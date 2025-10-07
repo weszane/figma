@@ -51,7 +51,7 @@ import { CornerPosition, OverlayType } from '../figma_app/450829';
 import { throwTypeError } from '../figma_app/465776';
 import { ButtonBasePrimaryTracked } from '../figma_app/637027';
 import { zl } from '../figma_app/641749';
-import { $M, nb } from '../figma_app/770088';
+import { resetNewComment, setNewCommentAttachment } from '../figma_app/770088';
 import { _S, dC, IL, jS, OQ, TI, wV, ZA, ZO } from '../figma_app/809086';
 import { TrackedButton } from '../figma_app/831799';
 import { HH } from '../figma_app/841415';
@@ -491,7 +491,7 @@ function eI(e) {
       attachmentIds: Object.keys(T.attachments)
     }));
     v([]);
-    t($M({
+    t(resetNewComment({
       resetStatusOnly: !1
     }));
   }, [t, e.postUuid, g, T]);
@@ -499,13 +499,13 @@ function eI(e) {
     library: new FeedAtMentionsLibrary(e.currentOrgId, e.postUuid)
   }), [e.currentOrgId, e.postUuid]);
   let O = useCallback(e => {
-    t(nb({
+    t(setNewCommentAttachment({
       attachmentId: e.id,
       attachment: e
     }));
   }, [t]);
   let y = useCallback((e, n) => {
-    t(nb({
+    t(setNewCommentAttachment({
       attachmentId: e,
       attachment: null
     }));

@@ -21,7 +21,7 @@ import { P3 } from "../figma_app/952446";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { hasPageLimitations, hasReachedPageLimit, FILE_TYPE_PAGE_LIMITS } from "../figma_app/345997";
-import { F as _$$F2 } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { UpsellModalType } from "../905/165519";
 import { getActiveVersion, loadVersionIncrementally } from "../figma_app/841351";
@@ -158,7 +158,7 @@ export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
             ...ob
           }), kh), p(t));
         }
-        _$$F2.trackFromFullscreen("action_page_switch", {
+        fullscreenHandler.trackFromFullscreen("action_page_switch", {
           oldPageNodeId: t,
           newPageNodeId: e,
           pageSwitchIdForTracking: y,

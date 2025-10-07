@@ -10,7 +10,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { getFalseValue } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { We, UU, Qe } from "../figma_app/770088";
+import { setTypeahead, deactivateActiveComment, trackAtMentionSearchStarted } from "../figma_app/770088";
 import { insertCommunityMention } from "../figma_app/530167";
 import { setTargetRef, hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
@@ -961,7 +961,7 @@ export class $$tA0 extends Component {
         result,
         canceled
       } = await e;
-      canceled || (result ? (this.state.contactsAnalytics?.trackQueryResult(t, result?.mentions.length ?? 0), this.props.dispatch(We(result))) : this.props.dispatch(We({
+      canceled || (result ? (this.state.contactsAnalytics?.trackQueryResult(t, result?.mentions.length ?? 0), this.props.dispatch(setTypeahead(result))) : this.props.dispatch(setTypeahead({
         type: "mentions",
         mentions: [],
         index: 0,
@@ -970,15 +970,15 @@ export class $$tA0 extends Component {
       })), this.props.onUpdateTextArea(this.state.editorState));
     }, 300);
     this.onEmojiSearchChange = t => {
-      this.props.dispatch(We(getEmojisResult(t)));
+      this.props.dispatch(setTypeahead(getEmojisResult(t)));
       this.props.onUpdateTextArea(this.state.editorState);
     };
     this.clearTypeahead = t => {
       this.pendingMentionsSearch && this.pendingMentionsSearch.cancel();
       this.state.contactsAnalytics?.endSession(t);
-      this.hasTypeahead() && (this.props.typeahead?.type === "suggestions" ? "editor_clear" === t ? this.props.dispatch(UU({
+      this.hasTypeahead() && (this.props.typeahead?.type === "suggestions" ? "editor_clear" === t ? this.props.dispatch(deactivateActiveComment({
         force: !0
-      })) : "changed_selection" !== t && this.props.dispatch(We(null)) : this.props.dispatch(We(null)));
+      })) : "changed_selection" !== t && this.props.dispatch(setTypeahead(null)) : this.props.dispatch(setTypeahead(null)));
     };
     this._handleBeforeInput = (t, e) => {
       if (this.props.maxCommentLength && e.getCurrentContent().getPlainText("").length >= this.props.maxCommentLength) return "handled";
@@ -1453,7 +1453,7 @@ export class $$tA0 extends Component {
             canceled
           } = await this.newMentionsSearch("");
           canceled || setTimeout(() => {
-            this.props.dispatch(We(result));
+            this.props.dispatch(setTypeahead(result));
             this.onChange(t);
             this.props.onUpdateTextArea(this.state.editorState);
           }, 180);
@@ -1482,12 +1482,12 @@ export class $$tA0 extends Component {
       }
       let n = this.props.pendingUserInvites?.length === 1 ? e.getCurrentContent().getPlainText() === `${this.props.pendingUserInvites[0].user?.email} ` : "" === e.getCurrentContent().getPlainText();
       (!this.props.hasMentionedPendingUserInvite || !this.props.hasMentionedPendingUserInviteTwice) && (this.props.pendingUserInvites?.length ?? 0) > 0 && this.props.user?.id && !this.props.typeahead && n && setTimeout(async () => {
-        if (this.props.onUpdateTextArea(this.state.editorState), this.props.pendingUserInvites?.length === 1) this.props.dispatch(We(_$$tI({
+        if (this.props.onUpdateTextArea(this.state.editorState), this.props.pendingUserInvites?.length === 1) this.props.dispatch(setTypeahead(_$$tI({
           index: -1,
           userId: this.props?.user?.id
         })));else {
           let t = await getMentionsResult("", this.props.mentionables, !this.props.isProtoView && this.props.figmaEditorType === FFileType.DESIGN);
-          this.props.dispatch(We(t));
+          this.props.dispatch(setTypeahead(t));
         }
       }, 180);
     }
@@ -1504,7 +1504,7 @@ export class $$tA0 extends Component {
         search
       } = V(e);
       "" === search && this.state.contactsAnalytics?.trackQueryResult("", this.props.typeahead.mentions.length);
-      this.props.dispatch(Qe());
+      this.props.dispatch(trackAtMentionSearchStarted());
     }
   }
   componentWillUnmount() {

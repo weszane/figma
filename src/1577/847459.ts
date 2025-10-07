@@ -17,7 +17,7 @@ import { P as _$$P } from "../905/347284";
 import { J as _$$J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
-import { AY, Fm, dB, lV, k7, _v } from "../figma_app/770088";
+import { markThreadAsRead, setActiveComment, createCommentReply, setCommentReplyMessage, updateCommentContent, handleCommentReplyWithConfirmation } from "../figma_app/770088";
 import { kR, I_, GH } from "../905/234821";
 import { dr } from "../figma_app/568591";
 import { G9, gj } from "../figma_app/12220";
@@ -185,7 +185,7 @@ function z(e) {
       onMouseEnter: () => {
         let e = E.some(e => e.isUnread);
         q = setTimeout(() => {
-          d.commentReceipts && e && (f(AY({
+          d.commentReceipts && e && (f(markThreadAsRead({
             receiptsAPI: d.commentReceipts,
             thread: D
           })), trackEventAnalytics("Comment Thread Read", {
@@ -243,7 +243,7 @@ function V(e) {
   } = r;
   let _ = useDispatch();
   useEffect(() => {
-    _(Fm({
+    _(setActiveComment({
       threadId
     }));
   }, [_, threadId]);
@@ -267,7 +267,7 @@ function V(e) {
           console.error("Calling submitReply with no write API");
           return;
         }
-        a && "loaded" === a.status && a.data.find(t => t.id === e.threadId) && (e.onCommentValidationFailure = (a, n, o, r) => dB(i, t, a, n, o, r, e.uuid, _$$y), t(lV({
+        a && "loaded" === a.status && a.data.find(t => t.id === e.threadId) && (e.onCommentValidationFailure = (a, n, o, r) => handleCommentReplyWithConfirmation(i, t, a, n, o, r, e.uuid, _$$y), t(createCommentReply({
           ...e,
           commentsWriteApi: i,
           commentsConfiguration: _$$y,
@@ -277,13 +277,13 @@ function V(e) {
         })));
       }, [t, a, i]),
       updateMessage: useCallback(i => {
-        t(k7({
+        t(setCommentReplyMessage({
           threadId: e,
           messageMeta: i
         }));
       }, [t, e]),
       submitEdit: useCallback((e, i) => {
-        t(_v({
+        t(updateCommentContent({
           comment: e,
           messageMeta: i
         }));

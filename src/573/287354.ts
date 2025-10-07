@@ -13,7 +13,7 @@ import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { symbolUsageEnum } from "../figma_app/198712";
-import { p as _$$p } from "../figma_app/372802";
+import { ViewportContainer } from "../figma_app/372802";
 import { y9S } from "../figma_app/27776";
 var d = l;
 let _ = "offscreen_indicators--indicatorGraphicBlue---nYr-";
@@ -75,7 +75,7 @@ function S({
     height: e.height - -7 - u
   };
   return jsx(Fragment, {
-    children: jsx(_$$p, {
+    children: jsx(ViewportContainer, {
       children: jsx("div", {
         "aria-hidden": !0,
         "data-forward-events-to-fullscreen": !0,

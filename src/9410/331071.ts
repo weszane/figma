@@ -406,7 +406,7 @@ import ay from '../vendor/267721';
 import { P as _$$P2 } from '../vendor/348225';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'use-debounce';
-import { N as _$$N } from '../vendor/930821';
+import { AnimatePresence } from '../vendor/930821';
 import dc from '../vendor/946678';
 import n_ from '../vendor/950573';
 let r = {};
@@ -1272,7 +1272,7 @@ function t8({
     default:
       throwTypeError(e);
   }
-  return jsx(_$$N, {
+  return jsx(AnimatePresence, {
     mode: 'popLayout',
     initial: !1,
     children: jsx(_$$P2.div, {

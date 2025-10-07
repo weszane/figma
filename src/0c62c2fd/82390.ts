@@ -217,7 +217,7 @@ import { setupThemeContext } from '../905/614223';
 import { e as _$$e3 } from '../905/621515';
 import { Z as _$$Z2 } from '../905/622097';
 import { ButtonPrimitive } from '../905/632989';
-import { A as _$$A30, y as _$$y5 } from '../905/638715';
+import { AlertState, HiddenState } from '../905/638715';
 import { getVisibleTheme } from '../905/640017';
 import { g_ as _$$g_ } from '../905/646788';
 import { d as _$$d2 } from '../905/647058';
@@ -22179,9 +22179,9 @@ function x6(e) {
     } = downtime;
     if (getFeatureFlags().display_downtime_banner) {
       switch (status) {
-        case _$$A30.Imminent:
-        case _$$A30.Warning:
-          if (payload && notifMinutesRemaining != null && hidingDowntimeNotif !== _$$y5.warningHidden) {
+        case AlertState.Imminent:
+        case AlertState.Warning:
+          if (payload && notifMinutesRemaining != null && hidingDowntimeNotif !== HiddenState.warningHidden) {
             let r = n(notifMinutesRemaining);
             let s = i(payload.helpcenterUrl, DowntimeActionsEnum.hideWarningNotif());
             let o = a(DowntimeActionsEnum.hideWarningNotif());
@@ -22198,8 +22198,8 @@ function x6(e) {
             }));
           }
           break;
-        case _$$A30.Ongoing:
-          if (payload && hidingDowntimeNotif !== _$$y5.ongoingHidden) {
+        case AlertState.Ongoing:
+          if (payload && hidingDowntimeNotif !== HiddenState.ongoingHidden) {
             let r = i(payload.helpcenterUrl, DowntimeActionsEnum.hideOngoingNotif());
             let s = a(DowntimeActionsEnum.hideOngoingNotif());
             dispatch(notificationActions.dequeue({
@@ -22215,7 +22215,7 @@ function x6(e) {
             }));
           }
           break;
-        case _$$A30.Finished:
+        case AlertState.Finished:
           c();
       }
       return () => {

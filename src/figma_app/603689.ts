@@ -66,7 +66,7 @@ import { trackAuthEvent } from '../905/248178';
 import { AccessibleAreasBindings } from '../905/250770';
 import { A as _$$A9 } from '../905/251970';
 import { $7, o8 as _$$o4, B_, QB } from '../905/258397';
-import { F as WebReporting } from '../905/258517';
+import { fullscreenHandler } from '../905/258517';
 import { PluginUIManager } from '../905/261467';
 import { WebAsyncInstance } from '../905/268366';
 import { Label } from '../905/270045';
@@ -352,7 +352,7 @@ import { getProductAccessTypeByKey } from '../figma_app/217457';
 import { vt } from '../figma_app/231614';
 import { a as _$$a9 } from '../figma_app/234156';
 import { rM as _$$rM } from '../figma_app/241541';
-import { lS as Comments } from '../figma_app/242565';
+import { mouseEventManager } from '../figma_app/242565';
 import { handleResourceQuery, hasLibraryKeyInSet, styleByKeyQuery } from '../figma_app/255679';
 import { gH, ZF } from '../figma_app/258114';
 import { rG as whiteboardThemeTsBindings } from '../figma_app/260703';
@@ -404,7 +404,7 @@ import { A as _$$A1 } from '../figma_app/426577';
 import { M as _$$M6 } from '../figma_app/427802';
 import { qm } from '../figma_app/431689';
 import { aE as _$$aE } from '../figma_app/433401';
-import { CB as EmojiWheelBindings } from '../figma_app/442259';
+import { emojiWheelManagerInstance } from '../figma_app/442259';
 import { OverlayType } from '../figma_app/450829';
 import { inputValue as CurrentUserInfo, fullscreenValue as FigmaApp, userValue as OOMHelpers, sessionValue, modalValue as StylesCheckBindings, additionalValue as variablesJsRuntimeAliasTsBindings, flagValue as WebMultiplayer } from '../figma_app/455680';
 import { Ws } from '../figma_app/459125';
@@ -576,7 +576,7 @@ import { rH as _$$rH, Ck, fK, IN, zB } from '../vendor/167083';
 import av from '../vendor/260986';
 import { P as _$$P } from '../vendor/348225';
 import { useAtomValue } from '../vendor/525001';
-import { N as _$$N7 } from '../vendor/930821';
+import { AnimatePresence } from '../vendor/930821';
 let n;
 let i;
 let a;
@@ -1721,7 +1721,7 @@ let ns = {
   }),
   AccessibleAreasBindings: () => AccessibleAreasBindings,
   OOMHelpers: () => OOMHelpers,
-  WebReporting: () => WebReporting,
+  WebReporting: () => fullscreenHandler,
   PlatformInfo: () => PlatformInfo,
   FontManagerJs: () => debugFontFetcher,
   WebAsync: () => WebAsyncInstance,
@@ -1740,8 +1740,8 @@ let ns = {
   WebSelection: () => sessionValue,
   WebMultiplayer: () => WebMultiplayer,
   WebUserSyncing: () => WebUserSyncing,
-  EmojiWheelBindings: () => EmojiWheelBindings,
-  Comments: () => Comments,
+  EmojiWheelBindings: () => emojiWheelManagerInstance,
+  Comments: () => mouseEventManager,
   PluginCallbacks: () => PluginCallbacks,
   WidgetBindings: () => widgetBindings,
   VideoTsBindings: () => VideoTsBindings,
@@ -6651,7 +6651,7 @@ function cE() {
   let i = useAtomWithSubscription(XU);
   return r ? jsxs(setupThemeContext, {
     mode: 'dark',
-    children: [jsx(_$$N7, {
+    children: [jsx(AnimatePresence, {
       children: t && jsxs(_$$P.div, {
         'initial': {
           opacity: 0
@@ -9176,10 +9176,10 @@ executeWhenDomReady(async () => {
         WebSelection: () => sessionValue,
         WebMultiplayer: () => WebMultiplayer,
         WebUserSyncing: () => WebUserSyncing,
-        EmojiWheelBindings: () => EmojiWheelBindings,
+        EmojiWheelBindings: () => emojiWheelManagerInstance,
         JsBindingsTestHelpers: () => JsBindingsTestHelpers,
-        WebReporting: () => WebReporting,
-        Comments: () => Comments,
+        WebReporting: () => fullscreenHandler,
+        Comments: () => mouseEventManager,
         PluginCallbacks: () => PluginCallbacks,
         HTMLWindowBindings: () => windowManagerInstance,
         ImageIo: () => imageAPI,

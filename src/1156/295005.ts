@@ -9,7 +9,7 @@ import { H } from "../905/999677";
 import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P } from "../vendor/348225";
 import { N as _$$N2 } from "../1156/461005";
 import { getI18nString } from "../905/303541";
@@ -198,7 +198,7 @@ export function $$w0(e) {
           className: "x78zum5 x6s0dn4 xet2fuk x2lah0s",
           children: D
         })]
-      }), jsx(_$$N, {
+      }), jsx(AnimatePresence, {
         children: !!w && jsxs(P.div, {
           initial: {
             height: 0,

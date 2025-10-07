@@ -13,7 +13,7 @@ import { GI, IZ, SK } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
-import { F as _$$F2 } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { Yv } from "../figma_app/616107";
 import { KindEnum } from "../905/129884";
 import { $J, Z9 } from "../figma_app/634656";
@@ -369,7 +369,7 @@ let $$K0 = memo(function ({
               selectionState: e_ || em ? "unselected" : (eh ? a === colorCSSManipulatorInstance.format(eb) : a === colorCSSManipulatorInstance.format(ey)) ? "selected" : "unselected",
               onClick: () => {
                 eS(t);
-                _$$F2.trackFromFullscreen("Drawing Tool Change Color", {
+                fullscreenHandler.trackFromFullscreen("Drawing Tool Change Color", {
                   source: "default",
                   color: colorCSSManipulatorInstance.format(t),
                   tool: DesignGraphElements[e]

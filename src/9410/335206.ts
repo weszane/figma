@@ -19,7 +19,7 @@ import { cX } from "../figma_app/920333";
 import { t as _$$t2 } from "../9410/47995";
 import { b as _$$b } from "../905/635568";
 import { useRef, useCallback, useEffect } from "react";
-import { Tc } from "../905/797478";
+import { getElementByDataTarget } from "../905/797478";
 import { ts } from "../figma_app/120210";
 import { registerModal } from "../905/102752";
 import { DraggableModalManager, ArrowPosition } from "../905/748636";
@@ -59,7 +59,7 @@ let O = registerModal(function () {
   return (useEffect(() => {
     let e = e => {
       let t = i.current?.getEl();
-      let r = Tc(N);
+      let r = getElementByDataTarget(N);
       if (!t || !r) return;
       let n = t.contains(e.target);
       let a = r.contains(e.target);

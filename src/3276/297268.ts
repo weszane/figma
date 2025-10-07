@@ -34,7 +34,7 @@ import { addRectOffset, getBasicViewportRect, useFullscreenViewportUpdates, useV
 import { formatPinCoordinates, aggregateUserComments } from '../figma_app/70421';
 import { getObservableValue } from '../figma_app/84367';
 import { viewportNavigatorContext } from '../figma_app/298911';
-import { p as _$$p } from '../figma_app/372802';
+import { ViewportContainer } from '../figma_app/372802';
 import { throwTypeError } from '../figma_app/465776';
 import { BI } from '../figma_app/546509';
 import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
@@ -43,7 +43,7 @@ import { isPinnedCommentsEnabled } from '../figma_app/591738';
 import { WN } from '../figma_app/638601';
 import { getNudgeAmounts } from '../figma_app/740163';
 import { AppStateTsApi, DesignGraphElements, LayoutTabType, UserActionState } from '../figma_app/763686';
-import { RP, wg } from '../figma_app/770088';
+import { removeHoveredPin, addHoveredPin } from '../figma_app/770088';
 import { trackFileEventWithUser } from '../figma_app/901889';
 import { useLatestRef } from '../figma_app/922077';
 import c from '../vendor/635';
@@ -164,14 +164,14 @@ let er = memo(e => {
   let eO = x5(eL);
   let eF = useMemo(() => new Set(e.threads.filter(e => eO(e)).map(e => e.id)), [eO, e.threads]);
   let eB = useCallback(e => {
-    P(wg({
+    P(addHoveredPin({
       threadId: e
     }));
     let t = eD(e);
     t && T.setHovering(t.canvasPosition);
   }, [T, P, eD]);
   let eU = useCallback(e => {
-    P(RP({
+    P(removeHoveredPin({
       threadId: e
     }));
     T.setHovering(null);
@@ -521,7 +521,7 @@ let er = memo(e => {
     e.key === 'Tab' && (tr(e.shiftKey ? 1 : 0), e.preventDefault());
     !e9 && e.key === 'Escape' && clusteredPinsInstance?.getFocusedClusterId() && td.current?.focus();
   }, [tl, tr, ts, e9]);
-  return jsxs(_$$p, {
+  return jsxs(ViewportContainer, {
     children: [ej && !!to && jsx(ue, {
       registrationOrigin: iX.NEW_COMMENT,
       fixedPositionProps: to

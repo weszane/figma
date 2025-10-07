@@ -15,7 +15,7 @@ import { consentCounterAtom } from "../905/18800";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
-import { XM } from "../905/486443";
+import { useIsVotingSessionJoined } from "../905/486443";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { m as _$$m } from "../905/99004";
 import { x as _$$x } from "../905/106997";
@@ -52,7 +52,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { rgbToHsl } from "../figma_app/273493";
 import { d as _$$d } from "../vendor/456530";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P2 } from "../vendor/348225";
 import { hideTooltip } from "../905/765855";
 import { oW } from "../figma_app/247611";
@@ -92,7 +92,7 @@ import { Point } from "../905/736624";
 import { o as _$$o } from "../9410/935965";
 import { fullscreenValue } from "../figma_app/455680";
 import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
-import { F as _$$F3 } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { B as _$$B } from "../figma_app/397954";
 import { uM, Iz, g5, wv } from "../905/888175";
 import { M8, Iw, Qc } from "../figma_app/368611";
@@ -108,7 +108,7 @@ import { y as _$$y2 } from "../figma_app/873852";
 import { Kj, $R as _$$$R, Hu, Iq } from "../2b17fec9/696626";
 import { stopChattingThunk } from "../figma_app/308685";
 import { H1 } from "../figma_app/124493";
-import { CB } from "../figma_app/442259";
+import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { hr } from "../9410/960980";
 import { L as _$$L2 } from "../905/453756";
 import { g as _$$g3 } from "../905/125190";
@@ -448,7 +448,7 @@ let ef = memo(function ({
     onContextMenu: e => {
       e.preventDefault();
     },
-    children: jsx(_$$N, {
+    children: jsx(AnimatePresence, {
       children: jsx(_$$P2.div, {
         ref: F,
         animate: Z,
@@ -1514,7 +1514,7 @@ function tA() {
         default:
           throwTypeError(e);
       }
-      _$$F3.trackFromFullscreen("Drawing Tool Change Color", {
+      fullscreenHandler.trackFromFullscreen("Drawing Tool Change Color", {
         source: "default",
         color: colorCSSManipulatorInstance.format(r),
         tool: e ? DesignGraphElements[e] : ""
@@ -3981,7 +3981,7 @@ function iL({
   let s = activeToolId === DesignGraphElements.STAMP;
   let l = _$$iT();
   let d = function (e) {
-    let t = XM();
+    let t = useIsVotingSessionJoined();
     let i = useAtomWithSubscription(nf);
     let n = ej();
     let r = _$$L(e);
@@ -3993,7 +3993,7 @@ function iL({
     leaveVotingSessionAndCloseWheel
   } = function () {
     let e = useDispatch();
-    let t = XM();
+    let t = useIsVotingSessionJoined();
     let i = hr();
     return {
       numVotesRemaining: i,
@@ -4013,7 +4013,7 @@ function iL({
     return {
       handleStampToolClick: useCallback(() => {
         t(!1);
-        e ? CB.closeWheel() : _$$X2({
+        e ? emojiWheelManagerInstance.closeWheel() : _$$X2({
           source: fK,
           offsetFromToolbelt: 40
         });
@@ -4064,7 +4064,7 @@ function ik({
   isToolbeltDisabled: t,
   isCommentsDisabled: i
 }) {
-  let a = XM();
+  let a = useIsVotingSessionJoined();
   let {
     numVisibleTools
   } = useAtomWithSubscription(Kj);
@@ -4260,7 +4260,7 @@ function iF({
     let t = wY(e);
     let i = t?.width ?? Hu().thresholdWidth + 260;
     let n = Xr(Kj);
-    let a = XM();
+    let a = useIsVotingSessionJoined();
     useEffect(() => {
       n(Iq(a).find(e => i >= e.thresholdWidth + 260) ?? Hu());
     }, [i, a, n]);

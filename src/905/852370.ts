@@ -8,7 +8,7 @@ import { globalPerfTimer } from "../905/542194";
 import { generateUUIDv4 } from "../905/871474";
 import { isNodeDescendantOf } from "../figma_app/379850";
 import { useDevModeFocusId } from "../figma_app/88239";
-import { UU, At, _B as _$$_B } from "../figma_app/770088";
+import { deactivateActiveComment, activateCommentThread, createNewComment } from "../figma_app/770088";
 import { I_ } from "../905/234821";
 import { isPinnedCommentsEnabled } from "../figma_app/591738";
 import { JG } from "../figma_app/12220";
@@ -114,7 +114,7 @@ export function $$R1(e, t, i, l, d) {
   let E = useRef(I);
   E.current = I;
   useEffect(() => {
-    l && !E.current.find(e => e.id === i) && i !== NEW_COMMENT_ID && h(UU());
+    l && !E.current.find(e => e.id === i) && i !== NEW_COMMENT_ID && h(deactivateActiveComment());
   }, [h, i, l]);
   return useMemo(() => I.filter(e => !!e.canvasPosition && e.page === t && (!d || i === e.id) && !e.isCanvasMention), [I, t, i, d]);
 }
@@ -168,7 +168,7 @@ export function $$O4(e, t, i, a, s, o) {
               height: 1.15 * n.height
             });
           }
-        } else c(At({
+        } else c(activateCommentThread({
           receiptsAPI: u.commentReceipts,
           thread: t,
           viewport: s,
@@ -201,7 +201,7 @@ export function $$D0(e, t) {
     let u = e.getCommentDestinationForCanvasPosition(r, t, !0);
     u && (trackEventAnalytics("New comment dispatching submission", {
       uuid: n
-    }), a(_$$_B({
+    }), a(createNewComment({
       destination: u,
       commentsWriteApi: s,
       commentsConfiguration: o,

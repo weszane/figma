@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { $ } from "../figma_app/938538";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { Tc } from "../905/797478";
+import { getElementByDataTarget } from "../905/797478";
 import { fullscreenValue } from "../figma_app/455680";
 import { useClickOutside } from "../905/1768";
 import { qM } from "../9410/607036";
@@ -23,7 +23,7 @@ export function $$m0({
   let x = useRef(null);
   useClickOutside(() => _(!i), {
     closeOnEsc: !0,
-    ignore: [x, Tc($$h2)]
+    ignore: [x, getElementByDataTarget($$h2)]
   });
   return jsx(qM, {
     closeWidow: _,

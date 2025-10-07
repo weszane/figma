@@ -48,7 +48,7 @@ import { TrackingProvider } from '../figma_app/831799';
 import { useLatestRef } from '../figma_app/922077';
 import i from '../vendor/128080';
 import { P as _$$P } from '../vendor/348225';
-import { N as _$$N } from '../vendor/930821';
+import { AnimatePresence } from '../vendor/930821';
 let $$r = i;
 function E(e) {
   let t = useDispatch();
@@ -153,7 +153,7 @@ function F(e) {
         children: e.text
       }), jsx('div', {
         className: 'x15kz4h8',
-        children: jsx(_$$N, {
+        children: jsx(AnimatePresence, {
           className: 'x15kz4h8',
           children: r && jsx(_$$P.div, {
             className: 'x78zum5 x6s0dn4 xl56j7k xg01cxk xzdg38j xbzrb6o',

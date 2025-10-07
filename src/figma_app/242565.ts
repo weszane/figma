@@ -1,45 +1,101 @@
-import { debugState } from "../905/407919";
-import { vV, CX } from "../figma_app/770088";
-export let $$n2;
-let s = {
+import { debugState } from "../905/407919"
+import { activateNewComment, setNewAnchorPosition } from "../figma_app/770088"
+
+export interface MouseEventHandler {
+  (position: { x: number, y: number }): void
+}
+
+export interface CommentCreator {
+  (stablePath: string, x: number, y: number): void
+}
+
+export interface MouseEventManager {
+  handleMouseDown: (x: number, y: number) => void
+  handleMouseMove: (x: number, y: number) => void
+  handleMouseUp: (x: number, y: number) => void
+  createNewCommentAtPosition: CommentCreator
+}
+
+// Event listener registry for mouse events
+const mouseEventListeners: {
+  mousedown: Set<MouseEventHandler>
+  mousemove: Set<MouseEventHandler>
+  mouseup: Set<MouseEventHandler>
+} = {
   mousedown: new Set(),
   mousemove: new Set(),
-  mouseup: new Set()
-};
-export function $$o3(e, t) {
-  s[e].add(t);
+  mouseup: new Set(),
 }
-export function $$l0(e, t) {
-  s[e].$$delete(t);
+
+/**
+ * Subscribe to a mouse event
+ * @param eventType - The type of mouse event to subscribe to
+ * @param handler - The handler function to be called when the event occurs
+ */
+export function subscribeToMouseEvent(eventType: keyof typeof mouseEventListeners, handler: MouseEventHandler): void {
+  mouseEventListeners[eventType].add(handler)
 }
-function d(e) {
-  return (t, r) => {
-    for (let n of s[e]) n({
-      x: t,
-      y: r
-    });
-  };
+
+/**
+ * Unsubscribe from a mouse event
+ * @param eventType - The type of mouse event to unsubscribe from
+ * @param handler - The handler function to remove
+ */
+export function unsubscribeFromMouseEvent(eventType: keyof typeof mouseEventListeners, handler: MouseEventHandler): void {
+  mouseEventListeners[eventType].delete(handler)
 }
-function c(e, t, r) {
-  debugState.dispatch(vV({
-    anchorPosition: {
-      x: t,
-      y: r
+
+/**
+ * Create an event dispatcher for a specific mouse event type
+ * @param eventType - The type of mouse event to dispatch
+ * @returns A function that dispatches the event to all registered handlers
+ */
+function createEventDispatcher(eventType: keyof typeof mouseEventListeners): (x: number, y: number) => void {
+  return (x: number, y: number) => {
+    for (const handler of mouseEventListeners[eventType]) {
+      handler({
+        x,
+        y,
+      })
     }
-  }));
-  debugState.dispatch(CX({
-    stablePath: e
-  }));
+  }
 }
-export function $$u1() {
-  $$n2 = {
-    handleMouseDown: d("mousedown"),
-    handleMouseMove: d("mousemove"),
-    handleMouseUp: d("mouseup"),
-    createNewCommentAtPosition: c
-  };
+
+/**
+ * Create a new comment at a specific position
+ * @param stablePath - The stable path for the comment
+ * @param x - X coordinate for the comment position
+ * @param y - Y coordinate for the comment position
+ */
+function createNewCommentAtPosition(stablePath: string, x: number, y: number): void {
+  debugState.dispatch(setNewAnchorPosition({
+    anchorPosition: {
+      x,
+      y,
+    },
+  }))
+  debugState.dispatch(activateNewComment({
+    stablePath,
+  }))
 }
-export const AU = $$l0;
-export const T6 = $$u1;
-export const lS = $$n2;
-export const on = $$o3;
+
+// Global mouse event manager instance
+export let mouseEventManager: MouseEventManager | undefined
+
+/**
+ * Initialize the mouse event manager
+ */
+export function initializeMouseEventManager(): void {
+  mouseEventManager = {
+    handleMouseDown: createEventDispatcher("mousedown"),
+    handleMouseMove: createEventDispatcher("mousemove"),
+    handleMouseUp: createEventDispatcher("mouseup"),
+    createNewCommentAtPosition,
+  }
+}
+
+// Export aliases for backward compatibility
+export const on = subscribeToMouseEvent
+export const AU = unsubscribeFromMouseEvent
+export const T6 = initializeMouseEventManager
+export const lS = mouseEventManager

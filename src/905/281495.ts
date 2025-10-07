@@ -13,7 +13,7 @@ import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
 import { BaseCustomError } from "../905/843553";
 import { fullscreenValue } from "../figma_app/455680";
-import { r8, uK, bK, oZ } from "../figma_app/178273";
+import { nodeStateFamily, deletionSettings, deleteAndWriteNode, clearAllNodeStates } from "../figma_app/178273";
 import { z8 } from "../figma_app/862289";
 let b = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH", "THIRTEENTH", "FOURTEENTH", "FIFTEENTH", "SIXTEENTH", "SEVENTEENTH", "EIGHTEENTH", "NINETEENTH", "TWENTIETH", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 let v = e => {
@@ -274,7 +274,7 @@ export let $$F4 = async ({
     } of (W += i.length, n)) id && (q.push({
       taskId: id,
       state: z8.INCOMPLETE
-    }), atomStoreManager.set(r8(id), {
+    }), atomStoreManager.set(nodeStateFamily(id), {
       guid: id,
       boundingBox: e.absoluteBoundingBox,
       state: "pending",
@@ -289,7 +289,7 @@ export let $$F4 = async ({
   if (0 === Q) throw new $$w2();
   if (W > $$D0) throw new $$T1(W);
   t && t(q);
-  atomStoreManager.set(uK, {
+  atomStoreManager.set(deletionSettings, {
     autoScroll: !0
   });
   trackFileEvent("ai_rename_layers_started", B, U, {
@@ -353,7 +353,7 @@ export let $$F4 = async ({
               animate
             } of a) {
               if (animate) {
-                let n = bK(node, i, e, S.has(source));
+                let n = deleteAndWriteNode(node, i, e, S.has(source));
                 o.push(n);
               }
               let r = {
@@ -372,7 +372,7 @@ export let $$F4 = async ({
       }
     }
     await ee();
-    e.signal.aborted ? oZ() : await Promise.all(o);
+    e.signal.aborted ? clearAllNodeStates() : await Promise.all(o);
     let d = M.getElapsedTime();
     M.stop();
     e.signal.aborted ? (trackFileEvent("ai_rename_layers_cancelled", B, U, {
@@ -398,7 +398,7 @@ export let $$F4 = async ({
     });
     fullscreenValue.triggerAction("commit");
   } catch (e) {
-    oZ();
+    clearAllNodeStates();
     L(Z);
     fullscreenValue.triggerAction("commit");
     reportError(ServiceCategories.AI_PRODUCTIVITY, e, {

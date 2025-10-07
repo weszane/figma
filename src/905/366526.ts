@@ -208,7 +208,7 @@ import { e as _$$e5 } from '../905/621515';
 import { setupFileObject } from '../905/628874';
 import { ButtonPrimitive } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, removeQueryParam, serializeQuery } from '../905/634134';
-import { A as _$$A0, y as _$$y6 } from '../905/638715';
+import { AlertState, HiddenState } from '../905/638715';
 import { fileImporter, initializeFileImporter } from '../905/642505';
 import { k as _$$k3 } from '../905/644504';
 import { createFileLibraryKeys } from '../905/651613';
@@ -489,7 +489,7 @@ import { FileType, FilterType, PermissionAction, PermissionType, SortField, Sort
 import { aU as _$$aU } from '../figma_app/757606';
 import { nx as _$$nx } from '../figma_app/761870';
 import { AppStateTsApi, BackgroundPattern, colorManagementStateJs, ColorProfileEnum, DataLoadStatus, DesignWorkspace, EditAction, Fonts, Fullscreen, HandoffBindingsCpp, IMixedValues, ItemType, KeyboardLayout, LayoutTabType, PageViewMode, perfTimerFrameManagerBindings, SceneGraphHelpers, SchemaJoinStatus, SessionStatus, UIVisibilitySetting, UserInterfaceElements, ViewType, WhiteboardIntegrationType } from '../figma_app/763686';
-import { $0, $M, cL as _$$cL3, Fm as _$$Fm, i4 as _$$i3, js as _$$js, lI as _$$lI, li as _$$li, nb as _$$nb, on as _$$on2, PB as _$$PB2, pD as _$$pD, pI as _$$pI, Q8 as _$$Q5, RI as _$$RI, RO as _$$RO, rW as _$$rW, sQ as _$$sQ, U3 as _$$U5, uy as _$$uy, uz as _$$uz, wg as _$$wg, xH as _$$xH3, y3 as _$$y4, yH as _$$yH4, Df, F8, gi, Jc, k7, NJ, Oo, q4, QD, RP, UU, We, wJ, Z5 } from '../figma_app/770088';
+import { setNewCommentActive, resetNewComment, resetComments, setActiveComment, setTypeaheadPositionOffset, resetActiveCommentId, submitNewComment, setCommentSaving, setNewCommentAttachment, setNewComment, revertNewComment, stopEditingComment, clearPendingUuid, setNewAnchorPosition, showEmojiPicker, setShowOnlyMyComments, setCommentContentAction, discardCommentReplyAttempt, setShowResolvedComments, setEditingAttachment, setActiveDragTarget, addHoveredPin, discardNewCommentAttempt, storeServerIdForPendingUuid, deleteCommentAction, setEditingComment, setNewSelectionBoxAnchorPosition, submitCommentReply, setCommentReply, setCommentReplyMessage, addEmphasizedPin, removeEmphasizedPin, resetCommentThread, setCommentReplyAttachment, removeHoveredPin, deactivateActiveComment, setTypeahead, clearCommentSaving, setNewCommentMessage } from '../figma_app/770088';
 import { A as _$$A1 } from '../figma_app/776368';
 import { BrowserInfo, isFigmaMobileApp } from '../figma_app/778880';
 import { dO as _$$dO, ZN as _$$ZN } from '../figma_app/781852';
@@ -6658,16 +6658,16 @@ let oj = {};
 let oV = new Set();
 let oG = combineReducers({
   activeThread(e = null, t) {
-    return _$$cL3.matches(t) || _$$js.matches(t) ? null : _$$Fm.matches(t) ? containsDash(t.payload.threadId) || t.payload.threadId.startsWith('feed_post') && !_$$y5() ? e : {
+    return resetComments.matches(t) || resetActiveCommentId.matches(t) ? null : setActiveComment.matches(t) ? containsDash(t.payload.threadId) || t.payload.threadId.startsWith('feed_post') && !_$$y5() ? e : {
       id: t.payload.threadId,
       source: t.payload.source
-    } : $0.matches(t) ? {
+    } : setNewCommentActive.matches(t) ? {
       id: NEW_COMMENT_ID
-    } : _$$yH4.matches(t) && t.payload.comment.id === e?.id ? null : e;
+    } : deleteCommentAction.matches(t) && t.payload.comment.id === e?.id ? null : e;
   },
   threads(e = {}, t) {
-    if (_$$cL3.matches(t)) return {};
-    if (_$$yH4.matches(t)) {
+    if (resetComments.matches(t)) return {};
+    if (deleteCommentAction.matches(t)) {
       if (t.payload.comment.id in e) {
         let {
           [t.payload.comment.id]: i,
@@ -6675,7 +6675,7 @@ let oG = combineReducers({
         } = e;
         return n;
       }
-    } else if (k7.matches(t)) {
+    } else if (setCommentReplyMessage.matches(t)) {
       return {
         ...e,
         [t.payload.threadId]: {
@@ -6687,7 +6687,7 @@ let oG = combineReducers({
           }
         }
       };
-    } else if (QD.matches(t)) {
+    } else if (setCommentReplyAttachment.matches(t)) {
       let i = e[t.payload.threadId];
       if (t.payload.attachment && !t.payload.attachment.isUploading && !i?.reply.attachments?.[t.payload.attachment.id]) return e;
       if (t.payload.attachment && i) {
@@ -6725,7 +6725,7 @@ let oG = combineReducers({
           }
         };
       }
-    } else if (Jc.matches(t)) {
+    } else if (setCommentReply.matches(t)) {
       return {
         ...e,
         [t.payload.threadId]: {
@@ -6734,7 +6734,7 @@ let oG = combineReducers({
           reply: t.payload.reply
         }
       };
-    } else if (gi.matches(t)) {
+    } else if (submitCommentReply.matches(t)) {
       return {
         ...e,
         [t.payload.threadId]: {
@@ -6743,7 +6743,7 @@ let oG = combineReducers({
           state: BusyReadyState.BUSY
         }
       };
-    } else if (_$$sQ.matches(t)) {
+    } else if (discardCommentReplyAttempt.matches(t)) {
       let i = e[t.payload];
       if (i) {
         let n = 1 + (i.discardAttempts || 0);
@@ -6755,7 +6755,7 @@ let oG = combineReducers({
           }
         };
       }
-    } else if (q4.matches(t)) {
+    } else if (resetCommentThread.matches(t)) {
       return {
         ...e,
         [t.payload.threadId]: {
@@ -6774,14 +6774,14 @@ let oG = combineReducers({
     return e;
   },
   newComment(e = _$$GV, t) {
-    if (_$$cL3.matches(t)) return _$$GV;
-    if (Z5.matches(t)) {
+    if (resetComments.matches(t)) return _$$GV;
+    if (setNewCommentMessage.matches(t)) {
       return {
         ...e,
         messageMeta: t.payload.messageMeta
       };
     }
-    if (_$$nb.matches(t)) {
+    if (setNewCommentAttachment.matches(t)) {
       if (t.payload.attachment && !t.payload.attachment.isUploading && !e.attachments[t.payload.attachment.id]) return e;
       if (t.payload.attachment) {
         return {
@@ -6803,26 +6803,26 @@ let oG = combineReducers({
         };
       }
     }
-    if (_$$on2.matches(t)) {
+    if (setNewComment.matches(t)) {
       return {
         ...e,
         messageMeta: t.payload.messageMeta,
         attachments: t.payload.attachments
       };
     }
-    if (_$$Q5.matches(t)) {
+    if (setNewAnchorPosition.matches(t)) {
       return {
         ...e,
         anchorPosition: t.payload.anchorPosition
       };
     }
-    if (F8.matches(t)) {
+    if (setNewSelectionBoxAnchorPosition.matches(t)) {
       return {
         ...e,
         selectionBoxAnchor: t.payload.selectionBoxAnchor
       };
     }
-    if (_$$lI.matches(t)) {
+    if (submitNewComment.matches(t)) {
       return {
         ...e,
         state: BusyReadyState.BUSY
@@ -6832,12 +6832,12 @@ let oG = combineReducers({
         ...e,
         state: BusyReadyState.BUSY
       };
-    } else if ($M.matches(t)) {
+    } else if (resetNewComment.matches(t)) {
       return t.payload.resetStatusOnly ? {
         ...e,
         state: BusyReadyState.READY
       } : _$$GV;
-    } else if (_$$PB2.matches(t)) {
+    } else if (revertNewComment.matches(t)) {
       return {
         ...t.payload,
         state: BusyReadyState.READY
@@ -6847,7 +6847,7 @@ let oG = combineReducers({
         ...e,
         state: BusyReadyState.READY
       };
-    } else if (_$$xH3.matches(t)) {
+    } else if (discardNewCommentAttempt.matches(t)) {
       return {
         ...e,
         discardAttempt: e.discardAttempt + 1
@@ -6856,14 +6856,14 @@ let oG = combineReducers({
     return e;
   },
   editingComment(e = null, t) {
-    if (_$$cL3.matches(t) || _$$pD.matches(t) || _$$rW.matches(t)) return null;
-    if (Df.matches(t)) {
+    if (resetComments.matches(t) || stopEditingComment.matches(t) || setCommentContentAction.matches(t)) return null;
+    if (setEditingComment.matches(t)) {
       return {
         ...e,
         ...t.payload
       };
     }
-    if (_$$uy.matches(t)) {
+    if (setEditingAttachment.matches(t)) {
       if (t.payload.attachment && !t.payload.attachment.isUploading && !e?.attachmentUpdates?.attachments[t.payload.attachment.id]) return e;
       if (t.payload.attachment) {
         return {
@@ -6898,18 +6898,18 @@ let oG = combineReducers({
     return e;
   },
   showOnlyParticipating(e = !1, t) {
-    return _$$RO.matches(t) ? t.payload.showOnlyParticipating : e;
+    return setShowOnlyMyComments.matches(t) ? t.payload.showOnlyParticipating : e;
   },
   showResolved(e = !1, t) {
-    return !_$$cL3.matches(t) && (_$$U5.matches(t) ? t.payload.showResolved : e);
+    return !resetComments.matches(t) && (setShowResolvedComments.matches(t) ? t.payload.showResolved : e);
   },
   emojiPicker(e = null, t) {
-    return _$$cL3.matches(t) || _$$Fm.matches(t) || $0.matches(t) ? null : _$$RI.matches(t) ? t.payload.visible ? {
+    return resetComments.matches(t) || setActiveComment.matches(t) || setNewCommentActive.matches(t) ? null : showEmojiPicker.matches(t) ? t.payload.visible ? {
       ...t.payload
     } : null : e;
   },
   typeahead(e = null, t) {
-    return _$$cL3.matches(t) || _$$Fm.matches(t) || $0.matches(t) ? null : We.matches(t) ? t.payload : e;
+    return resetComments.matches(t) || setActiveComment.matches(t) || setNewCommentActive.matches(t) ? null : setTypeahead.matches(t) ? t.payload : e;
   },
   typeaheadPositionOffset(e = {
     top: 0,
@@ -6919,20 +6919,20 @@ let oG = combineReducers({
     width: 0,
     height: 0
   }, t) {
-    return _$$cL3.matches(t) || _$$Fm.matches(t) || $0.matches(t) ? PK : _$$i3.matches(t) ? t.payload : e;
+    return resetComments.matches(t) || setActiveComment.matches(t) || setNewCommentActive.matches(t) ? PK : setTypeaheadPositionOffset.matches(t) ? t.payload : e;
   },
   emphasizedPinIds(e = [], t) {
-    return NJ.matches(t) ? e.concat([t.payload.threadId]) : Oo.matches(t) ? e.filter(e => e !== t.payload.threadId) : e;
+    return addEmphasizedPin.matches(t) ? e.concat([t.payload.threadId]) : removeEmphasizedPin.matches(t) ? e.filter(e => e !== t.payload.threadId) : e;
   },
   hoveredPinIds(e = [], t) {
-    return _$$wg.matches(t) ? e.concat([t.payload.threadId]) : RP.matches(t) ? e.filter(e => e !== t.payload.threadId) : e;
+    return addHoveredPin.matches(t) ? e.concat([t.payload.threadId]) : removeHoveredPin.matches(t) ? e.filter(e => e !== t.payload.threadId) : e;
   },
   activeDragTarget(e = null, t) {
-    return _$$uz.matches(t) ? t.payload : e;
+    return setActiveDragTarget.matches(t) ? t.payload : e;
   },
   savingCommentUuids(e = oV, t) {
-    if (_$$li.matches(t)) return new Set(e).add(t.payload.commentUuid);
-    if (wJ.matches(t)) {
+    if (setCommentSaving.matches(t)) return new Set(e).add(t.payload.commentUuid);
+    if (clearCommentSaving.matches(t)) {
       let i = new Set(e);
       i.delete(t.payload.commentUuid);
       return i;
@@ -6940,13 +6940,13 @@ let oG = combineReducers({
     return e;
   },
   lgPendingUuidToServerIdMap(e = oj, t) {
-    if (_$$y4.matches(t)) {
+    if (storeServerIdForPendingUuid.matches(t)) {
       return {
         ...e,
         [t.payload.commentUuid]: t.payload.commentId
       };
     }
-    if (_$$pI.matches(t)) {
+    if (clearPendingUuid.matches(t)) {
       let i = {
         ...e
       };
@@ -7303,7 +7303,7 @@ let oQ = combineReducers({
           replyIds: feed
         }
       };
-    } else if (k7.matches(t)) {
+    } else if (setCommentReplyMessage.matches(t)) {
       return {
         ...e,
         [t.payload.threadId]: {
@@ -7332,7 +7332,7 @@ let oQ = combineReducers({
     return e;
   },
   selectedCommentId(e = null, t) {
-    return setComments.matches(t) ? t.payload.selectedCommentId || e : _$$Fm.matches(t) ? t.payload.threadId : _$$cL3.matches(t) ? null : $0.matches(t) ? NEW_COMMENT_ID : e;
+    return setComments.matches(t) ? t.payload.selectedCommentId || e : setActiveComment.matches(t) ? t.payload.threadId : resetComments.matches(t) ? null : setNewCommentActive.matches(t) ? NEW_COMMENT_ID : e;
   },
   type(e = null, t) {
     return setCommentState.matches(t) ? t.payload.type : commitCreatedComment.matches(t) ? t.payload.resourceType : e;
@@ -11109,8 +11109,8 @@ window && (window.userAnalyticsDataTools = {
   printUserAnalyticsDataKeys: () => WZ
 });
 let pd = combineReducers({
-  hidingDowntimeNotif(e = _$$y6.noneHidden, t) {
-    return DowntimeActionsEnum.hideOngoingNotif.matches(t) ? _$$y6.ongoingHidden : DowntimeActionsEnum.hideWarningNotif.matches(t) ? _$$y6.warningHidden : e;
+  hidingDowntimeNotif(e = HiddenState.noneHidden, t) {
+    return DowntimeActionsEnum.hideOngoingNotif.matches(t) ? HiddenState.ongoingHidden : DowntimeActionsEnum.hideWarningNotif.matches(t) ? HiddenState.warningHidden : e;
   },
   notifMinutesRemaining(e = null, t) {
     return DowntimeActionsEnum.onTick.matches(t) ? Math.floor((t.payload.payload.downtimeStartDate.getTime() - Date.now()) / 1e3 / 60) : e;
@@ -11118,14 +11118,14 @@ let pd = combineReducers({
   payload(e = null, t) {
     return DowntimeActionsEnum.onTick.matches(t) ? t.payload.payload : e;
   },
-  status(e = _$$A0.Finished, t) {
+  status(e = AlertState.Finished, t) {
     if (DowntimeActionsEnum.onTick.matches(t)) {
       let {
         payload,
         hostname,
         currentTimeMs
       } = t.payload;
-      let r = _$$A0.Finished;
+      let r = AlertState.Finished;
       if (payload && payload.renderOnHostname && payload.renderOnHostname !== hostname) return r;
       let {
         finished,
@@ -11136,7 +11136,7 @@ let pd = combineReducers({
       if (!finished) {
         let e = downtimeStartDate.getTime();
         let t = currentTimeMs < e && e - currentTimeMs <= warningDurationMs;
-        e <= currentTimeMs ? r = _$$A0.Ongoing : t ? r = _$$A0.Imminent : currentTimeMs < e && e - currentTimeMs <= notifDurationMs && !t && (r = _$$A0.Warning);
+        e <= currentTimeMs ? r = AlertState.Ongoing : t ? r = AlertState.Imminent : currentTimeMs < e && e - currentTimeMs <= notifDurationMs && !t && (r = AlertState.Warning);
       }
       return r;
     }
@@ -13303,7 +13303,7 @@ let md = createOptimistThunk((e, {
       }
     }
   }
-  void 0 !== t.currentPage && e.dispatch(UU());
+  void 0 !== t.currentPage && e.dispatch(deactivateActiveComment());
   let r = i.multiplayerSessionState;
   let a = t.multiplayerSessionState;
   void 0 !== a && function (e, t, i) {

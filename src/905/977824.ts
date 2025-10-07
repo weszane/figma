@@ -5,6 +5,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { distributionAnalytics, globalPerfTimer } from '../905/542194';
 import { stopReactingAction } from '../figma_app/308685';
 import { Multiplayer, PaintTools } from '../figma_app/763686';
+import { CursorState } from '../figma_app/cursor-system';
 
 /**
  * Information about a user's cursor in a multiplayer session.
@@ -50,7 +51,7 @@ export interface CursorChatConfig {
   bins: number[];
   sendToDataDogEveryMs: number;
 }
-export let multiplayerSessionManager;
+export let multiplayerSessionManager: MultiplayerSessionManager;
 let reactionCounter = 0;
 
 /**
@@ -80,7 +81,7 @@ class MultiplayerSessionManager {
   }
 
   /** Returns a copy of infoBySessionId state. */
-  infoBySessionId(): Record<string, CursorInfo> {
+  infoBySessionId(): Record<string, CursorState> {
     return {
       ...this._infoBySessionId.get()
     };

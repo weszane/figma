@@ -10,10 +10,10 @@ import { createOptimistThunk } from "../905/350402";
 import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
 import { openResiger } from "../905/438683";
-import { UU } from "../figma_app/770088";
+import { deactivateActiveComment } from "../figma_app/770088";
 let g = e => {
   let t = e.getState();
-  e.dispatch(UU({
+  e.dispatch(deactivateActiveComment({
     force: !0
   }));
   t.mirror.appModel.showUi || fullscreenValue.triggerAction("toggle-ui");

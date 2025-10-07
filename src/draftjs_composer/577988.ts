@@ -8,7 +8,7 @@ import { Point } from "../905/736624";
 import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UserAvatar, AvatarSize } from "../905/590952";
-import { i4 } from "../figma_app/770088";
+import { setTypeaheadPositionOffset } from "../figma_app/770088";
 import { createComment } from "../figma_app/703138";
 import { mz } from "../figma_app/12220";
 import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
@@ -139,7 +139,7 @@ export function $$D1(e) {
       let s = Math.abs(left - (i?.left || 0));
       r = new Point(a - s, n + 20);
     } else r = 0 === s.left && 0 === s.top ? new Point(0, bottom - _top) : Point.subtract(new Point(s.left, bottom), new Point(_left, _top));
-    m && !p ? (n(i4({
+    m && !p ? (n(setTypeaheadPositionOffset({
       left: r.x,
       right: r.x,
       top: r.y,

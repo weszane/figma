@@ -1,6 +1,6 @@
 import { useContext, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { At } from "../figma_app/770088";
+import { activateCommentThread } from "../figma_app/770088";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { NAVIGATION_BUTTONS } from "../905/380385";
 import { s as _$$s } from "../905/518538";
@@ -9,7 +9,7 @@ export function $$d0(e) {
   let i = useContext(viewportNavigatorContext);
   let d = useDispatch();
   return useCallback(n => {
-    d(At({
+    d(activateCommentThread({
       thread: n,
       viewport: i,
       config: t,

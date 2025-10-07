@@ -5,7 +5,7 @@ import { Link } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { P as _$$P } from "../vendor/348225";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { H } from "../905/620380";
 import { getI18nString } from "../905/303541";
 import { getFieldValueOrDefault } from "../905/497882";
@@ -21,7 +21,7 @@ import { T as _$$T } from "../905/943304";
 import { x as _$$x } from "../905/956141";
 import { jT } from "../905/870778";
 var d = l;
-let $$S = memo(function ({ }) {
+let $$S = memo(function ({}) {
   return jsxs("svg", {
     width: "578",
     height: "272",
@@ -217,7 +217,7 @@ function P({
   let d = getCurrentTeam();
   let p = k(e, t);
   i && (s = "publishing_status" in i ? i.publishing_status : FPublicationStatusType.ORG_PRIVATE);
-  return jsx(_$$N, {
+  return jsx(AnimatePresence, {
     children: jsx(_$$P.div, {
       variants: C,
       style: {

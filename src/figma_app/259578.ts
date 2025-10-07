@@ -20,7 +20,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { useCurrentUserOrgId } from "../905/845253";
 import { Xo } from "../figma_app/482495";
-import { F as _$$F2 } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { getCurrentTeam } from "../figma_app/598018";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -142,7 +142,7 @@ export function $$Q2({
       rgba: n
     });
     t.onColorChange(n, r ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO_BUT_TRACK_AS_EDIT);
-    r && t.analytics && _$$F2.trackFromFullscreen(t.analytics.name, {
+    r && t.analytics && fullscreenHandler.trackFromFullscreen(t.analytics.name, {
       source: "slider",
       color: defaultColorManipulator.format(n),
       ...t.analytics.properties
@@ -166,7 +166,7 @@ export function $$Q2({
       rgba: n
     });
     t.onOpacityChange(n.a, r ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO_BUT_TRACK_AS_EDIT);
-    r && t.analytics && _$$F2.trackFromFullscreen(t.analytics.name, {
+    r && t.analytics && fullscreenHandler.trackFromFullscreen(t.analytics.name, {
       source: "slider",
       color: defaultColorManipulator.format(n),
       ...t.analytics.properties
@@ -174,7 +174,7 @@ export function $$Q2({
   };
   let el = (e, r) => {
     t.onColorChange(e, r);
-    t.analytics && _$$F2.trackFromFullscreen(t.analytics.name, {
+    t.analytics && fullscreenHandler.trackFromFullscreen(t.analytics.name, {
       source: "hex",
       color: defaultColorManipulator.format(e),
       ...t.analytics.properties

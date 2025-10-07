@@ -5,7 +5,7 @@ import { setupMenu, MenuItemComp, MenuRootComp, MenuContainerComp } from "../fig
 import { DialogTriggerButton } from "../905/976845";
 import { J } from "../905/125993";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Df, Mv, AY, QY } from "../figma_app/770088";
+import { setEditingComment, deleteComment, markThreadAsRead, markCommentAsUnread } from "../figma_app/770088";
 import { showModalHandler } from "../905/156213";
 import { I_ } from "../905/234821";
 import { selectCurrentUser } from "../905/372672";
@@ -50,7 +50,7 @@ export function $$y0(e) {
       attachments
     } = e.comment;
     let s = (attachments || []).reduce((e, t) => (e[t.id] = t, e), {});
-    i(Df({
+    i(setEditingComment({
       id,
       key,
       messageMeta: message_meta,
@@ -65,7 +65,7 @@ export function $$y0(e) {
       type: _$$E,
       data: {
         comment: e.comment,
-        onConfirm: () => i(Mv({
+        onConfirm: () => i(deleteComment({
           comment: e.comment
         }))
       }
@@ -75,13 +75,13 @@ export function $$y0(e) {
     let n = t.commentReceipts;
     if (n) {
       if (e.isUnread && e.thread) {
-        i(AY({
+        i(markThreadAsRead({
           receiptsAPI: n,
           thread: e.thread
         }));
         return;
       }
-      i(QY({
+      i(markCommentAsUnread({
         receiptsAPI: n,
         comment: e.comment
       }));

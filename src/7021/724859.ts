@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useLayoutEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P } from "../vendor/348225";
 import { bk, ZE, aV, VN, _D } from "../905/98947";
 import { pu } from "../7037/430062";
@@ -112,7 +112,7 @@ export function $$E0(e) {
     children,
     ...a
   } = e;
-  return jsx(_$$N, {
+  return jsx(AnimatePresence, {
     children: jsx(P.div, {
       layout: !0,
       transition: {
@@ -142,7 +142,7 @@ export function $$A2(e) {
     children,
     ...a
   } = e;
-  return jsx(_$$N, {
+  return jsx(AnimatePresence, {
     children: jsx(P.div, {
       layout: !0,
       transition: {
@@ -163,7 +163,7 @@ export function $$I3(e) {
   let [r, u] = useState(!1);
   return (useLayoutEffect(() => {
     o && (u(!0), setTimeout(() => u(!1), 1e3));
-  }, [o]), r || o) ? jsx(_$$N, {
+  }, [o]), r || o) ? jsx(AnimatePresence, {
     children: jsx(P.div, {
       initial: {
         opacity: 0

@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
 import { wY, cU } from "../figma_app/708845";
-import { A as _$$A } from "../905/638715";
+import { AlertState } from "../905/638715";
 import { usePopoverContext, PopoverProvider } from "../905/291714";
 import { T1, DH, Gu, nm, Al, Mj } from "../figma_app/90441";
 import { tui, xEX } from "../figma_app/27776";
@@ -42,7 +42,7 @@ export function $$g0({
       appModel: e
     }
   }) => e.showUi);
-  let O = useSelector(e => e.downtime.status === _$$A.Ongoing || e.downtime.status === _$$A.Imminent || e.showingDowntimeBanner);
+  let O = useSelector(e => e.downtime.status === AlertState.Ongoing || e.downtime.status === AlertState.Imminent || e.showingDowntimeBanner);
   let [D, L] = useState(!1);
   let F = g ?? ("top" === T ? T1 : DH);
   f && (F = "top" === T ? f.aboveTargetPositionY : f.belowTargetPositionY);

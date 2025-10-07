@@ -21,7 +21,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { Tc } from "../905/797478";
+import { getElementByDataTarget } from "../905/797478";
 import { fullscreenValue } from "../figma_app/455680";
 import { extractProtoFileId, extractValidNodeIdFromProtoUrl, isProtoViewerUrl, getProtoViewerBaseUrl } from "../figma_app/831696";
 import { KindEnum } from "../905/129884";
@@ -51,7 +51,7 @@ export function $$R2() {
   }, [i]);
   useClickOutside(() => s(!0), {
     closeOnEsc: !0,
-    ignore: [a, Tc($$O1)]
+    ignore: [a, getElementByDataTarget($$O1)]
   });
   let [o, l] = useState(0);
   let d = useCallback(async t => {

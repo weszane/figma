@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { Multiplayer } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import d from "classnames";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
@@ -379,7 +379,7 @@ function $(e) {
       self: ee,
       others: ei
     },
-    children: [jsx(_$$N, {
+    children: [jsx(AnimatePresence, {
       children: ec && jsx(_$$P.span, {
         initial: {
           opacity: 0
@@ -396,7 +396,7 @@ function $(e) {
         },
         children: jsx(Y, {})
       })
-    }), jsx(_$$N, {
+    }), jsx(AnimatePresence, {
       children: el && jsx(_$$P.span, {
         initial: {
           opacity: 0
@@ -507,7 +507,7 @@ function $(e) {
           })()
         })
       })
-    }), jsx(_$$N, {
+    }), jsx(AnimatePresence, {
       children: ed && jsx(_$$P.span, {
         initial: {
           opacity: 0

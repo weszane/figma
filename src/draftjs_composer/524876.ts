@@ -23,7 +23,7 @@ import { Y as _$$Y } from "../905/506207";
 import { n as _$$n } from "../draftjs_composer/589474";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { RI, We, uz, i4 } from "../figma_app/770088";
+import { showEmojiPicker, setTypeahead, setActiveDragTarget, setTypeaheadPositionOffset } from "../figma_app/770088";
 import { postUserFlag } from "../905/985254";
 import { useAtMentionInviteExperiment } from "../figma_app/297957";
 import { getCurrentFileType, isPrototypeView } from "../figma_app/976749";
@@ -200,7 +200,7 @@ export function $$em1(e) {
     }));
   }, [eF, e.threadId, $]);
   let eS = useSelector(e => e.comments.emojiPicker);
-  let eD = useCallback(() => eS?.visible ? (eS.onCancel?.(), dispatch(RI({
+  let eD = useCallback(() => eS?.visible ? (eS.onCancel?.(), dispatch(showEmojiPicker({
     visible: !1
   })), !0) : (e.editorRef.current && e.editorRef.current.handleEscape(), !1), [e.editorRef, eS, dispatch]);
   let eB = useCallback(() => {
@@ -242,13 +242,13 @@ export function $$em1(e) {
     if (e.editorRef && e.editorRef.current) {
       let n = dN.get(t.id);
       n && e.editorRef.current.insertEmoji(n);
-      e.dispatch(RI({
+      e.dispatch(showEmojiPicker({
         visible: !1
       }));
     }
   });
   let eq = async () => {
-    e.dispatch(We(await getMentionsResult("", e.mentionables, eT === FFileType.DESIGN)));
+    e.dispatch(setTypeahead(await getMentionsResult("", e.mentionables, eT === FFileType.DESIGN)));
     trackEventAnalytics("Comment Composer At Mention Clicked", {
       userId: e.user.id,
       fileKey: e.fileKey,
@@ -330,13 +330,13 @@ export function $$em1(e) {
         });
         e1(t);
       }
-      dispatch(uz(null));
+      dispatch(setActiveDragTarget(null));
     },
     onTargetDragEnter: t => {
-      dispatch(uz(e.recordingKey));
+      dispatch(setActiveDragTarget(e.recordingKey));
     },
     onTargetDragLeave: e => {
-      dispatch(uz(null));
+      dispatch(setActiveDragTarget(null));
     },
     forwardedRef: V,
     "data-testid": e.editingExistingComment ? "edit-comment-composer-container" : "new-comment-composer-container",
@@ -391,7 +391,7 @@ export function $$em1(e) {
           let t = V.current.getBoundingClientRect();
           let n = viewportPositionFromClientPosition(new Point(t.right, t.top));
           let o = viewportPositionFromClientPosition(new Point(t.left, t.bottom));
-          dispatch(i4({
+          dispatch(setTypeaheadPositionOffset({
             top: n.y - threadPosition.y,
             right: n.x - threadPosition.x,
             bottom: o.y - threadPosition.y,
@@ -399,7 +399,7 @@ export function $$em1(e) {
             height: t.height,
             width: t.width
           }));
-          ex && eI || !eO || !(eO.length > 0) || eE || e.getCurrentContent().getPlainText() !== `${eO[0].user?.email} ` || (dispatch(We(tI({
+          ex && eI || !eO || !(eO.length > 0) || eE || e.getCurrentContent().getPlainText() !== `${eO[0].user?.email} ` || (dispatch(setTypeahead(tI({
             index: -1,
             userId: Z?.id
           }))), eM(!0));
@@ -432,7 +432,7 @@ export function $$em1(e) {
           onClick: t => {
             trackEventAnalytics("Emoji Picker Opened");
             let n = h.current?.getBoundingClientRect();
-            n && e.dispatch(RI({
+            n && e.dispatch(showEmojiPicker({
               visible: !0,
               targetRect: n,
               onPick: t => {
@@ -441,7 +441,7 @@ export function $$em1(e) {
               },
               onCancel: () => {
                 e.editorRef.current?.focus();
-                e.dispatch(RI({
+                e.dispatch(showEmojiPicker({
                   visible: !1
                 }));
               }

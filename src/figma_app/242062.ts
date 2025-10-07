@@ -1,23 +1,27 @@
-import c from 'classnames';
-import { Fragment as _$$Fragment, memo, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from 'react';
+import type { AllUser } from '../../types/app';
+import type { ViewportInfo } from '../figma_app/62612';
+import type { ChatState, CursorCollisionPair } from './cursor-system';
+import classNames from 'classnames';
+import { AnimatePresence, motion } from 'motion/react';
+import React, { memo, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { throttle } from 'throttle-debounce';
 import { useClickOutside } from '../905/1768';
 import { selectWithShallowEqual } from '../905/103090';
-import { F as _$$F } from '../905/258517';
+import { fullscreenHandler } from '../905/258517';
 import { useTheme } from '../905/289770';
 import { getI18nString } from '../905/303541';
 import { debugState } from '../905/407919';
 import { isWebAnimationsApiSupported } from '../905/437800';
-import { XM } from '../905/486443';
+import { useIsVotingSessionJoined } from '../905/486443';
 import { De, JR, p4 } from '../905/496627';
 import { distributionAnalytics, globalPerfTimer } from '../905/542194';
 import { getFeatureFlags } from '../905/601108';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { o as _$$o } from '../905/755806';
 import { getCanvasViewState } from '../905/758967';
-import { n3, Tc } from '../905/797478';
-import { L as _$$L, w as _$$w } from '../905/842040';
+import { getElementByDataTarget, isNodeContainedIn } from '../905/797478';
 import { multiplayerSessionManager } from '../905/977824';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { getViewportInfo, useLatestViewportRef, viewportToScreen } from '../figma_app/62612';
@@ -25,19 +29,19 @@ import { getObservableOrFallback, getObservableValue } from '../figma_app/84367'
 import { H as _$$H } from '../figma_app/147959';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildStaticUrl, buildUploadUrl } from '../figma_app/169182';
-import { aG, EO } from '../figma_app/178273';
+import { allNodeStates, isDeleting } from '../figma_app/178273';
 import { getDarkerShade, getTextColorForBackground, textOnDarkCanvas, textOnLightCanvas } from '../figma_app/191804';
-import { I as _$$I, p as _$$p2 } from '../figma_app/210457';
+import { CursorKinematics, hasItem } from '../figma_app/210457';
 import { viewportNavigatorContext } from '../figma_app/298911';
 import { stopChattingThunk, stopReactingAction } from '../figma_app/308685';
 import { getI18nState } from '../figma_app/363242';
-import { p as _$$p } from '../figma_app/372802';
+import { ViewportContainer } from '../figma_app/372802';
 import { setupCursorChatDisabledCheck } from '../figma_app/403368';
 import { useDocumentEvent } from '../figma_app/412189';
-import { useObservingSessionID, useCurrentSessionID } from '../figma_app/440875';
+import { useCurrentSessionID, useObservingSessionID } from '../figma_app/440875';
 import { debug } from '../figma_app/465776';
 import { usePrefersReducedMotion } from '../figma_app/469468';
-import { oP } from '../figma_app/580087';
+import { CHAT_SHORTCUT_ELEMENT_ID } from '../figma_app/580087';
 import { chatStateTracker } from '../figma_app/682945';
 import { useAppModelProperty } from '../figma_app/722362';
 import { uiBlueSteelColor2 } from '../figma_app/728075';
@@ -46,447 +50,158 @@ import { shouldHandleMultiTouchOrPressure } from '../figma_app/753501';
 import { AppStateTsApi, DesignGraphElements, Fullscreen, LayoutTabType, Multiplayer, PaintTools, SnapshotLevel } from '../figma_app/763686';
 import { BrowserInfo } from '../figma_app/778880';
 import { memoizeByArgs } from '../figma_app/815945';
-import { K as _$$K } from '../figma_app/824081';
+import { useIsMouseInViewport } from '../figma_app/824081';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { trackFileEventWithUser } from '../figma_app/901889';
 import { p as _$$p3, Bj, bu, DE, Dy, hD, iU, iY, Lo, Lw, or, PT, Rt, S8, u0, vD, VW, W7, z8, zr } from '../figma_app/938674';
-import { x as _$$x } from '../figma_app/943271';
+import { useMousePositionTracker } from '../figma_app/943271';
 import { getCurrentFileType } from '../figma_app/976749';
-import { AS, mZ } from '../figma_app/991227';
-import { P as _$$P } from '../vendor/348225';
-import { n as _$$n } from '../vendor/547481';
-import { N as _$$N } from '../vendor/930821';
-let n = {};
-require.d(n, {
-  GLARE_ANIMATION: () => ej,
-  GRAY_BACKGROUND: () => eF,
-  NONE: () => eB,
-  ORANGE_GRADIENT: () => eM,
-  PINK_GRADIENT: () => eD,
-  animateBg: () => ek,
-  glareAnimation: () => eU
-});
-let u = c;
-var O = (e => (e.PINK_GRADIENT = 'PINK_GRADIENT', e.ORANGE_GRADIENT = 'ORANGE_GRADIENT', e.GRAY_BACKGROUND = 'GRAY_BACKGROUND', e.GLARE_ANIMATION = 'GLARE_ANIMATION', e.NONE = 'NONE', e))(O || {});
-let R = new Map([['happy birthday', 'PINK_GRADIENT'], ['bday', 'PINK_GRADIENT'], ['hbd', 'PINK_GRADIENT'], ['fire', 'ORANGE_GRADIENT'], ['fiire', 'ORANGE_GRADIENT'], ['fiiire', 'ORANGE_GRADIENT'], ['fiiiire', 'ORANGE_GRADIENT'], ['lit', 'ORANGE_GRADIENT'], ['heat', 'ORANGE_GRADIENT'], ['hot', 'ORANGE_GRADIENT'], ['spicy', 'ORANGE_GRADIENT'], ['lowkey', 'GRAY_BACKGROUND'], ['slick', 'GLARE_ANIMATION'], ['this is clean', 'GLARE_ANIMATION'], ['this clean', 'GLARE_ANIMATION'], ['cleann', 'GLARE_ANIMATION'], ['sharp', 'GLARE_ANIMATION'], ['immaculate', 'GLARE_ANIMATION'], ['pristine', 'GLARE_ANIMATION'], ['polished', 'GLARE_ANIMATION'], ['spotless', 'GLARE_ANIMATION'], ['shiny', 'GLARE_ANIMATION']]);
-let L = new Map([[buildUploadUrl('a83de90bf34495081ce2e8bcaf28d1d2c16e5186'), ['lol', 'lmao', 'rofl', 'lmfao', 'hehe', 'haha', 'sksk', 'cryingg', 'dyingg', 'so funny', 'rotfl']], [buildUploadUrl('d1e0d7ed5e1aa13e8854dbd88b9fd650377a02f2'), ['fire', 'fiire', 'fiiire', 'fiiiire', 'spicy', 'oh snap', 'dope', 'hot', 'heat', 'so good', 'siick', 'siiick', 'siiiick', 'on point', 'rad', 'sweeet', 'sweeeet', 'wagmi', 'wgmi', 'gmi']], [buildUploadUrl('0606e9d967b5abb6d9a2853c2fff589f2ec2fc05'), ['hey', 'hiya', 'heyo', 'hello', 'howdy', 'whats up', 'what\'s up', 'good morning', 'gm', 'greetings', 'bye', 'later', 'ciao', 'see ya', 'cya', 'wave']], [buildUploadUrl('ffd0635e8f9322352eff0c15411ac0b536b98d87'), ['taking a look', 'sus', 'let me look', 'let me see', 'lemme see', 'i see what you did there']], [buildUploadUrl('ff5be810b821d264cc2c95f665d24a867c34e587'), ['gorgeous', 'stunning', 'love', 'loove', 'looove', 'loooove', 'looooove', 'luv', 'woww', 'awww', '<3', 'yass', 'cute', 'amazingg', 'heart eyes', 'beautiful', 'my eyeballs are literally two giant hearts right now and i couldn\'t be happier', 'beautiful', 'adorable']], [buildUploadUrl('78f60a21d2616c2a24c7645d8636dec855e48ffb'), ['ngmi', 'bummer', 'sad face', 'uh oh', ':(', 'noo', 'oh no', 'sorry to hear that', 'rip', 'rats', 'big sad', 'tragic', 'fail', 'womp', 'that sucks']], [buildUploadUrl('1429964104bceac90c5c8e731ce4cc50b27e2797'), ['wtf', 'whoa', 'no way', ':O', 'woah', 'whaat', 'whaaat', 'shook', 'shooketh', 'omg', 'omfg', 'speechless', 'oh snap', 'surprised']], [buildUploadUrl('e15fa4fbba4b88b4f1f04ba64bb12abf12bcbc6c'), ['gift', 'hbd', 'bday', 'birthday']], [buildUploadUrl('778eea842ed4020f6209e97c77abcd84984e5c94'), ['cool', 'coool', 'swag', 'chill']], [buildStaticUrl('emoji/5/noto/medium/1f410.png'), ['goat']]]);
-var P = (e => (e[e.Standard = 0] = 'Standard', e))(P || {});
-let D = new Map();
-L.forEach((e, t) => {
-  !function (e, t, r) {
-    e.forEach(e => r.set(e, t));
-  }(e, t, D);
-});
-let k = (e, t) => {
-  let r = t.get(e);
-  r && multiplayerSessionManager.sendReaction(r);
+import { CursorTracker, CursorType } from '../figma_app/991227';
+import { AnimatedCursorEntity, BubblePopEntity, CollisionDetector, EmoteSystem, ParticleSystem, SparkleEntity, StarParticle, TimedEventEntity, WiggleDetector } from './cursor-system';
+
+let n = {
+  GLARE_ANIMATION: '',
+  GRAY_BACKGROUND: '',
+  NONE: '',
+  ORANGE_GRADIENT: '',
+  PINK_GRADIENT: '',
+  animateBg: '',
+  glareAnimation: ''
 };
-class V extends _$$w {
-  constructor() {
-    super();
-    this.type = 'Particle';
-    this.velocity = {
-      x: 0,
-      y: 0
-    };
-    this.kick = {
-      x: 0,
-      y: 0
-    };
-    this.kickDecay = 1;
-    this.gravity = {
-      x: 0,
-      y: 0
-    };
-  }
-  static fastVectorAddScaled(e, t, r) {
-    e.x += t.x * r;
-    e.y += t.y * r;
-  }
-  update(e) {
-    V.fastVectorAddScaled(this.position, this.velocity, e);
-    V.fastVectorAddScaled(this.position, this.kick, e);
-    V.fastVectorAddScaled(this.kick, this.kick, this.kickDecay ** (e / 0.016) - 1);
-    V.fastVectorAddScaled(this.velocity, this.gravity, e);
-    return super.update(e);
-  }
+export enum BackgroundEffectType {
+  PINK_GRADIENT = 'PINK_GRADIENT',
+  ORANGE_GRADIENT = 'ORANGE_GRADIENT',
+  GRAY_BACKGROUND = 'GRAY_BACKGROUND',
+  GLARE_ANIMATION = 'GLARE_ANIMATION',
+  NONE = 'NONE',
 }
-class H extends _$$L {
-  constructor() {
-    super(...arguments);
-    this.MAX_PARTICLES = 512;
-    this.addParticle = e => {
-      this.getParticles().length < this.MAX_PARTICLES && this.addEntity(e);
-    };
-  }
-  getParticles() {
-    return this.getEntities().filter(e => e instanceof V);
-  }
+const emoteSystem = new EmoteSystem();
+let backgroundEffectKeywords = emoteSystem.backgroundEffectKeywords;
+export enum CursorAnimationType {
+  Standard = 0,
 }
-let X = class e {
-  constructor() {
-    this.previouslyCollidingCursors = new Set();
-  }
-  updateAndCheckCollisions(t) {
-    let r = new Set();
-    let n = [];
-    for (let i = 0; i < t.length; i++) {
-      let a = t[i];
-      let s = e.closestNonSelfCursor(a, t.slice(i + 1));
-      if (s && e.distanceBetween(a.mouse?.canvasSpacePosition, s.mouse?.canvasSpacePosition) < e.CURSOR_COLLISION_RADIUS) {
-        let t = e.makeCursorProximityKey(a, s);
-        this.previouslyCollidingCursors.has(t) || n.push([a, s]);
-        r.add(t);
-      }
-    }
-    this.previouslyCollidingCursors = r;
-    return n;
-  }
-  static makeCursorProximityKey(e, t) {
-    return [e.sessionId, t.sessionId].sort().join('+');
-  }
-  static distanceBetween(e, t) {
-    if (!e || !t) return 1 / 0;
-    let r = e.x - t.x;
-    let n = e.y - t.y;
-    return Math.sqrt(r * r + n * n);
-  }
-  static computeMidpoint(e, t) {
-    return {
-      x: (e.x + t.x) / 2,
-      y: (e.y + t.y) / 2
-    };
-  }
-  static closestNonSelfCursor(t, r) {
-    let n = 1 / 0;
-    let i = null;
-    r.forEach(r => {
-      if (r.sessionId !== t.sessionId) {
-        let a = e.distanceBetween(t.mouse?.canvasSpacePosition, r.mouse?.canvasSpacePosition);
-        a < n && (n = a, i = r);
-      }
-    });
-    return i;
-  }
-};
-X.CURSOR_COLLISION_RADIUS = 80;
-let q = atom(!1);
-class J extends _$$w {
-  constructor(e) {
-    super();
-    this.position = e;
-    this.type = 'BubblePopEntity';
-    this.sortOrder = -2;
-  }
-}
-class Z extends _$$w {
-  constructor(e) {
-    super();
-    this.position = e;
-    this.type = 'SparkleEntity';
-  }
-}
-class Q extends _$$w {
-  constructor(e) {
-    super();
-    this.position = e;
-    this.type = 'StarParticle';
-    this.scale = (1 + Math.random()) * 0.3;
-    this.sortOrder = -0.5;
-    this.customData.emissionAngle = Math.random() * Math.PI * 2;
-  }
-}
-class ee extends _$$w {
-  constructor(e) {
-    super();
-    this.timedTriggers = e;
-  }
-  update(e) {
-    this.age += e;
-    this.timedTriggers = this.timedTriggers.filter(e => !(this.age >= e.time) || (e.event(), !1));
-    return this.timedTriggers.length > 0;
-  }
-}
-let et = class e extends _$$w {
-  constructor({
-    startingRelativePosition: t,
-    startingRotation: r,
-    position: n,
-    viewportZoomScale: i,
-    cursorOnRightForWindup: a,
-    cursorOnRightForCollision: s,
-    sessionId: o,
-    getUserCursorTransform: l
-  }) {
-    super();
-    this.type = 'AnimatedCursorEntity';
-    this.lifetime = 0.85;
-    s && (this.sortOrder = -1);
-    this.position = n;
-    this.viewportZoomScale = i;
-    this.cursorOnRightForWindup = a;
-    this.cursorOnRightForCollision = s;
-    let d = {
-      transform: `translate(${t.x}px, ${t.y}px) rotate(${r}rad)`
-    };
-    let c = {
-      transform: `translate(${(this.cursorOnRightForWindup ? 1 : -1) * 90}px, 70px) rotate(${this.cursorOnRightForWindup ? 1 : -1}rad) scale(0.9)`
-    };
-    let u = {
-      transform: `translate(${(this.cursorOnRightForCollision ? 1 : -1) * 10}px, 0px) scale(2)`
-    };
-    let p = e.RANDOM_VECTORS.map(e => ({
-      transform: `translate(${10 * e.x}px, ${10 * e.y}px) ${u.transform}`
-    }));
-    let _ = 1e3 / 60;
-    this.customData = {
-      sessionId: o,
-      animations: [{
-        keyframes: [d, c],
-        timing: {
-          duration: 12 * _,
-          easing: 'cubic-bezier(.26,.32,.12,1)'
-        }
-      }, {
-        keyframes: [c, u],
-        timing: {
-          delay: 12 * _,
-          duration: 4 * _,
-          easing: 'cubic-bezier(.16,.5,.47,1.25)'
-        }
-      }, {
-        keyframes: p,
-        timing: {
-          delay: 16 * _,
-          duration: 4 * _,
-          easing: `steps(${p.length})`
-        }
-      }, {
-        keyframes: [u, u],
-        timing: {
-          delay: 20 * _,
-          duration: 18 * _
-        }
-      }],
-      getReturnToCursorTransform: t => {
-        let r = (this.cursorOnRightForCollision ? 1 : -1) * 10;
-        let n = l();
-        let a = (n.position.x - this.position.x) * i;
-        let s = (n.position.y - this.position.y) * i;
-        let o = n.rotation;
-        return `translate(${e.lerp(r, a, t)}px,${e.lerp(0, s, t)}px) rotate(${e.lerp(0, o, t)}rad) scale(${e.lerp(2, 1, t)})`;
-      }
-    };
-  }
-  static lerp(e, t, r) {
-    return e * (1 - r) + t * r;
-  }
-};
-et.RANDOM_VECTORS = [{
-  x: 0.626086772987037,
-  y: -0.24715772511262912
-}, {
-  x: 0.16558013014491735,
-  y: -0.4962441097195551
-}];
-let en = class e {
-  constructor() {
-    this.wiggleMeter = 0;
-    this.wiggleMode = !1;
-    this.lastUpdateTime = 0;
-    this.shakeFactor = 0;
-    this.shakeGracePeriod = 0;
-    this.speedFactor = 0;
-    this.mouseX = 0;
-    this.mouseY = 0;
-    this.hasLastMousePosition = !1;
-    this.lastMouseX = 0;
-    this.lastMouseY = 0;
-    this.lastDirectionX = 0;
-    this.lastDirectionY = 0;
-    this.subscriptions = [];
-    this.mouseLeftCanvas = !1;
-    this.highFiveKeyPressed = !1;
-    this.mouseButtonHeld = !1;
-  }
-  getWiggleMode() {
-    return this.wiggleMode;
-  }
-  getShakeFactor() {
-    return this.shakeFactor;
-  }
-  getAboutToHide() {
-    return this.getWiggleMode() && this.wiggleMeter < e.WIGGLE_MODE_ABOUT_TO_HIDE_TIME / e.WIGGLE_MODE_DEACTIVATION_TIME;
-  }
-  onWiggleModeChange(e) {
-    this.subscriptions.push(e);
-    return () => {
-      let t = this.subscriptions.indexOf(e);
-      t >= 0 && this.subscriptions.splice(t, 1);
-    };
-  }
-  setWiggleMode(e) {
-    if (e !== this.wiggleMode) {
-      for (let t of (this.wiggleMode = e, this.subscriptions)) t(this.wiggleMode);
-    }
-  }
-  setMouseLeftCanvas(e) {
-    this.mouseLeftCanvas = e;
-  }
-  getMouseLeftCanvas() {
-    return this.mouseLeftCanvas;
-  }
-  setHighFiveKeyPressed(e) {
-    this.highFiveKeyPressed = e;
-  }
-  getHighFiveKeyPressed() {
-    return this.highFiveKeyPressed;
-  }
-  setMouseButtonHeld(e) {
-    this.mouseButtonHeld = e;
-    this.update();
-  }
-  getMousePosition() {
-    return {
-      x: this.mouseX,
-      y: this.mouseY,
-      overCanvas: !this.mouseLeftCanvas
-    };
-  }
-  stopWigglingNow() {
-    this.speedFactor = 0;
-    this.shakeFactor = 0;
-    this.shakeGracePeriod = 0;
-    this.wiggleMeter = 0;
-    this.hasLastMousePosition = !1;
-    this.lastDirectionX = 0;
-    this.lastDirectionY = 0;
-    this.setWiggleMode(!1);
-    this.update();
-  }
-  startOrRefreshWiggle() {
-    this.setWiggleMode(!0);
-    this.wiggleMeter = 1;
-  }
-  getDeltaTime() {
-    let e = performance.now();
-    let t = e - this.lastUpdateTime;
-    this.lastUpdateTime = e;
-    return t / 1e3;
-  }
-  update(e, t) {
-    e ? this.setMousePositionAndUpdate(e, t) : this.updateWiggleMeter(t);
-  }
-  setMousePositionAndUpdate(t, r) {
-    if (this.mouseLeftCanvas || this.mouseButtonHeld) return;
-    let n = typeof r == 'number' ? r : this.getDeltaTime();
-    if (n <= 0) return;
-    this.mouseX = t.x;
-    this.mouseY = t.y;
-    let i = 1;
-    let a = (this.mouseX - this.lastMouseX) / n;
-    let s = (this.mouseY - this.lastMouseY) / n;
-    if (this.lastMouseX = this.mouseX, this.lastMouseY = this.mouseY, !this.hasLastMousePosition) {
-      this.hasLastMousePosition = !0;
-      return;
-    }
-    let o = Math.sqrt(a * a + s * s);
-    if (o > 0) {
-      let e = a / o;
-      let t = s / o;
-      i = e * this.lastDirectionX + t * this.lastDirectionY;
-      this.lastDirectionX = e;
-      this.lastDirectionY = t;
-    }
-    let l = n / e.WIGGLE_MODE_MOVEMENT_DECAY_TIME;
-    let d = n / e.WIGGLE_MODE_MOVEMENT_MIN_TIME + l;
-    this.speedFactor += Math.min(o * e.WIGGLE_MODE_MOVEMENT_SENSITIVITY, d);
-    this.speedFactor = Math.max(0, this.speedFactor - l);
-    this.speedFactor = Math.min(1, this.speedFactor);
-    let c = this.speedFactor >= 0.8;
-    let u = c && i < 0;
-    let p = Math.abs(this.lastDirectionX) > Math.abs(this.lastDirectionY);
-    c && u && p && (this.shakeFactor += 1 / (this.wiggleMode ? e.WIGGLE_MODE_REPLENISH_SHAKES : e.WIGGLE_MODE_MIN_SHAKES_TO_TRIGGER), this.shakeGracePeriod = 1);
-    this.shakeGracePeriod > 0 ? this.shakeGracePeriod = Math.max(this.shakeGracePeriod - n / e.WIGGLE_MODE_SHAKE_GRACE_PERIOD, 0) : this.shakeFactor -= n / e.WIGGLE_MODE_SHAKE_RESET_TIME;
-    this.shakeFactor = Math.min(Math.max(this.shakeFactor, 0), 1);
-    c && (Math.abs(this.shakeFactor) >= 0.8 ? this.wiggleMeter = 1 : this.wiggleMode && Math.abs(this.shakeFactor) >= 0.3 && (this.wiggleMeter = Math.max(this.wiggleMeter, Math.abs(this.shakeFactor))));
-    this.updateWiggleMeter(n);
-  }
-  updateWiggleMeter(t) {
-    if ((t = typeof t == 'number' ? t : this.getDeltaTime()) <= 0) return;
-    this.wiggleMeter <= 0 ? this.setWiggleMode(!1) : this.wiggleMeter >= 1 && this.setWiggleMode(!0);
-    let r = 0;
-    r = this.mouseLeftCanvas ? -e.WIGGLE_MODE_LEAVE_CANVAS_GRACE_PERIOD : this.highFiveKeyPressed ? e.WIGGLE_MODE_HIGH_FIVE_KEY_TIME : this.wiggleMode ? -e.WIGGLE_MODE_DEACTIVATION_TIME : -e.WIGGLE_MODE_MOUSE_RESET_TIME;
-    this.wiggleMeter += t / r;
-    this.wiggleMeter = Math.min(Math.max(this.wiggleMeter, 0), 1);
-  }
-};
-function ei() {
+// Original variable name: q
+// Atom for storing a boolean value, likely related to cursor wiggle state.
+let q = atom<boolean>(false);
+
+// Original function name: ei
+/**
+ * Creates and returns an object containing various cursor-related systems and detectors.
+ * This function initializes the core components for cursor interactions, including wiggle detection,
+ * particle systems, collision detection, and kinematics.
+ * @returns An object with cursorWiggleDetector, cursorEntitySystem, cursorCollisionDetector, and cursorKinematics.
+ */
+function createCursorSystems(): {
+  cursorWiggleDetector: WiggleDetector;
+  cursorEntitySystem: ParticleSystem;
+  cursorCollisionDetector: CollisionDetector;
+  cursorKinematics: CursorKinematics;
+} {
   return {
-    cursorWiggleDetector: new en(),
-    cursorEntitySystem: new H(),
-    cursorCollisionDetector: new X(),
-    cursorKinematics: new _$$p2()
+    cursorWiggleDetector: new WiggleDetector(),
+    cursorEntitySystem: new ParticleSystem(),
+    cursorCollisionDetector: new CollisionDetector(),
+    cursorKinematics: new CursorKinematics()
   };
 }
-en.WIGGLE_MODE_DEACTIVATION_TIME = 6;
-en.WIGGLE_MODE_ABOUT_TO_HIDE_TIME = 3;
-en.WIGGLE_MODE_HIGH_FIVE_KEY_TIME = 0.5;
-en.WIGGLE_MODE_MOUSE_RESET_TIME = 0.6;
-en.WIGGLE_MODE_MOVEMENT_SENSITIVITY = 4e-5;
-en.WIGGLE_MODE_MOVEMENT_MIN_TIME = 0.1;
-en.WIGGLE_MODE_MOVEMENT_DECAY_TIME = 1.5;
-en.WIGGLE_MODE_MIN_SHAKES_TO_TRIGGER = 6.5;
-en.WIGGLE_MODE_REPLENISH_SHAKES = 3.5;
-en.WIGGLE_MODE_SHAKE_GRACE_PERIOD = 0.3;
-en.WIGGLE_MODE_SHAKE_RESET_TIME = 0.5;
-en.WIGGLE_MODE_LEAVE_CANVAS_GRACE_PERIOD = 0.3;
-let ea = memoizeByArgs(e => {
-  return e.reduce((e, t) => (e[t.sessionID] = t, e), {});
+
+// Original variable name: ea
+// Memoized function to reduce an array of users to an object keyed by sessionID for efficient lookups.
+let createUserMap = memoizeByArgs((users: AllUser[]) => {
+  return users.reduce((map, user) => {
+    map[user.sessionID] = user;
+    return map;
+  }, {} as Record<string, AllUser>);
 });
-function es(e, t, r, n, i) {
-  let a = (_$$I(t.getHandsOnRight(), r) ? 1 : -1) * (Math.PI / 4);
-  let s = 32 / n;
-  let o = {
-    x: e.x + s * Math.sin(a),
-    y: e.y - s * Math.cos(a)
+
+// Original function name: calculateCursorPosAndRotation
+/**
+ * Calculates the position and rotation for a cursor based on its canvas position, kinematics, session ID, zoom scale, and a boolean flag.
+ * This function determines the offset and angle for cursor rendering, accounting for hand orientation and zoom.
+ * @param canvasPosition - The position of the cursor on the canvas.
+ * @param kinematics - The CursorKinematics instance for hand orientation data.
+ * @param sessionId - The session ID of the cursor.
+ * @param zoomScale - The current zoom scale of the viewport.
+ * @param isPrimary - A boolean flag indicating if this is the primary cursor.
+ * @returns An object containing the calculated position and rotation.
+ */
+function calculateCursorPosAndRotation(canvasPosition: {
+  x: number;
+  y: number;
+}, kinematics: CursorKinematics, sessionId: string, zoomScale: number, isPrimary: boolean): {
+  position: {
+    x: number;
+    y: number;
   };
-  i || (o.x += 16 / n, o.y += 16 / n);
+  rotation: number;
+} {
+  const rotation = (hasItem(kinematics.getHandsOnRight(), sessionId) ? 1 : -1) * (Math.PI / 4);
+  const offset = 32 / zoomScale;
+  const position = {
+    x: canvasPosition.x + offset * Math.sin(rotation),
+    y: canvasPosition.y - offset * Math.cos(rotation)
+  };
+  if (!isPrimary) {
+    position.x += 16 / zoomScale;
+    position.y += 16 / zoomScale;
+  }
   return {
-    position: o,
-    rotation: a
+    position,
+    rotation
   };
 }
-function eo(e, t) {
-  return !!e.find(e => e.type === 'AnimatedCursorEntity' && e.customData.sessionId === t);
+function isCursorValidForInteraction(cursor, t, currentPageId, currentSessionId, observingSessionId) {
+  return !(cursor.deviceName !== 'editor' || t?.mouse?.canvasSpacePosition == null || isNaN(t?.mouse?.canvasSpacePosition.x) || t.mouse.pageId !== currentPageId || (t.lastMouseMoveMs === -1 || window.performance.now() - t.lastMouseMoveMs > 6e4) && currentSessionId !== cursor.sessionID) && cursor.sessionID !== observingSessionId;
 }
-function el(e, t, r, n, i) {
-  return !(e.deviceName !== 'editor' || t?.mouse?.canvasSpacePosition == null || isNaN(t?.mouse?.canvasSpacePosition.x) || t.mouse.pageId !== r || (t.lastMouseMoveMs === -1 || window.performance.now() - t.lastMouseMoveMs > 6e4) && n !== e.sessionID) && e.sessionID !== i;
+// Original function name: ed
+/**
+ * Determines if high-fiving is supported based on the current file type and voting session status.
+ * High-fiving is supported only in whiteboard mode and when not in a voting session.
+ * @returns {boolean} True if high-fiving is supported, false otherwise.
+ */
+function isHighFivingSupported(): boolean {
+  const fileType = getCurrentFileType();
+  const isVoting = useIsVotingSessionJoined();
+  return fileType === 'whiteboard' && !isVoting;
 }
-function ed() {
-  let e = getCurrentFileType();
-  let t = XM();
-  return e === 'whiteboard' && !t;
-}
-function e_({
-  viewportInfo: e,
-  bb: t
-}) {
-  let {
+
+// Original function name: e_
+/**
+ * Renders an animated selection box for AI interactions using motion.div.
+ * Calculates the scaled dimensions and position based on viewport zoom and bounding box.
+ * @param viewportInfo - The current viewport information including zoom scale.
+ * @param bb - The bounding box with width, height, x, and y coordinates.
+ * @returns A JSX element representing the animated selection box.
+ */
+function AiSelectionBox({
+  viewportInfo,
+  bb
+}: {
+  viewportInfo: {
+    zoomScale: number;
+  };
+  bb: {
+    w: number;
+    h: number;
+    x: number;
+    y: number;
+  };
+}): JSX.Element {
+  const {
     zoomScale
-  } = e;
-  let n = t.w * zoomScale;
-  let a = t.h * zoomScale;
-  let s = (zoomScale - 1) * t.x;
-  let o = (zoomScale - 1) * t.y;
-  let l = {
-    transform: `translate(${t.x + s}px, ${t.y + o}px)`,
-    width: `${n}px`,
-    height: `${a}px`
+  } = viewportInfo;
+  const scaledWidth = bb.w * zoomScale;
+  const scaledHeight = bb.h * zoomScale;
+  const offsetX = (zoomScale - 1) * bb.x;
+  const offsetY = (zoomScale - 1) * bb.y;
+  const style = {
+    transform: `translate(${bb.x + offsetX}px, ${bb.y + offsetY}px)`,
+    width: `${scaledWidth}px`,
+    height: `${scaledHeight}px`
   };
-  return jsx(_$$P.div, {
+  return jsx(motion.div, {
     className: 'ai_animations--aiSelectionBox--vHELC',
-    style: l,
+    style,
     initial: {
       opacity: 0
     },
@@ -501,680 +216,896 @@ function e_({
     }
   });
 }
-function eh({
-  viewportInfo: e
-}) {
-  let t = useAtomWithSubscription(EO);
-  let r = useAtomWithSubscription(aG);
-  return jsx(_$$N, {
-    children: r && t.map(t => jsx(e_, {
-      viewportInfo: e,
-      bb: t.boundingBox
-    }, t.guid))
+
+// Original function name: eh
+/**
+ * Component that manages the presence of AI selection boxes for nodes being deleted.
+ * Uses AnimatePresence to animate the entry and exit of selection boxes.
+ * @param viewportInfo - The current viewport information.
+ * @returns A JSX element containing animated selection boxes.
+ */
+function AiSelectionBoxes({
+  viewportInfo
+}: {
+  viewportInfo: {
+    zoomScale: number;
+  };
+}): JSX.Element {
+  const nodeStates = useAtomWithSubscription(allNodeStates);
+  const isDeletingNodes = useAtomWithSubscription(isDeleting);
+  return jsx(AnimatePresence, {
+    children: isDeletingNodes && nodeStates.map(nodeState => jsx(AiSelectionBox, {
+      viewportInfo,
+      bb: nodeState.boundingBox
+    }, nodeState.guid))
   });
 }
-function em(e, t) {
-  let r = 3 * e;
-  let n = 3 * e;
-  let i = 1.7999999999999998 * e;
-  let a = [];
-  for (let e = 0; e <= 100; e += 2) {
-    if (e === 0 || e === 100) {
-      a.push(eg(0, 0, 0));
+/**
+ * Creates a rumble animation with randomized keyframes based on intensity.
+ * Original function name: createRumbleKeyframes
+ * @param intensity - The intensity level for the rumble effect, affecting the range of random movements.
+ * @param element - The DOM element to apply the animation to.
+ * @returns An Animation object for the rumble effect.
+ */
+function createRumbleKeyframes(intensity: number, element: HTMLElement): Animation {
+  const maxX = 3 * intensity;
+  const maxY = 3 * intensity;
+  const maxRotation = 1.8 * intensity;
+  const keyframes: Keyframe[] = [];
+  for (let progress = 0; progress <= 100; progress += 2) {
+    if (progress === 0 || progress === 100) {
+      keyframes.push(createTransformKeyframe(0, 0, 0));
       continue;
     }
-    let t = Math.floor(Math.random() * r) - r / 2;
-    let s = Math.floor(Math.random() * n) - n / 2;
-    let o = Math.floor(Math.random() * i) - i / 2;
-    a.push(eg(t, s, o));
+    const x = Math.floor(Math.random() * maxX) - maxX / 2;
+    const y = Math.floor(Math.random() * maxY) - maxY / 2;
+    const rotation = Math.floor(Math.random() * maxRotation) - maxRotation / 2;
+    keyframes.push(createTransformKeyframe(x, y, rotation));
   }
-  return new Animation(new KeyframeEffect(t, a, {
+  return new Animation(new KeyframeEffect(element, keyframes, {
     duration: 100,
     easing: 'ease-in-out',
-    iterations: 1 / 0
+    iterations: Infinity
   }), document.timeline);
 }
-function eg(e, t, r) {
+function createTransformKeyframe(x: number, y: number, rotation: number) {
   return {
-    transform: `translate(${e}px, ${t}px) rotate(${r}deg)`
+    transform: `translate(${x}px, ${y}px) rotate(${rotation}deg)`
   };
 }
-function ef(e) {
-  return !!e.length && e.some(e => e.playState === 'running');
+function areAnimationsRunning(animations: Animation[]) {
+  return !!animations.length && animations.some(e => e.playState === 'running');
 }
-function eE(e) {
-  let {
-    content,
-    children
-  } = e;
-  let [n, s] = useState(0);
-  let o = useRef(0);
-  let l = useRef([]);
-  let d = useRef(null);
-  let [c, u] = useState([]);
-  let p = trackFileEventWithUser();
-  let _ = useMemo(() => content.length === 0 ? 0 : ((content.match(/!+$/g) || [])[0] || '').length, [content]);
-  let h = useCallback(e => {
-    clearTimeout(o.current);
-    o.current = setTimeout(() => {
-      s(e => (e > 0 && h(250), Math.max(e - 1, 0)));
-    }, e);
+/**
+ * ChatAnimationWrapper component handles animation effects for chat messages, specifically rumble animations triggered by exclamation marks.
+ * Original function name: ChatAnimationWrapper
+ * @param props - The props object containing content and children.
+ * @param props.content - The chat message content string.
+ * @param props.children - The child React elements to render.
+ * @returns A JSX element wrapping the children with animation effects.
+ */
+function ChatAnimationWrapper({
+  content,
+  children
+}: {
+  content: string;
+  children: React.ReactNode;
+}): JSX.Element {
+  // State for animation intensity based on trailing exclamation marks
+  const [animationIntensity, setAnimationIntensity] = useState(0);
+  // Ref for timeout ID to manage animation decay
+  const timeoutRef = useRef<number>(0);
+  // Ref for storing animation instances
+  const animationsRef = useRef<Animation[]>([]);
+  // Ref for the DOM element to apply animations
+  const elementRef = useRef<HTMLDivElement>(null);
+  // State for animation play states
+  const [animationStates, setAnimationStates] = useState<string[]>([]);
+  // Track event function
+  const trackEvent = trackFileEventWithUser();
+
+  // Memoized calculation of trailing exclamation marks count
+  const exclamationCount = useMemo(() => {
+    if (content.length === 0) return 0;
+    const match = content.match(/!+$/);
+    return match ? match[0].length : 0;
+  }, [content]);
+
+  // Callback to handle animation decay over time
+  const decayAnimation = useCallback((delay: number) => {
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setAnimationIntensity(prev => {
+        const newIntensity = Math.max(prev - 1, 0);
+        if (newIntensity > 0) {
+          decayAnimation(250);
+        }
+        return newIntensity;
+      });
+    }, delay);
   }, []);
+
+  // Effect to initialize and update animation intensity
   useEffect(() => {
-    s(_);
-    h(1e3);
-  }, [_, h]);
+    setAnimationIntensity(exclamationCount);
+    decayAnimation(1000);
+  }, [exclamationCount, decayAnimation]);
+
+  // Effect to manage rumble animations
   useEffect(() => {
-    if (!d.current) return;
-    n > 1 && !l.current.length && (l.current = [em(1, d.current), em(1.5, d.current), em(2, d.current), em(2.5, d.current), em(3, d.current)]);
-    let e = ef(l.current);
-    if (n > 1) {
-      let e = Math.min(n - 1 - 1, l.current.length - 1);
-      l.current.forEach((t, r) => {
-        r === e ? t.play() : t.cancel();
+    if (!elementRef.current) return;
+
+    // Initialize animations if not already done and intensity > 1
+    if (animationIntensity > 1 && animationsRef.current.length === 0) {
+      animationsRef.current = [createRumbleKeyframes(1, elementRef.current), createRumbleKeyframes(1.5, elementRef.current), createRumbleKeyframes(2, elementRef.current), createRumbleKeyframes(2.5, elementRef.current), createRumbleKeyframes(3, elementRef.current)];
+    }
+    const wasRunning = areAnimationsRunning(animationsRef.current);
+    if (animationIntensity > 1) {
+      const activeIndex = Math.min(animationIntensity - 2, animationsRef.current.length - 1);
+      animationsRef.current.forEach((anim, index) => {
+        if (index === activeIndex) {
+          anim.play();
+        } else {
+          anim.cancel();
+        }
       });
     } else {
-      l.current.forEach(e => e?.cancel());
+      animationsRef.current.forEach(anim => anim?.cancel());
     }
-    let t = ef(l.current);
-    !e && t && p('cursor_chat_rumble_triggered');
-    u(l.current.map(e => e?.playState));
-  }, [n, p]);
+    const isRunning = areAnimationsRunning(animationsRef.current);
+    if (!wasRunning && isRunning) {
+      trackEvent('cursor_chat_rumble_triggered');
+    }
+    setAnimationStates(animationsRef.current.map(anim => anim?.playState || 'idle'));
+  }, [animationIntensity, trackEvent]);
   return jsx('div', {
     'data-testid': 'chat-animation-wrapper',
-    'data-test-animation-state': c,
-    'ref': d,
+    'data-test-animation-state': animationStates,
+    'ref': elementRef,
     children
   });
 }
-let ey = {
+let CHAT_ACTION_TYPES = {
   HANDLE_KEYDOWN: 'HANDLE_KEYDOWN',
   HANDLE_INPUT: 'HANDLE_INPUT',
   STOP_CHATTING: 'STOP_CHATTING',
   START_FADING_INACTIVE_CHAT: 'START_FADING_INACTIVE_CHAT',
   STOP_FADING_INACTIVE_CHAT: 'STOP_FADING_INACTIVE_CHAT',
   HANDLE_EMOTE_ANIMATION_END: 'HANDLE_EMOTE_ANIMATION_END'
-};
-let eb = {
+} as const;
+let initialChatState: ChatState = {
   currentUserInput: '',
   previousLine: '',
   fadingOutText: '',
   isWidthLocked: !1,
   isShowingEmptyNewline: !1,
   inputIsEmpty: !0,
-  currentEmoteBackground: O.NONE,
+  currentEmoteBackground: BackgroundEffectType.NONE,
   width: 0,
   isFigJam: !1,
   isFadingInactiveChat: !1,
   shouldClose: !1,
   hasTypedAnything: !1
 };
-let eT = e => {
+let updateChatStateWidth = (text: ChatState) => {
   let t = document.createElement('canvas').getContext('2d');
-  if (!t) return e;
+  if (!t) return text;
   t.font = '14px Inter, sans-serif';
-  let r = Math.max(t.measureText(e.currentUserInput).width, t.measureText(e.previousLine).width);
+  let r = Math.max(t.measureText(text.currentUserInput).width, t.measureText(text.previousLine).width);
   return {
-    ...e,
+    ...text,
     width: r
   };
 };
-function eI(e, t) {
-  let r;
-  let n = e.toLocaleLowerCase();
-  let i = !((r = n.charAt(n.length - t.length - 1)).length === 1 && /[A-Z]/i.test(r));
-  return n.endsWith(t) && i;
-}
-let eS = (e, t, r) => {
-  for (let t of D.keys()) {
-    eI(e, t) && (!function (e, t) {
-      k(e, t);
-      k(e, t);
-      k(e, t);
-      k(e, t);
-      k(e, t);
-      k(e, t);
-    }(t, D), r('cursor_chat_emote_triggered', {
-      keyword: t
-    }));
-  }
-};
-let ev = e => {
-  for (let [t, r] of R) {
-    if (r && eI(e, t)) {
-      return {
-        key: t,
-        background: r
-      };
-    }
-  }
-};
-function eA(e, t) {
-  switch (t.type) {
-    case ey.HANDLE_INPUT:
-      {
-        let r = {
-          ...e
-        };
-        let {
-          value
-        } = t.payload;
-        if (e.isShowingEmptyNewline && (r.isShowingEmptyNewline = !1), value.length > r.currentUserInput.length && r.isFigJam) {
-          let {
-            key,
-            background
-          } = ev(value) ?? {};
-          background && (r.currentEmoteBackground = background, t.payload.trackEvent('cursor_chat_background_effect_triggered', {
-            keyword: key
-          }));
-          eS(value, P.Standard, t.payload.trackEvent);
-        }
-        r.fadingOutText = r.previousLine;
-        r.previousLine = '';
-        r.currentUserInput = value;
-        e.hasTypedAnything || t.payload.trackEvent('cursor_chat_typed_something');
-        r.hasTypedAnything = !0;
-        r.inputIsEmpty = r.currentUserInput.length === 0 && r.previousLine.length === 0;
-        return eT(r);
-      }
-    case ey.HANDLE_KEYDOWN:
-      {
-        let r = t.payload;
-        if (r.key === 'Enter') {
-          if (!1 === e.hasTypedAnything) return e;
-          let t = {
-            ...e
-          };
-          t.isShowingEmptyNewline = !0;
-          t.inputIsEmpty = !1;
-          t.isWidthLocked = !0;
-          t.fadingOutText = t.previousLine;
-          t.previousLine = t.currentUserInput;
-          t.currentUserInput = '';
-          return eT(t);
-        }
-        if (r.key === 'Escape') {
-          return {
-            ...e,
-            shouldClose: !0
-          };
-        }
-        return e;
-      }
-    case ey.HANDLE_EMOTE_ANIMATION_END:
-      {
-        let t = {
-          ...e
-        };
-        t.isWidthLocked = !1;
-        t.currentEmoteBackground = O.NONE;
-        return eT(t);
-      }
-    case ey.STOP_CHATTING:
-      return {
-        ...e,
-        shouldClose: !0
-      };
-    case ey.START_FADING_INACTIVE_CHAT:
-      return {
-        ...e,
-        isFadingInactiveChat: !0
-      };
-    case ey.STOP_FADING_INACTIVE_CHAT:
-      return {
-        ...e,
-        isFadingInactiveChat: !1
-      };
+
+/**
+ * Reducer function for managing chat state in the multiplayer cursor system.
+ * Handles various actions to update the chat state based on user interactions.
+ * @param state - The current chat state.
+ * @param action - The action object containing type and optional payload.
+ * @returns The updated chat state.
+ */
+function chatStateReducer(state: ChatState, action: {
+  type: string;
+  payload?: any;
+}): ChatState {
+  switch (action.type) {
+    case CHAT_ACTION_TYPES.HANDLE_INPUT:
+      return handleInputAction(state, action.payload);
+    case CHAT_ACTION_TYPES.HANDLE_KEYDOWN:
+      return handleKeydownAction(state, action.payload);
+    case CHAT_ACTION_TYPES.HANDLE_EMOTE_ANIMATION_END:
+      return handleEmoteAnimationEndAction(state);
+    case CHAT_ACTION_TYPES.STOP_CHATTING:
+      return handleStopChattingAction(state);
+    case CHAT_ACTION_TYPES.START_FADING_INACTIVE_CHAT:
+      return handleStartFadingInactiveChatAction(state);
+    case CHAT_ACTION_TYPES.STOP_FADING_INACTIVE_CHAT:
+      return handleStopFadingInactiveChatAction(state);
     default:
-      return e;
+      return state;
   }
 }
-let eL = (e, t, r) => {
+
+/**
+ * Handles the HANDLE_INPUT action by updating the chat state based on user input.
+ * Original logic from HANDLE_INPUT case.
+ * @param state - The current chat state.
+ * @param payload - The payload containing value and trackEvent.
+ * @returns The updated chat state.
+ */
+function handleInputAction(state: ChatState, payload: {
+  value: string;
+  trackEvent: (event: string, data?: any) => void;
+}): ChatState {
+  const newState = {
+    ...state
+  };
+  const {
+    value
+  } = payload;
+  if (state.isShowingEmptyNewline) {
+    newState.isShowingEmptyNewline = false;
+  }
+  if (value.length > newState.currentUserInput.length && newState.isFigJam) {
+    const effect = emoteSystem.findBackgroundEffect(value);
+    if (effect?.background) {
+      newState.currentEmoteBackground = effect.background;
+      payload.trackEvent('cursor_chat_background_effect_triggered', {
+        keyword: effect.key
+      });
+    }
+    emoteSystem.sendReactionEmotes(value, CursorAnimationType.Standard, payload.trackEvent);
+  }
+  newState.fadingOutText = newState.previousLine;
+  newState.previousLine = '';
+  newState.currentUserInput = value;
+  if (!state.hasTypedAnything) {
+    payload.trackEvent('cursor_chat_typed_something');
+  }
+  newState.hasTypedAnything = true;
+  newState.inputIsEmpty = newState.currentUserInput.length === 0 && newState.previousLine.length === 0;
+  return updateChatStateWidth(newState);
+}
+
+/**
+ * Handles the HANDLE_KEYDOWN action by processing keyboard events.
+ * Original logic from HANDLE_KEYDOWN case.
+ * @param state - The current chat state.
+ * @param event - The keyboard event.
+ * @returns The updated chat state.
+ */
+function handleKeydownAction(state: ChatState, event: KeyboardEvent): ChatState {
+  if (event.key === 'Enter') {
+    if (!state.hasTypedAnything) {
+      return state;
+    }
+    const newState = {
+      ...state
+    };
+    newState.isShowingEmptyNewline = true;
+    newState.inputIsEmpty = false;
+    newState.isWidthLocked = true;
+    newState.fadingOutText = newState.previousLine;
+    newState.previousLine = newState.currentUserInput;
+    newState.currentUserInput = '';
+    return updateChatStateWidth(newState);
+  }
+  if (event.key === 'Escape') {
+    return {
+      ...state,
+      shouldClose: true
+    };
+  }
+  return state;
+}
+
+/**
+ * Handles the HANDLE_EMOTE_ANIMATION_END action by resetting emote-related state.
+ * Original logic from HANDLE_EMOTE_ANIMATION_END case.
+ * @param state - The current chat state.
+ * @returns The updated chat state.
+ */
+function handleEmoteAnimationEndAction(state: ChatState): ChatState {
+  const newState = {
+    ...state
+  };
+  newState.isWidthLocked = false;
+  newState.currentEmoteBackground = BackgroundEffectType.NONE;
+  return updateChatStateWidth(newState);
+}
+
+/**
+ * Handles the STOP_CHATTING action by setting shouldClose to true.
+ * Original logic from STOP_CHATTING case.
+ * @param state - The current chat state.
+ * @returns The updated chat state.
+ */
+function handleStopChattingAction(state: ChatState): ChatState {
+  return {
+    ...state,
+    shouldClose: true
+  };
+}
+
+/**
+ * Handles the START_FADING_INACTIVE_CHAT action by setting isFadingInactiveChat to true.
+ * Original logic from START_FADING_INACTIVE_CHAT case.
+ * @param state - The current chat state.
+ * @returns The updated chat state.
+ */
+function handleStartFadingInactiveChatAction(state: ChatState): ChatState {
+  return {
+    ...state,
+    isFadingInactiveChat: true
+  };
+}
+
+/**
+ * Handles the STOP_FADING_INACTIVE_CHAT action by setting isFadingInactiveChat to false.
+ * Original logic from STOP_FADING_INACTIVE_CHAT case.
+ * @param state - The current chat state.
+ * @returns The updated chat state.
+ */
+function handleStopFadingInactiveChatAction(state: ChatState): ChatState {
+  return {
+    ...state,
+    isFadingInactiveChat: false
+  };
+}
+// Original function name: eL
+// Hook to manage the width of the chat input element based on input state and width.
+function useChatInputWidth(inputRef: React.RefObject<HTMLInputElement>, isInputEmpty: boolean, width: number) {
   useEffect(() => {
-    if (e.current) {
-      if (t) {
-        e.current.style.width = 'initial';
+    if (inputRef.current) {
+      if (isInputEmpty) {
+        inputRef.current.style.width = 'initial';
         return;
       }
-      e.current.style.width = `${r + 35}px`;
+      inputRef.current.style.width = `${width + 35}px`;
     }
-  }, [r, e, t]);
-};
-let eP = (e, t, r, n) => {
+  }, [width, inputRef, isInputEmpty]);
+}
+
+// Original function name: eP
+// Hook to synchronize the input value and data attribute with refs.
+function useChatInputValue(currentUserInput: string, previousLine: string, inputRef: React.RefObject<HTMLInputElement>, labelRef: React.RefObject<HTMLLabelElement>) {
   useEffect(() => {
-    r.current && n.current && (r.current.value = e, n.current.setAttribute('data-value', e));
-  }, [e, t, r, n]);
-};
-let eD = 'cursor_chat_emotes--PINK_GRADIENT--1KQ3C';
-let ek = 'cursor_chat_emotes--animateBg---meP2';
-let eM = 'cursor_chat_emotes--ORANGE_GRADIENT--cC1fw';
-let eF = 'cursor_chat_emotes--GRAY_BACKGROUND--DAHAE';
-let ej = 'cursor_chat_emotes--GLARE_ANIMATION--SuTBw';
-let eU = 'cursor_chat_emotes--glareAnimation--x1WJw';
-let eB = 'cursor_chat_emotes--NONE---FYHz';
-function eG(e) {
-  let t;
-  let {
-    color
-  } = e;
-  let o = getCurrentFileType() === 'whiteboard';
-  let d = useRef(null);
-  let c = useRef(null);
-  let u = useDispatch();
-  let p = trackFileEventWithUser();
-  let [{
-    currentUserInput: h,
-    previousLine: m,
-    fadingOutText: g,
-    isFadingInactiveChat: E,
-    isShowingEmptyNewline: y,
-    inputIsEmpty: b,
-    currentEmoteBackground: T,
-    width: I,
-    shouldClose: S,
-    hasTypedAnything: v
-  }, A] = useReducer(eA, {
-    ...eb,
-    isFigJam: o
+    if (inputRef.current && labelRef.current) {
+      inputRef.current.value = currentUserInput;
+      labelRef.current.setAttribute('data-value', currentUserInput);
+    }
+  }, [currentUserInput, previousLine, inputRef, labelRef]);
+}
+
+// Original function name: eG
+// Component for rendering the chat input interface, handling state, effects, and user interactions.
+/**
+ * ChatInput component handles the chat input UI for multiplayer cursors.
+ * Manages input state, background effects, and communication with multiplayer session.
+ * @param color - The color for styling the chat input.
+ */
+function ChatInput({
+  color
+}: {
+  color: string;
+}) {
+  const isWhiteboard = getCurrentFileType() === 'whiteboard';
+  const inputRef = useRef<HTMLInputElement>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const trackEvent = trackFileEventWithUser();
+  const [chatState, dispatchChatAction] = useReducer(chatStateReducer, {
+    ...initialChatState,
+    isFigJam: isWhiteboard
   });
-  eL(d, b, I);
-  eP(h, m, d, c);
-  (function (e, t, r, n) {
-    useEffect(() => {
-      Multiplayer?.sendChatMessage(e, t);
-    }, [e, t]);
-    let i = useCallback(() => {
-      Multiplayer?.sendChatMessage('', '');
-      n(stopChattingThunk());
-    }, [n]);
-    useEffect(() => {
-      r && i();
-    }, [r, i]);
-    useEffect(() => () => i(), [i]);
-  })(h, m, S, u);
-  let x = useCallback(() => {
-    u(stopChattingThunk());
-    A({
-      type: ey.STOP_CHATTING
-    });
-  }, [u, A]);
+  const {
+    currentUserInput,
+    previousLine,
+    fadingOutText,
+    isFadingInactiveChat,
+    isShowingEmptyNewline,
+    inputIsEmpty,
+    currentEmoteBackground,
+    width,
+    shouldClose,
+    hasTypedAnything
+  } = chatState;
+
+  // Use extracted hooks for width and value management
+  useChatInputWidth(inputRef, inputIsEmpty, width);
+  useChatInputValue(currentUserInput, previousLine, inputRef, labelRef);
+
+  // Effect to send chat messages and handle closing
   useEffect(() => {
-    A({
-      type: ey.STOP_FADING_INACTIVE_CHAT
-    });
-    let e = setTimeout(() => {
-      A({
-        type: ey.START_FADING_INACTIVE_CHAT
-      });
-    }, 5e3);
-    let t = setTimeout(() => {
-      A({
-        type: ey.STOP_FADING_INACTIVE_CHAT
-      });
-      x();
-    }, 8e3);
-    return () => {
-      clearTimeout(e);
-      clearTimeout(t);
-    };
-  }, [h, A, x]);
+    Multiplayer?.sendChatMessage(currentUserInput, previousLine);
+  }, [currentUserInput, previousLine]);
+  const stopChatting = useCallback(() => {
+    Multiplayer?.sendChatMessage('', '');
+    dispatch(stopChattingThunk());
+  }, [dispatch]);
   useEffect(() => {
-    let e = e => {
-      A({
-        type: ey.HANDLE_KEYDOWN,
-        payload: e
+    if (shouldClose) {
+      stopChatting();
+    }
+  }, [shouldClose, stopChatting]);
+  useEffect(() => () => stopChatting(), [stopChatting]);
+
+  // Effect to handle fading inactive chat
+  const stopChattingCallback = useCallback(() => {
+    dispatch(stopChattingThunk());
+    dispatchChatAction({
+      type: CHAT_ACTION_TYPES.STOP_CHATTING
+    });
+  }, [dispatch]);
+  useEffect(() => {
+    dispatchChatAction({
+      type: CHAT_ACTION_TYPES.STOP_FADING_INACTIVE_CHAT
+    });
+    const fadeTimeout = setTimeout(() => {
+      dispatchChatAction({
+        type: CHAT_ACTION_TYPES.START_FADING_INACTIVE_CHAT
+      });
+    }, 5000);
+    const closeTimeout = setTimeout(() => {
+      dispatchChatAction({
+        type: CHAT_ACTION_TYPES.STOP_FADING_INACTIVE_CHAT
+      });
+      stopChattingCallback();
+    }, 8000);
+    return () => {
+      clearTimeout(fadeTimeout);
+      clearTimeout(closeTimeout);
+    };
+  }, [currentUserInput, dispatchChatAction, stopChattingCallback]);
+
+  // Effect to handle keydown events
+  useEffect(() => {
+    const handleKeydown = (event: KeyboardEvent) => {
+      dispatchChatAction({
+        type: CHAT_ACTION_TYPES.HANDLE_KEYDOWN,
+        payload: event
       });
     };
-    let t = () => {
-      document.removeEventListener('keydown', e);
+    const removeKeydown = () => {
+      document.removeEventListener('keydown', handleKeydown);
     };
-    let r = () => {
-      document.addEventListener('keydown', e);
+    const addKeydown = () => {
+      document.addEventListener('keydown', handleKeydown);
     };
-    d.current && (window.focus(), d.current.focus({
-      preventScroll: !0
-    }));
-    document.addEventListener('keydown', e);
-    document.addEventListener('compositionstart', t);
-    document.addEventListener('compositionend', r);
+    if (inputRef.current) {
+      window.focus();
+      inputRef.current.focus({
+        preventScroll: true
+      });
+    }
+    document.addEventListener('keydown', handleKeydown);
+    document.addEventListener('compositionstart', removeKeydown);
+    document.addEventListener('compositionend', addKeydown);
     return () => {
-      document.removeEventListener('keydown', e);
-      document.removeEventListener('compositionstart', t);
-      document.removeEventListener('compositionend', r);
+      document.removeEventListener('keydown', handleKeydown);
+      document.removeEventListener('compositionstart', removeKeydown);
+      document.removeEventListener('compositionend', addKeydown);
     };
-  }, [A, d]);
-  let N = useCallback(e => {
-    if (n3(e.relatedTarget, Tc(oP))) {
-      d.current?.focus();
+  }, [dispatchChatAction, inputRef]);
+
+  // Callback for blur event
+  const handleBlur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
+    if (isNodeContainedIn(event.relatedTarget, getElementByDataTarget(CHAT_SHORTCUT_ELEMENT_ID))) {
+      inputRef.current?.focus();
       return;
     }
-    x();
-  }, [x]);
-  let C = getTextColorForBackground(color);
-  let w = C === textOnDarkCanvas ? 'chat_input--lightPlaceholder--YGSmc' : 'chat_input--darkPlaceholder--BH5Qn';
-  let O = getI18nString('whiteboard.cursor_chat.say_something');
-  switch (getI18nState()?.getPrimaryLocale(!1)) {
+    stopChattingCallback();
+  }, [stopChattingCallback]);
+
+  // Determine text color and placeholder styling
+  const textColor = getTextColorForBackground(color);
+  const placeholderClass = textColor === textOnDarkCanvas ? 'chat_input--lightPlaceholder--YGSmc' : 'chat_input--darkPlaceholder--BH5Qn';
+  const placeholderText = getI18nString('whiteboard.cursor_chat.say_something');
+
+  // Calculate placeholder size based on locale
+  let placeholderSize: number;
+  switch (getI18nState()?.getPrimaryLocale(false)) {
     case 'ja':
-      t = 18;
+      placeholderSize = 18;
       break;
     case 'ko-kr':
-      t = 13;
+      placeholderSize = 13;
       break;
     default:
-      t = O.length;
+      placeholderSize = placeholderText.length;
   }
-  let R = jsx('div', {
-    className: `chat_input--mask--P6RFl ${E ? 'chat_input--fading--EBfYy' : ''} `,
+
+  // Render the chat input UI
+  const chatInputElement = jsx('div', {
+    className: `chat_input--mask--P6RFl ${isFadingInactiveChat ? 'chat_input--fading--EBfYy' : ''}`,
     style: {
       boxShadow: `2px 4px 8px ${color}40`
     },
     children: jsxs('label', {
-      ref: c,
+      ref: labelRef,
       className: 'chat_input--inputSizer--9JY00',
-      children: [jsx('input', {
-        ref: d,
-        className: `chat_input--input--2o9dx ${w} ${y ? 'chat_input--expanded--1W44Y' : ''}`,
+      children: [React.createElement('input', {
+        ref: inputRef,
+        className: `chat_input--input--2o9dx ${placeholderClass} ${isShowingEmptyNewline ? 'chat_input--expanded--1W44Y' : ''}`,
         dir: 'auto',
         maxLength: 50,
-        onBlur: N,
-        onChange: e => A({
-          type: ey.HANDLE_INPUT,
+        onBlur: handleBlur,
+        onChange: event => dispatchChatAction({
+          type: CHAT_ACTION_TYPES.HANDLE_INPUT,
           payload: {
-            value: e.currentTarget.value,
-            trackEvent: p
+            value: event.currentTarget.value,
+            trackEvent
           }
         }),
-        placeholder: v ? '' : O,
-        size: v ? 1 : t,
-        spellCheck: !1,
+        placeholder: hasTypedAnything ? '' : placeholderText,
+        size: hasTypedAnything ? 1 : placeholderSize,
+        spellCheck: false,
         style: {
-          color: C,
+          color: textColor,
           backgroundColor: 'transparent'
         },
         type: 'text',
-        value: h
+        value: currentUserInput
       }), jsx('div', {
-        className: `chat_input--chatBackground--Mdxwm ${n[T]}`,
+        className: `chat_input--chatBackground--Mdxwm ${n[currentEmoteBackground]}`,
         style: {
           background: color,
-          color: C
+          color: textColor
         },
-        onAnimationEnd: () => A({
-          type: ey.HANDLE_EMOTE_ANIMATION_END
+        onAnimationEnd: () => dispatchChatAction({
+          type: CHAT_ACTION_TYPES.HANDLE_EMOTE_ANIMATION_END
         })
       }), jsx('div', {
         style: {
-          color: C
+          color: textColor
         },
         className: 'chat_input--previousChat--Y2u9G',
-        children: m
+        children: previousLine
       }), jsx('div', {
         style: {
-          color: C
+          color: textColor
         },
         className: 'chat_input--fadingOutLine--VF6ni chat_input--previousChat--Y2u9G chat_input--animated--ADHj-',
-        children: g
-      }, g)]
+        children: fadingOutText
+      }, fadingOutText)]
     })
   });
-  return o ? jsx(eE, {
-    content: h,
-    children: R
-  }) : R;
+  return isWhiteboard ? jsx(ChatAnimationWrapper, {
+    content: currentUserInput,
+    children: chatInputElement
+  }) : chatInputElement;
 }
-function ez() {
-  let e = useTheme();
-  let t = _$$K();
-  let r = useSelector(({
+// Original function name: ez
+/**
+ * Renders the chat input indicator for the current user, adjusting for theme and visibility.
+ * This component displays the chat input when the mouse is in the viewport, using enhanced contrast if enabled.
+ * @param props - No props are passed; it uses hooks for state.
+ * @returns A JSX element representing the chat input indicator.
+ */
+function renderChatInputIndicator() {
+  const theme = useTheme();
+  const isMouseInViewport = useIsMouseInViewport();
+  const userColor = useSelector(({
     multiplayer: {
-      allUsers: e
+      allUsers: users
     }
-  }) => e[0]?.color || uiBlueSteelColor2);
-  let n = getFeatureFlags().fpl_enhanced_contrast_toggle && e.enhancedContrast ? getDarkerShade(r) : r;
-  let a = Rt;
+  }) => users[0]?.color || uiBlueSteelColor2);
+  const adjustedColor = getFeatureFlags().fpl_enhanced_contrast_toggle && theme.enhancedContrast ? getDarkerShade(userColor) : userColor;
+  const containerClass = Rt;
   return jsx('div', {
-    className: a,
+    className: containerClass,
     style: {
-      opacity: t ? 1 : 0
+      opacity: isMouseInViewport ? 1 : 0
     },
-    children: jsx(eG, {
-      color: n
+    children: jsx(ChatInput, {
+      color: adjustedColor
     })
   });
 }
-function eJ(e, t, r) {
-  let n = PaintTools[t];
-  return r ? buildStaticUrl(`multiplayer_cursors/ui3/${n}/${e.substring(1)}.png`) : buildStaticUrl(`multiplayer_cursors/v1/${n}/${e.substring(1)}.png`);
+
+// Original function name: eJ
+/**
+ * Builds the URL for a cursor image based on color, tool type, and version.
+ * This function constructs static URLs for multiplayer cursors, differentiating between UI3 and v1 versions.
+ * @param color - The hex color string for the cursor.
+ * @param tool - The PaintTools enum value indicating the cursor type.
+ * @param isUI3 - Boolean flag to use UI3 version or v1.
+ * @returns The constructed URL string for the cursor image.
+ */
+function buildCursorImageUrl(color: string, tool: PaintTools, isUI3: boolean): string {
+  const toolName = PaintTools[tool];
+  return isUI3 ? buildStaticUrl(`multiplayer_cursors/ui3/${toolName}/${color.substring(1)}.png`) : buildStaticUrl(`multiplayer_cursors/v1/${toolName}/${color.substring(1)}.png`);
 }
-function eZ(e, t) {
-  if (t) {
-    let t = JR[e.substring(1)] ?? JR[p4];
-    return `data:image/png;base64, ${t}`;
+
+// Original function name: eZ
+/**
+ * Generates a fallback base64 data URL for a cursor image.
+ * This function provides a base64 encoded PNG as a fallback when image loading fails.
+ * @param color - The hex color string for the cursor.
+ * @param isUI3 - Boolean flag to select the appropriate fallback data.
+ * @returns The base64 data URL string for the fallback cursor image.
+ */
+function getFallbackCursorImage(color: string, isUI3: boolean): string {
+  if (isUI3) {
+    const fallbackData = JR[color.substring(1)] ?? JR[p4];
+    return `data:image/png;base64, ${fallbackData}`;
   }
-  let r = De[e.substring(1)] ?? De[p4];
-  return `data:image/png;base64, ${r}`;
+  const fallbackData = De[color.substring(1)] ?? De[p4];
+  return `data:image/png;base64, ${fallbackData}`;
 }
-function eQ({
-  viewportInfo: e,
-  cursorEntities: t
-}) {
-  let r = useCurrentSessionID();
-  let n = useSelector(({
+
+// Original function name: eQ
+/**
+ * Renders high-five entities on the viewport based on cursor entities.
+ * This component maps over cursor entities and renders appropriate JSX elements for animations like stars, bubbles, sparkles, and animated cursors.
+ * @param viewportInfo - The current viewport information including zoom and position.
+ * @param cursorEntities - An array of cursor entity objects to render.
+ * @returns A JSX Fragment containing the rendered entities.
+ */
+function renderHighFiveEntities({
+  viewportInfo,
+  cursorEntities
+}: {
+  viewportInfo: {
+    zoomScale: number;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  };
+  cursorEntities: Array<{
+    id: string;
+    type: string;
+    position: {
+      x: number;
+      y: number;
+    };
+    rotation: number;
+    scale: number;
+    customData?: any;
+  }>;
+}): JSX.Element {
+  const currentSessionId = useCurrentSessionID();
+  const allUsers = useSelector(({
     multiplayer: {
-      allUsers: e
+      allUsers: users
     }
-  }) => e);
+  }) => users);
   return jsx(Fragment, {
-    children: t.map(t => {
-      let a;
-      switch (t.type) {
+    children: cursorEntities.map(entity => {
+      let renderedEntity: JSX.Element | null = null;
+      switch (entity.type) {
         case 'StarParticle':
-          a = jsx(e7, {
-            emissionAngle: t.customData.emissionAngle
+          renderedEntity = jsx(renderFallingStar, {
+            emissionAngle: entity.customData.emissionAngle
           });
           break;
         case 'BubblePopEntity':
-          a = jsx(tt, {});
+          renderedEntity = jsx(renderBubble, {});
           break;
         case 'SparkleEntity':
-          a = jsx(tr, {});
+          renderedEntity = jsx(renderSparkle, {});
           break;
         case 'AnimatedCursorEntity':
-          let s = t.customData.sessionId;
-          let o = r.toString() === s;
-          let l = o ? e3 : n.find(e => e.sessionID.toString() === s)?.color;
-          a = jsx(e9, {
-            customData: t.customData,
-            color: l,
-            isCurrentUser: o
+          const sessionId = entity.customData.sessionId;
+          const isCurrentUser = currentSessionId.toString() === sessionId;
+          const color = isCurrentUser ? DEFAULT_CURSOR_COLOR : allUsers.find(user => user.sessionID.toString() === sessionId)?.color;
+          renderedEntity = jsx(renderAnimatedCursor, {
+            customData: entity.customData,
+            color,
+            isCurrentUser
           });
+          break;
       }
-      return a && jsx(e1, {
-        canvasPosition: t.position,
-        viewportInfo: e,
-        rotation: t.rotation,
-        scale: t.scale,
-        children: a
-      }, t.id);
+      return renderedEntity && jsx(renderPositionedEntity, {
+        canvasPosition: entity.position,
+        viewportInfo,
+        rotation: entity.rotation,
+        scale: entity.scale,
+        children: renderedEntity
+      }, entity.id);
     })
   });
 }
-function e0({
-  cursorWiggleStatus: e,
-  temporarilyHide: t,
-  isCursorHandOnRight: r
-}) {
-  let [n, s] = useState(!1);
+
+// Original function name: e0
+/**
+ * Renders the high-five cursor for the current user, handling animation states.
+ * This component manages the visibility and animation of the user's own high-five cursor based on wiggle status.
+ * @param cursorWiggleStatus - The current status of the cursor wiggle ('HIDDEN', 'SHOWN', 'ABOUT_TO_HIDE').
+ * @param temporarilyHide - Boolean flag to temporarily hide the cursor.
+ * @param isCursorHandOnRight - Boolean indicating if the cursor hand is on the right.
+ * @returns A JSX element for the self high-five cursor.
+ */
+function renderSelfHighFiveCursor({
+  cursorWiggleStatus,
+  temporarilyHide,
+  isCursorHandOnRight
+}: {
+  cursorWiggleStatus: string;
+  temporarilyHide: boolean;
+  isCursorHandOnRight: boolean;
+}): JSX.Element {
+  const [isHighFiveHandOut, setIsHighFiveHandOut] = useState(false);
   useEffect(() => {
-    let t = requestAnimationFrame(() => {
-      s(e !== 'HIDDEN');
+    const animationFrame = requestAnimationFrame(() => {
+      setIsHighFiveHandOut(cursorWiggleStatus !== 'HIDDEN');
     });
-    return () => cancelAnimationFrame(t);
-  }, [e]);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [cursorWiggleStatus]);
   return jsx('div', {
     className: 'cursor_high_five--highFiveCursorForSelf--cVByQ',
-    children: jsx(e5, {
-      color: e3,
-      isHighFiveHandOut: n,
-      aboutToHide: e === 'ABOUT_TO_HIDE',
-      temporarilyHide: t,
-      isCursorHandOnRight: r
+    children: jsx(renderHighFiveHand, {
+      color: DEFAULT_CURSOR_COLOR,
+      isHighFiveHandOut,
+      aboutToHide: cursorWiggleStatus === 'ABOUT_TO_HIDE',
+      temporarilyHide,
+      isCursorHandOnRight
     })
   });
 }
-function e1({
-  canvasPosition: e,
-  viewportInfo: t,
-  children: r,
-  rotation: n = 0,
-  scale: a = 1
-}) {
-  let s = viewportToScreen(t, e || {
+
+// Original function name: e1
+/**
+ * Renders a positioned entity on the viewport, applying transformations.
+ * This component converts canvas position to viewport position and applies rotation and scale.
+ * @param canvasPosition - The position on the canvas.
+ * @param viewportInfo - The viewport information for conversion.
+ * @param children - The child JSX elements to render.
+ * @param rotation - The rotation angle in radians (default 0).
+ * @param scale - The scale factor (default 1).
+ * @returns A JSX element with applied transformations.
+ */
+function renderPositionedEntity({
+  canvasPosition,
+  viewportInfo,
+  children,
+  rotation = 0,
+  scale = 1
+}: {
+  canvasPosition: {
+    x: number;
+    y: number;
+  };
+  viewportInfo: ViewportInfo;
+  children: React.ReactNode;
+  rotation?: number;
+  scale?: number;
+}): JSX.Element {
+  const viewportPosition = viewportToScreen(viewportInfo, canvasPosition || {
     x: 0,
     y: 0
   });
-  return jsx(e2, {
-    viewportPosition: s,
-    rotation: n,
-    scale: a,
-    children: r
+  return jsx(renderAbsoluteContainer, {
+    viewportPosition,
+    rotation,
+    scale,
+    children
   });
 }
-function e2({
-  viewportPosition: e,
-  children: t,
-  rotation: r = 0,
-  scale: n = 1
-}) {
-  let a = {
-    transform: `translate3D(${0 | e.x}px, ${0 | e.y}px, 0) translate(-50%, -50%) rotate(${r}rad) scale(${n})`
+
+// Original function name: e2
+/**
+ * Renders an absolutely positioned container with transformations.
+ * This component applies translate, rotate, and scale transformations for absolute positioning.
+ * @param viewportPosition - The position on the viewport.
+ * @param children - The child JSX elements.
+ * @param rotation - The rotation angle in radians (default 0).
+ * @param scale - The scale factor (default 1).
+ * @returns A JSX element with absolute positioning and transformations.
+ */
+function renderAbsoluteContainer({
+  viewportPosition,
+  children,
+  rotation = 0,
+  scale = 1
+}: {
+  viewportPosition: {
+    x: number;
+    y: number;
+  };
+  children: React.ReactNode;
+  rotation?: number;
+  scale?: number;
+}): JSX.Element {
+  const style = {
+    transform: `translate3D(${Math.floor(viewportPosition.x)}px, ${Math.floor(viewportPosition.y)}px, 0) translate(-50%, -50%) rotate(${rotation}rad) scale(${scale})`
   };
   return jsx('div', {
     className: 'cursor_high_five--highFiveAbsoluteContainer---G725',
-    style: a,
-    children: t
+    style,
+    children
   });
 }
-function e5({
-  color: e,
-  isHighFiveHandOut: t,
-  temporarilyHide: r,
-  isCursorHandOnRight: n,
-  aboutToHide: a = !1
-}) {
+
+// Original function name: e5
+/**
+ * Renders the high-five hand animation container.
+ * This component handles the animation states for the high-five hand, including visibility and orientation.
+ * @param color - The color for the hand.
+ * @param isHighFiveHandOut - Boolean indicating if the hand is out.
+ * @param temporarilyHide - Boolean to hide temporarily.
+ * @param isCursorHandOnRight - Boolean for hand orientation.
+ * @param aboutToHide - Boolean indicating if about to hide (default false).
+ * @returns A JSX element for the high-five hand.
+ */
+function renderHighFiveHand({
+  color,
+  isHighFiveHandOut,
+  temporarilyHide,
+  isCursorHandOnRight,
+  aboutToHide = false
+}: {
+  color: string;
+  isHighFiveHandOut: boolean;
+  temporarilyHide: boolean;
+  isCursorHandOnRight: boolean;
+  aboutToHide?: boolean;
+}): JSX.Element {
   return jsx('div', {
-    className: u()({
-      'cursor_high_five--highFiveAnimationContainer--jWFVT': !0,
-      'cursor_high_five--highFiveAnimHighFiveHandOut--6q5Bu': t,
-      'cursor_high_five--highFiveAnimHighFiveHandAboutToHide--tFRSO': a
+    className: classNames({
+      'cursor_high_five--highFiveAnimationContainer--jWFVT': true,
+      'cursor_high_five--highFiveAnimHighFiveHandOut--6q5Bu': isHighFiveHandOut,
+      'cursor_high_five--highFiveAnimHighFiveHandAboutToHide--tFRSO': aboutToHide
     }),
     children: jsx('div', {
       style: {
-        opacity: r ? '0' : '1'
+        opacity: temporarilyHide ? '0' : '1'
       },
-      className: u()({
-        'cursor_high_five--highFiveWaveContainer--M1fBF': !0,
-        'cursor_high_five--cursorHandOnRight--wSZLI': n
+      className: classNames({
+        'cursor_high_five--highFiveWaveContainer--M1fBF': true,
+        'cursor_high_five--cursorHandOnRight--wSZLI': isCursorHandOnRight
       }),
-      children: jsx(e6, {
-        color: e
+      children: jsx(renderHighFiveImage, {
+        color
       })
     })
   });
 }
-let e3 = '#FFFFFF';
-let e4 = new Set([e3, '#0FA958', '#5551FF', '#9747FF', '#848484', '#D27C2C', '#F24E1E', '#FFC700', '#667799', '#9747FF', '#007BE5', '#FF24BD', '#F24822', '#FFCD29', '#14AE5C']);
-function e8({
-  color: e
-}) {
-  let [t, r] = useState(!1);
-  if (!e4.has(e)) {
-    debug(!!e, `Unknown color ${e} for Cursor High Fives`);
-    return jsx(Fragment, {});
-  }
-  let n = eJ(t ? e3 : e, PaintTools.HIGH_FIVE, !1);
-  return jsx('img', {
-    className: 'cursor_high_five--handImage--mJVid',
-    src: n,
-    alt: '',
-    onError: () => r(!0)
-  });
-}
-function e6({
-  color: e
-}) {
-  return jsx(e8, {
-    color: e
-  }, e);
-}
-function e7({
-  emissionAngle: e
-}) {
+
+// Original function name: e7 (from earlier in file, but referenced here)
+/**
+ * Renders a falling star for high-five animations.
+ * @param emissionAngle - The angle for the star emission.
+ * @returns A JSX element for the falling star.
+ */
+function renderFallingStar({
+  emissionAngle
+}: {
+  emissionAngle: number;
+}): JSX.Element {
   return jsx('div', {
     className: 'cursor_high_five--fallingStar--Kx2fO',
     children: jsx('div', {
       style: {
-        transform: `rotate(${e}rad)`
+        transform: `rotate(${emissionAngle}rad)`
       },
       children: jsx('div', {
         className: 'cursor_high_five--shootingStar--tyk8Z',
-        children: jsx(te, {})
+        children: jsx(renderStarImage, {})
       })
     })
   });
 }
-function e9({
-  customData: e,
-  color: t,
-  isCurrentUser: r
-}) {
-  let n = useRef(null);
-  useLayoutEffect(() => {
-    if (!isWebAnimationsApiSupported()) return;
-    let t = -1;
-    e.animations.forEach((r, i) => {
-      let a = n.current?.animate(r.keyframes, r.timing);
-      a && i === e.animations.length - 1 && (a.onfinish = () => {
-        let r = null;
-        let i = 0;
-        let a = 1e3 / 60 * 12;
-        let s = o => {
-          let l = r === null ? 0 : o - r;
-          if (r = o, i += l, n.current && i < a) {
-            let r = i / a;
-            let o = Math.sin(2.1 * r) / 0.8632093666488737 * (1 - r) + r;
-            n.current.style.transform = e.getReturnToCursorTransform(o);
-            t = requestAnimationFrame(s);
-          }
-        };
-        t = requestAnimationFrame(s);
-      });
-    });
-    return () => {
-      t >= 0 && cancelAnimationFrame(t);
-    };
-  }, [e, n]);
-  return jsx('div', {
-    ref: n,
-    children: jsx(e6, {
-      color: t
-    })
-  });
-}
-function te() {
-  let e = buildUploadUrl('353e095c3f9c8488d9bb83dec3ce1d4c689f96db');
-  return jsx('img', {
-    className: 'cursor_high_five--starImage--GqFaX',
-    src: e,
-    alt: 'star'
-  });
-}
-function tt() {
+
+// Original function name: tt
+/**
+ * Renders a bubble for high-five animations.
+ * @returns A JSX element for the bubble.
+ */
+function renderBubble(): JSX.Element {
   return jsx('div', {
     className: 'cursor_high_five--bubble--9DVru'
   });
 }
-function tr() {
+
+// Original function name: tr
+/**
+ * Renders a sparkle for high-five animations.
+ * @returns A JSX element for the sparkle.
+ */
+function renderSparkle(): JSX.Element {
   return jsx('div', {
     className: 'cursor_high_five--sparkle--hCRWw',
     style: {
@@ -1182,209 +1113,414 @@ function tr() {
     }
   });
 }
-let to = 'reactions--indicatorSolid--wjW1q';
-function tl({
-  viewportInfo: e,
-  reactionInfo: t
-}) {
-  let r = viewportToScreen(e, t.canvasSpacePosition);
-  let [n] = useState(0.5 * Math.random() + 2);
-  let [s] = useState(0.4 * Math.random() + 0.3);
-  let o = {
-    animationDuration: `${n.toFixed(1)}s`
+
+// Original function name: te
+/**
+ * Renders the star image for animations.
+ * @returns A JSX element for the star image.
+ */
+function renderStarImage(): JSX.Element {
+  const starUrl = buildUploadUrl('353e095c3f9c8488d9bb83dec3ce1d4c689f96db');
+  return jsx('img', {
+    className: 'cursor_high_five--starImage--GqFaX',
+    src: starUrl,
+    alt: 'star'
+  });
+}
+
+// Original function name: e9
+/**
+ * Renders an animated cursor entity with custom animations.
+ * @param customData - The custom data for the animation.
+ * @param color - The color for the cursor.
+ * @param isCurrentUser - Boolean indicating if it's the current user.
+ * @returns A JSX element for the animated cursor.
+ */
+function renderAnimatedCursor({
+  customData,
+  color
+}: {
+  customData: any;
+  color: string;
+  isCurrentUser: boolean;
+}): JSX.Element {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    if (!isWebAnimationsApiSupported()) return;
+    let cancelId = -1;
+    customData.animations.forEach((animation: any, index: number) => {
+      const anim = ref.current?.animate(animation.keyframes, animation.timing);
+      if (anim && index === customData.animations.length - 1) {
+        anim.onfinish = () => {
+          let elapsed = 0;
+          const duration = 1000 / 60 * 12;
+          const animate = (timestamp: number) => {
+            const delta = elapsed === 0 ? 0 : timestamp - elapsed;
+            elapsed = timestamp;
+            elapsed += delta;
+            if (ref.current && elapsed < duration) {
+              const progress = Math.sin(2.1 * (elapsed / duration)) / 0.8632093666488737 * (1 - elapsed / duration) + elapsed / duration;
+              ref.current.style.transform = customData.getReturnToCursorTransform(progress);
+              cancelId = requestAnimationFrame(animate);
+            }
+          };
+          cancelId = requestAnimationFrame(animate);
+        };
+      }
+    });
+    return () => {
+      if (cancelId >= 0) cancelAnimationFrame(cancelId);
+    };
+  }, [customData, ref]);
+  return jsx('div', {
+    ref,
+    children: jsx(renderHighFiveImage, {
+      color
+    })
+  });
+}
+
+// Original function name: e6
+/**
+ * Renders the high-five hand image.
+ * @param color - The color for the image.
+ * @returns A JSX element for the hand image.
+ */
+function renderHighFiveImage({
+  color
+}: {
+  color: string;
+}): JSX.Element {
+  return jsx(renderHighFiveHandImage, {
+    color
+  }, color);
+}
+
+// Original function name: e8
+/**
+ * Renders the high-five hand image with error fallback.
+ * @param color - The color for the image.
+ * @param key - The key for the JSX element.
+ * @returns A JSX element for the hand image.
+ */
+function renderHighFiveHandImage({
+  color
+}: {
+  color: string;
+}, key?: string): JSX.Element {
+  const [hasError, setHasError] = useState(false);
+  if (!SUPPORTED_HIGH_FIVE_COLORS.has(color)) {
+    debug(!!color, `Unknown color ${color} for Cursor High Fives`);
+    return jsx(Fragment, {});
+  }
+  const imageUrl = buildCursorImageUrl(hasError ? '#ffffff' : color, PaintTools.HIGH_FIVE, false);
+  return jsx('img', {
+    className: 'cursor_high_five--handImage--mJVid',
+    src: imageUrl,
+    alt: '',
+    onError: () => setHasError(true),
+    key
+  });
+}
+// Original variable name: DEFAULT_CURSOR_COLOR
+// Constant for the default white color used in cursor rendering.
+const DEFAULT_CURSOR_COLOR = '#FFFFFF';
+
+// Original variable name: e4
+// Set of supported colors for high-five cursor images.
+const SUPPORTED_HIGH_FIVE_COLORS = new Set([DEFAULT_CURSOR_COLOR, '#0FA958', '#5551FF', '#9747FF', '#848484', '#D27C2C', '#F24E1E', '#FFC700', '#667799', '#9747FF', '#007BE5', '#FF24BD', '#F24822', '#FFCD29', '#14AE5C']);
+
+// Original variable name: to
+// CSS class name for the solid reaction indicator.
+const REACTION_INDICATOR_SOLID_CLASS = 'reactions--indicatorSolid--wjW1q';
+
+/**
+ * Component that renders a floating emoji reaction at a specific viewport position.
+ * Applies random animation durations and scales for visual variety.
+ * Original function name: tl
+ * @param viewportInfo - The current viewport information for position calculation.
+ * @param reactionInfo - Information about the reaction, including canvas position and image ID.
+ * @returns A JSX element representing the floating emoji.
+ */
+function FloatingEmoji({
+  viewportInfo,
+  reactionInfo
+}: {
+  viewportInfo: ViewportInfo;
+  reactionInfo: {
+    canvasSpacePosition: {
+      x: number;
+      y: number;
+    };
+    reactionId: string;
   };
-  let l = {
-    animationDuration: `${s.toFixed(1)}s`
+}): JSX.Element {
+  const screenPosition = viewportToScreen(viewportInfo, reactionInfo.canvasSpacePosition);
+  const [floatDuration] = useState(0.5 * Math.random() + 2);
+  const [driftDuration] = useState(0.4 * Math.random() + 0.3);
+  const floatStyle = {
+    animationDuration: `${floatDuration.toFixed(1)}s`
+  };
+  const driftStyle = {
+    animationDuration: `${driftDuration.toFixed(1)}s`
   };
   let {
     x,
     y
-  } = r;
-  d -= 5;
-  c -= 10;
-  let [u] = useState(1 * Math.random() + 0.5);
-  let p = {
+  } = screenPosition;
+  x -= 5;
+  y -= 10;
+  const [scale] = useState(1 * Math.random() + 0.5);
+  const containerStyle = {
     willChange: 'transform',
-    transform: `translate3D(${0 | x}px, ${0 | y}px, 0) scale(${u})`
+    transform: `translate3D(${Math.floor(x)}px, ${Math.floor(y)}px, 0) scale(${scale})`
   };
-  let [_] = useState(Math.random() > 0.5 ? 'reactions--forward--8SV6f' : 'reactions--backward--ZCNdY');
+  const [directionClass] = useState(Math.random() > 0.5 ? 'reactions--forward--8SV6f' : 'reactions--backward--ZCNdY');
   return jsx('div', {
-    'className': 'reactions--translationContainer--G9Mik',
-    'style': p,
+    "className": 'reactions--translationContainer--G9Mik',
+    "style": containerStyle,
     'data-testid': 'reaction',
-    'children': jsx('div', {
+    "children": jsx('div', {
       className: 'reactions--floatingEmojiContainer--olUKm',
-      style: o,
+      style: floatStyle,
       children: jsx('img', {
-        src: t.reactionId,
-        className: `reactions--floatingEmoji--IKqDo ${_}`,
-        style: l,
+        src: reactionInfo.reactionId,
+        className: `reactions--floatingEmoji--IKqDo ${directionClass}`,
+        style: driftStyle,
         alt: ''
       })
     })
   });
 }
-function td({
-  viewportInfo: e,
-  multiplayerCursorsEnabled: t
-}) {
-  let r = multiplayerSessionManager.useReactionsBySessionId();
-  let n = Object.keys(r);
-  let s = useCurrentSessionID();
-  let o = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
+
+/**
+ * Component that renders floating emoji reactions for all active sessions on the current page.
+ * Filters reactions based on session ID and multiplayer cursors enabled state.
+ * Original function name: td
+ * @param viewportInfo - The current viewport information.
+ * @param multiplayerCursorsEnabled - Boolean indicating if multiplayer cursors are enabled.
+ * @returns A JSX Fragment containing the rendered reactions.
+ */
+function ReactionsRenderer({
+  viewportInfo,
+  multiplayerCursorsEnabled
+}: {
+  viewportInfo: ViewportInfo;
+  multiplayerCursorsEnabled: boolean;
+}): JSX.Element {
+  const reactionsBySession = multiplayerSessionManager.useReactionsBySessionId();
+  const sessionIds = Object.keys(reactionsBySession);
+  const currentSessionId = useCurrentSessionID();
+  const currentPageGuid = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   return jsx(Fragment, {
-    children: n.map(n => {
-      let l = r[n];
-      let d = Object.keys(l).filter(e => l[e].pageId === o);
-      return n === `${s}` || t ? jsx(_$$Fragment, {
-        children: d.map(t => {
-          let r = l[t];
-          return jsx(tl, {
-            viewportInfo: e,
-            reactionInfo: r
-          }, t);
+    children: sessionIds.map(sessionId => {
+      const sessionReactions = reactionsBySession[sessionId];
+      const pageReactions = Object.keys(sessionReactions).filter(reactionId => sessionReactions[reactionId].pageId === currentPageGuid);
+      return sessionId === `${currentSessionId}` || multiplayerCursorsEnabled ? jsx(Fragment, {
+        children: pageReactions.map(reactionId => {
+          const reactionInfo = sessionReactions[reactionId];
+          return jsx(FloatingEmoji, {
+            viewportInfo,
+            reactionInfo
+          }, reactionId);
         })
-      }, n) : null;
+      }, sessionId) : null;
     })
   });
 }
-function tc({
-  multiplayerEmoji: e,
-  viewportInfo: t
-}) {
-  let r = _$$x({
-    subscribeToUpdates_EXPENSIVE: !0
+
+/**
+ * Component that handles the display and interaction for emoji reactions during chatting or reacting.
+ * Manages pointer events, intervals for continuous reactions, and dispatches actions to stop reacting.
+ * Original function name: tc
+ * @param multiplayerEmoji - The emoji state object containing type, image URL, and name.
+ * @param viewportInfo - The current viewport information for positioning.
+ * @returns A JSX element for the reaction indicator or null if not applicable.
+ */
+function EmojiReactionHandler({
+  multiplayerEmoji,
+  viewportInfo
+}: {
+  multiplayerEmoji: {
+    type: string;
+    imageUrl?: string;
+    name?: string;
+    isChatting?: boolean;
+  };
+  viewportInfo: ViewportInfo;
+}): JSX.Element | null {
+  const mousePosition = useMousePositionTracker({
+    subscribeToUpdates_EXPENSIVE: true
   });
-  let n = useRef(0);
-  let [o, d] = useState(to);
-  let [c, u] = useState(!1);
-  let p = useDispatch();
-  let _ = useCallback(() => {
-    p(stopReactingAction());
-  }, [p]);
-  useClickOutside(_, {
-    closeOnEsc: !0,
+  const lastDownTimeRef = useRef(0);
+  const [indicatorClass, setIndicatorClass] = useState(REACTION_INDICATOR_SOLID_CLASS);
+  const [isMultiTouchActive, setIsMultiTouchActive] = useState(false);
+  const dispatch = useDispatch();
+  const stopReacting = useCallback(() => {
+    dispatch(stopReactingAction());
+  }, [dispatch]);
+  useClickOutside(stopReacting, {
+    closeOnEsc: true,
     ignore: 'allClicks'
   });
-  let {
+  const {
     reactImageUrl,
     reactName
-  } = e.type === 'REACTING_OR_CHATTING' ? {
-    reactImageUrl: e.imageUrl,
-    reactName: e.name
+  } = multiplayerEmoji.type === 'REACTING_OR_CHATTING' ? {
+    reactImageUrl: multiplayerEmoji.imageUrl,
+    reactName: multiplayerEmoji.name
   } : {
     reactImageUrl: null,
     reactName: null
   };
   useEffect(() => {
-    if (d(to), !reactImageUrl) return;
-    let e = null;
-    let t = null;
-    let r = () => {
-      multiplayerSessionManager.sendReaction(reactImageUrl);
+    setIndicatorClass(REACTION_INDICATOR_SOLID_CLASS);
+    if (!reactImageUrl) return;
+    let fadeTimeout: number | null = null;
+    let reactionInterval: number | null = null;
+    const sendReaction = () => {
+      multiplayerSessionManager.sendReaction(reactImageUrl!);
       _$$H.trigger(SnapshotLevel.GENERIC);
-      d(to);
-      e != null && clearTimeout(e);
-      e = setTimeout(() => {
-        d('reactions--indicatorFading--ZTyOt reactions--indicatorSolid--wjW1q');
+      setIndicatorClass(REACTION_INDICATOR_SOLID_CLASS);
+      if (fadeTimeout != null) clearTimeout(fadeTimeout);
+      fadeTimeout = setTimeout(() => {
+        setIndicatorClass('reactions--indicatorFading--ZTyOt reactions--indicatorSolid--wjW1q');
       }, 300);
     };
-    let i = e => {
-      e.key === ' ' && t !== null && clearInterval(t);
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.key === ' ' && reactionInterval !== null) clearInterval(reactionInterval);
     };
-    let a = e => {
-      e.target.tagName === 'CANVAS' && (n.current = Date.now(), r(), t && clearInterval(t), t = setInterval(() => {
-        r();
-      }, 60), e.stopPropagation(), e.preventDefault());
+    const handleMouseDown = (event: MouseEvent) => {
+      if (event.target instanceof Element && event.target.tagName === 'CANVAS') {
+        lastDownTimeRef.current = Date.now();
+        sendReaction();
+        if (reactionInterval) clearInterval(reactionInterval);
+        reactionInterval = setInterval(() => {
+          sendReaction();
+        }, 60);
+        event.stopPropagation();
+        event.preventDefault();
+      }
     };
-    let s = e => {
-      if (t != null) {
-        let e = t;
-        if (n.current > 0) {
-          let e = Date.now() - n.current;
-          _$$F.trackFromFullscreen('emoji_reaction', {
-            duration: e,
+    const handleMouseUp = (event: MouseEvent) => {
+      if (reactionInterval != null) {
+        const intervalId = reactionInterval;
+        if (lastDownTimeRef.current > 0) {
+          const duration = Date.now() - lastDownTimeRef.current;
+          fullscreenHandler.trackFromFullscreen('emoji_reaction', {
+            duration,
             image: reactImageUrl,
             name: reactName
-          }, !1);
-          n.current = 0;
+          }, false);
+          lastDownTimeRef.current = 0;
         }
         setTimeout(() => {
-          clearInterval(e);
+          clearInterval(intervalId);
         }, 70);
       }
-      e.stopPropagation();
-      e.preventDefault();
+      event.stopPropagation();
+      event.preventDefault();
     };
-    let o = new Set();
-    let c = 0;
-    let p = null;
-    let _ = e => {
-      if (e.pointerType === 'mouse') {
-        a(e);
+    const activePointers = new Set<number>();
+    let maxPointers = 0;
+    let syntheticDownEvent: PointerEvent | null = null;
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') {
+        handleMouseDown(event as any);
         return;
       }
-      if (e.target.tagName !== 'CANVAS' || p && e.pointerId === p.pointerId) return;
-      o.add(e.pointerId);
-      let r = o.size;
-      if (c = Math.max(r, c), r === 1) {
-        let t = new PointerEvent('pointermove', e);
-        e.target?.dispatchEvent(t);
-        p = new PointerEvent('pointerdown', e);
+      if (event.target instanceof Element && event.target.tagName !== 'CANVAS' || syntheticDownEvent && event.pointerId === syntheticDownEvent.pointerId) return;
+      activePointers.add(event.pointerId);
+      const pointerCount = activePointers.size;
+      maxPointers = Math.max(pointerCount, maxPointers);
+      if (maxPointers <= 1) {
+        const moveEvent = new PointerEvent('pointermove', event);
+        event.target?.dispatchEvent(moveEvent);
+        syntheticDownEvent = new PointerEvent('pointerdown', event);
+      } else {
+        if (syntheticDownEvent) {
+          event.target?.dispatchEvent(syntheticDownEvent);
+          syntheticDownEvent = null;
+        }
+        if (reactionInterval) clearInterval(reactionInterval);
+        setIsMultiTouchActive(true);
       }
-      c <= 1 ? a(e) : (p && (e.target?.dispatchEvent(p), p = null), t && clearInterval(t), u(!0));
     };
-    let g = e => {
-      e.pointerType !== 'mouse' && p && e.pointerId === p.pointerId && (p = new PointerEvent('pointerdown', {
-        bubbles: p.bubbles,
-        cancelable: p.cancelable,
-        composed: p.composed,
-        detail: p.detail,
-        view: p.view,
-        altKey: p.altKey,
-        ctrlKey: p.ctrlKey,
-        metaKey: p.metaKey,
-        shiftKey: p.shiftKey,
-        button: p.button,
-        buttons: p.buttons,
-        clientX: e.clientX,
-        clientY: e.clientY,
-        movementX: e.movementX,
-        movementY: e.movementY,
-        relatedTarget: p.relatedTarget,
-        screenX: e.screenX,
-        screenY: e.screenY,
-        isPrimary: p.isPrimary,
-        pointerId: p.pointerId,
-        pointerType: p.pointerType
-      }));
+    const handlePointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== 'mouse' && syntheticDownEvent && event.pointerId === syntheticDownEvent.pointerId) {
+        syntheticDownEvent = new PointerEvent('pointerdown', {
+          bubbles: syntheticDownEvent.bubbles,
+          cancelable: syntheticDownEvent.cancelable,
+          composed: syntheticDownEvent.composed,
+          detail: syntheticDownEvent.detail,
+          view: syntheticDownEvent.view,
+          altKey: syntheticDownEvent.altKey,
+          ctrlKey: syntheticDownEvent.ctrlKey,
+          metaKey: syntheticDownEvent.metaKey,
+          shiftKey: syntheticDownEvent.shiftKey,
+          button: syntheticDownEvent.button,
+          buttons: syntheticDownEvent.buttons,
+          clientX: event.clientX,
+          clientY: event.clientY,
+          movementX: event.movementX,
+          movementY: event.movementY,
+          relatedTarget: syntheticDownEvent.relatedTarget,
+          screenX: event.screenX,
+          screenY: event.screenY,
+          isPrimary: syntheticDownEvent.isPrimary,
+          pointerId: syntheticDownEvent.pointerId,
+          pointerType: syntheticDownEvent.pointerType
+        });
+      }
     };
-    let f = e => {
-      if (e.pointerType === 'mouse') {
-        s(e);
+    const handlePointerUp = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') {
+        handleMouseUp(event as any);
         return;
       }
-      if (!o.has(e.pointerId)) return;
-      o.$$delete(e.pointerId);
-      let t = o.size;
-      c === 1 && s(e);
-      t === 0 && (c = 0, p = null, u(!1));
+      if (!activePointers.has(event.pointerId)) return;
+      activePointers.delete(event.pointerId);
+      const pointerCount = activePointers.size;
+      if (maxPointers === 1) handleMouseUp(event as any);
+      if (pointerCount === 0) {
+        maxPointers = 0;
+        syntheticDownEvent = null;
+        setIsMultiTouchActive(false);
+      }
     };
-    let E = shouldHandleMultiTouchOrPressure(!0);
-    E ? (document.addEventListener('pointerdown', _, !0), document.addEventListener('pointermove', g, !0), document.addEventListener('pointerup', f, !0), document.addEventListener('pointercancel', f, !0)) : (document.addEventListener('mousedown', a, !0), document.addEventListener('mouseup', s, !0), document.addEventListener('mouseleave', s, !0));
-    document.addEventListener('keydown', i);
+    const shouldHandleMultiTouch = shouldHandleMultiTouchOrPressure(true);
+    if (shouldHandleMultiTouch) {
+      document.addEventListener('pointerdown', handlePointerDown, true);
+      document.addEventListener('pointermove', handlePointerMove, true);
+      document.addEventListener('pointerup', handlePointerUp, true);
+      document.addEventListener('pointercancel', handlePointerUp, true);
+    } else {
+      document.addEventListener('mousedown', handleMouseDown, true);
+      document.addEventListener('mouseup', handleMouseUp, true);
+      document.addEventListener('mouseleave', handleMouseUp, true);
+    }
+    document.addEventListener('keydown', handleKeyUp);
     return () => {
-      t != null && clearInterval(t);
-      e != null && clearTimeout(e);
-      E ? (document.removeEventListener('pointerdown', _, !0), document.removeEventListener('pointermove', g, !0), document.removeEventListener('pointerup', f, !0), document.removeEventListener('pointercancel', f, !0)) : (document.removeEventListener('mousedown', a, !0), document.removeEventListener('mouseup', s, !0), document.removeEventListener('mouseleave', s, !0));
-      document.removeEventListener('keydown', i);
+      if (reactionInterval != null) clearInterval(reactionInterval);
+      if (fadeTimeout != null) clearTimeout(fadeTimeout);
+      if (shouldHandleMultiTouch) {
+        document.removeEventListener('pointerdown', handlePointerDown, true);
+        document.removeEventListener('pointermove', handlePointerMove, true);
+        document.removeEventListener('pointerup', handlePointerUp, true);
+        document.removeEventListener('pointercancel', handlePointerUp, true);
+      } else {
+        document.removeEventListener('mousedown', handleMouseDown, true);
+        document.removeEventListener('mouseup', handleMouseUp, true);
+        document.removeEventListener('mouseleave', handleMouseUp, true);
+      }
+      document.removeEventListener('keydown', handleKeyUp);
     };
   }, [reactImageUrl, reactName]);
-  return reactImageUrl && r && !c ? jsx('div', {
-    className: o,
+  return reactImageUrl && mousePosition && !isMultiTouchActive ? jsx('div', {
+    className: indicatorClass,
     style: {
       willChange: 'transform',
-      transform: `translate3D(${r.x - t.x}px, ${r.y - 0}px, 0)`
+      transform: `translate3D(${mousePosition.x - viewportInfo.x}px, ${mousePosition.y - 0}px, 0)`
     },
     children: jsx('img', {
       src: reactImageUrl,
@@ -1392,566 +1528,1013 @@ function tc({
     })
   }) : null;
 }
-let $$tu0 = memo(({
-  name: e,
-  color: t,
-  cursorType: r,
-  chatMessage: s,
-  isHighFiving: c,
-  focusOnTextCursor: h,
-  temporarilyHide: m,
-  isCursorHandOnRight: g,
-  isCursorPointingRight: f,
-  editorType: E,
-  isCursorAndChatAreaOffscreen: y,
-  sessionId: b,
-  prefersReducedMotion: T,
-  isHighFivingSupported: I,
-  useChatAnimation: S,
-  disableMessageFade: v,
-  isStaticView: A,
-  isHoveringWidgetWithHiddenCursors: x
+// Original component name: $$tu0
+/**
+ * Memoized component for rendering a multiplayer cursor with chat, high-five, and other features.
+ * Handles cursor appearance, chat messages, background effects, and animations based on various props.
+ * @param name - The name of the user associated with the cursor.
+ * @param color - The color of the cursor.
+ * @param cursorType - The type of cursor (e.g., PaintTools).
+ * @param chatMessage - The chat message array [currentMessage, previousMessage].
+ * @param isHighFiving - Boolean indicating if the cursor is high-fiving.
+ * @param focusOnTextCursor - Boolean indicating if focusing on text cursor.
+ * @param temporarilyHide - Boolean to temporarily hide the cursor.
+ * @param isCursorHandOnRight - Boolean for hand orientation.
+ * @param isCursorPointingRight - Boolean for pointing direction (not used in logic, but kept for consistency).
+ * @param editorType - The type of editor (e.g., 'whiteboard').
+ * @param isCursorAndChatAreaOffscreen - Boolean indicating if cursor is offscreen.
+ * @param sessionId - The session ID of the user.
+ * @param prefersReducedMotion - Boolean for reduced motion preference.
+ * @param isHighFivingSupported - Boolean indicating if high-fiving is supported.
+ * @param useChatAnimation - Boolean to use chat animation.
+ * @param disableMessageFade - Boolean to disable message fading.
+ * @param isStaticView - Boolean for static view.
+ * @param isHoveringWidgetWithHiddenCursors - Boolean for hovering widget.
+ * @returns A JSX element representing the cursor.
+ */
+export const CursorRenderer = memo(({
+  name,
+  color,
+  cursorType,
+  chatMessage,
+  isHighFiving,
+  focusOnTextCursor,
+  temporarilyHide,
+  isCursorHandOnRight,
+  isCursorPointingRight,
+  editorType,
+  isCursorAndChatAreaOffscreen,
+  sessionId,
+  prefersReducedMotion,
+  isHighFivingSupported,
+  useChatAnimation,
+  disableMessageFade,
+  isStaticView,
+  isHoveringWidgetWithHiddenCursors
+}: {
+  name: string;
+  color: string;
+  cursorType: PaintTools;
+  chatMessage: [string | null, string | null] | null;
+  isHighFiving: boolean;
+  focusOnTextCursor: boolean;
+  temporarilyHide: boolean;
+  isCursorHandOnRight: boolean;
+  isCursorPointingRight: boolean;
+  editorType: string;
+  isCursorAndChatAreaOffscreen: boolean;
+  sessionId: string;
+  prefersReducedMotion: boolean;
+  isHighFivingSupported: boolean;
+  useChatAnimation: boolean;
+  disableMessageFade: boolean;
+  isStaticView: boolean;
+  isHoveringWidgetWithHiddenCursors: boolean;
 }) => {
-  let N = useTheme();
-  let [C, w] = useState(1);
-  let L = useMemo(() => getTextColorForBackground(t), [t]);
-  let P = getFeatureFlags().fpl_enhanced_contrast_toggle && N.enhancedContrast ? getDarkerShade(t) : t;
-  let [D, k] = useState(O.NONE);
-  let F = () => k(O.NONE);
-  let [j, U] = useState(A);
-  let [B, G] = s || [];
+  const theme = useTheme();
+  const [fadeOpacity, setFadeOpacity] = useState(1);
+  const textColor = useMemo(() => getTextColorForBackground(color), [color]);
+  const adjustedColor = getFeatureFlags().fpl_enhanced_contrast_toggle && theme.enhancedContrast ? getDarkerShade(color) : color;
+  const [backgroundEffect, setBackgroundEffect] = useState(BackgroundEffectType.NONE);
+  const resetBackgroundEffect = () => setBackgroundEffect(BackgroundEffectType.NONE);
+  const [isVisible, setIsVisible] = useState(isStaticView);
+  const [currentMessage, previousMessage] = chatMessage || [];
+
+  // Effect to handle visibility and fading
   useEffect(() => {
-    let e;
-    let t;
-    B || G ? (U(!0), w(1)) : (U(!1), F());
-    v || (e = setTimeout(() => {
-      w(0);
-    }, 5e3), t = setTimeout(() => {
-      U(!1);
-      F();
-    }, 8e3));
+    let fadeTimeout: number | undefined;
+    let hideTimeout: number | undefined;
+    if (currentMessage || previousMessage) {
+      setIsVisible(true);
+      setFadeOpacity(1);
+    } else {
+      setIsVisible(false);
+      resetBackgroundEffect();
+    }
+    if (!disableMessageFade) {
+      fadeTimeout = setTimeout(() => setFadeOpacity(0), 5000);
+      hideTimeout = setTimeout(() => {
+        setIsVisible(false);
+        resetBackgroundEffect();
+      }, 8000);
+    }
     return () => {
-      w(0);
-      U(!1);
-      F();
-      clearTimeout(e);
-      clearTimeout(t);
+      setFadeOpacity(0);
+      setIsVisible(false);
+      resetBackgroundEffect();
+      if (fadeTimeout) clearTimeout(fadeTimeout);
+      if (hideTimeout) clearTimeout(hideTimeout);
     };
-  }, [B, G, v]);
-  let V = E === 'whiteboard';
+  }, [currentMessage, previousMessage, disableMessageFade]);
+  const isWhiteboard = editorType === 'whiteboard';
+
+  // Effect to detect background effects in whiteboard mode
   useEffect(() => {
-    if (V && B && !y) {
-      for (let e of R.keys()) {
-        let t = R.get(e);
-        t && eI(B, e) && k(t);
+    if (isWhiteboard && currentMessage && !isCursorAndChatAreaOffscreen) {
+      for (const keyword of backgroundEffectKeywords.keys()) {
+        const effect = backgroundEffectKeywords.get(keyword);
+        if (effect && emoteSystem.isCompleteKeywordMatch(currentMessage, keyword)) {
+          setBackgroundEffect(effect);
+          break;
+        }
       }
     }
-  }, [B, y, V]);
-  let H = useRef(null);
+  }, [currentMessage, isCursorAndChatAreaOffscreen, isWhiteboard]);
+  const messageRef = useRef<HTMLDivElement>(null);
+
+  // Effect to track performance for chat messages
   useEffect(() => {
-    if (H.current && H.current.innerText === B) {
-      let e = globalPerfTimer.tryStop(`view_cursor_chat_message_${b}_${B}`);
-      e && distributionAnalytics.add('view_cursor_chat_message', e);
+    if (messageRef.current && messageRef.current.innerText === currentMessage) {
+      const timer = globalPerfTimer.tryStop(`view_cursor_chat_message_${sessionId}_${currentMessage}`);
+      if (timer) {
+        distributionAnalytics.add('view_cursor_chat_message', timer);
+      }
     }
-  }, [B, H, b]);
-  let z = getFeatureFlags().cursor_bot && f && r === PaintTools.DEFAULT;
-  let W = r === PaintTools.PEN;
-  let K = jsxs('div', {
-    className: u()({
-      [iU]: j,
-      [VW]: !j,
-      [S8]: !W,
-      [z8]: z
-    }),
-    style: {
-      color: L
-    },
-    children: [jsx('div', {
-      className: j ? bu : iY,
-      style: {
-        opacity: j ? L === textOnDarkCanvas ? 0.8 : 0.5 : 1
-      },
-      dir: 'auto',
-      children: e
-    }), j && jsxs('div', {
+  }, [currentMessage, messageRef, sessionId]);
+  const isBotCursor = getFeatureFlags().cursor_bot && isCursorPointingRight && cursorType === PaintTools.DEFAULT;
+  const isPenTool = cursorType === PaintTools.PEN;
+
+  // Helper function to render the chat bubble
+  const renderChatBubble = () => {
+    if (!isVisible) return null;
+    return jsxs('div', {
       className: Lo,
       style: {
-        opacity: L === textOnLightCanvas ? 0.8 * C : C,
-        boxShadow: V ? void 0 : `2px 4px 8px ${P}40`
+        opacity: textColor === textOnLightCanvas ? 0.8 * fadeOpacity : fadeOpacity,
+        boxShadow: isWhiteboard ? undefined : `2px 4px 8px ${adjustedColor}40`
       },
       dir: 'auto',
-      children: [G && jsx('div', {
-        className: G.length > 0 && (B?.length ?? 0) > 0 ? vD : '',
-        children: G
-      }), B && jsx('div', {
-        ref: H,
-        children: B
+      children: [previousMessage && jsx('div', {
+        className: previousMessage.length > 0 && (currentMessage?.length ?? 0) > 0 ? vD : '',
+        children: previousMessage
+      }), currentMessage && jsx('div', {
+        ref: messageRef,
+        children: currentMessage
       })]
-    }), jsx('div', {
-      className: `${hD} ${n[D]}`,
-      style: D !== 'NONE' ? {
-        background: P,
-        overflow: 'hidden',
-        borderRadius: '2px 20px 20px 20px'
-      } : {
-        background: P
-      },
-      onAnimationEnd: () => F()
-    })]
-  });
-  return h ? null : jsxs('div', {
-    'className': Dy,
-    'style': {
-      opacity: x ? 0 : 1
+    });
+  };
+
+  // Helper function to render the background effect
+  const renderBackgroundEffect = () => jsx('div', {
+    className: `${hD} ${n[backgroundEffect]}`,
+    style: backgroundEffect !== BackgroundEffectType.NONE ? {
+      background: adjustedColor,
+      overflow: 'hidden',
+      borderRadius: '2px 20px 20px 20px'
+    } : {
+      background: adjustedColor
     },
-    'data-testid': `multiplayer-cursor-${b}`,
-    'children': [jsxs('div', {
+    onAnimationEnd: resetBackgroundEffect
+  });
+
+  // Main render logic with early return for focus on text cursor
+  if (focusOnTextCursor) {
+    return null;
+  }
+  const cursorImage = jsx('img', {
+    className: classNames({
+      [u0]: true,
+      [Bj]: isHighFivingSupported,
+      [DE]: isHighFiving,
+      [z8]: isBotCursor
+    }),
+    src: buildCursorImageUrl(color, isHighFiving ? PaintTools.DEFAULT : cursorType, true),
+    alt: `${isHighFiving ? 'highfive cursor' : 'hand cursor'}`,
+    onError: ({
+      currentTarget
+    }) => {
+      currentTarget.onerror = null;
+      currentTarget.src = getFallbackCursorImage(color, true);
+    }
+  });
+  const highFiveHand = isHighFivingSupported ? jsx('div', {
+    className: _$$p3,
+    children: jsx(renderHighFiveHand, {
+      color,
+      isHighFiveHandOut: isHighFiving,
+      temporarilyHide,
+      isCursorHandOnRight
+    })
+  }) : null;
+  const chatContent = jsxs('div', {
+    className: classNames({
+      [iU]: isVisible,
+      [VW]: !isVisible,
+      [S8]: !isPenTool,
+      [z8]: isBotCursor
+    }),
+    style: {
+      color: textColor
+    },
+    children: [jsx('div', {
+      className: isVisible ? bu : iY,
+      style: {
+        opacity: isVisible ? textColor === textOnDarkCanvas ? 0.8 : 0.5 : 1
+      },
+      dir: 'auto',
+      children: name
+    }), renderChatBubble(), renderBackgroundEffect()]
+  });
+  const animatedChat = (useChatAnimation || isWhiteboard) && !prefersReducedMotion ? jsx(ChatAnimationWrapper, {
+    content: currentMessage || '',
+    children: chatContent
+  }) : chatContent;
+  return jsxs('div', {
+    "className": Dy,
+    "style": {
+      opacity: isHoveringWidgetWithHiddenCursors ? 0 : 1
+    },
+    'data-testid': `multiplayer-cursor-${sessionId}`,
+    "children": [jsxs('div', {
       className: or,
-      children: [I ? jsxs(Fragment, {
-        children: [jsx('div', {
-          className: _$$p3,
-          children: jsx(e5, {
-            color: t,
-            isHighFiveHandOut: c,
-            temporarilyHide: m,
-            isCursorHandOnRight: g
-          })
-        }), jsx('img', {
-          className: u()({
-            [u0]: !0,
-            [Bj]: !0,
-            [DE]: c,
-            [z8]: z
-          }),
-          src: eJ(t, c ? PaintTools.DEFAULT : r, !0),
-          alt: `${c ? 'highfive cursor' : 'hand cursor'}`,
-          onError: ({
-            currentTarget: e
-          }) => {
-            e.onerror = null;
-            e.src = eZ(t, !0);
-          }
-        })]
+      children: [isHighFivingSupported ? jsxs(Fragment, {
+        children: [highFiveHand, cursorImage]
       }) : jsx('img', {
-        className: u()({
-          [u0]: !0,
-          [z8]: z
+        className: classNames({
+          [u0]: true,
+          [z8]: isBotCursor
         }),
-        src: eJ(t, r, !0),
+        src: buildCursorImageUrl(color, cursorType, true),
         alt: 'cursor',
         onError: ({
-          currentTarget: e
+          currentTarget
         }) => {
-          e.onerror = null;
-          e.src = eZ(t, !0);
+          currentTarget.onerror = null;
+          currentTarget.src = getFallbackCursorImage(color, true);
         }
-      }), b && jsx(_$$o, {
-        sessionId: b
+      }), sessionId && jsx(_$$o, {
+        sessionId
       })]
-    }), (S || V) && !T ? jsx(eE, {
-      content: B || '',
-      children: K
-    }) : K]
+    }), animatedChat]
   });
 });
-let tp = memo(({
-  isCursorAndChatAreaOffscreen: e,
-  x: t,
-  y: r,
-  children: n
+
+// Original component name: tp
+/**
+ * Memoized component for positioning the cursor element on the viewport.
+ * Handles offscreen detection and applies appropriate transforms.
+ * @param isCursorAndChatAreaOffscreen - Boolean indicating if the cursor is offscreen.
+ * @param x - The x-coordinate for positioning.
+ * @param y - The y-coordinate for positioning.
+ * @param children - The child JSX elements to render.
+ * @returns A JSX element with applied positioning.
+ */
+const CursorPositioner = memo(({
+  isCursorAndChatAreaOffscreen,
+  x,
+  y,
+  children
+}: {
+  isCursorAndChatAreaOffscreen: boolean;
+  x: number;
+  y: number;
+  children: React.ReactNode;
 }) => {
-  let a = {
-    display: e ? 'none' : 'block',
+  const style = {
+    display: isCursorAndChatAreaOffscreen ? 'none' : 'block',
     willChange: 'transform',
-    transform: e ? 'translate3D(-10000px, -10000px, 0)' : `translate3D(${t}px, ${r}px, 0)`
+    transform: isCursorAndChatAreaOffscreen ? 'translate3D(-10000px, -10000px, 0)' : `translate3D(${x}px, ${y}px, 0)`
   };
   return jsx('div', {
-    style: a,
-    children: n
+    style,
+    children
   });
 });
+
+
 // todo: canvas
-function t_() {
-  let e = selectWithShallowEqual(({
+/**
+ * Main multiplayer cursors component that orchestrates the rendering of all cursor-related features.
+ * Manages viewport positioning, cursor animations, chat functionality, and high-five interactions.
+ * Original function name: t_
+ * @returns A JSX Fragment containing all multiplayer cursor elements.
+ */
+function MultiplayerCursorsManager(): JSX.Element | null {
+  // Get all user session IDs for cursor rendering
+  const allUserSessionIds = selectWithShallowEqual(({
     multiplayer: {
-      allUsers: e
+      allUsers: users
     }
-  }) => e.map(e => e.sessionID));
-  let t = getViewportInfo({
-    subscribeToUpdates_expensive: !0
+  }) => users.map(user => user.sessionID));
+
+  // Get current viewport information with expensive updates enabled
+  const viewportInfo = getViewportInfo({
+    subscribeToUpdates_expensive: true
   });
-  let r = useContext(viewportNavigatorContext);
-  _$$x({
-    subscribeToUpdates_EXPENSIVE: !1
+
+  // Get viewport navigator context for positioning calculations
+  const viewportNavigator = useContext(viewportNavigatorContext);
+
+  // Track mouse position (subscription disabled for performance)
+  useMousePositionTracker({
+    subscribeToUpdates_EXPENSIVE: false
   });
-  let n = useMemo(() => r.getCommentsWrapperOffset(t), [r, t]);
-  let o = useCurrentSessionID();
-  let d = XM();
-  let c = useSelector(e => e.multiplayerEmoji);
-  let u = !getObservableValue(AppStateTsApi?.uiState().hideMultiplayerCursors, !1);
-  let p = useAppModelProperty('currentTool');
-  let _ = ed();
-  let [h, g, f, y] = function () {
-    let [e] = useState(ei);
-    !function (e) {
-      let t = trackFileEventWithUser();
-      let [r, n] = useAtomValueAndSetter(q);
-      let i = ed();
-      let o = function () {
-        let e = useSelector(e => {
-          let t = e.mirror.appModel.currentTool;
-          return t === DesignGraphElements.SELECT || t === DesignGraphElements.HAND;
-        });
-        let t = useSelector(e => e.multiplayerEmoji?.type === 'WHEEL' || e.multiplayerEmoji?.type === 'REACTING_OR_CHATTING');
-        let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-        return e && !t && r !== LayoutTabType.TEXT;
-      }();
-      let d = getObservableOrFallback(EditorPreferencesApi().cursorHighFiveWiggle);
-      let c = useRef(null);
-      let u = useRef(0);
-      useEffect(() => {
-        o || e.stopWigglingNow();
-      }, [e, o]);
-      useEffect(() => {
-        let r = e.onWiggleModeChange(r => {
-          multiplayerSessionManager.sendHighFiveStatus(r);
-          n(r);
-          r && e.getHighFiveKeyPressed() ? t('figjam_cursor_high_five_events', {
-            type: 'enter_hands_up',
-            source: 'keyboard'
-          }) : r && t('figjam_cursor_high_five_events', {
-            type: 'enter_hands_up',
-            source: 'mouse'
-          });
-        });
-        return () => {
-          r();
-        };
-      }, [e, n, t]);
-      useEffect(() => {
-        r ? (e.startOrRefreshWiggle(), e.setMouseLeftCanvas(!1), e.update()) : e.stopWigglingNow();
-      }, [e, r]);
-      let p = useCallback(() => {
-        clearTimeout(u.current);
-        u.current = setTimeout(() => {
-          e.getHighFiveKeyPressed() && !e.getWiggleMode() && (e.update(), p());
-        }, 250);
-      }, [e]);
-      useEffect(() => () => clearTimeout(u.current), []);
-      let _ = useStore();
-      let h = useCallback(t => {
-        let r = t.metaKey || t.ctrlKey || t.altKey || t.shiftKey;
-        if (t.key !== 'h' || r) {
-          t.key !== ' ' && t.key !== '/' && !r && e.getWiggleMode() && (e.setHighFiveKeyPressed(!1), c.current = null, e.stopWigglingNow());
-        } else {
-          if (!e.getHighFiveKeyPressed()) {
-            let e = _.getState().mirror.appModel.currentTool;
-            c.current = e;
-          }
-          e.setHighFiveKeyPressed(!0);
-          e.update();
-          p();
-        }
-      }, [e, p, _]);
-      let m = useCallback(t => {
-        t.key === 'h' && (e.getWiggleMode() && c.current !== null && c.current !== DesignGraphElements.HAND && Fullscreen.triggerActionInUserEditScope('set-tool-default', {
-          source: 'cursor-high-fives'
-        }), c.current = null, e.setHighFiveKeyPressed(!1), e.stopWigglingNow());
-      }, [e, c]);
-      let g = useCallback(t => {
-        e.getWiggleMode() && (e.setHighFiveKeyPressed(!1), e.stopWigglingNow());
-        (t.button === 0 || t.button === 1) && e.setMouseButtonHeld(!0);
-      }, [e]);
-      let f = useCallback(() => {
-        e.setMouseButtonHeld(!1);
-      }, [e]);
-      let E = useCallback(t => {
-        let r = !(t.target instanceof Element && t.target.closest('#fullscreen-root'));
-        e.setMouseLeftCanvas(r);
-        e.update({
-          x: t.clientX,
-          y: t.clientY
-        });
-      }, [e]);
-      let y = i && o;
-      useDocumentEvent('keydown', h, y);
-      useDocumentEvent('keyup', m, y);
-      useDocumentEvent('pointerdown', g, y);
-      useDocumentEvent('pointerup', f, y);
-      useDocumentEvent('mousemove', E, y && d);
-    }(e.cursorWiggleDetector);
-    let t = trackFileEventWithUser();
-    let [r, n] = useState([]);
-    let [i, o] = useState('HIDDEN');
-    let [d, c] = useState(new Set());
-    let u = useLatestViewportRef({
-      subscribeToUpdates_expensive: !0
-    });
-    let p = useRef({
-      oldEntitiesKey: '',
-      oldHandsOnRightKey: '',
-      oldWiggleMode: !1,
-      oldWiggleStatus: 'HIDDEN'
-    });
-    multiplayerSessionManager.useInfoBySessionIdSubscription(useMemo(() => _$$n(100, () => {
-      let r = u.current;
-      if (!r) return;
-      (function (e, t, r) {
-        if (!debugState || !Multiplayer) return;
-        let n = debugState.getState();
-        let i = multiplayerSessionManager.infoBySessionId();
-        if (!n.mirror || !n.mirror.appModel) return;
-        let a = Multiplayer.currentSessionID();
-        let s = n.multiplayer;
-        let o = n.mirror.appModel.currentPage;
-        let d = s.observingSessionID;
-        let c = ea(s.allUsers);
-        let u = Object.values(i).filter(e => {
-          if (!e.highFiveStatus || !e.mouse) return !1;
-          let t = c[e.sessionId];
-          return !!t && (t.sessionID === a || el(t, e, o, d, a));
-        });
-        t.cursorKinematics.updateCursors(u, a, t.cursorWiggleDetector.getWiggleMode(), t.cursorWiggleDetector.getMousePosition());
-        let p = e?.zoomScale || 1;
-        t.cursorCollisionDetector.updateAndCheckCollisions(u).forEach(e => function (e, t, r, n, i) {
-          let [a, s] = e;
-          let o = eo(n.cursorEntitySystem.getEntities(), a.sessionId);
-          let d = eo(n.cursorEntitySystem.getEntities(), s.sessionId);
-          if (o && d) return;
-          let c = a.sessionId === r.toString();
-          let u = s.sessionId === r.toString();
-          let p = a.mouse.canvasSpacePosition;
-          let _ = s.mouse.canvasSpacePosition;
-          let h = X.computeMidpoint(p, _);
-          h.y -= 38 / t;
-          let m = p.x > _.x;
-          let g = c || u ? c : m;
-          (c && !o || u && !d) && n.cursorWiggleDetector.startOrRefreshWiggle();
-          e.forEach((e, r) => {
-            if (!eo(n.cursorEntitySystem.getEntities(), e.sessionId) && e.mouse) {
-              let i = es(e.mouse.canvasSpacePosition, n.cursorKinematics, e.sessionId, t, c);
-              desktopAPIInstance && setTimeout(() => {
-                _$$H.trigger(SnapshotLevel.GENERIC);
-              }, 400);
-              n.cursorEntitySystem.addEntity(new et({
-                startingRelativePosition: {
-                  x: (i.position.x - h.x) * t,
-                  y: (i.position.y - h.y) * t
-                },
-                startingRotation: i.rotation,
-                position: h,
-                viewportZoomScale: t,
-                cursorOnRightForWindup: r === 0 ? m : !m,
-                cursorOnRightForCollision: r === 0 ? g : !g,
-                sessionId: e.sessionId,
-                getUserCursorTransform: () => es(multiplayerSessionManager.infoBySessionId()[e.sessionId]?.mouse?.canvasSpacePosition || {
-                  x: 0,
-                  y: 0
-                }, n.cursorKinematics, e.sessionId, t, r === 0 ? c : u)
-              }));
-            }
-          });
-          n.cursorEntitySystem.addEntity(new ee([{
-            time: 0.3,
-            event: () => {
-              n.cursorEntitySystem.addEntity(new J(h));
-              n.cursorEntitySystem.addEntity(new Z(h));
-              for (let e = 0; e < 6; e++) n.cursorEntitySystem.addEntity(new Q(h));
-            }
-          }]));
-          i('figjam_cursor_high_five_events', {
-            type: 'give_high_five'
-          });
-        }(e, p, a, t, r));
-        t.cursorEntitySystem.update();
-      })(r, e, t);
-      let i = e.cursorEntitySystem.getEntities();
-      let a = i.map(e => e.id).join(',');
-      a !== p.current.oldEntitiesKey && n(i);
-      let s = e.cursorWiggleDetector.getWiggleMode();
-      let d = e.cursorWiggleDetector.getAboutToHide() ? 'ABOUT_TO_HIDE' : s ? 'SHOWN' : 'HIDDEN';
-      d !== p.current.oldWiggleStatus && o(d);
-      let _ = e.cursorKinematics.getHandsOnRight();
-      let h = Array.from(_.keys()).join(',');
-      h !== p.current.oldHandsOnRightKey && c(new Set(_));
-      p.current.oldEntitiesKey = a;
-      p.current.oldWiggleMode = s;
-      p.current.oldWiggleStatus = d;
-      p.current.oldHandsOnRightKey = h;
-    }), [u, t, e]));
-    return [r, i, !e.cursorWiggleDetector.getMouseLeftCanvas(), d];
-  }();
-  let b = g !== 'HIDDEN';
-  let w = mZ.NONE;
-  let O = p === DesignGraphElements.HAND ? DesignGraphElements.HAND : DesignGraphElements.SELECT;
-  let R = b ? DesignGraphElements.SELECT : O;
-  c.type === 'REACTING_OR_CHATTING' && c.isChatting ? w = mZ.CHAT : b && (w = mZ.HIGH_FIVE);
-  let L = function (e) {
-    let t = e === mZ.NONE;
-    let [r, n] = useState(!t);
-    useEffect(() => {
-      let e = () => n(!1);
-      if (!t) {
-        n(!0);
-        return;
-      }
-      if (!BrowserInfo.isIpad && !BrowserInfo.isMeetDevice) {
-        document.addEventListener('mousemove', e);
-        return () => document.removeEventListener('mousemove', e);
-      }
-      e();
-    }, [t]);
-    return r;
-  }(w);
-  if (t == null) return null;
-  let P = {
-    left: `${0 | t.x}px`,
-    top: `${0 | t.y}px`,
-    width: `${0 | t.width}px`,
-    height: `${0 | t.height}px`
+
+  // Calculate comments wrapper offset for proper positioning
+  const commentsOffset = useMemo(() => viewportNavigator.getCommentsWrapperOffset(viewportInfo), [viewportNavigator, viewportInfo]);
+
+  // Get current session and voting state
+  const currentSessionId = useCurrentSessionID();
+  const isVotingSessionActive = useIsVotingSessionJoined();
+
+  // Get multiplayer emoji state for reactions
+  const multiplayerEmojiState = useSelector<AppState, AppState['multiplayerEmoji']>(state => state.multiplayerEmoji);
+
+  // Check if multiplayer cursors should be displayed
+  const shouldShowMultiplayerCursors = !getObservableValue(AppStateTsApi?.uiState().hideMultiplayerCursors, false);
+
+  // Get current tool for cursor appearance
+  const currentTool = useAppModelProperty('currentTool');
+
+  // Check if high-fiving is supported in current context
+  const isHighFivingEnabled = isHighFivingSupported();
+
+  // Initialize cursor systems and get their states
+  const [cursorEntities, wiggleStatus, isMouseInCanvas, handsOnRightSet] = useCursorSystemsManager();
+
+  // Determine cursor wiggle state
+  const isCursorWiggling = wiggleStatus !== 'HIDDEN';
+
+  // Determine current cursor mode
+  let cursorMode = CursorType.NONE;
+  const defaultTool = currentTool === DesignGraphElements.HAND ? DesignGraphElements.HAND : DesignGraphElements.SELECT;
+  const activeTool = isCursorWiggling ? DesignGraphElements.SELECT : defaultTool;
+
+  // Set cursor mode based on emoji state and wiggle status
+  if (multiplayerEmojiState.type === 'REACTING_OR_CHATTING' && multiplayerEmojiState.isChatting) {
+    cursorMode = CursorType.CHAT;
+  } else if (isCursorWiggling) {
+    cursorMode = CursorType.HIGH_FIVE;
+  }
+
+  // Determine if cursor should be visible based on mode
+  const shouldShowCursor = useCursorVisibility(cursorMode);
+
+  // Early return if no viewport info available
+  if (viewportInfo == null) {
+    return null;
+  }
+
+  // Calculate viewport container styles
+  const viewportContainerStyle = {
+    left: `${Math.floor(viewportInfo.x)}px`,
+    top: `${Math.floor(viewportInfo.y)}px`,
+    width: `${Math.floor(viewportInfo.width)}px`,
+    height: `${Math.floor(viewportInfo.height)}px`
   };
-  let D = (0 - t.offsetX) * t.zoomScale + n.x;
-  let k = (0 - t.offsetY) * t.zoomScale + n.y;
-  let M = {
-    top: `${t.y + t.height / 2}px`,
-    left: `${t.x + t.width / 2}px`,
-    transform: `translate(${D}px, ${k}px)`
+
+  // Calculate canvas positioning with zoom and offset
+  const canvasOffsetX = (0 - viewportInfo.offsetX) * viewportInfo.zoomScale + commentsOffset.x;
+  const canvasOffsetY = (0 - viewportInfo.offsetY) * viewportInfo.zoomScale + commentsOffset.y;
+
+  // Calculate canvas container styles for proper positioning
+  const canvasContainerStyle = {
+    top: `${viewportInfo.y + viewportInfo.height / 2}px`,
+    left: `${viewportInfo.x + viewportInfo.width / 2}px`,
+    transform: `translate(${canvasOffsetX}px, ${canvasOffsetY}px)`
   };
   return jsxs(Fragment, {
-    children: [jsx(_$$p, {
+    children: [
+    // Canvas-space cursors container
+    jsx(ViewportContainer, {
       children: jsx('div', {
-        'aria-hidden': !0,
-        'data-forward-events-to-fullscreen': !0,
+        'aria-hidden': true,
+        'data-forward-events-to-fullscreen': true,
         'className': Lw,
-        'style': M,
-        'children': u && jsxs('div', {
-          className: d ? W7 : PT,
-          children: [jsx(eh, {
-            viewportInfo: t
-          }), e.map(e => e === o ? null : jsx(tm, {
-            sessionID: e,
-            viewportInfo: t,
-            cursorEntities: h,
-            cursorHandsOnRight: y,
-            isHighFivingSupported: _
-          }, e))]
+        'style': canvasContainerStyle,
+        'children': shouldShowMultiplayerCursors && jsxs('div', {
+          className: isVotingSessionActive ? W7 : PT,
+          children: [
+          // AI selection boxes for node deletion animations
+          jsx(AiSelectionBoxes, {
+            viewportInfo
+          }),
+          // Render cursors for all other users (excluding current user)
+          allUserSessionIds.map(sessionId => sessionId === currentSessionId ? null : jsx(MultiplayerCursorRenderer, {
+            sessionID: sessionId,
+            viewportInfo,
+            cursorEntities,
+            cursorHandsOnRight: handsOnRightSet,
+            isHighFivingSupported: isHighFivingEnabled
+          }, sessionId))]
         })
       })
-    }), jsxs('div', {
-      'aria-hidden': !0,
-      'data-forward-events-to-fullscreen': !0,
+    }),
+    // Viewport-space UI elements container
+    jsxs('div', {
+      'aria-hidden': true,
+      'data-forward-events-to-fullscreen': true,
       'className': zr,
-      'style': P,
-      'children': [L && jsxs(AS, {
-        currentToolForCursor: R,
-        children: [w === mZ.CHAT && jsx(ez, {}), jsx(e0, {
-          cursorWiggleStatus: g,
-          temporarilyHide: !f || eo(h, o.toString()),
-          isCursorHandOnRight: _$$I(y, o.toString())
+      'style': viewportContainerStyle,
+      'children': [
+      // Current user's cursor and UI elements
+      shouldShowCursor && jsxs(CursorTracker, {
+        currentToolForCursor: activeTool,
+        children: [
+        // Chat input indicator
+        cursorMode === CursorType.CHAT && jsx(renderChatInputIndicator, {}),
+        // Self high-five cursor
+        jsx(renderSelfHighFiveCursor, {
+          cursorWiggleStatus: wiggleStatus,
+          temporarilyHide: !isMouseInCanvas || hasAnimatedCursorForSession(cursorEntities, currentSessionId.toString()),
+          isCursorHandOnRight: hasItem(handsOnRightSet, currentSessionId.toString())
         })]
-      }), _ && u ? jsx(eQ, {
-        viewportInfo: t,
-        cursorEntities: h
-      }) : null, t ? jsx(td, {
-        viewportInfo: t,
-        multiplayerCursorsEnabled: u
-      }) : null, t && c.type === 'REACTING_OR_CHATTING' ? jsx(tc, {
-        multiplayerEmoji: c,
-        viewportInfo: t
+      }),
+      // High-five particle effects and animations
+      isHighFivingEnabled && shouldShowMultiplayerCursors ? jsx(renderHighFiveEntities, {
+        viewportInfo,
+        cursorEntities
+      }) : null,
+      // Emoji reactions overlay
+      viewportInfo ? jsx(ReactionsRenderer, {
+        viewportInfo,
+        multiplayerCursorsEnabled: shouldShowMultiplayerCursors
+      }) : null,
+      // Emoji reaction interaction handler
+      viewportInfo && multiplayerEmojiState.type === 'REACTING_OR_CHATTING' ? jsx(EmojiReactionHandler, {
+        multiplayerEmoji: multiplayerEmojiState,
+        viewportInfo
       }) : null]
     })]
   });
 }
-let th = (e, t, r) => {
-  let n = useRef(null);
-  n.current = e?.sessionId ?? n.current;
+
+/**
+ * Hook to manage cursor systems and their states.
+ * Initializes wiggle detector, entity system, collision detector, and kinematics.
+ * Original logic extracted from the main component.
+ * @returns Array containing cursor entities, wiggle status, mouse in canvas state, and hands on right set.
+ */
+function useCursorSystemsManager(): [Array<any>,
+// cursorEntities
+string,
+// wiggleStatus
+boolean,
+// isMouseInCanvas
+Set<string>] // handsOnRightSet
+{
+  const [cursorSystems] = useState(createCursorSystems);
+
+  // Initialize wiggle detector with event handlers
+  useCursorWiggleDetector(cursorSystems.cursorWiggleDetector);
+  const trackEvent = trackFileEventWithUser();
+  const [cursorEntities, setCursorEntities] = useState([]);
+  const [wiggleStatus, setWiggleStatus] = useState('HIDDEN');
+  const [handsOnRightSet, setHandsOnRightSet] = useState<Set<string>>(new Set());
+  const latestViewportRef = useLatestViewportRef({
+    subscribeToUpdates_expensive: true
+  });
+  const previousStateRef = useRef({
+    oldEntitiesKey: '',
+    oldHandsOnRightKey: '',
+    oldWiggleMode: false,
+    oldWiggleStatus: 'HIDDEN'
+  });
+
+  // Subscribe to multiplayer session updates with throttling
+  multiplayerSessionManager.useInfoBySessionIdSubscription(useMemo(() => throttle(100, () => {
+    const currentViewport = latestViewportRef.current;
+    if (!currentViewport) return;
+
+    // Update cursor systems with current state
+    updateCursorSystems(currentViewport, cursorSystems, trackEvent);
+
+    // Get updated entities and check for changes
+    const updatedEntities = cursorSystems.cursorEntitySystem.getEntities();
+    const entitiesKey = updatedEntities.map(entity => entity.id).join(',');
+    if (entitiesKey !== previousStateRef.current.oldEntitiesKey) {
+      setCursorEntities(updatedEntities);
+    }
+
+    // Update wiggle status
+    const isWiggling = cursorSystems.cursorWiggleDetector.getWiggleMode();
+    const newWiggleStatus = cursorSystems.cursorWiggleDetector.getAboutToHide() ? 'ABOUT_TO_HIDE' : isWiggling ? 'SHOWN' : 'HIDDEN';
+    if (newWiggleStatus !== previousStateRef.current.oldWiggleStatus) {
+      setWiggleStatus(newWiggleStatus);
+    }
+
+    // Update hands on right set
+    const handsOnRight = cursorSystems.cursorKinematics.getHandsOnRight();
+    const handsOnRightKey = Array.from(handsOnRight.keys()).join(',');
+    if (handsOnRightKey !== previousStateRef.current.oldHandsOnRightKey) {
+      setHandsOnRightSet(new Set(handsOnRight));
+    }
+
+    // Update previous state reference
+    previousStateRef.current = {
+      oldEntitiesKey: entitiesKey,
+      oldWiggleMode: isWiggling,
+      oldWiggleStatus: newWiggleStatus,
+      oldHandsOnRightKey: handsOnRightKey
+    };
+  }), [latestViewportRef, trackEvent, cursorSystems]));
+  return [cursorEntities, wiggleStatus, !cursorSystems.cursorWiggleDetector.getMouseLeftCanvas(), handsOnRightSet];
+}
+
+/**
+ * Hook to manage cursor wiggle detection and high-five interactions.
+ * Sets up event listeners for keyboard and mouse interactions.
+ * Original function name: extracted from anonymous function
+ * @param wiggleDetector - The WiggleDetector instance to manage.
+ */
+function useCursorWiggleDetector(wiggleDetector: WiggleDetector): void {
+  const trackEvent = trackFileEventWithUser();
+  const [, setIsWiggling] = useAtomValueAndSetter(q);
+  const isHighFivingEnabled = isHighFivingSupported();
+
+  // Check if wiggle mode should be active
+  const shouldEnableWiggleMode = useShouldEnableWiggleMode();
+
+  // Check if enhanced wiggle is enabled
+  const isEnhancedWiggleEnabled = getObservableOrFallback(EditorPreferencesApi().cursorHighFiveWiggle);
+  const previousToolRef = useRef(null);
+  const updateTimeoutRef = useRef(0);
+  const store = useStore();
+
+  // Disable wiggling when not in appropriate mode
   useEffect(() => {
-    n.current && r && chatStateTracker?.setOtherUserChattingState(n.current, t);
-  }, [r, t]);
-  useEffect(() => (n.current && chatStateTracker?.setOtherUserChattingState(n.current, !1), () => {
-    n.current && chatStateTracker?.setOtherUserChattingState(n.current, !1);
-  }), []);
-};
-function tm({
-  sessionID: e,
-  viewportInfo: t,
-  cursorEntities: r,
-  cursorHandsOnRight: n,
-  isHighFivingSupported: a
-}) {
-  let o = useSelector(({
-    multiplayer: {
-      allUsers: t
+    if (!shouldEnableWiggleMode) {
+      wiggleDetector.stopWigglingNow();
     }
-  }) => t.find(t => t.sessionID === e));
-  let l = useAppModelProperty('currentPage');
-  let c = usePrefersReducedMotion();
-  let u = getCurrentFileType();
-  let p = getObservableOrFallback(getCanvasViewState().showOutlines);
-  let _ = setupCursorChatDisabledCheck();
-  let m = useSelector(({
-    multiplayer: {
-      observingSessionID: e
+  }, [wiggleDetector, shouldEnableWiggleMode]);
+
+  // Handle wiggle mode changes
+  useEffect(() => {
+    const unsubscribe = wiggleDetector.onWiggleModeChange(isWiggling => {
+      multiplayerSessionManager.sendHighFiveStatus(isWiggling);
+      setIsWiggling(isWiggling);
+      if (isWiggling && wiggleDetector.getHighFiveKeyPressed()) {
+        trackEvent('figjam_cursor_high_five_events', {
+          type: 'enter_hands_up',
+          source: 'keyboard'
+        });
+      } else if (isWiggling) {
+        trackEvent('figjam_cursor_high_five_events', {
+          type: 'enter_hands_up',
+          source: 'mouse'
+        });
+      }
+    });
+    return unsubscribe;
+  }, [wiggleDetector, setIsWiggling, trackEvent]);
+
+  // Update wiggle state based on atom value
+  useEffect(() => {
+    const [isWiggling] = useAtomValueAndSetter(q);
+    if (isWiggling) {
+      wiggleDetector.startOrRefreshWiggle();
+      wiggleDetector.setMouseLeftCanvas(false);
+      wiggleDetector.update();
+    } else {
+      wiggleDetector.stopWigglingNow();
     }
-  }) => e !== -1);
-  let g = multiplayerSessionManager.useInfoBySessionId({
-    updateSynchronously: m
-  })[e];
-  let E = !_ && g ? g.chatMessage : [null];
-  let b = useCurrentSessionID();
-  let S = useObservingSessionID();
-  let N = !!(o && g?.mouse && el(o, g, l, S, b));
-  if (th(g, !!(E && E.length && E[0]), N), !N || !g?.mouse) return null;
-  let C = !!getFeatureFlags().ee_text_selection_in_mp && g.focusOnTextCursor;
-  let w = p ? '#848484' : o.color;
-  let O = g.mouse.canvasSpacePosition;
-  let R = viewportToScreen(t, O);
-  let L = function ({
-    x: e,
-    y: t
-  }, {
-    width: r,
-    height: n
-  }) {
-    return e < 0 || t < 0 || e > r || t > n;
-  }(R, t) && function ({
-    x: e,
-    y: t
-  }) {
-    return e < -400 || t < -100;
-  }(R);
-  let P = t.zoomScale;
-  let D = (P - 1) * O.x;
-  let k = (P - 1) * O.y;
-  let M = o.sessionID.toString();
-  return jsx(tp, {
-    x: O.x + D,
-    y: O.y + k,
-    isCursorAndChatAreaOffscreen: L,
-    children: jsx($$tu0, {
-      chatMessage: E,
-      color: w,
-      cursorType: g.cursorType,
-      editorType: u,
-      focusOnTextCursor: C ?? !1,
-      isCursorAndChatAreaOffscreen: L,
-      isCursorHandOnRight: _$$I(n, M),
-      isHighFiving: g.highFiveStatus,
-      isHighFivingSupported: a,
-      isHoveringWidgetWithHiddenCursors: g.isHoveringWidgetWithHiddenCursors,
-      name: o.name,
-      prefersReducedMotion: c,
-      sessionId: o.sessionID,
-      temporarilyHide: eo(r, M)
+  }, [wiggleDetector]);
+
+  // Recursive update function for continuous wiggle checking
+  const scheduleWiggleUpdate = useCallback(() => {
+    clearTimeout(updateTimeoutRef.current);
+    updateTimeoutRef.current = setTimeout(() => {
+      if (wiggleDetector.getHighFiveKeyPressed() && !wiggleDetector.getWiggleMode()) {
+        wiggleDetector.update();
+        scheduleWiggleUpdate();
+      }
+    }, 250);
+  }, [wiggleDetector]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => () => clearTimeout(updateTimeoutRef.current), []);
+
+  // Keyboard event handlers
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    const hasModifiers = event.metaKey || event.ctrlKey || event.altKey || event.shiftKey;
+    if (event.key !== 'h' || hasModifiers) {
+      // Stop wiggling on other keys (except space and slash)
+      if (event.key !== ' ' && event.key !== '/' && !hasModifiers && wiggleDetector.getWiggleMode()) {
+        wiggleDetector.setHighFiveKeyPressed(false);
+        previousToolRef.current = null;
+        wiggleDetector.stopWigglingNow();
+      }
+    } else {
+      // Handle 'h' key press for high-five
+      if (!wiggleDetector.getHighFiveKeyPressed()) {
+        const state = store.getState() as AppState;
+        const currentTool = state.mirror.appModel.currentTool;
+        previousToolRef.current = currentTool;
+      }
+      wiggleDetector.setHighFiveKeyPressed(true);
+      wiggleDetector.update();
+      scheduleWiggleUpdate();
+    }
+  }, [wiggleDetector, scheduleWiggleUpdate, store]);
+  const handleKeyUp = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'h') {
+      // Restore previous tool if needed
+      if (wiggleDetector.getWiggleMode() && previousToolRef.current !== null && previousToolRef.current !== DesignGraphElements.HAND) {
+        Fullscreen.triggerActionInUserEditScope('set-tool-default', {
+          source: 'cursor-high-fives'
+        });
+      }
+      previousToolRef.current = null;
+      wiggleDetector.setHighFiveKeyPressed(false);
+      wiggleDetector.stopWigglingNow();
+    }
+  }, [wiggleDetector]);
+
+  // Mouse event handlers
+  const handlePointerDown = useCallback((event: PointerEvent) => {
+    if (wiggleDetector.getWiggleMode()) {
+      wiggleDetector.setHighFiveKeyPressed(false);
+      wiggleDetector.stopWigglingNow();
+    }
+    if (event.button === 0 || event.button === 1) {
+      wiggleDetector.setMouseButtonHeld(true);
+    }
+  }, [wiggleDetector]);
+  const handlePointerUp = useCallback(() => {
+    wiggleDetector.setMouseButtonHeld(false);
+  }, [wiggleDetector]);
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    const isOutsideFullscreen = !(event.target instanceof Element && event.target.closest('#fullscreen-root'));
+    wiggleDetector.setMouseLeftCanvas(isOutsideFullscreen);
+    wiggleDetector.update({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }, [wiggleDetector]);
+
+  // Determine if event listeners should be active
+  const shouldListenToEvents = isHighFivingEnabled && shouldEnableWiggleMode;
+
+  // Register event listeners conditionally
+  useDocumentEvent('keydown', handleKeyDown, shouldListenToEvents);
+  useDocumentEvent('keyup', handleKeyUp, shouldListenToEvents);
+  useDocumentEvent('pointerdown', handlePointerDown, shouldListenToEvents);
+  useDocumentEvent('pointerup', handlePointerUp, shouldListenToEvents);
+  useDocumentEvent('mousemove', handleMouseMove, shouldListenToEvents && isEnhancedWiggleEnabled);
+}
+
+/**
+ * Hook to determine if wiggle mode should be enabled based on current tool and state.
+ * Original logic extracted from inline function.
+ * @returns Boolean indicating if wiggle mode should be enabled.
+ */
+function useShouldEnableWiggleMode(): boolean {
+  const isSelectOrHandTool = useSelector<AppState, boolean>(state => {
+    const currentTool = state.mirror.appModel.currentTool;
+    return currentTool === DesignGraphElements.SELECT || currentTool === DesignGraphElements.HAND;
+  });
+  const isEmojiActive = useSelector<AppState, boolean>(state => state.multiplayerEmoji?.type === 'WHEEL' || state.multiplayerEmoji?.type === 'REACTING_OR_CHATTING');
+  const currentEditMode = useSelector<AppState, LayoutTabType>(state => state.mirror.appModel.activeCanvasEditModeType);
+  return isSelectOrHandTool && !isEmojiActive && currentEditMode !== LayoutTabType.TEXT;
+}
+
+/**
+ * Hook to manage cursor visibility based on cursor mode.
+ * Original logic extracted from inline function.
+ * @param cursorMode - The current cursor mode.
+ * @returns Boolean indicating if cursor should be visible.
+ */
+function useCursorVisibility(cursorMode: CursorType): boolean {
+  const isCursorInactive = cursorMode === CursorType.NONE;
+  const [shouldShowCursor, setShouldShowCursor] = useState(!isCursorInactive);
+  useEffect(() => {
+    let mouseMoveHandler: (() => void) | undefined;
+    if (!isCursorInactive) {
+      setShouldShowCursor(true);
+      return;
+    }
+    const hideCursor = () => setShouldShowCursor(false);
+    if (!BrowserInfo.isIpad && !BrowserInfo.isMeetDevice) {
+      mouseMoveHandler = hideCursor;
+      document.addEventListener('mousemove', mouseMoveHandler);
+      return () => document.removeEventListener('mousemove', mouseMoveHandler);
+    }
+    hideCursor();
+  }, [isCursorInactive]);
+  return shouldShowCursor;
+}
+
+/**
+ * Updates cursor systems with current viewport and multiplayer data.
+ * Handles collision detection, high-five animations, and entity management.
+ * Original function name: updateCursorSystems (extracted from inline logic)
+ * @param viewport - The current viewport information.
+ * @param systems - The cursor systems object.
+ * @param trackEvent - Function to track events.
+ */
+function updateCursorSystems(viewport: ViewportInfo, systems: ReturnType<typeof createCursorSystems>, trackEvent: (event: string, data?: any) => void): void {
+  if (!debugState || !Multiplayer) return;
+  const currentState = debugState.getState();
+  const sessionInfoMap = multiplayerSessionManager.infoBySessionId();
+  if (!currentState.mirror || !currentState.mirror.appModel) return;
+  const currentSessionId = Multiplayer.currentSessionID();
+  const multiplayerState = currentState.multiplayer;
+  const currentPage = currentState.mirror.appModel.currentPage;
+  const observingSessionId = multiplayerState.observingSessionID;
+  const userMap = createUserMap(multiplayerState.allUsers);
+
+  // Filter users for high-fiving
+  const highFivingUsers = Object.values(sessionInfoMap).filter(sessionInfo => {
+    if (!sessionInfo.highFiveStatus || !sessionInfo.mouse) return false;
+    const user = userMap[sessionInfo.sessionId];
+    return !!user && (user.sessionID === currentSessionId || isCursorValidForInteraction(user, sessionInfo, currentPage, observingSessionId, currentSessionId));
+  });
+
+  // Update cursor kinematics
+  systems.cursorKinematics.updateCursors(highFivingUsers, currentSessionId, systems.cursorWiggleDetector.getWiggleMode(), systems.cursorWiggleDetector.getMousePosition());
+  const zoomScale = viewport?.zoomScale || 1;
+
+  // Check for collisions and handle high-five interactions
+  const collisions = systems.cursorCollisionDetector.updateAndCheckCollisions(highFivingUsers);
+  collisions.forEach(collisionPair => {
+    handleHighFiveCollision(collisionPair, zoomScale, currentSessionId, systems, trackEvent);
+  });
+
+  // Update particle system
+  systems.cursorEntitySystem.update();
+}
+
+/**
+ * Handles high-five collision between two cursors.
+ * Creates animation entities and triggers appropriate effects.
+ * Original function name: handleHighFiveCollision (extracted from inline logic)
+ * @param collisionPair - Array of two colliding cursor sessions.
+ * @param zoomScale - Current viewport zoom scale.
+ * @param currentSessionId - ID of the current user session.
+ * @param systems - The cursor systems object.
+ * @param trackEvent - Function to track events.
+ */
+function handleHighFiveCollision(collisionPair: CursorCollisionPair, zoomScale: number, currentSessionId: string, systems: ReturnType<typeof createCursorSystems>, trackEvent: (event: string, data?: any) => void): void {
+  const [sessionA, sessionB] = collisionPair;
+
+  // Check if animations already exist for these sessions
+  const hasAnimationA = hasAnimatedCursorForSession(systems.cursorEntitySystem.getEntities(), sessionA.sessionId);
+  const hasAnimationB = hasAnimatedCursorForSession(systems.cursorEntitySystem.getEntities(), sessionB.sessionId);
+  if (hasAnimationA && hasAnimationB) return;
+
+  // Determine which user is current
+  const isCurrentUserA = sessionA.sessionId === currentSessionId.toString();
+  const isCurrentUserB = sessionB.sessionId === currentSessionId.toString();
+
+  // Get cursor positions
+  const positionA = sessionA.mouse.canvasSpacePosition;
+  const positionB = sessionB.mouse.canvasSpacePosition;
+
+  // Calculate midpoint for high-five effect
+  const midpoint = CollisionDetector.computeMidpoint(positionA, positionB);
+  midpoint.y -= 38 / zoomScale;
+
+  // Determine hand orientation
+  const isAOnLeft = positionA.x > positionB.x;
+  const primaryHandOnRight = isCurrentUserA || isCurrentUserB ? isCurrentUserA : isAOnLeft;
+
+  // Trigger wiggle for current user participants
+  if (isCurrentUserA && !hasAnimationA || isCurrentUserB && !hasAnimationB) {
+    systems.cursorWiggleDetector.startOrRefreshWiggle();
+  }
+
+  // Create animated cursor entities for each participant
+  collisionPair.forEach((session, index) => {
+    if (!hasAnimatedCursorForSession(systems.cursorEntitySystem.getEntities(), session.sessionId) && session.mouse) {
+      const cursorTransform = calculateCursorPosAndRotation(session.mouse.canvasSpacePosition, systems.cursorKinematics, session.sessionId, zoomScale, isCurrentUserA);
+
+      // Trigger snapshot for desktop app
+      if (desktopAPIInstance) {
+        setTimeout(() => {
+          _$$H.trigger(SnapshotLevel.GENERIC);
+        }, 400);
+      }
+      systems.cursorEntitySystem.addEntity(new AnimatedCursorEntity({
+        startingRelativePosition: {
+          x: (cursorTransform.position.x - midpoint.x) * zoomScale,
+          y: (cursorTransform.position.y - midpoint.y) * zoomScale
+        },
+        startingRotation: cursorTransform.rotation,
+        position: midpoint,
+        viewportZoomScale: zoomScale,
+        cursorOnRightForWindup: index === 0 ? isAOnLeft : !isAOnLeft,
+        cursorOnRightForCollision: index === 0 ? primaryHandOnRight : !primaryHandOnRight,
+        sessionId: session.sessionId,
+        getUserCursorTransform: () => {
+          const currentSessionInfo = multiplayerSessionManager.infoBySessionId()[session.sessionId];
+          const currentPosition = currentSessionInfo?.mouse?.canvasSpacePosition || {
+            x: 0,
+            y: 0
+          };
+          return calculateCursorPosAndRotation(currentPosition, systems.cursorKinematics, session.sessionId, zoomScale, index === 0 ? isCurrentUserA : isCurrentUserB);
+        }
+      }));
+    }
+  });
+
+  // Create particle effects for the high-five
+  systems.cursorEntitySystem.addEntity(new TimedEventEntity([{
+    time: 0.3,
+    event: () => {
+      systems.cursorEntitySystem.addEntity(new BubblePopEntity(midpoint));
+      systems.cursorEntitySystem.addEntity(new SparkleEntity(midpoint));
+      // Create multiple star particles
+      for (let i = 0; i < 6; i++) {
+        systems.cursorEntitySystem.addEntity(new StarParticle(midpoint));
+      }
+    }
+  }]));
+
+  // Track the high-five event
+  trackEvent('figjam_cursor_high_five_events', {
+    type: 'give_high_five'
+  });
+}
+
+/**
+ * Component for rendering individual multiplayer cursors.
+ * Handles cursor validation, positioning, and prop extraction.
+ * Original function name: tm
+ * @param sessionID - The session ID of the cursor to render.
+ * @param viewportInfo - Current viewport information.
+ * @param cursorEntities - Array of cursor entities for animation detection.
+ * @param cursorHandsOnRight - Set of session IDs with hands on right.
+ * @param isHighFivingSupported - Boolean indicating if high-fiving is supported.
+ * @returns A JSX element for the cursor or null if invalid.
+ */
+function MultiplayerCursorRenderer({
+  sessionID,
+  viewportInfo,
+  cursorEntities,
+  cursorHandsOnRight,
+  isHighFivingSupported
+}: {
+  sessionID: string;
+  viewportInfo: ViewportInfo;
+  cursorEntities: Array<any>;
+  cursorHandsOnRight: Set<string>;
+  isHighFivingSupported: boolean;
+}): JSX.Element | null {
+  // Get user information for this session
+  const userInfo = useSelector(({
+    multiplayer: {
+      allUsers: users
+    }
+  }) => users.find(user => user.sessionID === sessionID));
+
+  // Get current page and other required state
+  const currentPage = useAppModelProperty('currentPage');
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const editorType = getCurrentFileType();
+  const showOutlines = getObservableOrFallback(getCanvasViewState().showOutlines);
+  const isCursorChatDisabled = setupCursorChatDisabledCheck();
+  const isObservingMode = useSelector(({
+    multiplayer: {
+      observingSessionID: sessionId
+    }
+  }) => sessionId !== -1);
+
+  // Get session info from multiplayer manager
+  const sessionInfo = multiplayerSessionManager.useInfoBySessionId({
+    updateSynchronously: isObservingMode
+  })[sessionID];
+
+  // Get chat message (empty if chat is disabled)
+  const chatMessage = !isCursorChatDisabled && sessionInfo ? sessionInfo.chatMessage : [null];
+
+  // Get current and observing session IDs
+  const currentSessionId = useCurrentSessionID();
+  const observingSessionId = useObservingSessionID();
+
+  // Validate cursor for rendering
+  const shouldRenderCursor = !!(userInfo && sessionInfo?.mouse && isCursorValidForInteraction(userInfo, sessionInfo, currentPage, observingSessionId, currentSessionId));
+
+  // Track chat state for other users
+  useChatStateTracker(sessionInfo, chatMessage, shouldRenderCursor);
+
+  // Early return if cursor should not be rendered
+  if (!shouldRenderCursor || !sessionInfo?.mouse) {
+    return null;
+  }
+
+  // Check if focusing on text cursor
+  const shouldFocusOnTextCursor = !!(getFeatureFlags().ee_text_selection_in_mp && sessionInfo.focusOnTextCursor);
+
+  // Determine cursor color (gray if outlines are shown)
+  const cursorColor = showOutlines ? '#848484' : userInfo.color;
+
+  // Get cursor position and calculate screen coordinates
+  const canvasPosition = sessionInfo.mouse.canvasSpacePosition;
+  const screenPosition = viewportToScreen(viewportInfo, canvasPosition);
+
+  // Check if cursor is offscreen
+  const isCursorOffscreen = isCursorOutsideViewport(screenPosition, viewportInfo) && isCursorFarOffscreen(screenPosition);
+
+  // Calculate zoom-adjusted positioning
+  const zoomScale = viewportInfo.zoomScale;
+  const zoomOffsetX = (zoomScale - 1) * canvasPosition.x;
+  const zoomOffsetY = (zoomScale - 1) * canvasPosition.y;
+  const sessionIdString = userInfo.sessionID.toString();
+  return jsx(CursorPositioner, {
+    x: canvasPosition.x + zoomOffsetX,
+    y: canvasPosition.y + zoomOffsetY,
+    isCursorAndChatAreaOffscreen: isCursorOffscreen,
+    children: jsx(CursorRenderer, {
+      chatMessage,
+      color: cursorColor,
+      cursorType: sessionInfo.cursorType,
+      editorType,
+      focusOnTextCursor: shouldFocusOnTextCursor ?? false,
+      isCursorAndChatAreaOffscreen: isCursorOffscreen,
+      isCursorHandOnRight: hasItem(cursorHandsOnRight, sessionIdString),
+      isCursorPointingRight: false,
+      // This prop seems unused in the original
+      isHighFiving: sessionInfo.highFiveStatus,
+      isHighFivingSupported,
+      isHoveringWidgetWithHiddenCursors: sessionInfo.isHoveringWidgetWithHiddenCursors,
+      name: userInfo.name,
+      prefersReducedMotion,
+      sessionId: userInfo.sessionID,
+      temporarilyHide: hasAnimatedCursorForSession(cursorEntities, sessionIdString),
+      useChatAnimation: true,
+      disableMessageFade: false,
+      isStaticView: false
     })
   });
 }
-export function $$tg1() {
+
+/**
+ * Hook to track chat state for other users in the multiplayer session.
+ * Original function name: th
+ * @param sessionInfo - Information about the user session.
+ * @param chatMessage - The current chat message.
+ * @param shouldTrack - Boolean indicating if tracking should be active.
+ */
+function useChatStateTracker(sessionInfo: any, chatMessage: any, shouldTrack: boolean): void {
+  const sessionIdRef = useRef<string | null>(null);
+  sessionIdRef.current = sessionInfo?.sessionId ?? sessionIdRef.current;
+
+  // Track chat state when message exists and tracking is enabled
+  useEffect(() => {
+    if (sessionIdRef.current && shouldTrack) {
+      const hasMessage = !!(chatMessage && chatMessage.length && chatMessage[0]);
+      chatStateTracker?.setOtherUserChattingState(sessionIdRef.current, hasMessage);
+    }
+  }, [shouldTrack, chatMessage]);
+
+  // Cleanup on unmount and when tracking stops
+  useEffect(() => {
+    const cleanup = () => {
+      if (sessionIdRef.current) {
+        chatStateTracker?.setOtherUserChattingState(sessionIdRef.current, false);
+      }
+    };
+    cleanup();
+    return cleanup;
+  }, []);
+}
+
+/**
+ * Checks if a cursor position is outside the viewport bounds.
+ * Original logic extracted from inline function.
+ * @param screenPosition - The cursor position on screen.
+ * @param viewport - The viewport dimensions.
+ * @returns Boolean indicating if cursor is outside viewport.
+ */
+function isCursorOutsideViewport(screenPosition: {
+  x: number;
+  y: number;
+}, viewport: {
+  width: number;
+  height: number;
+}): boolean {
+  return screenPosition.x < 0 || screenPosition.y < 0 || screenPosition.x > viewport.width || screenPosition.y > viewport.height;
+}
+
+/**
+ * Checks if a cursor position is far offscreen (beyond reasonable bounds).
+ * Original logic extracted from inline function.
+ * @param screenPosition - The cursor position on screen.
+ * @returns Boolean indicating if cursor is far offscreen.
+ */
+function isCursorFarOffscreen(screenPosition: {
+  x: number;
+  y: number;
+}): boolean {
+  return screenPosition.x < -400 || screenPosition.y < -100;
+}
+
+/**
+ * Checks if there's an animated cursor entity for a given session.
+ * Helper function for determining cursor visibility.
+ * @param entities - Array of cursor entities.
+ * @param sessionId - The session ID to check.
+ * @returns Boolean indicating if animated cursor exists.
+ */
+function hasAnimatedCursorForSession(entities: Array<any>, sessionId: string): boolean {
+  return entities.some(entity => entity.type === 'AnimatedCursorEntity' && entity.customData?.sessionId === sessionId);
+}
+export function createMultiplayerCursorSystem() {
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'MultiplayerCursors',
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
-    children: jsx(t_, {})
+    children: jsx(MultiplayerCursorsManager, {})
   });
 }
-export const k_ = $$tu0;
-export const yL = $$tg1;
+export const k_ = CursorRenderer;
+export const yL = createMultiplayerCursorSystem;

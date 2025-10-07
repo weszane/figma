@@ -57,7 +57,7 @@ let reportCount = 0 // (C)
 let lastReportTime = -Infinity // (w)
 let lastReportDuration = 0 // (O)
 export let performanceTracker: PerformanceTracker | null = null // ($$R31)
-let chatStateTracker: ChatStateTracker | null = null // ($$L32)
+export let chatStateTracker: ChatStateTracker | null = null // ($$L32)
 let cursorReactionTracker: CursorReactionTracker | null = null // (P)
 let annotationVisibilityTracker: AnnotationVisibilityTracker | null = null // ($$D11)
 

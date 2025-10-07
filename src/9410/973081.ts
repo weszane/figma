@@ -78,7 +78,7 @@ import { useDraftsFolderProject } from '../905/461685';
 import { AutoLayout, Spacer } from '../905/470281';
 import { PluginImage } from '../905/480825';
 import { formatI18nMessage } from '../905/482208';
-import { gR } from '../905/486443';
+import { isVotingSessionJoined } from '../905/486443';
 import { nP as _$$nP, LU } from '../905/487011';
 import { O as _$$O3 } from '../905/487602';
 import { stripHtmlTags } from '../905/491152';
@@ -130,7 +130,6 @@ import { j as _$$j2 } from '../905/834956';
 import { TabsPrimitiveTabStrip } from '../905/840133';
 import { useDropdownState } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
-import { VariableStyleId } from '../905/859698';
 import { useFileByKey } from '../905/862913';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
@@ -320,7 +319,7 @@ import { getPropertiesPanelTab, updateHoveredNode } from '../figma_app/741237';
 import { qZ, ui } from '../figma_app/761118';
 import { Rs as _$$Rs } from '../figma_app/761870';
 import { ActionType, AppStateTsApi, AutoLayoutInsertMode, Axis, ColorFormatEnum, colorManagementStateJs, ColorProfileEnum, ColorSpaceEnum, CustomFocusHelpers, DesignGraphElements, DesignWorkspace, EyedropperBindings, Fullscreen, FullscreenMode, HandoffBindingsCpp, IVariableStyles, KeyboardLayout, LogToConsoleMode, MeasurementType, MenuType, Multiplayer, NodePropertyCategory, NodeType, PluginHelpers, SchemaJoinStatus, SelfDesignType, SessionOrigin, SessionStatus, StateHierarchy, StylesBindings, UIVisibilitySetting, VariableDataType, VariableResolvedDataType, VariablesBindings } from '../figma_app/763686';
-import { QY as _$$QY, AY, CX, hx, vV } from '../figma_app/770088';
+import { markCommentAsUnread, markThreadAsRead, activateNewComment, resolveCommentThread, setNewAnchorPosition } from '../figma_app/770088';
 import { BrowserInfo, isFigmaMobileApp, isMobileUA } from '../figma_app/778880';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { SH } from '../figma_app/790714';
@@ -362,7 +361,7 @@ import { r as _$$r } from '../figma_app/968727';
 import { fG, gY } from '../figma_app/973927';
 import { mz } from '../figma_app/975811';
 import { getCurrentFileType, getSelectedEditorType, isDesignFileType, isDevHandoffEditorType, isWhiteboardFileType } from '../figma_app/976749';
-import { ix as _$$ix, fA, Gz } from '../figma_app/991227';
+import { CursorContainer, CursorIcon, useCursorVisibility } from '../figma_app/991227';
 import { EG } from '../figma_app/995580';
 import { A as _$$A0 } from '../svg/56834';
 import { A as _$$A14 } from '../svg/211156';
@@ -1744,7 +1743,7 @@ function io({
     };
     t != null && (i !== r || t.displayId !== e.displayId) ? S(n) : n();
   }, [S]);
-  Gz(u && !d);
+  useCursorVisibility(u && !d);
   return jsxs(is, {
     initialWidth: h,
     initialHeight: p,
@@ -1769,7 +1768,7 @@ function io({
         transform: 'translate(-50%, 50%)',
         pointerEvents: 'none'
       },
-      children: jsx(fA, {
+      children: jsx(CursorIcon, {
         currentToolForCursor: DesignGraphElements.DROPPER_COLOR
       })
     }), jsx('div', {
@@ -2182,7 +2181,7 @@ function ib({
       hidden: en == null,
       onClick: X,
       children: en
-    }) : en != null && jsx(_$$ix, {
+    }) : en != null && jsx(CursorContainer, {
       position: e.cursorPosition,
       currentToolForCursor: DesignGraphElements.DROPPER_COLOR,
       children: en
@@ -2676,7 +2675,7 @@ function iq(e) {
   c && (d = o ? {
     name: 'mark-as-read',
     callback: () => {
-      t(AY({
+      t(markThreadAsRead({
         receiptsAPI: c,
         thread
       }));
@@ -2684,7 +2683,7 @@ function iq(e) {
   } : {
     name: 'mark-as-unread',
     callback: () => {
-      t(_$$QY({
+      t(markCommentAsUnread({
         receiptsAPI: c,
         comment: thread.comments[0]
       }));
@@ -2694,7 +2693,7 @@ function iq(e) {
   l || (isCommentStateActive(thread.sidebarItemType) ? u.push({
     name: 'resolve',
     callback: () => {
-      t(hx({
+      t(resolveCommentThread({
         thread,
         resolved: !0
       }));
@@ -2983,7 +2982,7 @@ let nr = connect((e, t) => ({
   editorType: e.selectedView.editorType,
   orgEntity: getCurrentOrgAdminInfo(e),
   org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
-  isJoinedToActiveVotingSession: gR(e),
+  isJoinedToActiveVotingSession: isVotingSessionJoined(e),
   hasSelection: Object.keys(e.mirror.sceneGraphSelection).length > 0,
   isDevHandoff: isFullscreenDevHandoffView(e.selectedView)
 }))(ni);
@@ -4569,10 +4568,10 @@ function nh(e, t, i, r, n, a, s) {
           });
         } else {
           let t = applyOffsetToViewport(e, a);
-          r(vV({
+          r(setNewAnchorPosition({
             anchorPosition: t
           }));
-          r(CX());
+          r(activateNewComment());
         }
       }(i, r, n, a, s);
     }
@@ -9314,7 +9313,7 @@ let li = {
               thumbnail_url: '',
               canvas_url: '',
               content_hash: i.styleVersionHash ?? void 0,
-              userFacingVersion: VariableStyleId(i.userFacingVersion),
+              userFacingVersion: i.userFacingVersion,
               node_id: i.guid,
               isLocal: !0,
               style_type: i.styleType

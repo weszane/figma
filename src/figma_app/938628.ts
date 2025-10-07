@@ -13,7 +13,7 @@ import { ow } from '../905/188421';
 import { permissionScopeHandler, scopeAwareFunction } from '../905/189185';
 import { isInvalidValue, isValidValue, MIXED_MARKER, normalizeValue } from '../905/216495';
 import { labConfigurations, useLabConfiguration } from '../905/226610';
-import { F as _$$F } from '../905/258517';
+import { fullscreenHandler } from '../905/258517';
 import { HiddenLabel } from '../905/270045';
 import { useSelectedStyleOrSelectionPropertyValues, useSelectionProperty, useSelectionPropertyValue, useSelectionPropertyValues } from '../905/275640';
 import { AutoInteractableWrapper } from '../905/277716';
@@ -2948,7 +2948,7 @@ function rF(e) {
     'offIcon': jsx(rk, {}),
     'onChange': () => {
       permissionScopeHandler.user('set-stack-position', () => {
-        i === 'ABSOLUTE' ? (s('AUTO'), o('Remove Absolute Position')) : (s('ABSOLUTE', yesNoTrackingEnum.NO), Fullscreen.bringSelectionToFrontVisually(), Fullscreen.triggerAction('commit', {}), _$$F.trackFromFullscreen('add_absolute_position', {
+        i === 'ABSOLUTE' ? (s('AUTO'), o('Remove Absolute Position')) : (s('ABSOLUTE', yesNoTrackingEnum.NO), Fullscreen.bringSelectionToFrontVisually(), Fullscreen.triggerAction('commit', {}), fullscreenHandler.trackFromFullscreen('add_absolute_position', {
           source: 'properties_panel',
           parent_node_ids: u
         }));

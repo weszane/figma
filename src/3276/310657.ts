@@ -4,7 +4,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { AnnouncementPrimitive } from "../905/745591";
 import r from "classnames";
 import { colorToString } from "../905/436288";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { multiplayerColors, parseColor, getTextColorForBackground } from "../figma_app/191804";
 import { Hd } from "../figma_app/583114";
@@ -240,7 +240,7 @@ export function $$O0(e) {
       dockedOffset: dockedBorderInfo?.width || 0,
       children: jsx(F, {
         isTabAccessible,
-        children: jsx(_$$N, {
+        children: jsx(AnimatePresence, {
           initial: !1,
           children: jsxs("div", {
             className: "multiplayer_bell--multiplayerBell--MJNGX",

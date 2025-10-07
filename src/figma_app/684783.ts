@@ -48,7 +48,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { t0 } from "../figma_app/198840";
 import { c$, ms, rr, wv } from "../figma_app/236327";
-import { lS } from "../figma_app/242565";
+import { mouseEventManager } from "../figma_app/242565";
 import { findMatchingScalingOptionId, getScalingOptionLabel, ViewportScalingMode, generateScalingOptions, usePrototypeNavigationControls, getViewportScalingMode, usePrototypeNavigationState, PrototypeViewMode } from "../figma_app/292324";
 import { defaultViewportState } from "../figma_app/298911";
 import { DEVICE_PRESETS_BY_ID } from "../figma_app/349969";
@@ -60,7 +60,7 @@ import { useViewer } from "../figma_app/632319";
 import { loadTimeTrackerModule, prototypeLibPerfModule } from "../figma_app/661568";
 import { PreviewMode } from "../figma_app/707808";
 import { perfTimerFrameManagerBindings } from "../figma_app/763686";
-import { UU } from "../figma_app/770088";
+import { deactivateActiveComment } from "../figma_app/770088";
 import { BrowserInfo } from "../figma_app/778880";
 import { LoadTimeTracker } from "../figma_app/781115";
 import { parsePxInt } from "../figma_app/783094";
@@ -274,7 +274,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
       maxHeight: `${e.viewerHeight - 120}px`
     };
     let s = r => {
-      r && (e.setCurrentPageId(r), t(UU()), trackEventAnalytics("Hub File Viewer Change Page", {
+      r && (e.setCurrentPageId(r), t(deactivateActiveComment()), trackEventAnalytics("Hub File Viewer Change Page", {
         hubFileId: e.hubFile.id,
         pageId: r
       }));
@@ -782,15 +782,15 @@ function ex(e) {
   let G = useRef(null);
   let V = useCallback(e => {
     G.current = e;
-    D && lS.handleMouseDown(e.x, e.y);
+    D && mouseEventManager.handleMouseDown(e.x, e.y);
   }, [D]);
   let H = eA(N.current);
   let z = useCallback(t => {
-    D ? lS.handleMouseUp(t.x, t.y) : (!e.disableClickToExpand || !e.disableFullscreen) && G.current && Point.distance(t, G.current) < wB && !isFullscreen && B();
+    D ? mouseEventManager.handleMouseUp(t.x, t.y) : (!e.disableClickToExpand || !e.disableFullscreen) && G.current && Point.distance(t, G.current) < wB && !isFullscreen && B();
     G.current = null;
   }, [D, isFullscreen, B, e.disableClickToExpand, e.disableFullscreen]);
   let W = useCallback(e => {
-    D && lS.handleMouseMove(e.x, e.y);
+    D && mouseEventManager.handleMouseMove(e.x, e.y);
   }, [D]);
   let K = useCallback(e => {
     e === "Escape" && c(sW(PreviewMode.DEFAULT));

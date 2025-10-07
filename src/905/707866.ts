@@ -12,7 +12,7 @@ import { dayjs } from "../905/920142";
 import { getI18nState } from "../figma_app/363242";
 import { KindEnum } from "../905/129884";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Df, uy, pD, z$, RI } from "../figma_app/770088";
+import { setEditingComment, setEditingAttachment, stopEditingComment, toggleCommentReaction, showEmojiPicker } from "../figma_app/770088";
 import { postUserFlag } from "../905/985254";
 import { AK, I_, Tv } from "../905/234821";
 import { ComposerType } from "../905/380385";
@@ -178,14 +178,14 @@ export function $$L0(e) {
     }));
   }, [dispatch]);
   let d = useCallback(e => {
-    dispatch(Df({
+    dispatch(setEditingComment({
       id: comment.id,
       key: comment.key,
       messageMeta: e
     }));
   }, [dispatch, comment]);
   let c = useCallback(e => {
-    dispatch(uy({
+    dispatch(setEditingAttachment({
       id: comment.id,
       key: comment.key,
       attachmentId: e.id,
@@ -193,7 +193,7 @@ export function $$L0(e) {
     }));
   }, [dispatch, comment]);
   let p = useCallback(e => {
-    dispatch(uy({
+    dispatch(setEditingAttachment({
       id: comment.id,
       key: comment.key,
       attachmentId: e,
@@ -201,7 +201,7 @@ export function $$L0(e) {
     }));
   }, [comment.id, comment.key, dispatch]);
   let m = useCallback(() => {
-    dispatch(pD());
+    dispatch(stopEditingComment());
   }, [dispatch]);
   let h = function (e) {
     let t = useDispatch();
@@ -287,7 +287,7 @@ function F(e) {
   let l = Tv(e.comment.id, e.currentUser.id);
   let d = reactionsApi ? (i, n) => {
     n.stopPropagation();
-    t(z$({
+    t(toggleCommentReaction({
       reactionsApi,
       id: e.comment.id,
       emoji: i.emoji,
@@ -323,7 +323,7 @@ function M(e) {
   let l = n => {
     d();
     e.onAddedReaction && e.onAddedReaction();
-    t(z$({
+    t(toggleCommentReaction({
       reactionsApi,
       id: e.comment.id,
       emoji: n.shortcodes,
@@ -332,7 +332,7 @@ function M(e) {
     e.threadCommentRef.current?.focus();
   };
   let d = () => {
-    t(RI({
+    t(showEmojiPicker({
       visible: !1
     }));
     e.threadCommentRef.current?.focus();
@@ -346,7 +346,7 @@ function M(e) {
       onClick: i => {
         i.stopPropagation();
         let n = i.currentTarget.getBoundingClientRect();
-        t(RI({
+        t(showEmojiPicker({
           visible: !0,
           targetRect: n,
           commentsId: e.comment.id,

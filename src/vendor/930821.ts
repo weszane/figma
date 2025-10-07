@@ -119,7 +119,7 @@ function w(e) {
   });
   return r;
 }
-export let $$k0 = ({
+export let AnimatePresence = ({
   children: e,
   custom: r,
   initial: n = !0,
@@ -198,4 +198,4 @@ export let $$k0 = ({
   });
   return createElement(Fragment, null, A.size ? E : E.map(e => cloneElement(e)));
 };
-export const N = $$k0;
+export const N = AnimatePresence;

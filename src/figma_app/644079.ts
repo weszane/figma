@@ -22,12 +22,12 @@ import { gT } from "../figma_app/822177";
 import { L } from "../905/453756";
 import { G } from "../figma_app/481531";
 import { _ as _$$_ } from "../figma_app/91620";
-import { A as _$$A } from "../905/638715";
+import { AlertState } from "../905/638715";
 import { xEX, yNw, ea4, M$q, j4N, F6W, IuL, jl4, P4e } from "../figma_app/27776";
 let w = parsePxInt(xEX);
 let O = atom(0);
 export function $$R4() {
-  let e = useSelector(e => e.downtime.status === _$$A.Ongoing || e.downtime.status === _$$A.Imminent || e.showingDowntimeBanner);
+  let e = useSelector(e => e.downtime.status === AlertState.Ongoing || e.downtime.status === AlertState.Imminent || e.showingDowntimeBanner);
   let t = getViewportY({
     subscribeToUpdates_expensive: !0
   });

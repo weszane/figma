@@ -9,7 +9,7 @@ import { s1, uR, d6 } from "../figma_app/304207";
 import { closeUniversalInsertModal } from "../905/116101";
 import { isWhiteboardFileType } from "../figma_app/976749";
 import { findProfile } from "../figma_app/740025";
-import { Tc } from "../905/797478";
+import { getElementByDataTarget } from "../905/797478";
 import { PinningState } from "../905/192333";
 import { wR } from "../figma_app/293326";
 import { kLt, M$q } from "../figma_app/27776";
@@ -30,7 +30,7 @@ export function $$b5(e, t = 552, r = 320) {
           i = window.innerHeight / 2;
           break;
         case "buttonTarget":
-          let a = Tc(e.buttonTarget);
+          let a = getElementByDataTarget(e.buttonTarget);
           if (!a) return;
           let l = a.getBoundingClientRect();
           n = l.x + l.width / 2;

@@ -9,7 +9,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { fC } from "../figma_app/968813";
 import { fG } from "../figma_app/973927";
 import { IntegrationUtils } from "../figma_app/469876";
-import { XM } from "../905/486443";
+import { useIsVotingSessionJoined } from "../905/486443";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { useIsLoading } from "../905/18797";
@@ -211,7 +211,7 @@ function H({
   let l = useDispatch();
   let d = NT();
   let c = useAtomWithSubscription(c5);
-  let u = XM();
+  let u = useIsVotingSessionJoined();
   let b = useCurrentUserOrg();
   let S = useSelector(e => e.universalInsertModal.showing);
   let I = fG();

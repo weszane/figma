@@ -27,7 +27,7 @@ import { isValidValue, arrayOrMixed, normalizeValue, AUTO_MARKER, isInvalidValue
 import { M as _$$M3 } from "../figma_app/634148";
 import { useSelectionPropertyValues, useSelectionProperty, useSelectionPropertyValue } from "../905/275640";
 import { o as _$$o } from "../905/237202";
-import { F as _$$F } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -147,7 +147,7 @@ export function $$Q4(e) {
       stackHorizontalPadding
     } = useSelectionPropertyValues("stackPaddingBottom", "stackVerticalPadding", "stackPaddingRight", "stackHorizontalPadding");
     return useCallback((n, i) => {
-      isValidValue(stackVerticalPadding) && isValidValue(stackPaddingBottom) && isValidValue(stackHorizontalPadding) && isValidValue(stackPaddingRight) && _$$F.trackFromFullscreen("Autolayout Padding Changed", {
+      isValidValue(stackVerticalPadding) && isValidValue(stackPaddingBottom) && isValidValue(stackHorizontalPadding) && isValidValue(stackPaddingRight) && fullscreenHandler.trackFromFullscreen("Autolayout Padding Changed", {
         side: $$K29[n],
         top: stackVerticalPadding,
         bottom: stackPaddingBottom,

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { P } from "../vendor/348225";
-import { N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { useLatestRef } from "../figma_app/922077";
 import { pl } from "../figma_app/578768";
 import { Q } from "../3276/336897";
@@ -95,7 +95,7 @@ export function $$m0({
       },
       layout: !0,
       layoutRoot: !0,
-      children: jsx(N, {
+      children: jsx(AnimatePresence, {
         initial: !1,
         mode: "popLayout",
         children: jsxs(Fragment, {

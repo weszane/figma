@@ -1,287 +1,364 @@
-import { reportError } from '../905/11';
-import { I as _$$I } from '../905/117966';
-import { gpuFullscreenEventNames, fullscreenPerfManager } from '../905/125218';
-import { ServiceCategories } from '../905/165054';
-import { buildAnalyticsContext } from '../905/210851';
-import { analyticsEventManager, trackEventAnalytics, trackFullScreenAnalytics } from '../905/449184';
-import { sendHistogram } from '../905/485103';
-import { AggregationType, LanguageType } from '../905/535806';
-import { distributionAnalytics, globalPerfTimer, reactTimerGroup, timerEventNames } from '../905/542194';
-import { currentSelectionAtom } from '../905/617744';
-import { EventEmitter } from '../905/690073';
-import { logCustom, setModeEventHandler } from '../905/714362';
-import { debounce } from '../905/915765';
-import { eventLogger } from '../905/945673';
-import { atomStoreManager } from '../figma_app/27355';
-import { isDevEnvironment } from '../figma_app/169182';
-import { Rf } from '../figma_app/546509';
-import { $G, sendConsecutiveImageChangeSkips, memoryPerformanceKeys, contextLostHandler, sendDirtyAfterLoad, contextRestoredHandler, postPerfMetric } from '../figma_app/553184';
-import { updateMaxRenderLayerCount, setIndependentLayerAdded, incrementNumAnimationsFromTs, onContextRestored, setIndependentLayerActive, updateMaxRenderedTileBytesUsed, setIndependentLayerAnimationActive, incrementNumAnimationsFromCpp, setIndependentLayerRemoved, setNonIndependentLayerAnimationActive } from '../figma_app/682945';
-import { DocumentSaveEvent, Multiplayer } from '../figma_app/763686';
-let A = [];
-function y(e) {
-  return `<img src="data:image/png;base64, ${e}" alt="Image of tile" />`;
+import { reportError } from '../905/11'
+import { I as _$$I } from '../905/117966'
+import { fullscreenPerfManager, gpuFullscreenEventNames } from '../905/125218'
+import { ServiceCategories } from '../905/165054'
+import { buildAnalyticsContext } from '../905/210851'
+import { analyticsEventManager, trackEventAnalytics, trackFullScreenAnalytics } from '../905/449184'
+import { sendHistogram } from '../905/485103'
+import { AggregationType, LanguageType } from '../905/535806'
+import { distributionAnalytics, globalPerfTimer, reactTimerGroup, timerEventNames } from '../905/542194'
+import { currentSelectionAtom } from '../905/617744'
+import { EventEmitter } from '../905/690073'
+import { logCustom, setModeEventHandler } from '../905/714362'
+import { debounce } from '../905/915765'
+import { eventLogger } from '../905/945673'
+import { atomStoreManager } from '../figma_app/27355'
+import { isDevEnvironment } from '../figma_app/169182'
+import { Rf } from '../figma_app/546509'
+import { contextLostHandler, contextRestoredHandler, memoryPerformanceKeys, postPerfMetric, sendConsecutiveFlushes, sendConsecutiveImageChangeSkips, sendDirtyAfterLoad } from '../figma_app/553184'
+import { incrementNumAnimationsFromCpp, incrementNumAnimationsFromTs, onContextRestored, setIndependentLayerActive, setIndependentLayerAdded, setIndependentLayerAnimationActive, setIndependentLayerRemoved, setNonIndependentLayerAnimationActive, updateMaxRenderedTileBytesUsed, updateMaxRenderLayerCount } from '../figma_app/682945'
+import { DocumentSaveEvent, Multiplayer } from '../figma_app/763686'
+
+// Original: let A = []
+// Original: function y(e) { ... }
+let renderingTraceHtml: string[] = []
+
+function generateTileImageHtml(tileData: string): string {
+  return `<img src="data:image/png;base64, ${tileData}" alt="Image of tile" />`
 }
-let v = new class {
-  constructor() {
-    this.roundTripTimes = [];
-    this.report = debounce(() => {
-      let e = 0;
-      this.roundTripTimes.forEach(t => e += t);
-      let t = Math.round(1e3 * e / this.roundTripTimes.length);
-      this.roundTripTimes = [];
-      sendHistogram('performance.multiplayer.round_trip_time', t);
-    }, 6e4);
+
+class MultiplayerRoundTripReporter {
+  private roundTripTimes: number[] = []
+  private report = debounce(() => {
+    if (this.roundTripTimes.length === 0)
+      return
+    const sum = this.roundTripTimes.reduce((acc, time) => acc + time, 0)
+    const average = Math.round(1000 * sum / this.roundTripTimes.length)
+    this.roundTripTimes = []
+    sendHistogram('performance.multiplayer.round_trip_time', average)
+  }, 60000)
+
+  reportMultiplayerRoundTripTime(time: number): void {
+    this.roundTripTimes.push(time)
+    this.report()
   }
-  reportMultiplayerRoundTripTime(e) {
-    this.roundTripTimes.push(e);
-    this.report();
-  }
-}();
-export let $$w0 = new class {
-  constructor() {
-    this.events = new EventEmitter('fullscreen');
-    setModeEventHandler(this.trackFromFullscreen.bind(this));
-  }
-  trackFromFullscreen(e, t, i, n, r, a) {
-    trackFullScreenAnalytics(e, buildAnalyticsContext(t), {
-      forwardToDatadog: i,
-      batchRequest: r ?? void 0,
-      addToRUM: a ?? void 0
-    });
-  }
-  trackDefinedEventFromFullscreen(e, t) {
-    analyticsEventManager.trackDefinedFullscreenEvent(e, buildAnalyticsContext(t));
-  }
-  resetDefinedAnalyticsForDocument() {
-    analyticsEventManager.resetDefinedAnalyticsForDocument();
-  }
-  slogFromFullscreen(e, t, i, n, r, a, s) {
-    return logCustom(e, t, i, n, r, a, s);
-  }
-  reportContextLost() {
-    contextLostHandler();
-  }
-  reportContextRestored() {
-    contextRestoredHandler();
-    onContextRestored();
-  }
-  reportRenderLayerCount(e) {
-    updateMaxRenderLayerCount(e);
-  }
-  reportIndependentLayerAnimationActive() {
-    setIndependentLayerAnimationActive();
-  }
-  reportNonIndependentLayerAnimationActive() {
-    setNonIndependentLayerAnimationActive();
-  }
-  reportIndependentLayerActive() {
-    setIndependentLayerActive();
-  }
-  reportIndependentLayerAdded() {
-    setIndependentLayerAdded();
-  }
-  reportIndependentLayerRemoved() {
-    setIndependentLayerRemoved();
-  }
-  reportRenderedTileBytesUsed(e) {
-    updateMaxRenderedTileBytesUsed(e);
-  }
-  reportAnimationFromCpp() {
-    incrementNumAnimationsFromCpp();
-  }
-  reportAnimationFromTs() {
-    incrementNumAnimationsFromTs();
-  }
-  recordRenderingEvent(e, t) {
-    !function (e, t) {
-      let i = '';
-      if (e === 'transferState') {
-        let e = !0;
-        let n = 0;
-        i += '<h1>Transfer State Tiles</h1><table><tr>';
-        for (let r = 0; r < t.tiles.length; r++) {
-          let a = t.tiles[r];
-          e || a.y === n || (i += '</tr><tr>');
-          i += `<td>${y(a.tile)}</td>`;
-          n = a.y;
-          e = !1;
+}
+
+const multiplayerRoundTripReporter = new MultiplayerRoundTripReporter()
+
+class RenderingTracer {
+  recordRenderingEvent(event: string, data: any): void {
+    let html = ''
+    if (event === 'transferState') {
+      let isFirstRow = true
+      let currentY = 0
+      html += '<h1>Transfer State Tiles</h1><table><tr>'
+      for (let i = 0; i < data.tiles.length; i++) {
+        const tile = data.tiles[i]
+        if (!isFirstRow && tile.y !== currentY) {
+          html += '</tr><tr>'
         }
-        i += '</tr></table>';
-      } else {
-        e === 'renderTile' ? (i += '<h1>Rendered Tile</h1>', i += `<h2>x = ${t.x}, y = ${t.y}, GUID = ${t.guid}</h2>`, i += y(t.tile)) : e === 'drawToTileStackTile' && (i += '<h1>Draw to Tile Stack Tile</h1>', i += `<h2>debugInfo = ${t.debugInfo}</h2>`, i += y(t.tile));
+        html += `<td>${generateTileImageHtml(tile.tile)}</td>`
+        currentY = tile.y
+        isFirstRow = false
       }
-      A.push(i);
-    }(e, t);
+      html += '</tr></table>'
+    }
+    else if (event === 'renderTile') {
+      html += '<h1>Rendered Tile</h1>'
+      html += `<h2>x = ${data.x}, y = ${data.y}, GUID = ${data.guid}</h2>`
+      html += generateTileImageHtml(data.tile)
+    }
+    else if (event === 'drawToTileStackTile') {
+      html += '<h1>Draw to Tile Stack Tile</h1>'
+      html += `<h2>debugInfo = ${data.debugInfo}</h2>`
+      html += generateTileImageHtml(data.tile)
+    }
+    renderingTraceHtml.push(html)
   }
-  saveRenderingTrace() {
-    !function () {
-      if (A.length === 0) return;
-      let e = `<!doctype html>
-    <html>
-    <head>
-      <title>Rendering Trace</title>
-      <meta charset="utf-8">
-      <style>
-        td {
-          padding: 2px;
-        }
-      </style>
-    </head>
-    <body>`;
-      e += A.join('');
-      e += `
-    </body>
-    </html>`;
-      let t = document.createElement('a');
-      t.href = URL.createObjectURL(new Blob([e], {
-        type: 'application/javascript'
-      }));
-      t.download = 'rendering_trace.html';
-      document.body.appendChild(t);
-      t.click();
-      document.body.removeChild(t);
-      A.length = 0;
-    }();
+
+  saveRenderingTrace(): void {
+    if (renderingTraceHtml.length === 0)
+      return
+    let html = `<!doctype html>
+<html>
+<head>
+  <title>Rendering Trace</title>
+  <meta charset="utf-8">
+  <style>
+    td {
+      padding: 2px;
+    }
+  </style>
+</head>
+<body>`
+    html += renderingTraceHtml.join('')
+    html += `
+</body>
+</html>`
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }))
+    link.download = 'rendering_trace.html'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    renderingTraceHtml.length = 0
   }
-  reportDirtyAfterLoad(e) {
-    let t = isDevEnvironment();
+}
+
+const renderingTracer = new RenderingTracer()
+
+class FullscreenHandler {
+  private events = new EventEmitter('fullscreen')
+
+  constructor() {
+    setModeEventHandler(this.trackFromFullscreen.bind(this))
+  }
+
+  trackFromFullscreen(event: any, context: any, options: any): void {
+    trackFullScreenAnalytics(event, buildAnalyticsContext(context), {
+      forwardToDatadog: options.forwardToDatadog,
+      batchRequest: options.batchRequest ?? undefined,
+      addToRUM: options.addToRUM ?? undefined,
+    })
+  }
+
+  trackDefinedEventFromFullscreen(event: any, context: any): void {
+    analyticsEventManager.trackDefinedFullscreenEvent(event, buildAnalyticsContext(context))
+  }
+
+  resetDefinedAnalyticsForDocument(): void {
+    analyticsEventManager.resetDefinedAnalyticsForDocument()
+  }
+
+  slogFromFullscreen(...args: any[]): any {
+    return logCustom(...args)
+  }
+
+  reportContextLost(): void {
+    contextLostHandler()
+  }
+
+  reportContextRestored(): void {
+    contextRestoredHandler()
+    onContextRestored()
+  }
+
+  reportRenderLayerCount(count: number): void {
+    updateMaxRenderLayerCount(count)
+  }
+
+  reportIndependentLayerAnimationActive(): void {
+    setIndependentLayerAnimationActive()
+  }
+
+  reportNonIndependentLayerAnimationActive(): void {
+    setNonIndependentLayerAnimationActive()
+  }
+
+  reportIndependentLayerActive(): void {
+    setIndependentLayerActive()
+  }
+
+  reportIndependentLayerAdded(): void {
+    setIndependentLayerAdded()
+  }
+
+  reportIndependentLayerRemoved(): void {
+    setIndependentLayerRemoved()
+  }
+
+  reportRenderedTileBytesUsed(bytes: number): void {
+    updateMaxRenderedTileBytesUsed(bytes)
+  }
+
+  reportAnimationFromCpp(): void {
+    incrementNumAnimationsFromCpp()
+  }
+
+  reportAnimationFromTs(): void {
+    incrementNumAnimationsFromTs()
+  }
+
+  recordRenderingEvent(event: string, data: any): void {
+    renderingTracer.recordRenderingEvent(event, data)
+  }
+
+  saveRenderingTrace(): void {
+    renderingTracer.saveRenderingTrace()
+  }
+
+  reportDirtyAfterLoad(sessionId: string): void {
+    const isDev = isDevEnvironment()
     trackEventAnalytics('dirty_after_load', {
-      registersDump: Multiplayer?.pendingRegistersDump(t).substring(0, 1e4),
-      sessionID: e
-    });
-    sendDirtyAfterLoad();
+      registersDump: Multiplayer?.pendingRegistersDump(isDev).substring(0, 10000),
+      sessionID: sessionId,
+    })
+    sendDirtyAfterLoad()
   }
-  reportConsecutiveFlushes() {
-    $G();
+
+  reportConsecutiveFlushes(): void {
+    sendConsecutiveFlushes()
   }
-  reportConsecutiveImageChangeSkips() {
-    sendConsecutiveImageChangeSkips();
+
+  reportConsecutiveImageChangeSkips(): void {
+    sendConsecutiveImageChangeSkips()
   }
-  reportPerfEvent(e) {
-    switch (e) {
+
+  reportPerfEvent(event: DocumentSaveEvent): void {
+    switch (event) {
       case DocumentSaveEvent.AFTER_FIRST_RENDER:
-        postPerfMetric('AFTER_FIRST_RENDER');
-        fullscreenPerfManager.start('AFTER_FIRST_RENDER');
-        break;
+        postPerfMetric('AFTER_FIRST_RENDER')
+        fullscreenPerfManager.start('AFTER_FIRST_RENDER')
+        break
       case DocumentSaveEvent.DOCUMENT_STARTED_SAVING:
-        postPerfMetric('DOCUMENT_STARTED_SAVING');
-        break;
+        postPerfMetric('DOCUMENT_STARTED_SAVING')
+        break
       case DocumentSaveEvent.DOCUMENT_FINISHED_SAVING:
-        postPerfMetric('DOCUMENT_FINISHED_SAVING');
+        postPerfMetric('DOCUMENT_FINISHED_SAVING')
+        break
     }
   }
-  reportContextRestore() {
-    this.events.trigger('context-restore');
+
+  reportContextRestore(): void {
+    this.events.trigger('context-restore')
   }
-  reportMultiplayerRoundTripTime(e) {
-    v.reportMultiplayerRoundTripTime(e);
+
+  reportMultiplayerRoundTripTime(time: number): void {
+    multiplayerRoundTripReporter.reportMultiplayerRoundTripTime(time)
   }
-  reportBranchingLoadTime(e, t, i, n, r, a) {
-    let l = atomStoreManager.get(currentSelectionAtom);
-    let d = {
-      branchFileKey: n,
-      sourceFileKey: i,
-      durationMs: 1e3 * e,
+
+  reportBranchingLoadTime(duration: number, functionName: string, sourceFileKey: string, branchFileKey: string, diffType?: string, branchModalTrackingId?: string): void {
+    const direction = atomStoreManager.get(currentSelectionAtom)
+    let data: any = {
+      branchFileKey,
+      sourceFileKey,
+      durationMs: 1000 * duration,
       loadType: AggregationType.GRANULAR,
-      functionName: t,
+      functionName,
       profileStep: LanguageType.CPP_ONLY,
-      branchModalTrackingId: a,
-      direction: l
-    };
-    r && (d = {
-      diffType: r,
-      ...d
-    });
-    trackEventAnalytics('Branch Modal Load Time', d);
+      branchModalTrackingId,
+      direction,
+    }
+    if (diffType) {
+      data = { diffType, ...data }
+    }
+    trackEventAnalytics('Branch Modal Load Time', data)
   }
-  reportQuantizedColorEqualsUse(e, t, i, n, r, a, s, l) {
-    let c = {
+
+  reportQuantizedColorEqualsUse(r1: number, g1: number, b1: number, a1: number, r2: number, g2: number, b2: number, a2: number): void {
+    const data = {
       ..._$$I(new Error().stack),
-      color1: JSON.stringify({
-        r: e,
-        g: t,
-        b: i,
-        a: n
-      }),
-      color2: JSON.stringify({
-        r,
-        g: a,
-        b: s,
-        a: l
-      })
-    };
-    trackEventAnalytics('quantized_color_equal_use', c);
+      color1: JSON.stringify({ r: r1, g: g1, b: b1, a: a1 }),
+      color2: JSON.stringify({ r: r2, g: g2, b: b2, a: a2 }),
+    }
+    trackEventAnalytics('quantized_color_equal_use', data)
   }
-  tryReportError(e) {
-    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error(e));
+
+  tryReportError(error: string): void {
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error(error))
   }
-  startPerfTimer(e) {
-    timerEventNames.has(e) && reactTimerGroup.start(e);
-    gpuFullscreenEventNames.has(e) && fullscreenPerfManager.startFs(e);
+
+  startPerfTimer(event: string): void {
+    if (timerEventNames.has(event))
+      reactTimerGroup.start(event)
+    if (gpuFullscreenEventNames.has(event))
+      fullscreenPerfManager.startFs(event)
   }
-  stopPerfTimer(e) {
-    timerEventNames.has(e) && reactTimerGroup.stop(e);
-    gpuFullscreenEventNames.has(e) && fullscreenPerfManager.stopFs(e);
+
+  stopPerfTimer(event: string): void {
+    if (timerEventNames.has(event))
+      reactTimerGroup.stop(event)
+    if (gpuFullscreenEventNames.has(event))
+      fullscreenPerfManager.stopFs(event)
   }
-  startOpsTimer(e, t) {
-    globalPerfTimer.start(e, {
-      key: t
-    });
+
+  startOpsTimer(name: string, key: string): void {
+    globalPerfTimer.start(name, { key })
   }
-  stopOpsTimer(e, t) {
-    return globalPerfTimer.stop(e, t);
+
+  stopOpsTimer(name: string, key: string): any {
+    return globalPerfTimer.stop(name, key)
   }
-  createDistribution(e, t) {
-    distributionAnalytics.create(e, t);
+
+  createDistribution(name: string, options: any): void {
+    distributionAnalytics.create(name, options)
   }
-  addToDistribution(e, t) {
-    distributionAnalytics.add(e, t);
+
+  addToDistribution(name: string, value: any): void {
+    distributionAnalytics.add(name, value)
   }
-  resetDistribution(e) {
-    distributionAnalytics.reset(e);
+
+  resetDistribution(name: string): void {
+    distributionAnalytics.reset(name)
   }
-  getDistributionAnalyticsProperties(e) {
-    return distributionAnalytics.analyticsProperties(e);
+
+  getDistributionAnalyticsProperties(name: string): any {
+    return distributionAnalytics.analyticsProperties(name)
   }
-  removeDistribution(e) {
-    distributionAnalytics.remove(e);
+
+  removeDistribution(name: string): void {
+    distributionAnalytics.remove(name)
   }
-  tryStopOpsTimer(e, t) {
-    return globalPerfTimer.tryStop(e, t);
+
+  tryStopOpsTimer(name: string, key: string): any {
+    return globalPerfTimer.tryStop(name, key)
   }
-  pauseOpsTimer(e, t) {
-    return globalPerfTimer.pause(e, t);
+
+  pauseOpsTimer(name: string, key: string): any {
+    return globalPerfTimer.pause(name, key)
   }
-  resumeOpsTimer(e, t) {
-    return globalPerfTimer.resume(e, t);
+
+  resumeOpsTimer(name: string, key: string): any {
+    return globalPerfTimer.resume(name, key)
   }
-  trySetAttributeOpsTimer(e, t, i, n) {
-    return globalPerfTimer.trySetAttribute(e, t, i, n);
+
+  trySetAttributeOpsTimer(name: string, key: string, attr: string, value: any): any {
+    return globalPerfTimer.trySetAttribute(name, key, attr, value)
   }
-  tryGetAttributesOpsTimer(e, t) {
-    return globalPerfTimer.tryGetAttribute(e, t);
+
+  tryGetAttributesOpsTimer(name: string, key: string): any {
+    return globalPerfTimer.tryGetAttribute(name, key)
   }
-  getOpsTimer(e, t) {
-    return globalPerfTimer.report().get(e)?.get(t) || null;
+
+  getOpsTimer(name: string, key: string): any {
+    return globalPerfTimer.report().get(name)?.get(key) || null
   }
-  logNumericMetric(e, t) {
-    for (let i of memoryPerformanceKeys) {
-      if (e.startsWith(i)) {
-        sendHistogram(e, t);
-        break;
+
+  logNumericMetric(metric: string, value: number): void {
+    for (const key of memoryPerformanceKeys) {
+      if (metric.startsWith(key)) {
+        sendHistogram(metric, value)
+        break
       }
     }
-    eventLogger.isNumberEvent(e) && eventLogger.loadTimer.logEvent(e, t);
-    e === 'receiveNodeChanges' && fullscreenPerfManager.logNodeChangeMsg(t);
+    if (eventLogger.isNumberEvent(metric)) {
+      eventLogger.loadTimer.logEvent(metric, value)
+    }
+    if (metric === 'receiveNodeChanges') {
+      fullscreenPerfManager.logNodeChangeMsg(value)
+    }
   }
-  logStringMetric(e, t) {
-    eventLogger.isStringEvent(e) && eventLogger.loadTimer.logEvent(e, t);
-    gpuFullscreenEventNames.has(e) && fullscreenPerfManager.startFs(e);
+
+  logStringMetric(metric: string, value: string): void {
+    if (eventLogger.isStringEvent(metric)) {
+      eventLogger.loadTimer.logEvent(metric, value)
+    }
+    if (gpuFullscreenEventNames.has(metric)) {
+      fullscreenPerfManager.startFs(metric)
+    }
   }
-  handleAllocationFailureWithNative(e) {
-    let t = Rf();
-    return !!t?.handleAllocationFailure && (t.handleAllocationFailure(e), t.handleAllocationFailure = void 0, !0);
+
+  handleAllocationFailureWithNative(failure: any): boolean {
+    const rf = Rf()
+    if (rf?.handleAllocationFailure) {
+      rf.handleAllocationFailure(failure)
+      rf.handleAllocationFailure = undefined
+      return true
+    }
+    return false
   }
-}();
-export const F = $$w0;
+}
+
+export const fullscreenHandler = new FullscreenHandler()
+export const F = fullscreenHandler

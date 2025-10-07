@@ -60,7 +60,7 @@ import { vx, oo } from "../642/38487";
 import { ArrowPosition } from "../905/748636";
 import { xtb } from "../figma_app/6204";
 import { m4 } from "../642/998522";
-import { uK } from "../figma_app/178273";
+import { deletionSettings } from "../figma_app/178273";
 import { jq } from "../figma_app/32128";
 import { w as _$$w } from "../642/994749";
 import ex from "../vendor/267721";
@@ -503,7 +503,7 @@ class ez extends RecordingPureComponent {
       this.scrollingTimeout = setTimeout(this.doneScrolling, 50);
       this.props.onScroll(e);
       this.setNeedsScrollLine(e);
-      atomStoreManager.set(uK, {
+      atomStoreManager.set(deletionSettings, {
         autoScroll: !1
       });
     };
@@ -583,7 +583,7 @@ class ez extends RecordingPureComponent {
       }
       let o = this.getScene().get(e);
       if (!o) return;
-      s || atomStoreManager.set(uK, {
+      s || atomStoreManager.set(deletionSettings, {
         autoScroll: !1
       });
       let d = this.isAncestorSticky(o);

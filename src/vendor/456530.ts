@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import { O } from "../vendor/122594";
+import { motionValue } from "../vendor/122594";
 import { Q } from "../vendor/408965";
 import { M } from "../vendor/644572";
 export function $$h0(e) {
-  let r = M(() => O(e));
+  let r = M(() => motionValue(e));
   let {
     isStatic
   } = useContext(Q);

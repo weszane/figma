@@ -12,7 +12,7 @@ import { KindEnum } from '../905/129884';
 import { ServiceCategories } from '../905/165054';
 import { setupToggleButton } from '../905/167712';
 import { R as _$$R } from '../905/256203';
-import { F as _$$F } from '../905/258517';
+import { fullscreenHandler } from '../905/258517';
 import { getI18nString } from '../905/303541';
 import { s as _$$s2 } from '../905/403855';
 import { globalPerfTimer } from '../905/542194';
@@ -46,7 +46,7 @@ import { eC as _$$eC, Fj } from '../figma_app/76123';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { g$, qW } from '../figma_app/116234';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
-import { r8 } from '../figma_app/178273';
+import { nodeStateFamily } from '../figma_app/178273';
 import { Bf } from '../figma_app/249941';
 import { isSpecialType } from '../figma_app/387100';
 import { A0, Br, sq } from '../figma_app/454974';
@@ -356,7 +356,7 @@ function eM(e) {
   let [t, s] = useState(null);
   let [i, l] = useState(!1);
   let a = useIsFullscreenSitesView();
-  let o = useAtomWithSubscription(r8(e.guid));
+  let o = useAtomWithSubscription(nodeStateFamily(e.guid));
   let {
     showVisualLayerIcons
   } = useContext(y0);
@@ -373,7 +373,7 @@ function eM(e) {
     nodeType: e.nodeType
   });
   let u = useHandleMouseEvent(e.recordingKey, e.focusOnSingleClick ? 'click' : 'dblclick', () => {
-    _$$F.trackFromFullscreen('action_rename_selection', {
+    fullscreenHandler.trackFromFullscreen('action_rename_selection', {
       source: 'click'
     });
     e.startRenaming(e.guid);
@@ -589,7 +589,7 @@ let eA = memo(e => {
   let eK = getSingletonSceneGraph().get(e.guid);
   let eG = eB && eF && X && eK && sq(eK);
   let eH = e.nodeType !== 'REACT_FIBER' && e.nodeType !== 'SLIDE';
-  let eV = useAtomWithSubscription(r8(e.guid))?.state === 'pending';
+  let eV = useAtomWithSubscription(nodeStateFamily(e.guid))?.state === 'pending';
   let eU = getObservableOrFallback(EditorPreferencesApi().showSemanticTagsOnLayerRows);
   let ez = !X && getFeatureFlags().sts_a11y_layers_semantic_tags && eU;
   let eW = eF ? topLevelObjectRowHeight : nestedObjectRowHeight;

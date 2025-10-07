@@ -60,11 +60,11 @@ export function getDarkerShade(color: string): string {
   return darkerShades[color] ?? color
 }
 
-const textOnDarkCanvas: string = 'var(--color-textondarkcanvas, #ffffff)'
-const textOnLightCanvas: string = 'var(--color-textonlightcanvas, #000000)'
-const borderLight: string = 'inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15)'
-const borderDark: string = 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1)'
-const borderTranslucent: string = 'inset 0px 0px 0px 2px var(--color-bordertranslucent)'
+export const textOnDarkCanvas: string = 'var(--color-textondarkcanvas, #ffffff)'
+export const textOnLightCanvas: string = 'var(--color-textonlightcanvas, #000000)'
+export const borderLight: string = 'inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15)'
+export const borderDark: string = 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1)'
+export const borderTranslucent: string = 'inset 0px 0px 0px 2px var(--color-bordertranslucent)'
 
 export const namedColors: Record<string, string> = {
   aliceblue: '#F0F8FF',

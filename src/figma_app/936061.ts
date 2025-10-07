@@ -9,7 +9,7 @@ import { memoizeByArgs } from "../figma_app/815945";
 import u from "../vendor/223926";
 import { trackEventAnalytics } from "../905/449184";
 import { Point } from "../905/736624";
-import { hY } from "../figma_app/770088";
+import { moveComment } from "../figma_app/770088";
 import { y as _$$y } from "../figma_app/705249";
 import { j, N as _$$N } from "../figma_app/261650";
 import { fullscreenValue } from "../figma_app/455680";
@@ -88,7 +88,7 @@ export function $$R1(e, t) {
               y: 0
             };
             let n = Point.add(a.position, r);
-            (t.x !== n.x || t.y !== n.y) && l(hY({
+            (t.x !== n.x || t.y !== n.y) && l(moveComment({
               thread: {
                 id: e.id,
                 uuid: e.uuid || void 0,
@@ -115,7 +115,7 @@ export function $$R1(e, t) {
             y: 0
           };
           let i = Point.add(position, r);
-          l(hY({
+          l(moveComment({
             thread: {
               id: e.id,
               uuid: e.uuid || void 0,

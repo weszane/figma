@@ -3,20 +3,17 @@ import { IncrementalLoadTimer } from "../figma_app/261445"
 interface EventLogger {
   isStringEvent: (event: string) => boolean
   isNumberEvent: (event: string) => boolean
-  loadTimer: LoadTimer
+  loadTimer: IncrementalLoadTimerReporter
 }
 
-interface LoadTimer {
-  logOpenFileAction: (fileKey: string) => void
-  logEvent: (event: LogEvent) => void
-}
 
-type LogEvent
+
+type _LogEvent
   = | { type: "receiveNodeChanges", size: number }
   | { type: "sendSceneGraphQuery" | "receiveSceneGraphReply", queries: string[] }
   | { type: "finishIncrementalLoading", fileKey: string }
 
-class IncrementalLoadTimerReporter implements LoadTimer {
+class IncrementalLoadTimerReporter  {
   reporter: IncrementalLoadTimer | null = null
 
   constructor() {
@@ -28,9 +25,28 @@ class IncrementalLoadTimerReporter implements LoadTimer {
     this.reporter.setFileKey(fileKey)
   }
 
-  logEvent(event: LogEvent): void {
+  logEvent(e, t) {
     if (this.reporter) {
-      this.reporter.logEvent(event)
+      switch (e) {
+        case "receiveNodeChanges":
+          this.reporter.logEvent({
+            type: e,
+            size: t,
+          })
+          break
+        case "sendSceneGraphQuery":
+        case "receiveSceneGraphReply":
+          this.reporter.logEvent({
+            type: e,
+            queries: t.split(","),
+          })
+          break
+        case "finishIncrementalLoading":
+          this.reporter.logEvent({
+            type: e,
+            fileKey: t,
+          })
+      }
     }
   }
 }

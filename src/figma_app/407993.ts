@@ -19,18 +19,18 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { stopChattingThunk, startReactingThunk, toggleEmojiWheelThunk } from "../figma_app/308685";
 import { Dm } from "../figma_app/8833";
-import { Tc } from "../905/797478";
-import { CB } from "../figma_app/442259";
+import { getElementByDataTarget } from "../905/797478";
+import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
 import { getViewportZoom } from "../figma_app/62612";
-import { XM } from "../905/486443";
+import { useIsVotingSessionJoined } from "../905/486443";
 import { useAppModelProperty, useCurrentTool } from "../figma_app/722362";
-import { F as _$$F } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { KindEnum } from "../905/129884";
 import { getColorForMultiplayer, multiplayerColors } from "../figma_app/136698";
 import { _ as _$$_ } from "../figma_app/433187";
 import { setupCursorChatDisabledCheck } from "../figma_app/403368";
-import { Qn } from "../figma_app/580087";
+import { EMOTE_SHORTCUT_ELEMENT_ID } from "../figma_app/580087";
 import { useClickOutside } from "../905/1768";
 import { L as _$$L } from "../905/453756";
 import { zG } from "../figma_app/47958";
@@ -298,7 +298,7 @@ function eg({
   let T = W();
   useClickOutside(y, {
     closeOnEsc: !0,
-    ignore: [d.current, b9(), Tc(Qn)]
+    ignore: [d.current, b9(), getElementByDataTarget(EMOTE_SHORTCUT_ELEMENT_ID)]
   });
   let I = fU();
   let S = useCurrentTool();
@@ -345,21 +345,21 @@ function eg({
     let a = e.type;
     switch (a) {
       case "STAMP":
-        _$$F.trackFromFullscreen("Start stamping", {
+        fullscreenHandler.trackFromFullscreen("Start stamping", {
           name: e.name
         });
         be(n, e.label || "");
         y();
         break;
       case "VOTE_STAMP":
-        _$$F.trackFromFullscreen("Start vote stamping", {
+        fullscreenHandler.trackFromFullscreen("Start vote stamping", {
           name: e.name
         });
         be(n, e.label || "");
         y();
         break;
       case "REACTION":
-        _$$F.trackFromFullscreen("Start reacting", {
+        fullscreenHandler.trackFromFullscreen("Start reacting", {
           name: e.name
         });
         p(startReactingThunk({
@@ -394,9 +394,9 @@ function eg({
         H(M.current, x, y);
       }
     };
-    CB.addTriggerActiveWheelButtonListener(e);
+    emojiWheelManagerInstance.addTriggerActiveWheelButtonListener(e);
     return () => {
-      CB.removeTriggerActiveWheelButtonListener(e);
+      emojiWheelManagerInstance.removeTriggerActiveWheelButtonListener(e);
     };
   }, [H]);
   useEffect(() => {
@@ -836,7 +836,7 @@ export function $$eI1() {
   return jsx(Fragment, {});
 }
 export function $$eS0(e) {
-  let t = XM();
+  let t = useIsVotingSessionJoined();
   let r = useDispatch();
   let a = useAppModelProperty("isReadOnly");
   let o = function ({

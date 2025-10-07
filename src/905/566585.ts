@@ -7,7 +7,7 @@ import { trackFileEventWithUser } from "../figma_app/901889";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, isMixedArray, isValidValue, normalizeValue, MIXED_MARKER } from "../905/216495";
 import { useSelectionProperty } from "../905/275640";
-import { F } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { TK } from "../905/129660";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { bi } from "../figma_app/836943";
@@ -25,7 +25,7 @@ export function $$_4() {
   }, [i, t, e]);
 }
 export function $$A5(e, t, i) {
-  t !== yesNoTrackingEnum.NO && F.trackFromFullscreen("ee_track_user_action", {
+  t !== yesNoTrackingEnum.NO && fullscreenHandler.trackFromFullscreen("ee_track_user_action", {
     category: "TEXT",
     property: e,
     source: i

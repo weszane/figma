@@ -16,7 +16,7 @@ import { bL, Y9, JU, UC } from "../figma_app/57171";
 import { O as _$$O } from "../905/487602";
 import { J as _$$J } from "../905/125993";
 import { w as _$$w } from "../905/770105";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { P as _$$P2 } from "../905/347284";
 import { TextWithTruncation } from "../905/984674";
@@ -541,7 +541,7 @@ function eL() {
   let m = d || "loading" === workspaces.status;
   let p = licenseGroups[0]?.id;
   let g = isOrgAdmin || !!p;
-  return jsx(_$$N, {
+  return jsx(AnimatePresence, {
     mode: "popLayout",
     initial: !1,
     children: jsx(_$$P.div, {

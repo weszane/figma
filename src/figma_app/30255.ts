@@ -6,7 +6,7 @@ import { rgbToHsl } from "../figma_app/273493";
 import { Fullscreen, TransactionCommand, BorderStyle } from "../figma_app/763686";
 import d from "classnames";
 import { d as _$$d } from "../vendor/456530";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { SKIP_RECORDING } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
@@ -131,7 +131,7 @@ export let $$x0 = memo(function ({
     onContextMenu: e => {
       e.preventDefault();
     },
-    children: jsx(_$$N, {
+    children: jsx(AnimatePresence, {
       children: jsx(_$$P.div, {
         ref: et,
         animate: es,

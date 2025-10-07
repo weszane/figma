@@ -4,7 +4,7 @@ import { SessionStatus } from "../figma_app/763686";
 import { atom, Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { H1 } from "../figma_app/124493";
-import { XM } from "../905/486443";
+import { useIsVotingSessionJoined } from "../905/486443";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { jo } from "../figma_app/629335";
 import { Qs, sx } from "../905/992395";
@@ -56,7 +56,7 @@ export function $$T1() {
   let e = useAtomWithSubscription(jo);
   let t = useSelector(e => e.music);
   let r = C3();
-  let n = XM();
+  let n = useIsVotingSessionJoined();
   let a = null != e.time && 0 !== e.time.totalTimeMs;
   let o = !!t.music?.selectedSongID && !t.music?.isPaused;
   let l = [];

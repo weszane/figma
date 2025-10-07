@@ -6,14 +6,14 @@ import { A } from "../905/251970";
 import { WhiteboardVotingCppBindings, SessionStatus } from "../figma_app/763686";
 import { x as _$$x } from "../vendor/194682";
 import { P as _$$P } from "../vendor/348225";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { fU } from "../905/492004";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { P as _$$P2 } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { w9, rT } from "../figma_app/124493";
-import { n3 } from "../905/797478";
+import { isNodeContainedIn } from "../905/797478";
 import { wW } from "../figma_app/656450";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { k6 } from "../figma_app/565197";
@@ -173,7 +173,7 @@ let F = memo(function ({
   useEffect(() => {
     if ("selected" !== i) return;
     let e = e => {
-      n3(e.target, C.current) || p();
+      isNodeContainedIn(e.target, C.current) || p();
     };
     window.addEventListener("click", e);
     return () => window.removeEventListener("click", e);
@@ -330,7 +330,7 @@ let F = memo(function ({
               children: jsx(A, {})
             })
           })]
-        }), jsx(_$$N, {
+        }), jsx(AnimatePresence, {
           children: ["selected", "hovered"].includes(i) && jsxs(Fragment, {
             children: [jsx(_$$P.div, {
               className: W0,

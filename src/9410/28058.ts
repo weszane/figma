@@ -11,7 +11,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { designCopyToSlidesAtom } from "../figma_app/223206";
 import { overlayStateAtom } from "../905/12032";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { Tc } from "../905/797478";
+import { getElementByDataTarget } from "../905/797478";
 import { getSidebarSplitPosition } from "../figma_app/740163";
 import { _o } from "../figma_app/701001";
 import { useAppModelProperty } from "../figma_app/722362";
@@ -73,7 +73,7 @@ export function $$V1() {
   let g = useRef(null);
   if (useClickOutside(() => t(!1), {
     closeOnEsc: !0,
-    ignore: [g, Tc("slides-template-button"), Tc(_$$G), Tc(_$$l)]
+    ignore: [g, getElementByDataTarget("slides-template-button"), getElementByDataTarget(_$$G), getElementByDataTarget(_$$l)]
   }), useEffect(() => {
     m(cd.fetchTemplatesMetadata({
       key: FDocumentType.Slides,

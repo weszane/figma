@@ -10,9 +10,9 @@ import { L as _$$L } from "../figma_app/819472";
 import { renderI18nText } from "../905/303541";
 import { stopChattingThunk } from "../figma_app/308685";
 import { H1 } from "../figma_app/124493";
-import { CB } from "../figma_app/442259";
+import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { LR } from "../figma_app/120210";
-import { XM } from "../905/486443";
+import { useIsVotingSessionJoined } from "../905/486443";
 import { KindEnum } from "../905/129884";
 import { hx } from "../figma_app/630194";
 import { gd } from "../figma_app/837467";
@@ -36,7 +36,7 @@ let $$R0 = memo(function () {
   let e = useDispatch();
   let t = iT();
   let i = useSelector(e => e?.mirror?.appModel?.currentTool === DesignGraphElements.STAMP) || t;
-  let o = XM();
+  let o = useIsVotingSessionJoined();
   let d = hr();
   let c = d > 0;
   let u = useSelector(e => e.universalInsertModal.showing);
@@ -52,7 +52,7 @@ let $$R0 = memo(function () {
   let O = useCallback(() => {
     N(!1);
     A();
-    t ? CB.closeWheel() : X({
+    t ? emojiWheelManagerInstance.closeWheel() : X({
       source: fK
     });
   }, [t, N, A]);

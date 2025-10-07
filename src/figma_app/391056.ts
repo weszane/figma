@@ -1,42 +1,77 @@
-import { jsx } from "react/jsx-runtime";
-import { memo, forwardRef } from "react";
-import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
-import s from "classnames";
-import { SvgComponent } from "../905/714743";
-var o = s;
-let $$d0 = "dlt_banner_shortcut_button";
-let $$c2 = memo(forwardRef(function (e, t) {
-  let {
+import classNames from "classnames"
+import { forwardRef, memo } from "react"
+import { jsx } from "react/jsx-runtime"
+import { SvgComponent } from "../905/714743"
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298"
+
+// Original: $$d0
+export const DLT_BANNER_SHORTCUT_BUTTON_ID = "dlt_banner_shortcut_button"
+
+// Original: $$c2 - DLT Banner Shortcut Button Component
+interface ShortcutButtonProps {
+  shortcut: React.ReactNode
+  onClick?: () => void
+  isActive?: boolean
+  recordingKey?: string
+  dataElementTarget?: string
+  isPressed?: boolean
+}
+
+/**
+ * A button component for displaying shortcuts in the DLT banner
+ * @param props - The shortcut button properties
+ * @returns JSX element representing the shortcut button
+ */
+export const ShortcutButton = memo(forwardRef<HTMLButtonElement, ShortcutButtonProps>((props, ref) => {
+  const {
     shortcut,
     onClick,
     isActive,
     recordingKey,
     dataElementTarget,
-    isPressed
-  } = e;
-  let u = useHandleMouseEvent(generateRecordingKey("dltBannerShortcutButton", recordingKey), "click", onClick);
-  let p = o()("dlt_banner_inline_elements--shortcutButton--LOMMi", {
+    isPressed,
+  } = props
+
+  const handleClick = useHandleMouseEvent(
+    generateRecordingKey("dltBannerShortcutButton", recordingKey),
+    "click",
+    onClick,
+  )
+
+  const buttonClassName = classNames("dlt_banner_inline_elements--shortcutButton--LOMMi", {
     "dlt_banner_inline_elements--active--zWunk": isActive,
-    "dlt_banner_inline_elements--pressed--36odr": isPressed
-  });
+    "dlt_banner_inline_elements--pressed--36odr": isPressed,
+  })
+
   return jsx("button", {
-    ref: t,
-    className: p,
-    onClick: u,
+    "ref": ref,
+    "className": buttonClassName,
+    "onClick": handleClick,
     "data-element-target": dataElementTarget,
-    children: shortcut
-  });
-}));
-export function $$u1({
-  icon: e
-}) {
+    "children": shortcut,
+  })
+}))
+
+// Original: $$u1 - Icon Inline Component
+interface IconInlineProps {
+  icon: string
+}
+
+/**
+ * A component for displaying inline icons in the DLT banner
+ * @param props - The icon properties
+ * @returns JSX element representing the inline icon
+ */
+export function IconInline({ icon }: IconInlineProps) {
   return jsx("div", {
     className: "dlt_banner_inline_elements--iconInline--0YsSs",
     children: jsx(SvgComponent, {
-      svg: e
-    })
-  });
+      svg: icon,
+    }),
+  })
 }
-export const UM = $$d0;
-export const kf = $$u1;
-export const zW = $$c2;
+
+// Export with refactored names
+export const UM = DLT_BANNER_SHORTCUT_BUTTON_ID
+export const kf = IconInline
+export const zW = ShortcutButton

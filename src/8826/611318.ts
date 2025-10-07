@@ -25,7 +25,7 @@ import { Zk, fI } from "../figma_app/626177";
 import { u as _$$u } from "../figma_app/6978";
 import { O as _$$O } from "../905/587457";
 import { normalizeValue, isInvalidValue, isValidValue, MIXED_MARKER, getCommonValue } from "../905/216495";
-import { F as _$$F } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { ExpressionInput } from "../figma_app/178475";
 import { fn, DE } from "../figma_app/811257";
@@ -228,7 +228,7 @@ let z = (e, t) => (n, l) => {
     shouldCommit: l
   });
   let r = "number" == typeof e?.canvasSpacingBetweenItemsX && "number" == typeof e?.canvasSpacingBetweenItemsY;
-  l && _$$F.trackFromFullscreen("magic_collections_list_spacing_changed", {
+  l && fullscreenHandler.trackFromFullscreen("magic_collections_list_spacing_changed", {
     source: "panel",
     spacing_did_change: !e || n !== e[i],
     was_mixed: !e,

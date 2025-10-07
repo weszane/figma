@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Xr, atom, useAtomWithSubscription, createRemovableAtomFamily, mg, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { useSceneGraphSelector, useCurrentTool } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { p as _$$p } from "../figma_app/372802";
+import { ViewportContainer } from "../figma_app/372802";
 import { m as _$$m, f as _$$f } from "../905/70820";
 import { useSelector, useDispatch } from "react-redux";
 import { traverseUpAndDown, findVisibleSectionChild, qT } from "../figma_app/387100";
@@ -26,7 +26,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { getViewportInfo, getVisibleArea } from "../figma_app/62612";
 import { mJ, uQ } from "../figma_app/311375";
 import { isDevModeFocusViewActive, isInteractiveInspectionResizing } from "../figma_app/544649";
-import { UU } from "../figma_app/770088";
+import { deactivateActiveComment } from "../figma_app/770088";
 import { Qx, Uu, ZR, Dm } from "../figma_app/8833";
 import { LO } from "../9410/571209";
 import { NW, E_ } from "../figma_app/355754";
@@ -3957,7 +3957,7 @@ function aj() {
     c !== DesignGraphElements.ANNOTATE && b(null);
   }, [c, b]);
   useEffect(() => {
-    null !== y && e(UU());
+    null !== y && e(deactivateActiveComment());
   }, [e, y]);
   let [A, I] = useState({});
   let {
@@ -4457,7 +4457,7 @@ function aw() {
     let e = useCurrentTool();
     let t = getObservableOrFallback(AppStateTsApi.annotationObserver().annotationInfoByTlf);
     return v(useMemo(() => Array.from(t.keys()), [t])).length > 0 || !!getFeatureFlags().dt_component_annotations || !!getFeatureFlags().dt_ccv2_on_canvas || !!getFeatureFlags().cheddar_annotations || e === DesignGraphElements.ANNOTATE;
-  }() ? null : jsx(_$$p, {
+  }() ? null : jsx(ViewportContainer, {
     forceNoScroll: !0,
     children: jsx(aj, {})
   });

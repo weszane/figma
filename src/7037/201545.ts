@@ -6,7 +6,7 @@ import { NONE_SYMBOL } from "../905/992467";
 import { c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { AvatarSize } from "../905/590952";
-import { uy, cL, Df, pD } from "../figma_app/770088";
+import { setEditingAttachment, resetComments, setEditingComment, stopEditingComment } from "../figma_app/770088";
 import { showModalHandler } from "../905/156213";
 import { cx, v6, BC } from "../905/504768";
 import { a as _$$a } from "../905/844092";
@@ -27,14 +27,14 @@ export function $$T0(e) {
   let [h, g] = useState(!1);
   let b = useSelector(e => e.comments.editingComment);
   let T = useCallback(n => {
-    t(uy({
+    t(setEditingAttachment({
       id: e.commentId,
       key: e.commentUuid,
       attachmentId: n.id,
       attachment: n
     }));
   }, [t, e.commentId, e.commentUuid]);
-  let w = useCallback(n => (t(uy({
+  let w = useCallback(n => (t(setEditingAttachment({
     id: e.commentId,
     key: e.commentUuid,
     attachmentId: n,
@@ -47,7 +47,7 @@ export function $$T0(e) {
       messageMeta: l,
       attachmentUpdates: b?.attachmentUpdates
     }));
-    t(cL());
+    t(resetComments());
     g(!1);
   }, [t, b, e.commentId, e.commentUuid, l]);
   let j = useCallback(() => {
@@ -55,7 +55,7 @@ export function $$T0(e) {
     e.attachments?.forEach(e => {
       n[e.id] = e;
     });
-    t(Df({
+    t(setEditingComment({
       id: e.commentId,
       key: e.commentUuid,
       messageMeta: e.messageMeta,
@@ -68,7 +68,7 @@ export function $$T0(e) {
   }, [t, e.commentId, e.commentUuid, e.messageMeta, e.attachments]);
   let O = useCallback(() => {
     m(e.messageMeta);
-    t(pD());
+    t(stopEditingComment());
     g(!1);
   }, [t, e.messageMeta]);
   let y = e.commentUser.id === e.user.id;

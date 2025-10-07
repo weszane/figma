@@ -131,7 +131,7 @@ import { A as _$$A7 } from '../905/251970';
 import { z as _$$z6 } from '../905/252950';
 import { R as _$$R4 } from '../905/256203';
 import { T as _$$T2 } from '../905/256551';
-import { F as _$$F8 } from '../905/258517';
+import { fullscreenHandler } from '../905/258517';
 import { HiddenLabel, Label } from '../905/270045';
 import { m as _$$m3 } from '../905/270214';
 import { O as _$$O3 } from '../905/273186';
@@ -619,7 +619,7 @@ import { nl as _$$nl3 } from '../figma_app/359943';
 import { $Y as _$$$Y, p4 as _$$p1, q0 as _$$q10, rb as _$$rb, Q5 } from '../figma_app/369750';
 import { el as _$$el, y2 as _$$y4, MR } from '../figma_app/369767';
 import { $v, lW as _$$lW, Q as _$$Q, tM as _$$tM, uh as _$$uh, AE } from '../figma_app/370763';
-import { p as _$$p } from '../figma_app/372802';
+import { ViewportContainer } from '../figma_app/372802';
 import { G as _$$G3 } from '../figma_app/373780';
 import { O as _$$O8 } from '../figma_app/373984';
 import { LH } from '../figma_app/384673';
@@ -836,7 +836,7 @@ import { $convertFromMarkdownString, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, B
 import { E as _$$E0 } from '../vendor/807288';
 import { Q as _$$Q7 } from '../vendor/898216';
 import { $ as _$$$3 } from '../vendor/909072';
-import { N as _$$N10 } from '../vendor/930821';
+import { AnimatePresence } from '../vendor/930821';
 import { G as _$$G7 } from '../vendor/947080';
 import { F as _$$F7 } from '../vendor/961806';
 import { Ec, RZ } from '../vendor/969425';
@@ -1093,7 +1093,7 @@ function H() {
   });
 }
 function q() {
-  return _$$e() ? jsx(_$$p, {
+  return _$$e() ? jsx(ViewportContainer, {
     forceNoScroll: !0,
     children: jsx(F, {
       children: jsx(H, {})
@@ -18060,7 +18060,7 @@ let gN = ({
     e && (p.current = e, p.current.select());
   }, []);
   let m = useHandleMouseEvent(l, 'dblclick', () => {
-    _$$F8.trackFromFullscreen('action_rename_selection', {
+    fullscreenHandler.trackFromFullscreen('action_rename_selection', {
       source: 'click'
     });
     s(e);
@@ -29032,7 +29032,7 @@ function Tc({
   return jsx(DraggableModalManager, {
     title: jsx('div', {
       className: m ? 'styles-module--behaviorSettingsPickerTitleWithDetails--EdoDD styles-module--behaviorSettingsPickerTitle--U37nj header_modal--headerModalTitle--32hFx' : 'styles-module--behaviorSettingsPickerTitle--U37nj header_modal--headerModalTitle--32hFx',
-      children: jsxs(_$$N10, {
+      children: jsxs(AnimatePresence, {
         mode: 'popLayout',
         children: [m && jsx(_$$P7.div, {
           initial: {
@@ -29106,7 +29106,7 @@ function Tc({
     recordingKey: n,
     arrowPosition: shouldPin ? void 0 : ArrowPosition.TOP,
     arrowRelativeX: shouldPin ? void 0 : b / 2,
-    children: jsx(_$$N10, {
+    children: jsx(AnimatePresence, {
       mode: 'popLayout',
       initial: !1,
       onExitComplete: () => {

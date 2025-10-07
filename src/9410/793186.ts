@@ -37,7 +37,7 @@ import { useIsFullscreenDevModeComponentBrowser, useIsFullscreenOverview } from 
 import { uQ, xv } from '../figma_app/151869';
 import { floatToString } from '../figma_app/164212';
 import { g as _$$g } from '../figma_app/240060';
-import { yL } from '../figma_app/242062';
+import { createMultiplayerCursorSystem } from '../figma_app/242062';
 import { trackUserEvent } from '../figma_app/314264';
 import { gI } from '../figma_app/399472';
 import { fullscreenValue } from '../figma_app/455680';
@@ -935,7 +935,7 @@ export function $$eU1({
       activeId: b,
       renderDetailContainerInPortal: !0,
       detailContainerPortal: e.current
-    }), !y && jsx(yL, {})]
+    }), !y && jsx(createMultiplayerCursorSystem, {})]
   });
 }
 export const jx = $$eM0;

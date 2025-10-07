@@ -73,7 +73,7 @@ import { useDropdownState } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
-import { F as _$$F2 } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { K0, YW } from "../figma_app/778125";
 import { iL } from "../905/824449";
@@ -148,7 +148,7 @@ let eD = memo(function ({
     t.stopPropagation();
     debug(null != e.content_hash, "style does not have a hash");
     let r = e.isLocal ? e.node_id : StylesBindings.getStyleNodeId(e.key, e.content_hash);
-    _$$F2.trackFromFullscreen("text_style_override_reverted", {
+    fullscreenHandler.trackFromFullscreen("text_style_override_reverted", {
       node_ids: U
     });
     TextStyleOverridesBindings.clearOverridesOverTextStyleInSelection(r);

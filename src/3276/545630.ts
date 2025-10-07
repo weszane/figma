@@ -105,13 +105,13 @@ import { wg as _$$wg } from '../figma_app/101956';
 import { getColorForMultiplayer, multiplayerColors, getMultiplayerTextColor } from '../figma_app/136698';
 import { buildStaticUrl, getInitialOptions } from '../figma_app/169182';
 import { t0 as _$$t3 } from '../figma_app/198840';
-import { AU, on } from '../figma_app/242565';
+import { unsubscribeFromMouseEvent, subscribeToMouseEvent } from '../figma_app/242565';
 import { useSubscription } from '../figma_app/288654';
 import { useFocusArea } from '../figma_app/290668';
 import { viewportNavigatorContext } from '../figma_app/298911';
 import { KD, O1 } from '../figma_app/317394';
 import { p as _$$p } from '../figma_app/353099';
-import { p as _$$p2 } from '../figma_app/372802';
+import { ViewportContainer } from '../figma_app/372802';
 import { getSelectedView, getSelectedViewType } from '../figma_app/386952';
 import { fullscreenValue } from '../figma_app/455680';
 import { throwTypeError } from '../figma_app/465776';
@@ -132,7 +132,7 @@ import { whiteColor, gray500Color, blackColor, whiteColor2 } from '../figma_app/
 import { useAuthedActiveCommunityProfile } from '../figma_app/740025';
 import { getSidebarSplitPosition } from '../figma_app/740163';
 import { AppStateTsApi, DesignGraphElements, LayoutTabType, UserActionState } from '../figma_app/763686';
-import { C as _$$C, nb as _$$nb, _v, a$, CX, dB, hx, hY, k7, lV, pD, q4, QD, RI, RP, UU, vV, wg, Z5 } from '../figma_app/770088';
+import { updateCommentContent, setNewCommentAttachment, setNewSelectionBoxAnchorPosition, activateNewComment, resolveCommentThread, moveComment, setCommentReplyMessage, createCommentReply, stopEditingComment, resetCommentThread, setCommentReplyAttachment, showEmojiPicker, removeHoveredPin, deactivateActiveComment, setNewAnchorPosition, addHoveredPin, setNewCommentMessage, handleCommentUpdateWithConfirmation, handleCommentReplyWithConfirmation } from '../figma_app/770088';
 import { K0 } from '../figma_app/778125';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { Sw } from '../figma_app/805373';
@@ -946,14 +946,14 @@ let eU = memo(e => {
   let et = x5(J);
   let en = useMemo(() => new Set(e.threads.filter(e => et(e)).map(e => e.id)), [et, e.threads]);
   let eo = useCallback(e => {
-    m(wg({
+    m(addHoveredPin({
       threadId: e
     }));
     let t = X(e);
     t && u.setHovering(t.canvasPosition);
   }, [u, m, X]);
   let ea = useCallback(e => {
-    m(RP({
+    m(removeHoveredPin({
       threadId: e
     }));
     u.setHovering(null);
@@ -1085,7 +1085,7 @@ let eU = memo(e => {
     });
   }, [setActivePinSize, ep, x, eh]);
   let e_ = isUserNotLoggedInAndEditorSupported();
-  return jsx(_$$p2, {
+  return jsx(ViewportContainer, {
     children: jsx(eL, {
       clientConfig: s,
       clusteredThreads: eu,
@@ -1194,20 +1194,20 @@ function tV(e) {
   } = e;
   let k = feedPost.id;
   let P = useCallback(e => {
-    dispatch(k7({
+    dispatch(setCommentReplyMessage({
       threadId: k,
       messageMeta: e
     }));
   }, [dispatch, k]);
   let T = useCallback(e => {
-    dispatch(QD({
+    dispatch(setCommentReplyAttachment({
       threadId: k,
       attachmentId: e.id,
       attachment: e
     }));
   }, [dispatch, k]);
   let M = useCallback((e, t) => {
-    dispatch(QD({
+    dispatch(setCommentReplyAttachment({
       threadId: k,
       attachmentId: e,
       attachment: null
@@ -1219,7 +1219,7 @@ function tV(e) {
       postUuid: gk(k),
       messageMeta: r.reply.messageMeta,
       attachmentIds: r.reply.attachments ? Object.keys(r.reply.attachments) : []
-    })), w(), P([]), dispatch(q4({
+    })), w(), P([]), dispatch(resetCommentThread({
       threadId: k,
       resetStatusOnly: !1
     })));
@@ -1242,7 +1242,7 @@ function tV(e) {
         inFileView: !0
       }
     }));
-    dispatch(UU({
+    dispatch(deactivateActiveComment({
       force: !0
     }));
   }, [dispatch, feedPost.feedPostPublicUuid]);
@@ -1707,7 +1707,7 @@ function nr(e) {
     });
   });
   let el = useCallback(e => {
-    dispatch(k7({
+    dispatch(setCommentReplyMessage({
       threadId: ei,
       messageMeta: e
     }));
@@ -1715,14 +1715,14 @@ function nr(e) {
   let ed = useRef(null);
   let ec = useRef(null);
   let em = useCallback(e => {
-    dispatch(QD({
+    dispatch(setCommentReplyAttachment({
       threadId: ei,
       attachmentId: e.id,
       attachment: e
     }));
   }, [dispatch, ei]);
   let eu = useCallback((t, n) => {
-    dispatch(QD({
+    dispatch(setCommentReplyAttachment({
       threadId: ei,
       attachmentId: t,
       attachment: null
@@ -1755,7 +1755,7 @@ function nr(e) {
     if (setIsPinned(!1), ew(), !isMessageMetaEmpty(p)) {
       if (u && ed.current?.isAllSelected() || isMessageMetaTooShort(p) && f.length === 0) {
         el([]);
-        dispatch(pD());
+        dispatch(stopEditingComment());
         return;
       }
       return !1;
@@ -1763,7 +1763,7 @@ function nr(e) {
   }, [ew, setIsPinned, p, u, f.length, el, dispatch]);
   let ek = useCallback(() => {
     setIsPinned(!1);
-    dispatch(UU({
+    dispatch(deactivateActiveComment({
       force: !0
     }));
     ew();
@@ -2120,11 +2120,11 @@ function nu(e) {
     if (n.thread.id === NEW_COMMENT_ID) {
       let e = n.viewport.current;
       if (!e) return;
-      l(vV({
+      l(setNewAnchorPosition({
         anchorPosition: applyOffsetToViewport(e, s)
       }));
     } else {
-      r && (l(UU()), m(s));
+      r && (l(deactivateActiveComment()), m(s));
     }
   }, [u, viewportPositionFromClientPosition, p, l, r]);
   let b = useCallback(e => {
@@ -2264,8 +2264,8 @@ class nx extends PureComponent {
   constructor(e) {
     super(e);
     this.onMouseUpPos = e => {
-      AU('mouseup', this.onMouseUpPos);
-      AU('mousemove', this.onMouseMovePos);
+      unsubscribeFromMouseEvent('mouseup', this.onMouseUpPos);
+      unsubscribeFromMouseEvent('mousemove', this.onMouseMovePos);
       let {
         onDragEnd
       } = this.props;
@@ -2289,8 +2289,8 @@ class nx extends PureComponent {
       });
     };
     this.onMouseDownPos = e => {
-      on('mouseup', this.onMouseUpPos);
-      on('mousemove', this.onMouseMovePos);
+      subscribeToMouseEvent('mouseup', this.onMouseUpPos);
+      subscribeToMouseEvent('mousemove', this.onMouseMovePos);
       this.setState({
         drag: {
           start: e,
@@ -2327,8 +2327,8 @@ class nx extends PureComponent {
     };
   }
   componentWillUnmount() {
-    AU('mouseup', this.onMouseUpPos);
-    AU('mousemove', this.onMouseMovePos);
+    unsubscribeFromMouseEvent('mouseup', this.onMouseUpPos);
+    unsubscribeFromMouseEvent('mousemove', this.onMouseMovePos);
   }
   render() {
     let e = this.state.drag ? {
@@ -2459,12 +2459,12 @@ function nP(e) {
   }, [u, j, k]);
   let [P, T] = useState(null);
   let M = useCallback(e => {
-    d(Z5({
+    d(setNewCommentMessage({
       messageMeta: e
     }));
   }, [d]);
   let E = useCallback(e => {
-    d(_$$nb({
+    d(setNewCommentAttachment({
       attachmentId: e.id,
       attachment: e
     }));
@@ -2472,7 +2472,7 @@ function nP(e) {
   let N = useCurrentFileKey();
   let S = useStore();
   let D = useCallback((t, n) => {
-    N && (d(_$$nb({
+    N && (d(setNewCommentAttachment({
       attachmentId: t,
       attachment: null
     })), Object.keys(S.getState().comments.newComment.attachments || {}).length === 0 && e.editorRef.current?.focus(), n ? n.then(() => fileCommentAttachmentAPI.$$delete(N, t)) : fileCommentAttachmentAPI.$$delete(N, t));
@@ -2487,7 +2487,7 @@ function nP(e) {
       R();
       return;
     }
-    (discardAttempts && e.editorRef.current?.isAllSelected() || isMessageMetaTooShort(t.messageMeta) && Object.keys(t.attachments || {}).length === 0) && (d(Z5({
+    (discardAttempts && e.editorRef.current?.isAllSelected() || isMessageMetaTooShort(t.messageMeta) && Object.keys(t.attachments || {}).length === 0) && (d(setNewCommentMessage({
       messageMeta: []
     })), R());
   }, [S, discardAttempts, e.editorRef, d, R]);
@@ -2806,7 +2806,7 @@ function nO(e) {
   let C = useSelector(e => e.comments.editingComment);
   let w = useSelector(e => e.comments.activeDragTarget);
   let P = _$$i3();
-  let T = useCallback(() => p.current?.visible ? (p.current.clearDecorators(), !0) : P ? (Dp(), !0) : !!C || (t(UU()), !0), [t, C, P]);
+  let T = useCallback(() => p.current?.visible ? (p.current.clearDecorators(), !0) : P ? (Dp(), !0) : !!C || (t(deactivateActiveComment()), !0), [t, C, P]);
   O1(T, KD.MODAL);
   let {
     pinOffset
@@ -2835,7 +2835,7 @@ function nO(e) {
   let A = useSelector(e => e.comments.newComment);
   let L = useCallback(e => {
     if (u) {
-      t(a$({
+      t(setNewSelectionBoxAnchorPosition({
         selectionBoxAnchor: e
       }));
     } else {
@@ -2850,7 +2850,7 @@ function nO(e) {
       } else {
         n.selection_box_anchor = e;
       }
-      t(hY({
+      t(moveComment({
         thread: l,
         clientMeta: n
       }));
@@ -3026,11 +3026,11 @@ function nq(e) {
   return {
     on: (t, n) => {
       let o = e[t];
-      o && on(o, n);
+      o && subscribeToMouseEvent(o, n);
     },
     off: (t, n) => {
       let o = e[t];
-      o && AU(o, n);
+      o && unsubscribeFromMouseEvent(o, n);
     }
   };
 }
@@ -3061,7 +3061,7 @@ function nK(e) {
   let [f, _] = useState(null);
   let [g, v] = useState(null);
   let x = useMemo(() => d === 'communityHub' ? {} : {
-    canDrag: () => l(UU()),
+    canDrag: () => l(deactivateActiveComment()),
     onDragStart: e => {
       let n = applyOffsetToViewport(t.getRawViewportInfo(), e.start);
       v(n);
@@ -3092,7 +3092,7 @@ function nK(e) {
           _(null);
           return;
         }
-        canvasPositionClick(u, !0) && l(a$({
+        canvasPositionClick(u, !0) && l(setNewSelectionBoxAnchorPosition({
           selectionBoxAnchor: applyOffsetToViewport(t.getRawViewportInfo(), e.start)
         }));
         v(null);
@@ -3155,10 +3155,10 @@ function nG(e) {
     let _ = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, null);
     let v = useRef(_);
     useEffect(() => {
-      _ !== v.current && (v.current = _, f(UU()));
+      _ !== v.current && (v.current = _, f(deactivateActiveComment()));
     }, [_, f]);
     let x = useCallback((o, a) => {
-      if (e && (allowCompose || !t)) return _requestToDeselectCommentPin ? !0 !== a && (_requestToDeselectCommentPin(), !0) : (n && n(!1), !f(UU()) || !0 !== a);
+      if (e && (allowCompose || !t)) return _requestToDeselectCommentPin ? !0 !== a && (_requestToDeselectCommentPin(), !0) : (n && n(!1), !f(deactivateActiveComment()) || !0 !== a);
     }, [e, allowCompose, t, _requestToDeselectCommentPin, n, f]);
     let {
       touchEvents
@@ -3178,9 +3178,9 @@ function nG(e) {
           y: n.y,
           width: 32 * 1.15,
           height: 32 * 1.15
-        }) : (f(vV({
+        }) : (f(setNewAnchorPosition({
           anchorPosition: e
-        })), f(CX()));
+        })), f(activateNewComment()));
         return e;
       }
     }, [x, _requestToAddDraftCommentPin, touchEvents, m, u, p, f]);
@@ -3224,7 +3224,7 @@ function nG(e) {
   let b = createRef();
   let y = useCallback(t => {
     if (t.keyCode === KeyCodes.ESCAPE && (x.cancel(), !m && e.activeId)) {
-      u && u.visible && p(RI({
+      u && u.visible && p(showEmojiPicker({
         visible: !1
       }));
     }
@@ -3466,7 +3466,7 @@ function n2(e) {
       console.error('Calling submitReply with no write API');
       return;
     }
-    t.status === 'loaded' && t.data.find(t => t.id === e.threadId) && (e.onCommentValidationFailure = (t, o, a, i) => dB(f, s, t, o, a, i, e.uuid, n), s(lV({
+    t.status === 'loaded' && t.data.find(t => t.id === e.threadId) && (e.onCommentValidationFailure = (t, o, a, i) => handleCommentReplyWithConfirmation(f, s, t, o, a, i, e.uuid, n), s(createCommentReply({
       ...e,
       commentsWriteApi: f,
       commentsConfiguration: n
@@ -3479,8 +3479,8 @@ function n2(e) {
       console.error('Calling submitNewComment with no write API');
       return;
     }
-    e.onCommentValidationFailure = (e, t, n, o) => _$$C(s, e, t, n, o);
-    s(_v(e));
+    e.onCommentValidationFailure = (e, t, n, o) => handleCommentUpdateWithConfirmation(s, e, t, n, o);
+    s(updateCommentContent(e));
   }, [s, f]);
   let w = useSelector(e => e.selectedView);
   let j = Yi(w);
@@ -3495,10 +3495,10 @@ function n2(e) {
   $P(e.activeId, N, c, modeOverride, M);
   let S = sc();
   let D = useCallback(e => {
-    s(hY(e));
+    s(moveComment(e));
   }, [s]);
   let A = useCallback(e => {
-    s(hx(e));
+    s(resolveCommentThread(e));
   }, [s]);
   if (isDevModeFocusViewActive() || k && (I || isLoading) || M === null || j) return null;
   let L = !k && !!S?.requestToSelectCommentPin && !!S?.requestToDeselectCommentPin && !!S?.requestToAddDraftCommentPin;

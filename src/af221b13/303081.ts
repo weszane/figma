@@ -198,7 +198,7 @@ import { R as _$$R } from "../5430/129716";
 import { H as _$$H } from "../5430/816957";
 import { X6 } from "../5430/28597";
 import { clamp, range } from "../figma_app/492908";
-import { N as _$$N3 } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P3, Mf, F5 } from "../5430/367577";
 import { A as _$$A31 } from "../figma_app/882803";
 import { e as _$$e7 } from "../905/621515";
@@ -5835,7 +5835,7 @@ function a5({
       },
       role: "grid",
       tabIndex: 0,
-      children: [jsx(_$$N3, {
+      children: [jsx(AnimatePresence, {
         mode: "popLayout",
         initial: !1,
         custom: o,

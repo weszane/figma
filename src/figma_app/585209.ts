@@ -2,7 +2,7 @@ import { ss } from "../figma_app/479760";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RI, We } from "../figma_app/770088";
+import { showEmojiPicker, setTypeahead } from "../figma_app/770088";
 import { mz } from "../figma_app/12220";
 import { getViewportInfo } from "../figma_app/62612";
 import { selectCurrentUser } from "../905/372672";
@@ -63,12 +63,12 @@ export function $$E1(e) {
   }, [o?.type]);
   let E = useDispatch();
   let y = useCallback(() => {
-    E(RI({
+    E(showEmojiPicker({
       visible: !1
     }));
   }, [E]);
   let b = useCallback(e => {
-    E(We(e));
+    E(setTypeahead(e));
   }, [E]);
   let T = getViewportInfo({
     subscribeToUpdates_expensive: !0

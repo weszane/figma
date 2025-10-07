@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { clearReportedErrors, reportError, setFileBranchingTags, SeverityLevel } from '../905/11';
+import { clearReportedErrors, reportError, setBranchingTags, SeverityLevel } from '../905/11';
 import { fullscreenAlias } from '../905/37051';
 import { fileMetadataService } from '../905/84999';
 import { showFileBrowserOrError } from '../905/87821';

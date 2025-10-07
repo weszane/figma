@@ -32,10 +32,10 @@ import { $z, TM } from "../vendor/187488";
 import { n as _$$n } from "../vendor/572888";
 import { ai } from "../vendor/459595";
 import { v as _$$v } from "../vendor/347763";
-import { O as _$$O2 } from "../vendor/122594";
+import { motionValue } from "../vendor/122594";
 import { k as _$$k } from "../vendor/549752";
 import { f as _$$f2 } from "../vendor/615177";
-import { i as _$$i } from "../vendor/753650";
+import { animate } from "../vendor/753650";
 import { yT } from "../vendor/807427";
 import { l as _$$l } from "../vendor/155802";
 import { rU as _$$rU } from "../vendor/47013";
@@ -1941,7 +1941,7 @@ function rG(e, r, n) {
       e.addValue(s, o);
       _$$k(willChange) && willChange.add(s);
     } else if (_$$S(a)) {
-      e.addValue(s, _$$O2(o, {
+      e.addValue(s, motionValue(o, {
         owner: e
       }));
       _$$k(willChange) && willChange.remove(s);
@@ -1951,7 +1951,7 @@ function rG(e, r, n) {
         r.hasAnimated || r.set(o);
       } else {
         let r = e.getStaticValue(s);
-        e.addValue(s, _$$O2(void 0 !== r ? r : o, {
+        e.addValue(s, motionValue(void 0 !== r ? r : o, {
           owner: e
         }));
       }
@@ -2183,7 +2183,7 @@ class rJ {
   getValue(e, r) {
     if (this.props.values && this.props.values[e]) return this.props.values[e];
     let n = this.values.get(e);
-    void 0 === n && void 0 !== r && (n = _$$O2(r, {
+    void 0 === n && void 0 !== r && (n = motionValue(r, {
       owner: this
     }), this.addValue(e, n));
     return n;
@@ -3066,7 +3066,7 @@ function nZ({
       this.pendingAnimation && (_$$eO.update(this.pendingAnimation), this.pendingAnimation = void 0);
       this.pendingAnimation = OH.update(() => {
         M.hasAnimatedSinceResize = !0;
-        this.currentAnimation = _$$i(0, nj, {
+        this.currentAnimation = animate(0, nj, {
           ...e,
           onUpdate: r => {
             var n;

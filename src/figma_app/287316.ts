@@ -19,7 +19,7 @@ import { GI, IZ, SK } from "../905/125333";
 import { closeUniversalInsertModal, setUniversalInsertModalOpen, updateSourceRect } from "../905/116101";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { Ii } from "../figma_app/644079";
-import { CB } from "../figma_app/442259";
+import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
 import { useUpdateSelectionProperty } from "../905/275640";
 import { useIsProgressBarHiddenOrLocked, useCurrentTool } from "../figma_app/722362";
@@ -1794,19 +1794,19 @@ export function $$eE0() {
     return "REACTING_OR_CHATTING" === t.type && !!t.imageUrl;
   });
   let Z = useCallback(e => {
-    if (q) CB.closeWheel();else {
+    if (q) emojiWheelManagerInstance.closeWheel();else {
       let {
         viewportX,
         viewportY
       } = X(e);
-      CB.handleShortcutPressWithType({
+      emojiWheelManagerInstance.handleShortcutPressWithType({
         viewportX,
         viewportY,
         source: "figma_mobile",
         openedViaHover: !1,
         wheelType: "STAMP"
       });
-      CB.handleShortcutRelease(viewportX, viewportY);
+      emojiWheelManagerInstance.handleShortcutRelease(viewportX, viewportY);
     }
   }, [q]);
   let Q = useCallback(e => {
@@ -1815,7 +1815,7 @@ export function $$eE0() {
         viewportX,
         viewportY
       } = X(e);
-      CB.updateEmojiWheelPosition(viewportX, viewportY);
+      emojiWheelManagerInstance.updateEmojiWheelPosition(viewportX, viewportY);
     }
   }, [q]);
   let ee = wi();
@@ -1852,7 +1852,7 @@ export function $$eE0() {
       eb();
       (t = e === y && $$eo1(y) ? ei() : $$es3.get(e)) && $$el4(t);
     }, eE._native_toolbar_activate_overflowing_tool = (t, r) => {
-      switch (r.y = e(r.y), "INSERT" !== t && et && en(closeUniversalInsertModal()), "STAMP" !== t && q && CB.closeWheel(), t) {
+      switch (r.y = e(r.y), "INSERT" !== t && et && en(closeUniversalInsertModal()), "STAMP" !== t && q && emojiWheelManagerInstance.closeWheel(), t) {
         case "SHAPE":
         case "CONNECTOR":
           break;

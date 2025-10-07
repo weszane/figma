@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { LoadingRenderer } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { AY, QY, Fm, l5, bB, NJ, Oo, Tb, UU, hx, Mv } from "../figma_app/770088";
+import { markThreadAsRead, markCommentAsUnread, setActiveComment, activateCommentThreadInternal, deactivateActiveComment, addEmphasizedPin, removeEmphasizedPin, markAllCommentsAsRead, deactivateActiveComment, resolveCommentThread, deleteComment } from "../figma_app/770088";
 import { wrapWithTracking } from "../figma_app/831799";
 import { y as _$$y } from "../figma_app/705249";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
@@ -296,10 +296,10 @@ function ex(e) {
   let f = useCurrentFileKey();
   let _ = getUserId();
   let g = useCallback(() => {
-    commentReceipts && (isUnread ? h(AY({
+    commentReceipts && (isUnread ? h(markThreadAsRead({
       receiptsAPI: commentReceipts,
       thread
-    })) : h(QY({
+    })) : h(markCommentAsUnread({
       receiptsAPI: commentReceipts,
       comment: thread.comments[0]
     })));
@@ -672,7 +672,7 @@ let e0 = memo(function (e) {
       message: getI18nString("comments.unavailable_offline")
     })), !0), [_, v, o]);
     let L = useCallback(async () => {
-      if (!A() && (l.current = !0, o(Fm({
+      if (!A() && (l.current = !0, o(setActiveComment({
         threadId: m,
         source: void 0
       })), e.nodeId || e.stablePath)) {
@@ -718,7 +718,7 @@ let e0 = memo(function (e) {
         navigate: j,
         isOrphanedComment: w
       };
-      if (o(k ? l5(a) : bB({
+      if (o(k ? activateCommentThreadInternal(a) : deactivateActiveComment({
         ...a,
         receiptsAPI: P.commentReceipts
       })), !w && !b.disableZoomViewportOnCommentSelection) {
@@ -732,7 +732,7 @@ let e0 = memo(function (e) {
     }, [P.commentReceipts, b, f, o, t, w, k, j, F, A, e, h, x]);
     let H = useCallback(() => {
       c(!0);
-      o(NJ({
+      o(addEmphasizedPin({
         threadId: m
       }));
     }, [o, m]);
@@ -740,12 +740,12 @@ let e0 = memo(function (e) {
       requestAnimationFrame(() => {
         c(!1);
       });
-      o(Oo({
+      o(removeEmphasizedPin({
         threadId: m
       }));
     }, [o, m]);
     let q = useCallback(() => {
-      o(NJ({
+      o(addEmphasizedPin({
         threadId: m
       }));
     }, [o, m]);
@@ -757,7 +757,7 @@ let e0 = memo(function (e) {
       onCommentMouseEnter: q,
       onCommentMouseLeave: useCallback(() => {
         l.current = !1;
-        o(Oo({
+        o(removeEmphasizedPin({
           threadId: m
         }));
       }, [o, m]),
@@ -1195,7 +1195,7 @@ function tp() {
     }, "dev-mode-notification-title"), jsx(MenuItemComp, {
       onClick: () => {
         let e = s.commentReceipts;
-        e && r && c(Tb({
+        e && r && c(markAllCommentsAsRead({
           commentReceiptsAPI: e,
           canvasMentionReceiptsAPI: r
         }));
@@ -1220,7 +1220,7 @@ function tg(e) {
   return (useEffect(() => {
     if (d !== manager.isOpen) {
       if (r) return l("SELECT_COMMENT_SIDEBAR");
-      t(UU());
+      t(deactivateActiveComment());
     }
   }, [t, r, manager.isOpen, d, l]), e.hideSettingsDropdown) ? null : jsxs(MenuRootComp, {
     manager,
@@ -1294,7 +1294,7 @@ function tb({
   }, [t.sorts, t.filters, t.modes, t.activeSort, t.threadManager, t.activeMode, l]);
   let f = useLatestRef(manager.isOpen) ?? !1;
   useEffect(() => {
-    f !== manager.isOpen && n(UU());
+    f !== manager.isOpen && n(deactivateActiveComment());
   }, [n, manager.isOpen, f]);
   return jsxs(MenuRootComp, {
     manager,
@@ -1313,11 +1313,11 @@ function tb({
 function ty(e) {
   let t = useDispatch();
   let n = useCallback(() => {
-    t(UU());
+    t(deactivateActiveComment());
     e.threadManager.setQuery("");
   }, [t, e.threadManager]);
   let s = useCallback(n => {
-    t(UU());
+    t(deactivateActiveComment());
     e.threadManager.setQuery(n);
   }, [t, e.threadManager]);
   return jsx(Fragment, {
@@ -1439,7 +1439,7 @@ export function $$tT0(e) {
   }, [M, E]);
   let N = useCallback((e, n) => {
     let o = E.current.find(t => t.id === e);
-    o && t(hx({
+    o && t(resolveCommentThread({
       thread: o,
       resolved: n
     }));
@@ -1448,7 +1448,7 @@ export function $$tT0(e) {
   }, [E, t, activeFilters]);
   let S = useCallback(e => {
     assertNotNullish(e.comments[0], "thread.comments[0] is null");
-    t(Mv({
+    t(deleteComment({
       comment: e.comments[0]
     }));
   }, [t]);

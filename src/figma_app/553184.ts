@@ -1,12 +1,12 @@
 import { sendMetric } from '../905/485103'
 import { handleOOMError } from '../905/707384'
 
-let memoryPerformanceKeys = ['memory.fullscreen.', 'performance.fullscreen.']
+export let memoryPerformanceKeys = ['memory.fullscreen.', 'performance.fullscreen.']
 /**
  * Tracks whether error handling is enabled.
  * @original s
  */
-let errorHandlingEnabled = true
+export let errorHandlingEnabled = true
 
 /**
  * Creates a throttled callback that only executes the handler if the specified interval has passed.
@@ -15,7 +15,7 @@ let errorHandlingEnabled = true
  * @returns Throttled function.
  * @original o
  */
-function createThrottledCallback(intervalSeconds: number, handler: () => void): () => void {
+export function createThrottledCallback(intervalSeconds: number, handler: () => void): () => void {
   let lastCalled = -Infinity
   return () => {
     const now = Date.now() / 1e3
@@ -48,7 +48,7 @@ window.addEventListener('error', (event) => {
  * Throttled callback for context lost events.
  * @original $$l8
  */
-const contextLostHandler = createThrottledCallback(30, () => {
+export const contextLostHandler = createThrottledCallback(30, () => {
   sendMetric('context_lost')
 })
 
@@ -56,7 +56,7 @@ const contextLostHandler = createThrottledCallback(30, () => {
  * Throttled callback for context restored events.
  * @original $$d10
  */
-const contextRestoredHandler = createThrottledCallback(30, () => {
+export const contextRestoredHandler = createThrottledCallback(30, () => {
   sendMetric('context_restored')
 })
 
@@ -143,7 +143,7 @@ export function handleOutOfMemoryError(error: any): any {
 }
 
 // Exported constants with refactored names
-export const YJ = sendConsecutiveFlushes
+export const $G = sendConsecutiveFlushes
 export const Ad = memoryPerformanceKeys
 export const B3 = sendReconnectingBanner
 export const Hh = sendUnsavedChangesBell

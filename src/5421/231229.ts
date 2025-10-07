@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { ScreenReaderOnly } from "../905/172252";
 import { useTheme } from "../905/289770";
 import { P } from "../vendor/348225";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { getI18nString } from "../905/303541";
 let c = {
   ENTER_TO_LOOP: 600,
@@ -505,7 +505,7 @@ function y({
       children: c
     }), jsx("div", {
       "aria-hidden": "true",
-      children: jsx(_$$N, {
+      children: jsx(AnimatePresence, {
         mode: "wait",
         children: jsxs(P.span, {
           initial: {

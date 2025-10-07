@@ -18,7 +18,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
 import { useFocusArea } from "../figma_app/290668";
 import { LR, gR } from "../figma_app/120210";
-import { XM } from "../905/486443";
+import { useIsVotingSessionJoined } from "../905/486443";
 import { useIsProgressBarHiddenOrLocked, useCurrentTool } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
@@ -55,7 +55,7 @@ import { b4 } from "../figma_app/106207";
 import { ITemplateType } from "../905/862883";
 import { RJ } from "../figma_app/869006";
 import { _ as _$$_ } from "../905/410717";
-import { n3, Tc } from "../905/797478";
+import { isNodeContainedIn, getElementByDataTarget } from "../905/797478";
 import { KindEnum } from "../905/129884";
 import { N as _$$N } from "../figma_app/57000";
 import { hx, aQ, YB, lq, cG, wn } from "../figma_app/630194";
@@ -63,13 +63,13 @@ import { I as _$$I, J as _$$J } from "../figma_app/552397";
 import { wB, jN, rX, UJ, OS, ej as _$$ej, Uf } from "../figma_app/801324";
 import { Z as _$$Z } from "../figma_app/900567";
 import { Lt, sD, fp as _$$fp, qG, Xn, wz, EY, cd, Mg, Bp, eB as _$$eB, gz, Sk, qf, z6, ac, r6, dk, tN, ZS, ph, s$, fT, cz, kl, Q$, o9, ES, Uq, iU, wF, zb, AT, HG, E$, Qs, i0, OA, z as _$$z2 } from "../figma_app/731560";
-import { kf } from "../figma_app/391056";
+import { IconInline } from "../figma_app/391056";
 import { A as _$$A } from "../svg/897148";
 import { A as _$$A2 } from "../svg/366068";
 import { styleBuilderInstance } from "../905/941192";
 import { setupCursorChatDisabledCheck } from "../figma_app/403368";
 import { N as _$$N2, Q as _$$Q2 } from "../figma_app/287368";
-import { uk, VQ, fn } from "../figma_app/580087";
+import { CommentsToolShortcutButton, EmojiShortcutButton, ChatShortcutButton } from "../figma_app/580087";
 import { oh, c5, Yg as _$$Yg } from "../905/526509";
 import { nS, pw, Wp } from "../figma_app/274383";
 import { q as _$$q } from "../9410/861323";
@@ -296,7 +296,7 @@ let eS = memo(function (e) {
     let e = dltRef.current;
     if (!e) return;
     let i = e => {
-      n3(e.target, Tc(eg)) || s(!0);
+      isNodeContainedIn(e.target, getElementByDataTarget(eg)) || s(!0);
     };
     e.addEventListener("click", i);
     return () => e.removeEventListener("click", i);
@@ -306,10 +306,10 @@ let eS = memo(function (e) {
     text: getI18nString("whiteboard.delightful_toolbar.view_only")
   }), []);
   let l = useMemo(() => renderI18nText("whiteboard.delightful_toolbar.version_history_banner_text", {
-    selectIcon: jsx(kf, {
+    selectIcon: jsx(IconInline, {
       icon: _$$A2
     }),
-    handIcon: jsx(kf, {
+    handIcon: jsx(IconInline, {
       icon: _$$A
     })
   }), []);
@@ -331,7 +331,7 @@ let eA = memo(function (e) {
     let e = dltRef.current;
     if (!e || o) return;
     let i = e => {
-      n3(e.target, Tc(eg)) || s(!0);
+      isNodeContainedIn(e.target, getElementByDataTarget(eg)) || s(!0);
     };
     e.addEventListener("click", i);
     return () => e.removeEventListener("click", i);
@@ -371,54 +371,54 @@ let eA = memo(function (e) {
   let p = setupCursorChatDisabledCheck();
   let h = !!selectCurrentFile()?.org?.figjamDisabledAt;
   let m = useMemo(() => p && h ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_figjam_disabled_by_org_no_chat", {
-    commentKey: jsx(uk, {
+    commentKey: jsx(CommentsToolShortcutButton, {
       isPressed: d
     }),
-    emoteKey: jsx(VQ, {
+    emoteKey: jsx(EmojiShortcutButton, {
       isPressed: c
     })
   }) : p ? o ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_no_chat_in_exp", {
-    commentKey: jsx(uk, {
+    commentKey: jsx(CommentsToolShortcutButton, {
       isPressed: d
     }),
-    emoteKey: jsx(VQ, {
+    emoteKey: jsx(EmojiShortcutButton, {
       isPressed: c
     })
   }) : renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_no_chat", {
-    commentKey: jsx(uk, {
+    commentKey: jsx(CommentsToolShortcutButton, {
       isPressed: d
     }),
-    emoteKey: jsx(VQ, {
+    emoteKey: jsx(EmojiShortcutButton, {
       isPressed: c
     })
   }) : h ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_figjam_disabled_by_org", {
-    commentKey: jsx(uk, {
+    commentKey: jsx(CommentsToolShortcutButton, {
       isPressed: d
     }),
-    chatKey: jsx(fn, {
+    chatKey: jsx(ChatShortcutButton, {
       isPressed: c
     }),
-    emoteKey: jsx(VQ, {
+    emoteKey: jsx(EmojiShortcutButton, {
       isPressed: u
     })
   }) : o ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_in_exp", {
-    commentKey: jsx(uk, {
+    commentKey: jsx(CommentsToolShortcutButton, {
       isPressed: d
     }),
-    chatKey: jsx(fn, {
+    chatKey: jsx(ChatShortcutButton, {
       isPressed: c
     }),
-    emoteKey: jsx(VQ, {
+    emoteKey: jsx(EmojiShortcutButton, {
       isPressed: u
     })
   }) : renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text", {
-    commentKey: jsx(uk, {
+    commentKey: jsx(CommentsToolShortcutButton, {
       isPressed: d
     }),
-    chatKey: jsx(fn, {
+    chatKey: jsx(ChatShortcutButton, {
       isPressed: c
     }),
-    emoteKey: jsx(VQ, {
+    emoteKey: jsx(EmojiShortcutButton, {
       isPressed: u
     })
   }), [p, h, d, c, u, o]);
@@ -868,7 +868,7 @@ function th({
   });
 }
 let tg = memo(function () {
-  let e = XM();
+  let e = useIsVotingSessionJoined();
   let t = useAtomWithSubscription(c5);
   let i = Xr(n6);
   let a = f7();
@@ -970,7 +970,7 @@ let tw = memo(function () {
   let I = useRef(null);
   let L = wY(I);
   let [k, F] = useAtomValueAndSetter(c5);
-  let H = XM();
+  let H = useIsVotingSessionJoined();
   let [B, V] = useAtomValueAndSetter(gT);
   let [W, z] = useAtomValueAndSetter(oh);
   _$$m(gT);

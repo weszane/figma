@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { noop } from 'lodash-es';
 import { useLatestRef } from "../figma_app/922077";
-import { At, vV, CX, UU, Z5 } from "../figma_app/770088";
+import { activateCommentThread, setNewAnchorPosition, activateNewComment, deactivateActiveComment, setNewCommentMessage } from "../figma_app/770088";
 import { I_ } from "../905/234821";
 import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../905/104740";
@@ -22,7 +22,7 @@ export function $$E1(e, t, r, a, o) {
   useEffect(() => {
     h && (h._select_comment = e => {
       let n = t.find(t => t.id === e);
-      n && m(At({
+      n && m(activateCommentThread({
         receiptsAPI: E.commentReceipts,
         thread: n,
         viewport: r,
@@ -35,22 +35,22 @@ export function $$E1(e, t, r, a, o) {
   useEffect(() => {
     h && (h._add_draft_comment = e => {
       let t = applyOffsetToViewport(r.getViewportInfo(), e);
-      m(vV({
+      m(setNewAnchorPosition({
         anchorPosition: t
       }));
-      m(CX());
+      m(activateNewComment());
     });
   }, [h, m, r]);
   useEffect(() => {
     h && (h._deselect_comment = e => {
-      m(UU());
+      m(deactivateActiveComment());
     }, h._remove_draft_comment = () => {
-      e === NEW_COMMENT_ID && m(UU());
+      e === NEW_COMMENT_ID && m(deactivateActiveComment());
     });
   }, [h, e, m]);
   useEffect(() => {
     h && (h._submit_comment_draft = e => {
-      m(Z5({
+      m(setNewCommentMessage({
         messageMeta: e
       }));
       o();

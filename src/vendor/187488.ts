@@ -1,5 +1,5 @@
 import { K } from "../vendor/708026";
-import { O as _$$O } from "../vendor/122594";
+import { motionValue } from "../vendor/122594";
 import { f } from "../vendor/615177";
 import { J } from "../vendor/38229";
 import { y as _$$y } from "../vendor/605352";
@@ -11,7 +11,7 @@ let s = e => /^0[^.\s]+$/.test(e);
 let v = [...T, _$$y, f];
 let y = e => v.find(_$$w(e));
 function O(e, r, n) {
-  e.hasValue(r) ? e.getValue(r).set(n) : e.addValue(r, _$$O(n));
+  e.hasValue(r) ? e.getValue(r).set(n) : e.addValue(r, motionValue(n));
 }
 export function $$x2(e, r) {
   let n = _$$K(e, r);
@@ -52,7 +52,7 @@ export function $$_0(e, r, n) {
     let O = null;
     Array.isArray(b) && (O = b[0]);
     null === O && (O = null !== (p = null !== (o = n[m]) && void 0 !== o ? o : e.readValue(m)) && void 0 !== p ? p : r[m]);
-    null != O && ("string" == typeof O && (i(O) || s(O)) ? O = parseFloat(O) : !y(O) && f.test(b) && (O = J(m, b)), e.addValue(m, _$$O(O, {
+    null != O && ("string" == typeof O && (i(O) || s(O)) ? O = parseFloat(O) : !y(O) && f.test(b) && (O = J(m, b)), e.addValue(m, motionValue(O, {
       owner: e
     })), void 0 === n[m] && (n[m] = O), null !== O && e.setBaseTarget(m, O));
   }

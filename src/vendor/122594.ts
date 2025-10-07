@@ -103,7 +103,7 @@ class d {
     this.stopPassiveEffect && this.stopPassiveEffect();
   }
 }
-export function $$p0(e, r) {
+export function motionValue(e, r) {
   return new d(e, r);
 }
-export const O = $$p0;
+export const O = motionValue;

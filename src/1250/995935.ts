@@ -37,7 +37,7 @@ import { useIsCanvasEditDisabled } from '../905/595131';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
-import { A as _$$A2 } from '../905/638715';
+import { AlertState } from '../905/638715';
 import { getResourceDataOrFallback } from '../905/663269';
 import { BannerButton } from '../905/692618';
 import { getSingletonSceneGraph } from '../905/700578';
@@ -1356,13 +1356,13 @@ let t3 = {
         minutes: l()
       }),
       description: o
-    } : status === _$$A2.Ongoing ? d = {
+    } : status === AlertState.Ongoing ? d = {
       bannerType: x1.WARN,
       icon: _$$A6,
       dismissible: !1,
       mainText: getI18nString('downtime_banner.ongoing.scheduled_maintenance_in_progress_header'),
       description: s
-    } : status === _$$A2.Imminent && (d = {
+    } : status === AlertState.Imminent && (d = {
       bannerType: x1.WARN,
       icon: _$$A6,
       dismissible: !1,

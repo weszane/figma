@@ -15,7 +15,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
-import { N as _$$N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { analyticsEventManager } from "../905/449184";
 import { F as _$$F } from "../905/680873";
@@ -1825,7 +1825,7 @@ function t0({
                     }
                   },
                   animate: t ? "stop" : "play",
-                  children: jsx(_$$N, {
+                  children: jsx(AnimatePresence, {
                     mode: "wait",
                     children: t ? jsx(_$$P.div, {
                       className: "absolute",
@@ -1877,7 +1877,7 @@ function t0({
                       })
                     }, "arrow")
                   })
-                }), jsx(_$$N, {
+                }), jsx(AnimatePresence, {
                   children: t && jsx(_$$P.span, {
                     ...stylex.props(tz.stopButtonText),
                     initial: {
@@ -2938,7 +2938,7 @@ function rp({
       children: getI18nString("figmake.chat.reasoning")
     }), jsx("div", {
       className: "xb3r6kr",
-      children: jsxs(_$$N, {
+      children: jsxs(AnimatePresence, {
         mode: "wait",
         children: [!t && jsxs(_$$P.div, {
           initial: {
@@ -3911,7 +3911,7 @@ let rU = {
 function rG({
   visible: e
 }) {
-  return jsx(_$$N, {
+  return jsx(AnimatePresence, {
     mode: "wait",
     children: e && jsx(_$$P.div, {
       className: "x78zum5 x6s0dn4 x1v8gsql xmapbj6 x1i2kgm6 x1db2dqx",
@@ -3950,7 +3950,7 @@ function rH({
       className: "x10l6tqk x2rgi x131sewu x78zum5 xh8yej3 x13a6bvl",
       children: [jsx(rG, {
         visible: e.length > 0
-      }), jsx(_$$N, {
+      }), jsx(AnimatePresence, {
         mode: "wait",
         children: e.map((e, t) => jsx(IconButton, {
           "aria-label": e.name,
@@ -4062,7 +4062,7 @@ function rW() {
   });
 }
 function rV() {
-  return jsx(_$$N, {
+  return jsx(AnimatePresence, {
     children: jsxs(_$$P.div, {
       className: "x1n2onr6 xh8yej3 x5yr21d x1yjdb4r x78zum5 xdt5ytf x6s0dn4 xl56j7k",
       initial: {
@@ -4603,7 +4603,7 @@ function iv({
   onUndo: n,
   isEnhanced: i
 }) {
-  return getFeatureFlags().bake_enhance_prompt ? jsx(_$$N, {
+  return getFeatureFlags().bake_enhance_prompt ? jsx(AnimatePresence, {
     mode: "wait",
     children: i ? jsx(_$$P.div, {
       initial: {

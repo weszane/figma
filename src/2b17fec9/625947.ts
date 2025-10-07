@@ -103,7 +103,7 @@ import { Rectangle } from '../905/249071';
 import { A as _$$A2 } from '../905/251970';
 import { z as _$$z2 } from '../905/255946';
 import { E2, Hr } from '../905/257019';
-import { F as _$$F5 } from '../905/258517';
+import { fullscreenHandler } from '../905/258517';
 import { y as _$$y4 } from '../905/263077';
 import { HiddenLabel } from '../905/270045';
 import { H as _$$H6 } from '../905/270307';
@@ -150,7 +150,7 @@ import { AutoLayout } from '../905/470281';
 import { PluginImage } from '../905/480825';
 import { formatI18nMessage } from '../905/482208';
 import { u as _$$u3 } from '../905/486140';
-import { e2 as _$$e1 } from '../905/486443';
+import { useCanShowJoinConfirmation } from '../905/486443';
 import { E as _$$E } from '../905/486517';
 import { hm as _$$hm, Q0, SX } from '../905/487011';
 import { stripHtmlTags } from '../905/491152';
@@ -15578,7 +15578,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   if (!m || !isValidValue(m)) return null;
   let _ = isValidValue(m) ? m : [];
   let x = e => {
-    e && (f([e]), _$$F5.trackFromFullscreen('figjam_text_style_change', {
+    e && (f([e]), fullscreenHandler.trackFromFullscreen('figjam_text_style_change', {
       source: 'default',
       size: e,
       node_type: h && Object.keys(h).length === 1 && Object.keys(h).pop() || 'MIXED',
@@ -15594,7 +15594,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     if (!isNaN(t)) {
       let i = e.clamp(t);
       f([i]);
-      _$$F5.trackFromFullscreen('figjam_text_style_change', {
+      fullscreenHandler.trackFromFullscreen('figjam_text_style_change', {
         source: 'custom',
         size: i,
         node_type: h && Object.keys(h).length === 1 && Object.keys(h).pop() || 'MIXED',
@@ -23480,7 +23480,7 @@ function v_() {
   } = wW(e?.userId || null);
   return function () {
     let e = C3();
-    let t = _$$e1();
+    let t = useCanShowJoinConfirmation();
     let {
       loading
     } = wW(e?.userId || null);

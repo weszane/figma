@@ -16,7 +16,7 @@ import { fK } from "../figma_app/300024";
 import { uW, Qq, nK, TC, tp } from "../figma_app/731560";
 import { s as _$$s } from "../2b17fec9/641273";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { CB } from "../figma_app/442259";
+import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { D1 } from "../9410/67768";
 import { Bu } from "../figma_app/604494";
 import { V } from "../9410/365876";
@@ -120,7 +120,7 @@ let N = memo(function () {
     isSelected: t,
     className: TC,
     onClick: () => {
-      a && CB.closeWheel();
+      a && emojiWheelManagerInstance.closeWheel();
       e();
     },
     "data-tooltip-type": KindEnum.LOOKUP,

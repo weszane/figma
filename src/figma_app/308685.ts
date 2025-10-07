@@ -41,9 +41,10 @@ export const startChattingAction = createActionCreator('MULTIPLAYER_EMOJI_START_
  * Optimist thunk to start chatting, set tool if needed, and track event.
  * @see $$_0
  */
-export const startChattingThunk = createOptimistThunk(async ({ dispatch }, payload: { source?: string }) => {
-  const state = multiplayerSessionManager.mirror?.appModel // Assumed context for currentTool
-  const currentTool = state?.currentTool
+export const startChattingThunk = createOptimistThunk(async ({ dispatch, getState }, payload) => {
+  const state = getState() as AppState
+  const appModel = state.mirror?.appModel // Assumed context for currentTool
+  const currentTool = appModel?.currentTool
   const isDefaultTool = ![DesignGraphElements.HAND, DesignGraphElements.SELECT, DesignGraphElements.HAND_SELECT].includes(currentTool)
   if (isDefaultTool) {
     Fullscreen?.triggerAction('set-tool-default', null)
@@ -89,8 +90,8 @@ export const toggleEmojiWheelAction = createActionCreator('MULTIPLAYER_EMOJI_TOG
  * Optimist thunk to track toggling emoji wheel and dispatch action.
  * @see $$E7
  */
-export const toggleEmojiWheelThunk = createOptimistThunk(({ dispatch }, payload: { wheelType: string, source?: string }) => {
-  const state = multiplayerSessionManager.mirror?.appModel // Assumed context for openFile
+export const toggleEmojiWheelThunk = createOptimistThunk(({ dispatch, getState }, payload) => {
+  const state = getState() as AppState
   trackFileEvent('Toggled emoji wheel', state?.openFile?.key, state, {
     wheelType: payload.wheelType,
     ...(payload.source && { source: payload.source }),

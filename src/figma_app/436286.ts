@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeTrackingEnum } from "../figma_app/741237";
 import { useSelectionPropertyValue } from "../905/275640";
-import { F } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 let $$d3 = ["NORMAL", "SELECT_DIVIDER", "DARKEN", "MULTIPLY", "LINEAR_BURN", "COLOR_BURN", "SELECT_DIVIDER", "LIGHTEN", "SCREEN", "LINEAR_DODGE", "COLOR_DODGE", "SELECT_DIVIDER", "OVERLAY", "SOFT_LIGHT", "HARD_LIGHT", "SELECT_DIVIDER", "DIFFERENCE", "EXCLUSION", "SELECT_DIVIDER", "HUE", "SATURATION", "COLOR", "LUMINOSITY"];
 let $$c1 = ["PASS_THROUGH"].concat($$d3);
@@ -13,7 +13,7 @@ export function $$u0(e) {
 }
 export function $$p4() {
   return [useSelectionPropertyValue("blendMode"), useCallback((e, t = yesNoTrackingEnum.YES) => {
-    normalizeTrackingEnum(t) && F.trackFromFullscreen("editor-blend-mode-change", {
+    normalizeTrackingEnum(t) && fullscreenHandler.trackFromFullscreen("editor-blend-mode-change", {
       blendMode: e
     });
     fullscreenValue.updateSelectionProperties({

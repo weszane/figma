@@ -3436,6 +3436,10 @@ export interface AllUser {
 }
 
 export interface MultiplayerEmoji {
+  viewportX: number
+  viewportY: number
+  openedViaHover: boolean
+  isChatting: boolean
   imageUrl: any
   type: string
   wheelType: string

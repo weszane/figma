@@ -13,7 +13,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker } from "../905/216495";
 import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
-import { F } from "../905/258517";
+import { fullscreenHandler } from "../905/258517";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { ColorInput } from "../figma_app/178475";
@@ -93,7 +93,7 @@ export function $$M0({
     clearVariableConsumption
   } = _$$O(P, VariableResolvedDataType.FLOAT);
   let en = useCallback((e, r) => {
-    r && (F.trackFromFullscreen("Autolayout Spacing Changed", {
+    r && (fullscreenHandler.trackFromFullscreen("Autolayout Spacing Changed", {
       source: t,
       input: W.current ? "scrub" : "textfield",
       spacing: isAutoMarker(e) ? "auto" : e,

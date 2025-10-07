@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { BrowserInfo } from "../figma_app/778880";
-import { Tc } from "../905/797478";
-import { CB } from "../figma_app/442259";
+import { getElementByDataTarget } from "../905/797478";
+import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
 import { NZ, HY, H1 } from "../figma_app/300024";
 export function $$c3() {
-  return Tc(NZ);
+  return getElementByDataTarget(NZ);
 }
 export function $$u0() {
-  return Tc(HY);
+  return getElementByDataTarget(HY);
 }
 export function $$p1({
   source: e,
@@ -23,14 +23,14 @@ export function $$p1({
     let n = a.getBoundingClientRect();
     let i = n.x + n.width / 2;
     let s = n.y - (_$$l + 2) - r;
-    CB.handleShortcutPressWithType({
+    emojiWheelManagerInstance.handleShortcutPressWithType({
       viewportX: i,
       viewportY: s,
       source: e,
       openedViaHover: t,
       wheelType: "STAMP"
     });
-    CB.handleShortcutRelease(i, s);
+    emojiWheelManagerInstance.handleShortcutRelease(i, s);
   }
 }
 export function $$_5({

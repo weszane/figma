@@ -277,7 +277,7 @@ import { Tj } from '../figma_app/342207';
 import { p as _$$p2 } from '../figma_app/353099';
 import { useMobileGestures } from '../figma_app/358450';
 import { nl as _$$nl } from '../figma_app/359943';
-import { p as _$$p } from '../figma_app/372802';
+import { ViewportContainer } from '../figma_app/372802';
 import { G as _$$G5 } from '../figma_app/373780';
 import { isDescendant, traverseChildren } from '../figma_app/387100';
 import { av as _$$av, dd as _$$dd, dg as _$$dg, i7 as _$$i, il as _$$il, JT as _$$JT, lX as _$$lX, m7 as _$$m2, DC, fx, Gj, h5, PV, Rz, U_, Yu, ZE, Zz } from '../figma_app/407414';
@@ -809,7 +809,7 @@ function ey({
   }, [u]);
   return jsx(CuratorPortal, {
     dataFullscreenIntercept: !1,
-    children: jsx(_$$p, {
+    children: jsx(ViewportContainer, {
       forceNoScroll: !0,
       children: jsx('div', {
         ref: d,

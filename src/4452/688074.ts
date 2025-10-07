@@ -6,7 +6,7 @@ import { IconButton } from "../905/443068";
 import { DialogHiddenTitle } from "../figma_app/272243";
 import { A } from "../905/251970";
 import c from "classnames";
-import { N } from "../vendor/930821";
+import { AnimatePresence } from "../vendor/930821";
 import { xQ } from "../vendor/222851";
 import { d as _$$d } from "../vendor/456530";
 import { P } from "../vendor/348225";
@@ -42,7 +42,7 @@ export let $$I0 = {
     }), [e.onClose, t]);
     return jsx(v.Provider, {
       value: a,
-      children: jsx(N, {
+      children: jsx(AnimatePresence, {
         initial: !1,
         children: e.open ? jsx(Fragment, {
           children: e.children

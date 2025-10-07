@@ -491,7 +491,7 @@ import { P as _$$P6 } from '../vendor/348225';
 import s, { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'use-debounce';
 import xh from '../vendor/907065';
-import { N as _$$N3 } from '../vendor/930821';
+import { AnimatePresence } from '../vendor/930821';
 import { createPortal } from 'react-dom';
 import { z as _$$z5 } from '../vendor/999105';
 let l;
@@ -10903,7 +10903,7 @@ function ux({
     setRefValue(l, t);
     r(e === 'visible' ? t : null);
   }, [r, e]);
-  return jsx(_$$N3, {
+  return jsx(AnimatePresence, {
     children: jsx(_$$P6.div, {
       variants: {
         fullyHidden: {

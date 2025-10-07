@@ -15,7 +15,7 @@ import { diffSets } from "../905/760682";
 import { logError, logInfo } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
 import { sendWithRetry } from "../905/910117";
-import { pI } from "../figma_app/770088";
+import { clearPendingUuid } from "../figma_app/770088";
 import { pf } from "../905/201151";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { createAttachmentsLookup, convertToFileComment } from "../905/901964";
@@ -601,7 +601,7 @@ export function $$H0(e) {
   }, [D, M]);
   useMemo(() => {
     "loaded" === z.status && z.data?.file?.comments?.forEach(e => {
-      e.id in U ? (g.current[e.id] = e, e.id = U[e.id]) : e.uuid && e.uuid in U && g.current[e.uuid] && g.current[e.uuid] !== e && (H(pI({
+      e.id in U ? (g.current[e.id] = e, e.id = U[e.id]) : e.uuid && e.uuid in U && g.current[e.uuid] && g.current[e.uuid] !== e && (H(clearPendingUuid({
         commentUuid: e.uuid
       })), delete g.current[e.uuid]);
     });
