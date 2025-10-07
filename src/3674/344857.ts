@@ -79,7 +79,7 @@ import eU from "../vendor/77708";
 import { v4, QN, AC, Pt } from "../figma_app/655139";
 import { fk, B7, Qm, g6, vI, $R, yP, p2 as _$$p2, cZ as _$$cZ, Vx } from "../figma_app/883490";
 import { gP, Ck, $L, W7, F9, yV, jt, lK as _$$lK, u9 as _$$u2, Fr, EN, Tk, Qz, tr as _$$tr, B5 } from "../figma_app/655717";
-import { $h, sQ as _$$sQ } from "../905/191741";
+import { useDevModeValueAndSetter, isCodeMode } from "../905/191741";
 import { applyScaleToValue, isCodegenSupportedForLanguage, getMeasurementUnit, getLanguageUnitLabel, useUpdateCodeExtensionPreferences, getCodeExtensionPreferences, getUnitForLanguage, getScaleFactor, getScaledValueWithUnit, useScaleFactorCallback } from "../figma_app/120227";
 import { KindEnum } from "../905/129884";
 import { Cj, jY, Tv as _$$Tv } from "../figma_app/151869";
@@ -242,7 +242,7 @@ import { K as _$$K3 } from "../905/799615";
 import { handleUrlAction } from "../905/280005";
 import { v as _$$v } from "../figma_app/258006";
 import { dI as _$$dI } from "../figma_app/204145";
-import { lW as _$$lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 import { getOpenExternalPluginIds, isAllowedUploadPluginId, isAllowedUpload } from "../figma_app/455620";
 import { B as _$$B3 } from "../figma_app/539422";
 import { waitForAnimationFrame } from "../905/236856";
@@ -1487,7 +1487,7 @@ function tN() {
 function tk() {
   let e = Cj("box-sizing: border-box");
   let t = v4();
-  let [n] = $h();
+  let [n] = useDevModeValueAndSetter();
   return ts() || t.id !== _$$uz || "code" !== n ? null : jsx(ButtonPrimitive, {
     className: "box_model--borderBoxMessage--2jJc- text--fontPos11--2LvXf text--_fontBase--QdLsd",
     onClick: e,
@@ -4948,7 +4948,7 @@ function o8({
     navigateToStateGroupIfVariant: !t.isVariant
   });
   let v = useCallback(() => {
-    c(_$$lW({
+    c(copyTextThunk({
       stringToCopy: t.linkUrl
     }));
     x("Dev Handoff Related Links Copy Hyperlink", {
@@ -11332,7 +11332,7 @@ function pj(e) {
   let l = _$$uQ();
   let d = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "SECTION", l);
   let c = NM();
-  let u = _$$sQ();
+  let u = isCodeMode();
   let p = useDropdownState();
   let h = useRef(null);
   let f = useSceneGraphSelector();
@@ -13022,7 +13022,7 @@ function fh() {
     displayText: getI18nString("dev_handoff.workflows.focus_view.copy_link"),
     recordingKey: "dev_handoff.focus.copy_link",
     callback: () => {
-      e(_$$lW({
+      e(copyTextThunk({
         stringToCopy: buildFileUrl({
           file: r,
           nodeId: d,

@@ -48,7 +48,7 @@ import { w as _$$w } from "../905/893785";
 import { J as _$$J3 } from "../905/296347";
 import { h as _$$h2 } from "../905/214561";
 import { W as _$$W } from "../905/526272";
-import { lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 import { hideModal } from "../905/156213";
 import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
@@ -358,7 +358,7 @@ function ep({
   }) : jsx(_$$h, {
     holdTimeInMs: 5e3,
     onMouseHold: async () => {
-      p(lW({
+      p(copyTextThunk({
         stringToCopy: JSON.stringify({
           figFileKey: e.deps.figFile?.key,
           existingHubFileId: existingHubFile?.id,

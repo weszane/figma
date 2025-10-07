@@ -26,7 +26,7 @@ import { c as _$$c2, P as _$$P } from "../905/200950";
 import { zt, YT, Oz } from "../figma_app/84580";
 import { eF } from "../figma_app/394327";
 import { wG, J2 } from "../905/331989";
-import { B9 } from "../905/782020";
+import { getPathLeaf } from "../905/782020";
 import { DraggableModalManager } from "../905/748636";
 import { X } from "../905/55424";
 import { IQ, EQ, Y_, Q6, dX, yZ, er, Xx, aA } from "../figma_app/632975";
@@ -318,7 +318,7 @@ function W({
   disableHover: i
 }) {
   let a = _$$u(e);
-  let s = a ? B9(a.name) : getI18nString("proto.expression_builder_entry.missing");
+  let s = a ? getPathLeaf(a.name) : getI18nString("proto.expression_builder_entry.missing");
   let o = G6(a?.variableSetId);
   let l = o && t ? o.modes.find(e => e.id === t) : null;
   let d = l?.name;

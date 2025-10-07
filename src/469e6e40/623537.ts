@@ -101,7 +101,7 @@ import { v as _$$v } from '../4452/562448';
 import { VU, zx } from '../4452/650793';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { EKN, fQh, swf } from '../figma_app/6204';
-import { II } from '../figma_app/11182';
+import { copyEmailsThunk } from '../figma_app/11182';
 import { getPermissionLevelNameCapitalized } from '../figma_app/12796';
 import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { fAD, lRB } from '../figma_app/27776';
@@ -2460,7 +2460,7 @@ function a9(e, t, a) {
   });
 }
 function ne(e, t) {
-  t(II({
+  t(copyEmailsThunk({
     emailList: e
   }));
 }

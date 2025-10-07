@@ -9,7 +9,7 @@ import { AuthFlowStep } from "../905/862321";
 import { BigTextInputForwardRef, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { S } from "../figma_app/11182";
+import { copyLinkThunk } from "../figma_app/11182";
 import { showModalHandler, hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { liveStoreInstance } from "../905/713695";
@@ -33,7 +33,7 @@ function I({
   let C = useSelector(e => !e.user);
   let [I, T] = useState(!!n);
   let M = () => {
-    I || (T(!0), s(S({
+    I || (T(!0), s(copyLinkThunk({
       url: y
     })));
   };

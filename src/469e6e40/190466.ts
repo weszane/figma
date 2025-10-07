@@ -49,7 +49,7 @@ import { sendRoleInvites } from "../905/351260";
 import { AccessLevelEnum } from "../905/557142";
 import { v as _$$v } from "../figma_app/899624";
 import { tb } from "../905/848667";
-import { II } from "../figma_app/11182";
+import { copyEmailsThunk } from "../figma_app/11182";
 import { selectViewAction } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { useSeatManagementWidgetProExperiment, usePlanUserCreationContextExperiment } from "../figma_app/297957";
@@ -245,7 +245,7 @@ function eO(e) {
       labelSize: _$$H.HEADING_MEDIUM,
       fallbackSvg: _$$A2,
       onClick: t => {
-        e.avatarEntity.email && (t.stopPropagation(), a(II({
+        e.avatarEntity.email && (t.stopPropagation(), a(copyEmailsThunk({
           emailList: [e.avatarEntity.email]
         })));
       },

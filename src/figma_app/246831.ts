@@ -8,7 +8,7 @@ import { Button } from "../905/521428";
 import { DialogTriggerButton } from "../905/976845";
 import { IconButton } from "../905/443068";
 import { LoadingSpinner } from "../905/443820";
-import { F as _$$F } from "../905/634016";
+import { ComboboxPrimitive } from "../905/634016";
 import { D as _$$D } from "../905/555681";
 import { l as _$$l } from "../905/509505";
 import { E as _$$E } from "../905/375716";
@@ -175,7 +175,7 @@ let eD = memo(function ({
       eventListeners: ["onMouseDown", "onPointerDown"],
       children: jsxs("div", {
         className: "x1jghuyi x78zum5 xc8icb0 x1n2onr6 xh8yej3 x1lg6u6 xwx8zwa",
-        children: [jsxs(_$$F.Option, {
+        children: [jsxs(ComboboxPrimitive.Option, {
           className: "x6s0dn4 x9f619 x78zum5 x10w6t97 xb3r6kr xt970qd xp48ta0 xwn43p0 xuxw1ft xh8yej3 xexmubx x18bfitd",
           ref: v,
           value: e,
@@ -403,7 +403,7 @@ export function $$eF1({
   let J = useMemo(() => items.some(e => "STYLES_ROW" === e.type), [items]);
   let Z = !K && !J;
   let er = R && !K && !J;
-  let en = _$$F.useCombobox({
+  let en = ComboboxPrimitive.useCombobox({
     expanded: !0,
     onSelect: e => {
       e && (r(e, !0), eo());
@@ -605,7 +605,7 @@ export function $$eB3({
     width: m || N2,
     children: ek
   }, h ? "list" : "grid");
-  return getFeatureFlags().fpl_style_picker_combobox ? jsx(_$$F.List, {
+  return getFeatureFlags().fpl_style_picker_combobox ? jsx(ComboboxPrimitive.List, {
     ...l,
     children: g
   }) : g;

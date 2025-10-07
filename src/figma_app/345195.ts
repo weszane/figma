@@ -1,169 +1,282 @@
-import { unstable_batchedUpdates } from "react-dom";
-import { EventEmitter } from "../905/690073";
-import { variablesMirrorManager } from "../figma_app/763686";
-import { defaultSessionLocalIDString } from "../905/871411";
-export let $$n0;
-let l = null;
-export function $$d3(e) {
-  l = e;
+import { unstable_batchedUpdates } from "react-dom"
+import { EventEmitter } from "../905/690073"
+import { defaultSessionLocalIDString } from "../905/871411"
+import { variablesMirrorManager } from "../figma_app/763686"
+
+/**
+ * Type definitions for callback handlers.
+ */
+
+type ExplicitModeChangeHandler = (payload: { setDeleted?: any, deleted?: any[], added?: any }) => void
+/**
+ * Internal handler references.
+ */
+let localExplicitModeChangeHandler: ExplicitModeChangeHandler | null = null
+let subscribedExplicitModeChangeHandler: ExplicitModeChangeHandler | null = null
+let localVariableHandler: ExplicitModeChangeHandler | null = null
+let localOverrideHandler: ExplicitModeChangeHandler | null = null
+let subscribedOverrideHandler: ExplicitModeChangeHandler | null = null
+let explicitModeHandler: ExplicitModeChangeHandler | null = null
+
+/**
+ * Event emitters for variable resolved values and explicit mode changes.
+ */
+const variableResolvedValueEmitter = new EventEmitter("VariableMirrorVariableResolvedValueEmitter")
+const explicitModeEmitter = new EventEmitter("VariableMirrorExplicitModeEmitter")
+
+/**
+ * Register a handler for local variable set updates.
+ * @param handler - Callback to handle updates.
+ * @returns Unsubscribe function.
+ * (original: $$d3)
+ */
+export function registerLocalExplicitModeChangeHandler(handler: ExplicitModeChangeHandler): (() => void) {
+  localExplicitModeChangeHandler = handler
   return () => {
-    l = null;
-  };
+    localExplicitModeChangeHandler = null
+  }
 }
-let c = null;
-export function $$u4(e) {
-  c = e;
+
+/**
+ * Register a handler for subscribed variable set updates.
+ * @param handler - Callback to handle updates.
+ * @returns Unsubscribe function.
+ * (original: $$u4)
+ */
+export function registerSubscribedExplicitModeChangeHandler(handler: ExplicitModeChangeHandler): (() => void) {
+  subscribedExplicitModeChangeHandler = handler
   return () => {
-    c = null;
-  };
+    subscribedExplicitModeChangeHandler = null
+  }
 }
-let p = null;
-export function $$_5(e) {
-  p = e;
+
+/**
+ * Register a handler for local variable updates.
+ * @param handler - Callback to handle updates.
+ * @returns Unsubscribe function.
+ * (original: $$_5)
+ */
+export function registerLocalVariableHandler(handler: ExplicitModeChangeHandler): (() => void) {
+  localVariableHandler = handler
   return () => {
-    p = null;
-  };
+    localVariableHandler = null
+  }
 }
-let h = null;
-export function $$m9(e) {
-  h = e;
+
+/**
+ * Register a handler for local variable overrides.
+ * @param handler - Callback to handle overrides.
+ * @returns Unsubscribe function.
+ * (original: $$m9)
+ */
+export function registerLocalOverrideHandler(handler: ExplicitModeChangeHandler): (() => void) {
+  localOverrideHandler = handler
   return () => {
-    h = null;
-  };
+    localOverrideHandler = null
+  }
 }
-let g = null;
-export function $$f6(e) {
-  g = e;
+
+/**
+ * Register a handler for subscribed variable overrides.
+ * @param handler - Callback to handle overrides.
+ * @returns Unsubscribe function.
+ * (original: $$f6)
+ */
+export function registerSubscribedOverrideHandler(handler: ExplicitModeChangeHandler): (() => void) {
+  subscribedOverrideHandler = handler
   return () => {
-    g = null;
-  };
+    subscribedOverrideHandler = null
+  }
 }
-let E = null;
-export function $$y7(e) {
-  E = e;
+
+/**
+ * Register a handler for explicit mode changes.
+ * @param handler - Callback to handle explicit mode changes.
+ * @returns Unsubscribe function.
+ * (original: $$y7)
+ */
+export function registerExplicitModeHandler(handler: ExplicitModeChangeHandler): (() => void) {
+  explicitModeHandler = handler
   return () => {
-    E = null;
-  };
+    explicitModeHandler = null
+  }
 }
-let b = new EventEmitter("VariableMirrorVariableResolvedValueEmitter");
-export function $$T2(e, t) {
-  variablesMirrorManager.subscribeToLocalVariableResolvedValue(e, defaultSessionLocalIDString);
-  b.on(e, t);
+
+/**
+ * Subscribe to variable resolved value updates.
+ * @param variableId - Variable identifier.
+ * @param callback - Callback for resolved value.
+ * @returns Unsubscribe function.
+ * (original: $$T2)
+ */
+export function subscribeVariableResolvedValue(variableId: string, callback: ExplicitModeChangeHandler): (() => void) {
+  variablesMirrorManager.subscribeToLocalVariableResolvedValue(variableId, defaultSessionLocalIDString)
+  variableResolvedValueEmitter.on(variableId, callback)
   return () => {
-    variablesMirrorManager.unsubscribeFromLocalVariableResolvedValue(e, defaultSessionLocalIDString);
-    b.removeListener(e, t);
-  };
+    variablesMirrorManager.unsubscribeFromLocalVariableResolvedValue(variableId, defaultSessionLocalIDString)
+    variableResolvedValueEmitter.removeListener(variableId, callback)
+  }
 }
-let I = new EventEmitter("VariableMirrorExplicitModeEmitter");
-export function $$S1(e, t) {
-  variablesMirrorManager.subscribeToExplicitModeChanges(e);
-  I.on(e, t);
+
+/**
+ * Subscribe to explicit mode changes.
+ * @param variableId - Variable identifier.
+ * @param callback - Callback for explicit mode.
+ * @returns Unsubscribe function.
+ * (original: $$S1)
+ */
+export function subscribeExplicitMode(variableId: string, callback: ExplicitModeChangeHandler): (() => void) {
+  variablesMirrorManager.subscribeToExplicitModeChanges(variableId)
+  explicitModeEmitter.on(variableId, callback)
   return () => {
-    variablesMirrorManager.unsubscribeFromExplicitModeChanges(e);
-    I.removeListener(e, t);
-  };
+    variablesMirrorManager.unsubscribeFromExplicitModeChanges(variableId)
+    explicitModeEmitter.removeListener(variableId, callback)
+  }
 }
-class v {
-  localVariableSetUpdated(e) {
+
+/**
+ * Handles variable mirror events and updates.
+ * (original: class v)
+ */
+class VariableMirrorManager {
+  /**
+   * Handle local variable set updated.
+   */
+  localVariableSetUpdated(variableSet: any) {
     unstable_batchedUpdates(() => {
-      l?.({
-        added: [e]
-      });
-    });
+      localExplicitModeChangeHandler?.({ added: [variableSet] })
+    })
   }
-  localVariableSetDeleted(e) {
+
+  /**
+   * Handle local variable set deleted.
+   */
+  localVariableSetDeleted(deletedSet: any) {
     unstable_batchedUpdates(() => {
-      l?.({
-        deleted: e
-      });
-      p?.({
-        setDeleted: e
-      });
-    });
+      localExplicitModeChangeHandler?.({ deleted: deletedSet })
+      localVariableHandler?.({ setDeleted: deletedSet })
+    })
   }
-  subscribedVariableSetUpdated(e, t) {
+
+  /**
+   * Handle subscribed variable set updated.
+   */
+  subscribedVariableSetUpdated(variableSet: any, added: any[]) {
     unstable_batchedUpdates(() => {
-      c?.({
-        added: [e]
-      });
-      E?.({
-        setDeleted: e.id
-      });
-      E?.({
-        added: t
-      });
-    });
+      subscribedExplicitModeChangeHandler?.({ added: [variableSet] })
+      explicitModeHandler?.({ setDeleted: variableSet.id })
+      explicitModeHandler?.({ added })
+    })
   }
-  subscribedVariableSetDeleted(e) {
+
+  /**
+   * Handle subscribed variable set deleted.
+   */
+  subscribedVariableSetDeleted(deletedSet: any) {
     unstable_batchedUpdates(() => {
-      c?.({
-        deleted: e
-      });
-      E?.({
-        setDeleted: e
-      });
-    });
+      subscribedExplicitModeChangeHandler?.({ deleted: deletedSet })
+      explicitModeHandler?.({ setDeleted: deletedSet })
+    })
   }
-  localVariablesUpdated(e) {
-    p?.({
-      added: e
-    });
+
+  /**
+   * Handle local variables updated.
+   */
+  localVariablesUpdated(added: any[]) {
+    localVariableHandler?.({ added })
   }
-  localVariableOverridesUpdated(e) {
-    h?.({
-      added: e
-    });
+
+  /**
+   * Handle local variable overrides updated.
+   */
+  localVariableOverridesUpdated(added: any[]) {
+    localOverrideHandler?.({ added })
   }
-  localVariableOverridesDeleted(e) {
-    h?.({
-      deleted: e
-    });
+
+  /**
+   * Handle local variable overrides deleted.
+   */
+  localVariableOverridesDeleted(deleted: any) {
+    localOverrideHandler?.({ deleted })
   }
-  subscribedVariableOverridesUpdated(e) {
-    g?.({
-      added: e
-    });
+
+  /**
+   * Handle subscribed variable overrides updated.
+   */
+  subscribedVariableOverridesUpdated(added: any[]) {
+    subscribedOverrideHandler?.({ added })
   }
-  subscribedVariableOverridesDeleted(e) {
-    g?.({
-      deleted: e
-    });
+
+  /**
+   * Handle subscribed variable overrides deleted.
+   */
+  subscribedVariableOverridesDeleted(deleted: any) {
+    subscribedOverrideHandler?.({ deleted })
   }
-  localVariablesDeleted(e) {
-    p?.({
-      deleted: e
-    });
-    e.forEach(e => {
-      b.trigger(e, {});
-    });
+
+  /**
+   * Handle local variables deleted.
+   */
+  localVariablesDeleted(deleted: any[]) {
+    localVariableHandler?.({ deleted })
+    deleted.forEach((id) => {
+      variableResolvedValueEmitter.trigger(id, {})
+    })
   }
-  variableResolvedValueUpdated(e, t) {
-    b.trigger(e, t);
+
+  /**
+   * Handle variable resolved value updated.
+   */
+  variableResolvedValueUpdated(variableId: string, value: any) {
+    variableResolvedValueEmitter.trigger(variableId, value)
   }
-  explicitModeUpdated(e, t) {
-    I.trigger(e, t);
+
+  /**
+   * Handle explicit mode updated.
+   */
+  explicitModeUpdated(variableId: string, value: any) {
+    explicitModeEmitter.trigger(variableId, value)
   }
+
+  /**
+   * Reset mirror cache and remove all listeners.
+   */
   resetMirrorCache() {
     unstable_batchedUpdates(() => {
-      l?.(null);
-      p?.(null);
-      h?.(null);
-      c?.(null);
-      E?.(null);
-    });
-    b.removeAllListeners();
+      localExplicitModeChangeHandler?.(null as any)
+      localVariableHandler?.(null as any)
+      localOverrideHandler?.(null as any)
+      subscribedExplicitModeChangeHandler?.(null as any)
+      explicitModeHandler?.(null as any)
+    })
+    variableResolvedValueEmitter.removeAllListeners()
   }
 }
-export function $$A8() {
-  $$n0 = new v();
+
+/**
+ * Singleton instance of VariableMirrorManager.
+ * (original: $$n0)
+ */
+export let variableMirrorManagerInstance: VariableMirrorManager
+
+/**
+ * Initialize the variable mirror manager singleton.
+ * (original: $$A8)
+ */
+export function initializeVariableMirrorManager(): void {
+  variableMirrorManagerInstance = new VariableMirrorManager()
 }
-export const DQ = $$n0;
-export const Lk = $$S1;
-export const RW = $$T2;
-export const Vr = $$d3;
-export const _n = $$u4;
-export const j2 = $$_5;
-export const kL = $$f6;
-export const uE = $$y7;
-export const xQ = $$A8;
-export const xb = $$m9;
+
+/**
+ * Exported aliases for backward compatibility.
+ */
+export const DQ = variableMirrorManagerInstance
+export const Lk = subscribeExplicitMode
+export const RW = subscribeVariableResolvedValue
+export const Vr = registerLocalExplicitModeChangeHandler
+export const _n = registerSubscribedExplicitModeChangeHandler
+export const j2 = registerLocalVariableHandler
+export const kL = registerSubscribedOverrideHandler
+export const uE = registerExplicitModeHandler
+export const xQ = initializeVariableMirrorManager
+export const xb = registerLocalOverrideHandler

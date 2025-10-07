@@ -33,7 +33,7 @@ import { NF } from "../figma_app/406976";
 import { $ } from "../905/483620";
 import { VariableBindingsDropdown } from "../figma_app/260445";
 import { y$ } from "../figma_app/152690";
-import { Wc } from "../905/782020";
+import { generateUniqueVariableName } from "../905/782020";
 import { gJ } from "../905/923433";
 import { dGl } from "../figma_app/27776";
 import { hF, _Z, mL, NI } from "../905/306456";
@@ -259,7 +259,7 @@ export function $$Z1({
   }
   useSingleEffect(() => {
     f.current?.select();
-    y(Wc(m, r), t ?? resolveVariableValue(r), p?.node_id ?? null);
+    y(generateUniqueVariableName(m, r), t ?? resolveVariableValue(r), p?.node_id ?? null);
   });
   let T = $$Y4(s.varValue);
   let v = $$q5(s.varValue, r, b);

@@ -67,7 +67,7 @@ import { DraggableModal } from '../905/748636';
 import { G as _$$G2 } from '../905/750789';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { getSelectedFile } from '../905/766303';
-import { nm } from '../905/782020';
+import { DEFAULT_MODE } from '../905/782020';
 import { q as _$$q2 } from '../905/820062';
 import { j as _$$j } from '../905/834956';
 import { useDropdown, useDropdownState } from '../905/848862';
@@ -1007,7 +1007,7 @@ function tu() {
     let d = useMemo(() => s.findIndex(e => e.variableId === o), [s, o]);
     let c = useMemo(() => {
       let e = r ? r.modes.map(e => {
-        let t = r.modes.length === 1 && e.name === nm ? getI18nString('variables.create_modal.value_label') : e.name;
+        let t = r.modes.length === 1 && e.name === DEFAULT_MODE ? getI18nString('variables.create_modal.value_label') : e.name;
         return {
           id: e.id,
           label: t

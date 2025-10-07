@@ -216,7 +216,7 @@ export function usePopoverPrimitive({
       'aria-haspopup': type === 'tooltip' ? 'dialog' : type,
       'aria-expanded': isOpen,
       'aria-describedby': type === 'tooltip' ? popoverId : undefined,
-    })
+    }) 
   }, [popoverId, getReferenceProps, isOpen, refs.setReference, type])
 
   return {

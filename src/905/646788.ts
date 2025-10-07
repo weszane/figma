@@ -149,7 +149,7 @@ import { reportError } from "../905/11";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary, ButtonSecondaryTracked, ButtonBasePrimaryTracked, ButtonSecondaryNegative, clickableBaseLinkTracked, ButtonNegativeTracked } from "../figma_app/637027";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
-import { lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 import { isValidTeamPaymentOrNotRequired, hasFileAccessBasedOnSubscription } from "../905/862913";
 import { Q3, Cy, Bg } from "../figma_app/246699";
 import { ApprovalStatusEnum } from "../figma_app/736948";
@@ -2663,7 +2663,7 @@ function na({
     };
   };
   let e_ = () => {
-    em && p(lW({
+    em && p(copyTextThunk({
       stringToCopy: em,
       successText: getI18nString("permissions_modal.file_share_settings.password_copied_to_clipboard")
     }));

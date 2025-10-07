@@ -14,7 +14,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, valueOrFallback } from "../905/216495";
 import { useSelectionProperty } from "../905/275640";
@@ -211,7 +211,7 @@ export function $$F1(t) {
               startingPointNodeId: t,
               showHotspots: void 0
             });
-            q(lW({
+            q(copyTextThunk({
               stringToCopy: `${G}${o}`
             }));
           }(Q),

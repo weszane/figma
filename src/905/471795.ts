@@ -7,7 +7,7 @@ import { colorToHexString } from "../figma_app/191804";
 import { hg } from "../figma_app/852050";
 import { isExtension, isLocalSubscriptionStatus } from "../figma_app/633080";
 import { gX, uC } from "../905/831801";
-import { Ex, rN } from "../905/782020";
+import { getVariableNamesInGroups, conditionalValue } from "../905/782020";
 var l = o;
 var $$h2 = (e => (e.filterApplied = "filter-applied", e.queryApplied = "query-applied", e.noVariableSet = "no-variable-set", e.noVariables = "no-variables", e))($$h2 || {});
 export function $$g1({
@@ -17,7 +17,7 @@ export function $$g1({
   currentVariableSet: o
 }) {
   let u = useMemo(() => function (e, t) {
-    let i = Ex(e, t);
+    let i = getVariableNamesInGroups(e, t);
     let n = flatten(e.map(e => i.includes(e.name) && e.variables.length > 0 ? [{
       type: "group",
       name: e.name
@@ -139,8 +139,8 @@ export function $$b5(e, t, i, n) {
   let s = r && !a;
   return r => {
     if (!isLocalSubscriptionStatus(e)) return null;
-    let a = rN(e => i?.(t.node_id, r, e) ?? !1, !!i);
-    let o = rN(i => n?.(e.node_id, t.node_id, r, i) ?? !1, !!n);
+    let a = conditionalValue(e => i?.(t.node_id, r, e) ?? !1, !!i);
+    let o = conditionalValue(i => n?.(e.node_id, t.node_id, r, i) ?? !1, !!n);
     return s ? o : a;
   };
 }

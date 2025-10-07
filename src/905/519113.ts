@@ -126,7 +126,7 @@ import { O as _$$O4 } from "../905/969533";
 import { k as _$$k4 } from "../905/44647";
 import { compareNumbers } from "../figma_app/766708";
 import { C as _$$C2 } from "../905/520159";
-import { F as _$$F } from "../905/604606";
+import { getVariableTypeInfo } from "../905/604606";
 function K(e) {
   let {
     localKits
@@ -1163,7 +1163,7 @@ function tZ({
 }) {
   let {
     IconUI3
-  } = _$$F(e.resolvedType);
+  } = getVariableTypeInfo(e.resolvedType);
   let s = useDropdownState();
   let o = `variable-library-item-row-${e.node_id}`;
   let l = useCallback(() => {

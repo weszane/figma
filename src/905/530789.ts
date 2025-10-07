@@ -12,8 +12,8 @@ import { rW } from "../figma_app/852050";
 import { useDropdown } from "../905/848862";
 import { Cf } from "../905/504727";
 import { i as _$$i } from "../905/415810";
-import { F } from "../905/604606";
-import { Pf, qQ } from "../905/782020";
+import { getVariableTypeInfo } from "../905/604606";
+import { getGroupPath, insertVariableAtPosition } from "../905/782020";
 import { ay } from "../905/886545";
 import { ZS, Fs } from "../905/24780";
 let $$v2 = "variables-modal-create-variable";
@@ -100,12 +100,12 @@ export function $$x1({
 function S(e) {
   let t = rW(e.variableSetID);
   let i = ay();
-  let a = F(e.resolvedType);
+  let a = getVariableTypeInfo(e.resolvedType);
   let s = useHandleMouseEvent(generateRecordingKey(e.recordingKey, "createVariableOption", a.name.toLowerCase()), "click", useCallback(() => {
     let n = e.groupPrefix;
     if (e.insertVariableBetweenIDs?.[0]) {
       let i = t.find(t => t.node_id === e.insertVariableBetweenIDs[0]);
-      let r = Pf(i?.name ?? "");
+      let r = getGroupPath(i?.name ?? "");
       r && (n = r);
     }
     let r = e.groups.map(e => e.name).includes(e.groupPrefix) ? n : void 0;
@@ -114,7 +114,7 @@ function S(e) {
     e.setRenamingVariableID?.(a);
     e.onClose();
     a && permissionScopeHandler.system("reorder-new-variable", () => {
-      qQ(a, e.insertVariableBetweenIDs, r ?? n, e.groups);
+      insertVariableAtPosition(a, e.insertVariableBetweenIDs, r ?? n, e.groups);
     });
   }, [i, e, t]));
   return jsx(c$, {

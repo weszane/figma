@@ -3,7 +3,7 @@ import { forwardRef, useCallback, useMemo, useRef } from 'react';
 import { jsx } from 'react/jsx-runtime';
 import { setupDragHandler } from '../905/97346';
 import { SG, U3 } from '../905/101482';
-import { X } from '../905/456000';
+import { columnResizeAtom } from '../905/456000';
 import { getFeatureFlags } from '../905/601108';
 import { $y, Jy, Zu } from '../905/708651';
 import { y } from '../905/871724';
@@ -63,7 +63,7 @@ let $$y7 = forwardRef(({
   });
 });
 function b() {
-  let e = Xr(X);
+  let e = Xr(columnResizeAtom);
   return [() => {
     e(e => ({
       ...e,
@@ -77,7 +77,7 @@ function b() {
   }];
 }
 export function $$v0() {
-  let [e, t] = useAtomValueAndSetter(X);
+  let [e, t] = useAtomValueAndSetter(columnResizeAtom);
   let i = useRef(0);
   let [d, c] = b();
   let [, p] = setupDragHandler({
@@ -112,7 +112,7 @@ export function $$v0() {
 export function $$I1({
   modeID: e
 }) {
-  let [t, i] = useAtomValueAndSetter(X);
+  let [t, i] = useAtomValueAndSetter(columnResizeAtom);
   let d = useRef(0);
   let [c, p] = b();
   let [, m] = setupDragHandler({

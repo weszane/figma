@@ -7,7 +7,7 @@ import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
-import { lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 var o = s;
 export function $$h0({
   suggestion: e,
@@ -24,7 +24,7 @@ export function $$h0({
     children: [jsxs("button", {
       onClick: () => {
         g(!0);
-        s(lW({
+        s(copyTextThunk({
           stringToCopy: e
         }));
       },

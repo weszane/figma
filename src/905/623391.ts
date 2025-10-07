@@ -8,10 +8,10 @@ import { setupAtomWithMount } from '../905/867679'
  * @returns The initialized atom.
  * (Original function name: $$r0)
  */
-export function setupAtomWithInitialValue<T>(atom: Atom<T> | WritableAtom<T, unknown[], void>, value: any) {
-  return setupAtomWithMount(atom, ({ onSet }) => {
+export function setupAtomWithInitialValue<T = any>(atom: Atom<T> | WritableAtom<T, unknown[], void>, value: any): WritableAtom<T, unknown[], void> {
+  return setupAtomWithMount<T>(atom, ({ onSet }) => {
     onSet(value)
-  })
+  }) as WritableAtom<T, unknown[], void>
 }
 
 // Refactored export name for H

@@ -53,7 +53,7 @@ import { RelativeTimeDisplay } from '../905/986103';
 import { resourceUtils } from '../905/989992';
 import { kq, ro } from '../905/994947';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { S as _$$S } from '../figma_app/11182';
+import { copyLinkThunk } from '../figma_app/11182';
 import { ProjectTilePermissions, TeamOrphanedStatus, TeamTilePermissions } from '../figma_app/43951';
 import { mapFileTypeToEditorType } from '../figma_app/53721';
 import { filePutAction } from '../figma_app/78808';
@@ -747,7 +747,7 @@ function e6(e) {
   l.push({
     displayText: getI18nString('file_browser.copy_link'),
     callback: () => {
-      r(_$$S({
+      r(copyLinkThunk({
         url: `${location.origin}${o}`
       }));
     }

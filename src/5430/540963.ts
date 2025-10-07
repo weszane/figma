@@ -87,7 +87,7 @@ import { A as _$$A9 } from '../5724/191519';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { O9D } from '../figma_app/6204';
 import { TeamOrgType } from '../figma_app/10554';
-import { lW } from '../figma_app/11182';
+import { copyTextThunk } from '../figma_app/11182';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { d8i, dxy, g8m, wOr, ZI8 } from '../figma_app/27776';
 import { CommunityResourceStat, UserMonetizationMetadata } from '../figma_app/43951';
@@ -1395,7 +1395,7 @@ function rA() {
   if (!r) return jsx(Fragment, {});
   let n = r.is_restricted_by_current_user;
   let a = () => {
-    e(lW({
+    e(copyTextThunk({
       stringToCopy: `${window.location.origin}${getProfileRouteHref(r.profile_handle)}`
     }));
   };

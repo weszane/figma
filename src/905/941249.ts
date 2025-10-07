@@ -8,7 +8,7 @@ import { trackTeamEvent } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { setupLoadingStateHandler } from "../905/696711";
 import { _M, jx, wZ, OL } from "../figma_app/869776";
-import { S } from "../figma_app/11182";
+import { copyLinkThunk } from "../figma_app/11182";
 var $$h1 = (e => (e.TEAM_PERMISSIONS_MODAL = "team permissions modal", e.NUX_INVITE_COLLABORATOR = "nux invite collaborator", e))($$h1 || {});
 let $$g0 = createActionCreator("TEAM_JOIN_LINKS_SET_REQUEST_STATE");
 let $$f5 = createOptimistThunk(async (e, t, {
@@ -56,7 +56,7 @@ let $$A4 = createOptimistThunk((e, t) => {
     if (t.disabled) e.dispatch($$g0({
       disabled: !0,
       url: void 0
-    })); else if (t.link) {
+    }));else if (t.link) {
       let i = jx(t.link);
       e.dispatch($$g0({
         disabled: !1,
@@ -76,7 +76,7 @@ let $$y2 = createOptimistThunk((e, t) => {
     resourceId: t.teamId,
     copyLinkSource: t.source
   });
-  e.dispatch(S({
+  e.dispatch(copyLinkThunk({
     url: t.url
   }));
 });

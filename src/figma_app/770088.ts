@@ -541,6 +541,35 @@ export let deleteComment = createOptimistThunk((context, payload: DeleteCommentP
 })
 
 /**
+ * Handles switching or deactivating comment threads based on the active thread state
+ * @origin $$Q29
+ */
+export let switchOrDeactivateCommentThread = createOptimistThunk((context, payload: { thread: { id: string }, skipDeactivatingExistingActiveComment?: boolean, source?: any, receiptsAPI?: any }) => {
+  const { dispatch, getState } = context
+  const state = getState()
+
+  // If the target thread is already active, deactivate it
+  if (state.comments.activeThread?.id === payload.thread.id) {
+    dispatch(deactivateActiveComment())
+    return
+  }
+
+  // Deactivate existing active thread if not skipped
+  if (!payload.skipDeactivatingExistingActiveComment) {
+    dispatch(deactivateActiveComment())
+  }
+
+  // If there is an active thread, activate the new one and reset related state
+  if (isActiveThread(state.comments)) {
+    dispatch(activateCommentThread(payload))
+    atomStoreManager.set(_$$m as any, null)
+  }
+})
+
+// Export with original name for backwards compatibility
+export const $$Q29 = switchOrDeactivateCommentThread
+
+/**
  * Resolves or unresolves a comment thread
  * @origin $$Y34
  */
@@ -1616,7 +1645,7 @@ export const Z5 = setNewCommentMessage
 export const _B = createNewComment
 export const _v = updateCommentContent
 export const a$ = setNewSelectionBoxAnchorPosition
-export const bB = deactivateActiveComment
+export const bB = switchOrDeactivateCommentThread
 export const cL = resetComments
 export const dB = handleCommentReplyWithConfirmation
 export const gi = submitCommentReply

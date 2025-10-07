@@ -1,6 +1,15 @@
 import { atom } from "../figma_app/27355";
-export let $$n0 = atom({
-  valueColumnWidths: new Map(),
-  isResizing: !1
+/**
+ * Atom for managing column resize state.
+ * Original export: $$n0
+ */
+export const columnResizeAtom = atom({
+  valueColumnWidths: new Map<string, number>(),
+  isResizing: false
 });
-export const X = $$n0;
+
+/**
+ * Alias for columnResizeAtom.
+ * Original export: X
+ */
+export const X = columnResizeAtom;

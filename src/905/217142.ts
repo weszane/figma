@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { s as _$$s } from "../905/328136";
 import { B } from "../905/759157";
 import { r as _$$r } from "../figma_app/896657";
-import { le } from "../figma_app/11182";
+import { copyViewLinkThunk } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { isAcceptedPublisher } from "../figma_app/564095";
 import { useDropdown } from "../905/848862";
@@ -79,11 +79,11 @@ export function $$C1(e) {
   e.isFromDropdownButton || T.push(_$$w, {
     displayText: getI18nString("file_browser.copy_link"),
     callback: (e, i, n, a) => {
-      publishedResource.is_widget ? r(le({
+      publishedResource.is_widget ? r(copyViewLinkThunk({
         view: "communityHub",
         subView: "widget",
         widgetId: publishedResource.id
-      })) : r(le({
+      })) : r(copyViewLinkThunk({
         view: "communityHub",
         subView: "plugin",
         publishedPluginId: publishedResource.id

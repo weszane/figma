@@ -134,7 +134,7 @@ import { A as _$$A3 } from '../6041/209192';
 import { A as _$$A2 } from '../6828/523860';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { renderAvatar } from '../figma_app/3731';
-import { lW } from '../figma_app/11182';
+import { copyTextThunk } from '../figma_app/11182';
 import { yJ } from '../figma_app/24841';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { CurrentUserInStudentPlusPlanView, CurrentUserIsMfaRequiredByMembershipOrgView, TeamCanEdit, UserFlagByName, UserSettingsPlanRow } from '../figma_app/43951';
@@ -2213,7 +2213,7 @@ function iC(e) {
         children: [jsx('button', {
           className: cssBuilderInstance.colorTextWarning.bgTransparent.cursorPointer.$,
           onClick: () => {
-            i(lW({
+            i(copyTextThunk({
               stringToCopy: t.token || ''
             }));
           },

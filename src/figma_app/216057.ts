@@ -1,567 +1,779 @@
-import { arraysEqual } from "../figma_app/656233";
-import { noop } from 'lodash-es';
-import { isNotNullish } from "../figma_app/95419";
-import { ey, yG } from "../905/859698";
-import { AppStateTsApi, VariablesBindings } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { atom, setupCustomAtom, createRemovableAtomFamily } from "../figma_app/27355";
-import { resourceUtils } from "../905/989992";
-import u from "../vendor/223926";
-import _ from "../vendor/239910";
-import m from "lodash-es/mapValues";
-import f from "../vendor/149674";
-import { libraryVariableCollectionAtom, libraryVariableCollectionWithVarsAtom, variableByKeyResourceAtomFamily, variableCollectionByKeyResourceAtomFamily } from "../905/888985";
-import { createAtomFamily } from "../905/157003";
-import { compareNumbers } from "../figma_app/766708";
-import { logError } from "../905/714362";
-import { figmaLibrariesEnabledAtom } from "../figma_app/657017";
-import { hasLibraryKeyInSet, handleResourceQuery, variableByKeyQuery, variableCollectionByKeyQuery } from "../figma_app/255679";
-import { fullscreenValue } from "../figma_app/455680";
-import { Vr, _n, j2, uE, RW, Lk, xb, kL } from "../figma_app/345195";
-import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { setupObservableAtomFamily } from "../905/508457";
-import { createAtomWithReduxWithState, attachReducerWrapper, setupReduxAtomWithState } from "../905/270322";
-import { LibraryVariableCollectionData, LibraryVariableCollectionDataByLibraryKey, CommunityLibraryVariableCollectionDataWithVariables, VariablesByVariableCollectionKey, LibraryVariableCollectionDataByLibraryKeyWithVariables, LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
-import { getSubscribedVariableSetInfo, getLocalVariableSetInfo, getLocalVariableInfo, getSubscribedVariableInfo, isExtension, getLocalVariableOverride, getSubscribedVariableOverride } from "../figma_app/633080";
-import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
-var p = u;
-var h = _;
-var g = m;
-var E = f;
-let P = setupObservableAtomFamily(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsSubscribed);
-let D = atom(e => e(P).map(getSubscribedVariableSetInfo));
-let k = setupObservableAtomFamily(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsLocal);
-let M = atom(e => e(k).map(getLocalVariableSetInfo));
-let F = setupObservableAtomFamily(() => AppStateTsApi.libraryAssets().fileLevelVariablesSubscribed);
-let j = setupObservableAtomFamily(() => AppStateTsApi.libraryAssets().fileLevelVariablesLocal);
-let U = atom(e => e(j).map(getLocalVariableInfo));
-let B = atom(e => e(F).map(getSubscribedVariableInfo));
-atom(e => ({
-  ...h()(e(M), e => e.keyForPublish),
-  ...h()(e(D), e => e.key)
-}));
-atom(e => ({
-  ...h()(e(U), e => e.keyForPublish),
-  ...h()(e(B), e => e.key)
-}));
-let $$G26 = (() => {
-  let e = createAtomWithReduxWithState({}, "SYNC_ATOM_VARIABLE_SETS_BY_ID");
-  let t = setupCustomAtom(e, (e, t) => {
-    if (t) {
-      if ("added" in t) {
-        let r = h()(t.added.map(getLocalVariableSetInfo), e => e.node_id);
-        return {
-          ...e,
-          ...r
-        };
-      }
-      if ("deleted" in t) {
-        let r = {
-          ...e
-        };
-        delete r[t.deleted];
-        return r;
-      }
-    }
-    return {};
-  });
-  t.onMount = e => {
-    fullscreenValue.onReady().then(() => {
-      e({
-        added: VariablesBindings.getLocalVariableSetsInfo()
-      });
-    });
-    let t = Vr(t => {
-      e(t);
-    });
-    return () => {
-      t();
-      e(null);
-    };
-  };
-  return attachReducerWrapper(t, e.reducer);
-})();
-let $$V20 = atom(e => ({
-  ...e($$G26),
-  ...e($$ec29)
-}));
-let $$H19 = createRemovableAtomFamily(e => atom(t => t($$G26)[e]));
-createRemovableAtomFamily(e => atom(t => t($$ec29)[e]));
-let $$z3 = createRemovableAtomFamily(e => atom(t => t($$V20)[e]));
-let $$W17 = createRemovableAtomFamily(e => setupRemovableAtomFamily(() => atom(t => {
-  let r = t($$z3(e));
-  if (!r || !getFeatureFlags().ds_extended_collections) return {};
-  let n = t(eg);
-  if (isExtension(r)) {
-    let n = t($$W17(r.backingVariableSetId));
-    let i = t($$eA5(e));
-    let s = {};
-    Object.entries(n).forEach(([e, t]) => {
-      s[e] = {
-        originVariableSetId: t.originVariableSetId,
-        resolvedType: t.resolvedType,
-        modeValues: Object.fromEntries(r.modes.map(e => {
-          if (!e.parentModeId) {
-            logError("Mode in extended collection has no parent mode set", "variableTableDataForVariableSetAtom", {
-              mode: e,
-              variable: t,
-              variableSet: r
-            }, {
-              reportAsSentryError: !0
-            });
-            return null;
-          }
-          let n = t.modeValues[e.parentModeId];
-          return n ? [e.id, n] : (logError("Parent mode value not found in backing variable collection", "variableTableDataForVariableSetAtom", {
-            parentModeId: e.parentModeId,
-            variable: t,
-            variableSet: r
-          }, {
-            reportAsSentryError: !0
-          }), null);
-        }).filter(isNotNullish)),
-        modeValueOriginVariableSetId: Object.fromEntries(r.modes.map(e => [e.id, r.backingVariableSetId]))
-      };
-    });
-    Object.values(i).forEach(t => {
-      let n = s[t.overriddenVariableID];
-      if (!n) {
-        logError("Variable not found in backingVariableSet", "variableTableDataForVariableSetAtom", {
-          overriddenVariableID: t.overriddenVariableID,
-          extensionVariableSetID: e,
-          backingVariableSetID: r.backingVariableSetId,
-          returnValue: s
-        }, {
-          reportAsSentryError: !0
-        });
-        return;
-      }
-      if (!t.overrideValues) {
-        logError("VariableOverride has no overrideValues", "variableTableDataForVariableSetAtom", {
-          override: t,
-          extensionVariableSetID: e
-        }, {
-          reportAsSentryError: !0
-        });
-        return;
-      }
-      Object.entries(t.overrideValues).forEach(([e, t]) => {
-        n.resolvedType = t.resolvedType;
-        n.modeValues[e] = t;
-        n.modeValueOriginVariableSetId[e] = r.node_id;
-      });
-    });
-    return s;
-  }
-  {
-    let e = n[r.node_id];
-    return e ? e.reduce((e, t) => {
-      let n = {};
-      Object.keys(t.modeValues).forEach(e => n[e] = r.node_id);
-      e[t.node_id] = {
-        originVariableSetId: r.node_id,
-        modeValues: t.modeValues,
-        modeValueOriginVariableSetId: n,
-        resolvedType: t.resolvedType
-      };
-      return e;
-    }, {}) : {};
-  }
-})));
-createRemovableAtomFamily(e => libraryVariableCollectionAtom(t => r => r(t({
-  fileKey: e
-}))));
-let $$K7 = createRemovableAtomFamily(e => atom(t => {
-  let r = {};
-  for (let n of e) r[n] = t(LibraryVariableCollectionData.Query({
-    fileKey: n
-  }));
-  return r;
-}), arraysEqual);
-let $$Y28 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(LibraryVariableCollectionDataByLibraryKey.Query({
-  libraryKey: e
-})))), arraysEqual);
-let $$$22 = createRemovableAtomFamily(e => libraryVariableCollectionWithVarsAtom(t => r => r(t({
-  fileKey: e
-}))));
-export function $$X14(e) {
-  return CommunityLibraryVariableCollectionDataWithVariables.Query(e ? {
-    hubFileId: e
-  } : null);
+import { groupBy, keyBy, mapValues, noop, pickBy } from 'lodash-es'
+import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677"
+import { createAtomFamily } from "../905/157003"
+import { attachReducerWrapper, createAtomWithReduxWithState, setupReduxAtomWithState } from "../905/270322"
+// import { setupObservableAtomFamily } from "../905/508457"
+import { getFeatureFlags } from "../905/601108"
+import { logError } from "../905/714362"
+import { ey, yG } from "../905/859698"
+import { libraryVariableCollectionAtom, libraryVariableCollectionWithVarsAtom, variableByKeyResourceAtomFamily, variableCollectionByKeyResourceAtomFamily } from "../905/888985"
+import { resourceUtils } from "../905/989992"
+import { atom, createRemovableAtomFamily, setupCustomAtom } from "../figma_app/27355"
+import { CommunityLibraryVariableCollectionDataWithVariables, LibraryVariableCollectionData, LibraryVariableCollectionDataByLibraryKey, LibraryVariableCollectionDataByLibraryKeyWithVariables, LibraryVariableCollectionDataWithVariables, VariablesByVariableCollectionKey } from "../figma_app/43951"
+import { isNotNullish } from "../figma_app/95419"
+import { handleResourceQuery, hasLibraryKeyInSet, variableByKeyQuery, variableCollectionByKeyQuery } from "../figma_app/255679"
+import { registerExplicitModeHandler, registerLocalExplicitModeChangeHandler, registerLocalOverrideHandler, registerLocalVariableHandler, registerSubscribedExplicitModeChangeHandler, registerSubscribedOverrideHandler, subscribeExplicitMode, subscribeVariableResolvedValue } from "../figma_app/345195"
+import { fullscreenValue } from "../figma_app/455680"
+import { setupRemovableAtomFamily } from "../figma_app/615482"
+import { getLocalVariableInfo, getLocalVariableOverride, getLocalVariableSetInfo, getSubscribedVariableInfo, getSubscribedVariableOverride, getSubscribedVariableSetInfo, isExtension } from "../figma_app/633080"
+import { arraysEqual } from "../figma_app/656233"
+import { figmaLibrariesEnabledAtom } from "../figma_app/657017"
+import { AppStateTsApi, VariablesBindings } from "../figma_app/763686"
+import { compareNumbers } from "../figma_app/766708"
+
+// Type definitions for variable sets
+interface BaseVariableSetInfo {
+  type: string
+  node_id: string
+  version: string
+  userFacingVersion: string
+  modes: any[]
+  name: string
+  sortPosition: number
+  isExtendable: boolean
+  isExtension?: boolean
+  [key: string]: any
 }
-let $$q13 = createRemovableAtomFamily(e => atom(t => {
-  let r = {};
-  for (let n of e) r[n] = t(createAtomFamily(VariablesByVariableCollectionKey)({
-    variableCollectionKey: n
-  }));
-  return r;
-}), arraysEqual);
-let $$J8 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(LibraryVariableCollectionDataByLibraryKeyWithVariables.Query({
-  libraryKey: e
-})))), arraysEqual);
-let $$Z18 = createRemovableAtomFamily(e => atom(t => {
-  let r = {};
-  for (let n of e) r[n] = t(LibraryVariableCollectionDataWithVariables.Query({
-    fileKey: n
-  }));
-  return r;
-}), arraysEqual);
-let $$Q24 = createRemovableAtomFamily(e => atom(t => {
-  let r = {};
-  for (let n of e) r[n] = t(CommunityLibraryVariableCollectionDataWithVariables.Query({
-    hubFileId: n
-  }));
-  return r;
-}), arraysEqual);
-export function $$ee10(e) {
-  let t = g()(h()(e), () => resourceUtils.disabled());
-  return atom(t);
+
+interface LocalVariableSetInfo extends BaseVariableSetInfo {
+  subscriptionStatus: 'LOCAL'
+  isPublishable: boolean
+  defaultModeID: string
+  isSoftDeleted: boolean
+  variableSetError: any
+  keyForPublish: string
 }
-let et = atom(e => {
-  let t = e($$ef21);
-  let r = e(resourceDataAndPresetKeysV2SetAtom);
-  let n = Object.values(t).filter(e => !hasLibraryKeyInSet(e, r)).map(e => e.key).sort();
-  return e(variableByKeyResourceAtomFamily(n.map(e => ({
-    key: e
-  })))).reduce((e, t) => (e[ey(t.args.key)] = t.result, e), {});
-});
-let er = atom(e => {
-  let t = e($$ef21);
-  let r = e(resourceDataAndPresetKeysV2SetAtom);
-  let n = (e(figmaLibrariesEnabledAtom) ? Object.values(t).filter(e => hasLibraryKeyInSet(e, r)) : []).map(e => e.key).sort().map(e => ({
-    key: e
-  }));
-  let i = handleResourceQuery(variableByKeyQuery, n, e);
-  return "loaded" !== i.status ? {} : i.data.reduce((e, t) => {
-    if ("loaded" !== t.result.status) return e;
-    let r = t.result.data.variable;
-    if (!r) return e;
-    let n = ey(r.key);
-    return {
-      ...e,
-      [n]: t.result
-    };
-  }, {});
-});
-let en = atom(e => ({
-  ...e(et),
-  ...e(er)
-}), noop);
-let $$ei12 = setupReduxAtomWithState(en, "SYNC_ATOM_USED_LIBRARY_VARIABLES_BY_KEY", {});
-let ea = atom(e => {
-  let t = [...new Set(Object.values(e(et)).map(e => e.data?.variable?.variableCollection.key).filter(isNotNullish))];
-  let r = e($$ec29);
-  let n = Object.keys(r);
-  Object.values(e($$G26)).forEach(e => {
-    e.isExtension && n.includes(e.backingVariableSetId) && t.push(r[e.backingVariableSetId].key);
-  });
-  let i = t.sort();
-  return e(variableCollectionByKeyResourceAtomFamily(i.map(e => ({
-    key: e
-  })))).reduce((e, t) => (e[yG(t.args.key)] = t.result, e), {});
-}, noop);
-let es = atom(e => {
-  let t = [...new Set(Object.values(e(er)).map(e => e.data?.variable?.variableCollection.key).filter(isNotNullish))].sort().map(e => ({
-    key: e
-  }));
-  let r = handleResourceQuery(variableCollectionByKeyQuery, t, e);
-  return "loaded" !== r.status ? {} : r.data.reduce((e, t) => {
-    if ("loaded" !== t.result.status) return e;
-    let r = t.result.data.variableCollection;
-    if (!r) return e;
-    let n = ey(r.key);
-    return {
-      ...e,
-      [n]: t.result
-    };
-  }, {});
-});
-let eo = atom(e => ({
-  ...e(ea),
-  ...e(es)
-}), noop);
-let $$el25 = setupReduxAtomWithState(eo, "SYNC_ATOM_USED_LIBRARY_VARIABLE_SETS_BY_KEY", {});
-atom(e => {
-  let t = Object.keys(e($$G26));
-  if (0 !== t.length) return t[0];
-});
-let $$ed15 = atom(e => Object.values(e($$G26)));
-let $$ec29 = (() => {
-  let e = createAtomWithReduxWithState({}, "SYNC_ATOM_SUBSCRIBED_VARIABLE_SETS_BY_ID");
-  let t = setupCustomAtom(e, (e, t) => {
-    if (t) {
-      if ("added" in t) {
-        let r = h()(t.added.map(getSubscribedVariableSetInfo), e => e.node_id);
+
+interface LocalExtensionVariableSetInfo extends LocalVariableSetInfo {
+  isExtension: true
+  backingVariableSetId: string
+  rootVariableSetKey: string
+  rootVariableSetId: string
+  variableSetExtensionChain: any[]
+}
+
+interface SubscribedVariableSetInfo extends BaseVariableSetInfo {
+  subscriptionStatus: 'SUBSCRIBED'
+  defaultModeID: string
+  key: string
+  library_key: string
+  pageIds: string[]
+}
+
+interface SubscribedExtensionVariableSetInfo extends SubscribedVariableSetInfo {
+  isExtension: true
+  backingVariableSetId: string
+  rootVariableSetId: string
+  rootVariableSetKey: string
+  variableSetExtensionChain: any[]
+}
+
+type VariableSetInfo
+  = | LocalVariableSetInfo
+  | LocalExtensionVariableSetInfo
+  | SubscribedVariableSetInfo
+  | SubscribedExtensionVariableSetInfo
+
+type VariableSetsAtomType = Record<string, VariableSetInfo>
+
+// Original: $$G26
+// Local variable sets atom with Redux state management
+const localVariableSetsAtom = (() => {
+  const reduxAtom = createAtomWithReduxWithState<VariableSetsAtomType>({}, "SYNC_ATOM_VARIABLE_SETS_BY_ID")
+  const customAtom = setupCustomAtom(reduxAtom, (state, action) => {
+    if (action) {
+      if ("added" in action) {
+        const addedSets = keyBy(action.added.map(getLocalVariableSetInfo), set => set.node_id)
         return {
-          ...e,
-          ...r
-        };
+          ...state,
+          ...addedSets,
+        }
       }
-      {
-        let r = {
-          ...e
-        };
-        delete r[t.deleted];
-        return r;
+      if ("deleted" in action) {
+        const newState = { ...state }
+        delete newState[action.deleted]
+        return newState
       }
     }
-    return {};
-  });
-  t.onMount = e => {
+    return {}
+  })
+  customAtom.onMount = (setState) => {
     fullscreenValue.onReady().then(() => {
-      e({
-        added: VariablesBindings.getSubscribedVariableSetsInfo()
-      });
-    });
-    let t = _n(t => {
-      e(t);
-    });
+      setState({
+        added: VariablesBindings.getLocalVariableSetsInfo(),
+      })
+    })
+    const handler = registerLocalExplicitModeChangeHandler((change) => {
+      setState(change)
+    })
     return () => {
-      t();
-      e(null);
-    };
-  };
-  return attachReducerWrapper(t, e.reducer);
-})();
-let $$eu2 = (() => {
-  let e = createAtomWithReduxWithState({}, "SYNC_ATOM_LOCAL_VARIABLES_BY_ID");
-  let t = setupCustomAtom(e, (e, t) => {
-    if (t) {
-      if ("added" in t) {
-        t.added && "map" in t.added || logError("variableChange is malformed, expected added to be an array", "variableChange", {
-          variableChange: t
-        }, {
-          reportAsSentryError: !0
-        });
-        return {
-          ...e,
-          ...h()(t.added.map(getLocalVariableInfo), e => e.node_id)
-        };
-      }
-      if ("deleted" in t) {
-        let r = new Set(t.deleted);
-        return E()(e, e => e.node_id && !r.has(e.node_id));
-      }
-      if ("setDeleted" in t) return E()(e, e => e.variableSetId !== t.setDeleted);
+      handler()
+      setState(null)
     }
-    return {};
-  });
-  t.onMount = e => {
-    fullscreenValue.onReady().then(() => {
-      e({
-        added: VariablesBindings.getLocalVariablesInfo()
-      });
-    });
-    let t = j2(t => {
-      e(t);
-    });
-    return () => {
-      t();
-      e(null);
-    };
-  };
-  return attachReducerWrapper(t, e.reducer);
-})();
-let $$ep23 = createRemovableAtomFamily(e => atom(t => t($$eu2)[e] ?? null));
-let $$e_27 = atom(e => Object.keys(e($$eu2)).map(t => e($$ep23(t))).sort((e, t) => -compareNumbers(e.sortPosition, t?.sortPosition)));
-let $$eh6 = atom(e => p()(e($$e_27), e => e.variableSetId));
-let $$em11 = atom(e => p()(e($$ef21), e => e.variableSetId));
-let eg = atom(e => {
-  let t = e($$eh6);
-  let r = e($$em11);
+  }
+  return attachReducerWrapper(customAtom, reduxAtom.reducer)
+})()
+
+// Original: $$V20
+// Combined local and subscribed variable sets atom
+const combinedVariableSetsAtom = atom<VariableSetsAtomType>((get) => {
+  const localSets = get(localVariableSetsAtom) as VariableSetsAtomType
+  const subscribedSets = get(subscribedVariableSetsAtom) as VariableSetsAtomType
   return {
-    ...t,
-    ...r
-  };
-});
-let $$ef21 = (() => {
-  let e = createAtomWithReduxWithState({}, "SYNC_ATOM_SUBSCRIBED_VARIABLES_BY_ID");
-  let t = setupCustomAtom(e, (e, t) => {
-    if (t) {
-      if ("added" in t) return {
-        ...e,
-        ...h()(t.added.map(getSubscribedVariableInfo), e => e.node_id)
-      };
-      if ("deleted" in t) return E()(e, e => e.id !== t.deleted);
-      if ("setDeleted" in t) return E()(e, e => e.variableSetId !== t.setDeleted);
-    }
-    return {};
-  });
-  t.onMount = e => {
-    fullscreenValue.onReady().then(() => {
-      e({
-        added: VariablesBindings.getSubscribedVariablesInfo()
-      });
-    });
-    let t = uE(t => {
-      e(t);
-    });
-    return () => {
-      t();
-      e(null);
-    };
-  };
-  return attachReducerWrapper(t, e.reducer);
-})();
-createRemovableAtomFamily(e => atom(t => t($$ef21)[e] ?? null));
-export let $$eE4 = createRemovableAtomFamily(e => atom(t => t($$eu2)[e] ?? t($$ef21)[e] ?? null));
-export function $$ey1(e, t) {
-  let r = fullscreenValue.isReady();
-  let n = new Map(Object.entries(t));
-  let i = r && e ? VariablesBindings.getVariableResolvedValue(e, n) : null;
-  let a = atom(i);
-  e && (a.onMount = t => {
-    r || fullscreenValue.onReady().then(() => {
-      t(VariablesBindings.getVariableResolvedValue(e, n));
-    });
-    let i = RW(e, () => {
-      t(VariablesBindings.getVariableResolvedValue(e, n));
-    });
-    return () => {
-      i();
-      t(null);
-    };
-  });
-  return a;
-}
-export function $$eb9(e) {
-  let t = fullscreenValue.isReady();
-  let r = t && e ? VariablesBindings.getExplicitModeNames(e) : null;
-  let n = atom(r);
-  e && (n.onMount = r => {
-    t || fullscreenValue.onReady().then(() => {
-      r(VariablesBindings.getExplicitModeNames(e));
-    });
-    let n = Lk(e, e => {
-      r(e);
-    });
-    return () => {
-      n();
-      r(null);
-    };
-  });
-  return n;
-}
-let eT = (() => {
-  let e = atom({});
-  let t = setupCustomAtom(e, (e, t) => {
-    if (t) {
-      if ("added" in t) return {
-        ...e,
-        ...h()(t.added.map(getLocalVariableOverride), e => e.node_id)
-      };
-      if ("deleted" in t) {
-        let r = new Set(t.deleted);
-        return E()(e, e => e.node_id && !r.has(e.node_id));
+    ...localSets,
+    ...subscribedSets,
+  }
+})
+
+// Original: $$H19
+// Atom family for individual local variable sets
+const localVariableSetByIdAtomFamily = createRemovableAtomFamily((id: string) => atom<VariableSetInfo | undefined>(get => (get(localVariableSetsAtom) as VariableSetsAtomType)[id]))
+
+// Original: $$z3
+// Atom family for individual combined variable sets
+const combinedVariableSetByIdAtomFamily = createRemovableAtomFamily((id: string) => atom<VariableSetInfo | undefined>(get => (get(combinedVariableSetsAtom) as VariableSetsAtomType)[id]))
+
+// Original: $$W17
+// Complex atom family for variable table data, handling extensions and backing sets
+const variableTableDataForVariableSetAtomFamily = createRemovableAtomFamily((variableSetId: string) => setupRemovableAtomFamily(() => atom((get) => {
+  const variableSet = get(combinedVariableSetByIdAtomFamily(variableSetId))
+  if (!variableSet || !getFeatureFlags().ds_extended_collections) {
+    return {}
+  }
+  const variablesByCollection = get(variablesGroupedByCollectionAtom)
+  if (isExtension(variableSet)) {
+    const backingVariables = get(variableTableDataForVariableSetAtomFamily(variableSet.backingVariableSetId))
+    const overrides = get(overridesByVariableSetIdAtomFamily(variableSetId))
+    const result: Record<string, any> = {}
+    Object.entries<Record<string, any>>(backingVariables).forEach(([varId, varData]) => {
+      result[varId] = {
+        originVariableSetId: varData.originVariableSetId,
+        resolvedType: varData.resolvedType,
+        modeValues: Object.fromEntries(variableSet.modes.map((mode) => {
+          if (!mode.parentModeId) {
+            logError("Mode in extended collection has no parent mode set", "variableTableDataForVariableSetAtom", {
+              mode,
+              variable: varData,
+              variableSet,
+            }, {
+              reportAsSentryError: true,
+            })
+            return null
+          }
+          const parentValue = varData.modeValues[mode.parentModeId]
+          return parentValue
+            ? [mode.id, parentValue]
+            : (logError("Parent mode value not found in backing variable collection", "variableTableDataForVariableSetAtom", {
+              parentModeId: mode.parentModeId,
+              variable: varData,
+              variableSet,
+            }, {
+              reportAsSentryError: true,
+            }), null)
+        }).filter(isNotNullish)),
+        modeValueOriginVariableSetId: Object.fromEntries(variableSet.modes.map(mode => [mode.id, variableSet.backingVariableSetId])),
       }
-      return {};
+    })
+    Object.values(overrides).forEach((override: Record<string, any>) => {
+      const varData = result[override.overriddenVariableID]
+      if (!varData) {
+        logError("Variable not found in backingVariableSet", "variableTableDataForVariableSetAtom", {
+          overriddenVariableID: override.overriddenVariableID,
+          extensionVariableSetID: variableSetId,
+          backingVariableSetID: variableSet.backingVariableSetId,
+          returnValue: result,
+        }, {
+          reportAsSentryError: true,
+        })
+        return
+      }
+      if (!override.overrideValues) {
+        logError("VariableOverride has no overrideValues", "variableTableDataForVariableSetAtom", {
+          override,
+          extensionVariableSetID: variableSetId,
+        }, {
+          reportAsSentryError: true,
+        })
+        return
+      }
+      Object.entries<ObjectOf>(override.overrideValues).forEach(([modeId, value]) => {
+        varData.resolvedType = value.resolvedType
+        varData.modeValues[modeId] = value
+        varData.modeValueOriginVariableSetId[modeId] = variableSet.node_id
+      })
+    })
+    return result
+  }
+  else {
+    const collectionVars = variablesByCollection[variableSet.node_id] as any[]
+    return collectionVars
+      ? collectionVars.reduce((acc, variable: any) => {
+        const modeOrigins: Record<string, string> = {}
+        Object.keys(variable.modeValues).forEach(modeId => modeOrigins[modeId] = variableSet.node_id)
+        acc[variable.node_id] = {
+          originVariableSetId: variableSet.node_id,
+          modeValues: variable.modeValues,
+          modeValueOriginVariableSetId: modeOrigins,
+          resolvedType: variable.resolvedType,
+        }
+        return acc
+      }, {} as Record<string, any>)
+      : {}
+  }
+})))
+
+// Original: $$K7
+// Atom family for multiple library variable collections by file keys
+const libraryVariableCollectionsByFileKeysAtomFamily = createRemovableAtomFamily((fileKeys: any[]) => atom((get) => {
+  const result: Record<string, any> = {}
+  for (const key of fileKeys) {
+    result[key] = get(LibraryVariableCollectionData.Query({
+      fileKey: key,
+    }))
+  }
+  return result
+}), arraysEqual)
+
+// Original: $$Y28
+// Atom family for library variable collections by library keys
+const libraryVariableCollectionsByLibraryKeysAtomFamily = createRemovableAtomFamily((libraryKeys: any[]) => atom(get => mapValues(keyBy(libraryKeys), key => get(LibraryVariableCollectionDataByLibraryKey.Query({
+  libraryKey: key,
+})))), arraysEqual)
+
+// Original: $$$22
+// Library variable collection with vars atom family
+const libraryVariableCollectionWithVarsByFileKeyAtomFamily = createRemovableAtomFamily((fileKey: string) => libraryVariableCollectionWithVarsAtom(get => set => set(get({
+  fileKey,
+}))))
+
+// Original: $$X14
+// Function to query community library variable collection with variables
+export function queryCommunityLibraryVariableCollectionWithVariables(hubFileId?: string) {
+  return CommunityLibraryVariableCollectionDataWithVariables.Query(hubFileId
+    ? {
+      hubFileId,
     }
-    return e;
-  });
-  t.onMount = e => {
-    fullscreenValue.onReady().then(() => {
-      let t = VariablesBindings?.getLocalVariableOverridesInfo();
-      t && e({
-        added: t
-      });
-    });
-    let t = xb(t => {
-      e(t);
-    });
-    return () => {
-      t();
-      e(null);
-    };
-  };
-  return t;
-})();
-let eI = (() => {
-  let e = atom({});
-  let t = setupCustomAtom(e, (e, t) => {
-    if (t) {
-      if ("added" in t) return {
-        ...e,
-        ...h()(t.added.map(getSubscribedVariableOverride), e => e.node_id)
-      };
-      if ("deleted" in t) {
-        let r = new Set(t.deleted);
-        return E()(e, e => e.node_id && !r.has(e.node_id));
+    : null)
+}
+
+// Original: $$q13
+// Atom family for variables by variable collection keys
+const variablesByVariableCollectionKeysAtomFamily = createRemovableAtomFamily((collectionKeys: any[]) => atom((get) => {
+  const result: Record<string, any> = {}
+  for (const key of collectionKeys) {
+    result[key] = get(createAtomFamily(VariablesByVariableCollectionKey)({
+      variableCollectionKey: key,
+    }))
+  }
+  return result
+}), arraysEqual)
+
+// Original: $$J8
+// Atom family for library variable collections with vars by library keys
+const libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily = createRemovableAtomFamily((libraryKeys: any[]) => atom(get => mapValues(keyBy(libraryKeys), key => get(LibraryVariableCollectionDataByLibraryKeyWithVariables.Query({
+  libraryKey: key,
+})))), arraysEqual)
+
+// Original: $$Z18
+// Atom family for library variable collections with vars by file keys
+const libraryVariableCollectionsWithVarsByFileKeysAtomFamily = createRemovableAtomFamily((fileKeys: any[]) => atom((get) => {
+  const result: Record<string, any> = {}
+  for (const key of fileKeys) {
+    result[key] = get(LibraryVariableCollectionDataWithVariables.Query({
+      fileKey: key,
+    }))
+  }
+  return result
+}), arraysEqual)
+
+// Original: $$Q24
+// Atom family for community library variable collections with vars by hub file ids
+const communityLibraryVariableCollectionsWithVarsByHubFileIdsAtomFamily = createRemovableAtomFamily((hubFileIds: any[]) => atom((get) => {
+  const result: Record<string, any> = {}
+  for (const id of hubFileIds) {
+    result[id] = get(CommunityLibraryVariableCollectionDataWithVariables.Query({
+      hubFileId: id,
+    }))
+  }
+  return result
+}), arraysEqual)
+
+// Original: $$ee10
+// Function to create disabled resource atom
+export function createDisabledResourceAtom(resources: any[]) {
+  const disabledResources = mapValues(keyBy(resources), () => resourceUtils.disabled())
+  return atom(disabledResources)
+}
+
+// Original: et
+// Local variables by key atom
+const localVariablesByKeyAtom = atom<any>((get) => {
+  const localVars = get(subscribedVariablesAtom) // Note: Original uses $$ef21, which is subscribedVariablesAtom
+  const resourceKeysSet = get(resourceDataAndPresetKeysV2SetAtom)
+  const keys = Object.values<ObjectOf>(localVars).filter(v => !hasLibraryKeyInSet(v, resourceKeysSet)).map(v => v.key).sort()
+  const resourceResults: any = get(variableByKeyResourceAtomFamily(keys.map(key => ({ key }))))
+  return resourceResults.reduce((acc, res) => (acc[ey(res.args.key)] = res.result, acc), {})
+})
+
+// Original: er
+// Library variables by key atom
+const libraryVariablesByKeyAtom = atom((get) => {
+  const subscribedVars = get(subscribedVariablesAtom)
+  const resourceKeysSet = get(resourceDataAndPresetKeysV2SetAtom)
+  const keys = (get(figmaLibrariesEnabledAtom) ? Object.values<any>(subscribedVars).filter(v => hasLibraryKeyInSet(v, resourceKeysSet)) : []).map(v => v.key).sort().map(key => ({
+    key,
+  }))
+  const queryResult = handleResourceQuery(variableByKeyQuery, keys, get)
+  return queryResult.status !== "loaded"
+    ? {}
+    : queryResult.data.reduce((acc, res) => {
+      if (res.result.status !== "loaded")
+        return acc
+      const variable = res.result.data.variable
+      if (!variable)
+        return acc
+      const hashedKey = ey(variable.key)
+      return {
+        ...acc,
+        [hashedKey]: res.result,
+      }
+    }, {})
+})
+
+// Original: en
+// Combined used library variables by key atom
+const usedLibraryVariablesByKeyAtom = atom((get) => {
+  const localVars = get(localVariablesByKeyAtom)
+  const libraryVars = get(libraryVariablesByKeyAtom)
+  // Type guard to ensure we're spreading objects
+  const safeLocalVars = (typeof localVars === 'object' && localVars !== null) ? localVars : {}
+  const safeLibraryVars = (typeof libraryVars === 'object' && libraryVars !== null) ? libraryVars : {}
+  return {
+    ...safeLocalVars,
+    ...safeLibraryVars,
+  }
+}, noop)
+
+// Original: $$ei12
+// Redux atom for used library variables by key
+const usedLibraryVariablesByKeyReduxAtom = setupReduxAtomWithState(usedLibraryVariablesByKeyAtom, "SYNC_ATOM_USED_LIBRARY_VARIABLES_BY_KEY", {})
+
+// Original: ea
+// Local variable collections by key atom
+const localVariableCollectionsByKeyAtom = atom((get) => {
+  const collectionKeys = [...new Set(Object.values<ObjectOf>(get(localVariablesByKeyAtom)).map(v => v.data?.variable?.variableCollection.key).filter(isNotNullish))]
+  const subscribedSets = get(subscribedVariableSetsAtom)
+  const subscribedKeys = Object.keys(subscribedSets)
+  Object.values(get(localVariableSetsAtom)).forEach((set) => {
+    if (set.isExtension && subscribedKeys.includes(set.backingVariableSetId)) {
+      collectionKeys.push(subscribedSets[set.backingVariableSetId].key)
+    }
+  })
+  const sortedKeys = collectionKeys.sort()
+  return get(variableCollectionByKeyResourceAtomFamily(sortedKeys.map(key => ({
+    key,
+  })))).reduce((acc, res) => (acc[yG(res.args.key)] = res.result, acc), {})
+}, noop)
+
+// Original: es
+// Library variable collections by key atom
+const libraryVariableCollectionsByKeyAtom = atom((get) => {
+  const collectionKeys = [...new Set(Object.values<ObjectOf>(get(libraryVariablesByKeyAtom)).map(v => v.data?.variable?.variableCollection.key).filter(isNotNullish))].sort().map(key => ({
+    key,
+  }))
+  const queryResult = handleResourceQuery(variableCollectionByKeyQuery, collectionKeys, get)
+  return queryResult.status !== "loaded"
+    ? {}
+    : queryResult.data.reduce((acc, res) => {
+      if (res.result.status !== "loaded")
+        return acc
+      const collection = res.result.data.variableCollection
+      if (!collection)
+        return acc
+      const hashedKey = ey(collection.key)
+      return {
+        ...acc,
+        [hashedKey]: res.result,
+      }
+    }, {})
+})
+
+// Original: eo
+// Combined used library variable sets by key atom
+const usedLibraryVariableSetsByKeyAtom = atom((get) => {
+  const localCollections = get(localVariableCollectionsByKeyAtom)
+  const libraryCollections = get(libraryVariableCollectionsByKeyAtom)
+  // Type guard to ensure we're spreading objects
+  const safeLocalCollections = (typeof localCollections === 'object' && localCollections !== null) ? localCollections : {}
+  const safeLibraryCollections = (typeof libraryCollections === 'object' && libraryCollections !== null) ? libraryCollections : {}
+  return {
+    ...safeLocalCollections,
+    ...safeLibraryCollections,
+  }
+}, noop)
+
+// Original: $$el25
+// Redux atom for used library variable sets by key
+const usedLibraryVariableSetsByKeyReduxAtom = setupReduxAtomWithState(usedLibraryVariableSetsByKeyAtom, "SYNC_ATOM_USED_LIBRARY_VARIABLE_SETS_BY_KEY", {})
+
+// Original: $$ed15
+// All local variable sets atom
+const allLocalVariableSetsAtom = atom(get => Object.values(get(localVariableSetsAtom)))
+
+// Original: $$ec29
+// Subscribed variable sets atom with Redux state management
+const subscribedVariableSetsAtom = (() => {
+  const reduxAtom = createAtomWithReduxWithState<VariableSetsAtomType>({}, "SYNC_ATOM_SUBSCRIBED_VARIABLE_SETS_BY_ID")
+  const customAtom = setupCustomAtom(reduxAtom, (state, action) => {
+    if (action) {
+      if ("added" in action) {
+        const addedSets = keyBy(action.added.map(getSubscribedVariableSetInfo), set => set.node_id)
+        return {
+          ...state,
+          ...addedSets,
+        }
+      }
+      else {
+        const newState = { ...state }
+        delete newState[action.deleted]
+        return newState
       }
     }
-    return e;
-  });
-  t.onMount = e => {
+    return {}
+  })
+  customAtom.onMount = (setState) => {
     fullscreenValue.onReady().then(() => {
-      let t = VariablesBindings?.getSubscribedVariableOverridesInfo();
-      t && e({
-        added: t
-      });
-    });
-    let t = kL(t => {
-      e(t);
-    });
+      setState({
+        added: VariablesBindings.getSubscribedVariableSetsInfo(),
+      })
+    })
+    const handler = registerSubscribedExplicitModeChangeHandler((change) => {
+      setState(change)
+    })
     return () => {
-      t();
-      e(null);
-    };
-  };
-  return t;
-})();
-let $$eS0 = createRemovableAtomFamily(e => atom(t => {
-  let r = Object.values(t(eT)).filter(t => t.variableSetId === e);
-  return h()(r, e => e.overriddenVariableID);
-}));
-let ev = createRemovableAtomFamily(e => atom(t => {
-  let r = Object.values(t(eI)).filter(t => t.variableSetId === e);
-  return h()(r, e => e.overriddenVariableID);
-}));
-let $$eA5 = createRemovableAtomFamily(e => atom(t => {
-  let r = t($$eS0(e));
-  let n = t(ev(e));
-  let i = {
-    ...r,
-    ...n
-  };
-  return h()(i, e => e.overriddenVariableID);
-}));
-export function $$ex16() {
-  let e = fullscreenValue.isReady();
-  let t = e ? VariablesBindings.getPageLevelModes() : null;
-  let r = atom(t);
-  r.onMount = t => (e || fullscreenValue.onReady().then(() => {
-    t(VariablesBindings.getPageLevelModes());
-  }), () => {
-    t(null);
-  });
-  return r;
+      handler()
+      setState(null)
+    }
+  }
+  return attachReducerWrapper(customAtom, reduxAtom.reducer)
+})()
+
+// Original: $$eu2
+// Local variables atom with Redux state management
+const localVariablesAtom = (() => {
+  const reduxAtom = createAtomWithReduxWithState({}, "SYNC_ATOM_LOCAL_VARIABLES_BY_ID")
+  const customAtom = setupCustomAtom(reduxAtom, (state, action) => {
+    if (action) {
+      if ("added" in action) {
+        if (!t.added || !("map" in t.added)) {
+          logError("variableChange is malformed, expected added to be an array", "variableChange", {
+            variableChange: action,
+          }, {
+            reportAsSentryError: true,
+          })
+        }
+        return {
+          ...state,
+          ...keyBy(action.added.map(getLocalVariableInfo), v => v.node_id),
+        }
+      }
+      if ("deleted" in action) {
+        const deletedSet = new Set(action.deleted)
+        return pickBy(state, v => v.node_id && !deletedSet.has(v.node_id))
+      }
+      if ("setDeleted" in action) {
+        return pickBy(state, v => v.variableSetId !== action.setDeleted)
+      }
+    }
+    return {}
+  })
+  customAtom.onMount = (setState) => {
+    fullscreenValue.onReady().then(() => {
+      setState({
+        added: VariablesBindings.getLocalVariablesInfo(),
+      })
+    })
+    const handler = registerLocalVariableHandler((change) => {
+      setState(change)
+    })
+    return () => {
+      handler()
+      setState(null)
+    }
+  }
+  return attachReducerWrapper(customAtom, reduxAtom.reducer)
+})()
+
+// Original: $$ep23
+// Atom family for individual local variables
+const localVariableByIdAtomFamily = createRemovableAtomFamily((id: string) => atom(get => get(localVariablesAtom)[id] ?? null))
+
+// Original: $$e_27
+// Sorted local variables atom
+const sortedLocalVariablesAtom = atom(get => Object.keys(get(localVariablesAtom)).map(id => get(localVariableByIdAtomFamily(id))).sort((a, b) => -compareNumbers(a.sortPosition, b?.sortPosition)))
+
+// Original: $$eh6
+// Local variables grouped by variable set id
+const localVariablesGroupedBySetIdAtom = atom(get => groupBy(get(sortedLocalVariablesAtom), v => v.variableSetId))
+
+// Original: $$em11
+// Subscribed variables grouped by variable set id
+const subscribedVariablesGroupedBySetIdAtom = atom(get => groupBy<ObjectOf>(get(subscribedVariablesAtom), v => v.variableSetId))
+
+// Original: eg
+// Combined variables grouped by collection
+const variablesGroupedByCollectionAtom = atom((get) => {
+  const localGrouped = get(localVariablesGroupedBySetIdAtom)
+  const subscribedGrouped = get(subscribedVariablesGroupedBySetIdAtom)
+  return {
+    ...localGrouped,
+    ...subscribedGrouped,
+  }
+})
+
+// Original: $$ef21
+// Subscribed variables atom with Redux state management
+const subscribedVariablesAtom = (() => {
+  const reduxAtom = createAtomWithReduxWithState({}, "SYNC_ATOM_SUBSCRIBED_VARIABLES_BY_ID")
+  const customAtom = setupCustomAtom(reduxAtom, (state, action) => {
+    if (action) {
+      if ("added" in action) {
+        return {
+          ...state,
+          ...keyBy(action.added.map(getSubscribedVariableInfo), v => v.node_id),
+        }
+      }
+      if ("deleted" in action) {
+        return pickBy(state, v => v.id !== action.deleted)
+      }
+      if ("setDeleted" in action) {
+        return pickBy(state, v => v.variableSetId !== action.setDeleted)
+      }
+    }
+    return {}
+  })
+  customAtom.onMount = (setState) => {
+    fullscreenValue.onReady().then(() => {
+      setState({
+        added: VariablesBindings.getSubscribedVariablesInfo(),
+      })
+    })
+    const handler = registerExplicitModeHandler((change) => {
+      setState(change)
+    })
+    return () => {
+      handler()
+      setState(null)
+    }
+  }
+  return attachReducerWrapper(customAtom, reduxAtom.reducer)
+})()
+
+// Original: $$eE4
+// Combined local or subscribed variable by id atom family
+export const variableByIdAtomFamily = createRemovableAtomFamily((id: string) => atom<ObjectOf>(get => get(localVariablesAtom)[id] ?? get(subscribedVariablesAtom)[id] ?? null))
+
+// Original: $$ey1
+// Function to create resolved value atom for a variable
+export function createVariableResolvedValueAtom(variableId: string, modes: Record<string, string>) {
+  const isReady = fullscreenValue.isReady()
+  const initialValue = isReady && variableId ? VariablesBindings.getVariableResolvedValue(variableId, new Map(Object.entries(modes))) : null
+  const valueAtom = atom(initialValue)
+  if (variableId) {
+    valueAtom.onMount = (setValue) => {
+      if (!isReady) {
+        fullscreenValue.onReady().then(() => {
+          setValue(VariablesBindings.getVariableResolvedValue(variableId, new Map(Object.entries(modes))))
+        })
+      }
+      const unsubscribe = subscribeVariableResolvedValue(variableId, () => {
+        setValue(VariablesBindings.getVariableResolvedValue(variableId, new Map(Object.entries(modes))))
+      })
+      return () => {
+        unsubscribe()
+        setValue(null)
+      }
+    }
+  }
+  return valueAtom
 }
-export const A6 = $$eS0;
-export const BJ = $$ey1;
-export const Cg = $$eu2;
-export const Eo = $$z3;
-export const Ev = $$eE4;
-export const Fx = $$eA5;
-export const Gc = $$eh6;
-export const H2 = $$K7;
-export const Ho = $$J8;
-export const JB = $$eb9;
-export const Jo = $$ee10;
-export const L9 = $$em11;
-export const LC = $$ei12;
-export const Oj = $$q13;
-export const Ri = $$X14;
-export const TD = $$ed15;
-export const Tg = $$ex16;
-export const XC = $$W17;
-export const Yt = $$Z18;
-export const ZG = $$H19;
-export const Zc = $$V20;
-export const bO = $$ef21;
-export const cp = $$$22;
-export const hy = $$ep23;
-export const hz = $$Q24;
-export const jt = $$el25;
-export const qy = $$G26;
-export const uk = $$e_27;
-export const wh = $$Y28;
-export const xA = $$ec29;
+
+// Original: $$eb9
+// Function to create explicit mode names atom for a variable set
+export function createExplicitModeNamesAtom(variableSetId: string) {
+  const isReady = fullscreenValue.isReady()
+  const initialValue = isReady && variableSetId ? VariablesBindings.getExplicitModeNames(variableSetId) : null
+  const namesAtom = atom(initialValue)
+  if (variableSetId) {
+    namesAtom.onMount = (setValue) => {
+      if (!isReady) {
+        fullscreenValue.onReady().then(() => {
+          setValue(VariablesBindings.getExplicitModeNames(variableSetId))
+        })
+      }
+      const unsubscribe = subscribeExplicitMode(variableSetId, (names) => {
+        setValue(names)
+      })
+      return () => {
+        unsubscribe()
+        setValue(null)
+      }
+    }
+  }
+  return namesAtom
+}
+
+// Original: eT
+// Local variable overrides atom
+const localVariableOverridesAtom = (() => {
+  const baseAtom = atom({})
+  const customAtom = setupCustomAtom(baseAtom, (state, action) => {
+    if (action) {
+      if ("added" in action) {
+        return {
+          ...state,
+          ...keyBy(action.added.map(getLocalVariableOverride), o => o.node_id),
+        }
+      }
+      if ("deleted" in action) {
+        const deletedSet = new Set(action.deleted)
+        return pickBy(state, o => o.node_id && !deletedSet.has(o.node_id))
+      }
+    }
+    return state
+  })
+  customAtom.onMount = (setState) => {
+    fullscreenValue.onReady().then(() => {
+      const overrides = VariablesBindings?.getLocalVariableOverridesInfo()
+      if (overrides) {
+        setState({
+          added: overrides,
+        })
+      }
+    })
+    const handler = registerLocalOverrideHandler((change) => {
+      setState(change)
+    })
+    return () => {
+      handler()
+      setState(null)
+    }
+  }
+  return customAtom
+})()
+
+// Original: eI
+// Subscribed variable overrides atom
+const subscribedVariableOverridesAtom = (() => {
+  const baseAtom = atom({})
+  const customAtom = setupCustomAtom(baseAtom, (state, action) => {
+    if (action) {
+      if ("added" in action) {
+        return {
+          ...state,
+          ...keyBy(action.added.map(getSubscribedVariableOverride), o => o.node_id),
+        }
+      }
+      if ("deleted" in action) {
+        const deletedSet = new Set(action.deleted)
+        return pickBy(state, o => o.node_id && !deletedSet.has(o.node_id))
+      }
+    }
+    return state
+  })
+  customAtom.onMount = (setState) => {
+    fullscreenValue.onReady().then(() => {
+      const overrides = VariablesBindings?.getSubscribedVariableOverridesInfo()
+      if (overrides) {
+        setState({
+          added: overrides,
+        })
+      }
+    })
+    const handler = registerSubscribedOverrideHandler((change) => {
+      setState(change)
+    })
+    return () => {
+      handler()
+      setState(null)
+    }
+  }
+  return customAtom
+})()
+
+// Original: $$eS0
+// Local overrides by variable set id atom family
+const localOverridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
+  const overrides = Object.values<ObjectOf>(get(localVariableOverridesAtom)).filter(o => o.variableSetId === setId)
+  return keyBy<ObjectOf>(overrides, o => o.overriddenVariableID)
+}))
+
+// Original: ev
+// Subscribed overrides by variable set id atom family
+const subscribedOverridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
+  const overrides = Object.values<ObjectOf>(get(subscribedVariableOverridesAtom)).filter(o => o.variableSetId === setId)
+  return keyBy<ObjectOf>(overrides, o => o.overriddenVariableID)
+}))
+
+// Original: $$eA5
+// Combined overrides by variable set id atom family
+const overridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
+  const localOverrides = get(localOverridesByVariableSetIdAtomFamily(setId))
+  const subscribedOverrides = get(subscribedOverridesByVariableSetIdAtomFamily(setId))
+  const combined = {
+    ...localOverrides,
+    ...subscribedOverrides,
+  }
+  return keyBy<ObjectOf>(combined, o => o.overriddenVariableID)
+}))
+
+// Original: $$ex16
+// Function to create page level modes atom
+export function createPageLevelModesAtom() {
+  const isReady = fullscreenValue.isReady()
+  const initialValue = isReady ? VariablesBindings.getPageLevelModes() : null
+  const modesAtom = atom(initialValue)
+  modesAtom.onMount = (setValue) => {
+    if (!isReady) {
+      fullscreenValue.onReady().then(() => {
+        setValue(VariablesBindings.getPageLevelModes())
+      })
+    }
+    return () => {
+      setValue(null)
+    }
+  }
+  return modesAtom
+}
+
+// Refactored exports with meaningful names, keeping originals as comments
+export const A6 = localOverridesByVariableSetIdAtomFamily // Original: A6 = $$eS0
+export const BJ = createVariableResolvedValueAtom // Original: BJ = $$ey1
+export const Cg = localVariablesAtom // Original: Cg = $$eu2
+export const Eo = combinedVariableSetByIdAtomFamily // Original: Eo = $$z3
+export const Ev = variableByIdAtomFamily // Original: Ev = $$eE4
+export const Fx = overridesByVariableSetIdAtomFamily // Original: Fx = $$eA5
+export const Gc = localVariablesGroupedBySetIdAtom // Original: Gc = $$eh6
+export const H2 = libraryVariableCollectionsByFileKeysAtomFamily // Original: H2 = $$K7
+export const Ho = libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily // Original: Ho = $$J8
+export const JB = createExplicitModeNamesAtom // Original: JB = $$eb9
+export const Jo = createDisabledResourceAtom // Original: Jo = $$ee10
+export const L9 = subscribedVariablesGroupedBySetIdAtom // Original: L9 = $$em11
+export const LC = usedLibraryVariablesByKeyReduxAtom // Original: LC = $$ei12
+export const Oj = variablesByVariableCollectionKeysAtomFamily // Original: Oj = $$q13
+export const Ri = queryCommunityLibraryVariableCollectionWithVariables // Original: Ri = $$X14
+export const TD = allLocalVariableSetsAtom // Original: TD = $$ed15
+export const Tg = createPageLevelModesAtom // Original: Tg = $$ex16
+export const XC = variableTableDataForVariableSetAtomFamily // Original: XC = $$W17
+export const Yt = libraryVariableCollectionsWithVarsByFileKeysAtomFamily // Original: Yt = $$Z18
+export const ZG = localVariableSetByIdAtomFamily // Original: ZG = $$H19
+export const Zc = combinedVariableSetsAtom // Original: Zc = $$V20
+export const bO = subscribedVariablesAtom // Original: bO = $$ef21
+export const cp = libraryVariableCollectionWithVarsByFileKeyAtomFamily // Original: cp = $$$22
+export const hy = localVariableByIdAtomFamily // Original: hy = $$ep23
+export const hz = communityLibraryVariableCollectionsWithVarsByHubFileIdsAtomFamily // Original: hz = $$Q24
+export const jt = usedLibraryVariableSetsByKeyReduxAtom // Original: jt = $$el25
+export const qy = localVariableSetsAtom // Original: qy = $$G26
+export const uk = sortedLocalVariablesAtom // Original: uk = $$e_27
+export const wh = libraryVariableCollectionsByLibraryKeysAtomFamily // Original: wh = $$Y28
+export const xA = subscribedVariableSetsAtom // Original: xA = $$ec29

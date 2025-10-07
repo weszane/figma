@@ -1,4 +1,4 @@
-import type { Atom, PrimitiveAtom } from 'jotai'
+import type { Atom, Getter, PrimitiveAtom, Setter } from 'jotai'
 import type { Store } from 'redux'
 import { atom } from 'jotai'
 import { atomWithDefault } from 'jotai/utils'
@@ -17,20 +17,20 @@ import { setupAtomWithInitialValue } from '../905/623391'
  * @param initialState - Initial state for the reducer
  * @returns The configured atom with Redux integration
  */
-export function setupReduxAtom<T = any>(
+export function setupReduxAtom<R, T = any>(
   storeAtom: () => Store<T>,
-  atomValue: PrimitiveAtom<T>,
+  atomValue: PrimitiveAtom<R>,
   actionType: string,
-  initialState?: T,
+  initialState?: R,
 ) {
   let unsubscribe = noop
   const { action, reducer } = createActionAndReducer(actionType, 'init' in atomValue ? atomValue.init : initialState)
-  return attachReducer(
-    setupAtomWithInitialValue(atomValue, (value: any) => {
+  return attachReducer<R>(
+    setupAtomWithInitialValue<R>(atomValue, (value: R) => {
       storeAtom()?.dispatch(action(value))
       unsubscribe(value, 'toRedux')
     }),
-    reducer,
+    reducer as (state: R, action: any) => R,
   )
 }
 
@@ -41,11 +41,11 @@ export function setupReduxAtom<T = any>(
  * @param initialState - Initial state for the reducer
  * @returns Object containing action creator and reducer
  */
-export function createActionAndReducer<T>(actionType: string, initialState: T) {
+export function createActionAndReducer<T = any>(actionType: string, initialState: T) {
   const actionCreator = createActionCreator(actionType)
   return {
     action: actionCreator,
-    reducer: (state = initialState, action: any) => actionCreator.matches(action) ? action.payload : state,
+    reducer: (state: T = initialState, action: { type: string, payload: T }) => actionCreator.matches(action) ? action.payload : state,
   }
 }
 
@@ -56,9 +56,12 @@ export function createActionAndReducer<T>(actionType: string, initialState: T) {
  * @param reducer - The reducer function
  * @returns The atom with the reducer attached
  */
-export function attachReducer(atom: any, reducer: any) {
+export function attachReducer<T = any>(
+  atom: PrimitiveAtom<T> & { reducer?: (state: T, action: any) => T },
+  reducer: (state: T, action: any) => T,
+) {
   atom.reducer = reducer
-  return atom
+  return atom as PrimitiveAtom<T> & { reducer: (state: T, action: any) => T }
 }
 
 /**
@@ -69,8 +72,8 @@ export function attachReducer(atom: any, reducer: any) {
  * @param actionType - Type of the Redux action
  * @returns The configured atom
  */
-export function createAtomWithRedux<T>(storeAtom: () => Store<T>, initialValue: T, actionType: string) {
-  return setupReduxAtom(storeAtom, atom(initialValue), actionType)
+export function createAtomWithRedux<R = any, T = any>(storeAtom: () => Store<T>, initialValue: R, actionType: string) {
+  return setupReduxAtom<R, T>(storeAtom, atom(initialValue), actionType)
 }
 
 /**
@@ -81,13 +84,13 @@ export function createAtomWithRedux<T>(storeAtom: () => Store<T>, initialValue: 
  * @param options - Options for notification
  * @returns The subscription atom with getStore method
  */
-export function createReduxSubscriptionAtom<T = any, S = any>(
+export function createReduxSubscriptionAtom<T, S = any>(
   storeAtom: () => Store<S> & { subscribeImmediate?: (listener?: () => any) => () => void } | null,
   selector: (state: S) => T,
   options: { notifyImmediate?: boolean } = {},
 ) {
   const { notifyImmediate = false } = options
-  const subscriptionAtom = setupSubscriptionAtom({
+  const subscriptionAtom = setupSubscriptionAtom<T>({
     get: () => {
       const store = storeAtom()
       if (!store) {
@@ -106,9 +109,12 @@ export function createReduxSubscriptionAtom<T = any, S = any>(
       return store.subscribe(callback)
     },
   })
-  const res =  Object.assign(atomWithDefault(() => subscriptionAtom), {
+
+  const baseAtom = atomWithDefault<T>(() => subscriptionAtom)
+  const res = Object.assign(baseAtom, {
     getStore: storeAtom,
   })
+
   return res as Atom<T> & { getStore: () => Store<S> | null }
 }
 

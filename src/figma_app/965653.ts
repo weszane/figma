@@ -10,7 +10,7 @@ import { SubscribedLibrariesAtom } from "../figma_app/155728";
 import { V } from "../905/693394";
 import { b } from "../905/857767";
 import { dC, Yc } from "../905/820169";
-import { uk } from "../figma_app/216057";
+import { sortedLocalVariablesAtom } from "../figma_app/216057";
 var s = a;
 let f = setupRemovableAtomFamily(() => atom(null));
 let $$E3 = setupRemovableAtomFamily(() => atom(e => e(f), (e, t, r) => {
@@ -25,7 +25,7 @@ let $$v5 = createRemovableAtomFamily(e => atom(t => {
   let {
     libraryVariables
   } = t(v4);
-  let i = t(qp) ? t(uk) : [];
+  let i = t(qp) ? t(sortedLocalVariablesAtom) : [];
   let {
     localVariableSets,
     libraryVariableSets

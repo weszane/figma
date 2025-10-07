@@ -10,7 +10,7 @@ import { QO } from '../888985';
 import { resourceUtils } from '../989992';
 import { zl } from '../../figma_app/27355';
 import { bsh } from '../../figma_app/43951';
-import { Ho } from '../../figma_app/216057';
+import { libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily } from '../../figma_app/216057';
 import { gr } from '../../figma_app/243058';
 import { cE, Zt } from '../../figma_app/349248';
 import { Dt } from '../../figma_app/633080';
@@ -213,7 +213,7 @@ async function rP(variableSetKey) {
 async function rO(variableCollectionInputs) {
   // rO - Process variable collections from library inputs and return formatted results
 
-  const libraryKeys = Ho(variableCollectionInputs.map(input => input.libraryKey));
+  const libraryKeys = libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily(variableCollectionInputs.map(input => input.libraryKey));
 
   // Fetch library data and process variable collections
   const libraryData = (await QO(libraryKeys, (resolve, reject) => {

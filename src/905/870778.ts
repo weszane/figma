@@ -12,7 +12,7 @@ import { r as _$$r } from "../905/857502";
 import { customHistory } from "../905/612521";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg, CommunityRoute, ResourceType } from "../figma_app/354658";
-import { S as _$$S } from "../figma_app/11182";
+import { copyLinkThunk } from "../figma_app/11182";
 import { hasPublishScope, hasClientMeta, isWidgetOrPlugin } from "../figma_app/45218";
 import { slideOrCooperNewFileUrl } from "../905/548668";
 export function $$b3({
@@ -27,7 +27,7 @@ export function $$b3({
   return jsx(Button, {
     variant: "secondary",
     onClick: async () => {
-      await t(_$$S({
+      await t(copyLinkThunk({
         url: new URL(i, document.baseURI).href
       }));
       l(!0);
@@ -84,7 +84,7 @@ export function $$E5({
     }
   }, [I]);
   let S = async () => {
-    await v(_$$S({
+    await v(copyLinkThunk({
       url: x,
       linkType: "template"
     }));

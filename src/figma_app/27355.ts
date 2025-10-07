@@ -102,7 +102,7 @@ export function useAtomValueAndSetter(atomInstance: any, options?: any) {
  * @returns Atom family with removeAll method.
  * @originalName $$A3
  */
-export function createRemovableAtomFamily<T, R extends Atom<unknown>>(keyFn: (value: T) => R, areEqual?: (a: T, b: T) => boolean): AtomFamily<T, R> & {
+export function createRemovableAtomFamily<T, R extends Atom<any>>(keyFn: (value: T) => R, areEqual?: (a: T, b: T) => boolean): AtomFamily<T, R> & {
     removeAll: () => void;
 } {
   const family = atomFamily(keyFn, areEqual) as AtomFamily<T, R> & { removeAll: () => void }

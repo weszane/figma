@@ -40,7 +40,7 @@ import { $S, mu } from '../905/918620';
 import { selectViewAction } from '../905/929976';
 import { fileEntityDataMapper } from '../905/943101';
 import { nk } from '../figma_app/2023';
-import { S as _$$S } from '../figma_app/11182';
+import { copyLinkThunk } from '../figma_app/11182';
 import { isExternalRestricted } from '../figma_app/12796';
 import { useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { copyShareLinkOptimistic } from '../figma_app/78808';
@@ -308,7 +308,7 @@ export function $$ek0(e) {
         }));
         break;
       case TileType.PROTOTYPE:
-        i(_$$S({
+        i(copyLinkThunk({
           url: buildFileUrlInternal({
             base: 'proto',
             file: {

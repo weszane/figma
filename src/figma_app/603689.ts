@@ -382,7 +382,7 @@ import { I$, Mx, x3 } from '../figma_app/327577';
 import { h as _$$h7 } from '../figma_app/334471';
 import { V as _$$V } from '../figma_app/339971';
 import { ds as _$$ds } from '../figma_app/343967';
-import { DQ as VariablesMirrorBindings } from '../figma_app/345195';
+import { variableMirrorManagerInstance } from '../figma_app/345195';
 import { mapRecentFilesAndRepos } from '../figma_app/349248';
 import { p as _$$p2 } from '../figma_app/353099';
 import { u as SitesJsBindings } from '../figma_app/353758';
@@ -1755,7 +1755,7 @@ let ns = {
   RichTextBindings: () => RichTextBindings,
   SpellCheckAPIBindings: () => SpellCheckAPIBindings,
   VariablesBindingsWeb: () => VariablesBindingsWeb,
-  VariablesMirrorBindings: () => VariablesMirrorBindings,
+  VariablesMirrorBindings: () => variableMirrorManagerInstance,
   AssetMirrorBindings: () => assetMirrorInstance,
   AssetConsumptionMirrorBindings: () => AssetConsumptionMirrorBindings,
   HandoffBindings: () => fullscreenAlias,
@@ -9197,7 +9197,7 @@ executeWhenDomReady(async () => {
         CanvasSearchBindings: () => CanvasSearchBindings,
         SpellCheckAPIBindings: () => SpellCheckAPIBindings,
         VariablesBindingsWeb: () => VariablesBindingsWeb,
-        VariablesMirrorBindings: () => VariablesMirrorBindings,
+        VariablesMirrorBindings: () => variableMirrorManagerInstance,
         AssetMirrorBindings: () => assetMirrorInstance,
         AssetConsumptionMirrorBindings: () => AssetConsumptionMirrorBindings,
         HandoffBindings: () => fullscreenAlias,

@@ -9,9 +9,9 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { _y, vV } from "../figma_app/755395";
-import { a9 } from "../905/191741";
+import { devModeFormatter } from "../905/191741";
 import { isCodegenSupportedForLanguage, getUnitForLanguage } from "../figma_app/120227";
-import { v as _$$v } from "../905/50227";
+import { devModeShowVarCodeSyntaxAtom } from "../905/50227";
 import { yt } from "../figma_app/451499";
 import { fullscreenAlias } from "../905/37051";
 import { useDropdownState } from "../905/848862";
@@ -50,7 +50,7 @@ export function $$N0({
   let b = fullscreenAlias.getIsExtension();
   let T = inspectionModes.map(e => ({
     key: e,
-    label: a9.format(e)
+    label: devModeFormatter.format(e)
   }));
   return jsx(VZ, {
     hideHeader: !0,
@@ -65,7 +65,7 @@ export function $$N0({
         dispatch: l,
         dropdownShown: g,
         dropdownWidth: "120px",
-        formatter: a9,
+        formatter: devModeFormatter,
         id: `${e}_dev_handoff_inspection_mode`,
         onChange: setInspectionMode,
         onShowDropdownOverride: d ? void 0 : noop,
@@ -169,7 +169,7 @@ function R({
   } = t;
   let s = isCodegenSupportedForLanguage();
   let o = getUnitForLanguage();
-  let l = useAtomWithSubscription(_$$v);
+  let l = useAtomWithSubscription(devModeShowVarCodeSyntaxAtom);
   if ("first-party" !== codeLanguage.type) return null;
   let d = l ? getI18nString("dev_handoff.variables.panel_display_code_syntax") : getI18nString("dev_handoff.variables.panel_display_figma_name");
   return jsx(vV, {

@@ -7,11 +7,11 @@ import { getI18nString } from "../905/303541";
 import { v4, AC, Pt } from "../figma_app/655139";
 import { SupportedPlatforms, WEB } from "../905/359509";
 import { isCodegenSupported, CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
-import { $h, OQ } from "../905/191741";
+import { useDevModeValueAndSetter, devModeOptions } from "../905/191741";
 import { Z } from "../905/820720";
 import { getPluginInfo, getUnitLabelForLanguage } from "../figma_app/120227";
 export function $$g0() {
-  let [e] = $h();
+  let [e] = useDevModeValueAndSetter();
   let [t, i] = useState(e);
   let g = v4();
   let [f, _] = useState({
@@ -80,7 +80,7 @@ export function $$g0() {
     formatter: T,
     onCodeLanguageChange: noop
   };
-  let N = OQ;
+  let N = devModeOptions;
   return {
     inspectionMode: N.find(e => e === t) || N[0],
     setInspectionMode: b,

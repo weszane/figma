@@ -1,4 +1,5 @@
 import type { PrimitiveAtom } from 'jotai'
+import type { Store } from 'redux'
 import { attachReducer, createActionAndReducer, createAtomWithRedux, createReduxSubscriptionAtom, setupReduxAtom } from '../905/111321'
 import { debugState } from '../905/407919'
 
@@ -6,8 +7,8 @@ import { debugState } from '../905/407919'
  * Returns the debug state.
  * Original name: a
  */
-function getDebugState() {
-  return debugState
+function getDebugState(): Store<AppState> {
+  return debugState as Store<AppState>
 }
 
 type SetupReduxAtomArgs<T> = [
@@ -30,6 +31,7 @@ type CreateAtomWithReduxArgs<T> = [
   actionType: string,
   initialValue: T,
 ]
+
 /**
  * Creates an action and reducer.
  * Original name: $$o0
@@ -43,32 +45,43 @@ export function createActionAndReducerWrapper<T>(...args: CreateAtomWithReduxArg
 /**
  * Attaches a reducer.
  * Original name: $$l3
- * @param args - Arguments for attachReducer
+ * @param atom - The atom to attach the reducer to
+ * @param reducer - The reducer function
  * @returns The result of attachReducer
  */
-export function attachReducerWrapper(...args: [atom: any, reducer: (state: any, action: any) => any]) {
-  return attachReducer(...args)
+export function attachReducerWrapper<T>(
+  atom: PrimitiveAtom<T> & { reducer?: (state: T, action: any) => T },
+  reducer: (state: T, action: any) => T,
+) {
+  return attachReducer(atom, reducer)
 }
 
 /**
  * Creates an atom with Redux using the debug state.
  * Original name: $$d1
- * @param args - Arguments for createAtomWithRedux
+ * @param initialValue - Initial value for the atom
+ * @param actionType - Type of the Redux action
  * @returns The result of createAtomWithRedux
  */
-export function createAtomWithReduxWithState(...args: [actionType: string, initialValue: any]) {
-  return createAtomWithRedux(getDebugState, ...args)
+export function createAtomWithReduxWithState<T extends Record<string, any>>(
+  initialValue: T,
+  actionType: string,
+) {
+  return createAtomWithRedux(getDebugState, initialValue, actionType)
 }
 
 /**
  * Creates a Redux subscription atom with the debug state.
  * Original name: $$c4
- * @param e - First argument
- * @param t - Second argument
+ * @param selector - Selector function for the state
+ * @param options - Options for notification
  * @returns The result of createReduxSubscriptionAtom
  */
-export function createReduxSubscriptionAtomWithState<T = any>(e: (state: AppState) => T, t: { notifyImmediate?: boolean } = {}) {
-  return createReduxSubscriptionAtom<T>(getDebugState, e, t)
+export function createReduxSubscriptionAtomWithState<T>(
+  selector: (state: AppState) => T,
+  options: { notifyImmediate?: boolean } = {},
+) {
+  return createReduxSubscriptionAtom<T, AppState>(getDebugState, selector, options)
 }
 
 // Aliases for backward compatibility or external use

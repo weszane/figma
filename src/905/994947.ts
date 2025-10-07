@@ -10,7 +10,7 @@ import { PublicModelType } from "../figma_app/162807";
 import { G as _$$G } from "../905/186289";
 import { ms, wv, c$ } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
-import { S as _$$S, le, TH } from "../figma_app/11182";
+import { copyLinkThunk, copyViewLinkThunk, copySelectedViewLinkThunk } from "../figma_app/11182";
 import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
 import { showModalHandler } from "../905/156213";
 import { selectTiles } from "../905/81009";
@@ -135,7 +135,7 @@ function x(e) {
     return {
       id: "copy_link",
       text: getI18nString("file_browser.copy_link"),
-      onClick: () => t(_$$S(n)),
+      onClick: () => t(copyLinkThunk(n)),
       ...overrides
     };
   };
@@ -149,7 +149,7 @@ function x(e) {
     return {
       id: "copy_view_link",
       text: getI18nString("file_browser.copy_link"),
-      onClick: () => t(le(n)),
+      onClick: () => t(copyViewLinkThunk(n)),
       ...overrides
     };
   }
@@ -221,7 +221,7 @@ let V = e => ({
       text: getI18nString("file_browser.copy_link"),
       onClick: () => {
         let n = new SelectedViewPathManager();
-        t(TH({
+        t(copySelectedViewLinkThunk({
           selector: n,
           selectedView: V(e),
           data: {

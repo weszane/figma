@@ -3284,6 +3284,10 @@ export interface SelectionProperties {
   arcStart: any
   arcSweep: any
   arcRadius: any
+  gridTrackSizingType: any
+  gridTrackSize: number
+  gridRowCount: number
+  gridColumnCount: number
 }
 
 export interface AriaAttributes {

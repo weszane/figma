@@ -155,7 +155,7 @@ import { convertTeamToRaw } from '../905/628874';
 import { T as _$$T3 } from '../905/632137';
 import { ButtonPrimitive } from '../905/632989';
 import { useSyncedRef } from '../905/633914';
-import { F as _$$F5 } from '../905/634016';
+import { ComboboxPrimitive } from '../905/634016';
 import { eo as _$$eo, fp as _$$fp2 } from '../905/634218';
 import { getVisibleTheme } from '../905/640017';
 import { X as _$$X3 } from '../905/647103';
@@ -5860,7 +5860,7 @@ function o7({
     deleteStyle(e) {},
     stylePreviewShown
   }), [l, u, stylePreviewShown]);
-  let R = _$$F5.useCombobox({
+  let R = ComboboxPrimitive.useCombobox({
     expanded: !0,
     onSelect: t => {
       t && (l(t, !0), e());

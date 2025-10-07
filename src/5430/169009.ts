@@ -46,7 +46,7 @@ import { HH } from "../figma_app/841415";
 import { ky } from "../figma_app/99826";
 import { VisualBellActions } from "../905/302958";
 import { CommunityRoute } from "../figma_app/354658";
-import { lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { E as _$$E2 } from "../905/565019";
 import { H as _$$H } from "../5430/304640";
@@ -296,7 +296,7 @@ function ef(e) {
     }));
   };
   let m = () => {
-    t(lW({
+    t(copyTextThunk({
       stringToCopy: ky(new CommunityRoute({
         apiResourceType: n,
         resourceId: o

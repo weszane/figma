@@ -74,7 +74,7 @@ import { VisualBellIcon } from '../905/576487';
 import { getFeatureFlags } from '../905/601108';
 import { K as _$$K } from '../905/628118';
 import { ButtonPrimitive } from '../905/632989';
-import { F as _$$F2 } from '../905/634016';
+import { ComboboxPrimitive } from '../905/634016';
 import { FeatureFlag } from '../905/652992';
 import { ResourceStatus } from '../905/663269';
 import { In } from '../905/672640';
@@ -931,7 +931,7 @@ function tk(e) {
   let [i, r] = useState(void 0);
   let l = useRef(null);
   let o = useId();
-  let d = _$$F2.useCombobox({
+  let d = ComboboxPrimitive.useCombobox({
     onActiveValueChange: r,
     onSelect: t => {
       let n = e.workspaces.find(e => e.id === t);
@@ -950,11 +950,11 @@ function tk(e) {
           onChange: a,
           value: t
         })
-      }), jsx(_$$F2.Trigger, {
+      }), jsx(ComboboxPrimitive.Trigger, {
         ...d.getTriggerProps(),
         children: jsx(_$$r3, {})
       })]
-    }), c.length > 0 && jsx(_$$F2.PopupList, {
+    }), c.length > 0 && jsx(ComboboxPrimitive.PopupList, {
       style: {
         width: l.current?.getBoundingClientRect().width
       },
@@ -968,7 +968,7 @@ function tk(e) {
           },
           children: c.map(t => {
             let a = e.hasCustomSettings(t);
-            return createElement(_$$F2.Option, {
+            return createElement(ComboboxPrimitive.Option, {
               ...props(i === t.id && !a && tE.activeComboboxOption),
               disabled: a,
               key: t.id,

@@ -30,7 +30,7 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { G as _$$G } from "../905/750789";
 import { styleBuilderInstance } from "../905/941192";
 import { tI, JT } from "../figma_app/599327";
-import { II } from "../figma_app/11182";
+import { copyEmailsThunk } from "../figma_app/11182";
 import { Button } from "../905/521428";
 import { y as _$$y } from "../905/37128";
 import { S as _$$S2 } from "../905/794163";
@@ -171,7 +171,7 @@ function $({
     value: e.email,
     onClick: e.email ? t => {
       t.stopPropagation();
-      e.email && l(II({
+      e.email && l(copyEmailsThunk({
         emailList: [e.email]
       }));
     } : void 0

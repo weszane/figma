@@ -14,34 +14,34 @@ import { FeatureFlag } from "../905/652992";
 import { fileActionEnum } from "../figma_app/630077";
 import { Y } from "../905/513161";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
-import { V_, fm, $A, Ot } from "../905/850476";
+import { SubscriptionTier, currentTierAtom, getMaxVariables, hasExtendedCollections } from "../905/850476";
 function b(e) {
   switch (e) {
-    case V_.STARTER:
+    case SubscriptionTier.STARTER:
       return consumptionPaywallUtils.Plan.STARTER;
-    case V_.PRO:
+    case SubscriptionTier.PRO:
       return consumptionPaywallUtils.Plan.PRO;
-    case V_.ORG:
+    case SubscriptionTier.ORG:
       return consumptionPaywallUtils.Plan.ORG;
-    case V_.ENTERPRISE:
+    case SubscriptionTier.ENTERPRISE:
       return consumptionPaywallUtils.Plan.ENTERPRISE;
   }
 }
 export function $$v1(e) {
-  let t = useAtomWithSubscription(fm);
-  let i = $A(t);
+  let t = useAtomWithSubscription(currentTierAtom);
+  let i = getMaxVariables(t);
   let s = function (e, t) {
     let i = useDispatch();
     let s = useAtomWithSubscription(openFileTeamAtom);
     return useCallback(() => {
-      if (e === V_.ENTERPRISE) {
+      if (e === SubscriptionTier.ENTERPRISE) {
         logError("designSystems", "attempting to show modes upsell modal to enterprise user");
         return;
       }
       let n = {
-        [V_.STARTER]: V_.PRO,
-        [V_.ORG]: V_.ENTERPRISE,
-        [V_.PRO]: V_.ENTERPRISE
+        [SubscriptionTier.STARTER]: SubscriptionTier.PRO,
+        [SubscriptionTier.ORG]: SubscriptionTier.ENTERPRISE,
+        [SubscriptionTier.PRO]: SubscriptionTier.ENTERPRISE
       }[e];
       i(showModalHandler({
         type: ConsumptionPaywallModalPlansPricing,
@@ -72,13 +72,13 @@ export function $$v1(e) {
   let v = useAtomWithSubscription(_$$t2).data ?? !1;
   return {
     modeLimit: i,
-    canShowCTA: useCallback(e => t !== V_.ENTERPRISE && e < $A(V_.ENTERPRISE), [t]),
-    showCTA: t !== V_.STARTER || v || "authoring" !== e ? s : c,
-    allowExtendedSets: Ot()
+    canShowCTA: useCallback(e => t !== SubscriptionTier.ENTERPRISE && e < getMaxVariables(SubscriptionTier.ENTERPRISE), [t]),
+    showCTA: t !== SubscriptionTier.STARTER || v || "authoring" !== e ? s : c,
+    allowExtendedSets: hasExtendedCollections()
   };
 }
 export function $$I0() {
-  let e = useAtomWithSubscription(fm);
+  let e = useAtomWithSubscription(currentTierAtom);
   let t = useAtomWithSubscription(_$$t2).data ?? !1;
   let i = function () {
     let e = useDispatch();
@@ -94,7 +94,7 @@ export function $$I0() {
     }, [e]);
   }();
   return {
-    canUseAdvancedPrototyping: e !== V_.STARTER,
+    canUseAdvancedPrototyping: e !== SubscriptionTier.STARTER,
     canMoveFileToProPlus: !t,
     showMoveToProTeam: i
   };

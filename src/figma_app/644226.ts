@@ -5,16 +5,16 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { v4, AC, Pt } from "../figma_app/655139";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
-import { sQ } from "../905/191741";
+import { isCodeMode } from "../905/191741";
 import { j6 } from "../figma_app/243025";
 import { useCodegenPreferencesSettings, getLanguageUnitLabel, isCodegenSupportedForLanguage, getCodeExtensionPreferences, useUpdateCodeExtensionPreferences } from "../figma_app/120227";
 import { showModalHandler } from "../905/156213";
 import { fullscreenAlias } from "../905/37051";
 import { Q } from "../figma_app/152461";
-import { v as _$$v } from "../905/50227";
+import { devModeShowVarCodeSyntaxAtom } from "../905/50227";
 export function $$f0(e) {
   let t = useCodegenPreferencesSettings();
-  let r = sQ();
+  let r = isCodeMode();
   let f = fullscreenAlias.getIsExtension();
   let E = function (e) {
     let t = v4();
@@ -56,7 +56,7 @@ export function $$f0(e) {
     updateDefaultCodegenSettings,
     isSetToDefault
   } = Q();
-  let [S, v] = useAtomValueAndSetter(_$$v);
+  let [S, v] = useAtomValueAndSetter(devModeShowVarCodeSyntaxAtom);
   let A = AC(b);
   let x = Pt(A).format(b);
   return useMemo(() => {

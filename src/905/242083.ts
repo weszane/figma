@@ -201,7 +201,7 @@ import { getSceneGraphInstance } from '../905/830071';
 import { parseInteger } from '../905/833686';
 import { getOrgByCurrentUserId } from '../905/845253';
 import { useDropdownState } from '../905/848862';
-import { f8 } from '../905/850476';
+import { getCurrentMaxVariables } from '../905/850476';
 import { s2 as _$$s3, A9, bT, E9, mK } from '../905/851937';
 import { savepointOptimistThunk } from '../905/852057';
 import { y as _$$y2 } from '../905/855374';
@@ -317,7 +317,7 @@ import { cS, Zo } from '../figma_app/334459';
 import { getCurrentUserOrg } from '../figma_app/336853';
 import { n as _$$n2 } from '../figma_app/339971';
 import { Kx } from '../figma_app/342355';
-import { xQ } from '../figma_app/345195';
+import { initializeVariableMirrorManager } from '../figma_app/345195';
 import { hasTeamPaidAccess } from '../figma_app/345997';
 import { Qy, v$ } from '../figma_app/347120';
 import { isMobileDevice, determineFrameType } from '../figma_app/349969';
@@ -5203,7 +5203,7 @@ export function $$lq1(e, t, i, n) {
     LC();
     _$$n6(t);
     _$$_2();
-    xQ();
+    initializeVariableMirrorManager();
     initializeAssetMirrorManager();
     _$$tO();
     initializeFullscreenAPI();
@@ -7913,7 +7913,7 @@ let lX = class e extends sP(sN(sR)) {
     return canEditBasedOnPlan(this._state.openFile);
   }
   getVariableSetNumberOfModesAllowed() {
-    return f8();
+    return getCurrentMaxVariables();
   }
   getDefaultStateKeyForStateGroup(e) {
     let t = getSingletonSceneGraph().get(e);

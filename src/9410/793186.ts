@@ -21,7 +21,7 @@ import { handleAtomEvent } from '../905/502364';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { setupThemeContext } from '../905/614223';
-import { F as _$$F } from '../905/634016';
+import { ComboboxPrimitive } from '../905/634016';
 import { L as _$$L } from '../905/657783';
 import { getSingletonSceneGraph } from '../905/700578';
 import { s as _$$s } from '../905/780421';
@@ -62,193 +62,291 @@ import { trackFileEventWithStore } from '../figma_app/901889';
 import { PluginRunForContext } from '../figma_app/915202';
 import { ConfirmationModal2, ModalView } from '../figma_app/918700';
 import { w as _$$w } from '../figma_app/984514';
-let P = M;
+
+let P: typeof M = M;
 let q = 'on_canvas_name_editor--frameNameInput--VpLPf sf_pro--uiFontWithSFProFallback--m-p9V';
-function X(e, t, i) {
-  let r;
-  let {
+
+/**
+ * Custom hook for managing the on-canvas name editor functionality
+ * @param initialName - The initial name value
+ * @param setNameCallback - Callback function to set the name
+ * @param options - Configuration options for the editor
+ * @returns Object containing refs, styles, and event handlers for the editor
+ */
+function useOnCanvasNameEditor(initialName: string, setNameCallback: (name: string) => void, options: NameEditorHookProps): NameEditorHookReturn | null {
+  let inputClassName: string;
+  const {
     maxWidth,
-    noSelectOnFocus = !1,
-    disableSaveOnEscape = !1,
-    hasSlideRowBeenManuallyRenamed = !0
-  } = i;
-  let {
+    noSelectOnFocus = false,
+    disableSaveOnEscape = false,
+    hasSlideRowBeenManuallyRenamed = true
+  } = options;
+  const {
     padding,
     margin,
-    ...h
-  } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
-  let m = getViewportInfo({
-    subscribeToUpdates_expensive: !0
+    ...editorInfo
+  } = useSelector((state: any) => state.mirror.appModel.onCanvasNameEditorInfo);
+  const viewportInfo = getViewportInfo({
+    subscribeToUpdates_expensive: true
   });
-  let g = m?.zoomScale || 1;
-  let [_, x] = useState(e);
-  let [y, b] = useState(!0);
-  let C = useRef(null);
-  let v = useRef(null);
-  let [E, T] = useState(0);
-  let [w, S] = useState(!1);
-  let j = useCallback((e, t) => {
-    switch (h.mode) {
+  const zoomScale = viewportInfo?.zoomScale || 1;
+  const [editingName, setEditingName] = useState(initialName);
+  const [isVisible, setIsVisible] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const measurerRef = useRef<HTMLSpanElement>(null);
+  const [inputWidth, setInputWidth] = useState(0);
+  const [isComposing, setIsComposing] = useState(false);
+  const calculateInputWidth = useCallback((scrollWidth: number, currentName: string) => {
+    switch (editorInfo.mode) {
       case DiagramElementType.FRAME_NAME:
       case DiagramElementType.VAR_WIDTH_SIZE:
       case DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP:
-        T(Math.min(e, maxWidth * g) + 7);
+        setInputWidth(Math.min(scrollWidth, maxWidth * zoomScale) + 7);
         break;
       case DiagramElementType.CANVAS_GRID_ROW_NAME:
-        let i = Math.min(e, maxWidth * g);
-        hasSlideRowBeenManuallyRenamed ? T(i + 14) : T(Math.max(i, 40) + 14);
+        const minWidth = Math.min(scrollWidth, maxWidth * zoomScale);
+        hasSlideRowBeenManuallyRenamed ? setInputWidth(minWidth + 14) : setInputWidth(Math.max(minWidth, 40) + 14);
         break;
       case DiagramElementType.RESPONSIVE_SET_NAME:
       case DiagramElementType.SECTION_NAME:
-        let r = maxWidth * g;
-        h.mode === DiagramElementType.RESPONSIVE_SET_NAME && (r -= 60);
-        e < r ? T(e) : T(r - 2 * margin.x);
+        let adjustedMaxWidth = maxWidth * zoomScale;
+        if (editorInfo.mode === DiagramElementType.RESPONSIVE_SET_NAME) {
+          adjustedMaxWidth -= 60;
+        }
+        scrollWidth < adjustedMaxWidth ? setInputWidth(scrollWidth) : setInputWidth(adjustedMaxWidth - 2 * (margin?.x || 0));
         break;
       case DiagramElementType.FLOW_STARTING_POINT_NAME:
-        T(Math.min(e, maxWidth) + 4);
+        setInputWidth(Math.min(scrollWidth, maxWidth) + 4);
         break;
       case DiagramElementType.MEASUREMENT_FREE_TEXT:
-        T(Math.min(e, maxWidth * g) + 8.5);
+        setInputWidth(Math.min(scrollWidth, maxWidth * zoomScale) + 8.5);
         break;
       case DiagramElementType.GRID_TRACK_SIZE:
-        let n = e;
-        InteractionCpp && (n = InteractionCpp.measureTrackLabelSize(t).x);
-        T(Math.min(n, maxWidth * g + 8.5));
+        let labelWidth = scrollWidth;
+        if (InteractionCpp) {
+          labelWidth = InteractionCpp.measureTrackLabelSize(currentName).x;
+        }
+        setInputWidth(Math.min(labelWidth, maxWidth * zoomScale + 8.5));
+        break;
     }
-  }, [h.mode, maxWidth, g, margin.x, hasSlideRowBeenManuallyRenamed]);
+  }, [editorInfo.mode, maxWidth, zoomScale, margin?.x, hasSlideRowBeenManuallyRenamed]);
   useLayoutEffect(() => {
-    v.current && j(v.current.scrollWidth, _);
-  }, [_, j]);
+    if (measurerRef.current) {
+      calculateInputWidth(measurerRef.current.scrollWidth, editingName);
+    }
+  }, [editingName, calculateInputWidth]);
   useEffect(() => {
-    e && (b(!0), x(e));
-  }, [e]);
+    if (initialName) {
+      setIsVisible(true);
+      setEditingName(initialName);
+    }
+  }, [initialName]);
   useEffect(() => {
-    let e = e => {
-      let t = !(C.current && C.current.contains(e.target));
-      let i = document.querySelector('[data-resource-id="rename-selection"]');
-      let r = e.target && i && i.contains(e.target);
-      t && !r && Fullscreen?.hideOnCanvasNameEditor();
+    const handleMouseDown = (event: MouseEvent) => {
+      const isClickOutsideContainer = !(containerRef.current && containerRef.current.contains(event.target as Node));
+      const renameSelectionElement = document.querySelector('[data-resource-id="rename-selection"]');
+      const isClickOnRenameSelection = event.target && renameSelectionElement && renameSelectionElement.contains(event.target as Node);
+      if (isClickOutsideContainer && !isClickOnRenameSelection) {
+        Fullscreen?.hideOnCanvasNameEditor();
+      }
     };
-    document.addEventListener('mousedown', e);
+    document.addEventListener('mousedown', handleMouseDown);
     return () => {
-      document.removeEventListener('mousedown', e);
+      document.removeEventListener('mousedown', handleMouseDown);
     };
   }, []);
-  let I = useHandleChangeEvent('onCanvasRename', 'change', e => {
-    x(e.target.value);
+  const handleChange = useHandleChangeEvent('onCanvasRename', 'change', event => {
+    setEditingName(event.target.value);
   });
-  let k = useHandleKeyboardEvent('onCanvasRename', 'keydown', e => {
-    if (!w) {
-      if (e.key === 'Escape' && disableSaveOnEscape) {
-        b(!1);
+  const handleKeyDown = useHandleKeyboardEvent('onCanvasRename', 'keydown', event => {
+    if (!isComposing) {
+      if (event.key === 'Escape' && disableSaveOnEscape) {
+        setIsVisible(false);
         Fullscreen?.hideOnCanvasNameEditor();
         return;
       }
-      switch (e.key) {
+      switch (event.key) {
         case 'Escape':
         case 'Enter':
         case 'Tab':
-          e.preventDefault();
-          b(!1);
-          t(_);
+          event.preventDefault();
+          setIsVisible(false);
+          setNameCallback(editingName);
           fullscreenValue.commit();
           Fullscreen?.hideOnCanvasNameEditor();
           break;
         case '=':
         case '-':
-          isCommandEvent(e) && forwardKeyboardEvent(e);
+          if (isCommandEvent(event)) {
+            forwardKeyboardEvent(event);
+          }
       }
     }
   });
-  if (!m) return null;
-  let N = {};
-  let A = viewportToScreen(m, {
-    x: h.x,
-    y: h.y
-  }, !1);
-  let O = {
-    x: A.x + m.x,
-    y: A.y + m.y
+  if (!viewportInfo) return null;
+  const containerStyle: StyleObject = {};
+  const screenPosition = viewportToScreen(viewportInfo, {
+    x: editorInfo.x,
+    y: editorInfo.y
+  }, false);
+  const position: Position = {
+    x: screenPosition.x + viewportInfo.x,
+    y: screenPosition.y + viewportInfo.y
   };
-  if (h.mode === DiagramElementType.FLOW_STARTING_POINT_NAME && (O.x -= 32 + E, O.y = Math.round(O.y)), h.mode === DiagramElementType.FRAME_NAME) {
-    let e = lerp(5, 9, (m.zoomScale - 0.1) * 5);
-    e = clamp(e, 5, 9) - 3;
-    O.y -= e;
+
+  // Adjust position based on editor mode
+  if (editorInfo.mode === DiagramElementType.FLOW_STARTING_POINT_NAME) {
+    position.x -= 32 + inputWidth;
+    position.y = Math.round(position.y);
   }
-  if (h.mode === DiagramElementType.CANVAS_GRID_ROW_NAME && AppStateTsApi) {
-    let e = AppStateTsApi.canvasGrid().gridRowSpacing() / 2 * m.zoomScale;
-    e -= 8;
-    O.y -= e;
+  if (editorInfo.mode === DiagramElementType.FRAME_NAME) {
+    let offset = lerp(5, 9, (viewportInfo.zoomScale - 0.1) * 5);
+    offset = clamp(offset, 5, 9) - 3;
+    position.y -= offset;
   }
-  switch (h.mode === DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP && AppStateTsApi && (O.y += 8, O.x += 20), h.mode === DiagramElementType.RESPONSIVE_SET_NAME && (O.x += 36, O.y -= 3), h.mode === DiagramElementType.VAR_WIDTH_SIZE && (O.y += 20 * h.varWidthTextDirection.y, O.x += 20 * h.varWidthTextDirection.x), h.mode === DiagramElementType.GRID_TRACK_SIZE ? h.isShownOnLeft ? (N.transformOrigin = `${O.x - 10}px ${O.y}px`, O.x += 10, N.transform = `rotate(${h.angle}deg) translate(calc(${O.x}px - 100%), ${O.y - 10}px)`) : (N.transformOrigin = `${O.x}px ${O.y}px`, N.transform = `rotate(${h.angle}deg) translate(calc(${O.x}px - 50%), ${O.y - 10}px)`) : h.mode === DiagramElementType.MEASUREMENT_FREE_TEXT ? h.invertTextPosition ? N.transform = h.isCentered ? `translate(calc(${O.x}px - 50%), ${O.y - 24}px)` : `translate(calc(${O.x - 6}px - 100%), ${O.y - 9.5}px)` : N.transform = h.isCentered ? `translate(calc(${O.x}px - 50%), ${O.y + 7}px)` : `translate(${O.x + 6}px, ${O.y - 9.5}px)` : h.mode === DiagramElementType.VAR_WIDTH_SIZE ? N.transform = `translate(calc(${O.x}px - 50%), ${O.y - 10}px)` : N.transform = `translate(${O.x}px, ${O.y}px) rotate(${h.angle}deg)`, h.mode) {
+  if (editorInfo.mode === DiagramElementType.CANVAS_GRID_ROW_NAME && AppStateTsApi) {
+    const rowSpacing = AppStateTsApi.canvasGrid().gridRowSpacing() / 2 * viewportInfo.zoomScale;
+    position.y -= rowSpacing - 8;
+  }
+
+  // Apply additional positioning based on mode
+  if (editorInfo.mode === DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP && AppStateTsApi) {
+    position.y += 8;
+    position.x += 20;
+  }
+  if (editorInfo.mode === DiagramElementType.RESPONSIVE_SET_NAME) {
+    position.x += 36;
+    position.y -= 3;
+  }
+  if (editorInfo.mode === DiagramElementType.VAR_WIDTH_SIZE) {
+    position.y += 20 * (editorInfo.varWidthTextDirection?.y || 0);
+    position.x += 20 * (editorInfo.varWidthTextDirection?.x || 0);
+  }
+
+  // Apply transforms based on mode
+  if (editorInfo.mode === DiagramElementType.GRID_TRACK_SIZE) {
+    if (editorInfo.isShownOnLeft) {
+      containerStyle.transformOrigin = `${position.x - 10}px ${position.y}px`;
+      position.x += 10;
+      containerStyle.transform = `rotate(${editorInfo.angle || 0}deg) translate(calc(${position.x}px - 100%), ${position.y - 10}px)`;
+    } else {
+      containerStyle.transformOrigin = `${position.x}px ${position.y}px`;
+      containerStyle.transform = `rotate(${editorInfo.angle || 0}deg) translate(calc(${position.x}px - 50%), ${position.y - 10}px)`;
+    }
+  } else if (editorInfo.mode === DiagramElementType.MEASUREMENT_FREE_TEXT) {
+    if (editorInfo.invertTextPosition) {
+      containerStyle.transform = editorInfo.isCentered ? `translate(calc(${position.x}px - 50%), ${position.y - 24}px)` : `translate(calc(${position.x - 6}px - 100%), ${position.y - 9.5}px)`;
+    } else {
+      containerStyle.transform = editorInfo.isCentered ? `translate(calc(${position.x}px - 50%), ${position.y + 7}px)` : `translate(${position.x + 6}px, ${position.y - 9.5}px)`;
+    }
+  } else if (editorInfo.mode === DiagramElementType.VAR_WIDTH_SIZE) {
+    containerStyle.transform = `translate(calc(${position.x}px - 50%), ${position.y - 10}px)`;
+  } else {
+    containerStyle.transform = `translate(${position.x}px, ${position.y}px) rotate(${editorInfo.angle || 0}deg)`;
+  }
+
+  // Determine input class name based on mode
+  switch (editorInfo.mode) {
     case DiagramElementType.FRAME_NAME:
-      r = q;
+      inputClassName = q;
       break;
     case DiagramElementType.CANVAS_GRID_ROW_NAME:
-      r = 'on_canvas_name_editor--canvasGridRowNameInput--NtMKm on_canvas_name_editor--frameNameInput--VpLPf sf_pro--uiFontWithSFProFallback--m-p9V';
+      inputClassName = 'on_canvas_name_editor--canvasGridRowNameInput--NtMKm on_canvas_name_editor--frameNameInput--VpLPf sf_pro--uiFontWithSFProFallback--m-p9V';
       break;
     case DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP:
-      r = q;
+      inputClassName = q;
       break;
     case DiagramElementType.FLOW_STARTING_POINT_NAME:
-      r = 'on_canvas_name_editor--flowStartingPointNameInput--lLEZF';
+      inputClassName = 'on_canvas_name_editor--flowStartingPointNameInput--lLEZF';
       break;
     case DiagramElementType.MEASUREMENT_FREE_TEXT:
-      r = 'on_canvas_name_editor--measurementFreeTextInput--gJle8 sf_pro--uiFontWithSFProFallback--m-p9V';
+      inputClassName = 'on_canvas_name_editor--measurementFreeTextInput--gJle8 sf_pro--uiFontWithSFProFallback--m-p9V';
       break;
     case DiagramElementType.GRID_TRACK_SIZE:
-      r = 'on_canvas_name_editor--gridTrackSizeInput--TX2Zz sf_pro--uiFontWithSFProFallback--m-p9V';
+      inputClassName = 'on_canvas_name_editor--gridTrackSizeInput--TX2Zz sf_pro--uiFontWithSFProFallback--m-p9V';
       break;
     case DiagramElementType.VAR_WIDTH_SIZE:
-      r = 'on_canvas_name_editor--varWidthSizeInput--34tdd sf_pro--uiFontWithSFProFallback--m-p9V';
+      inputClassName = 'on_canvas_name_editor--varWidthSizeInput--34tdd sf_pro--uiFontWithSFProFallback--m-p9V';
+      break;
+    default:
+      inputClassName = q;
   }
   return {
-    containerRef: C,
-    measurerRef: v,
-    containerStyle: N,
-    inputClassname: r,
-    editingName: _,
-    onFocus: e => {
-      noSelectOnFocus || e.target.select();
-      v.current && j(v.current.scrollWidth, _);
+    containerRef,
+    measurerRef,
+    containerStyle,
+    inputClassname: inputClassName,
+    editingName,
+    onFocus: event => {
+      if (!noSelectOnFocus) {
+        event.target.select();
+      }
+      if (measurerRef.current) {
+        calculateInputWidth(measurerRef.current.scrollWidth, editingName);
+      }
     },
-    onChange: I,
-    onKeyDown: k,
-    onBlur: e => {
-      y && (t(e.target.value), fullscreenValue.commit(), e.relatedTarget && e.relatedTarget.className === 'focus-target' && Fullscreen?.hideOnCanvasNameEditor());
+    onChange: handleChange,
+    onKeyDown: handleKeyDown,
+    onBlur: event => {
+      if (isVisible) {
+        setNameCallback(event.target.value);
+        fullscreenValue.commit();
+        if (event.relatedTarget && event.relatedTarget.className === 'focus-target') {
+          Fullscreen?.hideOnCanvasNameEditor();
+        }
+      }
     },
-    width: E,
-    setIsComposing: S
+    width: inputWidth,
+    setIsComposing
   };
 }
-function Z({
-  containerRef: e,
-  containerClassname: t,
-  containerStyle: i,
-  measurerRef: n,
-  editingName: a,
-  children: s
-}) {
+
+/**
+ * Container component for the on-canvas name editor
+ * @param props - Component props
+ * @returns JSX element
+ */
+function OnCanvasNameEditorContainer({
+  containerRef,
+  containerClassname,
+  containerStyle,
+  measurerRef,
+  editingName,
+  children
+}: ZComponentProps) {
   return jsxs('div', {
-    ref: e,
-    className: P()(t, Dm, 'on_canvas_name_editor--containerOnLight--6zUKs'),
-    style: i,
+    ref: containerRef,
+    className: P(containerClassname, Dm, 'on_canvas_name_editor--containerOnLight--6zUKs'),
+    style: containerStyle,
     children: [jsx('span', {
-      ref: n,
+      ref: measurerRef,
       className: 'on_canvas_name_editor--measurer--KTnSp',
-      children: a
-    }), s]
+      children: editingName
+    }), children]
   });
 }
-function Q(e) {
-  let t = X(e.name, e.setName, {
-    maxWidth: e.maxWidth,
-    noSelectOnFocus: e.noSelectOnFocus,
-    disableSaveOnEscape: e.disableSaveOnEscape,
-    hasSlideRowBeenManuallyRenamed: e.hasSlideRowBeenManuallyRenamed
+/**
+ * On-canvas name editor input component
+ * @param props - Component props
+ * @returns JSX element
+ */
+function OnCanvasNameEditorInput({
+  name,
+  setName,
+  maxWidth,
+  noSelectOnFocus,
+  disableSaveOnEscape,
+  hasSlideRowBeenManuallyRenamed,
+  
+}: QComponentProps) {
+  const editorHookResult = useOnCanvasNameEditor(name, setName, {
+    maxWidth,
+    noSelectOnFocus,
+    disableSaveOnEscape,
+    hasSlideRowBeenManuallyRenamed
   });
-  if (!t) return null;
-  let {
+  if (!editorHookResult) return null;
+  const {
     containerRef,
     measurerRef,
     containerStyle,
@@ -260,8 +358,8 @@ function Q(e) {
     width,
     setIsComposing,
     inputClassname
-  } = t;
-  return jsx(Z, {
+  } = editorHookResult;
+  return jsx(OnCanvasNameEditorContainer, {
     containerRef,
     containerStyle,
     measurerRef,
@@ -270,16 +368,16 @@ function Q(e) {
       autoCapitalize: 'off',
       autoComplete: 'off',
       autoCorrect: 'off',
-      autoFocus: !0,
+      autoFocus: true,
       className: inputClassname,
       dir: 'auto',
       onBlur,
       onChange,
-      onCompositionEnd: () => setIsComposing(!1),
-      onCompositionStart: () => setIsComposing(!0),
+      onCompositionEnd: () => setIsComposing(false),
+      onCompositionStart: () => setIsComposing(true),
       onFocus,
       onKeyDown,
-      spellCheck: !1,
+      spellCheck: false,
       style: {
         width: `${width}px`
       },
@@ -287,86 +385,60 @@ function Q(e) {
     })
   });
 }
-let $ = Object.values(LayoutSizingType).filter(e => typeof e == 'number');
-function ee(e) {
-  switch (e) {
+
+/**
+ * Converts a LayoutSizingType enum value to its string representation
+ * @param sizingType - The layout sizing type enum value
+ * @returns String representation of the sizing type
+ */
+function getLayoutSizingTypeName(sizingType: LayoutSizingType): string {
+  switch (sizingType) {
     case LayoutSizingType.FIXED:
       return 'FIXED';
     case LayoutSizingType.HUG:
       return 'HUG';
     case LayoutSizingType.FLEX:
       return 'FLEX';
+    default:
+      return 'UNKNOWN';
   }
 }
-function et() {
-  let e;
-  let [t, i] = useSelectionProperty('gridTrackSize');
-  let [n, a] = useSelectionProperty('gridTrackSizingType');
-  let {
-    axis,
-    width,
-    initialText,
-    shouldOpenDropdown
-  } = selectWithShallowEqual(e => ({
-    axis: e.mirror.appModel.onCanvasNameEditorInfo.axis,
-    width: e.mirror.selectionProperties.width,
-    initialText: e.mirror.appModel.onCanvasNameEditorInfo.initialText,
-    shouldOpenDropdown: e.mirror.appModel.onCanvasNameEditorInfo.shouldOpenDropdown
-  }));
-  let u = normalizeValue(useSelectionPropertyValue('gridRowCount'));
-  let p = normalizeValue(useSelectionPropertyValue('gridColumnCount'));
-  if (!t || n == null || !width || !p || !u || isInvalidValue(t) || isInvalidValue(n)) return null;
-  e = axis === Axis.X ? Math.round(width / p) : Math.round(width / u);
-  let h = getFeatureFlags().ce_tv_grid_hug ? 'Fill' : 'Auto';
-  let m = n === LayoutSizingType.FLEX ? h : n === LayoutSizingType.HUG ? 'Hug' : floatToString(t);
-  let f = e => {
-    let t;
-    let r = (t = (t = e).trim().toLowerCase(), 'auto'.startsWith(t) || 'fill'.startsWith(t)) ? LayoutSizingType.FLEX : 'hug'.startsWith(t) && getFeatureFlags().ce_tv_grid_hug ? LayoutSizingType.HUG : 'fixed'.startsWith(t) ? LayoutSizingType.FIXED : null;
-    if (r != null) {
-      a(r);
-    } else {
-      let t = parseFloat(e);
-      if (isNaN(t)) return;
-      i(t);
-    }
-  };
-  return getFeatureFlags().ce_tv_grid_hug ? jsx(ei, {
-    name: initialText || m,
-    setName: f,
-    maxWidth: e,
-    noSelectOnFocus: !!initialText,
-    disableSaveOnEscape: !0,
-    axis,
-    gridTrackSizingType: n,
-    setGridTrackSizingType: a,
-    shouldOpenDropdown
-  }) : jsx(Q, {
-    name: initialText || m,
-    setName: f,
-    maxWidth: e,
-    noSelectOnFocus: !!initialText,
-    disableSaveOnEscape: !0
+
+/**
+ * Grid track size editor component
+ * @param props - Component props
+ * @returns JSX element
+ */
+function GridTrackSizeEditor({
+  name,
+  setName,
+  maxWidth,
+  noSelectOnFocus,
+  disableSaveOnEscape,
+  axis,
+  gridTrackSizingType,
+  setGridTrackSizingType,
+  shouldOpenDropdown,
+  containerClassname
+}: GridTrackSizeEditorProps) {
+  const editorHookResult = useOnCanvasNameEditor(name, setName, {
+    maxWidth,
+    noSelectOnFocus,
+    disableSaveOnEscape
   });
-}
-function ei(e) {
-  let t = X(e.name, e.setName, {
-    maxWidth: e.maxWidth,
-    noSelectOnFocus: e.noSelectOnFocus,
-    disableSaveOnEscape: e.disableSaveOnEscape
-  });
-  let [i, a] = useState(e.shouldOpenDropdown);
-  let [o, l] = useState(ee(e.gridTrackSizingType));
-  let d = _$$F.useCombobox({
-    selected: [ee(e.gridTrackSizingType)],
-    activeValue: o,
-    onActiveValueChange: l,
-    expanded: i,
-    expandOnFocus: !1,
-    onExpand: a,
-    onSelect(t) {
-      if (!t) return;
-      let i = function (e) {
-        switch (e) {
+  const [isDropdownExpanded, setIsDropdownExpanded] = useState(shouldOpenDropdown);
+  const [activeValue, setActiveValue] = useState(getLayoutSizingTypeName(gridTrackSizingType));
+  const combobox = ComboboxPrimitive.useCombobox({
+    selected: [getLayoutSizingTypeName(gridTrackSizingType)],
+    activeValue,
+    onActiveValueChange: setActiveValue,
+    expanded: isDropdownExpanded,
+    expandOnFocus: false,
+    onExpand: setIsDropdownExpanded,
+    onSelect: selectedValue => {
+      if (!selectedValue) return;
+      const sizingType = function getSizingTypeFromString(value: string): LayoutSizingType | null {
+        switch (value) {
           case 'FIXED':
             return LayoutSizingType.FIXED;
           case 'HUG':
@@ -376,13 +448,17 @@ function ei(e) {
           default:
             return null;
         }
-      }(t);
-      i != null && (e.setGridTrackSizingType(i), a(!1), Fullscreen?.hideOnCanvasNameEditor());
+      }(selectedValue);
+      if (sizingType != null) {
+        setGridTrackSizingType(sizingType);
+        setIsDropdownExpanded(false);
+        Fullscreen?.hideOnCanvasNameEditor();
+      }
     }
   });
-  let c = useRef(null);
-  if (!t) return null;
-  let {
+  const inputRef = useRef(null);
+  if (!editorHookResult) return null;
+  const {
     containerRef,
     measurerRef,
     containerStyle,
@@ -393,10 +469,10 @@ function ei(e) {
     onBlur,
     width,
     setIsComposing
-  } = t;
-  return jsx(Z, {
+  } = editorHookResult;
+  return jsx(OnCanvasNameEditorContainer, {
     containerRef,
-    containerClassname: e.containerClassname,
+    containerClassname,
     containerStyle,
     measurerRef,
     editingName,
@@ -405,20 +481,24 @@ function ei(e) {
       children: [jsxs('div', {
         className: 'on_canvas_name_editor--gridTrackSizeComboboxContainer--XhG0G',
         children: [jsx(InputPrimitive, {
-          id: `on-canvas-name-editor-${e.name}`,
-          ...d.getInputProps({
-            ref: c,
-            autoFocus: !0,
+          id: `on-canvas-name-editor-${name}`,
+          ...combobox.getInputProps({
+            ref: inputRef,
+            autoFocus: true,
             className: 'on_canvas_name_editor--gridTrackSizeComboboxInput--BR3nH sf_pro--uiFontWithSFProFallback--m-p9V',
-            onChange: (e, {
-              event: t
+            onChange: (value, {
+              event
             }) => {
-              onChange(t);
+              onChange(event);
             },
-            onKeyDown(e) {
-              e.key === 'Enter' && i || onKeyDown(e);
+            onKeyDown(event) {
+              if (event.key === 'Enter' && isDropdownExpanded) {
+                // Do nothing, let the combobox handle it
+              } else {
+                onKeyDown(event);
+              }
             },
-            spellCheck: !1,
+            spellCheck: false,
             style: {
               width: `${width}px`
             },
@@ -429,220 +509,280 @@ function ei(e) {
               autoCorrect: 'off',
               dir: 'auto',
               onBlur,
-              onCompositionEnd: () => setIsComposing(!1),
-              onCompositionStart: () => setIsComposing(!0),
+              onCompositionEnd: () => setIsComposing(false),
+              onCompositionStart: () => setIsComposing(true),
               onFocus
             }
           })
-        }), jsx(_$$F.Trigger, {
-          ...d.getTriggerProps(),
+        }), jsx(ComboboxPrimitive.Trigger, {
+          ...combobox.getTriggerProps(),
           className: 'on_canvas_name_editor--gridTrackSizeComboboxTrigger--x3YF2',
           children: jsx(_$$O, {})
         })]
-      }), jsx(_$$F.PopupList, {
-        ...d.getListProps(),
-        'anchorEl': c,
+      }), jsx(ComboboxPrimitive.PopupList, {
+        ...combobox.getListProps(),
+        'anchorEl': inputRef,
         'data-testid': 'grid-track-combobox-popup-list',
         'placement': 'bottom',
         'offset': ({
-          rects: e
-        }) => -e.reference.height / 2 - e.floating.height / 2,
+          rects
+        }) => -rects.reference.height / 2 - rects.floating.height / 2,
         'className': 'on_canvas_name_editor--gridTrackSizeComboboxPopupList--VszDC',
-        'children': $.map(t => jsx(_$$F.Option, {
-          value: ee(t),
+        'children': Object.values(LayoutSizingType).filter(value => typeof value === 'number').map(sizingType => jsx(ComboboxPrimitive.Option, {
+          value: getLayoutSizingTypeName(sizingType as LayoutSizingType),
           className: 'on_canvas_name_editor--gridTrackSizeComboboxOption--txB7m',
-          recordingKey: `trackSizingTypeOption-${t}`,
+          recordingKey: `trackSizingTypeOption-${sizingType}`,
           children: jsxs('span', {
-            className: P()('on_canvas_name_editor--gridTrackSizeComboboxOptionInner--hHnK8', {
-              'on_canvas_name_editor--gridTrackSizeComboboxOptionInnerActive--iBPBQ': o === ee(t)
+            className: P('on_canvas_name_editor--gridTrackSizeComboboxOptionInner--hHnK8', {
+              'on_canvas_name_editor--gridTrackSizeComboboxOptionInnerActive--iBPBQ': activeValue === getLayoutSizingTypeName(sizingType as LayoutSizingType)
             }),
             children: [jsx(_$$l, {
               className: 'on_canvas_name_editor--gridTrackSizeComboboxOptionCheck--HHUoo'
-            }), jsx(er, {
-              gridTrackSizingType: t,
-              axis: e.axis
-            }), jsx(en, {
-              gridTrackSizingType: t,
-              axis: e.axis
+            }), jsx(GridTrackSizingIcon, {
+              gridTrackSizingType: sizingType as LayoutSizingType,
+              axis
+            }), jsx(GridTrackSizingLabel, {
+              gridTrackSizingType: sizingType as LayoutSizingType,
+              axis
             })]
           })
-        }, t))
+        }, sizingType))
       })]
     })
   });
 }
-function er(e) {
-  switch (e.gridTrackSizingType) {
+
+/**
+ * Icon component for grid track sizing options
+ * @param props - Component props
+ * @returns JSX element
+ */
+function GridTrackSizingIcon({
+  gridTrackSizingType,
+  axis
+}: {
+  gridTrackSizingType: LayoutSizingType;
+  axis: Axis;
+}) {
+  switch (gridTrackSizingType) {
     case LayoutSizingType.FIXED:
-      return e.axis === Axis.X ? jsx(_$$w, {}) : jsx(_$$T, {});
+      return axis === Axis.X ? jsx(_$$w, {}) : jsx(_$$T, {});
     case LayoutSizingType.HUG:
-      return e.axis === Axis.X ? jsx(_$$v, {}) : jsx(_$$C, {});
+      return axis === Axis.X ? jsx(_$$v, {}) : jsx(_$$C, {});
     case LayoutSizingType.FLEX:
-      return e.axis === Axis.X ? jsx(_$$G, {}) : jsx(_$$N, {});
+      return axis === Axis.X ? jsx(_$$G, {}) : jsx(_$$N, {});
+    default:
+      return null;
   }
 }
-function en(e) {
-  switch (e.gridTrackSizingType) {
+
+/**
+ * Label component for grid track sizing options
+ * @param props - Component props
+ * @returns JSX element
+ */
+function GridTrackSizingLabel({
+  gridTrackSizingType,
+  axis
+}: {
+  gridTrackSizingType: LayoutSizingType;
+  axis: Axis;
+}) {
+  switch (gridTrackSizingType) {
     case LayoutSizingType.FIXED:
-      return e.axis === Axis.X ? renderI18nText('fullscreen.on_canvas_editor.grid_track_size.fixed_width') : renderI18nText('fullscreen.on_canvas_editor.grid_track_size.fixed_height');
+      return axis === Axis.X ? renderI18nText('fullscreen.on_canvas_editor.grid_track_size.fixed_width') : renderI18nText('fullscreen.on_canvas_editor.grid_track_size.fixed_height');
     case LayoutSizingType.HUG:
       return renderI18nText('fullscreen.on_canvas_editor.grid_track_size.hug');
     case LayoutSizingType.FLEX:
-      return e.axis === Axis.X ? renderI18nText('fullscreen.on_canvas_editor.grid_track_size.fill_column') : renderI18nText('fullscreen.on_canvas_editor.grid_track_size.fill_row');
+      return axis === Axis.X ? renderI18nText('fullscreen.on_canvas_editor.grid_track_size.fill_column') : renderI18nText('fullscreen.on_canvas_editor.grid_track_size.fill_row');
+    default:
+      return null;
   }
 }
-function eh() {
-  let e = useSelector(e => e.mirror.selectionProperties.name);
-  let t = useSelector(e => e.mirror.selectionProperties.width);
-  let i = xv();
-  let n = _$$W();
-  if (!e || !t || !i) return null;
-  let o = InteractionCpp?.editorTypeConfig().hasSlideRowBeenManuallyRenamed(i) ?? !0;
-  return jsx(Q, {
-    name: o ? e : '',
-    setName: t => {
-      e && (_$$l2.user('rename-frame', () => renameNode(i, t)), n({
-        newTitle: t,
-        nodeType: 'FRAME'
-      }), t !== e && _$$d(t).length > 0 && handleAtomEvent({
-        id: 'frame_node_name_changed_with_rfd_indicator',
-        properties: {
-          nodeId: i
-        }
-      }));
-    },
-    maxWidth: t,
-    hasSlideRowBeenManuallyRenamed: o
+
+/**
+ * Grid track size editor component with combobox functionality
+ * @returns JSX element
+ */
+function GridTrackSizeEditorWithCombobox() {
+  const [gridTrackSize, setGridTrackSize] = useSelectionProperty('gridTrackSize');
+  const [gridTrackSizingType, setGridTrackSizingType] = useSelectionProperty('gridTrackSizingType');
+  const {
+    axis,
+    width,
+    initialText,
+    shouldOpenDropdown
+  } = selectWithShallowEqual((state: any) => ({
+    axis: state.mirror.appModel.onCanvasNameEditorInfo.axis,
+    width: state.mirror.selectionProperties.width,
+    initialText: state.mirror.appModel.onCanvasNameEditorInfo.initialText,
+    shouldOpenDropdown: state.mirror.appModel.onCanvasNameEditorInfo.shouldOpenDropdown
+  }));
+  const gridRowCount = normalizeValue(useSelectionPropertyValue('gridRowCount'));
+  const gridColumnCount = normalizeValue(useSelectionPropertyValue('gridColumnCount'));
+  if (!gridTrackSize || gridTrackSizingType == null || !width || !gridColumnCount || !gridRowCount || isInvalidValue(gridTrackSize) || isInvalidValue(gridTrackSizingType)) {
+    return null;
+  }
+  const gridSize = axis === Axis.X ? Math.round(width / gridColumnCount) : Math.round(width / gridRowCount);
+  const hugLabel = getFeatureFlags().ce_tv_grid_hug ? 'Fill' : 'Auto';
+  const displayValue = gridTrackSizingType === LayoutSizingType.FLEX ? hugLabel : gridTrackSizingType === LayoutSizingType.HUG ? 'Hug' : floatToString(gridTrackSize);
+  const handleSetName = (inputValue: string) => {
+    // Parse the input to determine if it's a sizing type or a numeric value
+    const trimmedInput = inputValue.trim().toLowerCase();
+    const isAutoOrFill = trimmedInput.startsWith('auto') || trimmedInput.startsWith('fill');
+    const isHug = trimmedInput.startsWith('hug') && getFeatureFlags().ce_tv_grid_hug;
+    const isFixed = trimmedInput.startsWith('fixed');
+    let sizingType: LayoutSizingType | null = null;
+    if (isAutoOrFill) {
+      sizingType = LayoutSizingType.FLEX;
+    } else if (isHug) {
+      sizingType = LayoutSizingType.HUG;
+    } else if (isFixed) {
+      sizingType = LayoutSizingType.FIXED;
+    }
+    if (sizingType != null) {
+      setGridTrackSizingType(sizingType);
+    } else {
+      const numericValue = parseFloat(inputValue);
+      if (!isNaN(numericValue)) {
+        setGridTrackSize(numericValue);
+      }
+    }
+  };
+  return getFeatureFlags().ce_tv_grid_hug ? jsx(GridTrackSizeEditor, {
+    name: initialText || displayValue,
+    setName: handleSetName,
+    maxWidth: gridSize,
+    noSelectOnFocus: !!initialText,
+    disableSaveOnEscape: true,
+    axis,
+    gridTrackSizingType,
+    setGridTrackSizingType,
+    shouldOpenDropdown
+  }) : jsx(OnCanvasNameEditorInput, {
+    name: initialText || displayValue,
+    setName: handleSetName,
+    maxWidth: gridSize,
+    noSelectOnFocus: !!initialText,
+    disableSaveOnEscape: true
   });
 }
-function em() {
+
+/**
+ * Frame name editor component
+ * @returns JSX element
+ */
+function FrameNameEditor() {
+  const name = useSelector((state: any) => state.mirror.selectionProperties.name);
+  const width = useSelector((state: any) => state.mirror.selectionProperties.width);
+  const nodeId = xv();
+  const trackRenameEvent = _$$W();
+  return name != null && width ? jsx(OnCanvasNameEditorInput, {
+    name,
+    setName: (newName: string) => {
+      _$$l2.user('rename-frame', () => renameNode(nodeId, newName));
+      trackRenameEvent({
+        newTitle: newName,
+        nodeType: 'FRAME'
+      });
+
+      // Track RFD indicator if name changed and contains indicators
+      if (newName !== name && _$$d(newName).length > 0) {
+        handleAtomEvent({
+          id: 'frame_node_name_changed_with_rfd_indicator',
+          properties: {
+            nodeId
+          }
+        });
+      }
+    },
+    maxWidth: width
+  }) : null;
+}
+
+/**
+ * Canvas grid row name editor component
+ * @returns JSX element
+ */
+function CanvasGridRowNameEditor() {
   return jsx(setupThemeContext, {
     brand: 'design',
-    children: eh()
+    children: jsx(FrameNameEditor, {})
   });
 }
-function ef() {
-  let [e, t] = useSelectionProperty('prototypeStartingPoint');
-  let i = normalizeValue(e)?.name || '';
-  return i ? jsx(Q, {
-    name: i,
-    setName: i => {
-      i && t({
-        name: i,
-        description: normalizeValue(e)?.description || '',
-        position: normalizeValue(e)?.position || ''
-      });
+
+/**
+ * Flow starting point name editor component
+ * @returns JSX element
+ */
+function FlowStartingPointNameEditor() {
+  const [prototypeStartingPoint, setPrototypeStartingPoint] = useSelectionProperty('prototypeStartingPoint' as any);
+  const startingPointName = normalizeValue(prototypeStartingPoint)?.name || '';
+  return startingPointName ? jsx(OnCanvasNameEditorInput, {
+    name: startingPointName,
+    setName: (newName: string) => {
+      if (newName) {
+        setPrototypeStartingPoint({
+          name: newName,
+          description: normalizeValue(prototypeStartingPoint)?.description || '',
+          position: normalizeValue(prototypeStartingPoint)?.position || ''
+        });
+      }
     },
     maxWidth: 93,
     containerClassname: 'on_canvas_name_editor--flowStartingPointNameContainer--JdVwd'
   }) : null;
 }
-function eg() {
-  let {
-    measurementId,
-    initMeasurementText
-  } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
-  let i = useSelector(e => e.mirror.appModel.currentPage);
-  let o = useMemo(() => HandoffBindingsCpp.findMeasurement(measurementId, i), [measurementId, i]);
-  let l = useRef(!o?.freeText);
-  let d = isDevModeFocusViewActive();
-  let c = function () {
-    let e = trackFileEventWithStore();
-    return useCallback((t, i, r) => {
-      let n = t.findContainingTopLevelFrameOrSelf();
-      let a = t.containingCanvas;
-      let s = {
-        measurement_id: i.id,
-        from_node_id: i.fromNode,
-        to_node_id: i.toNode.length === 1 ? i.toNode[0].toString() : i.toNode.toString(),
-        node_type: t.type
-      };
-      n && (s.tlf_id = n);
-      a && (s.page_id = a);
-      s.free_text = r;
-      e('update_annotation_measurement_free_text', s);
-    }, [e]);
-  }();
-  return o ? d ? (Fullscreen?.hideOnCanvasNameEditor(), null) : jsx(Q, {
-    name: initMeasurementText,
-    setName: e => {
-      let i = getSingletonSceneGraph().get(o.fromNode);
-      if (i) {
-        if (l && e === initMeasurementText) return;
-        _$$l2.user('free-text-annotation-measurement', () => {
-          i.updateMeasurementFreeText(o.id, e);
-          c(i, o, e);
-        });
-      }
-    },
-    maxWidth: 150
-  }) : null;
-}
-function e_() {
-  let {
-    varWidthNodeId,
-    varWidthIndex
-  } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
-  let i = trackFileEventWithStore();
-  let n = getSingletonSceneGraph().get(varWidthNodeId);
-  if (!n) return null;
-  let s = n.variableWidthPoints;
-  let o = n.strokeWeight;
-  if (s.length <= varWidthIndex) return null;
-  let l = s[varWidthIndex];
-  let d = l.ascent * o * 2;
-  return jsx(Q, {
-    name: (Math.round(10 * d) / 10).toString(),
-    containerClassname: 'on_canvas_name_editor--varWidthSizeContainer--GP30J',
-    setName: e => scopeAwareFunction.user('set-var-width-point-ascent', () => {
-      let r = parseFloat(e);
-      if (isNaN(r)) return;
-      let a = [...s];
-      a[varWidthIndex] = {
-        ...l,
-        ascent: r / (2 * o)
-      };
-      n.variableWidthPoints = a;
-      i('on_canvas_var_width_point_update', {
-        node_id: n.id
-      });
-    })(),
-    maxWidth: 200
-  });
-}
-function ex() {
-  let e = useSelector(e => e.mirror.selectionProperties.name);
-  let t = useSelector(e => e.mirror.selectionProperties.width);
-  let i = _$$W();
-  return e != null && t ? jsx(ey, {
-    name: e,
-    setNameWithNodeId: (e, t) => {
-      _$$l2.user('rename-section', () => renameNode(e, t ? t.trim() : ''));
-      i({
-        newTitle: t,
+
+/**
+ * Section name editor component
+ * @returns JSX element
+ */
+function SectionNameEditor() {
+  const name = useSelector((state: any) => state.mirror.selectionProperties.name);
+  const width = useSelector((state: any) => state.mirror.selectionProperties.width);
+  const trackRenameEvent = _$$W();
+  return name != null && width ? jsx(SectionNameEditorInput, {
+    name,
+    setNameWithNodeId: (nodeId: string, newName: string) => {
+      _$$l2.user('rename-section', () => renameNode(nodeId, newName ? newName.trim() : ''));
+      trackRenameEvent({
+        newTitle: newName,
         nodeType: 'SECTION'
       });
     },
-    maxWidth: t
+    maxWidth: width
   }) : null;
 }
-function ey(e) {
-  let {
-    name,
-    setNameWithNodeId,
-    maxWidth
-  } = e;
-  let o = uQ();
-  let l = X(name, e => {
-    o && setNameWithNodeId(o, e);
+interface SectionNameEditorInputProps {
+  name: string;
+  setNameWithNodeId: (nodeId: string, name: string) => void;
+  maxWidth: number;
+}
+
+/**
+ * Section name editor input component
+ * @param props - Component props
+ * @returns JSX element
+ */
+function SectionNameEditorInput({
+  name,
+  setNameWithNodeId,
+  maxWidth
+}: SectionNameEditorInputProps) {
+  const nodeId = uQ();
+  const editorHookResult = useOnCanvasNameEditor(name, newName => {
+    if (nodeId) {
+      setNameWithNodeId(nodeId, newName);
+    }
   }, {
     maxWidth
   });
-  let d = useSelector(e => {
-    let t = e.mirror.appModel.activeCanvasEditModeType;
-    return t === LayoutTabType.DESIGN_LAYOUT || t === LayoutTabType.SITES_LAYOUT;
+  const isDesignLayout = useSelector((state: AppState) => {
+    const activeCanvasEditModeType = state.mirror.appModel.activeCanvasEditModeType;
+    return activeCanvasEditModeType === LayoutTabType.DESIGN_LAYOUT || activeCanvasEditModeType === LayoutTabType.SITES_LAYOUT;
   });
-  let {
+  const {
     fontSize,
     top,
     left,
@@ -650,41 +790,44 @@ function ey(e) {
     horizontalPadding,
     verticalPadding,
     borderRadius
-  } = function (e, t) {
-    let {
+  } = function getSectionEditorStyles(isTopLevelSection: boolean, zoomScalePercentage: number) {
+    const {
       fontSize: _fontSize,
       padding,
       margin,
       cornerRadius
-    } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
-    let l = InteractionCpp.editorTypeConfig().showBigSectionNamePills();
-    let d = padding.x;
-    let c = padding.y;
-    let u = l ? 24 : 2 * padding.y + _fontSize;
-    let p = 0;
-    let h = -margin.y - u;
-    let m = InteractionCpp.editorTypeConfig().sectionNestedZoomLevel();
-    (!e || t <= m) && (p = margin.x, h = margin.y);
+    } = useSelector((state: any) => state.mirror.appModel.onCanvasNameEditorInfo);
+    const showBigSectionNamePills = InteractionCpp.editorTypeConfig().showBigSectionNamePills();
+    const paddingX = padding.x;
+    const paddingY = padding.y;
+    const sectionHeight = showBigSectionNamePills ? 24 : 2 * paddingY + _fontSize;
+    let positionTop = 0;
+    let positionLeft = -margin.y - sectionHeight;
+    const sectionNestedZoomLevel = InteractionCpp.editorTypeConfig().sectionNestedZoomLevel();
+    if (!isTopLevelSection || zoomScalePercentage <= sectionNestedZoomLevel) {
+      positionLeft = margin.x;
+      positionTop = margin.y;
+    }
     return {
       fontSize: _fontSize,
-      height: u,
-      top: h,
-      left: p,
-      horizontalPadding: d,
-      verticalPadding: c,
+      height: sectionHeight,
+      top: positionTop,
+      left: positionLeft,
+      horizontalPadding: paddingX,
+      verticalPadding: paddingY,
       borderRadius: cornerRadius
     };
-  }(useSelector(e => {
-    if (o === null) return !1;
-    let t = e.mirror.sceneGraph.get(o);
-    let i = e.mirror.appModel.currentPage;
-    let r = !!t?.isResponsiveSet;
-    return t && (t.type === 'SECTION' || r) && t.parentGuid === i;
+  }(useSelector((state: any) => {
+    if (nodeId === null) return false;
+    const node = state.mirror.sceneGraph.get(nodeId);
+    const currentPage = state.mirror.appModel.currentPage;
+    const isResponsiveSet = !!node?.isResponsiveSet;
+    return node && (node.type === 'SECTION' || isResponsiveSet) && node.parentGuid === currentPage;
   }), Math.round(100 * getViewportInfo({
-    subscribeToUpdates_expensive: !0
+    subscribeToUpdates_expensive: true
   }).zoomScale));
-  if (!l || !o) return null;
-  let {
+  if (!editorHookResult || !nodeId) return null;
+  const {
     containerRef,
     measurerRef,
     containerStyle,
@@ -695,8 +838,8 @@ function ey(e) {
     onBlur,
     width,
     setIsComposing
-  } = l;
-  let j = d ? 'normal' : 500;
+  } = editorHookResult;
+  const fontWeight = isDesignLayout ? 'normal' : 500;
   return jsxs('div', {
     ref: containerRef,
     className: `on_canvas_name_editor--sectionNameContainer--D8aez ${Dm}`,
@@ -706,7 +849,7 @@ function ey(e) {
       className: 'on_canvas_name_editor--sectionMeasurer--kfBij',
       style: {
         fontSize,
-        fontWeight: j,
+        fontWeight,
         paddingLeft: horizontalPadding,
         paddingRight: horizontalPadding,
         paddingTop: verticalPadding,
@@ -717,20 +860,20 @@ function ey(e) {
       autoCapitalize: 'off',
       autoComplete: 'off',
       autoCorrect: 'off',
-      autoFocus: !0,
+      autoFocus: true,
       className: 'on_canvas_name_editor--sectionNameInput--MgIUi',
       dir: 'auto',
       onBlur,
       onChange,
-      onCompositionEnd: () => setIsComposing(!1),
-      onCompositionStart: () => setIsComposing(!0),
+      onCompositionEnd: () => setIsComposing(false),
+      onCompositionStart: () => setIsComposing(true),
       onFocus,
       onKeyDown,
-      spellCheck: !1,
+      spellCheck: false,
       style: {
         width: `${width}px`,
         fontSize,
-        fontWeight: j,
+        fontWeight,
         left,
         top,
         height,
@@ -744,50 +887,156 @@ function ey(e) {
     })]
   });
 }
-function ek(e) {
-  let t = selectCurrentUser();
+
+/**
+ * Measurement free text editor component
+ * @returns JSX element
+ */
+function MeasurementFreeTextEditor() {
+  const {
+    measurementId,
+    initMeasurementText
+  } = useSelector((state: any) => state.mirror.appModel.onCanvasNameEditorInfo);
+  const currentPage = useSelector((state: any) => state.mirror.appModel.currentPage);
+  const measurement = useMemo(() => HandoffBindingsCpp.findMeasurement(measurementId, currentPage), [measurementId, currentPage]);
+  const hasFreeText = useRef(!measurement?.freeText);
+  const isFocusViewActive = isDevModeFocusViewActive();
+  const trackMeasurementEvent = useCallback((node: any, measurementData: any, freeText: string) => {
+    const trackEvent = trackFileEventWithStore();
+    const topLevelFrame = node.findContainingTopLevelFrameOrSelf();
+    const canvas = node.containingCanvas;
+    const eventData: any = {
+      measurement_id: measurementData.id,
+      from_node_id: measurementData.fromNode,
+      to_node_id: measurementData.toNode.length === 1 ? measurementData.toNode[0].toString() : measurementData.toNode.toString(),
+      node_type: node.type
+    };
+    if (topLevelFrame) {
+      eventData.tlf_id = topLevelFrame;
+    }
+    if (canvas) {
+      eventData.page_id = canvas;
+    }
+    eventData.free_text = freeText;
+    trackEvent('update_annotation_measurement_free_text', eventData);
+  }, []);
+  if (!measurement) return null;
+  if (isFocusViewActive) {
+    Fullscreen?.hideOnCanvasNameEditor();
+    return null;
+  }
+  return jsx(OnCanvasNameEditorInput, {
+    name: initMeasurementText,
+    setName: (newText: string) => {
+      const node = getSingletonSceneGraph().get(measurement.fromNode);
+      if (node) {
+        // Don't update if text hasn't changed
+        if (hasFreeText && newText === initMeasurementText) return;
+        _$$l2.user('free-text-annotation-measurement', () => {
+          node.updateMeasurementFreeText(measurement.id, newText);
+          trackMeasurementEvent(node, measurement, newText);
+        });
+      }
+    },
+    maxWidth: 150
+  });
+}
+
+/**
+ * Variable width size editor component
+ * @returns JSX element
+ */
+function VariableWidthSizeEditor() {
+  const {
+    varWidthNodeId,
+    varWidthIndex
+  } = useSelector((state: any) => state.mirror.appModel.onCanvasNameEditorInfo);
+  const trackEvent = trackFileEventWithStore();
+  const node = getSingletonSceneGraph().get(varWidthNodeId);
+  if (!node) return null;
+  const variableWidthPoints = node.variableWidthPoints;
+  const strokeWeight = node.strokeWeight;
+  if (variableWidthPoints.length <= varWidthIndex) return null;
+  const point = variableWidthPoints[varWidthIndex];
+  const ascentValue = point.ascent * strokeWeight * 2;
+  return jsx(OnCanvasNameEditorInput, {
+    name: (Math.round(10 * ascentValue) / 10).toString(),
+    containerClassname: 'on_canvas_name_editor--varWidthSizeContainer--GP30J',
+    setName: (newAscent: string) => scopeAwareFunction.user('set-var-width-point-ascent', () => {
+      const numericValue = parseFloat(newAscent);
+      if (isNaN(numericValue)) return;
+      const updatedPoints = [...variableWidthPoints];
+      updatedPoints[varWidthIndex] = {
+        ...point,
+        ascent: numericValue / (2 * strokeWeight)
+      };
+      node.variableWidthPoints = updatedPoints;
+      trackEvent('on_canvas_var_width_point_update', {
+        node_id: node.id
+      });
+    })(),
+    maxWidth: 200
+  });
+}
+
+/**
+ * Starter team edit confirmation modal component
+ * @param props - Component props
+ * @returns JSX element
+ */
+function StarterTeamEditConfirmationModal({
+  fileKey
+}: {
+  fileKey: string;
+}) {
+  const currentUser = selectCurrentUser();
   return jsx(TrackingProvider, {
     name: 'Starter team edit confirmation modal',
     properties: {
-      userId: t?.id,
-      userEmail: t?.email
+      userId: currentUser?.id,
+      userEmail: currentUser?.email
     },
     children: jsx(ConfirmationModal2, {
       confirmationTitle: getI18nString('fullscreen.starter_team_edit_modal.open_this_link'),
       confirmText: 'Continue',
       onConfirm: () => {
         trackEventAnalytics('Starter File Edit Modal Confirm Clicked', {
-          fileKey: e.fileKey
+          fileKey
         });
         _$$L.createStarterTeamFileRole({
-          key: e.fileKey
+          key: fileKey
         });
       },
-      disableClickOutsideToHide: !0,
-      hideOnConfirm: !1,
+      disableClickOutsideToHide: true,
+      hideOnConfirm: false,
       size: 'small',
-      hideCancel: !1,
-      hideClose: !0,
+      hideCancel: false,
+      hideClose: true,
       onCancel: () => {
         trackEventAnalytics('Starter File Edit Modal Cancel Clicked', {
-          fileKey: e.fileKey
+          fileKey
         });
         customHistory.redirect('/files/recents-and-sharing');
       },
       children: jsx('div', {
         className: jE,
         children: renderI18nText('fullscreen.starter_team_edit_modal.when_you_open_this_link_your_email_may_be_visible', {
-          email: t?.email
+          email: currentUser?.email
         })
       })
     })
   });
 }
-let eA = registerModal(e => {
+
+/**
+ * File migration warning modal component
+ * @returns JSX element
+ */
+const FileMigrationWarningModal = registerModal(() => {
   return jsxs(ModalView, {
     size: 'small',
     className: yl,
-    disableClickOutsideToHide: !0,
+    disableClickOutsideToHide: true,
     hide: noop,
     children: [jsx('div', {
       className: DD,
@@ -798,151 +1047,322 @@ let eA = registerModal(e => {
     })]
   });
 }, 'FileMigrationWarningModal');
-function eO() {
-  return useSelector(e => e.progressBarState);
+
+/**
+ * Gets the progress bar state from the store
+ * @returns Progress bar state
+ */
+function getProgressBarState() {
+  return useSelector((state: AppState) => state.progressBarState);
 }
-export let $$eL4 = memoizeByArgs((e, t, i) => {
-  e(gI());
-  e(initializeWidgetAllowlist({}));
+
+/**
+ * Initializes widget allowlist
+ * @param param0 - Initialization parameters
+ * @returns Initialization result
+ */
+export const initializeWidgetAllowlistMemoized = memoizeByArgs((param0: any, _param1: any, _param2: any) => {
+  param0(gI());
+  param0(initializeWidgetAllowlist({}));
 });
-export function $$eR2() {
+
+/**
+ * Main on-canvas name editor component selector
+ * @returns JSX element
+ */
+export function OnCanvasNameEditor() {
   switch (useAppModelProperty('onCanvasNameEditorInfo').mode) {
     case DiagramElementType.FRAME_NAME:
-      return jsx(eh, {});
+      return jsx(FrameNameEditor, {});
     case DiagramElementType.FLOW_STARTING_POINT_NAME:
-      return jsx(ef, {});
+      return jsx(FlowStartingPointNameEditor, {});
     case DiagramElementType.SECTION_NAME:
-      return jsx(ex, {});
+      return jsx(SectionNameEditor, {});
     case DiagramElementType.MEASUREMENT_FREE_TEXT:
-      return jsx(eg, {});
+      return jsx(MeasurementFreeTextEditor, {});
     case DiagramElementType.RESPONSIVE_SET_NAME:
-      return jsx(ex, {});
+      return jsx(SectionNameEditor, {});
     case DiagramElementType.CANVAS_GRID_ROW_NAME:
-      return jsx(em, {});
+      return jsx(CanvasGridRowNameEditor, {});
     case DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP:
-      return jsx(eh, {});
+      return jsx(FrameNameEditor, {});
     case DiagramElementType.GRID_TRACK_SIZE:
-      return jsx(et, {});
+      return jsx(GridTrackSizeEditorWithCombobox, {});
     case DiagramElementType.VAR_WIDTH_SIZE:
-      return jsx(e_, {});
+      return jsx(VariableWidthSizeEditor, {});
     default:
       return null;
   }
 }
-export function $$eD3() {
-  let e = eO();
-  let t = useSelector(e => e.showingOpenDesktopAppModal);
-  let i = useDispatch();
-  if (e.mode !== UIVisibilitySetting.OFF) return jsx(Fragment, {});
-  switch (t) {
+
+/**
+ * Plugin modal component
+ * @returns JSX element
+ */
+export function PluginModal() {
+  const progressBarState = getProgressBarState();
+  const showingOpenDesktopAppModal = useSelector((state: any) => state.showingOpenDesktopAppModal);
+  const dispatch = useDispatch();
+  if (progressBarState.mode !== UIVisibilitySetting.OFF) return jsx(Fragment, {});
+  switch (showingOpenDesktopAppModal) {
     case PluginRunForContext.FOR_OPEN:
       return jsx(_$$g, {
-        dispatch: i
+        dispatch
       });
     case PluginRunForContext.FOR_MENU:
       return jsx(_$$s, {
-        dispatch: i
+        dispatch
       });
   }
   return jsx(Fragment, {});
 }
-export function $$eM0(e) {
-  let t = selectCurrentFile();
-  let i = selectCurrentUser();
-  return e.showStartModal && i && t && t.key ? jsx(ek, {
-    fileKey: t.key
+
+/**
+ * Starter team edit modal component
+ * @param props - Component props
+ * @returns JSX element
+ */
+export function StarterTeamEditModal({
+  showStartModal
+}: {
+  showStartModal?: boolean;
+}) {
+  const currentFile = selectCurrentFile();
+  const currentUser = selectCurrentUser();
+  return showStartModal && currentUser && currentFile && currentFile.key ? jsx(StarterTeamEditConfirmationModal, {
+    fileKey: currentFile.key
   }) : jsx(Fragment, {});
 }
-export function $$eP7() {
-  let e = useRef(null);
-  let t = useRef(!1);
-  let i = eO();
-  let r = useDispatch();
-  let o = useSelector(e => e.needsUpgrade);
-  let l = useCallback(() => {
-    e.current !== null && (clearTimeout(e.current), e.current = null);
-  }, [e]);
-  let d = useCallback(() => {
-    l();
-    e.current = setTimeout(() => {
-      t.current = !0;
-      o && i.mode !== UIVisibilitySetting.OFF && r(showModalHandler({
-        type: eA
-      }));
-    }, 2e4);
-  }, [o, i, r, l]);
-  let c = useCallback(() => {
-    t.current && r(hideModal());
-    t.current = !1;
-    l();
-  }, [t, l, r]);
-  useEffect(() => (fullscreenValue.fromFullscreen.on('multiplayerConnect', d), fullscreenValue.fromFullscreen.on('multiplayerDisconnect', l), fullscreenValue.fromFullscreen.on('multiplayerGotSchema', c), () => {
-    fullscreenValue.fromFullscreen.removeListener('multiplayerConnect', d);
-    fullscreenValue.fromFullscreen.removeListener('multiplayerDisconnect', l);
-    fullscreenValue.fromFullscreen.removeListener('multiplayerGotSchema', c);
-    l();
-  }), [l, d, c]);
+
+/**
+ * Multiplayer connection timeout handler
+ * @returns void
+ */
+export function MultiplayerConnectionTimeoutHandler() {
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const modalShownRef = useRef(false);
+  const progressBarState = getProgressBarState();
+  const dispatch = useDispatch();
+  const needsUpgrade = useSelector((state: any) => state.needsUpgrade);
+  const clearTimer = useCallback(() => {
+    if (timeoutRef.current !== null) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  }, [timeoutRef]);
+  const startTimer = useCallback(() => {
+    clearTimer();
+    timeoutRef.current = setTimeout(() => {
+      modalShownRef.current = true;
+      if (needsUpgrade && progressBarState.mode !== UIVisibilitySetting.OFF) {
+        dispatch(showModalHandler({
+          type: FileMigrationWarningModal
+        }) as any);
+      }
+    }, 20000);
+  }, [needsUpgrade, progressBarState, dispatch, clearTimer]);
+  const hideModal = useCallback(() => {
+    if (modalShownRef.current) {
+      dispatch(hideModal() as any);
+    }
+    modalShownRef.current = false;
+    clearTimer();
+  }, [modalShownRef, clearTimer, dispatch]);
+  useEffect(() => {
+    fullscreenValue.fromFullscreen.on('multiplayerConnect', startTimer);
+    fullscreenValue.fromFullscreen.on('multiplayerDisconnect', clearTimer);
+    fullscreenValue.fromFullscreen.on('multiplayerGotSchema', hideModal);
+    return () => {
+      fullscreenValue.fromFullscreen.removeListener('multiplayerConnect', startTimer);
+      fullscreenValue.fromFullscreen.removeListener('multiplayerDisconnect', clearTimer);
+      fullscreenValue.fromFullscreen.removeListener('multiplayerGotSchema', hideModal);
+      clearTimer();
+    };
+  }, [clearTimer, startTimer, hideModal]);
 }
-export function $$eF5(e, t, i) {
-  !t.current && function (e, t) {
+
+/**
+ * Pointer input tracker
+ * @param event - Pointer event
+ * @param ref - Ref object
+ * @param toolType - Tool type
+ * @returns boolean
+ */
+export function trackPointerInput(event: any, ref: React.MutableRefObject<boolean>, toolType: DesignGraphElements) {
+  if (!ref.current && function shouldTrackPointerInput(e: any, t: DesignGraphElements) {
     if (t === DesignGraphElements.VECTOR_PENCIL || t === DesignGraphElements.ERASER || t === DesignGraphElements.HIGHLIGHTER) {
-      let i;
-      i = 'figjam';
+      const productType = 'figjam';
       trackUserEvent('Pointer Input', debugState.getState(), {
         inputSource: e.pointerType,
-        tool: function (e) {
-          switch (e) {
+        tool: function getToolName(tool: DesignGraphElements) {
+          switch (tool) {
             case DesignGraphElements.VECTOR_PENCIL:
               return 'VECTOR_PENCIL';
             case DesignGraphElements.ERASER:
               return 'ERASER';
             case DesignGraphElements.HIGHLIGHTER:
               return 'HIGHLIGHTER';
+            default:
+              return 'UNKNOWN';
           }
         }(t),
-        productType: i
+        productType
       });
-      return !0;
+      return true;
     }
-    return !1;
-  }(e, i) && (t.current = !0);
+    return false;
+  }(event, toolType)) {
+    ref.current = true;
+  }
 }
-export function $$eB6(e, t) {
-  t.current || (t.current = !0);
+
+/**
+ * Sets the first interaction flag
+ * @param event - Event object
+ * @param ref - Ref object
+ * @returns void
+ */
+export function setFirstInteraction(event: any, ref: React.MutableRefObject<boolean>) {
+  if (!ref.current) {
+    ref.current = true;
+  }
 }
+
+/**
+ * Comments and multiplayer cursor system component
+ * @param props - Component props
+ * @returns JSX element
+ */
 // todo: important: used in fullscreen/index.tsx
-export function $$eU1({
-  commentsDetailContainerRef: e
+export function CommentsAndMultiplayerSystem({
+  commentsDetailContainerRef
+}: {
+  commentsDetailContainerRef: React.RefObject<HTMLDivElement>;
 }) {
-  let t = useAppModelProperty('topLevelMode') === ViewType.HISTORY;
-  let i = selectCurrentFile();
-  let n = useSelector(e => e.user);
-  let o = useAppModelProperty('currentPage');
-  let u = useSelector(e => e.comments);
-  let p = useIsFullscreenOverview();
-  let h = useIsFullscreenWithDevVariables();
-  let f = useIsFullscreenDevModeComponentBrowser();
-  let x = isUserNotLoggedInAndEditorSupported();
-  let y = useCanUseDevModeDemoFile();
-  let b = u.activeThread?.id || null;
-  let C = u.showOnlyParticipating;
-  let T = u.showResolved;
+  const isHistoryView = useAppModelProperty('topLevelMode') === ViewType.HISTORY;
+  const currentFile = selectCurrentFile();
+  const user = useSelector((state: any) => state.user);
+  const currentPage = useAppModelProperty('currentPage');
+  const comments = useSelector((state: any) => state.comments);
+  const isOverview = useIsFullscreenOverview();
+  const hasDevVariables = useIsFullscreenWithDevVariables();
+  const isComponentBrowser = useIsFullscreenDevModeComponentBrowser();
+  const isNotLoggedInButSupported = isUserNotLoggedInAndEditorSupported();
+  const canUseDemoFile = useCanUseDevModeDemoFile();
+  const activeThreadId = comments.activeThread?.id || null;
+  const showOnlyParticipating = comments.showOnlyParticipating;
+  const showResolved = comments.showResolved;
   return jsxs(Fragment, {
-    children: [jsx(Ay, {}), i && !t && !p && !h && !f && (n || x) && !y && jsx($2, {
-      showOnlyParticipatingComments: C,
-      showResolvedComments: T,
-      pageId: o,
-      activeId: b,
-      renderDetailContainerInPortal: !0,
-      detailContainerPortal: e.current
-    }), !y && jsx(createMultiplayerCursorSystem, {})]
+    children: [jsx(Ay, {}), currentFile && !isHistoryView && !isOverview && !hasDevVariables && !isComponentBrowser && (user || isNotLoggedInButSupported) && !canUseDemoFile && jsx($2, {
+      showOnlyParticipatingComments: showOnlyParticipating,
+      showResolvedComments: showResolved,
+      pageId: currentPage,
+      activeId: activeThreadId,
+      renderDetailContainerInPortal: true,
+      detailContainerPortal: commentsDetailContainerRef.current
+    }), !canUseDemoFile && jsx(createMultiplayerCursorSystem, {})]
   });
 }
-export const jx = $$eM0;
-export const XI = $$eU1;
-export const qn = $$eR2;
-export const Nd = $$eD3;
-export const RS = $$eL4;
-export const P2 = $$eF5;
-export const j6 = $$eB6;
-export const Ky = $$eP7;
+
+// Export aliases for backward compatibility
+export const jx = StarterTeamEditModal;
+export const XI = CommentsAndMultiplayerSystem;
+export const qn = OnCanvasNameEditor;
+export const Nd = PluginModal;
+export const RS = initializeWidgetAllowlistMemoized;
+export const P2 = trackPointerInput;
+export const j6 = setFirstInteraction;
+export const Ky = MultiplayerConnectionTimeoutHandler;
+
+// ======================
+// TypeScript Interfaces
+// ======================
+
+interface _OnCanvasNameEditorInfo {
+  mode: DiagramElementType;
+  x: number;
+  y: number;
+  axis?: Axis;
+  width?: number;
+  initialText?: string;
+  shouldOpenDropdown?: boolean;
+  varWidthTextDirection?: {
+    x: number;
+    y: number;
+  };
+  isShownOnLeft?: boolean;
+  angle?: number;
+  invertTextPosition?: boolean;
+  isCentered?: boolean;
+  padding?: {
+    x: number;
+    y: number;
+  };
+  margin?: {
+    x: number;
+    y: number;
+  };
+  cornerRadius?: number;
+  fontSize?: number;
+  activeCanvasEditModeType?: LayoutTabType;
+  currentPage?: string;
+}
+
+interface Position {
+  x: number;
+  y: number;
+}
+interface StyleObject {
+  transformOrigin?: string;
+  transform?: string;
+  [key: string]: string | undefined;
+}
+interface NameEditorHookProps {
+  maxWidth: number;
+  noSelectOnFocus?: boolean;
+  disableSaveOnEscape?: boolean;
+  hasSlideRowBeenManuallyRenamed?: boolean;
+}
+interface NameEditorHookReturn {
+  containerRef: React.RefObject<HTMLDivElement>;
+  measurerRef: React.RefObject<HTMLSpanElement>;
+  containerStyle: StyleObject;
+  inputClassname: string;
+  editingName: string;
+  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  width: number;
+  setIsComposing: React.Dispatch<React.SetStateAction<boolean>>;
+}
+interface ZComponentProps {
+  containerRef: React.RefObject<HTMLDivElement>;
+  containerClassname?: string;
+  containerStyle: StyleObject;
+  measurerRef: React.RefObject<HTMLSpanElement>;
+  editingName: string;
+  children: React.ReactNode;
+}
+interface QComponentProps {
+  name: string;
+  setName: (name: string) => void;
+  maxWidth: number;
+  noSelectOnFocus?: boolean;
+  disableSaveOnEscape?: boolean;
+  hasSlideRowBeenManuallyRenamed?: boolean;
+  containerClassname?: string;
+}
+interface GridTrackSizeEditorProps {
+  name: string;
+  setName: (name: string) => void;
+  maxWidth: number;
+  noSelectOnFocus?: boolean;
+  disableSaveOnEscape?: boolean;
+  axis: Axis;
+  gridTrackSizingType: LayoutSizingType;
+  setGridTrackSizingType: (type: LayoutSizingType) => void;
+  shouldOpenDropdown?: boolean;
+  containerClassname?: string;
+}
+

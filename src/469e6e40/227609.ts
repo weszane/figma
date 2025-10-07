@@ -114,7 +114,7 @@ import { L as _$$L } from '../c5e2cae0/262856';
 import { fm } from '../c5e2cae0/453906';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { iq7, L69 } from '../figma_app/6204';
-import { II } from '../figma_app/11182';
+import { copyEmailsThunk } from '../figma_app/11182';
 import { canPerformActionBasedOnLevel } from '../figma_app/12796';
 import { fAD } from '../figma_app/27776';
 import { TeamAdminSettingsPage, TeamById, UserFlagByName } from '../figma_app/43951';
@@ -390,7 +390,7 @@ let e5 = withTracking(e => {
   } = e;
   let d = billing.summary.monthly_subscription ? RenewalTermEnum.MONTH : RenewalTermEnum.YEAR;
   let c = useCallback(e => {
-    dispatch(II({
+    dispatch(copyEmailsThunk({
       emailList: e
     }));
   }, [dispatch]);

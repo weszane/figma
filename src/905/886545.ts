@@ -5,11 +5,11 @@ import { resolveVariableValue } from "../905/929949";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { generateUniqueName } from "../905/578436";
-import { Ot } from "../905/850476";
-import { Wc } from "../905/782020";
+import { hasExtendedCollections } from "../905/850476";
+import { generateUniqueVariableName } from "../905/782020";
 export function $$p0() {
   return useCallback((e, t, i, n = "", d = VariableUIContext.VARIABLES_MODAL) => {
-    let c = Wc(t, i, n);
+    let c = generateUniqueVariableName(t, i, n);
     let p = resolveVariableValue(i);
     let m = e ?? VariablesBindings.createVariableSet(getI18nString("variables.authoring_modal.default_collection_name"), VariableCollectionContext.AUTOMATIC_FIRST_COLLECTION);
     let h = VariablesBindings.createVariable(c, m, p, d);
@@ -39,7 +39,7 @@ export function $$h1() {
     fullscreenValue.triggerAction("commit");
     return a;
   }, []);
-  return Ot() ? e : null;
+  return hasExtendedCollections() ? e : null;
 }
 export const ay = $$p0;
 export const jv = $$h1;

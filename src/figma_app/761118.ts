@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 import { debugState } from '../905/407919';
 import { getFeatureFlags } from '../905/601108';
 import { FEditorType } from '../figma_app/53721';
-import { qy, uk } from '../figma_app/216057';
+import { localVariableSetsAtom, sortedLocalVariablesAtom } from '../figma_app/216057';
 import { openFileKeyAtom } from '../figma_app/516028';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { td } from '../figma_app/827216';
@@ -27,7 +27,7 @@ let $$T21 = setupRemovableAtomFamily(() => atom({
   libraryKeys: new Set()
 }));
 let $$I15 = setupRemovableAtomFamily(() => atom(e => {
-  let t = e(uk);
+  let t = e(sortedLocalVariablesAtom);
   let r = e($$T21);
   let n = e($$O18);
   let i = {};
@@ -41,7 +41,7 @@ let $$I15 = setupRemovableAtomFamily(() => atom(e => {
 }));
 let $$S14 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$O18);
-  let r = e(qy);
+  let r = e(localVariableSetsAtom);
   return {
     localVariableSets: t ? r : {},
     libraryVariableSets: e($$T21).libraryVariableSetIdToSet

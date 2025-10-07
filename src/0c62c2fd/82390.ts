@@ -420,7 +420,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { A as _$$A29 } from '../f2246930/458609';
 import { nk as _$$nk } from '../figma_app/2023';
 import { rv as _$$rv, BTz, c6t, cJy, cvy, Duq, fQh, HaT, hxO, I3H, I5n, I$z, j0N, j9$, jQF, K69, kBq, kmq, LB2, LPt, LQ8, Msu, NM0, O5v, O9D, Ob5, Q16, Ql8, Qlc, r3Y, rQs, sqw, tBR, Tp6, tUL, tZO, Ult, UmN, USq, Wb3, X5_, XIg, xPo, YHe, yjU, YPG } from '../figma_app/6204';
-import { S as _$$S } from '../figma_app/11182';
+import { copyLinkThunk } from '../figma_app/11182';
 import { o8 as _$$o1 } from '../figma_app/12220';
 import { getAccessLevelLabels, isExternalRestricted } from '../figma_app/12796';
 import { L as _$$L6 } from '../figma_app/23271';
@@ -1366,7 +1366,7 @@ function rx(e) {
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link_to_team'), () => {
     let r = getTeamUrl(e.teamId, e.orgId);
-    t(_$$S({
+    t(copyLinkThunk({
       url: r
     }));
     t(hideDropdownAction());
@@ -1390,7 +1390,7 @@ function rb(e) {
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(e.orgId !== null, () => getI18nString('file_browser.copy_link_to_workspace'), () => {
     if (e.orgId !== null) {
       let r = _$$fO(e.workspaceId, e.orgId);
-      t(_$$S({
+      t(copyLinkThunk({
         url: r
       }));
     }
@@ -1414,7 +1414,7 @@ function rv(e) {
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link_to_project'), () => {
     let r = getProjectUrl(e.projectId, e.orgId);
-    t(_$$S({
+    t(copyLinkThunk({
       url: r
     }));
     t(hideDropdownAction());
@@ -1437,7 +1437,7 @@ function ry(e) {
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link'), () => {
     let r = generateProtoLinkUrl(e.prototype.fileKey, e.prototype.file?.name, e.prototype.pageId);
-    t(_$$S({
+    t(copyLinkThunk({
       url: r
     }));
     t(hideDropdownAction());
@@ -5027,7 +5027,7 @@ function nf() {
       displayText: getI18nString('file_browser.copy_link'),
       onClick: () => {
         let t = _$$fO(r.workspace.id, r.org.id);
-        e(_$$S({
+        e(copyLinkThunk({
           url: t
         }));
       }

@@ -14,7 +14,7 @@ import { getLibraryKey, createSubscribedObject } from "../905/313095";
 import { getPartnerType } from "../905/853613";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
-import { Ev, Eo } from "../figma_app/216057";
+import { variableByIdAtomFamily, combinedVariableSetByIdAtomFamily } from "../figma_app/216057";
 import { getRecentTimeDifferences, addCurrentTimestamp } from "../905/456837";
 function T(e) {
   switch (e) {
@@ -93,9 +93,9 @@ export function $$A2(e, t, r) {
       let _ = Object.keys(p.mirror.sceneGraphSelection);
       let f = p.openFile?.key;
       let E = p.user && p.user.id;
-      let I = atomStoreManager.get(Ev(d));
-      let S = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.node_id : null;
-      let A = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.sortPosition : null;
+      let I = atomStoreManager.get(variableByIdAtomFamily(d));
+      let S = I?.variableSetId ? atomStoreManager.get(combinedVariableSetByIdAtomFamily(I?.variableSetId))?.node_id : null;
+      let A = I?.variableSetId ? atomStoreManager.get(combinedVariableSetByIdAtomFamily(I?.variableSetId))?.sortPosition : null;
       let x = VariablesBindings.getSubscribedVariableInfo(d);
       let N = getLibraryKey(I ?? createSubscribedObject(x), p.openFile);
       let C = getPartnerType(N);
@@ -147,9 +147,9 @@ export function $$A2(e, t, r) {
       let s = Object.keys(n.mirror.sceneGraphSelection);
       let o = n.openFile?.key;
       let d = n.user && n.user.id;
-      let u = atomStoreManager.get(Ev(r?.value));
-      let p = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.node_id : null;
-      let _ = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.sortPosition : null;
+      let u = atomStoreManager.get(variableByIdAtomFamily(r?.value));
+      let p = u?.variableSetId ? atomStoreManager.get(combinedVariableSetByIdAtomFamily(u?.variableSetId))?.node_id : null;
+      let _ = u?.variableSetId ? atomStoreManager.get(combinedVariableSetByIdAtomFamily(u?.variableSetId))?.sortPosition : null;
       let f = VariablesBindings.getSubscribedVariableInfo(r?.value);
       let E = getLibraryKey(u ?? createSubscribedObject(f), n.openFile);
       let b = getPartnerType(E);
@@ -185,7 +185,7 @@ export function $$x3(e, t) {
     let n = Object.keys(r.mirror.sceneGraphSelection);
     let a = r.openFile?.key;
     let s = r.user && r.user.id;
-    let o = atomStoreManager.get(Ev(e));
+    let o = atomStoreManager.get(variableByIdAtomFamily(e));
     let d = VariablesBindings.getSubscribedVariableInfo(e);
     let u = getLibraryKey(o ?? createSubscribedObject(d), r.openFile);
     let p = getPartnerType(u);

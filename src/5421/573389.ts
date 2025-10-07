@@ -8,7 +8,7 @@ import { useDropdown } from "../905/848862";
 import { Cf } from "../905/504727";
 import { U, i as _$$i } from "../905/649519";
 import { i as _$$i2 } from "../905/415810";
-import { F } from "../905/604606";
+import { getVariableTypeInfo } from "../905/604606";
 import { ZS, Fs } from "../905/549307";
 import { A } from "../1617/954184";
 export function $$g0({
@@ -70,7 +70,7 @@ function y({
   showCreationModal: n,
   recordingKey: a
 }) {
-  let s = F(e);
+  let s = getVariableTypeInfo(e);
   let d = useHandleMouseEvent(generateRecordingKey(a, "createVariableOption", s.name), "click", useCallback(() => {
     n(e);
     t();

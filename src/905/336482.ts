@@ -68,7 +68,7 @@ import { maybeCreateSavepoint } from "../905/294113";
 import { S3, Rr, fY, YI, SK, Ur, RN, nz, fe } from "../905/234639";
 import { w as _$$w } from "../905/893785";
 import { W as _$$W } from "../905/526272";
-import { lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 import { hideModal } from "../905/156213";
 import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
@@ -685,7 +685,7 @@ function eM({
   }) : jsx(_$$h2, {
     holdTimeInMs: 5e3,
     onMouseHold: async () => {
-      l(lW({
+      l(copyTextThunk({
         stringToCopy: JSON.stringify({
           figFileKey: e.deps.figFile?.key,
           existingHubFileId: existingHubFile?.id,
@@ -1668,7 +1668,7 @@ function td({
   }) : jsx(_$$h2, {
     holdTimeInMs: 5e3,
     onMouseHold: async () => {
-      c(lW({
+      c(copyTextThunk({
         stringToCopy: JSON.stringify({
           figFileKey: e.deps.figFile?.key,
           existingHubFileId: existingHubFile?.id,

@@ -20,7 +20,7 @@ import { useDispatch } from "react-redux";
 import { CH, g4 } from "../figma_app/770359";
 import { IconButton } from "../905/443068";
 import { X } from "../905/736922";
-import { lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 import { getVisibleTheme } from "../905/640017";
 import { LoadingSpinner } from "../905/443820";
 import { g as _$$g } from "../905/125190";
@@ -151,7 +151,7 @@ function M({
     }), jsx(y, {
       children: jsx(IconButton, {
         onClick: () => {
-          n(lW({
+          n(copyTextThunk({
             stringToCopy: e
           }));
           onAction?.();

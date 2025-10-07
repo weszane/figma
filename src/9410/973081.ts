@@ -226,7 +226,7 @@ import { areColorsEqual, getThemeBackgroundColor, parseColor, whiteColor } from 
 import { getFileKeyFromSelectedView } from '../figma_app/193867';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { AN } from '../figma_app/201703';
-import { Cg } from '../figma_app/216057';
+import { localVariablesAtom } from '../figma_app/216057';
 import { copyToSitesFromDesignAtom } from '../figma_app/223206';
 import { Jb } from '../figma_app/224338';
 import { useEffectiveThemeId } from '../figma_app/226737';
@@ -1874,7 +1874,7 @@ function ib({
   let c = function () {
     let e = useSelector(e => e.eyedropper);
     let t = useSelector(e => e.library.local.styles);
-    let i = useAtomWithSubscription(Cg);
+    let i = useAtomWithSubscription(localVariablesAtom);
     let r = useSelector(e => e.library.used__LIVEGRAPH.styles);
     if (!e) return null;
     let n = e.assetId;

@@ -3,7 +3,7 @@ import { nE, W0, Ut, v4, qp } from "../figma_app/761118";
 import { FR } from "../figma_app/827216";
 import { debugState } from "../905/407919";
 import { VisualBellActions } from "../905/302958";
-import { uk } from "../figma_app/216057";
+import { sortedLocalVariablesAtom } from "../figma_app/216057";
 export function $$d2({
   button: e,
   message: t,
@@ -42,7 +42,7 @@ export function $$_4() {
     let t = atomStoreManager.get(qp);
     return {
       availableVariables: atomStoreManager.get(nE),
-      localVariables: t ? atomStoreManager.get(uk) : [],
+      localVariables: t ? atomStoreManager.get(sortedLocalVariablesAtom) : [],
       libraryVariables: e.libraryVariables,
       libraryVariableSetIdToSet: e.libraryVariableSetIdToSet,
       libraryKeys: e.libraryKeys

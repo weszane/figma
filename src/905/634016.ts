@@ -1,486 +1,640 @@
-import { createContext, useLayoutEffect, forwardRef, useMemo, useRef, useCallback, useEffect, useId, useState } from "react";
-import { useMergeRefs } from "@floating-ui/react";
-import { useRecording } from "../905/959312";
-import { preventAndStopEvent } from "../905/955878";
-import { mergeProps } from "../905/475481";
-import { jsx } from "react/jsx-runtime";
-import { setupRefUpdater } from "../905/823680";
-import { useExposedRef } from "../905/581092";
-import { ensureContext } from "../905/61417";
-import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
-import { ScrollContainer } from "../905/143421";
-import { defaultComponentAttribute } from "../905/577641";
-import { ButtonPrimitive } from "../905/632989";
-let l = "[role=option]";
-let f = Math.floor(1e3 / 60);
-let _ = createContext(null);
-function A({
-  anchorEl: e,
-  offset: t = 8,
-  placement: i = "bottom-start",
-  ...r
+import { useMergeRefs } from "@floating-ui/react"
+import { createContext, forwardRef, useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { jsx } from "react/jsx-runtime"
+import { ensureContext } from "../905/61417"
+import { ScrollContainer } from "../905/143421"
+import { mergeProps } from "../905/475481"
+import { defaultComponentAttribute } from "../905/577641"
+import { useExposedRef } from "../905/581092"
+import { ButtonPrimitive } from "../905/632989"
+import { PopoverPrimitiveContainer, usePopoverPrimitive } from "../905/691059"
+import { setupRefUpdater } from "../905/823680"
+import { preventAndStopEvent } from "../905/955878"
+import { useRecording } from "../905/959312"
+
+// Constants
+const ROLE_OPTION_SELECTOR = "[role=option]"
+const FRAME_RATE_DELAY = Math.floor(1000 / 60)
+
+// Context
+const ComboboxListContext = createContext<ComboboxListContextValue | null>(null)
+
+// Types
+interface ComboboxListContextValue {
+  activeValue: any
+  expanded: boolean
+  id: string
+  inputMode: "pointer" | "keyboard"
+  setActiveValue: (value: any) => void
+  onExpand: (expanded: boolean) => void
+  onPointerLeave: () => void
+  onSelect: (value: any, options: { event: Event }) => void
+  refs: { input: React.RefObject<HTMLElement>, scroll: React.RefObject<HTMLElement> }
+  selected: any[]
+  registerOption: (element: HTMLElement | null, value: any) => () => void
+}
+
+
+interface ListProps {
+  activeValue: any
+  children: React.ReactNode
+  className?: string
+  expanded: boolean
+  htmlAttributes?: React.HTMLAttributes<HTMLDivElement>
+  id: string
+  inputMode: "pointer" | "keyboard"
+  onExpand: (expanded: boolean) => void
+  onPointerLeave: () => void
+  onSelect: (value: any, options: { event: Event }) => void
+  refs: { input: React.RefObject<HTMLElement>, scroll: React.RefObject<HTMLElement> }
+  registerOption: (element: HTMLElement | null, value: any) => () => void
+  selected: any[]
+  setActiveValue: (value: any) => void
+  style?: React.CSSProperties
+}
+
+interface OptionProps {
+  value: any
+  children: React.ReactNode
+  disabled?: boolean
+  htmlAttributes?: React.HTMLAttributes<HTMLDivElement>
+  id?: string
+  recordingKey?: string
+}
+
+interface GroupProps {
+  children: React.ReactNode
+  htmlAttributes?: React.HTMLAttributes<HTMLDivElement>
+}
+
+interface TriggerProps {
+  htmlAttributes?: React.HTMLAttributes<HTMLButtonElement>
+  [key: string]: any
+}
+
+interface UseComboboxOptions {
+  activeValue?: any
+  arrowKeyBehavior?: "absolute" | "viewport"
+  selected?: any[]
+  expandOnFocus?: boolean
+  onSelect?: (value: any, options: { event: Event }) => void
+  onActiveValueChange?: (value: any) => void
+  popupId?: string
+  recordingKey?: string
+  expanded?: boolean
+  onExpand?: (expanded: boolean) => void
+}
+
+interface UseComboboxReturn {
+  activeValue: any
+  config: UseComboboxOptions
+  getDialogProps: (props?: any) => any
+  getInputProps: (props?: any) => any
+  getListProps: (props?: any) => any
+  getTriggerProps: (props?: any) => any
+  nextItem: (event?: KeyboardEvent) => void
+  prevItem: (event?: KeyboardEvent) => void
+  refs: {
+    input: React.RefObject<HTMLElement>
+    scroll: (element: HTMLElement | null) => void
+  }
+  registerOption: (element: HTMLElement | null, value: any) => () => void
+  selected: any[]
+  setActiveValue: (value: any) => void
+}
+
+// Utility functions
+function generatePopupId({ uuid }: { uuid: string }): string {
+  return `fpl-${uuid}-popup`
+}
+
+function generateListboxId({ uuid }: { uuid: string }): string {
+  return `fpl-${uuid}-listbox`
+}
+
+function generateOptionId({ uuid, localId }: { uuid: string, localId: string }): string {
+  return `fpl-${uuid}-option-${localId}`
+}
+
+function getFirstOption(map: WeakMap<Element, any>, container: Element | null): any {
+  if (!container)
+    return
+  container.scrollTo({ top: 0 })
+  const option = container.querySelector(ROLE_OPTION_SELECTOR)
+  return option ? map.get(option) : undefined
+}
+
+function getLastOption(map: WeakMap<Element, any>, container: Element | null): any {
+  if (!container)
+    return
+  container.scrollTo({ top: container.scrollHeight })
+  const options = container.querySelectorAll(ROLE_OPTION_SELECTOR)
+  return map.get(options[options.length - 1]) ?? undefined
+}
+
+function getVisibleOption(map: WeakMap<Element, any>, container: Element | null): any {
+  if (!container)
+    return
+  const { scrollTop } = container
+  for (const option of Array.from(container.querySelectorAll(ROLE_OPTION_SELECTOR) as unknown as HTMLElement[])) {
+    if (option.offsetTop + option.offsetHeight >= scrollTop) {
+      return map.get(option)
+    }
+  }
+}
+
+// Components
+/**
+ * PopupList component for ComboboxPrimitive
+ */
+export function PopupList({
+  anchorEl,
+  offset = 8,
+  placement = "bottom-start",
+  expanded,
+  onExpand,
+  id,
+  refs,
+  ...rest
 }) {
-  let a = function ({
-    uuid: e
-  }) {
-    return `fpl-${e}-popup`;
-  }({
-    uuid: r.id
-  });
-  let {
-    getContainerProps,
-    getTriggerProps
-  } = usePopoverPrimitive({
-    isOpen: r.expanded,
-    offset: t,
-    onOpenChange: r.onExpand,
-    placement: i,
-    nodeId: a,
-    type: "dialog"
-  });
+  const popupId = generatePopupId({ uuid: id })
+  const { getContainerProps, getTriggerProps } = usePopoverPrimitive({
+    isOpen: expanded,
+    offset,
+    onOpenChange: onExpand,
+    placement,
+    nodeId: popupId,
+    type: "dialog",
+  })
+
   useLayoutEffect(() => {
-    r.expanded && r.refs?.input.current && r.refs.input.current.focus();
-  }, [r.expanded]);
+    if (expanded && refs?.input.current) {
+      refs.input.current.focus()
+    }
+  }, [expanded, refs?.input])
+
   useLayoutEffect(() => {
-    e?.current && getTriggerProps().ref(e.current);
-  }, [r.expanded]);
+    if (anchorEl?.current) {
+      const props = getTriggerProps() as any
+      props.ref(anchorEl.current)
+    }
+  }, [expanded, anchorEl, getTriggerProps])
+
   return jsx(PopoverPrimitiveContainer, {
     ...getContainerProps(),
-    children: jsx(b, {
-      ...r
-    })
-  });
+    children: jsx(List, { expanded, onExpand, id, refs, ...rest }),
+  })
 }
-A.displayName = "ComboboxPrimitive.PopupList";
-let y = forwardRef(({
-  activeValue: e,
-  children: t,
-  className: i,
-  expanded: r,
-  htmlAttributes: a,
-  id: s,
-  inputMode: o,
-  onExpand: l,
-  onPointerLeave: u,
-  onSelect: p,
-  refs: m,
-  registerOption: g,
-  selected: f,
-  setActiveValue: A,
-  style: y,
-  ...b
-}, v) => {
-  let I = useMemo(() => ({
-    activeValue: e,
-    expanded: r,
-    id: s,
-    inputMode: o,
-    setActiveValue: A,
-    onExpand: l,
-    onPointerLeave: u,
-    onSelect: p,
-    refs: m,
-    selected: f,
-    registerOption: g
-  }), [e, r, s, o, A, l, u, p, f, g]);
-  return jsx(_.Provider, {
-    value: I,
+PopupList.displayName = "ComboboxPrimitive.PopupList"
+
+/**
+ * List component for ComboboxPrimitive
+ */
+const List = forwardRef<HTMLDivElement, ListProps>(({
+  activeValue,
+  children,
+  className,
+  expanded,
+  htmlAttributes,
+  id,
+  inputMode,
+  onExpand,
+  onPointerLeave,
+  onSelect,
+  refs,
+  registerOption,
+  selected,
+  setActiveValue,
+  style,
+  ...rest
+}, ref) => {
+  const contextValue = useMemo(() => ({
+    activeValue,
+    expanded,
+    id,
+    inputMode,
+    setActiveValue,
+    onExpand,
+    onPointerLeave,
+    onSelect,
+    refs,
+    selected,
+    registerOption,
+  }), [activeValue, expanded, id, inputMode, setActiveValue, onExpand, onPointerLeave, onSelect, refs, selected, registerOption])
+
+  return jsx(ComboboxListContext.Provider, {
+    value: contextValue,
     children: jsx(ScrollContainer, {
-      ...a,
-      ...b,
+      ...htmlAttributes,
+      ...rest,
       role: "listbox",
-      id: E({
-        uuid: s
-      }),
-      theme: {
-        root: i,
-        rootStyle: y
-      },
-      ref: setupRefUpdater(v, m.scroll),
-      onPointerLeave: u,
-      children: t
-    })
-  });
-});
-y.displayName = "ComboboxPrimitive.List";
-let b = y;
-let v = forwardRef(({
-  value: e,
-  children: t,
-  disabled: i,
-  htmlAttributes: r,
-  id: s,
-  recordingKey: o,
-  ...l
-}, c) => {
-  let m = useExposedRef(c);
-  let {
+      id: generateListboxId({ uuid: id }),
+      theme: { root: className, rootStyle: style },
+      ref: setupRefUpdater(ref, refs.scroll),
+      onPointerLeave,
+      children,
+    }),
+  })
+})
+List.displayName = "ComboboxPrimitive.List"
+
+/**
+ * Option component for ComboboxPrimitive
+ */
+const Option = forwardRef<HTMLDivElement, OptionProps>(({
+  value,
+  children,
+  disabled,
+  htmlAttributes,
+  id,
+  recordingKey,
+  ...rest
+}, ref) => {
+  const exposedRef = useExposedRef(ref)
+  const {
     activeValue,
     inputMode,
-    id,
+    id: contextId,
     refs,
     selected,
     onSelect,
     setActiveValue,
-    registerOption
-  } = ensureContext(_, "ComboboxPrimitiveListContext", "ComboboxPrimitive.List");
-  let S = useRecording(t => {
-    if (i) {
-      r?.onPointerDown?.(t);
-      return;
+    registerOption,
+  } = ensureContext(ComboboxListContext, "ComboboxPrimitiveListContext", "ComboboxPrimitive.List")
+
+  const handlePointerDown = useRecording((event) => {
+    if (disabled) {
+      htmlAttributes?.onPointerDown?.(event)
+      return
     }
-    t.preventDefault();
-    onSelect?.(e, {
-      event: t
-    });
-    refs.input.current?.focus();
-    r?.onPointerDown?.(t);
-  }, {
-    eventName: "pointerdown",
-    recordingKey: o
-  }, [onSelect, i, e]);
-  let w = function (e, t, i) {
-    let r = useRef(null);
-    return useCallback((...i) => (r.current && clearTimeout(r.current), r.current = window.setTimeout(e, t, ...i), () => {
-      r.current && clearTimeout(r.current);
-    }), [...i, t]);
-  }(t => {
-    if (i) {
-      r?.onPointerMove?.(t);
-      return;
+    event.preventDefault()
+    onSelect?.(value, { event })
+    refs.input.current?.focus()
+    htmlAttributes?.onPointerDown?.(event)
+  }, { eventName: "pointerdown", recordingKey }, [onSelect, disabled, value])
+
+  const debouncedPointerMove = useDebounce((event) => {
+    if (disabled) {
+      htmlAttributes?.onPointerMove?.(event)
+      return
     }
-    activeValue !== e && "pointer" === inputMode && setActiveValue(e);
-    refs.input.current?.focus();
-    r?.onPointerMove?.(t);
-  }, f, [activeValue, i, inputMode, setActiveValue, e]);
-  let C = !!selected?.includes(e) || void 0;
-  useEffect(() => registerOption(m.current, e), [e]);
-  let T = useId();
-  let k = s;
-  k || (k = "string" == typeof e ? function ({
-    uuid: e,
-    localId: t
-  }) {
-    return `fpl-${e}-option-${t}`;
-  }({
-    uuid: id,
-    localId: e
-  }) : T);
+    if (activeValue !== value && inputMode === "pointer") {
+      setActiveValue(value)
+    }
+    refs.input.current?.focus()
+    htmlAttributes?.onPointerMove?.(event)
+  }, FRAME_RATE_DELAY, [activeValue, disabled, inputMode, setActiveValue, value])
+
+  const isSelected = selected?.includes(value) || undefined
+
+  useEffect(() => registerOption(exposedRef.current, value), [value, registerOption, exposedRef])
+
+  const optionId = useId()
+  let finalId = id
+  if (!finalId) {
+    finalId = typeof value === "string" ? generateOptionId({ uuid: contextId, localId: value }) : optionId
+  }
+
   return jsx("div", {
     ...defaultComponentAttribute,
-    ...r,
-    ...l,
-    id: k,
-    ref: m,
-    role: "option",
-    "aria-selected": C,
-    "aria-disabled": i,
-    onPointerDown: S,
-    onPointerMove: w,
-    "data-activedescendant": activeValue === e || void 0,
-    children: t
-  });
-});
-v.displayName = "ComboboxPrimitive.Option";
-let I = forwardRef(({
-  children: e,
-  htmlAttributes: t,
-  ...i
-}, n) => jsx("div", {
+    ...htmlAttributes,
+    ...rest,
+    "id": finalId,
+    "ref": exposedRef,
+    "role": "option",
+    "aria-selected": isSelected,
+    "aria-disabled": disabled,
+    "onPointerDown": handlePointerDown,
+    "onPointerMove": debouncedPointerMove,
+    "data-activedescendant": activeValue === value || undefined,
+    children,
+  })
+})
+Option.displayName = "ComboboxPrimitive.Option"
+
+/**
+ * Group component for ComboboxPrimitive
+ */
+const Group = forwardRef<HTMLDivElement, GroupProps>(({
+  children,
+  htmlAttributes,
+  ...rest
+}, ref) => jsx("div", {
   ...defaultComponentAttribute,
-  ...t,
-  ...i,
+  ...htmlAttributes,
+  ...rest,
   role: "group",
-  ref: n,
-  children: e
-}));
-function E({
-  uuid: e
-}) {
-  return `fpl-${e}-listbox`;
-}
-I.displayName = "ComboboxPrimitive.Group";
-let x = {
-  activeValue: void 0,
-  arrowKeyBehavior: "absolute",
-  selected: void 0
-};
-function S(e, t) {
-  if (!t) return;
-  t.scrollTo({
-    top: 0
-  });
-  let i = t?.querySelector(l);
-  return i ? e.get(i) : void 0;
-}
-function w(e, t) {
-  if (!t) return;
-  t.scrollTo({
-    top: t.offsetHeight
-  });
-  let i = t?.querySelectorAll(l);
-  return e.get(i[i.length - 1]) ?? void 0;
-}
-function C(e, t) {
-  if (!t) return;
-  let {
-    scrollTop
-  } = t;
-  for (let n of t.querySelectorAll(l)) if (n.offsetTop + n.offsetHeight >= scrollTop) return e.get(n);
-}
-function k({
-  htmlAttributes: e,
-  ...t
-}) {
-  return jsx(ButtonPrimitive, {
-    ...t,
-    htmlAttributes: {
-      tabIndex: -1,
-      ...e
+  ref,
+  children,
+}))
+Group.displayName = "ComboboxPrimitive.Group"
+
+/**
+ * Trigger component for ComboboxPrimitive
+ */
+const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(({
+  htmlAttributes,
+  ...rest
+}, ref) => jsx(ButtonPrimitive, {
+  ...rest,
+  htmlAttributes: { tabIndex: -1, ...htmlAttributes },
+  ref,
+}))
+Trigger.displayName = "ComboboxPrimitive.Trigger"
+
+// Hook
+/**
+ * useCombobox hook for managing combobox state and behavior
+ */
+function useCombobox(options: UseComboboxOptions): UseComboboxReturn {
+  const generatedId = useId()
+  const config = { ...defaultConfig, ...options }
+  const {
+    arrowKeyBehavior,
+    expandOnFocus,
+    selected,
+    onSelect,
+    onActiveValueChange,
+    popupId = generatedId,
+    recordingKey,
+  } = config
+
+  const inputRef = useRef<HTMLElement>(null)
+  const scrollRef = useRef<HTMLElement>(null)
+  const [inputElementRef, setInputElementRef] = useState<any | null>(null)
+  const mergedInputRef = useMergeRefs([inputRef, inputElementRef])
+  const [inputMode, setInputMode] = useState<"pointer" | "keyboard">("pointer")
+  const elementToValueMap = useRef(new WeakMap<Element, any>())
+  const valueToElementMap = useRef(new Map<any, WeakRef<Element>>())
+  const registerOption = useCallback((element: HTMLElement | null, value: any) => {
+    if (element) {
+      elementToValueMap.current.set(element, value)
+      valueToElementMap.current.set(value, new WeakRef(element))
     }
-  });
-}
-k.displayName = "ComboboxPrimitive.Trigger";
-export let $$R0 = {
-  Group: I,
-  List: b,
-  Option: v,
-  PopupList: A,
-  Trigger: k,
-  useCombobox: function (e) {
-    let t = useId();
-    let i = {
-      ...x,
-      ...e
-    };
-    let {
-      arrowKeyBehavior,
-      expandOnFocus,
-      selected,
-      onSelect,
-      onActiveValueChange,
-      popupId = t,
-      recordingKey
-    } = i;
-    let f = useRef(null);
-    let _ = useRef(null);
-    let [A, y] = useState();
-    let b = useMergeRefs([f, A]);
-    let [v, I] = useState("pointer");
-    let T = useRef(new WeakMap());
-    let k = useRef(new Map());
-    let R = useCallback((e, t) => (e && (T.current.set(e, t), k.current.set(t, new WeakRef(e))), () => {
-      e && T.current.$$delete(e);
-      k.current.$$delete(t);
-    }), []);
-    let [N, P] = useState(i.expanded ?? !1);
-    let O = i.onExpand && "boolean" == typeof i.expanded ? i.expanded : N;
-    let D = useCallback(e => {
-      i.onExpand?.(e);
-      P(e);
-    }, [i.onExpand, P]);
-    let [L, F] = useState(void 0);
-    let M = i.activeValue || L;
-    let j = useCallback(e => {
-      I("pointer");
-      onActiveValueChange?.(e);
-      F(e);
-    }, [onActiveValueChange]);
-    let U = useCallback(e => {
-      if (_.current) {
-        if (M) {
-          let t = _.current.querySelectorAll(l) || [];
-          let i = !1;
-          for (let n = 0; n < t.length; n++) {
-            let r = t[n];
-            let a = T.current.get(r);
-            if (a === M) {
-              if (n === t.length - 1) {
-                if (e?.repeat) return;
-                j(S(T.current, _.current));
-                return;
-              }
-              i = !0;
-              continue;
-            }
-            if (i) {
-              r.scrollIntoView({
-                block: "nearest"
-              });
-              j(a);
-              return;
-            }
-          }
-        } else if ("viewport" === arrowKeyBehavior) {
-          let e = C(T.current, _.current);
-          if (e) {
-            j(e);
-            return;
-          }
-        }
-        j(S(T.current, _.current));
+    return () => {
+      if (element) {
+        elementToValueMap.current.delete(element)
+        valueToElementMap.current.delete(value)
       }
-    }, [M, arrowKeyBehavior, j]);
-    let B = useCallback(e => {
-      if (!_.current) return;
-      if (M) {
-        let t = _.current.querySelectorAll(l) || [];
-        let i = !1;
-        for (let n = t.length - 1; n >= 0; n--) {
-          let r = t[n];
-          let a = T.current.get(r);
-          if (a === M) {
-            if (0 === n) {
-              if (e?.repeat) return;
-              j(w(T.current, _.current));
-              return;
-            }
-            i = !0;
-            continue;
+    }
+  }, [])
+
+  const [internalExpanded, setInternalExpanded] = useState(config.expanded ?? false)
+  const expanded = config.onExpand && typeof config.expanded === "boolean" ? config.expanded : internalExpanded
+  const setExpanded = useCallback((value: boolean) => {
+    config.onExpand?.(value)
+    setInternalExpanded(value)
+  }, [config.onExpand])
+
+  const [internalActiveValue, setInternalActiveValue] = useState<any>(undefined)
+  const activeValue = config.activeValue || internalActiveValue
+  const setActiveValue = useCallback((value: any) => {
+    setInputMode("pointer")
+    onActiveValueChange?.(value)
+    setInternalActiveValue(value)
+  }, [onActiveValueChange])
+
+  const nextItem = useCallback((event?: KeyboardEvent) => {
+    if (!scrollRef.current)
+      return
+    if (activeValue) {
+      const options = scrollRef.current.querySelectorAll(ROLE_OPTION_SELECTOR) || []
+      let found = false
+      for (let i = 0; i < options.length; i++) {
+        const option = options[i]
+        const value = elementToValueMap.current.get(option)
+        if (value === activeValue) {
+          if (i === options.length - 1) {
+            if (event?.repeat)
+              return
+            setActiveValue(getFirstOption(elementToValueMap.current, scrollRef.current))
+            return
           }
-          if (i) {
-            r.scrollIntoView({
-              block: "nearest"
-            });
-            j(a);
-            return;
-          }
+          found = true
+          continue
         }
-      } else if ("viewport" === arrowKeyBehavior) {
-        let e = C(T.current, _.current);
-        if (e) {
-          j(e);
-          return;
+        if (found) {
+          option.scrollIntoView({ block: "nearest" })
+          setActiveValue(value)
+          return
         }
       }
-      let t = w(T.current, _.current);
-      t && j(t);
-    }, [M, arrowKeyBehavior, j]);
-    let V = useCallback(() => {
-      !1 !== expandOnFocus && (j(S(T.current, _.current)), D(!0));
-    }, [expandOnFocus, D, j]);
-    useEffect(() => {
-      O && !M && j("viewport" === arrowKeyBehavior ? C(T.current, _.current) : S(T.current, _.current));
-    }, [M, arrowKeyBehavior, O, j]);
-    let G = useCallback(() => {
-      !1 !== expandOnFocus && D(!1);
-    }, [expandOnFocus, D]);
-    let z = useRecording(e => {
-      if (!O && "ArrowDown" === e.key && e.altKey) {
-        j(S(T.current, _.current));
-        D(!0);
-        preventAndStopEvent(e);
-        return;
+    }
+    else if (arrowKeyBehavior === "viewport") {
+      const value = getVisibleOption(elementToValueMap.current, scrollRef.current)
+      if (value) {
+        setActiveValue(value)
+        return
       }
-      if (O && !e.altKey && !e.ctrlKey && !e.shiftKey && !e.metaKey) switch (e.key) {
+    }
+    setActiveValue(getFirstOption(elementToValueMap.current, scrollRef.current))
+  }, [activeValue, arrowKeyBehavior, setActiveValue])
+
+  const prevItem = useCallback((event?: KeyboardEvent) => {
+    if (!scrollRef.current)
+      return
+    if (activeValue) {
+      const options = scrollRef.current.querySelectorAll(ROLE_OPTION_SELECTOR) || []
+      let found = false
+      for (let i = options.length - 1; i >= 0; i--) {
+        const option = options[i]
+        const value = elementToValueMap.current.get(option)
+        if (value === activeValue) {
+          if (i === 0) {
+            if (event?.repeat)
+              return
+            setActiveValue(getLastOption(elementToValueMap.current, scrollRef.current))
+            return
+          }
+          found = true
+          continue
+        }
+        if (found) {
+          option.scrollIntoView({ block: "nearest" })
+          setActiveValue(value)
+          return
+        }
+      }
+    }
+    else if (arrowKeyBehavior === "viewport") {
+      const value = getVisibleOption(elementToValueMap.current, scrollRef.current)
+      if (value) {
+        setActiveValue(value)
+        return
+      }
+    }
+    const value = getLastOption(elementToValueMap.current, scrollRef.current)
+    if (value)
+      setActiveValue(value)
+  }, [activeValue, arrowKeyBehavior, setActiveValue])
+
+  const handleFocus = useCallback(() => {
+    if (expandOnFocus !== false) {
+      setActiveValue(getFirstOption(elementToValueMap.current, scrollRef.current))
+      setExpanded(true)
+    }
+  }, [expandOnFocus, setExpanded, setActiveValue])
+
+  useEffect(() => {
+    if (expanded && !activeValue) {
+      setActiveValue(arrowKeyBehavior === "viewport" ? getVisibleOption(elementToValueMap.current, scrollRef.current) : getFirstOption(elementToValueMap.current, scrollRef.current))
+    }
+  }, [activeValue, arrowKeyBehavior, expanded, setActiveValue])
+
+  const handleBlur = useCallback(() => {
+    if (expandOnFocus !== false) {
+      setExpanded(false)
+    }
+  }, [expandOnFocus, setExpanded])
+
+  const handleKeyDown = useRecording((event) => {
+    if (!expanded && event.key === "ArrowDown" && event.altKey) {
+      setActiveValue(getFirstOption(elementToValueMap.current, scrollRef.current))
+      setExpanded(true)
+      preventAndStopEvent(event)
+      return
+    }
+    if (expanded && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
+      switch (event.key) {
         case "Home":
-          _.current?.scroll({
-            top: 0
-          });
-          j(S(T.current, _.current));
-          preventAndStopEvent(e);
-          I("keyboard");
-          break;
+          scrollRef.current?.scroll({ top: 0 })
+          setActiveValue(getFirstOption(elementToValueMap.current, scrollRef.current))
+          preventAndStopEvent(event)
+          setInputMode("keyboard")
+          break
         case "End":
-          _.current?.scroll({
-            top: _.current?.offsetHeight
-          });
-          j(w(T.current, _.current));
-          preventAndStopEvent(e);
-          I("keyboard");
-          break;
+          scrollRef.current?.scroll({ top: scrollRef.current.offsetHeight })
+          setActiveValue(getLastOption(elementToValueMap.current, scrollRef.current))
+          preventAndStopEvent(event)
+          setInputMode("keyboard")
+          break
         case "ArrowDown":
-          U(e);
-          preventAndStopEvent(e);
-          I("keyboard");
-          break;
+          nextItem(event)
+          preventAndStopEvent(event)
+          setInputMode("keyboard")
+          break
         case "ArrowUp":
-          B(e);
-          preventAndStopEvent(e);
-          I("keyboard");
+          prevItem(event)
+          preventAndStopEvent(event)
+          setInputMode("keyboard")
+          break
       }
-    }, {
-      eventName: "keydown",
-      recordingKey
-    }, [O, D, U, B, j]);
-    let H = useCallback(e => {
-      "Enter" === e.key && onSelect && M && (onSelect(M, {
-        event: e
-      }), preventAndStopEvent(e));
-    }, [M, onSelect]);
-    let W = useCallback(e => (e?.ref && e.ref !== A && y(e.ref), mergeProps(e ?? {}, {
-      ...e?.htmlAttributes,
-      ref: b,
-      role: "combobox",
-      "aria-expanded": O,
-      "aria-controls": E({
-        uuid: popupId
-      }),
-      "aria-activedescendant": M ? k.current.get(M)?.deref()?.id : void 0,
+    }
+  }, { eventName: "keydown", recordingKey }, [expanded, setExpanded, nextItem, prevItem, setActiveValue])
+
+  const handleKeyUp = useCallback((event) => {
+    if (event.key === "Enter" && onSelect && activeValue) {
+      onSelect(activeValue, { event })
+      preventAndStopEvent(event)
+    }
+  }, [activeValue, onSelect])
+
+  const getInputProps = useCallback((props?: any) => {
+    if (props?.ref && props.ref !== inputElementRef) {
+      setInputElementRef(props.ref)
+    }
+      return mergeProps(props ?? {}, {
+      ...props?.htmlAttributes,
+      "ref": mergedInputRef,
+      "role": "combobox",
+      "aria-expanded": expanded,
+      "aria-controls": generateListboxId({ uuid: popupId }),
+      "aria-activedescendant": activeValue ? valueToElementMap.current.get(activeValue)?.deref()?.id : undefined,
       "aria-autocomplete": "list",
       "aria-haspopup": "listbox",
-      onFocus: V,
-      onBlur: G,
-      onKeyDown: z,
-      onKeyUp: H
-    })), [M, O, b, G, V, z, H, popupId, A]);
-    let K = useCallback(() => {
-      I("pointer");
-    }, []);
-    let Y = useCallback(e => mergeProps(e ?? {}, {
-      ...e?.htmlAttributes,
-      registerOption: R,
-      activeValue: M,
-      id: popupId,
-      inputMode: v,
-      setActiveValue: j,
-      expanded: O,
-      onExpand: D,
-      onPointerLeave: K,
-      onSelect,
-      refs: {
-        input: f,
-        scroll: _
-      },
-      selected: selected ?? []
-    }), [M, O, v, D, K, onSelect, popupId, R, selected, j]);
-    let q = useCallback(e => {
-      D(!O);
-      preventAndStopEvent(e);
-    }, [O, D]);
-    let $ = useCallback(e => mergeProps(e ?? {}, {
-      onClick: q,
-      "aria-controls": E({
-        uuid: popupId
-      }),
-      "aria-expanded": O,
-      "aria-haspopup": "listbox"
-    }), [O, popupId, q]);
-    let Z = useCallback(() => {
-      D(!1);
-    }, [D]);
-    let X = useCallback(e => mergeProps(e ?? {}, {
-      onClose: Z
-    }), [Z]);
-    return useMemo(() => ({
-      activeValue: M,
-      config: Object.freeze(i),
-      getDialogProps: X,
-      getInputProps: W,
-      getListProps: Y,
-      getTriggerProps: $,
-      nextItem: U,
-      prevItem: B,
-      refs: {
-        input: f,
-        scroll(e) {
-          _.current = e;
-        }
-      },
-      registerOption: R,
-      selected: selected ?? [],
-      setActiveValue: j
-    }), [M, X, W, Y, $, U, B, R, selected, j]);
-  }
-};
-export const F = $$R0;
+      "onFocus": handleFocus,
+      "onBlur": handleBlur,
+      "onKeyDown": handleKeyDown,
+      "onKeyUp": handleKeyUp,
+    })
+  }, [activeValue, expanded, mergedInputRef, handleBlur, handleFocus, handleKeyDown, handleKeyUp, popupId, inputElementRef])
+
+  const handlePointerLeave = useCallback(() => {
+    setInputMode("pointer")
+  }, [])
+
+  const getListProps = useCallback((props?: any) => mergeProps(props ?? {}, {
+    ...props?.htmlAttributes,
+    registerOption,
+    activeValue,
+    id: popupId,
+    inputMode,
+    setActiveValue,
+    expanded,
+    onExpand: setExpanded,
+    onPointerLeave: handlePointerLeave,
+    onSelect,
+    refs: { input: inputRef, scroll: scrollRef },
+    selected: selected ?? [],
+  }), [activeValue, expanded, inputMode, setExpanded, handlePointerLeave, onSelect, popupId, registerOption, selected, setActiveValue])
+
+  const handleTriggerClick = useCallback((event) => {
+    setExpanded(!expanded)
+    preventAndStopEvent(event)
+  }, [expanded, setExpanded])
+
+  const getTriggerProps = useCallback((props?: any) => mergeProps(props ?? {}, {
+    "onClick": handleTriggerClick,
+    "aria-controls": generateListboxId({ uuid: popupId }),
+    "aria-expanded": expanded,
+    "aria-haspopup": "listbox",
+  }), [expanded, popupId, handleTriggerClick])
+
+  const handleClose = useCallback(() => {
+    setExpanded(false)
+  }, [setExpanded])
+
+  const getDialogProps = useCallback((props?: any) => mergeProps(props ?? {}, {
+    onClose: handleClose,
+  }), [handleClose])
+
+  return useMemo(() => ({
+    activeValue,
+    config: Object.freeze(config),
+    getDialogProps,
+    getInputProps,
+    getListProps,
+    getTriggerProps,
+    nextItem,
+    prevItem,
+    refs: {
+      input: inputRef,
+      scroll: (element: HTMLElement | null) => { scrollRef.current = element },
+    },
+    registerOption,
+    selected: selected ?? [],
+    setActiveValue,
+  }), [activeValue, config, getDialogProps, getInputProps, getListProps, getTriggerProps, nextItem, prevItem, registerOption, selected, setActiveValue])
+}
+
+// Custom hook for debouncing
+function useDebounce<T extends (...args: any[]) => any>(func: T, delay: number, deps: React.DependencyList): T {
+  const ref = useRef<NodeJS.Timeout | number | null>(null)
+  return useCallback((...args: Parameters<T>) => {
+    if (ref.current)
+      clearTimeout(ref.current)
+    ref.current = setTimeout(() => func(...args), delay)
+    return () => {
+      if (ref.current)
+        clearTimeout(ref.current)
+    }
+  }, deps) as T
+}
+
+// Default config
+const defaultConfig: Required<Pick<UseComboboxOptions, "activeValue" | "arrowKeyBehavior" | "selected">> = {
+  activeValue: undefined,
+  arrowKeyBehavior: "absolute",
+  selected: undefined,
+}
+
+// Exports
+export const ComboboxPrimitive = {
+  Group,
+  List,
+  Option,
+  PopupList,
+  Trigger,
+  useCombobox,
+}
+export const F = ComboboxPrimitive

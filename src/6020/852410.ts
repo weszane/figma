@@ -15,7 +15,7 @@ import { logError } from "../905/714362";
 import { k as _$$k } from "../905/582200";
 import { k as _$$k2 } from "../6020/640789";
 import { getI18nString } from "../905/303541";
-import { lW } from "../figma_app/11182";
+import { copyTextThunk } from "../figma_app/11182";
 import { K as _$$K2 } from "../905/987240";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { VU } from "../905/625959";
@@ -136,7 +136,7 @@ function F({
               startingPointNodeId: t,
               showHotspots: void 0
             });
-            h(lW({
+            h(copyTextThunk({
               stringToCopy: `${g}${o}`
             }));
           }(i.nodeID),

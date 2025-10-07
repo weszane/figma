@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { S } from "../figma_app/11182";
+import { copyLinkThunk } from "../figma_app/11182";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
 import { buildFileUrl } from "../905/612685";
@@ -26,7 +26,7 @@ export function $$p1() {
       commentId: i.parent_id ?? i.id,
       ...t
     });
-    return e(S({
+    return e(copyLinkThunk({
       url: n
     }));
   }, [e, t, a, m]);

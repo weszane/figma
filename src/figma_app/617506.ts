@@ -7,7 +7,7 @@ import { selectViewAction } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
 import { u as _$$u, Rb, L5, rW } from "../figma_app/852050";
 import { getSelectedView } from "../figma_app/386952";
-import { Pw } from "../905/782020";
+import { buildVariableHierarchy } from "../905/782020";
 let _ = createLocalStorageAtom("last-used-dev-mode-variable-set", null);
 let $$h5 = "ALL_VARIABLES";
 let $$m3 = atom($$h5);
@@ -57,7 +57,7 @@ export function $$b4() {
 export function $$T7(e) {
   let t = L5(e);
   let r = rW(t?.node_id ?? "");
-  return useMemo(() => Pw(r).map(e => "/" === e.name.charAt(e.name.length - 1) ? {
+  return useMemo(() => buildVariableHierarchy(r).map(e => "/" === e.name.charAt(e.name.length - 1) ? {
     ...e,
     name: e.name.slice(0, -1)
   } : e), [r]);

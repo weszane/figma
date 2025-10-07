@@ -1,53 +1,49 @@
-import { useMemo, useEffect } from "react";
-import { isNotNullish } from "../figma_app/95419";
-import { VariableSetIdCompatHandler } from "../figma_app/243058";
-import { ey as _$$ey } from "../905/859698";
-import { VariablesBindings, HandoffBindingsCpp } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, atom, useAtomValueAndSetter, Pj } from "../figma_app/27355";
+import { flatten, isUndefined } from "lodash-es";
+import { useEffect, useMemo } from "react";
 import { useMemoShallow, useMemoStable } from "../905/19536";
-import { resourceUtils } from "../905/989992";
-import h from "../vendor/656470";
-import g from "../vendor/990460";
-import { logError } from "../905/714362";
-import { isValidLibraryKey, useValidLibraryKey } from "../figma_app/630951";
-import { sortVariableCollections, mapVariablePropertiesFromResource, mapAndSortVariableSets, mapVariableSetsFromLibrary, mapVariablesFromLibraryCollections } from "../905/261982";
-import { useCurrentFileKey } from "../figma_app/516028";
+import { permissionScopeHandler } from "../905/189185";
+import { mapAndSortVariableSets, mapVariablePropertiesFromResource, mapVariableSetsFromLibrary, mapVariablesFromLibraryCollections, sortVariableCollections } from "../905/261982";
 import { getLibraryNames } from "../905/506188";
+import { getFeatureFlags } from "../905/601108";
+import { getSingletonSceneGraph } from "../905/700578";
+import { logError } from "../905/714362";
+import { convertToModeValue } from "../905/782020";
+import { hasExtendedCollections } from "../905/850476";
+import { ey as _$$ey } from "../905/859698";
+import { resourceUtils } from "../905/989992";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
+import { isNotNullish } from "../figma_app/95419";
 import { useSubscribedLibraries } from "../figma_app/155728";
-import { isExtension, getSubscribedVariableSetInfo, getSubscribedVariableInfo, getPublishKey } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { eF, Io, CS, cn } from "../figma_app/394327";
-import { iG, AQ } from "../figma_app/481279";
-import { Gc, L9, Fx, XC, qy, jt, TD, uk, xA, bO, LC, ZG, Eo, JB, Tg, Cg, Ev, BJ, cp, Oj, Ri, Jo, H2, wh, Yt, hz, Ho, hy, A6, Zc } from "../figma_app/216057";
-import { Ot } from "../905/850476";
-import { pr } from "../905/782020";
-import { n as _$$n } from "../905/347702";
+import { localOverridesByVariableSetIdAtomFamily, createVariableResolvedValueAtom, subscribedVariablesAtom, localVariablesAtom, libraryVariableCollectionWithVarsByFileKeyAtomFamily, combinedVariableSetByIdAtomFamily, variableByIdAtomFamily, overridesByVariableSetIdAtomFamily, localVariablesGroupedBySetIdAtom, libraryVariableCollectionsByFileKeysAtomFamily, libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily, localVariableByIdAtomFamily, communityLibraryVariableCollectionsWithVarsByHubFileIdsAtomFamily, createExplicitModeNamesAtom, createDisabledResourceAtom, usedLibraryVariableSetsByKeyReduxAtom, subscribedVariablesGroupedBySetIdAtom, usedLibraryVariablesByKeyReduxAtom, variablesByVariableCollectionKeysAtomFamily, localVariableSetsAtom, queryCommunityLibraryVariableCollectionWithVariables, allLocalVariableSetsAtom, createPageLevelModesAtom, sortedLocalVariablesAtom, libraryVariableCollectionsByLibraryKeysAtomFamily, subscribedVariableSetsAtom, variableTableDataForVariableSetAtomFamily, libraryVariableCollectionsWithVarsByFileKeysAtomFamily, combinedVariableSetsAtom, localVariableSetByIdAtomFamily } from "../figma_app/216057";
+import { VariableSetIdCompatHandler } from "../figma_app/243058";
+import { cn, CS, eF, Io } from "../figma_app/394327";
 import { fullscreenValue } from "../figma_app/455680";
-var m = h;
-var f = g;
+import { AQ, iG } from "../figma_app/481279";
+import { useCurrentFileKey } from "../figma_app/516028";
+import { isValidLibraryKey, useValidLibraryKey } from "../figma_app/630951";
+import { getPublishKey, getSubscribedVariableInfo, getSubscribedVariableSetInfo, isExtension } from "../figma_app/633080";
+import { HandoffBindingsCpp, VariablesBindings } from "../figma_app/763686";
 export function $$P32(e) {
-  let t = useAtomWithSubscription(Gc);
+  let t = useAtomWithSubscription(localVariablesGroupedBySetIdAtom);
   return eE(e ? t[e] ?? [] : []);
 }
 export function $$D12(e) {
   let t = $$P32(e);
   let r = function (e) {
-    let t = useAtomWithSubscription(L9);
+    let t = useAtomWithSubscription(subscribedVariablesGroupedBySetIdAtom);
     return eE(e ? t[e] ?? [] : []);
   }(e);
   return t.length > 0 ? t : r;
 }
 export function $$k39(e) {
-  return useAtomWithSubscription(Fx(e));
+  return useAtomWithSubscription(overridesByVariableSetIdAtomFamily(e));
 }
 export function $$M31(e) {
-  return useAtomWithSubscription(XC(e));
+  return useAtomWithSubscription(variableTableDataForVariableSetAtomFamily(e));
 }
 export function $$F25() {
-  return useAtomWithSubscription(qy);
+  return useAtomWithSubscription(localVariableSetsAtom);
 }
 export function $$j11() {
   $$B9();
@@ -55,31 +51,31 @@ export function $$j11() {
   $$G23();
   $$V8();
   $$H26();
-  useAtomWithSubscription(jt);
+  useAtomWithSubscription(usedLibraryVariableSetsByKeyReduxAtom);
 }
 export function $$U40() {
-  var e;
-  e = eE(useAtomWithSubscription(TD));
-  let t = useMemo(() => Ot() ? e : e.filter(e => !isExtension(e)), [e]);
+  let e;
+  e = eE(useAtomWithSubscription(allLocalVariableSetsAtom));
+  let t = useMemo(() => hasExtendedCollections() ? e : e.filter(e => !isExtension(e)), [e]);
   return sortVariableCollections(t);
 }
 export function $$B9() {
-  return eE(useAtomWithSubscription(uk));
+  return eE(useAtomWithSubscription(sortedLocalVariablesAtom));
 }
 export function $$G23() {
-  return useAtomWithSubscription(xA);
+  return useAtomWithSubscription(subscribedVariableSetsAtom);
 }
 export function $$V8() {
-  return useAtomWithSubscription(bO);
+  return useAtomWithSubscription(subscribedVariablesAtom);
 }
 export function $$H26() {
-  return useAtomWithSubscription(LC);
+  return useAtomWithSubscription(usedLibraryVariablesByKeyReduxAtom);
 }
 export function $$z22(e) {
-  return useAtomWithSubscription(ZG(e));
+  return useAtomWithSubscription(localVariableSetByIdAtomFamily(e));
 }
 export function $$W3(e) {
-  let t = useMemo(() => e ? Eo(e) : atom(null), [e]);
+  let t = useMemo(() => e ? combinedVariableSetByIdAtomFamily(e) : atom(null), [e]);
   let r = useAtomWithSubscription(t);
   if (r) return r;
   if (!e) return;
@@ -87,11 +83,11 @@ export function $$W3(e) {
   if (i) return getSubscribedVariableSetInfo(i);
 }
 export function $$K27(e) {
-  let t = useMemo(() => JB(e), [e]);
+  let t = useMemo(() => createExplicitModeNamesAtom(e), [e]);
   return useAtomWithSubscription(t) ?? null;
 }
 export function $$Y16() {
-  let e = useMemo(() => Tg(), []);
+  let e = useMemo(() => createPageLevelModesAtom(), []);
   return useAtomWithSubscription(e);
 }
 export function $$$14(e, t) {
@@ -99,14 +95,14 @@ export function $$$14(e, t) {
 }
 export function $$X38(e) {
   let t = useMemoShallow(() => e, [e]);
-  let r = useMemo(() => atom(e => t.map(t => isNotNullish(t) ? e(Cg)[t] ?? null : null)), [t]);
+  let r = useMemo(() => atom(e => t.map(t => isNotNullish(t) ? e(localVariablesAtom)[t] ?? null : null)), [t]);
   return useAtomWithSubscription(r);
 }
 export function $$q34(e) {
   return $$J35(e)?.name || (e ? VariablesBindings.getVariableNameInStyleSelection(e) ?? void 0 : void 0);
 }
 export function $$J35(e) {
-  let t = useMemo(() => e ? Ev(e) : atom(null), [e]);
+  let t = useMemo(() => e ? variableByIdAtomFamily(e) : atom(null), [e]);
   let r = useAtomWithSubscription(t);
   if (r) return r;
   if (!e) return null;
@@ -117,7 +113,7 @@ export function $$Z18(e, t) {
   let r = useMemoShallow(() => e, [e]);
   let i = useMemo(() => atom(e => r.map(r => {
     if (!r) return null;
-    let n = e(Ev(r));
+    let n = e(variableByIdAtomFamily(r));
     if (n) return n;
     if (t) {
       let e = VariablesBindings.getSubscribedVariableInfo(r);
@@ -133,7 +129,7 @@ export function $$Q30(e, t) {
     let n = {};
     r.forEach(r => {
       if (!r) return;
-      let i = BJ(r, t ?? {});
+      let i = createVariableResolvedValueAtom(r, t ?? {});
       if (i) {
         n[r] = e(i);
         return;
@@ -145,12 +141,12 @@ export function $$Q30(e, t) {
   return useAtomWithSubscription(i);
 }
 export function $$ee0(e, t) {
-  let r = useMemo(() => e ? BJ(e, t ?? {}) : atom(null), [e, t]);
+  let r = useMemo(() => e ? createVariableResolvedValueAtom(e, t ?? {}) : atom(null), [e, t]);
   return useAtomWithSubscription(r);
 }
 export function $$et33(e, t) {
   let r = $$ee0(e, t);
-  return isNotNullish(r) && "MIXED" !== r ? r : void 0;
+  return isNotNullish(r) && r !== "MIXED" ? r : void 0;
 }
 export function $$er13(e, t) {
   return useMemo(() => {
@@ -162,11 +158,11 @@ export function $$er13(e, t) {
 export function $$en5(e) {
   let t = $$J35(e);
   let r = $$W3(t?.variableSetId);
-  return r ? "LOCAL" === r.subscriptionStatus ? r.keyForPublish : r.key : null;
+  return r ? r.subscriptionStatus === "LOCAL" ? r.keyForPublish : r.key : null;
 }
 export function $$ei1() {
   let e = useCurrentFileKey();
-  let t = useMemo(() => e ? cp(e) : atom(null), [e]);
+  let t = useMemo(() => e ? libraryVariableCollectionWithVarsByFileKeyAtomFamily(e) : atom(null), [e]);
   let r = useAtomWithSubscription(t);
   return useMemo(() => {
     let e = r && resourceUtils.from(r);
@@ -177,18 +173,22 @@ export function $$ei1() {
   }, [r]);
 }
 export function $$ea37(e) {
-  let t = useMemo(() => Oj(e), [e]);
+  let t = useMemo(() => variablesByVariableCollectionKeysAtomFamily(e), [e]);
   let r = useAtomWithSubscription(t);
   return useMemoStable(() => {
     let e = {};
-    for (let t of Object.values(r)) if ("loaded" === t.status) for (let r of t.data.variableCollection?.variables ?? []) e[_$$ey(r.key)] = r;
+    for (let t of Object.values(r)) {
+      if (t.status === "loaded") {
+        for (let r of t.data.variableCollection?.variables ?? []) e[_$$ey(r.key)] = r;
+      }
+    }
     return e;
   }, [r]);
 }
 export function $$es21(e) {
-  let t = useMemo(() => !e || isValidLibraryKey(e) ? atom(null) : cp(e), [e]);
+  let t = useMemo(() => !e || isValidLibraryKey(e) ? atom(null) : libraryVariableCollectionWithVarsByFileKeyAtomFamily(e), [e]);
   let r = useValidLibraryKey(e);
-  let i = Ri(r);
+  let i = queryCommunityLibraryVariableCollectionWithVariables(r);
   let a = useAtomWithSubscription(t);
   let s = useAtomWithSubscription(i);
   let o = useSubscribedLibraries();
@@ -209,7 +209,7 @@ export function $$es21(e) {
 }
 export function $$eo17() {
   let e = useCurrentFileKey();
-  let t = useMemo(() => e ? cp(e) : atom(null), [e]);
+  let t = useMemo(() => e ? libraryVariableCollectionWithVarsByFileKeyAtomFamily(e) : atom(null), [e]);
   let r = useAtomWithSubscription(t);
   return useMemo(() => {
     let e = r && resourceUtils.from(r);
@@ -220,9 +220,9 @@ export function $$eo17() {
   }, [r]);
 }
 export function $$el36(e) {
-  let t = useMemo(() => !e || isValidLibraryKey(e) ? atom(null) : cp(e), [e]);
+  let t = useMemo(() => !e || isValidLibraryKey(e) ? atom(null) : libraryVariableCollectionWithVarsByFileKeyAtomFamily(e), [e]);
   let r = useValidLibraryKey(e);
-  let i = Ri(r);
+  let i = queryCommunityLibraryVariableCollectionWithVariables(r);
   let a = useAtomWithSubscription(t);
   let s = useAtomWithSubscription(i);
   let o = useSubscribedLibraries();
@@ -252,35 +252,35 @@ export function $$ed20(e = {}) {
   });
   return r ? i : n;
 }
-let ec = _$$n((e = {}) => {
+let ec = (e = {}) => {
   let t = !1 === e.enabled;
   let r = useSubscribedLibraries();
   let i = useMemoShallow(() => r.data?.map(e => e.fileKey) ?? [], [r.data]);
-  let a = useMemo(() => t ? Jo(i) : H2(i), [t, i]);
+  let a = useMemo(() => t ? createDisabledResourceAtom(i) : libraryVariableCollectionsByFileKeysAtomFamily(i), [t, i]);
   let s = useAtomWithSubscription(a);
   return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(s));
-    return "loaded" !== e.status ? e : resourceUtils.loaded({
-      items: m()(Object.values(s).map(e => mapAndSortVariableSets({
+    return e.status !== "loaded" ? e : resourceUtils.loaded({
+      items: flatten()(Object.values(s).map(e => mapAndSortVariableSets({
         type: "team",
         value: e
       }, !1)))
     });
   }, [s]);
-});
-let eu = _$$n((e = {}) => {
+};
+let eu = (e = {}) => {
   let t = !1 === e.enabled;
   let r = useSubscribedLibraries();
   let i = useMemoShallow(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
-  let a = useMemo(() => t ? Jo(i) : wh(i), [t, i]);
+  let a = useMemo(() => t ? createDisabledResourceAtom(i) : libraryVariableCollectionsByLibraryKeysAtomFamily(i), [t, i]);
   let s = useAtomWithSubscription(a);
   return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(s));
-    return "loaded" !== e.status ? e : resourceUtils.loaded({
+    return e.status !== "loaded" ? e : resourceUtils.loaded({
       items: Object.values(s).flatMap(e => mapVariableSetsFromLibrary(e, !1))
     });
   }, [s]);
-});
+};
 let $$ep15 = atom(null);
 export function $$e_4({
   enabled: e = !0
@@ -290,9 +290,9 @@ export function $$e_4({
   });
   let [r, i] = useAtomValueAndSetter($$ep15);
   useEffect(() => {
-    (null === r || r.status !== t.status) && i(t);
+    (r === null || r.status !== t.status) && i(t);
   }, [t, i, r]);
-  return "loaded" === t.status;
+  return t.status === "loaded";
 }
 export function $$eh29(e) {
   let t = e?.enabled ?? !0;
@@ -305,7 +305,7 @@ export function $$eh29(e) {
   });
   return r ? i : n;
 }
-let em = _$$n(e => {
+let em = e => {
   let t = useSubscribedLibraries();
   let r = useMemoShallow(() => t.data?.filter(e => !isValidLibraryKey(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
   let i = useMemoShallow(() => t.data?.filter(e => isValidLibraryKey(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
@@ -318,7 +318,7 @@ let em = _$$n(e => {
       });
       return atom(e);
     }
-    return Yt(r);
+    return libraryVariableCollectionsWithVarsByFileKeysAtomFamily(r);
   }, [a, r]);
   let o = useAtomWithSubscription(s);
   let l = useMemo(() => {
@@ -329,7 +329,7 @@ let em = _$$n(e => {
       });
       return atom(e);
     }
-    return hz(i);
+    return communityLibraryVariableCollectionsWithVarsByHubFileIdsAtomFamily(i);
   }, [a, i]);
   let d = useAtomWithSubscription(l);
   return useMemoShallow(() => {
@@ -337,36 +337,36 @@ let em = _$$n(e => {
       ...o,
       ...d
     }));
-    return "loaded" !== e.status ? e.transform(() => ({
+    return e.status !== "loaded" ? e.transform(() => ({
       libraryVariableSets: [],
       libraryVariables: []
     })) : resourceUtils.loaded({
-      libraryVariableSets: [...m()(Object.values(o).map(e => mapAndSortVariableSets({
+      libraryVariableSets: [...flatten()(Object.values(o).map(e => mapAndSortVariableSets({
         type: "team",
         value: e
-      }, !1))), ...m()(Object.values(d).map(e => mapAndSortVariableSets({
+      }, !1))), ...flatten()(Object.values(d).map(e => mapAndSortVariableSets({
         type: "community",
         value: e
       }, !1)))],
-      libraryVariables: [...m()(Object.values(o).map(e => mapVariablePropertiesFromResource({
+      libraryVariables: [...flatten()(Object.values(o).map(e => mapVariablePropertiesFromResource({
         type: "team",
         value: e
-      }, !1))), ...m()(Object.values(d).map(e => mapVariablePropertiesFromResource({
+      }, !1))), ...flatten()(Object.values(d).map(e => mapVariablePropertiesFromResource({
         type: "community",
         value: e
       }, !1)))]
     });
   }, [o, d]);
-});
-let eg = _$$n(e => {
+};
+let eg = e => {
   let t = e?.enabled === !1;
   let r = useSubscribedLibraries();
   let i = useMemoShallow(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
-  let a = useMemo(() => t ? Jo(i) : Ho(i), [t, i]);
+  let a = useMemo(() => t ? createDisabledResourceAtom(i) : libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily(i), [t, i]);
   let s = useAtomWithSubscription(a);
   return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(s));
-    return "loaded" !== e.status ? e.transform(() => ({
+    return e.status !== "loaded" ? e.transform(() => ({
       libraryVariableSets: [],
       libraryVariables: []
     })) : resourceUtils.loaded({
@@ -374,12 +374,14 @@ let eg = _$$n(e => {
       libraryVariables: Object.values(s).flatMap(e => mapVariablesFromLibraryCollections(e, !1))
     });
   }, [s]);
-});
+};
 export function $$ef19(e, t, r) {
-  if (e) return HandoffBindingsCpp.getIdsOfVariablesWithValue(e, t, {
-    type: r.type,
-    value: r.value
-  });
+  if (e) {
+    return HandoffBindingsCpp.getIdsOfVariablesWithValue(e, t, {
+      type: r.type,
+      value: r.value
+    });
+  }
 }
 function eE(e) {
   return useMemo(() => e.filter(e => !eF(e)), [e]);
@@ -393,7 +395,7 @@ export function $$eb10(e, t) {
   let r = iG(e);
   let i = ey(t);
   return useMemo(() => {
-    if ("loaded" !== i.status) return i.transform(() => []);
+    if (i.status !== "loaded") return i.transform(() => []);
     let t = i.data?.filter(e => AQ(e, r)) ?? [];
     let n = [];
     for (let r of e) {
@@ -419,7 +421,7 @@ export function $$eS7() {
   return ($$eb10(["FONT_STYLE"]).data ?? []).length > 0;
 }
 export function $$ev24() {
-  let e = Pj();
+  let e = useStore();
   function t(e, r, n, i = yesNoTrackingEnum.YES, a = "set-variable-value-for-mode") {
     let s = permissionScopeHandler.user(a, () => VariablesBindings?.setVariableValueForMode(e, r, n) ?? !1);
     s && i === yesNoTrackingEnum.YES && fullscreenValue.triggerAction("commit");
@@ -440,8 +442,8 @@ export function $$ev24() {
       });
       return;
     }
-    let p = i ? pr(i) : null;
-    if (f()(p)) {
+    let p = i ? convertToModeValue(i) : null;
+    if (isUndefined(p)) {
       logError("variables", "Failed to set variable override. Invalid variable value.", {
         newValue: i
       });
@@ -464,9 +466,9 @@ export function $$ev24() {
   return {
     setVariableValueForMode: t,
     setVariableOverrideForMode: r,
-    setVariableValueOrOverrideForMode: function (n, i, a, s, o = yesNoTrackingEnum.YES, l) {
-      let d = e.get(ZG(n));
-      let c = e.get(hy(i));
+    setVariableValueOrOverrideForMode(n, i, a, s, o = yesNoTrackingEnum.YES, l) {
+      let d = e.get(localVariableSetByIdAtomFamily(n));
+      let c = e.get(localVariableByIdAtomFamily(i));
       if (!d) {
         logError("variables", "Failed to set variable value or override for mode. Variable set not found.", {
           variableSetId: n
@@ -479,8 +481,10 @@ export function $$ev24() {
         });
         return;
       }
-      if (isExtension(d) && !CS(c, n)) r(n, i, a, s, o, l);else {
-        if (null === s) {
+      if (isExtension(d) && !CS(c, n)) {
+        r(n, i, a, s, o, l);
+      } else {
+        if (s === null) {
           logError("variables", "Failed to set variable value for mode. Variable value is null.", {
             variableId: i,
             modeId: a
@@ -492,10 +496,10 @@ export function $$ev24() {
     },
     detachVariableAlias: n,
     detachVariableOverrideAlias: i,
-    detachAlias: function (t, a, s) {
-      let l = e.get(ZG(s));
-      let d = e.get(hy(t));
-      let c = e.get(A6(s))?.[t];
+    detachAlias(t, a, s) {
+      let l = e.get(localVariableSetByIdAtomFamily(s));
+      let d = e.get(localVariableByIdAtomFamily(t));
+      let c = e.get(localOverridesByVariableSetIdAtomFamily(s))?.[t];
       if (!l) {
         logError("variables", "Failed to clear variable or variable override alias. Variable set not found.", {
           variableSetId: s
@@ -508,13 +512,15 @@ export function $$ev24() {
         });
         return;
       }
-      if (!e.get(ZG(d.variableSetId))) {
+      if (!e.get(localVariableSetByIdAtomFamily(d.variableSetId))) {
         logError("variables", "Failed to clear variable or variable override alias. Owner variable set not found.", {
           variableId: t
         });
         return;
       }
-      if (CS(d, s)) n(t, a);else if (isExtension(l)) {
+      if (CS(d, s)) {
+        n(t, a);
+      } else if (isExtension(l)) {
         if (c) {
           i(t, a, s);
           return;
@@ -538,7 +544,7 @@ export function $$ev24() {
   };
 }
 export function $$eA28() {
-  let e = useAtomWithSubscription(Zc);
+  let e = useAtomWithSubscription(combinedVariableSetsAtom);
   return useMemo(() => {
     let t = {};
     for (let r of Object.values(e)) {

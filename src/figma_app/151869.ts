@@ -1,27 +1,28 @@
-import { useMemo, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { CSSExportHelpers } from "../figma_app/763686";
-import { convertKiwiToVariableIdString } from "../905/805904";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import { getI18nString } from "../905/303541";
-import { v4, xv as _$$xv } from "../figma_app/655139";
-import { WEB } from "../905/359509";
-import { t as _$$t2 } from "../905/241707";
-import { sQ } from "../905/191741";
-import { isCodegenSupportedForLanguage, getScaledValueWithUnit } from "../figma_app/120227";
-import { v as _$$v } from "../905/50227";
-import { toSlug } from "../905/232489";
-import { lW } from "../figma_app/11182";
-import { isDevHandoffEditorType } from "../figma_app/976749";
-import { getColorFormat } from "../figma_app/740163";
+import { useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { devModeShowVarCodeSyntaxAtom } from "../905/50227";
+import { isCodeMode } from "../905/191741";
 import { isValidValue } from "../905/216495";
+import { toSlug } from "../905/232489";
+import { t as _$$t2 } from "../905/241707";
 import { useSelectionPropertyValue } from "../905/275640";
-import { u as _$$u, hg } from "../figma_app/852050";
-import { useDeepEqualSceneValue, useSingleSceneValue, useMultipleSceneValues, useSimpleSceneValue } from "../figma_app/167249";
-import { OE } from "../figma_app/155647";
 import { q } from "../905/296913";
+import { getI18nString } from "../905/303541";
+import { WEB } from "../905/359509";
+import { convertKiwiToVariableIdString } from "../905/805904";
+import { lW } from "../figma_app/11182";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getScaledValueWithUnit, isCodegenSupportedForLanguage } from "../figma_app/120227";
+import { OE } from "../figma_app/155647";
+import { useDeepEqualSceneValue, useMultipleSceneValues, useSimpleSceneValue, useSingleSceneValue } from "../figma_app/167249";
 import { NX } from "../figma_app/394327";
-var $$n3;
+import { xv as _$$xv, v4 } from "../figma_app/655139";
+import { getColorFormat } from "../figma_app/740163";
+import { CSSExportHelpers } from "../figma_app/763686";
+import { u as _$$u, hg } from "../figma_app/852050";
+import { isDevHandoffEditorType } from "../figma_app/976749";
+
+let $$n3;
 export function $$N11() {
   let e = useSelector(e => e.mirror.selectionProperties?.numSelected === 1);
   let t = useSelector(e => e.mirror.sceneGraphSelection);
@@ -31,7 +32,7 @@ export function $$C4() {
   let e = useSelector(e => e.mirror.sceneGraphSelection);
   return useMemo(() => {
     let t = Object.keys(e);
-    return 0 === t.length ? null : t;
+    return t.length === 0 ? null : t;
   }, [e]);
 }
 export function $$w13() {
@@ -53,7 +54,7 @@ export function $$R6(e = 0) {
 export function $$L5() {
   let e = $$N11();
   let t = useSingleSceneValue(e);
-  if (null != e && null != t) return t;
+  if (e != null && t != null) return t;
 }
 export function $$P2() {
   let e = $$C4();
@@ -67,7 +68,7 @@ export function $$D7() {
 export function $$k9(e) {
   return useSelector(t => {
     let r = e(t);
-    if (null != r && isValidValue(r)) return r;
+    if (r != null && isValidValue(r)) return r;
   });
 }
 export function $$M1(e, t) {
@@ -87,17 +88,17 @@ export function $$F0(e) {
   let r = v4();
   let n = _$$u(e ?? void 0);
   let i = isDevHandoffEditorType();
-  let a = useAtomWithSubscription(_$$v);
+  let a = useAtomWithSubscription(devModeShowVarCodeSyntaxAtom);
   if (!n) return;
   if (!i || !a) return n.name;
-  let s = t && "first-party" === r.type ? r.id : WEB;
+  let s = t && r.type === "first-party" ? r.id : WEB;
   return _$$xv(n, s) ?? n.name;
 }
 export function $$j12(e) {
   let t = isDevHandoffEditorType();
   let r = v4();
-  let n = sQ();
-  let i = useAtomWithSubscription(_$$v);
+  let n = isCodeMode();
+  let i = useAtomWithSubscription(devModeShowVarCodeSyntaxAtom);
   if (e) return t && (i || n) ? _$$xv(e, r.id) ?? e.name ?? getI18nString("variables.missing_name") : e.name;
 }
 (e => {
@@ -139,7 +140,7 @@ export function $$j12(e) {
   e.unquoteEnumerableValues = function (e) {
     return e.map(e => {
       let [t, r] = e;
-      return "string" == typeof r && n.includes(r.toLowerCase()) ? [t, r, {
+      return typeof r == "string" && n.includes(r.toLowerCase()) ? [t, r, {
         quoted: !1
       }] : e;
     });
@@ -153,7 +154,7 @@ export function $$j12(e) {
     } = e.variable ?? {};
     switch (paint.type) {
       case "SOLID":
-        if (1 === r) {
+        if (r === 1) {
           let t = e.valueFormatter(e.colors[0], {
             hexCSSValue: !0
           });
@@ -191,7 +192,7 @@ export function $$j12(e) {
     let n = useSelector(e => e.mirror.selectionProperties.numSelected) || 0;
     let s = _(e);
     let o = useCallback(() => {
-      if (1 === n && s) {
+      if (n === 1 && s) {
         let e = new Set();
         if (s.forEach(t => {
           t.paint.blendMode && e.add(t.paint.blendMode);
@@ -224,7 +225,7 @@ export function $$j12(e) {
   let m = (t, n, i, a) => {
     let s = n.includes(" ");
     let o = _(i);
-    let l = o.length > 1 || 1 === o.length && "SOLID" !== o[0].paint.type;
+    let l = o.length > 1 || o.length === 1 && o[0].paint.type !== "SOLID";
     let d = e.copyColors(o, t);
     if (!l && !s) return `${a ?? "border"}: ${n} solid ${d}`;
     let c = s ? [["border-width", n], ["border-style", "solid"]] : [[`${a ?? "border"}`, `${n} solid`]];
@@ -234,7 +235,7 @@ export function $$j12(e) {
     });
   };
   function f(e) {
-    return e.map(e => void 0 === e ? "" : "string" == typeof e ? e : `${$$R6(e)}px`);
+    return e.map(e => void 0 === e ? "" : typeof e == "string" ? e : `${$$R6(e)}px`);
   }
   e.useStrokeCopyValue = function (e, t, r) {
     let n = getColorFormat();
@@ -247,10 +248,10 @@ export function $$j12(e) {
   };
   e.withPixels = f;
   let E = (t, n, i, a) => {
-    if ("FOREGROUND_BLUR" === t.type || "BACKGROUND_BLUR" === t.type) return r([["backdrop-filter", `blur(${t.radius}px)`]]);
+    if (t.type === "FOREGROUND_BLUR" || t.type === "BACKGROUND_BLUR") return r([["backdrop-filter", `blur(${t.radius}px)`]]);
     let s = e.copyColors(n, i);
     if (!t.offset) return;
-    let [o, l, d, c, u] = a && 5 === a.length ? a : [null, null, null, null, null];
+    let [o, l, d, c, u] = a && a.length === 5 ? a : [null, null, null, null, null];
     return r([["box-shadow", [f([NX({
       variable: o
     }) || t.offset?.x, NX({
@@ -261,7 +262,7 @@ export function $$j12(e) {
       variable: c
     }) || t.spread]).join(" "), NX({
       variable: u
-    }) || s, "INNER_SHADOW" === t.type ? "inset" : void 0].filter(_$$t2).join(" ")]], {
+    }) || s, t.type === "INNER_SHADOW" ? "inset" : void 0].filter(_$$t2).join(" ")]], {
       suffix: ";"
     });
   };
@@ -329,11 +330,11 @@ export function $$B8({
   let r = isDevHandoffEditorType();
   let n = v4();
   let i = isCodegenSupportedForLanguage();
-  let a = "number" == typeof e ? e : 0;
+  let a = typeof e == "number" ? e : 0;
   let s = getScaledValueWithUnit(n, a, U, {
     isTextProperty: t
   });
-  return r && i && 0 !== a ? s : void 0;
+  return r && i && a !== 0 ? s : void 0;
 }
 export const As = $$F0;
 export const Cj = $$M1;

@@ -9,7 +9,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
 import { pP } from "../figma_app/328825";
 import { groupStylesByPrefix } from "../figma_app/646357";
-import { Pw } from "../905/782020";
+import { buildVariableHierarchy } from "../905/782020";
 import { vdd, uj0 } from "../figma_app/27776";
 var d = l;
 var u = c;
@@ -32,7 +32,7 @@ export function $$v0({
       name: e.name
     });
     let s = "list" === i ? 1 : 6;
-    Pw(t).forEach(({
+    buildVariableHierarchy(t).forEach(({
       name: t,
       variables: i
     }) => {

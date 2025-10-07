@@ -11,7 +11,7 @@ import { compareNumbers } from "../figma_app/766708";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { filterStylesByType } from "../figma_app/646357";
 import { UV } from "../905/438367";
-import { Cg } from "../figma_app/216057";
+import { localVariablesAtom } from "../figma_app/216057";
 import { ay } from "../905/886545";
 import { X_ } from "../figma_app/634146";
 import { i1 } from "../figma_app/177697";
@@ -44,7 +44,7 @@ export function $$I1(e) {
   }, [e, data, t]);
 }
 function S(e) {
-  let t = useAtomWithSubscription(Cg);
+  let t = useAtomWithSubscription(localVariablesAtom);
   let r = i1(e);
   let {
     data

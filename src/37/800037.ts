@@ -26,7 +26,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { Y as _$$Y } from "../vendor/435990";
 import { eF } from "../figma_app/394327";
 import { J2, wG } from "../905/331989";
-import { B9 } from "../905/782020";
+import { getPathLeaf } from "../905/782020";
 import { getLocalVariableInfo, getLocalVariableSetInfo } from "../figma_app/633080";
 import { X as _$$X } from "../905/55424";
 import { noop } from 'lodash-es';
@@ -57,7 +57,7 @@ function F({
   }) => p(e.read(() => $getSelection()))), [o]);
   useEffect(() => o.registerCommand(KEY_ARROW_UP_COMMAND, f, COMMAND_PRIORITY_LOW), [o, f]);
   useEffect(() => o.registerCommand(KEY_ARROW_DOWN_COMMAND, f, COMMAND_PRIORITY_LOW), [o, f]);
-  let m = e && t && B9(e.name) || l && l.name;
+  let m = e && t && getPathLeaf(e.name) || l && l.name;
   let _ = m ? r && t ? m + ": " + he(t, r) : m : getI18nString("proto.expression_builder_entry.missing");
   let g = a ? J2.SELECTED : l ? J2.COMPONENT : J2.DEFAULT;
   let O = BQ(e?.node_id);
@@ -795,7 +795,7 @@ function eT({
 }) {
   let [a] = useLexicalComposerContext();
   let u = (e, t) => {
-    for (let r of t) if (B9(r.name).toLowerCase().startsWith(e.toLowerCase())) return !0;
+    for (let r of t) if (getPathLeaf(r.name).toLowerCase().startsWith(e.toLowerCase())) return !0;
     return !1;
   };
   let c = (e, t) => t.some(t => t.value.name.toLowerCase().startsWith(e.toLowerCase()));
@@ -847,7 +847,7 @@ function eT({
     if (!t?.trim() || !e || !i.isSelected()) return;
     let s = i.getTextContent();
     let l = s.charAt(s.length - 1);
-    !l.match(I0) || s === l || u(s.trimStart(), r) || c(s.trimStart(), n) || o(i, e => e && "node_id" in e ? !B9(e.name).toLowerCase().startsWith(t.toLowerCase()) : e && "COMPONENT_PROP" === e.type ? !e.value.name.toLowerCase().startsWith(t.toLowerCase()) : '"' === t.charAt(0) ? !l.match(yy) : !l.match(I0));
+    !l.match(I0) || s === l || u(s.trimStart(), r) || c(s.trimStart(), n) || o(i, e => e && "node_id" in e ? !getPathLeaf(e.name).toLowerCase().startsWith(t.toLowerCase()) : e && "COMPONENT_PROP" === e.type ? !e.value.name.toLowerCase().startsWith(t.toLowerCase()) : '"' === t.charAt(0) ? !l.match(yy) : !l.match(I0));
   }, [n, e, o, t, r]);
   let m = useCallback(e => {
     let t = e.getTextContent();

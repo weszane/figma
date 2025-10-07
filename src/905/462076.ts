@@ -5,7 +5,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { createLoadedState } from "../905/723791";
 import { $E, y1 } from "../905/445814";
 import { openUrlInContext } from "../figma_app/976345";
-import { le } from "../figma_app/11182";
+import { copyViewLinkThunk } from "../figma_app/11182";
 import { fetchFileByKeyOptimistic } from "../figma_app/78808";
 import { y as _$$y } from "../figma_app/705249";
 import { o8, CR } from "../figma_app/12220";
@@ -100,7 +100,7 @@ export function $$P0(e, t) {
       postUuid: e,
       source: t
     });
-    i(le({
+    i(copyViewLinkThunk({
       view: "teamFeed",
       postUuid: e
     }));

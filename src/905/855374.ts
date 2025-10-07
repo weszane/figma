@@ -62,9 +62,9 @@ import { hideVariablePicker } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizePath } from "../905/309735";
 import { generateUniqueName, stripNumberSuffix } from "../905/578436";
-import { RL, Ot } from "../905/850476";
+import { MAX_VARIABLES, hasExtendedCollections } from "../905/850476";
 import { compareNumbers } from "../figma_app/766708";
-import { rN as _$$rN, Pf, Lo as _$$Lo, cv, om, Qo, B9, GC, ky, ZR, nm, x9 as _$$x, yh, Pw, hF, Wx, Od, F$, US, qQ } from "../905/782020";
+import { conditionalValue, getGroupPath, generateUniqueGroupName, countVariablesWithPrefix, generateUniquePathName, getVariablesWithPrefix, getPathLeaf, GC, getPathBaseName, constructPath, DEFAULT_MODE, getNameColumnWidth, getValueColumnWidths, buildVariableHierarchy, getRelativeName, getParentPath, getFirstVariable, renameVariablesInGroup, normalizePathWithParent, insertVariableAtPosition } from "../905/782020";
 import { wp, jv } from "../905/886545";
 import { createPortal } from "react-dom";
 import { trackEventAnalytics } from "../905/449184";
@@ -112,7 +112,7 @@ import { createMultiRefCallback } from "../figma_app/272902";
 import { m as _$$m2 } from "../905/871166";
 import { i as _$$i2 } from "../905/415810";
 import { v6, Ar, N0, GC as _$$GC, uM, Mz, $4, SS } from "../905/984793";
-import { X as _$$X } from "../905/456000";
+import { columnResizeAtom } from "../905/456000";
 import { l2, Ks, U3, SG, iw as _$$iw, NE, gZ, Cg } from "../905/101482";
 import { Te } from "../vendor/813803";
 import { VisualBellActions } from "../905/302958";
@@ -1074,19 +1074,19 @@ let eH = [];
 function eZ(e) {
   let t = useDispatch();
   let i = e.contextMenuData.selectedVariableRows.map(e => e.variable);
-  let s = _$$rN(useCallback(() => {
+  let s = conditionalValue(useCallback(() => {
     if (!N3(i)) {
       e.hideContextMenu();
       return;
     }
     let t = "New group/";
     if (e.hasGroups) {
-      let n = Pf(i[0].name);
-      t = _$$Lo(e.allVariables, n + "New group/");
+      let n = getGroupPath(i[0].name);
+      t = generateUniqueGroupName(e.allVariables, n + "New group/");
     }
     e.onCreateGroup?.(t, i);
   }, [e, i]), !!e.onCreateGroup && everyLocalSubscription(i));
-  let o = _$$rN(useCallback(t => {
+  let o = conditionalValue(useCallback(t => {
     permissionScopeHandler.user("delete-variables", () => {
       t.forEach(e => {
         VariablesBindings.deleteVariable(e.node_id);
@@ -1096,26 +1096,26 @@ function eZ(e) {
     fullscreenValue.triggerAction("commit");
   }, [e]), !!e.onDeleteVariables);
   let l = useRef(e.contextMenuData.cellElement);
-  let d = _$$rN(useCallback(t => {
+  let d = conditionalValue(useCallback(t => {
     trackEventAnalytics(e.contextMenuData.selectedVariableRows.length > 1 ? "multi_edit_variable_modal_opened" : "edit_variable_modal_opened");
     t.stopPropagation();
     let n = calculatePickerPositionBelow(l.current, parsePxNumber($));
     e.toggleEditVariableModal(i.map(e => e.node_id), new Point(n.x, n.y));
     e.hideContextMenu();
   }, [e, i]), !!e.toggleEditVariableModal);
-  let c = _$$rN(useCallback(() => {
+  let c = conditionalValue(useCallback(() => {
     e.onDuplicateVariables?.();
     e.hideContextMenu();
   }, [e]), !!e.onDuplicateVariables);
-  let u = _$$rN(useCallback(() => {
+  let u = conditionalValue(useCallback(() => {
     e.onCopyVariables?.();
     e.hideContextMenu();
   }, [e]), !!e.onCopyVariables);
-  let m = _$$rN(useCallback(() => {
+  let m = conditionalValue(useCallback(() => {
     e.onPasteVariables?.();
     e.hideContextMenu();
   }, [e]), !!e.onPasteVariables);
-  let h = _$$rN(useCallback(() => {
+  let h = conditionalValue(useCallback(() => {
     if (!N3(i)) {
       e.hideContextMenu();
       return;
@@ -1123,19 +1123,19 @@ function eZ(e) {
     o?.(i);
     e.hideContextMenu();
   }, [o, e, i]), !!o && everyLocalSubscription(i));
-  let g = _$$rN(useCallback(() => {
+  let g = conditionalValue(useCallback(() => {
     let t = [];
-    if (e.contextMenuData.groupNames.map(t => cv(e.allVariables, t)).reduce((e, t) => e + t) + e.allVariables.length > RL) {
+    if (e.contextMenuData.groupNames.map(t => countVariablesWithPrefix(e.allVariables, t)).reduce((e, t) => e + t) + e.allVariables.length > MAX_VARIABLES) {
       fullscreenValue.showVisualBellLocalized("variable_limit_in_collection_reached", "variables.variable_limit_in_collection_reached", {
-        variableLimit: RL
+        variableLimit: MAX_VARIABLES
       }, !1);
       return;
     }
     let i = e.allVariables.map(e => e.name);
     e.contextMenuData.groupNames.forEach(n => {
-      let r = om(i, n);
+      let r = generateUniquePathName(i, n);
       t.push(r);
-      let a = Qo(e.allVariables, n);
+      let a = getVariablesWithPrefix(e.allVariables, n);
       permissionScopeHandler.user("duplicate-variables", () => {
         a.forEach(e => {
           let t = r + e.name.replace(n, "");
@@ -1147,26 +1147,26 @@ function eZ(e) {
     fullscreenValue.triggerAction("commit");
     e.hideContextMenu();
   }, [e]), !!(e.onCreateGroup && e.onDuplicateVariables));
-  let f = _$$rN(useCallback(() => {
+  let f = conditionalValue(useCallback(() => {
     e.onUngroup?.(e.contextMenuData.groupNames);
     e.hideContextMenu();
     e.onSetAllVariablesSelected(!0);
   }, [e]), !!e.onUngroup);
-  let _ = _$$rN(useCallback(() => {
+  let _ = conditionalValue(useCallback(() => {
     if (!e.onDeleteEmptyGroup || !e.onDeleteVariables) return;
     let {
       allVariables
     } = e;
     if (!N3(allVariables)) return;
     let i = e.contextMenuData.groupNames.reduce((i, n) => {
-      let r = i.concat(Qo(allVariables, n));
+      let r = i.concat(getVariablesWithPrefix(allVariables, n));
       0 === r.length && e.onDeleteEmptyGroup?.();
       return r;
     }, []);
     o?.(i);
     e.hideContextMenu();
   }, [e, o]), !!o && everyLocalSubscription(e.allVariables));
-  let A = useCallback(() => e.contextMenuData.groupNames.some(t => 0 === Qo(e.allVariables, t).length), [e]);
+  let A = useCallback(() => e.contextMenuData.groupNames.some(t => 0 === getVariablesWithPrefix(e.allVariables, t).length), [e]);
   let b = jsxs(Fragment, {
     children: [f && jsx(c$, {
       onClick: f,
@@ -1452,8 +1452,8 @@ function tT({
 }) {
   let [h, g] = useState(!1);
   let [f, _] = useState(!1);
-  let A = _$$rN(useCallback(e => s?.(d.node_id, e) ?? !1, [s, d.node_id]), !!s);
-  let y = _$$rN(g, !!A);
+  let A = conditionalValue(useCallback(e => s?.(d.node_id, e) ?? !1, [s, d.node_id]), !!s);
+  let y = conditionalValue(g, !!A);
   return jsxs(Fragment, {
     children: [A && y && h ? jsx("div", {
       children: jsx(_$$b, {
@@ -1508,26 +1508,26 @@ function tk({
     hide
   } = useDropdown("variable-modal-set-options");
   let h = yp();
-  let _ = _$$rN(useHandleMouseEvent(generateRecordingKey(d, "createVariableSet"), "click", () => {
+  let _ = conditionalValue(useHandleMouseEvent(generateRecordingKey(d, "createVariableSet"), "click", () => {
     a && t && (o(a()), t(!0), hide());
   }), !!a);
-  let A = _$$rN(useHandleMouseEvent(generateRecordingKey(d, "createVariableSetExtension"), "click", async () => {
+  let A = conditionalValue(useHandleMouseEvent(generateRecordingKey(d, "createVariableSetExtension"), "click", async () => {
     s && t && (o(await s(e.node_id)), t(!0), hide());
   }), !!s);
-  let y = _$$rN(useCallback(() => {
+  let y = conditionalValue(useCallback(() => {
     t?.(!0);
     hide();
   }, [t, hide]), !!t);
   let b = debugState.getState();
   let v = b.openFile?.key;
-  let I = _$$rN(useCallback(() => {
+  let I = conditionalValue(useCallback(() => {
     i?.(!0);
     hide();
     trackDefinedFileEvent("reorder_collections.ds_reorder_variable_collection_menu_opened", v ?? "", b, {
       collection_id: e.node_id
     });
   }, [i, hide, v, b, e.node_id]), !!i);
-  let E = _$$rN(useHandleMouseEvent(generateRecordingKey(d, "deleteVariableSet"), "click", () => {
+  let E = conditionalValue(useHandleMouseEvent(generateRecordingKey(d, "deleteVariableSet"), "click", () => {
     l?.(e.node_id);
     hide();
   }), !!l);
@@ -1776,7 +1776,7 @@ let t$ = forwardRef(function ({
   draggingModeID: C
 }, T) {
   let k = useRef(null);
-  let P = useAtomWithSubscription(_$$X).isResizing;
+  let P = useAtomWithSubscription(columnResizeAtom).isResizing;
   let D = !!s && !P && !S && isLocalSubscription(g);
   let {
     position
@@ -1893,10 +1893,10 @@ function tZ({
   isShowingGuids: a,
   recordingKey: s
 }) {
-  let o = B9(e.name);
-  let l = Pf(e.name);
+  let o = getPathLeaf(e.name);
+  let l = getGroupPath(e.name);
   let d = i === e.node_id;
-  let c = _$$rN(useHandleMouseEvent(s, "dblclick", () => {
+  let c = conditionalValue(useHandleMouseEvent(s, "dblclick", () => {
     r?.(e.node_id);
   }), !!r);
   return jsxs(Ar, {
@@ -2009,10 +2009,10 @@ function t1({
   let k = useCallback((t, i) => {
     i ? b(t4(e, T(t, i))) : b(t4(e, [t]));
   }, [T, b, e]);
-  let R = _$$rN(useCallback(e => {
+  let R = conditionalValue(useCallback(e => {
     for (let t of y) h?.(t, e);
   }, [h, y]), !!h);
-  let N = _$$rN(useCallback(t => {
+  let N = conditionalValue(useCallback(t => {
     let i = t.dropItem;
     if (!(0 > e.findIndex(e => e.name === i.name))) {
       if (t.position === Nz.INSIDE) {
@@ -2087,7 +2087,7 @@ function t2({
   let f = useRef(null);
   let _ = "" === e.name;
   let A = useMemo(() => GC(e).length, [e]);
-  let b = _ ? getI18nString("variables.authoring_modal.table.all_variables") : ky(e.name);
+  let b = _ ? getI18nString("variables.authoring_modal.table.all_variables") : getPathBaseName(e.name);
   let v = _ ? 0 : e.name.split("/").length - 2;
   let [I, E] = useState(!1);
   let {
@@ -2151,7 +2151,7 @@ function t2({
           recordingKey: generateRecordingKey(h, "renameInput"),
           autoFocus: !0,
           onCancel: () => E(!1),
-          onSubmit: t => u(e.name, ZR(e.name, normalizePath(t))),
+          onSubmit: t => u(e.name, constructPath(e.name, normalizePath(t))),
           onFinish: () => E(!1),
           originalValue: b
         })
@@ -2201,7 +2201,7 @@ let t8 = forwardRef(function ({
   onRenameGroup: a
 }, s) {
   let [o, l] = useState(!1);
-  let d = _$$rN(l, !!a);
+  let d = conditionalValue(l, !!a);
   let c = e.split("/").slice(0, -1);
   let u = c.slice(0, -1);
   let m = c[c.length - 1];
@@ -2225,7 +2225,7 @@ let t8 = forwardRef(function ({
           recordingKey: generateRecordingKey(i, e, "renameInput"),
           onSubmit: t => {
             let i = !1;
-            t && (i = a(e, ZR(e, normalizePath(t))));
+            t && (i = a(e, constructPath(e, normalizePath(t))));
             return i;
           },
           onFinish: () => d?.(!1),
@@ -2283,7 +2283,7 @@ function ie({
   let B = useDispatch();
   let {
     isResizing
-  } = useAtomWithSubscription(_$$X);
+  } = useAtomWithSubscription(columnResizeAtom);
   let G = useCallback(t => {
     if (isResizing || e) {
       t.preventDefault();
@@ -2326,12 +2326,12 @@ function ie({
     show,
     data
   } = useDropdown("variables-modal-mode-menu");
-  let Q = _$$rN(useCallback(() => {
+  let Q = conditionalValue(useCallback(() => {
     v ? E && x() : _?.(i, s);
     hide();
   }, [v, E, hide, _, i, s, x]), !!_);
-  let J = Xr(_$$X);
-  let ee = _$$rN(useCallback(() => {
+  let J = Xr(columnResizeAtom);
+  let ee = conditionalValue(useCallback(() => {
     getFeatureFlags().ds_variables_modal_resize && J(e => {
       let t = {
         ...e
@@ -2366,19 +2366,19 @@ function ie({
       hide();
     }
   }, [w, i, C, hide, R]);
-  let er = _$$rN(useCallback(e => !!A?.(i, e) && (fullscreenValue.triggerAction("commit"), !0), [i, A]), !!A);
-  let ea = _$$rN(useCallback(() => {
+  let er = conditionalValue(useCallback(e => !!A?.(i, e) && (fullscreenValue.triggerAction("commit"), !0), [i, A]), !!A);
+  let ea = conditionalValue(useCallback(() => {
     h?.(i);
     hide();
   }, [hide, h, i]), !!h);
-  let es = _$$rN(useHandleMouseEvent(generateRecordingKey(b, "name"), "dblclick", () => h?.(i)), !!h);
-  let eo = _$$rN(useCallback(() => {
+  let es = conditionalValue(useHandleMouseEvent(generateRecordingKey(b, "name"), "dblclick", () => h?.(i)), !!h);
+  let eo = conditionalValue(useCallback(() => {
     y?.(i);
     R(i);
     hide();
   }, [hide, y, i, R]), !!y);
   let el = !d && !c;
-  let ed = d && s === nm ? getI18nString("variables.create_modal.value_label") : s;
+  let ed = d && s === DEFAULT_MODE ? getI18nString("variables.create_modal.value_label") : s;
   let ec = [];
   data && !data.onlyAllowDeletion && (Q && ec.push(jsx(c$, {
     onClick: Q,
@@ -2409,7 +2409,7 @@ function ie({
   })));
   let eu = debugState.getState();
   let ep = eu.openFile?.key;
-  let em = _$$rN(useHandleMouseEvent(b, "contextmenu", useCallback(t => {
+  let em = conditionalValue(useHandleMouseEvent(b, "contextmenu", useCallback(t => {
     t.preventDefault();
     show({
       data: {
@@ -2604,21 +2604,21 @@ function it({
   }, {
     includeTarget: !0
   });
-  let ed = _$$rN(useCallback((e, t) => {
+  let ed = conditionalValue(useCallback((e, t) => {
     let i;
     let n = "";
     let r = "";
-    t.position === Nz.BEFORE ? (i = Pf(t.dropItem.name), r = t.dropItem.node_id, n = e <= 0 ? "" : Vm(O, e - 1)?.node_id) : t.position === Nz.AFTER && (i = Pf(t.dropItem.name), n = t.dropItem.node_id, r = e >= O.length - 1 ? "" : Vm(O, e + 1)?.node_id);
+    t.position === Nz.BEFORE ? (i = getGroupPath(t.dropItem.name), r = t.dropItem.node_id, n = e <= 0 ? "" : Vm(O, e - 1)?.node_id) : t.position === Nz.AFTER && (i = getGroupPath(t.dropItem.name), n = t.dropItem.node_id, r = e >= O.length - 1 ? "" : Vm(O, e + 1)?.node_id);
     let a = [];
     for (let e of I) {
       let t = Kh(O, e);
-      t && (null != i && Pf(t.name) !== i ? u?.(t.node_id, i) && a.push(t.node_id) : a.push(t.node_id));
+      t && (null != i && getGroupPath(t.name) !== i ? u?.(t.node_id, i) && a.push(t.node_id) : a.push(t.node_id));
     }
     _?.(a, n, r);
     fullscreenValue.triggerAction("commit");
   }, [u, _, O, I]), !!u && !!_);
-  let ec = _$$x();
-  let eu = yh(w.modes);
+  let ec = getNameColumnWidth();
+  let eu = getValueColumnWidths(w.modes);
   let ep = getFeatureFlags().ds_variables_modal_resize ? `${ec} ${eu} ${Ks}` : `${U3} repeat(${w.modes.length}, ${SG}) minmax(${Ks}, 1fr)`;
   let em = getFeatureFlags().ds_variables_modal_resize ? v6 : Ar;
   let [eh, eg] = useState(null);
@@ -3753,7 +3753,7 @@ export let $$i50 = registerModal(function () {
       };
     }));
     let I = x9(u && isExtension(u) ? u?.node_id ?? "" : "");
-    let E = useMemo(() => Pw(v), [v]);
+    let E = useMemo(() => buildVariableHierarchy(v), [v]);
     let [x, S] = useState([]);
     let [w, C] = useState(new Map());
     let k = useCallback(e => {
@@ -3762,7 +3762,7 @@ export let $$i50 = registerModal(function () {
     }, [u, w]);
     let R = useMemo(() => {
       if (!u || !w.has(u.node_id)) return [""];
-      let e = (w.get(u.node_id) || [""]).filter(e => cv(v, e) > 0);
+      let e = (w.get(u.node_id) || [""]).filter(e => countVariablesWithPrefix(v, e) > 0);
       return e.length ? e : [""];
     }, [u, w, v]);
     let [N, O] = useState(null);
@@ -3780,8 +3780,8 @@ export let $$i50 = registerModal(function () {
         variableID: e
       }), !1), j, eV, _);
       let r = ez(() => V.setVariableValueForMode, j, eB, _);
-      let a = Ot() ? ez(() => V.setVariableOverrideForMode, j, eG, _) : null;
-      let s = Ot() ? ez(() => (e, t, i) => a?.(e, t, i, null), j, eG, _) : null;
+      let a = hasExtendedCollections() ? ez(() => V.setVariableOverrideForMode, j, eG, _) : null;
+      let s = hasExtendedCollections() ? ez(() => (e, t, i) => a?.(e, t, i, null), j, eG, _) : null;
       let d = ez(() => (e, t) => {
         let i = permissionScopeHandler.user("delete-variable-code-syntax", () => VariablesBindings.deleteVariableCodeSyntax(e.node_id, t));
         i && fullscreenValue.triggerAction("commit");
@@ -3860,9 +3860,9 @@ export let $$i50 = registerModal(function () {
           }) => (t, i) => {
             let n = e.find(e => e.node_id === t);
             if (!n) return !1;
-            let r = Pf(n.name);
-            let a = hF(n, r);
-            let s = Qo(e, i);
+            let r = getGroupPath(n.name);
+            let a = getRelativeName(n, r);
+            let s = getVariablesWithPrefix(e, i);
             let o = normalizePath(i + a);
             s.some(e => e.name === o) && (o = generateUniqueName(stripNumberSuffix(o), s.map(e => e.name)));
             return permissionScopeHandler.user("move-variable-to-group", () => VariablesBindings.renameVariable(n.node_id, o));
@@ -3879,13 +3879,13 @@ export let $$i50 = registerModal(function () {
               let r = new Set();
               let a = n;
               t.reverse().forEach(t => {
-                let n = Qo(e, t.name);
-                let s = Wx(t.name);
-                let o = a ? Od(a) : null;
+                let n = getVariablesWithPrefix(e, t.name);
+                let s = getParentPath(t.name);
+                let o = a ? getFirstVariable(a) : null;
                 n.reverse().forEach(e => {
-                  let t = i.name + hF(e, s);
+                  let t = i.name + getRelativeName(e, s);
                   VariablesBindings.renameVariable(e.node_id, t);
-                  r.add(Pf(t));
+                  r.add(getGroupPath(t));
                   o && (VariablesBindings.insertVariableBetween(e.node_id, "", o?.node_id), o = e);
                 });
                 a = t;
@@ -3918,24 +3918,24 @@ export let $$i50 = registerModal(function () {
                 let n = new Set();
                 e.forEach(e => {
                   let r = GC(e);
-                  let a = Wx(e.name);
+                  let a = getParentPath(e.name);
                   r.forEach(e => {
-                    let r = t + hF(e, a);
-                    VariablesBindings.renameVariable(e.node_id, r) && (i.push(e), n.add(Pf(r)));
+                    let r = t + getRelativeName(e, a);
+                    VariablesBindings.renameVariable(e.node_id, r) && (i.push(e), n.add(getGroupPath(r)));
                   });
                 });
                 return {
                   movedVariables: i,
                   newGroupNames: n
                 };
-              }(groupsToMove, Wx(anchorGroup.name));
+              }(groupsToMove, getParentPath(anchorGroup.name));
               let o = e.filter(e => !movedVariables.includes(e));
               let {
                 prevVariable,
                 nextVariable
               } = (() => {
                 if ("before" === direction) {
-                  let e = Od(anchorGroup);
+                  let e = getFirstVariable(anchorGroup);
                   return {
                     prevVariable: function (e, t) {
                       let i = eM(e);
@@ -3946,7 +3946,7 @@ export let $$i50 = registerModal(function () {
                   };
                 }
                 {
-                  let e = Od(anchorGroup);
+                  let e = getFirstVariable(anchorGroup);
                   let t = function (e, t) {
                     let i = eM(e);
                     let n = i.findIndex(e => e.node_id === t.node_id);
@@ -3974,13 +3974,13 @@ export let $$i50 = registerModal(function () {
           }) => (t, i) => {
             let n = !1;
             if (!i) return n;
-            let r = Qo(e, t);
-            r.length > 0 && (n = permissionScopeHandler.user("rename-variables", () => F$(r, t, i)), fullscreenValue.triggerAction("commit"));
+            let r = getVariablesWithPrefix(e, t);
+            r.length > 0 && (n = permissionScopeHandler.user("rename-variables", () => renameVariablesInGroup(r, t, i)), fullscreenValue.triggerAction("commit"));
             k(R.map(e => e === t ? i : e));
             return n;
           }, j, eV, _),
           createGroup: ez(() => (e, t) => (t.forEach(t => {
-            if (!permissionScopeHandler.user("create-variable-group", () => VariablesBindings.renameVariable(t.node_id, US(t.name, e)))) {
+            if (!permissionScopeHandler.user("create-variable-group", () => VariablesBindings.renameVariable(t.node_id, normalizePathWithParent(t.name, e)))) {
               logError("variables", "Failed to rename variable", {
                 variableID: t.node_id
               });
@@ -3993,9 +3993,9 @@ export let $$i50 = registerModal(function () {
             t.forEach(t => {
               !function (e) {
                 e.forEach(e => {
-                  VariablesBindings.renameVariable(e.node_id, US(e.name, ""));
+                  VariablesBindings.renameVariable(e.node_id, normalizePathWithParent(e.name, ""));
                 });
-              }(Qo(e, t));
+              }(getVariablesWithPrefix(e, t));
             });
           }), k(R.filter(e => !t.includes(e))), fullscreenValue.triggerAction("commit"), !0), j, eV, _),
           reorderVariables: ez(() => (e, t, i) => {
@@ -4008,7 +4008,7 @@ export let $$i50 = registerModal(function () {
             variableList: e
           }) => t => {
             let i = new Set(t.map(e => e.node_id));
-            k(R.filter(t => !Qo(e, t).every(e => i.has(e.node_id))));
+            k(R.filter(t => !getVariablesWithPrefix(e, t).every(e => i.has(e.node_id))));
           }, j, eV, _),
           renameVariable: e,
           duplicateVariables: ez(({
@@ -4021,9 +4021,9 @@ export let $$i50 = registerModal(function () {
             let a = [];
             let s = null;
             let o = e.map(e => e.name) ?? [];
-            if (x.length + e.length > RL) {
+            if (x.length + e.length > MAX_VARIABLES) {
               fullscreenValue.showVisualBellLocalized("variable_limit_in_collection_reached", "variables.variable_limit_in_collection_reached", {
-                variableLimit: RL
+                variableLimit: MAX_VARIABLES
               }, !1);
               return;
             }
@@ -4034,7 +4034,7 @@ export let $$i50 = registerModal(function () {
                   let e = generateUniqueName(stripNumberSuffix(l.name), o);
                   s = VariablesBindings.duplicateVariable(l.node_id, e);
                   o.push(e);
-                  qQ(s, null, Pf(l.name), t);
+                  insertVariableAtPosition(s, null, getGroupPath(l.name), t);
                   a.push(s);
                   VariablesBindings.insertVariableBetween(s, i, r);
                   i = s;
@@ -4193,7 +4193,7 @@ export let $$i50 = registerModal(function () {
     t.preventDefault();
   }, [selectedGroupNames, show, currentVariableSet]);
   let z = e => selectedVariableIDs.length > 0 && e?.key === "Enter" && !!e.shiftKey && (actions.duplicateVariables?.(), !0);
-  let H = _$$rN(function (e, t, i) {
+  let H = conditionalValue(function (e, t, i) {
     let [n, a] = useState(null);
     let s = useLatestRef(e);
     useEffect(() => {

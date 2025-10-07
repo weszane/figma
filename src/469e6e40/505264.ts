@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { II } from "../figma_app/11182";
+import { copyEmailsThunk } from "../figma_app/11182";
 import { az } from "../figma_app/805373";
 import { A } from "../svg/213689";
 export let $$o0 = (e => {
@@ -10,7 +10,7 @@ export let $$o0 = (e => {
       super(...arguments);
       this.onCopyEmailToClipboard = e => {
         e.stopPropagation();
-        this.props.entity.email && this.props.dispatch(II({
+        this.props.entity.email && this.props.dispatch(copyEmailsThunk({
           emailList: [this.props.entity.email]
         }));
       };

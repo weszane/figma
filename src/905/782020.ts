@@ -1,174 +1,458 @@
-import { throwTypeError } from "../figma_app/465776";
-import { VariablesBindings, VariableDataType } from "../figma_app/763686";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import s from "../vendor/626715";
-import { compareNumbers } from "../figma_app/766708";
-import { normalizePath } from "../905/309735";
-import { generateUniqueName } from "../905/578436";
-import { F } from "../905/604606";
-import { X } from "../905/456000";
-import { U3, SG } from "../905/101482";
-var o = s;
-export let $$h16 = "Mode 1";
-export function $$g10(e, t, i = "") {
-  let n = e.map(e => e.name);
-  let r = F(t).name;
-  return generateUniqueName(i + r, n);
+/* eslint-disable no-prototype-builtins */
+import { normalizePath } from "../905/309735"
+import { columnResizeAtom } from "../905/456000"
+import { generateUniqueName } from "../905/578436"
+import { getVariableTypeInfo } from "../905/604606"
+import { useAtomWithSubscription } from "../figma_app/27355"
+import { throwTypeError } from "../figma_app/465776"
+import { VariableDataType, VariablesBindings } from "../figma_app/763686"
+import { compareNumbers } from "../figma_app/766708"
+// Utility function to remove duplicates from an array
+function uniq<T>(array: T[]): T[] {
+  return Array.from(new Set(array))
 }
-export function $$f4(e, t = "") {
-  return A(e, t, e => e.name);
+
+// Default mode string
+export const DEFAULT_MODE = "Mode 1"
+
+/**
+ * Generates a unique name for a variable based on its type and existing names.
+ * @param existingVariables - Array of existing variables with names.
+ * @param variableType - The type of the variable.
+ * @param prefix - Optional prefix for the name.
+ * @returns A unique name string.
+ */
+export function generateUniqueVariableName(
+  existingVariables: { name: string }[],
+  variableType: any,
+  prefix: string = "",
+): string {
+  const existingNames = existingVariables.map(v => v.name)
+  const typeName = getVariableTypeInfo(variableType).name
+  return generateUniqueName(prefix + typeName, existingNames)
 }
-export function $$_17(e, t = "") {
-  return A(e, t, e => e);
+
+/**
+ * Generates a unique name for a group based on existing names.
+ * @param existingGroups - Array of existing groups with names.
+ * @param baseName - Base name for the group.
+ * @returns A unique group name string.
+ */
+export function generateUniqueGroupName(
+  existingGroups: { name: string }[],
+  baseName: string = "",
+): string {
+  return generateUniquePath(existingGroups, baseName, v => v.name)
 }
-function A(e, t = "", i) {
-  let n = t.slice(0, -1).split("/");
-  let r = 1 === n.length ? "" : n.slice(0, -1).join("/") + "/";
-  let a = Array.from(new Set(e.map(i).filter(e => e.startsWith(r) && e.replace(r, "").includes("/")).map(e => e.replace(r, "").split("/")[0])));
-  return r + generateUniqueName(n[n.length - 1].replace(/\d+$/, "").trim(), a) + "/";
+
+/**
+ * Generates a unique path for an item based on existing paths.
+ * @param existingItems - Array of existing items with paths.
+ * @param basePath - Base path string.
+ * @returns A unique path string.
+ */
+export function generateUniquePathName(
+  existingItems: { name: string }[],
+  basePath: string = "",
+): string {
+  return generateUniquePath(existingItems, basePath, v => v)
 }
-export function $$y7(e) {
-  return function e(t) {
-    let i = [t];
-    for (let n of t.subgroups.sort(P)) i.push(...e(n));
-    return i;
-  }(function (e) {
-    let t = {
+
+/**
+ * Helper function to generate a unique path.
+ * @param items - Array of items.
+ * @param basePath - Base path.
+ * @param extractor - Function to extract the path from an item.
+ * @returns A unique path string.
+ */
+function generateUniquePath<T>(
+  items: T[],
+  basePath: string = "",
+  extractor: (item: T) => any,
+): string {
+  const pathParts = basePath.slice(0, -1).split("/")
+  const parentPath = pathParts.length === 1 ? "" : `${pathParts.slice(0, -1).join("/")}/`
+  const siblingNames = Array.from(
+    new Set(
+      items
+        .map(extractor)
+        .filter(name => name.startsWith(parentPath) && name.replace(parentPath, "").includes("/"))
+        .map(name => name.replace(parentPath, "").split("/")[0]),
+    ),
+  )
+  return `${parentPath}${generateUniqueName(
+    pathParts[pathParts.length - 1].replace(/\d+$/, "").trim(),
+    siblingNames,
+  )}/`
+}
+
+/**
+ * Builds a hierarchical structure of groups and variables from a flat list.
+ * @param variables - Array of variables to organize.
+ * @returns A flattened array of all groups and variables in order.
+ */
+export function buildVariableHierarchy(variables: any[]): any[] {
+  /**
+   * Recursively flattens a group structure.
+   * @param group - The group to flatten.
+   * @returns Array of flattened items.
+   */
+  function flattenGroup(group: any): any[] {
+    const result = [group]
+    for (const subgroup of group.subgroups.sort(compareGroups)) {
+      result.push(...flattenGroup(subgroup))
+    }
+    return result
+  }
+
+  /**
+   * Creates the root group structure from variables.
+   * @param vars - Array of variables.
+   * @returns The root group.
+   */
+  function createGroupStructure(vars: any[]): any {
+    const groups: { [key: string]: any } = {
       "": {
         name: "",
         subgroups: [],
-        variables: []
-      }
-    };
-    for (let i of e.sort((e, t) => -compareNumbers(e.sortPosition, t.sortPosition))) {
-      let e = $$w6(i.name);
-      t.hasOwnProperty(e) || (t[e] = {
-        name: e,
-        subgroups: [],
-        variables: []
-      });
-      t[e].variables.push(i);
+        variables: [],
+      },
     }
-    for (let e of Object.keys(t)) {
-      let i = e.split("/").slice(0, -1);
-      for (let e = 1; e < i.length; e++) {
-        let n = i.slice(0, e).join("/") + "/";
-        t.hasOwnProperty(n) || (t[n] = {
-          name: n,
+
+    for (const variable of vars.sort((a, b) => -compareNumbers(a.sortPosition, b.sortPosition))) {
+      const parentPath = getParentPath(variable.name)
+      if (!groups.hasOwnProperty(parentPath)) {
+        groups[parentPath] = {
+          name: parentPath,
           subgroups: [],
-          variables: []
-        });
+          variables: [],
+        }
+      }
+      groups[parentPath].variables.push(variable)
+    }
+
+    // Ensure all intermediate paths exist
+    for (const path of Object.keys(groups)) {
+      const pathParts = path.split("/").slice(0, -1)
+      for (let i = 1; i < pathParts.length; i++) {
+        const intermediatePath = `${pathParts.slice(0, i).join("/")}/`
+        if (!groups.hasOwnProperty(intermediatePath)) {
+          groups[intermediatePath] = {
+            name: intermediatePath,
+            subgroups: [],
+            variables: [],
+          }
+        }
       }
     }
-    for (let [e, i] of Object.entries(t)) "" !== e && t[$$I11(e)].subgroups.push(i);
-    return t[""];
-  }(e));
-}
-export function $$b1(e, t) {
-  let i = [];
-  for (let n of e) t.includes(n.name) && i.push(...function e(t) {
-    let i = [t.name];
-    for (let n of t.subgroups) i.push(...e(n));
-    return i;
-  }(n));
-  return o()(i);
-}
-export function $$v5(e) {
-  return 0 === e.variables.length ? $$v5(e.subgroups[0]) : e.variables[0];
-}
-export function $$I11(e) {
-  if (0 === e.length) return "";
-  let t = e.split("/").slice(0, -1);
-  return 1 === t.length ? "" : t.slice(0, -1).join("/") + "/";
-}
-export function $$E13(e, t) {
-  return null === t ? 0 : e.filter(e => e.name.startsWith(t)).length;
-}
-export function $$x8(e, t) {
-  return null === t ? [] : e.filter(e => e.name.startsWith(t));
-}
-export function $$S2(e, t, i) {
-  return $$x8(e, t).every(e => VariablesBindings.renameVariable(e.node_id, normalizePath(i + "/" + $$k14(e, t))));
-}
-export function $$w6(e) {
-  return e.includes("/") ? e.split("/").slice(0, -1).join("/") + "/" : "";
-}
-export function $$C9(e, t) {
-  let i = e.split("/");
-  return normalizePath(t + i[i.length - 1]);
-}
-export function $$T0(e) {
-  let t = e.split("/");
-  return t[t.length - 1];
-}
-export function $$k14(e, t) {
-  return e.name.replace(t, "");
-}
-export function $$R15(e) {
-  let t = e.slice(0, -1).split("/");
-  return t[t.length - 1];
-}
-export function $$N12(e, t) {
-  return $$I11(e) + t + "/";
-}
-function P(e, t) {
-  let i = $$v5(e).sortPosition;
-  let n = $$v5(t).sortPosition;
-  return -compareNumbers(i, n);
-}
-export function $$O19(e, t, i, n) {
-  let a;
-  let s;
-  if (t) {
-    let [i, n] = t;
-    VariablesBindings.insertVariableBetween(e, i, n);
-    return;
+
+    // Link subgroups
+    for (const [path, group] of Object.entries(groups)) {
+      if (path !== "") {
+        groups[getParentPath(path)].subgroups.push(group)
+      }
+    }
+
+    return groups[""]
   }
-  if (0 === n.length) return;
-  let o = function (e, t) {
-    if ("" === t) return [];
-    let i = $$I11(t);
-    let n = (i.match(RegExp("/", "g")) || []).length + 1;
-    return e.filter(e => e.name.startsWith(i) && (e.name.match(RegExp("/", "g")) || []).length === n);
-  }(n, i);
-  let l = o.findIndex(e => e.name === i);
-  if (-1 === l) return;
-  let d = o[l];
-  d && d.variables.length >= 1 ? a = d.variables[d.variables.length - 1] : l > 0 && (a = function e(t) {
-    return 0 === t.variables.length ? e(t.subgroups[t.subgroups.length - 1]) : t.variables[t.variables.length - 1];
-  }(o[l - 1]));
-  l < o.length - 1 && (s = $$v5(o[l + 1]));
-  VariablesBindings.insertVariableBetween(e, a?.node_id || "", s?.node_id || "");
+
+  return flattenGroup(createGroupStructure(variables))
 }
-export function $$D20(e, t) {
-  return t ? e : null;
+
+/**
+ * Gets all variable names in the specified groups and their subgroups.
+ * @param groups - Array of groups.
+ * @param groupNames - Array of group names to include.
+ * @returns Array of unique variable names.
+ */
+export function getVariableNamesInGroups(
+  groups: any[],
+  groupNames: string[],
+): string[] {
+  const names: string[] = []
+  for (const group of groups) {
+    if (groupNames.includes(group.name)) {
+      /**
+       * Recursively collects names from a group.
+       * @param g - The group.
+       * @returns Array of names.
+       */
+      function collectNames(g: any): string[] {
+        const result = [g.name]
+        for (const subgroup of g.subgroups) {
+          result.push(...collectNames(subgroup))
+        }
+        return result
+      }
+      names.push(...collectNames(group))
+    }
+  }
+  return uniq(names)
 }
-export function $$L21() {
-  let e = useAtomWithSubscription(X);
-  return e.nameColumnWidth ? `${e.nameColumnWidth}px` : U3;
+
+/**
+ * Gets the first variable in a group, recursively if needed.
+ * @param group - The group.
+ * @returns The first variable.
+ */
+export function getFirstVariable(group: any): any {
+  return group.variables.length === 0
+    ? getFirstVariable(group.subgroups[0])
+    : group.variables[0]
 }
-export function $$F22(e) {
-  let t = useAtomWithSubscription(X);
-  return Array.from({
-    length: e.length + 1
-  }, (i, n) => {
-    if (n === e.length) return `minmax(${SG}, 1fr)`;
-    let r = t.valueColumnWidths?.get(e[n]?.id ?? "");
-    return r ? `${r}px` : SG;
-  }).join(" ");
+
+/**
+ * Gets the parent path of a given path.
+ * @param path - The path string.
+ * @returns The parent path.
+ */
+export function getParentPath(path: string): string {
+  if (path.length === 0)
+    return ""
+  const parts = path.split("/").slice(0, -1)
+  return parts.length === 1 ? "" : `${parts.slice(0, -1).join("/")}/`
 }
-export function $$M18(e) {
-  switch (e.type) {
+
+/**
+ * Counts variables starting with a given prefix.
+ * @param variables - Array of variables.
+ * @param prefix - The prefix string, or null.
+ * @returns The count.
+ */
+export function countVariablesWithPrefix(
+  variables: any[],
+  prefix: string | null,
+): number {
+  return prefix === null ? 0 : variables.filter(v => v.name.startsWith(prefix)).length
+}
+
+/**
+ * Filters variables starting with a given prefix.
+ * @param variables - Array of variables.
+ * @param prefix - The prefix string, or null.
+ * @returns Array of matching variables.
+ */
+export function getVariablesWithPrefix(
+  variables: any[],
+  prefix: string | null,
+): any[] {
+  return prefix === null ? [] : variables.filter(v => v.name.startsWith(prefix))
+}
+
+/**
+ * Renames all variables in a group to a new path.
+ * @param variables - Array of variables.
+ * @param oldPrefix - The old prefix.
+ * @param newPath - The new path.
+ * @returns True if all renames succeeded.
+ */
+export function renameVariablesInGroup(
+  variables: any[],
+  oldPrefix: string,
+  newPath: string,
+): boolean {
+  return getVariablesWithPrefix(variables, oldPrefix).every(v =>
+    VariablesBindings.renameVariable(v.node_id, normalizePath(`${newPath}/${getRelativeName(v, oldPrefix)}`)),
+  )
+}
+
+/**
+ * Gets the parent path from a full path.
+ * @param path - The path string.
+ * @returns The parent path.
+ */
+export function getGroupPath(path: string): string {
+  return path.includes("/") ? `${path.split("/").slice(0, -1).join("/")}/` : ""
+}
+
+/**
+ * Normalizes a path with a new parent.
+ * @param oldPath - The old path.
+ * @param newParent - The new parent path.
+ * @returns The normalized path.
+ */
+export function normalizePathWithParent(oldPath: string, newParent: string): string {
+  const parts = oldPath.split("/")
+  return normalizePath(newParent + parts[parts.length - 1])
+}
+
+/**
+ * Gets the last part of a path.
+ * @param path - The path string.
+ * @returns The last part.
+ */
+export function getPathLeaf(path: string): string {
+  const parts = path.split("/")
+  return parts[parts.length - 1]
+}
+
+/**
+ * Gets the relative name by removing the prefix.
+ * @param variable - The variable.
+ * @param prefix - The prefix to remove.
+ * @returns The relative name.
+ */
+export function getRelativeName(variable: any, prefix: string): string {
+  return variable.name.replace(prefix, "")
+}
+
+/**
+ * Gets the last part of a path before the trailing slash.
+ * @param path - The path string.
+ * @returns The last part.
+ */
+export function getPathBaseName(path: string): string {
+  const parts = path.slice(0, -1).split("/")
+  return parts[parts.length - 1]
+}
+
+/**
+ * Constructs a new path with a name.
+ * @param basePath - The base path.
+ * @param name - The name to append.
+ * @returns The new path.
+ */
+export function constructPath(basePath: string, name: string): string {
+  return `${getParentPath(basePath)}${name}/`
+}
+
+/**
+ * Comparator for sorting groups by their first variable's sort position.
+ * @param a - First group.
+ * @param b - Second group.
+ * @returns Comparison result.
+ */
+function compareGroups(a: any, b: any): number {
+  const posA = getFirstVariable(a).sortPosition
+  const posB = getFirstVariable(b).sortPosition
+  return -compareNumbers(posA, posB)
+}
+
+/**
+ * Inserts a variable between others in the bindings.
+ * @param variableId - The variable ID to insert.
+ * @param position - Optional position tuple.
+ * @param groupPath - The group path.
+ * @param allVariables - Array of all variables.
+ */
+export function insertVariableAtPosition(
+  variableId: string,
+  position: [string, string] | null,
+  groupPath: string,
+  allVariables: any[],
+): void {
+  let beforeId: string | undefined
+  let afterId: string | undefined
+
+  if (position) {
+    const [before, after] = position
+    VariablesBindings.insertVariableBetween(variableId, before, after)
+    return
+  }
+
+  if (allVariables.length === 0)
+    return
+
+  const siblingGroups = getSiblingGroups(allVariables, groupPath)
+  const targetIndex = siblingGroups.findIndex(g => g.name === groupPath)
+
+  if (targetIndex === -1)
+    return
+
+  const targetGroup = siblingGroups[targetIndex]
+  if (targetGroup && targetGroup.variables.length >= 1) {
+    beforeId = targetGroup.variables[targetGroup.variables.length - 1].node_id
+  }
+  else if (targetIndex > 0) {
+    /**
+     * Gets the last variable in a group recursively.
+     * @param g - The group.
+     * @returns The last variable.
+     */
+    function getLastVariable(g: any): any {
+      return g.variables.length === 0
+        ? getLastVariable(g.subgroups[g.subgroups.length - 1])
+        : g.variables[g.variables.length - 1]
+    }
+    beforeId = getLastVariable(siblingGroups[targetIndex - 1]).node_id
+  }
+
+  if (targetIndex < siblingGroups.length - 1) {
+    afterId = getFirstVariable(siblingGroups[targetIndex + 1]).node_id
+  }
+
+  VariablesBindings.insertVariableBetween(variableId, beforeId || "", afterId || "")
+}
+
+/**
+ * Helper to get sibling groups at the same level.
+ * @param variables - All variables.
+ * @param path - The path.
+ * @returns Array of sibling groups.
+ */
+function getSiblingGroups(variables: any[], path: string): any[] {
+  if (path === "")
+    return []
+  const parentPath = getParentPath(path)
+  const depth = (parentPath.match(/\//g) || []).length + 1
+  return variables.filter(
+    v =>
+      v.name.startsWith(parentPath)
+      && (v.name.match(/\//g) || []).length === depth,
+  )
+}
+
+/**
+ * Returns the value if condition is true, else null.
+ * @param value - The value.
+ * @param condition - The condition.
+ * @returns The value or null.
+ */
+export function conditionalValue<T>(value: T, condition: boolean): T | null {
+  return condition ? value : null
+}
+
+/**
+ * Gets the name column width from the atom.
+ * @returns The width as a string.
+ */
+export function getNameColumnWidth(): string {
+  const resizeState = useAtomWithSubscription(columnResizeAtom)
+  return resizeState.nameColumnWidth ? `${resizeState.nameColumnWidth}px` : "200px"
+}
+
+/**
+ * Gets the grid template columns for variables.
+ * @param variables - Array of variables.
+ * @returns The template string.
+ */
+export function getValueColumnWidths(variables: any[]): string {
+  const resizeState = useAtomWithSubscription(columnResizeAtom)
+  return Array.from({ length: variables.length + 1 }, (_, index) => {
+    if (index === variables.length)
+      return "minmax(200px, 1fr)"
+    const width = resizeState.valueColumnWidths?.get(variables[index]?.id ?? "")
+    return width ? `${width}px` : "200px"
+  }).join(" ")
+}
+
+/**
+ * Converts a variable value to a mode value.
+ * @param value - The variable value.
+ * @returns The mode value or undefined.
+ */
+export function convertToModeValue(value: any): any {
+  switch (value.type) {
     case VariableDataType.STRING:
     case VariableDataType.FLOAT:
     case VariableDataType.BOOLEAN:
     case VariableDataType.COLOR:
-      return e.value;
+      return value.value
     case VariableDataType.ALIAS:
       return {
         type: "VARIABLE_ALIAS",
-        id: e.value
-      };
+        id: value.value,
+      }
     case VariableDataType.NODE_FIELD_ALIAS:
     case VariableDataType.MAP:
     case VariableDataType.FONT_STYLE:
@@ -182,35 +466,46 @@ export function $$M18(e) {
     case VariableDataType.JS_RUNTIME_ALIAS:
     case VariableDataType.DATE:
     case VariableDataType.SLOT_CONTENT_ID:
-      return;
+      return
     default:
-      throwTypeError(e, "Unknown VariableDataType when converting to VariableModeValue");
+      throwTypeError(value, "Unknown VariableDataType when converting to VariableModeValue")
   }
 }
-export const B9 = $$T0;
-export const Ex = $$b1;
-export const F$ = $$S2;
-export const GC = function e(t) {
-  let i = [...t.variables];
-  for (let n of t.subgroups) i.push(...e(n));
-  return i;
-};
-export const Lo = $$f4;
-export const Od = $$v5;
-export const Pf = $$w6;
-export const Pw = $$y7;
-export const Qo = $$x8;
-export const US = $$C9;
-export const Wc = $$g10;
-export const Wx = $$I11;
-export const ZR = $$N12;
-export const cv = $$E13;
-export const hF = $$k14;
-export const ky = $$R15;
-export const nm = $$h16;
-export const om = $$_17;
-export const pr = $$M18;
-export const qQ = $$O19;
-export const rN = $$D20;
-export const x9 = $$L21;
-export const yh = $$F22;
+
+// Aliases for backward compatibility or external use
+export const B9 = getPathLeaf
+export const Ex = getVariableNamesInGroups
+export const F$ = renameVariablesInGroup
+
+/**
+ * Recursively collects all variables from a group.
+ * @param group - The group.
+ * @returns Array of variables.
+ */
+export function collectAllVariables(group: any): any[] {
+  let variables = [...group.variables]
+  for (const subgroup of group.subgroups) {
+    variables.push(...collectAllVariables(subgroup))
+  }
+  return variables
+}
+
+export const Lo = generateUniqueGroupName
+export const Od = getFirstVariable
+export const Pf = getGroupPath
+export const Pw = buildVariableHierarchy
+export const Qo = getVariablesWithPrefix
+export const US = normalizePathWithParent
+export const Wc = generateUniqueVariableName
+export const Wx = getParentPath
+export const ZR = constructPath
+export const cv = countVariablesWithPrefix
+export const hF = getRelativeName
+export const ky = getPathBaseName
+export const nm = DEFAULT_MODE
+export const om = generateUniquePathName
+export const pr = convertToModeValue
+export const qQ = insertVariableAtPosition
+export const rN = conditionalValue
+export const x9 = getNameColumnWidth
+export const yh = getValueColumnWidths

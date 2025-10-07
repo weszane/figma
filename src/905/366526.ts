@@ -345,7 +345,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { at as _$$at } from '../figma_app/987';
 import { DFF } from '../figma_app/6204';
 import { aN as _$$aN, o$ as _$$o$, AB, h2, J6, vu } from '../figma_app/8833';
-import { lW as _$$lW2 } from '../figma_app/11182';
+import { copyTextThunk } from '../figma_app/11182';
 import { GV as _$$GV, us as _$$us, PK } from '../figma_app/12220';
 import { canPerformAction, canRunExtensions } from '../figma_app/12796';
 import { yJ as _$$yJ, S5, WJ } from '../figma_app/24841';
@@ -388,7 +388,7 @@ import { getFileIdFromPath, getFileKeyFromSelectedView, getSelectedViewName, get
 import { randomizeSongStartTimes } from '../figma_app/198387';
 import { iT as _$$iT, Q3, xT } from '../figma_app/199513';
 import { selectPermissionsState } from '../figma_app/212807';
-import { bO as _$$bO, Cg as _$$Cg, xA as _$$xA, jt, LC, qy } from '../figma_app/216057';
+import { subscribedVariablesAtom, localVariablesAtom, subscribedVariableSetsAtom, usedLibraryVariableSetsByKeyReduxAtom, usedLibraryVariablesByKeyReduxAtom, localVariableSetsAtom } from '../figma_app/216057';
 import { wJ as _$$wJ } from '../figma_app/216696';
 import { N as _$$N9 } from '../figma_app/240060';
 import { batchDeleteTeamMembers, batchJoinTeamAction, batchPutTeamAction, beginRenameTeamAction, changeDefaultPermissionAction, changeOrgAccessAction, changeSharingSettingsAction, deleteTeamAction, getTeamAction, joinTeamAction, postTeamAction, putTeamAction, renameTeamAction, setTeamCreationLoadingAction, setTeamMembersAction, setTeamOptimistThunk, stopRenameTeamAction } from '../figma_app/240735';
@@ -8208,12 +8208,12 @@ let lU = combineReducers({
     }
   } : e,
   libraryPublishingMode: libraryPublishingModeAtom.reducer,
-  localVariablesById: _$$Cg.reducer,
-  localVariableSetsById: qy.reducer,
-  subscribedVariablesByIdFromLoadedPages: _$$bO.reducer,
-  subscribedVariableSetsByIdFromLoadedPages: _$$xA.reducer,
-  knownUsedLibraryVariablesByKey: LC.reducer,
-  knownUsedLibraryVariableSetsByKey: jt.reducer,
+  localVariablesById: localVariablesAtom.reducer,
+  localVariableSetsById: localVariableSetsAtom.reducer,
+  subscribedVariablesByIdFromLoadedPages: subscribedVariablesAtom.reducer,
+  subscribedVariableSetsByIdFromLoadedPages: subscribedVariableSetsAtom.reducer,
+  knownUsedLibraryVariablesByKey: usedLibraryVariablesByKeyReduxAtom.reducer,
+  knownUsedLibraryVariableSetsByKey: usedLibraryVariableSetsByKeyReduxAtom.reducer,
   publishableStateGroups: Te,
   publishableStyles: _$$ax2,
   publishableSymbols: $K,
@@ -13838,7 +13838,7 @@ let FrontendCommitPreviewIndicator = registerTooltip('frontend_commit_preview_in
     customHistory.reload(`Changing feature flag override ${e} to ${n}`);
   };
   let o = e => {
-    i(_$$lW2({
+    i(copyTextThunk({
       stringToCopy: e ?? '',
       successText: `Copied ${e} to clipboard`
     }));

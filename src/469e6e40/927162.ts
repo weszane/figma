@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { E as _$$E } from "../905/53857";
 import { v4, AC } from "../figma_app/655139";
 import { x1 } from "../469e6e40/936617";
-import { sQ } from "../905/191741";
+import { isCodeMode } from "../905/191741";
 import { selectIsCopyExportAllowed } from "../figma_app/212807";
 import { useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
@@ -53,7 +53,7 @@ export function $$b1({
   });
 }
 export function $$v0() {
-  let e = sQ();
+  let e = isCodeMode();
   let t = selectIsCopyExportAllowed();
   let a = v4();
   let s = AC(a);

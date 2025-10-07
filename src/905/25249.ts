@@ -56,7 +56,7 @@ import { A as _$$A3 } from '../1617/892083';
 import { A as _$$A2 } from '../6828/70690';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { BWk, SqV } from '../figma_app/6204';
-import { le } from '../figma_app/11182';
+import { copyViewLinkThunk } from '../figma_app/11182';
 import { getPermissionLevelName } from '../figma_app/12796';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { FolderPermissions } from '../figma_app/43951';
@@ -82,7 +82,6 @@ import { LoadingOverlay } from '../figma_app/858013';
 import { rn } from '../figma_app/903573';
 import { _9, ET, Iz, J4, mi, YU } from '../figma_app/907616';
 import { truncate } from '../figma_app/930338';
-
 function SharingClarityProjectModalOverlay() {
   const userFlag = useAtomWithSubscription(projectModalOverlayFlagAtom);
   const {
@@ -591,7 +590,7 @@ export let FolderPermissionsModal = registerModal(modalProps => {
     sendInvites(emails);
   };
   let copyFolderLink = () => {
-    hideModalDispatch(le({
+    hideModalDispatch(copyViewLinkThunk({
       view: 'folder',
       folderId
     }));

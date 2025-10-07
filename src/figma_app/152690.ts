@@ -38,7 +38,7 @@ import { T as _$$T } from "../figma_app/472024";
 import { q } from "../905/296913";
 import { CP } from "../figma_app/481279";
 import { Ip, cn } from "../figma_app/394327";
-import { Ev } from "../figma_app/216057";
+import { variableByIdAtomFamily } from "../figma_app/216057";
 import { oz } from "../figma_app/406976";
 var g = m;
 var E = f;
@@ -493,7 +493,7 @@ export function $$ex29(e, t, r, n, i) {
       variable: null,
       variableData: r
     };
-    let n = atomStoreManager.get(Ev(r.variableId));
+    let n = atomStoreManager.get(variableByIdAtomFamily(r.variableId));
     if (n) return {
       variable: n,
       variableData: r
