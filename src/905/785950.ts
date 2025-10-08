@@ -1,3 +1,4 @@
+import type { Getter, WritableAtom } from 'jotai'
 import { atom } from 'jotai'
 
 /**
@@ -7,13 +8,16 @@ import { atom } from 'jotai'
  * @returns A jotai atom with custom logic.
  * @originalName $$r0
  */
-export function setupCustomAtom(key: any, handler: (value: any, ...args: any[]) => any) {
+export function setupCustomAtom<TState, TAction = any, TReturn = TState>(
+  key: WritableAtom<TState, [TState], void>,
+  handler: (state: TState, action?: TAction, get?: Getter) => TState | TReturn
+): WritableAtom<TReturn, [TAction], void> {
   return atom(
-    get => handler(get(key)),
-    (get, set, ...args) => {
-      const newValue = handler(get(key), ...args, get)
+    (get) => handler(get(key)) as TReturn,
+    (get, set, action: TAction) => {
+      const newValue = handler(get(key), action, get) as TState
       set(key, newValue)
-    },
+    }
   )
 }
 

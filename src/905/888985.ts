@@ -31,8 +31,8 @@ function deepEqualArgs<T>(a: T, b: T): boolean {
 function createObservableAtom<T, O>(
   observableKey: T,
   options?: O,
-): ReturnType<typeof setupAtomWithMount<LoadingState<unknown>>> {
-  const loadingAtom = atom(createLoadingState<unknown>())
+): ReturnType<typeof setupAtomWithMount<LoadingState<any>>> {
+  const loadingAtom = atom(createLoadingState<any>())
   if (options === undefined) {
     return setupAtomWithMount(loadingAtom, ({
       setSelf,
@@ -212,7 +212,7 @@ export function libraryVariableCollectionAtom<F extends (...args: any[]) => any>
 export function libraryVariableCollectionWithVarsAtom<F extends (...args: any[]) => any>(
   fn: (family: AtomFamily<typeof LibraryVariableCollectionDataWithVariables, ReturnType<typeof createObservableAtom<typeof LibraryVariableCollectionDataWithVariables, undefined>>>) => F,
 ) {
-  return createComposedRemovableAtom(LibraryVariableCollectionDataWithVariables, fn)
+  return createComposedRemovableAtom<typeof LibraryVariableCollectionDataWithVariables, F>(LibraryVariableCollectionDataWithVariables, fn)
 } // $$S7
 
 // Export original names for external usage

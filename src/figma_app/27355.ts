@@ -30,9 +30,9 @@ const defaultSymbol = Symbol()
  * @returns A new atom with custom read/write logic.
  * @originalName $$_13
  */
-export function createCustomReadWriteAtom(atomLike: any) {
-  const initialValue = unwrap(atomLike, (...args) => args.length ? args[0] : defaultSymbol)
-  const read = (get: any) => get(initialValue) === defaultSymbol ? get(atomLike) : get(initialValue)
+export function createCustomReadWriteAtom<T>(atomLike: Atom<T> | { read: (get: any) => T, write?: any }) {
+  const initialValue = unwrap(atomLike, (...args: any[]) => args.length ? args[0] : defaultSymbol)
+  const read = (get: (atom: any) => any) => get(initialValue) === defaultSymbol ? get(atomLike) : get(initialValue)
   return 'write' in atomLike ? atom(read, atomLike.write) : atom(read)
 }
 
@@ -43,7 +43,7 @@ export function createCustomReadWriteAtom(atomLike: any) {
  * @returns The current value of the atom, or a promise status if the value is a Promise.
  * @originalName $$S18
  */
-export function useAtomWithSubscription(atomInstance: any, options?: { deferToFrame?: boolean }) {
+export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { deferToFrame?: boolean }): T | Error {
   const store = useStore()
   const [[, lastStore, lastAtom], trigger] = useReducer(
     (prev) => {
@@ -91,7 +91,10 @@ export function useAtomWithSubscription(atomInstance: any, options?: { deferToFr
  * @returns [atom value, atom setter]
  * @originalName $$v17
  */
-export function useAtomValueAndSetter(atomInstance: any, options?: any) {
+export function useAtomValueAndSetter<T, Args extends any[]>(
+  atomInstance: any,
+  options?: { deferToFrame?: boolean },
+): [T | Error, (...args: Args) => void] {
   return [useAtomWithSubscription(atomInstance, options), useSetAtom(atomInstance)]
 }
 
@@ -102,16 +105,17 @@ export function useAtomValueAndSetter(atomInstance: any, options?: any) {
  * @returns Atom family with removeAll method.
  * @originalName $$A3
  */
-export function createRemovableAtomFamily<T, R extends Atom<any>>(keyFn: (value: T) => R, areEqual?: (a: T, b: T) => boolean): AtomFamily<T, R> & {
-    removeAll: () => void;
-} {
+export function createRemovableAtomFamily<T, K, R extends Atom<K> = Atom<K>>(
+  keyFn: (value: T) => R,
+  areEqual?: (a: T, b: T) => boolean,
+): AtomFamily<T, R> & { removeAll: () => void } {
   const family = atomFamily(keyFn, areEqual) as AtomFamily<T, R> & { removeAll: () => void }
   family.removeAll = () => {
     family.setShouldRemove(() => true)
     family.setShouldRemove(null)
   }
   return family
-} 
+}
 
 /**
  * Memoizes an atom and returns its value using useAtomWithSubscription.
@@ -120,7 +124,7 @@ export function createRemovableAtomFamily<T, R extends Atom<any>>(keyFn: (value:
  * @returns Atom value.
  * @originalName $$x19
  */
-export function useMemoizedAtomValue(initialValue: any, atomInstance?: any) {
+export function useMemoizedAtomValue<T>(initialValue: T, atomInstance?: Atom<T>): T | Error {
   const memoizedAtom = useMemo(() => atom(initialValue), [initialValue])
   return useAtomWithSubscription(atomInstance || memoizedAtom)
 }
