@@ -1,354 +1,480 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { useMemo } from "react";
-import { LoadingSpinner } from "../905/443820";
-import { E as _$$E } from "../905/500201";
-import { getFeatureFlags } from "../905/601108";
-import { useSubscription } from "../figma_app/288654";
-import { setupResourceAtomHandler } from "../figma_app/566371";
-import { P as _$$P } from "../905/347284";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { getAssetUniqueId, compareStyles } from "../figma_app/646357";
-import { l as _$$l } from "../905/997221";
-import { getParentOrgId } from "../905/872904";
-import { LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
-import { KindEnum } from "../905/129884";
-import { c as _$$c } from "../905/511370";
-import { fetchLibraryStylesByFileKeyQuery, useLibraryAssetsFromStats } from "../905/297574";
-import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { A as _$$A } from "../905/408320";
-import { q } from "../905/820062";
-import { sortWithCollator } from "../figma_app/930338";
-import { RenderListByChunks } from "../905/605383";
-import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { lX } from "../figma_app/588397";
-import { liveStoreInstance } from "../905/713695";
-import { DSAApiServiceInstance } from "../905/669853";
-import { V as _$$V } from "../905/697254";
-import { OverviewStatsView } from "../905/167005";
-import { Xk } from "../905/712714";
-let w = "dsa_file_view_assets--stickySection---ITu-";
-let C = "dsa_file_view_assets--headerIcon--fdLRQ";
-function T({
-  items: e,
-  onItemClick: t
-}) {
-  let i = new Map();
-  let r = new Map();
-  e.forEach(e => {
-    let t = e.containing_frame || {};
-    let n = t.pageId || "NO_PAGE";
-    let a = t.pageName || "";
-    r.set(n, a);
-    let s = i.get(n);
-    s ? s.push(e) : i.set(n, [e]);
-  });
-  let a = sortWithCollator(Array.from(i.keys()), e => r.get(e) ?? "");
-  let s = a.length > 1;
+import { useMemo } from "react"
+import { jsx, jsxs } from "react/jsx-runtime"
+import { KindEnum } from "../905/129884"
+import { OverviewStatsView } from "../905/167005"
+import { fetchLibraryStylesByFileKeyQuery, useLibraryAssetsFromStats } from "../905/297574"
+import { getI18nString, renderI18nText } from "../905/303541"
+import { RecordingScrollContainer } from "../905/347284"
+import { A as _$$A } from "../905/408320"
+import { LoadingSpinner } from "../905/443820"
+import { E as _$$E } from "../905/500201"
+import { c as _$$c } from "../905/511370"
+import { getFeatureFlags } from "../905/601108"
+import { RenderListByChunks } from "../905/605383"
+import { DSAApiServiceInstance } from "../905/669853"
+import { StatValueType } from "../905/697254"
+import { Xk } from "../905/712714"
+import { liveStoreInstance } from "../905/713695"
+import { q } from "../905/820062"
+import { getParentOrgId } from "../905/872904"
+import { getLibraryKeyWithReport } from "../905/997221"
+import { LibraryVariableCollectionDataWithVariables } from "../figma_app/43951"
+import { useSubscription } from "../figma_app/288654"
+import { setupResourceAtomHandler } from "../figma_app/566371"
+import { lX } from "../figma_app/588397"
+import { PrimaryWorkflowEnum } from "../figma_app/633080"
+import { compareStyles, getAssetUniqueId } from "../figma_app/646357"
+import { sortByPropertyWithOptions } from "../figma_app/656233"
+import { sortWithCollator } from "../figma_app/930338"
+
+let w = "dsa_file_view_assets--stickySection---ITu-"
+let C = "dsa_file_view_assets--headerIcon--fdLRQ"
+interface AssetGroupProps {
+  items: any[]
+  onItemClick: (item: any) => void
+}
+
+interface SectionHeaderProps {
+  children: React.ReactNode
+  headerText: string
+  showTitle: boolean
+}
+
+interface FrameGroupProps {
+  items: any[]
+  onItemClick: (item: any) => void
+}
+
+interface FrameSectionProps {
+  title: string
+  children: React.ReactNode
+}
+
+interface AssetTileListProps {
+  items: any[]
+  onItemClick: (item: any) => void
+}
+
+interface LibraryStatsProps {
+  libraryFileKey: string
+}
+
+interface LibraryOverviewViewProps {
+  duration: number
+  entrypoint: string
+  file: any
+  width: number
+  onItemClick: (item: any) => void
+}
+
+interface VariableCollectionsSectionProps {
+  libraryFileKey: string
+}
+
+function AssetGroup({ items, onItemClick }: AssetGroupProps) {
+  const pageMap = new Map<string, any[]>()
+  const pageNameMap = new Map<string, string>()
+
+  items.forEach((item) => {
+    const containingFrame = item.containing_frame || {}
+    const pageId = containingFrame.pageId || "NO_PAGE"
+    const pageName = containingFrame.pageName || ""
+
+    pageNameMap.set(pageId, pageName)
+
+    const pageItems = pageMap.get(pageId)
+    if (pageItems) {
+      pageItems.push(item)
+    }
+    else {
+      pageMap.set(pageId, [item])
+    }
+  })
+
+  const sortedPageIds = sortWithCollator(Array.from(pageMap.keys()), id => pageNameMap.get(id) ?? "")
+  const hasMultiplePages = sortedPageIds.length > 1
+
   return jsx("div", {
-    children: a.map(e => {
-      let a = i.get(e) || [];
-      let o = r.get(e) || "";
-      return jsx(k, {
-        showTitle: s && !!o,
-        headerText: o,
-        children: jsx(R, {
-          items: a,
-          onItemClick: t
-        })
-      }, e);
-    })
-  });
+    children: sortedPageIds.map((pageId) => {
+      const pageItems = pageMap.get(pageId) || []
+      const pageName = pageNameMap.get(pageId) || ""
+
+      return jsx(SectionWithStickyHeader, {
+        showTitle: hasMultiplePages && !!pageName,
+        headerText: pageName,
+        children: jsx(FrameGroup, {
+          items: pageItems,
+          onItemClick,
+        }),
+      }, pageId)
+    }),
+  })
 }
-function k({
-  children: e,
-  headerText: t,
-  showTitle: i
-}) {
-  let r = i ? "dsa_file_view_assets--stickySectionPage--tkNT6 dsa_file_view_assets--stickySection---ITu-" : w;
+
+function SectionWithStickyHeader({ children, headerText, showTitle }: SectionHeaderProps) {
+  const sectionClassName = showTitle
+    ? "dsa_file_view_assets--stickySectionPage--tkNT6 dsa_file_view_assets--stickySection---ITu-"
+    : w
+
   return jsxs("div", {
-    className: `${r || w}`,
-    children: [i && jsxs("div", {
-      className: "dsa_file_view_assets--stickySectionHeader--3Ho7o dsa_file_view_assets--sectionHeader--B1dd7 ellipsis--ellipsis--Tjyfa",
-      children: [jsx("div", {
-        className: C,
-        children: jsx(_$$A, {})
-      }), jsx("div", {
-        children: t
-      })]
-    }), e]
-  });
+    className: `${sectionClassName || w}`,
+    children: [
+      showTitle && jsxs("div", {
+        className: "dsa_file_view_assets--stickySectionHeader--3Ho7o dsa_file_view_assets--sectionHeader--B1dd7 ellipsis--ellipsis--Tjyfa",
+        children: [
+          jsx("div", {
+            className: C,
+            children: jsx(_$$A, {}),
+          }),
+          jsx("div", {
+            children: headerText,
+          }),
+        ],
+      }),
+      children,
+    ],
+  })
 }
-function R({
-  items: e,
-  onItemClick: t
-}) {
-  let i = {};
-  let r = [];
-  for (let t of e) {
-    let e = t.containing_frame;
-    e && e.nodeId && e.nodeId !== t.node_id ? (i[e.nodeId] = i[e.nodeId] || [], i[e.nodeId].push(t)) : r.push(t);
+
+function FrameGroup({ items, onItemClick }: FrameGroupProps) {
+  const frameGroups: Record<string, any[]> = {}
+  const ungroupedItems: any[] = []
+
+  for (const item of items) {
+    const containingFrame = item.containing_frame
+    if (containingFrame && containingFrame.nodeId && containingFrame.nodeId !== item.node_id) {
+      if (!frameGroups[containingFrame.nodeId]) {
+        frameGroups[containingFrame.nodeId] = []
+      }
+      frameGroups[containingFrame.nodeId].push(item)
+    }
+    else {
+      ungroupedItems.push(item)
+    }
   }
-  sortByPropertyWithOptions(r, "name");
-  let a = Object.keys(i);
-  a.sort((e, t) => {
-    let n = i[e][0].containing_frame?.name || "";
-    let r = i[t][0].containing_frame?.name || "";
-    return n.toLowerCase() < r.toLowerCase() ? -1 : 1;
-  });
-  let s = a.join(",");
+
+  sortByPropertyWithOptions(ungroupedItems, "name")
+
+  const frameIds = Object.keys(frameGroups)
+  frameIds.sort((id1, id2) => {
+    const name1 = frameGroups[id1][0].containing_frame?.name || ""
+    const name2 = frameGroups[id2][0].containing_frame?.name || ""
+    return name1.toLowerCase() < name2.toLowerCase() ? -1 : 1
+  })
+
+  const frameListKey = frameIds.join(",")
+
   return jsxs("div", {
-    children: [r.length > 0 && jsx(P, {
-      items: r,
-      onItemClick: t
-    }), jsx(RenderListByChunks, {
-      chunkSize: 5,
-      listKey: s,
-      children: a.map(e => {
-        let r = i[e];
-        sortByPropertyWithOptions(r, "name");
-        let a = r[0];
-        return a ? jsx(N, {
-          title: a.containing_frame?.name || "",
-          children: jsx(P, {
-            items: r,
-            onItemClick: t
-          })
-        }, e) : null;
-      })
-    })]
-  });
+    children: [
+      ungroupedItems.length > 0 && jsx(AssetTileList, {
+        items: ungroupedItems,
+        onItemClick,
+      }),
+      jsx(RenderListByChunks, {
+        chunkSize: 5,
+        listKey: frameListKey,
+        children: frameIds.map((frameId) => {
+          const frameItems = frameGroups[frameId]
+          sortByPropertyWithOptions(frameItems, "name")
+          const firstItem = frameItems[0]
+
+          return firstItem
+            ? jsx(FrameSection, {
+              title: firstItem.containing_frame?.name || "",
+              children: jsx(AssetTileList, {
+                items: frameItems,
+                onItemClick,
+              }),
+            }, frameId)
+            : null
+        }),
+      }),
+    ],
+  })
 }
-function N({
-  title: e,
-  children: t
-}) {
+
+function FrameSection({ title, children }: FrameSectionProps) {
   return jsxs("div", {
-    children: [jsxs("div", {
-      className: "dsa_file_view_assets--sectionHeader--B1dd7 ellipsis--ellipsis--Tjyfa",
-      children: [jsx("div", {
-        className: C,
-        children: jsx(q, {})
-      }), jsx("div", {
-        children: e
-      })]
-    }), t]
-  });
+    children: [
+      jsxs("div", {
+        className: "dsa_file_view_assets--sectionHeader--B1dd7 ellipsis--ellipsis--Tjyfa",
+        children: [
+          jsx("div", {
+            className: C,
+            children: jsx(q, {}),
+          }),
+          jsx("div", {
+            children: title,
+          }),
+        ],
+      }),
+      children,
+    ],
+  })
 }
-function P({
-  items: e,
-  onItemClick: t
-}) {
-  let i = e.map(e => jsx(lX, {
+
+function AssetTileList({ items, onItemClick }: AssetTileListProps) {
+  const assetTiles = items.map(item => jsx(lX, {
     buttonProps: {
-      onItemClick: t
+      onItemClick,
     },
     draggable: {
-      sourceForTracking: ""
+      sourceForTracking: "",
     },
     height: 62,
-    isFigJam: !1,
-    item: e,
-    recordingNodePath: e.node_id,
-    shouldHideTooltip: !1,
-    showName: !0,
-    width: 62
-  }, getAssetUniqueId(e)));
-  let r = e.map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key).join(",");
+    isFigJam: false,
+    item,
+    recordingNodePath: item.node_id,
+    shouldHideTooltip: false,
+    showName: true,
+    width: 62,
+  }, getAssetUniqueId(item)))
+
+  const listKey = items.map(item =>
+    item.type === PrimaryWorkflowEnum.COMPONENT ? item.component_key : item.key,
+  ).join(",")
+
   return jsx("div", {
     children: jsx("div", {
       className: "dsa_file_view_assets--componentContainer--PGt6T",
       children: jsx(RenderListByChunks, {
         chunkSize: 50,
-        listKey: r,
+        listKey,
         className: "dsa_file_view_assets--componentTiles--CXYEl",
-        children: i
-      })
-    })
-  });
+        children: assetTiles,
+      }),
+    }),
+  })
 }
-function M({
-  libraryFileKey: e
-}) {
-  let [t] = setupResourceAtomHandler(U(e));
-  let i = useMemo(() => [{
-    type: _$$V.STAT,
+
+function LibraryStats({ libraryFileKey }: LibraryStatsProps) {
+  const [libraryOverview] = setupResourceAtomHandler(fetchLibraryOverviewQuery(libraryFileKey)) as [
+   { data: any; status: string }
+  ]
+
+  const stats = useMemo(() => [{
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.used_by"),
-    count: t?.data?.num_teams ?? null,
+    count: libraryOverview?.data?.num_teams ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.team", {
-      teamCount: t?.data?.num_teams ?? 0
-    })
+      teamCount: libraryOverview?.data?.num_teams ?? 0,
+    }),
   }, {
-    type: _$$V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.total_components"),
-    count: t?.data?.num_components ?? null,
+    count: libraryOverview?.data?.num_components ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.component", {
-      componentCount: t?.data?.num_components ?? 0
-    })
+      componentCount: libraryOverview?.data?.num_components ?? 0,
+    }),
   }, {
-    type: _$$V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.total_styles"),
-    count: t?.data?.num_styles ?? null,
+    count: libraryOverview?.data?.num_styles ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.style", {
-      styleCount: t?.data?.num_styles ?? 0
-    })
+      styleCount: libraryOverview?.data?.num_styles ?? 0,
+    }),
   }, {
-    type: _$$V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.activity_this_week"),
-    count: t?.data?.num_weekly_insertions ?? null,
+    count: libraryOverview?.data?.num_weekly_insertions ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.insert", {
-      insertCount: t?.data?.num_weekly_insertions ?? 0
-    })
-  }], [t]);
+      insertCount: libraryOverview?.data?.num_weekly_insertions ?? 0,
+    }),
+  }], [libraryOverview])
+
   return jsx(OverviewStatsView, {
-    isLoading: "loading" === t.status,
-    stats: i
-  });
+    isLoading: libraryOverview.status === "loading",
+    stats,
+  })
 }
-function j({
-  libraryFileKey: e
-}) {
-  let [t] = setupResourceAtomHandler(U(e));
-  let i = t.data;
-  let a = useMemo(() => [{
-    type: _$$V.STAT,
+
+function LibraryStatsWithVariables({ libraryFileKey }: LibraryStatsProps) {
+  const [libraryOverview] = setupResourceAtomHandler(fetchLibraryOverviewQuery(libraryFileKey)) as [
+   { data: any; status: string }
+  ]
+  const overviewData = libraryOverview.data
+
+  const stats = useMemo(() => [{
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.used_by"),
-    count: i?.num_teams ?? null,
+    count: overviewData?.num_teams ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.team", {
-      teamCount: i?.num_teams ?? 0
-    })
+      teamCount: overviewData?.num_teams ?? 0,
+    }),
   }, {
-    type: _$$V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.total_components"),
-    count: i?.num_components ?? null,
+    count: overviewData?.num_components ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.component", {
-      componentCount: i?.num_components ?? 0
-    })
+      componentCount: overviewData?.num_components ?? 0,
+    }),
   }, {
-    type: _$$V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.total_styles"),
-    count: i?.num_styles ?? null,
+    count: overviewData?.num_styles ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.style", {
-      styleCount: i?.num_styles ?? 0
-    })
+      styleCount: overviewData?.num_styles ?? 0,
+    }),
   }, {
-    type: _$$V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.total_variables"),
-    count: i?.num_variables ?? null,
+    count: overviewData?.num_variables ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.variable", {
-      variableCount: i?.num_variables ?? 0
-    })
+      variableCount: overviewData?.num_variables ?? 0,
+    }),
   }, {
-    type: _$$V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.activity_this_week"),
-    count: i?.num_weekly_insertions ?? null,
+    count: overviewData?.num_weekly_insertions ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.insert", {
-      insertCount: i?.num_weekly_insertions ?? 0
-    })
-  }], [i]);
+      insertCount: overviewData?.num_weekly_insertions ?? 0,
+    }),
+  }], [overviewData])
+
   return jsx(OverviewStatsView, {
-    isLoading: "loading" === t.status,
-    stats: a
-  });
+    isLoading: libraryOverview.status === "loading",
+    stats,
+  })
 }
-let U = liveStoreInstance.Query({
-  fetch: async e => (await DSAApiServiceInstance.getLibraryOverview({
-    libraryFileKey: e
-  })).data.meta
-});
-let V = "dsa_file_view_overview--fileAssetSectionHeader--ngbds library_section_header--fileAssetSectionHeader--FApn3 text--fontPos12--YsUAh text--_fontBase--QdLsd";
-let G = "dsa_file_view_overview--sectionWrapper--rn7kh";
-let z = "dsa_file_view_overview--loadingSpinner--giOL4";
-export function $$H0(e) {
-  let {
+
+const fetchLibraryOverviewQuery = liveStoreInstance.Query({
+  fetch: async (libraryFileKey: string) => (
+    await DSAApiServiceInstance.getLibraryOverview({
+      libraryFileKey,
+    })
+  ).data.meta,
+})
+
+const SECTION_HEADER_CLASS = "dsa_file_view_overview--fileAssetSectionHeader--ngbds library_section_header--fileAssetSectionHeader--FApn3 text--fontPos12--YsUAh text--_fontBase--QdLsd"
+const SECTION_WRAPPER_CLASS = "dsa_file_view_overview--sectionWrapper--rn7kh"
+const LOADING_SPINNER_CLASS = "dsa_file_view_overview--loadingSpinner--giOL4"
+
+export function LibraryOverviewView({ duration, entrypoint, file, width, onItemClick }: LibraryOverviewViewProps) {
+  const orgId = getParentOrgId()
+
+  const [stylesQuery] = setupResourceAtomHandler(fetchLibraryStylesByFileKeyQuery(file.key)) as [
+   { data: any; status: string }
+  ]
+  const isStylesLoading = stylesQuery.status === "loading"
+  const sortedStyles = useMemo(() =>
+    [...(stylesQuery.status === "loaded" ? stylesQuery.data : [])].sort(compareStyles), [stylesQuery])
+
+  const [componentsQuery] = setupResourceAtomHandler(Xk({
     duration,
-    entrypoint,
-    file,
-    width,
-    onItemClick
-  } = e;
-  let f = getParentOrgId();
-  let [y] = setupResourceAtomHandler(fetchLibraryStylesByFileKeyQuery(file.key));
-  let b = "loading" === y.status;
-  let v = useMemo(() => [...("loaded" === y.status ? y.data : [])].sort(compareStyles), [y]);
-  let [I] = setupResourceAtomHandler(Xk({
-    duration,
-    orgId: f,
+    orgId,
     libraryFileKey: file.key,
-    entryPointForLogging: entrypoint
-  }));
-  let E = "loading" === I.status;
-  let x = useLibraryAssetsFromStats({
-    productComponentStats: I.data,
-    libraryKey: _$$l(file)
-  });
-  let S = getFeatureFlags().dsa_styles_variables_ui;
-  return jsxs(_$$P, {
+    entryPointForLogging: entrypoint,
+  })) as [
+   { data: any; status: string }
+  ]
+
+  const isComponentsLoading = componentsQuery.status === "loading"
+  const componentAssets = useLibraryAssetsFromStats({
+    productComponentStats: componentsQuery.data,
+    libraryKey: getLibraryKeyWithReport(file),
+  })
+
+  const showVariablesUI = getFeatureFlags().dsa_styles_variables_ui
+
+  return jsxs(RecordingScrollContainer, {
     width,
     className: "dsa_file_view_overview--fileViewDSA--pOwsl",
-    children: [S ? jsx(j, {
-      libraryFileKey: file.key
-    }) : jsx(M, {
-      libraryFileKey: file.key
-    }), b ? jsx("div", {
-      className: z,
-      children: jsx(LoadingSpinner, {})
-    }) : v.length > 0 && jsxs("div", {
-      className: G,
-      children: [jsx("div", {
-        className: V,
-        children: renderI18nText("design_systems.libraries_modal.header_styles")
-      }), jsx(_$$c, {
-        styleList: v
-      })]
-    }), S && jsx(W, {
-      libraryFileKey: file.key
-    }), !S && v.length > 0 && x.length > 0 && jsx("div", {
-      className: "dsa_file_view_overview--divider--TIoHM"
-    }), E && !b ? jsx("div", {
-      className: z,
-      children: jsx(LoadingSpinner, {})
-    }) : x.length > 0 && jsxs("div", {
-      className: G,
-      children: [jsx("div", {
-        className: V,
-        children: renderI18nText("design_systems.libraries_modal.header_components")
-      }), jsx(T, {
-        items: x,
-        onItemClick
-      })]
-    })]
-  });
-}
-function W({
-  libraryFileKey: e
-}) {
-  let t = useSubscription(LibraryVariableCollectionDataWithVariables, {
-    fileKey: e
-  });
-  let i = t.data?.file?.variableCollections;
-  let o = useMemo(() => i?.filter(e => !e.unpublishedAt), [i]);
-  return "loading" === t.status ? jsx("div", {
-    className: z,
-    children: jsx(LoadingSpinner, {})
-  }) : o && 0 !== o.length ? jsxs("div", {
-    className: G,
-    children: [jsx("div", {
-      className: V,
-      children: getI18nString("design_systems.libraries_modal.header_variable_collections")
-    }), jsx("div", {
-      className: "dsa_file_view_overview--variablesSection--4Nm9y",
-      children: o.map(e => jsx("div", {
-        className: "dsa_file_view_overview--variableSetThumb--A92GL",
-        "data-tooltip-type": KindEnum.TEXT,
-        "data-tooltip": e.name,
-        "data-tooltip-subtext": getI18nString("design_systems.libraries_modal.plural.num_variables", {
-          numVariables: e.variables.length
+    children: [
+      showVariablesUI
+        ? jsx(LibraryStatsWithVariables, {
+          libraryFileKey: file.key,
+        })
+        : jsx(LibraryStats, {
+          libraryFileKey: file.key,
         }),
-        role: "img",
-        "aria-label": e.name,
-        children: jsx(_$$E, {})
-      }, e.id))
-    })]
-  }) : null;
+
+      isStylesLoading
+        ? jsx("div", {
+          className: LOADING_SPINNER_CLASS,
+          children: jsx(LoadingSpinner, {}),
+        })
+        : sortedStyles.length > 0 && jsxs("div", {
+          className: SECTION_WRAPPER_CLASS,
+          children: [
+            jsx("div", {
+              className: SECTION_HEADER_CLASS,
+              children: renderI18nText("design_systems.libraries_modal.header_styles"),
+            }),
+            jsx(_$$c, {
+              styleList: sortedStyles,
+            }),
+          ],
+        }),
+
+      showVariablesUI && jsx(VariableCollectionsSection, {
+        libraryFileKey: file.key,
+      }),
+
+      !showVariablesUI && sortedStyles.length > 0 && componentAssets.length > 0 && jsx("div", {
+        className: "dsa_file_view_overview--divider--TIoHM",
+      }),
+
+      isComponentsLoading && !isStylesLoading
+        ? jsx("div", {
+          className: LOADING_SPINNER_CLASS,
+          children: jsx(LoadingSpinner, {}),
+        })
+        : componentAssets.length > 0 && jsxs("div", {
+          className: SECTION_WRAPPER_CLASS,
+          children: [
+            jsx("div", {
+              className: SECTION_HEADER_CLASS,
+              children: renderI18nText("design_systems.libraries_modal.header_components"),
+            }),
+            jsx(AssetGroup, {
+              items: componentAssets,
+              onItemClick,
+            }),
+          ],
+        }),
+    ],
+  })
 }
-export const l = $$H0;
+
+function VariableCollectionsSection({ libraryFileKey }: VariableCollectionsSectionProps) {
+  const variableCollectionsSubscription = useSubscription(LibraryVariableCollectionDataWithVariables, {
+    fileKey: libraryFileKey,
+  })
+
+  const variableCollections = variableCollectionsSubscription.data?.file?.variableCollections
+  const publishedCollections = useMemo(() =>
+    variableCollections?.filter(collection => !collection.unpublishedAt), [variableCollections])
+
+  return variableCollectionsSubscription.status === "loading"
+    ? jsx("div", {
+      className: LOADING_SPINNER_CLASS,
+      children: jsx(LoadingSpinner, {}),
+    })
+    : publishedCollections && publishedCollections.length !== 0
+      ? jsxs("div", {
+        className: SECTION_WRAPPER_CLASS,
+        children: [
+          jsx("div", {
+            className: SECTION_HEADER_CLASS,
+            children: getI18nString("design_systems.libraries_modal.header_variable_collections"),
+          }),
+          jsx("div", {
+            className: "dsa_file_view_overview--variablesSection--4Nm9y",
+            children: publishedCollections.map(collection => jsx("div", {
+              "className": "dsa_file_view_overview--variableSetThumb--A92GL",
+              "data-tooltip-type": KindEnum.TEXT,
+              "data-tooltip": collection.name,
+              "data-tooltip-subtext": getI18nString("design_systems.libraries_modal.plural.num_variables", {
+                numVariables: collection.variables.length,
+              }),
+              "role": "img",
+              "aria-label": collection.name,
+              "children": jsx(_$$E, {}),
+            }, collection.id)),
+          }),
+        ],
+      })
+      : null
+}
+
+export const l = LibraryOverviewView

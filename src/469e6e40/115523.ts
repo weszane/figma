@@ -59,7 +59,7 @@ import { A as _$$A3 } from "../6828/70690";
 import { IconButton } from "../905/443068";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { Ax } from "../figma_app/616261";
+import { FuzzyMatcher } from "../figma_app/616261";
 import { truncate } from "../figma_app/930338";
 import { LazyInputForwardRef } from "../905/408237";
 import { In } from "../905/672640";
@@ -474,7 +474,7 @@ function eO(e) {
     resourceConnectedUsersWithPlan: [],
     totalResourceConnectedUsers: 0
   });
-  let h = useMemo(() => new Ax(u.toLowerCase()), [u]);
+  let h = useMemo(() => new FuzzyMatcher(u.toLowerCase()), [u]);
   let x = useMemo(() => {
     switch (c) {
       case "ALL":

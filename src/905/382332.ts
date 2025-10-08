@@ -21,7 +21,7 @@ import { e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { SAW } from "../figma_app/6204";
+import { DrawScatterBrushOnboarding } from "../figma_app/6204";
 import { yl } from "../figma_app/947348";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
@@ -30,7 +30,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useDebouncedCallback } from "use-debounce";
 import { parsePxNumber } from "../figma_app/783094";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { fullscreenValue } from "../figma_app/455680";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
@@ -49,7 +49,7 @@ function R() {
     isShowing,
     complete
   } = e({
-    overlay: SAW,
+    overlay: DrawScatterBrushOnboarding,
     priority: _$$N.DEFAULT_MODAL
   });
   let r = getFeatureFlags().ce_il_scatter_onboarding ?? !1;
@@ -317,7 +317,7 @@ function ee(e) {
         padding: 0,
         children: jsx("div", {
           className: _J,
-          children: jsxs(_$$P, {
+          children: jsxs(RecordingScrollContainer, {
             hideScrollbar: !0,
             disableScrollbarBorder: !0,
             initialScrollTop: M,

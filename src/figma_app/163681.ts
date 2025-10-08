@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useStore, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { postUserFlag } from "../905/985254";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { NT, g5 } from "../figma_app/579169";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
@@ -11,7 +11,7 @@ import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { generateSlug, PanelIdentifiers, validateUserFileAccess } from "../figma_app/242339";
 import { N as _$$N } from "../figma_app/268271";
-import { WD4 } from "../figma_app/6204";
+import { FigmaBasicsTooltipOnboarding } from "../figma_app/6204";
 import { renderI18nText } from "../905/303541";
 import { createAndOpenFile } from "../905/738636";
 import { UpgradeAction } from "../905/370443";
@@ -36,7 +36,7 @@ import { Z as _$$Z } from "../figma_app/731770";
 import { iF } from "../figma_app/511910";
 import { alwaysFalseCallback2 } from "../figma_app/275462";
 import { useSingleEffect } from "../905/791079";
-import { Z as _$$Z2 } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { e as _$$e3 } from "../5132/291975";
 import { aE } from "../figma_app/433401";
 function R(e) {
@@ -387,7 +387,7 @@ function K({
 }
 function X(e) {
   let [t, r] = useState(!1);
-  let a = _$$Z2();
+  let a = useNavigateToViewport();
   let s = useRef(null);
   let o = e.getNodeForViewportFocus?.();
   let l = e.getNodeToSelect();
@@ -438,7 +438,7 @@ function q(e) {
 }
 function Z(e) {
   let [t, r] = useState(!1);
-  let a = _$$Z2();
+  let a = useNavigateToViewport();
   return (useSingleEffect(() => {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();
@@ -593,7 +593,7 @@ export function $$ea1() {
     show,
     uniqueId
   } = _$$e({
-    overlay: WD4,
+    overlay: FigmaBasicsTooltipOnboarding,
     priority: _$$N.OVERRIDING_MODAL
   }, [E, f]);
   let S = !!selectUserFlag("editor_onboarded");
@@ -607,7 +607,7 @@ export function $$ea1() {
   let w = validateUserFileAccess(t?.id, C, [expTootipsSymbol]);
   let [O, R] = useState(!1);
   let [L, P] = useState(!1);
-  _$$E(uniqueId, ["Reset Onboarding", $$ei0], () => {
+  useEventForwarder(uniqueId, ["Reset Onboarding", $$ei0], () => {
     if (!t || !C) return;
     let r = w ? {
       figma_basics_tooltips_onboarding: !1,
@@ -637,10 +637,10 @@ export function $$ea1() {
     };
     e(postUserFlag(r));
   });
-  _$$E(uniqueId, "starting_points_template_inserted", () => {
+  useEventForwarder(uniqueId, "starting_points_template_inserted", () => {
     R(!0);
   });
-  _$$E(uniqueId, "starting_points_basics_template_inserted", () => {
+  useEventForwarder(uniqueId, "starting_points_basics_template_inserted", () => {
     P(!0);
   });
   let D = useCallback(() => {

@@ -28,7 +28,7 @@ import { KindEnum } from "../905/129884";
 import { TrackingKeyEnum } from "../905/696396";
 import { Ro } from "../figma_app/805373";
 import { e as _$$e } from "../905/225961";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { a$ } from "../905/467351";
 function g(e) {
   return e.isRenaming ? jsx(PlaybackInput, {
@@ -333,7 +333,7 @@ export function $$V0(e) {
         "aria-expanded": m && !h,
         children: jsx(J, {})
       })
-    }), m && jsx(Cf, {
+    }), m && jsx(ConnectedPointingDropdown, {
       targetRect: _,
       showPoint: !h,
       lean: h ? "right" : "left",

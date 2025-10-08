@@ -13,7 +13,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { renameFileOptimistic } from "../figma_app/78808";
-import { NN } from "../905/466026";
+import { setSelectedBranchOptimist } from "../905/466026";
 import { renameAutosaveFileMutation, OfflineFileType } from "../figma_app/840917";
 import { renamingStateAtom, TileType, TileUtils } from "../figma_app/543100";
 import { FileCanEdit } from "../figma_app/43951";
@@ -44,7 +44,7 @@ export function $$S0(e) {
       e.tile.type === TileType.FILE ? m(renameFileOptimistic({
         file: e.tile.file,
         name: t
-      })) : e.tile.type === TileType.REPO ? m(NN({
+      })) : e.tile.type === TileType.REPO ? m(setSelectedBranchOptimist({
         repo: e.tile.repo,
         name: t
       })) : e.tile.type === TileType.OFFLINE_FILE && x({

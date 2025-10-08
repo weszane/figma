@@ -8,7 +8,7 @@ import { hideModal } from "../905/156213";
 import { getJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3 } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { Ay } from "../figma_app/724968";
@@ -25,7 +25,7 @@ export function $$b0({
 }) {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let E = useIsFullscreenSlidesView();
   let x = useDispatch();
   let S = getJubileePermissionForDesign();

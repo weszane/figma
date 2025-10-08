@@ -52,8 +52,8 @@ import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { a as _$$a } from '../905/329735';
 import { collaboratorSet } from '../905/332483';
 import { UI3ConditionalWrapper } from '../905/341359';
-import { C_ } from '../905/345933';
-import { P as _$$P } from '../905/347284';
+import { ThemeVariants } from '../905/345933';
+import { RecordingScrollContainer } from '../905/347284';
 import { createOptimistThunk } from '../905/350402';
 import { UpgradeAction } from '../905/370443';
 import { getUserId, hasPasswordOrSSO, selectCurrentUser } from '../905/372672';
@@ -68,14 +68,14 @@ import { IconButton } from '../905/443068';
 // import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { a as _$$a2 } from '../905/462280';
-import { fK, Qh } from '../905/469533';
+import { setEnhancedContrastThunk, setUserThemePreferenceThunk } from '../905/469533';
 import { AutoLayout } from '../905/470281';
 import { A11yConnectorProvider, useAriaAttributes, useAriaConnection } from '../905/472756';
 import { l as _$$l } from '../905/479687';
 import { O as _$$O } from '../905/487602';
 import { bL as _$$bL, c$ as _$$c$, l9, mc } from '../905/493196';
 import { z as _$$z } from '../905/502533';
-import { Cf } from '../905/504727';
+import { ConnectedPointingDropdown } from '../905/504727';
 import { isCollaboratorType, ProductAccessTypeEnum, ProductAccessTypeMap } from '../905/513035';
 import { Button } from '../905/521428';
 import { getFontFiles } from '../905/535224';
@@ -126,7 +126,7 @@ import { kA as _$$kA, rP as _$$rP, IO } from '../905/962318';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
 import { RelativeTimeDisplay } from '../905/986103';
-import { PG } from '../905/997533';
+import { validateSignInForm } from '../905/997533';
 import { getJobRoleDisplay } from '../3973/538504';
 import { A as _$$A5 } from '../5724/501642';
 import { A as _$$A4 } from '../5724/663128';
@@ -135,7 +135,7 @@ import { A as _$$A2 } from '../6828/523860';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { renderAvatar } from '../figma_app/3731';
 import { copyTextThunk } from '../figma_app/11182';
-import { yJ } from '../figma_app/24841';
+import { putUserAction } from '../figma_app/24841';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { CurrentUserInStudentPlusPlanView, CurrentUserIsMfaRequiredByMembershipOrgView, TeamCanEdit, UserFlagByName, UserSettingsPlanRow } from '../figma_app/43951';
 import { ResourceStatus } from '../figma_app/45218';
@@ -868,7 +868,7 @@ function eG(e) {
     }), s && d && jsx(Fragment, {
       children: jsx('div', {
         onClick: e => e.stopPropagation(),
-        children: jsxs(Cf, {
+        children: jsxs(ConnectedPointingDropdown, {
           targetRect: d,
           lean: 'left',
           closeDropdown: u,
@@ -1008,7 +1008,7 @@ function eZ(e) {
     className: 'purchase_page--purchasePageContents--DdU5u',
     children: jsxs('div', {
       className: 'purchase_page--purchasePageScrollContainer--VSL-0',
-      children: [jsx(_$$P, {
+      children: [jsx(RecordingScrollContainer, {
         hideScrollbar: !0,
         className: 'purchase_page--scrollContainer--MAVUI',
         children: jsx(eH, {
@@ -1835,7 +1835,7 @@ let iu = createOptimistThunk((e, {
   if (!e.getState().user) return;
   let i = e.getState().user;
   let n = i.dev_tokens || [];
-  e.dispatch(yJ({
+  e.dispatch(putUserAction({
     user: {
       id: i.id,
       dev_tokens: n.map(e => e.id === t ? {
@@ -1852,7 +1852,7 @@ let ip = createOptimistThunk(async (e, t) => {
   try {
     let n = (await UserAPIHandlers.createDevToken(t)).data.meta;
     let r = i.dev_tokens || [];
-    e.dispatch(yJ({
+    e.dispatch(putUserAction({
       user: {
         id: i.id,
         dev_tokens: [n, ...r]
@@ -2100,7 +2100,7 @@ function iw(e) {
   let [o, l] = useState(null);
   let d = useCallback(() => (l(token.id), sendWithRetry.del(`/api/user/dev_tokens/${token.id}`).then(e => {
     l(null);
-    s(yJ({
+    s(putUserAction({
       user: {
         id: user.id,
         dev_tokens: e.data.meta.tokens
@@ -2303,7 +2303,7 @@ function iR({
   let o = useCallback(t => {
     n(!0);
     sendWithRetry.del(`/api/oauth/token/${t.client_id}`).then(t => {
-      s(yJ({
+      s(putUserAction({
         user: {
           id: e,
           oauth_tokens: t.data.meta.tokens
@@ -2717,7 +2717,7 @@ function iH({
   });
 }
 let nt = createOptimistThunk((e, t) => {
-  let i = PG(t);
+  let i = validateSignInForm(t);
   if (i.message) return e.dispatch(FlashActions.error(i.message));
   let n = sendWithRetry.put('/api/user', t);
   n.then(() => {
@@ -3389,7 +3389,7 @@ let n1 = registerModal(e => {
       onSubmit: ({
         name: e
       }) => {
-        i(yJ({
+        i(putUserAction({
           user: {
             name: e,
             id: o.id
@@ -3437,7 +3437,7 @@ let n1 = registerModal(e => {
     children: jsxs(ModalFormContents, {
       onSubmit: e => {
         e.preventDefault();
-        i(yJ({
+        i(putUserAction({
           user: {
             name: d,
             id: o.id
@@ -4484,7 +4484,7 @@ function rF({
         'className': 'account_settings_modal--dropdownContainer--z3cU9',
         'children': jsxs(_$$bL, {
           value: i,
-          onChange: e => t(Qh({
+          onChange: e => t(setUserThemePreferenceThunk({
             theme: e,
             userInitiated: !0
           })),
@@ -4494,7 +4494,7 @@ function rF({
               children: $I(i)
             })
           }), jsx(mc, {
-            children: C_.map(e => jsx(_$$c$, {
+            children: ThemeVariants.map(e => jsx(_$$c$, {
               value: e,
               children: $I(e)
             }, e))
@@ -4514,7 +4514,7 @@ function rF({
             trackAccessibilityEvent(e ? AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_ON : AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_OFF, {
               isMouseEvent: i === 'mouse'
             });
-            t(fK({
+            t(setEnhancedContrastThunk({
               enhancedContrast: e,
               userInitiated: !0
             }));
@@ -4656,7 +4656,7 @@ let rj = {
     }) : o ? jsx('div', {
       className: iG,
       children: renderI18nText('sessions.error.no_sessions')
-    }) : jsx(_$$P, {
+    }) : jsx(RecordingScrollContainer, {
       className: ei,
       children: jsxs('div', {
         className: 'sessions_view--view--NV3rp',
@@ -4707,7 +4707,7 @@ let rj = {
       orgDomains: e.orgDomains,
       currentOrgDisabledPresetsAndTemplates: isTemplatePickerDisabled(e)
     }));
-    return e ? jsx(_$$P, {
+    return e ? jsx(RecordingScrollContainer, {
       className: ei,
       children: jsx(er, {
         children: jsxs('div', {

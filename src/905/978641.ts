@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useRef, useState } from "react";
 import { props } from "@stylexjs/stylex";
-import { g as _$$g } from "../905/211118";
+import { createPseudoRandomGenerator } from "../905/211118";
 import { WAFImage } from "../905/675859";
 var $$l1 = (e => (e.COMMUNITY_HUB_FILE_THUMBNAIL = "COMMUNITY_HUB_FILE_THUMBNAIL", e))($$l1 || {});
 let $$d0 = memo(function ({
@@ -42,7 +42,7 @@ let $$d0 = memo(function ({
           if (0 === r.length) return;
           let a = function (e, t) {
             let i = [];
-            let n = _$$g(408);
+            let n = createPseudoRandomGenerator(408);
             let r = new Set();
             for (; i.length < 5 && i.length < e.length;) {
               let t = Math.floor(n() * e.length);

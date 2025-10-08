@@ -8,7 +8,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { getI18nString } from "../905/303541";
 import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
 import { YH } from "../figma_app/604494";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { _B } from "../figma_app/602467";
 import { Ne, o$, mD, Tm } from "../figma_app/955528";
@@ -46,8 +46,8 @@ function b() {
       t && n();
     }, [t, n]);
   }(), t) return {
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.DIALOG_TRIGGER_BUTTON,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.DIALOG_TRIGGER_BUTTON,
     onClick: () => mD(r, {
       source: "panel_entrypoint",
       toggle: !0

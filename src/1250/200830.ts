@@ -7,12 +7,12 @@ import { ButtonBasePrimaryTracked, BigButtonPrimaryTracked, BigButtonSecondaryTr
 import { renderI18nText, getI18nString } from "../905/303541";
 import { CR, NJ } from "../figma_app/419216";
 import { TrackingProvider, TrackedDiv } from "../figma_app/831799";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily, fileBrowserOnboardedAtom, userFlagsAtom, userFlagAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { OnboardingSequence } from "../905/152487";
-import { LB2, I3H, Ob5, X5_, USq, sqw, yjU, MwQ, NdL, bGx, Qlc, I$z, Kgs, BTz, dYj, Ult, kmq, Sgd, Wb3 } from "../figma_app/6204";
+import { CustomSectionsNudge, FileBrowserFigjamWhatsNew, OnboardFileBrowser, OnboardOrgsWelcome, OrgSelectWorkspace, PlanSpacesLaunchOverlay, PlanSpacesRecreatedStarterTeamOverlay, ProTrialsV3EntryOverlay, ProTrialsV3ExpiryOverlay, ProTrialsV3TeamWelcomeOverlay, PromoCodeCreateTeam, PromoCodeSelectTeam, ResourceHubPromotionalOverlay, TeamProjectLinkOverlay, StarterPlanUpdatesOverlay, EduOffboarding, EduPostVerification, LimitedPlanSpacesOnboarding, UniversalUpgrade } from "../figma_app/6204";
 import { useSingleEffect } from "../905/791079";
 import { tH as _$$tH, mp, Ot, d2, Vm, Fy, Qm, zN } from "../figma_app/579169";
 import { f as _$$f } from "../1250/46310";
@@ -71,14 +71,14 @@ import { orgUserService } from "../figma_app/124713";
 import { trackEventAnalytics } from "../905/449184";
 import { tM as _$$tM, vd as _$$vd } from "../figma_app/60079";
 import { CloseButton } from "../905/17223";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { x as _$$x } from "../7021/270993";
 import { z6 } from "../figma_app/805373";
 import { ModalView } from "../figma_app/918700";
 import { P as _$$P2 } from "../1250/527167";
 import { j0 } from "../1250/524544";
 import { U as _$$U3 } from "../1250/641541";
-import { FY } from "../figma_app/24841";
+import { migratePersonalDraftsThunk } from "../figma_app/24841";
 import { getVisibleTheme } from "../905/640017";
 import { d as _$$d } from "../905/647058";
 import { OrganizationType } from "../905/833838";
@@ -188,10 +188,10 @@ let T = userFlagExistsAtomFamily(v);
 function j() {
   let e = useAtomWithSubscription(T);
   let t = _$$e({
-    overlay: LB2,
+    overlay: CustomSectionsNudge,
     priority: _$$N.OVERRIDING_MODAL
   }, [e]);
-  _$$E(t.uniqueId, $$w0, () => {
+  useEventForwarder(t.uniqueId, $$w0, () => {
     t.show({
       canShow: e => !e
     });
@@ -221,7 +221,7 @@ function O() {
     isShowing,
     complete
   } = _$$e({
-    overlay: I3H,
+    overlay: FileBrowserFigjamWhatsNew,
     priority: _$$N.DEFAULT_MODAL
   }, [e, t, r, o]);
   useSingleEffect(() => {
@@ -595,7 +595,7 @@ let eU = () => {
   let e = getStorage();
   try {
     return !!e.get(SIGNED_UP_FROM_OPEN_SESSIONS);
-  } catch (e) { }
+  } catch (e) {}
   return !1;
 };
 function eG() {
@@ -609,7 +609,7 @@ function eG() {
   let c = useAtomWithSubscription(d);
   let _ = useAtomWithSubscription(Ot);
   let u = _$$e({
-    overlay: Ob5,
+    overlay: OnboardFileBrowser,
     priority: _$$N.OVERRIDING_MODAL
   }, [t, s, c, _]);
   let [m, p] = useState([]);
@@ -646,7 +646,7 @@ function eG() {
   useSingleEffect(() => {
     w(!1);
   });
-  _$$E(u.uniqueId, "Reset Onboarding", () => w(!0));
+  useEventForwarder(u.uniqueId, "Reset Onboarding", () => w(!0));
   useEffect(() => {
     u.isShowing && r?.status === "loaded" && r?.data === !1 && n?.status === "loaded" && n?.data === !0 && u.complete();
   }, [u, n, r]);
@@ -707,7 +707,7 @@ function eZ() {
   let e = useAtomWithSubscription(d2);
   let t = useAtomWithSubscription(eQ);
   let n = _$$e({
-    overlay: X5_,
+    overlay: OnboardOrgsWelcome,
     priority: _$$N.OVERRIDING_MODAL
   }, [e, t]);
   useSingleEffect(() => {
@@ -775,7 +775,7 @@ function ti({
       })
     })]
   });
-  let d = jsx(_$$P, {
+  let d = jsx(RecordingScrollContainer, {
     className: cssBuilderInstance.flexShrink1.minH200.mt24.$,
     innerClassName: cssBuilderInstance.flex.flexColumn.gap12.p16.pt2.$,
     children: e.map(e => jsx(to, {
@@ -826,7 +826,7 @@ function ti({
       disableClickOutsideToHide: !0,
       children: [jsxs("div", {
         className: cssBuilderInstance.flex.flexColumn.hFull.$,
-        children: [jsxs(_$$P, {
+        children: [jsxs(RecordingScrollContainer, {
           className: cssBuilderInstance.flexGrow1.$,
           innerClassName: cssBuilderInstance.borderBox.hFull.flex.flexColumn.itemsCenter.alignCenter.px32.pt32.$,
           children: [l, d]
@@ -891,7 +891,7 @@ function tc() {
     complete,
     isShowing
   } = _$$e({
-    overlay: USq,
+    overlay: OrgSelectWorkspace,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [o, s, l, d, c, t]);
   return (useSingleEffect(() => {
@@ -1086,7 +1086,7 @@ function tS() {
     isShowing,
     complete
   } = _$$e({
-    overlay: sqw,
+    overlay: PlanSpacesLaunchOverlay,
     priority: _$$N.DEFAULT_MODAL + 1
   }, [d]);
   useEffect(() => {
@@ -1096,7 +1096,7 @@ function tS() {
   }, [g, p, show]);
   let I = !!e && e.length > 0;
   useEffect(() => {
-    h && I && s(FY());
+    h && I && s(migratePersonalDraftsThunk());
   }, [s, h, I]);
   let A = useCallback(e => jsx(tE, {
     hasOrgPlan: _,
@@ -1137,7 +1137,7 @@ function tP() {
     isShowing,
     complete
   } = _$$e({
-    overlay: yjU,
+    overlay: PlanSpacesRecreatedStarterTeamOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [e, n]);
   useSingleEffect(() => {
@@ -1906,7 +1906,7 @@ function nc() {
 }
 function n_() {
   let e = _$$e({
-    overlay: MwQ,
+    overlay: ProTrialsV3EntryOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   let t = useDispatch();
@@ -1937,7 +1937,7 @@ function n_() {
 }
 function nu(e) {
   let t = _$$e({
-    overlay: NdL,
+    overlay: ProTrialsV3ExpiryOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   let {
@@ -1979,7 +1979,7 @@ function nu(e) {
 }
 function nm(e) {
   let t = _$$e({
-    overlay: bGx,
+    overlay: ProTrialsV3TeamWelcomeOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   let {
@@ -2092,7 +2092,7 @@ function nT() {
   let t = useAtomWithSubscription(nb);
   let n = useAtomWithSubscription(nx);
   let r = _$$e({
-    overlay: Qlc,
+    overlay: PromoCodeCreateTeam,
     priority: _$$N.OVERRIDING_MODAL
   }, [e]);
   let o = useCallback(() => {
@@ -2196,7 +2196,7 @@ function nS() {
   let t = useAtomWithSubscription(nb);
   let n = useAtomWithSubscription(nx);
   let r = _$$e({
-    overlay: I$z,
+    overlay: PromoCodeSelectTeam,
     priority: _$$N.OVERRIDING_MODAL
   }, [e]);
   let o = useCallback(() => {
@@ -2227,7 +2227,7 @@ function nL() {
     isShowing,
     complete
   } = _$$e({
-    overlay: Kgs,
+    overlay: ResourceHubPromotionalOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [e, t]);
   useSingleEffect(() => {
@@ -2280,7 +2280,7 @@ function n$() {
     isShowing,
     complete
   } = _$$e({
-    overlay: BTz,
+    overlay: TeamProjectLinkOverlay,
     priority: _$$N.DEFAULT_MODAL,
     experiment: {
       check: () => n(),
@@ -2316,7 +2316,7 @@ function n0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: dYj,
+    overlay: StarterPlanUpdatesOverlay,
     priority: _$$N.DEFAULT_MODAL,
     experiment: {
       check: () => {
@@ -2371,7 +2371,7 @@ function n6() {
   let a = getCurrentTeam();
   let r = useDispatch();
   let o = _$$e({
-    overlay: Ult,
+    overlay: EduOffboarding,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [e, t, n]);
   useSingleEffect(() => {
@@ -2403,7 +2403,7 @@ let ae = {
 };
 function an() {
   let e = _$$e({
-    overlay: kmq,
+    overlay: EduPostVerification,
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
   let t = useDispatch();
@@ -2443,7 +2443,7 @@ function ao() {
     isShowing,
     complete
   } = _$$e({
-    overlay: Sgd,
+    overlay: LimitedPlanSpacesOnboarding,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [t, n, r]);
   return (useEffect(() => {
@@ -2473,7 +2473,7 @@ function a_() {
   let e = useDispatch();
   let t = useAtomWithSubscription(d2);
   let n = _$$e({
-    overlay: Wb3,
+    overlay: UniversalUpgrade,
     priority: _$$N.URGENT_ALERT
   }, [t]);
   useSingleEffect(() => {

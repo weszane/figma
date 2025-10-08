@@ -18,7 +18,7 @@ import { getFilteredFeatureFlags } from "../905/717445";
 import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { Point } from "../905/736624";
-import { Vi, GI } from "../905/125333";
+import { brushStyleAtom, vectorPencilStyleAtom } from "../905/125333";
 import { o as _$$o } from "../905/96108";
 import { rM } from "../figma_app/241541";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -977,7 +977,7 @@ export function $$ez0(e) {
         onChange: e.onChange,
         strokeBrushGuid: e.strokeBrushGuid,
         brushType: e.brushType,
-        defaultStyleAtom: e.defaultStyleAtom ?? Vi,
+        defaultStyleAtom: e.defaultStyleAtom ?? brushStyleAtom,
         positioningProps: {
           positionRelativeTo: c,
           align: {
@@ -992,7 +992,7 @@ export function $$ez0(e) {
         recordingKey: generateRecordingKey(e.recordingKey, "dynamicStroke"),
         endPointSettingsDisabled: et,
         strokePanelMode,
-        defaultStyleAtom: e.defaultStyleAtom ?? GI
+        defaultStyleAtom: e.defaultStyleAtom ?? vectorPencilStyleAtom
       })]
     })]
   }) : en();

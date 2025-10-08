@@ -31,7 +31,7 @@ import { findImageFillByHash, getImagePaintSignedUrl, getImageProcessingStatus, 
 import { JT, LC } from "../figma_app/632248";
 import { useSelectionState, SelectionState } from "../905/286488";
 import { RL, B3, qy } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { setupPromptHistory } from "../905/290931";
 import { hm } from "../905/487011";
 import { AIActionIterationTrigger, AIActionIterationResult, AIActionIterationStatus, AIActionIterationAction } from "../905/278499";
@@ -321,7 +321,7 @@ function eg({
   });
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let [G, H] = useState("");
   let {
     promptHistory,
@@ -555,7 +555,7 @@ function ef({
   });
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let [H, J] = useState("");
   let {
     promptHistory,

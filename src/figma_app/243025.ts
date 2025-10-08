@@ -7,7 +7,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBody } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { A as _$$A } from "../vendor/21595";
+import { useThrottledCallback } from "../vendor/21595";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML, WEB, CSSBUILDER } from "../905/359509";
@@ -93,7 +93,7 @@ export let $$w2 = registerModal(function (e) {
   }, [r, b, E]);
   let x = "first-party" === r.type && (r.id === ANDROID || r.id === ANDROID_XML || r.id === _$$p || r.id === IOS_UIKIT);
   let w = "first-party" === r.type && (r.id === WEB || r.id === CSSBUILDER);
-  let O = _$$A(() => {
+  let O = useThrottledCallback(() => {
     w && b(r, E, {
       customSettings: {
         onlyText: "true" === (y.customSettings?.onlyText || "false") ? "false" : "true"

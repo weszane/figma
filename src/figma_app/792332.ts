@@ -1,6 +1,6 @@
 import { CorePerfInfo } from "../figma_app/763686";
 import { logDebug } from "../905/714362";
-import { K } from "../905/63322";
+import { ProgressiveNotificationHandler } from "../905/63322";
 import { defaultHeapMemorySize, getUsedJSHeapSize } from "../figma_app/527873";
 let o = 64 * defaultHeapMemorySize;
 function l() {
@@ -23,7 +23,7 @@ let c = !1;
 let u = null;
 let p = 0;
 export function $$_0() {
-  c || (getUsedJSHeapSize() && (u = new K(o, 2, 1.2, 2e3, d), setInterval(() => {
+  c || (getUsedJSHeapSize() && (u = new ProgressiveNotificationHandler(o, 2, 1.2, 2e3, d), setInterval(() => {
     let e = l();
     u && e && (p = Math.max(p, e.jsSpecificMemory), u.setCurrent(e.jsSpecificMemory));
   }, 5e3)), c = !0);

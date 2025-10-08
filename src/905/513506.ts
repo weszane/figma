@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { getThemeContextOrDefault } from "../905/158740";
-import { Qf } from "../905/266289";
+import { toggleEnhancedContrast } from "../905/266289";
 import { Fullscreen } from "../figma_app/763686";
 import { isChromebookTabbed, applyDarkBackground } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -18,7 +18,7 @@ export function $$_0() {
   let i = getMPVisibleTheme();
   let _ = useSelector(e => e.theme?.enhancedContrast);
   useEffect(() => {
-    Qf(_);
+    toggleEnhancedContrast(_);
   }, [_]);
   let A = getSelectedView();
   let y = f3();

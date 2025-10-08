@@ -9,7 +9,7 @@ import { N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
 import { ArrowPosition } from "../905/858282";
-import { ak5 } from "../figma_app/6204";
+import { DtmDeprecationPostMigrationOverlay } from "../figma_app/6204";
 let g = userFlagExistsAtomFamily("seen_dtm_deprecation_post_migration_overlay");
 export function $$f0(e) {
   let t = useAtomWithSubscription(g);
@@ -18,7 +18,7 @@ export function $$f0(e) {
     isShowing,
     complete
   } = _$$e({
-    overlay: ak5,
+    overlay: DtmDeprecationPostMigrationOverlay,
     priority: N.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {

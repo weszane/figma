@@ -1,67 +1,151 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { formatNumber } from "../figma_app/930338";
-import { SvgComponent } from "../905/714743";
-import { lo, TQ, Yd, dq, gu, az, k9, s0, _y, Qe } from "../905/5637";
-import { A } from "../6828/379561";
-import { A as _$$A } from "../5724/322086";
-export function $$d3(e) {
+import { jsx, jsxs } from "react/jsx-runtime"
+import { _y, az, dq, gu, k9, lo, Qe, s0, TQ, Yd } from "../905/5637"
+import { SvgComponent } from "../905/714743"
+import { A as _$$A } from "../5724/322086"
+import { A } from "../6828/379561"
+import { formatNumber } from "../figma_app/930338"
+
+interface IconMetricBaseProps {
+  metric: number
+}
+
+interface IconMetricDisplayProps extends IconMetricBaseProps {
+  icon: string
+}
+
+interface IconMetricInteractiveProps extends IconMetricBaseProps {
+  icon: string
+  hoverIcon?: string
+  activeIcon?: string
+  onClick?: () => void
+  classNameOverride?: string
+  isActive?: boolean
+  isDisabled?: boolean
+  isWhiteboard?: boolean
+}
+
+interface IconMetricButtonProps extends IconMetricBaseProps {
+  icon: string
+}
+
+/**
+ * Display a simple icon with a formatted metric value
+ * Original: $$d3
+ */
+export function IconMetricDisplay({ icon, metric }: IconMetricDisplayProps) {
   return jsxs("div", {
     className: lo,
-    children: [jsx("div", {
-      className: TQ,
-      children: jsx(SvgComponent, {
-        className: Yd,
-        svg: e.icon
-      })
-    }), formatNumber(e.metric)]
-  });
+    children: [
+      jsx("div", {
+        className: TQ,
+        children: jsx(SvgComponent, {
+          className: Yd,
+          svg: icon,
+        }),
+      }),
+      formatNumber(metric),
+    ],
+  })
 }
-export function $$c2(e) {
-  let t = "onClick" in e ? e.onClick : void 0;
-  let i = e.classNameOverride ? e.classNameOverride : dq;
+
+/**
+ * Interactive icon metric component with hover and active states
+ * Original: $$c2
+ */
+export function IconMetricInteractive({
+  icon,
+  hoverIcon,
+  activeIcon,
+  metric,
+  onClick,
+  classNameOverride,
+}: IconMetricInteractiveProps) {
+  const handleClick = "onClick" in { onClick } ? onClick : undefined
+  const containerClassName = classNameOverride ?? dq
+
+  const getIconClassNames = (): string => {
+    const classNames = [Yd]
+    if (hoverIcon)
+      classNames.push(gu)
+    if (activeIcon)
+      classNames.push(az)
+    return classNames.join(" ")
+  }
+
   return jsxs("div", {
-    className: i,
-    onClick: t,
-    children: [jsxs("div", {
-      className: TQ,
-      children: [jsx(SvgComponent, {
-        className: (() => {
-          let t = [Yd];
-          e.hoverIcon && t.push(gu);
-          e.activeIcon && t.push(az);
-          return t.join(" ");
-        })(),
-        svg: e.icon
-      }), e.hoverIcon && jsx(SvgComponent, {
-        className: k9,
-        svg: e.hoverIcon
-      }), e.activeIcon && jsx(SvgComponent, {
-        className: s0,
-        svg: e.activeIcon
-      })]
-    }), formatNumber(e.metric)]
-  });
+    className: containerClassName,
+    onClick: handleClick,
+    children: [
+      jsxs("div", {
+        className: TQ,
+        children: [
+          jsx(SvgComponent, {
+            className: getIconClassNames(),
+            svg: icon,
+          }),
+          hoverIcon
+          && jsx(SvgComponent, {
+            className: k9,
+            svg: hoverIcon,
+          }),
+          activeIcon
+          && jsx(SvgComponent, {
+            className: s0,
+            svg: activeIcon,
+          }),
+        ],
+      }),
+      formatNumber(metric),
+    ],
+  })
 }
-export function $$u1(e) {
-  return !e.onClick || e.isDisabled ? jsx($$d3, {
-    icon: _$$A,
-    metric: e.metric
-  }) : jsx($$c2, {
+
+/**
+ * Button-like icon metric component with different states
+ * Original: $$u1
+ */
+export function IconMetricButton({
+  metric,
+  onClick,
+  isActive,
+  isDisabled,
+  isWhiteboard,
+}: IconMetricButtonProps & {
+  onClick?: () => void
+  isActive?: boolean
+  isDisabled?: boolean
+  isWhiteboard?: boolean
+}) {
+  if (!onClick || isDisabled) {
+    return jsx(IconMetricDisplay, {
+      icon: _$$A,
+      metric,
+    })
+  }
+
+  return jsx(IconMetricInteractive, {
     icon: _$$A,
     hoverIcon: _$$A,
     activeIcon: _$$A,
-    metric: e.metric,
-    classNameOverride: e.isActive ? e.isWhiteboard ? _y : Qe : void 0,
-    onClick: e.onClick
-  });
+    metric,
+    classNameOverride: isActive ? (isWhiteboard ? _y : Qe) : undefined,
+    onClick,
+  })
 }
-export function $$p0(e) {
-  return jsx($$d3, {
+
+/**
+ * Icon metric component for comments
+ * Original: $$p0
+ */
+export function IconMetricComments({ metric }: IconMetricBaseProps) {
+  return jsx(IconMetricDisplay, {
     icon: A,
-    metric: e.metric
-  });
+    metric,
+  })
 }
-export const Ij = $$p0;
-export const OV = $$u1;
-export const vE = $$c2;
-export const x8 = $$d3;
+
+// Export aliases for backward compatibility
+export const Ij = IconMetricComments // Original: $$p0
+export const OV = IconMetricButton // Original: $$u1
+export const vE = IconMetricInteractive // Original: $$c2
+export const x8 = IconMetricDisplay // Original: $$d3

@@ -1,6 +1,6 @@
 import { permissionScopeHandler } from "../905/189185";
 import { logError } from "../905/714362";
-import { D } from "../905/629114";
+import { createFigmaPluginScope } from "../905/629114";
 import { rp } from "../figma_app/229710";
 import { GF, NI, h0 } from "../figma_app/61403";
 import { eb } from "../figma_app/234505";
@@ -35,7 +35,7 @@ export async function $$_7({
   desiredHeight: r
 }) {
   try {
-    let i = D();
+    let i = createFigmaPluginScope();
     let s = permissionScopeHandler.onboarding("create-rectangle-for-image", () => i.createRectangle());
     let o = await i.createImageAsync(e);
     let {

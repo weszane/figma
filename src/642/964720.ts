@@ -9,7 +9,7 @@ import { renderI18nText } from '../905/303541';
 import { SerializeError } from '../905/340677';
 import { IconButton } from '../905/443068';
 import { bL, c$, l9, mc } from '../905/493196';
-import { Jz } from '../905/504727';
+import { PointingDropdown } from '../905/504727';
 import { Button } from '../905/521428';
 import { getSingletonSceneGraph } from '../905/700578';
 import { useDropdown } from '../905/848862';
@@ -400,7 +400,7 @@ function P({
       'aria-label': 'JSX debug settings',
       'ref': h,
       'children': jsx(_$$J2, {})
-    }), o.showing && jsx(Jz, {
+    }), o.showing && jsx(PointingDropdown, {
       showPoint: !0,
       options: u,
       targetRect: g,

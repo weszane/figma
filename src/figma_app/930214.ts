@@ -9,7 +9,7 @@ import { getUserId } from "../905/372672";
 import { isPluginVersionPublished } from "../figma_app/300692";
 import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget } from "../figma_app/155287";
 import { PluginSourceType } from "../905/946805";
-import { Ag } from "../905/235578";
+import { ExtensionSource } from "../905/235578";
 export function $$m4() {
   let e = useLastAddedTimestamps();
   let t = useAllowlistedPlugins();
@@ -119,16 +119,16 @@ export function $$g5(e) {
   return Object.values(t);
 }
 export function $$f9(e) {
-  return e.types.has(Ag.RECENT) || e.types.has(Ag.USER_SAVED) || e.types.has(Ag.LOCAL);
+  return e.types.has(ExtensionSource.RECENT) || e.types.has(ExtensionSource.USER_SAVED) || e.types.has(ExtensionSource.LOCAL);
 }
 export function $$E7(e) {
-  return e.types.has(Ag.ORG_SAVED);
+  return e.types.has(ExtensionSource.ORG_SAVED);
 }
 export function $$y0(e) {
-  return $$E7(e) || e.types.has(Ag.ORG_PRIVATE);
+  return $$E7(e) || e.types.has(ExtensionSource.ORG_PRIVATE);
 }
 export function $$b3(e) {
-  return e.types.has(Ag.COMMUNITY);
+  return e.types.has(ExtensionSource.COMMUNITY);
 }
 export function $$T8(e) {
   let t = getUserId();
@@ -140,9 +140,9 @@ export function $$T8(e) {
     case PluginSourceType.WIDGETS:
       return e => manifestContainsWidget(e.extension);
     case PluginSourceType.FROM_ORG:
-      return e => e.types.has(Ag.ORG_PRIVATE);
+      return e => e.types.has(ExtensionSource.ORG_PRIVATE);
     case PluginSourceType.DEVELOPMENT:
-      return e => e.types.has(Ag.LOCAL) || function (e, t) {
+      return e => e.types.has(ExtensionSource.LOCAL) || function (e, t) {
         let {
           publishedExtension,
           localPublishedExtension

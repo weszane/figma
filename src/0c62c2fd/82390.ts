@@ -118,7 +118,7 @@ import { $ as _$$$8 } from '../905/302575';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, getTranslatedDynamicContent, renderI18nText } from '../905/303541';
 import { R as _$$R0 } from '../905/304671';
-import { T as _$$T2, v as _$$v2 } from '../905/309844';
+import { dragAndDropStop, dragAndDropStart } from '../905/309844';
 import { C as _$$C5 } from '../905/314082';
 import { m3 as _$$m4 } from '../905/315794';
 import { FolderSortKey, FolderViewType, getProjectUrl } from '../905/316062';
@@ -130,7 +130,7 @@ import { selectTeams } from '../905/338617';
 import { UI3ConditionalWrapper } from '../905/341359';
 import { wR } from '../905/346715';
 import { useFavoriteResource } from '../905/347011';
-import { P as _$$P2 } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { n as _$$n4 } from '../905/347702';
 import { A as _$$A10 } from '../905/351112';
 import { sendRoleInvites } from '../905/351260';
@@ -141,7 +141,7 @@ import { Yg } from '../905/362959';
 import { BannerMessage } from '../905/363675';
 import { UpgradeAction } from '../905/370443';
 import { getUserId, selectCurrentUser, selectUser } from '../905/372672';
-import { S as _$$S1 } from '../905/373189';
+import { getHandleAssetTransferRequestModal } from '../905/373189';
 import { $ as _$$$4 } from '../905/379902';
 import { FRequestsStr } from '../905/384551';
 import { b as _$$b7 } from '../905/388233';
@@ -170,18 +170,18 @@ import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { e as _$$e1 } from '../905/457828';
 import { dy as _$$dy, rS as _$$rS, Zp as _$$Zp, DG } from '../905/462076';
 import { notificationActions } from '../905/463586';
-import { uo as _$$uo2, bE } from '../905/466026';
+import { batchPutRepos, postRepo } from '../905/466026';
 import { AutoLayout } from '../905/470281';
 import { H as _$$H7 } from '../905/474029';
-import { R as _$$R4 } from '../905/483499';
+import { FSidebarItemType } from '../905/483499';
 import { e as _$$e9 } from '../905/483726';
 import { bL as _$$bL3, c$ as _$$c$2, l9 as _$$l5, mc as _$$mc3 } from '../905/493196';
 import { useUserOrgPath } from '../905/495564';
 import { handleAtomEvent } from '../905/502364';
 import { z as _$$z12 } from '../905/502533';
 import { extractPropertyFromNestedObjects } from '../905/504360';
-import { Cf } from '../905/504727';
-import { Y9 as _$$Y6, yu } from '../905/504768';
+import { ConnectedPointingDropdown } from '../905/504727';
+import { REFRESH_FEED_ACTION, TEAM_FEED_SET_BELL_STATE_ACTION } from '../905/504768';
 import { Y as _$$Y } from '../905/506207';
 import { compareValues, createRect, navigateToFile, openWindow } from '../905/508367';
 import { l as _$$l7 } from '../905/509505';
@@ -195,7 +195,7 @@ import { P as _$$P5 } from '../905/537307';
 import { globalPerfTimer } from '../905/542194';
 import { DashboardSections, MemberSections, NavigationRoutes } from '../905/548208';
 import { AccessLevelEnum } from '../905/557142';
-import { hT as _$$hT, YM as _$$YM } from '../905/561087';
+import { deleteRepositoriesThunk, deleteRepositoriesForeverThunk } from '../905/561087';
 import { isSitesFeatureEnabled } from '../905/561485';
 import { HAvatarType } from '../905/566881';
 import { r as _$$r6 } from '../905/571562';
@@ -249,8 +249,8 @@ import { useWindowDimensions } from '../905/745972';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { findBranchById, isBranch, isBranchAlt } from '../905/760074';
 import { l as _$$l2 } from '../905/767868';
-import { u as _$$u4 } from '../905/774364';
-import { _ as _$$_3 } from '../905/780571';
+import { workspaceApiService } from '../905/774364';
+import { extractPropertyValues } from '../905/780571';
 import { $x } from '../905/780715';
 import { trackTemplateEvent } from '../905/793009';
 import { N as _$$N2 } from '../905/794224';
@@ -261,7 +261,7 @@ import { z as _$$z4 } from '../905/821223';
 import { OrganizationType } from '../905/833838';
 import { u as _$$u0 } from '../905/834238';
 import { teamAPIClient } from '../905/834575';
-import { Cy } from '../905/844322';
+import { handleMoveFiles } from '../905/844322';
 import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
 import { useDropdown, useDropdownState } from '../905/848862';
 import { h as _$$h0 } from '../905/857431';
@@ -272,7 +272,7 @@ import { h as _$$h3 } from '../905/864281';
 import { u as _$$u5 } from '../905/866761';
 import { generateUUIDv4 } from '../905/871474';
 import { getValueOrFallback } from '../905/872825';
-import { VK, YK } from '../905/880488';
+import { deleteFilesOptimistThunk, deleteFilesPermanentlyAction } from '../905/880488';
 import { E as _$$E1 } from '../905/881732';
 import { k as _$$k2 } from '../905/888808';
 import { InterProfileType } from '../905/895626';
@@ -419,15 +419,15 @@ import { z as _$$z5 } from '../940032c6/265110';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { A as _$$A29 } from '../f2246930/458609';
 import { nk as _$$nk } from '../figma_app/2023';
-import { rv as _$$rv, BTz, c6t, cJy, cvy, Duq, fQh, HaT, hxO, I3H, I5n, I$z, j0N, j9$, jQF, K69, kBq, kmq, LB2, LPt, LQ8, Msu, NM0, O5v, O9D, Ob5, Q16, Ql8, Qlc, r3Y, rQs, sqw, tBR, Tp6, tUL, tZO, Ult, UmN, USq, Wb3, X5_, XIg, xPo, YHe, yjU, YPG } from '../figma_app/6204';
+import { OrgAdminMovedUnassignedDraftsOnboarding, TeamProjectLinkOverlay, CommunityProfileAdminDropdownOnboarding, CommunityCreatorMediaUpsellModal, CommunityTabOnboardingOverlay, PlanSpacesNewStarterTeamOverlay, BillingGroupAdminOnboarding, OrgAdminUnassignedDraftsTabOnboarding, JapaneseLaunchAnnouncementMachine, FileBrowserFigjamWhatsNew, FigJamConnectGoogleDrive, PromoCodeSelectTeam, NuxOnboardingOverlay, FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay, MobileRedirect, TeamFeedAudienceSelection, ConnectedProjectsAdminSettingsOverlay, EduPostVerification, CustomSectionsNudge, TeamAdminManageUnassignedDraftsOverlay, ConnectedProjectsUsageOverlay, EnterpriseOrgAdminOnboarding, FileViewHistoryOnboardingOverlay, OrgAdminLicenseGroupsOnboarding, CommunityMonetizationMetricsTabOnboarding, OnboardFileBrowser, OrgAdminActivityOnboarding, OrgAdminTeamOnboarding, PromoCodeCreateTeam, DevModeOptInEventOnlyOverlay, OrgAdminWorkspacesOnboarding, PlanSpacesLaunchOverlay, SearchWorkspaceOnboarding, SidebarWorkspaceLinkOnboarding, CommunityDevModeFilterOnboarding, TeamAdminMovedUnassignedDraftsOverlay, EduOffboarding, OrgAdminMembersOnboarding, OrgSelectWorkspace, UniversalUpgrade, OnboardOrgsWelcome, SharingClarityAdminOnboardingOverlay, DtmDeprecationNavToPlanOverlay, WorkspaceAdminOnboarding, PlanSpacesRecreatedStarterTeamOverlay, FolderSettingsConnectedProjectsOnboardingOverlay } from '../figma_app/6204';
 import { copyLinkThunk } from '../figma_app/11182';
-import { o8 as _$$o1 } from '../figma_app/12220';
+import { stylizeMessageMeta } from '../figma_app/12220';
 import { getAccessLevelLabels, isExternalRestricted } from '../figma_app/12796';
 import { L as _$$L6 } from '../figma_app/23271';
-import { yJ as _$$yJ3 } from '../figma_app/24841';
+import { putUserAction } from '../figma_app/24841';
 import { atom, createRemovableAtomFamily, createValidatedLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { ISO, tgj } from '../figma_app/27776';
-import { Jt } from '../figma_app/28323';
+import { fetchLicenseGroupsThunk } from '../figma_app/28323';
 import { o as _$$o7, s as _$$s3 } from '../figma_app/29593';
 import { R as _$$R9 } from '../figma_app/32680';
 import { ActiveFileUsersForFileView, AddWorkspacePinnedFileView, AddWorkspacePinSearchFilesView, AddWorkspacePinSuggestedFilesView, AssetTransferReloadView, DraftsToMoveFoldersByUserId, EduOffboardingData, EnterpriseOrgMetaContentView, FileBrowserDraftsViewBarView, FileBrowserProjectPageTitleView, FileBrowserWorkspacePageTeamsView, FilesInProjectHighLimit, FolderBannerView, FolderCanView, FolderPageView, LimitedSpaceSharedProjectsView, NonEnterpriseOrgMetaContentView, PaginatedFigFeed, PinnedFiles, PlanConnectedProjectsForPlanUser, SharedWithYouResources, TeamById, TeamCanAdmin, TeamCanEdit, TeamFileLimitsInfoByProject, TeamPermissions, TeamRoleRequestView, TeamUpgradeBannerView, TeamUpgradePermissions, TeamUserStatusAndRequests, TrashedFilesPageView, UserFlagByName, UserProfilePageView, WorkspacePageMembersView, WorkspacePageView, WorkspacesDirectoryView, WorkspaceSuggestedPinsView } from '../figma_app/43951';
@@ -442,7 +442,7 @@ import { $$, nR as _$$nR, vd } from '../figma_app/60079';
 import { $ as _$$$2, E as _$$E4 } from '../figma_app/61705';
 import { batchPutFileAction, copyShareLinkOptimistic, filePutAction, setActiveFileUsersAction } from '../figma_app/78808';
 import { O8, ql } from '../figma_app/88484';
-import { gO as _$$gO, ox as _$$ox3, YP } from '../figma_app/88768';
+import { TeamActionType, canViewTeamByAccessLevel, getTeamActionType } from '../figma_app/88768';
 import { DH } from '../figma_app/90441';
 import { o as _$$o8, X as _$$X3 } from '../figma_app/91315';
 import { F as _$$F8 } from '../figma_app/101188';
@@ -494,7 +494,7 @@ import { DISABLED_TEAM_CREATION_BUTTON_HOVERED, FILE_BROWSER_FILE_CLICKED, logAn
 import { useRouteMatchExists, useRouteParams, useRouteQuery, useRouteStateInstance, useSafeRouteParams, useSafeRouteStateInstance } from '../figma_app/321395';
 import { getAllTimeSortOption, SortOptions } from '../figma_app/324237';
 import { fO as _$$fO, ZM } from '../figma_app/329496';
-import { Jt as _$$Jt2, GR, HD } from '../figma_app/330108';
+import { fetchOrganizationTeams, createThrottledTeamJoin, fetchTeamDetails } from '../figma_app/330108';
 import { h as _$$h7 } from '../figma_app/334471';
 import { useEnterpriseOrgDirectoryEnabled, getCurrentUserOrg, isTemplatePickerDisabled } from '../figma_app/336853';
 import { Il, Tj } from '../figma_app/342207';
@@ -535,7 +535,7 @@ import { lT as _$$lT } from '../figma_app/494261';
 import { LinkPrimitive } from '../figma_app/496441';
 import { setRecentUserData } from '../figma_app/502247';
 import { $c, g2 as _$$g4, gr as _$$gr, lI as _$$lI, lV as _$$lV, mc as _$$mc, bS, FU, KH, qD, ye, Zn } from '../figma_app/502363';
-import { FC as _$$FC, BN } from '../figma_app/502422';
+import { incrementUserFlagCounter, useUserFlagCounterValue } from '../figma_app/502422';
 import { getUserCurrency } from '../figma_app/514043';
 import { $E, $o, kF, WX } from '../figma_app/515363';
 import { c4 as _$$c, eO as _$$eO, P as _$$P, Au, LM, NJ, z4, Zr } from '../figma_app/518077';
@@ -558,7 +558,7 @@ import { useIsCommunityHomeShelfExperimentEnabled } from '../figma_app/591738';
 import { getExperimentConfigAsync, selectExperimentConfigHook } from '../figma_app/594947';
 import { getCurrentTeam, getCurrentTeamId, hasLegacyFilesLimitation, hasWhiteboardFilesBetaLimitation } from '../figma_app/598018';
 import { getCurrentLocale } from '../figma_app/598412';
-import { z6 as _$$z10, MR, qp } from '../figma_app/598926';
+import { unpinFileThunk, folderSetPinnedFileAction, folderLoadAction } from '../figma_app/598926';
 import { ResourceHubInternalSearchRoute, ResourceHubSearchRoute } from '../figma_app/600006';
 import { a as _$$a0, z as _$$z8 } from '../figma_app/601188';
 import { _O as _$$_O, CK } from '../figma_app/603826';
@@ -590,7 +590,7 @@ import { getTeamCountTypeForUpsell, shouldShowOrgUpsell, TeamCountType, dismissO
 import { EO } from '../figma_app/701982';
 import { w as _$$w5 } from '../figma_app/705249';
 import { CreateUpgradeAction, draftViews, EntityType, SidebarSection, TeamType, teamViews } from '../figma_app/707808';
-import { wY } from '../figma_app/708845';
+import { useResizeObserverRef } from '../figma_app/708845';
 import { q as _$$q2 } from '../figma_app/712384';
 import { TeamExtendedSchema } from '../figma_app/713624';
 import { f4 as _$$f2, yH as _$$yH, Zm } from '../figma_app/722141';
@@ -680,7 +680,7 @@ function ej() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: _$$rv,
+    overlay: OrgAdminMovedUnassignedDraftsOnboarding,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
   let n = useSelector(e => getCurrentUserOrgUser(e));
@@ -758,7 +758,7 @@ function e0(e) {
     isShowing,
     complete
   } = _$$e3({
-    overlay: kBq,
+    overlay: ConnectedProjectsAdminSettingsOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {
@@ -868,7 +868,7 @@ function tt(e) {
   let d = Xf(e.org.id);
   let c = d.status === 'loaded' ? d.data?.invoices ?? [] : void 0;
   useEffect(() => {
-    t(Jt({
+    t(fetchLicenseGroupsThunk({
       forceRefetch: !1
     }));
   }, [t, e.org.id]);
@@ -996,7 +996,7 @@ function tg(e) {
     isShowing,
     complete
   } = _$$e3({
-    overlay: xPo,
+    overlay: DtmDeprecationNavToPlanOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {
@@ -1077,7 +1077,7 @@ function tv(e) {
     onTargetDrop: t => {
       let r = new DragDataHandler(t);
       tc(e.dispatch, e.folder, null, r, void 0, n);
-      e.dispatch(_$$T2());
+      e.dispatch(dragAndDropStop());
       i(!1);
     },
     draggable: !1,
@@ -1250,7 +1250,7 @@ function rp(e, t, r, a) {
       }
     }));
     let a = transformFileRepoData(e);
-    a && r(bE({
+    a && r(postRepo({
       repo: a
     }));
   }
@@ -2093,15 +2093,15 @@ function rH(e) {
     let o = r.clientY - i.top;
     N.current = rz(s, 'favorited_generic_row--draggable--QinZd');
     a.setDragImage(N.current, n, o);
-    t(_$$v2({
-      type: _$$R4.Favorite,
+    t(dragAndDropStart({
+      type: FSidebarItemType.Favorite,
       data: e.favorite
     }));
   };
   let R = (t, a) => {
     let s = new DragDataHandler(t);
     let i = !1;
-    (r.type === _$$R4.Favorite || s.isFigFiles() || s.isRepos() || s.isPrototypes() || s.isTiles()) && ((s.isFigFiles() || s.isRepos() || s.isTiles()) && (i = e.favorite.resourceType === FEntityType.FOLDER), e.updateRearrangeDragState({
+    (r.type === FSidebarItemType.Favorite || s.isFigFiles() || s.isRepos() || s.isPrototypes() || s.isTiles()) && ((s.isFigFiles() || s.isRepos() || s.isTiles()) && (i = e.favorite.resourceType === FEntityType.FOLDER), e.updateRearrangeDragState({
       draggedOverFavoriteId: e.favorite.resource.id,
       dropBefore: i ? a.upperQuarter : a.upper,
       dropInto: i && a.middleVerticalHalf,
@@ -2110,7 +2110,7 @@ function rH(e) {
   };
   let A = t => {
     let a = new DragDataHandler(t);
-    (r.type === _$$R4.Favorite || a.isFigFiles() || a.isRepos() || a.isPrototypes() || a.isTiles() && j) && (e.clearRearrangeDragState(e.favorite.resource.id), I(!1));
+    (r.type === FSidebarItemType.Favorite || a.isFigFiles() || a.isRepos() || a.isPrototypes() || a.isTiles() && j) && (e.clearRearrangeDragState(e.favorite.resource.id), I(!1));
   };
   let O = (t, r) => {
     let a = getIsUpgradeHandlerLoading();
@@ -2135,20 +2135,20 @@ function rH(e) {
     let s = new DragDataHandler(a);
     if (e.rearrangeDragState?.dropInto && e.favorite.resourceType === FEntityType.FOLDER && e.favorite.resource.project) {
       tc(t, e.favorite.resource.project, e.favorite.resource.project.team, s, O, C);
-      t(_$$T2());
+      t(dragAndDropStop());
     } else if (s.isFigFiles() || s.isRepos() || s.isPrototypes() || s.isTiles()) {
       e.onSetResourceFavoriteDragDrop(a);
-    } else if (r.type === _$$R4.Favorite && j) {
+    } else if (r.type === FSidebarItemType.Favorite && j) {
       let a = r.data;
       e.reorderOrInsertFavorite(a.resource.id, a.resourceType);
-      t(_$$T2());
+      t(dragAndDropStop());
     }
     e.clearRearrangeDragState(e.favorite.resource.id);
     I(!1);
   };
   let P = r => {
     N.current && N.current.remove();
-    t(_$$T2());
+    t(dragAndDropStop());
     e.clearRearrangeDragState(e.favorite.resource.id);
     I(!1);
   };
@@ -2163,7 +2163,7 @@ function rH(e) {
   let D = e => {
     let t = new DragDataHandler(e);
     w(t.isFile());
-    return r.type !== _$$R4.SidebarSection && !t.isFile();
+    return r.type !== FSidebarItemType.SidebarSection && !t.isFile();
   };
   return jsx('div', {
     className: j ? e.rearrangeDragState?.dropBefore ? 'favorited_generic_row--dropBefore--xZvBN sidebar--dropBefore--wZDYO' : e.rearrangeDragState?.dropInto ? 'favorited_generic_row--dropInto--VKuX5' : 'favorited_generic_row--dropAfter--a64Ax sidebar--dropAfter--JEX7d' : void 0,
@@ -2295,10 +2295,10 @@ function rq(e) {
   let y = useSelector(e => e.dragState);
   let w = useLatestRef(y);
   useEffect(() => {
-    y.type === _$$R4.None && w && w.type !== _$$R4.None && v(void 0);
+    y.type === FSidebarItemType.None && w && w.type !== FSidebarItemType.None && v(void 0);
   }, [y, w]);
   useEffect(() => {
-    !e.isCurrentHoveredSection && y.type === _$$R4.SidebarSection && b && v(void 0);
+    !e.isCurrentHoveredSection && y.type === FSidebarItemType.SidebarSection && b && v(void 0);
   }, [e.isCurrentHoveredSection, b, y]);
   let [j, T] = useState(void 0);
   let [E, C] = useState(!0);
@@ -2309,8 +2309,8 @@ function rq(e) {
     T(void 0);
   }, [b, v, j, T]);
   let R = useCallback(r => {
-    e.section?.id && (r.dataTransfer.effectAllowed = 'move', new DragDataHandler(r.dataTransfer).setArbitraryData(e.section.id), t(_$$v2({
-      type: _$$R4.SidebarSection,
+    e.section?.id && (r.dataTransfer.effectAllowed = 'move', new DragDataHandler(r.dataTransfer).setArbitraryData(e.section.id), t(dragAndDropStart({
+      type: FSidebarItemType.SidebarSection,
       data: e.section.id
     })));
   }, [t, e.section]);
@@ -2625,20 +2625,20 @@ function rZ(e) {
   l.forEach(e => {
     e.resource.sidebarSectionId ? g[e.resource.sidebarSectionId] ? g[e.resource.sidebarSectionId].push(e) : g[e.resource.sidebarSectionId] = [e] : h.push(e);
   });
-  let x = useCallback(() => r.type === _$$R4.Favorite || r.type === _$$R4.SidebarSection, [r]);
+  let x = useCallback(() => r.type === FSidebarItemType.Favorite || r.type === FSidebarItemType.SidebarSection, [r]);
   let b = useCallback(e => {
-    r.type === _$$R4.SidebarSection && p(e.upper);
+    r.type === FSidebarItemType.SidebarSection && p(e.upper);
   }, [r]);
   let v = useCallback(() => {
     let a = d === 'starred' ? void 0 : d;
-    if (r.type === _$$R4.Favorite) {
+    if (r.type === FSidebarItemType.Favorite) {
       let e = r.data;
       t(moveFavoritedResourceToSection({
         favoriteId: e.resource.id,
         sectionId: a,
         resourceType: e.resourceType
       }));
-    } else if (r.type === _$$R4.SidebarSection && a) {
+    } else if (r.type === FSidebarItemType.SidebarSection && a) {
       let s = f.map(e => e.id) ?? [];
       let i = moveElement(s, r.data, a, _);
       t(updateFileBrowserPreferencesThunk({
@@ -2654,7 +2654,7 @@ function rZ(e) {
     }
     p(!1);
     c(void 0);
-    t(_$$T2());
+    t(dragAndDropStop());
   }, [d, t, r, _, f, e.fileBrowserPreferences]);
   let y = useCallback(e => () => {
     c(e);
@@ -2690,7 +2690,7 @@ function rZ(e) {
   return jsxs('div', {
     className: cssBuilderInstance.mt8.$,
     children: [n === 0 && T, f.map((t, s) => {
-      let i = r.type === _$$R4.Favorite ? tP : _ ? 'favorited_section--dropBefore--6poyi sidebar--dropBefore--wZDYO' : 'favorited_section--dropAfter--7G6L7 sidebar--dropAfter--JEX7d';
+      let i = r.type === FSidebarItemType.Favorite ? tP : _ ? 'favorited_section--dropBefore--6poyi sidebar--dropBefore--wZDYO' : 'favorited_section--dropAfter--7G6L7 sidebar--dropAfter--JEX7d';
       let o = U()(d === t.id ? i : '', cssBuilderInstance.mb8.$);
       return jsxs('div', {
         children: [jsx(_$$Y, {
@@ -2730,11 +2730,11 @@ let at = registerModal(e => {
   let u = getI18nString('file_browser.planless_favorites.add_favorites_to_modal_title');
   let m = () => n(hideModal());
   let _ = {};
-  l && _$$_3(d, l).forEach(e => {
+  l && extractPropertyValues(d, l).forEach(e => {
     e.drafts_folder_id && (_[e.team_id] = e.drafts_folder_id);
   });
   let p = (e, t) => {
-    t && n(Cy({
+    t && n(handleMoveFiles({
       files: e,
       folderName: '',
       folderId: t,
@@ -2751,7 +2751,7 @@ let at = registerModal(e => {
     truncateTitleText: !0,
     children: jsxs('div', {
       className: 'move_favorites_modal--modalBody---Rdx2',
-      children: [c && jsx(_$$P2, {
+      children: [c && jsx(RecordingScrollContainer, {
         width: 480,
         children: jsx('div', {
           className: cssBuilderInstance.pl8.pr8.$,
@@ -2994,7 +2994,7 @@ function ap() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: tZO,
+    overlay: TeamAdminMovedUnassignedDraftsOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
@@ -4112,7 +4112,7 @@ function sZ(e) {
     [FBGNavigationUpdatesVariants.VARIANT_B]: sl.AFTER_CONTENT
   }[e.FBGNavigationUpdatesTreatment];
   let J = H?.overrideLocation ?? K;
-  let q = !!m.data && (m.type === _$$R4.Folder || m.type === _$$R4.Team || m.type === _$$R4.Favorite);
+  let q = !!m.data && (m.type === FSidebarItemType.Folder || m.type === FSidebarItemType.Team || m.type === FSidebarItemType.Favorite);
   let X = !(e.showLoadingState || e.showingFileBrowserLoader);
   return jsx(_$$A2, {
     loadingElementId: 'filebrowser-loading-sidebar',
@@ -4121,7 +4121,7 @@ function sZ(e) {
       className: 'x78zum5 xdt5ytf xh8yej3',
       children: [jsx(sV, {
         hasBottomBorder: y
-      }), jsxs(_$$P2, {
+      }), jsxs(RecordingScrollContainer, {
         className: 'sidebar--sidebarScrollContainer--Z95XT',
         innerClassName: 'sidebar--innerScrollContainer--JaOLM',
         scrollingDisabled: !1,
@@ -4665,7 +4665,7 @@ function iB({
     } else if (e && a.workspace_id !== e) {
       return !1;
     }
-    return _$$ox3(a, r);
+    return canViewTeamByAccessLevel(a, r);
   })), [o, r, t, e]);
 }
 function iU({
@@ -4962,7 +4962,7 @@ function nn(e) {
   });
 }
 let n_ = liveStoreInstance.Mutation(async e => {
-  await _$$u4.updateDescription(e);
+  await workspaceApiService.updateDescription(e);
 });
 let np = registerModal(({
   workspace: e
@@ -5084,7 +5084,7 @@ function nw({
   });
 }
 let nj = liveStoreInstance.Mutation(async e => {
-  await _$$u4.updateColor(e);
+  await workspaceApiService.updateColor(e);
 });
 function nT({
   workspace: e,
@@ -5323,7 +5323,7 @@ let nD = registerModal(e => {
         children: [(n.MEMBERS.display ? d : c).length > 0 && jsx(nF, {
           query: r,
           onChange: i
-        }), jsx(_$$P2, {
+        }), jsx(RecordingScrollContainer, {
           className: 'workspace_members_modal--outerContainer--in03x',
           innerClassName: 'workspace_members_modal--membersContainer--16pMi',
           children: jsxs('div', {
@@ -5773,7 +5773,7 @@ function nX({
       clearSearch: l,
       iconClassName: cssBuilderInstance.colorIcon.$,
       hideXIcon: !0
-    }), jsx(_$$P2, {
+    }), jsx(RecordingScrollContainer, {
       className: 'choose_file_modal--gridMaxHeight--8NKvW',
       innerClassName: cssBuilderInstance.hFull.gap12.flex.flexColumn.pt16.px24.borderBox.$,
       children: i
@@ -9227,7 +9227,7 @@ function dL({
       })
     }, e.teamId);
   });
-  return jsx(_$$P2, {
+  return jsx(RecordingScrollContainer, {
     scrollContainerRef: d.sizeRef,
     children: jsx('div', {
       className: 'x78zum5 xdt5ytf xou54vl x1120s5i',
@@ -9617,7 +9617,7 @@ function d2({
     isShowing,
     complete
   } = _$$e3({
-    overlay: cvy,
+    overlay: CommunityTabOnboardingOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {
@@ -10801,7 +10801,7 @@ function ua(e) {
 }
 function us(e) {
   let t = parseInt(e.feedPost.numComments, 10);
-  let r = _$$o1(e.feedPost.descriptionMeta);
+  let r = stylizeMessageMeta(e.feedPost.descriptionMeta);
   let i = [...new Map(e.feedPost.comments.map(e => [e.user.id, e.user])).values()];
   let n = jsx('div', {
     className: 'feed_tile--commentPill--ZWfdc feed_reactions_section--reactionPill--qE8nJ reactions--reaction--BGfYE text--fontPos11--2LvXf text--_fontBase--QdLsd',
@@ -11139,7 +11139,7 @@ function un(e) {
     return r;
   }, [l, x.data, n]);
   let F = b && x.data && x.data.length === 0 && e.selectedUser;
-  return jsx(_$$P2, {
+  return jsx(RecordingScrollContainer, {
     scrollContainerRef: r,
     className: 'feed_list_view--scrollContainer--84INP main_feed_view--scrollContainer--BunJg',
     innerClassName: U()('feed_list_view--scrollContainerInner--8Le-r', m && 'feed_list_view--scrollContainerInnerProfile--izApr'),
@@ -11183,7 +11183,7 @@ function uo(e) {
   let t = useDispatch();
   let r = useSelector(e => e.teamFeedRefreshNonce);
   useEffect(() => {
-    t(yu({
+    t(TEAM_FEED_SET_BELL_STATE_ACTION({
       orgId: e.currentOrgId,
       bellActive: !1
     }));
@@ -11219,13 +11219,13 @@ function uu(e) {
 }
 function um(e) {
   let t = useDispatch();
-  useEffect(() => (trackEventAnalytics('Team Feed Posts List View Visited'), t(yu({
+  useEffect(() => (trackEventAnalytics('Team Feed Posts List View Visited'), t(TEAM_FEED_SET_BELL_STATE_ACTION({
     orgId: e.currentOrgId,
     bellActive: !1
   })), () => {
     trackEventAnalytics('Team Feed List View Closed');
   }), [t, e.currentOrgId]);
-  let r = useCallback(() => t(_$$Y6()), [t]);
+  let r = useCallback(() => t(REFRESH_FEED_ACTION()), [t]);
   let n = useCallback(() => {
     r();
   }, [r]);
@@ -12477,7 +12477,7 @@ function ma() {
         o(batchPutFileAction({
           files: e
         }));
-        o(_$$uo2({
+        o(batchPutRepos({
           repos: t
         }));
       }
@@ -13057,7 +13057,7 @@ function mj(e) {
     content: s
   });
 }
-let mE = [Wb3, Ult, kmq, USq, jQF, j0N, Ob5, Qlc, I$z, X5_, LB2, I5n, Msu, UmN, Ql8, Q16, O5v, _$$rv, HaT, rQs, YHe, hxO, sqw, Duq, yjU, BTz, I3H, tZO, LPt, cJy, tUL, tBR, K69, Tp6, XIg, fQh, O9D, c6t, NM0, YPG, j9$, LQ8, r3Y].map(e => e.id);
+let mE = [UniversalUpgrade, EduOffboarding, EduPostVerification, OrgSelectWorkspace, MobileRedirect, NuxOnboardingOverlay, OnboardFileBrowser, PromoCodeCreateTeam, PromoCodeSelectTeam, OnboardOrgsWelcome, CustomSectionsNudge, FigJamConnectGoogleDrive, EnterpriseOrgAdminOnboarding, OrgAdminMembersOnboarding, OrgAdminTeamOnboarding, OrgAdminActivityOnboarding, OrgAdminLicenseGroupsOnboarding, OrgAdminMovedUnassignedDraftsOnboarding, OrgAdminUnassignedDraftsTabOnboarding, OrgAdminWorkspacesOnboarding, WorkspaceAdminOnboarding, JapaneseLaunchAnnouncementMachine, PlanSpacesLaunchOverlay, PlanSpacesNewStarterTeamOverlay, PlanSpacesRecreatedStarterTeamOverlay, TeamProjectLinkOverlay, FileBrowserFigjamWhatsNew, TeamAdminMovedUnassignedDraftsOverlay, TeamAdminManageUnassignedDraftsOverlay, CommunityCreatorMediaUpsellModal, CommunityDevModeFilterOnboarding, SearchWorkspaceOnboarding, TeamFeedAudienceSelection, SidebarWorkspaceLinkOnboarding, SharingClarityAdminOnboardingOverlay, BillingGroupAdminOnboarding, CommunityMonetizationMetricsTabOnboarding, CommunityProfileAdminDropdownOnboarding, FileViewHistoryOnboardingOverlay, FolderSettingsConnectedProjectsOnboardingOverlay, FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay, ConnectedProjectsUsageOverlay, DevModeOptInEventOnlyOverlay].map(e => e.id);
 function mI({
   children: e
 }) {
@@ -14105,14 +14105,14 @@ let _b = registerModal(e => {
     if (t.length > 0) {
       if (isPermanentDeletion) {
         let r = t.reduce((e, t) => (e[t.key] = !0, e), {});
-        n(YK({
+        n(deleteFilesPermanentlyAction({
           fileKeys: r,
           userInitiated: !0,
           onSuccessCallback: e.onDeleteSuccess
         }));
       } else {
         let r = t.reduce((e, t) => (e[t.key] = fileEntityDataMapper.toSinatra(t), e), {});
-        n(VK({
+        n(deleteFilesOptimistThunk({
           fileKeys: r,
           userInitiated: !0,
           onSuccessCallback: e.onDeleteSuccess,
@@ -14133,10 +14133,10 @@ let _b = registerModal(e => {
         });
       }
     });
-    r.length > 0 && (isPermanentDeletion ? n(_$$YM({
+    r.length > 0 && (isPermanentDeletion ? n(deleteRepositoriesForeverThunk({
       repoIds: Object.keys(a),
       userInitiated: !0
-    })) : n(_$$hT({
+    })) : n(deleteRepositoriesThunk({
       reposById: a,
       userInitiated: !0
     })));
@@ -14970,7 +14970,7 @@ function _q({
     isShowing,
     complete
   } = _$$e3({
-    overlay: j9$,
+    overlay: FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [t, r]);
   useSingleEffect(() => {
@@ -15128,7 +15128,7 @@ function _Z({
   let g = useCallback(t => {
     if (t.length !== 1) return;
     let r = t[0];
-    r?.pinnedByUser?.id === l && n(_$$z10({
+    r?.pinnedByUser?.id === l && n(unpinFileThunk({
       folderId: e,
       fileKey: r.file.key
     }));
@@ -15335,7 +15335,7 @@ function pu(e) {
     useLayoutEffect(() => {
       a(t?.current?.offsetWidth ?? 0);
     }, [a, t]);
-    wY(t, e => {
+    useResizeObserverRef(t, e => {
       a(e.width);
     });
     let n = useMemo(() => i ? Math.min(Math.floor((i + 16) / 187), e) : 0, [i, e]);
@@ -15682,7 +15682,7 @@ function pS(e) {
   });
   let n = useMemo(() => r.status === 'loaded' ? (r.data.project?.pinnedFiles || []).filter(e => !!e.file) : [], [r]);
   useEffect(() => {
-    t(MR({
+    t(folderSetPinnedFileAction({
       folderId: e.folderId,
       fileKeys: n.map(e => e.file.key)
     }));
@@ -15890,7 +15890,7 @@ function p$(e) {
         }));
       },
       children: jsx(_$$J, {})
-    }), u && jsx(Cf, {
+    }), u && jsx(ConnectedPointingDropdown, {
       targetRect: n.data.targetRect,
       minWidth: 172,
       maxWidth: 172,
@@ -15933,7 +15933,7 @@ function p5({
     return useCallback(async t => {
       try {
         await sendWithRetry.post(`/api/folders/${t}/claim`);
-        e.dispatch(qp({
+        e.dispatch(folderLoadAction({
           folderId: t
         }));
         isTempId(t) || e.dispatch(jl({
@@ -15986,10 +15986,10 @@ function p5({
     lgFolder: t
   });
   let v = _$$b7(t.plan?.tier);
-  let y = BN(p4);
+  let y = useUserFlagCounterValue(p4);
   let [w, j] = useAtomValueAndSetter(p2);
   useEffect(() => {
-    !w && v && (_$$FC(p4), j(!0));
+    !w && v && (incrementUserFlagCounter(p4), j(!0));
   }, [w, j, v]);
   let T = (t?.canConnect ?? !1) && v;
   let E = y.status === 'loaded' && y.data < 3 && !!T;
@@ -16966,7 +16966,7 @@ function fR() {
     workspaceTeamCounts,
     unassignedTeams
   } = useMemo(() => {
-    let e = (c.data || []).filter(e => _$$ox3(e, t));
+    let e = (c.data || []).filter(e => canViewTeamByAccessLevel(e, t));
     return {
       workspaceTeamCounts: ZM(e),
       unassignedTeams: e.filter(e => e.workspace_id === null || void 0 === e.workspace_id)
@@ -17152,7 +17152,7 @@ function fF(e) {
   let l = useIsOrgMemberOrAdminUser(o);
   let d = useIsOrgGuestUser(o);
   useEffect(() => {
-    l.unwrapOr(!1) && (r(_$$Jt2({
+    l.unwrapOr(!1) && (r(fetchOrganizationTeams({
       includeMemberCount: !0,
       includeTopMembers: !1,
       includeProjectCount: !0
@@ -19498,7 +19498,7 @@ function hf(e) {
         }));
       },
       children: jsx(_$$J, {})
-    }), u && jsx(Cf, {
+    }), u && jsx(ConnectedPointingDropdown, {
       targetRect: n.data.targetRect,
       minWidth: 172,
       maxWidth: 172,
@@ -19587,20 +19587,20 @@ function hP(e) {
     orgTeamActionType
   } = e;
   switch (orgTeamActionType) {
-    case _$$gO.CLICK_JOIN:
-    case _$$gO.BYPASS_REQUEST:
+    case TeamActionType.CLICK_JOIN:
+    case TeamActionType.BYPASS_REQUEST:
       return jsxs(Fragment, {
         children: [renderI18nText('file_browser.team.no_permissions_message', {
           teamName: team.name
         }), jsx('br', {}), renderI18nText('file_browser.team.please_join_team')]
       });
-    case _$$gO.CLICK_REQUEST:
+    case TeamActionType.CLICK_REQUEST:
       return jsxs(Fragment, {
         children: [renderI18nText('file_browser.team.no_permissions_message', {
           teamName: team.name
         }), jsx('br', {}), renderI18nText('file_browser.team.please_request_to_join_team')]
       });
-    case _$$gO.CLICK_WITHDRAW:
+    case TeamActionType.CLICK_WITHDRAW:
       return renderI18nText('file_browser.team.request_to_join_team_is_pending', {
         teamName: team.name
       });
@@ -19623,7 +19623,7 @@ function hL({
     enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     label: adminPermissionConfig.TeamNonMemberJoinView.canAdminOrg
   }).unwrapOr(!1);
-  let l = YP(e, s, r, o);
+  let l = getTeamActionType(e, s, r, o);
   let d = useDispatch();
   let c = jsxs('div', {
     'className': 'team_page_view--nonMemberViewContainer--uleTt',
@@ -19647,7 +19647,7 @@ function hL({
       className: 'team_page_view--joinButton--waTM-',
       children: jsx(_$$m4, {
         team: e,
-        onJoin: GR(d, e.id),
+        onJoin: createThrottledTeamJoin(d, e.id),
         onLeave: () => {
           d(showModalHandler({
             type: _$$p5,
@@ -19720,11 +19720,11 @@ function hD({
     if (l) {
       h(!1);
     } else {
-      let t = HD.loadingKeyForPayload({
+      let t = fetchTeamDetails.loadingKeyForPayload({
         teamId: e
       });
       let r = `TEAM_GET_ACTION_${e}`;
-      d && !u[t] ? _(HD({
+      d && !u[t] ? _(fetchTeamDetails({
         teamId: e,
         disableFlashError: !0
       })) : isLoading(u, t) || isLoading(u, r) || h(!0);
@@ -19795,7 +19795,7 @@ function hD({
   let k = useRef(!1);
   useEffect(() => {
     !k.current && f.view === 'team' && f.assetTransferRequestId && _(showModalHandler({
-      type: _$$S1(),
+      type: getHandleAssetTransferRequestModal(),
       data: {
         selectedAssetTransferRequest: f.assetTransferRequestId
       }
@@ -20056,7 +20056,7 @@ function hM({
           key: iq.JOIN_TEAM,
           element: jsx(WithTrackedButtonLarge, {
             variant: 'secondary',
-            onClick: GR(t, e.id, AccessLevelEnum.ADMIN),
+            onClick: createThrottledTeamJoin(t, e.id, AccessLevelEnum.ADMIN),
             children: getI18nString('file_browser.team.join_team')
           })
         });
@@ -20262,7 +20262,7 @@ function h1(e) {
           })]
         }), s && e.user?.id === r?.id && jsx(h6, {
           user: e.user
-        }), n && jsxs(_$$P2, {
+        }), n && jsxs(RecordingScrollContainer, {
           className: cssBuilderInstance.flexShrink1.bt1.bSolid.colorBorder.$,
           innerClassName: cssBuilderInstance.p16.borderBox.flex.flexColumn.$,
           children: [jsx('div', {
@@ -20288,7 +20288,7 @@ function h4(e) {
   let r = useDispatch();
   return jsx(h1, {
     submitDescription: t => {
-      r(_$$yJ3({
+      r(putUserAction({
         user: {
           id: e.userId,
           description: t
@@ -20805,7 +20805,7 @@ let xr = e => {
           userId: t,
           org: m,
           publishedPlugins: G.value
-        }), jsxs(_$$P2, {
+        }), jsxs(RecordingScrollContainer, {
           children: [jsx(_$$d7, {
             items: et ?? [],
             handleOpenTile: q,

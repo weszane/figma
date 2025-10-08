@@ -14,7 +14,7 @@ import { ConfirmationModal } from "../905/441305";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { N$, qk } from "../905/355291";
+import { showTwoFactorRecoveryModal, PHONE_SETUP_MODAL_TYPE } from "../905/355291";
 import { rH, nm, uN } from "../905/264101";
 import { Z } from "../905/854480";
 import { hasPasswordOrSSO, selectCurrentUser } from "../905/372672";
@@ -68,7 +68,7 @@ function R({
           }), jsx(Button, {
             onClick: () => {
               r();
-              i(N$());
+              i(showTwoFactorRecoveryModal());
             },
             children: renderI18nText("auth.two-factor-setup.recovery_codes")
           })]
@@ -250,5 +250,5 @@ export let $$D0 = registerModal(function (e) {
     open: e.open,
     onClose: e.onClose
   }) : null;
-}, qk, ModalSupportsBackground.YES);
+}, PHONE_SETUP_MODAL_TYPE, ModalSupportsBackground.YES);
 export const J = $$D0;

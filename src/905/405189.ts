@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { LoadingSpinner } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import o from "../vendor/241899";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { TrackingProvider } from "../figma_app/831799";
 import { formatLibraryContents } from "../figma_app/646357";
 import { getLibraryNames } from "../905/506188";
@@ -69,7 +69,7 @@ export function $$x0(e) {
           }) : jsx(MissingLibrariesHeader, {
             backToList: e.backToList,
             numMissingLibraries: e.libraryKeys.length
-          }), jsxs(P, {
+          }), jsxs(RecordingScrollContainer, {
             children: [x && jsx(LoadingSpinner, {}), !x && e.libraryKeys.map(e => {
               let t = o[e];
               if (!t) return;

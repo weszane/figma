@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from 'react';
 import { n as _$$n } from '../905/79930';
-import { Z } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { ServiceCategories } from '../905/165054';
 import { permissionScopeHandler } from '../905/189185';
 import { trackEventAnalytics } from '../905/449184';
@@ -737,7 +737,7 @@ export function $$R0() {
   let E = Xr(jE);
   let T = !!selectUserFlag('cursor_bot_v2_has_greeted_with_wave');
   let w = useContext(viewportNavigatorContext);
-  let S = Z();
+  let S = useNavigateToViewport();
   let j = useSelector(e => e.mirror.sceneGraph);
   let I = useDispatch();
   let {

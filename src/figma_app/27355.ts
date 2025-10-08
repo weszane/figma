@@ -43,7 +43,7 @@ export function createCustomReadWriteAtom<T>(atomLike: Atom<T> | { read: (get: a
  * @returns The current value of the atom, or a promise status if the value is a Promise.
  * @originalName $$S18
  */
-export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { deferToFrame?: boolean }): T | Error {
+export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { deferToFrame?: boolean }): T {
   const store = useStore()
   const [[, lastStore, lastAtom], trigger] = useReducer(
     (prev) => {
@@ -81,7 +81,7 @@ export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { de
     }
   }, [store, atomInstance, deferToFrame])
   useDebugValue(value)
-  return value instanceof Promise ? handlePromiseStatus(value as any) : value
+  return value instanceof Promise ? handlePromiseStatus(value as any)  : value
 }
 
 /**

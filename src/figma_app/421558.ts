@@ -80,7 +80,7 @@ import { T as _$$T3 } from "../figma_app/399971";
 import { I as _$$I2 } from "../figma_app/109163";
 import { buildUploadUrl } from "../figma_app/169182";
 import { WAFImage } from "../905/675859";
-import { Vi, _o, GI } from "../905/125333";
+import { brushStyleAtom, vectorPenStyleAtom, vectorPencilStyleAtom } from "../905/125333";
 import { defaultColorManipulator } from "../905/713722";
 import { getVisibleTheme } from "../905/640017";
 import { hv } from "../figma_app/544744";
@@ -175,13 +175,13 @@ let eG = {
       base: "92f2b3374d918fc841bbf84a2031fb4debf0323b",
       overlay: "38ecf2765b7c3950c1023a48341859c5c46d9aa7",
       Wash: eU,
-      atom: Vi
+      atom: brushStyleAtom
     },
     pen: {
       base: "088142be80f010c8d9778e7f186e795ab31a7ab0",
       overlay: "bd14345e2f74e9f687df0c5bf8d3d7566d8e8152",
       Wash: eB,
-      atom: _o
+      atom: vectorPenStyleAtom
     },
     pencil: {
       base: "61e4d7ec10ee7499173e60f8c8dff736ba736d0f",
@@ -201,7 +201,7 @@ let eG = {
           })
         });
       },
-      atom: GI
+      atom: vectorPencilStyleAtom
     }
   },
   light: {
@@ -209,13 +209,13 @@ let eG = {
       base: "5d3465d6480fb1e5bb638da3e5cc39fe692ad65b",
       overlay: "2f83cafd8d45624778a5070f02edfcb38c8aa8f1",
       Wash: eU,
-      atom: Vi
+      atom: brushStyleAtom
     },
     pen: {
       base: "d5d9cad647cd2f5267b6f0f2acab527b8b11c4e2",
       overlay: "66522e608abb68b211db911554eca95cbf046a27",
       Wash: eB,
-      atom: _o
+      atom: vectorPenStyleAtom
     },
     pencil: {
       base: "c173cee2845ae89ae2d5acbda78e1519c6a4cbc2",
@@ -235,7 +235,7 @@ let eG = {
           })
         });
       },
-      atom: GI
+      atom: vectorPencilStyleAtom
     }
   }
 };

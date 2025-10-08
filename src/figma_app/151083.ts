@@ -27,7 +27,7 @@ import { AX } from "../905/542608";
 import { $$et0 } from "../905/759609";
 import { jX } from "../905/255446";
 import { TM } from "../figma_app/435826";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { YW } from "../figma_app/778125";
 import { cB, jR } from "../figma_app/524618";
 import { $ } from "../905/330495";
@@ -209,7 +209,7 @@ export function $$z0({
   recordingKey: r,
   dropdownShown: i
 }) {
-  return e && null != e.current && i ? jsx(Cf, {
+  return e && null != e.current && i ? jsx(ConnectedPointingDropdown, {
     targetRect: e.current.getBoundingClientRect(),
     propagateCloseClick: !0,
     children: t.map((e, t) => "option" === e.type ? jsxs(c$, {

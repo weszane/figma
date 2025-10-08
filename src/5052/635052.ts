@@ -1,4 +1,4 @@
-import { sj, uf } from "../figma_app/728005";
+import { GET_CODE, GET_IMAGE } from "../figma_app/728005";
 import { permissionScopeHandler } from "../905/189185";
 import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -7,7 +7,7 @@ import { VisualBellActions } from "../905/302958";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { selectOpenFile } from "../figma_app/516028";
 import { O } from "../905/207358";
-import { iy } from "../figma_app/342355";
+import { getMcpSettingsExternal } from "../figma_app/342355";
 import { r as _$$r } from "../905/501976";
 let p = "[TEST] ";
 let h = "[Codegen] ";
@@ -33,11 +33,11 @@ async function b(e, t) {
       c.name = u;
     });
     let f = performance.now();
-    let p = await _$$r(sj, {
+    let p = await _$$r(GET_CODE, {
       nodeId: s.data.nodeId
     }, e);
     let b = performance.now() - f;
-    let N = await _$$r(uf, {
+    let N = await _$$r(GET_IMAGE, {
       nodeId: s.data.nodeId
     }, e);
     c.name !== i && permissionScopeHandler.system("bulk-record-mcp-tool-output", () => {
@@ -83,7 +83,7 @@ export async function $$y0(e) {
     backendGitCommit: getInitialOptions().release_server_git_commit,
     backendEnv: getInitialOptions().cluster_name
   };
-  let n = iy();
+  let n = getMcpSettingsExternal();
   let a = getSingletonSceneGraph().getCurrentPage().childrenNodes.filter(e => "SECTION" === e.type);
   let r = function (e, t) {
     let n = t.find(e => "Codebases" === e.name);

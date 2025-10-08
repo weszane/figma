@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { R as _$$R } from "../figma_app/313269";
 import { c$ } from "../figma_app/236327";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { JZ } from "../figma_app/696043";
@@ -15,7 +15,7 @@ import { showModalHandler, popModalStack } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { useLocalPluginsExcludingWidgets, useUserPublishedWidgets } from "../figma_app/844435";
 import { isResourcePaymentFailed } from "../figma_app/86989";
-import { j as _$$j } from "../905/813868";
+import { createWidget } from "../905/813868";
 import { gR } from "../figma_app/120210";
 import { useDropdownState } from "../905/848862";
 import { Kx } from "../figma_app/546509";
@@ -25,9 +25,9 @@ import { Vq } from "../figma_app/979658";
 import { HubTypeEnum, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r as _$$r } from "../905/319631";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { f as _$$f } from "../figma_app/58113";
-import { cu } from "../figma_app/439332";
+import { PaymentSection } from "../figma_app/439332";
 import { mS, zD } from "../figma_app/293326";
 import { L as _$$L } from "../figma_app/520315";
 import { cX, s3 } from "../figma_app/920333";
@@ -72,11 +72,11 @@ export function $$G2(e) {
       resourceType: HubTypeEnum.WIDGET,
       editorType: "figjam"
     },
-    children: [jsx(_$$P, {
+    children: [jsx(RecordingScrollContainer, {
       height: mS(t.pinned, 500, s3, zD),
       children: jsxs("div", {
         className: tJ,
-        children: [m && jsx(cu, {}), jsx("img", {
+        children: [m && jsx(PaymentSection, {}), jsx("img", {
           className: d()(VM, Mp),
           src: Z.redirect_cover_image_url || "",
           alt: `${Z.name}`,
@@ -105,7 +105,7 @@ export function $$G2(e) {
         svg: _$$A,
         className: JX
       }), renderI18nText("whiteboard.inserts.see_more_details_in_community")]
-    }), K && z && jsxs(Cf, {
+    }), K && z && jsxs(ConnectedPointingDropdown, {
       targetRect: z,
       lean: "left",
       minWidth: 120,
@@ -133,7 +133,7 @@ export function $$G2(e) {
         children: renderI18nText("whiteboard.inserts.in_development_version_error_dropdown")
       }) : jsx(c$, {
         onClick: () => {
-          _$$j({
+          createWidget({
             pluginID: Z.plugin_id,
             widgetName: Z.name,
             pluginVersionID: "",
@@ -144,7 +144,7 @@ export function $$G2(e) {
         children: renderI18nText("whiteboard.inserts.in_development_version_dropdown")
       }), jsx(c$, {
         onClick: () => {
-          _$$j({
+          createWidget({
             pluginID: Z.plugin_id,
             widgetName: Z.name,
             pluginVersionID: Z.id,

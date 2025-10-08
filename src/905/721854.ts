@@ -12,7 +12,7 @@ import { setupHyperlinkHandler } from "../figma_app/815170";
 import { useSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { Yh } from "../figma_app/357047";
 import { Bf } from "../figma_app/249941";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { ID, aK } from "../905/487011";
 import { AIActionInstructionType, AIActionInstructionTrigger } from "../905/278499";
 import { ActionButton } from "../905/189361";
@@ -26,7 +26,7 @@ function E({
 }) {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let h = useDispatch();
   let g = useCallback(t => {
     e && ID({
@@ -93,7 +93,7 @@ export function $$x0({
   let P = useSelector(t => Yh(t.mirror.appModel, e));
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let D = useCallback(() => {
     m && ID({
       ...m,

@@ -12,7 +12,7 @@ import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { selectCurrentUser } from "../905/372672";
 import { LibraryAgeEnum } from "../figma_app/633080";
 import { n as _$$n } from "../905/402643";
-import { R as _$$R } from "../905/697254";
+import { OverviewCategory } from "../905/697254";
 import { h as _$$h } from "../905/589458";
 import { useUniqueId } from "../905/27228";
 let b = "dsa_file_view_tabs--dropdownIcon--NdB8e";
@@ -30,10 +30,10 @@ let x = {
   [_$$n.VARIABLES]: renderI18nText("design_systems.libraries_modal.variables")
 };
 let $$S = {
-  [_$$R.OVERVIEW]: renderI18nText("design_systems.libraries_modal.overview"),
-  [_$$R.ANALYTICS]: renderI18nText("design_systems.libraries_modal.analytics")
+  [OverviewCategory.OVERVIEW]: renderI18nText("design_systems.libraries_modal.overview"),
+  [OverviewCategory.ANALYTICS]: renderI18nText("design_systems.libraries_modal.analytics")
 };
-let w = [_$$R.OVERVIEW, _$$R.ANALYTICS];
+let w = [OverviewCategory.OVERVIEW, OverviewCategory.ANALYTICS];
 let C = [LibraryAgeEnum.THIRTY_DAYS, LibraryAgeEnum.SIXTY_DAYS, LibraryAgeEnum.NINETY_DAYS, LibraryAgeEnum.YEAR];
 let T = [_$$n.PRODUCT_COMPONENTS, _$$n.STYLES, _$$n.VARIABLES];
 let $$k0 = memo(({
@@ -108,10 +108,10 @@ let $$k0 = memo(({
         manager: N,
         children: [jsx(Tabs.Tab, {
           ...R.overview,
-          children: $$S[_$$R.OVERVIEW]
+          children: $$S[OverviewCategory.OVERVIEW]
         }), jsx(Tabs.Tab, {
           ...R.analytics,
-          children: $$S[_$$R.ANALYTICS]
+          children: $$S[OverviewCategory.ANALYTICS]
         })]
       }), "analytics" === N.activeTab && jsxs("div", {
         className: "dsa_file_view_tabs--dsaDropdowns--NtcWF",
@@ -135,11 +135,11 @@ let $$k0 = memo(({
         children: w.map(e => jsx("span", {
           className: f === e ? "dsa_file_view_tabs--fileViewTabActive--l63XH dsa_file_view_tabs--fileViewTab--NlEoB text--fontPos11--2LvXf text--_fontBase--QdLsd" : "dsa_file_view_tabs--fileViewTab--NlEoB text--fontPos11--2LvXf text--_fontBase--QdLsd",
           onClick: () => t(e),
-          "data-new-view-shown": _$$R.OVERVIEW,
+          "data-new-view-shown": OverviewCategory.OVERVIEW,
           role: "tab",
           children: $$S[e]
         }, e))
-      }), f === _$$R.ANALYTICS && jsxs("div", {
+      }), f === OverviewCategory.ANALYTICS && jsxs("div", {
         className: "dsa_file_view_tabs--dropdownContainer--arqSQ",
         children: [getFeatureFlags().dsa_styles_variables_ui && jsxs("div", {
           className: "dsa_file_view_tabs--assetTypeContainer--RUGf8 dsa_file_view_tabs--durationContainer--OyAkr",

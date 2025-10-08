@@ -16,7 +16,7 @@ import { u as _$$u } from "../figma_app/9104";
 import { K as _$$K } from "../figma_app/231130";
 import { _7 } from "../figma_app/150804";
 import { Xz } from "../figma_app/781981";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 export function $$I1() {
   let {
     containingStateGroupDescription,
@@ -38,8 +38,8 @@ export function $$S2(e) {
   let a = h$(e ?? r);
   let o = v();
   let d = useMemo(() => ({
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.DIALOG_TRIGGER_BUTTON,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.DIALOG_TRIGGER_BUTTON,
     onClick: a,
     icon: jsx(A, {}),
     isSelected: pickerShown?.id === Wv,

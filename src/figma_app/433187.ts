@@ -8,7 +8,7 @@ import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { getBasicViewportRect } from "../figma_app/62612";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { Xr, qN, Fb } from "../905/235109";
 export let $$m0 = "customElements" in window;
 function g(e) {
@@ -76,7 +76,7 @@ export let $$f1 = memo(e => {
   return jsx("div", {
     className: E,
     onMouseDown: m,
-    children: jsx(Cf, {
+    children: jsx(ConnectedPointingDropdown, {
       autofocusPrevOnDismount: !0,
       className: qN,
       disableDropdownScrollContainer: !0,
@@ -86,7 +86,7 @@ export let $$f1 = memo(e => {
       minWidth: 334,
       propagateCloseClick: !0,
       targetRect,
-      type: it.MATCH_BACKGROUND,
+      type: DropdownType.MATCH_BACKGROUND,
       children: jsx("div", {
         className: `${Fb} ${Dm}`,
         onClick: e => {

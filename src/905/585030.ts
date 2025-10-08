@@ -1,27 +1,27 @@
-import { useState, useRef, useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories } from "../905/165054";
-import { GitReferenceType, DiffImpl, MergeStatus, PreviewStage, UndoActionStatus, StateTransitionResult, PluginModalType, AutosaveEventType } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
+import { ServiceCategories } from "../905/165054";
+import { abandonBranchingChanges, enterPreviewDetachedState } from "../905/346794";
+import { fetchStyleAndLibraryKeysForChunks } from "../905/432493";
+import { trackEventAnalytics } from "../905/449184";
+import { mapDirectionToGitReferenceType, revokeAllObjectUrls } from "../905/491806";
+import { CPPEventType, SourceDirection } from "../905/535806";
+import { getFeatureFlags } from "../905/601108";
 import { logInfo } from "../905/714362";
+import { FT, ss } from "../905/746499";
+import { getDiffVersion, handleError, handleModalError } from "../905/760074";
+import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { generateUUIDv4 } from "../905/871474";
 import { sendWithRetry } from "../905/910117";
-import { rY, XA } from "../905/985490";
-import { handleModalError, handleError, getDiffVersion } from "../905/760074";
-import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
-import { getImageManager } from "../figma_app/624361";
-import { subscribeToContainingPages } from "../figma_app/582924";
-import { enterPreviewDetachedState, abandonBranchingChanges } from "../905/346794";
-import { Z_, yQ } from "../figma_app/793953";
-import { tG } from "../figma_app/723183";
-import { Qx, SN } from "../905/491806";
-import { CPPEventType, SourceDirection } from "../905/535806";
+import { DiffManager, DiffError } from "../905/985490";
 import { createNoOpValidator } from "../figma_app/181241";
-import { FT, ss } from "../905/746499";
-import { mT } from "../905/432493";
+import { throwTypeError } from "../figma_app/465776";
+import { subscribeToContainingPages } from "../figma_app/582924";
+import { getImageManager } from "../figma_app/624361";
+import { tG } from "../figma_app/723183";
+import { AutosaveEventType, DiffImpl, GitReferenceType, MergeStatus, PluginModalType, PreviewStage, StateTransitionResult, UndoActionStatus } from "../figma_app/763686";
+import { yQ, Z_ } from "../figma_app/793953";
 let S = new class {
   constructor() {
     this.FigDiffMinimizeAnalysisValidator = createNoOpValidator();
@@ -37,7 +37,7 @@ async function T(e, t) {
   let {
     imageShas,
     videoShas
-  } = rY.getExternalMediaFromDiff(e);
+  } = DiffManager.getExternalMediaFromDiff(e);
   let a = getImageManager();
   switch (e) {
     case GitReferenceType.SOURCE:
@@ -47,7 +47,7 @@ async function T(e, t) {
       i = t.branchKey;
       break;
     case GitReferenceType.COMPARE:
-      throw Error("Unexpected DiffType: COMPARE");
+      throw new Error("Unexpected DiffType: COMPARE");
   }
   await a.recordImages(i, imageShas);
   let s = tG();
@@ -59,16 +59,16 @@ export function $$k6() {
     let t;
     switch (e) {
       case MergeStatus.INTERNAL_ERROR:
-        t = Error("Error recreating branch point: internal error");
+        t = new Error("Error recreating branch point: internal error");
         break;
       case MergeStatus.MISSING_BACKING_SYMBOL:
-        t = Error("Error recreating branch point: missing backing symbol");
+        t = new Error("Error recreating branch point: missing backing symbol");
         break;
       case MergeStatus.NO_MERGE_IN_PROGRESS:
-        t = Error("Error recreating branch point: no merge in progress");
+        t = new Error("Error recreating branch point: no merge in progress");
         break;
       case MergeStatus.VERSION_MISMATCH:
-        t = Error("Error recreating branch point: version mismatch");
+        t = new Error("Error recreating branch point: version mismatch");
         break;
       default:
         throwTypeError(e);
@@ -83,16 +83,16 @@ export function $$R5(e, t = PreviewStage.PREVIEW) {
     let e;
     switch (i) {
       case MergeStatus.MISSING_BACKING_SYMBOL:
-        e = new XA("Error merging diff: missing backing symbols for diff");
+        e = new DiffError("Error merging diff: missing backing symbols for diff");
         break;
       case MergeStatus.INTERNAL_ERROR:
-        e = Error("Error merging diff: Unknown merge error");
+        e = new Error("Error merging diff: Unknown merge error");
         break;
       case MergeStatus.NO_MERGE_IN_PROGRESS:
-        e = Error("Error merging diff: No merge in progress");
+        e = new Error("Error merging diff: No merge in progress");
         break;
       case MergeStatus.VERSION_MISMATCH:
-        e = Error("Error merging diff: Version mismatch");
+        e = new Error("Error merging diff: Version mismatch");
         break;
       default:
         throwTypeError(i);
@@ -107,13 +107,13 @@ export function $$N7() {
     let t;
     switch (e) {
       case UndoActionStatus.INTERNAL_ERROR:
-        t = Error("Error unapplying chunks: internal error");
+        t = new Error("Error unapplying chunks: internal error");
         break;
       case UndoActionStatus.NO_MERGE_IN_PROGRESS:
-        t = Error("Error unapplying chunks: no merge in progress");
+        t = new Error("Error unapplying chunks: no merge in progress");
         break;
       case UndoActionStatus.UNABLE_TO_UNDO_CHANGES:
-        t = Error("Error unapplying chunks: unable to undo changes");
+        t = new Error("Error unapplying chunks: unable to undo changes");
         break;
       default:
         throwTypeError(e);
@@ -128,16 +128,16 @@ export function $$P3(e, t, i = PreviewStage.PREVIEW) {
     let e;
     switch (n) {
       case StateTransitionResult.INVALID_STATE_TRANSITION:
-        e = new rY.InvalidStateTransitionError("Error applying chunks: invalid state transition");
+        e = new DiffManager.InvalidStateTransitionError("Error applying chunks: invalid state transition");
         break;
       case StateTransitionResult.INTERNAL_ERROR:
-        e = Error("Error applying chunks: internal error");
+        e = new Error("Error applying chunks: internal error");
         break;
       case StateTransitionResult.NO_MERGE_IN_PROGRESS:
-        e = Error("Error applying chunks: no merge in progress");
+        e = new Error("Error applying chunks: no merge in progress");
         break;
       case StateTransitionResult.INVALID_INDEX:
-        e = Error("Error applying chunks: invalid index");
+        e = new Error("Error applying chunks: invalid index");
         break;
       default:
         throwTypeError(n);
@@ -161,7 +161,7 @@ let D = async (e, t, i, n, r) => {
       d = SourceDirection.TO_SOURCE;
       break;
     case GitReferenceType.COMPARE:
-      throw Error("Unexpected DiffType: COMPARE");
+      throw new Error("Unexpected DiffType: COMPARE");
     default:
       throwTypeError(i);
   }
@@ -195,7 +195,7 @@ let F = async (e, t, i, n, r, a) => {
   let s = performance.now();
   let l = await D(e, t, i, n, r);
   let d = await L(l.signed_url);
-  rY.trackGranularLoadTime({
+  DiffManager.trackGranularLoadTime({
     branchKey: t,
     sourceKey: e,
     durationMs: performance.now() - s,
@@ -215,7 +215,7 @@ let M = (e, t, i) => {
     sourceKey,
     branchModalTrackingId
   } = i;
-  let o = rY.setDiff(e, t, sourceKey, branchKey, branchModalTrackingId);
+  let o = DiffManager.setDiff(e, t, sourceKey, branchKey, branchModalTrackingId);
   let l = Z_();
   let d = yQ(n, l);
   FT({
@@ -232,11 +232,11 @@ let M = (e, t, i) => {
   });
 };
 let j = async (e, t, i, n) => {
-  let r = rY.getDisplayGroups(e, n);
+  let r = DiffManager.getDisplayGroups(e, n);
   let {
     styleKeyToLibraryKey,
     styleKeyToFileKey
-  } = await mT(r, t, i);
+  } = await fetchStyleAndLibraryKeysForChunks(r, t, i);
   return {
     displayGroups: r,
     styleKeyToFileKey,
@@ -246,7 +246,7 @@ let j = async (e, t, i, n) => {
 let U = e => {
   let t = performance.now();
   return handleLoadAllPagesWithVersionCheck(PluginModalType.BRANCHING_MODAL_OPEN).then(() => {
-    rY.trackGranularLoadTime({
+    DiffManager.trackGranularLoadTime({
       durationMs: performance.now() - t,
       functionName: "waitForPagesToLoad",
       ...e
@@ -256,7 +256,7 @@ let U = e => {
 export async function $$B10(e, t, i) {
   let n = performance.now();
   await subscribeToContainingPages(e, t);
-  rY.trackGranularLoadTime({
+  DiffManager.trackGranularLoadTime({
     durationMs: performance.now() - n,
     functionName: "waitForContainingPagesToLoad",
     ...i
@@ -272,7 +272,7 @@ export function $$V8(e, t, i, a, s, l, d, c) {
   let x = useRef(0);
   let S = useContext(ss);
   useEffect(() => {
-    x.current > 0 && (m(null), f(null), A(null), v(null), E(null), rY.clearDiffs());
+    x.current > 0 && (m(null), f(null), A(null), v(null), E(null), DiffManager.clearDiffs());
     x.current += 1;
     let n = x.current;
     if (!s) return;
@@ -327,7 +327,7 @@ export function $$G9(e, t, i, a, s, l, d) {
   let I = useRef(0);
   let E = useContext(ss);
   useEffect(() => {
-    I.current > 0 && (p(null), g(null), _(null), y(null), v(null), rY.clearDiffs());
+    I.current > 0 && (p(null), g(null), _(null), y(null), v(null), DiffManager.clearDiffs());
     I.current += 1;
     let n = I.current;
     if (s) {
@@ -344,11 +344,13 @@ export function $$G9(e, t, i, a, s, l, d) {
         if (I.current !== n) return;
         p(r);
         M(e, a, s);
-        let d = rY.getAllGuids(e, s.branchModalTrackingId);
+        let d = DiffManager.getAllGuids(e, s.branchModalTrackingId);
         if (await $$B10(d, AutosaveEventType.BRANCHING_MODAL_OPEN, {
           ...s,
           diffType: GitReferenceType[e]
-        }), I.current !== n) return;
+        }), I.current !== n) {
+          return;
+        }
         let {
           displayGroups,
           styleKeyToFileKey,
@@ -386,7 +388,7 @@ export class $$z0 {
     });
   }
   commitEnd(e, t) {
-    if (null === this.startTime) return;
+    if (this.startTime === null) return;
     let i = {};
     e && (i = {
       mergeRequestId: e.id,
@@ -404,7 +406,7 @@ export class $$z0 {
     });
   }
   commitSynced(e) {
-    null !== this.startTime && trackEventAnalytics("Branch Apply Changes Synced", {
+    this.startTime !== null && trackEventAnalytics("Branch Apply Changes Synced", {
       ...this.commonTrackingProps,
       durationMs: Date.now() - this.startTime,
       ...(e ? {
@@ -421,7 +423,7 @@ export class $$z0 {
       direction: this.context.mergeParams.direction,
       sourceFileKey: this.context.mergeParams.sourceKey,
       fileRepoId: this.context.file.file_repo_id,
-      isConflictResolution: null != this.context.conflictResolutionDetails,
+      isConflictResolution: this.context.conflictResolutionDetails != null,
       branchPickGroupsSize: this.context.conflictResolutionDetails?.branchPickGroups || 0,
       mainPickGroupsSize: this.context.conflictResolutionDetails?.mainPickGroups || 0,
       isReliableMerge: !0,
@@ -445,8 +447,8 @@ export async function $$W2(e, t, i, n = null, r = null) {
     direction,
     branchKey
   } = e;
-  let l = Qx(direction);
-  if (null === t) return;
+  let l = mapDirectionToGitReferenceType(direction);
+  if (t === null) return;
   n?.commitStart();
   let d = T(l, e);
   DiffImpl.uploadImages();
@@ -458,7 +460,7 @@ export async function $$W2(e, t, i, n = null, r = null) {
 }
 export async function $$K1() {
   await abandonBranchingChanges();
-  SN();
+  revokeAllObjectUrls();
 }
 export const FK = $$z0;
 export const ds = $$K1;

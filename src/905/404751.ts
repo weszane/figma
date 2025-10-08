@@ -8,11 +8,11 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { v as _$$v } from "../905/556792";
 import { createOptimistThunk } from "../905/350402";
-import { Cy } from "../905/844322";
+import { handleMoveFiles } from "../905/844322";
 import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { consumptionPaywallUtils } from "../905/224";
-import { mE } from "../905/561087";
+import { moveRepositoriesThunk } from "../905/561087";
 import { isTeamFolder, isTeamFolderV2, hasRootPathOptional } from "../figma_app/528509";
 import { FPermissionDenialReason, FFileType } from "../figma_app/191312";
 import { RepoCanMove, RepoCanMoveWithReasons, FileCanMoveWithReasons } from "../figma_app/43951";
@@ -100,13 +100,13 @@ let P = registerModal(function (e) {
 let U = (e, t) => e.find(e => getProductAccessTypeOrDefault(e.editor_type) === t)?.key ?? null;
 let B = (e, t, i, n) => {
   let r = i.length + (n ? n.length : 0) > 1;
-  i.length > 0 && t.dispatch(Cy({
+  i.length > 0 && t.dispatch(handleMoveFiles({
     files: i,
     folderName: e.folder.path,
     folderId: e.folder.id,
     isMultiMove: r
   }));
-  n && n.length > 0 && t.dispatch(mE({
+  n && n.length > 0 && t.dispatch(moveRepositoriesThunk({
     repos: n,
     folderId: e.folder.id,
     folderName: e.folder.path,
@@ -142,7 +142,7 @@ let V = (e, t, i, n, r) => {
 };
 let G = async (e, t, i, n, r) => {
   let a = i.length + (n ? n.length : 0) > 1;
-  i.length > 0 && (await t.dispatch(Cy({
+  i.length > 0 && (await t.dispatch(handleMoveFiles({
     files: i,
     folderId: r.id,
     folderName: r.path,
@@ -151,7 +151,7 @@ let G = async (e, t, i, n, r) => {
     isMultiMove: a,
     restoreFiles: e.restoreFiles
   })));
-  n && n.length > 0 && (await t.dispatch(mE({
+  n && n.length > 0 && (await t.dispatch(moveRepositoriesThunk({
     repos: n,
     folderId: r.id,
     fromFileModal: e.fromFileModal,

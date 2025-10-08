@@ -34,8 +34,8 @@ import { QU } from "../1250/559338";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { NotificationCategory } from "../905/170564";
 import { notificationActions } from "../905/463586";
-import { E as _$$E } from "../905/95280";
-import { Z as _$$Z } from "../905/104740";
+import { useCompareChangesHandler } from "../905/95280";
+import { useNavigateToViewport } from "../905/104740";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { KindEnum } from "../905/129884";
 import { K0 } from "../figma_app/778125";
@@ -162,8 +162,8 @@ function V() {
   let t = useSelector(e => !!e.modalShown);
   let s = useSelector(e => e.versionHistory.compareId);
   let i = HistoryChangesBindings.getChunkChangeCount();
-  let o = _$$Z("chunk_change_navigator_navigate");
-  let l = _$$E();
+  let o = useNavigateToViewport("chunk_change_navigator_navigate");
+  let l = useCompareChangesHandler();
   let d = useCallback(e => {
     SceneGraphHelpers.setSelectedNodeAndCanvas(e, !0);
     o(computeFullscreenViewportForNode({

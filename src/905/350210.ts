@@ -10,7 +10,7 @@ import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { useDropdownState } from "../905/848862";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { A as _$$A2 } from "../905/972270";
 import { A as _$$A3 } from "../6828/814452";
 function A({
@@ -81,7 +81,7 @@ function y({
   ariaLabelledBy: d
 }) {
   let c = r.current?.getBoundingClientRect();
-  return c ? jsx(Cf, {
+  return c ? jsx(ConnectedPointingDropdown, {
     "aria-labelledby": d,
     autofocusPrevOnDismount: !0,
     dataTestId: "publishing-metadata-author-select",
@@ -91,7 +91,7 @@ function y({
     propagateCloseClick: !0,
     showPoint: !1,
     targetRect: c,
-    type: it.MATCH_BACKGROUND,
+    type: DropdownType.MATCH_BACKGROUND,
     children: e.sort(t).map(e => jsx(c$, {
       id: a(e),
       className: "publishing_metadata_author_select_ui3--singleOption--ygwXK",

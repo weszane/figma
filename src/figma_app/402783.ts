@@ -16,7 +16,7 @@ import { J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
 import { zp } from "../figma_app/847014";
 import { setSummarizedAt, setSummaryItems } from "../figma_app/274571";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { D } from "../905/347702";
@@ -133,7 +133,7 @@ async function R({
 export function $$L0(e, t = !0, r) {
   let [o] = useState(getSingletonSceneGraph());
   let [l, p] = useState(!1);
-  let _ = Z("figjam_summary_navigate");
+  let _ = useNavigateToViewport("figjam_summary_navigate");
   let h = um();
   let {
     Sprig

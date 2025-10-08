@@ -16,6 +16,9 @@ declare global {
   let TaskController = TaskControllerPrority
   type Dispatch = (action: any) => any
   interface Window {
+    mountTime: any
+    arkoseResult: any
+    arkose: any
     webGLTestResult: any
     Module: {
       wasmBinaryFile: any

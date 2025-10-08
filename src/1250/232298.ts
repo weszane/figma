@@ -13,7 +13,7 @@ import { getUserId } from "../905/372672";
 import { N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
-import { hxO } from "../figma_app/6204";
+import { JapaneseLaunchAnnouncementMachine } from "../figma_app/6204";
 let x = 443 == require.j ? 864e5 : null;
 let y = () => Date.now() - x;
 let v = "seen_japanese_launch_announcement";
@@ -24,7 +24,7 @@ export function $$T0() {
   let n = useAtomWithSubscription(mp);
   let m = useAtomWithSubscription(w);
   let x = _$$e({
-    overlay: hxO,
+    overlay: JapaneseLaunchAnnouncementMachine,
     priority: N.DEFAULT_MODAL
   }, [n, m]);
   useSingleEffect(() => {

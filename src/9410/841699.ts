@@ -18,7 +18,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { nT, o5 } from "../figma_app/433401";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { xjb } from "../figma_app/6204";
+import { DevModeOverviewOnboardingOverlay } from "../figma_app/6204";
 import { showDropdownThunk } from "../905/929976";
 import { bx } from "../figma_app/8833";
 import { isWhiteboardFileType } from "../figma_app/976749";
@@ -41,7 +41,7 @@ function w({
     isShowing,
     complete
   } = _$$e({
-    overlay: xjb,
+    overlay: DevModeOverviewOnboardingOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   useSingleEffect(() => {

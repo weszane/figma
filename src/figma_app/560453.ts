@@ -28,7 +28,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { useIsLoading } from "../905/18797";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Sh } from "../figma_app/803787";
-import { l as _$$l } from "../905/202425";
+import { getSelectedItemTypes } from "../905/202425";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
 import { I as _$$I } from "../figma_app/130633";
@@ -39,7 +39,7 @@ import { eH as _$$eH, Nv } from "../figma_app/318590";
 import { shouldHideRecents } from "../figma_app/144974";
 import { JT } from "../figma_app/632248";
 import { WP, TC, B1, kN } from "../905/198599";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { _M } from "../905/487011";
 import { $L } from "../figma_app/737746";
 import { Ev } from "../figma_app/297822";
@@ -78,7 +78,7 @@ export function $$ef1({
   let l = useAtomWithSubscription(hO.currentCommunitySearchAtom);
   let {
     push
-  } = cq();
+  } = useNavigationStack();
   let f = useAtomWithSubscription(dd);
   let b = useIsLoading(fi);
   let I = g5(FDocumentType.Design).productComponents;
@@ -114,7 +114,7 @@ export function $$ef1({
   }, [x]);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let {
     libraries,
     presets,
@@ -122,7 +122,7 @@ export function $$ef1({
   } = _$$g2();
   let et = useCurrentFileKey();
   let er = useAtomWithSubscription(Rt);
-  let ei = useSelector(_$$l);
+  let ei = useSelector(getSelectedItemTypes);
   let ea = useAtomWithSubscription(Sh);
   let ep = useAtomWithSubscription(Lk);
   let e_ = !ea && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
@@ -377,7 +377,7 @@ export function $$eE0({
   });
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let {
     libraries,
     presets,
@@ -449,7 +449,7 @@ export function $$eE0({
   }) {
     let n = useAtomWithSubscription(dd);
     let s = useAtomWithSubscription(Rt);
-    let o = useSelector(_$$l);
+    let o = useSelector(getSelectedItemTypes);
     let {
       query,
       queryId,

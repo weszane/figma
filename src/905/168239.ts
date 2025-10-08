@@ -15,7 +15,7 @@ import { e } from "../905/621515";
 import { N as _$$N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { PositioningStrategy } from "../905/858282";
-import { hoH } from "../figma_app/6204";
+import { OrgAdminBillingGroupsSecondaryTabOnboardingOverlay } from "../figma_app/6204";
 import { selectViewAction } from "../905/929976";
 import { b as _$$b } from "../905/388233";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
@@ -33,7 +33,7 @@ function I() {
     show,
     complete
   } = e({
-    overlay: hoH,
+    overlay: OrgAdminBillingGroupsSecondaryTabOnboardingOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   useSingleEffect(() => {

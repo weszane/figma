@@ -1,6 +1,6 @@
 import { N } from "../figma_app/268271";
-import { rRT, TaD, Clh, Msu, LPt } from "../figma_app/6204";
-let r = [rRT, TaD, Clh, Msu, LPt];
+import { AdminNavigationOnboardingOverlay, AdminDashboardOnboardingOverlay, AdminSeatApprovalSettingsOnboardingOverlay, EnterpriseOrgAdminOnboarding, TeamAdminManageUnassignedDraftsOverlay } from "../figma_app/6204";
+let r = [AdminNavigationOnboardingOverlay, AdminDashboardOnboardingOverlay, AdminSeatApprovalSettingsOnboardingOverlay, EnterpriseOrgAdminOnboarding, TeamAdminManageUnassignedDraftsOverlay];
 export function $$i0(e) {
   let t = r.indexOf(e);
   if (-1 === t) {

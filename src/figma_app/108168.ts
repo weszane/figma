@@ -23,7 +23,7 @@ import { KindEnum } from "../905/129884";
 import { Yh, TY, c1 } from "../figma_app/357047";
 import { c as _$$c } from "../figma_app/740884";
 import { oO } from "../figma_app/467440";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { TT } from "../905/114390";
 import { MR, $0 } from "../figma_app/336720";
 import { Zk, HK } from "../figma_app/29089";
@@ -287,7 +287,7 @@ function H(e) {
   let r = useAtomWithSubscription(oO);
   if (!t || !t.data?.targetRect) return jsx(Fragment, {});
   let i = e.item.flyoutShowItemIcons || void 0 === e.item.flyoutShowItemIcons;
-  return jsx(Cf, {
+  return jsx(ConnectedPointingDropdown, {
     targetRect: "prototype-view-flyout" === e.item.name ? {
       top: t.data.targetRect.top,
       right: t.data.targetRect.right,
@@ -300,7 +300,7 @@ function H(e) {
     showPoint: !1,
     propagateCloseClick: !0,
     orientation: e.item.largeDisplayMode ? "horizontal" : "vertical",
-    type: e.item.largeDisplayMode ? it.MATCH_BACKGROUND : it.DEFAULT,
+    type: e.item.largeDisplayMode ? DropdownType.MATCH_BACKGROUND : DropdownType.DEFAULT,
     footer: e.item.footer,
     children: t.data?.items && t.data.items.map((t, a) => HK(t) ? jsx(wv, {}, a) : e.item.largeDisplayMode ? jsx(K, {
       item: t,

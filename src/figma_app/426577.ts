@@ -10,7 +10,7 @@ import { DesignGraphElements } from "../figma_app/763686";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getFilteredFeatureFlags } from "../905/717445";
-import { _o } from "../905/125333";
+import { vectorPenStyleAtom } from "../905/125333";
 import { a as _$$a } from "../905/847494";
 import { N as _$$N2 } from "../figma_app/176280";
 import { C as _$$C } from "../figma_app/938538";
@@ -30,9 +30,9 @@ import { e as _$$e } from "../905/621515";
 import { selectUserFlag } from "../905/940356";
 import { N as _$$N3 } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
-import { yc_, PXv } from "../figma_app/6204";
+import { DrawVariableWidthStrokeOnboarding, DrawSecondaryToolbeltOnboarding } from "../figma_app/6204";
 import { buildUploadUrl } from "../figma_app/169182";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { ImageOverlayComponent } from "../905/129046";
 let a = memo(function (e) {
   return jsx("svg", {
@@ -68,7 +68,7 @@ function V(e) {
     complete,
     uniqueId
   } = _$$e({
-    overlay: yc_,
+    overlay: DrawVariableWidthStrokeOnboarding,
     priority: _$$N3.DEFAULT_MODAL
   });
   let s = (getFeatureFlags().ce_il_var_width_onboarding ?? !1) && !e.isVarWidthPointDisabled;
@@ -78,7 +78,7 @@ function V(e) {
       canShow: () => s && !!o?.createdAt
     });
   });
-  _$$E(uniqueId, G, () => {
+  useEventForwarder(uniqueId, G, () => {
     show({
       canShow: () => s
     });
@@ -120,7 +120,7 @@ function H() {
     isShowing,
     complete
   } = _$$e({
-    overlay: PXv,
+    overlay: DrawSecondaryToolbeltOnboarding,
     priority: _$$N3.DEFAULT_MODAL
   });
   useSingleEffect(() => {
@@ -280,7 +280,7 @@ export function $$z0({
     ariaLabel: O ? getI18nString("fullscreen.toolbar.aria-label-pen") : getI18nString("fullscreen.toolbar.vector_editing_aria_label"),
     children: [O && !w && e === DesignGraphElements.VECTOR_PEN && jsxs(Fragment, {
       children: [jsx(_$$c, {
-        atom: _o
+        atom: vectorPenStyleAtom
       }), jsx(X, {})]
     }), getFilteredFeatureFlags().ce_il_root ? K : W, jsx(_$$C, {
       icon: jsx(_$$A, {}),

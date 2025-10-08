@@ -14,7 +14,7 @@ import { KeyCodes } from "../905/63728";
 import { APILoadingStatus } from "../905/520829";
 import { loadSharedSymbolOrStateGroup, loadSharedStyle } from "../figma_app/933328";
 import { compareWithGeneratedKey } from "../905/709171";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { selectOpenFileKey } from "../figma_app/516028";
@@ -82,7 +82,7 @@ function L(e) {
   };
 }
 export function $$F1(e) {
-  let t = Z("update_instance_navigate");
+  let t = useNavigateToViewport("update_instance_navigate");
   let i = $$H4(e);
   let {
     componentUpdatesForAllPages,

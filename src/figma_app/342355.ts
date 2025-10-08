@@ -1,66 +1,98 @@
-import { getFeatureFlags } from "../905/601108";
-import { createLocalStorageAtom, atomStoreManager, setupAtomWithMount, atom } from "../figma_app/27355";
-import { desktopAPIInstance } from "../figma_app/876459";
-let $$s11 = createLocalStorageAtom("dev-mode-mcp-get-code-connect-tools-enabled", !0, {
-  subscribeToChanges: !0
-});
-let $$o5 = createLocalStorageAtom("dev-mode-mcp-codebase-suggestions-enabled", !1, {
-  subscribeToChanges: !0
-});
-let $$l2 = () => atomStoreManager.get($$o5) && getFeatureFlags().dt_my_cool_plugin_codebase_suggestions;
-let $$d1 = createLocalStorageAtom("dev-mode-mcp-get-code-options", "design_to_react", {
-  subscribeToChanges: !0
-});
-let c = createLocalStorageAtom("dev-mode-mcp-image-options", desktopAPIInstance?.hasFeature("addMcpImageSupport") ? "local" : "placeholder-svg", {
-  subscribeToChanges: !0
-});
-let $$u9 = setupAtomWithMount(c, ({
-  onSet: e
+import { getFeatureFlags } from "../905/601108"
+import { atom, atomStoreManager, createLocalStorageAtom, setupAtomWithMount } from "../figma_app/27355"
+import { desktopAPIInstance } from "../figma_app/876459"
+
+// Feature flag atoms for MCP (Multi-Client Platform) development mode settings
+export const codeConnectToolsEnabledAtom = createLocalStorageAtom("dev-mode-mcp-get-code-connect-tools-enabled", true, {
+  subscribeToChanges: true,
+})
+
+export const codebaseSuggestionsEnabledAtom = createLocalStorageAtom("dev-mode-mcp-codebase-suggestions-enabled", false, {
+  subscribeToChanges: true,
+})
+
+// Check if codebase suggestions are enabled based on atom value and feature flag
+export function isCodebaseSuggestionsEnabled(): boolean {
+  return atomStoreManager.get(codebaseSuggestionsEnabledAtom) && getFeatureFlags().dt_my_cool_plugin_codebase_suggestions
+}
+
+export const codeOptionsAtom = createLocalStorageAtom("dev-mode-mcp-get-code-options", "design_to_react", {
+  subscribeToChanges: true,
+})
+
+export const imageOptionsAtom = createLocalStorageAtom(
+  "dev-mode-mcp-image-options",
+  desktopAPIInstance?.hasFeature("addMcpImageSupport") ? "local" : "placeholder-svg",
+  {
+    subscribeToChanges: true,
+  },
+)
+
+// Setup atom with mount for image options that sends MCP update when changed
+export const imageOptionsWithMount = setupAtomWithMount(imageOptionsAtom, ({
+  onSet: setter,
 }) => {
-  e(() => {
-    desktopAPIInstance?.sendMCPUpdate("tool_list", {});
-  });
-});
-let $$p4 = createLocalStorageAtom("dev-mode-mcp-deny-overwriting-files", !0, {
-  subscribeToChanges: !0
-});
-let $$_6 = createLocalStorageAtom("dev-mode-mcp-mock-dir-for-image-writes-to-disk", void 0, {
-  subscribeToChanges: !0
-});
-let $$h8 = createLocalStorageAtom("dev-mode-mcp-use-tailwind", !0, {
-  subscribeToChanges: !0
-});
-export function $$m3() {
+  setter(() => {
+    desktopAPIInstance?.sendMCPUpdate("tool_list", {})
+  })
+})
+
+export const denyOverwritingFilesAtom = createLocalStorageAtom("dev-mode-mcp-deny-overwriting-files", true, {
+  subscribeToChanges: true,
+})
+
+export const mockDirForImageWritesAtom = createLocalStorageAtom("dev-mode-mcp-mock-dir-for-image-writes-to-disk", undefined, {
+  subscribeToChanges: true,
+})
+
+export const useTailwindAtom = createLocalStorageAtom("dev-mode-mcp-use-tailwind", true, {
+  subscribeToChanges: true,
+})
+
+/**
+ * Get MCP settings for internal use
+ * @returns Object containing all MCP configuration settings
+ */
+export function getMcpSettings() {
   return {
-    codeConnectToolsEnabled: atomStoreManager.get($$s11),
-    codebaseSuggestionsEnabled: $$l2(),
-    codeOption: atomStoreManager.get($$d1),
-    markupImageOptions: atomStoreManager.get($$u9),
-    useTailwind: atomStoreManager.get($$h8),
-    denyOverwritingFiles: atomStoreManager.get($$p4)
-  };
+    codeConnectToolsEnabled: atomStoreManager.get(codeConnectToolsEnabledAtom),
+    codebaseSuggestionsEnabled: isCodebaseSuggestionsEnabled(),
+    codeOption: atomStoreManager.get(codeOptionsAtom),
+    markupImageOptions: atomStoreManager.get(imageOptionsWithMount),
+    useTailwind: atomStoreManager.get(useTailwindAtom),
+    denyOverwritingFiles: atomStoreManager.get(denyOverwritingFilesAtom),
+  }
 }
-export function $$g7() {
+
+/**
+ * Get MCP settings for external use (with safer defaults)
+ * @returns Object containing all MCP configuration settings with nullish coalescing
+ */
+export function getMcpSettingsExternal() {
   return {
-    codeConnectToolsEnabled: atomStoreManager.get($$s11),
-    codebaseSuggestionsEnabled: $$l2() ?? !1,
-    codeOption: atomStoreManager.get($$d1),
-    markupImageOption: atomStoreManager.get($$u9),
-    useTailwind: atomStoreManager.get($$h8),
-    denyOverwritingFiles: atomStoreManager.get($$p4)
-  };
+    codeConnectToolsEnabled: atomStoreManager.get(codeConnectToolsEnabledAtom),
+    codebaseSuggestionsEnabled: isCodebaseSuggestionsEnabled() ?? false,
+    codeOption: atomStoreManager.get(codeOptionsAtom),
+    markupImageOption: atomStoreManager.get(imageOptionsWithMount),
+    useTailwind: atomStoreManager.get(useTailwindAtom),
+    denyOverwritingFiles: atomStoreManager.get(denyOverwritingFilesAtom),
+  }
 }
-let $$$$f10 = atom(null);
-let $$E0 = atom(null);
-export const DR = $$E0;
-export const Kx = $$d1;
-export const Lw = $$l2;
-export const Nt = $$m3;
-export const Pq = $$p4;
-export const SV = $$o5;
-export const f = $$_6;
-export const iy = $$g7;
-export const lk = $$h8;
-export const pe = $$u9;
-export const rx = $$$$f10;
-export const tz = $$s11;
+
+// Additional atoms for application state
+export const additionalStateAtom1 = atom(null)
+export const additionalStateAtom2 = atom(null)
+
+// Exported atom constants for external usage
+export const DR = additionalStateAtom2
+export const Kx = codeOptionsAtom
+export const Lw = isCodebaseSuggestionsEnabled
+export const Nt = getMcpSettings
+export const Pq = denyOverwritingFilesAtom
+export const SV = codebaseSuggestionsEnabledAtom
+export const f = mockDirForImageWritesAtom
+export const iy = getMcpSettingsExternal
+export const lk = useTailwindAtom
+export const pe = imageOptionsWithMount
+export const rx = additionalStateAtom1
+export const tz = codeConnectToolsEnabledAtom

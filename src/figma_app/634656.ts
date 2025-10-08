@@ -8,7 +8,7 @@ import { Eg } from "../figma_app/583114";
 import { useLatestRef } from "../figma_app/922077";
 import { getCurrentLiveGraphClient } from "../905/761735";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { GI, IZ, ez, lC, U9, qL } from "../905/125333";
+import { vectorPencilStyleAtom, highlighterStyleAtom, shapeColorAtom, strokeColorAtom, shapeStrokeStyleAtom, stickyColorAtom } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -19,7 +19,7 @@ import { getCurrentTeamId } from "../figma_app/598018";
 import { fJ, Yv } from "../figma_app/616107";
 import { v as _$$v } from "../figma_app/314838";
 import { D } from "../905/347702";
-import { XQ, Dq, n6, ns, T7, E$ } from "../figma_app/285009";
+import { blackSolidBorder, highlightBorder, whiteColorParsed, grayDarkParsed, solidBorderStyle, getStickyColor } from "../figma_app/285009";
 import { zS, Ku, BV, Qe } from "../figma_app/153399";
 import { Qv, $R, zd, Ze } from "../figma_app/967873";
 export function $$N2() {
@@ -135,20 +135,20 @@ export function $$M9() {
   let e = $$w7();
   let t = useLatestRef(e.uuid);
   let r = e.type === Yv.CUSTOM ? zd(e) : null;
-  let i = Xr(GI);
-  let l = Xr(IZ);
-  let d = Xr(ez);
-  let u = Xr(lC);
-  let p = Xr(U9);
-  let h = Xr(qL);
+  let i = Xr(vectorPencilStyleAtom);
+  let l = Xr(highlighterStyleAtom);
+  let d = Xr(shapeColorAtom);
+  let u = Xr(strokeColorAtom);
+  let p = Xr(shapeStrokeStyleAtom);
+  let h = Xr(stickyColorAtom);
   useEffect(() => {
     e.uuid !== t && (e.type === Yv.DEFAULT ? void 0 !== t && (i({
-      paints: XQ
+      paints: blackSolidBorder
     }), l({
-      paints: Dq
-    }), d(n6), u(ns), p(T7), h(function () {
+      paints: highlightBorder
+    }), d(whiteColorParsed), u(grayDarkParsed), p(solidBorderStyle), h(function () {
       let e = Math.floor(Math.random() * Ku().length);
-      return BV(Ku()[e], "sticky") || E$();
+      return BV(Ku()[e], "sticky") || getStickyColor();
     }()), WhiteboardTsApi.setSectionToolColor(rgbToNormalized(function () {
       let e = Math.floor(Math.random() * Qe().length);
       return BV(Qe()[e], "baseLight") || BV(ColorOptions.BLUE_LIGHT, "baseLight");

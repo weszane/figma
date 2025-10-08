@@ -179,7 +179,7 @@ import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
 import { hX, xn } from "../figma_app/644079";
 import { J3, JU as _$$JU } from "../figma_app/622574";
-import { E as _$$E2 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A4 } from "../905/956262";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
@@ -189,7 +189,7 @@ import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
 import { O0, eg as _$$eg } from "../figma_app/452252";
 import { ArrowPosition } from "../905/858282";
-import { s1f } from "../figma_app/6204";
+import { SlidesTemplateOnboarding } from "../figma_app/6204";
 import { useHasValidSceneSlideTheme, useIsFullscreenSlidesView } from "../figma_app/21029";
 import { uM, Bn, R4, w1 } from "../figma_app/835688";
 import { g as _$$g2, h as _$$h3 } from "../9410/28058";
@@ -207,7 +207,7 @@ import { analyticsEventManager } from "../905/449184";
 import { reportError } from "../905/11";
 import { u4 } from "../figma_app/991591";
 import { LoadingSpinner } from "../figma_app/858013";
-import { P as _$$P2 } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { styleBuilderInstance } from "../905/941192";
 import { d as _$$d2 } from "../9410/847929";
 import { zF } from "../figma_app/297822";
@@ -307,8 +307,8 @@ import { J as _$$J5 } from "../905/494216";
 import { PE } from "../figma_app/251115";
 import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
-import { w as _$$w2, q as _$$q5 } from "../905/112768";
-import { ZU, Wg } from "../figma_app/986347";
+import { RemoveBackgroundAction, UpscaleImageAction } from "../905/112768";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 import { rB as _$$rB, bh } from "../figma_app/730706";
 import { X as _$$X } from "../905/647103";
 import { r6 as _$$r4 } from "../905/507950";
@@ -424,7 +424,7 @@ import { P as _$$P5 } from "../6388/491290";
 import { xm, CL, iS as _$$iS } from "../figma_app/887835";
 import { m as _$$m4 } from "../905/886380";
 import { c$ as _$$c$3 } from "../figma_app/236327";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { aF as _$$aF, Pm } from "../441/443466";
 import { EW } from "../9410/486658";
 import { lb as _$$lb } from "../figma_app/18327";
@@ -4083,7 +4083,7 @@ function rR() {
     complete,
     uniqueId
   } = _$$e({
-    overlay: s1f,
+    overlay: SlidesTemplateOnboarding,
     priority: _$$N3.DEFAULT_MODAL
   }, [a]);
   let x = useMemo(() => i ? [rM, rF] : [rM], [i]);
@@ -4106,7 +4106,7 @@ function rR() {
     isShowing,
     totalSteps: x.length
   })), [x, next, isShowing, complete, e]);
-  return (_$$E2(uniqueId, [Bn], () => {
+  return (useEventForwarder(uniqueId, [Bn], () => {
     show({
       canShow: e => !e
     });
@@ -4563,7 +4563,7 @@ function lk({
           height: `${s}px`
         }).$
       },
-      children: jsx(_$$P2, {
+      children: jsx(ScrollContainer, {
         className: "speaker_notes_overlay--inputWrapper--ufx4l text--fontPos13--xW8hS text--_fontBase--QdLsd",
         innerClassName: "speaker_notes_overlay--inputWrapperFullHeight--T0Ngw",
         children: jsx("div", {
@@ -7442,12 +7442,12 @@ let dt = memo(() => {
     let t = useSelector(e => Yh(e.mirror.appModel, JT.REMOVE_BACKGROUND));
     let i = PE();
     if (e && t && i) return {
-      type: ZU.CUSTOM_ACTION,
-      customActionType: Wg.DIALOG_TRIGGER_BUTTON,
+      type: DMenuItemType.CUSTOM_ACTION,
+      customActionType: DButtonType.DIALOG_TRIGGER_BUTTON,
       onClick: () => $I({
         moduleToOpen: {
           type: "custom",
-          module: jsx(_$$w2, {
+          module: jsx(RemoveBackgroundAction, {
             source: "quick-actions"
           }),
           beforeModuleOpen: () => {
@@ -7481,12 +7481,12 @@ let dt = memo(() => {
     let t = useSelector(e => Yh(e.mirror.appModel, JT.UPSCALE_IMAGE));
     let i = PE();
     if (e && t && i) return {
-      type: ZU.CUSTOM_ACTION,
-      customActionType: Wg.DIALOG_TRIGGER_BUTTON,
+      type: DMenuItemType.CUSTOM_ACTION,
+      customActionType: DButtonType.DIALOG_TRIGGER_BUTTON,
       onClick: () => $I({
         moduleToOpen: {
           type: "custom",
-          module: jsx(_$$q5, {
+          module: jsx(UpscaleImageAction, {
             source: "slides-image-menu"
           }),
           beforeModuleOpen: () => {
@@ -7529,8 +7529,8 @@ let dt = memo(() => {
     }, e);
     return useMemo(() => {
       if (t) return {
-        type: ZU.CUSTOM_ACTION,
-        customActionType: Wg.DIALOG_TRIGGER_BUTTON,
+        type: DMenuItemType.CUSTOM_ACTION,
+        customActionType: DButtonType.DIALOG_TRIGGER_BUTTON,
         onClick: () => {
           t.url && openWindow(t.url, "_blank", "noopener");
         },
@@ -8612,7 +8612,7 @@ function cb({
       onClick: () => toggle(),
       ref: s,
       children: jsx(_$$m4, {})
-    }), showing && s.current && jsxs(Cf, {
+    }), showing && s.current && jsxs(ConnectedPointingDropdown, {
       targetRect: s.current.getBoundingClientRect(),
       displayOverTarget: !0,
       children: [jsx(_$$c$3, {

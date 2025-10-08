@@ -1,5 +1,5 @@
 import _require from "../2824/40443";
-import { sj, Ep, _0, s8, n2, pD, k9, NB, Zw, fJ } from "../figma_app/728005";
+import { GET_CODE, STYLING_RULE, CODE_CONNECT_DOCS, CODEBASE_SUGGESTIONS_DOCS, IMAGE_ASSET_DOCS, ANNOTATION_DOCS, getImageAssetDocs, IMPORTANT_IMAGE_PROMPT, populateAssetsMap, ASSETS_BASE_URL } from "../figma_app/728005";
 import { ServiceCategories } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -15,7 +15,7 @@ import { htmlToEditorState } from "../905/902840";
 import { uA } from "../figma_app/781512";
 import { B9, Py } from "../figma_app/346422";
 import { hB } from "../figma_app/609511";
-import { pe, lk, Pq, f as _$$f, Lw } from "../figma_app/342355";
+import { imageOptionsWithMount, useTailwindAtom, denyOverwritingFilesAtom, mockDirForImageWritesAtom, isCodebaseSuggestionsEnabled } from "../figma_app/342355";
 import { Q } from "../905/938332";
 import { w6 } from "../905/372596";
 import { l as _$$l } from "../905/882689";
@@ -25,10 +25,10 @@ export async function $$A0(e, t, l, c, p) {
   let {
     designToReact
   } = await Promise.all([]).then(_require);
-  let C = atomStoreManager.get(pe);
-  let O = atomStoreManager.get(lk);
-  let R = atomStoreManager.get(Pq);
-  let L = atomStoreManager.get(_$$f);
+  let C = atomStoreManager.get(imageOptionsWithMount);
+  let O = atomStoreManager.get(useTailwindAtom);
+  let R = atomStoreManager.get(denyOverwritingFilesAtom);
+  let L = atomStoreManager.get(mockDirForImageWritesAtom);
   let P = new Map();
   let D = {
     transformer: B9,
@@ -54,7 +54,7 @@ export async function $$A0(e, t, l, c, p) {
     });
     Q(e, B, debugState);
   }
-  if (Lw()) {
+  if (isCodebaseSuggestionsEnabled()) {
     let [e, t] = await M;
     H(e, t);
     V = U ? Object.fromEntries(Object.entries(U).map(([e, t]) => [e, {
@@ -107,7 +107,7 @@ export async function $$A0(e, t, l, c, p) {
       codeSyntaxLanguage: l
     });
     let i = await r.serializeHTML(e.guid);
-    w6("html_serialization", performance.now() - t, sj);
+    w6("html_serialization", performance.now() - t, GET_CODE);
     let [a, o] = await M;
     F && H(a, o);
     return i;
@@ -126,7 +126,7 @@ export async function $$A0(e, t, l, c, p) {
         let t = performance.now();
         let r = Py(e, !0);
         r.then(() => {
-          w6("code_optimization", performance.now() - t, sj);
+          w6("code_optimization", performance.now() - t, GET_CODE);
         });
         return r;
       }
@@ -200,7 +200,7 @@ export async function $$A0(e, t, l, c, p) {
     attributes: V,
     attributesWithFallback: z
   });
-  w6("design_to_react", performance.now() - K, sj);
+  w6("design_to_react", performance.now() - K, GET_CODE);
   let $ = files.find(e => "index.tsx" === e.name)?.contents;
   if (!$ || "string" != typeof $) throw Error("No index.tsx string file found");
   $ = $.replace(/id="node-(\d+)_(\d+)"/g, (e, t, r) => `data-node-id="${t}:${r}"`);
@@ -210,14 +210,14 @@ export async function $$A0(e, t, l, c, p) {
 ${$}`);
   let X = performance.now();
   let q = _$$l(e, l, getFeatureFlags().dt_mcp_inline_variables ?? !1);
-  w6("variables_and_styles", performance.now() - X, sj);
+  w6("variables_and_styles", performance.now() - X, GET_CODE);
   let J = [{
     type: "text",
     text: $
   }];
   if (O && J.push({
     type: "text",
-    text: Ep
+    text: STYLING_RULE
   }), J.push({
     type: "text",
     text: 'Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.'
@@ -230,33 +230,33 @@ ${$}`);
   }
   j && Object.keys(j).length > 0 && J.push({
     type: "text",
-    text: _0
+    text: CODE_CONNECT_DOCS
   });
   U && Object.keys(U).length > 0 && J.push({
     type: "text",
-    text: s8
+    text: CODEBASE_SUGGESTIONS_DOCS
   });
   "local" === C && J.push({
     type: "text",
-    text: n2
+    text: IMAGE_ASSET_DOCS
   });
   z.length > 0 && J.push({
     type: "text",
-    text: pD
+    text: ANNOTATION_DOCS
   });
   "write-to-disk" === C && (p || L) && J.push({
     type: "text",
-    text: k9(p || L)
+    text: getImageAssetDocs(p || L)
   });
   J.push({
     type: "text",
-    text: NB
+    text: IMPORTANT_IMAGE_PROMPT
   });
   trackDefinedFileEvent("mcp.d2r_output_size", debugState.getState().openFile?.key || "", debugState.getState(), {
     length: $.length,
     numDivs: $.split("<div").length - 1,
     numNodes: t,
-    isTailwind: atomStoreManager.get(lk)
+    isTailwind: atomStoreManager.get(useTailwindAtom)
   });
   return [{
     content: J
@@ -267,9 +267,9 @@ ${$}`);
 async function x(e, t, r, i, a, s) {
   if ("local" === t) {
     let t = performance.now();
-    Zw(r);
-    let i = C(e, fJ);
-    w6("image_assets_update", performance.now() - t, sj);
+    populateAssetsMap(r);
+    let i = C(e, ASSETS_BASE_URL);
+    w6("image_assets_update", performance.now() - t, GET_CODE);
     return i;
   }
   if ("write-to-disk" === t) {
@@ -279,7 +279,7 @@ async function x(e, t, r, i, a, s) {
     let l = o.endsWith("/") ? o.slice(0, -1) : o;
     await O(r, l, s);
     let d = C(e, l);
-    w6("image_write_to_disk", performance.now() - t, sj);
+    w6("image_write_to_disk", performance.now() - t, GET_CODE);
     return d;
   }
   return e;

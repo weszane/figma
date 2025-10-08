@@ -2,8 +2,8 @@ import { createElement } from "react";
 import { Z } from "../905/606826";
 import { a as _$$a } from "../905/192547";
 import { getI18nString } from "../905/303541";
-import { Qh } from "../905/469533";
-import { C_ } from "../905/345933";
+import { setUserThemePreferenceThunk } from "../905/469533";
+import { ThemeVariants } from "../905/345933";
 export function $$d0(e) {
   return {
     light: getI18nString("fullscreen_actions.theme.light"),
@@ -12,13 +12,13 @@ export function $$d0(e) {
   }[e];
 }
 export function $$c1(e, t) {
-  e(Qh({
+  e(setUserThemePreferenceThunk({
     theme: t,
     userInitiated: !0
   }));
 }
 export function $$u3() {
-  return C_.map(e => ({
+  return ThemeVariants.map(e => ({
     value: e,
     displayText: $$d0(e)
   }));
@@ -30,7 +30,7 @@ export function $$p2(e) {
     displayForQuickCommand: "theme-light-mode-quick-command",
     hideCheckForQuickCommand: !0,
     callback: (e, t, r) => {
-      r(Qh({
+      r(setUserThemePreferenceThunk({
         theme: "light",
         userInitiated: !0
       }));
@@ -44,7 +44,7 @@ export function $$p2(e) {
     displayForQuickCommand: "theme-dark-mode-quick-command",
     hideCheckForQuickCommand: !0,
     callback: (e, t, r) => {
-      r(Qh({
+      r(setUserThemePreferenceThunk({
         theme: "dark",
         userInitiated: !0
       }));
@@ -58,7 +58,7 @@ export function $$p2(e) {
     displayForQuickCommand: "theme-system-quick-command",
     hideCheckForQuickCommand: !0,
     callback: (e, t, r) => {
-      r(Qh({
+      r(setUserThemePreferenceThunk({
         theme: "system",
         userInitiated: !0
       }));

@@ -1,19 +1,19 @@
-import { StackBindingsCpp } from "../figma_app/763686";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { atom, atomStoreManager } from "../figma_app/27355";
-import { trackEventAnalytics } from "../905/449184";
-import { debugState } from "../905/407919";
-import { logError } from "../905/714362";
-import { handleAtomEvent } from "../905/502364";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { trackFileEvent } from "../figma_app/314264";
 import { z } from "../905/207214";
-import { N7, cx, sg, vk } from "../905/664512";
+import { isApproximatelyEqual } from "../905/259345";
+import { VisualBellActions } from "../905/302958";
+import { getI18nString } from "../905/303541";
+import { debugState } from "../905/407919";
+import { trackEventAnalytics } from "../905/449184";
 import { Rm } from "../905/449579";
-import { n4 } from "../905/259345";
-import { D as _$$D } from "../905/629114";
+import { handleAtomEvent } from "../905/502364";
+import { getFeatureFlags } from "../905/601108";
+import { createFigmaPluginScope } from "../905/629114";
+import { cx, N7, sg, vk } from "../905/664512";
+import { getSingletonSceneGraph } from "../905/700578";
+import { logError } from "../905/714362";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { trackFileEvent } from "../figma_app/314264";
+import { StackBindingsCpp } from "../figma_app/763686";
 export let $$n5;
 let $$b0 = atom(new Set());
 let $$T1 = atom(new Set());
@@ -23,7 +23,7 @@ function v(e) {
   let t = e => {
     let r = 0;
     for (let n of e) {
-      "FRAME" === n.type && (r += 1);
+      n.type === "FRAME" && (r += 1);
       "children" in n && (r += t(n.children));
     }
     return r;
@@ -45,7 +45,7 @@ function x(e, t, r, n = !0, i = 1) {
 }
 class N {
   async autoSegmentNodesByRegion(e, t) {
-    let r = _$$D();
+    let r = createFigmaPluginScope();
     let n = [];
     let i = [];
     for (let r of e) {
@@ -69,9 +69,9 @@ class N {
   }
   async autoSegmentNodes(e, t) {
     let r;
-    let n = _$$D();
+    let n = createFigmaPluginScope();
     try {
-      var o;
+      let o;
       let c = performance.now();
       let u = (await Promise.all(e.map(e => n.getNodeByIdAsync(e)))).filter(e => e);
       let h = v(u);
@@ -102,10 +102,10 @@ class N {
         forwardToDatadog: !0
       }), r) {
         !function e(t, r) {
-          if (!t || "FRAME" !== t.type) return;
+          if (!t || t.type !== "FRAME") return;
           for (let n of t.children) e(n, r);
           let n = StackBindingsCpp.getBackgroundNodeCandidatesByGUID(t.id);
-          if (0 === n.backgroundNodes.length) return;
+          if (n.backgroundNodes.length === 0) return;
           let a = r.getNodeById(n.backgroundNodes[0]);
           if (t.resize(a.width, a.height), a.absoluteBoundingBox && t.absoluteBoundingBox) {
             let e = a.absoluteBoundingBox.x - t.absoluteBoundingBox.x;
@@ -122,13 +122,13 @@ class N {
               x(e, t, "fills", r, a);
               x(e, t, "effects", r, a);
               x(e, t, "strokes", r, a);
-              "strokes" in e && e.strokes.length > 0 && (t.strokeWeight = e.strokeWeight, t.strokeJoin = e.strokeJoin, t.dashPattern = e.dashPattern, t.strokeAlign = e.strokeAlign, "strokeCap" in e && !t.strokeCap && (t.strokeCap = e.strokeCap), "strokeMiterLimit" in e && (t.strokeMiterLimit = e.strokeMiterLimit), "strokeLeftWeight" in e && "number" == typeof e.strokeLeftWeight && 0 === t.strokeLeftWeight && (t.strokeLeftWeight = e.strokeLeftWeight), "strokeRightWeight" in e && "number" == typeof e.strokeRightWeight && 0 === t.strokeRightWeight && (t.strokeRightWeight = e.strokeRightWeight), "strokeTopWeight" in e && "number" == typeof e.strokeTopWeight && 0 === t.strokeTopWeight && (t.strokeTopWeight = e.strokeTopWeight), "strokeBottomWeight" in e && "number" == typeof e.strokeBottomWeight && 0 === t.strokeBottomWeight && (t.strokeBottomWeight = e.strokeBottomWeight));
-              "cornerRadius" in e && "number" == typeof e.cornerRadius && 0 === t.cornerRadius && (t.cornerRadius = e.cornerRadius);
-              "topLeftRadius" in e && "number" == typeof e.topLeftRadius && 0 === t.topLeftRadius && (t.topLeftRadius = e.topLeftRadius);
-              "bottomLeftRadius" in e && "number" == typeof e.bottomLeftRadius && 0 === t.bottomLeftRadius && (t.bottomLeftRadius = e.bottomLeftRadius);
-              "topRightRadius" in e && "number" == typeof e.topRightRadius && 0 === t.topRightRadius && (t.topRightRadius = e.topRightRadius);
-              "bottomRightRadius" in e && "number" == typeof e.bottomRightRadius && 0 === t.bottomRightRadius && (t.bottomRightRadius = e.bottomRightRadius);
-              "ELLIPSE" === e.type && n4(e.width, e.height) && (t.cornerRadius = t.width);
+              "strokes" in e && e.strokes.length > 0 && (t.strokeWeight = e.strokeWeight, t.strokeJoin = e.strokeJoin, t.dashPattern = e.dashPattern, t.strokeAlign = e.strokeAlign, "strokeCap" in e && !t.strokeCap && (t.strokeCap = e.strokeCap), "strokeMiterLimit" in e && (t.strokeMiterLimit = e.strokeMiterLimit), "strokeLeftWeight" in e && typeof e.strokeLeftWeight == "number" && t.strokeLeftWeight === 0 && (t.strokeLeftWeight = e.strokeLeftWeight), "strokeRightWeight" in e && typeof e.strokeRightWeight == "number" && t.strokeRightWeight === 0 && (t.strokeRightWeight = e.strokeRightWeight), "strokeTopWeight" in e && typeof e.strokeTopWeight == "number" && t.strokeTopWeight === 0 && (t.strokeTopWeight = e.strokeTopWeight), "strokeBottomWeight" in e && typeof e.strokeBottomWeight == "number" && t.strokeBottomWeight === 0 && (t.strokeBottomWeight = e.strokeBottomWeight));
+              "cornerRadius" in e && typeof e.cornerRadius == "number" && t.cornerRadius === 0 && (t.cornerRadius = e.cornerRadius);
+              "topLeftRadius" in e && typeof e.topLeftRadius == "number" && t.topLeftRadius === 0 && (t.topLeftRadius = e.topLeftRadius);
+              "bottomLeftRadius" in e && typeof e.bottomLeftRadius == "number" && t.bottomLeftRadius === 0 && (t.bottomLeftRadius = e.bottomLeftRadius);
+              "topRightRadius" in e && typeof e.topRightRadius == "number" && t.topRightRadius === 0 && (t.topRightRadius = e.topRightRadius);
+              "bottomRightRadius" in e && typeof e.bottomRightRadius == "number" && t.bottomRightRadius === 0 && (t.bottomRightRadius = e.bottomRightRadius);
+              e.type === "ELLIPSE" && isApproximatelyEqual(e.width, e.height) && (t.cornerRadius = t.width);
               (function (e, t) {
                 if (!e || !e.boundVariables) return;
                 let r = e.boundVariables;
@@ -161,7 +161,7 @@ class N {
         e: r
       });
       let t = debugState.dispatch;
-      "GraphResolutionError" === r.name ? (trackFileEvent("msal_error_try_again", debugState.getState().openFile?.key, debugState.getState(), {
+      r.name === "GraphResolutionError" ? (trackFileEvent("msal_error_try_again", debugState.getState().openFile?.key, debugState.getState(), {
         error: r,
         nodeIds: e
       }), t(VisualBellActions.enqueue({
@@ -181,17 +181,19 @@ class N {
     };
   }
   async makeResponsive2(e) {
-    let t = _$$D();
-    for (let r of e) for (let e of r) await cx(e, t);
+    let t = createFigmaPluginScope();
+    for (let r of e) {
+      for (let e of r) await cx(e, t);
+    }
     t.commitUndo();
     return !0;
   }
   shouldRunSimpleStackDetection(e) {
-    let t = _$$D();
+    let t = createFigmaPluginScope();
     return sg(e, t);
   }
   runMakeResponsiveHeuristics(e) {
-    let t = _$$D();
+    let t = createFigmaPluginScope();
     cx(e, t);
   }
   trackShouldShowMSALOnboarding(e) {
@@ -201,7 +203,7 @@ class N {
     });
   }
   async destroyAllAutoLayout(e) {
-    let t = _$$D();
+    let t = createFigmaPluginScope();
     let r = await vk(e, t);
     let n = debugState.dispatch;
     let i = r > 0 ? getI18nString("fullscreen_actions.destroy-all-auto-layout-result-visual-bell-toast", {

@@ -18,7 +18,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
-import { FJT } from "../figma_app/6204";
+import { EsLaLaunchAnnouncementModal } from "../figma_app/6204";
 if (443 == require.j) {}
 let j = 443 == require.j ? 864e5 : null;
 let k = () => Date.now() - j;
@@ -85,7 +85,7 @@ export function $$O0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: FJT,
+    overlay: EsLaLaunchAnnouncementModal,
     priority: _$$N.SECONDARY_MODAL
   }, [c, t, n]);
   if (useEffect(() => {

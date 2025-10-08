@@ -10,7 +10,7 @@ import { loadPluginManifest, getFullscreenViewEditorType, mapToFileType, resolve
 import { HubTypeEnum } from "../figma_app/45218";
 import { manifestErrorMessage, ManifestErrorType } from "../figma_app/155287";
 import { handleSelectedView } from "../905/622391";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { SimpleComponentType } from "../figma_app/504088";
 import { Po, Zy } from "../figma_app/378195";
 let E = M();
@@ -55,7 +55,7 @@ let $$y0 = createOptimistThunk(async (e, {
     })), _$$s({
       initialX: 0,
       initialY: 0,
-      initialTab: "figjam" === c ? "widget" === t ? _$$p.WIDGETS : _$$p.PLUGINS : void 0,
+      initialTab: "figjam" === c ? "widget" === t ? TabCategory.WIDGETS : TabCategory.PLUGINS : void 0,
       initialFdResourceTab: "figjam" !== c ? "widget" === t ? SimpleComponentType.WIDGET : SimpleComponentType.PLUGIN : void 0,
       initialFdView: "figjam" !== c ? "development" : void 0,
       scrollDevelopmentSectionIntoView: "figjam" === c,

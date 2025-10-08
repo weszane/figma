@@ -33,7 +33,7 @@ import { selectWithShallowEqual } from '../905/103090';
 import { x as _$$x6 } from '../905/106997';
 import { g as _$$g4 } from '../905/125190';
 import { fullscreenPerfManager } from '../905/125218';
-import { GI, Vi } from '../905/125333';
+import { vectorPencilStyleAtom, brushStyleAtom } from '../905/125333';
 import { ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
 import { a as _$$a4, J as _$$J } from '../905/142348';
@@ -109,7 +109,7 @@ import { IconButton } from '../905/443068';
 // import { LoadingSpinner } from '../905/443820';
 import { NN, w4, y1 } from '../905/445814';
 import { analyticsEventManager, getAnonymousId, trackEventAnalytics } from '../905/449184';
-import { E as _$$E7 } from '../905/453826';
+import { useEventForwarder } from '../905/453826';
 import { e as _$$e0 } from '../905/457828';
 import { useMenu } from '../905/465888';
 import { Q as _$$Q4 } from '../905/467310';
@@ -202,7 +202,7 @@ import { D as _$$D2 } from '../905/771179';
 import { X as _$$X3 } from '../905/776923';
 import { isSingleSceneGraphSelectionInDevHandoff } from '../905/782918';
 import { useSingleEffect } from '../905/791079';
-import { cq as _$$cq } from '../905/794154';
+import { useNavigationStack } from '../905/794154';
 import { branchingWebBindingsInstance } from '../905/797453';
 import { Ig } from '../905/805224';
 import { MultiValueMap } from '../905/810750';
@@ -253,7 +253,7 @@ import { multiplayerSessionManager as WebUserSyncing } from '../905/977824';
 import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
 import { RelativeTimeDisplay } from '../905/986103';
-import { Q as _$$Q } from '../905/986450';
+import { createReactRoot } from '../905/986450';
 import { rn as _$$rn2 } from '../905/988099';
 import { colorCSSManipulatorInstance } from '../905/989956';
 import { resourceUtils } from '../905/989992';
@@ -282,7 +282,7 @@ import { J as _$$J3 } from '../9831/379831';
 import _require4 from '../940032c6/115119';
 import _require2 from '../af221b13/303081';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { aBI, Dkp, evB, GFz, KP, MYY, t8H, Ujx, Xu4 } from '../figma_app/6204';
+import { OrgTrialPendingOverlay, DrawFirstTimeOnboarding, DrawPostConfigNudge, OrgAdminSurvey, DrawBackToDesignNudge, OrgCartAbandonSurvey, ProductTrialPendingOverlay, OrgTrialExpiredOverlay, DevModeUpgradedPopup } from '../figma_app/6204';
 import { bN as WhiteboardAnalyticsTsBindings } from '../figma_app/16595';
 import { $t, lW as _$$lW, FC, JO, y7 } from '../figma_app/20203';
 import { H as _$$H5, U as _$$U } from '../figma_app/23564';
@@ -378,7 +378,7 @@ import { CX, gT, If, NA } from '../figma_app/319440';
 import { pq as _$$pq } from '../figma_app/319732';
 import { ty as _$$ty, DT, Rm, Y2 } from '../figma_app/320164';
 import { ZO as QuickActionsBindings } from '../figma_app/322845';
-import { I$, Mx, x3 } from '../figma_app/327577';
+import { openRecentFile, openRecentPrototype, createNewFile } from '../figma_app/327577';
 import { h as _$$h7 } from '../figma_app/334471';
 import { V as _$$V } from '../figma_app/339971';
 import { ds as _$$ds } from '../figma_app/343967';
@@ -451,7 +451,7 @@ import { xE } from '../figma_app/581520';
 import { safeModeRenderController } from '../figma_app/582563';
 import { ConfigManagerProxy } from '../figma_app/594947';
 import { AddOperationType, checkTeamFileRestrictions, getCurrentTeam } from '../figma_app/598018';
-import { MR } from '../figma_app/598926';
+import { folderSetPinnedFileAction } from '../figma_app/598926';
 import { oR as _$$oR, wA as _$$wA } from '../figma_app/598952';
 import { PluginCallbacks } from '../figma_app/603466';
 import { Bu } from '../figma_app/604494';
@@ -483,7 +483,7 @@ import { Z as _$$Z3 } from '../figma_app/684783';
 import { useProjectFileCreationPermissions } from '../figma_app/687776';
 import { R as _$$R7 } from '../figma_app/690591';
 import { OnboardingStep, PreviewMode, viewMappings } from '../figma_app/707808';
-import { cU as _$$cU, wY } from '../figma_app/708845';
+import { initialSize, useResizeObserverRef } from '../figma_app/708845';
 import { EX, xI } from '../figma_app/709323';
 import { eJ as _$$eJ, ub as _$$ub2, uh as _$$uh, D_, q8, Uv, wX } from '../figma_app/710136';
 import { k as _$$k5 } from '../figma_app/717083';
@@ -559,7 +559,7 @@ import { mn as slotsBindingsWeb } from '../figma_app/968938';
 import { e2 as _$$e4, C$, Ml } from '../figma_app/971485';
 import { flashMfaAndRedirect, handleOrgMigration, ReloadReasonEnum } from '../figma_app/976345';
 import { getCurrentFileType, getEditorTypeFromView, getEditorTypeOrNull, getSelectedEditorType, isDesignFileType, isDevHandoffEditorType, isIllustrationEditorType, isSitesFileType, isWhiteboardFileType } from '../figma_app/976749';
-import { ZU } from '../figma_app/986347';
+import { DMenuItemType } from '../figma_app/986347';
 import { gY } from '../figma_app/991245';
 import { A as _$$A11 } from '../svg/95997';
 import { A as _$$A3 } from '../svg/278438';
@@ -1842,8 +1842,8 @@ let nG = memo(e => {
   let m = useRef(null);
   let {
     width
-  } = wY(m) || {
-    EMPTY_SIZE: _$$cU
+  } = useResizeObserverRef(m) || {
+    EMPTY_SIZE: initialSize
   };
   let f = h < (width || 0) + 32 ? _ : 0;
   useEffect(() => {
@@ -4408,7 +4408,7 @@ function od() {
   let r = useAtomWithSubscription(latestSurveyResponseDateAtom);
   let n = useAtomWithSubscription(ZS);
   let i = _$$e8({
-    overlay: GFz,
+    overlay: OrgAdminSurvey,
     priority: _$$N5.SURVEY
   }, [t, r, n]);
   useEffect(() => {
@@ -4534,7 +4534,7 @@ function oT() {
   let i = useAtomWithSubscription(oy);
   let a = _$$zl(og);
   let s = _$$e8({
-    overlay: MYY,
+    overlay: OrgCartAbandonSurvey,
     priority: _$$N5.SURVEY
   }, [e, t, r, n, i]);
   let o = useCallback(() => {
@@ -4612,7 +4612,7 @@ function oL({
     complete,
     isShowing
   } = _$$e8({
-    overlay: Ujx,
+    overlay: OrgTrialExpiredOverlay,
     priority: _$$N5.URGENT_ALERT
   }, [t]);
   useEffect(() => {
@@ -4785,7 +4785,7 @@ function oG({
     complete,
     isShowing
   } = _$$e8({
-    overlay: aBI,
+    overlay: OrgTrialPendingOverlay,
     priority: _$$N5.URGENT_ALERT
   }, [t]);
   useEffect(() => {
@@ -4969,7 +4969,7 @@ function o1({
     complete,
     isShowing
   } = _$$e8({
-    overlay: t8H,
+    overlay: ProductTrialPendingOverlay,
     priority: _$$N5.URGENT_ALERT
   }, [t]);
   return (useEffect(() => {
@@ -5224,7 +5224,7 @@ function lF({
             }));
             return;
           }
-          o(x3({
+          o(createNewFile({
             editorType: e,
             projectId: d
           }));
@@ -5428,11 +5428,11 @@ function l3({
       onClick(t) {
         if (t.preventDefault(), e.type === TileType.FILE || e.type === TileType.REPO) {
           let t = l1(e);
-          a(I$({
+          a(openRecentFile({
             fileKey: t.key
           }));
         } else {
-          e.type === TileType.PROTOTYPE && a(Mx({
+          e.type === TileType.PROTOTYPE && a(openRecentPrototype({
             fileKey: e.prototype.file_key,
             pageId: e.prototype.page_id
           }));
@@ -6538,7 +6538,7 @@ function cu() {
   })), [n]);
   let a = useDispatch();
   return (useEffect(() => {
-    a(MR({
+    a(folderSetPinnedFileAction({
       folderId: e,
       fileKeys: i.map(e => e.file.key)
     }));
@@ -7062,7 +7062,7 @@ function uy(e) {
     complete,
     uniqueId
   } = _$$e8({
-    overlay: Dkp,
+    overlay: DrawFirstTimeOnboarding,
     priority: _$$N5.DEFAULT_MODAL
   });
   useSingleEffect(() => {
@@ -7070,7 +7070,7 @@ function uy(e) {
       canShow: () => (getFeatureFlags().ce_il_onboarding && !n) ?? !1
     });
   });
-  _$$E7(uniqueId, 'ui3_finished_entering_illustration_mode', () => {
+  useEventForwarder(uniqueId, 'ui3_finished_entering_illustration_mode', () => {
     show({
       canShow: () => getFeatureFlags().ce_il_onboarding ?? !1
     });
@@ -7128,7 +7128,7 @@ function uT(e) {
     isShowing,
     complete
   } = _$$e8({
-    overlay: evB,
+    overlay: DrawPostConfigNudge,
     priority: _$$N5.DEFAULT_MODAL
   }, [r]);
   useEffect(() => {
@@ -7180,7 +7180,7 @@ function uv(e) {
     isShowing,
     complete
   } = _$$e8({
-    overlay: KP,
+    overlay: DrawBackToDesignNudge,
     priority: _$$N5.DEFAULT_MODAL
   });
   let [d, c] = useState(!1);
@@ -7319,7 +7319,7 @@ function uF() {
     isShowing,
     complete
   } = _$$e8({
-    overlay: Xu4,
+    overlay: DevModeUpgradedPopup,
     priority: _$$N5.DEFAULT_MODAL
   }, [e]);
   let a = _$$W4();
@@ -7463,7 +7463,7 @@ function u8() {
     offset: 8
   });
   let r = useAtomWithSubscription(NU);
-  let [n, i] = useAtomValueAndSetter(GI);
+  let [n, i] = useAtomValueAndSetter(vectorPencilStyleAtom);
   let a = n.dynamicStrokeSettings;
   let {
     currentStroke,
@@ -7641,27 +7641,27 @@ function pm(e) {
         style: {
           display: 'contents'
         },
-        children: hoistedToolbeltItems.map(e => e.type === ZU.FLYOUT ? jsx(AutoInteractableWrapper, {
+        children: hoistedToolbeltItems.map(e => e.type === DMenuItemType.FLYOUT ? jsx(AutoInteractableWrapper, {
           name: 'layer_header_button',
           children: jsx(_$$F8, {
             flyoutConfig: e,
             recordingKey: generateRecordingKey(If, e.flyoutRecordingKey)
           })
-        }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(AutoInteractableWrapper, {
+        }, e.dropdownKey) : e.type === DMenuItemType.ACTION ? jsx(AutoInteractableWrapper, {
           name: 'layer_header_button',
           children: jsx(QE, {
             item: e,
             numUnreadComments: 0,
             recordingKey: If
           })
-        }, e.recordingKey) : e.type === ZU.ACTION_SUBMENU ? jsx(AutoInteractableWrapper, {
+        }, e.recordingKey) : e.type === DMenuItemType.ACTION_SUBMENU ? jsx(AutoInteractableWrapper, {
           name: 'layer_header_button',
           children: jsx(QE, {
             item: e,
             numUnreadComments: 0,
             recordingKey: generateRecordingKey(If, e.recordingKey)
           })
-        }, e.recordingKey) : e.type === ZU.CUSTOM_ACTION ? jsx(CX, {
+        }, e.recordingKey) : e.type === DMenuItemType.CUSTOM_ACTION ? jsx(CX, {
           item: e
         }, e.recordingKey) : null)
       }), jsx(ph, {
@@ -8007,14 +8007,14 @@ function pV(e) {
   }) : activeSecondaryToolbeltId === _$$R6.BrushTool && _ ? jsx(_$$a0, {
     ariaLabel: getI18nString('fullscreen.toolbar.aria-label-brush'),
     children: jsx(_$$c7, {
-      atom: Vi,
+      atom: brushStyleAtom,
       includeStrokePicker: !0,
       recordingKey: e.recordingKey
     })
   }) : activeSecondaryToolbeltId === _$$R6.PencilTool && _ ? jsx(_$$a0, {
     ariaLabel: getI18nString('fullscreen.toolbar.aria-label-pencil'),
     children: jsx(_$$c7, {
-      atom: GI,
+      atom: vectorPencilStyleAtom,
       addon: getFeatureFlags().ce_il_pencil_stroke_presets && jsx(u8, {})
     })
   }) : activeSecondaryToolbeltId === _$$R6.SimplifyVectorTool ? jsx(_$$a0, {
@@ -8067,7 +8067,7 @@ function pz() {
   let T = h?.showBanner && !m && (!f || o) && (!y || o) && !(o && b);
   let {
     close
-  } = _$$cq();
+  } = useNavigationStack();
   let S = zm();
   let v = Uv(m);
   let A = isUserNotLoggedInAndEditorSupported();
@@ -9046,7 +9046,7 @@ function _D() {
   let e = parseAndNormalizeQuery(customHistory.location.search);
   let t = FFileType.DESIGN;
   e.editor_type === 'whiteboard' || e.type === 'whiteboard' || customHistory.location.pathname === '/jam' || customHistory.location.pathname === '/board/new' ? t = FFileType.WHITEBOARD : customHistory.location.pathname === '/slides/new' || e.type === 'slides' || e.editor_type === 'slides' ? t = FFileType.SLIDES : getFeatureFlags().sites && (customHistory.location.pathname === '/site/new' || e.type === 'sites' || e.editor_type === 'sites') ? t = FFileType.SITES : getFeatureFlags().cooper && (customHistory.location.pathname === '/buzz/new' || e.type === 'buzz' || e.editor_type === 'buzz' || e.type === 'cooper' || e.editor_type === 'cooper') ? t = FFileType.COOPER : isFigmakeSitesEnabled() && (customHistory.location.pathname === '/rev/new' || customHistory.location.pathname === '/make/new' || e.type === 'figmake' || e.editor_type === 'figmake') && (t = FFileType.FIGMAKE);
-  t !== 'whiteboard' && _$$Q().render(jsx('div', {
+  t !== 'whiteboard' && createReactRoot().render(jsx('div', {
     style: {
       position: 'absolute',
       top: '0',

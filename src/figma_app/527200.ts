@@ -9,7 +9,7 @@ import { N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
 import { ArrowPosition } from "../905/858282";
-import { QzE } from "../figma_app/6204";
+import { ConnectedProjectsAdminSettingsContentTabOverlay } from "../figma_app/6204";
 let m = userFlagExistsAtomFamily("seen_connected_projects_admin_settings_content_tab_overlay");
 let $$g1 = "org_admin_connected_projects_tab_onboarding_key";
 export function $$f0() {
@@ -19,7 +19,7 @@ export function $$f0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: QzE,
+    overlay: ConnectedProjectsAdminSettingsContentTabOverlay,
     priority: N.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {

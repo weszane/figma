@@ -15,7 +15,7 @@ import { C as _$$C } from "../905/314082";
 import { mc } from "../905/820960";
 import { selectViewAction, hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { GR } from "../figma_app/330108";
+import { createThrottledTeamJoin } from "../figma_app/330108";
 import { trackTeamEvent } from "../figma_app/314264";
 import { useDropdown } from "../905/848862";
 import { useCurrentUserOrgId } from "../905/845253";
@@ -53,7 +53,7 @@ export function $$P0(e) {
       }
     });
   }, [show]);
-  let U = e => GR(D, e)();
+  let U = e => createThrottledTeamJoin(D, e)();
   let B = e => {
     D(showModalHandler({
       type: _$$p,

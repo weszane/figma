@@ -19,7 +19,7 @@ import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { l as _$$l } from "../905/402643";
 import { zi } from "../905/824449";
 import { i } from "../905/415810";
-import { Hj, tD } from "../905/682977";
+import { TableRow, SortableHeaderCell } from "../905/682977";
 let d = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -296,9 +296,9 @@ function j({
   onSort: r,
   withCaret: a
 }) {
-  return jsxs(Hj, {
+  return jsxs(TableRow, {
     className: "stats_table--statsTableHeaderRow--rLO-Y library_modal_stats--headerRow--MTZxi text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: [e.map(e => jsx(tD, {
+    children: [e.map(e => jsx(SortableHeaderCell, {
       className: p()(e.headerClassName, {
         "stats_table--selectedCol--6jw8p library_modal_stats--selectedCol--pwGl4": t === e.sortBy
       }),
@@ -323,7 +323,7 @@ function U({
     i.preventDefault();
     t(i, e);
   }, [t, e]);
-  return jsxs(Hj, {
+  return jsxs(TableRow, {
     className: "stats_table--row--KtRaP text--fontPos11--2LvXf text--_fontBase--QdLsd",
     onMouseDown: s,
     children: [i.map(t => jsx("div", {

@@ -104,7 +104,7 @@ import { selectExperimentConfigHook } from "../figma_app/594947";
 import { selectUserFlag } from "../905/940356";
 import { useSingleEffect } from "../905/791079";
 import { postUserFlag } from "../905/985254";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zl as _$$zl } from "../figma_app/641749";
@@ -113,7 +113,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { createOnboardingStateMachine } from "../905/298004";
 import { WZ } from "../905/893645";
 import { NotModalType } from "../905/11928";
-import { GCV, KdZ, tzJ, ePo } from "../figma_app/6204";
+import { SharingClarityFileModalOverlay, SharingClarityBranchModalOverlay, SharingClarityFileAudienceOverlay, SharingClarityPrototypeModalOverlay } from "../figma_app/6204";
 import { Link } from "../905/438674";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
@@ -158,7 +158,7 @@ import { TooltipDropdown } from "../figma_app/209680";
 import { $ as _$$$ } from "../figma_app/995722";
 import { AccessLevelEnum } from "../905/557142";
 import { setupRoleRow, generateRoleOptions, getUserHandleOrEmail } from "../905/144598";
-import { og as _$$og } from "../905/466026";
+import { updateRepoOptimist } from "../905/466026";
 import { IconButton } from "../905/443068";
 import { a as _$$a } from "../905/5627";
 import { copyTextToClipboard } from "../figma_app/623293";
@@ -203,7 +203,7 @@ import { Jd } from "../905/71785";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { n as _$$n4, a as _$$a3 } from "../905/114254";
 import { N as _$$N3 } from "../905/620375";
-import { X$ } from "../figma_app/870683";
+import { generateHubFileUrl } from "../figma_app/870683";
 import { l as _$$l } from "../905/716947";
 import { isSlideTemplateResource } from "../figma_app/471982";
 import { sG } from "../905/686934";
@@ -1111,7 +1111,7 @@ let tF = "sc_file_modal_step_1_onboarding_key";
 let tM = "sc_file_modal_step_2_onboarding_key";
 let tj = "sc_file_modal_step_3_onboarding_key";
 let tU = userFlagExistsAtomFamily(tL);
-let tB = _$$rn("sc_file_modal_onboarding", createOnboardingStateMachine(GCV));
+let tB = _$$rn("sc_file_modal_onboarding", createOnboardingStateMachine(SharingClarityFileModalOverlay));
 function tV(e) {
   let t = useAtomWithSubscription(tU);
   let {
@@ -1120,7 +1120,7 @@ function tV(e) {
     isShowing,
     complete
   } = _$$e2({
-    overlay: GCV,
+    overlay: SharingClarityFileModalOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
   let l = useDispatch();
@@ -1130,7 +1130,7 @@ function tV(e) {
       canShow: e => !e
     });
   });
-  _$$E(uniqueId, "Reset Onboarding", () => {
+  useEventForwarder(uniqueId, "Reset Onboarding", () => {
     show();
   });
   let c = e.canViewFolder ? renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_2_description") : renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_2_description_no_folder");
@@ -2561,7 +2561,7 @@ function na({
     let s = useDispatch();
     let o = e.editor_type !== FFileType.WHITEBOARD && i && i.bigma_enabled ? e.mainFileLinkExpirationConfig?.id ?? "optimistic" : null;
     return useCallback((i, r, a) => {
-      t && e.key === t.default_file_key ? s(_$$og({
+      t && e.key === t.default_file_key ? s(updateRepoOptimist({
         repo: {
           ...i,
           id: t.id,
@@ -3834,7 +3834,7 @@ class rt extends Component {
       children: [jsx("a", {
         target: "_blank",
         className: oT,
-        href: X$(e.id),
+        href: generateHubFileUrl(e.id),
         children: t.name
       }), jsxs("div", {
         className: hC,
@@ -4801,7 +4801,7 @@ function ae() {
     isShowing,
     complete
   } = _$$e2({
-    overlay: KdZ,
+    overlay: SharingClarityBranchModalOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
@@ -4833,7 +4833,7 @@ function ar() {
     isShowing,
     complete
   } = _$$e2({
-    overlay: tzJ,
+    overlay: SharingClarityFileAudienceOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
@@ -4865,7 +4865,7 @@ function al() {
     isShowing,
     complete
   } = _$$e2({
-    overlay: ePo,
+    overlay: SharingClarityPrototypeModalOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {

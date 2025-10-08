@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { ButtonSecondary } from "../figma_app/637027";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { TrackedDiv } from "../figma_app/831799";
@@ -25,7 +25,7 @@ export function $$m0({
   h && (x += ` ${kz}`);
   let y = t[t.length - 1];
   let v = m && m.length === t.length;
-  return jsx(P, {
+  return jsx(RecordingScrollContainer, {
     onScroll: (e, n) => {
       let a = t.length >= 5;
       let r = a && 0 !== e;

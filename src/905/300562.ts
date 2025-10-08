@@ -1,2 +1,15 @@
-export var $$n0 = (e => (e.OrgView = "org_view", e.FileView = "file_view", e.FileNavigation = "file-navigation", e))($$n0 || {});
-export const F = $$n0;
+/**
+ * Enum representing different view modes
+ * Original name: $$n0
+ */
+export enum FileOrgViewMode {
+  OrgView = "org_view",
+  FileView = "file_view",
+  FileNavigation = "file-navigation",
+}
+
+/**
+ * Alias for ViewMode enum
+ * Original name: F
+ */
+export const F = FileOrgViewMode

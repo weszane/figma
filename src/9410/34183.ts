@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import n from "classnames";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { gH } from "../7222/396421";
@@ -14,7 +14,7 @@ export function $$u0({
   } = gH();
   if (!e.length) return null;
   let i = e[0].library_key;
-  return jsx(P, {
+  return jsx(RecordingScrollContainer, {
     className: cssBuilderInstance.px16.hFull.$,
     onScroll: onShowSeparatorScroll,
     children: jsx($$m3, {

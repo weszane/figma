@@ -5,10 +5,10 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
-import { $ } from "../905/489647";
+import { tryPluginInFullscreen } from "../905/489647";
 import { selectViewAction } from "../905/929976";
 import { Z, kq } from "../905/292918";
-import { Ad } from "../905/300250";
+import { handleMergeOnFileOpen } from "../905/300250";
 import { setProgressBarState } from "../figma_app/91703";
 import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 import { isBranchAlt } from "../905/760074";
@@ -79,7 +79,7 @@ let $$S0 = createOptimistThunk(e => {
     })), i.mergeParams.mergeOnFileOpen) {
       let n = t.openFile;
       if (!n) return;
-      e.dispatch(Ad({
+      e.dispatch(handleMergeOnFileOpen({
         mergeParams: i.mergeParams,
         editingFile: {
           key: n.key,
@@ -103,7 +103,7 @@ let $$S0 = createOptimistThunk(e => {
     tryPluginParams
   } = i;
   t.user && tryPluginId && tryPluginName && tryPluginVersionId && fileKey && editorType && permissionScopeHandler.user("try-plugin", () => {
-    e.dispatch($({
+    e.dispatch(tryPluginInFullscreen({
       tryPluginId,
       tryPluginName,
       tryPluginVersionId,

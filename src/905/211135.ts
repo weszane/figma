@@ -7,7 +7,7 @@ import { ModalRootComponent } from "../905/38914";
 import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
-import { Yu, sp } from "../905/355291";
+import { showPhoneSetupModal, TWO_FACTOR_RECOVERY_MODAL_TYPE } from "../905/355291";
 import { Ve, MV } from "../905/264101";
 import { Z } from "../905/854480";
 import { selectCurrentUser, hasPasswordOrSSO } from "../905/372672";
@@ -77,7 +77,7 @@ export let $$y0 = registerModal(function (e) {
             }), jsx(Button, {
               onClick: () => {
                 b(popModalStack());
-                b(Yu());
+                b(showPhoneSetupModal());
               },
               children: renderI18nText("auth.two-factor-setup.sms_settings")
             })]
@@ -90,5 +90,5 @@ export let $$y0 = registerModal(function (e) {
       title: renderI18nText("auth.two-factor-setup.two_factor_recovery_codes")
     })
   }) : null;
-}, sp);
+}, TWO_FACTOR_RECOVERY_MODAL_TYPE);
 export const J = $$y0;

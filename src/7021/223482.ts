@@ -19,7 +19,7 @@ import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
 import { N as _$$N } from "../figma_app/268271";
 import { w as _$$w } from "../7021/108292";
 import { OnboardingSequence } from "../905/152487";
-import { kSi } from "../figma_app/6204";
+import { SeatBillingTermsOverlay } from "../figma_app/6204";
 let $$C1 = liveStoreInstance.Mutation(({
   planParentId: e,
   planType: t
@@ -66,7 +66,7 @@ export function $$$$k0({
     show,
     complete
   } = _$$e({
-    overlay: kSi,
+    overlay: SeatBillingTermsOverlay,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [n]);
   if (useSingleEffect(() => {

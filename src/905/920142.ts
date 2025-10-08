@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import utc from 'dayjs/plugin/utc'
 import d from '../vendor/157822'
 import _ from '../vendor/173414'
@@ -24,6 +25,7 @@ dayjs.extend(utc)
 dayjs.extend(s())
 dayjs.extend(l())
 dayjs.extend(isSameOrAfter)
+dayjs.extend(relativeTime)
 dayjs.extend(p())
 dayjs.extend(h())
 dayjs.extend($$A())

@@ -15,7 +15,7 @@ import { PageTypeEnum } from "../figma_app/10554";
 import { ManifestErrorType, manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
 import { KM } from "../figma_app/224019";
 import { H } from "../figma_app/441663";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { K } from "../figma_app/364226";
 export function $$I1(e) {
   let t;
@@ -44,7 +44,7 @@ export function $$S0(e, t) {
   let i = LR();
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let o = e && !e.error ? t ? getI18nString("community.plugins.publish_new_version") : getI18nString("community.resource.publish") : t ? t.is_widget ? getI18nString("community.plugins.edit_resource_details.widget") : getI18nString("community.plugins.edit_resource_details.plugin") : void 0;
   return o ? {
     displayText: o,
@@ -99,7 +99,7 @@ export function $$A5(e, t, r, i = PageTypeEnum.EDITOR) {
   let s = useDispatch();
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   return {
     displayText: getI18nString("universal_insert.manage_permissions"),
     callback: () => {

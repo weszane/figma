@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import o from "classnames";
-import { Oy, EF, t9, FJ } from "../905/504768";
+import { deletePostReactionThunk, addPostReactionThunk, deleteCommentReactionThunk, addCommentReactionThunk } from "../905/504768";
 import { useDropdown } from "../905/848862";
 import { selectCurrentUser } from "../905/372672";
 import { _ as _$$_ } from "../figma_app/433187";
@@ -22,11 +22,11 @@ export function $$f0(e) {
     addOnly: a
   }) => {
     let r = existingReactionIdForCurrentUser(n);
-    r ? a || t(Oy({
+    r ? a || t(deletePostReactionThunk({
       feedPostUuid: e.postUuid,
       emoji: n,
       reactionId: r
-    })) : t(EF({
+    })) : t(addPostReactionThunk({
       feedPostUuid: e.postUuid,
       feedPostId: e.postId,
       emoji: n
@@ -56,11 +56,11 @@ export function $$h3(e) {
     addOnly: a
   }) => {
     let r = existingReactionIdForCurrentUser(n);
-    r ? a || t(t9({
+    r ? a || t(deleteCommentReactionThunk({
       commentUuid: e.commentUuid,
       emoji: n,
       reactionId: r
-    })) : t(FJ({
+    })) : t(addCommentReactionThunk({
       commentUuid: e.commentUuid,
       commentId: e.commentId,
       emoji: n

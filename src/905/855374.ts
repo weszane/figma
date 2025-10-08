@@ -28,7 +28,7 @@ import k from "classnames";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
 import { logError } from "../905/714362";
 import { Point } from "../905/736624";
-import { P as _$$P2 } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { JU, ks } from "../figma_app/626177";
@@ -38,7 +38,7 @@ import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
 import { KindEnum } from "../905/129884";
 import { c$, wv, l4, gw } from "../figma_app/236327";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { tq as _$$tq, lo } from "../905/386270";
 import { $ as _$$$, b as _$$b } from "../905/483620";
 import { $8, Mm, my } from "../figma_app/481279";
@@ -149,7 +149,7 @@ function K({
   recordingKey: i,
   onClick: r
 }) {
-  return jsx(Cf, {
+  return jsx(ConnectedPointingDropdown, {
     targetRect: e,
     hidePointWhenContentOffScreen: !0,
     disableDropdownScrollContainer: !0,
@@ -672,7 +672,7 @@ function ep(e) {
       }), jsx(DialogBody, {
         padding: 0,
         scrolling: "none",
-        children: jsx(_$$P2, {
+        children: jsx(RecordingScrollContainer, {
           className: "edit_variable_modal--scrollContents--1vjun",
           enableOverscroll: !0,
           children: jsx(AutoLayout, {
@@ -1385,7 +1385,7 @@ function tx({
     preventClickEventBubbling: !0,
     tabIndex: 0,
     title: getI18nString("variables.authoring_modal.reorder_collections_modal.title"),
-    children: jsx(_$$P2, {
+    children: jsx(RecordingScrollContainer, {
       ref: s,
       className: `variables_sets_reorder_modal--scrollContainer---4uwN ${o ? "variables_sets_reorder_modal--cursorGrabbing--In4QI" : ""}`,
       maxHeight: y,
@@ -1573,7 +1573,7 @@ function tk({
         children: jsx(_$$J2, {})
       })
     }), showing && x.current && jsx(CuratorPortal, {
-      children: jsxs(Cf, {
+      children: jsxs(ConnectedPointingDropdown, {
         targetRect: x.current.getBoundingClientRect(),
         children: [...S]
       })

@@ -35,7 +35,7 @@ import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import B from "../vendor/946678";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { WithTrackedButton } from "../figma_app/617427";
@@ -71,14 +71,14 @@ import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { l6, c$ } from "../905/794875";
 import { getFilterDisplayName, filterLibraries, getLibraryViewFilterStates, useEnsurePresetLibrariesFilter, sortLibrariesByCriteria, getPublishedLibraryKeys, searchLibraries } from "../905/55862";
-import { UDe } from "../figma_app/6204";
+import { LibrariesWorkspaceOnboarding } from "../figma_app/6204";
 import { i as _$$i2 } from "../905/565139";
 import { LibraryFileBestMatchesComponent, LibraryBestMatchesComponent } from "../905/109977";
 import { LibraryFilterRows } from "../905/47292";
 import { aU } from "../figma_app/757606";
 import { ButtonWide } from "../905/521428";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { l as _$$l2 } from "../905/997221";
+import { getLibraryKeyWithReport } from "../905/997221";
 import { Pg, y6 } from "../figma_app/803787";
 import { b as _$$b2 } from "../905/937225";
 import { I as _$$I2 } from "../905/266213";
@@ -102,7 +102,7 @@ import { hasResourcePresetKey } from "../figma_app/255679";
 import { B as _$$B2 } from "../905/146468";
 import { h as _$$h2 } from "../905/594794";
 import { hubFileAndPresetKeysSetAtom } from "../905/72677";
-import { FO } from "../905/682977";
+import { LoadingRow } from "../905/682977";
 import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { A as _$$A2 } from "../6828/117346";
 import { f as _$$f } from "../905/405189";
@@ -213,7 +213,7 @@ function eN() {
   let o = useAtomWithSubscription(eR);
   let l = useDropdownState();
   let d = _$$e3({
-    overlay: UDe,
+    overlay: LibrariesWorkspaceOnboarding,
     priority: _$$N2.DEFAULT_MODAL
   }, [e, s, o]);
   useSingleEffect(() => {
@@ -264,7 +264,7 @@ function e4({
   let m = selectPermissionsState();
   let h = getRepoById(e, m.repos);
   let g = isBranch(e);
-  let f = _$$l2(e);
+  let f = getLibraryKeyWithReport(e);
   let _ = useSelector(Pg);
   let y = _$$b2(t, i, r, o) || g;
   let v = getFeatureFlags().cmty_lib_admin_publish ? y && !_ : y;
@@ -929,7 +929,7 @@ function tS(e) {
           children: jsx(eN, {})
         })]
       })]
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: "subscription_list_view--fileListView--ucslx",
       hideScrollbar: isLoading,
       width,
@@ -942,7 +942,7 @@ function tS(e) {
             openFile: v,
             editingStats: eu,
             viewFile
-          }), isLoading && jsx(FO, {}), !isLoading && jsxs(Fragment, {
+          }), isLoading && jsx(LoadingRow, {}), !isLoading && jsxs(Fragment, {
             children: [showingDefaultSubscriptionsForTeamId && !isSearching && T?.type !== "presetLibraries" && !mapFromLibraryKeyToSharingGroupData && jsx(tN, {
               showingDefaultSubscriptionsForTeamId,
               canEditSubscriptions,

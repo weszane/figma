@@ -9,19 +9,19 @@ import { logWarning } from "../905/714362";
 import { sendWithRetry } from "../905/910117";
 import { AUTH_SET_REDIRECT_URL, AUTH_INIT, AUTH_SET_GOOGLE_ID_TOKEN, AUTH_SET_GOOGLE_TOKEN_TYPE, AUTH_CHANGE_NAME, AUTH_SET_ORIGIN, changeAuthFormState, AUTH_GOOGLE_SIGNUP, AUTH_SHOW_ERROR } from "../905/194276";
 import { _G } from "../905/164233";
-import { MZ, P8 } from "../905/997533";
+import { isAuthViewAbsent, handleAuthError } from "../905/997533";
 import { AuthFlowStep, AuthAction, AuthErrorCode } from "../905/862321";
 import { trackAuthEvent } from "../905/248178";
-import { sT } from "../905/694658";
+import { setArkoseAuthParams } from "../905/694658";
 import { a as _$$a } from "../905/105502";
-import { p as _$$p } from "../905/300815";
+import { trackPasskeySupport } from "../905/300815";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/347702";
 import { isWorkDomainType } from "../figma_app/416935";
-import { t as _$$t2 } from "../905/897919";
+import { extractFormValues } from "../905/897919";
 import { qV } from "../figma_app/165623";
 let C = "google_sso_temp";
 var $$w1 = (e => (e.COMMUNITY = "google_one_tap_logged_out_community", e.LOGGED_OUT_FILE = "google_one_tap_logged_out_file", e.PROTOTYPE = "google_one_tap_prototype", e))($$w1 || {});
@@ -91,7 +91,7 @@ export function $$k0(e, t, r) {
   t && (a += "&from_ms_teams=1");
   i(a);
 }
-class M extends Error { }
+class M extends Error {}
 export async function $$F3(e, {
   dispatch: t,
   apiUrl: r,
@@ -100,13 +100,13 @@ export async function $$F3(e, {
   tosAccepted: d = !1
 }) {
   let v = !!a && Object.values($$w1).includes(a);
-  await sT({
+  await setArkoseAuthParams({
     googleUserInfo: e
   });
   let C = {};
   if (o) {
     let e = document.getElementById(o);
-    C = _$$t2(e);
+    C = extractFormValues(e);
   }
   try {
     let {
@@ -127,11 +127,11 @@ export async function $$F3(e, {
     data.meta && data.meta.email_domain_type ? (trackEventAnalytics("Sign Up (GTM)", {
       isWorkEmail: isWorkDomainType(data),
       sha256_email: await qV(data.meta.email)
-    }), await _$$p("sign_up_google_sso")) : (trackEventAnalytics("google_sso", {
+    }), await trackPasskeySupport("sign_up_google_sso")) : (trackEventAnalytics("google_sso", {
       eventSubtype: "google_sso_success_signin",
       user_id: data?.meta?.id,
       origin: a
-    }), await _$$p("sign_in_google_sso"));
+    }), await trackPasskeySupport("sign_in_google_sso"));
     return {
       type: "login",
       user: data.meta
@@ -145,7 +145,7 @@ export async function $$F3(e, {
     }, data?.message);
     let s = getI18nString("auth.google-sso.unable-to-auth");
     if (data && data.reason && "object" == typeof data.reason && "two_factor" === data.reason.missing) {
-      MZ() && null != a && (t(AUTH_INIT({
+      isAuthViewAbsent() && null != a && (t(AUTH_INIT({
         origin: a,
         formState: AuthFlowStep.SIGN_IN,
         redirectUrl: debugState?.getState().auth.redirectUrl
@@ -154,7 +154,7 @@ export async function $$F3(e, {
         data: {}
       })));
       atomStoreManager.set(_G, e);
-      t(P8({
+      t(handleAuthError({
         resp: u
       }));
       return {
@@ -173,14 +173,14 @@ export async function $$F3(e, {
         tosAccepted: i
       }) {
         var a;
-        null != t && MZ() ? (r(AUTH_INIT({
+        null != t && isAuthViewAbsent() ? (r(AUTH_INIT({
           origin: t,
           formState: AuthFlowStep.SIGN_UP,
           redirectUrl: n
         })), r(showModalHandler({
           type: _$$a,
           data: {}
-        }))) : debugState?.getState()?.modalShown?.type !== _$$a && MZ() && logWarning("authenticate_google_user", "Skipped launching auth modal before arkose verification", {
+        }))) : debugState?.getState()?.modalShown?.type !== _$$a && isAuthViewAbsent() && logWarning("authenticate_google_user", "Skipped launching auth modal before arkose verification", {
           auth_origin: t
         }, {
           reportAsSentryError: !0,

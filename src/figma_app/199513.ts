@@ -15,9 +15,9 @@ import { p as _$$p } from "../905/282607";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { selectViewAction } from "../905/929976";
 import { batchPutFileAction } from "../figma_app/78808";
-import { yJ, bE, Kc } from "../figma_app/598926";
+import { folderPutAction, folderPostAction, folderLoadedAction } from "../figma_app/598926";
 import { showModalHandler } from "../905/156213";
-import { nX } from "../905/466026";
+import { batchPutReposInSameFolder } from "../905/466026";
 import { roleBatchPutAction } from "../905/98702";
 import { trackFolderEvent } from "../figma_app/314264";
 import { consumptionPaywallUtils } from "../905/224";
@@ -28,8 +28,8 @@ import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951";
 import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
-import { W$ } from "../905/970170";
-import { Y7 } from "../905/438864";
+import { convertLiveGraphFile } from "../905/970170";
+import { convertToFolder } from "../905/438864";
 import { PageFolderFile } from "../905/652992";
 import { fileEntityModel } from "../905/806985";
 import { FolderSchema } from "../905/316062";
@@ -47,20 +47,20 @@ let Y = createOptimistThunk((e, {
   folderData: r
 }) => {
   unstable_batchedUpdates(() => {
-    e.getState().folders[t] ? e.dispatch(yJ({
+    e.getState().folders[t] ? e.dispatch(folderPutAction({
       folder: r.folder
-    })) : e.dispatch(bE(r.folder));
+    })) : e.dispatch(folderPostAction(r.folder));
     e.dispatch(batchPutFileAction({
       files: r.files,
       subscribeToRealtime: !1
     }));
-    e.dispatch(nX({
+    e.dispatch(batchPutReposInSameFolder({
       repos: r.repos
     }));
     e.dispatch(roleBatchPutAction({
       roles: r.roles
     }));
-    e.dispatch(Kc({
+    e.dispatch(folderLoadedAction({
       folderId: t,
       state: "loaded"
     }));
@@ -77,13 +77,13 @@ let $ = liveStoreInstance.Query({
     t.dispatch(batchPutFileAction({
       files: r.data.meta.files
     }));
-    t.dispatch(nX({
+    t.dispatch(batchPutReposInSameFolder({
       repos: r.data.meta.repos
     }));
     t.dispatch(roleBatchPutAction({
       roles: r.data.meta.roles
     }));
-    t.dispatch(Kc({
+    t.dispatch(folderLoadedAction({
       folderId: e.folderId,
       state: "loaded"
     }));
@@ -108,7 +108,7 @@ let $ = liveStoreInstance.Query({
       t(t => {
         let n = t.files;
         (r.data?.project?.fileUpdates || []).filter(t => t.folderId === e).forEach(e => {
-          n.find(t => t.key === e.key) || t.files.unshift(W$(e));
+          n.find(t => t.key === e.key) || t.files.unshift(convertLiveGraphFile(e));
         });
       });
     });
@@ -179,13 +179,13 @@ let $$J0 = liveStoreInstance.PaginatedQuery({
     r.dispatch(batchPutFileAction({
       files: a.files
     }));
-    r.dispatch(nX({
+    r.dispatch(batchPutReposInSameFolder({
       repos: a.repos
     }));
     r.dispatch(roleBatchPutAction({
       roles: a.roles
     }));
-    r.dispatch(Kc({
+    r.dispatch(folderLoadedAction({
       folderId: e.folderId,
       state: "loaded"
     }));
@@ -215,7 +215,7 @@ let $$J0 = liveStoreInstance.PaginatedQuery({
       t(t => {
         let n = t[0];
         n && (r.data?.project?.fileUpdates || []).filter(t => t.folderId === e).forEach(e => {
-          t.find(t => !!t.files.find(t => t.key === e.key)) || n.files.unshift(W$(e));
+          t.find(t => !!t.files.find(t => t.key === e.key)) || n.files.unshift(convertLiveGraphFile(e));
         });
       });
     });
@@ -250,7 +250,7 @@ let $$Z10 = createOptimistThunk(async (e, {
   loadedFolders: r
 }) => {
   if (!r[t]) {
-    e.dispatch(Kc({
+    e.dispatch(folderLoadedAction({
       folderId: t,
       state: "loading"
     }));
@@ -266,10 +266,10 @@ let $$Z10 = createOptimistThunk(async (e, {
       404 === r.status || 403 === r.status ? e.dispatch(selectViewAction({
         view: "resourceUnavailable",
         resourceType: EntityType.PROJECT
-      })) : r.status >= 400 && r.status < 500 ? e.dispatch(Kc({
+      })) : r.status >= 400 && r.status < 500 ? e.dispatch(folderLoadedAction({
         folderId: t,
         state: "loaded"
-      })) : e.dispatch(Kc({
+      })) : e.dispatch(folderLoadedAction({
         folderId: t,
         state: null
       }));
@@ -300,7 +300,7 @@ let $$Q8 = liveStoreInstance.Query({
       t(t => {
         (r.data?.team?.projectUpdates ?? []).filter(t => t.teamId === e).forEach(e => {
           t.find(t => t.id === e.id) || t.push({
-            ...Y7(e),
+            ...convertToFolder(e),
             touched_at: e.updatedAt.toISOString()
           });
         });

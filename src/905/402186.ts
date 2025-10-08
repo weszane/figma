@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef } from "react";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { setupResourceAtomHandler } from "../905/713695";
@@ -10,12 +10,12 @@ import { a as _$$a } from "../905/275092";
 import { U as _$$U } from "../905/540113";
 import { OverviewStatsView } from "../905/167005";
 import { i as _$$i } from "../905/565139";
-import { V } from "../905/697254";
+import { StatValueType } from "../905/697254";
 import { KZ } from "../905/193404";
 import { _4 } from "../905/627262";
 import { nZ } from "../figma_app/277330";
 import { lY } from "../905/712714";
-import { t as _$$t2 } from "../905/414363";
+import { TrackingWrapper } from "../905/414363";
 export let $$v0 = memo(function ({
   libraryFileKey: e,
   styleStat: t,
@@ -42,7 +42,7 @@ export let $$v0 = memo(function ({
   }), [t.key]);
   let x = useRef(null);
   let S = nZ(x);
-  return jsx(_$$t2, {
+  return jsx(TrackingWrapper, {
     page: TrackingKeyEnum.DSA_STYLE_VIEW,
     properties: E,
     children: jsxs("div", {
@@ -54,7 +54,7 @@ export let $$v0 = memo(function ({
         children: m ? null : jsx(_$$U, {
           asset: t
         })
-      }), jsxs(P, {
+      }), jsxs(RecordingScrollContainer, {
         width: o,
         className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         ref: x,
@@ -82,28 +82,28 @@ function I({
     enabled: !!e
   });
   let r = [{
-    type: V.DESCRIPTION_AND_IMAGE,
+    type: StatValueType.DESCRIPTION_AND_IMAGE,
     imageData: {
       type: "style",
       style: t
     },
     description: t.description ?? getI18nString("design_systems.libraries_modal.n_a")
   }, {
-    type: V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.total"),
     count: i.data?.summary.total_usages ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.instance", {
       instanceCount: i.data?.summary.total_usages ?? 0
     })
   }, {
-    type: V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.used_by"),
     count: i.data?.summary.total_teams ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.team", {
       teamCount: i.data?.summary.total_teams ?? 0
     })
   }, {
-    type: V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.used_in"),
     count: i.data?.summary.total_files ?? null,
     word: getI18nString("design_systems.libraries_modal.plural.file", {

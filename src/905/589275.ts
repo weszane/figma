@@ -7,7 +7,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { generateRecordingKey } from "../figma_app/878298";
 import { gw, c$ } from "../figma_app/236327";
 import { Qp, JR, Wi } from "../figma_app/162641";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { n as _$$n } from "../905/734251";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -340,7 +340,7 @@ export function $$ei0({
         shouldPerformSwapOnClick: !1,
         title: getI18nString("design_systems.component_properties.choose_instances")
       }), s.length > 0 && jsxs(Fragment, {
-        children: [jsx(_$$P, {
+        children: [jsx(RecordingScrollContainer, {
           className: K[`scrollContainer_${C ? "list" : "grid"}`],
           children: jsxs("div", {
             className: C ? listContainer : gridContainer,

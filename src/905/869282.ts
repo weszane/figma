@@ -2,7 +2,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
 import { PluginSortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
-import { y2 } from "../905/776312";
+import { getValueWithFallback } from "../905/776312";
 import { p_ } from "../905/573610";
 let $$d1 = {
   viewId: "search-public_plugins",
@@ -42,7 +42,7 @@ let $$c0 = p_;
 export function $$u2(e, t) {
   return {
     sortMode: e.sortState.public_plugins,
-    viewMode: y2($$d1.viewId, t, $$d1.defaultOptions.viewMode),
+    viewMode: getValueWithFallback($$d1.viewId, t, $$d1.defaultOptions.viewMode),
     shouldShowPlanFilter: !1
   };
 }

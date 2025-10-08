@@ -16,7 +16,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
-import { VQ, Dc as _$$Dc, hf, Mt } from "../905/445022";
+import { updateSaveAsProgressThunk, initiateSaveAsAction, beginSaveAsAction, cancelSaveAsAction } from "../905/445022";
 import { getImageManager } from "../figma_app/624361";
 import { fullscreenPerfManager } from "../905/125218";
 import { areAllLoaded } from "../figma_app/623300";
@@ -42,7 +42,7 @@ export let $$O1 = {
     if (0 === t.length && 0 === r.size) return;
     async function d(t) {
       let r = 2e3;
-      for (; ;) try {
+      for (;;) try {
         return await t();
       } catch (t) {
         if (e()) return;
@@ -104,7 +104,7 @@ export let $$O1 = {
   }
 };
 function R(e, t) {
-  debugState.dispatch(VQ({
+  debugState.dispatch(updateSaveAsProgressThunk({
     pendingImageDownload: e,
     totalImages: t
   }));
@@ -140,9 +140,9 @@ async function P(e, t, r) {
   let h = debugState.dispatch;
   let m = debugState.getState();
   let f = !1;
-  let T = () => { };
+  let T = () => {};
   let I = !1;
-  let S = () => { };
+  let S = () => {};
   let A = new Promise(e => {
     S = e;
   });
@@ -307,7 +307,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
     nodesToLoad: o,
     mode: e
   });
-  r(_$$Dc());
+  r(initiateSaveAsAction());
   let g = debugState.getState();
   let f = g.saveAsState.attemptId;
   if (getFeatureFlags().antiabuse_file_download_check) try {
@@ -354,7 +354,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
       mode: e,
       completeSaveAction: n,
       settings: u
-    })), r(hf({
+    })), r(beginSaveAsAction({
       skipped: !1
     }))) : trackEventAnalytics("File Export V1 Canceled", {
       attemptId: f
@@ -367,7 +367,7 @@ let M = createOptimistThunk((e, t) => {
   let r = {
     text: getI18nString("save_as_actions.cancel"),
     action: t.cancelCallback || (() => {
-      e.dispatch(Mt());
+      e.dispatch(cancelSaveAsAction());
     })
   };
   let n = function (e, t, r) {
@@ -393,7 +393,7 @@ let M = createOptimistThunk((e, t) => {
         mode: t.mode,
         completeSaveAction: t.completeSaveAction
       }));
-      e.dispatch(hf({
+      e.dispatch(beginSaveAsAction({
         skipped: !0
       }));
     }

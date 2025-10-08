@@ -9,7 +9,7 @@ import { FOrganizationLevelType } from "../figma_app/191312";
 import { N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { PositioningStrategy } from "../905/858282";
-import { s3e } from "../figma_app/6204";
+import { AdminBillingOverviewSecondaryTabOnboardingOverlay } from "../figma_app/6204";
 export function $$g0({
   planType: e
 }) {
@@ -18,7 +18,7 @@ export function $$g0({
     isShowing,
     complete
   } = _$$e({
-    overlay: s3e,
+    overlay: AdminBillingOverviewSecondaryTabOnboardingOverlay,
     priority: N.DEFAULT_MODAL
   });
   useSingleEffect(() => {

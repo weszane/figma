@@ -1,469 +1,665 @@
-import { ServiceCategories } from "../905/165054";
-import { defaultSessionLocalIDString } from "../905/871411";
-import { l as _$$l } from "../905/716947";
-import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { setupResourceAtomHandler } from "../figma_app/566371";
-import { reportError } from "../905/11";
-import { hasResourcePresetKey } from "../figma_app/255679";
-import { isInvalidValue } from "../905/216495";
-import { useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
-import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
-import { computeBackingGUIDs } from "../905/92359";
-import { zV } from "../figma_app/410317";
-let g = /(#[0-9]+:[0-9]+)/g;
-function f(e) {
-  if ("string" == typeof e) {
-    let t = e.toLowerCase();
-    if ("true" === t || "yes" === t || "on" === t) return !0;
-    if ("false" === t || "no" === t || "off" === t) return !1;
+import { reportError } from "../905/11"
+import { computeBackingGUIDs } from "../905/92359"
+import { ServiceCategories } from "../905/165054"
+import { isInvalidValue } from "../905/216495"
+import { getFeatureFlags } from "../905/601108"
+import { defaultSessionLocalIDString } from "../905/871411"
+import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355"
+import { CodeConnectForNodeLk, FileCanAccessFullCodeConnect } from "../figma_app/43951"
+import { hasResourcePresetKey } from "../figma_app/255679"
+import { zV } from "../figma_app/410317"
+import { openFileLibraryKeyAtom, useCurrentFileKey } from "../figma_app/516028"
+import { setupResourceAtomHandler } from "../figma_app/566371"
+
+const NODE_ID_PATTERN = /(#\d+:\d+)/g
+
+function parseBooleanValue(value: any): any {
+  if (typeof value === "string") {
+    const lowercased = value.toLowerCase()
+    if (lowercased === "true" || lowercased === "yes" || lowercased === "on")
+      return true
+    if (lowercased === "false" || lowercased === "no" || lowercased === "off")
+      return false
   }
-  return e;
+  return value
 }
-function E(e) {
-  return e.replace(/\s+/g, " ");
+
+function normalizeWhitespace(str: string): string {
+  return str.replace(/\s+/g, " ")
 }
-function y(e) {
-  return e.replace(g, "").replace(/\s+/g, " ").trim();
+
+function sanitizePropertyName(str: string): string {
+  return str.replace(NODE_ID_PATTERN, "").replace(/\s+/g, " ").trim()
 }
-export function $$b3(e) {
+export function getComponentProperties(node: any): Record<string, any> {
   try {
-    if ("INSTANCE" === e.type) return Object.entries(e.componentProperties()).reduce((e, [t, r]) => ({
-      ...e,
-      [y(t)]: r
-    }), {});
-    if ("SYMBOL" === e.type) {
-      if (e.isState) return function (e) {
-        if (!e.parentNode) return {};
-        let t = Object.entries(e.variantProperties() ?? {}).reduce((e, [t, r]) => ({
-          ...e,
-          [t]: {
-            value: r,
-            type: "VARIANT"
-          }
-        }), {});
-        return Object.entries(e.parentNode.componentPropertyDefinitions()).reduce((e, [t, r]) => "VARIANT" === r.type ? e : {
-          ...e,
-          [y(t)]: {
-            value: r.defaultValue,
-            type: r.type
-          }
-        }, {
-          ...t
-        });
-      }(e);
-      return Object.entries(e.componentPropertyDefinitions()).reduce((e, [t, r]) => ({
-        ...e,
-        [y(t)]: {
-          value: r.defaultValue,
-          type: r.type
-        }
-      }), {});
+    if (node.type === "INSTANCE") {
+      return Object.entries(node.componentProperties()).reduce((acc, [propName, propValue]) => ({
+        ...acc,
+        [sanitizePropertyName(propName)]: propValue,
+      }), {})
     }
-  } catch (e) {
-    "Component set for node has existing errors" !== e.message && reportError(ServiceCategories.DEVELOPER_TOOLS, e);
+    if (node.type === "SYMBOL") {
+      if (node.isState) {
+        return (function getStateComponentProperties(stateNode: any) {
+          if (!stateNode.parentNode)
+            return {}
+          const variantProps = Object.entries(stateNode.variantProperties() ?? {}).reduce((acc, [propName, propValue]) => ({
+            ...acc,
+            [propName]: {
+              value: propValue,
+              type: "VARIANT",
+            },
+          }), {})
+          return Object.entries<{defaultValue: any; type: string}>(stateNode.parentNode.componentPropertyDefinitions()).reduce((acc, [propName, propDef]) => propDef.type === "VARIANT"
+            ? acc
+            : {
+                ...acc,
+                [sanitizePropertyName(propName)]: {
+                  value: propDef.defaultValue,
+                  type: propDef.type,
+                },
+              }, {
+            ...variantProps,
+          })
+        }(node))
+      }
+      return Object.entries<{defaultValue: any; type: string}>(node.componentPropertyDefinitions()).reduce((acc, [propName, propDef]) => ({
+        ...acc,
+        [sanitizePropertyName(propName)]: {
+          value: propDef.defaultValue,
+          type: propDef.type,
+        },
+      }), {})
+    }
   }
-  return {};
-}
-export function $$T7(e, t) {
-  let r = 0;
-  let n = null;
-  let i = $$b3(t);
-  for (let t of e) {
-    let e = 0;
-    Object.entries(t.variant ?? {}).every(([t, r]) => {
-      let n = E(t);
-      let a = Object.entries(i).reduce((e, [t, r]) => ({
-        ...e,
-        [E(t)]: {
-          type: r.type,
-          value: f(r.value)
-        }
-      }), {})[n];
-      return a?.value === f(r) ? (e++, !0) : void 0 === a;
-    }) && (!n || e > r) && (n = t, r = e);
+  catch (error) {
+    error.message !== "Component set for node has existing errors" && reportError(ServiceCategories.DEVELOPER_TOOLS, error)
   }
-  return n;
+  return {}
 }
-export function $$I10(e) {
-  return (e?.publishID && e?.publishID !== defaultSessionLocalIDString ? e?.publishID : e?.guid) ?? null;
+export function findBestMatchingVariant(variants: any[], node: any): any | null {
+  let maxMatches = 0
+  let bestMatch = null
+  const nodeProps = getComponentProperties(node)
+
+  for (const variant of variants) {
+    let matchCount = 0
+    const allPropsMatch = Object.entries(variant.variant ?? {}).every(([variantKey, variantValue]) => {
+      const normalizedKey = normalizeWhitespace(variantKey)
+      const normalizedNodeProps = Object.entries(nodeProps).reduce((acc, [key, prop]) => ({
+        ...acc,
+        [normalizeWhitespace(key)]: {
+          type: prop.type,
+          value: parseBooleanValue(prop.value),
+        },
+      }), {})
+      const nodeProp = normalizedNodeProps[normalizedKey]
+      return nodeProp?.value === parseBooleanValue(variantValue) ? (matchCount++, true) : nodeProp === undefined
+    })
+
+    if (allPropsMatch && (!bestMatch || matchCount > maxMatches)) {
+      bestMatch = variant
+      maxMatches = matchCount
+    }
+  }
+  return bestMatch
 }
-export function $$S2(e, t, r) {
-  let n = t.get(e);
-  if (!n) return {
-    backingLibraryKey: null,
-    backingNodeId: null
-  };
-  let {
+export function getPublishedNodeId(node: any): string | null {
+  return (node?.publishID && node?.publishID !== defaultSessionLocalIDString ? node?.publishID : node?.guid) ?? null
+}
+export function getBackingNodeInfo(nodeId: string, nodeMap: any, fallbackLibraryKey: string): any {
+  const node = nodeMap.get(nodeId)
+  if (!node) {
+    return {
+      backingLibraryKey: null,
+      backingNodeId: null,
+    }
+  }
+
+  const {
     backingSymbolGUID,
-    backingStateGroupGUID
-  } = computeBackingGUIDs(new Set([(n?.type === "INSTANCE" ? n?.symbolId : n?.guid) ?? ""]), t);
-  let s = null;
-  let o = null;
-  if (isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID || (s = t.get(backingSymbolGUID)), isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID || (o = t.get(backingStateGroupGUID)), "INSTANCE" === n.type && n.symbolId) {
-    let e = t.get(n.symbolId);
-    if (e?.isState) {
-      let e = o?.sourceLibraryKey;
+    backingStateGroupGUID,
+  } = computeBackingGUIDs(new Set([(node?.type === "INSTANCE" ? node?.symbolId : node?.guid) ?? ""]), nodeMap)
+
+  let backingSymbol = null
+  let backingStateGroup = null
+
+  if (!isInvalidValue(backingSymbolGUID) && backingSymbolGUID !== null) {
+    backingSymbol = nodeMap.get(backingSymbolGUID)
+  }
+  if (!isInvalidValue(backingStateGroupGUID) && backingStateGroupGUID !== null) {
+    backingStateGroup = nodeMap.get(backingStateGroupGUID)
+  }
+
+  if (node.type === "INSTANCE" && node.symbolId) {
+    const symbol = nodeMap.get(node.symbolId)
+    if (symbol?.isState) {
+      const libraryKey = backingStateGroup?.sourceLibraryKey
       return {
-        backingNodeId: $$I10(o),
-        backingComponentKey: s?.componentKey ?? void 0,
-        backingStateGroupKey: o?.stateGroupKey ?? void 0,
-        backingLibraryKey: "" !== e ? e : r
-      };
+        backingNodeId: getPublishedNodeId(backingStateGroup),
+        backingComponentKey: backingSymbol?.componentKey ?? void 0,
+        backingStateGroupKey: backingStateGroup?.stateGroupKey ?? void 0,
+        backingLibraryKey: libraryKey !== "" ? libraryKey : fallbackLibraryKey,
+      }
     }
     {
-      let e = s?.sourceLibraryKey;
+      const libraryKey = backingSymbol?.sourceLibraryKey
       return {
-        backingNodeId: $$I10(s),
-        backingComponentKey: s?.componentKey ?? void 0,
-        backingLibraryKey: "" !== e ? e : r
-      };
+        backingNodeId: getPublishedNodeId(backingSymbol),
+        backingComponentKey: backingSymbol?.componentKey ?? void 0,
+        backingLibraryKey: libraryKey !== "" ? libraryKey : fallbackLibraryKey,
+      }
     }
   }
-  return "SYMBOL" === n.type ? n.isState ? {
-    backingNodeId: $$I10(n.parentNode),
-    backingLibraryKey: n.parentNode?.sourceLibraryKey && n.parentNode?.sourceLibraryKey !== "" ? n.parentNode?.sourceLibraryKey : r,
-    backingStateGroupKey: n.parentNode?.stateGroupKey ?? void 0
-  } : {
-    backingNodeId: $$I10(n),
-    backingLibraryKey: "" !== n.sourceLibraryKey ? n.sourceLibraryKey : r,
-    backingComponentKey: n.componentKey ?? void 0
-  } : {
-    backingLibraryKey: null,
-    backingNodeId: null
-  };
+
+  return node.type === "SYMBOL"
+    ? node.isState
+      ? {
+          backingNodeId: getPublishedNodeId(node.parentNode),
+          backingLibraryKey: node.parentNode?.sourceLibraryKey && node.parentNode?.sourceLibraryKey !== "" ? node.parentNode?.sourceLibraryKey : fallbackLibraryKey,
+          backingStateGroupKey: node.parentNode?.stateGroupKey ?? void 0,
+        }
+      : {
+          backingNodeId: getPublishedNodeId(node),
+          backingLibraryKey: node.sourceLibraryKey !== "" ? node.sourceLibraryKey : fallbackLibraryKey,
+          backingComponentKey: node.componentKey ?? void 0,
+        }
+    : {
+        backingLibraryKey: null,
+        backingNodeId: null,
+      }
 }
-export function $$v8(e, t) {
-  let r = t.get(e);
-  let n = useCurrentFileKey();
-  let i = useAtomWithSubscription(openFileLibraryKeyAtom);
-  let [d] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
-    key: n ?? ""
-  }));
-  let {
+export function hasCodeConnect(nodeId: string, nodeMap: any): boolean {
+  const node = nodeMap.get(nodeId)
+  const currentFileKey = useCurrentFileKey()
+  const openLibraryKey = useAtomWithSubscription(openFileLibraryKeyAtom)
+
+  const [filePermission] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
+    key: currentFileKey ?? "",
+  })) as any[]
+
+  const {
     backingNodeId,
-    backingLibraryKey
-  } = $$S2(e, t, i);
-  let g = hasResourcePresetKey(_$$l(backingLibraryKey ?? ""));
-  let f = atomStoreManager.get(zV);
-  let E = d.data?.file?.status === "loaded" && !d.data.file?.data?.hasPermission && !g;
-  let [y] = setupResourceAtomHandler(CodeConnectForNodeLk({
+    backingLibraryKey,
+  } = getBackingNodeInfo(nodeId, nodeMap, openLibraryKey)
+
+  const isCommunityLibrary = hasResourcePresetKey(backingLibraryKey ?? "")
+  const codeConnectStore = atomStoreManager.get(zV)
+  const hasNoPermission = filePermission.data?.file?.status === "loaded" && !filePermission.data.file?.data?.hasPermission && !isCommunityLibrary
+
+  const [codeConnectData] = setupResourceAtomHandler(CodeConnectForNodeLk({
     libraryKey: backingLibraryKey ?? "",
     nodeId: backingNodeId ?? "",
     instances: [],
-    openFileKey: n ?? "",
-    isCommunityLibrary: g
+    openFileKey: currentFileKey ?? "",
+    isCommunityLibrary,
   }), {
-    enabled: !!backingLibraryKey && !!backingNodeId && !!getFeatureFlags().dt_figmadoc && !E
-  });
-  if (E || !r || !getFeatureFlags().dt_figmadoc) return !1;
-  let b = y.data?.file;
-  return f?.nodesWithCodeConnect && b?.status !== "loaded" ? f?.nodesWithCodeConnect.has(`${$$A12(backingLibraryKey, backingNodeId)}`) : !!(b && "loaded" === b.status && b.data && b.data?.code_connect_for_node_lk && b.data?.code_connect_for_node_lk.length > 0);
+    enabled: !!backingLibraryKey && !!backingNodeId && !!getFeatureFlags().dt_figmadoc && !hasNoPermission,
+  }) as any[]
+
+  if (hasNoPermission || !node || !getFeatureFlags().dt_figmadoc)
+    return false
+
+  const fileData = codeConnectData.data?.file
+  return codeConnectStore?.nodesWithCodeConnect && fileData?.status !== "loaded"
+    ? codeConnectStore?.nodesWithCodeConnect.has(createNodeKey(backingLibraryKey, backingNodeId))
+    : !!(fileData && fileData.status === "loaded" && fileData.data && fileData.data?.code_connect_for_node_lk && fileData.data?.code_connect_for_node_lk.length > 0)
 }
-export function $$A12(e, t) {
-  return `${e},${t}`;
+export function createNodeKey(libraryKey: string, nodeId: string): string {
+  return `${libraryKey},${nodeId}`
 }
-export function $$x11({
-  codeConnect: e,
-  node: t,
-  label: r,
-  filePermissionData: i
-}) {
-  let a = i?.file?.status === "loaded" && !i.file.data?.hasPermission;
-  let s = e.map(e => e.label).filter(Boolean).sort((e, t) => e.localeCompare(t)) ?? [];
-  let o = $$C4(e, r);
-  if (!o || a) return {
-    id: null,
-    updatedAt: null,
-    doc: null,
-    loaded: !0,
-    availableLabels: s,
-    instanceFigmadocs: {},
-    disabled: !1
-  };
-  let l = [];
-  let c = {};
-  try {
-    o.instanceFigmadocs && (c = Object.fromEntries(Object.entries(o.instanceFigmadocs).map(([e, t]) => [e, JSON.parse(t)])));
-  } catch {}
-  try {
-    l = JSON.parse(o.figmadoc);
-  } catch (e) {
-    reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
-      extra: {
-        figmadoc: o.figmadoc
-      }
-    });
+export function parseCodeConnectForDisplay({
+  codeConnect,
+  node,
+  label,
+  filePermissionData,
+}: {
+  codeConnect: any[]
+  node: any
+  label?: string
+  filePermissionData: any
+}): any {
+  const hasNoPermission = filePermissionData?.file?.status === "loaded" && !filePermissionData.file.data?.hasPermission
+  const availableLabels = codeConnect.map(doc => doc.label).filter(Boolean).sort((a, b) => a.localeCompare(b)) ?? []
+  const selectedDoc = selectCodeConnectDoc(codeConnect, label)
+
+  if (!selectedDoc || hasNoPermission) {
     return {
       id: null,
       updatedAt: null,
       doc: null,
-      loaded: !0,
-      availableLabels: s,
+      loaded: true,
+      availableLabels,
       instanceFigmadocs: {},
-      disabled: !0
-    };
+      disabled: false,
+    }
   }
-  let {
-    id,
-    updatedAt
-  } = o;
-  return (Array.isArray(l) || (l = [l]), "type" in l[0] && "snippet" === l[0].type) ? {
+
+  let parsedDocs = []
+  let instanceDocs = {}
+
+  try {
+    if (selectedDoc.instanceFigmadocs) {
+      instanceDocs = Object.fromEntries(
+        Object.entries(selectedDoc.instanceFigmadocs).map(([key, value]) => [key, JSON.parse(value as string)]),
+      )
+    }
+  }
+  catch {}
+
+  try {
+    parsedDocs = JSON.parse(selectedDoc.figmadoc)
+  }
+  catch (error) {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, error, {
+      extra: {
+        figmadoc: selectedDoc.figmadoc,
+      },
+    })
+    return {
+      id: null,
+      updatedAt: null,
+      doc: null,
+      loaded: true,
+      availableLabels,
+      instanceFigmadocs: {},
+      disabled: true,
+    }
+  }
+
+  const {
     id,
     updatedAt,
-    doc: l[0],
-    loaded: !0,
-    availableLabels: s,
-    instanceFigmadocs: c,
-    disabled: !1
-  } : "template" in l[0] ? {
-    id,
-    updatedAt,
-    doc: $$T7(l, t),
-    instanceFigmadocs: c,
-    loaded: !0,
-    availableLabels: s,
-    disabled: !1
-  } : {
+  } = selectedDoc
+
+  if (!Array.isArray(parsedDocs)) {
+    parsedDocs = [parsedDocs]
+  }
+
+  if ("type" in parsedDocs[0] && parsedDocs[0].type === "snippet") {
+    return {
+      id,
+      updatedAt,
+      doc: parsedDocs[0],
+      loaded: true,
+      availableLabels,
+      instanceFigmadocs: instanceDocs,
+      disabled: false,
+    }
+  }
+
+  if ("template" in parsedDocs[0]) {
+    return {
+      id,
+      updatedAt,
+      doc: findBestMatchingVariant(parsedDocs, node),
+      instanceFigmadocs: instanceDocs,
+      loaded: true,
+      availableLabels,
+      disabled: false,
+    }
+  }
+
+  return {
     id,
     updatedAt,
     doc: null,
-    loaded: !0,
-    availableLabels: s,
-    instanceFigmadocs: c,
-    disabled: !0
-  };
+    loaded: true,
+    availableLabels,
+    instanceFigmadocs: instanceDocs,
+    disabled: true,
+  }
 }
-export function $$N5(e, t, r, i) {
-  let u;
-  let h = t.get(e);
-  let g = useCurrentFileKey();
-  let f = useAtomWithSubscription(openFileLibraryKeyAtom);
-  let [E] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
-    key: g ?? ""
-  }));
-  let y = atomStoreManager.get(zV);
-  let {
+export function getCodeConnectForNode(nodeId: string, nodeMap: any, preferredLabel?: string, overrideNode?: any): any {
+  let codeConnectDocs: any
+  const node = nodeMap.get(nodeId)
+  const currentFileKey = useCurrentFileKey()
+  const openLibraryKey = useAtomWithSubscription(openFileLibraryKeyAtom)
+
+  const [filePermission] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
+    key: currentFileKey ?? "",
+  })) as any[]
+
+  const codeConnectStore = atomStoreManager.get(zV)
+  const {
     backingNodeId,
-    backingLibraryKey
-  } = $$S2(e, t, f);
-  let v = hasResourcePresetKey(_$$l(backingLibraryKey ?? ""));
-  let x = $$L6(e, t, g, !!i, f);
-  let N = !!backingLibraryKey && function (e, t, r) {
-    if (!e || !t) return !1;
-    let n = atomStoreManager.get(zV);
-    if (!n || !n.docsById || !n.docsById[`key-${e},${t}`]) return !1;
-    for (let e of r) if (!n.docsById[`key-${e}`]) return !1;
-    return !0;
-  }(backingLibraryKey, backingNodeId, x);
-  let w = null;
-  let O = E.data?.file?.status === "loaded" && !E.data.file?.data?.hasPermission && !v;
-  let [R] = setupResourceAtomHandler(CodeConnectForNodeLk({
+    backingLibraryKey,
+  } = getBackingNodeInfo(nodeId, nodeMap, openLibraryKey)
+
+  const isCommunityLibrary = hasResourcePresetKey(backingLibraryKey ?? "")
+  const instanceKeys = collectInstanceKeys(nodeId, nodeMap, currentFileKey, !!overrideNode, openLibraryKey)
+
+  const hasPreloadedDocs = !!backingLibraryKey && (function checkPreloadedDocs(libraryKey: string, nodeId: string, instances: string[]): boolean {
+    if (!libraryKey || !nodeId)
+      return false
+
+    const store = atomStoreManager.get(zV)
+    if (!store || !store.docsById || !store.docsById[`key-${libraryKey},${nodeId}`])
+      return false
+
+    for (const instanceKey of instances) {
+      if (!store.docsById[`key-${instanceKey}`])
+        return false
+    }
+    return true
+  }(backingLibraryKey, backingNodeId, instanceKeys))
+
+  let preloadedDocs = null
+  const hasNoPermission = filePermission.data?.file?.status === "loaded" && !filePermission.data.file?.data?.hasPermission && !isCommunityLibrary
+
+  const [codeConnectData] = setupResourceAtomHandler(CodeConnectForNodeLk({
     libraryKey: backingLibraryKey ?? "",
     nodeId: backingNodeId ?? "",
-    instances: x,
-    openFileKey: g ?? "",
-    isCommunityLibrary: v
+    instances: instanceKeys,
+    openFileKey: currentFileKey ?? "",
+    isCommunityLibrary,
   }), {
-    enabled: !!backingLibraryKey && !!backingNodeId && !!getFeatureFlags().dt_figmadoc && !O
-  });
-  if (O && !N || !backingLibraryKey || !backingNodeId) return {
-    id: null,
-    updatedAt: null,
-    doc: null,
-    loaded: !0,
-    availableLabels: [],
-    instanceFigmadocs: {},
-    disabled: !0,
-    isCommunityKey: v,
-    isComponentBrowserMapping: !1
-  };
-  if (N && y?.docsById) try {
-    w = JSON.parse(y?.docsById[`key-${backingLibraryKey},${backingNodeId}`]);
-  } catch {
-    w = null;
-  }
-  if (!h || !getFeatureFlags().dt_figmadoc) return {
-    id: null,
-    updatedAt: null,
-    doc: null,
-    loaded: !0,
-    availableLabels: [],
-    instanceFigmadocs: {},
-    disabled: !0,
-    isCommunityKey: v,
-    isComponentBrowserMapping: !1
-  };
-  let P = !1;
-  let D = R.data?.file;
-  if (D && "loaded" === D.status && D.data && D.data?.code_connect_for_node_lk && D.data?.code_connect_for_node_lk.length > 0) u = D.data?.code_connect_for_node_lk;else {
-    if (!w || D?.status === "loaded") return {
-      id: null,
-      updatedAt: null,
-      doc: null,
-      loaded: "loading" !== R.status,
-      availableLabels: [],
-      instanceFigmadocs: {},
-      willHaveCodeConnect: ("loading" === R.status && y?.nodesWithCodeConnect.has($$A12(backingLibraryKey, backingNodeId))) ?? !1,
-      disabled: D?.status !== "loaded",
-      isCommunityKey: v,
-      isComponentBrowserMapping: !1
-    };
-    P = !0;
-    u = w;
-  }
-  let k = u.map(e => e.label).filter(Boolean).sort((e, t) => e.localeCompare(t)) ?? [];
-  let M = $$C4(u, r);
-  if (!M) return {
-    id: null,
-    updatedAt: null,
-    doc: null,
-    loaded: !0,
-    availableLabels: k,
-    instanceFigmadocs: {},
-    disabled: !1,
-    isCommunityKey: v,
-    isComponentBrowserMapping: !1
-  };
-  let F = [];
-  let j = {};
-  try {
-    if (w && y?.docsById) for (let e of x) {
-      let t = $$C4(JSON.parse(y?.docsById[`key-${e}`]), r);
-      j[`key-${e}`] = JSON.parse(t.figmadoc);
-    } else M.instanceFigmadocs && (j = Object.fromEntries(Object.entries(M.instanceFigmadocs).map(([e, t]) => [e, JSON.parse(t)])));
-  } catch {}
-  try {
-    F = JSON.parse(M.figmadoc);
-  } catch (e) {
-    reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
-      extra: {
-        figmadoc: M.figmadoc
-      }
-    });
+    enabled: !!backingLibraryKey && !!backingNodeId && !!getFeatureFlags().dt_figmadoc && !hasNoPermission,
+  }) as any[]
+
+  if ((hasNoPermission && !hasPreloadedDocs) || !backingLibraryKey || !backingNodeId) {
     return {
       id: null,
       updatedAt: null,
       doc: null,
-      loaded: !0,
-      availableLabels: k,
+      loaded: true,
+      availableLabels: [],
       instanceFigmadocs: {},
-      disabled: !0,
-      isCommunityKey: v,
-      isComponentBrowserMapping: !1
-    };
+      disabled: true,
+      isCommunityKey: isCommunityLibrary,
+      isComponentBrowserMapping: false,
+    }
   }
-  let {
-    id,
-    updatedAt
-  } = M;
-  Array.isArray(F) || (F = [F]);
-  let G = "component_browser" === M.type;
-  return "type" in F[0] && "snippet" === F[0].type ? {
+
+  if (hasPreloadedDocs && codeConnectStore?.docsById) {
+    try {
+      preloadedDocs = JSON.parse(codeConnectStore?.docsById[`key-${backingLibraryKey},${backingNodeId}`])
+    }
+    catch {
+      preloadedDocs = null
+    }
+  }
+
+  if (!node || !getFeatureFlags().dt_figmadoc) {
+    return {
+      id: null,
+      updatedAt: null,
+      doc: null,
+      loaded: true,
+      availableLabels: [],
+      instanceFigmadocs: {},
+      disabled: true,
+      isCommunityKey: isCommunityLibrary,
+      isComponentBrowserMapping: false,
+    }
+  }
+
+  let isPreLoaded = false
+  const fileData = codeConnectData.data?.file
+
+  if (fileData && fileData.status === "loaded" && fileData.data && fileData.data?.code_connect_for_node_lk && fileData.data?.code_connect_for_node_lk.length > 0) {
+    codeConnectDocs = fileData.data?.code_connect_for_node_lk
+  }
+  else {
+    if (!preloadedDocs || fileData?.status === "loaded") {
+      return {
+        id: null,
+        updatedAt: null,
+        doc: null,
+        loaded: codeConnectData.status !== "loading",
+        availableLabels: [],
+        instanceFigmadocs: {},
+        willHaveCodeConnect: (codeConnectData.status === "loading" && codeConnectStore?.nodesWithCodeConnect.has(createNodeKey(backingLibraryKey, backingNodeId))) ?? false,
+        disabled: fileData?.status !== "loaded",
+        isCommunityKey: isCommunityLibrary,
+        isComponentBrowserMapping: false,
+      }
+    }
+    isPreLoaded = true
+    codeConnectDocs = preloadedDocs
+  }
+  const availableLabels = codeConnectDocs.map((doc: any) => doc.label).filter(Boolean).sort((a: string, b: string) => a.localeCompare(b)) ?? []
+  const selectedDoc = selectCodeConnectDoc(codeConnectDocs, preferredLabel)
+
+  if (!selectedDoc) {
+    return {
+      id: null,
+      updatedAt: null,
+      doc: null,
+      loaded: true,
+      availableLabels,
+      instanceFigmadocs: {},
+      disabled: false,
+      isCommunityKey: isCommunityLibrary,
+      isComponentBrowserMapping: false,
+    }
+  }
+
+  let parsedDocs = []
+  let instanceDocs = {}
+
+  try {
+    if (preloadedDocs && codeConnectStore?.docsById) {
+      for (const instanceKey of instanceKeys) {
+        const instanceDocData = selectCodeConnectDoc(JSON.parse(codeConnectStore?.docsById[`key-${instanceKey}`]), preferredLabel)
+        instanceDocs[`key-${instanceKey}`] = JSON.parse(instanceDocData.figmadoc)
+      }
+    }
+    else {
+      if (selectedDoc.instanceFigmadocs) {
+        instanceDocs = Object.fromEntries(
+          Object.entries(selectedDoc.instanceFigmadocs).map(([key, value]) => [key, JSON.parse(value as string)]),
+        )
+      }
+    }
+  }
+  catch {}
+
+  try {
+    parsedDocs = JSON.parse(selectedDoc.figmadoc)
+  }
+  catch (error) {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, error, {
+      extra: {
+        figmadoc: selectedDoc.figmadoc,
+      },
+    })
+    return {
+      id: null,
+      updatedAt: null,
+      doc: null,
+      loaded: true,
+      availableLabels,
+      instanceFigmadocs: {},
+      disabled: true,
+      isCommunityKey: isCommunityLibrary,
+      isComponentBrowserMapping: false,
+    }
+  }
+
+  const {
     id,
     updatedAt,
-    doc: F[0],
-    loaded: !0,
-    availableLabels: k,
-    instanceFigmadocs: j,
-    disabled: !1,
-    isCommunityKey: v,
-    isComponentBrowserMapping: G
-  } : "template" in F[0] ? {
-    id,
-    updatedAt,
-    doc: $$T7(F, i ?? h),
-    instanceFigmadocs: j,
-    loaded: !0,
-    availableLabels: k,
-    disabled: !1,
-    isCommunityKey: v,
-    isPreLoaded: P,
-    isComponentBrowserMapping: G
-  } : {
+  } = selectedDoc
+
+  if (!Array.isArray(parsedDocs)) {
+    parsedDocs = [parsedDocs]
+  }
+
+  const isComponentBrowserMapping = selectedDoc.type === "component_browser"
+
+  if ("type" in parsedDocs[0] && parsedDocs[0].type === "snippet") {
+    return {
+      id,
+      updatedAt,
+      doc: parsedDocs[0],
+      loaded: true,
+      availableLabels,
+      instanceFigmadocs: instanceDocs,
+      disabled: false,
+      isCommunityKey: isCommunityLibrary,
+      isComponentBrowserMapping,
+    }
+  }
+
+  if ("template" in parsedDocs[0]) {
+    return {
+      id,
+      updatedAt,
+      doc: findBestMatchingVariant(parsedDocs, overrideNode ?? node),
+      instanceFigmadocs: instanceDocs,
+      loaded: true,
+      availableLabels,
+      disabled: false,
+      isCommunityKey: isCommunityLibrary,
+      isPreLoaded,
+      isComponentBrowserMapping,
+    }
+  }
+
+  return {
     id,
     updatedAt,
     doc: null,
-    loaded: !0,
-    availableLabels: k,
-    instanceFigmadocs: j,
-    disabled: !0,
-    isCommunityKey: v,
-    isComponentBrowserMapping: !1
-  };
-}
-export function $$C4(e, t) {
-  let r = [e => "figmadoc" === e.type && "React" === e.label, e => "figmadoc" === e.type && "Storybook" === e.label, e => "figmadoc" === e.type && "SwiftUI" === e.label, e => "snippet" === e.type];
-  for (let n of (t && r.unshift(e => e.label === t), r)) {
-    let t = e.find(n);
-    if (t) return t;
+    loaded: true,
+    availableLabels,
+    instanceFigmadocs: instanceDocs,
+    disabled: true,
+    isCommunityKey: isCommunityLibrary,
+    isComponentBrowserMapping: false,
   }
-  return e[0];
 }
-export function $$w1(e, t, r) {
-  if ("INSTANCE" !== e.type) return null;
-  let n = e.symbolId;
-  if (!n) return null;
-  let i = function (e, t, r) {
-    let {
+export function selectCodeConnectDoc(docs: any[], preferredLabel?: string): any {
+  const defaultPriority = [
+    (doc: any) => doc.type === "figmadoc" && doc.label === "React",
+    (doc: any) => doc.type === "figmadoc" && doc.label === "Storybook",
+    (doc: any) => doc.type === "figmadoc" && doc.label === "SwiftUI",
+    (doc: any) => doc.type === "snippet",
+  ]
+
+  if (preferredLabel) {
+    defaultPriority.unshift((doc: any) => doc.label === preferredLabel)
+  }
+
+  for (const predicate of defaultPriority) {
+    const match = docs.find(predicate)
+    if (match)
+      return match
+  }
+  return docs[0]
+}
+export function getInstanceBackingKey(node: any, nodeMap: any, fallbackLibraryKey: string): string | null {
+  if (node.type !== "INSTANCE")
+    return null
+
+  const symbolId = node.symbolId
+  if (!symbolId)
+    return null
+
+  const backingInfo = (function computeBackingInfo(symbolId: string, nodeMap: any, fallbackKey: string) {
+    const {
       backingSymbolGUID,
-      backingStateGroupGUID
-    } = computeBackingGUIDs(new Set([e]), t);
-    if (isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID) return null;
-    let a = t.get(backingSymbolGUID);
-    let s = isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID ? null : t.get(backingStateGroupGUID);
-    return s ? {
-      backingNodeId: $$I10(s),
-      backingLibraryKey: "" !== s.sourceLibraryKey ? s.sourceLibraryKey : r
-    } : a ? {
-      backingNodeId: $$I10(a),
-      backingLibraryKey: "" !== a.sourceLibraryKey ? a.sourceLibraryKey : r
-    } : null;
-  }(n, t, r);
-  if (!i) return null;
-  let {
+      backingStateGroupGUID,
+    } = computeBackingGUIDs(new Set([symbolId]), nodeMap)
+
+    if (isInvalidValue(backingSymbolGUID) || backingSymbolGUID === null)
+      return null
+
+    const backingSymbol = nodeMap.get(backingSymbolGUID)
+    const backingStateGroup = isInvalidValue(backingStateGroupGUID) || backingStateGroupGUID === null
+      ? null
+      : nodeMap.get(backingStateGroupGUID)
+
+    if (backingStateGroup) {
+      return {
+        backingNodeId: getPublishedNodeId(backingStateGroup),
+        backingLibraryKey: backingStateGroup.sourceLibraryKey !== "" ? backingStateGroup.sourceLibraryKey : fallbackKey,
+      }
+    }
+
+    if (backingSymbol) {
+      return {
+        backingNodeId: getPublishedNodeId(backingSymbol),
+        backingLibraryKey: backingSymbol.sourceLibraryKey !== "" ? backingSymbol.sourceLibraryKey : fallbackKey,
+      }
+    }
+
+    return null
+  }(symbolId, nodeMap, fallbackLibraryKey))
+
+  if (!backingInfo)
+    return null
+
+  const {
     backingNodeId,
-    backingLibraryKey
-  } = i;
-  return backingLibraryKey + "," + backingNodeId;
+    backingLibraryKey,
+  } = backingInfo
+
+  return createNodeKey(backingLibraryKey, backingNodeId)
 }
-export var $$O0 = (e => (e[e.Continue = 0] = "Continue", e[e.SkipChildren = 1] = "SkipChildren", e[e.Stop = 2] = "Stop", e))($$O0 || {});
-export function $$R9(e, t, r, n) {
-  let i = [e];
-  for (; i.length > 0;) {
-    let e = i.pop();
-    if (e) {
-      let a = r(e);
-      if (2 === a) return;
-      if (1 === a) continue;
-      for (let r of n ? e.visibleChildren : e.childrenGuids) {
-        let e = t.get(r);
-        e && i.push(e);
+export enum TraversalAction {
+  Continue = 0,
+  SkipChildren = 1,
+  Stop = 2,
+}
+export function traverseNodeTree(rootNode: any, nodeMap: any, visitor: (node: any) => TraversalAction, visibleOnly: boolean = false): void {
+  const stack = [rootNode]
+
+  while (stack.length > 0) {
+    const currentNode = stack.pop()
+    if (!currentNode)
+      continue
+
+    const action = visitor(currentNode)
+
+    if (action === TraversalAction.Stop)
+      return
+
+    if (action === TraversalAction.SkipChildren)
+      continue
+
+    const children = visibleOnly ? currentNode.visibleChildren : currentNode.childrenGuids
+    for (const childId of children) {
+      const childNode = nodeMap.get(childId)
+      if (childNode) {
+        stack.push(childNode)
       }
     }
   }
 }
-export function $$L6(e, t, r, n, i) {
-  if (!r) return [];
-  let a = new Set();
-  let s = t.get(e);
-  return s ? ($$R9(s, t, e => {
-    if ("INSTANCE" === e.type) {
-      let r = $$w1(e, t, i);
-      r && a.add(r);
+export function collectInstanceKeys(nodeId: string, nodeMap: any, currentFileKey: string | null, includeHidden: boolean, fallbackLibraryKey: string): string[] {
+  if (!currentFileKey)
+    return []
+
+  const instanceKeys = new Set<string>()
+  const rootNode = nodeMap.get(nodeId)
+
+  if (!rootNode)
+    return []
+
+  traverseNodeTree(rootNode, nodeMap, (node) => {
+    if (node.type === "INSTANCE") {
+      const instanceKey = getInstanceBackingKey(node, nodeMap, fallbackLibraryKey)
+      if (instanceKey) {
+        instanceKeys.add(instanceKey)
+      }
     }
-  }, !n), Array.from(a.values())) : [];
+    return TraversalAction.Continue
+  }, !includeHidden)
+
+  return Array.from(instanceKeys.values())
 }
-export const Bn = $$O0;
-export const Gl = $$w1;
-export const HX = $$S2;
-export const Ji = $$b3;
-export const Xe = $$C4;
-export const _3 = $$N5;
-export const ad = $$L6;
-export const kN = $$T7;
-export const mr = $$v8;
-export const ph = $$R9;
-export const te = $$I10;
-export const xQ = $$x11;
-export const zi = $$A12;
+export const Bn = TraversalAction
+export const Gl = getInstanceBackingKey
+export const HX = getBackingNodeInfo
+export const Ji = getComponentProperties
+export const Xe = selectCodeConnectDoc
+export const _3 = getCodeConnectForNode
+export const ad = collectInstanceKeys
+export const kN = findBestMatchingVariant
+export const mr = hasCodeConnect
+export const ph = traverseNodeTree
+export const te = getPublishedNodeId
+export const xQ = parseCodeConnectForDisplay
+export const zi = createNodeKey

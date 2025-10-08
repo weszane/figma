@@ -1,6 +1,31 @@
-export function $$n0(e) {
-  return function () {
-    return (0xfffffff & (e = (0xb55a4f09 ^ (e = (e = ((e = (e = (0xc761c23c ^ (e = e + 0x7ed55d16 + (e << 12) & 0xffffffff) ^ e >>> 19) & 0xffffffff) + 0x165667b1 + (e << 5) & 0xffffffff) + 0xd3a2646c ^ e << 9) & 0xffffffff) + 0xfd7046c5 + (e << 3) & 0xffffffff) ^ e >>> 16) & 0xffffffff)) / 0x10000000;
-  };
+/**
+ * Creates a pseudo-random number generator function.
+ * Original: $$n0
+ * @param seed - The initial seed value for the generator.
+ * @returns A function that generates a pseudo-random number between 0 and 1.
+ */
+export function createPseudoRandomGenerator(seed: number): () => number {
+  let state = seed
+
+  /**
+   * Generates the next pseudo-random number.
+   * @returns A number between 0 and 1.
+   */
+  const generate = (): number => {
+    // Update state with a series of bitwise operations (hash-like transformation)
+    state = (state + 0x7ED55D16 + (state << 12)) & 0xFFFFFFFF
+    state = (0xC761C23C ^ state ^ (state >>> 19)) & 0xFFFFFFFF
+    state = (state + 0x165667B1 + (state << 5)) & 0xFFFFFFFF
+    state = (state + 0xD3A2646C ^ (state << 9)) & 0xFFFFFFFF
+    state = (state + 0xFD7046C5 + (state << 3)) & 0xFFFFFFFF
+    state = (state ^ (state >>> 16)) & 0xFFFFFFFF
+
+    // Mask and normalize to [0, 1)
+    return (state & 0xFFFFFFF) / 0x10000000
+  }
+
+  return generate
 }
-export const g = $$n0;
+
+// Original export: g
+export const g = createPseudoRandomGenerator

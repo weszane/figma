@@ -11,7 +11,7 @@ import { getFeatureFlags } from "../905/601108";
 import { handleUrlAction } from "../905/280005";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { _t, d7 } from "../figma_app/632248";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { hm, zQ } from "../905/487011";
 import { AIActionIterationResult, AIActionIterationStatus, AIActionIterationAction, AIActionIterationTrigger } from "../905/278499";
 import { ActionButton } from "../905/189361";
@@ -123,7 +123,7 @@ export function $$R1({
 }) {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let I = function ({
     error: e,
     customMessage: t

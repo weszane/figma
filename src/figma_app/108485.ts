@@ -20,7 +20,7 @@ import { U } from "../905/455766";
 import { OnboardingRenderFrame } from "../905/284399";
 import { yP, Iy } from "../figma_app/551322";
 import { OverlayType } from "../figma_app/450829";
-import { nWd } from "../figma_app/6204";
+import { MoveDraftsNudge } from "../figma_app/6204";
 let $$x0 = atom(!1);
 let N = () => new Date(Date.now() - 1e4);
 let C = "Move Drafts Nudge -";
@@ -38,7 +38,7 @@ export function $$O1() {
   let M = useAtomWithSubscription(w);
   let F = Xr($$x0);
   let j = _$$e({
-    overlay: nWd,
+    overlay: MoveDraftsNudge,
     priority: _$$N2.SECONDARY_MODAL
   }, [k, t, r, P, D, R, M]);
   let {

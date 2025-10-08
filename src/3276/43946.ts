@@ -29,7 +29,7 @@ import { useFigmaMakePrototypeTabUpsellExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { getVisibleTheme } from "../905/640017";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
-import { _Z, eC, $1 } from "../905/539601";
+import { incrementLifecycleCounter, createLifecycleAtomFamily, checkLifecycleConditions } from "../905/539601";
 import { isIntegrationContext } from "../905/87821";
 import { NE } from "../3276/373312";
 import { w as _$$w } from "../0c62c2fd/912149";
@@ -330,7 +330,7 @@ let eg = [{
     let a = _$$U("announcement");
     let s = "dark" === getVisibleTheme();
     let r = () => {
-      t ? _Z(t) : n(postUserFlag({
+      t ? incrementLifecycleCounter(t) : n(postUserFlag({
         [e]: !0
       }));
     };
@@ -479,7 +479,7 @@ let eg = [{
 let ev = atom(e => {
   let t = {};
   eg.forEach(n => {
-    n.lifecycle && (t[n.userFlagName] = e(eC(n.lifecycle)));
+    n.lifecycle && (t[n.userFlagName] = e(createLifecycleAtomFamily(n.lifecycle)));
   });
   return t;
 });
@@ -533,7 +533,7 @@ export function $$ex0(e) {
     if (ec || n.panelName !== e.panelName || $[e.panelName]) return !1;
     if (n.lifecycle) {
       let e = g[n.userFlagName];
-      if (e?.status !== "loaded" || $1({
+      if (e?.status !== "loaded" || checkLifecycleConditions({
         ...e.data,
         lifecycleConfig: n.lifecycle
       })) return !1;

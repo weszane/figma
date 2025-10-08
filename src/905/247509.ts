@@ -6,7 +6,7 @@ import { defaultSessionLocalIDString, sessionLocalIDToString } from "../905/8714
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { yT } from "../figma_app/332598";
@@ -99,7 +99,7 @@ export function $$O2({
       hidePreferencesForList: !0
     }), jsx("div", {
       className: "compare_changes_right_panel--dividerBottom--FmR5V"
-    }), jsxs(P, {
+    }), jsxs(RecordingScrollContainer, {
       children: [R && "code" === inspectionMode ? jsx(L, {
         codeLanguage: codeLanguageApi.codeLanguage,
         layerBasisNodeId: t,

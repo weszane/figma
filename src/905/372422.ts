@@ -1,6 +1,6 @@
 import { useMemo, useRef, useEffect } from "react";
 import { DesignWorkspace, Fullscreen, PrototypingTsApi } from "../figma_app/763686";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { Y } from "../905/462154";
@@ -9,7 +9,7 @@ export function $$c0({
   magicLinkOutput: e,
   aiTrackingContext: t
 }) {
-  let i = Z();
+  let i = useNavigateToViewport();
   let {
     generatedInteractions
   } = e;

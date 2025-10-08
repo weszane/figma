@@ -5,7 +5,7 @@ import { debounce } from "../905/915765";
 import { ButtonPrimitive } from "../905/632989";
 import { O } from "../905/969533";
 import { k } from "../905/44647";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { G } from "../905/750789";
 import { renderI18nText } from "../905/303541";
 import { trackUserEvent } from "../figma_app/314264";
@@ -35,7 +35,7 @@ export function $$E0(e) {
     onScroll?.(e, t);
     o && f(o, l?.key, l?.teamId ?? void 0, l?.parentOrgId ?? void 0);
   }, [onScroll, l?.key, l?.parentOrgId, l?.teamId, o]);
-  return jsx(P, {
+  return jsx(RecordingScrollContainer, {
     ...s,
     className: "asset_panel_shared_components--scrollContainer--YbltE",
     onScroll: d,

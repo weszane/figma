@@ -90,7 +90,7 @@ import { L as _$$L } from '../figma_app/940186';
 import { dP, m9 } from '../figma_app/947348';
 import { T as _$$T } from '../figma_app/962636';
 import { isDesignFileType, isWhiteboardFileType, isIllustrationEditorType } from '../figma_app/976749';
-import { Wg, ZU } from '../figma_app/986347';
+import { DButtonType, DMenuItemType } from '../figma_app/986347';
 import { kk, OU } from '../figma_app/986594';
 import { f$, LF } from '../figma_app/998062';
 import { useDispatch, useSelector } from 'react-redux';
@@ -128,8 +128,8 @@ function F() {
   if (!_$$U2() || !_ || (p ?? []).length === 0 || m) return;
   if (!getFeatureFlags().dakota_grid_repeaters && t?.stackMode === 'GRID') {
     return {
-      type: ZU.CUSTOM_ACTION,
-      customActionType: Wg.STANDARD_BUTTON,
+      type: DMenuItemType.CUSTOM_ACTION,
+      customActionType: DButtonType.STANDARD_BUTTON,
       onClick: noop,
       icon: jsx(_$$T, {}),
       getTitle: () => getI18nString('dakota.collection_selector.connect_submenu_title'),
@@ -138,17 +138,17 @@ function F() {
     };
   }
   let b = (p ?? []).map(e => ({
-    type: ZU.CUSTOM_ACTION,
+    type: DMenuItemType.CUSTOM_ACTION,
     onClick: () => E(e.id),
     getTitle: () => e.name,
     recordingKey: getFeatureFlags().cms_bindings_ux_improvements && !r ? e.name : generateRecordingKey(M, e.name) ?? '',
-    customActionType: Wg.STANDARD_BUTTON,
+    customActionType: DButtonType.STANDARD_BUTTON,
     icon: getFeatureFlags().cms_bindings_ux_improvements ? void 0 : jsx(_$$T, {}),
     preventHoisting: !0
   }));
   let v = {
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.DROPDOWN_GROUP_HEADER,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.DROPDOWN_GROUP_HEADER,
     getTitle: () => getI18nString('dakota.collection_selector.connect_submenu_title'),
     recordingKey: 'cmsPageBindingLabel',
     onClick: noop,
@@ -157,7 +157,7 @@ function F() {
   };
   let P = getFeatureFlags().cms_bindings_ux_improvements ? [v, ...b] : b;
   return {
-    type: ZU.ACTION_SUBMENU,
+    type: DMenuItemType.ACTION_SUBMENU,
     recordingKey: M,
     icon: getFeatureFlags().cms_bindings_ux_improvements ? jsx(_$$i, {}) : jsx(_$$T, {}),
     getTitle: () => getFeatureFlags().cms_bindings_ux_improvements ? getI18nString('dakota.collection_selector.connect_list_to_cms_title') : getI18nString('dakota.collection_selector.connect_submenu_title'),
@@ -175,7 +175,7 @@ function j() {
   let r = t?.getDakotaSelector()?.collectionId;
   if (t && r) {
     return {
-      type: ZU.CUSTOM_ACTION,
+      type: DMenuItemType.CUSTOM_ACTION,
       onClick: () => {
         permissionScopeHandler.user('dakota-unbind-collection', () => {
           t.setDakotaSelectorCollection('', InsertSourceType.CMS_PROPERTIES_PANEL);
@@ -185,19 +185,19 @@ function j() {
       icon: jsx(_$$U, {}),
       getTitle: () => getI18nString('dakota.collection_selector.disconnect_submenu_title'),
       recordingKey: 'removeCmsCollectionAction',
-      customActionType: Wg.STANDARD_BUTTON
+      customActionType: DButtonType.STANDARD_BUTTON
     };
   }
 }
 let U = e => !!e && e.type === 'RESPONSIVE_SET' && e.name !== '/';
 let ea = {
-  type: ZU.ACTION,
+  type: DMenuItemType.ACTION,
   action: 'apply-transform-modifiers',
   editModes: LB,
   recordingKey: 'toolApplyTransformModifiers'
 };
 let es = {
-  type: ZU.ACTION,
+  type: DMenuItemType.ACTION,
   action: 'add-transform-modifier-to-selection',
   getDisplayAction: () => 'add-radial-repeat-to-selection',
   editModes: LB,
@@ -205,20 +205,20 @@ let es = {
   onboardingKey: m9
 };
 let eo = {
-  type: ZU.ACTION,
+  type: DMenuItemType.ACTION,
   action: 'add-linear-repeat-to-selection',
   editModes: LB,
   recordingKey: 'addLinearRepeatToSelection'
 };
 let el = {
-  type: ZU.ACTION,
+  type: DMenuItemType.ACTION,
   action: 'add-skew-modifier-to-selection',
   editModes: LB,
   recordingKey: 'addSkewToSelection',
   featureFlags: ['ce_il_slant']
 };
 let ed = {
-  type: ZU.FLYOUT,
+  type: DMenuItemType.FLYOUT,
   dropdownKey: 'modifiers-overflow-flyout',
   getTooltip: () => getI18nString('fullscreen_actions.more-transform-modifier-options'),
   actions: [es, eo, el],
@@ -259,23 +259,23 @@ function ek() {
     }, [t]);
     if (!_$$U2() || !r || (s ?? []).length === 0 || o) return;
     let c = [{
-      type: ZU.CUSTOM_ACTION,
-      customActionType: Wg.DROPDOWN_GROUP_HEADER,
+      type: DMenuItemType.CUSTOM_ACTION,
+      customActionType: DButtonType.DROPDOWN_GROUP_HEADER,
       getTitle: () => getI18nString('dakota.collection_selector.connect_submenu_title'),
       recordingKey: 'cmsPageBindingLabel',
       onClick: noop,
       preventHoisting: !0,
       disabled: !0
     }, ...(s ?? []).map(e => ({
-      type: ZU.CUSTOM_ACTION,
+      type: DMenuItemType.CUSTOM_ACTION,
       onClick: () => d(e.id),
       getTitle: () => e.name,
       recordingKey: e.name,
-      customActionType: Wg.STANDARD_BUTTON,
+      customActionType: DButtonType.STANDARD_BUTTON,
       preventHoisting: !0
     }))];
     return {
-      type: ZU.ACTION_SUBMENU,
+      type: DMenuItemType.ACTION_SUBMENU,
       recordingKey: M,
       icon: jsx(_$$i, {}),
       getTitle: () => getI18nString('dakota.collection_selector.connect_page_to_cms_title'),
@@ -761,7 +761,7 @@ function tr({
           'className': p()(gF, {
             [_$$ek]: !['INSTANCE', 'FRAME', 'REPEATER'].includes(F || '')
           }),
-          'children': [U.map(e => e.type === ZU.FLYOUT ? jsx(AutoInteractableWrapper, {
+          'children': [U.map(e => e.type === DMenuItemType.FLYOUT ? jsx(AutoInteractableWrapper, {
             name: 'layer_header_button',
             alsoTrack: () => ({
               layerButtonAction: `open_flyout_${camelToSnake(e.dropdownKey)}`
@@ -770,7 +770,7 @@ function tr({
               flyoutConfig: e,
               recordingKey: generateRecordingKey($$e90, e.flyoutRecordingKey)
             })
-          }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(AutoInteractableWrapper, {
+          }, e.dropdownKey) : e.type === DMenuItemType.ACTION ? jsx(AutoInteractableWrapper, {
             name: 'layer_header_button',
             alsoTrack: () => ({
               layerButtonAction: `${camelToSnake(e.action)}`
@@ -780,7 +780,7 @@ function tr({
               numUnreadComments: eI,
               recordingKey: T
             })
-          }, e.recordingKey) : e.type === ZU.ACTION_SUBMENU ? jsx(AutoInteractableWrapper, {
+          }, e.recordingKey) : e.type === DMenuItemType.ACTION_SUBMENU ? jsx(AutoInteractableWrapper, {
             name: 'layer_header_button',
             alsoTrack: () => ({
               layerButtonAction: `open_submenu_${camelToSnake(e.getTitle())}`
@@ -790,9 +790,9 @@ function tr({
               numUnreadComments: eI,
               recordingKey: T
             })
-          }, e.recordingKey) : e.type === ZU.CUSTOM_ACTION ? jsx($$to1, {
+          }, e.recordingKey) : e.type === DMenuItemType.CUSTOM_ACTION ? jsx($$to1, {
             item: e
-          }, e.recordingKey) : null), ew, orderedHoistableToolbarItems.map((e, t) => e.type === ZU.CUSTOM_ACTION && e.customActionType === Wg.DROPDOWN_TRIGGER_BUTTON ? jsx('div', {
+          }, e.recordingKey) : null), ew, orderedHoistableToolbarItems.map((e, t) => e.type === DMenuItemType.CUSTOM_ACTION && e.customActionType === DButtonType.DROPDOWN_TRIGGER_BUTTON ? jsx('div', {
             children: e.dropdown
           }, t) : null)]
         })]
@@ -806,7 +806,7 @@ export function $$tn4(e, t, r) {
   let n = [];
   let i = e;
   t.every(e => {
-    let t = e.type === ZU.FLYOUT && e.actions.length > 1 ? 1.5 : 1;
+    let t = e.type === DMenuItemType.FLYOUT && e.actions.length > 1 ? 1.5 : 1;
     return i - t >= 0 && (i -= t, n.push(e), !0);
   });
   let a = t.length - n.length;
@@ -836,8 +836,8 @@ export function $$ti7(e, t) {
     });
     if (useIsFullscreenSitesView() && e) {
       return {
-        type: ZU.CUSTOM_ACTION,
-        customActionType: Wg.STANDARD_BUTTON,
+        type: DMenuItemType.CUSTOM_ACTION,
+        customActionType: DButtonType.STANDARD_BUTTON,
         onClick: noop,
         icon: jsx(_$$K2, {
           style: {
@@ -887,7 +887,7 @@ export function $$ti7(e, t) {
   return _$$U3(N);
 }
 export function $$ta8(e, t) {
-  return useMemo(() => e.map(e => e.reduce((e, r) => t.includes(r) ? e : r.type === ZU.CUSTOM_ACTION && r.dataTestId === e5 ? (r.getTitle = () => getI18nString('fullscreen_actions.create-symbol'), e.concat(r)) : r.type === ZU.FLYOUT ? e.concat(r.actions) : e.concat(r), [])), [e, t]);
+  return useMemo(() => e.map(e => e.reduce((e, r) => t.includes(r) ? e : r.type === DMenuItemType.CUSTOM_ACTION && r.dataTestId === e5 ? (r.getTitle = () => getI18nString('fullscreen_actions.create-symbol'), e.concat(r)) : r.type === DMenuItemType.FLYOUT ? e.concat(r.actions) : e.concat(r), [])), [e, t]);
 }
 export function $$ts6(e) {
   let t = isIllustrationEditorType();
@@ -905,8 +905,8 @@ export function $$ts6(e) {
 export function $$to1({
   item: e
 }) {
-  let t = e.customActionType === Wg.DIALOG_TRIGGER_BUTTON;
-  let r = e.customActionType === Wg.DROPDOWN_TRIGGER_BUTTON;
+  let t = e.customActionType === DButtonType.DIALOG_TRIGGER_BUTTON;
+  let r = e.customActionType === DButtonType.DROPDOWN_TRIGGER_BUTTON;
   return jsx(AutoInteractableWrapper, {
     name: 'layer_header_button',
     alsoTrack: () => ({
@@ -942,7 +942,7 @@ export function $$to1({
 export function $$tl2({
   item: e
 }) {
-  let t = e.customActionType === Wg.DROPDOWN_TRIGGER_BUTTON;
+  let t = e.customActionType === DButtonType.DROPDOWN_TRIGGER_BUTTON;
   return jsxs(Fragment, {
     children: [jsx($$to1, {
       item: e

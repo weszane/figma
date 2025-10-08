@@ -12,7 +12,7 @@ import { sZ } from "../figma_app/948389";
 import { JT, pY } from "../figma_app/632248";
 import { useSelectionState, SelectionState } from "../905/286488";
 import { z8, qy, B3 } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { setupPromptHistory } from "../905/290931";
 import { U } from "../figma_app/441035";
 import { AIActionIterationResult } from "../905/278499";
@@ -74,7 +74,7 @@ export function $$M0() {
   let w = useIsSelectedViewFullscreenCooper();
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let {
     promptHistory,
     addPromptToHistory

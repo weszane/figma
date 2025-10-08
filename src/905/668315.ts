@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSingleEffect } from "../905/791079";
 import { ModalCloseButton } from "../905/17223";
 import { LoadingSpinner } from "../figma_app/858013";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString } from "../905/303541";
 import { filePutAction } from "../figma_app/78808";
 import { popModalStack } from "../905/156213";
@@ -71,7 +71,7 @@ export let $$E0 = registerModal(function (e) {
       searchQuery: C,
       setSearchQuery: T,
       setSearchResults: R
-    }), jsxs(P, {
+    }), jsxs(RecordingScrollContainer, {
       className: jG,
       hideScrollbar: !0,
       children: [!i && jsx("div", {

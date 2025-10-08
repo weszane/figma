@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../figma_app/103028";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 import { oD, vK } from "../figma_app/587612";
 export function $$d0() {
   let e = useAtomWithSubscription(_$$_);
@@ -10,8 +10,8 @@ export function $$d0() {
   let r = vK();
   return useMemo(() => {
     if (r) return {
-      type: ZU.CUSTOM_ACTION,
-      customActionType: Wg.DIALOG_TRIGGER_BUTTON,
+      type: DMenuItemType.CUSTOM_ACTION,
+      customActionType: DButtonType.DIALOG_TRIGGER_BUTTON,
       onClick: t,
       isSelected: !1,
       preventHoisting: !0,

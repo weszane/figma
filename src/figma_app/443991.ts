@@ -9,10 +9,10 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { putOrgs } from "../905/395917";
 import { setTeamOptimistThunk } from "../figma_app/240735";
-import { yJ as _$$yJ2 } from "../figma_app/24841";
+import { putUserAction } from "../figma_app/24841";
 import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
 import { Pf, ck } from "../905/952832";
-import { u as _$$u } from "../905/774364";
+import { workspaceApiService } from "../905/774364";
 let E = (e, t) => {
   let r = t / Math.min(e.width, e.height);
   let n = e.width * r;
@@ -91,7 +91,7 @@ let S = createOptimistThunk((e, t) => {
   }) {
     let r = t.meta;
     r?.img_url && Multiplayer?.setImgUrl(r.img_url);
-    e.dispatch(_$$yJ2({
+    e.dispatch(putUserAction({
       user: r,
       userInitiated: !1
     }));
@@ -142,7 +142,7 @@ let S = createOptimistThunk((e, t) => {
     });
   } else if (t.entityType === ck.WORKSPACE) {
     let r = t.entity.id;
-    _$$u.updateImage({
+    workspaceApiService.updateImage({
       workspaceId: r,
       img_url: t.smallUrl,
       img_url_500_500: t.largeUrl,

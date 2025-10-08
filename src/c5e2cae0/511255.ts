@@ -9,7 +9,7 @@ import { renderCheckoutDevModeText } from "../figma_app/361869";
 import { CloseButton } from "../905/17223";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -334,7 +334,7 @@ function ea(e) {
       choosePlan: _,
       TeamIllustration: L,
       upsellSource: e.upsellSource
-    }) : jsxs(_$$P, {
+    }) : jsxs(RecordingScrollContainer, {
       className: "org_upgrade_multi_team_modal--scrollContainer--ZL-IQ",
       children: [jsxs("div", {
         className: "org_upgrade_multi_team_modal--planModalHeader--drD3M",

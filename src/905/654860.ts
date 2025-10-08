@@ -1,14 +1,14 @@
 import { KeyCodes } from "../905/63728";
 import { useDropdownState } from "../905/848862";
 import { kz } from "../figma_app/171177";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 export function $$o0(e = !1) {
   let t = useDropdownState();
   let {
     isRoot,
     pop,
     autoClose
-  } = cq();
+  } = useNavigationStack();
   kz(KeyCodes.ESCAPE, () => {
     t || (isRoot || e ? autoClose() : pop());
   }, !0);

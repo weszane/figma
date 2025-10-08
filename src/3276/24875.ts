@@ -17,7 +17,7 @@ import { ViewerRestrictedDraftAccessLog } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { q as _$$q } from "../905/202542";
 import { defaultValidator } from "../figma_app/181241";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { Bj, ic } from "../3276/565493";
 import { D as _$$D } from "../905/261307";
 import { t } from "../905/789267";
@@ -123,7 +123,7 @@ function S({
   }) : renderI18nText("viewer_restricted_tooltip.to_collaborate_in_this_draft_no_name");
   return jsx(TrackingProvider, {
     name: "VR Draft Share Notification Tooltip",
-    children: jsx(Cf, {
+    children: jsx(ConnectedPointingDropdown, {
       targetRect: m,
       disableDropdownScrollContainer: !0,
       showPoint: !0,

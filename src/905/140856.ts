@@ -9,7 +9,7 @@ import { M5 } from "../figma_app/817077";
 import { Fullscreen } from "../figma_app/763686";
 import { t as _$$t } from "../905/851577";
 import { N } from "../905/645480";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { j } from "../905/645912";
 import { V } from "../905/279663";
 import { ik, oK } from "../figma_app/357202";
@@ -33,7 +33,7 @@ export let $$y0 = forwardRef(({
     let r = j(n.entryPoint);
     let {
       close
-    } = cq();
+    } = useNavigationStack();
     let s = async t => {
       let {
         dropPosition,

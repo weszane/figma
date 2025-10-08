@@ -42,7 +42,7 @@ import { KindEnum } from "../905/129884";
 import { calculatePickerPositionLeft } from "../905/959568";
 import { executeWithDSAAction } from "../905/135117";
 import { $$ei1 } from "../905/759609";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { Tu } from "../figma_app/479313";
 import { YW } from "../figma_app/778125";
 import { v2, V9, T7 } from "../figma_app/524618";
@@ -274,7 +274,7 @@ class eA extends RecordingPureComponent {
         "data-tooltip": getI18nString("design_systems.styles.update_available"),
         recordingKey: generateRecordingKey(this.props, ""),
         children: jsx(_$$o, {})
-      }), this.props.dropdownShown?.type === this.STYLE_UPDATE_DROPDOWN_ID && (this.selectUpdateOptionRef.current ? jsx(Cf, {
+      }), this.props.dropdownShown?.type === this.STYLE_UPDATE_DROPDOWN_ID && (this.selectUpdateOptionRef.current ? jsx(ConnectedPointingDropdown, {
         targetRect: this.selectUpdateOptionRef.current.getBoundingClientRect(),
         propagateCloseClick: !0,
         children: s.map(e => jsx(c$, {

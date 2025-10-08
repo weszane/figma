@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { postUserFlag } from "../905/985254";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { wg, zo, pQ } from "../figma_app/101956";
 import { t as _$$t, d2 } from "../figma_app/579169";
@@ -21,7 +21,7 @@ import { OnboardingRenderFrame } from "../905/284399";
 import { $ } from "../figma_app/108485";
 import { hA } from "../figma_app/551322";
 import { OverlayType } from "../figma_app/450829";
-import { r4m } from "../figma_app/6204";
+import { MoveDraftsNudgeV2 } from "../figma_app/6204";
 export let $$N1 = "Node Count Reached for Draft";
 export function $$C0() {
   let e = useRef(!1);
@@ -40,7 +40,7 @@ export function $$C0() {
   }));
   let F = useDispatch();
   let j = _$$e({
-    overlay: r4m,
+    overlay: MoveDraftsNudgeV2,
     priority: N.SECONDARY_MODAL
   }, [L, R, w, P, D, M]);
   let U = useCallback(() => {
@@ -74,7 +74,7 @@ export function $$C0() {
     dismissModal: e,
     onClickPrimaryCta: t
   }), []);
-  _$$E(j.uniqueId, $$N1, U);
+  useEventForwarder(j.uniqueId, $$N1, U);
   return jsx(OnboardingRenderFrame, {
     isShowing: j.isShowing,
     modalType: OverlayType.SELF_CONTAINED,

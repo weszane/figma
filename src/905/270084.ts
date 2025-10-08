@@ -11,14 +11,14 @@ import { parsePxInt } from "../figma_app/783094";
 import { isInputElement } from "../figma_app/243213";
 import { trackedSvgComponent } from "../figma_app/637027";
 import { Wi, JR } from "../figma_app/162641";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import v, { AutoLayout } from "../905/470281";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
-import { iA, Hj } from "../905/682977";
+import { TableRowWithTracking, TableRow } from "../905/682977";
 import { LI } from "../905/832675";
 import { UE, sM, nM, uH, BA, D as _$$D, I6, E0, eO as _$$eO, U1, wY, TH, jG, NM, ln, T3, p$, _Z, KY, SB, cr, SM, Ym, ry, jm, hw } from "../figma_app/527041";
 import { B6G, fAD } from "../figma_app/27776";
@@ -229,7 +229,7 @@ function P(e) {
     let A = e.tooltipText;
     let b = [];
     shouldRoundBordersForSelectedRows && (b.push(uH), a && !eU(r) && b.push(BA), a && !eB(r) && b.push(_$$D));
-    return jsxs(iA, {
+    return jsxs(TableRowWithTracking, {
       className: p()(nM, m, a ? h : void 0, ...b, {
         [I6]: d === highlightState?.itemKey
       }),
@@ -265,7 +265,7 @@ function P(e) {
         opacity: t
       },
       "data-testid": "multi-select-list-loading-row",
-      children: jsxs(iA, {
+      children: jsxs(TableRowWithTracking, {
         className: p()(nM, styleOverrideClassNames?.row),
         useAdminTableStyles: !0,
         dataTestId: "multi-select-list-table-loading-row",
@@ -307,7 +307,7 @@ function P(e) {
       },
       "data-testid": "multi-select-list-select-all-checkbox"
     });
-    return jsxs(Hj, {
+    return jsxs(TableRow, {
       header: !0,
       useAdminTableStyles: !0,
       className: p()(disabled ? _$$eO : U1, styleOverrideClassNames?.header),
@@ -346,7 +346,7 @@ function P(e) {
       className: p()(wY, {
         [TH]: hasNewScrollContext
       }, styleOverrideClassNames?.tableWrapper),
-      children: [jsx(_$$P, {
+      children: [jsx(RecordingScrollContainer, {
         className: jG,
         innerClassName: p()(NM, scrollContainerInnerClassName),
         onScroll: ek,
@@ -652,7 +652,7 @@ class j extends Component {
       let g = e.tooltipText;
       let f = [];
       this.props.shouldRoundBordersForSelectedRows && (f.push(uH), r && !this.isFirstInSelectedGroup(i) && f.push(BA), r && !this.isLastInSelectedGroup(i) && f.push(_$$D));
-      return jsxs(iA, {
+      return jsxs(TableRowWithTracking, {
         className: p()(nM, u, r ? m : void 0, ...f, {
           [I6]: a === this.props.highlightState?.itemKey
         }),
@@ -708,7 +708,7 @@ class j extends Component {
           opacity: t
         },
         "data-testid": "multi-select-list-loading-row",
-        children: jsxs(iA, {
+        children: jsxs(TableRowWithTracking, {
           className: p()(nM, this.props.styleOverrideClassNames?.row),
           useAdminTableStyles: !0,
           dataTestId: "multi-select-list-table-loading-row",
@@ -776,7 +776,7 @@ class j extends Component {
       },
       "data-testid": "multi-select-list-select-all-checkbox"
     });
-    return jsxs(Hj, {
+    return jsxs(TableRow, {
       header: !0,
       useAdminTableStyles: !0,
       className: p()(this.props.disabled ? _$$eO : U1, this.props.styleOverrideClassNames?.header),
@@ -816,7 +816,7 @@ class j extends Component {
         className: p()(wY, {
           [TH]: this.props.hasNewScrollContext
         }, this.props.styleOverrideClassNames?.tableWrapper),
-        children: [jsx(_$$P, {
+        children: [jsx(RecordingScrollContainer, {
           className: jG,
           innerClassName: p()(NM, this.props.scrollContainerInnerClassName),
           onScroll: this.onScroll,

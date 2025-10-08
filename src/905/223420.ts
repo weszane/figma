@@ -2,14 +2,14 @@ import { jsx } from "react/jsx-runtime";
 import { IconButton } from "../905/443068";
 import { C } from "../905/520159";
 import { getI18nString } from "../905/303541";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 export function $$l0({
   beforeBack: e,
   recordingKey: t
 }) {
   let {
     pop
-  } = cq();
+  } = useNavigationStack();
   return jsx(IconButton, {
     onClick: function () {
       e?.();

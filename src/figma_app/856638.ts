@@ -8,7 +8,7 @@ import { bs } from "../figma_app/553940";
 import { selectAppModel } from "../figma_app/889655";
 import { Yh, c1 } from "../figma_app/357047";
 import { Jg } from "../figma_app/108168";
-import { fT, ZU } from "../figma_app/986347";
+import { isDropdownGroupHeader, DMenuItemType } from "../figma_app/986347";
 let h = "overflowMenuDropdown";
 export function $$m0(e) {
   return jsx(MenuContainerComp, {
@@ -26,8 +26,8 @@ function g({
   recordingKey: t
 }) {
   if (0 === e.length) return null;
-  let r = e.find(fT)?.getTitle();
-  let i = e.filter(e => !fT(e)).map(e => jsx($$f1, {
+  let r = e.find(isDropdownGroupHeader)?.getTitle();
+  let i = e.filter(e => !isDropdownGroupHeader(e)).map(e => jsx($$f1, {
     item: e,
     recordingKey: t
   }, e.recordingKey));
@@ -43,17 +43,17 @@ export function $$f1({
   recordingKey: t
 }) {
   switch (e.type) {
-    case ZU.ACTION:
+    case DMenuItemType.ACTION:
       return jsx(y, {
         action: e,
         recordingKey: t
       });
-    case ZU.ACTION_SUBMENU:
+    case DMenuItemType.ACTION_SUBMENU:
       return jsx(E, {
         submenu: e,
         recordingKey: t
       });
-    case ZU.CUSTOM_ACTION:
+    case DMenuItemType.CUSTOM_ACTION:
       return jsx(b, {
         action: e,
         recordingKey: t

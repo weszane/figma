@@ -34,7 +34,7 @@ import { pN } from "../figma_app/433401";
 import { OnboardingModal } from "../905/425180";
 import { V as _$$V2 } from "../905/460261";
 import { ArrowPosition } from "../905/858282";
-import { Tuf } from "../figma_app/6204";
+import { UI3LabelsEducation } from "../figma_app/6204";
 import { oW, Rg, gf } from "../figma_app/201694";
 import { g as _$$g } from "../figma_app/594353";
 import { fn } from "../figma_app/811257";
@@ -61,7 +61,7 @@ function G() {
     isShowing,
     complete
   } = e({
-    overlay: Tuf,
+    overlay: UI3LabelsEducation,
     priority: _$$N.SECONDARY_MODAL
   });
   let a = B();

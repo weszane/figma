@@ -8,7 +8,7 @@ import { ri, nc } from "../figma_app/15927";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
-import { GI } from "../905/125333";
+import { vectorPencilStyleAtom } from "../905/125333";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hidePickerThunk, showPickerThunk, stylePickerViewChangedThunk } from "../figma_app/91703";
 import { applySharedStyle } from "../figma_app/933328";
@@ -35,7 +35,7 @@ import { wv } from "../905/888175";
 import { A as _$$A } from "../svg/88630";
 function B(e) {
   let t = "stroke-settings";
-  let [n, u] = useAtomValueAndSetter(GI);
+  let [n, u] = useAtomValueAndSetter(vectorPencilStyleAtom);
   let v = (n.encodedPaints ? ri(n.encodedPaints) : n.paints) ?? [];
   let w = useDispatch();
   let B = useContext(zK);
@@ -103,8 +103,8 @@ function B(e) {
   let U = !!n.styleId || v.length > 0;
   let W = e.pickerShown?.id === t;
   let Y = !e.userFlags.dismissed_shift_to_draw_straight_lines_hint;
-  let X = A8(GI);
-  let Q = eh(GI);
+  let X = A8(vectorPencilStyleAtom);
+  let Q = eh(vectorPencilStyleAtom);
   let $ = n.strokeBrushGuid;
   let Z = jsx(v9, {
     strokeWeight: n.strokeWeight || wv,
@@ -243,7 +243,7 @@ function B(e) {
     }), W && e.pickerShown && jsx(_2, {
       brushType: Q,
       dashPattern: n.dashPattern,
-      defaultStyleAtom: GI,
+      defaultStyleAtom: vectorPencilStyleAtom,
       dropdownShown: e.dropdownShown,
       maxStrokeWeight: n.strokeWeight || wv,
       onChange: K,

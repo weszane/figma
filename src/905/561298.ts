@@ -6,7 +6,7 @@ import { d as _$$d } from "../905/884707";
 import { ButtonBasePrimary, ButtonSecondary, FocusCheckbox, SecureLink, BaseLinkComponent } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { v } from "../905/755077";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { updateProfileThunk } from "../figma_app/530167";
 import { isSuccess, isFailure, isLoading } from "../905/18797";
@@ -42,7 +42,7 @@ export function $$b5(e) {
 }
 export function $$v3(e) {
   return jsxs("div", {
-    children: [jsxs(P, {
+    children: [jsxs(RecordingScrollContainer, {
       className: e.className || Py,
       hideScrollbar: !0,
       children: [jsx("div", {

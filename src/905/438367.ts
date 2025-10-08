@@ -12,7 +12,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { Bh, oz } from "../figma_app/936646";
 import { filterStylesByType, sortStyles } from "../figma_app/646357";
 import { isValidSolidFill } from "../905/405710";
-import { EU, KV } from "../905/255097";
+import { CURRENT_PAGE_SWATCH_SET_ID, LOCAL_SWATCH_SET_ID } from "../905/255097";
 var d = l;
 export function $$y2({
   subscribedLibraries: e
@@ -22,8 +22,8 @@ export function $$y2({
   let o = Rb().filter(e => e.resolvedType === VariableResolvedDataType.COLOR).length > 0;
   let l = filterStylesByType(t.local.styles, "FILL").length > 0;
   return useMemo(() => {
-    let t = [EU];
-    return ((o || l) && t.push(KV), i) ? t.concat((() => {
+    let t = [CURRENT_PAGE_SWATCH_SET_ID];
+    return ((o || l) && t.push(LOCAL_SWATCH_SET_ID), i) ? t.concat((() => {
       let t = e.filter(e => e.fileKey !== i);
       sortByWithOptions(t, e => e.fileName);
       return t.map(e => e.fileKey);
@@ -79,7 +79,7 @@ export function $$v3() {
 }
 export function $$I1(e) {
   let t = useCurrentFileKey();
-  let i = e !== EU && e !== KV;
+  let i = e !== CURRENT_PAGE_SWATCH_SET_ID && e !== LOCAL_SWATCH_SET_ID;
   let r = kf(i ? e : null);
   let a = u5(i ? e : null);
   let l = useMemo(() => i ? {

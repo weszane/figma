@@ -7,7 +7,7 @@ import { useDebounce, useDebouncedCallback } from 'use-debounce';
 import { g as _$$g } from '../905/88169';
 import { x as _$$x } from '../905/97817';
 import { selectWithShallowEqual } from '../905/103090';
-import { Z as _$$Z } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { errorStateActionCreator } from '../905/193529';
 import { Q as _$$Q } from '../905/249555';
 import { VisualBellActions } from '../905/302958';
@@ -373,7 +373,7 @@ function ec({
   threads: r
 }) {
   let a = Y();
-  let s = _$$Z(a);
+  let s = useNavigateToViewport(a);
   let o = _$$g2(s);
   let l = _$$x2(s);
   let d = useMemo(() => [...new Set(r.map(e => e.comments[0]?.client_meta?.stable_path).filter(isNotNullish))], [r]);
@@ -449,7 +449,7 @@ function eE({
   let n = conditionalFeatureFlag('fpl_canvas_keyboard_controls', r, t);
   let s = useDispatch();
   let o = Y();
-  let l = _$$Z(o);
+  let l = useNavigateToViewport(o);
   let d = useRef(null);
   let c = _$$s2();
   let u = useCallback(t => {
@@ -857,7 +857,7 @@ function eL({
   navigationTelemetryTag: r
 }) {
   let i = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
-  let a = _$$Z(r);
+  let a = useNavigateToViewport(r);
   let s = getObservableOrFallback(EditorPreferencesApi().accessibilityDomDebug);
   let o = J({
     extractorCtor: t,
@@ -1166,7 +1166,7 @@ function e$({
 }) {
   let l = W([r], e => e ? eO(e) : void 0);
   let d = W([t], e => e ? eO(e) : void 0);
-  let c = _$$Z('figjam_navigate');
+  let c = useNavigateToViewport('figjam_navigate');
   return d ? jsx(cH, {
     size: Children.count(o),
     nodeId: t,
@@ -1185,7 +1185,7 @@ function eX({
   nodeId: e,
   children: t
 }) {
-  let r = _$$Z('figjam_navigate');
+  let r = useNavigateToViewport('figjam_navigate');
   let i = getObservableOrFallback(EditorPreferencesApi().accessibilityDomDebug);
   let s = useSelector(e => e.mirror.appModel.showComments);
   return jsx(Z3, {
@@ -1269,7 +1269,7 @@ function e8() {
   !function ({
     loggerEvent: e
   }) {
-    let t = _$$Z(e);
+    let t = useNavigateToViewport(e);
     let {
       getLastEventWasTab
     } = useContext(eD);

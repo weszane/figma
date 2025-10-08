@@ -12,7 +12,7 @@ import h from "classnames";
 import { useSingleEffect } from "../905/791079";
 import { KeyCodes, getModifierBitmask, ModifierKeyCodes } from "../905/63728";
 import { useHandleChangeEvent, generateRecordingKey } from "../figma_app/878298";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -21,7 +21,7 @@ import { trackFileEvent } from "../figma_app/314264";
 import { C as _$$C2 } from "../figma_app/523506";
 import { z } from "../905/654860";
 import { y as _$$y } from "../905/263077";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { SX, Q0 } from "../905/487011";
 import { AIActionMode } from "../905/278499";
 import { ActionButton } from "../905/189361";
@@ -109,7 +109,7 @@ export let $$V5 = forwardRef(({
     t(e.currentTarget.value);
   });
   let S = $$z2(o, p);
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     height: l,
     maxHeight: d,
     ref: T,
@@ -179,7 +179,7 @@ export function $$H3({
   let {
     isRoot,
     pop
-  } = cq();
+  } = useNavigationStack();
   let et = !(t.length > 0 || k);
   let er = et && u.length > 0;
   let en = getFeatureFlags().first_draft_prompt_history && _.length > 0 && et;

@@ -5,7 +5,7 @@ import { renderI18nText } from "../905/303541";
 import { alwaysFalseCallback2 } from "../figma_app/275462";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
-import { E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { useFullscreenViewFile, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -14,7 +14,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { wV, S5 } from "../figma_app/647246";
 import { ArrowPosition } from "../905/748636";
-import { TrJ } from "../figma_app/6204";
+import { VisualAssetsPanelTooltip } from "../figma_app/6204";
 import { a5, fc, bo, io, ko } from "../figma_app/73698";
 export let $$C1 = {
   [a5]: !1,
@@ -32,7 +32,7 @@ export function $$j0() {
     complete,
     uniqueId
   } = _$$e({
-    overlay: TrJ,
+    overlay: VisualAssetsPanelTooltip,
     priority: _$$N.SECONDARY_MODAL
   }, [e]);
   let T = alwaysFalseCallback2();
@@ -42,7 +42,7 @@ export function $$j0() {
     currentView,
     visualAssetsType
   } = wV();
-  E(uniqueId, ["Reset Visual Assets Tooltips", io], () => {
+  useEventForwarder(uniqueId, ["Reset Visual Assets Tooltips", io], () => {
     j && t && s(postUserFlag($$C1));
   });
   useEffect(() => {

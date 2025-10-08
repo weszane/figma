@@ -7,7 +7,7 @@ import { reportError } from '../905/11';
 import { k as _$$k2 } from '../905/44647';
 import { KeyCodes } from '../905/63728';
 import { l as _$$l } from '../905/103989';
-import { Z as _$$Z } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { KindEnum } from '../905/129884';
 import { ServiceCategories } from '../905/165054';
 import { setupToggleButton } from '../905/167712';
@@ -806,7 +806,7 @@ eA.displayName = 'ObjectRow';
 export let $$eP1 = memo(e => {
   let t = useSelector(t => t.mirror.appModel.hoveredNode === e.guid);
   let s = e.hasRefToHoveredDef || t || e.isTemporarilyHovered;
-  let l = _$$Z('prototype_sections_zoom');
+  let l = useNavigateToViewport('prototype_sections_zoom');
   let a = useCallback(e => {
     l(computeFullscreenViewportForNode({
       nodeId: e,

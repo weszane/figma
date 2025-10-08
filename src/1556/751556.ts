@@ -45,7 +45,7 @@ import { switchAccountAndNavigate, startDesktopAppAuth } from "../figma_app/9763
 import { e as _$$e2 } from "../905/579755";
 import { selectViewAction, showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { ql, S5 } from "../figma_app/24841";
+import { checkUserUnsyncedAutosaveFilesThunk, checkUnsyncedAutosaveFilesThunk } from "../figma_app/24841";
 import { T$, w3 } from "../figma_app/865646";
 import { setFileBrowserUserId, getUserPlan, setCommunityProfileId } from "../figma_app/502247";
 import { OrganizationType } from "../905/833838";
@@ -797,7 +797,7 @@ function eX() {
         let o = "signOut";
         let s = e.orderedIds;
         let a = e => {
-          t(ql({
+          t(checkUserUnsyncedAutosaveFilesThunk({
             user: e
           }));
         };
@@ -821,7 +821,7 @@ function eX() {
         }
         let r = getI18nString("navbar.profile_switcher.logout_all_accounts");
         let d = () => {
-          t(S5());
+          t(checkUnsyncedAutosaveFilesThunk());
         };
         return {
           element: jsxs(MenuSubMenu, {

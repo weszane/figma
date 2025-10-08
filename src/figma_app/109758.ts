@@ -5,7 +5,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { processImageWithThumbnail } from "../figma_app/624361";
 import { $, b as _$$b } from "../905/776478";
-import { D } from "../905/629114";
+import { createFigmaPluginScope } from "../905/629114";
 import { fetchImageAsByteArray } from "../905/866640";
 import { generateShimmerOverlay } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
@@ -81,7 +81,7 @@ async function f({
       scaleMode: "FILL"
     }));
   }
-  let o = D();
+  let o = createFigmaPluginScope();
   o.skipInvisibleInstanceChildren = !0;
   let l = o.getNodeById(e.guid);
   l && (l.setSharedPluginData("jsx", "isImage", "true"), l.setSharedPluginData("jsx", "description", i.description), l.setSharedPluginData("jsx", "background", n), s && l.setSharedPluginData("jsx", "hash", s));

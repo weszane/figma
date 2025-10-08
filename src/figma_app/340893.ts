@@ -3,7 +3,7 @@ import { ColorOptions, AppStateTsApi } from "../figma_app/763686";
 import { buildUploadUrl } from "../figma_app/169182";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { xf, JI, Vq, B9, Pi } from "../figma_app/942553";
-import { EC, Pn } from "../figma_app/285009";
+import { textSizes, iconSizes } from "../figma_app/285009";
 import { BV, sE, Dy, aN, Ku, Cz } from "../figma_app/153399";
 import { B } from "../figma_app/371825";
 let u = [{
@@ -123,8 +123,8 @@ let p = [{
   palette: "base"
 }];
 let _ = [ColorOptions.HIGHLIGHT_GRAY, ColorOptions.HIGHLIGHT_RED, ColorOptions.HIGHLIGHT_ORANGE, ColorOptions.HIGHLIGHT_YELLOW, ColorOptions.HIGHLIGHT_GREEN, ColorOptions.HIGHLIGHT_BLUE, ColorOptions.HIGHLIGHT_VIOLET];
-let $$h0 = new Map([["pencilStrokeWidth1", EC[0]], ["pencilStrokeWidth2", EC[1]], ["pencilStrokeWidth3", EC[2]], ["pencilStrokeWidth4", EC[3]], ["pencilStrokeWidth5", EC[4]]]);
-let $$m10 = new Map([["highlighterStrokeWidth1", Pn[0]], ["highlighterStrokeWidth2", Pn[1]], ["highlighterStrokeWidth3", Pn[2]], ["highlighterStrokeWidth4", Pn[3]], ["highlighterStrokeWidth5", Pn[4]]]);
+let $$h0 = new Map([["pencilStrokeWidth1", textSizes[0]], ["pencilStrokeWidth2", textSizes[1]], ["pencilStrokeWidth3", textSizes[2]], ["pencilStrokeWidth4", textSizes[3]], ["pencilStrokeWidth5", textSizes[4]]]);
+let $$m10 = new Map([["highlighterStrokeWidth1", iconSizes[0]], ["highlighterStrokeWidth2", iconSizes[1]], ["highlighterStrokeWidth3", iconSizes[2]], ["highlighterStrokeWidth4", iconSizes[3]], ["highlighterStrokeWidth5", iconSizes[4]]]);
 let $$g1 = B;
 function f(e, t) {
   let r = BV(e, t);

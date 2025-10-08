@@ -1,5 +1,5 @@
 import { useDebouncedCallback } from "use-debounce";
-export function $$s0(e, r, n) {
+export function useThrottledCallback(e, r, n) {
   var s = void 0 === n ? {} : n;
   var o = s.leading;
   var a = void 0 === o || o;
@@ -11,4 +11,4 @@ export function $$s0(e, r, n) {
     trailing: d
   });
 }
-export const A = $$s0;
+export const A = useThrottledCallback;

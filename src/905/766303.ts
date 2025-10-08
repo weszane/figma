@@ -26,7 +26,7 @@ interface NewFileConfigParams {
     folderId: string
   } | 'drafts' | null
   trackingInfo?: any
-  editorType?: FFileType
+  editorType?: any
   fileName?: string
   callback?: (value?: any) => void
   figjamAiNewFileData?: any

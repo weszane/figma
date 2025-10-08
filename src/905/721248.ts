@@ -21,20 +21,20 @@ import { LoadingRenderer } from '../905/211326';
 import { J as _$$J2 } from '../905/225412';
 import { waitForAnimationFrame } from '../905/236856';
 import { HiddenLabel, Label } from '../905/270045';
-import { ov, S2 } from '../905/300250';
+import { handleBranchModalExit, commitMerge } from '../905/300250';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { R as _$$R } from '../905/307199';
+import { CenterTruncatedText } from '../905/307199';
 import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { v as _$$v } from '../905/318279';
 import { wG } from '../905/331989';
 import { enterPreviewDetachedState } from '../905/346794';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { createOptimistThunk } from '../905/350402';
 import { selectCurrentUser } from '../905/372672';
 import { deepEqual } from '../905/382883';
 import { tq as _$$tq, lo, SR } from '../905/386270';
-import { $2, C_, cs, FD, ju, KZ, Mt, MY, Oh, Oi, on, PE, rB, Rw, s$, uA, WE, Xp, Y1, yi } from '../905/432493';
+import { isGridStyle, getImmediateParentHierarchyNodeChange, isDisplayNodeVisible, generateThumbnails, partitionVariantChunks, isValidStyleType, getMergeResultImagesForChunks, hasSymbolStateGroup, getTextOrFillBackgroundStyle, hasStyleOrLibraryKey, groupDisplayChunks, getPageBackgroundColor, shouldShowColor, isInternalCanvas, getSVGForLayoutGrid, getEffectOrGridBackgroundStyle, getParentHierarchyNodeChangeForDisplayNode, getBackgroundStyle, isInternalVariableSet, DEFAULT_BACKGROUND_COLOR } from '../905/432493';
 import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
@@ -42,7 +42,7 @@ import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { notificationActions } from '../905/463586';
 import { $T, _V, ED, z2 } from '../905/467351';
-import { FS } from '../905/491806';
+import { createIntersectionObserver } from '../905/491806';
 import { bL as _$$bL3, mc as _$$mc, c$, l9 } from '../905/493196';
 import { getLibraryNames } from '../905/506188';
 import { Button, ButtonWide } from '../905/521428';
@@ -96,7 +96,7 @@ import { fileEntityDataMapper } from '../905/943101';
 import { a as _$$a } from '../905/964520';
 import { filesByLibraryKeyAtom } from '../905/977779';
 import { Ar, GC, SS } from '../905/984793';
-import { rY } from '../905/985490';
+import { DiffManager } from '../905/985490';
 import { RelativeTimeDisplay } from '../905/986103';
 import { B8 } from '../905/993733';
 import { A as _$$A6 } from '../1617/380980';
@@ -368,8 +368,8 @@ function eO({
       children: renderI18nText('collaboration.branching_chunk.fallback_no_item')
     });
   }
-  if (t && $2(t)) {
-    let e = s$(t);
+  if (t && isGridStyle(t)) {
+    let e = getSVGForLayoutGrid(t);
     return jsx(SvgComponent, {
       svg: e,
       className: 'chunk_diff--grid--80il5',
@@ -393,8 +393,8 @@ function eD({
   shouldSkip: d
 }) {
   let c = getVisibleTheme() === 'dark';
-  let u = !d && !(s && $2(s)) && void 0 === i;
-  let p = KZ(o);
+  let u = !d && !(s && isGridStyle(s)) && void 0 === i;
+  let p = isValidStyleType(o);
   let m = o === 'TEXT';
   let h = o === 'FILL';
   let g = ev()({
@@ -404,13 +404,13 @@ function eD({
   let f = ev()({
     [eP]: m && c
   });
-  let _ = useMemo(() => cs(i, s) ? {
+  let _ = useMemo(() => isDisplayNodeVisible(i, s) ? {
     data: i.image,
     width: i.width,
     height: i.height,
     scale: getFeatureFlags().branching_detail_view_zoom ? p ? 2 : 4 : 2
   } : null, [i, s, p]);
-  let A = rB(c, a?.backgroundColor, o);
+  let A = shouldShowColor(c, a?.backgroundColor, o);
   let y = _ ? jsx(_$$ec, {
     className: g,
     canvasClassName: f,
@@ -448,7 +448,7 @@ let eL = memo(e => {
   let c = e.displayChunk.mainChunk.displayNode.type === 'CANVAS';
   let u = e.displayChunk.mainChunk.displayNode.styleType;
   let p = getVisibleTheme() === 'dark';
-  let h = rB(p, e.beforeBackgroundColorStyle.backgroundColor, u) ? 'chunk_diff--beforeChunk---fPIR chunk_diff--_chunk--2CSwp' : 'chunk_diff--beforeChunkLightCanvas--jrMYC chunk_diff--beforeChunk---fPIR chunk_diff--_chunk--2CSwp';
+  let h = shouldShowColor(p, e.beforeBackgroundColorStyle.backgroundColor, u) ? 'chunk_diff--beforeChunk---fPIR chunk_diff--_chunk--2CSwp' : 'chunk_diff--beforeChunkLightCanvas--jrMYC chunk_diff--beforeChunk---fPIR chunk_diff--_chunk--2CSwp';
   useEffect(() => {
     e.showOptions || a(Ss.SIDE_BY_SIDE);
   }, [e.showOptions]);
@@ -474,7 +474,7 @@ let eL = memo(e => {
         title: renderI18nText('collaboration.branching_chunk.side_by_side_left_label'),
         image: e.beforeImage,
         shouldSkip: e.displayChunk.mainChunk.phase === LibraryUpdateStatus.CREATED,
-        displayNode: e.chunkDetail?.diffBasis?.find($2),
+        displayNode: e.chunkDetail?.diffBasis?.find(isGridStyle),
         displayNodeStyleType: u,
         isMainChunkCanvas: c
       }), jsx(eD, {
@@ -805,7 +805,7 @@ function e6(e) {
     });
     return e;
   }, [basis]);
-  return changes && basis ? jsx(_$$P, {
+  return changes && basis ? jsx(RecordingScrollContainer, {
     className: 'chunk_property_changes--scrollContainer--1xvIv',
     children: jsxs('div', {
       className: 'chunk_property_changes--chunkPropertyChanges---T6-3 text--fontPos11--2LvXf text--_fontBase--QdLsd',
@@ -968,7 +968,7 @@ let tc = memo(e => {
             displayNode
           } = e;
           if (u === 'GRID') {
-            let e = s$(displayNode);
+            let e = getSVGForLayoutGrid(displayNode);
             return jsx(SvgComponent, {
               svg: e,
               className: 'chunk_tile--gridIcon--BISRZ',
@@ -1097,13 +1097,13 @@ function tI(e) {
     images
   } = e;
   let o = group.mainChunk;
-  let l = Xp(o, pageIdToInfo);
+  let l = getBackgroundStyle(o, pageIdToInfo);
   let d = sessionLocalIDToString(o.displayNode.guid);
   let c = useMemo(() => onChunkClick ? () => onChunkClick(group) : void 0, [onChunkClick, group]);
-  let u = useMemo(() => o.phase !== LibraryUpdateStatus.UNMODIFIED || MY(o) ? o.phase : LibraryUpdateStatus.UPDATED, [o]);
+  let u = useMemo(() => o.phase !== LibraryUpdateStatus.UNMODIFIED || hasSymbolStateGroup(o) ? o.phase : LibraryUpdateStatus.UPDATED, [o]);
   let p = group.type === 'state-group' ? group.variantChunks.filter(e => e.mainChunk.phase !== LibraryUpdateStatus.UNMODIFIED).length : 0;
   let h = 'affectedChunks' in group ? group.affectedChunks.length : 0;
-  let g = useMemo(() => C_(o), [o]);
+  let g = useMemo(() => getImmediateParentHierarchyNodeChange(o), [o]);
   return jsx(tc, {
     affectedCount: h,
     backgroundColorStyle: l,
@@ -1152,7 +1152,7 @@ let tx = memo(e => {
       i && e.onChangeVisibleGroups && e.onChangeVisibleGroups(Array.from(f.current));
     }
   }) : null);
-  let A = useRef(window.IntersectionObserver ? FS('chunk_section--stickyHeader--joj5o') : null);
+  let A = useRef(window.IntersectionObserver ? createIntersectionObserver('chunk_section--stickyHeader--joj5o') : null);
   useEffect(() => {
     if (h && !_.current) {
       for (let e of displayGroups || []) f.current.add(e);
@@ -1440,7 +1440,7 @@ function tO(e) {
       onClick,
       children: jsxs('div', {
         className: Wd,
-        children: [header.length > 80 ? jsx(_$$R, {
+        children: [header.length > 80 ? jsx(CenterTruncatedText, {
           text: header,
           maxWidth: 400
         }) : jsx('span', {
@@ -1553,7 +1553,7 @@ let tU = memo(e => {
   let {
     modifiedVariants,
     unmodifiedVariants
-  } = ju(displayGroup);
+  } = partitionVariantChunks(displayGroup);
   return modifiedVariants.length + unmodifiedVariants.length === 0 ? jsx('div', {
     className: Dn,
     children: renderI18nText('collaboration.branching_to_source.all_variants_were_removed')
@@ -2151,7 +2151,7 @@ function iL({
       originalIndex,
       displayNode
     } = e.mainChunk;
-    let r = rY.getChunkChanges(GitReferenceType.BRANCH, originalIndex);
+    let r = DiffManager.getChunkChanges(GitReferenceType.BRANCH, originalIndex);
     let a = (displayNode.variableSetModes ?? []).filter(t);
     let s = (r.diffBasis[0]?.variableSetModes ?? a).filter(t);
     let o = {};
@@ -2803,7 +2803,7 @@ function nA(e) {
             hideXIcon: !1
           })
         })
-      }), (T.length > 0 || k.length > 0) && jsx(_$$P, {
+      }), (T.length > 0 || k.length > 0) && jsx(RecordingScrollContainer, {
         className: 'sidebar_details--searchResultsContainer--pbnRS',
         hideScrollbar: !0,
         children: t === '' ? jsxs(Fragment, {
@@ -2916,7 +2916,7 @@ function ny(e) {
     let [a, s] = iZ()(i, e => e.user.id === m?.id);
     return [...r, ...n, ...a, ...s];
   })(reviewers);
-  return jsxs(_$$P, {
+  return jsxs(RecordingScrollContainer, {
     className: 'sidebar_details--reviewsSidebarContainer--27ITJ',
     children: [e.mergeRequest && jsx('div', {
       className: 'sidebar_details--requesterWrapper--u6KrU',
@@ -3325,7 +3325,7 @@ let nw = memo(e => {
     displayGroupsByVariableSet,
     displayGroupsByLibrary,
     sortedPageIds
-  } = useMemo(() => e.styleKeyToFileKey ? on(e.displayGroups ?? [], e.styleKeyToFileKey, e.styleKeyToLibraryKey ?? {}, SourceDirection.TO_SOURCE) : on([], {}, {}, SourceDirection.TO_SOURCE), [e.displayGroups, e.styleKeyToFileKey, e.styleKeyToLibraryKey]);
+  } = useMemo(() => e.styleKeyToFileKey ? groupDisplayChunks(e.displayGroups ?? [], e.styleKeyToFileKey, e.styleKeyToLibraryKey ?? {}, SourceDirection.TO_SOURCE) : groupDisplayChunks([], {}, {}, SourceDirection.TO_SOURCE), [e.displayGroups, e.styleKeyToFileKey, e.styleKeyToLibraryKey]);
   let ex = function (e, t, i, n, a, s, o, l) {
     let [d, c] = useState(null);
     let [u, p] = useState({});
@@ -3349,7 +3349,7 @@ let nw = memo(e => {
       let a = tX(r.map(e => e.diffBasis));
       gf(GitReferenceType.BRANCH);
       y(!0);
-      rY.trackGranularLoadTime({
+      DiffManager.trackGranularLoadTime({
         branchKey: t,
         sourceKey: i,
         durationMs: performance.now() - e,
@@ -3381,20 +3381,20 @@ let nw = memo(e => {
     return (useEffect(() => {
       f && _ && A && setTimeout(async () => {
         if (w) {
-          let e = PE(o, w.mainChunk);
+          let e = getPageBackgroundColor(o, w.mainChunk);
           let {
             nodeId,
             to,
             fromPromise
           } = function (e, t) {
             let i = sessionLocalIDToString(e.mainChunk.displayNode.guid);
-            let n = KZ(e.mainChunk.displayNode.styleType);
+            let n = isValidStyleType(e.mainChunk.displayNode.styleType);
             let r = [{
               id: e.basisChunkGuid !== null ? e.basisChunkGuid : i,
               backgroundColor: t,
               isStyle: n
             }];
-            let a = FD({
+            let a = generateThumbnails({
               nodes: [{
                 id: i,
                 backgroundColor: t,
@@ -3405,7 +3405,7 @@ let nw = memo(e => {
             let s = new Promise(async e => {
               for (let e = 0; e < 5; e++) await waitForAnimationFrame();
               b_();
-              let t = FD({
+              let t = generateThumbnails({
                 nodes: r,
                 scale: getFeatureFlags().branching_detail_view_zoom ? n ? 4 : 8 : void 0
               });
@@ -3430,7 +3430,7 @@ let nw = memo(e => {
             }
           }));
         }
-        let [e, n] = await Mt(S, t, i, f, x);
+        let [e, n] = await getMergeResultImagesForChunks(S, t, i, f, x);
         e.then(e => {
           c(t => ({
             ...t,
@@ -3575,7 +3575,7 @@ let nw = memo(e => {
   let eO = useMemo(() => {
     if (i.view === tN.SUMMARY || i.view === tN.AFFECTED_SUMMARY) return null;
     let e = nx(i);
-    return e ? rY.getChunkChanges(GitReferenceType.BRANCH, e.mainChunk.originalIndex) : null;
+    return e ? DiffManager.getChunkChanges(GitReferenceType.BRANCH, e.mainChunk.originalIndex) : null;
   }, [i]);
   let eD = {
     direction: SourceDirection.TO_SOURCE
@@ -3673,7 +3673,7 @@ let nw = memo(e => {
                   onApprove: ea,
                   mergeRequest: I
                 })]
-              }), jsx(_$$P, {
+              }), jsx(RecordingScrollContainer, {
                 className: lq,
                 children: jsx(_$$nS, {
                   children: summaryImages && jsx('div', {
@@ -3776,14 +3776,14 @@ let nw = memo(e => {
                       phase: e.mainChunk.phase
                     })]
                   })]
-                }), jsxs(_$$P, {
+                }), jsxs(RecordingScrollContainer, {
                   className: lq,
                   innerClassName: XA,
                   children: [(el() || i.view === tN.VARIANT_SUMMARY) && jsx(eL, {
                     beforeImage: r,
-                    beforeBackgroundColorStyle: Oh(e.mainChunk, pageIdToInfo),
+                    beforeBackgroundColorStyle: getTextOrFillBackgroundStyle(e.mainChunk, pageIdToInfo),
                     afterImage: a,
-                    afterBackgroundColorStyle: Oh(e.mainChunk, pageIdToInfo),
+                    afterBackgroundColorStyle: getTextOrFillBackgroundStyle(e.mainChunk, pageIdToInfo),
                     showOptions: e.mainChunk.phase !== LibraryUpdateStatus.CREATED && e.mainChunk.phase !== LibraryUpdateStatus.REMOVED,
                     displayChunk: e,
                     chunkDetail: eO,
@@ -3918,12 +3918,12 @@ let nF = memo(e => {
   } = useMemo(() => function (e, t, i, n) {
     if (!(t.length > 0)) {
       return {
-        ...on(e, i, n, SourceDirection.FROM_SOURCE),
+        ...groupDisplayChunks(e, i, n, SourceDirection.FROM_SOURCE),
         otherChanges: []
       };
     }
     {
-      let r = on(t, i, n, SourceDirection.FROM_SOURCE);
+      let r = groupDisplayChunks(t, i, n, SourceDirection.FROM_SOURCE);
       return {
         ...r,
         otherChanges: e.map((e, t) => ({
@@ -3978,7 +3978,7 @@ let nF = memo(e => {
           return !f.current.has(t) && (f.current.add(t), !0);
         });
         if (e.length === 0) return;
-        let [t, i] = await Mt(e, s, o, l, A);
+        let [t, i] = await getMergeResultImagesForChunks(e, s, o, l, A);
         t.then(e => {
           m(t => ({
             ...t,
@@ -4048,7 +4048,7 @@ let nF = memo(e => {
       })
     }), jsx('div', {
       className: 'changes_review--mainContent--ItN1b',
-      children: jsx(_$$P, {
+      children: jsx(RecordingScrollContainer, {
         className: 'changes_review--scrollbar--8e66S',
         children: jsx(tw, {
           onChangeVisibleGroups: z,
@@ -4076,7 +4076,7 @@ let nF = memo(e => {
 });
 let nj = nM;
 function nG(e) {
-  let t = useMemo(() => e.chunk ? C_(e.chunk) : void 0, [e.chunk]);
+  let t = useMemo(() => e.chunk ? getImmediateParentHierarchyNodeChange(e.chunk) : void 0, [e.chunk]);
   return jsx('div', {
     className: ev()({
       'chunk_title--chunkTitle--CeIJT': !0,
@@ -4087,12 +4087,12 @@ function nG(e) {
         node: e.chunk.displayNode,
         parentNode: t,
         className: 'chunk_title--headerIcon--kHPnp object_row--layerIcon--dTOdu'
-      }), jsx(_$$R, {
+      }), jsx(CenterTruncatedText, {
         text: _$$w2(e.chunk.displayNode.name || ''),
         element: 'h4',
         id: e.id
       })]
-    }) : jsx(_$$R, {
+    }) : jsx(CenterTruncatedText, {
       text: _$$w2(e.siblingChunk?.displayNode.name || ''),
       element: 'h4',
       id: e.id
@@ -4407,8 +4407,8 @@ function ri({
   isDarkBackground: e,
   displayNode: t
 }) {
-  if (t && $2(t)) {
-    let e = s$(t);
+  if (t && isGridStyle(t)) {
+    let e = getSVGForLayoutGrid(t);
     return jsx(SvgComponent, {
       svg: e,
       className: 'conflict_group_diff--grid--ojJey',
@@ -4433,17 +4433,17 @@ function rn(e) {
   let d = chunk?.displayNode.styleType === 'TEXT';
   let c = chunk?.displayNode.styleType === 'FILL';
   let u = getVisibleTheme() === 'dark';
-  let p = chunk ? uA(chunk, imageBackgroundColor) : {
+  let p = chunk ? getEffectOrGridBackgroundStyle(chunk, imageBackgroundColor) : {
     backgroundColor: imageBackgroundColor
   };
-  let h = rB(u, imageBackgroundColor, chunk?.displayNode.styleType);
+  let h = shouldShowColor(u, imageBackgroundColor, chunk?.displayNode.styleType);
   let g = ev()({
     [eN]: d || c
   });
   let f = ev()({
     [eP]: d && u
   });
-  let _ = useMemo(() => imageData && cs(imageData, l) ? {
+  let _ = useMemo(() => imageData && isDisplayNodeVisible(imageData, l) ? {
     width: imageData.width,
     height: imageData.height,
     data: imageData.image,
@@ -4571,7 +4571,7 @@ function rs({
       className: ev()('conflict_group_diff--diffHeaderLeft--jlkCd conflict_group_diff--diffHeaderItem--TWJfb conflict_resolution--mainHeader--l2ahY conflict_resolution--headerBorder--mFV8I', t === BranchType.MAIN && n5),
       children: [jsx('div', {
         className: n4,
-        children: jsx(_$$R, {
+        children: jsx(CenterTruncatedText, {
           text: a,
           element: 'h3'
         })
@@ -4586,7 +4586,7 @@ function rs({
         children: [jsx(SvgComponent, {
           className: 'conflict_group_diff--diffHeaderIcon--mn8Ej',
           svg: _$$A12
-        }), jsx(_$$R, {
+        }), jsx(CenterTruncatedText, {
           text: s,
           element: 'h3'
         })]
@@ -4615,7 +4615,7 @@ function ro({
   let p = useMemo(() => lp(sourceChunks, branchChunks, Hm), [sourceChunks, branchChunks]);
   return jsx('div', {
     className: 'conflict_group_diff--diffContents--vciWn conflict_resolution--diffPreview--Gn3q6',
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       className: 'conflict_group_diff--scrollContainer--SX-Xd',
       innerClassName: 'conflict_group_diff--innerScrollContainer--VWi96',
       children: p.map(([e, i]) => {
@@ -4716,9 +4716,9 @@ function rd({
       choice: r,
       loadingImages: a,
       mainImage: o?.image,
-      mainImageBackgroundColor: o?.backgroundColor || yi,
+      mainImageBackgroundColor: o?.backgroundColor || DEFAULT_BACKGROUND_COLOR,
       branchImage: i?.image,
-      branchImageBackgroundColor: i?.backgroundColor || yi
+      branchImageBackgroundColor: i?.backgroundColor || DEFAULT_BACKGROUND_COLOR
     });
   }();
   return c ? jsx('div', {
@@ -4763,7 +4763,7 @@ function rf(e) {
       })
     }), jsx('div', {
       className: 'conflict_list--conflictTitleTextContainer--HP4Hx',
-      children: jsx(_$$R, {
+      children: jsx(CenterTruncatedText, {
         text: i,
         tooltipPropsWhenTruncated: a
       })
@@ -4782,7 +4782,7 @@ function r_(e) {
   });
 }
 function rA(e) {
-  let t = useMemo(() => C_(e.chunk), [e.chunk]);
+  let t = useMemo(() => getImmediateParentHierarchyNodeChange(e.chunk), [e.chunk]);
   return jsx('div', {
     className: 'conflict_list--conflictSubItem--JuGqp',
     children: jsx(rf, {
@@ -4879,7 +4879,7 @@ function rv({
       picks: t,
       isOpen: d,
       setIsOpen: c
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: 'conflict_list--scrollContainer--SOS5e',
       ref: l,
       children: jsx(rw, {
@@ -4920,7 +4920,7 @@ function rI(e) {
       })]
     }), jsx('div', {
       className: ev()(isOpen && l ? null : 'conflict_list--sectionItemsHidden--qtvg9'),
-      children: jsx(_$$P, {
+      children: jsx(RecordingScrollContainer, {
         scrollBarAlways: !1,
         className: 'conflict_list--sectionItemsScrollContainer--1xKoi conflict_list--scrollContainer--SOS5e',
         children: conflictGroupSections.map(([e, t]) => jsx(rE, {
@@ -4994,7 +4994,7 @@ function rw(e) {
     listHeight
   } = e;
   let l = createRef();
-  let d = useMemo(() => sectionConflictGroups.map(e => [...e.sourceChunks, ...e.branchChunks].some(e => Y1(e)) ? 1 : rx(e)), [sectionConflictGroups]);
+  let d = useMemo(() => sectionConflictGroups.map(e => [...e.sourceChunks, ...e.branchChunks].some(e => isInternalVariableSet(e)) ? 1 : rx(e)), [sectionConflictGroups]);
   useLayoutEffect(() => {
     l.current && l.current.scrollToItem(sectionConflictGroups.indexOf(selectedConflict));
   }, [selectedConflict, l, sectionConflictGroups]);
@@ -5035,7 +5035,7 @@ function rk(e, t, i, n) {
     backgroundColor: SceneGraphHelpers.getNodePageBackgroundColor(e.id),
     isStyle: e.isStyle
   }));
-  let a = FD({
+  let a = generateThumbnails({
     nodes: r
   });
   let s = tX(n);
@@ -5086,9 +5086,9 @@ let rR = memo(e => {
         let o = sourceChunks.concat(branchChunks);
         let l = null;
         for (let e of o) {
-          if (Rw(e) && e.displayNode.styleType) return 'Styles';
-          if (Y1(e)) return 'Variables';
-          if (Oi(e)) {
+          if (isInternalCanvas(e) && e.displayNode.styleType) return 'Styles';
+          if (isInternalVariableSet(e)) return 'Variables';
+          if (hasStyleOrLibraryKey(e)) {
             let t = r[e.styleKey || ''] || e.componentLibraryKey || 'defaultKey';
             let n = t === 'defaultKey' ? 'Libraries' : i[t]?.name ?? 'Libraries';
             return {
@@ -5098,7 +5098,7 @@ let rR = memo(e => {
             };
           }
           {
-            let t = WE(e);
+            let t = getParentHierarchyNodeChangeForDisplayNode(e);
             let i = t.guid;
             let n = t.name;
             if (l && l.key !== i) return 'Multipage';
@@ -5264,7 +5264,7 @@ let rR = memo(e => {
             ...Z_()
           });
         } catch (e) {
-          e instanceof rY.InvalidStateTransitionError ? s.status === 'loading' && s.timer && clearTimeout(s.timer) : o({
+          e instanceof DiffManager.InvalidStateTransitionError ? s.status === 'loading' && s.timer && clearTimeout(s.timer) : o({
             status: 'error',
             error: e
           });
@@ -5731,7 +5731,7 @@ function rF(e) {
       let i = e.branchKey;
       u(!0);
       try {
-        let e = rY.getConflicts({
+        let e = DiffManager.getConflicts({
           branchKey: i,
           sourceKey: t,
           branchModalTrackingId: o
@@ -5840,7 +5840,7 @@ function rM(e) {
       if (s) {
         window[nC] = {
           getBranchChunks: e => {
-            let t = rY.getChunks(GitReferenceType.BRANCH).map(e => ({
+            let t = DiffManager.getChunks(GitReferenceType.BRANCH).map(e => ({
               ...e,
               phaseString: LibraryUpdateStatus[e.phase],
               diffTypeString: GitReferenceType[e.diffType]
@@ -5848,7 +5848,7 @@ function rM(e) {
             return e ? nT(e, t) : t;
           },
           getSourceChunks: e => {
-            let t = rY.getChunks(GitReferenceType.SOURCE).map(e => ({
+            let t = DiffManager.getChunks(GitReferenceType.SOURCE).map(e => ({
               ...e,
               phaseString: LibraryUpdateStatus[e.phase],
               diffTypeString: GitReferenceType[e.diffType]
@@ -5871,7 +5871,7 @@ function rM(e) {
     if (!c) return;
     let t = e.branchKey;
     let n = e.sourceKey;
-    i(ov({
+    i(handleBranchModalExit({
       hideModal: !0,
       mergeParams: {
         branchKey: t,
@@ -5916,7 +5916,7 @@ function rM(e) {
   let e_ = useCallback(() => {
     b_();
     o(SourceDirection.FROM_SOURCE);
-    rY.updateBranchingStagerDirection(SourceDirection.FROM_SOURCE);
+    DiffManager.updateBranchingStagerDirection(SourceDirection.FROM_SOURCE);
   }, [o]);
   let ey = useCallback(t => n => {
     let {
@@ -5935,7 +5935,7 @@ function rM(e) {
       direction: l
     };
     n.preventDefault();
-    i(S2({
+    i(commitMerge({
       mergeParams: d,
       checkpointDiff,
       pendingMessage,

@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/419236";
 import { useSubscription } from "../figma_app/288654";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { y2 } from "../figma_app/563413";
 import { V as _$$V } from "../figma_app/385855";
 import { DesignsList, SizeOption } from "../905/171275";
@@ -37,7 +37,7 @@ import { getOrgAdminTabMessage } from "../figma_app/809387";
 import { DashboardSection, FigResourceType } from "../figma_app/650409";
 import { SectionType } from "../figma_app/858344";
 import { hubFileAndPresetKeysSetAtom, resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
-import { Hj, A3, tD, FO } from "../905/682977";
+import { TableRow, HeaderCell, SortableHeaderCell, LoadingRow } from "../905/682977";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { IconButton } from "../905/443068";
 import { Checkbox } from "../905/274480";
@@ -55,7 +55,7 @@ import { generateUniqueKey } from "../905/383708";
 import { TrackingProvider } from "../figma_app/831799";
 import { isValidLibraryKey } from "../figma_app/630951";
 import { selectCurrentUser } from "../905/372672";
-import { Y as _$$Y2 } from "../905/465068";
+import { isOrgBrowsableFile } from "../905/465068";
 import { registerModal } from "../905/102752";
 import { HeaderModal } from "../905/519092";
 import { X as _$$X, U as _$$U } from "../905/77000";
@@ -189,7 +189,7 @@ function X(e) {
               children: jsx(_$$A, {})
             })]
           })]
-        }), jsx(_$$P, {
+        }), jsx(RecordingScrollContainer, {
           className: "xh8yej3 x6bct43",
           children: jsxs(AutoLayout, {
             direction: "vertical",
@@ -1103,7 +1103,7 @@ let tr = function ({
     children: jsxs(AutoLayout, {
       spacing: 0,
       height: "fill-parent",
-      children: [jsxs(_$$P, {
+      children: [jsxs(RecordingScrollContainer, {
         className: cssBuilderInstance.wHalf.hFull.$,
         children: [l && jsxs(Fragment, {
           children: [jsx(ta, {
@@ -1139,7 +1139,7 @@ let tr = function ({
         })]
       }), jsx("div", {
         className: cssBuilderInstance.wHalf.hFull.bl1.colorBorder.bSolid.$,
-        children: (l || a) && jsx(_$$P, {
+        children: (l || a) && jsx(RecordingScrollContainer, {
           className: cssBuilderInstance.wFull.hFull.$,
           children: jsx(e9, {
             libraryData: e,
@@ -1182,7 +1182,7 @@ let td = registerModal(function ({
     })), g());
   }, [g, t, m, p, u.status, o]);
   let h = l.windowInnerWidth <= parsePxInt(tgj);
-  let v = m && "file" === m.type && m.permissions && !_$$Y2({
+  let v = m && "file" === m.type && m.permissions && !isOrgBrowsableFile({
     org_browsable: m.permissions.orgBrowsable,
     link_access: m.permissions.linkAccess
   });
@@ -1271,7 +1271,7 @@ function tg({
   }, {
     enabled: !!i
   });
-  return jsx(Hj, {
+  return jsx(TableRow, {
     useAdminTableStyles: !0,
     className: "libraries_section--tableRowBody--VJ-We libraries_section--tableRow--Y2bLC",
     onClick: s,
@@ -1550,16 +1550,16 @@ export function $$tx1(e) {
           },
           placeholder: getI18nString("resources_tab.libraries.search.label_with_ellipsis")
         })
-      }), jsx(Hj, {
+      }), jsx(TableRow, {
         header: !0,
         useAdminTableStyles: !0,
         children: jsxs(AutoLayout, {
           spacing: 0,
-          children: [jsx(A3, {
+          children: [jsx(HeaderCell, {
             style: styleBuilderInstance.add({
               width: "40%"
             }).$,
-            children: jsx(tD, {
+            children: jsx(SortableHeaderCell, {
               className: cssBuilderInstance.colorText.$,
               isDescending: !sortState.isReversed,
               sortBy: () => updateSortState("NAME"),
@@ -1571,11 +1571,11 @@ export function $$tx1(e) {
                 children: renderI18nText("resources_tab.libraries.name")
               })
             })
-          }), jsx(A3, {
+          }), jsx(HeaderCell, {
             style: styleBuilderInstance.add({
               width: "30%"
             }).$,
-            children: jsx(tD, {
+            children: jsx(SortableHeaderCell, {
               className: cssBuilderInstance.colorText.$,
               isDescending: !sortState.isReversed,
               sortBy: () => updateSortState("ENABLED_FOR"),
@@ -1587,11 +1587,11 @@ export function $$tx1(e) {
                 children: renderI18nText("resources_tab.libraries.added_by_default")
               })
             })
-          }), jsx(A3, {
+          }), jsx(HeaderCell, {
             style: styleBuilderInstance.add({
               width: "10%"
             }).justifyEnd.$,
-            children: jsx(tD, {
+            children: jsx(SortableHeaderCell, {
               rightAligned: !0,
               className: cssBuilderInstance.colorText.$,
               isDescending: !sortState.isReversed,
@@ -1604,11 +1604,11 @@ export function $$tx1(e) {
                 children: renderI18nText("resources_tab.libraries.components")
               })
             })
-          }), jsx(A3, {
+          }), jsx(HeaderCell, {
             style: styleBuilderInstance.add({
               width: "10%"
             }).justifyEnd.$,
-            children: jsx(tD, {
+            children: jsx(SortableHeaderCell, {
               rightAligned: !0,
               className: cssBuilderInstance.colorText.$,
               isDescending: !sortState.isReversed,
@@ -1621,7 +1621,7 @@ export function $$tx1(e) {
                 children: renderI18nText("resources_tab.libraries.styles")
               })
             })
-          }), jsxs(A3, {
+          }), jsxs(HeaderCell, {
             style: styleBuilderInstance.add({
               width: "10%"
             }).$,
@@ -1629,7 +1629,7 @@ export function $$tx1(e) {
           })]
         })
       })]
-    }), ("loading" === et.status || "loading" === ee.status) && jsx(FO, {}), "loaded" === et.status && "loaded" === ee.status && !sortedItems.length && jsx(_$$p, {
+    }), ("loading" === et.status || "loading" === ee.status) && jsx(LoadingRow, {}), "loaded" === et.status && "loaded" === ee.status && !sortedItems.length && jsx(_$$p, {
       children: K ? jsx(TextWithTruncation, {
         children: renderI18nText("resources_tab.libraries.search.no_results")
       }) : Y.size > 0 ? jsx(TextWithTruncation, {
@@ -1667,7 +1667,7 @@ export function $$tx1(e) {
           libraryIcon: o,
           onClick: () => eh(e)
         }, e.library_key);
-      }), (K || Y.size > 0) && jsx(Hj, {
+      }), (K || Y.size > 0) && jsx(TableRow, {
         useAdminTableStyles: !0,
         className: "libraries_section--showAllLibrariesRow--e07-d libraries_section--tableRow--Y2bLC",
         onClick: () => {
@@ -1701,7 +1701,7 @@ export function $$tx1(e) {
       children: jsx(LoadingSpinner, {})
     }) : jsx("div", {
       className: cssBuilderInstance.overflowAuto.$,
-      children: jsx(_$$P, {
+      children: jsx(RecordingScrollContainer, {
         className: cssBuilderInstance.wFull.hFull.$,
         minContentWidth: 800,
         children: eb

@@ -10,7 +10,7 @@ import { atom } from '../figma_app/27355'
  * @returns The selectedView object.
  * (Original: l)
  */
-const selectSelectedView = (state: any) => state.selectedView
+export const selectSelectedView = (state: any) => state.selectedView
 
 /**
  * Selector for the view property inside selectedView.
@@ -18,7 +18,7 @@ const selectSelectedView = (state: any) => state.selectedView
  * @returns The view string.
  * (Original: d)
  */
-const selectSelectedViewType = (state: any) => state.selectedView.view
+export const selectSelectedViewType = (state: any) => state.selectedView.view
 
 /**
  * Returns the selectedView from Redux state.
@@ -55,25 +55,25 @@ export function getPrototypeSelectedView() {
  * Atom for subscribing to selectedView changes.
  * (Original: $$_1)
  */
-const selectedViewAtom = createReduxSubscriptionAtomWithState(selectSelectedView)
+export const selectedViewAtom = createReduxSubscriptionAtomWithState(selectSelectedView)
 
 /**
  * Atom for subscribing to modalShown changes.
  * (Original: $$h3)
  */
-const modalShownAtom = createReduxSubscriptionAtomWithState(state => state.modalShown)
+export const modalShownAtom = createReduxSubscriptionAtomWithState(state => state.modalShown)
 
 /**
  * Atom for the type of the currently shown modal.
  * (Original: $$m7)
  */
-const modalTypeAtom = atom(get => get(modalShownAtom)?.type || null)
+export const modalTypeAtom = atom(get => get(modalShownAtom)?.type || null)
 
 /**
  * Atom for the type of the first notification.
  * (Original: $$g0)
  */
-const notificationTypeAtom = createReduxSubscriptionAtomWithState(state => state.notifications?.[0]?.type ?? null)
+export const notificationTypeAtom = createReduxSubscriptionAtomWithState(state => state.notifications?.[0]?.type ?? null)
 
 /**
  * Returns the selectedView.view value from Redux state.

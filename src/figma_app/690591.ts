@@ -7,7 +7,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { ModalCloseButton } from "../905/17223";
 import { BaseLinkComponent, SecureLink } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString } from "../905/303541";
 import { rH } from "../figma_app/49598";
 import { _J } from "../figma_app/378195";
@@ -345,7 +345,7 @@ let $$Q0 = registerModal(function (e) {
       numPlugins: H,
       numWidgets: W,
       numFiles: K
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       className: jG,
       hideScrollbar: !0,
       children: [!ep && jsx("div", {

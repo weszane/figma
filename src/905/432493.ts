@@ -1,454 +1,689 @@
 import { getFileKey } from '../905/412913'
-import { bW } from '../905/491806'
+import { createObjectUrl } from '../905/491806'
 import { SourceDirection, ViewType } from '../905/535806'
 import { A as _$$A } from '../905/639174'
 import { defaultColorManipulator } from '../905/713722'
 import { logWarning } from '../905/714362'
 import { sessionLocalIDToString } from '../905/871411'
 import { sendWithRetry } from '../905/910117'
-import { rY } from '../905/985490'
-import { A as _$$A2 } from '../2854/317197'
-import { A as _$$A3 } from '../2854/950417'
-import { A as _$$A4 } from '../2854/957401'
+import { DiffManager } from '../905/985490'
+import { A as SVG } from '../2854/317197'
+import { A as SVG1 } from '../2854/950417'
+import { A as SVG2 } from '../2854/957401'
 import { kLz, vPu } from '../figma_app/27776'
 import { isColorDark } from '../figma_app/191804'
 import { getImageManager } from '../figma_app/624361'
 import { batchFetchFiles, fetchStylesByKeys } from '../figma_app/646357'
 import { filterNotNullish } from '../figma_app/656233'
-import { ImageExportType, LibraryUpdateStatus, RelationType, SceneGraphHelpers, Thumbnail } from '../figma_app/763686'
+import { GitReferenceType, ImageExportType, LibraryUpdateStatus, RelationType, SceneGraphHelpers, Thumbnail } from '../figma_app/763686'
 import { parsePxInt } from '../figma_app/783094'
-import s from '../vendor/267721'
-import c from '../vendor/626715'
-import l from '../vendor/946678'
+import { partition, chunk, uniq } from 'lodash-es'
 
-let o = s
-let d = l
-let u = c
-let T = async (e, t, i) => {
-  let {
+// Origin: /Users/allen/github/fig/src/905/432493.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments, improved readability and modularity.
+
+// --- Assumed dependencies ---
+// - lodash partition, chunk, uniq
+// - External modules as imported above
+
+// --- Type Definitions ---
+
+interface ImageMeta {
+  node_id: string
+  img_url: string
+}
+
+interface GenerateImagesResponse {
+  images: ImageMeta[]
+}
+
+interface ThumbnailResult {
+  image: string
+  width: number
+  height: number
+}
+
+interface Node {
+  id: string
+  isStyle?: boolean
+  backgroundColor?: string
+  [key: string]: any
+}
+
+interface DisplayNode {
+  guid: string
+  styleType?: string
+  type?: string
+  key?: string
+  layoutGrids?: any[]
+  name?: string
+  internalOnly?: boolean
+  [key: string]: any
+}
+
+interface MainChunk {
+  phase: LibraryUpdateStatus
+  displayNode: DisplayNode
+  styleKey?: string
+  componentLibraryKey?: string
+  canvasId?: string
+  [key: string]: any
+}
+
+interface DiffChunk {
+  mainChunk: MainChunk
+  type?: string
+  basisParentHierarchyGuids?: string[]
+  parentHierarchyGuids?: string[]
+  diffType?: GitReferenceType
+  styleKey?: string
+  componentLibraryKey?: string
+  canvasIsInternal?: boolean
+  [key: string]: any
+}
+
+interface PageInfo {
+  name: string
+  backgroundColor: string
+}
+
+interface DisplayGroupMap {
+  [key: string]: DiffChunk[]
+}
+
+interface NumberedDisplayGroupMap {
+  [key: string]: (DiffChunk & { index: number })[]
+}
+
+interface NumberedDisplayGroupsResult {
+  numberedDisplayGroupMap: NumberedDisplayGroupMap
+  numberedDisplayGroups: (DiffChunk & { index: number })[]
+}
+
+interface MergeResultImagesOptions {
+  branchKey: string
+  sourceKey: string
+  branchModalTrackingId: string
+}
+
+interface StyleKeyToLibraryKeyMap {
+  [key: string]: string
+}
+
+interface StyleKeyToFileKeyMap {
+  [key: string]: string
+}
+
+interface StyleLibraryResult {
+  styleKeyToLibraryKey: StyleKeyToLibraryKeyMap
+  styleKeyToFileKey: StyleKeyToFileKeyMap
+}
+
+// --- Utility Functions ---
+
+// Generate images for merge diff nodes
+async function generateImages(direction: SourceDirection, fileKey: string, payload: object): Promise<ImageMeta[]> {
+  const {
     data: {
-      meta: {
-        images,
-      },
+      meta: { images },
     },
-  } = await sendWithRetry.post(`/api/file_diff/file_merge/${e}/${t}/generate_images`, i, {
-    retryCount: 2,
-  })
+  } = await sendWithRetry.post(
+    `/api/file_diff/file_merge/${direction}/${fileKey}/generate_images`,
+    payload,
+    { retryCount: 2 },
+  )
   return images
 }
-export function $$k2({
-  nodes: e,
-  width: t,
-  height: i,
-  scale: n,
-}) {
-  return e.map((e) => {
-    let a
-    e.isStyle || (a = e.backgroundColor ?? $$D20)
-    let [s, o] = Thumbnail.generateThumbnailForNode(e.id, t || 0, i || 0, 2, {
-      scale: n ?? (t && i ? void 0 : 2),
-      type: 'UNCOMPRESSED',
-      clearColor: a,
-      renderDefaultStateForSubscribedStateGroups: !0,
-    })
-    return o.length
+
+// Generate thumbnails for nodes
+export function generateThumbnails({
+  nodes,
+  width,
+  height,
+  scale,
+}: {
+  nodes: Node[]
+  width?: number
+  height?: number
+  scale?: number
+}): (ThumbnailResult | null)[] {
+  return nodes.map((node) => {
+    let clearColor: string | undefined
+    if (!node.isStyle) {
+      clearColor = node.backgroundColor ?? DEFAULT_BACKGROUND_COLOR
+    }
+    const [thumbMeta, imageData] = Thumbnail.generateThumbnailForNode(
+      node.id,
+      width || 0,
+      height || 0,
+      2,
+      {
+        scale: scale ?? (width && height ? undefined : 2),
+        type: 'UNCOMPRESSED',
+        clearColor,
+        renderDefaultStateForSubscribedStateGroups: true,
+      },
+    )
+    return imageData.length
       ? {
-          image: o,
-          width: s.width,
-          height: s.height,
+          image: imageData,
+          width: thumbMeta.width,
+          height: thumbMeta.height,
         }
       : null
   })
 }
-export function $$R1(e) {
-  let t = rY.getImmediateParentHierarchyNodeChange(e, RelationType.PARENT)
-  if (t)
-    return t
-  {
-    let t = rY.getImmediateParentHierarchyNodeChange(e, RelationType.BASIS_PARENT)
-    if (t)
-      return t
-  }
+
+// Get immediate parent hierarchy node change
+export function getImmediateParentHierarchyNodeChange(chunk: DiffChunk): any {
+  let parent = DiffManager.getImmediateParentHierarchyNodeChange(chunk, RelationType.PARENT)
+  if (parent)
+    return parent
+  parent = DiffManager.getImmediateParentHierarchyNodeChange(chunk, RelationType.BASIS_PARENT)
+  if (parent)
+    return parent
 }
-let N = async (e, t) => {
-  let i
-  let n = new Promise((e) => {
-    i = setTimeout(() => {
+
+// Wait for all images under a node to load, with timeout
+async function waitForImagesToLoad(node: any, timeoutMs: number): Promise<void> {
+  let timeoutHandle: NodeJS.Timeout
+  const timeoutPromise = new Promise<void>((resolve) => {
+    timeoutHandle = setTimeout(() => {
       logWarning('merge', 'gave up waiting on images')
-      e()
-    }, t)
+      resolve()
+    }, timeoutMs)
   })
-  let a = getImageManager().loadAllImagesUnder([e], ImageExportType.NON_ANIMATED_ONLY, 'merge.waitForImagesToLoad')
-  await Promise.race([n, a])
-  clearTimeout(i)
+  const loadPromise = getImageManager().loadAllImagesUnder(
+    [node],
+    ImageExportType.NON_ANIMATED_ONLY,
+    'merge.waitForImagesToLoad',
+  )
+  await Promise.race([timeoutPromise, loadPromise])
+  clearTimeout(timeoutHandle)
 }
-let P = (e, t, i, n) => {
-  let a = performance.now()
-  let s = async (e) => {
-    await N(e.id, 3e4)
-    let [t, a] = Thumbnail.generateThumbnailForNode(e.id, i || 0, n || 0, 2, {
-      scale: i && n ? void 0 : 2,
-      type: 'PNG',
-    })
-    return bW(a)
+
+// Generate merge result images for removed nodes
+function getMergeResultImages(nodes: { id: string, styleType?: string }[], options: MergeResultImagesOptions, width: number, height: number): Promise<string[]> {
+  const startTime = performance.now()
+  const generateImage = async (node: { id: string }) => {
+    await waitForImagesToLoad({ id: node.id }, 30000)
+    const [, imageData] = Thumbnail.generateThumbnailForNode(
+      node.id,
+      width || 0,
+      height || 0,
+      2,
+      {
+        scale: width && height ? undefined : 2,
+        type: 'PNG',
+      },
+    )
+    return createObjectUrl(imageData)
   }
-  let o = performance.now() - a
-  let l = e.map(e => e.id)
-  if (l.length > 0) {
-    let e = l.sort().join(',')
-    rY.trackGranularLoadTime({
-      durationMs: o,
+  const nodeIds = nodes.map(n => n.id)
+  if (nodeIds.length > 0) {
+    const durationMs = performance.now() - startTime
+    DiffManager.trackGranularLoadTime({
+      durationMs,
       functionName: 'getMergeResultImages',
-      nodeIds: e,
-      ...t,
+      nodeIds: nodeIds.sort().join(','),
+      ...options,
     })
   }
-  return Promise.all(e.map(s))
+  return Promise.all(nodes.map(generateImage))
 }
-export async function $$O5(e, t, i, n, s) {
-  let [l, c] = d()(e, e => e.mainChunk.phase === LibraryUpdateStatus.REMOVED)
-  let u = (function (e) {
-    let {
-      direction,
-      fileKey,
-      nodeIds,
-      checkpointKey,
-      resolution,
-      maxChunksPerRequest,
-    } = e
-    return nodeIds.length === 0
-      ? []
-      : o()(nodeIds, maxChunksPerRequest).map(e => T(direction, fileKey, {
-          node_ids: e.join(','),
-          checkpoint_key: checkpointKey,
-          resolution,
-        }).then((t) => {
-          let i = {}
-          for (let t of e) i[t] = null
-          for (let e of t) i[e.node_id] = e
-          return i
-        }))
-  }({
-    direction: SourceDirection.FROM_SOURCE,
-    fileKey: t,
-    nodeIds: l.map(e => sessionLocalIDToString(e.mainChunk.displayNode.guid)),
-    checkpointKey: n,
-    resolution: ViewType.SUMMARY,
-    maxChunksPerRequest: 50,
+
+// Main function for merge result images
+export async function getMergeResultImagesForChunks(
+  chunks: DiffChunk[],
+  branchKey: string,
+  sourceKey: string,
+  checkpointKey: string,
+  branchModalTrackingId: string,
+): Promise<[Promise<Record<string, string>>, Promise<Record<string, string | null>>]> {
+  // Partition chunks into removed and others
+  const [removedChunks, otherChunks] = partition(chunks, chunk =>
+    chunk.mainChunk.phase === LibraryUpdateStatus.REMOVED)
+
+  // Prepare requests for non-removed chunks
+  const imageRequests = (() => {
+    const direction = SourceDirection.FROM_SOURCE
+    const fileKey = branchKey
+    const nodeIds = removedChunks.map(chunk =>
+      sessionLocalIDToString(chunk.mainChunk.displayNode.guid),
+    )
+    const resolution = ViewType.SUMMARY
+    const maxChunksPerRequest = 50
+    if (nodeIds.length === 0)
+      return []
+    return chunk(nodeIds, maxChunksPerRequest).map((nodeIdChunk: any[]) =>
+      generateImages(direction, fileKey, {
+        node_ids: nodeIdChunk.join(','),
+        checkpoint_key: checkpointKey,
+        resolution,
+      }).then((images) => {
+        const result: Record<string, ImageMeta | null> = {}
+        for (const id of nodeIdChunk) result[id] = null
+        for (const img of images) result[img.node_id] = img
+        return result
+      }),
+    )
+  })()
+
+  // Generate thumbnails for other chunks
+  const thumbnailNodes = otherChunks.map(chunk => ({
+    id: sessionLocalIDToString(chunk.mainChunk.displayNode.guid),
+    styleType: chunk.mainChunk.displayNode.styleType,
   }))
-  let p = await P(c.map(e => ({
-    id: sessionLocalIDToString(e.mainChunk.displayNode.guid),
-    styleType: e.mainChunk.displayNode.styleType,
-  })), {
-    branchKey: t,
-    sourceKey: i,
-    branchModalTrackingId: s,
-  }, 2 * parsePxInt(vPu), 2 * parsePxInt(kLz))
-  let h = {}
-  p.forEach((e, t) => {
-    let i = sessionLocalIDToString(c[t].mainChunk.displayNode.guid)
-    i && e && (h[i] = e)
+  const thumbnailWidth = 2 * parsePxInt(vPu)
+  const thumbnailHeight = 2 * parsePxInt(kLz)
+  const thumbnails = await getMergeResultImages(thumbnailNodes, {
+    branchKey,
+    sourceKey,
+    branchModalTrackingId,
+  }, thumbnailWidth, thumbnailHeight)
+
+  // Map thumbnails to node IDs
+  const thumbnailMap: Record<string, string> = {}
+  thumbnails.forEach((imageUrl, idx) => {
+    const nodeId = sessionLocalIDToString(otherChunks[idx].mainChunk.displayNode.guid)
+    if (nodeId && imageUrl) {
+      thumbnailMap[nodeId] = imageUrl
+    }
   })
-  let g = Promise.all(u).then((e) => {
-    let t = {}
-    e.forEach((e) => {
-      Object.keys(e).forEach((i) => {
-        let n = e[i]
-        t[i] = n ? n.img_url : null
+
+  // Map image URLs for removed chunks
+  const removedChunkImagesPromise = Promise.all(imageRequests).then((results) => {
+    const imageMap: Record<string, string | null> = {}
+    results.forEach((result) => {
+      Object.keys(result).forEach((nodeId) => {
+        const meta = result[nodeId]
+        imageMap[nodeId] = meta ? meta.img_url : null
       })
     })
-    return t
+    return imageMap
   })
-  return [Promise.resolve(h), g]
+
+  return [Promise.resolve(thumbnailMap), removedChunkImagesPromise]
 }
-export let $$D20 = 'rgba(0, 0, 0, 0.06)'
-export function $$L13(e, t) {
-  return !!e && !(t && $$F0(t))
+
+// Default background color constant
+export const DEFAULT_BACKGROUND_COLOR = 'rgba(0, 0, 0, 0.06)'
+
+// Utility functions for style/grid checks
+export function isDisplayNodeVisible(node: DiffChunk, styleNode?: DiffChunk): boolean {
+  return !!node && !(styleNode && isGridStyle(styleNode))
 }
-export function $$F0(e) {
-  return e.styleType === 'GRID' && !!e.layoutGrids?.length
+
+export function isGridStyle(node: DiffChunk): boolean {
+  return node.styleType === 'GRID' && !!node.layoutGrids?.length
 }
-export function $$M9(e) {
-  return !!(e.canvasIsInternal && e.displayNode.styleType && !e.styleKey)
+
+export function isInternalCanvas(chunk: MainChunk): boolean {
+  return !!(chunk.canvasIsInternal && chunk.displayNode.styleType && !chunk.styleKey)
 }
-export function $$j12(e) {
-  return e.canvasIsInternal && e.displayNode.type === 'VARIABLE_SET' && !e.displayNode.key
+
+export function isInternalVariableSet(chunk: MainChunk): boolean {
+  return (
+    chunk.canvasIsInternal
+    && chunk.displayNode.type === 'VARIABLE_SET'
+    && !chunk.displayNode.key
+  )
 }
-export function $$U7(e) {
-  return !!(e.styleKey || e.componentLibraryKey)
+
+export function hasStyleOrLibraryKey(chunk: MainChunk): boolean {
+  return !!(chunk.styleKey || chunk.componentLibraryKey)
 }
-export function $$B4(e) {
-  if (e.displayNode.type !== 'SYMBOL')
-    return !1
-  let t = e.basisParentHierarchyGuids.map(t => rY.getParentHierarchyNodeChange(e.diffType, t, RelationType.BASIS_PARENT))
-  for (let t of e.parentHierarchyGuids.map(t => rY.getParentHierarchyNodeChange(e.diffType, t, RelationType.PARENT))) {
-    if (t.isStateGroup)
-      return !0
+
+// Check if symbol has state group in parent hierarchy
+export function hasSymbolStateGroup(chunk: DiffChunk): boolean {
+  if (chunk.displayNode.type !== 'SYMBOL')
+    return false
+  const basisParents = chunk.basisParentHierarchyGuids.map(guid =>
+    DiffManager.getParentHierarchyNodeChange(chunk.diffType, guid, RelationType.BASIS_PARENT),
+  )
+  for (const parent of chunk.parentHierarchyGuids.map(guid =>
+    DiffManager.getParentHierarchyNodeChange(chunk.diffType, guid, RelationType.PARENT),
+  )) {
+    if (parent.isStateGroup)
+      return true
   }
-  for (let e of t) {
-    if (e.isStateGroup)
-      return !0
+  for (const parent of basisParents) {
+    if (parent.isStateGroup)
+      return true
   }
-  return !1
+  return false
 }
-let V = getFileKey()
-let G = async (e, t, i) => {
-  if (e.length === 0) {
+
+// Get file key utility
+const getFileKeyUtil = getFileKey
+
+// Fetch style keys and library keys
+async function fetchStyleKeysAndLibraries(styleKeys: string[], branchKey: string, api: any): Promise<StyleLibraryResult> {
+  if (styleKeys.length === 0) {
     return {
       styleKeyToFileKey: {},
       styleKeyToLibraryKey: {},
     }
   }
-  let n = {}
-  let r = {};
-  (await fetchStylesByKeys(i, e, t)).forEach((e) => {
-    n[e.key] = e.library_key
-    r[e.key] = V(e)
+  const styleKeyToLibraryKey: StyleKeyToLibraryKeyMap = {}
+  const styleKeyToFileKey: StyleKeyToFileKeyMap = {};
+  (await fetchStylesByKeys(api, styleKeys, branchKey)).forEach((style) => {
+    styleKeyToLibraryKey[style.key] = style.library_key
+    styleKeyToFileKey[style.key] = getFileKeyUtil(style)
   })
   return {
-    styleKeyToLibraryKey: n,
-    styleKeyToFileKey: r,
+    styleKeyToLibraryKey,
+    styleKeyToFileKey,
   }
 }
-export async function $$z15(e, t, i) {
-  let r = filterNotNullish(u()(e.map(e => e.mainChunk.styleKey)))
-  let a = filterNotNullish(u()(e.map(e => e.mainChunk.componentLibraryKey)))
-  let [{
-    styleKeyToLibraryKey: s,
-    styleKeyToFileKey: o,
-  }] = await Promise.all([G(r, t, i), batchFetchFiles(a, i)])
+
+// Fetch style and library keys for chunks
+export async function fetchStyleAndLibraryKeysForChunks(
+  chunks: DiffChunk[],
+  branchKey: string,
+  api: any,
+) {
+  const styleKeys = filterNotNullish(uniq(chunks.map(chunk => chunk.mainChunk.styleKey)))
+  const libraryKeys = filterNotNullish(uniq(chunks.map(chunk => chunk.mainChunk.componentLibraryKey)))
+  const [styleResult, libraryResult] = await Promise.all([
+    fetchStyleKeysAndLibraries(styleKeys, branchKey, api),
+    batchFetchFiles(libraryKeys, api),
+  ])
   return {
-    styleKeyToLibraryKey: s,
-    styleKeyToFileKey: o,
+    styleKeyToLibraryKey: styleResult,
+    styleKeyToFileKey: libraryResult,
   }
 }
-export function $$H10(e) {
-  if (e.displayNode.type === 'CANVAS') {
-    e.displayNode.internalOnly && (e.displayNode.name = 'Other')
-    return rY.parseParentHierarchyNodeChange(e.displayNode)
+
+// Get parent hierarchy node change for display node
+export function getParentHierarchyNodeChangeForDisplayNode(chunk: DiffChunk): any {
+  if (chunk.displayNode.type === 'CANVAS') {
+    if (chunk.displayNode.internalOnly)
+      chunk.displayNode.name = 'Other'
+    return DiffManager.parseParentHierarchyNodeChange(chunk.displayNode)
   }
-  let t = rY.getImmediateParentHierarchyNodeChange(e, RelationType.PARENT)
-  let i = rY.getTopLevelParentHierarchyNodeChange(e, RelationType.PARENT)
-  let n = rY.getImmediateParentHierarchyNodeChange(e, RelationType.BASIS_PARENT)
-  let s = rY.getTopLevelParentHierarchyNodeChange(e, RelationType.BASIS_PARENT)
-  if (t && !t.internalOnly && i)
-    return i
-  if (n && !n.internalOnly && s)
-    return s
-  let o = t ?? n
-  if (!o)
-    throw new Error(`Chunk ${sessionLocalIDToString(e.displayNode.guid)} should have a page`)
-  o.name = 'Other'
-  return o
+  const immediateParent = DiffManager.getImmediateParentHierarchyNodeChange(chunk, RelationType.PARENT)
+  const topLevelParent = DiffManager.getTopLevelParentHierarchyNodeChange(chunk, RelationType.PARENT)
+  const immediateBasisParent = DiffManager.getImmediateParentHierarchyNodeChange(chunk, RelationType.BASIS_PARENT)
+  const topLevelBasisParent = DiffManager.getTopLevelParentHierarchyNodeChange(chunk, RelationType.BASIS_PARENT)
+
+  if (immediateParent && !immediateParent.internalOnly && topLevelParent)
+    return topLevelParent
+  if (immediateBasisParent && !immediateBasisParent.internalOnly && topLevelBasisParent)
+    return topLevelBasisParent
+
+  const parent = immediateParent ?? immediateBasisParent
+  if (!parent)
+    throw new Error(`Chunk ${sessionLocalIDToString(chunk.displayNode.guid)} should have a page`)
+  parent.name = 'Other'
+  return parent
 }
-export function $$W8(e, t) {
-  let i = $$H10(t)
-  let n = i.guid || ''
-  return e[n]
-    ? e[n].backgroundColor
-    : i?.backgroundColor
-      ? defaultColorManipulator.format({
-          r: i.backgroundColor.red,
-          g: i.backgroundColor.green,
-          b: i.backgroundColor.blue,
-          a: i.backgroundColor.alpha,
-        })
-      : $$D20
+
+// Get background color for a page node
+export function getPageBackgroundColor(
+  pageBackgrounds: Record<string, { backgroundColor?: string }>,
+  chunk: DiffChunk,
+): string {
+  const parentNode = getParentHierarchyNodeChangeForDisplayNode(chunk)
+  const pageId = parentNode.guid || ''
+  if (pageBackgrounds[pageId]?.backgroundColor) {
+    return pageBackgrounds[pageId].backgroundColor
+  }
+  if (parentNode?.backgroundColor) {
+    return defaultColorManipulator.format({
+      r: parentNode.backgroundColor.red,
+      g: parentNode.backgroundColor.green,
+      b: parentNode.backgroundColor.blue,
+      a: parentNode.backgroundColor.alpha,
+    })
+  }
+  return DEFAULT_BACKGROUND_COLOR
 }
-let K = (e, t, i) => {
-  let n = {}
-  let r = []
-  let a = i || Object.keys(e)
-  let s = t
-  for (let t of a) {
-    for (let i of (n[t] = [], e[t])) {
-      let e = {
-        ...i,
-        index: s,
-      }
-      n[t].push(e)
-      r.push(e)
-      s++
+
+// Number display groups and assign indices
+function numberDisplayGroups(displayGroups: DisplayGroupMap, startIndex: number, keys?: string[]): NumberedDisplayGroupsResult {
+  const resultMap: NumberedDisplayGroupMap = {}
+  const resultList: (DiffChunk & { index: number })[] = []
+  const groupKeys = keys || Object.keys(displayGroups)
+  let index = startIndex
+  for (const key of groupKeys) {
+    resultMap[key] = []
+    for (const chunk of displayGroups[key]) {
+      const numberedChunk = { ...chunk, index }
+      resultMap[key].push(numberedChunk)
+      resultList.push(numberedChunk)
+      index++
     }
   }
   return {
-    numberedDisplayGroupMap: n,
-    numberedDisplayGroups: r,
+    numberedDisplayGroupMap: resultMap,
+    numberedDisplayGroups: resultList,
   }
 }
-let Y = (e) => {
-  let t = {}
-  Object.keys(e).forEach((i) => {
-    for (let n of e[i]) {
-      let e = n.mainChunk
-      let a = rY.getTopLevelParentHierarchyNodeChange(e, RelationType.PARENT)?.parentIndexPosition
-      if (a) {
-        t[a] = i
+
+// Sort page IDs by parent index position
+function sortPageIdsByParentIndex(displayGroups: DisplayGroupMap): string[] {
+  const indexToKey: Record<string, string> = {}
+  Object.keys(displayGroups).forEach((key) => {
+    for (const chunk of displayGroups[key]) {
+      const mainChunk = chunk.mainChunk
+      const parentIndex = DiffManager.getTopLevelParentHierarchyNodeChange(mainChunk, RelationType.PARENT)?.parentIndexPosition
+      if (parentIndex) {
+        indexToKey[parentIndex] = key
         break
       }
     }
   })
-  let i = Object.keys(t).sort().map(e => t[e])
-  return i.filter(t => t in e).concat(Object.keys(e).filter(e => !i.includes(e)))
+  const sortedKeys = Object.keys(indexToKey).sort().map(idx => indexToKey[idx])
+  return sortedKeys.filter(key => key in displayGroups).concat(
+    Object.keys(displayGroups).filter(key => !sortedKeys.includes(key)),
+  )
 }
-export function $$q16(e, t, i, n) {
-  let s = (function (e, t, i, n = SourceDirection.TO_SOURCE) {
-    let s = {}
-    let o = {}
-    let l = {}
-    let d = {}
-    let c = {}
-    if (e.forEach((e) => {
-      let t = e.mainChunk
-      if ($$M9(t) && t.displayNode.styleType) {
-        let i = t.displayNode.styleType
-        l[i] || (l[i] = [])
-        l[i].push(e)
+
+// Group display chunks by page, style, variable set, and library
+export function groupDisplayChunks(
+  chunks: DiffChunk[],
+  startIndex: number,
+  styleKeyToLibraryKey: Record<string, string>,
+  direction: SourceDirection,
+) {
+  // Grouping logic
+  const displayGroupsByPage: DisplayGroupMap = {}
+  const pageIdToInfo: Record<string, PageInfo> = {}
+  const displayGroupsByStyle: DisplayGroupMap = {}
+  const displayGroupsByVariableSet: DisplayGroupMap = {}
+  const displayGroupsByLibrary: DisplayGroupMap = {}
+
+  chunks.forEach((chunk) => {
+    const mainChunk = chunk.mainChunk
+    if (isInternalCanvas(mainChunk) && mainChunk.displayNode.styleType) {
+      const styleType = mainChunk.displayNode.styleType
+      if (!displayGroupsByStyle[styleType])
+        displayGroupsByStyle[styleType] = []
+      displayGroupsByStyle[styleType].push(chunk)
+      return
+    }
+    if (chunk.type === 'variable-collection' && isInternalVariableSet(mainChunk)) {
+      const guid = sessionLocalIDToString(mainChunk.displayNode.guid)
+      if (guid == null)
         return
+      if (!displayGroupsByVariableSet[guid])
+        displayGroupsByVariableSet[guid] = []
+      displayGroupsByVariableSet[guid].push(chunk)
+      return
+    }
+    if (hasStyleOrLibraryKey(mainChunk)) {
+      const libraryKey = mainChunk.componentLibraryKey || styleKeyToLibraryKey[mainChunk.styleKey!]
+      if (!displayGroupsByLibrary[libraryKey])
+        displayGroupsByLibrary[libraryKey] = []
+      displayGroupsByLibrary[libraryKey].push(chunk)
+      return
+    }
+    if (!displayGroupsByPage[mainChunk.canvasId!])
+      displayGroupsByPage[mainChunk.canvasId!] = []
+    displayGroupsByPage[mainChunk.canvasId!].push(chunk)
+
+    // Set page info if not removed
+    if (!pageIdToInfo[mainChunk.canvasId!] || mainChunk.phase !== LibraryUpdateStatus.REMOVED) {
+      const parentNode = getParentHierarchyNodeChangeForDisplayNode(mainChunk)
+      const bgColor = parentNode.backgroundColor
+        ? defaultColorManipulator.format({
+            r: parentNode.backgroundColor.red,
+            g: parentNode.backgroundColor.green,
+            b: parentNode.backgroundColor.blue,
+            a: parentNode.backgroundColor.alpha,
+          })
+        : DEFAULT_BACKGROUND_COLOR
+      pageIdToInfo[mainChunk.canvasId!] = {
+        name: parentNode.name,
+        backgroundColor: bgColor,
       }
-      if (e.type === 'variable-collection' && $$j12(t)) {
-        let i = sessionLocalIDToString(t.displayNode.guid)
-        if (i == null)
-          return
-        d[i] || (d[i] = [])
-        d[i].push(e)
-        return
-      }
-      if ($$U7(t)) {
-        let n = t.componentLibraryKey || i[t.styleKey]
-        c[n] || (c[n] = [])
-        c[n].push(e)
-        return
-      }
-      if (s[t.canvasId] || (s[t.canvasId] = []), s[t.canvasId].push(e), !o[t.canvasId] || t.phase !== LibraryUpdateStatus.REMOVED) {
-        let e = $$H10(t)
-        let i = e.backgroundColor
-        let n = e.name
-        o[t.canvasId] = {
-          name: n,
-          backgroundColor: i
-            ? defaultColorManipulator.format({
-                r: i.red,
-                g: i.green,
-                b: i.blue,
-                a: i.alpha,
-              })
-            : $$D20,
+    }
+  })
+
+  // Override background color from scene graph if direction is FROM_SOURCE
+  if (direction === SourceDirection.FROM_SOURCE) {
+    for (const pageId of Object.keys(pageIdToInfo)) {
+      const sceneBgColor = SceneGraphHelpers.getNodePageBackgroundColor(pageId)
+      if (sceneBgColor) {
+        pageIdToInfo[pageId] = {
+          ...pageIdToInfo[pageId],
+          backgroundColor: sceneBgColor,
         }
       }
-    }), n === SourceDirection.FROM_SOURCE) {
-      for (let e of Object.keys(o)) {
-        let t = SceneGraphHelpers.getNodePageBackgroundColor(e)
-        t && (o[e] = {
-          ...o[e],
-          backgroundColor: t,
-        })
-      }
     }
-    return {
-      displayGroupsByPage: s,
-      pageIdToInfo: o,
-      displayGroupsByStyle: l,
-      displayGroupsByVariableSet: d,
-      displayGroupsByLibrary: c,
-    }
-  }(e, 0, i, n))
-  let o = []
-  let l = 0
-  let d = Y(s.displayGroupsByPage)
-  let {
-    numberedDisplayGroupMap: _numberedDisplayGroupMap3,
-    numberedDisplayGroups: _numberedDisplayGroups3,
-  } = K(s.displayGroupsByPage, l, d)
-  o = o.concat(_numberedDisplayGroups3)
-  l += _numberedDisplayGroups3.length
-  let {
-    numberedDisplayGroupMap,
-    numberedDisplayGroups,
-  } = K(s.displayGroupsByStyle, l)
-  o = o.concat(numberedDisplayGroups)
-  l += numberedDisplayGroups.length
-  let {
-    numberedDisplayGroupMap: _numberedDisplayGroupMap,
-    numberedDisplayGroups: _numberedDisplayGroups,
-  } = K(s.displayGroupsByVariableSet, l)
-  o = o.concat(_numberedDisplayGroups)
-  l += _numberedDisplayGroups.length
-  let {
-    numberedDisplayGroupMap: _numberedDisplayGroupMap2,
-    numberedDisplayGroups: _numberedDisplayGroups2,
-  } = K(s.displayGroupsByLibrary, l)
-  o = o.concat(_numberedDisplayGroups2)
-  l += _numberedDisplayGroups2.length
+  }
+
+  // Number and sort display groups
+  const sortedPageIds = sortPageIdsByParentIndex(displayGroupsByPage)
+  const { numberedDisplayGroupMap: pageGroupMap, numberedDisplayGroups: pageGroups } = numberDisplayGroups(
+    displayGroupsByPage,
+    startIndex,
+    sortedPageIds,
+  )
+  let allDisplayGroups: (DiffChunk & { index: number })[] = [...pageGroups]
+  let index = startIndex + pageGroups.length
+
+  const { numberedDisplayGroupMap: styleGroupMap, numberedDisplayGroups: styleGroups } = numberDisplayGroups(
+    displayGroupsByStyle,
+    index,
+  )
+  allDisplayGroups = allDisplayGroups.concat(styleGroups)
+  index += styleGroups.length
+
+  const { numberedDisplayGroupMap: variableSetGroupMap, numberedDisplayGroups: variableSetGroups } = numberDisplayGroups(
+    displayGroupsByVariableSet,
+    index,
+  )
+  allDisplayGroups = allDisplayGroups.concat(variableSetGroups)
+  index += variableSetGroups.length
+
+  const { numberedDisplayGroupMap: libraryGroupMap, numberedDisplayGroups: libraryGroups } = numberDisplayGroups(
+    displayGroupsByLibrary,
+    index,
+  )
+  allDisplayGroups = allDisplayGroups.concat(libraryGroups)
+
   return {
-    allDisplayGroups: o,
-    displayGroupsByPage: _numberedDisplayGroupMap3,
-    pageIdToInfo: s.pageIdToInfo,
-    displayGroupsByStyle: numberedDisplayGroupMap,
-    displayGroupsByVariableSet: _numberedDisplayGroupMap,
-    displayGroupsByLibrary: _numberedDisplayGroupMap2,
-    sortedPageIds: d,
+    allDisplayGroups,
+    displayGroupsByPage: pageGroupMap,
+    pageIdToInfo,
+    displayGroupsByStyle: styleGroupMap,
+    displayGroupsByVariableSet: variableSetGroupMap,
+    displayGroupsByLibrary: libraryGroupMap,
+    sortedPageIds,
   }
 }
-export function $$$14(e) {
+
+// Partition variant chunks into modified and unmodified
+export function partitionVariantChunks(variantGroup: {
+  variantChunks: DiffChunk[]
+}): {
+  modifiedVariants: (DiffChunk & { index: number })[]
+  unmodifiedVariants: (DiffChunk & { index: number })[]
+} {
   return {
-    modifiedVariants: e.variantChunks.filter(e => e.mainChunk.phase !== LibraryUpdateStatus.UNMODIFIED).map((e, t) => ({
-      ...e,
-      index: t,
-    })),
-    unmodifiedVariants: e.variantChunks.filter(e => e.mainChunk.phase === LibraryUpdateStatus.UNMODIFIED).map((e, t) => ({
-      ...e,
-      index: t,
-    })),
+    modifiedVariants: variantGroup.variantChunks
+      .filter(chunk => chunk.mainChunk.phase !== LibraryUpdateStatus.UNMODIFIED)
+      .map((chunk, idx) => ({ ...chunk, index: idx })),
+    unmodifiedVariants: variantGroup.variantChunks
+      .filter(chunk => chunk.mainChunk.phase === LibraryUpdateStatus.UNMODIFIED)
+      .map((chunk, idx) => ({ ...chunk, index: idx })),
   }
 }
-export function $$Z18(e) {
-  let {
-    layoutGrids,
-  } = e
-  let i = _$$A4
+
+// Get SVG for layout grids
+export function getSVGForLayoutGrid(node: { layoutGrids?: any[] }): any {
+  const { layoutGrids } = node
+  let svg = SVG2
   if (layoutGrids?.length === 1) {
-    let e = layoutGrids[0]
-    e.pattern === 'STRIPES' && (i = e.axis === 'Y' ? _$$A3 : _$$A2)
+    const grid = layoutGrids[0]
+    if (grid.pattern === 'STRIPES') {
+      svg = grid.axis === 'Y' ? SVG1 : SVG
+    }
   }
-  return i
+  return svg
 }
-export function $$X3(e) {
-  return !!e && e !== 'NONE' && void 0 !== e
+
+// Utility checks
+export function isValidStyleType(styleType: string): boolean {
+  return !!styleType && styleType !== 'NONE' && styleType !== undefined
 }
-export function $$Q17(e, t, i) {
-  let n = t && isColorDark(t)
-  return !(i === 'GRID' || i === 'EFFECT') && (n || e && (i !== 'NONE' || void 0 !== i))
+
+export function shouldShowColor(
+  color: string,
+  backgroundColor: string,
+  styleType: string,
+): boolean {
+  const isDark = backgroundColor && isColorDark(backgroundColor)
+  return !(styleType === 'GRID' || styleType === 'EFFECT') && (isDark || (color && (styleType !== 'NONE' || styleType !== undefined)))
 }
-export function $$J6(e, t) {
-  return $$et11(e, t, !0)
+
+// Style background helpers
+export function getTextOrFillBackgroundStyle(chunk: DiffChunk, background: any): Record<string, any> {
+  return getBackgroundStyle(chunk, background, true)
 }
-export function $$ee19(e, t) {
-  return $$et11(e, t, !1)
+
+export function getEffectOrGridBackgroundStyle(chunk: DiffChunk, background: any): Record<string, any> {
+  return getBackgroundStyle(chunk, background, false)
 }
-export function $$et11(e, t, i) {
-  let n = {}
-  e.displayNode.styleType === 'TEXT' || e.displayNode.styleType === 'FILL' || ((e.displayNode.styleType === 'EFFECT' || e.displayNode.styleType === 'GRID') && (n.backgroundImage = `url('${_$$A()}')`, n.backgroundSize = i ? '24px' : '16px'), n.backgroundColor = t && typeof t != 'string' ? $$W8(t, e) : t)
-  return n
+
+export function getBackgroundStyle(chunk: DiffChunk, background: any, isLarge: boolean): Record<string, any> {
+  const style: Record<string, any> = {}
+  const styleType = chunk.displayNode.styleType
+  if (styleType === 'TEXT' || styleType === 'FILL') {
+    // No background image for text/fill
+  }
+  else if (styleType === 'EFFECT' || styleType === 'GRID') {
+    style.backgroundImage = `url('${_$$A()}')`
+    style.backgroundSize = isLarge ? '24px' : '16px'
+  }
+  style.backgroundColor
+    = background && typeof background !== 'string'
+      ? getPageBackgroundColor(background, chunk)
+      : background
+  return style
 }
-export const $2 = $$F0
-export const C_ = $$R1
-export const FD = $$k2
-export const KZ = $$X3
-export const MY = $$B4
-export const Mt = $$O5
-export const Oh = $$J6
-export const Oi = $$U7
-export const PE = $$W8
-export const Rw = $$M9
-export const WE = $$H10
-export const Xp = $$et11
-export const Y1 = $$j12
-export const cs = $$L13
-export const ju = $$$14
-export const mT = $$z15
-export const on = $$q16
-export const rB = $$Q17
-export const s$ = $$Z18
-export const uA = $$ee19
-export const yi = $$D20
+
+// --- Exported aliases for compatibility ---
+export const $2 = isGridStyle
+export const C_ = getImmediateParentHierarchyNodeChange
+export const FD = generateThumbnails
+export const KZ = isValidStyleType
+export const MY = hasSymbolStateGroup
+export const Mt = getMergeResultImagesForChunks
+export const Oh = getTextOrFillBackgroundStyle
+export const Oi = hasStyleOrLibraryKey
+export const PE = getPageBackgroundColor
+export const Rw = isInternalCanvas
+export const WE = getParentHierarchyNodeChangeForDisplayNode
+export const Xp = getBackgroundStyle
+export const Y1 = isInternalVariableSet
+export const cs = isDisplayNodeVisible
+export const ju = partitionVariantChunks
+export const mT = fetchStyleAndLibraryKeysForChunks
+export const on = groupDisplayChunks
+export const rB = shouldShowColor
+export const s$ = getSVGForLayoutGrid
+export const uA = getEffectOrGridBackgroundStyle
+export const yi = DEFAULT_BACKGROUND_COLOR

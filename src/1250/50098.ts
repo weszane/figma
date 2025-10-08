@@ -12,7 +12,7 @@ import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { Spacing, BigTextInputForwardRef } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { yJ } from "../figma_app/24841";
+import { putUserAction } from "../figma_app/24841";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
@@ -26,7 +26,7 @@ import { pu } from "../7037/430062";
 import { L as _$$L } from "../9864/861465";
 import { m as _$$m } from "../9864/958952";
 import { Xg } from "../7021/854265";
-import { CAe } from "../figma_app/6204";
+import { JobTitlePromptOverlay } from "../figma_app/6204";
 import { dayjs } from "../905/920142";
 import { normalizeJobRole } from "../3973/538504";
 import { useCurrentUserOrg } from "../905/845253";
@@ -54,7 +54,7 @@ export function $$F0({
     complete,
     isShowing
   } = _$$e({
-    overlay: CAe,
+    overlay: JobTitlePromptOverlay,
     priority: _$$N.OVERRIDING_MODAL
   });
   return (useSingleEffect(() => {
@@ -170,7 +170,7 @@ function B({
                   let t = e;
                   let n = "job_title_prompt_selection";
                   "something_else" === t && C.length > 0 && (t = C, n = "job_title_prompt_custom");
-                  u(yJ({
+                  u(putUserAction({
                     user: {
                       id: y,
                       job_title: t,

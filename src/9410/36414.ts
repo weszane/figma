@@ -4,7 +4,7 @@ import { F } from "../figma_app/954027";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { getCurrentFileType } from "../figma_app/976749";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { F5, oM } from "../905/192343";
 import { t as _$$t } from "../905/851577";
 import { N } from "../905/645480";
@@ -42,7 +42,7 @@ export function $$g2(e) {
   let i = F5();
   let r = V7(e.resource);
   let n = async n => (e.insertAction(n), t && oM({
-    type: _$$p.MORE,
+    type: TabCategory.MORE,
     id: r,
     source: e.triggeredFrom,
     options: {

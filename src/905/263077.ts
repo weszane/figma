@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
 import { KeyCodes } from "../905/63728";
 import { kz } from "../figma_app/171177";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 export function $$o0(e, t) {
   let {
     isRoot,
     pop
-  } = cq();
+  } = useNavigationStack();
   let l = function (e) {
     let [t, i] = useState(() => e.current === document.activeElement);
     let r = useCallback(() => {

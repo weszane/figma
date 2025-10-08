@@ -13,7 +13,7 @@ import { x as _$$x } from "../469e6e40/671704";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { setupPluginCodeCache } from "../905/827944";
 import { hasLocalFileId } from "../figma_app/155287";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { W } from "../3276/776313";
 import { F5, oM } from "../905/192343";
 export function $$y0(e) {
@@ -62,7 +62,7 @@ export function $$y0(e) {
       }
       w && oM({
         id: e.resource.plugin_id,
-        type: _$$p.PLUGINS,
+        type: TabCategory.PLUGINS,
         source: e.triggeredFrom,
         options: {
           ...j,

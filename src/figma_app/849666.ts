@@ -20,7 +20,7 @@ import { useSubscription } from "../figma_app/288654";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { selectViewAction } from "../905/929976";
-import { Rh } from "../905/844322";
+import { handleRestoreTrashedFilesHelper } from "../905/844322";
 import { BranchOpenMergeRequest, FileCanView, FileCanManage } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
 import { getPermissionsState } from "../figma_app/642025";
@@ -137,7 +137,7 @@ function k() {
     message: renderI18nText("collaboration.branching_archived_footer.restore_branch"),
     buttonText: renderI18nText("collaboration.branching_archived_footer.restore_branch_button"),
     buttonOnClick: () => {
-      e(Rh({
+      e(handleRestoreTrashedFilesHelper({
         fileKeys: {
           [r.key]: r
         },

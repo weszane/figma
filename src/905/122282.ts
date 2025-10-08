@@ -104,7 +104,7 @@ import { TeamAvatar } from "../figma_app/537817";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { useDropdownState } from "../905/848862";
 import { A as _$$A9 } from "../905/794518";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { A as _$$A0 } from "../6828/814452";
 import { VJh } from "../figma_app/27776";
 import { A as _$$A1 } from "../svg/619883";
@@ -965,14 +965,14 @@ function tE({
     }, t))
   });
   let a = t?.current?.getBoundingClientRect();
-  return a ? jsx(Cf, {
+  return a ? jsx(ConnectedPointingDropdown, {
     targetRect: a,
     showPoint: !1,
     minWidth: 512,
     maxWidth: 512,
     autofocusPrevOnDismount: !0,
     focusContainerOnMount: !0,
-    type: it.MATCH_BACKGROUND,
+    type: DropdownType.MATCH_BACKGROUND,
     propagateCloseClick: !0,
     children: r
   }) : null;

@@ -4,7 +4,7 @@ import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/58247";
-import { Ag } from "../905/235578";
+import { ExtensionSource } from "../905/235578";
 import { C } from "../figma_app/959385";
 export const q = function e(t, i) {
   switch (t.type) {
@@ -56,7 +56,7 @@ export const q = function e(t, i) {
                         source: "extension-requires-purchase"
                       }, createElement(C, {
                         extensionId: i,
-                        extensionType: Ag.COMMUNITY
+                        extensionType: ExtensionSource.COMMUNITY
                       }));
                     }
                   },

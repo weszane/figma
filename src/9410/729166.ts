@@ -5,7 +5,7 @@ import { reportError } from '../905/11';
 import { E as _$$E } from '../905/53857';
 import { e as _$$e5 } from '../905/74460';
 import { setupDragHandler } from '../905/97346';
-import { Z as _$$Z } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { t as _$$t3 } from '../905/117577';
 import { fullscreenPerfManager } from '../905/125218';
 import { J as _$$J } from '../905/125993';
@@ -26,7 +26,7 @@ import { O as _$$O2 } from '../905/301080';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { wG } from '../905/331989';
-import { P as _$$P2 } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { BannerMessage } from '../905/363675';
 import { O as _$$O4 } from '../905/365108';
 import { selectCurrentUser } from '../905/372672';
@@ -168,7 +168,7 @@ import { BI } from '../figma_app/546509';
 import { Yp } from '../figma_app/578768';
 import { Dl } from '../figma_app/601682';
 import { createTrackedAtom, setupRemovableAtomFamily } from '../figma_app/615482';
-import { Ax } from '../figma_app/616261';
+import { FuzzyMatcher } from '../figma_app/616261';
 import { eb as _$$eb, i_ as _$$i_, A8, bE, EB, R6, vo, zL } from '../figma_app/617506';
 import { flatten } from '../figma_app/656233';
 import { zy } from '../figma_app/656450';
@@ -1749,7 +1749,7 @@ function iQ() {
     let [e, t] = useAtomValueAndSetter(iA);
     let i = trackFileEventWithStore();
     let r = useMemo(() => function (e) {
-      let t = e ? new Ax(e.toLowerCase()) : null;
+      let t = e ? new FuzzyMatcher(e.toLowerCase()) : null;
       return {
         filter: e => {
           let i = t ? t.matchAgainst(e) : null;
@@ -2032,7 +2032,7 @@ function iQ() {
               })
             })
           })
-        }), jsx(_$$P2, {
+        }), jsx(RecordingScrollContainer, {
           className: 'overview--overviewNodesScrollContainer--uc1ey',
           scrollContainerRef: f,
           initialScrollTop: g,
@@ -2708,7 +2708,7 @@ let r0 = memo(({
   let {
     showing
   } = useDropdown(t.overflowDropdownType);
-  let M = _$$Z();
+  let M = useNavigateToViewport();
   let F = getObservableOrFallback(AppStateTsApi.singleSlideView().isInFocusedNodeView);
   let [B, U] = useState(!1);
   let G = useCallback(() => {

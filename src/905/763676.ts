@@ -8,7 +8,7 @@ import { KindEnum } from '../905/129884';
 import { hideModal } from '../905/156213';
 import { Label } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { GK, lh, LM, nX, TK } from '../905/424623';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
@@ -312,7 +312,7 @@ function eu({
       })]
     }), jsx('div', {
       className: 'replace_libraries_modal--fileMapContents--UfXz9',
-      children: jsxs(_$$P, {
+      children: jsxs(RecordingScrollContainer, {
         className: 'replace_libraries_modal--scrollContainer--8DxhM',
         innerClassName: 'replace_libraries_modal--scrollContainerInner--hkoqL',
         children: [l && u, o.styles.size > 0 && jsx(em, {

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { handleEmbedPaste, parseEmbedInput } from "../figma_app/916560";
-import { Cg } from "../905/195479";
+import { processPasteUrls } from "../905/195479";
 import { buildUploadUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { SecureLink, BigTextInputForwardRef, ButtonSecondary } from "../figma_app/637027";
@@ -61,7 +61,7 @@ export function $$g0(e) {
   let b = useCallback(e => {
     e.preventDefault();
     e.stopPropagation();
-    let o = Cg(x, n);
+    let o = processPasteUrls(x, n);
     if (o.length && o[0].valid) {
       g(!1);
       onSuccess();

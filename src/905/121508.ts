@@ -1,32 +1,49 @@
-import { throwTypeError } from "../figma_app/465776";
-import { getStorage } from "../905/657224";
-let a = "curatorLoggingEnabled";
-export function $$s0(e) {
-  let t = getStorage();
-  switch (e) {
+import { getStorage } from "../905/657224"
+import { throwTypeError } from "../figma_app/465776"
+
+const CURATOR_LOGGING_KEY = "curatorLoggingEnabled"
+
+/**
+ * Sets the curator logging level
+ * @param level - The logging level to set ($$s0)
+ * @returns A confirmation message
+ */
+export function setCuratorLoggingLevel(level: "debug" | "trace" | "disabled"): string {
+  const storage = getStorage()
+
+  switch (level) {
     case "debug":
-      t.set(a, "debug");
-      break;
+      storage.set(CURATOR_LOGGING_KEY, "debug")
+      break
     case "trace":
-      t.set(a, "trace");
-      break;
+      storage.set(CURATOR_LOGGING_KEY, "trace")
+      break
     case "disabled":
-      t.$$delete(a);
-      break;
+      storage.delete(CURATOR_LOGGING_KEY)
+      break
     default:
-      throwTypeError(e);
+      throwTypeError(level)
   }
-  return `Curator logging set to ${e}`;
+
+  return `Curator logging set to ${level}`
 }
-export function $$o1() {
-  switch (getStorage().get(a)) {
+
+/**
+ * Gets the current curator logging level
+ * @returns The current logging level ($$o1)
+ */
+export function getCuratorLoggingLevel(): "debug" | "trace" | "disabled" {
+  const storedValue = getStorage().get(CURATOR_LOGGING_KEY)
+
+  switch (storedValue) {
     case "debug":
-      return "debug";
+      return "debug"
     case "trace":
-      return "trace";
+      return "trace"
     default:
-      return "disabled";
+      return "disabled"
   }
 }
-export const L = $$s0;
-export const r = $$o1;
+
+export const L = setCuratorLoggingLevel
+export const r = getCuratorLoggingLevel

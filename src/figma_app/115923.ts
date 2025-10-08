@@ -91,6 +91,6 @@ export const booleanAtomFamily = setupRemovableAtomFamily(() => atom(false))
 
 // Exports with meaningful names (refactored from original obfuscated names)
 export const $e = ViewActionType
-export const N1 = genericAtomFamily1
+export const Nl = genericAtomFamily1
 export const bP = booleanAtomFamily
 export const s0 = sitesViewSetterAtomFamily

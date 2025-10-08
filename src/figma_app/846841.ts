@@ -46,7 +46,7 @@ import { shouldHideRecents } from "../figma_app/144974";
 import { JT } from "../figma_app/632248";
 import { WP, TC, B1, kN, ES } from "../905/198599";
 import { z as _$$z } from "../905/654860";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { usKeyboardFocusHandler } from "../905/286442";
 import { _M } from "../905/487011";
 import { AssetTabType, ExtensionFeatureKey } from "../905/946805";
@@ -132,7 +132,7 @@ export function $$eR6({
   let ez = t ? G4.FIGMAKE : e ? G4.ACTIONS_VISUAL_SEARCH_VIEW : G4.ACTIONS_ASSETS_TAB_DETAIL;
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let {
     libraries,
     presets,

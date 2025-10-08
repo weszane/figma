@@ -8,7 +8,7 @@ import { renderCheckoutDevModeText } from "../figma_app/361869";
 import { CloseButton } from "../905/17223";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../figma_app/307841";
@@ -173,7 +173,7 @@ function U(e) {
     hide: B,
     size: 586,
     useModalViewScroll: !1,
-    children: jsxs(_$$P, {
+    children: jsxs(RecordingScrollContainer, {
       className: jG,
       children: [jsxs("div", {
         className: _$$o,

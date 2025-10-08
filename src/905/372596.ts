@@ -1,13 +1,13 @@
-import { traverseChildren } from "../figma_app/387100";
-import { atomStoreManager } from "../figma_app/27355";
-import { debugState } from "../905/407919";
-import { Ay } from "../905/931912";
-import { G } from "../figma_app/714966";
-import { $z } from "../905/62762";
 import { consentAllowedAtom } from "../905/18800";
-import { trackDefinedFileEvent } from "../figma_app/314264";
-import { Nt } from "../figma_app/342355";
+import { $z } from "../905/62762";
+import { debugState } from "../905/407919";
 import { a as _$$a } from "../905/882689";
+import { Ay } from "../905/931912";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackDefinedFileEvent } from "../figma_app/314264";
+import { getMcpSettings } from "../figma_app/342355";
+import { traverseChildren } from "../figma_app/387100";
+import { G } from "../figma_app/714966";
 export function $$m2(e, t, i) {
   trackDefinedFileEvent("mcp.client_tool_call_duration_split", debugState.getState().openFile?.key || "", debugState.getState(), {
     operation: e,
@@ -50,11 +50,11 @@ export function $$h1({
       l.numHiddenNodes += 1;
       return;
     }
-    if (e.annotations && e.annotations.length > 0 && (l.nodesWithAnnotations += 1), "SYMBOL" === e.type ? l.numComponents += 1 : "INSTANCE" === e.type && (l.numInstances += 1), e.isStateGroup && (l.isComponentSet = !0), "FRAME" === e.type && (["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), "GRID" === e.stackMode && (l.framesWithGridLayout += 1)), "FRAME" === e.type && ["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.boundVariables && _$$a(e, i).forEach(e => {
-      e && null !== e.value && d.set(e.codeSyntaxName || e.name, e.type);
+    if (e.annotations && e.annotations.length > 0 && (l.nodesWithAnnotations += 1), e.type === "SYMBOL" ? l.numComponents += 1 : e.type === "INSTANCE" && (l.numInstances += 1), e.isStateGroup && (l.isComponentSet = !0), e.type === "FRAME" && (["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.stackMode === "GRID" && (l.framesWithGridLayout += 1)), e.type === "FRAME" && ["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.boundVariables && _$$a(e, i).forEach(e => {
+      e && e.value !== null && d.set(e.codeSyntaxName || e.name, e.type);
     }), e.childrenNodes && (l.numChildren += e.childrenNodes.length), e.id in o) {
       let t = o[e.id];
-      t && (l.nodesWithCodeConnect += 1, t.snippet && (l.nodesWithCodeConnectSnippet += 1), "figmadoc" === t.version && (l.nodesWithCodeConnectV1 += 1), "component_browser" === t.version && (l.nodesWithCodeConnectLibrary += 1));
+      t && (l.nodesWithCodeConnect += 1, t.snippet && (l.nodesWithCodeConnectSnippet += 1), t.version === "figmadoc" && (l.nodesWithCodeConnectV1 += 1), t.version === "component_browser" && (l.nodesWithCodeConnectLibrary += 1));
     }
     t = 0;
     e.effects && e.effects.length > 0 && (t = e.effects.filter(e => e.visible).length);
@@ -67,7 +67,7 @@ export function $$h1({
   });
   l.numVariables = d.size;
   d.forEach((e, t) => {
-    "color" === e && (l.colorVariablesUsed += 1);
+    e === "color" && (l.colorVariablesUsed += 1);
   });
   trackDefinedFileEvent("mcp.client_tool_call_completed", e.getState().openFile?.key || "", e.getState(), {
     toolArgs: JSON.stringify(a),
@@ -77,7 +77,7 @@ export function $$h1({
     clientLanguages: a?.clientLanguages,
     clientFrameworks: a?.clientFrameworks,
     ...l,
-    ...Nt()
+    ...getMcpSettings()
   });
 }
 export function $$g0(e) {

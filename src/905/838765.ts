@@ -1,26 +1,27 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useState, useCallback, memo, useRef } from "react";
-import { ButtonPrimitive } from "../905/632989";
 import l from "classnames";
-import { BrowserInfo, isMobileUA } from "../figma_app/778880";
-import { SvgComponent } from "../905/714743";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { UserAvatar, AvatarSize } from "../905/590952";
-import { useWindowEvent } from "../figma_app/412189";
-import { U6 } from "../figma_app/599917";
-import { L } from "../905/606555";
-import { ProfileWithResourcesTile } from "../905/617004";
-import { Cf, it } from "../905/504727";
-import { xY } from "../figma_app/439332";
+import { memo, useCallback, useRef, useState } from "react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { H } from "../905/209153";
 import { ev, ll, nK } from "../905/224306";
-import { ii, $M, cO, Vl, wp, yZ, MP, Sp, Bi, pB, J7, kU, KR, ai, Fl, Fb, xm, QH, xc, cu, Kb, RR, iz, Tz, vG, Nv, wH, h1, gf, hI, g as _$$g, JQ, Q3, gW, xB, i2, cf, o6, dL } from "../figma_app/957552";
-import { A as _$$A } from "../6828/677648";
+import { getI18nString, renderI18nText } from "../905/303541";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
+import { AvatarSize, UserAvatar } from "../905/590952";
+import { followsManagerInstance } from "../905/606555";
+import { ProfileWithResourcesTile } from "../905/617004";
+import { ButtonPrimitive } from "../905/632989";
+import { SvgComponent } from "../905/714743";
 import { A as _$$A2 } from "../5724/568040";
-var $$n1;
-var $$r0;
-var d = l;
+import { A as _$$A } from "../6828/677648";
+import { cssBuilderInstance } from "../cssbuilder/589278";
+import { useWindowEvent } from "../figma_app/412189";
+import { PaymentInfoTooltip } from "../figma_app/439332";
+import { U6 } from "../figma_app/599917";
+import { BrowserInfo, isMobileUA } from "../figma_app/778880";
+import { $M, g as _$$g, ai, Bi, cf, cO, cu, dL, Fb, Fl, gf, gW, h1, hI, i2, ii, iz, J7, JQ, Kb, KR, kU, MP, Nv, o6, pB, Q3, QH, RR, Sp, Tz, vG, Vl, wH, wp, xB, xc, xm, yZ } from "../figma_app/957552";
+
+let $$n1;
+let $$r0;
+let d = l;
 function b() {
   let [e, t] = useState();
   return {
@@ -28,7 +29,7 @@ function b() {
     toggleFollowing: () => t(!e),
     fetchCreatorFollowStatus: useCallback(e => {
       t(void 0);
-      L.getFollows({
+      followsManagerInstance.getFollows({
         authorId: e
       }).then(({
         data: e
@@ -46,12 +47,12 @@ function v(e) {
     isFollowing,
     toggleFollowing
   } = e;
-  return jsx(Cf, {
+  return jsx(ConnectedPointingDropdown, {
     className: `${className} creator_preview_tooltip--publisherDropdown--DrAYo`,
     targetRect,
     maxWidth: 380,
     minWidth: 380,
-    type: it.MATCH_BACKGROUND,
+    type: DropdownType.MATCH_BACKGROUND,
     leanPadding: 0,
     hidePointWhenContentOffScreen: !0,
     disableDropdownScrollContainer: !0,
@@ -68,13 +69,13 @@ function v(e) {
     })
   });
 }
-export let $$T3 = memo(function (e) {
+export let $$T3 = memo(e => {
   return jsxs("div", {
-    onClick: e.onClick,
-    onContextMenu: e.onContextMenu,
-    className: ii + (e.className ? ` ${e.className}` : ""),
+    "onClick": e.onClick,
+    "onContextMenu": e.onContextMenu,
+    "className": ii + (e.className ? ` ${e.className}` : ""),
     "data-testid": e.dataTestId ?? "community-card-layout",
-    children: [jsx("div", {
+    "children": [jsx("div", {
       children: e.image
     }), e.subtitle && jsx("div", {
       className: $M,
@@ -91,7 +92,7 @@ export function $$k2(e) {
   };
   e.backgroundColor && (t.backgroundColor = e.backgroundColor);
   let i = "";
-  i = e.removeBorder ? Vl + ` ${ev}` + (e.className ? ` ${e.className}` : "") : Vl + (e.className ? ` ${e.className}` : "");
+  i = e.removeBorder ? `${Vl} ${ev}${e.className ? ` ${e.className}` : ""}` : Vl + (e.className ? ` ${e.className}` : "");
   return jsxs("div", {
     className: i,
     onClick: e => {
@@ -107,19 +108,19 @@ export function $$k2(e) {
   });
 }
 function R(e) {
-  return 1 === e.dropdown.publishers.length ? jsx(v, {
+  return e.dropdown.publishers.length === 1 ? jsx(v, {
     className: wp,
     targetRect: e.dropdown.targetRect,
     profile: e.dropdown.publishers[0],
     isFollowing: e.dropdown.isFollowing,
     toggleFollowing: e.dropdown.toggleFollowing
-  }) : jsx(Cf, {
+  }) : jsx(ConnectedPointingDropdown, {
     targetRect: e.dropdown.targetRect,
     className: yZ,
     disableDropdownScrollContainer: !0,
     maxWidth: 250,
     minWidth: 100,
-    type: it.LIGHT,
+    type: DropdownType.LIGHT,
     propagateCloseClick: !0,
     children: jsx("div", {
       onClick: e => {
@@ -320,7 +321,7 @@ function R(e) {
         ref: l,
         className: vG,
         onMouseEnter: () => {
-          isMobileUA || (1 !== n.length || d || fetchCreatorFollowStatus(n[0].id), u(!0));
+          isMobileUA || (n.length !== 1 || d || fetchCreatorFollowStatus(n[0].id), u(!0));
         },
         children: [jsx(U6, {
           profile: n[0],
@@ -395,7 +396,7 @@ function R(e) {
                   className: i2
                 }), t.showPaymentError && jsx("div", {
                   className: cf,
-                  children: jsx(xY, {})
+                  children: jsx(PaymentInfoTooltip, {})
                 })]
               })
             }),

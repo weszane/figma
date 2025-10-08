@@ -19,7 +19,7 @@ import { useSceneGraphSelection } from "../figma_app/722362";
 import { JT, KL } from "../figma_app/632248";
 import { useSelectionState, SelectionState } from "../905/286488";
 import { RL, qy, B3, pP, z8 } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { setupPromptHistory } from "../905/290931";
 import { n as _$$n } from "../905/353086";
 import { E as _$$E, f as _$$f } from "../905/690713";
@@ -97,7 +97,7 @@ function k({
   }, [I]);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let M = () => {
     d();
     close();
@@ -223,7 +223,7 @@ function M({
   } = a;
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let m = useCallback(e => onRun({
     prompt: e.prompt
   }), [onRun]);
@@ -260,7 +260,7 @@ function $$F({
   } = r;
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let u = useCallback(e => start({
     guids: [],
     numExampleRows: 1,
@@ -338,7 +338,7 @@ export function $$U1() {
   } = e;
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   switch (useEffect(() => {
     t.state === SelectionState.SELECTION_OK && state === qy.INITIAL && start({
       guids: [],

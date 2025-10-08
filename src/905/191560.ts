@@ -29,17 +29,17 @@ import { CustomSpacer } from '../905/585996';
 import { customHistory } from '../905/612521';
 import { k as _$$k2 } from '../905/644504';
 import { I8, TA } from '../905/667970';
-import { Hc, p8, sT } from '../905/694658';
+import { getArkoseToken, ArkoseChallengeComponent, setArkoseAuthParams } from '../905/694658';
 import { SvgComponent } from '../905/714743';
 import { AnnouncementPrimitive } from '../905/745591';
 import { TrackedButton } from '../905/773401';
 import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, ClientPlatform } from '../905/862321';
-import { t as _$$t2 } from '../905/897919';
+import { extractFormValues } from '../905/897919';
 import { sendWithRetry } from '../905/910117';
 import { noop } from 'lodash-es';
 ;
 import { styleBuilderInstance } from '../905/941192';
-import { f1, Iu, Ng, q_ } from '../905/997533';
+import { validateEmailOnly, getAuthAction, validateSignUpForm, smsRecoverThunk } from '../905/997533';
 import { A as _$$A5 } from '../1617/720259';
 import { A as _$$A3 } from '../5724/332367';
 import { A as _$$A4 } from '../5724/600086';
@@ -233,7 +233,7 @@ function j(e) {
   let x = async () => {
     let e = '';
     try {
-      e = await Hc(AuthAction.SIGN_UP);
+      e = await getArkoseToken(AuthAction.SIGN_UP);
     } finally {
       window.self.origin === window.parent.origin && window.parent.postMessage({
         type: 'arkose_completed',
@@ -306,7 +306,7 @@ function j(e) {
           'children': getI18nString('auth.captcha.reload_captcha')
         })]
       })]
-    }) : null, jsx(p8, {
+    }) : null, jsx(ArkoseChallengeComponent, {
       prevFormState: e.auth.prevForm,
       arkoseAction: e.auth.arkoseAction,
       onLoaded: () => {
@@ -434,7 +434,7 @@ function H(e) {
         children: [jsx(Link, {
           href: '#',
           onClick: () => {
-            t(q_({
+            t(smsRecoverThunk({
               formId: e.id
             }));
             o(!0);
@@ -1119,7 +1119,7 @@ function eM({
   let i = useSelector(e => e.auth.googleIdToken);
   let s = useSelector(e => e.auth.googleTokenType);
   useEffect(() => {
-    sT({
+    setArkoseAuthParams({
       googleUserInfo: {
         name: '',
         token: i,
@@ -1511,8 +1511,8 @@ function eQ(e) {
   function S() {
     let i = e.id;
     let n = document.getElementById(i);
-    let r = _$$t2(n);
-    let a = f ? f1(r) : Ng(r);
+    let r = extractFormValues(n);
+    let a = f ? validateEmailOnly(r) : validateSignUpForm(r);
     return !a.message || (trackAuthEvent('signup_attempt_form_error', e.auth.origin, {
       error: a.message,
       googleIdToken: r.googleIdToken,
@@ -1524,12 +1524,12 @@ function eQ(e) {
   }
   async function w(i) {
     let n = i.currentTarget;
-    let r = _$$t2(n);
+    let r = extractFormValues(n);
     if (S()) {
       trackAuthEvent('email_start_submit', e.auth.origin);
       t(AUTH_SET_AUTH_LOADING());
       try {
-        let i = await Iu(r.email, AuthFlowStep.SIGN_UP);
+        let i = await getAuthAction(r.email, AuthFlowStep.SIGN_UP);
         t(AUTH_CLEAR_AUTH_LOADING());
         i === 'google' ? (b(!0), E()) : i === 'saml' ? t(AUTH_SEND_EMAIL_SAML_START({
           formId: e.id

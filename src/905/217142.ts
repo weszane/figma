@@ -17,7 +17,7 @@ import { useCurrentPlanUser, checkOrgUserPermission } from "../figma_app/465071"
 import { w as _$$w } from "../figma_app/883622";
 import { PageTypeEnum } from "../figma_app/10554";
 import { KM } from "../figma_app/224019";
-import { YW, ho } from "../figma_app/870683";
+import { generateCommunityWidgetUrl, generateCommunityPluginUrl } from "../figma_app/870683";
 import { H } from "../figma_app/441663";
 import { j } from "../905/834956";
 export function $$S2() {
@@ -61,7 +61,7 @@ export function $$C1(e) {
   }), T.push({
     displayText: getI18nString("file_browser.open_in_new_tab"),
     callback: (e, i, n, r) => {
-      publishedResource.is_widget ? customHistory.redirect(YW(publishedResource.id), "_blank") : customHistory.redirect(ho(publishedResource.id), "_blank");
+      publishedResource.is_widget ? customHistory.redirect(generateCommunityWidgetUrl(publishedResource.id), "_blank") : customHistory.redirect(generateCommunityPluginUrl(publishedResource.id), "_blank");
     }
   }), T.push(_$$w));
   g.unwrapOr(!1) && ((isAcceptedPublisher(publishedResource, h ?? "") || publishedResource.creator.id === h) && (C.push(KM.PUBLISH), T.push({

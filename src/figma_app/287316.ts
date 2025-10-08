@@ -15,7 +15,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { F as _$$F } from "../figma_app/954027";
 import { reportError } from "../905/11";
 import { base64ToUint8Array, uint8ArrayToBase64 } from "../figma_app/930338";
-import { GI, IZ, SK } from "../905/125333";
+import { vectorPencilStyleAtom, highlighterStyleAtom, toolStylesAtom } from "../905/125333";
 import { closeUniversalInsertModal, setUniversalInsertModalOpen, updateSourceRect } from "../905/116101";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { Ii } from "../figma_app/644079";
@@ -1437,20 +1437,20 @@ function eu(e, t) {
       type: "SOLID",
       color: t
     }];
-    return e === GI ? atomStoreManager.set(GI, e => ({
+    return e === vectorPencilStyleAtom ? atomStoreManager.set(vectorPencilStyleAtom, e => ({
       ...e,
       paints: r
-    })) : atomStoreManager.set(IZ, e => ({
+    })) : atomStoreManager.set(highlighterStyleAtom, e => ({
       ...e,
       paints: r
     }));
   };
   switch (e) {
     case "PENCIL":
-      r(GI);
+      r(vectorPencilStyleAtom);
       break;
     case "HIGHLIGHTER":
-      r(IZ);
+      r(highlighterStyleAtom);
   }
 }
 function ep(e, t, r) {
@@ -1473,7 +1473,7 @@ let e_ = () => {
   let e = useSelector(e => e.mirror?.appModel.isReadOnly);
   let {
     washiTapePaint
-  } = useAtomWithSubscription(SK);
+  } = useAtomWithSubscription(toolStylesAtom);
   let r = washiTapePaint?.image?.hash && sha1HexFromBytes(washiTapePaint?.image?.hash);
   useEffect(() => {
     e || r || Iw(M8(_$$B[0]));
@@ -1531,7 +1531,7 @@ export function $$em6() {
     }, n._native_toolbar_set_slider_value = (e, t) => {
       switch (t) {
         case "PRIMARY_PENCIL_OPACITY":
-          atomStoreManager.set(GI, t => ({
+          atomStoreManager.set(vectorPencilStyleAtom, t => ({
             ...t,
             strokeOpacity: e
           }));
@@ -1566,14 +1566,14 @@ export function $$em6() {
       switch (U9.includes(e) ? t = "SHAPE_NAME" : X4.includes(e) ? t = "STROKE_WIDTH" : _$$k.includes(e) && (t = "HIGHLIGHTER_WIDTH"), t) {
         case "STROKE_WIDTH":
           let r = E5.get(e);
-          r && atomStoreManager.set(GI, e => ({
+          r && atomStoreManager.set(vectorPencilStyleAtom, e => ({
             ...e,
             strokeWeight: r
           }));
           break;
         case "HIGHLIGHTER_WIDTH":
           let n = tj.get(e);
-          n && atomStoreManager.set(IZ, e => ({
+          n && atomStoreManager.set(highlighterStyleAtom, e => ({
             ...e,
             strokeWeight: n
           }));
@@ -1697,7 +1697,7 @@ export function $$eE0() {
   });
   let b = getObservableValue(AppStateTsApi?.editorState().selectionEmpty, !0);
   let N = useMemo(() => LK("PENCIL"), []);
-  let L = useAtomWithSubscription(GI);
+  let L = useAtomWithSubscription(vectorPencilStyleAtom);
   useEffect(() => {
     let t = L.paints?.[0]?.color;
     if (t) {
@@ -1715,7 +1715,7 @@ export function $$eE0() {
     }
   }, [e, L, N]);
   let F = useMemo(() => LK("HIGHLIGHTER"), []);
-  let j = useAtomWithSubscription(IZ);
+  let j = useAtomWithSubscription(highlighterStyleAtom);
   useEffect(() => {
     let t = j.paints?.[0]?.color;
     t && eg(jsx(K, {
@@ -1724,7 +1724,7 @@ export function $$eE0() {
       r && e?.nativeToolbarUpdateToolSettings?.("HIGHLIGHTER", ep(F, t, r));
     }).catch(console.error);
   }, [e, j, F]);
-  let U = useAtomWithSubscription(SK);
+  let U = useAtomWithSubscription(toolStylesAtom);
   let B = U.washiTapePaint?.image;
   useEffect(() => {
     let t = B?.hash;

@@ -9,7 +9,7 @@ import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { blackColor } from "../figma_app/191804";
 import { generateRecordingKey } from "../figma_app/878298";
-import { GI, IZ, SK } from "../905/125333";
+import { vectorPencilStyleAtom, highlighterStyleAtom, toolStylesAtom } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
@@ -50,8 +50,8 @@ let $$K0 = memo(function ({
   recordingKey: r,
   optimizeForCompactSize: s
 }) {
-  let [c, T] = useAtomValueAndSetter(GI);
-  let [C, O] = useAtomValueAndSetter(IZ);
+  let [c, T] = useAtomValueAndSetter(vectorPencilStyleAtom);
+  let [C, O] = useAtomValueAndSetter(highlighterStyleAtom);
   let [M, K] = useState(!1);
   let [$, X] = useState(!1);
   let {
@@ -60,7 +60,7 @@ let $$K0 = memo(function ({
   } = $J(X);
   let {
     washiTapePaint
-  } = useAtomWithSubscription(SK);
+  } = useAtomWithSubscription(toolStylesAtom);
   let Q = washiTapePaint?.image?.hash && sha1HexFromBytes(washiTapePaint?.image?.hash);
   let [ee, et] = useState(!1);
   let [er, en] = useState(!1);

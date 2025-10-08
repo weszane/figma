@@ -36,7 +36,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { A as _$$A } from "../905/51490";
 import { ZH } from "../figma_app/504823";
 import { vk } from "../figma_app/397881";
-import { Tr, Ay } from "../905/281495";
+import { getActionSourceString, renameLayers } from "../905/281495";
 import { A0, Mc } from "../figma_app/454974";
 import { ImageManager } from "../figma_app/624361";
 import { isValidValue, valueOrFallback, isInvalidValue } from "../905/216495";
@@ -181,7 +181,7 @@ let ex = class e extends PureComponent {
     this.autoRenameFrameOnExport = async () => {
       this.props.isSelectionRenamable && (this.setState({
         isRenameLayersRunning: !0
-      }), atomStoreManager.set(zF, Tr(ActionType.EXPORT_FRAME)), B3(JT.AUTO_RENAME_LAYERS), await Ag(JT.AUTO_RENAME_LAYERS, Ay, {
+      }), atomStoreManager.set(zF, getActionSourceString(ActionType.EXPORT_FRAME)), B3(JT.AUTO_RENAME_LAYERS), await Ag(JT.AUTO_RENAME_LAYERS, renameLayers, {
         source: ActionType.EXPORT_FRAME,
         overwriteNames: !1,
         ignoreDescendants: !0

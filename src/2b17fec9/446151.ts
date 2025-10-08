@@ -4,7 +4,7 @@ import { Fullscreen, ToolType, AlignmentPosition, ConfirmationLevel, Command, De
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
-import { ez, SK, U9, wp } from "../905/125333";
+import { shapeColorAtom, toolStylesAtom, shapeStrokeStyleAtom, connectorColorAtom } from "../905/125333";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
@@ -13,7 +13,7 @@ import { LR } from "../figma_app/120210";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
 import { KindEnum } from "../905/129884";
-import { Wd_ } from "../figma_app/6204";
+import { FigJamAdvancedDiagrammingOnboarding } from "../figma_app/6204";
 import { oh, Yg } from "../905/526509";
 import { hx } from "../figma_app/630194";
 import { nS } from "../figma_app/274383";
@@ -139,9 +139,9 @@ let ec = memo(function ({
   let t = OD();
   let i = AT();
   let s = R0();
-  let l = useAtomWithSubscription(ez);
-  let [d, p] = useAtomValueAndSetter(SK);
-  let h = useAtomWithSubscription(U9);
+  let l = useAtomWithSubscription(shapeColorAtom);
+  let [d, p] = useAtomValueAndSetter(toolStylesAtom);
+  let h = useAtomWithSubscription(shapeStrokeStyleAtom);
   let m = useAtomWithSubscription(oh);
   let f = "open" === m.state && "shape" === m.tool;
   let _ = useCallback(e => {
@@ -553,9 +553,9 @@ let eS = memo(function ({
   let m = h === Yt();
   let _ = _$$C();
   let x = AE();
-  let j = useAtomWithSubscription(ez);
+  let j = useAtomWithSubscription(shapeColorAtom);
   let C = colorCSSManipulatorInstance.format(j);
-  let T = useAtomWithSubscription(U9);
+  let T = useAtomWithSubscription(shapeStrokeStyleAtom);
   let E = Qd().get(h);
   let [S, w] = useAtomValueAndSetter(oh);
   let I = "open" === S.state && "shape" === S.tool;
@@ -739,8 +739,8 @@ function eN({
   let p = Uo();
   let h = _$$C();
   let m = AE();
-  let x = useAtomWithSubscription(SK).connectorToolLineStyle;
-  let j = useAtomWithSubscription(wp);
+  let x = useAtomWithSubscription(toolStylesAtom).connectorToolLineStyle;
+  let j = useAtomWithSubscription(connectorColorAtom);
   let C = colorCSSManipulatorInstance.format(j);
   let [T, E] = useAtomValueAndSetter(oh);
   let S = "open" === T.state && "shape" === T.tool;
@@ -810,7 +810,7 @@ function eN({
 export function $$eA1({
   optimizeForCompactSize: e
 }) {
-  let [t, i] = useAtomValueAndSetter(SK);
+  let [t, i] = useAtomValueAndSetter(toolStylesAtom);
   let [s, l] = useAtomValueAndSetter(_$$B2);
   let {
     shapeWithTextType
@@ -860,7 +860,7 @@ export function $$eA1({
     isShowing,
     complete
   } = _$$e({
-    overlay: Wd_,
+    overlay: FigJamAdvancedDiagrammingOnboarding,
     priority: _$$N.SECONDARY_MODAL
   }, [N, L]);
   let M = AE();

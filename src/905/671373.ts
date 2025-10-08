@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { Kh } from "../905/989765";
+import { captionsInstallProgress } from "../905/989765";
 import { MK } from "../figma_app/120529";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -21,7 +21,7 @@ class d extends Component {
       confirmationTitle: e,
       content: t,
       onConfirm: () => {
-        this.props.dispatch(Kh(0));
+        this.props.dispatch(captionsInstallProgress(0));
       },
       confirmText: "Ok",
       hideCancel: !0

@@ -12,7 +12,7 @@ import { isValidLibraryKey } from "../figma_app/630951";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
-import { HX, ad, xQ } from "../figma_app/97042";
+import { getBackingNodeInfo, collectInstanceKeys, parseCodeConnectForDisplay } from "../figma_app/97042";
 import { mapPlatformToFramework } from "../905/359509";
 export function $$y1(e, t, r = new Set()) {
   traverseChildren(e, e => {
@@ -45,8 +45,8 @@ export function $$b0() {
       let {
         backingNodeId,
         backingLibraryKey
-      } = HX(o.guid, r, y);
-      let i = ad(o.guid, r, t, !1, y);
+      } = getBackingNodeInfo(o.guid, r, y);
+      let i = collectInstanceKeys(o.guid, r, t, !1, y);
       if (!backingLibraryKey || !backingNodeId) continue;
       let d = await subscribeAndAwaitData(CodeConnectForNodeLk, {
         libraryKey: backingLibraryKey,
@@ -58,7 +58,7 @@ export function $$b0() {
       if ("loaded" !== d.file.status) continue;
       let p = d.file.data?.code_connect_for_node_lk;
       if (!p) continue;
-      let h = xQ({
+      let h = parseCodeConnectForDisplay({
         node: o,
         codeConnect: p,
         label: I,

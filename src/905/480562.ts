@@ -1,50 +1,50 @@
-import { registerTooltip } from "../905/524523";
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useMemo, useCallback, PureComponent, useState, useId, useRef } from "react";
+import { PureComponent, useCallback, useId, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IconButton } from "../905/443068";
-import { B as _$$B } from "../905/950875";
-import { L as _$$L } from "../905/704296";
-import { getFeatureFlags } from "../905/601108";
-import { P as _$$P } from "../905/347284";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { renderI18nText, getI18nString } from "../905/303541";
-import { postUserFlag } from "../905/985254";
-import { selectUserFlag } from "../905/940356";
-import { TrackingKeyEnum } from "../905/696396";
-import { n as _$$n, l as _$$l } from "../905/402643";
-import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { r as _$$r } from "../905/571562";
-import E from "../vendor/239910";
-import { ms, MM, rr } from "../figma_app/236327";
-import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { h as _$$h } from "../905/589458";
-import { o as _$$o } from "../905/918279";
-import { LoadingSpinner } from "../905/443820";
-import { dayjs } from "../905/920142";
-import { G5, S6 } from "../figma_app/795674";
-import { SvgComponent } from "../905/714743";
-import { TrackedLink } from "../905/160095";
-import { KindEnum } from "../905/129884";
-import { DSAApiServiceInstance } from "../905/669853";
-import { A as _$$A2 } from "../1617/380980";
-import { resourceUtils } from "../905/989992";
-import { setupResourceAtomHandler } from "../figma_app/566371";
-import { fX, Im } from "../905/627262";
-import { bu, k9, DQ, y$ } from "../905/712714";
-import { getUserLocale } from "../figma_app/514043";
-import { A as _$$A3 } from "../905/27250";
-import { throwTypeError } from "../figma_app/465776";
-import { Tabs } from "../905/150656";
-import { Label } from "../905/270045";
-import { bL, DZ, mc, zW, c$ } from "../905/493196";
-import { analyticsEventManager } from "../905/449184";
-import { selectCurrentUser } from "../905/372672";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { useUniqueId } from "../905/27228";
-import { Dd, $G, Yu, Gy, vA } from "../905/193404";
-import { FO } from "../905/682977";
-import { ue, nZ } from "../figma_app/277330";
-import { t as _$$t3 } from "../905/414363";
+import { A as _$$A3 } from "../905/27250";
+import { KindEnum } from "../905/129884";
+import { Tabs } from "../905/150656";
+import { TrackedLink } from "../905/160095";
+import { $G, Dd, Gy, vA, Yu } from "../905/193404";
+import { Label } from "../905/270045";
+import { getI18nString, renderI18nText } from "../905/303541";
+import { RecordingScrollContainer } from "../905/347284";
+import { selectCurrentUser } from "../905/372672";
+import { l as _$$l, n as _$$n } from "../905/402643";
+import { TrackingWrapper } from "../905/414363";
+import { IconButton } from "../905/443068";
+import { LoadingSpinner } from "../905/443820";
+import { analyticsEventManager } from "../905/449184";
+import { bL, c$, DZ, mc, zW } from "../905/493196";
+import { registerTooltip } from "../905/524523";
+import { r as _$$r } from "../905/571562";
+import { h as _$$h } from "../905/589458";
+import { getFeatureFlags } from "../905/601108";
+import { fX, Im } from "../905/627262";
+import { DSAApiServiceInstance } from "../905/669853";
+import { LoadingRow } from "../905/682977";
+import { TrackingKeyEnum } from "../905/696396";
+import { L as _$$L } from "../905/704296";
+import { bu, DQ, k9, y$ } from "../905/712714";
+import { SvgComponent } from "../905/714743";
+import { o as _$$o } from "../905/918279";
+import { dayjs } from "../905/920142";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
+import { selectUserFlag } from "../905/940356";
+import { B as _$$B } from "../905/950875";
+import { postUserFlag } from "../905/985254";
+import { resourceUtils } from "../905/989992";
+import { A as _$$A2 } from "../1617/380980";
+import { cssBuilderInstance } from "../cssbuilder/589278";
+import { MM, ms, rr } from "../figma_app/236327";
+import { nZ, ue } from "../figma_app/277330";
+import { throwTypeError } from "../figma_app/465776";
+import { getUserLocale } from "../figma_app/514043";
+import { setupResourceAtomHandler } from "../figma_app/566371";
+import { sortByPropertyWithOptions } from "../figma_app/656233";
+import { G5, S6 } from "../figma_app/795674";
+import E from "../vendor/239910";
 let _ = "dsa_file_view_analytics_footer--componentViewFooter--J00R3 file_view_styles--componentViewFooter--JQ0-4 file_view_styles--fileViewFooter--y5O8t";
 let A = "dsa_file_view_analytics_footer--libraryViewFooterNumText--tmYqO text--fontPos11--2LvXf text--_fontBase--QdLsd";
 function y({
@@ -89,10 +89,10 @@ function b({
       });
   }
 }
-var x = E;
+let x = E;
 let T = "library-comparison-dropdown";
 function k(e) {
-  return null != e && e.type === T;
+  return e != null && e.type === T;
 }
 function R({
   assetType: e,
@@ -177,7 +177,7 @@ function R({
             className: "dsa_file_view_analytics_header--dropdown--5HdGZ",
             children: [jsx(MM, {
               onClick: l,
-              checked: null == s,
+              checked: s == null,
               children: renderI18nText("design_systems.libraries_modal.none")
             }, "none"), h.map(e => jsx(rr, {
               onClick: _(e),
@@ -243,7 +243,7 @@ class eg extends PureComponent {
     this.props.comparisonFileKey && this.fetchInsertions("comparison");
   }
   componentDidUpdate(e) {
-    if (e.libraryFile.key !== this.props.libraryFile.key && this.fetchInsertions("primary"), null === this.props.comparisonFileKey) {
+    if (e.libraryFile.key !== this.props.libraryFile.key && this.fetchInsertions("primary"), this.props.comparisonFileKey === null) {
       this.setState({
         library2TimeSeries: null,
         library2TeamUsage: null
@@ -253,7 +253,7 @@ class eg extends PureComponent {
     e.comparisonFileKey !== this.props.comparisonFileKey && this.fetchInsertions("comparison");
   }
   fetchInsertions(e) {
-    let t = "primary" === e ? this.props.libraryFile.key : this.props.comparisonFileKey;
+    let t = e === "primary" ? this.props.libraryFile.key : this.props.comparisonFileKey;
     DSAApiServiceInstance.getLibraryWeeklyInsertions({
       fileKey: t,
       startTs: G5(this.props.numDays + 7).toString(),
@@ -263,7 +263,7 @@ class eg extends PureComponent {
         date: new Date(e.date),
         value: e.num_insertions
       }));
-      "primary" === e ? this.setState({
+      e === "primary" ? this.setState({
         library1TimeSeries: i
       }) : this.setState({
         library2TimeSeries: i
@@ -280,7 +280,7 @@ class eg extends PureComponent {
       let n = 0;
       for (let e of i) n += +e.num_insertions;
       for (let e of i) e.percent_insertions = `${Math.round(100 * e.num_insertions / n)}%`;
-      "primary" === e ? this.setState({
+      e === "primary" ? this.setState({
         library1TeamUsage: i
       }) : this.setState({
         library2TeamUsage: i
@@ -292,35 +292,37 @@ class eg extends PureComponent {
   render() {
     let e = this.state.library1TimeSeries;
     let t = this.state.library2TimeSeries || [];
-    if (null === e || null === this.state.library1TeamUsage) return jsxs(Fragment, {
-      children: [jsx("div", {
-        className: $,
-        children: jsxs("div", {
-          className: Z,
-          children: [jsx("div", {
-            className: X,
-            children: jsx(LoadingSpinner, {
-              size: "sm"
-            })
-          }), jsx("div", {
-            children: renderI18nText("design_systems.libraries_modal.loading_library_activity")
-          })]
-        })
-      }), jsx("div", {
-        className: ea,
-        children: jsx("div", {
-          className: er,
-          children: renderI18nText("design_systems.libraries_modal.top_teams")
-        })
-      }), jsx("div", {
-        className: ei,
-        children: jsx(ef, {
-          usage: null,
-          startingIndex: 0,
-          maxCount: 3
-        })
-      })]
-    });
+    if (e === null || this.state.library1TeamUsage === null) {
+      return jsxs(Fragment, {
+        children: [jsx("div", {
+          className: $,
+          children: jsxs("div", {
+            className: Z,
+            children: [jsx("div", {
+              className: X,
+              children: jsx(LoadingSpinner, {
+                size: "sm"
+              })
+            }), jsx("div", {
+              children: renderI18nText("design_systems.libraries_modal.loading_library_activity")
+            })]
+          })
+        }), jsx("div", {
+          className: ea,
+          children: jsx("div", {
+            className: er,
+            children: renderI18nText("design_systems.libraries_modal.top_teams")
+          })
+        }), jsx("div", {
+          className: ei,
+          children: jsx(ef, {
+            usage: null,
+            startingIndex: 0,
+            maxCount: 3
+          })
+        })]
+      });
+    }
     let i = Math.max(0, ...[...e, ...t].map(e => e.value));
     let r = 10;
     let a = 20;
@@ -336,7 +338,7 @@ class eg extends PureComponent {
     let o = Math.floor(i / r) + 1;
     let l = o * r;
     let d = 119 / o;
-    let c = Array.from(Array(o + 1), (e, t) => 1 + Math.floor(t * d));
+    let c = Array.from(new Array(o + 1), (e, t) => 1 + Math.floor(t * d));
     function u(e) {
       return 120 - Math.floor(120 * e / l);
     }
@@ -346,7 +348,7 @@ class eg extends PureComponent {
     let h = e.length > 0 ? +e[0].date : +Date.now();
     let g = (Date.now() - h) / 864e5;
     let f = Math.ceil((this.props.numDays - g) / 7);
-    let _ = Array(f).fill(0);
+    let _ = new Array(f).fill(0);
     let A = f - e.length;
     let y = "var(--color-text-brand, #0D99FF)";
     let b = "var(--color-text, black)";
@@ -365,9 +367,9 @@ class eg extends PureComponent {
         let a = [100 - I - i * v, u(e[i].value)];
         t.push(a);
         r.push(a);
-        1 === i && n.push(a);
+        i === 1 && n.push(a);
       }
-      i = m(t) + ` ${100 - I - (e.length - 1) * v},121 ${100 - I},121`;
+      i = `${m(t)} ${100 - I - (e.length - 1) * v},121 ${100 - I},121`;
       A < 0 && e.pop();
       return {
         data: e,
@@ -400,22 +402,22 @@ class eg extends PureComponent {
         }
       });
     }
-    let P = 365 === this.props.numDays;
+    let P = this.props.numDays === 365;
     function D(e, t) {
       return jsx("div", {
         className: G,
         children: _.map((i, r) => e.length > r ? jsx("div", {
-          style: {
+          "style": {
             marginTop: u(e[r].value) - 6.5
           },
-          className: H,
+          "className": H,
           "data-tooltip-show-above": !0,
           "data-tooltip-show-immediately": !0,
           "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": [getI18nString("design_systems.libraries_modal.dsa_graph_tooltip", {
             numInsertions: e[r].value
           }), e[r].date.toLocaleDateString()].join("\n"),
-          children: jsx("div", {
+          "children": jsx("div", {
             className: P ? K : W,
             style: {
               backgroundColor: t
@@ -447,7 +449,7 @@ class eg extends PureComponent {
                 points: polygon,
                 style: {
                   fill: y,
-                  fillOpacity: .1
+                  fillOpacity: 0.1
                 }
               }), N(restOfPts, y, ""), _restOfPts && N(_restOfPts, b, ""), N(dashed, y, "4 4"), _dashed && N(_dashed, b, "4 4"), c.map(e => jsx("polyline", {
                 points: `0,${e} 100,${e}`,
@@ -455,7 +457,7 @@ class eg extends PureComponent {
                 style: {
                   fill: "none",
                   stroke: "black",
-                  strokeOpacity: .05
+                  strokeOpacity: 0.05
                 }
               }, e))]
             })
@@ -481,12 +483,12 @@ class eg extends PureComponent {
             },
             className: "library_analytics_view--missingData--s6R-h",
             children: jsx("div", {
-              className: H,
+              "className": H,
               "data-tooltip-show-above": !0,
               "data-tooltip-show-immediately": !0,
               "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": `No data before ${data.length > 0 ? L(data[data.length - 1].date) : L(new Date())}`,
-              children: jsx(SvgComponent, {
+              "children": jsx(SvgComponent, {
                 svg: _$$A2
               })
             })
@@ -523,7 +525,7 @@ function ef({
 }) {
   return jsxs("div", {
     className: en,
-    children: [null === e && Array(i).fill(0).map((e, t) => jsxs("div", {
+    children: [e === null && new Array(i).fill(0).map((e, t) => jsxs("div", {
       className: eo,
       children: [jsx("div", {
         className: Q,
@@ -549,7 +551,7 @@ function ef({
           className: ee,
           children: e.percent_insertions
         })]
-      }, i)), 0 === e.length && 0 === t && jsx("div", {
+      }, i)), e.length === 0 && t === 0 && jsx("div", {
         className: J,
         children: jsx("div", {
           children: renderI18nText("design_systems.libraries_modal.no_usage_recorded")
@@ -580,7 +582,7 @@ function eA({
 }) {
   let i = [[getI18nString("design_systems.libraries_modal.dsa_csv_team_id"), getI18nString("design_systems.libraries_modal.dsa_csv_team_name"), getI18nString("design_systems.libraries_modal.dsa_csv_num_insertions"), getI18nString("design_systems.libraries_modal.dsa_csv_percent_insertions")].join(",")];
   for (let e of t) i.push(`${e.team_id},${e.team_name},${e.num_insertions},${e.percent_insertions}`);
-  let r = "data:text/plain;charset=utf-8," + encodeURIComponent(i.join("\r\n"));
+  let r = `data:text/plain;charset=utf-8,${encodeURIComponent(i.join("\r\n"))}`;
   return jsx("span", {
     className: cssBuilderInstance.ml12.$,
     children: jsx(TrackedLink, {
@@ -661,10 +663,10 @@ function eE({
     status: p
   }), [p, u, c]);
 }
-let eS = registerTooltip("dsa_graph", function ({
+let eS = registerTooltip("dsa_graph", ({
   numInsertions: e,
   dateString: t
-}) {
+}) => {
   let i = useMemo(() => new Intl.NumberFormat(getUserLocale(), {
     useGrouping: !0
   }).format(e), [e]);
@@ -712,7 +714,7 @@ function ew({
     primaryTimeSeries: timeSeries,
     comparisonTimeSeries: _timeSeries,
     primaryTeamUsage: teamUsage,
-    isLoading: "loading" === status
+    isLoading: status === "loading"
   });
 }
 function eC({
@@ -724,7 +726,7 @@ function eC({
   primaryTeamUsage: s,
   isLoading: o
 }) {
-  return o || null === r || null === s ? jsx(eT, {}) : jsx(ek, {
+  return o || r === null || s === null ? jsx(eT, {}) : jsx(ek, {
     assetType: e,
     numDays: t,
     libraryFile: i,
@@ -795,7 +797,7 @@ function ek({
     return {
       yMax: 120,
       graphMax: a,
-      markerYs: Array.from(Array(r + 1), (e, t) => 1 + Math.floor(t * s)),
+      markerYs: Array.from(new Array(r + 1), (e, t) => 1 + Math.floor(t * s)),
       tickInterval: e,
       xAxisFreq: n
     };
@@ -807,7 +809,7 @@ function ek({
     wholeWeeksList
   } = useMemo(() => {
     let e = Math.ceil(t / 7);
-    let i = Array(e).fill(0);
+    let i = new Array(e).fill(0);
     let n = e - a.length;
     return {
       ptWidth: 100 / e,
@@ -839,7 +841,7 @@ function ek({
     graphMax,
     missingWeeks
   }), [s, ptWidth, yMax, graphMax, missingWeeks]);
-  let w = 365 === t;
+  let w = t === 365;
   let C = "var(--color-text-brand, #0D99FF)";
   let T = "var(--color-text, black)";
   return jsxs(Fragment, {
@@ -876,7 +878,7 @@ function ek({
               points: polygon,
               style: {
                 fill: C,
-                fillOpacity: .1
+                fillOpacity: 0.1
               }
             }), jsx(eD, {
               pts: restOfPts,
@@ -900,7 +902,7 @@ function ek({
               style: {
                 fill: "none",
                 stroke: "black",
-                strokeOpacity: .05
+                strokeOpacity: 0.05
               }
             }, e))]
           })
@@ -984,9 +986,9 @@ function eP({
     })];
     s.push(o);
     d.push(o);
-    1 === r && l.push(o);
+    r === 1 && l.push(o);
   }
-  o = eN(s) + ` ${100 - a - (e.length - 1) * t},${i + 1} ${100 - a},${i + 1}`;
+  o = `${eN(s)} ${100 - a - (e.length - 1) * t},${i + 1} ${100 - a},${i + 1}`;
   r < 0 && e.pop();
   return {
     data: e,
@@ -1006,22 +1008,22 @@ function eO({
   return jsx("div", {
     className: G,
     children: i.map((i, o) => e.length > o ? jsx("div", {
-      style: {
+      "style": {
         marginTop: eR({
           pt: e[o].value,
           yMax: a,
           graphMax: s
         }) - 6.5
       },
-      className: H,
+      "className": H,
       "data-tooltip-show-above": !0,
       "data-tooltip-show-immediately": !0,
       "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip-dsa-graph-num-insertions": e[o].value,
       "data-tooltip-dsa-graph-date-string": e[o].date.toLocaleDateString(),
       "data-tooltip": eS,
-      children: jsx("div", {
-        className: "small" === r ? K : W,
+      "children": jsx("div", {
+        className: r === "small" ? K : W,
         style: {
           backgroundColor: t
         }
@@ -1055,7 +1057,7 @@ function eL({
 }) {
   return jsxs("div", {
     className: en,
-    children: [null === e && Array(i).fill(0).map((e, t) => jsxs("div", {
+    children: [e === null && new Array(i).fill(0).map((e, t) => jsxs("div", {
       className: el,
       children: [jsx("div", {
         className: Q,
@@ -1081,7 +1083,7 @@ function eL({
           className: ee,
           children: e.percent_insertions
         })]
-      }, i)), 0 === e.length && 0 === t && jsx("div", {
+      }, i)), e.length === 0 && t === 0 && jsx("div", {
         className: J,
         children: jsx("div", {
           children: renderI18nText("design_systems.libraries_modal.no_usage_recorded")
@@ -1115,7 +1117,7 @@ function eM({
 }) {
   let r = [[getI18nString("design_systems.libraries_modal.dsa_csv_team_id"), getI18nString("design_systems.libraries_modal.dsa_csv_team_name"), getI18nString("design_systems.libraries_modal.dsa_csv_num_insertions"), getI18nString("design_systems.libraries_modal.dsa_csv_percent_insertions")].join(",")];
   for (let e of i) r.push(`${e.team_id},${e.team_name},${e.num_insertions},${e.percent_insertions}`);
-  let a = "data:text/plain;charset=utf-8," + encodeURIComponent(r.join("\r\n"));
+  let a = `data:text/plain;charset=utf-8,${encodeURIComponent(r.join("\r\n"))}`;
   return jsx("span", {
     className: cssBuilderInstance.ml12.$,
     children: jsx(TrackedLink, {
@@ -1205,7 +1207,7 @@ function e$({
   let m = i.length > 1;
   let [h, g] = useState();
   let _ = useMemo(() => {
-    if (null != h) return i.find(e => e.key === h);
+    if (h != null) return i.find(e => e.key === h);
   }, [i, h]);
   let A = useId();
   let y = useCallback(e => {
@@ -1219,11 +1221,11 @@ function e$({
       dsaSessionId: c
     });
   }, [g, h, d, l, c]);
-  let b = useMemo(() => null == h ? e : {
+  let b = useMemo(() => h == null ? e : {
     type: _$$l.VARIABLES,
     items: e.items.filter(e => e.variableCollectionKey === h)
   }, [e, h]);
-  let v = useMemo(() => null == h ? t : {
+  let v = useMemo(() => h == null ? t : {
     type: _$$l.VARIABLE_MODES,
     items: t.items.filter(e => e.collectionKey === h)
   }, [t, h]);
@@ -1231,7 +1233,7 @@ function e$({
     variables: !0,
     modes: !0
   });
-  let S = "modes" === x.activeTab ? _$$l.VARIABLE_MODES : _$$l.VARIABLES;
+  let S = x.activeTab === "modes" ? _$$l.VARIABLE_MODES : _$$l.VARIABLES;
   return jsxs(Fragment, {
     children: [jsx(Yu, {
       tableType: S
@@ -1322,12 +1324,12 @@ export function $$eJ0({
     assetType: e,
     orgId: a?.parent_org_id
   }), [e, a?.parent_org_id]);
-  return jsx(_$$t3, {
+  return jsx(TrackingWrapper, {
     page: TrackingKeyEnum.DSA_FILE_VIEW_ANALYTICS,
     properties: T,
     children: jsxs("div", {
       className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.maxHFull.$,
-      children: [jsxs(_$$P, {
+      children: [jsxs(RecordingScrollContainer, {
         width: h,
         ref: f,
         className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
@@ -1349,7 +1351,7 @@ export function $$eJ0({
           comparisonFileKey: _,
           comparisonFileName: b ?? getI18nString("design_systems.libraries_modal.select_library"),
           numDays: _$$o[t]
-        }, t)), isLoading && jsx(FO, {}), !isLoading && (getFeatureFlags().dsa_styles_variables_ui ? jsx(eq, {
+        }, t)), isLoading && jsx(LoadingRow, {}), !isLoading && (getFeatureFlags().dsa_styles_variables_ui ? jsx(eq, {
           libraryFile: a,
           itemsList,
           duration: t,
@@ -1392,8 +1394,8 @@ function e1() {
       className: cssBuilderInstance.flex.itemsCenter.$,
       children: jsx(IconButton, {
         "aria-label": getI18nString("design_systems.libraries_modal.dsa_missing_data_dismiss"),
-        onClick: i,
-        children: jsx(_$$L, {})
+        "onClick": i,
+        "children": jsx(_$$L, {})
       })
     })]
   });

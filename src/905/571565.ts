@@ -24,11 +24,11 @@ export function formatPluginName(name: string, vmType: string): string {
 export function notifyPluginStatus(params: {
   name: string
   vmType: string
-  isBackground: boolean
-  isInsert: boolean
+  isBackground?: boolean
+  isInsert?: boolean
   shouldShowCheck?: boolean
   delayOverride?: number
-  cancelCallback: () => void
+  cancelCallback?: () => void
 }) {
   if (params.isBackground)
     return

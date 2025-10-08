@@ -11,7 +11,7 @@ import { copyTextToClipboard } from "../figma_app/623293"
  * @param e - The dispatch function.
  * @param t - Options including stringToCopy, ignoreLineBreaks, and successText.
  */
-const copyTextThunk = createOptimistThunk((e, t) => {
+export const copyTextThunk = createOptimistThunk((e, t) => {
   const textToCopy = t.stringToCopy
   const options = {
     withLineBreaks: !(t.ignoreLineBreaks ?? true),
@@ -31,7 +31,7 @@ const copyTextThunk = createOptimistThunk((e, t) => {
  * @param e - The dispatch function.
  * @param t - Options including emailList.
  */
-const copyEmailsThunk = createOptimistThunk((e, t) => {
+export const copyEmailsThunk = createOptimistThunk((e, t) => {
   const emailList = t.emailList
   const numEmails = emailList.length
   const emailText = emailList.join("; ")
@@ -70,7 +70,7 @@ export function copySelectedViewLinkThunk(e) {
  * @param e - The dispatch function.
  * @param t - Options including view.
  */
-const copyViewLinkThunk = createOptimistThunk((e, t) => {
+export const copyViewLinkThunk = createOptimistThunk((e, t) => {
   const url = new URL(selectedViewToPath(e.getState(), t), document.baseURI).href
   const linkType = (() => {
     if (t.view === "folder")
@@ -89,7 +89,7 @@ const copyViewLinkThunk = createOptimistThunk((e, t) => {
  * @param e - The dispatch function.
  * @param t - Options including url and optional linkType.
  */
-const copyLinkThunk = createOptimistThunk(async (e, t) => {
+export const copyLinkThunk = createOptimistThunk(async (e, t) => {
   const url = t.url
   const linkType = t.linkType ?? "selection"
   let successMessage

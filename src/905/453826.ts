@@ -1,51 +1,78 @@
-import { useRef, useCallback, useEffect } from "react";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import { useMemoShallow } from "../905/19536";
-import { eventEmitterAtom } from "../905/502364";
-import { R } from "../905/994802";
-export function $$l0(e, t, i) {
-  let l = useAtomWithSubscription(eventEmitterAtom);
-  let d = useMemoShallow(() => "string" == typeof t ? [t] : t, [t]);
-  let c = useRef(i);
-  c.current = i;
-  let u = useCallback(t => {
-    let i = "properties" in t ? t.properties : void 0;
-    R({
+import { useCallback, useEffect, useRef } from "react"
+import { useMemoShallow } from "../905/19536"
+import { eventEmitterAtom } from "../905/502364"
+import { logCuratorEvent } from "../905/994802"
+import { useAtomWithSubscription } from "../figma_app/27355"
+
+interface EventForwarderOptions {
+  overlayId: string
+  eventIds: string | string[]
+  handler: (event: any) => void
+}
+
+/**
+ * Custom hook to forward events from an event emitter to a handler function
+ * ($$l0 - original function name)
+ */
+export function useEventForwarder({ overlayId, eventIds, handler }: EventForwarderOptions): void {
+  const eventEmitter = useAtomWithSubscription(eventEmitterAtom) as any
+  const eventIdsArray = useMemoShallow(() =>
+    typeof eventIds === "string" ? [eventIds] : eventIds, [eventIds])
+  const handlerRef = useRef(handler)
+
+  // Keep handler reference updated
+  handlerRef.current = handler
+
+  // Create event handler with proper typing
+  const eventHandler = useCallback((event: any) => {
+    const eventProperties = "properties" in event ? event.properties : undefined
+
+    logCuratorEvent({
       type: "triggered",
       name: "event_forwarded",
       properties: {
-        overlayId: e,
-        eventId: t.id,
-        eventProperties: i
-      }
-    }, "debug");
-    c.current(t);
-  }, [e]);
+        overlayId,
+        eventId: event.id,
+        eventProperties,
+      },
+    }, "debug")
+
+    handlerRef.current(event)
+  }, [overlayId])
+
+  // Manage event listener subscription lifecycle
   useEffect(() => {
-    for (let t of d) {
-      R({
+    // Register event listeners
+    for (const eventId of eventIdsArray) {
+      logCuratorEvent({
         type: "triggered",
         name: "event_listener_registered",
         properties: {
-          overlayId: e,
-          eventId: t
-        }
-      }, "trace");
-      l.addEventListener(t, u);
+          overlayId,
+          eventId,
+        },
+      }, "trace")
+
+      eventEmitter.addEventListener(eventId, eventHandler)
     }
+
+    // Cleanup: Deregister event listeners
     return () => {
-      for (let t of d) {
-        R({
+      for (const eventId of eventIdsArray) {
+        logCuratorEvent({
           type: "triggered",
           name: "event_listener_deregistered",
           properties: {
-            overlayId: e,
-            eventId: t
-          }
-        }, "trace");
-        l.removeEventListener(t, u);
+            overlayId,
+            eventId,
+          },
+        }, "trace")
+
+        eventEmitter.removeEventListener(eventId, eventHandler)
       }
-    };
-  }, [e, d, l, u]);
+    }
+  }, [overlayId, eventIdsArray, eventEmitter, eventHandler])
 }
-export const E = $$l0;
+
+// Export alias for backward compatibility
+export const E = useEventForwarder

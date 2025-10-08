@@ -11,7 +11,7 @@ import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminSettingsResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
 import { selectViewAction } from "../905/929976";
-import { Jt } from "../figma_app/28323";
+import { fetchLicenseGroupsThunk } from "../figma_app/28323";
 import { MX, EO } from "../figma_app/684446";
 import { isLoading, isDefined, isLoaded } from "../905/18797";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
@@ -61,7 +61,7 @@ export function $$C0(e) {
     }));
   }, [A, F, U]);
   useEffect(() => {
-    A(Jt({
+    A(fetchLicenseGroupsThunk({
       forceRefetch: !0
     }));
   }, [A, N?.id]);

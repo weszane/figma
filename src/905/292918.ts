@@ -29,8 +29,8 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import N from "../vendor/73823";
 import O from "../vendor/946678";
 import { useSingleEffect } from "../905/791079";
-import { ov, S2 } from "../905/300250";
-import { rY } from "../905/985490";
+import { handleBranchModalExit, commitMerge } from "../905/300250";
+import { DiffManager } from "../905/985490";
 import { zZ, n6 } from "../905/585030";
 import { handleModalError } from "../905/760074";
 import { currentSelectionAtom } from "../905/617744";
@@ -96,7 +96,7 @@ let $ = registerModal(function (e) {
       let i = e.branchKey;
       I(!0);
       try {
-        let e = rY.getConflicts({
+        let e = DiffManager.getConflicts({
           branchKey: i,
           sourceKey: t,
           branchModalTrackingId: g
@@ -122,7 +122,7 @@ let $ = registerModal(function (e) {
     displayGroups: _displayGroups
   } = f;
   let Q = () => {
-    r(ov({
+    r(handleBranchModalExit({
       hideModal: !0,
       mergeParams: {
         branchKey,
@@ -137,7 +137,7 @@ let $ = registerModal(function (e) {
   G && (handleModalError(G), console.error(G), r(VisualBellActions.enqueue({
     message: getI18nString("collaboration.branching.error_generic"),
     error: !0
-  })), r(ov({
+  })), r(handleBranchModalExit({
     hideModal: !0,
     mergeParams: {
       branchKey,
@@ -167,7 +167,7 @@ let $ = registerModal(function (e) {
       destructive: !0,
       confirmText: renderI18nText("collaboration.branching_force.merge_to_source_confirm"),
       onConfirm: () => {
-        _checkpointDiff && r(S2({
+        _checkpointDiff && r(commitMerge({
           mergeParams: {
             branchKey,
             sourceKey,
@@ -205,7 +205,7 @@ let $ = registerModal(function (e) {
       let c = P()(l, e => ue(e, BranchType.MAIN));
       let p = tF(_diffInfo.displayGroups || [], e, N.identicalChunkGUIDs);
       n6(c, d, N.nonConflictingSourceChunkGUIDs, N.nonConflictingBranchChunkGUIDs, N.identicalChunkGUIDs);
-      r(S2({
+      r(commitMerge({
         mergeParams: {
           branchKey,
           sourceKey,

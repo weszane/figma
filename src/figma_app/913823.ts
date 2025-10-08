@@ -14,7 +14,7 @@ import { fetchAndUpdateStateGroupsThunk, loadPublishedComponents, processAndDisp
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { filesByLibraryKeyAtom } from "../905/977779";
 import { resolveUsedComponentsStateGroups, addTrackedState, generateDefaultLibrariesCacheKey, resolveUsedLibraries } from "../figma_app/646357";
-import { l as _$$l } from "../905/997221";
+import { getLibraryKeyWithReport } from "../905/997221";
 import { YG } from "../905/921418";
 import { withParsedMeta } from "../905/405710";
 import { isNullOrFailure, isLoaded, isLoading } from "../905/18797";
@@ -135,7 +135,7 @@ async function L(e) {
           file: t
         }));
       });
-      let a = i.data.meta.files.map(_$$l).filter(isNotNullish);
+      let a = i.data.meta.files.map(getLibraryKeyWithReport).filter(isNotNullish);
       e.dispatch(defaultLibraryInitializeLibraryKeys({
         libraryKeys: a
       }));

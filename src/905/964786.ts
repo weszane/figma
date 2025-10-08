@@ -17,11 +17,11 @@ import { isValidWidgetType } from "../figma_app/364284";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { canRunPluginWithinOrg, formatPluginName, filterResourcesByMatch, getCurrentPluginVersionId } from "../figma_app/300692";
-import { D as _$$D2 } from "../905/629114";
+import { createFigmaPluginScope } from "../905/629114";
 import { clearWidgetSyncedState, getSyncedState, getSyncedMap } from "../905/486749";
 import { fullscreenValue } from "../figma_app/455680";
 import { widgetErrorTracker } from "../905/250412";
-import { j } from "../905/813868";
+import { createWidget } from "../905/813868";
 import { hasKey, getArrayLength } from "../905/764747";
 import { canPerformAction } from "../figma_app/12796";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
@@ -351,7 +351,7 @@ export function $$M1({
         let h = -1;
         m && (h = [...m.reversedChildrenGuids].reverse().indexOf(_widgetID2));
         try {
-          let e = j({
+          let e = createWidget({
             pluginID: _pluginID3,
             widgetName: p,
             pluginVersionID: l,
@@ -365,7 +365,7 @@ export function $$M1({
           if (e) {
             let t = getSceneGraphInstance().get(e);
             t && (t.relativeTransform = s, function (e, t) {
-              for (let i of _$$D2().currentPage.findAllWithCriteria({
+              for (let i of createFigmaPluginScope().currentPage.findAllWithCriteria({
                 types: ["CONNECTOR"]
               })) {
                 "endpointNodeId" in i.connectorEnd && i.connectorEnd.endpointNodeId === e && (i.connectorEnd = {
@@ -406,7 +406,7 @@ export function $$M1({
                     iconURL,
                     parentNodeID
                   } = e;
-                  let u = j({
+                  let u = createWidget({
                     pluginID: _pluginID2,
                     widgetName,
                     pluginVersionID,

@@ -5,7 +5,7 @@ import { atom, atomStoreManager } from '../figma_app/27355'
  * EventEmitter class for managing event listeners.
  * Original: class r
  */
-class EventEmitter {
+export class EventEmitter {
   listenerMap: Map<string, Set<(event: any) => void>> = new Map()
 
   /**

@@ -7,7 +7,7 @@ import { BannerMessage } from "../905/363675";
 import { AppStateTsApi } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import u from "classnames";
-import { wY, cU } from "../figma_app/708845";
+import { useResizeObserverRef, initialSize } from "../figma_app/708845";
 import { F as _$$F } from "../905/680873";
 import { BrowserInfo } from "../figma_app/778880";
 import { CloseButton } from "../905/17223";
@@ -33,7 +33,7 @@ export function $$w0(e) {
     dataTestId
   } = e;
   let R = useRef(null);
-  let L = wY(R) ?? cU;
+  let L = useResizeObserverRef(R) ?? initialSize;
   let P = U1(R);
   switch (useEffect(() => {
     let e = document.documentElement.style;

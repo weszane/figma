@@ -136,7 +136,7 @@ import { y as _$$y4 } from "../figma_app/13082";
 import { z as _$$z } from "../vendor/999105";
 import { W as _$$W4 } from "../905/592530";
 import { useDebouncedCallback } from "use-debounce";
-import { P as _$$P4 } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { selectCurrentUser } from "../905/372672";
 import { L as _$$L2 } from "../1156/365427";
 import { N as _$$N3 } from "../1156/229926";
@@ -199,7 +199,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { FeatureFlag } from "../905/652992";
 import { N as _$$N5 } from "../figma_app/268271";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
-import { q6k } from "../figma_app/6204";
+import { FigmakeSelectedDesignSystemOnboarding } from "../figma_app/6204";
 import { nM as _$$nM, nc as _$$nc, NJ } from "../figma_app/570630";
 import { jx, Ic } from "../figma_app/198516";
 import { u as _$$u } from "../1156/83782";
@@ -3463,7 +3463,7 @@ function rL({
   let M = 0 === t.length ? jsx("div", {
     className: "x78zum5 xdt5ytf x98rzlu x1iyjqo2 xs83m0k x1r8uery xysyzu8 xl56j7k",
     children: s
-  }) : jsxs(_$$P4, {
+  }) : jsxs(RecordingScrollContainer, {
     className: "x78zum5 xdt5ytf x98rzlu x1iyjqo2 xs83m0k x1r8uery xb3r6kr xjkvuk6",
     scrollContainerRef: h,
     onScroll: handleScroll,
@@ -3851,7 +3851,7 @@ function rD({
   let T = 0 === t.length ? jsx("div", {
     className: "x78zum5 xdt5ytf x98rzlu x1iyjqo2 xs83m0k x1r8uery xysyzu8 xl56j7k",
     children: s
-  }) : jsxs(_$$P4, {
+  }) : jsxs(RecordingScrollContainer, {
     className: "x78zum5 xdt5ytf x98rzlu x1iyjqo2 xs83m0k x1r8uery xb3r6kr",
     scrollContainerRef: h,
     onScroll: handleScroll,
@@ -4422,7 +4422,7 @@ function iy({
     isShowing,
     complete
   } = _$$e5({
-    overlay: q6k,
+    overlay: FigmakeSelectedDesignSystemOnboarding,
     priority: _$$N5.DEFAULT_MODAL
   }, [o]);
   let x = useCurrentFileKey();

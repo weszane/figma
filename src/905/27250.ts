@@ -9,7 +9,7 @@ import { RenderListByChunks } from "../905/605383";
 import { getI18nString } from "../905/303541";
 import { getLibraryAgeLabel } from "../figma_app/646357";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { Hj, tD } from "../905/682977";
+import { TableRow, SortableHeaderCell } from "../905/682977";
 var d = l;
 let f = "library_item_stats--avatarColumn--do7-S text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let _ = "library_item_stats--caretColumn--rxdCY";
@@ -98,9 +98,9 @@ export class $$b0 extends PureComponent {
         children: this.props.showingStateStats ? getI18nString("design_systems.libraries_modal.all_variants") : getI18nString("design_systems.libraries_modal.component_statistics")
       }), jsx("div", {
         ref: this.onSortScrollTargetRef
-      }), jsxs(Hj, {
+      }), jsxs(TableRow, {
         className: "library_item_stats--statsTableHeaderRow--rCg6s library_modal_stats--headerRow--MTZxi text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: [e.map(e => jsx(tD, {
+        children: [e.map(e => jsx(SortableHeaderCell, {
           className: d()(e.className, {
             "library_item_stats--selectedCol--ZqfRg library_modal_stats--selectedCol--pwGl4": this.state.sortBy === e.sortBy
           }),
@@ -150,7 +150,7 @@ class v extends PureComponent {
   }
   render() {
     let e = this.props.stat;
-    return jsxs(Hj, {
+    return jsxs(TableRow, {
       className: "library_item_stats--row--CVlCa text--fontPos11--2LvXf text--_fontBase--QdLsd",
       onMouseDown: this.viewComponent,
       children: [jsxs("div", {

@@ -12,7 +12,7 @@ import { hasOrgUsersForUser } from "../figma_app/951233";
 import { hasClientMeta, isWidget } from "../figma_app/45218";
 import { isSubscription } from "../905/54385";
 import { bX } from "../figma_app/792917";
-import { cU, ox, ab } from "../figma_app/870683";
+import { generateAbsoluteHubFileUrl, generateAbsoluteCommunityWidgetUrl, generateAbsoluteCommunityPluginUrl } from "../figma_app/870683";
 import { dOH } from "../figma_app/27776";
 import { Xk, LL, iZ as _$$iZ, _1 } from "../5430/868766";
 export function $$v4(e) {
@@ -38,17 +38,17 @@ class b extends PureComponent {
     this.getSubjectBodyForResource = () => hasClientMeta(this.props.resource) ? {
       resourceSubject: getI18nString("community.reporting.reporting_an_inappropriate_file"),
       resourceBody: getI18nString("community.reporting.i_want_to_report_this_file_for_violating_the_community_guidelines_resource_url", {
-        resourceUrl: cU(this.props.resource.id)
+        resourceUrl: generateAbsoluteHubFileUrl(this.props.resource.id)
       })
     } : isWidget(this.props.resource) ? {
       resourceSubject: getI18nString("community.reporting.reporting_an_inappropriate_widget"),
       resourceBody: getI18nString("community.reporting.i_want_to_report_this_widget_for_violating_the_community_guidelines_resource_url", {
-        resourceUrl: ox(this.props.resource.id)
+        resourceUrl: generateAbsoluteCommunityWidgetUrl(this.props.resource.id)
       })
     } : {
       resourceSubject: getI18nString("community.reporting.reporting_an_inappropriate_plugin"),
       resourceBody: getI18nString("community.reporting.i_want_to_report_this_plugin_for_violating_the_plugin_guidelines_resource_url", {
-        resourceUrl: ab(this.props.resource.id)
+        resourceUrl: generateAbsoluteCommunityPluginUrl(this.props.resource.id)
       })
     };
   }

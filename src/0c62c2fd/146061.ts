@@ -7,7 +7,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { ButtonSecondary, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { f as _$$f } from "../0c62c2fd/277163";
@@ -128,7 +128,7 @@ export function $$M0(e) {
       truncateTitleText: !0,
       children: jsxs("div", {
         className: "folder_move--main--TkW9w file_move--main--fz-As",
-        children: [jsx(_$$P, {
+        children: [jsx(RecordingScrollContainer, {
           className: "folder_move--teamSectionBody--LACBL file_move--teamSectionBody--jIFZO",
           children: jsx("div", {
             className: "folder_move--teamSection---S02k file_move--teamSection--mI5yE",

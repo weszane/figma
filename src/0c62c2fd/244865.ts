@@ -13,14 +13,14 @@ import { FFileType } from "../figma_app/191312";
 import { N as _$$N } from "../figma_app/268271";
 import { VideoOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
-import { CBZ, qiY, TUm } from "../figma_app/6204";
+import { FigmakePromoOverlay, FigmaMakeUpsellInDesignEditorOverlay, FigmakeFileCreationTooltip } from "../figma_app/6204";
 import { O } from "../0c62c2fd/621155";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { dayjs } from "../905/920142";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { eC } from "../905/539601";
+import { createLifecycleAtomFamily } from "../905/539601";
 import { E as _$$E } from "../0c62c2fd/358013";
 let N = userFlagExistsAtomFamily("has_created_figma_make_file");
 export function $$C0({
@@ -29,9 +29,9 @@ export function $$C0({
   let t = function () {
     let e = _$$E();
     let t = getFeatureFlags().marketing_promo_modal_figmake_launch;
-    let r = useAtomWithSubscription(eC(CBZ.lifecycle));
+    let r = useAtomWithSubscription(createLifecycleAtomFamily(FigmakePromoOverlay.lifecycle));
     let a = useAtomWithSubscription(N);
-    let s = useAtomWithSubscription(eC(qiY.lifecycle));
+    let s = useAtomWithSubscription(createLifecycleAtomFamily(FigmaMakeUpsellInDesignEditorOverlay.lifecycle));
     return resourceUtils.all([e, r, a, s]).transform(([e, r, a, s]) => {
       if (t) {
         if (!r.lifecycleState || 0 === r.lifecycleState.count) return !1;
@@ -48,7 +48,7 @@ export function $$C0({
     isShowing,
     complete
   } = _$$e({
-    overlay: TUm,
+    overlay: FigmakeFileCreationTooltip,
     priority: _$$N.SECONDARY_MODAL,
     experiment: {
       check: r,

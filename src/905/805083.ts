@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef } from "react";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TrackingKeyEnum } from "../905/696396";
@@ -9,12 +9,12 @@ import { a as _$$a } from "../905/275092";
 import { U } from "../905/540113";
 import { OverviewStatsView } from "../905/167005";
 import { i as _$$i } from "../905/565139";
-import { V } from "../905/697254";
+import { StatValueType } from "../905/697254";
 import { KZ } from "../905/193404";
 import { _4 } from "../905/627262";
 import { nZ } from "../figma_app/277330";
 import { U7 } from "../905/712714";
-import { t as _$$t2 } from "../905/414363";
+import { TrackingWrapper } from "../905/414363";
 import { l as _$$l, n as _$$n } from "../905/402643";
 export let $$v0 = memo(function ({
   libraryFileKey: e,
@@ -42,7 +42,7 @@ export let $$v0 = memo(function ({
   }), [t.key]);
   let x = useRef(null);
   let S = nZ(x);
-  return jsx(_$$t2, {
+  return jsx(TrackingWrapper, {
     page: TrackingKeyEnum.DSA_VARIABLE_VIEW,
     properties: E,
     children: jsxs("div", {
@@ -54,7 +54,7 @@ export let $$v0 = memo(function ({
         children: p ? null : jsx(U, {
           asset: t
         })
-      }), jsxs(P, {
+      }), jsxs(RecordingScrollContainer, {
         width: l,
         className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         ref: x,
@@ -84,28 +84,28 @@ function I({
     enabled: !!e
   });
   let s = [{
-    type: V.DESCRIPTION_AND_IMAGE,
+    type: StatValueType.DESCRIPTION_AND_IMAGE,
     description: void 0,
     imageData: {
       type: "variable",
       variableType: i
     }
   }, {
-    type: V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.total"),
     count: r.data?.summary.total_usages ?? 0,
     word: getI18nString("design_systems.libraries_modal.plural.instance", {
       instanceCount: r.data?.summary.total_usages ?? 0
     })
   }, {
-    type: V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.used_by"),
     count: r.data?.summary.total_teams ?? 0,
     word: getI18nString("design_systems.libraries_modal.plural.team", {
       teamCount: r.data?.summary.total_teams ?? 0
     })
   }, {
-    type: V.STAT,
+    type: StatValueType.STAT,
     header: getI18nString("design_systems.libraries_modal.used_in"),
     count: r.data?.summary.total_files ?? 0,
     word: getI18nString("design_systems.libraries_modal.plural.file", {

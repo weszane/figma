@@ -30,7 +30,7 @@ import { kG } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
 import { calculatePickerPositionLeft } from "../905/959568";
 import { LengthInput } from "../figma_app/178475";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { Zk, ks } from "../figma_app/626177";
 import { Z as _$$Z } from "../905/278240";
 import { I as _$$I } from "../905/439783";
@@ -217,9 +217,9 @@ function Q({
       })
     }, `add-breakpoint-${e.rangeString}`));
   });
-  return jsxs(Cf, {
+  return jsxs(ConnectedPointingDropdown, {
     targetRect: r,
-    type: it.DEFAULT,
+    type: DropdownType.DEFAULT,
     lean: "left",
     children: [d, d.length > 0 && jsx(wv, {}), p, u.length > 0 && jsx(wv, {}), jsx(c$, {
       onClick: a,

@@ -9,7 +9,7 @@ import { UserAvatar } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { Mr } from "../figma_app/795938";
 import { dY } from "../905/838765";
-import { Ij, OV } from "../905/988303";
+import { IconMetricComments, IconMetricButton } from "../905/988303";
 var l = o;
 export function $$f0(e) {
   let t = e.name || getI18nString("fullscreen.fullscreen_view_selector.untitled");
@@ -170,9 +170,9 @@ export function $$f0(e) {
       }), metricFooter && jsx(dY.ResourceActionContainer, {
         children: jsx("div", {
           className: "publish_file_resource_modal_card--publishFileResourceModalCardMetric--8WMVB",
-          children: metricFooter.isPaid ? jsx(Ij, {
+          children: metricFooter.isPaid ? jsx(IconMetricComments, {
             metric: metricFooter.duplicateCount
-          }) : jsx(OV, {
+          }) : jsx(IconMetricButton, {
             metric: metricFooter.duplicateCount,
             isActive: !1
           })

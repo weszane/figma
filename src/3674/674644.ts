@@ -8,7 +8,7 @@ import { Pt, xJ } from "../figma_app/422471";
 import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint } from "../figma_app/473493";
 import { J } from "../figma_app/261874";
 import { UpgradeAction } from "../905/370443";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { LZ } from "../figma_app/101956";
 import { NT, mp } from "../figma_app/579169";
@@ -20,7 +20,7 @@ import { OnboardingModal } from "../905/425180";
 import { U } from "../figma_app/65327";
 import { PositioningStrategy } from "../905/748636";
 import { oR } from "../figma_app/598952";
-import { dvJ } from "../figma_app/6204";
+import { DevModeOnboardingTooltipOverlay } from "../figma_app/6204";
 let $$A1 = "https://help.figma.com/hc/articles/15023124644247-Guide-to-Dev-Mode";
 let I = buildUploadUrl("31fafead8c196706e91abf57cbdece011da1a199");
 export function $$E0() {
@@ -41,7 +41,7 @@ export function $$E0() {
     isShowing,
     uniqueId
   } = _$$e({
-    overlay: dvJ,
+    overlay: DevModeOnboardingTooltipOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [T, S, l, E]);
   useEffect(() => {
@@ -55,7 +55,7 @@ export function $$E0() {
       }
     });
   }, [n, C, e, t, T, P, l, S, E, show]);
-  _$$E(uniqueId, "Enter Inspect Mode", () => {
+  useEventForwarder(uniqueId, "Enter Inspect Mode", () => {
     isShowing && complete();
   });
   return jsx(OnboardingModal, {

@@ -18,7 +18,7 @@ import { VideoOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { ArrowPosition } from "../905/858282";
-import { pjo } from "../figma_app/6204";
+import { FigJamSectionPresetsAnnouncementOverlay } from "../figma_app/6204";
 import { rM, dO } from "../figma_app/318123";
 import { c as _$$c2 } from "../905/850166";
 import { w as _$$w2 } from "../figma_app/106955";
@@ -57,7 +57,7 @@ export function $$R2() {
     isShowing,
     complete
   } = _$$e({
-    overlay: pjo,
+    overlay: FigJamSectionPresetsAnnouncementOverlay,
     priority: _$$N.SECONDARY_MODAL
   }, [D, R, G]);
   let J = 1e3 * parseFloat(_$$H) + 1e3;

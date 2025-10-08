@@ -8,7 +8,7 @@ import { useLibraryFileLink } from "../905/217163";
 import { areAllSelectedInstances } from "../905/456912";
 import { selectCurrentFile } from "../figma_app/516028";
 import { K } from "../905/770444";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { M$ } from "../figma_app/297822";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 export function $$f0({
@@ -21,7 +21,7 @@ export function $$f0({
   let A = K(!0);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let b = selectCurrentFile();
   let v = areAllSelectedInstances();
   let I = useIsSelectedFigmakeFullscreen();

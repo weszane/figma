@@ -21,9 +21,9 @@ import { alwaysTrue } from "../figma_app/863319";
 import { SearchFilterWorkspaceView } from "../figma_app/43951";
 import { SearchAnalytics } from "../905/574958";
 import { Q0 } from "../905/994947";
-import { Of } from "../905/378567";
+import { PrivatePluginsSortConfig } from "../905/378567";
 import { Of as _$$Of } from "../905/869282";
-import { nD, uB } from "../905/572991";
+import { publicWidgetsSearchModule, privateWidgetsSearchModule } from "../905/572991";
 import { L as _$$L } from "../905/804347";
 import { zQ, ZG } from "../905/376829";
 import { hP, p_, Vg, Vz, g4, sb, UL, G2, xV, YF, p$, IC, jI, q6, Ki } from "../905/150269";
@@ -41,7 +41,7 @@ import { useKeyboardNavigationItem, KeyboardNavigationProvider } from "../figma_
 import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { XW } from "../905/182534";
-import { gt, Ri, j3, Gb, ht } from "../figma_app/327577";
+import { getSearchScopeFromState, setSearchQuery, setIsSearchBarFocused, handleSearchResultClick, initiateDesktopNewTabSearch } from "../figma_app/327577";
 import { filePutAction } from "../figma_app/78808";
 import { APILoadingStatus } from "../905/520829";
 import { getDesignFileUrl } from "../905/612685";
@@ -59,7 +59,7 @@ import { getSelectedView } from "../figma_app/386952";
 import { z5, L8, q4 } from "../905/124270";
 import { K as _$$K } from "../905/328468";
 import { Y as _$$Y } from "../905/720957";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { searchEndSession } from "../figma_app/925970";
 import { registerModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
@@ -76,7 +76,7 @@ import { PP as _$$PP, xx, v$ } from "../905/981129";
 import { ServiceCategories } from "../905/165054";
 import { reportError } from "../905/11";
 import { useIsCommunityHubView } from "../figma_app/740025";
-import { Q as _$$Q2 } from "../905/618914";
+import { waitForAtomStore } from "../905/618914";
 import { FOrganizationLevelType, FMemberRoleType } from "../figma_app/191312";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { getPlanFeaturesTeamAtomFamily, getPlanUserTeamAtomFamily } from "../905/276025";
@@ -97,10 +97,10 @@ let F = {
 };
 let j = {
   [PublicModelType.PUBLIC_PLUGINS]: _$$Of,
-  [PublicModelType.PRIVATE_PLUGINS]: Of,
+  [PublicModelType.PRIVATE_PLUGINS]: PrivatePluginsSortConfig,
   [PublicModelType.PUBLIC_PROFILES]: hP,
-  [PublicModelType.PUBLIC_WIDGETS]: nD.listStyle,
-  [PublicModelType.PRIVATE_WIDGETS]: uB.listStyle
+  [PublicModelType.PUBLIC_WIDGETS]: publicWidgetsSearchModule.listStyle,
+  [PublicModelType.PRIVATE_WIDGETS]: privateWidgetsSearchModule.listStyle
 };
 class U extends Component {
   componentDidMount() {
@@ -422,12 +422,12 @@ export function $$e_0() {
       searchResults: (e.responses.files?.results ?? []).slice(0, 5)
     };
   }();
-  let u = useSelector(e => gt(e));
+  let u = useSelector(e => getSearchScopeFromState(e));
   let _ = useCallback(t => {
     "" === r && "" !== t && e(startSearchSessionAction({
       entryPoint: "desktop_new_tab"
     }));
-    e(Ri(t));
+    e(setSearchQuery(t));
     e(searchThunk({
       query: t,
       searchModelType: PublicModelType.FILES,
@@ -438,17 +438,17 @@ export function $$e_0() {
     }));
   }, [e, r, u]);
   let h = useCallback(() => {
-    e(Ri(""));
+    e(setSearchQuery(""));
     e(searchClearQueryAction({}));
   }, [e]);
   let m = useCallback(t => {
-    e(j3(!0));
+    e(setIsSearchBarFocused(!0));
     "" === r || t || e(startSearchSessionAction({
       entryPoint: "desktop_new_tab"
     }));
   }, [e, r]);
   let g = useCallback(() => {
-    e(j3(!1));
+    e(setIsSearchBarFocused(!1));
     e(searchEndSessionAction());
   }, [e]);
   let f = !isLoading && !!s && 0 !== searchResults.length;
@@ -613,7 +613,7 @@ function eg(e) {
     t(filePutAction({
       file: result.model
     }));
-    t(Gb({
+    t(handleSearchResultClick({
       result,
       index,
       clickAction: SearchAnalytics.Query.ClickAction.CLICK
@@ -709,7 +709,7 @@ function ef(e) {
     },
     ref: setKeyboardNavigationElement,
     href: o,
-    onClick: () => t(ht()),
+    onClick: () => t(initiateDesktopNewTabSearch()),
     children: jsx("div", {
       className: $()({
         "search_bar--seeAllItem--YACGs": !0,
@@ -786,7 +786,7 @@ let eK = registerModal(function () {
           children: jsx(_$$Y, {
             hideSearchPreview: t.data?.hideSearchPreview
           })
-        }), jsxs(_$$P, {
+        }), jsxs(RecordingScrollContainer, {
           className: xx,
           children: [o && jsx("div", {
             className: v$,
@@ -835,8 +835,8 @@ export function $$e53({
       }
     }));
     return useCallback(async () => {
-      let r = await _$$Q2(getPlanFeaturesTeamAtomFamily(!0));
-      let n = await _$$Q2(getPlanUserTeamAtomFamily(!0));
+      let r = await waitForAtomStore(getPlanFeaturesTeamAtomFamily(!0));
+      let n = await waitForAtomStore(getPlanUserTeamAtomFamily(!0));
       let i = isOrgOrEnterprisePlan(r);
       let a = checkOrgUserPermission(n, FMemberRoleType.MEMBER);
       e(handleSearchParameterChangeThunk({

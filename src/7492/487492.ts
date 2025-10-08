@@ -18,7 +18,7 @@ import { AutoLayout } from '../905/470281';
 import { PluginImage } from '../905/480825';
 import { stripHtmlTags } from '../905/491152';
 import { SvgComponent } from '../905/714743';
-import { j as _$$j } from '../905/813868';
+import { createWidget } from '../905/813868';
 import { j as _$$j2 } from '../905/834956';
 import { useCurrentUserOrg } from '../905/845253';
 import { useDropdownState } from '../905/848862';
@@ -48,7 +48,7 @@ import { cH } from '../figma_app/212260';
 import { dR, Gt, RK } from '../figma_app/248118';
 import { getPluginVersion, isDevModeWithCodegen, pluginMetadata } from '../figma_app/300692';
 import { logAndTrackCTA } from '../figma_app/314264';
-import { ur, xY } from '../figma_app/439332';
+import { UpdatePaymentButton, PaymentInfoTooltip } from '../figma_app/439332';
 import { $3, op, QP } from '../figma_app/487970';
 import { SimpleComponentType } from '../figma_app/504088';
 import { ButtonBasePrimary } from '../figma_app/637027';
@@ -613,7 +613,7 @@ function eP(e) {
   let $ = B && !E ? jsx(e$, {
     plugin: R,
     hideFreeTrialBadge: !0
-  }) : D ? jsx(ur, {}) : H ? jsx($$ez5, {
+  }) : D ? jsx(UpdatePaymentButton, {}) : H ? jsx($$ez5, {
     pluginId: e.pluginId,
     buttonRef: keyboardNavigationButtonRef,
     usePrimaryButtonStyles: !0
@@ -793,7 +793,7 @@ function eA(e) {
     }
   }, [i, e.widgetId, f, j]);
   let b = useCallback(() => {
-    _$$j({
+    createWidget({
       pluginID: e.widgetId,
       widgetName: o.name,
       pluginVersionID: o.id,
@@ -898,7 +898,7 @@ function eS(e) {
     }
   }, [i, e.localFileId, a, e.isRecentTile, v]);
   let m = useCallback(() => {
-    r && _$$j({
+    r && createWidget({
       pluginID: r.plugin_id,
       widgetName: r.name,
       pluginVersionID: '',
@@ -1071,7 +1071,7 @@ let eM = memo(e => {
             })
           }), v && jsx('div', {
             className: Y9,
-            children: jsx(xY, {})
+            children: jsx(PaymentInfoTooltip, {})
           })]
         })
       }), jsx('div', {
@@ -1254,7 +1254,7 @@ export function $$eH1(e) {
   }, [i, e.widgetId, g, o]);
   let x = useCallback(() => {
     let e = getPluginVersion(t);
-    _$$j({
+    createWidget({
       pluginID: e.plugin_id,
       widgetName: e.name,
       pluginVersionID: e.id,

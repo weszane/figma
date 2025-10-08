@@ -5,7 +5,7 @@ import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { useDropdown } from "../905/848862";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { U, i as _$$i } from "../905/649519";
 import { i as _$$i2 } from "../905/415810";
 import { getVariableTypeInfo } from "../905/604606";
@@ -50,7 +50,7 @@ export function $$x0({
       resolvedType: E.current.resolvedType,
       onCreateVariable: T,
       onClose: T
-    }) : null), showing && f.current && jsx(Cf, {
+    }) : null), showing && f.current && jsx(ConnectedPointingDropdown, {
       arrowOffsetFromRectLeft: 14,
       leanPadding: 0,
       lean: "right",

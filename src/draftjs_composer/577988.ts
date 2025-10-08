@@ -10,7 +10,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { UserAvatar, AvatarSize } from "../905/590952";
 import { setTypeaheadPositionOffset } from "../figma_app/770088";
 import { createComment } from "../figma_app/703138";
-import { mz } from "../figma_app/12220";
+import { getPinSizeOGx } from "../figma_app/12220";
 import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { j as _$$j } from "../draftjs_composer/390258";
 import { DROPDOWN_ACTION_TIMEOUT } from "../figma_app/188152";
@@ -90,7 +90,7 @@ export function $$D1(e) {
   let t = selectCurrentUser();
   let n = useDispatch();
   let r = _B();
-  let l = mz();
+  let l = getPinSizeOGx();
   let [m, d] = useState(!0);
   let p = useSelector(e => e.comments.typeahead);
   let h = useCurrentFileKey();

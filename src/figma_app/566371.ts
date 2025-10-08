@@ -176,7 +176,7 @@ export function handleStatusChangeEffect(e: any, t: (data: any) => void) {
  */
 export function getAtomWithEnabledCheck(e: any, t: any) {
   const enabled = t?.enabled
-  const value = useAtomWithSubscription(e)
+  const value: any = useAtomWithSubscription(e)
   if (enabled !== false)
     return value
 }

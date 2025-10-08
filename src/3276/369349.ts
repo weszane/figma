@@ -5,7 +5,7 @@ import { useSingleEffect } from "../905/791079";
 import { getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { E6 } from "../3276/240191";
 import { PD } from "../figma_app/101956";
@@ -14,7 +14,7 @@ import { MULTIPLAYER_USER_STATE_CHANGE } from "../figma_app/915202";
 import { N } from "../figma_app/268271";
 import { OnboardingRenderFrame } from "../905/284399";
 import { OverlayType } from "../figma_app/450829";
-import { hPP } from "../figma_app/6204";
+import { MultiplayerSpotlightNudgeNux } from "../figma_app/6204";
 let $$b = () => getI18nString("collaboration.spotlight.nudge_spotlight.title");
 export function $$y0() {
   let e = useAtomWithSubscription(PD);
@@ -23,7 +23,7 @@ export function $$y0() {
   let r = useCanAccessFullDevMode();
   let y = n && !r;
   let C = _$$e({
-    overlay: hPP,
+    overlay: MultiplayerSpotlightNudgeNux,
     priority: N.SECONDARY_MODAL
   }, [e, t]);
   let w = useCallback(() => {
@@ -37,7 +37,7 @@ export function $$y0() {
   let j = useCallback(() => {
     C.isShowing || w();
   }, [C.isShowing, w]);
-  E(C.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, j);
+  useEventForwarder(C.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, j);
   return jsx(OnboardingRenderFrame, {
     element: _$$_,
     isShowing: C.isShowing,

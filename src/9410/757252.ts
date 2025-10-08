@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppStateTsApi, DesignGraphElements, Fullscreen, Command } from "../figma_app/763686";
 import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { yE } from "../905/125333";
+import { sharedStateAtom } from "../905/125333";
 import { V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
 import { consumptionPaywallUtils } from "../905/224";
@@ -88,7 +88,7 @@ export function $$D4(e, t) {
   return t ? `${i} - ${t}` : i;
 }
 export function $$M2(e) {
-  let t = useAtomWithSubscription(yE);
+  let t = useAtomWithSubscription(sharedStateAtom);
   if (!useSelector(e => e?.mirror?.appModel?.currentTool === DesignGraphElements.SHAPE_WHITEBOARD_PLATFORM) || !t) return !1;
   let i = e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key;
   let r = e.type;

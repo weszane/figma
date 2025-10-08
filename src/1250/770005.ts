@@ -18,7 +18,7 @@ import { useCurrentPublicPlan } from "../figma_app/465071";
 import { FileBrowserLocation } from "../figma_app/915202";
 import { N as _$$N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
-import { CBZ } from "../figma_app/6204";
+import { FigmakePromoOverlay } from "../figma_app/6204";
 import { M } from "../1250/475573";
 import { jl, yd, aX } from "../1250/868645";
 let E = {
@@ -89,7 +89,7 @@ export function $$I0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: CBZ,
+    overlay: FigmakePromoOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [e, O]);
   let {

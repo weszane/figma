@@ -330,6 +330,12 @@ interface Plugin {
 
 interface RunPluginArgs {
   plugin: Plugin;
+  command?: string;
+  queryMode?: boolean;
+  triggeredFrom?: string;
+  openFileKey?: string;
+  isWidget?: boolean;
+  runMode?: 'default' | 'headless';
 }
 
 type RunMode = 'run-forever' | 'run-and-terminate';

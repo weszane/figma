@@ -10,7 +10,7 @@ import { showModalHandler } from "../905/156213";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { NV, OX, x2, qu, qi } from "../figma_app/33586";
 import { usePluginedWidgets, findLocalPluginById, findPublishedWidgetById, useAllowlistedPlugins, getLocalPlugins, findPublishedPluginById } from "../figma_app/844435";
-import { j } from "../905/813868";
+import { createWidget } from "../905/813868";
 import { LR } from "../figma_app/120210";
 import { useDropdownState } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
@@ -20,9 +20,9 @@ import { ManifestErrorType } from "../figma_app/155287";
 import { bE, aY } from "../figma_app/78725";
 import { setupUserPluginPreferences } from "../figma_app/545541";
 import { r as _$$r } from "../905/319631";
-import { ab, ox } from "../figma_app/870683";
+import { generateAbsoluteCommunityPluginUrl, generateAbsoluteCommunityWidgetUrl } from "../figma_app/870683";
 import { j as _$$j } from "../905/834956";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { ak } from "../figma_app/212260";
 export function $$w2(e) {
   let t = useDispatch();
@@ -31,7 +31,7 @@ export function $$w2(e) {
   let d = findLocalPluginById(e.widgetId);
   let c = findPublishedWidgetById(e.widgetId);
   let p = desktopAPIInstance && !!c && !d;
-  return jsxs(Cf, {
+  return jsxs(ConnectedPointingDropdown, {
     targetRect: e.targetRect,
     lean: e.lean || "left",
     minWidth: 120,
@@ -59,7 +59,7 @@ export function $$w2(e) {
       children: ["\u26A0 ", renderI18nText("universal_insert.in_development_version")]
     }) : jsx(c$, {
       onClick: () => {
-        j({
+        createWidget({
           pluginID: i.plugin_id,
           widgetName: i.name,
           pluginVersionID: "",
@@ -69,7 +69,7 @@ export function $$w2(e) {
       children: renderI18nText("universal_insert.in_development_version")
     }), jsx(c$, {
       onClick: () => {
-        j({
+        createWidget({
           pluginID: i.plugin_id,
           widgetName: i.name,
           pluginVersionID: i.id,
@@ -126,7 +126,7 @@ export function $$L1(e) {
   });
   let m = useCallback(() => {
     t(_$$S({
-      url: e.resourceType === ResourceTypeNoComment.PLUGIN ? ab(e.resourceId) : ox(e.resourceId),
+      url: e.resourceType === ResourceTypeNoComment.PLUGIN ? generateAbsoluteCommunityPluginUrl(e.resourceId) : generateAbsoluteCommunityWidgetUrl(e.resourceId),
       linkType: e.resourceType === ResourceTypeNoComment.PLUGIN ? "plugin" : "widget"
     }));
   }, [t, e.resourceType, e.resourceId]);
@@ -256,7 +256,7 @@ export function $$j6(e) {
     ...e,
     dispatch: t,
     showPoint: !0,
-    type: it.DEFAULT,
+    type: DropdownType.DEFAULT,
     onSelectItem: e => {
       e.callback && e.callback("", null, t);
     }

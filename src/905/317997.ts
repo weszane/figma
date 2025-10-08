@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { X, U as _$$U } from "../905/77000";
@@ -60,7 +60,7 @@ export function $$w1(e) {
   let G = !!D && D.library_key === libraryKey;
   let z = _$$W();
   let H = z ? PV : eT;
-  let W = jsxs(_$$P, {
+  let W = jsxs(RecordingScrollContainer, {
     width,
     className: cssBuilderInstance.flexGrow1.$,
     children: [jsx(LibraryBestMatchesComponent, {

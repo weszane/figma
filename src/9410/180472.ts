@@ -9,7 +9,7 @@ import { P as _$$P } from "../vendor/348225";
 import { AnimatePresence } from "../vendor/930821";
 import { fU } from "../905/492004";
 import { useHandleMouseEvent } from "../figma_app/878298";
-import { P as _$$P2 } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { w9, rT } from "../figma_app/124493";
@@ -373,7 +373,7 @@ let F = memo(function ({
                 opacity: 0,
                 transform: `scale(${1 / V})`
               },
-              children: jsx(_$$P2, {
+              children: jsx(RecordingScrollContainer, {
                 ref: v,
                 maxHeight: $$A2 * $$O0,
                 width: 240,

@@ -12,10 +12,10 @@ import { canAccessDevModeWithOrg } from "../905/898378";
 import { InspectState } from "../905/560959";
 import { $ as _$$$ } from "../905/532878";
 import { createOptimistThunk } from "../905/350402";
-import { $ as _$$$2 } from "../905/489647";
+import { tryPluginInFullscreen } from "../905/489647";
 import { selectViewAction } from "../905/929976";
 import { kq } from "../905/292918";
-import { Ad } from "../905/300250";
+import { handleMergeOnFileOpen } from "../905/300250";
 import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
 import { showModalHandler } from "../905/156213";
 import { searchThunk } from "../905/977218";
@@ -24,7 +24,7 @@ import { Xg } from "../figma_app/199513";
 import { fullscreenValue, fullscreenPromise } from "../figma_app/455680";
 import { subscribeToContainingPage } from "../figma_app/582924";
 import { waitForJoinStatus } from "../905/346794";
-import { Lp } from "../905/309846";
+import { executeTeamUpgrade } from "../905/309846";
 import { usedComponentsPromise, findLibraryNameForAsset } from "../figma_app/646357";
 import { fetchTeamRoles } from "../905/672897";
 import { FEditorType } from "../figma_app/53721";
@@ -96,7 +96,7 @@ let $$H = createOptimistThunk((e, t, {
     }
     "1" !== E.vars && atomStoreManager.set(_$$$, null);
     f.user && E["try-plugin-id"] && permissionScopeHandler.user("try-plugin-desktop", () => {
-      e.dispatch(_$$$2({
+      e.dispatch(tryPluginInFullscreen({
         tryPluginId: E["try-plugin-id"],
         tryPluginName: E["try-plugin-name"],
         tryPluginVersionId: E["try-plugin-version-id"],
@@ -164,7 +164,7 @@ let $$H = createOptimistThunk((e, t, {
           let i = f.openFile;
           if (!i) return;
           E["checkpoint-diff-url"] && (t.checkpointDiffURL = E["checkpoint-diff-url"]);
-          e.dispatch(Ad({
+          e.dispatch(handleMergeOnFileOpen({
             mergeParams: t,
             editingFile: {
               key: i.key,
@@ -206,7 +206,7 @@ let $$H = createOptimistThunk((e, t, {
           }), {
             policy: "networkOnly"
           }))[0] || null;
-          Lp(s, o, user, e, {
+          executeTeamUpgrade(s, o, user, e, {
             ...openFile,
             editor_type: openFile.editorType,
             folder_id: openFile.folderId,

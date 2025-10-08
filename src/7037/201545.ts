@@ -8,7 +8,7 @@ import { renderI18nText } from "../905/303541";
 import { AvatarSize } from "../905/590952";
 import { setEditingAttachment, resetComments, setEditingComment, stopEditingComment } from "../figma_app/770088";
 import { showModalHandler } from "../905/156213";
-import { cx, v6, BC } from "../905/504768";
+import { editFeedCommentThunk, PENDING_FEED_COMMENT_ID, deleteFeedCommentThunk } from "../905/504768";
 import { a as _$$a } from "../905/844092";
 import { HH } from "../figma_app/841415";
 import { E } from "../905/565019";
@@ -41,7 +41,7 @@ export function $$T0(e) {
     attachment: null
   })), Promise.resolve()), [e.commentId, e.commentUuid, t]);
   let P = useCallback(() => {
-    t(cx({
+    t(editFeedCommentThunk({
       commentId: e.commentId,
       uuid: e.commentUuid,
       messageMeta: l,
@@ -72,7 +72,7 @@ export function $$T0(e) {
     g(!1);
   }, [t, e.messageMeta]);
   let y = e.commentUser.id === e.user.id;
-  let E = e.commentId.startsWith(v6);
+  let E = e.commentId.startsWith(PENDING_FEED_COMMENT_ID);
   let U = e.reactions.length > 0;
   return jsxs("div", {
     className: "feed_post_details_comments--comment--ScdJc",
@@ -162,7 +162,7 @@ function I(e) {
       type: E,
       data: {
         onConfirm: () => {
-          t(BC({
+          t(deleteFeedCommentThunk({
             commentId: e.commentId,
             uuid: e.commentUuid
           }));
@@ -181,7 +181,7 @@ function I(e) {
     onClick: n,
     children: renderI18nText("comments.delete_comment")
   }, "delete")], [n, onEdit]);
-  return e.commentId.startsWith(v6) ? null : jsx(V, {
+  return e.commentId.startsWith(PENDING_FEED_COMMENT_ID) ? null : jsx(V, {
     hideTarget: e.hideTarget,
     dropdownId: b(e.commentId),
     options: d,

@@ -38,7 +38,7 @@ import { E as _$$E2 } from "../905/142894";
 import { R as _$$R } from "../905/741991";
 import { TreeRow } from "../905/27174";
 import eE from "classnames";
-import { R as _$$R2 } from "../905/307199";
+import { CenterTruncatedText } from "../905/307199";
 import { KeyboardNavigationProvider, useKeyboardNavigationItem } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { A as _$$A2 } from "../f2246930/129503";
@@ -757,7 +757,7 @@ function eU({
         badges: displayProperties.leftBadges
       }), jsx(nK, {
         id: object.displayProperties.primaryId
-      }), jsx(_$$R2, {
+      }), jsx(CenterTruncatedText, {
         className: cssBuilderInstance.overflowHidden.$,
         text: displayProperties.name
       }), jsx(Spacer, {}), matches.filter(({

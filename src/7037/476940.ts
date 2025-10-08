@@ -13,7 +13,7 @@ import { NotModalType } from "../905/11928";
 import { ArrowPosition } from "../905/748636";
 import { d as _$$d } from "../905/811033";
 import { iX } from "../905/415545";
-import { ueY } from "../figma_app/6204";
+import { BrowserNotificationsOnboardingOverlay } from "../figma_app/6204";
 import { n } from "../905/347702";
 import { qH, UU, ym, vH, fD, mk, V_ } from "../905/807385";
 let b = n(() => N.SECONDARY_MODAL);
@@ -28,7 +28,7 @@ export function $$w0({
     isShowing,
     show
   } = _$$e({
-    overlay: ueY,
+    overlay: BrowserNotificationsOnboardingOverlay,
     priority: b()
   });
   useSingleEffect(() => {

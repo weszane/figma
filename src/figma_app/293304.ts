@@ -9,7 +9,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey, useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -40,7 +40,7 @@ export function $$C1({
     height: "hug-contents",
     children: [l && jsx(we, {
       selectedStyleProperties: e
-    }), jsxs(P, {
+    }), jsxs(RecordingScrollContainer, {
       maxHeight: 300,
       width: $$N0,
       children: [jsx(w, {

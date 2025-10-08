@@ -7,9 +7,9 @@ import { getUserId } from "../905/372672";
 import { getCurrentDocumentType } from "../figma_app/190980";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 import { manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { zX } from "../figma_app/882116";
-import { Ag, r7 } from "../905/235578";
+import { ExtensionSource, metaEnterKey } from "../905/235578";
 import { JT } from "../figma_app/930214";
 export function $$g0(e) {
   let t = y(e);
@@ -20,7 +20,7 @@ export function $$g0(e) {
     let r = useDispatch();
     let a = getCurrentDocumentType();
     let o = getUserId();
-    if (!e.types.has(Ag.USER_SAVED) && !JT(e)) return {
+    if (!e.types.has(ExtensionSource.USER_SAVED) && !JT(e)) return {
       displayText: getI18nString("community.saves.save"),
       callback: () => {
         if (save(), a && o) {
@@ -41,9 +41,9 @@ export function $$g0(e) {
   let a = t || r;
   let {
     pop
-  } = cq();
+  } = useNavigationStack();
   if (a) return {
-    shortcuts: [r7],
+    shortcuts: [metaEnterKey],
     onAction: () => {
       a.callback();
       pop();
@@ -74,15 +74,15 @@ function y(e) {
   let {
     unsave
   } = E(e);
-  if (!(e.types.has(Ag.RECENT) || e.types.has(Ag.USER_SAVED) || e.types.has(Ag.LOCAL))) return;
+  if (!(e.types.has(ExtensionSource.RECENT) || e.types.has(ExtensionSource.USER_SAVED) || e.types.has(ExtensionSource.LOCAL))) return;
   let p = !!(hasLocalFileId(extension) && e.publishedExtension);
   return {
     displayText: p ? getI18nString("universal_insert.remove_local_version") : getI18nString("universal_insert.remove"),
     callback: () => {
-      !(types.has(Ag.LOCAL) && hasLocalFileId(extension) && (t(qR(extension.localFileId)), p)) && (types.has(Ag.RECENT) && r && t((manifestContainsWidget(extension) ? removeRecentlyUsedWidgetAction : removeRecentlyUsedPluginAction)({
+      !(types.has(ExtensionSource.LOCAL) && hasLocalFileId(extension) && (t(qR(extension.localFileId)), p)) && (types.has(ExtensionSource.RECENT) && r && t((manifestContainsWidget(extension) ? removeRecentlyUsedWidgetAction : removeRecentlyUsedPluginAction)({
         storeInRecentsKey: r,
         resourceId: extension.plugin_id
-      })), types.has(Ag.USER_SAVED) && unsave());
+      })), types.has(ExtensionSource.USER_SAVED) && unsave());
     }
   };
 }

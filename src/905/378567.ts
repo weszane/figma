@@ -1,48 +1,57 @@
-import { setupLazyComponentFactory } from "../905/992467";
-import _require from "../5430/337035";
-import { jsx, jsxs } from "react/jsx-runtime";
-import { Component, PureComponent, createElement } from "react";
-import { connect } from "react-redux";
-import { LinkPrimitive } from "../figma_app/496441";
-import { ignoreCommandOrShift } from "../905/63728";
-import { BrowserInfo } from "../figma_app/778880";
-import { stripHtmlTags } from "../905/491152";
-import { RelativeTimeDisplay } from "../905/986103";
-import { f as _$$f } from "../905/671470";
-import { C as _$$C } from "../905/196436";
-import { renderI18nText } from "../905/303541";
-import { selectViewAction } from "../905/929976";
-import { getLastUsedEditorType } from "../905/620668";
-import { FFileType } from "../figma_app/191312";
-import { HubResourceCategory } from "../figma_app/350203";
-import { getPluginVersion } from "../figma_app/300692";
-import { ShelfViewType } from "../figma_app/45218";
-import { WidgetSortField } from "../figma_app/162807";
-import { ViewMode } from "../figma_app/756995";
-import { PluginImage } from "../905/480825";
-import { y2 } from "../905/776312";
-import { Qi } from "../figma_app/599917";
-import { ho } from "../figma_app/870683";
-import { li, dn } from "../figma_app/994403";
-import { AB } from "../figma_app/878651";
-import { h as _$$h } from "../905/971482";
-import { p_, qp, JC, PI, HE, JV, KG, Np, BZ, CK, lG, kw, PY, GA, jN, qV, zB, vQ, Qj, kU, lk } from "../905/573610";
-var n;
-var $$r0;
-let f = setupLazyComponentFactory("lazy_cmty_plugin_try_button", {
-  isCodesplit: !0,
+import { Component, createElement, PureComponent } from "react"
+import { connect } from "react-redux"
+import { jsx, jsxs } from "react/jsx-runtime"
+import { ignoreCommandOrShift } from "../905/63728"
+import { C as _$$C } from "../905/196436"
+import { renderI18nText } from "../905/303541"
+import { PluginImage } from "../905/480825"
+import { stripHtmlTags } from "../905/491152"
+import { BZ, CK, GA, HE, JC, jN, JV, KG, kU, kw, lG, lk, Np, p_, PI, PY, Qj, qp, qV, vQ, zB } from "../905/573610"
+import { getLastUsedEditorType } from "../905/620668"
+import { f as _$$f } from "../905/671470"
+import { getValueWithFallback } from "../905/776312"
+import { selectViewAction } from "../905/929976"
+import { createViewModeRenderer } from "../905/971482"
+import { RelativeTimeDisplay } from "../905/986103"
+import { setupLazyComponentFactory } from "../905/992467"
+import { PluginTryButton } from "../5430/337035"
+import { ShelfViewType } from "../figma_app/45218"
+import { WidgetSortField } from "../figma_app/162807"
+import { FFileType } from "../figma_app/191312"
+import { getPluginVersion } from "../figma_app/300692"
+import { HubResourceCategory } from "../figma_app/350203"
+import { LinkPrimitive } from "../figma_app/496441"
+import { Qi } from "../figma_app/599917"
+import { ViewMode } from "../figma_app/756995"
+import { BrowserInfo } from "../figma_app/778880"
+import { generateCommunityPluginUrl } from "../figma_app/870683"
+import { AB } from "../figma_app/878651"
+import { dn, li } from "../figma_app/994403"
+
+// Lazy load the PluginTryButton component
+const LazyPluginTryButton = setupLazyComponentFactory("lazy_cmty_plugin_try_button", {
+  isCodesplit: true,
   ComponentFactory: async () => ({
-    default: (await _require).PluginTryButton
-  })
-});
-function _(e) {
-  return jsx(f, {
+    default: PluginTryButton,
+  }),
+})
+
+/**
+ * Wrapper component for the lazy-loaded PluginTryButton
+ * @param props - Component props
+ */
+const PluginTryButtonWrapper: React.FC<any> = (props) => {
+  return jsx(LazyPluginTryButton, {
     fallback: null,
     errorFallback: null,
-    ...e
-  });
+    ...props,
+  })
 }
-let $$D3 = {
+
+/**
+ * Configuration object for private plugins search view
+ */
+export const PRIVATE_PLUGINS_SEARCH_CONFIG = {
   viewId: "search-private_plugins",
   sortKeys: [WidgetSortField.NAME, WidgetSortField.AUTHOR_NAME, WidgetSortField.UPDATED_AT, WidgetSortField.INSTALL_COUNT, WidgetSortField.RELEVANCY],
   listSortKeys: [WidgetSortField.NAME, WidgetSortField.AUTHOR_NAME, WidgetSortField.UPDATED_AT, WidgetSortField.INSTALL_COUNT],
@@ -54,178 +63,262 @@ let $$D3 = {
       [WidgetSortField.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
       [WidgetSortField.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
       [WidgetSortField.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
-      [WidgetSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance")
+      [WidgetSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
     },
     [ViewMode.LIST]: {
       [WidgetSortField.NAME]: renderI18nText("search.sort_option.name"),
       [WidgetSortField.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
       [WidgetSortField.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
       [WidgetSortField.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
-      [WidgetSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance")
-    }
+      [WidgetSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+    },
   },
   defaultOptions: {
     viewMode: ViewMode.GRID,
     sortMode: {
       sortKey: WidgetSortField.RELEVANCY,
-      sortDesc: !1
-    }
+      sortDesc: false,
+    },
   },
-  includeSortDirection: e => -1 === [WidgetSortField.RELEVANCY].indexOf(e),
-  settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
-};
-let $$L2 = p_;
-export function $$F1(e, t) {
-  return {
-    sortMode: e.sortState.private_plugins,
-    viewMode: y2($$D3.viewId, t, $$D3.defaultOptions.viewMode)
-  };
+  /**
+   * Determines whether sort direction should be included for a given sort key
+   * @param sortKey - The sort key to check
+   */
+  includeSortDirection: (sortKey: WidgetSortField) => ![WidgetSortField.RELEVANCY].includes(sortKey),
+  settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile,
 }
-(e => {
-  class t extends Component {
-    constructor() {
-      super(...arguments);
-      this.onPluginListRowClick = ignoreCommandOrShift(e => {
-        e.preventDefault();
-        this.props.onPluginListRowClick();
-      });
-    }
-    render() {
-      let e = this.props.plugin;
-      if (!e || !e.current_plugin_version_id) return null;
-      let t = getPluginVersion(e);
-      return t ? jsxs("div", {
-        className: this.props.usesTabletOptimizedSidebar ? qp : JC,
-        children: [jsxs(LinkPrimitive, {
-          onClick: this.onPluginListRowClick,
-          href: ho(e.id),
-          className: PI,
-          children: [jsxs(li.IconAndBadgeContainer, {
-            children: [jsx(PluginImage, {
-              plugin: t,
-              className: HE,
-              alt: ""
-            }), jsx(li.BadgeContainer, {
-              children: jsx(dn, {
-                editorType: t.manifest.editorType
-              })
-            })]
-          }), jsxs("div", {
-            className: JV,
-            children: [jsxs("div", {
-              className: KG,
-              children: [jsx("div", {
-                className: Np,
-                children: t.name
-              }), jsx(_$$C, {
-                className: BZ,
-                ...this.props
-              })]
-            }), jsx("div", {
-              className: CK,
-              children: stripHtmlTags(t.description)
-            })]
-          })]
-        }), e.community_publishers?.accepted && e.community_publishers.accepted.length > 0 ? jsx("div", {
-          className: this.props.usesTabletOptimizedSidebar ? lG : kw,
-          children: jsx("span", {
-            className: PY,
-            children: e.community_publishers.accepted.map(e => jsx(Qi, {
-              publisher: e,
-              className: GA,
-              childrenClassName: jN
-            }, e.id))
-          })
-        }) : jsx(Qi, {
-          publisher: e.publisher,
-          className: this.props.usesTabletOptimizedSidebar ? lG : kw
-        }), jsx("div", {
-          className: this.props.usesTabletOptimizedSidebar ? qV : zB,
-          children: jsx(RelativeTimeDisplay, {
-            date: t.created_at
-          })
-        }), jsx("div", {
-          className: this.props.usesTabletOptimizedSidebar ? vQ : Qj,
-          children: jsx(_$$f, {
-            count: e.unique_run_count
-          })
-        }), jsx("div", {
-          className: this.props.usesTabletOptimizedSidebar ? kU : lk,
-          children: jsx(_, {
-            resource: this.props.plugin,
-            universalEditorTypeFallback: this.props.tab ? function (e) {
-              switch (e) {
-                case HubResourceCategory.FIGJAM_PLUGINS:
-                case HubResourceCategory.FIGJAM_WIDGETS:
-                  return FFileType.WHITEBOARD;
-                case HubResourceCategory.FIGMA_DESIGN_PLUGINS:
-                case HubResourceCategory.FIGMA_DESIGN_WIDGETS:
-                  return FFileType.DESIGN;
-                case HubResourceCategory.PLUGINS:
-                case HubResourceCategory.WIDGETS:
-                default:
-                  return getLastUsedEditorType() || FFileType.DESIGN;
-              }
-            }(this.props.tab) : void 0,
-            context: ShelfViewType.SEARCH
-          })
-        })]
-      }) : null;
-    }
+
+/**
+ * Gets the current sort and view mode for private plugins
+ * @param state - Application state
+ * @param viewOptions - View options
+ */
+export function getPrivatePluginsViewMode(state: any, viewOptions: any) {
+  return {
+    sortMode: state.sortState.private_plugins,
+    viewMode: getValueWithFallback(PRIVATE_PLUGINS_SEARCH_CONFIG.viewId, viewOptions, PRIVATE_PLUGINS_SEARCH_CONFIG.defaultOptions.viewMode),
   }
-  t.displayName = "PluginListRow";
-  e.ConnectedPluginListRow = connect(null, (e, t) => ({
-    onPluginListRowClick: () => {
-      e(selectViewAction({
-        view: "communityHub",
-        subView: "plugin",
-        publishedPluginId: t.plugin.id
-      }));
+}
+interface PluginListRowProps {
+  plugin: any
+  usesTabletOptimizedSidebar: boolean
+  tab?: HubResourceCategory
+  onPluginListRowClick: () => void
+}
+
+/**
+ * Component representing a row in the plugin list
+ */
+class PluginListRow extends Component<PluginListRowProps> {
+  constructor(props: PluginListRowProps) {
+    super(props)
+    this.onPluginListRowClick = ignoreCommandOrShift((e: React.MouseEvent) => {
+      e.preventDefault()
+      this.props.onPluginListRowClick()
+    })
+  }
+
+  private onPluginListRowClick: (e: React.MouseEvent) => void
+  render() {
+    const {
+      plugin,
+      usesTabletOptimizedSidebar,
+    } = this.props
+
+    // Early return if plugin data is missing
+    if (!plugin || !plugin.current_plugin_version_id) {
+      return null
     }
-  }))(t);
-})(n || (n = {}));
-let M = n.ConnectedPluginListRow;
-class j extends PureComponent {
+    const pluginVersion = getPluginVersion(plugin)
+
+    // Early return if plugin version is not available
+    if (!pluginVersion) {
+      return null
+    }
+
+    // Determine editor type based on tab category
+    const getEditorTypeFromTab = (tab: HubResourceCategory): FFileType => {
+      switch (tab) {
+        case HubResourceCategory.FIGJAM_PLUGINS:
+        case HubResourceCategory.FIGJAM_WIDGETS:
+          return FFileType.WHITEBOARD
+        case HubResourceCategory.FIGMA_DESIGN_PLUGINS:
+        case HubResourceCategory.FIGMA_DESIGN_WIDGETS:
+          return FFileType.DESIGN
+        case HubResourceCategory.PLUGINS:
+        case HubResourceCategory.WIDGETS:
+        default:
+          return getLastUsedEditorType() || FFileType.DESIGN
+      }
+    }
+    const editorTypeFallback = this.props.tab ? getEditorTypeFromTab(this.props.tab) : undefined
+    return jsxs("div", {
+      className: usesTabletOptimizedSidebar ? qp : JC,
+      children: [
+      // Plugin link container
+        jsxs(LinkPrimitive, {
+          onClick: this.onPluginListRowClick,
+          href: generateCommunityPluginUrl(plugin.id),
+          className: PI,
+          children: [
+            // Icon and badge section
+            jsxs(li.IconAndBadgeContainer, {
+              children: [jsx(PluginImage, {
+                plugin: pluginVersion,
+                className: HE,
+                alt: "",
+              }), jsx(li.BadgeContainer, {
+                children: jsx(dn, {
+                  editorType: pluginVersion.manifest.editorType,
+                }),
+              })],
+            }),
+            // Text content section
+            jsxs("div", {
+              className: JV,
+              children: [
+                // Plugin name and additional info
+                jsxs("div", {
+                  className: KG,
+                  children: [jsx("div", {
+                    className: Np,
+                    children: pluginVersion.name,
+                  }), jsx(_$$C, {
+                    className: BZ,
+                    ...this.props,
+                  })],
+                }),
+                // Plugin description
+                jsx("div", {
+                  className: CK,
+                  children: stripHtmlTags(pluginVersion.description),
+                }),
+              ],
+            }),
+          ],
+        }),
+        // Publisher information
+        plugin.community_publishers?.accepted && plugin.community_publishers.accepted.length > 0
+          ? jsx("div", {
+              className: usesTabletOptimizedSidebar ? lG : kw,
+              children: jsx("span", {
+                className: PY,
+                children: plugin.community_publishers.accepted.map(publisher => jsx(Qi, {
+                  publisher,
+                  className: GA,
+                  childrenClassName: jN,
+                }, publisher.id)),
+              }),
+            })
+          : jsx(Qi, {
+              publisher: plugin.publisher,
+              className: usesTabletOptimizedSidebar ? lG : kw,
+            }),
+        // Creation date
+        jsx("div", {
+          className: usesTabletOptimizedSidebar ? qV : zB,
+          children: jsx(RelativeTimeDisplay, {
+            date: pluginVersion.created_at,
+          }),
+        }),
+        // Run count
+        jsx("div", {
+          className: usesTabletOptimizedSidebar ? vQ : Qj,
+          children: jsx(_$$f, {
+            count: plugin.unique_run_count,
+          }),
+        }),
+        // Plugin try button
+        jsx("div", {
+          className: usesTabletOptimizedSidebar ? kU : lk,
+          children: jsx(PluginTryButtonWrapper, {
+            resource: this.props.plugin,
+            universalEditorTypeFallback: editorTypeFallback,
+            context: ShelfViewType.SEARCH,
+          }),
+        }),
+      ],
+    })
+  }
+
+  static displayName = "PluginListRow"
+}
+
+// Connect the PluginListRow component to Redux
+const ConnectedPluginListRow = connect(null, (dispatch, ownProps: PluginListRowProps) => ({
+  onPluginListRowClick: () => {
+    dispatch(selectViewAction({
+      view: "communityHub",
+      subView: "plugin",
+      publishedPluginId: ownProps.plugin.id,
+    }))
+  },
+}))(PluginListRow)
+
+/**
+ * Component for rendering plugin tiles in grid view
+ */
+class PluginTile extends PureComponent<any> {
   render() {
     return jsx(AB, {
       ...this.props,
-      isPublicOverride: !1,
+      isPublicOverride: false,
       plugin: this.props.plugin,
       pluginId: this.props.plugin.id,
-      showInstallCount: !0,
+      showInstallCount: true,
       innerText: "Plugin Tile",
       trackingProperties: {
-        pluginId: this.props.plugin.id
-      }
-    });
+        pluginId: this.props.plugin.id,
+      },
+    })
   }
 }
-(e => {
-  let t = e => class extends Component {
+interface SearchResultRendererProps {
+  publishedPlugin?: any
+  searchResult: any
+}
+
+/**
+ * Higher-order component for rendering search results
+ */
+function withSearchResult(WrappedComponent: React.ComponentType<any>) {
+  return class extends Component<SearchResultRendererProps> {
     render() {
-      let {
+      const {
         publishedPlugin,
-        searchResult
-      } = this.props;
-      let n = publishedPlugin || searchResult.model;
-      return createElement(e, {
+        searchResult,
+      } = this.props
+      const plugin = publishedPlugin || searchResult.model
+      return createElement(WrappedComponent, {
         ...this.props,
-        plugin: n,
-        key: n.id
-      });
+        plugin,
+        key: plugin.id,
+      })
     }
-  };
-  let i = t(M);
-  let n = t(j);
-  let r = (e, t) => ({
-    publishedPlugin: e.publishedPlugins[t.searchResult.model.id] || null
-  });
-  e.SearchResult = _$$h({
-    [ViewMode.GRID]: connect(r)(n),
-    [ViewMode.LIST]: connect(r)(i)
-  });
-})($$r0 || ($$r0 = {}));
-export const g8 = $$r0;
-export const zQ = $$F1;
-export const Of = $$L2;
-export const xH = $$D3;
+  }
+}
+
+// Create wrapped components
+const PluginListRowWithSearchResult = withSearchResult(ConnectedPluginListRow)
+const PluginTileWithSearchResult = withSearchResult(PluginTile)
+
+// Map state to props for search results
+function mapSearchResultToProps(state: any, ownProps: any) {
+  return {
+    publishedPlugin: state.publishedPlugins[ownProps.searchResult.model.id] || null,
+  }
+}
+
+/**
+ * Search result renderer that handles different view modes
+ */
+export const SearchResult = createViewModeRenderer({
+  [ViewMode.GRID]: connect(mapSearchResultToProps)(PluginTileWithSearchResult),
+  [ViewMode.LIST]: connect(mapSearchResultToProps)(PluginListRowWithSearchResult),
+})
+export const PrivatePluginsSortConfig = p_
+// Export public API
+export const g8 = SearchResult
+export const zQ = getPrivatePluginsViewMode
+export const Of = PrivatePluginsSortConfig
+export const xH = PRIVATE_PLUGINS_SEARCH_CONFIG

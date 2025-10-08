@@ -7,7 +7,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { useHandleMouseEvent } from "../figma_app/878298";
-import { W6 } from "../905/125333";
+import { shapeSidebarModeAtom } from "../905/125333";
 import { SvgComponent } from "../905/714743";
 import { S as _$$S } from "../figma_app/552746";
 import { n as _$$n } from "../905/734251";
@@ -60,7 +60,7 @@ export function $$N0({
   });
   let U = Yt();
   let F = U ? lx.get(U) : null;
-  let H = useAtomWithSubscription(W6);
+  let H = useAtomWithSubscription(shapeSidebarModeAtom);
   let B = useMemo(() => e === F && c === H, [F, H, e, c]);
   let V = U_();
   let {

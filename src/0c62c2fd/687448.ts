@@ -25,7 +25,7 @@ import { noop } from 'lodash-es';
 import { atomStoreManager } from "../figma_app/27355";
 import C from "classnames";
 import { dN as _$$dN } from "../vendor/291472";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { IntersectionSentinel } from "../905/925868";
 import { ph } from "../905/50769";
 import { iX } from "../6443/426443";
@@ -89,7 +89,7 @@ function B({
   return jsxs("div", {
     className: "emoji_text_area--textAreaContainer--4FHeL",
     onClick: f,
-    children: [jsxs(_$$P, {
+    children: [jsxs(RecordingScrollContainer, {
       className: S()(cssBuilderInstance.flexGrow1.overflowAuto.maxWFull.borderBox.if(u, cssBuilderInstance.bb1.bSolid.colorBorder).$, l),
       innerClassName: cssBuilderInstance.hFull.$,
       children: [jsx(iX, {

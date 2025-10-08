@@ -16,7 +16,7 @@ import { isDevHandoffEditorType } from "../figma_app/976749";
 import { RC } from "../3276/926297";
 import { nk } from "../figma_app/2023";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { zg, iF, aD } from "../905/452667";
 import { g_ } from "../905/646788";
 import { Bj, lf, c4, ic } from "../3276/565493";
@@ -81,7 +81,7 @@ function E({
   let s = ic(e);
   return s ? jsx(TrackingProvider, {
     name: "Edit Request Tooltip",
-    children: jsx(Cf, {
+    children: jsx(ConnectedPointingDropdown, {
       className: "edit_request_tooltip--tooltipContainer--rhLGf",
       targetRect: s,
       disableDropdownScrollContainer: !0,

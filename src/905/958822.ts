@@ -56,7 +56,7 @@ import { TrackingKeyEnum } from "../905/696396";
 import { generateUUIDv4 } from "../905/871474";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { noop } from "../905/834956";
-import { kE } from "../905/466026";
+import { setSelectedBranch } from "../905/466026";
 import { i as _$$i } from "../905/977961";
 import { TF, l1, X_, TM } from "../905/811749";
 function N(e) {
@@ -363,7 +363,7 @@ function eb({
         selectedFileKey: t,
         previousFileKey: c?.key
       });
-      i(kE({
+      i(setSelectedBranch({
         repoId: e.repo.id,
         branchKey: t
       }));

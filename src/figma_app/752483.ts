@@ -25,7 +25,7 @@ import { ManifestEditorType } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { isFullscreenDevHandoffView } from "../905/782918";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { SimpleComponentType } from "../figma_app/504088";
 import { ModalContainer } from "../figma_app/918700";
 import { $v } from "../figma_app/613182";
@@ -278,7 +278,7 @@ export let $$W0 = registerModal(function ({
     _$$s({
       initialX: 0,
       initialY: 0,
-      initialTab: el ? "widget" === e ? _$$p.WIDGETS : _$$p.PLUGINS : void 0,
+      initialTab: el ? "widget" === e ? TabCategory.WIDGETS : TabCategory.PLUGINS : void 0,
       initialFdResourceTab: eo ? "widget" === e ? SimpleComponentType.WIDGET : SimpleComponentType.PLUGIN : void 0,
       initialFdView: eo ? "development" : void 0,
       scrollDevelopmentSectionIntoView: el,

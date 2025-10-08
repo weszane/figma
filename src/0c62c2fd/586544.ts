@@ -5,7 +5,7 @@ import { sortByWithOptions } from "../figma_app/656233";
 import { memoizeByArgs } from "../figma_app/815945";
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
@@ -153,7 +153,7 @@ export function $$N0(e) {
             children: renderI18nText("team_view.member_edit_access_modal.files_title_v2")
           })
         })]
-      }), jsx(P, {
+      }), jsx(RecordingScrollContainer, {
         className: "edit_access_modal--scrollContainer--WzCWr",
         hideScrollbar: !0,
         children: jsxs("div", {

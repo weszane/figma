@@ -7,7 +7,7 @@ import { y } from '../905/158417';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { trackEventAnalytics } from '../905/449184';
 import { e as _$$e } from '../905/579755';
-import { L } from '../905/606555';
+import { followsManagerInstance } from '../905/606555';
 import { M } from '../905/722875';
 import { sendWithRetry } from '../905/910117';
 import { cssBuilderInstance } from '../cssbuilder/589278';
@@ -53,7 +53,7 @@ export function $$T0({
 }) {
   let [r, s] = useState(!1);
   useEffect(() => {
-    M() && L.getFollows({
+    M() && followsManagerInstance.getFollows({
       authorId: e.id
     }).then(({
       data: t

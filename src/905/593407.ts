@@ -8,7 +8,7 @@ import { useSingleEffect } from "../905/791079";
 import { getInitialOptions } from "../figma_app/169182";
 import { postUserFlag } from "../905/985254";
 import { e as _$$e } from "../905/621515";
-import { y as _$$y } from "../905/958284";
+import { removeUUID } from "../905/958284";
 import { overlayIdsAtom } from "../905/12032";
 import { NT, g5 } from "../figma_app/579169";
 import { selectUserFlag } from "../905/940356";
@@ -16,7 +16,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { OnboardingSequence } from "../905/152487";
 import { isAllowedToSeeNux } from "../905/14910";
 import { e as _$$e2 } from "../905/107684";
-import { hib } from "../figma_app/6204";
+import { TOSAgreementOverlay } from "../figma_app/6204";
 import { useState, useCallback } from "react";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
@@ -116,7 +116,7 @@ export function $$F0({
     complete,
     isShowing
   } = _$$e({
-    overlay: hib,
+    overlay: TOSAgreementOverlay,
     priority: _$$N.URGENT_ALERT
   }, [i, I]);
   let w = useDispatch();
@@ -127,7 +127,7 @@ export function $$F0({
   useSingleEffect(() => {
     let t = () => show({
       canShow: (e, t) => {
-        let i = R.current.some(e => _$$e2.includes(_$$y(e)));
+        let i = R.current.some(e => _$$e2.includes(removeUUID(e)));
         let n = isAllowedToSeeNux({
           emailValidatedAt: t,
           jobTitle: e

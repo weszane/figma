@@ -6,7 +6,7 @@ import { sendWithRetry } from "../905/910117";
 import { c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
-import { Y9 } from "../905/504768";
+import { REFRESH_FEED_ACTION } from "../905/504768";
 import { selectCurrentUser } from "../905/372672";
 import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { registerModal } from "../905/102752";
@@ -44,7 +44,7 @@ let x = e => {
 };
 export function $$y1(e) {
   let t = useDispatch();
-  let n = useCallback(() => t(Y9()), [t]);
+  let n = useCallback(() => t(REFRESH_FEED_ACTION()), [t]);
   let {
     feedPost
   } = e;

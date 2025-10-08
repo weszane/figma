@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useLayoutEffect, useEffect } from "react";
 import { shallowEqual } from "react-redux";
 import s from "classnames";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { BrowserInfo } from "../figma_app/778880";
 var o = s;
 let c = {
@@ -108,8 +108,8 @@ let g = ({
       startDragX: void 0
     }));
   }, []);
-  wY(t, _);
-  wY(n, _);
+  useResizeObserverRef(t, _);
+  useResizeObserverRef(n, _);
   useEffect(() => {
     if (f) {
       document.addEventListener("mousemove", A);

@@ -2,7 +2,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
 import { TeamSortField, ProjectSortField, OrgSortField, UserSortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
-import { s as _$$s } from "../905/77553";
+import { SPACING_CONSTANTS } from "../905/77553";
 let $$l0 = {
   viewId: "search-files",
   sortKeys: [TeamSortField.RELEVANCY, TeamSortField.NAME, TeamSortField.TOUCHED_AT, TeamSortField.CREATED_AT],
@@ -66,8 +66,8 @@ let $$d1 = {
 let $$c2 = {
   viewId: "search-teams",
   sortKeys: [OrgSortField.RELEVANCY, OrgSortField.NAME, OrgSortField.FILES_LAST_TOUCHED_AT, OrgSortField.CREATED_AT, OrgSortField.MEMBER_COUNT],
-  listSortKeys: [OrgSortField.NAME, OrgSortField.FILES_LAST_TOUCHED_AT, OrgSortField.CREATED_AT, OrgSortField.MEMBER_COUNT, _$$s.SPACER],
-  tabletListSortKeys: [OrgSortField.NAME, OrgSortField.FILES_LAST_TOUCHED_AT, OrgSortField.MEMBER_COUNT, _$$s.SPACER],
+  listSortKeys: [OrgSortField.NAME, OrgSortField.FILES_LAST_TOUCHED_AT, OrgSortField.CREATED_AT, OrgSortField.MEMBER_COUNT, SPACING_CONSTANTS.SPACER],
+  tabletListSortKeys: [OrgSortField.NAME, OrgSortField.FILES_LAST_TOUCHED_AT, OrgSortField.MEMBER_COUNT, SPACING_CONSTANTS.SPACER],
   mobileListSortKeys: [OrgSortField.NAME],
   sortKeyDescriptions: {
     [ViewMode.GRID]: {

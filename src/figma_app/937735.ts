@@ -5,7 +5,7 @@ import s from "classnames";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { overlayStateAtom } from "../905/12032";
-import { X, Y } from "../figma_app/916469";
+import { CURATOR_GLOBAL_REQUEST_CLOSE, FigJamMenuEvents } from "../figma_app/916469";
 import { iN } from "../figma_app/634656";
 import { l as _$$l } from "../figma_app/265420";
 import { $n } from "../figma_app/439493";
@@ -42,9 +42,9 @@ export function $$f1({
   let m = useAtomWithSubscription(overlayStateAtom);
   useEffect(() => {
     e && m && !_$$l.has(m) && handleAtomEvent({
-      id: X,
+      id: CURATOR_GLOBAL_REQUEST_CLOSE,
       properties: {
-        requester: Y.FigjamDLTSubmenuOpen
+        requester: FigJamMenuEvents.FigjamDLTSubmenuOpen
       }
     });
   }, [e, m]);

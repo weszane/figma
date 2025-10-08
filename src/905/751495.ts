@@ -12,12 +12,12 @@ import { hp } from "../vendor/565136";
 import { ConfirmationModal } from "../905/441305";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { Yu } from "../905/355291";
-import { yJ } from "../figma_app/24841";
+import { showPhoneSetupModal } from "../905/355291";
+import { putUserAction } from "../figma_app/24841";
 import { qC, lJ, vJ } from "../905/264101";
 import { Z } from "../905/854480";
 import { selectCurrentUser, hasPasswordOrSSO } from "../905/372672";
-import { ed, r6 } from "../905/990455";
+import { resetTwoFactorAuthSetup, getTwoFactorAuthSetup } from "../905/990455";
 import { registerModal } from "../905/102752";
 import { _ as _$$_ } from "../905/799322";
 import { J } from "../905/211135";
@@ -32,8 +32,8 @@ let $$C0 = registerModal(function (e) {
   let d = Z();
   let c = () => {
     if (!s) return null;
-    ed();
-    r(yJ({
+    resetTwoFactorAuthSetup();
+    r(putUserAction({
       user: {
         id: s.id,
         two_factor_secret_loaded: !1
@@ -145,7 +145,7 @@ function R() {
           variant: "link",
           onClick: () => {
             r();
-            e(Yu());
+            e(showPhoneSetupModal());
           },
           children: renderI18nText("auth.two-factor-setup.send_me_an_sms_instead")
         }), jsxs("div", {
@@ -199,7 +199,7 @@ function N() {
         }), jsx("div", {
           className: KA,
           children: jsx(hp, {
-            value: r6().provisioning_uri || "",
+            value: getTwoFactorAuthSetup().provisioning_uri || "",
             bgColor: "#f0f0f0",
             size: 200
           })
@@ -215,7 +215,7 @@ function N() {
           children: renderI18nText("auth.two-factor-setup.type_the_text_code_into_your_app")
         }), jsx("div", {
           className: aY,
-          children: r6().secret?.match(/.{4}/g)?.join(" ")
+          children: getTwoFactorAuthSetup().secret?.match(/.{4}/g)?.join(" ")
         }), jsx(Button, {
           variant: "link",
           onClick: h,

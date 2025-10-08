@@ -13,7 +13,7 @@ import { r as _$$r2 } from "../905/211029";
 import { isAutoMarker, isValidValue, MIXED_MARKER, normalizeValue } from "../905/216495";
 import { D as _$$D } from "../905/225412";
 import { getI18nString } from "../905/303541";
-import { R as _$$R } from "../905/307199";
+import { CenterTruncatedText } from "../905/307199";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { V as _$$V } from "../905/418494";
 import { trackEventAnalytics } from "../905/449184";
@@ -935,7 +935,7 @@ export class $$en1 extends RecordingPureComponent {
           textAlign: "left"
         },
         children: this.props.children || this.props.formattedValue
-      }) : jsx(_$$R, {
+      }) : jsx(CenterTruncatedText, {
         className: nJ,
         text: this.props.formattedValue || ""
       }), this.props.rightLabel && jsx("span", {

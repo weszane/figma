@@ -3,7 +3,7 @@ import { ServiceCategories } from "../905/165054";
 import { PrototypingTsApi } from "../figma_app/763686";
 import { openWindow } from "../905/508367";
 import { BrowserInfo } from "../figma_app/778880";
-import { reportNullOrUndefined } from "../905/11";
+import { reportValueError } from "../905/11";
 import { sendWithRetry } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { selectViewAction } from "../905/929976";
@@ -29,7 +29,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
     scalingInfo
   } = t;
   let C = e.getState();
-  reportNullOrUndefined(ServiceCategories.PROTOTYPING, C.mirror.appModel);
+  reportValueError(ServiceCategories.PROTOTYPING, C.mirror.appModel);
   let T = C.mirror.appModel.currentPage;
   let k = isFirstPageCurrentSelector(C);
   let R = C.mirror.sceneGraph.get(T);
@@ -75,7 +75,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
         fileKey: t.meta.file_key,
         pageId: t.meta.page_id
       }));
-    }).catch(e => {});
+    }).catch(e => { });
     let n = await i.fetchFile(fileKey);
     if (isFigmaNativeApp) {
       e.dispatch(selectViewAction({

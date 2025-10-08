@@ -77,7 +77,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { y_w } from "../figma_app/6204";
+import { DrawDesignFollowupOnboarding } from "../figma_app/6204";
 import { dP } from "../figma_app/947348";
 import { _ as _$$_2 } from "../642/896644";
 import { r as _$$r } from "../905/571562";
@@ -383,7 +383,7 @@ function eD(e) {
     isShowing,
     complete
   } = _$$e2({
-    overlay: y_w,
+    overlay: DrawDesignFollowupOnboarding,
     priority: _$$N.DEFAULT_MODAL
   }, [n]);
   useEffect(() => {

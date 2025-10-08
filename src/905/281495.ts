@@ -1,102 +1,25 @@
-import { asyncMap } from "../figma_app/656233";
-import { ServiceCategories } from "../905/165054";
-import { ActionType } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { a as _$$a, v as _$$v } from "../figma_app/163822";
-import { getSingletonSceneGraph } from "../905/700578";
-import { atomStoreManager } from "../figma_app/27355";
-import { debugState } from "../905/407919";
-import { Timer } from "../905/609396";
-import { reportError } from "../905/11";
-import { trackFileEvent } from "../figma_app/314264";
-import { cortexAPI } from "../figma_app/432652";
-import { Ay as _$$Ay2 } from "../figma_app/948389";
-import { BaseCustomError } from "../905/843553";
-import { fullscreenValue } from "../figma_app/455680";
-import { nodeStateFamily, deletionSettings, deleteAndWriteNode, clearAllNodeStates } from "../figma_app/178273";
-import { z8 } from "../figma_app/862289";
-let b = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH", "THIRTEENTH", "FOURTEENTH", "FIFTEENTH", "SIXTEENTH", "SEVENTEENTH", "EIGHTEENTH", "NINETEENTH", "TWENTIETH", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-let v = e => {
-  let t = "FRAME" === e.type;
-  let i = e.parentNode;
-  let n = i && ("CANVAS" === i.type || "SECTION" === i.type);
-  return t && n;
-};
-let I = e => {
-  let t;
-  let i = [];
-  for (t = e; !v(t); t = t.parentNode) {
-    let e = t.name;
-    let n = 0;
-    let r = t.parentNode;
-    if (!r) break;
-    for (let i of r.childrenNodes) if (i.name === e) {
-      if (i.guid === t.guid) break;
-      n++;
-    }
-    i.push(e);
-    i.push(n.toString());
-  }
-  return i.join("/");
-};
-export function $$E6(e) {
-  switch (e) {
-    case ActionType.CONTEXT_MENU:
-      return "context_menu";
-    case ActionType.QUICK_ACTIONS:
-      return "quick_actions";
-    case ActionType.CREATE_COMPONENT:
-      return "create_component";
-    case ActionType.CREATE_FRAME:
-      return "create_frame";
-    case ActionType.DRAW_FRAME_AROUND_NODES:
-      return "draw_frame_around_nodes";
-    case ActionType.STACK_SELECTION:
-      return "stack_selection";
-    case ActionType.FIRST_DRAFT_LINT:
-      return "First Draft Lint";
-    case ActionType.EXPORT_FRAME:
-      return "export_frame";
-    case ActionType.EXPORT_PICKER:
-      return "export_picker";
-    case ActionType.MAGIC_LINK:
-      return "magic-link";
-    case ActionType.READY_FOR_DEV:
-      return "ready_for_dev";
-    case ActionType.LAYERS_PANEL_ACTION_ROW:
-      return "layers_panel_action_row";
-    case ActionType.LAYERS_PANEL_OVERFLOW_MENU:
-      return "layers_panel_overflow_menu";
-  }
-}
-var x = (e => (e[e.ALL = 0] = "ALL", e[e.TOP_LEVEL = 1] = "TOP_LEVEL", e))(x || {});
-let S = new Set([ActionType.CREATE_COMPONENT, ActionType.CREATE_FRAME, ActionType.DRAW_FRAME_AROUND_NODES, ActionType.STACK_SELECTION, ActionType.EXPORT_FRAME, ActionType.EXPORT_PICKER]);
-export class $$w2 extends BaseCustomError {
-  constructor() {
-    super(!1);
-    this.name = "NoNameableLayersError";
-  }
-}
-export class $$C3 extends BaseCustomError {
-  constructor() {
-    super(!1);
-    this.name = "NoSelectedLayersError";
-  }
-}
-export class $$T1 extends BaseCustomError {
-  constructor(e) {
-    super(!1);
-    this.name = "LayerLimitExceededError";
-    this.layerCount = e;
-  }
-}
-class k extends Error {
-  constructor() {
-    super();
-    this.name = "LayerNotRenamedError";
-  }
-}
-let R = {
+import { reportError } from "../905/11"
+import { ServiceCategories } from "../905/165054"
+import { permissionScopeHandler } from "../905/189185"
+import { debugState } from "../905/407919"
+import { Timer } from "../905/609396"
+import { getSingletonSceneGraph } from "../905/700578"
+import { BaseCustomError } from "../905/843553"
+import { atomStoreManager } from "../figma_app/27355"
+import { a as _$$a, v as _$$v } from "../figma_app/163822"
+import { clearAllNodeStates, deleteAndWriteNode, deletionSettings, nodeStateFamily } from "../figma_app/178273"
+import { trackFileEvent } from "../figma_app/314264"
+import { cortexAPI } from "../figma_app/432652"
+import { fullscreenValue } from "../figma_app/455680"
+import { asyncMap } from "../figma_app/656233"
+import { ActionType } from "../figma_app/763686"
+import { z8 } from "../figma_app/862289"
+import { Ay as _$$Ay2 } from "../figma_app/948389"
+
+// Constants
+const ordinalStrings = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH", "THIRTEENTH", "FOURTEENTH", "FIFTEENTH", "SIXTEENTH", "SEVENTEENTH", "EIGHTEENTH", "NINETEENTH", "TWENTIETH", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+const defaultNamesByType = {
   RECTANGLE: ["Rectangle", "Image", "image"],
   ROUNDED_RECTANGLE: ["Rectangle", "Image", "image"],
   TEXT: ["Text"],
@@ -107,328 +30,603 @@ let R = {
   LINE: ["Line"],
   ELLIPSE: ["Ellipse"],
   VECTOR: ["Vector"],
-  INSTANCE: ["Instance"]
-};
-let N = new Set(["RECTANGLE", "ROUNDED_RECTANGLE", "TEXT", "FRAME", "GROUP", "INSTANCE"]);
-function P(e, t = !1) {
-  let i;
-  if (e.type in R) i = R[e.type];else if ("SYMBOL" === e.type && t) {
-    let e = [];
-    N.forEach(t => {
-      t in R && R[t] && e.push(...R[t]);
-    });
-    e.push("Component");
-    i = e;
-  }
-  if (i) for (let t of i) {
-    let i = RegExp(`^${t} [()\\d]+[ ()\\d]*$`, "i");
-    if (e.name.match(i)) return !0;
-  }
-  if ("INSTANCE" === e.type && e.symbolId) {
-    let t = getSingletonSceneGraph().get(e.symbolId);
-    if (t && e.name === t.name) return !0;
-  }
-  return "TEXT" === e.type && !!e.autoRename;
+  INSTANCE: ["Instance"],
 }
-export function $$O5(e, t, i = !1) {
-  if (e.locked || e.isInstanceSublayer) return !1;
-  let n = i && "SYMBOL" === e.type;
-  return !!((N.has(e.type) || n) && (t || P(e, i)));
+
+const nameableTypes = new Set(["RECTANGLE", "ROUNDED_RECTANGLE", "TEXT", "FRAME", "GROUP", "INSTANCE"])
+
+const actionsThatCreateNewNodes = new Set([ActionType.CREATE_COMPONENT, ActionType.CREATE_FRAME, ActionType.DRAW_FRAME_AROUND_NODES, ActionType.STACK_SELECTION, ActionType.EXPORT_FRAME, ActionType.EXPORT_PICKER])
+
+const MAX_LAYER_COUNT = 500
+
+// Enums
+enum RenameScope {
+  ALL = 0,
+  TOP_LEVEL = 1,
 }
-export let $$D0 = 500;
-function L(e) {
+
+// Utility Functions
+/**
+ * Checks if a node is a top-level frame (FRAME type with CANVAS or SECTION parent).
+ * @param node - The node to check.
+ * @returns True if the node is a top-level frame.
+ */
+function isTopLevelFrame(node: any): boolean {
+  const isFrame = node.type === "FRAME"
+  const parent = node.parentNode
+  const hasValidParent = parent && (parent.type === "CANVAS" || parent.type === "SECTION")
+  return isFrame && hasValidParent
+}
+
+/**
+ * Generates a path string for a node based on its hierarchy and siblings.
+ * @param node - The node to generate the path for.
+ * @returns The path string.
+ */
+function getNodePath(node: any): string {
+  const pathParts: string[] = []
+  let current = node
+  while (!isTopLevelFrame(current)) {
+    const name = current.name
+    let index = 0
+    const parent = current.parentNode
+    if (!parent)
+      break
+    for (const sibling of parent.childrenNodes) {
+      if (sibling.name === name) {
+        if (sibling.guid === current.guid)
+          break
+        index++
+      }
+    }
+    pathParts.push(name)
+    pathParts.push(index.toString())
+    current = parent
+  }
+  return pathParts.join("/")
+}
+
+/**
+ * Maps an ActionType to a string representation.
+ * @param action - The ActionType to map.
+ * @returns The string representation.
+ */
+export function getActionSourceString(action: ActionType): string {
+  switch (action) {
+    case ActionType.CONTEXT_MENU:
+      return "context_menu"
+    case ActionType.QUICK_ACTIONS:
+      return "quick_actions"
+    case ActionType.CREATE_COMPONENT:
+      return "create_component"
+    case ActionType.CREATE_FRAME:
+      return "create_frame"
+    case ActionType.DRAW_FRAME_AROUND_NODES:
+      return "draw_frame_around_nodes"
+    case ActionType.STACK_SELECTION:
+      return "stack_selection"
+    case ActionType.FIRST_DRAFT_LINT:
+      return "First Draft Lint"
+    case ActionType.EXPORT_FRAME:
+      return "export_frame"
+    case ActionType.EXPORT_PICKER:
+      return "export_picker"
+    case ActionType.MAGIC_LINK:
+      return "magic-link"
+    case ActionType.READY_FOR_DEV:
+      return "ready_for_dev"
+    case ActionType.LAYERS_PANEL_ACTION_ROW:
+      return "layers_panel_action_row"
+    case ActionType.LAYERS_PANEL_OVERFLOW_MENU:
+      return "layers_panel_overflow_menu"
+  }
+}
+
+/**
+ * Checks if a node's name is a default generated name.
+ * @param node - The node to check.
+ * @param includeComponents - Whether to include component names.
+ * @returns True if the name is default.
+ */
+function isDefaultName(node: any, includeComponents: boolean = false): boolean {
+  let candidates: string[] | undefined
+  if (node.type in defaultNamesByType) {
+    candidates = defaultNamesByType[node.type]
+  }
+  else if (node.type === "SYMBOL" && includeComponents) {
+    const allCandidates: string[] = []
+    nameableTypes.forEach((type) => {
+      if (type in defaultNamesByType && defaultNamesByType[type]) {
+        allCandidates.push(...defaultNamesByType[type])
+      }
+    })
+    allCandidates.push("Component")
+    candidates = allCandidates
+  }
+  if (candidates) {
+    for (const candidate of candidates) {
+      const regex = new RegExp(`^${candidate} [()\\d]+[ ()\\d]*$`, "i")
+      if (node.name.match(regex))
+        return true
+    }
+  }
+  if (node.type === "INSTANCE" && node.symbolId) {
+    const symbol = getSingletonSceneGraph().get(node.symbolId)
+    if (symbol && node.name === symbol.name)
+      return true
+  }
+  return node.type === "TEXT" && !!node.autoRename
+}
+
+/**
+ * Checks if a layer is nameable based on its properties.
+ * @param node - The node to check.
+ * @param overwriteNames - Whether to overwrite existing names.
+ * @param includeComponents - Whether to include components.
+ * @returns True if the layer is nameable.
+ */
+function isLayerNameable(node: any, overwriteNames: boolean = false, includeComponents: boolean = false): boolean {
+  if (node.locked || node.isInstanceSublayer)
+    return false
+  const isSymbolAndIncluded = includeComponents && node.type === "SYMBOL"
+  return !!((nameableTypes.has(node.type) || isSymbolAndIncluded) && (overwriteNames || isDefaultName(node, includeComponents)))
+}
+
+/**
+ * Applies renames to nodes via permission scope handler.
+ * @param renames - Map of node GUIDs to rename data.
+ */
+function applyRenames(renames: Map<string, { name: string, autoRename: boolean }>): void {
   permissionScopeHandler.ai("rename-layers", () => {
-    for (let [t, {
-      name: i,
-      autoRename: n
-    }] of e) {
-      let e = getSingletonSceneGraph().get(t);
-      e && (e.name = i, e.autoRename = n);
+    for (const [guid, { name, autoRename }] of renames) {
+      const node = getSingletonSceneGraph().get(guid)
+      if (node) {
+        node.name = name
+        node.autoRename = autoRename
+      }
     }
-  });
+  })
 }
-export let $$F4 = async ({
-  abortController: e,
-  onTasksUpdate: t,
-  params: i,
-  clientLifecycleId: f
-}) => {
-  let {
-    source,
-    overwriteNames,
-    customNodeSelection,
-    ignoreDescendants
-  } = i;
-  let M = new Timer();
-  M.start();
-  let j = null;
-  let U = debugState.getState();
-  let B = U.openFile?.key;
-  let V = source === ActionType.CREATE_COMPONENT;
-  let G = $$E6(source);
-  let z = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
-  if (customNodeSelection) {
-    let e = [];
-    customNodeSelection.forEach(t => {
-      let i = getSingletonSceneGraph().get(t);
-      i && e.push(i);
-    });
-    z = e;
+
+// Error Classes
+/**
+ * Error thrown when no nameable layers are found.
+ */
+export class NoNameableLayersError extends BaseCustomError {
+  constructor() {
+    super(false)
+    this.name = "NoNameableLayersError"
   }
-  let H = z?.map(e => e.guid);
-  if (!z || 0 === z.length) throw new $$C3();
-  let W = 0;
-  let K = 0;
-  let Y = 0;
-  let q = [];
-  let $ = function (e, t) {
-    let i = new Map();
-    let n = new Map();
-    let r = t => {
-      if (!t.locked && t.visible) {
-        if (!v(t)) {
-          let r = t.guid === e.guid ? "" : I(t);
-          i.has(r) || i.set(r, []);
-          i.get(r).push(t);
-          n.set(t.guid, i.get(r));
-        }
-        if (t.childrenNodes) for (let e of t.childrenNodes) r(e);
+}
+
+/**
+ * Error thrown when no layers are selected.
+ */
+export class NoSelectedLayersError extends BaseCustomError {
+  constructor() {
+    super(false)
+    this.name = "NoSelectedLayersError"
+  }
+}
+
+/**
+ * Error thrown when the layer count exceeds the limit.
+ */
+export class LayerLimitExceededError extends BaseCustomError {
+  constructor(public layerCount: number) {
+    super(false)
+    this.name = "LayerLimitExceededError"
+  }
+}
+
+/**
+ * Error thrown when a layer is not renamed.
+ */
+class LayerNotRenamedError extends Error {
+  constructor() {
+    super()
+    this.name = "LayerNotRenamedError"
+  }
+}
+
+// Main Function and Helpers
+/**
+ * Builds a map of nodes to their sibling groups for renaming.
+ * @param page - The current page node.
+ * @param selectedNodes - The selected nodes.
+ * @returns Map of GUIDs to sibling arrays.
+ */
+function buildSiblingMap(page: any, selectedNodes: any[]): Map<string, any[]> {
+  const pathToNodes = new Map<string, any[]>()
+  const guidToSiblings = new Map<string, any[]>()
+
+  const collectVisible = (node: any) => {
+    if (!node.locked && node.visible) {
+      if (!isTopLevelFrame(node)) {
+        const path = node.guid === page.guid ? "" : getNodePath(node)
+        if (!pathToNodes.has(path))
+          pathToNodes.set(path, [])
+        pathToNodes.get(path)!.push(node)
+        guidToSiblings.set(node.guid, pathToNodes.get(path)!)
       }
-    };
-    for (let e of t) r(e);
-    let a = t => {
-      if (!(t.locked || !t.visible || n.has(t.guid))) {
-        if (!v(t)) {
-          let n = t.guid === e.guid ? "" : I(t);
-          i.has(n) && i.get(n).push(t);
-        }
-        if (t.childrenNodes) for (let e of t.childrenNodes) a(e);
-      }
-    };
-    a(e);
-    return n;
-  }(getSingletonSceneGraph().getCurrentPage(), z);
-  let Z = new Map();
-  let X = (await asyncMap(z, async e => {
-    let t = function e({
-      n: t,
-      overwriteNames: i,
-      renameComponents: n,
-      includeNodeIds: r,
-      relativeFrame: a
-    }) {
-      let s = $$O5(t, i, n);
-      let d = P(t, n);
-      a || (a = {
-        x: Math.floor(t.absoluteBoundingBox.x),
-        y: Math.floor(t.absoluteBoundingBox.y),
-        w: Math.floor(t.absoluteBoundingBox.w),
-        h: Math.floor(t.absoluteBoundingBox.h)
-      });
-      let c = t.fills.length > 0 && t.fills.some(e => "IMAGE" === e.type);
-      let u = t.type;
-      let p = !1;
-      if (c) u = "IMAGE";else if ("INSTANCE" === t.type && t.symbolId) {
-        let e = getSingletonSceneGraph().get(t.symbolId);
-        e && !P(e, n) && (u = e.name, p = !0);
-      } else "SYMBOL" === t.type && n && (u = "COMPONENT");
-      let m = !d && !p;
-      let h = _$$a(t);
-      let g = a.w > h ? h / a.w : 1;
-      let f = {
-        name: m ? t.name : void 0,
-        type: u,
-        id: s ? t.guid : void 0,
-        text: t.characters ? t.characters.trim().substring(0, 200) : void 0,
-        autolayout: t.isStack && "GRID" !== t.stackMode ? t.stackMode : void 0,
-        x: Math.floor((t.absoluteBoundingBox.x - a.x) * g),
-        y: Math.floor((t.absoluteBoundingBox.y - a.y) * g),
-        w: Math.floor(t.absoluteBoundingBox.w * g),
-        h: Math.floor(t.absoluteBoundingBox.h * g)
-      };
-      "INSTANCE" !== t.type && 0 === r && (f.children = function (e) {
-        let t = e.childrenNodes;
-        return e.uiOrderedChildren.map(e => t.find(t => t.guid === e)).filter(e => void 0 !== e);
-      }(t).filter(e => e.visible && e.opacity > 0).map(t => e({
-        n: t,
-        overwriteNames: i,
-        renameComponents: !1,
-        includeNodeIds: 0,
-        relativeFrame: a
-      })));
-      return f;
-    }({
-      n: e,
-      overwriteNames,
-      renameComponents: !!V,
-      includeNodeIds: ignoreDescendants ? 1 : 0
-    });
-    let i = [];
-    !function e(t, i) {
-      if (i.push(t), t.children) for (let n of t.children) e(n, i);
-    }(t, i);
-    let n = i.filter(e => void 0 !== e.id);
-    if (0 === n.length) return null;
-    for (let {
-      id
-    } of (W += i.length, n)) id && (q.push({
-      taskId: id,
-      state: z8.INCOMPLETE
-    }), atomStoreManager.set(nodeStateFamily(id), {
-      guid: id,
-      boundingBox: e.absoluteBoundingBox,
-      state: "pending",
-      name: e.name
-    }));
-    return {
-      rep: t,
-      image: await _$$v(e)
-    };
-  })).filter(Boolean);
-  let Q = q.length;
-  if (0 === Q) throw new $$w2();
-  if (W > $$D0) throw new $$T1(W);
-  t && t(q);
-  atomStoreManager.set(deletionSettings, {
-    autoScroll: !0
-  });
-  trackFileEvent("ai_rename_layers_started", B, U, {
-    numItemsTotal: W,
-    numItemsNameable: Q,
-    source: G,
-    clientLifecycleId: f
-  });
-  let J = e => {
-    q = q.map(t => (t.taskId === e && (t.state = z8.SUCCEEDED), t));
-    t && t(q);
-  };
-  try {
-    let t = {
-      ..._$$Ay2(),
-      clientLifecycleId: f
-    };
-    let i = await cortexAPI.design.generateRenameLayers({
-      nodes: X,
-      isMeteringRequest: !0,
-      renameTopLayerOnly: !!ignoreDescendants
-    }, t);
-    let n = new Set();
-    let r = new Promise(t => {
-      e.signal.addEventListener("abort", t);
-    });
-    let a = i.getReader();
-    let o = [];
-    async function ee() {
-      for (;;) {
-        let t = await Promise.race([a.read(), r]);
-        if (null === j && (j = M.getElapsedTime()), e.signal.aborted) {
-          a.cancel();
-          break;
-        }
-        let {
-          done,
-          value
-        } = t;
-        if (value) {
-          let [t, i] = value.split(",");
-          for (let e of (t = t.trim(), i = i.trim(), b)) if (i.toUpperCase().includes(e)) {
-            Y++;
-            break;
-          }
-          let r = getSingletonSceneGraph().get(t);
-          if (r && $$O5(r, overwriteNames, V) && (!ignoreDescendants || H?.includes(r.guid))) {
-            r.parentNode && function e(t, i) {
-              "isExpanded" in t && (t.isExpanded || (t.isExpanded = !0, i.add(t.guid)), t.parentNode && e(t.parentNode, i));
-            }(r.parentNode, n);
-            let a = [{
-              node: r,
-              animate: !0
-            }];
-            for (let e of $.get(t) ?? []) e.guid !== t && $$O5(r, overwriteNames, V) && !Z.has(e.guid) && a.push({
-              node: e,
-              animate: !1
-            });
-            for (let {
-              node,
-              animate
-            } of a) {
-              if (animate) {
-                let n = deleteAndWriteNode(node, i, e, S.has(source));
-                o.push(n);
-              }
-              let r = {
-                name: node.name,
-                autoRename: node.autoRename
-              };
-              permissionScopeHandler.ai("rename-layers", () => {
-                node.name = i;
-              });
-              Z.set(node.guid, r);
-              J && J(node.guid);
-            }
-          } else !r && K++;
-        }
-        if (done) break;
+      if (node.childrenNodes) {
+        for (const child of node.childrenNodes) collectVisible(child)
       }
     }
-    await ee();
-    e.signal.aborted ? clearAllNodeStates() : await Promise.all(o);
-    let d = M.getElapsedTime();
-    M.stop();
-    e.signal.aborted ? (trackFileEvent("ai_rename_layers_cancelled", B, U, {
-      timeToFirstToken: j,
-      timeToCompletion: d,
-      numItemsTotal: W,
-      numItemsNameable: Q,
-      numItemsNamed: q.filter(e => e.state === z8.SUCCEEDED).length,
-      numItemsHallucinated: K,
-      numItemsWithOrdinals: Y,
-      source: G,
-      clientLifecycleId: f
-    }), L(Z)) : trackFileEvent("ai_rename_layers_completed", B, U, {
-      timeToFirstToken: j,
-      timeToCompletion: d,
-      numItemsTotal: W,
-      numItemsNameable: Q,
-      numItemsNamed: q.filter(e => e.state === z8.SUCCEEDED).length,
-      numItemsHallucinated: K,
-      numItemsWithOrdinals: Y,
-      source: G,
-      clientLifecycleId: f
-    });
-    fullscreenValue.triggerAction("commit");
-  } catch (e) {
-    clearAllNodeStates();
-    L(Z);
-    fullscreenValue.triggerAction("commit");
-    reportError(ServiceCategories.AI_PRODUCTIVITY, e, {
-      extra: {
-        numItemsTotal: W,
-        numItemsNameable: Q,
-        source: G
-      }
-    });
-    trackFileEvent("ai_rename_layers_failed", B, U, {
-      error: e,
-      numItemsTotal: W,
-      numItemsNameable: Q,
-      source: G,
-      clientLifecycleId: f
-    });
-    return e;
-  } finally {
-    let e = q.map(e => (e.state === z8.INCOMPLETE && (e = {
-      ...e,
-      state: z8.FAILED,
-      error: new k()
-    }), e));
-    t && t(e);
   }
-};
-export const NB = $$D0;
-export const eJ = $$T1;
-export const BT = $$w2;
-export const tS = $$C3;
-export const Ay = $$F4;
-export const jX = $$O5;
-export const Tr = $$E6;
+
+  for (const node of selectedNodes) collectVisible(node)
+
+  const collectAdditional = (node: any) => {
+    if (!(node.locked || !node.visible || guidToSiblings.has(node.guid))) {
+      if (!isTopLevelFrame(node)) {
+        const path = node.guid === page.guid ? "" : getNodePath(node)
+        if (pathToNodes.has(path))
+          pathToNodes.get(path)!.push(node)
+      }
+      if (node.childrenNodes) {
+        for (const child of node.childrenNodes) collectAdditional(child)
+      }
+    }
+  }
+
+  collectAdditional(page)
+  return guidToSiblings
+}
+
+/**
+ * Builds the representation for a node for AI processing.
+ * @param params - Parameters for building the representation.
+ * @returns The node representation object.
+ */
+function buildNodeRepresentation({
+  node,
+  overwriteNames,
+  renameComponents,
+  includeNodeIds,
+  relativeFrame,
+}: {
+  node: any
+  overwriteNames: boolean
+  renameComponents: boolean
+  includeNodeIds: number
+  relativeFrame?: { x: number, y: number, w: number, h: number }
+}): any {
+  const isNameable = isLayerNameable(node, overwriteNames, renameComponents)
+  const isDefault = isDefaultName(node, renameComponents)
+  if (!relativeFrame) {
+    relativeFrame = {
+      x: Math.floor(node.absoluteBoundingBox.x),
+      y: Math.floor(node.absoluteBoundingBox.y),
+      w: Math.floor(node.absoluteBoundingBox.w),
+      h: Math.floor(node.absoluteBoundingBox.h),
+    }
+  }
+  const hasImageFill = node.fills.length > 0 && node.fills.some((fill: any) => fill.type === "IMAGE")
+  let type = node.type
+  let isCustomName = false
+  if (hasImageFill) {
+    type = "IMAGE"
+  }
+  else if (node.type === "INSTANCE" && node.symbolId) {
+    const symbol = getSingletonSceneGraph().get(node.symbolId)
+    if (symbol && !isDefaultName(symbol, renameComponents)) {
+      type = symbol.name
+      isCustomName = true
+    }
+  }
+  else if (node.type === "SYMBOL" && renameComponents) {
+    type = "COMPONENT"
+  }
+  const shouldUseName = !isDefault && !isCustomName
+  const maxWidth = _$$a(node)
+  const scale = relativeFrame.w > maxWidth ? maxWidth / relativeFrame.w : 1
+  const rep = {
+    name: shouldUseName ? node.name : undefined,
+    type,
+    id: isNameable ? node.guid : undefined,
+    text: node.characters ? node.characters.trim().substring(0, 200) : undefined,
+    autolayout: node.isStack && node.stackMode !== "GRID" ? node.stackMode : undefined,
+    x: Math.floor((node.absoluteBoundingBox.x - relativeFrame.x) * scale),
+    y: Math.floor((node.absoluteBoundingBox.y - relativeFrame.y) * scale),
+    w: Math.floor(node.absoluteBoundingBox.w * scale),
+    h: Math.floor(node.absoluteBoundingBox.h * scale),
+  }
+  if (node.type !== "INSTANCE" && includeNodeIds === 0) {
+    const children = node.childrenNodes
+      ? node.uiOrderedChildren.map((id: string) => children.find((child: any) => child.guid === id)).filter(Boolean)
+      : []
+    rep.children = children
+      .filter((child: any) => child.visible && child.opacity > 0)
+      .map((child: any) =>
+        buildNodeRepresentation({
+          node: child,
+          overwriteNames,
+          renameComponents: false,
+          includeNodeIds: 0,
+          relativeFrame,
+        }),
+      )
+  }
+  return rep
+}
+
+/**
+ * Processes the AI response stream and applies renames.
+ * @param reader - The stream reader.
+ * @param abortController - The abort controller.
+ * @param siblingMap - Map of GUIDs to siblings.
+ * @param selectedGuids - GUIDs of selected nodes.
+ * @param overwriteNames - Whether to overwrite names.
+ * @param isComponentCreation - Whether creating components.
+ * @param ignoreDescendants - Whether to ignore descendants.
+ * @param onTaskUpdate - Callback for task updates.
+ * @param pendingRenames - Map to store pending renames.
+ * @param expandedNodes - Set of expanded node GUIDs.
+ * @param animations - Array of animation promises.
+ * @param stats - Stats object to update.
+ * @returns Promise that resolves when processing is done.
+ */
+async function processRenameStream(
+  reader: any,
+  abortController: AbortController,
+  siblingMap: Map<string, any[]>,
+  selectedGuids: string[] | undefined,
+  overwriteNames: boolean,
+  isComponentCreation: boolean,
+  ignoreDescendants: boolean,
+  onTaskUpdate: (guid: string) => void,
+  pendingRenames: Map<string, { name: string, autoRename: boolean }>,
+  expandedNodes: Set<string>,
+  animations: Promise<any>[],
+  stats: { hallucinated: number, ordinals: number },
+): Promise<void> {
+  const abortPromise = new Promise<void>((resolve) => {
+    abortController.signal.addEventListener("abort", resolve)
+  })
+
+  for (;;) {
+    const result = await Promise.race([reader.read(), abortPromise])
+    if (abortController.signal.aborted) {
+      reader.cancel()
+      break
+    }
+    const { done, value } = result
+    if (value) {
+      const [guid, newName] = value.split(",").map((s: string) => s.trim())
+      // Check for ordinals
+      for (const ordinal of ordinalStrings) {
+        if (newName.toUpperCase().includes(ordinal)) {
+          stats.ordinals++
+          break
+        }
+      }
+      const node = getSingletonSceneGraph().get(guid)
+      if (node && isLayerNameable(node, overwriteNames, isComponentCreation) && (!ignoreDescendants || selectedGuids?.includes(node.guid))) {
+        // Expand parents
+        let current = node.parentNode
+        while (current) {
+          if ("isExpanded" in current && !current.isExpanded) {
+            current.isExpanded = true
+            expandedNodes.add(current.guid)
+          }
+          current = current.parentNode
+        }
+        const nodesToRename = [{ node, animate: true }]
+        for (const sibling of siblingMap.get(guid) ?? []) {
+          if (sibling.guid !== guid && isLayerNameable(sibling, overwriteNames, isComponentCreation) && !pendingRenames.has(sibling.guid)) {
+            nodesToRename.push({ node: sibling, animate: false })
+          }
+        }
+        for (const { node: nodeToRename, animate } of nodesToRename) {
+          if (animate) {
+            const animation = deleteAndWriteNode(nodeToRename, newName, abortController, actionsThatCreateNewNodes.has(isComponentCreation ? ActionType.CREATE_COMPONENT : undefined))
+            animations.push(animation)
+          }
+          const original = { name: nodeToRename.name, autoRename: nodeToRename.autoRename }
+          permissionScopeHandler.ai("rename-layers", () => {
+            nodeToRename.name = newName
+          })
+          pendingRenames.set(nodeToRename.guid, original)
+          onTaskUpdate(nodeToRename.guid)
+        }
+      }
+      else if (!node) {
+        stats.hallucinated++
+      }
+    }
+    if (done)
+      break
+  }
+}
+
+/**
+ * Main function to rename layers using AI.
+ * @param params - Parameters for the rename operation.
+ * @returns Promise that resolves with any error or undefined.
+ */
+export async function renameLayers({
+  abortController,
+  onTasksUpdate,
+  params,
+  clientLifecycleId,
+}: {
+  abortController: AbortController
+  onTasksUpdate?: (tasks: any[]) => void
+  params: {
+    source: ActionType
+    overwriteNames: boolean
+    customNodeSelection?: string[]
+    ignoreDescendants: boolean
+  }
+  clientLifecycleId: string
+}): Promise<any> {
+  const { source, overwriteNames, customNodeSelection, ignoreDescendants } = params
+  const timer = new Timer()
+  timer.start()
+  let timeToFirstToken: number | null = null
+  const debug = debugState.getState()
+  const fileKey = debug.openFile?.key
+  const isComponentCreation = source === ActionType.CREATE_COMPONENT
+  const sourceString = getActionSourceString(source)
+  let selectedNodes = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes
+  if (customNodeSelection) {
+    selectedNodes = customNodeSelection
+      .map(guid => getSingletonSceneGraph().get(guid))
+      .filter(Boolean)
+  }
+  const selectedGuids = selectedNodes?.map(node => node.guid)
+  if (!selectedNodes || selectedNodes.length === 0)
+    throw new NoSelectedLayersError()
+  let totalItems = 0
+  let hallucinatedCount = 0
+  let ordinalsCount = 0
+  const tasks: any[] = []
+  const siblingMap = buildSiblingMap(getSingletonSceneGraph().getCurrentPage(), selectedNodes)
+  const pendingRenames = new Map<string, { name: string, autoRename: boolean }>()
+  const representations = (await asyncMap(selectedNodes, async (node) => {
+    const rep = buildNodeRepresentation({
+      node,
+      overwriteNames,
+      renameComponents: !!isComponentCreation,
+      includeNodeIds: ignoreDescendants ? 1 : 0,
+    })
+    const flattened: any[] = []
+    const flatten = (item: any, arr: any[]) => {
+      arr.push(item)
+      if (item.children) {
+        for (const child of item.children) flatten(child, arr)
+      }
+    }
+    flatten(rep, flattened)
+    const nameable = flattened.filter(item => item.id !== undefined)
+    if (nameable.length === 0)
+      return null
+    totalItems += flattened.length
+    for (const { id } of nameable) {
+      if (id) {
+        tasks.push({ taskId: id, state: z8.INCOMPLETE })
+        atomStoreManager.set(nodeStateFamily(id), {
+          guid: id,
+          boundingBox: node.absoluteBoundingBox,
+          state: "pending",
+          name: node.name,
+        })
+      }
+    }
+    return { rep, image: await _$$v(node) }
+  })).filter(Boolean)
+  const nameableCount = tasks.length
+  if (nameableCount === 0)
+    throw new NoNameableLayersError()
+  if (totalItems > MAX_LAYER_COUNT)
+    throw new LayerLimitExceededError(totalItems)
+  onTasksUpdate?.(tasks)
+  atomStoreManager.set(deletionSettings, { autoScroll: true })
+  trackFileEvent("ai_rename_layers_started", fileKey, debug, {
+    numItemsTotal: totalItems,
+    numItemsNameable: nameableCount,
+    source: sourceString,
+    clientLifecycleId,
+  })
+  const updateTask = (guid: string) => {
+    tasks.forEach((task) => {
+      if (task.taskId === guid)
+        task.state = z8.SUCCEEDED
+    })
+    onTasksUpdate?.(tasks)
+  }
+  try {
+    const requestOptions = { ..._$$Ay2(), clientLifecycleId }
+    const response = await cortexAPI.design.generateRenameLayers(
+      { nodes: representations, isMeteringRequest: true, renameTopLayerOnly: !!ignoreDescendants },
+      requestOptions,
+    )
+    const expandedNodes = new Set<string>()
+    const animations: Promise<any>[] = []
+    const stats = { hallucinated: hallucinatedCount, ordinals: ordinalsCount }
+    await processRenameStream(
+      response.getReader(),
+      abortController,
+      siblingMap,
+      selectedGuids,
+      overwriteNames,
+      isComponentCreation,
+      ignoreDescendants,
+      updateTask,
+      pendingRenames,
+      expandedNodes,
+      animations,
+      stats,
+    )
+    hallucinatedCount = stats.hallucinated
+    ordinalsCount = stats.ordinals
+    if (!abortController.signal.aborted)
+      await Promise.all(animations)
+    const elapsed = timer.getElapsedTime()
+    timer.stop()
+    const succeededCount = tasks.filter(task => task.state === z8.SUCCEEDED).length
+    if (abortController.signal.aborted) {
+      trackFileEvent("ai_rename_layers_cancelled", fileKey, debug, {
+        timeToFirstToken,
+        timeToCompletion: elapsed,
+        numItemsTotal: totalItems,
+        numItemsNameable: nameableCount,
+        numItemsNamed: succeededCount,
+        numItemsHallucinated: hallucinatedCount,
+        numItemsWithOrdinals: ordinalsCount,
+        source: sourceString,
+        clientLifecycleId,
+      })
+      applyRenames(pendingRenames)
+    }
+    else {
+      trackFileEvent("ai_rename_layers_completed", fileKey, debug, {
+        timeToFirstToken,
+        timeToCompletion: elapsed,
+        numItemsTotal: totalItems,
+        numItemsNameable: nameableCount,
+        numItemsNamed: succeededCount,
+        numItemsHallucinated: hallucinatedCount,
+        numItemsWithOrdinals: ordinalsCount,
+        source: sourceString,
+        clientLifecycleId,
+      })
+    }
+    fullscreenValue.triggerAction("commit")
+  }
+  catch (error) {
+    clearAllNodeStates()
+    applyRenames(pendingRenames)
+    fullscreenValue.triggerAction("commit")
+    reportError(ServiceCategories.AI_PRODUCTIVITY, error, {
+      extra: { numItemsTotal: totalItems, numItemsNameable: nameableCount, source: sourceString },
+    })
+    trackFileEvent("ai_rename_layers_failed", fileKey, debug, {
+      error,
+      numItemsTotal: totalItems,
+      numItemsNameable: nameableCount,
+      source: sourceString,
+      clientLifecycleId,
+    })
+    return error
+  }
+  finally {
+    tasks.forEach((task) => {
+      if (task.state === z8.INCOMPLETE) {
+        task.state = z8.FAILED
+        task.error = new LayerNotRenamedError()
+      }
+    })
+    onTasksUpdate?.(tasks)
+  }
+}
+
+// Exports (refactored to match meaningful internal names)
+export const NB = MAX_LAYER_COUNT
+export const eJ = LayerLimitExceededError
+export const BT = NoNameableLayersError
+export const tS = NoSelectedLayersError
+export const Ay = renameLayers
+export const jX = isLayerNameable
+export const Tr = getActionSourceString

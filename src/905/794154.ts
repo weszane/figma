@@ -95,6 +95,6 @@ export function useCurrentNavigationItem() {
 }
 
 // Export aliases for backward compatibility
-export const cp = useNavigationStack
+export const cq = useNavigationStack
 export const i8 = useCurrentNavigationItem
 export const jX = useIsNavigationStackEmpty

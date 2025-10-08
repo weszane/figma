@@ -1,4 +1,4 @@
-import { D } from "../905/629114";
+import { createFigmaPluginScope } from "../905/629114";
 let i = ["RECTANGLE", "ELLIPSE", "FRAME", "POLYGON", "VECTOR", "STAR", "LINE", "BOOLEAN_OPERATION", "GROUP"];
 export async function $$a0({
   guid: e,
@@ -8,7 +8,7 @@ export async function $$a0({
   shouldSelectNewNode: a = !0,
   shouldAdjustFontSize: o = !1
 }) {
-  let l = D();
+  let l = createFigmaPluginScope();
   let d = l.getNodeById(e);
   if (!d) {
     console.warn("Could not find node", e);

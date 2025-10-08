@@ -78,14 +78,14 @@ import { RR } from "../figma_app/307841";
 import { l as _$$l } from "../905/714607";
 import { I as _$$I } from "../905/531560";
 import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
-import { $m } from "../figma_app/78808";
-import { Rh } from "../905/844322";
+import { setFileThumbnailOptimistic } from "../figma_app/78808";
+import { handleRestoreTrashedFilesHelper } from "../905/844322";
 import { kj, U1 } from "../905/191601";
 import { beginRenaming } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
-import { VK } from "../905/880488";
+import { deleteFilesOptimistThunk } from "../905/880488";
 import { isRestrictedPlanAccess } from "../figma_app/765689";
-import { F as _$$F2 } from "../905/300562";
+import { FileOrgViewMode } from "../905/300562";
 import { findFavoritedItem, isFavoritesLimitReached, sortWithPinnedItems } from "../figma_app/863319";
 import { getProjectUrl } from "../figma_app/528509";
 import { selectPermissionsState } from "../figma_app/212807";
@@ -502,7 +502,7 @@ let ti = memo(function ({
       let e = useSelector(selectOpenFileObject);
       let t = useDispatch();
       return () => {
-        e && (t(VK({
+        e && (t(deleteFilesOptimistThunk({
           fileKeys: {
             [e.key]: e
           },
@@ -517,7 +517,7 @@ let ti = memo(function ({
       let e = useSelector(selectOpenFileObject);
       let t = useDispatch();
       return () => {
-        e && t(Rh({
+        e && t(handleRestoreTrashedFilesHelper({
           fileKeys: {
             [e.key]: e
           },
@@ -533,7 +533,7 @@ let ti = memo(function ({
           type: _$$e4,
           data: {
             fileKey: e.key,
-            entrypoint: _$$F2.FileView
+            entrypoint: FileOrgViewMode.FileView
           }
         }));
       }, [e, t]);
@@ -587,7 +587,7 @@ let ti = memo(function ({
       let e = useDispatch();
       let t = selectCurrentFile();
       return () => {
-        t && e($m({
+        t && e(setFileThumbnailOptimistic({
           file_key: t.key,
           thumbnail_guid: null
         }));

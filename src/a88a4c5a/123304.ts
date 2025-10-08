@@ -39,7 +39,7 @@ import { n as _$$n } from '../905/79930';
 import { o as _$$o4 } from '../905/89370';
 import { m as _$$m } from '../905/99004';
 import { selectWithShallowEqual } from '../905/103090';
-import { Z as _$$Z2 } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { Ef } from '../905/107436';
 import { ImageOverlayComponent } from '../905/129046';
 import { KindEnum } from '../905/129884';
@@ -82,7 +82,7 @@ import { useModalManager } from '../905/437088';
 import { IconButton } from '../905/443068';
 import { LoadingSpinner } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
-import { E as _$$E } from '../905/453826';
+import { useEventForwarder } from '../905/453826';
 import { l as _$$l7 } from '../905/479687';
 import { X as _$$X } from '../905/482718';
 import { PrimaryWorkflowEnum } from '../905/497152';
@@ -210,7 +210,7 @@ import { yh } from '../9410/974031';
 import { K as _$$K2 } from '../b2835def/230877';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { CommentsSubmitButton } from '../draftjs_composer/524876';
-import { Dqt, E5y, EYw, kBA, koo, KTt, L6E, l_p, Nh9, qiY, wRw } from '../figma_app/6204';
+import { MobileReplyUpsellAnnouncement, DevModeDemoFileEntryPoint, StartingPointsTemplatesModal, ReadyForDevNodeNameChangeUpsell, DeveloperRFDUpsellOverlay, AIOnboarding, DeveloperContextualUpsellExportOverlay, VisualAssetsIntroTooltip, DeveloperContextualUpsellMeasureOverlay, FigmaMakeUpsellInDesignEditorOverlay, ViewerDevModeStatusChangedTooltipOverlay } from '../figma_app/6204';
 import { Dm } from '../figma_app/8833';
 import { ei as _$$ei } from '../figma_app/9054';
 import { KP } from '../figma_app/12491';
@@ -1091,7 +1091,7 @@ function eW() {
   let d = useAtomWithSubscription(Sp);
   let u = Xr(Sp);
   let c = useRef(null);
-  let x = _$$Z2('dev-handoff-rfd-signals-frame-upsell');
+  let x = useNavigateToViewport('dev-handoff-rfd-signals-frame-upsell');
   let [p, h] = useState(!1);
   let f = useCallback(() => {
     c.current && r(c.current.absoluteBounds.height * s.zoomScale);
@@ -1116,7 +1116,7 @@ function eW() {
     uniqueId,
     isShowing
   } = _$$e2({
-    overlay: kBA,
+    overlay: ReadyForDevNodeNameChangeUpsell,
     priority: _$$N.HIGH_PRIORITY_MODAL,
     experiment: {
       check: y,
@@ -1128,7 +1128,7 @@ function eW() {
     a({
       fn: complete
     });
-  }, [complete, a]), _$$E(uniqueId, ['frame_node_name_changed_with_rfd_indicator'], e => {
+  }, [complete, a]), useEventForwarder(uniqueId, ['frame_node_name_changed_with_rfd_indicator'], e => {
     if (!e.properties.nodeId) {
       eq('no_node_id');
       return;
@@ -1195,7 +1195,7 @@ function e7() {
       isShowing,
       uniqueId
     } = _$$e2({
-      overlay: Nh9,
+      overlay: DeveloperContextualUpsellMeasureOverlay,
       priority: _$$N.DEFAULT_MODAL,
       experiment: {
         check: t,
@@ -1209,7 +1209,7 @@ function e7() {
       isShowing: _isShowing,
       uniqueId: _uniqueId
     } = _$$e2({
-      overlay: L6E,
+      overlay: DeveloperContextualUpsellExportOverlay,
       priority: _$$N.DEFAULT_MODAL,
       experiment: {
         check: t,
@@ -1239,10 +1239,10 @@ function e7() {
       };
       n > s.current && window.addEventListener('keyup', e);
     }, [n]);
-    _$$E(e, 'copy_as_completed', e => {
+    useEventForwarder(e, 'copy_as_completed', e => {
       t('export');
     });
-    _$$E(e, 'export_completed', e => {
+    useEventForwarder(e, 'export_completed', e => {
       t('export');
     });
   }(exportId, n => {
@@ -1253,7 +1253,7 @@ function e7() {
       }
     });
   });
-  _$$E(activeId, 'Enter Inspect Mode', () => {
+  useEventForwarder(activeId, 'Enter Inspect Mode', () => {
     showing && complete();
   });
   let m = showing === 'export' ? renderI18nText('upsell.dev_mode.contextual_overlay.export_title') : renderI18nText('upsell.dev_mode.contextual_overlay.measure_title');
@@ -1319,7 +1319,7 @@ function th() {
     isShowing,
     uniqueId
   } = _$$e2({
-    overlay: koo,
+    overlay: DeveloperRFDUpsellOverlay,
     priority: _$$N.OVERRIDING_MODAL
   }, [p]);
   useEffect(() => {
@@ -1330,7 +1330,7 @@ function th() {
       }
     });
   }, [show, u, c, d, t, p, h, e, o]);
-  _$$E(uniqueId, 'Enter Inspect Mode', () => {
+  useEventForwarder(uniqueId, 'Enter Inspect Mode', () => {
     isShowing && complete();
   });
   let {
@@ -1429,10 +1429,10 @@ function tk() {
     complete,
     uniqueId
   } = _$$e2({
-    overlay: wRw,
+    overlay: ViewerDevModeStatusChangedTooltipOverlay,
     priority: _$$N.OVERRIDING_MODAL - 1
   }, [i]);
-  _$$E(uniqueId, 'ui3_finished_entering_design_mode', () => {
+  useEventForwarder(uniqueId, 'ui3_finished_entering_design_mode', () => {
     getQueryParam('rfd-notif') && show({
       canShow: e => !e.file?.hasPermission,
       onShow: () => {
@@ -1532,7 +1532,7 @@ function tW() {
     show,
     complete
   } = _$$e2({
-    overlay: E5y,
+    overlay: DevModeDemoFileEntryPoint,
     priority: _$$N.DEFAULT_MODAL
   });
   return (useEffect(() => {
@@ -1648,7 +1648,7 @@ function t4() {
     show,
     complete
   } = _$$e2({
-    overlay: qiY,
+    overlay: FigmaMakeUpsellInDesignEditorOverlay,
     priority: _$$N.DEFAULT_MODAL,
     experiment: {
       check: c,
@@ -2050,7 +2050,7 @@ function lL() {
     isShowing,
     complete
   } = _$$e2({
-    overlay: EYw,
+    overlay: StartingPointsTemplatesModal,
     priority: _$$N.OVERRIDING_MODAL + 1
   }, [h, y]);
   return (useEffect(() => {
@@ -2073,7 +2073,7 @@ let lF = Op({
     transitions: [_$$nr('curator_content_shown', 'ui3_onboarding_was_shown_in_current_session', {
       condition: ({
         event: e
-      }) => e.properties.shown === KTt.id
+      }) => e.properties.shown === AIOnboarding.id
     })]
   }, {
     id: 'ui3_onboarding_was_shown_in_current_session',
@@ -2088,7 +2088,7 @@ function lV() {
     show,
     uniqueId
   } = _$$e2({
-    overlay: l_p,
+    overlay: VisualAssetsIntroTooltip,
     priority: _$$N.SECONDARY_MODAL
   });
   let a = wA();
@@ -2103,7 +2103,7 @@ function lV() {
   let _ = isOnboardingComplete();
   let b = u?.canEdit;
   let j = d4(e => e.leftPanel.activeTab === UserInterfaceElements.LAYERS);
-  if (_$$E(uniqueId, ['Reset Visual Assets Tooltips', _$$io], () => {
+  if (useEventForwarder(uniqueId, ['Reset Visual Assets Tooltips', _$$io], () => {
     c && u && a(postUserFlag(_$$g3));
   }), useEffect(() => {
     !p() || !b || y || h || m || f || !_ || d || !j || isShowing || show();
@@ -10301,10 +10301,10 @@ let a_ = memo(() => {
 });
 function aO() {
   let e = _$$e2({
-    overlay: Dqt,
+    overlay: MobileReplyUpsellAnnouncement,
     priority: _$$N.DEFAULT_MODAL
   });
-  _$$E(e.uniqueId, 'commentThreadMobileAnnouncementClicked', () => {
+  useEventForwarder(e.uniqueId, 'commentThreadMobileAnnouncementClicked', () => {
     trackEventAnalytics('sidebar_announcement_mobile_app_download_prompt_modal_shown');
     e.show({});
   });

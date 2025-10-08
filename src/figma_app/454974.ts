@@ -11,7 +11,7 @@ import { B3, Ag } from "../figma_app/862289";
 import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { A } from "../905/51743";
-import { NB, jX, Ay } from "../905/281495";
+import { MAX_LAYER_COUNT, isLayerNameable, renameLayers } from "../905/281495";
 export function $$f2(e, t = !1) {
   let r = [];
   t ? e.map(e => {
@@ -23,10 +23,10 @@ export function $$f2(e, t = !1) {
       if (t.visible && 0 !== t.opacity) for (let n of (r.push(t), t.childrenNodes ?? [])) e(n, r);
     }(t, r);
   });
-  let n = r.length > NB;
+  let n = r.length > MAX_LAYER_COUNT;
   let i = [];
   r.map(e => {
-    if (jX(e, !1)) return i.push(e.guid);
+    if (isLayerNameable(e, !1)) return i.push(e.guid);
   });
   return {
     detectedUnnamedLayers: i.length > 0,
@@ -69,7 +69,7 @@ export function $$y1({
       }),
       beforeModuleOpen: () => {
         B3(JT.AUTO_RENAME_LAYERS);
-        e !== ActionType.LAYERS_PANEL_OVERFLOW_MENU && Ag(JT.AUTO_RENAME_LAYERS, Ay, {
+        e !== ActionType.LAYERS_PANEL_OVERFLOW_MENU && Ag(JT.AUTO_RENAME_LAYERS, renameLayers, {
           source: e,
           overwriteNames: !1
         });
@@ -110,7 +110,7 @@ export const Mc = $$f2;
 export const R4 = $$E3;
 export const sq = function e(t) {
   if (!t.visible || 0 === t.opacity) return !1;
-  if (jX(t, !1)) return !0;
+  if (isLayerNameable(t, !1)) return !0;
   for (let r of t.childrenNodes ?? []) if (e(r)) return !0;
   return !1;
 };

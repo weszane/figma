@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { showDropdownThunk } from "../905/929976";
 import { useDropdownState } from "../905/848862";
 import { KindEnum } from "../905/129884";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 import { Jo, VA, r1, m5 } from "../figma_app/152690";
 import { bt, R } from "../figma_app/767318";
 var d = l;
@@ -85,8 +85,8 @@ export function $$T1() {
   let a = S();
   let s = m5(!1, Jo.SELECTION);
   return useMemo(() => s ? {
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.DROPDOWN_TRIGGER_BUTTON,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.DROPDOWN_TRIGGER_BUTTON,
     dropdownTargetButtonRef: t,
     onClick: r,
     getTitle: () => getI18nString("properties.dropdown.apply_variable_mode"),

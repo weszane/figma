@@ -11,7 +11,7 @@ import { hO, d3, eQ, v2, G4 } from "../figma_app/545293";
 import { popModalStack, hideModalHandler, showModalHandler } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
 import { applyOffsetToViewport } from "../figma_app/62612";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { M$ } from "../figma_app/297822";
 import { dd, TT, Bw } from "../figma_app/604494";
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -331,7 +331,7 @@ export function $$$0(e, t, i, y, b) {
   let C = useAtomWithSubscription(dd);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   return useCallback((n, r, s, u) => {
     let f = {
       text: i === G4.FIGMAKE ? getI18nString("sites.panel.make.attach_design") : getI18nString("assets_in_actions.fragment_search.insert"),

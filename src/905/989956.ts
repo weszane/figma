@@ -16,7 +16,7 @@ export class ColorCSSManipulator extends ColorManipulator {
    * @returns Parsed color object
    * @throws Error if parsing fails
    */
-  parseColorString(colorStr: string) {
+  parse(colorStr: string) {
     const color = parseColor(colorStr)
     return assertNotNullish(color, 'Could not parse CSS')
   }

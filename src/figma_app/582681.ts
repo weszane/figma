@@ -17,7 +17,7 @@ import { Fj, jI } from "../905/763714";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { fK } from "../905/469533";
+import { setEnhancedContrastThunk } from "../905/469533";
 import { getCurrentFileType } from "../figma_app/976749";
 import { useScreenReaderManager } from "../905/810168";
 import { FFileType } from "../figma_app/191312";
@@ -99,7 +99,7 @@ export let $$C0 = registerModal(function ({
               trackAccessibilityEvent(e ? AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_ON : AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_OFF, {
                 isMouseEvent: "mouse" === t
               });
-              L(fK({
+              L(setEnhancedContrastThunk({
                 enhancedContrast: e,
                 userInitiated: !0
               }));

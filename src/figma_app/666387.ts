@@ -7,7 +7,7 @@ import { A as _$$A2 } from '../905/139173';
 import { e as _$$e } from '../905/149844';
 import { showModal } from '../905/156213';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { P as _$$P2 } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { IconButton } from '../905/443068';
 import { P as _$$P } from '../905/537307';
 import { findTeamById } from '../905/613917';
@@ -84,7 +84,7 @@ function H({
           showBottomBorder: u
         }), jsx('div', {
           className: 'color_palette_picker--paletteList--jdLIl',
-          children: jsx(_$$P2, {
+          children: jsx(RecordingScrollContainer, {
             maxHeight: 290,
             innerClassName: 'color_palette_picker--scrollContainer__inner--GF0-Z',
             onScroll: e => {

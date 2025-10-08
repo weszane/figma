@@ -21,7 +21,7 @@ import { Py, AD } from "../figma_app/578768";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { KindEnum } from "../905/129884";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { fI, YW } from "../figma_app/626177";
 import { vQ } from "../9410/124657";
 import { i as _$$i, S as _$$S } from "../3276/270077";
@@ -212,7 +212,7 @@ function V(e) {
                 disabled: e.disabled,
                 children: e.text
               }, e.key));
-              return jsx(Cf, {
+              return jsx(ConnectedPointingDropdown, {
                 targetRect: e.getBoundingClientRect(),
                 minWidth: 160,
                 closeDropdown: () => {

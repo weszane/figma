@@ -1,5 +1,5 @@
 import { Op, nr, rn } from "../figma_app/903573";
-import { WD4 } from "../figma_app/6204";
+import { FigmaBasicsTooltipOnboarding } from "../figma_app/6204";
 let i = Op({
   initial: "ready_to_show",
   states: [{
@@ -7,7 +7,7 @@ let i = Op({
     transitions: [nr("curator_content_shown", "no_figma_basics_onboarding_was_shown_in_current_session", {
       condition: ({
         event: e
-      }) => e.properties.shown === WD4.id
+      }) => e.properties.shown === FigmaBasicsTooltipOnboarding.id
     })]
   }, {
     id: "no_figma_basics_onboarding_was_shown_in_current_session",

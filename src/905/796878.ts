@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { U5, jG } from "../905/599844";
 export function $$s0({
   children: e,
@@ -7,7 +7,7 @@ export function $$s0({
   isEditHubFilePageMode: i = !1,
   footerErrorHeightPx: s
 }) {
-  return jsxs(P, {
+  return jsxs(RecordingScrollContainer, {
     className: i ? U5 : jG,
     onScroll: t,
     children: [jsx("div", {

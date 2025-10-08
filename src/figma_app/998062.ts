@@ -11,7 +11,7 @@ import { VisualBellIcon, VisualBellType } from "../905/576487";
 import { fullscreenValue } from "../figma_app/455680";
 import { useSelectionPropertyValue, useNonMixedSelectionPropertyValue } from "../905/275640";
 import { getObservableValue } from "../figma_app/84367";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 import { v as _$$v } from "../figma_app/339170";
 import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { useRef, useMemo } from "react";
@@ -95,8 +95,8 @@ export function $$R1() {
   let d = useNonMixedSelectionPropertyValue("numSelectedByType");
   let f = !!d?.CANVAS_ROW;
   if (a && s && !f) return {
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.DIALOG_TRIGGER_BUTTON,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.DIALOG_TRIGGER_BUTTON,
     onClick: () => {
       fullscreenValue.triggerActionInUserEditScope("ungroup-selection");
       e(VisualBellActions.enqueue({

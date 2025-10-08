@@ -37,13 +37,13 @@ import { e as _$$e2 } from "../905/621515";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { getUserPlan } from "../figma_app/502247";
 import { N as _$$N } from "../figma_app/268271";
-import { Ypw } from "../figma_app/6204";
+import { DevModeDemoFileTourOverlay } from "../figma_app/6204";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { PY, go, Px, Bl, kO, HO, aN } from "../figma_app/57551";
 import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { UpgradeAction } from "../905/370443";
-import { Z as _$$Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
 import { INSPECT_PANEL } from "../figma_app/80938";
 import { _o } from "../figma_app/701001";
@@ -350,7 +350,7 @@ function ef(e) {
   var t;
   let [n, a] = useState(!1);
   let l = useSelector(e => e.mirror.sceneGraph);
-  let d = _$$Z();
+  let d = useNavigateToViewport();
   t = l;
   let s = findNodeByCriteria({
     nodeType: "INSTANCE",
@@ -429,7 +429,7 @@ function e_(e) {
   var t;
   let [n, a] = useState(!1);
   let d = useSelector(e => e.mirror.sceneGraph);
-  let s = _$$Z();
+  let s = useNavigateToViewport();
   t = d;
   let u = findNodeByCriteria({
     nodeType: "INSTANCE",
@@ -499,7 +499,7 @@ function eC(e) {
   let [n, a] = useState(!1);
   let d = useAtomWithSubscription(go);
   let s = useSelector(e => e.mirror.sceneGraph);
-  let u = _$$Z();
+  let u = useNavigateToViewport();
   t = s;
   let c = findNodeByCriteria({
     nodeType: "FRAME",
@@ -607,7 +607,7 @@ function ej(e) {
   var t;
   let [n, a] = useState(!1);
   let l = useSelector(e => e.mirror.sceneGraph);
-  let d = _$$Z();
+  let d = useNavigateToViewport();
   t = l;
   let s = findNodeByCriteria({
     nodeType: "SECTION",
@@ -758,7 +758,7 @@ function eI() {
     isShowing,
     show
   } = _$$e2({
-    overlay: Ypw,
+    overlay: DevModeDemoFileTourOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   let n = getUserId();

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setupThemeContext } from "../905/614223";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { usePrefersReducedMotion } from "../figma_app/469468";
 import { Vn } from "../figma_app/795674";
 import { hideTooltip } from "../905/765855";
@@ -59,7 +59,7 @@ export function $$T1(e) {
     clearTimeout(E.current);
     E.current = setTimeout(i, n ? 550 : 200);
   }, [e.onAnimationCompletion, o]);
-  wY(s, I);
+  useResizeObserverRef(s, I);
   let [S, v] = useState(!1);
   useLayoutEffect(() => {
     v(!0);

@@ -407,7 +407,7 @@ export const clearGlobalTags = (): void => Object.keys(createTags(CPPEventType.U
  * @param i - The merge direction.
  * @param r - The context.
  */
-export function handleError(e: Error, t: CPPEventType, i: string | null, r: any): void {
+export function handleError(e: Error, t: CPPEventType, i: string | null, r?: any): void {
   logError('branching', e.message, r);
   reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e, {
     tags: createTags(t, i)
@@ -419,7 +419,7 @@ export function handleError(e: Error, t: CPPEventType, i: string | null, r: any)
  * @param e - The error.
  * @param t - The context.
  */
-export function handleModalError(e: Error, t: any): void {
+export function handleModalError(e: Error, t?: any): void {
   const i: any = atomStoreManager.get(currentSelectionAtom);
   logError('branching', e.message, t);
   reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e, {

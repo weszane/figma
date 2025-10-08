@@ -25,7 +25,7 @@ import { getPermissionLevelName } from "../figma_app/12796";
 import { AccessLevelEnum } from "../905/557142";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { b8 } from "../figma_app/926061";
 import { A as _$$A } from "../2854/769773";
 let A = "team_join_link_permissions--loadedViewWrapper--LjAIr";
@@ -155,7 +155,7 @@ function D(e) {
         },
         children: jsx(_$$P, {})
       })
-    }), o() && jsxs(Cf, {
+    }), o() && jsxs(ConnectedPointingDropdown, {
       targetRect: e.dropdownShown.data.targetRect,
       maxWidth: 140,
       minWidth: 140,

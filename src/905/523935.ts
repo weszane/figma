@@ -30,7 +30,7 @@ import { getUUID } from "../figma_app/517115";
 import { AUTO_SUGGEST_EVENT_PREFIX, trackComponentInserted } from "../figma_app/984498";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { Nv } from "../figma_app/318590";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { useSubscribedLibraryKeys } from "../figma_app/275938";
 import { F5, oM } from "../905/192343";
 export function $$$$j0(e) {
@@ -122,7 +122,7 @@ export function $$$$j0(e) {
     } else throw Error(`Unexpected type for dragging library item: ${V.type}`);
     K && !hasAssetId(e.resource) && hasComponentKey(e.resource) && oM({
       id: e.resource.component_key,
-      type: _$$p.STICKERS_AND_COMPONENTS,
+      type: TabCategory.STICKERS_AND_COMPONENTS,
       source: e.sourceForTracking,
       options: {
         ...q,

@@ -12,7 +12,7 @@ import { sZ } from "../figma_app/948389";
 import { getSelectedNodesWithinBreakpointFrame } from "../905/913055";
 import { JT, pY } from "../figma_app/632248";
 import { B3, z8, qy } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { AIActionIterationResult } from "../905/278499";
 import { DZ, F3, Q8 } from "../figma_app/604494";
 import { f as _$$f, E as _$$E } from "../905/690713";
@@ -71,7 +71,7 @@ let $$S0 = async ({
 export function $$j1() {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let {
     longRunningAction,
     lastParameters,

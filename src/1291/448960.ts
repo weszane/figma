@@ -7,7 +7,7 @@ import { A as _$$A } from "../905/251970";
 import { tabbable } from "tabbable";
 import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -23,13 +23,13 @@ import { Tabs } from "../905/150656";
 import { Z } from "../905/189618";
 import { Q } from "../1291/188959";
 import { styleBuilderInstance } from "../905/941192";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { cX } from "../figma_app/920333";
 import { DN, kD, FL, mS, HI, SK } from "../figma_app/293326";
 import { O as _$$O } from "../figma_app/71774";
 import { F as _$$F } from "../figma_app/603239";
 import { DraggableModalManager } from "../905/748636";
-let I = [_$$p.ALL, _$$p.STICKERS_AND_COMPONENTS, _$$p.TEMPLATES, _$$p.WIDGETS, _$$p.PLUGINS, _$$p.MORE];
+let I = [TabCategory.ALL, TabCategory.STICKERS_AND_COMPONENTS, TabCategory.TEMPLATES, TabCategory.WIDGETS, TabCategory.PLUGINS, TabCategory.MORE];
 function k() {
   let {
     tabManager,
@@ -54,23 +54,23 @@ function k() {
             }
           }, function (e) {
             switch (e) {
-              case _$$p.ALL:
+              case TabCategory.ALL:
                 return getI18nString("whiteboard.inserts.all");
-              case _$$p.STICKERS_AND_COMPONENTS:
+              case TabCategory.STICKERS_AND_COMPONENTS:
                 return getI18nString("whiteboard.inserts.stickers");
-              case _$$p.TEMPLATES:
+              case TabCategory.TEMPLATES:
                 return getI18nString("whiteboard.inserts.templates");
-              case _$$p.WIDGETS:
+              case TabCategory.WIDGETS:
                 return getI18nString("whiteboard.inserts.widgets");
-              case _$$p.PLUGINS:
+              case TabCategory.PLUGINS:
                 return getI18nString("whiteboard.inserts.plugins");
-              case _$$p.MORE:
+              case TabCategory.MORE:
                 return getI18nString("whiteboard.inserts.more");
               default:
                 return "";
             }
           }(e));
-          return e === _$$p.STICKERS_AND_COMPONENTS ? jsx(Q, {
+          return e === TabCategory.STICKERS_AND_COMPONENTS ? jsx(Q, {
             position: {
               top: "0px",
               right: "0px"
@@ -298,7 +298,7 @@ function D({
   }
   return jsx("div", {
     "data-not-draggable": !0,
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       height: h,
       width: gR,
       initialScrollTop: F[s],

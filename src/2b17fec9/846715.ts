@@ -7,7 +7,7 @@ import { DesignGraphElements, Fullscreen, ViewType, ToolType, AlignmentPosition,
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { useWindowDimensions } from "../905/745972";
 import { BrowserInfo } from "../figma_app/778880";
 import { X as _$$X } from "../figma_app/776368";
@@ -88,7 +88,7 @@ import { rM } from "../figma_app/241541";
 import { wg } from "../figma_app/101956";
 import { aE } from "../figma_app/433401";
 import { a as _$$a3 } from "../2b17fec9/927391";
-import { GI, qL } from "../905/125333";
+import { vectorPencilStyleAtom, stickyColorAtom } from "../905/125333";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { eq as _$$eq, bm, vp } from "../figma_app/671837";
 import { W as _$$W } from "../905/866915";
@@ -520,7 +520,7 @@ let e9 = memo(function ({
   let [f, _] = useState(!1);
   let {
     paints
-  } = useAtomWithSubscription(GI);
+  } = useAtomWithSubscription(vectorPencilStyleAtom);
   let [g, j] = useState(DesignGraphElements.VECTOR_PENCIL);
   let [, b] = useState(DesignGraphElements.VECTOR_PENCIL);
   let y = g === DesignGraphElements.VECTOR_PENCIL ? "set-tool-pencil" : g === DesignGraphElements.HIGHLIGHTER ? "set-tool-highlighter" : g === DesignGraphElements.ERASER ? "set-tool-eraser" : g === DesignGraphElements.WASHI_TAPE ? "set-tool-washi-tape" : "";
@@ -622,7 +622,7 @@ function tu({
   recordingKey: e,
   isOpen: t
 }) {
-  let [i, a] = useAtomValueAndSetter(qL);
+  let [i, a] = useAtomValueAndSetter(stickyColorAtom);
   let [s, o] = useState(!1);
   let {
     openColorPalettePicker,
@@ -739,7 +739,7 @@ function th({
 }) {
   let t = bu();
   let i = sT();
-  let a = useAtomWithSubscription(qL);
+  let a = useAtomWithSubscription(stickyColorAtom);
   let s = useIsProgressBarHiddenOrLocked();
   let [o, c] = useState(!1);
   let [p, h] = useState(!1);
@@ -968,7 +968,7 @@ let tw = memo(function () {
   let i = t?.votingSessions;
   let [c, x] = useState("PRE");
   let I = useRef(null);
-  let L = wY(I);
+  let L = useResizeObserverRef(I);
   let [k, F] = useAtomValueAndSetter(c5);
   let H = useIsVotingSessionJoined();
   let [B, V] = useAtomValueAndSetter(gT);

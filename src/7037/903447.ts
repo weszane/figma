@@ -4,7 +4,7 @@ import { getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { useDropdown } from "../905/848862";
 import { KindEnum } from "../905/129884";
-import { Jz } from "../905/504727";
+import { PointingDropdown } from "../905/504727";
 import { YW } from "../figma_app/778125";
 export function $$u0(e) {
   let t = useDropdown(e.dropdownId);
@@ -34,7 +34,7 @@ export function $$u0(e) {
       ref: n,
       onMouseDown: e => e.stopPropagation(),
       children: m
-    }), n.current && t.showing && jsx(Jz, {
+    }), n.current && t.showing && jsx(PointingDropdown, {
       closeDropdown: t.hide,
       displayAboveTarget: e.displayAboveTarget,
       displayOverTarget: e.displayOverTarget,

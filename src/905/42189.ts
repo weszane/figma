@@ -1,2 +1,23 @@
-export var $$n0 = (e => (e.RECENTS = "Recents", e.SAVED = "Saved", e.EXPLORE = "Explore", e.DEVELOPMENT = "Development", e.ALL = "All", e.STICKERS_AND_COMPONENTS = "Stickers", e.TEMPLATES = "Templates", e.WIDGETS = "Widgets", e.PLUGINS = "Plugins", e.MORE = "More", e.RECENTS_COLLAGE = "RecentsCollage", e))($$n0 || {});
-export const p = $$n0;
+/**
+ * Enum representing different categories or sections
+ * Original name: $$n0
+ */
+export enum TabCategory {
+  RECENTS = "Recents",
+  SAVED = "Saved",
+  EXPLORE = "Explore",
+  DEVELOPMENT = "Development",
+  ALL = "All",
+  STICKERS_AND_COMPONENTS = "Stickers",
+  TEMPLATES = "Templates",
+  WIDGETS = "Widgets",
+  PLUGINS = "Plugins",
+  MORE = "More",
+  RECENTS_COLLAGE = "RecentsCollage",
+}
+
+/**
+ * Alias for Category enum
+ * Original name: p
+ */
+export const p = TabCategory

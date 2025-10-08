@@ -13,7 +13,7 @@ import { setActiveSort, setShowResolvedComments, setShowOnlyMyComments } from ".
 import { setCommentsActiveFeedType } from "../figma_app/530167";
 import { setShowResolved } from "../figma_app/703138";
 import { wq } from "../905/234821";
-import { F$ } from "../figma_app/12220";
+import { extractUserIdsFromMessageMeta } from "../figma_app/12220";
 import { kC } from "../905/428519";
 import { useIsCommunityHubView } from "../figma_app/740025";
 import { getUserId } from "../905/372672";
@@ -116,7 +116,7 @@ export function $$V5(e) {
   let ee = kC(t);
   let et = useMemo(() => ({
     resolved: D,
-    yours: e => w && e.comments.some(e => e.user_id === w || F$(e).includes(w)) || !1,
+    yours: e => w && e.comments.some(e => e.user_id === w || extractUserIdsFromMessageMeta(e).includes(w)) || !1,
     currentPage: e => v && e.page === v || !1,
     currentNode: e => {
       let t = e.comments[0].client_meta;

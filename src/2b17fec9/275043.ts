@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useCallback, forwardRef, memo, useContext,
 import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
 import { um, useAtomWithSubscription, useAtomValueAndSetter, Xr, atom } from "../figma_app/27355";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { F as _$$F } from "../figma_app/832508";
 import { z as _$$z } from "../figma_app/47967";
@@ -35,7 +35,7 @@ import { I1, d6, t1 as _$$t2, Mg, $o } from "../9410/595754";
 import { Fullscreen, TransactionCommand, BorderStyle, DesignGraphElements, Command, AlignmentPosition, ConfirmationLevel, ShapeSidebarMode, NodePropertyCategory, ToolType, SessionStatus, LayoutTabType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import F from "classnames";
-import { ez as _$$ez, U9, SK, wp, GI, IZ, qL } from "../905/125333";
+import { shapeColorAtom, shapeStrokeStyleAtom, toolStylesAtom, connectorColorAtom, vectorPencilStyleAtom, highlighterStyleAtom, stickyColorAtom } from "../905/125333";
 import { LH } from "../figma_app/384673";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { KindEnum } from "../905/129884";
@@ -63,7 +63,7 @@ import { YCy, zuZ } from "../figma_app/27776";
 import { W as _$$W, v0, Dm } from "../9410/645772";
 import { ButtonPrimitive } from "../905/632989";
 import { Yk, iy as _$$iy, Z9 as _$$Z, AO } from "../2b17fec9/441720";
-import { Y as _$$Y } from "../figma_app/916469";
+import { FigJamMenuEvents } from "../figma_app/916469";
 import { GQ, BG, JE, L as _$$L } from "../figma_app/634288";
 import { g as _$$g2 } from "../9410/385690";
 import { a as _$$a } from "../2b17fec9/927391";
@@ -644,9 +644,9 @@ let ew = memo(function ({
   } = LH();
   let c = Jc.get(e);
   let u = c === Yt();
-  let p = useAtomWithSubscription(_$$ez);
+  let p = useAtomWithSubscription(shapeColorAtom);
   let h = colorCSSManipulatorInstance.format(p);
-  let m = useAtomWithSubscription(U9);
+  let m = useAtomWithSubscription(shapeStrokeStyleAtom);
   let f = Qd().get(c);
   let _ = useCallback(() => {
     f && i(c);
@@ -780,8 +780,8 @@ function eO({
     activeSecondaryToolbeltId
   } = LH();
   let l = Uo();
-  let d = useAtomWithSubscription(SK).connectorToolLineStyle;
-  let c = useAtomWithSubscription(wp);
+  let d = useAtomWithSubscription(toolStylesAtom).connectorToolLineStyle;
+  let c = useAtomWithSubscription(connectorColorAtom);
   let u = colorCSSManipulatorInstance.format(c);
   let p = useCallback(() => {
     t(eE[d].tool);
@@ -1033,10 +1033,10 @@ function e0({
   });
 }
 function e1() {
-  let e = useAtomWithSubscription(_$$ez);
+  let e = useAtomWithSubscription(shapeColorAtom);
   let t = function (e) {
-    let t = useAtomWithSubscription(SK);
-    let i = Xr(_$$ez);
+    let t = useAtomWithSubscription(toolStylesAtom);
+    let i = Xr(shapeColorAtom);
     let {
       shapeWithTextType
     } = t;
@@ -1083,7 +1083,7 @@ function e1() {
   });
 }
 function e2() {
-  let e = useAtomWithSubscription(U9);
+  let e = useAtomWithSubscription(shapeStrokeStyleAtom);
   let t = DP();
   let i = vz();
   let a = useMemo(() => getFeatureFlags().ad_curved_connectors ? ["ELBOWED", "CURVED", "STRAIGHT", "STRAIGHT_NO_ENDPOINTS"] : ["ELBOWED", "STRAIGHT", "STRAIGHT_NO_ENDPOINTS"], []);
@@ -1365,16 +1365,16 @@ let tc = memo(function ({
   });
 });
 function tC() {
-  let e = useAtomWithSubscription(GI);
+  let e = useAtomWithSubscription(vectorPencilStyleAtom);
   return e.paints?.[0]?.color;
 }
 function tT() {
-  let e = useAtomWithSubscription(IZ);
+  let e = useAtomWithSubscription(highlighterStyleAtom);
   return e.paints?.[0]?.color;
 }
 function tE(e) {
-  let t = useAtomWithSubscription(GI);
-  let i = useAtomWithSubscription(IZ);
+  let t = useAtomWithSubscription(vectorPencilStyleAtom);
+  let i = useAtomWithSubscription(highlighterStyleAtom);
   if (!e || !BG(e)) return null;
   switch (e) {
     case DesignGraphElements.VECTOR_PENCIL:
@@ -1392,7 +1392,7 @@ function tE(e) {
 function tS() {
   let {
     washiTapePaint
-  } = useAtomWithSubscription(SK);
+  } = useAtomWithSubscription(toolStylesAtom);
   return washiTapePaint?.image?.hash && sha1HexFromBytes(washiTapePaint.image.hash);
 }
 function tw() {
@@ -1413,7 +1413,7 @@ function tN() {
   let e = tw();
   let {
     washiTapePaint
-  } = useAtomWithSubscription(SK);
+  } = useAtomWithSubscription(toolStylesAtom);
   let i = washiTapePaint?.image?.hash;
   let [n, a] = useAtomValueAndSetter(tL);
   let s = n?.paintHex;
@@ -1487,8 +1487,8 @@ function tA() {
   }();
   let l = function () {
     let e = useAtomWithSubscription(_$$XS);
-    let [t, i] = useAtomValueAndSetter(GI);
-    let [n, a] = useAtomValueAndSetter(IZ);
+    let [t, i] = useAtomValueAndSetter(vectorPencilStyleAtom);
+    let [n, a] = useAtomValueAndSetter(highlighterStyleAtom);
     return useCallback(r => {
       let s = [{
         type: "SOLID",
@@ -1539,8 +1539,8 @@ function tO() {
   let e = tE(useAtomWithSubscription(_$$XS));
   let t = function () {
     let e = useAtomWithSubscription(_$$XS);
-    let [t, i] = useAtomValueAndSetter(GI);
-    let [n, a] = useAtomValueAndSetter(IZ);
+    let [t, i] = useAtomValueAndSetter(vectorPencilStyleAtom);
+    let [n, a] = useAtomValueAndSetter(highlighterStyleAtom);
     return useCallback(r => {
       switch (e) {
         case DesignGraphElements.HIGHLIGHTER:
@@ -3773,7 +3773,7 @@ function t7() {
   });
 }
 function ie() {
-  let [e, t] = useAtomValueAndSetter(qL);
+  let [e, t] = useAtomValueAndSetter(stickyColorAtom);
   let i = useCallback(e => {
     e && t(e);
   }, [t]);
@@ -4116,7 +4116,7 @@ function iD({
   let [u, p] = useState(_$$k2.DEFAULT);
   let h = 240 / (rX * e);
   let m = function () {
-    let e = useAtomWithSubscription(qL);
+    let e = useAtomWithSubscription(stickyColorAtom);
     let t = zS(e, "sticky");
     let i = colorCSSManipulatorInstance.format(e);
     return t ? MV(t, i) : "rgba(230, 230, 230, 1)";
@@ -4257,7 +4257,7 @@ function iF({
 }) {
   let t = function () {
     let e = useRef(null);
-    let t = wY(e);
+    let t = useResizeObserverRef(e);
     let i = t?.width ?? Hu().thresholdWidth + 260;
     let n = Xr(Kj);
     let a = useIsVotingSessionJoined();
@@ -4370,7 +4370,7 @@ function iB() {
     let {
       activeSecondaryToolbeltId
     } = LH();
-    let t = _$$g2(_$$Y.FigjamDLTSubmenuOpen);
+    let t = _$$g2(FigJamMenuEvents.FigjamDLTSubmenuOpen);
     useEffect(() => {
       activeSecondaryToolbeltId && t();
     }, [activeSecondaryToolbeltId, t]);

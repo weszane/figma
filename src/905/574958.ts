@@ -189,7 +189,7 @@ export const SearchAnalytics = {
      * @param additionalData - Additional data.
      * @param planFilter - Plan filter.
      */
-    click(modelType: PublicModelType, view: any, additionalData: any, planFilter: string): void {
+    click(modelType: PublicModelType, view: any, additionalData: any, planFilter?: string): void {
       const response = this.state.responses ? this.state.responses[modelType] : null;
       if (!response) {
         console.error('Cannot record click event on null response');

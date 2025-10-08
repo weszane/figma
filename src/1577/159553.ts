@@ -13,7 +13,7 @@ import { customHistory } from "../905/612521";
 import { F as _$$F } from "../905/680873";
 import { useLatestRef } from "../figma_app/922077";
 import { sendWithRetry } from "../905/910117";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { trackFileClicked } from "../figma_app/976345";
@@ -1130,7 +1130,7 @@ function eW(e, t) {
         }, `priority-${e.notification_id}`));
         return t;
       };
-      return jsx(_$$P, {
+      return jsx(RecordingScrollContainer, {
         className: `${e.fillParent ? "" : l}`,
         children: jsx("div", {
           children: e.notifications.map(t => {

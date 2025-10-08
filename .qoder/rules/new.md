@@ -13,6 +13,7 @@ I'm working with a compiled TypeScript code snippet (part of a larger character 
 
 2. **Input Details**:
    - The code may have minified variable names (e.g., `a`, `b`) and no type annotations.
+   - The symbol `createOptimistThunk` first argument is like redux thunk store context.
 
 3. **Output Requirements**:
    - Provide the complete refactored TypeScript code for this snippet, ensuring no part is omitted.
@@ -22,6 +23,7 @@ I'm working with a compiled TypeScript code snippet (part of a larger character 
    - Format the code cleanly (Prettier-style) and ensure it’s executable in the target environment.
    - If the snippet references external code (e.g., imported modules), note assumed dependencies in comments.
    - Add the origin of the code name in comments.
+   - For export statement, e.g., `export const a = $$e`, just refactor `$$e` to new meaningful variable name, and export it, but don't refactor `a`.
 
 4. **Constraints**:
    - Focus on refactoring this specific snippet. If it’s part of a larger file, I’ll provide additional chunks later.

@@ -5,7 +5,7 @@ import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { useDropdownState } from "../905/848862";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { A as _$$A } from "../6828/814452";
 let $$p0 = "scale-down";
 let $$m1 = ["scale-down", "contain", "min-zoom"];
@@ -63,7 +63,7 @@ function g({
   ariaLabelledBy: r
 }) {
   let a = t.current?.getBoundingClientRect();
-  return a ? jsx(Cf, {
+  return a ? jsx(ConnectedPointingDropdown, {
     "aria-labelledby": r,
     targetRect: a,
     showPoint: !1,
@@ -71,7 +71,7 @@ function g({
     maxWidth: 528,
     autofocusPrevOnDismount: !0,
     focusContainerOnMount: !0,
-    type: it.MATCH_BACKGROUND,
+    type: DropdownType.MATCH_BACKGROUND,
     propagateCloseClick: !0,
     children: $$m1.map(t => jsx(c$, {
       className: "publishing_metadata_scaling_mode_select_ui3--singleOption--ZE6u3",

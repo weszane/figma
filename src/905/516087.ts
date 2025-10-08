@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useState } from "react";
-import { wY } from "../figma_app/708845";
-import { P } from "../905/347284";
+import { useResizeObserverRef } from "../figma_app/708845";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/895449";
 export function $$d0({
@@ -14,12 +14,12 @@ export function $$d0({
   let u = useRef(null);
   let p = useRef(null);
   let [m, h] = useState(0);
-  wY(u, () => {
+  useResizeObserverRef(u, () => {
     h(u.current?.clientHeight ?? 0);
   });
   return jsx(_$$n.Stretch, {
     ref: u,
-    children: jsx(P, {
+    children: jsx(RecordingScrollContainer, {
       ref: p,
       height: m,
       hideScrollbar: !0,

@@ -1,123 +1,141 @@
-import { useMemo, useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Fullscreen } from "../figma_app/763686";
-import { trackEventAnalytics } from "../905/449184";
-import { dayjs } from "../905/920142";
-import { sanitizeInput } from "../905/241044";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { VisualBellIcon, VisualBellShape } from "../905/576487";
-import { hideModal, showModalHandler } from "../905/156213";
-import { startCompareChanges, findVersionById } from "../figma_app/841351";
-import { jsx } from "react/jsx-runtime";
-import { noop } from 'lodash-es';
-import { HISTORY_DOCUMENT_INDEX } from "../figma_app/518682";
-import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { DS, _W } from "../figma_app/571341";
-import { SI, PZ } from "../figma_app/241341";
-let b = registerModal(function (e) {
-  let {
-    nodeId
-  } = e;
-  let i = useDispatch();
-  let {
-    versions,
-    versionsQueryLoaded
-  } = DS(nodeId);
-  let o = useSelector(e => e.versionHistory.compareId);
-  let l = useMemo(() => o ? versions.find(e => e.id === o) ?? null : null, [versions, o]);
-  let [c, u] = useState(!0);
-  let [_, b] = useState(!1);
-  let v = {
-    inspectionMode: "properties",
+import { noop } from 'lodash-es'
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { jsx } from "react/jsx-runtime"
+import { ModalSupportsBackground, registerModal } from "../905/102752"
+import { hideModal, showModalHandler } from "../905/156213"
+import { sanitizeInput } from "../905/241044"
+import { VisualBellActions } from "../905/302958"
+import { getI18nString } from "../905/303541"
+import { trackEventAnalytics } from "../905/449184"
+import { VisualBellIcon, VisualBellShape } from "../905/576487"
+import { dayjs } from "../905/920142"
+import { PZ, SI } from "../figma_app/241341"
+import { HISTORY_DOCUMENT_INDEX } from "../figma_app/518682"
+import { _W, DS } from "../figma_app/571341"
+import { Fullscreen } from "../figma_app/763686"
+import { findVersionById, startCompareChanges } from "../figma_app/841351"
+
+/**
+ * Modal component for comparing changes in version history.
+ * @param props - The modal props containing nodeId.
+ * @returns JSX element for the compare changes modal.
+ */
+export function CompareChangesModal({ nodeId }: { nodeId: string }) {
+  const dispatch = useDispatch<AppDispatch>()
+  const { versions, versionsQueryLoaded } = DS(nodeId)
+  const compareId = useSelector((state: any) => state.versionHistory.compareId)
+  const selectedVersion = useMemo(() => compareId ? versions.find((v: any) => v.id === compareId) ?? null : null, [versions, compareId])
+  const [renderLoadingBar, setRenderLoadingBar] = useState(true)
+  const [modalError, setModalError] = useState(false)
+  const preferencesApi = {
+    inspectionMode: "properties" as const,
     setInspectionMode: noop,
-    inspectionModes: ["properties"]
-  };
-  let [I, E] = useState(void 0);
-  let x = void 0 !== I;
-  let [S, w] = useState(void 0);
-  let C = !!S;
+    inspectionModes: ["properties"] as const,
+  }
+  const [historicImage, setHistoricImage] = useState<any>(undefined)
+  const hasHistoricImage = historicImage !== undefined
+  const [currentImage, setCurrentImage] = useState<any>(undefined)
+  const hasCurrentImage = !!currentImage
+
   useEffect(() => {
-    c && x && C && versionsQueryLoaded && u(!1);
-  }, [c, x, C, versionsQueryLoaded]);
-  let T = useCallback(e => {
-    e.id !== o && (E(void 0), i(startCompareChanges({
-      fromVersionId: e.id
-    })));
-  }, [i, o, E]);
+    if (renderLoadingBar && hasHistoricImage && hasCurrentImage && versionsQueryLoaded) {
+      setRenderLoadingBar(false)
+    }
+  }, [renderLoadingBar, hasHistoricImage, hasCurrentImage, versionsQueryLoaded])
+
+  const handleVersionSelect = useCallback((version: any) => {
+    if (version.id !== compareId) {
+      setHistoricImage(undefined)
+      dispatch(startCompareChanges({ fromVersionId: version.id }))
+    }
+  }, [dispatch, compareId])
+
   useEffect(() => {
-    let e = setTimeout(() => {
-      E(SI({
+    const timeout = setTimeout(() => {
+      setHistoricImage(SI({
         nodeId,
         documentIndex: HISTORY_DOCUMENT_INDEX,
-        showError: () => {
-          E(null);
-        }
-      }));
-    }, _W);
-    return () => clearTimeout(e);
-  }, [nodeId, o, E]);
+        showError: () => setHistoricImage(null),
+      }))
+    }, _W)
+    return () => clearTimeout(timeout)
+  }, [nodeId, compareId])
+
   useEffect(() => {
-    let e = setTimeout(() => {
-      let e = () => {
-        w(void 0);
-        b(!0);
-      };
-      let i = SI({
-        nodeId,
-        showError: e
-      });
-      if (!i) {
-        e();
-        return;
+    const timeout = setTimeout(() => {
+      const onError = () => {
+        setCurrentImage(undefined)
+        setModalError(true)
       }
-      w(i);
-    }, _W);
-    return () => clearTimeout(e);
-  }, [nodeId]);
-  let k = useCallback(() => {
-    i(hideModal());
-  }, [i]);
+      const image = SI({ nodeId, showError: onError })
+      if (!image) {
+        onError()
+        return
+      }
+      setCurrentImage(image)
+    }, _W)
+    return () => clearTimeout(timeout)
+  }, [nodeId])
+
+  const handleCloseModal = useCallback(() => {
+    dispatch(hideModal())
+  }, [dispatch])
+
   return jsx(PZ, {
-    currentImage: S,
-    historicImage: I,
-    modalError: _,
+    currentImage,
+    historicImage,
+    modalError,
     modalTitle: getI18nString("collaboration.feedback.compare_changes_modal.header"),
     nodeId,
-    onCloseModal: k,
+    onCloseModal: handleCloseModal,
     origin: "cc_versions",
-    preferencesApi: v,
-    renderLoadingBar: c,
-    selectedVersion: l,
-    setSelectedVersion: T,
-    skipCorrectHistoryCanvasCheck: !0,
-    versions
-  });
-}, "CompareChangesModal", ModalSupportsBackground.YES);
-export function $$v1() {
-  let e = useDispatch();
-  let t = useSelector(e => e.versionHistory.compareId);
-  let i = useSelector(e => findVersionById(t, e.versionHistory));
-  let a = useSelector(e => e.modalShown);
-  return useCallback(t => {
-    $$I0(t, e, i, a);
-  }, [e, i, a]);
+    preferencesApi,
+    renderLoadingBar,
+    selectedVersion,
+    setSelectedVersion: handleVersionSelect,
+    skipCorrectHistoryCanvasCheck: true,
+    versions,
+  })
 }
-export function $$I0(e, t, i, n) {
-  if (n) return;
-  let r = sanitizeInput(i?.user.handle);
-  if (r && i?.touched_at && Fullscreen.getChunkChangeMap().has(e)) {
-    if (!Fullscreen.getChangesToCompareFromHistoryChangesState().has(e)) {
-      t(VisualBellActions.dequeue({
-        matchType: "view_changes"
-      }));
-      return;
+
+const compareChangesModal = registerModal(CompareChangesModal, "CompareChangesModal", ModalSupportsBackground.YES)
+
+/**
+ * Hook to get a callback for showing compare changes notification.
+ * @returns A callback function that takes a nodeId and shows the notification if conditions are met.
+ */
+export function useCompareChangesHandler() {
+  const dispatch = useDispatch()
+  const compareId = useSelector((state: any) => state.versionHistory.compareId)
+  const version = useSelector((state: any) => findVersionById(compareId, state.versionHistory))
+  const modalShown = useSelector((state: any) => state.modalShown)
+  return useCallback((nodeId: string) => {
+    showCompareChangesNotification(nodeId, dispatch, version, modalShown)
+  }, [dispatch, version, modalShown])
+}
+
+/**
+ * Shows a compare changes notification if applicable.
+ * @param nodeId - The node ID to check for changes.
+ * @param dispatch - Redux dispatch function.
+ * @param version - The version object.
+ * @param modalShown - Whether a modal is currently shown.
+ */
+export function showCompareChangesNotification(nodeId: string, dispatch: any, version: any, modalShown: boolean) {
+  if (modalShown)
+    return
+  const sanitizedHandle = sanitizeInput(version?.user?.handle)
+  if (sanitizedHandle && version?.touched_at && Fullscreen.getChunkChangeMap().has(nodeId)) {
+    if (!Fullscreen.getChangesToCompareFromHistoryChangesState().has(nodeId)) {
+      dispatch(VisualBellActions.dequeue({ matchType: "view_changes" }))
+      return
     }
-    t(VisualBellActions.dequeue({}));
-    t(VisualBellActions.enqueue({
+    dispatch(VisualBellActions.dequeue({}))
+    dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.feedback.compare_changes_modal.action_text", {
-        lastEditedBy: r,
-        lastEditedAt: dayjs(i.touched_at).fromNow()
+        lastEditedBy: sanitizedHandle,
+        lastEditedAt: dayjs(version.touched_at).fromNow(),
       }),
       type: "view_changes",
       button: {
@@ -125,21 +143,20 @@ export function $$I0(e, t, i, n) {
         action: () => {
           trackEventAnalytics("version_diffing_performance_metrics", {
             name: "diffing_modal_cta_clicked",
-            entrypoint: "figma_design_version_history"
-          });
-          t(showModalHandler({
-            type: b,
-            data: {
-              nodeId: e
-            }
-          }));
-        }
+            entrypoint: "figma_design_version_history",
+          })
+          dispatch(showModalHandler({
+            type: compareChangesModal,
+            data: { nodeId },
+          }))
+        },
       },
-      icon: "" !== i.user.img_url ? VisualBellIcon.FROM_URL : VisualBellIcon.NONE,
+      icon: version.user.img_url !== "" ? VisualBellIcon.FROM_URL : VisualBellIcon.NONE,
       iconShape: VisualBellShape.CIRCLE,
-      iconURL: i.user.img_url
-    }));
+      iconURL: version.user.img_url,
+    }))
   }
 }
-export const z = $$I0;
-export const E = $$v1;
+
+export const z = showCompareChangesNotification
+export const E = useCompareChangesHandler

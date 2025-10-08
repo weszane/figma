@@ -16,7 +16,7 @@ import { TeamOrg, isBillingGroupAdminEnabled } from "../figma_app/845611";
 import { Y } from "../figma_app/515088";
 import { ur, uE } from "../figma_app/451028";
 import { Y as _$$Y } from "../7021/427161";
-import { Jt } from "../figma_app/28323";
+import { fetchLicenseGroupsThunk } from "../figma_app/28323";
 import { wrapWithTracking } from "../figma_app/831799";
 import { Pn, Yo, oU } from "../figma_app/84966";
 import { NJ } from "../figma_app/518077";
@@ -199,7 +199,7 @@ function F(e) {
   });
   let c = "loaded" === o.status ? o.data.org?.taxIdVerificationStatus : null;
   useEffect(() => {
-    i && l && t(Jt({
+    i && l && t(fetchLicenseGroupsThunk({
       forceRefetch: !1
     }));
   }, [t, e.org.id, i, l]);
@@ -250,7 +250,7 @@ function B(e) {
   let u = Xf(e.org.id);
   let m = "loaded" === u.status ? u.data?.invoices ?? [] : void 0;
   useEffect(() => {
-    t(Jt({
+    t(fetchLicenseGroupsThunk({
       forceRefetch: !1
     }));
   }, [t, e.org.id]);

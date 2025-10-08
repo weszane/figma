@@ -1,10 +1,32 @@
-import { generateUUIDv4 } from "../905/871474";
-export function $$r0(e) {
-  return `${e}__${generateUUIDv4()}`;
+import { generateUUIDv4 } from "../905/871474"
+
+/**
+ * Appends a UUID v4 to the given string with double underscore separator
+ * Original function: $$r0
+ * @param input - The string to append UUID to
+ * @returns The input string with UUID appended
+ */
+export function appendUUID(input: string): string {
+  return `${input}__${generateUUIDv4()}`
 }
-let a = /__[0-9A-Za-z\-]+$/;
-export function $$s1(e) {
-  return e.replace(a, "");
+
+/**
+ * Regular expression pattern to match double underscore followed by
+ * alphanumeric characters, hyphens, case insensitive
+ * Original pattern: /__[0-9A-Z\-]+$/i
+ */
+const UUID_PATTERN = /__[0-9A-Z\-]+$/i
+
+/**
+ * Removes UUID suffix from the given string
+ * Original function: $$s1
+ * @param input - The string to remove UUID from
+ * @returns The input string with UUID suffix removed
+ */
+export function removeUUID(input: string): string {
+  return input.replace(UUID_PATTERN, "")
 }
-export const t = $$r0;
-export const y = $$s1;
+
+// Export aliases for backward compatibility
+export const t = appendUUID
+export const y = removeUUID

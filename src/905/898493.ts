@@ -1,7 +1,7 @@
 import { createActionCreator } from "../905/73481";
 import { logger } from "../905/651849";
 import { createOptimistThunk } from "../905/350402";
-import { Q } from "../905/618914";
+import { waitForAtomStore } from "../905/618914";
 import { FMemberRoleType } from "../figma_app/191312";
 import { getPlanUserAtomFamily } from "../905/276025";
 import { checkOrgUserPermission } from "../figma_app/465071";
@@ -11,7 +11,7 @@ let $$u1 = createOptimistThunk(async (e, t) => {
   let n = i.orgDomains;
   let a = !1;
   try {
-    let e = await Q(getPlanUserAtomFamily(!0));
+    let e = await waitForAtomStore(getPlanUserAtomFamily(!0));
     a = checkOrgUserPermission(e, FMemberRoleType.GUEST);
   } catch (e) {
     logger.error("Error fetching plan user:", e);

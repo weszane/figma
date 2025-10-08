@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { ub } from "../figma_app/598926";
+import { updateFolderDescriptionThunk } from "../figma_app/598926";
 import { c } from "../4452/815584";
 export function $$l0({
   folder: e
@@ -12,7 +12,7 @@ export function $$l0({
     title: getI18nString("resource_rename_modal.edit_description"),
     placeholder: "",
     submitText: getI18nString("resource_rename_modal.save"),
-    onRename: r => t(ub({
+    onRename: r => t(updateFolderDescriptionThunk({
       folderId: e.id,
       description: r.trim()
     })),

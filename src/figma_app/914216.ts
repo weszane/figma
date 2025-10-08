@@ -22,7 +22,7 @@ import { xn } from "../figma_app/108168";
 import { t as _$$t } from "../figma_app/856638";
 import { FK, rA, T0 } from "../figma_app/121043";
 import { Zk } from "../figma_app/29089";
-import { ZU, fT } from "../figma_app/986347";
+import { DMenuItemType, isDropdownGroupHeader } from "../figma_app/986347";
 import { Pf, NT, ZS } from "../figma_app/152574";
 var _ = p;
 let O = memo(function ({
@@ -60,7 +60,7 @@ let L = memo(function ({
     var l;
     return jsx(rA, {
       item: (l = s[0], {
-        type: ZU.ACTION,
+        type: DMenuItemType.ACTION,
         ...l
       }),
       isEnabled: !0,
@@ -138,8 +138,8 @@ function F({
   if (useEffect(() => {
     e.onSubmenuOpenClose?.(manager.isOpen);
   }, [manager.isOpen, e]), 0 === e.items.length) return null;
-  let s = e.items.find(fT)?.getTitle();
-  let c = e.items.filter(e => !fT(e)).map(e => jsx(_$$t, {
+  let s = e.items.find(isDropdownGroupHeader)?.getTitle();
+  let c = e.items.filter(e => !isDropdownGroupHeader(e)).map(e => jsx(_$$t, {
     item: e,
     recordingKey: t
   }, e.recordingKey));
@@ -177,32 +177,32 @@ export let $$j1 = memo(function ({
   if (!i(e)) return null;
   let c = e.dontChainRecordingKeys ? e.recordingKey : generateRecordingKey(r, e.recordingKey);
   switch (e.type) {
-    case ZU.LABEL:
+    case DMenuItemType.LABEL:
       return jsx(O, {
         item: e
       });
-    case ZU.TEXT_BUTTON:
+    case DMenuItemType.TEXT_BUTTON:
       return jsx(R, {
         item: e,
         recordingKey: c
       });
-    case ZU.FLYOUT:
+    case DMenuItemType.FLYOUT:
       return jsx(L, {
         item: e,
         disabled: d,
         recordingKey: c
       });
-    case ZU.ACTION:
+    case DMenuItemType.ACTION:
       return jsx(D, {
         item: e,
         recordingKey: c
       });
-    case ZU.ACTION_SUBMENU:
+    case DMenuItemType.ACTION_SUBMENU:
       return jsx(M, {
         item: e,
         recordingKey: c
       });
-    case ZU.TOOL:
+    case DMenuItemType.TOOL:
       return jsx(k, {
         item: e,
         numUnreadComments: t,

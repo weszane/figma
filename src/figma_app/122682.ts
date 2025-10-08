@@ -4,7 +4,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { useLatestRef } from "../figma_app/922077";
 import { isIpadDevice, getIsMobile } from "../figma_app/778880";
 import { getI18nState } from "../figma_app/363242";
-import { t7 } from "../905/989765";
+import { showCaptions } from "../905/989765";
 import { selectCurrentFile } from "../figma_app/516028";
 import { hasValidTeamPaymentStatus } from "../figma_app/598018";
 import { MK } from "../figma_app/120529";
@@ -56,7 +56,7 @@ export function $$b7(e) {
 }
 export function $$T0(e, t) {
   desktopAPIInstance?.setCaptionsEnabled(t);
-  e(t7(t));
+  e(showCaptions(t));
 }
 export const HJ = $$T0;
 export const Lk = $$h1;

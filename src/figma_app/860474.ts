@@ -5,7 +5,7 @@ import { debugState } from "../905/407919";
 import { createEventEmitter } from "../figma_app/516794";
 import { sanitizeAndExtractText } from "../905/973142";
 import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
-import { Fk, Ch, Wy, ml, hw, yo } from "../905/125333";
+import { counterAtom, currentSelectionAtom, elementsMapAtom, elementsSetAtom, anotherElementsSetAtom, configAtom } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { sV } from "../figma_app/712525";
@@ -53,14 +53,14 @@ export function $$E0(e) {
       H1.logIndex();
     },
     setResultInfo(e, t, r, n) {
-      null != e && Fk.syncFromFullscreen({
+      null != e && counterAtom.syncFromFullscreen({
         total: e
       });
-      Ch.syncFromFullscreen({
+      currentSelectionAtom.syncFromFullscreen({
         pageId: t,
         index: r
       });
-      Wy.syncFromFullscreen(e => {
+      elementsMapAtom.syncFromFullscreen(e => {
         let t;
         for (let r of (t = n.clearAllPreviousResults ? new Map() : new Map(e), n.addedActiveTextMatches)) (t.get(r.node) ?? t.set(r.node, new Set()).get(r.node)).add(r.matchIndex);
         for (let e of n.removedActiveTextMatches) {
@@ -69,7 +69,7 @@ export function $$E0(e) {
         }
         return t;
       });
-      ml.syncFromFullscreen(e => {
+      elementsSetAtom.syncFromFullscreen(e => {
         let t;
         if (!n) return new Set();
         for (let r of (t = n.clearAllPreviousResults ? new Set() : new Set(e), n.addedDirectSelection)) t.add(r);
@@ -77,7 +77,7 @@ export function $$E0(e) {
         for (let e of n.addedIndirectSelection) t.$$delete(e);
         return t;
       });
-      hw.syncFromFullscreen(e => {
+      anotherElementsSetAtom.syncFromFullscreen(e => {
         let t;
         if (!n) return new Set();
         for (let r of (t = n.clearAllPreviousResults ? new Set() : new Set(e), n.addedIndirectSelection)) t.add(r);
@@ -91,10 +91,10 @@ export function $$E0(e) {
     setCategoryCounts(e) {
       let t = {};
       for (let r of filterNumberValues(GraphicElement)) t[r] = e[r];
-      yo.syncFromFullscreen(t);
+      configAtom.syncFromFullscreen(t);
     },
     updateCategoryCounts(e) {
-      yo.syncFromFullscreen(t => {
+      configAtom.syncFromFullscreen(t => {
         let r = {};
         for (let n of filterNumberValues(GraphicElement)) r[n] = t[n] + e[n];
         return r;

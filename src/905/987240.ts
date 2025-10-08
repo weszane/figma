@@ -3,7 +3,7 @@ import { ServiceCategories } from "../905/165054";
 import { PresentationValidationStatus, PrototypingTsApi } from "../figma_app/763686";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { atomStoreManager } from "../figma_app/27355";
-import { reportNullOrUndefined } from "../905/11";
+import { reportValueError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { getDevModeFocusId } from "../figma_app/88239";
@@ -25,7 +25,7 @@ export let $$y0 = createOptimistThunk((e, {
   openShareModal: E
 }) => {
   let x = e.getState();
-  reportNullOrUndefined(ServiceCategories.PROTOTYPING, x.mirror.appModel);
+  reportValueError(ServiceCategories.PROTOTYPING, x.mirror.appModel);
   let S = isFirstPageCurrentSelector(x);
   let w = "" !== i ? PresentationValidationStatus.VALID : PrototypingTsApi.currentPagePrototypeStatus();
   if (w !== PresentationValidationStatus.VALID) {

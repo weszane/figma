@@ -1,216 +1,341 @@
-import { getFeatureFlags } from "../905/601108";
-import { createActionCreator } from "../905/73481";
-import { trackEventAnalytics } from "../905/449184";
-import { trimLastMessageMeta, flattenMessageMeta, normalizeMessageMeta, getMessageType, MessageType } from "../figma_app/819288";
-import { getCurrentLiveGraphClient } from "../905/761735";
-import { generateUUIDv4 } from "../905/871474";
-import { sendWithRetry } from "../905/910117";
-import { createOptimistThunk } from "../905/350402";
-import { setupLoadingStateHandler } from "../905/696711";
-import { getAttachmentChanges } from "../905/380385";
-import { createNoOpValidator } from "../figma_app/181241";
-let h = new class {
+import { createActionCreator } from "../905/73481"
+import { createOptimistThunk } from "../905/350402"
+import { getAttachmentChanges } from "../905/380385"
+import { trackEventAnalytics } from "../905/449184"
+import { getFeatureFlags } from "../905/601108"
+import { setupLoadingStateHandler } from "../905/696711"
+import { getCurrentLiveGraphClient } from "../905/761735"
+import { generateUUIDv4 } from "../905/871474"
+import { sendWithRetry } from "../905/910117"
+import { createNoOpValidator } from "../figma_app/181241"
+import { flattenMessageMeta, getMessageType, MessageType, normalizeMessageMeta, trimLastMessageMeta } from "../figma_app/819288"
+
+// Validator class for feed bell states
+class FeedBellStatesValidator {
+
+
+  validator = createNoOpValidator()
   constructor() {
-    this.FeedBellStatesSchemaValidator = createNoOpValidator();
   }
-  getFeedBellStates() {
-    return this.FeedBellStatesSchemaValidator.validate(async ({
-      xr: e
-    }) => await e.get("/api/feed_bell_states"));
+
+  /**
+   * Get feed bell states with validation
+   * @returns Promise with validated response
+   */
+  public getFeedBellStates() {
+    return this.validator.validate(async ({ xr }: { xr: any }) =>
+      await xr.get("/api/feed_bell_states"),
+    )
   }
-}();
-let $$g7 = createActionCreator("REFRESH_FEED");
-let $$f5 = createOptimistThunk((e, t, {
-  loadingKey: i
+}
+
+// Initialize validator instance
+export const feedBellStatesValidator = new FeedBellStatesValidator()
+
+// Action creators
+export const REFRESH_FEED_ACTION = createActionCreator("REFRESH_FEED")
+export const TEAM_FEED_SET_BELL_STATE_ACTION = createActionCreator("TEAM_FEED_SET_BELL_STATE")
+export const TEAM_FEED_SET_INITIAL_BELL_STATES_ACTION = createActionCreator("TEAM_FEED_SET_INITIAL_BELL_STATES")
+
+// Constants
+export const PENDING_FEED_COMMENT_ID = "pending-feed-comment"
+
+/**
+ * Refresh feed thunk with loading state handling
+ */
+export const refreshFeedThunk = createOptimistThunk((
+  dispatch: any,
+  _: any,
+  { loadingKey }: { loadingKey: string },
+) => {
+  if (!getFeatureFlags().xr_debounce_threshold) {
+    return
+  }
+
+  const feedBellStatesPromise = feedBellStatesValidator.getFeedBellStates()
+  setupLoadingStateHandler(feedBellStatesPromise, dispatch, loadingKey)
+
+  feedBellStatesPromise.then((response) => {
+    dispatch(TEAM_FEED_SET_INITIAL_BELL_STATES_ACTION({
+      bellStates: response.data.meta,
+    }))
+  })
+})
+
+/**
+ * Delete feed comment thunk
+ */
+export const deleteFeedCommentThunk = createOptimistThunk((dispatch: any, action: { uuid: string, commentId: string }) => {
+  const state = dispatch.getState()
+  const user = state.user
+  const liveGraphClient = getCurrentLiveGraphClient()
+  const commentUuid = action.uuid
+
+  if (!user || !liveGraphClient || !commentUuid || action.commentId.startsWith(PENDING_FEED_COMMENT_ID)) {
+    return
+  }
+
+  const deleteRequest = liveGraphClient.getIdFromUuid("FeedComment", commentUuid)
+    .then(id => sendWithRetry.del(`/api/feed_posts/comments/${id}`))
+
+  liveGraphClient.optimisticallyDeleteWithUUID({
+    FeedComment: {
+      [commentUuid]: null,
+    },
+  }, deleteRequest)
+})
+
+/**
+ * Edit feed comment thunk
+ */
+export const editFeedCommentThunk = createOptimistThunk((dispatch: any, action: {
+  uuid: string
+  messageMeta: any[]
+  attachmentUpdates: any
 }) => {
-  if (!getFeatureFlags().xr_debounce_threshold) return;
-  let r = h.getFeedBellStates();
-  setupLoadingStateHandler(r, e, i);
-  r.then(t => {
-    e.dispatch($$A10({
-      bellStates: t.data.meta
-    }));
-  });
-});
-let $$_11 = createActionCreator("TEAM_FEED_SET_BELL_STATE");
-let $$A10 = createActionCreator("TEAM_FEED_SET_INITIAL_BELL_STATES");
-let $$y3 = createOptimistThunk((e, t) => {
-  let i = e.getState().user;
-  let n = getCurrentLiveGraphClient();
-  let r = t.uuid;
-  if (!i || !n || !r || t.commentId.startsWith($$R0)) return;
-  let a = n.getIdFromUuid("FeedComment", r).then(e => sendWithRetry.del(`/api/feed_posts/comments/${e}`));
-  n.optimisticallyDeleteWithUUID({
-    FeedComment: {
-      [r]: null
-    }
-  }, a);
-});
-let $$b4 = createOptimistThunk((e, t) => {
-  t.messageMeta = trimLastMessageMeta(t.messageMeta);
-  let i = e.getState().user;
-  let n = getCurrentLiveGraphClient();
-  let r = t.uuid;
-  if (!i || !n || !r) return;
-  let l = n.getIdFromUuid("FeedComment", r).then(e => sendWithRetry.put(`/api/feed_posts/comments/${e}`, {
-    message_meta: t.messageMeta,
-    attachment_updates: getAttachmentChanges(t.attachmentUpdates)
-  }));
+  // Normalize message meta
+  action.messageMeta = trimLastMessageMeta(action.messageMeta)
+
+  const state = dispatch.getState()
+  const user = state.user
+  const liveGraphClient = getCurrentLiveGraphClient()
+  const commentUuid = action.uuid
+
+  if (!user || !liveGraphClient || !commentUuid) {
+    return
+  }
+
+  const updateRequest = liveGraphClient.getIdFromUuid("FeedComment", commentUuid)
+    .then(id => sendWithRetry.put(`/api/feed_posts/comments/${id}`, {
+      message_meta: action.messageMeta,
+      attachment_updates: getAttachmentChanges(action.attachmentUpdates),
+    }))
+
   trackEventAnalytics("Team Feed Comment Edited", {
-    text: flattenMessageMeta(t.messageMeta)
-  });
-  let c = normalizeMessageMeta(t.messageMeta);
-  n.optimisticallyUpdateWithUUID({
+    text: flattenMessageMeta(action.messageMeta),
+  })
+
+  const normalizedMessageMeta = normalizeMessageMeta(action.messageMeta)
+
+  liveGraphClient.optimisticallyUpdateWithUUID({
     FeedComment: {
-      [r]: {
-        messageMeta: c
-      }
-    }
-  }, l);
-});
-let $$v6 = createOptimistThunk((e, t) => {
-  t.messageMeta = trimLastMessageMeta(t.messageMeta);
-  let i = e.getState().user;
-  let n = getCurrentLiveGraphClient();
-  if (!i || !n) return;
-  let r = generateUUIDv4();
-  let c = sendWithRetry.post(`/api/feed_posts/${t.postUuid}/comments`, {
-    message_meta: t.messageMeta,
-    uuid: r,
-    attachment_ids: t.attachmentIds
-  });
-  let u = !!t.messageMeta.find(e => getMessageType(e) === MessageType.EMOJI);
-  let p = !!t.messageMeta.find(e => getMessageType(e) === MessageType.EDITOR_MENTION);
+      [commentUuid]: {
+        messageMeta: normalizedMessageMeta,
+      },
+    },
+  }, updateRequest)
+})
+
+/**
+ * Create feed comment thunk
+ */
+export const createFeedCommentThunk = createOptimistThunk((dispatch: any, action: {
+  postUuid: string
+  messageMeta: any[]
+  attachmentIds: string[]
+}) => {
+  // Normalize message meta
+  action.messageMeta = trimLastMessageMeta(action.messageMeta)
+
+  const state = dispatch.getState()
+  const user = state.user
+  const liveGraphClient = getCurrentLiveGraphClient()
+
+  if (!user || !liveGraphClient) {
+    return
+  }
+
+  const commentUuid = generateUUIDv4()
+
+  const createRequest = sendWithRetry.post(`/api/feed_posts/${action.postUuid}/comments`, {
+    message_meta: action.messageMeta,
+    uuid: commentUuid,
+    attachment_ids: action.attachmentIds,
+  })
+
+  // Analytics tracking
+  const hasEmoji = !!action.messageMeta.find(item => getMessageType(item) === MessageType.EMOJI)
+  const hasMention = !!action.messageMeta.find(item => getMessageType(item) === MessageType.EDITOR_MENTION)
+
   trackEventAnalytics("Team Feed Comment Added", {
-    emojiUsed: u,
-    mentionUsed: p,
-    text: flattenMessageMeta(t.messageMeta),
-    postUuid: t.postUuid
-  });
-  let m = normalizeMessageMeta(t.messageMeta);
-  n.optimisticallyCreateWithUUID({
+    emojiUsed: hasEmoji,
+    mentionUsed: hasMention,
+    text: flattenMessageMeta(action.messageMeta),
+    postUuid: action.postUuid,
+  })
+
+  const normalizedMessageMeta = normalizeMessageMeta(action.messageMeta)
+
+  liveGraphClient.optimisticallyCreateWithUUID({
     FeedComment: {
-      [r]: {
-        feedPostPublicUuid: t.postUuid,
-        uuid: r,
-        userId: i.id,
+      [commentUuid]: {
+        feedPostPublicUuid: action.postUuid,
+        uuid: commentUuid,
+        userId: user.id,
         user: {
-          id: i.id,
-          handle: i.handle,
-          imgUrl: i.img_url
+          id: user.id,
+          handle: user.handle,
+          imgUrl: user.img_url,
         },
-        messageMeta: m,
+        messageMeta: normalizedMessageMeta,
         createdAt: new Date(),
-        reactions: []
-      }
-    }
-  }, c);
-});
-let $$I8 = createOptimistThunk((e, t) => {
-  let {
-    commentUuid,
+        reactions: [],
+      },
+    },
+  }, createRequest)
+})
+
+/**
+ * Delete comment reaction helper function
+ */
+function deleteCommentReaction(commentUuid: string, emoji: string) {
+  return getCurrentLiveGraphClient().getIdFromUuid("FeedComment", commentUuid).then(id => sendWithRetry.del(`/api/feed_posts/comments/${id}/reactions`, {
     emoji,
-    reactionId
-  } = t;
-  let a = E(commentUuid, emoji);
-  e.getState().user && getCurrentLiveGraphClient().optimisticallyDelete({
-    FeedReaction: {
-      [reactionId]: null
-    }
-  }, a);
-});
-let E = (e, t) => getCurrentLiveGraphClient().getIdFromUuid("FeedComment", e).then(e => sendWithRetry.del(`/api/feed_posts/comments/${e}/reactions`, {
-  emoji: t
-}));
-let $$x1 = createOptimistThunk((e, t) => {
-  let {
-    commentUuid,
-    commentId,
-    emoji
-  } = t;
-  let s = e.getState().user;
-  if (!s || commentId.startsWith($$R0)) return;
-  let l = S(commentUuid, emoji);
+  }))
+}
+
+/**
+ * Delete comment reaction thunk
+ */
+export const deleteCommentReactionThunk = createOptimistThunk((
+  dispatch: any,
+  action: { commentUuid: string, emoji: string, reactionId: string },
+) => {
+  const { commentUuid, emoji, reactionId } = action
+  const deleteRequest = deleteCommentReaction(commentUuid, emoji)
+
+  const state = dispatch.getState()
+  if (state.user) {
+    getCurrentLiveGraphClient().optimisticallyDelete({
+      FeedReaction: {
+        [reactionId]: null,
+      },
+    }, deleteRequest)
+  }
+})
+
+/**
+ * Add comment reaction thunk
+ */
+export const addCommentReactionThunk = createOptimistThunk((
+  dispatch: any,
+  action: { commentUuid: string, commentId: string, emoji: string },
+) => {
+  const { commentUuid, commentId, emoji } = action
+  const state = dispatch.getState()
+  const user = state.user
+
+  if (!user || commentId.startsWith(PENDING_FEED_COMMENT_ID)) {
+    return
+  }
+
+  const createRequest = getCurrentLiveGraphClient().getIdFromUuid("FeedComment", commentUuid).then(id => sendWithRetry.post(`/api/feed_posts/comments/${id}/reactions`, {
+    emoji,
+  }))
+
   trackEventAnalytics("Team Feed Reaction Added", {
     commentId,
-    type: emoji
-  });
-  let d = `optimistic-id-comment-${commentId}-${emoji}-${s.id}`;
+    type: emoji,
+  })
+
+  const optimisticId = `optimistic-id-comment-${commentId}-${emoji}-${user.id}`
+
   getCurrentLiveGraphClient().optimisticallyCreate({
     FeedReaction: {
-      [d]: {
+      [optimisticId]: {
         createdAt: new Date(),
         emoji,
         feedResourceId: commentId,
         feedResourceType: "FeedComment",
-        userId: s.id
-      }
-    }
-  }, l);
-});
-let S = (e, t) => getCurrentLiveGraphClient().getIdFromUuid("FeedComment", e).then(e => sendWithRetry.post(`/api/feed_posts/comments/${e}/reactions`, {
-  emoji: t
-}));
-let $$w9 = createOptimistThunk((e, t) => {
-  let {
-    feedPostUuid,
+        userId: user.id,
+      },
+    },
+  }, createRequest)
+})
+
+/**
+ * Delete post reaction helper function
+ */
+function deletePostReaction(postUuid: string, emoji: string) {
+  return sendWithRetry.del(`/api/feed_posts/${postUuid}/reactions`, {
     emoji,
-    reactionId
-  } = t;
-  let a = C(feedPostUuid, emoji);
-  e.getState().user && getCurrentLiveGraphClient().optimisticallyDelete({
-    FeedReaction: {
-      [reactionId]: null
-    }
-  }, a);
-});
-let C = (e, t) => sendWithRetry.del(`/api/feed_posts/${e}/reactions`, {
-  emoji: t
-});
-let $$T2 = createOptimistThunk((e, t) => {
-  let {
-    feedPostUuid,
-    feedPostId,
-    emoji
-  } = t;
-  let s = e.getState().user;
-  if (!s) return;
-  let l = k(feedPostUuid, emoji);
+  })
+}
+
+/**
+ * Delete post reaction thunk
+ */
+export const deletePostReactionThunk = createOptimistThunk((
+  dispatch: any,
+  action: { feedPostUuid: string, emoji: string, reactionId: string },
+) => {
+  const { feedPostUuid, emoji, reactionId } = action
+  const deleteRequest = deletePostReaction(feedPostUuid, emoji)
+
+  const state = dispatch.getState()
+  if (state.user) {
+    getCurrentLiveGraphClient().optimisticallyDelete({
+      FeedReaction: {
+        [reactionId]: null,
+      },
+    }, deleteRequest)
+  }
+})
+
+/**
+ * Add post reaction thunk
+ */
+export const addPostReactionThunk = createOptimistThunk((
+  dispatch: any,
+  action: { feedPostUuid: string, feedPostId: string, emoji: string },
+) => {
+  const { feedPostUuid, feedPostId, emoji } = action
+  const state = dispatch.getState()
+  const user = state.user
+
+  if (!user) {
+    return
+  }
+
+  const createRequest = sendWithRetry.post(`/api/feed_posts/${feedPostUuid}/reactions`, {
+    emoji,
+  })
+
   trackEventAnalytics("Team Feed Reaction Added", {
     postUuid: feedPostUuid,
-    type: emoji
-  });
-  let d = `optimistic-id-${feedPostUuid}-${emoji}-${s.id}`;
+    type: emoji,
+  })
+
+  const optimisticId = `optimistic-id-${feedPostUuid}-${emoji}-${user.id}`
+
   getCurrentLiveGraphClient().optimisticallyCreate({
     FeedReaction: {
-      [d]: {
+      [optimisticId]: {
         createdAt: new Date(),
         emoji,
         feedResourceId: feedPostId,
         feedResourceType: "FeedPost",
-        userId: s.id,
+        userId: user.id,
         user: {
-          id: s.id,
-          handle: s.handle,
-          imgUrl: s.img_url
-        }
-      }
-    }
-  }, l);
-});
-let k = (e, t) => sendWithRetry.post(`/api/feed_posts/${e}/reactions`, {
-  emoji: t
-});
-let $$R0 = "pending-feed-comment";
-export const v6 = $$R0;
-export const FJ = $$x1;
-export const EF = $$T2;
-export const BC = $$y3;
-export const cx = $$b4;
-export const au = $$f5;
-export const gX = $$v6;
-export const Y9 = $$g7;
-export const t9 = $$I8;
-export const Oy = $$w9;
-export const hK = $$A10;
-export const yu = $$_11;
+          id: user.id,
+          handle: user.handle,
+          imgUrl: user.img_url,
+        },
+      },
+    },
+  }, createRequest)
+})
+
+// Export constants
+export const v6 = PENDING_FEED_COMMENT_ID
+export const FJ = addCommentReactionThunk
+export const EF = addPostReactionThunk
+export const BC = deleteFeedCommentThunk
+export const cx = editFeedCommentThunk
+export const au = refreshFeedThunk
+export const gX = createFeedCommentThunk
+export const Y9 = REFRESH_FEED_ACTION
+export const t9 = deleteCommentReactionThunk
+export const Oy = deletePostReactionThunk
+export const hK = TEAM_FEED_SET_INITIAL_BELL_STATES_ACTION
+export const yu = TEAM_FEED_SET_BELL_STATE_ACTION

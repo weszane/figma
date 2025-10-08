@@ -21,7 +21,7 @@ import { fileActionEnum } from "../figma_app/630077";
 import { Q } from "../figma_app/320600";
 import { hZ } from "../0c62c2fd/646972";
 import { cT } from "../figma_app/32128";
-import { J } from "../905/521144";
+import { getContainingAssetPanel } from "../905/521144";
 import { A as _$$A } from "../figma_app/965813";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { E as _$$E } from "../figma_app/999099";
@@ -96,7 +96,7 @@ export function $$A0({
             page_id: r
           };
           t(showModalHandler({
-            type: J(),
+            type: getContainingAssetPanel(),
             data: n
           }));
         }({

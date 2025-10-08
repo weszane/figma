@@ -91,7 +91,7 @@ export function getEditorViewType(
  * @param {string} theme
  * @returns {string}
  */
-export function getMPVisibleTheme(theme: string): string {
+export function getMPVisibleTheme(theme: string): 'light' | 'dark' {
   return typeof mpGlobal !== 'undefined'
     ? mpGlobal.getVisibleTheme(theme)
     : 'light'

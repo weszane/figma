@@ -9,7 +9,7 @@ import { s as _$$s2 } from "../905/58247";
 import { trackGenericEvent } from "../figma_app/314264";
 import { getFullscreenViewEditorType } from "../figma_app/300692";
 import { R } from "../figma_app/185954";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { SimpleComponentType } from "../figma_app/504088";
 var $$g1 = (e => (e.INVITE_TILE = "invite_tile", e.COMMUNITY_PAGE = "community_page", e))($$g1 || {});
 let $$f7 = createOptimistThunk((e, t) => {
@@ -48,7 +48,7 @@ let $$E5 = createOptimistThunk((e, t) => {
     plugin_id ? _$$s2({
       initialX: 0,
       initialY: 0,
-      initialTab: "figjam" === i ? _$$p.PLUGINS : void 0,
+      initialTab: "figjam" === i ? TabCategory.PLUGINS : void 0,
       initialFdResourceTab: "figma" === i ? SimpleComponentType.PLUGIN : void 0,
       scrollDevelopmentSectionIntoView: "figjam" === i,
       initialFdView: "figma" === i ? "development" : void 0,
@@ -56,7 +56,7 @@ let $$E5 = createOptimistThunk((e, t) => {
     }) : widget_id && _$$s2({
       initialX: 0,
       initialY: 0,
-      initialTab: "figjam" === i ? _$$p.WIDGETS : void 0,
+      initialTab: "figjam" === i ? TabCategory.WIDGETS : void 0,
       initialFdResourceTab: "figma" === i ? SimpleComponentType.WIDGET : void 0,
       scrollDevelopmentSectionIntoView: "figjam" === i,
       initialFdView: "figma" === i ? "development" : void 0,

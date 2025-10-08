@@ -1,154 +1,155 @@
-import { ZS } from "../figma_app/519839";
-import { ServiceCategories } from "../905/165054";
-import { AppStateTsApi, PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
-import { l as _$$l } from "../905/716947";
-import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager } from "../figma_app/27355";
-import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { createActionCreator } from "../905/73481";
-import { trackEventAnalytics } from "../905/449184";
-import { appendSearchParams } from "../905/508367";
-import { customHistory } from "../905/612521";
-import { x as _$$x } from "../figma_app/256637";
-import { getInitialOptions } from "../figma_app/169182";
-import { getCurrentLiveGraphClient } from "../905/761735";
-import { createAtomSetter } from "../figma_app/566371";
-import { isMobileUA } from "../figma_app/778880";
-import { reportError } from "../905/11";
-import { logError } from "../905/714362";
-import { sendWithRetry } from "../905/910117";
-import { AUTH_INIT } from "../905/194276";
-import { FlashActions } from "../905/573154";
-import { getI18nString } from "../905/303541";
-import { resolveMessage } from "../905/231762";
-import { VisualBellActions } from "../905/302958";
-import { getCurrentSearchSessionId } from "../figma_app/387599";
-import { processHubFilesThunk } from "../905/359847";
-import { resourceVersionsQuery } from "../905/909123";
-import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { createPublishActionCreators } from "../figma_app/530167";
-import { hideDropdownAction, selectViewAction } from "../905/929976";
-import { filePutAction } from "../figma_app/78808";
-import { u as _$$u } from "../905/747030";
-import { showModalHandler } from "../905/156213";
-import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
-import { roleBatchPutAction } from "../905/98702";
-import { HubEventType } from "../figma_app/350203";
-import { N as _$$N } from "../figma_app/23271";
-import { trackFileObjEvent } from "../figma_app/314264";
-import { findPublishedProfileForUser } from "../figma_app/740025";
-import { R1, Z2 } from "../figma_app/599979";
-import { triggerMissingFontPopover } from "../figma_app/557318";
-import { pt } from "../figma_app/198840";
-import { getDesignFileUrlWithOptions } from "../905/612685";
-import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
-import { liveStoreInstance } from "../905/713695";
-import { aB } from "../905/576221";
-import { setupLoadingStateHandler } from "../905/696711";
-import { maybeCreateSavepoint } from "../905/294113";
-import { AC, x6, jO } from "../figma_app/803787";
-import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
-import { UploadStatusEnum } from "../figma_app/10554";
-import { LibrarySourceEnum } from "../figma_app/633080";
-import { FDocumentType, ITemplateType } from "../905/862883";
-import { PreviewMode } from "../figma_app/707808";
-import { fileActionEnum } from "../figma_app/630077";
-import { BuyerAPIHandler } from "../905/180";
-import { HubFileMetadata } from "../905/17527";
-import { hubFileAPI } from "../905/473998";
-import { z as _$$z } from "../905/931953";
-import { AuthModal } from "../905/749159";
-import { Y as _$$Y } from "../905/582047";
-import { UM, F4 } from "../figma_app/60023";
-import { Dl } from "../905/58274";
-import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523";
-let ep = ZS;
-let $$e_7 = createActionCreator("PUT_FIG_FILE_PUBLISHED_AS_HUB_FILE");
-let $$eh0 = createActionCreator("UPDATE_HUB_FILE_PAGE_TITILE");
-let $$em2 = createActionCreator("DEL_FIG_FILE_PUBLISHED_AS_HUB_FILE");
-let $$eg5 = createActionCreator("PUT_FIG_FILE_DUPLICATE_FROM_HUB_FILE");
-let ef = createActionCreator("DEL_FIG_FILE_DUPLICATE_FROM_HUB_FILE");
-let $$eE12 = createActionCreator("HUB_FILE_PUT_HUB_FILE_REMIX");
-let ey = e => {
-  let t = getI18nString("community.actions.log_in_or_create_an_account_to_duplicate_this_file");
+import { reportError } from "../905/11"
+import { BuyerAPIHandler } from "../905/180"
+import { HubFileMetadata } from "../905/17527"
+import { Dl } from "../905/58274"
+import { createActionCreator } from "../905/73481"
+import { roleBatchPutAction } from "../905/98702"
+import { showModalHandler } from "../905/156213"
+import { ServiceCategories } from "../905/165054"
+import { AUTH_INIT } from "../905/194276"
+import { resolveMessage } from "../905/231762"
+import { maybeCreateSavepoint } from "../905/294113"
+import { VisualBellActions } from "../905/302958"
+import { getI18nString } from "../905/303541"
+import { createOptimistAction, createOptimistThunk } from "../905/350402"
+import { processHubFilesThunk } from "../905/359847"
+import { trackEventAnalytics } from "../905/449184"
+import { hubFileAPI } from "../905/473998"
+import { appendSearchParams } from "../905/508367"
+import { FlashActions } from "../905/573154"
+import { aB } from "../905/576221"
+import { Y as _$$Y } from "../905/582047"
+import { getFeatureFlags } from "../905/601108"
+import { customHistory } from "../905/612521"
+import { getDesignFileUrlWithOptions } from "../905/612685"
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456"
+import { setupLoadingStateHandler } from "../905/696711"
+import { liveStoreInstance } from "../905/713695"
+import { logError } from "../905/714362"
+import { l as _$$l } from "../905/716947"
+import { u as _$$u } from "../905/747030"
+import { AuthModal } from "../905/749159"
+import { getCurrentLiveGraphClient } from "../905/761735"
+import { FDocumentType, ITemplateType } from "../905/862883"
+import { resourceVersionsQuery } from "../905/909123"
+import { sendWithRetry } from "../905/910117"
+import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523"
+import { hideDropdownAction, selectViewAction } from "../905/929976"
+import { z as _$$z } from "../905/931953"
+import { UploadStatusEnum } from "../figma_app/10554"
+import { N as _$$N } from "../figma_app/23271"
+import { atomStoreManager } from "../figma_app/27355"
+import { F4, UM } from "../figma_app/60023"
+import { filePutAction } from "../figma_app/78808"
+import { addTemplateToRecentsThunkAction } from "../figma_app/147952"
+import { getInitialOptions } from "../figma_app/169182"
+import { FFileType, FTemplateCategoryType } from "../figma_app/191312"
+import { pt } from "../figma_app/198840"
+import { x as _$$x } from "../figma_app/256637"
+import { trackFileObjEvent } from "../figma_app/314264"
+import { HubEventType } from "../figma_app/350203"
+import { getCurrentSearchSessionId } from "../figma_app/387599"
+import { ZS } from "../figma_app/519839"
+import { createPublishActionCreators } from "../figma_app/530167"
+import { triggerMissingFontPopover } from "../figma_app/557318"
+import { createAtomSetter } from "../figma_app/566371"
+import { AddOperationType, checkTeamFileRestrictions } from "../figma_app/598018"
+import { R1, Z2 } from "../figma_app/599979"
+import { fileActionEnum } from "../figma_app/630077"
+import { LibrarySourceEnum } from "../figma_app/633080"
+import { PreviewMode } from "../figma_app/707808"
+import { findPublishedProfileForUser } from "../figma_app/740025"
+import { AppStateTsApi, PresentationValidationStatus, PrototypingTsApi } from "../figma_app/763686"
+import { isMobileUA } from "../figma_app/778880"
+import { AC, jO, x6 } from "../figma_app/803787"
+
+let ep = ZS
+let $$e_7 = createActionCreator("PUT_FIG_FILE_PUBLISHED_AS_HUB_FILE")
+let $$eh0 = createActionCreator("UPDATE_HUB_FILE_PAGE_TITILE")
+let $$em2 = createActionCreator("DEL_FIG_FILE_PUBLISHED_AS_HUB_FILE")
+let $$eg5 = createActionCreator("PUT_FIG_FILE_DUPLICATE_FROM_HUB_FILE")
+let ef = createActionCreator("DEL_FIG_FILE_DUPLICATE_FROM_HUB_FILE")
+let $$eE12 = createActionCreator("HUB_FILE_PUT_HUB_FILE_REMIX")
+let ey = (e) => {
+  let t = getI18nString("community.actions.log_in_or_create_an_account_to_duplicate_this_file")
   if (isMobileUA) {
-    window.location.href = "/login";
-    return;
+    window.location.href = "/login"
+    return
   }
   e.dispatch(AUTH_INIT({
-    origin
-  }));
+    origin,
+  }))
   e.dispatch(showModalHandler({
     type: AuthModal,
     data: {
-      headerText: t
-    }
-  }));
-};
+      headerText: t,
+    },
+  }))
+}
 let $$eb16 = createOptimistThunk((e, t, {
-  loadingKey: r
+  loadingKey: r,
 }) => {
-  let n = e.getState();
+  let n = e.getState()
   if (!n.user) {
-    ey(e);
-    return;
+    ey(e)
+    return
   }
   let i = {
     headers: {
       ...sendWithRetry.defaults.headers,
-      "X-Figma-User-ID": t.workspace.userId
-    }
-  };
+      "X-Figma-User-ID": t.workspace.userId,
+    },
+  }
   let a = sendWithRetry.post(`/api/hub_files/v2/${t.hubFileId}/copy`, {
-    org_id: t.workspace.orgId
-  }, i);
-  setupLoadingStateHandler(a, e, r);
+    org_id: t.workspace.orgId,
+  }, i)
+  setupLoadingStateHandler(a, e, r)
   a.then(({
-    data: r
+    data: r,
   }) => {
-    let i = r.meta;
+    let i = r.meta
     trackEventAnalytics(HubEventType.HUB_FILE_DUPLICATED, {
       hubFileId: t.hubFileId,
       figFileKey: i.key,
-      searchSessionId: getCurrentSearchSessionId(n)
-    });
-    "whiteboard" === i.editor_type && e.dispatch(addTemplateToRecentsThunkAction({
+      searchSessionId: getCurrentSearchSessionId(n),
+    })
+    i.editor_type === "whiteboard" && e.dispatch(addTemplateToRecentsThunkAction({
       storeInRecentsKey: FDocumentType.FigJam,
       id: t.hubFileId,
-      type: ITemplateType.CommunityResource
-    }));
-    let a = getDesignFileUrlWithOptions(i);
+      type: ITemplateType.CommunityResource,
+    }))
+    let a = getDesignFileUrlWithOptions(i)
     a = appendSearchParams(a, {
       [pt.KEY]: pt.VALUE,
-      fuid: t.workspace.userId
-    });
-    customHistory.redirect(a, isMobileUA ? void 0 : "_blank");
-    e.dispatch(hideDropdownAction());
-  }).catch(t => {
+      fuid: t.workspace.userId,
+    })
+    customHistory.redirect(a, isMobileUA ? void 0 : "_blank")
+    e.dispatch(hideDropdownAction())
+  }).catch((t) => {
     e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: getI18nString("community.actions.failed_to_duplicate_file_error", {
-        error: resolveMessage(t, getI18nString("community.actions.try_again_or_contact_support_figma_com"))
-      })
-    }));
-  });
+        error: resolveMessage(t, getI18nString("community.actions.try_again_or_contact_support_figma_com")),
+      }),
+    }))
+  })
 }, ({
-  hubFileId: e
-}) => `DUPLICATE_HUB_FILE_${e}`);
+  hubFileId: e,
+}) => `DUPLICATE_HUB_FILE_${e}`)
 let $$eT18 = createOptimistThunk((e, t) => {
   let {
-    canRetry = !0
-  } = t;
-  let n = e.getState();
-  let i = n.currentUserOrgId;
-  let a = n.currentTeamId;
+    canRetry = !0,
+  } = t
+  let n = e.getState()
+  let i = n.currentUserOrgId
+  let a = n.currentTeamId
   if (t.folderId) {
-    let r = n.folders[t.folderId]?.team_id;
-    let i = r ? n.teams[r] : null;
-    let a = _$$N(n.hubFiles[t.hubFileId].viewer_mode);
+    let r = n.folders[t.folderId]?.team_id
+    let i = r ? n.teams[r] : null
+    let a = _$$N(n.hubFiles[t.hubFileId].viewer_mode)
     if (i && !checkTeamFileRestrictions(i, {
       type: AddOperationType.ADD_FILE,
-      editorType: a
+      editorType: a,
     })) {
       e.dispatch(showModalHandler({
         type: _$$Y,
@@ -157,217 +158,223 @@ let $$eT18 = createOptimistThunk((e, t) => {
           createInDrafts: () => {
             e.dispatch($$eT18({
               ...t,
-              folderId: void 0
-            }));
+              folderId: void 0,
+            }))
           },
           teamName: i.name,
           editorType: a,
           dispatch: e.dispatch,
-          action: fileActionEnum.CREATE_FILE_FROM_TEMPLATE
-        }
-      }));
-      return;
+          action: fileActionEnum.CREATE_FILE_FROM_TEMPLATE,
+        },
+      }))
+      return
     }
   }
   return sendWithRetry.post(`/api/hub_files/template/${t.hubFileId}/copy`, {
     folder_id: t.folderId,
     org_id: i,
-    team_id: a || void 0
+    team_id: a || void 0,
   }).then(({
-    data: r
+    data: r,
   }) => {
-    let i = r.meta;
+    let i = r.meta
     trackFileObjEvent("File Created", i, {
-      selectedView: n.selectedView
+      selectedView: n.selectedView,
     }, {
-      source: t.source
-    });
-    t.callback && t.callback(i?.key);
-    "whiteboard" === i.editor_type && e.dispatch(addTemplateToRecentsThunkAction({
+      source: t.source,
+    })
+    t.callback && t.callback(i?.key)
+    i.editor_type === "whiteboard" && e.dispatch(addTemplateToRecentsThunkAction({
       storeInRecentsKey: FDocumentType.FigJam,
       id: t.hubFileId,
-      type: ITemplateType.CommunityResource
-    }));
-    let a = {};
+      type: ITemplateType.CommunityResource,
+    }))
+    let a = {}
     t.isDrawMode && (a = {
       ...a,
       isDrawMode: !0,
-      allowDefaulting: !1
-    });
-    let s = getDesignFileUrlWithOptions(i, a);
-    customHistory.redirect(s, t.openInNewTab && !isMobileUA ? "_blank" : void 0);
-  }).catch(n => {
+      allowDefaulting: !1,
+    })
+    let s = getDesignFileUrlWithOptions(i, a)
+    customHistory.redirect(s, t.openInNewTab && !isMobileUA ? "_blank" : void 0)
+  }).catch((n) => {
     let i = {
       error: !0,
       message: getI18nString("community.actions.failed_to_create_a_new_file_from_hub_file_name", {
-        hubFileName: t.hubFileName
-      })
-    };
+        hubFileName: t.hubFileName,
+      }),
+    }
     canRetry && (i.button = {
       text: getI18nString("community.actions.retry"),
       action: () => e.dispatch($$eT18({
         ...t,
-        canRetry: !1
-      }))
-    });
-    e.dispatch(VisualBellActions.enqueue(i));
-  });
-});
+        canRetry: !1,
+      })),
+    })
+    e.dispatch(VisualBellActions.enqueue(i))
+  })
+})
 let $$eI20 = createOptimistThunk(async (e, {
   hubFileId: t,
-  callback: r
+  callback: r,
 }, {
-  loadingKey: n
+  loadingKey: n,
 }) => {
-  let i = null;
-  let a = Promise.resolve(null);
+  let i = null
+  let a = Promise.resolve(null)
   let s = hubFileAPI.getVersions({
-    id: t
-  });
-  a = s;
+    id: t,
+  })
+  a = s
   try {
-    i = (await s).data.meta;
-  } catch (e) {
-    return;
+    i = (await s).data.meta
   }
-  setupLoadingStateHandler(a, e, n);
+  catch (e) {
+    return
+  }
+  setupLoadingStateHandler(a, e, n)
   let {
     fig_file_metadata,
     remixed_from_metadata,
     ...d
-  } = i;
-  let c = d.related_content;
-  let u = d.remixed_to_metadata;
-  let p = [...(c ? c.content : u || []), d];
-  remixed_from_metadata && p.push(remixed_from_metadata);
+  } = i
+  let c = d.related_content
+  let u = d.remixed_to_metadata
+  let p = [...(c ? c.content : u || []), d]
+  remixed_from_metadata && p.push(remixed_from_metadata)
   e.dispatch(processHubFilesThunk({
     hubFiles: p,
-    src: "getHubFileVersions"
-  }));
+    src: "getHubFileVersions",
+  }))
   fig_file_metadata && (e.dispatch($$e_7({
     hubFileId: d.id,
-    fileKey: fig_file_metadata.key
+    fileKey: fig_file_metadata.key,
   })), fig_file_metadata.file && e.dispatch(filePutAction({
-    file: fig_file_metadata.file
+    file: fig_file_metadata.file,
   })), fig_file_metadata.roles && e.dispatch(roleBatchPutAction({
-    roles: fig_file_metadata.roles
-  })));
+    roles: fig_file_metadata.roles,
+  })))
   e.dispatch($$eh0({
-    hubFileId: d.id
-  }));
-  let _ = new Set(u?.map(e => e.id));
+    hubFileId: d.id,
+  }))
+  let _ = new Set(u?.map(e => e.id))
   e.dispatch($$eE12({
     hubFileId: d.id,
     from: remixed_from_metadata ? remixed_from_metadata.id : null,
-    to: _
-  }));
-  r?.(d);
+    to: _,
+  }))
+  r?.(d)
 }, ({
-  hubFileId: e
-}) => `HUB_FILE_GET_VERSIONS_${e}`);
+  hubFileId: e,
+}) => `HUB_FILE_GET_VERSIONS_${e}`)
 let $$eS17 = createOptimistThunk(async (e, {
-  fileKey: t
+  fileKey: t,
 }) => {
   getInitialOptions().user_data && (await HubFileMetadata.getHubFileMetadata({
-    fileKey: t
+    fileKey: t,
   }).then(({
-    data: r
+    data: r,
   }) => {
-    let n = r.meta.published_as;
-    n?.id ? e.dispatch($$e_7({
-      hubFileId: n.id,
-      fileKey: t
-    })) : e.dispatch($$em2({
-      fileKey: t
-    }));
-    let i = r.meta.remixed_from_metadata;
-    let a = r.meta.is_preview;
-    i?.id ? e.dispatch($$eg5({
-      hubFileId: i.id,
-      fileKey: t,
-      isPreview: !!a
-    })) : e.dispatch(ef({
-      fileKey: t
-    }));
-    let s = [n, i].filter(e => !!e);
+    let n = r.meta.published_as
+    n?.id
+      ? e.dispatch($$e_7({
+          hubFileId: n.id,
+          fileKey: t,
+        }))
+      : e.dispatch($$em2({
+          fileKey: t,
+        }))
+    let i = r.meta.remixed_from_metadata
+    let a = r.meta.is_preview
+    i?.id
+      ? e.dispatch($$eg5({
+          hubFileId: i.id,
+          fileKey: t,
+          isPreview: !!a,
+        }))
+      : e.dispatch(ef({
+          fileKey: t,
+        }))
+    let s = [n, i].filter(e => !!e)
     s.length > 0 && e.dispatch(processHubFilesThunk({
       hubFiles: s,
-      src: "getHubFileMetadata"
-    }));
+      src: "getHubFileMetadata",
+    }))
   }).then(() => {
-    getFeatureFlags().ce_new_missing_fonts_logging && triggerMissingFontPopover();
-  }).catch(e => {
-    console.error(e);
+    getFeatureFlags().ce_new_missing_fonts_logging && triggerMissingFontPopover()
+  }).catch((e) => {
+    console.error(e)
   }).finally(() => {
-    atomStoreManager.set(_$$x, !0);
-  }));
-});
-let $$ev22 = createPublishActionCreators("HUB_FILE");
+    atomStoreManager.set(_$$x, !0)
+  }))
+})
+let $$ev22 = createPublishActionCreators("HUB_FILE")
 let {
   updateMetadata,
   updateStatus,
   clearMetadataAndStatus,
-  clearMetadata
-} = $$ev22;
+  clearMetadata,
+} = $$ev22
 let $$ew13 = createOptimistThunk((e, t) => {
-  let r = [];
-  let n = t.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE;
+  let r = []
+  let n = t.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE
   if (n) {
-    r = AC(e.getState());
-    let n = x6(e.getState());
-    let i = !!t.hubFileId && r.length > 0 && aB(Object.values(n), new Set(r));
-    if (!t.hubFileId && 0 === r.length || i) {
-      Dl(e.dispatch);
-      return;
+    r = AC(e.getState())
+    let n = x6(e.getState())
+    let i = !!t.hubFileId && r.length > 0 && aB(Object.values(n), new Set(r))
+    if (!t.hubFileId && r.length === 0 || i) {
+      Dl(e.dispatch)
+      return
     }
     atomStoreManager.set(UM, {
-      state: F4.PUBLISH_HUB_FILE_INITIATED
-    });
+      state: F4.PUBLISH_HUB_FILE_INITIATED,
+    })
   }
   e.dispatch(updateStatus({
     id: t.fileKey,
     status: {
-      code: UploadStatusEnum.UPLOADING
-    }
-  }));
+      code: UploadStatusEnum.UPLOADING,
+    },
+  }))
   eO(e, t).then(({
     hubFile: r,
     actingProfile: n,
-    profileCreated: i
+    profileCreated: i,
   }) => (e.dispatch(processHubFilesThunk({
     hubFiles: [r],
-    src: "createHubFile"
+    src: "createHubFile",
   })), e.dispatch($$e_7({
     hubFileId: r.id,
-    fileKey: t.fileKey
+    fileKey: t.fileKey,
   })), i && (n.profile_created = i, e.dispatch(addAuthedCommunityProfileToHub(n))), e.dispatch(putCommunityProfile(n)), e.dispatch(updateStatus({
     id: t.fileKey,
     status: {
-      code: UploadStatusEnum.SUCCESS
-    }
+      code: UploadStatusEnum.SUCCESS,
+    },
   })), t.suggestedCategory && trackEventAnalytics("community_category_suggestion", {
     resourceType: "hub_file",
     resourceId: r.id,
     categoryId: r.category_id,
-    suggestedCategory: t.suggestedCategory
+    suggestedCategory: t.suggestedCategory,
   }, {
-    forwardToDatadog: !0
+    forwardToDatadog: !0,
   }), {
-    hubFile: r
+    hubFile: r,
   })).then(({
-    hubFile: r
+    hubFile: r,
   }) => {
-    if (!n || null === ep) return;
-    let s = AC(e.getState());
-    let l = Object.values(jO(e.getState(), LibrarySourceEnum.HUBFILE)).map(e => e.node_id);
-    let d = AppStateTsApi.slideThemeLibBindings().renameThemeForTemplatePublish(t.name) ? l : s;
+    if (!n || ep === null)
+      return
+    let s = AC(e.getState())
+    let l = Object.values(jO(e.getState(), LibrarySourceEnum.HUBFILE)).map(e => e.node_id)
+    let d = AppStateTsApi.slideThemeLibBindings().renameThemeForTemplatePublish(t.name) ? l : s
     if (d.length > 0) {
-      r.library_key && AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(r.library_key));
+      r.library_key && AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(r.library_key))
       let {
         onPublishSuccess,
         onPublishProgress,
-        onPublishError
-      } = _$$u(FFileType.SLIDES);
+        onPublishError,
+      } = _$$u(FFileType.SLIDES)
       requestAnimationFrame(() => {
         e.dispatch(ep({
           savepointDescription: "Community slide template publish",
@@ -376,32 +383,35 @@ let $$ew13 = createOptimistThunk((e, t) => {
           hubFileId: r.id,
           onPublishSuccess,
           onPublishProgress,
-          onPublishError
-        }));
-      });
-    } else atomStoreManager.set(UM, {
-      state: F4.PUBLISH_HUB_FILE_COMPLETED
-    });
-  }).catch(r => {
+          onPublishError,
+        }))
+      })
+    }
+    else {
+      atomStoreManager.set(UM, {
+        state: F4.PUBLISH_HUB_FILE_COMPLETED,
+      })
+    }
+  }).catch((r) => {
     n && atomStoreManager.set(UM, {
-      state: F4.PUBLISH_HUB_FILE_ERRORED
-    });
+      state: F4.PUBLISH_HUB_FILE_ERRORED,
+    })
     e.dispatch(VisualBellActions.enqueue({
       message: r.message,
       type: "hub-file-created-error",
-      error: !0
-    }));
+      error: !0,
+    }))
     e.dispatch(updateStatus({
       id: t.fileKey,
       status: {
         code: UploadStatusEnum.FAILURE,
-        error: r.message
-      }
-    }));
-  });
-});
+        error: r.message,
+      },
+    }))
+  })
+})
 async function eO(e, t) {
-  let r;
+  let r
   let {
     fileKey,
     name,
@@ -424,21 +434,24 @@ async function eO(e, t) {
     price,
     supportContact,
     carouselMedia,
-    customCarouselThumbnail
-  } = t;
-  if (authorOrgId && authorTeamId) throw Error(getI18nString("community.actions.attempting_to_set_both_author_org_id_and_author_team_id_while_publishing"));
-  if (viewerMode === FTemplateCategoryType.PROTOTYPE && PrototypingTsApi.firstPagePrototypeStatus() !== PresentationValidationStatus.VALID) throw Error(getI18nString("community.actions.attempting_to_publish_an_invalid_prototype_as_a_prototype"));
-  let O = await maybeCreateSavepoint(fileKey, "Published to Community hub", description, e.dispatch).then(e => e.id).catch(e => {
-    reportError(ServiceCategories.COMMUNITY, e);
-    return Error(e.data?.message || getI18nString("community.actions.could_not_connect_to_the_server"));
-  });
+    customCarouselThumbnail,
+  } = t
+  if (authorOrgId && authorTeamId)
+    throw new Error(getI18nString("community.actions.attempting_to_set_both_author_org_id_and_author_team_id_while_publishing"))
+  if (viewerMode === FTemplateCategoryType.PROTOTYPE && PrototypingTsApi.firstPagePrototypeStatus() !== PresentationValidationStatus.VALID)
+    throw new Error(getI18nString("community.actions.attempting_to_publish_an_invalid_prototype_as_a_prototype"))
+  let O = await maybeCreateSavepoint(fileKey, "Published to Community hub", description, e.dispatch).then(e => e.id).catch((e) => {
+    reportError(ServiceCategories.COMMUNITY, e)
+    return new Error(e.data?.message || getI18nString("community.actions.could_not_connect_to_the_server"))
+  })
   try {
-    r = await R1(thumbnailBuffer, carouselMedia || [], O);
-  } catch (e) {
-    reportError(ServiceCategories.COMMUNITY, e);
-    return Error(getI18nString("community.actions.error_uploading_images_e"));
+    r = await R1(thumbnailBuffer, carouselMedia || [], O)
   }
-  let R = Z2(r?.carousel_images || [], customCarouselThumbnail);
+  catch (e) {
+    reportError(ServiceCategories.COMMUNITY, e)
+    return new Error(getI18nString("community.actions.error_uploading_images_e"))
+  }
+  let R = Z2(r?.carousel_images || [], customCarouselThumbnail)
   let L = {
     file_version_id: O,
     name,
@@ -462,27 +475,28 @@ async function eO(e, t) {
     price,
     support_contact: supportContact,
     carousel_images: r?.carousel_images,
-    cover_image_carousel_image: r?.carousel_images[R]
-  };
+    cover_image_carousel_image: r?.carousel_images[R],
+  }
   try {
-    let e = await hubFileAPI.publishHubFile(L);
+    let e = await hubFileAPI.publishHubFile(L)
     return {
       hubFile: e.data.meta.hub_file,
       actingProfile: e.data.meta.acting_profile,
-      profileCreated: e.data.meta.profile_created
-    };
-  } catch (e) {
-    reportError(ServiceCategories.COMMUNITY, e);
-    return Error(resolveMessage(e, getI18nString("community.actions.could_not_publish_hub_file", {
-      error: e.message
-    })));
+      profileCreated: e.data.meta.profile_created,
+    }
+  }
+  catch (e) {
+    reportError(ServiceCategories.COMMUNITY, e)
+    return new Error(resolveMessage(e, getI18nString("community.actions.could_not_publish_hub_file", {
+      error: e.message,
+    })))
   }
 }
 let $$eR4 = createOptimistThunk(async (e, {
   payload: t,
-  onSuccess: r
+  onSuccess: r,
 }) => {
-  let i;
+  let i
   let {
     hubFileId,
     name,
@@ -501,20 +515,21 @@ let $$eR4 = createOptimistThunk(async (e, {
     carouselMedia,
     customCarouselThumbnail,
     hasCustomUploadedThumbnail,
-    thumbnailBuffer
-  } = t;
+    thumbnailBuffer,
+  } = t
   try {
-    i = await R1(thumbnailBuffer, carouselMedia || [], void 0, hubFileId);
-  } catch (t) {
-    reportError(ServiceCategories.COMMUNITY, t);
+    i = await R1(thumbnailBuffer, carouselMedia || [], void 0, hubFileId)
+  }
+  catch (t) {
+    reportError(ServiceCategories.COMMUNITY, t)
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.error_uploading_images_publish_update_from_editor"),
       type: "hub-file-updated-error",
-      error: !0
-    }));
-    return Error(t);
+      error: !0,
+    }))
+    return new Error(t)
   }
-  let O = Z2(i?.carousel_images || [], customCarouselThumbnail);
+  let O = Z2(i?.carousel_images || [], customCarouselThumbnail)
   let R = {
     name,
     description,
@@ -532,134 +547,136 @@ let $$eR4 = createOptimistThunk(async (e, {
     cover_image_carousel_image: i?.carousel_images[O],
     has_custom_uploaded_thumbnail: hasCustomUploadedThumbnail,
     cover_image_uploaded: i?.cover_image.cover_image_uploaded,
-    signature: i?.cover_image.signature
-  };
+    signature: i?.cover_image.signature,
+  }
   try {
-    let t = (await hubFileAPI.updateHubFile(hubFileId, R)).data.meta;
+    let t = (await hubFileAPI.updateHubFile(hubFileId, R)).data.meta
     e.dispatch(processHubFilesThunk({
       hubFiles: [t],
-      src: "updateHubFile"
-    }));
+      src: "updateHubFile",
+    }))
     suggestedCategory && trackEventAnalytics("community_category_suggestion", {
       resourceType: "hub_file",
       resourceId: t.id,
       categoryId: t.category_id,
-      suggestedCategory
+      suggestedCategory,
     }, {
-      forwardToDatadog: !0
-    });
-    r?.(t);
-  } catch (r) {
-    let t = resolveMessage(r, getI18nString("community.actions.an_error_occurred_while_updating_please_refresh_and_try_again"));
-    e.dispatch(FlashActions.error(t));
-    reportError(ServiceCategories.COMMUNITY, r);
-    return Error(`Error updating file ${r}`);
+      forwardToDatadog: !0,
+    })
+    r?.(t)
   }
-});
-let eL = async e => {
-  if (e.viewer_mode !== FTemplateCategoryType.FIGMAKE_TEMPLATE || null == e.published_site_url) return;
-  let t = e.fig_file_metadata?.key;
+  catch (r) {
+    let t = resolveMessage(r, getI18nString("community.actions.an_error_occurred_while_updating_please_refresh_and_try_again"))
+    e.dispatch(FlashActions.error(t))
+    reportError(ServiceCategories.COMMUNITY, r)
+    return new Error(`Error updating file ${r}`)
+  }
+})
+let eL = async (e) => {
+  if (e.viewer_mode !== FTemplateCategoryType.FIGMAKE_TEMPLATE || e.published_site_url == null)
+    return
+  let t = e.fig_file_metadata?.key
   if (!t) {
-    console.warn("No file key available for figmake hub file, cannot unpublish site");
-    return;
+    console.warn("No file key available for figmake hub file, cannot unpublish site")
+    return
   }
   trackEventAnalytics("sites_unpublish_started", {
     fileKey: t,
-    productType: "sites"
-  });
+    productType: "sites",
+  })
   await _$$z.unpublishSite({
-    fileKey: t
-  });
-};
+    fileKey: t,
+  })
+}
 let $$eP10 = createOptimistThunk((e, {
   hubFileId: t,
   redirectLink: r,
   onSuccess: i,
-  onError: a
+  onError: a,
 }) => {
   sendWithRetry.del(`/api/hub_files/${t}`).then(({
-    data: t
+    data: t,
   }) => {
-    let r = t.meta;
+    let r = t.meta
     e.dispatch(processHubFilesThunk({
       hubFiles: [r],
-      src: "unpublishHubFile"
-    }));
-    return r;
+      src: "unpublishHubFile",
+    }))
+    return r
   }).then(eL).then(() => {
-    r && customHistory.redirect(r);
-    i?.();
-  }).catch(e => {
-    reportError(ServiceCategories.COMMUNITY, e);
-    console.error(Error(`Error unpublishing file ${e}`));
-    a?.();
-  });
-});
+    r && customHistory.redirect(r)
+    i?.()
+  }).catch((e) => {
+    reportError(ServiceCategories.COMMUNITY, e)
+    console.error(new Error(`Error unpublishing file ${e}`))
+    a?.()
+  })
+})
 let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
   hubFileId: t,
-  viewContext: r
+  viewContext: r,
 }, {
-  optimistId: n
+  optimistId: n,
 }) => {
   sendWithRetry.post(`/api/hub_files/v2/${t}/copy`).then(({
-    data: i
+    data: i,
   }) => {
-    e.dispatch(createOptimistCommitAction(n));
-    let a = i.meta;
-    let s = getDesignFileUrlWithOptions(a);
+    e.dispatch(createOptimistCommitAction(n))
+    let a = i.meta
+    let s = getDesignFileUrlWithOptions(a)
     s = appendSearchParams(s, {
-      [pt.KEY]: pt.VALUE
-    });
-    customHistory.redirect(s, isMobileUA ? void 0 : "_blank");
+      [pt.KEY]: pt.VALUE,
+    })
+    customHistory.redirect(s, isMobileUA ? void 0 : "_blank")
     trackEventAnalytics(HubEventType.HUB_FILE_DUPLICATED, {
       hubFileId: t,
       figFileKey: a.key,
       viewContext: r,
-      searchSessionId: getCurrentSearchSessionId(e.getState())
-    });
-  }).catch(t => {
-    e.dispatch(createOptimistRevertAction(n));
+      searchSessionId: getCurrentSearchSessionId(e.getState()),
+    })
+  }).catch((t) => {
+    e.dispatch(createOptimistRevertAction(n))
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_duplicate", {
-        error: resolveMessage(t, t.data.message)
+        error: resolveMessage(t, t.data.message),
       }),
       type: "HUB_FILE_DUPLICATE_FAILED",
-      error: !0
-    }));
-  });
-});
+      error: !0,
+    }))
+  })
+})
 let ek = liveStoreInstance.Mutation(({
-  id: e
+  id: e,
 }, {
-  query: t
+  query: t,
 }) => (t.mutate(resourceVersionsQuery({
   apiResourceType: "file",
-  id: e
-}), e => {
-  e.like_count += 1;
+  id: e,
+}), (e) => {
+  e.like_count += 1
 }), hubFileAPI.likeHubFile({
-  id: e
-})));
+  id: e,
+})))
 let $$eM24 = createOptimistThunk((e, {
-  hubFileId: t
+  hubFileId: t,
 }, {
-  loadingKey: r
+  loadingKey: r,
 }) => {
   let n = createAtomSetter(ek)({
-    id: t
-  });
-  setupLoadingStateHandler(n, e, r);
-  n.catch(t => {
+    id: t,
+  })
+  setupLoadingStateHandler(n, e, r)
+  n.catch((t) => {
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_like_this_file_error", {
-        error: resolveMessage(t, t.data?.message)
+        error: resolveMessage(t, t.data?.message),
       }),
       type: "HUB_FILE_LIKE_FAILED",
-      error: !0
-    }));
-  });
-  let i = e.getState().user;
-  let a = i && findPublishedProfileForUser(i, e.getState().authedProfilesById);
+      error: !0,
+    }))
+  })
+  let i = e.getState().user
+  let a = i && findPublishedProfileForUser(i, e.getState().authedProfilesById)
   i?.id && a && getCurrentLiveGraphClient().optimisticallyCreate({
     CommunityHubLike: {
       [`optimistic-${t}-${a.id}`]: {
@@ -670,107 +687,107 @@ let $$eM24 = createOptimistThunk((e, {
         hiddenAt: null,
         createdAt: new Date(),
         updatedAt: new Date(),
-        canRead: !0
-      }
-    }
-  }, n);
-}, e => `LIKE_HUB_FILE_${e}`);
+        canRead: !0,
+      },
+    },
+  }, n)
+}, e => `LIKE_HUB_FILE_${e}`)
 let eF = liveStoreInstance.Mutation(({
-  id: e
+  id: e,
 }, {
-  query: t
+  query: t,
 }) => (t.mutate(resourceVersionsQuery({
   apiResourceType: "file",
-  id: e
-}), e => {
-  e.like_count -= 1;
+  id: e,
+}), (e) => {
+  e.like_count -= 1
 }), hubFileAPI.unlikeHubFile({
-  id: e
-})));
+  id: e,
+})))
 let $$ej6 = createOptimistThunk((e, {
   hubFileId: t,
-  likeId: r
+  likeId: r,
 }, {
-  loadingKey: n
+  loadingKey: n,
 }) => {
   let i = createAtomSetter(eF)({
-    id: t
-  });
-  setupLoadingStateHandler(i, e, n);
-  i.catch(t => {
+    id: t,
+  })
+  setupLoadingStateHandler(i, e, n)
+  i.catch((t) => {
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_unlike_this_file_error", {
-        error: resolveMessage(t, t.data.message)
+        error: resolveMessage(t, t.data.message),
       }),
       type: "HUB_FILE_UNLIKE_FAILED",
-      error: !0
-    }));
-  });
+      error: !0,
+    }))
+  })
   e.getState().user?.id && r && getCurrentLiveGraphClient().optimisticallyDelete({
     CommunityHubLike: {
-      [r]: null
-    }
-  }, i);
-}, e => `UNLIKE_HUB_FILE_${e}`);
+      [r]: null,
+    },
+  }, i)
+}, e => `UNLIKE_HUB_FILE_${e}`)
 let $$eU21 = createOptimistThunk((e, {
-  hubFileId: t
+  hubFileId: t,
 }) => sendWithRetry.post(`/api/hub_files/${t}/view`, {
-  hubFileId: t
-}));
-let eB = {};
+  hubFileId: t,
+}))
+let eB = {}
 let $$eG14 = createOptimistThunk(async (e, {
-  hubFileId: t
+  hubFileId: t,
 }) => {
-  let r = e.getState();
-  let n = r.user?.id;
+  let r = e.getState()
+  let n = r.user?.id
   n && (trackEventAnalytics(HubEventType.SLIDE_TEMPLATE_USED, {
-    hubFileId: t
+    hubFileId: t,
   }), eB[n]?.includes(t) || (await BuyerAPIHandler.updateSlideTemplateCommunityUsageCount({
-    hubFileId: t
+    hubFileId: t,
   }).then(() => {
-    eB[n] || (eB[n] = []);
-    eB[n].includes(t) || eB[n].push(t);
-  }).catch(e => {
+    eB[n] || (eB[n] = [])
+    eB[n].includes(t) || eB[n].push(t)
+  }).catch((e) => {
     logError("Error updating Community Slide Template usage count", e, {
-      hubFileId: t
+      hubFileId: t,
     }, {
-      reportAsSentryError: !0
-    });
-  })));
-});
+      reportAsSentryError: !0,
+    })
+  })))
+})
 let $$eV19 = createOptimistThunk((e, t) => {
   (t === PreviewMode.FULLSCREEN || t === PreviewMode.FULLSCREEN_WITH_COMMENTS) && (trackEventAnalytics("Context Viewed", {
-    name: "hub-file-canvas-enter-fullscreen"
+    name: "hub-file-canvas-enter-fullscreen",
   }), t === PreviewMode.FULLSCREEN_WITH_COMMENTS && trackEventAnalytics("CTA Clicked", {
-    name: "community_hub_preview_comments_viewed"
-  }));
+    name: "community_hub_preview_comments_viewed",
+  }))
   let r = {
     ...e.getState().selectedView,
-    fullscreenState: t
-  };
-  t === PreviewMode.FULLSCREEN && r.commentThreadId && delete r.commentThreadId;
-  e.dispatch(selectViewAction(r));
-});
-export { D3, L1, Sb } from "../905/359847";
-export const Af = $$eh0;
-export const FO = $$em2;
-export const N4 = $$eR4;
-export const QA = $$eg5;
-export const Qi = $$ej6;
-export const Ri = $$e_7;
-export const VS = updateMetadata;
-export const ax = $$eP10;
-export const bk = clearMetadata;
-export const eq = $$eE12;
-export const i9 = $$ew13;
-export const k8 = $$eG14;
-export const oO = clearMetadataAndStatus;
-export const p7 = $$eb16;
-export const rH = $$eS17;
-export const rL = $$eT18;
-export const sW = $$eV19;
-export const ts = $$eI20;
-export const vr = $$eU21;
-export const wO = $$ev22;
-export const yh = $$eD23;
-export const zm = $$eM24;
+    fullscreenState: t,
+  }
+  t === PreviewMode.FULLSCREEN && r.commentThreadId && delete r.commentThreadId
+  e.dispatch(selectViewAction(r))
+})
+export { D3, L1, Sb } from "../905/359847"
+export const Af = $$eh0
+export const FO = $$em2
+export const N4 = $$eR4
+export const QA = $$eg5
+export const Qi = $$ej6
+export const Ri = $$e_7
+export const VS = updateMetadata
+export const ax = $$eP10
+export const bk = clearMetadata
+export const eq = $$eE12
+export const i9 = $$ew13
+export const k8 = $$eG14
+export const oO = clearMetadataAndStatus
+export const p7 = $$eb16
+export const rH = $$eS17
+export const rL = $$eT18
+export const sW = $$eV19
+export const ts = $$eI20
+export const vr = $$eU21
+export const wO = $$ev22
+export const yh = $$eD23
+export const zm = $$eM24

@@ -75,7 +75,7 @@ import { c as _$$c3 } from '../905/90943';
 import { useSprigWithSampling } from '../905/99656';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { h as _$$h } from '../905/104000';
-import { Z as _$$Z7 } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { getPanelTypeString } from '../905/105002';
 import { E as _$$E2 } from '../905/105281';
 import { t as _$$t6 } from '../905/117577';
@@ -106,7 +106,7 @@ import { y as _$$y2 } from '../905/175043';
 import { lk as _$$lk } from '../905/182453';
 import { InputComponent } from '../905/185998';
 import { a3 as _$$a15, ow as _$$ow } from '../905/188421';
-import { d as _$$d10 } from '../905/189168';
+import { getStartingNodeInfo } from '../905/189168';
 import { permissionScopeHandler as _$$l, zk } from '../905/189185';
 import { AUTH_COMPLETE } from '../905/194276';
 import { googleMapsEmbedConfig } from '../905/194327';
@@ -153,7 +153,7 @@ import { t as _$$t2 } from '../905/316903';
 import { v as _$$v8 } from '../905/318279';
 import { f as _$$f11 } from '../905/335032';
 import { Q as _$$Q0 } from '../905/346809';
-import { P as _$$P2 } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { a as _$$a18 } from '../905/361302';
 import { BannerMessage } from '../905/363675';
 import { O as _$$O0 } from '../905/365108';
@@ -185,7 +185,7 @@ import { IconButton } from '../905/443068';
 import { J as _$$J0 } from '../905/445197';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { EmbedProviderType } from '../905/450589';
-import { E as _$$E8 } from '../905/453826';
+import { useEventForwarder } from '../905/453826';
 import { z as _$$z13 } from '../905/454433';
 import { U as _$$U4 } from '../905/455766';
 import { K as _$$K5 } from '../905/459096';
@@ -199,7 +199,7 @@ import { PrimaryWorkflowEnum } from '../905/497152';
 import { Z as _$$Z4 } from '../905/498136';
 import { eventEmitterAtom, handleAtomEvent } from '../905/502364';
 import { C as _$$C8 } from '../905/504203';
-import { Cf as _$$Cf, it as _$$it, Jz } from '../905/504727';
+import { ConnectedPointingDropdown, DropdownType, PointingDropdown } from '../905/504727';
 import { Y as _$$Y4 } from '../905/506207';
 import { openWindow } from '../905/508367';
 import { l as _$$l9 } from '../905/509505';
@@ -481,7 +481,7 @@ import _require2 from '../f2246930/453829';
 import { getWorkshopModeStatus } from '../figma_app/789';
 import { at as _$$at, lz as _$$lz, N as _$$N4, uy as _$$uy, we as _$$we, Ab, Iv, R0, Vc, ZH } from '../figma_app/987';
 import { bY as _$$bY, Jj } from '../figma_app/2023';
-import { l4 as _$$l5, __X, bbp, Bd, BZN, Htp, KYV, Nbd, p2q, sfE, TtK, zpn } from '../figma_app/6204';
+import { SitesStarterFullscreenOverlay, FigmakeMobileWebBlockingPopup, FigmakeNewFileTemplateInsertionChatNudge, FigmakeNewFileOnboardingPreGeneration, FigmakeSendToMakeOnboarding, FigmakeExistingFilesFullscreenOnboarding, FigmakeNewFileOnboardingPostGeneration, SitesOnboardingCallouts, FigmakeExistingFilesEditorOnboarding, SitesOnboardingTOS, SitesOnboardingCodeCallout, FigMakeStarterFullscreenOverlay } from '../figma_app/6204';
 import { H as _$$H } from '../figma_app/7677';
 import { jQ as _$$jQ, s9 as _$$s, uR as _$$uR, Dm, J7, Qx, Uu, V6, Zn } from '../figma_app/8833';
 import { PageTypeEnum } from '../figma_app/10554';
@@ -525,7 +525,7 @@ import { Fz } from '../figma_app/106207';
 import { S as _$$S9 } from '../figma_app/106763';
 import { YOUTUBE_EMBED_CONFIG_HTML, YOUTUBE_EMBED_CONFIG_URL } from '../figma_app/109413';
 import { b5 as _$$b4, hi as _$$hi, iI as _$$iI, T_ as _$$T_, wh as _$$wh, xB as _$$xB, yq as _$$yq, zl as _$$zl, DW, Jl, LS, OY, UM, US, Wn, Xq, Y3, ZY, Zy } from '../figma_app/114522';
-import { booleanAtomFamily, Nl, sitesViewSetterAtomFamily, ViewActionType } from '../figma_app/115923';
+import { booleanAtomFamily, genericAtomFamily1, sitesViewSetterAtomFamily, ViewActionType } from '../figma_app/115923';
 import { bm as _$$bm, g$ as _$$g$, Lc } from '../figma_app/116234';
 import { useAttachments, MAX_ATTACHMENTS } from '../figma_app/119420';
 import { n8 as _$$n7, Py as _$$Py, xG as _$$xG } from '../figma_app/121043';
@@ -729,7 +729,7 @@ import { f as _$$f4, K as _$$K } from '../figma_app/695131';
 import { _o as _$$_o, GW, L3 } from '../figma_app/701001';
 import { $X, B8 as _$$B0, gq as _$$gq2, oM as _$$oM, Eu, JQ, LU, Xc } from '../figma_app/703447';
 import { AppView } from '../figma_app/707808';
-import { wY as _$$wY } from '../figma_app/708845';
+import { useResizeObserverRef } from '../figma_app/708845';
 import { iE as _$$iE, r as _$$r8, Wv as _$$Wv } from '../figma_app/711157';
 import { y0 as _$$y0 } from '../figma_app/718307';
 import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, useOnSelectionChange, useAppModelProperty, useAppModelPropsShallow, useSceneGraphSelection, useStableSelectedNode } from '../figma_app/722362';
@@ -1144,9 +1144,9 @@ function Y() {
       width: 0
     };
   }(t, i, s.data.findIndex(e => e.id === n));
-  return jsx(_$$Cf, {
+  return jsx(ConnectedPointingDropdown, {
     targetRect: o,
-    type: _$$it.DEFAULT,
+    type: DropdownType.DEFAULT,
     minWidth: 50,
     maxWidth: 320,
     leanPadding: 32,
@@ -2666,7 +2666,7 @@ function nI() {
     isShowing,
     complete
   } = _$$e5({
-    overlay: zpn,
+    overlay: FigMakeStarterFullscreenOverlay,
     priority: _$$N5.HIGH_PRIORITY_MODAL
   });
   let n = useCurrentPublicPlan('FigMakePaywallOverlay');
@@ -2733,7 +2733,7 @@ function nD() {
     show,
     isShowing
   } = _$$e5({
-    overlay: __X,
+    overlay: FigmakeMobileWebBlockingPopup,
     priority: _$$N5.HIGH_PRIORITY_MODAL - 1
   });
   return (useEffect(() => {
@@ -3373,7 +3373,7 @@ function am({
               children: e.actor?.handle
             })]
           })]
-        }), f && h.current && jsx(Jz, {
+        }), f && h.current && jsx(PointingDropdown, {
           options: j,
           hideDropdown: () => {
             x(hideDropdownAction());
@@ -10436,7 +10436,7 @@ function cC() {
       title: getI18nString('sites.side_rail.settings'),
       dataTestId: 'site-settings-view-header',
       children: jsx(_$$v4, {})
-    }), jsx(_$$P2, {
+    }), jsx(RecordingScrollContainer, {
       className: 'xh8yej3',
       children: jsx('div', {
         'className': 'x78zum5 xl56j7k x6s0dn4 x1efd9su x1kx8hp3',
@@ -10454,7 +10454,7 @@ function cT() {
     children: [jsx(nH.Header, {
       title: getI18nString('figmake.side_rail.settings'),
       children: jsx(s4, {})
-    }), jsx(_$$P2, {
+    }), jsx(RecordingScrollContainer, {
       className: 'xh8yej3',
       children: jsx('div', {
         className: 'x78zum5 xl56j7k x6s0dn4 x1efd9su x1kx8hp3',
@@ -10467,7 +10467,7 @@ function cT() {
   });
 }
 function cI() {
-  return jsxs(_$$P2, {
+  return jsxs(RecordingScrollContainer, {
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
@@ -10491,7 +10491,7 @@ function cI() {
 }
 function cE() {
   let e = _$$p4();
-  return jsxs(_$$P2, {
+  return jsxs(RecordingScrollContainer, {
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
@@ -11347,7 +11347,7 @@ function uy() {
     complete,
     show
   } = _$$e5({
-    overlay: Htp,
+    overlay: FigmakeExistingFilesFullscreenOnboarding,
     priority: _$$N5.OVERRIDING_MODAL
   });
   useEffect(() => {
@@ -11457,7 +11457,7 @@ function uN({
     complete,
     show
   } = _$$e5({
-    overlay: p2q,
+    overlay: FigmakeExistingFilesEditorOnboarding,
     priority: _$$N5.OVERRIDING_MODAL
   });
   useEffect(() => {
@@ -11570,11 +11570,11 @@ function uO() {
     show,
     uniqueId
   } = _$$e5({
-    overlay: Bd,
+    overlay: FigmakeNewFileOnboardingPreGeneration,
     priority: _$$N5.OVERRIDING_MODAL
   });
   let s = selectUserFlag('seen_figmake_new_file_post_generation_onboarding');
-  return (_$$E8(uniqueId, 'ai_for_production.chat_message_sent', () => {
+  return (useEventForwarder(uniqueId, 'ai_for_production.chat_message_sent', () => {
     complete();
   }), useEffect(() => {
     s || show();
@@ -11603,10 +11603,10 @@ function uF({
     show,
     uniqueId
   } = _$$e5({
-    overlay: KYV,
+    overlay: FigmakeNewFileOnboardingPostGeneration,
     priority: _$$N5.OVERRIDING_MODAL
   });
-  return (_$$E8(uniqueId, 'ai_for_production.chat_response_received', () => n(!0)), useEffect(() => {
+  return (useEventForwarder(uniqueId, 'ai_for_production.chat_response_received', () => n(!0)), useEffect(() => {
     t && d === 'put_it_on_the_web' && handleAtomEvent({
       id: _$$hj
     });
@@ -11634,16 +11634,16 @@ function uM() {
     show,
     uniqueId
   } = _$$e5({
-    overlay: bbp,
+    overlay: FigmakeNewFileTemplateInsertionChatNudge,
     priority: _$$N5.OVERRIDING_MODAL
   });
   let s = useRef(null);
   let r = useRef(!1);
-  return (_$$E8(uniqueId, 'make_onboarding_completed', () => {
+  return (useEventForwarder(uniqueId, 'make_onboarding_completed', () => {
     r.current || (s.current = setTimeout(() => {
       show();
     }, 3e4));
-  }), _$$E8(uniqueId, 'ai_for_production.chat_message_sent', () => {
+  }), useEventForwarder(uniqueId, 'ai_for_production.chat_message_sent', () => {
     r.current = !0;
     s.current && clearTimeout(s.current);
   }), useEffect(() => {
@@ -11715,7 +11715,7 @@ function uU() {
     show,
     uniqueId
   } = _$$e5({
-    overlay: BZN,
+    overlay: FigmakeSendToMakeOnboarding,
     priority: _$$N5.OVERRIDING_MODAL
   });
   let c = useCallback(() => {
@@ -11723,7 +11723,7 @@ function uU() {
       canShow: () => !e && !t && i
     });
   }, [show, e, t, i]);
-  if (_$$E8(uniqueId, 'ai_for_production.chat_message_sent', () => {
+  if (useEventForwarder(uniqueId, 'ai_for_production.chat_message_sent', () => {
     complete();
   }), useEffect(() => {
     c();
@@ -14994,7 +14994,7 @@ function mI({
     defaultSize: 480,
     size: t,
     side: 'left',
-    children: [jsx(mT, {}), jsx(_$$P2, {
+    children: [jsx(mT, {}), jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.overflowHidden.hFull.wFull.$,
       children: jsx(mk, {
         collection,
@@ -15475,7 +15475,7 @@ let mW = registerModal(({
       }
     });
   };
-  _$$wY(g, () => {
+  useResizeObserverRef(g, () => {
     g.current && h.current && m(h.current.scrollHeight > h.current.clientHeight);
   });
   let z = useCallback(async () => {
@@ -15524,7 +15524,7 @@ let mW = registerModal(({
             className: v()(cssBuilderInstance.flex.flexRow.$),
             children: [jsxs('div', {
               className: v()(cssBuilderInstance.flex.flexColumn.$, 'dakota_field_editor--fieldList--IquMu'),
-              children: [jsx(_$$P2, {
+              children: [jsx(RecordingScrollContainer, {
                 scrollContainerRef: h,
                 scrollContentRef: g,
                 className: v()(cssBuilderInstance.flex.flex1.$),
@@ -16917,7 +16917,7 @@ function hE() {
   openWindow(_$$m6, '_blank');
 }
 function hN(e) {
-  return jsx(_$$Cf, {
+  return jsx(ConnectedPointingDropdown, {
     targetRect: e.targetRect,
     closeDropdown: e.onClose,
     children: jsx(setupThemeContext, {
@@ -17052,7 +17052,7 @@ function hF() {
   } = getCollectionSummaryStatus(s);
   let u = useAtomWithSubscription(UU);
   let p = useRef(null);
-  let x = _$$wY(p)?.width;
+  let x = useResizeObserverRef(p)?.width;
   let m = _$$b2();
   let h = useMemo(() => {
     let e = data && data.length > 0;
@@ -18030,7 +18030,7 @@ function gu(e) {
     children: [i === pf.CONNECT && jsx(gc, {}), jsxs('div', {
       'className': 'x98rzlu',
       'data-testid': 'dakota-collections-panel',
-      'children': [jsx(ga, {}), jsx(_$$P2, {
+      'children': [jsx(ga, {}), jsx(RecordingScrollContainer, {
         enableOverscroll: !0,
         recordingKey: generateRecordingKey('scrollContainer'),
         width,
@@ -18387,7 +18387,7 @@ function gL(e) {
     startRenamingNode,
     stopRenamingNode
   } = e;
-  let m = _$$Z7();
+  let m = useNavigateToViewport();
   let g = useDispatch();
   let f = useSelector(e => !e.mirror.appModel.isReadOnly && e.mirror.appModel.topLevelMode !== ViewType.HISTORY);
   let _ = useSelector(e => e.mirror.sceneGraphSelection);
@@ -18407,7 +18407,7 @@ function gL(e) {
   });
   let [L, P] = useAtomValueAndSetter(B_);
   let O = function () {
-    let e = _$$Z7();
+    let e = useNavigateToViewport();
     let t = useDispatch();
     let i = _$$O6();
     let n = useSelector(e => e.mirror.appModel.currentPage);
@@ -18588,7 +18588,7 @@ function gL(e) {
         },
         side: 'bottom',
         ref: y,
-        children: jsx(_$$P2, {
+        children: jsx(RecordingScrollContainer, {
           className: 'x78zum5 xdt5ytf x5yr21d x1yjhc3n',
           onContextMenu: e => {
             e.stopPropagation();
@@ -18941,7 +18941,7 @@ function g7() {
     let {
       Sprig
     } = useSprigWithSampling();
-    let t = useAtomWithSubscription(Nl);
+    let t = useAtomWithSubscription(genericAtomFamily1);
     let i = useAtomWithSubscription(_$$f4);
     let {
       search: {
@@ -19122,7 +19122,7 @@ function g7() {
 }
 let g9 = memo(() => {
   let e = useAtomWithSubscription(sitesViewSetterAtomFamily);
-  let t = useAtomWithSubscription(Nl);
+  let t = useAtomWithSubscription(genericAtomFamily1);
   let i = useAtomWithSubscription(booleanAtomFamily);
   let n = useDispatch();
   useEffect(() => {
@@ -19355,7 +19355,7 @@ function fd() {
     isShowing,
     complete
   } = _$$e5({
-    overlay: _$$l5,
+    overlay: SitesStarterFullscreenOverlay,
     priority: _$$N5.HIGH_PRIORITY_MODAL
   });
   let {
@@ -19397,7 +19397,7 @@ function fy() {
     isShowing,
     complete
   } = _$$e5({
-    overlay: sfE,
+    overlay: SitesOnboardingTOS,
     priority: _$$N5.DEFAULT_MODAL
   }, [t, i]);
   useSingleEffect(() => {
@@ -19498,17 +19498,17 @@ function fv() {
     complete,
     uniqueId
   } = _$$e5({
-    overlay: Nbd,
+    overlay: SitesOnboardingCallouts,
     priority: _$$N5.DEFAULT_MODAL
   }, [i, r]);
   let [m, h] = useState(!1);
-  _$$E8(uniqueId, [_$$lz], () => {
+  useEventForwarder(uniqueId, [_$$lz], () => {
     h(!1);
     show({
       canShow: (e, t) => e && !t
     });
   });
-  _$$E8(uniqueId, [Ab], () => {
+  useEventForwarder(uniqueId, [Ab], () => {
     h(!0);
     show({
       canShow: (e, t) => e && !t
@@ -19558,7 +19558,7 @@ function fj() {
     isShowing,
     complete
   } = _$$e5({
-    overlay: TtK,
+    overlay: SitesOnboardingCodeCallout,
     priority: _$$N5.DEFAULT_MODAL
   }, [i, d, u]);
   useEffect(() => {
@@ -21446,7 +21446,7 @@ function _X({
     assert(e !== null);
     let t = _q(e);
     if (!t) return;
-    let i = _$$d10(t.guid);
+    let i = getStartingNodeInfo(t.guid);
     _ && i && i.startingNodeId !== _.startingNodeId && (I || (setWidthForWindow(i.initialSize.x), setHeightForWindow(i.initialSize.y)), b({
       mode: 'modal',
       ...i
@@ -21858,7 +21858,7 @@ function bg() {
   useEffect(() => {
     e.current != null && (e.current.scrollTop = i[r] ?? 0);
   }, [r]);
-  return jsxs(_$$P2, {
+  return jsxs(RecordingScrollContainer, {
     className: 'site_templates_view--scrollContainer--iVTvr',
     scrollContainerRef: e,
     initialScrollTop: i[r],
@@ -21949,7 +21949,7 @@ function bw({
     children: [jsx(bS, {
       title: i.name,
       publisherName: getI18nString('community.view_bar.figma')
-    }), jsx(_$$P2, {
+    }), jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.px8.hFull.$,
       scrollContainerRef: t,
       children: jsxs('div', {

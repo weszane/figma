@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDelayedCallback } from '../905/116724';
-import { cq } from '../905/794154';
+import { useNavigationStack } from '../905/794154';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { Tv } from '../figma_app/311375';
 import { traverseUpAndDown } from '../figma_app/387100';
@@ -23,7 +23,7 @@ export function $$c0({
 }) {
   let {
     autoClose
-  } = cq();
+  } = useNavigationStack();
   let u = useCallback(() => {
     i && i();
     autoClose();

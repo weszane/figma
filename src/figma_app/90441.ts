@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, useLayoutEffect } from "react";
 import { useMemoStable } from "../905/19536";
 import s from "classnames";
-import { wY, cU } from "../figma_app/708845";
+import { useResizeObserverRef, initialSize } from "../figma_app/708845";
 import { $ } from "../905/455748";
 import { Dm, Uu } from "../figma_app/8833";
 import { useClickOutside } from "../905/1768";
@@ -97,7 +97,7 @@ export function $$T0({
       y: 0
     });
   }, [s]);
-  let R = wY(w, O) ?? cU;
+  let R = useResizeObserverRef(w, O) ?? initialSize;
   useClickOutside(a, {
     ignore: [t?.current, w.current],
     closeOnEsc: S

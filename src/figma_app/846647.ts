@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { VF } from "../figma_app/989514";
 import { b as _$$b2 } from "../figma_app/5657";
 import { navigateAndSelect } from "../figma_app/202626";
@@ -12,7 +12,7 @@ import { ArrowPosition, PositioningStrategy } from "../905/748636";
 export let $$h0 = "text-panel-container";
 export function $$m1(e) {
   let [t, r] = useState(!1);
-  let m = Z();
+  let m = useNavigateToViewport();
   let g = useDispatch();
   if (useSingleEffect(() => {
     queueMicrotask(async function () {

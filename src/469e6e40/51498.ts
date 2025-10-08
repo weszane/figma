@@ -25,7 +25,7 @@ import { AutoLayout } from '../905/470281';
 import { l as _$$l } from '../905/479687';
 import { Button } from '../905/521428';
 import { ButtonPrimitive } from '../905/632989';
-import { Hj, iA } from '../905/682977';
+import { TableRow, TableRowWithTracking } from '../905/682977';
 import { getResourceDataOrFallback } from '../905/723791';
 import { errorBoundaryFallbackTypes, ErrorBoundaryCrash } from '../905/751457';
 import { x as _$$x } from '../905/811596';
@@ -801,7 +801,7 @@ function eh(e) {
   } = e;
   let i = item.id;
   let r = ev();
-  return jsxs(iA, {
+  return jsxs(TableRowWithTracking, {
     className: props(ef.row, isHighlighted && ef.highlightedRow).className,
     onClick: () => {
       isHighlighted ? onHighlight?.(null) : onHighlight?.(i);
@@ -863,7 +863,7 @@ function ex(e) {
         opacity: a
       },
       'data-testid': 'simple-table-loading-row',
-      'children': jsxs(iA, {
+      'children': jsxs(TableRowWithTracking, {
         className: 'x9f619 x1n2onr6 x1akne3o xh8yej3 x1jo9wx5 xf7z5ut xsdox4t x1ypdohk x78zum5 x1i71x30 x6s0dn4 xclx6tv x17akokd x1qxcl5b xno9bf3 x1betce5',
         useAdminTableStyles: !0,
         dataTestId: 'simple-table-loading-row',
@@ -902,7 +902,7 @@ function ex(e) {
     ref: e.scrollContentRef,
     children: [jsx('div', {
       className: 'x7wzq59 xhtitgo xylkp1l x1yjdb4r x1gcgh60 xbdeg4j x9f619',
-      children: jsxs(Hj, {
+      children: jsxs(TableRow, {
         header: !0,
         useAdminTableStyles: !0,
         className: 'xf7z5ut xxk0z11 x78zum5 x1i71x30 x6s0dn4 x1akne3o x1g2dr8m xiqqdae xkezfkh x14kxzw3 x1giz659',

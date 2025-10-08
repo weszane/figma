@@ -16,7 +16,7 @@ import { Zl } from "../figma_app/311375";
 import { cortexAPI, StreamAsyncIteratorWithTimeout } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { trackDefinedFileEventWrapper } from "../figma_app/2590";
-import { A } from "../905/202425";
+import { isImageNode } from "../905/202425";
 import { pD } from "../905/727576";
 import { isMagicLinkEnabled } from "../figma_app/144974";
 export class $$v8 extends Error {
@@ -345,7 +345,7 @@ export function $$V10(e, t, r) {
     r.forEach(r => {
       n[r]?.push(...function e(t, r, n) {
         let i = t.get(r);
-        return i ? "ICON" === n && i.isIconLike || i.type === n || "IMAGE" === n && A(i) ? [r] : i.childrenNodes.flatMap(r => e(t, r.guid, n)) : [];
+        return i ? "ICON" === n && i.isIconLike || i.type === n || "IMAGE" === n && isImageNode(i) ? [r] : i.childrenNodes.flatMap(r => e(t, r.guid, n)) : [];
       }(e, t, r));
     });
   });

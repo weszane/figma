@@ -9,7 +9,7 @@ import { e as _$$e } from "../905/621515";
 import { useCurrentPrivilegedPlan, useTeamPlanFeatures, useCurrentPlanUser, checkOrgUserPermission, useCurrentPublicPlan } from "../figma_app/465071";
 import { WZ } from "../905/893645";
 import { ArrowPosition, PositioningStrategy } from "../905/858282";
-import { rRT, LPt } from "../figma_app/6204";
+import { AdminNavigationOnboardingOverlay, TeamAdminManageUnassignedDraftsOverlay } from "../figma_app/6204";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
 import { bL, Y9, JU, UC } from "../figma_app/57171";
@@ -18,7 +18,7 @@ import { J as _$$J } from "../905/125993";
 import { w as _$$w } from "../905/770105";
 import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
-import { P as _$$P2 } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { TextWithTruncation } from "../905/984674";
 import { SidebarRow } from "../451de8f0/94979";
 import { selectViewAction } from "../905/929976";
@@ -75,8 +75,8 @@ function g(e) {
     isShowing,
     complete
   } = _$$e({
-    overlay: rRT,
-    priority: _$$g(rRT)
+    overlay: AdminNavigationOnboardingOverlay,
+    priority: _$$g(AdminNavigationOnboardingOverlay)
   }, [a]);
   useSingleEffect(() => {
     show({
@@ -264,8 +264,8 @@ let ej = {
       isShowing,
       complete
     } = _$$e({
-      overlay: LPt,
-      priority: _$$g(LPt)
+      overlay: TeamAdminManageUnassignedDraftsOverlay,
+      priority: _$$g(TeamAdminManageUnassignedDraftsOverlay)
     }, [e]);
     useSingleEffect(() => {
       show({
@@ -684,7 +684,7 @@ function eM() {
   let a = e?.key.parentId;
   return e ? jsx("div", {
     className: "xh8yej3 x5yr21d x78zum5 xdt5ytf xt0e3qv x1qughib",
-    children: jsxs(_$$P2, {
+    children: jsxs(RecordingScrollContainer, {
       className: "x1a34yqq",
       children: [jsx(eS, {}), t === FOrganizationLevelType.ORG ? jsx(eL, {}) : jsx(eD, {
         id: a

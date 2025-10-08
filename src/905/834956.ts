@@ -16,7 +16,7 @@ import { getI18nString } from '../905/303541';
 import { UI3ConditionalWrapper } from '../905/341359';
 import { s as _$$s } from '../905/403855';
 import { l as _$$l } from '../905/479687';
-import { Cf, g1, it, UV } from '../905/504727';
+import { ConnectedPointingDropdown, g1, DropdownType, getDropdownTypeProps } from '../905/504727';
 import { RecordableDiv } from '../905/511649';
 import { hX, km } from '../905/701417';
 import { Point } from '../905/736624';
@@ -603,10 +603,10 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
       let a = this.props.toolbarHeightAndMargin;
       let s = this.props.parentRect.top - 8;
       switch (s + r < window.innerHeight - a ? e.top = s : e.top = Math.max(56, this.props.parentRect.bottom - r + 8), this.props.rootAndSubmenuMaxWidth && (e.maxWidth = this.props.rootAndSubmenuMaxWidth), e.minWidth = this.props.rootAndSubmenuMinWidth ?? 200, this.props.type) {
-        case it.LIGHT:
+        case DropdownType.LIGHT:
           e.backgroundColor = 'white';
           break;
-        case it.MATCH_BACKGROUND:
+        case DropdownType.MATCH_BACKGROUND:
           e.backgroundColor = 'var(--color-bg, white)';
       }
       let o = jsx(g1, {
@@ -646,7 +646,7 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
       let e = this.state.submenuPosition === 1;
       let t = this.currentVisibleItems();
       return jsxs(Fragment, {
-        children: [jsxs(Cf, {
+        children: [jsxs(ConnectedPointingDropdown, {
           'aria-labelledby': this.props['aria-labelledby'],
           'autoHeight': this.props.autoHeight,
           'autofocusPrevOnDismount': this.props.autofocusPrevOnDismount,
@@ -674,7 +674,7 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
           'scrollContainerRef': this.dropdownScrollContainerRef,
           'showPoint': this.props.showPoint,
           'targetRect': this.props.parentRect,
-          ...UV(this.props),
+          ...getDropdownTypeProps(this.props),
           'children': [this.props.children != null && jsx('div', {
             onClick: this.onClickMenu,
             onMouseOver: this.onMouseOverMenu,
@@ -755,7 +755,7 @@ let MultilevelDropdown = class e extends RecordingPureComponent {
   render() {
     let e = null;
     if (this.props.showLoadingSpinner) {
-      e = jsx(Cf, {
+      e = jsx(ConnectedPointingDropdown, {
         targetRect: this.props.parentRect,
         showPoint: this.props.showPoint,
         onFocus: this.props.onFocus,

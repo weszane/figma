@@ -30,14 +30,14 @@ import { PluginManager } from "../figma_app/612938";
 import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { PluginImage } from "../905/480825";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { YW } from "../figma_app/626177";
 import { A as _$$A } from "../3591/199070";
 import { PE } from "../3591/130069";
 import { lD, T9 } from "../figma_app/38430";
 import { ModalContainer } from "../figma_app/918700";
 import { h as _$$h } from "../figma_app/752483";
-import { ho } from "../figma_app/870683";
+import { generateCommunityPluginUrl } from "../figma_app/870683";
 import { li, dn } from "../figma_app/994403";
 import { bp, rS, el as _$$el, yd, im, K0, In, iH, YG, cV, rs, q6, Yh, Gm, hM, H1, x$, yq, zr, Kz, P8, iZ, uN, UB, Hq, TM, QW, ft, kQ, Ac, m6, yk, A9, XV, vc, ar } from "../3591/656444";
 import { A as _$$A2 } from "../svg/905874";
@@ -83,7 +83,7 @@ export function $$ed0(e) {
   let t = useSelector(e => e.dropdownShown);
   let n = useCanRunExtensions();
   let s = e.resourceType === HubTypeEnum.WIDGET;
-  return t?.data?.targetRect ? jsxs(Cf, {
+  return t?.data?.targetRect ? jsxs(ConnectedPointingDropdown, {
     minWidth: 163,
     targetRect: t?.data.targetRect,
     lean: e.lean,
@@ -258,7 +258,7 @@ let eu = class e extends PureComponent {
           top: this.props.dropdownShown.data.clientY
         },
         children: e
-      }), this.shouldShowPointingDropdown() && jsx(Cf, {
+      }), this.shouldShowPointingDropdown() && jsx(ConnectedPointingDropdown, {
         className: Gm,
         minWidth: 122,
         targetRect: this.dotsIconRef.current.getBoundingClientRect(),
@@ -501,7 +501,7 @@ withTrackedClick(function ({
         publishedPluginId: e.id
       })));
     },
-    href: ho(e.id),
+    href: generateCommunityPluginUrl(e.id),
     children: [jsxs(li.IconAndBadgeContainer, {
       className: yk,
       children: [jsx("div", {

@@ -20,7 +20,7 @@ import { selectPermissionsState } from "../figma_app/212807";
 import { FEntityType, FAccessLevelType } from "../figma_app/191312";
 import { isLoading } from "../905/18797";
 import { x as _$$x } from "../905/695363";
-import { p9 } from "../figma_app/88768";
+import { generateJoinTeamCacheKey } from "../figma_app/88768";
 import { hasViewerRoleAccessOnTeam, canMemberOrg, canManageNonSecretOrgTeam } from "../figma_app/642025";
 import { ViewTypeEnum } from "../figma_app/471068";
 import { KindEnum } from "../905/129884";
@@ -114,7 +114,7 @@ export function $$O2(e) {
   let ei = jsx(_$$W, {
     team: e.team,
     isCurrentUserInTeam: G,
-    isLoading: isLoading(j, p9(e.team.id)),
+    isLoading: isLoading(j, generateJoinTeamCacheKey(e.team.id)),
     onOpenTeam: () => {
       if (!K) {
         $(e.team);

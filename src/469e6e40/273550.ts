@@ -5,7 +5,7 @@ import r from "classnames";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { usePluginedWidgets } from "../figma_app/844435";
 import { checkResourceEligibility } from "../figma_app/86989";
-import { j } from "../905/813868";
+import { createWidget } from "../905/813868";
 import { E as _$$E } from "../469e6e40/167556";
 import { P } from "../469e6e40/160324";
 import { FFileType } from "../figma_app/191312";
@@ -41,7 +41,7 @@ export function $$f0(e) {
       }),
       onClick: () => {
         f && permissionScopeHandler.user("insert-widget", () => {
-          j({
+          createWidget({
             pluginID: e.widget.plugin_id,
             widgetName: e.widget.name,
             pluginVersionID: w ? "" : e.widget.id,

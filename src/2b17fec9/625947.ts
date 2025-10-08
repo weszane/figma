@@ -49,7 +49,7 @@ import { setupPlaybackHandler, getImagePaintSignedUrl } from '../905/23253';
 import { a as _$$a6 } from '../905/29104';
 import { fullscreenAlias } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
-import { p as _$$p2 } from '../905/42189';
+import { TabCategory } from '../905/42189';
 import { k as _$$k5 } from '../905/44647';
 import { C as _$$C6 } from '../905/47358';
 import { ph as _$$ph } from '../905/50769';
@@ -67,11 +67,11 @@ import { W as _$$W3 } from '../905/95038';
 import { m as _$$m6 } from '../905/99004';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
-import { Z as _$$Z4 } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { K as _$$K5 } from '../905/107582';
 import { setUniversalInsertScrolledDevelopmentSection } from '../905/116101';
 import { sha1HexFromBytes } from '../905/125019';
-import { ez as _$$ez, Ch, Fk, U9, W6 } from '../905/125333';
+import { shapeColorAtom, currentSelectionAtom, counterAtom, shapeStrokeStyleAtom, shapeSidebarModeAtom } from '../905/125333';
 import { J as _$$J6 } from '../905/125993';
 import { KindEnum, PositionEnum } from '../905/129884';
 import { A as _$$A60 } from '../905/139173';
@@ -122,7 +122,7 @@ import { MediaQuerySvgComponent } from '../905/331623';
 import { f as _$$f8 } from '../905/335032';
 import { f6 as _$$f, ri as _$$ri } from '../905/337179';
 import { I as _$$I } from '../905/342732';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { O as _$$O2 } from '../905/353086';
 import { shouldOptimizeForIpad } from '../905/355607';
 import { UpgradeAction } from '../905/370443';
@@ -158,7 +158,7 @@ import { bL as _$$bL, c$ as _$$c$2, l9 as _$$l6, mc as _$$mc, wv as _$$wv2 } fro
 import { J as _$$J1 } from '../905/494216';
 import { Z as _$$Z5 } from '../905/498136';
 import { handleAtomEvent } from '../905/502364';
-import { Cf, Jz } from '../905/504727';
+import { ConnectedPointingDropdown, PointingDropdown } from '../905/504727';
 import { V as _$$V } from '../905/506207';
 import { RecordableDiv, RecordableSpan } from '../905/511649';
 import { Vector2D } from '../905/512402';
@@ -218,7 +218,7 @@ import { getMentionsResult } from '../905/772425';
 import { L as _$$L4 } from '../905/782297';
 import { z as _$$z4 } from '../905/788559';
 import { trackTemplateEvent } from '../905/793009';
-import { cq as _$$cq } from '../905/794154';
+import { useNavigationStack } from '../905/794154';
 import { c$ as _$$c$3, l6 as _$$l9, sK as _$$sK, uQ as _$$uQ2 } from '../905/794875';
 import { f as _$$f9 } from '../905/809171';
 import { EventShield } from '../905/821217';
@@ -484,7 +484,7 @@ import { lJ as _$$lJ3 } from '../figma_app/407856';
 import { S4 } from '../figma_app/407993';
 import { uv as _$$uv, CR } from '../figma_app/419216';
 import { cortexAPI } from '../figma_app/432652';
-import { cu as _$$cu, xY as _$$xY, Vv } from '../figma_app/439332';
+import { PaymentSection, PaymentInfoTooltip, PaymentButton } from '../figma_app/439332';
 import { $n as _$$$n, wv as _$$wv4, K0, W1 } from '../figma_app/439493';
 import { usePresenterUser } from '../figma_app/440875';
 import { U as _$$U2 } from '../figma_app/441035';
@@ -558,7 +558,7 @@ import { _o as _$$_o, L3 } from '../figma_app/701001';
 import { PH } from '../figma_app/701580';
 import { rp as _$$rp, PI } from '../figma_app/703988';
 import { PreviewMode } from '../figma_app/707808';
-import { wY } from '../figma_app/708845';
+import { useResizeObserverRef } from '../figma_app/708845';
 import { useAppModelProperty, useCurrentTool, useIsProgressBarHiddenOrLocked, useSceneGraphSelection, useSceneGraphSelector } from '../figma_app/722362';
 import { uiGrayColor5 } from '../figma_app/728075';
 import { lB as _$$lB, EE } from '../figma_app/731583';
@@ -606,7 +606,7 @@ import { trackFileEventWithStore, trackFileEventWithUser } from '../figma_app/90
 import { M as _$$M } from '../figma_app/904127';
 import { II, MR, OO, qM, qU } from '../figma_app/913518';
 import { fi as _$$fi, zK } from '../figma_app/913823';
-import { X as _$$X, Y as _$$Y } from '../figma_app/916469';
+import { CURATOR_GLOBAL_REQUEST_CLOSE, FigJamMenuEvents } from '../figma_app/916469';
 import { ConfirmationModal2 } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { cX as _$$cX, ik as _$$ik, mk as _$$mk, s3 as _$$s3, t$ as _$$t$, H6, Hb, kx, qZ, Sp } from '../figma_app/920333';
@@ -1238,7 +1238,7 @@ function tE({
   });
   let s = r && r.id ? _$$vo(r.id, e.name) : '';
   let d = HB(e);
-  let u = useAtomWithSubscription(W6) === i;
+  let u = useAtomWithSubscription(shapeSidebarModeAtom) === i;
   let [h, m] = useAtomValueAndSetter(Hf);
   let f = useCallback(() => {
     KG(e, i, s);
@@ -1481,8 +1481,8 @@ function tM({
   metadataByLibraryKey: e
 }) {
   let t = B8();
-  let i = useAtomWithSubscription(_$$ez);
-  let n = useAtomWithSubscription(U9);
+  let i = useAtomWithSubscription(shapeColorAtom);
+  let n = useAtomWithSubscription(shapeStrokeStyleAtom);
   let r = _$$es();
   if (t.length < 1) return null;
   let a = t.slice(0, qA);
@@ -1614,8 +1614,8 @@ function tV({
       sectionType: t
     });
     let n = B8();
-    let r = useAtomWithSubscription(_$$ez);
-    let a = useAtomWithSubscription(U9);
+    let r = useAtomWithSubscription(shapeColorAtom);
+    let a = useAtomWithSubscription(shapeStrokeStyleAtom);
     let s = useAtomWithSubscription(_$$Ai);
     let l = _$$es();
     if (n.length < 1 || s) return [];
@@ -1828,7 +1828,7 @@ function tV({
     overscan: 10,
     paddingEnd: 12
   });
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     scrollContainerRef: _,
     horizontalScrollingDisabled: !0,
     className: _$$jG,
@@ -1936,7 +1936,7 @@ function tz({
         className: 'x98rzlu xuxw1ft xb3r6kr xlyipyv x1db2dqx',
         children: getI18nString('whiteboard.shapes_sidebar.other_libraries')
       })
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       horizontalScrollingDisabled: !0,
       onScroll: d,
       scrollingDisabled: i,
@@ -1979,8 +1979,8 @@ function tZ() {
 function t$() {
   let e = U1();
   let t = useAtomWithSubscription(_$$ah);
-  let i = useAtomWithSubscription(_$$ez);
-  let n = useAtomWithSubscription(U9);
+  let i = useAtomWithSubscription(shapeColorAtom);
+  let n = useAtomWithSubscription(shapeStrokeStyleAtom);
   let {
     libraryItems,
     metadata
@@ -2120,7 +2120,7 @@ function t$() {
           metadataByLibraryKey: metadata,
           isFullyExpanded: !!minTopPanelHeight && !!j && j <= minTopPanelHeight
         })]
-      }) : P : jsxs(_$$P, {
+      }) : P : jsxs(RecordingScrollContainer, {
         horizontalScrollingDisabled: !0,
         className: _$$jG,
         children: [jsx(tJ, {
@@ -2547,7 +2547,7 @@ function ib({
     pagesList: e,
     shouldShowDuplicateOption: c
   });
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     horizontalScrollingDisabled: !0,
     onScroll: d,
     className: ex()('pages_dropdown--scrollContainer--jAJ5C', {
@@ -2967,7 +2967,7 @@ function i7({
   let a = useCallback(e => {
     n(e > 0);
   }, []);
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     horizontalScrollingDisabled: !0,
     onScroll: a,
     className: ex()('figjam_expanded_left_panel--scrollContainer--V6RoK', {
@@ -3762,7 +3762,7 @@ function ad(e) {
     if (n.stopPropagation(), validatePublishedPluginInOrgAllowlist()) {
       if (r && _$$oM({
         id: e.pluginId,
-        type: _$$p2.PLUGINS,
+        type: TabCategory.PLUGINS,
         source: u,
         options: {
           ...a,
@@ -3974,7 +3974,7 @@ let aT = memo(e => {
     searchQuery,
     showRequestFlow: m
   });
-  let x = isPendingPublisherForCurrentUser(pluginVersion.plugin_id) && e.view === _$$p2.PLUGINS;
+  let x = isPendingPublisherForCurrentUser(pluginVersion.plugin_id) && e.view === TabCategory.PLUGINS;
   let g = BI();
   let j = QP({
     resource: plugin,
@@ -3985,7 +3985,7 @@ let aT = memo(e => {
     resource: plugin
   }) : d ? jsx(aE, {
     plugin
-  }) : c ? jsx(Vv, {
+  }) : c ? jsx(PaymentButton, {
     children: renderI18nText('community.buyer.update')
   }) : m ? jsx('div', {
     style: styleBuilderInstance.add({
@@ -4018,7 +4018,7 @@ let aT = memo(e => {
           children: j
         }), c && jsx('div', {
           className: 'browse_plugins_universal_modal_tiles--browsePluginTilePaymentError--A0pCZ',
-          children: jsx(_$$xY, {})
+          children: jsx(PaymentInfoTooltip, {})
         }), e.showLockIcon && jsx(SvgComponent, {
           svg: _$$A7
         })]
@@ -4420,7 +4420,7 @@ function aX(e) {
       }), n > 0 && jsx('button', {
         className: az,
         onClick: () => {
-          t.setActiveTab(_$$p2.WIDGETS);
+          t.setActiveTab(TabCategory.WIDGETS);
         },
         children: `See ${n} more ${pluralize(n, 'result')}`
       })]
@@ -4431,7 +4431,7 @@ function aX(e) {
           widgetId: e
         }, e)), e.developmentSearchResultIds.slice(0, a).map(e => jsx(aV, {
           localFileId: e,
-          tab: _$$p2.DEVELOPMENT
+          tab: TabCategory.DEVELOPMENT
         }, e))]
       })
     })]
@@ -4454,17 +4454,17 @@ function aq(e) {
       }), n > 0 && jsx('button', {
         className: az,
         onClick: () => {
-          t.setActiveTab(_$$p2.PLUGINS);
+          t.setActiveTab(TabCategory.PLUGINS);
         },
         children: `See ${n} more ${pluralize(n, 'result')}`
       })]
     }), jsxs(Fragment, {
       children: [r.slice(0, 4).map(e => jsx(aC, {
         pluginId: e,
-        view: _$$p2.PLUGINS
+        view: TabCategory.PLUGINS
       }, e)), e.developmentSearchResultIds.slice(0, a).map(e => jsx(av, {
         localFileId: e,
-        view: _$$p2.DEVELOPMENT
+        view: TabCategory.DEVELOPMENT
       }, e))]
     })]
   });
@@ -4536,7 +4536,7 @@ function aQ() {
       }), n > 0 && jsx('button', {
         className: az,
         onClick: () => {
-          e.setActiveTab(_$$p2.STICKERS_AND_COMPONENTS);
+          e.setActiveTab(TabCategory.STICKERS_AND_COMPONENTS);
         },
         children: renderI18nText('whiteboard.inserts.see_num_more_resources', {
           numMoreResources: n
@@ -4570,7 +4570,7 @@ function a0(e) {
       }), a > 0 && jsx('button', {
         className: az,
         onClick: () => {
-          t.setActiveTab(_$$p2.TEMPLATES);
+          t.setActiveTab(TabCategory.TEMPLATES);
         },
         children: renderI18nText('whiteboard.inserts.see_num_more_resources', {
           numMoreResources: a
@@ -4708,7 +4708,7 @@ function sf(e) {
           className: sd,
           children: jsx(aC, {
             pluginId: e.id,
-            view: _$$p2.ALL
+            view: TabCategory.ALL
           }, e.id)
         }, e.id))
       })]
@@ -5051,7 +5051,7 @@ function sD() {
   return jsx(Fragment, {
     children: jsx(sM, {
       items: t.slice(0, 4),
-      view: _$$p2.RECENTS
+      view: TabCategory.RECENTS
     })
   });
 }
@@ -5071,11 +5071,11 @@ let sF = 'browse_widgets_view--widgetTilesGridContainer--t5-lL';
 let sH = memo(e => {
   let t = e => hasLocalFileId(e) ? jsx(aV, {
     localFileId: e.localFileId,
-    tab: _$$p2.RECENTS
+    tab: TabCategory.RECENTS
   }, e.localFileId) : jsx(aG, {
     widgetId: e.plugin_id,
     widgetVersion: e,
-    tab: _$$p2.RECENTS
+    tab: TabCategory.RECENTS
   }, e.plugin_id);
   return jsx('div', {
     className: sF,
@@ -5132,7 +5132,7 @@ function sz() {
     children: [jsx(sq, {
       title: getI18nString('whiteboard.inserts.widgets'),
       subtitle: getI18nString('whiteboard.inserts.widgets_subtitle'),
-      onClick: () => e.setActiveTab(_$$p2.WIDGETS),
+      onClick: () => e.setActiveTab(TabCategory.WIDGETS),
       showCaret: !0,
       shorterSectionHeader: !1
     }), jsx(sB, {})]
@@ -5145,7 +5145,7 @@ function sZ() {
     children: [jsx(sq, {
       title: getI18nString('whiteboard.inserts.plugins'),
       subtitle: getI18nString('whiteboard.inserts.plugins_subtitle'),
-      onClick: () => e.setActiveTab(_$$p2.PLUGINS),
+      onClick: () => e.setActiveTab(TabCategory.PLUGINS),
       showCaret: !0,
       shorterSectionHeader: !0
     }), jsx(sD, {})]
@@ -5158,7 +5158,7 @@ function s$() {
     children: [jsx(sq, {
       title: getI18nString('whiteboard.inserts.stickers'),
       subtitle: getI18nString('whiteboard.inserts.stickers_subtitle'),
-      onClick: () => e.setActiveTab(_$$p2.STICKERS_AND_COMPONENTS),
+      onClick: () => e.setActiveTab(TabCategory.STICKERS_AND_COMPONENTS),
       showCaret: !0,
       shorterSectionHeader: !1
     }), jsx(zz, {})]
@@ -5171,7 +5171,7 @@ function sY() {
     children: [jsx(sq, {
       title: getI18nString('whiteboard.inserts.templates'),
       subtitle: getI18nString('whiteboard.inserts.templates_subtitle'),
-      onClick: () => e.setActiveTab(_$$p2.TEMPLATES),
+      onClick: () => e.setActiveTab(TabCategory.TEMPLATES),
       showCaret: !0,
       shorterSectionHeader: !1
     }), jsx(sP, {})]
@@ -5183,7 +5183,7 @@ function sX() {
     className: sK,
     children: [jsx(sq, {
       title: getI18nString('whiteboard.inserts.more'),
-      onClick: () => e.setActiveTab(_$$p2.MORE),
+      onClick: () => e.setActiveTab(TabCategory.MORE),
       showCaret: !0,
       shorterSectionHeader: !0
     }), jsx(sL, {
@@ -5379,7 +5379,7 @@ function s8(e) {
         children: renderI18nText('whiteboard.inserts.plugin_recents')
       }), savedSearchResultIds.map(e => jsx(aC, {
         pluginId: e,
-        view: _$$p2.SAVED
+        view: TabCategory.SAVED
       }, `saved_plugin_${e}`))]
     }), m && jsxs(Fragment, {
       children: [jsx('div', {
@@ -5387,7 +5387,7 @@ function s8(e) {
         children: renderI18nText('whiteboard.inserts.development')
       }), developmentSearchResultIds.map(e => jsx(av, {
         localFileId: e,
-        view: _$$p2.DEVELOPMENT
+        view: TabCategory.DEVELOPMENT
       }, `development_plugin_${e}`))]
     }), f && jsxs(Fragment, {
       children: [jsx('div', {
@@ -5397,7 +5397,7 @@ function s8(e) {
         })
       }), orgSearchResultIds.map(e => jsx(aC, {
         pluginId: e,
-        view: _$$p2.EXPLORE
+        view: TabCategory.EXPLORE
       }, `org_plugin_${e}`))]
     }), h && jsxs(Fragment, {
       children: [jsx('div', {
@@ -5405,7 +5405,7 @@ function s8(e) {
         children: renderI18nText('whiteboard.inserts.plugin_from_community')
       }), communitySearchResultIds.map(e => jsx(aC, {
         pluginId: e,
-        view: _$$p2.EXPLORE
+        view: TabCategory.EXPLORE
       }, `community_plugin_${e}`))]
     })]
   }) : jsx(TrackingProvider, {
@@ -5447,7 +5447,7 @@ function oo(e) {
   return extensionType === PluginType.Plugin ? jsx(Fragment, {
     children: extensionIds.map(e => jsx(aC, {
       pluginId: e,
-      view: _$$p2.EXPLORE
+      view: TabCategory.EXPLORE
     }, e))
   }) : jsx('div', {
     className: sF,
@@ -5549,10 +5549,10 @@ function oj() {
   return jsxs(Fragment, {
     children: [n.map(e => jsx(av, {
       localFileId: Number(e),
-      view: _$$p2.DEVELOPMENT
+      view: TabCategory.DEVELOPMENT
     }, `development_plugin_${e}`)), i.map(e => jsx(av, {
       publishedPlugin: e,
-      view: _$$p2.DEVELOPMENT
+      view: TabCategory.DEVELOPMENT
     }, `development_plugin_${e.id}`))]
   });
 }
@@ -5562,7 +5562,7 @@ function ob() {
     name: 'invited',
     children: [e.map(e => jsx(aC, {
       pluginId: e.id,
-      view: _$$p2.PLUGINS,
+      view: TabCategory.PLUGINS,
       pluginVersion: getPluginVersion(e)
     }, e.id)), jsx(AutoLayout, {
       padding: {
@@ -5647,7 +5647,7 @@ function oI({
     children: [a.length > 0 && jsx(Fragment, {
       children: a.map(e => jsx(aC, {
         pluginId: e,
-        view: _$$p2.EXPLORE,
+        view: TabCategory.EXPLORE,
         showLockIcon: !0
       }, e))
     }), _.length > 0 && jsxs(Fragment, {
@@ -5658,7 +5658,7 @@ function oI({
         let t = e.plugin_id;
         return jsx(aC, {
           pluginId: t,
-          view: _$$p2.EXPLORE
+          view: TabCategory.EXPLORE
         }, t);
       })]
     }), jsx(os, {
@@ -5710,7 +5710,7 @@ function oM() {
         children: renderI18nText('universal_insert.recents')
       }), jsx(sM, {
         items: f,
-        view: _$$p2.RECENTS
+        view: TabCategory.RECENTS
       })]
     }), _ && x && jsx(_$$F2, {}), x && jsxs(Fragment, {
       children: [jsx('div', {
@@ -5718,7 +5718,7 @@ function oM() {
         children: renderI18nText('universal_insert.saved')
       }), jsx(sM, {
         items: h,
-        view: _$$p2.SAVED
+        view: TabCategory.SAVED
       }), c.length > 40 && !u && jsx('button', {
         className: oR,
         onClick: () => p(!0),
@@ -5733,7 +5733,7 @@ function oD() {
     shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL,
     renderResource: e => jsx(aC, {
       pluginId: e.id,
-      view: _$$p2.EXPLORE
+      view: TabCategory.EXPLORE
     }, e.id)
   });
 }
@@ -5906,11 +5906,11 @@ function oQ(e) {
       resourceType: HubTypeEnum.PLUGIN,
       editorType: 'whiteboard'
     },
-    children: [jsx(_$$P, {
+    children: [jsx(RecordingScrollContainer, {
       height: _$$mS(t.pinned, 500, _$$s3, zD),
       children: jsxs('div', {
         className: _$$tJ2,
-        children: [a && jsx(_$$cu, {}), jsx('img', {
+        children: [a && jsx(PaymentSection, {}), jsx('img', {
           className: ex()(VM, Mp),
           src: r.redirect_thumbnail_url || '',
           alt: `${h.name}`,
@@ -6057,7 +6057,7 @@ function o8(e) {
       resourceId: n.id,
       resourceType: HubTypeEnum.HUB_FILE
     },
-    children: [jsxs(_$$P, {
+    children: [jsxs(RecordingScrollContainer, {
       height: _$$mS(i.pinned, 504, _$$s3, zD),
       children: [jsx('div', {
         className: 'browse_templates_preview--embedContainer--8lgx5 hub_file_detail_view--embedContainer--QMuUr detail_view--embedContainer---TcbF',
@@ -6171,7 +6171,7 @@ function ln(e) {
             onSuccess: () => {
               j && _$$oM({
                 id: r.id,
-                type: _$$p2.TEMPLATES,
+                type: TabCategory.TEMPLATES,
                 source: _,
                 options: {
                   ...b,
@@ -6294,7 +6294,7 @@ function lc(e) {
       }), jsx('div', {
         className: ll,
         children: developmentSearchResultIds.map(e => jsx(aV, {
-          tab: _$$p2.DEVELOPMENT,
+          tab: TabCategory.DEVELOPMENT,
           localFileId: e
         }, e))
       })]
@@ -6394,9 +6394,9 @@ function lp() {
     className: sF,
     children: [i.map(e => jsx(aV, {
       localFileId: Number(e),
-      tab: _$$p2.DEVELOPMENT
+      tab: TabCategory.DEVELOPMENT
     }, e)), t.map(e => jsx(aH, {
-      tab: _$$p2.DEVELOPMENT,
+      tab: TabCategory.DEVELOPMENT,
       publishedWidget: e
     }, e.id))]
   });
@@ -6735,7 +6735,7 @@ function lk(e) {
             pluginId: r.id,
             buttonCta: getI18nString('whiteboard.inserts.plugin_run_cta'),
             isNotInHeader: !0,
-            view: _$$p2.PLUGINS
+            view: TabCategory.PLUGINS
           })
         })
       }), jsx(_$$_W, {
@@ -6800,7 +6800,7 @@ function lD(e) {
     });
     C && _$$oM({
       id: j.plugin_id,
-      type: _$$p2.WIDGETS,
+      type: TabCategory.WIDGETS,
       source: v,
       options: {
         ...T,
@@ -6923,7 +6923,7 @@ function lU() {
   }));
   let [t, i] = useState(universalInsertModal.initialSelectedCategory ?? a);
   let n = useCurrentFileKey();
-  let r = universalInsertModal.initialTab || s || (n ? _$$p2.ALL : _$$p2.WIDGETS);
+  let r = universalInsertModal.initialTab || s || (n ? TabCategory.ALL : TabCategory.WIDGETS);
   let {
     searchQuery,
     setSearchQuery,
@@ -6993,9 +6993,9 @@ function lF({
   let z = useAtomWithSubscription(overlayStateAtom);
   useEffect(() => {
     z && !_$$l7.has(z) && handleAtomEvent({
-      id: _$$X,
+      id: CURATOR_GLOBAL_REQUEST_CLOSE,
       properties: {
-        requester: _$$Y.FigjamUniversalInsertsMenuOpen
+        requester: FigJamMenuEvents.FigjamUniversalInsertsMenuOpen
       }
     });
   }, [z]);
@@ -7159,7 +7159,7 @@ function lF({
       shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL,
       renderResource: e => jsx(aC, {
         pluginId: e.id,
-        view: _$$p2.EXPLORE
+        view: TabCategory.EXPLORE
       }, e.id)
     }) : e.resourceType === Rt.ALL ? jsx(sf, {
       useCaseName: e.id
@@ -7262,7 +7262,7 @@ function lF({
       pluginId: i.id
     }) : i.type === Rt.ORG_FACE_STAMPS ? jsx($t, {
       onBack: () => {
-        tabManager.setActiveTab(_$$p2.MORE);
+        tabManager.setActiveTab(TabCategory.MORE);
       },
       queryFromAllSearch: debouncedSearchQuery !== '' ? debouncedSearchQuery : null
     }) : void 0 : null,
@@ -7941,7 +7941,7 @@ function d5({
   let x = _$$sM(_.title, _.subtitle, !1);
   let g = Xr(Ac);
   let j = useRef(null);
-  let b = wY(j);
+  let b = useResizeObserverRef(j);
   t = 180;
   b && (t = 36 * Math.floor((parsePxNumber(N5f) - b.height) / 36));
   let y = t;
@@ -8183,7 +8183,7 @@ function d8({
             children: h
           }),
           testIdPrefix: 'ai-modal-header'
-        }), jsxs(_$$P, {
+        }), jsxs(RecordingScrollContainer, {
           className: da,
           children: [jsx('div', {
             className: 'ai_modal--entryViewPromptEditorWrapper--D6Zwq',
@@ -8304,7 +8304,7 @@ function ci({
         }),
         closeButtonInnerText: 'dismiss',
         testIdPrefix: 'ai-modal-header'
-      }), jsxs(_$$P, {
+      }), jsxs(RecordingScrollContainer, {
         className: da,
         children: [jsx('div', {
           className: cssBuilderInstance.pt16.$,
@@ -8653,7 +8653,7 @@ function cW({
   }) {
     let {
       close
-    } = _$$cq();
+    } = useNavigationStack();
     _$$P4(!!n);
     let s = !!e.find(e => [_$$is.ACCEPT, _$$is.KEEP_IT].includes(e.type));
     let o = useCallback(() => {
@@ -9245,7 +9245,7 @@ function uS() {
   let e = getViewportInfo({
     subscribeToUpdates_expensive: !1
   });
-  let t = _$$Z4();
+  let t = useNavigateToViewport();
   return useCallback(i => {
     let n = uT(i, getSingletonSceneGraph());
     let r = {
@@ -9287,7 +9287,7 @@ function uL(e) {
 function uN() {
   let {
     close
-  } = _$$cq();
+  } = useNavigationStack();
   let [{
     currentAction: t
   }, i] = uh();
@@ -13994,7 +13994,7 @@ function _K({
     }
     return t;
   }, [c, d, n, p, e, m]);
-  return jsx(Jz, {
+  return jsx(PointingDropdown, {
     autofocusPrevElementOnEsc: !0,
     autofocusPrevElementOnSelect: !0,
     className: 'face_stamp_control--faceStampDropdown--fSoHZ',
@@ -14281,7 +14281,7 @@ function xn({
     },
     renderPopoverContents: e => jsxs(p, {
       side: e,
-      children: [d, jsx(_$$P, {
+      children: [d, jsx(RecordingScrollContainer, {
         height: E?.height ?? _7,
         width: E?.width,
         className: 'x78zum5 x1q0g3np x1a02dak xfawy5m',
@@ -14702,7 +14702,7 @@ function xf({
     }, function ({
       children: e
     }) {
-      return jsx(_$$P, {
+      return jsx(RecordingScrollContainer, {
         height: xs,
         disableScrollbarBorder: !0,
         scrollContainerRef: s.scrollContainerRef,
@@ -14883,7 +14883,7 @@ function xy(e = 4, t) {
           'id': e.wrapperId,
           'children': i
         });
-        return e.withScroll ? jsx(_$$P, {
+        return e.withScroll ? jsx(RecordingScrollContainer, {
           height: 184,
           disableScrollbarBorder: !0,
           ref: e.scrollContainerRef,
@@ -16732,7 +16732,7 @@ let x5 = memo(({
     children: [jsx('div', {
       className: x3,
       children: renderI18nText('whiteboard.inline_menu.variants')
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: x2,
       children: jsx('div', {
         className: gridClassName,
@@ -16744,7 +16744,7 @@ let x5 = memo(({
     children: [jsx('div', {
       className: x3,
       children: renderI18nText('whiteboard.inline_menu.variants')
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: x2,
       children: jsx('div', {
         className: gridClassName,
@@ -17534,8 +17534,8 @@ function gP() {
 function gU() {
   let {
     total
-  } = useAtomWithSubscription(Fk);
-  let t = useAtomWithSubscription(Ch);
+  } = useAtomWithSubscription(counterAtom);
+  let t = useAtomWithSubscription(currentSelectionAtom);
   let i = t?.index == null ? '?' : `${t.index + 1}`;
   let n = total === 0 ? getI18nString('canvas_search.no_results') : getI18nString('canvas_search.results_index_count', {
     index: i,
@@ -20779,13 +20779,13 @@ function bg({
 }) {
   let i = bx(t);
   let n = e.length === 0;
-  return jsx(Cf, {
+  return jsx(ConnectedPointingDropdown, {
     className: 'voting_user_overflow_dropdown--pointingDropdown--equm6',
     targetRect: t,
     lean: 'center',
     disableDropdownScrollContainer: !0,
     propagateCloseClick: !0,
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       maxHeight: i,
       width: 192,
       children: jsx('ol', {
@@ -21814,7 +21814,7 @@ function bX({
   let i = _$$jz2();
   let [n, r] = useState(null);
   return jsx(Fragment, {
-    children: i && i.length > 0 ? jsx(_$$P, {
+    children: i && i.length > 0 ? jsx(RecordingScrollContainer, {
       className: 'previous_votes_view--scrollContainer--Jb0sL',
       children: jsx('ol', {
         className: 'previous_votes_view--resultsList--IWpfo',
@@ -21958,7 +21958,7 @@ let b8 = memo(({
           date: i.createdAt
         })
       })]
-    }), a && jsx(b5, {}), a && jsx(_$$P, {
+    }), a && jsx(b5, {}), a && jsx(RecordingScrollContainer, {
       children: jsx('ol', {
         className: 'voting_results_detail_view--resultsList---owZd',
         children: n.map((e, t) => {
@@ -21980,7 +21980,7 @@ function b7({
 }) {
   let n = e.guid;
   let r = useSingleSceneValue(n);
-  let a = _$$Z4('figjam_voting');
+  let a = useNavigateToViewport('figjam_voting');
   let s = useDispatch();
   let c = useSelector(e => e.voting.selectedVotePinId === n);
   let u = useSelector(e => !!t && e.voting.selectedVotePinId === t);
@@ -22672,7 +22672,7 @@ function yE() {
         onClose: () => i({
           source: OO.MEETINGS_PANEL
         })
-      }), jsx(_$$P, {
+      }), jsx(RecordingScrollContainer, {
         className: Ff,
         children: jsx(yS, {})
       })]

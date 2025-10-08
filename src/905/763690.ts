@@ -12,7 +12,7 @@ import { N } from "../figma_app/268271";
 import { VideoOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { b0J } from "../figma_app/6204";
+import { FilePreviewOverlay } from "../figma_app/6204";
 let A = "seen_file_preview_overlay";
 let y = userFlagExistsAtomFamily(A);
 export function $$b0() {
@@ -25,7 +25,7 @@ export function $$b0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: b0J,
+    overlay: FilePreviewOverlay,
     priority: N.DEFAULT_MODAL
   }, [t, p]);
   useEffect(() => {

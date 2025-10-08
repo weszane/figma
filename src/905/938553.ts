@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { useDebouncedCallback } from 'use-debounce';
 import { reportError } from '../905/11';
 import { fetchContactsOptimist } from '../905/14223';
-import { p as _$$p } from '../905/42189';
+import { TabCategory } from '../905/42189';
 import { d as _$$d } from '../905/44199';
 import { ProductStatus } from '../905/54385';
 import { s as _$$s2 } from '../905/58247';
@@ -37,7 +37,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { RadioInputRoot, RadioInputOption } from '../905/308099';
 import { v as _$$v2 } from '../905/318279';
 import { MediaQuerySvgComponent } from '../905/331623';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { Q as _$$Q } from '../905/350210';
 import { A as _$$A4 } from '../905/356410';
 import { nu, Wq } from '../905/358418';
@@ -58,7 +58,7 @@ import { w3 } from '../905/481915';
 import { O as _$$O } from '../905/483217';
 import { isStrippedHtmlEmpty } from '../905/491152';
 import { handleAtomEvent } from '../905/502364';
-import { Cf } from '../905/504727';
+import { ConnectedPointingDropdown } from '../905/504727';
 import { Vl, yX } from '../905/540198';
 import { A as _$$A25 } from '../905/560753';
 import { M4 as _$$M, Kp, nn, UC, XT } from '../905/561298';
@@ -154,7 +154,7 @@ import { getAnnualPriceString, isNotInteger, isPriceOutOfRange, MIN_PRICE } from
 import { TrackingProvider, withTrackedClick } from '../figma_app/831799';
 import { y$ } from '../figma_app/835219';
 import { LoadingSpinner } from '../figma_app/858013';
-import { ab, ox } from '../figma_app/870683';
+import { generateAbsoluteCommunityPluginUrl, generateAbsoluteCommunityWidgetUrl } from '../figma_app/870683';
 import { ConfirmationModal2 } from '../figma_app/918700';
 import { HU } from '../figma_app/926061';
 import { GW } from '../figma_app/975811';
@@ -348,7 +348,7 @@ function eZ(e) {
         'data-tooltip': getI18nString('community.publishing.playground_file.tooltip')
       },
       'children': jsx(_$$J3, {})
-    }), l && c && jsxs(Cf, {
+    }), l && c && jsxs(ConnectedPointingDropdown, {
       targetRect: c,
       lean: 'left',
       minWidth: 120,
@@ -1185,7 +1185,7 @@ function tM({
         });
       },
       validateToken: y
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.maxH300.$,
       children: jsxs(AutoLayout, {
         direction: 'vertical',
@@ -1417,7 +1417,7 @@ function t0({
   userId: t,
   orgId: i
 }) {
-  let n = e.is_widget ? ox(e.id) : ab(e.id);
+  let n = e.is_widget ? generateAbsoluteCommunityWidgetUrl(e.id) : generateAbsoluteCommunityPluginUrl(e.id);
   let {
     href,
     onClick
@@ -1995,7 +1995,7 @@ class iW extends Component {
         i && _$$s2({
           initialX: 0,
           initialY: 0,
-          initialTab: i === 'figjam' ? this.isWidget() ? _$$p.WIDGETS : _$$p.PLUGINS : void 0,
+          initialTab: i === 'figjam' ? this.isWidget() ? TabCategory.WIDGETS : TabCategory.PLUGINS : void 0,
           initialFdResourceTab: i === 'figma' ? this.isWidget() ? SimpleComponentType.WIDGET : SimpleComponentType.PLUGIN : void 0,
           initialFdView: i === 'figma' ? 'development' : void 0,
           scrollDevelopmentSectionIntoView: i === 'figjam',
@@ -2844,7 +2844,7 @@ class iW extends Component {
         })
       };
     };
-    this.renderErrorScreen = () => jsx(_$$P, {
+    this.renderErrorScreen = () => jsx(RecordingScrollContainer, {
       className: 'plugin_publish_modal--scrollContainer--cHFjx publish_modal--scrollContainer--w0uYJ',
       children: jsxs('div', {
         className: 'plugin_publish_modal--publishContainer---8iA- publish_modal--publishContainer--q8lqv',

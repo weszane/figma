@@ -37,7 +37,7 @@ import { A as Svg } from "../6828/154709";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { DEFAULT_ANIMATION_DURATION, getContentScalingMode, handlePrototypeScaleChange, mapToDevicePresetType, shouldNavigateToNextItem, shouldNavigateToPreviousItem, shouldTriggerRefresh } from "../figma_app/2590";
 import { getCommunityResourcePayment } from "../figma_app/4253";
-import { wB } from "../figma_app/12220";
+import { DEFAULT_PIN_OFFSET } from "../figma_app/12220";
 import { QtA } from "../figma_app/27776";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { sW } from "../figma_app/49598";
@@ -786,7 +786,7 @@ function ex(e) {
   }, [D]);
   let H = eA(N.current);
   let z = useCallback(t => {
-    D ? mouseEventManager.handleMouseUp(t.x, t.y) : (!e.disableClickToExpand || !e.disableFullscreen) && G.current && Point.distance(t, G.current) < wB && !isFullscreen && B();
+    D ? mouseEventManager.handleMouseUp(t.x, t.y) : (!e.disableClickToExpand || !e.disableFullscreen) && G.current && Point.distance(t, G.current) < DEFAULT_PIN_OFFSET && !isFullscreen && B();
     G.current = null;
   }, [D, isFullscreen, B, e.disableClickToExpand, e.disableFullscreen]);
   let W = useCallback(e => {

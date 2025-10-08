@@ -55,7 +55,7 @@ import { getI18nState } from "../figma_app/363242";
 import { VisualBellActions } from "../905/302958";
 import { getRumLoggingConfig } from "../905/16237";
 import { DeepLinkType } from "../905/15667";
-import { yJ } from "../figma_app/24841";
+import { putUserAction } from "../figma_app/24841";
 import { UpgradeAction } from "../905/370443";
 import { selectViewAction } from "../905/929976";
 import { startProUpgradeFlowThunk, startOrgUpgradeFlowThunk, startStudentReviewThunk } from "../figma_app/482142";
@@ -137,7 +137,7 @@ import { ScreenReaderOnly } from "../905/172252";
 import { useModalManager, ModalRoot } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogCustomContents } from "../figma_app/272243";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { getI18nResourceKey } from "../905/528121";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/860955";
 import { r as _$$r3 } from "../905/571562";
@@ -825,7 +825,7 @@ function eJ(e) {
       t && i && (trackEventAnalytics("NUX Dynamic Preview", {
         eventSubtype: "set_user_name_success",
         signupSource: e.signupSource
-      }), r(yJ({
+      }), r(putUserAction({
         user: {
           id: t,
           name: i
@@ -867,7 +867,7 @@ function eJ(e) {
         newJobTitle: s,
         source: o,
         jobTitleSeenList: T?.toString()
-      }), r(yJ({
+      }), r(putUserAction({
         user: {
           id: t,
           job_title: s,
@@ -4372,7 +4372,7 @@ function ig({
   let n = useCallback(e => {
     e.isIntersecting ? l(!0) : l(!1);
   }, [l]);
-  let a = wY(e);
+  let a = useResizeObserverRef(e);
   useEffect(() => {
     a && e.current && i(e.current.scrollHeight > e.current.clientHeight);
   }, [a, a?.width, a?.height, e]);

@@ -6,7 +6,7 @@ import { ComponentPropType, VariablesBindings, LayoutSizingMode, RelationType, L
 import { isValidSessionLocalID, sessionLocalIDToString, areSessionLocalIDsEqual, defaultSessionLocalIDString } from "../905/871411";
 import d from "classnames";
 import { generateUUIDv4 } from "../905/871474";
-import { R as _$$R } from "../905/307199";
+import { CenterTruncatedText } from "../905/307199";
 import { ph } from "../figma_app/709893";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -19,7 +19,7 @@ import { ReviewPhase, formatRenderName, createSinglePropertyRenderTreatment, cre
 import { relaxedEqual, deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { formatList } from "../figma_app/930338";
-import { rY } from "../905/985490";
+import { DiffManager } from "../905/985490";
 import { renderComponentPropIcon, getComponentPropDisplayName } from "../figma_app/164212";
 import { AffineTransform } from "../905/583953";
 import { convertKiwiToVariableIdString } from "../905/805904";
@@ -1020,11 +1020,11 @@ let tn = e => {
 let tr = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.dash_pattern"), (e, t, i) => t.length ? tn(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i.length ? tn(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 let ta = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.font_name"), (e, t, i) => t ? `${t.family} ${t.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 let ts = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.parent"), (e, t, i, n) => {
-  let r = rY.getImmediateParentHierarchyNodeChange(n, RelationType.BASIS_PARENT);
+  let r = DiffManager.getImmediateParentHierarchyNodeChange(n, RelationType.BASIS_PARENT);
   let a = r?.name;
   return areSessionLocalIDsEqual(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.empty_dash") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 }, (e, t, i, n) => {
-  let r = rY.getImmediateParentHierarchyNodeChange(n, RelationType.PARENT);
+  let r = DiffManager.getImmediateParentHierarchyNodeChange(n, RelationType.PARENT);
   let a = r?.name;
   return areSessionLocalIDsEqual(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.node_reordered") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 });
@@ -1837,7 +1837,7 @@ function tw(e) {
           basis,
           change
         })
-      }), jsx(_$$R, {
+      }), jsx(CenterTruncatedText, {
         className: er,
         text: s,
         tooltipPropsWhenTruncated: o

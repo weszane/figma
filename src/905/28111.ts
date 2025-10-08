@@ -27,7 +27,7 @@ import { noop } from 'lodash-es';
 import { j$, xm } from '../905/936278';
 import { calculatePickerPositionLeft } from '../905/959568';
 import { DialogTriggerButton } from '../905/976845';
-import { JUF } from '../figma_app/6204';
+import { ColorContrastOnboardingOverlay } from '../figma_app/6204';
 import { buildUploadUrl } from '../figma_app/169182';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { N as _$$N } from '../figma_app/268271';
@@ -611,7 +611,7 @@ function et() {
     isShowing,
     complete
   } = e({
-    overlay: JUF,
+    overlay: ColorContrastOnboardingOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   let {

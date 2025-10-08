@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { dayjs } from "../905/920142";
 import { useSingleEffect } from "../905/791079";
-import { E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { d9, $5 } from "../3276/240191";
 import { PD } from "../figma_app/101956";
@@ -13,7 +13,7 @@ import { MULTIPLAYER_USER_STATE_CHANGE } from "../figma_app/915202";
 import { N } from "../figma_app/268271";
 import { OnboardingRenderFrame } from "../905/284399";
 import { OverlayType } from "../figma_app/450829";
-import { aI5, ar0 } from "../figma_app/6204";
+import { MultiplayerSpotlightNux, MultiplayerObservationNux } from "../figma_app/6204";
 import { trackEventAnalytics } from "../905/449184";
 import { openWindow } from "../905/508367";
 import { ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
@@ -89,11 +89,11 @@ export function $$M0() {
   let x = getUserCreatedAt();
   let b = dayjs().subtract(7, "day").isBefore(dayjs(x));
   let y = _$$e({
-    overlay: aI5,
+    overlay: MultiplayerSpotlightNux,
     priority: N.DEFAULT_MODAL
   }, [t, u]);
   let C = _$$e({
-    overlay: ar0,
+    overlay: MultiplayerObservationNux,
     priority: N.DEFAULT_MODAL
   });
   let w = useCallback(() => {
@@ -109,7 +109,7 @@ export function $$M0() {
     j();
   }, [y, j]);
   useSingleEffect(w);
-  E(y.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, w);
+  useEventForwarder(y.uniqueId, MULTIPLAYER_USER_STATE_CHANGE, w);
   return jsxs(Fragment, {
     children: [jsx(OnboardingRenderFrame, {
       element: ({

@@ -36,7 +36,7 @@ import { E as _$$E2 } from "../4452/428395";
 import { xo, OW } from "../figma_app/425283";
 import { isMobileUA } from "../figma_app/778880";
 import { UpgradeAction } from "../905/370443";
-import { E as _$$E3 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { rn, zl } from "../figma_app/903573";
@@ -44,7 +44,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { createOnboardingStateMachine } from "../905/298004";
 import { OnboardingModal } from "../905/425180";
 import { WZ } from "../905/893645";
-import { ONe } from "../figma_app/6204";
+import { OrgAdminRequestDashboardOnboarding } from "../figma_app/6204";
 import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { isCoreProductAccessType, ProductAccessMap } from "../figma_app/765689";
@@ -74,7 +74,7 @@ import { B6G, XMZ } from "../figma_app/27776";
 import { A as _$$A2 } from "../5724/663128";
 var c = d;
 let X = "seen_org_admin_request_dashboard_onboarding";
-let Q = rn("org_admin_request_dashboard_onboarding", createOnboardingStateMachine(ONe));
+let Q = rn("org_admin_request_dashboard_onboarding", createOnboardingStateMachine(OrgAdminRequestDashboardOnboarding));
 function Z(e) {
   let t = userFlagExistsAtomFamily(X);
   let a = useAtomWithSubscription(t);
@@ -84,7 +84,7 @@ function Z(e) {
     complete,
     uniqueId
   } = _$$e({
-    overlay: ONe,
+    overlay: OrgAdminRequestDashboardOnboarding,
     priority: _$$N.DEFAULT_MODAL
   }, [a]);
   let d = zl(Q);
@@ -93,7 +93,7 @@ function Z(e) {
       canShow: e => !e && !isMobileUA
     });
   });
-  _$$E3(uniqueId, "Reset Onboarding", () => show());
+  useEventForwarder(uniqueId, "Reset Onboarding", () => show());
   let c = [{
     title: renderI18nText("org_admin_onboarding.request_dashboard.tooltip.manage_upgrades_title"),
     description: e.hasBillingGroups ? renderI18nText("org_admin_onboarding.request_dashboard.tooltip.manage_billing_group_upgrade_requests_description") : renderI18nText("org_admin_onboarding.request_dashboard.tooltip.manage_upgrades_description"),

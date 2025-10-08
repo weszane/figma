@@ -4,7 +4,7 @@ import { wI } from "../figma_app/98578";
 import { M$ } from "../figma_app/297822";
 import { qI } from "../figma_app/171177";
 import { B } from "../905/388732";
-import { Hz } from "../905/235578";
+import { enterKey } from "../905/235578";
 import { OX } from "../figma_app/592180";
 export function $$u0({
   source: e,
@@ -19,7 +19,7 @@ export function $$u0({
   return useMemo(() => {
     let i = {
       text: t,
-      shortcuts: u && _ ? [] : [Hz],
+      shortcuts: u && _ ? [] : [enterKey],
       onAction: e => {
         n && wI({
           extensionId: n.extension.plugin_id,

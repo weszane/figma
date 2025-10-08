@@ -5,7 +5,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { reportError } from '../905/11';
 import { clusteredPinsInstance, isOnboardingCompletedAtom, ClusteredPinsElement } from '../905/29425';
 import { v as _$$v } from '../905/99004';
-import { Z as _$$Z } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { ServiceCategories } from '../905/165054';
 import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { qN } from '../905/234821';
@@ -28,7 +28,7 @@ import { BK, vB, x5 } from '../3276/677176';
 import { J as _$$J } from '../3276/853301';
 import { ue } from '../af221b13/476940';
 import { Z7 } from '../figma_app/8833';
-import { Zz } from '../figma_app/12220';
+import { hasUnreadPinnedComments } from '../figma_app/12220';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { addRectOffset, getBasicViewportRect, useFullscreenViewportUpdates, useViewportWithDelta, viewportToScreen } from '../figma_app/62612';
 import { formatPinCoordinates, aggregateUserComments } from '../figma_app/70421';
@@ -316,10 +316,10 @@ let er = memo(e => {
   }, [eJ, eW]);
   let e0 = useLatestRef(eg);
   let [e1, e2] = useState(() => {
-    if (eg) return Zz(e.threads);
+    if (eg) return hasUnreadPinnedComments(e.threads);
   });
   useEffect(() => {
-    void 0 === e1 && !e0 && eg && Zz(e.threads) && e2(!0);
+    void 0 === e1 && !e0 && eg && hasUnreadPinnedComments(e.threads) && e2(!0);
   }, [e0, eg, e.threads, e1]);
   useEffect(() => {
     eJ && e1 && (e.threads.some(e => e.commentPin != null && e.comments.some(e => e.isUnread)) || e2(!1));
@@ -542,7 +542,7 @@ let er = memo(e => {
 });
 var el = (e => (e[e.Forward = 0] = 'Forward', e[e.Backward = 1] = 'Backward', e))(el || {});
 let ed = () => {
-  let e = _$$Z();
+  let e = useNavigateToViewport();
   let t = useContext(viewportNavigatorContext);
   let n = useSelector(e => e.selectedView);
   return useCallback(o => e(calculateCommentPinViewport(o.threads[0], t, n, !1, !0)), [e, t, n]);

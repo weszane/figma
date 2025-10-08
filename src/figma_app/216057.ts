@@ -110,7 +110,7 @@ type VariableSetsAtomType = Record<string, VariableSetInfo>
 
 // Original: $$G26
 // Local variable sets atom with Redux state management
-const localVariableSetsAtom = (() => {
+export const localVariableSetsAtom = (() => {
   const reduxAtom = createAtomWithReduxWithState<VariableSetsAtomType>({}, "SYNC_ATOM_VARIABLE_SETS_BY_ID")
   const customAtom = setupCustomAtom<VariableSetsAtomType>(reduxAtom, (state, action) => {
     if (action) {
@@ -148,7 +148,7 @@ const localVariableSetsAtom = (() => {
 
 // Original: $$V20
 // Combined local and subscribed variable sets atom
-const combinedVariableSetsAtom = atom<VariableSetsAtomType>((get) => {
+export const combinedVariableSetsAtom = atom<VariableSetsAtomType>((get) => {
   const localSets = get(localVariableSetsAtom) as VariableSetsAtomType
   const subscribedSets = get(subscribedVariableSetsAtom) as VariableSetsAtomType
   return {
@@ -159,11 +159,11 @@ const combinedVariableSetsAtom = atom<VariableSetsAtomType>((get) => {
 
 // Original: $$H19
 // Atom family for individual local variable sets
-const localVariableSetByIdAtomFamily = createRemovableAtomFamily((id: string) => atom<VariableSetInfo | undefined>(get => (get(localVariableSetsAtom) as VariableSetsAtomType)[id]))
+export const localVariableSetByIdAtomFamily = createRemovableAtomFamily((id: string) => atom<VariableSetInfo | undefined>(get => (get(localVariableSetsAtom) as VariableSetsAtomType)[id]))
 
 // Original: $$z3
 // Atom family for individual combined variable sets
-const combinedVariableSetByIdAtomFamily = createRemovableAtomFamily((id: string) => atom<VariableSetInfo | undefined>(get => (get(combinedVariableSetsAtom) as VariableSetsAtomType)[id]))
+export const combinedVariableSetByIdAtomFamily = createRemovableAtomFamily((id: string) => atom<VariableSetInfo | undefined>(get => (get(combinedVariableSetsAtom) as VariableSetsAtomType)[id]))
 
 // Original: $$W17
 // Complex atom family for variable table data, handling extensions and backing sets
@@ -199,7 +199,7 @@ interface ExtendedVariableSet extends VariableSet {
 
 type VariableTableData = Record<string, VariableTableEntry>
 
-const variableTableDataForVariableSetAtomFamily = createRemovableAtomFamily((variableSetId: string) => setupRemovableAtomFamily(() => atom((get): VariableTableData => {
+export const variableTableDataForVariableSetAtomFamily = createRemovableAtomFamily((variableSetId: string) => setupRemovableAtomFamily(() => atom((get): VariableTableData => {
   const variableSet = get(combinedVariableSetByIdAtomFamily(variableSetId)) as VariableSet | null
   if (!variableSet || !getFeatureFlags().ds_extended_collections) {
     return {}
@@ -289,7 +289,7 @@ const variableTableDataForVariableSetAtomFamily = createRemovableAtomFamily((var
 
 // Original: $$K7
 // Atom family for multiple library variable collections by file keys
-const libraryVariableCollectionsByFileKeysAtomFamily = createRemovableAtomFamily((fileKeys: any[]) => atom((get) => {
+export const libraryVariableCollectionsByFileKeysAtomFamily = createRemovableAtomFamily((fileKeys: any[]) => atom((get) => {
   const result: Record<string, any> = {}
   for (const key of fileKeys) {
     result[key] = get(LibraryVariableCollectionData.Query({
@@ -301,13 +301,13 @@ const libraryVariableCollectionsByFileKeysAtomFamily = createRemovableAtomFamily
 
 // Original: $$Y28
 // Atom family for library variable collections by library keys
-const libraryVariableCollectionsByLibraryKeysAtomFamily = createRemovableAtomFamily((libraryKeys: any[]) => atom(get => mapValues(keyBy(libraryKeys), key => get(LibraryVariableCollectionDataByLibraryKey.Query({
+export const libraryVariableCollectionsByLibraryKeysAtomFamily = createRemovableAtomFamily((libraryKeys: any[]) => atom(get => mapValues(keyBy(libraryKeys), key => get(LibraryVariableCollectionDataByLibraryKey.Query({
   libraryKey: key,
 })))), arraysEqual)
 
 // Original: $$$22
 // Library variable collection with vars atom family
-const libraryVariableCollectionWithVarsByFileKeyAtomFamily = createRemovableAtomFamily((_fileKey: string) => libraryVariableCollectionWithVarsAtom)
+export const libraryVariableCollectionWithVarsByFileKeyAtomFamily = createRemovableAtomFamily((_fileKey: string) => libraryVariableCollectionWithVarsAtom)
 
 // Original: $$X14
 // Function to query community library variable collection with variables
@@ -321,7 +321,7 @@ export function queryCommunityLibraryVariableCollectionWithVariables(hubFileId?:
 
 // Original: $$q13
 // Atom family for variables by variable collection keys
-const variablesByVariableCollectionKeysAtomFamily = createRemovableAtomFamily((collectionKeys: any[]) => atom((get) => {
+export const variablesByVariableCollectionKeysAtomFamily = createRemovableAtomFamily((collectionKeys: any[]) => atom((get) => {
   const result: Record<string, any> = {}
   for (const key of collectionKeys) {
     result[key] = get(createAtomFamily(VariablesByVariableCollectionKey)({
@@ -333,13 +333,13 @@ const variablesByVariableCollectionKeysAtomFamily = createRemovableAtomFamily((c
 
 // Original: $$J8
 // Atom family for library variable collections with vars by library keys
-const libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily = createRemovableAtomFamily((libraryKeys: any[]) => atom(get => mapValues(keyBy(libraryKeys), key => get(LibraryVariableCollectionDataByLibraryKeyWithVariables.Query({
+export const libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily = createRemovableAtomFamily((libraryKeys: any[]) => atom(get => mapValues(keyBy(libraryKeys), key => get(LibraryVariableCollectionDataByLibraryKeyWithVariables.Query({
   libraryKey: key,
 })))), arraysEqual)
 
 // Original: $$Z18
 // Atom family for library variable collections with vars by file keys
-const libraryVariableCollectionsWithVarsByFileKeysAtomFamily = createRemovableAtomFamily((fileKeys: any[]) => atom((get) => {
+export const libraryVariableCollectionsWithVarsByFileKeysAtomFamily = createRemovableAtomFamily((fileKeys: any[]) => atom((get) => {
   const result: Record<string, any> = {}
   for (const key of fileKeys) {
     result[key] = get(LibraryVariableCollectionDataWithVariables.Query({
@@ -351,7 +351,7 @@ const libraryVariableCollectionsWithVarsByFileKeysAtomFamily = createRemovableAt
 
 // Original: $$Q24
 // Atom family for community library variable collections with vars by hub file ids
-const communityLibraryVariableCollectionsWithVarsByHubFileIdsAtomFamily = createRemovableAtomFamily((hubFileIds: any[]) => atom((get) => {
+export const communityLibraryVariableCollectionsWithVarsByHubFileIdsAtomFamily = createRemovableAtomFamily((hubFileIds: any[]) => atom((get) => {
   const result: Record<string, any> = {}
   for (const id of hubFileIds) {
     result[id] = get(CommunityLibraryVariableCollectionDataWithVariables.Query({
@@ -370,7 +370,7 @@ export function createDisabledResourceAtom(resources: any[]) {
 
 // Original: et
 // Local variables by key atom
-const localVariablesByKeyAtom = atom<any>((get) => {
+export const localVariablesByKeyAtom = atom<any>((get) => {
   const localVars = get(subscribedVariablesAtom) // Note: Original uses $$ef21, which is subscribedVariablesAtom
   const resourceKeysSet = get(resourceDataAndPresetKeysV2SetAtom)
   const keys = Object.values<ObjectOf>(localVars).filter(v => !hasLibraryKeyInSet(v, resourceKeysSet)).map(v => v.key).sort()
@@ -383,7 +383,7 @@ const localVariablesByKeyAtom = atom<any>((get) => {
 
 // Original: er
 // Library variables by key atom
-const libraryVariablesByKeyAtom = atom((get) => {
+export const libraryVariablesByKeyAtom = atom((get) => {
   const subscribedVars = get(subscribedVariablesAtom)
   const resourceKeysSet = get(resourceDataAndPresetKeysV2SetAtom)
   const keys = (get(figmaLibrariesEnabledAtom) ? Object.values<any>(subscribedVars).filter(v => hasLibraryKeyInSet(v, resourceKeysSet)) : []).map(v => v.key).sort().map(key => ({
@@ -407,7 +407,7 @@ const libraryVariablesByKeyAtom = atom((get) => {
 
 // Original: en
 // Combined used library variables by key atom
-const usedLibraryVariablesByKeyAtom = atom((get) => {
+export const usedLibraryVariablesByKeyAtom = atom((get) => {
   const localVars = get(localVariablesByKeyAtom)
   const libraryVars = get(libraryVariablesByKeyAtom)
   // Type guard to ensure we're spreading objects
@@ -421,11 +421,11 @@ const usedLibraryVariablesByKeyAtom = atom((get) => {
 
 // Original: $$ei12
 // Redux atom for used library variables by key
-const usedLibraryVariablesByKeyReduxAtom = setupReduxAtomWithState(usedLibraryVariablesByKeyAtom, "SYNC_ATOM_USED_LIBRARY_VARIABLES_BY_KEY", {})
+export const usedLibraryVariablesByKeyReduxAtom = setupReduxAtomWithState(usedLibraryVariablesByKeyAtom, "SYNC_ATOM_USED_LIBRARY_VARIABLES_BY_KEY", {})
 
 // Original: ea
 // Local variable collections by key atom
-const localVariableCollectionsByKeyAtom = atom((get) => {
+export const localVariableCollectionsByKeyAtom = atom((get) => {
   const collectionKeys = [...new Set(Object.values<ObjectOf>(get(localVariablesByKeyAtom)).map(v => v.data?.variable?.variableCollection.key).filter(isNotNullish))]
   const subscribedSets = get(subscribedVariableSetsAtom)
   const subscribedKeys = Object.keys(subscribedSets)
@@ -445,7 +445,7 @@ const localVariableCollectionsByKeyAtom = atom((get) => {
 
 // Original: es
 // Library variable collections by key atom
-const libraryVariableCollectionsByKeyAtom = atom((get) => {
+export const libraryVariableCollectionsByKeyAtom = atom((get) => {
   const collectionKeys = [...new Set(Object.values<ObjectOf>(get(libraryVariablesByKeyAtom)).map(v => v.data?.variable?.variableCollection.key).filter(isNotNullish))].sort().map(key => ({
     key,
   }))
@@ -467,7 +467,7 @@ const libraryVariableCollectionsByKeyAtom = atom((get) => {
 
 // Original: eo
 // Combined used library variable sets by key atom
-const usedLibraryVariableSetsByKeyAtom = atom((get) => {
+export const usedLibraryVariableSetsByKeyAtom = atom((get) => {
   const localCollections = get(localVariableCollectionsByKeyAtom)
   const libraryCollections = get(libraryVariableCollectionsByKeyAtom)
   // Type guard to ensure we're spreading objects
@@ -481,15 +481,15 @@ const usedLibraryVariableSetsByKeyAtom = atom((get) => {
 
 // Original: $$el25
 // Redux atom for used library variable sets by key
-const usedLibraryVariableSetsByKeyReduxAtom = setupReduxAtomWithState(usedLibraryVariableSetsByKeyAtom, "SYNC_ATOM_USED_LIBRARY_VARIABLE_SETS_BY_KEY", {})
+export const usedLibraryVariableSetsByKeyReduxAtom = setupReduxAtomWithState(usedLibraryVariableSetsByKeyAtom, "SYNC_ATOM_USED_LIBRARY_VARIABLE_SETS_BY_KEY", {})
 
 // Original: $$ed15
 // All local variable sets atom
-const allLocalVariableSetsAtom = atom(get => Object.values(get(localVariableSetsAtom)))
+export const allLocalVariableSetsAtom = atom(get => Object.values(get(localVariableSetsAtom)))
 
 // Original: $$ec29
 // Subscribed variable sets atom with Redux state management
-const subscribedVariableSetsAtom = (() => {
+export const subscribedVariableSetsAtom = (() => {
   const reduxAtom = createAtomWithReduxWithState<VariableSetsAtomType>({}, "SYNC_ATOM_SUBSCRIBED_VARIABLE_SETS_BY_ID")
   const customAtom = setupCustomAtom(reduxAtom, (state, action) => {
     if (action) {
@@ -527,7 +527,7 @@ const subscribedVariableSetsAtom = (() => {
 
 // Original: $$eu2
 // Local variables atom with Redux state management
-const localVariablesAtom = (() => {
+export const localVariablesAtom = (() => {
   const reduxAtom = createAtomWithReduxWithState({}, "SYNC_ATOM_LOCAL_VARIABLES_BY_ID")
   const customAtom = setupCustomAtom(reduxAtom, (state, action) => {
     if (action) {
@@ -573,23 +573,23 @@ const localVariablesAtom = (() => {
 
 // Original: $$ep23
 // Atom family for individual local variables
-const localVariableByIdAtomFamily = createRemovableAtomFamily((id: string) => atom(get => get(localVariablesAtom)[id] ?? null))
+export const localVariableByIdAtomFamily = createRemovableAtomFamily((id: string) => atom(get => get(localVariablesAtom)[id] ?? null))
 
 // Original: $$e_27
 // Sorted local variables atom
-const sortedLocalVariablesAtom = atom(get => Object.keys(get(localVariablesAtom)).map(id => get(localVariableByIdAtomFamily(id))).sort((a, b) => -compareNumbers(a.sortPosition, b?.sortPosition)))
+export const sortedLocalVariablesAtom = atom(get => Object.keys(get(localVariablesAtom)).map(id => get(localVariableByIdAtomFamily(id))).sort((a, b) => -compareNumbers(a.sortPosition, b?.sortPosition)))
 
 // Original: $$eh6
 // Local variables grouped by variable set id
-const localVariablesGroupedBySetIdAtom = atom(get => groupBy(get(sortedLocalVariablesAtom), v => v.variableSetId))
+export const localVariablesGroupedBySetIdAtom = atom(get => groupBy(get(sortedLocalVariablesAtom), v => v.variableSetId))
 
 // Original: $$em11
 // Subscribed variables grouped by variable set id
-const subscribedVariablesGroupedBySetIdAtom = atom(get => groupBy<ObjectOf>(get(subscribedVariablesAtom), v => v.variableSetId))
+export const subscribedVariablesGroupedBySetIdAtom = atom(get => groupBy<ObjectOf>(get(subscribedVariablesAtom), v => v.variableSetId))
 
 // Original: eg
 // Combined variables grouped by collection
-const variablesGroupedByCollectionAtom = atom((get) => {
+export const variablesGroupedByCollectionAtom = atom((get) => {
   const localGrouped = get(localVariablesGroupedBySetIdAtom)
   const subscribedGrouped = get(subscribedVariablesGroupedBySetIdAtom)
   return {
@@ -600,7 +600,7 @@ const variablesGroupedByCollectionAtom = atom((get) => {
 
 // Original: $$ef21
 // Subscribed variables atom with Redux state management
-const subscribedVariablesAtom = (() => {
+export const subscribedVariablesAtom = (() => {
   const reduxAtom = createAtomWithReduxWithState({}, "SYNC_ATOM_SUBSCRIBED_VARIABLES_BY_ID")
   const customAtom = setupCustomAtom(reduxAtom, (state, action) => {
     if (action) {
@@ -692,7 +692,7 @@ export function createExplicitModeNamesAtom(variableSetId: string) {
 
 // Original: eT
 // Local variable overrides atom
-const localVariableOverridesAtom = (() => {
+export const localVariableOverridesAtom = (() => {
   const baseAtom = atom({})
   const customAtom = setupCustomAtom(baseAtom, (state, action) => {
     if (action) {
@@ -731,7 +731,7 @@ const localVariableOverridesAtom = (() => {
 
 // Original: eI
 // Subscribed variable overrides atom
-const subscribedVariableOverridesAtom = (() => {
+export const subscribedVariableOverridesAtom = (() => {
   const baseAtom = atom({})
   const customAtom = setupCustomAtom(baseAtom, (state, action) => {
     if (action) {
@@ -770,7 +770,7 @@ const subscribedVariableOverridesAtom = (() => {
 
 // Original: $$eS0
 // Local overrides by variable set id atom family
-const localOverridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
+export const localOverridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
   const overridesAtomValue = get(localVariableOverridesAtom)
   if (typeof overridesAtomValue === 'function') {
     return {}
@@ -782,7 +782,7 @@ const localOverridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId 
 
 // Original: ev
 // Subscribed overrides by variable set id atom family
-const subscribedOverridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
+export const subscribedOverridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
   const overridesAtomValue = get(subscribedVariableOverridesAtom)
   if (typeof overridesAtomValue === 'function') {
     return {}
@@ -794,7 +794,7 @@ const subscribedOverridesByVariableSetIdAtomFamily = createRemovableAtomFamily(s
 
 // Original: $$eA5
 // Combined overrides by variable set id atom family
-const overridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
+export const overridesByVariableSetIdAtomFamily = createRemovableAtomFamily(setId => atom((get) => {
   const localOverrides = get(localOverridesByVariableSetIdAtomFamily(setId))
   const subscribedOverrides = get(subscribedOverridesByVariableSetIdAtomFamily(setId))
   const combined = {

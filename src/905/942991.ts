@@ -1,5 +1,5 @@
 import { LRUCache } from "../905/196201";
-import { Ax } from "../figma_app/616261";
+import { FuzzyMatcher } from "../figma_app/616261";
 import { dU } from "../905/660732";
 import { BB } from "../figma_app/98578";
 import { n as _$$n } from "../905/548236";
@@ -43,7 +43,7 @@ function c(e, t, i) {
   if (!n || !a) return 0;
   let s = d.get(n);
   if (!s) {
-    let e = new Ax(n, i.acceptsUnicode).matchAgainstText(n);
+    let e = new FuzzyMatcher(n, i.acceptsUnicode).matchAgainstText(n);
     d.set(n, e?.score ?? 1);
     s = e?.score ?? 1;
   }

@@ -77,7 +77,7 @@ import { g as _$$g } from "../4452/983384";
 import { e as _$$e2 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { OnboardingModal } from "../905/425180";
-import { Clh } from "../figma_app/6204";
+import { AdminSeatApprovalSettingsOnboardingOverlay } from "../figma_app/6204";
 import { LoadingSpinner } from "../905/443820";
 import { U as _$$U } from "../905/275247";
 import { n as _$$n } from "../4452/550447";
@@ -153,8 +153,8 @@ function eR(e) {
     isShowing,
     complete
   } = _$$e2({
-    overlay: Clh,
-    priority: _$$g(Clh)
+    overlay: AdminSeatApprovalSettingsOnboardingOverlay,
+    priority: _$$g(AdminSeatApprovalSettingsOnboardingOverlay)
   }, [a]);
   useSingleEffect(() => {
     show({

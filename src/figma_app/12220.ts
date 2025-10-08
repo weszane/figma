@@ -1,346 +1,675 @@
-import { throwTypeError } from "../figma_app/465776";
-import { getFeatureFlags } from "../905/601108";
-import { memoizeWeak } from "../figma_app/815945";
-import { containsDash } from "../figma_app/819288";
-import { parsePxNumber } from "../figma_app/783094";
-import { createLoadedState, getResourceDataOrFallback } from "../905/723791";
-import { isPointInRect, Point } from "../905/736624";
-import { ih } from "../905/201151";
-import { viewportToScreen } from "../figma_app/62612";
-import { BusyReadyState, NEW_COMMENT_ID, ThreadType } from "../905/380385";
-import { CommentPinElement, PostPinElement } from "../905/512783";
-import { NJv, QP5, oGx } from "../figma_app/27776";
-let $$m18 = 1;
-let $$g9 = {
+import { ih } from "../905/201151"
+import { BusyReadyState, NEW_COMMENT_ID, ThreadType } from "../905/380385"
+import { CommentPinElement, PostPinElement } from "../905/512783"
+import { getFeatureFlags } from "../905/601108"
+import { createLoadedState, getResourceDataOrFallback } from "../905/723791"
+import { isPointInRect, Point } from "../905/736624"
+import { NJv, oGx, QP5 } from "../figma_app/27776"
+import { viewportToScreen } from "../figma_app/62612"
+import { throwTypeError } from "../figma_app/465776"
+import { parsePxNumber } from "../figma_app/783094"
+import { memoizeWeak } from "../figma_app/815945"
+import { containsDash } from "../figma_app/819288"
+
+// Origin: /Users/allen/github/fig/src/figma_app/12220.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments, improved readability.
+// Assumed dependencies: imported modules as per original imports.
+
+// --- Type Definitions ---
+
+// Represents a rectangle with position and size
+export interface Rect {
+  top: number
+  right: number
+  bottom: number
+  left: number
+  width: number
+  height: number
+}
+
+// Represents a point in 2D space
+export interface XY {
+  x: number
+  y: number
+}
+
+// Represents the meta information for a message
+export interface MessageMetaUser {
+  user_id: string
+  user_annotated: {
+    id: string
+    handle: string
+    img_url: string
+  }
+}
+
+export interface MessageMetaOther {
+  t?: string
+  link?: string
+  styles?: any
+  children?: MessageMeta[]
+}
+
+export type MessageMeta = MessageMetaUser | MessageMetaOther
+
+// Represents an attachment
+export interface Attachment {
+  fileCommentId?: string
+  [key: string]: any
+}
+
+// Represents a user
+export interface User {
+  id: string
+  handle: string
+  imgUrl: string
+}
+
+// Represents a comment
+export interface Comment {
+  id: string
+  uuid?: string
+  key: string
+  parentId?: string | null
+  user: User
+  createdAt: Date
+  resolvedAt?: Date | null
+  deletedAt?: Date | null
+  messageMeta: MessageMeta[]
+  messageMetaStylized?: MessageMeta[]
+  attachments: { [key: string]: Attachment }
+  clientMeta?: ClientMeta | null
+  orderId?: number | null
+  commentPin?: any
+}
+
+// Represents client meta data for a comment
+export interface ClientMeta {
+  x: number
+  y: number
+  nodeId?: string
+  inFrame?: boolean
+  nodeOffset?: number
+  selectionBoxAnchor?: XY
+  stablePath?: string
+  pageId?: string
+}
+
+// Represents the loaded state for comments
+export interface LoadedState<T> {
+  status: "loaded" | string
+  data: {
+    file?: FileData
+  }
+}
+
+// Represents file data
+export interface FileData {
+  comments: Comment[]
+  commentAttachments: Attachment[]
+  currentUserCommentReadStatus?: CommentReadStatus
+  fileCanvasMentions?: CanvasMention[]
+  currentUserFileCanvasMentionReadStatus?: CanvasMentionReadStatus
+}
+
+// Represents comment read status
+export interface CommentReadStatus {
+  id: string
+  userId: string
+  fileKey: string
+  createdAt: Date
+  allReadAt: Date
+  readComments: { [id: string]: boolean }
+  unreadComments: { [id: string]: boolean }
+}
+
+// Represents canvas mention read status
+export interface CanvasMentionReadStatus {
+  unreadCanvasMentions: { [id: string]: boolean }
+  readCanvasMentions: { [id: string]: boolean }
+  allReadAt: Date
+  createdAt: Date
+}
+
+// Represents a canvas mention
+export interface CanvasMention {
+  id: string
+  fileKey: string
+  createdAt: Date
+  pageId: string
+  mentionedByUser: User
+  messageMeta: MessageMeta[]
+  nodeIdPath: string[]
+}
+
+// --- Constants ---
+
+export const DEFAULT_PIN_OFFSET: number = 1
+
+export const PIN_ELEMENT_OFFSET: XY = {
   x: 16,
-  y: -4
-};
-let $$f5 = {
+  y: -4,
+}
+
+export const DEFAULT_RECT: Rect = {
   top: 0,
   right: 0,
   bottom: 0,
   left: 0,
   width: 0,
-  height: 0
-};
-let $$E3 = {
+  height: 0,
+}
+
+export const DEFAULT_THREAD_STATE = {
   messageMeta: [],
   attachments: {},
   state: BusyReadyState.READY,
   anchorPosition: null,
   selectionBoxAnchor: null,
-  discardAttempt: 0
-};
-export function $$y13(e, t) {
-  return !t || isPointInRect(t, e);
+  discardAttempt: 0,
 }
-function b(e) {
-  return parsePxNumber(e ? NJv : QP5);
+
+// --- Utility Functions ---
+
+/**
+ * Checks if a point is inside a rectangle.
+ */
+export function isPointInSelectionRect(rect: Rect, point: XY | null): boolean {
+  return !point || isPointInRect(point, rect)
 }
-export function $$T15() {
-  return b(!0);
+
+/**
+ * Parses a pixel number based on a flag.
+ */
+function parsePinSize(useNJv: boolean): number {
+  return parsePxNumber(useNJv ? NJv : QP5)
 }
-export function $$I11() {
-  return parsePxNumber(oGx);
+
+/**
+ * Returns the pin size for NJv.
+ */
+export function getPinSizeNJv(): number {
+  return parsePinSize(true)
 }
-export function $$S4(e, t, r) {
-  let {
+
+/**
+ * Returns the pin size for oGx.
+ */
+export function getPinSizeOGx(): number {
+  return parsePxNumber(oGx)
+}
+
+/**
+ * Creates a new comment thread object.
+ */
+export function createNewCommentThread(
+  activeId: string,
+  threadState: typeof DEFAULT_THREAD_STATE,
+  pageId: string,
+) {
+  const {
     messageMeta,
     attachments,
     anchorPosition,
-    selectionBoxAnchor
-  } = t;
+    selectionBoxAnchor,
+  } = threadState
   return {
     id: NEW_COMMENT_ID,
     key: NEW_COMMENT_ID,
     uuid: NEW_COMMENT_ID,
-    anchored: !0,
+    anchored: true,
     canvasPosition: anchorPosition,
     selectionAnchorCanvasPosition: selectionBoxAnchor,
-    page: r,
-    isActive: e === NEW_COMMENT_ID,
+    page: pageId,
+    isActive: activeId === NEW_COMMENT_ID,
     comments: [],
     messageMeta,
     attachments: Object.values(attachments),
     pageName: null,
-    isCanvasMention: !1,
-    sidebarItemType: ThreadType.COMMENT_THREAD
-  };
-}
-export function $$v7(e) {
-  return e === NEW_COMMENT_ID;
-}
-let $$A12 = memoizeWeak(e => e.map(e => e.user ? {
-  user_id: e.user.id,
-  user_annotated: {
-    id: e.user.id,
-    handle: e.user.handle,
-    img_url: e.user.imgUrl
+    isCanvasMention: false,
+    sidebarItemType: ThreadType.COMMENT_THREAD,
   }
-} : {
-  t: null !== e.t ? e.t : void 0,
-  link: e.link ? e.link : void 0,
-  styles: e.styles ? e.styles : void 0,
-  children: e.children?.length ? $$A12(e.children) : void 0
-}));
-let x = memoizeWeak(e => ({
-  x: e.x,
-  y: e.y,
-  ...(e.nodeId ? {
-    node_id: e.nodeId
-  } : {}),
-  ...(e.inFrame ? {
-    in_frame: e.inFrame
-  } : {}),
-  ...(e.nodeOffset ? {
-    node_offset: e.nodeOffset
-  } : {}),
-  ...(e.selectionBoxAnchor ? {
-    selection_box_anchor: e.selectionBoxAnchor
-  } : {}),
-  ...(e.stablePath ? {
-    stable_path: e.stablePath
-  } : {})
-}));
-let $$N0 = memoizeWeak(e => ({
-  id: e.id,
-  handle: e.handle,
-  img_url: e.imgUrl
-}));
-let C = (e, t, r) => {
-  if ("publicUuid" in e && e.publicUuid) return !1;
-  if (t.unreadComments[e.id]) return !0;
-  if (t.readComments[e.id]) return !1;
-  let n = t.allReadAt || t.createdAt;
-  return !(e.createdAt.getTime() <= n.getTime()) && e.user.id !== r;
-};
-export function $$w2(e, t, r, n, a, o, l) {
-  let d = C(r, n, e);
-  let c = containsDash(r.id);
-  let u = r.messageMeta;
-  r.messageMetaStylized?.length && (u = r.messageMetaStylized);
-  let p = getFeatureFlags().comments_faster_saving_ux ? !!r.uuid && a.has(r.uuid) : void 0;
-  let _ = getFeatureFlags().comments_faster_saving_ux_v2 ? c || !!t.uuid && t.uuid in o : void 0;
-  return {
-    id: r.id,
-    uuid: r.uuid,
-    key: t.key,
-    parent_id: r.parentId,
-    user_id: r.user.id,
-    created_at: r.createdAt.toISOString(),
-    resolved_at: t.resolvedAt ? t.resolvedAt.toISOString() : null,
-    deleted_at: null,
-    message_meta: $$A12(u),
-    attachments: l,
-    client_meta: r.clientMeta ? x(r.clientMeta) : null,
-    order_id: null !== r.orderId ? r.orderId.toString() : null,
-    isUnread: d,
-    isPendingFromSinatra: c,
-    isSaving: p,
-    isPendingFromLg: _,
-    user: $$N0(r.user)
-  };
 }
-let O = new Date();
-let $$R8 = {
+
+/**
+ * Checks if the given id is the new comment id.
+ */
+export function isNewCommentId(id: string): boolean {
+  return id === NEW_COMMENT_ID
+}
+
+/**
+ * Memoized function to stylize message meta.
+ */
+export const stylizeMessageMeta = memoizeWeak((meta: MessageMeta[]): any[] =>
+  meta.map(item =>
+    "user" in item && item.user
+      ? {
+          user_id: item.user.id,
+          user_annotated: {
+            id: item.user.id,
+            handle: item.user.handle,
+            img_url: item.user.imgUrl,
+          },
+        }
+      : {
+          t: (item as MessageMetaOther).t ?? undefined,
+          link: (item as MessageMetaOther).link ?? undefined,
+          styles: (item as MessageMetaOther).styles ?? undefined,
+          children:
+            (item as MessageMetaOther).children?.length
+              ? stylizeMessageMeta((item as MessageMetaOther).children!)
+              : undefined,
+        },
+  ),
+)
+
+/**
+ * Memoized function to serialize client meta.
+ */
+export const serializeClientMeta = memoizeWeak((meta: ClientMeta) => ({
+  x: meta.x,
+  y: meta.y,
+  ...(meta.nodeId ? { node_id: meta.nodeId } : {}),
+  ...(meta.inFrame ? { in_frame: meta.inFrame } : {}),
+  ...(meta.nodeOffset ? { node_offset: meta.nodeOffset } : {}),
+  ...(meta.selectionBoxAnchor ? { selection_box_anchor: meta.selectionBoxAnchor } : {}),
+  ...(meta.stablePath ? { stable_path: meta.stablePath } : {}),
+}))
+
+/**
+ * Memoized function to serialize user.
+ */
+export const serializeUser = memoizeWeak((user: User) => ({
+  id: user.id,
+  handle: user.handle,
+  img_url: user.imgUrl,
+}))
+
+/**
+ * Determines if a comment is unread for the current user.
+ */
+function isCommentUnread(
+  comment: Comment,
+  readStatus: CommentReadStatus,
+  currentUserId: string,
+): boolean {
+  if ("publicUuid" in comment && (comment as any).publicUuid)
+    return false
+  if (readStatus.unreadComments[comment.id])
+    return true
+  if (readStatus.readComments[comment.id])
+    return false
+  const readAt = readStatus.allReadAt || readStatus.createdAt
+  return !(comment.createdAt.getTime() <= readAt.getTime()) && comment.user.id !== currentUserId
+}
+
+/**
+ * Serializes a comment for API or UI consumption.
+ */
+export function serializeComment(
+  currentUserId: string,
+  parentComment: Comment,
+  comment: Comment,
+  readStatus: CommentReadStatus,
+  savingSet: Set<string>,
+  pendingMap: { [uuid: string]: boolean },
+  attachments: Attachment[],
+) {
+  const isUnread = isCommentUnread(comment, readStatus, currentUserId)
+  const isPendingFromSinatra = containsDash(comment.id)
+  let meta = comment.messageMeta
+  if (comment.messageMetaStylized?.length)
+    meta = comment.messageMetaStylized
+  const isSaving
+    = getFeatureFlags().comments_faster_saving_ux && !!comment.uuid && savingSet.has(comment.uuid)
+  const isPendingFromLg
+    = getFeatureFlags().comments_faster_saving_ux_v2
+      && (isPendingFromSinatra || (!!parentComment.uuid && parentComment.uuid in pendingMap))
+  return {
+    id: comment.id,
+    uuid: comment.uuid,
+    key: parentComment.key,
+    parent_id: comment.parentId,
+    user_id: comment.user.id,
+    created_at: comment.createdAt.toISOString(),
+    resolved_at: parentComment.resolvedAt ? parentComment.resolvedAt.toISOString() : null,
+    deleted_at: null,
+    message_meta: stylizeMessageMeta(meta),
+    attachments,
+    client_meta: comment.clientMeta ? serializeClientMeta(comment.clientMeta) : null,
+    order_id: comment.orderId !== null ? String(comment.orderId) : null,
+    isUnread,
+    isPendingFromSinatra,
+    isSaving,
+    isPendingFromLg,
+    user: serializeUser(comment.user),
+  }
+}
+
+const DEFAULT_COMMENT_READ_STATUS: CommentReadStatus = {
   id: "",
   userId: "",
   fileKey: "",
-  createdAt: O,
-  allReadAt: O,
+  createdAt: new Date(),
+  allReadAt: new Date(),
   readComments: {},
-  unreadComments: {}
-};
-export function $$L14(e, t, r, n, a, o, d, c) {
-  if ("loaded" !== t.status) return t;
-  let u = t.data.file;
-  if (!u) return createLoadedState([]);
-  let _ = u?.comments.filter(e => !e.parentId);
-  let h = u.comments.filter(e => e.parentId).reduce((e, t) => {
-    let r = e[t.parentId] || [];
-    r.push(t);
-    e[t.parentId] = r;
-    return e;
-  }, {});
-  let m = u.commentAttachments.reduce((e, t) => {
-    if (!t.fileCommentId) return e;
-    let r = e[t.fileCommentId] || [];
-    r.push(t);
-    e[t.fileCommentId] = r;
-    return e;
-  }, {});
-  let g = a(_.filter(e => e.clientMeta?.nodeId).map(e => e.clientMeta.nodeId));
-  let f = _.map(t => {
-    let a = t.clientMeta && t.clientMeta.nodeId;
-    let l = n[t.id] || t.uuid && n[t.uuid];
-    let _ = null;
-    if (l && t.clientMeta?.selectionBoxAnchor) {
-      let e = t.clientMeta.x - t.clientMeta.selectionBoxAnchor.x;
-      let r = t.clientMeta.y - t.clientMeta.selectionBoxAnchor.y;
-      _ = {
-        x: l.x - e,
-        y: l.y - r
-      };
+  unreadComments: {},
+}
+
+/**
+ * Loads and structures comment threads from file data.
+ */
+export function loadCommentThreads(
+  currentUserId: string,
+  loadedState: LoadedState<any>,
+  activeThreadId: string,
+  nodeIdToCanvasPosition: (nodeIds: string[]) => { [nodeId: string]: XY },
+  pageNames: { [pageId: string]: string },
+  savingSet: Set<string>,
+  pendingMap: { [uuid: string]: boolean },
+) {
+  if (loadedState.status !== "loaded")
+    return loadedState
+  const file = loadedState.data.file
+  if (!file)
+    return createLoadedState([])
+
+  // Top-level comments (no parent)
+  const topLevelComments = file.comments.filter(c => !c.parentId)
+
+  // Group replies by parentId
+  const repliesByParent: { [parentId: string]: Comment[] } = file.comments
+    .filter(c => !!c.parentId)
+    .reduce((acc, reply) => {
+      const arr = acc[reply.parentId!] || []
+      arr.push(reply)
+      acc[reply.parentId!] = arr
+      return acc
+    }, {} as { [parentId: string]: Comment[] })
+
+  // Group attachments by fileCommentId
+  const attachmentsByComment: { [commentId: string]: Attachment[] } = file.commentAttachments.reduce(
+    (acc, att) => {
+      if (!att.fileCommentId)
+        return acc
+      const arr = acc[att.fileCommentId] || []
+      arr.push(att)
+      acc[att.fileCommentId] = arr
+      return acc
+    },
+    {} as { [commentId: string]: Attachment[] },
+  )
+
+  // Map nodeId to canvas position
+  const nodeIdToCanvas = nodeIdToCanvasPosition(
+    topLevelComments.filter(c => c.clientMeta?.nodeId).map(c => c.clientMeta!.nodeId!),
+  )
+
+  // Build thread objects
+  const threads = topLevelComments.map((topComment) => {
+    const nodeId = topComment.clientMeta?.nodeId
+    const canvasPosition = nodeId ? nodeIdToCanvas[nodeId] || topComment.clientMeta?.pageId || null : topComment.clientMeta?.pageId || "0:1"
+    const replies = repliesByParent[topComment.id] || []
+    const allComments = [topComment, ...replies.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())]
+    const readStatus = file.currentUserCommentReadStatus || DEFAULT_COMMENT_READ_STATUS
+
+    // Calculate selection anchor canvas position if available
+    let selectionAnchorCanvasPosition: XY | null = null
+    const canvasPos = nodeId ? nodeIdToCanvas[nodeId] : undefined
+    if (canvasPos && topComment.clientMeta?.selectionBoxAnchor) {
+      const dx = topComment.clientMeta.x - topComment.clientMeta.selectionBoxAnchor.x
+      const dy = topComment.clientMeta.y - topComment.clientMeta.selectionBoxAnchor.y
+      selectionAnchorCanvasPosition = {
+        x: canvasPos.x - dx,
+        y: canvasPos.y - dy,
+      }
     }
-    let f = a ? g[a] || t.clientMeta?.pageId || null : t.clientMeta?.pageId || "0:1";
-    let E = h[t.id] || [];
-    let y = [t, ...E.sort((e, t) => e.createdAt.getTime() - t.createdAt.getTime())];
-    let b = u.currentUserCommentReadStatus || $$R8;
-    let T = y.map(r => {
-      let n = m[r.id] ?? (r.uuid && m[r.uuid]);
-      return $$w2(e, t, r, b, d, c, n);
-    });
-    let I = containsDash(t.id);
-    let S = getFeatureFlags().comments_faster_saving_ux ? !!t.uuid && d.has(t.uuid) : void 0;
-    let v = getFeatureFlags().comments_faster_saving_ux_v2 ? I || !!t.uuid && t.uuid in c : void 0;
+
+    // Page id and name
+    const pageId = canvasPosition
+    const pageName = pageId && pageNames[pageId] || null
+
+    // Serialize all comments in thread
+    const serializedComments = allComments.map((comment) => {
+      const attachments
+        = attachmentsByComment[comment.id] ?? (comment.uuid && attachmentsByComment[comment.uuid]) ?? []
+      return serializeComment(
+        currentUserId,
+        topComment,
+        comment,
+        readStatus,
+        savingSet,
+        pendingMap,
+        attachments,
+      )
+    })
+
+    const isPendingFromSinatra = containsDash(topComment.id)
+    const isSaving
+      = getFeatureFlags().comments_faster_saving_ux
+        && !!topComment.uuid
+        && savingSet.has(topComment.uuid)
+    const isPendingFromLg
+      = getFeatureFlags().comments_faster_saving_ux_v2
+        && (isPendingFromSinatra || (!!topComment.uuid && topComment.uuid in pendingMap))
+
     return {
-      id: t.id,
-      uuid: t.uuid || void 0,
-      key: t.key,
-      anchored: !!l,
-      canvasPosition: l,
-      selectionAnchorCanvasPosition: _,
-      page: f,
-      pageName: f && o[f] || null,
-      isActive: r === t.id,
-      isPendingFromSinatra: I,
-      isSaving: S,
-      isPendingFromLg: v,
-      comments: T,
+      id: topComment.id,
+      uuid: topComment.uuid ?? undefined,
+      key: topComment.key,
+      anchored: !!canvasPos,
+      canvasPosition: canvasPos,
+      selectionAnchorCanvasPosition,
+      page: pageId,
+      pageName,
+      isActive: activeThreadId === topComment.id,
+      isPendingFromSinatra,
+      isSaving,
+      isPendingFromLg,
+      comments: serializedComments,
       messageMeta: [],
       attachments: [],
-      isCanvasMention: !1,
+      isCanvasMention: false,
       sidebarItemType: ThreadType.COMMENT_THREAD,
-      commentPin: t.commentPin
-    };
-  });
-  return createLoadedState(f);
+      commentPin: topComment.commentPin,
+    }
+  })
+
+  return createLoadedState(threads)
 }
-export function $$P17(e, t, r, i) {
-  let {
-    canvasPosition
-  } = t;
-  let s = canvasPosition && e ? viewportToScreen(e, canvasPosition) : null;
-  let o = function (e, t, r, i, a, s) {
-    if (!e || !t) return null;
-    let o = function (e) {
-      switch (e) {
+
+/**
+ * Calculates thread pin position and offset for rendering.
+ */
+export function calculateThreadPinPosition(
+  viewport: Rect | null,
+  thread: any,
+  threadData: any,
+  sidebarType: ThreadType,
+  pinSizeFlag: boolean,
+  pageId: string,
+  offset?: number,
+) {
+  const { canvasPosition } = thread
+  const screenPos = canvasPosition && viewport ? viewportToScreen(viewport, canvasPosition) : null
+
+  // Calculate offset for thread pin
+  const threadOffset = (() => {
+    if (!viewport || !screenPos)
+      return null
+    // Determine pin element type
+    const pinElement = (() => {
+      switch (sidebarType) {
         case ThreadType.COMMENT_THREAD:
         case ThreadType.LITMUS_COMMENT_THREAD:
-          return CommentPinElement;
+          return CommentPinElement
         case ThreadType.FEED_POST:
-          return PostPinElement;
+          return PostPinElement
         default:
-          throwTypeError(e);
+          throwTypeError(sidebarType)
       }
-    }(i).getPinSize(r).width;
-    let l = o + $$g9.x + b(a) + 25;
-    return e.width - t.x - (s ?? 0) < l ? {
-      x: -1 * b(a) - $$g9.x,
-      y: -55
-    } : {
-      x: o + $$g9.x,
-      y: -55
-    };
-  }(e, s, new Set(t.comments.map(e => e.user_id)).size, t.sidebarItemType, r, i);
-  let l = s && o ? Point.add(s, o) : null;
+    })()
+    const pinWidth = pinElement.getPinSize(threadData).width
+    const requiredSpace = pinWidth + PIN_ELEMENT_OFFSET.x + parsePinSize(pinSizeFlag) + 25
+    const availableSpace = viewport.width - screenPos.x - (offset ?? 0)
+    if (availableSpace < requiredSpace) {
+      return {
+        x: -1 * parsePinSize(pinSizeFlag) - PIN_ELEMENT_OFFSET.x,
+        y: -55,
+      }
+    }
+    else {
+      return {
+        x: pinWidth + PIN_ELEMENT_OFFSET.x,
+        y: -55,
+      }
+    }
+  })()
+
+  const threadPosition = screenPos && threadOffset ? Point.add(screenPos, threadOffset) : null
+
   return {
-    ...t,
-    anchorPosition: s,
-    threadPosition: l,
-    threadOffset: o
-  };
+    ...thread,
+    anchorPosition: screenPos,
+    threadPosition,
+    threadOffset,
+  }
 }
-let D = (e, t, r) => {
-  let n = e.id;
-  if (t.unreadCanvasMentions[n]) return !0;
-  if (t.readCanvasMentions[n]) return !1;
-  let i = t.allReadAt || t.createdAt;
-  return !(e.createdAt.getTime() <= i.getTime()) && r !== e.id;
-};
-export function $$k10(e, t, r) {
-  if ("loaded" !== t.status) return t;
-  let n = t.data.file;
-  if (!n) return createLoadedState([]);
-  let i = n.fileCanvasMentions;
-  let a = n.currentUserFileCanvasMentionReadStatus || ih;
-  let s = i.map(t => function (e, t, r, n) {
-    let i = `canvas_mention_${t.id.replace(/-/g, "_")}`;
-    let a = t.id;
-    let s = D(t, r, e);
+
+/**
+ * Determines if a canvas mention is unread for the current user.
+ */
+function isCanvasMentionUnread(
+  mention: CanvasMention,
+  readStatus: CanvasMentionReadStatus,
+  currentUserId: string,
+): boolean {
+  const id = mention.id
+  if (readStatus.unreadCanvasMentions[id])
+    return true
+  if (readStatus.readCanvasMentions[id])
+    return false
+  const readAt = readStatus.allReadAt || readStatus.createdAt
+  return !(mention.createdAt.getTime() <= readAt.getTime()) && currentUserId !== id
+}
+
+/**
+ * Loads canvas mentions from file data.
+ */
+export function loadCanvasMentions(
+  currentUserId: string,
+  loadedState: LoadedState<any>,
+  activeMentionId: string,
+) {
+  if (loadedState.status !== "loaded")
+    return loadedState
+  const file = loadedState.data.file
+  if (!file)
+    return createLoadedState([])
+
+  const mentions = file.fileCanvasMentions || []
+  const readStatus = file.currentUserFileCanvasMentionReadStatus || ih
+
+  const mentionThreads = mentions.map((mention) => {
+    const threadId = `canvas_mention_${mention.id.replace(/-/g, "_")}`
+    const isUnread = isCanvasMentionUnread(mention, readStatus, currentUserId)
     return {
-      id: i,
-      uuid: a,
-      key: t.fileKey,
-      anchored: !1,
+      id: threadId,
+      uuid: mention.id,
+      key: mention.fileKey,
+      anchored: false,
       canvasPosition: null,
       selectionAnchorCanvasPosition: null,
-      page: getResourceDataOrFallback(t.pageId, null),
+      page: getResourceDataOrFallback(mention.pageId, null),
       pageName: null,
-      isActive: n === i,
-      isPendingFromSinatra: void 0,
-      comments: [{
-        id: i,
-        uuid: a,
-        key: a,
-        parent_id: null,
-        user_id: t.fileKey,
-        created_at: t.createdAt.toISOString(),
-        resolved_at: null,
-        deleted_at: null,
-        message_meta: $$A12(t.messageMeta),
-        client_meta: null,
-        order_id: null,
-        isUnread: s,
-        isPendingFromSinatra: !1,
-        user: $$N0(t.mentionedByUser)
-      }],
-      messageMeta: $$A12(t.messageMeta),
+      isActive: activeMentionId === threadId,
+      isPendingFromSinatra: undefined,
+      comments: [
+        {
+          id: threadId,
+          uuid: mention.id,
+          key: mention.id,
+          parent_id: null,
+          user_id: mention.fileKey,
+          created_at: mention.createdAt.toISOString(),
+          resolved_at: null,
+          deleted_at: null,
+          message_meta: stylizeMessageMeta(mention.messageMeta),
+          client_meta: null,
+          order_id: null,
+          isUnread,
+          isPendingFromSinatra: false,
+          user: serializeUser(mention.mentionedByUser),
+        },
+      ],
+      messageMeta: stylizeMessageMeta(mention.messageMeta),
       attachments: [],
-      isCanvasMention: !0,
-      replyCount: void 0,
+      isCanvasMention: true,
+      replyCount: undefined,
       sidebarItemType: ThreadType.COMMENT_THREAD,
-      nodeId: t.nodeIdPath[0]
-    };
-  }(e, t, a, r));
-  return createLoadedState(s);
+      nodeId: mention.nodeIdPath[0],
+    }
+  })
+
+  return createLoadedState(mentionThreads)
 }
-export function $$M16() {
+
+/**
+ * Returns the default reply state.
+ */
+export function getDefaultReplyState() {
   return {
     reply: {
       messageMeta: [],
-      attachments: {}
+      attachments: {},
     },
-    state: BusyReadyState.READY
-  };
-}
-export function $$F1(e) {
-  let t = [];
-  for (let r = 0; r < e.message_meta.length; r++) {
-    let n = e.message_meta[r];
-    n.hasOwnProperty("user_id") && t.push(n.user_id);
+    state: BusyReadyState.READY,
   }
-  return t;
 }
-export function $$j6(e) {
-  return e.some(e => null != e.commentPin && e.comments.some(e => e.isUnread));
+
+/**
+ * Extracts user ids from message meta.
+ */
+export function extractUserIdsFromMessageMeta(comment: any): string[] {
+  const userIds: string[] = []
+  for (let i = 0; i < comment.message_meta.length; i++) {
+    const meta = comment.message_meta[i]
+    if (meta.hasOwnProperty("user_id"))
+      userIds.push(meta.user_id)
+  }
+  return userIds
 }
-export const CR = $$N0;
-export const F$ = $$F1;
-export const G9 = $$w2;
-export const GV = $$E3;
-export const JG = $$S4;
-export const PK = $$f5;
-export const Zz = $$j6;
-export const eR = $$v7;
-export const gj = $$R8;
-export const hx = $$g9;
-export const k0 = $$k10;
-export const mz = $$I11;
-export const o8 = $$A12;
-export const rN = $$y13;
-export const ro = $$L14;
-export const t$ = $$T15;
-export const us = $$M16;
-export const vl = $$P17;
-export const wB = $$m18;
+
+/**
+ * Checks if any comment thread contains unread comments with pins.
+ */
+export function hasUnreadPinnedComments(threads: any[]): boolean {
+  return threads.some(
+    thread =>
+      thread.commentPin != null
+      && thread.comments.some((comment: any) => comment.isUnread),
+  )
+}
+
+// --- Exported Aliases (for compatibility with original code) ---
+
+export const CR = serializeUser
+export const F$ = extractUserIdsFromMessageMeta
+export const G9 = serializeComment
+export const GV = DEFAULT_THREAD_STATE
+export const JG = createNewCommentThread
+export const PK = DEFAULT_RECT
+export const Zz = hasUnreadPinnedComments
+export const eR = isNewCommentId
+export const gj = DEFAULT_COMMENT_READ_STATUS
+export const hx = PIN_ELEMENT_OFFSET
+export const k0 = loadCanvasMentions
+export const mz = getPinSizeOGx
+export const o8 = stylizeMessageMeta
+export const rN = isPointInSelectionRect
+export const ro = loadCommentThreads
+export const t$ = getPinSizeNJv
+export const us = getDefaultReplyState
+export const vl = calculateThreadPinPosition
+export const wB = DEFAULT_PIN_OFFSET

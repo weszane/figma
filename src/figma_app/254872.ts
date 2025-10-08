@@ -12,7 +12,7 @@ import { aS, Im } from "../905/608145";
 import { c4 } from "../figma_app/805925";
 import { useDropdownState } from "../905/848862";
 import { hasLocalFileId } from "../figma_app/155287";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { w0 } from "../figma_app/189990";
 import { ms } from "../figma_app/38430";
 let b = "EXTENSION_SUBMENU_DROPDOWN";
@@ -30,7 +30,7 @@ export function $$I2({
   let a = c4();
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let d = w0();
   if (!i || !extension || !extension.manifest || !extension.manifest.menu) return null;
   let c = createMenuItems(extension.manifest.menu, extension).map(e => aS(e, e => () => {
@@ -58,7 +58,7 @@ export function $$v0({
 }) {
   let n = useDispatch();
   return useCallback(i => {
-    if (e) n(hideDropdownAction()); else if (i) {
+    if (e) n(hideDropdownAction());else if (i) {
       let e = i.getBoundingClientRect();
       n(showDropdownThunk({
         type: b,

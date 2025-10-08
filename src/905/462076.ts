@@ -8,7 +8,7 @@ import { openUrlInContext } from "../figma_app/976345";
 import { copyViewLinkThunk } from "../figma_app/11182";
 import { fetchFileByKeyOptimistic } from "../figma_app/78808";
 import { y as _$$y } from "../figma_app/705249";
-import { o8, CR } from "../figma_app/12220";
+import { stylizeMessageMeta, serializeUser } from "../figma_app/12220";
 import { N } from "../figma_app/261650";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { buildFileUrl } from "../905/612685";
@@ -154,12 +154,12 @@ export function $$O5(e, t, i, r) {
         created_at: e.createdAt.toISOString(),
         resolved_at: null,
         deleted_at: null,
-        message_meta: o8(e.messageMeta),
+        message_meta: stylizeMessageMeta(e.messageMeta),
         client_meta: null,
         order_id: null,
         isUnread: !1,
         isPendingFromSinatra: !1,
-        user: CR(e.user),
+        user: serializeUser(e.user),
         feed_id: e.id,
         attachments: e.attachments
       }));
@@ -178,7 +178,7 @@ export function $$O5(e, t, i, r) {
         x: d.x,
         y: d.y + d.height
       });
-      let m = CR(e.creator);
+      let m = serializeUser(e.creator);
       let f = iw(e.publicUuid);
       let _ = e.content.map(e => JSON.parse(e));
       let {
@@ -207,7 +207,7 @@ export function $$O5(e, t, i, r) {
           created_at: e.createdAt.toISOString(),
           resolved_at: null,
           deleted_at: null,
-          message_meta: o8(e.descriptionMeta),
+          message_meta: stylizeMessageMeta(e.descriptionMeta),
           client_meta: null,
           order_id: null,
           isUnread: !1,

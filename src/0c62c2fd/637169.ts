@@ -10,17 +10,17 @@ import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { useRfdSignalsUpsellExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { fullscreenAlias } from "../905/37051";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, computeFullscreenViewportForNode } from "../figma_app/62612";
 import { N as _$$N } from "../figma_app/268271";
 import { ArrowPosition } from "../905/858282";
 import { NJ } from "../figma_app/419216";
 import { GV } from "../figma_app/532170";
-import { ZNl } from "../figma_app/6204";
+import { ReadyForDevPageNameChangeUpsell } from "../figma_app/6204";
 import { hj, d1, Sp } from "../figma_app/888478";
 import { R3, b as _$$b, Xq, O6, zu, JP, Rg, j as _$$j } from "../0c62c2fd/722541";
 if (443 == require.j) {}
@@ -109,7 +109,7 @@ export function $$$$A1() {
   let b = Xr(d1);
   let A = useAtomWithSubscription(Sp);
   let O = Xr(Sp);
-  let F = Z("dev-handoff-rfd-signals-page-upsell");
+  let F = useNavigateToViewport("dev-handoff-rfd-signals-page-upsell");
   let P = useRfdSignalsUpsellExperiment();
   let {
     show,
@@ -117,7 +117,7 @@ export function $$$$A1() {
     uniqueId,
     isShowing
   } = _$$e({
-    overlay: ZNl,
+    overlay: ReadyForDevPageNameChangeUpsell,
     priority: _$$N.HIGH_PRIORITY_MODAL,
     experiment: {
       check: P,
@@ -137,7 +137,7 @@ export function $$$$A1() {
     b({
       fn: complete
     });
-  }, [complete, b]), _$$E(uniqueId, ["page_name_changed_with_rfd_indicator"], e => {
+  }, [complete, b]), useEventForwarder(uniqueId, ["page_name_changed_with_rfd_indicator"], e => {
     if (!e.properties.pageId) {
       R("no_page_id");
       return;

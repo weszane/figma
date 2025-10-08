@@ -22,7 +22,7 @@ import { KindEnum } from "../905/129884";
 import { WM } from "../905/838765";
 import { _ as _$$_ } from "../469e6e40/273550";
 import { lX } from "../figma_app/588397";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { I as _$$I } from "../9410/40694";
 import { Yx } from "../9410/335206";
 import { W as _$$W } from "../3276/776313";
@@ -131,7 +131,7 @@ export function $$Z0({
         mini: !0,
         hideName: !0,
         user: e.item,
-        triggeredFrom: Vq(_$$p.RECENTS_COLLAGE)
+        triggeredFrom: Vq(TabCategory.RECENTS_COLLAGE)
       });
     case HD.WHITEBOARD_TOOL:
       return jsx(G, {
@@ -177,7 +177,7 @@ function K({
     onInsertableResourcePointerDown
   } = _$$c({
     clickToInsert_DEPRECATED: !1,
-    triggeredFrom: Vq(_$$p.RECENTS_COLLAGE),
+    triggeredFrom: Vq(TabCategory.RECENTS_COLLAGE),
     resource: e
   });
   let s = q(n, V);
@@ -294,7 +294,7 @@ function G({
     resource: e,
     insertAction: t,
     clickToInsert_DEPRECATED: !1,
-    triggeredFrom: Vq(_$$p.RECENTS_COLLAGE),
+    triggeredFrom: Vq(TabCategory.RECENTS_COLLAGE),
     afterSuccessfulInsert: l
   });
   let p = AE(e);

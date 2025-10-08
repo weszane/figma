@@ -12,14 +12,14 @@ import { trackFileEventWithUser } from "../figma_app/901889";
 import { KeyCodes, isCommandModifier } from "../905/63728";
 import { yZ } from "../905/407352";
 import { isWhitespace } from "../figma_app/930338";
-import { Fk } from "../905/125333";
+import { counterAtom } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { NY } from "../figma_app/712525";
 import { getCurrentFileType } from "../figma_app/976749";
 import { r as _$$r } from "../figma_app/860474";
 import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { updateHoveredNode } from "../figma_app/741237";
 import { L3 } from "../figma_app/701001";
 import { useAppModelProperty } from "../figma_app/722362";
@@ -29,7 +29,7 @@ import { H1 as _$$H } from "../figma_app/451700";
 import { kM } from "../figma_app/421886";
 import { iW } from "../figma_app/34798";
 import { useIsFullscreenSitesView } from "../905/561485";
-import { Nl } from "../figma_app/115923";
+import { genericAtomFamily1 } from "../figma_app/115923";
 import { H as _$$H2 } from "../9410/748457";
 import { kH } from "../figma_app/463678";
 export let $$P2 = createContext(!1);
@@ -92,7 +92,7 @@ export function $$U1() {
   } = useSelector(e => e.canvasSearch);
   let {
     total
-  } = useAtomWithSubscription(Fk);
+  } = useAtomWithSubscription(counterAtom);
   return {
     focusedByButtons: e,
     hidden: t,
@@ -103,7 +103,7 @@ export function $$U1() {
   };
 }
 export function $$G5() {
-  let e = Z("canvas_search_navigate");
+  let e = useNavigateToViewport("canvas_search_navigate");
   let t = useSelector(e => e.canvasSearch.scope);
   return useCallback((i, r) => {
     e(CanvasSearchHelpers.setActiveResultAndGetViewportSettings(i, r), {
@@ -114,7 +114,7 @@ export function $$G5() {
   }, [e, t]);
 }
 export function $$K7() {
-  let e = Z("canvas_search_navigate");
+  let e = useNavigateToViewport("canvas_search_navigate");
   let {
     query,
     scope,
@@ -184,7 +184,7 @@ export function $$K7() {
       }
     });
   }, [e]);
-  let V = Xr(Nl);
+  let V = Xr(genericAtomFamily1);
   let W = useIsFullscreenSitesView();
   return {
     query,
@@ -300,7 +300,7 @@ function H() {
 export function $$z9() {
   let e = L3();
   let t = CanvasSearchHelpers.hasDirtyPrimaryInstances();
-  let i = useAtomWithSubscription(Fk);
+  let i = useAtomWithSubscription(counterAtom);
   let r = useRef([]);
   let a = t && r.current.length;
   let o = useMemo(() => {

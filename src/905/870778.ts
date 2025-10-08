@@ -11,7 +11,7 @@ import { g as _$$g } from "../905/125190";
 import { r as _$$r } from "../905/857502";
 import { customHistory } from "../905/612521";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Tg, CommunityRoute, ResourceType } from "../figma_app/354658";
+import { HubFileRoute, CommunityRoute, ResourceType } from "../figma_app/354658";
 import { copyLinkThunk } from "../figma_app/11182";
 import { hasPublishScope, hasClientMeta, isWidgetOrPlugin } from "../figma_app/45218";
 import { slideOrCooperNewFileUrl } from "../905/548668";
@@ -135,7 +135,7 @@ export function $$x1({
   });
 }
 export function $$S4(e) {
-  return hasPublishScope(e) ? "" : hasClientMeta(e) ? new Tg({
+  return hasPublishScope(e) ? "" : hasClientMeta(e) ? new HubFileRoute({
     resourceId: e.id
   }).href : isWidgetOrPlugin(e) ? new CommunityRoute({
     resourceId: e.id,

@@ -17,7 +17,7 @@ import { addBoundsChangeListener, removeBoundsChangeListener, watchBoundsForNode
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { s as _$$s } from "../905/518538";
 import { getCurrentPage } from "../figma_app/202626";
-import { ro, k0 } from "../figma_app/12220";
+import { loadCommentThreads, loadCanvasMentions } from "../figma_app/12220";
 import { E as _$$E } from "../905/884338";
 import { useIsFullscreenReady } from "../figma_app/115586";
 import { EE, lB } from "../figma_app/731583";
@@ -228,7 +228,7 @@ export function $$P4(e, t, r, a, s, o) {
     }
   }, [t]);
   let u = useMemo(() => o.filter(e => !!("nodeId" in e ? e.nodeId : e.id)).reduce((e, t) => (e["nodeId" in t ? t.nodeId : t.id] = t.name, e), {}), [o]);
-  let p = useMemo(() => ro(e, t, r, l.anchorPositionById, s, u, d, c), [e, t, r, l.anchorPositionById, s, u, d, c]);
+  let p = useMemo(() => loadCommentThreads(e, t, r, l.anchorPositionById, s, u, d, c), [e, t, r, l.anchorPositionById, s, u, d, c]);
   _$$E("loaded" === p.status && p.data || []);
   return p;
 }
@@ -249,7 +249,7 @@ export function $$k6(e, t, r) {
       });
     }
   }, [t.errors]);
-  return useMemo(() => k0(e, t, r), [r, t, e]);
+  return useMemo(() => loadCanvasMentions(e, t, r), [r, t, e]);
 }
 export function $$M2(e) {
   let t;

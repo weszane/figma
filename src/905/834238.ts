@@ -8,7 +8,7 @@ import { BigTextInputForwardRef } from "../figma_app/637027";
 import { ConfirmationModal } from "../905/441305";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { yJ } from "../figma_app/24841";
+import { putUserAction } from "../figma_app/24841";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { useDropdownState } from "../905/848862";
 import { TrackingKeyEnum } from "../905/696396";
@@ -38,7 +38,7 @@ function I(e) {
     let e = x;
     let n = "change_job_modal_selection";
     v(x) && C && (e = C, n = "change_job_modal_custom");
-    t(yJ({
+    t(putUserAction({
       user: {
         id: i.id,
         job_title: e,

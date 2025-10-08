@@ -23,7 +23,7 @@ import { getFileTypePx } from "../905/149328";
 import { WN } from "../figma_app/638601";
 import { pz } from "../figma_app/60079";
 import { ButtonBasePrimary } from "../figma_app/637027";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { W as _$$W } from "../3276/514864";
@@ -47,7 +47,7 @@ import { YL, gW } from "../figma_app/122682";
 import { KindEnum } from "../905/129884";
 import { x as _$$x } from "../905/106997";
 import { Q as _$$Q } from "../3276/336897";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { rJv } from "../figma_app/27776";
 import { isIpadDevice } from "../figma_app/778880";
 import { showModalHandler } from "../905/156213";
@@ -359,7 +359,7 @@ function eI({
         children: renderI18nText("fullscreen.toolbar.multiplayer.no_user_found")
       })]
     }), ed && jsxs(Fragment, {
-      children: [eu, jsxs(_$$P, {
+      children: [eu, jsxs(RecordingScrollContainer, {
         width: eT - 16,
         maxHeight: L,
         scrollBarAlways: !0,
@@ -396,7 +396,7 @@ function eI({
       })]
     })]
   });
-  return jsx(Cf, {
+  return jsx(ConnectedPointingDropdown, {
     arrowOffsetFromRectLeft: t,
     className: g()(qN, QD),
     contentRef: _,
@@ -573,7 +573,7 @@ function ek({
         children: renderI18nText("fullscreen.toolbar.multiplayer.no_user_found")
       })]
     }), em && jsxs(Fragment, {
-      children: [ex, jsxs(_$$P, {
+      children: [ex, jsxs(RecordingScrollContainer, {
         width: eT - 16,
         maxHeight: B,
         scrollBarAlways: !0,

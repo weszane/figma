@@ -9,7 +9,7 @@ import { reconcileJSXElement } from "../figma_app/964367";
 import { logError } from "../905/714362";
 import { SV } from "../9410/483857";
 import { _E } from "../905/788069";
-import { D as _$$D } from "../905/629114";
+import { createFigmaPluginScope } from "../905/629114";
 import { xF, _Y, jZ, WY, tG, Zu, U_, us } from "../figma_app/566517";
 import { l9 } from "../9410/234038";
 import { P as _$$P, t as _$$t } from "../9410/636108";
@@ -231,7 +231,7 @@ async function P(e) {
   }
 }
 async function B(e, t, i) {
-  let n = _$$D({
+  let n = createFigmaPluginScope({
     enableNativeJsx: !0
   });
   n.skipInvisibleInstanceChildren = !0;
@@ -302,7 +302,7 @@ export async function $$K0({
   options: p
 }, g) {
   let _ = getSingletonSceneGraph();
-  let x = _$$D({
+  let x = createFigmaPluginScope({
     enableNativeJsx: !0
   });
   if (x.skipInvisibleInstanceChildren = !0, !p.prevNodeId) {

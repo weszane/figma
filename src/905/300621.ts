@@ -1,3 +1,4 @@
+import { noop } from 'lodash-es';
 import { Fragment as _$$Fragment, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -8,16 +9,16 @@ import { selectWithShallowEqual } from '../905/103090';
 import { mapLibraryAttributes } from '../905/128063';
 import { H as _$$H } from '../905/216861';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { useLibrary } from '../905/420347';
 import { a as _$$a } from '../905/426262';
 import { useModalManager } from '../905/437088';
 import { IconButton } from '../905/443068';
 import { C as _$$C } from '../905/520159';
-import { librarySearchByFileAtomFamily, useLibrarySearchQuery, librarySearchByLibraryKeyAtomFamily } from '../905/570707';
+import { librarySearchByFileAtomFamily, librarySearchByLibraryKeyAtomFamily, useLibrarySearchQuery } from '../905/570707';
 import { getFeatureFlags } from '../905/601108';
 import { createFileLibraryKeys } from '../905/651613';
-import { FO } from '../905/682977';
+import { LoadingRow } from '../905/682977';
 import { kz } from '../905/691188';
 import { S as _$$S } from '../905/711770';
 import { liveStoreInstance } from '../905/713695';
@@ -29,12 +30,10 @@ import { u as _$$u2 } from '../905/831362';
 import { useCurrentUserOrgId } from '../905/845253';
 import { useFileByKey } from '../905/862913';
 import { LibraryItemTilesByPage } from '../905/909811';
-import { noop } from 'lodash-es';
-;
 import { b as _$$b } from '../905/937225';
 import { librariesAPI } from '../905/939602';
 import { filesByLibraryKeyAtom } from '../905/977779';
-import { l as _$$l2 } from '../905/997221';
+import { getLibraryKeyWithReport } from '../905/997221';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { PXO } from '../figma_app/27776';
 import { mapEditorTypeToStringWithObfuscated } from '../figma_app/53721';
@@ -173,7 +172,7 @@ function K(e) {
     properties: {
       libraryKey: i
     },
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       height: 528,
       className: 'figjam_subscription_file_view--fileView--4d2Xo',
       children: jsxs('div', {
@@ -253,7 +252,7 @@ function es(e) {
       r.push({
         library_file_key: c.key,
         library_file_name: c.name,
-        library_key: _$$l2(c) ?? _$$l(''),
+        library_key: getLibraryKeyWithReport(c) ?? _$$l(''),
         team_name: p?.name,
         team_id: u,
         workspace_id: p?.workspace_id,
@@ -293,7 +292,7 @@ function es(e) {
       r.push({
         library_file_key: e,
         library_file_name: d.name,
-        library_key: _$$l2(d) ?? _$$l(''),
+        library_key: getLibraryKeyWithReport(d) ?? _$$l(''),
         team_name: u?.name,
         team_id: c,
         workspace_id: u?.workspace_id,
@@ -333,7 +332,7 @@ function es(e) {
         recordingKey: 'subscriptionListViewLibrarySearch',
         selectOnFocus: !0
       })
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       className: 'figjam_subscriptions_list_view--whiteboardingFileListView--E3NJk',
       height: 480,
       children: [jsx(_$$W, {
@@ -342,7 +341,7 @@ function es(e) {
         formatBannerText: e => getI18nString('whiteboard.inserts.libraries_update_to_your_components', {
           numUpdates: e
         })
-      }), _.status === 'loading' && jsx(FO, {}), _.status !== 'loading' && jsxs(Fragment, {
+      }), _.status === 'loading' && jsx(LoadingRow, {}), _.status !== 'loading' && jsxs(Fragment, {
         children: [searchQuery && E.length === 0 && jsx('div', {
           className: 'figjam_subscriptions_list_view--noSearchResults--0YZBG ellipsis--ellipsis--Tjyfa',
           children: renderI18nText('whiteboard.library_subscriptions.no_results_for', {
@@ -422,21 +421,29 @@ function es(e) {
 }
 let el = 'figjam_library_modal--slidingPane--Ex7gt sliding_pane--slidingPane--6OmDU';
 let ed = 'figjam_library_modal--slidingPaneLeft--uAaog sliding_pane--slidingPaneLeft--Wrfdy sliding_pane--slidingPane--6OmDU';
-let $$ec1 = 'FIGJAM_LIBRARY_MODAL';
-let $$eu0 = registerModal(e => {
-  let t = useSelector(e => e.library);
-  let i = _$$H();
-  let f = useModalManager({
-    ...e,
-    onClose: i
+// Original modal name constant ($$ec1)
+export const FIGJAM_LIBRARY_MODAL = 'FIGJAM_LIBRARY_MODAL';
+
+/**
+ * FigjamLibraryModal component - renders the library modal with sliding panes.
+ * Original function: $$eu0 (anonymous modal registration function)
+ * @param props - Modal props passed by the modal manager.
+ * @returns JSX element for the modal.
+ */
+function FigjamLibraryModal(props: any) {
+  const library = useSelector((state: any) => state.library);
+  const closeHandler = _$$H();
+  const modalManager = useModalManager({
+    ...props,
+    onClose: closeHandler
   });
-  let [_, A] = useState(null);
-  let y = liveStoreInstance.useFile(_?.fileKey ?? null).data;
-  let b = useLibrary(_?.libraryKey ?? null).data;
-  let v = parsePxInt(PXO);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const fileData = liveStoreInstance.useFile(selectedFile?.fileKey ?? null).data;
+  const libraryData = useLibrary(selectedFile?.libraryKey ?? null).data;
+  const modalWidth = parsePxInt(PXO);
   return jsx(ModalRootComponent, {
-    manager: f,
-    width: v,
+    manager: modalManager,
+    width: modalWidth,
     height: 'dynamic',
     children: jsxs(DialogContents, {
       children: [jsx(DialogHeader, {
@@ -448,26 +455,33 @@ let $$eu0 = registerModal(e => {
         children: jsxs('div', {
           className: 'figjam_library_modal--slidingPaneContainer--ZuLV1 sliding_pane--slidingPaneContainer--RQkXf',
           children: [jsx('div', {
-            className: _?.libraryKey ? ed : el,
+            className: selectedFile?.libraryKey ? ed : el,
             children: jsx(es, {
-              library: t,
-              viewFile: A,
+              library,
+              viewFile: setSelectedFile,
               onUpdateClick: noop
             })
-          }), _ && y && jsx('div', {
-            className: _.libraryKey ? el : ed,
+          }), selectedFile && fileData && jsx('div', {
+            className: selectedFile.libraryKey ? el : ed,
             children: jsx(K, {
-              width: v,
-              library: t,
-              libraryFile: y,
-              publishedLibrary: isPublishedLibraryWithAssets(b) ? b : null,
-              backToList: () => A(null)
+              width: modalWidth,
+              library,
+              libraryFile: fileData,
+              publishedLibrary: isPublishedLibraryWithAssets(libraryData) ? libraryData : null,
+              backToList: () => setSelectedFile(null)
             })
           })]
         })
       })]
     })
   });
-}, $$ec1, ModalSupportsBackground.YES);
-export const Vg = $$eu0;
-export const _N = $$ec1;
+}
+
+// Register the modal with the named component
+export const registeredModal = registerModal(FigjamLibraryModal, FIGJAM_LIBRARY_MODAL, ModalSupportsBackground.YES);
+
+// Export the registered modal (original: Vg = $$eu0)
+export const Vg = registeredModal;
+
+// Export the modal name (original: _N = $$ec1)
+export const _N = FIGJAM_LIBRARY_MODAL;

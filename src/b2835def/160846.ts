@@ -86,7 +86,7 @@ import { ImageOverlayComponent } from "../905/129046";
 import { WZ } from "../905/893645";
 import { ArrowPosition } from "../905/858282";
 import { xT } from "../figma_app/195407";
-import { v58 } from "../figma_app/6204";
+import { DrawPropertiesPanelOnboarding } from "../figma_app/6204";
 import { dP, m9 } from "../figma_app/947348";
 import { _ as _$$_3 } from "../642/896644";
 import { N as _$$N2 } from "../905/720559";
@@ -110,7 +110,7 @@ import { wu } from "../1528/306300";
 import { M as _$$M } from "../figma_app/339170";
 import { AS, n4 } from "../figma_app/709323";
 import { k as _$$k2 } from "../905/582200";
-import { Vi, GI } from "../905/125333";
+import { brushStyleAtom, vectorPencilStyleAtom } from "../905/125333";
 import { fullscreenValue } from "../figma_app/455680";
 import { b as _$$b4 } from "../figma_app/755529";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -149,7 +149,7 @@ function eN(e) {
     isShowing,
     complete
   } = _$$e({
-    overlay: v58,
+    overlay: DrawPropertiesPanelOnboarding,
     priority: _$$N.DEFAULT_MODAL
   });
   useEffect(() => {
@@ -624,11 +624,11 @@ function tM(e) {
           forwardedRef: i,
           recordingKey: e.recordingKey
         }), C && "Brush" === k && jsx(tS, {
-          defaultStyleAtom: Vi,
+          defaultStyleAtom: brushStyleAtom,
           recordingKey: e.recordingKey,
           strokePanelRef: T
         }), C && "Dynamic" === k && jsx(tR, {
-          defaultStyleAtom: GI,
+          defaultStyleAtom: vectorPencilStyleAtom,
           recordingKey: generateRecordingKey(e, "dynamicStrokeControls")
         })]
       })

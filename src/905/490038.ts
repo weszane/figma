@@ -31,8 +31,8 @@ class AtomStoreManager {
    * @param atom The writable atom to set.
    * @param args Additional arguments for setting.
    */
-  set<T = any>(atom: PrimitiveAtom<T> | WritableAtom<T, T[], void>, ...args: any[]): void {
-    this.jotaiAtomStore.set(atom, ...args)
+  set<T = any>(atom: PrimitiveAtom<T> | WritableAtom<T, T[], void>, ...args: any[]) {
+    return this.jotaiAtomStore.set<T, any[], any>(atom, ...args)
   }
 
   /**

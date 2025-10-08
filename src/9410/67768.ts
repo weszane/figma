@@ -11,7 +11,7 @@ import { N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { ArrowPosition, PositioningStrategy } from "../905/858282";
-import { sP8 } from "../figma_app/6204";
+import { FigJamAIActionsCallout } from "../figma_app/6204";
 import { _ as _$$_ } from "../figma_app/91620";
 let $$x2 = atom(!1);
 let $$y1 = atom(!1);
@@ -30,7 +30,7 @@ export function $$C3() {
     isShowing,
     complete
   } = _$$e({
-    overlay: sP8,
+    overlay: FigJamAIActionsCallout,
     priority: N.SECONDARY_MODAL
   }, [e]);
   useEffect(() => {

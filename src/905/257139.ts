@@ -4,7 +4,7 @@ import { analyticsEventManager } from "../905/449184";
 import { RecordingComponent } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { N0, We, GY, zq, oz, wI } from "../figma_app/782261";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { DG } from "../figma_app/585235";
 import { KO } from "../figma_app/914674";
 import { useKeyboardNavigationItem } from "../figma_app/119475";
@@ -345,7 +345,7 @@ export class $$b0 extends RecordingComponent {
   render() {
     this.refreshElementsInView();
     return jsxs(Fragment, {
-      children: [jsxs(P, {
+      children: [jsxs(RecordingScrollContainer, {
         ...this.props,
         ref: this.scrollContainerRef,
         onScroll: this.onScroll,

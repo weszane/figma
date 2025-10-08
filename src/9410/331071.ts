@@ -17,7 +17,7 @@ import { fileByKeySelector, fileVersionSelector } from '../905/91038';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
 import { U as _$$U } from '../905/103637';
-import { q as _$$q4, w as _$$w4 } from '../905/112768';
+import { UpscaleImageAction, RemoveBackgroundAction } from '../905/112768';
 import { sha1HexFromBytes } from '../905/125019';
 import { g as _$$g3 } from '../905/125190';
 import { J as _$$J5 } from '../905/125993';
@@ -37,12 +37,12 @@ import { ActionButton } from '../905/189361';
 import { a as _$$a2 } from '../905/192547';
 import { LRUCache } from '../905/196201';
 import { ES, TC } from '../905/198599';
-import { l as _$$l } from '../905/202425';
+import { getSelectedItemTypes } from '../905/202425';
 import { useSingleEffect } from '../905/791079';
 import { FlexBox, LayoutContainer } from '../905/222272';
 import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { s as _$$s4 } from '../905/234042';
-import { Ag, H5, Hz } from '../905/235578';
+import { ExtensionSource, ExtensionViewType, enterKey } from '../905/235578';
 import { Panel } from '../905/236825';
 import { PricingOptions } from '../905/237873';
 import { z as _$$z } from '../905/239603';
@@ -55,7 +55,7 @@ import { J as _$$J } from '../905/273120';
 import { T as _$$T5 } from '../905/273689';
 import { AIActionIterationResult, AIActionStatus, AIActionIterationStatus, AIActionIterationAction, AIActionPromptTrigger, AIActionResult, AIActionMode } from '../905/278499';
 import { Z as _$$Z } from '../905/279476';
-import { Ay as _$$Ay2 } from '../905/281495';
+import { renameLayers } from '../905/281495';
 import { usKeyboardFocusHandler } from '../905/286442';
 import { useSelectionState, SelectionState } from '../905/286488';
 import { setupPromptHistory } from '../905/290931';
@@ -140,10 +140,10 @@ import { x as _$$x3 } from '../905/773818';
 import { A as _$$A6 } from '../905/780920';
 import { formatKeyboardShortcut } from '../905/783179';
 import { k as _$$k3 } from '../905/788559';
-import { cq } from '../905/794154';
+import { useNavigationStack } from '../905/794154';
 import { K as _$$K } from '../905/799615';
 import _require from '../905/802325';
-import { j as _$$j2 } from '../905/813868';
+import { createWidget } from '../905/813868';
 import { withAbortSignal } from '../905/829242';
 import { AutoLayout } from '../905/470281';
 import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
@@ -350,7 +350,7 @@ import { CortexError } from '../figma_app/691470';
 import { JZ } from '../figma_app/696043';
 import { ER, jF, K4, Ne, NT, pz, X4, Xy } from '../figma_app/702372';
 import { MobileDesignComponentSchema, PromptSchema } from '../figma_app/705029';
-import { wY as _$$wY } from '../figma_app/708845';
+import { useResizeObserverRef } from '../figma_app/708845';
 import { useSceneGraphSelector, useOnSelectionChange, useSceneGraphSelection, useAppModelProperty } from '../figma_app/722362';
 import { Ay as _$$Ay4, DI, Ti, Tu } from '../figma_app/724968';
 import { neutralDarkColor3, blueTintColor, redSecondaryColor, greenMintColor, redApricotColor2 } from '../figma_app/728075';
@@ -397,7 +397,7 @@ import { ah as _$$ah, EG, Hr, J8 } from '../figma_app/995580';
 import { A as _$$A7 } from '../svg/499035';
 import { A as _$$A14 } from '../svg/586486';
 import { A as _$$A13 } from '../svg/617101';
-import { A as _$$A4 } from '../vendor/21595';
+import { useThrottledCallback } from '../vendor/21595';
 import { useDebouncedCallback } from 'use-debounce';
 import ih from '../vendor/104014';
 import iu from '../vendor/223926';
@@ -1543,7 +1543,7 @@ function rC({
   let o = useSelectionState(e);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let d = _M({
     action: e,
     clientLifecycleId: void 0
@@ -2094,9 +2094,9 @@ function n7({
   let y = useCallback(e => {
     e && (_.current = e, x());
   }, []);
-  _$$wY(_, () => x());
-  _$$wY(c, () => x());
-  let b = _$$A4(async (e, t) => {
+  useResizeObserverRef(_, () => x());
+  useResizeObserverRef(c, () => x());
+  let b = useThrottledCallback(async (e, t) => {
     await i(e);
     t && fullscreenValue.triggerAction('commit');
   }, 100);
@@ -2527,7 +2527,7 @@ function as({
 }) {
   let {
     pop
-  } = cq();
+  } = useNavigationStack();
   kz(KeyCodes.ESCAPE, pop);
   kz(KeyCodes.BACKSPACE, pop);
   return jsx('div', {
@@ -2543,7 +2543,7 @@ function as({
 function al(e) {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   useOnSelectionChange(i => {
     if (e) {
       for (let e of Object.keys(i.mirror.sceneGraphSelection)) {
@@ -3217,7 +3217,7 @@ function ag({
   }, [y]);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let j = useCurrentFileKey();
   let I = useMemo(() => {
     let e;
@@ -3254,7 +3254,7 @@ function ag({
       payload: e
     });
   }, [N, x, U, y?.guid, g.radius, g.spacing]);
-  let K = _$$A4(e => {
+  let K = useThrottledCallback(e => {
     trackEventAnalytics('First Draft: Make Changes Color Change', {
       ...I,
       color: e
@@ -3305,7 +3305,7 @@ function ag({
       payload: t
     });
   }, [x, K, k, Y, N]);
-  let X = _$$A4(e => {
+  let X = useThrottledCallback(e => {
     trackEventAnalytics('First Draft: Make Changes Radius Change', {
       ...I,
       radius: e
@@ -3315,7 +3315,7 @@ function ag({
       mlEvent: !0
     });
   }, 1e3);
-  let Z = _$$A4(e => {
+  let Z = useThrottledCallback(e => {
     X(e);
     _$$oP(C.current, e, E.current);
   }, 100);
@@ -3326,7 +3326,7 @@ function ag({
       payload: e
     }));
   }, [A, x, Z]);
-  let et = _$$A4(e => {
+  let et = useThrottledCallback(e => {
     trackEventAnalytics('First Draft: Make Changes Spacing Change', {
       ...I,
       spacing: e
@@ -3336,7 +3336,7 @@ function ag({
       mlEvent: !0
     });
   }, 1e3);
-  let ei = _$$A4(e => {
+  let ei = useThrottledCallback(e => {
     et(e);
     HS(v.current, e, T.current);
   }, 100);
@@ -3347,7 +3347,7 @@ function ag({
       payload: e
     }));
   }, [x, ei, O]);
-  let en = _$$A4((e, t) => {
+  let en = useThrottledCallback((e, t) => {
     trackEventAnalytics('First Draft: Make Changes Font Change', {
       ...I,
       font_location: e,
@@ -4034,7 +4034,7 @@ let aF = async ({
 function aB(e) {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let i = RL(_$$JT.FIRST_DRAFT_COMPONENTIZE, aF);
   let {
     start,
@@ -4131,7 +4131,7 @@ let aU = async ({
 function aG(e) {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let {
     submit,
     progress
@@ -4623,7 +4623,7 @@ function sc({
   let {
     pop,
     push
-  } = cq();
+  } = useNavigationStack();
   let m = useCallback(i => {
     setSelectedKit(i);
     SX({
@@ -5424,7 +5424,7 @@ function sw({
     close,
     push,
     replace
-  } = cq();
+  } = useNavigationStack();
   let [M, P] = useState(!1 === hasLastSelectedKit);
   useEffect(() => {
     if (M || !hasLastSelectedKit) {
@@ -6342,7 +6342,7 @@ function s1({
 }) {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let o = RL(e, sX);
   let {
     state,
@@ -6741,7 +6741,7 @@ let oi = [{
       module: jsx(() => {
         let {
           pop
-        } = cq();
+        } = useNavigationStack();
         return jsx(ErrorBoundaryCrash, {
           boundaryKey: 'FirstDraftMakeKitView',
           fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
@@ -6776,7 +6776,7 @@ let oi = [{
         let e = useDispatch();
         let {
           close
-        } = cq();
+        } = useNavigationStack();
         let {
           inputs,
           renderInput
@@ -7055,7 +7055,7 @@ let oi = [{
   iconType: jsx(_$$$2, {}),
   quickAction: {
     module: {
-      module: jsx(_$$w4, {
+      module: jsx(RemoveBackgroundAction, {
         source: 'quick-actions'
       }),
       name: ExtensionFeatureKey.BACKGROUND_REMOVE_TOAST
@@ -7083,7 +7083,7 @@ let oi = [{
   iconType: jsx(_$$X, {}),
   quickAction: {
     module: {
-      module: jsx(_$$q4, {
+      module: jsx(UpscaleImageAction, {
         source: 'quick-actions'
       }),
       name: ExtensionFeatureKey.UPSCALE_IMAGE_TOAST
@@ -7120,7 +7120,7 @@ let oi = [{
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
       B3(_$$JT.AUTO_RENAME_LAYERS);
-      Yh(debugState.getState().mirror.appModel, _$$JT.AUTO_RENAME_LAYERS) && _$$Ag(_$$JT.AUTO_RENAME_LAYERS, _$$Ay2, {
+      Yh(debugState.getState().mirror.appModel, _$$JT.AUTO_RENAME_LAYERS) && _$$Ag(_$$JT.AUTO_RENAME_LAYERS, renameLayers, {
         source: ActionType.QUICK_ACTIONS,
         overwriteNames: !1
       });
@@ -7175,7 +7175,7 @@ let oi = [{
         let e = useIsSelectedViewFullscreenCooper();
         let {
           close
-        } = cq();
+        } = useNavigationStack();
         let [i, r] = useState('');
         let {
           promptHistory,
@@ -7543,7 +7543,7 @@ function od(e) {
   let {
     push,
     close
-  } = cq();
+  } = useNavigationStack();
   if (!submenuItem || !submenuItem.itemPath || submenuItem.submenu && submenuItem.submenu.length === 0) return null;
   let s = TW(submenuItem);
   return jsx(_$$B6.Item, {
@@ -7866,7 +7866,7 @@ function oF({
 }) {
   let {
     push
-  } = cq();
+  } = useNavigationStack();
   let {
     addFrecencyUsage
   } = fJ();
@@ -7875,7 +7875,7 @@ function oF({
   let u = useDispatch();
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let h = getObservableOrFallback(EditorPreferencesApi().showQuickCommandRankDebug);
   let m = useCanRunExtensions();
   let f = useAppModelProperty('keyboardShortcuts');
@@ -8169,7 +8169,7 @@ function oB({
   let t = Ev();
   let i = useAtomWithSubscription(Lk);
   let r = useAtomWithSubscription(_$$dd);
-  let o = useSelector(_$$l);
+  let o = useSelector(getSelectedItemTypes);
   let l = useAtomWithSubscription(Rt);
   let u = useRef(l);
   let p = useAtomWithSubscription(Q8);
@@ -8954,7 +8954,7 @@ let oz = 'extensions-filter-dropdown-menu';
 let oV = 'extensions-filter-dropdown-button';
 let oW = 'extensions-filter-dropdown';
 let lr = e => {
-  _$$j2({
+  createWidget({
     pluginID: e.plugin_id,
     widgetName: e.name,
     pluginVersionID: '',
@@ -9030,7 +9030,7 @@ function lC(e) {
   let t = ly(e);
   return {
     text: '',
-    shortcuts: [Hz],
+    shortcuts: [enterKey],
     onAction: e => {
       let i = e.target?.element;
       i && t(i);
@@ -9239,7 +9239,7 @@ function lj({
   }) {
     let {
       close
-    } = cq();
+    } = useNavigationStack();
     let {
       extension: _extension
     } = t;
@@ -9276,7 +9276,7 @@ function lj({
     }
     onAction();
   }, [d, onAction, r]);
-  let m = H5.LOCAL;
+  let m = ExtensionViewType.LOCAL;
   let f = _$$D2({
     source: m,
     text: actionText,
@@ -9352,7 +9352,7 @@ function lI({
     augmentedExtension: e,
     submenuRef: t
   });
-  let m = H5.PUBLISHED;
+  let m = ExtensionViewType.PUBLISHED;
   let f = _$$D2({
     source: m,
     text: actionText,
@@ -9451,7 +9451,7 @@ function lN({
   onAction: r
 }) {
   let a = _$$OX();
-  let s = H5.ACTION;
+  let s = ExtensionViewType.ACTION;
   let o = _$$D2({
     source: s,
     onAction: t => {
@@ -9711,7 +9711,7 @@ function de({
     extension: e,
     preloadImage: s
   });
-  let d = H5.PUBLISHED_WITH_DETAILS;
+  let d = ExtensionViewType.PUBLISHED_WITH_DETAILS;
   let c = _$$D2({
     source: d,
     text: getI18nString('qa.extensions.view_details'),
@@ -9844,7 +9844,7 @@ function ds({
   let o = useAtomWithSubscription(_$$dd);
   let l = useAtomWithSubscription(Rt);
   let d = useAtomWithSubscription(Q8);
-  let u = useSelector(_$$l);
+  let u = useSelector(getSelectedItemTypes);
   let p = getPendingPublisherWidgets();
   let h = getPendingPublisherWidgetsForCurrentUser();
   let {
@@ -9914,7 +9914,7 @@ function ds({
         extensions: useMemo(() => i.map(e => getCurrentPluginVersion(e)).filter(e => !!e), [i])
       };
     }();
-    let n = _extensions.map(e => t(e, Ag.COMMUNITY));
+    let n = _extensions.map(e => t(e, ExtensionSource.COMMUNITY));
     return {
       loaded: _loaded,
       extensions: ZM([...e, ...n])
@@ -10093,7 +10093,7 @@ function dv({
   let [u] = useDebounce(d, 300);
   let p = u.trim();
   let h = useAtomWithSubscription(Rt);
-  let m = useSelector(_$$l);
+  let m = useSelector(getSelectedItemTypes);
   let f = useDispatch();
   let {
     loading,
@@ -10231,9 +10231,9 @@ function dv({
     let r = Oy();
     return useMemo(() => {
       let n = (e, t) => e.map(e => getCurrentPluginVersion(e)).filter(e => !!e).map(e => r(e, t));
-      let a = n(e, Ag.COMMUNITY);
-      let s = n(t, Ag.ORG_PRIVATE);
-      return [...i.map(e => r(e, Ag.LOCAL)), ...s, ...a];
+      let a = n(e, ExtensionSource.COMMUNITY);
+      let s = n(t, ExtensionSource.ORG_PRIVATE);
+      return [...i.map(e => r(e, ExtensionSource.LOCAL)), ...s, ...a];
     }, [r, i, t, e]);
   }({
     publicExtensions,
@@ -10299,7 +10299,7 @@ function dE({
 }) {
   let t = useCurrentUserOrg();
   if (!t || e.length === 0) return null;
-  let [i, r] = du()(e, e => e.types.has(Ag.ORG_SAVED));
+  let [i, r] = du()(e, e => e.types.has(ExtensionSource.ORG_SAVED));
   let a = [...i, ...r];
   return jsx(di, {
     augmentedExtensions: a,
@@ -10364,7 +10364,7 @@ function dI() {
     let t = useAtomWithSubscription(_$$f);
     let {
       autoClose
-    } = cq();
+    } = useNavigationStack();
     let r = useCallback(() => {
       let e = debugState.getState();
       e.modalShown || e.dropdownShown || e.pickerShown || autoClose();
@@ -10576,7 +10576,7 @@ function dI() {
 function dk() {
   let {
     current
-  } = cq();
+  } = useNavigationStack();
   let t = jh();
   return (useSingleEffect(() => () => {
     t();
@@ -10614,37 +10614,37 @@ function dA() {
     let f = Oy();
     let g = useMemo(() => [{
       extensions: t,
-      extensionType: Ag.RECENT
+      extensionType: ExtensionSource.RECENT
     }, {
       extensions: i,
-      extensionType: Ag.RECENT
+      extensionType: ExtensionSource.RECENT
     }, {
       extensions: Object.values(userPlugins),
-      extensionType: Ag.USER_SAVED
+      extensionType: ExtensionSource.USER_SAVED
     }, {
       extensions: Object.values(userWidgets),
-      extensionType: Ag.USER_SAVED
+      extensionType: ExtensionSource.USER_SAVED
     }, {
       extensions: Object.values(orgPlugins),
-      extensionType: Ag.ORG_SAVED
+      extensionType: ExtensionSource.ORG_SAVED
     }, {
       extensions: Object.values(orgWidgets),
-      extensionType: Ag.ORG_SAVED
+      extensionType: ExtensionSource.ORG_SAVED
     }, {
       extensions: Object.values(d),
-      extensionType: Ag.ALLOWLIST
+      extensionType: ExtensionSource.ALLOWLIST
     }, {
       extensions: Object.values(u),
-      extensionType: Ag.ALLOWLIST
+      extensionType: ExtensionSource.ALLOWLIST
     }, {
       extensions: p,
-      extensionType: Ag.ORG_PRIVATE
+      extensionType: ExtensionSource.ORG_PRIVATE
     }, {
       extensions: h,
-      extensionType: Ag.ORG_PRIVATE
+      extensionType: ExtensionSource.ORG_PRIVATE
     }, {
       extensions: Object.values(m),
-      extensionType: Ag.LOCAL
+      extensionType: ExtensionSource.LOCAL
     }], [t, i, userPlugins, userWidgets, orgPlugins, orgWidgets, d, u, p, h, m]);
     let _ = useMemo(() => {
       let e = loaded ? g.map(({
@@ -10670,7 +10670,7 @@ function dA() {
   let [s, o] = useState(!1);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   useEffect(() => {
     dO(r) && o(!0);
     s && !dO(r) && close();
@@ -10712,7 +10712,7 @@ function dM(e) {
 }
 function dP() {
   let e = debugState.getState();
-  let t = _$$l(e);
+  let t = getSelectedItemTypes(e);
   let i = e.openFile?.key ?? '';
   let r = getProductType(e.selectedView, null);
   let s = _$$FX();

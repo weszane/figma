@@ -24,7 +24,7 @@ import { isThirdPartyMonetized } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
 import { BuyerAPIHandler } from "../905/180";
-import { it } from "../905/504727";
+import { DropdownType } from "../905/504727";
 import { ExtensionRequestModal } from "../905/404161";
 import { dn } from "../figma_app/994403";
 import { t as _$$t2, Z3, y7, CA, dD, Dh, Dr, d1, iM, K1, Yr, pz, qN, _3 } from "../905/884637";
@@ -370,7 +370,7 @@ export function $$H1(e, t, r) {
       rootAndSubmenuMaxWidth: 280,
       showPoint: !1,
       subMenuClassName: _3,
-      type: it.MATCH_BACKGROUND
+      type: DropdownType.MATCH_BACKGROUND
     });
   });
   return {

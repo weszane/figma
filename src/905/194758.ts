@@ -18,7 +18,7 @@ import { JT } from "../figma_app/632248";
 import { B3, Ag } from "../figma_app/862289";
 import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
-import { w as _$$w, q } from "../905/112768";
+import { RemoveBackgroundAction, UpscaleImageAction } from "../905/112768";
 import { r6 } from "../905/507950";
 import { J } from "../905/494216";
 var m = p;
@@ -38,7 +38,7 @@ export function $$C0({
     callback: () => void $I({
       moduleToOpen: {
         type: "custom",
-        module: jsx(_$$w, {
+        module: jsx(RemoveBackgroundAction, {
           source: "image-settings-panel"
         }),
         beforeModuleOpen: () => {
@@ -67,7 +67,7 @@ export function $$C0({
     callback: () => void $I({
       moduleToOpen: {
         type: "custom",
-        module: jsx(q, {
+        module: jsx(UpscaleImageAction, {
           source: "image-settings-panel"
         }),
         beforeModuleOpen: () => {

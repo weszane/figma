@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { f as _$$f } from "../figma_app/109947";
 import { Dm } from "../figma_app/8833";
 import { d as _$$d } from "../9410/847929";
@@ -23,7 +23,7 @@ let T = parsePxNumber(j4N);
 function w(e) {
   let t = useRef(null);
   let i = Xr(fq);
-  let o = wY(t);
+  let o = useResizeObserverRef(t);
   let {
     centeredInPanels
   } = gB();

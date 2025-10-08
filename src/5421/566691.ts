@@ -9,7 +9,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import { G } from "../figma_app/318030";
 import u from "classnames";
 import { n as _$$n } from "../vendor/547481";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { DefinitionAssignment } from "../figma_app/164212";
 import { useComponentPropDefinitions } from "../figma_app/626952";
@@ -167,7 +167,7 @@ export function $$S0({
         }) : jsx(Tabs.TabPanel, {
           ...N.properties,
           height: "fill",
-          children: jsx(_$$P, {
+          children: jsx(RecordingScrollContainer, {
             className: E,
             useBottomPinning: !0,
             children: jsx(D, {
@@ -181,7 +181,7 @@ export function $$S0({
         }), jsx(Tabs.TabPanel, {
           ...N.console,
           height: "fill",
-          children: jsx(_$$P, {
+          children: jsx(RecordingScrollContainer, {
             className: E,
             useBottomPinning: !0,
             children: jsx(j, {})

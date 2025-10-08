@@ -4,7 +4,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { F } from "../905/422355";
 import { getFalseValue } from "../figma_app/897289";
 import { loadingStatePutLoading, loadingStateDelete, loadingStatePutFailure } from "../figma_app/714946";
-import { yJ, uW, Z } from "../905/618921";
+import { createPublicUserPutAction, createPublicUserPutManyEmptyIdsAction, Z } from "../905/618921";
 import { selectCurrentUser } from "../905/372672";
 import { isLoading, isFailure } from "../905/18797";
 import { UserAPIHandlers } from "../905/93362";
@@ -63,7 +63,7 @@ export function $$b2(e) {
       g && (t(loadingStatePutLoading({
         key: r
       })), I(e).then(e => {
-        t(yJ({
+        t(createPublicUserPutAction({
           user: e
         }));
         t(loadingStateDelete({
@@ -114,7 +114,7 @@ export function $$T3(e) {
         key: r
       }));
       S(n).then(e => {
-        t(uW({
+        t(createPublicUserPutManyEmptyIdsAction({
           userIds: n
         }));
         t(Z({
@@ -167,7 +167,7 @@ export async function $$x1({
   let a = $$v0(r);
   if (!(!n && !a && i)) return null;
   let s = await I(r);
-  t(yJ({
+  t(createPublicUserPutAction({
     user: s
   }));
   return s;

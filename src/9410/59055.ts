@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { isEmbedAllowed } from "../figma_app/916560";
-import { Wx } from "../figma_app/708845";
+import { useResizeObserverElement } from "../figma_app/708845";
 import { getI18nString } from "../905/303541";
 import { stopChattingThunk } from "../figma_app/308685";
 import { EE, lB } from "../figma_app/731583";
@@ -164,7 +164,7 @@ let R = memo(function (e) {
       type: "MINIMIZE"
     })
   });
-  let C = Wx(p.current);
+  let C = useResizeObserverElement(p.current);
   useEffect(() => {
     let e = EE("active-embed", [embedThumbnailNodeId], e => {
       if (!e.position) {

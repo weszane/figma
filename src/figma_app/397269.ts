@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { OnboardingRenderFrame } from "../905/284399";
 import { k } from "../905/391967";
 import { OverlayType } from "../figma_app/450829";
-import { qw_ } from "../figma_app/6204";
+import { PluginPublishInvitePublishersOnboardingNudgeModal } from "../figma_app/6204";
 let $$h2 = "plugin-publish-invite-publishers-onboarding-event";
 let $$m1 = "plugin-publish-invite-publishers-click-event";
 let g = "seen_plugin_publish_invite_publishers_onboarding";
@@ -22,15 +22,15 @@ function y() {
 export function $$b0() {
   let e = useAtomWithSubscription(f);
   let t = _$$e({
-    overlay: qw_,
+    overlay: PluginPublishInvitePublishersOnboardingNudgeModal,
     priority: N.SECONDARY_MODAL
   }, [e]);
-  _$$E(t.uniqueId, $$h2, () => {
+  useEventForwarder(t.uniqueId, $$h2, () => {
     t.show({
       canShow: e => !e
     });
   });
-  _$$E(t.uniqueId, [$$m1, "Lost DOM Target"], () => {
+  useEventForwarder(t.uniqueId, [$$m1, "Lost DOM Target"], () => {
     t.complete();
   });
   return jsx(OnboardingRenderFrame, {

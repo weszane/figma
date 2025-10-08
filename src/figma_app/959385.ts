@@ -11,7 +11,7 @@ import { handleUrlAction } from "../905/280005";
 import { R as _$$R } from "../figma_app/313269";
 import { reportError } from "../905/11";
 import { formatNumber } from "../figma_app/930338";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { x as _$$x } from "../905/868466";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -24,10 +24,10 @@ import { setupHyperlinkHandler } from "../figma_app/815170";
 import { usePluginManifestById } from "../figma_app/844435";
 import { manifestContainsWidget } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
-import { ox, ab } from "../figma_app/870683";
+import { generateAbsoluteCommunityWidgetUrl, generateAbsoluteCommunityPluginUrl } from "../figma_app/870683";
 import { HW } from "../figma_app/632248";
 import { z as _$$z } from "../905/654860";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { m as _$$m } from "../figma_app/321561";
 import { M$ } from "../figma_app/297822";
 import { ExtensionFeatureKey } from "../905/946805";
@@ -37,7 +37,7 @@ import { n as _$$n } from "../905/895449";
 import { k as _$$k } from "../905/341245";
 import { t as _$$t3 } from "../905/572040";
 import { kB } from "../figma_app/201703";
-import { H5 } from "../905/235578";
+import { ExtensionViewType } from "../905/235578";
 import { D as _$$D } from "../figma_app/930185";
 import { M6 } from "../figma_app/592180";
 import { DS } from "../figma_app/467741";
@@ -56,7 +56,7 @@ function Z({
   } = e;
   let {
     pop
-  } = cq();
+  } = useNavigationStack();
   _$$z();
   let s = useRef(null);
   let {
@@ -67,7 +67,7 @@ function Z({
     submenuRef: s,
     displayAboveTarget: !0
   });
-  let d = H5.DETAILS;
+  let d = ExtensionViewType.DETAILS;
   let c = _$$D({
     source: d,
     text: actionText,
@@ -96,7 +96,7 @@ function Z({
     children: [jsx(_$$t2, {}), jsx(ee, {
       extension,
       onGoBack: pop
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       height: _,
       className: cssBuilderInstance.px16.$,
       children: [jsx(et, {
@@ -137,7 +137,7 @@ function ee({
   let u = e.plugin_id;
   let _ = function (e) {
     let t = useDispatch();
-    let r = manifestContainsWidget(e) ? ox(e.plugin_id) : ab(e.plugin_id);
+    let r = manifestContainsWidget(e) ? generateAbsoluteCommunityWidgetUrl(e.plugin_id) : generateAbsoluteCommunityPluginUrl(e.plugin_id);
     return useCallback(() => {
       handleUrlAction(r) || t(setupHyperlinkHandler({
         rawInput: r
@@ -147,7 +147,7 @@ function ee({
   let h = useDispatch();
   let m = useCallback(() => {
     h(_$$S({
-      url: r ? ox(u) : ab(u),
+      url: r ? generateAbsoluteCommunityWidgetUrl(u) : generateAbsoluteCommunityPluginUrl(u),
       linkType: r ? "widget" : "plugin"
     }));
   }, [h, r, u]);
@@ -298,7 +298,7 @@ export function $$ea1({
 }) {
   let {
     push
-  } = cq();
+  } = useNavigationStack();
   !function ({
     augmentedExtension: e,
     enabled: t
@@ -353,7 +353,7 @@ export function $$ea1({
 function es() {
   let {
     pop
-  } = cq();
+  } = useNavigationStack();
   useEffect(() => {
     pop();
   }, [pop]);

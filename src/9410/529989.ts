@@ -13,7 +13,7 @@ import { N } from "../figma_app/268271";
 import { b as _$$b2 } from "../9864/543300";
 import { isAllowedToSeeNux } from "../905/14910";
 import { pC } from "../905/98947";
-import { j0N } from "../figma_app/6204";
+import { NuxOnboardingOverlay } from "../figma_app/6204";
 export function $$y0(e) {
   let t = useAtomWithSubscription(eS);
   let i = useDispatch();
@@ -26,7 +26,7 @@ export function $$y0(e) {
     complete,
     isShowing
   } = _$$e({
-    overlay: j0N,
+    overlay: NuxOnboardingOverlay,
     priority: N.HIGH_PRIORITY_MODAL
   }, [b, C, t]);
   let S = useCallback(() => {

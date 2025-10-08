@@ -16,7 +16,7 @@ import { i as _$$i } from "../9410/799000";
 import { t as _$$t2 } from "../9410/254335";
 import { W as _$$W } from "../9410/94839";
 import { V as _$$V } from "../905/506207";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { updateHoveredNode } from "../figma_app/741237";
 import { useCurrentViewState } from "../figma_app/623300";
 import { useLabConfiguration, labConfigurations } from "../905/226610";
@@ -272,7 +272,7 @@ function Z({
       },
       side: "bottom",
       className: f ? aY : l$,
-      children: jsxs(_$$P, {
+      children: jsxs(RecordingScrollContainer, {
         scrollBarAlways: !1,
         ref: g,
         scrollContainerRef: _,

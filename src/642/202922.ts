@@ -23,7 +23,7 @@ import { Dr, Ct } from "../figma_app/803787";
 import { KindEnum } from "../905/129884";
 import { calculatePickerPositionLeft } from "../905/959568";
 import { Nu } from "../figma_app/23780";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { z6 } from "../figma_app/967154";
 import { Q as _$$Q } from "../642/688711";
 import { n as _$$n } from "../642/665823";
@@ -374,7 +374,7 @@ export function $$eg0({
       toggleAddPropDropdown: Z,
       recordingKey: e,
       isInSelectionActionsPanel: t
-    }), m && q.current && jsxs(Cf, {
+    }), m && q.current && jsxs(ConnectedPointingDropdown, {
       targetRect: q.current.getBoundingClientRect(),
       propagateCloseClick: !0,
       children: [jsx(c$, {

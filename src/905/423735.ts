@@ -7,7 +7,7 @@ import l from "../vendor/523035";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { useHandleMouseEvent } from "../figma_app/878298";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
@@ -131,7 +131,7 @@ export function $$F0({
     metadata: el,
     loading: ed
   });
-  let ec = jsxs(_$$P, {
+  let ec = jsxs(RecordingScrollContainer, {
     width: i,
     className: q ? V ? Cb : dk : eT,
     children: [z.length > 0 && jsx(RV, {

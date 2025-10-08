@@ -11,7 +11,7 @@ import { e as _$$e } from "../905/149844";
 import { dayjs } from "../905/920142";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { l as _$$l } from "../905/618243";
@@ -166,7 +166,7 @@ function F() {
     }, e.key);
   }), [selectedBranches, G, B, L, r, _, U.status]);
   if (!k || !F) return null;
-  let Y = jsx(_$$P, {
+  let Y = jsx(RecordingScrollContainer, {
     className: jG,
     children: z ? jsx(P, {
       text: emptyStateText

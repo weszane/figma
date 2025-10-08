@@ -81,7 +81,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { aJ, Oc } from '../905/449579';
 import { n as _$$n2 } from '../905/451212';
 import { K as _$$K2 } from '../905/459096';
-import { fK } from '../905/469533';
+import { setEnhancedContrastThunk } from '../905/469533';
 import { showNetworkSettingsModal } from '../905/470594';
 import { $$ab4, $$av5 } from '../905/472793';
 import { V as _$$V } from '../905/477816';
@@ -112,7 +112,7 @@ import { D as _$$D } from '../905/591570';
 import { u as _$$u2 } from '../905/591949';
 import { getFeatureFlags } from '../905/601108';
 import { _ as _$$_ } from '../905/607842';
-import { D as _$$D5 } from '../905/629114';
+import { createFigmaPluginScope } from '../905/629114';
 import { R as _$$R } from '../905/649743';
 import { logger } from '../905/651849';
 import { FeatureFlag } from '../905/652992';
@@ -169,7 +169,7 @@ import { D as _$$D3 } from '../905/993374';
 import { h as _$$h } from '../905/994594';
 import _require from '../5052/635052';
 import { y as _$$y4 } from '../figma_app/13082';
-import { S5 } from '../figma_app/24841';
+import { checkUnsyncedAutosaveFilesThunk } from '../figma_app/24841';
 import { atomStoreManager } from '../figma_app/27355';
 import { $t, HZ } from '../figma_app/29287';
 import { handleAutosaveAndNavigationThunk } from '../figma_app/91703';
@@ -184,11 +184,11 @@ import { t as _$$t4 } from '../figma_app/235299';
 import { N as _$$N7 } from '../figma_app/240060';
 import { j6 } from '../figma_app/243025';
 import { hasJubileePermissionForWhiteboard } from '../figma_app/251115';
-import { Sd } from '../figma_app/253220';
+import { getNavigationPreferenceMenuItems } from '../figma_app/253220';
 import { ContextType, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { gn } from '../figma_app/322845';
-import { tz as _$$tz, Kx, lk, Lw, pe, Pq, rx, SV } from '../figma_app/342355';
+import { codeConnectToolsEnabledAtom, codeOptionsAtom, useTailwindAtom, isCodebaseSuggestionsEnabled, imageOptionsWithMount, denyOverwritingFilesAtom, additionalStateAtom1, codebaseSuggestionsEnabledAtom } from '../figma_app/342355';
 import { toggleFigmentDebugger } from '../figma_app/347406';
 import { c1 } from '../figma_app/357047';
 import { ce } from '../figma_app/401069';
@@ -3099,7 +3099,7 @@ let tQ = {
   }
 };
 async function tJ() {
-  let e = _$$D5();
+  let e = createFigmaPluginScope();
   let t = figma.currentPage.selection;
   if (t.length !== 1 || t[0].type !== 'FRAME') {
     logger.log('Please select a single frame to test object detection');
@@ -5870,29 +5870,29 @@ export function generateFullscreenMenuItems(e) {
         name: 'dev-mode-mcp-server-settings',
         displayText: getI18nString('fullscreen_actions.mcp-react-tailwind-code'),
         get checked() {
-          return atomStoreManager.get(Kx) === 'design_to_react';
+          return atomStoreManager.get(codeOptionsAtom) === 'design_to_react';
         },
         callback: () => {
-          atomStoreManager.set(Kx, 'design_to_react');
+          atomStoreManager.set(codeOptionsAtom, 'design_to_react');
         }
       }, {
         name: 'dev-mode-codegen-mcp-server-settings',
         displayText: getI18nString('fullscreen_actions.mcp-xml-code'),
         get checked() {
-          return atomStoreManager.get(Kx) === 'xml';
+          return atomStoreManager.get(codeOptionsAtom) === 'xml';
         },
         callback: () => {
-          atomStoreManager.set(Kx, 'xml');
+          atomStoreManager.set(codeOptionsAtom, 'xml');
         },
         featureFlags: ['dt_my_cool_plugin_xml']
       }, {
         name: 'dev-mode-codegen-mcp-server-settings',
         displayText: getI18nString('fullscreen_actions.mcp-jsx-code'),
         get checked() {
-          return atomStoreManager.get(Kx) === 'jsx';
+          return atomStoreManager.get(codeOptionsAtom) === 'jsx';
         },
         callback: () => {
-          atomStoreManager.set(Kx, 'jsx');
+          atomStoreManager.set(codeOptionsAtom, 'jsx');
         },
         featureFlags: ['dt_my_cool_plugin_internal']
       }, {
@@ -5901,52 +5901,52 @@ export function generateFullscreenMenuItems(e) {
         name: 'dev-mode-mcp-server-settings',
         displayText: getI18nString('fullscreen_actions.mcp-use-tailwind'),
         get checked() {
-          return atomStoreManager.get(Kx) === 'design_to_react' && atomStoreManager.get(lk);
+          return atomStoreManager.get(codeOptionsAtom) === 'design_to_react' && atomStoreManager.get(useTailwindAtom);
         },
         callback: () => {
-          atomStoreManager.set(lk, e => !e);
+          atomStoreManager.set(useTailwindAtom, e => !e);
         },
-        disabled: atomStoreManager.get(Kx) !== 'design_to_react',
+        disabled: atomStoreManager.get(codeOptionsAtom) !== 'design_to_react',
         featureFlags: ['dt_my_cool_plugin_d2r_tailwind_option']
       }, ...(mcpArgs?.canAccessCodeConnect ? [{
         name: 'dev-mode-mcp-server-settings',
         displayText: getI18nString('fullscreen_actions.mcp-enable-code-connect'),
         get checked() {
-          return atomStoreManager.get(_$$tz);
+          return atomStoreManager.get(codeConnectToolsEnabledAtom);
         },
         callback: () => {
-          atomStoreManager.set(_$$tz, e => !e);
+          atomStoreManager.set(codeConnectToolsEnabledAtom, e => !e);
         }
       }] : []), {
         name: 'dev-mode-mcp-server-settings',
         displayText: getI18nString('fullscreen_actions.mcp-enable-codebase-suggestions'),
         get checked() {
-          return Lw();
+          return isCodebaseSuggestionsEnabled();
         },
         callback: () => {
-          atomStoreManager.set(SV, !Lw());
+          atomStoreManager.set(codebaseSuggestionsEnabledAtom, !isCodebaseSuggestionsEnabled());
         },
         featureFlags: ['dt_my_cool_plugin_codebase_suggestions']
       }, ...function () {
-        if (!desktopAPIInstance?.hasFeature('addMcpImageSupport') || atomStoreManager.get(Kx) === 'xml') return [];
+        if (!desktopAPIInstance?.hasFeature('addMcpImageSupport') || atomStoreManager.get(codeOptionsAtom) === 'xml') return [];
         let e = [{
           name: 'dev-mode-mcp-server-settings',
           displayText: getI18nString('fullscreen_actions.mcp-use-placeholder-images'),
           get checked() {
-            return atomStoreManager.get(pe) === 'placeholder-svg';
+            return atomStoreManager.get(imageOptionsWithMount) === 'placeholder-svg';
           },
           callback: () => {
-            atomStoreManager.set(pe, 'placeholder-svg');
+            atomStoreManager.set(imageOptionsWithMount, 'placeholder-svg');
           },
           featureFlags: []
         }, {
           name: 'dev-mode-mcp-server-settings',
           displayText: getI18nString('fullscreen_actions.mcp-use-local-images'),
           get checked() {
-            return atomStoreManager.get(pe) === 'local';
+            return atomStoreManager.get(imageOptionsWithMount) === 'local';
           },
           callback: () => {
-            atomStoreManager.set(pe, 'local');
+            atomStoreManager.set(imageOptionsWithMount, 'local');
           },
           hideForQuickCommand: !0,
           featureFlags: []
@@ -5954,23 +5954,23 @@ export function generateFullscreenMenuItems(e) {
           name: 'dev-mode-mcp-server-settings',
           displayText: getI18nString('fullscreen_actions.mcp-write-images-to-disk'),
           get checked() {
-            return atomStoreManager.get(pe) === 'write-to-disk';
+            return atomStoreManager.get(imageOptionsWithMount) === 'write-to-disk';
           },
           callback: () => {
-            atomStoreManager.set(pe, 'write-to-disk');
+            atomStoreManager.set(imageOptionsWithMount, 'write-to-disk');
           },
           featureFlags: [],
           hideForQuickCommand: !0
-        }, ...(atomStoreManager.get(pe) === 'write-to-disk' ? [{
+        }, ...(atomStoreManager.get(imageOptionsWithMount) === 'write-to-disk' ? [{
           separator: !0
         }, {
           name: 'dev-mode-mcp-server-settings',
           displayText: getI18nString('fullscreen_actions.mcp-allow-overwriting-files'),
           get checked() {
-            return !atomStoreManager.get(Pq);
+            return !atomStoreManager.get(denyOverwritingFilesAtom);
           },
           callback: () => {
-            atomStoreManager.set(Pq, e => !e);
+            atomStoreManager.set(denyOverwritingFilesAtom, e => !e);
           },
           featureFlags: [],
           hideForQuickCommand: !0
@@ -5990,7 +5990,7 @@ export function generateFullscreenMenuItems(e) {
         displayText: 'Mock Code Connect from clipboard',
         callback: () => {
           let e = () => {
-            atomStoreManager.set(rx, null);
+            atomStoreManager.set(additionalStateAtom1, null);
             debugState.dispatch(VisualBellActions.enqueue({
               message: 'Reset Code Connect mock'
             }));
@@ -5998,7 +5998,7 @@ export function generateFullscreenMenuItems(e) {
           navigator.clipboard.readText().then(t => {
             try {
               let e = JSON.parse(t);
-              atomStoreManager.set(rx, e);
+              atomStoreManager.set(additionalStateAtom1, e);
               debugState.dispatch(VisualBellActions.enqueue({
                 message: 'Set Code Connect mock'
               }));
@@ -6047,7 +6047,7 @@ export function generateFullscreenMenuItems(e) {
       },
       flags: ['whiteboard'],
       featureFlags: []
-    }, ...nT(Sd()), {
+    }, ...nT(getNavigationPreferenceMenuItems()), {
       separator: !0,
       flags: ['edit']
     }, {
@@ -6208,7 +6208,7 @@ export function generateFullscreenMenuItems(e) {
       callback: (e, t, i) => {
         IntegrationUtils.isGoogleClassroomIntegration() ? sendMessageToParent({
           action: 'logOut'
-        }) : i(S5());
+        }) : i(checkUnsyncedAutosaveFilesThunk());
       },
       hideForQuickCommand: !0,
       featureFlags: []
@@ -6643,7 +6643,7 @@ export function generateFullscreenMenuItems(e) {
     checked: debugState.getState().theme.enhancedContrast,
     callback: (e, t, i) => {
       trackAccessibilityEvent(AccessibilityActionType.TOGGLE_ENHANCED_CONTRAST_ON);
-      i(fK({
+      i(setEnhancedContrastThunk({
         enhancedContrast: !debugState.getState().theme.enhancedContrast,
         userInitiated: !0
       }));
@@ -7320,7 +7320,7 @@ export function generateFullscreenMenuItems(e) {
     name: 'run-auto-auto-layout',
     featureFlags: ['auto_auto_layout_debug'],
     callback: (e, t) => {
-      let i = _$$D5();
+      let i = createFigmaPluginScope();
       o5(i, {
         recurseOnlySingleLayer: !0
       });
@@ -7330,7 +7330,7 @@ export function generateFullscreenMenuItems(e) {
     name: 'run-auto-auto-layout-skip-responsive',
     featureFlags: ['auto_auto_layout_debug'],
     callback: (e, t) => {
-      let i = _$$D5();
+      let i = createFigmaPluginScope();
       o5(i, {
         skipResponsive: !0,
         recurseOnlySingleLayer: !0

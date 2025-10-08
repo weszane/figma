@@ -9,11 +9,11 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ErrorType } from "../905/969273";
 import { sZ } from "../figma_app/948389";
-import { jX, Ay, NB, BT, tS, eJ } from "../905/281495";
+import { isLayerNameable, renameLayers, MAX_LAYER_COUNT, NoNameableLayersError, NoSelectedLayersError, LayerLimitExceededError } from "../905/281495";
 import { I9 } from "../figma_app/151869";
 import { JT, gj } from "../figma_app/632248";
 import { pP, qy, RL, z8 } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { ID } from "../905/487011";
 import { AIActionInstructionType, AIActionInstructionTrigger, AIActionIterationResult } from "../905/278499";
 import { ActionButton } from "../905/189361";
@@ -99,7 +99,7 @@ function O({
 }) {
   let i = 0;
   for (let n of e) {
-    (!t || jX(n, !0)) && i++;
+    (!t || isLayerNameable(n, !0)) && i++;
     "INSTANCE" !== n.type && (i += O({
       nodes: n.childrenNodes,
       onlyRenamable: t
@@ -111,7 +111,7 @@ export function $$D0(e) {
   let {
     source
   } = e;
-  let i = RL(JT.AUTO_RENAME_LAYERS, Ay);
+  let i = RL(JT.AUTO_RENAME_LAYERS, renameLayers);
   let {
     start,
     stop,
@@ -122,7 +122,7 @@ export function $$D0(e) {
   let {
     close,
     pop
-  } = cq();
+  } = useNavigationStack();
   let j = useCallback((e = !1) => {
     start({
       source,
@@ -185,7 +185,7 @@ export function $$D0(e) {
             })]
           })
         });
-        if (V > NB) return jsx(Panel, {
+        if (V > MAX_LAYER_COUNT) return jsx(Panel, {
           children: jsxs(FlexBox, {
             justify: "space-between",
             align: "center",
@@ -199,7 +199,7 @@ export function $$D0(e) {
                 className: cssBuilderInstance.textBodyMedium.colorTextSecondary.$,
                 children: renderI18nText("auto_rename_layers.too_many_layers_count", {
                   selected: V,
-                  limit: NB
+                  limit: MAX_LAYER_COUNT
                 })
               })]
             }), jsx(ActionButton, {
@@ -249,7 +249,7 @@ export function $$D0(e) {
         let {
           error
         } = i;
-        if (error instanceof BT) return jsx(_$$u, {
+        if (error instanceof NoNameableLayersError) return jsx(_$$u, {
           buttons: [{
             label: getI18nString("auto_rename_layers.rename_anyway"),
             onClick: () => {
@@ -263,7 +263,7 @@ export function $$D0(e) {
           }],
           children: renderI18nText("auto_rename_layers.error.no_nameable_items")
         });
-        if (error instanceof tS) return jsx(_$$u, {
+        if (error instanceof NoSelectedLayersError) return jsx(_$$u, {
           children: renderI18nText("ai.error.no_layers_selected")
         });
         let r = [{
@@ -271,9 +271,9 @@ export function $$D0(e) {
           callback: j
         }];
         let a = null;
-        error instanceof eJ && (e = renderI18nText("auto_rename_layers.too_many_layers_selected"), a = renderI18nText("auto_rename_layers.too_many_layers_count", {
+        error instanceof LayerLimitExceededError && (e = renderI18nText("auto_rename_layers.too_many_layers_selected"), a = renderI18nText("auto_rename_layers.too_many_layers_count", {
           selected: error.layerCount,
-          limit: NB
+          limit: MAX_LAYER_COUNT
         }), r = []);
         sZ(error) === ErrorType.UNSAFE_OR_HARMFUL_CONTENT && (r = []);
         return jsx(_$$E, {

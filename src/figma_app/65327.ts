@@ -26,7 +26,7 @@ import { setActiveVersion, CURRENT_VERSION_ID, exitVersionHistoryMode } from "..
 import { FEditorType } from "../figma_app/53721";
 import { LoadingBarStatus } from "../figma_app/915202";
 import { ManifestEditorType } from "../figma_app/155287";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { SimpleComponentType } from "../figma_app/504088";
 import { R as _$$R } from "../905/300969";
 import { c as _$$c2 } from "../905/580030";
@@ -53,7 +53,7 @@ export function $$k0(e, t) {
   let ee = _$$W();
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   return useCallback(n => {
     if (M(!1), j(!1), $ || n === Z) return !1;
     if (close(), "handoff" === n) {

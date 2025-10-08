@@ -14,7 +14,7 @@ import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
 import { getVisibleTheme } from "../905/640017";
-import { E as _$$E2 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { LZ } from "../figma_app/101956";
 import { N as _$$N2 } from "../figma_app/268271";
@@ -22,7 +22,7 @@ import { ImageOverlayComponent } from "../905/129046";
 import { _l } from "../figma_app/995208";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { SAR, jk, ODB, QKV } from "../figma_app/6204";
+import { CooperModal, CooperBulkCreate, CooperInsertLockedTemplate, CooperPublishTemplatesOverview } from "../figma_app/6204";
 import { useIsFullscreenReady } from "../figma_app/21029";
 import { XF, WW, qA, Mt, D9 } from "../1250/182479";
 export function $$N2() {
@@ -32,7 +32,7 @@ export function $$N2() {
     isShowing,
     complete
   } = _$$e({
-    overlay: SAR,
+    overlay: CooperModal,
     priority: _$$N2.DEFAULT_MODAL
   });
   let m = Xr(Tw);
@@ -120,7 +120,7 @@ export function $$A0({
     isShowing,
     complete
   } = _$$e({
-    overlay: jk,
+    overlay: CooperBulkCreate,
     priority: _$$N2.DEFAULT_MODAL
   });
   let s = useSelectedAndFocusedNodeIds();
@@ -171,13 +171,13 @@ export function $$O3() {
     complete,
     uniqueId
   } = _$$e({
-    overlay: ODB,
+    overlay: CooperInsertLockedTemplate,
     priority: _$$N2.DEFAULT_MODAL
   });
   let a = useSelectedAndFocusedNodeIds();
   let s = a.length ? a[0] : null;
   isShowing && !s && complete();
-  _$$E2(uniqueId, qA, () => {
+  useEventForwarder(uniqueId, qA, () => {
     show();
   });
   return jsx(OnboardingModal, {
@@ -212,10 +212,10 @@ export function $$L1() {
     complete,
     uniqueId
   } = _$$e({
-    overlay: QKV,
+    overlay: CooperPublishTemplatesOverview,
     priority: _$$N2.DEFAULT_MODAL
   });
-  _$$E2(uniqueId, Mt, () => {
+  useEventForwarder(uniqueId, Mt, () => {
     show();
   });
   return jsx(OnboardingModal, {

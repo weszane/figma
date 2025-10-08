@@ -9,7 +9,7 @@ import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { c$, wv, MM } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useDropdown } from "../905/848862";
-import { Jz } from "../905/504727";
+import { PointingDropdown } from "../905/504727";
 import { Button } from "../905/521428";
 import { c as _$$c } from "../905/566438";
 import { kz } from "../figma_app/171177";
@@ -149,7 +149,7 @@ function v(e) {
           isActive: showing
         })
       })
-    }), showing && b && jsx(Jz, {
+    }), showing && b && jsx(PointingDropdown, {
       "aria-labelledby": e.buttonId,
       autoHeight: !0,
       autofocusPrevOnDismount: !0,

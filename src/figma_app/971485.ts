@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
 import { isIframe } from "../905/508367";
-import { wY, cU } from "../figma_app/708845";
+import { useResizeObserverRef, initialSize } from "../figma_app/708845";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { interactiveAnchorTracked } from "../figma_app/637027";
@@ -22,7 +22,7 @@ function T(e) {
   let c = useRef(null);
   let u = useRef();
   let E = Xr(consentCounterAtom);
-  let T = wY(c) ?? cU;
+  let T = useResizeObserverRef(c) ?? initialSize;
   let I = t ? T.height + (e.verticalPadding || 0) : 0;
   useEffect(() => {
     E(I);

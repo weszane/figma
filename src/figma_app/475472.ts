@@ -12,10 +12,10 @@ import { selectViewAction, hydrateFileBrowser } from "../905/929976";
 import { loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { rolePostAction } from "../905/98702";
 import { setTeamCreationLoadingAction, postTeamAction, renameTeamAction, changeSharingSettingsAction, joinTeamAction, batchJoinTeamAction } from "../figma_app/240735";
-import { b as _$$b } from "../905/493664";
+import { updateTeamRoleRequests } from "../905/493664";
 import { trackTeamEvent } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
-import { p9, n1 } from "../figma_app/88768";
+import { generateJoinTeamCacheKey, generateBatchJoinTeamsCacheKey } from "../figma_app/88768";
 import { sendRoleInvites } from "../905/351260";
 import { getUserState } from "../figma_app/502247";
 import { AccessLevelEnum } from "../905/557142";
@@ -219,7 +219,7 @@ let $$R5 = createOptimistThunk((e, t) => {
   trackEventAnalytics("file-browser-hydrate", {
     location: "team.onJoin"
   });
-  let r = p9(t.teamId);
+  let r = generateJoinTeamCacheKey(t.teamId);
   getUserState("onJoinTeam").then(n => {
     let i = t.teamId;
     e.dispatch(hydrateFileBrowser(n.data.meta));
@@ -254,7 +254,7 @@ let $$L4 = createOptimistThunk((e, t) => {
   trackEventAnalytics("file-browser-hydrate", {
     location: "team.onBatchJoin"
   });
-  let r = n1(t.teamIds);
+  let r = generateBatchJoinTeamsCacheKey(t.teamIds);
   getUserState("onBatchJoinTeams").then(n => {
     e.dispatch(hydrateFileBrowser(n.data.meta));
     let i = t.teamIds.length;
@@ -289,7 +289,7 @@ let $$P3 = createOptimistThunk(e => {
   _$$c.getTeamRoleRequestsOrgId({
     orgId: t
   }).then(t => {
-    e.dispatch(_$$b({
+    e.dispatch(updateTeamRoleRequests({
       teamRoleRequests: t.data.meta
     }));
   });

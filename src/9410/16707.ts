@@ -27,7 +27,7 @@ import { _l } from "../figma_app/995208";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition, PositioningStrategy } from "../905/858282";
 import { canEnterDesignMode } from "../figma_app/357367";
-import { Yqi } from "../figma_app/6204";
+import { SlidesOnboarding } from "../figma_app/6204";
 import { useHasValidSceneSlideTheme } from "../figma_app/21029";
 import { g as _$$g } from "../9410/28058";
 import { VZ } from "../figma_app/60023";
@@ -52,7 +52,7 @@ export function $$K0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: Yqi,
+    overlay: SlidesOnboarding,
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
   let c = useMemo(() => i ? [$$H1, z, V, W, Y, J] : [$$H1, z, V, W, J], [i]);

@@ -21,7 +21,7 @@ import { N as _$$N2 } from "../figma_app/268271";
 import { zo } from "../1250/615231";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
-import { kKu } from "../figma_app/6204";
+import { EsEsLaunchAnnouncementModal } from "../figma_app/6204";
 if (443 == require.j) {}
 if (443 == require.j) {}
 var C = (e => (e.SPAIN = "spain", e.NON_SPAIN = "non_spain", e))(C || {});
@@ -98,7 +98,7 @@ export function $$M0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: kKu,
+    overlay: EsEsLaunchAnnouncementModal,
     priority: _$$N2.SECONDARY_MODAL,
     experiment: {
       check: () => {

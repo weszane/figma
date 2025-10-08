@@ -21,7 +21,7 @@ import { FEditorType } from "../figma_app/53721";
 import { LIBRARY_PREFERENCES_MODAL, SHARED_FONTS_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { s as _$$s2 } from "../905/715327";
-import { y as _$$y } from "../905/375507";
+import { SharedFontsComponent } from "../905/375507";
 import { s as _$$s3 } from "../905/587936";
 import { _K, SE } from "../905/542608";
 import { Z } from "../905/582804";
@@ -93,7 +93,7 @@ let $$k1 = registerModal(function ({
   L(SHARED_FONTS_MODAL);
   let t = useDispatch();
   useEffect(() => {
-    _$$y.loadSharedFonts(t);
+    SharedFontsComponent.loadSharedFonts(t);
   }, [t]);
   return jsx(P, {
     initialTab: LibraryTabEnum.FONTS,
@@ -150,7 +150,7 @@ function F({
         showingDefaultSubscriptionsForTeamId: t,
         showingDefaultSubscriptionsForUser: !1,
         width: h
-      }), selectedTab === LibraryTabEnum.FONTS && jsx(_$$y, {
+      }), selectedTab === LibraryTabEnum.FONTS && jsx(SharedFontsComponent, {
         dispatch: r,
         teamId: t,
         width: h,

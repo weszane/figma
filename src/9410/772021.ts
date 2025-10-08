@@ -13,7 +13,7 @@ import { TrackingKeyEnum } from "../905/696396";
 import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { QLv, xiH } from "../figma_app/6204";
+import { FigJamAiToolbarOverlay, FigJamAiNewFileOverlay } from "../figma_app/6204";
 import { W1, qe, rM, RC } from "../figma_app/318123";
 let $$b1 = "ai_generate_onboarding_key";
 let $$C0 = "ai_new_file_modal_v2_onboarding_key";
@@ -28,7 +28,7 @@ export function $$I3() {
   let t = useAtomWithSubscription(qe);
   let i = useAtomWithSubscription(rM);
   let s = _$$e({
-    overlay: QLv,
+    overlay: FigJamAiToolbarOverlay,
     priority: N.HIGH_PRIORITY_MODAL
   }, [e]);
   useEffect(() => {
@@ -59,7 +59,7 @@ export function $$k2({
   let p = useAtomWithSubscription(j);
   let b = Xr(RC);
   let C = _$$e({
-    overlay: xiH,
+    overlay: FigJamAiNewFileOverlay,
     priority: N.HIGH_PRIORITY_MODAL
   }, [i, n, t, p]);
   useSingleEffect(() => {

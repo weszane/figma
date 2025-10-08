@@ -12,12 +12,12 @@ import { generateRecordingKey } from '../figma_app/878298';
 import { QE } from '../figma_app/914216';
 import { S } from '../figma_app/924300';
 import { camelToSnake } from '../figma_app/930338';
-import { ZU } from '../figma_app/986347';
+import { DMenuItemType } from '../figma_app/986347';
 function m({
   action: e
 }) {
   switch (e.type) {
-    case ZU.FLYOUT:
+    case DMenuItemType.FLYOUT:
       return jsx(AutoInteractableWrapper, {
         name: 'selection_actions_button',
         alsoTrack: () => ({
@@ -28,7 +28,7 @@ function m({
           recordingKey: generateRecordingKey(If, e.flyoutRecordingKey)
         })
       }, e.dropdownKey);
-    case ZU.ACTION:
+    case DMenuItemType.ACTION:
       return jsx(AutoInteractableWrapper, {
         name: 'selection_actions_button',
         alsoTrack: () => ({
@@ -40,11 +40,11 @@ function m({
           recordingKey: If
         })
       }, e?.reactKey ?? e?.recordingKey);
-    case ZU.CUSTOM_ACTION:
+    case DMenuItemType.CUSTOM_ACTION:
       return jsx(XS, {
         item: e
       }, e.recordingKey);
-    case ZU.ACTION_SUBMENU:
+    case DMenuItemType.ACTION_SUBMENU:
       return jsx(AutoInteractableWrapper, {
         name: 'selection_actions_button',
         alsoTrack: () => ({
@@ -76,7 +76,7 @@ export let $$b0 = memo(e => {
   return jsxs('div', {
     ...props(R.selectionActionsButtons),
     children: [x.map(e => {
-      let t = e.type === ZU.FLYOUT ? e.flyoutRecordingKey : 'reactKey' in e ? e.reactKey : e.recordingKey;
+      let t = e.type === DMenuItemType.FLYOUT ? e.flyoutRecordingKey : 'reactKey' in e ? e.reactKey : e.recordingKey;
       return jsx(m, {
         action: e
       }, t);

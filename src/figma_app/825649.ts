@@ -17,12 +17,12 @@ import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useComponentBrowserEntrypoint } from "../figma_app/88239";
 import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
 import { hideDropdownAction } from "../905/929976";
-import { $m } from "../figma_app/78808";
-import { Rh } from "../905/844322";
+import { setFileThumbnailOptimistic } from "../figma_app/78808";
+import { handleRestoreTrashedFilesHelper } from "../905/844322";
 import { U1, kj } from "../905/191601";
 import { beginRenaming } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
-import { VK } from "../905/880488";
+import { deleteFilesOptimistThunk } from "../905/880488";
 import { n6 } from "../905/234821";
 import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
@@ -33,7 +33,7 @@ import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { isBranchAlt, getRepoByIdAlt, isDefaultFile } from "../905/760074";
 import { t as _$$t2, m as _$$m } from "../905/364535";
 import { $n } from "../905/930279";
-import { F as _$$F } from "../905/300562";
+import { FileOrgViewMode } from "../905/300562";
 import { findFavoritedItem, isFavoritesLimitReached, sortWithPinnedItems } from "../figma_app/863319";
 import { getProjectUrl } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
@@ -385,7 +385,7 @@ export function $$eO1({
           type: _$$e3,
           data: {
             fileKey: eM.key,
-            entrypoint: _$$F.FileView
+            entrypoint: FileOrgViewMode.FileView
           }
         }));
       }
@@ -490,7 +490,7 @@ export function $$eO1({
     displayText: "Restore",
     callback: () => {
       z(hideDropdownAction());
-      eU && z(Rh({
+      eU && z(handleRestoreTrashedFilesHelper({
         fileKeys: {
           [eM.key]: eU
         },
@@ -522,7 +522,7 @@ export function $$eO1({
     displayText: tj ? getI18nString("fullscreen.filename_view.archive-branch") : getI18nString("fullscreen.filename_view.move_to_trash"),
     callback: tj ? () => {
       z(hideDropdownAction());
-      eU && (z(VK({
+      eU && (z(deleteFilesOptimistThunk({
         fileKeys: {
           [eM.key]: eU
         },
@@ -573,7 +573,7 @@ export function $$eO1({
     recordingKey: "resetFileThumbnail",
     displayText: getFeatureFlags().dse_library_pg_thumbnails ? getI18nString("fullscreen.filename_view.restore_default_file_thumbnail") : getI18nString("fullscreen.filename_view.restore_default_thumbnail"),
     callback: () => {
-      z($m({
+      z(setFileThumbnailOptimistic({
         file_key: eM.key,
         thumbnail_guid: null
       }));

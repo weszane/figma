@@ -17,7 +17,7 @@ import { trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { J } from "../905/980942";
 import { Ay } from "../figma_app/976110";
 import { Gh, d_, xP } from "../905/727576";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { AIActionIterationResult } from "../905/278499";
 import { ActionButton } from "../905/189361";
 import { FlexBox } from "../905/222272";
@@ -41,7 +41,7 @@ export function $$k0({
   let N = useSceneGraphSelector();
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let O = useMemo(() => new cP(N), [N]);
   let D = new Xi(!0);
   let L = jsx(Oq, {

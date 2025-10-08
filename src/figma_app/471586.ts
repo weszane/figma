@@ -11,7 +11,7 @@ import { N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
 import { ArrowPosition } from "../905/858282";
-import { OKV } from "../figma_app/6204";
+import { DtmDeprecationFileOverlay } from "../figma_app/6204";
 let f = userFlagExistsAtomFamily("seen_dtm_deprecation_file_overlay");
 let $$E1 = "dtm_deprecation_file_overlay_key";
 export function $$y0(e) {
@@ -21,7 +21,7 @@ export function $$y0(e) {
     isShowing,
     complete
   } = _$$e({
-    overlay: OKV,
+    overlay: DtmDeprecationFileOverlay,
     priority: N.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {

@@ -62,7 +62,7 @@ import { j as _$$j } from "../905/834956";
 import { PH } from "../figma_app/701580";
 import { tO as _$$tO } from "../figma_app/598952";
 import { ec as _$$ec } from "../figma_app/29089";
-import { ZU } from "../figma_app/986347";
+import { DMenuItemType } from "../figma_app/986347";
 import { M as _$$M } from "../figma_app/182591";
 import { dM, WT, q3, e1, by, yT, gb, U as _$$U2, TE, Zm, Ex, AQ, ET, Er } from "../figma_app/152574";
 import { A as _$$A2 } from "../6828/255111";
@@ -116,7 +116,7 @@ function eN(e) {
   return e.iconOverride ? {
     svg: e.iconOverride,
     ui3Icon: jsx(_$$V, {})
-  } : e.type === ZU.TOOL ? LW(e.tool) : e.type === ZU.ACTION || e.type === ZU.TEXT_BUTTON ? bs(e.action) : (console.error(`Couldn't find icon for item ${e}`), null);
+  } : e.type === DMenuItemType.TOOL ? LW(e.tool) : e.type === DMenuItemType.ACTION || e.type === DMenuItemType.TEXT_BUTTON ? bs(e.action) : (console.error(`Couldn't find icon for item ${e}`), null);
 }
 export class $$eC6 extends RecordingPureComponent {
   constructor() {
@@ -361,7 +361,7 @@ export function $$ej5(e) {
   } = e;
   let d = useRef(null);
   let c = eN(item)?.svg || null;
-  let u = item.type === ZU.ACTION ? GG(item.action) : null;
+  let u = item.type === DMenuItemType.ACTION ? GG(item.action) : null;
   let p = fullscreenAlias.getIsExtension();
   let _ = useRef(null);
   if (!isActive && _.current && _.current === document.activeElement && KeyboardFocusManager.focusCustomCanvasFocusElement(), !c) return null;

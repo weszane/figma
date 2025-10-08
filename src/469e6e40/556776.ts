@@ -33,7 +33,7 @@ import { be } from "../figma_app/474636";
 import { setupUserPluginPreferences } from "../figma_app/545541";
 import { PluginImage } from "../905/480825";
 import { j as _$$j } from "../905/834956";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { SimpleComponentType } from "../figma_app/504088";
 import { yG, dr } from "../7492/487492";
 export function $$$1() {
@@ -343,7 +343,7 @@ function H({
   unpinPlugin: t
 }) {
   let a = useDropdownState();
-  return jsx(Cf, {
+  return jsx(ConnectedPointingDropdown, {
     targetRect: a?.data.targetRect,
     lean: "left",
     minWidth: 64,

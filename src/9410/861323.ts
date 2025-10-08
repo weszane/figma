@@ -16,7 +16,7 @@ import { useIsLoading } from "../905/18797";
 import { FDocumentType } from "../905/862883";
 import { KindEnum } from "../905/129884";
 import { cd } from "../905/381612";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { c5 } from "../905/526509";
 import { hx } from "../figma_app/630194";
 import { ws, NT } from "../3276/316480";
@@ -215,7 +215,7 @@ function H({
   let b = useCurrentUserOrg();
   let S = useSelector(e => e.universalInsertModal.showing);
   let I = fG();
-  let A = _$$r(S, c?.stage !== "FULL" ? _$$p.MORE : void 0);
+  let A = _$$r(S, c?.stage !== "FULL" ? TabCategory.MORE : void 0);
   useEffect(() => {
     l(cd.fetchTemplatesMetadata({
       key: FDocumentType.FigJam,

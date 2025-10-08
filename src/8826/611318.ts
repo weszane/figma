@@ -81,7 +81,7 @@ import { N as _$$N2 } from "../figma_app/268271";
 import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { c$$ } from "../figma_app/6204";
+import { GridOnboarding } from "../figma_app/6204";
 import { e as _$$e2 } from "../905/810361";
 import { Yh } from "../figma_app/357047";
 import { m7, Hh } from "../figma_app/386160";
@@ -1095,7 +1095,7 @@ function tl() {
     isShowing,
     complete
   } = _$$e({
-    overlay: c$$,
+    overlay: GridOnboarding,
     priority: _$$N2.SECONDARY_MODAL
   }, [e, t]);
   useSingleEffect(() => {

@@ -9,14 +9,14 @@ import { eC } from "../figma_app/982327";
 import { Ut } from "../figma_app/425283";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
 import { d as _$$d } from "../figma_app/603561";
 import { selectUserFlag } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { d8X } from "../figma_app/6204";
+import { SeatApprovalOverlay } from "../figma_app/6204";
 if (443 == require.j) {}
 if (443 == require.j) {}
 let y = "seen_seat_approval_overlay";
@@ -35,7 +35,7 @@ function k({
     complete,
     uniqueId
   } = _$$e2({
-    overlay: d8X,
+    overlay: SeatApprovalOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   let S = e => s(postUserFlag({
@@ -48,7 +48,7 @@ function k({
   useSingleEffect(() => {
     !r || h || a?.student_team || show();
   });
-  _$$E(uniqueId, "settings_tab_click", () => {
+  useEventForwarder(uniqueId, "settings_tab_click", () => {
     isShowing && N();
   });
   let I = e ? renderI18nText("billing_modals.seat_approval_overlay.description") : renderI18nText("billing_modals.seat_approval_overlay.org_description");

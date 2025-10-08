@@ -11,7 +11,7 @@ import { z } from "../905/653569";
 import { AffineTransform } from "../905/583953";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
-import { wY, cU } from "../figma_app/708845";
+import { useResizeObserverRef, initialSize } from "../figma_app/708845";
 import { useSingleEffect } from "../905/791079";
 import { KeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
@@ -334,7 +334,7 @@ export function $$F1(e) {
     data: null
   };
   let d = useRef(null);
-  let c = wY(d) ?? cU;
+  let c = useResizeObserverRef(d) ?? initialSize;
   let u = useRef(null);
   let p = 24 * scale;
   let {
@@ -443,10 +443,10 @@ export function $$U2(e) {
     Overlay
   } = e;
   let a = useRef(null);
-  let s = wY(a) ?? cU;
+  let s = useResizeObserverRef(a) ?? initialSize;
   let o = useRef(null);
   let l = window.devicePixelRatio || 0;
-  let d = useMemo(() => s !== cU ? function (e, t, r = 1) {
+  let d = useMemo(() => s !== initialSize ? function (e, t, r = 1) {
     let {
       width,
       height

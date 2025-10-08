@@ -44,7 +44,7 @@ import { splitPath, getBasename } from '../905/309735';
 import { T as _$$T4 } from '../905/336775';
 import { selectTeams } from '../905/338617';
 import { I as _$$I } from '../905/342732';
-import { P as _$$P5 } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { UpgradeAction } from '../905/370443';
 import { jp, qF, WS } from '../905/370597';
 import { selectCurrentUser, getUserId } from '../905/372672';
@@ -129,7 +129,7 @@ import { B as _$$B } from '../9410/966396';
 import { A as _$$A6 } from '../af221b13/388839';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { we } from '../figma_app/987';
-import { QI3 } from '../figma_app/6204';
+import { VisualAssetPacksTooltip } from '../figma_app/6204';
 import { Dm } from '../figma_app/8833';
 import { getSiteKitAssets, SITE_KIT_EMBEDS_LIBRARY_KEY } from '../figma_app/10098';
 import { FX as _$$FX } from '../figma_app/12491';
@@ -217,7 +217,7 @@ import { _ as _$$_ } from '../figma_app/658134';
 import { isFrameMostlyVisible, useViewportStability, useBestFrame } from '../figma_app/663669';
 import { Ay as _$$Ay, jx, W7 } from '../figma_app/675746';
 import { rp as _$$rp, PI } from '../figma_app/703988';
-import { wY } from '../figma_app/708845';
+import { useResizeObserverRef } from '../figma_app/708845';
 import { _C, NG } from '../figma_app/709893';
 import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { E1 } from '../figma_app/757606';
@@ -265,7 +265,7 @@ function M() {
     isShowing,
     complete
   } = _$$e({
-    overlay: QI3,
+    overlay: VisualAssetPacksTooltip,
     priority: _$$N.SECONDARY_MODAL
   }, [s]);
   let o = alwaysFalseCallback2();
@@ -4143,7 +4143,7 @@ function nL({
     libraryKey,
     pageId: page.id
   });
-  return jsx(_$$P5, {
+  return jsx(RecordingScrollContainer, {
     hideScrollbar: !0,
     onScroll: handleScrollAssets,
     initialScrollTop: assetsScrollTop,
@@ -8186,7 +8186,7 @@ function an({
   }(t.localAssets);
   let i = useSubscribedLibraries().status === 'loading';
   let l = useRef(null);
-  let c = wY(l)?.width || e;
+  let c = useResizeObserverRef(l)?.width || e;
   let [u] = MA();
   let p = selectCurrentFile();
   useSingleEffect(() => {

@@ -17,7 +17,7 @@ import { d as _$$d } from "../figma_app/429226";
 import { generateRecordingKey, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { captureMessage } from "../905/11";
 import { Point } from "../905/736624";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { o$ } from "../figma_app/8833";
 import { fullscreenValue } from "../figma_app/455680";
@@ -1076,7 +1076,7 @@ let e7 = memo(function ({
     interactionType: ed,
     actions: mergedActions
   });
-  let th = jsx(_$$P, {
+  let th = jsx(RecordingScrollContainer, {
     className: Y ? "prototype_interaction_edit_modal--ui3TwoColScrollContainer--IWuQ4" : ek,
     useBottomPinning: !Y,
     ref: eU,
@@ -1229,7 +1229,7 @@ let e7 = memo(function ({
   });
   let tN = mergedActions.length > 0 ? jsx(_$$c.Provider, {
     value: _$$P3.RIGHT,
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       allowScrollAndZoomOver: !0,
       "data-not-draggable": !0,
       className: Y ? "prototype_interaction_edit_modal--ui3ScrollContainerRight--LJr-n" : void 0,

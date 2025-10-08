@@ -19,7 +19,7 @@ import { useDebounce } from 'use-debounce';
 import { APILoadingStatus } from "../905/520829";
 import { LazyInputForwardRef } from "../905/408237";
 import { LoadingOverlay } from "../figma_app/858013";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { In } from "../905/672640";
 import { Ki } from "../figma_app/328188";
 import { o as _$$o } from "../905/268099";
@@ -126,7 +126,7 @@ function G({
       }), d]
     }), jsx("div", {
       className: cssBuilderInstance.py8.$,
-      children: jsx(_$$P, {
+      children: jsx(RecordingScrollContainer, {
         children: o ? h ? jsx("div", {
           className: cssBuilderInstance.h350.$,
           children: jsx(LoadingOverlay, {})
@@ -268,7 +268,7 @@ let z = registerModal(function (e) {
       })]
     })
   });
-  let en = jsx(_$$P, {
+  let en = jsx(RecordingScrollContainer, {
     children: jsxs("div", {
       children: [!B?.length && jsxs("div", {
         className: Al,

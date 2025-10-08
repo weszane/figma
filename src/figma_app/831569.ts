@@ -7,7 +7,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { KI } from "../figma_app/797994";
 import { N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
-import { V86 } from "../figma_app/6204";
+import { OnboardNewTextContentRowLocation } from "../figma_app/6204";
 export let $$_0 = "new_text_row_location_callout";
 export function $$h1() {
   let e = userFlagExistsAtomFamily("seen_text_row_location_callout");
@@ -17,7 +17,7 @@ export function $$h1() {
     isShowing,
     complete
   } = _$$e({
-    overlay: V86,
+    overlay: OnboardNewTextContentRowLocation,
     priority: N.SECONDARY_MODAL
   }, [t]);
   useSingleEffect(() => {

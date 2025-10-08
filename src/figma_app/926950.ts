@@ -14,7 +14,7 @@ import { Checkbox } from '../905/274480';
 import { Tf } from '../905/280919';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { Link } from '../905/438674';
 import { Y as _$$Y } from '../905/506207';
 import { Button } from '../905/521428';
@@ -546,7 +546,7 @@ function ep(e) {
       children: [jsx(SvgComponent, {
         svg: _$$A
       }), renderI18nText('bug_reporter.drop_attachments')]
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       maxHeight: ep,
       hideScrollbar: Y,
       children: jsxs('form', {

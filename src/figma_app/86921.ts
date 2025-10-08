@@ -1,7 +1,7 @@
 import { getInitialOptions } from "../figma_app/169182";
 import { SET_MINIMAL_MFA_USER } from "../905/194276";
 import { hydrateFileBrowser, initAction } from "../905/929976";
-import { yJ, WJ, C$, hz } from "../figma_app/24841";
+import { putUserAction, userEraseSecretsAction, userToggleTwoFactorAction, deleteUserLoadingAction } from "../figma_app/24841";
 import { updateUserColorProfileAction } from "../figma_app/829197";
 export function $$l4(e, t) {
   return t && t.id === e.id ? "You" : e.handle;
@@ -18,7 +18,7 @@ export function $$u2(e = null, t) {
     ...e,
     ...t.payload.user
   };
-  if (yJ.matches(t)) {
+  if (putUserAction.matches(t)) {
     if (e && e.id === t.payload.user.id) {
       let r = new Map(e.dev_tokens?.map(e => [e.id, e]));
       let n = [];
@@ -35,17 +35,17 @@ export function $$u2(e = null, t) {
         dev_tokens: n
       };
     }
-  } else if (WJ.matches(t)) return e ? {
+  } else if (userEraseSecretsAction.matches(t)) return e ? {
     ...e,
     two_factor_secret_loaded: !1,
     password_token: void 0,
     temp_phone: void 0,
     phone_token: void 0,
     backup_codes: void 0
-  } : null;else if (C$.matches(t)) return e ? {
+  } : null;else if (userToggleTwoFactorAction.matches(t)) return e ? {
     ...e,
     two_factor_app_enabled: t.payload.enabled
-  } : null;else if (hz.matches(t)) return e ? {
+  } : null;else if (deleteUserLoadingAction.matches(t)) return e ? {
     ...e,
     delete_user_loading: t.payload.loading
   } : null;else if (hydrateFileBrowser.matches(t)) return e ? {

@@ -7,7 +7,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 import { Xo } from "../figma_app/687767";
 import { useEffectiveThemeId } from "../figma_app/226737";
 import { vK } from "../figma_app/587612";
@@ -42,8 +42,8 @@ export function $$f0() {
     let e = t.map(e => {
       let t = r[e.node_id];
       return {
-        type: ZU.CUSTOM_ACTION,
-        customActionType: Wg.STANDARD_BUTTON,
+        type: DMenuItemType.CUSTOM_ACTION,
+        customActionType: DButtonType.STANDARD_BUTTON,
         onClick: scopeAwareFunction.user("replace-text-style", () => {
           Fullscreen?.updateExistingStyleFromSelection("inheritTextStyleKey", e.node_id);
         }),
@@ -57,8 +57,8 @@ export function $$f0() {
       };
     });
     e.unshift({
-      type: ZU.CUSTOM_ACTION,
-      customActionType: Wg.DROPDOWN_GROUP_HEADER,
+      type: DMenuItemType.CUSTOM_ACTION,
+      customActionType: DButtonType.DROPDOWN_GROUP_HEADER,
       onClick: noop,
       getTitle: () => getI18nString("slides.properties_panel.text_styles.styles"),
       preventHoisting: !0,
@@ -69,7 +69,7 @@ export function $$f0() {
   let g = vK();
   return useMemo(() => {
     if (g) return {
-      type: ZU.ACTION_SUBMENU,
+      type: DMenuItemType.ACTION_SUBMENU,
       recordingKey: "replaceStyle",
       getTitle: () => getI18nString("slides.properties_panel.text_style.replace_style"),
       items: u,

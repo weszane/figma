@@ -11,7 +11,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { hideModal } from "../905/156213";
@@ -49,7 +49,7 @@ function C(e) {
       t(hideModal());
       e.markModalClosed();
     },
-    children: jsxs(_$$P, {
+    children: jsxs(RecordingScrollContainer, {
       scrollBarAlways: !1,
       className: "manage_memory--manageMemoryModal--gbZet",
       children: [jsx(k, {

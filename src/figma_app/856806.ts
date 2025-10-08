@@ -17,7 +17,7 @@ import { selectLocalSymbolsWithUsagesOnCurrentPage } from "../figma_app/889655";
 import { subscribedSymbolsOnCurrentPageSelector } from "../figma_app/141508";
 import { Q } from "../905/577205";
 import { zV, Af, mO } from "../figma_app/410317";
-import { HX, zi } from "../figma_app/97042";
+import { getBackingNodeInfo, createNodeKey } from "../figma_app/97042";
 function S(e, t, r, n) {
   if (!e) return new Set();
   let i = new Set();
@@ -26,7 +26,7 @@ function S(e, t, r, n) {
       let {
         backingNodeId,
         backingLibraryKey
-      } = HX(a.guid, t, n);
+      } = getBackingNodeInfo(a.guid, t, n);
       backingLibraryKey && backingNodeId && i.add(`${backingLibraryKey},${backingNodeId}`);
     }
     a.childCount > 0 && S(a, t, r, n).forEach(e => i.add(e));
@@ -41,7 +41,7 @@ function v(e, t, r, n, i) {
       let {
         backingStateGroupKey,
         backingComponentKey
-      } = HX(s.id, t, r);
+      } = getBackingNodeInfo(s.id, t, r);
       let l = backingStateGroupKey || backingComponentKey || null;
       !l && s.symbolId && n && i && (l = A(s.symbolId, n, i));
       l && a.add(l);
@@ -75,7 +75,7 @@ function x(e, t) {
     return useMemo(() => {
       let n = new Set();
       if (!e) return n;
-      for (let [e, i] of Object.entries(t)) i.containing_frame?.pageId === r && (i.containing_frame?.containingStateGroup?.nodeId ? n.add(zi(a, i.containing_frame?.containingStateGroup.nodeId)) : n.add(zi(a, e)));
+      for (let [e, i] of Object.entries(t)) i.containing_frame?.pageId === r && (i.containing_frame?.containingStateGroup?.nodeId ? n.add(createNodeKey(a, i.containing_frame?.containingStateGroup.nodeId)) : n.add(createNodeKey(a, e)));
       return n;
     }, [r, t]);
   }(e);
@@ -88,7 +88,7 @@ function x(e, t) {
       let {
         backingNodeId,
         backingLibraryKey
-      } = HX(n.nodeId, a, r);
+      } = getBackingNodeInfo(n.nodeId, a, r);
       if (backingLibraryKey && backingNodeId) for (let e of (t.add(`${backingLibraryKey},${backingNodeId}`), i)) t.add(e);
     }
     let n = new Set();
@@ -117,7 +117,7 @@ export function $$N3() {
     for (let i of l) {
       let {
         backingLibraryKey
-      } = HX(i.nodeId, t, e);
+      } = getBackingNodeInfo(i.nodeId, t, e);
       if (backingLibraryKey) {
         let e = _$$l(backingLibraryKey);
         r.add(e);
@@ -146,7 +146,7 @@ export function $$N3() {
       let {
         backingComponentKey,
         backingStateGroupKey
-      } = HX(r.nodeId, t, e);
+      } = getBackingNodeInfo(r.nodeId, t, e);
       if (backingComponentKey || backingStateGroupKey) {
         let e = backingStateGroupKey || backingComponentKey;
         e && n.add(e);

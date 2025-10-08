@@ -28,10 +28,10 @@ import { LibraryItemTileContextMenuType } from '../905/275787';
 import { Z as _$$Z } from '../905/279476';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { R as _$$R } from '../905/307199';
+import { CenterTruncatedText } from '../905/307199';
 import { z as _$$z } from '../905/316889';
 import { g as _$$g } from '../905/317997';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { H as _$$H, S as _$$S2 } from '../905/348433';
 import { UpgradeAction } from '../905/370443';
 import { _ as _$$_ } from '../905/381235';
@@ -1190,7 +1190,7 @@ function e5({
     metadata: h,
     loading: d
   });
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     children: jsx('div', {
       className: cssBuilderInstance.flex.flexColumn.gap16.p16.$,
       children: d ? jsx(e9, {}) : jsxs(Fragment, {
@@ -2200,7 +2200,7 @@ function tX() {
       loading: i,
       emptyState: a,
       metadata: d,
-      children: jsx(_$$P, {
+      children: jsx(RecordingScrollContainer, {
         className: 'library_modal_search_tab--searchScrollContainer--G5eqv',
         children: jsxs('div', {
           className: 'library_modal_search_tab--searchBody--r2twU',
@@ -2611,7 +2611,7 @@ function ib() {
     children: jsx(ec, {
       children: jsxs(_$$Q3, {
         width: e,
-        children: [jsxs(_$$P, {
+        children: [jsxs(RecordingScrollContainer, {
           className: 'library_modal_this_file_tab--thisFileScrollContainer--Sf-b6',
           children: [jsx(_$$W2.PageViewTracker, {
             loading: m,
@@ -2804,19 +2804,19 @@ function np({
         className: nc,
         children: [jsx('div', {
           className: 'updates_list_item--updateTitle--GaaBq text--fontPos13--xW8hS text--_fontBase--QdLsd',
-          children: jsx(_$$R, {
+          children: jsx(CenterTruncatedText, {
             text: e.name
           })
         }), movedFromFileName && jsx('span', {
           className: nu,
-          children: jsx(_$$R, {
+          children: jsx(CenterTruncatedText, {
             text: getI18nString('design_systems.updates.moved_from', {
               movedFromFileName
             })
           })
         }), p !== AssetFilterMode.CURRENT && !!numOutdatedInstances && jsx('span', {
           className: nu,
-          children: jsx(_$$R, {
+          children: jsx(CenterTruncatedText, {
             text: getI18nString('design_systems.updates.num_outdated_instances', {
               numOutdatedInstances
             })
@@ -3226,7 +3226,7 @@ function ny({
   }(_ref, !Y);
   let et = useHandleMouseEvent(a, 'click', updateAll);
   let ei = jsxs(Fragment, {
-    children: [jsxs(_$$P, {
+    children: [jsxs(RecordingScrollContainer, {
       width: e,
       className: 'updates--updatesContent--i15qb text--fontPos11--2LvXf text--_fontBase--QdLsd updates--scrollContainer--rzDnF',
       height: t,

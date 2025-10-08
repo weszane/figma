@@ -1,7 +1,7 @@
 import { PluginHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { I as _$$I } from "../905/117966";
+import { splitBufferIntoRawStacks } from "../905/117966";
 import { fetchDynamicConfig } from "../figma_app/594947";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { fullscreenValue } from "../figma_app/455680";
@@ -23,7 +23,7 @@ import { createPluginInstance, defineAlertFunction } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import K from "../905/536567";
 import { FetchPlugin } from "../figma_app/985200";
-import { JX } from "../905/104019";
+import { clearPlaybackHandler } from "../905/104019";
 let n;
 var r;
 var a;
@@ -102,11 +102,11 @@ class I {
           let i = "";
           try {
             i = n.getString(n.getPropStr(t, "name"));
-          } catch (e) { }
-          let a = function () { };
+          } catch (e) {}
+          let a = function () {};
           if (r = i, v.test(r) && !b.has(r)) try {
             a = Function(`return function ${i}() {}`)();
-          } catch (e) { }
+          } catch (e) {}
           e.set(t, a);
           return a;
         }
@@ -157,7 +157,7 @@ class I {
           return e.cloneValue(a, r);
         };
       }
-      u && (p.set = () => { });
+      u && (p.set = () => {});
       Object.defineProperty(r, s, p);
     }
     return r;
@@ -279,7 +279,7 @@ async function T(e) {
       s(e._jsvm_setPropStr(t, n(i), r));
     },
     definePropStr(t, i, r) {
-      if (l(), ("get" in r || "set" in r) && !("value" in r || "writable" in r)) s(e._jsvm_accessorDefinePropStr(t, n(i), void 0 === r.get ? d.undefined : d.newFunction("get_" + i, r.get), void 0 === r.set ? d.undefined : d.newFunction("set_" + i, r.set), !!r.configurable, !!r.enumerable)); else {
+      if (l(), ("get" in r || "set" in r) && !("value" in r || "writable" in r)) s(e._jsvm_accessorDefinePropStr(t, n(i), void 0 === r.get ? d.undefined : d.newFunction("get_" + i, r.get), void 0 === r.set ? d.undefined : d.newFunction("set_" + i, r.set), !!r.configurable, !!r.enumerable));else {
         if ("get" in r || "set" in r) {
           Object.defineProperty({}, i, r);
           return TypeError("Invalid property descriptor. Cannot both specify accessors and a value or writable attribute");
@@ -362,8 +362,8 @@ for (let e of ["log", "error", "assert", "info", "warn", "clear"]) F[e] = consol
 let M = null;
 let j = ["window", "document", "indexedDB", "atob", "btoa"];
 class U extends PluginWrapper {
-  _abortHandler = () => { };
-  _errorHandler = () => { };
+  _abortHandler = () => {};
+  _errorHandler = () => {};
   constructor() {
     this.vmType = "cppvm";
     this._isDestroyed = !1;
@@ -732,7 +732,7 @@ class en extends (a = PluginWrapper, r = J, a) {
     this.nullHandle = null;
     this.undefinedHandle = null;
     this[r] = !1;
-    this.errorHandler = () => { };
+    this.errorHandler = () => {};
     this.executionDepth = 0;
     let {
       realm,
@@ -1127,14 +1127,14 @@ class en extends (a = PluginWrapper, r = J, a) {
   evalTrustedTopLevelCode(e) {
     return this.evalTopLevelCode(e);
   }
-  setAbortHandler(e) { }
+  setAbortHandler(e) {}
   setErrorHandler(e) {
     this.errorHandler = e;
   }
   getStats() {
     return null;
   }
-  setStats(e) { }
+  setStats(e) {}
   destroy() {
     this[J] = !0;
     this.iframe.remove();
@@ -1142,8 +1142,8 @@ class en extends (a = PluginWrapper, r = J, a) {
   isDestroyed() {
     return this[J];
   }
-  retainHandle(e) { }
-  releaseHandle(e) { }
+  retainHandle(e) {}
+  releaseHandle(e) {}
 }
 let es = 0;
 function eo(e) {
@@ -1156,7 +1156,7 @@ function eo(e) {
   } = e;
   let a = {
     message,
-    ..._$$I(raw_stack),
+    ...splitBufferIntoRawStacks(raw_stack),
     pluginID: pluginID || "",
     version: apiVersion
   };
@@ -1353,7 +1353,7 @@ let $$eu1 = _$$n(async e => {
           {
             let i = e.toString(t);
             return {
-              release: () => { },
+              release: () => {},
               callback: () => e.evalCode(i)
             };
           }
@@ -1525,7 +1525,7 @@ let $$eu1 = _$$n(async e => {
       securityCheckReporter && M.defineFunction(M.global, "reportSecurityResults", "reportSecurityResults", e => (securityCheckReporter(M.toString(e)), M.undefined));
       let J = new NoOpVm();
       q(() => J.destroy());
-      q(JX);
+      q(clearPlaybackHandler);
       q(setStackInvariantCallback(e => {
         stats.stackInvariantsEnforced(e);
       }));
@@ -1574,13 +1574,13 @@ let $$eu1 = _$$n(async e => {
         securityCheckReporter || (PluginHelpers.prepareToRunPlugin(), q(() => PluginHelpers.finishedRunningPlugin()));
         try {
           if (i = M.evalTopLevelCode(ee), isWidget && isLocal) {
-            if (X.hasRegisteredWidget()) testMessageHandler?.widgetRegistered && testMessageHandler.widgetRegistered(); else throw Error("widget missing call to figma.widget.register");
+            if (X.hasRegisteredWidget()) testMessageHandler?.widgetRegistered && testMessageHandler.widgetRegistered();else throw Error("widget missing call to figma.widget.register");
           }
         } catch (i) {
           let e = "Unknown error";
           try {
             e = i + "";
-          } catch (e) { }
+          } catch (e) {}
           t({
             message: e,
             isError: !0

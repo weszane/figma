@@ -6,7 +6,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { activateCommentThread, setNewAnchorPosition, activateNewComment, deactivateActiveComment, setNewCommentMessage } from "../figma_app/770088";
 import { I_ } from "../905/234821";
 import { fullscreenValue } from "../figma_app/455680";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { applyOffsetToViewport, viewportToScreen } from "../figma_app/62612";
 import { NEW_COMMENT_ID } from "../905/380385";
 import { CommentPinElement } from "../905/512783";
@@ -18,7 +18,7 @@ export function $$E1(e, t, r, a, o) {
   let m = useDispatch();
   let E = I_();
   let y = _$$s();
-  let b = Z();
+  let b = useNavigateToViewport();
   useEffect(() => {
     h && (h._select_comment = e => {
       let n = t.find(t => t.id === e);

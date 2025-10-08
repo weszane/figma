@@ -12,7 +12,7 @@ import { cortexAPI } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { renameNode } from "../figma_app/741237";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
@@ -33,7 +33,7 @@ export function $$x1() {
   let [x, N] = useState(!1);
   let C = trackFileEventWithUser();
   let w = useRef();
-  let O = Z("figjam_summary_navigate");
+  let O = useNavigateToViewport("figjam_summary_navigate");
   let R = um();
   let L = useAtomWithSubscription(_s);
   let P = useAtomWithSubscription(openFileTeamIdAtom);
@@ -126,7 +126,7 @@ export function $$N0(e, t = !1) {
   let r = useMemo(() => getSingletonSceneGraph(), []);
   let [o, l] = useState(!1);
   let d = useRef();
-  let c = Z("figjam_local_cluster_navigate");
+  let c = useNavigateToViewport("figjam_local_cluster_navigate");
   let u = useCallback(e => {
     let t = r.get(e);
     t?.isAlive && permissionScopeHandler.system("remove-cluster-placeholder", () => StickyClusteringCppBindings?.removePlaceholder(e));

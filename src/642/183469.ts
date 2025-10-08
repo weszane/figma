@@ -23,11 +23,11 @@ import { isCommandEvent } from "../905/63728";
 import { V as _$$V } from "../905/418494";
 import { BrowserInfo } from "../figma_app/778880";
 import { useHandleMouseEvent, RecordingPureComponent, handleMouseEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
-import { reportNullOrUndefined } from "../905/11";
+import { reportValueError } from "../905/11";
 import { getThemePx } from "../905/149328";
 import { Point } from "../905/736624";
 import { V as _$$V2 } from "../905/506207";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { showDropdownThunk } from "../905/929976";
 import { Rb } from "../figma_app/8833";
@@ -35,7 +35,7 @@ import { i as _$$i } from "../figma_app/85949";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { EditorPreferencesApi } from "../figma_app/740163";
-import { E as _$$E } from "../905/95280";
+import { useCompareChangesHandler } from "../905/95280";
 import { updateTemporarilyExpandedInstanceLayers, expandNodeToRoot, selectNodesInRange, duplicateSelection, transferSelection, clearSelection, updateHoveredNode, setNodeExpandedRecursive, setSelectionExpanded, setNodeExpanded, setNodeLocked, setNodeVisible, replaceSelection, setNodeTemporarilyExpanded, removeFromSelection, addToSelection } from "../figma_app/741237";
 import { NF, Ht, no } from "../figma_app/701001";
 import { useCurrentViewState } from "../figma_app/623300";
@@ -50,7 +50,7 @@ import { p as _$$p } from "../figma_app/353099";
 import { KeyboardShortcut } from "../figma_app/420927";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
-import { E as _$$E2 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
 import { $$in } from "../figma_app/76123";
 import { browserCapabilities } from "../905/409121";
@@ -58,7 +58,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { vx, oo } from "../642/38487";
 import { ArrowPosition } from "../905/748636";
-import { xtb } from "../figma_app/6204";
+import { MSALOnboardingOverlay } from "../figma_app/6204";
 import { m4 } from "../642/998522";
 import { deletionSettings } from "../figma_app/178273";
 import { jq } from "../figma_app/32128";
@@ -160,14 +160,14 @@ function ep() {
     complete,
     uniqueId
   } = _$$e2({
-    overlay: xtb,
+    overlay: MSALOnboardingOverlay,
     priority: _$$N.SECONDARY_MODAL
   });
   let l = browserCapabilities.isApple();
   let a = useMemo(() => jsx(KeyboardShortcut, {
     shortcut: l ? "\u2303\u21E7A" : "Ctrl+Alt+Shift+A"
   }), [l]);
-  _$$E2(uniqueId, $$in, () => {
+  useEventForwarder(uniqueId, $$in, () => {
     show({
       canShow: () => !!getFeatureFlags().ce_al_show_msal_onboarding
     });
@@ -534,7 +534,7 @@ class ez extends RecordingPureComponent {
       });
       this.frameRequestX = null;
     };
-    this.isNodeSticky = e => (reportNullOrUndefined(ServiceCategories.FIGJAM, this.props), e.parentGuid === this.props.currentPage && ("SYMBOL" === e.type || "FRAME" === e.type && !e.resizeToFit));
+    this.isNodeSticky = e => (reportValueError(ServiceCategories.FIGJAM, this.props), e.parentGuid === this.props.currentPage && ("SYMBOL" === e.type || "FRAME" === e.type && !e.resizeToFit));
     this.isAncestorSticky = e => {
       let t = this.getScene();
       let s = e.parentGuid ? t.get(e.parentGuid) : null;
@@ -1217,7 +1217,7 @@ class ez extends RecordingPureComponent {
         getNode: function (e) {
           return s.getNode(e) ?? null;
         }
-      }), jsxs(_$$P, {
+      }), jsxs(RecordingScrollContainer, {
         ref: this.scrollContainerRef,
         className: f()(l, {
           "objects_panel--hasPending--0IO3j": this.props.hasPending
@@ -1270,7 +1270,7 @@ function eW(e) {
   let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let j = isDevHandoffEditorType();
   let v = useCanAccessFullDevMode();
-  let S = _$$E();
+  let S = useCompareChangesHandler();
   let k = getSingletonSceneGraph();
   let w = useStrictDeepEqualSceneValue((e, t) => {
     let s = e.get(t);

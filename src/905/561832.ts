@@ -1,35 +1,35 @@
-import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "../905/438674";
-import { Button } from "../905/521428";
-import { SchemaJoinStatus } from "../figma_app/763686";
-import { trackEventAnalytics } from "../905/449184";
-import { logger } from "../905/651849";
-import { customHistory } from "../905/612521";
-import { useSingleEffect } from "../905/791079";
-import { Point } from "../905/736624";
-import { sendWithRetry } from "../905/910117";
-import { cssBuilderInstance } from "../cssbuilder/589278";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { VisualBellIcon } from "../905/576487";
-import { selectViewAction } from "../905/929976";
-import { Cp } from "../905/292918";
-import { Nu, ie, ov, E as _$$E } from "../905/300250";
+import { jsx, jsxs } from "react/jsx-runtime";
+import { ModalSupportsBackground, registerModal } from "../905/102752";
 import { hideModal } from "../905/156213";
-import { TrackingProvider } from "../figma_app/831799";
-import { handleError } from "../905/760074";
+import { Cp } from "../905/292918";
+import { finishBranchMerge, clearOpenFileMerge, setBranchMergeError, handleBranchModalExit } from "../905/300250";
+import { VisualBellActions } from "../905/302958";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { waitForJoinStatus } from "../905/346794";
-import { FEditorType } from "../figma_app/53721";
+import { Link } from "../905/438674";
+import { trackEventAnalytics } from "../905/449184";
+import { Button } from "../905/521428";
 import { CPPEventType, SourceDirection } from "../905/535806";
+import { VisualBellIcon } from "../905/576487";
+import { customHistory } from "../905/612521";
+import { logger } from "../905/651849";
 import { TrackingKeyEnum } from "../905/696396";
-import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { DraggableModalManager } from "../905/748636";
+import { Point } from "../905/736624";
 import { ss } from "../905/746499";
+import { DraggableModalManager } from "../905/748636";
+import { handleError } from "../905/760074";
+import { useSingleEffect } from "../905/791079";
+import { sendWithRetry } from "../905/910117";
+import { selectViewAction } from "../905/929976";
+import { cssBuilderInstance } from "../cssbuilder/589278";
+import { FEditorType } from "../figma_app/53721";
+import { SchemaJoinStatus } from "../figma_app/763686";
+import { TrackingProvider } from "../figma_app/831799";
 var $$P1 = (e => (e[e.TIMED_OUT = 0] = "TIMED_OUT", e[e.COULD_NOT_START = 1] = "COULD_NOT_START", e[e.BRANCH_ARCHIVED = 2] = "BRANCH_ARCHIVED", e[e.STALE_BRANCH_POINT = 3] = "STALE_BRANCH_POINT", e[e.COULD_NOT_COMPLETE = 4] = "COULD_NOT_COMPLETE", e))($$P1 || {});
 let O = async (e, t, i) => {
-  e.dispatch(Nu({}));
+  e.dispatch(setBranchMergeError({}));
   e.dispatch(VisualBellActions.enqueue({
     message: t,
     icon: VisualBellIcon.SPINNER,
@@ -38,7 +38,7 @@ let O = async (e, t, i) => {
   await sendWithRetry.put(`/api/file_merge/${e.failureInfo.file_merge_id}`, {
     closed: !0
   }).catch(t => {
-    400 === t.status && (logger.warn(t), handleError(Error(t?.data?.message || "Unknown error"), CPPEventType.ON_MERGE, e.mergeParams.direction, {
+    t.status === 400 && (logger.warn(t), handleError(new Error(t?.data?.message || "Unknown error"), CPPEventType.ON_MERGE, e.mergeParams.direction, {
       file_merge_id: e.failureInfo.file_merge_id
     }));
   });
@@ -48,11 +48,11 @@ let O = async (e, t, i) => {
       icon: VisualBellIcon.CHECK,
       type: "file-merge-submit"
     }));
-    e.dispatch(ie({}));
+    e.dispatch(clearOpenFileMerge({}));
   });
 };
 let D = async (e, t, i) => {
-  e.dispatch(Nu({}));
+  e.dispatch(setBranchMergeError({}));
   e.dispatch(VisualBellActions.enqueue({
     message: t,
     icon: VisualBellIcon.SPINNER,
@@ -65,7 +65,7 @@ let D = async (e, t, i) => {
       icon: VisualBellIcon.CHECK,
       type: "file-merge-submit"
     }));
-    e.dispatch(ie({}));
+    e.dispatch(clearOpenFileMerge({}));
   });
 };
 let L = e => {
@@ -112,7 +112,7 @@ let F = (e, t, i) => {
           L(e);
         },
         secondaryAction: e => {
-          e.dispatch(ov({
+          e.dispatch(handleBranchModalExit({
             hideModal: !1,
             mergeParams: {
               branchKey: e.mergeParams.branchKey,
@@ -197,7 +197,7 @@ function M(e) {
             href: secondaryLinkButton.href,
             onClick: () => {
               h(hideModal());
-              h(_$$E({}));
+              h(finishBranchMerge({}));
             },
             children: secondaryLinkButton.text
           }), secondaryButtonText && secondaryAction && jsx("span", {
@@ -206,7 +206,7 @@ function M(e) {
               variant: "secondary",
               onClick: () => {
                 h(hideModal());
-                h(_$$E({}));
+                h(finishBranchMerge({}));
                 secondaryAction({
                   mergeParams: e.mergeParams,
                   failureInfo: e.failureInfo,
@@ -221,7 +221,7 @@ function M(e) {
               variant: "primary",
               onClick: () => {
                 h(hideModal());
-                h(_$$E({}));
+                h(finishBranchMerge({}));
                 i.primaryAction({
                   mergeParams: e.mergeParams,
                   failureInfo: e.failureInfo,

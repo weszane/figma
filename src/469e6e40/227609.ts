@@ -71,7 +71,7 @@ import { BillingSections, DashboardSections, MemberSections } from '../905/54820
 import { AccessLevelEnum } from '../905/557142';
 import { mL, UC } from '../905/563637';
 import { FlashActions } from '../905/573154';
-import { z as _$$z } from '../905/595507';
+import { demoteEditorRolesAction } from '../905/595507';
 import { getFeatureFlags } from '../905/601108';
 import { e as _$$e3 } from '../905/621515';
 import { v as _$$v3 } from '../905/621749';
@@ -113,7 +113,7 @@ import { d as _$$d3 } from '../7021/966231';
 import { L as _$$L } from '../c5e2cae0/262856';
 import { fm } from '../c5e2cae0/453906';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { iq7, L69 } from '../figma_app/6204';
+import { TeamAdminAuthorityOverlay, TeamAdminPeopleTableChangesOverlay } from '../figma_app/6204';
 import { copyEmailsThunk } from '../figma_app/11182';
 import { canPerformActionBasedOnLevel } from '../figma_app/12796';
 import { fAD } from '../figma_app/27776';
@@ -303,7 +303,7 @@ function eJ() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: L69,
+    overlay: TeamAdminPeopleTableChangesOverlay,
     priority: _$$N2.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {
@@ -343,7 +343,7 @@ let e0 = createOptimistThunk((e, {
       team: s,
       onConfirm: () => {
         let a = t.last_active ? new Date(1e3 * t.last_active).toDateString() : 'never';
-        t.id && e.dispatch(_$$z({
+        t.id && e.dispatch(demoteEditorRolesAction({
           editor: {
             id: t.id,
             img_url: t.img_url,
@@ -1736,7 +1736,7 @@ function an() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: iq7,
+    overlay: TeamAdminAuthorityOverlay,
     priority: _$$N2.SECONDARY_MODAL
   });
   useSingleEffect(() => {

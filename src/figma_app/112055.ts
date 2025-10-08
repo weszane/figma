@@ -4,7 +4,7 @@ import { getI18nString } from "../905/303541";
 import { NX, k9 } from "../figma_app/777207";
 import { sortWithPriority, isExamplesPreset, isExamplePreset } from "../figma_app/915774";
 import { isTemplateAsset, isPrimaryWorkflowType } from "../figma_app/646357";
-import { l as _$$l } from "../905/997221";
+import { getLibraryKeyWithReport } from "../905/997221";
 import { splitPath } from "../905/309735";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { TY } from "../figma_app/76115";
@@ -113,7 +113,7 @@ function E(e, t, r) {
   let a = [];
   let s = [];
   let o = {};
-  for (let e of t) if (getFeatureFlags().dse_templates_proto && e.type === PrimaryWorkflowEnum.COMPONENT && isTemplateAsset(e)) a.push(e); else if (isPrimaryWorkflowType(e) && e.containing_frame?.nodeId && "" !== e.containing_frame.name) {
+  for (let e of t) if (getFeatureFlags().dse_templates_proto && e.type === PrimaryWorkflowEnum.COMPONENT && isTemplateAsset(e)) a.push(e);else if (isPrimaryWorkflowType(e) && e.containing_frame?.nodeId && "" !== e.containing_frame.name) {
     let t = e.containing_frame.nodeId;
     n[t] = n[t] || [];
     n[t].push(e);
@@ -264,7 +264,7 @@ export function $$b0({
   let T = i.fileKeyToSubscribedItems;
   for (let e of i.subscribedFiles) {
     let t = e.key;
-    let r = _$$l(e);
+    let r = getLibraryKeyWithReport(e);
     let n = {
       items: [],
       subtrees: [],
@@ -273,7 +273,7 @@ export function $$b0({
       type: "FILE",
       isFilePublished: !0,
       sectionNameForTracking: "Default libraries",
-      subscribedLibraryKey: _$$l(e)
+      subscribedLibraryKey: getLibraryKeyWithReport(e)
     };
     y(n, T[t]);
     c.subtrees.push(n);
@@ -285,7 +285,7 @@ export function $$b0({
     approvedLibraryKeysByResourceType: l
   }), f)) {
     let t = e.key;
-    let r = _$$l(e);
+    let r = getLibraryKeyWithReport(e);
     let n = {
       items: [],
       subtrees: [],
@@ -294,7 +294,7 @@ export function $$b0({
       type: "FILE",
       isFilePublished: !0,
       sectionNameForTracking: "Subscribed libraries",
-      subscribedLibraryKey: _$$l(e)
+      subscribedLibraryKey: getLibraryKeyWithReport(e)
     };
     r && libraryKeyToSubscribedItems[r] && y(n, libraryKeyToSubscribedItems[r]);
     u[t] = n;

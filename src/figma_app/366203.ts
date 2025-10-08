@@ -19,7 +19,7 @@ import { Yv } from "../figma_app/616107";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Z9, iN } from "../figma_app/634656";
 import { Ru } from "../figma_app/630194";
-import { eQ, _W } from "../figma_app/285009";
+import { defaultPadding, defaultMargin } from "../figma_app/285009";
 import { TS } from "../figma_app/153399";
 import { em } from "../figma_app/932285";
 import { W1, K0, wv } from "../figma_app/439493";
@@ -379,9 +379,9 @@ function X(e, t, r, n) {
       case Iz:
         return _$$A4;
     } else if (n) switch (e) {
-      case eQ:
+      case defaultPadding:
         break;
-      case _W:
+      case defaultMargin:
         return _$$A4;
     }
     return _$$A5;

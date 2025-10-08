@@ -1,3 +1,3 @@
-import { lLk, kp0, Njd, MJs, zoI, wRI, Kze, Wd_ } from "../figma_app/6204";
-export let $$i0 = new Set([lLk.id, kp0.id, Njd.id, MJs.id, zoI.id, wRI.id, Kze.id, Wd_.id]);
+import { OnboardFigJamEditor, OnboardFigJamEditorBrowseTemplates, OnboardFigJamEditorMakeSomething, OnboardFigJamViewer, OnboardFigJamEditorUnified, OnboardFigJamEditorUnifiedPanAndZoom, OnboardFigJamEditorUnifiedProduct, FigJamAdvancedDiagrammingOnboarding } from "../figma_app/6204";
+export let $$i0 = new Set([OnboardFigJamEditor.id, OnboardFigJamEditorBrowseTemplates.id, OnboardFigJamEditorMakeSomething.id, OnboardFigJamViewer.id, OnboardFigJamEditorUnified.id, OnboardFigJamEditorUnifiedPanAndZoom.id, OnboardFigJamEditorUnifiedProduct.id, FigJamAdvancedDiagrammingOnboarding.id]);
 export const l = $$i0;

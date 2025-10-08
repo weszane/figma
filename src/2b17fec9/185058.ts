@@ -6,7 +6,7 @@ import { DesignGraphElements, Fullscreen, AlignmentPosition, ConfirmationLevel, 
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
-import { wp, SK } from "../905/125333";
+import { connectorColorAtom, toolStylesAtom } from "../905/125333";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
@@ -37,8 +37,8 @@ export function $$L0({
   let j = useMemo(() => X5.get(i), [i]);
   let S = useMemo(() => F_.get(i), [i]);
   let L = useMemo(() => I.format(i), [i]);
-  let A = useAtomWithSubscription(wp);
-  let O = useAtomWithSubscription(SK).connectorToolLineStyle;
+  let A = useAtomWithSubscription(connectorColorAtom);
+  let O = useAtomWithSubscription(toolStylesAtom).connectorToolLineStyle;
   let [k, R] = useAtomValueAndSetter(Hf);
   let M = useCallback(() => {
     ko({

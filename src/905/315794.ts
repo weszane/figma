@@ -7,9 +7,9 @@ import { getI18nString } from "../905/303541";
 import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { lT } from "../figma_app/494261";
-import { GR } from "../figma_app/330108";
+import { createThrottledTeamJoin } from "../figma_app/330108";
 import { getSelectedView } from "../figma_app/386952";
-import { YP, gO } from "../figma_app/88768";
+import { getTeamActionType, TeamActionType } from "../figma_app/88768";
 import { getPermissionsState } from "../figma_app/642025";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { AccessLevelEnum } from "../905/557142";
@@ -25,7 +25,7 @@ export function $$v0(e) {
   let A = getSelectedView();
   let y = useTeamPlanUser();
   let v = useIsOrgAdminUser(y).unwrapOr(!1);
-  let x = YP(e.team, u[e.team.id], m, v);
+  let x = getTeamActionType(e.team, u[e.team.id], m, v);
   let S = t => {
     t.stopPropagation();
     t.preventDefault();
@@ -46,7 +46,7 @@ export function $$v0(e) {
   let C = () => {
     i(!1);
   };
-  if (A?.view === "search" && e.team.org_id !== p || null === x || x === gO.CLICK_JOIN || x === gO.CLICK_JOIN_AS_ADMIN) return jsx(Fragment, {});
+  if (A?.view === "search" && e.team.org_id !== p || null === x || x === TeamActionType.CLICK_JOIN || x === TeamActionType.CLICK_JOIN_AS_ADMIN) return jsx(Fragment, {});
   let T = $$I1({
     type: x,
     overrideLeaveText: t || e.isCardActive ? getI18nString("team_list.org_join_status_leave") : void 0
@@ -54,9 +54,9 @@ export function $$v0(e) {
   let k = {
     className: (() => {
       switch (x) {
-        case gO.CLICK_LEAVE:
+        case TeamActionType.CLICK_LEAVE:
           return o()("org_team_action--buttonNegative--jWoqq org_team_action--actionButton--2k4Cm button_styles--button--vl9vc", b);
-        case gO.CLICK_REQUEST:
+        case TeamActionType.CLICK_REQUEST:
           return o()("org_team_action--requestButton--rrIM7 org_team_action--requestButton--rrIM7 org_team_action--actionButton--2k4Cm button_styles--button--vl9vc", b);
         default:
           return o()("org_team_action--actionButton--2k4Cm button_styles--button--vl9vc", b);
@@ -67,7 +67,7 @@ export function $$v0(e) {
     onMouseLeave: C,
     children: T
   };
-  return x === gO.CLICK_LEAVE ? jsx(ButtonSecondaryNegative, {
+  return x === TeamActionType.CLICK_LEAVE ? jsx(ButtonSecondaryNegative, {
     className: k.className,
     onClick: S,
     onMouseOver: w,
@@ -82,18 +82,18 @@ export function $$I1({
   overrideLeaveText: t
 }) {
   switch (e) {
-    case gO.CLICK_LEAVE:
+    case TeamActionType.CLICK_LEAVE:
       if (t) return t;
       return getI18nString("team_list.org_join_status_joined");
-    case gO.CLICK_WITHDRAW:
+    case TeamActionType.CLICK_WITHDRAW:
       return getI18nString("teams_table.cancel_join_request");
-    case gO.CLICK_JOIN:
+    case TeamActionType.CLICK_JOIN:
       return getI18nString("teams_table.join_team");
-    case gO.CLICK_JOIN_AS_ADMIN:
+    case TeamActionType.CLICK_JOIN_AS_ADMIN:
       return getI18nString("teams_table.join_team_as_admin");
-    case gO.BYPASS_REQUEST:
+    case TeamActionType.BYPASS_REQUEST:
       return getI18nString("teams_table.join_team_as_owner");
-    case gO.CLICK_REQUEST:
+    case TeamActionType.CLICK_REQUEST:
       return getI18nString("teams_table.ask_to_join");
   }
 }
@@ -107,24 +107,24 @@ export function $$E2({
   dispatch: s
 }) {
   switch (e) {
-    case gO.CLICK_LEAVE:
+    case TeamActionType.CLICK_LEAVE:
       n(t);
       return;
-    case gO.CLICK_WITHDRAW:
+    case TeamActionType.CLICK_WITHDRAW:
       i && s(lT({
         requestId: i.id
       }));
       return;
-    case gO.CLICK_JOIN:
+    case TeamActionType.CLICK_JOIN:
       r?.(t.id);
       return;
-    case gO.CLICK_JOIN_AS_ADMIN:
+    case TeamActionType.CLICK_JOIN_AS_ADMIN:
       a?.(t.id);
       return;
-    case gO.BYPASS_REQUEST:
-      GR(s, t.id, AccessLevelEnum.OWNER)();
+    case TeamActionType.BYPASS_REQUEST:
+      createThrottledTeamJoin(s, t.id, AccessLevelEnum.OWNER)();
       return;
-    case gO.CLICK_REQUEST:
+    case TeamActionType.CLICK_REQUEST:
       s(showModalHandler({
         type: $,
         data: {

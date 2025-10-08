@@ -1,45 +1,105 @@
-import { Tg, CommunityRoute, ResourceType } from "../figma_app/354658";
-export function $$i1(e, t) {
-  return new Tg({
-    resourceId: e,
-    urlSlug: t
-  }).href;
+import { CommunityRoute, HubFileRoute, ResourceType } from "../figma_app/354658"
+
+// Route helper functions for generating URLs to community and hub resources
+// Original functions: $$i1, $$a6, $$s2, $$o4, $$l7, $$d5, $$c0, $$u3
+
+
+
+/**
+ * Generates a URL for a hub file resource
+ * @param resourceId - The ID of the resource
+ * @param urlSlug - The URL slug for the resource
+ * @returns The generated URL href
+ */
+export function generateHubFileUrl(resourceId: string, urlSlug: string): string {
+  return new HubFileRoute({
+    resourceId,
+    urlSlug,
+  }).href
 }
-export function $$a6(e, t) {
+
+/**
+ * Generates a URL for a community plugin resource
+ * @param resourceId - The ID of the plugin resource
+ * @param urlSlug - The URL slug for the plugin
+ * @returns The generated URL href
+ */
+export function generateCommunityPluginUrl(resourceId: string, urlSlug?: string): string {
   return new CommunityRoute({
     apiResourceType: ResourceType.PLUGIN,
-    resourceId: e,
-    urlSlug: t
-  }).href;
+    resourceId,
+    urlSlug,
+  }).href
 }
-export function $$s2(e, t) {
+
+/**
+ * Generates a URL for a community widget resource
+ * @param resourceId - The ID of the widget resource
+ * @param urlSlug - The URL slug for the widget
+ * @returns The generated URL href
+ */
+export function generateCommunityWidgetUrl(resourceId: string, urlSlug: string): string {
   return new CommunityRoute({
     apiResourceType: ResourceType.WIDGET,
-    resourceId: e,
-    urlSlug: t
-  }).href;
+    resourceId,
+    urlSlug,
+  }).href
 }
-export function $$o4(e, t) {
-  return new URL($$a6(e, t), location.href).href;
+
+/**
+ * Generates an absolute URL for a community plugin resource
+ * @param resourceId - The ID of the plugin resource
+ * @param urlSlug - The URL slug for the plugin
+ * @returns The absolute URL href
+ */
+export function generateAbsoluteCommunityPluginUrl(resourceId: string, urlSlug: string): string {
+  return new URL(generateCommunityPluginUrl(resourceId, urlSlug), location.href).href
 }
-export function $$l7(e, t) {
-  return new URL($$s2(e, t), location.href).href;
+
+/**
+ * Generates an absolute URL for a community widget resource
+ * @param resourceId - The ID of the widget resource
+ * @param urlSlug - The URL slug for the widget
+ * @returns The absolute URL href
+ */
+export function generateAbsoluteCommunityWidgetUrl(resourceId: string, urlSlug: string): string {
+  return new URL(generateCommunityWidgetUrl(resourceId, urlSlug), location.href).href
 }
-export function $$d5(e, t) {
-  return new URL($$i1(e, t), location.href).href;
+
+/**
+ * Generates an absolute URL for a hub file resource
+ * @param resourceId - The ID of the resource
+ * @param urlSlug - The URL slug for the resource
+ * @returns The absolute URL href
+ */
+export function generateAbsoluteHubFileUrl(resourceId: string, urlSlug: string): string {
+  return new URL(generateHubFileUrl(resourceId, urlSlug), location.href).href
 }
-export function $$c0() {
-  return new URL("/community/plugin/pluginID", location.href).href;
+
+/**
+ * Generates a default community plugin URL
+ * @returns The default community plugin URL href
+ */
+export function generateDefaultCommunityPluginUrl(): string {
+  return new URL("/community/plugin/pluginID", location.href).href
 }
-export function $$u3(e) {
-  let t = e.match(/\/community\/plugin\/([^/]+)/);
-  return t ? t[1] : null;
+
+/**
+ * Extracts plugin ID from a community plugin URL
+ * @param url - The URL to extract the plugin ID from
+ * @returns The extracted plugin ID or null if not found
+ */
+export function extractPluginIdFromUrl(url: string): string | null {
+  const match = url.match(/\/community\/plugin\/([^/]+)/)
+  return match ? match[1] : null
 }
-export const Nz = $$c0;
-export const X$ = $$i1;
-export const YW = $$s2;
-export const Yp = $$u3;
-export const ab = $$o4;
-export const cU = $$d5;
-export const ho = $$a6;
-export const ox = $$l7;
+
+// Export aliases for backward compatibility
+export const Nz = generateDefaultCommunityPluginUrl
+export const X$ = generateHubFileUrl
+export const YW = generateCommunityWidgetUrl
+export const Yp = extractPluginIdFromUrl
+export const ab = generateAbsoluteCommunityPluginUrl
+export const cU = generateAbsoluteHubFileUrl
+export const ho = generateCommunityPluginUrl
+export const ox = generateAbsoluteCommunityWidgetUrl

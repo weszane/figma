@@ -11,8 +11,8 @@ import { useDevModeFocusId } from "../figma_app/88239";
 import { deactivateActiveComment, activateCommentThread, createNewComment } from "../figma_app/770088";
 import { I_ } from "../905/234821";
 import { isPinnedCommentsEnabled } from "../figma_app/591738";
-import { JG } from "../figma_app/12220";
-import { Z } from "../905/104740";
+import { createNewCommentThread } from "../figma_app/12220";
+import { useNavigateToViewport } from "../905/104740";
 import { viewportToScreen } from "../figma_app/62612";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
@@ -141,7 +141,7 @@ export function $$P5(e, t) {
   let i = useContext(hh);
   let a = useMemo(() => $$k3(i.threads, []), [i.threads]);
   let s = useSelector(e => e.comments.newComment);
-  return useMemo(() => e === NEW_COMMENT_ID ? JG(e, s, t) : a.find(t => t.id === e) || null, [s, e, a, t]);
+  return useMemo(() => e === NEW_COMMENT_ID ? createNewCommentThread(e, s, t) : a.find(t => t.id === e) || null, [s, e, a, t]);
 }
 export function $$O4(e, t, i, a, s, o) {
   let [l, d] = useState(!1);
@@ -151,7 +151,7 @@ export function $$O4(e, t, i, a, s, o) {
   let c = useDispatch();
   let u = I_();
   let p = _$$s();
-  let g = Z("comments-navigate");
+  let g = useNavigateToViewport("comments-navigate");
   useEffect(() => {
     if (t && !l) {
       let t = a.find(t => t.id === e);

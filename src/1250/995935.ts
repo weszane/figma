@@ -22,7 +22,7 @@ import { V as _$$V } from '../905/355181';
 import { BannerMessage } from '../905/363675';
 import { UpgradeAction } from '../905/370443';
 import { getUserId, selectCurrentUser } from '../905/372672';
-import { T as _$$T2 } from '../905/378189';
+import { isShowingBannerAtom } from '../905/378189';
 import { A as _$$A3 } from '../905/389851';
 import { s as _$$s } from '../905/403855';
 import { useModalManager } from '../905/437088';
@@ -1156,7 +1156,7 @@ let t5 = {
   Banner(e) {
     let [t, n] = useState(!1);
     let [i, o] = useState(!1);
-    let l = useAtomWithSubscription(_$$T2);
+    let l = useAtomWithSubscription(isShowingBannerAtom);
     let d = useSelector(e => !!e.saveStatus?.hasUnsavedChanges);
     let u = selectCurrentFile()?.editorType;
     if (useEffect(() => {

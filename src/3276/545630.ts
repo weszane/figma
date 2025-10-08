@@ -10,7 +10,7 @@ import { clusteredPinsInstance } from '../905/29425';
 import { i as _$$i3, Dp } from '../905/50151';
 import { ay } from '../905/56623';
 import { KeyCodes } from '../905/63728';
-import { Z as _$$Z2 } from '../905/104740';
+import { useNavigateToViewport } from '../905/104740';
 import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
 import { Qt, zW } from '../905/162414';
@@ -27,7 +27,7 @@ import { R as _$$R2 } from '../905/266815';
 import { eW as _$$eW, fG, gu, pC, Rf, sj, UR, Y6 } from '../905/301347';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, getI18nStringAlias, renderI18nText } from '../905/303541';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { fileCommentAttachmentAPI } from '../905/348437';
 import { getUserId, selectCurrentUser, selectUser } from '../905/372672';
 import { feedCommentAttachmentAPI } from '../905/375499';
@@ -39,7 +39,7 @@ import { IconButton } from '../905/443068';
 // import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { handleAtomEvent } from '../905/502364';
-import { gX } from '../905/504768';
+import { createFeedCommentThunk } from '../905/504768';
 import { createRect } from '../905/508367';
 import { RecordableDiv } from '../905/511649';
 import { s as _$$s } from '../905/518538';
@@ -90,7 +90,7 @@ import { B as _$$B2 } from '../7037/575850';
 import { ue } from '../af221b13/476940';
 import { j as _$$j } from '../draftjs_composer/390258';
 import { Dm, Uu, Z7 } from '../figma_app/8833';
-import { eR as _$$eR, hx as _$$hx, t$ as _$$t$, F$, rN, vl, wB } from '../figma_app/12220';
+import { isNewCommentId, PIN_ELEMENT_OFFSET, getPinSizeNJv, extractUserIdsFromMessageMeta, isPointInSelectionRect, calculateThreadPinPosition, DEFAULT_PIN_OFFSET } from '../figma_app/12220';
 import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { IuL, M$q, qoo, u24 } from '../figma_app/27776';
@@ -1215,7 +1215,7 @@ function tV(e) {
     t ? t.then(() => feedCommentAttachmentAPI.delete(e)) : feedCommentAttachmentAPI.delete(e);
   }, [dispatch, k]);
   let E = useCallback(() => {
-    r && (dispatch(gX({
+    r && (dispatch(createFeedCommentThunk({
       postUuid: gk(k),
       messageMeta: r.reply.messageMeta,
       attachmentIds: r.reply.attachments ? Object.keys(r.reply.attachments) : []
@@ -1233,7 +1233,7 @@ function tV(e) {
     k && N.current?.scrollToBottom();
   }, [k, N]);
   let [D, A] = useState(!1);
-  let L = _$$t$();
+  let L = getPinSizeNJv();
   let R = useCallback(() => {
     dispatch(showModalHandler({
       type: _$$K2,
@@ -1253,7 +1253,7 @@ function tV(e) {
   let U = B - tB;
   let H = !t && !e.mountUnfocused;
   let V = [...new Set(feedPost.comments.map(e => e.user.handle))];
-  return c ? jsxs(_$$P, {
+  return c ? jsxs(RecordingScrollContainer, {
     'ref': N,
     'maxHeight': U,
     'onMouseDown': e => e.stopPropagation(),
@@ -1480,7 +1480,7 @@ function t8(e) {
   }, [e.mountUnfocused, s]);
   I_();
   _$$s();
-  _$$Z2('comments_navigate');
+  useNavigateToViewport('comments_navigate');
   let r = isPinnedCommentsEnabled() && !!e.thread.commentPin;
   return jsxs('div', {
     'className': F7,
@@ -1590,7 +1590,7 @@ function nr(e) {
   let _ = useSelector(e => e.comments.editingComment);
   let [v, x] = useState(!1);
   let b = useAtomWithSubscription(_$$R);
-  let [y, C] = useState(_$$t$());
+  let [y, C] = useState(getPinSizeNJv());
   let [w, j] = useState(ne);
   let k = function (e) {
     let t = useRef(e);
@@ -1832,7 +1832,7 @@ function nr(e) {
   let eZ = _$$eW();
   return (() => {
     if (!V || e.thread.isCanvasMention) return null;
-    let t = vl(e.viewportInfo, e.thread, !0, eZ.paddingRight);
+    let t = calculateThreadPinPosition(e.viewportInfo, e.thread, !0, eZ.paddingRight);
     let a = {
       x: R.x - y,
       y: 0,
@@ -1936,7 +1936,7 @@ function nr(e) {
             resolved: !!comments[0].resolved_at,
             setResolved: e.setResolved,
             thread: t
-          }), thread.sidebarItemType === ThreadType.COMMENT_THREAD ? jsxs(_$$P, {
+          }), thread.sidebarItemType === ThreadType.COMMENT_THREAD ? jsxs(RecordingScrollContainer, {
             'ref': ep,
             'maxHeight': c,
             'onMouseDown': no,
@@ -2111,7 +2111,7 @@ function nu(e) {
     if (p({
       ...t,
       maxDist: a
-    }), a < wB) {
+    }), a < DEFAULT_PIN_OFFSET) {
       return;
     }
     let i = n.computeDropLocation(o, t.mouseOffset);
@@ -2135,7 +2135,7 @@ function nu(e) {
     let o = viewportPositionFromClientPosition(new Point(e.clientX, e.clientY));
     let a = n.viewport.current;
     if (!a) return;
-    if (!(t.maxDist > wB) || !r) return p(null);
+    if (!(t.maxDist > DEFAULT_PIN_OFFSET) || !r) return p(null);
     let i = n.computeDropLocation(o, t.mouseOffset);
     if (!n.isInViewport(i)) return p(null);
     let l = s.getCommentDestinationForCanvasPosition(i, n.pageId);
@@ -2239,7 +2239,7 @@ function np(e) {
   let l = useCallback(e => {
     let n = s.getValidCommentsRect();
     let o = viewportToScreen(t.current, e);
-    return rN(o, n);
+    return isPointInSelectionRect(o, n);
   }, [s, t]);
   let d = selectCurrentUser();
   let m = useAuthedActiveCommunityProfile();
@@ -2448,7 +2448,7 @@ function nP(e) {
   });
   let b = Point.add(anchorPosition, v, f);
   let y = useSelector(e => e.comments.activeDragTarget);
-  let w = _$$_(m, b, viewportBounds, nk, _$$hx, e.pinOffset);
+  let w = _$$_(m, b, viewportBounds, nk, PIN_ELEMENT_OFFSET, e.pinOffset);
   useEffect(() => {
     u();
   }, [u]);
@@ -2782,10 +2782,10 @@ function nO(e) {
   });
   let s = _B();
   let r = _$$eW();
-  let l = useMemo(() => vl(n, e.thread, !0, r.paddingRight), [e.thread, n, r.paddingRight]);
+  let l = useMemo(() => calculateThreadPinPosition(n, e.thread, !0, r.paddingRight), [e.thread, n, r.paddingRight]);
   let d = getSelectedView();
   let m = d.view === 'communityHub';
-  let u = _$$eR(e.thread.id);
+  let u = isNewCommentId(e.thread.id);
   let p = useRef(null);
   let f = useRef(null);
   let {
@@ -2812,14 +2812,14 @@ function nO(e) {
     pinOffset
   } = e;
   let E = useMemo(() => {
-    if (!pinOffset) return _$$hx;
+    if (!pinOffset) return PIN_ELEMENT_OFFSET;
     let {
       width,
       height
     } = pinOffset;
     return {
-      x: width + _$$hx.x,
-      y: _$$hx.y - height
+      x: width + PIN_ELEMENT_OFFSET.x,
+      y: PIN_ELEMENT_OFFSET.y - height
     };
   }, [pinOffset]);
   let N = _$$y() && l.sidebarItemType === ThreadType.FEED_POST;
@@ -3168,7 +3168,7 @@ function nG(e) {
       let {
         replace
       } = t || nW;
-      if (!x(n, replace) && (!touchEvents || replace) && rN(n, m.getValidCommentsRect())) {
+      if (!x(n, replace) && (!touchEvents || replace) && isPointInSelectionRect(n, m.getValidCommentsRect())) {
         if (u(e)) {
           p();
           return;
@@ -3307,7 +3307,7 @@ export function $$nX2(e) {
 export function $$nY1(e, t, n) {
   if (e.comments.length === 0) return !1;
   let o = e.comments[0]?.user_id === n;
-  let a = e.comments.some(e => e.user_id === n || F$(e).includes(n));
+  let a = e.comments.some(e => e.user_id === n || extractUserIdsFromMessageMeta(e).includes(n));
   return t.canEdit || o || a;
 }
 let nJ = e => {

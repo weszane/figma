@@ -11,7 +11,7 @@ import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tv } from "../figma_app/311375";
 import { fullscreenValue } from "../figma_app/455680";
-import { Ay } from "../905/281495";
+import { renameLayers } from "../905/281495";
 import { getPropertiesPanelTab, setPropertiesPanelTab, replaceSelection } from "../figma_app/741237";
 import { getObservableValue } from "../figma_app/84367";
 import { trackDefinedFileEventWrapper } from "../figma_app/2590";
@@ -22,7 +22,7 @@ import { d_, pD } from "../905/727576";
 import { e as _$$e } from "../905/462154";
 import { JT, Xy } from "../figma_app/632248";
 import { RL, qy, cT, Ag, B3 } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { A as _$$A } from "../905/51743";
@@ -50,7 +50,7 @@ function j() {
   } = t;
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let g = useRef(null);
   let b = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   useEffect(() => {
@@ -184,7 +184,7 @@ function U() {
             name: ExtensionFeatureKey.RENAME_LAYERS_TOAST,
             beforeModuleOpen: () => {
               cT(JT.MAGIC_LINK);
-              Yh(debugState.getState().mirror.appModel, JT.AUTO_RENAME_LAYERS) && Ag(JT.AUTO_RENAME_LAYERS, Ay, {
+              Yh(debugState.getState().mirror.appModel, JT.AUTO_RENAME_LAYERS) && Ag(JT.AUTO_RENAME_LAYERS, renameLayers, {
                 source: ActionType.MAGIC_LINK,
                 overwriteNames: !1
               });

@@ -37,7 +37,7 @@ import { q as _$$q } from "../905/749058";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { kd, Pc, Jb, E7 } from "../figma_app/425283";
 import { UpgradeAction } from "../905/370443";
-import { E as _$$E2 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e3 } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zl } from "../figma_app/641749";
@@ -45,7 +45,7 @@ import { rn } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
 import { createOnboardingStateMachine } from "../905/298004";
 import { OnboardingModal } from "../905/425180";
-import { Ql8, YHe } from "../figma_app/6204";
+import { OrgAdminTeamOnboarding, WorkspaceAdminOnboarding } from "../figma_app/6204";
 import { throwTypeError } from "../figma_app/465776";
 import { useSubscription } from "../figma_app/288654";
 import { A as _$$A2 } from "../905/956262";
@@ -81,12 +81,12 @@ import { debounce } from "../905/915765";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { $ as _$$$ } from "../905/355181";
-import { xM, c5, ZT, lH } from "../figma_app/330108";
+import { assignTeamsToWorkspace, unassignTeamsFromWorkspaces, joinTeamsBatch, useThrottledTeamJoin } from "../figma_app/330108";
 import { registerModal } from "../905/102752";
 import { HeaderModal } from "../905/519092";
 import { Cj } from "../905/270084";
 import { Uc } from "../4452/915131";
-import { gO, YP } from "../figma_app/88768";
+import { TeamActionType, getTeamActionType } from "../figma_app/88768";
 import { getPermissionsState, canViewTeam } from "../figma_app/642025";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { AccessLevelEnum } from "../905/557142";
@@ -124,7 +124,7 @@ import { A as _$$A4 } from "../svg/619883";
 import { R as _$$R2 } from "../905/192963";
 let X = "seen_org_admin_teams_onboarding";
 let Q = userFlagExistsAtomFamily(X);
-let Z = rn("org_admin_teams_onboarding", createOnboardingStateMachine(Ql8));
+let Z = rn("org_admin_teams_onboarding", createOnboardingStateMachine(OrgAdminTeamOnboarding));
 function ee(e) {
   let t = useAtomWithSubscription(Q);
   let {
@@ -133,7 +133,7 @@ function ee(e) {
     show,
     uniqueId
   } = _$$e3({
-    overlay: Ql8,
+    overlay: OrgAdminTeamOnboarding,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
   let o = zl(Z);
@@ -142,7 +142,7 @@ function ee(e) {
       canShow: e => !e
     });
   });
-  _$$E2(uniqueId, "Reset Onboarding", () => show());
+  useEventForwarder(uniqueId, "Reset Onboarding", () => show());
   return jsx(OnboardingModal, {
     isShowing,
     trackingContextName: `${kd} Org Access`,
@@ -172,7 +172,7 @@ function e_() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: YHe,
+    overlay: WorkspaceAdminOnboarding,
     priority: _$$N.DEFAULT_MODAL
   }, [a, t]);
   useSingleEffect(() => {
@@ -441,7 +441,7 @@ let eV = registerModal(function ({
     return jsx(_$$$, {
       variant: "primary",
       onClick: function () {
-        a(xM({
+        a(assignTeamsToWorkspace({
           teams: r,
           workspaceId: e,
           workspaceName: U
@@ -553,7 +553,7 @@ function e7(e, t, a, n) {
   let d = _$$q(G5, !0);
   return {
     onAddToWorkspace: (e, t, a) => {
-      s(xM({
+      s(assignTeamsToWorkspace({
         teams: [e],
         workspaceId: t,
         workspaceName: a
@@ -622,7 +622,7 @@ function e7(e, t, a, n) {
       }));
     },
     onRemoveFromWorkspace: e => {
-      s(c5({
+      s(unassignTeamsFromWorkspaces({
         teams: [e]
       }));
       r();
@@ -639,7 +639,7 @@ function e7(e, t, a, n) {
   };
 }
 var e9 = (e => (e.MIXED_JOIN = "MIXED_JOIN", e))(e9 || {});
-let te = new Set([gO.CLICK_JOIN_AS_ADMIN, gO.BYPASS_REQUEST]);
+let te = new Set([TeamActionType.CLICK_JOIN_AS_ADMIN, TeamActionType.BYPASS_REQUEST]);
 function tt(e) {
   return 1 === e.length ? e[0] : null;
 }
@@ -681,7 +681,7 @@ function ta({
   let S = t.map(e => e.id);
   let N = new Map();
   t.forEach(e => {
-    let t = YP(e, a[e.id], m, g);
+    let t = getTeamActionType(e, a[e.id], m, g);
     let n = N.get(t) || [];
     n.push(e);
     N.set(t, n);
@@ -697,20 +697,20 @@ function ta({
     1 === e.length ? R = e[0] : e.every(e => te.has(e)) && (R = "MIXED_JOIN");
   }
   switch (R) {
-    case gO.CLICK_JOIN:
-    case gO.CLICK_JOIN_AS_ADMIN:
+    case TeamActionType.CLICK_JOIN:
+    case TeamActionType.CLICK_JOIN_AS_ADMIN:
       _ = getI18nString("teams_table.join");
       break;
-    case gO.CLICK_LEAVE:
+    case TeamActionType.CLICK_LEAVE:
       _ = getI18nString("teams_table.leave");
       break;
-    case gO.CLICK_WITHDRAW:
+    case TeamActionType.CLICK_WITHDRAW:
       _ = getI18nString("teams_table.cancel_join_request");
       break;
-    case gO.BYPASS_REQUEST:
+    case TeamActionType.BYPASS_REQUEST:
       _ = getI18nString("teams_table.join_team_as_owner");
       break;
-    case gO.CLICK_REQUEST:
+    case TeamActionType.CLICK_REQUEST:
       _ = getI18nString("teams_table.request_to_join");
       break;
     default:
@@ -718,7 +718,7 @@ function ta({
   }
   let O = null === R;
   let L = () => {
-    u(ZT({
+    u(joinTeamsBatch({
       teamIds: S
     }));
     d && S.forEach(e => {
@@ -727,7 +727,7 @@ function ta({
   };
   let D = e => {
     let t = e ?? S;
-    u(ZT({
+    u(joinTeamsBatch({
       teamIds: t,
       level: AccessLevelEnum.ADMIN
     }));
@@ -749,7 +749,7 @@ function ta({
   };
   let U = e => {
     let t = e ?? S;
-    u(ZT({
+    u(joinTeamsBatch({
       teamIds: t,
       level: AccessLevelEnum.OWNER
     }));
@@ -761,37 +761,37 @@ function ta({
     for (let e of t) onWithdrawRequestForTeam(e);
   };
   let q = e => {
-    e ? u(xM({
+    e ? u(assignTeamsToWorkspace({
       teams: t,
       workspaceId: e.id,
       workspaceName: e.name
-    })) : u(c5({
+    })) : u(unassignTeamsFromWorkspaces({
       teams: t
     }));
   };
   let $ = () => {
     if (!O) switch (R) {
-      case gO.CLICK_LEAVE:
+      case TeamActionType.CLICK_LEAVE:
         M();
         return;
-      case gO.CLICK_WITHDRAW:
+      case TeamActionType.CLICK_WITHDRAW:
         F();
         return;
-      case gO.CLICK_JOIN:
+      case TeamActionType.CLICK_JOIN:
         L();
         return;
-      case gO.CLICK_JOIN_AS_ADMIN:
+      case TeamActionType.CLICK_JOIN_AS_ADMIN:
         D();
         return;
-      case gO.BYPASS_REQUEST:
+      case TeamActionType.BYPASS_REQUEST:
         U();
         return;
-      case gO.CLICK_REQUEST:
+      case TeamActionType.CLICK_REQUEST:
         P();
         return;
       case "MIXED_JOIN":
-        D(T(gO.CLICK_JOIN_AS_ADMIN));
-        U(T(gO.BYPASS_REQUEST));
+        D(T(TeamActionType.CLICK_JOIN_AS_ADMIN));
+        U(T(TeamActionType.BYPASS_REQUEST));
         return;
       default:
         return;
@@ -919,9 +919,9 @@ function tc({
       }
     }));
   };
-  let M = lH(r.id, void 0, _);
-  let P = lH(r.id, AccessLevelEnum.ADMIN, _);
-  let F = lH(r.id, AccessLevelEnum.OWNER, _);
+  let M = useThrottledTeamJoin(r.id, void 0, _);
+  let P = useThrottledTeamJoin(r.id, AccessLevelEnum.ADMIN, _);
+  let F = useThrottledTeamJoin(r.id, AccessLevelEnum.OWNER, _);
   let q = b ? {
     team: b,
     billing: x,
@@ -996,37 +996,37 @@ function tc({
     callback: () => onDeleteTeam(r)
   });
   let W = (e => {
-    let t = YP(e, o[e.id], h, j);
+    let t = getTeamActionType(e, o[e.id], h, j);
     return null === t ? null : {
       displayText: (() => {
         switch (t) {
-          case gO.CLICK_LEAVE:
+          case TeamActionType.CLICK_LEAVE:
             return getI18nString("teams_table.leave_team");
-          case gO.CLICK_WITHDRAW:
+          case TeamActionType.CLICK_WITHDRAW:
             return getI18nString("teams_table.cancel_join_request");
-          case gO.CLICK_JOIN:
+          case TeamActionType.CLICK_JOIN:
             return getI18nString("teams_table.join_team");
-          case gO.CLICK_JOIN_AS_ADMIN:
+          case TeamActionType.CLICK_JOIN_AS_ADMIN:
             return getI18nString("teams_table.join_team_as_admin");
-          case gO.BYPASS_REQUEST:
+          case TeamActionType.BYPASS_REQUEST:
             return getI18nString("teams_table.join_team_as_owner");
-          case gO.CLICK_REQUEST:
+          case TeamActionType.CLICK_REQUEST:
             return getI18nString("teams_table.request_to_join");
         }
       })(),
       callback: (() => {
         switch (t) {
-          case gO.CLICK_LEAVE:
+          case TeamActionType.CLICK_LEAVE:
             return () => D(e);
-          case gO.CLICK_WITHDRAW:
+          case TeamActionType.CLICK_WITHDRAW:
             return () => onWithdrawRequestForTeam(e);
-          case gO.CLICK_JOIN:
+          case TeamActionType.CLICK_JOIN:
             return M;
-          case gO.CLICK_JOIN_AS_ADMIN:
+          case TeamActionType.CLICK_JOIN_AS_ADMIN:
             return P;
-          case gO.BYPASS_REQUEST:
+          case TeamActionType.BYPASS_REQUEST:
             return F;
-          case gO.CLICK_REQUEST:
+          case TeamActionType.CLICK_REQUEST:
             return () => onJoinRequest(e);
         }
       })()

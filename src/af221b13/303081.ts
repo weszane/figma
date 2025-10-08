@@ -206,7 +206,7 @@ import { RB } from "../figma_app/599979";
 import { N as _$$N4 } from "../figma_app/268271";
 import { p as _$$p } from "../figma_app/353099";
 import { _l, B$ } from "../figma_app/995208";
-import { cJy } from "../figma_app/6204";
+import { CommunityCreatorMediaUpsellModal } from "../figma_app/6204";
 import { t as _$$t3 } from "../5430/601486";
 import { R as _$$R2 } from "../5430/229344";
 let n;
@@ -5978,7 +5978,7 @@ function st() {
     isShowing,
     complete
   } = _$$e7({
-    overlay: cJy,
+    overlay: CommunityCreatorMediaUpsellModal,
     priority: _$$N4.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {

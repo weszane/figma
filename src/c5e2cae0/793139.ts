@@ -8,7 +8,7 @@ import { hideModal } from '../905/156213';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { designSet } from '../905/332483';
 import { S as _$$S } from '../905/339549';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { AutoLayout } from '../905/470281';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { ConfirmationModal, HeaderModal } from '../905/519092';
@@ -561,7 +561,7 @@ registerModal(({
           fontWeight: 'medium',
           children: renderI18nText('general.figjam')
         })]
-      }), jsx(Y, {}), jsx(_$$P, {
+      }), jsx(Y, {}), jsx(RecordingScrollContainer, {
         maxHeight: 426,
         children: jsx(W, {
           userData: Object.values(g),

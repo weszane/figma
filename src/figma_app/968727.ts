@@ -8,7 +8,7 @@ import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
 import { applyOffsetToViewport } from "../figma_app/62612";
 import { getAssetsForLibraryKey } from "../figma_app/646357";
-import { l as _$$l } from "../905/997221";
+import { getLibraryKeyWithReport } from "../905/997221";
 import { getPublishedComponentsForLibraryThunk } from "../905/64411";
 let m = "\x3c!--(figcomponent)";
 let $$g1 = createOptimistThunk((e, t) => {
@@ -55,7 +55,7 @@ let $$f0 = createOptimistThunk(async (e, t) => {
       libraryKey: generateUniqueKey(fileKey)
     })), m = e.getState());
     let t = m.fileByKey[fileKey];
-    let n = t ? _$$l(t) : void 0;
+    let n = t ? getLibraryKeyWithReport(t) : void 0;
     !n || (f = getAssetsForLibraryKey(m.library.publishedByLibraryKey.components, n)[nodeId] ?? null) || (await e.dispatch(getPublishedComponentsForLibraryThunk({
       libraryKey: generateUniqueKey(fileKey)
     })), m = e.getState(), f = getAssetsForLibraryKey(m.library.publishedByLibraryKey.components, n)[nodeId] ?? null);

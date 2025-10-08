@@ -1,2 +1,22 @@
-export var $$n0 = (e => (e[e.GENERIC = 0] = "GENERIC", e[e.FIGMA_FILE = 1] = "FIGMA_FILE", e[e.FIGMA_PROTOTYPE = 2] = "FIGMA_PROTOTYPE", e[e.PAGE = 3] = "PAGE", e[e.FRAME = 4] = "FRAME", e[e.MAILTO = 5] = "MAILTO", e[e.INVALID = 6] = "INVALID", e[e.MISSING = 7] = "MISSING", e[e.NOT_LOADED = 8] = "NOT_LOADED", e[e.TEL = 9] = "TEL", e[e.FIGMA_VERSION = 10] = "FIGMA_VERSION", e))($$n0 || {});
-export const F = $$n0;
+/**
+ * Enum representing various link or resource types, originally defined as $$n0.
+ * This enum maintains the same values and behavior as the original code.
+ */
+export enum AssetLinkType {
+  GENERIC = 0,
+  FIGMA_FILE = 1,
+  FIGMA_PROTOTYPE = 2,
+  PAGE = 3,
+  FRAME = 4,
+  MAILTO = 5,
+  INVALID = 6,
+  MISSING = 7,
+  NOT_LOADED = 8,
+  TEL = 9,
+  FIGMA_VERSION = 10,
+}
+
+/**
+ * Alias for LinkType, originally exported as F = $$n0.
+ */
+export const F = AssetLinkType;

@@ -1,7 +1,7 @@
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { organizationAPIService } from "../figma_app/617654";
-import { u } from "../905/774364";
+import { workspaceApiService } from "../905/774364";
 import { createOptimistThunk } from "../905/350402";
 import { updateOrgUserDescriptionAction } from "../figma_app/990058";
 let $$d1 = createOptimistThunk(async (e, t) => {
@@ -38,11 +38,11 @@ let $$c0 = createOptimistThunk(async (e, t) => {
     let a = t.workspace.defaultTeams?.map(e => e.teamId) || [];
     let n = a.filter(e => !t.teamIds.includes(e));
     let r = t.teamIds.filter(e => !a.includes(e));
-    n.length && (await u.deleteDefaultTeams({
+    n.length && (await workspaceApiService.deleteDefaultTeams({
       workspaceId: t.workspace.id,
       removedTeamIds: n
     }));
-    r.length && (await u.addDefaultTeams({
+    r.length && (await workspaceApiService.addDefaultTeams({
       workspaceId: t.workspace.id,
       addedTeamIds: r
     }));

@@ -15,7 +15,7 @@ import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { XG } from "../figma_app/98578";
 import { Nv } from "../figma_app/318590";
 import { WP } from "../905/198599";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { eg } from "../figma_app/297822";
 import { AssetTabType } from "../905/946805";
 import { dd } from "../figma_app/604494";
@@ -64,7 +64,7 @@ export function $$C1({
   }), [e, t, P, j?.editorType, R, N, D, i, O]);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   return {
     afterSuccessfulInsert: useCallback(() => {
       let t = {

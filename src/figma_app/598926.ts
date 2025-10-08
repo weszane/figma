@@ -1,194 +1,290 @@
-import { createActionCreator } from "../905/73481";
-import { handleOptimistTransactionWithError } from "../905/150006";
-import { sendWithRetry } from "../905/910117";
-import { FlashActions } from "../905/573154";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { stopCreateNewFolder } from "../905/34809";
-import { selectViewAction } from "../905/929976";
-import { popModalStack } from "../905/156213";
-import { trackFolderEvent } from "../figma_app/314264";
-import { validateFolderName, generateTempId } from "../figma_app/528509";
-import { FResourceCategoryType } from "../figma_app/191312";
-import { sendRoleInvites } from "../905/351260";
-import { AccessLevelEnum } from "../905/557142";
-import { roleServiceAPI } from "../figma_app/66216";
-import { createOptimistThunk } from "../905/350402";
-import { rolePostAction } from "../905/98702";
-let $$b10 = createOptimistThunk((e, t) => sendWithRetry.put(`/api/folders/${t.folderId}/description`, {
-  description: t.description
-}).then(({
-  data: t
-}) => {
-  e.dispatch($$P14({
-    folder: t.meta
-  }));
-}).catch(t => {
-  console.error(t);
-  e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.update_subscription_error")));
-}));
-let $$T6 = createActionCreator("FOLDER_UNPIN_FILE");
-let $$I15 = createOptimistThunk((e, t) => {
-  let r = e.optimisticDispatch($$T6(t));
-  return sendWithRetry.del(`/api/folders/${t.fileKey}/pin`).then(() => {
-    r.commit();
-  }).catch(() => {
-    r.revert();
-    e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.file_unpin_error")));
-  });
-});
-let $$S1 = createActionCreator("FOLDER_PIN_FILE");
-let $$v8 = createOptimistThunk(async (e, t) => {
-  let r = e.optimisticDispatch($$S1(t));
-  trackFolderEvent("file_browser_folder_pin_file", t.folderId, null, e.getState(), {
-    fileKey: t.fileKey
-  });
-  await sendWithRetry.post(`/api/folders/${t.fileKey}/pin`).then(() => {
-    r.commit();
-    e.dispatch(VisualBellActions.enqueue({
-      error: !1,
-      message: getI18nString("file_browser.file_browser_actions.file_pinned_to_project")
-    }));
-  }).catch(() => {
-    r.revert();
-    e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.file_pin_error")));
-  });
-});
-let $$A5 = createActionCreator("FOLDER_SET_PINNED_FILE");
-let $$x2 = createActionCreator("FOLDER_DELETE_LG_SHIM");
-let $$N13 = createActionCreator("FOLDER_DELETE");
-let $$C3 = createActionCreator("FOLDER_CLEAR");
-let $$w11 = createOptimistThunk((e, t) => {
-  let r = validateFolderName(t.name);
-  if (r) {
-    e.dispatch(FlashActions.error(r));
-    return null;
-  }
-  if (e.dispatch(popModalStack()), e.dispatch(stopCreateNewFolder()), void 0 === t.isInviteOnly && void 0 === t.isViewOnly && void 0 === t.teamAccess) {
-    e.dispatch(FlashActions.error("inviteOnly and viewOnly fields or teamAccess field must be defined"));
-    return null;
-  }
-  let n = {
-    id: generateTempId(),
-    name: t.name,
-    description: null,
-    path: t.name,
-    team_id: t.teamId,
-    is_subscribed: !1,
-    is_favorited: !1,
-    created_at: `${new Date()}`,
-    updated_at: `${new Date()}`,
-    is_invite_only: !1,
-    is_view_only: !1,
-    settings: {
-      webhooks: {}
-    },
-    deleted_at: null,
-    sharing_audience_control: null,
-    team_access: null,
-    trashed_at: null,
-    trashed_user_id: null,
-    is_abandoned_drafts: !1
-  };
-  let l = sendWithRetry.post("/api/folders", {
-    team_id: t.teamId,
-    path: t.name,
-    is_invite_only: t.isInviteOnly,
-    is_view_only: t.isViewOnly,
-    sharing_audience_control: t.sharingAudienceControl,
-    team_access: t.teamAccess
-  }).then(({
-    data: r
-  }) => {
-    e.dispatch($$N13({
-      folderIds: [n.id]
-    }));
-    let i = r.meta;
-    for (let r of i) if (r.name === t.name) {
-      e.dispatch($$k7(r));
-      t.onFolderCreated && t.onFolderCreated(r.id, r.name);
-      trackFolderEvent("Folder Created", r.id, r.team_id, e.getState(), {
-        sharingAudienceControl: t.sharingAudienceControl,
-        teamAccess: t.teamAccess
+import { stopCreateNewFolder } from "../905/34809"
+import { createActionCreator } from "../905/73481"
+import { rolePostAction } from "../905/98702"
+import { handleOptimistTransactionWithError } from "../905/150006"
+import { popModalStack } from "../905/156213"
+import { VisualBellActions } from "../905/302958"
+import { getI18nString } from "../905/303541"
+import { createOptimistThunk } from "../905/350402"
+import { sendRoleInvites } from "../905/351260"
+import { AccessLevelEnum } from "../905/557142"
+import { FlashActions } from "../905/573154"
+import { sendWithRetry } from "../905/910117"
+import { selectViewAction } from "../905/929976"
+import { roleServiceAPI } from "../figma_app/66216"
+import { FResourceCategoryType } from "../figma_app/191312"
+import { trackFolderEvent } from "../figma_app/314264"
+import { generateTempId, validateFolderName } from "../figma_app/528509"
+
+// Origin: /Users/allen/github/fig/src/figma_app/598926.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments, improved readability.
+// Assumed dependencies: Redux-like store context, imported action creators, API utilities, and constants.
+
+// Type definitions for folder-related actions
+interface UpdateFolderDescriptionPayload {
+  folderId: string;
+  description: string;
+}
+
+interface PinUnpinFilePayload {
+  fileKey: string;
+  folderId: string;
+}
+
+interface CreateFolderPayload {
+  name: string;
+  teamId: string;
+  isInviteOnly?: boolean;
+  isViewOnly?: boolean;
+  sharingAudienceControl?: any;
+  teamAccess?: any;
+  inviteEmails?: string[];
+  inviteLevel?: AccessLevelEnum;
+  onFolderCreated?: (id: string, name: string) => void;
+  shouldRedirect?: boolean;
+}
+
+// Optimist thunk for updating folder description
+export const updateFolderDescriptionThunk = createOptimistThunk(
+  async (context, payload: UpdateFolderDescriptionPayload) => {
+    try {
+      const response = await sendWithRetry.put(`/api/folders/${payload.folderId}/description`, {
+        description: payload.description,
       });
-      let n = e.getState().user;
-      t.inviteEmails?.length && t.teamAccess && e.dispatch(sendRoleInvites({
-        emails: t.inviteEmails,
-        emailsToExclude: n ? new Set([n.email]) : void 0,
-        resourceType: FResourceCategoryType.FOLDER,
-        resourceIdOrKey: r.id,
-        level: t.inviteLevel || AccessLevelEnum.VIEWER,
-        source: "new_project_creation_modal",
-        teamId: t.teamId
-      }));
-      roleServiceAPI.getRoles({
-        resourceId: r.id,
-        resourceType: FResourceCategoryType.FOLDER
-      }).then(({
-        data: t
-      }) => {
-        for (let r of t.meta) e.dispatch(rolePostAction({
-          role: r
-        }));
-      });
-      t.shouldRedirect && e.dispatch(selectViewAction({
-        view: "folder",
-        folderId: r.id
-      }));
-      break;
+      // Dispatch action to update folder meta
+      context.dispatch(folderPutAction({ folder: response.data.meta }));
+    } catch (error) {
+      console.error(error);
+      context.dispatch(
+        FlashActions.error(getI18nString("file_browser.file_browser_actions.update_subscription_error"))
+      );
     }
-    return i;
-  });
-  return handleOptimistTransactionWithError({
-    store: e,
-    requestPromise: l,
-    fallbackError: getI18nString("file_browser.file_browser_actions.create_project_error"),
-    next: e.dispatch,
-    action: $$k7(n)
-  });
-});
-createOptimistThunk((e, {
-  folderId: t,
-  teamId: r,
-  isSubscribed: n
-}) => {
-  let s = n ? "Folder Subscriber Added" : "Folder Subscriber Deleted";
-  trackFolderEvent(s, t, r, e.getState());
-  let l = sendWithRetry.put(`/api/folders/${t}`, {
-    is_subscribed: n
-  });
-  handleOptimistTransactionWithError({
-    store: e,
-    requestPromise: l,
-    fallbackError: getI18nString("file_browser.file_browser_actions.update_project_error"),
-    next: e.dispatch,
-    action: $$P14({
-      folder: {
-        id: t,
-        is_subscribed: n
+  }
+);
+
+// Action creators
+export const folderUnpinFileAction = createActionCreator("FOLDER_UNPIN_FILE");
+export const folderPinFileAction = createActionCreator("FOLDER_PIN_FILE");
+export const folderSetPinnedFileAction = createActionCreator("FOLDER_SET_PINNED_FILE");
+export const folderDeleteLgShimAction = createActionCreator("FOLDER_DELETE_LG_SHIM");
+export const folderDeleteAction = createActionCreator("FOLDER_DELETE");
+export const folderClearAction = createActionCreator("FOLDER_CLEAR");
+export const folderLoadAction = createActionCreator("FOLDER_LOAD");
+export const folderPutUpdatedAtAction = createActionCreator("FOLDER_PUT_UPDATED_AT");
+export const folderLoadedAction = createActionCreator("FOLDER_LOADED");
+export const folderPutAction = createActionCreator("FOLDER_PUT");
+export const folderBatchPostAction = createActionCreator("FOLDER_BATCH_POST");
+export const folderPostAction = createActionCreator("FOLDER_POST");
+
+// Optimist thunk for unpinning a file from a folder
+export const unpinFileThunk = createOptimistThunk(
+  async (context, payload: PinUnpinFilePayload) => {
+    const optimistic = context.optimisticDispatch(folderUnpinFileAction(payload));
+    try {
+      await sendWithRetry.del(`/api/folders/${payload.fileKey}/pin`);
+      optimistic.commit();
+    } catch {
+      optimistic.revert();
+      context.dispatch(
+        FlashActions.error(getI18nString("file_browser.file_browser_actions.file_unpin_error"))
+      );
+    }
+  }
+);
+
+// Optimist thunk for pinning a file to a folder
+export const pinFileThunk = createOptimistThunk(
+  async (context, payload: PinUnpinFilePayload) => {
+    const optimistic = context.optimisticDispatch(folderPinFileAction(payload));
+    trackFolderEvent("file_browser_folder_pin_file", payload.folderId, null, context.getState(), {
+      fileKey: payload.fileKey,
+    });
+    try {
+      await sendWithRetry.post(`/api/folders/${payload.fileKey}/pin`);
+      optimistic.commit();
+      context.dispatch(
+        VisualBellActions.enqueue({
+          error: false,
+          message: getI18nString("file_browser.file_browser_actions.file_pinned_to_project"),
+        })
+      );
+    } catch {
+      optimistic.revert();
+      context.dispatch(
+        FlashActions.error(getI18nString("file_browser.file_browser_actions.file_pin_error"))
+      );
+    }
+  }
+);
+
+// Optimist thunk for creating a new folder
+export const createFolderThunk = createOptimistThunk(
+  async (context, payload: CreateFolderPayload) => {
+    // Validate folder name
+    const validationError = validateFolderName(payload.name);
+    if (validationError) {
+      context.dispatch(FlashActions.error(validationError));
+      return null;
+    }
+
+    // Close modal and stop folder creation UI
+    context.dispatch(popModalStack());
+    context.dispatch(stopCreateNewFolder());
+
+    // Ensure required fields are present
+    if (
+      payload.isInviteOnly === undefined &&
+      payload.isViewOnly === undefined &&
+      payload.teamAccess === undefined
+    ) {
+      context.dispatch(
+        FlashActions.error("inviteOnly and viewOnly fields or teamAccess field must be defined")
+      );
+      return null;
+    }
+
+    // Prepare optimistic folder object
+    const tempFolder = {
+      id: generateTempId(),
+      name: payload.name,
+      description: null,
+      path: payload.name,
+      team_id: payload.teamId,
+      is_subscribed: false,
+      is_favorited: false,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      is_invite_only: false,
+      is_view_only: false,
+      settings: { webhooks: {} },
+      deleted_at: null,
+      sharing_audience_control: null,
+      team_access: null,
+      trashed_at: null,
+      trashed_user_id: null,
+      is_abandoned_drafts: false,
+    };
+
+    // API call to create folder
+    const requestPromise = sendWithRetry.post("/api/folders", {
+      team_id: payload.teamId,
+      path: payload.name,
+      is_invite_only: payload.isInviteOnly,
+      is_view_only: payload.isViewOnly,
+      sharing_audience_control: payload.sharingAudienceControl,
+      team_access: payload.teamAccess,
+    }).then(({ data }) => {
+      // Remove temp folder from state
+      context.dispatch(folderDeleteAction({ folderIds: [tempFolder.id] }));
+
+      // Find created folder by name
+      const createdFolders = data.meta;
+      for (const folder of createdFolders) {
+        if (folder.name === payload.name) {
+          context.dispatch(folderPostAction(folder));
+          payload.onFolderCreated?.(folder.id, folder.name);
+
+          trackFolderEvent("Folder Created", folder.id, folder.team_id, context.getState(), {
+            sharingAudienceControl: payload.sharingAudienceControl,
+            teamAccess: payload.teamAccess,
+          });
+
+          // Invite users if needed
+          const currentUser = context.getState().user;
+          if (payload.inviteEmails?.length && payload.teamAccess) {
+            context.dispatch(
+              sendRoleInvites({
+                emails: payload.inviteEmails,
+                emailsToExclude: currentUser ? new Set([currentUser.email]) : undefined,
+                resourceType: FResourceCategoryType.FOLDER,
+                resourceIdOrKey: folder.id,
+                level: payload.inviteLevel || AccessLevelEnum.VIEWER,
+                source: "new_project_creation_modal",
+                teamId: payload.teamId,
+              })
+            );
+          }
+
+          // Fetch roles for the new folder
+          roleServiceAPI.getRoles({
+            resourceId: folder.id,
+            resourceType: FResourceCategoryType.FOLDER,
+          }).then(({ data }: { data: any }) => {
+            for (const role of data.meta) {
+              context.dispatch(rolePostAction({ role }));
+            }
+          });
+
+          // Redirect if requested
+          if (payload.shouldRedirect) {
+            context.dispatch(
+              selectViewAction({
+                view: "folder",
+                folderId: folder.id,
+              })
+            );
+          }
+          break;
+        }
       }
-    })
-  });
-});
-let $$O9 = createActionCreator("FOLDER_LOAD");
-let $$R12 = createActionCreator("FOLDER_PUT_UPDATED_AT");
-let $$L4 = createActionCreator("FOLDER_LOADED");
-let $$P14 = createActionCreator("FOLDER_PUT");
-let $$D0 = createActionCreator("FOLDER_BATCH_POST");
-let $$k7 = createActionCreator("FOLDER_POST");
-export const $l = $$D0;
-export const $o = $$S1;
-export const HA = $$x2;
-export const IU = $$C3;
-export const Kc = $$L4;
-export const MR = $$A5;
-export const Q2 = $$T6;
-export const bE = $$k7;
-export const gO = $$v8;
-export const qp = $$O9;
-export const ub = $$b10;
-export const vt = $$w11;
-export const y2 = $$R12;
-export const yH = $$N13;
-export const yJ = $$P14;
-export const z6 = $$I15;
+      return createdFolders;
+    });
+
+    // Handle optimistic transaction with error fallback
+    return handleOptimistTransactionWithError({
+      store: context,
+      requestPromise,
+      fallbackError: getI18nString("file_browser.file_browser_actions.create_project_error"),
+      next: context.dispatch,
+      action: folderPostAction(tempFolder),
+    });
+  }
+);
+
+// Optimist thunk for updating folder subscription status
+createOptimistThunk(
+  async (
+    context,
+    {
+      folderId,
+      teamId,
+      isSubscribed,
+    }: { folderId: string; teamId: string; isSubscribed: boolean }
+  ) => {
+    const eventType = isSubscribed ? "Folder Subscriber Added" : "Folder Subscriber Deleted";
+    trackFolderEvent(eventType, folderId, teamId, context.getState());
+    const requestPromise = sendWithRetry.put(`/api/folders/${folderId}`, {
+      is_subscribed: isSubscribed,
+    });
+    handleOptimistTransactionWithError({
+      store: context,
+      requestPromise,
+      fallbackError: getI18nString("file_browser.file_browser_actions.update_project_error"),
+      next: context.dispatch,
+      action: folderPutAction({
+        folder: {
+          id: folderId,
+          is_subscribed: isSubscribed,
+        },
+      }),
+    });
+  }
+);
+
+// Exported actions and thunks
+export const $l = folderBatchPostAction;
+export const $o = folderPinFileAction;
+export const HA = folderDeleteLgShimAction;
+export const IU = folderClearAction;
+export const Kc = folderLoadedAction;
+export const MR = folderSetPinnedFileAction;
+export const Q2 = folderUnpinFileAction;
+export const bE = folderPostAction;
+export const gO = pinFileThunk;
+export const qp = folderLoadAction;
+export const ub = updateFolderDescriptionThunk;
+export const vt = createFolderThunk;
+export const y2 = folderPutUpdatedAtAction;
+export const yH = folderDeleteAction;
+export const yJ = folderPutAction;
+export const z6 = unpinFileThunk;

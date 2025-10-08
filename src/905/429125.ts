@@ -5,7 +5,7 @@ import { selectWithShallowEqual } from '../905/103090';
 import { showModalHandler } from '../905/156213';
 import { permissionScopeHandler } from '../905/189185';
 import { getI18nString } from '../905/303541';
-import { Cf } from '../905/504727';
+import { ConnectedPointingDropdown } from '../905/504727';
 import { getFeatureFlags } from '../905/601108';
 import { n as _$$n } from '../905/841238';
 import { useDropdownState } from '../905/848862';
@@ -71,7 +71,7 @@ export function $$I0({
       propType: getComponentPropDisplayName(e).toLocaleLowerCase()
     });
   }, [t]);
-  return N ? jsxs(Cf, {
+  return N ? jsxs(ConnectedPointingDropdown, {
     targetRect: P,
     maxWidth: 220,
     lean: 'right',

@@ -6,7 +6,7 @@ import { r as _$$r } from "../905/571838";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
 import c from "../vendor/524488";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { KeyCodes } from "../905/63728";
 import { useBlurFocusedItem } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -339,7 +339,7 @@ function $({
     width: 0,
     height: 0
   });
-  wY(d, () => {
+  useResizeObserverRef(d, () => {
     u({
       width: d.current?.clientWidth ?? 0,
       height: d.current?.clientHeight ?? 0

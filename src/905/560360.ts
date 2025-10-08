@@ -7,7 +7,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { NameClass } from "../905/881708";
 import { aK, t6 } from "../figma_app/647246";
-import { Nl } from "../figma_app/115923";
+import { genericAtomFamily1 } from "../figma_app/115923";
 import { $e } from "../905/554703";
 let h = new Vector2D(80, 20);
 let g = {
@@ -34,7 +34,7 @@ export class $$A0 extends NameClass {
     this._isMouseOverAddButton(e) ? this.addButtonUiState.isHovered = !0 : this.addButtonUiState.isHovered = !1;
   }
   handleMouseDown(e) {
-    this._isMouseOverAddButton(e) && (e.accept(this), atomStoreManager.set(Nl, $e.INSERT), atomStoreManager.set(aK, t6.Blocks));
+    this._isMouseOverAddButton(e) && (e.accept(this), atomStoreManager.set(genericAtomFamily1, $e.INSERT), atomStoreManager.set(aK, t6.Blocks));
   }
   render(e, t) {
     if (!InteractionCpp.shouldRenderAddButton()) return;

@@ -14,7 +14,7 @@ import { createOptimistThunk } from '../905/350402';
 import { ConfirmationModal } from '../905/441305';
 import { AccessLevelEnum } from '../905/557142';
 import { FlashActions, handlePromiseError } from '../905/573154';
-import { P as _$$P } from '../905/595507';
+import { setMemberEduGracePeriodAction } from '../905/595507';
 import { liveStoreInstance } from '../905/713695';
 import { getDisplayNameAlt } from '../905/760074';
 import { getCurrentLiveGraphClient } from '../905/761735';
@@ -199,7 +199,7 @@ let z = createOptimistThunk((e, {
   let p = u && u.folder_id && c.folders[u.folder_id];
   let m = s && t.level >= AccessLevelEnum.EDITOR;
   d.then(i => {
-    if (e.dispatch(_$$P({
+    if (e.dispatch(setMemberEduGracePeriodAction({
       role: t,
       hasEduEditAccess: i.data.meta.edu_edit_access_allowed
     })), m && u && p) {

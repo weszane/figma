@@ -17,12 +17,12 @@ import { hH, Qe } from "../9410/728210";
 import { J as _$$J } from "../figma_app/553179";
 import { iF } from "../figma_app/511910";
 import { NavigationDirection } from "../figma_app/202626";
-import { SyB } from "../figma_app/6204";
+import { CursorBotV2Overlay } from "../figma_app/6204";
 import { a8, jE, mH, Dh } from "../figma_app/467440";
 import { wn, HQ, bn, Le, $2, mf, h0 } from "../figma_app/61403";
 import { W as _$$W, Y as _$$Y } from "../figma_app/467880";
 import { FlashActions } from "../905/573154";
-import { E as _$$E } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { selectCurrentUser } from "../905/372672";
 import { Of, XC } from "../figma_app/631279";
 import { b as _$$b2 } from "../9410/881782";
@@ -513,7 +513,7 @@ export function $$eo1() {
     complete,
     uniqueId
   } = e({
-    overlay: SyB,
+    overlay: CursorBotV2Overlay,
     priority: _$$N.OVERRIDING_MODAL
   });
   let O = useDispatch();
@@ -555,10 +555,10 @@ export function $$eo1() {
       n(postUserFlag(r));
       t || i();
     };
-    _$$E(e, _$$W, () => {
+    useEventForwarder(e, _$$W, () => {
       o?.editor_type === FFileType.DESIGN ? c(!0) : n(FlashActions.error("Cursor Bot can only be run in Figma design."));
     });
-    _$$E(e, "Reset Onboarding", () => {
+    useEventForwarder(e, "Reset Onboarding", () => {
       s && o?.editor_type === FFileType.DESIGN && c();
     });
   }(uniqueId, isShowing, show);

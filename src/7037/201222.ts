@@ -8,14 +8,14 @@ import { KindEnum } from '../905/129884';
 import { hideModal } from '../905/156213';
 import { OnboardingRenderFrame } from '../905/284399';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { selectCurrentUser } from '../905/372672';
 import { feedCommentAttachmentAPI } from '../905/375499';
 import { w4 } from '../905/445814';
 import { trackEventAnalytics } from '../905/449184';
 import { DG, dy, Kc, rS, Zp } from '../905/462076';
 import { handleAtomEvent } from '../905/502364';
-import { gX } from '../905/504768';
+import { createFeedCommentThunk } from '../905/504768';
 import { Dr } from '../905/530837';
 import { FlashActions } from '../905/573154';
 import { UserAvatar, AvatarSize } from '../905/590952';
@@ -38,8 +38,8 @@ import { i as _$$i } from '../7037/201545';
 import { o as _$$o } from '../7037/529503';
 import { B as _$$B2 } from '../7037/575850';
 import { x as _$$x } from '../7037/837002';
-import { bIZ } from '../figma_app/6204';
-import { o8 } from '../figma_app/12220';
+import { FeedPostDetailZoomPanNudge } from '../figma_app/6204';
+import { stylizeMessageMeta } from '../figma_app/12220';
 import { FeedPostWithDetails } from '../figma_app/43951';
 import { xT } from '../figma_app/195407';
 import { N as _$$N } from '../figma_app/268271';
@@ -168,7 +168,7 @@ function ee(e) {
 let en = 'feed-post-detail-modal';
 function eo() {
   let e = _$$e({
-    overlay: bIZ,
+    overlay: FeedPostDetailZoomPanNudge,
     priority: _$$N.DEFAULT_MODAL
   });
   let t = zl(B);
@@ -485,7 +485,7 @@ function eI(e) {
   let [g, v] = useState([]);
   let T = useSelector(e => e.comments.newComment);
   let I = useCallback(() => {
-    t(gX({
+    t(createFeedCommentThunk({
       postUuid: e.postUuid,
       messageMeta: g,
       attachmentIds: Object.keys(T.attachments)
@@ -513,7 +513,7 @@ function eI(e) {
   }, [t]);
   return jsxs('div', {
     className: 'feed_post_detail_modal--commentSection--2SXbE',
-    children: [jsxs(_$$P, {
+    children: [jsxs(RecordingScrollContainer, {
       innerClassName: 'feed_post_detail_modal--commentSectionScroll--yFbDD',
       useBottomPinning: !0,
       ref: n,
@@ -528,7 +528,7 @@ function eI(e) {
           createdAt: t.createdAt,
           currentOrgId: e.currentOrgId,
           mentionables: j,
-          messageMeta: o8(t.messageMeta),
+          messageMeta: stylizeMessageMeta(t.messageMeta),
           reactions: t.reactions,
           user: e.currentUser
         }, t.id))
@@ -574,7 +574,7 @@ function eI(e) {
   });
 }
 function ew(e) {
-  let t = useMemo(() => o8(e.feedPost.descriptionMeta), [e.feedPost.descriptionMeta]);
+  let t = useMemo(() => stylizeMessageMeta(e.feedPost.descriptionMeta), [e.feedPost.descriptionMeta]);
   return jsxs('div', {
     role: 'textbox',
     tabIndex: 0,

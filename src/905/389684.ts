@@ -8,7 +8,7 @@ import { isBranchAlt } from "../905/760074";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getParentOrgId } from "../905/872904";
 import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
-import { Vg } from "../905/300621";
+import { registeredModal } from "../905/300621";
 import { r6 } from "../905/542608";
 import { T } from "../figma_app/472024";
 import { getTabKeyFromEnum } from "../905/753512";
@@ -22,7 +22,7 @@ export function $$_0({
   let y = selectCurrentFile();
   let b = getParentOrgId();
   let v = "editor" === t;
-  let I = useMemo(() => "editor" === t && A?.type === LIBRARY_PREFERENCES_MODAL || "figjam" === t && A?.type === Vg.type, [A?.type, t]);
+  let I = useMemo(() => "editor" === t && A?.type === LIBRARY_PREFERENCES_MODAL || "figjam" === t && A?.type === registeredModal.type, [A?.type, t]);
   let E = useCallback(() => {
     let n = generateUUIDv4();
     trackEventAnalytics("toggle_library_modal", {
@@ -45,7 +45,7 @@ export function $$_0({
         sessionId: n
       }
     })), _(markLibrariesModalOpenedFlag())) : _(showModalHandler({
-      type: Vg,
+      type: registeredModal,
       data: {
         tab: LibraryTabEnum.LIBRARIES
       }

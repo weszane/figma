@@ -5,7 +5,7 @@ import { Fz } from "../figma_app/106207";
 import { fG } from "../figma_app/973927";
 import { t } from "../905/851577";
 import { N } from "../905/645480";
-import { p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { F5, oM } from "../905/192343";
 export function $$u0(e) {
   let {
@@ -24,7 +24,7 @@ export function $$u0(e) {
     } = a;
     n && oM({
       id: e.resource.template.id,
-      type: p.TEMPLATES,
+      type: TabCategory.TEMPLATES,
       source: e.triggeredFrom,
       options: {
         ...u,

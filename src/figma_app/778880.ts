@@ -106,7 +106,7 @@ export function isInFigmaMobile(): boolean {
  * Checks if the device is iOS (iPhone, iPad, iPod).
  * Original: $$E14
  */
-const isIOSUA: boolean = /iPhone|iPad|iPod/.test(navigator.userAgent)
+export const isIOSUA: boolean = /iPhone|iPad|iPod/.test(navigator.userAgent)
 
 /**
  * Checks if the device is iPhone or iPod.

@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { styleBuilderInstance } from "../905/941192";
 export function $$l0(e) {
@@ -8,7 +8,7 @@ export function $$l0(e) {
     style: styleBuilderInstance.if(!!e.maxContentWidth, styleBuilderInstance.my0.mxAuto.add({
       maxWidth: `calc(${e.maxContentWidth}rem / 16)`
     })).$,
-    children: jsxs(P, {
+    children: jsxs(RecordingScrollContainer, {
       className: cssBuilderInstance.wFull.hFull.$,
       innerClassName: cssBuilderInstance.px32.borderBox.hFull.$,
       minContentWidth: e.minContentWidth,

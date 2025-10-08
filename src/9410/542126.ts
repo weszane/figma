@@ -12,7 +12,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
-import { yo } from "../905/125333";
+import { configAtom } from "../905/125333";
 import { y0, wv, MM } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -23,7 +23,7 @@ import { useDropdown } from "../905/848862";
 import { useAppModelProperty } from "../figma_app/722362";
 import { b4, _V, kM } from "../figma_app/421886";
 import { KindEnum } from "../905/129884";
-import { Jz } from "../905/504727";
+import { PointingDropdown } from "../905/504727";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { sW, p9 } from "../figma_app/463678";
 import { wV, H9, ed, t1 } from "../9410/763216";
@@ -69,7 +69,7 @@ function D({
   let c = useDropdown("CANVAS_SEARCH_FILTER_DROPDOWN");
   let h = useRef(null);
   let y = useAppModelProperty("isReadOnly");
-  let N = useAtomWithSubscription(yo);
+  let N = useAtomWithSubscription(configAtom);
   let A = useSelector(e => e.canvasSearch.filters);
   let L = useSelector(e => e.canvasSearch.mode);
   let R = "whiteboard" === getCurrentFileType();
@@ -128,7 +128,7 @@ function D({
   useEffect(() => {
     y && L === EditAction.REPLACE && d(sV(EditAction.FIND));
   }, [d, y, L]);
-  let U = h.current && jsx(Jz, {
+  let U = h.current && jsx(PointingDropdown, {
     autofocusPrevElementOnEsc: !0,
     autofocusPrevElementOnSelect: !0,
     autofocusPrevElementOnTab: !1,
@@ -211,7 +211,7 @@ function F({
 }) {
   let h = useDispatch();
   let f = useAppModelProperty("isReadOnly");
-  let x = useAtomWithSubscription(yo);
+  let x = useAtomWithSubscription(configAtom);
   let y = useSelector(e => e.canvasSearch.filters);
   let C = useSelector(e => e.canvasSearch.mode);
   let {

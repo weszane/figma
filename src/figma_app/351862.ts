@@ -12,7 +12,7 @@ import { A as _$$A } from "../vendor/518290";
 import { analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
-import { W6 } from "../905/125333";
+import { shapeSidebarModeAtom } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { teamLibraryCache } from "../figma_app/80990";
@@ -414,14 +414,14 @@ export function $$tH1(e, t, r) {
 export function $$tz14(e, t) {
   t && (Fullscreen?.triggerActionEnumInUserEditScope(t.actionEnum, {
     source: YV
-  }), atomStoreManager.set(W6, e));
+  }), atomStoreManager.set(shapeSidebarModeAtom, e));
 }
 export async function $$tW13(e, t, r) {
   try {
     let n = await teamLibraryCache.getCanvas(e);
     WhiteboardTsApi?.setPlatformShapeSelected(n, $$t$2(e), e.type, e.userFacingVersion.toString(), e.library_key, r);
     Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_SHAPE_WHITEBOARD_PLATFORM, {});
-    atomStoreManager.set(W6, t);
+    atomStoreManager.set(shapeSidebarModeAtom, t);
   } catch (e) {
     reportError(ServiceCategories.FIGJAM, e);
   }

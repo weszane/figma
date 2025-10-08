@@ -3,7 +3,7 @@ import { useSetAtom } from 'jotai/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { getI18nString } from '../905/303541';
-import { Cf, it } from '../905/504727';
+import { ConnectedPointingDropdown, DropdownType } from '../905/504727';
 import { getSingletonSceneGraph } from '../905/700578';
 import { q } from '../905/820062';
 import { useDropdown } from '../905/848862';
@@ -235,9 +235,9 @@ function F({
     icon: jsx(q, {})
   }, 'add-custom-breakpoint')];
   return jsx(Fragment, {
-    children: t.showing && jsx(Cf, {
+    children: t.showing && jsx(ConnectedPointingDropdown, {
       targetRect: g,
-      type: it.DEFAULT,
+      type: DropdownType.DEFAULT,
       maxWidth: 150,
       lean: 'left',
       className: f()(cssBuilderInstance.eventsAuto.$),

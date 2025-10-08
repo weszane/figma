@@ -5,7 +5,7 @@ import { IconButton } from "../905/443068";
 import { d as _$$d } from "../c5e2cae0/368426";
 import { Q } from "../905/553231";
 import { analyticsEventManager } from "../905/449184";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UL, iB, O$ } from "../figma_app/361035";
@@ -366,7 +366,7 @@ export function $$q0({
         className: "select_seats_table--tableContainer--ft8tm",
         ref: T,
         "data-testid": "select-seats-table",
-        children: [jsx(_$$P, {
+        children: [jsx(RecordingScrollContainer, {
           maxHeight: b,
           className: "select_seats_table--scrollContainer--HMiGx",
           hideScrollbar: !0,

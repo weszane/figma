@@ -17,7 +17,7 @@ import { useMultiSubscription } from "../figma_app/288654";
 import { linkWithTracking, clickableBaseLinkTracked } from "../figma_app/637027";
 import { w4, Y8 } from "../905/445814";
 import { LoadingSpinner } from "../figma_app/858013";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -159,7 +159,7 @@ function q(e) {
           children: N
         })
       }), jsx(DialogBody, {
-        children: fileImport && jsx(_$$P, {
+        children: fileImport && jsx(RecordingScrollContainer, {
           innerClassName: cssBuilderInstance.flex.flexColumn.$,
           className: J,
           children: Object.values(fileImport.files).map(e => jsx($$ei1, {
@@ -336,7 +336,7 @@ export function $$ee2({
         })
       }), jsx(DialogBody, {
         padding: 0,
-        children: jsx(_$$P, {
+        children: jsx(RecordingScrollContainer, {
           className: "x78zum5 xdt5ytf x1mhq5o4",
           className: J,
           children: Object.values(e.files).map(e => jsx($$ei1, {

@@ -28,7 +28,7 @@ import { dh } from "../figma_app/186343";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { KindEnum } from "../905/129884";
 import { xH as _$$xH } from "../figma_app/249941";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { ActionButton } from "../905/189361";
 import { m as _$$m } from "../figma_app/175364";
 import { FlexBox } from "../905/222272";
@@ -136,7 +136,7 @@ export function $$U0() {
 export function $$B2() {
   let {
     pop
-  } = cq();
+  } = useNavigationStack();
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "FirstDraftLintViewForMakeKit",
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,

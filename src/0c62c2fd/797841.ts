@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { BaseLinkComponent } from "../figma_app/637027";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fileRestoreAction } from "../figma_app/78808";
 import { hideModal, popModalStack } from "../905/156213";
@@ -85,7 +85,7 @@ export function $$g0(e) {
     },
     children: jsx("div", {
       className: "file_restore_from_version_modal--fileRestorePanel--pMNT2",
-      children: jsx(P, {
+      children: jsx(RecordingScrollContainer, {
         width: 396,
         children: n.map((e, t) => jsx(f, {
           version: e,

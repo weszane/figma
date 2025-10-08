@@ -30,7 +30,7 @@ import { getCurrentFileType, isPrototypeView } from "../figma_app/976749";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { trackUserEvent } from "../figma_app/314264";
 import { DEFAULT_THUMBNAIL_SIZE, uploadImageAttachment } from "../905/901964";
-import { eR as _$$eR } from "../figma_app/12220";
+import { isNewCommentId } from "../figma_app/12220";
 import { $W, KD } from "../figma_app/317394";
 import { H as _$$H } from "../905/674803";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -169,7 +169,7 @@ export function $$em1(e) {
   let ew = useSelector(e => e.comments.activeDragTarget);
   let eR = useAtMentionInviteExperiment();
   let ek = useAtomWithSubscription(_$$H);
-  let eO = _$$eR(e.threadId) && eR({
+  let eO = isNewCommentId(e.threadId) && eR({
     isDraftFile: !eC,
     isMobile: BrowserInfo.isMobileBrowser,
     showExpAtMentionInvite: !!getFeatureFlags().show_at_mention_invited_users,
@@ -191,7 +191,7 @@ export function $$em1(e) {
   }, [setHyperlinkLocation, setHyperlinkEditorRef, editorRef]);
   let eF = useStore();
   useEffect(() => {
-    let t = !_$$eR(e.threadId);
+    let t = !isNewCommentId(e.threadId);
     trackUserEvent("Comment composer opened", eF.getState(), {
       isThread: t
     });
@@ -313,11 +313,11 @@ export function $$em1(e) {
   let e8 = e => isMessageMetaEmpty(e);
   let e7 = e3();
   let e6 = e8(e.messageMeta) && (!eW || 0 === eG.length);
-  let e9 = eW && ew === e.recordingKey && !_$$eR(e.threadId);
+  let e9 = eW && ew === e.recordingKey && !isNewCommentId(e.threadId);
   return jsxs(_$$Y, {
     className: f()(e.containerClassName || {
       [fP]: !0,
-      [U0]: _$$eR(e.threadId),
+      [U0]: isNewCommentId(e.threadId),
       [mr]: e9
     }, e6 && Sg),
     isDragTarget: () => eW,

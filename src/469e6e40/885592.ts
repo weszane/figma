@@ -18,7 +18,7 @@ import { UpgradeAction } from '../905/370443';
 import { b as _$$b2 } from '../905/484176';
 import { DashboardSections } from '../905/548208';
 import { getFeatureFlags } from '../905/601108';
-import { A3, Hj } from '../905/682977';
+import { HeaderCell, TableRow } from '../905/682977';
 import { textDisplayConfig } from '../905/687265';
 import { dayjs } from '../905/920142';
 import { selectViewAction } from '../905/929976';
@@ -865,7 +865,7 @@ function ek() {
   }));
 }
 function eE(e) {
-  return jsx(Hj, {
+  return jsx(TableRow, {
     className: 'x1n2onr6 xu15cu9 x9f619 xfbgxd4 xmkjyiy xuhu7p5 x1tv5ljm',
     leftPadding: !0,
     header: e.header,
@@ -891,7 +891,7 @@ function eC(e) {
           id: e,
           className: t,
           renderHeader: a
-        }) => jsx(A3, {
+        }) => jsx(HeaderCell, {
           className: t,
           children: jsx('span', {
             className: cssBuilderInstance.colorText.$,

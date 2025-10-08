@@ -28,7 +28,7 @@ import { OnboardingModal } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { Link } from '../905/438674';
 import { trackEventAnalytics } from '../905/449184';
-import { E as _$$E2 } from '../905/453826';
+import { useEventForwarder } from '../905/453826';
 import { useWebLoggerTimerEffect } from '../905/485103';
 import { Button } from '../905/521428';
 import { AccessLevelEnum } from '../905/557142';
@@ -55,7 +55,7 @@ import { A as _$$A5 } from '../1617/442539';
 import { A as _$$A3 } from '../1617/892083';
 import { A as _$$A2 } from '../6828/70690';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { BWk, SqV } from '../figma_app/6204';
+import { SharingClarityProjectModalOverlay, SharingClarityProjectCreationTeamAccessOverlay } from '../figma_app/6204';
 import { copyViewLinkThunk } from '../figma_app/11182';
 import { getPermissionLevelName } from '../figma_app/12796';
 import { useAtomWithSubscription } from '../figma_app/27355';
@@ -89,7 +89,7 @@ function SharingClarityProjectModalOverlay() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: SqV,
+    overlay: SharingClarityProjectCreationTeamAccessOverlay,
     priority: _$$N2.DEFAULT_MODAL
   }, [userFlag]);
   useSingleEffect(() => {
@@ -117,7 +117,7 @@ const seenSharingClarityProjectModalOverlayFlag = 'seen_sharing_clarity_project_
 const projectModalOnboardingKey = 'sc_project_modal_onboarding_key';
 const projectModalTeamAccessOnboardingKey = 'sc_project_modal_team_access_onboarding_key';
 const projectModalOverlayFlagAtom = userFlagExistsAtomFamily(seenSharingClarityProjectModalOverlayFlag);
-const projectModalOnboardingAtom = rn('sc_project_modal_onboarding', createOnboardingStateMachine(BWk));
+const projectModalOnboardingAtom = rn('sc_project_modal_onboarding', createOnboardingStateMachine(SharingClarityProjectModalOverlay));
 function SharingClarityProjectModalOnboarding() {
   const userFlag = useAtomWithSubscription(projectModalOverlayFlagAtom);
   const {
@@ -126,7 +126,7 @@ function SharingClarityProjectModalOnboarding() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: BWk,
+    overlay: SharingClarityProjectModalOverlay,
     priority: _$$N2.DEFAULT_MODAL
   }, [userFlag]);
   const dispatch = useDispatch();
@@ -140,7 +140,7 @@ function SharingClarityProjectModalOnboarding() {
       });
     }
   });
-  _$$E2(uniqueId, 'Reset Onboarding', () => {
+  useEventForwarder(uniqueId, 'Reset Onboarding', () => {
     show({});
   });
   const learnMoreCta = {

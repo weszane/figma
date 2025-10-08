@@ -16,7 +16,7 @@ import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { clearWorkspaceFilterThunk, trackLicenseGroupFilterDropdownClickThunk, sortStateThunk, selectPlanFilterThunk, clearPlanFilterThunk, selectWorkspaceFilterThunk } from "../905/977218";
 import { useDropdownState } from "../905/848862";
 import { SortOrder } from "../figma_app/756995";
-import { y2 } from "../905/776312";
+import { getValueWithFallback } from "../905/776312";
 import { P_, J as _$$J, l4 } from "../905/124270";
 import { l as _$$l } from "../figma_app/676249";
 import { getSupportedFacetTypes, createResourceFacet, buildQueryObject } from "../905/171315";
@@ -38,17 +38,17 @@ import { UC } from "../figma_app/33126";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
-import { tBR } from "../figma_app/6204";
+import { SearchWorkspaceOnboarding } from "../figma_app/6204";
 import { A as _$$A2 } from "../6828/154709";
-import { xH as _$$xH, zQ as _$$zQ } from "../905/378567";
+import { PRIVATE_PLUGINS_SEARCH_CONFIG, getPrivatePluginsViewMode } from "../905/378567";
 import { xH as _$$xH2, zQ as _$$zQ2 } from "../905/869282";
 import { g as _$$g } from "../905/345380";
-import { nD, uB } from "../905/572991";
+import { publicWidgetsSearchModule, privateWidgetsSearchModule } from "../905/572991";
 import { debounce } from "../905/915765";
 import { wv, MM } from "../figma_app/236327";
 import { lV, R1 } from "../figma_app/802781";
 import { selectCurrentUser } from "../905/372672";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { g as _$$g2 } from "../905/210813";
 import { Kc } from "../figma_app/626700";
 var n;
@@ -149,7 +149,7 @@ function et() {
   let n = useAtomWithSubscription(J);
   let a = useAtomWithSubscription(ee);
   let o = _$$e({
-    overlay: tBR,
+    overlay: SearchWorkspaceOnboarding,
     priority: _$$N.DEFAULT_MODAL
   }, [n, i, a]);
   useSingleEffect(() => {
@@ -385,7 +385,7 @@ function eT(e) {
         svg: _$$A2,
         className: B()(el, o ? ed : "")
       })
-    }), o && jsxs(Cf, {
+    }), o && jsxs(ConnectedPointingDropdown, {
       targetRect: n.data.targetRect,
       minWidth: 162,
       maxWidth: 500,
@@ -463,7 +463,7 @@ function eT(e) {
       case PublicModelType.PRIVATE_PLUGINS:
         return jsx(t, {
           ...e,
-          ..._$$xH
+          ...PRIVATE_PLUGINS_SEARCH_CONFIG
         });
       case PublicModelType.FILES:
         return jsx(t, {
@@ -531,34 +531,34 @@ function eP(e) {
 export let $$eO1 = {
   [PublicModelType.FILES]: (e, t) => ({
     sortMode: e.sortState.files,
-    viewMode: y2(KJ.viewId, t, KJ.defaultOptions.viewMode),
+    viewMode: getValueWithFallback(KJ.viewId, t, KJ.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
   [PublicModelType.PROJECTS]: (e, t) => ({
     sortMode: e.sortState.projects,
-    viewMode: y2($T.viewId, t, $T.defaultOptions.viewMode),
+    viewMode: getValueWithFallback($T.viewId, t, $T.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
   [PublicModelType.TEAMS]: (e, t) => ({
     sortMode: e.sortState.teams,
-    viewMode: y2(Vx.viewId, t, Vx.defaultOptions.viewMode),
+    viewMode: getValueWithFallback(Vx.viewId, t, Vx.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
   [PublicModelType.USERS]: (e, t) => ({
     sortMode: e.sortState.users,
-    viewMode: y2(V0.viewId, t, V0.defaultOptions.viewMode),
+    viewMode: getValueWithFallback(V0.viewId, t, V0.defaultOptions.viewMode),
     shouldShowGroupFilter: !1,
     shouldShowPlanFilter: !0
   }),
   [PublicModelType.HUB_FILES]: eB,
   [PublicModelType.PUBLIC_PLUGINS]: _$$zQ2,
-  [PublicModelType.PRIVATE_PLUGINS]: _$$zQ,
+  [PublicModelType.PRIVATE_PLUGINS]: getPrivatePluginsViewMode,
   [PublicModelType.PUBLIC_PROFILES]: _$$g.getValidOptions,
-  [PublicModelType.PUBLIC_WIDGETS]: nD.getValidOptions,
-  [PublicModelType.PRIVATE_WIDGETS]: uB.getValidOptions
+  [PublicModelType.PUBLIC_WIDGETS]: publicWidgetsSearchModule.getValidOptions,
+  [PublicModelType.PRIVATE_WIDGETS]: privateWidgetsSearchModule.getValidOptions
 };
 export function $$eD0(e) {
   let t = useDispatch();

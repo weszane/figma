@@ -5,7 +5,7 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { $ } from "../905/922405";
 import { getProductType } from "../figma_app/314264";
-import { l as _$$l } from "../905/202425";
+import { getSelectedItemTypes } from "../905/202425";
 import { hasJubileePermissionForWhiteboard } from "../figma_app/251115";
 import { $L, OW } from "../figma_app/737746";
 import { x } from "../905/179739";
@@ -121,7 +121,7 @@ export function $$I1(e) {
     hasAiFeatureAccess
   } = function () {
     let e = debugState.getState();
-    let t = _$$l(e);
+    let t = getSelectedItemTypes(e);
     let r = e.openFile?.key ?? "";
     let n = getProductType(e.selectedView, null);
     let l = atomStoreManager.get(dd) ?? "";

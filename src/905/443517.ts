@@ -20,7 +20,7 @@ import { z as _$$z } from '../905/654860';
 import { F as _$$F } from '../905/680873';
 import { logInfo } from '../905/714362';
 import { SvgComponent } from '../905/714743';
-import { cq } from '../905/794154';
+import { useNavigationStack } from '../905/794154';
 import { n as _$$n } from '../905/895449';
 import { styleBuilderInstance } from '../905/941192';
 import { A as _$$A2 } from '../1617/325876';
@@ -75,7 +75,7 @@ export function $$K0(e) {
   let {
     pop,
     close
-  } = cq();
+  } = useNavigationStack();
   useEffect(() => () => {
     G.current || terminate();
   }, [terminate]);
@@ -481,7 +481,7 @@ function $({
 }) {
   let {
     pop
-  } = cq();
+  } = useNavigationStack();
   let A = useRef(null);
   let b = useRef(null);
   _$$Y(g);

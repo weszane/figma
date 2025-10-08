@@ -14,7 +14,7 @@ import { createOptimistThunk } from "../905/350402";
 import { stopRecordingThunk, startRecordingThunk, handleAutosaveAndNavigationThunk, updateMultiplayerStateThunk } from "../figma_app/91703";
 import { loadingStatePutSuccess } from "../figma_app/714946";
 import { hideModal, showModalHandler } from "../905/156213";
-import { E as _$$E } from "../905/344656";
+import { handleSaveStatusUpdate } from "../905/344656";
 import { VERSION_HISTORY_SET_DOC_HAS_CHANGED } from "../905/784363";
 import { b2 } from "../figma_app/622574";
 import { setupFlushTimer, setupConnectionStateHandler } from "../figma_app/582924";
@@ -269,7 +269,7 @@ export class $$eu0 {
       status: !0
     }));
     let s = this.store.getState().saveStatus;
-    s && a.equals(s) || (this.dispatch(_$$E(a)), handleSyncEvent(a));
+    s && a.equals(s) || (this.dispatch(handleSaveStatusUpdate(a)), handleSyncEvent(a));
     let o = getAutosaveState();
     if (o && o.status === FileProcessingStatus.WAITING && !e && !t && i === SyncError.NONE) {
       finishAutosaveWait(!1);

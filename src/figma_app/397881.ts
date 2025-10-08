@@ -1,7 +1,7 @@
 import { isEmptyObject } from "../figma_app/493477";
 import { traverseChildren, getAncestors } from "../figma_app/387100";
 import { createOptimistThunk } from "../905/350402";
-import { j } from "../905/496937";
+import { exportPickerSetItemsAction } from "../905/496937";
 import { Nf } from "../figma_app/357047";
 import { y2, YI } from "../figma_app/678300";
 class d {
@@ -111,7 +111,7 @@ export let $$p0 = createOptimistThunk(e => {
       });
     }
   }
-  e.dispatch(j({
+  e.dispatch(exportPickerSetItemsAction({
     items: f,
     frames: a
   }));

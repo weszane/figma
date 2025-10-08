@@ -1,32 +1,32 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useRef, useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SvgComponent } from "../905/714743";
-import { renderI18nText } from "../905/303541";
-import { r as _$$r } from "../905/534055";
-import { s as _$$s } from "../905/328136";
-import { Mr } from "../figma_app/795938";
-import { withTrackedClick } from "../figma_app/831799";
-import { getPluginVersion } from "../figma_app/300692";
-import { WM, Wh, dY, sU } from "../905/838765";
-import { YW } from "../figma_app/870683";
-import { dn } from "../figma_app/994403";
-import { BrowserInfo } from "../figma_app/778880";
-import { cx } from "../figma_app/558929";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import { _y, MJ, Qe } from "../905/5637";
 import { showModalHandler } from "../905/156213";
-import { generateCommunityUrl } from "../905/882646";
+import { z } from "../905/255946";
+import { renderI18nText } from "../905/303541";
+import { s as _$$s } from "../905/328136";
 import { selectCurrentUser } from "../905/372672";
+import { x as _$$x } from "../905/423181";
+import { r as _$$r } from "../905/534055";
+import { hz, m_ } from "../905/540198";
+import { SvgComponent } from "../905/714743";
+import { dY, sU, Wh, WM } from "../905/838765";
+import { generateCommunityUrl } from "../905/882646";
+import { IconMetricDisplay, IconMetricInteractive } from "../905/988303";
+import { A as _$$A2 } from "../1617/579393";
+import { A as _$$A } from "../5724/322086";
 import { isWidget } from "../figma_app/45218";
 import { ManifestEditorType } from "../figma_app/155287";
+import { getPluginVersion } from "../figma_app/300692";
+import { cx } from "../figma_app/558929";
 import { WW } from "../figma_app/764679";
-import { x as _$$x } from "../905/423181";
-import { x8, vE } from "../905/988303";
-import { Qe, _y, MJ } from "../905/5637";
-import { A as _$$A } from "../5724/322086";
+import { BrowserInfo } from "../figma_app/778880";
+import { Mr } from "../figma_app/795938";
+import { withTrackedClick } from "../figma_app/831799";
+import { generateCommunityWidgetUrl } from "../figma_app/870683";
 import { Q7 } from "../figma_app/878651";
-import { z } from "../905/255946";
-import { m_, hz } from "../905/540198";
-import { A as _$$A2 } from "../1617/579393";
+import { dn } from "../figma_app/994403";
 function T(e) {
   let t = useDispatch();
   let i = selectCurrentUser();
@@ -39,7 +39,7 @@ function T(e) {
   let c = isWidget(e.resource);
   let u = getPluginVersion(e.resource);
   let m = u.manifest.editorType?.[0] ?? ManifestEditorType.FIGMA;
-  return e.isDisabled ? jsx(x8, {
+  return e.isDisabled ? jsx(IconMetricDisplay, {
     icon: _$$A,
     metric: e.resource.unique_run_count
   }) : jsxs("div", {
@@ -47,7 +47,7 @@ function T(e) {
     children: [jsx("div", {
       ref: d,
       onMouseEnter: () => toggleSwitchEditorDropdown(d, !0),
-      children: jsx(vE, {
+      children: jsx(IconMetricInteractive, {
         icon: _$$A,
         hoverIcon: _$$A,
         activeIcon: _$$A,
@@ -113,7 +113,7 @@ export function $$D2({
         editorType: e.manifest.editorType
       })
     }), r ? a : jsx("a", {
-      href: YW(t.id),
+      href: generateCommunityWidgetUrl(t.id),
       children: a
     })]
   });
@@ -125,9 +125,9 @@ export function $$L1({
 }) {
   let r = !!t.org_id;
   let d = useSelector(e => e.orgById);
-  let c = "search" === useSelector(({
+  let c = useSelector(({
     selectedView: e
-  }) => e).view;
+  }) => e).view === "search";
   let u = t.org_id && d[t.org_id];
   return jsxs(Fragment, {
     children: [jsxs(dY.MetadataContainer, {
@@ -151,7 +151,7 @@ export function $$L1({
           children: [jsx(SvgComponent, {
             className: hz,
             svg: _$$A2
-          }), renderI18nText("community.cards."), "OrgWidgetsView" === i && jsx(_$$r, {
+          }), renderI18nText("community.cards."), i === "OrgWidgetsView" && jsx(_$$r, {
             resource: t
           })]
         })
@@ -164,7 +164,7 @@ export function $$L1({
     })]
   });
 }
-export let $$F0 = withTrackedClick(function (e) {
+export let $$F0 = withTrackedClick(e => {
   let {
     onTileClicked,
     version
@@ -183,7 +183,7 @@ export let $$F0 = withTrackedClick(function (e) {
     })
   });
 });
-withTrackedClick(function (e) {
+withTrackedClick(e => {
   let {
     onTileClicked,
     version
@@ -200,7 +200,7 @@ withTrackedClick(function (e) {
           editorType: version.manifest.editorType
         })
       }), jsx("a", {
-        href: YW(e.widget.id),
+        href: generateCommunityWidgetUrl(e.widget.id),
         children: jsx(z, {
           src: version.redirect_snapshot_url || version.redirect_icon_url,
           context: "community"

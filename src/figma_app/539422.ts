@@ -3,7 +3,7 @@ import { useId, useMemo, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { UV } from "../905/504727";
+import { getDropdownTypeProps } from "../905/504727";
 import { j } from "../905/834956";
 export function $$c0(e) {
   let t = useId();
@@ -27,7 +27,7 @@ export function $$c0(e) {
     },
     dropdownTargetRef: _,
     Dropdown: function (e) {
-      let t = UV(e);
+      let t = getDropdownTypeProps(e);
       return jsx(Fragment, {
         children: u && h && createPortal(jsx(j, {
           parentRect: h,

@@ -2,7 +2,7 @@ import { deepEqual } from "../905/382883";
 import { SelectionPaintHelpers, VariableResolvedDataType } from "../figma_app/763686";
 import { GP } from "../figma_app/15927";
 import { atom, atomStoreManager } from "../figma_app/27355";
-import { gq } from "../905/125333";
+import { stylesAtom } from "../905/125333";
 import { setEyedropper } from "../figma_app/91703";
 import { updateSelectionPaintsFromFullscreen, forceUpdateSelectionPaintsForUndo, updatePaintsDirectlyOnSingleNodeFromFullscreen, updateSelectionStylesFromFullscreen, updateStylesDirectlyOnSingleNodeFromFullscreen, clearSelectionPaintsDueToLimitExceeded, updateCurrentSelectionPaintInPicker } from "../905/854717";
 import { Yr, o$ } from "../figma_app/8833";
@@ -93,7 +93,7 @@ export class $$g1 {
     this.updatePaintStyles(this.store.getState().mirror.selectionPaints.styles, e, updateSelectionStylesFromFullscreen);
   }
   updateSelectionTextAndEffectStyles(e) {
-    gq.syncFromFullscreen({
+    stylesAtom.syncFromFullscreen({
       styles: e
     });
   }
@@ -104,7 +104,7 @@ export class $$g1 {
     this.store.dispatch(clearSelectionPaintsDueToLimitExceeded());
   }
   clearSelectionTextAndEffectStylesDueToLimitExceeded() {
-    gq.syncFromFullscreen({
+    stylesAtom.syncFromFullscreen({
       styles: []
     });
   }

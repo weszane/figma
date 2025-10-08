@@ -28,7 +28,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { useLatestRef } from "../figma_app/922077";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { ie, ov } from "../905/300250";
+import { clearOpenFileMerge, handleBranchModalExit } from "../905/300250";
 import { T as _$$T } from "../figma_app/640519";
 import { showModalHandler } from "../905/156213";
 import { ss } from "../905/746499";
@@ -308,8 +308,8 @@ function H({
         sourceKey: o.mergeFile.sourceFileKey,
         branchModalTrackingId: m
       };
-      u(ie({}));
-      u(ov({
+      u(clearOpenFileMerge({}));
+      u(handleBranchModalExit({
         hideModal: !0,
         mergeParams: t,
         userInitiated: !0,

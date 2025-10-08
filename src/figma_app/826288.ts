@@ -1,7 +1,7 @@
 import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import a from "../vendor/635";
-import { Ax } from "../figma_app/616261";
+import { FuzzyMatcher } from "../figma_app/616261";
 import { dU, cT } from "../905/660732";
 import { hasSeparator, hasHeader, hasRenderFunction, hasActionOrCallback } from "../figma_app/847915";
 import { a as _$$a } from "../905/69481";
@@ -69,7 +69,7 @@ export class $$E2 {
   }
   _searchByFuzzyMatchAndSubstringMatch(e, t) {
     if (!t) return [];
-    let r = new Ax(t, this.acceptsUnicode);
+    let r = new FuzzyMatcher(t, this.acceptsUnicode);
     if (!r.isValidQuery()) return [];
     let n = new dU(t);
     let i = [];
@@ -88,7 +88,7 @@ export class $$E2 {
     return i;
   }
   _searchByFuzzyMatch(e, t) {
-    let r = new Ax(t, this.acceptsUnicode);
+    let r = new FuzzyMatcher(t, this.acceptsUnicode);
     if (!r.isValidQuery()) return [];
     let n = [];
     let i = r.matchAgainst(Object.keys(this.queryStringMap));

@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useLayoutEffect, useMemo, useContext, useEffect, createContext } from "react";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import s from "classnames";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { usKeyboardFocusHandler } from "../905/286442";
 import { A as _$$A } from "../905/780920";
 import { useLayoutRegistration, ListLayoutContext, LayoutProvider } from "../905/479155";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { k } from "../905/341245";
 import { U } from "../905/172092";
 var o = s;
@@ -32,7 +32,7 @@ export function $$f0({
     let l = useCallback(() => {
       o && s(i.current?.clientHeight ?? 0);
     }, [o, i]);
-    wY(i, l);
+    useResizeObserverRef(i, l);
     useLayoutEffect(() => {
       if (n) {
         let i = function ({
@@ -70,7 +70,7 @@ export function $$f0({
       ref: g,
       className: cssBuilderInstance.flex.gap4.if(void 0 === a, cssBuilderInstance.absolute.left0.right0.top0.bottom0).$,
       "data-testid": s,
-      children: jsx(P, {
+      children: jsx(RecordingScrollContainer, {
         ref: h,
         height: y,
         hideScrollbar: !0,

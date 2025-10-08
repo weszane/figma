@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useState, useCallback, useEffect, useLayoutEffect, forwardRef } from "react";
 import { useSelector } from "react-redux";
 import { IconButton } from "../905/443068";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { generateRecordingKey } from "../figma_app/878298";
 import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k } from "../905/582200";
@@ -17,7 +17,7 @@ import { Xo } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { a1 } from "../figma_app/23780";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { zi } from "../figma_app/626177";
 import { Q } from "../905/384324";
 import { O as _$$O } from "../905/410575";
@@ -116,7 +116,7 @@ memo(function (e) {
     useLayoutEffect(() => {
       r(ee(e.current));
     }, [e]);
-    wY(e, useCallback(() => {
+    useResizeObserverRef(e, useCallback(() => {
       r(ee(e.current));
     }, [e]));
     return t;
@@ -192,7 +192,7 @@ export function $$Y0(e) {
       })
     }), t.showing && jsx(AutoInteractableWrapper, {
       name: "dropdown",
-      children: jsx(Cf, {
+      children: jsx(ConnectedPointingDropdown, {
         targetRect: t.data.targetRect,
         propagateCloseClick: !0,
         children: e.actions.map(t => jsx($, {

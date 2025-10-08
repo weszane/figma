@@ -21,7 +21,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { IntersectionSentinel } from "../905/925868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
@@ -1083,7 +1083,7 @@ function e0(e) {
         className: `${eA} ${cssBuilderInstance.colorTextSecondary.borderBox.flex.itemsCenter.justifyEnd.$}`,
         children: renderI18nText("column_header.product")
       })]
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       dataTestId: "activity-log-table-body",
       children: [jsx(IntersectionSentinel, {
         onIntersectionChange: e => {

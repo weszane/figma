@@ -27,7 +27,7 @@ import { Q as _$$Q } from "../905/346809";
 import { parsePxInt } from "../figma_app/783094";
 import { X } from "../figma_app/313269";
 import { Point } from "../905/736624";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { DraggableModalManager } from "../905/748636";
 import { M0y } from "../figma_app/27776";
 import { JU, Zk, fI, nV } from "../figma_app/626177";
@@ -84,7 +84,7 @@ let B = function ({
     truncateTitleText: !0,
     dragHeaderOnly: !0,
     onClose: c,
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       className: "prototype_starting_point_modal--contentContainer--PuTTf",
       children: jsx("div", {
         className: "prototype_starting_point_modal--richTextEditor--Ru95M",

@@ -13,14 +13,14 @@ import { useSubscription } from "../figma_app/288654";
 import p, { generateUUIDv4 } from "../905/871474";
 import { WAFImage } from "../905/675859";
 import { LoadingOverlay } from "../figma_app/858013";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { J as _$$J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { markThreadAsRead, setActiveComment, createCommentReply, setCommentReplyMessage, updateCommentContent, handleCommentReplyWithConfirmation } from "../figma_app/770088";
 import { kR, I_, GH } from "../905/234821";
 import { dr } from "../figma_app/568591";
-import { G9, gj } from "../figma_app/12220";
+import { serializeComment, DEFAULT_COMMENT_READ_STATUS } from "../figma_app/12220";
 import { selectCurrentUser } from "../905/372672";
 import { QuickReply_CommentThreadByRootComment } from "../figma_app/43951";
 import { createMentionLibrary } from "../905/772425";
@@ -149,7 +149,7 @@ function z(e) {
   if (!N) return jsx("div", {
     children: getI18nString("quick_reply.unable_to_load_thread")
   });
-  let E = mobileCommentThread.map(e => G9(user.id, N, e, currentUserCommentReadStatus ?? gj, I, R, e.attachments));
+  let E = mobileCommentThread.map(e => serializeComment(user.id, N, e, currentUserCommentReadStatus ?? DEFAULT_COMMENT_READ_STATUS, I, R, e.attachments));
   let D = {
     id: N.id,
     key: fileKey,
@@ -314,7 +314,7 @@ function V(e) {
   return W ? jsxs(Fragment, {
     children: [jsx("div", {
       style: styleBuilderInstance.flex1.$
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: "quick_reply_thread_view--bottomAnchoredScrollContainer--5-F87",
       useBottomPinning: !0,
       ref: K,

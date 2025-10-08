@@ -8,9 +8,9 @@ import { Af } from "../figma_app/49598";
 import { l5 } from "../figma_app/559491";
 import { hydrateFileBrowser, selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
-import { yJ as _$$yJ, bE } from "../figma_app/598926";
+import { folderPutAction, folderPostAction } from "../figma_app/598926";
 import { newFileLoaded } from "../figma_app/91703";
-import { yJ as _$$yJ2 } from "../905/466026";
+import { putRepoOptimist } from "../905/466026";
 import { searchSetParametersAction } from "../905/977218";
 import { trackUserEvent } from "../figma_app/314264";
 import { getRepoById } from "../905/760074";
@@ -120,12 +120,12 @@ let $$P0 = e => t => function (r) {
       }
       setViewDocumentTitle(P, t);
     }
-  } else if (_$$yJ.matches(r)) {
+  } else if (folderPutAction.matches(r)) {
     if (!getFeatureFlags().folder_page_fix_tab_titles) {
       let t = e.getState().selectedView;
       "folder" === t.view && t.folderId === r.payload.folder.id && setViewDocumentTitle(P, t);
     }
-  } else if (bE.matches(r)) {
+  } else if (folderPostAction.matches(r)) {
     let t = e.getState().selectedView;
     if ("folder" === t.view && t.folderId === r.payload.id) {
       getFeatureFlags().folder_page_fix_tab_titles || setViewDocumentTitle(P, t);
@@ -135,7 +135,7 @@ let $$P0 = e => t => function (r) {
         jsCommitHash: getReleaseManifestGitCommit()
       });
     }
-  } else if (_$$yJ2.matches(r)) {
+  } else if (putRepoOptimist.matches(r)) {
     let t = e.getState().selectedView;
     if ("fullscreen" === t.view) {
       let e = t.fileKey && P.fileByKey[t.fileKey];

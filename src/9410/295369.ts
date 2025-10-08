@@ -12,7 +12,7 @@ import { OnboardingSequence } from "../905/152487";
 import { mI } from "../9410/983167";
 import { ArrowPosition } from "../905/858282";
 import { Dv } from "../figma_app/419216";
-import { YiU } from "../figma_app/6204";
+import { FigJamAISummarizationEntrpointPointerOverlay } from "../figma_app/6204";
 import { Cb } from "../9410/659371";
 let $$y2 = atom(!1);
 let $$b1 = "organize";
@@ -65,7 +65,7 @@ export function $$v0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: YiU,
+    overlay: FigJamAISummarizationEntrpointPointerOverlay,
     priority: N.SECONDARY_MODAL
   });
   useEffect(() => {

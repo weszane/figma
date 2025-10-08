@@ -1,4 +1,4 @@
-import { A$ } from "../figma_app/728005";
+import { GET_CODE_CONNECT_MAP } from "../figma_app/728005";
 import { ServiceCategories } from "../905/165054";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -12,12 +12,12 @@ import { mapPlatformToFramework } from "../905/359509";
 import { r as _$$r } from "../figma_app/821179";
 import { trackDefinedFileEvent } from "../figma_app/314264";
 import { selectOpenFileKey, selectOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
-import { Q } from "../905/618914";
+import { waitForAtomStore } from "../905/618914";
 import { PreloadCodeConnectLk, FileCanAccessFullCodeConnect } from "../figma_app/43951";
 import { getPlanFeaturesTeamAtomFamily } from "../905/276025";
 import { searchAPIHandler } from "../905/144933";
-import { HX, ad, Xe, kN } from "../figma_app/97042";
-import { tz, Lw, rx, DR } from "../figma_app/342355";
+import { getBackingNodeInfo, collectInstanceKeys, selectCodeConnectDoc, findBestMatchingVariant } from "../figma_app/97042";
+import { codeConnectToolsEnabledAtom, isCodebaseSuggestionsEnabled, additionalStateAtom1, additionalStateAtom2 } from "../figma_app/342355";
 import { w6 } from "../905/372596";
 function v(e, t, r, n = new Set()) {
   let i = selectOpenFileKey(t);
@@ -36,8 +36,8 @@ function v(e, t, r, n = new Set()) {
         backingLibraryKey,
         backingComponentKey,
         backingStateGroupKey
-      } = HX(s.guid, r, i);
-      let d = ad(s.guid, r, n, !1, i);
+      } = getBackingNodeInfo(s.guid, r, i);
+      let d = collectInstanceKeys(s.guid, r, n, !1, i);
       if (!backingLibraryKey || !backingNodeId) continue;
       let c = {
         nodeToFetch: s,
@@ -61,11 +61,11 @@ function v(e, t, r, n = new Set()) {
   };
 }
 export async function $$A2(e, t) {
-  if (!(t === A$ || atomStoreManager.get(tz))) return [[{}, {}], [{}, {}]];
+  if (!(t === GET_CODE_CONNECT_MAP || atomStoreManager.get(codeConnectToolsEnabledAtom))) return [[{}, {}], [{}, {}]];
   try {
     let r = performance.now();
     let [n, i] = await x(e);
-    if (w6("code_connect_mapping", performance.now() - r, t), Lw()) {
+    if (w6("code_connect_mapping", performance.now() - r, t), isCodebaseSuggestionsEnabled()) {
       let t = new Set(n?.[0] ? Object.keys(n[0]) : []);
       let [r, a] = await N(e, t);
       return [[n, i], [r, a]];
@@ -81,7 +81,7 @@ export async function $$A2(e, t) {
   }
 }
 async function x(e) {
-  let t = atomStoreManager.get(rx);
+  let t = atomStoreManager.get(additionalStateAtom1);
   if (t) return [t, {}];
   let r = {};
   let n = {};
@@ -123,12 +123,12 @@ async function x(e) {
   return [r, n];
 }
 async function N(e, t) {
-  let r = atomStoreManager.get(DR);
+  let r = atomStoreManager.get(additionalStateAtom2);
   if (r) return [r, {}];
   let n = {};
   let i = {};
   let o = debugState.getState();
-  let l = await Q(getPlanFeaturesTeamAtomFamily(!0));
+  let l = await waitForAtomStore(getPlanFeaturesTeamAtomFamily(!0));
   let {
     nodesByLibraryKey
   } = v(e, o, i, t);
@@ -226,14 +226,14 @@ async function O({
       }
       return r;
     }(_, l);
-    let g = Xe(_, l);
+    let g = selectCodeConnectDoc(_, l);
     let f = {};
     let E = p.instanceList;
     try {
       for (let t of E) {
         let r = e.docsById?.[`key-${t}`];
         if (!r) continue;
-        let n = Xe(JSON.parse(r), l);
+        let n = selectCodeConnectDoc(JSON.parse(r), l);
         n && (f[`key-${t}`] = JSON.parse(n.figmadoc));
       }
     } catch (e) {
@@ -257,7 +257,7 @@ async function O({
       });
       continue;
     }
-    if (Array.isArray(y) && (y = kN(y, p.nodeToFetch)), !y) continue;
+    if (Array.isArray(y) && (y = findBestMatchingVariant(y, p.nodeToFetch)), !y) continue;
     y.source || y.templateData.imports?.length || trackDefinedFileEvent("mcp.get_code_connect_mapping.missing_data", n, debugState.getState(), {
       componentName: y.component || "",
       source: y.source || ""

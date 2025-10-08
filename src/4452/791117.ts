@@ -5,7 +5,7 @@ import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Jt } from "../figma_app/28323";
+import { fetchLicenseGroupsThunk } from "../figma_app/28323";
 if (443 == require.j) {}
 export function $$u0() {
   let e = useDispatch();
@@ -79,7 +79,7 @@ export function $$u0() {
 export function $$m1(e, t) {
   let a = useDispatch();
   useEffect(() => {
-    e && !t && a(Jt({
+    e && !t && a(fetchLicenseGroupsThunk({
       forceRefetch: !0
     }));
   }, [a, e, t]);

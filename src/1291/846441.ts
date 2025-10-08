@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'use-debounce';
 import { editorUtilities as _$$k } from '../905/22009';
-import { p as _$$p } from '../905/42189';
+import { TabCategory } from '../905/42189';
 import { SimpleFuseSearch } from '../905/81982';
 import { selectWithShallowEqual } from '../905/103090';
 import { F5 } from '../905/192343';
@@ -182,16 +182,16 @@ export function $$z0() {
   useEffect(() => {
     let t;
     let a = tabManager.activeTab;
-    (a === _$$p.TEMPLATES || a === _$$p.ALL) && (s.trim() === '' ? el({
+    (a === TabCategory.TEMPLATES || a === TabCategory.ALL) && (s.trim() === '' ? el({
       [e]: []
     }) : (t = [...new Set(t = k.search(s).map(e => e.hub_file_id))], el({
       [e]: t
     })));
-    (a === _$$p.ALL || a === _$$p.MORE) && (s.trim() === '' ? setLastFaceStampSearchQuery(null) : faceStampServerSideSearch(s));
-    (a === _$$p.PLUGINS || a === _$$p.ALL) && (s.trim() === '' ? (em([]), ef([]), eg([]), ex([]), setLastPluginSearchQuery(null)) : (ef(L.search(s).map(e => e.localFileId)), pluginServerSideSearch(s, eg, ex, em)));
-    (a === _$$p.WIDGETS || a === _$$p.ALL) && (s.trim() === '' ? (ey([]), eT([]), eS([]), ew([]), setLastWidgetSearchQuery(null)) : (eT(A.search(s).map(e => e.localFileId)), widgetServerSideSearch(s, eS, ew, ey)));
-    (a === _$$p.STICKERS_AND_COMPONENTS || a === _$$p.ALL) && setQuery(s);
-    (a === _$$p.MORE || a === _$$p.ALL) && ec(B.search(s).map(e => e.component));
+    (a === TabCategory.ALL || a === TabCategory.MORE) && (s.trim() === '' ? setLastFaceStampSearchQuery(null) : faceStampServerSideSearch(s));
+    (a === TabCategory.PLUGINS || a === TabCategory.ALL) && (s.trim() === '' ? (em([]), ef([]), eg([]), ex([]), setLastPluginSearchQuery(null)) : (ef(L.search(s).map(e => e.localFileId)), pluginServerSideSearch(s, eg, ex, em)));
+    (a === TabCategory.WIDGETS || a === TabCategory.ALL) && (s.trim() === '' ? (ey([]), eT([]), eS([]), ew([]), setLastWidgetSearchQuery(null)) : (eT(A.search(s).map(e => e.localFileId)), widgetServerSideSearch(s, eS, ew, ey)));
+    (a === TabCategory.STICKERS_AND_COMPONENTS || a === TabCategory.ALL) && setQuery(s);
+    (a === TabCategory.MORE || a === TabCategory.ALL) && ec(B.search(s).map(e => e.component));
     trackEventAnalytics('search_query_result', {
       query: s,
       selectedTab: a,

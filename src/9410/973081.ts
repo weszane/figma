@@ -41,7 +41,7 @@ import { permissionScopeHandler as _$$l, zk } from '../905/189185';
 import { PinningState } from '../905/192333';
 import { c as _$$c } from '../905/196462';
 import { WP } from '../905/198599';
-import { l as _$$l4 } from '../905/202425';
+import { getSelectedItemTypes } from '../905/202425';
 import { isInvalidValue, isValidValue, normalizeValue } from '../905/216495';
 import { r as _$$r5 } from '../905/216849';
 import { J as _$$J3 } from '../905/225412';
@@ -53,12 +53,12 @@ import { v as _$$v } from '../905/266815';
 import { HiddenLabel, Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
 import { AIActionProgressType } from '../905/278499';
-import { Ay as _$$Ay, Tr } from '../905/281495';
+import { renameLayers, getActionSourceString } from '../905/281495';
 import { useIsCodeViewPanel } from '../905/298663';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { l as _$$l2 } from '../905/331642';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { n as _$$n } from '../905/347702';
 import { getUserId, selectCurrentUser } from '../905/372672';
 import { isCommentStateActive } from '../905/380385';
@@ -83,7 +83,7 @@ import { nP as _$$nP, LU } from '../905/487011';
 import { O as _$$O3 } from '../905/487602';
 import { stripHtmlTags } from '../905/491152';
 import { bL as _$$bL, c$, l9, mc, WL, YJ } from '../905/493196';
-import { G as _$$G } from '../905/496937';
+import { exportPickerCheckAction } from '../905/496937';
 import { NO } from '../905/498139';
 import { handleAtomEvent } from '../905/502364';
 import { openWindow } from '../905/508367';
@@ -99,7 +99,7 @@ import { buildFileUrl } from '../905/612685';
 import { setupThemeContext } from '../905/614223';
 import { generateExportThumbnail, convertImageDataToURL } from '../905/619652';
 import { VU } from '../905/625959';
-import { D as _$$D } from '../905/629114';
+import { createFigmaPluginScope } from '../905/629114';
 import { ButtonPrimitive } from '../905/632989';
 import { M as _$$M2 } from '../905/637515';
 import { getVisibleTheme } from '../905/640017';
@@ -198,7 +198,7 @@ import { $ as _$$$, J as _$$J5 } from '../figma_app/61771';
 import { applyOffsetToViewport, centeredValue, getBasicViewportRect, getViewportInfo, viewportToScreen } from '../figma_app/62612';
 import { U as _$$U3 } from '../figma_app/65327';
 import { iT as _$$iT } from '../figma_app/74165';
-import { $m, copyShareLinkOptimistic } from '../figma_app/78808';
+import { setFileThumbnailOptimistic, copyShareLinkOptimistic } from '../figma_app/78808';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { getDevModeFocusId, isFullscreenOverview, useDevModeFocusId, useIsFullscreenDevModeComponentBrowser, useIsFullscreenOverview } from '../figma_app/88239';
 import { hidePickerThunk, isSelectionPaintItem, isSelectionStyleItem, recentlyUsedQuickCommands } from '../figma_app/91703';
@@ -235,7 +235,7 @@ import { r as _$$r3 } from '../figma_app/235299';
 import { StyleIdHandler } from '../figma_app/243058';
 import { dR, Gt } from '../figma_app/248118';
 import { hasJubileePermissionForDesign } from '../figma_app/251115';
-import { Z1 } from '../figma_app/253220';
+import { initializeNavigationPreferences } from '../figma_app/253220';
 import { DialogBody, DialogContents, DialogHeader, DialogHiddenTitle, DialogTitle } from '../figma_app/272243';
 import { rgbToNormalized } from '../figma_app/273493';
 import { handlePreviewTracking } from '../figma_app/274217';
@@ -400,7 +400,7 @@ class O {
       }
       return null;
     }
-    let t = _$$D();
+    let t = createFigmaPluginScope();
     for (let i of t.currentPage.selection) {
       for (let r = 0; r < i.fills.length; r++) {
         let n = i.fills[r];
@@ -1261,9 +1261,9 @@ class tk extends PureComponent {
       this.props.exports.items.forEach(t => {
         e.includes(t.nodeID) && (t.isBeingRenamed = !0);
       });
-      atomStoreManager.set(zF, Tr(ActionType.EXPORT_PICKER));
+      atomStoreManager.set(zF, getActionSourceString(ActionType.EXPORT_PICKER));
       B3(JT.AUTO_RENAME_LAYERS);
-      await Ag(JT.AUTO_RENAME_LAYERS, _$$Ay, {
+      await Ag(JT.AUTO_RENAME_LAYERS, renameLayers, {
         source: ActionType.EXPORT_PICKER,
         overwriteNames: !1,
         customNodeSelection: e,
@@ -1349,14 +1349,14 @@ class tk extends PureComponent {
     };
     this.setAllChecked = e => {
       this.props.exports.items.forEach((t, i) => {
-        this.props.dispatch(_$$G({
+        this.props.dispatch(exportPickerCheckAction({
           itemID: t.itemID,
           checked: e
         }));
       });
     };
     this.setChecked = (e, t) => {
-      this.props.dispatch(_$$G({
+      this.props.dispatch(exportPickerCheckAction({
         itemID: e.itemID,
         checked: t
       }));
@@ -1482,7 +1482,7 @@ class tk extends PureComponent {
     return jsx('div', {
       children: jsxs('div', {
         className: 'export_picker--modal--FoIpV',
-        children: [this.renderHeader(), jsxs(_$$P, {
+        children: [this.renderHeader(), jsxs(RecordingScrollContainer, {
           width: this.props.width,
           className: 'export_picker--scrollContainer--F9sI6',
           children: [!e && jsx('div', {
@@ -3192,7 +3192,7 @@ let ns = class e extends PureComponent {
       },
       flags: ['edit', '!slides'],
       callback: () => {
-        this.props.openFile && this.props.dispatch($m({
+        this.props.openFile && this.props.dispatch(setFileThumbnailOptimistic({
           file_key: this.props.openFile.key,
           thumbnail_guid: e ? null : this.getSelectionGuid()
         }));
@@ -4029,7 +4029,7 @@ let ns = class e extends PureComponent {
             }),
             beforeModuleOpen: () => {
               B3(JT.AUTO_RENAME_LAYERS);
-              Ag(JT.AUTO_RENAME_LAYERS, _$$Ay, {
+              Ag(JT.AUTO_RENAME_LAYERS, renameLayers, {
                 source: ActionType.CONTEXT_MENU,
                 overwriteNames: !1
               });
@@ -8766,7 +8766,7 @@ function oj(e) {
   let {
     addFrecencyUsage
   } = fJ();
-  let o = useSelector(_$$l4);
+  let o = useSelector(getSelectedItemTypes);
   let l = Ev();
   let c = useAtomWithSubscription(dd);
   let u = useAtomWithSubscription(Rt);
@@ -9261,7 +9261,7 @@ function lt() {
   let e = useSelector(e => e.isFullscreenDocumentLoaded);
   let t = useRef(!1);
   useEffect(() => {
-    e && !t.current && (Z1(), t.current = !0);
+    e && !t.current && (initializeNavigationPreferences(), t.current = !0);
   }, [e, t]);
   return null;
 }

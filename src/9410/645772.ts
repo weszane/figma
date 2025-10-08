@@ -6,7 +6,7 @@ import { LH } from "../figma_app/384673";
 import { Kh, uh } from "../figma_app/370763";
 import { L } from "../figma_app/819472";
 import { rM } from "../figma_app/241541";
-import { Y } from "../figma_app/916469";
+import { FigJamMenuEvents } from "../figma_app/916469";
 import { V } from "../9410/365876";
 import { hV } from "../figma_app/822177";
 import { a as _$$a } from "../9410/510768";
@@ -27,7 +27,7 @@ export function $$E1() {
       setActiveSecondaryToolbeltId
     } = LH();
     let c = useAtomWithSubscription(Kh);
-    let h = _$$g2(Y.FigJamQuickActionsMenuOpen);
+    let h = _$$g2(FigJamMenuEvents.FigJamQuickActionsMenuOpen);
     let m = V();
     let f = L();
     return useCallback(r => {

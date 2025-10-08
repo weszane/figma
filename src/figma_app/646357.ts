@@ -1375,7 +1375,7 @@ function generateStyleThumbnailUrl(key: string, version: string) {
  */
 export async function batchFetchFiles(libraryKeys: string[], dispatch: Fn) {
   if (libraryKeys.length > 0) {
-    let promises: Promise<void>[] = [];
+    let promises: Promise<any>[] = [];
     async function fetchBatch(keys: string[]) {
       try {
         let response = await sendWithRetry.post('/api/files/batch', {
@@ -1398,7 +1398,7 @@ export async function batchFetchFiles(libraryKeys: string[], dispatch: Fn) {
       let batch = libraryKeys.slice(i, i + 200);
       promises.push(fetchBatch(batch));
     }
-    await Promise.all(promises);
+    return await Promise.all(promises);
   }
 }
 

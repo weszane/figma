@@ -5,7 +5,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Point } from "../905/736624";
-import { GI, IZ, SK } from "../905/125333";
+import { vectorPencilStyleAtom, highlighterStyleAtom, toolStylesAtom } from "../905/125333";
 import { SvgComponent } from "../905/714743";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { generatePaintIcon, convertImageDataToURL } from "../905/619652";
@@ -40,8 +40,8 @@ export let $$I0 = 72;
 export function $$S1({
   action: e
 }) {
-  let t = useAtomWithSubscription(GI);
-  let r = useAtomWithSubscription(IZ);
+  let t = useAtomWithSubscription(vectorPencilStyleAtom);
+  let r = useAtomWithSubscription(highlighterStyleAtom);
   let i = colorCSSManipulatorInstance.format(t.paints?.[0]?.color);
   let a = colorCSSManipulatorInstance.format(r.paints?.[0]?.color);
   return "set-tool-eraser" === e ? jsx($$N2, {
@@ -118,8 +118,8 @@ export function $$N2({
   color: r,
   isPlaceholder: i = !1
 }) {
-  let a = useAtomWithSubscription(GI);
-  let o = useAtomWithSubscription(IZ);
+  let a = useAtomWithSubscription(vectorPencilStyleAtom);
+  let o = useAtomWithSubscription(highlighterStyleAtom);
   let l = a.strokeWeight === uM;
   let d = o.strokeWeight === Iz;
   if (i) switch (e) {
@@ -1063,7 +1063,7 @@ function D({
 }) {
   let {
     washiTapePaint
-  } = useAtomWithSubscription(SK);
+  } = useAtomWithSubscription(toolStylesAtom);
   let r = washiTapePaint?.image?.hash && sha1HexFromBytes(washiTapePaint?.image?.hash);
   let i = r && buildUploadUrl(r);
   let o = r && !_$$B.map(e => e.image).includes(r);
@@ -1100,7 +1100,7 @@ function k({
 }) {
   let {
     washiTapePaint
-  } = useAtomWithSubscription(SK);
+  } = useAtomWithSubscription(toolStylesAtom);
   let [r, a] = useState();
   let o = useCallback(e => {
     let t = generatePaintIcon(e, new Point((e.originalImageWidth || 244) / (e.originalImageHeight || 244) * 244, 244), {

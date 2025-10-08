@@ -4,11 +4,27 @@ applyTo: '**'
 
 # GitHub Copilot Refactoring Instructions
 
-- Analyze the file and directory structure to identify logical groupings of related functionality. If possible, suggest ways to organize code modules or files more intuitively.
-- Refactor complex or fragmented code by grouping related functions, classes, or components together in a way that reflects their business logic or app domain. Like add required types for code.
-- Split large functions or classes into smaller, focused units where logical separation improves clarity and maintainability.
-- Convert functions to named functions or arrow functions for better readability.
-- Simplify nested conditionals and loops by using early returns, guard clauses, or helper functions
-- Consider adding comments or documentation to clarify complex logic or important decisions. But add the original code name like (function, variable, class names. etc.) as comments to help trace back to the original code. Also add TS documenttation comments for functions and classes.
-- Ensure that refactored code maintains the same functionality and behavior as the original.
-- **Refactor all the import variables same with the new refactored exported names **, like export const YJ = setupPlaybackHandler;setupPlaybackHandler is the refactored name.
+I'm working with a compiled TypeScript code snippet (part of a larger character file) that has been minified or transpiled to JavaScript, making it hard to read and lacking type definitions. I need your help to refactor this specific snippet into clean, type-safe TypeScript. Please follow these requirements:
+
+1. **Goals**:
+   - Improve readability with clear variable names, proper indentation, and comments explaining key logic.
+   - Add TypeScript type definitions (e.g., interfaces or types) to replace `any` or missing types, inferring types from the code’s logic.
+   - Simplify complex logic (e.g., nested loops or dense functions) while preserving functionality.
+   - Follow TypeScript best practices (e.g., modular structure, DRY principles, camelCase/PascalCase naming).
+   - Identify potential bugs or performance issues and note them in comments.
+
+2. **Input Details**:
+   - The code may have minified variable names (e.g., `a`, `b`) and no type annotations.
+
+3. **Output Requirements**:
+   - Provide the complete refactored TypeScript code for this snippet, ensuring no part is omitted.
+   - Include a brief comment at the top summarizing changes (e.g., “Renamed variables, added types, simplified loops”).
+   - Add TypeScript types/interfaces to ensure type safety.
+   - Include comments to explain complex logic or unclear parts from the compiled code.
+   - Format the code cleanly (Prettier-style) and ensure it’s executable in the target environment.
+   - If the snippet references external code (e.g., imported modules), note assumed dependencies in comments.
+   - Add the origin of the code name in comments.
+
+4. **Constraints**:
+   - Focus on refactoring this specific snippet. If it’s part of a larger file, I’ll provide additional chunks later.
+   - If the code is too long for you to process, indicate which parts need further context to complete the refactoring.

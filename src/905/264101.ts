@@ -1,15 +1,15 @@
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { sendWithRetry } from "../905/910117";
-import { cT } from "../905/997533";
+import { handleAuthSuccess } from "../905/997533";
 import { FlashActions } from "../905/573154";
 import { getI18nString, getI18nStringAlias } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
 import { popModalStack, hideModal } from "../905/156213";
-import { z3, sp, r1, Yu } from "../905/355291";
-import { WJ, yJ, C$, hz, S5 } from "../figma_app/24841";
-import { yV, r6 } from "../905/990455";
+import { setTwoFactorAuthError, TWO_FACTOR_RECOVERY_MODAL_TYPE, setTwoFactorAuthLoading, showPhoneSetupModal } from "../905/355291";
+import { userEraseSecretsAction, putUserAction, userToggleTwoFactorAction, deleteUserLoadingAction, checkUnsyncedAutosaveFilesThunk } from "../figma_app/24841";
+import { setTwoFactorAuthSetup, getTwoFactorAuthSetup } from "../905/990455";
 import { UserAPIHandlers } from "../905/93362";
 export let $$f5 = createOptimistThunk((e, t) => {
   t.passwordNew !== t.passwordRetype ? e.dispatch(FlashActions.error(getI18nString("api_user.error.please_retype_your_new_password_they_don_t_match"))) : sendWithRetry.post("/api/password/change", {
@@ -32,9 +32,9 @@ export let $$f5 = createOptimistThunk((e, t) => {
 function _(e, t, i) {
   try {
     let i = t.data;
-    "bad_token" === i.reason ? (e(WJ()), e(z3(getI18nString("api_user.error.too-long-since-password-checked")))) : e(z3(resolveMessage(t, i.message || "unknown error")));
+    "bad_token" === i.reason ? (e(userEraseSecretsAction()), e(setTwoFactorAuthError(getI18nString("api_user.error.too-long-since-password-checked")))) : e(setTwoFactorAuthError(resolveMessage(t, i.message || "unknown error")));
   } catch (t) {
-    e(z3(i));
+    e(setTwoFactorAuthError(i));
   }
 }
 let $$A1 = createOptimistThunk((e, t) => {
@@ -43,18 +43,18 @@ let $$A1 = createOptimistThunk((e, t) => {
   }).then(({
     data: t
   }) => {
-    e.dispatch(yJ({
+    e.dispatch(putUserAction({
       user: t.meta,
       userInitiated: !1
     }));
     let i = e.getState();
-    i.modalShown && i.modalShown.type === sp && e.dispatch($$I4({
+    i.modalShown && i.modalShown.type === TWO_FACTOR_RECOVERY_MODAL_TYPE && e.dispatch($$I4({
       token: t.meta.password_token
     }));
   }).catch(t => {
     _(e.dispatch, t, getI18nString("api_user.error.generic-verify-password"));
   });
-  e.dispatch(r1());
+  e.dispatch(setTwoFactorAuthLoading());
 });
 let $$y8 = createOptimistThunk((e, t) => {
   let i = e.getState().user.password_token;
@@ -66,14 +66,14 @@ let $$y8 = createOptimistThunk((e, t) => {
   }).then(({
     data: t
   }) => {
-    e.dispatch(yJ({
+    e.dispatch(putUserAction({
       user: t.meta,
       userInitiated: !1
     }));
   }).catch(t => {
     _(e.dispatch, t, getI18nString("auth.two-factor-setup.error.generic-confirm-phone-number"));
   });
-  e.dispatch(r1());
+  e.dispatch(setTwoFactorAuthLoading());
 });
 let $$b10 = createOptimistThunk((e, t) => {
   let i = e.getState().user;
@@ -87,7 +87,7 @@ let $$b10 = createOptimistThunk((e, t) => {
   }) => {
     if (o) {
       let i = getInitialOptions().redirect_url;
-      i ? customHistory.redirect(i) : e.dispatch(cT({
+      i ? customHistory.redirect(i) : e.dispatch(handleAuthSuccess({
         data: {
           meta: {
             id: t.meta.id,
@@ -96,14 +96,14 @@ let $$b10 = createOptimistThunk((e, t) => {
         }
       }));
     }
-    e.dispatch(yJ({
+    e.dispatch(putUserAction({
       user: t.meta,
       userInitiated: !1
     }));
   }).catch(t => {
     _(e.dispatch, t, getI18nString("auth.two-factor-setup.error.generic-confirm-phone-number"));
   });
-  e.dispatch(r1());
+  e.dispatch(setTwoFactorAuthLoading());
 });
 let $$v11 = createOptimistThunk(e => {
   let t = e.getState().user.password_token;
@@ -112,15 +112,15 @@ let $$v11 = createOptimistThunk(e => {
   }).then(({
     data: t
   }) => {
-    e.dispatch(yJ({
+    e.dispatch(putUserAction({
       user: t.meta,
       userInitiated: !1
     }));
   }).catch(t => {
-    e.dispatch(Yu());
+    e.dispatch(showPhoneSetupModal());
     _(e.dispatch, t, getI18nString("auth.two-factor-setup.error.generic-delete-phone-number"));
   });
-  e.dispatch(r1());
+  e.dispatch(setTwoFactorAuthLoading());
 });
 let $$I4 = createOptimistThunk((e, t) => {
   UserAPIHandlers.getBackupCodes({
@@ -128,7 +128,7 @@ let $$I4 = createOptimistThunk((e, t) => {
   }).then(({
     data: t
   }) => {
-    e.dispatch(yJ({
+    e.dispatch(putUserAction({
       user: t.meta,
       userInitiated: !1
     }));
@@ -143,7 +143,7 @@ let $$E3 = createOptimistThunk(e => {
   }).then(({
     data: t
   }) => {
-    e.dispatch(yJ({
+    e.dispatch(putUserAction({
       user: t.meta,
       userInitiated: !1
     }));
@@ -155,13 +155,13 @@ let $$x6 = createOptimistThunk((e, t) => {
   sendWithRetry.del("/api/user/totp", {
     password_verify_token: t.token
   }).then(() => {
-    e.dispatch(C$({
+    e.dispatch(userToggleTwoFactorAction({
       enabled: !1
     }));
   }).catch(t => {
     _(e.dispatch, t, getI18nString("auth.two-factor-setup.error.generic-disable-two-factor"));
   });
-  e.dispatch(r1());
+  e.dispatch(setTwoFactorAuthLoading());
 });
 let $$S7 = createOptimistThunk((e, t) => {
   sendWithRetry.post("/api/user/totp", {
@@ -170,8 +170,8 @@ let $$S7 = createOptimistThunk((e, t) => {
   }).then(({
     data: t
   }) => {
-    yV(t.meta.two_factor_secret);
-    e.dispatch(yJ({
+    setTwoFactorAuthSetup(t.meta.two_factor_secret);
+    e.dispatch(putUserAction({
       user: {
         id: t.meta.id,
         two_factor_secret_loaded: !!t.meta.two_factor_secret
@@ -181,10 +181,10 @@ let $$S7 = createOptimistThunk((e, t) => {
   }).catch(t => {
     _(e.dispatch, t, getI18nString("auth.two-factor-setup.error.generic-setup-totp"));
   });
-  e.dispatch(r1());
+  e.dispatch(setTwoFactorAuthLoading());
 });
 let $$w12 = createOptimistThunk((e, t) => {
-  let i = r6().token;
+  let i = getTwoFactorAuthSetup().token;
   let o = e.getState().user;
   let d = o.mfa_setup_token;
   sendWithRetry.post("/api/user/totp/confirm", {
@@ -196,7 +196,7 @@ let $$w12 = createOptimistThunk((e, t) => {
   }) => {
     if (d) {
       let i = getInitialOptions().redirect_url;
-      i ? customHistory.redirect(i) : e.dispatch(cT({
+      i ? customHistory.redirect(i) : e.dispatch(handleAuthSuccess({
         data: {
           meta: {
             id: t.meta.id,
@@ -205,17 +205,17 @@ let $$w12 = createOptimistThunk((e, t) => {
         }
       }));
     }
-    e.dispatch(yJ({
+    e.dispatch(putUserAction({
       user: t.meta,
       userInitiated: !1
     }));
-    e.dispatch(C$({
+    e.dispatch(userToggleTwoFactorAction({
       enabled: !0
     }));
   }).catch(t => {
     _(e.dispatch, t, getI18nString("auth.two-factor-setup.error.generic-confirm-totp"));
   });
-  e.dispatch(r1());
+  e.dispatch(setTwoFactorAuthLoading());
 });
 let $$C0 = createOptimistThunk(e => {
   let t = e.dispatch(FlashActions.flash(getI18nString("api_user.one_moment")));
@@ -247,7 +247,7 @@ let $$T9 = createOptimistThunk(e => {
   });
 });
 let $$k2 = createOptimistThunk((e, t) => {
-  e.dispatch(hz({
+  e.dispatch(deleteUserLoadingAction({
     loading: !0
   }));
   sendWithRetry.del("/api/user", {
@@ -262,13 +262,13 @@ let $$k2 = createOptimistThunk((e, t) => {
       e.dispatch(FlashActions.flash(t));
     } else e.dispatch(FlashActions.flash(getI18nString("api_user.account_deleted_redirecting")));
     setTimeout(() => {
-      e.dispatch(S5());
+      e.dispatch(checkUnsyncedAutosaveFilesThunk());
     }, 3e3);
   }).catch(({
     response: t
   }) => {
     e.dispatch(hideModal());
-    e.dispatch(hz({
+    e.dispatch(deleteUserLoadingAction({
       loading: !1
     }));
     let i = JSON.parse(t);

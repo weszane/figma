@@ -1,210 +1,493 @@
-import { N } from "../905/55273";
-export let $$r10 = 2.001;
-export function $$a9(e, t, i = $$r10) {
-  return Math.abs(e - t) < i;
+import { aalSettingsConfig } from "../905/55273"
+
+// Threshold for approximate equality comparisons
+export const EPSILON = 2.001
+
+/**
+ * Checks if two numbers are approximately equal within a threshold (EPSILON)
+ * Original name: $$a9
+ */
+export function isApproximatelyEqual(firstValue: number, secondValue: number, epsilon: number = EPSILON): boolean {
+  return Math.abs(firstValue - secondValue) < epsilon
 }
-export function $$s1(e, t, i = $$r10) {
-  return $$a9(e, t, i) || e > t;
+
+/**
+ * Checks if two numbers are approximately equal or if the first is greater than the second
+ * Original name: $$s1
+ */
+export function isApproximatelyEqualOrGreater(firstValue: number, secondValue: number, epsilon: number = EPSILON): boolean {
+  return isApproximatelyEqual(firstValue, secondValue, epsilon) || firstValue > secondValue
 }
-export function $$o6(e, t, i, n = !1) {
-  return null != i && Math.abs(Number(e) - Number(t)) < i ? 0 : n ? Math.abs(Number(e)) > Math.abs(Number(t)) ? 1 : Math.abs(Number(e)) < Math.abs(Number(t)) ? -1 : 0 : e > t ? 1 : e < t ? -1 : 0;
+
+/**
+ * Compares two values with optional tolerance and absolute value comparison
+ * Returns: -1 if first < second, 0 if equal within tolerance, 1 if first > second
+ * Original name: $$o6
+ */
+export function compareWithTolerance(
+  firstValue: number | string,
+  secondValue: number | string,
+  tolerance?: number,
+  useAbsoluteValues: boolean = false,
+): number {
+  const firstNum = Number(firstValue)
+  const secondNum = Number(secondValue)
+
+  // If tolerance is provided and values are within tolerance, they're equal
+  if (tolerance !== undefined && Math.abs(firstNum - secondNum) < tolerance) {
+    return 0
+  }
+
+  // If using absolute values for comparison
+  if (useAbsoluteValues) {
+    const absFirst = Math.abs(firstNum)
+    const absSecond = Math.abs(secondNum)
+
+    if (absFirst > absSecond)
+      return 1
+    if (absFirst < absSecond)
+      return -1
+    return 0
+  }
+
+  // Standard comparison
+  if (firstNum > secondNum)
+    return 1
+  if (firstNum < secondNum)
+    return -1
+  return 0
 }
-export function $$l3(e) {
-  return "X" === e ? "Y" : "X";
+
+/**
+ * Gets the opposite axis
+ * Original name: $$l3
+ */
+export function getOppositeAxis(axis: "X" | "Y"): "X" | "Y" {
+  return axis === "X" ? "Y" : "X"
 }
-function d(e, t) {
+
+/**
+ * Transforms a point using a transformation matrix
+ * Original name: d
+ */
+function transformPoint(matrix: { m00: number, m01: number, m10: number, m11: number }, point: { x: number, y: number }): { x: number, y: number } {
   return {
-    x: e.m00 * t.x + e.m01 * t.y,
-    y: e.m10 * t.x + e.m11 * t.y
-  };
-}
-export function $$c8(e) {
-  let t = 1 / 0;
-  let i = 1 / 0;
-  let n = -1 / 0;
-  let r = -1 / 0;
-  for (let a of e) {
-    t = Math.min(t, a.left);
-    i = Math.min(i, a.top);
-    n = Math.max(n, a.right);
-    r = Math.max(r, a.bottom);
+    x: matrix.m00 * point.x + matrix.m01 * point.y,
+    y: matrix.m10 * point.x + matrix.m11 * point.y,
   }
+}
+
+/**
+ * Calculates the bounding box that contains all given rectangles
+ * Original name: $$c8
+ */
+export function calculateBoundingBox(rectangles: Array<{ left: number, top: number, right: number, bottom: number }>): { left: number, top: number, right: number, bottom: number } {
+  let minX = Infinity
+  let minY = Infinity
+  let maxX = -Infinity
+  let maxY = -Infinity
+
+  for (const rect of rectangles) {
+    minX = Math.min(minX, rect.left)
+    minY = Math.min(minY, rect.top)
+    maxX = Math.max(maxX, rect.right)
+    maxY = Math.max(maxY, rect.bottom)
+  }
+
   return {
-    left: t,
-    top: i,
-    right: n,
-    bottom: r
-  };
-}
-export function $$u14(e) {
-  let t = 1 / 0;
-  let i = 1 / 0;
-  let n = -1 / 0;
-  let r = -1 / 0;
-  for (let a of e) {
-    let e = "x" in a && "relativeTransform" in a ? function (e, t) {
-      let i = function (e, t) {
-        let i = {
-          x: 0,
-          y: 0
-        };
-        for (let n of [{
-          x: -1,
-          y: 1
-        }, {
-          x: 1,
-          y: 1
-        }]) i = {
-          x: Math.max(i.x, Math.abs(d(t, {
-            x: e.x * n.x,
-            y: e.y * n.y
-          }).x)),
-          y: Math.max(i.y, Math.abs(d(t, {
-            x: e.x * n.x,
-            y: e.y * n.y
-          }).y))
-        };
-        return i;
-      }(e, t);
-      let n = {
-        x: t.m02,
-        y: t.m12
-      };
-      n.x += d(t, {
-        x: e.x / 2,
-        y: e.y / 2
-      }).x;
-      n.y += d(t, {
-        x: e.x / 2,
-        y: e.y / 2
-      }).y;
-      n.x -= i.x / 2;
-      n.y -= i.y / 2;
-      return {
-        x: n.x,
-        y: n.y,
-        width: i.x,
-        height: i.y
-      };
-    }({
-      x: a.width,
-      y: a.height
-    }, {
-      m00: a.relativeTransform[0][0],
-      m01: a.relativeTransform[0][1],
-      m02: a.relativeTransform[0][2],
-      m10: a.relativeTransform[1][0],
-      m11: a.relativeTransform[1][1],
-      m12: a.relativeTransform[1][2]
-    }) : a;
-    e.x < t && (t = e.x);
-    e.y < i && (i = e.y);
-    e.x + e.width > n && (n = e.x + e.width);
-    e.y + e.height > r && (r = e.y + e.height);
+    left: minX,
+    top: minY,
+    right: maxX,
+    bottom: maxY,
   }
+}
+
+/**
+ * Calculates bounding box for transformed elements
+ * Original name: $$u14
+ */
+export function calculateTransformedBoundingBox(elements: Array<{
+  x?: number
+  y?: number
+  width: number
+  height: number
+  relativeTransform?: number[][]
+} | {
+  x: number
+  y: number
+  width: number
+  height: number
+}>): { left: number, top: number, right: number, bottom: number } {
+  let minX = Infinity
+  let minY = Infinity
+  let maxX = -Infinity
+  let maxY = -Infinity
+
+  for (const element of elements) {
+    // Handle transformed elements
+    let bounds = element
+
+    if ("x" in element && "relativeTransform" in element && element.relativeTransform) {
+      // Calculate transformed bounds
+      const elementSize = { x: element.width, y: element.height }
+      const transformMatrix = {
+        m00: element.relativeTransform[0][0],
+        m01: element.relativeTransform[0][1],
+        m02: element.relativeTransform[0][2],
+        m10: element.relativeTransform[1][0],
+        m11: element.relativeTransform[1][1],
+        m12: element.relativeTransform[1][2],
+      }
+
+      // Calculate size after transformation
+      const calculateTransformedSize = (size: { x: number, y: number }, matrix: typeof transformMatrix) => {
+        let result = { x: 0, y: 0 }
+
+        for (const corner of [{ x: -1, y: 1 }, { x: 1, y: 1 }]) {
+          const transformedPoint = transformPoint(matrix, {
+            x: size.x * corner.x,
+            y: size.y * corner.y,
+          })
+
+          result = {
+            x: Math.max(result.x, Math.abs(transformedPoint.x)),
+            y: Math.max(result.y, Math.abs(transformedPoint.y)),
+          }
+        }
+
+        return result
+      }
+
+      const transformedSize = calculateTransformedSize(elementSize, transformMatrix)
+
+      // Calculate position after transformation
+      let position = {
+        x: transformMatrix.m02,
+        y: transformMatrix.m12,
+      }
+
+      const centerOffset = transformPoint(transformMatrix, {
+        x: elementSize.x / 2,
+        y: elementSize.y / 2,
+      })
+
+      position.x += centerOffset.x
+      position.y += centerOffset.y
+      position.x -= transformedSize.x / 2
+      position.y -= transformedSize.y / 2
+
+      bounds = {
+        x: position.x,
+        y: position.y,
+        width: transformedSize.x,
+        height: transformedSize.y,
+      }
+    }
+
+    // Update bounding box
+    if (bounds.x < minX)
+      minX = bounds.x
+    if (bounds.y < minY)
+      minY = bounds.y
+    if (bounds.x + bounds.width > maxX)
+      maxX = bounds.x + bounds.width
+    if (bounds.y + bounds.height > maxY)
+      maxY = bounds.y + bounds.height
+  }
+
   return {
-    left: t,
-    top: i,
-    right: n,
-    bottom: r
-  };
-}
-function p(e, t, i, n = 0) {
-  if ("X" === i) {
-    let i = e;
-    let r = t;
-    e.left > t.left && (i = t, r = e);
-    return i.left < r.right + n && i.right > r.left - n;
-  }
-  {
-    let i = e;
-    let r = t;
-    e.top > t.top && (i = t, r = e);
-    return i.top < r.bottom + n && i.bottom > r.top - n;
+    left: minX,
+    top: minY,
+    right: maxX,
+    bottom: maxY,
   }
 }
-export function $$m4(e, t) {
-  let i = e.right - e.left;
-  let r = t.right - t.left;
-  let a = -1 * Math.min(N.HORIZONTAL_AXIS_OVERLAP_PX, .35 * i, .35 * r);
-  let s = e.bottom - e.top;
-  let o = t.bottom - t.top;
-  let l = -1 * Math.min(N.VERTICAL_AXIS_OVERLAP_PX, .35 * s, .35 * o);
-  return p(e, t, "X", a) && p(e, t, "Y", l);
+
+/**
+ * Checks if two bounding boxes overlap on a specific axis with optional padding
+ * Original name: p
+ */
+function doBoxesOverlapOnAxis(
+  firstBox: { left: number, right: number, top: number, bottom: number },
+  secondBox: { left: number, right: number, top: number, bottom: number },
+  axis: "X" | "Y",
+  padding: number = 0,
+): boolean {
+  if (axis === "X") {
+    // Determine leftmost and rightmost boxes
+    let leftBox = firstBox
+    let rightBox = secondBox
+
+    if (firstBox.left > secondBox.left) {
+      leftBox = secondBox
+      rightBox = firstBox
+    }
+
+    // Check horizontal overlap with padding
+    return leftBox.left < rightBox.right + padding && leftBox.right > rightBox.left - padding
+  }
+  else {
+    // Determine topmost and bottommost boxes
+    let topBox = firstBox
+    let bottomBox = secondBox
+
+    if (firstBox.top > secondBox.top) {
+      topBox = secondBox
+      bottomBox = firstBox
+    }
+
+    // Check vertical overlap with padding
+    return topBox.top < bottomBox.bottom + padding && topBox.bottom > bottomBox.top - padding
+  }
 }
-export function $$h7(e, t, i = $$r10) {
-  return $$a9(e.left, t.left, i) && $$a9(e.top, t.top, i) && $$a9(e.right, t.right, i) && $$a9(e.bottom, t.bottom, i);
+
+/**
+ * Checks if two bounding boxes overlap considering configured overlap thresholds
+ * Original name: $$m4
+ */
+export function doBoxesOverlap(
+  firstBox: { left: number, right: number, top: number, bottom: number },
+  secondBox: { left: number, right: number, top: number, bottom: number },
+): boolean {
+  // Calculate dimensions
+  const firstWidth = firstBox.right - firstBox.left
+  const secondWidth = secondBox.right - secondBox.left
+  const firstHeight = firstBox.bottom - firstBox.top
+  const secondHeight = secondBox.bottom - secondBox.top
+
+  // Calculate overlap thresholds
+  const horizontalThreshold = -1 * Math.min(
+    aalSettingsConfig.HORIZONTAL_AXIS_OVERLAP_PX,
+    0.35 * firstWidth,
+    0.35 * secondWidth,
+  )
+
+  const verticalThreshold = -1 * Math.min(
+    aalSettingsConfig.VERTICAL_AXIS_OVERLAP_PX,
+    0.35 * firstHeight,
+    0.35 * secondHeight,
+  )
+
+  // Check overlap on both axes
+  return doBoxesOverlapOnAxis(firstBox, secondBox, "X", horizontalThreshold)
+    && doBoxesOverlapOnAxis(firstBox, secondBox, "Y", verticalThreshold)
 }
-export function $$g11(e, t) {
-  return e["X" === t ? "x" : "y"];
+
+/**
+ * Checks if two bounding boxes are approximately equal
+ * Original name: $$h7
+ */
+export function areBoxesApproximatelyEqual(
+  firstBox: { left: number, top: number, right: number, bottom: number },
+  secondBox: { left: number, top: number, right: number, bottom: number },
+  epsilon: number = EPSILON,
+): boolean {
+  return isApproximatelyEqual(firstBox.left, secondBox.left, epsilon)
+    && isApproximatelyEqual(firstBox.top, secondBox.top, epsilon)
+    && isApproximatelyEqual(firstBox.right, secondBox.right, epsilon)
+    && isApproximatelyEqual(firstBox.bottom, secondBox.bottom, epsilon)
 }
-export function $$f13(e, t, i) {
-  return $$g11(t, i) < $$g11(e, i) ? $$f13(t, e, i) : $$g11(t, i) - $$g11(e, i) - ("X" === i ? e.width : e.height);
+
+/**
+ * Gets coordinate value for specified axis
+ * Original name: $$g11
+ */
+export function getCoordinateForAxis(box: { x: number, y: number }, axis: "X" | "Y"): number {
+  return axis === "X" ? box.x : box.y
 }
-export function $$_0(e, t) {
-  let i = function (e, t) {
-    let i = [];
-    if (e.length < 2) return i;
-    for (let n = 0; n + 1 < e.length; n++) i.push($$f13(e[n], e[n + 1], t));
-    return i;
-  }(e, t);
-  return i.reduce((e, t) => e + t, 0) / i.length;
+
+/**
+ * Calculates spacing between two boxes along an axis
+ * Original name: $$f13
+ */
+export function calculateSpacingBetweenBoxes(
+  firstBox: { x: number, y: number, width: number, height: number },
+  secondBox: { x: number, y: number, width: number, height: number },
+  axis: "X" | "Y",
+): number {
+  // Ensure consistent ordering
+  if (getCoordinateForAxis(secondBox, axis) < getCoordinateForAxis(firstBox, axis)) {
+    [firstBox, secondBox] = [secondBox, firstBox]
+  }
+
+  // Calculate spacing
+  return getCoordinateForAxis(secondBox, axis)
+    - getCoordinateForAxis(firstBox, axis)
+    - (axis === "X" ? firstBox.width : firstBox.height)
 }
-export function $$A2(e) {
-  switch (e) {
+
+/**
+ * Calculates average spacing between consecutive boxes
+ * Original name: $$_0
+ */
+export function calculateAverageSpacing(
+  boxes: Array<{ x: number, y: number, width: number, height: number }>,
+  axis: "X" | "Y",
+): number {
+  // Calculate spacings between consecutive boxes
+  const spacings: number[] = []
+
+  if (boxes.length < 2) {
+    return 0
+  }
+
+  for (let i = 0; i + 1 < boxes.length; i++) {
+    spacings.push(calculateSpacingBetweenBoxes(boxes[i], boxes[i + 1], axis))
+  }
+
+  // Calculate average
+  const sum = spacings.reduce((acc, spacing) => acc + spacing, 0)
+  return sum / spacings.length
+}
+
+/**
+ * Maps alignment values to constraint types
+ * Original name: $$A2
+ */
+export function mapAlignmentToConstraintType(alignment: string): "MIN" | "MAX" | "CENTER" {
+  switch (alignment) {
     case "left":
-      return "MIN";
+      return "MIN"
     case "right":
-      return "MAX";
+      return "MAX"
     default:
-      return "CENTER";
+      return "CENTER"
   }
 }
-export function $$y5(e, t, i) {
-  if (!e.length) return "left";
-  let n = {
+
+/**
+ * Determines dominant alignment of elements relative to a reference box
+ * Original name: $$y5
+ */
+export function determineDominantAlignment(
+  elements: Array<{ x: number, y: number, width: number, height: number }>,
+  referenceBox: { left: number, top: number, right: number, bottom: number },
+  axis: "X" | "Y",
+): "left" | "center" | "right" {
+  // Handle empty array
+  if (!elements.length) {
+    return "left"
+  }
+
+  // Initialize alignment counters
+  const alignmentCounts = {
     left: 0,
     center: 0,
     right: 0,
-    defer: 0
-  };
-  for (let r of e) {
-    let e = function (e, t, i, n) {
-      let r = "Y" === i ? "left" : "top";
-      let a = "Y" === i ? "right" : "bottom";
-      let s = Math.abs(t[r] - e[r]);
-      let o = Math.max(0, t[a] - e[a]);
-      return s < 1 && o < 1 ? "defer" : s > 5 * o + 5 ? "right" : 5 * s + 5 < o ? "left" : Math.abs(o - s) <= (t[a] - t[r]) * .33 && 0 !== s && 0 !== o ? "center" : s > o ? "right" : "left";
-    }($$u14([r]), t, i, 0);
-    e && n[e]++;
+    defer: 0,
   }
-  if ("X" === i && e.every(t => t.height === e[0].height)) return "center";
-  let r = 0;
-  let a = !1;
-  let s = "X" === i ? "center" : "left";
-  for (let e of ["left", "center", "right"]) {
-    let t = n[e];
-    t > r ? (r = t, s = e, a = !1) : t && t === r && (a = !0);
+
+  // Count alignments for each element
+  for (const element of elements) {
+    const elementBounds = calculateTransformedBoundingBox([element])
+
+    // Determine alignment for this element
+    const alignment = (() => {
+      const primaryEdge = axis === "Y" ? "left" : "top"
+      const secondaryEdge = axis === "Y" ? "right" : "bottom"
+
+      const distanceToPrimary = Math.abs(referenceBox[primaryEdge] - elementBounds[primaryEdge])
+      const overlapWithSecondary = Math.max(0, referenceBox[secondaryEdge] - elementBounds[secondaryEdge])
+
+      // Special cases
+      if (distanceToPrimary < 1 && overlapWithSecondary < 1) {
+        return "defer"
+      }
+
+      if (distanceToPrimary > 5 * overlapWithSecondary + 5) {
+        return "right"
+      }
+
+      if (5 * distanceToPrimary + 5 < overlapWithSecondary) {
+        return "left"
+      }
+
+      if (Math.abs(overlapWithSecondary - distanceToPrimary) <= (referenceBox[secondaryEdge] - referenceBox[primaryEdge]) * 0.33
+        && distanceToPrimary !== 0
+        && overlapWithSecondary !== 0) {
+        return "center"
+      }
+
+      return distanceToPrimary > overlapWithSecondary ? "right" : "left"
+    })()
+
+    // Increment counter
+    if (alignment) {
+      alignmentCounts[alignment as keyof typeof alignmentCounts]++
+    }
   }
-  return a ? n.left > n.right ? "left" : n.right > n.left ? "right" : "center" : s;
+
+  // Special case: all elements have same height when checking X axis
+  if (axis === "X" && elements.every(element => element.height === elements[0].height)) {
+    return "center"
+  }
+
+  // Find dominant alignment
+  let maxCount = 0
+  let hasTie = false
+  let dominantAlignment: "left" | "center" | "right" = axis === "X" ? "center" : "left"
+
+  for (const alignment of ["left", "center", "right"] as const) {
+    const count = alignmentCounts[alignment]
+
+    if (count > maxCount) {
+      maxCount = count
+      dominantAlignment = alignment
+      hasTie = false
+    }
+    else if (count && count === maxCount) {
+      hasTie = true
+    }
+  }
+
+  // Handle ties
+  if (hasTie) {
+    if (alignmentCounts.left > alignmentCounts.right) {
+      return "left"
+    }
+    else if (alignmentCounts.right > alignmentCounts.left) {
+      return "right"
+    }
+    else {
+      return "center"
+    }
+  }
+
+  return dominantAlignment
 }
-export function $$b12(e, t) {
-  let i = e.x + e.width / 2;
-  let n = e.y + e.height / 2;
-  return Math.sqrt(Math.pow(i - (t.x + t.width / 2), 2) + Math.pow(n - (t.y + t.height / 2), 2));
+
+/**
+ * Calculates Euclidean distance between centers of two rectangles
+ * Original name: $$b12
+ */
+export function calculateCenterDistance(
+  firstRect: { x: number, y: number, width: number, height: number },
+  secondRect: { x: number, y: number, width: number, height: number },
+): number {
+  const firstCenterX = firstRect.x + firstRect.width / 2
+  const firstCenterY = firstRect.y + firstRect.height / 2
+  const secondCenterX = secondRect.x + secondRect.width / 2
+  const secondCenterY = secondRect.y + secondRect.height / 2
+
+  return Math.sqrt(
+    (firstCenterX - secondCenterX) ** 2
+    + (firstCenterY - secondCenterY) ** 2,
+  )
 }
-export const BS = $$_0;
-export const JX = $$s1;
-export const LZ = $$A2;
-export const MM = $$l3;
-export const Nj = $$m4;
-export const Nv = $$y5;
-export const _d = $$o6;
-export const cA = $$h7;
-export const mW = $$c8;
-export const n4 = $$a9;
-export const p8 = $$r10;
-export const s9 = $$g11;
-export const sH = $$b12;
-export const uM = $$f13;
-export const uS = $$u14;
+
+// Export aliases for backward compatibility
+export const BS = calculateAverageSpacing
+export const JX = isApproximatelyEqualOrGreater
+export const LZ = mapAlignmentToConstraintType
+export const MM = getOppositeAxis
+export const Nj = doBoxesOverlap
+export const Nv = determineDominantAlignment
+export const _d = compareWithTolerance
+export const cA = areBoxesApproximatelyEqual
+export const mW = calculateBoundingBox
+export const n4 = isApproximatelyEqual
+export const p8 = EPSILON
+export const s9 = getCoordinateForAxis
+export const sH = calculateCenterDistance
+export const uM = calculateSpacingBetweenBoxes
+export const uS = calculateTransformedBoundingBox

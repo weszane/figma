@@ -11,7 +11,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { U } from "../905/455766";
 import { OnboardingModal } from "../905/425180";
-import { Hx5 } from "../figma_app/6204";
+import { DevModeComponentBrowserOnboardingOverlay } from "../figma_app/6204";
 if (443 == require.j) {}
 let h = userFlagExistsAtomFamily("dev_mode_has_seen_component_browser_onboarding");
 let $$b1 = {
@@ -100,7 +100,7 @@ export function $$w0({
     complete,
     isShowing
   } = _$$e({
-    overlay: Hx5,
+    overlay: DevModeComponentBrowserOnboardingOverlay,
     priority: N.DEFAULT_MODAL
   }, [n]);
   let b = ["ManualStep1", "ManualStep2", "ManualStep3"];

@@ -36,7 +36,7 @@ import { v as _$$v } from '../905/981847';
 import { postUserFlag } from '../905/985254';
 import { iX } from '../6443/426443';
 import { n as _$$n } from '../draftjs_composer/589474';
-import { eR as _$$eR } from '../figma_app/12220';
+import { isNewCommentId } from '../figma_app/12220';
 import { useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { FFileType } from '../figma_app/191312';
 import { useAtMentionInviteExperiment } from '../figma_app/297957';
@@ -169,7 +169,7 @@ export function $$ed1(e) {
   let eR = useSelector(e => e.comments.activeDragTarget);
   let eL = useAtMentionInviteExperiment();
   let eT = useAtomWithSubscription(_$$H);
-  let eI = _$$eR(e.threadId) && eL({
+  let eI = isNewCommentId(e.threadId) && eL({
     isDraftFile: !ef,
     isMobile: BrowserInfo.isMobileBrowser,
     showExpAtMentionInvite: !!getFeatureFlags().show_at_mention_invited_users,
@@ -193,7 +193,7 @@ export function $$ed1(e) {
   }, [setHyperlinkLocation, setHyperlinkEditorRef, editorRef]);
   let eA = useStore();
   useEffect(() => {
-    let t = !_$$eR(e.threadId);
+    let t = !isNewCommentId(e.threadId);
     trackUserEvent('Comment composer opened', eA.getState(), {
       isThread: t
     });
@@ -317,11 +317,11 @@ export function $$ed1(e) {
   let e7 = e => isMessageMetaEmpty(e);
   let e8 = e4();
   let e6 = e7(e.messageMeta) && (!eG || eW.length === 0);
-  let e9 = eG && eR === e.recordingKey && !_$$eR(e.threadId);
+  let e9 = eG && eR === e.recordingKey && !isNewCommentId(e.threadId);
   return jsxs(_$$Y, {
     'className': m()(e.containerClassName || {
       [fP]: !0,
-      [U0]: _$$eR(e.threadId),
+      [U0]: isNewCommentId(e.threadId),
       [mr]: e9
     }, e6 && Sg),
     'isDragTarget': () => eG,

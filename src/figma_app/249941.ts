@@ -70,7 +70,7 @@ import { SvgComponent, V as _$$V2 } from "../905/714743";
 import { MediaQuerySvgComponent } from "../905/331623";
 import { getI18nString } from "../905/303541";
 import { U as _$$U } from "../905/492359";
-import { s$ } from "../905/432493";
+import { getSVGForLayoutGrid } from "../905/432493";
 import { generateObjectsPanelIcon } from "../905/619652";
 import { KindEnum } from "../905/129884";
 import { g$ } from "../figma_app/116234";
@@ -657,7 +657,7 @@ export function $$tI2(e) {
       } = this.props;
       switch (node.styleType) {
         case "GRID":
-          let r = s$(node);
+          let r = getSVGForLayoutGrid(node);
           return jsx(SvgComponent, {
             svg: r,
             className,

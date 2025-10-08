@@ -19,7 +19,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
-import { Tw6 } from "../figma_app/6204";
+import { KoKrLaunchAnnouncementModal } from "../figma_app/6204";
 if (443 == require.j) {}
 let k = 443 == require.j ? 864e5 : null;
 let E = () => Date.now() - k;
@@ -77,7 +77,7 @@ export function $$S0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: Tw6,
+    overlay: KoKrLaunchAnnouncementModal,
     priority: N.SECONDARY_MODAL,
     experiment: {
       check: () => {

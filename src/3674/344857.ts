@@ -119,7 +119,7 @@ import { k as _$$k3 } from "../905/44647";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { useSessionStorageSync, useLocalStorageSync } from "../905/657224";
 import { RecordableDiv, RecordableAnchor } from "../905/511649";
-import { P as _$$P2 } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { R6, zL, bE, i_ as _$$i_, eb as _$$eb, vo } from "../figma_app/617506";
 import { $ as _$$$3 } from "../905/532878";
 import { gs, ON } from "../figma_app/31103";
@@ -144,7 +144,7 @@ import { notificationAPI } from "../905/894881";
 import { p as _$$p4 } from "../figma_app/353099";
 import { uh as _$$uh } from "../figma_app/370763";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { E as _$$E3 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e3 } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { N as _$$N } from "../figma_app/268271";
@@ -152,7 +152,7 @@ import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { wX } from "../figma_app/710136";
 import { ArrowPosition } from "../905/748636";
-import { War, tb3, Iu5, FtN, ma5 } from "../figma_app/6204";
+import { EyeDropperToolInDevModeOnboardingOverlay, DevHandoffConfigWizard, DevModeInteractiveInspectionOnboardingOverlay, DevModeFocusViewOnboardingOverlay, McpEnableButtonCalloutOverlay } from "../figma_app/6204";
 import { K as _$$K } from "../figma_app/398376";
 import { EA } from "../9410/499229";
 import { f as _$$f3 } from "../1528/716387";
@@ -197,7 +197,7 @@ import { setupHyperlinkHandler } from "../figma_app/815170";
 import { useDropdownState } from "../905/848862";
 import { j as _$$j } from "../905/834956";
 import { A as _$$A10 } from "../svg/957897";
-import { Qh } from "../905/469533";
+import { setUserThemePreferenceThunk } from "../905/469533";
 import { GV } from "../figma_app/532170";
 import { A as _$$A11 } from "../905/389851";
 import { isValidSessionLocalID, parseSessionLocalID, defaultSessionLocalIDString } from "../905/871411";
@@ -353,7 +353,7 @@ import ds from "../vendor/805353";
 import dd from "../vendor/961736";
 import { c as _$$c7 } from "../905/241436";
 import { incrementCounter } from "../905/949750";
-import { ab as _$$ab } from "../figma_app/870683";
+import { generateAbsoluteCommunityPluginUrl } from "../figma_app/870683";
 import { registerNodeChangeCallback, unregisterNodeChangeCallback } from "../figma_app/644255";
 import { K as _$$K4 } from "../905/918348";
 import { E as _$$E7 } from "../905/53857";
@@ -384,7 +384,7 @@ import { t as _$$t6 } from "../figma_app/143965";
 import { L as _$$L4 } from "../figma_app/467950";
 import { A as _$$A18 } from "../6020/852410";
 import { VX } from "../figma_app/635062";
-import { mr } from "../figma_app/97042";
+import { hasCodeConnect } from "../figma_app/97042";
 import { bL as _$$bL3, l9 as _$$l3, mc as _$$mc, c$ as _$$c$2, DZ } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { bL as _$$bL4 } from "../905/911410";
@@ -426,7 +426,7 @@ import { InputComponent } from "../905/185998";
 import { LinkPrimitive } from "../figma_app/496441";
 import { H_ } from "../905/963340";
 import { G as _$$G4 } from "../905/800369";
-import { f as _$$f5, pe as _$$pe, Pq, Kx, tz as _$$tz, SV, lk as _$$lk2 } from "../figma_app/342355";
+import { mockDirForImageWritesAtom, imageOptionsWithMount, denyOverwritingFilesAtom, codeOptionsAtom, codeConnectToolsEnabledAtom, codebaseSuggestionsEnabledAtom, useTailwindAtom } from "../figma_app/342355";
 import { Fc } from "../figma_app/484865";
 import { $k, As } from "../figma_app/802241";
 import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
@@ -451,7 +451,7 @@ import { NB, pq as _$$pq } from "../figma_app/973219";
 import { A as _$$A21 } from "../6828/364616";
 import { g as _$$g4 } from "../figma_app/777171";
 import { L as _$$L5 } from "../1250/681431";
-import { Cf, it as _$$it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { A as _$$A22 } from "../svg/639108";
 import { createPortal } from "react-dom";
 import { L as _$$L6 } from "../905/704296";
@@ -2232,7 +2232,7 @@ function nJ({
         defaultSize: h,
         onResize: p,
         className: cssBuilderInstance.relative.$,
-        children: jsx(_$$P2, {
+        children: jsx(ScrollContainer, {
           className: "variables_side_panel--variableSetsScrollContainer--qTzl5",
           children: n.map(n => jsx(nq, {
             variableSet: n,
@@ -2691,7 +2691,7 @@ function nY({
         })]
       })
     })]
-  }) : jsx(_$$P2, {
+  }) : jsx(ScrollContainer, {
     className: "variables_side_panel--variableGroupsScrollContainer--B2ilG",
     children: groups.map((e, t) => jsx(nZ, {
       canShowCaret: e.subgroups.length > 0,
@@ -2804,7 +2804,7 @@ function a_() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: War,
+    overlay: EyeDropperToolInDevModeOnboardingOverlay,
     priority: _$$N.SECONDARY_MODAL
   }, [e]);
   let u = useCallback(() => {
@@ -2815,7 +2815,7 @@ function a_() {
       }(e)
     });
   }, [n, show, t]);
-  _$$E3(uniqueId, wX("dev"), () => {
+  useEventForwarder(uniqueId, wX("dev"), () => {
     u();
   });
   let p = _$$uh();
@@ -3480,7 +3480,7 @@ function iF() {
       children: renderI18nText("dev_handoff.configuration_wizard.theme_step.description")
     }), jsx(_$$bL, {
       value: t,
-      onChange: t => e(Qh({
+      onChange: t => e(setUserThemePreferenceThunk({
         theme: t,
         userInitiated: !0
       })),
@@ -4486,7 +4486,7 @@ function iq() {
     show,
     complete
   } = _$$e3({
-    overlay: tb3,
+    overlay: DevHandoffConfigWizard,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [e]);
   let d = useModalManager({
@@ -4499,7 +4499,7 @@ function iq() {
       canShow: e => !e
     });
   });
-  _$$E3(uniqueId, "Reset Onboarding", () => {
+  useEventForwarder(uniqueId, "Reset Onboarding", () => {
     t(postUserFlag({
       [aL]: !1
     }));
@@ -5469,7 +5469,7 @@ let lD = memo(({
                   onClose: I,
                   children: renderI18nText("design_systems.playground.banner_content")
                 })
-              }), jsxs(_$$P2, {
+              }), jsxs(ScrollContainer, {
                 children: [jsxs(SceneGraphContext.Provider, {
                   value: _,
                   children: [jsx("div", {
@@ -8659,7 +8659,7 @@ function dN({
       }), jsx(_$$N3, {
         newTab: !0,
         trusted: !0,
-        href: _$$ab(j.plugin_id),
+        href: generateAbsoluteCommunityPluginUrl(j.plugin_id),
         children: renderI18nText("inspect_panel.code.error_link")
       })]
     })
@@ -8736,7 +8736,7 @@ function dD() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: Iu5,
+    overlay: DevModeInteractiveInspectionOnboardingOverlay,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [e, t]);
   useEffect(() => {
@@ -8770,7 +8770,7 @@ function dH() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: FtN,
+    overlay: DevModeFocusViewOnboardingOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
   let o = dR();
@@ -10895,7 +10895,7 @@ function u6() {
     isShowing,
     complete
   } = _$$e3({
-    overlay: ma5,
+    overlay: McpEnableButtonCalloutOverlay,
     priority: _$$N.SECONDARY_MODAL,
     experiment: {
       check: e,
@@ -11055,8 +11055,8 @@ function pr() {
 }
 function pd() {
   let e = "internal-path-for-image-writes-to-disk";
-  let [t, n] = useAtomValueAndSetter(_$$f5);
-  let i = useAtomWithSubscription(_$$pe);
+  let [t, n] = useAtomValueAndSetter(mockDirForImageWritesAtom);
+  let i = useAtomWithSubscription(imageOptionsWithMount);
   return As() && getFeatureFlags().dt_my_cool_plugin_internal && "write-to-disk" === i ? jsxs("div", {
     className: pt,
     children: [jsx(Label, {
@@ -11072,9 +11072,9 @@ function pd() {
 }
 function pc() {
   let e = "image-source";
-  let [t, n] = useAtomValueAndSetter(_$$pe);
-  let [i, o] = useAtomValueAndSetter(Pq);
-  let l = useAtomWithSubscription(Kx);
+  let [t, n] = useAtomValueAndSetter(imageOptionsWithMount);
+  let [i, o] = useAtomValueAndSetter(denyOverwritingFilesAtom);
+  let l = useAtomWithSubscription(codeOptionsAtom);
   return desktopAPIInstance?.hasFeature("addMcpImageSupport") && "xml" !== l ? jsxs(Fragment, {
     children: [jsxs("div", {
       className: pt,
@@ -11100,7 +11100,7 @@ function pc() {
           })]
         })]
       })]
-    }), "write-to-disk" === atomStoreManager.get(_$$pe) && jsx("div", {
+    }), "write-to-disk" === atomStoreManager.get(imageOptionsWithMount) && jsx("div", {
       className: pt,
       children: jsx(Checkbox, {
         checked: !i,
@@ -11188,12 +11188,12 @@ function pf() {
     getTriggerProps,
     manager
   } = setupMenu();
-  let [n, o] = useAtomValueAndSetter(_$$tz);
-  let [l, d] = useAtomValueAndSetter(SV);
-  let [c, u] = useAtomValueAndSetter(_$$lk2);
-  let [p, h] = useAtomValueAndSetter(Kx);
-  let [f, g] = useAtomValueAndSetter(_$$pe);
-  let [x, m] = useAtomValueAndSetter(Pq);
+  let [n, o] = useAtomValueAndSetter(codeConnectToolsEnabledAtom);
+  let [l, d] = useAtomValueAndSetter(codebaseSuggestionsEnabledAtom);
+  let [c, u] = useAtomValueAndSetter(useTailwindAtom);
+  let [p, h] = useAtomValueAndSetter(codeOptionsAtom);
+  let [f, g] = useAtomValueAndSetter(imageOptionsWithMount);
+  let [x, m] = useAtomValueAndSetter(denyOverwritingFilesAtom);
   let _ = Fc();
   let v = getFeatureFlags();
   let y = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
@@ -11338,7 +11338,7 @@ function pj(e) {
   let f = useSceneGraphSelector();
   let g = fullscreenAlias.getIsExtension();
   let x = useAtomWithSubscription(be);
-  let m = mr(l ?? "", f);
+  let m = hasCodeConnect(l ?? "", f);
   return jsx(Tabs.TabPanel, {
     ...e.tabProps,
     height: "fill",
@@ -11352,7 +11352,7 @@ function pj(e) {
           width: "100%",
           height: "100%"
         },
-        children: jsx(_$$P2, {
+        children: jsx(ScrollContainer, {
           ref: h,
           className: "inspect_panel--scrollContainer--wwC0l properties_panel--scrollContainer--o2LxW",
           onContextMenu: noop,
@@ -11943,11 +11943,11 @@ function p4({
       children: jsx(SvgComponent, {
         svg: _$$A22
       })
-    }), d && jsx(Cf, {
+    }), d && jsx(ConnectedPointingDropdown, {
       className: t ? void 0 : "frame_picker--closedDropdown--ynVzU",
       targetRect: d,
       displayAboveTarget: !0,
-      type: _$$it.MATCH_BACKGROUND,
+      type: DropdownType.MATCH_BACKGROUND,
       disableDropdownScrollContainer: !0,
       propagateCloseClick: !0,
       children: jsx("div", {
@@ -12401,7 +12401,7 @@ function hD({
       })
     }) : h ? jsx("div", {
       className: n,
-      children: jsx(_$$P2, {
+      children: jsx(ScrollContainer, {
         children: jsx(hL, {
           styleId,
           styleNodeId,
@@ -12629,7 +12629,7 @@ function hH() {
   return jsxs(SubscribedLibrariesProvider, {
     children: [jsxs("div", {
       className: "inspect_tabs--tabsBar--nbu1a",
-      children: [jsx(_$$P2, {
+      children: [jsx(ScrollContainer, {
         innerClassName: "inspect_tabs--tabs--w8XOI",
         minContentWidth: 100,
         children: c.map(t => jsx(r7, {

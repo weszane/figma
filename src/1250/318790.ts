@@ -19,7 +19,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
-import { gik } from "../figma_app/6204";
+import { PtBrLaunchAnnouncementModal } from "../figma_app/6204";
 if (443 == require.j) {}
 var k = (e => (e.BRAZILIAN = "brazilian", e.NON_BRAZILIAN = "non_brazilian", e))(k || {});
 let E = 443 == require.j ? 864e5 : null;
@@ -81,7 +81,7 @@ export function $$N0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: gik,
+    overlay: PtBrLaunchAnnouncementModal,
     priority: N.SECONDARY_MODAL,
     experiment: {
       check: () => {

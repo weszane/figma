@@ -10,7 +10,7 @@ import { debugState } from "../905/407919";
 import { au, pX, _ as _$$_, LQ } from "../figma_app/445976";
 import { rZ } from "../905/971098";
 import { getFileKeyFromSelectedView } from "../figma_app/193867";
-import { D as _$$D2 } from "../905/629114";
+import { createFigmaPluginScope } from "../905/629114";
 import { getNodeParentPath, getNestedImageNodes, IMAGE_NAME_FORMAT, extractModifiersFromProp, getComponentInfoById } from "../figma_app/664063";
 import { lS } from "../905/296461";
 import { E$ } from "../905/209596";
@@ -175,7 +175,7 @@ let E = {
   },
   fix: (e, t) => {
     if (!t) return !1;
-    let i = _$$D2();
+    let i = createFigmaPluginScope();
     let n = i.createSection();
     for (let e of (n.name = "Invalid examples", t.exampleGuids)) {
       let t = i.getNodeById(e);

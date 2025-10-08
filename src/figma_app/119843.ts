@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { KeyboardNavigationProvider } from "../figma_app/119475";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { a3, Vm } from "../905/703676";
 import { Wm, _o, T$ } from "../905/697409";
 export function $$c0({
@@ -26,7 +26,7 @@ export function $$c0({
   }), p) ? jsx("div", {
     className: Wm,
     ref: _,
-    children: jsx(P, {
+    children: jsx(RecordingScrollContainer, {
       className: c ? _o : T$,
       children: jsx(KeyboardNavigationProvider, {
         children: jsx(a3.Provider, {

@@ -59,7 +59,7 @@ import { VZ } from "../figma_app/727192";
 import { l6, c$ } from "../905/794875";
 import { uI } from "../figma_app/598952";
 import { NONE_SYMBOL } from "../905/992467";
-import { HX, _3, zi } from "../figma_app/97042";
+import { getBackingNodeInfo, getCodeConnectForNode, createNodeKey } from "../figma_app/97042";
 import { QU, bf } from "../figma_app/856806";
 import { useModalManager } from "../905/437088";
 import { useTabManager } from "../905/56919";
@@ -980,7 +980,7 @@ function eK({
     backingComponentKey,
     backingStateGroupKey,
     backingLibraryKey
-  } = HX(p ?? "", _, null);
+  } = getBackingNodeInfo(p ?? "", _, null);
   let E = usePlaygroundSceneGraph();
   s && (_ = E);
   let I = Ur(e.template, a, s);
@@ -1241,7 +1241,7 @@ export function $$eQ0({
     loaded,
     willHaveCodeConnect,
     isComponentBrowserMapping
-  } = _3(c, o, selectedLabel, e ? _ : void 0);
+  } = getCodeConnectForNode(c, o, selectedLabel, e ? _ : void 0);
   let x = useDispatch();
   let N = useDropdownState();
   let C = useAtomWithSubscription($$e$2);
@@ -1282,7 +1282,7 @@ export function $$eQ0({
         let {
           backingNodeId,
           backingLibraryKey
-        } = HX(e.guid, r, t);
+        } = getBackingNodeInfo(e.guid, r, t);
         return {
           backingNodeId,
           nodeGuid: e.guid,
@@ -1293,19 +1293,19 @@ export function $$eQ0({
       let {
         status,
         nodesWithCodeConnect
-      } = QU(s.map(e => zi(e.backingLibraryKey, e.backingNodeId)), e);
+      } = QU(s.map(e => createNodeKey(e.backingLibraryKey, e.backingNodeId)), e);
       let d = "loaded" === status ? nodesWithCodeConnect : bf() ?? new Set();
       let {
         backingNodeId,
         backingLibraryKey
-      } = HX(n?.guid ?? "", r, t);
-      if (d.has(zi(backingLibraryKey, backingNodeId))) return null;
+      } = getBackingNodeInfo(n?.guid ?? "", r, t);
+      if (d.has(createNodeKey(backingLibraryKey, backingNodeId))) return null;
       for (let {
         nodeName,
         nodeGuid,
         backingNodeId,
         backingLibraryKey
-      } of s) if (d.has(zi(backingLibraryKey, backingNodeId))) return {
+      } of s) if (d.has(createNodeKey(backingLibraryKey, backingNodeId))) return {
         name: nodeName,
         guid: nodeGuid
       };
@@ -1383,7 +1383,7 @@ export function $$eQ0({
   let B = uQ();
   let {
     backingLibraryKey
-  } = HX(B ?? "", U, null);
+  } = getBackingNodeInfo(B ?? "", U, null);
   let H = eH(_$$l(backingLibraryKey ?? ""));
   let z = "inspect-panel" !== D.view && "inspect-parent" !== D.view && "inspect-library-upsell" !== D.view && "inspect-component-browser-mapping" !== D.view;
   switch (D.view) {

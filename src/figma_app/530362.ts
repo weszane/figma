@@ -20,7 +20,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableInput } from "../905/511649";
 import { Point } from "../905/736624";
 import { useModalConfig, PickerOptionType } from "../905/211621";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { S as _$$S } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
@@ -291,7 +291,7 @@ function ey({
     children: [jsx("p", {
       className: "edit_component_prop_picker--variantValuesSubheading--L0zoU edit_component_prop_picker--subheading--JbXut",
       children: renderI18nText("design_systems.component_properties.values")
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: "edit_component_prop_picker--variantList--K6wCE",
       ref: P,
       children: jsx(dD.Provider, {

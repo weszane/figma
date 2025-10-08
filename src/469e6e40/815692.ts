@@ -88,7 +88,7 @@ import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { q as _$$q } from '../905/749058';
 import { ErrorBoundaryCrash } from '../905/751457';
 import { s as _$$s4 } from '../905/761565';
-import { u as _$$u2 } from '../905/774364';
+import { workspaceApiService } from '../905/774364';
 import { N as _$$N2 } from '../905/809096';
 import { AutoLayout } from '../905/470281';
 import { useCurrentUserOrg } from '../905/845253';
@@ -174,7 +174,7 @@ import { createEmptyAddress } from '../figma_app/831101';
 import { TrackingProvider } from '../figma_app/831799';
 import { createPluginManifestData } from '../figma_app/844435';
 import { LoadingSpinner, LoadingOverlay } from '../figma_app/858013';
-import { Nz, Yp } from '../figma_app/870683';
+import { generateDefaultCommunityPluginUrl, extractPluginIdFromUrl } from '../figma_app/870683';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { trackOrgEventWithStore } from '../figma_app/901889';
 import { ModalView, ConfirmationModal2 } from '../figma_app/918700';
@@ -1183,7 +1183,7 @@ let tN = registerModal(({
           }), jsx(Button, {
             variant: 'primary',
             onClick: () => {
-              _$$u2.updateAiControls({
+              workspaceApiService.updateAiControls({
                 workspaceId: a.id,
                 aiControlsSetting: o
               }).then(() => {
@@ -1232,7 +1232,7 @@ let tI = registerModal(({
           }), jsx(Button, {
             variant: 'destructive',
             onClick: () => {
-              _$$u2.updateAiControls({
+              workspaceApiService.updateAiControls({
                 workspaceId: t.id,
                 aiControlsSetting: null
               }).then(() => {
@@ -1924,7 +1924,7 @@ function aj({
           className: cssBuilderInstance.flexGrow1.mr8.$,
           onChange: t,
           value: a,
-          placeholder: Nz(),
+          placeholder: generateDefaultCommunityPluginUrl(),
           recordingKey: 'devRelatedLinkUrlInput'
         }), jsx(_$$$, {
           onClick: e,
@@ -1953,7 +1953,7 @@ let aR = atom(null);
 var aO = (e => (e.AUTO_RUN = 'auto-run', e.PINNED_PLUGINS = 'pinned-plugins', e.CODEGEN = 'codegen', e))(aO || {});
 async function aL(e, t, a) {
   let n;
-  let s = Yp(e);
+  let s = extractPluginIdFromUrl(e);
   let i = {
     errorMessage: getI18nString('settings_tab.pinned_plugins_invalid_url')
   };
@@ -2166,7 +2166,7 @@ function aU({
           className: cssBuilderInstance.flexGrow1.mr8.$,
           onChange: x,
           value: _,
-          placeholder: Nz(),
+          placeholder: generateDefaultCommunityPluginUrl(),
           recordingKey: 'devRelatedLinkUrlInput'
         }), jsx(_$$$, {
           onClick: b,
@@ -3758,7 +3758,7 @@ let nL = registerModal(({
               let n = zz(formState, l);
               if (fJ(formState.maxDuration, formState.isTimeMeasuredInDays)) {
                 if (c(t, n) && a.workspaceSharedSetting !== null && a.workspaceSharedSetting?.publicLinkControlsSetting !== null) return e();
-                _$$u2.updatePublicLinkControlsSetting({
+                workspaceApiService.updatePublicLinkControlsSetting({
                   workspaceId: a.id,
                   publicLinkControlsSetting: t,
                   publicLinkControlsMaxExpiration: n
@@ -3810,7 +3810,7 @@ let nD = registerModal(({
           }), jsx(Button, {
             variant: 'destructive',
             onClick: () => {
-              _$$u2.updatePublicLinkControlsSetting({
+              workspaceApiService.updatePublicLinkControlsSetting({
                 workspaceId: e.id,
                 publicLinkControlsSetting: null,
                 publicLinkControlsMaxExpiration: null

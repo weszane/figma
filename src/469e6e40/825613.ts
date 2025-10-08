@@ -28,7 +28,7 @@ import { E as _$$E } from "../figma_app/126651";
 import { AccessLevelEnum } from "../905/557142";
 import { TeamCreationControls } from "../figma_app/482728";
 import { r as _$$r } from "../469e6e40/505264";
-import { Hj } from "../905/682977";
+import { TableRow } from "../905/682977";
 import { p3 } from "../figma_app/588582";
 import { ListFormatter } from "../figma_app/257703";
 let y = {
@@ -3870,7 +3870,7 @@ export function $$eh0(e) {
       let _ = new $$default("{now, date, ::MMMdyyy}", l).format({
         now: new Date(s.created_at)
       });
-      return jsxs(Hj, {
+      return jsxs(TableRow, {
         className: "activity_logs_table--row--4fhRo",
         useAdminTableStyles: !0,
         children: [jsxs("div", {

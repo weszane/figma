@@ -1,5 +1,20 @@
-($$n1 || ($$n1 = {})).SPACER = "spacer";
-var $$n1;
-var $$r0 = (e => (e[e.VIEW_MODE = 0] = "VIEW_MODE", e[e.SORT_MODE = 1] = "SORT_MODE", e))($$r0 || {});
-export const P = $$r0;
-export const s = $$n1;
+/**
+ * Constants for UI spacing
+ * Original: $$n1
+ */
+export const SPACING_CONSTANTS = {
+  SPACER: "spacer",
+}
+
+/**
+ * Enum for different modes
+ * Original: $$r0
+ */
+export enum SortViewMode {
+  VIEW_MODE = 0,
+  SORT_MODE = 1,
+}
+
+// Export aliases to maintain backward compatibility
+export const s = SPACING_CONSTANTS
+export const P = SortViewMode

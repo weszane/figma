@@ -1,5 +1,5 @@
 import { reportError } from '../905/11';
-import { JX } from '../905/104019';
+import { clearPlaybackHandler } from '../905/104019';
 import { ServiceCategories } from '../905/165054';
 import { delay } from '../905/236856';
 import { hM, Nq, p1, Tj, Yd } from '../905/266529';
@@ -428,10 +428,10 @@ export function $$ea2(e) {
   let n = isE2ETraffic() || i;
   if (!n) {
     if (isGlobalPluginActive()) {
-      handlePluginError().then(JX);
+      handlePluginError().then(clearPlaybackHandler);
       return;
     }
-    JX();
+    clearPlaybackHandler();
     return;
   }
   setResetGlobalPluginAPI($$ea2);
@@ -439,7 +439,7 @@ export function $$ea2(e) {
     if (isGlobalPluginActive()) return;
     n && function (e) {
       let t = new NoOpVm();
-      let i = [() => t.destroy(), () => JX, () => fullscreenValue.triggerAction('commit')];
+      let i = [() => t.destroy(), () => clearPlaybackHandler, () => fullscreenValue.triggerAction('commit')];
       let n = () => {
         let e;
         for (let t of i) {
@@ -452,7 +452,7 @@ export function $$ea2(e) {
         if (i = [], e) throw e;
       };
       let r = () => (n(), Promise.resolve());
-      JX();
+      clearPlaybackHandler();
       let a = createDefaultPluginOptions();
       createPluginInstance(t, {
         ...a,

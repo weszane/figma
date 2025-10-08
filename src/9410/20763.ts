@@ -11,13 +11,13 @@ import { globalPerfTimer } from "../905/542194";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { KeyCodes, isCommandEvent } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Fk } from "../905/125333";
+import { counterAtom } from "../905/125333";
 import { b as _$$b } from "../figma_app/556971";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { getCurrentFileType } from "../figma_app/976749";
 import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { useIsMounted } from "../figma_app/412189";
 import { KindEnum } from "../905/129884";
 import { H as _$$H } from "../9410/748457";
@@ -33,11 +33,11 @@ export function $$I0({
 }) {
   let N = useDispatch();
   let A = useIsMounted();
-  let O = Z("canvas_search_navigate");
+  let O = useNavigateToViewport("canvas_search_navigate");
   let L = useSelector(e => e.canvasSearch.scope);
   let {
     total
-  } = useAtomWithSubscription(Fk);
+  } = useAtomWithSubscription(counterAtom);
   let D = "whiteboard" === getCurrentFileType();
   let [M, P] = useState(!1);
   let F = _$$b();

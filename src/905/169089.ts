@@ -1,4 +1,4 @@
-import { A } from "../905/202425";
+import { isImageNode } from "../905/202425";
 export function $$r0(e) {
   switch (e?.input.type) {
     case "input-image":
@@ -8,7 +8,7 @@ export function $$r0(e) {
         node: void 0
       };
     case "input-selection":
-      if (A(e.input.node)) return {
+      if (isImageNode(e.input.node)) return {
         type: "image",
         name: e.input.name,
         node: void 0

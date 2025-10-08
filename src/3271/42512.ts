@@ -27,14 +27,14 @@ import { PickerOptionType } from '../905/211621';
 import { PricingOptions } from '../905/237873';
 import { N as _$$N3 } from '../905/301843';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { selectCurrentUser } from '../905/372672';
 import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
 // import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { AutoLayout } from '../905/470281';
-import { Jz } from '../905/504727';
+import { PointingDropdown } from '../905/504727';
 import { Button } from '../905/521428';
 import { s7 } from '../905/551193';
 import { selectCommonLibraryKey } from '../905/557338';
@@ -90,7 +90,7 @@ import { canAssociatedUserPurchaseResource, filterPublishedResources, filterReso
 import { R as _$$R } from '../figma_app/313269';
 import { SortOptions } from '../figma_app/324237';
 import { getPluginContent, getWidgetContent } from '../figma_app/427318';
-import { cu } from '../figma_app/439332';
+import { PaymentSection } from '../figma_app/439332';
 import { getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan, useCurrentPublicPlan } from '../figma_app/465071';
 import { $3, op as _$$op } from '../figma_app/487970';
 import { SimpleComponentType, OrgListViewType } from '../figma_app/504088';
@@ -115,7 +115,7 @@ import { useIsSelectedViewFullscreenCooper } from '../figma_app/828186';
 import { TrackingProvider } from '../figma_app/831799';
 import { comparePluginsByName, getLocalPlugins, getPendingPublisherWidgets, getPendingPublisherWidgetsForCurrentUser, getUnpublishedResources, useAllowlistedPlugins, useAllowlistedWidgets, useCanPerformAction, useDedupedRecentlyUsedPlugins, useDedupedRecentlyUsedWidgets, useExtensionAllowlist, useFilteredDedupedRecentlyUsedPlugins, useInstalledPluginsAndWidgets, useLocalPluginsExcludingWidgets, usePluginedWidgets, usePluginServerSideSearch, usePublishedPlugins, useRunnableInstalledPluginsAndWidgets, useWidgetServerSideSearch } from '../figma_app/844435';
 import { LoadingSpinner } from '../figma_app/858013';
-import { ab, ox } from '../figma_app/870683';
+import { generateAbsoluteCommunityPluginUrl, generateAbsoluteCommunityWidgetUrl } from '../figma_app/870683';
 import { Q as _$$Q } from '../figma_app/904819';
 import { zK } from '../figma_app/913823';
 import { searchStartSession, searchEndSession } from '../figma_app/925970';
@@ -432,7 +432,7 @@ function eG(e) {
   } = {};
   let O = useCallback(() => {
     l(_$$S3({
-      url: r ? ab(e.resourceId) : ox(e.resourceId),
+      url: r ? generateAbsoluteCommunityPluginUrl(e.resourceId) : generateAbsoluteCommunityWidgetUrl(e.resourceId),
       linkType: r ? 'plugin' : 'widget'
     }));
   }, [l, e.resourceId, r]);
@@ -478,7 +478,7 @@ function eG(e) {
       isMonetized: hasMonetizedResourceMetadata(resource),
       editorType: 'figma'
     },
-    children: [!d && jsx(ez, {}), jsxs(_$$P, {
+    children: [!d && jsx(ez, {}), jsxs(RecordingScrollContainer, {
       height: m,
       onScroll: U,
       onMouseDown: e => e.stopPropagation(),
@@ -497,7 +497,7 @@ function eG(e) {
             }), jsx(_$$E, {
               dragState
             })]
-          }), v && jsx(cu, {}), G && !v && !j && jsx(ec, {
+          }), v && jsx(PaymentSection, {}), G && !v && !j && jsx(ec, {
             resource
           }), jsxs('div', {
             className: isVsCodeEnvironment() ? 'detail_view--infoContainerVsCode--g6DeF detail_view--infoContainer--deaxz text--fontPos11--2LvXf text--_fontBase--QdLsd' : 'detail_view--infoContainer--deaxz text--fontPos11--2LvXf text--_fontBase--QdLsd',
@@ -805,7 +805,7 @@ function tC({
     children: [jsx(tj, {
       viewType: e,
       onBackPress: t
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       height: s,
       onMouseDown: e => e.stopPropagation(),
       onPointerDown: e => e.stopPropagation(),
@@ -1505,7 +1505,7 @@ function st(e) {
       sectionIdx: e
     }, R7.COMMUNITY)));
   }
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     innerClassName: l ? 'fd_browse_resource_modal--buzzScrollContainer--XtGn8' : '',
     height: ex,
     onScroll: eh,
@@ -1785,7 +1785,7 @@ function sd({
           })
         })
       })
-    }), h && f.current && jsx(Jz, {
+    }), h && f.current && jsx(PointingDropdown, {
       autofocusPrevElementOnEsc: !0,
       autofocusPrevElementOnSelect: !0,
       autofocusPrevElementOnTab: !1,
@@ -1840,7 +1840,7 @@ function sc(e) {
           resourceType: activeTab === SimpleComponentType.WIDGET ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN
         })
       })]
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       height: c,
       onScroll: x,
       innerClassName: s ? cssBuilderInstance.hFull.$ : '',

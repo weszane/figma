@@ -1,9 +1,24 @@
-import { C, sj } from "../905/724174";
-export function $$r0(e, t) {
-  return e === C || t && e === sj;
+import { GET_CODE, GET_METADATA } from "../905/724174"
+
+/**
+ * Checks if the given value matches GET_METADATA or optionally GET_CODE
+ * @param value - The value to check
+ * @param allowCode - Whether to also check for GET_CODE
+ * @returns True if the value matches the criteria
+ */
+export function isMetadataOrCode(value: unknown, allowCode?: boolean): boolean {
+  return value === GET_METADATA || (allowCode && value === GET_CODE)
 }
-export function $$a1(e) {
-  return e === C;
+
+/**
+ * Checks if the given value matches GET_METADATA
+ * @param value - The value to check
+ * @returns True if the value matches GET_METADATA
+ */
+export function isMetadata(value: unknown): boolean {
+  return value === GET_METADATA
 }
-export const G = $$r0;
-export const k = $$a1;
+
+// Aliases for backward compatibility
+export const G = isMetadataOrCode
+export const k = isMetadata

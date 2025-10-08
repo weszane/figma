@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
-import { wY, cU } from "../figma_app/708845";
+import { useResizeObserverRef, initialSize } from "../figma_app/708845";
 import { AlertState } from "../905/638715";
 import { usePopoverContext, PopoverProvider } from "../905/291714";
 import { T1, DH, Gu, nm, Al, Mj } from "../figma_app/90441";
@@ -29,7 +29,7 @@ export function $$g0({
   let I = useRef(null);
   let E = useRef(null);
   let x = useRef(null);
-  let S = wY(I) ?? cU;
+  let S = useResizeObserverRef(I) ?? initialSize;
   let [w, C] = useState({
     x: 0,
     y: 0,

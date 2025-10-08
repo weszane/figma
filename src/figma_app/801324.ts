@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import d from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
-import { lC, U9 } from "../905/125333";
+import { strokeColorAtom, shapeStrokeStyleAtom } from "../905/125333";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { k as _$$k2 } from "../905/545760";
@@ -343,8 +343,8 @@ let N = 2 / 38;
 let C = .5 / 38;
 let w = 8 / 38;
 function O() {
-  let e = useAtomWithSubscription(lC);
-  let t = useAtomWithSubscription(U9);
+  let e = useAtomWithSubscription(strokeColorAtom);
+  let t = useAtomWithSubscription(shapeStrokeStyleAtom);
   return useMemo(() => R(e, t), [t, e]);
 }
 let R = (e, t) => t === BorderStyle.NONE ? "#000000" : colorCSSManipulatorInstance.format(e);
@@ -382,7 +382,7 @@ function k(e, t) {
     isDragging
   } = t;
   return t ? {
-    stroke: getFeatureFlags().figjam_track_stroke_color ? R(atomStoreManager.get(lC), atomStoreManager.get(U9)) : L(e),
+    stroke: getFeatureFlags().figjam_track_stroke_color ? R(atomStoreManager.get(strokeColorAtom), atomStoreManager.get(shapeStrokeStyleAtom)) : L(e),
     strokeWidth: function (e, t, r = !1) {
       return r && (e === BorderStyle.SOLID || e === BorderStyle.DASHED) ? 4 * t : 0;
     }(styleType, svgToCanvasScale, isDragging),

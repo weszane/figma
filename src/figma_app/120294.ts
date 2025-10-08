@@ -3,7 +3,7 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { useMemoArrayCustom } from "../905/19536";
 import { useLatestRef } from "../figma_app/922077";
-import { NS, Pp, a6 } from "../905/989765";
+import { fetchVoiceUsersThunk, toggleWidget, clearActiveCall } from "../905/989765";
 import { multiplayerSessionManager } from "../905/977824";
 import { _i } from "../figma_app/578768";
 import { selectCurrentUser } from "../905/372672";
@@ -93,7 +93,7 @@ export function $$g0(e, t) {
     shallowEqual(_, n) || m(n);
   }, [u, e, d, c, p, _, E, g]);
   useEffect(() => {
-    t && _.length > 0 && r(NS({
+    t && _.length > 0 && r(fetchVoiceUsersThunk({
       fileKey: t,
       userIds: _
     }));
@@ -115,7 +115,7 @@ export function $$E3(e) {
   let r = Lk();
   let a = useSelector(t => e && e in t.voice.activeCall);
   useEffect(() => () => {
-    r && a && (t(Pp(!1)), _$$h.leave(), e && t(a6({
+    r && a && (t(toggleWidget(!1)), _$$h.leave(), e && t(clearActiveCall({
       fileKey: e
     })));
   }, [r, a, t, e]);

@@ -52,7 +52,7 @@ import { Wz, MW, ju, cM, MH, dM, fA, y6, x$ as _$$x$, oB as _$$oB, JI, Dc, Iy, M
 import { O as _$$O3 } from "../905/566074";
 import { LibraryPublishStatusEnum, LibrarySourceEnum, PrimaryWorkflowEnum, StagingStatusEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
-import { Y as _$$Y } from "../905/465068";
+import { isOrgBrowsableFile } from "../905/465068";
 import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
 import { libraryPublishingModeAtom } from "../figma_app/825489";
@@ -64,7 +64,7 @@ import { $ as _$$$ } from "../figma_app/61705";
 import { FileBrowserLocation } from "../figma_app/915202";
 import { JT as _$$JT } from "../figma_app/632248";
 import { RL, qy, B3, Ag } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { FlexBox } from "../905/222272";
 import { Panel } from "../905/236825";
 import { z as _$$z } from "../905/491916";
@@ -165,7 +165,7 @@ function ey() {
   } = t;
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let o = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.FIGMAKE,
@@ -455,7 +455,7 @@ function eq({
     if (r) return e.teams[r];
   });
   let o = isOrgOrWorkspaceContainer(i);
-  let l = o && !_$$Y(t);
+  let l = o && !isOrgBrowsableFile(t);
   let d = o && s?.org_access === FAccessLevelType.SECRET;
   if (!l && !d) return null;
   let c = jsx(TextWithTruncation, {
@@ -1324,7 +1324,7 @@ function tJ(e) {
   let eN = useCurrentPublicPlan("PublishingModalInner").unwrapOr(null);
   let eP = getParentOrgIdIfOrgLevel(eN);
   let eO = useSelector(e => e.orgById);
-  let eD = _$$Y(eg || null);
+  let eD = isOrgBrowsableFile(eg || null);
   let eL = !!em?.starter_library_src_file_key;
   let eF = useMemo(() => {
     let e = 0;

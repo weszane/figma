@@ -12,9 +12,9 @@ import { selectViewAction } from "../905/929976";
 import { d as _$$d } from "../905/531325";
 import { notificationAPI } from "../905/894881";
 import { sL } from "../figma_app/50271";
-import { vY, cz } from "../905/579526";
+import { DesktopFileSubscriptionManager, cz } from "../905/579526";
 let E = new Map();
-let y = new vY();
+let y = new DesktopFileSubscriptionManager();
 export function $$b1(e, t, r) {
   var n;
   var i;

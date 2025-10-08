@@ -17,7 +17,7 @@ import { x as _$$x2 } from '../905/346809';
 import { E as _$$E2 } from '../905/375716';
 import { IconButton } from '../905/443068';
 import { trackEventAnalytics } from '../905/449184';
-import { Cf } from '../905/504727';
+import { ConnectedPointingDropdown } from '../905/504727';
 import { k as _$$k } from '../905/582200';
 import { x as _$$x } from '../905/587214';
 import { getFeatureFlags } from '../905/601108';
@@ -764,7 +764,7 @@ function eP({
         'data-tooltip': getI18nString('design_systems.create_style.create_style'),
         'recordingKey': generateRecordingKey(m, 'addButton'),
         'children': jsx(_$$e2, {})
-      }), u && h && jsx(Cf, {
+      }), u && h && jsx(ConnectedPointingDropdown, {
         targetRect: h,
         minWidth: 128,
         disableDropdownScrollContainer: !0,

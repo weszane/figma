@@ -19,7 +19,7 @@ import { clearPendingUuid } from "../figma_app/770088";
 import { pf } from "../905/201151";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { createAttachmentsLookup, convertToFileComment } from "../905/901964";
-import { gj } from "../figma_app/12220";
+import { DEFAULT_COMMENT_READ_STATUS } from "../figma_app/12220";
 import { W9, gu, Hu } from "../figma_app/936061";
 import { N as _$$N } from "../figma_app/261650";
 import { selectCurrentUser } from "../905/372672";
@@ -194,7 +194,7 @@ class j {
       pending_mentions: _,
       uuid,
       ...(!g && {
-        all_read_at: gj.allReadAt
+        all_read_at: DEFAULT_COMMENT_READ_STATUS.allReadAt
       })
     });
     this.client.optimistically((e, t) => {
@@ -248,7 +248,7 @@ class j {
               userId: this.client.user.id,
               fileKey: this.client.fileKey,
               createdAt: e,
-              allReadAt: gj.allReadAt,
+              allReadAt: DEFAULT_COMMENT_READ_STATUS.allReadAt,
               readComments: {},
               unreadComments: {}
             }
@@ -370,7 +370,7 @@ class U {
     let r = sendWithRetry.post(`/api/file/${this.client.fileKey}/unread_comments`, {
       comment_ids: [e],
       ...(!t && {
-        all_read_at: gj.allReadAt
+        all_read_at: DEFAULT_COMMENT_READ_STATUS.allReadAt
       })
     });
     this.client.optimistically(async (t, n, i) => {
@@ -385,7 +385,7 @@ class U {
           CommentReadStatus: {
             [a.id]: {
               ...a,
-              allReadAt: gj.allReadAt,
+              allReadAt: DEFAULT_COMMENT_READ_STATUS.allReadAt,
               readComments: i,
               unreadComments: {
                 ...a.unreadComments,
@@ -400,7 +400,7 @@ class U {
             userId: i.id,
             fileKey: this.client.fileKey,
             createdAt: s,
-            allReadAt: gj.allReadAt,
+            allReadAt: DEFAULT_COMMENT_READ_STATUS.allReadAt,
             readComments: {},
             unreadComments: {
               [e]: "true"
@@ -415,7 +415,7 @@ class U {
     let e = this.client.subscription.data?.file?.currentUserCommentReadStatus;
     let t = sendWithRetry.del(`/api/file/${this.client.fileKey}/unread_comments`, {
       ...(!e && {
-        all_read_at: gj.allReadAt
+        all_read_at: DEFAULT_COMMENT_READ_STATUS.allReadAt
       })
     });
     this.client.optimistically(async (e, r, n) => {
@@ -450,7 +450,7 @@ class U {
     let r = sendWithRetry.del(`/api/file/${this.client.fileKey}/unread_comments`, {
       comment_ids: e,
       ...(!t && {
-        all_read_at: gj.allReadAt
+        all_read_at: DEFAULT_COMMENT_READ_STATUS.allReadAt
       })
     });
     this.client.optimistically(async (t, n, i) => {
@@ -477,7 +477,7 @@ class U {
             userId: i.id,
             fileKey: this.client.fileKey,
             createdAt: s,
-            allReadAt: gj.allReadAt,
+            allReadAt: DEFAULT_COMMENT_READ_STATUS.allReadAt,
             readComments: o,
             unreadComments: {}
           }

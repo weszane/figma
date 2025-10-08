@@ -2,11 +2,11 @@ import c from 'classnames';
 import { useSelector } from 'react-redux';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { oo, ul } from '../905/114390';
-import { HV } from '../905/125333';
+import { someStateAtom } from '../905/125333';
 import { Alignment, ElementTypeEnum, KindEnum, StatusEnum, PositionEnum } from '../905/129884';
 import { z } from '../905/147443';
 import { getThemePx } from '../905/149328';
-import { F as _$$F } from '../905/162860';
+import { AssetLinkType } from '../905/162860';
 import { x as _$$x } from '../905/439735';
 import { trackEventAnalytics } from '../905/449184';
 import { isSpecialRoutePath } from '../905/470286';
@@ -101,12 +101,12 @@ function W(e) {
       try {
         let e = new URL(urlString);
         r = {
-          type: e.protocol === 'mailto:' ? _$$F.MAILTO : e.protocol === 'tel:' ? _$$F.TEL : isFigmaDomain(e.hostname) || isFigmaDomain(e.host) ? isSpecialRoutePath(e.pathname) ? _$$F.FIGMA_PROTOTYPE : e.searchParams.has('version-id') ? _$$F.FIGMA_VERSION : _$$F.FIGMA_FILE : _$$F.GENERIC,
+          type: e.protocol === 'mailto:' ? AssetLinkType.MAILTO : e.protocol === 'tel:' ? AssetLinkType.TEL : isFigmaDomain(e.hostname) || isFigmaDomain(e.host) ? isSpecialRoutePath(e.pathname) ? AssetLinkType.FIGMA_PROTOTYPE : e.searchParams.has('version-id') ? AssetLinkType.FIGMA_VERSION : AssetLinkType.FIGMA_FILE : AssetLinkType.GENERIC,
           url: e
         };
       } catch (e) {
         r = {
-          type: _$$F.INVALID,
+          type: AssetLinkType.INVALID,
           urlString
         };
       }
@@ -610,7 +610,7 @@ function q(e, t) {
   let a = i?.selectedView && i.selectedView.view === 'fullscreen';
   let s = $(e, i);
   if (s !== 'return' && (s || (s = function () {
-    let e = atomStoreManager.get(HV);
+    let e = atomStoreManager.get(someStateAtom);
     if (!e) return null;
     let t = fullscreenValue.getViewportInfo();
     let r = scaleRect(t, e.bounds);

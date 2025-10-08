@@ -56,7 +56,7 @@ import { DialogTriggerButton } from '../905/976845';
 import { N as _$$N2 } from '../905/995635';
 import { A as _$$A11 } from '../2854/374356';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { efW } from '../figma_app/6204';
+import { AspectRatioLockOnboarding } from '../figma_app/6204';
 import { u as _$$u } from '../figma_app/6978';
 import { ak } from '../figma_app/8833';
 import { createLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
@@ -1530,7 +1530,7 @@ function td({
     isShowing,
     complete
   } = _$$e({
-    overlay: efW,
+    overlay: AspectRatioLockOnboarding,
     priority: _$$N.SECONDARY_MODAL
   }, [t, r]);
   !function (e) {

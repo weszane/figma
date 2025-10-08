@@ -8,17 +8,17 @@ import { reportError } from "../905/11";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
 import { BlueLoadingSpinner } from "../figma_app/858013";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AvatarSize, TeamAvatar } from "../905/590952";
 import { HAvatarType } from "../905/566881";
-import { Cy } from "../905/844322";
+import { handleMoveFiles } from "../905/844322";
 import { showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { z as _$$z } from "../905/373223";
-import { mE } from "../905/561087";
+import { moveRepositoriesThunk } from "../905/561087";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FUserRoleType, FPlanRestrictionType } from "../figma_app/191312";
 import { AccessibleFoldersV2 } from "../figma_app/43951";
@@ -261,7 +261,7 @@ export let $$en0 = registerModal(function (e) {
   let eb = (e, t) => {
     let n = draftsToMove.map(e => fileEntityDataMapper.toSinatra(e));
     let r = onMoveSuccess ? e => onMoveSuccess(e, n.length) : void 0;
-    n.length > 0 && em(Cy({
+    n.length > 0 && em(handleMoveFiles({
       files: n,
       folderName: e,
       folderId: t,
@@ -269,7 +269,7 @@ export let $$en0 = registerModal(function (e) {
       onFinishCallback: r,
       fromFileModal: !0
     }));
-    reposToMove.length > 0 && em(mE({
+    reposToMove.length > 0 && em(moveRepositoriesThunk({
       repos: reposToMove,
       folderId: t,
       folderName: e
@@ -356,7 +356,7 @@ export let $$en0 = registerModal(function (e) {
       truncateTitleText: !0,
       children: jsxs("div", {
         className: z,
-        children: [ef && jsx(_$$P, {
+        children: [ef && jsx(RecordingScrollContainer, {
           width: 480,
           ref: ec,
           children: jsxs("div", {

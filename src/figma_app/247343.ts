@@ -1,103 +1,77 @@
-import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { sendWithRetry } from "../905/910117";
-import { FlashActions } from "../905/573154";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { j } from "../905/869261";
-import { showModalHandler } from "../905/156213";
-import { FPlanRestrictionType } from "../figma_app/191312";
-import { TeamType } from "../905/814802";
-import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { putTeamUser } from "../905/584989";
-createOptimistThunk((e, {
-  members: t,
-  team: r,
-  teamUsers: n,
-  usersWithNoTeamUserIds: i = [],
-  paidStatusType: a,
-  paidStatus: p,
-  entryPoint: _,
-  showModalsBeneath: m = !1
-}) => {
-  e.dispatch(showModalHandler({
-    type: j(),
-    data: {
-      onConfirm: () => {
-        let l;
-        e.dispatch($$h0({
-          teamId: r.id,
-          teamUsers: n,
-          usersWithNoTeamUserIds: i,
-          paidStatus: p,
-          paidStatusType: a,
-          userInitiated: !0,
-          entryPoint: _
-        }));
-        let d = t.length;
-        let m = {
-          productName: a === TeamType.WHITEBOARD ? getI18nString("general.figjam") : getI18nString("general.figma_design"),
-          nameOrEmail: t[0].name || t[0].email,
-          numTeamMembers: d
-        };
-        switch (p) {
-          case FPlanRestrictionType.FULL:
-            l = getI18nString("team_user.actions.team_members_upgraded.seat_rename", m);
-            break;
-          case FPlanRestrictionType.STARTER:
-            l = getI18nString("team_user.actions.team_members_downgraded_to_viewer.seat_rename", m);
-            break;
-          case FPlanRestrictionType.RESTRICTED:
-            l = getI18nString("team_user.actions.team_members_downgraded_to_viewer_restricted.seat_rename", m);
+import { showModalHandler } from "../905/156213"
+import { VisualBellActions } from "../905/302958"
+import { getI18nString } from "../905/303541"
+import { createOptimistAction, createOptimistThunk } from "../905/350402"
+import { FlashActions } from "../905/573154"
+import { putTeamUser } from "../905/584989"
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456"
+import { TeamType } from "../905/814802"
+import { j } from "../905/869261"
+import { sendWithRetry } from "../905/910117"
+import { FPlanRestrictionType } from "../figma_app/191312"
+
+interface TeamUserUpdateDesignPaidStatusPayload {
+  teamId: string
+  teamUsers: Array<{ user_id: string }>
+  usersWithNoTeamUserIds?: string[]
+  paidStatus: string
+  paidStatusType: TeamType
+  userInitiated: boolean
+  entryPoint?: string
+}
+
+export const updateTeamUserDesignPaidStatus = createOptimistAction(
+  "TEAM_USER_UPDATE_DESIGN_PAID_STATUS",
+  async (
+    {dispatch},
+    {
+      teamId,
+      teamUsers,
+      usersWithNoTeamUserIds,
+      paidStatus,
+      paidStatusType,
+      userInitiated,
+      entryPoint,
+    }: TeamUserUpdateDesignPaidStatusPayload,
+    { optimistId },
+  ) => {
+    if (!userInitiated) {
+      return
+    }
+
+    try {
+      const userIds = teamUsers.map(user => user.user_id).concat(usersWithNoTeamUserIds || [])
+
+      const teamUserDeltas = userIds.map((userId) => {
+        const delta: any = { user_id: userId }
+        if (paidStatusType === TeamType.WHITEBOARD) {
+          delta.whiteboard_paid_status = paidStatus
         }
-        e.dispatch(VisualBellActions.enqueue({
-          type: "team-paid-status-updated",
-          message: l
-        }));
-      },
-      members: t,
-      team: r,
-      paidStatusType: a,
-      paidStatus: p
-    },
-    showModalsBeneath: m
-  }));
-});
-export let $$h0 = createOptimistAction("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", async (e, {
-  teamId: t,
-  teamUsers: r,
-  usersWithNoTeamUserIds: o,
-  paidStatus: l,
-  paidStatusType: d,
-  userInitiated: c,
-  entryPoint: p
-}, {
-  optimistId: h
-}) => {
-  if (c) {
-    let c = r.map(e => e.user_id).concat(o || []);
-    await sendWithRetry.put(`/api/teams/${t}/team_user_batch`, {
-      team_user_deltas: c.map(e => {
-        let t = {
-          user_id: e
-        };
-        d === TeamType.WHITEBOARD ? t.whiteboard_paid_status = l : t.design_paid_status = l;
-        return t;
-      }),
-      entry_point: p
-    }).then(function ({
-      data: r
-    }) {
-      e.dispatch(createOptimistCommitAction(h));
-      e.dispatch(putTeamUser({
-        teamUsers: r.meta,
-        teamId: t
-      }));
-    }).catch(function (t) {
-      e.dispatch(createOptimistRevertAction(h));
-      let r = getI18nString("team_user.actions.an_error_occurred_while_changing_a_team_member_s_billing_status");
-      e.dispatch(FlashActions.error(r));
-      console.error(t);
-    });
-  }
-}, e => `$TEAM_USER_UPDATE_DESIGN_PAID_STATUS::teamId::${e.teamId}`);
-export const m = $$h0;
+        else {
+          delta.design_paid_status = paidStatus
+        }
+        return delta
+      })
+
+      const response = await sendWithRetry.put(`/api/teams/${teamId}/team_user_batch`, {
+        team_user_deltas: teamUserDeltas,
+        entry_point: entryPoint,
+      })
+
+      dispatch(createOptimistCommitAction(optimistId))
+      dispatch(putTeamUser({
+        teamUsers: response.data.meta,
+        teamId,
+      }))
+    }
+    catch (error) {
+      dispatch(createOptimistRevertAction(optimistId))
+      const errorMessage = getI18nString("team_user.actions.an_error_occurred_while_changing_a_team_member_s_billing_status")
+      dispatch(FlashActions.error(errorMessage))
+      console.error(error)
+    }
+  },
+  payload => `$TEAM_USER_UPDATE_DESIGN_PAID_STATUS::teamId::${payload.teamId}`,
+)
+
+export const m = updateTeamUserDesignPaidStatus

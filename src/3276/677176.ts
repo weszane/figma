@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import { clampPointToBounds } from "../figma_app/819288";
 import { Point } from "../905/736624";
 import { WN } from "../figma_app/638601";
-import { moveComment, deactivateActiveComment, deactivateActiveComment } from "../figma_app/770088";
+import { moveComment, deactivateActiveComment, switchOrDeactivateCommentThread } from "../figma_app/770088";
 import { I_ } from "../905/234821";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
-import { rN } from "../figma_app/12220";
+import { isPointInSelectionRect } from "../figma_app/12220";
 import { MP } from "../figma_app/936061";
-import { Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { viewportToScreen, applyOffsetToViewport } from "../figma_app/62612";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
@@ -72,7 +72,7 @@ export function $$P0(e, t, n, s, m, u) {
     let s = useContext(viewportNavigatorContext);
     let m = I_();
     let u = _$$s();
-    let f = Z("comments_navigate");
+    let f = useNavigateToViewport("comments_navigate");
     let _ = isUserNotLoggedInAndEditorSupported();
     let v = WN();
     return useCallback(o => {
@@ -94,7 +94,7 @@ export function $$P0(e, t, n, s, m, u) {
               height: 1.15 * o.height
             });
           }
-        } else i(deactivateActiveComment({
+        } else i(switchOrDeactivateCommentThread({
           receiptsAPI: m.commentReceipts,
           viewport: s,
           thread: a,
@@ -124,7 +124,7 @@ function I(e, t) {
   return useCallback((n, o, a) => {
     let g;
     let v = viewportToScreen(a, n);
-    if (!rN(v, f())) return;
+    if (!isPointInSelectionRect(v, f())) return;
     if (u(n)) {
       r(deactivateActiveComment());
       p();

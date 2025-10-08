@@ -20,7 +20,7 @@ interface PromiseLike<T = any> {
  * @param obj - The promise-like object to process.
  * @returns The fulfilled value, throws the rejection reason, or returns an unreachable error.
  */
-export function handlePromiseStatus<T = any>(obj: PromiseLike<T>): T | Error {
+export function handlePromiseStatus<T = any>(obj: PromiseLike<T>) {
   // Original function: $$r0
   if (obj.status === 'pending') {
     logErrorAndReturn(obj)

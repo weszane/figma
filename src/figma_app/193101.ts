@@ -25,12 +25,12 @@ import { _B } from "../figma_app/760428";
 import { M0 } from "../figma_app/803054";
 import { c as _$$c } from "../figma_app/94664";
 import { sy } from "../figma_app/29089";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 import { IU } from "../figma_app/386160";
 export function $$L2() {
   let e = P();
   return useMemo(() => ({
-    type: ZU.ACTION_SUBMENU,
+    type: DMenuItemType.ACTION_SUBMENU,
     getTitle: () => getI18nString("fullscreen.properties_panel.layer_header.reset_specific_changes"),
     icon: jsx(_$$N, {}),
     recordingKey: "resetSubmenu",
@@ -46,8 +46,8 @@ let P = () => {
     for (let r in t) for (let i in t[r]) {
       let a = t[r][i];
       e.push({
-        type: ZU.CUSTOM_ACTION,
-        customActionType: Wg.STANDARD_BUTTON,
+        type: DMenuItemType.CUSTOM_ACTION,
+        customActionType: DButtonType.STANDARD_BUTTON,
         onClick: () => permissionScopeHandler.user("reset-prop-assignments", () => Fullscreen.resetComponentPropAssignmentForInstances(a.instanceGUIDs, i)),
         icon: jsx($, {}),
         getTitle: () => getI18nString("design_systems.instance_panel.reset_property_assignment", {
@@ -67,8 +67,8 @@ export function $$k0() {
     restoreType
   } = _$$$(e);
   if ("SYMBOL_AS_STATE" === restoreType) return {
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.STANDARD_BUTTON,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.STANDARD_BUTTON,
     getTitle: () => getI18nString("design_systems.instance_panel.restore_variant"),
     recordingKey: "restoreVariant",
     icon: jsx(_$$y, {}),
@@ -98,8 +98,8 @@ export function $$F1(e) {
   } = iT(s);
   let p = "ui3_toolbar_toggleInstanceOptionDropdown." + s.join("-");
   let _ = useMemo(() => ({
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.DROPDOWN_TRIGGER_BUTTON,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.DROPDOWN_TRIGGER_BUTTON,
     onClick: toggleDropdown,
     icon: jsx("span", {
       className: IU,
@@ -128,8 +128,8 @@ export function $$j3(e) {
   let u = oX(SlotSymbolType.OVERRIDDEN_SYMBOL_ID, t.current ? t : r, o);
   let _ = MB(SlotSymbolType.OVERRIDDEN_SYMBOL_ID);
   let m = useMemo(() => ({
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.DROPDOWN_TRIGGER_BUTTON,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.DROPDOWN_TRIGGER_BUTTON,
     onClick: u,
     icon: jsx(V, {}),
     getTitle: () => d,

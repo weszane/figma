@@ -2,7 +2,7 @@ import { useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
-import { gq } from "../905/125333";
+import { stylesAtom } from "../905/125333";
 import { y as _$$y } from "../figma_app/404310";
 import { v4 } from "../figma_app/655139";
 import { t } from "../905/241707";
@@ -86,7 +86,7 @@ let S = (e, t) => e.name.localeCompare(t.name);
 export function $$v2(e) {
   let {
     styles
-  } = useAtomWithSubscription(gq);
+  } = useAtomWithSubscription(stylesAtom);
   let r = useSelector(e => e.library);
   let n = styles.map(e => {
     let t = getStyleSubscriptionInfo(e.key, e.guids, r);

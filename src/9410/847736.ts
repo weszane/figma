@@ -5,7 +5,7 @@ import { J3, JU, wv, kN, Gi, GR, e2 as _$$e, li } from "../figma_app/622574";
 import { bY, Vf, q7, oQ, V6, i6, ux, VZ, Ei, OR, xw } from "../figma_app/60023";
 import d from "classnames";
 import { buildUploadUrl, isLocalCluster } from "../figma_app/169182";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText, getTranslatedDynamicContent } from "../905/303541";
 import { selectCurrentFile, useCurrentFileKey, openFileKeyAtom, openFileTeamIdAtom } from "../figma_app/516028";
@@ -390,7 +390,7 @@ function eo({
     }), jsx("div", {
       children: renderI18nText("slides.templates.search.empty.tip")
     })]
-  }) : jsx(_$$P, {
+  }) : jsx(RecordingScrollContainer, {
     className: cssBuilderInstance.px8.hFull.$,
     onScroll: onShowSeparatorScroll,
     children: jsxs("div", {
@@ -432,7 +432,7 @@ function ed({
     start
   } = JY();
   let E = Xr(bY);
-  return (useEffect(() => () => resetScrollTop([Vf.ALL]), [resetScrollTop]), loading || y && !b) ? jsx(kM, {}) : jsxs(_$$P, {
+  return (useEffect(() => () => resetScrollTop([Vf.ALL]), [resetScrollTop]), loading || y && !b) ? jsx(kM, {}) : jsxs(RecordingScrollContainer, {
     className: cssBuilderInstance.px8.hFull.$,
     scrollContainerRef: scrollRef,
     initialScrollTop: scrollPosition,
@@ -552,7 +552,7 @@ function ef({
     children: [jsx(em, {
       title: getTranslatedDynamicContent(t.i18n_meta.title, t.title),
       onClick: d
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.px8.pt16.hFull.$,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
@@ -1344,7 +1344,7 @@ function tm({
     children: [jsx(em, {
       title: e.name,
       onClick: S
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.px8.hFull.$,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
@@ -1420,7 +1420,7 @@ function t_({
           type: Vf.ALL
         });
       }
-    }), templatesByTeam ? jsx(_$$P, {
+    }), templatesByTeam ? jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.p8.hFull.$,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
@@ -1510,7 +1510,7 @@ function tT({
       debouncedSearchQuery: t,
       status: e
     })
-  }) : jsx(_$$P, {
+  }) : jsx(RecordingScrollContainer, {
     className: c()(cssBuilderInstance.px8.hFull.$),
     onScroll: (e, t) => {
       onScroll(e, t);
@@ -1762,7 +1762,7 @@ function tA({
   onScroll: i
 }) {
   let r = _$$eE(FDocumentType.Slides);
-  return 0 === r.length ? null : jsx(_$$P, {
+  return 0 === r.length ? null : jsx(RecordingScrollContainer, {
     className: cssBuilderInstance.px8.hFull.$,
     scrollContainerRef: e,
     initialScrollTop: t,
@@ -1792,7 +1792,7 @@ function tO({
       title: t,
       onClick: i,
       showSeparator: !1
-    }), templatesByTeam ? jsx(_$$P, {
+    }), templatesByTeam ? jsx(RecordingScrollContainer, {
       scrollContainerRef: l,
       className: cssBuilderInstance.px8.hFull.$,
       children: jsx(tg, {
@@ -1843,7 +1843,7 @@ function tL({
     displayName: e.name,
     onBackClick: () => E(null)
   }) : (x ? isLoading : isLoadingTeamTemplates) ? jsx(kM, {}) : jsx(Fragment, {
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.px8.hFull.$,
       scrollContainerRef: t,
       initialScrollTop: i,
@@ -1875,7 +1875,7 @@ function tR({
   }] = setupResourceAtomHandler(_$$_2());
   if ("loading" === a) return jsx(kM, {});
   let s = e.id;
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     className: cssBuilderInstance.px8.hFull.$,
     scrollContainerRef: t,
     initialScrollTop: i,

@@ -37,7 +37,7 @@ import { MenuSeparator } from "../figma_app/860955";
 import { p as _$$p2 } from "../469e6e40/348454";
 import { O as _$$O2 } from "../905/142086";
 import { Fh } from "../905/191601";
-import { W6, b4 } from "../figma_app/937413";
+import { duplicateSingleFileToDrafts, restoreTrashedFilesAndRepos } from "../figma_app/937413";
 import { IU } from "../figma_app/421401";
 import { b as _$$b } from "../469e6e40/978552";
 import { oi } from "../figma_app/527041";
@@ -119,15 +119,15 @@ function V(e) {
     }));
   }, [o, r, a]);
   let m = useCallback(() => {
-    a(W6({
+    a(duplicateSingleFileToDrafts({
       file: t
     }));
   }, [t, a]);
   let p = useCallback(() => {
-    o ? a(b4({
+    o ? a(restoreTrashedFilesAndRepos({
       fileKeys: [],
       repoIds: [o.id]
-    })) : a(b4({
+    })) : a(restoreTrashedFilesAndRepos({
       fileKeys: [r.key],
       repoIds: []
     }));
@@ -182,7 +182,7 @@ function H({
     }), a && jsxs(Fragment, {
       children: [jsx(IU, {
         onClick: () => {
-          t(W6({
+          t(duplicateSingleFileToDrafts({
             file: e[0]
           }));
         },
@@ -192,7 +192,7 @@ function H({
         onClick: () => {
           let a = e.filter(e => !e.repo).map(e => e.key);
           let n = e.filter(e => !!e.repo).map(e => e.repo.id);
-          t(b4({
+          t(restoreTrashedFilesAndRepos({
             fileKeys: a,
             repoIds: n
           }));

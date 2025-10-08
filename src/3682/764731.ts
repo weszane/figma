@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useMemo, Component, memo, useCallback, useId } from "react";
 import { useSelector, useDispatch, connect, useStore } from "react-redux";
-import { yF, oI, rO, cb, Pp, Zq, a6 } from "../905/989765";
+import { toggleWidgetParticipantList, leaveActiveCall, joinActiveCall, setUserIdsInCallFromProvider, toggleWidget, setActiveCall, clearActiveCall } from "../905/989765";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { AM, eo as _$$eo, qr } from "../figma_app/637336";
@@ -48,7 +48,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { isEmptyObject } from "../figma_app/493477";
 import { e as _$$e } from "../905/483726";
 import { formatCount } from "../figma_app/930338";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { Q as _$$Q } from "../3276/336897";
 import { vQ, sK } from "../9410/124657";
 import { h as _$$h } from "../figma_app/275739";
@@ -67,7 +67,7 @@ import { CloseButton } from "../905/17223";
 import { LoadingSpinner } from "../figma_app/858013";
 import { VisualBellActions } from "../905/302958";
 import { TrackedAnchor } from "../figma_app/831799";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { l6, c$ } from "../905/794875";
 import { aHA } from "../figma_app/27776";
 var p = u;
@@ -738,8 +738,8 @@ let eP = connect(e => ({
           call: e.call
         }),
         hideToggleOption: usersInCall.length < 2,
-        onToggle: e => l(yF(!e)),
-        children: jsx(_$$P, {
+        onToggle: e => l(toggleWidgetParticipantList(!e)),
+        children: jsx(RecordingScrollContainer, {
           className: YM,
           children: usersInCall.map(e => jsx(_$$Q, {
             callMetadata,
@@ -929,7 +929,7 @@ function e6(e) {
       className: "device_controls--divider--Z8rM-"
     }), !WO() && jsx(tt, {}), WO() && jsx(te, {})]
   });
-  return jsxs(Cf, {
+  return jsxs(ConnectedPointingDropdown, {
     className: "device_controls--pointingDropdown--hSJ1h",
     targetRect,
     minWidth: e7,
@@ -1082,7 +1082,7 @@ function tr(e) {
     switch (callEvent) {
       case $E.DISCONNECTED:
         q && (tn?.play(), Q(!1));
-        ed(oI({
+        ed(leaveActiveCall({
           fileKey
         }));
         break;
@@ -1104,7 +1104,7 @@ function tr(e) {
       case $E.CONNECTED:
       case $E.CONNECTED_WITH_MIC_DISABLED:
         K && (setTimeout(() => ti?.play(), 400), Y(!1));
-        ed(rO({
+        ed(joinActiveCall({
           fileKey
         }));
         break;
@@ -1208,7 +1208,7 @@ remote: ${s}`);
     em(!1);
   };
   function eN(e) {
-    ed(cb(e));
+    ed(setUserIdsInCallFromProvider(e));
   }
   _$$N({
     isVisible: V
@@ -1227,12 +1227,12 @@ remote: ${s}`);
     Q(!0);
     try {
       await Promise.all([ev.out(), call.leave()]);
-      ed(oI({
+      ed(leaveActiveCall({
         fileKey
       }));
       tn?.play();
       en && ed(hideDropdownAction());
-      ed(Pp(!1));
+      ed(toggleWidget(!1));
     } catch {
       ev.$$in();
       callEventCallback($E.ERROR_ON_LEAVE);
@@ -1380,7 +1380,7 @@ export function $$t_0() {
   let [I, g] = useState();
   let [f, O] = useState();
   let w = useCallback((e, t) => {
-    GA.has(e) && N(Pp(!0));
+    GA.has(e) && N(toggleWidget(!0));
     t && O(t);
     g(e);
   }, [N]);
@@ -1391,9 +1391,9 @@ export function $$t_0() {
   }, [b, x, h]), useEffect(() => {
     u || (O(void 0), g(void 0));
   }, [u]), useEffect(() => {
-    t && !p && m > 0 ? N(Zq({
+    t && !p && m > 0 ? N(setActiveCall({
       fileKey: t
-    })) : t && p && !v && 0 === m && N(a6({
+    })) : t && p && !v && 0 === m && N(clearActiveCall({
       fileKey: t
     }));
   }, [m, t, p, v, N]), e && t && a) ? p && !u ? jsx(j, {

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import a from "classnames";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { useScrollHandler } from "../905/825399";
 var s = a;
 export function $$d0(e) {
@@ -18,7 +18,7 @@ export function $$d0(e) {
     handleScroll(e);
     onScroll?.(e, i);
   }, [handleScroll, onScroll]);
-  return jsx(P, {
+  return jsx(RecordingScrollContainer, {
     ...a,
     onScroll: u,
     className: s()(e.className, "scroll_container_with_border--container--bOpnt", {

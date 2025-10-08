@@ -23,20 +23,20 @@ import { FormattedInputVariant3 } from '../905/203369';
 import { L as _$$L3 } from '../905/210923';
 import { D as _$$D, J as _$$J } from '../905/225412';
 import { Yl } from '../905/232641';
-import { _U, EU, KV } from '../905/255097';
+import { isSwatchSetId, CURRENT_PAGE_SWATCH_SET_ID, LOCAL_SWATCH_SET_ID } from '../905/255097';
 import { n as _$$n } from '../905/264891';
 import { HiddenLabel } from '../905/270045';
 import { o as _$$o } from '../905/298519';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { l as _$$l } from '../905/331642';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { UpgradeAction } from '../905/370443';
 import { k as _$$k3 } from '../905/376839';
 import { OnboardingModal } from '../905/425180';
 import { bR, Do, PC, UV } from '../905/438367';
 import { A as _$$A } from '../905/442873';
 import { IconButton } from '../905/443068';
-import { E as _$$E2 } from '../905/453826';
+import { useEventForwarder } from '../905/453826';
 import { O as _$$O } from '../905/487602';
 import { bL as _$$bL, c$ as _$$c$, l9, mc, wv } from '../905/493196';
 import { handleAtomEvent } from '../905/502364';
@@ -85,7 +85,7 @@ import { b as _$$b2 } from '../905/946806';
 import { calculatePickerPositionLeft } from '../905/959568';
 import { colorCSSManipulatorInstance } from '../905/989956';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { Nlr } from '../figma_app/6204';
+import { VideoFillCallout } from '../figma_app/6204';
 import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { teamLibraryCache } from '../figma_app/80990';
@@ -152,7 +152,7 @@ function ey({
     complete,
     uniqueId
   } = _$$e3({
-    overlay: Nlr,
+    overlay: VideoFillCallout,
     priority: _$$N.DEFAULT_MODAL
   }, [r]);
   useSingleEffect(() => {
@@ -160,7 +160,7 @@ function ey({
       canShow: e => t && !!i && !e
     });
   });
-  _$$E2(uniqueId, ef, () => {
+  useEventForwarder(uniqueId, ef, () => {
     isShowing && complete();
   });
   return jsx(OnboardingModal, {
@@ -569,9 +569,9 @@ function e6({
   let u = useMemo(() => ({
     format: e => {
       switch (e) {
-        case EU:
+        case CURRENT_PAGE_SWATCH_SET_ID:
           return getI18nString('fullscreen.properties_panel.current_page_colors');
-        case KV:
+        case LOCAL_SWATCH_SET_ID:
           return getI18nString('fullscreen.properties_panel.local_assets');
         default:
           {
@@ -581,7 +581,7 @@ function e6({
       }
     }
   }), [i]);
-  let p = !e.every(_U);
+  let p = !e.every(isSwatchSetId);
   let m = useCallback(e => {
     let t = u.format(e).replace(/\W/g, '');
     return c ? jsx(_$$c$, {
@@ -592,8 +592,8 @@ function e6({
       recordingKey: generateRecordingKey(s, t)
     }, e);
   }, [u, s, c]);
-  let g = useMemo(() => e.filter(_U).map(m), [m, e]);
-  let f = useMemo(() => e.filter(e => !_U(e)).map(m), [m, e]);
+  let g = useMemo(() => e.filter(isSwatchSetId).map(m), [m, e]);
+  let f = useMemo(() => e.filter(e => !isSwatchSetId(e)).map(m), [m, e]);
   return c ? jsxs(_$$bL, {
     value: t,
     onChange: o,
@@ -630,7 +630,7 @@ function e7({
   let l = bR({
     subscribedLibraries: s
   });
-  let d = i ? [EU] : l;
+  let d = i ? [CURRENT_PAGE_SWATCH_SET_ID] : l;
   let [c, u] = useSessionStorageSync('library-color-swatch-selected-swatch-set-id', d[0], {
     parse: e => d.find(t => t === e) ? e : void 0,
     stringify: e => e
@@ -689,9 +689,9 @@ function e8({
   let o = a.status === 'loading' || s.isLoading;
   let l = function () {
     switch (e) {
-      case EU:
+      case CURRENT_PAGE_SWATCH_SET_ID:
         return i;
-      case KV:
+      case LOCAL_SWATCH_SET_ID:
         return n;
       default:
         return a.data ?? [];
@@ -780,7 +780,7 @@ function e9({
         onChange: l,
         recordingKey: generateRecordingKey(o, 'swatchSetSelect')
       })
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: _()('library_color_swatch--swatchScrollContainer--im6kP', {
         'library_color_swatch--swatchScrollContainerNewUI--w7-PQ': m
       }),
@@ -1166,7 +1166,7 @@ function tN({
     gradientPaint: H,
     onChange: i
   });
-  return jsxs(_$$P, {
+  return jsxs(RecordingScrollContainer, {
     maxHeight: 500,
     children: [jsxs(KeyboardReceiver, {
       className: 'gradient_editor--root--YXS31',

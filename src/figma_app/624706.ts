@@ -41,7 +41,7 @@ import { KeyboardShortcut } from "../figma_app/420927";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nState } from "../figma_app/363242";
 import { setKeyboardShortcutPanelTab } from "../905/26824";
-import { yJ } from "../figma_app/24841";
+import { putUserAction } from "../figma_app/24841";
 import { postUserFlag } from "../905/985254";
 import { isTryWhiteboardFile } from "../figma_app/976749";
 import { handleAccessibilityKeyboardEvents } from "../figma_app/290668";
@@ -61,13 +61,13 @@ import { A5, ci } from "../figma_app/274104";
 import { KeyboardFocusManager } from "../905/826900";
 import { kA, IO } from "../905/962318";
 import { H as _$$H2 } from "../figma_app/731109";
-import { E as _$$E2 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily, userFlagAtomFamily, userFlagsAtom } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { J_ } from "../figma_app/598952";
-import { lk2, Yd_, FR6, nRk } from "../figma_app/6204";
+import { BugReporterMachine, CollectiveUpsellOverlay, KoreanReportTranslationIssueCallout, GuestLanguagePickerOverlay } from "../figma_app/6204";
 import { jH, cl, bb } from "../figma_app/926950";
 import { qf } from "../905/817095";
 import { textDisplayConfig } from "../905/687265";
@@ -107,7 +107,7 @@ import { defaultLanguage, languageCodes } from "../905/816253";
 import { T as _$$T, e as _$$e3 } from "../905/949616";
 import { getCookieManager } from "../905/423575";
 import { j as _$$j } from "../905/270643";
-import { D as _$$D } from "../905/629114";
+import { createFigmaPluginScope } from "../905/629114";
 import { Fullscreen, ColorConversionEnum } from "../figma_app/763686";
 import { Fb } from "../figma_app/819458";
 import { A as _$$A7 } from "../svg/728314";
@@ -256,7 +256,7 @@ function eL() {
   let e = useDispatch();
   let t = useAtomWithSubscription(eR);
   let r = _$$e({
-    overlay: lk2,
+    overlay: BugReporterMachine,
     priority: _$$N.SECONDARY_MODAL
   }, [t]);
   let s = useSelector(e => e.user?.created_at);
@@ -264,7 +264,7 @@ function eL() {
   let l = !!s && dayjs().diff(dayjs(s), "days") >= 14;
   let d = !!o && o.includes("@figma.com");
   let c = useAtomWithSubscription(jH);
-  return (_$$E2(r.uniqueId, "Fullscreen Loaded", () => {
+  return (useEventForwarder(r.uniqueId, "Fullscreen Loaded", () => {
     l && d && r.show({
       canShow: e => !e,
       onShow: () => e(postUserFlag({
@@ -747,7 +747,7 @@ function tc({
     flagNumberVal
   } = eH(...WB);
   let _ = _$$e({
-    overlay: Yd_,
+    overlay: CollectiveUpsellOverlay,
     priority: _$$N.SECONDARY_MODAL
   }, [s, o]);
   useSingleEffect(() => {
@@ -758,7 +758,7 @@ function tc({
       }
     });
   });
-  _$$E2(_.uniqueId, "Reset Onboarding", () => {
+  useEventForwarder(_.uniqueId, "Reset Onboarding", () => {
     let e = to.reduce((e, t) => ({
       ...e,
       [t]: !1
@@ -2218,7 +2218,7 @@ function tR({
     isShowing,
     complete
   } = _$$e({
-    overlay: FR6,
+    overlay: KoreanReportTranslationIssueCallout,
     priority: _$$N.SECONDARY_MODAL
   });
   useSingleEffect(() => {
@@ -2254,7 +2254,7 @@ function tM({
     isShowing,
     complete
   } = _$$e({
-    overlay: nRk,
+    overlay: GuestLanguagePickerOverlay,
     priority: _$$N.SECONDARY_MODAL
   });
   useSingleEffect(() => {
@@ -2685,7 +2685,7 @@ async function t0(e, t, r) {
 }
 let t1 = async (e, t) => await t0(e, t, null);
 async function t2(e) {
-  let t = _$$D();
+  let t = createFigmaPluginScope();
   let r = await t1(t, e);
   t.currentPage.appendChild(r);
   return r;
@@ -2864,7 +2864,7 @@ let t7 = class e extends RecordingPureComponent {
     };
     this.onClickResetNux = () => {
       if (!getInitialOptions().user_data) return !1;
-      this.props.dispatch(yJ({
+      this.props.dispatch(putUserAction({
         user: {
           id: getInitialOptions().user_data.id,
           email_validated_at: new Date().toISOString(),

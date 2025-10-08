@@ -37,7 +37,7 @@ import { zG } from "../figma_app/47958";
 import { b9 } from "../figma_app/765161";
 import { Point } from "../905/736624";
 import { k6, be, WX, PK, LL, vv, C7 } from "../figma_app/565197";
-import { n as _$$n } from "../905/155450";
+import { reactionWheelItems } from "../905/155450";
 import { lJ, hf } from "../figma_app/407856";
 import { stampPaletteZ } from "../figma_app/786175";
 import { A as _$$A } from "../svg/382200";
@@ -814,10 +814,10 @@ function eT() {
     position: r + 1,
     image: t,
     i18nName: () => getI18nString("fullscreen.stamp_wheel.thumbs_up")
-  })) : _$$n, []);
+  })) : reactionWheelItems, []);
   let a = useMemo(() => hf(e.voteStamp), [e.voteStamp]);
   useEffect(() => {
-    C7(_$$n, t);
+    C7(reactionWheelItems, t);
   }, [t]);
   useEffect(() => {
     C7(r, t);

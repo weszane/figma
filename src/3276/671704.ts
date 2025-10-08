@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/58247";
-import { Ag } from "../905/235578";
+import { ExtensionSource } from "../905/235578";
 import { C } from "../figma_app/959385";
 export function $$c0({
   isWidget: e,
@@ -17,7 +17,7 @@ export function $$c0({
       source: "extension-requires-payment-error"
     }, createElement(C, {
       extensionId: t,
-      extensionType: Ag.COMMUNITY
+      extensionType: ExtensionSource.COMMUNITY
     }));
   }, [t, e]);
   return useCallback(() => {

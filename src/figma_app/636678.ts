@@ -23,7 +23,7 @@ import { yt } from "../figma_app/292212";
 import { oX, MB } from "../figma_app/930914";
 import { createContainingStateOrSymbolSelector } from "../figma_app/505098";
 import { A as _$$A2 } from "../figma_app/78608";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 export function $$w0(e) {
   let t = yt();
   let r = function (e, t) {
@@ -53,8 +53,8 @@ export function $$w0(e) {
         return !0;
       });
       let c = useMemo(() => ({
-        type: ZU.CUSTOM_ACTION,
-        customActionType: Wg.DROPDOWN_TRIGGER_BUTTON,
+        type: DMenuItemType.CUSTOM_ACTION,
+        customActionType: DButtonType.DROPDOWN_TRIGGER_BUTTON,
         onClick: o,
         icon: jsx(_$$u, {}),
         getTitle: () => a,
@@ -94,8 +94,8 @@ export function $$w0(e) {
         d ? s(hidePickerThunk()) : p();
       }, [s, d, p]);
       let y = useMemo(() => ({
-        type: ZU.CUSTOM_ACTION,
-        customActionType: Wg.DIALOG_TRIGGER_BUTTON,
+        type: DMenuItemType.CUSTOM_ACTION,
+        customActionType: DButtonType.DIALOG_TRIGGER_BUTTON,
         onClick: f,
         icon: jsx(_$$A, {}),
         getTitle: () => getI18nString("fullscreen.properties_panel.section_slot.edit_slot_property"),
@@ -125,8 +125,8 @@ export function $$w0(e) {
       });
       return useMemo(() => {
         if (getFeatureFlags().dse_slots && void 0 !== e && t && r) return {
-          type: ZU.CUSTOM_ACTION,
-          customActionType: Wg.STANDARD_BUTTON,
+          type: DMenuItemType.CUSTOM_ACTION,
+          customActionType: DButtonType.STANDARD_BUTTON,
           onClick: () => {
             permissionScopeHandler.user("reset-slot-assignment", () => {
               Fullscreen?.resetComponentPropAssignmentForInstances([r], e.explicitDefID);
@@ -160,8 +160,8 @@ function O({
   });
   return useMemo(() => {
     if (getFeatureFlags().dse_slots && e && r) return {
-      type: ZU.CUSTOM_ACTION,
-      customActionType: Wg.STANDARD_BUTTON,
+      type: DMenuItemType.CUSTOM_ACTION,
+      customActionType: DButtonType.STANDARD_BUTTON,
       onClick: () => {
         VU.get("empty-slot-contents", "toolbar")?.();
       },

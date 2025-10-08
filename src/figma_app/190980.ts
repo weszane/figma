@@ -27,13 +27,13 @@ export function getCurrentDocumentType(): FDocumentType | null {
 }
 
 // Storage keys for recent items
-const RECENT_WIDGETS_FIGJAM = 'recent-widgets-figjam' // $$p12
-const RECENT_PLUGINS_FIGJAM = 'recent-plugins-figjam' // $$_2
-const RECENT_WIDGETS_FIGMA_DESIGN = 'recent-widgets-figma-design' // $$h7
-const RECENT_PLUGINS_FIGMA_DESIGN = 'recent-plugins-figma-design' // $$m11
-const RECENT_PLUGINS_SLIDES = 'recent-plugins-slides' // $$g8
-const RECENT_FACE_STAMPS_FIGJAM = 'recent-face-stamps-figjam' // $$f3
-const RECENT_WHITEBOARD_TOOLS_FIGJAM = 'recent-whiteboard-tools-figjam' // $$E0
+export const RECENT_WIDGETS_FIGJAM = 'recent-widgets-figjam' // $$p12
+export const RECENT_PLUGINS_FIGJAM = 'recent-plugins-figjam' // $$_2
+export const RECENT_WIDGETS_FIGMA_DESIGN = 'recent-widgets-figma-design' // $$h7
+export const RECENT_PLUGINS_FIGMA_DESIGN = 'recent-plugins-figma-design' // $$m11
+export const RECENT_PLUGINS_SLIDES = 'recent-plugins-slides' // $$g8
+export const RECENT_FACE_STAMPS_FIGJAM = 'recent-face-stamps-figjam' // $$f3
+export const RECENT_WHITEBOARD_TOOLS_FIGJAM = 'recent-whiteboard-tools-figjam' // $$E0
 
 /**
  * Returns the localStorage key for recent items based on document and hub type.

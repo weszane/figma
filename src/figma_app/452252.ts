@@ -18,7 +18,7 @@ import { b as _$$b } from "../figma_app/47801";
 import { W as _$$W } from "../905/95038";
 import { renameFileOptimistic } from "../figma_app/78808";
 import { beginRenaming, stopRenaming } from "../figma_app/91703";
-import { NN } from "../905/466026";
+import { setSelectedBranchOptimist } from "../905/466026";
 import { autosaveFileInfoAtom, renameAutosaveFileMutation, OfflineFileType } from "../figma_app/840917";
 import { getDisplayNameAlt } from "../905/760074";
 import { setEditorDocumentTitle } from "../905/697795";
@@ -122,7 +122,7 @@ export function $$K5(e) {
     ...e,
     name: getDisplayNameAlt(e.repo),
     onRename: t => {
-      e.dispatch(NN({
+      e.dispatch(setSelectedBranchOptimist({
         repo: e.repo,
         name: t
       }));

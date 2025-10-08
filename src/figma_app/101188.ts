@@ -9,12 +9,12 @@ import { RI, _S } from "../905/315794";
 import { S as _$$S } from "../figma_app/11182";
 import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { GR } from "../figma_app/330108";
+import { createThrottledTeamJoin } from "../figma_app/330108";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { adminPermissionConfig } from "../905/654645";
 import { setupShadowRead } from "../figma_app/391338";
 import { FAccessLevelType } from "../figma_app/191312";
-import { YP, gO } from "../figma_app/88768";
+import { getTeamActionType, TeamActionType } from "../figma_app/88768";
 import { getPermissionsState, canAdminOrg } from "../figma_app/642025";
 import { AccessLevelEnum } from "../905/557142";
 import { getTeamUrl } from "../figma_app/630077";
@@ -44,8 +44,8 @@ export function $$C0() {
         }
       }));
     };
-    let O = GR(n, C.id);
-    let R = GR(n, C.id, AccessLevelEnum.ADMIN);
+    let O = createThrottledTeamJoin(n, C.id);
+    let R = createThrottledTeamJoin(n, C.id, AccessLevelEnum.ADMIN);
     let L = e => {
       n(showModalHandler({
         type: _$$p,
@@ -140,8 +140,8 @@ export function $$C0() {
         displayText: getI18nString("team_view.toolbar.leave_team"),
         onClick: w
       });else if (C.org_id) {
-        let i = YP(C, r[C.id], e, M);
-        null != i && i !== gO.CLICK_JOIN && t.push({
+        let i = getTeamActionType(C, r[C.id], e, M);
+        null != i && i !== TeamActionType.CLICK_JOIN && t.push({
           displayText: RI({
             type: i,
             overrideLeaveText: getI18nString("teams_table.leave_team")

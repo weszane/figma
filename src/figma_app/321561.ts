@@ -12,7 +12,7 @@ import { Gt } from "../figma_app/248118";
 import { useCanRunExtensions } from "../figma_app/844435";
 import { checkResourceEligibility, checkResourceSubscriptionActive, isResourcePaymentFailed, initiateResourcePurchaseFlow } from "../figma_app/86989";
 import { getCurrentWorkspaceInfo } from "../figma_app/684168";
-import { j } from "../905/813868";
+import { createWidget } from "../905/813868";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
@@ -24,7 +24,7 @@ import { Kp } from "../figma_app/189990";
 import { q8, U4, S3 } from "../figma_app/254872";
 import { ExtensionRequestModal } from "../905/404161";
 import { t as _$$t2 } from "../figma_app/198180";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 export function $$O0({
   augmentedExtension: e,
   submenuRef: t,
@@ -39,7 +39,7 @@ export function $$O0({
   let D = useDispatch();
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let M = checkResourceEligibility(publishedExtension);
   let F = checkResourceSubscriptionActive(publishedExtension);
   let j = F && isResourcePaymentFailed(publishedExtension);
@@ -127,7 +127,7 @@ export function $$O0({
   }, [M, F, publishedExtension, B, j, G, canRun, canRequest, ee, Z, X, $, Y]);
 }
 let R = e => {
-  j({
+  createWidget({
     pluginID: e.plugin_id,
     widgetName: e.name,
     pluginVersionID: e.id,

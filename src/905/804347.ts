@@ -23,12 +23,12 @@ import { FolderSortKey } from '../905/316062';
 import { g as _$$g } from '../905/345380';
 import { A as _$$A } from '../905/351112';
 import { getUserId, selectCurrentUser } from '../905/372672';
-import { g8 } from '../905/378567';
+import { SearchResult } from '../905/378567';
 import { L as _$$L } from '../905/406205';
 import { Link } from '../905/438674';
 import { analyticsEventManager } from '../905/449184';
 import { q0 } from '../905/546357';
-import { Ru } from '../905/572991';
+import { searchResultRendererModule } from '../905/572991';
 import { SearchAnalytics } from '../905/574958';
 import { UserAvatar, AvatarSize } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
@@ -47,7 +47,7 @@ import { selectViewAction } from '../905/929976';
 import { v as _$$v } from '../905/939922';
 import { fileEntityDataMapper } from '../905/943101';
 import { d as _$$d2 } from '../905/958822';
-import { h as _$$h } from '../905/971482';
+import { createViewModeRenderer } from '../905/971482';
 import { sortStateThunk } from '../905/977218';
 import { RelativeTimeDisplay } from '../905/986103';
 import { resourceUtils } from '../905/989992';
@@ -57,7 +57,7 @@ import { copyLinkThunk } from '../figma_app/11182';
 import { ProjectTilePermissions, TeamOrphanedStatus, TeamTilePermissions } from '../figma_app/43951';
 import { mapFileTypeToEditorType } from '../figma_app/53721';
 import { filePutAction } from '../figma_app/78808';
-import { p9 } from '../figma_app/88768';
+import { generateJoinTeamCacheKey } from '../figma_app/88768';
 import { ProjectSortField, PublicModelType, TeamSortField } from '../figma_app/162807';
 import { getInitialOptions } from '../figma_app/169182';
 import { NU } from '../figma_app/204891';
@@ -65,7 +65,7 @@ import { selectPermissionsState } from '../figma_app/212807';
 import { vt } from '../figma_app/231614';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { trackTeamEvent } from '../figma_app/314264';
-import { GR, hZ } from '../figma_app/330108';
+import { createThrottledTeamJoin, setDiscoverableTeams } from '../figma_app/330108';
 import { p as _$$p3 } from '../figma_app/353099';
 import { getSelectedView } from '../figma_app/386952';
 import { debug } from '../figma_app/465776';
@@ -109,7 +109,7 @@ function y(e) {
     useLGPerms: e.useLGPerms
   });
 }
-let b = _$$h({
+let b = createViewModeRenderer({
   [ViewMode.GRID](e) {
     let t = e.searchResult.model;
     let i = t.id;
@@ -154,7 +154,7 @@ function z(e, t) {
     }
   }), [i, e, t]);
 }
-let H = _$$h({
+let H = createViewModeRenderer({
   [ViewMode.GRID](e) {
     let [t, i] = useState(!1);
     let a = getDesignFileUrlWithOptions(e.searchResult.model);
@@ -372,7 +372,7 @@ function em(e, t) {
     onClick: t ? () => {
       i(selectTeamView(e));
     } : () => {},
-    onJoin: GR(i, e),
+    onJoin: createThrottledTeamJoin(i, e),
     onLeave: () => {
       i(showModalHandler({
         type: _$$p2,
@@ -383,7 +383,7 @@ function em(e, t) {
     }
   }), [i, e, t]);
 }
-let eh = _$$h({
+let eh = createViewModeRenderer({
   [ViewMode.GRID](e) {
     let t = e.searchResult.model;
     let {
@@ -393,7 +393,7 @@ let eh = _$$h({
     } = function (e) {
       let t = e.id;
       let i = useSelector(e => e.loadingState);
-      let n = useMemo(() => isLoading(i, p9(t)), [i, t]);
+      let n = useMemo(() => isLoading(i, generateJoinTeamCacheKey(t)), [i, t]);
       let s = selectPermissionsState();
       let o = hasViewerRoleAccessOnTeam(e.id, s);
       return {
@@ -910,7 +910,7 @@ function te(e) {
       });
     case PublicModelType.PUBLIC_PLUGINS:
     case PublicModelType.PRIVATE_PLUGINS:
-      return jsx(g8.SearchResult, {
+      return jsx(SearchResult.SearchResult, {
         searchResult: e.searchResult,
         viewMode: e.viewMode
       });
@@ -921,7 +921,7 @@ function te(e) {
       });
     case PublicModelType.PUBLIC_WIDGETS:
     case PublicModelType.PRIVATE_WIDGETS:
-      return jsx(Ru.SearchResult, {
+      return jsx(searchResultRendererModule.SearchResult, {
         searchResult: e.searchResult,
         viewMode: e.viewMode
       });
@@ -950,7 +950,7 @@ export function $$tt0(e) {
         ...t.model,
         orphaned: e[t.model.id]
       }));
-      h(hZ({
+      h(setDiscoverableTeams({
         teams: i
       }));
     }

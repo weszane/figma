@@ -19,14 +19,14 @@ import { fileVersionSelector } from "../905/91038";
 import { LibraryAgeEnum, PrimaryWorkflowEnum, initialLibraryStats } from "../figma_app/633080";
 import { TrackingKeyEnum } from "../905/696396";
 import { O as _$$O } from "../905/480562";
-import { l as _$$l } from "../905/362016";
+import { LibraryOverviewView } from "../905/362016";
 import { S as _$$S } from "../905/669334";
 import { n as _$$n } from "../905/402643";
 import { v as _$$v, E as _$$E } from "../905/928543";
 import { U as _$$U } from "../905/402186";
 import { x as _$$x } from "../905/805083";
-import { R as _$$R } from "../905/697254";
-import { t as _$$t2 } from "../905/414363";
+import { OverviewCategory } from "../905/697254";
+import { TrackingWrapper } from "../905/414363";
 import { Gk } from "../figma_app/277330";
 import { l as _$$l2 } from "../905/579959";
 import { useInitializeUniqueId } from "../905/27228";
@@ -40,7 +40,7 @@ function D({
   entrypoint: s
 }) {
   let [o, l] = useState(e ?? _$$n.PRODUCT_COMPONENTS);
-  let [d, c] = useState(_$$R.OVERVIEW);
+  let [d, c] = useState(OverviewCategory.OVERVIEW);
   let [u, m] = useState(LibraryAgeEnum.THIRTY_DAYS);
   let [h, g] = useState(void 0);
   let [D, L] = useState(void 0);
@@ -86,7 +86,7 @@ function D({
     overview: !0,
     analytics: !0
   });
-  return jsx(_$$t2, {
+  return jsx(TrackingWrapper, {
     page: TrackingKeyEnum.DSA_FILE_VIEW,
     properties: {
       libraryKey: t?.key
@@ -110,7 +110,7 @@ function D({
           children: [jsx(Tabs.TabPanel, {
             ...J.overview,
             height: "fill",
-            children: t && jsx(_$$l, {
+            children: t && jsx(LibraryOverviewView, {
               duration: u,
               entrypoint: s,
               file: t,
@@ -133,7 +133,7 @@ function D({
             })
           })]
         }) : jsx(Fragment, {
-          children: d === _$$R.OVERVIEW ? t && jsx(_$$l, {
+          children: d === OverviewCategory.OVERVIEW ? t && jsx(LibraryOverviewView, {
             duration: u,
             entrypoint: s,
             file: t,

@@ -38,7 +38,7 @@ import { KeyboardReceiver } from "../905/826900";
 import { At } from "../figma_app/74043";
 import { M as _$$M } from "../figma_app/119924";
 import { zK, zM, lk } from "../905/182453";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { B7 } from "../figma_app/144692";
 import { iP } from "../figma_app/803054";
 import { StyleType } from "../figma_app/276332";
@@ -408,7 +408,7 @@ function ek({
     handleKeyDown: t,
     children: jsxs(_$$V, {
       className: g()(Lp, Ph),
-      children: [jsx(_$$P, {
+      children: [jsx(RecordingScrollContainer, {
         hideScrollbar: !0,
         scrollingDisabled: !0,
         className: g()(ux, KE, Dm, Ph, {
@@ -481,7 +481,7 @@ function eK({
   return S ? L : jsx("div", {
     className: gq,
     onFocus: j,
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       enableOverscroll: !0,
       ref: a,
       className: jG,

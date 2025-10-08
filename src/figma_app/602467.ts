@@ -14,7 +14,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { linkWithTracking } from "../figma_app/637027";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
@@ -306,7 +306,7 @@ let $$ei0 = memo(function () {
         },
         children: jsx(_$$L, {})
       })]
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: Ff,
       children: jsx("div", {
         className: cssBuilderInstance.p16.$,

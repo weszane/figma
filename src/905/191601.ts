@@ -7,7 +7,7 @@ import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { ResourceStatus } from "../905/723791";
 import { reportError } from "../905/11";
 import { hideModal, showModalHandler } from "../905/156213";
-import { hT, YM } from "../905/561087";
+import { deleteRepositoriesThunk, deleteRepositoriesForeverThunk } from "../905/561087";
 import { TileType } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
 import { SiteMount, FileLastPublishedAt } from "../figma_app/43951";
@@ -25,7 +25,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { createOptimistThunk } from "../905/350402";
 import { vv } from "../figma_app/435872";
 import { resetTileSelection } from "../905/81009";
-import { VK, YK } from "../905/880488";
+import { deleteFilesOptimistThunk, deleteFilesPermanentlyAction } from "../905/880488";
 let I = registerModal(function (e) {
   let {
     numFiles,
@@ -348,12 +348,12 @@ let $$M2 = createOptimistThunk(async (e, t, {
   let b = "";
   s > 0 ? b = Object.values(t.filesByKey)[0].name : o > 0 && t.reposById ? b = Object.values(t.reposById)[0].repo.name : d > 0 && t.offlineFilesByKey ? b = Object.values(t.offlineFilesByKey)[0].name : reportError(ServiceCategories.WAYFINDING, Error("Could not get firstFileName in tryDeleteFiles"));
   let v = () => {
-    s > 0 && e.dispatch(VK({
+    s > 0 && e.dispatch(deleteFilesOptimistThunk({
       fileKeys: t.filesByKey,
       userInitiated: !0,
       repoIds: Object.keys(t.reposById || {})
     }));
-    t.reposById && o > 0 && e.dispatch(hT({
+    t.reposById && o > 0 && e.dispatch(deleteRepositoriesThunk({
       reposById: t.reposById,
       userInitiated: !0,
       fileKeys: Object.keys(t.filesByKey)
@@ -384,7 +384,7 @@ let $$M2 = createOptimistThunk(async (e, t, {
   }));
 });
 let $$j1 = createOptimistThunk((e, t) => {
-  e.dispatch(YK(t));
+  e.dispatch(deleteFilesPermanentlyAction(t));
 });
 let $$U3 = createOptimistThunk(async ({
   getState: e,
@@ -420,7 +420,7 @@ let $$U3 = createOptimistThunk(async ({
           fileKeys: l,
           userInitiated: !0
         }));
-        repoIds.length > 0 && t(YM({
+        repoIds.length > 0 && t(deleteRepositoriesForeverThunk({
           repoIds,
           userInitiated: !0
         }));

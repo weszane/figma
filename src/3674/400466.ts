@@ -121,7 +121,7 @@ import { A as _$$A14 } from "../6828/154709";
 import { A as _$$A15 } from "../5724/713301";
 import { J as _$$J3 } from "../905/526136";
 import { useDebounce } from "use-debounce";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { clearSelection, addToSelection, getSelectedDevModePropertiesPanelTab, setSelectedDevModePropertiesPanelTab, updateHoveredNode } from "../figma_app/741237";
 import { useDropdown } from "../905/848862";
 import { s as _$$s } from "../905/172385";
@@ -2821,7 +2821,7 @@ function n$({
       absoluteBoundingBox: n.absoluteBoundingBox
     } : null;
   }, e);
-  wY(j ? void 0 : T, e => {
+  useResizeObserverRef(j ? void 0 : T, e => {
     e && n(t, e);
   });
   let {

@@ -5,7 +5,7 @@ import { props } from "@stylexjs/stylex";
 import { AutoInteractableWrapper } from "../905/277716";
 import { If, XS, fJ, b_, yG } from "../figma_app/319440";
 import { S } from "../figma_app/924300";
-import { ZU } from "../figma_app/986347";
+import { DMenuItemType } from "../figma_app/986347";
 import { U } from "../figma_app/427950";
 import { throwTypeError } from "../figma_app/465776";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -17,7 +17,7 @@ function f({
   action: e
 }) {
   switch (e.type) {
-    case ZU.FLYOUT:
+    case DMenuItemType.FLYOUT:
       return jsx(AutoInteractableWrapper, {
         name: "selection_actions_button",
         alsoTrack: () => ({
@@ -28,7 +28,7 @@ function f({
           recordingKey: generateRecordingKey(If, e.flyoutRecordingKey)
         })
       }, e.dropdownKey);
-    case ZU.ACTION:
+    case DMenuItemType.ACTION:
       return jsx(AutoInteractableWrapper, {
         name: "selection_actions_button",
         alsoTrack: () => ({
@@ -40,11 +40,11 @@ function f({
           recordingKey: If
         })
       }, e?.reactKey ?? e?.recordingKey);
-    case ZU.CUSTOM_ACTION:
+    case DMenuItemType.CUSTOM_ACTION:
       return jsx(XS, {
         item: e
       }, e.recordingKey);
-    case ZU.ACTION_SUBMENU:
+    case DMenuItemType.ACTION_SUBMENU:
       return jsx(AutoInteractableWrapper, {
         name: "selection_actions_button",
         alsoTrack: () => ({
@@ -76,7 +76,7 @@ export let $$_0 = memo(e => {
   return jsxs("div", {
     ...props(R.selectionActionsButtons),
     children: [x.map(e => {
-      let t = e.type === ZU.FLYOUT ? e.flyoutRecordingKey : "reactKey" in e ? e.reactKey : e.recordingKey;
+      let t = e.type === DMenuItemType.FLYOUT ? e.flyoutRecordingKey : "reactKey" in e ? e.reactKey : e.recordingKey;
       return jsx(f, {
         action: e
       }, t);

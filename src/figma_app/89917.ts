@@ -5,7 +5,7 @@ import { styleBuilderInstance } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { DEFAULT_DESIGN_MODE_LABEL } from "../figma_app/806075";
 import { getSelectedEditorType } from "../figma_app/976749";
-import { E as _$$E2 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
@@ -15,7 +15,7 @@ import { RM } from "../figma_app/322845";
 import { sY } from "../figma_app/29089";
 import { PositioningStrategy } from "../905/748636";
 import { oR } from "../figma_app/598952";
-import { _v_ } from "../figma_app/6204";
+import { OpenPlaygroundFile } from "../figma_app/6204";
 import { Vc } from "../figma_app/658673";
 import { yl } from "../figma_app/300024";
 let S = sY;
@@ -86,14 +86,14 @@ function w(e) {
 }
 export function $$O0() {
   let e = _$$e({
-    overlay: _v_,
+    overlay: OpenPlaygroundFile,
     priority: _$$N.SECONDARY_MODAL
   });
   let t = selectCurrentFile();
   let r = getSelectedEditorType();
-  return (_$$E2(e.uniqueId, $$A1, () => {
+  return (useEventForwarder(e.uniqueId, $$A1, () => {
     t?.canEdit && e.show();
-  }), _$$E2(e.uniqueId, [Vc, "open-playground-file-click-event", "action_open_universal_insert_collage_modal", DEFAULT_DESIGN_MODE_LABEL], () => {
+  }), useEventForwarder(e.uniqueId, [Vc, "open-playground-file-click-event", "action_open_universal_insert_collage_modal", DEFAULT_DESIGN_MODE_LABEL], () => {
     e.complete();
   }), !t || RM()) ? null : jsx(w, {
     onClose: e.complete,

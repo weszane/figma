@@ -1,6 +1,6 @@
 import { atom } from 'jotai'
 
-let $$i2 = atom(null)
+let $$i2 = atom<{nodesWithCodeConnect: any; docsById: any}>(null)
 let $$a0 = atom(null)
 let $$s1 = atom(null)
 export const Af = $$a0

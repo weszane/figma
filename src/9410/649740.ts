@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { createRef } from "react";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { ms } from "../figma_app/236327";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { Dm } from "../figma_app/8833";
 import { KeyboardReceiver } from "../905/826900";
 import { DU } from "../figma_app/575164";
@@ -63,7 +63,7 @@ export class $$p1 extends RecordingPureComponent {
   render() {
     let e = this.props.resultCount;
     let t = Math.min(Math.max(e, 1), 10);
-    return jsxs(P, {
+    return jsxs(RecordingScrollContainer, {
       ref: this.scrollContainerRef,
       width: 400,
       height: 32 * t + (e >= 10 ? -16 : 8),

@@ -1,50 +1,104 @@
-import { throwTypeError } from "../figma_app/465776";
-import { GitReferenceType } from "../figma_app/763686";
-import { SourceDirection } from "../905/535806";
-let s = [];
-export function $$o4(e) {
-  if (0 === e.length) return null;
-  let t = URL.createObjectURL(new Blob([e]));
-  s.push(t);
-  return t;
+import { SourceDirection } from "../905/535806"
+import { throwTypeError } from "../figma_app/465776"
+import { GitReferenceType } from "../figma_app/763686"
+
+// Object URL management utilities
+const createdObjectUrls: string[] = []
+
+/**
+ * Creates an object URL for the given data
+ * @param data - The data to create URL for
+ * @returns Object URL or null if data is empty
+ */
+export function createObjectUrl(data: Uint8Array): string | null {
+  if (data.length === 0) {
+    return null
+  }
+  const objectUrl = URL.createObjectURL(new Blob([data]))
+  createdObjectUrls.push(objectUrl)
+  return objectUrl
 }
-export function $$l2() {
-  let e;
-  for (; e = s.pop();) URL.revokeObjectURL(e);
-}
-export function $$d1(e) {
-  switch (e) {
-    case SourceDirection.TO_SOURCE:
-      return GitReferenceType.BRANCH;
-    case SourceDirection.FROM_SOURCE:
-      return GitReferenceType.SOURCE;
-    default:
-      throwTypeError(e);
+
+/**
+ * Revokes all created object URLs
+ */
+export function revokeAllObjectUrls(): void {
+  let url: string | undefined
+  // eslint-disable-next-line no-cond-assign
+  while (url = createdObjectUrls.pop()) {
+    URL.revokeObjectURL(url)
   }
 }
-export function $$c3({
-  branchKey: e,
-  sourceKey: t,
-  direction: i
-}) {
-  switch (i) {
+
+/**
+ * Maps source direction to git reference type
+ * @param direction - The source direction
+ * @returns Corresponding git reference type
+ */
+export function mapDirectionToGitReferenceType(direction: SourceDirection): GitReferenceType {
+  switch (direction) {
     case SourceDirection.TO_SOURCE:
-      return t;
+      return GitReferenceType.BRANCH
     case SourceDirection.FROM_SOURCE:
-      return e;
+      return GitReferenceType.SOURCE
     default:
-      throwTypeError(i);
+      throwTypeError(direction)
   }
 }
-export function $$u0(e) {
-  return new IntersectionObserver(t => {
-    for (let i of t) i.isIntersecting && i.intersectionRatio < 1 && i.intersectionRatio > 0 && i.intersectionRect.height > 0 && i.intersectionRect.height < i.boundingClientRect.height ? i.target.classList.add(e) : i.target.classList.remove(e);
+
+/**
+ * Gets the appropriate key based on direction
+ * @param params - Object containing branchKey, sourceKey and direction
+ * @returns The appropriate key based on direction
+ */
+export function getKeyByDirection({
+  branchKey,
+  sourceKey,
+  direction,
+}: {
+  branchKey: string
+  sourceKey: string
+  direction: SourceDirection
+}): string {
+  switch (direction) {
+    case SourceDirection.TO_SOURCE:
+      return sourceKey
+    case SourceDirection.FROM_SOURCE:
+      return branchKey
+    default:
+      throwTypeError(direction)
+  }
+}
+
+/**
+ * Creates an IntersectionObserver that adds/removes a class based on intersection
+ * @param className - The class name to add/remove
+ * @returns A new IntersectionObserver instance
+ */
+export function createIntersectionObserver(className: string): IntersectionObserver {
+  return new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (
+        entry.isIntersecting
+        && entry.intersectionRatio < 1
+        && entry.intersectionRatio > 0
+        && entry.intersectionRect.height > 0
+        && entry.intersectionRect.height < entry.boundingClientRect.height
+      ) {
+        entry.target.classList.add(className)
+      }
+      else {
+        entry.target.classList.remove(className)
+      }
+    }
   }, {
-    threshold: [0, 1]
-  });
+    threshold: [0, 1],
+  })
 }
-export const FS = $$u0;
-export const Qx = $$d1;
-export const SN = $$l2;
-export const WO = $$c3;
-export const bW = $$o4;
+
+// Export aliases for backward compatibility
+export const FS = createIntersectionObserver
+export const Qx = mapDirectionToGitReferenceType
+export const SN = revokeAllObjectUrls
+export const WO = getKeyByDirection
+export const bW = createObjectUrl

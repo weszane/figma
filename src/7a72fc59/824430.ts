@@ -35,12 +35,12 @@ import { registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
 import { K as _$$K2 } from '../905/107582';
 import { useCounter } from '../905/108595';
-import { q as _$$q5 } from '../905/112768';
+import { UpscaleImageAction } from '../905/112768';
 import { setUniversalInsertViewResourceDetails } from '../905/116101';
 import { t as _$$t4 } from '../905/117577';
 import { h as _$$h4 } from '../905/123399';
 import { sha1HexFromBytes } from '../905/125019';
-import { J as _$$J4 } from '../905/125483';
+import { imageLoadingManager } from '../905/125483';
 import { J as _$$J3 } from '../905/125993';
 import { KindEnum } from '../905/129884';
 import { A as _$$A7 } from '../905/139173';
@@ -80,7 +80,7 @@ import { v as _$$v3 } from '../905/318279';
 import { hideVariablePicker } from '../905/330741';
 import { a as _$$a9 } from '../905/339331';
 import { I as _$$I2 } from '../905/342732';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { P as _$$P3 } from '../905/351996';
 import { UpgradeAction } from '../905/370443';
 import { selectCurrentUser } from '../905/372672';
@@ -187,7 +187,7 @@ import { ConsumptionPaywallModalPlansPricing } from '../905/739964';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from '../905/751457';
 import { H as _$$H2, i as _$$i3 } from '../905/777871';
 import { I as _$$I3 } from '../905/783004';
-import { cq as _$$cq } from '../905/794154';
+import { useNavigationStack } from '../905/794154';
 import { n as _$$n6 } from '../905/796896';
 import { K as _$$K5 } from '../905/799615';
 import { f as _$$f } from '../905/809171';
@@ -441,7 +441,7 @@ import { X as _$$X } from '../figma_app/668312';
 import { Zr } from '../figma_app/678782';
 import { useCachedSubtree } from '../figma_app/679183';
 import { rp as _$$rp } from '../figma_app/703988';
-import { wY } from '../figma_app/708845';
+import { useResizeObserverRef } from '../figma_app/708845';
 import { useIsProgressBarHiddenOrLocked, useSceneGraphSelector, useAppModelProperty, useOnSelectionChange, useSceneGraphSelection } from '../figma_app/722362';
 import { tG as _$$tG } from '../figma_app/723183';
 import { Ay as _$$Ay2, Tu } from '../figma_app/724968';
@@ -485,7 +485,7 @@ import { fG, NH } from '../figma_app/973927';
 import { KD } from '../figma_app/975811';
 import { trackFileClicked } from '../figma_app/976345';
 import { PluginSandbox, PluginIframeMode } from '../figma_app/985200';
-import { A as _$$A19 } from '../vendor/21595';
+import { useThrottledCallback } from '../vendor/21595';
 import { useDebouncedCallback } from 'use-debounce';
 import { P as _$$P6 } from '../vendor/348225';
 import s, { useDispatch, useSelector } from 'react-redux';
@@ -1591,7 +1591,7 @@ function t$({
       debouncedSearchQuery: t,
       status: e
     })
-  }) : jsx(_$$P, {
+  }) : jsx(RecordingScrollContainer, {
     className: em()(cssBuilderInstance.px8.hFull.$),
     onScroll: (e, t) => {
       onScroll(e, t);
@@ -2184,7 +2184,7 @@ function nc({
   return jsxs(Fragment, {
     children: [t === Gu.NEW_FILE_MODAL && jsx(nx, {
       onBackCallback: e
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       className: ns,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
@@ -2691,7 +2691,7 @@ function nX({
         }
       }),
       onBack: v
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       className: ns,
       children: [jsx(nB, {}), E.length === 1 && E[0] ? jsx('div', {
         className: 'xyamay9',
@@ -3221,7 +3221,7 @@ function lb({
   } = _$$z4(n.map(e => e.model));
   let m = useCurrentPrivilegedPlan('CooperTemplateSearchView');
   if (a || s || d || isLoading || m.status === 'loading') {
-    return jsxs(_$$P, {
+    return jsxs(RecordingScrollContainer, {
       className: na,
       children: [jsx(t3, {}), jsx(_$$p2, {
         children: Array.from({
@@ -3238,7 +3238,7 @@ function lb({
   let g = t.length > 0 || n.length > 0;
   return h ? jsx(lj, {
     query: e
-  }) : jsxs(_$$P, {
+  }) : jsxs(RecordingScrollContainer, {
     className: na,
     children: [t.length > 0 && jsxs(Fragment, {
       children: [jsx(t8, {
@@ -3367,7 +3367,7 @@ function lv() {
   let d = useCurrentPrivilegedPlan('CooperTemplateAllView');
   useEffect(() => () => resetScrollTop([mF.ALL]), [resetScrollTop]);
   return r.type === mF.ALL ? jsx(Fragment, {
-    children: jsxs(_$$P, {
+    children: jsxs(RecordingScrollContainer, {
       className: na,
       children: [t && n() && jsx(lu, {
         onMakeATemplateSelected: l,
@@ -3405,7 +3405,7 @@ function lT() {
     r && i(!1);
   }, [r, i]);
   useEffect(() => () => resetScrollTop([mF.ALL]), [resetScrollTop]);
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     className: nd,
     scrollContainerRef: scrollRef,
     initialScrollTop: scrollPosition,
@@ -3695,7 +3695,7 @@ function lz({
     isFetchingNextPage,
     singleColumn: r
   });
-  return x ? D || G.length !== 0 ? jsx(_$$P, {
+  return x ? D || G.length !== 0 ? jsx(RecordingScrollContainer, {
     className: nd,
     scrollContainerRef: scrollRef,
     initialScrollTop: scrollPosition,
@@ -3912,7 +3912,7 @@ function lD({
       }) : a({
         type: mF.ALL
       })
-    }), templatesByTeam ? jsx(_$$P, {
+    }), templatesByTeam ? jsx(RecordingScrollContainer, {
       className: ns,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
@@ -4035,7 +4035,7 @@ function lV({
     children: [jsx(lG, {
       planName: e.name,
       isLeftRail: t
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       className: ns,
       scrollContainerRef: scrollRef,
       initialScrollTop: scrollPosition,
@@ -4215,7 +4215,7 @@ function lY({
       onBack: () => t({
         type: Ef.DEFAULT
       })
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.hFull.$,
       children: jsx('div', {
         className: 'xz9dl7a',
@@ -4258,7 +4258,7 @@ function lq({
   useEffect(() => {
     r.current && (r.current.scrollTop = 0);
   }, [e]);
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     className: na,
     scrollContainerRef: r,
     children: jsx('div', {
@@ -4457,10 +4457,10 @@ function ro({
   let s = createRef();
   let [d, c] = useState(null);
   let [u, x] = useState(0);
-  wY(l, e => {
+  useResizeObserverRef(l, e => {
     i(e.width);
   });
-  wY(s, e => {
+  useResizeObserverRef(s, e => {
     c(e.width);
   });
   let p = r !== null && r > 0 && d !== null && d > 0;
@@ -4855,7 +4855,7 @@ function ii() {
   let e = useDispatch();
   let {
     close
-  } = _$$cq();
+  } = useNavigationStack();
   return useCallback(() => {
     B3(JT.EDIT_IMAGE);
     scheduler.postTask(() => {
@@ -5452,7 +5452,7 @@ let oO = memo(({
         currentTeamName: U?.name ?? null,
         showFontsUpsell: X
       })
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       ref: y,
       onScroll: ep,
       scrollContainerRef: j,
@@ -6632,7 +6632,7 @@ function aN({
                     isBatch: e.length > 1
                   });
                 },
-                module: jsx(_$$q5, {
+                module: jsx(UpscaleImageAction, {
                   source: az
                 })
               },
@@ -8321,7 +8321,7 @@ function sB({
                 isBatch: t.length > 1
               });
             },
-            module: jsx(_$$q5, {
+            module: jsx(UpscaleImageAction, {
               source: e
             })
           },
@@ -8464,7 +8464,7 @@ function sY({
     let e = useDispatch();
     let {
       close
-    } = _$$cq();
+    } = useNavigationStack();
     return useCallback(() => {
       B3(JT.GENERATE_IMAGE);
       scheduler.postTask(() => {
@@ -10245,7 +10245,7 @@ function cL({
         onChange: x,
         clearSearch: () => x('')
       })
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       ref: m,
       children: s ? jsx(Fragment, {
         children: jsx(_$$uU, {
@@ -10440,7 +10440,7 @@ function cG({
     setQuery(n);
   }, [n, setQuery]);
   let s = useMemo(() => t ? cO(i.filter(e => e.name.toLowerCase().includes(t.toLowerCase()))) : cO(i), [i, t]);
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     children: jsxs('div', {
       className: 'x78zum5 xdt5ytf',
       children: [s.length > 0 && jsxs(Fragment, {
@@ -10588,7 +10588,7 @@ function cX({
           showAuthor: !1
         })
       })
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       ref: s,
       children: l ? jsx(_$$uU, {
         selectedLibrary: l,
@@ -10623,7 +10623,7 @@ function cY({
 }) {
   let t = bW();
   let n = useMemo(() => cO(t), [t]);
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     children: jsx(c$, {
       shapes: n,
       positionerRef: e
@@ -10676,7 +10676,7 @@ function cJ({
     i(!0);
   }, []);
   let d = e ? (n - 48) / 3 : 64;
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     children: jsx('div', {
       ...stylex.props(cq.container, n === 0 && cq.hidden),
       children: s.map((e, t) => jsx(cB, {
@@ -10757,7 +10757,7 @@ function c1({
   return jsxs(Fragment, {
     children: [c && jsx(c5, {
       item: c
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       children: jsxs('div', {
         className: 'x1o2pa38 x1gcgh60 x1jwbysl',
         children: [jsx('div', {
@@ -11405,7 +11405,7 @@ function uF() {
       }), jsx(uL, {
         mappings: l,
         removeMapping: x
-      }), jsx(uB, {}), jsx(_$$P, {
+      }), jsx(uB, {}), jsx(RecordingScrollContainer, {
         children: jsx('div', {
           className: 'x78zum5 xdt5ytf x1odjw0f x6ikm8r',
           children: jsx(ug, {
@@ -11754,7 +11754,7 @@ function xe({
     let n = Th();
     let l = isNotInFocusedNodeView();
     let r = trackFileEventWithStore();
-    return _$$A19(() => {
+    return useThrottledCallback(() => {
       r('edit_template_field', {
         product_type: 'buzz',
         content_type: 'text',
@@ -12121,7 +12121,7 @@ function xy() {
   }, []);
 }
 async function xE(e, t, n, l) {
-  _$$J4.startLoadingImage(0);
+  imageLoadingManager.startLoadingImage(0);
   let r = UN();
   let i = r.getDirectlySelectedNodes();
   let o = [];
@@ -12201,7 +12201,7 @@ async function xE(e, t, n, l) {
   } catch (e) {
     throw new Error(`Failed to insert Unsplash photo with ID: ${t} - ${e}`);
   } finally {
-    _$$J4.finishLoadingImage();
+    imageLoadingManager.finishLoadingImage();
   }
 }
 function xv(e, t, n) {
@@ -12778,7 +12778,7 @@ function xH() {
       })
     }), jsx('div', {
       className: 'x78zum5 xdt5ytf x98rzlu x10wlt62 xdyg6lv',
-      children: jsx(_$$P, {
+      children: jsx(RecordingScrollContainer, {
         disableScrollbarBorder: !0,
         hideScrollbar: g,
         scrollingDisabled: g,
@@ -12974,7 +12974,7 @@ function x1() {
     l.current && (l.current.scrollTop = 0);
   }, [selectedAssetType]);
   return jsxs(Fragment, {
-    children: [jsx(lE, {}), jsx(_$$P, {
+    children: [jsx(lE, {}), jsx(RecordingScrollContainer, {
       className: na,
       scrollContainerRef: l,
       children: jsx('div', {

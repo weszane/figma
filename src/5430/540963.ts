@@ -24,7 +24,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { ProfileFollowButton } from '../905/316655';
 import { MediaQuerySvgComponent } from '../905/331623';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { A6 } from '../905/350234';
 import { createOptimistThunk } from '../905/350402';
 import { z as _$$z2 } from '../905/353894';
@@ -33,7 +33,7 @@ import { Link } from '../905/438674';
 import { IconButton } from '../905/443068';
 // import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
-import { E as _$$E } from '../905/453826';
+import { useEventForwarder } from '../905/453826';
 import { handleAtomEvent } from '../905/502364';
 import { FlashActions } from '../905/573154';
 import { getFeatureFlags } from '../905/601108';
@@ -85,7 +85,7 @@ import { m as _$$m } from '../5430/992484';
 import { H as _$$H } from '../5430/997712';
 import { A as _$$A9 } from '../5724/191519';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { O9D } from '../figma_app/6204';
+import { CommunityMonetizationMetricsTabOnboarding } from '../figma_app/6204';
 import { TeamOrgType } from '../figma_app/10554';
 import { copyTextThunk } from '../figma_app/11182';
 import { useAtomWithSubscription } from '../figma_app/27355';
@@ -702,7 +702,7 @@ function to({
 }) {
   let t = useAtomWithSubscription(tn);
   let r = _$$e2({
-    overlay: O9D,
+    overlay: CommunityMonetizationMetricsTabOnboarding,
     priority: _$$N2.SECONDARY_MODAL
   }, [t]);
   useSingleEffect(() => {
@@ -710,7 +710,7 @@ function to({
       canShow: e => !e
     });
   });
-  _$$E(r.uniqueId, 'profile-metrics-tab-clicked', () => {
+  useEventForwarder(r.uniqueId, 'profile-metrics-tab-clicked', () => {
     r.isShowing && r.complete();
   });
   return jsx(OnboardingSequence, {
@@ -798,7 +798,7 @@ let tE = registerModal(() => {
       }), r.length > 0 && jsxs(Fragment, {
         children: [jsx('div', {
           children: renderI18nText('community.seller.click_to_download_statements')
-        }), jsx(_$$P, {
+        }), jsx(RecordingScrollContainer, {
           className: y,
           ref: x,
           onCanScrollChange: e => {

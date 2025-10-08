@@ -12,7 +12,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { AutoInteractableWrapper } from "../905/277716";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -157,7 +157,7 @@ function B({
     onScroll
   } = ee(a, s);
   let m = RegExp(`${l.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")}`, "i");
-  return jsxs(_$$P, {
+  return jsxs(RecordingScrollContainer, {
     ref: a,
     scrollContainerRef: o,
     className: R,
@@ -202,7 +202,7 @@ function X({
     hasInstanceSelected
   } = useCooperFrameSelectionInfo();
   let g = hasInstanceSelected || e !== SocialMediaFormats.CUSTOM;
-  return jsxs(_$$P, {
+  return jsxs(RecordingScrollContainer, {
     ref: o,
     scrollContainerRef: s,
     className: R,

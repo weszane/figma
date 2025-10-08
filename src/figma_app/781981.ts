@@ -2,13 +2,13 @@ import { useMemo } from "react";
 import { isIllustrationEditorType } from "../figma_app/976749";
 import { useSceneGraphSelection } from "../figma_app/722362";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { ZU, uo, IF, gc, Xz } from "../figma_app/986347";
+import { DMenuItemType, CREATE_COMPONENT_OPTIONS_ID, BOOLEAN_OPERATIONS_FLYOUT_ID, MODIFIERS_OVERFLOW_FLYOUT_ID, COMPONENT_CONTROLS_ID } from "../figma_app/986347";
 var l = (e => (e[e.TOOLBELT = 0] = "TOOLBELT", e[e.TOOLBAR = 1] = "TOOLBAR", e[e.NONE = 2] = "NONE", e))(l || {});
 function d(e) {
-  return e.type === ZU.ACTION ? e.action : e.id ?? null;
+  return e.type === DMenuItemType.ACTION ? e.action : e.id ?? null;
 }
 let c = {
-  [uo]: 0,
+  [CREATE_COMPONENT_OPTIONS_ID]: 0,
   "create-multiple-symbols": 0,
   "create-multiple-symbols-and-state-group": 0,
   "create-symbol": 0,
@@ -19,7 +19,7 @@ let c = {
   "select-similar": 0,
   "focus-mode-component-set-toggle": 0,
   "mask-selection": 0,
-  [IF]: 0,
+  [BOOLEAN_OPERATIONS_FLYOUT_ID]: 0,
   "live-boolean-union": 0,
   "live-boolean-subtract": 0,
   "live-boolean-intersect": 0,
@@ -29,8 +29,8 @@ let c = {
   "goto-parent-component": 0,
   "restore-variant": 0,
   "select-matching": 0,
-  [gc]: 1,
-  [Xz]: 1,
+  [MODIFIERS_OVERFLOW_FLYOUT_ID]: 1,
+  [COMPONENT_CONTROLS_ID]: 1,
   "focus-mode-responsive-set": 1,
   "toggle-component-configuration": 1,
   "apply-instance-swap": 1,
@@ -188,7 +188,7 @@ let E = function (e) {
   let t = d(e);
   return t ? u[t] : 1 / 0;
 });
-let y = e => t => t.type === ZU.FLYOUT && t.id === IF && e.isCandidateForBooleanOps ? t.actions : t;
+let y = e => t => t.type === DMenuItemType.FLYOUT && t.id === BOOLEAN_OPERATIONS_FLYOUT_ID && e.isCandidateForBooleanOps ? t.actions : t;
 export function $$b4(e, t) {
   return e.flatMap(y(t)).sort(E);
 }

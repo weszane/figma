@@ -1,320 +1,675 @@
-import { sha1HexFromString, bytesToHex } from "../905/125019";
-import { ImageCppBindings } from "../figma_app/763686";
-import { Zw, fJ } from "../905/419431";
-export function $$o0(e) {
+import { bytesToHex, sha1HexFromString } from "../905/125019"
+import { ASSETS_BASE_URL, populateAssetsMap } from "../905/419431"
+import { ImageCppBindings } from "../figma_app/763686"
+
+/**
+ * Options for generating node markup
+ */
+interface NodeMarkupOptions {
+  node: any
+  maxDepth?: number
+  includeComponents?: boolean
+  includeVariables?: boolean
+  codeConnectMapping?: Record<string, any>
+  codebaseSuggestions?: Record<string, any>
+  configSettings: {
+    markupImageOption: "local" | "inline"
+  }
+  loadImageByHash?: (hash: string) => Promise<void>
+}
+
+/**
+ * Generates XML markup representation of a Figma design node
+ */
+export function generateNodeMarkup(options: NodeMarkupOptions) {
   try {
-    let t = e.configSettings.markupImageOption;
-    let i = function (e) {
-      let t = e.maxDepth || void 0;
-      let i = e.includeComponents ?? !0;
-      let r = e.includeVariables ?? !0;
-      let o = function e({
-        node: t,
-        maxDepth: i,
-        includeComponents: r,
-        includeVariables: o,
-        codeConnectMapping: d,
-        codebaseSuggestions: c,
-        configSettings: u,
-        loadImageByHash: p
-      }, m = 0) {
-        if (!t.visible && (!t.componentPropertyReferences() || !t.componentPropertyReferences().visible)) return "";
-        let h = "  ".repeat(m);
-        let g = function ({
-          node: e,
-          includeComponents: t,
-          includeVariables: i,
-          codeConnectMapping: r,
-          codebaseSuggestions: o,
-          configSettings: d,
-          loadImageByHash: c
-        }) {
-          let u = {
-            name: e.name,
-            id: e.guid
-          };
-          t && function (e, t, i) {
-            if ("SYMBOL" === e.type && e.parentNode && e.parentNode.isStateGroup ? (t.componentKey = e.componentKey ?? "", t.parentComponentKey = e.parentNode.componentKey ?? "") : e.isStateGroup && e.componentKey && (t.componentKey = e.componentKey), e.isStateGroup || "SYMBOL" === e.type && e.parentNode && !e.parentNode.isStateGroup) {
-              let i = e.componentPropertyDefinitions();
-              for (let n in i) {
-                let r = i[n];
-                let a = n?.split("#")[0] || "";
-                let s = `prop[${a.replace(/[^A-Za-z0-9]/g, "_")}]`;
-                if (r?.type === "INSTANCE_SWAP") try {
-                  let i = e.sceneGraph.get("#{p.defaultValue}");
-                  i && i.parentNode && (t[s] = i.parentNode.isStateGroup ? i.parentNode.name : i.name);
-                } catch (e) {
-                  console.warn("Could not get default swap component:", e);
-                } else r?.type === "VARIANT" ? t[s] = r?.variantOptions?.join(",") : t[s] = r?.defaultValue;
-              }
-            }
-            "VECTOR" === e.type && e.visible && function (e, t, i) {
-              if ("local" === i.markupImageOption) {
-                let i = new TextDecoder("utf-8").decode(e.$$export([{
-                  imageType: "SVG"
-                }]));
-                let r = sha1HexFromString(i);
-                let s = new Blob([i]);
-                let o = new Map();
-                let l = `${r}.svg`;
-                o.set(l, s);
-                Zw(o);
-                t["xlink:href"] = `${fJ}/${l}`;
-              } else try {
-                let i = new TextDecoder("utf-8").decode(e.$$export([{
-                  imageType: "SVG"
-                }]));
-                t.svg = i;
-              } catch (e) {}
-            }(e, t, i);
-            "INSTANCE" === e.type && function (e, t) {
-              try {
-                let i = e.mainComponent ? e.mainComponent : null;
-                i && (t.componentKey = i.componentKey ?? "", i.parentNode && i.parentNode.isStateGroup && i.parentNode.componentKey && (t.parentComponentKey = i.parentNode.componentKey));
-              } catch (e) {
-                console.warn("Could not get main component:", e);
-              }
-              let i = e.componentProperties();
-              for (let n in i) {
-                let r = i[n];
-                let a = n?.split("#")[0] || "";
-                let s = `prop[${a.replace(/[^A-Za-z0-9]/g, "_")}]`;
-                if (r?.type === "INSTANCE_SWAP") try {
-                  let i = e.sceneGraph.get(`${r.value}`);
-                  i && i.parentNode && (t[s] = i.parentNode.isStateGroup ? i.parentNode.name : i.name);
-                } catch (e) {
-                  console.warn("Could not get swap component:", e);
-                } else t[s] = r?.value;
-              }
-            }(e, t);
-          }(e, u, d);
-          e.annotations && e.annotations.length && function (e, t) {
-            for (let i of e.annotations) {
-              let n = i.categoryId ? e.sceneGraph.getRoot().annotationCategories?.find(e => e?.id === i.categoryId) : null;
-              i.label && (t[`annotation[${n ? n.id : "Default"}]`] = i.label);
-            }
-          }(e, u);
-          l(e, u, d, c);
-          i && e.boundVariables && function (e, t) {
-            for (let i in e.boundVariables) {
-              let n = "fills" === i || "strokes" === i;
-              let r = n ? e.boundVariables[i] : [e.boundVariables[i]];
-              if (!r) continue;
-              let a = Array.isArray(r) ? r : [r];
-              if (0 === a.length) continue;
-              let s = 0;
-              for (let r of a) {
-                if (!r) continue;
-                let a = e.sceneGraph.getVariableNode(r.id);
-                let o = n ? `var[${i}][${s}]` : `var[${i}]`;
-                let l = a ? a.name : r.id;
-                l && (t[o] = l, s++);
-              }
-            }
-          }(e, u);
-          r && function (e, t, i) {
-            let n = i[e.guid];
-            n && (t.codeConnectSrc = n.source, t.codeConnectName = n.componentName);
-          }(e, u, r);
-          o && function (e, t, i) {
-            let n = i[e.guid];
-            n && 0 !== n.length && (t.codebaseSuggestions = JSON.stringify(n));
-          }(e, u, o);
-          return u;
-        }({
-          node: t,
-          includeComponents: !!r,
-          includeVariables: !!o,
-          codeConnectMapping: d,
-          codebaseSuggestions: c,
-          configSettings: u,
-          loadImageByHash: p
-        });
-        let f = t.type.toLowerCase();
-        let _ = Object.entries(g).flatMap(([e, t]) => {
-          if ("spans" === e || "svg" === e || null == t) return [];
-          let i = String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
-          return `${e}="${i}"`;
-        }).join(" ");
-        let A = `${h}<${f} ${_}`;
-        let y = void 0 !== i && m >= i;
-        if (g.spans) {
-          A += ">\n";
-          A += g.spans.map(e => `${h}  <span ${Object.entries(e).flatMap(([e, t]) => {
-            if ("content" === e) return [];
-            let i = String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
-            return `${e}="${i}"`;
-          }).join(" ")} ${e.content ? `>${e.content}</span>` : "/>"}`).join("\n");
-          A += `
-${h}</${f}>
-`;
-        } else if (g.svg) {
-          A += ">\n";
-          A += `${h}  ${g.svg.replace(/\n/g, "")}`;
-          A += `
-${h}</${f}>
-`;
-        } else if ("childrenNodes" in t && t.childrenNodes.length > 0 && !y) {
-          for (let n of (A += ">\n", t.childrenNodes)) A += e({
-            node: n,
-            maxDepth: i,
-            includeComponents: r,
-            includeVariables: o,
-            codeConnectMapping: d,
-            codebaseSuggestions: c,
-            configSettings: u,
-            loadImageByHash: p
-          }, m + 1);
-          A += `${h}</${f}>
-`;
-        } else A += " />\n";
-        return A;
-      }({
-        node: e.node,
-        includeComponents: i,
-        includeVariables: r,
-        maxDepth: t,
-        codeConnectMapping: e.codeConnectMapping,
-        codebaseSuggestions: e.codebaseSuggestions,
-        configSettings: e.configSettings,
-        loadImageByHash: e.loadImageByHash
-      });
-      return `<?xml version="1.0" encoding="UTF-8"?>
-<root>
-${o}
-</root>`;
-    }(e);
-    let r = Object.keys(e?.codeConnectMapping || {}).length > 0;
-    let o = Object.keys(e?.codebaseSuggestions || {}).length > 0;
+    const imageOption = options.configSettings.markupImageOption
+    const xmlContent = convertNodeToXml(options)
+    const hasCodeConnect = Object.keys(options?.codeConnectMapping || {}).length > 0
+    const hasSuggestions = Object.keys(options?.codebaseSuggestions || {}).length > 0
+
     return {
-      content: [{
-        type: "text",
-        text: ["The following message is an XML representation of the design node. ", r ? "If the node is connected to a code component in the users codebase, the source of the code component will be included in the XML on the codeConnectSrc attribute. The component name will be included in the codeConnectName attribute." : "", o ? "If the node is similar to existing components in your codebase based on name and visual similarity, the top suggested components will be included in the XML on the codebaseSuggestions attribute. It will be an array of objects with the component `name` and `source`, ordered in descending order of similarity." : "", "local" === t ? "Image assets are stored on a local server and can be referenced using the imageSrc attribute in the XML-they will be served from the local server." : ""].filter(e => !!e).join("\n\n")
-      }, {
-        type: "text",
-        text: i
-      }]
-    };
-  } catch (e) {
-    console.error(e);
-    return e;
-  }
-}
-async function l(e, t, i, s) {
-  if ("TEXT" === e.type) {
-    !function (e, t) {
-      e.name === e.characters ? t.name = "Text Node" : t.name = e.name.slice(0, 30);
-      let i = e.getStyledTextSegments(["textStyleId", "fontName", "fontSize", "fontWeight", "letterSpacing", "lineHeight", "textCase", "textDecoration"]);
-      let n = [];
-      for (let t of i) {
-        let i = {
-          content: t.characters
-        };
-        if (n.push(i), t.textStyleId) {
-          let n = e.getRangeInheritedTextStyle(t.start, t.end);
-          i["style[textStyleName]"] = function (e, t) {
-            if ("mixed" === t) return "mixed";
-            if (t && t.key) {
-              let i = e.sceneGraph.getStyleNodeByRef(t);
-              return i ? i.name : t.key;
-            }
-            return "unknown";
-          }(e, n);
+      content: [
+        {
+          type: "text",
+          text: [
+            "The following message is an XML representation of the design node. ",
+            hasCodeConnect ? "If the node is connected to a code component in the users codebase, the source of the code component will be included in the XML on the codeConnectSrc attribute. The component name will be included in the codeConnectName attribute." : "",
+            hasSuggestions ? "If the node is similar to existing components in your codebase based on name and visual similarity, the top suggested components will be included in the XML on the codebaseSuggestions attribute. It will be an array of objects with the component `name` and `source`, ordered in descending order of similarity." : "",
+            imageOption === "local" ? "Image assets are stored on a local server and can be referenced using the imageSrc attribute in the XML-they will be served from the local server." : ""
+          ].filter(text => !!text).join("\n\n"),
+        },
+        {
+          type: "text",
+          text: xmlContent,
         }
-        if (t.fontName && (i["style[fontFamily]"] = t.fontName.family, i["style[fontStyle]"] = t.fontName.style), void 0 !== t.fontSize && (i["style[fontSize]"] = t.fontSize), void 0 !== t.fontWeight && (i["style[fontWeight]"] = t.fontWeight), void 0 !== t.letterSpacing) {
-          let e = t.letterSpacing;
-          "object" == typeof e ? (i["style[letterSpacing]"] = e.value, i["style[letterSpacingUnit]"] = e.units) : i["style[letterSpacing]"] = e;
-        }
-        if (void 0 !== t.lineHeight) {
-          let e = t.lineHeight;
-          "object" == typeof e ? (i["style[lineHeight]"] = e.value, i["style[lineHeightUnit]"] = e.units) : i["style[lineHeight]"] = e;
-        }
-        void 0 !== t.textCase && (i["style[textCase]"] = t.textCase);
-        void 0 !== t.textDecoration && (i["style[textDecoration]"] = t.textDecoration);
-        void 0 !== t.paragraphIndent && (i["style[paragraphIndent]"] = t.paragraphIndent);
-        void 0 !== t.paragraphSpacing && (i["style[paragraphSpacing]"] = t.paragraphSpacing);
-      }
-      t.spans = n;
-      void 0 !== e.textAlignHorizontal && (t["style[textAlign]"] = e.textAlignHorizontal);
-      void 0 !== e.textAlignVertical && (t["style[textAlignVertical]"] = e.textAlignVertical);
-    }(e, t);
-    return;
-  }
-  let o = e.inferredAutoLayoutResult;
-  if (o) for (let e in o) t[`style[${e}]`] = o[e];
-  if (e.absoluteRenderBounds?.w !== void 0 && (t["style[width]"] = e.absoluteRenderBounds.w), e.absoluteRenderBounds?.h !== void 0 && (t["style[height]"] = e.absoluteRenderBounds.h), void 0 !== e.x && (t["style[x]"] = e.x), void 0 !== e.y && (t["style[y]"] = e.y), e.fills && e.fills.length > 0) {
-    let o = e.fills.map(async (e, o) => {
-      if ("SOLID" === e.type && !1 !== e.visible && e.color) {
-        let {
-          r: _r,
-          g,
-          b,
-          a
-        } = e.color;
-        let s = $$d(_r, g, b);
-        t[`style[fill][${o}]`] = s;
-        1 !== a && (t[`style[fillOpacity][${o}]`] = a);
-      } else if ("local" === i.markupImageOption && "IMAGE" === e.type && e.image?.hash && ImageCppBindings && !1 !== e.visible) try {
-        let i = bytesToHex(e.image.hash);
-        await s(i);
-        let l = ImageCppBindings.getCompressedImage(i);
-        if (!l) {
-          console.error(`Image data for hash ${i} not found`);
-          return;
-        }
-        let d = new Blob([l]);
-        let c = new Map();
-        let u = `${i}.png`;
-        c.set(u, d);
-        Zw(c);
-        t[`style[fill][${o}][imageSrc]`] = `${fJ}/${u}`;
-      } catch (e) {
-        console.error(`Error processing image fill at index ${o}:`, e);
-      } else e.type && (t[`style[fill][${o}]`] = e.type);
-    });
-    await Promise.all(o);
-  }
-  let l = e.strokePaints?.data;
-  l && l.length > 0 && l.forEach((e, i) => {
-    if ("SOLID" === e.type && !1 !== e.visible) {
-      let {
-        r: _r2,
-        g,
-        b,
-        a: _a
-      } = e.color || {
-        r: 0,
-        g: 0,
-        b: 0,
-        a: 1
-      };
-      let o = $$d(_r2, g, b);
-      t[`style[stroke][${i}]`] = o;
-      1 !== _a && (t[`style[strokeOpacity][${i}]`] = `${_a}`);
-    } else e.type && (t[`style[stroke][${i}]`] = e.type);
-  });
-  e.effects && e.effects.length > 0 && e.effects.forEach((e, i) => {
-    if (e.visible) {
-      if (t[`style[effect][${i}][type]`] = `${e.type}`, "DROP_SHADOW" === e.type || "INNER_SHADOW" === e.type) {
-        if (e.color) {
-          let {
-            r: _r3,
-            g,
-            b,
-            a: _a2
-          } = e.color;
-          t[`style[effect][${i}][color]`] = $$d(_r3, g, b);
-          1 !== _a2 && (t[`style[effect][${i}][opacity]`] = `${_a2}`);
-        }
-        t[`style[effect][${i}][offset][x]`] = e.offset ? e.offset.x : void 0;
-        t[`style[effect][${i}][offset][y]`] = e.offset ? e.offset.y : void 0;
-        t[`style[effect][${i}][radius]`] = e.radius;
-        t[`style[effect][${i}][spread]`] = e.spread;
-      } else ("FOREGROUND_BLUR" === e.type || "BACKGROUND_BLUR" === e.type) && (t[`style[effect][${i}][radius]`] = e.radius);
+      ],
     }
-  });
+  } catch (error) {
+    console.error(error)
+    return error
+  }
 }
-function $$d(e, t, i) {
-  return "#" + (0x1000000 + ((e = Math.round(255 * e)) << 16) + ((t = Math.round(255 * t)) << 8) + (i = Math.round(255 * i))).toString(16).slice(1).toUpperCase();
+
+/**
+ * Converts a node to XML format
+ */
+function convertNodeToXml(options: NodeMarkupOptions): string {
+  const maxDepth = options.maxDepth || undefined
+  const includeComponents = options.includeComponents ?? true
+  const includeVariables = options.includeVariables ?? true
+
+  const xmlBody = generateNodeXml({
+    node: options.node,
+    includeComponents,
+    includeVariables,
+    maxDepth,
+    codeConnectMapping: options.codeConnectMapping,
+    codebaseSuggestions: options.codebaseSuggestions,
+    configSettings: options.configSettings,
+    loadImageByHash: options.loadImageByHash,
+  })
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<root>
+${xmlBody}
+</root>`
 }
-export const d = $$o0;
+
+/**
+ * Recursively generates XML for a node and its children
+ */
+function generateNodeXml(params: {
+  node: any
+  maxDepth?: number
+  includeComponents: boolean
+  includeVariables: boolean
+  codeConnectMapping?: Record<string, any>
+  codebaseSuggestions?: Record<string, any>
+  configSettings: any
+  loadImageByHash?: (hash: string) => Promise<void>
+}, depth: number = 0): string {
+  const {
+    node,
+    maxDepth,
+    includeComponents,
+    includeVariables,
+    codeConnectMapping,
+    codebaseSuggestions,
+    configSettings,
+    loadImageByHash,
+  } = params
+
+  // Skip invisible nodes
+  if (!node.visible && (!node.componentPropertyReferences() || !node.componentPropertyReferences().visible)) {
+    return ""
+  }
+
+  const indent = "  ".repeat(depth)
+  const attributes = collectNodeAttributes({
+    node,
+    includeComponents,
+    includeVariables,
+    codeConnectMapping,
+    codebaseSuggestions,
+    configSettings,
+    loadImageByHash,
+  })
+
+  const tagName = node.type.toLowerCase()
+  const attributeString = Object.entries(attributes).flatMap(([key, value]) => {
+    if (key === "spans" || key === "svg" || value == null) {
+      return []
+    }
+    const escapedValue = escapeXml(String(value))
+    return `${key}="${escapedValue}"`
+  }).join(" ")
+
+  let xmlString = `${indent}<${tagName} ${attributeString}`
+  const isMaxDepthReached = maxDepth !== undefined && depth >= maxDepth
+
+  // Handle text nodes with spans
+  if (attributes.spans) {
+    xmlString += ">\n"
+    xmlString += attributes.spans.map(span =>
+      `${indent}  <span ${Object.entries(span).flatMap(([key, value]) => {
+        if (key === "content") return []
+        const escapedValue = escapeXml(String(value || ""))
+        return `${key}="${escapedValue}"`
+      }).join(" ")} ${span.content ? `>${span.content}</span>` : "/>"}`
+    ).join("\n")
+    xmlString += `\n${indent}</${tagName}>\n`
+  }
+  // Handle vector nodes with SVG
+  else if (attributes.svg) {
+    xmlString += ">\n"
+    xmlString += `${indent}  ${attributes.svg.replace(/\n/g, "")}`
+    xmlString += `\n${indent}</${tagName}>\n`
+  }
+  // Handle nodes with children
+  else if ("childrenNodes" in node && node.childrenNodes.length > 0 && !isMaxDepthReached) {
+    xmlString += ">\n"
+    for (const childNode of node.childrenNodes) {
+      xmlString += generateNodeXml({
+        node: childNode,
+        maxDepth,
+        includeComponents,
+        includeVariables,
+        codeConnectMapping,
+        codebaseSuggestions,
+        configSettings,
+        loadImageByHash,
+      }, depth + 1)
+    }
+    xmlString += `${indent}</${tagName}>\n`
+  }
+  // Self-closing tag
+  else {
+    xmlString += " />\n"
+  }
+
+  return xmlString
+}
+
+/**
+ * Collects all attributes for a node
+ */
+function collectNodeAttributes(params: {
+  node: any
+  includeComponents: boolean
+  includeVariables: boolean
+  codeConnectMapping?: Record<string, any>
+  codebaseSuggestions?: Record<string, any>
+  configSettings: any
+  loadImageByHash?: (hash: string) => Promise<void>
+}): Record<string, any> {
+  const {
+    node,
+    includeComponents,
+    includeVariables,
+    codeConnectMapping,
+    codebaseSuggestions,
+    configSettings,
+    loadImageByHash,
+  } = params
+
+  const attributes: Record<string, any> = {
+    name: node.name,
+    id: node.guid,
+  }
+
+  if (includeComponents) {
+    addComponentAttributes(node, attributes, configSettings)
+  }
+
+  if (node.annotations?.length) {
+    addAnnotationAttributes(node, attributes)
+  }
+
+  addStyleAttributes(node, attributes, configSettings, loadImageByHash)
+
+  if (includeVariables && node.boundVariables) {
+    addVariableAttributes(node, attributes)
+  }
+
+  if (codeConnectMapping) {
+    addCodeConnectAttributes(node, attributes, codeConnectMapping)
+  }
+
+  if (codebaseSuggestions) {
+    addCodebaseSuggestions(node, attributes, codebaseSuggestions)
+  }
+
+  return attributes
+}
+
+/**
+ * Adds component-related attributes
+ */
+function addComponentAttributes(node: any, attributes: Record<string, any>, configSettings: any): void {
+  // Handle SYMBOL nodes with state groups
+  if (node.type === "SYMBOL" && node.parentNode?.isStateGroup) {
+    attributes.componentKey = node.componentKey ?? ""
+    attributes.parentComponentKey = node.parentNode.componentKey ?? ""
+  } else if (node.isStateGroup && node.componentKey) {
+    attributes.componentKey = node.componentKey
+  }
+
+  // Handle component property definitions
+  if (node.isStateGroup || (node.type === "SYMBOL" && node.parentNode && !node.parentNode.isStateGroup)) {
+    const propertyDefinitions = node.componentPropertyDefinitions()
+    for (const propName in propertyDefinitions) {
+      const prop = propertyDefinitions[propName]
+      const sanitizedName = propName?.split("#")[0] || ""
+      const attrKey = `prop[${sanitizedName.replace(/[^A-Z0-9]/gi, "_")}]`
+
+      if (prop?.type === "INSTANCE_SWAP") {
+        try {
+          const swapNode = node.sceneGraph.get("#{p.defaultValue}")
+          if (swapNode?.parentNode) {
+            attributes[attrKey] = swapNode.parentNode.isStateGroup ? swapNode.parentNode.name : swapNode.name
+          }
+        } catch (error) {
+          console.warn("Could not get default swap component:", error)
+        }
+      } else if (prop?.type === "VARIANT") {
+        attributes[attrKey] = prop.variantOptions?.join(",")
+      } else {
+        attributes[attrKey] = prop?.defaultValue
+      }
+    }
+  }
+
+  // Handle VECTOR nodes
+  if (node.type === "VECTOR" && node.visible) {
+    handleVectorNode(node, attributes, configSettings)
+  }
+
+  // Handle INSTANCE nodes
+  if (node.type === "INSTANCE") {
+    handleInstanceNode(node, attributes)
+  }
+}
+
+/**
+ * Handles vector node SVG export
+ */
+function handleVectorNode(node: any, attributes: Record<string, any>, configSettings: any): void {
+  if (configSettings.markupImageOption === "local") {
+    const svgData = new TextDecoder("utf-8").decode(node.$$export([{ imageType: "SVG" }]))
+    const hash = sha1HexFromString(svgData)
+    const blob = new Blob([svgData])
+    const assetMap = new Map()
+    const filename = `${hash}.svg`
+    assetMap.set(filename, blob)
+    populateAssetsMap(assetMap)
+    attributes["xlink:href"] = `${ASSETS_BASE_URL}/${filename}`
+  } else {
+    try {
+      const svgData = new TextDecoder("utf-8").decode(node.$$export([{ imageType: "SVG" }]))
+      attributes.svg = svgData
+    } catch {
+      // Silently fail for inline SVG
+    }
+  }
+}
+
+/**
+ * Handles instance node properties
+ */
+function handleInstanceNode(node: any, attributes: Record<string, any>): void {
+  try {
+    const mainComponent = node.mainComponent || null
+    if (mainComponent) {
+      attributes.componentKey = mainComponent.componentKey ?? ""
+      if (mainComponent.parentNode?.isStateGroup && mainComponent.parentNode.componentKey) {
+        attributes.parentComponentKey = mainComponent.parentNode.componentKey
+      }
+    }
+  } catch (error) {
+    console.warn("Could not get main component:", error)
+  }
+
+  const componentProps = node.componentProperties()
+  for (const propName in componentProps) {
+    const prop = componentProps[propName]
+    const sanitizedName = propName?.split("#")[0] || ""
+    const attrKey = `prop[${sanitizedName.replace(/[^A-Z0-9]/gi, "_")}]`
+
+    if (prop?.type === "INSTANCE_SWAP") {
+      try {
+        const swapNode = node.sceneGraph.get(`${prop.value}`)
+        if (swapNode?.parentNode) {
+          attributes[attrKey] = swapNode.parentNode.isStateGroup ? swapNode.parentNode.name : swapNode.name
+        }
+      } catch (error) {
+        console.warn("Could not get swap component:", error)
+      }
+    } else {
+      attributes[attrKey] = prop?.value
+    }
+  }
+}
+
+/**
+ * Adds annotation attributes
+ */
+function addAnnotationAttributes(node: any, attributes: Record<string, any>): void {
+  for (const annotation of node.annotations) {
+    const category = annotation.categoryId
+      ? node.sceneGraph.getRoot().annotationCategories?.find(cat => cat?.id === annotation.categoryId)
+      : null
+    if (annotation.label) {
+      attributes[`annotation[${category ? category.id : "Default"}]`] = annotation.label
+    }
+  }
+}
+
+/**
+ * Adds variable binding attributes
+ */
+function addVariableAttributes(node: any, attributes: Record<string, any>): void {
+  for (const propName in node.boundVariables) {
+    const isArrayType = propName === "fills" || propName === "strokes"
+    const bindings = isArrayType ? node.boundVariables[propName] : [node.boundVariables[propName]]
+
+    if (!bindings) continue
+
+    const bindingArray = Array.isArray(bindings) ? bindings : [bindings]
+    if (bindingArray.length === 0) continue
+
+    let index = 0
+    for (const binding of bindingArray) {
+      if (!binding) continue
+
+      const variableNode = node.sceneGraph.getVariableNode(binding.id)
+      const attrKey = isArrayType ? `var[${propName}][${index}]` : `var[${propName}]`
+      const variableName = variableNode ? variableNode.name : binding.id
+
+      if (variableName) {
+        attributes[attrKey] = variableName
+        index++
+      }
+    }
+  }
+}
+
+/**
+ * Adds code connect attributes
+ */
+function addCodeConnectAttributes(node: any, attributes: Record<string, any>, codeConnectMapping: Record<string, any>): void {
+  const mapping = codeConnectMapping[node.guid]
+  if (mapping) {
+    attributes.codeConnectSrc = mapping.source
+    attributes.codeConnectName = mapping.componentName
+  }
+}
+
+/**
+ * Adds codebase suggestion attributes
+ */
+function addCodebaseSuggestions(node: any, attributes: Record<string, any>, codebaseSuggestions: Record<string, any>): void {
+  const suggestions = codebaseSuggestions[node.guid]
+  if (suggestions && suggestions.length !== 0) {
+    attributes.codebaseSuggestions = JSON.stringify(suggestions)
+  }
+}
+
+/**
+ * Adds style-related attributes (main entry point for style processing)
+ */
+async function addStyleAttributes(
+  node: any,
+  attributes: Record<string, any>,
+  configSettings: any,
+  loadImageByHash?: (hash: string) => Promise<void>
+): Promise<void> {
+  if (node.type === "TEXT") {
+    addTextStyleAttributes(node, attributes)
+    return
+  }
+
+  // Add auto-layout properties
+  const autoLayoutResult = node.inferredAutoLayoutResult
+  if (autoLayoutResult) {
+    for (const key in autoLayoutResult) {
+      attributes[`style[${key}]`] = autoLayoutResult[key]
+    }
+  }
+
+  // Add dimensions and position
+  if (node.absoluteRenderBounds?.w !== undefined) {
+    attributes["style[width]"] = node.absoluteRenderBounds.w
+  }
+  if (node.absoluteRenderBounds?.h !== undefined) {
+    attributes["style[height]"] = node.absoluteRenderBounds.h
+  }
+  if (node.x !== undefined) {
+    attributes["style[x]"] = node.x
+  }
+  if (node.y !== undefined) {
+    attributes["style[y]"] = node.y
+  }
+
+  // Process fills
+  if (node.fills?.length > 0) {
+    await addFillAttributes(node, attributes, configSettings, loadImageByHash)
+  }
+
+  // Process strokes
+  addStrokeAttributes(node, attributes)
+
+  // Process effects
+  addEffectAttributes(node, attributes)
+}
+
+/**
+ * Adds text-specific style attributes
+ */
+function addTextStyleAttributes(node: any, attributes: Record<string, any>): void {
+  // Set simplified name for text nodes
+  attributes.name = node.name === node.characters ? "Text Node" : node.name.slice(0, 30)
+
+  const textSegments = node.getStyledTextSegments([
+    "textStyleId", "fontName", "fontSize", "fontWeight",
+    "letterSpacing", "lineHeight", "textCase", "textDecoration"
+  ])
+
+  const spans: any[] = []
+
+  for (const segment of textSegments) {
+    const span: Record<string, any> = {
+      content: segment.characters,
+    }
+
+    if (segment.textStyleId) {
+      const textStyle = node.getRangeInheritedTextStyle(segment.start, segment.end)
+      span["style[textStyleName]"] = getTextStyleName(node, textStyle)
+    }
+
+    if (segment.fontName) {
+      span["style[fontFamily]"] = segment.fontName.family
+      span["style[fontStyle]"] = segment.fontName.style
+    }
+
+    if (segment.fontSize !== undefined) {
+      span["style[fontSize]"] = segment.fontSize
+    }
+
+    if (segment.fontWeight !== undefined) {
+      span["style[fontWeight]"] = segment.fontWeight
+    }
+
+    if (segment.letterSpacing !== undefined) {
+      const spacing = segment.letterSpacing
+      if (typeof spacing === "object") {
+        span["style[letterSpacing]"] = spacing.value
+        span["style[letterSpacingUnit]"] = spacing.units
+      } else {
+        span["style[letterSpacing]"] = spacing
+      }
+    }
+
+    if (segment.lineHeight !== undefined) {
+      const lineHeight = segment.lineHeight
+      if (typeof lineHeight === "object") {
+        span["style[lineHeight]"] = lineHeight.value
+        span["style[lineHeightUnit]"] = lineHeight.units
+      } else {
+        span["style[lineHeight]"] = lineHeight
+      }
+    }
+
+    if (segment.textCase !== undefined) {
+      span["style[textCase]"] = segment.textCase
+    }
+
+    if (segment.textDecoration !== undefined) {
+      span["style[textDecoration]"] = segment.textDecoration
+    }
+
+    if (segment.paragraphIndent !== undefined) {
+      span["style[paragraphIndent]"] = segment.paragraphIndent
+    }
+
+    if (segment.paragraphSpacing !== undefined) {
+      span["style[paragraphSpacing]"] = segment.paragraphSpacing
+    }
+
+    spans.push(span)
+  }
+
+  attributes.spans = spans
+
+  if (node.textAlignHorizontal !== undefined) {
+    attributes["style[textAlign]"] = node.textAlignHorizontal
+  }
+
+  if (node.textAlignVertical !== undefined) {
+    attributes["style[textAlignVertical]"] = node.textAlignVertical
+  }
+}
+
+/**
+ * Gets the text style name
+ */
+function getTextStyleName(node: any, textStyle: any): string {
+  if (textStyle === "mixed") {
+    return "mixed"
+  }
+  if (textStyle?.key) {
+    const styleNode = node.sceneGraph.getStyleNodeByRef(textStyle)
+    return styleNode ? styleNode.name : textStyle.key
+  }
+  return "unknown"
+}
+
+/**
+ * Adds fill attributes
+ */
+async function addFillAttributes(
+  node: any,
+  attributes: Record<string, any>,
+  configSettings: any,
+  loadImageByHash?: (hash: string) => Promise<void>
+): Promise<void> {
+  const fillPromises = node.fills.map(async (fill: any, index: number) => {
+    if (fill.type === "SOLID" && fill.visible !== false && fill.color) {
+      const { r, g, b, a } = fill.color
+      const hexColor = rgbToHex(r, g, b)
+      attributes[`style[fill][${index}]`] = hexColor
+      if (a !== 1) {
+        attributes[`style[fillOpacity][${index}]`] = a
+      }
+    }
+    else if (
+      configSettings.markupImageOption === "local" &&
+      fill.type === "IMAGE" &&
+      fill.image?.hash &&
+      ImageCppBindings &&
+      fill.visible !== false
+    ) {
+      try {
+        const hash = bytesToHex(fill.image.hash)
+        if (loadImageByHash) {
+          await loadImageByHash(hash)
+        }
+        const imageData = ImageCppBindings.getCompressedImage(hash)
+        if (!imageData) {
+          console.error(`Image data for hash ${hash} not found`)
+          return
+        }
+        const blob = new Blob([imageData])
+        const assetMap = new Map()
+        const filename = `${hash}.png`
+        assetMap.set(filename, blob)
+        populateAssetsMap(assetMap)
+        attributes[`style[fill][${index}][imageSrc]`] = `${ASSETS_BASE_URL}/${filename}`
+      } catch (error) {
+        console.error(`Error processing image fill at index ${index}:`, error)
+      }
+    }
+    else if (fill.type) {
+      attributes[`style[fill][${index}]`] = fill.type
+    }
+  })
+
+  await Promise.all(fillPromises)
+}
+
+/**
+ * Adds stroke attributes
+ */
+function addStrokeAttributes(node: any, attributes: Record<string, any>): void {
+  const strokes = node.strokePaints?.data
+  if (!strokes?.length) return
+
+  strokes.forEach((stroke: any, index: number) => {
+    if (stroke.type === "SOLID" && stroke.visible !== false) {
+      const { r, g, b, a } = stroke.color || { r: 0, g: 0, b: 0, a: 1 }
+      const hexColor = rgbToHex(r, g, b)
+      attributes[`style[stroke][${index}]`] = hexColor
+      if (a !== 1) {
+        attributes[`style[strokeOpacity][${index}]`] = `${a}`
+      }
+    } else if (stroke.type) {
+      attributes[`style[stroke][${index}]`] = stroke.type
+    }
+  })
+}
+
+/**
+ * Adds effect attributes
+ */
+function addEffectAttributes(node: any, attributes: Record<string, any>): void {
+  if (!node.effects?.length) return
+
+  node.effects.forEach((effect: any, index: number) => {
+    if (!effect.visible) return
+
+    attributes[`style[effect][${index}][type]`] = `${effect.type}`
+
+    if (effect.type === "DROP_SHADOW" || effect.type === "INNER_SHADOW") {
+      if (effect.color) {
+        const { r, g, b, a } = effect.color
+        attributes[`style[effect][${index}][color]`] = rgbToHex(r, g, b)
+        if (a !== 1) {
+          attributes[`style[effect][${index}][opacity]`] = `${a}`
+        }
+      }
+      attributes[`style[effect][${index}][offset][x]`] = effect.offset?.x
+      attributes[`style[effect][${index}][offset][y]`] = effect.offset?.y
+      attributes[`style[effect][${index}][radius]`] = effect.radius
+      attributes[`style[effect][${index}][spread]`] = effect.spread
+    }
+    else if (effect.type === "FOREGROUND_BLUR" || effect.type === "BACKGROUND_BLUR") {
+      attributes[`style[effect][${index}][radius]`] = effect.radius
+    }
+  })
+}
+
+/**
+ * Converts RGB values (0-1) to hex color string
+ */
+function rgbToHex(r: number, g: number, b: number): string {
+  const red = Math.round(255 * r)
+  const green = Math.round(255 * g)
+  const blue = Math.round(255 * b)
+  return `#${(0x1000000 + (red << 16) + (green << 8) + blue).toString(16).slice(1).toUpperCase()}`
+}
+
+/**
+ * Escapes special XML characters
+ */
+function escapeXml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;")
+}
+
+// Export with original name for compatibility
+export const $$o0 = generateNodeMarkup
+export const d = generateNodeMarkup

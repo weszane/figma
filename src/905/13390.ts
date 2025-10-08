@@ -16,10 +16,10 @@ import { e as _$$e3 } from '../905/157975';
 import { ServiceCategories } from '../905/165054';
 import { Fh, Mw, U1 } from '../905/191601';
 import { J as _$$J, q as _$$q } from '../905/202542';
-import { F as _$$F } from '../905/300562';
+import { FileOrgViewMode } from '../905/300562';
 import { getI18nString } from '../905/303541';
 import { getUserId } from '../905/372672';
-import { iC } from '../905/466026';
+import { deleteRecentRepo } from '../905/466026';
 import { appendSearchParam } from '../905/508367';
 import { I as _$$I } from '../905/531560';
 import { l as _$$l3 } from '../905/572910';
@@ -59,7 +59,7 @@ import { isRootPath } from '../figma_app/528509';
 import { TileType, TileUtils, renamingStateAtom } from '../figma_app/543100';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
-import { gO, z6 } from '../figma_app/598926';
+import { pinFileThunk, unpinFileThunk } from '../figma_app/598926';
 import { UF } from '../figma_app/622574';
 import { Z as _$$Z } from '../figma_app/640519';
 import { wH } from '../figma_app/680166';
@@ -74,7 +74,7 @@ import { alwaysTrue } from '../figma_app/863319';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { addFileFavorite, addPrototypeFavorite, removeFileFavorite, removePrototypeFavorite } from '../figma_app/909778';
 import { TabOpenBehavior } from '../figma_app/915202';
-import { g4 as _$$g, b4, n_ } from '../figma_app/937413';
+import { duplicateToDrafts, restoreTrashedFilesAndRepos, duplicateSelectedFiles } from '../figma_app/937413';
 function v({
   children: e,
   portalTarget: t,
@@ -229,26 +229,26 @@ export function $$ek0(e) {
     }
   };
   let e0 = e => {
-    e.folderId != null && i(gO({
+    e.folderId != null && i(pinFileThunk({
       folderId: e.folderId,
       fileKey: e.key
     }));
   };
   let e1 = e => {
-    e.folder_id != null && e.default_file_key != null && i(gO({
+    e.folder_id != null && e.default_file_key != null && i(pinFileThunk({
       folderId: e.folder_id,
       fileKey: e.default_file_key
     }));
   };
   let e2 = e => {
     let t = e.folderId;
-    t != null && i(z6({
+    t != null && i(unpinFileThunk({
       folderId: t,
       fileKey: e.key
     }));
   };
   let e5 = e => {
-    e.folder_id != null && e.default_file_key != null && i(z6({
+    e.folder_id != null && e.default_file_key != null && i(unpinFileThunk({
       folderId: e.folder_id,
       fileKey: e.default_file_key
     }));
@@ -353,7 +353,7 @@ export function $$ek0(e) {
     }));
   };
   let ta = () => {
-    i(n_({
+    i(duplicateSelectedFiles({
       toDraft: !1
     }));
     i(resetTileSelection());
@@ -363,7 +363,7 @@ export function $$ek0(e) {
       type: _$$e3,
       data: {
         fileKey: e.key,
-        entrypoint: _$$F.FileNavigation
+        entrypoint: FileOrgViewMode.FileNavigation
       }
     }));
   };
@@ -407,7 +407,7 @@ export function $$ek0(e) {
       i(FlashActions.error(getI18nString('tile.dropdown.no_permission_to_restore_error')));
       return;
     }
-    i(b4({
+    i(restoreTrashedFilesAndRepos({
       fileKeys: t,
       repoIds: n
     }));
@@ -447,12 +447,12 @@ export function $$ek0(e) {
     }
   };
   let tu = () => {
-    i(_$$g());
+    i(duplicateToDrafts());
     i(resetTileSelection());
   };
   let tp = () => {
     let e = Object.keys(tileSelect[ComFileType.REPOS]);
-    e.length > 0 && i(iC({
+    e.length > 0 && i(deleteRecentRepo({
       recent_repo_ids: e
     }));
     let t = [];

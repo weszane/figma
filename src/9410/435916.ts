@@ -30,7 +30,7 @@ import { TY, pi } from "../figma_app/357047";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/748636";
 import { oi } from "../figma_app/598952";
-import { eD$ } from "../figma_app/6204";
+import { FigJamPanZoomOnboardingDLTBannerOverlay } from "../figma_app/6204";
 import { p as _$$p } from "../9410/505291";
 var u = c;
 function M({
@@ -637,7 +637,7 @@ function et() {
     complete,
     isShowing
   } = _$$e({
-    overlay: eD$,
+    overlay: FigJamPanZoomOnboardingDLTBannerOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [e, t, i, a, o, l]);
   useEffect(() => {

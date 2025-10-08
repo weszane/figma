@@ -9,7 +9,7 @@ import { useSingleEffect } from "../905/791079";
 import { d as _$$d } from "../905/884707";
 import { changeAuthFormState, AUTH_CHANGE_EMAIL, AUTH_SET_GOOGLE_ID_TOKEN } from "../905/194276";
 import { AuthFlowStep, AuthField } from "../905/862321";
-import { sT } from "../905/694658";
+import { setArkoseAuthParams } from "../905/694658";
 import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
@@ -85,7 +85,7 @@ export function $$w0(e) {
     trackEvent
   } = useTracking();
   useSingleEffect(() => {
-    f && isValidEmail(f) && sT({
+    f && isValidEmail(f) && setArkoseAuthParams({
       email: f
     });
   });
@@ -98,7 +98,7 @@ export function $$w0(e) {
     if (l(AUTH_CHANGE_EMAIL({
       value: e.trim()
     })), !p && isValidEmail(e)) {
-      await sT({
+      await setArkoseAuthParams({
         email: e
       });
       try {

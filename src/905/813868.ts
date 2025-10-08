@@ -1,94 +1,189 @@
-import { Fullscreen } from "../figma_app/763686";
-import { getSceneGraphInstance } from "../905/830071";
-import { getFeatureFlags } from "../905/601108";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { Point } from "../905/736624";
-import { getI18nString } from "../905/303541";
-import { PluginAction } from "../905/15667";
-import { postUserFlag } from "../905/985254";
-import { fullscreenValue } from "../figma_app/455680";
-import { applyOffsetToViewport } from "../figma_app/62612";
-import { checkZoomWidgetAccess } from "../figma_app/12796";
-import { showVisualBell, getFullscreenViewEditorType } from "../figma_app/300692";
-import { PluginManager } from "../figma_app/612938";
-import { handleSelectedView, checkCanRunExtensions, getPluginDevMode } from "../905/622391";
-import { setSyncedValues } from "../905/486749";
-import { notifyPluginStatus } from "../905/571565";
-import { k as _$$k2 } from "../figma_app/644304";
-import { x as _$$x } from "../905/239551";
-import { widgetInteractionTracker } from "../905/223332";
-export function $$I0({
-  pluginID: e,
-  widgetName: t,
-  pluginVersionID: i,
-  position: I,
-  basicOverrides: E,
-  mapOverrides: x,
-  widgetAction: S,
-  parentNodeID: w,
-  triggeredFrom: C,
-  shouldPositionWidget: T = !0,
-  indexInParent: k,
-  isOnInternalCanvas: R
-}) {
-  if (!handleSelectedView()) {
-    showVisualBell(getI18nString("widgets.cannot_insert_widget_while_logged_out"));
-    return {
-      widgetNodeID: void 0,
-      widgetRunPromise: void 0
-    };
-  }
-  if (getFeatureFlags().ext_require_appropriate_seat && !checkCanRunExtensions()) {
-    PluginManager.instance.handleUpgrade(PluginAction.RUN_WIDGET);
-    return {
-      widgetNodeID: void 0,
-      widgetRunPromise: void 0
-    };
-  }
-  let N = checkZoomWidgetAccess();
-  if (!N.canRun) {
-    showVisualBell(N.message);
-    return {
-      widgetNodeID: void 0,
-      widgetRunPromise: void 0
-    };
-  }
-  "universal-insert" === C && "figma" === getFullscreenViewEditorType() && fullscreenValue.dispatch(postUserFlag({
-    seen_widget_insert_onboarding_modal: !0
-  }));
-  "undo_widget_update" !== S && notifyPluginStatus({
-    name: t,
-    isInsert: !0,
-    cancelCallback: () => {},
-    vmType: getPluginDevMode()
-  });
-  widgetInteractionTracker.startInteraction(e, "insert");
-  let P = Fullscreen.createWidget(e, t, i ?? "", w ?? "", k ?? null, R ?? null);
-  if (!isInteractionPathCheck() && T && function (e, t) {
-    let i = getSceneGraphInstance().get(e);
-    if (i) {
-      if (!t) {
-        let e = 0;
-        fullscreenValue.showUI() && (e = document.getElementById(_$$k2)?.clientWidth ?? 0);
-        let n = fullscreenValue.getViewportInfo();
-        let r = applyOffsetToViewport(n, {
-          x: n.x + n.width / 2 - e,
-          y: n.y + n.height / 2
-        });
-        let a = i.size;
-        t = new Point(r.x - a.x / 2, r.y - a.y / 2);
-      }
-      Fullscreen.positionAndParentWidget(e, t.x, t.y);
-    }
-  }(P, I), E || x) {
-    let e = getSceneGraphInstance().get(P);
-    setSyncedValues(e, E, x);
-  }
-  let O = _$$x.mountWidget(e, P, "insert", I, S, C);
-  return {
-    widgetNodeID: P,
-    widgetRunPromise: O
-  };
+import { PluginAction } from "../905/15667"
+import { widgetInteractionTracker } from "../905/223332"
+import { x as _$$x } from "../905/239551"
+import { getI18nString } from "../905/303541"
+import { setSyncedValues } from "../905/486749"
+import { notifyPluginStatus } from "../905/571565"
+import { getFeatureFlags } from "../905/601108"
+import { checkCanRunExtensions, getPluginDevMode, handleSelectedView } from "../905/622391"
+import { Point } from "../905/736624"
+import { getSceneGraphInstance } from "../905/830071"
+import { postUserFlag } from "../905/985254"
+import { checkZoomWidgetAccess } from "../figma_app/12796"
+import { applyOffsetToViewport } from "../figma_app/62612"
+import { getFullscreenViewEditorType, showVisualBell } from "../figma_app/300692"
+import { fullscreenValue } from "../figma_app/455680"
+import { PluginManager } from "../figma_app/612938"
+import { k as fullscreenUIElementId } from "../figma_app/644304"
+import { Fullscreen } from "../figma_app/763686"
+import { isInteractionPathCheck } from "../figma_app/897289"
+
+// Origin: /Users/allen/github/fig/src/905/813868.ts
+// Refactored: Renamed variables, added types/interfaces, simplified logic, added comments, improved readability and type safety.
+
+// Assumed dependencies: All imported modules exist and provide the expected APIs.
+
+// Types for widget creation
+export interface WidgetInsertOptions {
+  pluginID: string
+  widgetName: string
+  pluginVersionID?: string
+  position?: Point
+  basicOverrides?: Record<string, unknown>
+  mapOverrides?: Record<string, unknown>
+  widgetAction?: string
+  parentNodeID?: string
+  triggeredFrom?: string
+  shouldPositionWidget?: boolean
+  indexInParent?: number | null
+  isOnInternalCanvas?: boolean | null
 }
-getFeatureFlags().widgets_dev_window_bindings && (window.createWidget = $$I0);
-export const j = $$I0;
+
+export interface WidgetInsertResult {
+  widgetNodeID: string | undefined
+  widgetRunPromise: Promise<unknown> | undefined
+}
+
+/**
+ * Inserts a widget into the scene, handling permissions, positioning, and overrides.
+ * - Renamed variables for clarity.
+ * - Added type definitions.
+ * - Simplified nested logic.
+ * - Added comments for key logic and potential issues.
+ */
+export function createWidget(options: WidgetInsertOptions): WidgetInsertResult {
+  const {
+    pluginID,
+    widgetName,
+    pluginVersionID,
+    position,
+    basicOverrides,
+    mapOverrides,
+    widgetAction,
+    parentNodeID,
+    triggeredFrom,
+    shouldPositionWidget = true,
+    indexInParent,
+    isOnInternalCanvas,
+  } = options
+
+  // Check if user is logged in and can insert widgets
+  if (!handleSelectedView()) {
+    showVisualBell(getI18nString("widgets.cannot_insert_widget_while_logged_out"))
+    return { widgetNodeID: undefined, widgetRunPromise: undefined }
+  }
+
+  // Check feature flag and extension seat requirements
+  if (getFeatureFlags().ext_require_appropriate_seat && !checkCanRunExtensions()) {
+    PluginManager.instance.handleUpgrade(PluginAction.RUN_WIDGET)
+    return { widgetNodeID: undefined, widgetRunPromise: undefined }
+  }
+
+  // Check zoom widget access
+  const zoomAccess = checkZoomWidgetAccess()
+  if (!zoomAccess.canRun) {
+    showVisualBell(zoomAccess.message)
+    return { widgetNodeID: undefined, widgetRunPromise: undefined }
+  }
+
+  // Show onboarding modal if triggered from universal insert in Figma fullscreen editor
+  if (
+    triggeredFrom === "universal-insert"
+    && getFullscreenViewEditorType() === "figma"
+  ) {
+    fullscreenValue.dispatch(
+      postUserFlag({ seen_widget_insert_onboarding_modal: true }),
+    )
+  }
+
+  // Notify plugin status unless undoing a widget update
+  if (widgetAction !== "undo_widget_update") {
+    notifyPluginStatus({
+      name: widgetName,
+      isInsert: true,
+      cancelCallback: () => {},
+      vmType: getPluginDevMode(),
+    })
+  }
+
+  // Track widget interaction
+  widgetInteractionTracker.startInteraction(pluginID, "insert")
+
+  // Create the widget node
+  const widgetNodeID = Fullscreen.createWidget(
+    pluginID,
+    widgetName,
+    pluginVersionID ?? "",
+    parentNodeID ?? "",
+    indexInParent ?? null,
+    isOnInternalCanvas ?? null,
+  )
+
+  // Position the widget if required and not in interaction path check
+  if (!isInteractionPathCheck() && shouldPositionWidget) {
+    positionWidgetInFullscreen(widgetNodeID, position)
+  }
+
+  // Apply overrides if provided
+  if (basicOverrides || mapOverrides) {
+    const widgetInstance = getSceneGraphInstance().get(widgetNodeID)
+    setSyncedValues(widgetInstance, basicOverrides, mapOverrides)
+  }
+
+  // Mount the widget and return the result
+  const widgetRunPromise = _$$x.mountWidget(
+    pluginID,
+    widgetNodeID,
+    "insert",
+    position,
+    widgetAction,
+    triggeredFrom,
+  )
+
+  return {
+    widgetNodeID,
+    widgetRunPromise,
+  }
+}
+
+/**
+ * Positions the widget in fullscreen mode.
+ * - If no position is provided, centers the widget in the viewport.
+ * - Handles UI width offset if fullscreen UI is visible.
+ */
+function positionWidgetInFullscreen(widgetNodeID: string, position?: Point): void {
+  const widgetInstance = getSceneGraphInstance().get(widgetNodeID)
+  if (!widgetInstance)
+    return
+
+  let finalPosition = position
+  if (!finalPosition) {
+    // Calculate UI width offset if fullscreen UI is shown
+    let uiWidth = 0
+    if (fullscreenValue.showUI()) {
+      uiWidth = document.getElementById(fullscreenUIElementId)?.clientWidth ?? 0
+    }
+
+    // Get viewport info and center widget
+    const viewport = fullscreenValue.getViewportInfo()
+    const centered = applyOffsetToViewport(viewport, {
+      x: viewport.x + viewport.width / 2 - uiWidth,
+      y: viewport.y + viewport.height / 2,
+    })
+
+    // Adjust for widget size
+    const widgetSize = widgetInstance.size
+    finalPosition = new Point(centered.x - widgetSize.x / 2, centered.y - widgetSize.y / 2)
+  }
+
+  Fullscreen.positionAndParentWidget(widgetNodeID, finalPosition.x, finalPosition.y)
+}
+
+// Bind to window if dev window bindings are enabled
+if (getFeatureFlags().widgets_dev_window_bindings) {
+  (window as any).createWidget = createWidget
+}
+
+// Export for external usage
+export const j = createWidget
+export const noop = createWidget

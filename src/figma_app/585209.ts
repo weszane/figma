@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { showEmojiPicker, setTypeahead } from "../figma_app/770088";
-import { mz } from "../figma_app/12220";
+import { getPinSizeOGx } from "../figma_app/12220";
 import { getViewportInfo } from "../figma_app/62612";
 import { selectCurrentUser } from "../905/372672";
 import { _ as _$$_ } from "../figma_app/433187";
@@ -42,7 +42,7 @@ export function $$f2(e) {
       height: t.height
     };
   }, [t, e.position]);
-  let s = mz();
+  let s = getPinSizeOGx();
   return jsx($$E1, {
     onInsert: e.onInsert,
     onClear: e.onClear,

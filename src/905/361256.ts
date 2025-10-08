@@ -33,7 +33,7 @@ import { MediaQuerySvgComponent } from '../905/331623';
 import { f as _$$f } from '../905/335032';
 import { k as _$$k4 } from '../905/336528';
 import { Q as _$$Q } from '../905/346809';
-import { P as _$$P2 } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { o as _$$o, cx, El, H0, mI } from '../905/361629';
 import { W as _$$W } from '../905/378870';
 import { FormattedInputContext } from '../905/427409';
@@ -2667,7 +2667,7 @@ function t6(e) {
     });
   };
   let tJ = t => {
-    let i = e => jsx(_$$P2, {
+    let i = e => jsx(ScrollContainer, {
       height: 322,
       children: e
     });

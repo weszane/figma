@@ -15,7 +15,7 @@ import { e as _$$e } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
-import { qmK } from "../figma_app/6204";
+import { FigmakeOnboardingTOS } from "../figma_app/6204";
 import { _H } from "../figma_app/408883";
 import { Ve } from "../figma_app/812915";
 import { M } from "../1250/475573";
@@ -60,7 +60,7 @@ export function $$I1() {
     isShowing,
     complete
   } = _$$e({
-    overlay: qmK,
+    overlay: FigmakeOnboardingTOS,
     priority: N.HIGH_PRIORITY_MODAL - 1
   }, [t]);
   let {

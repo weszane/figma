@@ -1,7 +1,6 @@
-import { l as _$$l } from "../905/202425"
+import { getSelectedItemTypes } from "../905/202425"
 import { q4 } from "../905/294085"
 import { VisualBellActions } from "../905/302958"
-import { n } from "../905/347702"
 import { debugState } from "../905/407919"
 import { R as _$$R } from "../905/423086"
 import { analyticsEventManager } from "../905/449184"
@@ -56,7 +55,7 @@ export function $$M0({
   let a = debugState.getState()
   let s = {
     keyboardShortcut: "",
-    currentSelection: _$$l(a),
+    currentSelection: getSelectedItemTypes(a),
     fileKey: a.openFile?.key ?? "",
     productType: getProductType(a.selectedView, null),
     role: WZ(),
@@ -177,12 +176,12 @@ export function $$W9(e?: any) {
   getFeatureFlags().figjam_quick_actions_v2 || a.push(FEditorType.Whiteboard)
   return !!(n && !a.includes(n) && (t || e))
 }
-export let $$K4 = n((e, t) => {
+export let $$K4 = (e, t) => {
   let r = t?.isUI3 ?? AppStateTsApi.uiState().isUI3.getCopy()
   let n = debugState.getState().selectedView
   let a = t?.editorType ?? getEditorTypeIfFullscreen(n)
   return !!(a && (a === FEditorType.Design || a === FEditorType.Illustration || a === FEditorType.Slides) && (r || e))
-})
+}
 class Y {
   isQuickActionsShown() {
     return $$j1(debugState.getState().dropdownShown)

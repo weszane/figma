@@ -18,7 +18,7 @@ import { o as _$$o } from '../905/268099';
 import { HighlightedText } from '../905/287602';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { P as _$$P } from '../905/347284';
+import { RecordingScrollContainer } from '../905/347284';
 import { BannerMessage } from '../905/363675';
 import { getMinimumBundle } from '../905/389382';
 import { z as _$$z } from '../905/404751';
@@ -197,11 +197,11 @@ function eA(e) {
     children: jsx(LoadingOverlay, {})
   });
   return jsxs('div', {
-    children: [!selectedTeam && jsx(_$$P, {
+    children: [!selectedTeam && jsx(RecordingScrollContainer, {
       width: 400,
       height: 300,
       children: h
-    }), selectedTeam && jsx(_$$P, {
+    }), selectedTeam && jsx(RecordingScrollContainer, {
       width: 400,
       height: 300,
       children: jsxs('div', {
@@ -328,11 +328,11 @@ function eb(e) {
     className: Al,
     children: renderI18nText('file_browser.file_move.no_projects_yet')
   }) : jsxs('div', {
-    children: [!o && jsx(_$$P, {
+    children: [!o && jsx(RecordingScrollContainer, {
       width: 400,
       height: 300,
       children: r
-    }), o && jsx(_$$P, {
+    }), o && jsx(RecordingScrollContainer, {
       width: 400,
       height: 300,
       children: c
@@ -352,7 +352,7 @@ function ev(e) {
     }, `all-team-${t.id}}`))
   });
   return jsx('div', {
-    children: jsx(_$$P, {
+    children: jsx(RecordingScrollContainer, {
       width: 400,
       height: 300,
       children: t
@@ -552,7 +552,7 @@ let eR = registerModal(e => {
         children: jsx('br', {})
       })
     })
-  }) : jsx(_$$P, {
+  }) : jsx(RecordingScrollContainer, {
     width: 400,
     height: 300,
     children: jsx('div', {
@@ -924,7 +924,7 @@ let eR = registerModal(e => {
               },
               teamsList: e5 ? e7 : ta
             }) : void 0]
-          }), (eH || eF) && jsx(_$$P, {
+          }), (eH || eF) && jsx(RecordingScrollContainer, {
             width: 400,
             height: 346,
             children: eF ? jsx('div', {

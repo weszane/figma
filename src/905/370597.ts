@@ -30,7 +30,7 @@ import { isAssetSuggestionsEnabled } from "../figma_app/144974";
 import { JT } from "../figma_app/632248";
 import { WP, B1, ES } from "../905/198599";
 import { z as _$$z } from "../905/654860";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { s as _$$s3 } from "../905/169089";
 import { _M, ID } from "../905/487011";
 import { AIActionInstructionType, AIActionInstructionTrigger } from "../905/278499";
@@ -134,7 +134,7 @@ export function $$ec2({
   }, [h]);
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let {
     libraries,
     librariesForConnectedProject

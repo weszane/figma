@@ -10,7 +10,7 @@ import { w as _$$w } from "../905/835474";
 import { G5 } from "../figma_app/795674";
 import { formatRelativeTimeStatic, RelativeTimeDisplay } from "../905/986103";
 import { LoadingRenderer } from "../905/211326";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TrackedLink } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -21,11 +21,11 @@ import { DSAApiServiceInstance } from "../905/669853";
 import { OverviewStatsView } from "../905/167005";
 import { i as _$$i } from "../905/565139";
 import { o as _$$o } from "../905/918279";
-import { V as _$$V } from "../905/697254";
+import { StatValueType } from "../905/697254";
 import { A as _$$A } from "../905/27250";
-import { Hj, FO, tD } from "../905/682977";
+import { TableRow, LoadingRow, SortableHeaderCell } from "../905/682977";
 import { nZ } from "../figma_app/277330";
-import { t as _$$t2 } from "../905/414363";
+import { TrackingWrapper } from "../905/414363";
 import { n as _$$n } from "../905/402643";
 import O from "../vendor/923386";
 import { setupResourceAtomHandler } from "../figma_app/566371";
@@ -88,13 +88,13 @@ function B({
         trusted: !0,
         children: renderI18nText("design_systems.dsa.learn_more")
       })]
-    }), jsx(Hj, {
+    }), jsx(TableRow, {
       className: "stats_for_missing_files_view--headerRow--7en-p library_modal_stats--headerRow--MTZxi text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: d.map(e => jsx("div", {
         className: e.className,
         children: e.header
       }, e.header))
-    }), jsx(Hj, {
+    }), jsx(TableRow, {
       className: "stats_for_missing_files_view--statsRow--W5gDv library_item_view--componentRow--KcAgz text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: d.map(e => jsx("div", {
         className: e.className,
@@ -141,7 +141,7 @@ let $$q1 = memo(function (e) {
   }), [e.stateGroup.key]);
   let l = useRef(null);
   let d = nZ(l);
-  return jsx(_$$t2, {
+  return jsx(TrackingWrapper, {
     page: TrackingKeyEnum.DSA_STATE_GROUP_VIEW,
     properties: o,
     children: jsxs("div", {
@@ -152,7 +152,7 @@ let $$q1 = memo(function (e) {
         children: !e.hideOpenInFileButton && jsx(et, {
           item: e.stateGroup
         })
-      }), jsxs(_$$P, {
+      }), jsxs(RecordingScrollContainer, {
         width: e.width,
         className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         ref: l,
@@ -186,7 +186,7 @@ export function $$$0({
     assetType: _$$n.PRODUCT_COMPONENTS
   }), [e.component_key]);
   let u = e.containing_frame?.containingStateGroup ? _$$w(e.name) : e.name;
-  return jsx(_$$t2, {
+  return jsx(TrackingWrapper, {
     page: TrackingKeyEnum.DSA_COMPONENT_VIEW,
     properties: c,
     children: jsxs("div", {
@@ -198,7 +198,7 @@ export function $$$0({
         children: !o && jsx(et, {
           item: e
         })
-      }), jsxs(_$$P, {
+      }), jsxs(RecordingScrollContainer, {
         width: i,
         className: cssBuilderInstance.flexAuto.minH0.flex.flexColumn.$,
         children: [jsx(ee, {
@@ -337,10 +337,10 @@ class Q extends PureComponent {
       className: V
     }];
     return jsxs("div", {
-      children: [!this.state.loaded && jsx(FO, {}), this.state.loaded && jsxs(Fragment, {
-        children: [jsx(Hj, {
+      children: [!this.state.loaded && jsx(LoadingRow, {}), this.state.loaded && jsxs(Fragment, {
+        children: [jsx(TableRow, {
           className: "library_item_view--headerRow--bkJ-a library_modal_stats--headerRow--MTZxi text--fontPos11--2LvXf text--_fontBase--QdLsd",
-          children: t.map(e => jsx(tD, {
+          children: t.map(e => jsx(SortableHeaderCell, {
             className: c()(e.className, "library_item_view--sortableCol--5Kur-", {
               "library_item_view--selectedCol--IZP4x library_modal_stats--selectedCol--pwGl4": this.state.sortBy === e.sortBy
             }),
@@ -382,7 +382,7 @@ class J extends PureComponent {
   render() {
     let e = this.props.fileName ? this.props.fileName : "Untitled";
     let t = this.props.fileKey;
-    return jsx(Hj, {
+    return jsx(TableRow, {
       className: "library_item_view--componentRow--KcAgz text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: jsxs(Fragment, {
         children: [jsx("div", {
@@ -439,28 +439,28 @@ class ee extends PureComponent {
   }
   render() {
     let e = [{
-      type: _$$V.DESCRIPTION_AND_IMAGE,
+      type: StatValueType.DESCRIPTION_AND_IMAGE,
       imageData: {
         type: "image",
         url: this.props.item.thumbnail_url
       },
       description: this.props.item.description || getI18nString("design_systems.libraries_modal.n_a")
     }, {
-      type: _$$V.STAT,
+      type: StatValueType.STAT,
       header: getI18nString("design_systems.libraries_modal.total"),
       count: this.state.statsData?.total_instances ?? null,
       word: getI18nString("design_systems.libraries_modal.plural.instance", {
         instanceCount: this.state.statsData?.total_instances ?? 0
       })
     }, {
-      type: _$$V.STAT,
+      type: StatValueType.STAT,
       header: getI18nString("design_systems.libraries_modal.used_by"),
       count: this.state.statsData?.total_team_usage ?? null,
       word: getI18nString("design_systems.libraries_modal.plural.team", {
         teamCount: this.state.statsData?.total_team_usage ?? 0
       })
     }, {
-      type: _$$V.STAT,
+      type: StatValueType.STAT,
       header: getI18nString("design_systems.libraries_modal.used_in"),
       count: this.state.statsData?.total_file_usage ?? null,
       word: getI18nString("design_systems.libraries_modal.plural.file", {

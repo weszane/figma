@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { LoadingRenderer } from "../905/211326";
 import { renderI18nText } from "../905/303541";
 import { getVariableTypeIcon } from "../905/604606";
-import { V } from "../905/697254";
+import { StatValueType } from "../905/697254";
 import { SvgComponent } from "../905/714743";
 import { iL, zi } from "../905/824449";
 import { Wi } from "../figma_app/162641";
@@ -14,7 +14,7 @@ interface StatBase {
   count?: number;
 }
 interface DescriptionAndImageStat extends StatBase {
-  type: typeof V.DESCRIPTION_AND_IMAGE;
+  type: typeof StatValueType.DESCRIPTION_AND_IMAGE;
   imageData: {
     type: "variable" | "style" | "image";
     variableType?: string;
@@ -24,7 +24,7 @@ interface DescriptionAndImageStat extends StatBase {
   description?: string;
 }
 interface CountStat extends StatBase {
-  type: typeof V.COUNT;
+  type: typeof StatValueType.COUNT;
 }
 type Stat = DescriptionAndImageStat | CountStat;
 interface StatIconProps {
@@ -63,9 +63,9 @@ export function OverviewStatsView({
   return jsx("div", {
     className: "overview_stats_view--overviewStats--vEzXs",
     children: stats.map(stat => {
-      const key = stat.type === V.DESCRIPTION_AND_IMAGE ? "Description" : stat.header;
+      const key = stat.type === StatValueType.DESCRIPTION_AND_IMAGE ? "Description" : stat.header;
       return jsx(Fragment, {
-        children: stat.type === V.DESCRIPTION_AND_IMAGE ? jsx(LoadingRenderer, {
+        children: stat.type === StatValueType.DESCRIPTION_AND_IMAGE ? jsx(LoadingRenderer, {
           isLoading,
           className: STAT_CLASS_NAME,
           children: () => jsx(DescriptionAndImageStatComponent, {

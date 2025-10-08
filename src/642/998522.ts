@@ -15,7 +15,7 @@ import { N } from "../figma_app/268271";
 import { VideoOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
-import { vlG } from "../figma_app/6204";
+import { UI3LayersHorizontalScrollOverlay } from "../figma_app/6204";
 let $$C1 = "ui3-layers-horizontal-scroll-onboarding-key";
 let $$j2 = "ui2-layers-horizontal-scroll-onboarding-key";
 let v = userFlagExistsAtomFamily("seen_ui3_layers_horizontal_scroll_overlay");
@@ -30,7 +30,7 @@ export function $$S0() {
     isShowing,
     complete
   } = _$$e({
-    overlay: vlG,
+    overlay: UI3LayersHorizontalScrollOverlay,
     priority: N.SECONDARY_MODAL
   }, [t, j]);
   useEffect(() => {

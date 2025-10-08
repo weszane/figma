@@ -9,7 +9,7 @@ import { getImageManager } from "../figma_app/624361";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { openFileAtom } from "../figma_app/516028";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { A } from "../905/202425";
+import { isImageNode } from "../905/202425";
 import { n0 } from "../figma_app/259678";
 import { attachmentsAtomFamily, isLoadedAttachmentWithNodeGuid, handleInsertError, generateNodeThumbnail, getNodeImageHash, useAttachments } from "../figma_app/119420";
 async function f(e, t) {
@@ -33,7 +33,7 @@ export async function $$y0(e, t, n, r, a) {
   if (!e) return;
   let c = t.get(e);
   if (!c) return;
-  let d = A(c) ? "IMAGE" : "FIGMA_NODE";
+  let d = isImageNode(c) ? "IMAGE" : "FIGMA_NODE";
   if ("FIGMA_NODE" === d && "TEXT" === c.type) {
     r(c.characters);
     permissionScopeHandler.system("clean-up-chat-box-pasted-text-node", () => {

@@ -11,7 +11,7 @@ import { sZ } from "../figma_app/948389";
 import { wC, JT, pY } from "../figma_app/632248";
 import { useSelectionState, SelectionState } from "../905/286488";
 import { z8, qy } from "../figma_app/862289";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { AIActionIterationResult } from "../905/278499";
 import { f as _$$f, E as _$$E } from "../905/690713";
 import { A } from "../905/721854";
@@ -198,7 +198,7 @@ export function $$A0() {
   } = S;
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   let D = useSelectionState(JT.TRANSLATE_TEXT);
   let M = tasks.length;
   let P = tasks.filter(e => e.state === z8.FAILED).length;

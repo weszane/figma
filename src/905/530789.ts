@@ -10,7 +10,7 @@ import { c$ } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { rW } from "../figma_app/852050";
 import { useDropdown } from "../905/848862";
-import { Cf } from "../905/504727";
+import { ConnectedPointingDropdown } from "../905/504727";
 import { i as _$$i } from "../905/415810";
 import { getVariableTypeInfo } from "../905/604606";
 import { getGroupPath, insertVariableAtPosition } from "../905/782020";
@@ -77,7 +77,7 @@ export function $$x1({
   setSelectedVariableID: u,
   insertVariableBetweenIDs: p
 }) {
-  return createPortal(jsx(Cf, {
+  return createPortal(jsx(ConnectedPointingDropdown, {
     id: e,
     arrowOffsetFromRectLeft: 15,
     lean: "right",

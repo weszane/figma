@@ -8,7 +8,7 @@ import { N } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
 import { ArrowPosition } from "../905/858282";
-import { jkr } from "../figma_app/6204";
+import { SharingClarityTeamCreationOverlay } from "../figma_app/6204";
 let $$p0 = "sc_team_creation_modal_onboarding_key";
 let g = "seen_sharing_clarity_team_creation_modal_overlay";
 let h = userFlagExistsAtomFamily(g);
@@ -19,7 +19,7 @@ export function $$x1() {
     isShowing,
     complete
   } = _$$e({
-    overlay: jkr,
+    overlay: SharingClarityTeamCreationOverlay,
     priority: N.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {

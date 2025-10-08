@@ -1,71 +1,81 @@
-function n(e, t) {
+/**
+ * Creates an object with an id and additional properties
+ *
+ * @param id - The unique identifier for the object
+ * @param properties - Additional properties to spread into the object
+ * @returns An object containing the id and all provided properties
+ */
+export function createProperies(id: string, properties: Record<string, any>): {
+  id: string
+} & Record<string, any> {
   return {
-    id: e,
-    ...t
+    id,
+    ...properties
   };
 }
-let $$i1 = n("AdvancedPrototypingUpsellOverlay", {
+
+export let AdvancedPrototypingUpsellOverlay = createProperies("AdvancedPrototypingUpsellOverlay", {
   team: "monetization_upgrades"
 });
-let $$a138 = n("AspectRatioLockOnboarding", {
+export let AspectRatioLockOnboarding = createProperies("AspectRatioLockOnboarding", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "aspect_ratio_locking_onboarding_overlay",
     maxTimes: 1
   }
 });
-let $$s208 = n("AudioNux", {
+export let AudioNux = createProperies("AudioNux", {
   team: "feedback",
   queueOnBlock: !0
 });
-let $$o140 = n("BillingGroupAdminOnboarding", {
+export let BillingGroupAdminOnboarding = createProperies("BillingGroupAdminOnboarding", {
   team: "scale"
 });
-let $$l166 = n("BugReporterMachine", {
+export let BugReporterMachine = createProperies("BugReporterMachine", {
   team: "client_platform"
 });
-let $$d112 = n("CollectiveUpsellOverlay", {
+export let CollectiveUpsellOverlay = createProperies("CollectiveUpsellOverlay", {
   team: "monetization_upgrades"
 });
-let $$c131 = n("CommunityCreatorMediaUpsellModal", {
+export let CommunityCreatorMediaUpsellModal = createProperies("CommunityCreatorMediaUpsellModal", {
   team: "community",
   queueOnBlock: !0
 });
-let $$u191 = n("CommunityDevModeFilterOnboarding", {
+export let CommunityDevModeFilterOnboarding = createProperies("CommunityDevModeFilterOnboarding", {
   team: "community",
   queueOnBlock: !0
 });
-let $$p47 = n("ResourceHubPromotionalOverlay", {
+export let ResourceHubPromotionalOverlay = createProperies("ResourceHubPromotionalOverlay", {
   team: "community",
   queueOnBlock: !0
 });
-let $$_132 = n("CommunityTabOnboardingOverlay", {
+export let CommunityTabOnboardingOverlay = createProperies("CommunityTabOnboardingOverlay", {
   team: "community",
   queueOnBlock: !0
 });
-let $$h66 = n("CommunityMonetizationMetricsTabOnboarding", {
+export let CommunityMonetizationMetricsTabOnboarding = createProperies("CommunityMonetizationMetricsTabOnboarding", {
   team: "community",
   queueOnBlock: !1
 });
-let $$m130 = n("CommunityProfileAdminDropdownOnboarding", {
+export let CommunityProfileAdminDropdownOnboarding = createProperies("CommunityProfileAdminDropdownOnboarding", {
   team: "community",
   queueOnBlock: !0
 });
-let $$g165 = n("VisualAssetsIntroTooltip", {
+export let VisualAssetsIntroTooltip = createProperies("VisualAssetsIntroTooltip", {
   team: "community"
 });
-let $$f90 = n("VisualAssetsPanelTooltip", {
+export let VisualAssetsPanelTooltip = createProperies("VisualAssetsPanelTooltip", {
   team: "community"
 });
-let $$E73 = n("VisualAssetPacksTooltip", {
+export let VisualAssetPacksTooltip = createProperies("VisualAssetPacksTooltip", {
   team: "community"
 });
-let $$y43 = n("AIOnboarding", {
+export let AIOnboarding = createProperies("AIOnboarding", {
   team: "editor_usability",
   queueOnBlock: !0,
   allowShowingIfModalPresent: !0
 });
-let $$b201 = n("UI3LayersHorizontalScrollOverlay", {
+export let UI3LayersHorizontalScrollOverlay = createProperies("UI3LayersHorizontalScrollOverlay", {
   team: "editor_usability",
   queueOnBlock: !0,
   lifecycle: {
@@ -73,7 +83,7 @@ let $$b201 = n("UI3LayersHorizontalScrollOverlay", {
     maxTimes: 1
   }
 });
-let $$T93 = n("UI3LabelsEducation", {
+export let UI3LabelsEducation = createProperies("UI3LabelsEducation", {
   team: "ui3_platform",
   queueOnBlock: !0,
   lifecycle: {
@@ -81,7 +91,7 @@ let $$T93 = n("UI3LabelsEducation", {
     maxTimes: 1
   }
 });
-let $$I30 = n("UI3ReactivationOverlay", {
+export let UI3ReactivationOverlay = createProperies("UI3ReactivationOverlay", {
   team: "ui3_platform",
   queueOnBlock: !0,
   lifecycle: {
@@ -89,47 +99,47 @@ let $$I30 = n("UI3ReactivationOverlay", {
     maxTimes: 1
   }
 });
-let $$S51 = n("CustomSectionsNudge", {
+export let CustomSectionsNudge = createProperies("CustomSectionsNudge", {
   team: "wayfinding"
 });
-let $$v175 = n("CustomTemplatePublishNudge", {
+export let CustomTemplatePublishNudge = createProperies("CustomTemplatePublishNudge", {
   team: "figjam"
 });
-let $$A45 = n("DesignFileLinkExpiration", {
+export let DesignFileLinkExpiration = createProperies("DesignFileLinkExpiration", {
   team: "scale"
 });
-let $$x159 = n("DesktopDownloadModalPrompt", {
+export let DesktopDownloadModalPrompt = createProperies("DesktopDownloadModalPrompt", {
   team: "desktop"
 });
-let $$N194 = n("DevHandoffConfigWizard", {
+export let DevHandoffConfigWizard = createProperies("DevHandoffConfigWizard", {
   team: "developer_tools",
   queueOnBlock: !0
 });
-let $$C114 = n("DevModeDemoFileTourOverlay", {
+export let DevModeDemoFileTourOverlay = createProperies("DevModeDemoFileTourOverlay", {
   team: "activation",
   queueOnBlock: !0
 });
-let $$w108 = n("DevModeUpgradedPopup", {
+export let DevModeUpgradedPopup = createProperies("DevModeUpgradedPopup", {
   team: "developer_tools"
 });
-let $$O177 = n("DevModeOptInEventOnlyOverlay", {
+export let DevModeOptInEventOnlyOverlay = createProperies("DevModeOptInEventOnlyOverlay", {
   team: "scale"
 });
-let $$R26 = n("DevModeFocusViewOnboardingOverlay", {
+export let DevModeFocusViewOnboardingOverlay = createProperies("DevModeFocusViewOnboardingOverlay", {
   team: "developer_tools",
   lifecycle: {
     userFlagName: "dev_mode_has_seen_focus_view_onboarding",
     maxTimes: 1
   }
 });
-let $$L38 = n("DevModeInteractiveInspectionOnboardingOverlay", {
+export let DevModeInteractiveInspectionOnboardingOverlay = createProperies("DevModeInteractiveInspectionOnboardingOverlay", {
   team: "developer_tools",
   lifecycle: {
     userFlagName: "dev_mode_has_seen_interactive_inspection_onboarding",
     maxTimes: 1
   }
 });
-let $$P206 = n("DevModeOverviewOnboardingOverlay", {
+export let DevModeOverviewOnboardingOverlay = createProperies("DevModeOverviewOnboardingOverlay", {
   team: "developer_tools",
   allowShowingIfModalPresent: !0,
   lifecycle: {
@@ -137,59 +147,59 @@ let $$P206 = n("DevModeOverviewOnboardingOverlay", {
     maxTimes: 1
   }
 });
-let $$D33 = n("DevModeComponentBrowserOnboardingOverlay", {
+export let DevModeComponentBrowserOnboardingOverlay = createProperies("DevModeComponentBrowserOnboardingOverlay", {
   team: "developer_tools",
   lifecycle: {
     userFlagName: "dev_mode_has_seen_component_browser_onboarding",
     maxTimes: 1
   }
 });
-let $$k92 = n("EditorFigjamWhatsNew", {
+export let EditorFigjamWhatsNew = createProperies("EditorFigjamWhatsNew", {
   team: "figjam"
 });
-let $$M160 = n("EduPostVerification", {
+export let EduPostVerification = createProperies("EduPostVerification", {
   team: "activation"
 });
-let $$F98 = n("EduOffboarding", {
+export let EduOffboarding = createProperies("EduOffboarding", {
   team: "monetization_upgrades"
 });
-let $$j56 = n("EnterpriseOrgAdminOnboarding", {
+export let EnterpriseOrgAdminOnboarding = createProperies("EnterpriseOrgAdminOnboarding", {
   team: "scale"
 });
-let $$U157 = n("EsEsLaunchAnnouncementModal", {
+export let EsEsLaunchAnnouncementModal = createProperies("EsEsLaunchAnnouncementModal", {
   team: "growth_platform",
   lifecycle: {
     userFlagName: "seen_es_es_launch_announcement",
     maxTimes: 1
   }
 });
-let $$B22 = n("EsLaLaunchAnnouncementModal", {
+export let EsLaLaunchAnnouncementModal = createProperies("EsLaLaunchAnnouncementModal", {
   team: "growth_platform",
   lifecycle: {
     userFlagName: "seen_es_la_launch_announcement",
     maxTimes: 1
   }
 });
-let $$G104 = n("FigJamAdvancedDiagrammingOnboarding", {
+export let FigJamAdvancedDiagrammingOnboarding = createProperies("FigJamAdvancedDiagrammingOnboarding", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$V36 = n("FigJamConnectGoogleDrive", {
+export let FigJamConnectGoogleDrive = createProperies("FigJamConnectGoogleDrive", {
   team: "figjam"
 });
-let $$H136 = n("FigJamPanZoomOnboardingDLTBannerOverlay", {
+export let FigJamPanZoomOnboardingDLTBannerOverlay = createProperies("FigJamPanZoomOnboardingDLTBannerOverlay", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$z39 = n("FigJamTryConfirmSave", {
+export let FigJamTryConfirmSave = createProperies("FigJamTryConfirmSave", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$W106 = n("FigJamTryDeviceAlreadyClaimed", {
+export let FigJamTryDeviceAlreadyClaimed = createProperies("FigJamTryDeviceAlreadyClaimed", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$K184 = n("FigJamUI3ToolbeltOnboarding", {
+export let FigJamUI3ToolbeltOnboarding = createProperies("FigJamUI3ToolbeltOnboarding", {
   team: "figjam",
   queueOnBlock: !0,
   lifecycle: {
@@ -197,21 +207,21 @@ let $$K184 = n("FigJamUI3ToolbeltOnboarding", {
     maxTimes: 1
   }
 });
-let $$Y101 = n("FigmaBasicsTooltipOnboarding", {
+export let FigmaBasicsTooltipOnboarding = createProperies("FigmaBasicsTooltipOnboarding", {
   team: "activation",
   queueOnBlock: !0
 });
-let $$$35 = n("FileBrowserFigjamWhatsNew", {
+export let FileBrowserFigjamWhatsNew = createProperies("FileBrowserFigjamWhatsNew", {
   team: "wayfinding"
 });
-let $$X129 = n("GridOnboarding", {
+export let GridOnboarding = createProperies("GridOnboarding", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "seen_grid_onboarding_overlay",
     maxTimes: 1
   }
 });
-let $$q59 = n("SitesOnboardingCallouts", {
+export let SitesOnboardingCallouts = createProperies("SitesOnboardingCallouts", {
   team: "sites_editor",
   lifecycle: {
     userFlagName: "seen_sites_onboarding_callouts",
@@ -219,26 +229,26 @@ let $$q59 = n("SitesOnboardingCallouts", {
   },
   queueOnBlock: !0
 });
-let $$J91 = n("SitesOnboardingCodeCallout", {
+export let SitesOnboardingCodeCallout = createProperies("SitesOnboardingCodeCallout", {
   team: "make",
   lifecycle: {
     userFlagName: "seen_sites_onboarding_code_callout",
     maxTimes: 1
   }
 });
-let $$Z186 = n("SitesOnboardingTOS", {
+export let SitesOnboardingTOS = createProperies("SitesOnboardingTOS", {
   team: "sites_editor",
   queueOnBlock: !0
 });
-let $$Q174 = n("FigmakeOnboardingTOS", {
+export let FigmakeOnboardingTOS = createProperies("FigmakeOnboardingTOS", {
   team: "ai_for_production",
   queueOnBlock: !0
 });
-let $$ee118 = n("FigmakeMobileWebBlockingPopup", {
+export let FigmakeMobileWebBlockingPopup = createProperies("FigmakeMobileWebBlockingPopup", {
   team: "activation",
   queueOnBlock: !0
 });
-let $$et9 = n("FigmakePromoOverlay", {
+export let FigmakePromoOverlay = createProperies("FigmakePromoOverlay", {
   team: "ai_for_production",
   queueOnBlock: !0,
   lifecycle: {
@@ -246,7 +256,7 @@ let $$et9 = n("FigmakePromoOverlay", {
     maxTimes: 1
   }
 });
-let $$er87 = n("FigmakeFileCreationTooltip", {
+export let FigmakeFileCreationTooltip = createProperies("FigmakeFileCreationTooltip", {
   team: "wayfinding",
   queueOnBlock: !0,
   lifecycle: {
@@ -254,28 +264,28 @@ let $$er87 = n("FigmakeFileCreationTooltip", {
     maxTimes: 1
   }
 });
-let $$en5 = n("FigmakeNewFileOnboardingPreGeneration", {
+export let FigmakeNewFileOnboardingPreGeneration = createProperies("FigmakeNewFileOnboardingPreGeneration", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_figmake_new_file_pre_generation_onboarding",
     maxTimes: 1
   }
 });
-let $$ei44 = n("FigmakeNewFileOnboardingPostGeneration", {
+export let FigmakeNewFileOnboardingPostGeneration = createProperies("FigmakeNewFileOnboardingPostGeneration", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_figmake_new_file_post_generation_onboarding",
     maxTimes: 1
   }
 });
-let $$ea128 = n("FigmakeNewFileTemplateInsertionChatNudge", {
+export let FigmakeNewFileTemplateInsertionChatNudge = createProperies("FigmakeNewFileTemplateInsertionChatNudge", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_figmake_new_file_template_insertion_chat_nudge",
     maxTimes: 1
   }
 });
-let $$es170 = n("FigmakeExistingFilesEditorOnboarding", {
+export let FigmakeExistingFilesEditorOnboarding = createProperies("FigmakeExistingFilesEditorOnboarding", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_figmake_existing_files_editor_onboarding",
@@ -283,7 +293,7 @@ let $$es170 = n("FigmakeExistingFilesEditorOnboarding", {
   },
   queueOnBlock: !0
 });
-let $$eo32 = n("FigmakeExistingFilesFullscreenOnboarding", {
+export let FigmakeExistingFilesFullscreenOnboarding = createProperies("FigmakeExistingFilesFullscreenOnboarding", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_figmake_existing_files_fullscreen_onboarding",
@@ -291,7 +301,7 @@ let $$eo32 = n("FigmakeExistingFilesFullscreenOnboarding", {
   },
   queueOnBlock: !0
 });
-let $$el172 = n("FigmakeSelectedDesignSystemOnboarding", {
+export let FigmakeSelectedDesignSystemOnboarding = createProperies("FigmakeSelectedDesignSystemOnboarding", {
   team: "ai_for_production",
   lifecycle: {
     userFlagName: "seen_figmake_selected_design_system_onboarding",
@@ -299,14 +309,14 @@ let $$el172 = n("FigmakeSelectedDesignSystemOnboarding", {
   },
   queueOnBlock: !0
 });
-let $$ed4 = n("FigmakeSendToMakeOnboarding", {
+export let FigmakeSendToMakeOnboarding = createProperies("FigmakeSendToMakeOnboarding", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_figmake_send_to_make_onboarding",
     maxTimes: 1
   }
 });
-let $$ec115 = n("SlidesOnboarding", {
+export let SlidesOnboarding = createProperies("SlidesOnboarding", {
   team: "slides",
   lifecycle: {
     userFlagName: "seen_slides_onboarding",
@@ -314,15 +324,15 @@ let $$ec115 = n("SlidesOnboarding", {
   },
   queueOnBlock: !0
 });
-let $$eu24 = n("SlidesAiWelcome", {
+export let SlidesAiWelcome = createProperies("SlidesAiWelcome", {
   team: "slides",
   queueOnBlock: !0
 });
-let $$ep182 = n("SlidesTemplateOnboarding", {
+export let SlidesTemplateOnboarding = createProperies("SlidesTemplateOnboarding", {
   team: "slides",
   queueOnBlock: !0
 });
-let $$e_197 = n("SlidesProTemplatesAnnouncement", {
+export let SlidesProTemplatesAnnouncement = createProperies("SlidesProTemplatesAnnouncement", {
   team: "slides",
   queueOnBlock: !0,
   lifecycle: {
@@ -330,124 +340,124 @@ let $$e_197 = n("SlidesProTemplatesAnnouncement", {
     maxTimes: 1
   }
 });
-let $$eh149 = n("NuxOnboardingOverlay", {
+export let NuxOnboardingOverlay = createProperies("NuxOnboardingOverlay", {
   team: "activation",
   queueOnBlock: !0
 });
-let $$em147 = n("JapaneseLaunchAnnouncementMachine", {
+export let JapaneseLaunchAnnouncementMachine = createProperies("JapaneseLaunchAnnouncementMachine", {
   team: "growth_platform",
   queueOnBlock: !0
 });
-let $$eg94 = n("KoKrLaunchAnnouncementModal", {
+export let KoKrLaunchAnnouncementModal = createProperies("KoKrLaunchAnnouncementModal", {
   team: "growth_platform",
   lifecycle: {
     userFlagName: "seen_ko_kr_launch_announcement",
     maxTimes: 1
   }
 });
-let $$ef95 = n("LibrariesWorkspaceOnboarding", {
+export let LibrariesWorkspaceOnboarding = createProperies("LibrariesWorkspaceOnboarding", {
   team: "scale",
   allowShowingIfModalPresent: !0
 });
-let $$eE83 = n("LimitedPlanSpacesOnboarding", {
+export let LimitedPlanSpacesOnboarding = createProperies("LimitedPlanSpacesOnboarding", {
   team: "monetization_upgrades",
   lifecycle: {
     userFlagName: "seen_limited_spaces_onboarding",
     maxTimes: 1
   }
 });
-let $$ey84 = n("LocalComponentDragDrop", {
+export let LocalComponentDragDrop = createProperies("LocalComponentDragDrop", {
   team: "monetization_upgrades",
   queueOnBlock: !0
 });
-let $$eb29 = n("MobileCommentDownloadModalPrompt", {
+export let MobileCommentDownloadModalPrompt = createProperies("MobileCommentDownloadModalPrompt", {
   team: "desktop"
 });
-let $$eT151 = n("MobileRedirect", {
+export let MobileRedirect = createProperies("MobileRedirect", {
   team: "activation",
   queueOnBlock: !0
 });
-let $$eI169 = n("MoveDraftsNudge", {
+export let MoveDraftsNudge = createProperies("MoveDraftsNudge", {
   team: "monetization_upgrades"
 });
-let $$eS178 = n("MoveDraftsNudgeV2", {
+export let MoveDraftsNudgeV2 = createProperies("MoveDraftsNudgeV2", {
   team: "monetization_upgrades"
 });
-let $$ev124 = n("MultiplayerObservationNux", {
+export let MultiplayerObservationNux = createProperies("MultiplayerObservationNux", {
   team: "feedback",
   queueOnBlock: !0
 });
-let $$eA143 = n("MultiplayerSpotlightNudgeNux", {
+export let MultiplayerSpotlightNudgeNux = createProperies("MultiplayerSpotlightNudgeNux", {
   team: "feedback"
 });
-let $$ex122 = n("MultiplayerSpotlightNux", {
+export let MultiplayerSpotlightNux = createProperies("MultiplayerSpotlightNux", {
   team: "feedback",
   queueOnBlock: !0
 });
-let $$eN164 = n("OnboardFigJamEditor", {
+export let OnboardFigJamEditor = createProperies("OnboardFigJamEditor", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$eC162 = n("OnboardFigJamEditorBrowseTemplates", {
+export let OnboardFigJamEditorBrowseTemplates = createProperies("OnboardFigJamEditorBrowseTemplates", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$ew62 = n("OnboardFigJamEditorMakeSomething", {
+export let OnboardFigJamEditorMakeSomething = createProperies("OnboardFigJamEditorMakeSomething", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$eO54 = n("OnboardFigJamViewer", {
+export let OnboardFigJamViewer = createProperies("OnboardFigJamViewer", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$eR212 = n("OnboardFigJamEditorUnified", {
+export let OnboardFigJamEditorUnified = createProperies("OnboardFigJamEditorUnified", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$eL202 = n("OnboardFigJamEditorUnifiedPanAndZoom", {
+export let OnboardFigJamEditorUnifiedPanAndZoom = createProperies("OnboardFigJamEditorUnifiedPanAndZoom", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$eP48 = n("OnboardFigJamEditorUnifiedProduct", {
+export let OnboardFigJamEditorUnifiedProduct = createProperies("OnboardFigJamEditorUnifiedProduct", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$eD70 = n("OnboardFileBrowser", {
+export let OnboardFileBrowser = createProperies("OnboardFileBrowser", {
   team: "activation",
   queueOnBlock: !0
 });
-let $$ek100 = n("OnboardNewTextContentRowLocation", {
+export let OnboardNewTextContentRowLocation = createProperies("OnboardNewTextContentRowLocation", {
   team: "prototyping",
   lifecycle: {
     userFlagName: "seen_text_row_location_callout",
     maxTimes: 1
   }
 });
-let $$eM105 = n("OnboardOrgsWelcome", {
+export let OnboardOrgsWelcome = createProperies("OnboardOrgsWelcome", {
   team: "activation"
 });
-let $$eF119 = n("OpenPlaygroundFile", {
+export let OpenPlaygroundFile = createProperies("OpenPlaygroundFile", {
   team: "community"
 });
-let $$ej72 = n("OrgAdminActivityOnboarding", {
+export let OrgAdminActivityOnboarding = createProperies("OrgAdminActivityOnboarding", {
   team: "scale"
 });
-let $$eU65 = n("OrgAdminLicenseGroupsOnboarding", {
+export let OrgAdminLicenseGroupsOnboarding = createProperies("OrgAdminLicenseGroupsOnboarding", {
   team: "scale"
 });
-let $$eB99 = n("OrgAdminMembersOnboarding", {
+export let OrgAdminMembersOnboarding = createProperies("OrgAdminMembersOnboarding", {
   team: "scale"
 });
-let $$eG69 = n("OrgAdminRequestDashboardOnboarding", {
+export let OrgAdminRequestDashboardOnboarding = createProperies("OrgAdminRequestDashboardOnboarding", {
   team: "scale"
 });
-let $$eV28 = n("OrgAdminSurvey", {
+export let OrgAdminSurvey = createProperies("OrgAdminSurvey", {
   team: "scale"
 });
-let $$eH76 = n("OrgAdminTeamOnboarding", {
+export let OrgAdminTeamOnboarding = createProperies("OrgAdminTeamOnboarding", {
   team: "scale"
 });
-let $$ez188 = n("OrgAdminFiltersOnboardingOverlay", {
+export let OrgAdminFiltersOnboardingOverlay = createProperies("OrgAdminFiltersOnboardingOverlay", {
   team: "scale",
   queueOnBlock: !0,
   lifecycle: {
@@ -455,78 +465,78 @@ let $$ez188 = n("OrgAdminFiltersOnboardingOverlay", {
     maxTimes: 1
   }
 });
-let $$eW179 = n("OrgAdminWorkspacesOnboarding", {
+export let OrgAdminWorkspacesOnboarding = createProperies("OrgAdminWorkspacesOnboarding", {
   team: "scale"
 });
-let $$eK31 = n("OrgAdminUnassignedDraftsTabOnboarding", {
+export let OrgAdminUnassignedDraftsTabOnboarding = createProperies("OrgAdminUnassignedDraftsTabOnboarding", {
   team: "scale"
 });
-let $$eY181 = n("OrgAdminMovedUnassignedDraftsOnboarding", {
+export let OrgAdminMovedUnassignedDraftsOnboarding = createProperies("OrgAdminMovedUnassignedDraftsOnboarding", {
   team: "scale"
 });
-let $$e$55 = n("OrgCartAbandonSurvey", {
+export let OrgCartAbandonSurvey = createProperies("OrgCartAbandonSurvey", {
   team: "monetization_upgrades"
 });
-let $$eX96 = n("OrgSelectWorkspace", {
+export let OrgSelectWorkspace = createProperies("OrgSelectWorkspace", {
   team: "wayfinding",
   queueOnBlock: !0
 });
-let $$eq97 = n("OrgTrialExpiredOverlay", {
+export let OrgTrialExpiredOverlay = createProperies("OrgTrialExpiredOverlay", {
   team: "monetization_upgrades",
   queueOnBlock: !0
 });
-let $$eJ121 = n("OrgTrialPendingOverlay", {
+export let OrgTrialPendingOverlay = createProperies("OrgTrialPendingOverlay", {
   team: "monetization_upgrades",
   queueOnBlock: !0
 });
-let $$eZ189 = n("ProductTrialPendingOverlay", {
+export let ProductTrialPendingOverlay = createProperies("ProductTrialPendingOverlay", {
   team: "monetization_upgrades",
   queueOnBlock: !0
 });
-let $$eQ152 = n("OssSalesUpsell", {
+export let OssSalesUpsell = createProperies("OssSalesUpsell", {
   team: "monetization_upgrades",
   queueOnBlock: !0
 });
-let $$e0187 = n("PlanSpacesLaunchOverlay", {
+export let PlanSpacesLaunchOverlay = createProperies("PlanSpacesLaunchOverlay", {
   team: "monetization_upgrades",
   lifecycle: {
     userFlagName: "seen_plan_spaces_launch_modal",
     maxTimes: 1
   }
 });
-let $$e117 = n("PlanSpacesNewStarterTeamOverlay", {
+export let PlanSpacesNewStarterTeamOverlay = createProperies("PlanSpacesNewStarterTeamOverlay", {
   team: "sharing_and_access"
 });
-let $$e2211 = n("PlanSpacesRecreatedStarterTeamOverlay", {
+export let PlanSpacesRecreatedStarterTeamOverlay = createProperies("PlanSpacesRecreatedStarterTeamOverlay", {
   team: "sharing_and_access"
 });
-let $$e5176 = n("PluginPublishInvitePublishersOnboardingNudgeModal", {
+export let PluginPublishInvitePublishersOnboardingNudgeModal = createProperies("PluginPublishInvitePublishersOnboardingNudgeModal", {
   team: "extensibility",
   allowShowingIfModalPresent: !0
 });
-let $$e357 = n("ProTrialsV3EntryOverlay", {
+export let ProTrialsV3EntryOverlay = createProperies("ProTrialsV3EntryOverlay", {
   team: "monetization_upgrades"
 });
-let $$e460 = n("ProTrialsV3ExpiryOverlay", {
+export let ProTrialsV3ExpiryOverlay = createProperies("ProTrialsV3ExpiryOverlay", {
   team: "monetization_upgrades"
 });
-let $$e8126 = n("ProTrialsV3TeamWelcomeOverlay", {
+export let ProTrialsV3TeamWelcomeOverlay = createProperies("ProTrialsV3TeamWelcomeOverlay", {
   team: "monetization_upgrades"
 });
-let $$e677 = n("PromoCodeCreateTeam", {
+export let PromoCodeCreateTeam = createProperies("PromoCodeCreateTeam", {
   team: "monetization_upgrades"
 });
-let $$e734 = n("PromoCodeSelectTeam", {
+export let PromoCodeSelectTeam = createProperies("PromoCodeSelectTeam", {
   team: "monetization_upgrades"
 });
-let $$e9142 = n("PtBrLaunchAnnouncementModal", {
+export let PtBrLaunchAnnouncementModal = createProperies("PtBrLaunchAnnouncementModal", {
   team: "growth_platform",
   lifecycle: {
     userFlagName: "seen_pt_br_launch_announcement",
     maxTimes: 1
   }
 });
-let $$te155 = n("ReadyForDevNodeNameChangeUpsell", {
+export let ReadyForDevNodeNameChangeUpsell = createProperies("ReadyForDevNodeNameChangeUpsell", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_rfd_frame_or_section_upsell",
@@ -534,54 +544,54 @@ let $$te155 = n("ReadyForDevNodeNameChangeUpsell", {
     cooldown: "FORTNIGHTLY"
   }
 });
-let $$tt116 = n("ReadyForDevPageNameChangeUpsell", {
+export let ReadyForDevPageNameChangeUpsell = createProperies("ReadyForDevPageNameChangeUpsell", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_rfd_page_upsell",
     maxTimes: 1
   }
 });
-let $$tr190 = n("SearchWorkspaceOnboarding", {
+export let SearchWorkspaceOnboarding = createProperies("SearchWorkspaceOnboarding", {
   team: "scale"
 });
-let $$tn109 = n("ShareToGoogleClassroomExistingUserOnboarding", {
+export let ShareToGoogleClassroomExistingUserOnboarding = createProperies("ShareToGoogleClassroomExistingUserOnboarding", {
   team: "figjam",
   allowShowingIfModalPresent: !0,
   queueOnBlock: !0
 });
-let $$ti14 = n("ShareToGoogleClassroomNewUserOnboarding", {
+export let ShareToGoogleClassroomNewUserOnboarding = createProperies("ShareToGoogleClassroomNewUserOnboarding", {
   team: "figjam",
   allowShowingIfModalPresent: !0,
   queueOnBlock: !0
 });
-let $$ta89 = n("SidebarWorkspaceLinkOnboarding", {
+export let SidebarWorkspaceLinkOnboarding = createProperies("SidebarWorkspaceLinkOnboarding", {
   team: "wayfinding",
   queueOnBlock: !0
 });
-let $$ts13 = n("SprigSurveysOverlay", {
+export let SprigSurveysOverlay = createProperies("SprigSurveysOverlay", {
   team: "community",
   queueOnBlock: !1,
   allowShowingIfModalPresent: !0
 });
-let $$to134 = n("StarterPlanUpdatesOverlay", {
+export let StarterPlanUpdatesOverlay = createProperies("StarterPlanUpdatesOverlay", {
   team: "monetization_upgrades",
   lifecycle: {
     userFlagName: "seen_starter_plan_updates_overlay",
     maxTimes: 1
   }
 });
-let $$tl2 = n("TeamProjectLinkOverlay", {
+export let TeamProjectLinkOverlay = createProperies("TeamProjectLinkOverlay", {
   team: "monetization_upgrades"
 });
-let $$td103 = n("UniversalUpgrade", {
+export let UniversalUpgrade = createProperies("UniversalUpgrade", {
   team: "monetization_upgrades",
   queueOnBlock: !0
 });
-let $$tc141 = n("UpsellLibrariesConsecutivePaste", {
+export let UpsellLibrariesConsecutivePaste = createProperies("UpsellLibrariesConsecutivePaste", {
   team: "monetization_upgrades",
   queueOnBlock: !0
 });
-let $$tu6 = n("UpsellLibrariesReuseComponentsOverlay", {
+export let UpsellLibrariesReuseComponentsOverlay = createProperies("UpsellLibrariesReuseComponentsOverlay", {
   team: "monetization_upgrades",
   lifecycle: {
     userFlagName: "seen_reuse_components_overlay",
@@ -589,122 +599,122 @@ let $$tu6 = n("UpsellLibrariesReuseComponentsOverlay", {
     cooldown: "DAILY"
   }
 });
-let $$tp196 = n("WorkflowInteropMachine", {
+export let WorkflowInteropMachine = createProperies("WorkflowInteropMachine", {
   team: "activation",
   queueOnBlock: !1
 });
-let $$t_25 = n("WorkshopPointer", {
+export let WorkshopPointer = createProperies("WorkshopPointer", {
   team: "figjam"
 });
-let $$th110 = n("WorkspaceAdminOnboarding", {
+export let WorkspaceAdminOnboarding = createProperies("WorkspaceAdminOnboarding", {
   team: "scale"
 });
-let $$tm16 = n("MobileReplyUpsellAnnouncement", {
+export let MobileReplyUpsellAnnouncement = createProperies("MobileReplyUpsellAnnouncement", {
   team: "desktop"
 });
-let $$tg0 = n("MobileReplyUpsellHint", {
+export let MobileReplyUpsellHint = createProperies("MobileReplyUpsellHint", {
   team: "desktop"
 });
-let $$tf146 = n("FigJamTemplatesWhatsNew", {
+export let FigJamTemplatesWhatsNew = createProperies("FigJamTemplatesWhatsNew", {
   team: "figjam"
 });
-let $$tE193 = n("ColorManagementDefaultToP3Modal", {
+export let ColorManagementDefaultToP3Modal = createProperies("ColorManagementDefaultToP3Modal", {
   team: "editor_usability",
   queueOnBlock: !0
 });
-let $$ty200 = n("LinkShortcutOverlay", {
+export let LinkShortcutOverlay = createProperies("LinkShortcutOverlay", {
   team: "extensibility"
 });
-let $$tb207 = n("MSALOnboardingOverlay", {
+export let MSALOnboardingOverlay = createProperies("MSALOnboardingOverlay", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "seen_msal_onboarding_overlay",
     maxTimes: 1
   }
 });
-let $$tT10 = n("FrameFormattingReactiveFollowUp", {
+export let FrameFormattingReactiveFollowUp = createProperies("FrameFormattingReactiveFollowUp", {
   team: "activation"
 });
-let $$tI37 = n("TextFormattingReactiveFollowUp", {
+export let TextFormattingReactiveFollowUp = createProperies("TextFormattingReactiveFollowUp", {
   team: "activation"
 });
-let $$tS117 = n("SetUserOnboardingProgressUserFlagsEventOnlyOverlay", {
+export let SetUserOnboardingProgressUserFlagsEventOnlyOverlay = createProperies("SetUserOnboardingProgressUserFlagsEventOnlyOverlay", {
   team: "activation"
 });
-let $$tv127 = n("FeedPostDetailZoomPanNudge", {
+export let FeedPostDetailZoomPanNudge = createProperies("FeedPostDetailZoomPanNudge", {
   team: "wayfinding",
   allowShowingIfModalPresent: !0
 });
-let $$tA41 = n("TeamFeedAudienceSelection", {
+export let TeamFeedAudienceSelection = createProperies("TeamFeedAudienceSelection", {
   team: "wayfinding",
   allowShowingIfModalPresent: !0
 });
-let $$tx205 = n("FigJamAiNewFileOverlay", {
+export let FigJamAiNewFileOverlay = createProperies("FigJamAiNewFileOverlay", {
   team: "ai_productivity",
   queueOnBlock: !0
 });
-let $$tN80 = n("FigJamAiSummarizationNudgeOverlay", {
+export let FigJamAiSummarizationNudgeOverlay = createProperies("FigJamAiSummarizationNudgeOverlay", {
   team: "ai_productivity"
 });
-let $$tC113 = n("FigJamAISummarizationEntrpointPointerOverlay", {
+export let FigJamAISummarizationEntrpointPointerOverlay = createProperies("FigJamAISummarizationEntrpointPointerOverlay", {
   team: "ai_productivity"
 });
-let $$tw75 = n("FigJamAiToolbarOverlay", {
+export let FigJamAiToolbarOverlay = createProperies("FigJamAiToolbarOverlay", {
   team: "ai_productivity"
 });
-let $$tO171 = n("FigJamSectionPresetsAnnouncementOverlay", {
+export let FigJamSectionPresetsAnnouncementOverlay = createProperies("FigJamSectionPresetsAnnouncementOverlay", {
   team: "figjam",
   queueOnBlock: !0
 });
-let $$tR7 = n("FigJamSectionPresetPickerCallout", {
+export let FigJamSectionPresetPickerCallout = createProperies("FigJamSectionPresetPickerCallout", {
   team: "figjam"
 });
-let $$tL86 = n("CursorBotV2Overlay", {
+export let CursorBotV2Overlay = createProperies("CursorBotV2Overlay", {
   team: "activation",
   queueOnBlock: !0
 });
-let $$tP120 = n("CursorBotFrameFormattingFollowUp", {
+export let CursorBotFrameFormattingFollowUp = createProperies("CursorBotFrameFormattingFollowUp", {
   team: "activation"
 });
-let $$tD20 = n("CursorBotTextFormattingFollowUp", {
+export let CursorBotTextFormattingFollowUp = createProperies("CursorBotTextFormattingFollowUp", {
   team: "activation"
 });
-let $$tk107 = n("SharingClarityAdminOnboardingOverlay", {
+export let SharingClarityAdminOnboardingOverlay = createProperies("SharingClarityAdminOnboardingOverlay", {
   team: "workflow"
 });
-let $$tM46 = n("SharingClarityBranchModalOverlay", {
+export let SharingClarityBranchModalOverlay = createProperies("SharingClarityBranchModalOverlay", {
   team: "workflow",
   allowShowingIfModalPresent: !0
 });
-let $$tF195 = n("SharingClarityFileAudienceOverlay", {
+export let SharingClarityFileAudienceOverlay = createProperies("SharingClarityFileAudienceOverlay", {
   team: "workflow",
   allowShowingIfModalPresent: !0
 });
-let $$tj27 = n("SharingClarityFileModalOverlay", {
+export let SharingClarityFileModalOverlay = createProperies("SharingClarityFileModalOverlay", {
   team: "workflow",
   allowShowingIfModalPresent: !0
 });
-let $$tU137 = n("SharingClarityPrototypeModalOverlay", {
+export let SharingClarityPrototypeModalOverlay = createProperies("SharingClarityPrototypeModalOverlay", {
   team: "workflow",
   allowShowingIfModalPresent: !0
 });
-let $$tB78 = n("SharingClarityProjectCreationPermissionOverlay", {
+export let SharingClarityProjectCreationPermissionOverlay = createProperies("SharingClarityProjectCreationPermissionOverlay", {
   team: "workflow",
   allowShowingIfModalPresent: !0
 });
-let $$tG85 = n("SharingClarityProjectCreationTeamAccessOverlay", {
+export let SharingClarityProjectCreationTeamAccessOverlay = createProperies("SharingClarityProjectCreationTeamAccessOverlay", {
   team: "workflow",
   allowShowingIfModalPresent: !0
 });
-let $$tV3 = n("SharingClarityProjectModalOverlay", {
+export let SharingClarityProjectModalOverlay = createProperies("SharingClarityProjectModalOverlay", {
   team: "workflow",
   allowShowingIfModalPresent: !0
 });
-let $$tH154 = n("SharingClarityTeamCreationOverlay", {
+export let SharingClarityTeamCreationOverlay = createProperies("SharingClarityTeamCreationOverlay", {
   team: "workflow",
   allowShowingIfModalPresent: !0
 });
-let $$tz148 = n("TeamAdminAuthorityOverlay", {
+export let TeamAdminAuthorityOverlay = createProperies("TeamAdminAuthorityOverlay", {
   team: "scale",
   queueOnBlock: !0,
   lifecycle: {
@@ -712,13 +722,13 @@ let $$tz148 = n("TeamAdminAuthorityOverlay", {
     maxTimes: 1
   }
 });
-let $$tW192 = n("TeamAdminMovedUnassignedDraftsOverlay", {
+export let TeamAdminMovedUnassignedDraftsOverlay = createProperies("TeamAdminMovedUnassignedDraftsOverlay", {
   team: "scale"
 });
-let $$tK52 = n("TeamAdminManageUnassignedDraftsOverlay", {
+export let TeamAdminManageUnassignedDraftsOverlay = createProperies("TeamAdminManageUnassignedDraftsOverlay", {
   team: "scale"
 });
-let $$tY49 = n("TeamAdminPeopleTableChangesOverlay", {
+export let TeamAdminPeopleTableChangesOverlay = createProperies("TeamAdminPeopleTableChangesOverlay", {
   team: "scale",
   queueOnBlock: !0,
   lifecycle: {
@@ -726,7 +736,7 @@ let $$tY49 = n("TeamAdminPeopleTableChangesOverlay", {
     maxTimes: 1
   }
 });
-let $$t$19 = n("OrgAdminFlyoutOnboardingOverlay", {
+export let OrgAdminFlyoutOnboardingOverlay = createProperies("OrgAdminFlyoutOnboardingOverlay", {
   team: "scale",
   queueOnBlock: !0,
   lifecycle: {
@@ -734,7 +744,7 @@ let $$t$19 = n("OrgAdminFlyoutOnboardingOverlay", {
     maxTimes: 1
   }
 });
-let $$tX12 = n("OrgAdminAuthorityOverlay", {
+export let OrgAdminAuthorityOverlay = createProperies("OrgAdminAuthorityOverlay", {
   team: "scale",
   queueOnBlock: !0,
   lifecycle: {
@@ -742,7 +752,7 @@ let $$tX12 = n("OrgAdminAuthorityOverlay", {
     maxTimes: 1
   }
 });
-let $$tq88 = n("AdminDashboardOnboardingOverlay", {
+export let AdminDashboardOnboardingOverlay = createProperies("AdminDashboardOnboardingOverlay", {
   team: "monetization_expansion",
   queueOnBlock: !0,
   lifecycle: {
@@ -750,7 +760,7 @@ let $$tq88 = n("AdminDashboardOnboardingOverlay", {
     maxTimes: 1
   }
 });
-let $$tJ11 = n("AdminSeatApprovalSettingsOnboardingOverlay", {
+export let AdminSeatApprovalSettingsOnboardingOverlay = createProperies("AdminSeatApprovalSettingsOnboardingOverlay", {
   team: "monetization_expansion",
   queueOnBlock: !0,
   lifecycle: {
@@ -758,7 +768,7 @@ let $$tJ11 = n("AdminSeatApprovalSettingsOnboardingOverlay", {
     maxTimes: 1
   }
 });
-let $$tZ180 = n("AdminNavigationOnboardingOverlay", {
+export let AdminNavigationOnboardingOverlay = createProperies("AdminNavigationOnboardingOverlay", {
   team: "scale",
   queueOnBlock: !0,
   lifecycle: {
@@ -766,7 +776,7 @@ let $$tZ180 = n("AdminNavigationOnboardingOverlay", {
     maxTimes: 1
   }
 });
-let $$tQ183 = n("AdminBillingOverviewSecondaryTabOnboardingOverlay", {
+export let AdminBillingOverviewSecondaryTabOnboardingOverlay = createProperies("AdminBillingOverviewSecondaryTabOnboardingOverlay", {
   team: "scale",
   queueOnBlock: !0,
   lifecycle: {
@@ -774,7 +784,7 @@ let $$tQ183 = n("AdminBillingOverviewSecondaryTabOnboardingOverlay", {
     maxTimes: 1
   }
 });
-let $$t0145 = n("OrgAdminBillingGroupsSecondaryTabOnboardingOverlay", {
+export let OrgAdminBillingGroupsSecondaryTabOnboardingOverlay = createProperies("OrgAdminBillingGroupsSecondaryTabOnboardingOverlay", {
   team: "scale",
   queueOnBlock: !0,
   lifecycle: {
@@ -782,19 +792,19 @@ let $$t0145 = n("OrgAdminBillingGroupsSecondaryTabOnboardingOverlay", {
     maxTimes: 1
   }
 });
-let $$t121 = n("StartingPointsTemplatesModal", {
+export let StartingPointsTemplatesModal = createProperies("StartingPointsTemplatesModal", {
   team: "activation",
   queueOnBlock: !0,
   allowShowingIfModalPresent: !0
 });
-let $$t2125 = n("FilePreviewOverlay", {
+export let FilePreviewOverlay = createProperies("FilePreviewOverlay", {
   team: "search",
   lifecycle: {
     userFlagName: "seen_file_preview_overlay",
     maxTimes: 1
   }
 });
-let $$t5135 = n("DevModeOnboardingTooltipOverlay", {
+export let DevModeOnboardingTooltipOverlay = createProperies("DevModeOnboardingTooltipOverlay", {
   team: "activation",
   queueOnBlock: !0,
   lifecycle: {
@@ -802,7 +812,7 @@ let $$t5135 = n("DevModeOnboardingTooltipOverlay", {
     maxTimes: 1
   }
 });
-let $$t3161 = n("DeveloperRFDUpsellOverlay", {
+export let DeveloperRFDUpsellOverlay = createProperies("DeveloperRFDUpsellOverlay", {
   team: "activation",
   queueOnBlock: !1,
   lifecycle: {
@@ -811,7 +821,7 @@ let $$t3161 = n("DeveloperRFDUpsellOverlay", {
     cooldown: "MONTHLY"
   }
 });
-let $$t450 = n("DeveloperContextualUpsellExportOverlay", {
+export let DeveloperContextualUpsellExportOverlay = createProperies("DeveloperContextualUpsellExportOverlay", {
   team: "activation",
   queueOnBlock: !0,
   lifecycle: {
@@ -820,7 +830,7 @@ let $$t450 = n("DeveloperContextualUpsellExportOverlay", {
     cooldown: "FORTNIGHTLY"
   }
 });
-let $$t861 = n("DeveloperContextualUpsellMeasureOverlay", {
+export let DeveloperContextualUpsellMeasureOverlay = createProperies("DeveloperContextualUpsellMeasureOverlay", {
   team: "activation",
   queueOnBlock: !0,
   lifecycle: {
@@ -829,7 +839,7 @@ let $$t861 = n("DeveloperContextualUpsellMeasureOverlay", {
     cooldown: "FORTNIGHTLY"
   }
 });
-let $$t68 = n("JobTitlePromptOverlay", {
+export let JobTitlePromptOverlay = createProperies("JobTitlePromptOverlay", {
   team: "activation",
   queueOnBlock: !0,
   lifecycle: {
@@ -838,7 +848,7 @@ let $$t68 = n("JobTitlePromptOverlay", {
     cooldown: "FORTNIGHTLY"
   }
 });
-let $$t7158 = n("SeatBillingTermsOverlay", {
+export let SeatBillingTermsOverlay = createProperies("SeatBillingTermsOverlay", {
   team: "monetization_upgrades",
   queueOnBlock: !0,
   lifecycle: {
@@ -846,75 +856,75 @@ let $$t7158 = n("SeatBillingTermsOverlay", {
     cooldown: "DAILY"
   }
 });
-let $$t9133 = n("SeatApprovalOverlay", {
+export let SeatApprovalOverlay = createProperies("SeatApprovalOverlay", {
   team: "monetization_upgrades",
   queueOnBlock: !0
 });
-let $$re111 = n("FolderSettingsConnectedProjectsOnboardingOverlay", {
+export let FolderSettingsConnectedProjectsOnboardingOverlay = createProperies("FolderSettingsConnectedProjectsOnboardingOverlay", {
   team: "workflow"
 });
-let $$rt150 = n("FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay", {
+export let FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay = createProperies("FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay", {
   team: "workflow"
 });
-let $$rr156 = n("ConnectedProjectsAdminSettingsOverlay", {
+export let ConnectedProjectsAdminSettingsOverlay = createProperies("ConnectedProjectsAdminSettingsOverlay", {
   team: "workflow",
   lifecycle: {
     userFlagName: "seen_connected_projects_admin_settings_overlay",
     maxTimes: 1
   }
 });
-let $$rn79 = n("ConnectedProjectsAdminSettingsContentTabOverlay", {
+export let ConnectedProjectsAdminSettingsContentTabOverlay = createProperies("ConnectedProjectsAdminSettingsContentTabOverlay", {
   team: "workflow",
   lifecycle: {
     userFlagName: "seen_connected_projects_admin_settings_content_tab_overlay",
     maxTimes: 1
   }
 });
-let $$ri53 = n("ConnectedProjectsUsageOverlay", {
+export let ConnectedProjectsUsageOverlay = createProperies("ConnectedProjectsUsageOverlay", {
   team: "workflow"
 });
-let $$ra58 = n("FileViewHistoryOnboardingOverlay", {
+export let FileViewHistoryOnboardingOverlay = createProperies("FileViewHistoryOnboardingOverlay", {
   team: "workflow"
 });
-let $$rs68 = n("DtmDeprecationFileOverlay", {
+export let DtmDeprecationFileOverlay = createProperies("DtmDeprecationFileOverlay", {
   team: "workflow",
   lifecycle: {
     userFlagName: "seen_dtm_deprecation_file_overlay",
     maxTimes: 1
   }
 });
-let $$ro123 = n("DtmDeprecationPostMigrationOverlay", {
+export let DtmDeprecationPostMigrationOverlay = createProperies("DtmDeprecationPostMigrationOverlay", {
   team: "workflow",
   lifecycle: {
     userFlagName: "seen_dtm_deprecation_post_migration_overlay",
     maxTimes: 1
   }
 });
-let $$rl204 = n("DtmDeprecationNavToPlanOverlay", {
+export let DtmDeprecationNavToPlanOverlay = createProperies("DtmDeprecationNavToPlanOverlay", {
   team: "workflow",
   lifecycle: {
     userFlagName: "seen_dtm_deprecation_nav_to_plan_overlay",
     maxTimes: 1
   }
 });
-let $$rd40 = n("ColorContrastOnboardingOverlay", {
+export let ColorContrastOnboardingOverlay = createProperies("ColorContrastOnboardingOverlay", {
   team: "developer_tools",
   lifecycle: {
     userFlagName: "has_seen_color_contrast_onboarding_overlay",
     maxTimes: 1
   }
 });
-let $$rc102 = n("EyeDropperToolInDevModeOnboardingOverlay", {
+export let EyeDropperToolInDevModeOnboardingOverlay = createProperies("EyeDropperToolInDevModeOnboardingOverlay", {
   team: "developer_tools",
   lifecycle: {
     userFlagName: "has_seen_eyedropper_tool_in_dev_mode_onboarding_overlay",
     maxTimes: 1
   }
 });
-let $$ru168 = n("GuestLanguagePickerOverlay", {
+export let GuestLanguagePickerOverlay = createProperies("GuestLanguagePickerOverlay", {
   team: "growth_platform"
 });
-let $$rp18 = n("DevModeDemoFileEntryPoint", {
+export let DevModeDemoFileEntryPoint = createProperies("DevModeDemoFileEntryPoint", {
   team: "activation",
   lifecycle: {
     userFlagName: "has_seen_dev_mode_demo_file_entry_point_popup",
@@ -922,7 +932,7 @@ let $$rp18 = n("DevModeDemoFileEntryPoint", {
     cooldown: "DAILY"
   }
 });
-let $$r_153 = n("CooperBulkCreate", {
+export let CooperBulkCreate = createProperies("CooperBulkCreate", {
   team: "project_buzz",
   queueOnBlock: !0,
   lifecycle: {
@@ -930,7 +940,7 @@ let $$r_153 = n("CooperBulkCreate", {
     maxTimes: 1
   }
 });
-let $$rh67 = n("CooperInsertLockedTemplate", {
+export let CooperInsertLockedTemplate = createProperies("CooperInsertLockedTemplate", {
   team: "project_buzz",
   queueOnBlock: !0,
   lifecycle: {
@@ -938,11 +948,11 @@ let $$rh67 = n("CooperInsertLockedTemplate", {
     maxTimes: 1
   }
 });
-let $$rm81 = n("CooperModal", {
+export let CooperModal = createProperies("CooperModal", {
   team: "project_buzz",
   queueOnBlock: !0
 });
-let $$rg74 = n("CooperPublishTemplatesOverview", {
+export let CooperPublishTemplatesOverview = createProperies("CooperPublishTemplatesOverview", {
   team: "project_buzz",
   queueOnBlock: !0,
   lifecycle: {
@@ -950,130 +960,102 @@ let $$rg74 = n("CooperPublishTemplatesOverview", {
     maxTimes: 1
   }
 });
-let $$rf163 = n("SitesStarterFullscreenOverlay", {
+export let SitesStarterFullscreenOverlay = createProperies("SitesStarterFullscreenOverlay", {
   team: "monetization_upgrades",
   lifecycle: {
     userFlagName: "seen_sites_starter_fullscreen_overlay",
     cooldown: "DAILY"
   }
 });
-let $$rE213 = n("FigMakeStarterFullscreenOverlay", {
+export let FigMakeStarterFullscreenOverlay = createProperies("FigMakeStarterFullscreenOverlay", {
   team: "monetization_upgrades",
   lifecycle: {
     userFlagName: "seen_figmake_starter_fullscreen_overlay",
     cooldown: "DAILY"
   }
 });
-let $$ry23 = n("KoreanReportTranslationIssueCallout", {
+export let KoreanReportTranslationIssueCallout = createProperies("KoreanReportTranslationIssueCallout", {
   team: "growth_platform",
   lifecycle: {
     userFlagName: "seen_korean_report_translation_issue_callout",
     maxTimes: 1
   }
 });
-let $$rb185 = n("FigJamAIActionsCallout", {
+export let FigJamAIActionsCallout = createProperies("FigJamAIActionsCallout", {
   team: "figjam",
   lifecycle: {
     userFlagName: "seen_figjam_ai_actions_callout",
     maxTimes: 1
   }
 });
-let $$rT15 = n("DrawFirstTimeOnboarding", {
+export let DrawFirstTimeOnboarding = createProperies("DrawFirstTimeOnboarding", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "seen_draw_first_time_onboarding",
     maxTimes: 1
   }
 });
-let $$rI71 = n("DrawSecondaryToolbeltOnboarding", {
+export let DrawSecondaryToolbeltOnboarding = createProperies("DrawSecondaryToolbeltOnboarding", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "seen_draw_secondary_toolbelt_onboarding",
     maxTimes: 1
   }
 });
-let $$rS199 = n("DrawPropertiesPanelOnboarding", {
+export let DrawPropertiesPanelOnboarding = createProperies("DrawPropertiesPanelOnboarding", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "seen_draw_properties_panel_onboarding",
     maxTimes: 1
   }
 });
-let $$$$rv209 = n("DrawDesignFollowupOnboarding", {
+export let DrawDesignFollowupOnboarding = createProperies("DrawDesignFollowupOnboarding", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "seen_draw_design_followup_onboarding",
     maxTimes: 1
   }
 });
-let $$rA210 = n("DrawVariableWidthStrokeOnboarding", {
+export let DrawVariableWidthStrokeOnboarding = createProperies("DrawVariableWidthStrokeOnboarding", {
   team: "texture_labs",
   lifecycle: {
     userFlagName: "seen_draw_variable_width_stroke_onboarding",
     maxTimes: 1
   }
 });
-let $$rx82 = n("DrawScatterBrushOnboarding", {
+export let DrawScatterBrushOnboarding = createProperies("DrawScatterBrushOnboarding", {
   team: "texture_labs",
   lifecycle: {
     userFlagName: "seen_draw_scatter_brush_onboarding",
     maxTimes: 1
   }
 });
-let $$rN144 = n("TOSAgreementOverlay", {
+export let TOSAgreementOverlay = createProperies("TOSAgreementOverlay", {
   team: "activation",
   queueOnBlock: !0
 });
-let $$rC139 = n("DrawPostConfigNudge", {
+export let DrawPostConfigNudge = createProperies("DrawPostConfigNudge", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "seen_draw_post_config_nudge",
     maxTimes: 1
   }
 });
-let $$rw42 = n("DrawBackToDesignNudge", {
+export let DrawBackToDesignNudge = createProperies("DrawBackToDesignNudge", {
   team: "text_and_vector",
   lifecycle: {
     userFlagName: "seen_draw_back_to_design_nudge",
     maxTimes: 1
   }
 });
-n("StringManagementEntryOnboardingOverlay", {
-  team: "growth_platform",
-  lifecycle: {
-    userFlagName: "seen_string_management_entry_onboarding_overlay",
-    maxTimes: 1
-  }
-});
-n("StringManagementIntroOnboardingOverlay", {
-  team: "growth_platform",
-  lifecycle: {
-    userFlagName: "seen_string_management_intro_onboarding_overlay",
-    maxTimes: 1
-  }
-});
-n("StringManagementAddNewOnboardingOverlay", {
-  team: "growth_platform",
-  lifecycle: {
-    userFlagName: "seen_string_management_add_new_onboarding_overlay",
-    maxTimes: 1
-  }
-});
-n("StringManagementFeatureOnboardingOverlay", {
-  team: "growth_platform",
-  lifecycle: {
-    userFlagName: "seen_string_management_feature_onboarding_overlay",
-    maxTimes: 1
-  }
-});
-let $$rO203 = n("ViewerDevModeStatusChangedTooltipOverlay", {
+export let ViewerDevModeStatusChangedTooltipOverlay = createProperies("ViewerDevModeStatusChangedTooltipOverlay", {
   team: "activation",
   lifecycle: {
     userFlagName: "dev_mode_has_seen_viewer_dev_mode_status_changed_notif_overlay",
     maxTimes: 1
   }
 });
-let $$rR167 = n("McpEnableButtonCalloutOverlay", {
+export let McpEnableButtonCalloutOverlay = createProperies("McpEnableButtonCalloutOverlay", {
   team: "developer_tools",
   lifecycle: {
     userFlagName: "dev_mode_mcp_has_seen_mcp_enable_button_callout",
@@ -1081,7 +1063,7 @@ let $$rR167 = n("McpEnableButtonCalloutOverlay", {
     cooldown: "WEEKLY"
   }
 });
-let $$rL198 = n("BrowserNotificationsOnboardingOverlay", {
+export let BrowserNotificationsOnboardingOverlay = createProperies("BrowserNotificationsOnboardingOverlay", {
   team: "wayfinding",
   lifecycle: {
     localStorageName: "seen_browser_notifications_onboarding_overlay",
@@ -1089,238 +1071,238 @@ let $$rL198 = n("BrowserNotificationsOnboardingOverlay", {
     cooldown: "WEEKLY"
   }
 });
-let $$rP64 = n("GlassEffectOnboardingOverlay", {
+export let GlassEffectOnboardingOverlay = createProperies("GlassEffectOnboardingOverlay", {
   team: "texture_labs",
   lifecycle: {
     userFlagName: "seen_glass_effect_onboarding_overlay",
     maxTimes: 1
   }
 });
-let $$rD63 = n("VideoFillCallout", {
+export let VideoFillCallout = createProperies("VideoFillCallout", {
   team: "sites_web_publishing",
   lifecycle: {
     userFlagName: "seen_video_fill_callout",
     maxTimes: 1
   }
 });
-let $$rk173 = n("FigmaMakeUpsellInDesignEditorOverlay", {
+export let FigmaMakeUpsellInDesignEditorOverlay = createProperies("FigmaMakeUpsellInDesignEditorOverlay", {
   team: "activation",
   lifecycle: {
     userFlagName: "seen_figma_make_upsell_in_design_editor_overlay",
     maxTimes: 1
   }
 });
-export const $T1 = $$tg0;
-export const B14 = $$i1;
-export const BTz = $$tl2;
-export const BWk = $$tV3;
-export const BZN = $$ed4;
-export const Bd = $$en5;
-export const BrS = $$tu6;
-export const Byv = $$tR7;
-export const CAe = $$t68;
-export const CBZ = $$et9;
-export const CVA = $$tT10;
-export const Clh = $$tJ11;
-export const DE1 = $$tX12;
-export const DFF = $$ts13;
-export const DKg = $$ti14;
-export const Dkp = $$rT15;
-export const Dqt = $$tm16;
-export const Duq = $$e117;
-export const E5y = $$rp18;
-export const EKN = $$t$19;
-export const ENg = $$tD20;
-export const EYw = $$t121;
-export const FJT = $$B22;
-export const FR6 = $$ry23;
-export const Fff = $$eu24;
-export const Fq3 = $$t_25;
-export const FtN = $$R26;
-export const GCV = $$tj27;
-export const GFz = $$eV28;
-export const H2x = $$eb29;
-export const HU3 = $$I30;
-export const HaT = $$eK31;
-export const Htp = $$eo32;
-export const Hx5 = $$D33;
-export const I$z = $$e734;
-export const I3H = $$$35;
-export const I5n = $$V36;
-export const IQ = $$tI37;
-export const Iu5 = $$L38;
-export const JGK = $$z39;
-export const JUF = $$rd40;
-export const K69 = $$tA41;
-export const KP = $$rw42;
-export const KTt = $$y43;
-export const KYV = $$ei44;
-export const K_h = $$A45;
-export const KdZ = $$tM46;
-export const Kgs = $$p47;
-export const Kze = $$eP48;
-export const L69 = $$tY49;
-export const L6E = $$t450;
-export const LB2 = $$S51;
-export const LPt = $$tK52;
-export const LQ8 = $$ri53;
-export const MJs = $$eO54;
-export const MYY = $$e$55;
-export const Msu = $$j56;
-export const MwQ = $$e357;
-export const NM0 = $$ra58;
-export const Nbd = $$q59;
-export const NdL = $$e460;
-export const Nh9 = $$t861;
-export const Njd = $$ew62;
-export const Nlr = $$rD63;
-export const Nwg = $$rP64;
-export const O5v = $$eU65;
-export const O9D = $$h66;
-export const ODB = $$rh67;
-export const OKV = $$rs68;
-export const ONe = $$eG69;
-export const Ob5 = $$eD70;
-export const PXv = $$rI71;
-export const Q16 = $$ej72;
-export const QI3 = $$E73;
-export const QKV = $$rg74;
-export const QLv = $$tw75;
-export const Ql8 = $$eH76;
-export const Qlc = $$e677;
-export const QpH = $$tB78;
-export const QzE = $$rn79;
-export const RSb = $$tN80;
-export const SAR = $$rm81;
-export const SAW = $$rx82;
-export const Sgd = $$eE83;
-export const Smd = $$ey84;
-export const SqV = $$tG85;
-export const SyB = $$tL86;
-export const TUm = $$er87;
-export const TaD = $$tq88;
-export const Tp6 = $$ta89;
-export const TrJ = $$f90;
-export const TtK = $$J91;
-export const Ttn = $$k92;
-export const Tuf = $$T93;
-export const Tw6 = $$eg94;
-export const UDe = $$ef95;
-export const USq = $$eX96;
-export const Ujx = $$eq97;
-export const Ult = $$F98;
-export const UmN = $$eB99;
-export const V86 = $$ek100;
-export const WD4 = $$Y101;
-export const War = $$rc102;
-export const Wb3 = $$td103;
-export const Wd_ = $$G104;
-export const X5_ = $$eM105;
-export const XAb = $$W106;
-export const XIg = $$tk107;
-export const Xu4 = $$w108;
-export const Y2_ = $$tn109;
-export const YHe = $$th110;
-export const YPG = $$re111;
-export const Yd_ = $$d112;
-export const YiU = $$tC113;
-export const Ypw = $$C114;
-export const Yqi = $$ec115;
-export const ZNl = $$tt116;
-export const _5$ = $$tS117;
-export const __X = $$ee118;
-export const _v_ = $$eF119;
-export const a9B = $$tP120;
-export const aBI = $$eJ121;
-export const aI5 = $$ex122;
-export const ak5 = $$ro123;
-export const ar0 = $$ev124;
-export const b0J = $$t2125;
-export const bGx = $$e8126;
-export const bIZ = $$tv127;
-export const bbp = $$ea128;
-export const c$$ = $$X129;
-export const c6t = $$m130;
-export const cJy = $$c131;
-export const cvy = $$_132;
-export const d8X = $$t9133;
-export const dYj = $$to134;
-export const dvJ = $$t5135;
-export const eD$ = $$H136;
-export const ePo = $$tU137;
-export const efW = $$a138;
-export const evB = $$rC139;
-export const fQh = $$o140;
-export const g4U = $$tc141;
-export const gik = $$e9142;
-export const hPP = $$eA143;
-export const hib = $$rN144;
-export const hoH = $$t0145;
-export const hsL = $$tf146;
-export const hxO = $$em147;
-export const iq7 = $$tz148;
-export const j0N = $$eh149;
-export const j9$ = $$rt150;
-export const jQF = $$eT151;
-export const jRE = $$eQ152;
-export const jk = $$r_153;
-export const jkr = $$tH154;
-export const kBA = $$te155;
-export const kBq = $$rr156;
-export const kKu = $$U157;
-export const kSi = $$t7158;
-export const kmj = $$x159;
-export const kmq = $$M160;
-export const koo = $$t3161;
-export const kp0 = $$eC162;
-export const l4 = $$rf163;
-export const lLk = $$eN164;
-export const l_p = $$g165;
-export const lk2 = $$l166;
-export const ma5 = $$rR167;
-export const nRk = $$ru168;
-export const nWd = $$eI169;
-export const p2q = $$es170;
-export const pjo = $$tO171;
-export const q6k = $$el172;
-export const qiY = $$rk173;
-export const qmK = $$Q174;
-export const qnr = $$v175;
-export const qw_ = $$e5176;
-export const r3Y = $$O177;
-export const r4m = $$eS178;
-export const rQs = $$eW179;
-export const rRT = $$tZ180;
-export const rv = $$eY181;
-export const s1f = $$ep182;
-export const s3e = $$tQ183;
-export const sJD = $$K184;
-export const sP8 = $$rb185;
-export const sfE = $$Z186;
-export const sqw = $$e0187;
-export const swf = $$ez188;
-export const t8H = $$eZ189;
-export const tBR = $$tr190;
-export const tUL = $$u191;
-export const tZO = $$tW192;
-export const t_E = $$tE193;
-export const tb3 = $$N194;
-export const tzJ = $$tF195;
-export const uPw = $$tp196;
-export const uTW = $$e_197;
-export const ueY = $$rL198;
-export const v58 = $$rS199;
-export const v75 = $$ty200;
-export const vlG = $$b201;
-export const wRI = $$eL202;
-export const wRw = $$rO203;
-export const xPo = $$rl204;
-export const xiH = $$tx205;
-export const xjb = $$P206;
-export const xtb = $$tb207;
-export const y4J = $$s208;
-export const y_w = $$$$rv209;
-export const yc_ = $$rA210;
-export const yjU = $$e2211;
-export const zoI = $$eR212;
-export const zpn = $$rE213;
+export const $T1 = MobileReplyUpsellHint;
+export const B14 = AdvancedPrototypingUpsellOverlay;
+export const BTz = TeamProjectLinkOverlay;
+export const BWk = SharingClarityProjectModalOverlay;
+export const BZN = FigmakeSendToMakeOnboarding;
+export const Bd = FigmakeNewFileOnboardingPreGeneration;
+export const BrS = UpsellLibrariesReuseComponentsOverlay;
+export const Byv = FigJamSectionPresetPickerCallout;
+export const CAe = JobTitlePromptOverlay;
+export const CBZ = FigmakePromoOverlay;
+export const CVA = FrameFormattingReactiveFollowUp;
+export const Clh = AdminSeatApprovalSettingsOnboardingOverlay;
+export const DE1 = OrgAdminAuthorityOverlay;
+export const DFF = SprigSurveysOverlay;
+export const DKg = ShareToGoogleClassroomNewUserOnboarding;
+export const Dkp = DrawFirstTimeOnboarding;
+export const Dqt = MobileReplyUpsellAnnouncement;
+export const Duq = PlanSpacesNewStarterTeamOverlay;
+export const E5y = DevModeDemoFileEntryPoint;
+export const EKN = OrgAdminFlyoutOnboardingOverlay;
+export const ENg = CursorBotTextFormattingFollowUp;
+export const EYw = StartingPointsTemplatesModal;
+export const FJT = EsLaLaunchAnnouncementModal;
+export const FR6 = KoreanReportTranslationIssueCallout;
+export const Fff = SlidesAiWelcome;
+export const Fq3 = WorkshopPointer;
+export const FtN = DevModeFocusViewOnboardingOverlay;
+export const GCV = SharingClarityFileModalOverlay;
+export const GFz = OrgAdminSurvey;
+export const H2x = MobileCommentDownloadModalPrompt;
+export const HU3 = UI3ReactivationOverlay;
+export const HaT = OrgAdminUnassignedDraftsTabOnboarding;
+export const Htp = FigmakeExistingFilesFullscreenOnboarding;
+export const Hx5 = DevModeComponentBrowserOnboardingOverlay;
+export const I$z = PromoCodeSelectTeam;
+export const I3H = FileBrowserFigjamWhatsNew;
+export const I5n = FigJamConnectGoogleDrive;
+export const IQ = TextFormattingReactiveFollowUp;
+export const Iu5 = DevModeInteractiveInspectionOnboardingOverlay;
+export const JGK = FigJamTryConfirmSave;
+export const JUF = ColorContrastOnboardingOverlay;
+export const K69 = TeamFeedAudienceSelection;
+export const KP = DrawBackToDesignNudge;
+export const KTt = AIOnboarding;
+export const KYV = FigmakeNewFileOnboardingPostGeneration;
+export const K_h = DesignFileLinkExpiration;
+export const KdZ = SharingClarityBranchModalOverlay;
+export const Kgs = ResourceHubPromotionalOverlay;
+export const Kze = OnboardFigJamEditorUnifiedProduct;
+export const L69 = TeamAdminPeopleTableChangesOverlay;
+export const L6E = DeveloperContextualUpsellExportOverlay;
+export const LB2 = CustomSectionsNudge;
+export const LPt = TeamAdminManageUnassignedDraftsOverlay;
+export const LQ8 = ConnectedProjectsUsageOverlay;
+export const MJs = OnboardFigJamViewer;
+export const MYY = OrgCartAbandonSurvey;
+export const Msu = EnterpriseOrgAdminOnboarding;
+export const MwQ = ProTrialsV3EntryOverlay;
+export const NM0 = FileViewHistoryOnboardingOverlay;
+export const Nbd = SitesOnboardingCallouts;
+export const NdL = ProTrialsV3ExpiryOverlay;
+export const Nh9 = DeveloperContextualUpsellMeasureOverlay;
+export const Njd = OnboardFigJamEditorMakeSomething;
+export const Nlr = VideoFillCallout;
+export const Nwg = GlassEffectOnboardingOverlay;
+export const O5v = OrgAdminLicenseGroupsOnboarding;
+export const O9D = CommunityMonetizationMetricsTabOnboarding;
+export const ODB = CooperInsertLockedTemplate;
+export const OKV = DtmDeprecationFileOverlay;
+export const ONe = OrgAdminRequestDashboardOnboarding;
+export const Ob5 = OnboardFileBrowser;
+export const PXv = DrawSecondaryToolbeltOnboarding;
+export const Q16 = OrgAdminActivityOnboarding;
+export const QI3 = VisualAssetPacksTooltip;
+export const QKV = CooperPublishTemplatesOverview;
+export const QLv = FigJamAiToolbarOverlay;
+export const Ql8 = OrgAdminTeamOnboarding;
+export const Qlc = PromoCodeCreateTeam;
+export const QpH = SharingClarityProjectCreationPermissionOverlay;
+export const QzE = ConnectedProjectsAdminSettingsContentTabOverlay;
+export const RSb = FigJamAiSummarizationNudgeOverlay;
+export const SAR = CooperModal;
+export const SAW = DrawScatterBrushOnboarding;
+export const Sgd = LimitedPlanSpacesOnboarding;
+export const Smd = LocalComponentDragDrop;
+export const SqV = SharingClarityProjectCreationTeamAccessOverlay;
+export const SyB = CursorBotV2Overlay;
+export const TUm = FigmakeFileCreationTooltip;
+export const TaD = AdminDashboardOnboardingOverlay;
+export const Tp6 = SidebarWorkspaceLinkOnboarding;
+export const TrJ = VisualAssetsPanelTooltip;
+export const TtK = SitesOnboardingCodeCallout;
+export const Ttn = EditorFigjamWhatsNew;
+export const Tuf = UI3LabelsEducation;
+export const Tw6 = KoKrLaunchAnnouncementModal;
+export const UDe = LibrariesWorkspaceOnboarding;
+export const USq = OrgSelectWorkspace;
+export const Ujx = OrgTrialExpiredOverlay;
+export const Ult = EduOffboarding;
+export const UmN = OrgAdminMembersOnboarding;
+export const V86 = OnboardNewTextContentRowLocation;
+export const WD4 = FigmaBasicsTooltipOnboarding;
+export const War = EyeDropperToolInDevModeOnboardingOverlay;
+export const Wb3 = UniversalUpgrade;
+export const Wd_ = FigJamAdvancedDiagrammingOnboarding;
+export const X5_ = OnboardOrgsWelcome;
+export const XAb = FigJamTryDeviceAlreadyClaimed;
+export const XIg = SharingClarityAdminOnboardingOverlay;
+export const Xu4 = DevModeUpgradedPopup;
+export const Y2_ = ShareToGoogleClassroomExistingUserOnboarding;
+export const YHe = WorkspaceAdminOnboarding;
+export const YPG = FolderSettingsConnectedProjectsOnboardingOverlay;
+export const Yd_ = CollectiveUpsellOverlay;
+export const YiU = FigJamAISummarizationEntrpointPointerOverlay;
+export const Ypw = DevModeDemoFileTourOverlay;
+export const Yqi = SlidesOnboarding;
+export const ZNl = ReadyForDevPageNameChangeUpsell;
+export const _5$ = SetUserOnboardingProgressUserFlagsEventOnlyOverlay;
+export const __X = FigmakeMobileWebBlockingPopup;
+export const _v_ = OpenPlaygroundFile;
+export const a9B = CursorBotFrameFormattingFollowUp;
+export const aBI = OrgTrialPendingOverlay;
+export const aI5 = MultiplayerSpotlightNux;
+export const ak5 = DtmDeprecationPostMigrationOverlay;
+export const ar0 = MultiplayerObservationNux;
+export const b0J = FilePreviewOverlay;
+export const bGx = ProTrialsV3TeamWelcomeOverlay;
+export const bIZ = FeedPostDetailZoomPanNudge;
+export const bbp = FigmakeNewFileTemplateInsertionChatNudge;
+export const c$$ = GridOnboarding;
+export const c6t = CommunityProfileAdminDropdownOnboarding;
+export const cJy = CommunityCreatorMediaUpsellModal;
+export const cvy = CommunityTabOnboardingOverlay;
+export const d8X = SeatApprovalOverlay;
+export const dYj = StarterPlanUpdatesOverlay;
+export const dvJ = DevModeOnboardingTooltipOverlay;
+export const eD$ = FigJamPanZoomOnboardingDLTBannerOverlay;
+export const ePo = SharingClarityPrototypeModalOverlay;
+export const efW = AspectRatioLockOnboarding;
+export const evB = DrawPostConfigNudge;
+export const fQh = BillingGroupAdminOnboarding;
+export const g4U = UpsellLibrariesConsecutivePaste;
+export const gik = PtBrLaunchAnnouncementModal;
+export const hPP = MultiplayerSpotlightNudgeNux;
+export const hib = TOSAgreementOverlay;
+export const hoH = OrgAdminBillingGroupsSecondaryTabOnboardingOverlay;
+export const hsL = FigJamTemplatesWhatsNew;
+export const hxO = JapaneseLaunchAnnouncementMachine;
+export const iq7 = TeamAdminAuthorityOverlay;
+export const j0N = NuxOnboardingOverlay;
+export const j9$ = FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay;
+export const jQF = MobileRedirect;
+export const jRE = OssSalesUpsell;
+export const jk = CooperBulkCreate;
+export const jkr = SharingClarityTeamCreationOverlay;
+export const kBA = ReadyForDevNodeNameChangeUpsell;
+export const kBq = ConnectedProjectsAdminSettingsOverlay;
+export const kKu = EsEsLaunchAnnouncementModal;
+export const kSi = SeatBillingTermsOverlay;
+export const kmj = DesktopDownloadModalPrompt;
+export const kmq = EduPostVerification;
+export const koo = DeveloperRFDUpsellOverlay;
+export const kp0 = OnboardFigJamEditorBrowseTemplates;
+export const l4 = SitesStarterFullscreenOverlay;
+export const lLk = OnboardFigJamEditor;
+export const l_p = VisualAssetsIntroTooltip;
+export const lk2 = BugReporterMachine;
+export const ma5 = McpEnableButtonCalloutOverlay;
+export const nRk = GuestLanguagePickerOverlay;
+export const nWd = MoveDraftsNudge;
+export const p2q = FigmakeExistingFilesEditorOnboarding;
+export const pjo = FigJamSectionPresetsAnnouncementOverlay;
+export const q6k = FigmakeSelectedDesignSystemOnboarding;
+export const qiY = FigmaMakeUpsellInDesignEditorOverlay;
+export const qmK = FigmakeOnboardingTOS;
+export const qnr = CustomTemplatePublishNudge;
+export const qw_ = PluginPublishInvitePublishersOnboardingNudgeModal;
+export const r3Y = DevModeOptInEventOnlyOverlay;
+export const r4m = MoveDraftsNudgeV2;
+export const rQs = OrgAdminWorkspacesOnboarding;
+export const rRT = AdminNavigationOnboardingOverlay;
+export const rv = OrgAdminMovedUnassignedDraftsOnboarding;
+export const s1f = SlidesTemplateOnboarding;
+export const s3e = AdminBillingOverviewSecondaryTabOnboardingOverlay;
+export const sJD = FigJamUI3ToolbeltOnboarding;
+export const sP8 = FigJamAIActionsCallout;
+export const sfE = SitesOnboardingTOS;
+export const sqw = PlanSpacesLaunchOverlay;
+export const swf = OrgAdminFiltersOnboardingOverlay;
+export const t8H = ProductTrialPendingOverlay;
+export const tBR = SearchWorkspaceOnboarding;
+export const tUL = CommunityDevModeFilterOnboarding;
+export const tZO = TeamAdminMovedUnassignedDraftsOverlay;
+export const t_E = ColorManagementDefaultToP3Modal;
+export const tb3 = DevHandoffConfigWizard;
+export const tzJ = SharingClarityFileAudienceOverlay;
+export const uPw = WorkflowInteropMachine;
+export const uTW = SlidesProTemplatesAnnouncement;
+export const ueY = BrowserNotificationsOnboardingOverlay;
+export const v58 = DrawPropertiesPanelOnboarding;
+export const v75 = LinkShortcutOverlay;
+export const vlG = UI3LayersHorizontalScrollOverlay;
+export const wRI = OnboardFigJamEditorUnifiedPanAndZoom;
+export const wRw = ViewerDevModeStatusChangedTooltipOverlay;
+export const xPo = DtmDeprecationNavToPlanOverlay;
+export const xiH = FigJamAiNewFileOverlay;
+export const xjb = DevModeOverviewOnboardingOverlay;
+export const xtb = MSALOnboardingOverlay;
+export const y4J = AudioNux;
+export const y_w = DrawDesignFollowupOnboarding;
+export const yc_ = DrawVariableWidthStrokeOnboarding;
+export const yjU = PlanSpacesRecreatedStarterTeamOverlay;
+export const zoI = OnboardFigJamEditorUnified;
+export const zpn = FigMakeStarterFullscreenOverlay;

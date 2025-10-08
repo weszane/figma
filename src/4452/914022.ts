@@ -6,7 +6,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { getFeatureFlags } from "../905/601108";
 import { _ as _$$_, S } from "../figma_app/490799";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
@@ -68,7 +68,7 @@ function I(e) {
           children: [jsx(_$$_, {
             color: S.INFORMATION,
             text: s ? renderI18nText("asset_transfers.editor_admin_list_modal.any_of_these_admins_can_transfer_this_project_to_an_external_organization") : renderI18nText("asset_transfers.editor_admin_list_modal.any_of_these_admins_can_transfer_this_team_to_an_external_organization")
-          }), jsx(P, {
+          }), jsx(RecordingScrollContainer, {
             className: "asset_transfer_admin_list_modal--scrollContainer--IG5YS",
             children: jsx("div", {
               className: "asset_transfer_admin_list_modal--contentContainer--u5vXu",

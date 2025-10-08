@@ -31,7 +31,7 @@ import { D as _$$D } from "../figma_app/268271";
 import { PI, rp } from "../figma_app/703988";
 import { r6 } from "../905/542608";
 import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
-import { p as _$$p } from "../905/42189";
+import { TabCategory } from "../905/42189";
 import { e as _$$e } from "../1291/265452";
 import { ik, mk, cX, hY } from "../figma_app/920333";
 import { ZA } from "../1291/533467";
@@ -322,7 +322,7 @@ export function $$eo1({
     name: "stickers",
     properties: {
       query: e,
-      resourceType: _$$p.STICKERS_AND_COMPONENTS
+      resourceType: TabCategory.STICKERS_AND_COMPONENTS
     },
     children: 0 === ex.length ? jsx(_$$e, {
       illustration: _$$A,
@@ -434,7 +434,7 @@ function el() {
     name: "detail",
     properties: {
       resourceId: t?.libraryKey,
-      resourceType: _$$p.STICKERS_AND_COMPONENTS
+      resourceType: TabCategory.STICKERS_AND_COMPONENTS
     },
     children: jsx("div", {
       className: ei,
@@ -460,7 +460,7 @@ export function $$ed2({
     name: "detail",
     properties: {
       resourceId: e.id,
-      resourceType: _$$p.STICKERS_AND_COMPONENTS
+      resourceType: TabCategory.STICKERS_AND_COMPONENTS
     },
     children: jsx("div", {
       className: _()({

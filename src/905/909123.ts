@@ -23,7 +23,7 @@ interface ResourceDetailQueryArgs extends ResourceVersionQueryArgs {
  * Query for fetching resource versions metadata
  * Original name: $$$$m1
  */
-const resourceVersionsQuery = liveStoreInstance.Query({
+export const resourceVersionsQuery = liveStoreInstance.Query({
   fetch: async ({ apiResourceType, id }: ResourceVersionQueryArgs) => {
     switch (apiResourceType) {
       case 'file':
@@ -46,7 +46,7 @@ const resourceVersionsQuery = liveStoreInstance.Query({
  * Query for fetching detailed resource information
  * Original name: $$h0
  */
-const resourceDetailQuery = liveStoreInstance.Query({
+export const resourceDetailQuery = liveStoreInstance.Query({
   fetch: async ({
     apiResourceType,
     id,

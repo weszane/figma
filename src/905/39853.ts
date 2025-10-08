@@ -12,7 +12,7 @@ import { getI18nString } from "../905/303541";
 import { initializeFullscreenForNewFile } from "../905/327855";
 import { F as _$$F } from "../905/422355";
 import { trackEventAnalytics } from "../905/449184";
-import { bE } from "../905/466026";
+import { postRepo } from "../905/466026";
 import { enqueueNetworkErrorBell } from "../905/470594";
 import { Vy, zT } from "../905/484695";
 import { ImportBaseError, ImportErrors, importErrorTracker, ServiceErrors } from "../905/615657";
@@ -1616,7 +1616,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
       let t = await sendWithRetry.put(`/api/repo/${f.meta.file.file_repo_id}`, {
         name: i
       });
-      e.dispatch(bE({
+      e.dispatch(postRepo({
         repo: t.data.meta
       }));
       g = {

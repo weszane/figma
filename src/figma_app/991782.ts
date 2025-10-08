@@ -27,7 +27,7 @@ import { replaceSelection } from "../figma_app/741237";
 import { useDropdown } from "../905/848862";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { Jz } from "../905/504727";
+import { PointingDropdown } from "../905/504727";
 import { uh } from "../figma_app/410518";
 import { uU } from "../figma_app/547638";
 import { o as _$$o } from "../figma_app/478029";
@@ -130,7 +130,7 @@ function z({
           className: "lint_error_modal--fixIssuesDropdownButton--vN-0U",
           children: [t.recommendationLabelOverride ?? getI18nString("sites.lint.fix-issue"), jsx(_$$r, {})]
         })
-      }), showing && d.current && jsx(Jz, {
+      }), showing && d.current && jsx(PointingDropdown, {
         options: e,
         hideDropdown: hide,
         autofocusPrevElementOnEsc: !0,

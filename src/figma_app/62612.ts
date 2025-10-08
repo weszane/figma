@@ -74,7 +74,7 @@ export function viewportToScreen(viewport: ViewportInfo, point: IPoint, rounded 
  * @returns ViewportInfo
  * (Original: $$T0)
  */
-export function applyOffsetToViewport(viewport: ViewportInfo, offset: Point) {
+export function applyOffsetToViewport(viewport: ViewportInfo, offset: IPoint) {
   return Point.rounded({
     x: (offset.x - viewport.width / 2) / viewport.zoomScale + viewport.offsetX,
     y: (offset.y - viewport.height / 2) / viewport.zoomScale + viewport.offsetY

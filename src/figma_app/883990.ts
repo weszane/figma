@@ -15,7 +15,7 @@ import { C as _$$C } from '../905/504203';
 import { $P, qc, Rt } from '../905/590676';
 import { z } from '../905/654860';
 import { SvgComponent } from '../905/714743';
-import { cq } from '../905/794154';
+import { useNavigationStack } from '../905/794154';
 import { A as _$$A3 } from '../1617/377036';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Dm } from '../figma_app/8833';
@@ -79,7 +79,7 @@ function L({
   let t = useRef(null);
   return {
     searchInputRef: t,
-    isRoot: cq().isRoot,
+    isRoot: useNavigationStack().isRoot,
     focus: Y(t).focus,
     onSearchChangeInner: useHandleChangeEvent(C, 'change', t => {
       e(t.currentTarget.value);
@@ -179,7 +179,7 @@ let $$D0 = forwardRef(({
   });
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   return jsxs('div', {
     className: 'x78zum5 x6s0dn4 xkh2ocl xg2d0mh xf7z5ut',
     children: [jsxs('div', {

@@ -13,8 +13,8 @@ import { useIsFullscreenOverview } from "../figma_app/88239";
 import { i as _$$i } from "../figma_app/85949";
 import { J } from "../905/445197";
 import { EditorPreferencesApi } from "../figma_app/740163";
-import { E as _$$E } from "../905/95280";
-import { Z } from "../905/104740";
+import { useCompareChangesHandler } from "../905/95280";
+import { useNavigateToViewport } from "../905/104740";
 import { dh, $P } from "../figma_app/186343";
 import { Ht } from "../figma_app/701001";
 import { getNodeStatus } from "../figma_app/623300";
@@ -254,8 +254,8 @@ export function $$L1({
   pagesList: e,
   isComparingChanges: t
 }) {
-  let n = Z("page_change_navigator_navigate");
-  let a = _$$E();
+  let n = useNavigateToViewport("page_change_navigator_navigate");
+  let a = useCompareChangesHandler();
   let s = trackFileEventWithStore();
   let l = useDispatch();
   let d = getSelectedView();
@@ -268,8 +268,8 @@ export function $$F0({
   isComparingChanges: t,
   enabled: n = !0
 }) {
-  let a = Z("page_change_navigator_navigate");
-  let s = _$$E();
+  let a = useNavigateToViewport("page_change_navigator_navigate");
+  let s = useCompareChangesHandler();
   let l = trackFileEventWithStore();
   let d = useDispatch();
   let _ = getSelectedView();

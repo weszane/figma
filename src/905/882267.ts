@@ -19,7 +19,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { LazyInputForwardRef } from "../905/408237";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { ne } from "../figma_app/563413";
 import { SvgComponent, V as _$$V } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -510,7 +510,7 @@ function eL({
           currentTeamName: eG?.name ?? null,
           showFontsUpsell: eY
         })
-      }), jsx(_$$P, {
+      }), jsx(RecordingScrollContainer, {
         ref: eo,
         onScroll: ts,
         scrollContainerRef: ea,

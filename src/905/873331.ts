@@ -18,7 +18,7 @@ import { KindEnum } from "../905/129884";
 import { conditionalWrapper } from "../905/579635";
 import { LengthInput } from "../figma_app/178475";
 import { VariableBindingInput } from "../figma_app/841644";
-import { Jz } from "../905/504727";
+import { PointingDropdown } from "../905/504727";
 import { fn } from "../figma_app/811257";
 import { lF, TV, Yp, XG } from "../905/62223";
 import { om, Fz, kF, Ww, Uj } from "../figma_app/395097";
@@ -197,7 +197,7 @@ function D(e) {
       })]
     })
   }));
-  return jsx(Jz, {
+  return jsx(PointingDropdown, {
     showPoint: !0,
     hidePointWhenContentOffScreen: !0,
     targetRect: e.targetRect,

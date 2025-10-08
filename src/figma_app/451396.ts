@@ -8,7 +8,7 @@ import { reportError } from "../905/11";
 import { useSceneGraphSelector, usePlaygroundSceneGraph } from "../figma_app/722362";
 import { useCurrentFileKey, useOpenFileLibraryKey } from "../figma_app/516028";
 import { Vr } from "../figma_app/151869";
-import { ph, Bn, Gl, Ji, kN } from "../figma_app/97042";
+import { traverseNodeTree, TraversalAction, getInstanceBackingKey, getComponentProperties, findBestMatchingVariant } from "../figma_app/97042";
 import { yT, Nv } from "../figma_app/478201";
 import m from "../905/661768";
 let $$g1 = atom(!1);
@@ -20,10 +20,10 @@ function f(e, t, r) {
     return;
   }
   let s = r.developerFriendlyIdFromGuid(e.guid);
-  ph(i, r, t => {
+  traverseNodeTree(i, r, t => {
     if (t.type === e.type && s.endsWith(`;${t.guid}`)) {
       n = t.name;
-      return Bn.Stop;
+      return TraversalAction.Stop;
     }
   }, !0);
   return n;
@@ -93,12 +93,12 @@ function b({
   if (!e || !r) return null;
   let i = "SYMBOL" === e.type ? e.guid : e.symbolId;
   let a = {
-    key: Gl(e, t, n) ?? void 0,
+    key: getInstanceBackingKey(e, t, n) ?? void 0,
     type: "INSTANCE",
     name: e.name,
     guid: e.guid,
     symbolId: i,
-    properties: Ji(e),
+    properties: getComponentProperties(e),
     children: []
   };
   for (let i of e.visibleChildren) {
@@ -107,8 +107,8 @@ function b({
       let o = r;
       if ("INSTANCE" === t.type) {
         let e = f(t, r, n);
-        let i = Gl(t, n, a);
-        let l = Ji(t);
+        let i = getInstanceBackingKey(t, n, a);
+        let l = getComponentProperties(t);
         let d = r.children.push({
           key: i ?? void 0,
           type: "INSTANCE",
@@ -142,7 +142,7 @@ function b({
 function T(e) {
   return function (t, r) {
     let n = e.get(r);
-    return n && t ? kN(t, n) : null;
+    return n && t ? findBestMatchingVariant(t, n) : null;
   };
 }
 export const Ur = $$E0;

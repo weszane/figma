@@ -175,7 +175,7 @@ HubFileRoute.parseQueryString = (query: string) => {
 /**
  * Exported variables (original: $$y0, $$p1, $$u2, $$m3, $$f4)
  */
-export const $$y0 = HubFileRoute
+export const Tg = HubFileRoute
 export const UF = ResourceTypePlural
 export const Uo = ResourceType
 export const Xu = CommunityRoute

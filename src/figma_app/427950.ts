@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { z2, PK } from "../figma_app/914216";
-import { ZU } from "../figma_app/986347";
+import { DMenuItemType } from "../figma_app/986347";
 let s = Symbol("uniqueSymbol");
 export function $$d0(e) {
   let t = function () {
@@ -24,13 +24,13 @@ export function $$d0(e) {
     } = $$c1();
     return useCallback(n => {
       switch (n.type) {
-        case ZU.ACTION:
+        case DMenuItemType.ACTION:
           return getMaybeEnabledItem(n);
-        case ZU.ACTION_SUBMENU:
+        case DMenuItemType.ACTION_SUBMENU:
           return getMaybeSubmenuWithEnabledItems(n);
-        case ZU.FLYOUT:
+        case DMenuItemType.FLYOUT:
           return e(n);
-        case ZU.CUSTOM_ACTION:
+        case DMenuItemType.CUSTOM_ACTION:
           return n;
         default:
           throwTypeError(n);
@@ -42,7 +42,7 @@ export function $$d0(e) {
 export function $$c1() {
   let e = z2();
   let t = PK();
-  let r = useCallback(r => r.type === ZU.CUSTOM_ACTION || e(r) && t(r), [e, t]);
+  let r = useCallback(r => r.type === DMenuItemType.CUSTOM_ACTION || e(r) && t(r), [e, t]);
   let i = useCallback(e => r(e) ? e : null, [r]);
   let a = useCallback(e => {
     let {

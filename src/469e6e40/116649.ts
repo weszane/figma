@@ -25,7 +25,7 @@ import { ER } from "../figma_app/102449";
 import { useSubscription } from "../figma_app/288654";
 import { ResourceStatus } from "../905/723791";
 import { F } from "../469e6e40/308608";
-import { Jt } from "../figma_app/28323";
+import { fetchLicenseGroupsThunk } from "../figma_app/28323";
 import { ProductAccessMap } from "../figma_app/765689";
 import { OrgSharedSettingView } from "../figma_app/43951";
 import { nF, lF } from "../469e6e40/68843";
@@ -38,7 +38,7 @@ function O({
   });
   let r = useDispatch();
   useEffect(() => {
-    r(Jt({
+    r(fetchLicenseGroupsThunk({
       forceRefetch: !0
     }));
   }, [r, e.id]);

@@ -25,11 +25,11 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv, RecordableButton } from "../905/511649";
 import { w as _$$w } from "../905/835474";
 import { isWhitespace } from "../figma_app/930338";
-import { Wy, ml, Fk, Ch, hw } from "../905/125333";
+import { elementsMapAtom, elementsSetAtom, counterAtom, currentSelectionAtom, anotherElementsSetAtom } from "../905/125333";
 import { ph } from "../figma_app/709893";
 import { b as _$$b } from "../figma_app/556971";
 import { ImageBackedLoading } from "../figma_app/858013";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -38,7 +38,7 @@ import { V2, DI } from "../figma_app/712525";
 import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r } from "../figma_app/860474";
 import { gk } from "../figma_app/540726";
-import { Z as _$$Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { updateHoveredNode } from "../figma_app/741237";
 import { useAppModelProperty, useSceneGraphSelector } from "../figma_app/722362";
 import { hasNotLoaded, getNodeStatus } from "../figma_app/623300";
@@ -59,7 +59,7 @@ import { f as _$$f } from "../905/54715";
 import { VS, JE, oZ, WP, _0 } from "../9410/763216";
 import { Bf } from "../figma_app/249941";
 import { useIsFullscreenSitesView } from "../905/561485";
-import { Nl } from "../figma_app/115923";
+import { genericAtomFamily1 } from "../figma_app/115923";
 import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { II, EA, SQ, CT, A5, aH, ih, WB, L4 } from "../9410/499229";
 import { a as _$$a } from "../9410/20763";
@@ -259,7 +259,7 @@ function eL(e, t = !1) {
 function eR(e, t, n, a) {
   let i = II();
   let o = function () {
-    let e = _$$Z("canvas_search_navigate");
+    let e = useNavigateToViewport("canvas_search_navigate");
     let t = useSelector(e => e.canvasSearch.scope);
     let n = trackFileEventWithUser();
     let a = useContext(EA);
@@ -276,7 +276,7 @@ function eR(e, t, n, a) {
     return a ? i : noop;
   }();
   let d = function () {
-    let e = _$$Z("canvas_search_navigate");
+    let e = useNavigateToViewport("canvas_search_navigate");
     let t = useSelector(e => e.canvasSearch.scope);
     let n = trackFileEventWithUser();
     let a = useContext(EA);
@@ -372,9 +372,9 @@ export let $$eF0 = memo(function ({
   } = CT();
   let L = useRef(null);
   let R = useIsSelectedViewFullscreenCooper();
-  let j = _$$Z("canvas_search_navigate");
-  let w = useAtomWithSubscription(Wy);
-  let P = useAtomWithSubscription(ml);
+  let j = useNavigateToViewport("canvas_search_navigate");
+  let w = useAtomWithSubscription(elementsMapAtom);
+  let P = useAtomWithSubscription(elementsSetAtom);
   let M = useContext(EA);
   let z = useAtomWithSubscription(el);
   let [U, V] = useState(null);
@@ -551,17 +551,17 @@ function eM({
   let M = useRef(null);
   let B = useSelector(e => e.canvasSearch.scope);
   let U = CanvasSearchHelpers.hasDirtyPrimaryInstances();
-  let K = useAtomWithSubscription(Fk);
-  let V = useAtomWithSubscription(Ch);
-  let W = useAtomWithSubscription(Wy);
-  let Y = useAtomWithSubscription(ml);
-  let q = useAtomWithSubscription(hw);
+  let K = useAtomWithSubscription(counterAtom);
+  let V = useAtomWithSubscription(currentSelectionAtom);
+  let W = useAtomWithSubscription(elementsMapAtom);
+  let Y = useAtomWithSubscription(elementsSetAtom);
+  let q = useAtomWithSubscription(anotherElementsSetAtom);
   let Z = useContext(EA);
   let J = !m;
   let Q = null == n;
   let ee = L4();
   let el = function (e, t) {
-    let n = _$$Z("canvas_search_navigate");
+    let n = useNavigateToViewport("canvas_search_navigate");
     let a = useSelector(e => e.canvasSearch.scope);
     let i = trackFileEventWithUser();
     let o = useContext(EA);
@@ -587,7 +587,7 @@ function eM({
     return o ? d : noop;
   }(J, Q);
   let er = function () {
-    let e = _$$Z("canvas_search_navigate");
+    let e = useNavigateToViewport("canvas_search_navigate");
     let t = useSelector(e => e.canvasSearch.scope);
     let n = useContext(EA);
     let a = useCallback((n, a, l) => {
@@ -772,7 +772,7 @@ function eM({
   };
   let eC = function (e, t, n, a, i, o, d) {
     let c = function (e, t) {
-      let n = _$$Z("canvas_search_navigate");
+      let n = useNavigateToViewport("canvas_search_navigate");
       let a = useSelector(e => e.canvasSearch.scope);
       let i = trackFileEventWithUser();
       let o = useContext(EA);
@@ -848,7 +848,7 @@ function eM({
     }, [i, u, p, c, d, t]);
   }(e, t, J, Q, h, S, C);
   let eT = eD(S);
-  let ej = Xr(Nl);
+  let ej = Xr(genericAtomFamily1);
   return jsxs("div", {
     className: sb,
     children: [jsxs("div", {
@@ -886,7 +886,7 @@ function eM({
           children: jsx(_$$k, {})
         })]
       })]
-    }), jsxs(_$$P, {
+    }), jsxs(RecordingScrollContainer, {
       className: bB,
       scrollContainerRef: M,
       children: [jsx(RecordableDiv, {

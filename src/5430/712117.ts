@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ButtonPrimitive } from "../905/632989";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { getFalseValue } from "../figma_app/897289";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { In } from "../905/672640";
@@ -372,7 +372,7 @@ export function $$U0({
     y.current && C(y.current.scrollWidth > y.current.clientWidth);
   }, []);
   useEffect(Q, [Q, $.length]);
-  wY(y, Q);
+  useResizeObserverRef(y, Q);
   let Z = useCallback(() => {
     let e = y.current;
     let t = z.current[$.length - 1];

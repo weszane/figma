@@ -41,7 +41,7 @@ import { sH, gn } from "../5421/58503";
 import { XH, zV, fl, pn } from "../1156/993639";
 import { useDispatch } from "react-redux";
 import Y from "classnames";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 import { VisualBellActions } from "../905/302958";
 import { c as _$$c } from "../7a72fc59/376662";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -136,7 +136,7 @@ import { Oz } from "../1156/354790";
 import { ry } from "../figma_app/408883";
 import { F as _$$F2 } from "../1156/649032";
 import { jT, I4, IO, S4, H1, wE, gz, pO, GW, cH, jS } from "../figma_app/302802";
-import { eY as _$$eY } from "../figma_app/616261";
+import { escapeRegExp } from "../figma_app/616261";
 import { logError } from "../905/714362";
 import { a as _$$a3 } from "../5421/59825";
 import { W as _$$W4 } from "../figma_app/331365";
@@ -2352,7 +2352,7 @@ function nE({
           previousImage: o
         }) {
           let i = function (e, t) {
-            let n = _$$eY(t);
+            let n = escapeRegExp(t);
             let o = RegExp(`\\b${n}\\b`, "g");
             let i = o.exec(e);
             if (!i) return [];
@@ -2562,7 +2562,7 @@ function nT({
   let T = useMemo(() => new nC(l, C, s), [l, C, s]);
   let [S, A] = useState(nN(e, d, t));
   let [w, k] = useState(null);
-  wY(d, () => {
+  useResizeObserverRef(d, () => {
     A(nN(e, d, t));
     k(d.current);
   });

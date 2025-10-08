@@ -13,7 +13,7 @@ import { selectCurrentUser, selectUser } from "../905/372672";
 import { debounce } from "../905/915765";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useDispatch } from "react-redux";
 import C from "classnames";
@@ -448,7 +448,7 @@ function eo({
       children: [jsxs("div", {
         className: cssBuilderInstance.flex.flexColumn.gap16.p16.pb8.$,
         children: [jsx(D, {}), jsx(G, {})]
-      }), jsx(_$$P, {
+      }), jsx(RecordingScrollContainer, {
         className: e ? "first_level_resources--floatingModalScrollContainer--i7yEe" : "first_level_resources--scrollContainer--t1Gzz",
         children: jsxs("div", {
           className: cssBuilderInstance.flex.flexColumn.gap16.pb16.$,

@@ -5,7 +5,7 @@ import { renderI18nText } from '../905/303541';
 import { UpgradeAction } from '../905/370443';
 import { OnboardingModal } from '../905/425180';
 import { e as _$$e } from '../905/621515';
-import { LQ8 } from '../figma_app/6204';
+import { ConnectedProjectsUsageOverlay } from '../figma_app/6204';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { buildUploadUrl } from '../figma_app/169182';
 import { N } from '../figma_app/268271';
@@ -26,7 +26,7 @@ export function $$f0({
     isShowing,
     complete
   } = _$$e({
-    overlay: LQ8,
+    overlay: ConnectedProjectsUsageOverlay,
     priority: N.DEFAULT_MODAL
   }, [y]);
   useSingleEffect(() => {

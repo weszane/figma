@@ -16,7 +16,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { stopCreateNewFolder } from "../905/34809";
-import { vt } from "../figma_app/598926";
+import { createFolderThunk } from "../figma_app/598926";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
@@ -43,7 +43,7 @@ import { N as _$$N2 } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
 import { ArrowPosition } from "../905/858282";
-import { QpH } from "../figma_app/6204";
+import { SharingClarityProjectCreationPermissionOverlay } from "../figma_app/6204";
 import { _9, J4, YU, Iz } from "../figma_app/907616";
 import { o6, gy } from "../905/986349";
 import { confirmOrgGuestInviteModal } from "../905/154112";
@@ -56,7 +56,7 @@ function X() {
     isShowing,
     complete
   } = _$$e2({
-    overlay: QpH,
+    overlay: SharingClarityProjectCreationPermissionOverlay,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
@@ -187,7 +187,7 @@ export function $$er0(e) {
   let eN = () => {
     let a;
     eg === _9.ORG ? a = ex === J4.EDIT ? FPermissionLevelType.ORG_EDIT : FPermissionLevelType.ORG_VIEW : eg === _9.WORKSPACE ? a = ex === J4.EDIT ? FPermissionLevelType.WORKSPACE_EDIT : FPermissionLevelType.WORKSPACE_VIEW : eg === _9.INVITE_ONLY && (a = FPermissionLevelType.INVITE_ONLY);
-    t(vt({
+    t(createFolderThunk({
       shouldRedirect: !e.modalShown,
       name: r.trim(),
       teamId: e.teamId,

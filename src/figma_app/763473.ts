@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from "react";
-import { wY } from "../figma_app/708845";
+import { useResizeObserverRef } from "../figma_app/708845";
 export function $$a0({
   ref: e,
   onTextChange: t,
@@ -19,7 +19,7 @@ export function $$s1({
   checkVerticalOverflow: a = !1
 }) {
   let [s, o] = useState(!1);
-  let l = wY(e);
+  let l = useResizeObserverRef(e);
   useLayoutEffect(() => void t?.(), [t, r]);
   useLayoutEffect(() => {
     var t;

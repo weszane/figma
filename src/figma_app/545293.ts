@@ -1,4 +1,4 @@
-import { A } from '../905/202425';
+import { isImageNode } from '../905/202425';
 import { v } from '../905/350380';
 import { D as _$$D } from '../905/417423';
 import { trackEventAnalytics } from '../905/449184';
@@ -41,7 +41,7 @@ export function $$E9(e, t, r, n, a, s, o) {
         case 'input-image':
           return;
         case 'input-selection':
-          return A(e.node) || e.node.childCount === 1 && A(e.node.childrenNodes[0]);
+          return isImageNode(e.node) || e.node.childCount === 1 && isImageNode(e.node.childrenNodes[0]);
         default:
           throwTypeError(e);
       }

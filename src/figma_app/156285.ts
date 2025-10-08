@@ -11,7 +11,7 @@ import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { buildUploadUrl } from "../figma_app/169182";
-import { GI, Vi } from "../905/125333";
+import { vectorPencilStyleAtom, brushStyleAtom } from "../905/125333";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { toArray, normalizeMixedValue } from "../905/216495";
@@ -127,7 +127,7 @@ export function $$U10(e) {
 let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function () {
   let [e, t] = useAtomValueAndSetter($$O5);
   let r = e[x]?.config;
-  let i = useAtomWithSubscription(GI)?.dynamicStrokeSettings;
+  let i = useAtomWithSubscription(vectorPencilStyleAtom)?.dynamicStrokeSettings;
   let a = useMemo(() => u()(t, 500, {
     trailing: !0
   }), [t]);
@@ -160,7 +160,7 @@ let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function () {
 } : noop;
 let $$G6 = setupRemovableAtomFamily(() => atom(null));
 export function $$V9() {
-  let [e, t] = useAtomValueAndSetter(Vi);
+  let [e, t] = useAtomValueAndSetter(brushStyleAtom);
   let r = useAtomWithSubscription($$G6);
   useEffect(() => {
     r && (void 0 === e.strokeBrushGuid || e.strokeBrushGuid === defaultSessionLocalID) && t(e => ({
@@ -181,7 +181,7 @@ export function $$H2() {
   let [i, c] = useAtomValueAndSetter($$G6);
   let u = $$F1();
   let p = useMemo(() => u.filter(e => !e.isSoftDeleted && t.includes(e.guid) && e.guid !== defaultSessionLocalIDString), [t, u]);
-  let _ = Xr(Vi);
+  let _ = Xr(brushStyleAtom);
   useEffect(() => {
     if (p.length && !i) {
       let e = p.filter(e => e.type === DistributionType.STRETCH);
@@ -218,7 +218,7 @@ export function $$H2() {
     let t = getSingletonSceneGraph();
     B();
     let r = useMemo(() => e.filter(e => !e.isSoftDeleted), [e]);
-    let [i] = iM(Vi, "strokeBrushGuid");
+    let [i] = iM(brushStyleAtom, "strokeBrushGuid");
     let l = normalizeMixedValue(i);
     useEffect(() => {
       if (!getFilteredFeatureFlags().ce_il_strokes || !Fullscreen) return;

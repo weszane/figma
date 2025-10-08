@@ -9,7 +9,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { UT } from "../figma_app/95266";
 import { Tv } from "../figma_app/151869";
 import { c as _$$c } from "../figma_app/94664";
-import { ZU, Wg } from "../figma_app/986347";
+import { DMenuItemType, DButtonType } from "../figma_app/986347";
 import { FormattedInputContext } from "../905/427409";
 export function $$g0() {
   let e = useRef(null);
@@ -30,8 +30,8 @@ export function $$g0() {
   let y = useSelector(e => UT(e) ?? "");
   let b = isInvalidValue(y) ? getI18nString("fullscreen.mixed") : y;
   if (E) return {
-    type: ZU.CUSTOM_ACTION,
-    customActionType: Wg.DROPDOWN_TRIGGER_BUTTON,
+    type: DMenuItemType.CUSTOM_ACTION,
+    customActionType: DButtonType.DROPDOWN_TRIGGER_BUTTON,
     onClick: () => {
       let r = e.current ?? t?.current;
       r && showBindingUI?.(r, {

@@ -5,7 +5,7 @@ import { debugState } from "../905/407919";
 import { getCurrentLiveGraphClient } from "../905/761735";
 import { batchPutFileAction } from "../figma_app/78808";
 import { prototypeResetRecents, recentPrototypePost } from "../905/70982";
-import { uo as _$$uo, nF } from "../905/466026";
+import { batchPutRepos, initRecentRepos } from "../905/466026";
 import { trackMultipleFileEvent } from "../figma_app/314264";
 import { FileBrowserRecentFilesByEditorTypeView, FileBrowserRecentFilesView } from "../figma_app/43951";
 import { mapRecentFilesAndRepos } from "../figma_app/349248";
@@ -70,7 +70,7 @@ export let $$S3 = function () {
       for (let t of recent_prototypes) e(recentPrototypePost({
         prototype: t
       }));
-      e(_$$uo({
+      e(batchPutRepos({
         repos: recent_prototype_repos
       }));
     }).catch(e => {});
@@ -105,7 +105,7 @@ export function $$A0(e) {
     files: e.recent_files.concat(t),
     subscribeToRealtime: !1
   }));
-  debugState.dispatch(nF({
+  debugState.dispatch(initRecentRepos({
     recent_repos: e.recent_repos,
     subscribeToRealtime: !1
   }));

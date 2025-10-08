@@ -33,7 +33,7 @@ import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel, useCurrentPublicPlan, 
 import { U as _$$U } from "../905/455766";
 import { OnboardingModal } from "../905/425180";
 import { PositioningStrategy, ArrowPosition } from "../905/858282";
-import { Msu, DE1, XIg, Ql8, Q16, O5v, rQs, HaT } from "../figma_app/6204";
+import { EnterpriseOrgAdminOnboarding, OrgAdminAuthorityOverlay, SharingClarityAdminOnboardingOverlay, OrgAdminTeamOnboarding, OrgAdminActivityOnboarding, OrgAdminLicenseGroupsOnboarding, OrgAdminWorkspacesOnboarding, OrgAdminUnassignedDraftsTabOnboarding } from "../figma_app/6204";
 import { N as _$$N2 } from "../figma_app/268271";
 import { X as _$$X } from "../905/482718";
 import { Ui3PositionType } from "../905/11928";
@@ -57,10 +57,10 @@ import { Jt } from "../figma_app/401069";
 import { initializePluginAllowlist, initializeWidgetAllowlist } from "../905/837497";
 import { selectViewAction } from "../905/929976";
 import { useLibraryInfo } from "../figma_app/933328";
-import { w4, yo, Jt as _$$Jt } from "../figma_app/28323";
+import { licenseGroupDelete, licenseGroupUpdate, fetchLicenseGroupsThunk } from "../figma_app/28323";
 import { UK } from "../905/898493";
 import { Jt as _$$Jt2 } from "../figma_app/342125";
-import { Jt as _$$Jt3 } from "../figma_app/330108";
+import { fetchOrganizationTeams } from "../figma_app/330108";
 import { usePlanInviteWithSeatExperiment, useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { g7 } from "../905/939482";
 import { useOrgUsersFilterCounts, useOrgAdmins } from "../figma_app/741211";
@@ -84,7 +84,7 @@ import { DUserRole, SectionType, defaultSectionKey } from "../figma_app/858344";
 import { o0 } from "../905/844131";
 import { buildUploadUrl } from "../figma_app/169182";
 import { ImageOverlayComponent } from "../905/129046";
-import { y as _$$y2 } from "../905/375507";
+import { SharedFontsComponent } from "../905/375507";
 import { noop } from 'lodash-es';
 import { isEmptyObject } from "../figma_app/493477";
 import { IconButton } from "../905/443068";
@@ -99,14 +99,14 @@ import { sendWithRetry } from "../905/910117";
 import { gw, MM, wv } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
 import { ButtonBasePrimary, BigTextInputForwardRef, ButtonSecondary, SecureLink, BUTTON_INTERNAL_CONST_Z12, ButtonBasePrimaryTracked, clickableBaseLinkTracked, ButtonSecondaryTracked, ButtonNegativeTracked } from "../figma_app/637027";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { q as _$$q } from "../905/749058";
 import { postUserFlag } from "../905/985254";
-import { E as _$$E2 } from "../905/453826";
+import { useEventForwarder } from "../905/453826";
 import { zl } from "../figma_app/641749";
 import { rn } from "../figma_app/903573";
 import { createOnboardingStateMachine } from "../905/298004";
@@ -118,7 +118,7 @@ import { d as _$$d2 } from "../905/44199";
 import { um, Rs as _$$Rs, N$ } from "../figma_app/761870";
 import { P as _$$P2 } from "../905/392438";
 import { p as _$$p } from "../figma_app/353099";
-import { Hj, A3, tD as _$$tD } from "../905/682977";
+import { TableRow, HeaderCell, SortableHeaderCell } from "../905/682977";
 import { p3 } from "../figma_app/588582";
 import { zR } from "../469e6e40/825613";
 import { jG, NM, ln, oi } from "../figma_app/527041";
@@ -311,8 +311,8 @@ function W() {
     complete,
     isShowing
   } = _$$e2({
-    overlay: Msu,
-    priority: _$$g(Msu)
+    overlay: EnterpriseOrgAdminOnboarding,
+    priority: _$$g(EnterpriseOrgAdminOnboarding)
   }, [i, r]);
   let c = ["CreateFirstWorkspace", "CreateFirstBillingGroup"];
   let {
@@ -350,7 +350,7 @@ function K() {
     isShowing,
     complete
   } = _$$e2({
-    overlay: DE1,
+    overlay: OrgAdminAuthorityOverlay,
     priority: _$$N2.SECONDARY_MODAL
   });
   useSingleEffect(() => {
@@ -514,7 +514,7 @@ function eK() {
     isShowing,
     complete
   } = _$$e2({
-    overlay: XIg,
+    overlay: SharingClarityAdminOnboardingOverlay,
     priority: _$$N2.SECONDARY_MODAL
   }, [e]);
   useSingleEffect(() => {
@@ -589,12 +589,12 @@ function eK() {
 var e4 = e2;
 var e3 = e5;
 let th = "seen_org_admin_activity_onboarding";
-let tx = rn("org_admin_activity_onboarding", createOnboardingStateMachine(Ql8));
+let tx = rn("org_admin_activity_onboarding", createOnboardingStateMachine(OrgAdminTeamOnboarding));
 let tb = userFlagExistsAtomFamily(th);
 function tv() {
   let e = useAtomWithSubscription(tb);
   let t = _$$e2({
-    overlay: Q16,
+    overlay: OrgAdminActivityOnboarding,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
   let a = useDispatch();
@@ -604,7 +604,7 @@ function tv() {
       canShow: e => !e
     });
   });
-  _$$E2(t.uniqueId, "Reset Onboarding", () => {
+  useEventForwarder(t.uniqueId, "Reset Onboarding", () => {
     t.show();
   });
   let i = [{
@@ -1532,7 +1532,7 @@ class tZ extends PureComponent {
         })
       }), jsx("div", {
         className: cssBuilderInstance.wFull.hFull.overflowAuto.$,
-        children: jsxs(_$$P, {
+        children: jsxs(RecordingScrollContainer, {
           horizontalScrollingDisabled: !0,
           className: e4()(jG, cssBuilderInstance.wFull.hFull.$),
           innerClassName: this.props.hideHeader ? void 0 : NM,
@@ -1561,7 +1561,7 @@ class tZ extends PureComponent {
               orgCanUseMfaRequiredForGuests: this.props.orgCanUseMfaRequiredForGuests,
               orgTeams: this.props.orgTeams,
               showClearButton: this.showClearButton()
-            }), jsxs(Hj, {
+            }), jsxs(TableRow, {
               useAdminTableStyles: !0,
               header: !0,
               children: [jsx("div", {
@@ -1751,7 +1751,7 @@ function t1() {
 tZ.displayName = "ActivityLogsPage";
 let t7 = atom(!1);
 let t9 = "seen_org_admin_billing_groups_onboarding";
-let ae = rn("org_admin_license_groups_onboarding", createOnboardingStateMachine(O5v));
+let ae = rn("org_admin_license_groups_onboarding", createOnboardingStateMachine(OrgAdminLicenseGroupsOnboarding));
 let at = userFlagExistsAtomFamily(t9);
 function aa() {
   let e = useAtomWithSubscription(at);
@@ -1762,7 +1762,7 @@ function aa() {
     complete,
     uniqueId
   } = _$$e2({
-    overlay: O5v,
+    overlay: OrgAdminLicenseGroupsOnboarding,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
   let l = zl(ae);
@@ -1771,7 +1771,7 @@ function aa() {
       canShow: e => !e && !isMobileUA
     });
   });
-  _$$E2(uniqueId, "Reset Onboarding", () => show());
+  useEventForwarder(uniqueId, "Reset Onboarding", () => show());
   let o = [];
   t || o.push({
     title: renderI18nText("org_admin_onboarding.billing_groups.tooltip.create.title"),
@@ -1837,7 +1837,7 @@ let aw = registerModal(function (e) {
               })
             }));
             e.onClose();
-            t(w4({
+            t(licenseGroupDelete({
               licenseGroups: n.meta,
               deletingAll: a.length === e.licenseGroups.length
             }));
@@ -2071,7 +2071,7 @@ let aS = registerModal(function (e) {
           })
         }));
         t(hideModal());
-        t(yo({
+        t(licenseGroupUpdate({
           licenseGroup: e.meta,
           orgId: l
         }));
@@ -3092,10 +3092,10 @@ function nS() {
     complete,
     uniqueId
   } = _$$e2({
-    overlay: rQs,
+    overlay: OrgAdminWorkspacesOnboarding,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
-  _$$E2(uniqueId, nw, () => {
+  useEventForwarder(uniqueId, nw, () => {
     show({
       canShow: e => !isMobileUA && !e
     });
@@ -3797,7 +3797,7 @@ function nX() {
     isShowing,
     complete
   } = _$$e2({
-    overlay: HaT,
+    overlay: OrgAdminUnassignedDraftsTabOnboarding,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
@@ -4159,7 +4159,7 @@ function su({
           }
         }));
       };
-      return jsxs(Hj, {
+      return jsxs(TableRow, {
         className: e4()(cssBuilderInstance.flex.itemsCenter.gap16.relative.$, sd),
         style: styleBuilderInstance.add({
           border: "none"
@@ -4197,18 +4197,18 @@ function sm({
   updateSortState: t,
   sortState: a
 }) {
-  return jsxs(Hj, {
+  return jsxs(TableRow, {
     header: !0,
     useAdminTableStyles: !0,
     className: e4()(cssBuilderInstance.fontSemiBold.relative.flex.gap16.itemsBaseline.$, sd),
     style: styleBuilderInstance.add({
       border: "none"
     }).px32.py16.$,
-    children: [jsx(A3, {
+    children: [jsx(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "20%"
       }).$,
-      children: jsx(_$$tD, {
+      children: jsx(SortableHeaderCell, {
         hasArrow: "name" === a.column,
         field: "name",
         sortBy: () => t("name"),
@@ -4218,7 +4218,7 @@ function sm({
           children: renderI18nText("plugin" === e ? "resources_tab.approved_plugins.table.plugin_name_column" : "resources_tab.approved_plugins.table.widget_name_column")
         })
       })
-    }), jsx(A3, {
+    }), jsx(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "40%"
       }).$,
@@ -4226,11 +4226,11 @@ function sm({
         color: "default",
         children: renderI18nText("resources_tab.approved_plugins.table.description_column")
       })
-    }), jsx(A3, {
+    }), jsx(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "10%"
       }).justifyStart.$,
-      children: jsx(_$$tD, {
+      children: jsx(SortableHeaderCell, {
         hasArrow: "approved" === a.column,
         field: "approved",
         sortBy: () => t("approved"),
@@ -4240,7 +4240,7 @@ function sm({
           children: renderI18nText("resources_tab.approved_plugins.table.approved_column")
         })
       })
-    }), jsx(A3, {
+    }), jsx(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "20%"
       }).justifyStart.$,
@@ -4248,7 +4248,7 @@ function sm({
         color: "default",
         children: renderI18nText("resources_tab.approved_plugins.table.approved_for_column")
       })
-    }), jsxs(A3, {
+    }), jsxs(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "10%"
       }).justifyStart.$,
@@ -4509,18 +4509,18 @@ function sC({
   updateSortState: t,
   sortState: a
 }) {
-  return jsxs(Hj, {
+  return jsxs(TableRow, {
     header: !0,
     useAdminTableStyles: !0,
     className: e4()(cssBuilderInstance.fontSemiBold.relative.flex.gap16.itemsBaseline.$, sd),
     style: styleBuilderInstance.add({
       border: "none"
     }).px32.py16.$,
-    children: [jsx(A3, {
+    children: [jsx(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "20%"
       }).$,
-      children: jsx(_$$tD, {
+      children: jsx(SortableHeaderCell, {
         hasArrow: "name" === a.column,
         field: "name",
         sortBy: () => t("name"),
@@ -4530,7 +4530,7 @@ function sC({
           children: renderI18nText("plugin" === e ? "resources_tab.approved_plugins.table.plugin_name_column" : "resources_tab.approved_plugins.table.widget_name_column")
         })
       })
-    }), jsx(A3, {
+    }), jsx(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "40%"
       }).$,
@@ -4538,11 +4538,11 @@ function sC({
         color: "default",
         children: renderI18nText("resources_tab.approved_plugins.table.description_column")
       })
-    }), jsx(A3, {
+    }), jsx(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "10%"
       }).justifyStart.$,
-      children: jsx(_$$tD, {
+      children: jsx(SortableHeaderCell, {
         hasArrow: "last_requested" === a.column,
         field: "last_requested",
         sortBy: () => t("last_requested"),
@@ -4552,7 +4552,7 @@ function sC({
           children: renderI18nText("resources_tab.approved_plugins.table.last_requested_column")
         })
       })
-    }), jsx(A3, {
+    }), jsx(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "20%"
       }).justifyStart.$,
@@ -4560,7 +4560,7 @@ function sC({
         color: "default",
         children: renderI18nText("resources_tab.approved_plugins.table.requested_by_column")
       })
-    }), jsxs(A3, {
+    }), jsxs(HeaderCell, {
       style: styleBuilderInstance.add({
         width: "10%"
       }).justifyStart.$,
@@ -4693,7 +4693,7 @@ function sT(e) {
       data: s
     }));
   };
-  return jsxs(Hj, {
+  return jsxs(TableRow, {
     className: e4()(cssBuilderInstance.flex.itemsCenter.gap16.relative.$, sd),
     style: styleBuilderInstance.add({
       border: "none"
@@ -4856,7 +4856,7 @@ function sR({
     })]
   });
   return "loading" !== m.status && "errors" !== m.status && x ? jsxs(Fragment, {
-    children: [f, jsxs(_$$P, {
+    children: [f, jsxs(RecordingScrollContainer, {
       className: cssBuilderInstance.wFull.hFull.$,
       children: [!b && jsx("div", {
         className: cssBuilderInstance.ml32.mr32.mb24.$,
@@ -4930,14 +4930,14 @@ function sP(e) {
       });
       break;
     case FigResourceType.SHARED_FONTS:
-      g = jsx(_$$y2, {
+      g = jsx(SharedFontsComponent, {
         dispatch: t,
         dropdownShown: a,
         permissionsState: n,
         orgId: e.org.id,
         sharedFonts: l,
         resourceType: "org",
-        isLoading: !!_$$y2.fontLoadPromise || !_$$y2.loadedFonts,
+        isLoading: !!SharedFontsComponent.fontLoadPromise || !SharedFontsComponent.loadedFonts,
         onRightActionsChange: u
       });
       break;
@@ -5072,7 +5072,7 @@ function sB(e) {
     }));
   }, [e.selectedTab, n.id]);
   useEffect(() => {
-    L && a(_$$Jt3({
+    L && a(fetchOrganizationTeams({
       includeMemberCount: !0,
       includeTopMembers: !0,
       includeProjectCount: !0,
@@ -5094,13 +5094,13 @@ function sB(e) {
   let ee = g7();
   let et = Z.data || null;
   useEffect(() => {
-    L && _$$y2.loadSharedFonts(a);
+    L && SharedFontsComponent.loadSharedFonts(a);
   }, [L, a, n.id]);
   useEffect(() => {
     L && (a(initializePluginAllowlist({})), a(initializeWidgetAllowlist({})));
   }, [L, a, n.id]);
   useEffect(() => {
-    a(_$$Jt({
+    a(fetchLicenseGroupsThunk({
       forceRefetch: !0
     }));
   }, [a, n.id]);
@@ -5287,14 +5287,14 @@ function sB(e) {
           break;
         case FigResourceType.SHARED_FONTS:
           eQ = !1;
-          eH = jsx(_$$y2, {
+          eH = jsx(SharedFontsComponent, {
             dispatch: a,
             dropdownShown: w,
             permissionsState: k,
             orgId: n.id,
             sharedFonts: E,
             resourceType: "org",
-            isLoading: !!_$$y2.fontLoadPromise || !_$$y2.loadedFonts
+            isLoading: !!SharedFontsComponent.fontLoadPromise || !SharedFontsComponent.loadedFonts
           });
           break;
         case FigResourceType.LIBRARIES:

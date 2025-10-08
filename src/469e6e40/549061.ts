@@ -65,7 +65,7 @@ import { fetchPendingAccountTypeRequest } from '../4452/876838';
 import { g as _$$g } from '../4452/983384';
 import { R as _$$R } from '../7021/67076';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { TaD } from '../figma_app/6204';
+import { AdminDashboardOnboardingOverlay } from '../figma_app/6204';
 import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { AdminRequestDashboardView, AdminRequestDashOrgInfo, UserFlagByName } from '../figma_app/43951';
 import { BannerInset } from '../figma_app/59509';
@@ -93,7 +93,7 @@ import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { SecureLink } from '../figma_app/637027';
 import { BillingSectionEnum, DashboardSection, WorkspaceTab } from '../figma_app/650409';
 import { EQ, MX } from '../figma_app/684446';
-import { wY } from '../figma_app/708845';
+import { useResizeObserverRef } from '../figma_app/708845';
 import { TrackingProvider } from '../figma_app/831799';
 import { TeamOrg, RequestFilterType, InvitedByType, useFilteredRequestIds, isBillingGroupAdminEnabled } from '../figma_app/845611';
 import { LoadingSpinner } from '../figma_app/858013';
@@ -464,8 +464,8 @@ function eO({
     isShowing,
     complete
   } = _$$e3({
-    overlay: TaD,
-    priority: _$$g(TaD)
+    overlay: AdminDashboardOnboardingOverlay,
+    priority: _$$g(AdminDashboardOnboardingOverlay)
   }, [r, t]);
   useSingleEffect(() => {
     show({
@@ -1396,7 +1396,7 @@ export function $$tg0({
   let d = useRef(null);
   let [A, O] = useState(0);
   let L = !!desktopAPIInstance || isChromebookTabbed();
-  wY(d, () => {
+  useResizeObserverRef(d, () => {
     O(d.current?.clientWidth ?? 0);
   });
   let D = _$$d({

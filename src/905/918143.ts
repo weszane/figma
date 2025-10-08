@@ -13,7 +13,7 @@ import g from "classnames";
 import { SvgComponent } from "../905/714743";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { useDropdownState } from "../905/848862";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { A as _$$A } from "../6828/814452";
 import { A as _$$A2 } from "../905/794518";
 function m({
@@ -116,14 +116,14 @@ function E({
     i.preventDefault();
     d(e.findIndex(e => e.id === t));
   };
-  return jsx(Cf, {
+  return jsx(ConnectedPointingDropdown, {
     targetRect: s,
     showPoint: !1,
     minWidth: 528,
     maxWidth: 528,
     autofocusPrevOnDismount: !0,
     focusContainerOnMount: !0,
-    type: it.MATCH_BACKGROUND,
+    type: DropdownType.MATCH_BACKGROUND,
     onKeyDown: i => {
       if (i.preventDefault(), "ArrowDown" === i.key || "ArrowUp" === i.key) {
         let t = -1;

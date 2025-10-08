@@ -6,7 +6,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
-import { Z as _$$Z } from "../905/104740";
+import { useNavigateToViewport } from "../905/104740";
 import { VF, uY } from "../figma_app/989514";
 import { b as _$$b2 } from "../figma_app/5657";
 import { Vr } from "../figma_app/151869";
@@ -32,7 +32,7 @@ export function $$E0({
   let w = useDispatch();
   let O = Vr();
   let R = x?.(getSingletonSceneGraph()) || findFirstNodeOfType(getSingletonSceneGraph(), "FRAME", O);
-  let L = _$$Z();
+  let L = useNavigateToViewport();
   let [P, D] = useState(!1);
   if (useSingleEffect(() => {
     queueMicrotask(async function () {

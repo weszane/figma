@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { R } from "../905/307199";
-import { P } from "../905/347284";
+import { CenterTruncatedText } from "../905/307199";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { o as _$$o } from "../905/524481";
@@ -23,7 +23,7 @@ export function $$p0() {
     confirmText: getI18nString("shared_fonts.upload_error_modal.okay"),
     hideCancel: !0,
     size: 600,
-    children: jsxs(P, {
+    children: jsxs(RecordingScrollContainer, {
       className: "shared_fonts_upload_error_modal--scrollContainer--Dv-bm",
       children: [jsxs("div", {
         className: "shared_fonts_upload_error_modal--modalHeaderRow--sUF-- text--fontPos10--s1PI5 text--_fontBase--QdLsd shared_fonts_upload_error_modal--_row--Qn5-U",
@@ -38,7 +38,7 @@ export function $$p0() {
         className: "shared_fonts_upload_error_modal--row--P1Dqx text--fontPos11--2LvXf text--_fontBase--QdLsd shared_fonts_upload_error_modal--_row--Qn5-U",
         children: [jsx("div", {
           className: u,
-          children: jsx(R, {
+          children: jsx(CenterTruncatedText, {
             text: e.filename
           })
         }), jsx("div", {

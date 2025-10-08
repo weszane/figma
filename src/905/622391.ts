@@ -38,8 +38,8 @@ export function getOpenFileKey(): string | undefined {
  * @param state The debug state.
  * @returns True if extensions can be run.
  */
-export function checkCanRunExtensions(state: any): boolean {
-  return canRunExtensions(state)
+export function checkCanRunExtensions(): boolean {
+  return canRunExtensions(debugState.getState())
 }
 
 /**

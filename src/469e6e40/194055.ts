@@ -5,7 +5,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
 import { SecureLink, ButtonBase } from "../figma_app/637027";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -19,7 +19,7 @@ import { ExtensionActivityLogHistoryView, PluginAllowlistManagementModalView } f
 import { useTeamPlanPublicInfo, useCurrentPrivilegedPlan, useTeamPlanUser } from "../figma_app/465071";
 import { X as _$$X } from "../5430/785696";
 import { J as _$$J } from "../905/403084";
-import { ox, ab } from "../figma_app/870683";
+import { generateAbsoluteCommunityWidgetUrl, generateAbsoluteCommunityPluginUrl } from "../figma_app/870683";
 import { HeaderModal } from "../905/519092";
 import { useLatestRef } from "../figma_app/922077";
 import { u as _$$u } from "../4452/434813";
@@ -62,7 +62,7 @@ import { ManifestEditorType } from "../figma_app/155287";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { useDropdownState } from "../905/848862";
 import { UK } from "../figma_app/764679";
-import { Cf, it } from "../905/504727";
+import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { qN } from "../905/884637";
 let L = registerModal(function ({
   extensionName: e,
@@ -277,7 +277,7 @@ function q({
         iconSrc: _$$A3,
         children: "plugin" === v ? getI18nString("resources_tab.approved_plugins.modal.individual_workspaces_approval_warning") : getI18nString("resources_tab.approved_widgets.modal.individual_workspaces_approval_warning")
       })
-    }), jsx(_$$P, {
+    }), jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.flexGrow1.$,
       children: jsx("div", {
         className: cssBuilderInstance.py8.if(j, cssBuilderInstance.opacity0_5.eventsNone).$,
@@ -845,7 +845,7 @@ function ec(e) {
       noteType: "revoke"
     }, e.id) : void 0;
   };
-  return jsx(_$$P, {
+  return jsx(RecordingScrollContainer, {
     className: cssBuilderInstance.hFull.flex.flexColumn.p16.gap16.$,
     children: jsx("div", {
       "data-testid": "extension-request-sidebar",
@@ -1177,11 +1177,11 @@ function eq(e) {
         manifestEditorTypes: s
       }) {
         let i = s.slice().sort();
-        return jsx(Cf, {
+        return jsx(ConnectedPointingDropdown, {
           className: qN,
           targetRect: d?.data.targetRect,
           minWidth: 242,
-          type: it.MATCH_BACKGROUND,
+          type: DropdownType.MATCH_BACKGROUND,
           propagateCloseClick: !0,
           children: i.map(s => jsx(UK, {
             editorType: s,
@@ -1454,7 +1454,7 @@ export function $$eV0({
     orgId: e
   });
   let [I, T] = useState(g ?? "overview");
-  let A = "widget" === a ? ox(t) : ab(t);
+  let A = "widget" === a ? generateAbsoluteCommunityWidgetUrl(t) : generateAbsoluteCommunityPluginUrl(t);
   if (!("loaded" === N.status && N.data.plugin && N.data.org && S.loaded)) return null;
   let R = N.data.plugin.pluginRequests?.filter(e => "pending" === e.status) ?? [];
   let O = N.data.org.workspaces ?? [];
@@ -1488,7 +1488,7 @@ export function $$eV0({
         className: cssBuilderInstance.flex.flexColumn.hFull.$,
         children: [jsxs("div", {
           className: cssBuilderInstance.flex.flexGrow1.overflowHidden.$,
-          children: [jsx(_$$P, {
+          children: [jsx(RecordingScrollContainer, {
             className: cssBuilderInstance.flexGrow1.flexRow.flexWrap.$,
             innerClassName: cssBuilderInstance.hFull.$,
             children: jsx(ej, {

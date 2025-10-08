@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { df } from "../figma_app/728005";
+import { generateNodeMarkup } from "../figma_app/728005";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, Xr, atomStoreManager } from "../figma_app/27355";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Tv } from "../figma_app/311375";
 import { getImageManager } from "../figma_app/624361";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
-import { Kx, iy } from "../figma_app/342355";
+import { codeOptionsAtom, getMcpSettingsExternal } from "../figma_app/342355";
 import { $w } from "../figma_app/935144";
 import { t2 } from "../figma_app/911720";
 let $$h1 = atom(null);
@@ -49,14 +49,14 @@ export function $$f3() {
 function E(e, t, r) {
   let n = getSingletonSceneGraph().get(e ?? null);
   if (n) {
-    if ("xml" === atomStoreManager.get(Kx)) {
-      t(df({
+    if ("xml" === atomStoreManager.get(codeOptionsAtom)) {
+      t(generateNodeMarkup({
         node: n,
         includeComponents: !0,
         codeConnectMapping: null,
         codebaseSuggestions: null,
         loadImageByHash: e => getImageManager().loadImageByHash(e),
-        configSettings: iy()
+        configSettings: getMcpSettingsExternal()
       }).content.map(e => e.text).join("\n\n"));
       desktopAPIInstance?.sendMCPUpdate("resource", {
         uri: r

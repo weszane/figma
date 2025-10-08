@@ -7,7 +7,7 @@ import l from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
-import { P as _$$P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -573,7 +573,7 @@ function H({
     qu(u) || setOptedOutOfSecurityForm(!1);
   }, [i, u, setOptedOutOfSecurityForm]);
   return jsxs(Fragment, {
-    children: [jsxs(_$$P, {
+    children: [jsxs(RecordingScrollContainer, {
       className: "extension_security_form--scrollContainer--CkLIi publish_modal--scrollContainer--w0uYJ",
       maxHeight: 800,
       children: [jsx(z, {

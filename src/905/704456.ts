@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { cq } from "../905/794154";
+import { useNavigationStack } from "../905/794154";
 import { ActionButton } from "../905/189361";
 import { FlexBox } from "../905/222272";
 import { Panel } from "../905/236825";
@@ -10,7 +10,7 @@ export function $$d0({
 }) {
   let {
     close
-  } = cq();
+  } = useNavigationStack();
   return jsx(Panel, {
     onDismiss: close,
     children: jsxs(FlexBox, {

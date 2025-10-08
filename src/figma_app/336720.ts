@@ -16,12 +16,12 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { LB } from "../figma_app/29089";
-import { ZU } from "../figma_app/986347";
+import { DMenuItemType } from "../figma_app/986347";
 import { fullHeightSidebarFlyout, disabledFullHeightSidebarFlyout, fullHeightSidebarFlyoutButton } from "../figma_app/430407";
 var c = d;
 let $$v1 = "slides-presentation-flyout";
 let $$A0 = {
-  type: ZU.FLYOUT,
+  type: DMenuItemType.FLYOUT,
   name: $$v1,
   editModes: LB.concat([LayoutTabType.SLIDE_LAYOUT, LayoutTabType.PREVIEW]),
   nonEditorsAllowed: !0,

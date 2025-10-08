@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ModalCloseButton } from "../905/17223";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
-import { P } from "../905/347284";
+import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { W } from "../5430/573261";
@@ -174,7 +174,7 @@ let $$y0 = registerModal(function ({
     disableClickOutsideToHide: !0,
     tintedModalBackground: !0,
     size: "medium",
-    children: jsx(P, {
+    children: jsx(RecordingScrollContainer, {
       className: "allowlist_plugins_modals--pluginsOptInModalText--5-lJB text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: j
     })
