@@ -8,7 +8,7 @@ import { p as _$$p } from '../469e6e40/348454';
 import { l as _$$l } from '../469e6e40/774192';
 import { a as _$$a2 } from '../905/5627';
 import { ModalRootComponent } from '../905/38914';
-import { d as _$$d } from '../905/44199';
+import { baseErrorSeverity } from '../905/44199';
 import { registerModal } from '../905/102752';
 import { J as _$$J } from '../905/129695';
 import { KindEnum } from '../905/129884';
@@ -78,7 +78,7 @@ function D() {
 }
 let F = registerModal(e => {
   let t = useModalManager(e);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let [r, l] = useState(!1);
   let [o, d] = useState(!1);
   let c = useCurrentPrivilegedPlan('DomainCaptureModal').unwrapOr(null);
@@ -179,7 +179,7 @@ let F = registerModal(e => {
 let q = 'org_domain_management_page_view--domainList--RqkFA';
 function $(e) {
   let t = !e.enabled && !e.allDomainsVerified;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = selectUser();
   let r = !e.enabled && e.allDomainsVerified ? 'button' : 'div';
   return jsx(r, {
@@ -288,7 +288,7 @@ function $(e) {
   });
 }
 function V(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useRef(null);
   let [r, l] = useState(!1);
   useEffect(() => () => {
@@ -415,7 +415,7 @@ let Y = registerModal(e => {
   });
 }, 'DOMAIN_ERRORS_MODAL');
 function J(e, t, a, n) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return function () {
     let i = a ? 'VERIFY' : 'ADD';
     let r = t.length;
@@ -497,7 +497,7 @@ let Q = registerModal(e => {
   let a;
   let r;
   let l = useModalManager(e);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let [d, _] = useState({
     inputValue: '',
     tokens: [],
@@ -556,11 +556,11 @@ let Q = registerModal(e => {
               placeholderText: getI18nString('domain_management.add_domain_modal.input_placeholder_text'),
               tokenClassName: 'org_domain_management_page_view--removeHardcodedHeight--PF-ox',
               validateToken: e => e.match(Z) === null ? {
-                state: _$$d.ERROR,
+                state: baseErrorSeverity.ERROR,
                 content: e,
                 errorMessage: getI18nString('domain_management.error_domain_is_invalid')
               } : {
-                state: _$$d.OK,
+                state: baseErrorSeverity.OK,
                 content: e
               }
             })
@@ -627,7 +627,7 @@ function et(e) {
   });
 }
 function ea(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCallback(() => {
     t(showModalHandler({
       type: Q,
@@ -672,7 +672,7 @@ function ek({
 }) {
   let [r, l] = useState('');
   let [o, d] = useState(new Set());
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let _ = useSubscription(UnclaimedDomainUserView, {
     domainId: e,
     orgId: t,
@@ -812,7 +812,7 @@ function eE({
   orgId: e,
   orgName: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   return jsx('button', {
     onClick: () => {
       a(showModalHandler({
@@ -927,7 +927,7 @@ let eS = {
   }
 };
 let eO = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, r] = useState(!1);
   let l = useModalManager(e);
   let o = async () => {
@@ -1109,7 +1109,7 @@ let eL = registerModal(e => {
 let eM = 'DomainFlyout';
 function eP(e) {
   let t = useDropdownState();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = _$$B();
   let l = useRef(null);
   let o = useRef(null);
@@ -1206,7 +1206,7 @@ function eF({
   dnsToken: a,
   onVerify: s
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return jsx(cd, {
     children: !t.verifiedAt && jsx(Button, {
       onClick: n => {
@@ -1235,7 +1235,7 @@ function eq({
   mfaRequired: a,
   setHighlightedItemId: r
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let o = useCallback(() => {
     l(showModalHandler({
       type: eO,
@@ -1577,7 +1577,7 @@ let eG = {
   domainsRequireVerification: !1
 };
 export function $$ez0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useTeamPlanUser();
   let a = useIsOrgAdminUser(t).unwrapOr(!1);
   let m = useTeamPlanFeatures().unwrapOr(null);

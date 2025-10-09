@@ -39,14 +39,14 @@ export function $$p2(e, t) {
   } : n;
 }
 export function $$g3() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedView();
   return useCallback(n => {
     handleFullscreenViewTransition(e, t, n);
   }, [e, t]);
 }
 export function $$f4() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedView();
   return useCallback(() => {
     closeDevModeComponentBrowser(e, t);
@@ -54,7 +54,7 @@ export function $$f4() {
 }
 export function $$h1(e) {
   let t = $$m0(e);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = trackFileEventWithStore();
   let l = n0();
   let u = VS({

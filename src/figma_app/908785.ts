@@ -25,7 +25,7 @@ import { Legend } from "../905/932270";
 import { useDispatch } from "react-redux";
 import { AppStateTsApi, DrawingElementType } from "../figma_app/763686";
 import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/91703";
-import { sw } from "../figma_app/914957";
+import { hideStylePreview } from "../figma_app/914957";
 import { Xo } from "../figma_app/482495";
 import { getObservableValue } from "../figma_app/84367";
 import { calculatePickerPositionLeft } from "../905/959568";
@@ -149,7 +149,7 @@ function $(e) {
 }
 function X(e) {
   let t = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = U();
     return useCallback(() => {
       if (r) t(hidePickerThunk());else {
@@ -161,7 +161,7 @@ function X(e) {
           initialY: r.y
         }));
         t(hideStylePicker());
-        t(sw());
+        t(hideStylePreview());
       }
     }, [t, e, r]);
   }(e.forwardedRef);

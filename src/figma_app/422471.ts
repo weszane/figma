@@ -13,7 +13,7 @@ export function $$_4() {
     let e = useSelector(e => e.currentUserOrgId);
     let t = useSelector(e => e.currentTeamId);
     let r = selectCurrentFile()?.teamId || null;
-    let o = useDispatch();
+    let o = useDispatch<AppDispatch>();
     let c = useAtomWithSubscription($$d1);
     let u = useRef(!1);
     useEffect(() => {
@@ -27,7 +27,7 @@ export function $$_4() {
 }
 export function $$h0() {
   (function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useAtomWithSubscription($$p5);
     let r = Xr($$u2);
     let o = useRef(!1);

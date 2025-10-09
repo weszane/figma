@@ -66,7 +66,7 @@ export function $$D0({
   planComparisonChartOverride: U,
   seatComparisonChartOverride: B
 }) {
-  let G = useDispatch();
+  let G = useDispatch<AppDispatch>();
   let [V, H] = useState(getUserCurrency());
   let z = selectWithShallowEqual(e => setupWorkspaceIdentity(e.user, e.currentUserOrgId, e.currentTeamId));
   let W = useCurrentPublicPlan("PlanComparisonModalContent");

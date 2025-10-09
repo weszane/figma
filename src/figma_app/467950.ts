@@ -30,7 +30,7 @@ export function $$p0() {
   }));
   let E = hD();
   let y = getDevHandoffInspectSplitPosition();
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let {
     collapsedInspectionPanelAtom,
     collapseEnabled

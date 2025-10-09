@@ -5,7 +5,7 @@ import { permissionScopeHandler as _$$l, scopeAwareFunction } from "../905/18918
 import { generateRecordingKey } from "../figma_app/878298";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
-import { qC } from "../figma_app/972736";
+import { setImageDialogActionCreator } from "../figma_app/972736";
 import { hideSpecificModal, showModal } from "../905/156213";
 import { addWhiteboardToolToRecentsAction } from "../figma_app/147952";
 import { BI } from "../figma_app/546509";
@@ -32,7 +32,7 @@ import { X } from "../figma_app/765161";
 let N = "delightful-toolbar-media-button";
 let A = "InsertMediaModal";
 let O = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => !!e.modalShown?.data?.shouldMountCenter);
   let i = useRef(null);
   let s = t ? {
@@ -128,7 +128,7 @@ export function $$F11(e) {
 function B(e) {
   let t;
   let i = _$$b();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let d = useSelector(e => e.user?.id);
   let {
     tabManager,
@@ -295,7 +295,7 @@ export function $$J10() {
   });
 }
 export function $$q2() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = BI()?.shouldOptimizeForIpadApp;
   return jsx(B, {
     resourceType: "Image",
@@ -308,7 +308,7 @@ export function $$q2() {
       Fullscreen.triggerAction("place", {
         source: "MEDIA_MODAL"
       });
-      e(qC({
+      e(setImageDialogActionCreator({
         open: !0
       }));
     },
@@ -316,7 +316,7 @@ export function $$q2() {
   });
 }
 export function $$X3() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsx(B, {
     resourceType: "Link",
     text: getI18nString("whiteboard.inserts.links_title"),

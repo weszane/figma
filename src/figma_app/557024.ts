@@ -101,7 +101,7 @@ export function $$M0(e) {
   }, [t, l, d, o, n]);
 }
 function F() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
     e(hideModal());
   }, [e]);

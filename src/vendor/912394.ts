@@ -969,7 +969,7 @@ function eK(e, r) {
 }
 let eJ = 0;
 let e0 = Symbol.$$for("__REACT_DND_CONTEXT_INSTANCE__");
-export var $$e10 = memo(function (e) {
+export var DndProvider = memo(function (e) {
   var {
     children
   } = e;
@@ -1003,4 +1003,4 @@ function e5(e, r = e3(), n, i) {
 function e3() {
   return "undefined" != typeof global ? global : window;
 }
-export const Q = $$e10;
+export const Q = DndProvider;

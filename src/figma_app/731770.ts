@@ -29,7 +29,7 @@ export function $$E0({
   fromCursorBot: N,
   isFollowUp: C
 }) {
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   let O = Vr();
   let R = x?.(getSingletonSceneGraph()) || findFirstNodeOfType(getSingletonSceneGraph(), "FRAME", O);
   let L = useNavigateToViewport();

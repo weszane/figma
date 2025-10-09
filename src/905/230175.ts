@@ -7,7 +7,7 @@ import { debugState } from "../905/407919";
 import { libraryPublishCallbacksSelectorAtom } from "../905/686934";
 import { executePublishProcess } from "../figma_app/519839";
 import { Se } from "../905/889062";
-import { Ol } from "../905/576221";
+import { areAllAssetsNotCurrentOrChangedOrNew } from "../905/576221";
 import { selectDeletedOrCooperComponentNodeIds, selectCooperComponents } from "../figma_app/803787";
 import { StagingStatusEnum } from "../figma_app/633080";
 var o = s;
@@ -22,7 +22,7 @@ export function $$_2({
 }) {
   let n = t.length > 0;
   let r = i.filter(e => e.status === StagingStatusEnum.CURRENT).length > 0;
-  return e || n || r ? e && n && Ol(i) ? [{
+  return e || n || r ? e && n && areAllAssetsNotCurrentOrChangedOrNew(i) ? [{
     key: "UNPUBLISHING_ALL_COMPONENTS",
     data: {}
   }] : void 0 : [{

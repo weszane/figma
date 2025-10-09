@@ -112,7 +112,7 @@ function D(e) {
   });
 }
 function k() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(selectOpenFile);
   let r = liveStoreInstance.useFile(t?.key || "").data;
   let i = useSelector(e => getPermissionsState(e));
@@ -159,7 +159,7 @@ function k() {
 k.displayName = "ArchivedBranchFooter";
 var ea = ei;
 let eE = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [r, s] = useState("");
   let [o, d] = useState(!1);
   let c = useCurrentFileKey();
@@ -262,7 +262,7 @@ let eb = registerModal(function (e) {
     email,
     onChangeEmail
   } = e;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = useCurrentFileKey();
   let o = useModalManager({
     ...e,
@@ -411,7 +411,7 @@ function ex({
   });
 }
 function eN() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = t => {
     e(showModalHandler({
       type: eb,
@@ -485,7 +485,7 @@ function eC({
   let r = _$$B();
   let i = Y9();
   let s = e ? r : i;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let c = {
     [ao.key]: ao.value
   };
@@ -541,7 +541,7 @@ function eD({
   let r = _$$B();
   let i = Y9();
   let s = e ? r : i;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let u = {
     [ao.key]: ao.value
   };

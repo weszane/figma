@@ -7,7 +7,7 @@ import { selectViewAction } from "../905/929976";
 import { getGroupOrDefault } from "../905/817247";
 import { UserGroupRole, GroupType } from "../905/441038";
 function _(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(SecureLink, {
     onClick: () => {
       t(selectViewAction({

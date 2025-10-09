@@ -37,7 +37,7 @@ var g = p;
 let L = "plan_switcher--planSwitcherRow--pzSwY";
 export let $$$$U0 = "PLAN_SWITCHER_ONBOARDING_KEY";
 export function $$G1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => getPermissionsStateMemoized(e));
   let n = selectWithShallowEqual(e => setupWorkspaceIdentity(e.user, e.currentUserOrgId, e.currentTeamId));
   let o = useSelector(e => e.user);
@@ -86,7 +86,7 @@ function W({
   currentUser: n,
   planResult: r
 }) {
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let {
     manager,
     getTriggerProps
@@ -183,7 +183,7 @@ function z({
   currentUser: n,
   planResult: o
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = useRef(null);
   let {
     open

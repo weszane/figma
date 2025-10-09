@@ -15,7 +15,7 @@ export function $$g0({
   logToggle: e
 } = {}) {
   let t = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = Xr(FT);
     let i = Xr(bs);
     return () => {

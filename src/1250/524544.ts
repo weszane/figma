@@ -46,7 +46,7 @@ export function $$f0() {
     loadedFolders: e.loadedFolders
   }));
   let s = selectCurrentUser();
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let u = useSelector(e => e.userFlags);
   let m = s?.personal_drafts_folder_id;
   useEffect(() => {

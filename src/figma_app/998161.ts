@@ -23,7 +23,7 @@ import { Ep } from "../figma_app/504823";
 import { getColorFormat } from "../figma_app/740163";
 import { isGradientType, validateGradientPaint, getSolidPaint, getColorAtStop, paintManager } from "../figma_app/385874";
 import { useSelectionPropertyValue } from "../905/275640";
-import { tZ } from "../figma_app/852050";
+import { getVariableName } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { useCurrentTool, useAppModelProperty } from "../figma_app/722362";
 import { normalizePath } from "../905/309735";
@@ -203,7 +203,7 @@ function Z({
   recordingKey: s,
   hideCustomColorPickerFillTypeToggle: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useDropdownState();
   let c = useCurrentTool();
   let u = Ep();
@@ -299,7 +299,7 @@ function ee({
   recordingKey: e
 }) {
   let t = useAtomWithSubscription(E_);
-  let r = tZ(t?.varId);
+  let r = getVariableName(t?.varId);
   let [a, s] = useState(r ?? "");
   useEffect(() => {
     s(r ?? "");

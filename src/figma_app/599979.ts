@@ -1108,7 +1108,7 @@ export async function uploadHubFileImages(
   coverImageBuffer: Uint8Array | null,
   carouselMedia: any[],
   fileVersionId: string,
-  hubFileId: string,
+  hubFileId?: string,
 ): Promise<any> {
   let uploadData: any
   const { uploadImages, allMedia } = prepareMediaUploadData(carouselMedia)
@@ -1268,7 +1268,7 @@ function isPresignedUrlObject(obj: any): boolean {
 export function uploadImageWithPresignedUrl(
   presignedUrl: any,
   file: File,
-  buffer: Uint8Array,
+  buffer: ArrayBuffer,
 ): Promise<any> {
   if (isPresignedUrlObject(presignedUrl)) {
     const { fields, imagePath, signedCloudfrontUrl } = presignedUrl
@@ -1370,7 +1370,7 @@ export async function uploadVideoWithThumbnail(
   resourceType: string,
   resourceId: string,
   videoData: any,
-  thumbnailBuffer: Uint8Array,
+  thumbnailBuffer: ArrayBuffer,
   thumbnailSha1: string,
 ): Promise<any> {
   const { video, videoThumbnail } = await VideoUploadService.getVideoUploadUrl({

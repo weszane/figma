@@ -181,7 +181,7 @@ let eI = new EX();
 let eC = new JV();
 let eE = new Eq();
 function ej(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let o = useIsFullscreenSitesView();
   let {
@@ -290,7 +290,7 @@ function ew(e) {
   let b = 1 === detailPropsMultipleActions.interactionActions.length && "BACK" === detailPropsMultipleActions.interactionActions[0].connectionType;
   let I = void 0 !== detailPropsMultipleActions.interactionActions.find(e => y(e, "CONDITIONAL"));
   return function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = e.updateSelectionProperties;
     let o = getBigNudgeAmount();
     let [l, s] = useState(!1);
@@ -579,7 +579,7 @@ function e$({
   stateManagementVersion: o,
   selectedInteractions: r
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let s = YT() === Oz.SINGLE_COL;
   let d = s ? ButtonWide : Button;
   let c = 1 === o ? jsx(d, {
@@ -822,7 +822,7 @@ let e7 = memo(function ({
   filterOutNoneActions: N
 }) {
   let A;
-  let V = useDispatch();
+  let V = useDispatch<AppDispatch>();
   let [B, H] = useState(!1);
   let [, F] = useAtomValueAndSetter(_$$x);
   let K = useRef(null);
@@ -1447,7 +1447,7 @@ function te({
   createActionTrigger: n,
   titleId: o
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     selectedInteractions
   } = Ay(e);

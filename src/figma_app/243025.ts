@@ -39,7 +39,7 @@ export function $$N1({
   inputClassName: s,
   autoFocus: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useDropdownState();
   return jsx(l6, {
     ariaLabel: getI18nString("dev_handoff.alternative_units.scale_factor.select_label"),

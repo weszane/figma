@@ -159,7 +159,7 @@ export function $$D0(e) {
     setSearchResults,
     hasCloseButton = !0
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let u = useCallback(() => {
     query && (d(startSearchSessionAction({
       entryPoint: "community:universal_posting"

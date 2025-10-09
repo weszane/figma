@@ -21,7 +21,7 @@ export function $$y0() {
   let {
     canMoveFileToProPlus
   } = R();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let y = !useAtomWithSubscription(openFileTeamAtom);
   let b = useCallback(() => {
     i(showModalHandler({

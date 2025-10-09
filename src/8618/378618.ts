@@ -553,7 +553,7 @@ function th({
   });
 }
 function ty() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useDropdownState();
   let n = selectCurrentFile();
   let r = GV();
@@ -692,7 +692,7 @@ function tb({
   stylePickerListLayout: T,
   stylePickerShown: f
 }) {
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   let E = useAtomWithSubscription(_$$b);
   let P = qh();
   let w = SQ();
@@ -963,7 +963,7 @@ function tw({
   stylePickerListLayout: b,
   stylePickerShown: T
 }) {
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let [I, E] = useAtomValueAndSetter(_$$b);
   let P = useAppModelPropsShallow("currentPage", "currentSelectedProperty");
   let w = qh();

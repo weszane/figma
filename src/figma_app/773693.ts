@@ -27,7 +27,7 @@ export function $$v0() {
   let v = useAtomWithSubscription(J);
   let A = um();
   let x = trackFileEventWithUser();
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let C = {
     orgId: e,
     teamId: t || null,

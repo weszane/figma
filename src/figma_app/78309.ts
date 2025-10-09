@@ -47,7 +47,7 @@ export function $$W0({
   hideCustomColorPickerFillTypeToggle: d,
   inheritStyleKeyField: c
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = 'slidesColorPicker';
   let _ = useEffectiveThemeId();
   let h = UZ(_);

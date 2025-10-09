@@ -10,7 +10,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { i as _$$i } from "../469e6e40/651707";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
-import { hZ } from "../figma_app/342125";
+import { orgSamlConfigSet } from "../figma_app/342125";
 import { a as _$$a } from "../469e6e40/234755";
 import { registerModal, registerLegacyModal } from "../905/102752";
 import { d as _$$d } from "../figma_app/121794";
@@ -311,7 +311,7 @@ function A(e) {
       sso_target_url: e.idp_sso_target_url
     }).then(t => {
       x(!1);
-      e.dispatch(hZ({
+      e.dispatch(orgSamlConfigSet({
         orgSamlConfig: t.data.meta
       }));
       w();

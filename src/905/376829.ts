@@ -90,7 +90,7 @@ function M({
   valuesToDisplayText: l,
   onChange: d
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = useAtomWithSubscription(selectedItemAtom);
   let m = useCallback((t, i, n) => {
     t.stopPropagation();
@@ -179,7 +179,7 @@ function er({
   onResetFilter: n,
   onChange: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useCallback(e => {
     e.stopPropagation();
     l(hideDropdownAction());
@@ -275,7 +275,7 @@ function em(e) {
   })) : jsx(Fragment, {});
 }
 function eh(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useRef(null);
   let n = useSelector(e => e.dropdownShown);
   let o = n?.type === e.dropdownId;
@@ -340,7 +340,7 @@ function eC(e) {
   });
 }
 function eT(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useRef(null);
   let n = useSelector(e => e.dropdownShown);
   let o = n?.type === e.dropdownId;
@@ -561,7 +561,7 @@ export let $$eO1 = {
   [PublicModelType.PRIVATE_WIDGETS]: privateWidgetsSearchModule.getValidOptions
 };
 export function $$eD0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.search.parameters);
   let n = useSelector(e => e.viewBarViewModeOptionByView);
   let [o, l] = useAtomValueAndSetter(selectedItemAtom);
@@ -674,7 +674,7 @@ export function $$eD0(e) {
   });
 }
 function eL(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useRef(null);
   let n = useDropdownState();
   let o = n?.type === e.dropdownId;

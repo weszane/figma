@@ -41,7 +41,7 @@ import { CurrencyFormatter } from "../figma_app/514043";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getPlanData } from "../figma_app/428858";
 import { devModalTypes } from "../figma_app/124713";
-import { B as _$$B } from "../figma_app/395012";
+import { TeamFeatureKey } from "../figma_app/395012";
 import { registerModal } from "../905/102752";
 import { N as _$$N2 } from "../905/809096";
 import { UL, un, kI } from "../figma_app/457899";
@@ -237,7 +237,7 @@ function ee({
 }) {
   let E = r.key.parentId;
   let S = r.key.type;
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let [A, x] = useState(!1);
   let N = useCallback(() => {
     f();
@@ -278,7 +278,7 @@ function ee({
     planId: E,
     ...getPlanData(S, {
       team: {
-        entryPoint: _$$B.MEMBERS_TAB
+        entryPoint: TeamFeatureKey.MEMBERS_TAB
       },
       org: {
         entryPoint: devModalTypes.MEMBERS_TAB

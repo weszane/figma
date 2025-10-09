@@ -74,7 +74,7 @@ export function $$et0({
   let es = !!e.org || hasTeamStatePaidAccess(e.team);
   let eo = e.isTryFile;
   let el = useIsProgressBarHiddenOrLocked();
-  let ed = useDispatch();
+  let ed = useDispatch<AppDispatch>();
   let ec = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   })?.url;

@@ -12,7 +12,7 @@ import { isProrationBillingEnabledForCurrentPlan } from '../figma_app/618031';
 import { getOrgUserByUserIdAction } from '../figma_app/990058';
 import { useSelector, useDispatch } from 'react-redux';
 export function $$h0(e, t) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let {
     getDynamicConfig
   } = setupDynamicConfigHandler('disable_cost_messaging_config');

@@ -9,9 +9,9 @@ import { BaseLinkComponent, SecureLink } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString } from "../905/303541";
-import { rH } from "../figma_app/49598";
-import { _J } from "../figma_app/378195";
-import { se, fd } from "../figma_app/559491";
+import { getHubFileMetadataThunk } from "../figma_app/49598";
+import { initializeLocalPluginsThunk } from "../figma_app/378195";
+import { unpublishedPluginsQuery, unpublishedWidgetsQuery } from "../figma_app/559491";
 import { aq } from "../figma_app/399472";
 import { t as _$$t2 } from "../905/833100";
 import { r as _$$r } from "../figma_app/896657";
@@ -210,7 +210,7 @@ function X(e) {
   });
 }
 function q(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectUser();
   let i = [];
   let o = {
@@ -255,7 +255,7 @@ var J = (e => (e[e.Fetched = 0] = "Fetched", e[e.Fetching = 1] = "Fetching", e[e
 let Z = [FFileType.DESIGN, FFileType.WHITEBOARD];
 let $$Q0 = registerModal(function (e) {
   let t = selectUser();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = useSelector(e => !!e.user);
   let l = useSelector(e => e.currentUserOrgId);
   let d = function () {
@@ -273,11 +273,11 @@ let $$Q0 = registerModal(function (e) {
   let H = getTotalUserWidgetsCount();
   let W = getTotalUserWidgetsWithDevelopmentCount();
   let K = Object.keys(V).length;
-  setupResourceAtomHandler(se());
-  setupResourceAtomHandler(fd());
+  setupResourceAtomHandler(unpublishedPluginsQuery());
+  setupResourceAtomHandler(unpublishedWidgetsQuery());
   useEffect(() => {
     r(searchClearQueryAction({}));
-    o && (r(_J()), r(aq()));
+    o && (r(initializeLocalPluginsThunk()), r(aq()));
     let e = document.body.style.overflowY;
     document.body.style.overflowY = "hidden";
     return () => {
@@ -308,7 +308,7 @@ let $$Q0 = registerModal(function (e) {
     r(hideModal());
   };
   let J = async e => {
-    await r(rH({
+    await r(getHubFileMetadataThunk({
       fileKey: e
     }));
   };

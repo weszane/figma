@@ -28,7 +28,7 @@ export function $$j0(e) {
     currency,
     canSeeBillingAddressExp
   } = e;
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   let E = getSelectedView();
   let A = useSelector(e => selectedViewToPath(e, E));
   let [I, k] = useState(!1);

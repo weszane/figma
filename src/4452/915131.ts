@@ -15,7 +15,7 @@ import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { cL } from "../905/748726";
+import { autocompleteReset } from "../905/748726";
 import { fetchContactsOptimist } from "../905/14223";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
@@ -31,7 +31,7 @@ import { Wj } from "../905/913057";
 import { AccessLevelEnum } from "../905/557142";
 import { teamVisibilityEnum, teamConstant } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
-import { Z as _$$Z } from "../figma_app/761870";
+import { getAllAutocompleteEmails } from "../figma_app/761870";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 import { z6 } from "../figma_app/805373";
@@ -44,7 +44,7 @@ import { A as _$$A } from "../svg/38542";
 let W = "team_creation_modal--sectionHeader--WhxZn text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let z = "team_creation_modal--flexRow---ZX7J";
 function Q(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.contacts);
   let n = useSelector(e => e.orgDomains);
   let i = useSelector(e => e.orgById);
@@ -103,7 +103,7 @@ export function $$Y1(e, t) {
   return e === _9.ORG ? t === J4.EDIT ? FPermissionLevelType.ORG_EDIT : FPermissionLevelType.ORG_VIEW : e === _9.WORKSPACE ? t === J4.EDIT ? FPermissionLevelType.WORKSPACE_EDIT : FPermissionLevelType.WORKSPACE_VIEW : FPermissionLevelType.INVITE_ONLY;
 }
 export let $$K0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.currentUserOrgId) ?? "";
   let N = useSelector(e => e.orgById)[a];
   let R = selectCurrentUser();
@@ -262,7 +262,7 @@ export let $$K0 = registerModal(function (e) {
       orgAccess: el,
       workspaceId: em ?? void 0,
       dontRedirect: !onSubmitReturnToPrevView,
-      inviteEmails: _$$Z(ef),
+      inviteEmails: getAllAutocompleteEmails(ef),
       defaultPermission: ed,
       description: ew,
       sharingAudienceControl: $$Y1(eE, eb),
@@ -275,7 +275,7 @@ export let $$K0 = registerModal(function (e) {
   }
   function eD() {
     t(popModalStack());
-    t(cL());
+    t(autocompleteReset());
   }
   return jsx(TrackingProvider, {
     name: "Team Creation",
@@ -361,7 +361,7 @@ export let $$K0 = registerModal(function (e) {
             }), jsx(ButtonBasePrimaryTracked, {
               onClick: function () {
                 if (0 === er) ei(1);else {
-                  let e = N && N.domain_capture && k.domains.length > 0 ? _$$Z(ef).filter(e => isValidEmail(e) && !checkDomainExists(k.domains, e)) : [];
+                  let e = N && N.domain_capture && k.domains.length > 0 ? getAllAutocompleteEmails(ef).filter(e => isValidEmail(e) && !checkDomainExists(k.domains, e)) : [];
                   e.length > 0 ? function (e) {
                     if (N?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
                       t(showModalHandler({

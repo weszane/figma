@@ -51,7 +51,7 @@ export function $$U2(e) {
 function B(e) {
   var t;
   let r;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = useStore();
   let P = useSelector(e => e.currentUserOrgId);
   let j = useSelector(e => P && e.orgById[P]);

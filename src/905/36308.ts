@@ -191,7 +191,7 @@ import { gn } from '../figma_app/322845';
 import { codeConnectToolsEnabledAtom, codeOptionsAtom, useTailwindAtom, isCodebaseSuggestionsEnabled, imageOptionsWithMount, denyOverwritingFilesAtom, additionalStateAtom1, codebaseSuggestionsEnabledAtom } from '../figma_app/342355';
 import { toggleFigmentDebugger } from '../figma_app/347406';
 import { c1 } from '../figma_app/357047';
-import { ce } from '../figma_app/401069';
+import { logFileSaveAs } from '../figma_app/401069';
 import { OX } from '../figma_app/407414';
 import { getAnticipationConfig } from '../figma_app/407767';
 import { cortexAPI } from '../figma_app/432652';
@@ -3928,7 +3928,7 @@ export function generateFullscreenMenuItems(e) {
       callback: (e, i, n) => {
         let r = () => {
           Dc(hV.SaveLocalFile, t, n, e, ['0:0'], 'save-as');
-          ce();
+          logFileSaveAs();
         };
         c ? function ({
           dispatch: e,

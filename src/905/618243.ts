@@ -41,7 +41,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A } from "../5724/768410";
 function N(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, r] = useState("");
   let [s, o] = useState(!1);
   let l = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.nodeId : void 0);
@@ -424,7 +424,7 @@ let X = registerModal(function ({
   canAdminCurrentTeam: t,
   trackingContextName: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = UpsellModalType.OSS_EXPOSURE_BRANCHING_UPSELL_MODAL;
   let s = t ? renderI18nText("oss_exposure_branching_upsell_modal.body1") : renderI18nText("oss_exposure_branching_upsell_modal.nonadmin.body1", {
     learnMoreLink: jsx(linkWithTracking, {

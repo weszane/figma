@@ -34,7 +34,7 @@ function R({
   setConfirm: e,
   user: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let r = k();
   let s = useSubscription(CurrentUserIsMfaRequiredByMembershipOrgView, {});
   let d = getResourceDataOrFallback(s.data?.currentUser?.isMfaRequiredByMembershipOrg) && !t.two_factor_app_enabled;
@@ -83,7 +83,7 @@ function N({
   addPhone: i
 }) {
   let r = Z();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let u = k();
   let p = setupAutofocusHandler();
   return jsxs(ModalFormContents, {
@@ -139,7 +139,7 @@ function P({
 }) {
   let i = setupAutofocusHandler();
   let r = Z();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let u = k();
   return jsxs(ModalFormContents, {
     onSubmit: e,
@@ -198,7 +198,7 @@ function O({
 }) {
   let [o, l] = useState(!1);
   let [d, u] = useState(!1);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let m = Z();
   let f = t => {
     let i = t.target.elements;

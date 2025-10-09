@@ -139,7 +139,7 @@ let W = liveStoreInstance.Query({
   key: 'figjamDefaultLibraries'
 });
 function K(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = _$$l(e.publishedLibrary?.library_key ?? '');
   let {
     dropdownShown,

@@ -37,7 +37,7 @@ function T({
   onClose: t,
   ...n
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let o = kG(e);
   let s = useLatestRef(o.showing);
   let c = p1();
@@ -436,7 +436,7 @@ function J({
   updatePreview: e,
   recordingKey: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = useDropdownState();
   let [c, k] = useSelectionProperty("stackReverseZIndex");
   let y = trackFileEventWithUser();
@@ -566,7 +566,7 @@ function et({
   updatePreview: e,
   recordingKey: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = useDropdownState();
   let [o, c] = useSelectionProperty("bordersTakeSpace");
   let m = trackFileEventWithUser();

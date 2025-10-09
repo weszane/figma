@@ -12,7 +12,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { VZ } from "../figma_app/727192";
 import { _p } from "../figma_app/826998";
 import { s0, yg } from "../figma_app/261761";
-import { JG } from "../figma_app/852050";
+import { useVariableDataLoaded } from "../figma_app/852050";
 import { t as _$$t2 } from "../figma_app/143965";
 import { SG, VS, Af, ZN } from "../figma_app/803932";
 import { X } from "../figma_app/934313";
@@ -144,7 +144,7 @@ export function $$S1() {
   }) : null;
 }
 export function $$N0() {
-  JG({
+  useVariableDataLoaded({
     enabled: !0
   });
   let e = uQ();

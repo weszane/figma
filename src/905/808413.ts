@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { deepEqual } from "../905/382883";
 import { getLivegraphClient } from "../figma_app/288654";
-import { y } from "../figma_app/705249";
+import { isXrDebounceThresholdEnabled } from "../figma_app/705249";
 import { selectCurrentUser } from "../905/372672";
 class l {
   constructor(e, t, i) {
@@ -40,7 +40,7 @@ export function $$c0(e) {
     if (i) return new l(args, subscription, i);
   });
   useEffect(() => {
-    if (!y() || !i) {
+    if (!isXrDebounceThresholdEnabled() || !i) {
       m(void 0);
       return;
     }

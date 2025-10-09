@@ -11,7 +11,7 @@ import { C as _$$C } from "../905/937623";
 import { ri } from "../905/337179";
 export function $$g0(e) {
   let t;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let g = _B();
   let h = useRef(null);
   let f = useRef(null);

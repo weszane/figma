@@ -25,7 +25,7 @@ export function $$S1() {
   let o = usePluginedWidgets();
   let l = useCurrentFileKey();
   let S = Xr($$I2);
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let A = [];
   let x = [];
   let N = useDebouncedCallback(() => {

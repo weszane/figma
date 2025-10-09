@@ -187,7 +187,7 @@ export const PrePurchaseUserSelectorModal = registerModal((props: {
   onUserSelect: (user: any) => void;
   resource: any;
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const handleClose = useCallback(() => {
     dispatch(hideModal());
   }, [dispatch]);

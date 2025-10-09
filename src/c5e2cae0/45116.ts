@@ -134,7 +134,7 @@ function O({
   setAdditionalSeats: a,
   tier: r
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let l = getRumLoggingConfig();
   return jsx(WithTrackedButton, {
     "aria-label": getI18nString("checkout.additional_seats.add_seats_to_assign_later"),
@@ -234,7 +234,7 @@ function Z({
   tier: i,
   teamId: l
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let d = getUserId();
   let o = e.id === d;
   let c = useCartSeatSelectionClarityExperiment();

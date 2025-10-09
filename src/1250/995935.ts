@@ -102,7 +102,7 @@ import { getCurrentUserOrg, isBigmaEnabledSimple } from '../figma_app/336853';
 import { hasFolderOrTeamRestrictions, hasValidSubscription, isTeamLocked } from '../figma_app/345997';
 import { CHECKOUT_ROUTE } from '../figma_app/350203';
 import { shouldShowDeprecationBannerAtom } from '../figma_app/369803';
-import { bE } from '../figma_app/375098';
+import { userTeamFlagPost } from '../figma_app/375098';
 import { getVisibleSpecialChildren } from '../figma_app/387100';
 import { isOrgGuestUser, useCurrentPlanUser, useCurrentPublicPlan } from '../figma_app/465071';
 import { MA, om, x1 } from '../figma_app/465413';
@@ -155,7 +155,7 @@ function ek({
   team: e,
   openInvoiceUrls: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   if (t.length === 0) return null;
   let r = {
     'data-tooltip-type': KindEnum.TEXT,
@@ -484,7 +484,7 @@ let tW = {
 let tz = {
   bannerId: om.ProTeamPastDue,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = selectPermissionsState();
@@ -533,7 +533,7 @@ let tz = {
 let t$ = {
   bannerId: om.ExternalContentControlBanner,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = selectCurrentFile();
     let r = selectCurrentUser();
     let i = useCurrentUserOrgId();
@@ -590,7 +590,7 @@ let t$ = {
 let tq = {
   bannerId: om.ProTeamChargeFailed,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = selectPermissionsState();
@@ -637,7 +637,7 @@ let tq = {
 let tV = {
   bannerId: om.ProTeamNoMonthlySubEditorCountExceeded,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
     let o = selectPermissionsState();
@@ -683,7 +683,7 @@ let tV = {
 let tH = {
   bannerId: om.ProTrialsExpiryBanner,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = selectCurrentFile();
     let r = getCurrentTeamId();
     let i = useSelector(e => r ? e.teams[r] : null);
@@ -755,7 +755,7 @@ let tH = {
         mainText: getI18nString('banner.pro_trial_expiry.title'),
         dismissible: !m,
         onDismiss: m ? void 0 : () => {
-          t(bE({
+          t(userTeamFlagPost({
             all_team_flags: [{
               team_id: i.id,
               flags: {
@@ -779,7 +779,7 @@ let tH = {
 let tK = {
   bannerId: om.StarterTeamOverFreeLimitAndLocked,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = selectPermissionsState();
@@ -979,7 +979,7 @@ let tZ = {
     let n = getCurrentTeamId();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = useCurrentUserOrgId();
-    let o = useDispatch();
+    let o = useDispatch<AppDispatch>();
     let d = selectPermissionsState();
     if (!(i && t?.project && isOrgFolderV2(t.project)) && !r && t && hasFolderOrTeamRestrictions(t.folderId, t.teamId, d)) {
       let t = {
@@ -1191,7 +1191,7 @@ let t5 = {
 let t4 = {
   bannerId: om.FigJamTryDraftsBanner,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = selectCurrentFile();
     let r = useCurrentFileWorkshopModeStatus();
     let i = selectCurrentUser();
@@ -1236,12 +1236,12 @@ let t4 = {
 let t2 = {
   bannerId: om.FigJamTryClaimBanner,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let {
       onClaim
     } = function () {
       let e = selectCurrentFile();
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       let n = useSelector(e => e.plans);
       useEffect(() => {
         t(setupOptimistPlanLoader({
@@ -1453,7 +1453,7 @@ let ne = {
 let nt = {
   bannerId: om.FileIsTeamTemplate,
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = useIsProgressBarHiddenOrLocked();
     let r = kD();
     let i = b4();
@@ -1662,7 +1662,7 @@ let na = {
 let nr = {
   bannerId: om.SeatBillingTermsReminder,
   Banner() {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = selectCurrentUser();
     let n = useCurrentUserOrg();
     let i = !!n?.id;
@@ -1778,7 +1778,7 @@ let no = {
     let r = getUserId();
     let i = function () {
       let e = useCanUseDevModeDemoFile();
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       let n = selectCurrentUser();
       let r = selectCurrentFile();
       return e && r && n ? async () => {
@@ -1848,7 +1848,7 @@ let no = {
 let ns = {
   bannerId: om.OrderFormBillingTermsBanner,
   Banner() {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = selectCurrentUser();
     let n = useCurrentUserOrg();
     let r = Az(n);

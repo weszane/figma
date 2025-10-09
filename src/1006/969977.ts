@@ -16,7 +16,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Dm } from "../figma_app/8833";
 import { defaultColorManipulator } from "../905/713722";
 import { getSelectedEditorType } from "../figma_app/976749";
-import { x as _$$x } from "../905/239551";
+import { widgetManagerHandler } from "../905/239551";
 import { isValidWidgetType, getWidgetMenuI18nString } from "../figma_app/364284";
 import { useDropdownState } from "../905/848862";
 import { FEditorType } from "../figma_app/53721";
@@ -107,7 +107,7 @@ function S({
   let n = getSelectedEditorType();
   let l = scopeAwareFunction.user("widget-select-color", n => {
     let o = colorToHex(n.option);
-    _$$x.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, f[o] ?? o);
+    widgetManagerHandler.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, f[o] ?? o);
   });
   let r = useDebouncedCallback(l, 100);
   let [c, p] = useState(!1);
@@ -156,7 +156,7 @@ function H({
     propertyName: t.propertyName,
     icon: t.icon,
     onClick: scopeAwareFunction.user("widget-action", () => {
-      _$$x.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, null);
+      widgetManagerHandler.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, null);
     })
   });
 }
@@ -167,7 +167,7 @@ function R({
   widgetInfo: t
 }) {
   let n = getSelectedEditorType();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let a = e.options.find(t => t.option === e.selectedOption);
   let c = generateRecordingKey("widgetControl", e.propertyName);
@@ -194,7 +194,7 @@ function R({
       id: `widgetControl.${e.propertyName}`,
       inputClassName: p ? "widget_controls--input--Z6nHO" : hF,
       onChange: n => {
-        _$$x.runPropertyMenuCallback(t.pluginID, t.widgetID, e.propertyName, n.option);
+        widgetManagerHandler.runPropertyMenuCallback(t.pluginID, t.widgetID, e.propertyName, n.option);
       },
       property: {
         option: e.selectedOption,
@@ -223,7 +223,7 @@ function z({
     icon: t.icon,
     active: t.isToggled ? "LOUD" : "NONE",
     onClick: scopeAwareFunction.user("widget-toggle", () => {
-      _$$x.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, null);
+      widgetManagerHandler.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, null);
     })
   });
 }

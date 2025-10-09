@@ -10,7 +10,7 @@ import { Link } from "../905/438674";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { aK } from "../figma_app/401069";
+import { logFileImageDownloadThunk } from "../figma_app/401069";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FileCanExport } from "../figma_app/43951";
 import { KindEnum } from "../905/129884";
@@ -167,9 +167,9 @@ function C({
     paint: e,
     fileKey: useCurrentFileKey() ?? ""
   });
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useCallback(() => {
-    o(aK());
+    o(logFileImageDownloadThunk());
   }, [o]);
   if (!s) return jsx(Fragment, {
     children: t

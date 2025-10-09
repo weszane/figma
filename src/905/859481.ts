@@ -36,7 +36,7 @@ import { R8, V0, kW, e6, Jt } from "../figma_app/359164";
 let F = new OH();
 let M = new EN();
 function j(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = bC();
   let r = e.leftEndCap === e.rightEndCap && isValidValue(e.leftEndCap) && -1 !== Gp.indexOf(e.leftEndCap);
   let a = !!e.leftEndCap && !!e.rightEndCap && isValidValue(e.leftEndCap) && isValidValue(e.rightEndCap) && e.leftEndCap !== e.rightEndCap;

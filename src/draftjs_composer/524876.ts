@@ -69,7 +69,7 @@ let d = memo(function (e) {
 });
 var f = h;
 function J(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     attachments
   } = e;

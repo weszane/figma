@@ -81,7 +81,7 @@ import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { i$, uw, Z5 } from "../figma_app/582377";
 import { getNodeStatus } from "../figma_app/623300";
 import { WN } from "../figma_app/638601";
-import { y as _$$y } from "../figma_app/705249";
+import { isXrDebounceThresholdEnabled } from "../figma_app/705249";
 import { initialSize, useResizeObserverRef } from "../figma_app/708845";
 import { useCurrentTool } from "../figma_app/722362";
 import { f as _$$f } from "../figma_app/750432";
@@ -292,7 +292,7 @@ function ex(e) {
     commentReceipts
   } = I_();
   let m = fr();
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let f = useCurrentFileKey();
   let _ = getUserId();
   let g = useCallback(() => {
@@ -417,7 +417,7 @@ let eS = memo(e => {
   let w = e.thread.attachments?.length || e.thread.comments.map(e => e.attachments?.length || 0).reduce((e, t) => e + t, 0) || 0;
   let j = e.avatars[0].avatar_user_handle;
   let k = e.hideResolve || !userCanResolveThread || isPendingFromSinatra;
-  let P = thread.sidebarItemType === ThreadType.FEED_POST && !_$$y();
+  let P = thread.sidebarItemType === ThreadType.FEED_POST && !isXrDebounceThresholdEnabled();
   let I = y ? jsx(HG, {
     children: jsx(ButtonPrimitive, {
       "aria-label": getI18nString("comments.unavailable_offline"),
@@ -627,7 +627,7 @@ let e0 = memo(e => {
     onCanvasMentionCopyLink,
     openPostDetailModal
   } = function (e, t, n) {
-    let o = useDispatch();
+    let o = useDispatch<AppDispatch>();
     let {
       comments: _comments
     } = e;
@@ -1090,7 +1090,7 @@ function tp() {
   let r = fr();
   let l = n6();
   let d = isDevHandoffEditorType();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let m = useSelector(e => e.mirror.appModel.showComments);
   let h = useCallback(() => {
     fullscreenValue.triggerAction("toggle-show-comments", {
@@ -1214,7 +1214,7 @@ function tp() {
 let tf = "comments_sidebar_header--headerIconButton--JiHD6";
 let t_ = "comments_sidebar_header--headerIconButtonSel--3-zXH";
 function tg(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     getTriggerProps,
     manager
@@ -1243,7 +1243,7 @@ function tb({
   activeFilters: e,
   ...t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let {
     getTriggerProps,
     manager
@@ -1317,7 +1317,7 @@ function tb({
   });
 }
 function ty(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useCallback(() => {
     t(deactivateActiveComment());
     e.threadManager.setQuery("");
@@ -1423,7 +1423,7 @@ function tk({
 let tP = e => e.stopPropagation();
 let tI = [hJ.COMMENTS_ONLY, hJ.POSTS_ONLY];
 export function $$tT0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     activeQuery,
     activeSort,
@@ -1437,7 +1437,7 @@ export function $$tT0(e) {
   let j = lM();
   let P = useMemo(() => e.sorts && Array.from(e.sorts) || x, [e.sorts, x]);
   let I = useMemo(() => e.filters && Array.from(e.filters) || b, [e.filters, b]);
-  let T = useMemo(() => _$$y() && !j ? tI : void 0, [j]);
+  let T = useMemo(() => isXrDebounceThresholdEnabled() && !j ? tI : void 0, [j]);
   let M = useMemo(() => filteredSidebarItems.status === "loaded" && filteredSidebarItems.data || [], [filteredSidebarItems]);
   let E = useRef(M);
   useEffect(() => {

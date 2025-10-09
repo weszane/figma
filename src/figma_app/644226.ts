@@ -24,7 +24,7 @@ export function $$f0(e) {
     let h = isCodegenSupportedForLanguage(r);
     let m = getCodeExtensionPreferences(r.id);
     let g = useUpdateCodeExtensionPreferences();
-    let f = useDispatch();
+    let f = useDispatch<AppDispatch>();
     return useMemo(() => {
       let e = [];
       if (!h) return e;

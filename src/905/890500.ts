@@ -16,7 +16,7 @@ import { VX } from "../905/50151";
 var A = (e => (e.EDIT = "edit", e.DELETE = "delete", e.COPY_LINK = "copy_link", e.TOGGLE_UNREAD = "toggle_unread", e))(A || {});
 export function $$y0(e) {
   let t = I_();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let A = selectCurrentUser();
   let y = v();
   let {

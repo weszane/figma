@@ -44,7 +44,7 @@ let N = e => {
   return a && r ? "spain" : a && i ? "non_spain" : void 0;
 };
 function O(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = getVisibleTheme();
   let r = e.isSpainVariant ? renderI18nText("es_es_announcement.spain.description") : renderI18nText("es_es_announcement.nonspain.description");
   return jsx(_l, {
@@ -83,7 +83,7 @@ function O(e) {
 }
 let R = userFlagExistsAtomFamily("has_tried_es_es");
 export function $$M0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(R);
   let n = useAtomWithSubscription(mp);
   let s = "loaded" === n.status;

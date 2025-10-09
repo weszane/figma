@@ -32,7 +32,7 @@ import { t9, yI } from "../905/915142";
 import { Wj } from "../905/913057";
 import { UpsellModalType } from "../905/165519";
 import { AccessLevelEnum } from "../905/557142";
-import { Z as _$$Z } from "../figma_app/761870";
+import { getAllAutocompleteEmails } from "../figma_app/761870";
 import { TrackingKeyEnum } from "../905/696396";
 import { e as _$$e } from "../905/393279";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -88,7 +88,7 @@ function X() {
 }
 let et = "folder_creation_modal--sectionHeader--EcWYc text--fontPos11--2LvXf text--_fontBase--QdLsd";
 export function $$er0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [r, U] = useState("");
   let [W, $] = useState(!1);
   let [G, V] = useState(0);
@@ -167,7 +167,7 @@ export function $$er0(e) {
     let t = getFeatureFlags().folder_creation_restricted_guests_err_ui && ed?.invite_whitelist_guest_invite_setting != null;
     return yI(e, K.usersByEmail[e] || e, ed, e_, er.email, t ? getI18nString("project_creation.restricted_against_adding_external_users") : null);
   };
-  let eE = () => ed && ed.domain_capture && e_.domains.length > 0 ? _$$Z(J).filter(e => isValidEmail(e) && !checkDomainExists(e_.domains, e)) : [];
+  let eE = () => ed && ed.domain_capture && e_.domains.length > 0 ? getAllAutocompleteEmails(J).filter(e => isValidEmail(e) && !checkDomainExists(e_.domains, e)) : [];
   let eI = e => {
     if (ed && ed?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
       t(showModalHandler({
@@ -195,7 +195,7 @@ export function $$er0(e) {
       isViewOnly: void 0,
       sharingAudienceControl: ed ? a : void 0,
       teamAccess: z,
-      inviteEmails: _$$Z(J),
+      inviteEmails: getAllAutocompleteEmails(J),
       inviteLevel: ev,
       orgId: ed?.id,
       onFolderCreated: e.onFolderCreated

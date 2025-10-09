@@ -44,7 +44,7 @@ export let $$x0 = memo(function ({
     state,
     dispatch
   } = useContext(nS);
-  let G = useDispatch();
+  let G = useDispatch<AppDispatch>();
   let V = state.draggedTool === e;
   let H = state.draggedToolCanCancel;
   let [z, W] = useState(!1);

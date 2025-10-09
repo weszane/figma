@@ -10,10 +10,10 @@ import { getI18nString } from "../905/303541";
 import { X } from "../905/190511";
 import { logCmsError } from "../905/937198";
 import { stopPropagation } from "../figma_app/753501";
-import { u as _$$u } from "../figma_app/852050";
+import { getVariableById } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { J } from "../905/225412";
-import { eF } from "../figma_app/394327";
+import { isLocallySoftDeleted } from "../figma_app/394327";
 import { s as _$$s } from "../figma_app/268276";
 import { zm, Bx } from "../figma_app/228217";
 import { A as _$$A } from "../1617/991344";
@@ -21,10 +21,10 @@ export function $$I2({
   variableId: e,
   ...t
 }) {
-  let i = _$$u(convertKiwiToVariableIdString(e));
+  let i = getVariableById(convertKiwiToVariableIdString(e));
   let r = i?.name ?? "";
   let a = i?.description;
-  let o = !!i && eF(i);
+  let o = !!i && isLocallySoftDeleted(i);
   let d = t.paint;
   let c = d.color && d.opacity ? `${colorToHex(d.color)}, ${(100 * d.opacity).toLocaleString("en", {
     maximumFractionDigits: 2

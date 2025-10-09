@@ -167,7 +167,7 @@ function X({
 }) {
   let [g, y] = useState((r ?? "") + (t ? getBasename(t) : ""));
   let [S, v] = useState(valueOrFallback(u, ""));
-  let C = useDispatch();
+  let C = useDispatch<AppDispatch>();
   let w = e.guid;
   let L = e.styleType;
   let P = useRef(null);
@@ -331,7 +331,7 @@ function Z({
   recordingKey: a
 }) {
   let o = useIsFullscreenSlidesView();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useDropdownState();
   let c = useAtomWithSubscription(TN);
   let u = useAtomWithSubscription(Dq)[e] || "";

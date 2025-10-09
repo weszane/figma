@@ -265,7 +265,7 @@ import { SY } from '../figma_app/383828';
 import { isDescendant } from '../figma_app/387100';
 import { O8 } from '../figma_app/393980';
 import { HR } from '../figma_app/397881';
-import { rg as _$$rg } from '../figma_app/401069';
+import { logFileExportThunk } from '../figma_app/401069';
 import { setupCursorChatDisabledCheck } from '../figma_app/403368';
 import { NF } from '../figma_app/406976';
 import { KeyboardShortcut } from '../figma_app/420927';
@@ -287,7 +287,7 @@ import { KV } from '../figma_app/548615';
 import { useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { sendReconnectingBanner } from '../figma_app/553184';
 import { bs, SD } from '../figma_app/553940';
-import { af as _$$af } from '../figma_app/559491';
+import { getResourceVersionsThunk } from '../figma_app/559491';
 import { O as _$$O4, S as _$$S5 } from '../figma_app/568977';
 import { $P, D6 as _$$D4, ix as _$$ix2, pB as _$$pB, Rt as _$$Rt, EA, Hq, Ke, LE, qc, Tk, V4, Vu, w8, wn, ZR } from '../figma_app/575164';
 import { xE } from '../figma_app/581520';
@@ -317,7 +317,7 @@ import { getCurrentOrgAdminInfo } from '../figma_app/740025';
 import { EditorPreferencesApi, getColorFormat, getDevHandoffInspectSplitPosition, getPropertiesPanelSplitPosition, getSidebarSplitPosition } from '../figma_app/740163';
 import { getPropertiesPanelTab, updateHoveredNode } from '../figma_app/741237';
 import { qZ, ui } from '../figma_app/761118';
-import { Rs as _$$Rs } from '../figma_app/761870';
+import { getInitialAutocompleteState } from '../figma_app/761870';
 import { ActionType, AppStateTsApi, AutoLayoutInsertMode, Axis, ColorFormatEnum, colorManagementStateJs, ColorProfileEnum, ColorSpaceEnum, CustomFocusHelpers, DesignGraphElements, DesignWorkspace, EyedropperBindings, Fullscreen, FullscreenMode, HandoffBindingsCpp, IVariableStyles, KeyboardLayout, LogToConsoleMode, MeasurementType, MenuType, Multiplayer, NodePropertyCategory, NodeType, PluginHelpers, SchemaJoinStatus, SelfDesignType, SessionOrigin, SessionStatus, StateHierarchy, StylesBindings, UIVisibilitySetting, VariableDataType, VariableResolvedDataType, VariablesBindings } from '../figma_app/763686';
 import { markCommentAsUnread, markThreadAsRead, activateNewComment, resolveCommentThread, setNewAnchorPosition } from '../figma_app/770088';
 import { BrowserInfo, isFigmaMobileApp, isMobileUA } from '../figma_app/778880';
@@ -1066,7 +1066,7 @@ function tS() {
   let o = getFileTypePx();
   let d = useSelector(e => e.saveAsState);
   let c = useSelector(e => e.mirror.appModel.currentPage);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = () => {
     u(hidePickerThunk());
   };
@@ -1338,7 +1338,7 @@ class tk extends PureComponent {
         });
         Fullscreen.saveExportedItems();
         this.props.dispatch(hidePickerThunk());
-        this.props.dispatch(_$$rg());
+        this.props.dispatch(logFileExportThunk());
         handleAtomEvent({
           id: 'export_completed',
           properties: {
@@ -1558,7 +1558,7 @@ function tW({
     VariableAndStyleCreateModalRoot
   } = useContext(_$$l2) ?? {};
   let c = useSelector(e => e.pickerShown);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   function p() {
     (isSelectionPaintItem(c?.id ?? null) || isSelectionStyleItem(c?.id ?? null)) && u(hidePickerThunk());
   }
@@ -1922,7 +1922,7 @@ function ib({
     }
     return c && c in s ? s[c] : null;
   }();
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = function () {
     let e = AppStateTsApi?.uiState().backgroundPickerOpen.getCopy();
     let t = useSelector(e => e.mirror.appModel.prototypeBackgroundPickerOpen);
@@ -2264,7 +2264,7 @@ function iw({
   deleteCollection: n,
   collectionId: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = ZX();
   let {
     appModel,
@@ -2325,7 +2325,7 @@ function iS({
   deleteField: n,
   duplicateField: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let {
     appModel,
     sceneGraph,
@@ -2374,7 +2374,7 @@ function ij({
   selectedView: i,
   deleteItemOrItems: n
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let {
     appModel,
     sceneGraph,
@@ -2426,7 +2426,7 @@ function iA(e) {
   };
 }
 function iO(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.mirror.appModel);
   let n = e.clientX;
   let s = e.clientY;
@@ -2592,7 +2592,7 @@ function iV({
   selectedView: i
 }) {
   let n;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useSelector(e => e.mirror.appModel);
   let l = useSelector(e => e.mirror.sceneGraph);
   let d = _$$U3('annotations_button');
@@ -2661,7 +2661,7 @@ function iV({
   });
 }
 function iq(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = I_();
   let n = useSelector(e => e.mirror.appModel);
   if (!useSelector(e => getFileKeyFromSelectedView(e.selectedView))) return null;
@@ -3502,7 +3502,7 @@ let ns = class e extends PureComponent {
   }
   getFigJamRemovePluginActionsMenu() {
     if (this.props.selectedView.editorType === FEditorType.Design) return null;
-    let t = e => this.props.dispatch(_$$af({
+    let t = e => this.props.dispatch(getResourceVersionsThunk({
       id: e,
       resourceType: HubTypeEnum.PLUGIN
     }));
@@ -4245,7 +4245,7 @@ function nl(e) {
   let l = useCanAccessDevModeEntryPoint();
   let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let u = ng();
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = useInstalledPluginsAndWidgets();
   let m = h.orgPlugins;
   let f = _$$h2('plugin');
@@ -4339,7 +4339,7 @@ function nc(e) {
   let l = useCanAccessDevModeEntryPoint();
   let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let u = ng();
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = useInstalledPluginsAndWidgets();
   let m = h.orgPlugins;
   let f = _$$h2('plugin');
@@ -4434,7 +4434,7 @@ function nu({
     return i ? i.canHaveAnnotation : null;
   }, t);
   let p = _$$s4();
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let m = BrowserInfo.windows ? 'Ctrl+' : '\u2318';
   let g = [e ? {
     name: 'expand-element',
@@ -4514,7 +4514,7 @@ function np({
   let t = useSelector(e => e.mirror.sceneGraphSelection);
   let i = useSelector(e => e.mirror.appModel);
   let n = useSelector(e => e.mirror.sceneGraph);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = BrowserInfo.windows ? 'Ctrl+' : '\u2318';
   let l = [];
   navigator.clipboard && navigator.clipboard.write && l.push({
@@ -4677,7 +4677,7 @@ function ny({
   clientY: t,
   selectedView: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useSelector(e => e.mirror.appModel);
   let l = selectCurrentFile();
   let d = useCallback(() => {
@@ -4725,7 +4725,7 @@ function nb({
   clientY: i,
   selectedView: n
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useSelector(e => e.mirror.appModel);
   let l = useDeepEqualSceneValue((e, t) => e.get(t)?.isPageDivider, e);
   let d = [{
@@ -4757,7 +4757,7 @@ function nb({
   });
 }
 function nC(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.mirror.appModel);
   let n = e.clientX;
   let s = e.clientY;
@@ -4815,7 +4815,7 @@ function nk({
   targetInViewport: e,
   selectedView: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = useSelector(e => e.mirror.appModel);
   let l = getSingletonSceneGraph();
   let d = getBasicViewportRect();
@@ -4904,7 +4904,7 @@ let nN = {
 };
 function nM() {
   let e = useDropdownState();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = Gt(e?.data.pluginId, e?.data.triggeredFrom);
   let n = dR(e?.data.pluginId, e?.data.triggeredFrom);
   let s = _$$t5(e?.data.pluginId, i, n);
@@ -4988,7 +4988,7 @@ function nY({
   nodeId: t,
   selectedView: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let u = useSelector(e => e.mirror.appModel);
   let p = getSingletonSceneGraph();
   let h = mJ(t);
@@ -5195,7 +5195,7 @@ function nY({
   });
 }
 function nq(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     sceneGraph: e.mirror.sceneGraph,
@@ -5297,7 +5297,7 @@ function nZ({
   deleteItem: l,
   selectOnCanvas: d
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let {
     sceneGraph,
     sceneGraphSelection
@@ -5354,7 +5354,7 @@ function n1({
   paint: s,
   onPaintChange: l
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let {
     appModel,
     sceneGraph,
@@ -5554,7 +5554,7 @@ function ab({
 }) {
   let c;
   let u;
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = useCurrentFileKey();
   let m = useAtomWithSubscription(_$$g3);
   let f = m.state === 'hasData' ? m.data : [];
@@ -6291,7 +6291,7 @@ function aQ({
     includeDisabled: !0,
     acceptsUnicode: d === 'ja'
   });
-  let [p, h] = useState(_$$Rs());
+  let [p, h] = useState(getInitialAutocompleteState());
   return jsx(_$$P4, {
     autoFocus: !0,
     autocompleteResultsClassName: cssBuilderInstance.maxW300.$,
@@ -7971,7 +7971,7 @@ function sH({
   let c = sJ();
   let u = useLatestRef(c);
   let p = useLatestRef(e);
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let m = function (e, t, i) {
     let r = sd(t);
     let n = [];
@@ -8332,7 +8332,7 @@ function s7() {
   let c = useSelector(e => e.mirror.appModel.multiplayerSessionState);
   let u = yZ();
   let p = useSelector(e => e.mirror.appModel.currentPage);
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let [m, f] = useState(null);
   let g = useLatestRef(isLoading);
   let _ = useCallback(t => {
@@ -9106,7 +9106,7 @@ function o0(e) {
   return e.startsWith('mailto:') ? e.includes('?') ? e : e.substring(7) : e;
 }
 function o1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useStore().getState();
   let [l, d] = useState(o0(e.hyperlinkLocation.url));
   let c = useRef(!0);
@@ -9224,7 +9224,7 @@ function o9(e) {
 function le({
   fileKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useStore();
   let r = useSelector(e => e.isFullscreenDocumentLoaded);
   let s = _$$jz();
@@ -9388,7 +9388,7 @@ export function $$lr0({
   children: e
 }) {
   let t = selectWithShallowEqual(o9);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let m = getUserId();
   let T = t.openFile ? t.openFile.key : null;
   let j = getObservableValue(AppStateTsApi?.uiState().shouldShowAutoLayoutHintsIfExist, !1);

@@ -1,14 +1,14 @@
 import { throwTypeError } from "../figma_app/465776";
 import { PresentationValidationStatus } from "../figma_app/763686";
 import { viewerModes } from "../figma_app/471982";
-import { a6, x0 } from "../figma_app/198840";
+import { getHubFileVersionOrDefault, mapFileTypeToCategoryType } from "../figma_app/198840";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 function l({
   existingHubFile: e,
   createNewVersionOnSubmit: t,
   figFilePrototypeStatus: i
 }) {
-  return t ? i === PresentationValidationStatus.VALID : !!e && a6(e).valid_prototype;
+  return t ? i === PresentationValidationStatus.VALID : !!e && getHubFileVersionOrDefault(e).valid_prototype;
 }
 export let $$d0 = {
   displayName: "ViewerModeField",
@@ -21,7 +21,7 @@ export let $$d0 = {
     createNewVersionOnSubmit: i,
     existingHubFile: e,
     figFilePrototypeStatus: n
-  })) ? e.viewer_mode : x0(t?.editor_type ?? null),
+  })) ? e.viewer_mode : mapFileTypeToCategoryType(t?.editor_type ?? null),
   validate: ({
     figFile: e,
     existingHubFile: t,
@@ -36,7 +36,7 @@ export let $$d0 = {
       case FFileType.SITES:
       case FFileType.COOPER:
       case FFileType.FIGMAKE:
-        if (d !== x0(c)) return [{
+        if (d !== mapFileTypeToCategoryType(c)) return [{
           key: "INVALID_VIEWER_MODE_FOR_EDITOR_TYPE",
           data: {
             viewerMode: d,

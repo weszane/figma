@@ -40,7 +40,7 @@ export function $$S1(e, t) {
   return !useMemo(() => !!containingProductComponent?.guid && !nodesHaveInstanceSublayer && (!selectionHasProductComponent || e !== SlotSymbolType.VISIBLE), [containingProductComponent, nodesHaveInstanceSublayer, selectionHasProductComponent, e]) || !!defReferencedBySelection;
 }
 export function $$v3(e, t, r, n) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useMemo(() => getSlotPropTypes(e).defaultType, [e]);
   let d = useMemo(p1, []);
   let {

@@ -4,7 +4,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { F } from "../905/422355";
 import { getFalseValue } from "../figma_app/897289";
 import { loadingStatePutLoading, loadingStateDelete, loadingStatePutFailure } from "../figma_app/714946";
-import { createPublicUserPutAction, createPublicUserPutManyEmptyIdsAction, Z } from "../905/618921";
+import { createPublicUserPutAction, createPublicUserPutManyEmptyIdsAction, createPublicUserPutManyAction } from "../905/618921";
 import { selectCurrentUser } from "../905/372672";
 import { isLoading, isFailure } from "../905/18797";
 import { UserAPIHandlers } from "../905/93362";
@@ -47,7 +47,7 @@ let y = e => t => {
 export function $$b2(e) {
   let t = selectWithShallowEqual(E(e));
   let r = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = `PUBLIC_USER_FETCH_${e}`;
     let a = useSelector(e => e.loadingState);
     let s = useSelector(m(e));
@@ -88,7 +88,7 @@ export function $$b2(e) {
   } : r;
 }
 export function $$T3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(g(e));
   let a = Object.keys(r || []);
   let o = useSelector(e => e.loadingState);
@@ -117,7 +117,7 @@ export function $$T3(e) {
         t(createPublicUserPutManyEmptyIdsAction({
           userIds: n
         }));
-        t(Z({
+        t(createPublicUserPutManyAction({
           users: e
         }));
         t(loadingStateDelete({

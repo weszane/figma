@@ -17,7 +17,7 @@ import { useSyncedRef } from "../905/633914";
 import { nS } from "../figma_app/274383";
 export function $$b0(e, t) {
   let i = useStore();
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let v = new Image();
   let I = useRef(!1);
   let E = useRef(void 0);

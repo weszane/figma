@@ -388,7 +388,7 @@ function eo({
   };
 }
 function ea(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = function (e) {
     let t = useSubscription(ResourceSaveFromResourceId, {
       resourceId: e.id,
@@ -436,7 +436,7 @@ function ea(e, t) {
   };
 }
 function el(e, t, r) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useSelector(e => getOrgAdminAccess(e));
   let a = useSubscription(PluginInstall, {
     pluginId: t.id,
@@ -541,7 +541,7 @@ function ev({
   resourceContent: t,
   viewContext: r
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = useSelector(e => e.dropdownShown?.type === eg);
   let a = useSelector(e => e.dropdownShown?.data?.targetRect);
   let l = [];
@@ -684,7 +684,7 @@ function eb({
   resourceContent: t,
   viewContext: r
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let a = useRef(null);
   let [l, c] = useState(!1);
   return jsxs(Fragment, {
@@ -727,7 +727,7 @@ function eL({
   allowOrgSaves: d,
   enableWideButtonForStickyFooter: u
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let {
     onUserSaveActionClick,
     isResourceSavedForUser
@@ -789,7 +789,7 @@ function eT({
   resourceContent: t,
   viewContext: r
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = useSelector(e => e.dropdownShown?.type === eC);
   let a = useSelector(e => e.dropdownShown?.data?.targetRect);
   let {

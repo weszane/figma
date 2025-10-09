@@ -214,7 +214,7 @@ function ev(e) {
   });
 }
 function ef(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = "orgAdminSettings" === e.selectedView.view && e.selectedView.orgAdminSettingsViewTab === DashboardSection.DASHBOARD;
   let s = "billingGroupDashboard" === e.selectedView.view && e.selectedView.selectedTab === FRequestsStr.REQUESTS;
   let i = a || s;
@@ -301,7 +301,7 @@ function ey(e) {
     text,
     webEventId
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = getSelectedView();
   let _ = "workspace" !== c.view && "licenseGroup" !== c.view && c.view === e.selectViewArgs.view && ("orgAdminSettings" === c.view && "orgAdminSettings" === e.selectViewArgs.view ? c.orgAdminSettingsViewTab === e.selectViewArgs.orgAdminSettingsViewTab : "teamAdminConsole" === c.view && "teamAdminConsole" === e.selectViewArgs.view ? c.teamAdminConsoleViewTab === e.selectViewArgs.teamAdminConsoleViewTab : void 0);
   let u = useCallback(() => {
@@ -331,7 +331,7 @@ function ey(e) {
   });
 }
 function eC() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
     e(selectViewAction({
       view: "recentsAndSharing"
@@ -419,7 +419,7 @@ function eI(e) {
   }) : d;
 }
 function eT(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = getSelectedView();
   let s = useCallback(e => {
     t(selectViewAction({
@@ -452,7 +452,7 @@ function eT(e) {
   });
 }
 function eA(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = getSelectedView();
   let s = useCallback(e => {
     t(selectViewAction({
@@ -580,7 +580,7 @@ function eL() {
   });
 }
 function eD(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(t => t.teams[e.id]);
   let s = !!(!a?.student_team && a?.pro_team);
   let r = useMemo(() => function (e, t, a) {

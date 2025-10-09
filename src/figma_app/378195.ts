@@ -1,132 +1,221 @@
-import { debounce } from "../905/915765";
 import { createActionCreator } from "../905/73481";
-import { FlashActions } from "../905/573154";
+import { widgetManagerHandler } from "../905/239551";
 import { createOptimistThunk } from "../905/350402";
-import { x } from "../905/239551";
-import { M } from "../figma_app/170366";
-import { getPermissionsState } from "../figma_app/642025";
-import { loadLocalPluginManifest, getLocalPluginManifest, getPublishingData, isDefaultPublishingData } from "../figma_app/300692";
-import { SH } from "../figma_app/790714";
-import { hM, A9 } from "../905/851937";
+import { FlashActions } from "../905/573154";
 import { handlePluginError } from "../905/753206";
-import { hasLocalFileId } from "../figma_app/155287";
+import { A9, hM } from "../905/851937";
+import { debounce } from "../905/915765";
+import { PluginPublishModal } from "../905/938553";
 import { incrementCounter } from "../905/949750";
-import { o as _$$o } from "../905/938553";
-import { Ij, fy } from "../figma_app/559491";
-let $$E0 = createActionCreator("PLUGIN_INITIALIZE_LOCAL");
-let $$y1 = createActionCreator("PLUGIN_UPDATE_LOCAL");
-let $$b2 = createActionCreator("PLUGIN_DELETE_LOCAL");
-let T = !1;
-let I = M();
-let $$S3 = createOptimistThunk(async e => {
-  if (I) {
-    if (I.isCompatibleWith({
-      desktopVersion: 59
-    })) {
-      let t = (await I.getLocalManifestFileExtensionIdsToCachedMetadataMap()) ?? {};
-      let r = Object.keys(t).map(e => parseInt(e));
-      let n = await Promise.all(r.map(e => loadLocalPluginManifest(e, {
-        resourceType: "unknown"
-      })));
-      let i = {};
-      n.forEach(e => {
-        e.cachedContainsWidget = !!t[e.localFileId].cachedContainsWidget;
-        e.lastKnownPluginId = t[e.localFileId].lastKnownPluginId || "";
-        i[e.localFileId] = e;
-      });
-      e.dispatch($$E0(i));
-    } else if (I.isCompatibleWith({
-      desktopVersion: 58
-    })) {
-      let t = await I.getLocalManifestFileExtensionIdsToCachedContainsWidgetMap();
-      let r = Object.keys(t).map(e => parseInt(e));
-      let n = await Promise.all(r.map(e => loadLocalPluginManifest(e, {
-        resourceType: "unknown"
-      })));
-      let i = {};
-      n.forEach(e => {
-        e.cachedContainsWidget = !!t[e.localFileId];
-        i[e.localFileId] = e;
-      });
-      e.dispatch($$E0(i));
-    } else {
-      let t = await I.getAllLocalFileExtensionIds();
-      let r = await Promise.all(t.map(e => loadLocalPluginManifest(e, {
-        resourceType: "unknown"
-      })));
-      let n = {};
-      r.forEach(e => {
-        n[e.localFileId] = e;
-      });
-      e.dispatch($$E0(n));
-    }
-    if (!T) {
-      T = !0;
-      I.registerManifestChangeObserver(t => {
-        if ("added" === t.type || "changed" === t.type) {
-          let r;
-          let n = t.id;
-          let i = getLocalPluginManifest(n, t.localLoadResult, {
-            resourceType: "unknown"
-          });
-          let s = e.getState().localPlugins[n]?.plugin_id;
-          e.dispatch($$y1(i));
-          let o = e.getState();
-          let {
-            publishingPlugins,
+import { hasLocalFileId } from "../figma_app/155287";
+import { getPluginManager } from "../figma_app/170366";
+import { getLocalPluginManifest, getPublishingData, isDefaultPublishingData, loadLocalPluginManifest } from "../figma_app/300692";
+import { updateMetadata, clearMetadataAndStatus } from "../figma_app/559491";
+import { getPermissionsState } from "../figma_app/642025";
+import { SH } from "../figma_app/790714";
+
+// Origin: /Users/allen/sigma-main/src/figma_app/378195.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments for clarity and potential issues.
+
+// --- Type Definitions ---
+
+// Represents the structure of plugin manifest metadata cached by PluginManager
+interface CachedManifestMetadata {
+  cachedContainsWidget?: boolean;
+  lastKnownPluginId?: string;
+}
+
+// Represents the structure of a plugin manifest loaded from disk
+interface LocalPluginManifest {
+  localFileId: number;
+  cachedContainsWidget?: boolean;
+  lastKnownPluginId?: string;
+  plugin_id?: string;
+  error?: any;
+  // ...other properties as needed
+}
+
+// Represents the manifest change event
+interface ManifestChangeEvent {
+  type: "added" | "changed" | "removed";
+  id: number;
+  localLoadResult?: any;
+  manifestFileId?: number;
+}
+
+// Represents the Redux store context for thunks
+interface StoreContext {
+  dispatch: (action: any) => void;
+  getState: () => any;
+}
+
+// --- Action Creators ---
+
+export const pluginInitializeLocal = createActionCreator("PLUGIN_INITIALIZE_LOCAL");
+export const pluginUpdateLocal = createActionCreator("PLUGIN_UPDATE_LOCAL");
+export const pluginDeleteLocal = createActionCreator("PLUGIN_DELETE_LOCAL");
+
+// --- Internal State ---
+
+let manifestObserversRegistered = false;
+
+// --- Plugin Manager Instance ---
+
+const pluginManager = getPluginManager();
+
+// --- Thunk: Initialize Local Plugins ---
+
+export const initializeLocalPluginsThunk = createOptimistThunk(async (context: StoreContext) => {
+  if (!pluginManager) return;
+
+  // Handle different desktop versions for compatibility
+  if (pluginManager.isCompatibleWith({
+    desktopVersion: 59
+  })) {
+    // Version 59: Get cached metadata for each local manifest file
+    const cachedMetadataMap: Record<string, CachedManifestMetadata> = (await pluginManager.getLocalManifestFileExtensionIdsToCachedMetadataMap()) ?? {};
+    const fileIds = Object.keys(cachedMetadataMap).map(Number) as any[];
+
+    // Load manifests for each file ID
+    const manifests = (await Promise.all(fileIds.map(fileId => loadLocalPluginManifest(fileId, {
+      resourceType: "unknown"
+    })))) as any[];
+
+    // Attach cached metadata to each manifest
+    const localPlugins: Record<number, LocalPluginManifest> = {};
+    manifests.forEach(manifest => {
+      const metadata = cachedMetadataMap[manifest.localFileId];
+      manifest.cachedContainsWidget = !!metadata?.cachedContainsWidget;
+      manifest.lastKnownPluginId = metadata?.lastKnownPluginId || "";
+      localPlugins[manifest.localFileId] = manifest;
+    });
+    context.dispatch(pluginInitializeLocal(localPlugins));
+  } else if (pluginManager.isCompatibleWith({
+    desktopVersion: 58
+  })) {
+    // Version 58: Only cachedContainsWidget info available
+    const containsWidgetMap: Record<string, boolean> = await pluginManager.getLocalManifestFileExtensionIdsToCachedContainsWidgetMap();
+    const fileIds = Object.keys(containsWidgetMap).map(Number) as any[];
+    const manifests = (await Promise.all(fileIds.map(fileId => loadLocalPluginManifest(fileId, {
+      resourceType: "unknown"
+    })))) as any[];
+    const localPlugins: Record<number, LocalPluginManifest> = {};
+    manifests.forEach(manifest => {
+      manifest.cachedContainsWidget = !!containsWidgetMap[manifest.localFileId];
+      localPlugins[manifest.localFileId] = manifest;
+    });
+    context.dispatch(pluginInitializeLocal(localPlugins));
+  } else {
+    // Older versions: Just get all local file IDs
+    const fileIds: any[] = await pluginManager.getAllLocalFileExtensionIds();
+    const manifests = await Promise.all(fileIds.map(fileId => loadLocalPluginManifest(fileId, {
+      resourceType: "unknown"
+    })));
+    const localPlugins: Record<number, LocalPluginManifest> = {};
+    manifests.forEach(manifest => {
+      localPlugins[manifest.localFileId] = manifest;
+    });
+    context.dispatch(pluginInitializeLocal(localPlugins));
+  }
+
+  // Register observers only once
+  if (!manifestObserversRegistered) {
+    manifestObserversRegistered = true;
+
+    // Manifest change observer
+    pluginManager.registerManifestChangeObserver((event: ManifestChangeEvent) => {
+      if (event.type === "added" || event.type === "changed") {
+        // Load updated manifest and update local state
+        const manifest = getLocalPluginManifest(event.id, event.localLoadResult, {
+          resourceType: "unknown"
+        });
+        const previousPluginId = context.getState().localPlugins[event.id]?.plugin_id;
+        context.dispatch(pluginUpdateLocal(manifest));
+
+        // Gather state for publishing logic
+        const state = context.getState();
+        const {
+          publishingPlugins,
+          localPlugins,
+          publishedPlugins,
+          publishedWidgets,
+          currentUserOrgId,
+          authedProfilesById,
+          modalShown
+        } = state;
+        const publishingPlugin = publishingPlugins[event.id];
+
+        // If plugin_id changed and publish modal not shown, show publish modal
+        if (manifest.plugin_id !== previousPluginId && modalShown?.type !== PluginPublishModal.type) {
+          context.dispatch(clearMetadataAndStatus({
+            id: event.id
+          }));
+        }
+
+        // Try to get publishing data and update if needed
+        try {
+          const publishingData = getPublishingData({
+            ...getPermissionsState(state),
+            currentUserOrgId,
             localPlugins,
             publishedPlugins,
             publishedWidgets,
-            currentUserOrgId,
-            authedProfilesById,
-            modalShown
-          } = o;
-          let b = publishingPlugins[n];
-          i.plugin_id !== s && modalShown?.type !== _$$o.type && e.dispatch(Ij({
-            id: n
-          }));
-          try {
-            r = getPublishingData({
-              ...getPermissionsState(o),
-              currentUserOrgId,
-              localPlugins,
-              publishedPlugins,
-              publishedWidgets,
-              authedProfilesById
-            }, n);
-          } catch (t) {
-            e.dispatch(FlashActions.error(t.message));
-            return;
+            authedProfilesById
+          }, event.id);
+
+          // If publishing plugin metadata is default and manifest has no error, update publishing metadata
+          if (publishingPlugin && publishingPlugin.metadata && isDefaultPublishingData(publishingPlugin.metadata) && !manifest.error) {
+            context.dispatch(updateMetadata({
+              id: event.id,
+              metadata: publishingData
+            }));
           }
-          b && b.metadata && isDefaultPublishingData(b.metadata) && !i.error && e.dispatch(fy({
-            id: n,
-            metadata: r
-          }));
-        } else "removed" === t.type && e.dispatch($$b2(t.id));
-      });
-      let t = debounce(t => {
-        if ("added" === t.type || "changed" === t.type) {
-          let r = e.getState().mirror?.selectionProperties?.selectedWidgetInfo;
-          r && r.pluginID && x.mountWidget(r.pluginID, r.widgetID, "hot-reloading re-render");
-          let n = SH()?.plugin;
-          let i = SH()?.triggeredFrom;
-          let a = e.getState();
-          "manifestFileId" in t && n && hasLocalFileId(n) && a.mirror.appModel.hotReloadPluginDev && t.manifestFileId === n.localFileId && hM() && (async () => {
+        } catch (error: any) {
+          context.dispatch(FlashActions.error(error.message));
+        }
+      } else if (event.type === "removed") {
+        // Remove plugin from local state
+        context.dispatch(pluginDeleteLocal(event.id));
+      }
+    });
+
+    // Debounced code change observer for hot-reloading widgets
+    const debouncedCodeChangeObserver = debounce((event: ManifestChangeEvent) => {
+      if (event.type === "added" || event.type === "changed") {
+        const selectedWidgetInfo = context.getState().mirror?.selectionProperties?.selectedWidgetInfo;
+        if (selectedWidgetInfo && selectedWidgetInfo.pluginID && selectedWidgetInfo.widgetID) {
+          widgetManagerHandler.mountWidget(selectedWidgetInfo.pluginID, selectedWidgetInfo.widgetID, "hot-reloading re-render");
+        }
+
+        // Hot reload plugin dev logic
+        const plugin = SH()?.plugin;
+        const triggeredFrom = SH()?.triggeredFrom;
+        const state = context.getState();
+        if ("manifestFileId" in event && plugin && hasLocalFileId(plugin) && state.mirror.appModel.hotReloadPluginDev && event.manifestFileId === plugin.localFileId && hM()) {
+          // Handle plugin error and increment counter
+          (async () => {
             await handlePluginError();
-            "codegen" !== i && A9({
-              newTriggeredFrom: null
-            });
+            if (triggeredFrom !== "codegen") {
+              A9({
+                newTriggeredFrom: null
+              });
+            }
             incrementCounter();
           })();
         }
-      });
-      I.registerCodeChangeObserver(t);
-      I.registerManifestChangeObserver(t);
-      I.registerUiChangeObserver(t);
-    }
+      }
+    });
+
+    // Register observers for code, manifest, and UI changes
+    pluginManager.registerCodeChangeObserver(debouncedCodeChangeObserver);
+    pluginManager.registerManifestChangeObserver(debouncedCodeChangeObserver);
+    pluginManager.registerUiChangeObserver(debouncedCodeChangeObserver);
   }
 });
-export const Ob = $$E0;
-export const Po = $$y1;
-export const Zy = $$b2;
-export const _J = $$S3;
+
+// --- Exported Action Creators and Thunk ---
+
+export const Ob = pluginInitializeLocal;
+export const Po = pluginUpdateLocal;
+export const Zy = pluginDeleteLocal;
+export const _J = initializeLocalPluginsThunk;

@@ -11,7 +11,7 @@ import { m as _$$m } from "../905/701558";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { JT } from "../figma_app/173838";
-import { Vz } from "../figma_app/198840";
+import { openCommunityFileUrl } from "../figma_app/198840";
 import { getCommunityFileUrl } from "../905/612685";
 import { FUserVerificationStatusType, FPublicationStatusType } from "../figma_app/191312";
 import { KindEnum } from "../905/129884";
@@ -118,7 +118,7 @@ function R({
   hubFile: e
 }) {
   let t;
-  let i = Vz(e.id);
+  let i = openCommunityFileUrl(e.id);
   if (e.unpublishedAt) return null;
   let {
     currentHubFileVersion

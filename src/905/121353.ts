@@ -69,7 +69,7 @@ function ep({
   let {
     existingHubFile
   } = e.deps;
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let {
     trackEvent
   } = useTracking();

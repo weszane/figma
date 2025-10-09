@@ -10,7 +10,7 @@ import { getObservableValue } from "../figma_app/84367";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { a2 } from "../figma_app/762558";
 import { om } from "../figma_app/395097";
-import { A8 } from "../figma_app/836943";
+import { isValidNormalizedValue } from "../figma_app/836943";
 export function $$g13() {
   let {
     strokeAlign,
@@ -67,7 +67,7 @@ export function $$E2() {
   return getObservableValue(AppStateTsApi?.propertiesPanelState().strokePanelTerminalPointCount, 0);
 }
 export function $$y0(e, t, r) {
-  let n = A8(r);
+  let n = isValidNormalizedValue(r);
   return !(e && vx(e, "TABLE")) && (n || valueOrFallback(t, []).length > 0 || t === MIXED_MARKER);
 }
 export function $$b5() {

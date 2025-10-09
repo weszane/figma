@@ -55,7 +55,7 @@ import { D as _$$D } from "../figma_app/32557";
 import { O as _$$O } from "../figma_app/688952";
 import { jv } from "../905/525678";
 let U = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
     e(hideModalHandler());
   }, [e]);
@@ -108,7 +108,7 @@ function q(e) {
   let a = useCallback(e => {
     isInvalidValue(e) || r(e.valueOf());
   }, [r]);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   useEffect(() => {
     uw({
       [e.configPropertyName]: t
@@ -132,7 +132,7 @@ function q(e) {
   });
 }
 let J = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
     e(hideModalHandler());
   }, [e]);
@@ -230,7 +230,7 @@ async function es({
   }
 }
 let eo = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
     e(hideModalHandler());
   }, [e]);
@@ -264,7 +264,7 @@ let eo = registerModal(function () {
   });
 }, "MLExportModal");
 let ec = () => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
@@ -413,7 +413,7 @@ class e_ extends RecordingPureComponent {
 }
 export function $$eh0(e) {
   _$$n2();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.mirror.appModel);
   let i = useSelector(e => e.selectedView);
   let a = useSelector(e => e.dropdownShown?.data?.selectionToUpdate);

@@ -34,14 +34,14 @@ import { LibraryIconWithTooltip } from "../905/511388";
 import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
-import { e as _$$e2 } from "../figma_app/882253";
+import { isStylePreviewActive } from "../figma_app/882253";
 import { KindEnum } from "../905/129884";
 import { resourceDataToSubscriptionMapAtom } from "../905/72677";
 import { J as _$$J } from "../905/225412";
 import { Cq } from "../figma_app/632975";
 import { zi, iL } from "../905/824449";
 import { m3 } from "../figma_app/915281";
-import { Oi } from "../figma_app/394327";
+import { getVariableDisplayString } from "../figma_app/394327";
 import { jx, vu, w4, Yc, tx, lC, Vc } from "../905/820169";
 import { A as _$$A } from "../905/442873";
 import { styleInfoTooltip } from "../905/248978";
@@ -522,7 +522,7 @@ function e_({
   variableThumbnail: i
 }) {
   return r || ("fields" === e && t !== VariableResolvedDataType.COLOR ? jsx(Fragment, {
-    children: Oi(i)
+    children: getVariableDisplayString(i)
   }) : null);
 }
 export function $$eh0({
@@ -571,7 +571,7 @@ export function $$eh0({
     });
   }, [_, e]);
   let k = useRef();
-  let M = useSelector(t => _$$e2(t, e));
+  let M = useSelector(t => isStylePreviewActive(t, e));
   let F = useCallback(() => {
     let t = k.current?.getBoundingClientRect();
     t && showStyleDetails({
@@ -731,7 +731,7 @@ function eg({
     onMouseMove: p,
     recordingKey: r,
     value: g && jsx(Fragment, {
-      children: Oi(g)
+      children: getVariableDisplayString(g)
     })
   });
 }

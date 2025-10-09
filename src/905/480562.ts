@@ -103,7 +103,7 @@ function R({
   onResetComparison: l,
   onSelectComparison: c
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let m = useSelector(e => e.dropdownShown);
   let h = useMemo(() => {
     if (!t) return N;
@@ -1375,7 +1375,7 @@ export function $$eJ0({
 let e0 = "dsa_dismissed_feb_2025_missing_data_banner";
 function e1() {
   let e = selectUserFlag(e0);
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCallback(() => {
     t(postUserFlag({
       [e0]: !0

@@ -28,7 +28,7 @@ import { generateCommunityWidgetUrl } from "../figma_app/870683";
 import { Q7 } from "../figma_app/878651";
 import { dn } from "../figma_app/994403";
 function T(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectCurrentUser();
   let {
     dropdownIsShown,

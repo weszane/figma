@@ -513,7 +513,7 @@ export let FreemiumApiPreCheckoutModal = registerModal((props: FreemiumApiPreChe
     onClose,
     onContinue
   } = props;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const handleClose = useCallback(() => {
     onClose?.();
     dispatch(hideModal());

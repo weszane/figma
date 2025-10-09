@@ -42,7 +42,7 @@ function k() {
 }
 export function $$P0(e, t, n, s, m, u) {
   let f = useContext(viewportNavigatorContext);
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let v = f.getCommentDestinationForCanvasPosition;
   let w = fG();
   let P = k();
@@ -68,7 +68,7 @@ export function $$P0(e, t, n, s, m, u) {
   }, [t, w, v, _, P]));
   let E = j(e, I(t, n));
   let N = function (e, t, n) {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     let s = useContext(viewportNavigatorContext);
     let m = I_();
     let u = _$$s();
@@ -114,7 +114,7 @@ export function $$P0(e, t, n, s, m, u) {
 }
 function I(e, t) {
   let n = useContext(viewportNavigatorContext);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let d = n.getCommentDestinationForCanvasPosition;
   let c = fG();
   let u = pC();

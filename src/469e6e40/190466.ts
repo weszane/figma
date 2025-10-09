@@ -67,7 +67,7 @@ import { k_ as _$$k_ } from "../1881/866163";
 import { L7 } from "../figma_app/329496";
 import { DashboardSection } from "../figma_app/650409";
 import { BillingCycle } from "../figma_app/831101";
-import { J as _$$J2 } from "../905/298764";
+import { activityLogsService } from "../905/298764";
 import { H as _$$H, az } from "../figma_app/805373";
 import { r as _$$r } from "../469e6e40/505264";
 import { l6, c$, sK } from "../905/794875";
@@ -226,7 +226,7 @@ let eT = "member_flyout--middleColumn--jallv";
 let eA = "member_flyout--sideColumn--1AIc2";
 function eO(e) {
   let t = !!(e.avatarEntity.handle ?? e.avatarEntity.name);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   return jsx("div", {
     className: cssBuilderInstance.py24.pl24.pr4.overflowHidden.$,
     "data-testid": "member-flyout-header",
@@ -258,7 +258,7 @@ function eO(e) {
 function eL(e) {
   let t;
   let a = `member-flyout-${e.id}`;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let o = useSelector(e => e.dropdownShown);
   let d = useId();
   let c = useId();
@@ -489,7 +489,7 @@ function eF(e) {
 function eq(e) {
   let t = eU(e);
   let a = e.planType === FOrganizationLevelType.TEAM ? !e.member.upgrade_method : !e.orgUser.active_seat_upgrade_method?.upgrade_method;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = t.eccUpgradingLocked || t.scimLocked;
   let l = r ? {
     "data-tooltip": t.eccUpgradingLocked ? getI18nString("external_collaboration_restricted.members.tooltip.v2", {
@@ -584,7 +584,7 @@ let eB = {
   }
 };
 function eG(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   if (eU(e).currentSeatType === ViewAccessTypeEnum.VIEW) return null;
   let a = [];
   let r = null;
@@ -780,7 +780,7 @@ function eV(e) {
   });
 }
 function eW(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     allAdminableLicenseGroups
   } = _$$x();
@@ -845,7 +845,7 @@ function eY(e) {
   }) : null;
 }
 function eJ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = _$$o(e.orgUser, e.workspacesCanMoveTo);
   let s = findMainWorkspaceUser(e.orgUser);
   let {
@@ -870,9 +870,9 @@ function eK(e) {
   let t;
   let a;
   let o;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let a = !!e;
     return useCallback(n => {
       if (!a) return noop;
@@ -932,7 +932,7 @@ function eK(e) {
 function eX(e) {
   let t;
   let a;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   switch (e.planType) {
     case FOrganizationLevelType.ORG:
       t = e.org.name;
@@ -1051,13 +1051,13 @@ function eZ(e) {
   });
 }
 function e0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.selectedView.view);
   let [r, l] = useState(!0);
   let [o, d] = useState(null);
   let [c, u] = useState(!1);
   return (useEffect(() => {
-    _$$J2.getRecent({
+    activityLogsService.getRecent({
       orgUserId: e.orgUser.id,
       pageSize: 50
     }).then(e => {

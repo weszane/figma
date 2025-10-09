@@ -8,7 +8,7 @@ import { trackUserEvent } from '../figma_app/314264'
 import { fullscreenValue } from '../figma_app/455680'
 import { Fullscreen, KeyboardLayout } from '../figma_app/763686'
 
-const KEYBOARD_LAYOUT_PREFERENCE_KEY = 'keyboardLayoutPreference'
+export const KEYBOARD_LAYOUT_PREFERENCE_KEY = 'keyboardLayoutPreference'
 
 /**
  * Maps a KeyboardLayout enum value to its corresponding localized string.

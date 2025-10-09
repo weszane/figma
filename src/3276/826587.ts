@@ -57,7 +57,7 @@ export function $$g0(e) {
   } = e;
   let [n, l] = useState("");
   let [_, g] = useState(!1);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let b = useCallback(e => {
     e.preventDefault();
     e.stopPropagation();

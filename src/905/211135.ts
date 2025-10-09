@@ -21,7 +21,7 @@ export let $$y0 = registerModal(function (e) {
   } = e;
   let f = selectCurrentUser();
   let y = Z();
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let v = useModalManager({
     open,
     onClose

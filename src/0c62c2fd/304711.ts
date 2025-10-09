@@ -15,7 +15,7 @@ import { getSidebarPath } from "../figma_app/528509";
 import { x as _$$x } from "../905/98916";
 export function $$x0(e) {
   var t;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let x = useModalManager(e);
   let b = getAtomMutate(Q4);
   let v = _$$x(e.folder.id, !0);

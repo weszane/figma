@@ -1,11 +1,11 @@
 import { dayjs } from "../905/920142";
-import { uF, LP, a8 } from "../figma_app/559491";
+import { initializeUserPublishedResourcesThunk, getOrgPublishedPluginsThunk, getOrgPublishedWidgetsThunk } from "../figma_app/559491";
 import { isNullOrFailure } from "../905/18797";
 export let $$s1 = new class {
   loadPluginsPublishedByUser(e) {
     let t = e.getState().loadingState;
-    let r = uF.loadingKeyForPayload();
-    isNullOrFailure(t, r) && e.dispatch(uF());
+    let r = initializeUserPublishedResourcesThunk.loadingKeyForPayload();
+    isNullOrFailure(t, r) && e.dispatch(initializeUserPublishedResourcesThunk());
   }
   async loadPluginsAuthoredByCurrentOrg(e) {
     let {
@@ -13,8 +13,8 @@ export let $$s1 = new class {
       currentUserOrgId
     } = e.getState();
     if (!currentUserOrgId) return;
-    let n = LP.loadingKeyForPayload(currentUserOrgId);
-    isNullOrFailure(loadingState, n) && (await e.dispatch(LP(currentUserOrgId)));
+    let n = getOrgPublishedPluginsThunk.loadingKeyForPayload(currentUserOrgId);
+    isNullOrFailure(loadingState, n) && (await e.dispatch(getOrgPublishedPluginsThunk(currentUserOrgId)));
   }
   loadWidgetsAuthoredByCurrentOrg(e) {
     let {
@@ -22,8 +22,8 @@ export let $$s1 = new class {
       currentUserOrgId
     } = e.getState();
     if (!currentUserOrgId) return;
-    let n = a8.loadingKeyForPayload(currentUserOrgId);
-    isNullOrFailure(loadingState, n) && e.dispatch(a8(currentUserOrgId));
+    let n = getOrgPublishedWidgetsThunk.loadingKeyForPayload(currentUserOrgId);
+    isNullOrFailure(loadingState, n) && e.dispatch(getOrgPublishedWidgetsThunk(currentUserOrgId));
   }
 }();
 export class $$o0 {

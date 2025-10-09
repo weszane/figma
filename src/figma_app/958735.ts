@@ -1,217 +1,305 @@
-import { useEffect } from "react";
-import { useStore } from "react-redux";
-import { microtaskThrottle } from "../905/915765";
-import { UserActionState, SchemaJoinStatus, AppStateTsApi } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { fetchAndUpdateStateGroupsThunk } from "../figma_app/933328";
-import { createActionAndReducerWrapper } from "../905/270322";
-import { updateLocalLibraryItems } from "../figma_app/646357";
-import { subscribeObservable } from "../figma_app/84367";
-let {
-  action,
-  reducer
-} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_SYMBOLS", []);
-let {
-  action: _action,
-  reducer: _reducer
-} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_STATE_GROUPS", []);
-let {
-  action: _action2,
-  reducer: _reducer2
-} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_STYLES", []);
-let {
-  action: _action3,
-  reducer: _reducer3
-} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_MODULES", []);
-let {
-  action: _action4,
-  reducer: _reducer4
-} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_SYMBOLS", []);
-let {
-  action: _action5,
-  reducer: _reducer5
-} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_SYMBOLS_ON_CURRENT_PAGE", []);
-let {
-  action: _action6,
-  reducer: _reducer6
-} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_STATE_GROUPS", []);
-let {
-  action: _action7,
-  reducer: _reducer7
-} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_STATE_GROUPS_ON_CURRENT_PAGE", []);
-let {
-  action: _action8,
-  reducer: _reducer8
-} = createActionAndReducerWrapper("SYNC_DIRECTLY_SUBSCRIBED_STYLES", []);
-let {
-  action: _action9,
-  reducer: _reducer9
-} = createActionAndReducerWrapper("SYNC_DIRECTLY_SUBSCRIBED_STYLES_ON_CURRENT_PAGE", []);
-let {
-  action: _action0,
-  reducer: _reducer0
-} = createActionAndReducerWrapper("SYNC_INDIRECTLY_SUBSCRIBED_STYLES", []);
-let {
-  action: _action1,
-  reducer: _reducer1
-} = createActionAndReducerWrapper("SYNC_LOCAL_SYMBOLS_THAT_HAVE_USAGES", []);
-let {
-  action: _action10,
-  reducer: _reducer10
-} = createActionAndReducerWrapper("SYNC_LOCAL_SYMBOLS_THAT_HAVE_USAGES_ON_CURRENT_PAGE", []);
-let {
-  action: _action11,
-  reducer: _reducer11
-} = createActionAndReducerWrapper("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES", []);
-let {
-  action: _action12,
-  reducer: _reducer12
-} = createActionAndReducerWrapper("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES_ON_CURRENT_PAGE", []);
-export function $$V11() {
-  let e = getFeatureFlags().dse_module_publish;
-  let t = useStore();
-  useEffect(() => function (e) {
-    let t = () => updateLocalLibraryItems(e);
-    let r = microtaskThrottle(t);
-    let n = "normal";
-    let i = e.subscribe(() => {
-      let {
-        activeUserAction,
-        multiplayerSessionState
-      } = e.getState().mirror.appModel;
-      let a = function (e) {
-        switch (e) {
-          case UserActionState.DEFAULT:
-          case UserActionState.SELECTING_TEXT:
-          case UserActionState.CLICKING_TO_CHANGE_SELECTION:
-            return !1;
-          case UserActionState.DRAGGING:
-          case UserActionState.RESIZING:
-          case UserActionState.ROTATING:
-            return !0;
-        }
-      }(activeUserAction) || multiplayerSessionState === SchemaJoinStatus.DETACHED;
-      "normal" === n && a ? n = "paused" : "paused" !== n || a ? "enqueued" !== n || a || (t(), n = "normal") : n = "normal";
-    });
-    let {
+import { useEffect } from "react"
+import { useStore } from "react-redux"
+import { createActionAndReducerWrapper } from "../905/270322"
+import { getFeatureFlags } from "../905/601108"
+import { microtaskThrottle } from "../905/915765"
+import { subscribeObservable } from "../figma_app/84367"
+import { updateLocalLibraryItems } from "../figma_app/646357"
+import { AppStateTsApi, SchemaJoinStatus, UserActionState } from "../figma_app/763686"
+import { fetchAndUpdateStateGroupsThunk } from "../figma_app/933328"
+// Origin: /Users/allen/sigma-main/src/figma_app/958735.ts
+// Refactored: Renamed variables, added TypeScript types, simplified logic, added comments, improved readability and type safety.
+
+// Assumed dependencies:
+// - createActionAndReducerWrapper returns { action: ActionCreator, reducer: Reducer }
+// - AppStateTsApi.libraryAssets() returns an object with observables
+// - subscribeObservable subscribes to observable changes
+// - microtaskThrottle wraps a function for throttled execution
+
+
+// Type for observable subscription
+interface Observable<T> {
+  getCopy: () => T
+  // Other observable methods...
+}
+
+// Type for subscription cleanup function
+type Unsubscribe = () => void
+
+// Type for H function input
+interface ObservableActionPair<T = any> {
+  observable: Observable<T>
+  action: (payload: T) => any
+}
+
+// Refactored action/reducer wrappers for various sync actions
+export const {
+  action: syncPublishableSymbolsAction,
+  reducer: syncPublishableSymbolsReducer,
+} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_SYMBOLS", [])
+
+export const {
+  action: syncPublishableStateGroupsAction,
+  reducer: syncPublishableStateGroupsReducer,
+} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_STATE_GROUPS", [])
+
+export const {
+  action: syncPublishableStylesAction,
+  reducer: syncPublishableStylesReducer,
+} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_STYLES", [])
+
+export const {
+  action: syncPublishableModulesAction,
+  reducer: syncPublishableModulesReducer,
+} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_MODULES", [])
+
+export const {
+  action: syncSubscribedSymbolsAction,
+  reducer: syncSubscribedSymbolsReducer,
+} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_SYMBOLS", [])
+
+export const {
+  action: syncSubscribedSymbolsOnCurrentPageAction,
+  reducer: syncSubscribedSymbolsOnCurrentPageReducer,
+} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_SYMBOLS_ON_CURRENT_PAGE", [])
+
+export const {
+  action: syncSubscribedStateGroupsAction,
+  reducer: syncSubscribedStateGroupsReducer,
+} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_STATE_GROUPS", [])
+
+export const {
+  action: syncSubscribedStateGroupsOnCurrentPageAction,
+  reducer: syncSubscribedStateGroupsOnCurrentPageReducer,
+} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_STATE_GROUPS_ON_CURRENT_PAGE", [])
+
+export const {
+  action: syncDirectlySubscribedStylesAction,
+  reducer: syncDirectlySubscribedStylesReducer,
+} = createActionAndReducerWrapper("SYNC_DIRECTLY_SUBSCRIBED_STYLES", [])
+
+export const {
+  action: syncDirectlySubscribedStylesOnCurrentPageAction,
+  reducer: syncDirectlySubscribedStylesOnCurrentPageReducer,
+} = createActionAndReducerWrapper("SYNC_DIRECTLY_SUBSCRIBED_STYLES_ON_CURRENT_PAGE", [])
+
+export const {
+  action: syncIndirectlySubscribedStylesAction,
+  reducer: syncIndirectlySubscribedStylesReducer,
+} = createActionAndReducerWrapper("SYNC_INDIRECTLY_SUBSCRIBED_STYLES", [])
+
+export const {
+  action: syncLocalSymbolsWithUsagesAction,
+  reducer: syncLocalSymbolsWithUsagesReducer,
+} = createActionAndReducerWrapper("SYNC_LOCAL_SYMBOLS_THAT_HAVE_USAGES", [])
+
+export const {
+  action: syncLocalSymbolsWithUsagesOnCurrentPageAction,
+  reducer: syncLocalSymbolsWithUsagesOnCurrentPageReducer,
+} = createActionAndReducerWrapper("SYNC_LOCAL_SYMBOLS_THAT_HAVE_USAGES_ON_CURRENT_PAGE", [])
+
+export const {
+  action: syncLocalStylesWithUsagesAction,
+  reducer: syncLocalStylesWithUsagesReducer,
+} = createActionAndReducerWrapper("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES", [])
+
+export const {
+  action: syncLocalStylesWithUsagesOnCurrentPageAction,
+  reducer: syncLocalStylesWithUsagesOnCurrentPageReducer,
+} = createActionAndReducerWrapper("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES_ON_CURRENT_PAGE", [])
+
+/**
+ * Main hook to synchronize publishable and subscribed assets with the Redux store.
+ * Handles throttling, pausing during user actions, and observable subscriptions.
+ */
+export function syncLibraryAssets() {
+  const featureFlags = getFeatureFlags()
+  const isModulePublishEnabled = featureFlags.dse_module_publish
+  const store = useStore()
+
+  // Effect: Sync publishable assets and handle throttling/pause logic
+  useEffect(() => {
+    // State for throttling and pausing updates
+    let syncState: "normal" | "paused" | "enqueued" = "normal"
+
+    // Throttled update function for local library items
+    const throttledUpdate = microtaskThrottle(() => updateLocalLibraryItems(store))
+
+    // Subscribe to store changes to pause/enqueue updates during certain user actions
+    const unsubscribeStore = store.subscribe(() => {
+      const { activeUserAction, multiplayerSessionState } = store.getState().mirror.appModel
+
+      // Determine if updates should be paused based on user action or multiplayer state
+      const shouldPause = (
+        activeUserAction === UserActionState.DRAGGING
+        || activeUserAction === UserActionState.RESIZING
+        || activeUserAction === UserActionState.ROTATING
+        || multiplayerSessionState === SchemaJoinStatus.DETACHED
+      )
+
+      if (syncState === "normal" && shouldPause) {
+        syncState = "paused"
+      }
+      else if (syncState === "paused" && !shouldPause) {
+        syncState = "normal"
+      }
+      else if (syncState === "enqueued" && !shouldPause) {
+        throttledUpdate()
+        syncState = "normal"
+      }
+      else if (syncState === "normal" && !shouldPause) {
+        // No state change needed
+      }
+      else if (syncState === "paused" && shouldPause) {
+        // Remain paused
+      }
+    })
+
+    // Get observables for publishable assets
+    const {
       publishableSymbols,
       publishableStateGroups,
       publishableStyles,
-      publishableModules
-    } = AppStateTsApi.libraryAssets();
-    let m = H(e, [{
-      observable: publishableSymbols,
-      action
-    }, {
-      observable: publishableStateGroups,
-      action: _action
-    }, {
-      observable: publishableStyles,
-      action: _action2
-    }, ...(getFeatureFlags().dse_module_publish ? [{
-      observable: publishableModules,
-      action: _action3
-    }] : [])], () => {
-      "normal" === n ? r() : n = "enqueued";
-    });
+      publishableModules,
+    } = AppStateTsApi.libraryAssets()
+
+    // Build observable/action pairs for subscription
+    const observableActionPairs: ObservableActionPair[] = [
+      { observable: publishableSymbols, action: syncPublishableSymbolsAction },
+      { observable: publishableStateGroups, action: syncPublishableStateGroupsAction },
+      { observable: publishableStyles, action: syncPublishableStylesAction },
+      ...(isModulePublishEnabled
+        ? [{ observable: publishableModules, action: syncPublishableModulesAction }]
+        : []),
+    ]
+
+    // Subscribe to observables and trigger throttled update on change
+    const unsubscribeObservables = subscribeToObservables(store, observableActionPairs, () => {
+      if (syncState === "normal") {
+        throttledUpdate()
+      }
+      else {
+        syncState = "enqueued"
+      }
+    })
+
+    // Cleanup subscriptions and throttled function on unmount
     return () => {
-      m();
-      i();
-      r.cancel();
-    };
-  }(t), [t, e]);
-  useEffect(() => function (e) {
-    let {
-      subscribedSymbols,
-      subscribedStateGroups
-    } = AppStateTsApi.libraryAssets();
-    return H(e, [{
-      observable: subscribedSymbols,
-      action: _action4
-    }, {
-      observable: subscribedStateGroups,
-      action: _action6
-    }], () => e.dispatch(fetchAndUpdateStateGroupsThunk()));
-  }(t), [t]);
-  useEffect(() => function (e) {
-    let {
+      unsubscribeObservables()
+      unsubscribeStore()
+      throttledUpdate.cancel()
+    }
+  }, [store, isModulePublishEnabled])
+
+  // Effect: Sync subscribed symbols and state groups
+  useEffect(() => {
+    const { subscribedSymbols, subscribedStateGroups } = AppStateTsApi.libraryAssets()
+
+    const observableActionPairs: ObservableActionPair[] = [
+      { observable: subscribedSymbols, action: syncSubscribedSymbolsAction },
+      { observable: subscribedStateGroups, action: syncSubscribedStateGroupsAction },
+    ]
+
+    // On change, dispatch fetchAndUpdateStateGroupsThunk
+    return subscribeToObservables(store, observableActionPairs, () => {
+      store.dispatch(fetchAndUpdateStateGroupsThunk())
+    })
+  }, [store])
+
+  // Effect: Sync local symbols/styles with usages and subscribed styles
+  useEffect(() => {
+    const {
       localSymbolsThatHaveUsages,
       directlySubscribedStyles,
       indirectlySubscribedStyles,
-      localStylesThatHaveUsages
-    } = AppStateTsApi.libraryAssets();
-    return H(e, [{
-      observable: directlySubscribedStyles,
-      action: _action8
-    }, {
-      observable: indirectlySubscribedStyles,
-      action: _action0
-    }, {
-      observable: localSymbolsThatHaveUsages,
-      action: _action1
-    }, {
-      observable: localStylesThatHaveUsages,
-      action: _action11
-    }]);
-  }(t), [t]);
-  useEffect(() => function (e) {
-    let {
+      localStylesThatHaveUsages,
+    } = AppStateTsApi.libraryAssets()
+
+    const observableActionPairs: ObservableActionPair[] = [
+      { observable: directlySubscribedStyles, action: syncDirectlySubscribedStylesAction },
+      { observable: indirectlySubscribedStyles, action: syncIndirectlySubscribedStylesAction },
+      { observable: localSymbolsThatHaveUsages, action: syncLocalSymbolsWithUsagesAction },
+      { observable: localStylesThatHaveUsages, action: syncLocalStylesWithUsagesAction },
+    ]
+
+    return subscribeToObservables(store, observableActionPairs)
+  }, [store])
+
+  // Effect: Sync assets on current page
+  useEffect(() => {
+    const {
       subscribedSymbolsOnCurrentPage,
       subscribedStateGroupsOnCurrentPage,
       directlySubscribedStylesOnCurrentPage,
       localSymbolsThatHaveUsagesOnCurrentPage,
-      localStylesThatHaveUsagesOnCurrentPage
-    } = AppStateTsApi.libraryAssets();
-    return H(e, [{
-      observable: subscribedSymbolsOnCurrentPage,
-      action: _action5
-    }, {
-      observable: subscribedStateGroupsOnCurrentPage,
-      action: _action7
-    }, {
-      observable: directlySubscribedStylesOnCurrentPage,
-      action: _action9
-    }, {
-      observable: localSymbolsThatHaveUsagesOnCurrentPage,
-      action: _action10
-    }, {
-      observable: localStylesThatHaveUsagesOnCurrentPage,
-      action: _action12
-    }]);
-  }(t), [t]);
+      localStylesThatHaveUsagesOnCurrentPage,
+    } = AppStateTsApi.libraryAssets()
+
+    const observableActionPairs: ObservableActionPair[] = [
+      { observable: subscribedSymbolsOnCurrentPage, action: syncSubscribedSymbolsOnCurrentPageAction },
+      { observable: subscribedStateGroupsOnCurrentPage, action: syncSubscribedStateGroupsOnCurrentPageAction },
+      { observable: directlySubscribedStylesOnCurrentPage, action: syncDirectlySubscribedStylesOnCurrentPageAction },
+      { observable: localSymbolsThatHaveUsagesOnCurrentPage, action: syncLocalSymbolsWithUsagesOnCurrentPageAction },
+      { observable: localStylesThatHaveUsagesOnCurrentPage, action: syncLocalStylesWithUsagesOnCurrentPageAction },
+    ]
+
+    return subscribeToObservables(store, observableActionPairs)
+  }, [store])
 }
-function H(e, t, r) {
-  let n = [];
-  for (let {
-    observable,
-    action
-  } of t) {
-    e.dispatch(action(observable.getCopy()));
-    r?.();
-    n.push(subscribeObservable(observable, {
+
+/**
+ * Subscribes to a list of observables, dispatches actions on change, and calls an optional callback.
+ * Returns a cleanup function to unsubscribe all.
+ * @param store Redux store
+ * @param pairs List of observable/action pairs
+ * @param onChange Optional callback after dispatch
+ */
+function subscribeToObservables(
+  store: any,
+  pairs: ObservableActionPair[],
+  onChange?: () => void,
+): Unsubscribe {
+  const unsubscribers: Unsubscribe[] = []
+
+  for (const { observable, action } of pairs) {
+    // Initial dispatch
+    store.dispatch(action(observable.getCopy()))
+    if (onChange)
+      onChange()
+
+    // Subscribe to observable changes
+    const unsubscribe = subscribeObservable(observable, {
       onChangeDeferred: () => {
-        e.dispatch(action(observable.getCopy()));
-        r?.();
-      }
-    }));
+        store.dispatch(action(observable.getCopy()))
+        if (onChange)
+          onChange()
+      },
+    })
+    unsubscribers.push(unsubscribe)
   }
+
+  // Cleanup function to unsubscribe all
   return () => {
-    for (let e of n) e();
-  };
+    for (const unsubscribe of unsubscribers) {
+      unsubscribe()
+    }
+  }
 }
-export const $K = reducer;
-export const F0 = _reducer5;
-export const Fx = _reducer3;
-export const GN = _reducer1;
-export const QI = _reducer6;
-export const Qu = _reducer12;
-export const RG = _reducer10;
-export const Te = _reducer;
-export const ax = _reducer2;
-export const cQ = _reducer9;
-export const ck = _reducer0;
-export const co = $$V11;
-export const db = _reducer11;
-export const hu = _reducer7;
-export const lR = _reducer8;
-export const uN = _reducer4;
+
+// Export original reducer names, mapped to refactored reducer variables
+export const $K = syncPublishableSymbolsReducer
+export const F0 = syncSubscribedSymbolsOnCurrentPageReducer
+export const Fx = syncPublishableModulesReducer
+export const GN = syncLocalSymbolsWithUsagesReducer
+export const QI = syncSubscribedStateGroupsReducer
+export const Qu = syncLocalStylesWithUsagesOnCurrentPageReducer
+export const RG = syncLocalSymbolsWithUsagesOnCurrentPageReducer
+export const Te = syncPublishableStateGroupsReducer
+export const ax = syncPublishableStylesReducer
+export const cQ = syncDirectlySubscribedStylesOnCurrentPageReducer
+export const ck = syncIndirectlySubscribedStylesReducer
+export const co = syncLibraryAssets
+export const db = syncLocalStylesWithUsagesReducer
+export const hu = syncSubscribedStateGroupsOnCurrentPageReducer
+export const lR = syncDirectlySubscribedStylesReducer
+export const uN = syncSubscribedSymbolsReducer

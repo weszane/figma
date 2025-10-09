@@ -22,7 +22,7 @@ import { FL, Ay as _$$Ay } from "../figma_app/248365";
 import { createNewSlideHandler, createDuplicateTemplateHandler } from "../5132/642384";
 import { s as _$$s2 } from "../5430/913603";
 import { WorkspaceSelectorModal } from "../905/456042";
-import { ts as _$$ts, Sb } from "../figma_app/49598";
+import { getHubFileVersionsThunk, processHubFilesThunk } from "../figma_app/49598";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { COMMUNITY_MIN_WIDTH, FREEMIUM_PREVIEW, HubAction, COMMUNITY_HEIGHT } from "../figma_app/350203";
@@ -458,9 +458,9 @@ function M(e) {
 }
 let $ = registerModal(function (e) {
   let t = useSelector(e => e.user?.email);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useSelector(t => t.hubFiles[e.hubFileId]);
-  let o = useIsLoaded(_$$ts.loadingKeyForPayload({
+  let o = useIsLoaded(getHubFileVersionsThunk.loadingKeyForPayload({
     hubFileId: e.hubFileId
   }));
   let c = getSelectedView();
@@ -468,7 +468,7 @@ let $ = registerModal(function (e) {
     i(hideModal());
   };
   useEffect(() => {
-    n || i(_$$ts({
+    n || i(getHubFileVersionsThunk({
       hubFileId: e.hubFileId
     }));
   }, [i, n, e.hubFileId]);
@@ -2928,7 +2928,7 @@ function iB({
   route: u
 }) {
   let m = useRef(null);
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let p = useAtomWithSubscription(iR);
   let _ = useAtomWithSubscription(iP);
   let y = !(("design_template" !== t || p?.status !== "loaded" || p?.data) && ("websites" !== t || _?.status !== "loaded" || _?.data));
@@ -3050,7 +3050,7 @@ function iW({
   });
 }
 function iQ() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAuthedActiveCommunityProfile();
   return t?.primary_user_id ? jsx(Fragment, {}) : jsxs("div", {
     className: "admin_profile_banner--root--HDfDA",
@@ -6103,7 +6103,7 @@ function so() {
     apiResourceType: getCommunityPathSegments()[0],
     resourceId: getCommunityPathSegments()[1]
   });
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH - 1}px)`);
   useEffect(() => {
     let e = customHistory.listen(() => {
@@ -6135,7 +6135,7 @@ function so() {
   let m = u && hasContent(u) ? getMainContent(u) : u;
   let p = u && hasResourceType(u) ? u.category : void 0;
   useEffect(() => {
-    e && t && u && m && (hasClientMeta(m) ? n(Sb({
+    e && t && u && m && (hasClientMeta(m) ? n(processHubFilesThunk({
       hubFiles: [m],
       src: "resourcePage"
     })) : n(mergePublishedPluginThunk({
@@ -6270,7 +6270,7 @@ function sc() {
   return null;
 }
 export function $$sd0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentUser();
   let i = useSelector(e => e.userFlags);
   return (useSingleEffect(() => (function (e, t) {

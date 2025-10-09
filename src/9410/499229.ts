@@ -14,7 +14,7 @@ import { yZ } from "../905/407352";
 import { isWhitespace } from "../figma_app/930338";
 import { counterAtom } from "../905/125333";
 import { getI18nString } from "../905/303541";
-import { NY } from "../figma_app/712525";
+import { setCanvasSearchQuery } from "../figma_app/712525";
 import { getCurrentFileType } from "../figma_app/976749";
 import { r as _$$r } from "../figma_app/860474";
 import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
@@ -121,7 +121,7 @@ export function $$K7() {
     filters,
     mode
   } = useSelector(e => e.canvasSearch);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let m = useRef(!1);
   let _ = useAppModelProperty("currentPage");
   let x = L3();
@@ -166,7 +166,7 @@ export function $$K7() {
   }, [_, e, scope, D, M]);
   let G = useDebouncedCallback(U, 300);
   let K = useCallback((e, t = !0) => {
-    p(NY(e));
+    p(setCanvasSearchQuery(e));
     O(!!e && !isWhitespace(e));
     G(e, t);
   }, [p, G]);

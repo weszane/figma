@@ -13,7 +13,7 @@ import { h7 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
-import { SG } from "../figma_app/852050";
+import { getFilteredVariables } from "../figma_app/852050";
 import { oZ, LS, TK, F6, UH } from "../905/129660";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -37,7 +37,7 @@ export function $$N0({
   onChange: x,
   responsiveTextStyleVariantIndex: T
 }) {
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -231,7 +231,7 @@ function O({
   children: l
 }) {
   let d = useContext(FormattedInputContext);
-  let c = SG(["LINE_HEIGHT"]).data ?? [];
+  let c = getFilteredVariables(["LINE_HEIGHT"]).data ?? [];
   let u = useCallback(() => {
     a.current && d?.showBindingUI(a.current, {
       currentFieldValue: t,

@@ -26,7 +26,7 @@ let y = memo(function ({
   onClose: w,
   open: k
 }) {
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let C = useModalManager({
     open: k,
     onClose: w

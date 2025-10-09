@@ -14,7 +14,7 @@ import { m as _$$m } from "../905/571439";
 import { MIXED_MARKER, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { defaultGrayColor } from "../figma_app/385874";
 import { useSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues, useSelectionPropertyValues, useHasSelectedStyle, useSelectedStylePropertyValue, useNonMixedSelectedStyleOrSelectionPropertyValues, useNonMixedSelectionPropertyValues } from "../905/275640";
-import { SG } from "../figma_app/852050";
+import { getFilteredVariables } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { useCachedSubtree } from "../figma_app/679183";
 import { selectStyledLibraryItemsWithStatus } from "../figma_app/803787";
@@ -22,7 +22,7 @@ import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Tn } from "../figma_app/323320";
 import { $i } from "../figma_app/467440";
 import { JJ } from "../figma_app/61403";
-import { WH } from "../figma_app/836943";
+import { useStyleInfo } from "../figma_app/836943";
 import { L as _$$L } from "../905/216039";
 import { R1, JG } from "../figma_app/152690";
 import { zK } from "../905/182453";
@@ -93,7 +93,7 @@ function ec(e) {
     onKeyDown
   } = e;
   let p = "width" === property ? Yq.Width : Yq.Height;
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let h = createRecordingCallback(recordingKey);
   let m = function () {
     if (selectionRegionsBounds && selectionRegionsBounds.length) {
@@ -865,10 +865,10 @@ export let $$eD3 = s.ConnectedGridsPanel;
       smallNudgeAmount,
       bigNudgeAmount
     } = getNudgeAmounts();
-    let ey = WH(inheritTextStyleKey ?? null, styleIdForText ?? null, "TEXT");
+    let ey = useStyleInfo(inheritTextStyleKey ?? null, styleIdForText ?? null, "TEXT");
     let eb = _$$L();
     let eT = selectWithShallowEqual(e => t(e, selectSceneGraphSelectionKeys(e), SlotSymbolType.TEXT));
-    let eI = SG(["TEXT_DATA"]).data ?? [];
+    let eI = getFilteredVariables(["TEXT_DATA"]).data ?? [];
     let eS = R1().variableConsumptionMap;
     let eA = JG();
     let ex = useAtomWithSubscription($i) === JJ.TEXT_PANEL;

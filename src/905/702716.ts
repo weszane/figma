@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { isResourcePendingPublishing } from "../figma_app/777551";
-import { Qi } from "../figma_app/559491";
+import { mergePublishedPluginThunk } from "../figma_app/559491";
 import { showModalHandler } from "../905/156213";
 import { getPluginVersion, getMissingEditorTypeError, generatePluginId } from "../figma_app/300692";
 import { HubTypeEnum } from "../figma_app/45218";
@@ -132,7 +132,7 @@ export function $$D3(e) {
 function L({
   localPlugin: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(z, {
     variant: "danger",
     iconSrc: _$$A9,
@@ -160,11 +160,11 @@ function F({
   updatePluginPublishingMetadata: a,
   localPlugin: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let c = async () => {
     if (!o) return;
     let e = await generatePluginId(i);
-    l(Qi({
+    l(mergePublishedPluginThunk({
       publishedPlugins: [e],
       src: "generatePluginId"
     }));

@@ -34,7 +34,7 @@ let S = "seen_seat_billing_terms_modal";
 export function $$$$k0({
   org: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = getAtomMutate($$C1);
   let n = _$$T(e);
   let y = !!n?.data?.isEligible;

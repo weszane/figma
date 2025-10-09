@@ -503,7 +503,7 @@ import { ResourceTypeNoComment } from '../figma_app/45218';
 import { H as _$$H3 } from '../figma_app/47866';
 import { z as _$$z } from '../figma_app/47967';
 import { kF as _$$kF2 } from '../figma_app/48566';
-import { rH as _$$rH } from '../figma_app/49598';
+import { getHubFileMetadataThunk } from '../figma_app/49598';
 import { loadCanvasDataAsync } from '../figma_app/53049';
 import { FEditorType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { BannerFullWidth, BannerInline, BannerInsetModal } from '../figma_app/59509';
@@ -554,7 +554,7 @@ import { _Y as _$$_Y, KB as _$$KB, G_, QK } from '../figma_app/191312';
 import { b as _$$b1 } from '../figma_app/192260';
 import { $C, jx as _$$jx, Ic } from '../figma_app/198516';
 import { yesNoTrackingEnum } from '../figma_app/198712';
-import { a6 as _$$a14 } from '../figma_app/198840';
+import { getHubFileVersionOrDefault } from '../figma_app/198840';
 import { Xw } from '../figma_app/201694';
 import { o0 as _$$o2, Nm } from '../figma_app/202307';
 import { m as _$$m4 } from '../figma_app/203842';
@@ -761,7 +761,7 @@ import { TrackingProvider } from '../figma_app/831799';
 import { e as _$$e8 } from '../figma_app/831857';
 import { F as _$$F3 } from '../figma_app/832508';
 import { Q as _$$Q12 } from '../figma_app/834744';
-import { _S as _$$_S, OS, WH } from '../figma_app/836943';
+import { useStylePickerShown, getStylePickerId, useStyleInfo } from '../figma_app/836943';
 import { _j as _$$_j, ap as _$$ap, Cg as _$$Cg, rU as _$$rU, se as _$$se, K5 } from '../figma_app/843119';
 import { W as _$$W8 } from '../figma_app/854365';
 import { LoadingSpinner } from '../figma_app/858013';
@@ -2139,7 +2139,7 @@ function iD({
     Sprig
   } = useSprigWithSampling();
   let n = useAtomWithSubscription(_$$f4);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   useEffect(() => {
     e && CodeComponentHelper?.convertToMultiFileCodeLayer(e.guid);
   }, [e]);
@@ -3271,7 +3271,7 @@ function am({
         return null;
     }
   };
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let m = useDropdownState();
   let h = useRef(null);
   let g = `site-publish-history-dropdown-${e.id}`;
@@ -3648,7 +3648,7 @@ let aL = {
 function aD({
   fileKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useIsSelectedFigmakeFullscreen();
   let n = _$$_t(e);
   let a = n ? jsx(Link, {
@@ -3946,7 +3946,7 @@ function a9({
     fileKey: e,
     setCommunityPublishingState: t
   }) {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     let n = useIsSelectedFigmakeFullscreen();
     let l = selectCurrentFile();
     let r = getFeatureFlags().cmty_make_publishing ?? !1;
@@ -3966,7 +3966,7 @@ function a9({
     let h = n && d && r && !1 === canPublishAsHubFile;
     let g = l?.publishedHubFile?.publishingStatus === _$$KB.APPROVED_PUBLIC;
     useEffect(() => {
-      i(_$$rH({
+      i(getHubFileMetadataThunk({
         fileKey: e
       }));
     }, [i, e]);
@@ -4151,7 +4151,7 @@ function sp({
   hasPublishEvents: y,
   domainInfo: j
 }) {
-  let k = useDispatch();
+  let k = useDispatch<AppDispatch>();
   let [w] = _$$_I();
   let [S, C] = useState('main');
   let T = useTeamPlanFeatures();
@@ -4557,7 +4557,7 @@ let sh = registerModal(e => {
 let sy = e => e.length === 1 && e[0] === QK.FILE_DENY_PUBLISH_SITE_LACKS_LICENSE ? 'must-upgrade' : e.includes(QK.FILE_DENY_PUBLISH_SITE_ORG_DISABLED_PUBLISHING) ? 'disabled-for-org' : e.includes(QK.FILE_DENY_EDIT_SITE_FILE_STUDENT) || e.includes(QK.FILE_DENY_EDIT_FIGMAKE_FILE_STUDENT) ? 'student-team' : e.includes(QK.FILE_DENY_PUBLISH_SITE_USER_RESTRICTED) ? 'disabled-for-user' : void 0;
 function sv(e) {
   let t = e.key;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = JW(t);
   let {
     selectedResponsiveSetGuids
@@ -4848,7 +4848,7 @@ function sX() {
   });
 }
 function sV() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsxs(Fragment, {
     children: [jsx(_$$H4, {
       large: !0,
@@ -4995,7 +4995,7 @@ function s5({
   let r = selectCurrentFile();
   let d = getRumLoggingConfig();
   let c = I4(n);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let [x, m] = useAtomValueAndSetter($C);
   let h = _$$_H2();
   let {
@@ -5133,7 +5133,7 @@ function s4() {
   });
 }
 function s3() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     keyboardShortcuts,
     isEditingFile,
@@ -5610,7 +5610,7 @@ function rN({
   connectedProject: e,
   isPending: t = !1
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdown('CONNECTED_PROJECT_MORE_MENU');
   let r = rj();
   let o = useMemo(() => [{
@@ -6036,7 +6036,7 @@ let rQ = registerModal(({
   open: i,
   onClose: n
 }) => {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [o, d] = useState(!1);
   let c = setupAutofocusHandler();
   let x = async () => {
@@ -6131,7 +6131,7 @@ function r5({
   fontFileIds: e,
   fontName: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return jsx(IconButton, {
     'aria-label': getI18nString('sites.metadata.fonts.delete_font'),
     'onClick': () => i(showModalHandler({
@@ -6586,7 +6586,7 @@ function ob() {
   }();
   let c = function (e, t) {
     let [i, n] = useState(new Set());
-    let l = useDispatch();
+    let l = useDispatch<AppDispatch>();
     let d = function () {
       let [e, t] = useState(null);
       let i = useRef(null);
@@ -7424,7 +7424,7 @@ function oY({
   onCancel: t,
   setDomainLoading: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = qg(e.domain).subdomain ?? '';
   let o = `.${qg(e.domain).domain ?? ''}`;
   let d = useCurrentFileKey();
@@ -7871,7 +7871,7 @@ function dn({
   fileKey: t,
   recordingKey: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = Xr(AP);
   let [d, c] = useState(null);
   let [p, x] = useState(!1);
@@ -7993,7 +7993,7 @@ function dl({
   customDomainPlanLimitReachedQueryResult: i,
   siteNeverPublished: n
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [o, d] = useState(!1);
   let c = useTeamPlanFeatures();
   let p = useIsStarterPlan(c);
@@ -8046,7 +8046,7 @@ let ds = registerModal(e => {
     fileKey
   } = e;
   let i = useModalManager(e);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [a] = setupResourceAtomHandler(SiteMount.Query({
     fileKey: e.fileKey
   }));
@@ -8124,7 +8124,7 @@ function dc({
   fileKey: e,
   domainInfo: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let r = n?.type === dd;
   let o = useCallback(() => {
@@ -8154,7 +8154,7 @@ function du({
   fileKey: e,
   domainInfo: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = !!getFeatureFlags().apex_domain_support;
   let a = t.customDomainType === 'apex' || t.customDomainType === 'subdomain' && qg(t.customDomain).subdomain === 'www';
   return jsxs(_$$gw, {
@@ -8179,7 +8179,7 @@ function du({
 function dp({
   fileKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(_$$c$4, {
     onClick: () => {
       t(showModalHandler({
@@ -8196,7 +8196,7 @@ function dx({
   fileKey: e,
   domain: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = Xr(AP);
   let r = useCallback(async () => {
     try {
@@ -8218,7 +8218,7 @@ function dm({
   fileKey: e,
   redirectedDomain: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let [n] = setupResourceAtomHandler(SiteMount.Query({
     fileKey: e
   }));
@@ -8462,7 +8462,7 @@ function dk({
 function dw({
   text: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx('td', {
     ...props(dj.cellBase, dj.tableCell, dj.copyableCell),
     onClick: () => t(_$$lW2({
@@ -8485,7 +8485,7 @@ function dS({
   fileKey: t,
   planLimitReachedQueryResult: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [r, o] = useState(!1);
   let [d, c] = useState(!1);
   let p = i.status === 'loading';
@@ -8807,7 +8807,7 @@ function dz({
     editorType: n
   });
   let o = useMemo(() => !!(i.status === 'loaded' && getResourceDataOrFallback(i.data?.siteMount)?.pwdConfig?.id), [i]);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = function () {
     let e = selectCurrentFile();
     if (!e) return !1;
@@ -10137,7 +10137,7 @@ function cb({
 }) {
   let i = t.key;
   let n = JW(i || null);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = useIsSelectedFigmakeFullscreen();
   if (_$$$D({
     fileKey: i
@@ -10762,7 +10762,7 @@ function c5() {
   let {
     libraryImport
   } = _$$S8();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   return i && getFeatureFlags().bake_starter_limit ? null : jsx(Fragment, {
     children: jsx(cJ, {
       ref: o,
@@ -11095,7 +11095,7 @@ function ur({
     color
   } = useTheme();
   let d = Xr(FX);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let p = Xr(EB);
   let {
     noDataLoaded
@@ -12229,7 +12229,7 @@ function pr({
   zA();
   _$$m5();
   (function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = selectCurrentFile();
     let n = i?.key;
     let [l] = useAtomValueAndSetter(_$$n6);
@@ -13248,7 +13248,7 @@ let xE = memo(({
   } = function (e) {
     let [t, i] = useState(null);
     let n = Xr(UU);
-    let l = useDispatch();
+    let l = useDispatch<AppDispatch>();
     let r = useCallback(t => {
       KB({
         collection: e,
@@ -13289,7 +13289,7 @@ let xE = memo(({
   }(e);
   let [u, p] = useAtomValueAndSetter(UU);
   let [x, m] = useAtomValueAndSetter(pE(t));
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = useMemo(() => ({
     editable: !1,
     sortable: !1,
@@ -14492,7 +14492,7 @@ function mx({
     c(null);
   };
   let y = useRef(null);
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let j = `image_detail_modal-${t.id}`;
   let k = _$$kG(j);
   let w = () => {
@@ -15440,7 +15440,7 @@ let mW = registerModal(({
   let g = useRef(null);
   let f = getCollectionViewStatus(i ?? '').data;
   let _ = r ?? f?.name;
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let y = Xr(_$$iO);
   let {
     collectionFields,
@@ -15583,7 +15583,7 @@ let mW = registerModal(({
   });
 }, 'CollectionFieldEditorModal', ModalSupportsBackground.YES);
 let mY = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager({
     open: e.open,
     onClose: ({
@@ -15637,7 +15637,7 @@ let mY = registerModal(e => {
   });
 }, 'CMSNewCollectionModal', ModalSupportsBackground.YES);
 function mJ() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCurrentFileKey();
   let i = getCollectionSummaryStatus(t);
   let n = (i.data?.length ?? 0) + 1;
@@ -16124,7 +16124,7 @@ function ho({
   });
 }
 let hd = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager({
     ...e,
     onClose: ({
@@ -16386,7 +16386,7 @@ let hu = {
   }
 };
 function hp() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = function () {
     let e = useCurrentFileKey();
     return async function ({
@@ -16681,7 +16681,7 @@ function h_({
   });
 }
 function hb() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let [t, i] = useState('');
   let [n, r] = useState(!1);
   let d = getI18nString('dakota.ai.prompt_placeholder');
@@ -17001,7 +17001,7 @@ function hO({
   fileKey: t,
   recordingKey: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = getCollectionSummaryStatus(t).data;
   let r = a?.find(t => t.id === e.id);
   let d = pL(r?.name ?? '', 'header', e.id);
@@ -17099,7 +17099,7 @@ function h0(e) {
     startRenamingNode,
     stopRenamingNode
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = A$();
   let p = useSelector(e => e.versionHistory);
   let x = useSelector(e => !e.mirror.appModel.isReadOnly && e.mirror.appModel.topLevelMode !== ViewType.HISTORY);
@@ -17740,7 +17740,7 @@ function gl() {
   });
 }
 function ga() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = Xr(pb);
   let i = mJ();
   let n = _$$ut2();
@@ -17891,7 +17891,7 @@ function go({
 }) {
   let n = e.name;
   let d = e.id;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = pL(n, 'leftPanel', d);
   let [p, m] = useAtomValueAndSetter(gt(d));
   let h = _$$e();
@@ -18388,7 +18388,7 @@ function gL(e) {
     stopRenamingNode
   } = e;
   let m = useNavigateToViewport();
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let f = useSelector(e => !e.mirror.appModel.isReadOnly && e.mirror.appModel.topLevelMode !== ViewType.HISTORY);
   let _ = useSelector(e => e.mirror.sceneGraphSelection);
   let y = useRef(null);
@@ -18408,7 +18408,7 @@ function gL(e) {
   let [L, P] = useAtomValueAndSetter(B_);
   let O = function () {
     let e = useNavigateToViewport();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = _$$O6();
     let n = useSelector(e => e.mirror.appModel.currentPage);
     let l = useSelector(e => e.versionHistory);
@@ -18956,7 +18956,7 @@ function g7() {
     } = _$$h13();
     let x = hasOverlay && !overlayClosing;
     let [h, g] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
-    let f = useDispatch();
+    let f = useDispatch<AppDispatch>();
     let _ = useCallback(t => {
       getFeatureFlags().sts_sprig_targeted_feedback && i && h === PanelType.CODE && t === PanelType.FILE && Sprig('track', 'sites_code_layer_edit');
       t !== h && f(hideModalHandler());
@@ -19049,7 +19049,7 @@ function g7() {
     let w = _$$Ty();
     let S = _$$Py();
     let C = function () {
-      let e = useDispatch();
+      let e = useDispatch<AppDispatch>();
       let t = useAppModelProperty('isReadOnly');
       let i = useAtomWithSubscription(_$$oD);
       let n = _$$D2();
@@ -19124,7 +19124,7 @@ let g9 = memo(() => {
   let e = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let t = useAtomWithSubscription(genericAtomFamily1);
   let i = useAtomWithSubscription(booleanAtomFamily);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   useEffect(() => {
     let i = getPanelTypeString(e);
     t && (i = t);
@@ -19386,7 +19386,7 @@ function fy() {
   let e = userFlagExistsAtomFamily(Vc);
   let t = useAtomWithSubscription(e);
   let i = useCurrentPublicPlan('OnboardSitesTOSInner');
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = useSceneGraphSelector();
   let r = useAtomWithSubscription(LZ);
   let d = Xr(P4);
@@ -19486,7 +19486,7 @@ function fy() {
   });
 }
 function fv() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = userFlagExistsAtomFamily(_$$at);
   let i = useAtomWithSubscription(t);
   let n = userFlagExistsAtomFamily(_$$uy);
@@ -19544,7 +19544,7 @@ function fv() {
   }) : jsx(fj, {});
 }
 function fj() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = userFlagExistsAtomFamily(_$$at);
   let i = useAtomWithSubscription(t);
   let n = userFlagExistsAtomFamily(_$$uy);
@@ -19740,7 +19740,7 @@ function fI({
   totalSteps: a,
   nextStepType: r
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     o(postUserFlag({
       [R0]: !0
@@ -19969,7 +19969,7 @@ function fq(e) {
     let i = t.find(e => e.type === 'tablet');
     return [t.find(e => e.type === 'desktop'), i, e].filter(e => void 0 !== e);
   }, [t]);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = fU();
   let p = useMemo(() => t.map(e => ({
     displayText: e.label,
@@ -20049,7 +20049,7 @@ let fX = 'resize_controls--scrubbableInput--Bd5TX';
 let fV = 'resize_controls--input--O3LqJ raw_components--flushLeft--YH-5P';
 let fG = 'resize_controls--inactiveLabel--G8Rru raw_components--iconInsideBorderFocusWithin--2g7fO';
 function fW(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = fU();
   return jsxs('div', {
     className: 'resize_controls--controlGroup--M4UEb',
@@ -21166,7 +21166,7 @@ function _B({
   let p = useAtomWithSubscription(_$$_b);
   assert(!!p, 'sitePreviewState should not be null');
   let x = fJ(p.history);
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let [h, g] = useState({
     showOverflow: !1,
     layoutsInOverflow: !1
@@ -21661,7 +21661,7 @@ let bi = () => {
     Sprig
   } = useSprigWithSampling();
   let t = Xr(P4);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = trackFileEventWithStore();
   return {
     onStartFromScratch: () => {
@@ -21886,7 +21886,7 @@ function bf() {
   } = useSprigWithSampling();
   let t = trackFileEventWithStore();
   let i = Xr(P4);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return jsxs('div', {
     className: v()('site_templates_view--header--kKbXy', 'site_templates_view--separator--NIAqk'),
     children: [jsx('div', {
@@ -21933,7 +21933,7 @@ function bw({
   template: e
 }) {
   let t = useRef(null);
-  let i = _$$a14(e.content.hub_file);
+  let i = getHubFileVersionOrDefault(e.content.hub_file);
   let [n] = setupResourceAtomHandler(bk({
     id: e.content.hub_file.id
   }));
@@ -21978,7 +21978,7 @@ function bS({
   let n = trackFileEventWithStore();
   let a = Xr(P4);
   let d = Xr(_$$ZH);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let p = () => {
     d(null);
   };
@@ -22110,7 +22110,7 @@ let bE = ({
   template: e,
   onInsertTemplateFinished: t
 }) => {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = Xr(P4);
   let {
     insertTemplate
@@ -22208,7 +22208,7 @@ function bA({
 }) {
   let t = trackFileEventWithStore();
   let i = Xr(P4);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   useSingleEffect(() => t('sites_template_picker_shown'));
   return jsx(ModalContainer, {
     'className': 'sites_template_modal--templateModal--a3YSn',
@@ -22398,7 +22398,7 @@ function yi({
   isSelected: n
 }) {
   let a = useOpenFileLibraryKey();
-  let s = WH(e, t, StyleType.TEXT);
+  let s = useStyleInfo(e, t, StyleType.TEXT);
   return jsx(Fragment, {
     children: jsx('div', {
       'className': 'cms_rich_text_style_panel--styleTitle--qGZx9',
@@ -22457,18 +22457,18 @@ function ya({
   cmsRichTextStyleMap: t,
   setCmsRichTextStyle: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [o, d] = useState(null);
   let [c, u] = useState(null);
   let [p, x] = useState(null);
   let m = 'inheritTextStyleKey';
-  let h = _$$_S(m);
+  let h = useStylePickerShown(m);
   let g = useLatestRef(h);
   let f = useContext(_$$lk);
   let _ = h || g;
   let y = useCallback((t, i, l) => {
     _ && o === t ? n(hideStylePicker()) : e && n(showStylePicker({
-      id: OS(m),
+      id: getStylePickerId(m),
       initialX: e.left - N2,
       initialY: e.top,
       modal: !0
@@ -22978,7 +22978,7 @@ let yY = forwardRef(({
   mixedMathHandler: d,
   disabled: c
 }) => {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let {
     smallNudgeAmount,
     bigNudgeAmount,
@@ -23117,7 +23117,7 @@ let yZ = memo(({
     };
   }(e, t);
   let f = i === _$$D7.Enabled;
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let b = _$$P5(getI18nString('fullscreen.properties_panel.transform_panel.corner_radius'));
   return jsxs(_$$Zk, {
     'data-testid': 'appearance-panel-web-direct-manipulation',
@@ -23181,7 +23181,7 @@ function ve({
   recordingKey: r
 }) {
   let o = useRef(null);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useDropdownState();
   let {
     smallNudgeAmount,
@@ -23492,7 +23492,7 @@ let vc = memo(({
 let vu = memo(e => {
   let t = _$$u8.directManipulationCanvasEditor();
   let i = useRef(!1);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = useCallback(e => {
     if (i.current) return;
     i.current = !0;
@@ -23703,7 +23703,7 @@ function vJ({
   onDropdownHidden: i,
   recordingKey: n
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = useDropdownState();
   return jsx(vZ, {
     dispatch: a,
@@ -23739,7 +23739,7 @@ function v3({
   onDropdownHidden: i,
   recordingKey: n
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = useDropdownState();
   let d = useMemo(() => [{
     roles: vO
@@ -23820,7 +23820,7 @@ function v9({
   recordingKey: a,
   ariaLabelledBy: r
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = useDropdownState();
   return jsx(je, {
     ariaLabelledBy: r,
@@ -24400,7 +24400,7 @@ function jv({
       node: t
     }) : r());
   }, [t, n, r]);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = e?.sourceLibraryKey;
   let p = useLibraryFileLink({
     libraryKey: c,
@@ -24645,7 +24645,7 @@ function jz({
   value: i,
   recordingKey: n
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [o, d] = useState(i);
   useEffect(() => {
     d(i);
@@ -25191,7 +25191,7 @@ function j8({
   ariaLabelledBy: e
 }) {
   let t = useSelectionPropertyValue('responsiveSetScalingMode') ?? 'REFLOW';
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let a = trackFileEventWithStore();
   return jsxs(_$$l1, {
@@ -25301,7 +25301,7 @@ let kt = new X9({
 let ko = _$$l1;
 let kd = _$$c$6;
 function kc(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let n = createShownTransformControlsObservable();
   let o = createEnabledTransformControlsObservable();
@@ -25430,7 +25430,7 @@ function ku({
   localPlugins: _,
   publishedPlugins: b
 }) {
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let v = useAtomWithSubscription(_$$b12);
   let j = selectCurrentFile();
   let k = _$$hD();
@@ -25958,7 +25958,7 @@ function wl({
   recordingKey: i
 }) {
   let n = getSmallNudgeAmount();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   return jsx(Fragment, {
     children: isValidValue(e) && e != null && t != null && jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.transition_delay'),
@@ -25986,7 +25986,7 @@ function wa({
   setEasingFunction: r
 }) {
   let o = getSmallNudgeAmount();
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = isValidValue(e) ? wr(e) : e;
   let p = wd(e);
   let x = e => {
@@ -26098,7 +26098,7 @@ function wu({
   setDelay: d,
   recordingKey: c
 }) {
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let x = useDropdownState();
   let m = wl({
     delay: o,
@@ -26152,7 +26152,7 @@ function wm({
     let e = useSceneGraphSelector();
     return useMemo(() => new _$$cP(e), [e]);
   }();
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = useDropdownState();
   let c = function () {
     let e = useSceneGraphSelection();
@@ -26253,7 +26253,7 @@ function wy({
   setRotation: p,
   recordingKey: x
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let h = getNudgeMultipliers();
   let g = e => e.stopPropagation();
   return jsxs(k8, {
@@ -26361,7 +26361,7 @@ function wj({
   recordingKey: c,
   drilldownCallback: p
 }) {
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let m = useDropdownState();
   let h = wl({
     delay: o,
@@ -26410,7 +26410,7 @@ function wk({
   pushDetailsComponent: e,
   recordingKey: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let [r, o] = wI();
   let [d, c] = wE();
@@ -26481,7 +26481,7 @@ function ww({
   pushDetailsComponent: t,
   recordingKey: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let [o, d] = wP(e);
   let c = null;
@@ -27177,7 +27177,7 @@ let Sy = e => {
   return S_.has(t) && e.size.x > 0 && e.size.y > 0;
 };
 function Sv(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = getSmallNudgeAmount();
   let n = getBigNudgeAmount();
   let [r, o] = Sj();
@@ -27343,7 +27343,7 @@ function SE({
   });
 }
 function SN(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let [n, r] = SA();
   let [o, d] = SR();
@@ -28491,7 +28491,7 @@ function C$(e, t) {
   Cj(e).easingFunction = t;
 }
 function CU(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, n] = CG();
   return jsxs(k8, {
     children: [jsx(k5, {
@@ -28543,7 +28543,7 @@ function CW({
   pushDetailsComponent: e,
   recordingKey: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let [r, o] = C5();
   let [d, c] = C2();
@@ -30815,7 +30815,7 @@ let T2 = memo(({
   let v = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let j = v === PanelType.DAKOTA;
   let k = _$$U();
-  let S = useDispatch();
+  let S = useDispatch<AppDispatch>();
   let C = L3();
   let T = useIsCodeViewPanel();
   let I = selectCurrentUser();
@@ -30835,7 +30835,7 @@ let T2 = memo(({
     let n = useAtomWithSubscription(copyToSitesFromDesignAtom);
     let l = Xr(sessionIdAtom);
     let a = useSceneGraphSelector();
-    let d = useDispatch();
+    let d = useDispatch<AppDispatch>();
     let [c, x] = useAtomValueAndSetter(u3);
     !c && n && x(!0);
     useConditionalCallback(() => {

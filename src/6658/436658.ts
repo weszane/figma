@@ -45,7 +45,7 @@ export function $$E2({
     x.current = x.current.slice(0, o.length);
   }, [o.length]);
   let N = getSelectedView();
-  let A = useDispatch();
+  let A = useDispatch<AppDispatch>();
   let O = getAtomMutate(RL);
   let B = getAtomMutate(S6);
   let D = getAtomMutate(K5);

@@ -136,8 +136,8 @@ import { P as _$$P } from "../9410/208213";
 import { R as _$$R3 } from "../figma_app/501766";
 import { u as _$$u3 } from "../9410/126479";
 import { OQ } from "../figma_app/991591";
-import { rH } from "../figma_app/49598";
-import { _J } from "../figma_app/378195";
+import { getHubFileMetadataThunk } from "../figma_app/49598";
+import { initializeLocalPluginsThunk } from "../figma_app/378195";
 import { x4 as _$$x4 } from "../figma_app/913823";
 import { useAllLibrarySubscriptions, initializeUserThunk } from "../figma_app/933328";
 import { fullscreenCrashStateAtom } from "../figma_app/276445";
@@ -296,7 +296,7 @@ let eB = atom(null, (e, t, i) => {
 let eU = ["mousemove", "mousedown", "keydown", "touchstart", "touchmove", "wheel"];
 var eJ = eY;
 function e4(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.auth);
   useEffect(() => {
     t(AUTH_INIT({
@@ -397,7 +397,7 @@ function tm(e) {
     onWorkshopExpired
   } = e;
   !function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = selectCurrentUser();
     let i = !t;
     let r = useCurrentFileWorkshopModeStatus();
@@ -455,7 +455,7 @@ function tm(e) {
     dismissEditFileFooter
   } = function (e) {
     let [t, i] = useState(!1);
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     let s = selectCurrentUser();
     let o = selectCurrentFile();
     let l = o?.name;
@@ -532,7 +532,7 @@ let t5 = memo(({
   let i = t ? t.key : "";
   let s = t?.parentOrgId || "";
   let o = useRef(null);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useAtomWithSubscription(fullscreenCrashStateAtom);
   let u = useSelector(e => e.openFile?.canEdit ?? !1);
   let p = useAppModelProperty("isReadOnly");
@@ -559,7 +559,7 @@ let t5 = memo(({
     isIpadDevice && document.addEventListener("focusout", e);
     document.documentElement.classList.add(FC);
     document.body.classList.add(Wc);
-    d(_J());
+    d(initializeLocalPluginsThunk());
     let t = window.FigmaMobile;
     t && (t._get_memory_stats = () => {
       let e = FullscreenPerfInfo?.getImageMemory();
@@ -619,7 +619,7 @@ let t5 = memo(({
     };
   }, [d]);
   useEffect(() => {
-    t && !o.current && (d(initializeUserThunk({})), t && !p ? t?.canEdit && d(rH({
+    t && !o.current && (d(initializeUserThunk({})), t && !p ? t?.canEdit && d(getHubFileMetadataThunk({
       fileKey: t.key
     })) : getFeatureFlags().ce_new_missing_fonts_logging && triggerMissingFontPopover(), o.current = t);
   }, [d, p, t]);
@@ -653,7 +653,7 @@ export function $$t80({
       allowResourceTracking: !fullscreenPerfManager.isColdBoot
     }) : Tf.disableEventSendingUnlessDebugEnabled();
   }, []);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let d = selectCurrentFile();
   subscribeDevModePermissions(d?.key ?? "");
   liveStoreInstance.Folder.useValue(d?.folderId);
@@ -705,7 +705,7 @@ export function $$t80({
   (function () {
     let e = useRef();
     let t = useRef();
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     let r = useSelector(e => e.userFlags);
     let s = useSelector(e => !!e.user);
     let o = function (e, t) {
@@ -870,7 +870,7 @@ export function $$t80({
   })();
   selectExperimentConfigHook("exp_aa_test_fullscreen_view").getConfig();
   (function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = _$$_();
     let i = BI();
     let [r, s] = useState(!1);
@@ -881,7 +881,7 @@ export function $$t80({
       let t = window.FigmaMobile;
       let i = rE();
       let r = C3();
-      let s = useDispatch();
+      let s = useDispatch<AppDispatch>();
       let o = trackFileEventWithUser();
       let l = r ? getResourceDataOrFallback(r.pageNodeId) : void 0;
       useEffect(() => {
@@ -1092,7 +1092,7 @@ export function $$t80({
   useInitializeLeftPanelTab();
   usePreventBrowserKeydown();
   (function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let [t, i] = Wz("nux_seat_selection_show_confirmation", null);
     useEffect(() => {
       t && ("autoApproved" in t && "seatType" in t && e(showModalHandler({

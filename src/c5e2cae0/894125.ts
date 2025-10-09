@@ -108,7 +108,7 @@ export function $$b1(e) {
     paymentStep,
     teamFlowType
   } = t;
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let u = useSelector(e => e.payment.billingPeriod);
   let S = selectCurrentUser()?.id;
   let N = T(teamFlowType, u, useSelector(e => e.payment.promo), e.selectedView.planType || TeamType.UNDETERMINED);

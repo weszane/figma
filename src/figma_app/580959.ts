@@ -40,7 +40,7 @@ import { applySharedStyle, loadSharedStyle } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { showPickerInStyleCreation, hidePickerInStyleCreation } from "../905/295712";
 import { updateCurrentSelectionPaintInPicker, forceUpdateSelectionPaintsForUndo } from "../905/854717";
-import { sw } from "../figma_app/914957";
+import { hideStylePreview } from "../figma_app/914957";
 import { yJ, F7 } from "../figma_app/8833";
 import { formatI18nMessage } from "../905/482208";
 import { AutoColorFormatter, FormattedHexColor } from "../905/713722";
@@ -53,7 +53,7 @@ import { isSolidType, paintManager, defaultGrayColor } from "../figma_app/385874
 import { updateGIFImageProperties } from "../905/619652";
 import { b as _$$b } from "../figma_app/755529";
 import { useSelectionPropertyValue, useHasSelectedStyle } from "../905/275640";
-import { Rb, Pt as _$$Pt } from "../figma_app/852050";
+import { getSortedLocalVariables, getSubscribedVariables } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -62,7 +62,7 @@ import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { useStyleSubscriptionInfo, useStyleSubscriptionName, useOptimisticStyleThumbnailUpdate } from "../figma_app/646357";
 import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
-import { b as _$$b2 } from "../figma_app/882253";
+import { resolveDestinationStyleKey } from "../figma_app/882253";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { K as _$$K2 } from "../905/733706";
@@ -86,7 +86,7 @@ import { zi } from "../905/824449";
 import { MM, UP } from "../figma_app/246831";
 import { N2 } from "../905/213527";
 import { AH } from "../905/571648";
-import { yT, WH, OS } from "../figma_app/836943";
+import { getStylePickerUIState, useStyleInfo, getStylePickerId } from "../figma_app/836943";
 import { dD, Qu, lt, z$ } from "../figma_app/941824";
 import { mS } from "../figma_app/711157";
 import { Ad, pG, Y9, DE } from "../figma_app/811257";
@@ -150,7 +150,7 @@ let $$ti6 = memo(function (e) {
     }));
   }, [dispatch]);
   let u = normalizeValue(_$$b("guid"));
-  let p = yT({
+  let p = getStylePickerUIState({
     ...e,
     styleType: "FILL",
     inheritStyleKeyField: "inheritFillStyleKey",
@@ -320,7 +320,7 @@ class to extends PureComponent {
           initialY: e.y
         }));
         this.props.dispatch(hideStylePicker());
-        this.props.dispatch(sw());
+        this.props.dispatch(hideStylePreview());
       }
     };
     this.setIndividualBorderOption = e => {
@@ -362,7 +362,7 @@ class to extends PureComponent {
     };
   }
   render() {
-    let e = yT({
+    let e = getStylePickerUIState({
       ...this.props,
       styleType: "FILL",
       inheritStyleKeyField: "inheritFillStyleKeyForStroke"
@@ -459,17 +459,17 @@ let $$tc5 = memo(function ({
   selectedStyleGuid: L,
   entrypointMenu: D
 }) {
-  let k = useDispatch();
+  let k = useDispatch<AppDispatch>();
   let M = Xo();
   let F = useDropdownState();
   let j = !!useContext(zK);
   let U = j ? `style-modal-${qj(m)}` : qj(m);
-  let B = WH(h, g, _);
+  let B = useStyleInfo(h, g, _);
   let G = AH(B?.key ?? null, normalizeValue(g));
   let H = B?.isLocal ? B : G?.status === "loaded" ? G.data : null;
   let z = function () {
-    let e = Rb();
-    let t = _$$Pt();
+    let e = getSortedLocalVariables();
+    let t = getSubscribedVariables();
     let r = e.length > 0;
     let n = Object.keys(t).length > 0;
     return r || n;
@@ -560,7 +560,7 @@ let $$tc5 = memo(function ({
         onApplyStyle: j ? void 0 : n,
         onChange: X,
         paint: r,
-        paintId: OS(m),
+        paintId: getStylePickerId(m),
         pickerShown: e,
         recordingKey: generateRecordingKey(C, "paintPicker"),
         selectedStyle: H,
@@ -572,7 +572,7 @@ let $$tc5 = memo(function ({
 });
 export function $$tu7(e) {
   let t = useContext(zK);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let n = null != t;
   let o = useCallback(() => n, [n]);
   let l = useHasSelectedStyle();
@@ -637,7 +637,7 @@ export function $$tu7(e) {
     r(stylePickerViewChangedThunk({
       isListLayout: !e.stylePickerListLayout
     }));
-    r(sw());
+    r(hideStylePreview());
   }, [r, e.stylePickerListLayout]);
   let w = xm(e);
   let {
@@ -707,7 +707,7 @@ export function $$tu7(e) {
           return "";
       }
     })(),
-    ...yT(e),
+    ...getStylePickerUIState(e),
     advancedSettingsTooltip: e.advancedSettingsTooltip,
     defaultColor: e.defaultColor,
     entrypointMenu: (() => {
@@ -787,7 +787,7 @@ export class $$tp1 extends PureComponent {
           isInStyleModal: this.isInStyleModal()
         }
       }));
-      this.isInStyleModal() || (this.props.dispatch(sw()), this.props.dispatch(hideStylePicker()));
+      this.isInStyleModal() || (this.props.dispatch(hideStylePreview()), this.props.dispatch(hideStylePicker()));
     };
     this.hidePicker = () => {
       this.isInStyleModal() ? this.props.dispatch(hidePickerInStyleCreation()) : this.props.dispatch(hidePickerThunk());
@@ -1216,7 +1216,7 @@ export function $$th8(e) {
   let n = w()({
     [EC]: !e.paint.visible || e.disableOpacity
   });
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = e.chitOverride ? e.chitOverride : {
     paint: e.paint
   };
@@ -1339,14 +1339,14 @@ function tf({
     stateStylePickerShown: e.stylePickerShown,
     stylePreviewShown: e.stylePreviewShown
   }));
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let A = `${yJ}-${o}`;
   let x = m?.id === A ? m : null;
   let N = stateStylePickerShown.isShown && stateStylePickerShown.id === A ? stateStylePickerShown : null;
   let C = _$$M(c);
   let k = useStyleSubscriptionInfo(e, n);
   let M = useStyleSubscriptionName(e, n);
-  let F = useSelector(t => _$$b2(t, e, null));
+  let F = useSelector(t => resolveDestinationStyleKey(t, e, null));
   let j = useCallback(() => {
     v(hidePickerThunk());
     Fullscreen.selectStyleByGuid("");
@@ -1368,7 +1368,7 @@ function tf({
     u && B();
   }, []);
   let G = useCallback(() => {
-    v(sw());
+    v(hideStylePreview());
   }, [v]);
   let z = useCallback(e => {
     e.stopPropagation();
@@ -1536,7 +1536,7 @@ $$t_2.displayName = "Paint";
           initialX: e.x,
           initialY: e.y
         }));
-        this.props.dispatch(sw());
+        this.props.dispatch(hideStylePreview());
         this.props.dispatch(hideStylePicker());
         this.props.dispatch(updateCurrentSelectionPaintInPicker({
           paintId: this.props.id,
@@ -1838,7 +1838,7 @@ $$t_2.displayName = "Paint";
         initialY: s,
         modal: !0
       }));
-      e(sw());
+      e(hideStylePreview());
       e(hidePickerThunk());
     },
     setPickerListLayout: t => {
@@ -1882,7 +1882,7 @@ export function $$tb4(e) {
     for (let r in e) if (e[r] !== t[r]) return !1;
     return !0;
   }), []);
-  let G = useDispatch();
+  let G = useDispatch<AppDispatch>();
   let {
     forceUpdateForUndo
   } = u;

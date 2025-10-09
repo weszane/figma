@@ -151,7 +151,7 @@ function eO({
   let {
     existingHubFile
   } = e.deps;
-  let Y = useDispatch();
+  let Y = useDispatch<AppDispatch>();
   let {
     trackEvent
   } = useTracking();
@@ -589,7 +589,7 @@ function eP({
   cannotPublishAsHubFileReason: s,
   onPublishFailure: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = _$$H(o);
   let {
     trackEvent

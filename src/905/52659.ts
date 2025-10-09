@@ -238,7 +238,7 @@ let er = (e, t, i, n) => {
 };
 export function $$ea0(e) {
   let [t, i] = useState([]);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let x = useSelector(k);
   let S = getSelectedView();
   let w = getAtomMutate(Ct);

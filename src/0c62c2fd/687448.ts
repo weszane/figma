@@ -74,7 +74,7 @@ function B({
   onSubmit: o,
   textAreaClassName: l
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = atomStoreManager.get(ph);
   let [u, m] = useState(!1);
   let p = useRef(null);
@@ -246,7 +246,7 @@ export function $$U0({
   });
 }
 export function $$W1(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = getSelectedView();
   return useCallback(s => {
     let i;

@@ -33,7 +33,7 @@ let A = 100 * N.padBottom / N.height;
 let O = `calc(${A}% + ${-_$$H}px)`;
 let k = `translateY(${O})`;
 let $$R0 = memo(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = iT();
   let i = useSelector(e => e?.mirror?.appModel?.currentTool === DesignGraphElements.STAMP) || t;
   let o = useIsVotingSessionJoined();

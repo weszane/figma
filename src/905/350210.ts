@@ -25,7 +25,7 @@ function A({
   renderCreatorWithIcon: u,
   ariaLabelledBy: g
 }) {
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let A = useDropdownState();
   let b = A?.type === o;
   let v = useCallback(() => {

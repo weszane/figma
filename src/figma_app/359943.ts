@@ -66,7 +66,7 @@ function $(e) {
     productName,
     presetType
   } = c;
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: `${productName} ${presetType} presets entrypoint`,
     children: jsx("div", {
@@ -263,7 +263,7 @@ let ep = () => [{
 export function $$e_2({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getObservableValue(EditorPreferencesApi().expandedFramePresetType, DeviceType.NONE);
   let l = useCallback(e => {
     r === e && (e = DeviceType.NONE);

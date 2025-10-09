@@ -7,7 +7,7 @@ import { YW } from "../figma_app/553488";
 export function $$d0() {
   let e = J3();
   let t = selectCurrentFile();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return {
     openSlidesPublishFlow: async n => {
       if (t) {

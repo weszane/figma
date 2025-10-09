@@ -619,7 +619,7 @@ export function $$X0({
   ...i
 }) {
   let a = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return useCallback((t, i) => {
       let n = i <= -8 ? "1/8" : i <= -4 ? "1/4" : i <= -2 ? "1/2" : i >= 8 ? "8x" : i >= 4 ? "4x" : i >= 2 ? "2x" : "1x";
       e(VisualBellActions.enqueue({

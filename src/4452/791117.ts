@@ -8,7 +8,7 @@ import { VisualBellIcon } from "../905/576487";
 import { fetchLicenseGroupsThunk } from "../figma_app/28323";
 if (443 == require.j) {}
 export function $$u0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return {
     dispatchSuccess: ({
       approve: t,
@@ -77,7 +77,7 @@ export function $$u0() {
   };
 }
 export function $$m1(e, t) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   useEffect(() => {
     e && !t && a(fetchLicenseGroupsThunk({
       forceRefetch: !0

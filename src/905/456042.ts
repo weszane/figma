@@ -65,7 +65,7 @@ export function WorkspaceAvatar({ name, orgId, userId }: AvatarProps) {
  * Original name: WorkspaceSelectorModal
  */
 export const WorkspaceSelectorModal = registerModal(({ payload }: WorkspaceSelectorModalProps) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const handleCloseModal = useCallback(() => {
     dispatch(hideModal())

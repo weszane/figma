@@ -68,7 +68,7 @@ let E = liveStoreInstance.Mutation(async (e, {
   });
 });
 let $$C0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     planId,
     planType

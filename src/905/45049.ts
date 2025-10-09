@@ -326,7 +326,7 @@ export function $$$0(e, t, i, y, b) {
   let I = B(i);
   let E = useAtomWithSubscription(hO.sortByAtom);
   let x = useAtomWithSubscription(CZ);
-  let S = useDispatch();
+  let S = useDispatch<AppDispatch>();
   let w = X();
   let C = useAtomWithSubscription(dd);
   let {

@@ -9,7 +9,7 @@ import { hideModalHandler } from "../905/156213";
 import { registerModal } from "../905/102752";
 import { Vq } from "../figma_app/639088";
 export let $$m0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager(e);
   let u = e.folder.viewOnlyAt;
   let m = jsx("span", {

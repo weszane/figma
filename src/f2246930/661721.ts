@@ -72,7 +72,7 @@ export function $$M1() {
 function F({
   onClose: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let l = useSelector(J);
   let a = useCallback(e => {
     let l = e.guids[0];

@@ -25,7 +25,7 @@ export function $$f0({
   let b = selectCurrentFile();
   let v = areAllSelectedInstances();
   let I = useIsSelectedFigmakeFullscreen();
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let x = useMemo(() => {
     let n = {
       text: getI18nString("design_systems.assets_panel.insert"),

@@ -376,7 +376,7 @@ export function getLibraryViewFilterStates(
   skipPresetLibraries = false,
 ): LibrariesViewFilterState[] | null {
   const filters: LibrariesViewFilterState[] = []
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const currentUserOrg = useCurrentUserOrg()
   const currentPlanUser = useCurrentPlanUser('useLibrariesViewFilterStates')
   const isOrgMemberOrAdmin = useIsOrgMemberOrAdminUser(currentPlanUser).unwrapOr(false)

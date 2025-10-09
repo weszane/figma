@@ -113,7 +113,7 @@ let Q = registerModal(function (e) {
     onClose
   } = e;
   let [o, l] = useState("");
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = !o.trim().length;
   return jsx(TrackingProvider, {
     name: "Plan Spaces Pro Draft Move Confirmation Modal",
@@ -193,7 +193,7 @@ export let $$en0 = registerModal(function (e) {
   let ep = useSubscription(AccessibleFoldersV2, {
     orgId: null
   });
-  let em = useDispatch();
+  let em = useDispatch<AppDispatch>();
   let eh = _$$z();
   let eg = useCallback(() => {
     onClose();

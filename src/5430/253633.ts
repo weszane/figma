@@ -31,7 +31,7 @@ export function $$b0({
   closeIconClassName: T,
   dropdownSelector: I
 }) {
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let E = getSearchSessionIdFromSelector(!0);
   let S = useIsResourceHub();
   let [R, k] = useState(!1);

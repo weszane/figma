@@ -39,7 +39,7 @@ export function AppleEulaModal({
   eulaShown,
   ...restProps
 }: AppleEulaModalProps) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const currentUser = selectCurrentUser();
   const currentFile = selectCurrentFile();
 

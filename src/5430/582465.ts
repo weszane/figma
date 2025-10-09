@@ -25,7 +25,7 @@ function b({
   inputPlaceholder: o
 }) {
   let a = useRef(null);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let [d, u] = useState(!1);
   return jsxs("div", {
     className: "search_input_mobile--mobileSearchContainer--VsAJK text--fontPos13--xW8hS text--_fontBase--QdLsd",

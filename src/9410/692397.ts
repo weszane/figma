@@ -89,7 +89,7 @@ export function $$k4() {
   let t = e?.repo;
   let i = !!(t && isDefaultFileAlt(e, t));
   let n = !!(e && isBranchAlt(e));
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return n && t ? jsx("div", {
     className: l()(T, w),
     children: jsx(C, {
@@ -117,7 +117,7 @@ export function $$N1({
   });
 }
 function A() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useContext(X);
   return null === t || t < 1 ? null : jsx(ButtonPrimitive, {
     className: "left_panel_header_components--button--zghbk",

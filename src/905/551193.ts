@@ -1,6 +1,6 @@
 import { debugState } from "../905/407919";
 import { initializeWidgetAllowlist } from "../905/837497";
-import { a8 } from "../figma_app/559491";
+import { getOrgPublishedWidgetsThunk } from "../figma_app/559491";
 import { gI } from "../figma_app/399472";
 import { findProfile } from "../figma_app/740025";
 import { isLoaded } from "../905/18797";
@@ -29,7 +29,7 @@ async function m(e) {
   let {
     loadingState
   } = debugState.getState();
-  isLoaded(loadingState, a8.loadingKeyForPayload(e)) || (await debugState.dispatch(gI()));
+  isLoaded(loadingState, getOrgPublishedWidgetsThunk.loadingKeyForPayload(e)) || (await debugState.dispatch(gI()));
 }
 export function $$h2(e, t) {
   if (hasLocalFileId(e)) return !1;

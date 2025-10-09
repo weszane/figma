@@ -35,7 +35,7 @@ import { A as _$$A2 } from "../6828/903761";
 import { isWidget, ResourceTypeNoComment } from "../figma_app/45218";
 import { PluginInstallStatus } from "../figma_app/155287";
 import { DropdownEnableState } from "../figma_app/188152";
-import { a6 } from "../figma_app/198840";
+import { getHubFileVersionOrDefault } from "../figma_app/198840";
 import { getPluginMetadata, getPluginVersion } from "../figma_app/300692";
 import { oj, s1, uR } from "../figma_app/304207";
 import { C as _$$C2 } from "../figma_app/382445";
@@ -351,7 +351,7 @@ export function $$eb5({
   let _ = eT(e, s);
   let h = s ?? !!e.roles.is_public;
   let m = selectCurrentUser();
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let y = e.publisher || e.creator;
   let T = jsx("div", {
     className: gx,
@@ -727,7 +727,7 @@ $$ev7.defaultProps = {
       });
     }
     render() {
-      let e = a6(this.props.hubFile);
+      let e = getHubFileVersionOrDefault(this.props.hubFile);
       return jsx("div", {
         className: Yt,
         children: jsx("div", {

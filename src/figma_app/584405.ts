@@ -10,12 +10,12 @@ import { sf } from '../figma_app/646031';
 import { kA } from '../figma_app/726579';
 import { Kk, u2, Ut, v4 } from '../figma_app/761118';
 import { FR, td } from '../figma_app/827216';
-import { pN } from '../figma_app/852050';
+import { getSubscribedVariablesResource } from '../figma_app/852050';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { F7, yU } from '../figma_app/908460';
 export function $$E6() {
   let e = Xr(v4);
-  let t = pN();
+  let t = getSubscribedVariablesResource();
   let r = t.data?.libraryVariables;
   let s = t.data?.libraryVariableSets;
   let o = useAtomWithSubscription(Ut);

@@ -586,7 +586,7 @@ function em(e) {
   });
 }
 export function $$eg7(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = isDevHandoffEditorType();
   let o = Fj(e.color.dsStyle.value.key);
   let l = e.color.dsStyle.kind;

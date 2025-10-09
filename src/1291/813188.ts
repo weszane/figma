@@ -76,7 +76,7 @@ export function $$I0(e) {
   let $ = isWhiteboardFileType();
   let I = useIsSelectedViewFullscreenCooper();
   let L = t === rp.THIN_2_COL || t === rp.THIN_3_COL ? 4 : 8;
-  let A = useDispatch();
+  let A = useDispatch<AppDispatch>();
   let R = f ? Du : Vq(h.activeTab);
   let [M, F] = useState(!1);
   let [z, O] = useState(width);
@@ -195,7 +195,7 @@ export function $$P1() {
   let e = useDropdownState();
   let t = liveStoreInstance.File.useValue(e?.data?.fileKey).data;
   let s = cX().setSelectedCategory;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   if (e?.type !== B || !t) return null;
   let r = t.library_key;
   return r ? jsx(L, {

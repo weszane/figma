@@ -845,7 +845,7 @@ function e6({
   rdpImpressionId: t,
   openLightboxRDP: r
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = getCurrentVersion(e);
   let o = e.thumbnail_url;
   let l = !!e.thumbnail_is_set;
@@ -885,7 +885,7 @@ function te({
   rdpImpressionId: t,
   openLightboxRDP: r
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = getCurrentVersion(e);
   let o = n.redirect_icon_url;
   let a = buildCommunityPathById({
@@ -918,7 +918,7 @@ function tt({
   rdpImpressionId: t,
   openLightboxRDP: r
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = getCurrentVersion(e);
   let o = n.redirect_snapshot_url;
   let a = buildCommunityPathById({

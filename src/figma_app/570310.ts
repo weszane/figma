@@ -98,7 +98,7 @@ function eS({
   }
 }
 function ev() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsxs("ol", {
     role: "list",
     className: Gg,
@@ -211,7 +211,7 @@ function ev() {
   });
 }
 function eA() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsxs("ol", {
     role: "list",
     className: Gg,
@@ -361,7 +361,7 @@ function eA() {
   });
 }
 function ex() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsxs("ol", {
     role: "list",
     className: Gg,
@@ -516,7 +516,7 @@ dependencies {
   });
 }
 function eN() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsxs("ol", {
     role: "list",
     className: Gg,
@@ -631,7 +631,7 @@ function eN() {
 let eC = registerModal(function (e) {
   let [t, r] = useState("React");
   let s = trackDefinedFileEventWithStore();
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useCallback(e => {
     "HTML" !== e && s("code_connect.connect_to_codebase.language_selected", {
       language: e.toLowerCase()
@@ -877,7 +877,7 @@ function eG({
   });
 }
 function eV() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsxs("div", {
     className: "figmadocs--emptyCodeConnectCard--UrWur",
     children: [jsx("div", {
@@ -1164,14 +1164,14 @@ function eJ({
 }) {
   let t = !!getFeatureFlags().dt_ccv2;
   let r = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return useCallback(() => {
       e(showModalHandler({
         type: eC
       }));
     }, [e]);
   }();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = selectUserFlag(eq);
   let l = useCallback(() => {
     s(postUserFlag({
@@ -1242,7 +1242,7 @@ export function $$eQ0({
     willHaveCodeConnect,
     isComponentBrowserMapping
   } = getCodeConnectForNode(c, o, selectedLabel, e ? _ : void 0);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let N = useDropdownState();
   let C = useAtomWithSubscription($$e$2);
   useEffect(() => {

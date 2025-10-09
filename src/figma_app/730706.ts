@@ -30,9 +30,9 @@ export function $$y0() {
 function b() {
   let e = I();
   let t = Ne();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   if (function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = I();
     let r = Ne();
     let n = useCallback(() => o$(e), [e]);
@@ -59,7 +59,7 @@ function b() {
   };
 }
 export function $$T2() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = I();
   let r = useCallback(() => {
     o$(e);

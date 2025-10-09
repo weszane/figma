@@ -387,7 +387,7 @@ function eS() {
     classNameEditingController,
     directManipulationEditor
   } = ef();
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
   let p = parseInt(c["border-top-left-radius"] ?? "0", 10);
   let u = parseInt(c["border-top-right-radius"] ?? "0", 10);
@@ -707,7 +707,7 @@ function eF({
     currentTool: e.mirror.appModel.currentTool,
     dropdownShown: e.dropdownShown
   }));
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useRef(null);
   return r ? jsx("div", {
     className: n1,
@@ -820,7 +820,7 @@ function e9() {
   let d = createRef();
   let c = xF();
   let p = useMemo(() => getFontStyleMapping(c), [c]);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let h = Xo();
   let m = "sans-serif";
   let x = a["font-family"];
@@ -1169,7 +1169,7 @@ function ty() {
       ...t
     }, o);
   }, [U]);
-  let K = useDispatch();
+  let K = useDispatch<AppDispatch>();
   return jsx(eg, {
     children: jsxs("div", {
       className: "x78zum5 xdt5ytf xc7ga6q xy13l1i x167g77z xafpxmx x9f619",
@@ -2542,7 +2542,7 @@ function nT({
     deferToFrame: !0
   }).snippet;
   let v = useRef(!1);
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   let C = useCallback(e => {
     if (v.current) return;
     v.current = !0;

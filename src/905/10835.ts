@@ -19,7 +19,7 @@ export function $$h1() {
   })
 }
 export function $$g0() {
-  let e = useDispatch()
+  let e = useDispatch<AppDispatch>()
   let t = selectCurrentFile()
   let i = useSelector<AppState>(e => e.fileVersion)
   return t?.key

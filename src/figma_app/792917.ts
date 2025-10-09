@@ -31,7 +31,7 @@ let $$N0 = registerModal(function (e) {
   let [c, h] = useState(!1);
   let [f, b] = useState(null);
   let [S, x] = useState("");
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let O = () => {
     N(showModalHandler({
       type: C,
@@ -139,7 +139,7 @@ let C = registerModal(function (e) {
   let {
     user
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return jsxs(ModalView, {
     size: "small",
     hide: noop,

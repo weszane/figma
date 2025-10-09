@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { sz } from "../figma_app/216696";
 import { TrackingProvider } from "../figma_app/831799";
 import { eE, Fz } from "../figma_app/106207";
-import { RD } from "../figma_app/198840";
+import { FileTypeSwitch } from "../figma_app/198840";
 import { useIsLoaded, useIsLoading } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt } from "../figma_app/979658";
@@ -76,7 +76,7 @@ function C() {
       })]
     }), jsx(_$$g, {
       templates: teamTemplates,
-      templateInsertionLocation: RD.CURRENT_FILE
+      templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
     })]
   }) : null : null;
 }
@@ -95,7 +95,7 @@ function $() {
         })
       }), jsx(_$$g, {
         templates: t,
-        templateInsertionLocation: RD.CURRENT_FILE
+        templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
       })]
     }) : jsx(Fragment, {})
   });
@@ -124,7 +124,7 @@ export function $$I0(e) {
             template: s,
             type: _$$n.HubFile
           },
-          templateInsertionLocation: RD.CURRENT_FILE,
+          templateInsertionLocation: FileTypeSwitch.CURRENT_FILE,
           triggeredFrom: "universal-insert-figjam-templates",
           isInsertingTemplate: isInsertingTemplate(s.id),
           onClickTitle: () => e.setPreviewHubFile({

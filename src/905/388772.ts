@@ -6,7 +6,7 @@ import { s as _$$s } from "../905/518538";
 export function $$l0(e) {
   let t = _$$s();
   let i = useContext(viewportNavigatorContext);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return useCallback(n => {
     l(activateCommentThreadInternal({
       thread: n,

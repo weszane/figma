@@ -10,7 +10,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey, useHandleMouseEvent, useHandleGenericEvent, useHandleInputEvent } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { EditorPreferencesApi } from "../figma_app/740163";
-import { wX, lC, yp, G6, EP, pN, lO, L5, rN, U6, x9, mm } from "../figma_app/852050";
+import { getLocalVariablesByIds, getLocalVariableSetById, getSortedLocalVariableSets, getCombinedVariableSetById, getLibraryNameForVariableSet, getSubscribedVariablesResource, getSubscribedVariableSets, getEffectiveVariableSet, getVariableTableDataForSet, getVariablesForSet, getOverridesForSet, useVariableActions } from "../figma_app/852050";
 import { useDropdown, useDropdownState } from "../905/848862";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { ClipboardOperation } from "../figma_app/915202";
@@ -596,8 +596,8 @@ let eu = registerModal(function (e) {
     updateCodeSyntaxToken,
     removeCodeSyntaxToken
   } = e;
-  let f = wX(variableIDs).filter(isNotNullish);
-  let _ = lC(variableSetId);
+  let f = getLocalVariablesByIds(variableIDs).filter(isNotNullish);
+  let _ = getLocalVariableSetById(variableSetId);
   if (!_ || !f) return null;
   let A = isExtension(_);
   return jsx(ep, {
@@ -1072,7 +1072,7 @@ function ez(e, t, i, n) {
 }
 let eH = [];
 function eZ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = e.contextMenuData.selectedVariableRows.map(e => e.variable);
   let s = conditionalValue(useCallback(() => {
     if (!N3(i)) {
@@ -1339,7 +1339,7 @@ function tx({
   close: e,
   initialPosition: t
 }) {
-  let i = yp();
+  let i = getSortedLocalVariableSets();
   let a = i.map(e => e.node_id);
   let s = useRef(null);
   let [o, l] = useState(!1);
@@ -1507,7 +1507,7 @@ function tk({
     toggle,
     hide
   } = useDropdown("variable-modal-set-options");
-  let h = yp();
+  let h = getSortedLocalVariableSets();
   let _ = conditionalValue(useHandleMouseEvent(generateRecordingKey(d, "createVariableSet"), "click", () => {
     a && t && (o(a()), t(!0), hide());
   }), !!a);
@@ -1588,11 +1588,11 @@ function tP({
   onChangeVariableSet: i,
   recordingKey: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useDropdownState();
-  let d = yp();
-  let c = G6(isExtension(e) ? e.backingVariableSetId : void 0);
-  let u = EP(c);
+  let d = getSortedLocalVariableSets();
+  let c = getCombinedVariableSetById(isExtension(e) ? e.backingVariableSetId : void 0);
+  let u = getLibraryNameForVariableSet(c);
   let m = d.length > 1;
   let h = useMemo(() => ({
     format: e => t ? `${e.name} (${e.node_id})` : e.name,
@@ -1692,11 +1692,11 @@ function tj({
   onChangeVariableSet: t,
   onCreateVariableSetExtension: i
 }) {
-  let r = pN();
+  let r = getSubscribedVariablesResource();
   let a = "loaded" !== r.status;
   r.data?.libraryVariables;
   let s = r.data?.libraryVariableSets ?? [];
-  let o = yp();
+  let o = getSortedLocalVariableSets();
   return a ? jsx("div", {
     children: renderI18nText("variables.authoring_modal.sidebar.loading")
   }) : jsxs(Fragment, {
@@ -2280,7 +2280,7 @@ function ie({
   setIsDragging: j,
   isDraggable: U
 }) {
-  let B = useDispatch();
+  let B = useDispatch<AppDispatch>();
   let {
     isResizing
   } = useAtomWithSubscription(columnResizeAtom);
@@ -2558,7 +2558,7 @@ function it({
     e.target.closest(".modeSelectable") || $(null);
   }, []);
   let X = useRef(w);
-  let Q = useDispatch();
+  let Q = useDispatch<AppDispatch>();
   useEffect(() => {
     X.current.node_id === w.node_id && X.current.defaultModeID !== w.defaultModeID && (Q(VisualBellActions.enqueue({
       type: "default-mode-changed",
@@ -3715,11 +3715,11 @@ export let $$i50 = registerModal(function () {
     },
     actions
   } = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useSelector(e => e.modalShown);
-    let n = yp();
-    let s = Object.values(lO());
-    let d = pN();
+    let n = getSortedLocalVariableSets();
+    let s = Object.values(getSubscribedVariableSets());
+    let d = getSubscribedVariablesResource();
     let c = d.data?.libraryVariableSets ?? eH;
     let [u, m] = function ({
       localVariableSets: e,
@@ -3740,9 +3740,9 @@ export let $$i50 = registerModal(function () {
       readOnly: "READ_ONLY" === e || !f,
       variableSetType: h ? "extension" : "root"
     }), [e, f, h]);
-    let A = L5(u);
-    let b = rN(u?.node_id ?? "");
-    let v = U6(A?.node_id ?? "").filter(e => !e.isSoftDeleted);
+    let A = getEffectiveVariableSet(u);
+    let b = getVariableTableDataForSet(u?.node_id ?? "");
+    let v = getVariablesForSet(A?.node_id ?? "").filter(e => !e.isSoftDeleted);
     h && (v = v.map(e => {
       let t = b[e.node_id];
       return {
@@ -3752,7 +3752,7 @@ export let $$i50 = registerModal(function () {
         })
       };
     }));
-    let I = x9(u && isExtension(u) ? u?.node_id ?? "" : "");
+    let I = getOverridesForSet(u && isExtension(u) ? u?.node_id ?? "" : "");
     let E = useMemo(() => buildVariableHierarchy(v), [v]);
     let [x, S] = useState([]);
     let [w, C] = useState(new Map());
@@ -3774,7 +3774,7 @@ export let $$i50 = registerModal(function () {
     }), [E, v]);
     let U = wp();
     let B = jv();
-    let V = mm();
+    let V = useVariableActions();
     return useMemo(() => {
       let e = ez(() => (e, t) => permissionScopeHandler.user("rename-variable", () => VariablesBindings.renameVariable(e, normalizePath(t))) ? (fullscreenValue.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable", {
         variableID: e
@@ -4240,7 +4240,7 @@ export let $$i50 = registerModal(function () {
       ...N
     });
   }, [H, N]);
-  let en = yp().length > 0;
+  let en = getSortedLocalVariableSets().length > 0;
   let {
     tableRowItems,
     tableRowItemsEmptyReason,

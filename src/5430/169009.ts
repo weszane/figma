@@ -21,7 +21,7 @@ import { Zl, getResourceType } from "../figma_app/427318";
 import { hJ, XY } from "../905/506641";
 import { setCommentsActiveFeedType, restrictProfileThunk, unrestrictProfileThunk, followEntityThunk, unfollowEntityThunk, fetchCommentsThunk, setCommentStateThunk, resetCommentState } from "../figma_app/530167";
 import { COMMUNITY_TIMEOUT } from "../figma_app/350203";
-import { t0 } from "../figma_app/198840";
+import { isFullscreenPreviewMode } from "../figma_app/198840";
 import { CommentTabType, ResourceTypeNoComment } from "../figma_app/45218";
 import { E as _$$E, d as _$$d } from "../5430/165157";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -95,7 +95,7 @@ let M = function ({
   includeShowResolved: t,
   isLoggedIn: r
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = useDropdownState();
   let a = useSelector(e => e.communityHub.comments.activeFeedType);
   let l = useSelector(e => e.communityHub.comments.showResolved);
@@ -280,7 +280,7 @@ function ex(e) {
   };
 }
 function ef(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentUser();
   let n = Zl[e.resourceType];
   let o = e.resourceId;
@@ -535,7 +535,7 @@ function eI(e) {
   let [m, _] = useState(!1);
   let p = useRef(null);
   let h = useSelector(e => e.dropdownShown);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let [f, v] = useState(!1);
   let [b, j] = useState(null);
   let w = useCallback(() => {
@@ -878,14 +878,14 @@ eN.displayName = "CommentTile";
 let ek = !1;
 function eA(e) {
   let t;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = selectCurrentUser();
   let [a, _] = useState(!1);
   let [p, I] = useState(!1);
   let N = isResourceHubContext();
   let [E, S] = useState(!0);
   let R = useRef(null);
-  let A = useSelector(e => "communityHub" === e.selectedView.view && "hubFile" === e.selectedView.subView && e.selectedView.fullscreenState && t0(e.selectedView.fullscreenState));
+  let A = useSelector(e => "communityHub" === e.selectedView.view && "hubFile" === e.selectedView.subView && e.selectedView.fullscreenState && isFullscreenPreviewMode(e.selectedView.fullscreenState));
   let P = useSelector(e => e.communityHub.comments.activeFeedType);
   let B = useSelector(e => e.communityHub.comments.feeds);
   let {

@@ -73,7 +73,7 @@ function R({
   recordingKey: r,
   isDevMode: s
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let [d, p] = useState(!1);
   let _ = selectCurrentUser();
   let h = useSubscription(OpenEditorFileData, {

@@ -6,7 +6,7 @@ import { selectViewAction } from "../905/929976";
 import { getPluginVersion } from "../figma_app/300692";
 import { generateCommunityWidgetUrl } from "../figma_app/870683";
 export function $$c0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return useCallback((t, i) => {
     let n = getPluginVersion(t)?.name;
     if (i?.stopPropagation(), isCommandOrShift(i)) {

@@ -461,7 +461,7 @@ function eo({
     setPositionAndRun
   } = useContext(_$$u);
   let s = useAtomWithSubscription(iV(ExtensionFeatureKey.REWRITE));
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useRef(null);
   x(d, {
     numCols: 2

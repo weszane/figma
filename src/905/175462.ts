@@ -1,5 +1,5 @@
 import { trimOrEmpty } from "../figma_app/740025";
-import { a6 } from "../figma_app/198840";
+import { getHubFileVersionOrDefault } from "../figma_app/198840";
 import { getCurrentPluginVersion } from "../figma_app/300692";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 let $$o0 = 100;
@@ -11,7 +11,7 @@ let $$l1 = {
     localExtension: i,
     defaultName: n
   }) => t && function (e) {
-    return "name" in e ? e.name : isWidgetOrPlugin(e) ? getCurrentPluginVersion(e)?.name || "" : a6(e).name;
+    return "name" in e ? e.name : isWidgetOrPlugin(e) ? getCurrentPluginVersion(e)?.name || "" : getHubFileVersionOrDefault(e).name;
   }(t) || n || i?.manifest.name || e?.name || "",
   validate: ({}, e) => {
     let t = trimOrEmpty(e);

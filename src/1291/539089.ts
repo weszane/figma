@@ -14,7 +14,7 @@ import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { fC } from "../figma_app/968813";
+import { FETCH_FIGJAM_DEFAULT_INSERTS } from "../figma_app/968813";
 import { fi, zK } from "../figma_app/913823";
 import { TrackingProvider } from "../figma_app/831799";
 import { u as _$$u } from "../905/389684";
@@ -303,7 +303,7 @@ export function $$eo1({
   } = g5(t);
   let ee = ik(productComponents, "components", (e, t) => !t.some(t => t.id === e.id), Y ? 9 : 10);
   let eo = useIsLoading(fi);
-  let el = mk(ee, [!eo, useIsLoaded(fC)]);
+  let el = mk(ee, [!eo, useIsLoaded(FETCH_FIGJAM_DEFAULT_INSERTS)]);
   let ed = el.length > 0 || !s;
   let ec = (!V.query || !e) && getInitialOptions().user_data;
   let em = cX().setSelectedCategory;
@@ -478,7 +478,7 @@ export function $$ed2({
   }) : null;
 }
 export function $$ec0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentFile();
   let {
     fileVersion,
@@ -495,7 +495,7 @@ export function $$ec0() {
     productComponents
   } = g5(FDocumentType.FigJam);
   let d = ik(productComponents, "components", (e, t) => !t.some(t => t.id === e.id), 10);
-  let c = mk(d, [useIsLoaded(fi), useIsLoaded(fC)]);
+  let c = mk(d, [useIsLoaded(fi), useIsLoaded(FETCH_FIGJAM_DEFAULT_INSERTS)]);
   return jsx(lU, {
     items: {
       "": c

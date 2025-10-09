@@ -8,7 +8,7 @@ import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { getResourceTypeLabel, mapVtResourceType } from "../figma_app/471982";
 import { hasContent, hasHubFile, isWidgetResource, getMainContent, getResourceType } from "../figma_app/427318";
 import { resourceDetailQuery } from "../905/909123";
-import { zm, Qi } from "../figma_app/49598";
+import { likeHubFileThunk, unlikeHubFileThunk } from "../figma_app/49598";
 import { C as _$$C, $ } from "../figma_app/382445";
 import { showModalHandler } from "../905/156213";
 import { HubAction, HubEventType } from "../figma_app/350203";
@@ -20,11 +20,11 @@ import { a as _$$a } from "../figma_app/601188";
 import { COMMUNITY_OPT_IN_MODAL_NAME, CommunityOnboardingVariation } from "../figma_app/588092";
 export function $$$$w0(e, t, r, m) {
   let g = function (e, t, r, i) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let o = selectCurrentUser();
     let a = getSearchSessionIdFromSelector();
     let l = () => {
-      hasContent(e) || (logAndTrackCTA(b()), hasClientMeta(e) ? n(zm({
+      hasContent(e) || (logAndTrackCTA(b()), hasClientMeta(e) ? n(likeHubFileThunk({
         hubFileId: e.id
       })) : isWidget(e) ? n(_$$C({
         id: e.id,
@@ -54,7 +54,7 @@ export function $$$$w0(e, t, r, m) {
       if (!hasContent(e)) {
         if (t.stopPropagation(), !o) throw Error(`Tried to unlike a ${getResourceTypeLabel(e)} as a signed out user`);
         logAndTrackCTA(b());
-        hasClientMeta(e) ? n(Qi({
+        hasClientMeta(e) ? n(unlikeHubFileThunk({
           hubFileId: e.id,
           likeId: r || void 0
         })) : isWidget(e) ? n($({
@@ -80,7 +80,7 @@ export function $$$$w0(e, t, r, m) {
     };
   }(e, t, r, m);
   let b = function (e, t, r, m) {
-    let _ = useDispatch();
+    let _ = useDispatch<AppDispatch>();
     let p = selectCurrentUser();
     let g = getSearchSessionIdFromSelector();
     let v = getAtomMutate(C);

@@ -7,7 +7,7 @@ import { $E, y1 } from "../905/445814";
 import { openUrlInContext } from "../figma_app/976345";
 import { copyViewLinkThunk } from "../figma_app/11182";
 import { fetchFileByKeyOptimistic } from "../figma_app/78808";
-import { y as _$$y } from "../figma_app/705249";
+import { isXrDebounceThresholdEnabled } from "../figma_app/705249";
 import { stylizeMessageMeta, serializeUser } from "../figma_app/12220";
 import { N } from "../figma_app/261650";
 import { useSceneGraphSelector } from "../figma_app/722362";
@@ -45,7 +45,7 @@ export function $$k2({
   return `${location.origin}/proto/${t}?${a}`;
 }
 export function $$R6(e, t, i) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = t.find(e => e.type === cM.NODE || e.type === cM.PROTOTYPE);
   let l = (s ? s.fileKey : void 0) || i;
   useEffect(() => {
@@ -94,7 +94,7 @@ export function $$R6(e, t, i) {
 }
 export var $$N4 = (e => (e.TILE = "tile", e.DETAIL = "detail", e))($$N4 || {});
 export function $$P0(e, t) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return useCallback(() => {
     trackEventAnalytics("Team Feed Copy Link Clicked", {
       postUuid: e,
@@ -127,7 +127,7 @@ export function $$O5(e, t, i, r) {
     }
   }, [e.errors]);
   useMemo(() => {
-    if (_$$y() && "loaded" === e.status && e.data.file && p?.get) {
+    if (isXrDebounceThresholdEnabled() && "loaded" === e.status && e.data.file && p?.get) {
       let t = e.data.file.feedPosts;
       let n = t.filter(e => !!e.org && !!v && C(y, v, e.org.id));
       let o = N(n);

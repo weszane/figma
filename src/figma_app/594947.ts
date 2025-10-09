@@ -108,7 +108,7 @@ export function useUserFlagExperimentConfig(
     deviceValue,
     useAtomWithSubscription(userFlagAtom).data || false,
   )
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   /**
    * Returns experiment config and dispatches user flag update.

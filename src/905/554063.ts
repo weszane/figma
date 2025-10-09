@@ -13,7 +13,7 @@ import { MAX_PUBLISHERS_PER_RESOURCE } from "../figma_app/740025";
 import { isUserWorkspace } from "../figma_app/599979";
 import { CommunityMentionsLibrary } from "../905/772425";
 import { SimpleFuseSearch } from "../905/81982";
-import { d as _$$d } from "../905/44199";
+import { baseErrorSeverity } from "../905/44199";
 import { P as _$$P } from "../905/392438";
 import { FieldContainer } from "../905/567946";
 let v = "cocreators_input--profilePrimaryText--AdeJZ autocomplete_permissions--name--62sCS ellipsis--ellipsis--Tjyfa";
@@ -55,7 +55,7 @@ export function $$S0({
     inputValue: "",
     tokens: getFieldValueOrDefault(e, []).map(e => ({
       content: e,
-      state: _$$d.OK
+      state: baseErrorSeverity.OK
     })),
     errorMessage: ""
   });
@@ -75,7 +75,7 @@ export function $$S0({
       ...e,
       tokens: t.map(e => ({
         content: e,
-        state: _$$d.OK
+        state: baseErrorSeverity.OK
       }))
     }));
   }, [e.currentValue]), e.currentValue === unsetSymbol || I && !canSetFieldValue(e)) ? null : jsx(FieldContainer, {

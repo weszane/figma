@@ -47,7 +47,7 @@ let $$A0 = {
     "data-onboarding-key": FM,
     children: jsx(function () {
       let e = useCurrentFileKey();
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       let r = useCallback(() => {
         let r = `${getInitialOptions().figma_url}/deck/${e}`;
         navigator.clipboard.writeText(r);

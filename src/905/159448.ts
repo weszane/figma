@@ -9,7 +9,7 @@ import { getI18nString } from "../905/303541";
 import { hideMobileNav, showMobileNav } from "../905/34809";
 import { KindEnum } from "../905/129884";
 export function $$p0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(({
     mobileNavShown: e
   }) => e);

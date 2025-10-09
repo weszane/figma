@@ -128,7 +128,7 @@ let $$L0 = connect(e => ({
   });
 });
 function D(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = "team-link-settings-dropdown";
   let n = createRef();
   let o = () => e.dropdownShown?.type === r;
@@ -172,7 +172,7 @@ function D(e) {
   });
 }
 function M(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = "join-link-permission-level-dropdown";
   let s = e.currentLevel === AccessLevelEnum.VIEWER ? "-32px" : "-61px";
   let n = jsxs("div", {
@@ -250,7 +250,7 @@ function B(e) {
 }
 let U = "RESET_LINKS_CONFIRMATION_MODAL";
 registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useModalManager(e);
   return jsx(ModalRootComponent, {
     width: "md",

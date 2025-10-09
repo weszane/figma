@@ -127,7 +127,7 @@ export function $$F1(t) {
   let Y = !!X;
   let G = X?.prototype_url;
   let Q = useSelector(t => t.mirror.appModel.urlNodeId);
-  let q = useDispatch();
+  let q = useDispatch<AppDispatch>();
   let J = useCallback(() => {
     F(!1);
   }, []);

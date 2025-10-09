@@ -165,7 +165,7 @@ function M(e) {
     secondaryButtonText,
     secondaryAction
   } = i;
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     trackEventAnalytics("Merge Error Modal Shown", {
       view: $$P1[e.view],

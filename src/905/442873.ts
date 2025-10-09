@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { convertKiwiToString, convertStringToKiwi } from "../905/537777";
 import { generateVariableSetThumbnailUrl, getVariableThumbnail, loadVariableSetThumbnails } from "../905/711212";
 import { teamLibraryCache } from "../figma_app/80990";
-import { BQ } from "../figma_app/852050";
+import { getResolvedVariableValue } from "../figma_app/852050";
 import { isLocalOrSubscribed } from "../figma_app/633080";
 import { Px } from "../figma_app/152690";
 export function $$u1({
@@ -25,9 +25,9 @@ export function $$p0({
   variable: e,
   variableCollection: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = isLocalOrSubscribed(e);
-  let p = BQ(o ? e.node_id : void 0);
+  let p = getResolvedVariableValue(o ? e.node_id : void 0);
   let m = Px();
   let h = convertStringToKiwi(t.node_id);
   h || console.error(`Invalid variableId in loading thumbnails: ${t.id}`);

@@ -18,7 +18,7 @@ export function $$f1(e) {
     profileHandle,
     emptyStateText
   } = e;
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let [f, E] = useState([]);
   let [y, b] = useState(!1);
   useEffect(() => {

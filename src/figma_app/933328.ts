@@ -1934,7 +1934,7 @@ export const getLibraryInfoV2 = liveStoreInstance.Query({
  */
 export function useLibraryInfo(params: any, options: any = {}): any {
   const queryResult = setupResourceAtomHandler(getLibraryInfo(params), options)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const [data] = queryResult
   const setAtom = useSetAtom(setLibrariesAtom)
   handleStatusChangeEffect(data, (result: any) => {

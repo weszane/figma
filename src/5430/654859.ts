@@ -374,7 +374,7 @@ export function $$K0(e) {
     selectedIdx,
     setSelectedIdx
   } = _$$W(context);
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let j = getSearchSessionIdFromSelector(!0);
   let w = useIsResourceHub();
   let C = useCallback(() => {

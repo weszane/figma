@@ -29,7 +29,7 @@ export function $$f1({
   currentTool: g,
   dropdownShown: f
 }) {
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   return jsx("div", {
     className: l()(n1, {
       [z]: "light" === r,

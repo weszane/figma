@@ -40,10 +40,10 @@ import { trackEventAnalytics } from "../905/449184";
 import { whiteColor, getColorBrightness } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
-import { sw, rk } from "../figma_app/914957";
+import { hideStylePreview, showStylePreviewThunk } from "../figma_app/914957";
 import { Yr } from "../figma_app/8833";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { bL as _$$bL2 } from "../figma_app/852050";
+import { getModeValue } from "../figma_app/852050";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../figma_app/905311";
@@ -312,7 +312,7 @@ function ey({
   onMouseUp: A,
   onMouseMove: y
 }) {
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let I = createRef();
   let E = bf(t);
   let {
@@ -337,10 +337,10 @@ function ey({
     (void 0 === k || k && !C) && N.flush();
   }, [k, C, N]);
   let P = useCallback(() => {
-    if (E) b(sw());else if (R) Fullscreen?.findMissingFontsAndShowPopover();else if (I.current) {
+    if (E) b(hideStylePreview());else if (R) Fullscreen?.findMissingFontsAndShowPopover();else if (I.current) {
       Fullscreen?.selectStyleByGuid(t.node_id);
       let e = I.current.getBoundingClientRect();
-      b(rk({
+      b(showStylePreviewThunk({
         style: t,
         rowTop: e.y,
         rowLeft: e.x
@@ -352,7 +352,7 @@ function ey({
     m && !O.current && (P(), O.current = !0);
   }, [m, P]);
   useEffect(() => () => {
-    b(sw());
+    b(hideStylePreview());
   }, [b]);
   let D = generateRecordingKey(c, "textStyleRow", t.node_id);
   return jsx(RecordableDiv, {
@@ -485,7 +485,7 @@ function ex({
   let [o, c] = useAtomValueAndSetter(E_);
   let u = useLatestRef(o);
   let m = function (e, t) {
-    let i = _$$bL2(e?.varId ?? "", t);
+    let i = getModeValue(e?.varId ?? "", t);
     return i && i.type === VariableDataType.COLOR ? i : null;
   }(o, s);
   let h = useMemo(() => {
@@ -497,7 +497,7 @@ function ex({
     openColorPicker,
     closeColorPicker
   } = function (e, t) {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     return {
       openColorPicker: useCallback(() => {
         if (e) return !1;

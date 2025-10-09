@@ -49,7 +49,7 @@ import { BannerButton } from "../905/692618";
 import { Link } from "../905/438674";
 import { _ as _$$_ } from "../905/574895";
 import { Vq, EX, Wh, Rc, nT, J9, Fh, Kc, bo, Gl } from "../905/448740";
-import { Qi, uT, n1, se, fd } from "../figma_app/559491";
+import { mergePublishedPluginThunk, uploadPluginCode, parseUploadError, unpublishedPluginsQuery, unpublishedWidgetsQuery } from "../figma_app/559491";
 import { showModalHandler, hideModal } from "../905/156213";
 import { generatePluginId, getCurrentPluginVersion, getLocalFileId, getOrgRole, validatePluginCodeSize, validateExtensionIconImage, hasRoleOrOrgChanged, mapToFileType, loadPluginManifest, loadLocalPluginSource, validateAndResizeIconImage, getPublishedResourceOrNull } from "../figma_app/300692";
 import { HubTypeEnum, FileInputType, PaymentType, ResourceTypeNoComment } from "../figma_app/45218";
@@ -363,7 +363,7 @@ function e_({
 function eA({
   localExtension: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = renderI18nText("community.publishing.failed_to_read_file", {
     filename: "manifest.json"
   });
@@ -389,12 +389,12 @@ function ey({
   isWidget: r,
   localExtension: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = async () => {
     if (!s) return;
     let e = r ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN;
     let i = await generatePluginId(e);
-    o(Qi({
+    o(mergePublishedPluginThunk({
       publishedPlugins: [i],
       src: "generatePluginId"
     }));
@@ -969,7 +969,7 @@ let tu = forwardRef(function ({
       u.current ? u.current.focus(e) : p.current?.focus(e);
     }
   }), []);
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let h = getValidationErrors(e, !1);
   let g = findFirstResult(h, tc);
   if (!canSetFieldValue(e)) return null;
@@ -1511,7 +1511,7 @@ async function ii(e) {
     imagePaths,
     code
   } = e;
-  code && "codeUploadUrl" in imagePaths && (t = uT(imagePaths.codeUploadUrl, code), validatePluginCodeSize(code));
+  code && "codeUploadUrl" in imagePaths && (t = uploadPluginCode(imagePaths.codeUploadUrl, code), validatePluginCodeSize(code));
   let d = assertFieldReady(icon).currentValue?.buffer;
   if (null != d) {
     i = uploadBlobWithPresignedUrl(imagePaths.iconUploadUrl, d);
@@ -2371,7 +2371,7 @@ let ic = setupFormValidationHandler({
         code: c
       });
     } catch (e) {
-      if (reportError(ServiceCategories.COMMUNITY, e), n1(e)) return new withSubmissionError.SubmissionError({
+      if (reportError(ServiceCategories.COMMUNITY, e), parseUploadError(e)) return new withSubmissionError.SubmissionError({
         key: "ERROR_FILE_TOO_LARGE",
         data: {
           rawError: e
@@ -2521,7 +2521,7 @@ let ic = setupFormValidationHandler({
       manifest: u,
       code: c
     });
-    debugState.dispatch(Qi({
+    debugState.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [m],
       src: "updatePublishedPlugin"
     }));
@@ -2559,7 +2559,7 @@ function iM({
   var i;
   let s;
   let o;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let {
     trackEvent
   } = useTracking();
@@ -2697,7 +2697,7 @@ function iM({
     };
   }(e.fieldStates.snapshot, e.deps.widgetSnapshotPromise);
   let F = function (e, t, i) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let {
       trackEvent: _trackEvent2
     } = useTracking();
@@ -3452,13 +3452,13 @@ let $$iU0 = registerModal(function (e) {
   let [{
     status: p,
     data: m
-  }] = setupResourceAtomHandler(se(), {
+  }] = setupResourceAtomHandler(unpublishedPluginsQuery(), {
     enabled: c
   });
   let [{
     status: h,
     data: g
-  }] = setupResourceAtomHandler(fd(), {
+  }] = setupResourceAtomHandler(unpublishedWidgetsQuery(), {
     enabled: c
   });
   let f = getPublishedResourceOrNull(m ?? void 0, g ?? void 0, r) ?? void 0;

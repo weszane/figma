@@ -19,7 +19,7 @@ import { az } from "../figma_app/805373";
 import { lM } from "../figma_app/392626";
 let s;
 function I(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useModalManager(e);
   let s = lM(e.entryPoint);
   let [b, I] = useState();

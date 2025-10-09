@@ -26,9 +26,9 @@ import { k as _$$k3 } from "../905/582200";
 import { Point } from "../905/736624";
 import { ph } from "../figma_app/709893";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { rg } from "../figma_app/401069";
+import { logFileExportThunk } from "../figma_app/401069";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
-import { sw } from "../figma_app/914957";
+import { hideStylePreview } from "../figma_app/914957";
 import { C9 } from "../figma_app/8833";
 import { mz } from "../figma_app/975811";
 import { stopPropagation } from "../figma_app/753501";
@@ -174,7 +174,7 @@ let ex = class e extends PureComponent {
         let n = [this.props.currentPage];
         ImageManager.includeOutsideContents(e) || (n = Object.keys(this.props.sceneGraphSelection));
         Dc(hV.Export, this.props.saveAsState, this.props.dispatch, "export-selected-exportables-direct", n, "export-selected-exportables-direct");
-        this.props.dispatch(rg());
+        this.props.dispatch(logFileExportThunk());
       }
     };
     this.shouldShowAIRenameLayersCheckbox = e => A0(ActionType.EXPORT_FRAME) && (e > 0 || isInvalidValue(this.props.exportSettings)) && (this.props.isSelectionRenamable || this.state.isRenameLayersRunning);
@@ -377,7 +377,7 @@ function eC(e) {
   });
 }
 export function $$ew3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     selectedPropertyType,
     dropdownShown,
@@ -515,7 +515,7 @@ let eF = forwardRef(function ({
   singletonRow: w
 }, O) {
   let L = createRecordingCallback(S);
-  let P = useDispatch();
+  let P = useDispatch<AppDispatch>();
   let D = getFeatureFlags().fpl_select_migration;
   let k = Qu();
   let M = eD.map((e, t) => jsx(eR, {
@@ -769,7 +769,7 @@ function eU(e) {
             initialX: r.x,
             initialY: r.y
           }));
-          e.dispatch(sw());
+          e.dispatch(hideStylePreview());
         }
       },
       pickerShown: s,

@@ -13,7 +13,7 @@ export function $$c2() {
   return useSelector(e => e.pickerShown);
 }
 export function $$u3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = $$c2();
   return useMemo(() => {
     let n = r?.id === e;

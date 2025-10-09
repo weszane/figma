@@ -8,7 +8,7 @@ import { findFirstResult } from "../905/331038";
 import { getValidationErrors } from "../905/113805";
 import { getFieldValueOrDefault } from "../905/497882";
 import { PUBLISHER_INPUT_KEYS, MAX_TAGS_LENGTH } from "../figma_app/740025";
-import { d as _$$d } from "../905/44199";
+import { baseErrorSeverity } from "../905/44199";
 import { BuyerAPIHandler } from "../905/180";
 import { P } from "../905/392438";
 import { FieldContainer } from "../905/567946";
@@ -83,7 +83,7 @@ let $$y0 = forwardRef(function ({
   let R = useMemo(() => ({
     inputValue: T,
     tokens: E.map((e, t) => ({
-      state: w.has(e) && E.indexOf(e) !== t || C.has(e) ? _$$d.ERROR : _$$d.OK,
+      state: w.has(e) && E.indexOf(e) !== t || C.has(e) ? baseErrorSeverity.ERROR : baseErrorSeverity.OK,
       content: {
         text: e
       }

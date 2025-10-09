@@ -7,7 +7,7 @@ import { isValidValue } from "../905/216495";
 import { applyOffsetToViewport } from "../figma_app/62612";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
-import { WH } from "../figma_app/836943";
+import { useStyleInfo } from "../figma_app/836943";
 import { l5 } from "../figma_app/224338";
 import { ie } from "../figma_app/524655";
 export function $$m0() {
@@ -63,7 +63,7 @@ export function $$b4() {
     inheritTextStyleKey: e.mirror.selectionProperties.inheritTextStyleKey || null,
     styleIdForText: e.mirror.selectionProperties.styleIdForText || null
   }));
-  let r = WH(inheritTextStyleKey, styleIdForText, "TEXT");
+  let r = useStyleInfo(inheritTextStyleKey, styleIdForText, "TEXT");
   return isValidValue(styleIdForText) && null === r;
 }
 export const CC = $$m0;

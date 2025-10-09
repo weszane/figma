@@ -19,7 +19,7 @@ import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { handleErrorWithToast } from "../figma_app/345997";
-import { Rs } from "../figma_app/761870";
+import { getInitialAutocompleteState } from "../figma_app/761870";
 import { fm, X4, Cn, by, UI } from "../c5e2cae0/453906";
 import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
@@ -29,7 +29,7 @@ import { UserAvatar, AvatarSize } from "../905/590952";
 import { getOrgAdminsAction } from "../figma_app/990058";
 import { fetchTeamUsers } from "../905/584989";
 import { SimpleFuseSearch } from "../905/81982";
-import { d as _$$d } from "../905/44199";
+import { baseErrorSeverity } from "../905/44199";
 import { organizationAPIService } from "../figma_app/617654";
 import { teamAPIClient } from "../905/834575";
 import { P as _$$P } from "../905/392438";
@@ -60,7 +60,7 @@ function F(e) {
   });
 }
 function $$q(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     planId,
     planType,
@@ -85,9 +85,9 @@ function $$q(e) {
     m(t);
     let a = t.filter(e => null != e.email && initialEmails.includes(e.email));
     !1 === initialEmailsLoaded && (setAutocomplete({
-      ...Rs(),
+      ...getInitialAutocompleteState(),
       tokens: a.map(e => ({
-        state: _$$d.OK,
+        state: baseErrorSeverity.OK,
         content: e
       }))
     }), setInitialEmailsLoaded(!0));
@@ -201,7 +201,7 @@ let $$z0 = registerModal(function ({
   ...a
 }) {
   let C = useModalManager(a);
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let I = function (e) {
     switch (e) {
       case fm.TEAM:
@@ -219,7 +219,7 @@ let $$z0 = registerModal(function ({
   let M = useMemo(() => R || (T.data ? new Set(T.data.frequencies) : new Set()), [R, T.data]);
   let P = useMemo(() => L || (T.data ? T.data.recipient_settings : UI.SPECIFIC_ADMINS), [L, T.data]);
   let U = getAtomMutate(G);
-  let [F, z] = useState(Rs());
+  let [F, z] = useState(getInitialAutocompleteState());
   let [V, W] = useState(!1);
   let [H, Y] = useState(!1);
   let J = "loaded" !== T.status ? jsx(LoadingSpinner, {

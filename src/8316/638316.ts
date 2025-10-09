@@ -30,7 +30,7 @@ let w = {
   "lemonsqueezy.com/": "Lemon Squeezy"
 };
 let v = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = () => {
     t(hideModalHandler());
   };
@@ -98,7 +98,7 @@ export function $$P0({
   let m = useSelector(e => e.authedUsers);
   let y = initiateResourcePurchaseFlow(e);
   let b = useDuplicateTemplateHandler(e, !0);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   if (!hasMonetizedResourceMetadata(e) && !isThirdPartyMonetized(e)) return null;
   let f = !1;
   if (isOrgOrTeamExport(_) && !isThirdPartyMonetized(e)) {

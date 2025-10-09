@@ -16,7 +16,7 @@ export function $$p1(e) {
 function _({
   file: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = $$p1(e);
   let i = async () => {
     try {

@@ -27,7 +27,7 @@ export function FavoriteResourceDropdown({
   userHasMaxFavorites,
   orgId
 }: FavoriteResourceDropdownProps) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const currentTeamId = useSelector((state: any) => state.currentTeamId);
   const orderedSections = useMemo(() => sortWithPinnedItems(sections, customSectionOrdering), [sections, customSectionOrdering]);
   const menuItems = generateFavoriteResourceMenuItems({

@@ -9,7 +9,7 @@ export function $$c0({
   url: e,
   title: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return BrowserInfo.isMeetDevice ? jsx(WithTrackedButton, {
     variant: "link",
     onClick: () => i(showModalHandler({

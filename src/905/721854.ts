@@ -27,7 +27,7 @@ function E({
   let {
     close
   } = useNavigationStack();
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = useCallback(t => {
     e && ID({
       ...e,

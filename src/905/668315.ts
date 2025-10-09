@@ -18,7 +18,7 @@ import { IW, ql, fp, fV } from "../figma_app/257005";
 import { M4, UC } from "../905/561298";
 import { Yk, vu, g8, aq, jG, g4, qr, PJ, GC } from "../figma_app/312949";
 function I(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsxs("div", {
     className: Yk,
     children: [jsx(IW, {
@@ -38,7 +38,7 @@ function I(e) {
   });
 }
 export let $$E0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = "loaded" === ql().status;
   let o = useFileByKey();
   useSingleEffect(() => {

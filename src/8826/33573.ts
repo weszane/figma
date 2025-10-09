@@ -37,7 +37,7 @@ function B(e) {
   let t = "stroke-settings";
   let [n, u] = useAtomValueAndSetter(vectorPencilStyleAtom);
   let v = (n.encodedPaints ? ri(n.encodedPaints) : n.paints) ?? [];
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   let B = useContext(zK);
   let F = () => null != B;
   let z = useRef(null);

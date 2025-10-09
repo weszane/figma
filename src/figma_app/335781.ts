@@ -55,7 +55,7 @@ export function $$M0({
   onCanvasUI: r,
   ...u
 }) {
-  let M = useDispatch();
+  let M = useDispatch<AppDispatch>();
   let {
     smallNudgeAmount,
     bigNudgeAmount

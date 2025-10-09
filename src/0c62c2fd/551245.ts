@@ -20,7 +20,7 @@ export function $$b0({
   onClose: r
 }) {
   let b = getUserId();
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let y = _$$p2(getI18nString("file_browser.pinning.delete_pin_modal.confirmation_bell"), "file-browser-workspace-delete-pin");
   let [w, j] = useState(!1);
   let T = useSubscription(DeleteWorkspacePinnedFileView, {

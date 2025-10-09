@@ -218,7 +218,7 @@ function useTrackAppleFontEulaClicked(eulaConfig: AppleEulaConfig, trigger: stri
  * AppleFontEulaModal - Modal for Apple font EULA agreement (original: appleFontEualModal)
  */
 export const AppleFontEulaModal = registerModal((props: AppleFontEulaModalProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const {
     eulaConfig,
     eulasToShow,

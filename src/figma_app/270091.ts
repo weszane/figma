@@ -191,7 +191,7 @@ function eW(e) {
   let e5 = useSelector(e => e.universalInsertModal.showing);
   let e3 = openFile.key;
   let e4 = useOpenFileLibraryKey();
-  let e8 = useDispatch();
+  let e8 = useDispatch<AppDispatch>();
   let e6 = multiselect ? null : selectedItems[0] ?? null;
   let e7 = useMemo(() => overrideDefaultItem ? overrideDefaultItem.library_key : null, [overrideDefaultItem]);
   let e9 = useMemo(() => e7 ?? getCommonLibraryKey(selectedItems) ?? selectedLibraryKey, [e7, selectedItems, selectedLibraryKey]);
@@ -946,7 +946,7 @@ export function $$eY2(e) {
     instanceSwapPickerShown: e.instanceSwapPickerShown,
     dropdownShown: e.dropdownShown
   }));
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let h = useRef(null);
   let [m, g] = useState(generateUUIDv4());
   let f = instanceSwapPickerShown.isShown ? new Point(instanceSwapPickerShown.initialX, instanceSwapPickerShown.initialY) : new Point(0, 0);
@@ -1046,7 +1046,7 @@ export function $$e$0({
   sessionId: s,
   queryId: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = _$$S.useTrackViewToggle({
     sessionId: s,
     queryId: o,

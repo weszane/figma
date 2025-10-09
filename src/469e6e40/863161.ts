@@ -6,7 +6,7 @@ import { c } from "../4452/815584";
 export function $$o0({
   team: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(c, {
     title: getI18nString("resource_rename_modal.team_description.title"),
     initialName: e.description ?? "",

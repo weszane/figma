@@ -90,7 +90,7 @@ var u = c;
 let ee = registerModal(function (e) {
   let t;
   let a = useModalManager(e);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let i = Xf(e.plan.key.parentId, e.plan.key.type !== FOrganizationLevelType.TEAM);
   let l = useSelector(e => e.teamBilling);
   let o = e.plan.key.type === FOrganizationLevelType.TEAM ? l.summary.currency : i.data?.currency;
@@ -243,7 +243,7 @@ function eL({
   });
 }
 function eB(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useDropdownState();
   let n = a?.type === e.type;
   return jsxs(_$$V2, {
@@ -278,7 +278,7 @@ export function $$e$0({
   let J = isProrationBillingEnabledForCurrentPlan();
   let eI = RR();
   let eE = getRumLoggingConfig();
-  let eS = useDispatch();
+  let eS = useDispatch<AppDispatch>();
   let {
     seatAvailability
   } = _$$k2(e);

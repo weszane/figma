@@ -20,7 +20,7 @@ import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { neutralOffWhiteColor } from "../figma_app/728075";
 import { pL } from "../figma_app/639088";
 let $$x0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useContext(ThemeContext);
   let o = useSelector(e => e.avatarEditorState);
   let l = useModalManager(e);

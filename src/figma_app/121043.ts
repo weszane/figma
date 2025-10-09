@@ -91,7 +91,7 @@ var y = E;
 function ep(e) {
   let t = useSelector(e => e.mirror.appModel.pagesList);
   let r = useSelector(e => e.mirror.appModel.currentPage);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   if (!t || t.length <= 1) return null;
   let s = async e => {
     await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e.nodeId);
@@ -400,7 +400,7 @@ export function $$ej5(e) {
 }
 let $$eU7 = memo(function (e) {
   let t = useRef(null);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = useMemo(() => generateUUIDv4(), []);
   let {
     dropdownShown,
@@ -515,7 +515,7 @@ let $$eB8 = memo(function (e) {
     selectedView: e.selectedView
   }));
   let i = isWorkshopModeEnabled();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return jsx("span", {
     className: cssBuilderInstance.mr8.$,
     "data-preferred-theme": e.useDarkTheme ? "dark" : void 0,

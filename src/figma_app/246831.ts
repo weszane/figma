@@ -33,7 +33,7 @@ import { getFileKey } from "../905/412913";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { hideStylePicker, hidePickerThunk, showPickerThunk, showStylePicker } from "../figma_app/91703";
 import { hideModal, showModalHandler } from "../905/156213";
-import { sw, rk } from "../figma_app/914957";
+import { hideStylePreview, showStylePreviewThunk } from "../figma_app/914957";
 import { hideTooltip } from "../905/765855";
 import { stopPropagation } from "../figma_app/753501";
 import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
@@ -42,7 +42,7 @@ import { useLibraryFileLink } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, normalizeValue } from "../905/216495";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
-import { bO, SS } from "../figma_app/936646";
+import { useLibraryDataSubscriptions, LibrarySubscriptionRequest } from "../figma_app/936646";
 import { getStyleTypeLabel } from "../figma_app/646357";
 import { useSubscribedLibraries } from "../figma_app/155728";
 import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
@@ -60,7 +60,7 @@ import { b as _$$b2 } from "../905/857767";
 import { N2, vG } from "../905/213527";
 import { G as _$$G, h as _$$h } from "../figma_app/257072";
 import { _l, Kq, AH, V0, dG as _$$dG } from "../905/571648";
-import { WH } from "../figma_app/836943";
+import { useStyleInfo } from "../figma_app/836943";
 import { EventShield } from "../905/821217";
 import { g as _$$g } from "../905/496772";
 import eh from "classnames";
@@ -96,7 +96,7 @@ let eD = memo(function ({
   isEditable: g = !0
 }) {
   let f = useDropdownState();
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem,
@@ -376,7 +376,7 @@ export function $$eF1({
   hideLocalStyles: y = !1,
   customPickerTitle: b = ""
 }) {
-  let T = useDispatch();
+  let T = useDispatch<AppDispatch>();
   let I = useSelector(e => e.modalShown);
   let S = GC(u);
   let v = useMemo(() => !!I && I.type === LIBRARY_PREFERENCES_MODAL, [I]);
@@ -385,7 +385,7 @@ export function $$eF1({
     A.current?.scrollTo(0);
   }, [A]);
   hg(u);
-  let N = WH(p, h, u)?.key ?? null;
+  let N = useStyleInfo(p, h, u)?.key ?? null;
   let [w, O] = useState("");
   let R = !!w;
   let L = !!R || m;
@@ -424,7 +424,7 @@ export function $$eF1({
   }, [g]);
   let eo = useCallback(() => {
     T(hideStylePicker());
-    T(sw());
+    T(hideStylePreview());
     T(hidePickerThunk());
   }, [T]);
   let el = useCallback(() => {
@@ -436,7 +436,7 @@ export function $$eF1({
       }
     }));
   }, [T, v]);
-  let ed = bO();
+  let ed = useLibraryDataSubscriptions();
   let ep = useMemo(() => U?.status !== "loaded" ? null : eM(U.data), [U]);
   let e_ = (() => {
     if (!N || !U || isNullish(ep)) return !1;
@@ -628,7 +628,7 @@ function eG({
   customPickerTitle: H,
   children: W
 }) {
-  let Y = useDispatch();
+  let Y = useDispatch<AppDispatch>();
   let X = useCurrentFileKey();
   let Z = useMemo(() => D || (t ? new Point(t.initialX, t.initialY) : new Point(0, 0)), [D, t]);
   let [Q, ee] = useState(!1);
@@ -652,7 +652,7 @@ function eG({
     let e = () => Y(hideTooltip());
     let r = () => Y(hidePickerThunk());
     let n = () => Y(hideStylePicker());
-    let i = () => Y(sw());
+    let i = () => Y(hideStylePreview());
     return {
       selectStyle(r) {
         s(r, l);
@@ -667,7 +667,7 @@ function eG({
           isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : teamLibraryCache.getCanvas(e).then(e => {
             Fullscreen.selectExternalStyle(e);
           });
-          Y(rk({
+          Y(showStylePreviewThunk({
             style: e,
             rowTop: t.y,
             rowLeft: t.x
@@ -699,7 +699,7 @@ function eG({
   }, [Y, s, l, X, stylePreviewShown, t.modal]);
   let ef = useCallback(() => {
     Y(hideStylePicker());
-    Y(sw());
+    Y(hideStylePreview());
     Y(hidePickerThunk());
   }, [Y]);
   let eE = useCallback(e => {
@@ -886,7 +886,7 @@ export function $$eY0({
   styleType: r,
   selectedLibraries: a
 }) {
-  let s = WH(e, t, r)?.key ?? null;
+  let s = useStyleInfo(e, t, r)?.key ?? null;
   let o = AH(s, normalizeValue(t));
   let l = useRef(o);
   let {
@@ -894,10 +894,10 @@ export function $$eY0({
   } = _$$dG(r, l.current);
   let c = a && a.length > 0 ? a : libraries;
   return jsxs(Fragment, {
-    children: [c.map(e => jsx(SS, {
+    children: [c.map(e => jsx(LibrarySubscriptionRequest, {
       fileKey: e.fileKey,
       libraryKey: e.libraryKey
-    }, e.fileKey)), jsx(SS, {
+    }, e.fileKey)), jsx(LibrarySubscriptionRequest, {
       fileKey: l.current?.status === "loaded" && eK(l.current.data) || null,
       libraryKey: l.current?.data?.library_key ?? null
     })]

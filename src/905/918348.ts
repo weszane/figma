@@ -11,7 +11,7 @@ import { useSingleEffect } from "../905/791079";
 import { zL } from "../905/294543";
 import { extractCopyExportRestrictions } from "../905/491708";
 import { getCodegenHandler } from "../905/201014";
-import { JG } from "../figma_app/852050";
+import { useVariableDataLoaded } from "../figma_app/852050";
 import { sendGeneratedCode } from "../figma_app/415217";
 import { useCounter } from "../905/949750";
 import { d as _$$d } from "../905/485888";
@@ -52,7 +52,7 @@ export function $$E0({
   let L = getSingletonSceneGraph();
   let F = zL();
   let M = getCodegenHandler(c);
-  let j = JG({
+  let j = useVariableDataLoaded({
     enabled: "first-party" === t.type
   });
   let U = useSelector(extractCopyExportRestrictions, deepEqual);

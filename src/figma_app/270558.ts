@@ -13,7 +13,7 @@ import { registerModal } from "../905/102752";
 import { b } from "../905/791493";
 import { planPickerModalBody, workspaceSelectorModalInner } from "../figma_app/727769";
 export let $$f0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCallback(() => {
     t(hideModal());
   }, [t]);

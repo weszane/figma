@@ -64,7 +64,7 @@ export function $$I1({
   });
 }
 export function $$k0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(sendToBuzzFromDesignAtom);
   let i = useCurrentFileKey();
   let s = useIsFullscreenReady();

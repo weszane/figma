@@ -1,5 +1,5 @@
 import { trimOrEmpty } from "../figma_app/740025";
-import { a6 } from "../figma_app/198840";
+import { getHubFileVersionOrDefault } from "../figma_app/198840";
 import { getCurrentPluginVersion } from "../figma_app/300692";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 export let $$o0 = {
@@ -7,7 +7,7 @@ export let $$o0 = {
   fetchInitialValue: ({
     existingResourceContent: e
   }) => e ? function (e) {
-    return "description" in e ? e.description || "" : isWidgetOrPlugin(e) ? getCurrentPluginVersion(e)?.description || "" : a6(e).description;
+    return "description" in e ? e.description || "" : isWidgetOrPlugin(e) ? getCurrentPluginVersion(e)?.description || "" : getHubFileVersionOrDefault(e).description;
   }(e) : "",
   validate: ({
     valueRequired: e

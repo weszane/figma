@@ -372,7 +372,7 @@ function ec({
   frameConfigs: t,
   updateFrameConfig: n
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let s = e ? t[e] : null;
   let o = e && s?.type === 'MP4';
@@ -688,7 +688,7 @@ function eu({
 }
 let ep = registerModal(e => {
   let t = useModalManager(e);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let i = useSceneGraphSelector();
   let o = function () {
     let [{
@@ -797,7 +797,7 @@ let ep = registerModal(e => {
   });
 });
 function em() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentFile();
   let n = useAtomWithSubscription(_$$o);
   let i = !!t && isExportRestricted(t);
@@ -819,7 +819,7 @@ function eF(e) {
   let {
     isRightPanelCollapsed
   } = useContext(_$$t2);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let f = useIsFullscreenSlidesView();
   let v = useIsFullscreenSitesView();
   let I = useIsSelectedViewFullscreenCooper() && isCooperFeatureEnabled();

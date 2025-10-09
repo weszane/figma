@@ -13,7 +13,7 @@ import { createOptimistThunk } from '../905/350402';
 import { trackEventAnalytics } from '../905/449184';
 import { AccessLevelEnum } from '../905/557142';
 import { FlashActions, handlePromiseError } from '../905/573154';
-import { cL } from '../905/748726';
+import { autocompleteReset } from '../905/748726';
 import { getCurrentLiveGraphClient } from '../905/761735';
 import { sendWithRetry } from '../905/910117';
 import { t as _$$t2 } from '../figma_app/32680';
@@ -28,7 +28,7 @@ import { getResourceTeamId, getRolesForResource, hasAdminRoleAccessOnTeam, hasEd
 import { TrackingProvider } from '../figma_app/831799';
 import { ConfirmationModal2 } from '../figma_app/918700';
 let orgGuestsBannedModal = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: 'Sharing with external users is disabled modal',
     properties: {
@@ -68,7 +68,7 @@ function k(e) {
   });
 }
 let requestAccessWarningModal = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: 'Admin approval needed modal',
     properties: {
@@ -104,7 +104,7 @@ let requestAccessWarningModal = registerModal(e => {
   });
 }, 'REQUEST_ACCESS_WARNING_MODAL');
 let inviteWhiteListErrorModal = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: 'Invite whitelist error modal',
     properties: {
@@ -137,7 +137,7 @@ let inviteWhiteListErrorModal = registerModal(e => {
   });
 }, 'INVITE_WHITELIST_ERROR_MODAL');
 let deprovisionedUserModal = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: 'Deprovisioned user invite error modal',
     properties: {
@@ -170,7 +170,7 @@ let deprovisionedUserModal = registerModal(e => {
   });
 }, 'DEPROVISIONED_USER_MODAL');
 let orgRestrictedInviteModal = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: 'Deprovisioned user invite error modal',
     properties: {
@@ -344,7 +344,7 @@ export const sendRoleInvites = createOptimistThunk(({
   }).then(({
     data
   }) => {
-    dispatch(cL());
+    dispatch(autocompleteReset());
 
     // Process successful invites
     for (const invite of data.meta.invites) {
@@ -370,7 +370,7 @@ export const sendRoleInvites = createOptimistThunk(({
   }, ({
     response
   }) => {
-    dispatch(cL());
+    dispatch(autocompleteReset());
 
     // Parse error response
     let errorResponse;

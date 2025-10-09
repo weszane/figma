@@ -31,7 +31,7 @@ export let $$C0 = registerModal(function ({
   let [C, w] = useAtomValueAndSetter(Fj);
   let O = Xr(jI);
   let R = setupAutofocusHandler();
-  let L = useDispatch();
+  let L = useDispatch<AppDispatch>();
   let P = useSelector(e => e.screenreader.errorType);
   let D = getCurrentFileType();
   let {

@@ -11,7 +11,7 @@ export function $$m0({
   pluginId: e,
   containerClassName: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let m = useSelector(t => getPluginMetadata(e, t.publishedPlugins));
   let _ = useSelector(e => getPluginPublisherStatus(e, m));
   return void 0 !== _ && isPublisherPending(_) ? jsx("div", {

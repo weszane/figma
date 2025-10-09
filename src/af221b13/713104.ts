@@ -16,7 +16,7 @@ import { o as _$$o } from "../5430/992445";
 import { A as _$$A } from "../5724/965092";
 export function $$f0(e) {
   let t = selectCurrentUser();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let [f, b] = useState(!0);
   let v = e.resource;
   let j = getPluginVersion(v);

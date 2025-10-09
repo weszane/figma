@@ -206,7 +206,7 @@ function k(e) {
   });
 }
 function M() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(({
     mobileNavShown: e
   }) => e);
@@ -222,7 +222,7 @@ function M() {
   });
 }
 export function $$F0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedView();
   let r = useTeamPlanUser();
   let a = useIsOrgAdminUser(r).unwrapOr(!1);

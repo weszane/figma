@@ -2,7 +2,7 @@ import { reportError } from '../905/11'
 import { pluginAPIService } from '../905/3209'
 import { createActionCreator } from '../905/73481'
 import { ServiceCategories } from '../905/165054'
-import { mergePublishedPluginThunk } from '../905/172918'
+import { deleteAllPlugins, deleteAllWidgets, mergePublishedPlugin, mergePublishedPluginThunk, putAllPlugins, putAllWidgets } from '../905/172918'
 import { resolveMessage } from '../905/231762'
 import { readImageBytes } from '../905/289751'
 import { VisualBellActions } from '../905/302958'
@@ -26,432 +26,450 @@ import { HubTypeEnum, isWidget } from '../figma_app/45218'
 import { getPublishingData, getResourceRoleInfo, loadLocalPluginSource, loadPluginManifest, validateArtworkImage, validateExtensionIconImage, validatePluginCodeSize } from '../figma_app/300692'
 import { getPluginWidgetLabel, getResourceTypeLabel } from '../figma_app/471982'
 import { createPublishActionCreators } from '../figma_app/530167'
-import { Ac, Gf, Kg, Rd } from '../figma_app/599979'
+import { prepareMediaUploadData, uploadCarouselImages, uploadImageWithPresignedUrl, uploadVideoWithThumbnail } from '../figma_app/599979'
 import { getPermissionsState } from '../figma_app/642025'
 import { loadingStatePutFailure, loadingStatePutLoading, loadingStatePutSuccess } from '../figma_app/714946'
 import { isResourcePendingPublishing } from '../figma_app/777551'
-import { Jr, UM } from '../figma_app/940844'
+import { UM } from '../figma_app/940844'
 
-let $$M6 = createActionCreator('PLUGIN_REPLACE_FEATURED')
-let $$F29 = createOptimistThunk((e, t, {
-  loadingKey: r,
+export { deleteAllPlugins, deleteAllWidgets, mergePublishedPlugin, mergePublishedPluginThunk, putAllPlugins, putAllWidgets } from '../905/172918'
+
+const replaceFeaturedPluginAction = createActionCreator('PLUGIN_REPLACE_FEATURED')
+const initializeUserPublishedResourcesThunk = createOptimistThunk((dispatch, action, {
+  loadingKey,
 }) => {
-  if (!e.getState().user)
+  if (!dispatch.getState().user)
     return
-  let n = pluginAPIService.getPlugins()
-  let i = widgetAPIClient.getWidgets()
-  n.then(({
-    data: t,
+  const pluginsRequest = pluginAPIService.getPlugins()
+  const widgetsRequest = widgetAPIClient.getWidgets()
+  pluginsRequest.then(({
+    data,
   }) => {
-    let r = t.meta
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: r,
+    const plugins = data.meta
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: plugins,
       src: 'initializeUserPublishedPlugins',
     }))
   })
-  i.then(({
-    data: t,
+  widgetsRequest.then(({
+    data,
   }) => {
-    let r = t.meta
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: r,
+    const widgets = data.meta
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: widgets,
       src: 'initializeUserPublishedWidgets',
     }))
   })
-  setupLoadingStateHandler(i, e, r)
+  setupLoadingStateHandler(widgetsRequest, dispatch, loadingKey)
 })
-let $$j28 = liveStoreInstance.Query({
-  fetch: async e => (await pluginAPIService.getUnpublishedPlugins()).data.meta,
+const unpublishedPluginsQuery = liveStoreInstance.Query({
+  fetch: async () => (await pluginAPIService.getUnpublishedPlugins()).data.meta,
   output: ({
-    data: e,
-  }) => {
-    let t = {}
-    if (e) {
-      for (let r of e) t[r.id] = r
+    data,
+  }: {data: any}) => {
+    const result = {}
+    if (data) {
+      for (const plugin of data) {
+        result[plugin.id] = plugin
+      }
     }
-    return t
+    return result
   },
 })
-let $$U19 = liveStoreInstance.Query({
-  fetch: async e => (await widgetAPIClient.getUnpublishedWidgets()).data.meta,
+const unpublishedWidgetsQuery = liveStoreInstance.Query({
+  fetch: async () => (await widgetAPIClient.getUnpublishedWidgets()).data.meta,
   output: ({
-    data: e,
-  }) => {
-    let t = {}
-    if (e) {
-      for (let r of e) t[r.id] = r
+    data,
+  }: {data: any}) => {
+    const result = {}
+    if (data) {
+      for (const widget of data) {
+        result[widget.id] = widget
+      }
     }
-    return t
+    return result
   },
 })
-let $$B16 = createOptimistThunk((e, {
-  widgetIDToVersions: t,
+const cacheWidgetVersionsThunk = createOptimistThunk((dispatch, {
+  widgetIDToVersions,
 }) => {
-  let {
+  const {
     publishedCanvasWidgetVersions,
     currentUserOrgId,
-  } = e.getState()
-  for (let [e, i] of Object.entries(t)) {
-    i.forEach((i) => {
-      let a = publishedCanvasWidgetVersions[e]?.[i]
-      a && new Set(t[e]).forEach((e) => {
-        setupPluginCodeCache.getAndCache({
-          ...a,
-          id: e,
-        }, currentUserOrgId ?? void 0)
-      })
+  } = dispatch.getState()
+  for (const [widgetId, versions] of Object.entries<ObjectOf>(widgetIDToVersions)) {
+    versions.forEach((versionId) => {
+      const widgetVersion = publishedCanvasWidgetVersions[widgetId]?.[versionId]
+      if (widgetVersion) {
+        new Set(widgetIDToVersions[widgetId]).forEach((id) => {
+          setupPluginCodeCache.getAndCache({
+            ...widgetVersion,
+            id,
+          }, currentUserOrgId ?? void 0)
+        })
+      }
     })
   }
 })
-let $$G32 = createOptimistThunk(async (e, {
-  resourceId: t,
-  resourceType: r,
+const getPublishedResourceThunk = createOptimistThunk(async (dispatch, {
+  resourceId,
+  resourceType,
 }) => {
-  let n = r === HubTypeEnum.WIDGET
+  const request = resourceType === HubTypeEnum.WIDGET
     ? widgetAPIClient.getWidgets({
-        id: t,
+        id: resourceId,
       })
     : pluginAPIService.getPlugins({
-        id: t,
+        id: resourceId,
       })
-  let {
+  const {
     data,
-  } = await n
-  let a = data.meta.find(e => e.id === t)
-  a && e.dispatch(mergePublishedPluginThunk({
-    publishedPlugins: [a],
-    src: 'getPublishedResource',
-  }))
+  } = await request
+  const resource = data.meta.find(item => item.id === resourceId)
+  if (resource) {
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: [resource],
+      src: 'getPublishedResource',
+    }))
+  }
 })
-let $$V20 = createActionCreator('UPDATE_PUBLISHED_CANVAS_WIDGET_VERSIONS')
-let $$H33 = createActionCreator('UPDATE_FETCHED_CANVAS_WIDGET_VERSIONS')
-export async function $$z0(e, t, r) {
-  let n = await $$W13({
-    [e]: [t],
-  }, r)
-  return n[e]?.[t]
+const updatePublishedCanvasWidgetVersionsAction = createActionCreator('UPDATE_PUBLISHED_CANVAS_WIDGET_VERSIONS')
+const updateFetchedCanvasWidgetVersionsAction = createActionCreator('UPDATE_FETCHED_CANVAS_WIDGET_VERSIONS')
+export async function getCanvasWidgetVersion(widgetId, versionId, orgId) {
+  const versions = await fetchCanvasWidgetVersions({
+    [widgetId]: [versionId],
+  }, orgId)
+  return versions[widgetId]?.[versionId]
 }
-export async function $$W13(e, t) {
-  let r = debugState.getState()
-  let n = r.openFile?.key
-  let i = await sendWithRetry.post('/api/widgets/v2/versions', {
-    ids_to_versions: e,
-    org_id: t,
-    file_key: n,
+export async function fetchCanvasWidgetVersions(widgetIDsToVersions, orgId) {
+  const currentState = debugState.getState()
+  const fileKey = currentState.openFile?.key
+  const response = await sendWithRetry.post('/api/widgets/v2/versions', {
+    ids_to_versions: widgetIDsToVersions,
+    org_id: orgId,
+    file_key: fileKey,
   })
-  let a = i?.data?.meta || {}
-  debugState.dispatch($$V20(a))
-  debugState.dispatch($$H33(Object.fromEntries(Object.entries(e).map(([e, t]) => [e, Object.fromEntries(t.map(e => [e, !0]))]))))
-  return a
+  const versions = response?.data?.meta || {}
+  debugState.dispatch(updatePublishedCanvasWidgetVersionsAction(versions))
+  debugState.dispatch(updateFetchedCanvasWidgetVersionsAction(Object.fromEntries(Object.entries(widgetIDsToVersions).map(([widgetId, versionIds]: [string, string[]]) => [widgetId, Object.fromEntries(versionIds.map(versionId => [versionId, true]))]))))
+  return versions
 }
-let $$K18 = createOptimistThunk(async (e, {
-  pluginIds: t,
+const fetchPublishedPluginsThunk = createOptimistThunk(async (dispatch, {
+  pluginIds,
 }) => {
-  let {
+  const {
     currentUserOrgId,
     publishedPlugins,
-  } = e.getState()
-  let i = t.filter(e => !publishedPlugins[e])
-  if (i.length) {
+  } = dispatch.getState()
+  const missingPluginIds = pluginIds.filter(id => !publishedPlugins[id])
+  if (missingPluginIds.length) {
     try {
-      let e = await pluginAPIService.postPluginsBatch(i, currentUserOrgId)
-      let t = e.data?.meta ?? []
+      const response = await pluginAPIService.postPluginsBatch(missingPluginIds, currentUserOrgId)
+      const plugins = response.data?.meta ?? []
       debugState.dispatch(mergePublishedPluginThunk({
-        publishedPlugins: t,
+        publishedPlugins: plugins,
         src: 'fetchPublishedPlugins',
-        overrideInstallStatus: !0,
+        overrideInstallStatus: true,
       }))
     }
-    catch { }
+    catch {}
   }
 })
-let $$Y8 = createOptimistThunk(async (e, {
-  widgetIds: t,
+const fetchPublishedWidgetsThunk = createOptimistThunk(async (dispatch, {
+  widgetIds,
 }) => {
-  let {
+  const {
     currentUserOrgId,
     publishedWidgets,
-  } = e.getState()
-  let i = t.filter(e => !publishedWidgets[e])
-  if (i.length) {
+  } = dispatch.getState()
+  const missingWidgetIds = widgetIds.filter(id => !publishedWidgets[id])
+  if (missingWidgetIds.length) {
     try {
-      let e = await sendWithRetry.post('/api/widgets/batch', {
-        ids: i,
+      const response = await sendWithRetry.post('/api/widgets/batch', {
+        ids: missingWidgetIds,
         org_id: currentUserOrgId,
       })
-      let t = e.data?.meta ?? []
+      const widgets = response.data?.meta ?? []
       debugState.dispatch(mergePublishedPluginThunk({
-        publishedPlugins: t,
+        publishedPlugins: widgets,
         src: 'fetchPublishedWidgets',
-        overrideInstallStatus: !0,
+        overrideInstallStatus: true,
       }))
     }
-    catch { }
+    catch {}
   }
 })
-let $$$1 = createOptimistThunk(async (e, {
-  widgetIDAndVersions: t,
+const fetchAndCacheWidgetVersionsThunk = createOptimistThunk(async (dispatch, {
+  widgetIDAndVersions,
 }) => {
-  let {
+  const {
     currentUserOrgId,
-  } = e.getState()
-  let n = []
-  let i = {}
-  t.forEach(({
-    widgetID: e,
-    widgetVersionID: t,
+  } = dispatch.getState()
+  const widgetIds = []
+  const widgetIDToVersions = {}
+  widgetIDAndVersions.forEach(({
+    widgetID,
+    widgetVersionID,
   }) => {
-    i[e] ? i[e].includes(t) || i[e].push(t) : (n.push(e), i[e] = [t])
+    if (widgetIDToVersions[widgetID]) {
+      if (!widgetIDToVersions[widgetID].includes(widgetVersionID)) {
+        widgetIDToVersions[widgetID].push(widgetVersionID)
+      }
+    }
+    else {
+      widgetIds.push(widgetID)
+      widgetIDToVersions[widgetID] = [widgetVersionID]
+    }
   })
-  n.length !== 0 && (await $$W13(i, currentUserOrgId), e.dispatch($$B16({
-    widgetIDToVersions: i,
-  })), e.dispatch($$Y8({
-    widgetIds: Object.keys(i),
-  })))
+  if (widgetIds.length !== 0) {
+    await fetchCanvasWidgetVersions(widgetIDToVersions, currentUserOrgId)
+    dispatch.dispatch(cacheWidgetVersionsThunk({
+      widgetIDToVersions,
+    }))
+    dispatch.dispatch(fetchPublishedWidgetsThunk({
+      widgetIds: Object.keys(widgetIDToVersions),
+    }))
+  }
 })
-let $$X26 = createOptimistThunk((e, t, {
-  loadingKey: r,
+const getCommunityProfilePluginsThunk = createOptimistThunk((dispatch, profileData, {
+  loadingKey,
 }) => {
-  let n = pluginAPIService.getProfile({
-    profileId: t.profileId,
-    currentOrgId: e.getState().currentUserOrgId || void 0,
+  const pluginsRequest = pluginAPIService.getProfile({
+    profileId: profileData.profileId,
+    currentOrgId: dispatch.getState().currentUserOrgId || void 0,
   })
-  let i = UM(t.profileId)
-  setupLoadingStateHandler(n, e, r)
-  return n.then(async ({
-    data: t,
+  const widgetsRequest = UM(profileData.profileId)
+  setupLoadingStateHandler(pluginsRequest, dispatch, loadingKey)
+  return pluginsRequest.then(async ({
+    data,
   }) => {
-    let r = [...(await i), ...t.meta]
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: r,
+    const plugins = [...(await widgetsRequest), ...data.meta]
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: plugins,
       src: 'getCommunityProfilePlugins',
     }))
-    return r
+    return plugins
   })
 }, ({
-  profileId: e,
-}) => `GET_COMMUNITY_PROFILE_PLUGINS_${e}`)
-createOptimistThunk((e, t, {
-  loadingKey: r,
+  profileId,
+}) => `GET_COMMUNITY_PROFILE_PLUGINS_${profileId}`)
+const getOrgPublishedPluginsThunk = createOptimistThunk((dispatch, orgId, {
+  loadingKey,
 }) => {
-  let n = widgetAPIClient.getProfile({
-    profileId: t.profileId,
-    currentOrgId: e.getState().currentUserOrgId || void 0,
+  const request = pluginAPIService.getOrg({
+    orgId,
   })
-  let i = Jr(t.profileId)
-  setupLoadingStateHandler(n, e, r)
-  return n.then(async ({
-    data: t,
+  setupLoadingStateHandler(request, dispatch, loadingKey)
+  return request.then(({
+    data,
   }) => {
-    let r = [...(await i), ...t.meta]
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: r,
-      src: 'getCommunityProfileWidgets',
-    }))
-    return r
-  })
-}, ({
-  profileId: e,
-}) => `GET_COMMUNITY_PROFILE_WIDGETS_${e}`)
-let $$q7 = createOptimistThunk((e, t, {
-  loadingKey: r,
-}) => {
-  let n = pluginAPIService.getOrg({
-    orgId: t,
-  })
-  setupLoadingStateHandler(n, e, r)
-  return n.then(({
-    data: t,
-  }) => {
-    let r = t.meta
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: r,
+    const plugins = data.meta
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: plugins,
       src: 'getOrgPublishedPlugins',
     }))
-    return r
+    return plugins
   })
-}, e => `GET_ORG_PUBLISHED_PLUGINS_${e}`)
-let $$J14 = createOptimistThunk(async (e, t, {
-  loadingKey: r,
+}, orgId => `GET_ORG_PUBLISHED_PLUGINS_${orgId}`)
+const getOrgPublishedWidgetsThunk = createOptimistThunk(async (dispatch, orgId, {
+  loadingKey,
 }) => {
   try {
-    e.dispatch(loadingStatePutLoading({
-      key: r,
+    dispatch.dispatch(loadingStatePutLoading({
+      key: loadingKey,
     }))
-    let n = await widgetAPIClient.getOrg({
-      orgId: t,
+    const response = await widgetAPIClient.getOrg({
+      orgId,
     })
-    let i = n?.data?.meta || []
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: i,
+    const widgets = response?.data?.meta || []
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: widgets,
       src: 'getOrgPublishedWidgets',
     }))
-    e.dispatch(loadingStatePutSuccess({
-      key: r,
+    dispatch.dispatch(loadingStatePutSuccess({
+      key: loadingKey,
     }))
-    return i
+    return widgets
   }
-  catch (t) {
-    FlashActions.flash(t.message || getI18nString('community.actions.an_error_occurred_while_trying_to_fetch_the_org_widgets_list'))
-    e.dispatch(loadingStatePutFailure({
-      key: r,
+  catch (error) {
+    FlashActions.flash(error.message || getI18nString('community.actions.an_error_occurred_while_trying_to_fetch_the_org_widgets_list'))
+    dispatch.dispatch(loadingStatePutFailure({
+      key: loadingKey,
     }))
     return []
   }
-}, e => `GET_ORG_PUBLISHED_WIDGETS_${e}`)
-async function Z(e, t, r) {
-  if (e.current_plugin_version_id === null || !e.id)
+}, orgId => `GET_ORG_PUBLISHED_WIDGETS_${orgId}`)
+async function updatePluginVersion(resource, pluginVersion, playgroundFilePublishType) {
+  if (resource.current_plugin_version_id === null || !resource.id) {
     throw new Error(getI18nString('community.actions.resource_is_invalid'))
-  let i = 0
-  t.iconBlob && (i = validateExtensionIconImage(t.iconBlob))
-  let a = 0
-  t.coverBlob && (a = validateArtworkImage(t.coverBlob))
-  let o = t.carouselMedia
-  let {
+  }
+  let iconFileSize = 0
+  if (pluginVersion.iconBlob) {
+    iconFileSize = validateExtensionIconImage(pluginVersion.iconBlob)
+  }
+  let coverFileSize = 0
+  if (pluginVersion.coverBlob) {
+    coverFileSize = validateArtworkImage(pluginVersion.coverBlob)
+  }
+  const carouselMedia = pluginVersion.carouselMedia
+  const {
     uploadImages,
     uploadVideos,
     allMedia,
-  } = Kg(o)
-  let g = await PluginUploadApi.postPluginImagesUpload(e.id, e.is_widget, uploadImages)
-  let f = Promise.resolve(!1)
-  let E = t.iconBlob
-  void 0 !== E && (f = readImageBytes(E).then(e => Ac(g.iconUploadUrl, E, e)).then(() => !0).catch((t) => {
-    reportError(ServiceCategories.COMMUNITY, t)
-    let r = resolveMessage(t, getI18nString('community.actions.could_not_connect_to_the_server'))
-    throw new Error(isWidget(e)
-      ? getI18nString('community.actions.error_uploading_widget_icon_error', {
-          error: r,
-        })
-      : getI18nString('community.actions.error_uploading_plugin_icon_error', {
-          error: r,
-        }))
-  }))
-  let y = Promise.resolve(!1)
-  let b = t.coverBlob
-  void 0 !== b && (y = readImageBytes(b).then(e => Ac(g.coverImageUploadUrl, b, e)).then(() => !0).catch((t) => {
-    reportError(ServiceCategories.COMMUNITY, t)
-    return new Error(isWidget(e)
-      ? getI18nString('community.actions.error_uploading_widget_artwork_image_error', {
-          error: resolveMessage(t, t.data?.message || 'unknown error'),
-        })
-      : getI18nString('community.actions.error_uploading_plugin_artwork_image_error', {
-          error: resolveMessage(t, t.data?.message || 'unknown error'),
-        }))
-  }))
-  let {
-    snapshotBlob,
-  } = t
-  let v = Promise.resolve(!1)
-  void 0 !== snapshotBlob && (v = readImageBytes(snapshotBlob).then((e) => {
-    if (!g.snapshotUploadUrl)
-      throw new Error('Snapshot upload url is missing')
-    return Ac(g.snapshotUploadUrl, snapshotBlob, e)
-  }).then(() => !0).catch((e) => {
-    reportError(ServiceCategories.COMMUNITY, e)
-    return new Error(getI18nString('community.actions.error_uploading_widget_snapshot_image_error', {
-      error: resolveMessage(e, e.data?.message || 'unknown error'),
-    }))
-  }))
-  let A = Rd(g.carouselImages, o)
-  let [x, C, O] = await Promise.all([f, y, v, ...A])
-  let L = uploadVideos.map(t => Gf(getResourceTypeLabel(e, {
-    pluralized: !0,
-  }), e.id, {
-    sha1: t.sha1,
-    bytes: t.bytes,
-  }, t.video_thumbnail_buffer, t.video_thumbnail_sha1).then((e) => {
-    allMedia.push({
-      carousel_position: t.carousel_position,
-      sha1: e.sha1,
-      video_file_uuid: e.videoFileUuid,
-      video_thumbnail_sha1: e.videoThumbnailSha1,
+  } = prepareMediaUploadData(carouselMedia)
+  const uploadUrls = await PluginUploadApi.postPluginImagesUpload(resource.id, resource.is_widget, uploadImages)
+  let iconUploadPromise = Promise.resolve(false)
+  const iconBlob = pluginVersion.iconBlob
+  if (iconBlob !== void 0) {
+    iconUploadPromise = readImageBytes(iconBlob).then(bytes => uploadImageWithPresignedUrl(uploadUrls.iconUploadUrl, iconBlob, bytes)).then(() => true).catch((error) => {
+      reportError(ServiceCategories.COMMUNITY, error)
+      const message = resolveMessage(error, getI18nString('community.actions.could_not_connect_to_the_server'))
+      throw new Error(isWidget(resource)
+        ? getI18nString('community.actions.error_uploading_widget_icon_error', {
+            error: message,
+          })
+        : getI18nString('community.actions.error_uploading_plugin_icon_error', {
+            error: message,
+          }))
     })
-  }).then(() => !0).catch((e) => {
-    reportError(ServiceCategories.COMMUNITY, e)
+  }
+  let coverUploadPromise: Promise<boolean | Error> = Promise.resolve(false)
+  const coverBlob = pluginVersion.coverBlob
+  if (coverBlob !== void 0) {
+    coverUploadPromise = readImageBytes(coverBlob).then(bytes => uploadImageWithPresignedUrl(uploadUrls.coverImageUploadUrl, coverBlob, bytes)).then(() => true).catch((error) => {
+      reportError(ServiceCategories.COMMUNITY, error)
+      return new Error(isWidget(resource)
+        ? getI18nString('community.actions.error_uploading_widget_artwork_image_error', {
+            error: resolveMessage(error, error.data?.message || 'unknown error'),
+          })
+        : getI18nString('community.actions.error_uploading_plugin_artwork_image_error', {
+            error: resolveMessage(error, error.data?.message || 'unknown error'),
+          }))
+    })
+  }
+  const {
+    snapshotBlob,
+  } = pluginVersion
+  let snapshotUploadPromise: Promise<boolean | Error> = Promise.resolve(false)
+  if (snapshotBlob !== void 0) {
+    snapshotUploadPromise = readImageBytes(snapshotBlob).then((bytes) => {
+      if (!uploadUrls.snapshotUploadUrl) {
+        throw new Error('Snapshot upload url is missing')
+      }
+      return uploadImageWithPresignedUrl(uploadUrls.snapshotUploadUrl, snapshotBlob, bytes)
+    }).then(() => true).catch((error) => {
+      reportError(ServiceCategories.COMMUNITY, error)
+      return new Error(getI18nString('community.actions.error_uploading_widget_snapshot_image_error', {
+        error: resolveMessage(error, error.data?.message || 'unknown error'),
+      }))
+    })
+  }
+  const carouselUploadPromises = uploadCarouselImages(uploadUrls.carouselImages, carouselMedia)
+  const [iconUploaded, coverUploaded, snapshotUploaded] = await Promise.all([iconUploadPromise, coverUploadPromise, snapshotUploadPromise, ...carouselUploadPromises])
+  const videoUploadPromises = uploadVideos.map(video => uploadVideoWithThumbnail(getResourceTypeLabel(resource, {
+    pluralized: true,
+  }), resource.id, {
+    sha1: video.sha1,
+    bytes: video.bytes,
+  }, video.video_thumbnail_buffer, video.video_thumbnail_sha1).then((result) => {
+    allMedia.push({
+      carousel_position: video.carousel_position,
+      sha1: result.sha1,
+      video_file_uuid: result.videoFileUuid,
+      video_thumbnail_sha1: result.videoThumbnailSha1,
+    })
+  }).then(() => true).catch((error) => {
+    reportError(ServiceCategories.COMMUNITY, error)
     return new Error(getI18nString('community.actions.error_uploading_plugin_video_error', {
-      error: resolveMessage(e, e.data?.message || 'unknown error'),
+      error: resolveMessage(error, error.data?.message || 'unknown error'),
     }))
   }))
-  await Promise.all(L)
-  let {
+  await Promise.all(videoUploadPromises)
+  const {
     data,
-  } = await sendWithRetry.put(`/api/${getResourceTypeLabel(e, {
-    pluralized: !0,
-  })}/${e.id}/versions/${t.id}`, {
-    icon_uploaded: x,
-    cover_image_uploaded: C,
-    snapshot_uploaded: O,
+  } = await sendWithRetry.put(`/api/${getResourceTypeLabel(resource, {
+    pluralized: true,
+  })}/${resource.id}/versions/${pluginVersion.id}`, {
+    icon_uploaded: iconUploaded,
+    cover_image_uploaded: coverUploaded,
+    snapshot_uploaded: snapshotUploaded,
     carousel_media: allMedia,
-    name: t.name,
-    description: t.description,
-    tagline: t.tagline,
-    creator_policy: t.creatorPolicy,
-    release_notes: t.releaseNotes,
-    comments_setting: e.comments_setting,
-    category_id: e.category_id,
-    image_upload_nonce: g.imageUploadNonce,
-    playground_fig_file_key: t.playground_fig_file_key,
-    playground_file_publish_type: r,
-  }).catch((e) => {
-    reportError(ServiceCategories.COMMUNITY, e)
+    name: pluginVersion.name,
+    description: pluginVersion.description,
+    tagline: pluginVersion.tagline,
+    creator_policy: pluginVersion.creatorPolicy,
+    release_notes: pluginVersion.releaseNotes,
+    comments_setting: resource.comments_setting,
+    category_id: resource.category_id,
+    image_upload_nonce: uploadUrls.imageUploadNonce,
+    playground_fig_file_key: pluginVersion.playground_fig_file_key,
+    playground_file_publish_type: playgroundFilePublishType,
+  }).catch((error) => {
+    reportError(ServiceCategories.COMMUNITY, error)
     return new Error(getI18nString('community.actions.error_finalizing_plugin_error', {
-      error: resolveMessage(e, e.data?.message || 'unknown error'),
+      error: resolveMessage(error, error.data?.message || 'unknown error'),
     }))
-  })
-  let D = data.meta
-  let k = D.plugin
-  if (k.id !== e.id)
+  }) as any
+  const responseData = data.meta
+  const publishedPlugin = responseData.plugin
+  if (publishedPlugin.id !== resource.id) {
     throw new Error(getI18nString('community.actions.the_published_resource_i_ds_do_not_match'))
+  }
   trackEventAnalytics('Hub Plugin Update Version', {
-    pluginId: e.id,
-    isWidget: e.is_widget,
-    iconFileSize: i,
-    coverFileSize: a,
+    pluginId: resource.id,
+    isWidget: resource.is_widget,
+    iconFileSize,
+    coverFileSize,
   })
   return {
-    publishedPlugin: k,
-    profile: D.profile,
+    publishedPlugin,
+    profile: responseData.profile,
   }
 }
-async function Q(e, t, r, i, a, o, l, u, h, g, f) {
-  let E
-  if (!e)
+async function publishNewPluginVersion(pluginId, localFileId, pluginVersion, commentsSetting, categoryId, tags, tagsV2, agreedToTos, orgId, isWidget, playgroundFilePublishType) {
+  let uploadResponse
+  if (!pluginId) {
     throw new Error(getI18nString('community.actions.plugin_id_is_invalid'))
-  let [y, b] = await Promise.all([loadPluginManifest(t, {
-    resourceType: getPluginWidgetLabel(g),
-    isPublishing: !0,
-  }), loadLocalPluginSource(t)])
-  let T = validatePluginCodeSize(b)
-  let v = 0
-  r.iconBlob && (v = validateExtensionIconImage(r.iconBlob))
-  let A = 0
-  r.coverBlob && (A = validateArtworkImage(r.coverBlob))
-  let x = r.carouselMedia
-  let {
+  }
+  const [manifest, pluginSource] = await Promise.all([loadPluginManifest(localFileId, {
+    resourceType: getPluginWidgetLabel(isWidget),
+    isPublishing: true,
+  }), loadLocalPluginSource(localFileId)])
+  const codeLength = validatePluginCodeSize(pluginSource)
+  let iconFileSize = 0
+  if (pluginVersion.iconBlob) {
+    iconFileSize = validateExtensionIconImage(pluginVersion.iconBlob)
+  }
+  let coverFileSize = 0
+  if (pluginVersion.coverBlob) {
+    coverFileSize = validateArtworkImage(pluginVersion.coverBlob)
+  }
+  const carouselMedia = pluginVersion.carouselMedia
+  const {
     uploadImages,
     uploadVideos,
     allMedia,
-  } = Kg(x)
-  let L = {
-    manifest: y,
-    release_notes: r.releaseNotes,
-    name: r.name,
-    description: r.description,
-    tagline: r.tagline,
-    creator_policy: r.creatorPolicy,
-    tags: o,
-    tags_v2: l,
-    category_id: a,
+  } = prepareMediaUploadData(carouselMedia)
+  const uploadData = {
+    manifest,
+    release_notes: pluginVersion.releaseNotes,
+    name: pluginVersion.name,
+    description: pluginVersion.description,
+    tagline: pluginVersion.tagline,
+    creator_policy: pluginVersion.creatorPolicy,
+    tags,
+    tags_v2: tagsV2,
+    category_id: categoryId,
     images_sha1: uploadImages,
   }
   try {
-    E = await PluginUploadApi.postPluginUpload(L, e, g)
+    uploadResponse = await PluginUploadApi.postPluginUpload(uploadData, pluginId, isWidget)
   }
-  catch (e) {
-    reportError(ServiceCategories.COMMUNITY, e)
-    return new Error(resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server')))
+  catch (error) {
+    reportError(ServiceCategories.COMMUNITY, error)
+    return new Error(resolveMessage(error, getI18nString('community.actions.could_not_connect_to_the_server')))
   }
-  let {
+  const {
     codeUploadUrl,
     iconUploadUrl,
     coverImageUploadUrl,
@@ -460,135 +478,144 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
     versionId,
     imageUploadNonce,
     carouselImages,
-  } = E
-  let G = Promise.resolve(!1)
-  b && (G = $$ep30(codeUploadUrl, b).then(() => !0).catch((e) => {
-    reportError(ServiceCategories.COMMUNITY, e)
-    let t = $$e_25(e) ?? resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server'))
-    throw new Error(g
-      ? getI18nString('community.actions.error_uploading_widget_code_error', {
-          error: t,
-        })
-      : getI18nString('community.actions.error_uploading_plugin_code_error', {
-          error: t,
-        }))
-  }))
-  let V = Promise.resolve(!1)
-  let H = r.iconBlob
-  H != null && (V = readImageBytes(H).then(e => Ac(iconUploadUrl, H, e)).then(() => !0).catch((e) => {
-    reportError(ServiceCategories.COMMUNITY, e)
-    let t = $$e_25(e) ?? resolveMessage(e, e.data?.message || 'unknown error')
-    throw new Error(g
-      ? getI18nString('community.actions.error_uploading_widget_icon_error', {
-          error: t,
-        })
-      : getI18nString('community.actions.error_uploading_plugin_icon_error', {
-          error: t,
-        }))
-  }))
-  let z = Promise.resolve(!1)
-  let W = r.coverBlob
-  W != null && (z = readImageBytes(W).then(e => Ac(coverImageUploadUrl, W, e)).then(() => !0).catch((e) => {
-    reportError(ServiceCategories.COMMUNITY, e)
-    let t = $$e_25(e) ?? resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server'))
-    throw new Error(g
-      ? getI18nString('community.actions.error_uploading_widget_artwork_image_error', {
-          error: t,
-        })
-      : getI18nString('community.actions.error_uploading_plugin_artwork_image_error', {
-          error: t,
-        }))
-  }))
-  let {
+  } = uploadResponse
+  let codeUploadPromise = Promise.resolve(false)
+  if (pluginSource) {
+    codeUploadPromise = uploadPluginCode(codeUploadUrl, pluginSource).then(() => true).catch((error) => {
+      reportError(ServiceCategories.COMMUNITY, error)
+      const errorMessage = parseUploadError(error) ?? resolveMessage(error, getI18nString('community.actions.could_not_connect_to_the_server'))
+      throw new Error(isWidget
+        ? getI18nString('community.actions.error_uploading_widget_code_error', {
+            error: errorMessage,
+          })
+        : getI18nString('community.actions.error_uploading_plugin_code_error', {
+            error: errorMessage,
+          }))
+    })
+  }
+  let iconUploadPromise = Promise.resolve(false)
+  const iconBlob = pluginVersion.iconBlob
+  if (iconBlob != null) {
+    iconUploadPromise = readImageBytes(iconBlob).then(bytes => uploadImageWithPresignedUrl(iconUploadUrl, iconBlob, bytes)).then(() => true).catch((error) => {
+      reportError(ServiceCategories.COMMUNITY, error)
+      const errorMessage = parseUploadError(error) ?? resolveMessage(error, error.data?.message || 'unknown error')
+      throw new Error(isWidget
+        ? getI18nString('community.actions.error_uploading_widget_icon_error', {
+            error: errorMessage,
+          })
+        : getI18nString('community.actions.error_uploading_plugin_icon_error', {
+            error: errorMessage,
+          }))
+    })
+  }
+  let coverUploadPromise = Promise.resolve(false)
+  const coverBlob = pluginVersion.coverBlob
+  if (coverBlob != null) {
+    coverUploadPromise = readImageBytes(coverBlob).then(bytes => uploadImageWithPresignedUrl(coverImageUploadUrl, coverBlob, bytes)).then(() => true).catch((error) => {
+      reportError(ServiceCategories.COMMUNITY, error)
+      const errorMessage = parseUploadError(error) ?? resolveMessage(error, getI18nString('community.actions.could_not_connect_to_the_server'))
+      throw new Error(isWidget
+        ? getI18nString('community.actions.error_uploading_widget_artwork_image_error', {
+            error: errorMessage,
+          })
+        : getI18nString('community.actions.error_uploading_plugin_artwork_image_error', {
+            error: errorMessage,
+          }))
+    })
+  }
+  const {
     snapshotBlob,
-  } = r
-  let Y = Promise.resolve(!1)
-  snapshotBlob != null && snapshotUploadUrl && (Y = readImageBytes(snapshotBlob).then(e => Ac(snapshotUploadUrl, snapshotBlob, e)).then(() => !0).catch((e) => {
-    reportError(ServiceCategories.COMMUNITY, e)
-    return new Error(getI18nString('community.actions.error_uploading_widget_snapshot_image_error', {
-      error: $$e_25(e) ?? resolveMessage(e, e.data?.message || 'unknown error'),
-    }))
-  }))
-  let $ = Rd(carouselImages, x)
-  let [X, q, J, Z] = await Promise.all([G, V, z, Y, ...$])
-  let Q = uploadVideos.map(async (t) => {
+  } = pluginVersion
+  let snapshotUploadPromise = Promise.resolve(false)
+  if (snapshotBlob != null && snapshotUploadUrl) {
+    snapshotUploadPromise = readImageBytes(snapshotBlob).then(bytes => uploadImageWithPresignedUrl(snapshotUploadUrl, snapshotBlob, bytes)).then(() => true).catch((error) => {
+      reportError(ServiceCategories.COMMUNITY, error)
+      throw new Error(getI18nString('community.actions.error_uploading_widget_snapshot_image_error', {
+        error: parseUploadError(error) ?? resolveMessage(error, error.data?.message || 'unknown error'),
+      }))
+    })
+  }
+  const carouselUploadPromises = uploadCarouselImages(carouselImages, carouselMedia)
+  const [codeUploaded, iconUploaded, coverUploaded, snapshotUploaded] = await Promise.all([codeUploadPromise, iconUploadPromise, coverUploadPromise, snapshotUploadPromise, ...carouselUploadPromises])
+  const videoUploadPromises = uploadVideos.map(async (video) => {
     try {
-      let r = await Gf(g ? 'widgets' : 'plugins', e, {
-        sha1: t.sha1,
-        bytes: t.bytes,
-      }, t.video_thumbnail_buffer, t.video_thumbnail_sha1)
+      const result = await uploadVideoWithThumbnail(isWidget ? 'widgets' : 'plugins', pluginId, {
+        sha1: video.sha1,
+        bytes: video.bytes,
+      }, video.video_thumbnail_buffer, video.video_thumbnail_sha1)
       allMedia.push({
-        carousel_position: t.carousel_position,
-        sha1: r.sha1,
-        video_file_uuid: r.videoFileUuid,
-        video_thumbnail_sha1: r.videoThumbnailSha1,
+        carousel_position: video.carousel_position,
+        sha1: result.sha1,
+        video_file_uuid: result.videoFileUuid,
+        video_thumbnail_sha1: result.videoThumbnailSha1,
       })
-      return !0
+      return true
     }
-    catch (e) {
-      reportError(ServiceCategories.COMMUNITY, e)
+    catch (error) {
+      reportError(ServiceCategories.COMMUNITY, error)
       return new Error(getI18nString('community.actions.error_uploading_plugin_video_error', {
-        error: resolveMessage(e, e.data?.message || 'unknown error'),
+        error: resolveMessage(error, error.data?.message || 'unknown error'),
       }))
     }
   })
-  await Promise.all(Q)
-  let {
+  await Promise.all(videoUploadPromises)
+  const {
     data,
-  } = await sendWithRetry.put(`/api/${getPluginWidgetLabel(!!g, {
-    pluralized: !0,
-  })}/${e}/versions/${versionId}`, {
-    icon_uploaded: q,
-    cover_image_uploaded: J,
-    snapshot_uploaded: Z,
+  } = await sendWithRetry.put(`/api/${getPluginWidgetLabel(!!isWidget, {
+    pluralized: true,
+  })}/${pluginId}/versions/${versionId}`, {
+    icon_uploaded: iconUploaded,
+    cover_image_uploaded: coverUploaded,
+    snapshot_uploaded: snapshotUploaded,
     carousel_media: allMedia,
-    code_uploaded: X,
-    comments_setting: i,
-    category_id: a,
+    code_uploaded: codeUploaded,
+    comments_setting: commentsSetting,
+    category_id: categoryId,
     signature,
     image_upload_nonce: imageUploadNonce,
-    agreed_to_tos: u,
-    org_id: h,
-    playground_fig_file_key: r.playground_fig_file_key,
-    playground_file_publish_type: f,
-  }).catch((e) => {
-    reportError(ServiceCategories.COMMUNITY, e)
-    return new Error(g
+    agreed_to_tos: agreedToTos,
+    org_id: orgId,
+    playground_fig_file_key: pluginVersion.playground_fig_file_key,
+    playground_file_publish_type: playgroundFilePublishType,
+  }).catch((error) => {
+    reportError(ServiceCategories.COMMUNITY, error)
+    return new Error(isWidget
       ? getI18nString('community.actions.error_finalizing_widget_error', {
-          error: resolveMessage(e, e.data?.message || ''),
+          error: resolveMessage(error, error.data?.message || ''),
         })
       : getI18nString('community.actions.error_finalizing_plugin_error', {
-          error: resolveMessage(e, e.data?.message || ''),
+          error: resolveMessage(error, error.data?.message || ''),
         }))
-  })
-  let et = data.meta
-  let er = et.plugin
-  if (er.id !== e)
+  }) as any
+  const responseData = data.meta
+  const publishedPlugin = responseData.plugin
+  if (publishedPlugin.id !== pluginId) {
     throw new Error(getI18nString('community.actions.the_published_resource_i_ds_do_not_match'))
+  }
   trackEventAnalytics('Hub Plugin Publish Version', {
-    pluginId: e,
-    hasUI: !!y.ui,
-    apiVersion: y.api,
-    codeLength: T,
-    iconFileSize: v,
-    coverFileSize: A,
-    isWidget: g,
-    editorType: y.editorType?.sort().join(', '),
+    pluginId,
+    hasUI: !!manifest.ui,
+    apiVersion: manifest.api,
+    codeLength,
+    iconFileSize,
+    coverFileSize,
+    isWidget,
+    editorType: manifest.editorType?.sort().join(', '),
   })
   return {
-    publishedPlugin: er,
-    profile: et.profile,
+    publishedPlugin,
+    profile: responseData.profile,
   }
 }
-let $$ee5 = createPublishActionCreators('PLUGIN')
-let {
+const publishActionCreators = createPublishActionCreators('PLUGIN')
+const {
   updateMetadata,
   updateStatus,
   clearMetadataAndStatus,
   clearMetadata,
-} = $$ee5
-let $$ea2 = createOptimistThunk(async (e, t) => {
-  let {
+} = publishActionCreators
+const publishPluginVersionThunk = createOptimistThunk(async (dispatch, params) => {
+  const {
     pluginVersion,
     localFileId,
     pluginId,
@@ -601,80 +628,88 @@ let $$ea2 = createOptimistThunk(async (e, t) => {
     playgroundFilePublishType,
     tags,
     tagsV2,
-  } = t
-  e.dispatch(updateStatus({
+  } = params
+  dispatch.dispatch(updateStatus({
     id: localFileId,
     status: {
       code: UploadStatusEnum.UPLOADING,
     },
   }))
   try {
-    let {
+    const {
       publishedPlugin,
       profile,
-    } = await Q(pluginId, localFileId, pluginVersion, commentsSetting, categoryId, tags, tagsV2, agreedToTos, orgId, isWidget, playgroundFilePublishType)
-    e.dispatch(mergePublishedPluginThunk({
+    } = (await publishNewPluginVersion(pluginId, localFileId, pluginVersion, commentsSetting, categoryId, tags, tagsV2, agreedToTos, orgId, isWidget, playgroundFilePublishType)) as any
+    dispatch.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [publishedPlugin],
       src: 'publishPluginVersion',
     }))
-    profile && (e.dispatch(addAuthedCommunityProfileToHub(profile)), e.dispatch(putCommunityProfile(profile)))
-    e.dispatch(updateStatus({
+    if (profile) {
+      dispatch.dispatch(addAuthedCommunityProfileToHub(profile))
+      dispatch.dispatch(putCommunityProfile(profile))
+    }
+    dispatch.dispatch(updateStatus({
       id: localFileId,
       status: {
         code: UploadStatusEnum.SUCCESS,
       },
     }))
-    e.dispatch(clearMetadata({
+    dispatch.dispatch(clearMetadata({
       id: localFileId,
     }))
     callback()
   }
-  catch (r) {
-    e.dispatch(updateStatus({
+  catch (error) {
+    dispatch.dispatch(updateStatus({
       id: localFileId,
       status: {
         code: UploadStatusEnum.FAILURE,
-        error: r.message,
+        error: error.message,
       },
     }))
-    let t = getI18nString('community.actions.could_not_publish_plugin_error', {
-      error: resolveMessage(r, r.message),
+    const errorMessage = getI18nString('community.actions.could_not_publish_plugin_error', {
+      error: resolveMessage(error, error.message),
     })
-    r instanceof UploadError
-      ? enqueueNetworkErrorBell(e.dispatch, getI18nString('check_network_compatibility.error_bell.video_upload.message'))
-      : r.message.includes('invalid word') || e.dispatch(VisualBellActions.enqueue({
-        message: t,
-        error: !0,
+    if (error instanceof UploadError) {
+      enqueueNetworkErrorBell(dispatch.dispatch, getI18nString('check_network_compatibility.error_bell.video_upload.message'))
+    }
+    else if (!error.message.includes('invalid word')) {
+      dispatch.dispatch(VisualBellActions.enqueue({
+        message: errorMessage,
+        error: true,
       }))
-    reportError(ServiceCategories.COMMUNITY, r)
-    return new Error(t)
+    }
+    reportError(ServiceCategories.COMMUNITY, error)
+    return new Error(errorMessage)
   }
 })
-let $$es11 = createOptimistThunk(async (e, t) => {
-  let {
+const updatePluginVersionThunk = createOptimistThunk(async (dispatch, params) => {
+  const {
     resource,
     pluginVersion,
     callback,
     playgroundFilePublishType,
     localFileIdOrPluginId,
-  } = t
+  } = params
   try {
-    e.dispatch(updateStatus({
+    dispatch.dispatch(updateStatus({
       id: localFileIdOrPluginId,
       status: {
         code: UploadStatusEnum.UPLOADING,
       },
     }))
-    let {
+    const {
       profile,
       publishedPlugin,
-    } = await Z(resource, pluginVersion, playgroundFilePublishType)
-    e.dispatch(mergePublishedPluginThunk({
+    } = await updatePluginVersion(resource, pluginVersion, playgroundFilePublishType)
+    dispatch.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [publishedPlugin],
       src: 'updatePublishedPluginRole',
     }))
-    profile && e.dispatch(putCommunityProfile(profile))
-    e.dispatch(updateStatus({
+    if (profile) {
+      dispatch.dispatch(putCommunityProfile(profile))
+    }
+    dispatch.dispatch(updateStatus({
       id: localFileIdOrPluginId,
       status: {
         code: UploadStatusEnum.SUCCESS,
@@ -682,294 +717,312 @@ let $$es11 = createOptimistThunk(async (e, t) => {
     }))
     callback()
   }
-  catch (r) {
-    let t = resolveMessage(r, r.message)
-    r instanceof UploadError
-      ? enqueueNetworkErrorBell(e.dispatch, getI18nString('check_network_compatibility.error_bell.video_upload.message'))
-      : e.dispatch(VisualBellActions.enqueue({
-          message: t,
-          error: !0,
-        }))
-    e.dispatch(updateStatus({
+  catch (error) {
+    const errorMessage = resolveMessage(error, error.message)
+    if (error instanceof UploadError) {
+      enqueueNetworkErrorBell(dispatch.dispatch, getI18nString('check_network_compatibility.error_bell.video_upload.message'))
+    }
+    else {
+      dispatch.dispatch(VisualBellActions.enqueue({
+        message: errorMessage,
+        error: true,
+      }))
+    }
+    dispatch.dispatch(updateStatus({
       id: localFileIdOrPluginId,
       status: {
         code: UploadStatusEnum.FAILURE,
-        error: t,
+        error: errorMessage,
       },
     }))
-    reportError(ServiceCategories.COMMUNITY, r)
-    return new Error(`Failed plugin patchVersion: ${r.message}`)
+    reportError(ServiceCategories.COMMUNITY, error)
+    return new Error(`Failed plugin patchVersion: ${error.message}`)
   }
 })
-let $$eo35 = createOptimistThunk(async (e, {
-  pluginId: t,
-  role: r,
-  agreedToTos: i,
-  isWidget: a,
+const updatePluginRoleThunk = createOptimistThunk(async (dispatch, {
+  pluginId,
+  role,
+  agreedToTos,
+  isWidget,
 }) => {
-  let o
-  let l = {
-    org_id: r.org ? r.org.id : void 0,
-    is_public: r.is_public,
-    agreed_to_tos: i,
+  const roleData = {
+    org_id: role.org ? role.org.id : void 0,
+    is_public: role.is_public,
+    agreed_to_tos: agreedToTos,
   }
-  o = a ? sendWithRetry.put(`/api/widgets/${t}/roles`, l) : sendWithRetry.put(`/api/plugins/${t}/roles`, l)
-  await o.then(({
-    data: r,
+  const request = isWidget ? sendWithRetry.put(`/api/widgets/${pluginId}/roles`, roleData) : sendWithRetry.put(`/api/plugins/${pluginId}/roles`, roleData)
+  await request.then(({
+    data,
   }) => {
-    let n = r.meta
+    const resource = data.meta
     trackEventAnalytics('Hub Plugin Publish Role', {
-      pluginId: t,
-      toPublic: n.roles.is_public,
-      toOrg: !!n.roles.org,
-      needApproval: isResourcePendingPublishing(n),
-      isWidget: a,
+      pluginId,
+      toPublic: resource.roles.is_public,
+      toOrg: !!resource.roles.org,
+      needApproval: isResourcePendingPublishing(resource),
+      isWidget,
     })
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: [n],
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: [resource],
       src: 'updatePublishedPluginRole',
     }))
-  }).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
+  }).catch((error) => {
+    dispatch.dispatch(VisualBellActions.enqueue({
       message: getI18nString('community.publishing.could_not_publish_plugin_error', {
-        error: resolveMessage(t, t.data?.message),
+        error: resolveMessage(error, error.data?.message),
       }),
-      error: !0,
+      error: true,
     }))
-    reportError(ServiceCategories.COMMUNITY, t)
+    reportError(ServiceCategories.COMMUNITY, error)
   })
 })
-let $$el10 = createOptimistThunk(async (e, t) => {
-  let r
-  if (t.authorOrgId && t.authorTeamId) {
+const updatePublishedPluginThunk = createOptimistThunk(async (dispatch, params) => {
+  if (params.authorOrgId && params.authorTeamId) {
     console.error('Attempting to set both authorOrgId and authorTeamId while publishing')
     return
   }
-  let {
+  const {
     isWidget,
     pluginId,
-  } = t
-  let s = {
-    tags: t.tags,
-    tags_v2: t.tagsV2,
-    support_contact: t.supportContact,
-    author_org_id: t.authorOrgId,
-    author_team_id: t.authorTeamId,
-    publisher_ids: t.publisherIds,
-    hide_related_content_by_others: t.hideRelatedContentByOthers,
-    agreed_to_tos: t.agreedToTos,
-    is_paid: t.isPaid,
-    is_subscription: t.isSubscription,
-    price: t.price,
-    has_freemium_code: t.hasFreemiumCode,
-    category_id: t.categoryId,
-    is_public: t.isPublic,
-    annual_discount_percentage: t.annualDiscount,
-    is_annual_discount_active: t.isAnnualDiscountActive,
+  } = params
+  const updateData = {
+    tags: params.tags,
+    tags_v2: params.tagsV2,
+    support_contact: params.supportContact,
+    author_org_id: params.authorOrgId,
+    author_team_id: params.authorTeamId,
+    publisher_ids: params.publisherIds,
+    hide_related_content_by_others: params.hideRelatedContentByOthers,
+    agreed_to_tos: params.agreedToTos,
+    is_paid: params.isPaid,
+    is_subscription: params.isSubscription,
+    price: params.price,
+    has_freemium_code: params.hasFreemiumCode,
+    category_id: params.categoryId,
+    is_public: params.isPublic,
+    annual_discount_percentage: params.annualDiscount,
+    is_annual_discount_active: params.isAnnualDiscountActive,
   }
-  r = isWidget ? sendWithRetry.put(`/api/widgets/${pluginId}`, s) : sendWithRetry.put(`/api/plugins/${pluginId}`, s)
-  await r.then(({
-    data: r,
+  const request = isWidget ? sendWithRetry.put(`/api/widgets/${pluginId}`, updateData) : sendWithRetry.put(`/api/plugins/${pluginId}`, updateData)
+  await request.then(({
+    data,
   }) => {
-    let n = r.meta
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: [n],
+    const resource = data.meta
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: [resource],
       src: 'updatePublishedPlugin',
     }))
-    t.onSuccess?.()
-  }).catch((t) => {
-    e.dispatch(VisualBellActions.enqueue({
+    params.onSuccess?.()
+  }).catch((error) => {
+    dispatch.dispatch(VisualBellActions.enqueue({
       message: getI18nString('community.publishing.could_not_publish_plugin_error', {
-        error: resolveMessage(t, t.data?.message),
+        error: resolveMessage(error, error.data?.message),
       }),
-      error: !0,
+      error: true,
     }))
-    reportError(ServiceCategories.COMMUNITY, t)
+    reportError(ServiceCategories.COMMUNITY, error)
   })
 })
-let $$ed17 = createOptimistThunk((e, {
-  resource: t,
+const unpublishPluginThunk = createOptimistThunk((dispatch, {
+  resource,
 }) => {
-  sendWithRetry.del(`/api/${getResourceTypeLabel(t, {
-    pluralized: !0,
-  })}/${t.id}`).then(({
-    data: r,
+  sendWithRetry.del(`/api/${getResourceTypeLabel(resource, {
+    pluralized: true,
+  })}/${resource.id}`).then(({
+    data,
   }) => {
-    let n = r.meta
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: [n],
+    const unpublishedResource = data.meta
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: [unpublishedResource],
       src: 'unpublishPublishedPlugin',
     }))
     trackEventAnalytics('Hub Unpublish Plugin', {
-      pluginId: t.id,
-      ...getResourceRoleInfo(t),
+      pluginId: resource.id,
+      ...getResourceRoleInfo(resource),
     })
-  }).catch((r) => {
-    e.dispatch(VisualBellActions.enqueue({
-      message: isWidget(t)
+  }).catch((error) => {
+    dispatch.dispatch(VisualBellActions.enqueue({
+      message: isWidget(resource)
         ? getI18nString('community.actions.could_not_publish_widget_error', {
-            error: resolveMessage(r, r.data?.message),
+            error: resolveMessage(error, error.data?.message),
           })
         : getI18nString('community.actions.could_not_publish_plugin_error', {
-            error: resolveMessage(r, r.data?.message),
+            error: resolveMessage(error, error.data?.message),
           }),
-      error: !0,
+      error: true,
     }))
-    reportError(ServiceCategories.COMMUNITY, r)
+    reportError(ServiceCategories.COMMUNITY, error)
   })
 })
-let $$ec15 = createOptimistThunk((e, {
-  id: t,
-  resourceType: r,
+const getResourceVersionsThunk = createOptimistThunk((dispatch, {
+  id,
+  resourceType,
 }, {
-  loadingKey: n,
+  loadingKey,
 }) => {
-  let i = t => e.dispatch(mergePublishedPluginThunk({
-    publishedPlugins: [t],
+  const handleSuccess = resource => dispatch.dispatch(mergePublishedPluginThunk({
+    publishedPlugins: [resource],
     src: 'getResourceVersions',
-    overrideInstallStatus: !0,
+    overrideInstallStatus: true,
   }))
-  let a = r === HubTypeEnum.WIDGET
+  const request = resourceType === HubTypeEnum.WIDGET
     ? widgetAPIClient.getVersions({
-        widgetId: t,
+        widgetId: id,
       })
     : pluginAPIService.getVersions({
-        pluginId: t,
+        pluginId: id,
       })
-  setupLoadingStateHandler(a, e, n)
-  a.then(({
-    data: e,
+  setupLoadingStateHandler(request, dispatch, loadingKey)
+  request.then(({
+    data,
   }) => {
-    i(e.meta.plugin)
-  }).catch((e) => {
-    console.log(`Versions of ${r} with id ${t} cannot be fetched at this time:`, e.data?.message)
+    handleSuccess(data.meta.plugin)
+  }).catch((error) => {
+    console.log(`Versions of ${resourceType} with id ${id} cannot be fetched at this time:`, error.data?.message)
   })
 }, ({
-  id: e,
-}) => `GET_PLUGIN_VERSIONS_${e}`)
-let $$eu34 = createOptimistThunk(async (e, t) => {
-  let {
+  id,
+}) => `GET_PLUGIN_VERSIONS_${id}`)
+const setPluginPublisherRoleThunk = createOptimistThunk(async (dispatch, params) => {
+  const {
     role,
     userId,
     resource,
-  } = t
+  } = params
   try {
-    let t = (resource.is_widget
+    const response = resource.is_widget
       ? await sendWithRetry.put(`/api/widgets/${resource.id}/publishers/${userId}`, {
           role,
         })
       : await sendWithRetry.put(`/api/plugins/${resource.id}/publishers/${userId}`, {
           role,
-        })).data.meta.plugin
-    let n = e.getState().user
-    role === PublisherRole.NONE && userId === n?.id && (t.plugin_publishers = {
-      accepted: [],
-      pending: [],
-    })
-    e.dispatch(mergePublishedPluginThunk({
-      publishedPlugins: [t],
+        })
+    let updatedPlugin = response.data.meta.plugin
+    const currentUser = dispatch.getState().user
+    if (role === PublisherRole.NONE && userId === currentUser?.id) {
+      updatedPlugin.plugin_publishers = {
+        accepted: [],
+        pending: [],
+      }
+    }
+    dispatch.dispatch(mergePublishedPluginThunk({
+      publishedPlugins: [updatedPlugin],
       src: 'setPluginPublisherRole',
     }))
-    let s = e.getState()
-    let {
+    const state = dispatch.getState()
+    const {
       publishingPlugins,
       localPlugins,
       publishedPlugins,
       publishedWidgets,
       currentUserOrgId,
       authedProfilesById,
-    } = s
-    let h = Object.values(localPlugins).find(e => e.plugin_id === resource.id)
-    let m = h?.localFileId ?? resource.id
-    let f = getPublishingData({
-      ...getPermissionsState(s),
+    } = state
+    const localPlugin = Object.values<ObjectOf>(localPlugins).find(plugin => plugin.plugin_id === resource.id)
+    const metadataId = localPlugin?.localFileId ?? resource.id
+    const publishingData = getPublishingData({
+      ...getPermissionsState(state),
       currentUserOrgId,
       localPlugins,
       publishedPlugins,
       publishedWidgets,
       authedProfilesById,
-    }, h?.localFileId)
-    let E = {
-      ...publishingPlugins[m].metadata,
-      author: f.author,
-      publishers: f.publishers,
-      creators: f.creators,
-      blockPublishingOnToS: f.blockPublishingOnToS,
+    }, localPlugin?.localFileId)
+    const updatedMetadata = {
+      ...publishingPlugins[metadataId].metadata,
+      author: publishingData.author,
+      publishers: publishingData.publishers,
+      creators: publishingData.creators,
+      blockPublishingOnToS: publishingData.blockPublishingOnToS,
     }
-    e.dispatch(updateMetadata({
-      id: m,
-      metadata: E,
+    dispatch.dispatch(updateMetadata({
+      id: metadataId,
+      metadata: updatedMetadata,
     }))
   }
-  catch (t) {
-    e.dispatch(VisualBellActions.enqueue({
-      message: resolveMessage(t, t.message),
-      error: !0,
+  catch (error) {
+    dispatch.dispatch(VisualBellActions.enqueue({
+      message: resolveMessage(error, error.message),
+      error: true,
     }))
-    reportError(ServiceCategories.COMMUNITY, t)
-    return new Error(t.message)
+    reportError(ServiceCategories.COMMUNITY, error)
+    return new Error(error.message)
   }
 })
-export function $$ep30(e, t) {
-  let {
+export function uploadPluginCode(uploadUrl, pluginSource) {
+  const {
     fields,
     codePath,
     signedCloudfrontUrl,
-  } = e
-  let s = new FormData()
-  return (Object.entries(fields).forEach(([e, t]) => s.append(e, t)), s.set('Content-Type', 'text/javascript'), s.append('file', t), signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains)
-    ? sendWithRetry.crossOriginPut(signedCloudfrontUrl, t, {
-        raw: !0,
-        headers: {
-          'Content-Type': 'text/javascript',
-          'Cache-Control': ', max-age=86400',
-          'x-amz-acl': 'bucket-owner-full-control',
-        },
-      })
-    : sendWithRetry.crossOriginPost(codePath, s, {
-        raw: !0,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Cache-Control': ', max-age=86400',
-        },
-      })
+  } = uploadUrl
+  const formData = new FormData()
+  Object.entries(fields).forEach(([key, value]: [string, any]) => formData.append(key, value))
+  formData.set('Content-Type', 'text/javascript')
+  formData.append('file', pluginSource)
+  if (signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains) {
+    return sendWithRetry.crossOriginPut(signedCloudfrontUrl, pluginSource, {
+      raw: true,
+      headers: {
+        'Content-Type': 'text/javascript',
+        'Cache-Control': ', max-age=86400',
+        'x-amz-acl': 'bucket-owner-full-control',
+      },
+    })
+  }
+  else {
+    return sendWithRetry.crossOriginPost(codePath, formData, {
+      raw: true,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Cache-Control': ', max-age=86400',
+      },
+    })
+  }
 }
-export function $$e_25(e) {
-  let t = e.data
-  if (!t || typeof t != 'string')
+export function parseUploadError(error) {
+  const data = error.data
+  if (!data || typeof data !== 'string') {
     return
-  let r = new DOMParser().parseFromString(t, 'text/xml').getElementsByTagName('Code')
-  if (r && r[0] && r[0].textContent === 'EntityTooLarge')
+  }
+  const xmlDoc = new DOMParser().parseFromString(data, 'text/xml')
+  const codeElements = xmlDoc.getElementsByTagName('Code')
+  if (codeElements && codeElements[0] && codeElements[0].textContent === 'EntityTooLarge') {
     return getI18nString('community.actions.file_too_large')
+  }
 }
-export { GV, l5, l7, Qi, uV, Vx } from '../905/172918'
-export const $Z = $$z0
-export const Cf = $$$1
-export const Dl = $$ea2
+export const GV = deleteAllWidgets
+export const l5 = mergePublishedPlugin
+export const l7 = deleteAllPlugins
+export const Qi = mergePublishedPluginThunk
+export const uV = putAllWidgets
+export const Vx = putAllPlugins
+export const $Z = getCanvasWidgetVersion
+export const Cf = fetchAndCacheWidgetVersionsThunk
+export const Dl = publishPluginVersionThunk
 export const Ij = clearMetadataAndStatus
-export const KJ = $$ee5
-export const L4 = $$M6
-export const LP = $$q7
-export const O8 = $$Y8
-export const R8 = $$el10
-export const Vp = $$es11
-export const W9 = $$W13
-export const a8 = $$J14
-export const af = $$ec15
-export const b6 = $$B16
-export const et = $$ed17
-export const f1 = $$K18
-export const fd = $$U19
-export const fs = $$V20
+export const KJ = publishActionCreators
+export const L4 = replaceFeaturedPluginAction
+export const LP = getOrgPublishedPluginsThunk
+export const O8 = fetchPublishedWidgetsThunk
+export const R8 = updatePublishedPluginThunk
+export const Vp = updatePluginVersionThunk
+export const W9 = fetchCanvasWidgetVersions
+export const a8 = getOrgPublishedWidgetsThunk
+export const af = getResourceVersionsThunk
+export const b6 = cacheWidgetVersionsThunk
+export const et = unpublishPluginThunk
+export const f1 = fetchPublishedPluginsThunk
+export const fd = unpublishedWidgetsQuery
+export const fs = updatePublishedCanvasWidgetVersionsAction
 export const fy = updateMetadata
 export const gD = updateStatus
-export const n1 = $$e_25
-export const pZ = $$X26
+export const n1 = parseUploadError
+export const pZ = getCommunityProfilePluginsThunk
 export const pm = clearMetadata
-export const se = $$j28
-export const uF = $$F29
-export const uT = $$ep30
-export const uX = $$G32
-export const uw = $$H33
-export const wx = $$eu34
-export const zn = $$eo35
+export const se = unpublishedPluginsQuery
+export const uF = initializeUserPublishedResourcesThunk
+export const uT = uploadPluginCode
+export const uX = getPublishedResourceThunk
+export const uw = updateFetchedCanvasWidgetVersionsAction
+export const wx = setPluginPublisherRoleThunk
+export const zn = updatePluginRoleThunk

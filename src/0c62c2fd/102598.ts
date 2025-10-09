@@ -6,7 +6,7 @@ import { c } from "../4452/815584";
 export function $$l0({
   folder: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(c, {
     initialName: e.description ?? "",
     title: getI18nString("resource_rename_modal.edit_description"),

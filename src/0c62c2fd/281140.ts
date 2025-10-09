@@ -7,7 +7,7 @@ import { c } from "../4452/815584";
 export function $$d0({
   team: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(c, {
     initialName: e.name,
     maxLength: teamConstant,

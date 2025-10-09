@@ -22,7 +22,7 @@ import { WithTrackedButtonWide } from "../figma_app/617427";
 import { TrackingProvider } from "../figma_app/831799";
 import { ModalContainer } from "../figma_app/918700";
 function x(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = $Y(e.teamId);
   let m = void 0 === e.canEditTeam ? r : e.canEditTeam;
   let y = useSubscription(TeamFileLimitsInfo({
@@ -158,7 +158,7 @@ export function $$N0(e) {
   });
 }
 export let $$C1 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(ModalContainer, {
     size: 500,
     children: jsx(TrackingProvider, {

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useId, useRef, useCallback, useMemo } from "react";
-import { Q } from "../vendor/912394";
+import { DndProvider } from "../vendor/912394";
 import { getElementPosition, pointFromMouseEvent } from "../905/268491";
 import { setupRefUpdater } from "../905/823680";
 import { defaultComponentAttribute } from "../905/577641";
@@ -294,7 +294,7 @@ let $$f1 = forwardRef(({
     };
   }(t);
   let v = setupRefUpdater(i, ref);
-  return jsx(Q, {
+  return jsx(DndProvider, {
     backend: l,
     children: jsxs(k.Provider, {
       value: gridContextValue,

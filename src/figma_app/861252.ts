@@ -181,7 +181,7 @@ function es() {
 }
 let e_ = parsePxNumber(if6);
 let $$eh0 = memo(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = isSitesFileType();
   let r = useCanUseDevModeDemoFile();
   let i = _$$C()?.setBottomRightToolsNode || noop;

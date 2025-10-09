@@ -19,12 +19,12 @@ import { A as _$$A } from "../905/713173";
 import { d as _$$d } from "../905/954754";
 import { o as _$$o } from "../905/609215";
 import { isInvalidValue, isValidValue } from "../905/216495";
-import { u as _$$u, G6 } from "../figma_app/852050";
+import { getVariableById, getCombinedVariableSetById } from "../figma_app/852050";
 import { c as _$$c } from "../905/534105";
 import { J } from "../905/225412";
 import { c as _$$c2, P as _$$P } from "../905/200950";
 import { zt, YT, Oz } from "../figma_app/84580";
-import { eF } from "../figma_app/394327";
+import { isLocallySoftDeleted } from "../figma_app/394327";
 import { wG, J2 } from "../905/331989";
 import { getPathLeaf } from "../905/782020";
 import { DraggableModalManager } from "../905/748636";
@@ -317,9 +317,9 @@ function W({
   showVariableThumbnails: r,
   disableHover: i
 }) {
-  let a = _$$u(e);
+  let a = getVariableById(e);
   let s = a ? getPathLeaf(a.name) : getI18nString("proto.expression_builder_entry.missing");
-  let o = G6(a?.variableSetId);
+  let o = getCombinedVariableSetById(a?.variableSetId);
   let l = o && t ? o.modes.find(e => e.id === t) : null;
   let d = l?.name;
   let c = a && r ? Xx(a.resolvedType) : null;
@@ -327,7 +327,7 @@ function W({
   return jsx(wG, {
     text: u,
     thumbnailValue: c,
-    isDeleted: !!a && eF(a),
+    isDeleted: !!a && isLocallySoftDeleted(a),
     disableHover: i
   });
 }

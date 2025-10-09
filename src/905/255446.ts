@@ -158,7 +158,7 @@ export function $$M8(e, t, i, a, o) {
   let p = useMemo(() => !!o && o.instanceIdsToUpdate.map(Fullscreen.getBackingAssetRef).every(e => V(a, e)), [a, o, l]);
   let m = useRef(new LRUCache(100));
   let h = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let [i, a] = useState(createInitState());
     let s = useRef(null);
     let o = `${getAssetKey(e)}/${getAssetVersion(e)}`;
@@ -215,7 +215,7 @@ export function $$j2(e) {
     beforeImage,
     afterImage
   } = function (e, t, i, o) {
-    let l = useDispatch();
+    let l = useDispatch<AppDispatch>();
     let d = useSelector(e => e.theme.visibleTheme);
     let c = getThemeBackgroundColor(d);
     let g = selectWithShallowEqual(e => selectOpenFileKey(e) || "");

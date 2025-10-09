@@ -127,7 +127,7 @@ function R({
   selectedRegion: e,
   setSelectedRegion: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let a = e => {
     switch (e) {
@@ -378,7 +378,7 @@ export function $$D1({
   trackingContext: n,
   source: r
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return () => i(showModalHandler({
     type: $$O0,
     data: {

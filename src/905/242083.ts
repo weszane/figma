@@ -57,7 +57,7 @@ import { widgetInteractionTracker } from '../905/223332';
 import { shouldEnableFeedbackCategory } from '../905/226610';
 import { ExtensionSource } from '../905/235578';
 import { delay } from '../905/236856';
-import { T as _$$T4 } from '../905/239551';
+import { setWidgetManagerHandler } from '../905/239551';
 import { copyHyperlinkToClipboard, parseLinkForContext } from '../905/250387';
 import { R as ICON } from '../905/256203';
 import { HiddenLabel, Label } from '../905/270045';
@@ -112,7 +112,7 @@ import { createFileBehaviorAtom, FileChangeBehaviorEnum } from '../905/508457';
 import { checkEligibilityStatus } from '../905/509613';
 import { Vector2D } from '../905/512402';
 import { PublishingUIContext } from '../905/514666';
-import { v as _$$v3 } from '../905/516963';
+import { statsigClient } from '../905/516963';
 import { dD } from '../905/519113';
 import { Button } from '../905/521428';
 import { canOpenUrlInDesktop, DesktopModalType, openUrlInDesktop, redirectToFontSettings } from '../905/535224';
@@ -206,7 +206,7 @@ import { getCurrentMaxVariables } from '../905/850476';
 import { s2 as _$$s3, A9, bT, E9, mK } from '../905/851937';
 import { savepointOptimistThunk } from '../905/852057';
 import { y as _$$y2 } from '../905/855374';
-import { n3 as _$$n, F7, Rf } from '../905/859698';
+import { n3 as _$$n, Rf } from '../905/859698';
 import { FDocumentType, isSupportedBlockType, ITemplateType } from '../905/862883';
 import { defaultSessionLocalIDString, parseSessionLocalID } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
@@ -222,7 +222,6 @@ import { sendWithRetry } from '../905/910117';
 import { bL } from '../905/911410';
 import { fullscreenCrashHandler } from '../905/913008';
 import { debounce } from '../905/915765';
-import { a7 as _$$a4 } from '../905/917898';
 import { sZ as _$$sZ, J5, jd, K8, O8, Vq } from '../905/920793';
 import { hD } from '../905/921139';
 import { hideDropdownAction, selectViewAction, showDropdownThunk, updateDropdownSelectionAction } from '../905/929976';
@@ -365,7 +364,7 @@ import { ni as _$$ni, G4, LK } from '../figma_app/545293';
 import { _o as _$$_o } from '../figma_app/552821';
 import { c3 as _$$c7, ZI } from '../figma_app/553940';
 import { initializeMissingFontTracker, trackShowMissingFontsPopover } from '../figma_app/557318';
-import { $Z, Cf } from '../figma_app/559491';
+import { getCanvasWidgetVersion, fetchAndCacheWidgetVersionsThunk } from '../figma_app/559491';
 import { B as _$$B4 } from '../figma_app/560453';
 import { singletonAsync } from '../figma_app/562352';
 import { be, k6 } from '../figma_app/565197';
@@ -420,7 +419,7 @@ import { setupHyperlinkHandler } from '../figma_app/815170';
 import { G_h } from '../figma_app/822011';
 import { isProtoViewerUrl } from '../figma_app/831696';
 import { TrackingProvider } from '../figma_app/831799';
-import { bi } from '../figma_app/836943';
+import { findStyleInLibrary } from '../figma_app/836943';
 import { dumpAutosaveData, getAutosaveManagerInstance, setupAutosaveManager } from '../figma_app/840917';
 import { enterVersionHistoryMode, exitVersionHistoryMode, findVersionById } from '../figma_app/841351';
 import { z6 } from '../figma_app/846841';
@@ -460,6 +459,7 @@ import { hp } from '../vendor/162266';
 import ah from '../vendor/223926';
 import { deflateRaw } from '../vendor/323834';
 import oA from '../vendor/805353';
+import { ensureVmModuleLoaded } from "./realmVmWrapper";
 let n;
 let r;
 function d(e) {
@@ -873,7 +873,7 @@ class t4 {
       let n = {
         guid: parseSessionLocalID(e?.styleId.guid)
       };
-      return !bi({
+      return !findStyleInLibrary({
         library: t,
         inheritStyleKey: r.key,
         inheritStyleID: n
@@ -1011,14 +1011,14 @@ function ik(e) {
       let t = e.getDirectlySelectedNodes()[0];
       return t ? t.guid : null;
     });
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     useEffect(() => {
       i !== e && n(hideSpecificModal({
         type: t
       }));
     }, [n, e, i, t]);
   }(e.slotNodeId, iN.type);
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = pN(e.slotNodeId);
   let {
     preferredValues
@@ -1148,7 +1148,7 @@ let iG = {
   clearFrecencyData: Zk
 };
 let i0 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager(e);
   return jsx(ModalRootComponent, {
     manager: i,
@@ -2202,7 +2202,7 @@ let r7 = registerModal(({
   open: t,
   onClose: i
 }) => {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = selectCurrentFile();
   let [o, l] = useLocalStorageSync('preferred-document-color-profile-change-option', 'convert');
   let d = getColorSpaceSupportStatus();
@@ -2770,7 +2770,7 @@ let aO = registerModal(e => {
   let h = c.length;
   let [g, f] = useState('all');
   let _ = useDropdownState();
-  let A = useDispatch();
+  let A = useDispatch<AppDispatch>();
   let [y, b] = useState(JI);
   let [v, I] = useState('DOCUMENT');
   let E = async () => {
@@ -4188,8 +4188,8 @@ let ov = (e, t, i, n, r) => {
 };
 let oI = {
   publishFrameSelectionForMirror(e, t, i, r, a) {
-    let s = _$$v3.getExperimentNumber('mirror_debounce_exp', 'debounce_ms', -1);
-    let o = _$$v3.getExperimentNumber('mirror_debounce_exp', 'max_debounce_wait_ms', -1);
+    let s = statsigClient.getExperimentNumber('mirror_debounce_exp', 'debounce_ms', -1);
+    let o = statsigClient.getExperimentNumber('mirror_debounce_exp', 'max_debounce_wait_ms', -1);
     s > 0 && o > 0 ? (n || (n = ob(s, o)), n(e, t, i, r, a)) : ov(e, t, i, r, a);
   }
 };
@@ -4677,7 +4677,7 @@ async function lN({
   }
 }
 async function lP(e, t) {
-  return getWidgetVersionData(e) || (!e.widgetId || !e.widgetVersionId || hasKey(e.widgetId) ? null : (await $Z(e.widgetId, e.widgetVersionId, t)) ?? null);
+  return getWidgetVersionData(e) || (!e.widgetId || !e.widgetVersionId || hasKey(e.widgetId) ? null : (await getCanvasWidgetVersion(e.widgetId, e.widgetVersionId, t)) ?? null);
 }
 async function lO({
   pluginID: e,
@@ -5085,9 +5085,9 @@ class lV {
     lp.trackImpression(e.filter(e => !isValidWidgetType(e.widgetID)));
     this.trackLocalWidgetsInPlaygroundFile(e);
     let i = await getFullscreenViewFile(debugState);
-    i?.canEditCanvas && (debugState?.dispatch(Cf({
+    i?.canEditCanvas && (debugState?.dispatch(fetchAndCacheWidgetVersionsThunk({
       widgetIDAndVersions: t
-    })), this.didStartPreloadingSandbox || (_$$a4('cppvm').catch(() => {}), this.didStartPreloadingSandbox = !0));
+    })), this.didStartPreloadingSandbox || (ensureVmModuleLoaded('cppvm').catch(() => {}), this.didStartPreloadingSandbox = !0));
     return !0;
   }
   trackLocalWidgetsInPlaygroundFile(e) {
@@ -5225,7 +5225,7 @@ class lV {
       currentUserOrgId
     } = debugState.getState();
     let r = !!t;
-    let a = t ? publishedCanvasWidgetVersions[e]?.[t] ?? (await $Z(e, t, currentUserOrgId)) : void 0;
+    let a = t ? publishedCanvasWidgetVersions[e]?.[t] ?? (await getCanvasWidgetVersion(e, t, currentUserOrgId)) : void 0;
     let s = r ? MAX_CANVAS_SIZE : ZI;
     let o = s / 4;
     let l = _$$Dl(s, s);
@@ -5418,7 +5418,7 @@ export function $$lq1(e, t, i, n) {
     $W();
     mQ();
     setupEventHandlers();
-    _$$T4(new lV());
+    setWidgetManagerHandler(new lV());
     initJsKiwiSerialization();
     _$$a();
     setModalValue(new t4(t));

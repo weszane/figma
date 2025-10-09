@@ -214,7 +214,7 @@ export function $$S0({
 }) {
   let [m] = useLexicalComposerContext();
   return function (e, t, i, l, p) {
-    let m = useDispatch();
+    let m = useDispatch<AppDispatch>();
     let [h, f] = useState(!1);
     useEffect(() => mergeRegister(e.registerCommand(SELECTION_CHANGE_COMMAND, () => {
       let e = $getSelection();

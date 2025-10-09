@@ -31,7 +31,7 @@ let C = (e, t) => {
   return r && i;
 };
 function I(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = getVisibleTheme();
   return jsx(_l, {
     isShowing: e.isShowing,
@@ -62,7 +62,7 @@ function I(e) {
 }
 let $$A = userFlagExistsAtomFamily("has_tried_ko_kr");
 export function $$S0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription($$A);
   let n = useAtomWithSubscription(mp);
   let _ = "loaded" === t.status && "loaded" === n.status;

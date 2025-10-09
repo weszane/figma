@@ -42,7 +42,7 @@ export function $$b3(e) {
     null != e.mirror.appModel.currentStampToolName && "" !== e.mirror.appModel.currentStampToolName && (t = TI(e.mirror.appModel.currentStampToolName)());
     return [e.mirror.appModel.currentTool, t];
   });
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let A = useRef(!1);
   useEffect(() => {
     if (!r) return;

@@ -136,7 +136,7 @@ export let $$I0 = registerModal(function (e) {
   let d = o.data?.org;
   let c = new C(extensionType);
   let g = c.getSettingsText();
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let v = () => {
     hasBackButton && x(popModalStack());
     x(popModalStack());

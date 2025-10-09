@@ -12,7 +12,7 @@ import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ExtensionRequestModal } from "../905/404161";
 var $$p1 = (e => (e.FigJamPluginTile = "figjam_plugin_tile", e))($$p1 || {});
 export function $$g0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     version,
     isPlugin,

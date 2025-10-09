@@ -17,7 +17,7 @@ export function $$_0(e) {
   let [i, _] = useAtomValueAndSetter(l7);
   let [x, y] = useAtomValueAndSetter(oZ);
   let b = selectCurrentFile();
-  let C = useDispatch();
+  let C = useDispatch<AppDispatch>();
   let v = rE();
   let E = useSelector(e => e.versionHistory);
   let T = trackFileEventWithUser();

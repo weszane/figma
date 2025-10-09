@@ -149,7 +149,7 @@ let E = memo(function (e) {
   });
 });
 function B(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = getNudgeMultipliers();
   let a = useSelectionPropertyValue("detectedList");
   let s = useSelectionPropertyValue("detectableListAxis");

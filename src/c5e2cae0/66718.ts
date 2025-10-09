@@ -101,7 +101,7 @@ let w = registerModal(function ({
   });
 }, "ContactSalesSuccessModal");
 export function $$E0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.user);
   let [g, S] = useState({
     email: a?.email ?? "",

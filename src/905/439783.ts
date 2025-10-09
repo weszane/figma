@@ -13,7 +13,7 @@ import { DEFAULT_FINE_NUDGE, DEFAULT_COARSE_NUDGE } from "../905/668764";
 import { h7 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
-import { SG } from "../figma_app/852050";
+import { getFilteredVariables } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { conditionalWrapper } from "../905/579635";
 import { PixelInput } from "../figma_app/178475";
@@ -38,7 +38,7 @@ export function $$N0({
   recordingKey: N,
   responsiveTextStyleVariantIndex: D
 }) {
-  let L = useDispatch();
+  let L = useDispatch<AppDispatch>();
   let F = useRef(null);
   let {
     consumedVariable
@@ -132,7 +132,7 @@ function P({
   children: o
 }) {
   let l = useContext(FormattedInputContext);
-  let d = SG(["LETTER_SPACING"]).data ?? [];
+  let d = getFilteredVariables(["LETTER_SPACING"]).data ?? [];
   let c = useCallback(() => {
     i.current && l?.showBindingUI(i.current, {
       currentFieldValue: e,

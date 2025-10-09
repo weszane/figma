@@ -76,7 +76,7 @@ export function MemoryWarningModal(props: { isBranching: boolean }) {
       || getInitialOptions().editing_file?.source_file?.key
       || ''
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   // Modal context for recovery mode
   const modalContext = {

@@ -108,7 +108,7 @@ import { lx, QH } from '../figma_app/333571';
 import { cS, Zo } from '../figma_app/334459';
 import { p as _$$p } from '../figma_app/353099';
 import { alignmentFromAnchorPosition, anchorPositionFromAlignment, checkIfAnyEffectVisible, getColorAtStop, getContrastingColor, getImageOrVideoPaint, getNoisePaint, getPatternPaint, getSolidPaint, isGradientType, isSolidType, validateGradientPaint } from '../figma_app/385874';
-import { MH } from '../figma_app/394327';
+import { extractVariableAliasOrFontStyle } from '../figma_app/394327';
 import { oz } from '../figma_app/406976';
 import { ZB } from '../figma_app/451499';
 import { fullscreenValue } from '../figma_app/455680';
@@ -126,7 +126,7 @@ import { addToSelection, clearSelection } from '../figma_app/741237';
 import { stopPropagation } from '../figma_app/753501';
 import { CopyPasteType, DesignGraphElements, EyedropperBindings, GradientToolApi, NodePropertyCategory, NoneColor, PropertyScope, SharedStyle, StyleVariableOperation, Thumbnail, VariableDataType, VariableResolvedDataType } from '../figma_app/763686';
 import { Rk } from '../figma_app/844696';
-import { u as _$$u } from '../figma_app/852050';
+import { getVariableById } from '../figma_app/852050';
 import { generateRecordingKey, useHandleMouseEvent, useSetupPlayback } from '../figma_app/878298';
 import { trackDefinedFileEventWithStore } from '../figma_app/901889';
 import { useLatestRef } from '../figma_app/922077';
@@ -563,7 +563,7 @@ function e6({
   recordingKey: s,
   onChange: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useDropdownState();
   let c = getFeatureFlags().eu_fpl_migration_styles_picker_selects;
   let u = useMemo(() => ({
@@ -801,7 +801,7 @@ function e9({
 let t_ = l6;
 let tA = _$$c$2;
 function ty(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = new ZB(() => e.paint);
   return jsx(t_, {
     ariaLabel: getI18nString('fullscreen.properties_panel.color_picker.paint_type.aria_label'),
@@ -922,7 +922,7 @@ function tR({
   handleTabNextRow: v,
   handleTabPrevRow: I
 }) {
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let S = useRef(null);
   let C = X7();
   let T = useCallback(() => {
@@ -1027,7 +1027,7 @@ function tN({
 }) {
   let g = useDropdownState();
   let f = useCounter();
-  let A = useDispatch();
+  let A = useDispatch<AppDispatch>();
   let [b, v] = useState(null);
   let I = useRef(-1);
   let x = useRef(null);
@@ -1062,7 +1062,7 @@ function tN({
     }, yesNoTrackingEnum.YES);
   };
   let O = k.stopsVar[S]?.colorVar;
-  let F = _$$u(MH(O) || void 0);
+  let F = getVariableById(extractVariableAliasOrFontStyle(O) || void 0);
   let M = useCallback(() => {
     let e;
     let t = k.stops[N(S, k.stops)];
@@ -2069,7 +2069,7 @@ function ia({
   minimalUI: O,
   onClose: L
 }) {
-  let F = useDispatch();
+  let F = useDispatch<AppDispatch>();
   let U = Ep();
   let B = X7();
   let H = useCounter();
@@ -2224,7 +2224,7 @@ export function $$io0({
   variableScopes: y,
   isVariableCreationEnabled: b = !1
 }) {
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let I = useDropdownState();
   let S = getColorFormat();
   let C = useCurrentTool();

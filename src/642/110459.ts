@@ -10,7 +10,7 @@ import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { useSelectionProperty } from "../905/275640";
-import { SG, u as _$$u } from "../figma_app/852050";
+import { getFilteredVariables, getVariableById } from "../figma_app/852050";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
 import { Tn, On } from "../figma_app/323320";
@@ -33,7 +33,7 @@ export function $$S0(e) {
     isDefReferencedBySelection: !!s(e, SlotSymbolType.VISIBLE),
     visibilityIsBoundToComponentProp: v(e, selectSceneGraphSelectionKeys(e), SlotSymbolType.VISIBLE)
   }));
-  let w = SG(["VISIBLE"]).data ?? [];
+  let w = getFilteredVariables(["VISIBLE"]).data ?? [];
   let [T] = useSelectionProperty("visible");
   let {
     consumedVariable
@@ -41,7 +41,7 @@ export function $$S0(e) {
   let I = useRef(null);
   let [E, M] = ND("visibility-icon");
   let A = $V();
-  let P = _$$u(A);
+  let P = getVariableById(A);
   let L = !!consumedVariable && !!P;
   let R = L || visibilityIsBoundToComponentProp || isDefReferencedBySelection;
   let O = !L && !visibilityIsBoundToComponentProp && w.length > 0;

@@ -253,7 +253,7 @@ export function $$q2({
   stateManagementVersion: u,
   updateSelectionProperties: _
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let h = useDropdownState();
   let T = getSmallNudgeAmount();
   let w = useAtomWithSubscription(_$$x);

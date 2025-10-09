@@ -100,7 +100,7 @@ function C() {
 }
 export function $$w0(e) {
   let t = useAtomWithSubscription($$N1);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   if (selectUserFlag("dev_mode_mcp_sse_deprecation_banner_dismissed") || !hasDesktopAPI() || !t) return null;
   let i = {
     bannerType: x1.WARN_SOFT,

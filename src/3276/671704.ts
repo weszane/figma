@@ -9,7 +9,7 @@ export function $$c0({
   isWidget: e,
   id: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let c = useCallback(() => {
     _$$e({
       id: t,

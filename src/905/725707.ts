@@ -16,7 +16,7 @@ let m = {
   }
 };
 export function $$h0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(Q.Consumer, {
     children: i => i.useLargePreviewRows ? jsx("div", {
       className: "x1aawmmo xdyg6lv xzi3mdb x18d9i69",

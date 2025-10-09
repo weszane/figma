@@ -48,7 +48,7 @@ function C({
   containerRef: i
 }) {
   let s = useRef(null);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useDropdownState();
   let d = l?.type === e;
   let {

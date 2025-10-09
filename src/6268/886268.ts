@@ -1197,7 +1197,7 @@ let nm = "confirm_deletion_modal--bodyText--OTH-f";
 let np = registerModal(function (e) {
   let n = useModalManager(e);
   let o = useCurrentPlanUser("ConfirmDeletionModal");
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let r = "loaded" === o.status;
   let [a, l] = useState(!1);
   let d = o.data?.planKey;
@@ -1339,7 +1339,7 @@ function nw({
   });
 }
 function nj() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     getTriggerProps,
     manager

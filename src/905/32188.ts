@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { _r } from "../figma_app/451499";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, isMixedArray, isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
-import { M6 } from "../figma_app/852050";
+import { hasFontStyleVariables } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { generateSlug, PanelIdentifiers } from "../figma_app/242339";
 import { a2 } from "../figma_app/762558";
@@ -31,9 +31,9 @@ export function $$N4(e) {
   let [i, y] = useState([]);
   let [v, N] = useState({});
   let [P, D] = useState({});
-  let L = useDispatch();
+  let L = useDispatch<AppDispatch>();
   let F = useDropdownState();
-  let M = M6();
+  let M = hasFontStyleVariables();
   let j = !!e.fontVariationAxes;
   let U = !e.hideTypographyVariableOptions && M;
   let B = useMemo(() => {

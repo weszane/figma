@@ -24,7 +24,7 @@ import { zS, Ku, BV, Qe } from "../figma_app/153399";
 import { Qv, $R, zd, Ze } from "../figma_app/967873";
 export function $$N2() {
   let e = useCurrentFileKey();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = Xr(Qv);
   return (n, i, a) => {
     e && (r(i), getCurrentLiveGraphClient().optimisticallyUpdate({}, _$$v.setUserColorPaletteOverrideForFile(e, n)).catch(e => {

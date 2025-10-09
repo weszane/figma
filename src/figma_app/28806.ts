@@ -11,7 +11,7 @@ import { FPlanAccessType } from "../figma_app/191312";
 import { FOrganizationLevelType } from "../figma_app/421473";
 import { getOrgLevelData } from "../figma_app/428858";
 export function $$m0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useGetLicenseTypesForSeatType({
     visibility: SeatDescriptionVisibility.ALL
   });

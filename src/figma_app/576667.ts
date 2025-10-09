@@ -16,7 +16,7 @@ export function $$g0({
   id: t,
   path: r
 }) {
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let f = useAtomWithSubscription(searchInputAtom);
   let E = useAtomWithSubscription(searchScopeAtom);
   let y = useSelector(e => "search" === e.selectedView.view);

@@ -5,19 +5,19 @@ import { lS } from "../905/296461";
 import { tm } from "../905/261789";
 import { u7, GS } from "../figma_app/846140";
 import { pX } from "../figma_app/445976";
-import { rW, qd } from "../figma_app/852050";
+import { getLocalVariablesForSet, getResolvedValuesForVariables } from "../figma_app/852050";
 import { Xy, Ne } from "../figma_app/702372";
 export function $$p0() {
   let e = {};
   let t = pX();
   let i = t ? t.defaultModeId : null;
-  let p = rW(t?.nodeId || null);
+  let p = getLocalVariablesForSet(t?.nodeId || null);
   let m = p.filter(e => e.name.startsWith(lS)).map(e => e.node_id);
   let h = t ? yG(t.key) : void 0;
   let g = useMemo(() => h && i ? {
     [h]: i
   } : void 0, [h, i]);
-  let f = qd(m, g);
+  let f = getResolvedValuesForVariables(m, g);
   if (t) {
     Object.entries(p.reduce((e, t) => {
       if (!t.node_id) return e;

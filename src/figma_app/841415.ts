@@ -29,7 +29,7 @@ let $$S2 = memo(e => {
   } = e;
   let s = useMemo(() => renderEmojiShortcodes(text), [text]);
   let o = getSelectedViewType();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return jsx(SecureLink, {
     "data-tooltip": PositionEnum.HYPERLINK_POPUP,
     "data-tooltip-editor-type": o,

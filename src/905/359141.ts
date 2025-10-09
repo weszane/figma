@@ -147,7 +147,7 @@ import { Fullscreen, Multiplayer, PluginModalType } from '../figma_app/763686';
 import { sF } from '../figma_app/777207';
 import { hasAnyPublishableContentAtom, canUserPublishToCommunity, canEditAndHasChangesAtom, hasPendingChangesAtom, createLibraryItemsAtomFamily } from '../figma_app/803787';
 import { z6 } from '../figma_app/805373';
-import { SR } from '../figma_app/852050';
+import { initializeVariableHooks } from '../figma_app/852050';
 import { LargeLoadingSpinner } from '../figma_app/858013';
 import { C as _$$C } from '../figma_app/872960';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
@@ -188,7 +188,7 @@ function y(e) {
   }, [i, t?.key, t?.parentOrgId, t?.teamId, n, e, hasSwitchedTabs, tabManager.activeTab]);
 }
 function x() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.modalShown);
   let i = useCallback(() => {
     t && (e(hideModalHandler()), setTimeout(() => {
@@ -235,7 +235,7 @@ function ea({
   } = useLibraryModalContext();
   let u = function () {
     let e = useDropdownState();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     return useCallback(() => {
       e && e.type === LibraryItemTileContextMenuType.LIBRARY_MODAL && t(hideDropdownAction());
     }, [t, e]);
@@ -1641,7 +1641,7 @@ function td({
   });
 }
 function tc() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getCurrentTeam();
   let i = selectCurrentFile();
   let {
@@ -1889,7 +1889,7 @@ function tC() {
 function tO({
   kbPath: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCallback(() => {
     t(showModalHandler({
       type: _$$i
@@ -1979,7 +1979,7 @@ function tz({
   });
 }
 let tH = () => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(canUserPublishToCommunity);
   let {
     sessionId
@@ -2340,7 +2340,7 @@ function il({
 function id() {
   let e = function () {
     let e = getCurrentTeam();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let {
       sessionId
     } = useLibraryModalContext();
@@ -2407,7 +2407,7 @@ function id() {
 }
 function ic() {
   let e = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = selectCurrentFile();
     let {
       sessionId
@@ -2755,7 +2755,7 @@ function np({
     numOutdatedInstances,
     toggleReviewUpdatesModal
   } = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = no(e);
     let n = e.type === PrimaryWorkflowEnum.STYLE;
     let r = e.type === PrimaryWorkflowEnum.VARIABLE_SET;
@@ -2989,11 +2989,11 @@ function ny({
   entrypoint: o,
   switchedTabs: l
 }) {
-  SR();
+  initializeVariableHooks();
   let c = isLibraryModalContextAvailable();
   let h = function () {
     let [e, t] = useAtomValueAndSetter(iz);
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     let {
       componentUpdateKeys,
       stateGroupUpdateKeys,

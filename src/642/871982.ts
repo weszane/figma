@@ -2,11 +2,11 @@ import { jsx } from "react/jsx-runtime";
 import { IconButton } from "../905/443068";
 import { U } from "../905/708285";
 import { getI18nString } from "../905/303541";
-import { u as _$$u, BQ } from "../figma_app/852050";
+import { getVariableById, getResolvedVariableValue } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { DE } from "../figma_app/811257";
 import { u3 } from "../figma_app/152690";
-import { eF } from "../figma_app/394327";
+import { isLocallySoftDeleted } from "../figma_app/394327";
 import { P } from "../figma_app/120873";
 import { $V } from "../figma_app/755783";
 export function $$$$m0() {
@@ -15,10 +15,10 @@ export function $$$$m0() {
     clearVariableConsumption
   } = u3(["VISIBLE"]);
   let s = $V();
-  let m = _$$u(s);
+  let m = getVariableById(s);
   let g = m?.name;
   let f = !!consumedVariable && !!m;
-  let x = BQ(s);
+  let x = getResolvedVariableValue(s);
   return f ? jsx(DE, {
     appendedClassName: "component_bound_vibisility_row--row--Pss97",
     input: jsx(P, {
@@ -29,7 +29,7 @@ export function $$$$m0() {
       styleOverride: {
         width: "auto"
       },
-      isDeleted: !!m && eF(m),
+      isDeleted: !!m && isLocallySoftDeleted(m),
       fullWidth: !0,
       variablePillContainerClassName: "component_bound_vibisility_row--ui3RowVariablePillContainer--ocnP8",
       thumbnailValue: "MIXED" !== x ? x : void 0

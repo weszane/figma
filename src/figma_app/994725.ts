@@ -1,54 +1,118 @@
 import { dayjs } from "../905/920142";
 import { isValidEmail } from "../figma_app/416935";
-export function $$a0(e) {
-  let t = new Date();
+// Origin: /Users/allen/sigma-main/src/figma_app/994725.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, improved readability, added comments, simplified logic, noted dependencies.
+
+// Assumed dependencies:
+// - dayjs: date manipulation library (imported above)
+// - isValidEmail: function to validate email addresses (imported above)
+
+/**
+ * Returns today's date and a minimum date offset by a given number of days.
+ * @param daysAgo Number of days to subtract from today for minDate (default: 366)
+ */
+export function getDateRange(daysAgo?: number): { today: string; minDate: string } {
+  const todayDate = new Date();
   return {
-    today: dayjs(t).format("YYYY-MM-DD"),
-    minDate: dayjs(t).subtract(e || 366, "days").format("YYYY-MM-DD")
+    today: dayjs(todayDate).format("YYYY-MM-DD"),
+    minDate: dayjs(todayDate).subtract(daysAgo ?? 366, "days").format("YYYY-MM-DD"),
   };
 }
-export function $$s1(e) {
-  return e ? dayjs(e).add(1, "day").subtract(1, "second").format() : null;
+
+/**
+ * Returns the end of the given day in ISO format.
+ * @param dateString Date string to process
+ */
+export function getEndOfDay(dateString?: string): string | null {
+  if (!dateString) return null;
+  // Adds 1 day, subtracts 1 second to get the last moment of the day
+  return dayjs(dateString).add(1, "day").subtract(1, "second").format();
 }
-export function $$o2(e, t, r) {
-  if (t) for (let e of t) {
-    let t = function (e) {
-      let t = (e || "").trim();
-      return t && !isValidEmail(t) ? {
-        message: "An email is invalid",
-        field: "email"
-      } : null;
-    }(e);
-    if (t) return t;
+
+// Type for validation error
+interface ValidationError {
+  message: string;
+  field: "email" | "startDate" | "endDate";
+}
+
+// Type for date range input
+interface DateRangeInput {
+  start: string;
+  end: string;
+}
+
+/**
+ * Validates a list of emails and a date range.
+ * @param dateRange Date range object with start and end dates
+ * @param emails Array of email strings to validate
+ * @param daysAgo Number of days for minDate calculation
+ * @returns ValidationError object or null if valid
+ */
+export function validateEmailsAndDateRange(
+  dateRange: DateRangeInput,
+  emails?: string[],
+  daysAgo?: number
+): ValidationError | null {
+  // Validate emails first
+  if (emails) {
+    for (const email of emails) {
+      const trimmedEmail = (email ?? "").trim();
+      if (trimmedEmail && !isValidEmail(trimmedEmail)) {
+        return {
+          message: "An email is invalid",
+          field: "email",
+        };
+      }
+    }
   }
-  return function (e, t) {
-    let r = dayjs(e.start);
-    let i = dayjs(e.end);
-    if (!r.isValid()) return {
+
+  // Validate date range
+  const startDate = dayjs(dateRange.start);
+  const endDate = dayjs(dateRange.end);
+
+  if (!startDate.isValid()) {
+    return {
       message: "The start date is invalid",
-      field: "startDate"
+      field: "startDate",
     };
-    if (!i.isValid()) return {
+  }
+  if (!endDate.isValid()) {
+    return {
       message: "The end date is invalid",
-      field: "endDate"
+      field: "endDate",
     };
-    if (r.diff(i, "days") > 0) return {
+  }
+  if (startDate.diff(endDate, "days") > 0) {
+    return {
       message: "The start date cannot be greater than the end date",
-      field: "startDate"
+      field: "startDate",
     };
-    let {
-      today,
-      minDate
-    } = $$a0(t);
-    return r.diff(today, "days") > 0 || 0 > r.diff(minDate, "days") ? {
+  }
+
+  // Get date boundaries
+  const { today, minDate } = getDateRange(daysAgo);
+
+  // Check start date range
+  if (startDate.diff(today, "days") > 0 || startDate.diff(minDate, "days") < 0) {
+    return {
       message: "The start date is out of range",
-      field: "startDate"
-    } : i.diff(today, "days") > 0 ? {
+      field: "startDate",
+    };
+  }
+
+  // Check end date range
+  if (endDate.diff(today, "days") > 0) {
+    return {
       message: "The end date is out of range",
-      field: "endDate"
-    } : null;
-  }(e, r);
+      field: "endDate",
+    };
+  }
+
+  // All validations passed
+  return null;
 }
-export const Bd = $$a0;
-export const H3 = $$s1;
-export const KJ = $$o2;
+
+// Export aliases to preserve original code names
+export const Bd = getDateRange;
+export const H3 = getEndOfDay;
+export const KJ = validateEmailsAndDateRange;

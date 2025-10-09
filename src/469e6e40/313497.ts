@@ -544,7 +544,7 @@ function z(e) {
     ...e,
     preventUserClose: t
   });
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let i = useCallback(() => {
     a(!0);
     (async () => {
@@ -661,7 +661,7 @@ function W(e) {
   let {
     onClose
   } = e;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let [n, s] = useState(!1);
   let i = useModalManager({
     ...e,

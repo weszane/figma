@@ -22,7 +22,7 @@ export let $$b0 = registerModal(function (e) {
     source,
     requesterCurrentLevel
   } = e;
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let g = () => {
     u(popModalStack());
   };

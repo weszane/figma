@@ -204,7 +204,7 @@ function eg(e) {
     showPoint,
     propogateOnClick
   } = e;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = e => {
     e.callback && e.callback("", null, l);
   };
@@ -223,7 +223,7 @@ function eg(e) {
   });
 }
 function ef(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useMemo(() => e.dropdownId || generateUUIDv4(), [e.dropdownId]);
   let s = useSelector(e => e.dropdownShown?.type === i);
   let o = () => {
@@ -305,7 +305,7 @@ function eA(e) {
   let r = t ? getRepoById(t, i) : null;
   let s = liveStoreInstance.File.useValue(r?.default_file_key).data;
   let o = ac(s ? fileEntityDataMapper.toLiveGraph(s) : null);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   if ("loaded" !== o.status) return null;
   {
     let t = `branch-indicator-${e.fileKey}`;
@@ -346,7 +346,7 @@ function eb({
   repoTile: e,
   buttonThemeVersion: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = useSelector(e => e.roles.byFileKey);
   let o = selectUser();
   let l = useSelector(e => e.selectedBranchKeyByRepoId);
@@ -543,7 +543,7 @@ export function $$eT0({
   viewType: D,
   sortBy: L
 }) {
-  let F = useDispatch();
+  let F = useDispatch<AppDispatch>();
   let M = getSelectedView();
   let j = useCurrentUserOrgId();
   let U = Xr(yH);

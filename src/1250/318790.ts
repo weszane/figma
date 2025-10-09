@@ -34,7 +34,7 @@ let I = e => {
   if (a && o) return t && EK.includes(t) || navigator.languages.some(e => B1.includes(e)) ? "brazilian" : "non_brazilian";
 };
 function $$A(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = getVisibleTheme();
   let r = e.isBrazilianVariant ? renderI18nText("pt_br_announcement.description") : renderI18nText("pt_br_announcement.non_brazilian.description");
   return jsx(_l, {
@@ -66,7 +66,7 @@ function $$A(e) {
 }
 let S = userFlagExistsAtomFamily("has_tried_pt_br");
 export function $$N0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(S);
   let n = useAtomWithSubscription(mp);
   let _ = "loaded" === t.status && "loaded" === n.status;

@@ -88,7 +88,7 @@ let X = memo(function ({
   });
 });
 function eu() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => Yh(e.mirror.appModel, JT.MAGIC_LINK));
   let n = _$$a();
   if (!hasJubileePermissionForDesign()) return null;
@@ -152,7 +152,7 @@ let eN = new sX();
 let $$eT0 = memo(function ({
   filterInteractionCategory: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useSelector(Cy);
   let a = useSelector(n9);
   let l = useSelector(DV);

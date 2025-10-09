@@ -34,7 +34,7 @@ export function OnboardingSequence(props: OnboardingSequenceProps): JSX.Element 
     children,
   } = props
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const isFullscreenWithoutUI = useSelector(
     (state: any) => state?.selectedView?.view === 'fullscreen' && !state.mirror.appModel.showUi,
   )

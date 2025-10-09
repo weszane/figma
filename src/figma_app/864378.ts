@@ -9,8 +9,8 @@ import { updateLocalLibraryItems } from '../figma_app/646357'
  * Thunk to update local library items.
  * Original: $$c0
  */
-export const updateLocalLibraryItemsThunk = createOptimistThunk((payload) => {
-  updateLocalLibraryItems(payload)
+export const updateLocalLibraryItemsThunk = createOptimistThunk((context) => {
+  updateLocalLibraryItems(context)
 })
 
 /**

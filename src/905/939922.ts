@@ -25,7 +25,7 @@ export function $$S0() {
   let t = useCurrentUserOrgId();
   let i = getCurrentTeamId();
   let a = getSelectedView();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = useSelector(e => e.selectedBranchKeyByRepoId);
   return useCallback(async (n, r) => {
     s(hideDropdownAction());

@@ -8,7 +8,7 @@ import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { getResourceTypeLabel, mapVtResourceType } from "../figma_app/471982";
 import { hasContent, hasHubFile, isWidgetResource, getMainContent, getResourceType } from "../figma_app/427318";
 import { resourceDetailQuery } from "../905/909123";
-import { zm, Qi } from "../figma_app/49598";
+import { likeHubFileThunk, unlikeHubFileThunk } from "../figma_app/49598";
 import { C, $ } from "../figma_app/382445";
 import { showModalHandler } from "../905/156213";
 import { HubAction, HubEventType } from "../figma_app/350203";
@@ -20,11 +20,11 @@ import { a as _$$a } from "../figma_app/601188";
 import { COMMUNITY_OPT_IN_MODAL_NAME, CommunityOnboardingVariation } from "../figma_app/588092";
 export function $$k0(e, t, i, p) {
   let b = function (e, t, i, l) {
-    let a = useDispatch();
+    let a = useDispatch<AppDispatch>();
     let s = selectCurrentUser();
     let r = getSearchSessionIdFromSelector();
     let o = () => {
-      hasContent(e) || (logAndTrackCTA(v()), hasClientMeta(e) ? a(zm({
+      hasContent(e) || (logAndTrackCTA(v()), hasClientMeta(e) ? a(likeHubFileThunk({
         hubFileId: e.id
       })) : isWidget(e) ? a(C({
         id: e.id,
@@ -54,7 +54,7 @@ export function $$k0(e, t, i, p) {
       if (!hasContent(e)) {
         if (t.stopPropagation(), !s) throw Error(`Tried to unlike a ${getResourceTypeLabel(e)} as a signed out user`);
         logAndTrackCTA(v());
-        hasClientMeta(e) ? a(Qi({
+        hasClientMeta(e) ? a(unlikeHubFileThunk({
           hubFileId: e.id,
           likeId: i || void 0
         })) : isWidget(e) ? a($({
@@ -80,7 +80,7 @@ export function $$k0(e, t, i, p) {
     };
   }(e, t, i, p);
   let v = function (e, t, i, p) {
-    let x = useDispatch();
+    let x = useDispatch<AppDispatch>();
     let m = selectCurrentUser();
     let b = getSearchSessionIdFromSelector();
     let y = getAtomMutate($$w);

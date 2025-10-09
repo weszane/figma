@@ -15,7 +15,7 @@ import { Ro } from "../figma_app/805373";
 import { rP } from "../figma_app/697906";
 function x(e) {
   let [t, r] = useState(!1);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useSelector(e => e.selectedView);
   let o = selectPermissionsState();
   let x = e.team;

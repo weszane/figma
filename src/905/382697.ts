@@ -29,7 +29,7 @@ const shareActionTabNames: Record<ShareAction, string> = {
  * @returns {Function} Callback for tab selection
  */
 export function setupShareModalTabHandler(): (tab: ShareAction) => void {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   return useCallback((tab: ShareAction) => {
     dispatch(fileSelectedShareModalTab({ view: tab }))
     trackEventAnalytics('File Permissions Modal Tab Clicked', {

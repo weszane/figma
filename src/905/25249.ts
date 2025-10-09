@@ -37,7 +37,7 @@ import { $ as _$$$, t as _$$t2 } from '../905/628632';
 import { ButtonPrimitive } from '../905/632989';
 import { liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
-import { cL } from '../905/748726';
+import { autocompleteReset } from '../905/748726';
 import { useSingleEffect } from '../905/791079';
 import { useCurrentUserOrg } from '../905/845253';
 import { r as _$$r } from '../905/857502';
@@ -75,14 +75,14 @@ import { bV, d3, DA, dF, hO, KN, KZ, l2, Lq, Sc, st, tb, VA, w3, Zk, zY } from '
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { zl } from '../figma_app/641749';
 import { getReadOnlyOverrideMessageForFolder } from '../figma_app/642025';
-import { Z as _$$Z } from '../figma_app/761870';
+import { getAllAutocompleteEmails } from '../figma_app/761870';
 import { z6 } from '../figma_app/805373';
 import { TrackingProvider } from '../figma_app/831799';
 import { LoadingOverlay } from '../figma_app/858013';
 import { rn } from '../figma_app/903573';
 import { _9, ET, Iz, J4, mi, YU } from '../figma_app/907616';
 import { truncate } from '../figma_app/930338';
-function SharingClarityProjectModalOverlay() {
+function ClarityProjectModalOverlay() {
   const userFlag = useAtomWithSubscription(projectModalOverlayFlagAtom);
   const {
     show,
@@ -129,7 +129,7 @@ function SharingClarityProjectModalOnboarding() {
     overlay: SharingClarityProjectModalOverlay,
     priority: _$$N2.DEFAULT_MODAL
   }, [userFlag]);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const onboardingState = zl(projectModalOnboardingAtom);
   useSingleEffect(() => {
     if (onboardingState.currentState === 'reset') {
@@ -321,7 +321,7 @@ function eL({
           })()]
         })
       })]
-    }), folderCanEditValue && org && jsx(SharingClarityProjectModalOnboarding, {}), folderCanEditValue && !org && jsx(SharingClarityProjectModalOverlay, {})]
+    }), folderCanEditValue && org && jsx(SharingClarityProjectModalOnboarding, {}), folderCanEditValue && !org && jsx(ClarityProjectModalOverlay, {})]
   });
 }
 interface TeamAccessSettingsProps {
@@ -556,11 +556,11 @@ export let FolderPermissionsModal = registerModal(modalProps => {
   let getSearchResultToken = (email: string) => t9(email, org, orgDomains);
   let validateToken = (email: string) => yI(email, contactsState.usersByEmail[email] || email, org, orgDomainsData, (currentUser as any).email || '');
   useEffect(() => () => {
-    hideModalDispatch(cL());
+    hideModalDispatch(autocompleteReset());
   }, [hideModalDispatch]);
   let sendInvites = (emails: string[]) => {
     hideModalDispatch(sendRoleInvites({
-      emails: _$$Z(emails),
+      emails: getAllAutocompleteEmails(emails),
       resourceType: FResourceCategoryType.FOLDER,
       resourceIdOrKey: folderId,
       level: inviteLevel,
@@ -571,7 +571,7 @@ export let FolderPermissionsModal = registerModal(modalProps => {
   };
   let handleSendInvites = (emails: string[]) => {
     if (org && org.domain_capture && orgDomainsData && orgDomainsData.domains.length > 0) {
-      let externalEmails = _$$Z(emails).filter(email => isValidEmail(email) && !checkDomainExists(orgDomainsData.domains, email));
+      let externalEmails = getAllAutocompleteEmails(emails).filter(email => isValidEmail(email) && !checkDomainExists(orgDomainsData.domains, email));
       if (org.invite_whitelist_guest_invite_setting == null && externalEmails.length > 0) {
         hideModalDispatch(showModalHandler({
           type: confirmOrgGuestInviteModal,
@@ -605,7 +605,7 @@ export let FolderPermissionsModal = registerModal(modalProps => {
   };
   let handleCloseModal = () => {
     hideModalDispatch(hideModal());
-    hideModalDispatch(cL());
+    hideModalDispatch(autocompleteReset());
     trackSharingClarityExit();
   };
   let goBackToInviteView = () => {

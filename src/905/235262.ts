@@ -39,7 +39,7 @@ export function $$I7({
   });
 }
 function E() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedView();
   let [i, n] = useAtomValueAndSetter(valueAtom);
   let o = useRef(!0);

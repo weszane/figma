@@ -35,7 +35,7 @@ export function $$N0({
   preferencesApi: r,
   hidePreferencesForList: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useCanAccessFullDevMode();
   let {
     inspectionMode,

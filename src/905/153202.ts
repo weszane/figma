@@ -27,7 +27,7 @@ let d = memo(function (e) {
   });
 });
 export function $$_0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useRef(!1);
   let l = X7();
   function d(i) {

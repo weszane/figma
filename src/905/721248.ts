@@ -129,7 +129,7 @@ import { UB } from '../figma_app/249941';
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { useSubscription } from '../figma_app/288654';
 import { mapUserProperties } from '../figma_app/349248';
-import { rY as _$$rY } from '../figma_app/394327';
+import { areVariablesEqual } from '../figma_app/394327';
 import { _5, ec as _$$ec, Yz } from '../figma_app/449837';
 import { assertNotNullish, throwTypeError } from '../figma_app/465776';
 import { B3 } from '../figma_app/481279';
@@ -2252,7 +2252,7 @@ function iF({
     }), t.map(e => {
       let t = iM(prev, e.id);
       let d = iM(next, e.id);
-      let c = _$$rY(t, d);
+      let c = areVariablesEqual(t, d);
       let u = [LibraryUpdateStatus.UNMODIFIED, LibraryUpdateStatus.UPDATED].includes(e.phase) ? phase : e.phase;
       return jsx(Ar, {
         children: jsx(Suspense, {
@@ -2283,7 +2283,7 @@ var iH = (e => (e.APPROVED = 'approve', e.CHANGES_REQUESTED = 'suggest_changes',
 let iW = registerModal(e => {
   let t;
   let i;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let [o, u] = useState(e.mergeRequestReviewer.notes || '');
   let [p, m] = useState(e.mergeRequestReviewer.approved_at ? 'approve' : e.mergeRequestReviewer.changes_requested_at ? 'suggest_changes' : '');
   let {
@@ -2583,7 +2583,7 @@ function nf(e) {
   let s = e.editingNotes;
   let o = e.isReviewRequestor ? e.mergeRequest?.requested_at : e.reviewer?.changes_requested_at || e.reviewer?.approved_at;
   let [l, d] = useState(i);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   useEffect(() => {
     s || d(i);
   }, [i, s]);
@@ -2709,7 +2709,7 @@ function nA(e) {
   let [d, c] = useState();
   let [u, p] = useState(-1);
   let [m, h] = useState(!1);
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let f = (e, t) => {
     t.includes(e) && (c(e), p(t.indexOf(e)));
   };
@@ -3051,7 +3051,7 @@ function nx(e) {
   return e.view === tN.SUMMARY ? void 0 : e.view === tN.AFFECTED_DETAIL || e.view === tN.VARIANT_DETAIL ? e.detailDisplayGroup : e.displayGroup;
 }
 function nS(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = jsx('span', {
     className: nI,
     children: e.sourceFile.name
@@ -3181,7 +3181,7 @@ function nS(e) {
   });
 }
 let nw = memo(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, s] = useState({
     view: tN.SUMMARY
   });
@@ -5702,7 +5702,7 @@ let rL = 0;
 function rF(e) {
   let t = useSelector(e => e.fileVersion);
   let i = useSelector(e => e.currentUserOrgId);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useContext(ss);
   let [l, d] = useState(null);
   let [c, u] = useState(!1);
@@ -5771,7 +5771,7 @@ function rF(e) {
 }
 function rM(e) {
   let t;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let [s, o] = useAtomValueAndSetter(currentSelectionAtom);
   let l = s ?? e.direction;
   useSingleEffect(() => (o(e.direction), () => o(null)));

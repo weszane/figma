@@ -253,7 +253,7 @@ function q({
 let eO = "seen_bug_reporter_modal";
 let eR = userFlagExistsAtomFamily(eO);
 function eL() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(eR);
   let r = _$$e({
     overlay: BugReporterMachine,
@@ -289,7 +289,7 @@ function eM({
   flagName: e,
   userFlag: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = e => {
     r({
       type: "USER_FLAG_POST",
@@ -506,7 +506,7 @@ let eB = registerModal(function (e) {
   });
 }, "ResetUserFlagsModal");
 function eH(...e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.userFlags);
   let n = e.reduceRight((e, t) => (e << 1) + (r[t] ? 1 : 0), 0);
   let i = r => {
@@ -541,7 +541,7 @@ let e4 = registerModal(function ({
   maxSeenCount: r = 1 / 0
 }) {
   let s = useMemo(() => hK(), []);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let {
     flagNumberVal,
     incrementFlag
@@ -667,7 +667,7 @@ function tr({
     flagNumberVal,
     incrementFlag
   } = eH(...WB);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let [u, p] = useState(e || flagNumberVal > r);
   return (useSingleEffect(() => {
     !u && r !== 1 / 0 && flagNumberVal <= r && incrementFlag();
@@ -740,7 +740,7 @@ function tc({
   let [t, r] = useState(!1);
   let s = useAtomWithSubscription(tl);
   let o = useAtomWithSubscription(td);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = selectCurrentFile();
   let c = useAtomWithSubscription(_$$P2);
   let {
@@ -2717,7 +2717,7 @@ export function $$t60(e) {
     let d = function (e) {
       let t = "collective_upsell_first_file_created";
       let r = useRef(selectUserFlag(t));
-      let n = useDispatch();
+      let n = useDispatch<AppDispatch>();
       useSingleEffect(() => {
         !r.current && e && n(postUserFlag({
           [t]: !0
@@ -3423,7 +3423,7 @@ function rr({
     getTriggerProps,
     manager
   } = setupMenu();
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   return jsxs(Fragment, {
     children: [e && jsxs(MenuRootComp, {
       manager,

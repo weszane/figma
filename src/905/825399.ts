@@ -62,7 +62,7 @@ export function usePublishedLibraries({
 } = {}) {
   const orgId = getParentOrgId()
   const currentFile = selectCurrentFile()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const [oldQueryResult] = setupResourceAtomHandler(libraryInfoQuery({
     currentOrgId: orgId,
     subscriptionFileKey: currentFile?.key,

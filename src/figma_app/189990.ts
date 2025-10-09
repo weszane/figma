@@ -8,7 +8,7 @@ import { EG } from "../figma_app/995580";
 import { addRecentlyUsedAction } from "../905/73603";
 export function $$u1() {
   let e = useSelector(e => e.recentlyUsedQuickCommands);
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback(r => {
     let n = EG(r);
     let i = r.runPluginArgs;

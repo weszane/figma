@@ -7,7 +7,7 @@ import { M as _$$M } from "../figma_app/648761";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { useSelectionPropertyValue } from "../905/275640";
-import { SG } from "../figma_app/852050";
+import { getFilteredVariables } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -15,7 +15,7 @@ import { ScrubbableDropdownInput } from "../figma_app/178475";
 import { useVariablePickerForFields } from "../figma_app/260445";
 import { FormattedInputContext } from "../905/427409";
 import { u3, lC, Ek } from "../figma_app/152690";
-import { MH, eF } from "../figma_app/394327";
+import { extractVariableAliasOrFontStyle, isLocallySoftDeleted } from "../figma_app/394327";
 import { SvgComponent } from "../905/714743";
 import { sK, c$ } from "../905/794875";
 import { y8 } from "../figma_app/409807";
@@ -29,9 +29,9 @@ export function $$N1(e, t) {
     consumedVariable
   } = u3([e]);
   let l = lC(e);
-  let d = MH(consumedVariable);
+  let d = extractVariableAliasOrFontStyle(consumedVariable);
   let c = Ek([e]);
-  let u = !!l && eF(l);
+  let u = !!l && isLocallySoftDeleted(l);
   return {
     memoizedProviderValue: useMemo(() => ({
       showBindingUI: n,
@@ -97,10 +97,10 @@ export function $$C0({
     smallNudgeAmount,
     bigNudgeAmount
   } = getNudgeAmounts();
-  let e_ = useDispatch();
+  let e_ = useDispatch<AppDispatch>();
   let eh = useRef(!1);
   let em = _$$M(w);
-  let eg = SG([b]).data ?? [];
+  let eg = getFilteredVariables([b]).data ?? [];
   let {
     memoizedProviderValue,
     showBindingUI,

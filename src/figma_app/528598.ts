@@ -41,7 +41,7 @@ import { isSitesFileType } from "../figma_app/976749";
 import { A as _$$A2 } from "../905/639174";
 import { setHoveredComponentPropDef } from "../figma_app/741237";
 import { isValidValue, isInvalidValue } from "../905/216495";
-import { u as _$$u, BQ } from "../figma_app/852050";
+import { getVariableById, getResolvedVariableValue } from "../figma_app/852050";
 import { J as _$$J } from "../905/95677";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
@@ -67,7 +67,7 @@ import { Hm } from "../figma_app/47085";
 import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
 import { FormattedInputContext } from "../905/427409";
 import { Px, y$ } from "../figma_app/152690";
-import { eF as _$$eF } from "../figma_app/394327";
+import { isLocallySoftDeleted } from "../figma_app/394327";
 import { P as _$$P2 } from "../figma_app/120873";
 import { oz } from "../figma_app/406976";
 import { U as _$$U } from "../905/708285";
@@ -100,14 +100,14 @@ function eO({
   let m = selectWithShallowEqual(selectContainingInstance);
   let g = e.type === VariableDataType.ALIAS ? e.value : void 0;
   let f = e.type === VariableDataType.NODE_FIELD_ALIAS ? aA(e.value.stablePathToNode, e.value.indexOrKey) : void 0;
-  let E = _$$u(g);
+  let E = getVariableById(g);
   let y = Px();
   let b = useMemo(() => VariablesBindings.getVariableSetKeyForPublish(E?.variableSetId ?? "") ?? "", [E?.variableSetId]);
   let T = b in y ? y[yG(b)] : void 0;
   let S = useMemo(() => T ? {
     [yG(b)]: T
   } : void 0, [T, b]);
-  let v = BQ(g ?? void 0, S) ?? f?.varValue;
+  let v = getResolvedVariableValue(g ?? void 0, S) ?? f?.varValue;
   return t ? jsx("span", {
     className: c6,
     children: f && h && !E ? jsx(_$$f, {
@@ -224,7 +224,7 @@ function eU(e) {
   } = e;
   let C = getObservableValue(AppStateTsApi?.propertiesPanelState().shownPropertiesPanels, void 0);
   let O = C?.[ItemType.INSTANCE_ITEM] ?? !1;
-  let R = useDispatch();
+  let R = useDispatch<AppDispatch>();
   let L = useSelector(e => e.selectedComponentPropDefId);
   let [D, M] = useState(!1);
   let F = useRef(null);
@@ -523,7 +523,7 @@ function eV({
   submitBehaviorAssignment: c,
   onChange: u
 }) {
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let _ = useSelector(e => e.instanceSwapPickerShown);
   let g = useCallback(e => {
     let t = resolveVariableValue(VariableResolvedDataType.BOOLEAN, e);
@@ -554,7 +554,7 @@ function eH({
 }) {
   let t = isInvalidValue(e);
   let r = e.value;
-  let s = _$$u(r);
+  let s = getVariableById(r);
   let o = Px();
   let l = useContext(FormattedInputContext);
   let d = useMemo(() => VariablesBindings?.getVariableSetKeyForPublish(s?.variableSetId ?? "") ?? "", [s?.variableSetId]);
@@ -562,7 +562,7 @@ function eH({
   let u = useMemo(() => c ? {
     [yG(d)]: c
   } : void 0, [c, d]);
-  let p = BQ(r ?? void 0, u);
+  let p = getResolvedVariableValue(r ?? void 0, u);
   let _ = useRef(null);
   return s ? jsx("div", {
     role: "button",
@@ -577,7 +577,7 @@ function eH({
       variableId: r && !t ? r : void 0,
       isStandalone: !0,
       thumbnailValue: "MIXED" !== p ? p : void 0,
-      isDeleted: _$$eF(s),
+      isDeleted: isLocallySoftDeleted(s),
       classNameOverride: cssBuilderInstance.wFull.$,
       variablePillContainerClassName: Ro,
       fullWidth: !0
@@ -806,7 +806,7 @@ function e$({
   onChange: m
 }) {
   let g = isInvalidValue(e) ? 0 : Number(e);
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let [E, y] = useState(null);
   let b = useMemo(() => new eY(p), [p]);
   let T = e => {
@@ -907,7 +907,7 @@ function eq({
   instanceSwapPickerIdPrefix: f = "instance-swap-prop-assignment-picker-",
   submitBehaviorAssignment: E
 }) {
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let b = useSelector(selectOpenFileKey);
   let {
     preferredValues,

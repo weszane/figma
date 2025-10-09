@@ -212,7 +212,7 @@ function en({
   version: r
 }) {
   let i = useIsResourceHub();
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let a = useResourceRouteParams();
   let l = buildCommunityPathById({
     resource: e
@@ -297,7 +297,7 @@ export function $$ea0({
   let A = !k && "twoColumn" === T;
   let P = useIsResourceHub();
   let O = isResourceHubProfilesEnabled();
-  let B = useDispatch();
+  let B = useDispatch<AppDispatch>();
   let D = getSearchSessionIdFromSelector();
   let F = useResourceRouteParams();
   let U = useResourceFuid() ?? void 0;

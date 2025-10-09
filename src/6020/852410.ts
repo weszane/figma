@@ -178,7 +178,7 @@ export let $$L0 = function (t) {
   let d = useSceneGraphSelector();
   let c = isDevHandoffEditorType();
   let [m, f] = useState(null);
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   let v = c || t.viewOnly;
   let P = useSelector(t => t.mirror.appModel.prototypeCanvasUiVisible && v);
   let R = valueOrFallback(e, []);

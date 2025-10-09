@@ -298,7 +298,7 @@ function V(e) {
 function X({
   children: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.pickerShown);
   let s = useSelector(e => e.mirror.sceneGraph);
   let d = Tv();

@@ -15,7 +15,7 @@ export function $$m0({
 }) {
   let m = getSelectedView();
   let h = stopPresenting();
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let f = useDevModeFocusId();
   let _ = Xr($);
   let A = KP("full_table", t);

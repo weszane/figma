@@ -5,7 +5,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { getFileKey } from "../905/412913";
-import { k8 } from "../figma_app/49598";
+import { trackSlideTemplateUsageThunk } from "../figma_app/49598";
 import { insertSharedModule } from "../figma_app/933328";
 import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
 import { fullscreenValue } from "../figma_app/455680";
@@ -69,7 +69,7 @@ export function $$S0({
       subscribeToLibrary: l,
       slideId: g
     });
-    e.isHubFile && a(k8({
+    e.isHubFile && a(trackSlideTemplateUsageThunk({
       hubFileId: b(e)
     }));
     $$A8(a, e);

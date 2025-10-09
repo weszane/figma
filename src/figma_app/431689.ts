@@ -18,7 +18,7 @@ export function $$d1(e) {
   };
 }
 export function $$c0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = () => {
     e(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.error_generic"),

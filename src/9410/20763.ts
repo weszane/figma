@@ -31,7 +31,7 @@ export function $$I0({
   recordingKey: I,
   hasMultipleSelections: k
 }) {
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let A = useIsMounted();
   let O = useNavigateToViewport("canvas_search_navigate");
   let L = useSelector(e => e.canvasSearch.scope);

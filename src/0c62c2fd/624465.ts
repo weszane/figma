@@ -36,7 +36,7 @@ export function $$A0({
   selectedView: A,
   shouldShowDuplicateOption: O
 }) {
-  let F = useDispatch();
+  let F = useDispatch<AppDispatch>();
   let P = useSelector(e => e.mirror.appModel);
   let L = selectCurrentFile();
   let D = useAppModelProperty("pagesList");

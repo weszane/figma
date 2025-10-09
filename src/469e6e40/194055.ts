@@ -140,7 +140,7 @@ function q({
   mode: r,
   requests: l
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = _$$q(XB, !0);
   let {
     id
@@ -479,7 +479,7 @@ function ea({
   showUpsell: t,
   extensionType: a
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = e.sort((e, t) => e.org_rank - t.org_rank);
   let o = jsx(SecureLink, {
     onClick: () => {
@@ -707,7 +707,7 @@ function ed({
 }) {
   let r;
   let l;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = useCallback((e, t) => {
     e.preventDefault();
     e.stopPropagation();
@@ -1158,7 +1158,7 @@ function eq(e) {
     toggleSwitchEditorDropdown,
     ExtensionAllowlistTryEditorDropdown
   } = function (e, t, a, s, l) {
-    let o = useDispatch();
+    let o = useDispatch<AppDispatch>();
     let d = useDropdownState();
     let c = d?.type === eU;
     let _ = getPluginOrWidget(e) || s;
@@ -1253,7 +1253,7 @@ function e$(e) {
     resource,
     source
   } = e;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let _ = getPluginOrWidget(extension) || resource;
   let m = mapToEditorType(manifestEditorType);
   let p = () => {
@@ -1334,7 +1334,7 @@ function eG(e) {
     goToEditTab,
     workspaces
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useTeamPlanUser().unwrapOr(null);
   let _ = c?.key?.parentId;
   let {
@@ -1396,7 +1396,7 @@ function ez(e) {
     goToEditTab,
     workspaces
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -1447,7 +1447,7 @@ export function $$eV0({
   resource: y,
   source: w
 }) {
-  let C = useDispatch();
+  let C = useDispatch<AppDispatch>();
   let S = _$$A2(t, !0);
   let N = useSubscription(PluginAllowlistManagementModalView, {
     pluginId: t,

@@ -33,7 +33,7 @@ let E = connect((e, t) => ({
     });
   }, []);
   let t = useMemo(() => e.query ?? e.searchQuery, [e.query, e.searchQuery]);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let {
     onFocusOverride,
     onBlurOverride,

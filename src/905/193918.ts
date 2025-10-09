@@ -41,7 +41,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { tgj } from '../figma_app/27776';
 import { hasClientMeta, hasMonetizedResourceMetadata } from '../figma_app/45218';
 import { FDomainVerificationStatusType } from '../figma_app/191312';
-import { a6 } from '../figma_app/198840';
+import { getHubFileVersionOrDefault } from '../figma_app/198840';
 import { getPluginVersion } from '../figma_app/300692';
 import { CHECKOUT_ROUTE } from '../figma_app/350203';
 import { useWindowEvent } from '../figma_app/412189';
@@ -634,7 +634,7 @@ function eS({
   resource: e,
   subscriptionInterval: t
 }) {
-  let i = hasClientMeta(e) ? a6(e) : getPluginVersion(e);
+  let i = hasClientMeta(e) ? getHubFileVersionOrDefault(e) : getPluginVersion(e);
   let r = getPublisherDisplayName(e);
   let a = i.name;
   let s = hasClientMeta(e) ? e.thumbnail_url : i.redirect_icon_url;
@@ -698,7 +698,7 @@ function eR(e) {
     resource,
     mobileScrollContainerRef
   } = e;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useRef(null);
   let l = useCallback(() => {
     o.current && (mobileScrollContainerRef?.current?.scrollTop ? o.current.classList.add(HC) : o.current.classList.remove(HC));
@@ -739,7 +739,7 @@ export const CommunityCheckoutModal = registerModal(props => {
   const monetizedMetaId = monetizedMeta?.id;
 
   // Redux dispatch
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   // Initialize buyer payment methods and tax info
   _$$G();

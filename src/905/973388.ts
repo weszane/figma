@@ -12,7 +12,7 @@ import { hideModal, popModalStack } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { c as _$$c } from "../905/32166";
 export let $$g0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager(e);
   let g = () => {
     t(hideModal());

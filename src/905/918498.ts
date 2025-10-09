@@ -21,7 +21,7 @@ export let $$v0 = registerModal(function (e) {
   let {
     plan
   } = e;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let v = () => {
     i(hideModal());
   };

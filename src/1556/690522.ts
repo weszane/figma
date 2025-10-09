@@ -32,7 +32,7 @@ export function $$u3(e) {
   });
 }
 export function $$h1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsxs(NJ, {
     dismissModal: e.dismissModal,
     width: 247,

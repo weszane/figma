@@ -58,7 +58,7 @@ export function $$S13() {
 }
 export function $$w10() {
   let e = _$$s();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = getI18nString("comments.comments_cannot_be_placed_in_this_area");
   let l = e.commentDisabledPositionBellMessage ?? i;
   return useCallback(() => {

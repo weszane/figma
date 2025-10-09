@@ -17,7 +17,7 @@ interface TemplateData {
   publish_scope: string
 }
 
-interface UploadTemplateParams {
+export interface UploadTemplateParams {
   fileKey: string
   name: string
   description: string
@@ -30,6 +30,7 @@ interface UploadTemplateParams {
   onSuccess: () => void
   onFailure: (error: string) => void
   dispatch: (action: any) => void
+  [key: string]: any
 }
 
 /**

@@ -93,7 +93,7 @@ export function $$C2(e) {
 }
 export var $$w5 = (e => (e.NONE = "NONE", e.UNASSIGNED = "UNASSIGNED", e.WORKSPACE = "WORKSPACE", e))($$w5 || {});
 function O(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let s = createRef();
   let l = 0;
@@ -129,7 +129,7 @@ function O(e) {
   });
 }
 export function $$R0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useDropdownState();
   if (!RG() || 0 === e.licenseGroups.length) return null;
   let i = r?.type === A;
@@ -151,7 +151,7 @@ export function $$R0(e) {
   });
 }
 export function $$L1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useDropdownState();
   if (0 === e.workspaces.length) return null;
   let i = r?.type === x;

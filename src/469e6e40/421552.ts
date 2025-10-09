@@ -471,7 +471,7 @@ function eY({
   library: e,
   org: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = getAtomMutate(eW);
   let l = getAtomMutate(eH);
   let [o, d] = useState(!1);
@@ -560,7 +560,7 @@ function eX({
   workspaceId: t,
   workspaceName: a
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = useCurrentUserOrgId();
   let o = useCurrentPrivilegedPlan("WorkspaceApprovedLibrarySetting").unwrapOr(null);
   let d = o?.tier === FPlanNameType.ENTERPRISE;
@@ -700,7 +700,7 @@ function e9({
   orgData: t,
   selectedWorkspaceId: a
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = "community" !== e.type;
   let o = useMemo(() => {
     if (!a) return {
@@ -1154,7 +1154,7 @@ let tr = function ({
 let td = registerModal(function ({
   libraryResourceId: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = selectCurrentUser();
   let r = useSelector(e => e.currentUserOrgId);
   let l = useWindowDimensions();
@@ -1351,7 +1351,7 @@ export function $$tx1(e) {
   let z = libraryStats ?? th;
   let V = useMemo(() => (communityLibraryStats ?? []).map(e => mapLibraryAttributes(e)), [communityLibraryStats]);
   let W = useMemo(() => (z?.files ?? []).map(e => mapLibraryAttributes(e)), [z]);
-  let H = useDispatch();
+  let H = useDispatch<AppDispatch>();
   let [Y, J] = useState(new Set(workspaceId ? [workspaceId] : []));
   let [K, Q] = useState("");
   let Z = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);

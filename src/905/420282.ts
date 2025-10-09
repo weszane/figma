@@ -75,7 +75,7 @@ export function $$Q0(e) {
   });
 }
 function J(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager(e);
   let p = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: ServiceCategories.SCALE
@@ -314,7 +314,7 @@ function J(e) {
   });
 }
 function ee(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.selectedView);
   return jsx(_$$z, {
     variant: e.noAnnualSeat ? "warning" : "brand",

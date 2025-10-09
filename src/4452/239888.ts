@@ -24,7 +24,7 @@ import { b as _$$b2, A as _$$A } from "../905/723768";
 var _ = m;
 let $$A = "connected_projects_tab_header--headerContainer--Rz5m6";
 export function $$w0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useTeamPlanUser();
   let a = useTeamPlanFeatures().unwrapOr(null);
   let m = useIsAdminUser(t).unwrapOr(!1);

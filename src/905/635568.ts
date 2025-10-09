@@ -6,7 +6,7 @@ import { PinningState } from "../905/192333";
 export function $$l0(e) {
   let t = useSelector(e => e.universalInsertModal);
   let i = LR();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return useCallback(() => {
     t.pinned === PinningState.NOT_PINNED && (i(), e?.hideTooltips && l(hideTooltip()));
   }, [t, i, e, l]);

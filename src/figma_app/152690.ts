@@ -26,7 +26,7 @@ import { trackDefinedFileEvent } from "../figma_app/314264";
 import { MIXED_MARKER, normalizeValue, isValidValue, isInvalidValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { useUpdateSelectionProperty, useSelectionProperty, useSelectionPropertyValue } from "../905/275640";
-import { u as _$$u, G6, jI, iC } from "../figma_app/852050";
+import { getVariableById, getCombinedVariableSetById, getSubscribedVariableSetsResource, getIdsOfVariablesWithValue } from "../figma_app/852050";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { I7, P1 } from "../figma_app/745458";
 import { selectSceneGraph, $u } from "../figma_app/889655";
@@ -37,7 +37,7 @@ import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { q } from "../905/296913";
 import { CP } from "../figma_app/481279";
-import { Ip, cn } from "../figma_app/394327";
+import { getVariableSetKey, getVariablePublishKey } from "../figma_app/394327";
 import { variableByIdAtomFamily } from "../figma_app/216057";
 import { oz } from "../figma_app/406976";
 var g = m;
@@ -153,7 +153,7 @@ export function $$ea20(e = 0) {
     if (!getFeatureFlags().ds_extended_collections) return r;
     let e = {};
     Object.values(i).forEach(t => {
-      let r = Ip(t);
+      let r = getVariableSetKey(t);
       r && (e[r] || (e[r] = []), e[r].push(t));
     });
     Object.entries(e).forEach(([e, t]) => {
@@ -193,14 +193,14 @@ export function $$eo5({
 }
 export function $$el31(e) {
   let t = function (e) {
-    let t = _$$u(e);
+    let t = getVariableById(e);
     let r = $$ea20(0);
-    let n = G6(t?.variableSetId);
+    let n = getCombinedVariableSetById(t?.variableSetId);
     if (!t || !n) return null;
-    let i = cn(n);
+    let i = getVariablePublishKey(n);
     return r?.[i] ?? null;
   }(e);
-  let r = G6(t?.collectionID);
+  let r = getCombinedVariableSetById(t?.collectionID);
   if (!t || !r) return null;
   let n = t.modeOptions;
   let i = t.explicitMode;
@@ -213,7 +213,7 @@ export function $$ed15(e = 0) {
   return useMemoStable(() => normalizeValue(t)?.variableSetKeyToPageLevelPresetMode || {}, [t]);
 }
 export function $$ec17(e = 0) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelectionProperty("numSelectedByType")[0];
   let s = function () {
     let e = useDevModeFocusId();
@@ -283,7 +283,7 @@ export function $$ep1(e) {
   return useMemoShallow(() => Object.fromEntries(Object.entries(t).filter(([e, t]) => !!t.libraryKey && t.modeOptions.length > 1)), [t]);
 }
 export function $$e_18() {
-  let e = jI();
+  let e = getSubscribedVariableSetsResource();
   return useMemoShallow(() => {
     if ("loaded" === e.status) {
       let t = e.data?.items.filter(e => e.modes && e.modes.length > 1);
@@ -416,7 +416,7 @@ export function $$eS25(e, t, r, n) {
     type: t.type,
     value: t.value
   }) : [];
-  let h = _$$u(u);
+  let h = getVariableById(u);
   if (!h) return _.length > 0 && t ? {
     matchingVars: {
       ids: _,
@@ -441,7 +441,7 @@ function ev(e, t, r) {
     boundVar: convertKiwiToVariableIdString(colorVar.value.alias)
   };
   if (!color || !r) return {};
-  let s = iC(e, Array.from(r), {
+  let s = getIdsOfVariablesWithValue(e, Array.from(r), {
     type: VariableDataType.COLOR,
     resolvedType: VariableResolvedDataType.COLOR,
     value: {
@@ -471,7 +471,7 @@ export function $$eA14(e, t) {
     boundVar,
     matchingVars
   } = ev(r, e, t);
-  return eC(_$$u(boundVar), {
+  return eC(getVariableById(boundVar), {
     variableId: boundVar,
     matchingVars
   }, i.id, a, n.inspectionMode);
@@ -536,7 +536,7 @@ export function $$ew21(e) {
     consumedVariable
   } = $$ey28([e]);
   let r = eb(consumedVariable);
-  return _$$u(r);
+  return getVariableById(r);
 }
 export function $$eO0(e) {
   return useSelector(t => {

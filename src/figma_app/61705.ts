@@ -17,7 +17,7 @@ export function $$h1({
   newFileDataLocalStorageKey: m
 }) {
   let g = B();
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let E = getUserId();
   let y = Xr(P4);
   let b = useSelector(e => {

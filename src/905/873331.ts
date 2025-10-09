@@ -32,7 +32,7 @@ export function $$N0({
   setBorderOption: i,
   recordingKey: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let c = trackFileEventWithStore();
   let u = useDropdownState();
   let p = useRef(null);
@@ -222,7 +222,7 @@ function L({
     smallNudgeAmount,
     bigNudgeAmount
   } = getNudgeAmounts();
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let A = Ww(t);
   let E = useMemo(() => [function (e) {
     switch (e) {

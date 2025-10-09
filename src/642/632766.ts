@@ -40,7 +40,7 @@ export function $$j0({
   setShowSinglePaddingControl: x,
   ...y
 }) {
-  let j = useDispatch();
+  let j = useDispatch<AppDispatch>();
   let [v, k] = HF(e);
   let {
     smallNudgeAmount,

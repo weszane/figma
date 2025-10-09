@@ -11,7 +11,7 @@ export function $$c0({
   onFilterUpdate: t,
   getCount: a
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let _ = useDropdownState();
   let u = useSelector(e => e.currentUserOrgId);
   let m = NJ(u);

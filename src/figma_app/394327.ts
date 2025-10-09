@@ -1,51 +1,137 @@
-import { assertNotNullish } from "../figma_app/465776";
-import { deepEqual } from "../905/382883";
-import { VariableResolvedDataType, VariableDataType, PlatformType, ComponentPropType, OperationType } from "../figma_app/763686";
-import { convertKiwiToVariableIdString } from "../905/805904";
-import { colorToRgbaString } from "../figma_app/191804";
-import { getI18nString } from "../905/303541";
-import { formattedColorManipulator } from "../905/713722";
-import { normalizeValue } from "../905/216495";
-export function $$u6(e) {
-  if ("MIXED" === e) return getI18nString("fullscreen.mixed");
-  if (!e) return null;
-  switch (e.resolvedType) {
+import { normalizeValue } from "../905/216495"
+import { getI18nString } from "../905/303541"
+import { deepEqual } from "../905/382883"
+import { formattedColorManipulator } from "../905/713722"
+import { convertKiwiToVariableIdString } from "../905/805904"
+import { colorToRgbaString } from "../figma_app/191804"
+import { assertNotNullish } from "../figma_app/465776"
+import { ComponentPropType, OperationType, PlatformType, VariableDataType, VariableResolvedDataType } from "../figma_app/763686"
+
+// Origin: /Users/allen/sigma-main/src/figma_app/394327.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments, improved readability and type safety.
+
+// Assumed dependencies (from imports):
+// - normalizeValue, getI18nString, deepEqual, formattedColorManipulator, convertKiwiToVariableIdString, colorToRgbaString, assertNotNullish
+// - ComponentPropType, OperationType, PlatformType, VariableDataType, VariableResolvedDataType
+
+// --- Type Definitions ---
+
+export interface VariableValue {
+  boolValue?: boolean;
+  floatValue?: number;
+  textValue?: string;
+  colorValue?: { r: number; g: number; b: number; a: number } ;
+  alias?: string;
+  asFloat?: unknown;
+  asString?: unknown;
+  expressionFunction?: OperationType;
+  expressionArguments?: VariableValue[];
+  expression?: unknown;
+}
+
+export interface Variable {
+  name: string;
+  codeSyntax?: Partial<Record<PlatformType, string>>;
+  subscriptionStatus?: "LOCAL" | "SUBSCRIBED" | "LIBRARY";
+  isSoftDeleted?: boolean;
+  isExtension?: boolean;
+  rootVariableSetKey?: string;
+  key?: string;
+  keyForPublish?: string;
+  variableSetId?: string;
+  dataType?: keyof typeof VariableDataType | string;
+  resolvedDataType?: keyof typeof VariableResolvedDataType | string;
+  value?: VariableValue;
+  type?: keyof typeof VariableDataType | string;
+}
+
+export interface VariableDisplay {
+  resolvedType?: VariableResolvedDataType;
+  value?: any;
+  type?: VariableDataType;
+}
+
+export interface VariableComparison {
+  dataType?: keyof typeof VariableDataType | string;
+  resolvedDataType?: keyof typeof VariableResolvedDataType | string;
+  value?: VariableValue;
+}
+
+// --- Refactored Functions ---
+
+/**
+ * Converts a variable value to a display string, handling types and localization.
+ */
+export function getVariableDisplayString(variable: "MIXED" | VariableDisplay | null): string | null {
+  if (variable === "MIXED") {
+    return getI18nString("fullscreen.mixed");
+  }
+  if (!variable) {
+    return null;
+  }
+  switch (variable.resolvedType) {
     case VariableResolvedDataType.FLOAT:
-      return String(parseFloat(e.value.toFixed(2)));
+      // Show float with 2 decimals
+      return String(parseFloat(variable.value.toFixed(2)));
     case VariableResolvedDataType.BOOLEAN:
-      return e.value ? getI18nString("variables.values.boolean.true") : getI18nString("variables.values.boolean.false");
+      return variable.value
+        ? getI18nString("variables.values.boolean.true")
+        : getI18nString("variables.values.boolean.false");
     case VariableResolvedDataType.COLOR:
-      return formattedColorManipulator.format(e.value);
+      return formattedColorManipulator.format(variable.value);
     case VariableResolvedDataType.STRING:
-      if (e.type === VariableDataType.DATE) return null;
-      return e.value;
+      if (variable.type === VariableDataType.DATE) return null;
+      return variable.value;
     case VariableResolvedDataType.IMAGE:
     case VariableResolvedDataType.JS_RUNTIME_ALIAS:
       return null;
     default:
-      return JSON.stringify(e.value);
+      // Fallback: JSON stringify
+      return JSON.stringify(variable.value);
   }
 }
-export function $$p12(e, t) {
-  if (e === t) return !0;
-  if (!e || !e.dataType || !e.resolvedDataType || !e.value || !t || !t.dataType || !t.resolvedDataType || !t.value || e.dataType !== t.dataType || e.resolvedDataType !== t.resolvedDataType) return !1;
-  switch (e.dataType) {
+
+/**
+ * Compares two variable objects for equality, handling type-specific logic.
+ */
+export function areVariablesEqual(a: VariableComparison | null, b: VariableComparison | null): boolean {
+  if (a === b) return true;
+  if (
+    !a ||
+    !a.dataType ||
+    !a.resolvedDataType ||
+    !a.value ||
+    !b ||
+    !b.dataType ||
+    !b.resolvedDataType ||
+    !b.value ||
+    a.dataType !== b.dataType ||
+    a.resolvedDataType !== b.resolvedDataType
+  ) {
+    return false;
+  }
+  switch (a.dataType) {
     case "BOOLEAN":
-      return e.value.boolValue === t.value.boolValue;
+      return a.value.boolValue === b.value.boolValue;
     case "FLOAT":
-      return e.value.floatValue === t.value.floatValue;
+      return a.value.floatValue === b.value.floatValue;
     case "STRING":
-      return e.value.textValue === t.value.textValue;
+      return a.value.textValue === b.value.textValue;
     case "COLOR":
-      assertNotNullish(e.value.colorValue);
-      assertNotNullish(t.value.colorValue);
-      return colorToRgbaString(e.value.colorValue) === colorToRgbaString(t.value.colorValue);
+      assertNotNullish(a.value.colorValue);
+      assertNotNullish(b.value.colorValue);
+      return colorToRgbaString(a.value.colorValue) === colorToRgbaString(b.value.colorValue);
     default:
-      return deepEqual(e, t);
+      // Deep equality for other types
+      return deepEqual(a, b);
   }
 }
-export function $$_10(e) {
-  switch (e) {
+
+/**
+ * Maps resolved variable type to its base data type.
+ */
+export function resolvedTypeToDataType(resolvedType: VariableResolvedDataType): VariableDataType | undefined {
+  switch (resolvedType) {
     case VariableResolvedDataType.BOOLEAN:
       return VariableDataType.BOOLEAN;
     case VariableResolvedDataType.FLOAT:
@@ -58,12 +144,22 @@ export function $$_10(e) {
       return VariableDataType.MAP;
     case VariableResolvedDataType.SYMBOL_ID:
       return VariableDataType.SYMBOL_ID;
+    default:
+      return undefined;
   }
 }
-export function $$h11(e) {
-  return "LOCAL" === e.subscriptionStatus && e.isSoftDeleted;
+
+/**
+ * Checks if a variable is locally soft-deleted.
+ */
+export function isLocallySoftDeleted(variable: Variable): boolean {
+  return variable.subscriptionStatus === "LOCAL" && !!variable.isSoftDeleted;
 }
-export let $$m2 = {
+
+/**
+ * Maps variable property keys to supported resolved data types.
+ */
+export const variablePropertyTypeMap: Record<string, VariableResolvedDataType[]> = {
   CORNER_RADIUS: [VariableResolvedDataType.FLOAT],
   STACK_SPACING: [VariableResolvedDataType.FLOAT],
   STACK_PADDING_LEFT: [VariableResolvedDataType.FLOAT],
@@ -104,16 +200,33 @@ export let $$m2 = {
   CMS_SERIALIZED_RICH_TEXT_DATA: [VariableResolvedDataType.JS_RUNTIME_ALIAS],
   SLOT_CONTENT_ID: [VariableResolvedDataType.SLOT_CONTENT_ID],
   GRID_ROW_GAP: [VariableResolvedDataType.FLOAT],
-  GRID_COLUMN_GAP: [VariableResolvedDataType.FLOAT]
+  GRID_COLUMN_GAP: [VariableResolvedDataType.FLOAT],
 };
-export function $$g5({
-  variable: e,
-  variableDisplayName: t
-}) {
-  return e ? e.codeSyntax?.[PlatformType.WEB] ? e.codeSyntax[PlatformType.WEB] : `var(--${(t ?? e.name).replace(/[^a-zA-Z0-9-]/g, "")})` : "";
+
+/**
+ * Returns the CSS variable syntax for a variable, or fallback to its name.
+ */
+export function getWebVariableSyntax({
+  variable,
+  variableDisplayName,
+}: {
+  variable?: Variable;
+  variableDisplayName?: string;
+}): string {
+  if (!variable) return "";
+  if (variable.codeSyntax?.[PlatformType.WEB]) {
+    return variable.codeSyntax[PlatformType.WEB]!;
+  }
+  // Fallback: generate CSS variable name from display name or variable name
+  const name = (variableDisplayName ?? variable.name).replace(/[^a-z0-9-]/gi, "");
+  return `var(--${name})`;
 }
-export function $$f8(e) {
-  switch (e) {
+
+/**
+ * Maps resolved variable type to component prop type.
+ */
+export function resolvedTypeToComponentPropType(resolvedType: VariableResolvedDataType): ComponentPropType {
+  switch (resolvedType) {
     case VariableResolvedDataType.BOOLEAN:
       return ComponentPropType.BOOL;
     case VariableResolvedDataType.FLOAT:
@@ -122,11 +235,15 @@ export function $$f8(e) {
     case VariableResolvedDataType.TEXT_DATA:
       return ComponentPropType.TEXT;
     default:
-      throw Error(`Unknown resolved type: ${e}`);
+      throw new Error(`Unknown resolved type: ${resolvedType}`);
   }
 }
-export function $$E1(e) {
-  switch (e) {
+
+/**
+ * Maps resolved variable type to string identifier.
+ */
+export function resolvedTypeToString(resolvedType: VariableResolvedDataType): string | undefined {
+  switch (resolvedType) {
     case VariableResolvedDataType.BOOLEAN:
       return "boolean";
     case VariableResolvedDataType.FLOAT:
@@ -151,44 +268,92 @@ export function $$E1(e) {
       return "js_runtime_alias";
     case VariableResolvedDataType.SLOT_CONTENT_ID:
       return "slot_content_id";
+    default:
+      return undefined;
   }
 }
-export function $$y9(e) {
-  return "SUBSCRIBED" === e.subscriptionStatus || "LIBRARY" === e.subscriptionStatus ? e.key : e.keyForPublish;
+
+/**
+ * Returns the publish key for a variable, depending on its subscription status.
+ */
+export function getVariablePublishKey(variable: Variable): string | undefined {
+  if (variable.subscriptionStatus === "SUBSCRIBED" || variable.subscriptionStatus === "LIBRARY") {
+    return variable.key;
+  }
+  return variable.keyForPublish;
 }
-export function $$b3(e) {
-  return e.isExtension ? e.rootVariableSetKey : $$y9(e);
+
+/**
+ * Returns the root variable set key for an extension variable, otherwise its publish key.
+ */
+export function getVariableSetKey(variable: Variable): string | undefined {
+  return variable.isExtension ? variable.rootVariableSetKey : getVariablePublishKey(variable);
 }
-export function $$T0(e, t) {
-  return e.variableSetId === t;
+
+/**
+ * Checks if a variable belongs to a specific variable set.
+ */
+export function isVariableInSet(variable: Variable, setId: string): boolean {
+  return variable.variableSetId === setId;
 }
-export const CS = $$T0;
-export const Hr = $$E1;
-export const Io = $$m2;
-export const Ip = $$b3;
-export const MH = function e(t) {
-  let r = normalizeValue(t);
-  if (r) {
-    if ("dataType" in r && "ALIAS" === r.dataType && r.value?.alias) return convertKiwiToVariableIdString(r.value?.alias);
-    if ("type" in r) {
-      if (r.type === VariableDataType.ALIAS) return r.value;
-      if (r.type === VariableDataType.FONT_STYLE) return e(r.value.asFloat ?? r.value.asString ?? null);
-      if (r?.type === VariableDataType.EXPRESSION && r.value.expressionFunction === OperationType.STRINGIFY && 1 === r.value.expressionArguments.length) return e(r.value.expressionArguments[0]);
+
+/**
+ * Normalizes and extracts a variable's alias or font style/expression value.
+ */
+export function extractVariableAliasOrFontStyle(variable: any) {
+  const normalized = normalizeValue(variable);
+  if (normalized) {
+    if ("dataType" in normalized && normalized.dataType === "ALIAS" && normalized.value?.alias) {
+      return convertKiwiToVariableIdString(normalized.value.alias);
+    }
+    if ("type" in normalized) {
+      if (normalized.type === VariableDataType.ALIAS) {
+        return normalized.value;
+      }
+      if (normalized.type === VariableDataType.FONT_STYLE) {
+        return iterateVariableValue(normalized.value.asFloat ?? normalized.value.asString ?? null);
+      }
+      if (
+        normalized.type === VariableDataType.EXPRESSION &&
+        normalized.value.expressionFunction === OperationType.STRINGIFY &&
+        normalized.value.expressionArguments.length === 1
+      ) {
+        return iterateVariableValue(normalized.value.expressionArguments[0]);
+      }
     }
   }
   return null;
-};
-export const NX = $$g5;
-export const Oi = $$u6;
-export const Pr = function e(t) {
-  return {
-    *[Symbol.iterator]() {
-      if (yield t, t.type === VariableDataType.EXPRESSION) for (let r of t.value.expressionArguments) yield* e(r);else if (t.type === VariableDataType.MAP) for (let r of Object.values(t.value)) yield* e(r);
+}
+export const MH = extractVariableAliasOrFontStyle;
+
+/**
+ * Recursively iterates through variable values for font style/expression/map types.
+ * Returns a generator that yields values.
+ */
+function* iterateVariableValue(value: any) {
+  yield value;
+  if (value?.type === VariableDataType.EXPRESSION) {
+    for (const arg of value.value.expressionArguments) {
+      yield* iterateVariableValue(arg);
     }
-  }[Symbol.iterator]();
-};
-export const WB = $$f8;
-export const cn = $$y9;
-export const e4 = $$_10;
-export const eF = $$h11;
-export const rY = $$p12;
+  } else if (value?.type === VariableDataType.MAP) {
+    for (const v of Object.values(value.value)) {
+      yield* iterateVariableValue(v);
+    }
+  }
+}
+export const Pr = iterateVariableValue;
+
+// --- Export Aliases (preserving original names) ---
+
+export const WB = resolvedTypeToComponentPropType;
+export const cn = getVariablePublishKey;
+export const e4 = resolvedTypeToDataType;
+export const eF = isLocallySoftDeleted;
+export const rY = areVariablesEqual;
+export const CS = isVariableInSet;
+export const Hr = resolvedTypeToString;
+export const Io = variablePropertyTypeMap;
+export const Ip = getVariableSetKey;
+export const NX = getWebVariableSyntax;
+export const Oi = getVariableDisplayString;

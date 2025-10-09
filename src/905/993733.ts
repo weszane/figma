@@ -224,7 +224,7 @@ function e_(e) {
     header,
     RenderTable
   } = e;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = {};
   let l = {};
   oldValues.forEach(e => {

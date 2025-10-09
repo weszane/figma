@@ -18,7 +18,7 @@ import { CommunityPageType } from '../figma_app/45218';
 import { Ou } from '../figma_app/106207';
 import { getInitialOptions } from '../figma_app/169182';
 import { FFileType } from '../figma_app/191312';
-import { a6 } from '../figma_app/198840';
+import { getHubFileVersionOrDefault } from '../figma_app/198840';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { tS } from '../figma_app/622574';
 import { FUSE_CONFIG_PROFILE } from '../figma_app/740025';
@@ -106,7 +106,7 @@ export function $$z0() {
   let {
     setQuery
   } = _$$I(Cn.FigJam);
-  let j = useDispatch();
+  let j = useDispatch<AppDispatch>();
   let S = useCurrentFileKey();
   let {
     shelves,
@@ -167,7 +167,7 @@ export function $$z0() {
   let [ev, ew] = useState([]);
   let [eN, eT] = useState([]);
   useEffect(() => {
-    let e = Object.keys(P).reduce((e, t) => [...e, ...P[t]], []).map(e => a6(hubFiles[e]));
+    let e = Object.keys(P).reduce((e, t) => [...e, ...P[t]], []).map(e => getHubFileVersionOrDefault(hubFiles[e]));
     k.set(e);
   }, [P, hubFiles]);
   useEffect(() => {

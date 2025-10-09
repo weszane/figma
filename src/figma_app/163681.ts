@@ -64,7 +64,7 @@ function R(e) {
   });
 }
 function k(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = renderI18nText("tooltips_plus_onboarding.ui_kits_ending_step.title");
   let s = renderI18nText("tooltips_plus_onboarding.ui_kits_ending_step.description");
   let o = "UI Kits";
@@ -126,7 +126,7 @@ let F = {
 function j({
   completeOverlay: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useStore();
   let s = selectUserFlag("figma_basics_tooltips_onboarding");
   let l = selectUserFlag(F.FRAME);
@@ -227,7 +227,7 @@ function j({
   });
 }
 function z(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = alwaysFalseCallback2()() ? renderI18nText("tooltips_plus_onboarding.ui_kits_and_icon_packs_step.title") : renderI18nText("tooltips_plus_onboarding.ui_kits_step.title");
   let s = renderI18nText("tooltips_plus_onboarding.ui_kits_step.description");
   let o = "UI Kits";
@@ -274,7 +274,7 @@ let W = {
 function K({
   completeOverlay: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectUserFlag("no_figma_basics_tooltips_onboarding");
   let s = useIsProgressBarHiddenOrLocked();
   let [l, d] = useState(NavigationDirection.FORWARD);
@@ -506,7 +506,7 @@ let er = {
 function en({
   completeOverlay: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectUserFlag("seen_starting_points_tooltips_onboarding");
   let s = selectUserFlag(er.EDIT_TEXT);
   let l = selectUserFlag(er.PROPERTIES);
@@ -582,7 +582,7 @@ function en({
 }
 export let $$ei0 = "tooltips_plus_onboarding_reset_onboarding";
 export function $$ea1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentUser();
   let r = selectCurrentFile()?.canEditCanvas;
   let f = useAtomWithSubscription(NT);

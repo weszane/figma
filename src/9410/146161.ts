@@ -14,7 +14,7 @@ export function $$p0(e) {
   let h = usePublishedPlugins();
   let m = usePluginedWidgets();
   let f = "plugin" === e ? h : m;
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let _ = useIsUserGuestInOrg();
   let x = selectorFullScreenViewEditorType();
   let y = "plugin" === e ? Xt : gI;

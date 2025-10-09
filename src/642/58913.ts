@@ -17,7 +17,7 @@ export function $$f0({
   recordingKey: s,
   showDefault: f
 }) {
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let [y, _] = sL();
   let b = selectWithShallowEqual(e => e.dropdownShown);
   let C = !f && qg(y, "PASS_THROUGH");

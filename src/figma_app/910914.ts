@@ -39,7 +39,7 @@ export const DEV_HAND = 'dev_handoff_dismissed_inspect_panel_plugins_hint';
  */
 export function DevHandoffInspectPanelPluginsHint() {
   const isVisible = isSingleSceneGraphSelectionInDevHandoff();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   /**
    * Handles dismissing the hint panel.

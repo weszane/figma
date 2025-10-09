@@ -116,7 +116,7 @@ export function $$em2({
   customPlaceholder: ep,
   variant: em = "row"
 }) {
-  let eg = useDispatch();
+  let eg = useDispatch<AppDispatch>();
   let ef = Xo();
   let eE = useDropdownState();
   let ey = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);

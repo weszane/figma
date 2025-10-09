@@ -8,7 +8,7 @@ import { supportedResolvedTypes } from "../905/929949";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { c$ } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
-import { rW } from "../figma_app/852050";
+import { getLocalVariablesForSet } from "../figma_app/852050";
 import { useDropdown } from "../905/848862";
 import { ConnectedPointingDropdown } from "../905/504727";
 import { i as _$$i } from "../905/415810";
@@ -35,7 +35,7 @@ export function $$E0(e) {
   let o = useCallback(() => {
     toggle();
   }, [toggle]);
-  let l = rW(e.variableSetID);
+  let l = getLocalVariablesForSet(e.variableSetID);
   let d = null;
   if (l.length > 0) {
     let t = e.selectedVariableIDs[e.selectedVariableIDs.length - 1];
@@ -98,7 +98,7 @@ export function $$x1({
   }), document.body);
 }
 function S(e) {
-  let t = rW(e.variableSetID);
+  let t = getLocalVariablesForSet(e.variableSetID);
   let i = ay();
   let a = getVariableTypeInfo(e.resolvedType);
   let s = useHandleMouseEvent(generateRecordingKey(e.recordingKey, "createVariableOption", a.name.toLowerCase()), "click", useCallback(() => {

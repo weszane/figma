@@ -32,7 +32,7 @@ export function $$P0(e) {
   let i = useSelector(e => e.teams);
   let P = getSelectedView();
   let O = e.orgTeams;
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let {
     showing,
     show,

@@ -113,7 +113,7 @@ let er = memo(e => {
   let n = selectCurrentUser();
   let c = _$$s();
   let m = Z5();
-  let P = useDispatch();
+  let P = useDispatch<AppDispatch>();
   let T = useContext(viewportNavigatorContext);
   let z = useRef(null);
   let J = useSelector(e => e.mirror.appModel.currentTool);

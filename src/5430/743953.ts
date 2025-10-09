@@ -1,5 +1,5 @@
 import { createOptimistThunk } from "../905/350402";
-import { vr } from "../figma_app/49598";
+import { viewHubFileThunk } from "../figma_app/49598";
 import { sendWithRetry } from "../905/910117";
 import { hasClientMeta, isWidget } from "../figma_app/45218";
 let n = createOptimistThunk((e, {
@@ -9,7 +9,7 @@ let n = createOptimistThunk((e, {
   pluginId: t
 }));
 export function $$a0(e, t) {
-  e(hasClientMeta(t) ? vr({
+  e(hasClientMeta(t) ? viewHubFileThunk({
     hubFileId: t.id
   }) : n({
     pluginId: t.id,

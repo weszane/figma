@@ -64,7 +64,7 @@ import { InstanceType } from '../figma_app/338442';
 import { hg } from '../figma_app/355754';
 import { Aw } from '../figma_app/383828';
 import { setSelectedTypedPropDefId } from '../figma_app/389091';
-import { eF as _$$eF } from '../figma_app/394327';
+import { isLocallySoftDeleted } from '../figma_app/394327';
 import { ty as _$$ty } from '../figma_app/406976';
 import { fullscreenValue } from '../figma_app/455680';
 import { applyAutoSuggestedProps, findSingleInstanceId } from '../figma_app/460003';
@@ -85,7 +85,7 @@ import { iN } from '../figma_app/760428';
 import { ComponentPropType, Fullscreen, OperationType, StateHierarchy, VariableDataType, VariableResolvedDataType, VariablesBindings, VariableSetErrorType } from '../figma_app/763686';
 import { parsePxInt } from '../figma_app/783094';
 import { Ad, fn, oO, Y9 } from '../figma_app/811257';
-import { u as _$$u, BQ } from '../figma_app/852050';
+import { getVariableById, getResolvedVariableValue } from '../figma_app/852050';
 import { generateRecordingKey, useHandleInputEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { Og } from '../figma_app/882817';
 import { selectSceneGraphSelectionKeys } from '../figma_app/889655';
@@ -163,7 +163,7 @@ function eb({
   text: e,
   ...t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     state,
     targetRect,
@@ -250,7 +250,7 @@ function ew(e) {
     };
   });
   let w = useSelector(selectContainingStateGroupId);
-  let O = useDispatch();
+  let O = useDispatch<AppDispatch>();
   let R = useCallback(e => {
     V(e.currentTarget.value);
   }, []);
@@ -768,7 +768,7 @@ function $$e6(e) {
     sceneGraph,
     updateHistory
   } = e;
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   let v = useSelector(e => e.instanceSwapPickerShown);
   let A = hg();
   let x = D5(variantPropDef.name, variantPropDef.values);
@@ -783,7 +783,7 @@ function $$e6(e) {
     onExpressionSubmitted,
     variableConsumptionMapValue
   } = function (e, t) {
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     let {
       consumedVariable,
       variantProperties,
@@ -927,14 +927,14 @@ function $$e6(e) {
   function H() {
     setBinding(void 0);
   }
-  let z = _$$u(boundVariableId ?? void 0);
+  let z = getVariableById(boundVariableId ?? void 0);
   let W = Px();
   let K = useMemo(() => VariablesBindings.getVariableSetKeyForPublish(z?.variableSetId ?? '') ?? '', [z?.variableSetId]);
   let Y = K in W ? W[yG(K)] : void 0;
   let $ = useMemo(() => Y ? {
     [yG(K)]: Y
   } : void 0, [Y, K]);
-  let X = BQ(boundVariableId ?? void 0, $);
+  let X = getResolvedVariableValue(boundVariableId ?? void 0, $);
   let {
     assignmentValue,
     iconButton
@@ -960,7 +960,7 @@ function $$e6(e) {
             classNameOverride: cssBuilderInstance.wFull.$,
             fullWidth: !0,
             invalid: void 0 !== t,
-            isDeleted: _$$eF(z),
+            isDeleted: isLocallySoftDeleted(z),
             isStandalone: !0,
             thumbnailValue: X === 'MIXED' || t ? void 0 : X,
             tooltipOverride: t,
@@ -1072,7 +1072,7 @@ function e9({
   guids: d,
   ariaLabelledBy: c
 }) {
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let m = useSelector(e => e.dropdownShown);
   return jsx('div', {
     className: u()(tP, {
@@ -1198,7 +1198,7 @@ function td({
     selectedStates: _f(e),
     selectedStatesPropertyValues: D1(e)
   }));
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let {
     useGrid
   } = useContext(dD);

@@ -173,12 +173,12 @@ import { ButtonPrimitive } from "../905/632989";
 import { Q as _$$Q3 } from "../1250/220026";
 import { useLatestRef } from "../figma_app/922077";
 import { SvgComponent } from "../905/714743";
-import { Ji } from "../figma_app/972736";
+import { setIsMakeSomethingV2ActiveActionCreator } from "../figma_app/972736";
 import { createNewFileWithRestrictions } from "../905/738636";
 import { Fz } from "../figma_app/106207";
 import { useIsFullscreenReady } from "../figma_app/115586";
 import { B as _$$B2 } from "../905/524020";
-import { a6 as _$$a2, RD } from "../figma_app/198840";
+import { getHubFileVersionOrDefault, FileTypeSwitch } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
 import { mI, vX, wV, mN, rL as _$$rL, CM } from "../9410/983167";
@@ -249,7 +249,7 @@ import { Hj } from "../figma_app/336229";
 import { buildStateMachine, createUserEventTransition } from "../905/337355";
 import { rn as _$$rn } from "../905/988099";
 import { R as _$$R2 } from "../figma_app/738753";
-import { ts as _$$ts } from "../figma_app/49598";
+import { getHubFileVersionsThunk } from "../figma_app/49598";
 import { WZ } from "../905/893645";
 import { TabCategory } from "../905/42189";
 import { Gv, ak as _$$ak } from "../figma_app/532170";
@@ -571,7 +571,7 @@ function Q() {
   return t && e && !i;
 }
 function et() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     isShowing,
     complete
@@ -651,7 +651,7 @@ let eu = atom(!1);
 let e_ = "slides_visual_bell_entrypoint_dismissed_user_flag";
 function ex() {
   !function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = _$$d();
     let i = selectUserFlag(e_);
     let r = _$$$();
@@ -695,7 +695,7 @@ function eD() {
   let t = useAtomValue(_$$t2);
   let i = useAtomValue(eR);
   let n = useAtomValue(openFileAtom);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let {
     uniqueId,
     isShowing,
@@ -995,7 +995,7 @@ function th() {
     overlay: CustomTemplatePublishNudge,
     priority: _$$N.DEFAULT_MODAL
   });
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useStore();
   let a = useDeepEqualSceneValue((e, t) => zC(e, t), i.getState().mirror.appModel.currentPage);
   let s = JU(J3());
@@ -1097,7 +1097,7 @@ function tR(e) {
     viewedSidebar,
     setViewedSidebar
   } = e;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = _$$w2({
     rolesToDefaultToOther: ["education"]
   });
@@ -1155,7 +1155,7 @@ let tz = "figjam_try_confirm_save_steps--descriptionBold--ou7xj";
 function tV({
   dismissModal: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCurrentFileKey();
   let a = useSelector(e => e.user?.email_validated_at);
   let s = useSelector(e => i ? e.loadingState[_$$Q2.loadingKeyForPayload({
@@ -1354,7 +1354,7 @@ function t7() {
   });
 }
 function ir() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     show,
     isShowing,
@@ -1436,7 +1436,7 @@ function ir() {
   });
 }
 function ic() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.currentTeamId);
   let i = useStore();
   let a = useAtomWithSubscription(_$$t2);
@@ -1518,7 +1518,7 @@ function ic() {
 let im = "seen_link_shortcut_overlay";
 let ig = userFlagExistsAtomFamily(im);
 function i_() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomValue(ig);
   let {
     show,
@@ -1586,7 +1586,7 @@ var iy = ix;
 let iE = "dismissed_local_component_asset_panel_pointer";
 let iT = userFlagExistsAtomFamily(iE);
 function iw() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getUserId();
   let i = useAtomWithSubscription(wg);
   let a = useAtomWithSubscription(iT);
@@ -1650,7 +1650,7 @@ function iw() {
 }
 let iI = userFlagExistsAtomFamily("seen_mobile_comment_download_modal_prompt");
 function ik() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(iI);
   let i = useSelector(e => e.userAnalyticsData?.is_active_mobile_user);
   let o = useSelector(e => e.user?.created_at);
@@ -2007,7 +2007,7 @@ let rh = userFlagExistsAtomFamily("has_shared_to_google_classroom");
 let rm = userFlagExistsAtomFamily("figjam_editor_onboarded");
 let rf = "start_share_to_classroom_new_user_onboarding";
 function rg() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = ra({
     skipAccountCreationDateCheck: !0
   });
@@ -2049,7 +2049,7 @@ function rg() {
     next: t,
     complete: i
   }) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let a = selectCurrentFile();
     return [jsx(ro, {
       isShowing: e,
@@ -2087,7 +2087,7 @@ function rg() {
   });
 }
 function r_(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return () => {
     t(postUserFlag({
       figjam_editor_onboarded: !0
@@ -2099,7 +2099,7 @@ function rx({
   overlayUniqueId: e,
   afterReset: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   useEventForwarder(e, "Reset Onboarding", () => {
     i(postUserFlag({
       figjam_editor_onboarded: !1,
@@ -2143,7 +2143,7 @@ function rH({
   useCase: t
 }) {
   let i = selectCurrentFile();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = _$$O2();
   return {
     onNext: useCallback(() => {
@@ -4141,10 +4141,10 @@ let ni = e => {
   let {
     name
   } = useTracking();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let [o, l] = useState(fD.NONE);
   let d = useCallback(e => {
-    a(Ji({
+    a(setIsMakeSomethingV2ActiveActionCreator({
       isActive: e
     }));
   }, [a]);
@@ -4288,7 +4288,7 @@ let nn = _$$n2(({
   onSuccess: e
 } = {}) => {
   let t = Xr(_$$w5);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let r = useIsProgressBarHiddenOrLocked();
   let a = useIsFullscreenReady();
   let o = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
@@ -4308,7 +4308,7 @@ let nn = _$$n2(({
     let e = {};
     Object.keys(hubFiles).filter(e => categoryIds.some(t => templates[t]?.includes(e))).reduce((e, t) => {
       let i = hubFiles[t];
-      i && (e[_$$a2(i).name.toUpperCase()] = i);
+      i && (e[getHubFileVersionOrDefault(i).name.toUpperCase()] = i);
       return e;
     }, e);
     return e;
@@ -4449,7 +4449,7 @@ function ns(e) {
     useCaseTiles,
     onListBoxKeydown
   } = ni({
-    templateInsertionLocation: RD.CURRENT_FILE,
+    templateInsertionLocation: FileTypeSwitch.CURRENT_FILE,
     onHideModal,
     onClickUseCaseTile(e) {
       l.current = !0;
@@ -4602,7 +4602,7 @@ function no(e) {
       shiftPopupUp: i
     };
   }();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = _$$B2();
   let {
     hoveredUseCase,
@@ -4614,7 +4614,7 @@ function no(e) {
     useCaseTiles,
     onListBoxKeydown
   } = ni({
-    templateInsertionLocation: RD.NEW_FILE,
+    templateInsertionLocation: FileTypeSwitch.NEW_FILE,
     onHideModal,
     onClickUseCaseTile(e) {
       l(createNewFileWithRestrictions({
@@ -4877,7 +4877,7 @@ let nL = _$$D3((e, t) => {
   }));
 });
 function nR(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx("div", {
     className: "onboard_figjam_viewer--openTutorialModalContainer--O1ld1",
     children: jsx("div", {
@@ -4988,7 +4988,7 @@ function nF(e) {
   });
 }
 function nB() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useFullscreenViewFile();
   let {
     show,
@@ -5500,7 +5500,7 @@ function at(e) {
   });
 }
 function ai(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = MR();
   let a = qU();
   let [s, o] = useState("invalid");
@@ -7037,7 +7037,7 @@ let sr = registerModal(function ({
   onDismiss: e
 }) {
   let t = useAtomWithSubscription(openFileAtom);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return jsxs(ConfirmationModal2, {
     autoFocusCta: !1,
     cancelText: renderI18nText("oss_sales_upsell_overlay.secondary_cta"),
@@ -7119,7 +7119,7 @@ function sa({
   teamId: e,
   fileKey: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let a = useAtomWithSubscription(M$);
   let o = useSubscription(TeamCanAdmin, {
     id: e
@@ -7272,7 +7272,7 @@ function sb({
   });
 }
 function sC() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = ra({});
   let i = useAtomWithSubscription(rc);
   let a = useAtomWithSubscription(rp);
@@ -7312,7 +7312,7 @@ function sC() {
     next: t,
     complete: i
   }) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let a = selectCurrentFile();
     return [jsx(sb, {
       onPrimaryCtaClick: () => {
@@ -7369,7 +7369,7 @@ function sM({
   isShowing: t,
   onTargetLost: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   sR(n, jx);
   sR(n, sN);
   return jsx(OnboardingModal, {
@@ -7410,7 +7410,7 @@ function sF({
   isShowing: t,
   onTargetLost: i
 }) {
-  sR(useDispatch(), _$$af);
+  sR(useDispatch<AppDispatch>(), _$$af);
   return jsx(OnboardingModal, {
     arrowPosition: ArrowPosition.BOTTOM,
     description: getFeatureFlags().hub_file_fragments ? renderI18nText("ui3_and_ai_callouts.community_fragment_search.description") : renderI18nText("ui3_and_ai_callouts.fragment_search.description"),
@@ -7657,7 +7657,7 @@ function sJ({
 }
 function sq(e) {
   let [t, i] = useState(!0);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let o = useAtomWithSubscription(openFileAtom);
   useEffect(() => {
     setTimeout(() => i(!1), 1e3);
@@ -7750,7 +7750,7 @@ let s2 = _$$rn("paste_deselected_machine", s1);
 let s3 = userFlagExistsAtomFamily("explicitly_dismissed_create_component_pointer");
 let s5 = _$$tH("first_component_created_date");
 function s4() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(_$$t2);
   let i = useAtomWithSubscription(NZ);
   let n = useAtomWithSubscription(pQ);
@@ -7844,10 +7844,10 @@ function oo() {
     let {
       insertTemplate
     } = Fz();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     useSingleEffect(() => {
       let i = getQueryParam("templateId");
-      null != i && (removeQueryParam("templateId"), t(_$$ts({
+      null != i && (removeQueryParam("templateId"), t(getHubFileVersionsThunk({
         hubFileId: i,
         callback: t => {
           insertTemplate({
@@ -7869,7 +7869,7 @@ function oo() {
     priority: _$$N.OVERRIDING_MODAL
   }, [e]);
   let i = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     return useMemo(() => [{
       title: renderI18nText("rcs.figjam_diagram_onboarding.connectors_title"),
       trackingContextName: or.connectors,
@@ -7977,7 +7977,7 @@ function op(e) {
   });
 }
 function o_(e, t, i, r) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = selectUserFlag(i);
   let o = useRef(!!s);
   useEventForwarder(e, t, useCallback(() => {
@@ -7996,7 +7996,7 @@ function ow() {
     overlay: CursorBotFrameFormattingFollowUp,
     priority: _$$N.OVERRIDING_MODAL
   });
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = selectUserFlag("cursor_bot_v2__no_basics_file__played_frame_formatting");
   let d = selectUserFlag("design_panel_step_shown");
   let c = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
@@ -8039,7 +8039,7 @@ function oS() {
     overlay: CursorBotTextFormattingFollowUp,
     priority: _$$N.OVERRIDING_MODAL
   });
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = selectUserFlag("cursor_bot_v2__no_basics_file__played_text_formatting");
   let d = selectUserFlag("format_text_step_shown");
   let c = selectUserFlag("cursor_bot_v2__basics_file__started_flow");
@@ -8086,7 +8086,7 @@ function ok() {
   let t = selectUserFlag("no_figma_basics_tooltips_design_panel_step");
   let i = selectUserFlag("design_panel_step_shown");
   let a = selectUserFlag("started_figma_basics_onboarding");
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = t && !i && !a;
   if (useEventForwarder(e.uniqueId, "create_frame", useCallback(() => {
     o && !e.isShowing && e.show();
@@ -8118,7 +8118,7 @@ function oN() {
   let t = selectUserFlag("no_figma_basics_tooltips_format_text_step");
   let i = selectUserFlag("format_text_step_shown");
   let a = selectUserFlag("started_figma_basics_onboarding");
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = !i && t && !a;
   if (useEventForwarder(e.uniqueId, "create_text", useCallback(() => {
     o && !e.isShowing && e.show();
@@ -8206,7 +8206,7 @@ function oH(e) {
   }) : null;
 }
 function oX() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = hasJubileePermissionForDesign();
   let i = userFlagExistsAtomFamily(Kt);
   let r = useAtomWithSubscription(i);
@@ -8253,7 +8253,7 @@ function o1({
 function o2({
   teamId: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = userFlagExistsAtomFamily(Kt);
   let a = useAtomWithSubscription(i);
   let o = userFlagExistsAtomFamily(uM);
@@ -8423,7 +8423,7 @@ export let $$le0 = memo(function ({
     e.current;
   })(l);
   (function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useAtomWithSubscription(userCreatedAtAtom);
     let r = null != i && dayjs("2023-10-31").isBefore(i);
     let a = !!selectUserFlag("has_opened_design_editor");

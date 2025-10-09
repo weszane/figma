@@ -268,7 +268,7 @@ export function $$Y3(e) {
   let {
     updateIndividualInstances
   } = TM(o, AX.DROPDOWN_UPDATE_SELECTED_INSTANCE);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useMemo(() => ({
     source: "INSTANCE_PANEL",
     instanceAndSublayerGUIDs: e
@@ -303,7 +303,7 @@ export function $$Y3(e) {
   }, [componentInstanceUpdateInfo, needsUpdate, numSelectedInstancesToUpdate, u, stateInstanceUpdateInfo, _, h, updateIndividualInstances]);
 }
 export function $$$2(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(t => t.dropdownShown?.type === G && u()(t.dropdownShown.data?.guids, e));
   let n = W();
   let s = useCallback(i => {

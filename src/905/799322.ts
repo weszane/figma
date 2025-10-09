@@ -9,7 +9,7 @@ import { popModalStack } from "../905/156213";
 import { BD, BE } from "../905/264101";
 import { _Z, z3, Hx, G6, bE } from "../figma_app/639088";
 export function $$m0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = setupAutofocusHandler();
   let m = () => {
     t(BD());

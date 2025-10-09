@@ -23,7 +23,7 @@ import { c as _$$c } from "../905/32166";
 import { registerModal } from "../905/102752";
 import { fF, yF, Kg, F5, QU, j1, xQ } from "../figma_app/397283";
 export let $$A0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = () => {
     t(hideModal());
   };

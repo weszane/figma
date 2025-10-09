@@ -18,7 +18,7 @@ import { DashboardSection } from "../figma_app/650409";
 if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$b2() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedViewType();
   return "orgAdminSettings" !== t && "seatRequests" !== t ? jsx(Fragment, {}) : jsx(WithTrackedButton, {
     variant: "secondary",
@@ -49,7 +49,7 @@ export function $$y0({
   });
 }
 function j() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.teamBilling);
   let a = t.summary.currency;
   let r = t.summary.monthly_subscription ? RenewalTermEnum.MONTH : RenewalTermEnum.YEAR;
@@ -76,7 +76,7 @@ function I({
   orgId: e,
   configuredUpgradeRequestSetting: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = Xf(e);
   let l = r.data?.currency;
   let _ = t === FVisibilityType.ALL_USERS ? _$$d({

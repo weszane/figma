@@ -1820,7 +1820,7 @@ export function $$eE0() {
   }, [q]);
   let ee = wi();
   let et = useSelector(e => e.universalInsertModal.pinned === PinningState.NOT_PINNED);
-  let en = useDispatch();
+  let en = useDispatch<AppDispatch>();
   let eu = useCallback(e => {
     ee ? (et && $$el4("set-tool-default"), en(closeUniversalInsertModal())) : ($$el4("clear-tool"), en(setUniversalInsertModalOpen({
       initialX: 0,

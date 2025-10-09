@@ -579,7 +579,7 @@ export function $$H0(e) {
     enabled: f && v
   });
   let U = useSelector(e => e.comments.lgPendingUuidToServerIdMap);
-  let H = useDispatch();
+  let H = useDispatch<AppDispatch>();
   let z = useMemo(() => {
     if ("loaded" !== D.status || !D.data.file) return D;
     let e = B(D.data.file.comments).transform.filter(e => null === e.resolvedAt);

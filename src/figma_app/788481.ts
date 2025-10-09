@@ -80,7 +80,7 @@ export function $$B0(e) {
   let {
     positioner = U
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     bell,
     queueDepth

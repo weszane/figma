@@ -27,7 +27,7 @@ import { G as _$$G } from "../905/595923";
 import { generateRoleOptions, setupRoleRow, getUserHandleOrEmail } from "../905/144598";
 import { to as _$$to, vQ, UU } from "../905/372455";
 export function $$N0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let N = _$$P();
   let P = useSelector(e => e.userFlags);

@@ -117,7 +117,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { Xd, W as _$$W2, zr } from "../figma_app/359164";
 import { hl, Vb, i as _$$i2, xI, CL } from "../figma_app/722913";
-import { yT } from "../figma_app/836943";
+import { getStylePickerUIState } from "../figma_app/836943";
 import { dD } from "../figma_app/941824";
 import { IconButton } from "../905/443068";
 import { setupToggleButton } from "../905/167712";
@@ -539,7 +539,7 @@ function tM(e) {
   let t = useLabConfiguration(labConfigurations.useGrid);
   let i = useRef(null);
   let a = _$$W2();
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let u = getColorFormat();
   let h = useDropdownState();
   let f = Xo();
@@ -560,7 +560,7 @@ function tM(e) {
   let E = useSelectionPropertyValue("strokePaints");
   let C = E && (isInvalidValue(E) || E.length > 0);
   let A = normalizeValue(_$$b4("guid"));
-  let I = yT({
+  let I = getStylePickerUIState({
     styleType: "FILL",
     inheritStyleKeyField: "inheritFillStyleKeyForStroke",
     selectedStyleGuid: A,
@@ -638,7 +638,7 @@ function tM(e) {
 function tP({
   scrollContainer: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectCurrentUser();
   let n = Dj(i);
   let a = useAtomWithSubscription(_$$b2);

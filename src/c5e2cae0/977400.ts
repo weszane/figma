@@ -73,7 +73,7 @@ let L = createOptimistThunk((e, {
   });
 });
 function V(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = getUserId();
   let l = useSelector(selectTeams);
   let n = useSelector(e => e.roles.byTeamId);
@@ -144,7 +144,7 @@ function V(e) {
 }
 export function $$z0(e) {
   let [t, a] = useState("selectTeam");
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let b = getSelectedView();
   let C = selectPermissionsState();
   let w = useSelector(e => e.payment.promo);

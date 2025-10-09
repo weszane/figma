@@ -14,7 +14,7 @@ import { r6 } from "../905/542608";
 import { se } from "../figma_app/435826";
 import { A as _$$A2 } from "../5724/965092";
 export function $$A0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useAtomWithSubscription(cb);
   let A = useAtomWithSubscription(WE);
   let y = useSubscribedAssets(AssetFilterMode.ALL);

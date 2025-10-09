@@ -112,12 +112,12 @@ export function $$R0({
     lgFolder: t,
     fileCreationOptions: r
   }) {
-    let a = useDispatch();
+    let a = useDispatch<AppDispatch>();
     let s = function ({
       lgFolder: e,
       newFileFrom: t
     }) {
-      let r = useDispatch();
+      let r = useDispatch<AppDispatch>();
       let a = _$$E({
         isDraftsFolder: hasRootPath(e),
         newFileFrom: t,

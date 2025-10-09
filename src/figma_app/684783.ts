@@ -40,13 +40,13 @@ import { getCommunityResourcePayment } from "../figma_app/4253";
 import { DEFAULT_PIN_OFFSET } from "../figma_app/12220";
 import { QtA } from "../figma_app/27776";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
-import { sW } from "../figma_app/49598";
+import { setPreviewModeThunk } from "../figma_app/49598";
 import { hJ, xy } from "../figma_app/102712";
 import { VL } from "../figma_app/112055";
 import { Dy } from "../figma_app/165422";
 import { getInitialOptions } from "../figma_app/169182";
 import { FTemplateCategoryType } from "../figma_app/191312";
-import { t0 } from "../figma_app/198840";
+import { isFullscreenPreviewMode } from "../figma_app/198840";
 import { c$, ms, rr, wv } from "../figma_app/236327";
 import { mouseEventManager } from "../figma_app/242565";
 import { findMatchingScalingOptionId, getScalingOptionLabel, ViewportScalingMode, generateScalingOptions, usePrototypeNavigationControls, getViewportScalingMode, usePrototypeNavigationState, PrototypeViewMode } from "../figma_app/292324";
@@ -214,7 +214,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     };
   }
   e.PagesButton = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = useSelector(e => e.dropdownShown);
     let s = n?.type === r;
     let o = e.pages && e.pages.length > 1;
@@ -268,7 +268,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     });
   };
   e.PagesDropdown = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = useSelector(e => e.dropdownShown?.type === r);
     let a = {
       maxHeight: `${e.viewerHeight - 120}px`
@@ -297,7 +297,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     }) : null;
   };
   e.HubFileZoomButton = function (t) {
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     let a = useSelector(e => e.dropdownShown?.type === s);
     let {
       adjustZoomInFactory,
@@ -367,7 +367,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     setZoom: o,
     resetZoomToFitCanvasContent: l
   }) {
-    let d = useDispatch();
+    let d = useDispatch<AppDispatch>();
     let {
       adjustZoomInFactory,
       adjustZoomOutFactory,
@@ -444,7 +444,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     });
   };
   e.PrototypeZoomButton = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = useSelector(e => e.dropdownShown?.type === ec);
     let n = 1;
     e.viewer && (n = e.getCurrentZoomScale());
@@ -477,7 +477,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     });
   };
   e.PrototypeZoomDropdown = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = useSelector(e => e.dropdownShown?.type === ec);
     let n = e.viewer.getPrototypeDeviceType();
     let s = mapToDevicePresetType(n);
@@ -720,7 +720,7 @@ function ex(e) {
     showFullscreenComments,
     fixedSize
   } = e;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let [u, p] = useState(!1);
   let [g, f] = useState(!1);
   let x = useRef(null);
@@ -777,7 +777,7 @@ function ex(e) {
       source: "click"
     });
     r = e.isFullscreen ? PreviewMode.DEFAULT : PreviewMode.FULLSCREEN;
-    c(sW(r));
+    c(setPreviewModeThunk(r));
   }, [c, e.hubFile, e.isFullscreen]);
   let G = useRef(null);
   let V = useCallback(e => {
@@ -793,7 +793,7 @@ function ex(e) {
     D && mouseEventManager.handleMouseMove(e.x, e.y);
   }, [D]);
   let K = useCallback(e => {
-    e === "Escape" && c(sW(PreviewMode.DEFAULT));
+    e === "Escape" && c(setPreviewModeThunk(PreviewMode.DEFAULT));
   }, [c]);
   let Y = useCallback(e => {
     K(e.key);
@@ -1272,12 +1272,12 @@ export class $$eJ0 extends Component {
     this.containerRef = createRef();
     this.state = {
       embedLoaded: !1,
-      fullscreenTransitionState: t0(this.props.fullscreenState) ? 2 : 0,
+      fullscreenTransitionState: isFullscreenPreviewMode(this.props.fullscreenState) ? 2 : 0,
       showFullscreenComments: this.props.fullscreenState === PreviewMode.FULLSCREEN_WITH_COMMENTS
     };
     this.handleFullscreenTransition = (e, t) => {
       if (e !== t) {
-        if (t0(e) !== t0(t)) {
+        if (isFullscreenPreviewMode(e) !== isFullscreenPreviewMode(t)) {
           let e = eq(this.state.fullscreenTransitionState);
           let r = eq(e);
           this.setState({
@@ -1304,7 +1304,7 @@ export class $$eJ0 extends Component {
       }
     };
     this.setFullscreenState = e => {
-      this.props.dispatch(sW(e));
+      this.props.dispatch(setPreviewModeThunk(e));
     };
     this.onViewerLoad = () => {
       this.state.embedLoaded || (this.setState({

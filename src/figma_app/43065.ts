@@ -21,7 +21,7 @@ let $$I1 = registerModal($$A0);
 let S = buildUploadUrl("a2151b55cc069625817d2ed13b404e0dd2417f1c");
 let v = "https://help.figma.com/hc/articles/31722591905559-Figma-Make-FAQs";
 export function $$A0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useModalManager(e);
   let {
     hideCTA,

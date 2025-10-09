@@ -15,7 +15,7 @@ import { s as _$$s } from "../905/518538";
 import { h4, sc } from "../figma_app/546509";
 export function $$E1(e, t, r, a, o) {
   let h = h4();
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let E = I_();
   let y = _$$s();
   let b = useNavigateToViewport();

@@ -10,7 +10,7 @@ import { yesNoTrackingEnum } from '../figma_app/198712';
 import { FormattedInputWithWrapper, ControlledVariablePickerProvider, VariablePicker } from '../figma_app/260445';
 import { On } from '../figma_app/323320';
 import { SlotSymbolType } from '../figma_app/338442';
-import { Io, MH } from '../figma_app/394327';
+import { variablePropertyTypeMap, extractVariableAliasOrFontStyle } from '../figma_app/394327';
 import { fullscreenValue } from '../figma_app/455680';
 import { assertNotNullish } from '../figma_app/465776';
 import { Fullscreen, OperationType, PropertyScope, VariableDataType, VariableResolvedDataType } from '../figma_app/763686';
@@ -25,7 +25,7 @@ export function $$I3({
     onExpressionSubmitted,
     onComponentPropSelected
   } = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let {
       consumedVariable,
       updateVariableConsumption,
@@ -76,7 +76,7 @@ export function $$I3({
   return jsxs(FormattedInputWithWrapper, {
     fields: l,
     resolvedType: VariableResolvedDataType.STRING,
-    requestedTypes: Io.TEXT_DATA,
+    requestedTypes: variablePropertyTypeMap.TEXT_DATA,
     onVariableSelected: updateConsumption,
     onExpressionSubmitted,
     onComponentPropSelected,
@@ -90,7 +90,7 @@ export function $$E0({
   onChange: t,
   children: i
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let g = useMemo(() => ['FONT_FAMILY'], []);
   let {
     updateVariableConsumption,
@@ -117,7 +117,7 @@ export function $$E0({
   });
 }
 function x() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useMemo(() => ['FONT_STYLE'], []);
   let {
     consumedVariable,
@@ -159,11 +159,11 @@ export function $$S1({
     consumedVariable,
     updateVariableConsumption
   } = x();
-  let r = MH(consumedVariable);
+  let r = extractVariableAliasOrFontStyle(consumedVariable);
   return jsxs(ControlledVariablePickerProvider, {
     boundVariableId: r ?? void 0,
     resolvedType: VariableResolvedDataType.STRING,
-    requestedTypes: Io.FONT_STYLE,
+    requestedTypes: variablePropertyTypeMap.FONT_STYLE,
     onVariableSelected: updateVariableConsumption,
     children: [jsx(VariablePicker, {
       variableScope: PropertyScope.FONT_STYLE
@@ -177,7 +177,7 @@ export function $$w2({
     consumedVariable,
     updateVariableConsumption
   } = x();
-  let r = !consumedVariable || isInvalidValue(consumedVariable) || consumedVariable.type !== VariableDataType.FONT_STYLE ? null : consumedVariable.value.asFloat ? MH(consumedVariable) : null;
+  let r = !consumedVariable || isInvalidValue(consumedVariable) || consumedVariable.type !== VariableDataType.FONT_STYLE ? null : consumedVariable.value.asFloat ? extractVariableAliasOrFontStyle(consumedVariable) : null;
   let a = async e => {
     await updateVariableConsumption(e);
   };

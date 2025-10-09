@@ -6,7 +6,7 @@ import { compareLibraryItemsAlias } from "../905/709171";
 import { useDropdownState } from "../905/848862";
 import { vG } from "../905/213527";
 export function $$c3(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = useMemo(() => debounce(r, 200), [r]);
   useEffect(() => {
     t?.skip || o(updateAllStyleThumbnailsOptimist({
@@ -15,7 +15,7 @@ export function $$c3(e, t) {
   });
 }
 export function $$u1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useMemo(() => debounce(t, 200), [t]);
   useEffect(() => {
     r(updateAllStyleThumbnailsOptimist({

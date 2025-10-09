@@ -22,7 +22,7 @@ export function $$C0(e) {
     backingSymbolGUID
   } = $([e ?? ""]);
   let a = useMemo(() => null === backingSymbolGUID || isInvalidValue(backingSymbolGUID) ? null : backingSymbolGUID, [backingSymbolGUID]);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return useCallback(() => {
     e && a && (globalPerfTimer.reset("dev_handoff.view_history", e), globalPerfTimer.start("dev_handoff.view_history", {
       key: e
@@ -44,7 +44,7 @@ export function $$C0(e) {
 export function $$v2(e) {
   let t = wS();
   let i = uQ();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = trackFileEventWithStore();
   return useCallback(() => {
     i && "loaded" === t.status && (s("Diff Modal Compare Changes Clicked", {
@@ -67,7 +67,7 @@ export function $$E1(e, t) {
   let d = uQ();
   let c = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.name.trim(), d);
   let m = useCurrentFileKey();
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let C = useAtomWithSubscription(_$$d);
   let v = useSceneGraphSelector();
   return useCallback(() => {

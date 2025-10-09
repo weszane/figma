@@ -17,7 +17,7 @@ import { TrackingProvider } from "../figma_app/831799";
 let $$y0 = registerModal($$T1);
 let b = buildUploadUrl("6d9d43af72441d7be4344d8d679d852139ebfaf7");
 export function $$T1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useModalManager(e);
   let {
     hideCTA,

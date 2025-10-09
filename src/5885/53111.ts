@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { hideModal } from "../905/156213";
-import { bE } from "../figma_app/375098";
+import { userTeamFlagPost } from "../figma_app/375098";
 import { UpgradeAction } from "../905/370443";
 import { selectCurrentUser } from "../905/372672";
 import { S } from "../5885/332447";
@@ -48,11 +48,11 @@ export let $$b0 = registerModal(function ({
 }) {
   let t = selectCurrentUser();
   let i = useSelector(t => t.teams[e]);
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let u = useSelector(e => e.userTeamFlags);
   if (!t || u[e]?.[h]) return null;
   let g = () => {
-    m(bE({
+    m(userTeamFlagPost({
       all_team_flags: [{
         team_id: e,
         flags: {

@@ -179,7 +179,7 @@ function es({
   let N = selectCurrentFile();
   if (!N) throw Error("Open file required");
   let g = useSelector(e => e.voice.activeCall[N.key]);
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let [O, w] = useState(null);
   let x = useDropdownState();
   let b = useRef(null);
@@ -711,7 +711,7 @@ let eP = connect(e => ({
     showWidgetParticipantList
   } = e;
   let a = selectCurrentUser();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let {
     userIdsInCall
   } = W5(e.fileKey);
@@ -776,7 +776,7 @@ let e4 = "MICROPHONE_CONTROL_DROPDOWN";
 let e3 = "PLAYBACK_DEVICE_CONTROL_DROPDOWN";
 let e7 = parsePxNumber(aHA);
 function e9(e, t, a, o, n, l, r) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let [d, _] = useState(null);
   let [u, p] = useState([]);
   let m = useSelector(e => e.dropdownShown?.type === o);
@@ -847,7 +847,7 @@ function e6(e) {
     playbackDevices,
     setPlaybackDevice
   } = e;
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let u = useId();
   let p = useId();
   let [m, h] = useState({
@@ -967,7 +967,7 @@ function e6(e) {
 function te() {
   let e = useSelector(e => e.voice.captionsInstallProgress);
   let t = useSelector(e => e.voice.showCaptions);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let n = useId();
   let l = jsx(eB, {});
   let r = renderI18nText("collaboration.voice.closed_captioning");
@@ -1058,7 +1058,7 @@ function tr(e) {
   let el = useSelector(e => e.voice.activeCall[fileKey] || !1);
   let er = useSelector(e => e.voice.showWidgetParticipantList);
   let ec = useRef(null);
-  let ed = useDispatch();
+  let ed = useDispatch<AppDispatch>();
   let ev = {
     in: () => {
       F(!0);
@@ -1376,7 +1376,7 @@ export function $$t_0() {
   } = W5(t, !0);
   let m = bF(userIdsInCall, t).length;
   let h = qr();
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let [I, g] = useState();
   let [f, O] = useState();
   let w = useCallback((e, t) => {

@@ -27,7 +27,7 @@ export function $$b0({
     close
   } = useNavigationStack();
   let E = useIsFullscreenSlidesView();
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let S = getJubileePermissionForDesign();
   return jsxs("div", {
     className: l()(sn, {

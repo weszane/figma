@@ -31,7 +31,7 @@ function L(e) {
   let t = useSelector(e => e.selectedView);
   let r = useLatestRef(t);
   let n = useSelector(e => e.modalShown?.type);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = "fullscreen" !== t.view && r?.view === t.view;
   let l = !("fullscreen" === t.view && r?.view === "fullscreen" && t.fileKey === r.fileKey) && !o;
   useEffect(() => {
@@ -91,7 +91,7 @@ let $$k1 = registerModal(function ({
   entrypoint: e
 }) {
   L(SHARED_FONTS_MODAL);
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   useEffect(() => {
     SharedFontsComponent.loadSharedFonts(t);
   }, [t]);
@@ -121,7 +121,7 @@ function F({
   initialTab: e,
   teamId: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = useSelector(e => e.sharedFonts);
   let o = useSelector(e => _$$p(e));
   let l = useCurrentPlanUser("TeamLibraryPreferencesModal").unwrapOr(null);
@@ -167,7 +167,7 @@ function j({
   teamId: e,
   resourceConnection: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = _K(!0);
   let l = t.hostPlanType === FOrganizationLevelType.TEAM;
   return jsx(_$$s3, {

@@ -59,7 +59,7 @@ export const CategorySelectDropdown = forwardRef<unknown, {
   touched: boolean
   onTouched?: () => void
 }>(({ categoryFieldManager, touched, onTouched }, ref) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const { setValue, validCategories } = categoryFieldManager
   const canEdit = canSetFieldValue(categoryFieldManager)
   const validationErrors = getValidationErrors(categoryFieldManager, !touched)

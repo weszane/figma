@@ -114,7 +114,7 @@ function C({
 function W({
   onHeightChange: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectCurrentFile();
   let a = selectPermissionsState();
   let s = useAppModelProperty("pagesList").length;

@@ -41,7 +41,7 @@ function V({
   user: e,
   file: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let n = useMemo(() => BrowserInfo.isMeetDevice ? getI18nString("figjam_try.google_meet_user_name") : localStorage.getItem(generateAnnomousPrefill()) || "", []);
   let [s, o] = useState(n);
   let [l, d] = useState(!1);

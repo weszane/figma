@@ -205,33 +205,33 @@ export abstract class PluginWrapper implements IPluginWrapper {
   }
 
   // Abstract methods that need to be implemented by subclasses
-  protected abstract toBoolean(value: any): boolean
-  protected abstract toNumber(value: any): number
-  protected abstract toString(value: any): string
-  protected abstract getProp(object: any, property: string): any
-  protected abstract setProp(object: any, property: string, value: any): void
-  protected abstract newBoolean(value: boolean): any
-  protected abstract newNumber(value: number): any
-  protected abstract newString(value: string): any
-  protected abstract newArray(): any
-  protected abstract newObject(): any
-  protected abstract newArrayBuffer(buffer: ArrayBuffer): any
-  protected abstract newUint8Array(array: Uint8Array): any
-  protected abstract newFunction(name: string, implementation: (...args: any[]) => any): any
-  protected abstract callFunction(func: any, thisArg: any, ...args: any[]): any
-  protected abstract typeof(value: any): string
-  protected abstract $$null: any
-  protected abstract undefined: any
-  protected abstract isNull(value: any): boolean
-  protected abstract isArray(value: any): boolean
-  protected abstract isObject(value: any): boolean
-  protected abstract isArrayBuffer(value: any): boolean
-  protected abstract isUint8Array(value: any): boolean
-  protected abstract getArrayBuffer(value: any): ArrayBuffer
-  protected abstract getUint8Array(value: any): Uint8Array
-  protected abstract getKeys(object: any): string[]
-  protected abstract shallowFreezeObject(object: any): void
-  protected abstract defineProp(target: any, name: string, descriptor: PropertyDescriptor): void
-  protected abstract getStats(): any
-  protected abstract isDestroyed(): boolean
+   abstract toBoolean(value: any): boolean
+   abstract toNumber(value: any): number
+   abstract toString(value: any): string
+   abstract getProp(object: any, property: string): any
+   abstract setProp(object: any, property: string, value: any): void
+   abstract newBoolean(value: boolean): any
+   abstract newNumber(value: number): any
+   abstract newString(value: string): any
+   abstract newArray(): any
+   abstract newObject(): any
+   abstract newArrayBuffer(buffer: ArrayBuffer): any
+   abstract newUint8Array(array: Uint8Array): any
+   abstract newFunction(name: string, implementation: (...args: any[]) => any): any
+   abstract callFunction(func: any, thisArg: any, ...args: any[]): any
+   abstract typeof(value: any): string
+   abstract $$null: any
+   abstract undefined: any
+   abstract isNull(value: any): boolean
+   abstract isArray(value: any): boolean
+   abstract isObject(value: any): boolean
+   abstract isArrayBuffer(value: any): boolean
+   abstract isUint8Array(value: any): boolean
+   abstract getArrayBuffer(value: any): ArrayBuffer
+   abstract getUint8Array(value: any): Uint8Array
+   abstract getKeys(object: any): string[]
+   abstract shallowFreezeObject(object: any): void
+   abstract defineProp(target: any, name: string, descriptor: PropertyDescriptor): void
+   abstract getStats(): any
+   abstract isDestroyed(): boolean
 }

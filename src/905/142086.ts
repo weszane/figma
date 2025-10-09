@@ -360,7 +360,7 @@ function ev(e) {
   });
 }
 function eC(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     onTeamCreate
   } = e;
@@ -382,7 +382,7 @@ function eC(e) {
   });
 }
 let eT = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, n] = useState('');
   let r = useCallback(() => {
     t(popModalStack());
@@ -471,7 +471,7 @@ let ek = (e, t) => {
   }
 };
 let eR = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = _$$s2();
   let n = isProrationBillingEnabledForCurrentPlan();
   let {
@@ -1110,7 +1110,7 @@ let eR = registerModal(e => {
   });
 }, 'FileMoveModalV2');
 let eU = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCallback(() => {
     t(hideModal());
   }, [t]);

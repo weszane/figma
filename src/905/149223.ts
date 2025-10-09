@@ -246,7 +246,7 @@ export function $$j1({
   paintNodeIds: B,
   positioningProps: V
 }) {
-  let G = useDispatch();
+  let G = useDispatch<AppDispatch>();
   let z = getColorFormat();
   let H = selectCurrentFile();
   let {

@@ -20,7 +20,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { getFocusedNodeId, isFullscreenAndInFocusedNodeView } from "../figma_app/327588";
 import { useCooperFrameGuids, useSelectedCooperFrameIds, useSelectedSlideRowGuids } from "../figma_app/396464";
-import { rg } from "../figma_app/401069";
+import { logFileExportThunk } from "../figma_app/401069";
 import { hideModalHandler } from "../905/156213";
 import { ZH } from "../figma_app/504823";
 import { replaceSelection } from "../figma_app/741237";
@@ -35,7 +35,7 @@ import { eD } from "../905/257620";
 export let $$M0 = registerModal(function (e) {
   let [t, i] = useState(!1);
   let u = useModalManager(e);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let m = useSceneGraphSelector();
   let h = useCooperFrameGuids();
   let g = useSelectedCooperFrameIds();
@@ -158,7 +158,7 @@ export let $$M0 = registerModal(function (e) {
               } else t(() => {
                 Fullscreen?.exportSelectedCooperFramesToImg(N, q, Z.type, Z.value, e, G);
               });
-              p(rg());
+              p(logFileExportThunk());
             },
             disabled: 0 === g.length && 0 === y.length || t,
             children: t ? jsxs("div", {

@@ -32,7 +32,7 @@ function f({
   onKeyDown: b
 }) {
   let v = "width" === u ? Yq.Width : Yq.Height;
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   let E = getNudgeMultipliers();
   let x = isInvalidValue(t) ? g : {};
   let S = createRecordingCallback(A);

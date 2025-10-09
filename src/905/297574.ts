@@ -60,7 +60,7 @@ export function useLibraryAssetsFromStats({
   // useAssetsForLibrary encapsulates all hooks needed to compute grouped assets from app state
   // Original: inner IIFE returning memoized grouped assets
   function useAssetsForLibrary(libraryKeyParam?: string) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const sceneGraph = useSelector(selectSceneGraph)
     const libraryState = useSelector((s: any) => s.library)
     const currentFileVersion = useSelector(fileVersionSelector)

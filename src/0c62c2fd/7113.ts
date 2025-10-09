@@ -11,7 +11,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$m0() {
   let e = useCurrentUserOrgId();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback((r, a) => {
     if (t(trackNavTreeClicked({
       clickedResourceType: "workspace",

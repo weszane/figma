@@ -5,7 +5,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { uQ } from "../figma_app/311375";
 import { selectViewAction } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
-import { u as _$$u, Rb, L5, rW } from "../figma_app/852050";
+import { getVariableById, getSortedLocalVariables, getEffectiveVariableSet, getLocalVariablesForSet } from "../figma_app/852050";
 import { getSelectedView } from "../figma_app/386952";
 import { buildVariableHierarchy } from "../905/782020";
 let _ = createLocalStorageAtom("last-used-dev-mode-variable-set", null);
@@ -13,20 +13,20 @@ let $$h5 = "ALL_VARIABLES";
 let $$m3 = atom($$h5);
 export function $$g0() {
   let e = useSelector(e => "devModeVariablesTableSelectedVariable" in e.selectedView ? e.selectedView.devModeVariablesTableSelectedVariable : void 0);
-  let t = _$$u(e);
-  let r = Rb();
+  let t = getVariableById(e);
+  let r = getSortedLocalVariables();
   let a = !!t;
   let s = useMemo(() => a && "SUBSCRIBED" !== t.subscriptionStatus || !e ? null : r.find(t => e.includes(t.keyForPublish)), [a, e, r, t?.subscriptionStatus]);
   return s ? s.node_id : t?.node_id ?? null;
 }
 export function $$f1() {
-  let e = Rb();
+  let e = getSortedLocalVariables();
   let t = $$g0();
   return e.find(e => e.node_id === t)?.variableSetId;
 }
 export function $$E6() {
   let e = getSelectedView();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback(r => {
     t(selectViewAction({
       ...e,
@@ -49,14 +49,14 @@ export function $$y2(e) {
 export function $$b4() {
   let e = uQ();
   let t = useLatestRef(e);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   useEffect(() => {
     t && e !== t && r(hideModalHandler());
   }, [r, t, e]);
 }
 export function $$T7(e) {
-  let t = L5(e);
-  let r = rW(t?.node_id ?? "");
+  let t = getEffectiveVariableSet(e);
+  let r = getLocalVariablesForSet(t?.node_id ?? "");
   return useMemo(() => buildVariableHierarchy(r).map(e => "/" === e.name.charAt(e.name.length - 1) ? {
     ...e,
     name: e.name.slice(0, -1)

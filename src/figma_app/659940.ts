@@ -7,7 +7,7 @@ import { showModalHandler } from "../905/156213";
 import { AuthModal } from "../905/749159";
 import { ao } from "../figma_app/598952";
 export function $$u0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return ({
     origin: t,
     formState: r

@@ -56,7 +56,7 @@ export function KeyboardNavigationProvider({
   const navigationState = useState(initialNavigationState);
   const setNavigationState = navigationState[1];
   const instanceSwapPickerShown = useSelector((e: any) => e.instanceSwapPickerShown);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     const isSearchInputFocused = searchBarRef?.current?.searchInput === document.activeElement;
     if (e.key === 'I' && e.shiftKey && !isSearchInputFocused) {

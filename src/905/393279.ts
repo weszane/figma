@@ -5,10 +5,10 @@ import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { ButtonWhite, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
-import { hZ } from "../905/748726";
+import { autocompleteSet } from "../905/748726";
 import { UpgradeAction } from "../905/370443";
 import { ContactsAnalyticsTracker, ENTRYPOINT_SHARE_MODAL } from "../905/331019";
-import { F5 } from "../figma_app/761870";
+import { isAutocompleteValid } from "../figma_app/761870";
 import { P, D } from "../905/392438";
 import { b8 } from "../figma_app/926061";
 var l = o;
@@ -39,14 +39,14 @@ export class $$A0 extends PureComponent {
       });
     };
     this.onAutocompleteChange = e => {
-      this.props.onAutocompleteChange ? this.props.onAutocompleteChange(e) : this.props.dispatch(hZ({
+      this.props.onAutocompleteChange ? this.props.onAutocompleteChange(e) : this.props.dispatch(autocompleteSet({
         ...e,
         errorMessage: this.getErrorMessage(e.tokens, e.inputValue)
       }));
     };
     this.onSubmit = e => {
       e?.preventDefault();
-      F5(this.props.autocomplete, this.props.validateToken) && this.props.onSubmit && this.props.onSubmit(this.props.autocomplete);
+      isAutocompleteValid(this.props.autocomplete, this.props.validateToken) && this.props.onSubmit && this.props.onSubmit(this.props.autocomplete);
     };
     this.contactsAnalytics = new ContactsAnalyticsTracker(ENTRYPOINT_SHARE_MODAL);
   }
@@ -58,7 +58,7 @@ export class $$A0 extends PureComponent {
       autocomplete,
       validateToken
     } = this.props;
-    let i = F5(autocomplete, validateToken);
+    let i = isAutocompleteValid(autocomplete, validateToken);
     let r = this.props.buttonClassName ? l()(_, this.props.buttonClassName) : _;
     return jsxs("form", {
       onSubmit: this.onSubmit,

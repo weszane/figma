@@ -260,7 +260,7 @@ function en({
 function eo() {
   let e = "bubbledPropsPicker";
   let t = useSelector(e => e.pickerShown);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let n = new Point(t?.initialX, t?.initialY);
   return t?.id !== BUBBLED_PROPS_PICKER ? null : jsx(DraggableModalManager, {
     title: getI18nString("design_systems.component_properties.expose_nested_instances"),
@@ -289,7 +289,7 @@ export function $$eg0({
   recordingKey: e,
   isInSelectionActionsPanel: t
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = useSelector(i$);
   let d = useSelector(selectNodeFromCombinedId);
   let h = !useSelector(Jp);

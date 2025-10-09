@@ -63,7 +63,7 @@ let Y = registerModal(function (e) {
   let u = i ? e.resourceConnectionInvite.projectName : e.resourceConnection.projectName;
   let p = i ? e.resourceConnectionInvite.isHostPlanAdmin : e.resourceConnection.isHostPlanAdmin;
   if (null == d || null == c) throw Error("hostPlan or connectingPlan not found");
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let h = useModalManager({
     ...e,
     onClose: () => {
@@ -336,7 +336,7 @@ let eo = (e, t) => {
   let n = useSubscription(ProjectByIdForFolderSettings, {
     projectId: e
   });
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = getAtomMutate(Ct);
   let o = n.data?.project;
   let l = _$$b(o?.plan?.tier);

@@ -146,7 +146,7 @@ let $$y0 = registerModal(function ({
   org: e,
   extensionType: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("allowlist_plugins_modals.msa_amendment_modal.title"),
     confirmText: getI18nString("allowlist_plugins_modals.msa_amendment_modal.accept_button"),
@@ -181,7 +181,7 @@ let $$y0 = registerModal(function ({
   });
 }, "AllowListPluginsMSAAmendmentModal");
 let $$w1 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, o] = useState("");
   let m = () => {
     t(hideModal());
@@ -242,7 +242,7 @@ let $$w1 = registerModal(function (e) {
   });
 }, "AllowlistPluginsInputModal");
 let $$k2 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, o] = useState("");
   let m = () => {
     t(hideModal());

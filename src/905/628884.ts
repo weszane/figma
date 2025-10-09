@@ -37,7 +37,7 @@ export function $$k0({
       canGoBackToReviewFlow: !0
     });
   }));
-  let R = useDispatch();
+  let R = useDispatch<AppDispatch>();
   let N = useSceneGraphSelector();
   let {
     close

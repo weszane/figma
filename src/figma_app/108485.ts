@@ -48,7 +48,7 @@ export function $$O1() {
     numSteps: 2,
     onComplete: j.complete
   });
-  let G = useDispatch();
+  let G = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     null != e && e.canEdit && e.createdAt > N() && j.show({
       canShow: (t, r, n, i, a, s, l) => {

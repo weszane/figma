@@ -26,7 +26,7 @@ function k({
   org: t,
   team: a
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = y3(t?.created_at || a?.created_at, a?.last_upgraded_at);
   let h = selectUserFlag(y);
   let {

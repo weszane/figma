@@ -19,7 +19,8 @@ import { k as _$$k2 } from '../905/582200';
 import { a as _$$a } from '../905/597867';
 import { getFeatureFlags } from '../905/601108';
 import { Point } from '../905/736624';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { calculatePickerPositionLeft } from '../905/959568';
 import { wu } from '../1528/306300';
 import { k8 } from '../figma_app/8833';
@@ -31,7 +32,7 @@ import { y7 } from '../figma_app/580959';
 import { fI, JU, Zk } from '../figma_app/626177';
 import { RecordingPureComponent, generateRecordingKey, handleChangeEvent } from '../figma_app/878298';
 import { Ad, DE } from '../figma_app/811257';
-import { sw } from '../figma_app/914957';
+import { hideStylePreview } from '../figma_app/914957';
 import { shallowEqual, useDispatch } from 'react-redux';
 let N = 'mixed_checkbox--mixed--xYUsQ';
 class I extends PureComponent {
@@ -133,7 +134,7 @@ E.displayName = 'Checkbox';
 export function $$G0(e) {
   let t = useRef(null);
   let s = getThemeContextOrDefault();
-  let k = useDispatch();
+  let k = useDispatch<AppDispatch>();
   let w = useIsFullscreenSitesView();
   let {
     backgroundColor,
@@ -172,7 +173,7 @@ export function $$G0(e) {
         initialX: e.x,
         initialY: e.y
       }));
-      k(sw());
+      k(hideStylePreview());
     }
   };
   let $ = () => jsx(H, {

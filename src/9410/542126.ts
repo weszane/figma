@@ -17,7 +17,7 @@ import { y0, wv, MM } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { sV, DI, zx, dY } from "../figma_app/712525";
+import { setCanvasSearchMode, toggleCanvasSearchCategoryFilter, switchCanvasSearchCategoryFilterExclusive, clearCanvasSearchCategoryFilters } from "../figma_app/712525";
 import { getCurrentFileType } from "../figma_app/976749";
 import { useDropdown } from "../905/848862";
 import { useAppModelProperty } from "../figma_app/722362";
@@ -65,7 +65,7 @@ function D({
   minWidth: t,
   recordingKey: i
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useDropdown("CANVAS_SEARCH_FILTER_DROPDOWN");
   let h = useRef(null);
   let y = useAppModelProperty("isReadOnly");
@@ -80,7 +80,7 @@ function D({
       primaryText: getI18nString("canvas_search.search"),
       checked: L === EditAction.FIND,
       onClick: () => {
-        d(sV(EditAction.FIND));
+        d(setCanvasSearchMode(EditAction.FIND));
         c.hide();
       },
       recordingKey: generateRecordingKey(i, "settings.find")
@@ -88,7 +88,7 @@ function D({
       primaryText: getI18nString("canvas_search.replace"),
       checked: L === EditAction.REPLACE,
       onClick: () => {
-        d(sV(EditAction.REPLACE));
+        d(setCanvasSearchMode(EditAction.REPLACE));
         c.hide();
       },
       recordingKey: generateRecordingKey(i, "settings", "replace")
@@ -100,7 +100,7 @@ function D({
         checked: a,
         counts: N,
         onClick: e => {
-          n || e.ctrlKey || BrowserInfo.mac && e.metaKey ? (d(DI(t)), n && c.hide()) : (d(zx(t)), c.hide());
+          n || e.ctrlKey || BrowserInfo.mac && e.metaKey ? (d(toggleCanvasSearchCategoryFilter(t)), n && c.hide()) : (d(switchCanvasSearchCategoryFilterExclusive(t)), c.hide());
         },
         recordingKey: i
       }, t));
@@ -114,7 +114,7 @@ function D({
         label: getI18nString("canvas_search.filter.all"),
         count: a,
         onClick: () => {
-          d(dY());
+          d(clearCanvasSearchCategoryFilters());
           c.hide();
         },
         recordingKey: generateRecordingKey(i, "settings", "All")
@@ -126,7 +126,7 @@ function D({
     return e;
   }, [d, c, A, R, F, y, L, N, i]);
   useEffect(() => {
-    y && L === EditAction.REPLACE && d(sV(EditAction.FIND));
+    y && L === EditAction.REPLACE && d(setCanvasSearchMode(EditAction.FIND));
   }, [d, y, L]);
   let U = h.current && jsx(PointingDropdown, {
     autofocusPrevElementOnEsc: !0,
@@ -209,7 +209,7 @@ function F({
   shouldShowSearchCategories: i,
   recordingKey: a
 }) {
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let f = useAppModelProperty("isReadOnly");
   let x = useAtomWithSubscription(configAtom);
   let y = useSelector(e => e.canvasSearch.filters);
@@ -221,18 +221,18 @@ function F({
     initialPosition: t
   });
   let I = e => {
-    h(sV(e));
+    h(setCanvasSearchMode(e));
     manager.setOpen(!1);
   };
   let k = (e, t) => {
-    e?.ctrlKey || e?.metaKey ? h(DI(t)) : h(zx(t));
+    e?.ctrlKey || e?.metaKey ? h(toggleCanvasSearchCategoryFilter(t)) : h(switchCanvasSearchCategoryFilterExclusive(t));
   };
   let A = e => {
-    h(DI(e));
+    h(toggleCanvasSearchCategoryFilter(e));
   };
   let L = C === EditAction.FIND && i;
   useEffect(() => {
-    f && C === EditAction.REPLACE && h(sV(EditAction.FIND));
+    f && C === EditAction.REPLACE && h(setCanvasSearchMode(EditAction.FIND));
   }, [h, f, C]);
   return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseUp"],
@@ -287,7 +287,7 @@ function F({
             recordingKey: generateRecordingKey(a, "settings", "All"),
             checked: !b4.some(e => !!y[e]),
             onChange: () => {
-              h(dY());
+              h(clearCanvasSearchCategoryFilters());
             },
             icon: _$$A2,
             label: getI18nString("canvas_search.filter.all"),

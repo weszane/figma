@@ -138,7 +138,7 @@ function eS(e) {
   });
 }
 function ej(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = e.canAdminCurrentTeam ? renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.text", {
     upgradeLink: jsx(linkWithTracking, {
       onClick: () => {
@@ -226,7 +226,7 @@ export let $$eZ0 = registerModal(function (e) {
     missingFonts
   } = e;
   let h = "missingFontsModal";
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let f = useDropdownState();
   let v = useSelector(e => e.fonts);
   let E = trackFileEventWithStore();

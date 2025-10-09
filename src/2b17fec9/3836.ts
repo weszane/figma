@@ -10,7 +10,7 @@ import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { kt, Pq } from "../3591/828414";
 export function $$m0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let m = i?.type === kt;
   let f = e.resourceType === HubTypeEnum.WIDGET ? getI18nString("community.plugins.create_new_widget") : getI18nString("community.plugins.create_new_plugin");

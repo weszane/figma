@@ -201,7 +201,7 @@ export function $$U2({
   showingDefaultSubscriptionsForUser: s,
   buttonStyleType: l = 'CLASSIC'
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let {
     library,
     openFile
@@ -333,7 +333,7 @@ export function $$V1({
   setConfirmCalloutShowing: u
 }) {
   let m;
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let [f, _] = useState(null);
   let {
     library,

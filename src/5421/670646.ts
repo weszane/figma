@@ -811,7 +811,7 @@ function ez({
   disabled: e,
   recordingKey: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [a] = useSelectionProperty("showWontScrollWarning");
   let [l] = useSelectionProperty("scrollDirection");
   let s = eq();
@@ -870,7 +870,7 @@ function eG({
   disabled: e,
   recordingKey: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = useSelectionPropertyValue("scrollBehavior") || "SCROLLS";
   let l = useCallback(e => {
     let t;
@@ -933,7 +933,7 @@ function eG({
   }), [d, l, a, t, e, fixedScrollingDisabled]);
 }
 function eY(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useSelectionPropertyValue("scrollBehavior");
   let {
     fixedScrollingDisabled
@@ -1088,7 +1088,7 @@ export let $$e70 = withTracking(function (e) {
   }(!!numVideosSelected);
   let H = normalizeValue(numSelected);
   let U = null !== H && H > 0;
-  let F = useDispatch();
+  let F = useDispatch<AppDispatch>();
   let K = useCallback(() => {
     F(trackPrototypeScaleChangeEvent({
       name: "Show Prototype Settings Clicked"

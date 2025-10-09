@@ -28,7 +28,7 @@ import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { hideStylePicker, hidePickerThunk, showStylePicker } from "../figma_app/91703";
 import { applySharedStyle, updateSelectedSharedStyleConsumers } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
-import { sw } from "../figma_app/914957";
+import { hideStylePreview } from "../figma_app/914957";
 import { hideTooltip } from "../905/765855";
 import { fullscreenValue } from "../figma_app/455680";
 import { MIXED_MARKER, normalizeValue } from "../905/216495";
@@ -51,7 +51,7 @@ import { fI, nV } from "../figma_app/626177";
 import { QN } from "../905/824449";
 import { MM, UP } from "../figma_app/246831";
 import { N2 } from "../905/213527";
-import { zb, OS, WH } from "../figma_app/836943";
+import { getStylePickerShown, getStylePickerId, useStyleInfo } from "../figma_app/836943";
 import { mw } from "../905/566585";
 import { r as _$$r } from "../figma_app/711157";
 import { B as _$$B } from "../905/229357";
@@ -93,9 +93,9 @@ class eA extends RecordingPureComponent {
         });
         return;
       }
-      if (zb(this.props)) {
+      if (getStylePickerShown(this.props)) {
         this.props.dispatch(hideStylePicker());
-        this.props.dispatch(sw());
+        this.props.dispatch(hideStylePreview());
         this.props.dispatch(hidePickerThunk());
       } else {
         let e = this.panelTitleRef.current.getBoundingClientRect();
@@ -106,7 +106,7 @@ class eA extends RecordingPureComponent {
           y
         } = this.props.openStylePickerToLeft ? calculatePickerPositionLeft(this.panelTitleRef.current, N2) : new Point(t, i);
         this.props.dispatch(showStylePicker({
-          id: OS(this.props.inheritStyleKeyField),
+          id: getStylePickerId(this.props.inheritStyleKeyField),
           initialX: x,
           initialY: y,
           modal: !0
@@ -168,7 +168,7 @@ class eA extends RecordingPureComponent {
     this.toggleReviewUpdatesModal = this.toggleReviewUpdatesModal.bind(this);
   }
   UNSAFE_componentWillReceiveProps(e) {
-    if (zb(e)) {
+    if (getStylePickerShown(e)) {
       let t;
       let i = this.panelTitleRef.current.getBoundingClientRect();
       let n = i.top + i.height;
@@ -313,7 +313,7 @@ class eA extends RecordingPureComponent {
     } = this.props;
     !(isSitesFeatureEnabled() && getFeatureFlags().sites_responsive_text_styles && mw(this.props.sceneGraphSelection, this.props.library) && _$$c(this.props.sceneGraphSelection)) && (this.props.inheritStyleKey === MIXED_MARKER || null != normalizeValue(this.props.inheritStyleKey) && this.props.hasMixedProperties && mainStyle) ? (t = 1, i = this.props.addProperty) : mainStyle ? t = 0 : (t = 2, i = this.props.addProperty);
     let c = RC(this.props);
-    let u = zb(this.props);
+    let u = getStylePickerShown(this.props);
     let p = 0 === t && !this.props.hasMixedProperties;
     let g = !(this.props.isEmpty || this.props.hasMixedProperties || this.props.hasMissingFont || this.props.disableStyleCreation);
     let f = this.props.isSlides && !("FILL" === (e = this.props.styleType) || "STROKE" === e || Rc(e));
@@ -519,9 +519,9 @@ export let $$ey0 = memo(e => {
     })),
     styleUpdates: useAtomWithSubscription(j_)
   };
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = normalizeValue(_$$b("guid"));
-  let l = WH(e.inheritStyleKey, e.inheritStyleID, e.styleType);
+  let l = useStyleInfo(e.inheritStyleKey, e.inheritStyleID, e.styleType);
   let d = useIsFullscreenSlidesView();
   return jsx(eA, {
     ...r,

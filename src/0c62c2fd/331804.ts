@@ -16,7 +16,7 @@ export function $$g0({
   open: t,
   onClose: r
 }) {
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let h = _$$p2(getI18nString("file_browser.pinning.pin_modal.edit.confirmation_bell"), "file-browser-workspace-edit-pin");
   let x = useSubscription(EditWorkspacePinnedFileView, {
     pinnedFileId: e

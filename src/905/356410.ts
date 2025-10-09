@@ -431,7 +431,7 @@ function G({
     extensionType
   } = k();
   let x = qu(i);
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   return jsxs("div", {
     className: d()(cssBuilderInstance.flex.gap8.p16.justifyBetween.alignCenter.absolute.bottom0.left0.right0.bSolid.bt1.colorBorder.colorBg.$, "extension_security_form--bottomBarUI3--cXlx-"),
     children: [!x && jsx("button", {

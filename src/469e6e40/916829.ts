@@ -20,7 +20,7 @@ import { UserGroupRole, GroupType } from "../905/441038";
 import { registerModal } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
 function k(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = e.licenseGroupsEnabled && e.groupsToReview.length > 0;
   return jsx(TrackingProvider, {
     name: "Freeze Invoice Modal",

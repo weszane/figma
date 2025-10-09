@@ -29,7 +29,7 @@ export function $$b1(e, t, i, n) {
 export function $$v0({
   ariaLabelledBy: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let l = useSceneGraphSelector();
   let u = null;

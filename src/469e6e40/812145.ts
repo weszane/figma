@@ -205,7 +205,7 @@ function M({
   lastActiveAt: U,
   jobTitle: F
 }) {
-  let q = useDispatch();
+  let q = useDispatch<AppDispatch>();
   let $ = a ?? ViewAccessTypeEnum.VIEW;
   let B = JT($);
   let G = usePlanInviteWithSeatExperiment({

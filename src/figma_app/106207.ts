@@ -186,7 +186,7 @@ function V(e, t) {
   return `INSERT_FIGJAM_TEMPLATE_${e}_${t}`;
 }
 export function $$H4() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCurrentFileKey();
   let r = useSelector(e => e.fileVersion);
   let n = useSelector(e => e.loadingState);
@@ -317,7 +317,7 @@ export let $$Y0 = createOptimistThunk((e, t) => {
   }));
 });
 export function $$$3() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return useCallback(t => e($$Y0(t)), [e]);
 }
 export function $$X5() {

@@ -204,7 +204,7 @@ export function $$L0(e) {
     dispatch(stopEditingComment());
   }, [dispatch]);
   let h = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useMemo(() => e ? {
       view: "communityHub",
       subView: "handle",
@@ -279,7 +279,7 @@ export function $$L0(e) {
   }
 }
 function F(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, s] = useState(!1);
   let {
     reactionsApi
@@ -313,7 +313,7 @@ function F(e) {
   });
 }
 function M(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     reactionsApi
   } = I_();

@@ -12,7 +12,7 @@ import { DialogBody, DialogContents } from '../figma_app/272243';
 import { WithTrackedButtonLargeWide } from '../figma_app/617427';
 import { TrackingProvider } from '../figma_app/831799';
 export let googleDeviceClaimSuccessModal = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager({
     ...e,
     preventUserClose: !0

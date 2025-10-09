@@ -14,7 +14,7 @@ export function $$h0({
   instruction: t,
   dataTestId: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let [h, g] = useState(!1);
   return jsxs(AutoLayout, {
     direction: "vertical",

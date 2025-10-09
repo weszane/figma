@@ -193,7 +193,7 @@ export function $$U1(e) {
     headerRef
   } = e;
   let I = $$j2("inspection_panel_copy_all_click", useContext(F));
-  let A = useDispatch();
+  let A = useDispatch<AppDispatch>();
   let x = isDevHandoffEditorType();
   let N = useHandleMouseEvent(recordingKey, "click", useCallback(() => {
     if (!copyAllValue) return;

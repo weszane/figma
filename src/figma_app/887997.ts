@@ -23,7 +23,7 @@ export function $$v0() {
   let e = useSelector(e => e.publishedPlugins);
   let t = useCurrentOrgAdminInfo();
   let r = _$$S(e, t?.id);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return (useSingleEffect(() => {
     i(Xt());
   }), t && 0 !== r.length) ? jsx($$A1, {
@@ -51,7 +51,7 @@ function x({
   trackingContext: t,
   renderPluginDropdownButton: r
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = j_();
   let p = B();
   let {

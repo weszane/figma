@@ -42,7 +42,7 @@ export let $$V0 = registerModal(function (e) {
     team,
     afterFileMove
   } = e;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = selectPermissionsState();
   let l = selectCurrentUser();
   let d = !!team && canEditTeam(team?.id, o);
@@ -160,7 +160,7 @@ function G(e) {
   }) : jsx(Fragment, {});
 }
 function z(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = () => {
     t(hideModal());
   };

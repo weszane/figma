@@ -15,7 +15,7 @@ import { j_, Di, ii } from "../905/217142";
 import { S as _$$S } from "../figma_app/783597";
 import { p as _$$p } from "../figma_app/93911";
 export function $$y1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => getCurrentOrgAdminInfo(e));
   let r = useSelector(e => e.publishedWidgets);
   useEffect(() => {
@@ -32,7 +32,7 @@ export function $$y1() {
 export function $$b0({
   widgets: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = j_();
   useEffect(() => {
     t(gI());

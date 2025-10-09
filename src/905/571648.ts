@@ -11,11 +11,11 @@ import { Fl } from "../figma_app/236178";
 import { NX, Qy } from "../figma_app/777207";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
-import { bO, z5 } from "../figma_app/936646";
+import { useLibraryDataSubscriptions, getStylesFromLoadedLibrary } from "../figma_app/936646";
 import { filterStylesByType, groupStylesByPrefix } from "../figma_app/646357";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
 import { BasicFuseSearch } from "../905/81982";
-import { b as _$$b } from "../figma_app/882253";
+import { resolveDestinationStyleKey } from "../figma_app/882253";
 import { useSubscribedLibraries, getNumStylesByType } from "../figma_app/155728";
 import { useIsFullscreenSlidesView } from "../figma_app/21029";
 import { Dq } from "../figma_app/177697";
@@ -30,7 +30,7 @@ export function $$R1(e) {
   return useMemo(() => filterStylesByType(t, e), [t, e]);
 }
 export function $$N0(e, t) {
-  let i = useSelector(i => _$$b(i, e, t));
+  let i = useSelector(i => resolveDestinationStyleKey(i, e, t));
   let n = selectCurrentFile();
   let a = n && (isBranchAlt(n) ? n.sourceFileKey : n.key);
   return a && compareWithGeneratedKey(i?.data, a) ? null : i;
@@ -107,7 +107,7 @@ export function $$j4({
 }) {
   let a = $$F6(e, t);
   let s = i && i.length > 0 ? i : a.libraries;
-  let l = bO();
+  let l = useLibraryDataSubscriptions();
   let {
     stylesByFileKey,
     isLoadingLibraryData
@@ -121,7 +121,7 @@ export function $$j4({
         break;
       }
       r && r?.status !== "errors" && (i[r.data.fileKey] = {
-        styles: z5(r, e),
+        styles: getStylesFromLoadedLibrary(r, e),
         fileName: r.data.name,
         libraryKey: r.data.libraryKey
       });

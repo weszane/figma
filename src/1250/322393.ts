@@ -179,7 +179,7 @@ export function $$ee13(e) {
   let t = Xr(isTemplateSearchEnabledAtomFamily);
   let n = Z('cooper_template_picker_dismissed');
   let i = useSelector(e => e.search.sessionId);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return useCallback(() => {
     n({
       source: e
@@ -211,7 +211,7 @@ export function $$en6({
 }) {
   let t = Xr(isTemplateSearchEnabledAtomFamily);
   let n = useCurrentFileKey();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = function (e) {
     let [t] = setupResourceAtomHandler(_$$u(e), {
       enabled: !0

@@ -17,7 +17,7 @@ export function $$m1(e, t, i) {
     appModel: e.mirror.appModel,
     selectedView: e.selectedView
   }));
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let _ = usePublishedPlugins()[e];
   let x = getPluginVersion(_);
   let y = useInstalledPluginsAndWidgets();

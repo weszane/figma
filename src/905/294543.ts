@@ -39,7 +39,7 @@ export let $$A0 = createOptimistThunk((e, t) => {
 export function $$y1() {
   let e = trackFileEventWithStore();
   let t = usePublishedPlugins();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = getUserId() ?? void 0;
   return useCallback(n => {
     let r = _(n);

@@ -154,7 +154,7 @@ function eh(e) {
     isEligibleForProvisionalAccess,
     entryPoint
   } = e;
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let _ = licenseType === FProductAccessType.DEV_MODE;
   let A = iS(licenseType);
   let y = useCurrentFileKey();
@@ -303,7 +303,7 @@ function ey({
   });
 }
 export function $$eb0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     planType,
     planParentId,

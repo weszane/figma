@@ -11,11 +11,11 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { QF } from "../figma_app/696043";
-import { Qi } from "../figma_app/559491";
+import { mergePublishedPluginThunk } from "../figma_app/559491";
 import { s as _$$s } from "../905/58247";
 import { hideModal } from "../905/156213";
 import { getSelectedEditorType } from "../figma_app/976749";
-import { M as _$$M } from "../figma_app/170366";
+import { getPluginManager } from "../figma_app/170366";
 import { pS } from "../905/588985";
 import { getFullscreenViewEditorType, generatePluginId } from "../figma_app/300692";
 import { Bs, d_, cj } from "../905/197730";
@@ -33,7 +33,7 @@ import { A as _$$A } from "../905/438475";
 import { n0, we, pv, YJ, Ow, lg, lJ, Lk, x6, aP, $O, Qp, IO, re, gn, Bb, fY, GT, pn, Fn, Tp, WG, GK, Cb, dH, hG, x9 } from "../905/424197";
 import { A as _$$A2 } from "../6828/645333";
 import { A as _$$A3 } from "../6828/696513";
-let j = _$$M();
+let j = getPluginManager();
 var U = (e => (e.CHOOSE_EDITOR_TYPE = "choose_editor_type_step", e.CHOOSE_TEMPLATE = "choose_template_step", e.SUCCESS_SCREEN = "success_screen_step", e.HIDDEN = "hidden", e))(U || {});
 function B({
   children: e,
@@ -196,7 +196,7 @@ function z({
 export let $$W0 = registerModal(function ({
   resourceType: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
   let [b, C] = useState("");
   let [F, U] = useState(-1);
@@ -253,7 +253,7 @@ export let $$W0 = registerModal(function ({
     let r = "";
     try {
       let n = await generatePluginId(e);
-      t(Qi({
+      t(mergePublishedPluginThunk({
         publishedPlugins: [n],
         src: "onGenerateNewClick"
       }));

@@ -4,7 +4,7 @@ import { useStableMemo } from "../905/19536";
 import { showModalConditional } from "../905/156213";
 export function $$o1(e) {
   let t = useStableMemo(e);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return useCallback(() => {
     i(showModalConditional(t));
   }, [i, t]);

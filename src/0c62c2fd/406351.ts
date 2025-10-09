@@ -22,7 +22,7 @@ export function $$y0({
   open: r,
   onClose: n
 }) {
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let y = _$$p2(getI18nString("file_browser.pinning.pin_modal.confirmation_bell"), "file-browser-workspace-add-pin");
   let j = useSubscription(AddWorkspacePinnedFileView, {
     fileKey: e

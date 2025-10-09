@@ -16,7 +16,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 export let $$h0 = "resource_hub_link";
 export function $$b1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedViewType();
   let n = useSelector(e => e.userFlags);
   let b = useResourceRouteParams();

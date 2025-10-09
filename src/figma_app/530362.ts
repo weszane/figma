@@ -28,7 +28,7 @@ import { hideInstanceSwapPicker } from "../905/8732";
 import { loadSharedSymbolOrStateGroup, loadSharedVariableThunk } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection, renameNode } from "../figma_app/741237";
-import { u as _$$u, BQ } from "../figma_app/852050";
+import { getVariableById, getResolvedVariableValue } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -50,7 +50,7 @@ import { dD, lt, Qu } from "../figma_app/941824";
 import { Y9, oO } from "../figma_app/811257";
 import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
 import { y$ } from "../figma_app/152690";
-import { eF } from "../figma_app/394327";
+import { isLocallySoftDeleted } from "../figma_app/394327";
 import { P as _$$P2 } from "../figma_app/120873";
 import { oz } from "../figma_app/406976";
 import { gJ } from "../905/923433";
@@ -74,7 +74,7 @@ export function $$eE1({
   let r = useSelector(e => ow(e) ?? []);
   let s = useSelector(e => OC(e) ?? []);
   let o = useSelector(e => e.instanceSwapPickerShown.isShown);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let [d, c] = useState(null);
   let u = useCallback(e => c(e.currentTarget.value), []);
   let {
@@ -455,7 +455,7 @@ function eI({
   shouldShowVariableBinding: r,
   boundVariable: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useCallback(t => {
     e.type === ComponentPropType.BOOL && t !== normalizeComponentPropValue(ComponentPropType.BOOL, e.defaultValue) && permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editBoolComponentPropDefDefaultValue(e.explicitDefID, t));
   }, [e]);
@@ -562,7 +562,7 @@ function eA({
   openFileKey: s
 }) {
   let o = useSceneGraphSelector();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let {
     preferredValues,
     preferredValuesFetchError,
@@ -601,8 +601,8 @@ function ex({
   onClear: t
 }) {
   let r = e.value;
-  let i = _$$u(r);
-  let a = BQ(r ?? void 0);
+  let i = getVariableById(r);
+  let a = getResolvedVariableValue(r ?? void 0);
   return i ? jsxs("div", {
     className: "edit_component_prop_picker--variableBoundInputContainer--BVQ2Q",
     children: [jsx("div", {
@@ -612,7 +612,7 @@ function ex({
         variableId: r,
         isStandalone: !0,
         thumbnailValue: a,
-        isDeleted: eF(i)
+        isDeleted: isLocallySoftDeleted(i)
       })
     }), jsx(IconButton, {
       onClick: () => t(a),
@@ -648,7 +648,7 @@ function eN({
 function eC({
   def: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     variableType,
     requestedTypes,

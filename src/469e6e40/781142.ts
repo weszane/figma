@@ -82,7 +82,7 @@ function S(e) {
   });
 }
 function N(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = isProrationBillingEnabledForCurrentPlan();
   let r = useCallback(() => {
     switch (e.planType) {

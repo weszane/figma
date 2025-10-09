@@ -24,7 +24,7 @@ export function $$I0({
   fileKey: I
 }) {
   let E = getUserId();
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let S = useSubscription(OrgUserIsMfaRestrictedView, {
     orgId: t.id
   });

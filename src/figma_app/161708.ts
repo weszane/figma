@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { loadSharedVariableThunk } from "../figma_app/933328";
 import { getNudgeAmounts } from "../figma_app/740163";
 import { getCommonValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
-import { SG } from "../figma_app/852050";
+import { getFilteredVariables } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { PercentageInput, LengthInput } from "../figma_app/178475";
 import { FormattedInputWithWrapper } from "../figma_app/841644";
@@ -20,7 +20,7 @@ import { ui, om } from "../figma_app/395097";
 import { l6, c$ } from "../905/794875";
 import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
 import { u3, y$ } from "../figma_app/152690";
-import { MH } from "../figma_app/394327";
+import { extractVariableAliasOrFontStyle } from "../figma_app/394327";
 import { fE } from "../figma_app/359164";
 import { QK, YJ, I_, TL, py, H, Xd, os, IX, kA } from "../figma_app/228217";
 var c = d;
@@ -38,7 +38,7 @@ export function $$L3(e) {
     bigNudgeAmount,
     smallNudgeAmount
   } = getNudgeAmounts();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useRef(null);
   let d = useSelector(e => {
     let {
@@ -194,8 +194,8 @@ function M({
   isNotPencilTool: l,
   recordingKey: d
 }) {
-  let c = useDispatch();
-  let u = SG([r]).data ?? [];
+  let c = useDispatch<AppDispatch>();
+  let u = getFilteredVariables([r]).data ?? [];
   let {
     updateVariableConsumption,
     consumedVariable
@@ -207,7 +207,7 @@ function M({
   let {
     clearVariableConsumption: _clearVariableConsumption
   } = u3(["STROKE_WEIGHT"]);
-  let y = MH(consumedVariable) ?? MH(_consumedVariable) ?? void 0;
+  let y = extractVariableAliasOrFontStyle(consumedVariable) ?? extractVariableAliasOrFontStyle(_consumedVariable) ?? void 0;
   let T = useCallback(async e => {
     if (e) {
       let t = await c(loadSharedVariableThunk(e));

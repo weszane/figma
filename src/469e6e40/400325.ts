@@ -10,7 +10,7 @@ import { useTeamPlanUser, useIsOrgAdminUser, useTeamPlanFeatures, getParentOrgId
 import { o0 } from "../905/844131";
 import { a as _$$a } from "../469e6e40/51498";
 export function $$p0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useTeamPlanUser();
   let a = useIsOrgAdminUser(t).unwrapOr(!1);
   let p = useTeamPlanFeatures().unwrapOr(null);

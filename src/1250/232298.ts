@@ -19,7 +19,7 @@ let y = () => Date.now() - x;
 let v = "seen_japanese_launch_announcement";
 let w = userFlagExistsAtomFamily(v);
 export function $$T0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getUserId();
   let n = useAtomWithSubscription(mp);
   let m = useAtomWithSubscription(w);

@@ -35,7 +35,7 @@ import { gH } from "../905/104173";
 import { W as _$$W2, T as _$$T } from "../905/336482";
 import { allCategoriesQuery } from "../figma_app/188671";
 import { resetCommentState } from "../figma_app/530167";
-import { i9, N4, VS, oO, bk } from "../figma_app/49598";
+import { publishHubFileThunk, updateHubFileThunk, updateMetadata, clearMetadataAndStatus, clearMetadata } from "../figma_app/49598";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { fileSelectedShareModalTab } from "../figma_app/91703";
 import { hideModal, popModalStack } from "../905/156213";
@@ -46,7 +46,7 @@ import { isWorkspaceMatch, validateCarouselImages, processThumbnailImage, cleanu
 import { D as _$$D } from "../905/274925";
 import { DropdownEnableState } from "../figma_app/188152";
 import { selectUser } from "../905/372672";
-import { bH, cp, HF, zv, yS, cU, vK, Rj, al, a6, ow } from "../figma_app/198840";
+import { validateTemplatePublishFields, validatePrice, isHubFilePublished, isHubFileApprovedPublic, validateTemplateName, validateCategoryId, validateTemplateDescription, validateCreatorPolicy, validateSupportContact, getHubFileVersionOrDefault, buildTemplatePublishPayload } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
 import { getExplicitRoleForUserAndFile, getPermissionsState } from "../figma_app/642025";
@@ -59,14 +59,14 @@ import { LibrarySourceEnum } from "../figma_app/633080";
 import { AccessLevelEnum } from "../905/557142";
 import { ShareAction } from "../figma_app/707808";
 import { SourceType } from "../figma_app/175992";
-import { Rs } from "../figma_app/761870";
+import { getInitialAutocompleteState } from "../figma_app/761870";
 import { TrackingKeyEnum } from "../905/696396";
 import { profileServiceAPI } from "../905/608932";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { HeaderModal } from "../905/519092";
 import { $ as _$$$ } from "../905/241406";
-import { F4, _g } from "../figma_app/60023";
+import { PublishState, currentStateAtom } from "../figma_app/60023";
 import { A as _$$A2 } from "../905/172237";
 import { A as _$$A3 } from "../905/855351";
 import { A as _$$A4 } from "../905/437920";
@@ -429,7 +429,7 @@ class ts extends Component {
       let i = "team_id" in metadata.author ? metadata.author.team_id : null;
       if (this.props.isEditHubFilePageMode && this.props.hubFile) {
         let n = this.getUpdateHubFilePayload();
-        let r = bH(n);
+        let r = validateTemplatePublishFields(n);
         if (this.setState({
           formErrors: r
         }), this.hasFormErrors(r)) {
@@ -472,7 +472,7 @@ class ts extends Component {
         }));
       } else {
         let e = this.getCreateHubFilePayload();
-        let n = bH(e);
+        let n = validateTemplatePublishFields(e);
         if (this.setState({
           formErrors: n
         }), this.hasFormErrors(n)) {
@@ -598,10 +598,10 @@ class ts extends Component {
       let e = this.props.publishingState.metadata.isPaid;
       this.updatePublishingMetadata({
         isPaid: !e,
-        publishers: e ? this.props.publishingState.metadata.publishers : Rs()
+        publishers: e ? this.props.publishingState.metadata.publishers : getInitialAutocompleteState()
       });
       !e && this.props.publishingState.metadata.price ? this.setFormErrors({
-        price: cp(!e, this.props.publishingState.metadata.price)
+        price: validatePrice(!e, this.props.publishingState.metadata.price)
       }) : this.setFormErrors({
         price: void 0
       });
@@ -833,7 +833,7 @@ class ts extends Component {
       isGeneratingThumbnail: !1
     });
     let r = {};
-    if (HF(this.props.hubFile)) {
+    if (isHubFilePublished(this.props.hubFile)) {
       let e = this.state.customThumbnail && this.state.customThumbnail.sha1 === n?.sha1;
       r.thumbnailType = (() => {
         if (this.state.customThumbnail) return e ? this.hasUserSetCanvasThumbnail() ? CanvasSourceEnum.USER_CANVAS : CanvasSourceEnum.DEFAULT_CANVAS : CanvasSourceEnum.USER_UPLOADED;
@@ -892,7 +892,7 @@ class ts extends Component {
     return "design" === this.props.figFile.editor_type;
   }
   getPrimaryButtonText() {
-    return this.props.isEditHubFilePageMode || zv(this.props.hubFile) ? getI18nString("general.save") : this.props.isPaid ? getI18nString("community.publishing.submit_for_review") : getI18nString("community.publishing.publish");
+    return this.props.isEditHubFilePageMode || isHubFileApprovedPublic(this.props.hubFile) ? getI18nString("general.save") : this.props.isPaid ? getI18nString("community.publishing.submit_for_review") : getI18nString("community.publishing.publish");
   }
   hasFormErrors(e) {
     return !!countEnabledFeatures(Object.keys(e), e);
@@ -904,7 +904,7 @@ class ts extends Component {
     let t = this.props.hubFile;
     let i = getDebugWorkspaceInfo(metadata.author);
     let n = this.state.formErrors;
-    let a = this.props.publishingState.status.code === UploadStatusEnum.UPLOADING || this.props.slidesPublishState === F4.PUBLISH_HUB_FILE_INITIATED;
+    let a = this.props.publishingState.status.code === UploadStatusEnum.UPLOADING || this.props.slidesPublishState === PublishState.PUBLISH_HUB_FILE_INITIATED;
     let s = n.thumbnailIsSet || n.thumbnailBuffer;
     let o = this.state.customThumbnail;
     let l = metadata.isPaid ? {
@@ -979,7 +979,7 @@ class ts extends Component {
               let t = e.currentTarget.value;
               this.inputDebounce("name", t);
               this.setFormErrors({
-                name: yS(t)
+                name: validateTemplateName(t)
               });
             },
             error: n.name,
@@ -994,7 +994,7 @@ class ts extends Component {
                 categoryId: e
               });
               n.categoryId && this.setFormErrors({
-                categoryId: cU(e)
+                categoryId: validateCategoryId(e)
               });
             },
             categoryInputValue: this.state.otherCategoryInputValue,
@@ -1009,7 +1009,7 @@ class ts extends Component {
               });
               this.inputDebounce("description", e);
               this.setFormErrors({
-                description: vK(e)
+                description: validateTemplateDescription(e)
               });
             },
             resourceType: HubTypeEnum.HUB_FILE,
@@ -1046,7 +1046,7 @@ class ts extends Component {
               });
               this.inputDebounce("creatorPolicy", t);
               this.setFormErrors({
-                creatorPolicy: Rj(e)
+                creatorPolicy: validateCreatorPolicy(e)
               });
             },
             resourceType: HubTypeEnum.HUB_FILE,
@@ -1066,7 +1066,7 @@ class ts extends Component {
               let t = e.currentTarget.value;
               this.inputDebounce("supportContact", t);
               this.setFormErrors({
-                supportContact: al(this.props.isPaid, t)
+                supportContact: validateSupportContact(this.props.isPaid, t)
               });
             },
             error: n.supportContact,
@@ -1190,7 +1190,7 @@ class ts extends Component {
             price: e
           });
           this.setFormErrors({
-            price: cp(this.props.isPaid, e)
+            price: validatePrice(this.props.isPaid, e)
           });
         },
         error: this.state.formErrors.price
@@ -1204,7 +1204,7 @@ class ts extends Component {
     let e = null;
     let t = !1;
     let i = this.isSlidePublish();
-    let n = i && this.props.slidesPublishState === F4.PUBLISH_HUB_FILE_COMPLETED;
+    let n = i && this.props.slidesPublishState === PublishState.PUBLISH_HUB_FILE_COMPLETED;
     if (2 === this.state.step && this.props.hubFile && this.props.publishingState.status.code === UploadStatusEnum.SUCCESS && this.props.publisher && (!i || n)) {
       let {
         hubFile,
@@ -1277,14 +1277,14 @@ let to = connect((e, t) => {
     isFullscreenOpen
   } = t;
   let a = t.hubFile;
-  let s = a && a6(a);
+  let s = a && getHubFileVersionOrDefault(a);
   let o = getExplicitRoleForUserAndFile(fileKey, e);
   let l = o?.level === AccessLevelEnum.OWNER;
   let d = isEditHubFilePageMode ? !!s?.valid_prototype : t.entryPoint !== PageTypeEnum.UNIVERSAL_POSTING && PrototypingTsApi.firstPagePrototypeStatus() === PresentationValidationStatus.VALID;
   let u = e.publishingHubFiles[fileKey];
   u && u.metadata || (u = {
     status: getStatusOrDefault(u),
-    metadata: ow({
+    metadata: buildTemplatePublishPayload({
       ...getPermissionsState(e),
       currentUserOrgId: e.currentUserOrgId,
       figFilePublishedAsHubFile: e.figFilePublishedAsHubFile,
@@ -1319,10 +1319,10 @@ let to = connect((e, t) => {
   };
 }, (e, t) => ({
   createHubFile: t => {
-    e(i9(t));
+    e(publishHubFileThunk(t));
   },
   updateHubFile: (t, i) => {
-    e(N4({
+    e(updateHubFileThunk({
       payload: t,
       onSuccess: t => {
         e(hideModal());
@@ -1337,16 +1337,16 @@ let to = connect((e, t) => {
     e(popModalStack());
   },
   onPublishingMetadataChanged: (t, i) => {
-    e(VS({
+    e(updateMetadata({
       id: t,
       metadata: i
     }));
   },
   clearPublishingState: () => {
-    e(oO({
+    e(clearMetadataAndStatus({
       id: t.fileKey
     }));
-    e(bk({
+    e(clearMetadata({
       id: t.fileKey
     }));
   },
@@ -1366,7 +1366,7 @@ let $$tl0 = registerModal(function (e) {
     return t ? e.hubFiles[t] ?? null : null;
   });
   let a = getCommunityHubLikeStatus(n?.id, ResourceTypeNoComment.HUB_FILE);
-  let o = useAtomWithSubscription(_g);
+  let o = useAtomWithSubscription(currentStateAtom);
   let l = Xr(libraryPublishingModeAtom);
   return i ? _$$W2(i.editor_type) ? jsx(_$$T, {
     publishingEntryPoint: e.entryPoint,
@@ -1382,7 +1382,7 @@ let $$tl0 = registerModal(function (e) {
   }) : null;
 }, "HubFilePublishModal", ModalSupportsBackground.YES);
 (n || (n = {})).PublishModalSuccessScreen = function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useIsCommunityHubView();
   let n = useSelector(t => e.hubFile && selectedViewToPath(t, {
     view: "communityHub",
@@ -1407,10 +1407,10 @@ let $$tl0 = registerModal(function (e) {
   });
   let h = () => {
     t(hideModal());
-    t(oO({
+    t(clearMetadataAndStatus({
       id: e.fileKey
     }));
-    t(bk({
+    t(clearMetadata({
       id: e.fileKey
     }));
   };
@@ -1485,7 +1485,7 @@ let $$tl0 = registerModal(function (e) {
       },
       publisher: e.publisher
     }) : jsx(Fragment, {});
-    let s = e.isPaid && !zv(e.hubFile);
+    let s = e.isPaid && !isHubFileApprovedPublic(e.hubFile);
     return jsx(XT, {
       className: U5,
       title: s ? getI18nString("community.publishing.is_under_review.file") : getI18nString("community.publishing.congratulations"),

@@ -25,7 +25,7 @@ let E = "handle_asset_transfer_request_modal--radioText--WU7za";
 let C = "handle_asset_transfer_request_modal--radioSubtitle--aF3ij";
 var N = (e => (e.REMOVE_COLLABORATORS = "remove_collaborators", e.KEEP_COLLABORATORS = "keep_collaborators", e))(N || {});
 export function $$I0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.currentUserOrgId);
   let N = useSelector(e => a && e.orgById[a]);
   let I = N && N.bigma_enabled;

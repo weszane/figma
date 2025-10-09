@@ -59,7 +59,7 @@ export async function fetchPendingAccountTypeRequest(
  * Custom hook for handling one-click approval of account type requests via query parameters.
  */
 export function useOneClickApproval() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const [isCompleted, setIsCompleted] = useState(false)
   const [pendingRequest, setPendingRequest] = useState<any>()
   const isOneClickApproveEnabled = getFeatureFlags().one_click_approve_on_recents

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useEffect, useCallback, useState, useRef } from "react";
 import { useAtomWithSubscription, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { J3, JU, wv, kN, Gi, GR, e2 as _$$e, li } from "../figma_app/622574";
-import { bY, Vf, q7, oQ, V6, i6, ux, VZ, Ei, OR, xw } from "../figma_app/60023";
+import { fileTypeAtom, FileType, booleanAtomFamily, genericNullAtomFamily, selectionModeAtomFamily, SelectionMode, nullAtomFamily, selectionAtomFamily, draftModeAtomFamily, orgAtom, resetStateAtom } from "../figma_app/60023";
 import d from "classnames";
 import { buildUploadUrl, isLocalCluster } from "../figma_app/169182";
 import { RecordingScrollContainer } from "../905/347284";
@@ -53,7 +53,7 @@ import { logInfo, logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { k8 } from "../figma_app/49598";
+import { trackSlideTemplateUsageThunk } from "../figma_app/49598";
 import { renameFileOptimistic } from "../figma_app/78808";
 import { insertMultipleSlideModules } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
@@ -229,7 +229,7 @@ function Q({
   currentTeam: e
 }) {
   let t = fK();
-  let i = useSetAtom(bY);
+  let i = useSetAtom(fileTypeAtom);
   let {
     teamTemplates,
     numTemplatesForTeam
@@ -242,7 +242,7 @@ function Q({
     }),
     previewData: teamTemplates,
     onSeeAllClick: s ? () => i({
-      type: Vf.TEAM,
+      type: FileType.TEAM,
       teamId: e.id,
       displayName: e.name
     }) : void 0
@@ -256,11 +256,11 @@ function $({
     teamTemplates,
     isLoading
   } = wv(FFileType.SLIDES, t);
-  let a = useSetAtom(bY);
+  let a = useSetAtom(fileTypeAtom);
   let s = teamTemplates && teamTemplates.length >= t;
   if (isLoading || !teamTemplates || !teamTemplates.length || !t) return null;
   let d = s ? () => a({
-    type: Vf.ORG
+    type: FileType.ORG
   }) : void 0;
   return jsx(ei, {
     title: renderI18nText("slides.templates.theme_picker.org_template_header", {
@@ -275,7 +275,7 @@ function ee() {
     data: e,
     status: t
   }] = setupResourceAtomHandler(_$$_2());
-  let i = useSetAtom(bY);
+  let i = useSetAtom(fileTypeAtom);
   let r = fK();
   return "loading" === t ? jsx(kM, {
     removePadding: !0,
@@ -292,7 +292,7 @@ function ee() {
         title: getTranslatedDynamicContent(e.i18n_meta.title, e.title),
         previewData: a,
         onSeeAllClick: t.length > r ? () => i({
-          type: Vf.HUB_FILE,
+          type: FileType.HUB_FILE,
           shelfId: e.id
         }) : void 0
       }, e.id);
@@ -303,7 +303,7 @@ function et() {
   let e = _$$eE(FDocumentType.Slides);
   let t = getRecentTemplateCount(FDocumentType.Slides);
   let i = fK();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = selectCurrentFile();
   let s = J3();
   let l = JU(s);
@@ -421,18 +421,18 @@ function ed({
     scrollRef,
     onScroll,
     resetScrollTop
-  } = d$(Vf.ALL);
+  } = d$(FileType.ALL);
   let {
     onShowSeparatorScroll
   } = gH();
-  let y = useAtomWithSubscription(q7);
+  let y = useAtomWithSubscription(booleanAtomFamily);
   let b = useCurrentFileKey();
   let C = Gi();
   let {
     start
   } = JY();
-  let E = Xr(bY);
-  return (useEffect(() => () => resetScrollTop([Vf.ALL]), [resetScrollTop]), loading || y && !b) ? jsx(kM, {}) : jsxs(RecordingScrollContainer, {
+  let E = Xr(fileTypeAtom);
+  return (useEffect(() => () => resetScrollTop([FileType.ALL]), [resetScrollTop]), loading || y && !b) ? jsx(kM, {}) : jsxs(RecordingScrollContainer, {
     className: cssBuilderInstance.px8.hFull.$,
     scrollContainerRef: scrollRef,
     initialScrollTop: scrollPosition,
@@ -443,8 +443,8 @@ function ed({
     children: [i === Ji.OVERLAY_MODAL && jsx(L, {
       onStartFromFigJamSelected: function () {
         E({
-          type: Vf.FILE_PICKER,
-          parentType: Vf.ALL
+          type: FileType.FILE_PICKER,
+          parentType: FileType.ALL
         });
       },
       onStartFromTextOutlineSelected: function () {
@@ -533,14 +533,14 @@ function ef({
     data: t,
     status: i
   }] = setupResourceAtomHandler(_$$Q2(e));
-  let r = useSetAtom(bY);
+  let r = useSetAtom(fileTypeAtom);
   let {
     scrollPosition,
     scrollRef,
     onScroll
-  } = d$(Vf.HUB_FILE);
+  } = d$(FileType.HUB_FILE);
   let d = () => r({
-    type: Vf.ALL
+    type: FileType.ALL
   });
   return "loading" === i ? jsxs(x, {
     children: [jsx(em, {
@@ -784,8 +784,8 @@ function e1(e) {
   });
 }
 function e2() {
-  let e = useAtomWithSubscription(oQ) ?? void 0;
-  let t = useAtomWithSubscription(bY);
+  let e = useAtomWithSubscription(genericNullAtomFamily) ?? void 0;
+  let t = useAtomWithSubscription(fileTypeAtom);
   let i = t?.figjamEntryPointData;
   let r = i?.figjamFileKey ?? e;
   let {
@@ -797,7 +797,7 @@ function e2() {
     showPlaceholderOverlay,
     removeAllPlaceholderOverlays
   } = Wb();
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = useAtomWithSubscription(openFileKeyAtom);
   let m = t?.source ?? _$$E.SLIDES_TEMPLATE;
   Xr(zF)(m);
@@ -901,15 +901,15 @@ let e3 = async ({
   }
 };
 function e8() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useDropdownState();
-  let i = useAtomWithSubscription(oQ);
+  let i = useAtomWithSubscription(genericNullAtomFamily);
   let [r, o] = useState([]);
-  let [d, c] = useAtomValueAndSetter(V6);
+  let [d, c] = useAtomValueAndSetter(selectionModeAtomFamily);
   let u = M0(i);
   return (useEffect(() => {
     !isInteractionPathCheck() && i && (c({
-      type: i6.NONE
+      type: SelectionMode.NONE
     }), (async () => {
       let e = await u();
       if (!e) return;
@@ -919,14 +919,14 @@ function e8() {
         guid: e.guid,
         name: e.name
       }))), c({
-        type: i6.SINGLE,
+        type: SelectionMode.SINGLE,
         page: {
           guid: i.guid,
           name: i.name
         }
       }));
     })());
-  }, [i, c, u]), i) ? d.type === i6.NONE ? jsx(e9, {}) : jsx("div", {
+  }, [i, c, u]), i) ? d.type === SelectionMode.NONE ? jsx(e9, {}) : jsx("div", {
     "data-testid": "page-selector",
     children: jsxs(l6, {
       ariaLabel: getI18nString("slides.templates.file_picker.page_selector.label"),
@@ -937,15 +937,15 @@ function e8() {
       formatter: {
         format: e => {
           switch (e.type) {
-            case i6.SINGLE:
+            case SelectionMode.SINGLE:
               return e.page.name;
-            case i6.ALL:
+            case SelectionMode.ALL:
               return getI18nString("slides.templates.file_picker.page_selector.all_pages");
             default:
               return "";
           }
         },
-        isEqual: (e, t) => e.type === t.type && (e.type !== i6.SINGLE || t.type !== i6.SINGLE || e.page.guid === t.page.guid && e.page.name === t.page.name)
+        isEqual: (e, t) => e.type === t.type && (e.type !== SelectionMode.SINGLE || t.type !== SelectionMode.SINGLE || e.page.guid === t.page.guid && e.page.name === t.page.name)
       },
       id: "slides-ai-file-picker-page-select",
       inputClassName: cssBuilderInstance.fontMedium.colorText.ellipsis.alignTop.maxW150.$,
@@ -955,20 +955,20 @@ function e8() {
       property: d,
       children: [jsx(c$, {
         value: {
-          type: i6.NONE
+          type: SelectionMode.NONE
         },
         disabled: !0,
         ignoreCheck: !0,
         children: getI18nString("slides.templates.file_picker.page_selector.label")
       }), r.map(e => jsx(c$, {
         value: {
-          type: i6.SINGLE,
+          type: SelectionMode.SINGLE,
           page: e
         },
         children: e.name
       }, e.guid)), jsx(sK, {}), jsx(c$, {
         value: {
-          type: i6.ALL,
+          type: SelectionMode.ALL,
           allPages: r
         },
         children: getI18nString("slides.templates.file_picker.page_selector.all_pages")
@@ -1037,7 +1037,7 @@ function ti({
   });
 }
 function tr() {
-  let e = useAtomWithSubscription(V6);
+  let e = useAtomWithSubscription(selectionModeAtomFamily);
   let {
     startAction,
     figjamFileKey
@@ -1047,24 +1047,24 @@ function tr() {
       iconPrefix: jsx(_$$x, {}),
       variant: "primary",
       onClick: startAction,
-      disabled: !figjamFileKey || e.type === i6.NONE,
+      disabled: !figjamFileKey || e.type === SelectionMode.NONE,
       children: renderI18nText("slides.templates.file_picker.submit_button.generate")
     })
   });
 }
 function tn() {
-  let e = useAtomWithSubscription(V6);
-  let t = Xr(bY);
-  let i = useAtomWithSubscription(oQ);
+  let e = useAtomWithSubscription(selectionModeAtomFamily);
+  let t = Xr(fileTypeAtom);
+  let i = useAtomWithSubscription(genericNullAtomFamily);
   return jsx(ti, {
     children: jsx(Button, {
       variant: "primary",
       onClick: () => {
         t({
-          type: Vf.TEMPLATE_PICKER
+          type: FileType.TEMPLATE_PICKER
         });
       },
-      disabled: !i || e.type === i6.NONE,
+      disabled: !i || e.type === SelectionMode.NONE,
       children: renderI18nText("slides.templates.file_picker.submit_button.pick_template")
     })
   });
@@ -1086,12 +1086,12 @@ function to({
   libraryKey: e
 }) {
   let t = NG(e);
-  let [i, r] = useAtomValueAndSetter(bY);
+  let [i, r] = useAtomValueAndSetter(fileTypeAtom);
   let o = null === useCurrentFileKey();
   let d = r$();
   let c = S7();
-  let u = Xr(ux);
-  let p = Xr(oQ);
+  let u = Xr(nullAtomFamily);
+  let p = Xr(genericNullAtomFamily);
   return (useEffect(() => {
     o || ["loading", "loaded"].includes(t.status) || logInfo(ServiceCategories.SLIDES, `Query result status has unexpected value: ${t.status}`);
   }, [o, t.status]), "loading" === t.status || o) ? jsxs(x, {
@@ -1099,8 +1099,8 @@ function to({
       title: "",
       isLoading: !0,
       onClick: () => {
-        r(i.type === Vf.TEMPLATE ? i.parentView : {
-          type: Vf.ALL
+        r(i.type === FileType.TEMPLATE ? i.parentView : {
+          type: FileType.ALL
         });
         u(null);
         p(null);
@@ -1125,24 +1125,24 @@ function tl({
 }) {
   let i = selectCurrentFile();
   let r = r$();
-  let [o, d] = useAtomValueAndSetter(bY);
-  let c = Xr(ux);
-  let u = Xr(oQ);
+  let [o, d] = useAtomValueAndSetter(fileTypeAtom);
+  let c = Xr(nullAtomFamily);
+  let u = Xr(genericNullAtomFamily);
   let {
     showSeparator
   } = gH();
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = m4();
   let _ = t && t.length > 0;
   let y = _$$e4();
-  let E = o.type === Vf.TEMPLATE && o.shouldRemoveSourceLibraryKeyOnFail;
+  let E = o.type === FileType.TEMPLATE && o.shouldRemoveSourceLibraryKeyOnFail;
   let T = BX(y);
   useEffect(() => {
-    if (!_ && o.type === Vf.TEMPLATE) {
+    if (!_ && o.type === FileType.TEMPLATE) {
       if (E) {
         T();
         d({
-          type: Vf.ALL
+          type: FileType.ALL
         });
         return;
       }
@@ -1159,7 +1159,7 @@ function tl({
         reportAsSentryError: !0
       });
       d({
-        type: Vf.ALL
+        type: FileType.ALL
       });
     }
   }, [h, _, e, t, T, d, E, o.type]);
@@ -1220,7 +1220,7 @@ function tl({
       },
       name: S.file_name
     }));
-    S?.isHubFile && S?.hub_file_id && h(k8({
+    S?.isHubFile && S?.hub_file_id && h(trackSlideTemplateUsageThunk({
       hubFileId: S.hub_file_id
     }));
     qm(h, S);
@@ -1232,8 +1232,8 @@ function tl({
       title: I,
       publisherName: N,
       onClick: () => {
-        d(o.type === Vf.TEMPLATE ? o.parentView : {
-          type: Vf.ALL
+        d(o.type === FileType.TEMPLATE ? o.parentView : {
+          type: FileType.ALL
         });
         c(null);
         u(null);
@@ -1248,8 +1248,8 @@ function tl({
       createOutline: () => {
         c(S.library_key);
         d({
-          type: Vf.FILE_PICKER,
-          parentType: Vf.TEMPLATE
+          type: FileType.FILE_PICKER,
+          parentType: FileType.TEMPLATE
         });
       },
       addAllSlides: j
@@ -1317,12 +1317,12 @@ function tm({
   });
   let g = getFeatureFlags().pro_templates_lg;
   let y = g ? teamTemplates : templatesByTeam;
-  let b = useSetAtom(bY);
+  let b = useSetAtom(fileTypeAtom);
   let {
     scrollPosition,
     scrollRef,
     onScroll
-  } = d$(Vf.ORG);
+  } = d$(FileType.ORG);
   let T = y?.[y.length - 1]?.teamId ?? null;
   let w = useRef(null);
   _$$X({
@@ -1332,7 +1332,7 @@ function tm({
     onIntersectionChange: g ? requestLoadMoreForOrg : requestLoadMore
   });
   let S = () => b({
-    type: Vf.ALL
+    type: FileType.ALL
   });
   return (g ? isLoading : isLoadingTeamTemplates) ? jsxs(x, {
     children: [jsx(em, {
@@ -1358,7 +1358,7 @@ function tm({
             g || requestLoadMoreForTeam(t.teamId);
           },
           onSeeAllClick: g && t.totalTemplatesByTeam > c ? () => b({
-            type: Vf.TEAM,
+            type: FileType.TEAM,
             teamId: t.teamId,
             displayName: t.teamName ?? e.name
           }) : void 0
@@ -1403,21 +1403,21 @@ function t_({
     teamId: e,
     editorType: FFileType.SLIDES
   });
-  let a = useSetAtom(bY);
+  let a = useSetAtom(fileTypeAtom);
   let {
     scrollPosition,
     scrollRef,
     onScroll
-  } = d$(Vf.TEAM);
+  } = d$(FileType.TEAM);
   let u = useCurrentUserOrgId();
   return jsxs(x, {
     children: [jsx(em, {
       title: t,
       onClick: () => {
         u ? a({
-          type: Vf.ORG
+          type: FileType.ORG
         }) : a({
-          type: Vf.ALL
+          type: FileType.ALL
         });
       }
     }), templatesByTeam ? jsx(RecordingScrollContainer, {
@@ -1439,7 +1439,7 @@ function t_({
 function tE({
   showCloseButton: e
 }) {
-  let [t, i] = useAtomValueAndSetter(bY);
+  let [t, i] = useAtomValueAndSetter(fileTypeAtom);
   let {
     files,
     searchQuery,
@@ -1447,25 +1447,25 @@ function tE({
     setSearchQuery,
     status
   } = _$$_(FFileType.WHITEBOARD);
-  let [p, f] = useAtomValueAndSetter(ux);
-  let g = Xr(oQ);
+  let [p, f] = useAtomValueAndSetter(nullAtomFamily);
+  let g = Xr(genericNullAtomFamily);
   let {
     showSeparator
   } = gH();
-  return t.type !== Vf.FILE_PICKER ? null : jsxs(x, {
+  return t.type !== FileType.FILE_PICKER ? null : jsxs(x, {
     dataTestId: "file-picker-view",
     children: [jsx(ui, {
       searchQuery,
       setSearchQuery,
       onBack: function () {
-        t.type === Vf.FILE_PICKER && (p && t.parentType === Vf.TEMPLATE ? i({
-          type: Vf.TEMPLATE,
+        t.type === FileType.FILE_PICKER && (p && t.parentType === FileType.TEMPLATE ? i({
+          type: FileType.TEMPLATE,
           libraryKey: p,
           parentView: {
-            type: Vf.ALL
+            type: FileType.ALL
           }
         }) : (i({
-          type: Vf.ALL
+          type: FileType.ALL
         }), f(null), g(null)));
       },
       showCloseButton: !!e,
@@ -1486,7 +1486,7 @@ function tE({
       status,
       debouncedSearchQuery,
       files
-    }), t.parentType === Vf.TEMPLATE ? jsx(tr, {}) : jsx(tn, {})]
+    }), t.parentType === FileType.TEMPLATE ? jsx(tr, {}) : jsx(tn, {})]
   });
 }
 function tT({
@@ -1498,7 +1498,7 @@ function tT({
     scrollPosition,
     scrollRef,
     onScroll
-  } = d$(Vf.FILE_PICKER);
+  } = d$(FileType.FILE_PICKER);
   let {
     onShowSeparatorScroll
   } = gH();
@@ -1530,7 +1530,7 @@ function tw({
   file: e
 }) {
   let t = selectCurrentUser();
-  let [i, r] = useAtomValueAndSetter(oQ);
+  let [i, r] = useAtomValueAndSetter(genericNullAtomFamily);
   let {
     disabled,
     tooltipText
@@ -1603,8 +1603,8 @@ function tj({
     searchQuery,
     setSearchQuery
   } = $N();
-  let [r, a] = useAtomValueAndSetter(bY);
-  let o = !!(r.type === Vf.TEMPLATE_PICKER && r.figjamEntryPointData);
+  let [r, a] = useAtomValueAndSetter(fileTypeAtom);
+  let o = !!(r.type === FileType.TEMPLATE_PICKER && r.figjamEntryPointData);
   let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED) || isInteractionPathCheck();
   return jsxs(x, {
     dataTestId: "template-picker-view",
@@ -1618,8 +1618,8 @@ function tj({
       setSearchQuery,
       onBack: function () {
         a({
-          type: Vf.FILE_PICKER,
-          parentType: Vf.TEMPLATE_PICKER
+          type: FileType.FILE_PICKER,
+          parentType: FileType.TEMPLATE_PICKER
         });
       },
       showCloseButton: !!e,
@@ -1642,7 +1642,7 @@ function tI({
     searchQueryResult,
     requestLoadMore
   } = $N();
-  let o = useAtomWithSubscription(ux);
+  let o = useAtomWithSubscription(nullAtomFamily);
   let {
     showSeparator
   } = gH();
@@ -1683,7 +1683,7 @@ function tN() {
     scrollPosition,
     scrollRef,
     onScroll
-  } = d$(Vf.TEMPLATE_PICKER);
+  } = d$(FileType.TEMPLATE_PICKER);
   let {
     showSeparator,
     onShowSeparatorScroll
@@ -1897,17 +1897,17 @@ function tR({
 export function $$tD0({
   showCloseButton: e
 }) {
-  let t = useAtomWithSubscription(bY);
-  let i = Xr(VZ);
-  let r = Xr(Ei);
-  let d = Xr(OR);
-  let c = Xr(xw);
+  let t = useAtomWithSubscription(fileTypeAtom);
+  let i = Xr(selectionAtomFamily);
+  let r = Xr(draftModeAtomFamily);
+  let d = Xr(orgAtom);
+  let c = Xr(resetStateAtom);
   let u = Gi();
   switch (useEffect(() => () => {
     d("");
     c();
   }, [c, d]), t.type) {
-    case Vf.ALL:
+    case FileType.ALL:
       return jsx(ec, {
         showCloseButton: e,
         closePicker: () => {
@@ -1915,30 +1915,30 @@ export function $$tD0({
           i(!1);
         }
       });
-    case Vf.ORG:
+    case FileType.ORG:
       if (u?.type !== "org") throw Error("User is not allowed to browse org templates");
       return jsx(tm, {
         currentOrg: u.entity
       });
-    case Vf.TEAM:
+    case FileType.TEAM:
       if (!u) throw Error("User is not allowed to browse team templates");
       return jsx(t_, {
         teamId: t.teamId,
         displayName: t.displayName
       });
-    case Vf.TEMPLATE:
+    case FileType.TEMPLATE:
       return jsx(to, {
         libraryKey: t.libraryKey
       });
-    case Vf.HUB_FILE:
+    case FileType.HUB_FILE:
       return jsx(ef, {
         shelfId: t.shelfId
       });
-    case Vf.FILE_PICKER:
+    case FileType.FILE_PICKER:
       return jsx(tE, {
         showCloseButton: e
       });
-    case Vf.TEMPLATE_PICKER:
+    case FileType.TEMPLATE_PICKER:
       return jsx(tj, {
         showCloseButton: e
       });

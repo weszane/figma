@@ -1,4 +1,5 @@
 import eA from 'classnames';
+import { noop } from 'lodash-es';
 import { Component, createRef, forwardRef, useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
@@ -6,7 +7,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { reportError } from '../905/11';
 import { fetchContactsOptimist } from '../905/14223';
 import { TabCategory } from '../905/42189';
-import { d as _$$d } from '../905/44199';
+import { baseErrorSeverity } from '../905/44199';
 import { ProductStatus } from '../905/54385';
 import { s as _$$s2 } from '../905/58247';
 import { A as _$$A19 } from '../905/61817';
@@ -34,7 +35,7 @@ import { gI } from '../905/277373';
 import { Z as _$$Z2 } from '../905/279476';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { RadioInputRoot, RadioInputOption } from '../905/308099';
+import { RadioInputOption, RadioInputRoot } from '../905/308099';
 import { v as _$$v2 } from '../905/318279';
 import { MediaQuerySvgComponent } from '../905/331623';
 import { RecordingScrollContainer } from '../905/347284';
@@ -99,8 +100,6 @@ import { debounce } from '../905/915765';
 import { Ay as _$$Ay, iu as _$$iu, Ql } from '../905/918143';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
 import { Legend } from '../905/932270';
-import { noop } from 'lodash-es';
-;
 import { styleBuilderInstance } from '../905/941192';
 import { A as _$$A20 } from '../905/972270';
 import { TextWithTruncation } from '../905/984674';
@@ -139,15 +138,15 @@ import { isValidEmail } from '../figma_app/416935';
 import { throwTypeError } from '../figma_app/465776';
 import { getPluginWidgetLabel, mapFileTypeToEnum } from '../figma_app/471982';
 import { SimpleComponentType } from '../figma_app/504088';
-import { Dl, fd, fy, gD, Ij, pm, Qi, R8, se, uX, Vp, wx, zn } from '../figma_app/559491';
+import { publishPluginVersionThunk, unpublishedWidgetsQuery, updateMetadata, updateStatus, clearMetadataAndStatus, clearMetadata, mergePublishedPluginThunk, updatePublishedPluginThunk, unpublishedPluginsQuery, getPublishedResourceThunk, updatePluginVersionThunk, setPluginPublisherRoleThunk, updatePluginRoleThunk } from '../figma_app/559491';
 import { isAcceptedPublisher, isAnyPublisher, sendPublisherInvites } from '../figma_app/564095';
-import { countEnabledFeatures, determinePublisherType, isCreator, isSameWorkspace, getDebugWorkspaceInfo, getWorkspaceName, getPublisherWorkspace, getValidAuthorsForPlugin, needsToAcceptCommunityTOS } from '../figma_app/599979';
+import { countEnabledFeatures, determinePublisherType, getDebugWorkspaceInfo, getPublisherWorkspace, getValidAuthorsForPlugin, getWorkspaceName, isCreator, isSameWorkspace, needsToAcceptCommunityTOS } from '../figma_app/599979';
 import { fI } from '../figma_app/626177';
 import { BaseLinkComponent, BigTextInputForwardRef, SecureLink } from '../figma_app/637027';
 import { jE } from '../figma_app/639088';
 import { canAdminOrg, canMemberOrg, getPermissionsState } from '../figma_app/642025';
 import { getStatusOrDefault, MAX_TAGLINE_LENGTH, MAX_TAGS_PER_FEED } from '../figma_app/740025';
-import { Z as _$$Z } from '../figma_app/761870';
+import { getAllAutocompleteEmails } from '../figma_app/761870';
 import { isResourceApprovedPublic, isResourcePendingPublishing } from '../figma_app/777551';
 import { parsePxInt } from '../figma_app/783094';
 import { getAnnualPriceString, isNotInteger, isPriceOutOfRange, MIN_PRICE } from '../figma_app/808294';
@@ -321,7 +320,7 @@ let eF = registerModal(e => {
 let eq = 'playground_file_row--playgroundFileSelect--AKzzs';
 let e$ = 'playground_file_row--ui3--61px6';
 function eZ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     resourceId
   } = e;
@@ -479,7 +478,7 @@ function e5({
   revertVersionCallback: l,
   removeFileCallback: d
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = t ? getPluginVersion(t) : pluginMetadata;
   let p = n === _$$J2.Actions.NOOP && i && i.id !== u.playground_file_version_id;
   let m = t && n === _$$J2.Actions.SET && a?.key === u.playground_fig_file?.key;
@@ -544,13 +543,13 @@ let e9 = function ({
   isWidget: n,
   error: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useRef(null);
   let c = useRef(null);
   let [u, p] = useState(!c.current?.value);
   let m = getUserId();
   let h = (i, n, r) => {
-    l(fy({
+    l(updateMetadata({
       id: e,
       metadata: {
         ...t,
@@ -843,22 +842,22 @@ function tx({
 }) {
   if (!isValidEmail(e)) {
     return {
-      state: _$$d.ERROR,
+      state: baseErrorSeverity.ERROR,
       content: e
     };
   }
   let a = t[e] ?? e;
   return tE(t, n.creator, n.plugin_publishers).has(e) ? {
-    state: _$$d.ERROR,
+    state: baseErrorSeverity.ERROR,
     content: a
   } : n.roles.is_public || n.roles.org == null || !r || r.id !== n.roles.org.id ? {
-    state: _$$d.OK,
+    state: baseErrorSeverity.OK,
     content: a
   } : isEmailAllowed(i, a) ? {
-    state: _$$d.ERROR,
+    state: baseErrorSeverity.ERROR,
     content: a
   } : {
-    state: _$$d.OK,
+    state: baseErrorSeverity.OK,
     content: a
   };
 }
@@ -931,7 +930,7 @@ function tO({
   publishedPlugin: l,
   closePluginPublishModal: d
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useDropdownState();
   let p = t === PublisherRole.OWNER ? [tR(PublisherRole.OWNER)] : [tR(PublisherRole.PUBLISHER)];
   t !== PublisherRole.OWNER && (!i && a && p.unshift(tR(PublisherRole.OWNER)), p.push({
@@ -966,7 +965,7 @@ function tO({
             resourceName: o,
             isWidget: l.is_widget,
             onConfirm: () => {
-              c(wx({
+              c(setPluginPublisherRoleThunk({
                 role: t,
                 userId: e.id,
                 resource: l
@@ -975,7 +974,7 @@ function tO({
             onCancel: () => {}
           },
           showModalsBeneath: !0
-        })) : (c(wx({
+        })) : (c(setPluginPublisherRoleThunk({
           role: t,
           userId: e.id,
           resource: l
@@ -1064,7 +1063,7 @@ function tM({
     errorMessage: ''
   });
   let [f, _] = useState(!1);
-  let A = useDispatch();
+  let A = useDispatch<AppDispatch>();
   function y(t) {
     return tx({
       email: t,
@@ -1078,7 +1077,7 @@ function tM({
     A(fetchContactsOptimist());
   }, [A]);
   useEffect(() => {
-    m !== PageTypeEnum.RESOURCE_PAGE && A(uX({
+    m !== PageTypeEnum.RESOURCE_PAGE && A(getPublishedResourceThunk({
       resourceId: d.id,
       resourceType: d.is_widget ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN
     }));
@@ -1142,7 +1141,7 @@ function tM({
           tokens: [...e.tokens, y(e.inputValue)],
           errorMessage: e.errorMessage
         } : e;
-        let i = _$$Z(t);
+        let i = getAllAutocompleteEmails(t);
         _(!0);
         sendPublisherInvites(d, i).then(({
           resource: e,
@@ -1158,11 +1157,11 @@ function tM({
               return n.has(t);
             }).map(e => ({
               ...e,
-              state: _$$d.ERROR
+              state: baseErrorSeverity.ERROR
             })),
             errorMessage: ''
           });
-          A(Qi({
+          A(mergePublishedPluginThunk({
             publishedPlugins: [e],
             src: 'PluginPublishModalPermissionsTabContents.onSubmit'
           }));
@@ -1974,7 +1973,7 @@ class iW extends Component {
     } = {}) => {
       let i = () => {
         let e = this.props.publishingState.status;
-        (e.code === UploadStatusEnum.SUCCESS || e.code === UploadStatusEnum.FAILURE) && this.props.dispatch(Ij({
+        (e.code === UploadStatusEnum.SUCCESS || e.code === UploadStatusEnum.FAILURE) && this.props.dispatch(clearMetadataAndStatus({
           id: this.getLocalFileIdOrPluginId()
         }));
         trackEventAnalytics('plugin_publish_modal_close', {
@@ -2043,7 +2042,7 @@ class iW extends Component {
           resourceId: this.getLocalFileIdOrPluginId()
         });
       }
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2053,7 +2052,7 @@ class iW extends Component {
     }, 200);
     this.updateCreatorPolicy = e => {
       let t = isStrippedHtmlEmpty(e) ? '' : e;
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2074,7 +2073,7 @@ class iW extends Component {
       });
     };
     this.updatePluginPublishingMetadata = (e, t) => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: e,
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2083,7 +2082,7 @@ class iW extends Component {
       }));
     };
     this.clearOtherError = () => {
-      this.props.dispatch(gD({
+      this.props.dispatch(updateStatus({
         id: this.getLocalFileIdOrPluginId(),
         status: {
           code: UploadStatusEnum.EDIT
@@ -2105,7 +2104,7 @@ class iW extends Component {
     };
     this.isPrivateResource = () => this.state.roleToPublishAs === PublisherType.ORG && !!this.getOrgToPublishTo();
     this.onTagsChanged = e => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2115,7 +2114,7 @@ class iW extends Component {
       this.isInvalidTagError() && this.clearOtherError();
     };
     this.onCategoryChanged = e => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2124,7 +2123,7 @@ class iW extends Component {
       }));
     };
     this.onPublishingMetadataAuthorChange = e => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2133,7 +2132,7 @@ class iW extends Component {
       }));
     };
     this.onCommentsSettingChange = () => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2143,7 +2142,7 @@ class iW extends Component {
     };
     this.onPaidSettingChange = () => {
       let e = this.props.publishingState.metadata.isPaid;
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2157,7 +2156,7 @@ class iW extends Component {
       let t = this.props.publishingState.metadata.price;
       let i = this.props.publishingState.metadata.annualDiscount;
       !i && t && (i = 20);
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2167,7 +2166,7 @@ class iW extends Component {
       }));
     };
     this.onSubscriptionSettingChange = e => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2294,7 +2293,7 @@ class iW extends Component {
         }, {
           forwardToDatadog: !0
         });
-        this.props.dispatch(Dl({
+        this.props.dispatch(publishPluginVersionThunk({
           pluginId: i,
           localFileId: this.props.localPlugin.localFileId,
           pluginVersion: {
@@ -2339,7 +2338,7 @@ class iW extends Component {
         }, {
           forwardToDatadog: !0
         });
-        this.props.dispatch(Vp({
+        this.props.dispatch(updatePluginVersionThunk({
           resource: {
             ...this.props.publishedPlugin,
             comments_setting: metadata.commentsSetting,
@@ -2387,14 +2386,14 @@ class iW extends Component {
       let a = !e.blockPublishingOnToS;
       let s = hasRoleOrOrgChanged(this.props.publishedPlugin, r);
       let o = isCreator(this.props.publishedPlugin, this.props.user.id) || this.props.isRepublishingUnpublishedPlugin;
-      s && o && this.props.dispatch(zn({
+      s && o && this.props.dispatch(updatePluginRoleThunk({
         pluginId: n,
         role: r,
         agreedToTos: a,
         isWidget: this.isWidget()
       }));
       let l = this.state.roleToPublishAs === PublisherType.PUBLIC ? t.map(e => e.id) : [];
-      this.props.dispatch(R8({
+      this.props.dispatch(updatePublishedPluginThunk({
         pluginId: n,
         ...(i ? {
           tags: e.tags,
@@ -2451,7 +2450,7 @@ class iW extends Component {
         }
       })();
       if (!i) {
-        this.props.dispatch(fy({
+        this.props.dispatch(updateMetadata({
           id: this.getLocalFileIdOrPluginId(),
           metadata: {
             ...this.props.publishingState.metadata,
@@ -2471,7 +2470,7 @@ class iW extends Component {
           e.getContext('2d').drawImage(t, 0, 0);
           let i = G_(e.toDataURL('image/png'));
           this.unpublishedWidgetCardRef.current?.blur();
-          this.props.dispatch(fy({
+          this.props.dispatch(updateMetadata({
             id: this.getLocalFileIdOrPluginId(),
             metadata: {
               ...this.props.publishingState.metadata,
@@ -2486,7 +2485,7 @@ class iW extends Component {
       r.readAsDataURL(n);
     };
     this.removeSnapshotUploadOnDelete = e => {
-      e.keyCode === 8 && this.props.dispatch(fy({
+      e.keyCode === 8 && this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2516,7 +2515,7 @@ class iW extends Component {
       }).format(new Date(e.created_at));
     };
     this.updateCreators = e => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2561,7 +2560,7 @@ class iW extends Component {
     };
     this.onOrgMsaChange = e => {
       let t = e.currentTarget.checked;
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2582,7 +2581,7 @@ class iW extends Component {
       }));
     };
     this.onPlaygroundFileSelect = e => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2592,7 +2591,7 @@ class iW extends Component {
       }));
     };
     this.onPlaygroundFileUpdateVersion = () => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2601,7 +2600,7 @@ class iW extends Component {
       }));
     };
     this.onPlaygroundFileRevertVersion = () => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2610,7 +2609,7 @@ class iW extends Component {
       }));
     };
     this.onPlaygroundFileRemoveFile = () => {
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2629,7 +2628,7 @@ class iW extends Component {
           price: t
         }
       });
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -2646,7 +2645,7 @@ class iW extends Component {
           annualDiscount: t
         }
       });
-      this.props.dispatch(fy({
+      this.props.dispatch(updateMetadata({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
@@ -3492,18 +3491,18 @@ let iY = connect((e, t) => {
     isRepublishingUnpublishedPlugin: !d.id && !!c
   };
 })(iW);
-let $$iq0 = registerModal(e => {
+export let PluginPublishModal = registerModal(e => {
   let {
     Sprig
   } = useSprigWithSampling();
   let [{
     status: i,
     data: n
-  }] = setupResourceAtomHandler(se());
+  }] = setupResourceAtomHandler(unpublishedPluginsQuery());
   let [{
     status: a,
     data: s
-  }] = setupResourceAtomHandler(fd());
+  }] = setupResourceAtomHandler(unpublishedWidgetsQuery());
   let o = !!e.publishedPluginId;
   let l = _$$A2(e.publishedPluginId ?? '', o);
   return i !== 'loading' && a !== 'loading' && l.loaded ? jsx(iY, {
@@ -3515,7 +3514,7 @@ let $$iq0 = registerModal(e => {
   }) : jsx(LoadingSpinner, {});
 }, 'PluginPublishModal', ModalSupportsBackground.YES);
 (n || (n = {})).PublishModalPostFormFlow = function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectUser();
   let {
     addCommunityProfileUser,
@@ -3532,10 +3531,10 @@ let $$iq0 = registerModal(e => {
   });
   let c = () => {
     t(hideModal());
-    t(Ij({
+    t(clearMetadataAndStatus({
       id: e.localFileIdOrPluginId
     }));
-    t(pm({
+    t(clearMetadata({
       id: e.localFileIdOrPluginId
     }));
   };
@@ -3632,4 +3631,4 @@ let $$iq0 = registerModal(e => {
   }) : jsx(Fragment, {});
 };
 let i$ = n.PublishModalPostFormFlow;
-export const o = $$iq0;
+export const o = PluginPublishModal;

@@ -190,7 +190,7 @@ export function $$D1(e) {
   });
 }
 function F(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = MX();
   let i = e.invoices && hX(e.invoices);
   let l = e.org.bigma_enabled && e.orgUser.license_admin && e.orgUser.permission !== FUserRoleType.ADMIN;
@@ -240,7 +240,7 @@ function F(e) {
   });
 }
 function B(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = e.orgUser.permission === FUserRoleType.ADMIN;
   let i = RG();
   let l = MX();

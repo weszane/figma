@@ -61,7 +61,7 @@ function V(e) {
   let V = A?.id === user.userID;
   let [q, z] = useState(!1);
   let Z = useRef(null);
-  let $ = useDispatch();
+  let $ = useDispatch<AppDispatch>();
   let K = "prototype" === useSelector(e => e.selectedView).view;
   let W = jsx(Ro, {
     entity: {
@@ -358,7 +358,7 @@ export function $$z0(e) {
     hasBorder,
     hidePopover
   } = e;
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let f = callMetadata && jsx(_$$i, {
     userId: user.userID,
     userName: user.name,

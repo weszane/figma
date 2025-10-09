@@ -7,7 +7,7 @@ import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
 export function $$d1({
   disabled: e = !1
 } = {}) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentFile();
   let c = useSelector(e => e.fileVersion);
   let u = useSelector(e => e.loadingState);

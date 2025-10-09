@@ -11,7 +11,7 @@ import { KeyCodes } from "../905/63728";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { LoadingOverlay } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { cL } from "../905/748726";
+import { autocompleteReset } from "../905/748726";
 import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { u as _$$u } from "../1e926454/858319";
@@ -25,7 +25,7 @@ import { sendRoleInvites } from "../905/351260";
 import { bp, Wj } from "../905/913057";
 import { initialDomainsState } from "../905/158283";
 import { AccessLevelEnum } from "../905/557142";
-import { Z as _$$Z } from "../figma_app/761870";
+import { getAllAutocompleteEmails } from "../figma_app/761870";
 import { e as _$$e } from "../905/393279";
 import { o6, gy } from "../905/986349";
 import { r, X as _$$X } from "../905/308709";
@@ -139,7 +139,7 @@ export function $$ee0(e) {
     prepopulateEmail,
     initialView
   } = e;
-  let $ = useDispatch();
+  let $ = useDispatch<AppDispatch>();
   let G = selectUser();
   let V = useSelector(e => e.autocomplete);
   let z = useSelector(e => e.contacts);
@@ -193,7 +193,7 @@ export function $$ee0(e) {
     orgDomains: en
   });
   let ef = e => {
-    let t = _$$Z(e);
+    let t = getAllAutocompleteEmails(e);
     $(sendRoleInvites({
       emails: t,
       resourceType: FResourceCategoryType.TEAM,
@@ -207,7 +207,7 @@ export function $$ee0(e) {
   };
   let eg = () => {
     $(hideModal());
-    $(cL());
+    $(autocompleteReset());
   };
   let [eh, ex] = useState(initialView || 0);
   let eb = () => 0 === eh ? jsx("div", {
@@ -293,7 +293,7 @@ export function $$ee0(e) {
             onInviteLevelChange: setInviteLevel,
             onSubmit: e => {
               if (er && er.domain_capture && en && en.domains.length > 0) {
-                let t = _$$Z(e).filter(e => isValidEmail(e) && !checkDomainExists(en.domains, e));
+                let t = getAllAutocompleteEmails(e).filter(e => isValidEmail(e) && !checkDomainExists(en.domains, e));
                 if (er?.invite_whitelist_guest_invite_setting == null && t.length > 0) {
                   $(showModalHandler({
                     type: confirmOrgGuestInviteModal,

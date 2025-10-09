@@ -10,11 +10,11 @@ import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, normalizeValue, isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { paintManager, isGradientType } from "../figma_app/385874";
 import { useSelectionProperty } from "../905/275640";
-import { bL } from "../figma_app/852050";
+import { getModeValue } from "../figma_app/852050";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { AH } from "../905/571648";
-import { WH } from "../figma_app/836943";
+import { useStyleInfo } from "../figma_app/836943";
 import { E_ } from "../figma_app/177697";
 import { UZ } from "../figma_app/687767";
 import { useEffectiveThemeId } from "../figma_app/226737";
@@ -48,7 +48,7 @@ export function $$A7(e) {
   let t = useEffectiveThemeId();
   let r = UZ(t);
   let i = useAtomWithSubscription(E_);
-  let a = bL(i?.varId || "", r);
+  let a = getModeValue(i?.varId || "", r);
   return useMemo(() => i && a && a.type === VariableDataType.COLOR ? $$v4(a.value) : isValidValue(e) ? e : $$v4(blackColor), [i, a, e]);
 }
 export function $$x0() {
@@ -81,7 +81,7 @@ export function $$C6(e, t, r) {
   });
 }
 export function $$w5(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useAtomWithSubscription(E_);
   return useCallback(async n => {
     let i = await t(loadSharedVariableThunk(n));
@@ -92,12 +92,12 @@ export function $$w5(e) {
   }, [t, r, e]);
 }
 export function $$O3(e, t, r) {
-  let i = WH(t ?? null, r ?? null, e);
+  let i = useStyleInfo(t ?? null, r ?? null, e);
   let a = AH(i?.key ?? null, normalizeValue(r));
   return useMemo(() => i?.isLocal ? i : a?.status === "loaded" ? a.data : null, [i, a]);
 }
 export function $$R9(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = useAtomWithSubscription(E_);
   let s = useSceneGraphSelector();
   return useCallback((n, i) => {

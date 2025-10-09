@@ -114,13 +114,13 @@ export function $$R0(e) {
 }
 let M = setupRemovableAtomFamily(() => atom(Wy.SAFE));
 export function $$P1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     toggleManageMemoryModal,
     closeManageMemoryModal
   } = function () {
     let e = useSelector(e => e.modalShown?.type === gG.type);
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = useCallback(() => {
       let n = P3();
       trackEventAnalytics("toggle_manage_memory_modal", {

@@ -44,7 +44,7 @@ export function generateFavoriteResourceMenuItems({
   sections,
   userHasMaxFavorites
 }: FavoriteResourceParams): MenuItem[] {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const isMobileNavShown = useSelector((state: any) => state.mobileNavShown);
   const collapsedCustomSections = useSelector((state: any) => state.favorites.collapsedCustomSections);
 

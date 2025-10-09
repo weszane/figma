@@ -19,7 +19,7 @@ export function $$h1({
   libraryKey: p,
   ariaLabelledBy: _,
 }) {
-  let h = useDispatch()
+  let h = useDispatch<AppDispatch>()
   let g = useDropdownState()
   let f = "auto_inherit_mode_string"
   let E = e.modes ? e.modes[0].name : ""

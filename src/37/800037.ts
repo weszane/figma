@@ -18,13 +18,13 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { d as _$$d } from "../905/954754";
 import { o as _$$o } from "../905/609215";
-import { BQ, pN } from "../figma_app/852050";
+import { getResolvedVariableValue, getSubscribedVariablesResource } from "../figma_app/852050";
 import { R as _$$R } from "../905/69216";
 import { Yc, lC, LV } from "../905/820169";
 import { he, Cq, aA, tz, J4, TL, uX, d9, HC, sO, q2, a1, $$if as _$$$$if, kl, DE, tJ, yZ, er as _$$er, I0, yy, Ub, Q6, _z, bU, wL, ZX, N_ } from "../figma_app/632975";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { Y as _$$Y } from "../vendor/435990";
-import { eF } from "../figma_app/394327";
+import { isLocallySoftDeleted } from "../figma_app/394327";
 import { J2, wG } from "../905/331989";
 import { getPathLeaf } from "../905/782020";
 import { getLocalVariableInfo, getLocalVariableSetInfo } from "../figma_app/633080";
@@ -60,14 +60,14 @@ function F({
   let m = e && t && getPathLeaf(e.name) || l && l.name;
   let _ = m ? r && t ? m + ": " + he(t, r) : m : getI18nString("proto.expression_builder_entry.missing");
   let g = a ? J2.SELECTED : l ? J2.COMPONENT : J2.DEFAULT;
-  let O = BQ(e?.node_id);
+  let O = getResolvedVariableValue(e?.node_id);
   let h = l ? Cq(l) : O;
   return jsx("span", {
     children: jsx(wG, {
       text: _,
       colorTheme: g,
       thumbnailValue: h,
-      isDeleted: !!e && eF(e),
+      isDeleted: !!e && isLocallySoftDeleted(e),
       onClick: e => {
         o.update(() => {
           e.shiftKey || e.metaKey || $setSelection($createRangeSelection());
@@ -670,7 +670,7 @@ function eh({
         if (V(r)) {
           let e = r.__variable;
           let t = r.__variableCollection;
-          return e && eF(e) || !e || !t ? [] : function (e, t) {
+          return e && isLocallySoftDeleted(e) || !e || !t ? [] : function (e, t) {
             let r = [{
               type: Yc.SECTION_HEADER,
               name: "Modes"
@@ -773,7 +773,7 @@ function eh({
       l(t?.trim() ?? null);
     } else if ($isNodeSelection(e)) {
       let t = e.getNodes();
-      1 === t.length && V(t[0]) && t[0].__variable && eF(t[0].__variable) ? l("") : l(null);
+      1 === t.length && V(t[0]) && t[0].__variable && isLocallySoftDeleted(t[0].__variable) ? l("") : l(null);
     } else logError("expressions", "somehow hitting a GridSelection or null selection");
     return !1;
   }, [t, n, o, l]);
@@ -1068,7 +1068,7 @@ export function $$ev0({
   }, [el, er, eE]);
   let ev = useMemo(() => eE.filter(e => e.type === Yc.VARIABLES).map(e => e.items[0]), [eE]);
   let eN = useMemo(() => getFeatureFlags().ds_variable_props_proto ? eb.filter(e => e.type === Yc.COMPONENT_PROPS).map(e => e.items[0]) : [], [eb]);
-  let eI = pN();
+  let eI = getSubscribedVariablesResource();
   let ey = eI.data?.libraryVariables;
   let eS = useCallback((e, t) => {
     let r = [-1, -1];

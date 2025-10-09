@@ -10,7 +10,7 @@ let {
   useRegisterMenu
 } = createRegisterMenuEvent();
 export function $$u1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return {
     open: useCallback(() => {
       A() ? open() : e(showDropdownThunk({

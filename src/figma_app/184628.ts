@@ -161,7 +161,7 @@ export function $$X1({
       e.sourceCode = t;
     }), G());
   }, [e, x, W, G]);
-  let Q = useDispatch();
+  let Q = useDispatch<AppDispatch>();
   pO();
   let ee = h3(_);
   let et = useMemo(() => new Mq(), []);

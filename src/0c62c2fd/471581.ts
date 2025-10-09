@@ -58,7 +58,7 @@ function w({
   let [P, L] = useState(!1);
   let [D, M] = useState(!1);
   let [B, U] = useState(window.innerHeight);
-  let W = useDispatch();
+  let W = useDispatch<AppDispatch>();
   let $ = error?.code === dl.UNINITIALIZED_STRIPE_ELEMENTS_ERROR;
   let G = () => W(hideModal());
   _$$P(({

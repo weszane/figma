@@ -193,7 +193,7 @@ let $$X0 = registerModal(function (e) {
     initialX,
     initialY
   } = e;
-  let U = useDispatch();
+  let U = useDispatch<AppDispatch>();
   let {
     singleSelectedNode,
     openFileKey,

@@ -38,7 +38,7 @@ export function $$E0({
   elementBesideName: P
 }) {
   let O = assertNotNullish(useContext($$b3), "Must use `FacetedSearchPreviewRowBase` inside `<SearchRowContext.Provider>");
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let L = useAtomWithSubscription(searchInputAtom);
   let F = useSelector(e => e.currentUserOrgId);
   let M = _$$S(F)?.searches;

@@ -3,7 +3,7 @@ import { V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
 if (443 == require.j) { }
 export function $$o0(e, t) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return () => n(showModalHandler({
     type: V,
     data: {

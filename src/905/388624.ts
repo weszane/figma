@@ -330,7 +330,7 @@ function generateDropdownItems(authedUsers: any, authedProfilesById: any, permis
  */
 function WorkspaceSwitcherDropdown() {
   // Original function: z
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const isDropdownShown = useSelector((state: any) => state.dropdownShown?.type === DROPDOWN_TYPE);
   const selectedView = useSelector((state: any) => state.selectedView);
   const targetRect = useSelector((state: any) => state.dropdownShown?.data?.targetRect);

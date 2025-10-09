@@ -12,7 +12,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
-import { h6 } from "../figma_app/852050";
+import { getPageLevelModes } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { getLibraryNames } from "../905/506188";
 import { trackDefinedFileEventWrapper } from "../figma_app/2590";
@@ -33,7 +33,7 @@ let L = l6;
 let D = c$;
 let R = {};
 export function $$M1() {
-  let e = h6() || R;
+  let e = getPageLevelModes() || R;
   let t = iR();
   let n = useMemo(() => {
     let n = m()(t, (e, t) => ({
@@ -95,7 +95,7 @@ export function $$M1() {
   let I = b?.setKey;
   let j = b?.modeData.collectionID;
   let N = useMemo(() => I && f(I), [I, f]);
-  let T = useDispatch();
+  let T = useDispatch<AppDispatch>();
   return {
     localVariableSets: h,
     allVariableSets: a,
@@ -209,7 +209,7 @@ function U({
   actionIndexPath: n,
   ariaLabelledBy: i
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let l = useDropdownState();
   let s = "set-variable-mode--select-variable-set-" + n;
   let {
@@ -249,7 +249,7 @@ function $({
   actionIndexPath: a,
   ariaLabelledBy: l
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let d = useDropdownState();
   let c = "set-variable-mode--select-variable-mode-" + a;
   let {

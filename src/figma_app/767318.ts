@@ -18,7 +18,7 @@ import { N as _$$N } from "../figma_app/673778";
 import { retrieveVariableCollection } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { EditorPreferencesApi } from "../figma_app/740163";
-import { ol } from "../figma_app/852050";
+import { getExtensionMappings } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { getLibraryNames } from "../905/506188";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -42,12 +42,12 @@ export function $$G0(e) {
     recordingKey,
     consumptionTarget
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let {
     Sprig
   } = useSprigWithSampling();
   let _ = function (e, t, r) {
-    let o = useDispatch();
+    let o = useDispatch<AppDispatch>();
     let d = getObservableOrFallback(EditorPreferencesApi().showGuids);
     let u = t === Jo.FOCUS_NODE;
     let _ = hZ(t);
@@ -202,7 +202,7 @@ export function $$G0(e) {
       return e;
     }, {}), [O, U, G]);
     let z = useMemo(() => Object.keys(H).sort(), [H]);
-    let W = ol();
+    let W = getExtensionMappings();
     return useMemo(() => {
       let e = [];
       for (let [t, n] of (Object.values(O).length > 0 && e.push({

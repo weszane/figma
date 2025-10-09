@@ -13,7 +13,7 @@ export let $$h0 = "text-panel-container";
 export function $$m1(e) {
   let [t, r] = useState(!1);
   let m = useNavigateToViewport();
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   if (useSingleEffect(() => {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();

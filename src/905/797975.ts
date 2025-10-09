@@ -207,7 +207,7 @@ function K({
   setSkippedExamples: e
 }) {
   let t = RL(JT.PUBLISH_LIBRARY_FOR_AI, Iq);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return jsxs("div", {
     className: "x78zum5 x193iq5w xdt5ytf x1cy8zhl x167g77z x1vcdrz3 xkh2ocl",
     children: [jsx("span", {

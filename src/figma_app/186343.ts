@@ -60,7 +60,7 @@ export function $$F7() {
       pageCount: t
     })));
   }();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = consumptionPaywallUtils.useShouldHideStarterCtaForOpenFile();
   return useCallback(n => {
     if (t && e) {

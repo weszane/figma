@@ -6,15 +6,7 @@ import { createOptimistThunk } from '../905/350402'
 import { ErrorEnum } from '../905/962579'
 import { getInitialOptions } from '../figma_app/169182'
 
-/**
- * Types for flash messages and actions
- */
-interface FlashMessage {
-  message: string
-  status: ErrorEnum
-  timeout?: number
-  id: number
-}
+
 
 interface FlashInitOptions {
   error?: string | { i18n: string, fallback_text?: string }
@@ -48,14 +40,14 @@ export const flashRemoveAllAction = createActionCreator('FLASH_REMOVE_ALL')
  * Handles adding/removing flash messages with timeout
  * (original: p)
  */
-export const handleFlash = createOptimistThunk<FlashMessage, number>(
+export const handleFlash = createOptimistThunk(
   /**
    * @param context - OptimistThunkContext
    * @param flash - FlashMessage
    * @returns flashId
    */
-  (context: OptimistThunkContext, flash: FlashMessage) => {
-    const state = context.getState()
+  (context, flash: any) => {
+    const state = context.getState() as any
     // Remove duplicate flash
     for (const key in state.flashes) {
       const existing = state.flashes[key]
@@ -89,7 +81,7 @@ export const FlashActions = {
     /**
      * @param context - OptimistThunkContext
      */
-    (context: OptimistThunkContext) => {
+    (context) => {
       const options: FlashInitOptions = getInitialOptions().flash
       if (!options)
         return
@@ -143,20 +135,20 @@ export const FlashActions = {
  * (original: $$m0)
  */
 export const handlePromiseError = createOptimistThunk((context, { promise, fallbackError }) => {
-    promise.catch(({ response }) => {
-      try {
-        const parsed = JSON.parse(response)
-        const msg = resolveMessage(
-          { ...parsed, data: { ...parsed.data, i18n: parsed.i18n } },
-          parsed.message,
-        )
-        context.dispatch(FlashActions.error(msg))
-      }
-      catch {
-        context.dispatch(FlashActions.error(fallbackError || getI18nString('general.an_error_occurred_while_performing_that_action')))
-      }
-    })
-  },
+  promise.catch(({ response }) => {
+    try {
+      const parsed = JSON.parse(response)
+      const msg = resolveMessage(
+        { ...parsed, data: { ...parsed.data, i18n: parsed.i18n } },
+        parsed.message,
+      )
+      context.dispatch(FlashActions.error(msg))
+    }
+    catch {
+      context.dispatch(FlashActions.error(fallbackError || getI18nString('general.an_error_occurred_while_performing_that_action')))
+    }
+  })
+},
 )
 
 export const Q = handlePromiseError // original: $$m0

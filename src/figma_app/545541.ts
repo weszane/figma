@@ -466,7 +466,7 @@ export function setupUserPluginPreferences() {
     codegenEnabled,
     pinnedPluginsEnabled
   } = getOrgPreferences();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const trackFileEvent = trackFileEventWithStore();
   const isEditorType = isDevHandoffEditorType();
   const canAccessFullDevMode = useCanAccessFullDevMode();

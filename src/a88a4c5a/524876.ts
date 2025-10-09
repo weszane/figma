@@ -69,7 +69,7 @@ let c = memo(e => {
 });
 let m = g;
 function J(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     attachments
   } = e;

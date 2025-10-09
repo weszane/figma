@@ -49,7 +49,7 @@ let U = "confirm_org_user_actions--bold--FUp4f";
 let F = "confirm_org_user_actions--spacing--ZBS-Z";
 let q = "confirm_org_user_actions--learnMoreLink--M---Z confirm_org_user_actions--link--kN9aV blue_link--blueLink--9rlnd";
 export let $$z2 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = isProrationBillingEnabledForCurrentPlan();
   let s = e.orgUserIds.length;
   let r = getI18nString("org_settings.remove_user_modal.title.users_only_text", {
@@ -120,7 +120,7 @@ export let $$z2 = registerModal(function (e) {
   });
 }, "OrgConfirmDeleteModal");
 function V(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = _$$q(Wq, !0);
   function s(e, t) {
     return 1 === e ? t ? renderI18nText("confirm_account_change.upgrade.all_licenses.description_p1.singular", {
@@ -515,7 +515,7 @@ let $$W1 = registerModal(function (e) {
   });
 }, "OrgConfirmAccountChangeModal");
 let $$H3 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("confirm_billing_group_change.title"),
     confirmText: getI18nString("confirm_billing_group_change.confirm_button"),
@@ -582,7 +582,7 @@ let $$Y0 = registerModal(function (e) {
   let t = e.selectedOrgJoinRequest;
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let r = useSelector(e => e.orgSamlConfig);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let [o, x] = useState();
   let b = `ORG_JOIN_REQUEST_APPROVE_${t}`;
   let v = o && o.requester_user.handle;

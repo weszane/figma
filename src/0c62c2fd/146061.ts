@@ -36,7 +36,7 @@ let O = "folder_move--warningContainer--MXpOB";
 export function $$M0(e) {
   let t;
   let r;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = _$$s();
   let g = useSelector(e => e.currentUserOrgId);
   let A = useSelector(e => null != g ? e.orgById[g] : null);

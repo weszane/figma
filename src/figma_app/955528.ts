@@ -274,7 +274,7 @@ export function $$Q9(e) {
   let t = pP(JT.SLIDES_REWRITE_TEXT);
   let r = t.state;
   let o = useLatestRef(r) !== r;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   useEffect(() => () => {
     l(VisualBellActions.dequeue({
       matchType: K

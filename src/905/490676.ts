@@ -12,7 +12,7 @@ import { hideModal } from "../905/156213";
 export function $$h0({
   title: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCallback(() => t(hideModal()), [t]);
   let h = useModalManager({
     open: !0,

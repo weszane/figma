@@ -15,7 +15,7 @@ const flyoutPropsAtom = atom(null) as PrimitiveAtom<any | null>
  * Original function: $$c1
  */
 export function useComponentFlyoutModal() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const modalShown = useSelector<AppState, AppState['modalShown']>(state => state.modalShown)
   const [flyoutProps, setFlyoutProps] = useAtomValueAndSetter(flyoutPropsAtom)
 

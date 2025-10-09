@@ -433,7 +433,7 @@ import { R as _$$R9 } from '../figma_app/32680';
 import { ActiveFileUsersForFileView, AddWorkspacePinnedFileView, AddWorkspacePinSearchFilesView, AddWorkspacePinSuggestedFilesView, AssetTransferReloadView, DraftsToMoveFoldersByUserId, EduOffboardingData, EnterpriseOrgMetaContentView, FileBrowserDraftsViewBarView, FileBrowserProjectPageTitleView, FileBrowserWorkspacePageTeamsView, FilesInProjectHighLimit, FolderBannerView, FolderCanView, FolderPageView, LimitedSpaceSharedProjectsView, NonEnterpriseOrgMetaContentView, PaginatedFigFeed, PinnedFiles, PlanConnectedProjectsForPlanUser, SharedWithYouResources, TeamById, TeamCanAdmin, TeamCanEdit, TeamFileLimitsInfoByProject, TeamPermissions, TeamRoleRequestView, TeamUpgradeBannerView, TeamUpgradePermissions, TeamUserStatusAndRequests, TrashedFilesPageView, UserFlagByName, UserProfilePageView, WorkspacePageMembersView, WorkspacePageView, WorkspacesDirectoryView, WorkspaceSuggestedPinsView } from '../figma_app/43951';
 import { CommunityPageType, isPlugin, UserRole } from '../figma_app/45218';
 import { b as _$$b6 } from '../figma_app/47801';
-import { rL as _$$rL } from '../figma_app/49598';
+import { createFileFromTemplateThunk } from '../figma_app/49598';
 import { c as _$$c8 } from '../figma_app/52714';
 import { FEditorType, mapFileTypeToEditorType, SITES_STRING } from '../figma_app/53721';
 import { t as _$$t9 } from '../figma_app/55043';
@@ -464,7 +464,7 @@ import { categoryBySlugQuery } from '../figma_app/188671';
 import { FAccessLevelType, FEntityType, FFileType, FMemberRoleType, FOrganizationLevelType, FOrganizationRoleType, FPaymentHealthStatusType, FPlanLimitationType, FPlanNameType, FProductAccessType, FResourceCategoryType, FStudentTeamStatusType, FTemplateCategoryType, FUserRoleType } from '../figma_app/191312';
 import { areColorsEqual, isColorDarkByLuminance, parseColor, whiteColor } from '../figma_app/191804';
 import { getSelectedViewUrl, isRecentsAndSharingView } from '../figma_app/193867';
-import { a6 as _$$a11 } from '../figma_app/198840';
+import { getHubFileVersionOrDefault } from '../figma_app/198840';
 import { getDirectoryWorkspaceId } from '../figma_app/198885';
 import { BU, jl, LK, SX, Xg } from '../figma_app/199513';
 import { NM } from '../figma_app/204891';
@@ -507,7 +507,7 @@ import { MAX_BANNER_CLICKS, MAX_CAROUSEL_MEDIA, MAX_DESCRIPTION_LENGTH2, MAX_TAG
 import { ResourceHubResourceRoute } from '../figma_app/354658';
 import { s$ as _$$s$ } from '../figma_app/361035';
 import { z as _$$z1 } from '../figma_app/369596';
-import { bE as _$$bE } from '../figma_app/375098';
+import { userTeamFlagPost } from '../figma_app/375098';
 import { V as _$$V3 } from '../figma_app/385855';
 import { getSelectedView, getSelectedViewType } from '../figma_app/386952';
 import { getCurrentQueryId, getSearchSessionIdFromSelector } from '../figma_app/387599';
@@ -548,7 +548,7 @@ import { uZ as _$$uZ, Jo, jU } from '../figma_app/544879';
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { S as _$$S0 } from '../figma_app/552746';
 import { sendAutosaveNotification } from '../figma_app/553184';
-import { pZ as _$$pZ } from '../figma_app/559491';
+import { getCommunityProfilePluginsThunk } from '../figma_app/559491';
 import { IW } from '../figma_app/563413';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { hK as _$$hK } from '../figma_app/570310';
@@ -588,7 +588,7 @@ import { Vh } from '../figma_app/692987';
 import { A as _$$A9, K as _$$K3 } from '../figma_app/694593';
 import { getTeamCountTypeForUpsell, shouldShowOrgUpsell, TeamCountType, dismissOrgUpsell } from '../figma_app/698052';
 import { EO } from '../figma_app/701982';
-import { w as _$$w5 } from '../figma_app/705249';
+import { isXrDebounceThresholdEnabledForUser } from '../figma_app/705249';
 import { CreateUpgradeAction, draftViews, EntityType, SidebarSection, TeamType, teamViews } from '../figma_app/707808';
 import { useResizeObserverRef } from '../figma_app/708845';
 import { q as _$$q2 } from '../figma_app/712384';
@@ -729,7 +729,7 @@ function eN({
   return !isExternalRestricted(t, s) && !isAndroidOrIphoneNotFigmaMobile && !(o || l);
 }
 function eO() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedViewType();
   return jsx(SidebarRow, {
     onClick: () => {
@@ -791,7 +791,7 @@ function e0(e) {
 }
 let e1 = 'go_to_admin_row--goToAdminRow--OPVDe';
 function e4(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCurrentPrivilegedPlan('GoToAdminRow').unwrapOr(null);
   let n = useSubscription(UserFlagByName, {
     name: 'initiated_first_resource_connection'
@@ -858,7 +858,7 @@ function e2(e) {
   });
 }
 function tt(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.orgUser.permission === FUserRoleType.ADMIN;
   let n = RG();
   let o = MX();
@@ -943,7 +943,7 @@ function tt(e) {
 }
 function ta(e) {
   let t = useSelector(e => e.currentTeamId);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return t ? jsx(SidebarRow, {
     'isSelected': e.selectedView && e.selectedView.view === 'team',
     'onClick': () => {
@@ -1121,7 +1121,7 @@ function tv(e) {
   }) : f;
 }
 let tN = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = jsx('span', {
     className: cssBuilderInstance.fontBold.$,
     children: e.sectionName
@@ -1154,7 +1154,7 @@ function tR() {
   return e && e?.type === tk ? e : null;
 }
 function tA(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = tR();
   if (r == null) return jsx(Fragment, {});
   let s = () => {
@@ -1207,7 +1207,7 @@ let tG = 'favorited_section--title--bWf4x ellipsis--ellipsis--Tjyfa';
 let tV = 'favorited_section--fileIconContainer--u8cZj';
 let tz = 'favorited_section--dialogTriggerButtonContainer--m7yPm';
 function tH(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(getCurrentUserOrg);
   if (!r) return null;
   let s = jsx('span', {
@@ -1281,7 +1281,7 @@ let rg = [{
   separator: !0
 }];
 function rh(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.selectedView);
   let s = _$$p4();
   let n = e.favoritedFile.file;
@@ -1361,7 +1361,7 @@ function rh(e) {
   });
 }
 function rx(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link_to_team'), () => {
@@ -1384,7 +1384,7 @@ function rx(e) {
   });
 }
 function rb(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(e.orgId !== null, () => getI18nString('file_browser.copy_link_to_workspace'), () => {
@@ -1409,7 +1409,7 @@ function rb(e) {
   });
 }
 function rv(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link_to_project'), () => {
@@ -1432,7 +1432,7 @@ function rv(e) {
   });
 }
 function ry(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link'), () => {
@@ -1455,7 +1455,7 @@ function ry(e) {
   });
 }
 function rj(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.orgId;
   let n = useSelector(e => e.currentTeamId);
   let o = e.favorite.team;
@@ -1554,7 +1554,7 @@ let rk = e => jsx('div', {
   children: e
 });
 function rR(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.currentUserOrgId);
   let n = useSelector(e => e.currentTeamId);
   let l = useSelector(e => e.dropdownShown);
@@ -1725,7 +1725,7 @@ let rP = e => jsx('div', {
   children: e
 });
 function rL(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.favorite.project;
   let n = useSelector(e => e.currentTeamId);
   let o = useSelector(e => e.currentUserOrgId);
@@ -1826,7 +1826,7 @@ function rW({
   });
 }
 function r$(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.currentTeamId);
   let n = useSelector(e => e.currentUserOrgId);
   let l = useSelector(e => e.dropdownShown);
@@ -1933,7 +1933,7 @@ function r$(e) {
   });
 }
 function rV(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.orgId;
   let n = useSelector(e => e.currentTeamId);
   let o = useSelector(e => e.dropdownShown);
@@ -2044,7 +2044,7 @@ let rz = (e, t) => {
   return a;
 };
 function rH(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.dragState);
   let n = useSelector(e => e.currentUserOrgId);
   let {
@@ -2280,7 +2280,7 @@ function rH(e) {
   });
 }
 function rq(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.currentTeamId);
   let n = useCurrentUserOrgId() ?? null;
   let o = sortFavoritedResources(e.favorites, e.order);
@@ -2603,7 +2603,7 @@ function rQ(e) {
   });
 }
 function rZ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.dragState);
   let n = useSelector(e => e.favorites.newCustomSectionIndex);
   let o = useSelector(e => e.favorites.favoritesCount);
@@ -2722,7 +2722,7 @@ function rZ(e) {
 }
 let at = registerModal(e => {
   let [t, r] = useState(null);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = Gs();
   let l = getUserId();
   let d = useSelector(e => e.teamUserByTeamId);
@@ -2826,7 +2826,7 @@ function ar(e) {
 }
 let as = 'favorited_drafts_to_move';
 function ai(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [r, o] = useState(!0);
   let l = getUserId();
   let d = useSelector(e => e.favorites.collapsedCustomSections);
@@ -2925,7 +2925,7 @@ function ai(e) {
 }
 function an(e) {
   let t = useSelector(e => e.currentTeamId);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return t ? jsx(SidebarRow, {
     isSelected: e.selectedView && e.selectedView.view === 'limitedTeamSharedProjects',
     onClick: () => {
@@ -2956,7 +2956,7 @@ function al() {
 function ad({
   hasWorkspaces: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.currentUserOrgId);
   let s = useSelector(e => e.selectedView);
   let n = useSelector(e => r ? e.orgById[r] : null);
@@ -3029,7 +3029,7 @@ function ap() {
 }
 let af = 'PRO_ADMIN_SETTINGS_LINK_ONBOARING_KEY';
 function ag(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.currentTeamId);
   let n = useTeamPlanUser();
   let o = useIsTeamAdminUser(n).unwrapOr(!1);
@@ -3188,7 +3188,7 @@ function a$(e) {
 let aG = 'upgrade_section--upgradeTextEmphasized--aQCr9';
 var aV = (e => (e[e.UPGRADE = 0] = 'UPGRADE', e[e.CREATE = 1] = 'CREATE', e))(aV || {});
 function az(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.type;
   let s = jsx('span', {
     className: aG,
@@ -3221,7 +3221,7 @@ function az(e) {
 function aH({
   daysLeft: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = !!selectUserFlag('edu_hide_verification');
   if (e < 0) return null;
   let s = () => {
@@ -3260,7 +3260,7 @@ function aH({
 }
 let aq = 'dismissed_limited_team_space_uub';
 function aX(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [r, n] = useState(!1);
   let o = useSubscription(TeamRoleRequestView, {
     teamId: e.team.id
@@ -3305,7 +3305,7 @@ function aX(e) {
     header: renderI18nText('upgrade.limited_access_in_this_team'),
     onClickCTA: _,
     onDismiss: () => {
-      t(_$$bE({
+      t(userTeamFlagPost({
         all_team_flags: [{
           team_id: e.team.id,
           flags: {
@@ -3323,7 +3323,7 @@ function aX(e) {
 function a1({
   orgUpsellEligibility: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.userFlags);
   let s = e === TeamCountType.SINGLE_TEAM ? renderI18nText('upgrade.access_cross_team_design_libraries_sso_and_more') : renderI18nText('upgrade.centralize_your_teams_and_share_design_libraries');
   let n = `${e === TeamCountType.SINGLE_TEAM ? 'Single-Team' : 'Multi-Team'} Dismissible Org Upgrade Section`;
@@ -3352,7 +3352,7 @@ function a1({
 }
 let a5 = 'dismissed_paid_free_space_uub';
 function a8(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = _$$h3.useTrackingContext({
     trigger: UpsellModalType.UNIVERSAL_UPGRADE_SECTION
   });
@@ -3392,7 +3392,7 @@ function a8(e) {
       trackingDescriptor: UpgradeAction.VIEW_ALL_PLANS
     },
     onDismiss: () => {
-      t(_$$bE({
+      t(userTeamFlagPost({
         all_team_flags: [{
           team_id: e.team.id,
           flags: {
@@ -3427,7 +3427,7 @@ function si({
   loading: e,
   data: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = useSeparateBillingShippingExperiment();
   let n = useSelector(e => e.teamBilling.summary);
   let {
@@ -3512,7 +3512,7 @@ function sd({
   onTeam: e,
   hitFileLimit: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = _$$h3.useTrackingContext({
     trigger: UpsellModalType.UNIVERSAL_UPGRADE_SECTION
   });
@@ -3604,7 +3604,7 @@ function sw(e) {
 function sj() {
   let e = function () {
     let e = getCurrentTeam();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = useSelector(e => e.teamBilling.summary);
     let a = useSelector(e => e.loadingState);
     let s = Be.loadingKeyForPayload({
@@ -3821,7 +3821,7 @@ let sC = {
   }
 };
 function sL() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.userFlags);
   let r = useResourceRouteParams();
   let s = useResourceFuid();
@@ -3869,7 +3869,7 @@ let sD = {
   }
 };
 function sU() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = () => {
     trackEventAnalytics('community_browser_sidebar_action_clicked');
     e(selectViewAction({
@@ -3927,7 +3927,7 @@ function sV(e) {
   });
 }
 function sH(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getSelectedView();
   let s = useSelector(e => e.currentUserOrgId);
   let n = useSelector(e => e.teamFeedBellStates);
@@ -3961,7 +3961,7 @@ function sK({
   teamFolderId: t,
   teamFolderName: r
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return t && r ? jsx(SidebarRow, {
     'isSelected': e && e.view === 'folder' && e.folderId === t,
     'onClick': () => {
@@ -3981,7 +3981,7 @@ function sK({
   }) : null;
 }
 function sJ() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.selectedView).view === 'deletedFiles';
   return jsx(Fragment, {
     children: jsx(SidebarRow, {
@@ -4009,7 +4009,7 @@ let sq = 'sidebar--section--COZVK';
 let sX = 'sidebar--loading--AITp2';
 let sQ = 'sidebar--divider--sHsz4';
 function sZ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCurrentUserOrgId();
   let n = useSelector(e => e.currentTeamId);
   let l = useSelector(e => e.userFlags);
@@ -4270,7 +4270,7 @@ function s0(e) {
   let r = useCurrentUserOrgId();
   let n = _$$d2();
   let o = useSelector(e => e.currentTeamId);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = _$$v({
     currentOrgId: r,
     currentTeamId: o || null
@@ -4581,7 +4581,7 @@ function iD({
   orgTeamsQuery: e,
   workspaceId: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     currentOrgUser,
     teams,
@@ -4784,7 +4784,7 @@ function iJ({
 }
 var iq = (e => (e.NEW_FILE = 'NEW_FILE', e.NEW_RESOURCE = 'NEW_RESOURCE', e.PROJECT_OVERFLOW_MENU = 'PROJECT_OVERFLOW_MENU', e.NEW_TEAM = 'NEW_TEAM', e.NEW_PROJECT = 'NEW_PROJECT', e.IMPORT = 'IMPORT', e.INVITE = 'INVITE', e.SHARE = 'SHARE', e.FAVORITE = 'FAVORITE', e.LOG_OUT = 'LOG_OUT', e.CLAIM = 'CLAIM', e.NEW_WHITEBOARD_FILE = 'NEW_WHITEBOARD_FILE', e.VIEW_COMMUNITY_PROFILE = 'VIEW_COMMUNITY_PROFILE', e.REQUEST_TO_EDIT = 'REQUEST_TO_EDIT', e.JOIN_TEAM = 'JOIN_TEAM', e.UPGRADE_TO_TEAM_ADMIN = 'UPGRADE_TO_TEAM_ADMIN', e.DROPDOWN = 'DROPDOWN', e.VIEW_MEMBERS = 'VIEW_MEMBERS', e.TEAM_OVERFLOW_MENU = 'TEAM_OVERFLOW_MENU', e.VIEW_LIBRARIES = 'VIEW_LIBRARIES', e.NEW_SITE_FILE = 'NEW_SITE_FILE', e.NEW_SLIDES_FILE = 'NEW_SLIDES_FILE', e.NEW_FIGMAKE_FILE = 'NEW_FIGMAKE_FILE', e.GET_DESKTOP_APP = 'GET_DESKTOP_APP', e.ADD_TO_CHROMEBOOK = 'ADD_TO_CHROMEBOOK', e.REQUEST_SENT_DESIGN = 'REQUEST_SENT_DESIGN', e.REQUEST_SENT_WHITEBOARD = 'REQUEST_SENT_WHITEBOARD', e.REQUEST_SENT_ALL = 'REQUEST_SENT_ALL', e.SETTINGS = 'SETTINGS', e))(iq || {});
 function iX(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.currentUserOrgId);
   let a = getSelectedView();
   return () => {
@@ -4914,7 +4914,7 @@ function ni({
   });
 }
 function nn(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useRef(null);
   let n = useSelector(({
     dropdownShown: e
@@ -4967,7 +4967,7 @@ let n_ = liveStoreInstance.Mutation(async e => {
 let np = registerModal(({
   workspace: e
 }) => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getAtomMutate(n_);
   return jsx(_$$c4, {
     title: getI18nString('workspace_view.description_modal.title'),
@@ -4999,7 +4999,7 @@ let np = registerModal(({
   });
 }, 'UpdateWorkspaceDescriptionModal');
 function nf() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getUserId();
   return useCallback(r => {
     let a = r.workspace.admins.some(e => e.baseOrgUser?.user.id === t);
@@ -5090,7 +5090,7 @@ function nT({
   workspace: e,
   onClose: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let n = getAtomMutate(nj);
   let o = [{
     option: ig
@@ -5362,7 +5362,7 @@ function nM({
   query: t,
   users: r
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = useCallback((e, t) => {
     n(selectViewAction({
       view: 'user',
@@ -5404,7 +5404,7 @@ function nB(e) {
     workspace,
     org
   } = e;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = useSelector(e => e.currentUserOrgId);
   let l = useSelector(e => e.avatarEditorState);
   let d = workspace.canAdmin;
@@ -5475,7 +5475,7 @@ function nB(e) {
   }), [p, v, o, f]);
   let j = function () {
     let e = nf();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let [r, a] = useAtomValueAndSetter(ip);
     return useCallback(r => {
       let s = e(r);
@@ -5579,7 +5579,7 @@ function nB(e) {
   });
 }
 function nU(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.workspace.members;
   let n = useMemo(() => r ? r.sort((e, t) => {
     let r = e.permission === FOrganizationRoleType.ADMIN;
@@ -5839,7 +5839,7 @@ let n4 = {
 let n2 = registerModal(({
   workspaceId: e
 }) => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCurrentPrivilegedPlan('ChooseFileToPinModal').unwrapOr(null);
   let o = r?.name ?? null;
   let [l, d] = useState('');
@@ -5975,7 +5975,7 @@ function os({
 }) {
   let t = e.slice(0, 8);
   let r = getSelectedView();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let {
     showing,
     show,
@@ -6064,7 +6064,7 @@ function oi({
   isHovered: t,
   isSelected: r
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = useCallback(t => {
     n(showModalHandler({
       type: _$$a7(),
@@ -6344,7 +6344,7 @@ let oT = [];
 function oE({
   workspace: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getSelectedView();
   let n = getUserId();
   let {
@@ -6510,7 +6510,7 @@ function ok({
 }) {
   let [r, n] = useAtomValueAndSetter(oS(e.id));
   let o = useCallback(() => n(e => !e), [n]);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = e.pinnedFiles?.length ?? 0;
   let c = t || e.canAdmin;
   let u = d >= D1;
@@ -8627,7 +8627,7 @@ let dm = {
 function dp({
   teamId: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useResourceRouteParams();
   let s = useResourceFuid();
   let {
@@ -9651,7 +9651,7 @@ function d8({
   orgOrTeamName: t,
   isCommunityTabDisabledForOrg: r
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let n = useSafeRouteStateInstance(ResourceHubHomeRouteClass);
   let o = useSelector(e => e.userFlags);
   let l = e => {
@@ -9806,7 +9806,7 @@ function cn({
   let d = getActiveResourceHubSearchRoute();
   let c = !!d;
   let u = d?.search.query;
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let [_, p] = useState('');
   let f = useDebouncedCallback(e, 400);
   let [g, h] = useState(!1);
@@ -9920,7 +9920,7 @@ let cd = {
   }
 };
 function ch() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSafeRouteParams(ResourceHubResourceRoute);
   let r = t.apiResourceType;
   let n = t.resourceId;
@@ -10388,7 +10388,7 @@ function cL({
   });
 }
 function cD() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useResourceRouteParams();
   let r = useResourceFuid();
   let n = useCurrentPrivilegedPlan('ResourceHubApp');
@@ -10712,7 +10712,7 @@ let c1 = new class {
 let ue = 'feed_tile--commentPillText--goQ26';
 let ut = 'feed_tile--feedPostHoverContainerSelectable--rhPI9';
 function ua(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useRef(null);
   let [n, o] = _$$M();
   let [l, d] = _$$M();
@@ -11028,7 +11028,7 @@ function ui(e) {
   });
 }
 function un(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useRef(null);
   let n = selectCurrentUser();
   let o = useSelector(e => e.teamFeedRefreshNonce);
@@ -11180,7 +11180,7 @@ function un(e) {
   });
 }
 function uo(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.teamFeedRefreshNonce);
   useEffect(() => {
     t(TEAM_FEED_SET_BELL_STATE_ACTION({
@@ -11218,7 +11218,7 @@ function uu(e) {
   });
 }
 function um(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   useEffect(() => (trackEventAnalytics('Team Feed Posts List View Visited'), t(TEAM_FEED_SET_BELL_STATE_ACTION({
     orgId: e.currentOrgId,
     bellActive: !1
@@ -11348,7 +11348,7 @@ let uv = (e, t, r) => {
 function uy({
   currView: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.tileSortFilterStateByView);
   let n = ub(t, r, e);
   let o = uv(t, r, e);
@@ -11489,7 +11489,7 @@ function uA({
   canEditTeam: e,
   isDraftsFolder: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = getCurrentTeam();
   let n = getSelectedView();
   return t || !s || hasTeamPaidAccess(s) || n.view !== 'folder' ? null : jsx(uO, {
@@ -11625,7 +11625,7 @@ function uF({
 }
 let uY = 'open_invoice_reminder_card--icon--gcN35';
 function uJ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.team.restrictions_list?.includes(FPlanLimitationType.LOCKED);
   let s = e.canAdminTeam ? r ? getI18nString('billing.open_invoice_reminder.title') : getI18nString('billing.open_invoice_reminder.grace_period_title') : getI18nString('billing.open_invoice_reminder.title_viewer');
   let n = e.canAdminTeam ? r ? getI18nString('billing.open_invoice_reminder.locked_admin_description') : getI18nString('billing.open_invoice_reminder.grace_period_admin_description') : getI18nString('billing.open_invoice_reminder.locked_viewer_description');
@@ -11810,7 +11810,7 @@ function me({
     userExternallyRestricted: isOrgUserExternallyRestrictedFromState(A),
     selectedBranchKeyByRepoId: e.selectedBranchKeyByRepoId
   }));
-  let $ = useDispatch();
+  let $ = useDispatch<AppDispatch>();
   let G = vt(O?.id);
   let V = !!O && G;
   let z = !!O && !!m;
@@ -12171,7 +12171,7 @@ function me({
   });
   if (Cm(eo), !function (e) {
     let t = getSelectedView();
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     let a = useMemoStable(() => {
       if (t.view === 'deletedFiles') return [];
       let r = [];
@@ -12469,7 +12469,7 @@ function ma() {
         return e;
       }, []) : [];
     }), [t]);
-    let o = useDispatch();
+    let o = useDispatch<AppDispatch>();
     useEffect(() => {
       if (n.data) {
         let e = n.data?.filter(e => e.type === TileType.FILE).map(e => fileEntityDataMapper.toSinatra(e.file)) || [];
@@ -12558,7 +12558,7 @@ function mc({
   canEditTeam: e
 }) {
   let t;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = getCurrentTeam();
   let n = getSelectedViewType();
   let o = selectExperimentConfigHook('exp_fbg_project_limit_upsell');
@@ -12657,7 +12657,7 @@ function mu() {
 function mm({
   canEditTeam: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getCurrentTeam();
   let s = getSelectedViewType();
   let n = _$$h3.useTrackingContext({
@@ -12870,7 +12870,7 @@ function mv(e) {
     folderList,
     ...r
   } = e;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = e.selectedView.view === 'trashedFolders';
   let l = e.selectedView.view === 'team';
   let d = e.selectedView.view === 'recentsAndSharing';
@@ -13120,7 +13120,7 @@ let mk = e => {
   }
 };
 let mW = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.teams)[e.teamId].subscription;
   let n = e.paymentRequiresAction;
   useEffect(() => {
@@ -13407,7 +13407,7 @@ function m9(e, t, r, i, n, l) {
         trackingContextName: n,
         dismissible: !j,
         onClose: j ? void 0 : () => {
-          r && i?.(_$$bE({
+          r && i?.(userTeamFlagPost({
             all_team_flags: [{
               team_id: r,
               flags: {
@@ -13948,7 +13948,7 @@ let _n = () => {
 };
 function _o() {
   let e;
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.currentUserOrgId);
   let s = useSelector(e => e.currentTeamId);
   let n = _n();
@@ -14081,7 +14081,7 @@ function _c(e) {
 let _b = registerModal(e => {
   let t;
   let r;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [l, d] = useState('');
   let c = useSelector(e => e.deletedReposById);
   let u = useSelector(e => e.fileByKey);
@@ -14327,7 +14327,7 @@ function _P(e) {
   });
 }
 function _L(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.selectedView);
   let s = _$$v4();
   let {
@@ -14438,7 +14438,7 @@ function _D({
   });
 }
 function _M() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.user?.personal_drafts_folder_id);
   let r = useSelector(e => e.fileKeysByFolderId);
   let n = useSelector(e => e.fileKeysByRepoId);
@@ -14831,7 +14831,7 @@ function _B({
   currentResourceId: t,
   hasTrailingDivider: r
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return jsx(J5, {
     text: e.name,
     onClick: r => {
@@ -14872,7 +14872,7 @@ function _$({
   orgId: r,
   hasTrailingDivider: s
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return jsx(J5, {
     text: e.name,
     onClick: a => {
@@ -15023,7 +15023,7 @@ function _X(e) {
     userAnalyticsData: e.userAnalyticsData,
     ...getPermissionsState(e)
   }));
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let m = useSubscription(EduOffboardingData, {});
   let {
     teamId,
@@ -15081,7 +15081,7 @@ function _Z({
   pinnedFiles: t,
   tileActions: r
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = getSelectedView();
   let l = getUserId();
   let {
@@ -15252,7 +15252,7 @@ let pa = _$$n4(e => function (e) {
 let pl = [FFileType.WHITEBOARD, FFileType.SLIDES];
 let pd = atom(!1);
 function pc(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = pa(selectCurrentUser());
   let n = pr(!1, r);
   let o = useIsLoading(n);
@@ -15416,16 +15416,16 @@ function pm() {
 }
 let p_ = e => e === FTemplateCategoryType.WHITEBOARD ? 'whiteboard' : e === FTemplateCategoryType.SLIDE_TEMPLATE ? 'piper' : 'design';
 function pp(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.hubFile;
   let s = r.id;
   let n = e.duplicatingHubId !== null;
   let o = e.duplicatingHubId === s;
-  let l = r && _$$a11(e.hubFile);
+  let l = r && getHubFileVersionOrDefault(e.hubFile);
   let d = a => {
     a.stopPropagation();
     e.setDuplicatingHubId(s);
-    t(_$$rL({
+    t(createFileFromTemplateThunk({
       hubFileId: s,
       hubFileName: l?.name || 'this file',
       openInNewTab: !1,
@@ -15484,7 +15484,7 @@ function pp(e) {
         isSet: !!e.overrideThumbnailUrl || !!r.thumbnail_is_set,
         isWhiteboard: r.viewer_mode === FTemplateCategoryType.WHITEBOARD,
         hubFileId: r.id,
-        alt: _$$a11(r).name,
+        alt: getHubFileVersionOrDefault(r).name,
         imageClassName: r.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE ? 'templates_bar--slidesThumbnailImage--uJ-8c templates_bar--thumbnailImage--ymHpx' : 'templates_bar--thumbnailImage--ymHpx',
         resizedThumbnailUrls: r.resized_thumbnail_urls
       })]
@@ -15535,7 +15535,7 @@ function pI(e) {
     hostPlanName,
     user
   } = e;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let {
     properties
   } = useTracking();
@@ -15676,7 +15676,7 @@ let pC = {
   pinToWorkspace: !0
 };
 function pS(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSubscription(PinnedFiles, {
     folderId: e.folderId
   });
@@ -15736,7 +15736,7 @@ function pk({
     isShowingLockedRedesign: r,
     additionalVisibilityRequirements: a = !0
   }) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let o = getUserId();
     let {
       data
@@ -15828,7 +15828,7 @@ function pL({
   });
 }
 function p$(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useRef(null);
   let n = useSelector(({
     dropdownShown: e
@@ -15921,7 +15921,7 @@ function p5({
   lgFolder: t,
   team: r
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = useSelector(e => e.selectedView.view === 'folder' && e.selectedView.shouldShowRenameModal || !1);
   let l = function () {
     let e = vt();
@@ -15947,7 +15947,7 @@ function p5({
   }();
   let c = useCallback(() => d(t.id), [d, t.id]);
   let u = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = e.canEdit;
     return useCallback(() => {
       e.name && r && t(showModalHandler({
@@ -16210,7 +16210,7 @@ function p8({
   }(e);
   let d = n.data?.folder;
   let c = t.data?.project || null;
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let m = useSubscription(FolderCanView, {
     id: e
   });
@@ -16409,7 +16409,7 @@ function p6() {
 function p3({
   orgId: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCurrentPlanUser('ViewLibrariesAction');
   return useIsOrgMemberOrAdminUser(r).data ? jsx(_$$K3, {
     action: {
@@ -16430,7 +16430,7 @@ function p7({
   canCreateTeam: e,
   isEnterpriseOrgDirectoryEnabled: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return t || !e ? null : jsx(_$$K3, {
     action: {
       kind: _$$A9.CUSTOM,
@@ -16470,7 +16470,7 @@ function p9({
   });
 }
 function fr() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCurrentUserOrgId();
   let r = m3(selectWithShallowEqual(e => ({
     ...getPermissionsState(e),
@@ -16556,7 +16556,7 @@ function fc({
 function fu({
   handle: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx('a', {
     href: new ProfileRouteState({
       profileHandle: e
@@ -16579,7 +16579,7 @@ function fm({
   orgId: e
 }) {
   let t = useSelector(t => getAdminUsers(t.orgUsersByOrgId[e]).map(e => e.user));
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return jsx(nR, {
     label: getI18nString('org_home_view_meta.admins'),
     members: t,
@@ -16701,7 +16701,7 @@ let fb = e => {
   }
 };
 function fv(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCurrentPublicPlan('OrgPageViewBar').unwrapOr(null);
   let n = getParentOrgIdIfOrgLevel(r);
   let o = {
@@ -16745,7 +16745,7 @@ function fw({
 }) {
   let s = nf();
   let n = useCurrentUserOrg();
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   if (!n || !r || !t) return null;
   let l = s({
     workspace: e,
@@ -16855,7 +16855,7 @@ function fk(e) {
     }
     return t;
   }(workspace.id, f, _()));
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let v = useCallback((e, t, r) => {
     if (workspace) {
       let a = {
@@ -16935,7 +16935,7 @@ function fk(e) {
   });
 }
 function fR() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectPermissionsState();
   let r = useCurrentUserOrgId();
   let n = Au(r);
@@ -17146,7 +17146,7 @@ let fO = {
 };
 function fF(e) {
   let t = useSelector(t => t.orgById[e.orgId]);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let n = useEnterpriseOrgDirectoryEnabled(e.orgId);
   let o = useCurrentPlanUser('OrgPageView');
   let l = useIsOrgMemberOrAdminUser(o);
@@ -17223,7 +17223,7 @@ function fL() {
   });
 }
 function fD() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectUser();
   return jsx(_$$K3, {
     action: {
@@ -17489,7 +17489,7 @@ function f1(e) {
 function f4({
   isLoading: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(f1, {
     dataTestId: 'file-import-button',
     icon: jsx(_$$R1, {}),
@@ -17720,7 +17720,7 @@ function gf({
   isSelected: t,
   onFocus: r
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = Lj(e);
   let l = useCallback(() => {
     FM(n, e, {
@@ -17838,7 +17838,7 @@ let gv = {
   }
 };
 function gy() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let [t, r] = useState([]);
   let [{
     data: n,
@@ -18049,7 +18049,7 @@ function gj({
   });
 }
 function gT() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsx(ErrorBoundaryCrash, {
     team: ServiceCategories.COMMUNITY,
     boundaryKey: 'RecommendedResourcesShelf',
@@ -18266,7 +18266,7 @@ function gN() {
 }
 let gR = {
   Banner(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = e => {
       t(postUserFlag({
         [e]: !0
@@ -18844,7 +18844,7 @@ let gZ = e => jsx('span', {
   children: e
 });
 let g0 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentUser();
   return r ? jsxs(CustomModalComponent, {
     tintedModalBackground: !0,
@@ -19073,7 +19073,7 @@ function hr(e) {
 }
 function ha(e) {
   let t = e.selectedTab;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let n = getSelectedView();
   let l = useSelector(e => e.tileSortFilterStateByView);
   let d = t === ViewTypeEnum.SHARED_PROJECTS ? ['folder'] : ['file', 'file_repo', 'prototype'];
@@ -19249,7 +19249,7 @@ function hs(e) {
   }
 }
 function hi(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = _$$R3();
   let n = _e({
     checks: {
@@ -19380,7 +19380,7 @@ function h_() {
 function hp({
   team: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSubscription(TeamCanEdit, {
     id: e.id
   });
@@ -19432,7 +19432,7 @@ function hp({
   });
 }
 function hf(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useRef(null);
   let n = useSelector(({
     dropdownShown: e
@@ -19522,7 +19522,7 @@ let hk = registerModal(({
   hasSecondaryBtn: r = !0
 }) => {
   let n = useMemo(() => To(), []);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = () => {
     o(hideModal());
   };
@@ -19573,7 +19573,7 @@ let hO = (e, t, r) => {
   }, 1)];
 };
 function hF() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedView();
   let r = hO(e, useSelector(e => e.tileSortFilterStateByView), t);
   return jsx(_$$g4, {
@@ -19624,7 +19624,7 @@ function hL({
     label: adminPermissionConfig.TeamNonMemberJoinView.canAdminOrg
   }).unwrapOr(!1);
   let l = getTeamActionType(e, s, r, o);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = jsxs('div', {
     'className': 'team_page_view--nonMemberViewContainer--uleTt',
     'data-testid': 'non-member-join-content',
@@ -19675,7 +19675,7 @@ function hD({
   let d = useSelector(e => e.currentUserOrgId);
   let c = useSelector(e => l && l.org_id && e.orgById[l.org_id] || null);
   let u = useSelector(e => e.loadingState);
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let f = getSelectedView();
   let [g, h] = useState(!1);
   _$$r0(e);
@@ -19845,7 +19845,7 @@ function hM({
   let j = _$$R3(y);
   let T = jn();
   let E = useSelector(e => e.teamBilling);
-  let C = useDispatch();
+  let C = useDispatch<AppDispatch>();
   let S = getSelectedView();
   let k = useCallback(t => {
     let r = {
@@ -20188,7 +20188,7 @@ let hJ = {
   ctrlKey: 'metaKey'
 };
 function hq(e, t = {}) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = useStore();
   let n = useMemo(() => ({
     metaKey: e => {
@@ -20215,7 +20215,7 @@ function hq(e, t = {}) {
 }
 let h0 = 'org_user_meta_content--teamsHeader--1p4jT org_user_meta_content--sectionHeader--snmkw text--fontPos13--xW8hS text--_fontBase--QdLsd';
 function h1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentUser();
   let s = _$$w7(e.user);
   let n = useSelector(t => t.currentUserOrgId === e.orgId);
@@ -20285,7 +20285,7 @@ function h1(e) {
 }
 function h4(e) {
   let t = selectCurrentUser();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return jsx(h1, {
     submitDescription: t => {
       r(putUserAction({
@@ -20307,7 +20307,7 @@ function h4(e) {
   });
 }
 function h2(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentUser();
   return jsx(h1, {
     isLoading: !e.user || !e.orgUser || !e.org,
@@ -20403,7 +20403,7 @@ function h6(e) {
   let {
     profile
   } = e.user;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return jsx(Fragment, {
     children: profile?.images ? null : jsx(h8, {
       title: getI18nString('internal_profile.profile_image_nudge.title'),
@@ -20539,7 +20539,7 @@ let xt = {
 };
 let xr = e => {
   let t = e.user.id;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = useSelector(e => e.selectedView);
   let d = e.orgUser && e.orgUser.org_id;
   let c = useSelector(e => e.currentUserOrgId);
@@ -20701,7 +20701,7 @@ let xr = e => {
     status: APILoadingStatus.SUCCESS,
     value: W
   }, [T, C, W]);
-  let G = useAsyncWithReset(() => m && m.community_profile_id ? r(_$$pZ({
+  let G = useAsyncWithReset(() => m && m.community_profile_id ? r(getCommunityProfilePluginsThunk({
     profileId: m.community_profile_id
   })) : Promise.resolve([]), [r, m]);
   let V = l.view === 'user' && l.userViewTab === InterProfileType.INTERNAL_PROFILE_POSTS ? InterProfileType.INTERNAL_PROFILE_POSTS : InterProfileType.INTERNAL_PROFILE;
@@ -20897,7 +20897,7 @@ function xl(e) {
   });
 }
 function xd(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentUser();
   let s = e.orgId;
   let o = useSelector(e => e.currentUserOrgId);
@@ -20984,7 +20984,7 @@ function xm({
   workspaceId: t,
   parentBackgroundColor: r
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return jsx(jT, {
     text: e.name,
     parentBackgroundColor: r,
@@ -21011,7 +21011,7 @@ function x_({
     trackFileBrowserPageVisit(t);
   }, [t]);
   let r = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = selectUser();
     let r = useCurrentUserOrgId();
     let n = getSelectedView();
@@ -21431,7 +21431,7 @@ function xp(e) {
   });
 }
 function xf(e) {
-  return _$$w5() ? jsx(u_, {
+  return isXrDebounceThresholdEnabledForUser() ? jsx(u_, {
     postUuid: e.postUuid,
     creatorId: e.creatorId
   }) : null;
@@ -21444,7 +21444,7 @@ function xT({
   let n = useSelector(t => t.teams[e.teamId]);
   let o = useSelector(e => e.teamCreation);
   let l = useSelector(e => e.payment);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useCallback(() => {
     n && d(selectViewAction({
       view: 'team',
@@ -21573,7 +21573,7 @@ function xO() {
 }
 let xF = !1;
 function xP(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   useEffect(() => {
     let e = () => {
       t(Jw());
@@ -21651,7 +21651,7 @@ function xP(e) {
 }
 let xD = 'team-org-access-dropdown';
 function xM(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = e.dropdownShown && e.dropdownShown.type === xD;
   return jsxs('div', {
     className: 'team_org_access_dropdown--orgAccess--JAIwP',
@@ -21706,7 +21706,7 @@ function xU({
   orgById: d
 }) {
   let c;
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let [_, p] = useState(null);
   let [f, g] = useState(FAccessLevelType.PUBLIC);
   let h = n.ignoreCurrentPlan;
@@ -21831,7 +21831,7 @@ function xU({
 function xW({
   selectedView: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCurrentUserOrgId();
   let s = useSelector(e => e.orgById);
   let n = selectCurrentUser();
@@ -21856,7 +21856,7 @@ function xz({
 }) {
   let t;
   let r;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [o, l] = useState(!1);
   let d = e.teamId;
   let c = useSelector(e => e.teams[d]);
@@ -21962,7 +21962,7 @@ function xq(e) {
   let t = selectCurrentUser();
   let [r, n] = useState(() => getUserCurrency());
   let o = UpsellModalType.UPGRADE_NEW_TEAM;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = _$$sx3();
   let c = (t, a) => {
     let s = e.selectedView;
@@ -22234,7 +22234,7 @@ function x9() {
   });
 }
 function bt(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.fileImport.step);
   let n = B2().unwrapOr(!1);
   let [o, l] = useState(!1);
@@ -22290,7 +22290,7 @@ let bs = 'file_browser_view--filebrowserHtml--v2BLN';
 let bi = 'file_browser_view--filebrowserBody--6MX2i';
 let bn = 'file_browser_view--desktop--5VrC1';
 export function $$bo0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCurrentUserOrgId();
   let r = useDropdownState();
   let E = selectCurrentUser();
@@ -22403,7 +22403,7 @@ export function $$bo0() {
   let W = isMobilePlatformNotFigmaMobile;
   if (!function () {
     let e = getSelectedView();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = getUserId();
     let a = null;
     (e.view === 'teamUpgrade' || e.view === 'promoReview' || e.view === 'eduReview') && (a = e.teamId);

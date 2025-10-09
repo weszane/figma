@@ -27,7 +27,7 @@ let $$C0 = registerModal(function (e) {
     open,
     onClose
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = selectCurrentUser();
   let d = Z();
   let c = () => {
@@ -75,7 +75,7 @@ let T = () => {
   });
 };
 function k() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = T();
   return jsxs(DialogContents, {
     children: [jsx(DialogHeader, {
@@ -106,7 +106,7 @@ function k() {
   });
 }
 function R() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentUser();
   let i = Z();
   let r = T();
@@ -171,7 +171,7 @@ function R() {
   }) : null;
 }
 function N() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = Z();
   let i = setupAutofocusHandler();
   let s = T();

@@ -124,7 +124,7 @@ export let NuxSeatRequestConfirmationModal = registerModal(e => {
   let {
     color
   } = useTheme();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = U('nux_seat_request_confirmation_modal');
   let A = selectCurrentFile();
   useSingleEffect(() => {

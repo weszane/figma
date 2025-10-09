@@ -5,7 +5,7 @@ import { sz } from "../figma_app/216696";
 import { CommunityProfileView } from "../figma_app/43951";
 import { useIsLoading, useIsLoaded } from "../905/18797";
 export function $$c0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(t => t.communityHub.shelves[e] || []);
   let n = sz.loadingKeyForPayload({
     shelfType: e

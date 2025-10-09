@@ -7,7 +7,7 @@ import { useMemoStable } from "../905/19536";
 import { analyticsEventManager } from "../905/449184";
 import { fetchDynamicConfig } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
-import { qd } from "../figma_app/852050";
+import { getResolvedValuesForVariables } from "../figma_app/852050";
 import { isLocalOrSubscribed } from "../figma_app/633080";
 import { recommendVariablesService } from "../905/442915";
 import { uQ } from "../figma_app/151869";
@@ -151,7 +151,7 @@ export function $$A1({
     let u = useMemo(() => getFeatureFlags().aip_flower_garden_shadow_reranker ? e.filter(isLocalOrSubscribed).map(e => e.node_id) : [], [e]);
     let h = useMemo(() => r.modeContext ?? {}, [r]);
     let m = useMemo(() => O0(r), [r]);
-    let g = qd(u, h);
+    let g = getResolvedValuesForVariables(u, h);
     useEffect(() => {
       if (!i) {
         c({

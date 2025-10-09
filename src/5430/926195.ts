@@ -17,7 +17,7 @@ export let $$p0 = registerModal(function ({
 }) {
   let p = HI(e);
   let h = getSearchSessionIdFromSelector();
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let f = selectCurrentUser();
   return p ? jsx(AppleEulaModal, {
     onAgree: () => {

@@ -20,7 +20,7 @@ import { paintManager, blackColor } from "../figma_app/385874";
 import { updateGIFImageProperties } from "../905/619652";
 import { J } from "../905/225412";
 import { ku } from "../905/149223";
-import { WH } from "../figma_app/836943";
+import { useStyleInfo } from "../figma_app/836943";
 import { w1 } from "../figma_app/405546";
 import { getI18nString } from "../905/303541";
 import { getNudgeAmounts } from "../figma_app/740163";
@@ -52,10 +52,10 @@ function R({
   } = useAtomWithSubscription(t);
   let [a, _] = w1(t, "paints");
   let R = NodePropertyCategory.STROKE_PRESET;
-  let L = useDispatch();
+  let L = useDispatch<AppDispatch>();
   let P = paintManager.getId(0, NodePropertyCategory.STROKE_PRESET, "paint");
   let D = function (e) {
-    let t = WH(e ?? null, null, StyleType.STROKE);
+    let t = useStyleInfo(e ?? null, null, StyleType.STROKE);
     return useMemo(() => {
       let e = t?.meta?.style_thumbnail;
       return e && "FILL" === e.type && e.fillPaints[0] || null;

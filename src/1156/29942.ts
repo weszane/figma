@@ -630,7 +630,7 @@ let tl = (e, t) => {
 let th = "dismissed_chat_soft_limit_banner";
 function tN() {
   let e = Y9(getI18nString("auth.welcome-to-figma"));
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: "Logged Out File Chatbox Banner",
     children: jsxs("div", {
@@ -1553,7 +1553,7 @@ let tQ = forwardRef((e, t) => {
     showChatSoftLimitBanner,
     onCloseChatSoftLimitBanner
   } = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = selectUserFlag(th);
     let r = useTeamPlanPublicInfo();
     let i = r.unwrapOr(null)?.tier;
@@ -2175,7 +2175,7 @@ function nw({
   let {
     organization
   } = mS();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl",
     children: [jsx(nb, {
@@ -2268,7 +2268,7 @@ function nL({
   let {
     organization
   } = mS();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl",
     children: [jsx(nb, {
@@ -4442,7 +4442,7 @@ function iy({
     libraryImport
   } = S1();
   let E = Xr(jx);
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   useEffect(() => {
     libraryImport && !atomStoreManager.get(FX) && show({
       canShow: e => !e
@@ -4671,7 +4671,7 @@ function ik({
   hasMessages: b,
   libraryImports: j
 }) {
-  let k = useDispatch();
+  let k = useDispatch<AppDispatch>();
   let E = useAtomWithSubscription(f3);
   let N = useRef(null);
   let [A, T] = useAtomValueAndSetter(mC(u));

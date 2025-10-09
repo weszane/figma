@@ -5,7 +5,7 @@ import { am, ut } from "../4452/575555";
 import { showModalHandler } from "../905/156213";
 if (443 == require.j) { }
 export function $$o0(e, t, a, o, d, c) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   return useCallback(() => {
     void 0 !== t && (e === am.MEMBERS && t.team.org_id ? u(showModalHandler({
       type: T(),

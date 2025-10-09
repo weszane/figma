@@ -135,7 +135,7 @@ let ev = registerModal(function ({
   totalRequestCount: t,
   filteredRequestCount: a
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = () => {
     s(hideModal());
   };
@@ -286,7 +286,7 @@ let eI = registerModal(function ({
   onDeny: d,
   entryPoint: c
 }) {
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let [u, m] = useState(null);
   let [p, g] = useState(!0);
   useMemo(() => {
@@ -440,7 +440,7 @@ export function $$eD0({
   defaultAdminEntryPoint: B
 }) {
   let G;
-  let z = useDispatch();
+  let z = useDispatch<AppDispatch>();
   let V = useDropdownState();
   let [W, H] = useState(!1);
   let [Y, J] = useState("");

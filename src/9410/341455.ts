@@ -8,7 +8,7 @@ import { openFileKeyAtom } from "../figma_app/516028";
 import { JT } from "../figma_app/632248";
 import { pP, qy, cT } from "../figma_app/862289";
 import { ks, Vm } from "../figma_app/838407";
-import { V6, i6, bY, ux } from "../figma_app/60023";
+import { selectionModeAtomFamily, SelectionMode, fileTypeAtom, nullAtomFamily } from "../figma_app/60023";
 import { Ji } from "../figma_app/553488";
 import { yt, WS, S7, NG } from "../7222/396421";
 import g from "classnames";
@@ -24,12 +24,12 @@ function y() {
 }
 export function $$v0(e) {
   if (e) return e.pageGuids;
-  let t = atomStoreManager.get(V6);
+  let t = atomStoreManager.get(selectionModeAtomFamily);
   return (() => {
     switch (t.type) {
-      case i6.ALL:
+      case SelectionMode.ALL:
         return t.allPages;
-      case i6.SINGLE:
+      case SelectionMode.SINGLE:
         return [t.page];
       default:
         return [];
@@ -37,7 +37,7 @@ export function $$v0(e) {
   })().map(e => e.guid);
 }
 export function $$E2(e) {
-  let t = useAtomWithSubscription(bY).figjamEntryPointData;
+  let t = useAtomWithSubscription(fileTypeAtom).figjamEntryPointData;
   let i = t?.figjamFileKey || e;
   let r = t?.selectedGuids;
   return useCallback(() => {
@@ -66,7 +66,7 @@ export function $$T3(e) {
 }
 export function $$w5() {
   let e = function () {
-    let e = useAtomWithSubscription(ux);
+    let e = useAtomWithSubscription(nullAtomFamily);
     let t = WS();
     let i = t.data || [];
     let r = "loaded" === t.status && i.length > 0;

@@ -338,7 +338,7 @@ export let $$z0 = registerModal(function ({
     let t = e.teamBilling.summary.annual_subscription?.current_period_end || e.teamBilling.summary.monthly_subscription?.current_period_end;
     return t ? dayjs(t).format("LL") : void 0;
   });
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let [I, N] = useState(!1);
   let P = () => {
     b(hideModal());

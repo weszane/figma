@@ -24,8 +24,8 @@ import { getSearchSessionIdFromSelector } from "../figma_app/387599";
 import { shouldShowCreatorNudge } from "../figma_app/471982";
 import { gK } from "../5430/201744";
 import { getProfileRouteHref } from "../905/934145";
-import { ts, ax } from "../figma_app/49598";
-import { af } from "../figma_app/559491";
+import { getHubFileVersionsThunk, unpublishHubFileThunk } from "../figma_app/49598";
+import { getResourceVersionsThunk } from "../figma_app/559491";
 import { t as _$$t2 } from "../905/833100";
 import { r as _$$r } from "../figma_app/896657";
 import { showDropdownThunk } from "../905/929976";
@@ -133,7 +133,7 @@ function V(e) {
     resource,
     fileKey
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let c = useRef(null);
   let d = useSelector(_$$E(Y));
   let p = useSelector(e => e.currentUserOrgId);
@@ -146,9 +146,9 @@ function V(e) {
   let G = x2(void 0, resource, void 0, PageTypeEnum.RESOURCE_PAGE);
   let q = OX(resource);
   if (useEffect(() => {
-    w ? r(ts({
+    w ? r(getHubFileVersionsThunk({
       hubFileId: e.resource.id
-    })) : r(af({
+    })) : r(getResourceVersionsThunk({
       id: e.resource.id,
       resourceType: E ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET
     }));
@@ -227,7 +227,7 @@ function V(e) {
               confirmText: V ? getI18nString("community.resource.delist") : getI18nString("community.resource.unpublish"),
               cancelText: getI18nString("general.cancel"),
               onConfirm: () => {
-                r(ax({
+                r(unpublishHubFileThunk({
                   hubFileId: resource.id,
                   redirectLink: getProfileRouteHref(resource.publisher.profile_handle)
                 }));

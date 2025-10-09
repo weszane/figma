@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { o2 } from "../figma_app/968813";
+import { updateFaceStamps } from "../figma_app/968813";
 import { getMentionsResult } from "../905/772425";
 import { zW } from "../905/162414";
 import { contactsAPIService } from "../figma_app/477548";
@@ -12,7 +12,7 @@ let c = {
 export function $$u0({
   maxResults: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let s = zW({
     maxResultsCount: e,
     api: c,
@@ -35,7 +35,7 @@ export function $$u0({
       _(!0);
       let i = s?.mentions || [];
       p(e);
-      t(o2(i));
+      t(updateFaceStamps(i));
       u(!1);
     });
   }, [s, t, x]);

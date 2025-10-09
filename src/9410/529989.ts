@@ -16,7 +16,7 @@ import { pC } from "../905/98947";
 import { NuxOnboardingOverlay } from "../figma_app/6204";
 export function $$y0(e) {
   let t = useAtomWithSubscription(eS);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let y = !!selectUserFlag("not_gen_0");
   let b = useAtomWithSubscription(NT);
   let C = useAtomWithSubscription(g5);

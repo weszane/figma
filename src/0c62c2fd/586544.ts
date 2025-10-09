@@ -50,7 +50,7 @@ let I = e => ({
   editableResources: []
 });
 export function $$N0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = function (e, t) {
     let r = useSubscription(EditAccessModalView, {
       teamId: e,

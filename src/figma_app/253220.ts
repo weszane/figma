@@ -20,7 +20,7 @@ interface NavigationPreferenceUpdate {
 }
 
 // Enum for navigation preferences
-enum NavigationPreferences {
+export enum NavigationPreferences {
   MouseScrollToZoom = "mouse-scroll-wheel-zoom",
   RightClickDragToPan = "right-click-drag-to-pan",
 }

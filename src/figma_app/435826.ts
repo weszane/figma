@@ -17,7 +17,7 @@ import { autoUpdateSharedLibraryAsset, updateSharedComponents, updateSharedState
 import { startLibraryUpdate, completeLibraryUpdate, failLibraryUpdate } from "../905/63598";
 import { hideModal } from "../905/156213";
 import { getNextSessionId, createSessionPromise, isIncrementalSessionOrValidating } from "../figma_app/582924";
-import { wM } from "../figma_app/852050";
+import { getVariablesByCollectionKeys } from "../figma_app/852050";
 import { selectFileInfo } from "../905/210851";
 import { openFileAtom, selectCurrentFile } from "../figma_app/516028";
 import { useDelayedCallback } from "../905/116724";
@@ -119,7 +119,7 @@ export async function $$B0(e, t) {
   }));
 }
 export function $$G6(e, t = AssetFilterMode.ALL, r) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let u = bA(t);
   let p = useAtomWithSubscription(openFileAtom);
   let {
@@ -137,7 +137,7 @@ export function $$G6(e, t = AssetFilterMode.ALL, r) {
   let {
     sessionId
   } = useLibraryModalContextOptional() ?? {};
-  let Y = wM(scopedVariableSetUpdates.map(e => e.key));
+  let Y = getVariablesByCollectionKeys(scopedVariableSetUpdates.map(e => e.key));
   let $ = useCallback((e, r) => {
     if (Object.values(AX).includes(e)) {
       let t = e === AX.REVIEW_INSTANCE_UPDATES_MODAL_UPDATE_INSTANCE || e === AX.DROPDOWN_UPDATE_SELECTED_INSTANCE;
@@ -345,7 +345,7 @@ export function $$V4(e, t) {
     updateComponent,
     updateStateGroup
   } = $$G6(e, void 0, t);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = useCallback((e, t) => {
     let r = Fullscreen.getOutdatedStyleConsumers(t);
     s(updateSelectedSharedStyleConsumers({

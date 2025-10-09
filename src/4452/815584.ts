@@ -11,7 +11,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { popModalStack } from "../905/156213";
 export function $$g0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(h, {
     ...e,
     open: !0,
@@ -29,7 +29,7 @@ function h(e) {
     submitText,
     allowEmptyString
   } = e;
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let [j, I] = useState(initialName);
   let E = title ?? getI18nString("resource_rename_modal.title", {
     initialName

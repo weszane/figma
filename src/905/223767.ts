@@ -29,7 +29,7 @@ import { ModalView } from "../figma_app/918700";
 import { PlanComparisonChart } from "../905/6519";
 import { I as _$$I } from "../905/641938";
 function O(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = TN(e.teamId ?? "");
   let [n, h] = useState(getUserCurrency());
   let g = selectWithShallowEqual(e => setupWorkspaceIdentity(e.user, e.currentUserOrgId, e.currentTeamId));

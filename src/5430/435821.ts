@@ -58,7 +58,7 @@ let w = registerModal(function ({
   securityFormResponse: e,
   isWidget: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let n = jsx(linkWithTracking, {
     href: "https://help.figma.com/hc/articles/16354660649495",
     target: "_blank",
@@ -222,7 +222,7 @@ export function $$P1({
   isWidget: r,
   is24x24: u
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   if (!e) return null;
   let _ = function (e, t) {
     let {

@@ -5,15 +5,15 @@ import { createOptimistThunk } from "../905/350402";
 import { s as _$$s } from "../905/58247";
 import { addPluginToRecentsThunk, addWidgetToRecentsThunk } from "../figma_app/147952";
 import { isVsCodeEnvironment } from "../905/858738";
-import { M } from "../figma_app/170366";
+import { getPluginManager } from "../figma_app/170366";
 import { loadPluginManifest, getFullscreenViewEditorType, mapToFileType, resolveFrameworkType, loadLocalPluginManifest } from "../figma_app/300692";
 import { HubTypeEnum } from "../figma_app/45218";
 import { manifestErrorMessage, ManifestErrorType } from "../figma_app/155287";
 import { handleSelectedView } from "../905/622391";
 import { TabCategory } from "../905/42189";
 import { SimpleComponentType } from "../figma_app/504088";
-import { Po, Zy } from "../figma_app/378195";
-let E = M();
+import { pluginUpdateLocal, pluginDeleteLocal } from "../figma_app/378195";
+let E = getPluginManager();
 let $$y0 = createOptimistThunk(async (e, {
   resourceType: t,
   localFileIdToRemove: r
@@ -100,10 +100,10 @@ let $$b1 = createOptimistThunk(async (e, {
   let n = await loadLocalPluginManifest(t, {
     resourceType: r
   });
-  e.dispatch(Po(n));
+  e.dispatch(pluginUpdateLocal(n));
 });
 let $$T2 = createOptimistThunk((e, t) => {
-  void 0 != t && (E && E.removeLocalFileExtension(t), e.dispatch(Zy(t)));
+  void 0 != t && (E && E.removeLocalFileExtension(t), e.dispatch(pluginDeleteLocal(t)));
 });
 export const JZ = $$y0;
 export const QF = $$b1;

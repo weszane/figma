@@ -40,7 +40,7 @@ function F(e) {
   return PrototypingTsApi.getMagicLinkSelectionInfo().selectedDisplayAmount;
 }
 function j() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = RL(JT.MAGIC_LINK, _$$e);
   let {
     start,

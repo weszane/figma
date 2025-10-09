@@ -41,7 +41,7 @@ export function $$C0(e) {
     selectedView: e
   }) => e);
   let T = MX();
-  let A = useDispatch();
+  let A = useDispatch<AppDispatch>();
   let R = Xf(N?.id);
   let O = R?.data?.invoices;
   let L = EO(N?.id ?? "");

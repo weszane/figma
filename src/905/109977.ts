@@ -156,7 +156,7 @@ export function LibraryBestMatchesComponent(props: {
   const selectedView = useSelector(getSelectedViewSelector)
   const dropdownShown = useSelector((state: any) => state.dropdownShown)
   const [searchResults] = setupResourceAtomHandler(librarySearchByLibraryKeyAtomFamily(searchQuery))
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   // Early return if no search query or results not loaded
   if (!searchQuery || searchResults.status !== "loaded") {
@@ -292,7 +292,7 @@ export function LibraryFileBestMatchesComponent({
   inTeamLibrarySettingsModal?: boolean
   maxShownItems?: number
 }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const components = libraryFile.components
   const stateGroups = libraryFile.stateGroups
   const selectedView = useSelector(getSelectedViewSelector)

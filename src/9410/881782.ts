@@ -10,7 +10,7 @@ import { logError, logInfo } from '../905/714362';
 import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
 import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
-import { ts } from '../figma_app/49598';
+import { getHubFileVersionsThunk } from '../figma_app/49598';
 import { $2, bn, GF, h0, HQ, JJ, mf, NI, zu } from '../figma_app/61403';
 import { isRectInsideViewport, viewportToScreen } from '../figma_app/62612';
 import { getObservableValue } from '../figma_app/84367';
@@ -163,7 +163,7 @@ class L {
       await this.waitForDuration(500);
     };
     return this.startingStateHubFiles[e] ? n(this.startingStateHubFiles[e]) : new Promise((t, i) => {
-      this.dispatch(ts({
+      this.dispatch(getHubFileVersionsThunk({
         hubFileId: e,
         callback: async e => {
           try {
@@ -739,7 +739,7 @@ export function $$R0() {
   let w = useContext(viewportNavigatorContext);
   let S = useNavigateToViewport();
   let j = useSelector(e => e.mirror.sceneGraph);
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   let {
     insertTemplate
   } = Fz();

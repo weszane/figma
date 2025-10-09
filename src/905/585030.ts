@@ -263,7 +263,7 @@ export async function $$B10(e, t, i) {
   });
 }
 export function $$V8(e, t, i, a, s, l, d, c) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let [p, m] = useState(null);
   let [g, f] = useState(null);
   let [_, A] = useState(null);
@@ -318,7 +318,7 @@ export function $$V8(e, t, i, a, s, l, d, c) {
   };
 }
 export function $$G9(e, t, i, a, s, l, d) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let [u, p] = useState(null);
   let [m, g] = useState(null);
   let [f, _] = useState(null);

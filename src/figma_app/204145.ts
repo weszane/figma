@@ -29,7 +29,7 @@ export function $$f1({
   let E = wS();
   let y = M4();
   let b = useOpenFileLibraryKey();
-  let T = useDispatch();
+  let T = useDispatch<AppDispatch>();
   let I = "loaded" === E.status ? E.result : void 0;
   let S = useMemo(() => I && I.isExternal ? I.libraryKey : backingSymbol?.sourceLibraryKey ? backingSymbol?.sourceLibraryKey : b, [I, backingSymbol?.sourceLibraryKey, b]);
   let v = y?.guid;
@@ -63,7 +63,7 @@ export function $$E2() {
   }, [t, e]);
 }
 export function $$y0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getSelectedView();
   let r = useSceneGraphSelector();
   let n = $$E2();

@@ -20,7 +20,7 @@ export function $$u0(e, t, s, u, m, _) {
       window.removeEventListener("resize", t);
     };
   }, [e, s]);
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let j = useCallback(() => {
     y(handlePinningState({
       initialX: u.x,

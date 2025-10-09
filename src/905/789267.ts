@@ -37,7 +37,7 @@ export let $$N0 = registerModal(function ({
   entryPoint: D,
   planDataForSocialProof: L
 }) {
-  let F = useDispatch();
+  let F = useDispatch<AppDispatch>();
   let [M, j] = useState(!1);
   let U = getRumLoggingConfig();
   let B = () => {

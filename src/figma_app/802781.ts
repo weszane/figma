@@ -148,7 +148,7 @@ export function $$R1(e) {
   });
 }
 export function $$L8(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.selectedView);
   let i = isSitesFeatureEnabled();
   let s = isCooperFeatureEnabled();
@@ -190,7 +190,7 @@ export function $$L8(e) {
   });
 }
 export function $$P4(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.selectedView);
   return jsx(w, {
     checkedValue: e.config.filters.sharedBy ?? "",
@@ -215,7 +215,7 @@ export function $$P4(e) {
   });
 }
 export function $$D0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.selectedView);
   let s = useMemo(() => {
     let t = {};

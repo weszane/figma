@@ -158,7 +158,7 @@ import { g as _$$g2 } from "../9410/153133";
 import { d as _$$d3 } from "../9410/162990";
 import { b as _$$b2, W as _$$W } from "../b2835def/91751";
 function V() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => !!e.modalShown);
   let s = useSelector(e => e.versionHistory.compareId);
   let i = HistoryChangesBindings.getChunkChangeCount();
@@ -295,7 +295,7 @@ function eW(e) {
     onSetKeyboardNavigationElement,
     validAssetTypeOptions
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useSelector(e => e.dropdownShown);
   let u = useSelector(selectOpenFile);
   let {
@@ -458,7 +458,7 @@ function tS({
   preventDrag: y,
   disableContextMenu: m
 }) {
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let b = useSelector(e => e.dropdownShown);
   let {
     query,
@@ -1105,7 +1105,7 @@ function t9({
   containerSizingOptions: l,
   recordingKey: d
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useSelector(e => e.dropdownShown);
   let p = useSelector(selectLibrary);
   let y = useSelector(getSelectedViewSelector);
@@ -1209,7 +1209,7 @@ function t9({
       let [a, i] = useState({
         type: _$$I2.ALL
       });
-      let o = useDispatch();
+      let o = useDispatch<AppDispatch>();
       let l = useSelector(_$$q);
       let d = selectCurrentFile();
       useEffect(() => {

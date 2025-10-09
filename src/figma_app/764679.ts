@@ -126,7 +126,7 @@ export function $$B0(e) {
   });
 }
 function G(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     files,
     resource,
@@ -211,7 +211,7 @@ function V({
   primaryFullscreenEditorType: r,
   resource: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = getPluginVersion(i);
   let l = getSearchSessionIdFromSelector();
   let d = useIsResourceHub();
@@ -239,7 +239,7 @@ function V({
   });
 }
 export function $$H1(e, t, r) {
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let g = useDropdownState();
   let f = g?.type === z && g.data.resourceId === e.id && g.data.viewContext === r;
   let y = useIsResourceHub();

@@ -390,7 +390,7 @@ function q({
   }, {
     enabled: !!c
   });
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let x = useMemo(() => JSON.stringify(n) !== JSON.stringify(directories.map(e => ({
     value: e
   }))), [n, directories]);

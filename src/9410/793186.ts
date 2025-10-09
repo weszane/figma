@@ -1102,7 +1102,7 @@ export function OnCanvasNameEditor() {
 export function PluginModal() {
   const progressBarState = getProgressBarState();
   const showingOpenDesktopAppModal = useSelector((state: any) => state.showingOpenDesktopAppModal);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   if (progressBarState.mode !== UIVisibilitySetting.OFF) return jsx(Fragment, {});
   switch (showingOpenDesktopAppModal) {
     case PluginRunForContext.FOR_OPEN:
@@ -1142,7 +1142,7 @@ export function MultiplayerConnectionTimeoutHandler() {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const modalShownRef = useRef(false);
   const progressBarState = getProgressBarState();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const needsUpgrade = useSelector((state: any) => state.needsUpgrade);
   const clearTimer = useCallback(() => {
     if (timeoutRef.current !== null) {

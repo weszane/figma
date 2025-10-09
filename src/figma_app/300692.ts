@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { reportError } from '../905/11';
-import { d as _$$d } from '../905/44199';
+import { baseErrorSeverity } from '../905/44199';
 import { ProductStatus } from '../905/54385';
 import { ServiceCategories } from '../905/165054';
 import { C8 } from '../905/216495';
@@ -25,7 +25,7 @@ import { TeamOrgType, UploadStatusEnum } from '../figma_app/10554';
 import { Eh } from '../figma_app/12796';
 import { FEditorType } from '../figma_app/53721';
 import { am, Av, bH, Dk, f5, FW, ho, k0, Kd, Lu, MP, Pe, pR, Q7, u8, UX, Wt, xg, XS, Ye, ZQ, ZV } from '../figma_app/155287';
-import { M as _$$M } from '../figma_app/170366';
+import { getPluginManager } from '../figma_app/170366';
 import { DropdownEnableState } from '../figma_app/188152';
 import { FFileType } from '../figma_app/191312';
 import { MAX_CANVAS_SIZE } from '../figma_app/291892';
@@ -38,7 +38,7 @@ import { isAnyPublisher, isAcceptedPublisher } from '../figma_app/564095';
 import { isCreator, getDefaultPluginAuthor, isWorkspaceMatch, loadImage, validateCarouselImages, validateImage, needsToAcceptCommunityTOS } from '../figma_app/599979';
 import { sortByCreatedAt } from '../figma_app/656233';
 import { validateTaglineLength, getHubTypeString, trimOrEmpty, getValueOrDefault, MAX_RESOURCE_SIZE } from '../figma_app/740025';
-import { Rs } from '../figma_app/761870';
+import { getInitialAutocompleteState } from '../figma_app/761870';
 import { isResourcePendingPublishing } from '../figma_app/777551';
 import { BrowserInfo } from '../figma_app/778880';
 import { centsToDollars, isGreater, isNotInteger, isPriceOutOfRange, isRatioHigh, MIN_PRICE } from '../figma_app/808294';
@@ -97,6 +97,8 @@ export interface PluginManifest {
     optional?: boolean;
   }>;
   menu?: any[];
+  ui?: any
+  [key: string]: any
 }
 
 /**
@@ -183,7 +185,7 @@ type ResourceType = 'plugin' | 'widget' | 'unknown';
  */
 interface PluginLoadOptions {
   ignoreMissingEditorType?: boolean;
-  resourceType: ResourceType;
+  resourceType: any;
   isPublishing?: boolean;
 }
 
@@ -682,7 +684,7 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
   }
 
   // Update cached widget status
-  const desktopApi = _$$M();
+  const desktopApi = getPluginManager();
   if ('manifest' in manifestSource && desktopApi?.updateCachedContainsWidget) {
     desktopApi.updateCachedContainsWidget({
       id: fileId,
@@ -895,7 +897,7 @@ function getManifestName(manifest: PluginManifest | undefined, manifestSource: P
  * @returns PluginData object.
  */
 export async function loadLocalPluginManifest(fileId: string, options: PluginLoadOptions): Promise<PluginData> {
-  const desktopApi = _$$M();
+  const desktopApi = getPluginManager();
   try {
     if (!desktopApi) throw new Error('desktopApp not available');
     const manifestSource = await desktopApi.getLocalFileExtensionManifest(fileId);
@@ -937,7 +939,7 @@ export function injectHtmlOrUiFiles(code: string, htmlOrUi: string | Record<stri
  * @throws Error if unable to load or build code.
  */
 export async function loadLocalPluginSource(fileId: string): Promise<string> {
-  const desktopApi = _$$M();
+  const desktopApi = getPluginManager();
   let sourceData;
   try {
     if (!desktopApi) throw new Error('desktopApp not available');
@@ -1367,7 +1369,7 @@ export function isDefaultPublishingData(data: any): boolean {
  * @param snapshotBlob - Snapshot blob.
  * @returns Publishing data object.
  */
-export function getPublishingData(state: any, pluginId: string, resourceId: string, snapshotUrl: any, snapshotBlob: any): any {
+export function getPublishingData(state: any, pluginId: string, resourceId?: string, snapshotUrl?: any, snapshotBlob?: any): any {
   let author;
   const localPlugin = pluginId !== undefined ? state.localPlugins[pluginId] : undefined;
   const manifest = localPlugin && localPlugin.manifest;
@@ -1384,7 +1386,7 @@ export function getPublishingData(state: any, pluginId: string, resourceId: stri
     pending
   } = publishedResource.community_publishers;
   const publishers = {
-    ...Rs(),
+    ...getInitialAutocompleteState(),
     tokens: (publishedResource.community_publishers ? [...accepted.map((e: any) => ({
       ...e,
       isPending: false
@@ -1392,7 +1394,7 @@ export function getPublishingData(state: any, pluginId: string, resourceId: stri
       ...e,
       isPending: true
     })) || [])] : []).reduce((arr: any[], item: any) => isWorkspaceMatch(state.authedProfilesById[item.id], author) ? arr : arr.concat([{
-      state: _$$d.OK,
+      state: baseErrorSeverity.OK,
       content: item
     }]), [])
   };
@@ -1888,7 +1890,7 @@ export function showVisualBell(message: string): void {
   dequeuePluginStatus({
     shouldShowVisualBell: true
   });
-  const desktopApi = _$$M();
+  const desktopApi = getPluginManager();
   Y5.dispatch(VisualBellActions.enqueue({
     type: 'plugins-runtime-error',
     message,

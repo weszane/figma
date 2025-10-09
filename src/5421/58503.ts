@@ -69,7 +69,7 @@ let $$N4 = 320;
 let $$T1 = 3e3;
 let $$S7 = 3e3;
 export function $$A3() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let [t, n] = useAtomValueAndSetter($$_8);
   let [h, g] = useAtomValueAndSetter($$v5);
   let [C, E] = useAtomValueAndSetter($$I10);

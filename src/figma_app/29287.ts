@@ -17,7 +17,7 @@ import { S, E as _$$E } from "../figma_app/999099";
 import { V } from "../figma_app/761984";
 export function $$b3() {
   let e = useAtomWithSubscription(openFileKeyAtom);
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = debugState.getState();
   let l = getPermissionsAndView(r);
   let d = dh();

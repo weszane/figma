@@ -10,7 +10,7 @@ import { hideModal } from "../905/156213";
 import { registerModal } from "../905/102752";
 import { P } from "../905/932818";
 export let $$h0 = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = P();
   let r = useCallback(() => e(hideModal()), [e]);
   let p = useCallback(() => {

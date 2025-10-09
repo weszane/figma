@@ -20,7 +20,7 @@ import { useHandleVariableSelected, useDetachedVariableValue, VariableFormRow, u
 import { NF, oz } from "../figma_app/406976";
 import { DraggableModalManager } from "../905/748636";
 import { i as _$$i } from "../905/649519";
-import { WB } from "../figma_app/394327";
+import { resolvedTypeToComponentPropType } from "../figma_app/394327";
 import { IconButton } from "../905/443068";
 import { U as _$$U } from "../905/708285";
 import { useSingleEffect } from "../905/791079";
@@ -134,7 +134,7 @@ export function $$j0({
     let {
       onCreateComponentPropSubmit: _onCreateComponentPropSubmit
     } = function (e, t, i) {
-      let n = WB(t);
+      let n = resolvedTypeToComponentPropType(t);
       let r = DD({
         propType: n,
         refField: i
@@ -188,7 +188,7 @@ function U({
   let R = useId();
   let [N, P] = useState("Property");
   let M = useCallback(() => "Property" === N, [N]);
-  let j = WB(i);
+  let j = resolvedTypeToComponentPropType(i);
   let U = selectWithShallowEqual(e => vS(e, j, g));
   let V = function (e) {
     let t = useSelector(selectSceneGraphSelectionKeys);
@@ -198,7 +198,7 @@ function U({
       return n?.textContent ?? "";
     });
     let n = useSelectionPropertyValue("visible");
-    let r = WB(e) === ComponentPropType.BOOL;
+    let r = resolvedTypeToComponentPropType(e) === ComponentPropType.BOOL;
     return resolveVariableValue(e, r ? n : i);
   }(i);
   let [G, z] = useState({
@@ -294,7 +294,7 @@ function B({
   onChange: t,
   ariaLabelledBy: i
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = useDropdownState();
   return jsxs(l6, {
     ariaLabelledBy: i,

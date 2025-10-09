@@ -15,7 +15,7 @@ import { Gi, tS, wv } from "../figma_app/622574";
 import { Ou, Fz, b4, WS } from "../figma_app/106207";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { a6, Ve, RD } from "../figma_app/198840";
+import { getHubFileVersionOrDefault, getTemplateActionLabel, FileTypeSwitch } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
 import { ITemplateType } from "../905/862883";
@@ -63,7 +63,7 @@ function B({
   makeSomethingCategoryId: l,
   subcategories: d
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useCurrentFileKey();
   let p = Gi();
   let _ = selectUserFlag("figjam_editor_onboarded");
@@ -324,10 +324,10 @@ let $ = (e, t = 3) => {
   };
 })(n || (n = {}));
 function en(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.hubFiles);
   let a = r[e.templateId];
-  let o = a6(a);
+  let o = getHubFileVersionOrDefault(a);
   if (!a) return null;
   let l = jsx(_$$i, {
     insertTemplate: () => e.insertTemplate({
@@ -335,7 +335,7 @@ function en(e) {
       template: a
     }),
     isInsertingTemplate: e.isInsertingTemplate,
-    children: Ve(e.templateInsertionLocation)
+    children: getTemplateActionLabel(e.templateInsertionLocation)
   });
   let d = e.moreTemplateIds.filter(t => t !== e.templateId).map(e => r[e]);
   return jsxs("div", {
@@ -544,7 +544,7 @@ function em(e) {
     M && $ && trackTemplateEvent("resource_previewed", {
       fileKey,
       resourceType: "template",
-      resourceName: a6($).name,
+      resourceName: getHubFileVersionOrDefault($).name,
       resourceId: M,
       triggeredFrom: "browse-templates-modal",
       templateType: _$$n.HubFile
@@ -555,7 +555,7 @@ function em(e) {
   let Z = WS();
   let Q = e => isInsertingTemplate(e) || Z(e);
   let ee = t => {
-    if (e.templateInsertionLocation === RD.CURRENT_FILE) insertTemplate({
+    if (e.templateInsertionLocation === FileTypeSwitch.CURRENT_FILE) insertTemplate({
       template: t,
       onSuccess: X,
       triggeredFrom: "browse-templates-modal"

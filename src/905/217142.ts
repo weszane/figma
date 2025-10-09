@@ -35,7 +35,7 @@ export function $$C1(e) {
     publishedResource,
     targetRect
   } = e.dropdownData;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let h = getUserId();
   let g = $$S2();
   let _ = _$$s();

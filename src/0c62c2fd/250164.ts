@@ -17,7 +17,7 @@ function x(e, t) {
   return e && "loaded" === t.status ? t.data.org : e || "loaded" !== t.status ? null : t.data.team;
 }
 export let $$b0 = memo(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     updateVatGstId
   } = e;

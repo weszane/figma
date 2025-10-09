@@ -65,7 +65,7 @@ function y(e) {
   });
 }
 function j(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.selectedView);
   let r = e.canSeeBillingAddressExp && e.billingAddress;
   let l = e.canSeeBillingAddressExp && e.shippingAddress && !isAddressEmpty(e.shippingAddress);

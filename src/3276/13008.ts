@@ -15,7 +15,7 @@ import { RC, Yx } from "../3276/926297";
 let g = "edit_request";
 let v = "move_to_project";
 export function $$x0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = RC();
   let x = Yx();
   let b = e.editorType === FFileType.WHITEBOARD && !!e.org?.figjamDisabledAt;

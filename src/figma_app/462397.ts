@@ -1,15 +1,15 @@
 import { VariableDataType } from "../figma_app/763686";
 import { isValidValue } from "../905/216495";
-import { u } from "../figma_app/852050";
+import { getVariableById } from "../figma_app/852050";
 import { mapToSlotSymbolType } from "../figma_app/164212";
-import { e4 } from "../figma_app/394327";
+import { resolvedTypeToDataType } from "../figma_app/394327";
 import { u3 } from "../figma_app/152690";
 export function $$d2(e) {
   let {
     consumedVariable
   } = u3(e);
   let r = consumedVariable && isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.ALIAS ? consumedVariable.value : void 0;
-  let s = u(r);
+  let s = getVariableById(r);
   return {
     boundVariableId: r,
     boundVariable: s
@@ -21,7 +21,7 @@ export function $$c0(e, t, r, i) {
     resolvedType: e,
     value: i
   } : r ? {
-    type: e4(e),
+    type: resolvedTypeToDataType(e),
     resolvedType: e,
     value: r
   } : void 0;

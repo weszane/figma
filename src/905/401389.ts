@@ -37,7 +37,7 @@ import { m5 } from "../figma_app/651753";
 import { fI, nV } from "../figma_app/626177";
 import { MM, UP } from "../figma_app/246831";
 import { N2 } from "../905/213527";
-import { A8, zb, OS } from "../figma_app/836943";
+import { isValidNormalizedValue, getStylePickerShown, getStylePickerId } from "../figma_app/836943";
 import { $ as _$$$ } from "../figma_app/297778";
 import { q as _$$q } from "../figma_app/905311";
 import { c9, kG, U1, AA, xu, zi, ko, o1, et, PT, Dn, yr, Pf, wx, Qf } from "../figma_app/459377";
@@ -236,7 +236,7 @@ let ei = (e, t, i) => {
     return r.selectedPropertyType === r.currentSelectedProperty?.type ? r.currentSelectedProperty.indices.filter(e => e >= 0 && e < a.length) : [];
   }, [i, e, t]);
   let o = useCallback(() => new Set(n()), [n]);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useCallback(t => {
     arraysEqual(t, n()) || (0 === t.length ? fullscreenValue.deselectProperty() : fullscreenValue.updateAppModel({
       currentSelectedProperty: {
@@ -545,7 +545,7 @@ export class $$es2 extends RecordingComponent {
       this.props.dispatch(hideStylePicker());
     };
     this.removeAllProperties = () => {
-      A8(this.props.inheritStyleKey) && permissionScopeHandler.user("remove-all-properties", () => {
+      isValidNormalizedValue(this.props.inheritStyleKey) && permissionScopeHandler.user("remove-all-properties", () => {
         executeWithDSAAction(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
           Fullscreen?.applyStyleToSelection(this.props.inheritStyleKeyField, defaultSessionLocalIDString, !1);
         });
@@ -562,11 +562,11 @@ export class $$es2 extends RecordingComponent {
         });
         return;
       }
-      if (zb(this.props)) this.props.dispatch(hideStylePicker());else {
+      if (getStylePickerShown(this.props)) this.props.dispatch(hideStylePicker());else {
         let t = e.left + (e.width - N2) / 2;
         let i = e.top + e.height;
         this.props.dispatch(showStylePicker({
-          id: OS(this.props.inheritStyleKeyField),
+          id: getStylePickerId(this.props.inheritStyleKeyField),
           initialX: t,
           initialY: i,
           modal: !0
@@ -592,7 +592,7 @@ export class $$es2 extends RecordingComponent {
     let e = this.props.propertyList === MIXED_MARKER || this.props.inheritStyleKey === MIXED_MARKER;
     let t = !e && 0 === valueOrFallback(this.props.propertyList, []).length && !normalizeValue(this.props.inheritStyleKey);
     if (e) {
-      let e = zb(this.props);
+      let e = getStylePickerShown(this.props);
       return jsxs("div", {
         onMouseOver: this.onMouseOver,
         children: [jsx($$ea0, {

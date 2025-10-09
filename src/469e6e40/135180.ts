@@ -96,7 +96,7 @@ function z(e) {
 }
 function V(e) {
   let t = e.abandonedDraftFile;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = G(t);
   let l = t.repo;
   let o = l ? z(l) : null;
@@ -158,7 +158,7 @@ function V(e) {
 function H({
   files: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   if (0 === e.length) return null;
   let a = e.some(e => !!e.trashedAt);
   let s = e.every(e => !!e.trashedAt);
@@ -218,7 +218,7 @@ let X = "fig_file_checkpoints.updated_at";
 let Q = "created_at";
 let Z = [X, Q];
 function ee(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, r] = useState({
     columnName: K,
     isReversed: !1
@@ -380,7 +380,7 @@ function ee(e) {
   });
 }
 export function $$et0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = getSelectedView();
   let g = useSelector(e => getPermissionsStateMemoized(e));
   let h = useSelector(e => e.teams);

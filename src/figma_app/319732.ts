@@ -35,7 +35,7 @@ function M(e) {
   let t;
   let r;
   let i;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = t => {
     o(setupHyperlinkHandler({
       rawInput: e.urlString,

@@ -13,13 +13,13 @@ import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { lW } from "../figma_app/11182";
 import { popModalStack } from "../905/156213";
-import { M } from "../figma_app/170366";
+import { getPluginManager } from "../figma_app/170366";
 import { KindEnum } from "../905/129884";
 export let $$y0 = registerModal(function (e) {
   let {
     localPlugin
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let y = useModalManager({
     open: e.open,
     onClose: e.onClose
@@ -28,7 +28,7 @@ export let $$y0 = registerModal(function (e) {
     error
   } = getI18nString;
   if (!error) return null;
-  let T = M();
+  let T = getPluginManager();
   let I = !!T?.isCompatibleWith({
     desktopVersion: 80
   });

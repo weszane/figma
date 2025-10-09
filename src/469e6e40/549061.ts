@@ -123,7 +123,7 @@ function U({
   isLoading: e,
   plan: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = useSelector(e => e.avatarEditorState);
   return e ? jsx(Wi, {
     className: cssBuilderInstance.h32.w400.$
@@ -148,7 +148,7 @@ function U({
   });
 }
 function J(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(BannerButton, {
     onClick: () => {
       t(selectViewAction({
@@ -162,7 +162,7 @@ function J(e) {
   });
 }
 function K() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsx(BannerButton, {
     onClick: () => {
       e(selectViewAction({
@@ -696,7 +696,7 @@ function t_({
   numOfBillingGroupsManaged: a,
   isOrgAdmin: s
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = getRumLoggingConfig();
   return jsxs(Fragment, {
     children: [jsx(WithTrackedButton, {
@@ -736,7 +736,7 @@ function tu({
     seatAvailability,
     status
   } = _$$k5(e);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -1391,7 +1391,7 @@ export function $$tg0({
   isOrgAdmin: e,
   teamBilling: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let l = getRumLoggingConfig();
   let d = useRef(null);
   let [A, O] = useState(0);

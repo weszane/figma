@@ -7,7 +7,7 @@ import { UserInterfaceElements } from '../figma_app/763686'
 import { lV } from '../figma_app/914674'
 
 export function $$c0() {
-  let e = useDispatch()
+  let e = useDispatch<AppDispatch>()
   let t = selectCurrentFile()
   let r = lV()
   let c = useCallback((n = !0) => {

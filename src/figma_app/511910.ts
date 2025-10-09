@@ -90,7 +90,7 @@ function P() {
 }
 var D = (e => (e.MOUSE = "mouse", e.TRACKPAD = "trackpad", e))(D || {});
 function k() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let [t, r] = useState("mouse");
   return jsx(TrackingProvider, {
     name: "Panning and Zooming Instructions Modal",

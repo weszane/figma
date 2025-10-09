@@ -17,7 +17,7 @@ export function $$_0({
   selectedView: t,
   targetObjectAnimation: i
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let {
     appModel,
     sceneGraph,

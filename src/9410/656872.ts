@@ -7,20 +7,20 @@ import { getI18nString } from "../905/303541";
 import { hideModal, showModal } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
 import { oW } from "../figma_app/247611";
-import { RD } from "../figma_app/198840";
+import { FileTypeSwitch } from "../figma_app/198840";
 import { KindEnum } from "../905/129884";
 import { PH } from "../figma_app/701580";
 import { Z } from "../9410/200844";
 export let $$g0 = "templates_toolbar";
 export function $$_1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.modalShown?.type === PH.type);
   let i = useCallback(() => {
     t ? e(hideModal()) : (oW.trigger("action", TransactionCommand.CLEAR), e(showModal({
       type: PH.type,
       data: {
         triggeredFrom: "toolbar",
-        templateInsertionLocation: RD.CURRENT_FILE
+        templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
       }
     })));
   }, [e, t]);

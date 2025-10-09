@@ -1103,7 +1103,7 @@ let $$eT0 = registerModal((e) => {
     nodeId,
     layerName,
   } = e
-  let s = useDispatch()
+  let s = useDispatch<AppDispatch>()
   let o = useSelector(e => e.selectedView.view === 'fullscreen' ? e.selectedView.editorType : null)
   let d = useSelector(e => e.versionHistory.activeId)
   let {
@@ -1288,7 +1288,7 @@ let $$eI4 = registerModal((e) => {
     detachedInfoStatus,
     origin,
   } = e
-  let o = useDispatch()
+  let o = useDispatch<AppDispatch>()
   let {
     Sprig,
   } = useSprigWithSampling()
@@ -1377,7 +1377,7 @@ let $$eS5 = registerModal((e) => {
     initialSelectedNodeId,
     isComparingOverrides = !1,
   } = e
-  let l = useDispatch()
+  let l = useDispatch<AppDispatch>()
   let {
     Sprig,
   } = useSprigWithSampling()

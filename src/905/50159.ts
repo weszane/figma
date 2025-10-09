@@ -124,7 +124,7 @@ export function $$P0(e) {
   let r = useSelector(e => e.currentTeamId);
   let s = useSelector(e => e.user);
   let o = useSelector(e => e.selectedView);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   return jsx("div", {
     className: CK,
     children: jsx("div", {

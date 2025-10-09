@@ -134,7 +134,7 @@ let M = e => {
   let t = useSelector(e => e.mirror.sceneGraphSelection);
   let r = useRef(null);
   let n = D();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useCallback(e => {
     e && (Fullscreen.panToNode(e, !1), clearSelection(), addToSelection([e]));
   }, []);
@@ -173,7 +173,7 @@ function F(e) {
     onClick
   } = e;
   let c = isDevHandoffEditorType();
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = useCallback(e => {
     e.stopPropagation();
     action && onClick && onClick(action);

@@ -37,7 +37,7 @@ let $$k2 = forwardRef(function ({
   let h = T(e);
   let g = useDropdownState();
   let _ = g?.type === h;
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let v = useCallback(() => {
     _ ? y(hideDropdownAction()) : y(showDropdownThunk({
       type: h,
@@ -91,7 +91,7 @@ function R({
   isPreferredValues: p
 }) {
   let m = _$$S.useOpenFileProperties();
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let f = useCallback(() => {
     h(hideDropdownAction());
   }, [h]);

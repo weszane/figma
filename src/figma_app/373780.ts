@@ -447,7 +447,7 @@ function eE({
     return isPickCursorActive ? isPickCursorFocusedOnNode : t;
   }(e);
   let n = conditionalFeatureFlag('fpl_canvas_keyboard_controls', r, t);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = Y();
   let l = useNavigateToViewport(o);
   let d = useRef(null);
@@ -1287,7 +1287,7 @@ function e8() {
   });
   let r = useIsScreenReaderEnabled();
   of(e);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useSelector(e => !!e.modalShown);
   useEffect(() => {
     r && isAnyMobile && (o || s(VisualBellActions.enqueue({
@@ -1432,7 +1432,7 @@ function e6({
   let _ = getObservableOrFallback(EditorPreferencesApi().accessibilityDomDebug);
   let m = useIsCanvasEditDisabled();
   recordAccessibilityDomActive();
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   useEffect(() => {
     f(errorStateActionCreator({
       errorType: null

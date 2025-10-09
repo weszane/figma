@@ -18,7 +18,7 @@ import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 if (443 == require.j) {}
 export function $$y0() {
   let e;
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     nudgeUpgradeRequest
   } = q0();

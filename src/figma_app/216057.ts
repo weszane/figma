@@ -106,7 +106,7 @@ type VariableSetInfo
     | SubscribedVariableSetInfo
     | SubscribedExtensionVariableSetInfo
 
-type VariableSetsAtomType = Record<string, VariableSetInfo>
+export type VariableSetsAtomType = Record<string, VariableSetInfo>
 
 // Original: $$G26
 // Local variable sets atom with Redux state management

@@ -158,7 +158,7 @@ export function $$x2({
     getTriggerProps
   } = setupMenu();
   let g = useId();
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   useEffect(() => E(aq()), [E]);
   let y = _?.format(c) ?? o?.[0];
   let b = y ? getI18nString("dev_handoff.code.language_named", {
@@ -199,7 +199,7 @@ export function $$N4({
     getTriggerProps
   } = setupMenu();
   let m = useId();
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   useEffect(() => g(aq()), [g]);
   let E = d?.format(o) ?? r?.[0];
   let y = E ? getI18nString("dev_handoff.code.settings.language_dropdown_with_unit", {

@@ -148,7 +148,7 @@ export function $$L1({
     isDetailModalShownForRow,
     toggleDetailModal
   } = function (e, t, r) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let s = useSelector(e => e.modalShown);
     let o = getSelectedView();
     let l = !!s && s.type === VariableDetailModal;
@@ -189,7 +189,7 @@ export function $$L1({
     isMatchingVarsModalShownForRow,
     toggleMatchingVarsModal
   } = function (e, t, r) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let s = useSelector(e => e.modalShown);
     let o = !!s && s.type === MatchingVariablesModal;
     let l = o && s.data?.rowRef && s.data.rowRef.current === (r?.current ?? e?.current);
@@ -220,7 +220,7 @@ export function $$L1({
     isStyleDetailModalShownForRow,
     toggleStyleDetailModal
   } = function (e, t, r, n, s) {
-    let o = useDispatch();
+    let o = useDispatch<AppDispatch>();
     let l = useSelector(e => e.modalShown);
     let d = getSelectedView();
     let u = !!l && l.type === StyleDetailModal;

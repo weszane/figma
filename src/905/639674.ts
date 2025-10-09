@@ -8,7 +8,7 @@ import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../905/105972";
 export function $$p0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useRef(null);
   let [p, m] = useState(!1);
   let h = async () => {

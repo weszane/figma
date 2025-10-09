@@ -80,7 +80,7 @@ function eg(e) {
   let o = useSelector(e => e.selectedView?.editorType);
   let l = useSelector(e => "prototype" === e.selectedView.view);
   let d = o === FEditorType.Design || o === FEditorType.Whiteboard || o === FEditorType.DevHandoff || o === FEditorType.Slides || o === FEditorType.Illustration;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   if (isIpadDevice || !i || l || !d) return null;
   let u = YL({
     openFile: i,
@@ -261,7 +261,7 @@ function eI({
   let [L, R] = useState(310);
   let M = useRef(null);
   let [P, F] = useState(0);
-  let B = useDispatch();
+  let B = useDispatch<AppDispatch>();
   let U = getFileTypePx();
   let G = Math.min(window.innerHeight - U - 22, 465);
   useLayoutEffect(() => {
@@ -434,7 +434,7 @@ function ek({
   let [B, U] = useState(310);
   let G = useRef(null);
   let [K, z] = useState(0);
-  let Y = useDispatch();
+  let Y = useDispatch<AppDispatch>();
   let J = getFileTypePx();
   let q = Math.min(window.innerHeight - J - 22, 465);
   useLayoutEffect(() => {
@@ -653,7 +653,7 @@ let $$eO0 = memo(function (e) {
   let k = useIsFullscreenDevModeComponentBrowser();
   let N = isUserNotLoggedInAndEditorSupported();
   let O = WN();
-  let M = useDispatch();
+  let M = useDispatch<AppDispatch>();
   let [P, G] = useState(!1);
   let z = useIsSelectedFigmakeFullscreen();
   let W = dropdownShown?.type;

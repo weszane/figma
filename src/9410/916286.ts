@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import o from "classnames";
 import { Y } from "../905/506207";
-import { co } from "../figma_app/958735";
+import { syncLibraryAssets } from "../figma_app/958735";
 import { isVsCodeEnvironment } from "../905/858738";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
@@ -37,7 +37,7 @@ function O() {
 function L(e) {
   let t = getSelectedView();
   let i = "fullscreen" === t.view ? t.fileKey : null;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useSelector(e => e.fileByKey);
   let d = useSelector(e => e.userAnalyticsData);
   let c = useSelector(e => e.user);
@@ -157,7 +157,7 @@ function L(e) {
   return p && _$$n(d, c?.email) ? jsx(O, {}) : jsx(Fragment, {});
 }
 function P() {
-  co();
+  syncLibraryAssets();
   return null;
 }
 export function $$F0({

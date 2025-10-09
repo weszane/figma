@@ -54,7 +54,7 @@ function R({
   let [u, R] = useState(!1);
   let [N, P] = useAtomValueAndSetter(k);
   let O = useRef(null);
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let L = useDropdown('search-options-dropdown');
   let [F, M] = useState(0);
   let [j, U] = useState(0);

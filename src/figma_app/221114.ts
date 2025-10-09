@@ -1290,7 +1290,7 @@ function eB({
   idx: s,
   isSection: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useFileByKey();
   return jsx(Fragment, {
     children: e.map((a, c) => jsx($$eR4, {

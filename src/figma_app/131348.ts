@@ -28,7 +28,7 @@ function $$I(e) {
     "data-testid": p,
     recordingKey
   } = e;
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let {
     ref,
     ...S

@@ -151,7 +151,7 @@ export function validateFileUploads(
  * @param videoSource - URL or path to the video source
  * @returns Promise that resolves to encoded image data
  */
-export async function generateVideoThumbnail(videoSource: string): Promise<Uint8Array> {
+export async function generateVideoThumbnail(videoSource: string) {
   // Create video element and load video
   const video = document.createElement("video")
   video.preload = "auto"

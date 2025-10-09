@@ -16,7 +16,7 @@ var $$n0;
     e[e.INFO = 6] = "INFO";
   })(e.Step || (e.Step = {}));
   e.usePublishModalStateMachine = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useSelector(e => e.authedProfilesById);
     let n = useSelector(e => e.loadingState);
     let c = selectCurrentUser();

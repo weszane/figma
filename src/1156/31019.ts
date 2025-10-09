@@ -44,7 +44,7 @@ export function $$L0({
   let o = selectCurrentUser();
   let c = selectCurrentFile();
   let d = c?.key || null;
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let [f, b] = useAtomValueAndSetter(I(t));
   let j = _$$A();
   return {

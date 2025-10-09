@@ -63,7 +63,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuItemLead 
 import { generateRecordingKey, useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { isInteractionPathCheck } from '../figma_app/897289';
 import { e as _$$e, q as _$$q } from '../figma_app/905311';
-import { rk, sw, YG, Zs } from '../figma_app/914957';
+import { showStylePreviewThunk, hideStylePreview, hideStylePreviewThunk, showCreateStylePreviewThunk } from '../figma_app/914957';
 let H = q;
 let G = 'styles--contextMenu--C-hVT';
 let Z = 'styles--caret--DZmzh';
@@ -272,7 +272,7 @@ function en({
   temporarilyExpandFolder: _,
   toggleFolder: T
 }) {
-  let R = useDispatch();
+  let R = useDispatch<AppDispatch>();
   let [I, N] = useState(!1);
   let D = useRef(null);
   let B = useRef(null);
@@ -294,7 +294,7 @@ function en({
   let q = useCallback(() => {
     let e = mapTypeToStyleKey(t.styleTypeSection);
     let l = D.current?.getBoundingClientRect();
-    e && l && R(Zs({
+    e && l && R(showCreateStylePreviewThunk({
       rowLeft: l.left,
       rowTop: l.top,
       styleType: t.styleTypeSection,
@@ -378,7 +378,7 @@ function eu({
 }) {
   let [N, D] = useState(!1);
   let [B, A] = useState(!1);
-  let M = useDispatch();
+  let M = useDispatch<AppDispatch>();
   let K = useRef(null);
   let F = useRef(null);
   let O = useCallback(() => {
@@ -396,7 +396,7 @@ function eu({
     let e = F.current;
     if (e) {
       let t = e.getBoundingClientRect();
-      Y ? M(sw()) : (M(rk({
+      Y ? M(hideStylePreview()) : (M(showStylePreviewThunk({
         style: E,
         rowTop: t.top,
         rowLeft: t.left
@@ -511,13 +511,13 @@ function em({
   recordingKey: l
 }) {
   let [r, a] = useState(!1);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let d = useRef(null);
   let c = useCallback(() => {
     t && fullscreenValue.triggerAction('set-tool-default');
     let l = mapTypeToStyleKey(e);
     let n = d.current?.getBoundingClientRect();
-    l && n && i(Zs({
+    l && n && i(showCreateStylePreviewThunk({
       rowLeft: n.left,
       rowTop: n.top,
       styleType: e,
@@ -607,7 +607,7 @@ function eC({
   onDuplicateItems: p,
   onPasteItems: x
 }) {
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   useEffect(() => (Fullscreen.computePastableStyleCount(), () => {
     Fullscreen.clearPastableStyleCount();
   }), []);
@@ -618,7 +618,7 @@ function eC({
     let l = t[0];
     if (e) {
       let t = e.getBoundingClientRect();
-      f(rk({
+      f(showStylePreviewThunk({
         style: l,
         rowTop: t.top,
         rowLeft: t.left
@@ -706,7 +706,7 @@ function eM({
 function eP({
   setDefaultToolOnCreateStyle: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let l = useContext(lk);
   let r = !useAppModelProperty('isReadOnly');
   let a = useRef(null);
@@ -729,7 +729,7 @@ function eP({
   };
   let C = e => {
     e.stopPropagation();
-    t(YG());
+    t(hideStylePreviewThunk());
     let l = a.current;
     u ? w() : l && (trackEventAnalytics('editor-local-styles-dropdown-show'), k());
   };
@@ -927,7 +927,7 @@ function eY({
   setDefaultToolOnCreateStyle: t,
   recordingKey: l
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let i = useSelector(e => e.stylePreviewShown);
   let y = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let m = useSelector(e => e.mirror.appModel.currentTool);
@@ -941,7 +941,7 @@ function eY({
   let B = y === LayoutTabType.GRADIENT || y === LayoutTabType.RASTER || m === DesignGraphElements.DROPPER_COLOR;
   useEffect(() => {
     let e = () => {
-      !B && (a(setLocalStyleSelection(null)), i.isShown && (a(sw()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID)));
+      !B && (a(setLocalStyleSelection(null)), i.isShown && (a(hideStylePreview()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID)));
     };
     let t = shouldHandleMultiTouchOrPressure();
     t ? window.addEventListener('pointerdown', e) : window.addEventListener('mousedown', e);
@@ -1118,7 +1118,7 @@ function ez({
 }) {
   let U = selectCurrentFile();
   let Y = !useAppModelProperty('isReadOnly');
-  let z = useDispatch();
+  let z = useDispatch<AppDispatch>();
   let W = useSelector(e => e.stylePreviewShown);
   let q = useSelector(t => i4(t, e));
   let H = useSelector(t => A7(t, e, l));
@@ -1173,7 +1173,7 @@ function ez({
     return d;
   }, [l]);
   let ea = useCallback(() => {
-    W.isShown && (z(sw()), z(hidePickerThunk()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
+    W.isShown && (z(hideStylePreview()), z(hidePickerThunk()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
   }, [z, W.isShown]);
   let ei = useMemo(() => {
     if (!Q) return null;
@@ -1347,7 +1347,7 @@ function ez({
       return t;
     }));
     fullscreenValue.triggerAction('commit');
-    W.isShown && (z(sw()), z(hidePickerThunk()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
+    W.isShown && (z(hideStylePreview()), z(hidePickerThunk()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
     P(null);
   }, [W.isShown, P, q, l, U?.key, X, z]);
   let eb = useMemo(() => {

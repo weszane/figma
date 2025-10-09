@@ -49,7 +49,7 @@ export function $$p0() {
   let t = !!selectUserFlag(l("unmanaged"));
   let r = !!selectUserFlag(l("managed"));
   let a = !!selectUserFlag(l("srgb"));
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let d = useCallback(n => {
     c(s, {
       isDefault: e,

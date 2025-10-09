@@ -20,12 +20,12 @@ function c(e) {
   };
 }
 export function $$g2(e) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let t = c(e);
   return () => i(dx(t));
 }
 export function $$h0(e) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let t = c(e);
   return () => i(MZ(t));
 }

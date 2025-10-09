@@ -31,7 +31,7 @@ export function $$E0(e) {
     setUserClickedControls
   } = e;
   let k = getBigNudgeAmount();
-  let R = useDispatch();
+  let R = useDispatch<AppDispatch>();
   let N = useMemo(() => new f0(duration), [duration]);
   let P = X7();
   let O = paint.video?.hash ? sha1HexFromBytes(paint.video?.hash).toLowerCase() : null;

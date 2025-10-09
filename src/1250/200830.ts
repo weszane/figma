@@ -96,7 +96,7 @@ import { In } from "../905/672640";
 import { SvgComponent } from "../905/714743";
 import { A as _$$A2 } from "../svg/831814";
 import { hideModal, showModalHandler } from "../905/156213";
-import { bE } from "../figma_app/375098";
+import { userTeamFlagPost } from "../figma_app/375098";
 import { STANDARD_LIMIT, PRIMARY_LIMIT, hasTeamPaidAccess } from "../figma_app/345997";
 import { Mm, iX, bo, h3, $Q, TB, PG, NN } from "../5885/399780";
 import { registerModal } from "../905/102752";
@@ -290,7 +290,7 @@ function ea(e) {
   });
 }
 function es(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useSelector(e => e.user?.drafts_folder_id);
   useEffect(() => (pP(), () => void _$$nz()), [t, n]);
   return jsx(EventShield, {
@@ -599,7 +599,7 @@ let eU = () => {
   return !1;
 };
 function eG() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(userFlagsAtom);
   let n = useAtomWithSubscription(eL);
   let r = useLatestRef(n);
@@ -743,7 +743,7 @@ function ti({
   onModalClose: t
 }) {
   let [n, r] = useState(null);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = useSelector(({
     selectedView: e
   }) => e);
@@ -1023,7 +1023,7 @@ function tS() {
   let t = useSelector(e => e.teams);
   let n = useSelector(e => e.userFlags.personal_draft_migration_scheduled);
   let r = e.filter(e => e.plan_type === OrganizationType.TEAM).map(e => t[e.plan_id]).filter(e => !!e);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = getVisibleTheme();
   let d = useAtomWithSubscription(mp);
   let _ = e.some(e => e.plan_type === OrganizationType.ORG);
@@ -1374,13 +1374,13 @@ function t0() {
 let t1 = registerModal(function ({
   teamId: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useCallback(() => {
     t(hideModal());
   }, [t]);
   let r = useCallback(() => {
     n();
-    t(bE({
+    t(userTeamFlagPost({
       all_team_flags: [{
         team_id: e,
         flags: {
@@ -1678,7 +1678,7 @@ let na = registerModal(function () {
   let [d, _] = useState(TB);
   let [u, m] = useState(PG);
   let p = xX();
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let f = useCallback(() => p.find(e => e.id === n)?.name ?? getI18nString("pro_trials_v3.pro_trial_initiation_modal.your_team"), [p, n]);
   let h = useCallback(() => g(hideModal()), [g]);
   let b = getI18nString("payments.pro_trial.start_pro_trial_error");
@@ -1744,7 +1744,7 @@ function no(e) {
   let {
     hideModal
   } = e;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = jsxs(Fragment, {
     children: [jsx(TextWithTruncation, {
       fontSize: 13,
@@ -1780,7 +1780,7 @@ function ns(e) {
     teamId,
     hideModal
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = jsxs(Fragment, {
     children: [jsx(TextWithTruncation, {
       fontSize: 13,
@@ -1817,7 +1817,7 @@ function nl(e) {
     hideModal,
     teamId
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = {
     view: "team",
     teamId
@@ -1909,7 +1909,7 @@ function n_() {
     overlay: ProTrialsV3EntryOverlay,
     priority: _$$N.DEFAULT_MODAL
   });
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     e.show();
   });
@@ -1944,11 +1944,11 @@ function nu(e) {
     proTrial
   } = e;
   let r = proTrial.teamId;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     t.show();
   });
-  let o = useCallback(() => i(bE({
+  let o = useCallback(() => i(userTeamFlagPost({
     all_team_flags: [{
       team_id: r,
       flags: {
@@ -1986,11 +1986,11 @@ function nm(e) {
     proTrial
   } = e;
   let r = proTrial.teamId;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     t.show();
   });
-  let o = useCallback(() => i(bE({
+  let o = useCallback(() => i(userTeamFlagPost({
     all_team_flags: [{
       team_id: r,
       flags: {
@@ -2114,7 +2114,7 @@ function nT() {
   });
 }
 function nI(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = e.promo;
   let r = "";
   let i = parseInt(n.promo_value);
@@ -2369,7 +2369,7 @@ function n6() {
   let t = useAtomWithSubscription(Qm);
   let n = useAtomWithSubscription(zN);
   let a = getCurrentTeam();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = _$$e({
     overlay: EduOffboarding,
     priority: _$$N.HIGH_PRIORITY_MODAL
@@ -2406,7 +2406,7 @@ function an() {
     overlay: EduPostVerification,
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     let n = getQueryParam(n7.key);
     let a = getQueryParam(ae.key);
@@ -2470,7 +2470,7 @@ function ao() {
   }) : null;
 }
 function a_() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(d2);
   let n = _$$e({
     overlay: UniversalUpgrade,

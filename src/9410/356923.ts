@@ -26,7 +26,7 @@ import { i } from "../figma_app/566312";
 import { JY } from "../9410/236102";
 import { v2 } from "../figma_app/164260";
 import { D as _$$D } from "../7222/938408";
-import { VZ, Ei, bY, Vf, ux, DM } from "../figma_app/60023";
+import { selectionAtomFamily, draftModeAtomFamily, fileTypeAtom, FileType, nullAtomFamily, lockAtomFamily } from "../figma_app/60023";
 import { CH, Ji } from "../figma_app/553488";
 import { r$ } from "../7222/396421";
 import { e4, pz, a3, ln, S as _$$S, uP, zs, $y, VY, iH, y5, gx, JB, n_ } from "../9410/261393";
@@ -37,11 +37,11 @@ export function $$P2({
   ...t
 }) {
   let i = r$();
-  let s = Xr(VZ);
-  let o = Xr(Ei);
+  let s = Xr(selectionAtomFamily);
+  let o = Xr(draftModeAtomFamily);
   let c = useAtomWithSubscription(v2);
   let u = useCurrentFileKey();
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = "insert-slide-module";
   let _ = _$$D(e.library_key);
   let y = scopeAwareFunction.user(g, (t, r, n) => {
@@ -149,7 +149,7 @@ function B({
   showSelectedState: s = !1
 }) {
   let o = r$();
-  let l = useAtomWithSubscription(bY);
+  let l = useAtomWithSubscription(fileTypeAtom);
   return jsx("div", {
     "data-testid": t,
     className: m()(cssBuilderInstance.p8.$, a),
@@ -160,7 +160,7 @@ function B({
           className: m()({
             [zs]: o === Ji.PICKER || o === Ji.OUTLINE_TO_DECK,
             [$y]: o === Ji.OVERLAY_MODAL,
-            [VY]: l.type === Vf.TEMPLATE_PICKER,
+            [VY]: l.type === FileType.TEMPLATE_PICKER,
             [iH]: s
           }),
           removeBorder: !0,
@@ -187,7 +187,7 @@ function B({
 export function $$U0({
   template: e
 }) {
-  return useAtomWithSubscription(bY).type === Vf.TEMPLATE_PICKER ? jsx(G, {
+  return useAtomWithSubscription(fileTypeAtom).type === FileType.TEMPLATE_PICKER ? jsx(G, {
     template: e
   }) : jsx(K, {
     template: e
@@ -201,7 +201,7 @@ function G({
     imageUrl,
     libraryKey
   } = fG()(e);
-  let [a, s] = useAtomValueAndSetter(ux);
+  let [a, s] = useAtomValueAndSetter(nullAtomFamily);
   if (!libraryKey) return null;
   let o = () => s(_$$l(libraryKey));
   return jsx(B, {
@@ -225,11 +225,11 @@ function K({
     imageUrl,
     libraryKey
   } = fG()(e);
-  let a = Xr(bY);
+  let a = Xr(fileTypeAtom);
   let o = r$();
-  let l = useAtomWithSubscription(bY);
+  let l = useAtomWithSubscription(fileTypeAtom);
   let d = JY();
-  let u = Xr(DM);
+  let u = Xr(lockAtomFamily);
   if (!libraryKey) return null;
   let h = e => {
     e.stopPropagation();
@@ -238,7 +238,7 @@ function K({
       name: "template_cover_tile",
       productType: "slides"
     }), o === Ji.OUTLINE_TO_DECK ? (d.setTemplateLibraryKey(_$$l(libraryKey)), u(!1)) : a({
-      type: Vf.TEMPLATE,
+      type: FileType.TEMPLATE,
       libraryKey,
       parentView: l
     }));

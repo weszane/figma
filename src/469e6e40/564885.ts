@@ -19,11 +19,11 @@ import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { OrganizationType } from "../905/833838";
 import { E as _$$E } from "../figma_app/126651";
 import { KindEnum } from "../905/129884";
-import { J as _$$J } from "../905/298764";
+import { activityLogsService } from "../905/298764";
 import { teamAPIClient } from "../905/834575";
 export let $$E0 = registerModal(function (e) {
   let t = useModalManager(e);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let [r, u] = useState({});
   let [g, h] = useState(!0);
   let x = function (e, t) {
@@ -41,7 +41,7 @@ export let $$E0 = registerModal(function (e) {
     }
   }(e.activityType, e.planUserDisplayName);
   useEffect(() => {
-    (e.planType === OrganizationType.ORG ? _$$J.getLastEdit({
+    (e.planType === OrganizationType.ORG ? activityLogsService.getLastEdit({
       orgUserId: e.planUserId
     }) : teamAPIClient.getUsersLastActive({
       teamId: e.planId,
@@ -133,7 +133,7 @@ function C() {
   });
 }
 function S(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsxs("tr", {
     className: "x1n5zjp5 x17akokd xdpxx8g",
     children: [jsx("td", {

@@ -35,7 +35,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { ModalContainer } from "../figma_app/918700";
 import { vN, Jn, S7 } from "../7222/396421";
 import { uRR, M$q } from "../figma_app/27776";
-import { Ei, q7, VZ } from "../figma_app/60023";
+import { draftModeAtomFamily, booleanAtomFamily, selectionAtomFamily } from "../figma_app/60023";
 import { Ji } from "../figma_app/553488";
 import { ij } from "../9410/148230";
 var d = l;
@@ -64,11 +64,11 @@ function G({
   });
 }
 export function $$V1() {
-  let [e, t] = useAtomValueAndSetter(Ei);
+  let [e, t] = useAtomValueAndSetter(draftModeAtomFamily);
   let i = getSidebarSplitPosition();
   let s = _o();
   let l = Ye();
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let f = useCurrentUserOrg();
   let g = useRef(null);
   if (useClickOutside(() => t(!1), {
@@ -108,11 +108,11 @@ export function $$W0() {
   let t = useHasValidSceneSlideTheme();
   let i = !!S7();
   let n = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []).flat().length > 0;
-  let a = useAtomWithSubscription(q7);
+  let a = useAtomWithSubscription(booleanAtomFamily);
   let l = useIsFullscreenReady();
   let d = useAtomWithSubscription(overlayStateAtom);
   let c = useAtomWithSubscription(userFlagExistsAtomFamily(Kt)).data;
-  let u = useAtomWithSubscription(VZ);
+  let u = useAtomWithSubscription(selectionAtomFamily);
   let p = useAtomWithSubscription(designCopyToSlidesAtom);
   let {
     state

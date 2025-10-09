@@ -415,7 +415,7 @@ export function $$W1({
   onSelectDropdownItem: u,
   onSubmitCustomZoom: p
 }) {
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let h = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
   let m = XR();
   let y = useMemo(() => ({

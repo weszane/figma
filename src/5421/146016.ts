@@ -28,7 +28,7 @@ import { trackPrototypeScaleChangeEvent } from '../figma_app/2590';
 import { useAtomValueAndSetter } from '../figma_app/27355';
 import { hP, hV, Oz, YT, zt } from '../figma_app/84580';
 import { av } from '../figma_app/316316';
-import { eF } from '../figma_app/394327';
+import { isLocallySoftDeleted } from '../figma_app/394327';
 import { Op, qQ } from '../figma_app/405038';
 import { d as _$$d } from '../figma_app/429226';
 import { _X, cP, js, Z6 } from '../figma_app/451499';
@@ -39,7 +39,7 @@ import { selectExperimentConfigHook } from '../figma_app/594947';
 import { aA } from '../figma_app/632975';
 import { y3 } from '../figma_app/741785';
 import { Fullscreen, VariableResolvedDataType } from '../figma_app/763686';
-import { u as _$$u } from '../figma_app/852050';
+import { getVariableById } from '../figma_app/852050';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 let a = memo(e => {
   return jsx('svg', {
@@ -237,7 +237,7 @@ function Y({
   let l = useContext(_$$c);
   let s = a && l === _$$P.LEFT;
   let c = t || n;
-  let p = _$$u(isValidValue(e.targetVariable) && e.targetVariable && 'id' in e.targetVariable ? e.targetVariable?.id : void 0);
+  let p = getVariableById(isValidValue(e.targetVariable) && e.targetVariable && 'id' in e.targetVariable ? e.targetVariable?.id : void 0);
   let u = isValidValue(e.targetVariable) && e.targetVariable && 'nodeFieldAlias' in e.targetVariable ? aA(e.targetVariable.nodeFieldAlias.stablePathToNode, e.targetVariable.nodeFieldAlias.indexOrKey) : void 0;
   let h = p?.name ?? u?.name;
   let g = G();
@@ -425,7 +425,7 @@ function Y({
                         className: 'prototype_action_verbose_title--variableNameContainer--XeJX2',
                         children: jsx(wG, {
                           text: h,
-                          isDeleted: !!p && eF(p),
+                          isDeleted: !!p && isLocallySoftDeleted(p),
                           disableHover: s
                         })
                       }),
@@ -479,7 +479,7 @@ export function $$en0({
   setAutoOpenExpressionBuilder: v,
   ...I
 }) {
-  let C = useDispatch();
+  let C = useDispatch<AppDispatch>();
   let {
     shouldShowAdvancedPrototypingPaywall,
     showAdvancedPrototypingVariablesModal,

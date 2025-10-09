@@ -26,7 +26,7 @@ function T({
     window.origin === window.parent.origin && (n = window.parent || window);
   } catch {}
   let o = useAsyncWithReset(() => _$$o(n), [n]);
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let y = !!isGoogleFederatedCMEnabled();
   let T = r ?? y;
   let I = useRef(!1);

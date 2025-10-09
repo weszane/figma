@@ -190,7 +190,7 @@ let eb = registerModal(({
   licenseGroupName: t,
   orgId: a
 }) => {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return jsx(ConfirmationModal, {
     headerClassName: 'complete_license_group_review_modal--header--ee93k',
     maxWidth: 360,
@@ -677,7 +677,7 @@ function tv({
   });
   let q = status !== 'loaded' || !!fetchMore;
   let B = useCurrentUserOrgUser();
-  let G = useDispatch();
+  let G = useDispatch<AppDispatch>();
   let z = _$$R();
   let V = useMemo(() => sortedUsers.map(t => ({
     org: e,
@@ -888,7 +888,7 @@ let tf = registerModal(({
   invoices: r,
   addPendingOrgUserIds: l
 }) => {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = useCurrentUserOrg();
   let [c, _] = useState(eN.ADD_MEMBERS);
   let m = useSelector(({
@@ -964,7 +964,7 @@ function tj(e) {
   });
 }
 function ty(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return e.requiresReview ? jsxs(Fragment, {
     children: [jsx(BannerButton, {
       onClick: () => {
@@ -1075,7 +1075,7 @@ function tE(e) {
   }) : null;
 }
 function tT(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = [TeamOrg.ORG, e.org.id].toString();
   let [s] = useAtomValueAndSetter(_$$Y3);
   let r = s[a] ?? 0;
@@ -1169,7 +1169,7 @@ function tD({
     idpGroupIds,
     idpGroupsById
   } = tL();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let o = useDropdownState();
   return idpGroupIds.length ? jsx(bv, {
     'data-testid': 'idp-group-menubar-filter',
@@ -1210,7 +1210,7 @@ function tP({
   onFilterUpdate: t,
   getCount: a
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let l = useSelector(({
     licenseGroups: e
@@ -1908,7 +1908,7 @@ function aq({
   orgUserIds: r,
   queueFilterCountsRefetch: l
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = useCallback(e => {
     o(showModalHandler({
       type: a$,
@@ -1961,7 +1961,7 @@ let a$ = registerModal(e => {
   let c = JT(seatType);
   let _ = orgUserIds.length;
   let u = useModalManager(e);
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let [p, g] = useState(!1);
   let h = useCallback(() => {
     g(!0);
@@ -2041,7 +2041,7 @@ let a$ = registerModal(e => {
   });
 });
 function aV(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = getUserBadge(e.orgUser);
   return jsx(_$$r2, {
     defaultText: '',
@@ -2054,7 +2054,7 @@ function aV(e) {
 }
 let aJ = 'guest_resources--disclaimer--2MOEQ';
 function aK(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsxs('tr', {
     className: 'x17akokd xdpxx8g xjp7ctv',
     children: [jsx('td', {
@@ -2106,7 +2106,7 @@ function aK(e) {
 }
 function aX(e) {
   let t = e.resource.folder;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = e.hasCheckedAccess && !!e.resource.can_view;
   let r = s || !e.hasCheckedAccess ? void 0 : getI18nString('members_tab.member_modal.not_project_member_tooltip');
   let l = `folder_tooltip_${e.resource.folder.id}`;
@@ -2151,7 +2151,7 @@ function aQ(e) {
   let t = e.resource.team;
   let a = e.hasCheckedAccess && !!e.resource.can_view;
   let s = a || !e.hasCheckedAccess;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = a ? () => {
     r(selectViewAction({
       view: 'team',
@@ -2337,7 +2337,7 @@ function a2({
   setHighlightedItemKey: t,
   isCurrentUserOrgAdmin: a
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return e9(e) ? jsxs(zx, {
     children: [jsx(_$$p3, {
       onClick: () => t(e.orgUser.id),
@@ -2387,7 +2387,7 @@ function a2({
   });
 }
 function a4(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(_$$p3, {
     onClick: () => {
       t(showModalHandler({
@@ -3151,7 +3151,7 @@ export function $$nc0(e) {
     startTime,
     isLoading
   } = e;
-  let M = useDispatch();
+  let M = useDispatch<AppDispatch>();
   let P = useSelector(e => e.selectedView);
   let U = useSelector(e => {
     let t = e.currentUserOrgId;

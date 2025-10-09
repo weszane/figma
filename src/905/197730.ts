@@ -3,7 +3,7 @@ import { pS, hl, fN, Bt, MQ, Ah, Pg, kE, hW, rK } from "../905/588985";
 import { Gs, VZ, TH, Gw, rA, Bt as _$$Bt, Ib, o1 } from "../905/481915";
 import { ManifestEditorType } from "../figma_app/155287";
 import { isVsCodeEnvironment } from "../905/858738";
-import { M } from "../figma_app/170366";
+import { getPluginManager } from "../figma_app/170366";
 import { wL, Pl, Z8 } from "../905/341409";
 let c = `# Node
 *.log
@@ -15,13 +15,13 @@ dist/
 code.js
 `;
 export function $$u0() {
-  let e = M();
+  let e = getPluginManager();
   return !!(e && e.isCompatibleWith({
     desktopVersion: 72
   }));
 }
 function p() {
-  let e = M();
+  let e = getPluginManager();
   return e && e.isCompatibleWith({
     desktopVersion: 62
   }) ? [{

@@ -54,7 +54,7 @@ export function $$T0(e) {
   });
 }
 function E(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = setupAutofocusHandler();
   let {
     folder,

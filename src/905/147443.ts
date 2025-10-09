@@ -11,7 +11,7 @@ export function $$c0() {
   let i = !!getFeatureFlags().exp_help_on_hover_ff;
   let c = selectUserFlag("in_help_on_hover_exp_treatment");
   let u = selectUserFlag("disabled_help_on_hover_ui_hints");
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   return useCallback(() => {
     let n = i && ul(e) && !u && !0 === t.getConfig().getValue("in_treatment");
     n && !c && p(postUserFlag({

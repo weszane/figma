@@ -1,54 +1,55 @@
-import { reportError } from '../905/11';
-import { clearPlaybackHandler } from '../905/104019';
-import { ServiceCategories } from '../905/165054';
-import { delay } from '../905/236856';
-import { hM, Nq, p1, Tj, Yd } from '../905/266529';
-import { SubscriptionStatus } from '../905/272080';
-import { VisualBellActions } from '../905/302958';
-import { getI18nString } from '../905/303541';
-import { n as _$$n } from '../905/347702';
-import { debugState } from '../905/407919';
-import { trackEventAnalytics } from '../905/449184';
-import { createDefaultPluginOptions, createPluginInstance } from '../905/472793';
-import { getPluginApiDebugCopy } from '../905/535481';
-import { PluginApiMetrics } from '../905/545265';
-import { dequeuePluginStatus } from '../905/571565';
-import { VisualBellIcon } from '../905/576487';
-import { pS } from '../905/588985';
-import { getFeatureFlags } from '../905/601108';
-import { getCurrentUserOrgId, getPluginDevMode, handleSelectedView } from '../905/622391';
-import { yA } from '../905/642684';
-import { logger } from '../905/651849';
-import { localStorageRef } from '../905/657224';
-import { NoOpVm } from '../905/700654';
-import { parseAndRemoveSourceMapComments } from '../905/751771';
-import { closeCurrentPlugin, generateRandomID, handlePluginError, isGlobalPluginActive, pluginState, resetPluginState, setFAtom, setGlobalPluginCloseFunc, setPluginCloseFunc, setPluginData, setPluginTriggeredFrom, setResetGlobalPluginAPI } from '../905/753206';
-import { mapEditorTypeTo } from '../905/808775';
-import { setupPluginCodeCache } from '../905/827944';
-import { isVsCodeEnvironment } from '../905/858738';
-import { waitForAllPagesForPlugin } from '../905/916933';
-import { a7, ls } from '../905/917898';
-import { canPerformAction, canRunExtensions } from '../figma_app/12796';
-import { atomStoreManager } from '../figma_app/27355';
-import { hasMonetizedResourceMetadata } from '../figma_app/45218';
-import { mapEditorTypeToStringWithObfuscated } from '../figma_app/53721';
-import { addPluginToRecentsThunk, addWidgetToRecentsThunk } from '../figma_app/147952';
-import { hasLocalFileId } from '../figma_app/155287';
-import { isDevEnvironment, isE2ETraffic } from '../figma_app/169182';
-import { clearVisualBell, getFullscreenViewEditorType, hasSpecialCapability, isBuzzPlugin, isDevModeWithInspectPanel, isValidForCooper, isValidForCooperSelectedView, isValidForFullscreenView, joinStringSegments, loadLocalPluginSource, loadPluginManifest, PluginPermissions, showVisualBell } from '../figma_app/300692';
-import { fullscreenValue } from '../figma_app/455680';
-import { d4 } from '../figma_app/474636';
-import { PluginManager } from '../figma_app/612938';
-import { assetCategoryAtom, AssetCategoryEnum } from '../figma_app/639711';
-import { setSelectedDevModePropertiesPanelTab } from '../figma_app/741237';
-import { IAssertResource } from '../figma_app/763686';
-import { C3, SH } from '../figma_app/790714';
-import { desktopAPIInstance } from '../figma_app/876459';
-import { isInteractionPathCheck } from '../figma_app/897289';
-import { getPluginIframeMode, DEFAULT_ALLOWED_ORIGINS, PluginInstanceManager } from '../figma_app/985200';
-let n;
-let r;
-let a;
+import { reportError } from '../905/11'
+import { clearPlaybackHandler } from '../905/104019'
+import { ServiceCategories } from '../905/165054'
+import { delay } from '../905/236856'
+import { getCounter, getStoredValue, hasStoredValue, incrementCounter, setStoredValue } from '../905/266529'
+import { SubscriptionStatus } from '../905/272080'
+import { VisualBellActions } from '../905/302958'
+import { getI18nString } from '../905/303541'
+import { n as _$$n } from '../905/347702'
+import { debugState } from '../905/407919'
+import { trackEventAnalytics } from '../905/449184'
+import { createDefaultPluginOptions, createPluginInstance } from '../905/472793'
+import { getPluginApiDebugCopy } from '../905/535481'
+import { PluginApiMetrics } from '../905/545265'
+import { dequeuePluginStatus } from '../905/571565'
+import { VisualBellIcon } from '../905/576487'
+import { getFeatureFlags } from '../905/601108'
+import { getCurrentUserOrgId, getPluginDevMode, handleSelectedView } from '../905/622391'
+import { yA } from '../905/642684'
+import { logger } from '../905/651849'
+import { localStorageRef } from '../905/657224'
+import { NoOpVm } from '../905/700654'
+import { parseAndRemoveSourceMapComments } from '../905/751771'
+import { closeCurrentPlugin, generateRandomID, handlePluginError, isGlobalPluginActive, pluginState, resetPluginState, setFAtom, setGlobalPluginCloseFunc, setPluginCloseFunc, setPluginData, setPluginTriggeredFrom, setResetGlobalPluginAPI } from '../905/753206'
+import { mapEditorTypeTo } from '../905/808775'
+import { setupPluginCodeCache } from '../905/827944'
+import { isVsCodeEnvironment } from '../905/858738'
+import { waitForAllPagesForPlugin } from '../905/916933'
+import { runPluginInVm } from '../905/917898'
+import { canPerformAction, canRunExtensions } from '../figma_app/12796'
+import { atomStoreManager } from '../figma_app/27355'
+import { hasMonetizedResourceMetadata } from '../figma_app/45218'
+import { mapEditorTypeToStringWithObfuscated } from '../figma_app/53721'
+import { addPluginToRecentsThunk, addWidgetToRecentsThunk } from '../figma_app/147952'
+import { hasLocalFileId } from '../figma_app/155287'
+import { isDevEnvironment, isE2ETraffic } from '../figma_app/169182'
+import { clearVisualBell, getFullscreenViewEditorType, hasSpecialCapability, isBuzzPlugin, isDevModeWithInspectPanel, isValidForCooper, isValidForCooperSelectedView, isValidForFullscreenView, joinStringSegments, loadLocalPluginSource, loadPluginManifest, PluginPermissions, showVisualBell } from '../figma_app/300692'
+import { fullscreenValue } from '../figma_app/455680'
+import { d4 } from '../figma_app/474636'
+import { PluginManager } from '../figma_app/612938'
+import { assetCategoryAtom, AssetCategoryEnum } from '../figma_app/639711'
+import { setSelectedDevModePropertiesPanelTab } from '../figma_app/741237'
+import { IAssertResource } from '../figma_app/763686'
+import { C3, SH } from '../figma_app/790714'
+import { desktopAPIInstance } from '../figma_app/876459'
+import { isInteractionPathCheck } from '../figma_app/897289'
+import { DEFAULT_ALLOWED_ORIGINS, getPluginIframeMode, PluginInstanceManager } from '../figma_app/985200'
+import { ensureVmModuleLoaded } from "./realmVmWrapper"
+
+let n
+let r
+let a
 let $ = `const __html__ = (() => {
   let realString = null;
   const getRealString = () => {
@@ -71,10 +72,10 @@ let $ = `const __html__ = (() => {
       },
     },
   );
-})();`.replace(/\n/g, ' ');
+})();`.replace(/\n/g, ' ')
 async function Z(e) {
-  let t;
-  let i;
+  let t
+  let i
   let {
     apiVersion,
     checkSyntax,
@@ -105,61 +106,71 @@ async function Z(e) {
     incrementalSafeApi,
     allowIncrementalUnsafeApiCalls,
     enableNativeJsx,
-    enableResponsiveSetHierarchyMutations
-  } = e;
-  let F = isWidget ? 'widget' : 'plugin';
-  if (stats.markTime('timeToRunPluginCodeInternalMs'), apiVersion === '0.6.0' || apiVersion === '1.0.0') ;else throw new Error(`Unknown ${F} api version "${apiVersion}"`);
-  if (showRuntimeErrors) {
-    let e;
-    e = 0;
-    let i = t => {
-      let i = t.startsWith('Error') ? t.replace('Error', 'error') : t;
-      let n = '';
-      ++e > 1 && (n = ` (${e} errors total)`);
-      isWidget ? showVisualBell(`Widget ${i}${n}`) : showVisualBell(`Plugin ${i}${n}`);
-    };
-    t = errorHandler ? e => {
-      i(e);
-      errorHandler(e);
-    } : i;
-  } else {
-    t = errorHandler || (() => {});
+    enableResponsiveSetHierarchyMutations,
+  } = e
+  let F = isWidget ? 'widget' : 'plugin'
+  stats.markTime('timeToRunPluginCodeInternalMs')
+  if (apiVersion === '0.6.0' || apiVersion === '1.0.0') {
+    //
   }
-  let M = code;
+  else {
+    throw new Error(`Unknown ${F} api version "${apiVersion}"`)
+  }
+  if (showRuntimeErrors) {
+    let e
+    e = 0
+    let i = (t) => {
+      let i = t.startsWith('Error') ? t.replace('Error', 'error') : t
+      let n = ''
+      ++e > 1 && (n = ` (${e} errors total)`)
+      isWidget ? showVisualBell(`Widget ${i}${n}`) : showVisualBell(`Plugin ${i}${n}`)
+    }
+    t = errorHandler
+      ? (e) => {
+          i(e)
+          errorHandler(e)
+        }
+      : i
+  }
+  else {
+    t = errorHandler || (() => {})
+  }
+  let M = code
   if (!getFeatureFlags().plugins_remove_syntax_checking && !1 !== checkSyntax) {
-    let e;
+    let e
     try {
-      e = await parseAndRemoveSourceMapComments(code);
-    } catch (e) {}
+      e = await parseAndRemoveSourceMapComments(code)
+    }
+    catch {}
     if (e && !1 === e.success) {
       let {
         lineNumber,
         column,
-        description
-      } = e.error;
-      let r = `Syntax error on line ${lineNumber}: ${description}`;
-      let a = code.split('\n');
-      let o = '';
+        description,
+      } = e.error
+      let r = `Syntax error on line ${lineNumber}: ${description}`
+      let a = code.split('\n')
+      let o = ''
       if (lineNumber >= 1 && lineNumber <= a.length && column >= 1 && column < 100) {
-        let e = a[lineNumber - 1].replace(/\t/g, ' ').slice(0, column + 100);
+        let e = a[lineNumber - 1].replace(/\t/g, ' ').slice(0, column + 100)
         o += `
 ${e}
-${' '.repeat(column - 1)}^`;
+${' '.repeat(column - 1)}^`
       }
-      noConsoleError || yA(r + o);
-      return new Error(r);
+      noConsoleError || yA(r + o)
+      return new Error(r)
     }
-    vmType === 'realms' && e && e.success && (M = joinStringSegments(code, e.rangesToRemove));
+    vmType === 'realms' && e && e.success && (M = joinStringSegments(code, e.rangesToRemove))
   }
   let j = null;
   ({
     html: j,
-    code: M
+    code: M,
   } = (i = null, {
     code: M.replace(/^const __html__ = ("(.*?)([^\\]|^)");/, (e, t) => (i = JSON.parse(t.split('"+"').join('')), $)),
-    html: i
-  }));
-  return ls({
+    html: i,
+  }))
+  return runPluginInVm({
     allowedDomains: e.allowedDomains,
     apiVersion,
     capabilities: e.capabilities,
@@ -197,11 +208,11 @@ ${' '.repeat(column - 1)}^`;
     incrementalSafeApi,
     allowIncrementalUnsafeApiCalls: !!allowIncrementalUnsafeApiCalls,
     enableNativeJsx,
-    enableResponsiveSetHierarchyMutations
-  });
+    enableResponsiveSetHierarchyMutations,
+  })
 }
 async function ei(e) {
-  let t;
+  let t
   let i = `<script>
   function doIframeSecurityChecks() {
     // Edge seems to change the URL and origin of the page when you document.write()
@@ -239,7 +250,7 @@ async function ei(e) {
     result = ex + ''
   }
   window.parent.postMessage({ pluginMessage: result }, '*')
-  </script>`;
+  </script>`
   let n = `
     function doMainThreadSecurityChecks() {
       // Modify a grab bag of prototype objects to try to modify prototypes outside
@@ -333,14 +344,14 @@ async function ei(e) {
       reportSecurityResults(result)
       figma.closePlugin()
     }
-  `;
-  localStorageRef && (localStorageRef['figma-extension-guard'] = 'guard');
-  let r = '';
+  `
+  localStorageRef && (localStorageRef['figma-extension-guard'] = 'guard')
+  let r = ''
   let {
-    runResult
+    runResult,
   } = await Z({
     allowedDomains: DEFAULT_ALLOWED_ORIGINS,
-    apiVersion: pS,
+    apiVersion: '1.0.0',
     capabilities: [],
     checkSyntax: !1,
     code: n,
@@ -348,8 +359,8 @@ async function ei(e) {
     disableSilenceConsole: !0,
     enablePrivatePluginApi: !1,
     enableProposedApi: !1,
-    errorHandler: e => {
-      t = t || e || 'unknown error';
+    errorHandler: (e) => {
+      t = t || e || 'unknown error'
     },
     isLocal: !0,
     isWidget: !1,
@@ -361,8 +372,8 @@ async function ei(e) {
     pluginRunID: '',
     pluginVersionID: '',
     queryMode: !1,
-    securityCheckReporter: e => {
-      r = e;
+    securityCheckReporter: (e) => {
+      r = e
     },
     showLaunchErrors: !1,
     showRuntimeErrors: !1,
@@ -375,115 +386,123 @@ async function ei(e) {
     html: null,
     incrementalSafeApi: !1,
     enableNativeJsx: !1,
-    enableResponsiveSetHierarchyMutations: !1
-  });
-  await runResult;
-  let s = !1;
+    enableResponsiveSetHierarchyMutations: !1,
+  })
+  await runResult
+  let s = !1
   for (let e of [Array.prototype, Function.prototype, Object.prototype, Date.prototype, Object.getPrototypeOf(function* () {
-    yield 0;
+    yield 0
   }), 'Object.getPrototypeOf(async () => {})', 'Object.getPrototypeOf(async function*(){ yield 0 })']) {
     if (typeof e == 'string') {
       try {
-        e = (0, eval)(e);
-      } catch (e) {
-        continue;
+        e = (0, eval)(e)
+      }
+      catch (e) {
+        continue
       }
     }
-    e.hackedSandbox && (s = !0, delete e.hackedSandbox);
+    e.hackedSandbox && (s = !0, delete e.hackedSandbox)
   }
-  if (s) throw new Error('Prototypes not isolated');
-  if (void 0 !== t) throw new Error('Security checks triggered error');
-  if (r !== 'ok') throw new Error(r);
+  if (s)
+    throw new Error('Prototypes not isolated')
+  if (void 0 !== t)
+    throw new Error('Security checks triggered error')
+  if (r !== 'ok')
+    throw new Error(r)
 }
 async function en(e, t) {
-  await a7(e);
+  await ensureVmModuleLoaded(e)
   await Promise.all([PluginInstanceManager.getInstanceLoading(getPluginIframeMode({
-    triggeredFrom: void 0
+    triggeredFrom: void 0,
   })), PluginInstanceManager.getInstanceLoading(getPluginIframeMode({
-    triggeredFrom: t
-  }))]);
-  e === 'realms' && (r || (r = ei('realms').catch(e => {
+    triggeredFrom: t,
+  }))])
+  e === 'realms' && (r || (r = ei('realms').catch((e) => {
     trackEventAnalytics('Plugin Sandbox Failure', {
       error: `${e}`,
-      vm: 'realms'
-    });
-    return e;
-  })), await r);
-  e === 'cppvm' && (a || (a = ei('cppvm').catch(e => {
+      vm: 'realms',
+    })
+    return e
+  })), await r)
+  e === 'cppvm' && (a || (a = ei('cppvm').catch((e) => {
     trackEventAnalytics('Plugin Sandbox Failure', {
       error: `${e}`,
-      vm: 'cppvm'
-    });
-    return e;
-  })), await a);
+      vm: 'cppvm',
+    })
+    return e
+  })), await a)
 }
 class er extends Error {
   constructor(e) {
-    super(e);
+    super(e)
   }
 }
 export function $$ea2(e) {
-  let t = debugState.getState();
-  let i = canPerformAction(t) && canRunExtensions(t);
-  let n = isE2ETraffic() || i;
+  let t = debugState.getState()
+  let i = canPerformAction(t) && canRunExtensions(t)
+  let n = isE2ETraffic() || i
   if (!n) {
     if (isGlobalPluginActive()) {
-      handlePluginError().then(clearPlaybackHandler);
-      return;
+      handlePluginError().then(clearPlaybackHandler)
+      return
     }
-    clearPlaybackHandler();
-    return;
+    clearPlaybackHandler()
+    return
   }
-  setResetGlobalPluginAPI($$ea2);
+  setResetGlobalPluginAPI($$ea2)
   try {
-    if (isGlobalPluginActive()) return;
-    n && function (e) {
-      let t = new NoOpVm();
-      let i = [() => t.destroy(), () => clearPlaybackHandler, () => fullscreenValue.triggerAction('commit')];
+    if (isGlobalPluginActive())
+      return
+    n && (function (e) {
+      let t = new NoOpVm()
+      let i = [() => t.destroy(), () => clearPlaybackHandler, () => fullscreenValue.triggerAction('commit')]
       let n = () => {
-        let e;
+        let e
         for (let t of i) {
           try {
-            t();
-          } catch (t) {
-            e || (e = t);
+            t()
+          }
+          catch (t) {
+            e || (e = t)
           }
         }
-        if (i = [], e) throw e;
-      };
-      let r = () => (n(), Promise.resolve());
-      clearPlaybackHandler();
-      let a = createDefaultPluginOptions();
+        if (i = [], e)
+          throw e
+      }
+      let r = () => (n(), Promise.resolve())
+      clearPlaybackHandler()
+      let a = createDefaultPluginOptions()
       createPluginInstance(t, {
         ...a,
         openFileKey: e.openFileKey,
         userID: e.userID,
         closePlugin: r,
-        addShutdownAction: e => {
-          !i.includes(e) && i.push(e);
+        addShutdownAction: (e) => {
+          !i.includes(e) && i.push(e)
         },
         incrementalSafeApi: !0,
         allowIncrementalUnsafeApiCalls: !0,
-        enableResponsiveSetHierarchyMutations: !0
-      });
-      setGlobalPluginCloseFunc(r);
-    }(e);
-  } catch (e) {
-    isDevEnvironment() && t.selectedView.view === 'fullscreen' && console.error(e);
+        enableResponsiveSetHierarchyMutations: !0,
+      })
+      setGlobalPluginCloseFunc(r)
+    }(e))
+  }
+  catch (e) {
+    isDevEnvironment() && t.selectedView.view === 'fullscreen' && console.error(e)
   }
 }
 export function $$es1({
   pluginID: e,
-  widgetNodeID: t
+  widgetNodeID: t,
 }) {
-  return hM() && void 0 !== pluginState.currentWidget && pluginState.currentWidget.pluginID === e && pluginState.currentWidget.widgetNodeID === t;
+  return hasStoredValue() && void 0 !== pluginState.currentWidget && pluginState.currentWidget.pluginID === e && pluginState.currentWidget.widgetNodeID === t
 }
-export let $$eo4 = _$$n(async e => {
-  let t = generateRandomID();
-  pluginState.currentPluginRunID = t;
-  let i = new PluginApiMetrics();
-  pluginState.stats = i;
-  let n = e.plugin;
+export let $$eo4 = _$$n(async (e) => {
+  let t = generateRandomID()
+  pluginState.currentPluginRunID = t
+  let i = new PluginApiMetrics()
+  pluginState.stats = i
+  let n = e.plugin
   trackEventAnalytics('Plugin Start Initiated', {
     pluginID: n.plugin_id,
     trigger: e.triggeredFrom,
@@ -494,59 +513,65 @@ export let $$eo4 = _$$n(async e => {
     orgId: getCurrentUserOrgId() ?? null,
     pluginRunID: t,
     editorType: getFullscreenViewEditorType(),
-    ...(hasLocalFileId(n) ? {
-      pluginVersionID: '',
-      source: 'development',
-      name: '<local plugin>'
-    } : {
-      pluginVersionID: n.id,
-      source: 'imported',
-      name: n.name
-    })
-  });
+    ...(hasLocalFileId(n)
+      ? {
+          pluginVersionID: '',
+          source: 'development',
+          name: '<local plugin>',
+        }
+      : {
+          pluginVersionID: n.id,
+          source: 'imported',
+          name: n.name,
+        }),
+  })
   let {
-    isCancelled
-  } = await i.markDuration('waitForAllPagesMs', async () => await waitForAllPagesForPlugin(e));
+    isCancelled,
+  } = await i.markDuration('waitForAllPagesMs', async () => await waitForAllPagesForPlugin(e))
   if (!isCancelled) {
     if (isValidForCooper(e.triggeredFrom)) {
-      if (!isDevModeWithInspectPanel(e.plugin)) throw new Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.');
-      atomStoreManager.set(d4, 'LOADING');
-      setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
+      if (!isDevModeWithInspectPanel(e.plugin))
+        throw new Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.')
+      atomStoreManager.set(d4, 'LOADING')
+      setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN)
     }
     if (isValidForCooperSelectedView(e.triggeredFrom)) {
-      if (!isBuzzPlugin(e.plugin)) throw new Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.');
-      atomStoreManager.set(d4, 'LOADING');
-      atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS);
+      if (!isBuzzPlugin(e.plugin))
+        throw new Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.')
+      atomStoreManager.set(d4, 'LOADING')
+      atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS)
     }
-    e.isWidget || e.ignoreForRunLastPlugin || C3(e);
-    setPluginData(e.plugin);
-    setPluginTriggeredFrom(e.triggeredFrom);
-    e.runMode === 'default' && isValidForCooper(e.triggeredFrom) && (e.runMode = 'inspect');
-    setFAtom(e.runMode);
+    e.isWidget || e.ignoreForRunLastPlugin || C3(e)
+    setPluginData(e.plugin)
+    setPluginTriggeredFrom(e.triggeredFrom)
+    e.runMode === 'default' && isValidForCooper(e.triggeredFrom) && (e.runMode = 'inspect')
+    setFAtom(e.runMode)
     try {
       if (hasLocalFileId(e.plugin)) {
         try {
-          let n = await ed(e, i, e.plugin);
+          let n = await ed(e, i, e.plugin)
           await ec({
             localPlugin: e.plugin,
             runPluginArgs: e,
             stats: i,
             pluginRunID: t,
-            code: n
-          });
-        } catch (t) {
-          yA(t);
-          el(t, e.isWidget);
+            code: n,
+          })
         }
-      } else {
+        catch (t) {
+          yA(t)
+          el(t, e.isWidget)
+        }
+      }
+      else {
         try {
-          let n = await ed(e, i, e.plugin);
-          await function ({
+          let n = await ed(e, i, e.plugin)
+          await (function ({
             pluginVersion: e,
             runPluginArgs: t,
             stats: i,
             pluginRunID: n,
-            code: r
+            code: r,
           }) {
             let {
               command,
@@ -557,26 +582,27 @@ export let $$eo4 = _$$n(async e => {
               parameterValues,
               isWidget,
               widgetAction,
-              forcePluginVersionId
-            } = t;
-            let f = handleSelectedView();
-            if (!f) throw new er(t.isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'));
+              forcePluginVersionId,
+            } = t
+            let f = handleSelectedView()
+            if (!f)
+              throw new er(t.isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'))
             if (e = {
               ...e,
-              id: forcePluginVersionId || e.id
+              id: forcePluginVersionId || e.id,
             }, pluginState.currentPluginRunID !== n) {
-              return;
+              return
             }
-            let _ = debugState.getState().selectedView.editorType;
+            let _ = debugState.getState().selectedView.editorType
             let y = {
               storeInRecentsKey: mapEditorTypeTo(_),
               id: e.plugin_id,
               version: e.version,
-              currentUserId: handleSelectedView()
-            };
-            isWidget ? debugState.dispatch(addWidgetToRecentsThunk(y)) : debugState.dispatch(addPluginToRecentsThunk(y));
-            let b = debugState.getState().publishedPlugins[e.plugin_id];
-            let v = hasMonetizedResourceMetadata(b);
+              currentUserId: handleSelectedView(),
+            }
+            isWidget ? debugState.dispatch(addWidgetToRecentsThunk(y)) : debugState.dispatch(addPluginToRecentsThunk(y))
+            let b = debugState.getState().publishedPlugins[e.plugin_id]
+            let v = hasMonetizedResourceMetadata(b)
             let x = {
               pluginID: e.plugin_id,
               pluginVersionID: e.id,
@@ -593,21 +619,23 @@ export let $$eo4 = _$$n(async e => {
               productType: mapEditorTypeToStringWithObfuscated(_),
               isWidget,
               isMonetized: v,
-              paidStatus: function (e) {
-                let t = hasMonetizedResourceMetadata(e);
-                let i = e?.community_resource_payment;
-                return t && i ? i.status === SubscriptionStatus.TRIALING ? 'trial' : 'paid' : 'none';
-              }(b),
+              paidStatus: (function (e) {
+                let t = hasMonetizedResourceMetadata(e)
+                let i = e?.community_resource_payment
+                return t && i ? i.status === SubscriptionStatus.TRIALING ? 'trial' : 'paid' : 'none'
+              }(b)),
               widgetAction: widgetAction ?? null,
               isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
               editorType: getFullscreenViewEditorType(),
               incrementalMode: e.manifest.documentAccess === 'dynamic-page',
               isVsCode: isVsCodeEnvironment(),
-              orgId: getCurrentUserOrgId() ?? null
-            };
-            trackEventAnalytics('Plugin Start', x, isWidget ? {
-              forwardToDatadog: !0
-            } : {});
+              orgId: getCurrentUserOrgId() ?? null,
+            }
+            trackEventAnalytics('Plugin Start', x, isWidget
+              ? {
+                  forwardToDatadog: !0,
+                }
+              : {})
             return $$ep5(em({
               runPluginArgs: t,
               manifest: e.manifest,
@@ -623,64 +651,68 @@ export let $$eo4 = _$$n(async e => {
                 pluginVersionID: e.id,
                 titleIconURL: e.redirect_icon_url,
                 userID: f,
-                enablePrivatePluginApi: !!(e.manifest.enablePrivatePluginApi && e.is_private)
-              }
-            }));
+                enablePrivatePluginApi: !!(e.manifest.enablePrivatePluginApi && e.is_private),
+              },
+            }))
           }({
             pluginVersion: e.plugin,
             runPluginArgs: e,
             stats: i,
             pluginRunID: t,
-            code: n
-          });
-        } catch (t) {
-          t instanceof er || reportError(ServiceCategories.EXTENSIBILITY, t);
-          el(t, e.isWidget);
+            code: n,
+          }))
+        }
+        catch (t) {
+          t instanceof er || reportError(ServiceCategories.EXTENSIBILITY, t)
+          el(t, e.isWidget)
         }
       }
-    } finally {
-      setPluginData(null);
-      setPluginTriggeredFrom(null);
-      setFAtom(null);
+    }
+    finally {
+      setPluginData(null)
+      setPluginTriggeredFrom(null)
+      setFAtom(null)
     }
   }
-});
+})
 function el(e, t) {
-  let i = (e instanceof er ? e?.message : void 0) ?? (t ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin'));
-  showVisualBell(i);
+  let i = (e instanceof er ? e?.message : void 0) ?? (t ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin'))
+  showVisualBell(i)
 }
 async function ed(e, t, i) {
-  let n = hasLocalFileId(i);
+  let n = hasLocalFileId(i)
   try {
     fullscreenValue.dispatch(VisualBellActions.enqueue({
       message: getI18nString('plugins.loading_plugin', {
-        pluginName: i.name
+        pluginName: i.name,
       }),
       icon: VisualBellIcon.SPINNER,
       type: 'loading-plugin',
       delay: 200,
-      timeoutOverride: 1 / 0
-    }));
-    let r = n ? getPluginDevMode() : 'cppvm';
+      timeoutOverride: 1 / 0,
+    }))
+    let r = n ? getPluginDevMode() : 'cppvm'
     let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration('pluginCodeDownloadedMs', async () => await setupPluginCodeCache.getAndCache(i, getCurrentUserOrgId()))))(), (async () => {
       await t.markDuration('loadSandboxAndRunSecurityChecksMs', async () => {
         try {
-          await en(r, e.triggeredFrom);
-        } catch (i) {
-          let t = e.isWidget ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin');
-          throw new er(t);
+          await en(r, e.triggeredFrom)
         }
-      });
-    })()]);
+        catch (i) {
+          let t = e.isWidget ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin')
+          throw new er(t)
+        }
+      })
+    })()])
     if (!a) {
-      let t = e.isWidget ? getI18nString('plugins.no_code_found_for_widget') : getI18nString('plugins.no_code_found_for_plugin');
-      throw new er(t);
+      let t = e.isWidget ? getI18nString('plugins.no_code_found_for_widget') : getI18nString('plugins.no_code_found_for_plugin')
+      throw new er(t)
     }
-    return a;
-  } finally {
+    return a
+  }
+  finally {
     fullscreenValue.dispatch(VisualBellActions.dequeue({
-      matchType: 'loading-plugin'
-    }));
+      matchType: 'loading-plugin',
+    }))
   }
 }
 async function ec({
@@ -688,7 +720,7 @@ async function ec({
   runPluginArgs: t,
   pluginRunID: i,
   stats: n,
-  code: r
+  code: r,
 }) {
   let {
     command,
@@ -698,11 +730,12 @@ async function ec({
     triggeredFrom,
     openFileKey,
     deferRunEvent,
-    parameterValues
-  } = t;
-  let g = handleSelectedView();
-  if (!g) throw new er(isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'));
-  let f = debugState.getState().selectedView.editorType;
+    parameterValues,
+  } = t
+  let g = handleSelectedView()
+  if (!g)
+    throw new er(isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'))
+  let f = debugState.getState().selectedView.editorType
   if (e.manifest) {
     let t = {
       pluginID: e.manifest.id || '',
@@ -724,26 +757,30 @@ async function ec({
       editorType: getFullscreenViewEditorType(),
       incrementalMode: e.manifest.documentAccess === 'dynamic-page',
       isVsCode: isVsCodeEnvironment(),
-      orgId: getCurrentUserOrgId() ?? null
-    };
-    trackEventAnalytics('Plugin Start', t, isWidget ? {
-      forwardToDatadog: !0
-    } : {});
+      orgId: getCurrentUserOrgId() ?? null,
+    }
+    trackEventAnalytics('Plugin Start', t, isWidget
+      ? {
+          forwardToDatadog: !0,
+        }
+      : {})
   }
   let _ = {
     storeInRecentsKey: mapEditorTypeTo(f),
     id: String(e.localFileId),
     isDevelopment: !0,
     version: '',
-    currentUserId: handleSelectedView()
-  };
-  isWidget ? debugState.dispatch(addWidgetToRecentsThunk(_)) : debugState.dispatch(addPluginToRecentsThunk(_));
+    currentUserId: handleSelectedView(),
+  }
+  isWidget ? debugState.dispatch(addWidgetToRecentsThunk(_)) : debugState.dispatch(addPluginToRecentsThunk(_))
   try {
-    let a = e.testCode ? e.manifest : await loadPluginManifest(e.localFileId, {
-      resourceType: isWidget ? 'widget' : 'plugin',
-      ignoreMissingEditorType: !0,
-      isPublishing: !1
-    });
+    let a = e.testCode
+      ? e.manifest
+      : await loadPluginManifest(e.localFileId, {
+          resourceType: isWidget ? 'widget' : 'plugin',
+          ignoreMissingEditorType: !0,
+          isPublishing: !1,
+        })
     let o = em({
       runPluginArgs: t,
       manifest: a,
@@ -758,104 +795,111 @@ async function ec({
         pluginRunID: i,
         pluginVersionID: '',
         titleIconURL: '',
-        userID: g
-      }
-    });
-    await $$ep5(o);
-  } catch (t) {
-    yA(t);
+        userID: g,
+      },
+    })
+    await $$ep5(o)
+  }
+  catch (t) {
+    yA(t)
     dequeuePluginStatus({
-      shouldShowVisualBell: !0
-    });
-    let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'));
-    showVisualBell(e);
+      shouldShowVisualBell: !0,
+    })
+    let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'))
+    showVisualBell(e)
   }
 }
 export let $$eu3 = _$$n(({
-  newTriggeredFrom: e
+  newTriggeredFrom: e,
 } = {
-  newTriggeredFrom: 'runlast'
+  newTriggeredFrom: 'runlast',
 }) => {
-  let t = SH();
+  let t = SH()
   t && isValidForFullscreenView(t) && (e && (t.triggeredFrom = e), PluginManager.instance.enqueue({
     mode: 'run-forever',
-    runPluginArgs: t
-  }));
-});
+    runPluginArgs: t,
+  }))
+})
 export function $$ep5(e) {
-  if (pluginState.currentPluginRunID !== e.pluginRunID) return Promise.resolve();
-  getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${e.pluginRunID} started`, e);
-  let t = e.stats;
-  t.markTime('timeToRunPluginCodeStartMs');
-  let i = e.isWidget ? 'widget' : 'plugin';
-  clearVisualBell();
-  let n = p1();
-  Tj(n);
-  Yd();
+  if (pluginState.currentPluginRunID !== e.pluginRunID)
+    return Promise.resolve()
+  getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${e.pluginRunID} started`, e)
+  let t = e.stats
+  t.markTime('timeToRunPluginCodeStartMs')
+  let i = e.isWidget ? 'widget' : 'plugin'
+  clearVisualBell()
+  let n = getCounter()
+  setStoredValue(n)
+  incrementCounter()
   let r = new Promise(async (t, i) => {
     if (await closeCurrentPlugin({
-      overriddenBy: e.triggeredFrom
-    }), Nq() !== n) {
-      t();
-      return;
+      overriddenBy: e.triggeredFrom,
+    }), getStoredValue() !== n) {
+      t()
+      return
     }
-    let r = () => (t(), Promise.resolve());
-    setPluginCloseFunc(r);
+    let r = () => (t(), Promise.resolve())
+    setPluginCloseFunc(r)
     try {
       if (e.isWidget) {
         let {
-          widgetNodeID
-        } = JSON.parse(e.command);
+          widgetNodeID,
+        } = JSON.parse(e.command)
         pluginState.currentWidget = {
           widgetNodeID,
-          pluginID: e.pluginID
-        };
-      } else {
-        pluginState.currentWidget = void 0;
+          pluginID: e.pluginID,
+        }
       }
-    } catch {
-      pluginState.currentWidget = void 0;
+      else {
+        pluginState.currentWidget = void 0
+      }
+    }
+    catch {
+      pluginState.currentWidget = void 0
     }
     try {
-      if (isInteractionPathCheck() && (await en('cppvm', e?.triggeredFrom)), desktopAPIInstance && hasSpecialCapability(e.permissions.permissions) && (pluginState.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (pluginState.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), Nq() !== n) {
-        t();
-        return;
+      if (isInteractionPathCheck() && (await en('cppvm', e?.triggeredFrom)), desktopAPIInstance && hasSpecialCapability(e.permissions.permissions) && (pluginState.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (pluginState.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), getStoredValue() !== n) {
+        t()
+        return
       }
       let {
         runResult,
-        closePlugin
+        closePlugin,
       } = await Z({
         ...e,
         pluginCounter: n,
-        html: null
-      });
-      if (Nq() === n) {
+        html: null,
+      })
+      if (getStoredValue() === n) {
         setPluginCloseFunc(closePlugin, {
-          ignorePreviousCloseFunc: r
-        });
-        r = closePlugin;
-        let e = await runResult;
+          ignorePreviousCloseFunc: r,
+        })
+        r = closePlugin
+        let e = await runResult
         e && fullscreenValue.dispatch(VisualBellActions.enqueue({
           type: 'plugins-supplied-message',
-          message: e
-        }));
+          message: e,
+        }))
       }
-      t();
-    } catch (e) {
-      i(e);
-    } finally {
-      n === Nq() && (setPluginCloseFunc(null, {
-        ignorePreviousCloseFunc: r
-      }), resetPluginState());
+      t()
     }
-  }).catch(t => {
+    catch (e) {
+      i(e)
+    }
+    finally {
+      n === getStoredValue() && (setPluginCloseFunc(null, {
+        ignorePreviousCloseFunc: r,
+      }), resetPluginState())
+    }
+  }).catch((t) => {
     if (e.noConsoleError || yA(t), e.showLaunchErrors) {
-      let i = (t instanceof er ? t?.message : void 0) ?? (e.isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'));
-      showVisualBell(i);
-    } else {
-      throw t;
+      let i = (t instanceof er ? t?.message : void 0) ?? (e.isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'))
+      showVisualBell(i)
     }
-  });
+    else {
+      throw t
+    }
+  })
   let a = () => {
     let n = {
       pluginID: e.pluginID,
@@ -875,46 +919,46 @@ export function $$ep5(e) {
       validationCount: t.validationCount(),
       clientStorageUsageDelta: t.clientStorageUsageDelta(),
       totalClientStorageUsage: t.totalClientStorageUsage(),
-      jsvmCppFromManifest: !!getFeatureFlags().ext_jsvm_cpp_upgrade
-    };
+      jsvmCppFromManifest: !!getFeatureFlags().ext_jsvm_cpp_upgrade,
+    }
     let r = {
       pluginDataHistogram: t.pluginDataHistogramToJSON(),
       pluginDataTotalSetSize: t.pluginDataTotalSetSize(),
       sharedPluginDataTotalSetSize: t.sharedPluginDataTotalSetSize(),
-      pluginDataMaximumKeyCountExceeded: t.pluginDataMaximumKeyCountExceeded()
-    };
+      pluginDataMaximumKeyCountExceeded: t.pluginDataMaximumKeyCountExceeded(),
+    }
     getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${e.pluginRunID} finished`, {
       pluginEndEventData: n,
-      setPluginDataStats: r
-    });
+      setPluginDataStats: r,
+    })
     trackEventAnalytics('Plugin End', {
       ...n,
-      ...r
+      ...r,
     }, {
-      forwardToDatadog: !0
-    });
+      forwardToDatadog: !0,
+    })
     e.pluginID && t.hasResizedNodeWithMissingFont() && (trackEventAnalytics('Plugin resized node with missing font', {
-      pluginID: e.pluginID
-    }), console.warn(`This ${i} resized a node with missing fonts. Text layout for node will not be applied.`));
-  };
-  r.then(a, a);
-  return r;
+      pluginID: e.pluginID,
+    }), console.warn(`This ${i} resized a node with missing fonts. Text layout for node will not be applied.`))
+  }
+  r.then(a, a)
+  return r
 }
 function em({
   manifest: e,
   isLocal: t,
   stats: i,
   runPluginArgs: n,
-  customOverrides: r
+  customOverrides: r,
 }) {
   return {
     name: e.name,
-    allowedDomains: function (e, t) {
+    allowedDomains: (function (e, t) {
       let {
-        networkAccess
-      } = e;
-      return networkAccess ? t && networkAccess.devAllowedDomains ? networkAccess.devAllowedDomains.includes('*') || networkAccess.allowedDomains.includes('none') ? networkAccess.devAllowedDomains : Array.from(new Set([...networkAccess.devAllowedDomains, ...networkAccess.allowedDomains])) : networkAccess.allowedDomains : DEFAULT_ALLOWED_ORIGINS;
-    }(e, t),
+        networkAccess,
+      } = e
+      return networkAccess ? t && networkAccess.devAllowedDomains ? networkAccess.devAllowedDomains.includes('*') || networkAccess.allowedDomains.includes('none') ? networkAccess.devAllowedDomains : Array.from(new Set([...networkAccess.devAllowedDomains, ...networkAccess.allowedDomains])) : networkAccess.allowedDomains : DEFAULT_ALLOWED_ORIGINS
+    }(e, t)),
     apiVersion: e.api,
     capabilities: e.capabilities ?? [],
     stats: i,
@@ -936,12 +980,12 @@ function em({
     editorType: n.plugin.manifest.editorType ?? [],
     incrementalSafeApi: e.documentAccess === 'dynamic-page',
     enableNativeJsx: !!getFeatureFlags().ext_full_jsx,
-    enableResponsiveSetHierarchyMutations: !0
-  };
+    enableResponsiveSetHierarchyMutations: !0,
+  }
 }
-export { hM } from '../905/266529';
-export const mK = $$es1;
-export const s2 = $$ea2;
-export const A9 = $$eu3;
-export const bT = $$eo4;
-export const E9 = $$ep5;
+export const hM = hasStoredValue
+export const mK = $$es1
+export const s2 = $$ea2
+export const A9 = $$eu3
+export const bT = $$eo4
+export const E9 = $$ep5

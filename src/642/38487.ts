@@ -59,7 +59,7 @@ import { EditorPreferencesApi } from '../figma_app/740163';
 import { ActionType, SceneGraphHelpers } from '../figma_app/763686';
 import { parsePxNumber } from '../figma_app/783094';
 import { indentWidthWithMargin, rowActionsWidth, scrollBarYWidth, trackPadding } from '../figma_app/786175';
-import { o3 } from '../figma_app/852050';
+import { getExplicitModeNames } from '../figma_app/852050';
 import { generateRecordingKey, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { handleKeyboardEventByState, KeyboardEventResponse } from '../figma_app/896988';
 import { formatList } from '../figma_app/930338';
@@ -813,7 +813,7 @@ export let $$eP1 = memo(e => {
       alwaysPan: !0
     }));
   }, [l]);
-  let o = o3(e.guid);
+  let o = getExplicitModeNames(e.guid);
   return jsx(eA, {
     ...e,
     isHovered: s,

@@ -31,7 +31,7 @@ import { SimpleComponentType } from "../figma_app/504088";
 import { R as _$$R } from "../905/300969";
 import { c as _$$c2 } from "../905/580030";
 export function $$k0(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [k, M] = useAtomValueAndSetter(_$$R);
   let [F, j] = useAtomValueAndSetter(_$$c2);
   let U = useCurrentFileKey() ?? "";

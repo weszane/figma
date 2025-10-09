@@ -16,7 +16,7 @@ export async function $$f1(e, t, i, n = {}) {
 }
 export function $$_0(e) {
   let t = useSelector(UQ);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = g_[e];
   let d = useCallback((e, t) => i(setAssetsSearchQuery({
     query: e,

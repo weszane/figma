@@ -32,7 +32,7 @@ export function $$w1(e) {
   let f = t || r;
   let E = useSelector(e => e.teams);
   let A = YO(e);
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   return ({
     folder: e,
     shouldShowJoinButton: r
@@ -163,7 +163,7 @@ export function $$O0({
   useLGPerms: r
 }) {
   let a = useSelector(e => e.dropdownShown);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useTracking();
   let l = $$w1(t.id);
   let d = a?.data?.targetRect;

@@ -9,7 +9,7 @@ import { FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { e as _$$e2 } from "../905/86132";
 export function $$m0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = usePlanInviteWithSeatExperiment();
   let i = useTeamPlanFeatures();
   let m = i.data?.type;

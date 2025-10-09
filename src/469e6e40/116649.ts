@@ -36,7 +36,7 @@ function O({
   let a = useSubscription(OrgSharedSettingView, {
     orgId: e.id
   });
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   useEffect(() => {
     r(fetchLicenseGroupsThunk({
       forceRefetch: !0
@@ -54,7 +54,7 @@ function O({
 export function $$D0({
   selectedTab: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCurrentUserOrg();
   useSelector(({
     selectedView: e

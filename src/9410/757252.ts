@@ -127,7 +127,7 @@ export function $$B8() {
 }
 export function $$U10() {
   let e = selectCurrentFile();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback(() => {
     e && t(showModalHandler({
       type: V,
@@ -141,7 +141,7 @@ export function $$U10() {
 }
 export function $$G11() {
   let e = selectCurrentFile();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = consumptionPaywallUtils.useShouldHideStarterCtaForOpenFile();
   return useCallback(() => {
     e && t(showModalHandler({

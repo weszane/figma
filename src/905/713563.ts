@@ -21,7 +21,7 @@ export function $$_1(e, t, i) {
   }, [l, s, r]);
 }
 export function $$A0(e, t, i) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let _ = useSelector(e => e.currentUserOrgId);
   let A = S(_)?.searches;
   let y = Xr(l4(CreatorResourceType.RESOURCE));

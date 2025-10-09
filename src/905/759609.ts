@@ -43,7 +43,7 @@ function H({
   backButtonRef: e,
   children: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = useCallback(t => {
     t.event.keyCode === KeyCodes.TAB && null != e.current && (e.current.focus(), t.accept());
   }, [e]);
@@ -260,7 +260,7 @@ function q({
   isHidden: r,
   updatesModalScope: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = t === PrimaryWorkflowEnum.COMPONENT || t === PrimaryWorkflowEnum.STATE_GROUP;
   return jsxs("div", {
     className: "review_updates_modal--headerContainer--jSwdB",

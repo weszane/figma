@@ -38,7 +38,7 @@ import { areFontsInitializedCheck, isAgentDetected } from "../905/777093";
 import { G8, Qr, kF, Km, e2, HP, sp } from "../905/690539";
 import { jB, Uh } from "../905/465941";
 import { isInvalidValue } from "../905/216495";
-import { SG } from "../figma_app/852050";
+import { getFilteredVariables } from "../figma_app/852050";
 import { useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
@@ -124,7 +124,7 @@ export function $$eD0({
   let R = () => {
     C.isShown && i(hideVariablePicker());
   };
-  let P = SG(["FONT_FAMILY"]).data ?? [];
+  let P = getFilteredVariables(["FONT_FAMILY"]).data ?? [];
   return jsx(DraggableModalManager, {
     ref: b,
     alwaysEnsureModalOnScreen: !0,

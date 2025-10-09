@@ -45,7 +45,7 @@ let F = "confirm_unpublish_modal--modalContent--gX17Y modal--modalContent--P643j
 let M = registerModal(function ({
   libraryModalSessionId: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectCurrentFile();
   let r = useAtomWithSubscription(libraryPublishingModeAtom);
   let s = useAtomWithSubscription(libraryAssetsAtom);
@@ -107,7 +107,7 @@ export function $$W0(e) {
   let S = useMemo(() => ND(localStyles), [localStyles]);
   let w = useMemo(() => ND(processLocalComponents(localComponents)), [localComponents]);
   let C = useMemo(() => ND(localStateGroups), [localStateGroups]);
-  let T = useDispatch();
+  let T = useDispatch<AppDispatch>();
   let k = useCallback(() => {
     T(showModalHandler({
       type: M,

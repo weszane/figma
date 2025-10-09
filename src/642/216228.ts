@@ -604,7 +604,7 @@ function e2({
   isVisualAsset: m,
   onSuccessfulAssetInsert: g
 }) {
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let x = _$$I(Cn.AssetsPanel);
   let y = useSelector(selectSceneGraph);
   let _ = useSelector(hasLocalOrPublishedContent);
@@ -752,7 +752,7 @@ function e7({
   children: t
 }) {
   let s = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let {
       query,
       searchSessionId
@@ -1564,7 +1564,7 @@ function t1({
     sourceForTracking: i,
     isList: l
   }) {
-    let a = useDispatch();
+    let a = useDispatch<AppDispatch>();
     let {
       logInsert: _logInsert,
       logKeyboardInsert
@@ -3517,7 +3517,7 @@ let ns = forwardRef(({
   let a = _$$sN();
   let o = useDropdownState();
   let d = o?.type === nt;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useCallback(() => c(hideDropdownAction()), [c]);
   let h = useCallback(() => c(showDropdownThunk({
     type: nt,
@@ -4352,12 +4352,12 @@ function nV({
   }, [e.libraryKey, y?.libraryKey]);
   let O = function (e, t = !1) {
     let s = selectCurrentFile();
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     let i = e.libraryKey === s?.libraryKey;
     let l = _9(e.libraryKey, 'assets_panel_library_context_menu');
     let o = useCallback(() => l(!1), [l]);
     let d = function () {
-      let e = useDispatch();
+      let e = useDispatch<AppDispatch>();
       let t = selectCurrentFile();
       let s = useSelector(e => e.teams);
       let r = useSelector(canUserPublishToCommunity);
@@ -6100,7 +6100,7 @@ function ii({
   });
   let _ = function (e, t) {
     let s = selectCurrentFile();
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     let i = e === s?.libraryKey;
     let l = e && !!t;
     let o = useLibraryFileLink({
@@ -7301,7 +7301,7 @@ let la = () => {
 function lb({
   libraryName: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     currentView,
     startSearch,
@@ -7472,7 +7472,7 @@ function lL({
   let i = useCurrentFileKey();
   let l = useDropdownState();
   let o = l?.type === lP;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useCallback(() => {
     o ? d(hideDropdownAction()) : (d(showDropdownThunk({
       type: lP,
@@ -7516,7 +7516,7 @@ function lR({
   includeFolderSetting: t,
   buttonRef: s
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = useCallback(() => {
     i(hideDropdownAction());
   }, [i]);

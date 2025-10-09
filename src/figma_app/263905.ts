@@ -55,7 +55,7 @@ function z() {
       setErrors: t
     };
   }();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [r, a] = useState(!1);
   let s = useModalManager({
     open: r,

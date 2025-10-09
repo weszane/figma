@@ -105,7 +105,7 @@ function z(e) {
   let l = useAtomWithSubscription(be);
   let [o, c] = useState(!1);
   let _ = K();
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let {
     shownPlugins,
     overflowPlugins
@@ -189,7 +189,7 @@ function V({
   let h = useRef(null);
   let x = useCanAccessFullDevMode();
   let b = isDevHandoffEditorType() && !x;
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let w = useDropdownState();
   let C = _$$p(e.plugin_id, o);
   let I = C.length > 0;

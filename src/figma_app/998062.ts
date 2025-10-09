@@ -27,7 +27,7 @@ function N({
   rowRef: e,
   recordingKey: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = useRef(null);
   let s = useSelector(e => e.dropdownShown?.type === x);
   let o = _$$r();
@@ -87,7 +87,7 @@ export function $$O0({
   });
 }
 export function $$R1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useIsFullscreenSlidesView();
   let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let a = t && r === SelfDesignType.SELF;

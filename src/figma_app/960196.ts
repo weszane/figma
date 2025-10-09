@@ -12,7 +12,7 @@ import { wv } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
 import { hideVariablePicker } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
-import { bL, u as _$$u } from "../figma_app/852050";
+import { getModeValue, getVariableById } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { calculatePickerPositionLeft } from "../905/959568";
@@ -144,7 +144,7 @@ export function $$D4({
   });
 }
 export function $$k6() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
     e(hideVariablePicker());
   }, [e]);
@@ -165,7 +165,7 @@ function M({
   onComponentPropSelected: c,
   cmsFieldTypes: u
 }) {
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let f = useCallback(() => {
     g(hideVariablePicker());
   }, [g]);
@@ -245,9 +245,9 @@ function j({
   onVariableSelected: c,
   variableFilters: _
 }) {
-  let h = useDispatch();
-  let y = bL(e, t);
-  let b = _$$u(y?.type === VariableDataType.ALIAS ? y?.value : void 0);
+  let h = useDispatch<AppDispatch>();
+  let y = getModeValue(e, t);
+  let b = getVariableById(y?.type === VariableDataType.ALIAS ? y?.value : void 0);
   let T = useCallback(() => {
     h(hideVariablePicker());
   }, [h]);
@@ -315,7 +315,7 @@ export function $$B1({
   onClose: l,
   variableScopes: d
 }) {
-  let c = _$$u(a);
+  let c = getVariableById(a);
   let [u, _] = useState(!1);
   let h = useRef(null);
   let m = h.current ? calculatePickerPositionLeft(h.current, _$$i) : void 0;
@@ -357,7 +357,7 @@ export function $$B1({
 export function $$G5({
   variableScope: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCallback(() => {
     t(hideVariablePicker());
   }, [t]);

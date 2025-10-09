@@ -56,7 +56,7 @@ export function $$v0({
   extension: t,
   displayAboveTarget: r
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return useCallback(i => {
     if (e) n(hideDropdownAction());else if (i) {
       let e = i.getBoundingClientRect();

@@ -9,7 +9,7 @@ import { ConfirmationModal2 } from "../figma_app/918700";
 export function $$u0({
   folders: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getAtomMutate(U);
   let u = e => {
     e.forEach(e => {

@@ -131,7 +131,7 @@ function Q({
     from: e
   }) {
     let t = getCurrentFileType();
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     let h = selectCurrentFile();
     let g = h?.currentPlanUser?.draftsFolderId ?? void 0;
     let f = h?.team;

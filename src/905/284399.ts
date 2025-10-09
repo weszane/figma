@@ -65,7 +65,7 @@ export const OnboardingRenderFrame: React.FC<OnboardingModalProps> = ({
   ...otherProps
 }) => {
   const processedStep = useMemoShallow(() => processStep(otherProps), [otherProps])
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   return jsx(OnboardingSequence, {
     userFlagOnShow,
     isShowing,

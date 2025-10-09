@@ -243,7 +243,7 @@ function L({
 export var $$P1 = (e => (e[e.Grid = 0] = "Grid", e[e.List = 1] = "List", e))($$P1 || {});
 export let $$D4 = e => 0 === e ? "grid" : "list";
 export function $$k7(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = selectCurrentFile();
   let s = M();
   let o = useSubscribedLibraryId(e);

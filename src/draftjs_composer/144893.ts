@@ -11,7 +11,7 @@ export function $$l0(e) {
     commentType,
     onComplete
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let u = useCallback(e => {
     let {
       message: _message,

@@ -17,7 +17,7 @@ export function useScreenReaderManager(): [
   boolean,
   (enabled: boolean, scope?: string) => void,
 ] {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const isEnabled = useSelector<AppState, boolean>(state => state.screenreader?.enabled ?? false)
   const user = useSelector<AppState, AppState["user"]>(state => state.user)
 

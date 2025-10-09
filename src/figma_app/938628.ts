@@ -295,7 +295,7 @@ function J(e, t, r, n, i) {
   i(s);
 }
 function Q(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -1096,7 +1096,7 @@ let eI = 'expanded_constraint_control--tbrlInnerInput--zEvmT';
 let eS = 'expanded_constraint_control--scrubbableInputEnabled--pOHsZ';
 let ev = 'expanded_constraint_control--scrubbableInputSoftDisabled--1qsfu';
 function eA(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -1352,7 +1352,7 @@ function eH(e) {
     canBecomeGroup,
     triggerClassName
   } = e;
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let {
     manager,
     getTriggerProps
@@ -2434,7 +2434,7 @@ function re(e) {
   });
 }
 function rd(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let s = useSelector(e => e.mirror.selectionProperties.stackLayoutSizeOptions);
   let [o, l] = useState(!1);
@@ -3181,7 +3181,7 @@ export function $$r51(e) {
   let E = I9();
   let y = E != null && E.some(e => e.type !== E[0].type);
   let b = useSelector(e => e.dropdownShown);
-  let T = useDispatch();
+  let T = useDispatch<AppDispatch>();
   return getFeatureFlags().eu_fpl_frame_preset_menu ? jsx(eH, {
     canBecomeFrame: !!l,
     canBecomeGroup: !!d,
@@ -3226,7 +3226,7 @@ function r3() {
 export function $$r48(e) {
   let t = useSelectionPropertyValue('nodesAreAllInsideStacks');
   let r = useSelectionPropertyValue('stackPositioning');
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = isSitesFileType();
   let d = rE() && e.canEditConstraints;
   let c = useRef(null);
@@ -3435,7 +3435,7 @@ export function $$r62(e) {
     wheelMultiplier,
     scrubMultiplier
   } = getNudgeMultipliers();
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = I9();
   let _ = () => {
     p && (p.every(e => e.type === 'STAR') ? analyticsEventManager.trackDefinedEvent('illustration.web_star_count', {}) : p.every(e => e.type === 'REGULAR_POLYGON') && analyticsEventManager.trackDefinedEvent('illustration.web_polygon_count', {}));
@@ -3522,7 +3522,7 @@ export let $$r70 = memo(e => {
     wheelMultiplier,
     scrubMultiplier
   } = getNudgeMultipliers();
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   return jsx(DE, {
     label: renderI18nText('properties.label.arc'),
     icon: null,
@@ -3801,7 +3801,7 @@ let na = {
   }
 };
 export function $$ns3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let i = e => {
     fullscreenValue.updateSelectionProperties({

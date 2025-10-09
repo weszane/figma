@@ -16,7 +16,7 @@ import { filesByLibraryKeyAtom } from "../905/977779";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
-import { a6 } from "../figma_app/198840";
+import { getHubFileVersionOrDefault } from "../figma_app/198840";
 import { isNullOrFailure } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt, Vq as _$$Vq } from "../figma_app/979658";
@@ -45,7 +45,7 @@ export function $$D7(e, t) {
   return null !== r.current ? r.current : e;
 }
 export function $$k4() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentFile();
   let {
     fileVersion,
@@ -141,7 +141,7 @@ export function $$U6({
     if (t(e), e && e.type === Rt.TEMPLATES) {
       let t = hubFiles[e.id];
       if (t) {
-        let r = a6(t);
+        let r = getHubFileVersionOrDefault(t);
         trackTemplateEvent("resource_previewed", {
           fileKey: l,
           resourceType: "template",

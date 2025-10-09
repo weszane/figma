@@ -25,7 +25,7 @@ var m = p;
 export function $$C0({
   paint: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdown("AI_IMAGE_TOOLS_DROPDOWN");
   let p = useMemo(() => !!(e && ImageToolsBindings?.canEditSelectedImage()), [e]);
   let m = useMemo(() => [{

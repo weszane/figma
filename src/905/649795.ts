@@ -6,7 +6,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { Vt } from "../905/780715";
 export let $$c0 = memo(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = {
     attributes: {
       rel: "noopener nofollow noreferrer ugc",

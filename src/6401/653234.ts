@@ -766,7 +766,7 @@ function ek({
   let {
     setParticipantData
   } = d();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = selectCurrentUser();
   let m = scopeAwareFunction.system("slides-update-poll-votes", e => {
     if (!u) {

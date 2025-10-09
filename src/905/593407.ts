@@ -119,7 +119,7 @@ export function $$F0({
     overlay: TOSAgreementOverlay,
     priority: _$$N.URGENT_ALERT
   }, [i, I]);
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   let C = selectUserFlag("tos_accepted");
   let T = !!getInitialOptions().tos_agreement_required && !C;
   let k = getFeatureFlags().tos_blocking_fallback_modal;

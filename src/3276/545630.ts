@@ -104,7 +104,7 @@ import { clearSelectedViewCommentId } from '../figma_app/91703';
 import { wg as _$$wg } from '../figma_app/101956';
 import { getColorForMultiplayer, multiplayerColors, getMultiplayerTextColor } from '../figma_app/136698';
 import { buildStaticUrl, getInitialOptions } from '../figma_app/169182';
-import { t0 as _$$t3 } from '../figma_app/198840';
+import { isFullscreenPreviewMode } from '../figma_app/198840';
 import { unsubscribeFromMouseEvent, subscribeToMouseEvent } from '../figma_app/242565';
 import { useSubscription } from '../figma_app/288654';
 import { useFocusArea } from '../figma_app/290668';
@@ -126,7 +126,7 @@ import { wV } from '../figma_app/585209';
 import { canPinComments, isPinnedCommentsEnabled, shouldShowPinnedComments } from '../figma_app/591738';
 import { useCurrentViewState } from '../figma_app/623300';
 import { W as _$$W2 } from '../figma_app/642364';
-import { y as _$$y } from '../figma_app/705249';
+import { isXrDebounceThresholdEnabled } from '../figma_app/705249';
 import { useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { whiteColor, gray500Color, blackColor, whiteColor2 } from '../figma_app/728075';
 import { useAuthedActiveCommunityProfile } from '../figma_app/740025';
@@ -909,7 +909,7 @@ let eU = memo(e => {
   let n = selectCurrentUser();
   let s = _$$s();
   let r = _$$Z();
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let u = useContext(viewportNavigatorContext);
   let p = useSelector(e => e.mirror.appModel.currentTool);
   let f = getObservableValue(AppStateTsApi?.editorState().handToolTemporarilyEnabled, !1);
@@ -1416,7 +1416,7 @@ function t6(e) {
   let {
     pinApi
   } = I_();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = !!e.commentPin;
   let r = e.numPinnedCommentThreads >= 10;
   async function d() {
@@ -2079,7 +2079,7 @@ function nu(e) {
   let n = selectCurrentUser();
   let s = useContext(viewportNavigatorContext);
   let r = t.view !== 'communityHub' || e.thread.comments[0]?.user_id === n?.id;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let [d, m] = useState(null);
   let [u, p] = function () {
     let e = useRef(null);
@@ -2431,7 +2431,7 @@ function nP(e) {
     discardAttempts,
     allowAttachments = !0
   } = e;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let m = useRef(null);
   let u = useCallback(() => {
     m.current && m.current.scrollIntoView({
@@ -2730,7 +2730,7 @@ function nD(e, t, n, o, a) {
 }
 function nL(e) {
   let t = selectUser();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = useSelector(e => e.comments.typeahead);
   return jsx(nI, {
     dispatch: n,
@@ -2776,7 +2776,7 @@ function nR({
   });
 }
 function nO(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
@@ -2822,7 +2822,7 @@ function nO(e) {
       y: PIN_ELEMENT_OFFSET.y - height
     };
   }, [pinOffset]);
-  let N = _$$y() && l.sidebarItemType === ThreadType.FEED_POST;
+  let N = isXrDebounceThresholdEnabled() && l.sidebarItemType === ThreadType.FEED_POST;
   let S = m ? _$$j : zW({
     feedPostUuid: N ? l.feedPostPublicUuid : void 0
   });
@@ -2861,7 +2861,7 @@ function nO(e) {
   let B = selectUser();
   let U = useSelector(e => e.comments);
   let H = d.view === 'communityHub';
-  let V = useMemo(() => d.view === 'communityHub' && d.subView === 'hubFile' && _$$t3(d.fullscreenState), [d]);
+  let V = useMemo(() => d.view === 'communityHub' && d.subView === 'hubFile' && isFullscreenPreviewMode(d.fullscreenState), [d]);
   let q = null;
   u ? q = A.selectionBoxAnchor : l.comments[0].client_meta?.selection_box_anchor && (l.comments[0].client_meta?.in_frame, q = l.selectionAnchorCanvasPosition ?? l.boundingBoxAnchorCanvasPosition ?? null);
   let z = !!useSubscription(FileCanEdit(u ? null : {
@@ -2900,7 +2900,7 @@ function nO(e) {
         thread: l,
         viewportInfo: n,
         viewportPositionFromClientPosition: e.viewportPositionFromClientPosition
-      }) : l.sidebarItemType === ThreadType.COMMENT_THREAD || l.sidebarItemType === ThreadType.FEED_POST && _$$y() ? jsx(nr, {
+      }) : l.sidebarItemType === ThreadType.COMMENT_THREAD || l.sidebarItemType === ThreadType.FEED_POST && isXrDebounceThresholdEnabled() ? jsx(nr, {
         commentCreationDisabled: e.commentCreationDisabled,
         comments: U,
         disableDragging: H && !V,
@@ -3049,7 +3049,7 @@ function nK(e) {
   let n = pC();
   let s = gu();
   let r = fG();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useSelector(e => e.selectedView.view);
   let {
     dragEventHandler
@@ -3135,7 +3135,7 @@ function nG(e) {
   let c = void 0 !== e.isActiveCommentPinned ? e.isActiveCommentPinned : d;
   let m = useSelector(e => e.comments.editingComment);
   let u = useSelector(e => e.comments.emojiPicker);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let {
     activeId,
     commentCreationDisabled
@@ -3151,7 +3151,7 @@ function nG(e) {
     let m = useContext(viewportNavigatorContext);
     let u = pC();
     let p = gu();
-    let f = useDispatch();
+    let f = useDispatch<AppDispatch>();
     let _ = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, null);
     let v = useRef(_);
     useEffect(() => {
@@ -3331,7 +3331,7 @@ function n0(e) {
   let d = selectCurrentUser();
   let m = selectCurrentFile();
   let u = useSelector(e => e.selectedView.commentThreadId);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = useContext(hh);
   let g = h.filteredThreads;
   let v = WM(g, e.pageId, activeId, e.showOnlyParticipatingComments, e.hideInactiveComments);
@@ -3448,7 +3448,7 @@ export function $$n10(e) {
 function n2(e) {
   let t = wq();
   let n = _$$s();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = function () {
     let e = Vi();
     let t = useSelector(e => e.mirror.appModel.showComments);

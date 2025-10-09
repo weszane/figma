@@ -75,7 +75,7 @@ import { serializeJSX } from "../figma_app/964367";
 import { k9 as _$$k4 } from "../905/182598";
 import { Q as _$$Q } from "../figma_app/550678";
 import { Point } from "../905/736624";
-import { k8 } from "../figma_app/49598";
+import { trackSlideTemplateUsageThunk } from "../figma_app/49598";
 import { renameFileOptimistic } from "../figma_app/78808";
 import { fullscreenValue } from "../figma_app/455680";
 import { convertMarkdownToEditorState } from "../905/877554";
@@ -90,7 +90,7 @@ import { nv, Ci, qm, Ji } from "../figma_app/553488";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { q as _$$q } from "../9410/847736";
-import { DM, bY, Vf } from "../figma_app/60023";
+import { lockAtomFamily, fileTypeAtom, FileType } from "../figma_app/60023";
 import { bL as _$$bL, l9 as _$$l4, mc, c$, wv } from "../905/493196";
 import { p as _$$p } from "../905/536283";
 import { u as _$$u } from "../905/591949";
@@ -334,9 +334,9 @@ import { s as _$$s7 } from "../905/702260";
 import { W as _$$W5 } from "../905/378870";
 import { Z as _$$Z5 } from "../905/498136";
 import { selectWithShallowEqual } from "../905/103090";
-import { u as _$$u5 } from "../figma_app/852050";
+import { getVariableById } from "../figma_app/852050";
 import { getFontStyleMapping } from "../905/714538";
-import { _S, OS, WH } from "../figma_app/836943";
+import { useStylePickerShown, getStylePickerId, useStyleInfo } from "../figma_app/836943";
 import { ay as _$$ay } from "../figma_app/628987";
 import { Z as _$$Z6 } from "../905/278240";
 import { zz, zD } from "../905/32188";
@@ -347,7 +347,7 @@ import { B as _$$B5 } from "../905/957400";
 import { LM, PK } from "../905/566585";
 import { g as _$$g4 } from "../figma_app/594353";
 import { u3 } from "../figma_app/152690";
-import { MH } from "../figma_app/394327";
+import { extractVariableAliasOrFontStyle } from "../figma_app/394327";
 import { N as _$$N4 } from "../2b17fec9/152433";
 import { r as _$$r5 } from "../905/571562";
 import { n3 as _$$n5, VariableStyleId as _$$IA } from "../905/859698";
@@ -360,7 +360,7 @@ import { Xo as _$$Xo, kO } from "../figma_app/687767";
 import { KL, Z3 as _$$Z7, oS as _$$oS } from "../figma_app/450967";
 import { it as _$$it } from "../figma_app/587612";
 import { AutoLayout } from "../figma_app/947482";
-import { sw as _$$sw, rk as _$$rk } from "../figma_app/914957";
+import { hideStylePreview, showStylePreviewThunk } from "../figma_app/914957";
 import { zK, zM, lk as _$$lk } from "../905/182453";
 import { u as _$$u6 } from "../9410/354452";
 import { Gf, _f } from "../figma_app/293304";
@@ -893,7 +893,7 @@ function eb() {
   });
 }
 function eE() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentFile();
   let i = useSelector(e => e.multiplayer);
   let n = useSelector(e => e.user);
@@ -1149,7 +1149,7 @@ let tt = async ({
                   slideId: s
                 });
                 let o = t.module;
-                o.isHubFile && o.hub_file_id && e(k8({
+                o.isHubFile && o.hub_file_id && e(trackSlideTemplateUsageThunk({
                   hubFileId: o.hub_file_id
                 }));
                 qm(e, o);
@@ -1327,7 +1327,7 @@ async function tl({
   }
 }
 function tc() {
-  let e = Xr(DM);
+  let e = Xr(lockAtomFamily);
   let t = useCallback(() => {
     e(!1);
   }, [e]);
@@ -2279,7 +2279,7 @@ let is = {
   }
 };
 function ia() {
-  let [e, t] = useAtomValueAndSetter(DM);
+  let [e, t] = useAtomValueAndSetter(lockAtomFamily);
   let i = _$$sH();
   let n = NG(i).data;
   let s = n?.[0];
@@ -2351,7 +2351,7 @@ function id() {
   let {
     state
   } = wj(JT.SLIDES_GENERATE_OUTLINE);
-  let i = useAtomWithSubscription(DM);
+  let i = useAtomWithSubscription(lockAtomFamily);
   let {
     data,
     setOutline
@@ -2408,7 +2408,7 @@ function ip() {
   let n = function ({
     modules: e
   }) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useAtomWithSubscription(openFileKeyAtom);
     let n = m4();
     let {
@@ -2964,7 +2964,7 @@ function nj({
     value: 0.6,
     label: getI18nString("slides.properties_panel.object_animations.duration.600ms")
   }];
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let l = useSelector(e => {
     let t = e.mirror.selectionProperties.objectAnimationDuration;
@@ -4071,7 +4071,7 @@ let r_ = memo(function () {
   });
 });
 function rR() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = J3();
   let i = _$$JU(t);
   let n = userFlagExistsAtomFamily(uM);
@@ -4123,7 +4123,7 @@ function rM({
   isShowing: n,
   totalSteps: l
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let o = hX(`[data-onboarding-key="${O0}"]`);
   return jsx(OnboardingModal, {
     arrowPosition: ArrowPosition.RIGHT_BODY,
@@ -4202,7 +4202,7 @@ function rF({
 function rB() {
   syncDesignModePermission();
   let e = _$$dh();
-  let t = Xr(bY);
+  let t = Xr(fileTypeAtom);
   let i = !!S7();
   let n = useEffectiveThemeId();
   TG();
@@ -4223,7 +4223,7 @@ function rB() {
   }, [n, o]);
   useEffect(() => () => {
     i && t({
-      type: Vf.ALL
+      type: FileType.ALL
     });
   }, [i, t]);
   return jsxs(Fragment, {
@@ -5006,7 +5006,7 @@ function sg({
   delay: e,
   onChange: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdownState();
   return jsx(AutoInteractableWrapper, {
     name: "slides_delay_dropdown",
@@ -5049,7 +5049,7 @@ function sb({
   easingType: t,
   onChange: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let l = useDropdownState();
   return jsx(AutoInteractableWrapper, {
     name: "slides_duration_dropdown",
@@ -5371,7 +5371,7 @@ function sU({
   recordingKey: i
 }) {
   var n;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let o = so("behavior", e, t);
   let d = so("direction", e, t);
   let p = so("duration", e, t);
@@ -5495,7 +5495,7 @@ function sK({
 function as({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i] = useSelectionProperty("slideNumber");
   let n = "SLIDE" === i || "SECTION" === i || "SUBSECTION" === i || "TOTAL_WITHIN_DECK" === i || "TOTAL_WITHIN_SECTION" === i;
   let l = isInvalidValue(i);
@@ -5528,7 +5528,7 @@ function as({
 function aa({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let [n, l] = useSelectionProperty("slideNumber");
   return jsx(No, {
@@ -5594,7 +5594,7 @@ function ad({
 function ac({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let [n] = useSelectionProperty("slideNumber");
   let [o, d] = useSelectionProperty("slideNumberSeparator");
@@ -5666,7 +5666,7 @@ function ac({
 function ap({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let [n, l] = useSelectionProperty("codeBlockLanguage");
   let [a, o] = useSelectionProperty("codeBlockTheme");
@@ -5717,7 +5717,7 @@ function ap({
 function am({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelectedThemeId();
   let n = useEffectiveThemeId();
   let {
@@ -5786,7 +5786,7 @@ function a_({
   stylePickerListLayout: f,
   stylePickerShown: b
 }) {
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let v = useAtomWithSubscription(_$$b4);
   let T = qh();
   let S = hD();
@@ -6025,7 +6025,7 @@ function ay({
   stylePickerListLayout: f,
   stylePickerShown: b
 }) {
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let [v, T] = useAtomValueAndSetter(_$$b4);
   let S = useAppModelPropsShallow("currentPage", "currentSelectedProperty");
   let I = qh();
@@ -6320,7 +6320,7 @@ function oN({
 }) {
   let i = useEffectiveThemeId();
   let n = useSelector(e => e.stylePreviewShown);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = useSelector(e => e.mirror.selectedStyleProperties);
   let u = useSelector(e => e.mirror.sceneGraphSelection);
   let p = useRef(Object.keys(u).length > 0);
@@ -6345,7 +6345,7 @@ function oN({
     let t = createStyle();
     o(hidePickerThunk());
     o(hideStylePicker());
-    o(_$$sw());
+    o(hideStylePreview());
     AppStateTsApi?.slideThemeLibBindings().addStyleToLocalTheme(t ?? "", i);
     e();
   });
@@ -6357,7 +6357,7 @@ function oN({
       width: oI,
       defaultPosition: b,
       onClose: () => {
-        o(_$$sw());
+        o(hideStylePreview());
       },
       recordingKey: t,
       draggable: "header",
@@ -6426,8 +6426,8 @@ function oU({
   recordingKey: l
 }) {
   let a = "inheritTextStyleKey";
-  let d = _S(a);
-  let u = useDispatch();
+  let d = useStylePickerShown(a);
+  let u = useDispatch<AppDispatch>();
   return jsxs(Fragment, {
     children: [jsx(MM, {
       inheritStyleKey: t,
@@ -6461,9 +6461,9 @@ function oU({
         onClick: () => {
           if (d) u(hideStylePicker());else if (e.current) {
             let t = e.current.getBoundingClientRect();
-            u(_$$sw());
+            u(hideStylePreview());
             u(showStylePicker({
-              id: OS("inheritTextStyleKey"),
+              id: getStylePickerId("inheritTextStyleKey"),
               initialX: t.left - t.width - 4,
               initialY: t.top,
               modal: !0
@@ -6486,7 +6486,7 @@ function o$({
   closePicker: n,
   recordingKey: o
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let u = useEffectiveThemeId();
   let p = _$$Xo(u);
   let x = useMemo(() => e?.node_id && p.some(t => t.node_id === e.node_id), [e?.node_id, p]);
@@ -6526,7 +6526,7 @@ function o$({
           "aria-expanded": b,
           "aria-label": getI18nString("slides.properties_panel.text_style.create_new_style"),
           onClick: () => {
-            if (b) d(_$$sw());else if (f.current) {
+            if (b) d(hideStylePreview());else if (f.current) {
               _$$l3.user("slides-create-style", () => {
                 Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !0);
                 Fullscreen?.selectStyle(_$$n5.INVALID, _$$IA.INVALID);
@@ -6615,7 +6615,7 @@ function oz({
   onMouseUp: x,
   recordingKey: h
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let [_, g] = useState(!1);
   let y = useDeepEqualSceneValue((e, t) => e.get(t || "")?.fontSize, e.node_id);
   let f = useDeepEqualSceneValue((e, t) => e.get(t || "")?.hasMissingFont || !1, e.node_id);
@@ -6666,10 +6666,10 @@ function oz({
       children: jsx(DialogTriggerButton, {
         "aria-label": getI18nString("slides.properties_panel.text_style.edit_text_style"),
         onClick: t => {
-          if (b) m(_$$sw());else if (j.current) {
+          if (b) m(hideStylePreview());else if (j.current) {
             Fullscreen?.selectStyleByGuid(e.node_id);
             let t = j.current.getBoundingClientRect();
-            m(_$$rk({
+            m(showStylePreviewThunk({
               style: e,
               rowTop: t.y,
               rowLeft: t.x - 8
@@ -6755,7 +6755,7 @@ function oq({
   previouslyAppliedStyle: n,
   recordingKey: a
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = createRef();
   let [c, u] = useState(!1);
   let p = _$$it();
@@ -6968,7 +6968,7 @@ function o0({
   themeStyleToUpdate: e,
   recordingKey: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let {
     fontFamily,
     fontStyle,
@@ -7023,7 +7023,7 @@ function o1({
     inheritTextStyleKey: e.mirror.selectionProperties.inheritTextStyleKey || null,
     styleIdForText: e.mirror.selectionProperties.styleIdForText || null
   }));
-  let n = WH(inheritTextStyleKey, styleIdForText, "TEXT");
+  let n = useStyleInfo(inheritTextStyleKey, styleIdForText, "TEXT");
   let a = useSelector(e => e.fonts);
   let o = useMemo(() => getFontStyleMapping(a), [a]);
   let d = useDropdownState();
@@ -7079,7 +7079,7 @@ function o5({
   savePreviouslyAppliedStyleOnFontChange: i,
   recordingKey: n
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let o = valueOrFallback(useSelectionPropertyValue("missingFont"), !1);
   let d = !!fullscreenValue?.isFontListLoaded();
   let u = o || !d;
@@ -7104,8 +7104,8 @@ function o5({
     consumedVariable,
     clearVariableConsumption
   } = u3(["FONT_FAMILY"]);
-  let T = consumedVariable ? MH(consumedVariable) : null;
-  let S = _$$u5(T ?? void 0);
+  let T = consumedVariable ? extractVariableAliasOrFontStyle(consumedVariable) : null;
+  let S = getVariableById(T ?? void 0);
   let I = p ? jsx(_$$ay, {
     boundVariable: S ?? void 0,
     disabled: u,
@@ -7778,7 +7778,7 @@ function dv({
   onChange: a,
   recordingKey: o
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let u = useDropdownState();
   let {
     smallNudgeAmount,
@@ -7856,7 +7856,7 @@ function dO({
   recordingKey: t,
   targetDomNode: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = useDropdownState();
   let {
     smallNudgeAmount,
@@ -7962,7 +7962,7 @@ function dU({
   startingPointsData: t,
   activeStartingPointId: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = useDropdownState();
   let o = useMemo(() => new d$(t), [t]);
   let d = useCallback(t => {
@@ -8116,7 +8116,7 @@ function cr({
 function cl({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, n] = useSelectionProperty("blur");
   let a = useCallback(e => n(100 * e), [n]);
   return jsx(_$$k7, {
@@ -8630,7 +8630,7 @@ function cv({
   currentTheme: e,
   onThemeSelected: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let a = useId();
   return jsxs("div", {
@@ -8697,7 +8697,7 @@ let ck = /^\w+:/;
 function cC({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let n = useSelectionPropertyValue("hyperlink");
   let o = normalizeValue(n);
@@ -8807,7 +8807,7 @@ let cA = [0.1, 0.3, 0.5, 0.8, 1];
 function cL({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let [n, l] = useSelectionProperty("opacity");
   let a = new cO();
@@ -8870,7 +8870,7 @@ function cM({
   shownPanels: d,
   stylePickerListLayout: c
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = selectCurrentFile();
   let {
     numSelectedByType
@@ -9082,7 +9082,7 @@ let cK = memo(({
   let L = A ? A.key : "";
   let G = useAppModelProperty("showUi");
   let H = useSelector(e => e.universalInsertModal);
-  let Y = useDispatch();
+  let Y = useDispatch<AppDispatch>();
   let q = wd();
   useFileLibrarySubscriptions(L);
   _$$W();
@@ -9226,7 +9226,7 @@ function cz() {
       i.current = e;
       let n = useRef(t);
       n.current = t;
-      let r = useDispatch();
+      let r = useDispatch<AppDispatch>();
       let a = getAtomMutate(renameAutosaveFileMutation);
       let o = selectCurrentUser();
       let d = yZ();

@@ -131,7 +131,7 @@ function M({
   code: e
 }) {
   let t = getVisibleTheme();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let {
     onAction
   } = x();
@@ -176,7 +176,7 @@ function U({
   let {
     onAction
   } = x();
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let p = () => (d(!0), UserAPIHandlers.createDevToken({
     desc: "Code Connect",
     expiration: 7776e3,

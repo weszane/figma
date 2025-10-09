@@ -8,7 +8,7 @@ import { showModalHandler } from "../905/156213";
 import { formatI18nMessage } from "../905/482208";
 import { LR } from "../figma_app/120210";
 import { getUserId } from "../905/372672";
-import { M } from "../figma_app/170366";
+import { getPluginManager } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory } from "../figma_app/300692";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { PageTypeEnum } from "../figma_app/10554";
@@ -19,7 +19,7 @@ import { useNavigationStack } from "../905/794154";
 import { K } from "../figma_app/364226";
 export function $$I1(e) {
   let t;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = getUserId();
   if (!e || i !== e.creator.id) return null;
   if (isResourcePendingPublishing(e)) t = getI18nString("community.plugins.cancel_review");else if (hasMonetizedResourceMetadata(e)) {
@@ -40,7 +40,7 @@ export function $$I1(e) {
   };
 }
 export function $$S0(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = LR();
   let {
     close
@@ -60,7 +60,7 @@ export function $$S0(e, t) {
   } : null;
 }
 export function $$v2(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   if (!e || !t) return null;
   switch (e) {
     case ManifestErrorType.LOAD:
@@ -96,7 +96,7 @@ export function $$v2(e, t) {
   }
 }
 export function $$A5(e, t, r, i = PageTypeEnum.EDITOR) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let {
     close
   } = useNavigationStack();
@@ -116,7 +116,7 @@ export function $$A5(e, t, r, i = PageTypeEnum.EDITOR) {
   };
 }
 export function $$x4(e) {
-  let t = M();
+  let t = getPluginManager();
   return e ? {
     displayText: formatI18nMessage(getPluginsMenuOpenDirectory()),
     callback: () => {
@@ -136,7 +136,7 @@ export function $$C6(e) {
     publishedExtension,
     localPublishedExtension
   } = e;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return !publishedExtension || localPublishedExtension ? null : {
     displayText: getI18nString("qa.extensions.locate_local_version"),
     callback: () => {

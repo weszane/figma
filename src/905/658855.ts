@@ -101,7 +101,7 @@ function D({
   resourceType: U,
   resourceId: B
 }) {
-  let V = useDispatch();
+  let V = useDispatch<AppDispatch>();
   let G = useRef(null);
   let z = useRef(null);
   let H = async t => {
@@ -354,7 +354,7 @@ function B({
   resourceType: S,
   resourceId: T
 }) {
-  let k = useDispatch();
+  let k = useDispatch<AppDispatch>();
   let R = useRef(null);
   let N = useRef(null);
   let [P, D] = useState(!1);

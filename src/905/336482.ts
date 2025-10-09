@@ -100,8 +100,8 @@ import { l as _$$l } from "../905/493845";
 import { Z9 } from "../905/104173";
 import { nV, bn } from "../905/361060";
 import { m as _$$m3 } from "../905/924751";
-import { aB } from "../905/576221";
-import { u as _$$u } from "../905/747030";
+import { areAllAssetsInactive } from "../905/576221";
+import { getPublishHandlersForFileType } from "../905/747030";
 import { executePublishProcess } from "../figma_app/519839";
 import { n as _$$n } from "../905/341791";
 import { t as _$$t4 } from "../905/431558";
@@ -483,7 +483,7 @@ function eM({
   let {
     existingHubFile
   } = e.deps;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let {
     trackEvent
   } = useTracking();
@@ -898,7 +898,7 @@ async function e9({
       onPublishSuccess,
       onPublishProgress,
       onPublishError
-    } = _$$u(FFileType.SLIDES);
+    } = getPublishHandlersForFileType(FFileType.SLIDES);
     await new Promise(n => {
       requestAnimationFrame(async () => {
         await debugState.dispatch(executePublishProcess({
@@ -1171,7 +1171,7 @@ let tt = setupFormValidationHandler({
     localModules: i = {}
   }, n) => {
     let r = [];
-    n.viewerMode.currentValue === FTemplateCategoryType.SLIDE_TEMPLATE && (!e && 0 === t.length || aB(Object.values(i), new Set(t))) && r.push({
+    n.viewerMode.currentValue === FTemplateCategoryType.SLIDE_TEMPLATE && (!e && 0 === t.length || areAllAssetsInactive(Object.values(i), new Set(t))) && r.push({
       key: "NO_SLIDES_TO_PUBLISH",
       data: {}
     });
@@ -1349,7 +1349,7 @@ function td({
     canvasThumbnailPromise,
     existingHubFile
   } = e.deps;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let {
     trackEvent
   } = useTracking();

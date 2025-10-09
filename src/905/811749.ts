@@ -24,7 +24,7 @@ import { SizeOption } from "../905/171275";
 import { C as _$$C } from "../905/226458";
 import { A as _$$A } from "../905/100919";
 function _(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = TileUtils.getOwner(e.tile);
   if (!i) return jsx(TextWithTruncation, {
     fontSize: 13,

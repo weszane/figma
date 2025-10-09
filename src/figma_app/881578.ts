@@ -1,7 +1,7 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { RelatedLinksManager } from "../905/37051";
 import { Q } from "../905/917104";
-import { e3 } from "../figma_app/852050";
+import { variableDataAtom } from "../figma_app/852050";
 export let $$n1;
 export function $$l0() {
   $$n1 = new d();
@@ -17,7 +17,7 @@ class d {
     Q();
   }
   isVariableAvailableInLibraryAsset(e) {
-    let t = atomStoreManager.get(e3);
+    let t = atomStoreManager.get(variableDataAtom);
     return t?.status === "loaded" && t.data.some(t => t.node_id === e);
   }
 }

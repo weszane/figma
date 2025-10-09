@@ -13,7 +13,7 @@ import { wN, KP, v0, hF, pL } from "../905/289198";
 import { J_, BQ } from "../905/871493";
 var n = i;
 export function $$h0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = () => {
     t(postUserFlag({
       dismissed_move_draft_to_project_interstitial_modal: !0

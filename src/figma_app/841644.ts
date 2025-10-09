@@ -17,7 +17,7 @@ import { i as _$$i } from '../figma_app/85949';
 import { FormattedInputWithWrapper } from '../figma_app/260445';
 import { createMultiRefCallback } from '../figma_app/272902';
 import { Gp } from '../figma_app/779179';
-import { SG } from '../figma_app/852050';
+import { getFilteredVariables } from '../figma_app/852050';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { _$$default as $$default } from '../svg/764361';
 
@@ -267,7 +267,7 @@ export const VariableBindingInput = memo<VariableBindingInputProps>(({
   onBlur,
   onFocus
 }) => {
-  const availableFields = SG(fields).data ?? [];
+  const availableFields = getFilteredVariables(fields).data ?? [];
   return jsx(FormattedInputWithWrapper, {
     fields,
     resolvedType,

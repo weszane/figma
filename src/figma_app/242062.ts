@@ -1355,7 +1355,7 @@ function EmojiReactionHandler({
   const lastDownTimeRef = useRef(0);
   const [indicatorClass, setIndicatorClass] = useState(REACTION_INDICATOR_SOLID_CLASS);
   const [isMultiTouchActive, setIsMultiTouchActive] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const stopReacting = useCallback(() => {
     dispatch(stopReactingAction());
   }, [dispatch]);

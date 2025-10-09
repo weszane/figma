@@ -15,7 +15,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
 import { UpsellModalType } from "../905/165519";
 export function $$_0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentFile();
   let s = useSelector(e => e.user?.id);
   if (!t) return null;

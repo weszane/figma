@@ -233,7 +233,7 @@ function Y({
 }) {
   let [r, o] = useState(1);
   let [l, d] = useState(3);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = $$z6(e);
   useEffect(() => {
     u && (u < r && o(u), u > l && d(u));

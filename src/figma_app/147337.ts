@@ -108,7 +108,7 @@ export function $$y6(e, t) {
   });
 }
 export function $$b2(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback((r, n) => {
     if (n) {
       t(FlashActions.error(getI18nString("file_browser.pinning.add_pin_error_max_pins", {

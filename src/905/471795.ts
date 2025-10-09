@@ -4,7 +4,7 @@ import { VariableDataType } from "../figma_app/763686";
 import { useMemoStable } from "../905/19536";
 import o from "../vendor/728460";
 import { colorToHexString } from "../figma_app/191804";
-import { hg } from "../figma_app/852050";
+import { getVariablesByIds } from "../figma_app/852050";
 import { isExtension, isLocalSubscriptionStatus } from "../figma_app/633080";
 import { gX, uC } from "../905/831801";
 import { getVariableNamesInGroups, conditionalValue } from "../905/782020";
@@ -35,7 +35,7 @@ export function $$g1({
     });
     return Array.from(t);
   }(u), [u]);
-  let g = l()(h, hg(h));
+  let g = l()(h, getVariablesByIds(h));
   let f = useMemoStable(() => g, [g]);
   let _ = useCallback((e, t, i, n) => {
     let r = function (e, t, i) {

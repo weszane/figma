@@ -44,7 +44,7 @@ export function ProfileRowTile({
   avatarSize = 48,
   hideFollowsYouBadge = false,
 }: ProfileRowTileProps): JSX.Element {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const handleProfileClick = () => {
     dispatch(selectViewAction({
@@ -118,7 +118,7 @@ export function ProfileWithResourcesTile({
   hideFollowButton = false,
 }: ProfileWithResourcesTileProps): JSX.Element {
   const currentUser = selectCurrentUser()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const handleTileClick = (event: React.MouseEvent) => {
     event.stopPropagation()

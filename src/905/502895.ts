@@ -54,7 +54,7 @@ export function $$$$A0(e) {
   }, [openFileKey]);
   let O = useMemo(() => imagePaint.video?.hash, [imagePaint]);
   let D = useLatestRef(O);
-  let L = useDispatch();
+  let L = useDispatch<AppDispatch>();
   let F = useCallback((e, t, i, n) => {
     L(trackPrototypeScaleChangeEvent({
       name: "video_load",

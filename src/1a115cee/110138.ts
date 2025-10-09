@@ -103,7 +103,7 @@ function Y(e) {
     fileName,
     onClick,
     thumbnail
-  } = W(useDispatch(), e.fileState, e.user);
+  } = W(useDispatch<AppDispatch>(), e.fileState, e.user);
   return jsxs("div", {
     className: ho,
     children: [jsx("div", {
@@ -157,7 +157,7 @@ function V({
   onDone: o
 }) {
   let r;
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let x = o || (() => {
     h(hideModal());
   });
@@ -264,7 +264,7 @@ export function $$X1(e) {
 }
 function z(e) {
   let a = useModalManager(e);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let [i, o] = useState(!1);
   let [r, x] = useState(!1);
   let v = async () => {
@@ -373,7 +373,7 @@ export function $$J0(e) {
     loaded,
     autosaveFilesToDelete
   } = function (e) {
-    let a = useDispatch();
+    let a = useDispatch<AppDispatch>();
     let [s, l] = useState({
       multiUserGarbageCollectionTimestamp: 0,
       multiUserUnsyncedFiles: {},

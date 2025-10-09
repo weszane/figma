@@ -237,7 +237,7 @@ function A({
   requests: e,
   editRequestPermissionsData: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let i = useCurrentFileKey();
   let s = t.file?.key ?? i;
   let r = e[0];
@@ -279,7 +279,7 @@ function L(e) {
     userHandle,
     editRequestPermissionsData
   } = e;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useCurrentFileKey();
   let {
     handleApprove,

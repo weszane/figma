@@ -18,7 +18,7 @@ import { UpsellModalType } from "../905/165519";
 var o = l;
 export function $$j0(e) {
   let t;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let l = useTeamPlanFeatures().unwrapOr(null);
   let j = useTeamPlanUser().unwrapOr(null);
   let y = useSeatManagementWidgetExperiment();

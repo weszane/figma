@@ -30,7 +30,7 @@ import { canEnterDesignMode } from "../figma_app/357367";
 import { SlidesOnboarding } from "../figma_app/6204";
 import { useHasValidSceneSlideTheme } from "../figma_app/21029";
 import { g as _$$g } from "../9410/28058";
-import { VZ } from "../figma_app/60023";
+import { selectionAtomFamily } from "../figma_app/60023";
 import { E as _$$E } from "../9410/583075";
 import { FProductAccessType, FPlanNameType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
@@ -44,7 +44,7 @@ function U() {
   });
 }
 export function $$K0() {
-  let e = Xr(VZ);
+  let e = Xr(selectionAtomFamily);
   let t = useHasValidSceneSlideTheme();
   let i = canEnterDesignMode();
   let {
@@ -93,7 +93,7 @@ export function $$H1({
   isOnboarding: s
 }) {
   let d;
-  let _ = Xr(VZ);
+  let _ = Xr(selectionAtomFamily);
   let x = useAtomWithSubscription(d2);
   let C = function () {
     let {
@@ -105,7 +105,7 @@ export function $$H1({
     } = getPlanAndPlanUser(FProductAccessType.SLIDES);
     return plan?.tier !== FPlanNameType.STARTER && plan?.tier !== FPlanNameType.STUDENT && (planUser?.seatTypeLicenseTypes?.includes(FProductAccessType.SLIDES) ?? !1);
   }();
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let T = x.data === OrgPersonal.ORG;
   let S = atomStoreManager.get(orgSubscriptionAtom);
   let j = atomStoreManager.get(currentTeamAtom);

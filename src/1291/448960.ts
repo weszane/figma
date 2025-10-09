@@ -120,7 +120,7 @@ function O({
   let N = useRef(null);
   let T = useRef(null);
   let C = useSelector(e => e.universalInsertModal);
-  let $ = useDispatch();
+  let $ = useDispatch<AppDispatch>();
   let E = LR();
   let I = useCallback(e => {
     e && w(zo - e.getBoundingClientRect().height - 1);

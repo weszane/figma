@@ -30,7 +30,7 @@ let $$w4 = 'share-to-google-classroom-row';
 let $$O0 = atom(null);
 let R = withTrackedClick(sR);
 function L(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSetAtom($$O0);
   let s = useRef(null);
   useEffect(() => (r(s), () => {

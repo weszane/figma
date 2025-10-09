@@ -29,7 +29,7 @@ function T({
   position: i,
   recentSearch: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = getSelectedView();
   let c = Xr(searchInputAtom);
   let u = useAtomWithSubscription(searchScopeAtom);

@@ -8,7 +8,7 @@ import { CommunityPageType } from '../figma_app/45218'
  * @param e - Editor type
  * @returns Promise resolving to categories meta
  */
-const allCategoriesQuery = liveStoreInstance.Query({
+export const allCategoriesQuery = liveStoreInstance.Query({
   fetch: async (e: any) => (await communityCategoryHandler.getAll({
     editorType: e,
   })).data.meta,

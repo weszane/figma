@@ -319,7 +319,7 @@ function getSavepointModalTitle(savepointID?: string, isEditingMergeSavepoint?: 
 export const SavepointModalContainer = registerModal((props) => {
   const manager = useModalManager(props)
   const file = selectCurrentFile()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const isHistoryMode = useSelector<ObjectOf>(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY)
   const description = props.description || ''
   const label = props.label || ''
@@ -363,7 +363,7 @@ export const SavepointModalContainer = registerModal((props) => {
  */
 export const DevModeSavepointModalContainer = registerModal((props) => {
   const file = selectCurrentFile()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const manager = useModalManager(props)
   const modalTitle = getSavepointModalTitle(props.savepointID, false)
 

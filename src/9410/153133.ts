@@ -6,7 +6,7 @@ import { SA, d2 } from "../figma_app/8833";
 import { Pe } from "../figma_app/32128";
 import { cE } from "../figma_app/932601";
 export function $$c0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return useCallback(({
     nodeId: t,
     clientX: i,
@@ -26,7 +26,7 @@ export function $$u1({
   pagesList: e,
   shouldShowDuplicateOption: t = !0
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let [c, u] = useAtomValueAndSetter(cE);
   return useCallback(({
     nodeId: r,

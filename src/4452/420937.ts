@@ -15,7 +15,7 @@ import { TrackingKeyEnum } from "../905/696396";
 export let $$h0 = registerModal(function (e) {
   let t;
   let a = useModalManager(e);
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let x = Xf(e.plan.key.parentId, e.plan.key.type !== FOrganizationLevelType.TEAM);
   let f = useSelector(e => e.teamBilling);
   let v = e.plan.key.type === FOrganizationLevelType.TEAM ? f.summary.currency : x.data?.currency;

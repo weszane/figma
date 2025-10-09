@@ -138,7 +138,7 @@ function Q({
 let Z = registerModal(function (e) {
   let t;
   let r;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let i = hasDesktopAPI();
   let [a, u] = useAtomValueAndSetter(_$$Q);
   let m = useRef(!1);

@@ -102,7 +102,7 @@ function F() {
   let r = !1;
   let s = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_IDENTICAL_CHILDREN) ?? [];
   s.length === 0 && (s = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_CHILDREN) ?? [], r = !0);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let u = useCurrentFileKey();
   let p = getCollectionSummaryStatus(u).data;
   let _ = getFeatureFlags().dakota_repeaters && s.length > 0 || U(t);

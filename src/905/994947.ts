@@ -27,7 +27,7 @@ import { trackFileBrowserFileClicked } from "../figma_app/314264";
 import { getSelectedViewUrl } from "../figma_app/193867";
 import { FolderPermissionsModal } from "../905/25249";
 import { VisualBellActions } from "../905/302958";
-import { p7 } from "../figma_app/49598";
+import { duplicateHubFileThunk } from "../figma_app/49598";
 import { selectCurrentUser } from "../905/372672";
 import { useSubscription } from "../figma_app/288654";
 import { TeamById } from "../figma_app/43951";
@@ -104,7 +104,7 @@ function x(e) {
     return n ? t(n) : null;
   };
   function i(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     if (!e) return null;
     let {
       overrides,
@@ -127,7 +127,7 @@ function x(e) {
     };
   }
   let n = e => {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let {
       overrides,
       ...n
@@ -140,7 +140,7 @@ function x(e) {
     };
   };
   function r(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     if (!e) return null;
     let {
       overrides,
@@ -154,7 +154,7 @@ function x(e) {
     };
   }
   let a = e => {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let {
       overrides,
       ...n
@@ -167,7 +167,7 @@ function x(e) {
     };
   };
   function s(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useStore();
     if (!e) return null;
     let {
@@ -214,7 +214,7 @@ let V = e => ({
     return !e?.teamId && !e?.parentOrgId && e?.folderId === t?.personal_drafts_folder_id;
   };
   e.CopyLink = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useSelector(e => e.sharingAttributionContextKey);
     return {
       id: "copy_view_link",
@@ -236,7 +236,7 @@ let V = e => ({
     };
   };
   e.Share = e => {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     return t(e) ? null : {
       id: "share_file",
       text: "Share",
@@ -252,7 +252,7 @@ let V = e => ({
     };
   };
   e.ShowInFolder = e => {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     let n = useSelector(t => e.folderId && t.folders[e.folderId]);
     return t(e) || !n ? null : {
       id: "show_in_folder",
@@ -270,7 +270,7 @@ let V = e => ({
     };
   };
   e.SetFavoriteStatus = e => {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     return t(e) || !e.isFavorited ? null : {
       id: "set_favorite_status",
       text: e.isFavorited ? getI18nString("tile.favoriting.remove_from_favorites") : getI18nString("tile.favoriting.add_to_favorites"),
@@ -303,7 +303,7 @@ let z = e => function (t) {
   e.Open = n.Creators.Open(z(!1));
   e.OpenInNewTab = n.Creators.OpenViewInNewTab(z(!0));
   e.ShowInTeam = e => {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let {
       team_id
     } = e;
@@ -319,7 +319,7 @@ let z = e => function (t) {
     } : null;
   };
   e.Share = e => {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     return {
       id: "share_folder",
       text: "Share",
@@ -344,13 +344,13 @@ let Y = e => ({
   e.OpenInNewTab = n.Creators.OpenViewInNewTab(Y);
   e.CopyLink = n.Creators.CopyViewLink(Y);
   e.Duplicate = e => {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = selectCurrentUser();
     return {
       id: "duplicate_hub_file",
       text: "Duplicate",
       onClick: () => {
-        i ? t(p7({
+        i ? t(duplicateHubFileThunk({
           hubFileId: e.id,
           workspace: {
             userId: i.id,
@@ -408,7 +408,7 @@ function ee(e) {
   e.OpenInNewTab = n.Creators.OpenViewInNewTab(ee);
   e.CopyLink = n.Creators.CopyViewLink(J);
   e.Leave = e => {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useSelector(e => e.user);
     let n = useSelector(t => t.roles?.byTeamId[e.id]);
     return i && n && n[i.id] ? {
@@ -541,7 +541,7 @@ let {
   return {
     Context: i,
     Provider: e => {
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       let i = useSelector(e => e.dropdownShown);
       return jsxs(Fragment, {
         children: [jsx(r, {

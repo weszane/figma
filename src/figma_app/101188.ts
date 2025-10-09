@@ -27,7 +27,7 @@ export function $$C0() {
   let e = useSelector(e => getPermissionsState(e));
   let t = useSelector(e => e.selectedView);
   let r = useSelector(e => e.teamRoleRequests);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let l = _$$s2();
   return ({
     onRenameClick: i,
@@ -180,7 +180,7 @@ export function $$w1({
   selectedTeamPermissions: s
 }) {
   let o = useSelector(e => e.dropdownShown);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = $$C0();
   if (!s) return null;
   let u = c({

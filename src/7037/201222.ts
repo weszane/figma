@@ -217,7 +217,7 @@ function eC() {
   });
 }
 export let $$eb0 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useCurrentUserOrgId();
   let u = getSelectedView();
   useEffect(() => {
@@ -346,7 +346,7 @@ export let $$eb0 = registerModal(e => {
   });
 }, _$$E, ModalSupportsBackground.YES);
 function eT(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = selectCurrentUser();
   let a = useCurrentUserOrgId();
   let d = useCallback(() => {
@@ -461,7 +461,7 @@ function eT(e) {
   });
 }
 function eI(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useRef(null);
   let a = useRef(null);
   let [d, r] = useState(!1);

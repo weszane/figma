@@ -8,7 +8,7 @@ import { zw } from "../905/877407";
 import { ft } from "../905/430950";
 import { v2 } from "../figma_app/164260";
 import { Sz } from "../figma_app/784857";
-import { Ei } from "../figma_app/60023";
+import { draftModeAtomFamily } from "../figma_app/60023";
 export class $$h0 extends C {
   getDefaultChildSize() {
     return SlideConstantsCppBindings ? new Vector2D(SlideConstantsCppBindings.slideWidth(), SlideConstantsCppBindings.slideHeight()) : new Vector2D(1920, 1080);
@@ -17,7 +17,7 @@ export class $$h0 extends C {
     return Sz(e, t, i, n);
   }
   shouldHideUI() {
-    return atomStoreManager.get(v2) || !!atomStoreManager.get(Ei);
+    return atomStoreManager.get(v2) || !!atomStoreManager.get(draftModeAtomFamily);
   }
   shouldRenderEmptyCanvasPlaceholder() {
     return !getSingletonSceneGraph().getRoot().slideThemeId.endsWith("-1:-1");

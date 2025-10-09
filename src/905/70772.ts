@@ -78,7 +78,7 @@ let C = {
 };
 var T = (e => (e[e.LEFT = -1] = "LEFT", e[e.RIGHT = 1] = "RIGHT", e))(T || {});
 export let $$k0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, b] = useState(e.selectedIdx);
   let T = useRef(null);
   let [k, R] = useState(null);

@@ -5,7 +5,7 @@ import { VariableResolvedDataType } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
 import { loadSharedVariable } from "../figma_app/933328";
 import { valueOrFallback, isInvalidValue } from "../905/216495";
-import { SG, u as _$$u } from "../figma_app/852050";
+import { getFilteredVariables, getVariableById } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { calculatePickerPositionBelow } from "../905/959568";
 import { LengthInput } from "../figma_app/178475";
@@ -16,7 +16,7 @@ import { fn } from "../figma_app/811257";
 import { useVariablePickerForFields } from "../figma_app/260445";
 import { FormattedInputContext } from "../905/427409";
 import { u3, y$ } from "../figma_app/152690";
-import { MH, eF } from "../figma_app/394327";
+import { extractVariableAliasOrFontStyle, isLocallySoftDeleted } from "../figma_app/394327";
 import { d9 } from "../905/579068";
 import { jp } from "../figma_app/960196";
 import { getNudgeMultipliers } from "../figma_app/98483";
@@ -38,10 +38,10 @@ export function $$w0({
   let C = useMemo(() => [cv(OK.TOP_RIGHT)], []);
   let v = useMemo(() => [cv(OK.BOTTOM_LEFT)], []);
   let S = useMemo(() => [cv(OK.BOTTOM_RIGHT)], []);
-  let k = SG(b).data ?? [];
-  let w = SG(C).data ?? [];
-  let E = SG(v).data ?? [];
-  let M = SG(S).data ?? [];
+  let k = getFilteredVariables(b).data ?? [];
+  let w = getFilteredVariables(C).data ?? [];
+  let E = getFilteredVariables(v).data ?? [];
+  let M = getFilteredVariables(S).data ?? [];
   let A = useRef(null);
   let P = useRef(null);
   let L = useRef(null);
@@ -180,7 +180,7 @@ let T = forwardRef(({
   hideVariableIcon: p,
   mixedMathHandler: g
 }, f) => {
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let {
     smallNudgeAmount,
     bigNudgeAmount,
@@ -231,9 +231,9 @@ function N({
   let {
     consumedVariable
   } = u3(e);
-  let a = MH(consumedVariable);
-  let o = _$$u(a ?? void 0);
-  let d = !!o && eF(o);
+  let a = extractVariableAliasOrFontStyle(consumedVariable);
+  let o = getVariableById(a ?? void 0);
+  let d = !!o && isLocallySoftDeleted(o);
   let [u, p, h] = useVariablePickerForFields(e, VariableResolvedDataType.FLOAT);
   return jsx(FormattedInputContext.Provider, {
     value: {
@@ -253,7 +253,7 @@ function I({
   variableFields: a,
   onClose: d
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let {
     updateVariableConsumption,
     clearVariableConsumption

@@ -9,7 +9,7 @@ export function useNavigationStack() {
   const [stack, setStack] = useAtomValueAndSetter(YH)
   const resetSearchQuery = hw()
   const closeDropdown = jh()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const dropdownState = useDropdownState()
 
   return useMemo(() => {

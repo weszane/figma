@@ -7,7 +7,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { AutoInteractableWrapper } from "../905/277716";
 import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Rb } from "../figma_app/852050";
+import { getSortedLocalVariables } from "../figma_app/852050";
 import { n as _$$n } from "../905/971006";
 import { KindEnum } from "../905/129884";
 import { x as _$$x } from "../905/346809";
@@ -24,7 +24,7 @@ export function $$_0() {
     e();
   }, [e]);
   let n = useSelector(f);
-  let _ = 0 === Rb().length && !n;
+  let _ = 0 === getSortedLocalVariables().length && !n;
   return jsx(k, {
     name: "local_variables_panel",
     children: jsx(Zk, {

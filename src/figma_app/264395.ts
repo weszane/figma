@@ -17,7 +17,7 @@ export function $$E0(e, t) {
   return !!(e?.is_ipad_user || isFigmaEmail(t));
 }
 export function $$y1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useRef("");
   let r = "whiteboard" === getCurrentFileType();
   let a = useIsMounted();

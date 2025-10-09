@@ -10,7 +10,7 @@ import { useSelectionProperty } from "../905/275640";
 import { fullscreenHandler } from "../905/258517";
 import { TK } from "../905/129660";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { bi } from "../figma_app/836943";
+import { findStyleInLibrary } from "../figma_app/836943";
 import { El } from "../905/361629";
 export function $$_4() {
   let e = trackFileEventWithUser();
@@ -149,7 +149,7 @@ export function $$S8(e, t) {
       let n = {
         guid: parseSessionLocalID(e?.styleId.guid)
       };
-      if (bi({
+      if (findStyleInLibrary({
         library: t,
         inheritStyleKey: r.key,
         inheritStyleID: n

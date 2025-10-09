@@ -12,7 +12,7 @@ export function $$l0(e) {
     onComplete,
     parentId
   } = e;
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = useCallback(e => {
     let {
       message,

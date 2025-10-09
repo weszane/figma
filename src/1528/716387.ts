@@ -34,7 +34,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { V2, DI } from "../figma_app/712525";
+import { setCanvasSearchScope, toggleCanvasSearchCategoryFilter } from "../figma_app/712525";
 import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r } from "../figma_app/860474";
 import { gk } from "../figma_app/540726";
@@ -77,7 +77,7 @@ var en = (e => (e[e.NONE = 0] = "NONE", e[e.SINGLE = 1] = "SINGLE", e[e.MULTI = 
 let el = atom(!1);
 let er = memo(function (e) {
   let t = Xr(el);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let l = useSelector(e => e.canvasSearch.scope);
   let i = useSelector(e => e.mirror.appModel.pagesList);
   let {
@@ -106,16 +106,16 @@ let er = memo(function (e) {
           option: PageViewMode.ACTIVE_PAGE,
           activeOption: l,
           onClickCallback: e => {
-            n(V2(e));
+            n(setCanvasSearchScope(e));
           }
         }), jsx(ei, {
           option: PageViewMode.ALL_PAGES,
           activeOption: l,
           onClickCallback: e => {
             hasNotLoaded(i) || !allInstancesExpanded ? (t(!0), requestAnimationFrame(() => {
-              n(V2(e));
+              n(setCanvasSearchScope(e));
               t(!1);
-            })) : n(V2(e));
+            })) : n(setCanvasSearchScope(e));
           }
         })]
       })]
@@ -151,11 +151,11 @@ function eh({
   options: t,
   recordingKey: n
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = useSelector(e => e.canvasSearch.filters);
   let o = _$$b();
   let d = useCallback(e => {
-    i(DI(e));
+    i(toggleCanvasSearchCategoryFilter(e));
   }, [i]);
   let c = useMemo(() => mapFilter(t, e => s[e] ? jsx(_$$v, {
     hasCloseButton: !0,
@@ -212,14 +212,14 @@ function ex({
   mode: t,
   recordingKey: n
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let i = useSelector(e => e.canvasSearch.filters);
   let s = t === EditAction.FIND ? D4 : IM;
   let o = _$$b();
   let d = mapFilter(s, e => i[e] ? jsx(eg, {
     option: e,
     onClose: () => {
-      l(DI(e));
+      l(toggleCanvasSearchCategoryFilter(e));
     },
     recordingKey: n
   }, e) : null);
@@ -544,7 +544,7 @@ function eM({
   setHoveredResult: T,
   allInstancesExpanded: R
 }) {
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let j = WB();
   let k = II();
   let P = useAppModelProperty("currentPage");
@@ -952,7 +952,7 @@ function eM({
         recordingKey: "figma_design_search.other_pages_button",
         className: N()(fp, AX),
         onClick: () => {
-          D(V2(PageViewMode.ALL_PAGES));
+          D(setCanvasSearchScope(PageViewMode.ALL_PAGES));
         },
         children: renderI18nText("canvas_search.results_other_pages")
       }), f && B === PageViewMode.ALL_PAGES && jsx("div", {
@@ -1038,7 +1038,7 @@ function eG({
   let y = !yZ();
   let b = useSelector(e => e.mirror.appModel.pagesList);
   let R = y && e.textMatch.matchType === MatchCriteria.PAGE_MATCH && Multiplayer.isIncrementalSession() && getNodeStatus(b, e.resultGuid) !== DataLoadStatus.LOADED;
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let O = N()(V3, {
     [HR]: e.isPurple,
     [wH]: i,

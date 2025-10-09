@@ -47,7 +47,7 @@ function C({
   entryPointId: g,
   setPinned: f
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let {
     tabManager
   } = cX();
@@ -112,7 +112,7 @@ let L = memo(function (e) {
   });
 });
 function P() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     activateTool
   } = rM(lW);
@@ -204,7 +204,7 @@ export function $$F0() {
   useEffect(() => {
     universalInsertModal.initialSearch && setSearchQuery(universalInsertModal.initialSearch);
   }, [universalInsertModal.initialSearch, setSearchQuery]);
-  let R = useDispatch();
+  let R = useDispatch<AppDispatch>();
   let A = gt(_$$b2);
   let L = useMemo(() => ({
     kind: "buttonTarget",

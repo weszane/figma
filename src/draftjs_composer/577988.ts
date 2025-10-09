@@ -88,7 +88,7 @@ function S({
 }
 export function $$D1(e) {
   let t = selectCurrentUser();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = _B();
   let l = getPinSizeOGx();
   let [m, d] = useState(!0);
@@ -274,7 +274,7 @@ export function $$L2(e) {
     resourceType,
     onSuccessCallback
   } = e;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let m = useSelector(e => e.communityHub.comments.activeFeedType);
   let c = useSelector(e => e.communityHub.comments.feeds)[m];
   let d = useCallback(e => {

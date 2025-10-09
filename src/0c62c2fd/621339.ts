@@ -253,7 +253,7 @@ function O({
     } = e.currentTarget;
     t.includes(id) ? r(t.filter(e => e !== id)) : r([...t, id]);
   };
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let f = getSelectedView().teamId;
   return jsx(HeaderModal, {
     title: getI18nString("downgrade_survey.header"),
@@ -334,7 +334,7 @@ function O({
 export function $$F0({
   context: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.modalShown?.data.teamId);
   let l = useSelector(e => e.teams[r]);
   let d = "admin" === e ? getI18nString("downgrade_survey.go_back") : getI18nString("downgrade_survey.do_not_leave_team");

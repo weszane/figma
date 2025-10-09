@@ -12,7 +12,7 @@ import { MediaQuerySvgComponent } from "../905/331623";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { af } from "../figma_app/559491";
+import { getResourceVersionsThunk } from "../figma_app/559491";
 import { PluginAction } from "../905/15667";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
@@ -65,7 +65,7 @@ let P = class e extends PureComponent {
       });
     };
     this.fetchPlugin = e => {
-      this.props.dispatch(af({
+      this.props.dispatch(getResourceVersionsThunk({
         id: e,
         resourceType: HubTypeEnum.PLUGIN
       }));

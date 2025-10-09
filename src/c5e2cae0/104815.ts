@@ -16,7 +16,7 @@ export function $$g0(e) {
     selectedView,
     promo
   } = e;
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let x = Ud({
     teamId: selectedView.teamId
   });

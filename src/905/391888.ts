@@ -7,7 +7,7 @@ import { selectFolderView } from "../figma_app/976345";
 import { hideDropdownAction } from "../905/929976";
 import { getSelectedViewUrl } from "../figma_app/193867";
 export function $$u0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useStore();
   return useCallback(async (i, n) => {
     e(hideDropdownAction());

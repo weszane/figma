@@ -108,7 +108,7 @@ export function $$D5(e) {
   let t = $$I7();
   let i = selectCurrentFile();
   let a = useSelector(e => i && i.teamId ? e.teams[i.teamId] ?? null : null);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return useCallback(() => {
     if ("eligibleWithUpgrade" === t) s(showModalHandler({
       type: ConsumptionPaywallModalPlansPricing,

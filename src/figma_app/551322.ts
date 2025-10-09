@@ -48,7 +48,7 @@ var c = d;
 let $ = "move_drafts_nudge_rcs_steps--bodyWithoutTitle--H7oik";
 let X = "move_drafts_nudge_rcs_steps--infoText--dIEdg";
 export function $$Z1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let s = selectCurrentFile();
   let o = useSelector(e => e.repos);
@@ -93,7 +93,7 @@ export function $$Z1(e) {
   }) : null;
 }
 export function $$Q0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let {
     dismissModal
@@ -146,7 +146,7 @@ export function $$ee2({
   onClickPrimaryCta: t
 }) {
   var r;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let u = useDropdownState();
   let p = getCurrentFileType();
   let h = selectCurrentFile();
@@ -383,7 +383,7 @@ let et = getFeatureFlags().move_drafts_nudge_v2_recent_files_slim ? function () 
   }))), [t]);
 };
 let er = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsx(OA, {
     targetKey: v4,
     title: "",

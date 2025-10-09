@@ -15,7 +15,7 @@ import { HeaderModal } from "../905/519092";
 function h({
   handleClose: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCallback(() => {
     e();
     t(openCreateTeamFlow({
@@ -31,7 +31,7 @@ function h({
 }
 export function $$x0() {
   let e = selectPermissionsState();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = sx();
   let x = useCallback(() => {
     t(hideModal());

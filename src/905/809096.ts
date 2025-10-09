@@ -42,7 +42,7 @@ function p(e) {
   });
 }
 export function $$h0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDelayedTrue(100);
   let o = useCallback(() => {
     t(popModalStack());

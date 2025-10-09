@@ -74,7 +74,7 @@ export function $$w0(e) {
       slotPropertyDefinition: e,
       includesInstanceSublayer: t
     }, r) {
-      let s = useDispatch();
+      let s = useDispatch<AppDispatch>();
       let l = Xo();
       let d = l?.id === aR;
       let c = useAtomWithSubscription(_$$A2);

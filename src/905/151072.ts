@@ -73,7 +73,7 @@ let $$w0 = forwardRef((e, t) => {
     recordingKey,
     onInputKeyDown
   } = e;
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let f = useSelector(e => e.dropdownShown);
   let w = createRecordingCallback(recordingKey);
   let C = I.map((e, t) => jsx(x, {

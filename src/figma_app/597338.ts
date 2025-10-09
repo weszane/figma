@@ -45,7 +45,7 @@ export function $$S0({
   compareId: e,
   versions: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [c, g] = useState(null);
   let [S, v] = useState({});
   let A = useSelector(e => !!e.modalShown);

@@ -513,7 +513,7 @@ function eB(e) {
   }
 }
 function eV(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useHasSceneGraphSelection();
   let l = new eU();
   let d = useId();
@@ -777,7 +777,7 @@ function eV(e) {
   });
 }
 function eG(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsxs(Fragment, {
     children: [jsx(cS, {
       label: renderI18nText("fullscreen.properties_panel.stroke_settings.join"),
@@ -818,7 +818,7 @@ function eG(e) {
   });
 }
 export function $$ez0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   Gx();
   let {
     Sprig

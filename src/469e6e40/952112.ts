@@ -10,7 +10,7 @@ import { postUserFlag } from "../905/985254";
 export function $$u0({
   openConnectedProjects: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = () => {
     t(postUserFlag({
       seen_connected_project_in_admin_dashboard_banner: !0

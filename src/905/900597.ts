@@ -147,7 +147,7 @@ function G({
   });
 }
 let z = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCallback(() => {
     t(hideModal());
   }, [t]);
@@ -354,7 +354,7 @@ let z = registerModal(function (e) {
 export let $$W0 = registerModal(function (e) {
   var t;
   let i = useModalManager(e);
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let A = e.entryPoint === wR.PROJECT_SETTINGS && e.assetTransferRequestWarning;
   return jsx(TrackingProvider, {
     name: "Connected Project Intro Modal",

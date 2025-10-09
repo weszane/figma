@@ -237,7 +237,7 @@ export function validateTaglineLength(tagline: string) {
     ? getI18nString('community.publishing.tagline_must_be_at_most_100_characters_long')
     : null
 }
-const MAX_TAGLINE_LENGTH = 100 // $$Z9
+export const MAX_TAGLINE_LENGTH = 100 // $$Z9
 
 /**
  * Default template object.

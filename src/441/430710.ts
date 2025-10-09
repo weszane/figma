@@ -39,7 +39,7 @@ export function $$L0(e) {
     setActiveEmbed
   } = _$$_2(nodeId);
   let f = !isReadOnly;
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let g = getObservableValue(AppStateTsApi?.flappData().embeddablePrototypeIdPendingInsertion, "");
   let [v, b] = useState();
   let N = useMemo(() => {

@@ -5,7 +5,7 @@ import { fG } from "../figma_app/973927";
 import { convertToRgba } from "../905/862913";
 import { S as _$$S } from "../3276/591174";
 import { B } from "../3276/578394";
-import { Ve } from "../figma_app/198840";
+import { getTemplateActionLabel } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
 import { sU, WM, Wh, dY } from "../905/838765";
 import { i as _$$i } from "../figma_app/566312";
@@ -53,7 +53,7 @@ export function $$y1(e) {
               insertTemplate: noop,
               isInsertingTemplate: e.isInsertingTemplate,
               shouldUseOpaqueBackground: !0,
-              children: Ve(e.templateInsertionLocation)
+              children: getTemplateActionLabel(e.templateInsertionLocation)
             })
           }), jsx(Ho, {
             image: imageUrl,

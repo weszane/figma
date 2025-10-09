@@ -6,9 +6,9 @@ import { l as _$$l } from "../905/716947";
 import { useStableMemo } from "../905/19536";
 import { getFileKey } from "../905/412913";
 import { compareLibraryKeyWithString } from "../905/709171";
-import { nR } from "../figma_app/852050";
+import { getUsedLibraryVariables } from "../figma_app/852050";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { SS } from "../figma_app/936646";
+import { LibrarySubscriptionRequest } from "../figma_app/936646";
 import { useSubscribedLibraries } from "../figma_app/155728";
 import { LibraryItemTypeEnum, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { AH } from "../905/571648";
@@ -17,7 +17,7 @@ export function $$$$A0(e, t, i) {
   let n = useStableMemo(i ?? [LibraryItemTypeEnum.VARIABLE, LibraryItemTypeEnum.STYLE]);
   let d = AH(t?.type === PrimaryWorkflowEnum.STYLE ? t.key : null, t?.type === PrimaryWorkflowEnum.STYLE ? t : null);
   let m = d?.status === "loaded" ? d.data : null;
-  let A = nR();
+  let A = getUsedLibraryVariables();
   let y = t?.type === PrimaryWorkflowEnum.VARIABLE && "SUBSCRIBED" === t.subscriptionStatus ? t : null;
   let b = useSubscribedLibraries();
   let v = useCurrentFileKey();
@@ -94,7 +94,7 @@ export function $$y1({
 }) {
   let i = $$$$A0(e, t);
   return jsx(Fragment, {
-    children: i.map(e => jsx(SS, {
+    children: i.map(e => jsx(LibrarySubscriptionRequest, {
       fileKey: e.fileKey,
       libraryKey: e.libraryKey
     }, e.fileKey))

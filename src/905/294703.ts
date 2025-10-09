@@ -38,7 +38,7 @@ function N({
   position: a,
   onContextMenuCallback: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useAtomWithSubscription(searchInputAtom);
   let c = uF(e.model);
   let u = _$$G(c, a, e);
@@ -105,7 +105,7 @@ function D({
   position: a,
   onContextMenuCallback: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useAtomWithSubscription(searchQueryAtom);
   let c = Xx(e.model);
   let u = _$$G(c, a, e);
@@ -164,7 +164,7 @@ function $$j({
   userResult: a,
   onContextMenuCallback: o
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useAtomWithSubscription(searchQueryAtom);
   let u = useSelector(e => e.currentUserOrgId || void 0);
   let m = useSelector(e => e.orgById);
@@ -303,7 +303,7 @@ export function $$z0({
   let x = useAtomWithSubscription(searchQueryAtom);
   let S = convertSearchModelTypeToModelType(i);
   let w = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useSelector(e => e.search);
     let i = useSelector(e => e.selectedView);
     let n = useSelector(e => e.search.parameters);

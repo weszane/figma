@@ -13,7 +13,7 @@ import { $Q } from "../figma_app/315578";
 import { LN } from "../figma_app/975811";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { getColorFormat } from "../figma_app/740163";
-import { u as _$$u, hg } from "../figma_app/852050";
+import { getVariableById, getVariablesByIds } from "../figma_app/852050";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { G } from "../figma_app/194673";
 import { aj, DP, Af } from "../figma_app/803932";
@@ -24,7 +24,7 @@ import { g as _$$g } from "../figma_app/638268";
 import { vG } from "../905/210945";
 import { Ig, oI } from "../figma_app/155647";
 import { pc, uA } from "../figma_app/152690";
-import { NX } from "../figma_app/394327";
+import { getWebVariableSyntax } from "../figma_app/394327";
 import { VZ, x0 } from "../figma_app/727192";
 import { wG } from "../905/331989";
 import { yY, Ln, ix, n1, Q5, hq, i5, cu, DW, qR, bN, cx, TX, RI, W0 } from "../figma_app/811711";
@@ -34,7 +34,7 @@ function P({
   varData: t
 }) {
   let r = t?.value?.alias;
-  let i = _$$u(r ? convertKiwiToVariableIdString(r) : void 0);
+  let i = getVariableById(r ? convertKiwiToVariableIdString(r) : void 0);
   return i ? jsx("div", {
     className: "value_or_variable_pill--variablePillContainer--198BC",
     children: jsx(wG, {
@@ -49,7 +49,7 @@ function P({
 }
 let k = new ck();
 export function $$M6(e, t, r) {
-  return Cm(T4.withPixels([NX({
+  return Cm(T4.withPixels([getWebVariableSyntax({
     variable: t
   }) || e]).join(""), r);
 }
@@ -171,7 +171,7 @@ export function $$V3(e) {
     endOffset
   } = e;
   let z = "PROGRESSIVE" === blurOpType;
-  let [W, K, Y, $] = hg([xVar, yVar, radiusVar, spreadVar, colorVar].map(e => e?.value?.alias ? convertKiwiToVariableIdString(e.value.alias) : void 0));
+  let [W, K, Y, $] = getVariablesByIds([xVar, yVar, radiusVar, spreadVar, colorVar].map(e => e?.value?.alias ? convertKiwiToVariableIdString(e.value.alias) : void 0));
   let X = $$M6(offset?.x, W, getI18nString("inspect_panel.shadows.x"));
   let q = $$M6(offset?.y, K, getI18nString("inspect_panel.shadows.y"));
   let J = Cm(startOffset?.x);

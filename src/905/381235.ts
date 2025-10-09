@@ -10,7 +10,7 @@ import { M } from "../905/540025";
 export function $$p0(e, t) {
   let i = e?.library_key;
   let p = M();
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let h = selectCurrentFile();
   let g = useSubscribedLibraryId(e?.library_key);
   let f = T();

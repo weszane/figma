@@ -25,7 +25,7 @@ export function $$E2() {
   return useAtomWithSubscription(k);
 }
 export function $$C3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useCallback(e => {
     t(postUserFlag({
       [j]: e

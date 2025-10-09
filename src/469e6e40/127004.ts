@@ -10,7 +10,7 @@ import { ConfirmationModal2 } from "../figma_app/918700";
 let u = "shared_fonts_upload_error_modal--errorColumnFile--h0Its";
 let m = "shared_fonts_upload_error_modal--errorColumnMessage--ObLuS";
 export function $$p0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.sharedFonts.unsuccessfulUploads);
   return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("shared_fonts.upload_error_modal.title", {

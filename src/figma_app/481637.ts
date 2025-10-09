@@ -8,7 +8,7 @@ import { useIsFullscreenReady } from "../figma_app/115586";
 import { selectUserFlag } from "../905/940356";
 let c = D(() => fullscreenValue.fromFullscreen);
 export function $$u0(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = selectUserFlag(e);
   let u = useIsFullscreenReady();
   useEffect(() => {

@@ -33,7 +33,7 @@ var $$D1 = (e => (e.PROJECT_SETTINGS = "project_settings", e.CONNECTED_PROJECT_A
 var L = (e => (e.URL_FORMAT = "url_format", e.URL_SAME_PLAN = "url_same_plan", e.EMAIL_FORMAT = "email_format", e.EMAIL_USER_NOT_FOUND = "email_user_not_found", e.EMAIL_NOT_MATCH_PLAN = "email_not_match_plan", e.EMAIL_SAME_DOMAIN = "email_same_domain", e.EMAIL_USER_ALREADY_EXISTS = "email_user_already_exists", e.NON_GOV_URL = "non_gov_url", e))(L || {});
 let $$F0 = registerModal(function (e) {
   let t;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let u = () => {
     i(hideModal());
   };
@@ -328,7 +328,7 @@ let $$F0 = registerModal(function (e) {
   });
 }, "ResourceConnectRequestModal");
 let M = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = () => {
     t(hideModal());
   };

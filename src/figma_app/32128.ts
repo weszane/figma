@@ -95,7 +95,7 @@ export function $$z2() {
   let d = $$V8();
   let c = useSelector(e => e.openFile ? e.leftPanel.activeTab : UserInterfaceElements.LAYERS);
   let p = _$$F(c);
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let {
     setIsLayersOpen
   } = $$K15();

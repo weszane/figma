@@ -19,7 +19,7 @@ import { ModalContainer } from "../figma_app/918700";
 import { X } from "../905/33014";
 import { VatGstInput } from "../905/289352";
 export let $$w0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentUser();
   let g = getSelectedView();
   let w = H();

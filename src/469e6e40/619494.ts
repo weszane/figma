@@ -17,7 +17,7 @@ import { registerModal } from "../905/102752";
 import { HeaderModal } from "../905/519092";
 import { wz, Vq, tp, FK, jE, Yy } from "../469e6e40/442006";
 function j(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCallback(() => {
     t(showModalHandler({
       type: mW,
@@ -154,7 +154,7 @@ function j(e) {
   });
 }
 export let $$y0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = e.org;
   let s = e.orgSamlConfig;
   let r = e.orgDomains;

@@ -153,7 +153,7 @@ import { handleFullscreenViewTransition, getBackgroundColorWithOverride } from '
 import { stopPresenting } from '../figma_app/385215';
 import { getSelectedView } from '../figma_app/386952';
 import { c as _$$c2 } from '../figma_app/391827';
-import { Hr, Oi } from '../figma_app/394327';
+import { resolvedTypeToString, getVariableDisplayString } from '../figma_app/394327';
 import { bi } from '../figma_app/425489';
 import { usePresenterUser, useCurrentUser } from '../figma_app/440875';
 import { fullscreenValue } from '../figma_app/455680';
@@ -186,7 +186,7 @@ import { rh as _$$rh, np } from '../figma_app/803932';
 import { nd, sD } from '../figma_app/826998';
 import { TrackingProvider } from '../figma_app/831799';
 import { dX } from '../figma_app/837840';
-import { u as _$$u, BQ, Kd, yp } from '../figma_app/852050';
+import { getVariableById, getResolvedVariableValue, getPublishKeyForVariableSet, getSortedLocalVariableSets } from '../figma_app/852050';
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp } from '../figma_app/860955';
 import { TR } from '../figma_app/867292';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -584,7 +584,7 @@ function ea() {
 }
 let ep = 'mcp-unmapped-components';
 function eh({}) {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = trackDefinedFileEventWithStore();
   let i = ox();
   let [s, o] = useState(!1);
@@ -702,12 +702,12 @@ function eK({
   isCopyable: i,
   variableTypeForTracking: a
 }) {
-  let s = Kd(e.node_id);
+  let s = getPublishKeyForVariableSet(e.node_id);
   let d = useMemo(() => t && s ? {
     [s]: t
   } : void 0, [t, s]);
   let c = e.modeValues[t];
-  let u = BQ(e.node_id, d);
+  let u = getResolvedVariableValue(e.node_id, d);
   let p = c ?? u;
   let h = !p || !u || u === 'MIXED' || p === 'MIXED';
   if (useEffect(() => {
@@ -728,7 +728,7 @@ function eK({
       });
     case VariableDataType.BOOLEAN:
       return jsx(eH, {
-        value: Oi(p),
+        value: getVariableDisplayString(p),
         isCopyable: i,
         variableTypeForTracking: a
       });
@@ -815,7 +815,7 @@ function eV({
   isCopyable: i,
   variableTypeForTracking: a
 }) {
-  let s = _$$u(e.value);
+  let s = getVariableById(e.value);
   let o = Cj(s?.name);
   let d = ON();
   let c = useCallback(e => {
@@ -965,7 +965,7 @@ function tu() {
   } = function () {
     let e = performance.now();
     let t = oy();
-    let i = yp();
+    let i = getSortedLocalVariableSets();
     let [r, a] = R6(i);
     let s = function (e, t) {
       let i = vo(e);
@@ -981,7 +981,7 @@ function tu() {
             }));
             let n = i.name.split('/');
             let a = i.name.includes('/') ? n[n.length - 1] : i.name;
-            let s = i?.resolvedType !== void 0 ? Hr(i.resolvedType) : void 0;
+            let s = i?.resolvedType !== void 0 ? resolvedTypeToString(i.resolvedType) : void 0;
             return {
               id: i.node_id,
               type: i.resolvedType,
@@ -1069,12 +1069,12 @@ function tu() {
       return r === e.length - 1 ? `${a} minmax(${Gyo}, auto)` : a;
     }).join(' ');
   }(currentVariableSet?.modes);
-  let v = _$$u(selectedVariable || void 0);
+  let v = getVariableById(selectedVariable || void 0);
   let T = useAtomWithSubscription(_$$$);
   let S = useMemo(() => ({
     numColumns: variablesTableColumns?.length,
     numRows: variablesTableData?.length,
-    variableType: v?.resolvedType !== void 0 ? Hr(v.resolvedType) : void 0,
+    variableType: v?.resolvedType !== void 0 ? resolvedTypeToString(v.resolvedType) : void 0,
     entrypoint: T
   }), [v?.resolvedType, variablesTableColumns?.length, variablesTableData?.length, T]);
   if (!zL()) {
@@ -1282,7 +1282,7 @@ function th({
   let o = selectCurrentFile();
   let l = selectCurrentUser();
   let d = getSelectedView();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useSelector(e => 'devModeVariablesTableBackFocusId' in e.selectedView ? e.selectedView.devModeVariablesTableBackFocusId : void 0);
   let p = Xr(_$$$);
   let m = useCallback(() => {
@@ -1335,7 +1335,7 @@ function tm(e) {
   return !0 === e.isDividerRow && typeof e.content == 'string';
 }
 function t9() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return selectUserFlag('dismissed_dev_mode_overview_banner') || isVsCodeEnvironment() ? null : jsx(TrackingProvider, {
     name: 'Dev Mode Overview Banner',
     properties: {
@@ -1562,7 +1562,7 @@ function ij({
   nodeId: e,
   isEdited: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = selectCurrentFile()?.key;
   let s = trackFileEventWithStore();
   let l = async () => {
@@ -1640,7 +1640,7 @@ let iW = setupRemovableAtomFamily(() => atom(!1), {
 });
 function iY() {
   let e = selectCurrentFile();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectCurrentUser();
   let s = useDropdownState();
   let o = useSelector(e => e.multiplayer);
@@ -1725,7 +1725,7 @@ function iQ() {
     }, [e, t]);
   }();
   let c = getSelectedView();
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   _$$O3();
   let p = getObservableOrFallback(AppStateTsApi.currentSceneState().nodesWithStatusForFile);
   let f = useRef(null);
@@ -2291,7 +2291,7 @@ function i5({
   users: n,
   nodeCount: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = trackFileEventWithStore();
   let {
     nodeId,
@@ -2692,7 +2692,7 @@ let r0 = memo(({
     showDeviceFrameEnabled: f,
     scalingInfo: g
   }, _] = useAtomValueAndSetter(t.stateAtom);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let y = useSceneGraphSelector();
   let C = useMemo(() => h === bi.OPEN, [h]);
   let v = m?.initialViewerSize ?? rX;
@@ -3052,7 +3052,7 @@ function r1({
   isPreviewFittedToAspectRatio: v,
   viewerControl: T
 }) {
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   let S = useRef(null);
   let [{
     currentPresentedNode: j,
@@ -3240,7 +3240,7 @@ function r2({
   onBack: s,
   onForward: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return jsxs('div', {
     className: KW,
     children: [n <= Ah ? null : jsxs(Fragment, {

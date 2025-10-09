@@ -42,7 +42,7 @@ let B = registerModal(function (e) {
     library,
     onClose
   } = e;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let {
     createLibraryImport
   } = S1();
@@ -140,7 +140,7 @@ function G({
   let {
     createLibraryImport
   } = S1();
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let c = useCurrentFileKey();
   if ("loading" === allDsImportReadyLibrariesRequestStatus) return jsx(Fragment, {
     children: range(3).map(e => jsx(Q, {}, e))
@@ -252,7 +252,7 @@ export let $$W0 = registerModal(function (e) {
     onCloseCallback,
     hasExistingChatMessages
   } = e;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useCallback(() => {
     onCloseCallback();
     l(hideModalHandler());

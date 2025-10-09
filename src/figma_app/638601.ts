@@ -61,7 +61,7 @@ export function $$u0(e) {
   });
 }
 export function $$p1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return useCallback(t => {
     $$u0(t);
     e(AUTH_INIT({

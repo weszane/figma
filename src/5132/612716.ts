@@ -165,7 +165,7 @@ export function $$N0({
   cardsClickable: I
 }) {
   let [z, N] = useState(e[0].id);
-  let M = useDispatch();
+  let M = useDispatch<AppDispatch>();
   let W = 1 === T ? jsx("div", {
     className: cssBuilderInstance.p16.pt14.pb36.$,
     children: jsx(TextWithTruncation, {

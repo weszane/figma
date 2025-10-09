@@ -128,7 +128,7 @@ let b = createViewModeRenderer({
   [ViewMode.LIST]: () => jsx(Fragment, {})
 });
 function z(e, t) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return useMemo(() => ({
     onClick: () => {
       i(trackFileClicked({
@@ -367,7 +367,7 @@ let ep = memo(e => {
   });
 });
 function em(e, t) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return useMemo(() => ({
     onClick: t ? () => {
       i(selectTeamView(e));
@@ -448,7 +448,7 @@ let eh = createViewModeRenderer({
 function eg(e) {
   let t = e.searchResult.model;
   let i = function (e, t) {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     return ignoreCommandOrShift(n => {
       n.preventDefault();
       i(selectViewAction({
@@ -528,7 +528,7 @@ let eF = e => {
   }
 };
 function eM(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.search.parameters.sortState);
   let s = _$$d();
   let [o, l] = useState([]);
@@ -648,7 +648,7 @@ let ez = e => {
   }
 };
 function eH(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.search.parameters.sortState);
   let r = e => {
     let n = eG(e.sortKey);
@@ -700,7 +700,7 @@ function eK(e) {
 }
 let e$ = eq;
 function e0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getUserId();
   let i = getUserId();
   return useCallback((n, r) => {
@@ -730,7 +730,7 @@ function e6(e) {
     user,
     targetRect
   } = e.dropdownData;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = e0();
   let o = ef(user.id);
   if (!targetRect) return null;
@@ -939,7 +939,7 @@ export function $$tt0(e) {
   let m = useMultiSubscription(TeamOrphanedStatus, p, {
     enabled: e.searchModelType === PublicModelType.TEAMS
   });
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   useEffect(() => {
     if (e.searchModelType === PublicModelType.TEAMS) {
       let e = {};

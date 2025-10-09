@@ -6,7 +6,7 @@ import { addTileFavorite, handleTileUnfavorite } from "../figma_app/909778";
 import { userHasPlan } from "../905/697795";
 import { TileUtils } from "../figma_app/543100";
 export function $$c0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCallback((i, n, r) => {
     let a = {
       entrypoint: e.entrypoint,

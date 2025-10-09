@@ -42,7 +42,7 @@ import { Ml, bj } from "../905/971098";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { d$ } from "../figma_app/664693";
 import { MIXED_MARKER } from "../905/216495";
-import { nN, SR } from "../figma_app/852050";
+import { getLocalVariableSets, initializeVariableHooks } from "../figma_app/852050";
 import { useOpenFileLibraryKey, selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { isOrgOrWorkspaceContainer, hasAssetError, getAllAssets, isNewOrChangedOrDeleted, hasVariableSetError, isStagedStatus, isActiveStagingStatus, hasContainingStateGroup, remapNodeIdsForMove, isTemplateAsset } from "../figma_app/646357";
 import { FFileType, FContainerType, FAccessLevelType } from "../figma_app/191312";
@@ -298,7 +298,7 @@ function eW(e) {
     hasWorkspace,
     workspaceName
   } = e;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let {
     teams,
     currentOrgId,
@@ -711,7 +711,7 @@ function tF({
   let v = useSelector(e => e.fileByKey);
   let I = useAtomWithSubscription(filesByLibraryKeyAtom);
   let E = useSelector(groupComponentItemsByStateGroup);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let S = useMemo(createWellFormedVariablesBySetIdSelector, []);
   let w = useSelector(t => S(t, e.node_id));
   let C = useMemo(createUnpublishedVariablesBySetIdSelector, []);
@@ -1171,7 +1171,7 @@ function tZ({
       VariablesBindings.setVariableIsPublishable(e.node_id, !e.isPublishable);
     });
   }, [e.node_id, e.isPublishable]);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useCallback(e => {
     e.preventDefault();
     e.stopPropagation();
@@ -1286,7 +1286,7 @@ function tJ(e) {
     initiallyCheckedItemIDs,
     libraryModalSessionId
   } = e;
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = useModalManager(e);
   let _ = useRef(null);
   let [b, I] = useAtomValueAndSetter(libraryPublishingModeAtom);
@@ -1313,7 +1313,7 @@ function tJ(e) {
   let eA = useSelector(selectComponentLibraryItemsWithStatus);
   let ey = useSelector(selectStateGroupLibraryItemsWithStatus);
   let ev = useAtomWithSubscription(libraryAssetsAtom);
-  let eI = nN();
+  let eI = getLocalVariableSets();
   let eE = useMemo(() => processLocalComponents(eA), [eA]);
   let {
     modeLimit,
@@ -1371,7 +1371,7 @@ function tJ(e) {
   let eY = useContext(og);
   let eq = UJ();
   let eQ = Xm();
-  SR();
+  initializeVariableHooks();
   let e0 = useAtomWithSubscription(createLibraryItemsAtomFamily(eQ));
   let e1 = useAtomWithSubscription(createAllStagedItemIdsAtomFamily(eQ));
   let e2 = useLatestRef(eY);
@@ -1738,7 +1738,7 @@ function t0({
   isCurrentFilePublished: t
 }) {
   let i = useOpenFileLibraryKey();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = Object.values(useSelector(selectComponentLibraryItemsWithStatus));
   let o = Object.values(useSelector(selectStateGroupLibraryItemsWithStatus));
   let l = !s.length && !o.length;

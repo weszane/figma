@@ -8,7 +8,7 @@ import { hidePickerThunk } from '../figma_app/91703';
 import { resetLocalMusicThunk, resetLocalTimer } from '../figma_app/389091';
 import { H1 } from '../figma_app/451700';
 import { fullscreenValue } from '../figma_app/455680';
-import { cL } from '../figma_app/712525';
+import { resetCanvasSearch } from '../figma_app/712525';
 import { AppStateTsApi, CanvasSearchHelpers, Fullscreen, HandoffBindingsCpp, SelectionState } from '../figma_app/763686';
 import { resetComments } from '../figma_app/770088';
 // Original code: $$f1 = createActionCreator('FULLSCREEN_CLOSE')
@@ -32,7 +32,7 @@ export const closeFullscreenThunk = createOptimistThunk(e => {
 
   // Dispatch cleanup actions
   e.dispatch(resetComments());
-  e.dispatch(cL());
+  e.dispatch(resetCanvasSearch());
   e.dispatch(resetLocalTimer());
   e.dispatch(resetLocalMusicThunk());
 

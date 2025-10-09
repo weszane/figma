@@ -675,7 +675,7 @@ export function $$tu1({
   } = useComponentFlyoutModal();
   let ec = fV(e.library_key);
   let eu = selectCurrentFile();
-  let ep = useDispatch();
+  let ep = useDispatch<AppDispatch>();
   let eh = useSelector(e => selectLibrary(e).local.thumbnails);
   let em = _$$H();
   let eg = useCallback(({

@@ -19,7 +19,7 @@ const CMS_CONNECTION_ERROR_BELL_TYPE = 'cms-connection-error-visual-bell'
  * @param params - Object containing the current status.
  */
 export function VisualBellConnectionErrorHandler(params: { status: string }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const [debouncedStatus] = useDebounce(params.status, 3000)
 
   useEffect(() => {

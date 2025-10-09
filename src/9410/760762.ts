@@ -100,7 +100,7 @@ function T({
 function w({
   trackingProperties: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useAtomWithSubscription(QY);
   let n = Xr(xw);
   let o = useAtomWithSubscription(Zk);
@@ -132,7 +132,7 @@ function w({
 function S({
   trackingProperties: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(E, {
     name: BadgeLabels.FREE,
     onBadgeClick: () => {
@@ -271,7 +271,7 @@ function ei({
   dismissModal: e,
   teamId: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = TN(t);
   return jsx(TrackingProvider, {
     name: "Pro trial upsell modal",
@@ -404,7 +404,7 @@ function el({
   canEditTeam: n,
   isProOrOnceEdu: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let p = jn();
   let h = ng.canSeeProTrialExpiryUx(t);
   let m = h ? BadgeLabels.PRO_TRIAL_EXPIRED : BadgeLabels.LOCKED;
@@ -496,7 +496,7 @@ function eh({
   teamId: t
 }) {
   let i = _$$y(t, UpsellModalType.STARTER_TEAM_FILE_BADGE);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let o = useAtomWithSubscription(QY);
   let c = Xr(xw);
   return jsx(E, {

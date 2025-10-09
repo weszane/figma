@@ -208,7 +208,7 @@ let X = function ({
   onImageUploaded: t
 }) {
   let r = useRef(null);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let a = useSelector(e => e.loadingState);
   let l = uploadProfileCoverImageThunk.loadingKeyForPayload({
     profileId: e.id
@@ -752,7 +752,7 @@ let tg = createOptimistThunk(async (e, t, {
   }
 });
 let tE = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentUser();
   let [r, s] = useState([]);
   let [a, l] = useState(!0);
@@ -1085,7 +1085,7 @@ function rf({
 function ry({
   resource: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     id,
     is_subscription
@@ -1206,7 +1206,7 @@ function rj({
   primaryUserId: e,
   profileId: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = selectCurrentUser();
   let [a, l] = useState(!1);
   let [{
@@ -1388,7 +1388,7 @@ let rk = e => {
   }
 };
 function rA() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentUser();
   let r = useSelector(e => e.dropdownShown?.data?.profile);
   let s = useSelector(e => e.dropdownShown?.data?.targetRect);
@@ -1500,7 +1500,7 @@ function rP(e) {
   let t = useDropdownState();
   let r = useRef(null);
   let s = !!(t && t.type === DROPDOWN_TYPE_COMMUNITY_PROFILE_MORE_ACTIONS_MENU);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let l = useCallback(() => {
     a(hideDropdownAction());
   }, [a]);
@@ -1954,7 +1954,7 @@ function r7({
 }) {
   let r = useSelector(e => 'authedActiveCommunityProfile' in e ? e.authedActiveCommunityProfile?.id : null);
   let s = useSelector(e => 'selectedView' in e ? e.selectedView : null);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let l = r === e.id;
   return (useEffect(() => {
     t !== UserProfileTab.SAVES || l || customHistory.push(getProfileRouteHref(e.profile_handle, UserProfileTab.RESOURCES));
@@ -1975,7 +1975,7 @@ function r6({
     tabView
   } = useSafeRouteParams(ProfileRouteState);
   let r = selectCurrentUser();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = useSelector(t => isAuthedActiveProfile(e, t));
   let l = useSelector(t => getPrimaryUserIdStatus(t, e));
   let c = useSelector(e => 'authedActiveCommunityProfile' in e ? e.authedActiveCommunityProfile?.id ?? null : null);
@@ -2238,7 +2238,7 @@ export function $$si0({
   let t = useRouteStateInstance(ProfileRouteState);
   let r = useRouteStateInstance(ResourceHubProfileRouteState);
   let s = useIsResourceHub();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let l = t?.params.profileHandle ?? r?.params.profileHandle ?? null;
   let [c] = setupResourceAtomHandler(ss(l ?? ''));
   useEffect(() => {

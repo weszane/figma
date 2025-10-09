@@ -46,7 +46,7 @@ let b = registerModal(function (e) {
   let [y, b] = useState(null);
   let [j] = useAtomValueAndSetter(f);
   let v = _();
-  let k = useDispatch();
+  let k = useDispatch<AppDispatch>();
   let C = useCallback(async () => {
     g(!1);
     j[importNodeGuid] || d(!0);
@@ -112,7 +112,7 @@ let b = registerModal(function (e) {
   });
 }, "FigmakeImportModal", ModalSupportsBackground.NO);
 export function $$j0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return t => e(showModalHandler({
     type: b,
     data: {

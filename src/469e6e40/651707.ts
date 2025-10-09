@@ -13,16 +13,16 @@ import { props } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
-import { d as _$$d } from "../905/44199";
+import { baseErrorSeverity } from "../905/44199";
 import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 let $$j0 = registerModal(function (e) {
   let t = useModalManager(e);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let [v, j] = useState({
     inputValue: "",
     tokens: (e.orgSamlConfig.domains || []).map(e => ({
-      state: _$$d.OK,
+      state: baseErrorSeverity.OK,
       content: e
     })),
     errorMessage: ""
@@ -107,7 +107,7 @@ let $$j0 = registerModal(function (e) {
                 });
                 return jsxs("div", {
                   className: "x78zum5 x6s0dn4 xg2d0mh xlup9mm xip9h3s x1ldx8e",
-                  children: [e.state !== _$$d.ERROR && jsx("span", {
+                  children: [e.state !== baseErrorSeverity.ERROR && jsx("span", {
                     className: "x78zum5 x6s0dn4 x14ju556",
                     children: a
                   }), jsx(TextWithTruncation, {
@@ -135,17 +135,17 @@ let $$j0 = registerModal(function (e) {
               },
               placeholderText: getI18nString("idp_management.domain_mapping_modal.placeholder"),
               searchResultToken: e => ({
-                state: _$$d.OK,
+                state: baseErrorSeverity.OK,
                 content: e
               }),
               useContainerRefForWidth: !0,
               validateToken: t => {
                 let a = e.orgDomains.find(e => e.domain === t);
                 return a ? {
-                  state: _$$d.OK,
+                  state: baseErrorSeverity.OK,
                   content: a
                 } : {
-                  state: _$$d.ERROR,
+                  state: baseErrorSeverity.ERROR,
                   content: {
                     domain: t,
                     id: "",

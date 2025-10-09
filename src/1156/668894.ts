@@ -165,7 +165,7 @@ let G = registerModal(function (e) {
   let {
     activeProjects
   } = YY();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let a = !!e.toolCallId && !!e.toolName;
   let [l, o] = useState(void 0);
   return jsx(ModalRootComponent, {
@@ -229,7 +229,7 @@ function H({
   trackingContext: r,
   source: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return () => s(showModalHandler({
     type: G,
     data: {
@@ -334,7 +334,7 @@ export function $$X0({
       trackingContext: n,
       source: r
     }) {
-      let i = useDispatch();
+      let i = useDispatch<AppDispatch>();
       return () => i(showModalHandler({
         type: V,
         data: {

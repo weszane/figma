@@ -4,6 +4,7 @@ applyTo: '**'
 
 # GitHub Copilot Refactoring Instructions
 
+
 I'm working with a compiled TypeScript code snippet (part of a larger character file) that has been minified or transpiled to JavaScript, making it hard to read and lacking type definitions. I need your help to refactor this specific snippet into clean, type-safe TypeScript. Please follow these requirements:
 
 1. **Goals**:
@@ -15,6 +16,7 @@ I'm working with a compiled TypeScript code snippet (part of a larger character 
 
 2. **Input Details**:
    - The code may have minified variable names (e.g., `a`, `b`) and no type annotations.
+   - The symbol `createOptimistThunk` first argument is like redux thunk store context.
 
 3. **Output Requirements**:
    - Provide the complete refactored TypeScript code for this snippet, ensuring no part is omitted.
@@ -28,3 +30,21 @@ I'm working with a compiled TypeScript code snippet (part of a larger character 
 4. **Constraints**:
    - Focus on refactoring this specific snippet. If it’s part of a larger file, I’ll provide additional chunks later.
    - If the code is too long for you to process, indicate which parts need further context to complete the refactoring.
+   - All code should be refactored, keep the original code name in comments.
+   - The export statement left name should be the same as the original code name but its right names should be changed to the refactored code name.
+
+```example
+// input
+function a() {
+  logger.log('hh')
+}
+
+export const b = a;
+
+// Output
+export function logMessage() {
+   logger.log('hh')
+}
+// note that is the a is not exported, the new name is logMessage which should be exported
+export const b = logMessage;
+```

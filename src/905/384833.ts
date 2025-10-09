@@ -94,7 +94,7 @@ function ea(e) {
   let [C, O] = useState(!1);
   let V = useMemo(() => collaboratorSet.dict(e => (g[e] ?? 0) + (y[e] || 0)), [g, y]);
   let Q = function (e, t, i) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     return r => {
       organizationAPIService.updateOrgRenewalCounts({
         orgId: e,
@@ -333,7 +333,7 @@ function ea(e) {
   });
 }
 function es(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.selectedView);
   return jsx(_$$z, {
     variant: "brand",

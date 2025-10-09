@@ -28,7 +28,7 @@ import { $I, RM } from "../figma_app/322845";
 import { fullscreenValue } from "../figma_app/455680";
 import { throwTypeError } from "../figma_app/465776";
 import { SimpleComponentType } from "../figma_app/504088";
-import { W9 } from "../figma_app/559491";
+import { fetchCanvasWidgetVersions } from "../figma_app/559491";
 import { PluginManager } from "../figma_app/612938";
 import { assetCategoryAtom, AssetCategoryEnum } from "../figma_app/639711";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
@@ -102,7 +102,7 @@ export const tryPluginInFullscreen = createOptimistThunk(async (dispatchOrStore,
 
   // Special case: Widget, not playground, and can run extensions
   if (isWidget && !isPlaygroundFile && canRun) {
-    await W9({
+    await fetchCanvasWidgetVersions({
       [tryPluginId]: [tryPluginVersionId]
     }, orgId);
     createWidget({

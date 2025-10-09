@@ -289,7 +289,7 @@ function eg({
   openedViaHover: l
 }) {
   let d = K();
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let [_, h] = useState(null);
   let [g, f] = useState(!1);
   let y = useCallback(() => {
@@ -837,7 +837,7 @@ export function $$eI1() {
 }
 export function $$eS0(e) {
   let t = useIsVotingSessionJoined();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = useAppModelProperty("isReadOnly");
   let o = function ({
     multiplayerWheelType: e,

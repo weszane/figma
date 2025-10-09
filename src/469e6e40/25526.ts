@@ -53,13 +53,13 @@ import { k as _$$k4 } from "../469e6e40/115523";
 import { isSelectedOrgAdminSettingsMissingResources } from "../figma_app/422062";
 import { _ as _$$_, Y as _$$Y2 } from "../469e6e40/781142";
 import { r as _$$r } from "../905/398386";
-import { Jt } from "../figma_app/401069";
+import { fetchActivityLogsThunk } from "../figma_app/401069";
 import { initializePluginAllowlist, initializeWidgetAllowlist } from "../905/837497";
 import { selectViewAction } from "../905/929976";
 import { useLibraryInfo } from "../figma_app/933328";
 import { licenseGroupDelete, licenseGroupUpdate, fetchLicenseGroupsThunk } from "../figma_app/28323";
 import { UK } from "../905/898493";
-import { Jt as _$$Jt2 } from "../figma_app/342125";
+import { fetchOrgSamlConfig } from "../figma_app/342125";
 import { fetchOrganizationTeams } from "../figma_app/330108";
 import { usePlanInviteWithSeatExperiment, useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { g7 } from "../905/939482";
@@ -112,10 +112,10 @@ import { rn } from "../figma_app/903573";
 import { createOnboardingStateMachine } from "../905/298004";
 import { WZ } from "../905/893645";
 import { f as _$$f, jD, Vl as _$$Vl, OK } from "../figma_app/481749";
-import { KJ, H3 as _$$H, Bd } from "../figma_app/994725";
+import { validateEmailsAndDateRange, getEndOfDay, getDateRange } from "../figma_app/994725";
 import { isBigmaEnabledAlias3 } from "../figma_app/336853";
-import { d as _$$d2 } from "../905/44199";
-import { um, Rs as _$$Rs, N$ } from "../figma_app/761870";
+import { baseErrorSeverity } from "../905/44199";
+import { getAllAutocompleteStrings, getInitialAutocompleteState, getTokenStrings } from "../figma_app/761870";
 import { P as _$$P2 } from "../905/392438";
 import { p as _$$p } from "../figma_app/353099";
 import { TableRow, HeaderCell, SortableHeaderCell } from "../905/682977";
@@ -597,7 +597,7 @@ function tv() {
     overlay: OrgAdminActivityOnboarding,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let n = zl(tx);
   useSingleEffect(() => {
     "reset" === n.currentState ? t.show() : t.show({
@@ -1292,7 +1292,7 @@ class tZ extends PureComponent {
     return !e3()(e, this.initialFilterState());
   };
   filterLogs = () => {
-    let e = KJ(this.state.date, um(this.state.emails), this.props.org.activity_logs_max_query_duration_in_days);
+    let e = validateEmailsAndDateRange(this.state.date, getAllAutocompleteStrings(this.state.emails), this.props.org.activity_logs_max_query_duration_in_days);
     if (e) {
       this.setState(t => ({
         error: {
@@ -1317,7 +1317,7 @@ class tZ extends PureComponent {
   };
   onRequestCSV = () => {
     if (this.state.pendingRequest) return;
-    let e = KJ(this.state.date, um(this.state.emails), this.props.org.activity_logs_max_query_duration_in_days);
+    let e = validateEmailsAndDateRange(this.state.date, getAllAutocompleteStrings(this.state.emails), this.props.org.activity_logs_max_query_duration_in_days);
     if (e) {
       this.setState(t => ({
         error: {
@@ -1349,7 +1349,7 @@ class tZ extends PureComponent {
       org_id: this.props.org.id,
       emails: t.emails?.join(),
       start_time: t.date.start,
-      end_time: _$$H(t.date.end),
+      end_time: getEndOfDay(t.date.end),
       event_names: t.eventName?.join(",")
     }).then(() => {
       this.props.dispatch(VisualBellActions.enqueue({
@@ -1450,11 +1450,11 @@ class tZ extends PureComponent {
   }
   initialFilterState() {
     let e = this.props.initialStartTime ? dayjs(this.props.initialStartTime) : dayjs().subtract(30, "days");
-    let t = _$$Rs();
+    let t = getInitialAutocompleteState();
     this.props.initialEmail && (t = {
       ...t,
       tokens: t.tokens.concat({
-        state: _$$d2.OK,
+        state: baseErrorSeverity.OK,
         content: this.props.initialEmail
       })
     });
@@ -1510,7 +1510,7 @@ class tZ extends PureComponent {
     let t = e ?? this.state;
     return {
       teamId: t.team?.id ?? "",
-      emails: [...new Set(N$(t.emails))],
+      emails: [...new Set(getTokenStrings(t.emails))],
       eventName: t.event.value,
       date: {
         ...t.date
@@ -1598,7 +1598,7 @@ function t0(e) {
     let {
       today,
       minDate
-    } = Bd(e.org.activity_logs_max_query_duration_in_days);
+    } = getDateRange(e.org.activity_logs_max_query_duration_in_days);
     return jsx(BigTextInputForwardRef, {
       type: "date",
       className: a ? "activity_logs_section--dateErrorInput--5ngnu activity_logs_section--dateInput--6OLqr activity_logs_section--errorBorder--eU74Y" : "activity_logs_section--dateInput--6OLqr",
@@ -1627,7 +1627,7 @@ function t0(e) {
         placeholder: getI18nString("activity_log.table.member_email_addresses"),
         onChange: e.onEmailInputChange,
         validateToken: e => ({
-          state: isValidEmail(e) ? _$$d2.OK : _$$d2.ERROR,
+          state: isValidEmail(e) ? baseErrorSeverity.OK : baseErrorSeverity.ERROR,
           content: e
         }),
         TokenComponent: tQ
@@ -1805,7 +1805,7 @@ function aa() {
   });
 }
 let aw = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = MX();
   let n = useModalManager(e);
   let l = useCurrentPublicPlan("LicenseGroupDeleteModal").unwrapOr(null);
@@ -2004,7 +2004,7 @@ function aC({
   });
 }
 let aS = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, n] = useState(null);
   let l = useCurrentUserOrgId();
   let o = useCurrentUserOrg();
@@ -2013,16 +2013,16 @@ let aS = registerModal(function (e) {
   let u = !!e.licenseGroup;
   let m = [];
   u && !e.licenseGroup.is_orphaned && (m = e.licenseGroup.admin_users_metadata.map(e => ({
-    state: _$$d2.OK,
+    state: baseErrorSeverity.OK,
     content: {
       id: "",
       user: e
     }
   })));
   let [p, g] = useState(u ? {
-    ..._$$Rs(),
+    ...getInitialAutocompleteState(),
     tokens: m
-  } : _$$Rs());
+  } : getInitialAutocompleteState());
   let h = useCallback(t => {
     trackEventAnalytics("Workspace admin search performed", {
       orgId: o?.id,
@@ -2102,7 +2102,7 @@ let aS = registerModal(function (e) {
 function aN({
   selectedLicenseGroups: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return 0 === e.length ? null : jsxs(Fragment, {
     children: [1 === e.length && !!e[0].id && jsxs(Fragment, {
       children: [jsx(IU, {
@@ -2142,7 +2142,7 @@ let aA = "license_groups_table--overflowWrapper--FJgye";
 function aR({
   item: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return e.id ? jsxs(zx, {
     dataOnboardingKey: Pz,
     children: [jsx(_$$p3, {
@@ -2210,7 +2210,7 @@ let aD = parsePxInt(YEj);
 let aM = e => e.id ?? aP;
 let aP = "unassigned";
 function aU(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = T();
   let [n, l] = useState("");
   let [o, d] = useState(!1);
@@ -2401,7 +2401,7 @@ function a$(e) {
   let {
     "data-onboarding-key": t
   } = e;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: "New billing group",
     children: jsx(_$$V2, {
@@ -2538,7 +2538,7 @@ function a5(e) {
   });
 }
 function a3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = RR();
   let n = Xf(e.org.id);
   let l = usePlanInvoices({
@@ -2853,7 +2853,7 @@ let nx = e => {
 let nb = registerModal(function ({
   onConfirm: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: "Create License Group Confirmation modal",
     children: jsxs(ConfirmationModal2, {
@@ -2891,7 +2891,7 @@ let nf = "workspace_edit_modal--inputLabel--azeeV";
 let nj = "workspace_edit_modal--adminField--JKgPu";
 let nw = "First Workspace Created";
 let nk = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, n] = useState(null);
   let l = useCurrentPublicPlan("WorkspaceEditModal").unwrapOr(null);
   let o = getParentOrgIdIfOrgLevel(l);
@@ -2904,7 +2904,7 @@ let nk = registerModal(function (e) {
   m?.admins && (g = m.admins.reduce((e, t) => {
     let a = t?.baseOrgUser;
     return a ? [...e, {
-      state: _$$d2.OK,
+      state: baseErrorSeverity.OK,
       content: {
         id: a.id,
         user: {
@@ -2916,9 +2916,9 @@ let nk = registerModal(function (e) {
     }] : e;
   }, []));
   let [h, x] = useState(p ? {
-    ..._$$Rs(),
+    ...getInitialAutocompleteState(),
     tokens: g
-  } : _$$Rs());
+  } : getInitialAutocompleteState());
   let b = useCallback(e => {
     trackEventAnalytics("Workspace admin search performed", {
       orgId: o,
@@ -3123,7 +3123,7 @@ function nS() {
   });
 }
 let nL = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.currentUserOrgId);
   let n = _$$q(OK, !0);
   let l = e.workspaces.map(e => e.id);
@@ -3214,7 +3214,7 @@ function nD({
   workspacesData: e,
   selectedWorkspaces: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   if (0 === t.length) return null;
   let n = t[0];
   return n ? jsxs(Fragment, {
@@ -3257,7 +3257,7 @@ function nM({
   workspaceId: e,
   workspacesData: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let n = t.find(t => t.id === e);
   let l = useCallback(() => {
     a(showModalHandler({
@@ -3390,7 +3390,7 @@ function nq({
   });
 }
 function n$() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
     e(showModalHandler({
       type: nk,
@@ -3487,7 +3487,7 @@ let nG = new SimpleFuseSearch([], {
   }]
 });
 function nz(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, n] = useState("");
   let l = useSubscription(WorkspacesTableView, {
     orgId: e.org.id
@@ -3824,7 +3824,7 @@ function nX() {
   });
 }
 function n4(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = usePlanInviteWithSeatExperiment();
   let n = e.activeTab === MemberView.ALL_MEMBERS ? jsx(Button, {
     variant: "primary",
@@ -4025,7 +4025,7 @@ function su({
     name: e => e.name ?? "",
     approved: e => e.approvedAt.getTime()
   }), []);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let m = function (e, t) {
     let a = new Map();
     for (let n of e) {
@@ -4377,7 +4377,7 @@ let sy = registerModal(function ({
     iconUrl
   } = e;
   let [c, _] = useState(void 0);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let m = t ? getI18nString("extension_decline_modal.decline_widget_request") : getI18nString("extension_decline_modal.decline_plugin_request");
   let p = e => {
     let t = {
@@ -4650,7 +4650,7 @@ function sI() {
   });
 }
 function sT(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     entry,
     orgId,
@@ -4792,7 +4792,7 @@ function sR({
   selectedExtensionId: a,
   onRightActionsChange: n
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let o = useTeamPlanPublicInfo().unwrapOr(null);
   let c = o?.tier === FPlanNameType.ENTERPRISE;
   let _ = o?.key.type === FOrganizationLevelType.ORG;
@@ -4892,7 +4892,7 @@ let sD = liveStoreInstance.Query({
   fetch: async e => await n8.getExtensionAnalyticsForOrg(e)
 });
 function sP(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useDropdownState();
   let n = selectPermissionsState();
   let l = useSelector(({
@@ -4962,7 +4962,7 @@ function sP(e) {
   });
 }
 export function $$s$0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = selectPermissionsState();
   let n = useTeamPlanUser();
   let l = useIsOrgAdminUser(n);
@@ -4988,7 +4988,7 @@ export function $$s$0(e) {
 }
 function sB(e) {
   var t;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let n = useCurrentUserOrg();
   let v = useSelector(({
     orgDomains: e
@@ -5082,7 +5082,7 @@ function sB(e) {
   useEffect(() => {
     L && (a(UK({
       force: !0
-    })), a(_$$Jt2()));
+    })), a(fetchOrgSamlConfig()));
   }, [L, a, n.id]);
   let [Z] = useLibraryInfo({
     currentOrgId: n.id,
@@ -5140,7 +5140,7 @@ function sB(e) {
         dispatch: a,
         dropdownShown: w,
         fetchLogs: e => {
-          a(Jt(e));
+          a(fetchActivityLogsThunk(e));
         },
         initialEmail: I.activityTabInitialEmail,
         initialEventOptionId: I.activityTabInitialEventOptionId,

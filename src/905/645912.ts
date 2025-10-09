@@ -51,7 +51,7 @@ let D = _$$n((e, t, i, n) => {
   });
 });
 export function $$L0(e, t) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let d = useAtomWithSubscription(hO.currentSearchAtom);
   let x = useAtomWithSubscription(hO.currentCommunitySearchAtom);
   let P = useAtomWithSubscription(CZ);

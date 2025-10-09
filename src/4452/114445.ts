@@ -91,7 +91,7 @@ function G({
   isProrationBillingEnabled: a,
   planUser: n
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let l = useTeamPlanFeatures().unwrapOr(null);
   let o = t.reason === D3.AVAILABLE_SEAT;
   let d = o ? jsx(_$$y, {}) : jsx(_$$S2, {});
@@ -164,7 +164,7 @@ function $({
   currentSeatValue: n
 }) {
   let i;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let o = capitalize(useRelativeTime(e.createdAt));
   let d = jsx(V, {
     label: getI18nString("admin_dashboard.request_flyout.body.email"),
@@ -399,7 +399,7 @@ let er = {
     let I;
     let E;
     let S;
-    let T = useDispatch();
+    let T = useDispatch<AppDispatch>();
     let A = useTeamPlanFeatures().unwrapOr(null);
     if (!A) throw Error("Missing Plan.");
     let N = A.key.type === FOrganizationLevelType.ORG;

@@ -64,7 +64,7 @@ function f(e) {
   });
 }
 export function $$g0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = r => {
     trackEventAnalytics("restore_version_from_modal", {
       fileKey: e.fig.key,

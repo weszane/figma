@@ -3,7 +3,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import a from "classnames";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { bY, Vf } from "../figma_app/60023";
+import { fileTypeAtom, FileType } from "../figma_app/60023";
 import { Ji } from "../figma_app/553488";
 import { r$ } from "../7222/396421";
 import { p9, y0 } from "../9410/34183";
@@ -13,11 +13,11 @@ var s = a;
 let m = "loading_state--container--ouiBF";
 function g() {
   let e = r$();
-  let t = useAtomWithSubscription(bY);
+  let t = useAtomWithSubscription(fileTypeAtom);
   let i = s()({
     [C9]: e === Ji.OVERLAY_MODAL,
     [_P]: e === Ji.PICKER || e === Ji.OUTLINE_TO_DECK,
-    [cb]: t.type === Vf.TEMPLATE_PICKER
+    [cb]: t.type === FileType.TEMPLATE_PICKER
   }, cssBuilderInstance.m8.$);
   return jsx(Qp, {
     className: i,
@@ -46,7 +46,7 @@ export function $$y4({
   numSections: t = 3,
   numTemplates: i
 }) {
-  let a = useAtomWithSubscription(bY).type === Vf.TEMPLATE_PICKER ? 3 : 4;
+  let a = useAtomWithSubscription(fileTypeAtom).type === FileType.TEMPLATE_PICKER ? 3 : 4;
   return jsx("div", {
     className: s()("loading_state--loadingStateContainer--dcv3D", {
       [cssBuilderInstance.px8.$]: !e

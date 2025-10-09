@@ -4,7 +4,7 @@ import { V } from "../figma_app/304955";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 export function $$l0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return useCallback((t, i, n) => {
     if (n) {
       if (i === n) return !1;

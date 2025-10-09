@@ -207,7 +207,7 @@ let R = registerModal(function ({
   onClose: p,
   allDrafts: m = !1
 }) {
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = [];
   s && g.push("published_assets");
   o && g.push("published_sites");

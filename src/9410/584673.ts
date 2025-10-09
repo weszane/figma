@@ -115,7 +115,7 @@ export function $$Y1() {
     getTriggerProps,
     manager
   } = setupMenu();
-  let A = useDispatch();
+  let A = useDispatch<AppDispatch>();
   let L = CI();
   let M = useAtomWithSubscription(V).data;
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(TrackingProvider, {
@@ -261,7 +261,7 @@ let J = withTrackedClick(function ({
   disabled: l,
   dropdownContainsAiOption: d
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useAtomWithSubscription(V).data;
   let p = CI();
   let [m, g] = useState(0);

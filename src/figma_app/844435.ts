@@ -31,7 +31,7 @@ import { useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { canRunPlugin, convertEditorTypeToFileType, filterEntriesByEditorType, filterEntriesByPluginVersionEditorType, filterPublishedResources, filterResourcesByMatch, getCurrentPluginVersion, getPluginByFileId, getPluginVersion, isDevModePlugin, isEditorTypeMatch, sortResourcesByCreatedAt } from '../figma_app/300692';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { BI as getFigmaMobile } from '../figma_app/546509';
-import { f1, O8 } from '../figma_app/559491';
+import { fetchPublishedPluginsThunk, fetchPublishedWidgetsThunk } from '../figma_app/559491';
 import { isPendingPublisher } from '../figma_app/564095';
 import { getAllowlistedExtensionIds, getAllowlistedPluginOrWidgetIds } from '../figma_app/684168';
 import { useAppModelProperty } from '../figma_app/722362';
@@ -872,13 +872,13 @@ const pluginFetchQueue = new Set<string>();
 const widgetFetchQueue = new Set<string>();
 const triggerPluginWidgetFetch = debounce(dispatch => {
   if (pluginFetchQueue.size > 0) {
-    dispatch(f1({
+    dispatch(fetchPublishedPluginsThunk({
       pluginIds: Array.from(pluginFetchQueue)
     }));
     pluginFetchQueue.clear();
   }
   if (widgetFetchQueue.size > 0) {
-    dispatch(O8({
+    dispatch(fetchPublishedWidgetsThunk({
       widgetIds: Array.from(widgetFetchQueue)
     }));
     widgetFetchQueue.clear();
@@ -890,7 +890,7 @@ const triggerPluginWidgetFetch = debounce(dispatch => {
  * Original: useInstalledPluginsAndWidgets
  */
 export function useInstalledPluginsAndWidgets(): PluginCollections {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const orgId = useSelector<ObjectOf, string>(state => state.currentUserOrgId);
   const subscription = useSubscription(InstalledPlugins, {
     orgId
@@ -1264,7 +1264,7 @@ function filterPluginsByAllowlistAndEditorType(allowlist: PluginMap, publishedPl
  */
 function useAllowlistedPluginIds(resourceType: 'plugin' | 'widget') {
   const orgId = useCurrentUserOrg()?.id ?? '';
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const allowlisted = useSelector((state: any) => resourceType === 'plugin' ? state.whitelistedPlugins : state.whitelistedWidgets);
   const hasOrg = !!orgId;
   const allowlistData = useMemo(() => {
@@ -1677,7 +1677,7 @@ export function useWidgetAllowlistValidation(widgetId: string): WidgetValidation
  * Original: usePluginAllowlistValidation
  */
 export function usePluginAllowlistValidation(pluginId: string): PluginValidationResult {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const org = useCurrentUserOrg();
   const isWhitelistEnforced = !!(org && org.plugins_whitelist_enforced);
   const isAllowlisted = useSelector((state: any) => state.whitelistedPlugins)[pluginId];

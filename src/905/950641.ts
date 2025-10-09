@@ -26,7 +26,7 @@ import { hK } from "../figma_app/211706";
 import { qC, Wb, pr, Qu, j_ } from "../905/948828";
 import { Y } from "../905/26051";
 function R() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return jsxs("div", {
     className: cssBuilderInstance.p8.bRadius8.colorBgSecondary.flex.justifyBetween.itemsCenter.$,
     children: [jsxs("div", {
@@ -212,7 +212,7 @@ function O({
   highlightBadge: l,
   withUpgradeExistingTeamOption: d
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let {
     planTier,
     name,

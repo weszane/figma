@@ -62,7 +62,7 @@ import { v2 } from "../1528/88743";
 import { KF } from "../figma_app/957070";
 var j = C;
 function P() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentUser();
   let {
     isEditingFile,
@@ -407,7 +407,7 @@ function el({
   });
 }
 function ea() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = [{
     label: getI18nString("help_widget.menu.change_keyboard_layout"),
     onClick: function () {

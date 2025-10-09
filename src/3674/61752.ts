@@ -49,7 +49,7 @@ export function $$z0({
     let g = getCurrentTeam();
     let x = hasTeamPaidAccess(g) && !g?.org_id;
     let y = trackFileEventWithStore();
-    let C = useDispatch();
+    let C = useDispatch<AppDispatch>();
     let L = _$$J2();
     let [R, O] = useAtomValueAndSetter(_$$t);
     let B = useCallback(() => {
@@ -127,7 +127,7 @@ export function $$z0({
     let t = !!useDevModeFocusId();
     let n = useAtomWithSubscription(_$$R2);
     let l = _$$U2("blocking_modal");
-    let s = useDispatch();
+    let s = useDispatch<AppDispatch>();
     let d = selectWithShallowEqual(e => ({
       ...e.selectedView,
       editorType: FEditorType.Design,

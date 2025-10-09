@@ -133,7 +133,7 @@ export let $$I2 = memo(function (e) {
     shouldIndent,
     extended
   } = e;
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let {
     dropdownShown,
     sceneGraphSelection

@@ -16,6 +16,7 @@ declare global {
   let TaskController = TaskControllerPrority
   type Dispatch = (action: any) => any
   interface Window {
+    CppVm: any
     mountTime: any
     arkoseResult: any
     arkose: any

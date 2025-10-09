@@ -122,7 +122,7 @@ export function $$eT1() {
 }
 export function $$ek0(e) {
   let t = selectPermissionsState();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let {
     user,
     currentUserOrgId

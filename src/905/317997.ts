@@ -34,7 +34,7 @@ export function $$w1(e) {
     canEditSubscriptions,
     orgId
   } = e;
-  let N = useDispatch();
+  let N = useDispatch<AppDispatch>();
   let P = useSelector(e => e.dropdownShown);
   let O = useSelector(e => e.selectedView);
   let D = useSelector(e => getSelectedFile(e));

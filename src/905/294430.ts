@@ -46,7 +46,7 @@ import $ from "classnames";
 import { loadSharedVariableThunk } from "../figma_app/933328";
 import { FormattedInputWithWrapper } from "../figma_app/841644";
 import { ControlledVariablePickerProvider } from "../figma_app/260445";
-import { MH } from "../figma_app/394327";
+import { extractVariableAliasOrFontStyle } from "../figma_app/394327";
 import { oz } from "../figma_app/406976";
 import { E as _$$E } from "../905/53857";
 import { bL as _$$bL } from "../905/911410";
@@ -80,7 +80,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/708285";
 import { rM } from "../905/95091";
 import { b as _$$b, O as _$$O2 } from "../905/916974";
-import { yT } from "../figma_app/836943";
+import { getStylePickerUIState } from "../figma_app/836943";
 import { dD, o7 } from "../figma_app/941824";
 import { B as _$$B } from "../905/229357";
 import { IR } from "../905/668609";
@@ -134,8 +134,8 @@ function ed({
   onChange: s,
   recordingKey: o
 }) {
-  let l = (t && MH(a[t])) ?? void 0;
-  let c = useDispatch();
+  let l = (t && extractVariableAliasOrFontStyle(a[t])) ?? void 0;
+  let c = useDispatch<AppDispatch>();
   let u = useCallback(async e => {
     if (t && e) {
       let i = await c(loadSharedVariableThunk(e));
@@ -1107,7 +1107,7 @@ let te = memo(function (e) {
   });
 });
 function ta(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = t => {
     t.stopPropagation();
     e.togglePicker();
@@ -2179,7 +2179,7 @@ class tM extends PureComponent {
     t.forEach(e => i[e] = 0);
     e.forEach(e => i[e.type]++);
     let r = Bf().reduce((e, t) => ("GLASS" === t && this.props.anyNonFrameLikesSelected ? e[t] = "disallowedForGlassType" : i[t] >= tL[t] ? e[t] = "disallowedForCount" : e[t] = "allowed", e), {});
-    let a = yT({
+    let a = getStylePickerUIState({
       ...this.props,
       styleType: "EFFECT",
       inheritStyleKeyField: "inheritEffectStyleKey"
@@ -2310,7 +2310,7 @@ class tU extends PureComponent {
       renderProperty: this.renderProperty,
       selectedPropertyType: this.props.selectedPropertyType,
       title: getI18nString("properties_panel.effects.effects"),
-      ...yT(this.props)
+      ...getStylePickerUIState(this.props)
     });
   }
 }

@@ -22,7 +22,7 @@ import { A as _$$A } from "../svg/619883";
 var o = i;
 export let $$k0 = registerModal(function (e) {
   let t = selectCurrentUser();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let i = getSelectedView();
   let w = useSubscription(EduOffboardingData, {});
   let k = useSubscription(EduOffboardingTeam, {

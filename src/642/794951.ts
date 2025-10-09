@@ -24,7 +24,7 @@ export let $$C1 = {
 export function $$j0() {
   let e = useFullscreenViewFile();
   let t = selectCurrentFile();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let j = selectCurrentUser();
   let {
     show,

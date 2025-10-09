@@ -40,7 +40,7 @@ export function $$y2() {
 export function $$b5() {
   let e = Xr(Qs);
   let t = E();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = useSelector(e => e.mirror.appModel.votingSessionInfo);
   return useCallback(n => {
     n && t("meetings_panel_close", n.source);

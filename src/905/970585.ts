@@ -170,7 +170,7 @@ registerLegacyModal(z, e => jsx(K, {
   ...e
 }));
 let Z = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = jsx("a", {
     className: Be,
     href: "https://help.figma.com/hc/articles/1500006775761",
@@ -203,7 +203,7 @@ let Z = registerModal(function () {
   });
 }, "MultiplayerEditorLimitModal");
 let X = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = jsx("a", {
     className: Be,
     href: "https://help.figma.com/hc/articles/1500006775761",

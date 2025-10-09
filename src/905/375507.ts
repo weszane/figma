@@ -1361,7 +1361,7 @@ const FontCollisionReplacementModal = registerModal((props) => {
     setApplyToAll(prev => !prev)
   }, [setApplyToAll])
   const sharedFonts = useSelector(state => state.sharedFonts)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const handleSkipReplacement = useCallback(() => {
     const collisionsToProcess = applyToAll ? sharedFonts.collisions : [sharedFonts.collisions[0]]
     collisionsToProcess.forEach(() => {
@@ -1441,7 +1441,7 @@ const TeamFontsOverrideWarningModal = registerModal((props) => {
   const sharedFonts = useSelector(state => state.sharedFonts)
   const permissionsState = selectPermissionsState()
   const warning = sharedFonts.warnings[0]
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const handleDismissWarning = useCallback(() => {
     dispatch(sharedFontActions.dismissFontWarning())
     onWarningDismissed()
@@ -1490,7 +1490,7 @@ const TeamFontsOverrideWarningModal = registerModal((props) => {
 // eV - Confirm Delete Fonts Modal
 const ConfirmDeleteFontsModal = registerModal((props) => {
   const modalManager = useModalManager(props)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const selectedFontsCount = Object.keys(useSelector(state => state.sharedFonts).fontsToDelete).length
   const handleConfirmDelete = useCallback(() => {
     dispatch(sharedFontActions.deleteFonts())
@@ -1545,7 +1545,7 @@ const DuplicateFontNameCollisionModal = registerModal((props) => {
     setApplyToAll(prev => !prev)
   }, [setApplyToAll])
   const sharedFonts = useSelector(state => state.sharedFonts)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const handleSkipReplacement = useCallback(() => {
     const collisionsToProcess = applyToAll ? sharedFonts.collisions : [sharedFonts.collisions[0]]
     collisionsToProcess.forEach(() => {

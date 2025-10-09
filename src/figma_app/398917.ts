@@ -239,7 +239,7 @@ function ee({
   position: r,
   onCreateCustomBreakpoint: a
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let u = getNudgeAmounts();
   let [p, _] = useState("");
   let [h, m] = useState(1);
@@ -379,7 +379,7 @@ function er({
   onClose: c,
   position: u
 }) {
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let _ = getNudgeAmounts();
   let [h, m] = useState(e.name ?? "");
   let [g, y] = useState(e.minWidth ?? 1);
@@ -482,7 +482,7 @@ function en({
   index: t,
   textStyleGuid: r
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let o = _$$B();
   let l = createRef();
   let d = createRef();

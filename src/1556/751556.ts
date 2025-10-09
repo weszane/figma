@@ -109,7 +109,7 @@ export function $$R2(e) {
 }
 var S = E;
 let ed = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = () => {
     e(popModalStack());
   };
@@ -542,7 +542,7 @@ function eQ(e) {
 }
 function eX() {
   let e = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useSelector(e => e.authedUsers);
     let n = selectUser();
     let o = getThemePreference();
@@ -998,7 +998,7 @@ function eY({
 }) {
   let l = useRef(null);
   let o = useSelector(_$$E3(B$));
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let {
     open
   } = SO();
@@ -1049,7 +1049,7 @@ function ta(e) {
   });
 }
 function tr(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useSubscription(CommunityNotificationBellView, {});
   useEffect(() => {
     if ("loaded" === n.status && n.data.currentUser.communityProfileNotificationBell.status === ResourceStatus.Loaded) {
@@ -1079,7 +1079,7 @@ let td = {
 let tu = "sidebar-user-notifications-dropdown";
 export function $$th1() {
   let e;
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useIsCommunityHubView();
   let l = useSelector(_$$E3(tu));
   let o = useRef(null);

@@ -8,7 +8,7 @@ import { trackFileEvent } from "../figma_app/314264";
 import { selectCurrentFile } from "../figma_app/516028";
 import { h as _$$h } from "../figma_app/275739";
 export function $$u0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useStore();
   let u = useSelector(e => e.voice.showWidget);
   let p = selectCurrentFile();

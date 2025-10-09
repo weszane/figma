@@ -66,11 +66,11 @@ import { getFeatureFlags } from "../905/601108";
 import { useSingleEffect } from "../905/791079";
 import { RecordableDiv } from "../905/511649";
 import { showVariablePicker, hideVariablePicker } from "../905/330741";
-import { tZ, u as _$$u, BQ } from "../figma_app/852050";
+import { getVariableName, getVariableById, getResolvedVariableValue } from "../figma_app/852050";
 import { selectAreAllSymbolsOrInstances } from "../figma_app/505098";
 import { f as _$$f } from "../37/573389";
 import { m9, tz, aA, Xx } from "../figma_app/632975";
-import { eF as _$$eF } from "../figma_app/394327";
+import { isLocallySoftDeleted } from "../figma_app/394327";
 import { Z as _$$Z } from "../905/230174";
 import { YK, $3 } from "../figma_app/149989";
 import { wG, J2 } from "../905/331989";
@@ -118,7 +118,7 @@ function K({
 }) {
   let [d, p] = useState(!1);
   let [h, x] = useState(new Point());
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let y = "{ " + n.join(", ") + " }";
   let {
     destinationOverlayBackgroundColor,
@@ -309,7 +309,7 @@ function Z({
   onOverlayPositionTypeChange: t,
   recordingKey: n
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let l = useDropdownState();
   let s = useId();
   let d = jsx(W, {
@@ -489,7 +489,7 @@ function eh({
   onNewActionAdded: _,
   handleMouseDownUI3: v
 }) {
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   let C = useAppModelProperty("currentPage");
   let E = YT() === Oz.TWO_COL;
   let j = E ? x.equals(h) : void 0;
@@ -821,15 +821,15 @@ function eX({
   ...c
 }) {
   let p = useRef(null);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let g = useSelector(e => e.variablePickerShown);
-  let y = tZ(isValidValue(t) && "id" in t ? t.id : void 0);
-  let _ = _$$u(isValidValue(t) && "id" in t ? t.id : void 0);
+  let y = getVariableName(isValidValue(t) && "id" in t ? t.id : void 0);
+  let _ = getVariableById(isValidValue(t) && "id" in t ? t.id : void 0);
   let [v, I] = useState("");
   useSingleEffect(() => {
     s && !0 === s.current && (E(), s.current = !1);
   });
-  let C = BQ(isValidValue(t) && "id" in t ? t.id : void 0) ?? m9(isValidValue(t) && "nodeFieldAlias" in t ? t.nodeFieldAlias : void 0);
+  let C = getResolvedVariableValue(isValidValue(t) && "id" in t ? t.id : void 0) ?? m9(isValidValue(t) && "nodeFieldAlias" in t ? t.nodeFieldAlias : void 0);
   useEffect(() => {
     void 0 !== e && C && "MIXED" !== C && isValidValue(e) && e.resolvedType !== C.resolvedType && !(tz(e.resolvedType) && tz(C.resolvedType)) && n({
       targetVariableData: void 0
@@ -950,7 +950,7 @@ function eX({
             }) : y ? jsx(wG, {
               text: y,
               thumbnailValue: C,
-              isDeleted: !!_ && _$$eF(_)
+              isDeleted: !!_ && isLocallySoftDeleted(_)
             }) : O ? jsx(wG, {
               text: O.name,
               thumbnailValue: D,
@@ -1062,7 +1062,7 @@ function te({
   stateManagementVersion: c,
   selectedInteractions: p
 }) {
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let x = isDesignFileType();
   let y = useContext(_$$c);
   let _ = YT() === Oz.TWO_COL && y === _$$P2.LEFT;
@@ -1259,7 +1259,7 @@ function tr(e) {
     isVideoSelected,
     onChange
   } = e;
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let [g, y] = useState(() => isVideoSelected ? new ti(scene) : new cP(scene));
   viableSameFrameVideoIds.sort((e, t) => {
     let n = g.format(e);
@@ -1347,7 +1347,7 @@ function tc({
     smallNudgeAmount,
     bigNudgeAmount
   } = getNudgeAmounts();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let p = (t, n) => (o, i) => {
     if (t) {
       if (l) {
@@ -1439,7 +1439,7 @@ function tf({
   let h = "SKIP_FORWARD" === d || "SKIP_BACKWARD" === d;
   let g = "PLAY" === d || "PAUSE" === d || "TOGGLE_PLAY_PAUSE" === d;
   let y = "MUTE" === d || "UNMUTE" === d || "TOGGLE_MUTE_UNMUTE" === d;
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let v = getBigNudgeAmount();
   let I = useCallback(e => {
     n({
@@ -1605,7 +1605,7 @@ function tf({
 let tb = ({
   onUpdateTransitionNodeID: e
 }) => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback((n, o) => {
     let i = parseSessionLocalID(n);
     i && e(i);
@@ -1632,7 +1632,7 @@ export function $$tv0({
   setAutoOpenExpressionBuilder: N,
   ...T
 }) {
-  let S = useDispatch();
+  let S = useDispatch<AppDispatch>();
   let A = useDropdownState();
   let {
     scene
@@ -1854,7 +1854,7 @@ export function $$tI1({
   recordingKey: s,
   setPropertiesForAnchorLink: d
 }) {
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = useDropdownState();
   let {
     scene

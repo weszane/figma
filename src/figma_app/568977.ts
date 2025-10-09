@@ -22,7 +22,7 @@ import { h as _$$h2, b as _$$b } from "../905/916167";
 let $$v0 = "nudge-amount";
 let A = parsePxInt(md8);
 export function $$x1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getSmallNudgeAmount();
   let c = getBigNudgeAmount();
   let I = _$$S({

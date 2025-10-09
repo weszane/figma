@@ -27,7 +27,7 @@ let m = (e, t) => {
 };
 export function $$g1(e) {
   let t = selectCurrentUser();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     file,
     onCanvasExpired

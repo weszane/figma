@@ -18,7 +18,7 @@ import { nn, Us, zY } from "../1250/486464";
 import { o as _$$o } from "../7037/529503";
 let b = e => `COMMENT_SIDEBAR_OVERFLOW_DROPDOWN-${e}`;
 export function $$T0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [n, r] = M();
   let [l, m] = useState([]);
   useEffect(() => {
@@ -156,7 +156,7 @@ export function $$T0(e) {
   });
 }
 function I(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useCallback(() => {
     t(showModalHandler({
       type: E,

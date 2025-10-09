@@ -29,7 +29,7 @@ let _ = registerModal(function (e) {
   });
 }, "EnableAiFeaturesModal");
 export function $$$$p0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsxs(BannerInset, {
     variant: "brand",
     "data-testid": e.testId,

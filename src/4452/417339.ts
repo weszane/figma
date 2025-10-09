@@ -9,7 +9,7 @@ export function $$o0(e) {
   }, {
     enabled: !!e
   });
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   useLayoutEffect(() => {
     "loaded" !== t.status || t.data.team || a(selectViewAction({
       view: "recentsAndSharing"
@@ -22,7 +22,7 @@ export function $$d1(e) {
   }, {
     enabled: !!e
   });
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   useLayoutEffect(() => {
     "loaded" !== t.status || t.data.team?.hasPermission || a(selectViewAction({
       view: "recentsAndSharing"

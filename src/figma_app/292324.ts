@@ -104,7 +104,7 @@ export function usePrototypeNavigationState(editor: any, shouldUpdate: boolean =
  * @returns Navigation control functions
  */
 export function usePrototypeNavigationControls(editor: any, multiplayerState: any) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   return {
     navigateForward: useCallback(

@@ -4,8 +4,8 @@ import { VariableResolvedDataType } from "../figma_app/763686";
 import s from "classnames";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { formattedColorManipulator } from "../905/713722";
-import { tZ, u as _$$u, BQ } from "../figma_app/852050";
-import { Oi } from "../figma_app/394327";
+import { getVariableName, getVariableById, getResolvedVariableValue } from "../figma_app/852050";
+import { getVariableDisplayString } from "../figma_app/394327";
 import { J2, wG } from "../905/331989";
 import { HB, vk, Ju, gD } from "../905/903359";
 var o = s;
@@ -30,9 +30,9 @@ export function $$h1({
   recordingKey: N
 }) {
   let C;
-  let w = tZ(t);
-  let O = _$$u(t);
-  let R = BQ(O?.node_id ?? void 0);
+  let w = getVariableName(t);
+  let O = getVariableById(t);
+  let R = getResolvedVariableValue(O?.node_id ?? void 0);
   let L = useMemo(() => v, [v]);
   let P = useHandleMouseEvent(N, "click", e => {
     L && L(e);
@@ -45,7 +45,7 @@ export function $$h1({
       });
       C = `#${e}, ${t}%`;
     } else C = `#${e}`;
-  } else C = Oi(R);
+  } else C = getVariableDisplayString(R);
   let D = (O?.resolvedType || "") === VariableResolvedDataType.FLOAT && w !== e;
   let k = jsx("div", {
     className: o()(T, {

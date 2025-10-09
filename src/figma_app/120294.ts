@@ -58,7 +58,7 @@ export function $$m1(e, t) {
   };
 }
 export function $$g0(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     multiplayerUsersInVoiceCall,
     multiplayerUsersNotInVoiceCall
@@ -111,7 +111,7 @@ export function $$f2(e, t) {
   return useMemo(() => [...voiceUsersInMultiplayer, ...voiceUsersNotInMultiplayer], [voiceUsersInMultiplayer, voiceUsersNotInMultiplayer]);
 }
 export function $$E3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = Lk();
   let a = useSelector(t => e && e in t.voice.activeCall);
   useEffect(() => () => {

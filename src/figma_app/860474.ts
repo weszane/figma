@@ -8,7 +8,7 @@ import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_a
 import { counterAtom, currentSelectionAtom, elementsMapAtom, elementsSetAtom, anotherElementsSetAtom, configAtom } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { sV } from "../figma_app/712525";
+import { setCanvasSearchMode } from "../figma_app/712525";
 import { H1, z, XJ, X0 } from "../figma_app/451700";
 import { kM } from "../figma_app/421886";
 import { uA } from "../figma_app/781512";
@@ -101,7 +101,7 @@ export function $$E0(e) {
       });
     },
     showReplace() {
-      e.dispatch(sV(EditAction.REPLACE));
+      e.dispatch(setCanvasSearchMode(EditAction.REPLACE));
     },
     showMissingFontBell() {
       e.dispatch(VisualBellActions.enqueue({

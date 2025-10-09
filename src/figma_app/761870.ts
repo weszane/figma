@@ -1,67 +1,122 @@
-import { d } from "../905/44199"
-import { cL, g, hZ, Ox, pf } from "../905/748726"
+import { baseErrorSeverity } from "../905/44199"
+import { autocompleteAddToken, autocompleteInputChange, autocompleteReset, autocompleteSet, setErrorMessage } from "../905/748726"
+// Origin: /Users/allen/sigma-main/src/figma_app/761870.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments for clarity and potential issues.
 
-export function $$a0(e, t) {
-  let r = !!(e.tokens && e.tokens.length || e.inputValue && e.inputValue.length)
-  e.tokens.some(e => e.state === d.ERROR) && (r = !1)
-  e.inputValue && e.inputValue.length && t(e.inputValue).state === d.ERROR && (r = !1)
-  return r
+// Assumed dependencies:
+// - `d.ERROR` is an error state constant imported from "../905/44199"
+// - Action creators (autocompleteReset, setErrorMessage, etc.) are imported from "../905/748726"
+// - Token content may be a string or an object with an `email` property
+
+// Type definitions for tokens and state
+export const TokenState  = {
+  ERROR: baseErrorSeverity.ERROR, // Add other states as needed
 }
-export function $$s5(e) {
-  let t = []
-  for (let r of e.tokens) t.push(r.content.toLowerCase())
-  e.inputValue && t.push(e.inputValue.trim().toLowerCase())
-  return t
-}
-export function $$o1(e) {
-  let t = []
-  for (let r of e.tokens) t.push(r.content.toLowerCase())
-  return t
-}
-export function $$l3(e) {
-  let t = []
-  for (let r of e.tokens) {
-    let e = typeof r.content == "string" ? r.content : r.content.email
-    t.push(e.toLowerCase())
+export interface Token {
+  content: string | {
+    email: string
   }
-  e.inputValue && t.push(e.inputValue.trim().toLowerCase())
-  return t
+  state: any
 }
-export function $$d2() {
+export interface AutocompleteState {
+  inputValue: string
+  tokens: Token[]
+  errorMessage: string
+}
+
+// Function to check if autocomplete is valid (no error tokens, valid input)
+export function isAutocompleteValid(state: AutocompleteState, validateInput: (input: string) => {
+  state: any
+}): boolean {
+  // Check if there are any tokens or input value
+  let isValid = state.tokens && state.tokens.length > 0 || state.inputValue && state.inputValue.length > 0
+
+  // If any token is in error state, invalidate
+  if (state.tokens.some(token => token.state === TokenState.ERROR)) {
+    isValid = false
+  }
+
+  // If input value is present and validation returns error, invalidate
+  if (state.inputValue && state.inputValue.length > 0 && validateInput(state.inputValue).state === TokenState.ERROR) {
+    isValid = false
+  }
+  return isValid
+}
+
+// Function to get all token contents and input value as lowercase strings
+export function getAllAutocompleteStrings(state: AutocompleteState): string[] {
+  const result: string[] = state.tokens.map(token => typeof token.content === "string" ? token.content.toLowerCase() : token.content.email.toLowerCase())
+  if (state.inputValue) {
+    result.push(state.inputValue.trim().toLowerCase())
+  }
+  return result
+}
+
+// Function to get all token contents as lowercase strings
+export function getTokenStrings(state: AutocompleteState): string[] {
+  return state.tokens.map(token => typeof token.content === "string" ? token.content.toLowerCase() : token.content.email.toLowerCase())
+}
+
+// Function to get all token contents and input value as lowercase strings (same as getAllAutocompleteStrings)
+export function getAllAutocompleteEmails(state: AutocompleteState): string[] {
+  const result: string[] = state.tokens.map(token => typeof token.content === "string" ? token.content.toLowerCase() : token.content.email.toLowerCase())
+  if (state.inputValue) {
+    result.push(state.inputValue.trim().toLowerCase())
+  }
+  return result
+}
+
+// Function to return initial autocomplete state
+export function getInitialAutocompleteState(): AutocompleteState {
   return {
     inputValue: "",
     tokens: [],
     errorMessage: "",
   }
 }
-export function $$c4(e = $$d2(), t) {
-  return cL.matches(t)
-    ? $$d2()
-    : hZ.matches(t)
-      ? {
-          ...t.payload,
-        }
-      : Ox.matches(t)
-        ? {
-            ...e,
-            tokens: e.tokens.concat(t.payload),
-            inputValue: "",
-          }
-        : pf.matches(t)
-          ? {
-              ...e,
-              inputValue: t.payload,
-            }
-          : g.matches(t)
-            ? {
-                ...e,
-                errorMessage: t.payload,
-              }
-            : e
+
+// Reducer function for autocomplete state
+export function autocompleteReducer(state: AutocompleteState = getInitialAutocompleteState(), action: any): AutocompleteState {
+  // Note: The action matching logic assumes action creators have a .matches method
+  if (autocompleteReset.matches(action)) {
+    return getInitialAutocompleteState()
+  }
+  if (autocompleteSet.matches(action)) {
+    // Replace state with payload
+    return {
+      ...action.payload,
+    }
+  }
+  if (autocompleteAddToken.matches(action)) {
+    // Add token and reset input value
+    return {
+      ...state,
+      tokens: state.tokens.concat(action.payload),
+      inputValue: "",
+    }
+  }
+  if (autocompleteInputChange.matches(action)) {
+    // Update input value
+    return {
+      ...state,
+      inputValue: action.payload,
+    }
+  }
+  if (setErrorMessage.matches(action)) {
+    // Set error message
+    return {
+      ...state,
+      errorMessage: action.payload,
+    }
+  }
+  // Return unchanged state for unknown actions
+  return state
 }
-export const F5 = $$a0
-export const N$ = $$o1
-export const Rs = $$d2
-export const Z = $$l3
-export const nx = $$c4
-export const um = $$s5
+
+// Export statements preserving original names
+export const F5 = isAutocompleteValid
+export const N$ = getTokenStrings
+export const Rs = getInitialAutocompleteState
+export const Z = getAllAutocompleteEmails
+export const nx = autocompleteReducer
+export const um = getAllAutocompleteStrings

@@ -61,7 +61,7 @@ function g({
 function h({
   resource: e
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return jsx("div", {
     className: cV,
     children: jsx(g, {

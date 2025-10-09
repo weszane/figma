@@ -53,7 +53,7 @@ export function $$F0({
     let e = G.data.libraryKeyToFile?.hubFile?.communityLibrary;
     return e ? e.variableCollections : [];
   }, [G]);
-  let H = useDispatch();
+  let H = useDispatch<AppDispatch>();
   let W = useSelector(e => e.dropdownShown);
   let K = useSelector(e => e.selectedView);
   let Y = useSelector(e => getSelectedFile(e));

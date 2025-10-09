@@ -151,7 +151,7 @@ import { A as _$$A5 } from "../6828/250823";
 let i;
 var d = a;
 function L(e) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return useCallback(() => {
     e && e();
     r(postUserFlag({
@@ -168,7 +168,7 @@ function v({
   children: a
 }) {
   let d = L(e);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useLatestRef(r);
   useEffect(() => {
     u && !r && d();
@@ -383,7 +383,7 @@ function es() {
   }, [e, i, r, t]);
 }
 function ey() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let r = useSelector(e => e.selectedView);
   let t = useSelector(e => null !== e.user && isStudentValidated(e.user));
   let i = t => {
@@ -607,7 +607,7 @@ function eX({
   });
 }
 function eJ(e) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let t = getUserId();
   let i = !!selectUserFlag("not_gen_0");
   let a = useAtomWithSubscription(S0);
@@ -634,7 +634,7 @@ function eJ(e) {
     let {
       team
     } = e;
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = _$$B();
     let s = useCallback(async e => (await eq(team?.id, e))?.id, [team]);
     return async (e, o) => {
@@ -1039,7 +1039,7 @@ let rh = {
   ORG_OPTION: "nux-dynamic-preview-org-option"
 };
 function r_() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let r = getUserCurrency();
   let t = designSet.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let i = {
@@ -1079,7 +1079,7 @@ function r_() {
   };
 }
 function rp() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let r = getUserCurrency();
   let t = {
     currency: r,
@@ -2745,7 +2745,7 @@ function tc() {
   });
 }
 function tm(e) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     joinLink
   } = e;

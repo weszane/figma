@@ -80,7 +80,7 @@ let S = ["NONE", "LIGHT", "MEDIUM", "STRONG"];
 export function $$I0({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     shadowStylePresetOptions,
     selectedShadowStyle,

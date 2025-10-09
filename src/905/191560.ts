@@ -219,7 +219,7 @@ function M() {
   return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 }
 function j(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, o] = useState(!1);
   let [l, c] = useState(!1);
   let [_, A] = useState(M());
@@ -333,7 +333,7 @@ function j(e) {
   });
 }
 function H(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, o] = useState(!1);
   let [d, c] = useState(null);
   let f = useAtomWithSubscription(nb);
@@ -460,7 +460,7 @@ function H(e) {
 }
 let X = 'join_org--modalText--t6wL6';
 function Q(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = customHistory.location.pathname + customHistory.location.search;
   let [s, o] = useState(!1);
   let d = useSelector(e => e.user);
@@ -561,7 +561,7 @@ function Q(e) {
 }
 let ee = 'password_reset--centeredLink--MYK7h auth_view--footerButtonRow--X82kF auth_brand--innerLink---m7Kv';
 function et(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsxs(v, {
     ...e,
     header: getI18nString('auth.password-reset.enter-email-header'),
@@ -600,7 +600,7 @@ function et(e) {
   });
 }
 function ei(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = y()({
     'password_reset--modal--fz1tm': e.modal,
     'password_reset--form--CoL54 password_reset--modal--fz1tm': !e.modal
@@ -629,7 +629,7 @@ function ei(e) {
   });
 }
 function en(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = I8();
   return jsxs(v, {
     auth: e.auth,
@@ -722,7 +722,7 @@ function eA(e) {
 function ey(e) {
   let t = useRef(void 0);
   let [i, s] = useState(!1);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   useEffect(() => () => {
     clearTimeout(t.current);
   }, []);
@@ -814,7 +814,7 @@ function eb(e) {
   let i;
   let s;
   let o;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let [c, p] = useState(!1);
   let h = e.auth.appAuthAppType === ClientPlatform.MSFT_TEAMS;
   let g = t => {
@@ -977,7 +977,7 @@ function eb(e) {
   });
 }
 function ev(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     r();
     customHistory.replace('/login', null);
@@ -1029,7 +1029,7 @@ function ev(e) {
 function ex({
   authOrigin: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.loadingState);
   let s = useSelector(e => e.auth.accountPicker);
   let o = getInitialOptions().team_join_link?.token;
@@ -1115,7 +1115,7 @@ function eD() {
 function eM({
   formId: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.auth.googleIdToken);
   let s = useSelector(e => e.auth.googleTokenType);
   useEffect(() => {
@@ -1144,7 +1144,7 @@ function eM({
   });
 }
 function ej(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = window.INITIAL_OPTIONS.cluster_name === 'gov';
   let r = i ? getI18nString('auth.email-only.header') : getI18nString('auth.saml-start.header');
   return jsxs(v, {
@@ -1258,7 +1258,7 @@ function eG({
   });
 }
 function ez(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     auth
   } = e;
@@ -1374,7 +1374,7 @@ function ez(e) {
   });
 }
 function eH(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, r] = useAtomValueAndSetter(Kf);
   let o = Xr(nb);
   useSingleEffect(() => () => {
@@ -1468,7 +1468,7 @@ function eX(e) {
   });
 }
 function eQ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = Xr(nb);
   let [o, l] = useAtomValueAndSetter(Kf);
   let c = function () {
@@ -1570,7 +1570,7 @@ function eQ(e) {
   });
 }
 function eJ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = () => {
     t(AUTH_COMPLETE());
   };
@@ -1628,7 +1628,7 @@ function eJ(e) {
 }
 let e1 = 'validate_code--description--w-PBc';
 function e2(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, s] = useState('');
   return jsxs(v, {
     onSubmit: () => {
@@ -1837,7 +1837,7 @@ function e9() {
   });
 }
 function te() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.auth.email);
   let i = useSelector(e => e.auth.formState);
   let s = useSelector(e => e.auth.redirectUrl || '/');
@@ -2038,7 +2038,7 @@ function ta({
   });
 }
 function ts() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.auth.email);
   let i = useSelector(e => e.auth.redirectUrl);
   let s = useSelector(e => e.auth.origin);
@@ -2160,7 +2160,7 @@ function ts() {
   });
 }
 export function $$to0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   useEffect(() => () => {
     t(AUTH_CLEAR_ERROR());
     t(changeAuthFormState({
@@ -2225,7 +2225,7 @@ export function $$to0(e) {
   });
 }
 function tl(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = Xr(nb);
   useSingleEffect(() => {
     e.auth.formState !== AuthFlowStep.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT && e.auth.formState !== AuthFlowStep.VERIFY_HUMAN && (t(AUTH_SET_GOOGLE_ID_TOKEN({

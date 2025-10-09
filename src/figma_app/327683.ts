@@ -15,7 +15,7 @@ import { loadSharedVariableThunk } from "../figma_app/933328";
 import { Vg, gU, Hf } from "../figma_app/407414";
 import { Ef } from "../905/107436";
 import { kA } from "../figma_app/726579";
-import { MH } from "../figma_app/394327";
+import { extractVariableAliasOrFontStyle } from "../figma_app/394327";
 let $$T8 = "aip_flower_garden_color_variable_config";
 let $$I6 = "rerankerMaxPopularCandidates";
 let $$S2 = 50;
@@ -410,7 +410,7 @@ export function $$P1(e) {
 }
 export function $$D7(e, t, r) {
   if (!e || !e.colorVar || "ALIAS" !== e.colorVar.dataType) return null;
-  let n = VariableIdHandler.fromString(MH(e.colorVar) ?? "") ?? "";
+  let n = VariableIdHandler.fromString(extractVariableAliasOrFontStyle(e.colorVar) ?? "") ?? "";
   let a = t[n];
   return !a || !("library_key" in a) || r.has(a.library_key) ? null : {
     variableId: n.toString(),

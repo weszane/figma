@@ -50,7 +50,7 @@ export function $$D0() {
 }
 export function $$k1() {
   let e = selectCurrentFile();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => getPermissionsStateMemoized(e));
   let y = useSelector(hasLocalOrPublishedContent);
   let N = useSubscription(FileNameViewDropdown, {

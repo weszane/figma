@@ -46,7 +46,7 @@ let f = {
   permissionFilter: "true_member"
 };
 export function $$j0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useTeamPlanPublicInfo().unwrapOr(null);
   let l = getParentOrgIdIfOrgLevel(a);
   let [m, g] = useState([]);

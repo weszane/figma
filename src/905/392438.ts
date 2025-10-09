@@ -10,7 +10,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { LazyInputForwardRef } from "../905/408237";
 import { S as _$$S } from "../figma_app/552746";
 import { useTracking } from "../figma_app/831799";
-import { d as _$$d } from "../905/44199";
+import { baseErrorSeverity } from "../905/44199";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { A as _$$A2 } from "../svg/545021";
@@ -18,7 +18,7 @@ var o = s;
 let y = "autocomplete_input--autocompleteResults--Y0sCg overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7";
 function v(e) {
   let t;
-  t = e.token.state === _$$d.ERROR ? e.isSelected ? "autocomplete_input--tokenErrorSelected--Q96wR autocomplete_input--tokenSelected--tjZz0 autocomplete_input--token--wJ-t7 autocomplete_input--tokenPadding---bs7d" : "autocomplete_input--tokenError--Y9Gyi autocomplete_input--token--wJ-t7 autocomplete_input--tokenPadding---bs7d" : e.isSelected ? "autocomplete_input--tokenSelected--tjZz0 autocomplete_input--token--wJ-t7 autocomplete_input--tokenPadding---bs7d" : "autocomplete_input--token--wJ-t7 autocomplete_input--tokenPadding---bs7d";
+  t = e.token.state === baseErrorSeverity.ERROR ? e.isSelected ? "autocomplete_input--tokenErrorSelected--Q96wR autocomplete_input--tokenSelected--tjZz0 autocomplete_input--token--wJ-t7 autocomplete_input--tokenPadding---bs7d" : "autocomplete_input--tokenError--Y9Gyi autocomplete_input--token--wJ-t7 autocomplete_input--tokenPadding---bs7d" : e.isSelected ? "autocomplete_input--tokenSelected--tjZz0 autocomplete_input--token--wJ-t7 autocomplete_input--tokenPadding---bs7d" : "autocomplete_input--token--wJ-t7 autocomplete_input--tokenPadding---bs7d";
   return jsxs("div", {
     role: "group",
     className: o()(t, e.tokenClassName),
@@ -218,7 +218,7 @@ export function $$E0({
     eg(e);
   }, [t.tokens, eg, Z]);
   let eb = useMemo(() => I ?? (e => ({
-    state: _$$d.OK,
+    state: baseErrorSeverity.OK,
     content: e
   })), [I]);
   let ev = useCallback(e => {

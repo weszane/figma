@@ -11,7 +11,7 @@ export function $$p0({
   otherLibraryKeys: e,
   disabled: t = !1
 } = {}) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let m = useSelector(e => e.loadingState);
   let {
     libraries,

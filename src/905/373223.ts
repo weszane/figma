@@ -119,7 +119,7 @@ function O({
   });
 }
 let D = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useRef(null);
   let [r, s] = useState(550);
   let o = _$$h.useTrackingContext({
@@ -231,7 +231,7 @@ let D = registerModal(function (e) {
 }, "TeamCreationSpeedBump");
 export function $$L0() {
   let e = getUserId();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectUserFlag("team_creation_speed_bump_dismissed");
   let c = useSelector(e => e.teams);
   let u = useSelector(e => e.roles.byTeamId);

@@ -26,7 +26,7 @@ export function $$T0({
   enableWideButtonForStickyFooter: t
 }) {
   let r = IE(e);
-  let T = useDispatch();
+  let T = useDispatch<AppDispatch>();
   let I = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
   let N = isResourceHubContext();
   let E = selectCurrentUser();

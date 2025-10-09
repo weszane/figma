@@ -466,7 +466,7 @@ export function categorizeAndSortItems(stagedItemIds: Set<string>, items: any[],
     },
   }
 }
-export function selectLibraryItemsWithDetails(context: any, specificContext: any) {
+export function selectLibraryItemsWithDetails(context: any, specificContext?: any) {
   return specificContext == null ? selectAllLibraryItemsWithDetails(context) : selectLibraryItemsWithDetailsAndContext(context, specificContext)
 }
 export let createLibraryItemsAtomFamily = createRemovableAtomFamily((context: any) => {
@@ -548,7 +548,7 @@ export let createHasVariableSetsAtomFamily = createRemovableAtomFamily((context:
 export let selectStagedVariableSetsForFiltering = createSelector([selectStagedVariableSets], (sets: any[]) => sets)
 export let hasStagedVariableSetsAtom = createSelector([selectStagedVariableSetsForFiltering], (sets: any[]) => sets.length > 0)
 export let createHasStagedVariableSetsAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => hasStagedVariableSetsAtom(state, context)))
-export let selectWellFormedModulesForPublishing = createSelector([selectWellFormedModules, canUserPublishToCommunity], (modules: any[], canPublish: boolean) => canPublish ? modules : [])
+export let selectWellFormedModulesForPublishing = createSelector([selectWellFormedModules, canUserPublishToCommunity], (modules: any[], canPublish?: boolean) => canPublish ? modules : [])
 export let hasWellFormedModulesAtom = createSelector([selectWellFormedModulesForPublishing], (modules: any[]) => modules.length > 0)
 export let createHasWellFormedModulesAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => hasWellFormedModulesAtom(state, context)))
 export let selectStagedModulesForFiltering = createSelector([selectStagedModules], (modules: any[]) => modules.length > 0)

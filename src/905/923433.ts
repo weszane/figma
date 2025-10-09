@@ -18,17 +18,18 @@ import { G } from '../905/658204';
 import { formattedColorManipulator } from '../905/713722';
 import { Point } from '../905/736624';
 import { resolveVariableValue } from '../905/929949';
-import { noop } from 'lodash-es';;
+import { noop } from 'lodash-es';
+;
 import { J as _$$J2, P as _$$P } from '../figma_app/120873';
 import { ExpressionInput, OpacityInput } from '../figma_app/178475';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { VariableAliasProvider } from '../figma_app/260445';
-import { eF, Oi } from '../figma_app/394327';
+import { isLocallySoftDeleted, getVariableDisplayString } from '../figma_app/394327';
 import { throwTypeError } from '../figma_app/465776';
 import { getBigNudgeAmount, getSmallNudgeAmount } from '../figma_app/740163';
 import { VariableDataType, VariableResolvedDataType } from '../figma_app/763686';
 import { FormattedInputWithWrapper } from '../figma_app/841644';
-import { u as _$$u, BQ, Kd, t8 } from '../figma_app/852050';
+import { getVariableById, getResolvedVariableValue, getPublishKeyForVariableSet, getResolvedVariableValueIfNotMixed } from '../figma_app/852050';
 import { generateRecordingKey } from '../figma_app/878298';
 let h = m;
 let F = 'variables_modal_value_input--disabled--y64Jo';
@@ -41,11 +42,11 @@ export function $$G1(e) {
   let t = e.variableOverride?.overrideValues[e.modeID];
   let i = void 0 !== t;
   let a = i ? t : e.variable.modeValues[e.modeID];
-  let s = Kd(e.variable.node_id);
+  let s = getPublishKeyForVariableSet(e.variable.node_id);
   let o = useMemo(() => e.modeID && s ? {
     [s]: e.modeID
   } : void 0, [e.modeID, s]);
-  let l = BQ(e.variable.node_id);
+  let l = getResolvedVariableValue(e.variable.node_id);
   let d = _r(e.variable.node_id, e.modeID);
   oG(e.variable.node_id, e.modeID, useCallback(() => {
     let t = e.containerRef?.current;
@@ -81,7 +82,7 @@ export function $$G1(e) {
   }) : null;
 }
 export function $$z2(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = e.contextType ?? $.CELL;
   let u = getBigNudgeAmount();
   let p = getSmallNudgeAmount();
@@ -140,7 +141,7 @@ export function $$z2(e) {
               id: $$V0,
               recordingKey: generateRecordingKey(e.recordingKey, 'toggleInput'),
               label: jsx(Label, {
-                children: Oi(_)
+                children: getVariableDisplayString(_)
               }),
               onChange: t => {
                 e.onChange({
@@ -259,7 +260,7 @@ function H({
   recordingKey: d,
   innerContainerClassName: c
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = useRef(null);
   let m = useRef(null);
   let [g, A] = useState(!1);
@@ -355,8 +356,8 @@ function H({
 function W(e) {
   let t = useRef(null);
   let i = useContext(FormattedInputContext);
-  let a = _$$u(e.variableID);
-  let s = t8(e.variableID, e.varSetKeyToModeID);
+  let a = getVariableById(e.variableID);
+  let s = getResolvedVariableValueIfNotMixed(e.variableID, e.varSetKeyToModeID);
   return jsx('div', {
     ref: t,
     className: h()({
@@ -366,7 +367,7 @@ function W(e) {
     children: jsx(_$$P, {
       colorTheme: e.isInaccessible ? _$$J2.DISABLED : e.isOverridden ? _$$J2.OVERRIDDEN : _$$J2.DEFAULT,
       disableHover: e.isInaccessible,
-      isDeleted: !!a && eF(a),
+      isDeleted: !!a && isLocallySoftDeleted(a),
       onClick: () => {
         !e.isInaccessible && i && i.showBindingUI(t.current);
       },

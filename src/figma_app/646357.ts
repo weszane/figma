@@ -1553,7 +1553,7 @@ function buildAssetMap(sceneGraph: Map<string, any>, symbolNodeIds: string[], st
  * @returns Asset map
  */
 export function useSubscribedAssets(mode: 'current' | 'all') {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const {
     library,
     sceneGraph,

@@ -52,7 +52,7 @@ export function setupRoleRow(props: {
   isBranchFile?: boolean;
 }) {
   // Redux dispatch
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   // Share modal tab handler
   const handleShareModalTab = setupShareModalTabHandler();
   // Experiment hook

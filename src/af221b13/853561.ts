@@ -11,7 +11,7 @@ import { selectUser } from "../905/372672";
 import { ComposerLocation } from "../figma_app/45218";
 import { R } from "../figma_app/690591";
 export function $$h0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectUser();
   let i = useSelector(e => !e.currentUserOrgId || !!getOrgAdminAccess(e)[e.currentUserOrgId]);
   let h = getSelectedView();

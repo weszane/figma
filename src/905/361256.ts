@@ -100,7 +100,7 @@ import { FormattedInputWithWrapper } from '../figma_app/260445';
 import { DialogBackButton, DialogBody, DialogContents, DialogHeader, DialogHiddenTitle, DialogTabStrip, DialogTitle } from '../figma_app/272243';
 import { oE } from '../figma_app/305626';
 import { defaultGrayColor } from '../figma_app/385874';
-import { MH } from '../figma_app/394327';
+import { extractVariableAliasOrFontStyle } from '../figma_app/394327';
 import { bo } from '../figma_app/447445';
 import { _r } from '../figma_app/451499';
 import { fullscreenValue } from '../figma_app/455680';
@@ -121,14 +121,14 @@ import { BrowserInfo } from '../figma_app/778880';
 import { fn } from '../figma_app/811257';
 import { memoizeByArgs } from '../figma_app/815945';
 import { TrackedAnchor } from '../figma_app/831799';
-import { bi, dd, yT } from '../figma_app/836943';
+import { findStyleInLibrary, hasValidSessionLocalID, getStylePickerUIState } from '../figma_app/836943';
 import { FormattedInputWrapper } from '../figma_app/841644';
 import { B as _$$B2 } from '../figma_app/846647';
-import { u as _$$u } from '../figma_app/852050';
+import { getVariableById } from '../figma_app/852050';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { generateRecordingKey } from '../figma_app/878298';
 import { trackFileEventWithUser } from '../figma_app/901889';
-import { sw } from '../figma_app/914957';
+import { hideStylePreview } from '../figma_app/914957';
 import tL from '../vendor/197638';
 let n;
 let m = memo(e => {
@@ -1038,7 +1038,7 @@ function tQ({
   variationAxisTickValues: c,
   formatter: u
 }) {
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let m = useSelectionPropertyValue('detachOpticalSizeFromFontSize');
   let h = !isInvalidValue(m) && !m;
   let g = e.$$default ?? 0;
@@ -1230,7 +1230,7 @@ function t2({
   });
 }
 function t3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useRef();
   useOnSelectionChange(() => {
     i.current = void 0;
@@ -1314,7 +1314,7 @@ function t3(e) {
   });
 }
 function t6(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -2792,7 +2792,7 @@ let t7 = forwardRef((e, t) => {
   });
 });
 let t8 = forwardRef((e, t) => {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -2960,7 +2960,7 @@ class iS extends PureComponent {
         let r = this.getIsStyleConsumer();
         let a = this.props.isOnlyTextPath;
         r && this.state.activeTab !== 'Basics' ? this.setActiveTab('Basics') : a && this.setActiveTab('Details');
-        !t && (this.props.stylePickerShown.isShown && this.props.dispatch(hideStylePicker()), this.props.stylePreviewShown.isShown && this.props.dispatch(sw()));
+        !t && (this.props.stylePickerShown.isShown && this.props.dispatch(hideStylePicker()), this.props.stylePreviewShown.isShown && this.props.dispatch(hideStylePreview()));
       }
     };
     this.toggleSettingsFromAlignmentRow = () => {
@@ -3217,7 +3217,7 @@ class iS extends PureComponent {
     this.getStylePanelProps = () => {
       let e = this.getHasMixedProperties();
       let t = valueOrFallback(this.props.missingFont, !0);
-      return yT({
+      return getStylePickerUIState({
         ...this.props,
         styleType: 'TEXT',
         inheritStyleKeyField: 'inheritTextStyleKey',
@@ -3225,7 +3225,7 @@ class iS extends PureComponent {
         hasMissingFont: t
       });
     };
-    this.getIsStyleConsumer = () => this.props.inheritStyleKey === MIXED_MARKER || !!bi({
+    this.getIsStyleConsumer = () => this.props.inheritStyleKey === MIXED_MARKER || !!findStyleInLibrary({
       library: this.props.library,
       inheritStyleKey: this.props.inheritStyleKey,
       inheritStyleID: this.props.inheritStyleID
@@ -3293,7 +3293,7 @@ class iS extends PureComponent {
     let u = this.showFontAgentCTA && (this.props.localFontAgentVersion || 0) < 14 && !(this.state && this.state.fontAgentUpdatePromptDismissed);
     let p = this.props.version === 'ui3';
     let m = isInvalidValue(this.props.textDecoration) || isInvalidValue(this.props.leadingTrim) || isInvalidValue(this.props.hangingList) || isInvalidValue(this.props.hangingPunctuation) || isInvalidValue(this.props.textCase) || isInvalidValue(this.props.fontVariantPosition);
-    if (!dd(this.props.selectedStyleProperties) || !this.isInStyleModal()) {
+    if (!hasValidSessionLocalID(this.props.selectedStyleProperties) || !this.isInStyleModal()) {
       let [a, ...s] = this.renderIconButtons({
         isEditingStyle: !1
       }).reverse();
@@ -3514,13 +3514,13 @@ function iw(e) {
     clearVariableConsumption
   } = u3(['FONT_FAMILY'], a);
   let c = () => clearVariableConsumption();
-  let u = consumedVariable ? MH(consumedVariable) : null;
-  let p = _$$u(u ?? void 0);
+  let u = consumedVariable ? extractVariableAliasOrFontStyle(consumedVariable) : null;
+  let p = getVariableById(u ?? void 0);
   let {
     consumedVariable: _consumedVariable
   } = u3(['FONT_STYLE'], a);
-  let h = _consumedVariable ? MH(_consumedVariable) : null;
-  let g = _$$u(h ?? void 0);
+  let h = _consumedVariable ? extractVariableAliasOrFontStyle(_consumedVariable) : null;
+  let g = getVariableById(h ?? void 0);
   let f = vK();
   let _ = g ? jsx(_$$H, {
     elementRef: e.stylePickerRowRef,

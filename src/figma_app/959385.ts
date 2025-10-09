@@ -136,7 +136,7 @@ function ee({
   let s = r ? getI18nString("qa.extensions.widget") : getI18nString("qa.extensions.plugin");
   let u = e.plugin_id;
   let _ = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = manifestContainsWidget(e) ? generateAbsoluteCommunityWidgetUrl(e.plugin_id) : generateAbsoluteCommunityPluginUrl(e.plugin_id);
     return useCallback(() => {
       handleUrlAction(r) || t(setupHyperlinkHandler({
@@ -144,7 +144,7 @@ function ee({
       }));
     }, [t, r]);
   }(e);
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let m = useCallback(() => {
     h(_$$S({
       url: r ? generateAbsoluteCommunityWidgetUrl(u) : generateAbsoluteCommunityPluginUrl(u),

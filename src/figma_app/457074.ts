@@ -73,7 +73,7 @@ function getLastUsedLeftPanelTab(): UserInterfaceElements | null {
  * Custom hook that dispatches the left panel tab initialization if conditions are met.
  */
 export function useInitializeLeftPanelTab(): void {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const hasExpTooltips = checkUserAccess([expTootipsSymbol]);
   const onboardingComplete = isOnboardingComplete();
   const { hasAnyUiKit } = useHasAnyUiKit();

@@ -135,7 +135,7 @@ import { y3 } from '../figma_app/307841';
 import { getFutureDateOrNull, hasValidSubscription, isTeamInGracePeriod } from '../figma_app/345997';
 import { p as _$$p3 } from '../figma_app/353099';
 import { z as _$$z2 } from '../figma_app/369596';
-import { bE } from '../figma_app/375098';
+import { userTeamFlagPost } from '../figma_app/375098';
 import { getSelectedView } from '../figma_app/386952';
 import { useShadowReadLoaded } from '../figma_app/391338';
 import { bv, IU } from '../figma_app/421401';
@@ -188,7 +188,7 @@ function $({
 function B({
   team: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.avatarEditorState);
   let n = useTeamPlanFeatures().unwrapOr(null);
   let s = useSubscription(UserFlagByName, {
@@ -1144,7 +1144,7 @@ function tG(e) {
     settingsData
   } = e;
   let s = _$$R();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let d = e.billing.summary.annual_subscription;
   let c = e.billing.summary.monthly_subscription;
   let _ = e.billing.summary.shipping_address;
@@ -1854,7 +1854,7 @@ function ak(e) {
   });
 }
 function aA(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = usePlanInvoices({
     planType: FOrganizationLevelType.TEAM,
     planId: e.team.id
@@ -1998,7 +1998,7 @@ function aR(e) {
   });
 }
 function aO(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = _$$R3();
   let n = useCallback((a, n) => {
     t(selectViewAction({
@@ -2092,7 +2092,7 @@ function aO(e) {
   });
 }
 function aP(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useTeamPlanPublicInfo();
   let n = a?.data?.tier === FPlanNameType.STUDENT;
   let [s, o, d] = Tabs.useManagedTabs({
@@ -2182,7 +2182,7 @@ export function $$aB1(e, t) {
 }
 export function $$aG0(e) {
   let t;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let n = useSelector(e => e.teams);
   let s = n[e.teamId];
   let k = useTeamPlanUser();
@@ -2216,7 +2216,7 @@ export function $$aG0(e) {
   let U = useSelector(e => e.dropdownShown);
   let F = $$aB1(e.teamId, T);
   let q = function (e, t) {
-    let a = useDispatch();
+    let a = useDispatch<AppDispatch>();
     let n = useSelector(t => e && t.userTeamFlags?.[e]?.[aq]);
     let [s] = setupResourceAtomHandler(a$({
       teamId: e
@@ -2231,7 +2231,7 @@ export function $$aG0(e) {
     return e && show_banner && !n ? jsx(wr, {
       color: Sn.LIGHT_BLUE,
       onClose: () => {
-        a(bE({
+        a(userTeamFlagPost({
           all_team_flags: [{
             team_id: e,
             flags: {

@@ -275,7 +275,7 @@ function G({
   onInsertableResourcePointerDown: t,
   disableTooltips: n
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = useSelector(e => e.user?.id);
   let l = useCallback(() => {
     s(addWhiteboardToolToRecentsAction({

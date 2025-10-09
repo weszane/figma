@@ -516,7 +516,7 @@ export function $$eo1() {
     overlay: CursorBotV2Overlay,
     priority: _$$N.OVERRIDING_MODAL
   });
-  let O = useDispatch();
+  let O = useDispatch<AppDispatch>();
   let L = useStore();
   let R = useSelector(e => e.isFullscreenDocumentLoaded);
   let D = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
@@ -525,7 +525,7 @@ export function $$eo1() {
   let B = selectUserFlag("has_cursor_bot_onboarding_v2");
   !function (e, t, i) {
     let r = selectCurrentUser();
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let s = selectUserFlag("has_cursor_bot_onboarding_v2");
     let o = useOpenFileObjectWithSinatraType({
       useSinatraType: !0

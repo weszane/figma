@@ -13,7 +13,7 @@ export function $$p0(e) {
   } = e;
   let i = getSelectedView();
   let p = useSelector(e => e.currentUserOrgId);
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let h = "recentsAndSharing" === i.view && "shared-projects" === i.tab ? e.folder.parent_org?.id ?? null : p;
   let g = e.folder.team_id;
   let f = userHasPlan(h, g);

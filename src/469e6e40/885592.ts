@@ -436,7 +436,7 @@ function er(e) {
   });
 }
 function el(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = isProrationBillingEnabledForCurrentPlan();
   let r = useTeamPlanFeatures().unwrapOr(null);
   let l = r?.key?.type;
@@ -527,7 +527,7 @@ function el(e) {
     content: e
   }) => e);
   let g = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let a = e.adjustAnnualSeatsAction;
     let s = useProAnnualImprovementsExperiment();
     let r = e.invoice.billing_interval === FBillingPeriodType.MONTH && e5(e.invoice) > 0;
@@ -947,7 +947,7 @@ export function $$eI0(e) {
   let r = useRef(null);
   let l = useRef(null);
   let o = useStore();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let _ = useMemo(() => function (e, t) {
     let a = getLatestValidPendingInvoice(e, {
       allowLegacyOrgAnnual: !0,

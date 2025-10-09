@@ -6,7 +6,7 @@ import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { fC } from "../figma_app/968813";
+import { FETCH_FIGJAM_DEFAULT_INSERTS } from "../figma_app/968813";
 import { fG } from "../figma_app/973927";
 import { IntegrationUtils } from "../figma_app/469876";
 import { useIsVotingSessionJoined } from "../905/486443";
@@ -208,7 +208,7 @@ function H({
 }) {
   let t = getUserId();
   let [i, o] = useState(!1);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = NT();
   let c = useAtomWithSubscription(c5);
   let u = useIsVotingSessionJoined();
@@ -226,7 +226,7 @@ function H({
     }));
     o(!0);
   }, [l, b?.id]);
-  let R = useIsLoading(fC);
+  let R = useIsLoading(FETCH_FIGJAM_DEFAULT_INSERTS);
   let P = useIsLoading(cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));

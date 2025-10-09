@@ -51,7 +51,7 @@ import { P as _$$P } from '../vendor/348225';
 import { AnimatePresence } from '../vendor/930821';
 let $$r = i;
 function E(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCallback(() => {
     _$$a.postOrgSamlConfig({
       org_id: e.org.id
@@ -108,7 +108,7 @@ function C(e) {
   }));
 }
 function F(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, i] = useState(!1);
   let [r, l] = useState(!1);
   let o = useRef(null);
@@ -233,7 +233,7 @@ function er({
   });
 }
 function el(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     idpData,
     k12GoogleOrg,
@@ -625,7 +625,7 @@ let em = {
   Root: ec,
   Contents(e) {
     let t;
-    let a = useDispatch();
+    let a = useDispatch<AppDispatch>();
     let [s, i, r] = Tabs.useTabs({
       idp_details: !0,
       domain_mapping: !0

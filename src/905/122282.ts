@@ -111,7 +111,7 @@ import { A as _$$A1 } from "../svg/619883";
 let y = registerModal(function ({
   open: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = getCurrentTeam();
   let n = i?.student_team ? renderI18nText("templates.limit_modal.student") : renderI18nText("templates.limit_modal.professional");
   let a = () => {
@@ -594,7 +594,7 @@ function ta({
 }) {
   let a;
   let s;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = selectCurrentFile();
   let u = getCurrentFileType();
   let {
@@ -898,7 +898,7 @@ function tI({
   let s = t.find(t => t.scope === e);
   let o = useRef(null);
   let l = useDropdownState()?.type === tA;
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   return getFeatureFlags().figjam_fpl_template_publish_scope ? jsxs(_$$bL, {
     value: e,
     onChange: i,
@@ -1071,7 +1071,7 @@ function tO({
   let h = getCurrentTeamId();
   let g = e.name;
   let A = e.team;
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let E = useRef(null);
   let [x, C] = useState();
   let [k, R] = useState(!1);
@@ -1114,7 +1114,7 @@ function tO({
     initiateTemplatePublish: _initiateTemplatePublish2,
     publishInProgress: _publishInProgress2
   } = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useAtomWithSubscription(J);
     let i = Xr(ee);
     let n = "PUBLISH_TEMPLATE_INITIATED" === t.state || "UNPUBLISH_TEMPLATE_INITIATED" === t.state;

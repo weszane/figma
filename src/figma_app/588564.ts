@@ -29,7 +29,7 @@ import { jD } from "../figma_app/322845";
 import { qM, qU } from "../figma_app/913518";
 import { Hd, bu, Vz, Jd } from "../figma_app/878113";
 function L() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(Tm);
   let [r, a] = useAtomValueAndSetter(qM);
   let s = qU();

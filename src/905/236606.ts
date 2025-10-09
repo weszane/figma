@@ -19,10 +19,10 @@ import { useSubscribedLibraries } from "../figma_app/155728";
 import { eT } from "../figma_app/617506";
 import { ON, gs } from "../figma_app/31103";
 import { hideModalHandler, showModal } from "../905/156213";
-import { t8, G6 as _$$G, hg, u as _$$u } from "../figma_app/852050";
+import { getResolvedVariableValueIfNotMixed, getCombinedVariableSetById, getVariablesByIds, getVariableById } from "../figma_app/852050";
 import { registerModal } from "../905/102752";
 import { Cj } from "../figma_app/151869";
-import { Hr } from "../figma_app/394327";
+import { resolvedTypeToString } from "../figma_app/394327";
 import { wG } from "../905/331989";
 import { MatchingVariablesModalWidth, ModalMaxHeight, MatchingVariablesModal, VariableDetailModal, StyleDetailModalWidth, ModalPadding, ModalWindowType, StyleDetailModal, VariableDetailModalWidth } from "../905/560959";
 import { parsePxNumber } from "../figma_app/783094";
@@ -42,7 +42,7 @@ function P({
 }) {
   let t = ON();
   let i = Cj(e.name);
-  let a = t8(e.node_id);
+  let a = getResolvedVariableValueIfNotMixed(e.node_id);
   let s = useCallback(e => {
     i && (t("row_copied", {
       type: "name"
@@ -68,7 +68,7 @@ function O({
   variableGroup: e,
   rawValue: t
 }) {
-  let i = _$$G(e?.variableSetId);
+  let i = getCombinedVariableSetById(e?.variableSetId);
   let a = e.variables[0];
   let s = i?.name;
   let o = function (e) {
@@ -101,7 +101,7 @@ function D({
   variableIds: e,
   rawValue: t
 }) {
-  let i = Object.entries(hg(e, !0).reduce((e, t) => {
+  let i = Object.entries(getVariablesByIds(e, !0).reduce((e, t) => {
     if (!t) return e;
     let i = t.variableSetId;
     let n = e[i] ?? [];
@@ -120,12 +120,12 @@ function D({
 }
 let L = registerModal(function (e) {
   eT();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCallback(() => {
     t(hideModalHandler());
   }, [t]);
-  let o = _$$u(e?.vars?.ids?.[0]);
-  let l = o ? Hr(o.resolvedType) : void 0;
+  let o = getVariableById(e?.vars?.ids?.[0]);
+  let l = o ? resolvedTypeToString(o.resolvedType) : void 0;
   let d = useMemo(() => ({
     numSuggestions: e.vars.ids.length,
     entrypoint: e.entryPoint,
@@ -171,7 +171,7 @@ let U = parsePxNumber(ZGX);
 let B = registerModal(function (e) {
   eT();
   let t = useSubscribedLibraries();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = useCallback(() => {
     i(hideModalHandler());
   }, [i]);
@@ -326,11 +326,11 @@ function ee({
   children: e,
   varId: t
 }) {
-  let i = _$$u(t);
+  let i = getVariableById(t);
   let {
     ref
   } = useContext($$J0);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let u = _$$P();
   let m = getSelectedView();
   let h = useRef(null);
@@ -391,7 +391,7 @@ function et({
   let u = _$$P();
   let m = useRef(null);
   let h = getSelectedView();
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let _ = useSelector(e => e.modalShown);
   let A = !!_ && _.type === StyleDetailModal;
   let y = isVsCodeEnvironment() ? t === h.styleForDetailsPanel?.styleId : A && _.data?.rowRef && _.data.rowRef.current === m?.current;

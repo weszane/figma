@@ -195,7 +195,7 @@ const ACTION_HANDLERS: Record<UserProfileTooltipAction, React.FC<any>> = {
     userHandle: string
     userSessionID?: number
   }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const isPresentationAllowed = useIsPresentationAllowed()
     const isFullscreen = useIsSelectedFigmakeFullscreen()
 
@@ -312,7 +312,7 @@ const ACTION_HANDLERS: Record<UserProfileTooltipAction, React.FC<any>> = {
     userHandle: string
     userSessionID?: number
   }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const handleFollowPresenter = useCallback((e: React.MouseEvent) => {
       e.stopPropagation()

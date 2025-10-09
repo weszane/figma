@@ -71,7 +71,7 @@ function w({
   useEffect(() => {
     w(O(t, r));
   }, [t, r, w]);
-  let R = useDispatch();
+  let R = useDispatch<AppDispatch>();
   let L = e.guid;
   let P = e.styleType;
   let D = useRef(null);

@@ -97,7 +97,7 @@ function M({
 function j(e) {
   let [t, i] = useState(void 0);
   let [a, s] = useState(void 0);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useDropdownState();
   let d = useMemo(() => ({
     inputClassName: "edit_preview_toolbar--input--FPZy0 text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",

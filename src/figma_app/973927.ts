@@ -4,7 +4,7 @@ import { l as _$$l } from "../905/716947";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { n as _$$n } from "../905/79930";
-import { a6 } from "../figma_app/198840";
+import { getHubFileVersionOrDefault } from "../figma_app/198840";
 export function $$c3(e) {
   switch (e.type) {
     case _$$n.HubFile:
@@ -31,7 +31,7 @@ export function $$u0(e) {
 export function $$p2(e) {
   switch (e.type) {
     case _$$n.HubFile:
-      return a6(e.template).name;
+      return getHubFileVersionOrDefault(e.template).name;
     case _$$n.TeamTemplate:
     case _$$n.TeamTemplateLg:
       return e.template.name;
@@ -49,7 +49,7 @@ export function $$_1() {
     let u = function (e) {
       switch (e.type) {
         case _$$n.HubFile:
-          return a6(e.template).description;
+          return getHubFileVersionOrDefault(e.template).description;
         case _$$n.TeamTemplate:
         case _$$n.TeamTemplateLg:
           return e.template.description;

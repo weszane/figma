@@ -190,7 +190,7 @@ export function useDevModeOverviewEntryClick(): () => void {
   const trackEvent = trackFileEventWithStore()
   const cannotAccessDevModeEntry = !useCanAccessDevModeEntryPoint()
   const [, setAtomH1] = useAtomValueAndSetter(atomH1)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const [_, setGk] = useAtomValueAndSetter(gk)
   const selectedViewWithOverview = useSelectedViewWithOverview()
 
@@ -215,7 +215,7 @@ export function useDevModeOverviewEntryClick(): () => void {
  * @originalName $$M10
  */
 export function useComponentBrowserEntrypoint(entrypoint: any): () => void {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const selectedView = (() => {
     const currentPage = useSelector(state => state.mirror.appModel.currentPage)
     return selectWithShallowEqual(state => state.selectedView.view === 'fullscreen'
@@ -239,7 +239,7 @@ export function useComponentBrowserEntrypoint(entrypoint: any): () => void {
  * @originalName $$F0
  */
 export function useUpdateGithubRepositorySelectorMode(): (mode: SelectorType) => void {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const selectedView = useSelector(state => state.selectedView)
 
   return useCallback((mode: SelectorType) => {

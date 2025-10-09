@@ -58,7 +58,7 @@ import { extractFirstEmoji, removePrefixAndVariation } from '../905/225144';
 import { C as _$$C2 } from '../905/226458';
 import { labConfigurations, useLabConfiguration } from '../905/226610';
 import { delay } from '../905/236856';
-import { x as widgetBindings } from '../905/239551';
+import { widgetManagerHandler } from '../905/239551';
 import { d as _$$d6 } from '../905/241150';
 import { l as _$$l4 } from '../905/241412';
 import { W as _$$W3 } from '../905/244810';
@@ -123,7 +123,7 @@ import { createFileBehaviorAtom, FileChangeBehaviorEnum } from '../905/508457';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { s as _$$s } from '../905/513506';
 import { PublishingUIContext } from '../905/514666';
-import { v as _$$v } from '../905/516963';
+import { statsigClient } from '../905/516963';
 import { dD as _$$dD } from '../905/519113';
 import { APILoadingStatus } from '../905/520829';
 import { Button, ButtonLarge } from '../905/521428';
@@ -193,7 +193,7 @@ import { H as _$$H7 } from '../905/740869';
 import { R as _$$R2 } from '../905/741991';
 import { c as _$$c0, s as _$$s7 } from '../905/744710';
 import { AnnouncementPrimitive } from '../905/745591';
-import { u as _$$u5 } from '../905/747030';
+import { getPublishHandlersForFileType } from '../905/747030';
 import { PositioningStrategy } from '../905/748636';
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes, RootErrorBoundaryFallback, useErrorBoundaryContext } from '../905/751457';
 import { scenegraphStringManagementBindingsInstance } from '../905/755627';
@@ -297,7 +297,7 @@ import { ActiveFileUsersForFileView, ClientReloadView, ComponentByKey, DesktopNe
 import { ComposerLocation } from '../figma_app/45218';
 import { e as _$$e11, n as _$$n5 } from '../figma_app/48514';
 import { Q6 } from '../figma_app/48566';
-import { ts as _$$ts } from '../figma_app/49598';
+import { getHubFileVersionsThunk } from '../figma_app/49598';
 import { AS } from '../figma_app/50271';
 import { I as _$$I4 } from '../figma_app/51637';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
@@ -341,7 +341,7 @@ import { getThemeBackgroundColor, isColorDarkByLuminance } from '../figma_app/19
 import { zT as LinterBindings } from '../figma_app/192142';
 import { isMainView, selectedViewToPath } from '../figma_app/193867';
 import { yesNoTrackingEnum } from '../figma_app/198712';
-import { a6 as _$$a6, M3 } from '../figma_app/198840';
+import { getHubFileVersionOrDefault, getHubFileOrDefault } from '../figma_app/198840';
 import { LK } from '../figma_app/199513';
 import { NM } from '../figma_app/204891';
 import { fullscreenConfigInstance } from '../figma_app/204937';
@@ -549,7 +549,7 @@ import { E as _$$E } from '../figma_app/924252';
 import { w4 as _$$w3, Fj, go } from '../figma_app/927140';
 import { formatList } from '../figma_app/930338';
 import { e_ as _$$e_, Cn } from '../figma_app/936061';
-import { z5 as _$$z3, Bh, fN } from '../figma_app/936646';
+import { getStylesFromLoadedLibrary, useLibraryData, LibraryDataProvider } from '../figma_app/936646';
 import { $ as _$$$4 } from '../figma_app/938538';
 import { we as thumbhashBindings } from '../figma_app/945605';
 import { aQ as _$$aQ, Qj } from '../figma_app/947348';
@@ -593,7 +593,7 @@ function ec(e) {
     updateNotification
   } = ql(!1, e.selectedPlan);
   let [a, s] = useState([]);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = he([...notificationFeedMap.values()], a);
   let c = _$$e2(d);
   let u = useHighPriorityNotificationsExperiment(c);
@@ -667,7 +667,7 @@ function ec(e) {
   });
 }
 function eu() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   !function () {
     let e = useStore();
     let t = useMemo(() => generateUUIDv4(), []);
@@ -1743,7 +1743,7 @@ let ns = {
   EmojiWheelBindings: () => emojiWheelManagerInstance,
   Comments: () => mouseEventManager,
   PluginCallbacks: () => PluginCallbacks,
-  WidgetBindings: () => widgetBindings,
+  WidgetBindings: () => widgetManagerHandler,
   VideoTsBindings: () => VideoTsBindings,
   JsKiwiSerialization: () => JsKiwiSerializationInstance,
   TsFontManualLoader: () => TsFontManualLoader,
@@ -2207,7 +2207,7 @@ function iW() {
 }
 function iq() {
   let e = useIsMounted();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getQueryParam('locale');
   let n = getQueryParam('hub_file_id');
   let i = getQueryParam('name');
@@ -3418,7 +3418,7 @@ async function a7(e, t) {
 }
 function si() {
   let e = getSelectedView();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCallback(e => {
     t(selectViewAction({
       view: 'figmascope',
@@ -3805,21 +3805,21 @@ let sE = new LazyComponentFactory({
 class sx extends PureComponent {
   constructor() {
     super(...arguments);
-    this.isLoadingVersions = () => isLoading(this.props.loadingState, _$$ts.loadingKeyForPayload({
+    this.isLoadingVersions = () => isLoading(this.props.loadingState, getHubFileVersionsThunk.loadingKeyForPayload({
       hubFileId: this.props.hubFileId
     }));
-    this.shouldRetryLoadingVersions = () => isNullOrFailure(this.props.loadingState, _$$ts.loadingKeyForPayload({
+    this.shouldRetryLoadingVersions = () => isNullOrFailure(this.props.loadingState, getHubFileVersionsThunk.loadingKeyForPayload({
       hubFileId: this.props.hubFileId
     }));
   }
   componentDidMount() {
-    this.props.dispatch(_$$ts({
+    this.props.dispatch(getHubFileVersionsThunk({
       hubFileId: this.props.hubFileId
     }));
   }
   render() {
     let e = !(this.isLoadingVersions() || this.shouldRetryLoadingVersions());
-    let t = !!_$$a6(this.props.hubFile).id;
+    let t = !!getHubFileVersionOrDefault(this.props.hubFile).id;
     return jsx(Fragment, {
       children: e && t ? jsx(_$$Z3, {
         containerClassName: 'hub_file_embed_view--container---KHBD',
@@ -3835,7 +3835,7 @@ class sx extends PureComponent {
 sx.displayName = 'HubFileDetailView';
 let sN = connect((e, t) => ({
   hubFile: {
-    ...M3(t.hubFileId, e.hubFiles),
+    ...getHubFileOrDefault(t.hubFileId, e.hubFiles),
     comments_setting: null
   },
   loadingState: e.loadingState
@@ -4638,7 +4638,7 @@ function oj(e) {
     orgTrial
   } = e;
   let [r, n] = useState(!1);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let a = getAtomMutate(_$$A7.validateOrgTrialMutation);
   let s = useCurrentPlanUser('OrgTrialPendingModal');
   let o = useIsOrgAdminUser(s);
@@ -4819,7 +4819,7 @@ function oZ({
   productTrial: e
 }) {
   let [t, r] = useState(!1);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let i = getAtomMutate(oz);
   let a = useModalManager({
     preventUserClose: !0,
@@ -5142,7 +5142,7 @@ function lF({
 }) {
   let a;
   let s;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   switch (useCurrentTheme(), e) {
     case FFileType.DESIGN:
       a = getI18nString('desktop_new_tab.file_type.design');
@@ -5300,7 +5300,7 @@ function l2(e) {
 function l5({
   recentItems: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentUser();
   let n = useSelector(e => e.activeFileUsers);
   let i = lJ().status === 'loaded';
@@ -5373,7 +5373,7 @@ function l3({
   user: n
 }) {
   let i;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = TileUtils.getName(e);
   let o = useRef(null);
   let [d, c] = useState(null);
@@ -5519,7 +5519,7 @@ function l4({
   });
 }
 function l8() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => selectedViewToPath(e, {
     view: 'recentsAndSharing'
   }));
@@ -5812,7 +5812,7 @@ let dO = e => {
 };
 function dR() {
   (function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     !function () {
       let e = !!getFeatureFlags().ds_componentbykey_shadow_read;
       let t = useSelector(subscribedSymbolsUniqueKeysFromLoadedPagesSelector);
@@ -5867,12 +5867,12 @@ function dR() {
       let e = useCurrentFileKey();
       let t = useFileLibraryKeys();
       let r = useSceneGraphSelector();
-      let n = Bh(t);
+      let n = useLibraryData(t);
       let i = useSelector(selectPublishableStyleNodeIds);
       let a = useSelector(selectLocalStylesWithUsagesOnLoadedPages);
       let s = useMemo(() => {
         if (!r || n.status !== 'loaded') return {};
-        let e = new Set(_$$z3(n).map(e => e.node_id));
+        let e = new Set(getStylesFromLoadedLibrary(n).map(e => e.node_id));
         return dL({
           allStyles: [...new Set([...i, ...a])],
           publishedStyleNodeIds: e,
@@ -5988,7 +5988,7 @@ function dB({
   maxSubscriptionsBeforeCleanup: t
 }) {
   !function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useCurrentFileKey();
     let r = useSubscription(LegacySourceStyleData, {
       fileKey: t ?? ''
@@ -6016,7 +6016,7 @@ function dG({
   let r = selectCurrentFile()?.canEdit;
   !function () {
     let e = useRef(new Set());
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let r = useAtomWithSubscription(dU);
     let n = useFileByKey();
     let i = useMemoStable(() => {
@@ -6033,7 +6033,7 @@ function dG({
     }
   }();
   return jsxs(SubscribedLibrariesProvider, {
-    children: [r && jsx(dV, {}), jsx(fN, {
+    children: [r && jsx(dV, {}), jsx(LibraryDataProvider, {
       maxSubscriptionsBeforeCleanup: t,
       children: jsx(dE, {
         children: e
@@ -6047,7 +6047,7 @@ function dV() {
 }
 function dH() {
   !function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = getCurrentFileType();
     let r = useSelector(e => e.library.publishProgress);
     let [n, i] = useState(0);
@@ -6139,7 +6139,7 @@ function dH() {
         onPublishSuccess,
         onPublishError,
         onPublishProgress
-      } = _$$u5(t);
+      } = getPublishHandlersForFileType(t);
       let d = t => {
         handlePublishEnded(r, t ?? {
           __tag: 'UNKNOWN'
@@ -6423,7 +6423,7 @@ function ci({
   let o = useCallback(e => {
     i && s(i, e);
   }, [i, s]);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   return jsxs(Fragment, {
     children: [e.map(e => jsx(cr, {
       tile: e,
@@ -6536,7 +6536,7 @@ function cu() {
     type: TileType.PINNED_FILE,
     file: e.file
   })), [n]);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   return (useEffect(() => {
     a(folderSetPinnedFileAction({
       folderId: e,
@@ -6604,7 +6604,7 @@ function cg() {
   }));
   let [r] = handleSuspenseRetainRelease(t);
   let n = r.unwrapOr(void 0)?.project;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   assert(!!n, 'Project is null');
   return jsxs(Fragment, {
     children: [jsxs('div', {
@@ -6683,7 +6683,7 @@ function cE() {
   }) : null;
 }
 function cX() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = !selectCurrentUser();
   let r = _$$e11();
   let n = useCanUseDevModeDemoFile();
@@ -6721,7 +6721,7 @@ function cX() {
 let c0 = atom(new Set());
 let c1 = 'true';
 function c2() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentFile();
   let r = useCurrentFileKey();
   let n = selectCurrentUser();
@@ -6914,7 +6914,7 @@ function ut({
   let o = selectCurrentUser();
   let d = !!useDevModeFocusId() && a;
   !function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useCurrentFileKey();
     let r = useCanUseDevModeDemoFile();
     let n = getFilteredFeatureFlags().ce_il_root;
@@ -7173,7 +7173,7 @@ function uv(e) {
     activeMode,
     prevActiveMode
   } = e;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let i = selectUserFlag('has_toggled_from_draw');
   let {
     show,
@@ -7313,7 +7313,7 @@ function uO() {
 let uM = userFlagAtomFamily('dev_mode_notified_of_approved_org_request');
 function uF() {
   let e = useAtomWithSubscription(uM);
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     show,
     isShowing,
@@ -7387,7 +7387,7 @@ function uj() {
 function uY() {
   let e = _$$Y4(getI18nString('auth.sign_up_for_figma'));
   let [t, r] = useState(!1);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   useEffect(() => {
     let e = setTimeout(() => {
       r(!0);
@@ -8224,7 +8224,7 @@ function p3(e) {
 }
 (e => {
   function t(e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     return jsx(p3, {
       showModal: () => t(showModalHandler({
         type: _$$s7,
@@ -8244,7 +8244,7 @@ function p3(e) {
 let p4 = {
   [viewMappings.ACCOUNT_SETTINGS]: o.AccountSettingsModalInIframe,
   [viewMappings.UNIVERSAL_PUBLISHING]() {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return jsx(p3, {
       showModal: () => e(showModalHandler({
         type: _$$R7,
@@ -8487,7 +8487,7 @@ function _m(e) {
   let t = useSelector(e => e.notifications);
   let r = isHelpWidgetHidden();
   let n = W6();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let a = useAtomWithSubscription(overlayStateAtom);
   let s = t[0]?.type ?? null;
   return (useEffect(() => {
@@ -8505,7 +8505,7 @@ function _m(e) {
 }
 let _b = 'locked_account_view--addAccountButton--M2CKK';
 function _I() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.user);
   let r = useSelector(e => e.authedUsers);
   let n = useSelector(e => e.orgById);
@@ -8756,7 +8756,7 @@ function _N(e) {
   });
 }
 let _C = memo(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.flashes);
   let r = getSelectedView();
   let n = useSelector(e => e.interactionTestDialogShown);
@@ -8772,7 +8772,7 @@ let _C = memo(() => {
     };
   }, []);
   (function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = function () {
       let e = useMemo(() => generateUUIDv4(), []);
       let t = useSubscription(ClientReloadView, {
@@ -8927,7 +8927,7 @@ let _C = memo(() => {
   });
 });
 let _O = createDeferredPromise();
-_$$v.setDelegate(new ConfigManagerProxy());
+statsigClient.setDelegate(new ConfigManagerProxy());
 (function (e) {
   if (!getFeatureFlags().web_vitals_report) return;
   let t = customHistory.location.pathname + customHistory.location.search;
@@ -9242,7 +9242,7 @@ executeWhenDomReady(async () => {
         PrototypeApp: () => r.prototypeApp || new SceneLoadingHandler(),
         SkewKiwiSerialization: () => r.skewKiwiSerialization || null,
         DeprecatedJsSceneHooks: () => r.deprecatedJsSceneHooks || new SceneManagerHandler(),
-        WidgetBindings: () => widgetBindings,
+        WidgetBindings: () => widgetManagerHandler,
         ZipImpl: () => zipImpl,
         StatsigConfigBindings: () => fullscreenConfigInstance,
         WebGPUTsContext: () => webGPUContextInstance,

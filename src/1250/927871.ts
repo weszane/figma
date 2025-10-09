@@ -100,7 +100,7 @@ function v() {
 let w = buildUploadUrl("d67cccad0bd5d4d8f50d8cac15b5ed848027e0a8");
 let T = buildUploadUrl("f9217dd1dac2a765d218e1de9eb6fcbb32a454ec");
 export function $$j0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = B();
   let o = _$$w({
     rolesToDefaultToOther: ["education"]

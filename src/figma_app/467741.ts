@@ -17,7 +17,7 @@ export function $$g0(e) {
     let {
       save
     } = E(e);
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     let a = getCurrentDocumentType();
     let o = getUserId();
     if (!e.types.has(ExtensionSource.USER_SAVED) && !JT(e)) return {
@@ -65,7 +65,7 @@ function E(e) {
   return _i(extension.plugin_id, manifestContainsWidget(extension) ? ResourceTypeNoComment.WIDGET : ResourceTypeNoComment.PLUGIN, e.publishedExtension, r);
 }
 function y(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = getCurrentDocumentType();
   let {
     extension,

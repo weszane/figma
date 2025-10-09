@@ -70,7 +70,7 @@ export class $$m0 extends PureComponent {
   }
 }
 export function $$g1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(t => t.viewBarViewModeOptionByView[e.viewId]) ?? e.defaultOptions.viewMode;
   return jsx(h, {
     viewMode: r,

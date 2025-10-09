@@ -18,7 +18,7 @@ import { qY } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
-import { a6 } from "../figma_app/198840";
+import { getHubFileVersionOrDefault } from "../figma_app/198840";
 import { FFileType } from "../figma_app/191312";
 import { EditorFilePickerRecentFilesByEditorTypeView } from "../figma_app/43951";
 import { mapRecentFilesAndRepos } from "../figma_app/349248";
@@ -33,7 +33,7 @@ import { useLibraryModules } from "../figma_app/409131";
 import { E as _$$E } from "../figma_app/999099";
 import { useHasValidSceneSlideTheme } from "../figma_app/21029";
 import { D as _$$D } from "../7222/938408";
-import { bY, Vf, VZ, Ei, Mt, ke, OR, M0 } from "../figma_app/60023";
+import { fileTypeAtom, FileType, selectionAtomFamily, draftModeAtomFamily, updateStateAtom, counterAtom, orgAtom, stringAtomFamily } from "../figma_app/60023";
 import { l as _$$l2, x as _$$x } from "../7222/542428";
 import { _ as _$$_ } from "../7222/460441";
 import { Ji, CH } from "../figma_app/553488";
@@ -64,10 +64,10 @@ export function $$G1(e) {
 export function $$F16() {
   let e = $$J7();
   let t = function () {
-    let e = useAtomWithSubscription(bY);
-    return e.type === Vf.TEMPLATE_PICKER && e.source === _$$E.SLIDES_TEMPLATE;
+    let e = useAtomWithSubscription(fileTypeAtom);
+    return e.type === FileType.TEMPLATE_PICKER && e.source === _$$E.SLIDES_TEMPLATE;
   }();
-  let r = Xr(VZ);
+  let r = Xr(selectionAtomFamily);
   let u = useMemo(() => e.data || [], [e]);
   let c = u[0];
   let i = "loaded" === e.status && u.length > 0;
@@ -114,9 +114,9 @@ export function $$J7() {
   return $$X5(_$$l(e));
 }
 export function $$W17(e) {
-  let t = useDispatch();
-  let r = Xr(Ei);
-  let l = Xr(VZ);
+  let t = useDispatch<AppDispatch>();
+  let r = Xr(draftModeAtomFamily);
+  let l = Xr(selectionAtomFamily);
   let [c, i] = useState(!1);
   let a = _$$D(e?.library_key);
   return (e, _, u, s, o) => {
@@ -148,8 +148,8 @@ export function $$z15() {
     let t = e?.template;
     return e && t && !t.unpublishedAt ? _$$l(e.libraryKey) : null;
   }();
-  let [t, r] = useAtomValueAndSetter(bY);
-  let [u, n] = useAtomValueAndSetter(Ei);
+  let [t, r] = useAtomValueAndSetter(fileTypeAtom);
+  let [u, n] = useAtomValueAndSetter(draftModeAtomFamily);
   let i = useCurrentFileKey() || "";
   let a = useCallback(() => {
     n(!0);
@@ -164,15 +164,15 @@ export function $$z15() {
       e && (_ = _$$l(e));
     }
     _ && r({
-      type: Vf.TEMPLATE,
+      type: FileType.TEMPLATE,
       libraryKey: _,
       parentView: {
-        type: Vf.ALL
+        type: FileType.ALL
       },
       shouldRemoveSourceLibraryKeyOnFail: !0
     });
-    [Vf.FILE_PICKER, Vf.TEMPLATE_PICKER].includes(t.type) && r({
-      type: Vf.ALL
+    [FileType.FILE_PICKER, FileType.TEMPLATE_PICKER].includes(t.type) && r({
+      type: FileType.ALL
     });
   }, [i, n, r, e, t.type]);
   let o = useCallback(() => {
@@ -188,15 +188,15 @@ export function $$z15() {
   };
 }
 export function $$Z13() {
-  let e = Xr(Ei);
-  let t = Xr(VZ);
+  let e = Xr(draftModeAtomFamily);
+  let t = Xr(selectionAtomFamily);
   return () => {
     e(!1);
     t(!1);
   };
 }
 export function $$ee9(e) {
-  let [t, r] = useAtomValueAndSetter(Mt);
+  let [t, r] = useAtomValueAndSetter(updateStateAtom);
   let u = t[e] ?? 0;
   return {
     scrollPosition: u,
@@ -205,15 +205,15 @@ export function $$ee9(e) {
       r(e, t);
     }, [r, e]),
     resetScrollTop: useCallback(e => {
-      for (let t in Vf) {
-        let _ = Vf[t];
+      for (let t in FileType) {
+        let _ = FileType[t];
         e.includes(_) || r(_, 0);
       }
     }, [r])
   };
 }
 export function $$et12() {
-  let [e, t] = useAtomValueAndSetter(ke);
+  let [e, t] = useAtomValueAndSetter(counterAtom);
   let r = useCallback((e, r) => {
     t(e);
   }, [t]);
@@ -228,7 +228,7 @@ let er = new AdvancedWorkerFuseSearch({
   ignoreLocation: !0
 });
 export function $$e_0() {
-  let [e, t] = useAtomValueAndSetter(OR);
+  let [e, t] = useAtomValueAndSetter(orgAtom);
   let r = e.trim();
   let [u] = useDebounce(r, 200);
   let l = $$ei14();
@@ -250,7 +250,7 @@ export function $$e_0() {
     return {
       areShelvesLoading: "loading" === t,
       hubFilesById: useMemo(() => r.reduce((e, t) => (e[t.id] = t, e), {}), [r]),
-      hubFileVersions: useMemo(() => r.map(e => a6(e)), [r])
+      hubFileVersions: useMemo(() => r.map(e => getHubFileVersionOrDefault(e)), [r])
     };
   }();
   let [E, f] = useState([]);
@@ -293,7 +293,7 @@ export function $$e_0() {
 }
 export var $$eu3 = (e => (e[e.LOADING = 0] = "LOADING", e[e.NO_RECENT_FILES = 1] = "NO_RECENT_FILES", e[e.NO_QUERY_RESULTS = 2] = "NO_QUERY_RESULTS", e[e.SUCCESS = 3] = "SUCCESS", e))($$eu3 || {});
 export function $$el8(e) {
-  let [t, r] = useAtomValueAndSetter(M0);
+  let [t, r] = useAtomValueAndSetter(stringAtomFamily);
   let u = t.trim();
   let [l] = useDebounce(u, 200);
   let n = en(e);

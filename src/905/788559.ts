@@ -128,7 +128,7 @@ export function $$L0({
     let t = e(D);
     I && E ? E(t) : C(e);
   }, [D, E, I, C]);
-  let F = useDispatch();
+  let F = useDispatch<AppDispatch>();
   let M = useRef(null);
   let j = t => {
     M && M.current?.focus();

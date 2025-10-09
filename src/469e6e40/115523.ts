@@ -131,7 +131,7 @@ function ey(e) {
     projectDescription,
     assetTransferRequest
   } = e.resourceConnection;
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   if ("loading" === e.numLibrariesEnabledResult.status || "loading" === e.resourceConnectedUsersResult.status) return null;
   let {
     resourceConnectedUsersWithPlan,
@@ -463,7 +463,7 @@ function eO(e) {
     resourceName,
     isHostPlanAdmin
   } = e.resourceConnection;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = selectUser();
   let [c, _] = useState("ALL");
   let [u, m] = useState("");
@@ -671,7 +671,7 @@ let eM = {
       resourceId,
       status
     } = e.resourceConnection;
-    let l = useDispatch();
+    let l = useDispatch<AppDispatch>();
     let o = useTeamPlanFeatures().unwrapOr(null);
     let [d, c] = useState("overview");
     let [_, u, m] = Tabs.useManagedTabs({
@@ -777,7 +777,7 @@ function eU(e) {
   let r = _$$B();
   let l = useRef(null);
   let d = useRef(null);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let [_, u] = useState(!1);
   let p = useMemo(() => {
     let e = resourceConnectionsLgResult?.plan;

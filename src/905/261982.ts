@@ -1,7 +1,7 @@
 import { getResourceDataOrFallback } from "../905/723791"
 import { mapVariableProperties, mapVariableSetProperties } from "../figma_app/349248"
 
-interface VariableCollection {
+export interface VariableCollection {
   variables?: any[]
   sortPosition?: number
   name: string

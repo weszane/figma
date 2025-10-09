@@ -38,7 +38,7 @@ export function $$C0() {
   let M = useAtomWithSubscription(MoveDraftsTeamData.Query({
     orgId: null
   }));
-  let F = useDispatch();
+  let F = useDispatch<AppDispatch>();
   let j = _$$e({
     overlay: MoveDraftsNudgeV2,
     priority: N.SECONDARY_MODAL

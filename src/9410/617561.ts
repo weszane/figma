@@ -14,7 +14,7 @@ export function $$m1() {
   let t = e?.type === CM.type;
   let i = getObservableValue(AppStateTsApi?.uiState().showMissingFontsButton, !1);
   let r = trackFileEventWithStore();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return {
     expanded: t,
     icon: z,

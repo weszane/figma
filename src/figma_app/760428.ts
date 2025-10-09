@@ -143,7 +143,7 @@ export function $$J2({
     onRetry: retryPreferredValuesFetch,
     recordingKey: "instancePropAssignment"
   }) : void 0, [preferredValuesFetchError, retryPreferredValuesFetch]);
-  let el = useDispatch();
+  let el = useDispatch<AppDispatch>();
   let {
     backingSymbolGUID,
     backingStateGroupGUID,

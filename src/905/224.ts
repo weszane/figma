@@ -39,7 +39,7 @@ export enum PlanType {
  * (original: useModalControls)
  */
 export function useModalControls(teamId: string | null) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const closeModal = () => {
     dispatch(popModalStack());
   };

@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
 import { oY } from "../figma_app/524655";
 import { MB } from "../figma_app/835688";
-import { Ei } from "../figma_app/60023";
+import { draftModeAtomFamily } from "../figma_app/60023";
 import { uu } from "../7222/396421";
 let $$b0 = "carousel-add-slide-button";
 let $$C1 = forwardRef(function ({
@@ -23,7 +23,7 @@ let $$C1 = forwardRef(function ({
     toggleTemplatePicker,
     closeTemplatePicker
   } = uu();
-  let C = useAtomWithSubscription(Ei);
+  let C = useAtomWithSubscription(draftModeAtomFamily);
   let E = scopeAwareFunction.user("ssv-carousel", () => {
     closeTemplatePicker();
     let e = getSingletonSceneGraph();

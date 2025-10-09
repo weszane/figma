@@ -36,7 +36,7 @@ export function $$O0({
     canRun,
     canRequest
   } = e;
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let {
     close
   } = useNavigationStack();

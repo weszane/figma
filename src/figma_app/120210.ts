@@ -64,7 +64,7 @@ export function $$b5(e, t = 552, r = 320) {
   }
 }
 export function $$T1() {
-  let e = useDispatch()
+  let e = useDispatch<AppDispatch>()
   return useCallback((t = !0) => {
     Fullscreen && t && Fullscreen.triggerAction("set-tool-default", null)
     e(closeUniversalInsertModal())
@@ -106,7 +106,7 @@ export function $$S4(e) {
   return e.mirror.appModel.currentTool === DesignGraphElements.NONE && e.universalInsertModal.showing && e.universalInsertModal.pinned === PinningState.NOT_PINNED
 }
 export function $$v2(e, t, r, a) {
-  let s = useDispatch()
+  let s = useDispatch<AppDispatch>()
   let o = useSelector(e => findProfile({
     authedProfilesById: e.authedProfilesById,
     userId: e.user?.id,

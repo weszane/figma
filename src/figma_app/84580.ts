@@ -229,7 +229,7 @@ export function $$ei1(e) {
 }
 function ea(e, t) {
   let r;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   switch (e) {
     case FeatureFlag.PROTOTYPING_MULTIPLE_ACTIONS:
       r = UpsellModalType.PROTOTYPING_MULTIPLE_ACTIONS;

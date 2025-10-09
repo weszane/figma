@@ -1,104 +1,251 @@
 import { atom } from "../figma_app/27355"
 import { setupRemovableAtomFamily } from "../figma_app/615482"
 
-var $$a11 = (e => (e.ALL = "ALL", e.ORG = "ORG", e.TEMPLATE = "TEMPLATE", e.HUB_FILE = "HUB_FILE", e.FILE_PICKER = "FILE_PICKER", e.TEMPLATE_PICKER = "TEMPLATE_PICKER", e.TEAM = "TEAM", e))($$a11 || {})
-let $$s1 = setupRemovableAtomFamily(() => atom(!1))
-let $$o10 = setupRemovableAtomFamily(() => atom(!1))
-let $$l0 = setupRemovableAtomFamily(() => atom(!1))
-let $$d13 = atom({
-  type: "ALL",
-})
-let $$c7 = atom("")
-let u = atom({})
-let $$p6 = atom(e => e(u), (e, t, r, n) => {
-  t(u, e => ({
-    ...e,
-    [r]: n,
-  }))
-})
-let $$_20 = atom(null, (e, t) => {
-  t(u, {})
-})
-let $$h16 = atom(0)
-export var $$m2 = (e => (e.PUBLISH_HUB_FILE_INITIATED = "PUBLISH_HUB_FILE_INITIATED", e.PUBLISH_HUB_FILE_COMPLETED = "PUBLISH_HUB_FILE_COMPLETED", e.PUBLISH_HUB_FILE_ERRORED = "PUBLISH_HUB_FILE_ERRORED", e.PUBLISH_TEMPLATE_INITIATED = "PUBLISH_TEMPLATE_INITIATED", e.PUBLISH_TEMPLATE_COMPLETED = "PUBLISH_TEMPLATE_COMPLETED", e.PUBLISH_TEMPLATE_ERRORED = "PUBLISH_TEMPLATE_ERRORED", e.UNPUBLISH_TEMPLATE_INITIATED = "UNPUBLISH_TEMPLATE_INITIATED", e.UNPUBLISH_HUB_FILE_INITIATED = "UNPUBLISH_HUB_FILE_INITIATED", e.UNPUBLISH_COMPLETED = "UNPUBLISH_COMPLETED", e.UNPUBLISH_TEMPLATE_ERRORED = "UNPUBLISH_ERRORED", e.CLEARED = "CLEARED", e))($$m2 || {})
-let g = ["PUBLISH_HUB_FILE_INITIATED", "PUBLISH_TEMPLATE_INITIATED", "UNPUBLISH_TEMPLATE_INITIATED", "UNPUBLISH_HUB_FILE_INITIATED"]
-let f = [...g, "CLEARED"]
-export function $$E5(e) {
-  return g.includes(e)
+// Origin: /Users/allen/sigma-main/src/figma_app/60023.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments, improved readability, and ensured type safety.
+// Assumed dependencies: atom, setupRemovableAtomFamily (from local modules)
+// Note: Some atom logic assumes Jotai-like API. Adjust imports/types if using a different state management library.
+
+/**
+ * Enum for file types.
+ */
+export enum FileType {
+  ALL = "ALL",
+  ORG = "ORG",
+  TEMPLATE = "TEMPLATE",
+  HUB_FILE = "HUB_FILE",
+  FILE_PICKER = "FILE_PICKER",
+  TEMPLATE_PICKER = "TEMPLATE_PICKER",
+  TEAM = "TEAM",
 }
-let y = {
-  CLEARED: g,
-  PUBLISH_TEMPLATE_INITIATED: ["PUBLISH_TEMPLATE_COMPLETED", "PUBLISH_TEMPLATE_ERRORED"],
-  PUBLISH_TEMPLATE_COMPLETED: f,
-  PUBLISH_TEMPLATE_ERRORED: f,
-  UNPUBLISH_TEMPLATE_INITIATED: ["UNPUBLISH_COMPLETED", "UNPUBLISH_ERRORED"],
-  UNPUBLISH_HUB_FILE_INITIATED: ["UNPUBLISH_COMPLETED", "UNPUBLISH_ERRORED"],
-  UNPUBLISH_COMPLETED: f,
-  UNPUBLISH_ERRORED: f,
-  PUBLISH_HUB_FILE_INITIATED: ["PUBLISH_HUB_FILE_COMPLETED", "PUBLISH_HUB_FILE_ERRORED"],
-  PUBLISH_HUB_FILE_COMPLETED: f,
-  PUBLISH_HUB_FILE_ERRORED: f,
+
+/**
+ * Atom families for removable boolean atoms.
+ */
+export const draftModeAtomFamily = setupRemovableAtomFamily(() => atom(false))
+export const selectionAtomFamily = setupRemovableAtomFamily(() => atom(false))
+export const lockAtomFamily = setupRemovableAtomFamily(() => atom(false))
+
+/**
+ * Atom for current file type.
+ */
+const fileTypeAtom = atom<{ type: FileType }>({
+  type: FileType.ALL,
+})
+
+/**
+ * Atom for organization string.
+ */
+const orgAtom = atom<string>("")
+
+/**
+ * Atom for a generic object state.
+ */
+const stateAtom = atom<Record<string, unknown>>({})
+
+/**
+ * Atom for updating a key in the state object.
+ */
+const updateStateAtom = atom(
+  get => get(stateAtom),
+  (get, set, key: string, value: unknown) => {
+    set(stateAtom, prev => ({
+      ...prev,
+      [key]: value,
+    }))
+  },
+)
+
+/**
+ * Atom for resetting the state object.
+ */
+const resetStateAtom = atom(
+  null,
+  (get, set) => {
+    set(stateAtom, {})
+  },
+)
+
+/**
+ * Atom for a numeric value (e.g., counter).
+ */
+const counterAtom = atom<number>(0)
+
+/**
+ * Enum for publish/unpublish states.
+ */
+export enum PublishState { 
+  PUBLISH_HUB_FILE_INITIATED = "PUBLISH_HUB_FILE_INITIATED",
+  PUBLISH_HUB_FILE_COMPLETED = "PUBLISH_HUB_FILE_COMPLETED",
+  PUBLISH_HUB_FILE_ERRORED = "PUBLISH_HUB_FILE_ERRORED",
+  PUBLISH_TEMPLATE_INITIATED = "PUBLISH_TEMPLATE_INITIATED",
+  PUBLISH_TEMPLATE_COMPLETED = "PUBLISH_TEMPLATE_COMPLETED",
+  PUBLISH_TEMPLATE_ERRORED = "PUBLISH_TEMPLATE_ERRORED",
+  UNPUBLISH_TEMPLATE_INITIATED = "UNPUBLISH_TEMPLATE_INITIATED",
+  UNPUBLISH_HUB_FILE_INITIATED = "UNPUBLISH_HUB_FILE_INITIATED",
+  UNPUBLISH_COMPLETED = "UNPUBLISH_COMPLETED",
+  UNPUBLISH_TEMPLATE_ERRORED = "UNPUBLISH_ERRORED",
+  CLEARED = "CLEARED",
 }
-let b = atom({
-  state: "CLEARED",
+
+/**
+ * List of states that represent an "initiated" action.
+ */
+const initiatedStates: PublishState[] = [
+  PublishState.PUBLISH_HUB_FILE_INITIATED,
+  PublishState.PUBLISH_TEMPLATE_INITIATED,
+  PublishState.UNPUBLISH_TEMPLATE_INITIATED,
+  PublishState.UNPUBLISH_HUB_FILE_INITIATED,
+]
+
+/**
+ * List of all states that can be cleared.
+ */
+export const clearedStates: (PublishState | "CLEARED")[] = [
+  ...initiatedStates,
+  PublishState.CLEARED,
+]
+
+/**
+ * Checks if a state is an "initiated" state.
+ */
+export function isInitiatedState(state: PublishState): boolean {
+  return initiatedStates.includes(state)
+}
+
+/**
+ * State transition map for publish/unpublish actions.
+ */
+const stateTransitionMap = {
+  CLEARED: initiatedStates,
+  PUBLISH_TEMPLATE_INITIATED: [
+    PublishState.PUBLISH_TEMPLATE_COMPLETED,
+    PublishState.PUBLISH_TEMPLATE_ERRORED,
+  ],
+  PUBLISH_TEMPLATE_COMPLETED: clearedStates,
+  PUBLISH_TEMPLATE_ERRORED: clearedStates,
+  UNPUBLISH_TEMPLATE_INITIATED: [
+    PublishState.UNPUBLISH_COMPLETED,
+    PublishState.UNPUBLISH_ERRORED,
+  ],
+  UNPUBLISH_HUB_FILE_INITIATED: [
+    PublishState.UNPUBLISH_COMPLETED,
+    PublishState.UNPUBLISH_ERRORED,
+  ],
+  UNPUBLISH_COMPLETED: clearedStates,
+  UNPUBLISH_ERRORED: clearedStates,
+  PUBLISH_HUB_FILE_INITIATED: [
+    PublishState.PUBLISH_HUB_FILE_COMPLETED,
+    PublishState.PUBLISH_HUB_FILE_ERRORED,
+  ],
+  PUBLISH_HUB_FILE_COMPLETED: clearedStates,
+  PUBLISH_HUB_FILE_ERRORED: clearedStates,
+}
+
+/**
+ * Atom for current publish/unpublish state.
+ */
+interface PublishAtomState {
+  state: PublishState
+  request?: unknown
+}
+export const publishStateAtom = atom<PublishAtomState>({
+  state: PublishState.CLEARED,
 })
-let $$T12 = atom(e => e(b).state)
-let $$I14 = atom((e) => {
-  let t = e(b)
-  return t.state === "PUBLISH_TEMPLATE_INITIATED" ? t.request : null
+
+/**
+ * Atom for getting the current state value.
+ */
+export const currentStateAtom = atom(get => get(publishStateAtom).state)
+
+/**
+ * Atom for getting the current request if state is PUBLISH_TEMPLATE_INITIATED.
+ */
+export const currentRequestAtom = atom<PublishRequestParams>((get) => {
+  const { state, request } = get(publishStateAtom)
+  return state === PublishState.PUBLISH_TEMPLATE_INITIATED ? request : null
 })
-let $$S8 = atom(null, (e, t, r) => {
-  let n = e($$T12)
-  let {
-    state,
-  } = r
-  if (y[n].includes(state))
-    t(b, r); else throw new Error(`Invalid state transition from ${n} to ${state}. Please check the state transition logic.`)
-})
-export function $$v3(e) {
-  switch (e) {
-    case "PUBLISH_TEMPLATE_ERRORED":
-    case "PUBLISH_TEMPLATE_INITIATED":
+
+/**
+ * Atom for updating the publish state, with validation for allowed transitions.
+ */
+export const updatePublishStateAtom = atom(
+  null,
+  (get, set, newState: PublishAtomState) => {
+    const currentState = get(currentStateAtom)
+    if (stateTransitionMap[currentState].includes(newState.state)) {
+      set(publishStateAtom, newState)
+    }
+    else {
+      throw new Error(
+        `Invalid state transition from ${currentState} to ${newState.state}. Please check the state transition logic.`,
+      )
+    }
+  },
+)
+
+/**
+ * Maps publish/unpublish states to human-readable labels.
+ */
+export function getPublishLabel(state: PublishState): string {
+  switch (state) {
+    case PublishState.PUBLISH_TEMPLATE_ERRORED:
+    case PublishState.PUBLISH_TEMPLATE_INITIATED:
       return "Slides Team Template Publish"
-    case "UNPUBLISH_TEMPLATE_INITIATED":
-    case "UNPUBLISH_ERRORED":
+    case PublishState.UNPUBLISH_TEMPLATE_INITIATED:
+    case PublishState.UNPUBLISH_ERRORED:
       return "Slides Team Template Unpublish"
-    case "PUBLISH_HUB_FILE_ERRORED":
-    case "PUBLISH_HUB_FILE_INITIATED":
+    case PublishState.PUBLISH_HUB_FILE_ERRORED:
+    case PublishState.PUBLISH_HUB_FILE_INITIATED:
       return "Slides Hub File Publish"
-    case "UNPUBLISH_HUB_FILE_INITIATED":
+    case PublishState.UNPUBLISH_HUB_FILE_INITIATED:
       return "Slides Hub File Unpublish"
     default:
-      return e
+      return state
   }
 }
-export var $$A15 = (e => (e.ALL = "ALL", e.SINGLE = "SINGLE", e.NONE = "NONE", e))($$A15 || {})
-let $$x19 = setupRemovableAtomFamily(() => atom(null))
-let $$N17 = setupRemovableAtomFamily(() => atom(null))
-let $$C9 = setupRemovableAtomFamily(() => atom({
-  type: "NONE",
-}))
-let $$w4 = setupRemovableAtomFamily(() => atom(""))
-let $$O18 = setupRemovableAtomFamily(() => atom(!1))
-setupRemovableAtomFamily(() => atom(null))
-export const DM = $$l0
-export const Ei = $$s1
-export const F4 = $$m2
-export const Jw = $$v3
-export const M0 = $$w4
-export const Md = $$E5
-export const Mt = $$p6
-export const OR = $$c7
-export const UM = $$S8
-export const V6 = $$C9
-export const VZ = $$o10
-export const Vf = $$a11
-export const _g = $$T12
-export const bY = $$d13
-export const cZ = $$I14
-export const i6 = $$A15
-export const ke = $$h16
-export const oQ = $$N17
-export const q7 = $$O18
-export const ux = $$x19
-export const xw = $$_20
+
+/**
+ * Enum for selection modes.
+ */
+export enum SelectionMode {
+  ALL = "ALL",
+  SINGLE = "SINGLE",
+  NONE = "NONE",
+}
+
+/**
+ * Atom families for various states.
+ */
+export const selectionModeAtomFamily = setupRemovableAtomFamily(() =>
+  atom<{ type: SelectionMode }>({ type: SelectionMode.NONE }),
+)
+export const stringAtomFamily = setupRemovableAtomFamily(() => atom<string>(""))
+export const booleanAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(false))
+export const nullAtomFamily = setupRemovableAtomFamily(() => atom<null>(null))
+export const genericNullAtomFamily = setupRemovableAtomFamily(() => atom<null>(null))
+
+/**
+ * Exported atoms and enums (original names preserved on left).
+ */
+export const DM = lockAtomFamily
+export const Ei = draftModeAtomFamily
+export const F4 = PublishState
+export const Jw = getPublishLabel
+export const M0 = stringAtomFamily
+export const Md = isInitiatedState
+export const Mt = updateStateAtom
+export const OR = orgAtom
+export const UM = updatePublishStateAtom
+export const V6 = selectionModeAtomFamily
+export const VZ = selectionAtomFamily
+export const Vf = FileType
+export const _g = currentStateAtom
+export const bY = fileTypeAtom
+export const cZ = currentRequestAtom
+export const i6 = SelectionMode
+export const ke = counterAtom
+export const oQ = genericNullAtomFamily
+export const q7 = booleanAtomFamily
+export const ux = nullAtomFamily
+export const xw = resetStateAtom

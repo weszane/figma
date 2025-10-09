@@ -33,7 +33,7 @@ import { Kx } from "../905/401389";
 import { PO, YR, dW } from "../905/75293";
 import { b as _$$b, O as _$$O2 } from "../905/916974";
 import { Zk, JU, $4 } from "../figma_app/626177";
-import { yT } from "../figma_app/836943";
+import { getStylePickerUIState } from "../figma_app/836943";
 import { dD, o7 } from "../figma_app/941824";
 import { Y9, Oe } from "../figma_app/811257";
 import { B as _$$B } from "../905/229357";
@@ -183,7 +183,7 @@ class en extends PureComponent {
     };
   }
   render() {
-    let e = yT({
+    let e = getStylePickerUIState({
       ...this.props,
       styleType: "GRID",
       inheritStyleKeyField: "inheritGridStyleKey"
@@ -307,7 +307,7 @@ class ea extends PureComponent {
       recordingKey: this.props.recordingKey,
       renderProperty: this.renderProperty,
       selectedPropertyType: this.props.selectedPropertyType,
-      ...yT(this.props)
+      ...getStylePickerUIState(this.props)
     });
   }
 }

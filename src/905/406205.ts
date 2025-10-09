@@ -92,7 +92,7 @@ function ec() {
   });
 }
 function em(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectPermissionsState();
   let o = getSelectedView();
   let d = useSelector(e => e.currentUserOrgId);
@@ -355,7 +355,7 @@ function eA({
   });
 }
 function ey(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = getSelectedView();
   let {
     showing,
@@ -426,7 +426,7 @@ function ey(e) {
   });
 }
 function eb(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = _$$B3();
   let r = useSelector(t => e.folder.team_id ? t.teams[e.folder.team_id] : void 0);
   return jsx(LinkPrimitive, {

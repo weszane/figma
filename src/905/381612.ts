@@ -3,19 +3,18 @@ import { localStorageRef } from "../905/657224";
 import { recentCustomTemplatePutAll } from "../905/775228";
 import { FaceToolType, FDocumentType, ITemplateType } from "../905/862883";
 import { HubTypeEnum } from "../figma_app/45218";
-import { ts } from "../figma_app/49598";
+import { getHubFileVersionsThunk } from "../figma_app/49598";
 import { addFaceStampToRecentsAction, addFetchedPluginVersionAction, addFetchedWidgetVersionAction, addPluginToRecentsAction, addTemplateToRecentsWithUserIdThunk, addWhiteboardToolToRecentsAction, addWidgetsToRecentsAction, removeRecentlyUsedPluginAction, removeRecentlyUsedWidgetAction, setRecentFaceStampsAction, setRecentPluginsAction, setRecentTemplatesAction, setRecentWhiteboardToolsAction, setRecentWidgetsAction, syncRecentPluginsAction, syncRecentWidgetsAction } from "../figma_app/147952";
 import { getRecentItems, getRecentKey, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
 import { getCurrentPluginVersionId } from "../figma_app/300692";
 import { templateService } from "../figma_app/446378";
 import { throwTypeError } from "../figma_app/465776";
-import { b6, W9 } from "../figma_app/559491";
+import { cacheWidgetVersionsThunk, fetchCanvasWidgetVersions } from "../figma_app/559491";
 import { NO_TEAM } from "../figma_app/633080";
 import { getAssetKeyVersion } from "../figma_app/646357";
 import { loadingStatePutLoading, loadingStatePutSuccess } from "../figma_app/714946";
 import { ADD_ASSET_TO_RECENTS } from "../figma_app/933328";
 import { combineReducers } from "../vendor/156872";
-
 let x = "recent-library-items-design";
 let S = "recent-library-items";
 let w = "recent-library-items-slides";
@@ -41,7 +40,7 @@ let T = createOptimistThunk(async (e, t, {
   let c = [];
   let p = Array.from(d).map(async t => {
     try {
-      await e.dispatch(ts({
+      await e.dispatch(getHubFileVersionsThunk({
         hubFileId: t
       }));
     } catch (e) {
@@ -103,7 +102,7 @@ let k = createOptimistThunk(async (e, t, {
     }));
     return;
   }
-  Object.keys(r).length > 0 && (await W9(r, n.currentUserOrgId), e.dispatch(b6({
+  Object.keys(r).length > 0 && (await fetchCanvasWidgetVersions(r, n.currentUserOrgId), e.dispatch(cacheWidgetVersionsThunk({
     widgetIDToVersions: r
   })), e.dispatch(loadingStatePutSuccess({
     key: i

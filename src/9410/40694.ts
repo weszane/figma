@@ -52,7 +52,7 @@ export function $$j0({
   let m = LL(c, e.name || e.handle || "", p);
   let b = getUserId();
   let T = _$$b();
-  let j = useDispatch();
+  let j = useDispatch<AppDispatch>();
   let O = useCallback(() => {
     j(addFaceStampToRecentsAction({
       currentUserId: b ?? void 0,

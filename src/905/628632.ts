@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { hZ } from "../905/748726";
+import { autocompleteSet } from "../905/748726";
 import { getUserId } from "../905/372672";
 import { hp, bp } from "../905/913057";
 import { KindEnum } from "../905/129884";
@@ -55,7 +55,7 @@ export function $$g0({
   };
 }
 export function $$f1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useMemo(() => {
     let t = new Set();
     e.autocomplete.tokens.forEach(e => t.add(e.content.id));
@@ -64,7 +64,7 @@ export function $$f1(e) {
   let u = getUserId();
   let g = (n, r) => {
     let a = e.searchResultToken(n);
-    i.has(a.content.id) || (t(hZ({
+    i.has(a.content.id) || (t(autocompleteSet({
       ...e.autocomplete,
       tokens: e.autocomplete.tokens.concat(a),
       inputValue: ""

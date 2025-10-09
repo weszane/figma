@@ -65,7 +65,7 @@ function m() {
 export function $$v0({
   isWidget: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let s = useDropdownState();
   let v = s?.type === kt;
   let f = useRef(null);

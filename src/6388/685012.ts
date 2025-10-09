@@ -45,7 +45,7 @@ export function $$C0({
   importData: t,
   onCreateFinished: l
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let C = Object.values(t)[0]?.length || 0;
   let N = useMemo(() => $$T1(e), [e]);
   let w = C * N.size;
@@ -95,7 +95,7 @@ export function $$C0({
           return i?.get(t);
         }, [e]);
       }();
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       let l = useAtomWithSubscription(_$$v);
       return useCallback((o, n, s, r, i, a, c, u, x, g) => {
         permissionScopeHandler.user("buzz-add-asset-progressive-loading", () => {

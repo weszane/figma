@@ -29,7 +29,7 @@ let g = e => {
 export function $$h0(e) {
   var t;
   let [a, r] = useState((t = e || "", /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(t)) ? e : void 0);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let h = useCurrentPrivilegedPlan("useOpenResourceConnectionReviewModal").unwrapOr(null);
   let x = useSubscription(ResourceConnectionInviteByIdView, {
     resourceConnectionInviteId: a

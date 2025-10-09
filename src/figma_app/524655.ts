@@ -99,7 +99,7 @@ export function $$A3() {
   }), e);
 }
 export function $$x0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     numSkippedSlides,
     numTotalSlides

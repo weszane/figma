@@ -1,6 +1,6 @@
 import { reportError, setTagGlobal } from '../905/11';
 import { ServiceCategories } from '../905/165054';
-import { Tj } from '../905/266529';
+import { setStoredValue } from '../905/266529';
 import { debugState } from '../905/407919';
 import { getOpenFileKey, handleSelectedView } from '../905/622391';
 import { atomStoreManager } from '../figma_app/27355';
@@ -181,7 +181,7 @@ export async function handlePluginError(error?: any) {
  * (Original: $$T10)
  */
 export function resetPluginState(): void {
-  Tj(undefined);
+  setStoredValue(undefined);
   pluginState.currentWidget = undefined;
   setPluginData(null);
   setPluginTriggeredFrom(null);

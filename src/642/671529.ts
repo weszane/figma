@@ -19,7 +19,7 @@ import { isFullscreenDesignModeNotFocused } from "../figma_app/327588";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { e as _$$e } from "../1528/93111";
 import { hasCmsCollection } from "../figma_app/618433";
-import { sw, Zs } from "../figma_app/914957";
+import { hideStylePreview, showCreateStylePreviewThunk } from "../figma_app/914957";
 import { hideVariablePicker } from "../905/330741";
 import { Dm } from "../figma_app/8833";
 import { getPropertiesPanelSplitPosition, EditorPreferencesApi } from "../figma_app/740163";
@@ -105,7 +105,7 @@ function ef({
   onCreate: a,
   recordingKey: d
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let p = useSelector(e => e.mirror.selectedStyleProperties);
   let h = useSelector(e => e.mirror.sceneGraphSelection);
   let m = 1 === Object.keys(h).length ? Object.keys(h)[0] : null;
@@ -131,7 +131,7 @@ function ef({
     j && AppStateTsApi.slideThemeLibBindings().addStyleToLocalTheme(e || "", b);
     c(hidePickerThunk());
     g || c(hideStylePicker());
-    c(sw());
+    c(hideStylePreview());
     a && a(e || "");
   });
   let T = useSelector(e => {
@@ -209,7 +209,7 @@ function ef({
     value: zM.CREATE_STYLE,
     children: jsx(bL, {
       onClose: () => {
-        c(sw());
+        c(hideStylePreview());
       },
       width: tA,
       defaultPosition: e,
@@ -234,7 +234,7 @@ function ef({
       initialWidth: tA,
       initialPosition: e,
       onClose: () => {
-        c(sw());
+        c(hideStylePreview());
       },
       recordingKey: generateRecordingKey("createStyleModal"),
       dragHeaderOnly: !0,
@@ -249,7 +249,7 @@ function e_({
   recordingKey: n,
   stylePreviewShown: l
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let o = useSelector(e => e.mirror.selectedStyleProperties);
   let d = getShownNonLocalStyle(l);
   let u = sessionLocalIDToString(o.guid);
@@ -269,7 +269,7 @@ function e_({
       recordingKey: n,
       isInspectPanel: t,
       isRenaming: s,
-      onEnterPressed: () => a(sw()),
+      onEnterPressed: () => a(hideStylePreview()),
       selectedStyleProperties: o,
       styleDescription: g,
       styleName: m,
@@ -435,7 +435,7 @@ function eK({
   refMainScrollContainer: a
 }) {
   var d;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useAppModelProperty("isReadOnly");
   let h = useAppModelProperty("topLevelMode");
   let m = useDropdownState();
@@ -447,7 +447,7 @@ function eK({
     fullscreenValue.deselectProperty();
     c(hidePickerThunk());
     c(hideInstanceSwapPicker());
-    c(sw());
+    c(hideStylePreview());
     c(hideStylePicker());
     _ && (y([]), Fullscreen?.setSelectedInteractions([]));
   });
@@ -708,7 +708,7 @@ export function $$e20({
   trackingAlwaysEnabled: p = !1,
   shouldDeferCanvasUpdateOnPanelResize: h
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let g = useIsProgressBarHiddenOrLocked();
   let f = _$$b("guid");
   let _ = isValidSessionLocalID(normalizeValue(f));
@@ -720,7 +720,7 @@ export function $$e20({
   let v = g || j;
   let S = useCallback(() => {
     Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID);
-    m(sw());
+    m(hideStylePreview());
     m(hideVariablePicker());
   }, [m]);
   let T = e === DesignWorkspace.COMMENT;
@@ -742,8 +742,8 @@ export function $$e20({
     rowLeft: r,
     rowTop: n
   }) => {
-    m(sw());
-    m(Zs({
+    m(hideStylePreview());
+    m(showCreateStylePreviewThunk({
       rowLeft: r,
       rowTop: n,
       styleType: e,

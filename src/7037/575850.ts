@@ -35,7 +35,7 @@ export function $$_1(e) {
   });
 }
 export function $$h0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useCallback(n => {
     n.stopPropagation();
     e.user.id && t(selectViewAction({

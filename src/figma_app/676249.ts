@@ -39,7 +39,7 @@ export function $$I0({
   hasQuickActionsStyling: I,
   contentTargetRef: S
 }) {
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let A = useRef(null);
   let x = S || A;
   let N = useDropdownState();

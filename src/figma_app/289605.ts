@@ -27,7 +27,7 @@ import { g as _$$g } from "../905/246147";
 import { gs, ON, KP } from "../figma_app/31103";
 import { useLibraryFileLink } from "../905/217163";
 import { getColorFormat } from "../figma_app/740163";
-import { u as _$$u, G6, Kd, BQ, t8, Xv, hg } from "../figma_app/852050";
+import { getVariableById, getCombinedVariableSetById, getPublishKeyForVariableSet, getResolvedVariableValue, getResolvedVariableValueIfNotMixed, getVariableChainForModes, getVariablesByIds } from "../figma_app/852050";
 import { isVsCodeEnvironment } from "../905/858738";
 import { useDropdownState } from "../905/848862";
 import { getLibraryName } from "../905/506188";
@@ -43,7 +43,7 @@ import { Ig } from "../figma_app/155647";
 import { l6, c$ } from "../905/794875";
 import { ov, r8, lo } from "../905/386270";
 import { yK, Px } from "../figma_app/152690";
-import { Hr, eF } from "../figma_app/394327";
+import { resolvedTypeToString, isLocallySoftDeleted } from "../figma_app/394327";
 import { B3, wG } from "../905/331989";
 import { Us } from "../figma_app/481279";
 import { registerTooltip } from "../905/524523";
@@ -53,9 +53,9 @@ function ee({
   variableId: e,
   isDetailsModal: t
 }) {
-  let r = _$$u(e);
-  let n = G6(r?.variableSetId);
-  let i = Kd(r?.node_id);
+  let r = getVariableById(e);
+  let n = getCombinedVariableSetById(r?.variableSetId);
+  let i = getPublishKeyForVariableSet(r?.node_id);
   let a = n?.modes.find(e => e.id === n?.defaultModeID);
   let s = yK(r?.node_id);
   return {
@@ -86,12 +86,12 @@ export function $$en0({
   entryPoint: o,
   canOpenLibrary: l
 }) {
-  let d = _$$u(e);
+  let d = getVariableById(e);
   let c = isVsCodeEnvironment() ? "vscode" : "dev_mode";
   let u = d?.subscriptionStatus === "LOCAL" && d.isSoftDeleted;
   let p = useMemo(() => ({
     entrypoint: o,
-    variableType: d?.resolvedType !== void 0 ? Hr(d.resolvedType) : void 0,
+    variableType: d?.resolvedType !== void 0 ? resolvedTypeToString(d.resolvedType) : void 0,
     variableOrigin: d?.subscriptionStatus === "LOCAL" ? "local" : "library",
     product: c,
     isDeleted: u,
@@ -117,7 +117,7 @@ function ei({
   inlineCloseButton: s,
   canOpenLibrary: l = !0
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let u = ON();
   let p = ee({
     variableId: e,
@@ -317,7 +317,7 @@ function el({
   modeOptions: r,
   jumpsCollection: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = ON();
   let d = useDropdownState();
   let c = useMemo(() => r.find(t => t.id === e), [e, r]);
@@ -423,7 +423,7 @@ function ep({
   onClose: t,
   canOpenLibrary: r
 }) {
-  let a = _$$u(e);
+  let a = getVariableById(e);
   let c = a?.subscriptionStatus === "LOCAL";
   let _ = a?.subscriptionStatus === "LOCAL" && a.isSoftDeleted;
   let h = a?.subscriptionStatus === "SUBSCRIBED" ? a.library_key : void 0;
@@ -503,11 +503,11 @@ function e_({
   onClose: p,
   canOpenLibrary: f
 }) {
-  let y = _$$u(e.value);
-  let b = BQ(e.value, t);
-  let T = t8(e.value, t);
-  let I = G6(y?.variableSetId);
-  let S = Kd(y?.node_id);
+  let y = getVariableById(e.value);
+  let b = getResolvedVariableValue(e.value, t);
+  let T = getResolvedVariableValueIfNotMixed(e.value, t);
+  let I = getCombinedVariableSetById(y?.variableSetId);
+  let S = getPublishKeyForVariableSet(y?.node_id);
   let A = Cj(y?.name);
   let x = ON();
   let N = useCallback(() => {
@@ -546,7 +546,7 @@ function e_({
         thumbnailValue: T,
         text: y?.name ?? getI18nString("variables.missing_name"),
         onClick: N,
-        isDeleted: y ? eF(y) : void 0,
+        isDeleted: y ? isLocallySoftDeleted(y) : void 0,
         fullWidth: !0,
         containerClassName: g7
       }), c && jsx("div", {
@@ -665,9 +665,9 @@ function em({
 }
 function eg(e, t, r) {
   let n = ec(t, r);
-  let a = _$$u(e);
-  let s = Xv(e, n);
-  let o = hg((s ?? []).map(e => e.type === VariableDataType.ALIAS ? e.value : void 0));
+  let a = getVariableById(e);
+  let s = getVariableChainForModes(e, n);
+  let o = getVariablesByIds((s ?? []).map(e => e.type === VariableDataType.ALIAS ? e.value : void 0));
   let l = a?.variableSetId;
   return useMemo(() => o.some((e, t) => !!e && t > 0 && e?.variableSetId !== l), [o, l]);
 }
@@ -682,8 +682,8 @@ function ef({
   let [l, d] = useState(!1);
   let c = a || l;
   let u = ec(t, r);
-  let p = _$$u(e);
-  let _ = Xv(e, u);
+  let p = getVariableById(e);
+  let _ = getVariableChainForModes(e, u);
   let h = ON();
   let m = useCallback(() => {
     h("toggle_alias_chain", {
@@ -738,7 +738,7 @@ function ef({
 function eE({
   variableId: e
 }) {
-  let t = _$$u(e);
+  let t = getVariableById(e);
   let r = ON();
   let i = getI18nString("dev_handoff.variables.details_scope");
   let a = _$$X2(i);

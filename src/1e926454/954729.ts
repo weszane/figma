@@ -17,7 +17,7 @@ import { props } from "@stylexjs/stylex";
 import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { ViewAccessTypeEnum } from "../905/513035";
-import { F5, Z as _$$Z } from "../figma_app/761870";
+import { isAutocompleteValid, getAllAutocompleteEmails } from "../figma_app/761870";
 import { e as _$$e2 } from "../905/393279";
 import { _u, rG } from "../1881/125927";
 import { LabelPrimitive } from "../905/865071";
@@ -353,7 +353,7 @@ function er({
   licenseGroupId: t,
   workspaceId: r
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = useSelector(e => e.autocomplete);
   let [d, c] = useState(ViewAccessTypeEnum.VIEW);
   let {
@@ -414,7 +414,7 @@ function er({
           children: getI18nString("general.cancel")
         }), jsx(WithTrackedButton, {
           onClick: () => submit(l),
-          disabled: isSubmitting || !F5(l, onValidateToken),
+          disabled: isSubmitting || !isAutocompleteValid(l, onValidateToken),
           children: getI18nString("plan_invite_modal.send_invite")
         })]
       })
@@ -427,7 +427,7 @@ function eb({
   prepopulatedEmail: t,
   onClose: s
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let p = selectUser();
   let u = useSelector(e => e.autocomplete);
   let m = useSelector(e => e.contacts);
@@ -480,7 +480,7 @@ function eb({
     prepopulatedEmail: t,
     parentOrg: null
   });
-  let $ = useMemo(() => _$$Z(u), [u]);
+  let $ = useMemo(() => getAllAutocompleteEmails(u), [u]);
   let G = TG(I);
   let z = useMemo(() => "loaded" !== G.status ? [] : $.filter(e => !!G.data?.[e]?.team_user?.active_seat_type), [G, $]);
   let J = useMemo(() => {
@@ -615,7 +615,7 @@ function eb({
           ...O.inviteByEmail,
           children: jsx(WithTrackedButton, {
             onClick: K,
-            disabled: !F5(u, validateToken),
+            disabled: !isAutocompleteValid(u, validateToken),
             children: getI18nString("plan_invite_modal.send_invite")
           })
         }), jsx(Tabs.TabPanel, {

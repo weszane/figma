@@ -1,6 +1,6 @@
-export let $$n0 = {
+export let baseErrorSeverity = {
   OK: "ok",
   WARN: "warn",
   ERROR: "error"
-};
-export const d = $$n0;
+} as const
+export const d = baseErrorSeverity;

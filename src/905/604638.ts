@@ -93,7 +93,7 @@ export function $$x0({
   children: t,
   containerRef: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = selectWithShallowEqual(e => ({
     tooltip: e.tooltip,
     dropdownShown: e.dropdownShown,

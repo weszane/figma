@@ -32,7 +32,7 @@ let w = registerModal(function ({
 }) {
   let s;
   let o;
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = () => {
     _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.NONE);
     d(popModalStack());
@@ -223,7 +223,7 @@ export function $$O3(e) {
   let p = u && o.plugin?.plugin_id === t;
   let h = Xr(Lx);
   let m = P();
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   return {
     isPluginSetToAutoRun: p,
     callback: useCallback(() => {

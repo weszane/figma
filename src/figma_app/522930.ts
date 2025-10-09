@@ -48,7 +48,7 @@ export function $$y1({
   applyNarrowStyling: t
 }) {
   let r = selectUserFlag("dismissed_team_template_announcement_card");
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = tS();
   let d = useCallback(() => {
     o(postUserFlag({

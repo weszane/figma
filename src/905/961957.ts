@@ -13,7 +13,7 @@ import { sx } from "../figma_app/957070";
 import { yl, DD, jE, v0, Lu, pL } from "../figma_app/639088";
 import { A } from "../4711/667326";
 export let $$_0 = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   useEffect(() => {
     e(postUserFlag({
       completed_font_installer_modal: !0

@@ -4,7 +4,7 @@ import { StateHierarchy } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { hideDropdownAction } from "../905/929976";
 import { hidePickerThunk, showPickerThunk, hideStylePicker } from "../figma_app/91703";
-import { sw } from "../figma_app/914957";
+import { hideStylePreview } from "../figma_app/914957";
 import { DEFAULT_PICKER_WIDTH, calculatePickerPositionLeft } from "../905/959568";
 import { ADD_COMPONENT_PROP_DROPDOWN } from "../figma_app/164212";
 import { selectNodeFromCombinedId, generateDescription } from "../figma_app/505098";
@@ -64,7 +64,7 @@ export function $$b6() {
   });
 }
 export function $$T5(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     dropdownShown,
     pickerShown
@@ -78,7 +78,7 @@ export function $$T5(e) {
   }, [d, s, t, c]);
 }
 export function $$I2(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback((r, n, i = DEFAULT_PICKER_WIDTH) => {
     if (!e || !e.current) return;
     let a = e.current;
@@ -88,7 +88,7 @@ export function $$I2(e) {
       initialX: s.x,
       initialY: s.y
     }));
-    t(sw());
+    t(hideStylePreview());
     t(hideStylePicker());
   }, [t, e]);
 }

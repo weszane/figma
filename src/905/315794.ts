@@ -18,7 +18,7 @@ var o = s;
 let b = "org_team_action--showBlueBorder--W-9zt";
 export function $$v0(e) {
   let [t, i] = useState(!1);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let u = useSelector(e => e.teamRoleRequests);
   let p = useSelector(e => e.currentUserOrgId);
   let m = useSelector(e => getPermissionsState(e));

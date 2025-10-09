@@ -37,7 +37,7 @@ export function $$M0({
   context: r,
 }) {
   let j
-  let S = useDispatch()
+  let S = useDispatch<AppDispatch>()
   let R = getUserId()
   let M = useCurrentPrivilegedPlan("PluginTryButton").unwrapOr(null)
   let B = M?.widgetsWhitelistEnforced || null

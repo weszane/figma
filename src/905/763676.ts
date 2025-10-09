@@ -88,7 +88,7 @@ function ec({
   id: s,
   isDisabled: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useSelector(e => e.dropdownShown);
   let c = selectCurrentFile();
   let u = usePublishedLibraries({
@@ -465,7 +465,7 @@ export function $$ef0({
   selectedLibraryKey: e,
   onBackClick: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let [d, C] = useState(!0);
   useSingleEffect(() => {
     _$$J2(() => {

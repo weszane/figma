@@ -230,7 +230,7 @@ function D(e) {
   });
 }
 let M = forwardRef(function (e, t) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let [s, l] = useState(!1);
   let d = useRef(null);
   let {

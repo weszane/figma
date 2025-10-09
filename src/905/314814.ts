@@ -87,7 +87,7 @@ function z(e) {
   });
 }
 function H(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager(e);
   let d = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: ServiceCategories.SCALE

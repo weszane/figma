@@ -88,7 +88,7 @@ let ed = atom(!1);
 function ec(e) {
   let [t, r] = useState([]);
   let [o, l] = useState(new Map());
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   useEffect(() => {
     (async () => {
       try {
@@ -153,7 +153,7 @@ function eu({
   let x = useSelector(e => e.multiplayer.allUsers.length);
   let N = useSelector(e => e.user?.id);
   let R = getSelectedView();
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let {
     windowInnerHeight
   } = useWindowDimensions();
@@ -414,7 +414,7 @@ function ep(e) {
   let t = e.recordingKey;
   let r = e.isPerformanceIssue ?? !1;
   let s = useDropdownState();
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = getFileTypePx();
   let {
     windowInnerHeight
@@ -809,7 +809,7 @@ function e_(e) {
   });
 }
 function eh(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useHandleMouseEvent(generateRecordingKey(e.recordingKey, 'asana-link'), 'click', () => {});
   return jsxs('div', {
     className: yl,

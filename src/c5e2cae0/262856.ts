@@ -17,7 +17,7 @@ import { HeaderModal } from "../905/519092";
 import { v0, hF, pL } from "../905/289198";
 var n = l;
 let j = memo(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     displayName,
     legalName

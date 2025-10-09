@@ -223,7 +223,7 @@ function H({
         return i?.fileMerges.find(t => t.userId === e && !K(t));
     }
   }(i, o.state, o.mergeFile);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let m = useContext(ss);
   let [f, _] = useState(!0);
   useEffect(() => {
@@ -333,7 +333,7 @@ export function $$X0(e) {
   let f = useSelector(e => e.openFileMerge);
   let g = useSelector(e => e.mirror.appModel.topLevelMode);
   let _ = useSelector(e => e.modalShown);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let y = useCurrentFile();
   let b = y?.ownerRole?.userId === t?.id;
   let v = i?.project?.activeProjectResourceConnections?.[0];

@@ -16,7 +16,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$h0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useTeamPlanUser();
   let h = useIsAdminUser(a).unwrapOr(!1);
   let x = jsxs(Link, {

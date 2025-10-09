@@ -11,7 +11,7 @@ import { HeaderModal } from "../905/519092";
 import { Dy, v0, hF, pL } from "../905/289198";
 var o = n;
 let f = memo(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     teamId,
     billingEndDate

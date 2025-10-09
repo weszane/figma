@@ -63,7 +63,7 @@ export function $$O0({
   selectedSecondaryTab: t,
   rightActions: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = useCurrentPublicPlan("OrgAdminSettingsSecondaryTabs").unwrapOr(null);
   let m = l?.tier === FPlanNameType.ENTERPRISE;
   let h = _$$b(l?.tier);

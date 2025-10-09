@@ -10,7 +10,7 @@ import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { JZ } from "../figma_app/696043";
-import { af } from "../figma_app/559491";
+import { getResourceVersionsThunk } from "../figma_app/559491";
 import { showModalHandler, popModalStack } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { useLocalPluginsExcludingWidgets, useUserPublishedWidgets } from "../figma_app/844435";
@@ -41,7 +41,7 @@ export function $$G2(e) {
   let r = e.id;
   let l = useSelector(e => e.publishedWidgets[r]);
   let m = isResourcePaymentFailed(l);
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   let j = Object.values(useLocalPluginsExcludingWidgets()).find(t => t.plugin_id === e.id);
   let G = !!useUserPublishedWidgets().find(t => t.id === e.id) && !j;
   let z = useSelector(e => e.dropdownShown?.data?.targetRect);
@@ -52,13 +52,13 @@ export function $$G2(e) {
   let X = Kx();
   let q = X?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os;
   useEffect(() => {
-    l || w(af({
+    l || w(getResourceVersionsThunk({
       id: r,
       resourceType: HubTypeEnum.WIDGET
     }));
   }, [r, w, l]);
   let J = _$$b();
-  if (useIsLoading(af.loadingKeyForPayload({
+  if (useIsLoading(getResourceVersionsThunk.loadingKeyForPayload({
     id: r,
     resourceType: HubTypeEnum.WIDGET
   })) && !l) return jsx(_$$L, {});

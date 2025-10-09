@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { AppStateTsApi } from "../figma_app/763686";
 import { useSubscription } from "../figma_app/288654";
 import { getI18nString } from "../905/303541";
-import { rH } from "../figma_app/49598";
+import { getHubFileMetadataThunk } from "../figma_app/49598";
 import { showModalHandler } from "../905/156213";
 import { DM } from "../905/889062";
 import { getValidAuthorsForHubFile } from "../figma_app/599979";
@@ -106,7 +106,7 @@ export function $$R5(e) {
 export function $$N0({
   figFileKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     data
   } = liveStoreInstance.useFile(e);
@@ -135,7 +135,7 @@ export function $$N0({
             return !1;
           }
       }
-      await t(rH({
+      await t(getHubFileMetadataThunk({
         fileKey: s.key
       }));
       l(!1);

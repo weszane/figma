@@ -30,7 +30,7 @@ var u = c;
 export function $$P0({
   hideSearchPreview: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = getSelectedView();
   let [c, P] = useState(!1);
   let O = useRef(null);

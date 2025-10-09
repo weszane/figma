@@ -151,7 +151,7 @@ function B(e) {
   });
 }
 export function $$V0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = `branch-row-${e.branch.key}`;
   let m = useSelector(e => e.dropdownShown?.type === i);
   let h = useSelector(e => !!e.dropdownShown?.data?.contextClick);

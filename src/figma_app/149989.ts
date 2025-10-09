@@ -19,7 +19,7 @@ import { getI18nString } from "../905/303541";
 import { Fl } from "../figma_app/236178";
 import { NX, k9 } from "../figma_app/777207";
 import { useHasResourcePresetKey } from "../figma_app/255679";
-import { kf, u5, Rb, yp, pN } from "../figma_app/852050";
+import { getLibraryVariableProperties, getLibraryVariableSets, getSortedLocalVariables, getSortedLocalVariableSets, getSubscribedVariablesResource } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { useCurrentTool } from "../figma_app/722362";
 import { useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
@@ -167,8 +167,8 @@ function ee({
   renderSetControls: g
 }) {
   let f = t.fileKey;
-  let E = kf(f);
-  let y = u5(f);
+  let E = getLibraryVariableProperties(f);
+  let y = getLibraryVariableSets(f);
   let b = "loading" === y.status || "loading" === E.status;
   let T = E.data ?? [];
   let I = y.data ?? [];
@@ -260,8 +260,8 @@ export function $$er2({
   searchInputRef: E,
   renderSetControls: y
 }) {
-  let b = Rb();
-  let T = yp();
+  let b = getSortedLocalVariables();
+  let T = getSortedLocalVariableSets();
   return i === VariableResolvedDataType.COLOR && "color-picker" === a && c ? jsx(ei, {
     styleType: StyleType.FILL,
     render: o => jsx($$el3, {
@@ -352,9 +352,9 @@ function en({
   searchInputRef: b,
   renderSetControls: T
 }) {
-  let I = Rb();
-  let S = yp();
-  let v = pN();
+  let I = getSortedLocalVariables();
+  let S = getSortedLocalVariableSets();
+  let v = getSubscribedVariablesResource();
   let x = "loaded" !== v.status;
   let N = v.data?.libraryVariables;
   let C = v.data?.libraryVariableSets;

@@ -8,7 +8,7 @@ export function $$d0() {
   let e = !!kD();
   let t = J3();
   let i = selectCurrentFile();
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   return {
     openCooperPublishFlow: async n => {
       if (i) {

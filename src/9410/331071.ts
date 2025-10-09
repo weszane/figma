@@ -322,7 +322,7 @@ import { BY as _$$BY, nF as _$$nF, rO as _$$rO, jR, k5, Mz, uP } from '../figma_
 import { useIsUserGuestInOrg, useHasUserPermissionInOrg, useParentOrgOfOpenFile } from '../figma_app/543529';
 import { c as _$$c, lc as _$$lc, G4, Hl, T1, UF } from '../figma_app/545293';
 import { S as _$$S3 } from '../figma_app/552746';
-import { Qi } from '../figma_app/559491';
+import { mergePublishedPluginThunk } from '../figma_app/559491';
 import { B as _$$B3, t as _$$t2 } from '../figma_app/560453';
 import { isAcceptedPublisher } from '../figma_app/564095';
 import { setupResourceAtomHandler } from '../figma_app/566371';
@@ -1084,7 +1084,7 @@ function t2({
 let t3 = registerModal(({
   messages: e
 }) => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(DraggableModalManager, {
     onClose: () => {
       t(hideModalHandler());
@@ -1116,7 +1116,7 @@ let t3 = registerModal(({
 function t5() {
   let [e, t] = useState('');
   let [i, r] = useAtomValueAndSetter(ta);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useSelector(e => e.modalShown);
   _$$b();
   let d = useCallback(() => {
@@ -2072,7 +2072,7 @@ function n7({
   onChangeColor: i,
   onHide: r
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useDropdownState();
   let c = useRef(document.getElementById(t || 'fullscreen-root'));
   kz(KeyCodes.ESCAPE, r);
@@ -2841,7 +2841,7 @@ function af(e) {
     A.current = r;
   }, [r]);
   let [L, R] = useState(Date.now());
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let P = useRef(I);
   useEffect(() => {
     I !== P.current && f && (I ? Vm(f.guid, jsx(nh, {})) : ks(f.guid), P.current = I);
@@ -5443,7 +5443,7 @@ function sw({
   } = setupPromptHistory(sb, e => e);
   let K = WX(selectedKit);
   let [H, z] = useState(!1);
-  let V = useDispatch();
+  let V = useDispatch<AppDispatch>();
   let W = WX(selectedKit);
   let Y = qi({
     enabled: W
@@ -6773,7 +6773,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(() => {
-        let e = useDispatch();
+        let e = useDispatch<AppDispatch>();
         let {
           close
         } = useNavigationStack();
@@ -7728,7 +7728,7 @@ function ov() {
       };
     }, [e, t]);
   }();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = useParentOrgOfOpenFile();
   let l = useAtomWithSubscription(openFileTeamAtom);
   let d = getI18nString('qa.no_ai.title');
@@ -7872,7 +7872,7 @@ function oF({
   } = fJ();
   let d = getActionOrName(e);
   let c = useSelector(e => e.mirror.appModel);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let {
     close
   } = useNavigationStack();
@@ -8995,7 +8995,7 @@ function lx(e) {
   return hasLocalFileId(e) ? t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
 }
 function ly(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = lx(e);
   return useCallback(r => {
     if (i) {
@@ -9225,7 +9225,7 @@ function lj({
   let {
     extension
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [o, l] = useState(!1);
   let d = lx(extension);
   let c = _$$Pt2(extension.error?.type, extension);
@@ -9342,7 +9342,7 @@ function lI({
     canRun,
     canRequest
   } = e;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let [d, c] = useState(!1);
   let u = lx(extension);
   let {
@@ -9407,7 +9407,7 @@ function lI({
   });
 }
 function lk(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = isEditorTypeSupported();
   return hasDesktopAPI() && [PluginSourceType.DEVELOPMENT, PluginSourceType.ALL].includes(e) ? [{
     itemKey: 'newPlugin',
@@ -9856,7 +9856,7 @@ function ds({
       loaded: _loaded,
       extensions: _extensions
     } = function () {
-      let e = useDispatch();
+      let e = useDispatch<AppDispatch>();
       let t = getCurrentFileType();
       let [i, r] = useState([]);
       let [n, o] = useState(!1);
@@ -9904,7 +9904,7 @@ function ds({
         d();
       }, [d]);
       useEffect(() => {
-        e(Qi({
+        e(mergePublishedPluginThunk({
           publishedPlugins: i,
           src: 'Quick Actions V2 suggested extensions'
         }));
@@ -10094,7 +10094,7 @@ function dv({
   let p = u.trim();
   let h = useAtomWithSubscription(Rt);
   let m = useSelector(getSelectedItemTypes);
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let {
     loading,
     publicExtensions,
@@ -10214,7 +10214,7 @@ function dv({
   }(p, t);
   useEffect(() => {
     let e = [...publicExtensions, ...privateExtensions];
-    e.length !== 0 && f(Qi({
+    e.length !== 0 && f(mergePublishedPluginThunk({
       publishedPlugins: e,
       src: 'Quick actions'
     }));
@@ -10412,7 +10412,7 @@ function dI() {
     loaded,
     extensions
   } = useAtomWithSubscription(P_);
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   useEffect(() => g(_$$aq()), [g]);
   let _ = selectCurrentFile();
   let x = !!(defaultViewTabsAvailable && _?.canEdit);
@@ -10904,7 +10904,7 @@ let dU = {
   }
 };
 export function $$dG0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = _$$I();
   let r = PE();
   return (useEffect(() => {

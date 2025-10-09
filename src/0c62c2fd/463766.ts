@@ -21,7 +21,7 @@ import { l as _$$l } from "../4452/447644";
 import { nF, lF } from "../4452/710166";
 if (443 == require.j) {}
 export function $$T0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useTeamPlanFeatures();
   let r = useTeamPlanUser();
   let T = RR();

@@ -28,7 +28,7 @@ export function $$E2({
 let y = .5 * Vn;
 let b = .3 * Vn;
 export function $$T1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useMemo(() => e.rows.map(e => createRef()), [e.rows]);
   let s = r[e.activeRowIndex];
   let [o, d] = useState();

@@ -46,7 +46,7 @@ let E = {
 };
 let j = "html-to-design-processing";
 let N = () => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useRef(null);
   let n = useCallback(n => {
     t.current = window.setTimeout(() => {

@@ -12,7 +12,7 @@ import { Bi, ee } from "../figma_app/248118";
 import { isEditorTypeSupportedFor, comparePluginsByName } from "../figma_app/844435";
 import { s7 } from "../905/551193";
 import { checkResourceEligibilityDebug } from "../figma_app/86989";
-import { x as _$$x } from "../905/239551";
+import { widgetManagerHandler } from "../905/239551";
 import { isValidWidgetType } from "../figma_app/364284";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -284,7 +284,7 @@ export function $$M1({
     },
     flags: ["edit"],
     callback: () => {
-      _$$x.mountWidget(pluginID, widgetID, "menu re-render");
+      widgetManagerHandler.mountWidget(pluginID, widgetID, "menu re-render");
       trackFullScreenAnalytics("Re-render Widget", {
         pluginId: pluginID,
         widgetId: widgetID
@@ -298,7 +298,7 @@ export function $$M1({
     flags: ["edit"],
     callback: () => {
       let e = getSceneGraphInstance().get(widgetID);
-      e && (clearWidgetSyncedState(e), _$$x.mountWidget(pluginID, widgetID, "menu reset and re-render"), trackFullScreenAnalytics("Reset Widget State", {
+      e && (clearWidgetSyncedState(e), widgetManagerHandler.mountWidget(pluginID, widgetID, "menu reset and re-render"), trackFullScreenAnalytics("Reset Widget State", {
         pluginId: pluginID,
         widgetId: widgetID
       }));

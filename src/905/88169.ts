@@ -22,7 +22,7 @@ export function $$m0({
     setPos: m,
     setSize: h
   }), [m, h]);
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let v = useSelector(e => e.screenreader.lastCreatedCommentId);
   useLayoutEffect(() => {
     v && i === v && (A?.current?.focus(), b(lastCreatedCommentIdAction({

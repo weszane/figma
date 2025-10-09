@@ -25,7 +25,7 @@ export function $$m8(e, t = !0) {
   let [s, d] = useState(!1);
   let [u, p] = useState(!1);
   let [_, h] = useState({});
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   useEffect(() => {
     (async () => {
       if (!r && !s && !u && t) {

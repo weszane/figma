@@ -16,7 +16,7 @@ import { UsedStylesContext } from "../905/336143";
 import { VJ, Kw } from "../905/610995";
 import { mergeAssetMaps, separateItemsByType, buildLibraryLookupMap, sortByName, replaceStyleIfContentHash, upsertAndSwapComponentOrStateGroup } from "../905/131786";
 export function $$b3() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.mirror.sceneGraph);
   let i = useSelector(subscribedSymbolsNodeIdsFromLoadedPagesSelector);
   let a = useSelector(subscribedStateGroupsNodeIdsFromLoadedPagesSelector);
@@ -83,7 +83,7 @@ function x(e) {
 export function $$S0(e) {
   let t = useCurrentFileKey();
   let i = VJ(e);
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = Kw(e);
   let {
     styles,

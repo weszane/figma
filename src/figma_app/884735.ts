@@ -66,7 +66,7 @@ export function $$H0(e) {
       dropdownShown: e.dropdownShown
     };
   });
-  let V = useDispatch();
+  let V = useDispatch<AppDispatch>();
   let H = useCallback(e => {
     containingProductComponentGUID && def && V(showDropdownThunk({
       type: G,
@@ -186,7 +186,7 @@ export function $$z1(e) {
     containingProductComponentGUID,
     propDefId
   } = e;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let c = containingInstanceGUID || containingProductComponentGUID;
   let u = useCallback(() => {
     c && propDefId && (clearSelection(), addToSelection([c]), o(setSelectedTypedPropDefId({

@@ -54,7 +54,7 @@ export async function $$I1(e) {
   await a;
 }
 export let $$S3 = function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   useEffect(() => function (e) {
     b.getRecentPrototypes({
       isGlobal: !0,

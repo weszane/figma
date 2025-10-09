@@ -50,7 +50,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { v4 } from "../figma_app/655139";
 import { getScaledValueWithUnit, getScaledValuesWithUnit } from "../figma_app/120227";
 import { fullscreenValue } from "../figma_app/455680";
-import { u as _$$u, hg } from "../figma_app/852050";
+import { getVariableById, getVariablesByIds } from "../figma_app/852050";
 import { m3, nd as _$$nd } from "../figma_app/826998";
 import { wG } from "../905/331989";
 import { g as _$$g } from "../8826/914688";
@@ -63,7 +63,7 @@ import { getStyleSubscriptionInfo, useOptimisticStyleThumbnailUpdate } from "../
 import { J as _$$J } from "../905/225412";
 import { Ig } from "../figma_app/155647";
 import { zi } from "../905/824449";
-import { f$ } from "../figma_app/836943";
+import { getValidStyleNodeId } from "../figma_app/836943";
 import { GN } from "../figma_app/249941";
 import { VariableIdHandler, ManagedStringIdHandler } from "../figma_app/243058";
 import { SU } from "../figma_app/451499";
@@ -218,7 +218,7 @@ function eT({
   isHovered: t,
   variableContainerClassName: n
 }) {
-  let i = _$$u(e?.variableId);
+  let i = getVariableById(e?.variableId);
   if ("mixed" === e.format) {
     let i = e.value.some(e => !!e.variableId);
     return jsx("div", {
@@ -277,7 +277,7 @@ function ez({
   nodeFields: e,
   isPreview: t = !1
 }) {
-  let n = _$$u(e?.itemSpacingVariableId);
+  let n = getVariableById(e?.itemSpacingVariableId);
   return t ? jsx(eF, {
     nodeFields: e,
     variable: n,
@@ -342,10 +342,10 @@ function eH({
   nodeFields: e,
   isPreview: t = !1
 }) {
-  let n = _$$u(e.paddingTopVariableId);
-  let i = _$$u(e.paddingRightVariableId);
-  let o = _$$u(e.paddingBottomVariableId);
-  let l = _$$u(e.paddingLeftVariableId);
+  let n = getVariableById(e.paddingTopVariableId);
+  let i = getVariableById(e.paddingRightVariableId);
+  let o = getVariableById(e.paddingBottomVariableId);
+  let l = getVariableById(e.paddingLeftVariableId);
   let {
     stackTopPadding,
     stackRightPadding,
@@ -499,7 +499,7 @@ function eK({
   variableAlias: t,
   isPreview: n
 }) {
-  let i = _$$u(t?.id);
+  let i = getVariableById(t?.id);
   return i && n ? jsx(Fragment, {
     children: i.name
   }) : jsx(eT, {
@@ -511,7 +511,7 @@ function eK({
 }
 function eZ(e, t) {
   let n = useSelector(e => e.library);
-  let a = f$(e);
+  let a = getValidStyleNodeId(e);
   let i = mJ(a);
   if (!e || !a || !i) return null;
   let o = getStyleSubscriptionInfo(e.key, [a], n);
@@ -575,7 +575,7 @@ function e1({
 }) {
   let i = n?.[0];
   let o = Ig();
-  let l = _$$u(i?.id);
+  let l = getVariableById(i?.id);
   let s = eZ(t, "FILL");
   return 0 === e.length ? null : s ? jsx(Fragment, {
     children: s.name
@@ -599,7 +599,7 @@ function e5({
   variableAlias: t
 }) {
   let n = Ig();
-  let i = _$$u(t?.id);
+  let i = getVariableById(t?.id);
   let o = e0(e, i, n);
   return o ? jsxs("div", {
     className: ej,
@@ -627,7 +627,7 @@ function e3({
   let i = eZ(e, t);
   return (!function (e) {
     let t = useSelector(e => e.library);
-    let n = f$(e);
+    let n = getValidStyleNodeId(e);
     let a = n ? getStyleSubscriptionInfo(e.key, [n], t) : void 0;
     useOptimisticStyleThumbnailUpdate(a);
   }(e), i) ? jsxs("div", {
@@ -759,7 +759,7 @@ function tl({
     }
     return null;
   });
-  let l = hg(o);
+  let l = getVariablesByIds(o);
   switch (e.type) {
     case "DROP_SHADOW":
     case "INNER_SHADOW":
@@ -821,7 +821,7 @@ function tl({
 function ts({
   styleRef: e
 }) {
-  let t = f$(e);
+  let t = getValidStyleNodeId(e);
   let n = mJ(t);
   return t && n ? jsx("div", {
     children: n.name
@@ -861,7 +861,7 @@ function th({
   variableAlias: t,
   isPreview: n
 }) {
-  let i = _$$u(t?.id);
+  let i = getVariableById(t?.id);
   let o = v4();
   let l = "mixed" !== e && "PIXELS" === e.units ? e.value : void 0;
   let s = getScaledValueWithUnit(o, l, tp, {
@@ -892,7 +892,7 @@ function tf({
   variableAlias: t,
   isPreview: n
 }) {
-  let i = _$$u(t?.id);
+  let i = getVariableById(t?.id);
   return "mixed" === e ? renderI18nText("fullscreen.mixed") : i && n ? jsx(Fragment, {
     children: i.name
   }) : jsx(eT, {
@@ -908,7 +908,7 @@ function tg({
   variableAlias: t,
   isPreview: n
 }) {
-  let i = _$$u(t?.id);
+  let i = getVariableById(t?.id);
   return "mixed" === e ? renderI18nText("fullscreen.mixed") : (i && i.resolvedType !== VariableResolvedDataType.FLOAT && (i = null), i && n) ? jsx(Fragment, {
     children: i.name
   }) : jsx(eT, {
@@ -1739,7 +1739,7 @@ function tI({
   nodeFields: e,
   isPreview: t = !1
 }) {
-  let n = _$$u(e.opacityVariable);
+  let n = getVariableById(e.opacityVariable);
   return n && t ? jsx(Fragment, {
     children: n.name
   }) : jsx(eT, {
@@ -1755,10 +1755,10 @@ function tE({
   nodeFields: e,
   isPreview: t = !1
 }) {
-  let n = _$$u(e.topLeftRadiusVariable);
-  let i = _$$u(e.topRightRadiusVariable);
-  let o = _$$u(e.bottomRightRadiusVariable);
-  let l = _$$u(e.bottomLeftRadiusVariable);
+  let n = getVariableById(e.topLeftRadiusVariable);
+  let i = getVariableById(e.topRightRadiusVariable);
+  let o = getVariableById(e.bottomRightRadiusVariable);
+  let l = getVariableById(e.bottomLeftRadiusVariable);
   return jsx(eV, {
     rawValues: [e.rectangleTopLeftCornerRadius, e.rectangleTopRightCornerRadius, e.rectangleBottomRightCornerRadius, e.rectangleBottomLeftCornerRadius],
     variables: [n, i, o, l],
@@ -1781,7 +1781,7 @@ function tT({
   nodeFields: e,
   isPreview: t
 }) {
-  let n = _$$u(e.strokeWeightVariable);
+  let n = getVariableById(e.strokeWeightVariable);
   return n && t ? jsx(Fragment, {
     children: n.name
   }) : jsx(eT, {
@@ -1797,10 +1797,10 @@ function tS({
   nodeFields: e,
   isPreview: t
 }) {
-  let n = _$$u(e.strokeTopWeightVariable);
-  let i = _$$u(e.strokeRightWeightVariable);
-  let o = _$$u(e.strokeBottomWeightVariable);
-  let l = _$$u(e.strokeLeftWeightVariable);
+  let n = getVariableById(e.strokeTopWeightVariable);
+  let i = getVariableById(e.strokeRightWeightVariable);
+  let o = getVariableById(e.strokeBottomWeightVariable);
+  let l = getVariableById(e.strokeLeftWeightVariable);
   return e ? jsx(eV, {
     rawValues: [e.borderTopWeight, e.borderRightWeight, e.borderBottomWeight, e.borderLeftWeight],
     variables: [n, i, o, l],
@@ -1820,7 +1820,7 @@ function tL({
   isPreview: n,
   isTextProperty: i = !1
 }) {
-  let o = _$$u(t?.id);
+  let o = getVariableById(t?.id);
   let l = v4();
   let s = getScaledValueWithUnit(l, "number" == typeof e ? e : void 0, tP, {
     isTextProperty: i
@@ -1841,7 +1841,7 @@ function tR({
   isPreview: n,
   isTextProperty: i = !1
 }) {
-  let o = _$$u(t?.id);
+  let o = getVariableById(t?.id);
   let l = v4();
   let s = getScaledValueWithUnit(l, "mixed" === e ? void 0 : e.value, tP, {
     isTextProperty: i
@@ -1867,7 +1867,7 @@ function tR({
 function tD({
   styleRef: e
 }) {
-  let t = f$(e);
+  let t = getValidStyleNodeId(e);
   let n = mJ(t);
   return n ? jsx(Fragment, {
     children: n.name
@@ -1902,7 +1902,7 @@ function tB(e) {
     parentRect
   } = e;
   let s = selectCurrentFile();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let c = tO();
   let u = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
   let h = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
@@ -2657,7 +2657,7 @@ function nX({
   nodeId: n,
   stringKey: i
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let s = trackDefinedFileEventWithStore();
   let r = e => {
     e && (clearSelection(), _$$S3("annotations"), addToSelection([e]), getSelectedDevModePropertiesPanelTab()?.getCopy() !== IAssertResource.STRING_MANAGEMENT && setSelectedDevModePropertiesPanelTab(IAssertResource.STRING_MANAGEMENT));
@@ -3014,7 +3014,7 @@ function n5({
   setInputCategoryId: f,
   annotationIndex: x
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -3627,7 +3627,7 @@ let aa = memo(function ({
   let T = s9();
   let L = E_();
   let R = !!useDevModeFocusId();
-  let D = useDispatch();
+  let D = useDispatch<AppDispatch>();
   let M = (e, t) => {
     e && (clearSelection(), _$$S3("annotations"), t ? (HandoffBindingsCpp.setEnableZoomToSelection(!1), addToSelection([e]), HandoffBindingsCpp.setEnableZoomToSelection(!0)) : addToSelection([e]));
   };
@@ -3938,7 +3938,7 @@ z-index: 100;
   });
 }
 function aj() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = uQ();
   let n = useSelector(e => e.isFullscreenDocumentLoaded);
   let c = useCurrentTool();

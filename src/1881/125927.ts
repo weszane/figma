@@ -7,7 +7,7 @@ import { useSubscription } from "../figma_app/288654";
 import { SecureLink } from "../figma_app/637027";
 import { ListFormatter } from "../figma_app/257703";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { cL } from "../905/748726";
+import { autocompleteReset } from "../905/748726";
 import { showModalHandler, popModalStack } from "../905/156213";
 import { createOrgInvitesThunk } from "../figma_app/996356";
 import { TrackingProvider } from "../figma_app/831799";
@@ -16,9 +16,9 @@ import { useCurrentUserOrg } from "../905/845253";
 import { FPlanFeatureType } from "../figma_app/191312";
 import { OrgInviteModalView } from "../figma_app/43951";
 import { checkDomainExists } from "../figma_app/336853";
-import { d as _$$d } from "../905/44199";
+import { baseErrorSeverity } from "../905/44199";
 import { ApprovalStatusEnum } from "../figma_app/736948";
-import { um } from "../figma_app/761870";
+import { getAllAutocompleteStrings } from "../figma_app/761870";
 import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 import { HeaderModal } from "../905/519092";
@@ -37,7 +37,7 @@ export function $$U3({
   configs: o
 }) {
   var l;
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let E = useCurrentUserOrg();
   let T = useSelector(e => e.orgDomains.domains);
   let R = useSelector(({
@@ -66,12 +66,12 @@ export function $$U3({
   }) : null, [R, A, M]);
   let D = n => {
     p(createOrgInvitesThunk({
-      emails: um(n),
+      emails: getAllAutocompleteStrings(n),
       licenseGroupId: e,
       workspaceId: i,
       billableProductKey: t === ViewAccessTypeEnum.VIEW ? null : t
     }));
-    p(cL());
+    p(autocompleteReset());
   };
   l = O.view;
   let G = !E.invite_whitelist_member_allowlist_enabled || "orgAdminSettings" === l;
@@ -111,7 +111,7 @@ export function $$U3({
     isSubmitting: j,
     submit: e => {
       if (T.length >= 1) {
-        let i = um(e).filter(e => isValidEmail(e) && !checkDomainExists(T, e));
+        let i = getAllAutocompleteStrings(e).filter(e => isValidEmail(e) && !checkDomainExists(T, e));
         if ((i = [...new Set(i)]).length > 0) {
           p(showModalHandler({
             type: C,
@@ -131,7 +131,7 @@ export function $$U3({
       let i = isValidEmail(e) && checkDomainExists(T, e) && G;
       let t = isValidEmail(e) && P;
       return {
-        state: i || t ? _$$d.OK : _$$d.ERROR,
+        state: i || t ? baseErrorSeverity.OK : baseErrorSeverity.ERROR,
         content: e
       };
     },
@@ -196,7 +196,7 @@ let $$y1 = registerModal(function ({
   workspaceId: i
 }) {
   let t = useCurrentUserOrg();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let o = useSelector(e => e.selectedView);
   if (!t) return jsx(Fragment, {});
   let l = S(t, o.view);
@@ -207,7 +207,7 @@ let $$y1 = registerModal(function ({
       title: d,
       onClose: () => {
         a(popModalStack());
-        a(cL());
+        a(autocompleteReset());
       },
       children: jsx($$M2, {
         licenseGroupId: e,

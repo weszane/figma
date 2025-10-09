@@ -20,7 +20,7 @@ export function $$f0() {
   let [e, t] = useAtomValueAndSetter(pageLoadAtom);
   let i = Xr(nonceAtom);
   !function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let {
       components,
       stateGroups

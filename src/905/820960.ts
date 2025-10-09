@@ -30,7 +30,7 @@ import { Ys } from "../figma_app/697906";
 import { A as _$$A } from "../5724/240681";
 export function $$O2(e) {
   let t;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let O = useSelector(e => e.currentUserOrgId);
   let D = selectPermissionsState();
   let L = _$$x();

@@ -95,7 +95,7 @@ export function stopPresenting() {
  */
 export function nominatePresenter() {
   const isPrototype = isPrototypeView();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   return useCallback((sessionId: string, state: SpotlightState) => {
     if (isPrototype) {
       performNomination(sessionId, state, getViewerInstance(), dispatch);
@@ -111,7 +111,7 @@ export function nominatePresenter() {
  */
 export function cancelNomination() {
   const isPrototype = isPrototypeView();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   return useCallback((sessionId: string, state: SpotlightState) => {
     if (isPrototype) {
       performCancelNomination(sessionId, state, getViewerInstance(), dispatch);
@@ -127,7 +127,7 @@ export function cancelNomination() {
  */
 export function stopFollowing() {
   const isPrototype = isPrototypeView();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   return useCallback((state: SpotlightState) => {
     if (isPrototype) {
       performStopFollowing(state, getViewerInstance());

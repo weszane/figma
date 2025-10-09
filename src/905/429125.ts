@@ -47,7 +47,7 @@ export function $$I0({
       defReferencedBySelection: E(e, t)
     };
   });
-  let T = useDispatch();
+  let T = useDispatch<AppDispatch>();
   let k = useDropdownState();
   let R = $$v1.concat('-', t);
   let N = k && k.type === R && k.data.nodeField === t;

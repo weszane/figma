@@ -24,7 +24,7 @@ import { CurrencyFormatter } from "../figma_app/514043";
 import { registerModal } from "../905/102752";
 import { HeaderModal } from "../905/519092";
 function N(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, r] = useState(!1);
   let l = () => {
     t(hideModalHandler());
@@ -99,7 +99,7 @@ function T({
   });
 }
 export let $$A0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = o0(e.invoice);
   let s = new CurrencyFormatter(e.invoice.currency);
   let _ = isOrgTrueUpOrCatchUp(e.invoice);

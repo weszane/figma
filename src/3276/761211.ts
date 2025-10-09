@@ -24,7 +24,7 @@ export function $$y0(e) {
   let w = "whiteboard" === getCurrentFileType();
   let j = F5();
   let k = _$$t(e.resource.plugin_id, y, C);
-  let P = useDispatch();
+  let P = useDispatch<AppDispatch>();
   let I = k.length > 0;
   let T = usePublishedPlugins();
   let M = checkResourceEligibility(T[e.resource.plugin_id]);

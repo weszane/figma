@@ -18,7 +18,7 @@ import { slideOrCooperNewFileUrl } from "../905/548668";
 export function $$b3({
   publishedResourceContent: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = $$S4(e);
   let [o, l] = useState(!1);
   useEffect(() => {
@@ -72,7 +72,7 @@ export function $$E5({
   let f = "primary" === o;
   let A = "banner" === o;
   let b = "borderless" === o;
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let [I, E] = useState(!1);
   let x = new URL(slideOrCooperNewFileUrl(e, t), document.baseURI).href;
   useEffect(() => {

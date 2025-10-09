@@ -131,7 +131,7 @@ export function $$K5(e) {
   });
 }
 export function $$Y3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentUser();
   let n = selectCurrentFile();
   let a = useSelector(e => e.isRenaming);

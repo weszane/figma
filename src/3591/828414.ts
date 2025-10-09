@@ -24,7 +24,7 @@ import { closeUniversalInsertModal } from "../905/116101";
 import { withTrackedClick } from "../figma_app/831799";
 import { useCanRunExtensions, findLocalPluginById } from "../figma_app/844435";
 import { useDropdownState } from "../905/848862";
-import { M as _$$M } from "../figma_app/170366";
+import { getPluginManager } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory, hasOrgRole, getPluginVersion } from "../figma_app/300692";
 import { PluginManager } from "../figma_app/612938";
 import { HubTypeEnum } from "../figma_app/45218";
@@ -79,7 +79,7 @@ function ea(e) {
 }
 export let $$ep3 = "CREATE_PLUGIN_DROPDOWN";
 export function $$ed0(e) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let t = useSelector(e => e.dropdownShown);
   let n = useCanRunExtensions();
   let s = e.resourceType === HubTypeEnum.WIDGET;
@@ -131,7 +131,7 @@ let eu = class e extends PureComponent {
       this.props.onTileClick ? this.props.onTileClick() : this.onRevealLocally();
     };
     this.onRevealLocally = () => {
-      _$$M().openExtensionDirectory(this.props.plugin.localFileId);
+      getPluginManager().openExtensionDirectory(this.props.plugin.localFileId);
     };
     this.showError = () => {
       this.setState({
@@ -336,7 +336,7 @@ function eg(e) {
 ($$n2 || ($$n2 = {})).Tile = function (e) {
   let i = useDropdownState();
   let t = i?.type === lD && i.data.localFileId === e.plugin.localFileId;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let s = useRef(null);
   return jsxs(Fragment, {
     children: [jsx(eg, {
@@ -407,7 +407,7 @@ function eg(e) {
   e.Tile = function (e) {
     let t = useDropdownState();
     let n = t?.type === lD && t.data.pluginId === e.plugin.id && t.data.targetRect;
-    let s = useDispatch();
+    let s = useDispatch<AppDispatch>();
     let l = useRef(null);
     let p = getPluginVersion(e.plugin);
     let d = findLocalPluginById(e.plugin.id);
@@ -490,7 +490,7 @@ withTrackedClick(function ({
   onClick: t
 }) {
   let n = getPluginVersion(e);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return jsxs("a", {
     className: i || m6,
     "data-plugin-id": e.id,

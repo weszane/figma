@@ -80,7 +80,7 @@ function el(e) {
 function ed(e) {
   let t = selectCurrentUser();
   let n = useFullscreenViewFile();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = _$$w();
   let r = () => {
     let t = e.asset.bg ? {
@@ -194,7 +194,7 @@ let eg = [{
   AnnouncementComponent: function ({
     userFlagName: e
   }) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = selectCurrentFile();
     let a = "dark" === getVisibleTheme();
     let {
@@ -249,7 +249,7 @@ let eg = [{
 }, {
   userFlagName: "seen_mobile_proto_announcement",
   AnnouncementComponent: function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return useAtomWithSubscription(NE) ? jsx(ed, {
       asset: {
         type: "image",
@@ -286,7 +286,7 @@ let eg = [{
 }, {
   userFlagName: "seen_mobile_comment_announcement",
   AnnouncementComponent: function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return jsx(ed, {
       asset: {
         type: "image",
@@ -326,7 +326,7 @@ let eg = [{
     userFlagName: e,
     lifecycle: t
   }) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let a = _$$U("announcement");
     let s = "dark" === getVisibleTheme();
     let r = () => {
@@ -435,7 +435,7 @@ let eg = [{
 }, {
   userFlagName: "dev_mode_demo_file_props_panel_upsell_dismissed",
   AnnouncementComponent: function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = getInitialOptions().dev_mode_demo_file_key;
     return t ? jsx(ed, {
       asset: {

@@ -28,7 +28,7 @@ export function $$_5() {
   return Math.min(760, window.innerWidth);
 }
 export function $$A1(e, t) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let [s, o] = useState(() => t && e.includes(t) ? t : e[0]);
   let l = useCallback(t => {
     e.includes(t) && (t !== s && trackEventAnalytics("Library Preferences Modal Tab Changed", {

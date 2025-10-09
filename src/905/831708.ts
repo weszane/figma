@@ -32,7 +32,7 @@ export function $$R0({
 }) {
   let [s, l] = useState("");
   let d = _$$F(s, CreatorResourceType.SPACE);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let g = useAtomWithSubscription(q$);
   let E = useMemo(() => {
     let {

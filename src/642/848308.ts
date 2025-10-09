@@ -21,7 +21,7 @@ function g() {
     }
     return s;
   }, [e, t]);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = useCallback(() => {
     r(showModalHandler({
       type: dD,

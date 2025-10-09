@@ -16,7 +16,7 @@ export function $$h2({
   scalingDropdownFormatter: s,
   ariaLabelledBy: c
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let h = useDropdownState();
   let f = h?.type === e;
   let _ = useCallback(() => {

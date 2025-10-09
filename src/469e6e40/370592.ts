@@ -192,7 +192,7 @@ export function $$M1({
     data,
     toggle
   } = useDropdown("CODEGEN_PLUGIN_SETTINGS_DROPDOWN");
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = useRef(null);
   let _ = e.name === data?.name && showing;
   let u = e.children?.find(e => e.isChecked)?.displayText ?? "";

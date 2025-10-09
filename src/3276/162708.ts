@@ -27,7 +27,7 @@ function I({
   onRequestClose: t,
   alreadyCopied: n
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let x = liveStoreInstance.File.useValue(e).data;
   let y = x?.url || "";
   let C = useSelector(e => !e.user);
@@ -113,7 +113,7 @@ export let $$T0 = registerModal(function ({
   fileKey: e,
   alreadyCopied: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = () => {
     n(hideModal());
   };

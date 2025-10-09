@@ -48,7 +48,7 @@ export function $$v1(e) {
     showPresetActions: !!e.presetInteractions,
     isLayoutNodeSelected
   });
-  let L = useDispatch();
+  let L = useDispatch<AppDispatch>();
   let D = useCallback(e => {
     addButtonPressed(Bs(e));
     hide();

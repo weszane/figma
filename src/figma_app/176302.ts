@@ -124,7 +124,7 @@ export function SendToMakeAttachmentManager({
   attachmentsReady,
   chatError,
 }: SendToMakeAttachmentManagerProps) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const setStatus = useSetAtom(sendToMakeStatusAtom)
   const isWaitingForAttachments = useAtomWithSubscription(isSendToMakeWaitingForAttachmentsAtom)
   const [metadata, setMetadata] = useAtomValueAndSetter(sendToMakeMetadataAtom)
@@ -234,7 +234,7 @@ export function SendToMakeAttachmentManager({
  * Handles file bootstrapping and initial visual bell
  */
 export function SendToMakeInitiator() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const isFullscreenReady = useIsFullscreenReady()
   const currentFileKey = useCurrentFileKey()
   const makeCreationData = useAtomWithSubscription(sendToMakeFromDesignAtom)

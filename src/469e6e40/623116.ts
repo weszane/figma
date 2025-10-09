@@ -116,8 +116,8 @@ import { TeamAvatar, AvatarSize } from "../905/590952";
 import { HAvatarType } from "../905/566881";
 import { F as _$$F2 } from "../7021/270993";
 import { SimpleFuseSearch } from "../905/81982";
-import { d as _$$d } from "../905/44199";
-import { Rs as _$$Rs } from "../figma_app/761870";
+import { baseErrorSeverity } from "../905/44199";
+import { getInitialAutocompleteState } from "../figma_app/761870";
 import { P as _$$P } from "../905/392438";
 import { YEj } from "../figma_app/27776";
 import { A as _$$A4 } from "../svg/619883";
@@ -256,7 +256,7 @@ let eV = registerModal(function ({
   workspaceId: e,
   onSubmit: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = useCurrentUserOrgId();
   let [o, d] = useState({
     columnName: TeamPropertyKey.NAME,
@@ -546,7 +546,7 @@ let eV = registerModal(function ({
   });
 }, "ADD_UNASSIGNED_TEAMS_MODAL");
 function e7(e, t, a, n) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = _$$q(R4, !0);
   let l = _$$q(uU, !0);
   let o = _$$q(gx, !0);
@@ -654,7 +654,7 @@ function ta({
   onViewerLeaveTeam: c
 }) {
   let _;
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let m = useSelector(e => getPermissionsState(e));
   let p = useTeamPlanUser();
   let g = useIsOrgAdminUser(p).unwrapOr(!1);
@@ -881,7 +881,7 @@ function tc({
   onViewerJoinTeam: _,
   onViewerLeaveTeam: u
 }) {
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let p = _$$q(gx, !0);
   let g = _$$q(uU, !0);
   let h = useSelector(e => getPermissionsState(e));
@@ -1128,7 +1128,7 @@ let tN = registerModal(function (e) {
   let {
     workspaceId
   } = e;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = useCurrentUserOrgId();
   let l = useAtomWithSubscription(EK);
   let o = useMemo(() => "loaded" !== l.status ? l : {
@@ -1147,15 +1147,15 @@ let tN = registerModal(function (e) {
     });
     return e;
   }, [_]);
-  let [m, p] = useState(_$$Rs());
+  let [m, p] = useState(getInitialAutocompleteState());
   let [h, x] = useState(!1);
   let b = "loaded" !== o.status || "loaded" !== d.status;
   useEffect(() => {
     b || h || p({
-      ..._$$Rs(),
+      ...getInitialAutocompleteState(),
       tokens: _.filter(e => e.teamId in o.data).map(function (e) {
         return {
-          state: _$$d.OK,
+          state: baseErrorSeverity.OK,
           content: tS(o.data[e.teamId], u.get(e.teamId))
         };
       })
@@ -1198,7 +1198,7 @@ let tN = registerModal(function (e) {
                 n && (t = n);
                 a.push({
                   ...e,
-                  state: n ? _$$d.ERROR : _$$d.OK
+                  state: n ? baseErrorSeverity.ERROR : baseErrorSeverity.OK
                 });
               });
               p({
@@ -1301,7 +1301,7 @@ function tL(e) {
   } = e;
   let [Q, Z] = useState(!1);
   let [et, ea] = useState(null);
-  let en = useDispatch();
+  let en = useDispatch<AppDispatch>();
   let es = _$$q(b4, !0);
   let er = useSelector(({
     selectedView: e
@@ -1894,7 +1894,7 @@ export function $$tP0(e) {
     selectedWorkspaceId,
     onRightActionsChange
   } = e;
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let [v, f] = useState({
     workspaceFilter: selectedWorkspaceId ?? null,
     orgAccessFilter: null,

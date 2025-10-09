@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { cL } from "../905/748726";
+import { autocompleteReset } from "../905/748726";
 import { hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { zK } from "../figma_app/475472";
@@ -21,7 +21,7 @@ import { _9, J4, Kd, Iz, YU } from "../figma_app/907616";
 import { w } from "../905/733703";
 import { DA, Lq, $2, VA, bV, E_ } from "../figma_app/538002";
 export let $$S0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = dr(e.team.id).data;
   let n = a && a.workspace ? {
     id: a.workspace.id,
@@ -30,7 +30,7 @@ export let $$S0 = registerModal(function (e) {
   } : void 0;
   let d = () => {
     t(hideModal());
-    t(cL());
+    t(autocompleteReset());
   };
   let c = useModalManager({
     ...e,
@@ -75,7 +75,7 @@ export let $$S0 = registerModal(function (e) {
 }, "TeamAccessModal");
 export function $$T1(e) {
   let t = getFeatureFlags().sc_workspace_audience;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let i = useCallback(() => {
     let t = e.teamSharingSettings && e.teamSharingSettings.sharingAudienceControl;
     return t === FPermissionLevelType.ORG_EDIT || t === FPermissionLevelType.ORG_VIEW ? _9.ORG : t === FPermissionLevelType.WORKSPACE_EDIT || t === FPermissionLevelType.WORKSPACE_VIEW ? _9.WORKSPACE : _9.INVITE_ONLY;

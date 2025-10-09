@@ -64,7 +64,7 @@ export function $$C2() {
       }, [r]);
     }(),
     exitFigmakeFullscreenView: function () {
-      let e = useDispatch();
+      let e = useDispatch<AppDispatch>();
       let t = getSelectedView();
       let r = useIsSelectedFigmakeFullscreen();
       return useCallback(() => {
@@ -88,7 +88,7 @@ export function $$O5() {
 }
 export function $$R0() {
   let e = getSelectedView();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useIsSelectedFigmakeFullscreen();
   return n => {
     if ("fullscreen" !== e.view || !r) return;

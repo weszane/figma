@@ -252,7 +252,7 @@ import { R as _$$R2 } from '../figma_app/184628';
 import { zC } from '../figma_app/186343';
 import { FFileType, FPlanNameType } from '../figma_app/191312';
 import { N3, QX } from '../figma_app/194671';
-import { pt } from '../figma_app/198840';
+import { isCommunityDuplicate } from '../figma_app/198840';
 import { getCurrentPage } from '../figma_app/202626';
 import { ac as _$$ac, Bx, Lt, wg } from '../figma_app/210234';
 import { fV } from '../figma_app/236178';
@@ -2036,7 +2036,7 @@ function lL() {
   let s = useIsProgressBarHiddenOrLocked();
   let o = d4(e => e.mirror.appModel.currentPage);
   let d = useDeepEqualSceneValue((e, t) => zC(e, t), o);
-  let u = getQueryParam(pt.KEY) === pt.VALUE;
+  let u = getQueryParam(isCommunityDuplicate.KEY) === isCommunityDuplicate.VALUE;
   let c = selectCurrentFile();
   let x = getUserId();
   let p = c?.creatorId === x;

@@ -256,7 +256,7 @@ async function el(e, t) {
   return a;
 }
 function ei() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = GH();
   let a = [{
     label: "Eval kit Examples",
@@ -385,7 +385,7 @@ function ec({
   selectedKitOption: e,
   clientLifecycleId: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let {
     evalSetsQueryStatus,
     evalSets
@@ -945,7 +945,7 @@ async function ex({
 function eS({
   selectedKit: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCurrentFileKey();
   let [s, r] = useState("");
   let [c, d] = useState([]);
@@ -1088,7 +1088,7 @@ function eI({
   selectedKitOption: e,
   clientLifecycleId: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let c = I9();
   let [d, p] = useState(!1);
   let [m, I] = useState("");

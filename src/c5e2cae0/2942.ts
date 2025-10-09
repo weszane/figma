@@ -24,7 +24,7 @@ let $$b2 = D(({
   teamId: e,
   canSeeBillingAddressExp: t
 }) => {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let p = useSelector(e => e.loadingState);
   let x = useSelector(t => e ? t.teamUserByTeamId[e] : null);
   let y = useSelector(e => e.selectedView);
@@ -43,7 +43,7 @@ let $$b2 = D(({
     }));
   }, [a, e]);
   let O = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return useCallback(t => {
       trackEventAnalytics("Loaded Saved Cart State", {
         teamId: t.teamId,

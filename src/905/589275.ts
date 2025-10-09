@@ -80,7 +80,7 @@ function M({
   recordingKey: i,
   unpublished: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let [l, c] = useState(!1);
   let u = useMemo(() => l ? J0(e) : void 0, [e, l]);
   return jsxs(RecordableDiv, {
@@ -125,7 +125,7 @@ function Y(e) {
     hasValues
   } = e;
   let h = useSelector(e => e.instanceSwapPickerShown);
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let _ = useRef(null);
   let A = useCallback(() => _.current ? calculatePickerPositionRight({
     el: _.current
@@ -216,7 +216,7 @@ function J({
   recordingKeys: t
 }) {
   let i = useSelector(e => e.dropdownShown);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return i && i.type === Q ? jsx(q, {
     className: contextMenu,
     style: i.data.position,
@@ -235,7 +235,7 @@ function ee({
   guids: e,
   recordingKey: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = useCallback(() => {
     i(showModalHandler({
       type: dD,
@@ -295,7 +295,7 @@ export function $$ei0({
   entrypointForLogging: S
 }) {
   let C = useSelector(e => e.preferredValuesPickerListLayout);
-  let k = useDispatch();
+  let k = useDispatch<AppDispatch>();
   let R = useCallback((e, t) => {
     e.preventDefault();
     e.stopPropagation();

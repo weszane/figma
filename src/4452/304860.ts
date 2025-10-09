@@ -193,7 +193,7 @@ function es({
 }
 let en = zRx.INSTANT_APPROVAL_IF_AVAILABLE_SEATS;
 function er(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     currency,
     renewalTerm

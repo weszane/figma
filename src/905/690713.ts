@@ -146,7 +146,7 @@ export function $$R1({
     buttons: t
   }) {
     let i = function () {
-      let e = useDispatch();
+      let e = useDispatch<AppDispatch>();
       return useCallback(() => {
         let t = getFeatureFlags().ai_ga ? _t : d7;
         handleUrlAction(t) || e(setupHyperlinkHandler({

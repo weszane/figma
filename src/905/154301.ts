@@ -20,7 +20,7 @@ import { v as _$$v } from "../905/621749";
 import { kL, Vq, _Z, v0, pL } from "../figma_app/639088";
 export let $$E0 = registerModal(function (e) {
   let [t, i] = useState("");
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let E = useSelector(e => e.teams);
   let x = e.team.id;
   let S = 1 === Object.values(E).length;
@@ -35,7 +35,7 @@ export let $$E0 = registerModal(function (e) {
     teamId: e,
     fileCountsEnabled: t
   }) {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     let [n, o] = useState(!1);
     let [l, d] = useState(0);
     let [c, p] = useState(0);

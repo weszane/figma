@@ -28,7 +28,7 @@ export let $$I0 = "PLAN_SPACES_ONBOARDING_KEY";
 export function $$A1({
   currentUser: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useSelector(e => e.plans);
   let a = useSelector(e => getPermissionsStateMemoized(e));
   let d = z();

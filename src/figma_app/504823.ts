@@ -12,7 +12,7 @@ import { getObservableValue } from "../figma_app/84367";
 import { dX } from "../figma_app/837840";
 import { H } from "../905/769882";
 import { j } from "../905/51490";
-import { q } from "../figma_app/458300";
+import { webGLColorSpaceManager } from "../figma_app/458300";
 import { useUserColorProfileSubscription } from "../figma_app/829197";
 let E = atom(!1);
 function y(e) {
@@ -110,7 +110,7 @@ function N({
       colorProfileManagerInstance.setCanvasColorProfile(d);
       return;
     }
-    r && q.queueSwitchWebglColorSpace(r, d, e, t);
+    r && webGLColorSpaceManager.queueSwitchWebglColorSpace(r, d, e, t);
   }, [d, e, r, t]);
   return null;
 }

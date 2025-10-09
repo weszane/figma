@@ -10,7 +10,7 @@ import { useSubscribedLibraries } from '../figma_app/155728';
 import { useFigmaLibrariesEnabled } from '../figma_app/657017';
 import { useSelector, useDispatch } from 'react-redux';
 export function $$m0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useRef(!1);
   let s = useSelector(e => e.loadingState);
   let m = useFigmaLibrariesEnabled();

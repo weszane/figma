@@ -168,7 +168,7 @@ import { ButtonBasePrimary, ButtonSecondary, BigTextInputForwardRef, ButtonNegat
 import { AM } from '../figma_app/637336';
 import { _Z, jE, pL, v0, Vq, yl } from '../figma_app/639088';
 import { wH } from '../figma_app/680166';
-import { w as _$$w } from '../figma_app/705249';
+import { isXrDebounceThresholdEnabledForUser } from '../figma_app/705249';
 import { findPublishedProfileForUser } from '../figma_app/740025';
 import { BrowserInfo } from '../figma_app/778880';
 import { bX } from '../figma_app/792917';
@@ -227,7 +227,7 @@ let y = createContext({
 });
 let E = I;
 let z1 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, n] = useState(e.vatGstId);
   let [s, o] = useState(e.shippingAddress);
   let [l, d] = useState(!1);
@@ -289,7 +289,7 @@ let z1 = registerModal(e => {
   });
 }, 'ChangeAddressModal');
 function H(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, n] = useState(e.vatGstId);
   let [s, o] = useState(e.shippingAddress);
   let l = e.taxIdVerificationStatus === FDomainVerificationStatusType.UNVERIFIED;
@@ -371,7 +371,7 @@ function en(e) {
   let t;
   let i = selectCurrentUser();
   let n = useSelector(e => e.avatarEditorState);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   switch (e.avatarType) {
     case 0:
       if (!i) return null;
@@ -456,7 +456,7 @@ function e_(e) {
 }
 function eA(e) {
   let t = 'primary-email-dropdown';
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = e.profile.associated_users || [];
   let a = useDropdownState();
   let s = (t, n) => {
@@ -501,7 +501,7 @@ function eA(e) {
 }
 function ey(e) {
   let t = e.profile?.associated_users || [];
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = (t, n) => {
     e.user.community_profile_id && i(removeCommunityProfileUser({
       email: t,
@@ -569,7 +569,7 @@ let eC = function (e) {
     isError = !1,
     children
   } = e;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = E()('community_resource_row--resourceRow--Lw3vr text--fontPos11--2LvXf text--_fontBase--QdLsd', {
     'community_resource_row--interactiveRow--rqlr-': !isBlocked
   });
@@ -798,7 +798,7 @@ function eG(e) {
   let {
     support_contact
   } = t;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [s, o] = useState(!1);
   let l = useRef(null);
   let d = l.current?.getBoundingClientRect();
@@ -1045,7 +1045,7 @@ let eX = (e, t) => {
   }));
 };
 function eQ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = e.activePurchases.length || e.inactivePurchases.length;
   let n = e0(e.activePurchases, e.inactivePurchases);
   let a = e1(e.vatGstId, e.shippingAddress);
@@ -1135,7 +1135,7 @@ function eJ(e) {
       e.meta.tax_id_verification_status && E(e.meta.tax_id_verification_status);
     }).catch(() => {});
   });
-  let O = useDispatch();
+  let O = useDispatch<AppDispatch>();
   let L = e.profile?.public_at ? e.profile?.profile_handle : null;
   let {
     purchasePageType
@@ -1627,7 +1627,7 @@ let tR = {
   }
 };
 function tN() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = !!selectUserFlag('opted_in_email');
   let i = useCallback(t => {
     e(postUserFlag({
@@ -1688,7 +1688,7 @@ function tO() {
 function tD() {
   let e = selectCurrentUser();
   let t = selectCurrentFile();
-  let i = _$$w();
+  let i = isXrDebounceThresholdEnabledForUser();
   let n = useCurrentUserOrgId();
   let s = Au(n) != null;
   let o = !!desktopAPIInstance;
@@ -1743,7 +1743,7 @@ function tD() {
 }
 var tq = (e => (e[e.Unknown = 0] = 'Unknown', e[e.Mobile = 1] = 'Mobile', e[e.Desktop = 2] = 'Desktop', e))(tq || {});
 let tJ = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager(e);
   let n = setupAutofocusHandler();
   return jsx(ModalRootComponent, {
@@ -1803,7 +1803,7 @@ let tJ = registerModal(e => {
 let t4 = registerModal(e => {
   let t = selectCurrentUser();
   let i = _$$Z();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = useModalManager(e);
   return t ? hasPasswordOrSSO(t) ? jsx(ConfirmationModal, {
     title: jsx(zd, {}),
@@ -1928,7 +1928,7 @@ let iv = registerModal(e => {
   let {
     org
   } = e;
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let A = e => getI18nString('tokens.settings.dev_token_modal.expiration_option', {
     numDays: e
   });
@@ -2096,7 +2096,7 @@ function iw(e) {
     user,
     nonExpPatRevocationStage
   } = e;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let [o, l] = useState(null);
   let d = useCallback(() => (l(token.id), sendWithRetry.del(`/api/user/dev_tokens/${token.id}`).then(e => {
     l(null);
@@ -2187,7 +2187,7 @@ function iw(e) {
 }
 function iC(e) {
   let t = e.token;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return jsxs(AutoLayout, {
     padding: 12,
     backgroundColor: 'warning-tertiary',
@@ -2234,7 +2234,7 @@ function iT(e) {
   let t = e.user.dev_tokens || [];
   t && t.sort((e, t) => Number(t.id) - Number(e.id));
   let i = useAtomWithSubscription(orgSubscriptionAtom);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let a = e => {
     n(iu({
       id: e
@@ -2299,7 +2299,7 @@ function iR({
   token: t
 }) {
   let [i, n] = useState(!1);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useCallback(t => {
     n(!0);
     sendWithRetry.del(`/api/oauth/token/${t.client_id}`).then(t => {
@@ -2369,7 +2369,7 @@ function iF({
   onSessionRevoked: t
 }) {
   let [i, n] = useState(!1);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useCallback(e => {
     s(VisualBellActions.clearAll());
     n(!0);
@@ -2453,7 +2453,7 @@ function iF({
 function iM({
   user: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSubscription(CurrentUserIsMfaRequiredByMembershipOrgView({}));
   let n = getResourceDataOrFallback(i.data?.currentUser?.isMfaRequiredByMembershipOrg);
   let a = e.two_factor_app_enabled;
@@ -2635,7 +2635,7 @@ function iH({
   onSessionRevoked: t
 }) {
   let [i, n] = useState(!1);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useCallback(e => {
     s(VisualBellActions.clearAll());
     n(!0);
@@ -2736,7 +2736,7 @@ let nt = createOptimistThunk((e, t) => {
   return n;
 });
 let ni = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(nr, {
     ...e,
     onSubmitChangeEmail: e => {
@@ -3362,7 +3362,7 @@ let nJ = Object.assign(nQ, {
 });
 let n1 = registerModal(e => {
   let t = useModalManager(e);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = getFeatureFlags().fpl_username_form_migration;
   let o = useSelector(e => e.user);
   let [d, u] = useState(o.name);
@@ -3715,7 +3715,7 @@ function rs({
   });
 }
 function ro() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let [t, i] = useState('init');
   if (useEffect(() => {
     let e = !1;
@@ -3826,7 +3826,7 @@ function rh() {
   });
 }
 function rg() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.voice.showCaptions);
   return jsx('div', {
     className: 'account_settings_modal--newFeaturesRow--buhmC',
@@ -3848,7 +3848,7 @@ function rg() {
 function rf() {
   let e = useSelector(e => e.voice.showCaptions);
   let t = useSelector(e => e.voice.captionsInstallProgress);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return (useEffect(() => {
     e && _$$nN(t) && (HJ(i, !1), trackEventAnalytics('voice_caption_download_error', {
       error_code: t,
@@ -3895,7 +3895,7 @@ function rA() {
 let rR = 'leave_org_confirm--important--F-mUY modal--important--qfd6R';
 let rN = 'LEAVE_ORG_CONFIRMATION_MODAL';
 function rP(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(ConfirmationModal, {
     confirmationTitle: getI18nString('org_settings.leave_org.confirm_modal_title', {
       orgName: e.orgName
@@ -4003,7 +4003,7 @@ function rO(e) {
   });
 }
 function rD(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     plan,
     planUser,
@@ -4211,7 +4211,7 @@ function rL(e) {
 function rF({
   user: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = getThemePreference();
   let {
     enhancedContrast

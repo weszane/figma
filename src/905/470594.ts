@@ -87,7 +87,7 @@ export const base64Png = decodeBase64('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF
  * Modal for network compatibility check (N)
  */
 export const CheckNetworkCompatibilityModal = registerModal(props => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const manager = useModalManager(props);
 
   // Description content

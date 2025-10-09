@@ -12,7 +12,7 @@ export function $$$$m0({
   selectedSecondaryTab: e,
   rightActions: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let m = getSelectedView();
   let p = "workspace" === m.view && m.subView === DUserRole.ADMIN ? m.workspaceId : null;
   let g = "workspace" === m.view && m.subView === DUserRole.ADMIN ? m.orgAdminOriginTab : void 0;

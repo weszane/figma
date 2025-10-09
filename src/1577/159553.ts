@@ -200,7 +200,7 @@ function em(e) {
   });
 }
 function ef(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     block,
     callbacks,
@@ -529,7 +529,7 @@ function eM(e) {
 function eL(e) {
   var t;
   let i;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let [l, s] = useState(!1);
   let c = useSelector(e => e.selectedView.view);
   let {
@@ -835,7 +835,7 @@ ez.THROTTLE_DURATION_MS = ez.DESIRED_DURATION_MS / ez.BUFFER_CAPACITY;
 let eQ = "user_notifications_dropdown--dateHeader---l8oH";
 let e$ = "user_notifications_dropdown--markAllReadButton--TwhKK text--fontPos11--2LvXf text--_fontBase--QdLsd";
 export function $$eY4(e, t) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let a = useSelector(e => e.user.id);
   let n = useSelector(e => e.user.community_profile_id);
   let s = useSelector(e => e.authedUsers.byId[a]?.plans);
@@ -1033,7 +1033,7 @@ function eW(e, t) {
     let a = selectUser();
     let l = useSelector(e => a ? e.authedUsers.byId[a.id]?.plans : null);
     let s = useStore();
-    let d = useDispatch();
+    let d = useDispatch<AppDispatch>();
     let u = selectPermissionsState();
     let _ = selectCurrentFile();
     let m = useCurrentUserOrg();

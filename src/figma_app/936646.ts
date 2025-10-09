@@ -1,324 +1,467 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { createContext, useContext, useEffect, useState, useCallback, useMemo, useLayoutEffect, memo } from "react";
+import { difference, keyBy, uniq } from "lodash-es";
+import { createContext, memo, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { assertNotNullish } from "../figma_app/95419";
-import { l as _$$l } from "../905/716947";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomValueAndSetter } from "../figma_app/27355";
-import { memoizeWeak } from "../figma_app/815945";
-import u from "../vendor/983401";
-import _ from "../vendor/239910";
-import m from "../vendor/626715";
-import { useSubscriptionAnalytics, useSubscription } from "../figma_app/288654";
-import { createLoadingState, createErrorState, createLoadedState } from "../905/723791";
-import { componentReplaceOpenFilePublishedLivegraph } from "../905/879323";
-import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
-import { useFigmaLibrariesEnabled } from "../figma_app/657017";
-import { useCurrentFileKey } from "../figma_app/516028";
-import { resolveUsedLibrariesAsync } from "../figma_app/646357";
-import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../figma_app/43951";
-import { mapStyleProperties, mapComponentProperties, mapStateGroupProperties } from "../figma_app/349248";
-import { libraryDataCompositionAtom } from "../figma_app/825489";
-import { useCurrentFileModules } from "../figma_app/409131";
-import { isValidLibraryKey } from "../figma_app/630951";
 import { createFileLibraryKeys } from "../905/651613";
-import { hE, D1 } from "../figma_app/852050";
-var p = u;
-var h = _;
-var g = m;
-let R = createContext(null);
-export function $$L0(e) {
-  let {
-    subscriptions,
-    requestLibraryItems,
-    releaseLibraryItems
-  } = assertNotNullish(useContext(R), "Must call `useLibraryData` from within <LibraryDataProvider>");
-  let a = e?.fileKey;
-  useEffect(() => {
-    if (a) {
-      requestLibraryItems(a);
-      return () => releaseLibraryItems(a);
-    }
-  }, [requestLibraryItems, releaseLibraryItems, a]);
-  return a && subscriptions[a] || createLoadingState();
+import { createErrorState, createLoadedState, createLoadingState } from "../905/723791";
+import { componentReplaceOpenFilePublishedLivegraph } from "../905/879323";
+import { useAtomValueAndSetter } from "../figma_app/27355";
+import { CommunityLibraryStyleData, LibraryData, LibraryStyleData } from "../figma_app/43951";
+import { assertNotNullish } from "../figma_app/95419";
+import { useSubscription, useSubscriptionAnalytics } from "../figma_app/288654";
+import { mapComponentProperties, mapStateGroupProperties, mapStyleProperties } from "../figma_app/349248";
+import { useCurrentFileModules } from "../figma_app/409131";
+import { useCurrentFileKey } from "../figma_app/516028";
+import { isValidLibraryKey } from "../figma_app/630951";
+import { resolveUsedLibrariesAsync } from "../figma_app/646357";
+import { useFigmaLibrariesEnabled } from "../figma_app/657017";
+import { memoizeWeak } from "../figma_app/815945";
+import { libraryDataCompositionAtom } from "../figma_app/825489";
+import { getCurrentFileLibraryVariables, getCurrentFileLibraryVariableSets } from "../figma_app/852050";
+import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
+// Origin: /Users/allen/sigma-main/src/figma_app/936646.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments, improved readability, ensured type safety.
+
+/*
+  Assumed dependencies:
+  - React, Redux, and various project-specific hooks/utilities.
+  - External functions/types: createErrorState, createLoadedState, createLoadingState, mapComponentProperties, mapStateGroupProperties, mapStyleProperties, memoizeWeak, uniq, difference, keyBy, etc.
+  - Types: LibrarySubscription, LibraryDataContextValue, LibraryHierarchyPath, LibraryStyle, LibraryStatus, etc.
+*/
+
+// --- Type Definitions ---
+
+interface LibrarySubscription {
+  status: "loading" | "loaded" | "errors";
+  data: any; // Should be replaced with a more specific type if available
 }
-export function $$P3() {
-  let {
-    subscriptions
-  } = assertNotNullish(useContext(R), "Must call `useLibraryDataSubscriptions` from within <LibraryDataProvider>");
-  return subscriptions;
+interface LibraryDataContextValue {
+  requestLibraryItems: (fileKey: string) => void;
+  releaseLibraryItems: (fileKey: string) => void;
+  fetchedFileKeys: string[];
+  subscriptions: Record<string, LibrarySubscription>;
+  subscriptionsByLibraryKey: Record<string, LibrarySubscription>;
 }
-export function $$D2() {
-  let {
-    subscriptionsByLibraryKey
-  } = assertNotNullish(useContext(R), "Must call `useLibraryDataSubscriptionsByLibraryKey` from within <LibraryDataProvider>");
-  return subscriptionsByLibraryKey;
+interface LibraryProviderProps {
+  children: React.ReactNode;
+  maxSubscriptionsBeforeCleanup?: number;
 }
-export function $$k1({
-  fileKey: e,
-  libraryKey: t
+interface LibrarySubscriptionComponentProps {
+  subscription: LibrarySubscription;
+  fileKey: string;
+}
+interface LibrarySubscriptionMemoProps {
+  fileKey: string;
+  onChange: (fileKey: string, subscription: LibrarySubscription) => void;
+}
+interface LibraryHierarchyPath {
+  components: any[];
+  stateGroups: any[];
+  styles: any[];
+  pageName?: string;
+  containingFrameName?: string;
+  nameHierarchyPath?: string[];
+}
+interface LibraryStyle {
+  style_type?: string;
+  [key: string]: any;
+}
+
+// --- Context ---
+
+const LibraryDataContext = createContext<LibraryDataContextValue | null>(null);
+
+// --- Hooks ---
+
+/**
+ * useLibraryData: Provides subscription for a given fileKey.
+ */
+export function useLibraryData(props?: {
+  fileKey?: string;
 }) {
-  $$L0(createFileLibraryKeys(e, t));
+  const context = assertNotNullish(useContext(LibraryDataContext), "Must call `useLibraryData` from within <LibraryDataProvider>");
+  const fileKey = props?.fileKey;
+  useEffect(() => {
+    if (fileKey) {
+      context.requestLibraryItems(fileKey);
+      return () => context.releaseLibraryItems(fileKey);
+    }
+  }, [context.requestLibraryItems, context.releaseLibraryItems, fileKey]);
+  return fileKey && context.subscriptions[fileKey] || createLoadingState();
+}
+
+/**
+ * useLibraryDataSubscriptions: Returns all subscriptions.
+ */
+export function useLibraryDataSubscriptions() {
+  const context = assertNotNullish(useContext(LibraryDataContext), "Must call `useLibraryDataSubscriptions` from within <LibraryDataProvider>");
+  return context.subscriptions;
+}
+
+/**
+ * useLibraryDataSubscriptionsByLibraryKey: Returns subscriptions by library key.
+ */
+export function useLibraryDataSubscriptionsByLibraryKey() {
+  const context = assertNotNullish(useContext(LibraryDataContext), "Must call `useLibraryDataSubscriptionsByLibraryKey` from within <LibraryDataProvider>");
+  return context.subscriptionsByLibraryKey;
+}
+
+/**
+ * LibrarySubscriptionRequest: Requests subscription for a fileKey/libraryKey pair.
+ */
+export function LibrarySubscriptionRequest({
+  fileKey,
+  libraryKey
+}: {
+  fileKey: string;
+  libraryKey: string;
+}) {
+  useLibraryData(createFileLibraryKeys(fileKey, libraryKey));
   return null;
 }
-export function $$M4({
-  children: e,
-  maxSubscriptionsBeforeCleanup: t = 20
-}) {
-  let r = useCurrentFileKey();
+
+/**
+ * LibraryDataProvider: Provides library data context and manages subscriptions.
+ */
+export function LibraryDataProvider({
+  children,
+  maxSubscriptionsBeforeCleanup = 20
+}: LibraryProviderProps) {
+  const currentFileKey = useCurrentFileKey();
   useAtomValueAndSetter(libraryDataCompositionAtom);
-  let [s, o] = useState({});
-  let c = useCallback((e, t) => {
-    o(r => ({
-      ...r,
-      [e]: t
+
+  // Subscriptions state: fileKey -> LibrarySubscription
+  const [subscriptions, setSubscriptions] = useState<Record<string, LibrarySubscription>>({});
+
+  // Callback to update subscription for a fileKey
+  const handleSubscriptionChange = useCallback((fileKey: string, subscription: LibrarySubscription) => {
+    setSubscriptions(prev => ({
+      ...prev,
+      [fileKey]: subscription
     }));
   }, []);
-  let u = useMemo(() => {
-    let e = {};
-    for (let t of Object.keys(s)) {
-      let r = s[t];
-      null != r && (e[t] = U(r));
+
+  // Memoized subscriptions with normalized data
+  const normalizedSubscriptions = useMemo(() => {
+    const result: Record<string, LibrarySubscription> = {};
+    for (const key of Object.keys(subscriptions)) {
+      const sub = subscriptions[key];
+      if (sub != null) result[key] = normalizeSubscription(sub);
     }
-    return e;
-  }, [s]);
-  let _ = useMemo(() => {
-    let e = {};
-    Object.values(s).forEach(t => {
-      if (null == t) return;
-      let r = U(t);
-      r.data && (e[r.data.libraryKey] = r);
+    return result;
+  }, [subscriptions]);
+
+  // Memoized subscriptions by library key
+  const subscriptionsByLibraryKey = useMemo(() => {
+    const result: Record<string, LibrarySubscription> = {};
+    Object.values(subscriptions).forEach(sub => {
+      if (sub == null) return;
+      const normalized = normalizeSubscription(sub);
+      if (normalized.data) result[normalized.data.libraryKey] = normalized;
     });
-    return e;
-  }, [s]);
-  let [m, f] = useState({});
+    return result;
+  }, [subscriptions]);
+
+  // Track subscription counts per fileKey
+  const [subscriptionCounts, setSubscriptionCounts] = useState<Record<string, number>>({});
   useEffect(() => {
-    r && f(e => ({
-      ...e,
-      [r]: (e[r] || 0) + 1
-    }));
-  }, [r]);
-  let [E, T] = useState({});
-  !function (e) {
-    let t = useMemo(() => e?.status === "loaded" ? $$G6(e) : [], [e]);
-    let r = useMemo(() => h()(t, e => e.node_id), [t]);
-    let n = useMemo(() => e?.status === "loaded" ? function (e) {
-      let t = [];
-      for (let r of e.data.libraryHierarchyPaths) for (let e of r.components) t.push(e);
-      return t;
-    }(e) : [], [e]);
-    let s = useMemo(() => h()(n, "node_id"), [n]);
-    let o = useMemo(() => e?.status === "loaded" ? function (e) {
-      let t = [];
-      for (let r of e.data.libraryHierarchyPaths) for (let e of r.stateGroups) t.push(e);
-      return t;
-    }(e) : [], [e]);
-    let d = useMemo(() => h()(o, e => e.node_id), [o]);
-    let c = hE();
-    let u = useMemo(() => h()(c, e => e.node_id), [c]);
-    let p = D1();
-    let _ = useMemo(() => h()(p, e => e.node_id), [p]);
-    let m = useCurrentFileModules();
-    let g = useMemo(() => getFeatureFlags().dse_module_publish ? h()(m, e => e.node_id) : {}, [m]);
-    let f = useDispatch();
-    useLayoutEffect(() => {
-      f(componentReplaceOpenFilePublishedLivegraph({
-        components: s,
-        styles: r,
-        stateGroups: d,
-        variableSets: u,
-        variables: _,
-        modules: g
+    if (currentFileKey) {
+      setSubscriptionCounts(prev => ({
+        ...prev,
+        [currentFileKey]: (prev[currentFileKey] || 0) + 1
       }));
-      f(updateLocalLibraryItemsThunk());
-    }, [f, s, d, r, u, _, g]);
-    useEffect(() => {
-      (e?.status === "loaded" || e?.status === "errors") && resolveUsedLibrariesAsync();
-    }, [e]);
-  }(r ? u[r] : null);
-  let v = useCallback(e => {
-    f(t => {
-      let r = t[e] ?? 0;
-      return {
-        ...t,
-        [e]: r + 1
-      };
-    });
-    T(t => ({
-      ...t,
-      [e]: Date.now()
+    }
+  }, [currentFileKey]);
+
+  // Track last access time per fileKey
+  const [lastAccessTimes, setLastAccessTimes] = useState<Record<string, number>>({});
+
+  // Subscription management logic for analytics and livegraph updates
+  useLibraryLivegraphSync(currentFileKey ? normalizedSubscriptions[currentFileKey] : null);
+
+  // Request subscription for a fileKey
+  const requestLibraryItems = useCallback((fileKey: string) => {
+    setSubscriptionCounts(prev => ({
+      ...prev,
+      [fileKey]: (prev[fileKey] ?? 0) + 1
+    }));
+    setLastAccessTimes(prev => ({
+      ...prev,
+      [fileKey]: Date.now()
     }));
   }, []);
-  let A = useCallback(e => {
-    f(t => {
-      let r = (t[e] ?? 0) - 1;
-      if (r > 0) return {
-        ...t,
-        [e]: r
-      };
-      {
-        r < 0 && console.error("Tried to release subscription for library items that doesn't exist");
-        let n = {
-          ...t
+
+  // Release subscription for a fileKey
+  const releaseLibraryItems = useCallback((fileKey: string) => {
+    setSubscriptionCounts(prev => {
+      const count = (prev[fileKey] ?? 0) - 1;
+      if (count > 0) {
+        return {
+          ...prev,
+          [fileKey]: count
         };
-        delete n[e];
-        return n;
       }
+      if (count < 0) {
+        console.error("Tried to release subscription for library items that doesn't exist");
+      }
+      const updated = {
+        ...prev
+      };
+      delete updated[fileKey];
+      return updated;
     });
   }, []);
-  let C = Object.keys(m);
-  let w = Object.keys(s);
-  let L = g()([...C, ...w]);
-  let P = p()(L, C);
+
+  // Cleanup subscriptions if exceeding maxSubscriptionsBeforeCleanup
+  const currentFileKeys = Object.keys(subscriptionCounts);
+  const subscriptionFileKeys = Object.keys(subscriptions);
+  const allFileKeys = uniq([...currentFileKeys, ...subscriptionFileKeys]);
+  const extraFileKeys = difference(allFileKeys, currentFileKeys);
   useEffect(() => {
-    let e = L.length;
-    let r = P.length;
-    e > t && r > 0 && o(r => {
-      let n = [...P].sort((e, t) => {
-        let r = E[e];
-        let n = E[t];
-        return null == r ? -1 : null == n ? 1 : null == r && null == n ? 0 : r - n;
-      }).slice(0, e - t);
-      let i = {
-        ...r
-      };
-      for (let e of n) delete i[e];
-      return i;
-    });
+    const total = allFileKeys.length;
+    const extra = extraFileKeys.length;
+    if (total > maxSubscriptionsBeforeCleanup && extra > 0) {
+      setSubscriptions(prev => {
+        // Sort extra keys by last access time (oldest first)
+        const sorted = [...extraFileKeys].sort((a, b) => {
+          const timeA = lastAccessTimes[a];
+          const timeB = lastAccessTimes[b];
+          if (timeA == null) return -1;
+          if (timeB == null) return 1;
+          return timeA - timeB;
+        }).slice(0, total - maxSubscriptionsBeforeCleanup);
+
+        // Remove oldest subscriptions
+        const updated = {
+          ...prev
+        };
+        for (const key of sorted) {
+          delete updated[key];
+        }
+        return updated;
+      });
+    }
   });
-  let D = useMemo(() => ({
-    requestLibraryItems: v,
-    releaseLibraryItems: A,
-    fetchedFileKeys: L,
-    subscriptions: u,
-    subscriptionsByLibraryKey: _
-  }), [v, A, L, u, _]);
+
+  // Context value
+  const contextValue: LibraryDataContextValue = useMemo(() => ({
+    requestLibraryItems,
+    releaseLibraryItems,
+    fetchedFileKeys: allFileKeys,
+    subscriptions: normalizedSubscriptions,
+    subscriptionsByLibraryKey
+  }), [requestLibraryItems, releaseLibraryItems, allFileKeys, normalizedSubscriptions, subscriptionsByLibraryKey]);
   return jsxs(Fragment, {
-    children: [jsx(R.Provider, {
-      value: D,
-      children: e
-    }), L.map(e => jsx(j, {
-      fileKey: e,
-      onChange: c
-    }, e)), Object.entries(u).map(([e, t]) => t && jsx(F, {
-      subscription: t,
-      fileKey: e
-    }, e))]
+    children: [jsx(LibraryDataContext.Provider, {
+      value: contextValue,
+      children
+    }), allFileKeys.map(fileKey => jsx(LibrarySubscriptionMemo, {
+      fileKey,
+      onChange: handleSubscriptionChange
+    }, fileKey)), Object.entries(normalizedSubscriptions).map(([fileKey, subscription]) => subscription && jsx(LibrarySubscriptionComponent, {
+      subscription,
+      fileKey
+    }, fileKey))]
   });
 }
-function F({
-  subscription: e,
-  fileKey: t
-}) {
-  useSubscriptionAnalytics(e, "Library Data Subscription Load Time", {
-    fileKey: t,
-    numStyles: "loaded" === e.status ? e.data.numStyles : 0
+
+/**
+ * LibrarySubscriptionComponent: Tracks analytics for a subscription.
+ */
+function LibrarySubscriptionComponent({
+  subscription,
+  fileKey
+}: LibrarySubscriptionComponentProps) {
+  useSubscriptionAnalytics(subscription, "Library Data Subscription Load Time", {
+    fileKey,
+    numStyles: subscription.status === "loaded" ? subscription.data.numStyles : 0
   });
   return null;
 }
-let j = memo(function ({
-  fileKey: e,
-  onChange: t
-}) {
-  let r = e !== useCurrentFileKey();
-  let n = isValidLibraryKey(e);
-  let a = useFigmaLibrariesEnabled();
-  let {
+
+/**
+ * LibrarySubscriptionMemo: Memoized subscription fetcher for a fileKey.
+ */
+const LibrarySubscriptionMemo = memo(({
+  fileKey,
+  onChange
+}: LibrarySubscriptionMemoProps) => {
+  const isNotCurrentFile = fileKey !== useCurrentFileKey();
+  const isCommunityLibrary = isValidLibraryKey(fileKey);
+  const librariesEnabled = useFigmaLibrariesEnabled();
+
+  // Determine which view/component to use for subscription
+  const {
     view,
     args,
     options
-  } = n ? {
+  } = isCommunityLibrary ? {
     view: CommunityLibraryStyleData,
     args: {
-      hubFileId: e
+      hubFileId: fileKey
     },
     options: {
-      enabled: a
+      enabled: librariesEnabled
     }
   } : {
-    view: r ? LibraryStyleData : LibraryData,
+    view: isNotCurrentFile ? LibraryStyleData : LibraryData,
     args: {
-      fileKey: e
+      fileKey
     },
-    options: void 0
+    options: undefined
   };
-  let d = useSubscription(view, args, options);
+  const subscription = useSubscription(view, args, options) as any;
   useEffect(() => {
-    t(e, d);
-  }, [t, e, d]);
+    onChange(fileKey, subscription);
+  }, [onChange, fileKey, subscription]);
   return null;
 });
-let U = memoizeWeak(function (e) {
-  if ("loaded" !== e.status) return e;
-  let t = e.data;
-  if ("communityLibraryByHubFileId" in t) {
-    let e = t.communityLibraryByHubFileId;
-    if (!e) return createErrorState([]);
-    let r = e.libraryHierarchyPaths.map(t => {
-      let r = t.styles.map(t => mapStyleProperties(t, {
+
+/**
+ * normalizeSubscription: Memoized normalization of subscription data.
+ */
+const normalizeSubscription = memoizeWeak((subscription: LibrarySubscription): LibrarySubscription => {
+  if (subscription.status !== "loaded") return subscription;
+  const data = subscription.data;
+
+  // Community library normalization
+  if ("communityLibraryByHubFileId" in data) {
+    const communityLib = data.communityLibraryByHubFileId;
+    if (!communityLib) return createErrorState([]);
+    const hierarchyPaths: LibraryHierarchyPath[] = communityLib.libraryHierarchyPaths.map(path => ({
+      pageName: path.pageName ?? undefined,
+      containingFrameName: path.containingFrameName ?? undefined,
+      nameHierarchyPath: path.nameHierarchyPath ?? undefined,
+      components: [],
+      stateGroups: [],
+      styles: path.styles.map(style => mapStyleProperties(style, {
         type: "hubFile",
         file: {
-          id: e.hubFileId,
-          libraryKey: e.libraryKey
+          id: communityLib.hubFileId,
+          libraryKey: communityLib.libraryKey
         }
-      }));
-      return {
-        pageName: t.pageName ?? void 0,
-        containingFrameName: t.containingFrameName ?? void 0,
-        nameHierarchyPath: t.nameHierarchyPath ?? void 0,
-        components: [],
-        stateGroups: [],
-        styles: r
-      };
-    });
+      }))
+    }));
     return createLoadedState({
-      fileKey: e.hubFileId,
-      libraryKey: _$$l(e.libraryKey),
-      name: e.name,
+      fileKey: communityLib.hubFileId,
+      libraryKey: communityLib.libraryKey,
+      name: communityLib.name,
       numComponents: 0,
       numStateGroups: 0,
-      numStyles: e.numStyles ?? 0,
-      libraryHierarchyPaths: r
+      numStyles: communityLib.numStyles ?? 0,
+      libraryHierarchyPaths: hierarchyPaths
     });
   }
-  let r = "libraryKeyToFile" in t ? t.libraryKeyToFile?.file : t.file;
-  if (!r) return createErrorState([]);
-  let n = r.libraryHierarchyPaths.map(e => ({
-    components: "components" in e ? e.components.map(e => mapComponentProperties(e, {
+
+  // Team library normalization
+  const file = "libraryKeyToFile" in data ? data.libraryKeyToFile?.file : data.file;
+  if (!file) return createErrorState([]);
+  const hierarchyPaths: LibraryHierarchyPath[] = file.libraryHierarchyPaths.map(path => ({
+    components: "components" in path ? path.components.map(component => mapComponentProperties(component, {
       type: "team",
-      file: r
+      file
     })) : [],
-    stateGroups: "stateGroups" in e ? e.stateGroups.map(e => mapStateGroupProperties(e, {
+    stateGroups: "stateGroups" in path ? path.stateGroups.map(stateGroup => mapStateGroupProperties(stateGroup, {
       type: "team",
-      file: r
+      file
     })) : [],
-    styles: e.styles.map(e => mapStyleProperties(e, {
+    styles: path.styles.map(style => mapStyleProperties(style, {
       type: "team",
-      file: r
+      file
     }))
   }));
   return createLoadedState({
-    fileKey: r.key,
-    libraryKey: _$$l(r.libraryKey),
-    name: r.name,
-    numComponents: r.library && "numComponents" in r.library && r.library.numComponents || 0,
-    numStateGroups: r.library && "numStateGroups" in r.library && r.library.numStateGroups || 0,
-    numStyles: r.library?.numStyles ?? 0,
-    libraryHierarchyPaths: n
+    fileKey: file.key,
+    libraryKey: file.libraryKey,
+    name: file.name,
+    numComponents: file.library && "numComponents" in file.library && file.library.numComponents || 0,
+    numStateGroups: file.library && "numStateGroups" in file.library && file.library.numStateGroups || 0,
+    numStyles: file.library?.numStyles ?? 0,
+    libraryHierarchyPaths: hierarchyPaths
   });
 });
-export function $$B5(e, t) {
-  let r = [];
-  for (let n of e.libraryHierarchyPaths) for (let e of n.styles) t ? e.style_type === t && r.push(e) : r.push(e);
-  return r;
+
+/**
+ * useLibraryLivegraphSync: Syncs livegraph and analytics for the current file's subscription.
+ * Note: This is a refactored version of the IIFE in the original code.
+ */
+function useLibraryLivegraphSync(subscription: LibrarySubscription | null) {
+  const dispatch = useDispatch<AppDispatch>();
+  useLayoutEffect(() => {
+    if (!subscription) return;
+    // Extract components, styles, stateGroups, variableSets, variables, modules
+    const components = useMemo(() => keyBy(extractComponents(subscription), "node_id"), [subscription]);
+    const styles = useMemo(() => keyBy(extractStyles(subscription), (s: any) => s.node_id), [subscription]);
+    const stateGroups = useMemo(() => keyBy(extractStateGroups(subscription), (sg: any) => sg.node_id), [subscription]);
+    const variableSets = useMemo(() => keyBy(getCurrentFileLibraryVariableSets(), (vs: any) => vs.node_id), []);
+    const variables = useMemo(() => keyBy(getCurrentFileLibraryVariables(), (v: any) => v.node_id), []);
+    const modules = useCurrentFileModules();
+    const modulesById = useMemo(() => getFeatureFlags().dse_module_publish ? keyBy(modules, (m: any) => m.node_id) : {}, [modules]);
+    dispatch(componentReplaceOpenFilePublishedLivegraph({
+      components,
+      styles,
+      stateGroups,
+      variableSets,
+      variables,
+      modules: modulesById
+    }));
+    dispatch(updateLocalLibraryItemsThunk());
+  }, [dispatch, subscription]);
+  useEffect(() => {
+    if (subscription?.status === "loaded" || subscription?.status === "errors") {
+      resolveUsedLibrariesAsync();
+    }
+  }, [subscription]);
 }
-export function $$G6(e, t) {
-  return $$B5(e.data, t);
+
+// --- Utility Functions ---
+
+function extractComponents(subscription: LibrarySubscription): any[] {
+  if (subscription.status !== "loaded") return [];
+  return subscription.data.libraryHierarchyPaths.flatMap((path: any) => path.components || []);
 }
-export const Bh = $$L0;
-export const SS = $$k1;
-export const _Y = $$D2;
-export const bO = $$P3;
-export const fN = $$M4;
-export const oz = $$B5;
-export const z5 = $$G6;
+function extractStyles(subscription: LibrarySubscription): any[] {
+  if (subscription.status !== "loaded") return [];
+  return subscription.data.libraryHierarchyPaths.flatMap((path: any) => path.styles || []);
+}
+function extractStateGroups(subscription: LibrarySubscription): any[] {
+  if (subscription.status !== "loaded") return [];
+  return subscription.data.libraryHierarchyPaths.flatMap((path: any) => path.stateGroups || []);
+}
+
+// --- Style Extraction Functions ---
+
+/**
+ * getStylesFromLibraryHierarchy: Extracts styles from library hierarchy paths, optionally filtering by style_type.
+ */
+export function getStylesFromLibraryHierarchy(data: {
+  libraryHierarchyPaths: LibraryHierarchyPath[];
+}, styleType?: string): LibraryStyle[] {
+  const result: LibraryStyle[] = [];
+  for (const path of data.libraryHierarchyPaths) {
+    for (const style of path.styles) {
+      if (styleType ? style.style_type === styleType : true) {
+        result.push(style);
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ * getStylesFromLoadedLibrary: Extracts styles from loaded library subscription.
+ */
+export function getStylesFromLoadedLibrary(subscription: LibrarySubscription, styleType?: string): LibraryStyle[] {
+  return getStylesFromLibraryHierarchy(subscription.data, styleType);
+}
+
+// --- Exported Aliases (keep original export names) ---
+
+export const Bh = useLibraryData;
+export const SS = LibrarySubscriptionRequest;
+export const _Y = useLibraryDataSubscriptionsByLibraryKey;
+export const bO = useLibraryDataSubscriptions;
+export const fN = LibraryDataProvider;
+export const oz = getStylesFromLibraryHierarchy;
+export const z5 = getStylesFromLoadedLibrary;

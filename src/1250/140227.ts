@@ -21,7 +21,7 @@ export let $$w0 = registerModal(function (e) {
   let {
     teamId
   } = e;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let b = getSelectedView();
   let w = useSelector(e => e.folders);
   let T = useSubscription(TeamFileCountsByTeamId, {

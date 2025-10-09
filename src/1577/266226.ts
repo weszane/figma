@@ -32,7 +32,7 @@ import { dV } from "../1577/337708";
 let I = registerModal(function ({
   paletteUuid: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(ConfirmationModal2, {
     size: 300,
     confirmText: getI18nString("whiteboard.color_palettes.modal.delete_color_palette_button"),
@@ -52,7 +52,7 @@ let M = registerModal(function ({
   paletteName: e,
   paletteUuid: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = getCurrentTeamId();
   let r = useSelector(e => e.teams[o]?.name);
   r || console.error("No team name found for team id", o);
@@ -75,7 +75,7 @@ function L({
   theme: t,
   showMakeDefaultButton: i
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let r = e.uuid === fJ;
   let l = e.name || getI18nString("whiteboard.color_palettes.unnamed_palette");
   return jsxs(AutoLayout, {
@@ -190,7 +190,7 @@ export let $$B0 = registerModal(function ({
   let d = getUserId();
   let u = getCurrentTeamId();
   let _ = useModalManager(c);
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let [y] = setupResourceAtomHandler(ColorPalettesForTeam({
     teamId: u
   }), {

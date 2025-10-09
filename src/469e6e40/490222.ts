@@ -32,7 +32,7 @@ import { b as _$$b2 } from "../469e6e40/978552";
 import { oi } from "../figma_app/527041";
 function R(e) {
   let t = e.abandonedDraftFolder;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = useCallback(() => {
     a(selectViewAction({
       view: "abandonedDraftFiles",
@@ -75,7 +75,7 @@ function L({
   planType: t,
   planId: a
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   return 0 === e.length ? null : jsxs(Fragment, {
     children: [jsx(IU, {
       onClick: () => {
@@ -114,7 +114,7 @@ function L({
 }
 let P = "abandoned_draft_user_removed_at";
 export function $$U0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, N] = useState({
     columnName: P,
     isReversed: !0

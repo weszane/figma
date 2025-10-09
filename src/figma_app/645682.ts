@@ -9,7 +9,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showPickerThunk, hideStylePicker, hidePickerThunk } from "../figma_app/91703";
-import { sw } from "../figma_app/914957";
+import { hideStylePreview } from "../figma_app/914957";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, valueOrFallback, isValidValue } from "../905/216495";
 import { useSelectionPropertyValue } from "../905/275640";
@@ -93,7 +93,7 @@ export let $$K0 = memo(function (e) {
   let o = useSelector(selectSceneGraphSelectionKeys);
   let d = useSelector(selectInstanceKeys);
   let u = useSelector(Z3);
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let {
     backingSymbolGUID,
     singleBackingStateGroup
@@ -112,7 +112,7 @@ export let $$K0 = memo(function (e) {
         initialX: e.x,
         initialY: e.y
       }));
-      _(sw());
+      _(hideStylePreview());
       _(hideStylePicker());
     } else _(hidePickerThunk());
   }, [_]);
@@ -197,7 +197,7 @@ function Y({
   } = $(i);
   let m = useSelector(lm);
   let f = useSelector(selectOpenFileKey);
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let S = _$$S.useOpenFileProperties();
   if ("STATE_GROUP" === restoreType || "SYMBOL_AS_NON_STATE" === restoreType) {
     let t = jsx(_$$z, {

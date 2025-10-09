@@ -578,7 +578,7 @@ function eY(e) {
     isCampfireCart: !0
   });
   let td = error?.code === dl.UNINITIALIZED_STRIPE_ELEMENTS_ERROR;
-  let to = useDispatch();
+  let to = useDispatch<AppDispatch>();
   let tc = Ud({
     teamId: eP,
     canSeeBillingAddressExp: eO

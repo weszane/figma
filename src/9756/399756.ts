@@ -103,7 +103,7 @@ let k = async ({
   clientLifecycleId: r
 }));
 export function $$y0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     start,
     stop,

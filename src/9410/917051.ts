@@ -18,7 +18,7 @@ let x = () => {
   return decodeURIComponent(normalizeValue(e)?.url || normalizeValue(e)?.srcUrl || "");
 };
 export function $$y1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = x();
   let i = useSelectionPropertyValue("embedData");
   let r = createEmbedAnalyticsHandler(i);

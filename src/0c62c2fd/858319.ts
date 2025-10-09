@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hZ, cL } from "../905/748726";
+import { autocompleteSet, autocompleteReset } from "../905/748726";
 import { fetchContactsOptimist } from "../905/14223";
 import { selectUser } from "../905/372672";
 import { yI, t9 } from "../905/915142";
@@ -10,7 +10,7 @@ export function $$c0({
   parentOrg: t,
   orgDomains: r
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useSelector(e => e.contacts);
   let m = selectUser();
   useEffect(() => {
@@ -21,7 +21,7 @@ export function $$c0({
   useEffect(() => {
     if (e) {
       let t = p(e);
-      c(hZ({
+      c(autocompleteSet({
         tokens: [t],
         inputValue: "",
         errorMessage: ""
@@ -29,7 +29,7 @@ export function $$c0({
     }
   }, [e, p, c]);
   useEffect(() => () => {
-    c(cL());
+    c(autocompleteReset());
   }, [c]);
   return {
     validateToken: p,

@@ -36,7 +36,7 @@ export function $$N2() {
     priority: _$$N2.DEFAULT_MODAL
   });
   let m = Xr(isTemplateSearchEnabledAtomFamily);
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let E = useIsFullscreenReady();
   let w = useAtomWithSubscription(LZ);
   let S = () => {

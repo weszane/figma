@@ -95,7 +95,7 @@ export function $$j0() {
   let U = !isVsCodeEnvironment();
   let G = uF + 72 + 32;
   let K = _4();
-  let H = useDispatch();
+  let H = useDispatch<AppDispatch>();
   let z = useCallback(() => {
     handleFullscreenViewTransition(H, debugState.getState().selectedView, "overview_search_clicked");
     K();

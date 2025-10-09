@@ -16,7 +16,7 @@ export function $$f0(e) {
     canRevokeProjectTransfer,
     isTransferTeam = !1
   } = e;
-  let g = useDispatch();
+  let g = useDispatch<AppDispatch>();
   let h = useModalManager(e);
   let x = pending.id;
   let b = pending.source_user_email;

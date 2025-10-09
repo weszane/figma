@@ -6,13 +6,13 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { executePublishProcess } from "../figma_app/519839";
-import { Ol } from "../905/576221";
+import { areAllAssetsNotCurrentOrChangedOrNew } from "../905/576221";
 import { selectDeletedOrCooperComponentNodeIds, selectCooperComponents } from "../figma_app/803787";
 import { getFContainerType } from "../905/186961";
 import { currentPublishStateAtom, updatePublishStateAtom, hasHubOrPublishState, PublishState } from "../figma_app/755939";
 import { enqueueNoItemsToPublishError, handleTemplateUpload, getLibraryPublishCallbacks, TEMPLATE_PUBLISH_VISUAL_BELL_TYPE } from "../905/686934";
 export function $$f0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(currentPublishStateAtom);
   let i = Xr(updatePublishStateAtom);
   let f = hasHubOrPublishState(t);
@@ -21,7 +21,7 @@ export function $$f0() {
   return {
     initiateTemplatePublish: useCallback(t => {
       if (f) return;
-      let n = !!t.isPublishedTemplate && _.length > 0 && Ol(A);
+      let n = !!t.isPublishedTemplate && _.length > 0 && areAllAssetsNotCurrentOrChangedOrNew(A);
       if (!t.isPublishedTemplate && 0 === _.length || n) {
         enqueueNoItemsToPublishError(e);
         return;

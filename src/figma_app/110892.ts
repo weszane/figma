@@ -16,7 +16,7 @@ import { fx, PF } from "../figma_app/657972";
 import { Ad } from "../figma_app/811257";
 export function $$y0() {
   let [e, t] = useState(!1);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let y = selectCurrentFile();
   let b = useSelector(e => e.fileVersion);
   let T = _$$d();

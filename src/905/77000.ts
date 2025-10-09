@@ -37,7 +37,7 @@ export function $$f0({
   onRedirect: t,
   padding: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let u = useTeamPlanFeatures().unwrapOr(null);
   let g = e => {
     u && (u.key.type === FOrganizationLevelType.ORG ? s(selectViewAction({

@@ -34,7 +34,7 @@ export function $$y0({
   createLoadedAttachment: b,
   toggleComponent: j
 }) {
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let k = useRef(null);
   let {
     getTriggerProps,

@@ -23,7 +23,7 @@ import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { loadSharedVariableThunk } from "../figma_app/933328";
-import { BQ, yp, rW } from "../figma_app/852050";
+import { getResolvedVariableValue, getSortedLocalVariableSets, getLocalVariablesForSet } from "../figma_app/852050";
 import { useDropdownState } from "../905/848862";
 import { getLocalVariableInfo } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
@@ -126,7 +126,7 @@ function K({
   });
 }
 export function $$Y4(e) {
-  let t = BQ(e.type === VariableDataType.ALIAS ? e.value : void 0);
+  let t = getResolvedVariableValue(e.type === VariableDataType.ALIAS ? e.value : void 0);
   return isNotNullish(t) && "MIXED" !== t ? t : null;
 }
 export function $$$3({
@@ -161,7 +161,7 @@ export function $$X6(e) {
   }, [e]);
 }
 export function $$q5(e, t, r) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return useCallback(async i => {
     if (i) {
       let e = await n(loadSharedVariableThunk(i));
@@ -237,7 +237,7 @@ export function $$Z1({
   setVariableFormSubmitData: a,
   variableFormSubmitData: s
 }) {
-  let o = yp();
+  let o = getSortedLocalVariableSets();
   let l = useId();
   r === VariableResolvedDataType.TEXT_DATA && (r = VariableResolvedDataType.STRING);
   let [d, c] = useLocalStorageSync("last-used-variable-set-bottoms-up", o.length > 0 ? o[0].node_id : null);
@@ -245,7 +245,7 @@ export function $$Z1({
     let e = o.find(e => e.node_id === d);
     return !e && o.length > 0 ? o[0] : e;
   }, [o, d]);
-  let m = rW(p?.node_id ?? null);
+  let m = getLocalVariablesForSet(p?.node_id ?? null);
   let f = useRef(null);
   function y(e, t, r) {
     a({
@@ -349,7 +349,7 @@ function ee({
   onChange: r,
   ariaLabelledBy: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useDropdownState();
   let d = useMemo(() => b()(t, e => e.node_id), [t]);
   return jsx(l6, {

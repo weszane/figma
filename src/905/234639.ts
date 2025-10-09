@@ -6,7 +6,7 @@ import { assertFieldReady } from "../905/497882";
 import { V } from "../905/513628";
 import { resourceDetailQuery } from "../905/909123";
 import { updateProfileThunk } from "../figma_app/530167";
-import { Ri } from "../figma_app/49598";
+import { putFigFilePublishedAsHubFile } from "../figma_app/49598";
 import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523";
 import { trimOrEmpty } from "../figma_app/740025";
 import { uploadHubFileImages, findMediaIndexBySha1 } from "../figma_app/599979";
@@ -157,7 +157,7 @@ export async function $$S3({
   updateSource: a
 }) {
   $$b0(e, a);
-  t && debugState.dispatch(Ri({
+  t && debugState.dispatch(putFigFilePublishedAsHubFile({
     hubFileId: e.id,
     fileKey: t.key
   }));

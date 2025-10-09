@@ -40,7 +40,7 @@ export const UsedStylesContext = createContext<{
  * Original hook: $$I1
  */
 export function useUsedStyles() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const [usedStylesData, setUsedStylesData] = useState<{
     allUsedStylesByLibraryKey: Record<string, any>
     allUsedLibraryKeys: string[]

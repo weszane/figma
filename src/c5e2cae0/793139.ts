@@ -308,7 +308,7 @@ function W({
   checkboxHandler: t
 }) {
   let [a, l] = useState(0);
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let d = ({
     rect: e,
     designChecked: s,

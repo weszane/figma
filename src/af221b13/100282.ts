@@ -102,7 +102,7 @@ export function $$I0({
   prompt: c,
   promptCategory: d
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let g = B();
   let p = getIsMobile();
   let w = isAIFeaturesEnabledForCurrentUser();

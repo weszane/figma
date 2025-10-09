@@ -13,7 +13,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { Point } from "../905/736624";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sw } from "../figma_app/914957";
+import { hideStylePreview } from "../figma_app/914957";
 import { useAppModelProperty } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getShownNonLocalStyle } from "../figma_app/646357";
@@ -25,7 +25,7 @@ import { Gf, Zv, _f } from "../figma_app/293304";
 let N = Gf;
 let $$C0 = "slides-edit-text-style-modal";
 export function $$w1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAppModelProperty("isReadOnly");
   let r = useCurrentFileKey();
   let w = "slidesEditStyleModal";
@@ -48,7 +48,7 @@ export function $$w1() {
   if (!stylePreviewShown.isShown || stylePreviewShown.isCreating || !selectedStyleProperties && !inheritTextStyleKey && !styleIdForText && !D) return null;
   let M = () => {
     Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID);
-    e(sw());
+    e(hideStylePreview());
   };
   let F = Zv(getShownNonLocalStyle(stylePreviewShown), selectedStyleProperties, k);
   let j = scopeAwareFunction.user("slides-delete-style", () => {
@@ -84,7 +84,7 @@ export function $$w1() {
             padding: 0,
             children: jsx(_f, {
               type: selectedStyleProperties.styleType,
-              onEnterPressed: () => e(sw()),
+              onEnterPressed: () => e(hideStylePreview()),
               viewOnly: t,
               selectedStyleProperties,
               isInspectPanel: !1,

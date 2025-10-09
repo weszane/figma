@@ -15,7 +15,7 @@ export function $$x0({
   resource: e,
   viewContext: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let x = selectCurrentUser();
   let f = isResourceHubLightboxRdp();
   let y = Object.values(useSelector(e => getOrgAdminAccess(e))).filter(t => isPlugin(e) && t.plugins_whitelist_enforced || isWidget(e) && t.widgets_whitelist_enforced);

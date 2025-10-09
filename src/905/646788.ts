@@ -189,12 +189,12 @@ import { Pn, PP } from "../905/230175";
 import { AvatarSize } from "../905/590952";
 import { organizationAPIService } from "../figma_app/617654";
 import { Ro } from "../figma_app/805373";
-import { ax as _$$ax, ts as _$$ts2 } from "../figma_app/49598";
+import { unpublishHubFileThunk, getHubFileVersionsThunk } from "../figma_app/49598";
 import { selectViewAction } from "../905/929976";
 import { getStatusOrDefault, defaultTemplate } from "../figma_app/740025";
 import { getPublisherDisplayName } from "../figma_app/690075";
 import { $T } from "../figma_app/12535";
-import { HF, a6 as _$$a2, ow, M3 as _$$M3 } from "../figma_app/198840";
+import { isHubFilePublished, getHubFileVersionOrDefault, buildTemplatePublishPayload, getHubFileOrDefault } from "../figma_app/198840";
 import { getPermissionsState } from "../figma_app/642025";
 import { selectedViewToPath } from "../figma_app/193867";
 import { createUpdateLibraryPublishingModeAction } from "../figma_app/803787";
@@ -210,8 +210,8 @@ import { getLibraryPublishCallbacks } from "../905/686934";
 import { executePublishProcess } from "../figma_app/519839";
 import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { ConfirmationModal2 } from "../figma_app/918700";
-import { UM, F4 } from "../figma_app/60023";
-import { ke } from "../905/58274";
+import { updatePublishStateAtom, PublishState } from "../figma_app/60023";
+import { getPublishHandlers } from "../905/58274";
 import { br, U7 } from "../905/149895";
 import { A as _$$A7 } from "../5724/568040";
 import { A as _$$A8 } from "../1617/582870";
@@ -261,14 +261,14 @@ import { b as _$$b5 } from "../905/173822";
 import { bp, _N, Wj } from "../905/913057";
 import { e as _$$e7 } from "../905/393279";
 import { VO, o6, Vh, gy } from "../905/986349";
-import { d as _$$d3 } from "../905/44199";
+import { baseErrorSeverity } from "../905/44199";
 import { d as _$$d4 } from "../905/762622";
 import { $ as _$$$2, t as _$$t8 } from "../905/628632";
 import { sendWithRetry } from "../905/910117";
-import { cL } from "../905/748726";
+import { autocompleteReset } from "../905/748726";
 import { checkDomainExists } from "../figma_app/336853";
 import { handleInviteStatusResponses, sendRoleInvites, showInviteVisualBell } from "../905/351260";
-import { Z as _$$Z } from "../figma_app/761870";
+import { getAllAutocompleteEmails } from "../figma_app/761870";
 import { isValidEmail } from "../figma_app/416935";
 import { H as _$$H2 } from "../905/674803";
 import { t as _$$t9 } from "../figma_app/32680";
@@ -404,7 +404,7 @@ function ey({
   file: e,
   repo: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = eA({
     file: e,
     repo: t
@@ -500,7 +500,7 @@ function eM({
   file: e,
   repo: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = eA({
     file: e,
     repo: t
@@ -614,7 +614,7 @@ let eX = registerModal(function (e) {
     fileKey,
     hasPasswordSet
   } = e;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = () => s(popModalStack());
   let l = useModalManager({
     ...e,
@@ -669,7 +669,7 @@ let eQ = registerModal(function (e) {
   let {
     fileKey
   } = e;
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = () => i(popModalStack());
   let o = useModalManager({
     ...e,
@@ -702,7 +702,7 @@ function eJ({
   file: t
 }) {
   let i;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = selectCurrentUser();
   let o = s?.id;
   let l = t.key;
@@ -832,7 +832,7 @@ let to = registerModal(function (e) {
       remainingMinutes: i - 60 * n
     };
   }(e.fileKey);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let [o, l] = useState(600);
   let [d, u] = useState(0);
   let p = () => s(popModalStack());
@@ -1123,7 +1123,7 @@ function tV(e) {
     overlay: SharingClarityFileModalOverlay,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = _$$zl(tB);
   useSingleEffect(() => {
     "reset" === d.currentState ? show() : show({
@@ -1171,7 +1171,7 @@ function tV(e) {
 }
 let tW = registerModal(function (e) {
   let t = useModalManager(e);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let [s, o] = useState(!1);
   let [l, d] = useState(!1);
   return jsx(ModalRootComponent, {
@@ -1234,7 +1234,7 @@ let tW = registerModal(function (e) {
 });
 function tK(e) {
   let [t, i] = useState(!1);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = !!selectUserFlag("prototype_share_warning_dismissed");
   let l = tv(e.planTier === FPlanNameType.STARTER && !o);
   let d = jsx(_$$K, {});
@@ -1297,7 +1297,7 @@ function tY(e) {
 function tX({
   fileKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = jsx(_$$x, {});
   let s = useCallback(() => {
     $t({
@@ -1384,7 +1384,7 @@ function ir() {
     let e = !!kD();
     let t = J3();
     let i = selectCurrentFile();
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     return {
       openMakePublishFlow: async r => {
         if (i) {
@@ -1635,7 +1635,7 @@ function is({
   }) {
     let o = e.key;
     let l = e.editor_type;
-    let d = useDispatch();
+    let d = useDispatch<AppDispatch>();
     let c = isFullscreenView();
     let u = setupShareModalTabHandler();
     let p = tn(o);
@@ -1703,7 +1703,7 @@ function is({
     let i = e.file.canEdit;
     let s = qZ();
     let o = t && i && s && getFeatureFlags().aip_flower_garden_share;
-    let l = useDispatch();
+    let l = useDispatch<AppDispatch>();
     let d = useCallback(() => {
       l(hideModal());
       _$$u({
@@ -1719,7 +1719,7 @@ function is({
     file: e
   });
   let et = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = getCurrentTeamId();
     return e.file.isDraftFileLG && e.file.canMove && (e.org || i && hasTeamPaidAccess(e.team)) ? jsx(tf, {
       onClick: () => {
@@ -2066,7 +2066,7 @@ function iG({
   }), [e, i, n]);
 }
 function i$(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsxs(Fragment, {
     children: [jsx(LazyInputForwardRef, {
       disabled: e.sharedContainerSetting?.autogen_password_controls,
@@ -2373,7 +2373,7 @@ let ne = (e, t) => e === FPermissionLevelType.ORG_EDIT && t ? getI18nString("per
   containerName: t.name
 }) : getI18nString("permissions_modal.file_share_settings.only_invited_people");
 function nt(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let [s, o] = useState(null);
   let l = e.orgMaxExpirationInHrs ? e.currentTimestamp.clone().add(e.orgMaxExpirationInHrs, "hours") : null;
@@ -2513,7 +2513,7 @@ function na({
   fileRoles: c,
   currentUser: u
 }) {
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let g = trackFileEventWithStore();
   let _ = _$$L();
   let b = setupShareModalTabHandler();
@@ -2558,7 +2558,7 @@ function na({
     org: i,
     currentUser: n
   }) {
-    let s = useDispatch();
+    let s = useDispatch<AppDispatch>();
     let o = e.editor_type !== FFileType.WHITEBOARD && i && i.bigma_enabled ? e.mainFileLinkExpirationConfig?.id ?? "optimistic" : null;
     return useCallback((i, r, a) => {
       t && e.key === t.default_file_key ? s(updateRepoOptimist({
@@ -3009,7 +3009,7 @@ function ns(e) {
   return null;
 }
 function nc(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = Xr(ti);
   return jsx(TrackingProvider, {
     name: "google_device_screenshare_disclaimer_modal",
@@ -3105,7 +3105,7 @@ function nk({
   });
 }
 let nR = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => e(hideModal()), [e]);
   let i = useSelector(e => e.currentUserOrgId);
   let [s] = setupResourceAtomHandler(organizationAPIService.OrgAdminsQuery({
@@ -3146,7 +3146,7 @@ let nR = registerModal(function () {
   });
 }, "AccessNeededToPublishInOrgModal");
 let nN = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentFile();
   let i = useCallback(() => e(hideModal()), [e]);
   let s = useCallback(() => {
@@ -3198,7 +3198,7 @@ let n2 = registerModal(function ({
   onSuccess: l,
   onError: d
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = Xr(libraryPublishingModeAtom);
   let [m, g] = useState(!1);
   let {
@@ -3209,8 +3209,8 @@ let n2 = registerModal(function ({
   } = useMemo(() => isSlideTemplateResource(e) ? {
     beforeUnpublishHubFile: async () => {
       p(LibrarySourceEnum.HUBFILE);
-      atomStoreManager.set(UM, {
-        state: F4.UNPUBLISH_HUB_FILE_INITIATED
+      atomStoreManager.set(updatePublishStateAtom, {
+        state: PublishState.UNPUBLISH_HUB_FILE_INITIATED
       });
       AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(""));
       await u(executePublishProcess({
@@ -3218,7 +3218,7 @@ let n2 = registerModal(function ({
         unpublishAll: !0,
         savepointDescription: "slide template unpublish",
         hubFileId: e.id,
-        ...ke()
+        ...getPublishHandlers()
       }));
     },
     onUnpublishHubFileRedirectLink: void 0,
@@ -3227,8 +3227,8 @@ let n2 = registerModal(function ({
     },
     onUnpublishHubFileError: () => {
       U7(u);
-      atomStoreManager.set(UM, {
-        state: F4.UNPUBLISH_TEMPLATE_ERRORED
+      atomStoreManager.set(updatePublishStateAtom, {
+        state: PublishState.UNPUBLISH_TEMPLATE_ERRORED
       });
     }
   } : e.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE && getFeatureFlags().cooper_publish_to_cmty ? {
@@ -3263,7 +3263,7 @@ let n2 = registerModal(function ({
       onConfirm: async () => {
         g(!0);
         await beforeUnpublishHubFile?.();
-        u(_$$ax({
+        u(unpublishHubFileThunk({
           hubFileId: e.id,
           redirectLink: onUnpublishHubFileRedirectLink,
           onSuccess: async () => {
@@ -3640,7 +3640,7 @@ class rt extends Component {
     this.state.thumbnail && !this.state.publishing && URL.revokeObjectURL(this.state.thumbnail.url);
   }
   fetchRemixedFromHubFile() {
-    this.props.remixedFrom && this.props.dispatch(_$$ts2({
+    this.props.remixedFrom && this.props.dispatch(getHubFileVersionsThunk({
       hubFileId: this.props.remixedFrom.id
     }));
   }
@@ -3660,8 +3660,8 @@ class rt extends Component {
     let i = this.props.editingHubFile && isResourcePendingPublishing(this.props.editingHubFile);
     let r = this.props.isCommunityBlocked;
     let a = this.props.editingHubFile && this.props.editingHubFile.verification_status === FUserVerificationStatusType.BLOCKED;
-    let s = HF(this.props.editingHubFile) ? _$$a2(this.props.editingHubFile).created_at : null;
-    let o = HF(this.props.editingHubFile) && s ? getI18nString("community.permissions_modal_publish_tab.footer.published_at_timestamp", {
+    let s = isHubFilePublished(this.props.editingHubFile) ? getHubFileVersionOrDefault(this.props.editingHubFile).created_at : null;
+    let o = isHubFilePublished(this.props.editingHubFile) && s ? getI18nString("community.permissions_modal_publish_tab.footer.published_at_timestamp", {
       publish_date: new Date(s)
     }) : "\u2013";
     let l = this.props.user.sharing_restricted;
@@ -3774,7 +3774,7 @@ class rt extends Component {
       })]
     }) : (e = this.props.editingHubFile && isResourceDelisted(this.props.editingHubFile) ? getI18nString("community.resource.delisted") : i ? getI18nString("community.permissions_modal_publish_tab.footer.submitted") : getI18nString("community.permissions_modal_publish_tab.footer.last_published"), t = this.isPaid() && !i ? getI18nString("community.resource.delist") : getI18nString("community.resource.unpublish"), jsx("div", {
       className: HO,
-      children: HF(this.props.editingHubFile) && !this.props.canPublishError ? jsxs(Fragment, {
+      children: isHubFilePublished(this.props.editingHubFile) && !this.props.canPublishError ? jsxs(Fragment, {
         children: [jsxs("div", {
           className: ZD,
           children: [jsx("div", {
@@ -3828,7 +3828,7 @@ class rt extends Component {
     }));
   }
   renderRemixedFrom(e) {
-    let t = _$$a2(e);
+    let t = getHubFileVersionOrDefault(e);
     return jsxs("div", {
       className: Kz,
       children: [jsx("a", {
@@ -3847,11 +3847,11 @@ class rt extends Component {
     });
   }
   remixPublishingBlocked() {
-    return !HF(this.props.editingHubFile) && this.props.remixedFrom;
+    return !isHubFilePublished(this.props.editingHubFile) && this.props.remixedFrom;
   }
   isAlreadyPublishedByAnotherUser() {
     let e = this.props.editingHubFile;
-    return !this.props.canPublishError && HF(e) && e && e.creator.id !== this.props.user.id;
+    return !this.props.canPublishError && isHubFilePublished(e) && e && e.creator.id !== this.props.user.id;
   }
   getThumbnail(e) {
     return e.thumbnail_url ?? this.state.thumbnail?.url ?? "";
@@ -3871,7 +3871,7 @@ class rt extends Component {
         }), jsx(n7, {})]
       }), this.renderPublishInfoFooter()]
     });
-    if (HF(this.props.editingHubFile)) {
+    if (isHubFilePublished(this.props.editingHubFile)) {
       let t = this.getThumbnail(this.props.editingHubFile);
       let i = this.props.editingHubFile;
       let r = i?.community_publishers?.accepted.length > 0 ? i?.community_publishers?.accepted[0] : null;
@@ -3957,7 +3957,7 @@ let ri = connect((e, t) => {
   let o = e.publishingHubFiles[i.key];
   o && o.metadata || (o = {
     status: getStatusOrDefault(o),
-    metadata: t.canPublishError ? defaultTemplate : ow({
+    metadata: t.canPublishError ? defaultTemplate : buildTemplatePublishPayload({
       ...getPermissionsState(e),
       currentUserOrgId: e.currentUserOrgId,
       figFilePublishedAsHubFile: e.figFilePublishedAsHubFile,
@@ -3979,7 +3979,7 @@ let ri = connect((e, t) => {
     publishingState: o,
     isCommunityBlocked: s,
     openFile: i,
-    remixedFrom: e.figFileDuplicatedFromHubFile[i.key] ? _$$M3(e.figFileDuplicatedFromHubFile[i.key].hubFileId, e.hubFiles) : null,
+    remixedFrom: e.figFileDuplicatedFromHubFile[i.key] ? getHubFileOrDefault(e.figFileDuplicatedFromHubFile[i.key].hubFileId, e.hubFiles) : null,
     user: e.user,
     hubFileRemixes: e.hubFileRemixes,
     hubFileHref: l,
@@ -3987,7 +3987,7 @@ let ri = connect((e, t) => {
   };
 })(rt);
 function rn(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = selectUser();
   let s = useSelector(e => e.modalShown?.type === jS);
   let o = selectCurrentFile();
@@ -4021,7 +4021,7 @@ function rn(e) {
   let A = !!getCommunityHubLikeStatus(d, ResourceTypeNoComment.HUB_FILE).data?.[0];
   let y = o?.editorType === _YF.SLIDES;
   let b = o && _$$W(o.editorType);
-  let v = canPublishAsHubFile && !_ && "loading" !== p.status && (!HF(h) || isResourceDelisted(h)) && b;
+  let v = canPublishAsHubFile && !_ && "loading" !== p.status && (!isHubFilePublished(h) || isResourceDelisted(h)) && b;
   let I = useMemoShallow(() => o && ny()(o, "key", "teamId", "parentOrgId", "editorType"), [o]);
   useLayoutEffect(() => {
     s && I && v && re({
@@ -4100,7 +4100,7 @@ function rg({
 }) {
   let i = useParentOrgOfOpenFile();
   let s = getCurrentFileType();
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = {
     name: t.publishedByUser?.name || i?.name,
     imgUrl: t.publishedByUser?.imgUrl || i?.img_url
@@ -4166,7 +4166,7 @@ function rb() {
   let A = useSelector(t => e?.parentOrgId && t.orgById[e.parentOrgId] || void 0);
   let b = e?.key;
   let v = Pb(e);
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   let E = J3();
   let x = JU(E);
   let S = !!Of(e).canPublishAsHubFile;
@@ -4508,7 +4508,7 @@ function rM({
   editorType: t,
   licenseType: i
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     getShouldShowCurf,
     getIsEligibleForProvisionalAccess,
@@ -4562,7 +4562,7 @@ function rM({
   });
 }
 function rG(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = !!useSelector(e => e.userFlags).dismissed_move_draft_to_project_interstitial_modal;
   let r = jsx("p", {
     children: renderI18nText("drafts_move_banner.to_add_editors_first_move_this_file_from_drafts_into_a_project.seat_rename")
@@ -4630,7 +4630,7 @@ function rZ(e) {
   });
 }
 let r1 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = () => {
     t(popModalStack());
   };
@@ -4683,7 +4683,7 @@ let r1 = registerModal(function (e) {
   });
 }, "ConfirmEnableFolderAccessModal");
 let r2 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = () => {
     t(popModalStack());
   };
@@ -4723,7 +4723,7 @@ let r2 = registerModal(function (e) {
   });
 }, "ConfirmDisableFolderAccessModal");
 function r5(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = setupShareModalTabHandler();
   let r = e.folderAccessEnabled && e.canViewFolder;
   let s = () => {
@@ -5041,7 +5041,7 @@ function au({
 function aA(e) {
   let t = useDropdownState();
   let i = _$$P();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = mu(e.fileRowResource.file, e.seenState.user_id);
   let o = !!(e.fileRowResource.file.key && e.seenState.user_id);
   let {
@@ -5398,7 +5398,7 @@ function aq({
     repo: t,
     org: i
   }) {
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     let s = aB({
       isPrototypeInvite: isPrototypeView()
     });
@@ -5410,7 +5410,7 @@ function aq({
         repo: t,
         file: e
       });
-      let l = _$$Z(r);
+      let l = getAllAutocompleteEmails(r);
       if (i && l.filter(e => !checkDomainExists(i.org_domains?.domains || [], e)).length > 0) {
         n(VisualBellActions.enqueue({
           message: getI18nString("file_permissions_modal.external_sharing_unavailable", {
@@ -5429,7 +5429,7 @@ function aq({
         data: e
       }) => {
         let t = e.meta;
-        n(cL());
+        n(autocompleteReset());
         t.filter(e => !e.errored).length > 0 && n(VisualBellActions.enqueue({
           message: getI18nString("file_permissions_modal.link_has_been_sent")
         }));
@@ -5486,7 +5486,7 @@ function a$({
     fileRoles: d,
     inviteLevel: c
   }) {
-    let u = useDispatch();
+    let u = useDispatch<AppDispatch>();
     let p = isPrototypeView();
     let g = $Y(e);
     let f = useCurrentPublicPlan("useHandleSendInvitesSubmit");
@@ -5502,7 +5502,7 @@ function a$({
     }) {
       let o = isPrototypeView();
       let l = X();
-      let d = useDispatch();
+      let d = useDispatch<AppDispatch>();
       let [c, u] = useAtomValueAndSetter(_$$H2);
       let p = _$$P().usersByEmail;
       let g = selectUser();
@@ -5521,7 +5521,7 @@ function a$({
         });
         o = e.editor_type === FFileType.SLIDES ? aH.SLIDES : f ? aH.PROTOTYPE : l ? aH.HANDOFF : aH.DESIGN;
         d(sendRoleInvites({
-          emails: _$$Z(r),
+          emails: getAllAutocompleteEmails(r),
           resourceType,
           resourceIdOrKey,
           level: s,
@@ -5544,7 +5544,7 @@ function a$({
               file: e,
               folderName: a
             }));
-            d(cL());
+            d(autocompleteReset());
           },
           orgName: i ? i.name : void 0
         }));
@@ -5598,7 +5598,7 @@ function a$({
       }
       let d = i?.org_domains?.domains;
       if (i?.invite_whitelist_guest_invite_setting == null && d && d.length > 0) {
-        let e = _$$Z(r).filter(e => isValidEmail(e) && !checkDomainExists(d, e));
+        let e = getAllAutocompleteEmails(r).filter(e => isValidEmail(e) && !checkDomainExists(d, e));
         if (e.length > 0) {
           u(showModalHandler({
             type: confirmOrgGuestInviteModal,
@@ -5663,7 +5663,7 @@ function aZ({
   dropdownProps: u,
   planRecordId: p
 }) {
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = selectUser();
   let f = useSelector(e => e.autocomplete);
   let _ = useSelector(e => e.contacts);
@@ -5674,7 +5674,7 @@ function aZ({
   }, [t]);
   let b = useCallback(e => {
     if (_$$d4(e)) return {
-      state: _$$d3.OK,
+      state: baseErrorSeverity.OK,
       content: e
     };
     let i = t?.org_domains || aP;
@@ -5759,7 +5759,7 @@ function a0({
 }) {
   let x = useCurrentPublicPlan("InviteTabLoaded");
   let S = useIsStarterPlan(x).unwrapOr(!1);
-  let w = useDispatch();
+  let w = useDispatch<AppDispatch>();
   let C = selectUser();
   let {
     hasEditRole,
@@ -5843,7 +5843,7 @@ function a2({
   file: e,
   team: t
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   return jsx(BannerFullWidth, {
     variant: "warn",
     children: jsxs(BannerMessage, {
@@ -5893,7 +5893,7 @@ function a5({
   planRecordId: w
 }) {
   let C = J();
-  let T = useDispatch();
+  let T = useDispatch<AppDispatch>();
   let k = isPrototypeView();
   let R = tv(S === FPlanNameType.STARTER && k);
   switch (C) {
@@ -6148,7 +6148,7 @@ function se({
   folder: t,
   goBack: i
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   if (!t || !(e.hasEditRole && s5())) return null;
   let s = () => {
     _$$L5.updateFolderAccessEnabled({
@@ -6359,10 +6359,10 @@ function sp({
     planTier,
     planRecordId
   } = useMemo(() => m1(t, e), [e, t]);
-  let W = useDispatch();
+  let W = useDispatch<AppDispatch>();
   let K = mu(file, i.id);
   let Y = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = function (e) {
       let {
         Sprig
@@ -6379,7 +6379,7 @@ function sp({
         view: ShareAction.INVITE
       }));
       t(hideModal());
-      t(cL());
+      t(autocompleteReset());
       i();
     }, [t, i]);
   }(t);
@@ -6526,14 +6526,14 @@ export let $$sm0 = registerModal(function ({
   });
   return (!function () {
     let e = isPrototypeView();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     useEffect(() => {
       e && t(trackPrototypeScaleChangeEvent({
         name: "Prototype Share Opened"
       }));
     }, [t, e]);
   }(), !function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     useEffect(() => {
       "loaded" === e.status && null === e.data.file && t(hideModal());
     }, [e, t]);

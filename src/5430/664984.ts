@@ -65,7 +65,7 @@ export function $$y2(e) {
   return useMemo(() => !!t && (teams.length || orgs.length ? teams.length > 0 || orgs.some(e => !e.is_slides_disabled) : !r?.is_slides_disabled), [t, teams, orgs, r]);
 }
 export function $$g0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = function (e) {
     let t = useAtomWithSubscription(initialStateAtom);
     let r = selectCurrentUser();

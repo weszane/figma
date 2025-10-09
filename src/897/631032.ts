@@ -410,7 +410,7 @@ function $(e) {
   let _ = P.invert(p);
   let d = u.transformDirection(1);
   let [h, m] = useState(null);
-  let S = useDispatch();
+  let S = useDispatch<AppDispatch>();
   let I = useCallback(e => {
     let t = l.current.getBoundingClientRect();
     return {
@@ -621,7 +621,7 @@ function X(e) {
   return e;
 }
 export let $$Y0 = memo(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = isSitesFileType();
   let r = t => {
     e.updateSelectionProperties({

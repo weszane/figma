@@ -14,7 +14,7 @@ import { getI18nString } from "../905/303541";
 import { retrieveVariableCollection } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { EditorPreferencesApi } from "../figma_app/740163";
-import { ol } from "../figma_app/852050";
+import { getExtensionMappings } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { LibraryTabEnum } from "../figma_app/633080";
@@ -134,7 +134,7 @@ export function $$$0({
   showInheritedModeOption: n,
   recordingKey: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = kN();
   let d = iR();
   let c = d2();
@@ -187,7 +187,7 @@ export function $$W1(e) {
     hideRemoveButton,
     onChange
   } = e;
-  let W = useDispatch();
+  let W = useDispatch<AppDispatch>();
   let Y = useSelector(e => e.dropdownShown);
   let X = ZP();
   let q = explicitModeID && explicitModeID !== Mo && modeOptions.every(e => !deepEqual(e.modeId, explicitModeID));
@@ -204,7 +204,7 @@ export function $$W1(e) {
     onChange(e, n);
     void 0 !== t && et(t);
   }, [onChange]);
-  let ea = ol();
+  let ea = getExtensionMappings();
   let el = _$$T2(variableSetKey, modeOptions, explicitModeID, inheritedModeID ?? null, ea);
   let er = getFeatureFlags().ds_extended_collections && el.collectionsInFamily.size > 1;
   let ei = useMemo(() => getFeatureFlags().ds_extended_collections ? function (e, t) {

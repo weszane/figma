@@ -34,7 +34,7 @@ export function $$P1(e) {
     oldValueMap,
     newValueMap
   } = e;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = new _r();
   let d = e => e && "Variables" === header ? l.format(e) : e;
   return jsxs("div", {
@@ -126,7 +126,7 @@ function D({
   layerChangeNodeId: t,
   layerBasisNodeId: i
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = lE(e, e => sessionLocalIDToString(e.basis.guid) === i || sessionLocalIDToString(e.change.guid) === t)?.changesToDisplay;
   if (!s) return null;
   let l = s.filter(e => "textData" !== e.identifier);

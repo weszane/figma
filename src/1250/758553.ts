@@ -43,7 +43,7 @@ let x = e => {
   };
 };
 export function $$y1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useCallback(() => t(REFRESH_FEED_ACTION()), [t]);
   let {
     feedPost

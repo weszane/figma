@@ -53,7 +53,7 @@ function q(e) {
     onCancel
   } = e;
   let m = useModalManager(e);
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let p = $$es3(fileImport);
   let f = 0 === p.remainingFiles;
   let g = $$ea7();
@@ -191,7 +191,7 @@ function q(e) {
 }
 let Q = "import_progress_modal";
 export function $$Z0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     fileImport
   } = selectWithShallowEqual(e => ({
@@ -255,7 +255,7 @@ export function $$ee2({
   onCancel: r,
   onMoveToProject: n
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = $$ea7();
   let m = $$es3(e);
   let _ = useSelector(e => e.selectedView);

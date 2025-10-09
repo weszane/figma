@@ -178,7 +178,7 @@ export function ModalView(props) {
  * Wraps ModalView and handles modal stack/hide logic and analytics tracking.
  */
 export function ModalContainer(props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const {
     onHide,
     popStack,
@@ -257,7 +257,7 @@ export function ConfirmationModal2(props) {
     bottomWarningText,
     ...rest
   } = props;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   // Handles modal close
   const handleClose = useCallback(() => {

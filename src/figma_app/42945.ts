@@ -90,7 +90,7 @@ async function B(e, t) {
 export let $$G3 = createContext({});
 export function $$V5(e) {
   let t = wq();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let d = useIsCommunityHubView();
   let u = useSelector(e => e.comments.showResolved);
   let p = useSelector(e => e.comments.showOnlyParticipating);

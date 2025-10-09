@@ -79,7 +79,7 @@ import { initiateResourcePurchaseFlow, checkResourceEligibility, isResourcePayme
 import { KeyboardNavigationProvider, useKeyboardNavigationItem } from '../figma_app/119475';
 import { LR } from '../figma_app/120210';
 import { getPluginAllowListKey, getWidgetAllowListKey } from '../figma_app/155287';
-import { M as _$$M } from '../figma_app/170366';
+import { getPluginManager } from '../figma_app/170366';
 import { FUserRoleType } from '../figma_app/191312';
 import { B6, dQ, Ex, ff, gC, IT, Ix, kB, Kr, NF, np, Xo, Zm } from '../figma_app/201703';
 import { MM } from '../figma_app/236327';
@@ -97,7 +97,7 @@ import { SimpleComponentType, OrgListViewType } from '../figma_app/504088';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { hI, I4, JL, QW } from '../figma_app/522242';
 import { BI } from '../figma_app/546509';
-import { af, Qi } from '../figma_app/559491';
+import { getResourceVersionsThunk, mergePublishedPluginThunk } from '../figma_app/559491';
 import { IW } from '../figma_app/563413';
 import { a as _$$a2, z as _$$z } from '../figma_app/601188';
 import { WithTrackedIconButton } from '../figma_app/617427';
@@ -128,7 +128,7 @@ import { A as _$$A8 } from '../svg/987294';
 let r;
 let _ = u;
 function $(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let s = useStore();
   let r = useSelector(_$$m);
   let l = useSelector(e => selectCommonLibraryKey(e));
@@ -370,7 +370,7 @@ function eH({
 }
 let eU = 'detail_view--ratingSelectorContainer--zbvCM';
 function eQ(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     activeTab
   } = IT();
@@ -379,7 +379,7 @@ function eQ(e) {
   let o = usePluginedWidgets();
   let d = (r ? l : o)[e.resourceId];
   return (useEffect(() => {
-    d && d.community_publishers || t(af({
+    d && d.community_publishers || t(getResourceVersionsThunk({
       id: e.resourceId,
       resourceType: r ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET
     }));
@@ -401,7 +401,7 @@ function eG(e) {
     activeTab
   } = IT();
   let r = activeTab === SimpleComponentType.PLUGIN;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let o = isDevHandoffEditorType();
   let d = useIsSelectedViewFullscreenCooper();
   let c = useCanPerformAction();
@@ -690,7 +690,7 @@ function e5({
   });
 }
 function e8() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useDropdownState();
   let s = t?.type === _$$kt;
   let r = useCallback(t => {
@@ -734,7 +734,7 @@ function e7() {
   let r = useLocalPluginsExcludingWidgets();
   let n = activeTab === SimpleComponentType.WIDGET;
   let l = n ? r : s;
-  let o = _$$M();
+  let o = getPluginManager();
   let d = getUnpublishedResources(n);
   return o && (Object.keys(l).length > 0 || d.length > 0) ? jsxs(TrackingProvider, {
     name: 'Development',
@@ -1115,11 +1115,11 @@ function tJ({
   let [w, L] = useState(null);
   let [E, P] = useState(!1);
   let [k, R] = useState(!1);
-  let M = useDispatch();
+  let M = useDispatch<AppDispatch>();
   useEffect(() => {
     let e = u !== d;
     hasPluginAllowList || publicExtensionsDisallowed || !e && j !== null || E || (P(!0), tY(o, d).then(e => {
-      M(Qi({
+      M(mergePublishedPluginThunk({
         publishedPlugins: e,
         src: 'Figma inserts modal recents view'
       }));
@@ -1135,7 +1135,7 @@ function tJ({
   }, [M, j, E, o, hasAllowList, hasPluginAllowList, publicExtensionsDisallowed, d, u]);
   useEffect(() => {
     hasWidgetAllowList || w !== null || k || (R(!0), tK().then(e => {
-      M(Qi({
+      M(mergePublishedPluginThunk({
         publishedPlugins: e,
         src: 'Figma inserts modal recents view'
       }));
@@ -1693,7 +1693,7 @@ function sd({
   setSearchQuery: t,
   placeholder: s
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     setKeyboardNavigationElement
   } = useKeyboardNavigationItem({
@@ -1810,7 +1810,7 @@ function sc(e) {
   } = IT();
   let c = NF(l);
   let u = useRef(null);
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let x = useCallback(e => {
     t.current && (e > 0 ? t.current.className = _()('fd_browse_resource_modal--mainViewHeaderScrolled--RPI7X fd_browse_resource_modal--mainViewHeader--AZpur', tm) : t.current.className = _()(t_, r ? tx : tm), m(hideDropdownAction()));
   }, [t, m, r]);
@@ -1871,10 +1871,10 @@ function su({
   });
 }
 function s_(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let s = useDropdownState();
   let r = useCurrentUserOrg();
-  let l = _$$M();
+  let l = getPluginManager();
   let o = useCallback(e => function (e, t) {
     switch (e) {
       case 'recents_and_saved':

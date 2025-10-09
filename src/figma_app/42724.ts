@@ -11,7 +11,7 @@ import { AuthModal } from "../905/749159";
 export function $$_1(e) {
   let t = selectCurrentFile()?.name;
   let r = getSelectedView();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return ({
     origin: i,
     formState: a

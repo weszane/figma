@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { isResourcePendingPublishing } from "../figma_app/777551";
-import { et, zn } from "../figma_app/559491";
+import { unpublishPluginThunk, updatePluginRoleThunk } from "../figma_app/559491";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
@@ -13,10 +13,10 @@ export let $$u0 = registerModal(function ({
   let r;
   let d;
   let u;
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let _ = e.is_widget ? getI18nString("community.plugins.widget") : getI18nString("community.plugins.plugin");
   let h = () => {
-    p(et({
+    p(unpublishPluginThunk({
       resource: e
     }));
   };
@@ -26,7 +26,7 @@ export let $$u0 = registerModal(function ({
   }) : getI18nString("community.plugins.this_action_will_remove_your_public_resource_type_review_submission", {
     resourceType: _
   }), d = getI18nString("community.plugins.withdraw"), u = () => {
-    e.roles.org ? p(zn({
+    e.roles.org ? p(updatePluginRoleThunk({
       pluginId: e.id,
       role: e.roles
     })) : h();

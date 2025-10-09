@@ -17,7 +17,7 @@ export function $$E0() {
   let e = useSelector(e => e.universalInsertModal.showing);
   let t = useSelector(e => e?.mirror?.appModel?.currentTool === DesignGraphElements.NONE);
   let r = e && t;
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let y = useCallback(() => {
     r ? (E(closeUniversalInsertModal()), Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
       source: fK

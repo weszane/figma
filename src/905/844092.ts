@@ -10,7 +10,7 @@ import { M } from "../905/981847";
 import { KK } from "../905/649567";
 import { Kn } from "../905/958668";
 export function $$h0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     attachments
   } = e;

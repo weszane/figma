@@ -25,7 +25,7 @@ import { j as _$$j } from "../905/834956";
 import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { ak } from "../figma_app/212260";
 export function $$w2(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = usePluginedWidgets()[e.widgetId];
   let i = getPluginVersion(r);
   let d = findLocalPluginById(e.widgetId);
@@ -115,7 +115,7 @@ function R({
   } : null;
 }
 export function $$L1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useDropdownState();
   let s = isDevHandoffEditorType();
   let o = setupUserPluginPreferences();
@@ -183,7 +183,7 @@ export let $$k7 = "DROPDOWN_TYPE_PLUGIN_USER_OPTIONS_DROPDOWN";
 export function $$M3(e) {
   if (!e.localResource && !e.publishedResource) throw Error("Either localResource or publishedResource is required");
   let t = isDevHandoffEditorType();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let s = Object.values(getLocalPlugins()).find(t => t.plugin_id === e.publishedResource?.id);
   let o = setupUserPluginPreferences();
@@ -251,7 +251,7 @@ export function $$M3(e) {
 }
 export let $$F5 = "DROPDOWN_TYPE_DEVELOPMENT_RESOURCE_OPTIONS_DROPDOWN";
 export function $$j6(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(_$$j, {
     ...e,
     dispatch: t,

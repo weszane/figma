@@ -6,7 +6,7 @@ import { VisualBellActions } from "../905/302958";
 import { z8, bb } from "../figma_app/399472";
 import { isOrgOrTeamExport } from "../figma_app/740025";
 import { getPublisherStatus, PENDING_STATUSES } from "../figma_app/599979";
-import { M3 } from "../figma_app/198840";
+import { getHubFileOrDefault } from "../figma_app/198840";
 import { getPluginMetadata } from "../figma_app/300692";
 import { ResourceTypeNoComment, hasClientMeta, isWidget, isPlugin } from "../figma_app/45218";
 import { vR } from "../5430/309696";
@@ -15,8 +15,8 @@ export function $$h0({
   resourceType: t,
   containerClassName: r
 }) {
-  let h = useDispatch();
-  let x = useSelector(r => t === ResourceTypeNoComment.HUB_FILE ? M3(e, r.hubFiles) : getPluginMetadata(e, r.publishedPlugins));
+  let h = useDispatch<AppDispatch>();
+  let x = useSelector(r => t === ResourceTypeNoComment.HUB_FILE ? getHubFileOrDefault(e, r.hubFiles) : getPluginMetadata(e, r.publishedPlugins));
   let f = useSelector(e => e.authedActiveCommunityProfile);
   let y = useSelector(e => getPublisherStatus(e, x));
   let g = useCallback(() => {

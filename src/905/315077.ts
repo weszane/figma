@@ -23,7 +23,7 @@ export function $$v0({
   position: l,
   onContextMenuCallback: d
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let _ = useSelector(e => e.currentUserOrgId || void 0);
   let b = useSelector(e => e.currentTeamId);
   let v = useSelector(e => e.user);

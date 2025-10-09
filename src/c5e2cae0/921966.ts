@@ -27,7 +27,7 @@ let N = e => {
     return t.loadingState[a];
   });
   let a = useSelector(t => t.teamUserByTeamId[e] || {});
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   useEffect(() => {
     s(fetchTeamUsers({
       teamId: e
@@ -54,7 +54,7 @@ export function $$b0({
     teamId
   } = e;
   let a = N(teamId);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = () => {
     r(makeStudentTeamThunk({
       teamId,

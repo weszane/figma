@@ -222,7 +222,7 @@ export function $$z0({
   workspaceId: e,
   selectedTab: t
 }) {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = useSelector(({
     orgById: e,
     currentUserOrgId: t

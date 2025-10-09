@@ -8,7 +8,7 @@ import p from "../vendor/223926";
 import { dayjs } from "../905/920142";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
-import { af } from "../figma_app/559491";
+import { getResourceVersionsThunk } from "../figma_app/559491";
 import { PluginAction } from "../905/15667";
 import { useCurrentOrgAdminInfo } from "../figma_app/543529";
 import { useCanRunExtensions } from "../figma_app/844435";
@@ -204,8 +204,8 @@ export function $$F0() {
   let p = useCurrentFileKey();
   let C = useRef(new _$$O(dayjs.duration(1, "day")));
   let T = useCanRunExtensions();
-  let I = useDispatch();
-  let D = e => I(af({
+  let I = useDispatch<AppDispatch>();
+  let D = e => I(getResourceVersionsThunk({
     id: e,
     resourceType: n[e]?.is_widget ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN
   }));

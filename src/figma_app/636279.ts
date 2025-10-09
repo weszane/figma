@@ -7,7 +7,7 @@ import { selectComponentAssetsMap, selectStateGroupAssetsMap } from "../figma_ap
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { useComponentFlyoutModal, COMPONENT_FLYOUT_MODAL_TYPE } from "../figma_app/608944";
 export function $$u0(e, t, r) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useSelector(e => e.modalShown);
   let {
     isFlyoutOpen,

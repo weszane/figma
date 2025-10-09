@@ -97,7 +97,7 @@ export let $$x0 = registerModal(function ({
   onClose: t,
   projectId: i
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let [o, l] = useState(!1);
   let d = B2().unwrapOr(!1);
   let c = useCallback(() => l(!0), []);

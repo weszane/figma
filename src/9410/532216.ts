@@ -41,7 +41,7 @@ import { getRepoByIdAlt, isDefaultFile, isBranchAlt } from "../905/760074";
 import { m as _$$m, t as _$$t2 } from "../905/364535";
 import { $n } from "../905/930279";
 import { isIntegrationContext } from "../905/87821";
-import { SR } from "../figma_app/852050";
+import { initializeVariableHooks } from "../figma_app/852050";
 import { BI, m0 as _$$m2 } from "../figma_app/546509";
 import { selectCurrentFile, selectOpenFileObject } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -228,7 +228,7 @@ let eI = memo(function () {
 });
 var e1 = (e => (e.DISABLED = "disabled", e.PUBLISH = "publish", e.SHOW_UPSELL_MODAL = "show_upsell_modal", e))(e1 || {});
 function e2() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return () => {
     e(showModalHandler({
       type: dD,
@@ -310,7 +310,7 @@ let e7 = memo(function ({
   sections: i
 }) {
   let o = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useSelector(selectOpenFileObject);
     let i = useSelector(e => e.currentUserOrgId);
     let r = useSelector(e => e.currentTeamId);
@@ -368,7 +368,7 @@ let e7 = memo(function ({
 let e8 = memo(function () {
   let e = selectCurrentFile();
   let t = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return t => {
       e(showModalHandler({
         type: _$$l(),
@@ -379,7 +379,7 @@ let e8 = memo(function () {
     };
   }();
   let i = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return t => {
       e(showModalHandler({
         type: _$$I(),
@@ -432,8 +432,8 @@ let ti = memo(function ({
   let u = useSelector(e => e.fileVersion);
   let m = useSelector(e => e.repos);
   let g = !!selectCurrentUser();
-  let _ = useDispatch();
-  SR();
+  let _ = useDispatch<AppDispatch>();
+  initializeVariableHooks();
   let {
     archiveBranch,
     deleteBranch,
@@ -449,7 +449,7 @@ let ti = memo(function ({
   } = {
     deleteBranch: function () {
       let e = selectCurrentFile();
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       return () => {
         e && t(showModalHandler({
           type: _$$e3,
@@ -466,7 +466,7 @@ let ti = memo(function ({
       };
     }(),
     rename: function () {
-      let e = useDispatch();
+      let e = useDispatch<AppDispatch>();
       return useCallback(() => {
         e(beginRenaming());
       }, [e]);
@@ -477,7 +477,7 @@ let ti = memo(function ({
       let i = useSelector(selectOpenFileObject);
       let r = JT();
       let n = r && r.profile.entityType === TeamOrgType.TEAM;
-      let s = useDispatch();
+      let s = useDispatch<AppDispatch>();
       let o = useSelector(e => e.repos);
       return () => {
         if (!e || !i) return;
@@ -500,7 +500,7 @@ let ti = memo(function ({
     }(),
     archiveBranch: function () {
       let e = useSelector(selectOpenFileObject);
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       return () => {
         e && (t(deleteFilesOptimistThunk({
           fileKeys: {
@@ -515,7 +515,7 @@ let ti = memo(function ({
     }(),
     restoreBranch: function () {
       let e = useSelector(selectOpenFileObject);
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       return () => {
         e && t(handleRestoreTrashedFilesHelper({
           fileKeys: {
@@ -527,7 +527,7 @@ let ti = memo(function ({
     }(),
     openFileAnalytics: function () {
       let e = selectCurrentFile();
-      let t = useDispatch();
+      let t = useDispatch<AppDispatch>();
       return useCallback(() => {
         e && t(showModalHandler({
           type: _$$e4,
@@ -556,7 +556,7 @@ let ti = memo(function ({
       let s = function () {
         let e = selectCurrentFile();
         let t = useSelector(e => e.teams);
-        let i = useDispatch();
+        let i = useDispatch<AppDispatch>();
         return () => {
           if (!e) return;
           let r = e.teamId && t[e.teamId];
@@ -575,7 +575,7 @@ let ti = memo(function ({
       };
     }(),
     toggleVersionHistory: function () {
-      let e = useDispatch();
+      let e = useDispatch<AppDispatch>();
       let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
       return () => {
         Ah(t) ? e(exitVersionHistoryMode()) : e(enterVersionHistoryMode({
@@ -584,7 +584,7 @@ let ti = memo(function ({
       };
     }(),
     resetFileThumbnail: function () {
-      let e = useDispatch();
+      let e = useDispatch<AppDispatch>();
       let t = selectCurrentFile();
       return () => {
         t && e(setFileThumbnailOptimistic({
@@ -866,7 +866,7 @@ let ti = memo(function ({
   });
 });
 export function $$tr0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let c = i?.type === _$$eg;
   let v = useSelector(e => e.isRenaming);

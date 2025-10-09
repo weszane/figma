@@ -7,7 +7,7 @@ import { closeUniversalInsertModal, setUniversalInsertModalOpen } from "../905/1
 import { logAndTrackCTA } from "../figma_app/314264";
 import { fK, tV } from "../figma_app/300024";
 export function $$m0(e, t) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return useCallback(() => {
     handleAtomEvent({
       id: "figjam-saves"

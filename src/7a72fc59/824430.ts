@@ -349,7 +349,7 @@ import { APIParameterUtils, createPaginatedValidator } from '../figma_app/181241
 import { dh as _$$dh } from '../figma_app/186343';
 import { FFileType, FOrganizationLevelType, FPlanNameType } from '../figma_app/191312';
 import { yesNoTrackingEnum } from '../figma_app/198712';
-import { pt as _$$pt } from '../figma_app/198840';
+import { isCommunityDuplicate } from '../figma_app/198840';
 import { ih as _$$ih } from '../figma_app/200284';
 import { B0 } from '../figma_app/201703';
 import { sendToBuzzFromDesignAtom } from '../figma_app/223206';
@@ -386,7 +386,7 @@ import { LH } from '../figma_app/384673';
 import { getColorAtStop, validateGradientPaint, isGradientType, rotatePaint, getSolidPaint, paintManager, getImageOrVideoPaint } from '../figma_app/385874';
 import { useSelectedSlideRowGuids, useSelectedCooperFrameId, useSelectedCooperFrameIds, useCooperFrameGuids } from '../figma_app/396464';
 import { aq as _$$aq } from '../figma_app/399472';
-import { rg as _$$rg } from '../figma_app/401069';
+import { logFileExportThunk } from '../figma_app/401069';
 import { R as _$$R } from '../figma_app/421558';
 import { u7 as _$$u, hg } from '../figma_app/425489';
 import { A as _$$A2 } from '../figma_app/426577';
@@ -458,7 +458,7 @@ import { Ad } from '../figma_app/811257';
 import { _YF } from '../figma_app/822011';
 import { TrackingProvider } from '../figma_app/831799';
 import { F as _$$F2 } from '../figma_app/832508';
-import { WH } from '../figma_app/836943';
+import { useStyleInfo } from '../figma_app/836943';
 import { dM as _$$dM, Eh } from '../figma_app/837840';
 import { rE as _$$rE, bW, Oj } from '../figma_app/850075';
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuItemLead, MenuGroupComp } from '../figma_app/860955';
@@ -475,7 +475,7 @@ import { kx } from '../figma_app/920333';
 import { searchStartSession, searchEndSession } from '../figma_app/925970';
 import { capitalize } from '../figma_app/930338';
 import { applySharedStyle, useFileLibrarySubscriptions, loadSharedVariableThunk } from '../figma_app/933328';
-import { _Y as _$$_Y } from '../figma_app/936646';
+import { useLibraryDataSubscriptionsByLibraryKey } from '../figma_app/936646';
 import { EditorUIState } from '../figma_app/941983';
 import { Vi } from '../figma_app/955650';
 import { _q, PA } from '../figma_app/957070';
@@ -973,7 +973,7 @@ let et = e => {
   };
 };
 let en = (e, t, n, l, r, i, o) => {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = trackFileEventWithStore();
   useEffect(() => {
     if (!e) return;
@@ -1000,7 +1000,7 @@ let en = (e, t, n, l, r, i, o) => {
         })
       }));
       Z();
-      d(_$$rg());
+      d(logFileExportThunk());
       o(!1);
       l(0);
     };
@@ -1281,7 +1281,7 @@ function td({
   setSearchQuery: t
 }) {
   let n = useSelector(e => e.search.sessionId);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let r = g5('import_from_design_search_bar');
   let i = Xr(templateSourceAtom);
   let d = useCallback(e => {
@@ -1339,7 +1339,7 @@ function tx({
   customPlaceholder: n
 }) {
   let l = useSelector(e => e.search.sessionId);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = v3();
   let d = Xr(isTemplateSearchEnabledAtomFamily);
   let c = g5('search_bar');
@@ -1611,7 +1611,7 @@ function tV({
   file: e
 }) {
   let t = selectCurrentUser();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let l = _$$aZ();
   let r = useSelector(e => e.currentUserOrgId);
   let i = useSelector(e => e.currentTeamId);
@@ -2464,7 +2464,7 @@ let nS = {
 };
 let nF = userFlagAtomFamily(RG);
 function nB() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = VU();
   let n = useAtomWithSubscription(nF);
   return n?.status !== 'loaded' || n?.status === 'loaded' && n?.data ? null : jsx('div', {
@@ -2637,7 +2637,7 @@ function nX({
 }) {
   let [t, n] = useAtomValueAndSetter(templateSourceAtom);
   let l = VU();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let i = useLibraries([_$$l(e)]);
   let d = i.data;
   let u = i.status === 'loading';
@@ -3032,7 +3032,7 @@ function n8({
   isLoading: t,
   dismissible: n = !0
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let r = useAtomWithSubscription(n6);
   return (r?.status !== 'loaded' || r?.status === 'loaded' && r?.data) && n ? null : t ? jsx('div', {
     className: 'x2iayur',
@@ -4185,7 +4185,7 @@ function lY({
 }) {
   let t = Xr(templateBrowsingModeAtomFamily);
   let n = VU();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let r = useLibraries([_$$l(e)]);
   let i = r.data;
   let d = r.status === 'loading';
@@ -4682,7 +4682,7 @@ function rO({
 function rM({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [n, l] = useSelectionProperty('cornerRadius');
   let {
     smallNudgeAmount,
@@ -4852,7 +4852,7 @@ function r7({
   });
 }
 function ii() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let {
     close
   } = useNavigationStack();
@@ -5055,7 +5055,7 @@ function iV({
 function iG({
   letterSpacing: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     bigNudgeAmount,
     smallNudgeAmount
@@ -5819,7 +5819,7 @@ function o7({
   let u = !!d;
   let x = useSubscribedLibraries();
   _$$hg(r);
-  let p = WH(t, n, r)?.key ?? null;
+  let p = useStyleInfo(t, n, r)?.key ?? null;
   let m = AH(p, normalizeValue(n));
   let {
     stylePreviewShown
@@ -5833,7 +5833,7 @@ function o7({
     height,
     initialOffset
   } = V0(r, p, g.current, !0, d, []);
-  let y = _$$_Y();
+  let y = useLibraryDataSubscriptionsByLibraryKey();
   let E = useMemo(() => m?.status !== 'loaded' ? null : m.data.library_key, [m]);
   let v = (() => {
     if (!p || !m || isNullish(E)) return !1;
@@ -5934,7 +5934,7 @@ function an({
     } = selectWithShallowEqual(e => ({
       styleIdForText: e.mirror.selectionProperties.styleIdForText || null
     }));
-    let n = WH(e, styleIdForText, 'TEXT');
+    let n = useStyleInfo(e, styleIdForText, 'TEXT');
     let l = useSelectionPropertyValue('fontFamily');
     return useMemo(() => {
       let e = {
@@ -5996,7 +5996,7 @@ function al({
     inheritTextStyleKey: e.mirror.selectionProperties.inheritTextStyleKey || null,
     styleIdForText: e.mirror.selectionProperties.styleIdForText || null
   }));
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let x = useSelector(e => e.pickerShown && e.pickerShown.id === o2 ? e.pickerShown : null);
   let m = useCallback((e, t) => {
     if (t.current) {
@@ -7113,7 +7113,7 @@ function aV({
   padding: e,
   recordingKey: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [l, r] = useSelectionProperty('blur');
   let {
     smallNudgeAmount,
@@ -7199,7 +7199,7 @@ function aH({
   padding: e = 'normal',
   recordingKey: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let [l, r] = useSelectionProperty('opacity');
   let i = isInvalidValue(l) ? MIXED_MARKER : valueOrFallback(l, 1);
   return jsx(aD, {
@@ -7296,7 +7296,7 @@ function aZ({
   toggleOverlayColorPicker: t,
   recordingKey: n
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let {
     opacity,
     paint,
@@ -7358,7 +7358,7 @@ function a5({
   padding: e,
   recordingKey: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let {
     selectedShadowStyle,
     shadowOpacity,
@@ -8461,7 +8461,7 @@ function sY({
   let u = MK(JT.GENERATE_IMAGE);
   let x = Xr(assetCategoryAtom);
   let m = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let {
       close
     } = useNavigationStack();
@@ -9325,7 +9325,7 @@ function dy() {
   });
 }
 function dE() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let [t, n] = useState(!1);
   return jsx(_$$R4, {
     children: jsx(AutoInteractableWrapper, {
@@ -9581,7 +9581,7 @@ function dO({
   strokeWeight: l,
   onStrokeWeightChange: r
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let d = useRef(new KD({
     min: 0
   }));
@@ -10995,7 +10995,7 @@ function uI({
   let d = function ({
     onImportFailure: e
   }) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     return useCallback(n => {
       e(n);
       t(VisualBellActions.enqueue({
@@ -11482,7 +11482,7 @@ function uK() {
       setCurrentView: i
     }), [t, i]);
   }();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let l = useMemo(() => ({
     activeTab: SimpleComponentType.PLUGIN,
     viewResource: e => {
@@ -11520,7 +11520,7 @@ function uH({
 }) {
   let t = useAtomWithSubscription(_$$d4) === 'LOADING';
   let n = uW();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   useEffect(() => {
     l(_$$aq());
   }, [l]);
@@ -11878,7 +11878,7 @@ function xn({
   });
 }
 function xl() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelectedCooperFrameIds();
   let n = isFullscreenAndInFocusedNodeView();
   let l = getFocusedNodeId();
@@ -12647,7 +12647,7 @@ function xK({
   setSearchQuery: t
 }) {
   let n = useSelector(e => e.search.sessionId);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let r = useCallback(e => {
     e === '' && n ? l(searchEndSession()) : e === '' || n || l(searchStartSession({
       entryPoint: xU
@@ -12806,7 +12806,7 @@ function xH() {
   });
 }
 function xX() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
     B3(JT.GENERATE_IMAGE);
     scheduler.postTask(() => {
@@ -13187,7 +13187,7 @@ function x4() {
     let {
       fdPreviewResource
     } = useSelector(e => e.universalInsertModal);
-    let c = useDispatch();
+    let c = useDispatch<AppDispatch>();
     switch (e) {
       case AssetCategoryEnum.BULK_CREATE:
         if (t === 0) {
@@ -13875,7 +13875,7 @@ function pR({
     currentTool: e.mirror.appModel.currentTool,
     dropdownShown: e.dropdownShown
   }));
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   return jsx(S7, {
     dispatch: p,
     color: d,
@@ -13929,7 +13929,7 @@ function pB({
   let r = U1();
   let i = useSelectionPropertyValue('numSelectedByType');
   let c = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     return useCallback(async n => {
       let l = await t(loadSharedVariableThunk(n));
       let r = VariableIdHandler.fromString(l);
@@ -13951,7 +13951,7 @@ function pB({
     }, [t, e]);
   }(l);
   let u = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     return useCallback((n, l) => {
       t(applySharedStyle({
         style: n,
@@ -14016,7 +14016,7 @@ function pK({
   let n = eP();
   let l = useRef(null);
   let r = useSelector(e => e.pickerShown && (e.pickerShown.id === pw || e.pickerShown.id === pF) ? e.pickerShown : null);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let d = useCallback((e, t, n) => {
     if (t.current) {
       let {
@@ -14108,7 +14108,7 @@ function pH({
   let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let i = Ep();
   let c = useRef(null);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let x = useCounter();
   let p = useAppModelProperty('currentSelectedGradientStop');
   let m = !t || isInvalidValue(t);
@@ -14606,7 +14606,7 @@ let mw = memo(({
   let [l, r] = useState(!1);
   let i = _$$dh();
   $k();
-  let x = getQueryParam(_$$pt.KEY) === _$$pt.VALUE;
+  let x = getQueryParam(isCommunityDuplicate.KEY) === isCommunityDuplicate.VALUE;
   useEffect(() => {
     x && n && n.length === 1 && n[0] && !l && (CooperHelpers?.detachAndReplaceSymbolOnCommunityLoad(n[0]), r(!0));
   }, [x, n, l]);
@@ -14618,7 +14618,7 @@ let mw = memo(({
   let _ = b ? b.key : '';
   let j = useAppModelProperty('showUi');
   let y = useSelector(e => e.universalInsertModal);
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   useFileLibrarySubscriptions(_);
   !function () {
     let {

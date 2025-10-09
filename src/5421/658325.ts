@@ -494,7 +494,7 @@ function G({
   isInteractionModal: v,
   recordingKey: C
 }) {
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let j = e && !isInvalidValue(e) && ("url" === e.type || "cms_link_field_alias" === e.type);
   let N = e && !isInvalidValue(e) && e?.type === "url" && (e?.url.startsWith("mailto:") || e?.url.startsWith("tel:"));
   let A = useCallback(t => {

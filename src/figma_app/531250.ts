@@ -10,7 +10,7 @@ import { AutoInteractableWrapper } from "../905/277716";
 import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
 import { useSelectionPropertyValue, useSelectionProperty } from "../905/275640";
-import { u as _$$u, SG } from "../figma_app/852050";
+import { getVariableById, getFilteredVariables } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { LengthInput } from "../figma_app/178475";
 import { FormattedInputWithWrapper } from "../figma_app/841644";
@@ -19,7 +19,7 @@ import { P } from "../905/460261";
 import { useVariablePickerForFields } from "../figma_app/260445";
 import { FormattedInputContext } from "../905/427409";
 import { u3 } from "../figma_app/152690";
-import { MH, eF } from "../figma_app/394327";
+import { extractVariableAliasOrFontStyle, isLocallySoftDeleted } from "../figma_app/394327";
 import { U as _$$U } from "../figma_app/924260";
 import { getNudgeMultipliers, trackTransformChange } from "../figma_app/98483";
 import { hF, QK } from "../figma_app/100987";
@@ -37,14 +37,14 @@ export function $$O0(e) {
     consumedVariable: _consumedVariable,
     clearVariableConsumption: _clearVariableConsumption
   } = u3(w);
-  let f = MH(consumedVariable);
-  let y = MH(_consumedVariable);
+  let f = extractVariableAliasOrFontStyle(consumedVariable);
+  let y = extractVariableAliasOrFontStyle(_consumedVariable);
   let b = f ?? y;
-  let x = _$$u(b ?? void 0);
-  let N = !!x && eF(x);
+  let x = getVariableById(b ?? void 0);
+  let N = !!x && isLocallySoftDeleted(x);
   let [O, L, P] = useVariablePickerForFields(!f && y ? w : $$C, VariableResolvedDataType.FLOAT);
   let D = isNotNullish(a) && isValidValue(a) ? a : void 0;
-  let k = 0 === (SG($$C)?.data ?? []).length;
+  let k = 0 === (getFilteredVariables($$C)?.data ?? []).length;
   let M = useCallback(() => {
     clearVariableConsumption();
     _clearVariableConsumption();
@@ -102,7 +102,7 @@ export function $$R1(e) {
     bigNudgeAmount,
     wheelMultiplier
   } = getNudgeMultipliers();
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let [_, m] = useSelectionProperty("cornerRadius");
   let E = e.disabled ? 0 : void 0;
   let T = P(getI18nString("fullscreen.properties_panel.transform_panel.corner_radius"));

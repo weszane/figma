@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { getProductPriceString } from "../figma_app/808294";
 import { hN } from "../figma_app/248118";
 import { checkResourceEligibilityDebug } from "../figma_app/86989";
-import { M } from "../figma_app/170366";
+import { getPluginManager } from "../figma_app/170366";
 import { canPerformAction } from "../figma_app/12796";
 import { isDevModePlugin, isSingleDevWithCodegen, canRunPlugin, isSamePlugin, isValidForFullscreenView, getMissingEditorTypeError, formatPluginName, getPluginsMenuOpenDirectory } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
@@ -106,7 +106,7 @@ function C(e, t, i) {
   return h;
 }
 export function $$T0(e, t) {
-  let i = M();
+  let i = getPluginManager();
   let n = [];
   let s = !!e.isReadOnly;
   let l = debugState.getState();
@@ -185,7 +185,7 @@ export function $$T0(e, t) {
     type: "submenu",
     name: getI18nString("widgets.development"),
     submenu: function (e) {
-      let t = M();
+      let t = getPluginManager();
       let i = function (e) {
         let {
           localExtensions,
@@ -244,7 +244,7 @@ export function $$T0(e, t) {
               subtype: "manifest",
               name: u,
               submenu: createMenuItems(a.manifest.menu, a, [u])
-            }); else {
+            });else {
               let t = e.currentPlugin && isSamePlugin(a, e.currentPlugin);
               o.push({
                 type: "run-menu-action",

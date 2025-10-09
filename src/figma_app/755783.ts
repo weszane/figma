@@ -5,7 +5,7 @@ import { VariableResolvedDataType, Fullscreen, VariableDataType, LayoutTabType, 
 import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
 import { isValidValue } from "../905/216495";
-import { u as _$$u } from "../figma_app/852050";
+import { getVariableById } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { t } from "../905/62933";
@@ -14,13 +14,13 @@ import { FLATTENED_BOOLEAN_VALUES } from "../figma_app/264776";
 import { Z } from "../figma_app/221818";
 import { useVariablePickerForFields, createBooleanExpressionVariable } from "../figma_app/260445";
 import { u3 } from "../figma_app/152690";
-import { Pr } from "../figma_app/394327";
+import { iterateVariableValue } from "../figma_app/394327";
 export function $$b0() {
   let {
     consumedVariable
   } = u3(["VISIBLE"]);
   let t = $$I1();
-  let r = _$$u(t);
+  let r = getVariableById(t);
   return !!consumedVariable && !!r;
 }
 export function $$T4(e) {
@@ -52,7 +52,7 @@ export function $$I1() {
   } = u3(["VISIBLE"]);
   if (consumedVariable) {
     if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.ALIAS) e = consumedVariable.value;else if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.EXPRESSION) {
-      for (let r of Pr(consumedVariable)) if (r.type === VariableDataType.ALIAS) {
+      for (let r of iterateVariableValue(consumedVariable)) if (r.type === VariableDataType.ALIAS) {
         e = r.value;
         break;
       }

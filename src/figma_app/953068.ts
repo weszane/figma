@@ -9,7 +9,7 @@ import { pR } from "../vendor/330821";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { $Q } from "../figma_app/315578";
-import { t8 } from "../figma_app/852050";
+import { getResolvedVariableValueIfNotMixed } from "../figma_app/852050";
 import { uV } from "../figma_app/151869";
 import { ZQ, QZ, VZ, SH, ln } from "../figma_app/727192";
 import { Cm, _p } from "../figma_app/826998";
@@ -72,7 +72,7 @@ function A({
   });
   let N = x.variableDisplayName;
   let C = uV(x?.variable);
-  let w = t8(x?.variable?.node_id);
+  let w = getResolvedVariableValueIfNotMixed(x?.variable?.node_id);
   let O = Cm(t, "text_content");
   let R = Cm(C, "text_variable");
   let L = isHovered || S;

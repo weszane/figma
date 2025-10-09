@@ -24,7 +24,7 @@ function m(e, t, i, n, r, a, o) {
   });
 }
 export function $$h0(e, t, i) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = useSelector(e => e.search);
   let c = getSelectedView();
   let u = useSelector(e => findCurrentPlan(e));
@@ -34,7 +34,7 @@ export function $$h0(e, t, i) {
   }, [s, e, t, i, l, c, u]);
 }
 export function $$g1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentUser();
   let i = useCurrentUserOrgId();
   let p = getCurrentTeam()?.id;

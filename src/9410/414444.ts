@@ -9,7 +9,7 @@ import { P } from "../905/647955";
 import { DS } from "../figma_app/571341";
 import { L$ } from "../figma_app/241341";
 export function $$h0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useIsProgressBarHiddenOrLocked();
   let i = useSelector(e => e.selectedView.compareChangesVersionId);
   let h = useSelector(e => e.selectedView.compareChangesActivityId);

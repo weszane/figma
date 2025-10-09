@@ -40,7 +40,7 @@ let I = (e, t, n) => {
   return "latam" === i ? n ? "has_seen_es_es_announcement" : "has_not_seen_es_es_announcement" : "spain" === i ? void 0 : a && rX.includes(a) ? n ? "has_seen_es_es_announcement" : "has_not_seen_es_es_announcement" : void 0;
 };
 function A(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = getVisibleTheme();
   let r = e.hasSeenEsEsModal ? renderI18nText("es_la_announcement.seen_es_es_description") : renderI18nText("es_la_announcement.not_seen_es_es_description");
   return jsx(_l, {
@@ -75,7 +75,7 @@ function A(e) {
 let S = userFlagExistsAtomFamily("has_tried_es_la");
 let N = userFlagExistsAtomFamily("seen_es_es_launch_announcement");
 export function $$O0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(S);
   let n = useAtomWithSubscription(N);
   let c = useAtomWithSubscription(mp);

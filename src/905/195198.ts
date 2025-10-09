@@ -30,7 +30,7 @@ let x = (e, t, i) => e ? t === FAccessLevelType.PUBLIC ? renderI18nText("file_br
 });
 let $$S0 = registerModal(function (e) {
   let t = useSelector(e => getPermissionsState(e));
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let o = t.teams[e.teamId];
   let y = t.user?.id || "";
   let b = useSubscription(TeamById, {

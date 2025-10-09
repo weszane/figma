@@ -39,7 +39,7 @@ export function $$l1({
   };
 }
 export function $$d0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return useCallback(t => {
     var r;
     if (!t?.overlayId) {

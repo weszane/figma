@@ -212,7 +212,7 @@ function G(e) {
   let [r, l] = useState(a[0]);
   let o = D();
   let d = useProAnnualImprovementsExperiment();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let [_, u, m] = Tabs.useManagedTabs(useMemo(() => ({
     [FBillingPeriodType.YEAR]: !0,
     [FBillingPeriodType.MONTH]: !0
@@ -383,7 +383,7 @@ function eu(e) {
   });
 }
 function em(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     isAnnualProPlan,
     adjustAnnualSeatsAction,
@@ -1083,7 +1083,7 @@ function e3(e) {
   let a = _$$R();
   let d = RG();
   let c = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let a = RG();
     return useMemo(() => e.trueUpState === InvoiceReviewState.LOCKED ? [] : e.trueUpState === InvoiceReviewState.REVIEW && TV(e.invoice, !!e.orgHasAutomaticUpcomingInvoice) ? a ? [{
       key: "true_up_review_billing_groups",
@@ -1195,7 +1195,7 @@ function e3(e) {
 export function $$e80(e) {
   let t = useSeatManagementWidgetExperiment();
   let a = useCallback(() => getFeatureFlags().admin_ai_addon, []);
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useMemo(() => getLatestValidPendingInvoice(e.invoices, {
     allowLegacyOrgAnnual: !t(),
     allowProratedOrgAnnual: !t()

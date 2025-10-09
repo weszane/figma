@@ -150,7 +150,7 @@ export function $$U1({
   activePageShouldUseBrandColor: Z,
   shouldUseButtonRow: ee
 }) {
-  let et = useDispatch();
+  let et = useDispatch<AppDispatch>();
   let er = "whiteboard" === getCurrentFileType();
   let [ea, es] = useState(!1);
   let ei = useAtomWithSubscription(_$$l2);

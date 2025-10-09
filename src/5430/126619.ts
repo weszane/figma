@@ -182,7 +182,7 @@ function M({
   manager: e,
   menuData: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     resource,
     sharedRouteParams
@@ -270,7 +270,7 @@ export function $$F0({
   loadingTileCount: r = 10,
   resourceImpressionTracking: h = noop
 }) {
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let f = useResourceRouteParams();
   let y = useCurrentPrivilegedPlan("ResourceHubItemsView").unwrapOr(null);
   let g = useCurrentPlanUser("ResourceHubItemsView").unwrapOr(null);

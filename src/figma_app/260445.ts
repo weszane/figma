@@ -11,10 +11,10 @@ import { Point } from '../905/736624';
 import { calculatePickerPositionBelow } from '../905/959568';
 import { Ek, u3, y$ } from '../figma_app/152690';
 import { yesNoTrackingEnum } from '../figma_app/198712';
-import { eF, MH } from '../figma_app/394327';
+import { isLocallySoftDeleted, extractVariableAliasOrFontStyle } from '../figma_app/394327';
 import { fullscreenValue } from '../figma_app/455680';
 import { OperationType, VariableDataType, VariableResolvedDataType, VariablesBindings } from '../figma_app/763686';
-import { u as _$$u, bL, BQ, mm } from '../figma_app/852050';
+import { getVariableById, getModeValue, getResolvedVariableValue, useVariableActions } from '../figma_app/852050';
 import { loadSharedVariable } from '../figma_app/933328';
 import { ND, Ti } from '../figma_app/960196';
 
@@ -128,7 +128,7 @@ export function useVariablePickerForFields(e: any, t: VariableResolvedDataType, 
 export function useVariablePickerForAlias(e: string, t: string, r: string, n: VariableResolvedDataType): [boolean, (element: HTMLElement, options?: any) => void, (variable: any) => void] {
   const {
     setVariableValueOrOverrideForMode
-  } = mm();
+  } = useVariableActions();
   const m = useDispatch<AppDispatch>();
   const g = useSelector((e: any) => e.variablePickerShown);
   const f = useCallback((i: any) => {
@@ -223,9 +223,9 @@ function FormattedInputProvider({
   const {
     consumedVariable
   } = u3(fields, editingStyleGuid, responsiveTextStyleVariantIndex);
-  const h = MH(consumedVariable);
-  const m = _$$u(h ?? undefined);
-  const g = !!m && eF(m);
+  const h = extractVariableAliasOrFontStyle(consumedVariable);
+  const m = getVariableById(h ?? undefined);
+  const g = !!m && isLocallySoftDeleted(m);
   const y = Ek(fields);
   const [T, I, v, A, x] = useVariablePickerForFields(fields, resolvedType, onVariableSelected, {
     requestedTypes
@@ -270,10 +270,10 @@ export function VariableAliasProvider({
   resolvedType: VariableResolvedDataType;
 }) {
   const [o, l, d] = useVariablePickerForAlias(variableSetId, variableID, modeID, resolvedType);
-  const c = bL(variableID, modeID);
-  const u = MH(c ?? null);
-  const p = _$$u(u ?? undefined);
-  const h = !!p && eF(p);
+  const c = getModeValue(variableID, modeID);
+  const u = extractVariableAliasOrFontStyle(c ?? null);
+  const p = getVariableById(u ?? undefined);
+  const h = !!p && isLocallySoftDeleted(p);
   const contextValue = useMemo(() => ({
     showBindingUI: l,
     isShowingBindingUI: o,
@@ -322,15 +322,15 @@ export function VariableBindingsDropdown({
     p(true);
   }, []);
   const y = variableValue.type === VariableDataType.ALIAS ? variableValue.value : undefined;
-  const b = _$$u(y);
-  const I = !!b && eF(b);
+  const b = getVariableById(y);
+  const I = !!b && isLocallySoftDeleted(b);
   const contextValue = useMemo(() => ({
     showBindingUI: m,
     isShowingBindingUI: u,
     boundVariableId: y ?? null,
     isBoundVariableDeleted: I
   }), [m, u, y, I]);
-  const v = BQ(y);
+  const v = getResolvedVariableValue(y);
   const renderPicker = () => {
     if (!u) return null;
     if (variableValue.resolvedType !== VariableResolvedDataType.COLOR) {
@@ -417,8 +417,8 @@ export function ControlledVariablePickerProvider({
   onComponentPropSelected?: any;
   children: React.ReactNode;
 }) {
-  const p = _$$u(boundVariableId ?? undefined);
-  const h = !!p && eF(p);
+  const p = getVariableById(boundVariableId ?? undefined);
+  const h = !!p && isLocallySoftDeleted(p);
   const [m, g, y] = useControlledVariablePicker({
     resolvedType,
     requestedTypes,
@@ -468,7 +468,7 @@ function useControlledVariablePicker({
   onComponentPropSelected?: any;
 }): [boolean, (element: HTMLElement, options?: any) => void, string] {
   const l = useId();
-  const c = useDispatch();
+  const c = useDispatch<AppDispatch>();
   const p = useSelector((e: any) => e.variablePickerShown);
   const isShown = p.isShown && p.type === 'variable-picker-controlled' && p.key === l;
   const showPicker = useCallback((i: HTMLElement, a?: any) => {
@@ -503,7 +503,7 @@ export function VariablePicker({
   variableScope?: string;
   onPickerClose?: () => void;
 }) {
-  const r = useDispatch();
+  const r = useDispatch<AppDispatch>();
   const s = useCallback(() => {
     onPickerClose?.();
     r(hideVariablePicker());

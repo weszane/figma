@@ -18,7 +18,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { convertToRgba } from "../905/862913";
 import { useDropdownState } from "../905/848862";
-import { Ve } from "../figma_app/198840";
+import { getTemplateActionLabel } from "../figma_app/198840";
 import { FileCanView } from "../figma_app/43951";
 import { n as _$$n } from "../905/79930";
 import { zq, FK, zx, Wf } from "../figma_app/961422";
@@ -50,7 +50,7 @@ function k({
   template: e,
   position: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     viewSourceFileUrl,
     duplicateLink,
@@ -125,7 +125,7 @@ export function $$M0(e) {
             insertTemplate: e.onInsert,
             isInsertingTemplate: e.isInsertingTemplate,
             shouldUseOpaqueBackground: !0,
-            children: Ve(e.templateInsertionLocation)
+            children: getTemplateActionLabel(e.templateInsertionLocation)
           })
         }), jsx(Ho, {
           image: imageUrl,

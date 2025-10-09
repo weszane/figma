@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setShowingFileFooter } from "../figma_app/389091";
 import { kL } from "../figma_app/624600";
 export function $$l0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   useEffect(() => (t(setShowingFileFooter(!0)), () => {
     t(setShowingFileFooter(!1));
   }), [t]);

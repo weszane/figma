@@ -164,7 +164,7 @@ import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { AuthTypeEnum, UserTypeEnum, ApprovalStatusEnum, USEURegionEnum } from '../figma_app/736948';
 import { stopPropagation } from '../figma_app/753501';
 import { ls, V0 } from '../figma_app/755395';
-import { Rs as _$$Rs } from '../figma_app/761870';
+import { getInitialAutocompleteState } from '../figma_app/761870';
 import { MeasurementUnit } from '../figma_app/763686';
 import { z6 } from '../figma_app/805373';
 import { getOrgAdminTabMessage } from '../figma_app/809387';
@@ -266,7 +266,7 @@ function B(e) {
   });
 }
 let G = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = useSelector(e => e.orgSamlConfig);
   let s = !a.config;
@@ -341,7 +341,7 @@ function ec() {
   });
 }
 function e_(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, r] = useState(!1);
   let l = useLatestRef(e.mfaRequiredSetting);
   let o = l === UserTypeEnum.GUESTS || l === UserTypeEnum.ALL_USERS;
@@ -408,7 +408,7 @@ function e_(e) {
   });
 }
 let eu = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = useSelector(e => e.orgSamlConfig);
   let r = getAuthType(t);
@@ -502,7 +502,7 @@ let ej = 'billing_emails_modal--icon--KUryt';
 let ey = 'billing_emails_modal--description_section--3-x5B';
 let ew = 'billing_emails_modal--subtitle--AtE9I';
 let eC = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let s = () => t(popModalStack());
   dayjs.extend(r);
   dayjs(e.subscriptionStart).format('Do');
@@ -587,7 +587,7 @@ function eA() {
   return useAtomWithSubscription(eT);
 }
 let te = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let s = useModalManager(e);
   return jsx(ModalRootComponent, {
@@ -626,10 +626,10 @@ let te = registerModal(e => {
   });
 }, 'DELETE_ORG_MODAL');
 let tt = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCurrentUserOrg();
   let r = useModalManager(e);
-  let [l, o] = useState(_$$Rs());
+  let [l, o] = useState(getInitialAutocompleteState());
   let d = useCallback(e => {
     trackEventAnalytics('Delete user search performed', {
       orgId: a?.id,
@@ -683,7 +683,7 @@ let tt = registerModal(e => {
   });
 }, 'DELETE_ORG_USER_MODAL');
 let ta = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let s = useModalManager(e);
   return jsx(ModalRootComponent, {
@@ -1060,7 +1060,7 @@ let tS = registerModal(e => {
     onClose
   } = e;
   let r = useModalManager(e);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let [o, d] = useState(!org.ai_features_disabled);
   let c = eA();
   let _ = [...(c?.data?.org?.workspaces ?? [])];
@@ -1135,7 +1135,7 @@ let tN = registerModal(({
   onClose: t,
   workspace: a
 }) => {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = getI18nString('org_settings.ai_controls.workspace_success');
   let [o, d] = useState(tR(a));
   let c = useCallback(() => {
@@ -1204,7 +1204,7 @@ let tI = registerModal(({
   goBack: e,
   workspace: t
 }) => {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = getI18nString('org_settings.ai_controls.workspace_success');
   let r = useModalManager({
     open: !0,
@@ -1300,7 +1300,7 @@ function tR(e) {
 let tD = 'autogen_password_controls_modal--radioLabel--tmcmf';
 let tP = e => e ? 'autogen' : 'custom';
 let tU = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getI18nString('org_settings.autogen_password_controls.success');
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let r = useSubscription(OrgSharedSettingView, {
@@ -1384,7 +1384,7 @@ let tU = registerModal(() => {
   });
 }, 'AutogenPasswordControlsModal');
 let tF = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = () => e(popModalStack());
   return jsx(HeaderModal, {
@@ -1699,7 +1699,7 @@ function tX(e) {
   }, e.token.name);
 }
 let tQ = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = () => t(popModalStack());
   return jsx(HeaderModal, {
     title: getI18nString('settings_tab.connected_apps.revoke_app', {
@@ -1747,7 +1747,7 @@ let tQ = registerModal(e => {
   });
 }, 'REVOKE_APP_MODAL');
 let tZ = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, r] = useState([]);
   let [l, o] = useState(!0);
   useEffect(() => {
@@ -1804,7 +1804,7 @@ let tZ = registerModal(e => {
   });
 }, 'ConnectedAppsModal');
 let t0 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(HeaderModal, {
     title: e.token.name,
     onClose: () => t(popModalStack()),
@@ -1881,7 +1881,7 @@ function aj({
   let l = useTeamPlanFeatures().unwrapOr(null);
   let o = getParentOrgIdIfOrgLevel(l);
   let d = l?.name;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let _ = jsx(SecureLink, {
     onClick: () => {
       if (desktopAPIInstance) {
@@ -2303,7 +2303,7 @@ function az({
   preferences: e
 }) {
   let t = useCurrentUserOrg() || null;
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let [r, l] = useAtomValueAndSetter(aS);
   let [o, d] = useState(null);
   let [c, _] = useState(!1);
@@ -2505,7 +2505,7 @@ function aW() {
 }
 let aH = registerModal(() => {
   let e = useCurrentUserOrg() || null;
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = setupOrgPluginPreferences();
   let [r, l] = useAtomValueAndSetter(aC);
   let [o, d] = useAtomValueAndSetter(aE);
@@ -2651,7 +2651,7 @@ function a2(e) {
 function a4({
   org: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = eA();
   let r = [...(a?.data?.org?.workspaces ?? [])];
   sortByPropertyWithOptions(r, 'name');
@@ -2730,7 +2730,7 @@ function a5({
   });
 }
 let a3 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = getI18nString('org_settings.export_controls.success');
   let r = useSelector(e => e.orgById[e.currentUserOrgId]);
   let [l, o] = useState(r.shared_container_setting?.file_export_setting ?? 'allowed');
@@ -2802,7 +2802,7 @@ let a8 = registerModal(({
   onClose: t,
   workspace: a
 }) => {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = getI18nString('org_settings.export_controls.workspace_success');
   let o = useSelector(e => e.orgById[e.currentUserOrgId]);
   let [d, c] = useState(a.workspaceSharedSetting?.fileExportSetting ?? o.shared_container_setting?.file_export_setting ?? 'allowed');
@@ -2889,7 +2889,7 @@ let a6 = registerModal(({
   onClose: t,
   workspace: a
 }) => {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = getI18nString('org_settings.export_controls.workspace_success');
   let l = useSelector(e => e.orgById[e.currentUserOrgId]);
   let o = useModalManager({
@@ -2956,7 +2956,7 @@ let na = 'external_collaboration_controls_modal--listItem--g50IJ';
 let nn = 'external_collaboration_controls_modal--confirmButton---8ryZ';
 let ns = 'external_collaboration_controls_modal--bold--WoY4e';
 let nr = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = () => e(popModalStack());
   let [r, l] = useState(t.shared_container_setting?.external_collaboration_controls);
@@ -3069,7 +3069,7 @@ let nr = registerModal(() => {
 let nd = 'guest_invite_settings_modal--sectionInstruction---T3SG';
 let nc = 'guest_invite_settings_modal--radioLabel--Yuqzr';
 function n_(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [a, r] = useState(!1);
   let l = useLatestRef(e.mfaRequiredSetting);
   let o = l === UserTypeEnum.MEMBERS || l === UserTypeEnum.ALL_USERS;
@@ -3136,7 +3136,7 @@ function n_(e) {
   });
 }
 let nu = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString('org_settings.guest_control.confirm_title'),
     confirmText: getI18nString('org_settings.guest_control.confirm_button'),
@@ -3154,7 +3154,7 @@ let nu = registerModal(e => {
   });
 }, 'CONFIRM_BAN_GUEST_INVITE_MODAL');
 let nm = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = _$$M2(t);
   let r = useSubscription(OrgMfaGuestInfoView, {
@@ -3342,7 +3342,7 @@ function nv(e) {
   return isGovCluster() || e;
 }
 function nw(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useDropdownState();
   let s = a?.type === e.id;
   return jsxs(_$$V3, {
@@ -3388,7 +3388,7 @@ function nE(e) {
   });
 }
 let nC = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCurrentUserOrg();
   let r = !!a?.security_add_on_enabled_at;
   let l = nh(r);
@@ -3586,7 +3586,7 @@ function nI(e) {
   return e.split(',').map(e => e.trim()).filter(e => e.length > 0);
 }
 let nT = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCallback(() => t(popModalStack()), [t]);
   let [r, l] = useState(e.ipAllowlistEnabled);
   let o = e.ipAllowlistRanges.map(e => e.ipRange);
@@ -3688,7 +3688,7 @@ let nL = registerModal(({
   org: t,
   workspace: a
 }) => {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let {
     formState,
     formActions
@@ -3780,7 +3780,7 @@ let nD = registerModal(({
   workspace: e,
   goBack: t
 }) => {
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = useModalManager({
     open: !0,
     onClose: t
@@ -3833,7 +3833,7 @@ function nM({
   org: e
 }) {
   let t = eA();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let r = [...(t?.data?.org?.workspaces ?? [])];
   sortByPropertyWithOptions(r, 'name');
   let l = useCallback(t => {
@@ -3862,7 +3862,7 @@ function nP(e) {
   return !!e.workspaceSharedSetting?.publicLinkControlsSetting;
 }
 let nU = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let {
     formState,
@@ -3986,7 +3986,7 @@ let nF = registerModal(e => {
   let t;
   let a;
   let s;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let l = () => r(popModalStack());
   e.isOpenSessionsEnabled ? (t = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_links_title'), a = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_links_submit'), s = renderI18nText('settings_tab.public_sharing.confirmation_modal.disable_public_links_description')) : (t = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_title'), a = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_submit'), s = jsxs(Fragment, {
     children: [renderI18nText('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.main'), jsxs('ul', {
@@ -4087,7 +4087,7 @@ function n3(e) {
     orgId: e.orgId,
     tier: nY[t = e.planTier] ?? t
   });
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let [c, _] = useState(createEmptyAddress(e.defaultCountry));
   let [u, m] = useState(null);
   let [p, g] = useState(!1);
@@ -4217,7 +4217,7 @@ function n6({
   billableSeats: t,
   canSeeBillingAddressExp: a
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = async (t, n) => {
     let i = {
       source_token: t.token?.id,
@@ -4258,7 +4258,7 @@ function n6({
   }, 'change-payment-method');
 }
 let n9 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCurrentUserOrg();
   let r = useSubscription(OrgAdminSettingsPage, {
     orgId: a.id
@@ -4342,7 +4342,7 @@ let n9 = registerModal(e => {
   });
 }, 'SitesPublishingToggleModal');
 let se = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useCurrentUserOrg();
   let r = useSubscription(OrgAdminSettingsPage, {
     orgId: a.id
@@ -4436,7 +4436,7 @@ let st = 'team_creation_controls_modal--settingLabel--KGHr-';
 let sa = 'team_creation_controls_modal--description--tsaEB';
 let sn = 'team_creation_controls_modal--radioLabel--7XJIQ';
 let ss = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = c4(t.id).data;
   let r = () => e(hideModal());
@@ -4529,7 +4529,7 @@ export function $$sr0(e) {
   eA();
   let F = _$$s4();
   let q = _$$r2();
-  let $ = useDispatch();
+  let $ = useDispatch<AppDispatch>();
   let B = selectUser();
   t = useTeamPlanFeatures();
   let z = collaboratorSet.reduce((e, a) => {

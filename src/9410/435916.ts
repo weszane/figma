@@ -37,7 +37,7 @@ function M({
   dismissModal: e,
   targetKey: t = oi.ZOOM
 }) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let s = selectWithShallowEqual(({
     mirror: {
       appModel: e
@@ -474,7 +474,7 @@ function Y(e) {
     onNext,
     onManualDismiss
   } = e;
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = useCallback(() => {
     s(postUserFlag({
       [V.NEW_USER_ZOOM]: !0
@@ -525,7 +525,7 @@ function J(e) {
     onManualDismiss
   } = e;
   let [i, s] = useState(!1);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   useSingleEffect(() => {
     setTimeout(() => {
       s(!0);

@@ -29,7 +29,7 @@ export function $$g2({
 }) {
   let t = useSelector(e => e.library);
   let i = useCurrentFileKey();
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let [g, f] = useState({
     status: APILoadingStatus.SUCCESS,
     nodeIdToValidatedMoveInfo: Object.create(null)

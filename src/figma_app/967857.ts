@@ -283,7 +283,7 @@ export function $$ea0() {
 }
 function es(e) {
   var t;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   t = ["generate_ideas"];
   let n = !!e.find(e => e && t.includes(e.type));
   return {

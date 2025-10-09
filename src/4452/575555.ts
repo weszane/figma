@@ -129,7 +129,7 @@ let K = 'members_list_row--dropdownIcon--mJelI';
 let X = 'members_list_row--avatarWithHandle--yirlt';
 let et = 'team-member-list-row-dropdown';
 function ea(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = selectUser();
   let i = _$$P();
   let l = useDropdownState();
@@ -322,7 +322,7 @@ let ei = () => {
   return e && e?.type === er ? e : null;
 };
 function el(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = ei();
   let i = useRef(null);
   let [l, o] = useState(e.request.level);
@@ -660,7 +660,7 @@ let tn = {
   aiEnabledButton: 'ai-settings-ai-enabled-button'
 };
 let tr = registerModal(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getCurrentTeamId();
   let a = useSubscription(TeamAdminSettingsPage, {
     teamId: t
@@ -818,7 +818,7 @@ let tm = 'settings_view--upgradeBannerBody--n82sx';
 let t_ = 'settings_view--blueLinkForBanner--b0V8l settings_view--blueLink--F3vR6 blue_link--blueLink--9rlnd';
 let tp = 'settings_view--accessIcon--7RIy3';
 function tf(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = getVisibleTheme();
   let i = e.team;
   let l = useSelector(e => getPermissionsState(e));
@@ -1366,7 +1366,7 @@ let tS = (e, t, a) => {
   e(selectViewAction(a));
 };
 let $$tT0 = registerModal(e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = useRef(null);
   let [i, o] = useState(-1);
   let c = _$$h.useTrackingContext({

@@ -46,7 +46,7 @@ function I({
   dropdownType: s,
   disabled: o
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useDropdownState();
   let c = d?.type === s;
   let u = useCallback(() => {
@@ -104,7 +104,7 @@ function E({
   value: a
 }) {
   let s = i.current?.getBoundingClientRect();
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let [l, d] = useState(null);
   if (useEffect(() => {
     if (a && e.length && null === l) {

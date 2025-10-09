@@ -31,7 +31,7 @@ export function $$v1(e) {
   let t = useAtomWithSubscription(currentTierAtom);
   let i = getMaxVariables(t);
   let s = function (e, t) {
-    let i = useDispatch();
+    let i = useDispatch<AppDispatch>();
     let s = useAtomWithSubscription(openFileTeamAtom);
     return useCallback(() => {
       if (e === SubscriptionTier.ENTERPRISE) {
@@ -58,7 +58,7 @@ export function $$v1(e) {
     }, [i, s, e, t]);
   }(t, e);
   let c = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return useCallback(() => {
       e(showModalHandler({
         type: Y,
@@ -81,7 +81,7 @@ export function $$I0() {
   let e = useAtomWithSubscription(currentTierAtom);
   let t = useAtomWithSubscription(_$$t2).data ?? !1;
   let i = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return useCallback(() => {
       e(showModalHandler({
         type: Y,

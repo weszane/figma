@@ -49,7 +49,7 @@ export function setupPluginCommandHandler({
   const localPlugins = getLocalPlugins()
   const editorType = getSelectedEditorType()
   const currentFile = selectCurrentFile()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   /**
    * Prepares and runs the plugin command.

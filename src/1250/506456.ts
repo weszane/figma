@@ -257,7 +257,7 @@ export function $$L1({
   let n = useNavigateToViewport("page_change_navigator_navigate");
   let a = useCompareChangesHandler();
   let s = trackFileEventWithStore();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = getSelectedView();
   let _ = dh();
   let u = useSelector(e => e.versionHistory);
@@ -271,7 +271,7 @@ export function $$F0({
   let a = useNavigateToViewport("page_change_navigator_navigate");
   let s = useCompareChangesHandler();
   let l = trackFileEventWithStore();
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let _ = getSelectedView();
   let u = dh(n);
   let m = useSelector(e => e.versionHistory);

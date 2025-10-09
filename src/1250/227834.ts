@@ -9,7 +9,7 @@ export function $$l0({
   contextClicked: n,
   forceOpenNewTab: l
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let {
     data,
     status

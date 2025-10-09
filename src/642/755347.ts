@@ -29,7 +29,7 @@ import { wu } from "../1528/306300";
 import { M as _$$M } from "../figma_app/339170";
 import { DialogTriggerButton } from "../905/976845";
 import { u as _$$u } from "../905/911813";
-import { u as _$$u2 } from "../figma_app/852050";
+import { getVariableById } from "../figma_app/852050";
 import { KindEnum } from "../905/129884";
 import { u3 } from "../figma_app/152690";
 import { ND, $V, $H, AP } from "../figma_app/755783";
@@ -69,7 +69,7 @@ function K(e) {
   let o = useRef(null);
   let [p, h] = ND("binding-icon");
   let m = $V();
-  let f = _$$u2(m);
+  let f = getVariableById(m);
   let x = !!consumedVariable && !!f || visibilityIsBoundToComponentProp || isDefReferencedBySelection;
   let _ = useCallback(() => h(o.current), [h]);
   let b = useHandleMouseEvent(generateRecordingKey(e, "visibilityVariableBindingControl"), "mousedown", e => {
@@ -131,7 +131,7 @@ function ec({
   recordingKey: s
 }) {
   let [n, l] = sL();
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let o = useDropdownState();
   let d = useIsFullscreenSitesView();
   let p = !qg(n, "PASS_THROUGH");
@@ -314,7 +314,7 @@ let $$e_0 = memo(function (e) {
     recordingKey: e.recordingKey,
     rowRef: t
   });
-  let W = useDispatch();
+  let W = useDispatch<AppDispatch>();
   let $ = handleMirroring && isVectorEditMode && jsx(Cs, {
     handleMirroring,
     recordingKey: generateRecordingKey(e, "mirroring")

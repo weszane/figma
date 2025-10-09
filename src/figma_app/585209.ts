@@ -61,7 +61,7 @@ export function $$E1(e) {
   useEffect(() => {
     o?.type === "suggestions" && f(NS);
   }, [o?.type]);
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let y = useCallback(() => {
     E(showEmojiPicker({
       visible: !1

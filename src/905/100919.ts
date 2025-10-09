@@ -22,7 +22,7 @@ import { Cu, ol } from "../figma_app/603826";
 import { A as _$$A } from "../5724/663128";
 export function $$S0(e) {
   let [t, i] = useState(null);
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let x = getAtomMutate(renameAutosaveFileMutation);
   let S = Xr(renamingStateAtom);
   let C = useSubscription(FileCanEdit, {

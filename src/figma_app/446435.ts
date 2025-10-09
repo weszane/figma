@@ -5,13 +5,13 @@ import { getInitialOptions } from "../figma_app/169182";
 import { isCommandOrShift } from "../905/63728";
 import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
 import { sz } from "../figma_app/216696";
-import { rL } from "../figma_app/49598";
+import { createFileFromTemplateThunk } from "../figma_app/49598";
 import { showDropdownThunk } from "../905/929976";
 import { trackTemplateEvent } from "../905/793009";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { a6 } from "../figma_app/198840";
+import { getHubFileVersionOrDefault } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { useIsLoading, useIsLoaded } from "../905/18797";
 import { SimpleFuseSearch } from "../905/81982";
@@ -25,7 +25,7 @@ export function $$A3(e) {
     templatesShelfType,
     source
   } = e;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let [u] = useState(() => new SimpleFuseSearch([], {
     keys: ["name"]
   }));
@@ -54,8 +54,8 @@ export function $$A3(e) {
   }) => e), [S]);
   let P = useCallback(e => {
     let t = I[e];
-    let n = a6(t);
-    o(rL({
+    let n = getHubFileVersionOrDefault(t);
+    o(createFileFromTemplateThunk({
       hubFileId: e,
       hubFileName: n.name || "this file",
       openInNewTab: !0,
@@ -68,7 +68,7 @@ export function $$A3(e) {
     }));
   }, [o, b, f, p]);
   useEffect(() => {
-    let e = Object.keys(O).reduce((e, t) => [...e, ...O[t]], []).map(e => a6(I[e]));
+    let e = Object.keys(O).reduce((e, t) => [...e, ...O[t]], []).map(e => getHubFileVersionOrDefault(I[e]));
     u.set(e);
   }, [O, I, u]);
   useEffect(() => {
@@ -124,7 +124,7 @@ export function $$A3(e) {
 }
 export let $$x0 = "templates_context_menu";
 export function $$N2(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     primaryKey
   } = fG()(e);
@@ -152,7 +152,7 @@ export function $$C1(e) {
     isDrawMode,
     enabled = !0
   } = e;
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let [h] = useState(() => enabled ? new Promise(e => function (e, t) {
     if (v[e]) {
       t(v[e]);
@@ -182,8 +182,8 @@ export function $$C1(e) {
       n?.(null);
       return;
     }
-    let m = a6(i);
-    u(rL({
+    let m = getHubFileVersionOrDefault(i);
+    u(createFileFromTemplateThunk({
       hubFileId: templateId,
       hubFileName: m?.name || "this file",
       openInNewTab: !!forceOpenNewTab || isCommandOrShift(e),

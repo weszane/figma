@@ -10,7 +10,7 @@ export let $$l0 = {
   FEEDBACK_FORM: "https://form.asana.com?k=FPQgFCXUINQN6CmMtWiabQ&d=10497086658021"
 };
 export function $$d1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.multiplayer.observingSessionID);
   let r = useSelector(e => e.multiplayer.sessionID);
   return useCallback(function (n) {

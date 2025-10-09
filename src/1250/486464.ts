@@ -12,7 +12,7 @@ var s = o;
 var $$p1 = (e => (e[e.FULL = 0] = "FULL", e[e.ADD_ONLY = 1] = "ADD_ONLY", e))($$p1 || {});
 var $$g4 = (e => (e[e.TILE_CONTENT = 0] = "TILE_CONTENT", e[e.TILE_POST = 1] = "TILE_POST", e[e.DETAIL_POST = 2] = "DETAIL_POST", e[e.DETAIL_COMMENT_NO_REACTION = 3] = "DETAIL_COMMENT_NO_REACTION", e[e.DETAIL_COMMENT_WITH_REACTION = 4] = "DETAIL_COMMENT_WITH_REACTION", e[e.FILE_POPOVER = 5] = "FILE_POPOVER", e))($$g4 || {});
 export function $$f0(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = selectCurrentUser();
   let {
     existingReactionIdForCurrentUser
@@ -46,7 +46,7 @@ export function $$f0(e) {
   });
 }
 export function $$h3(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = selectCurrentUser();
   let {
     existingReactionIdForCurrentUser

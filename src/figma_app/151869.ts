@@ -15,13 +15,12 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { getScaledValueWithUnit, isCodegenSupportedForLanguage } from "../figma_app/120227";
 import { OE } from "../figma_app/155647";
 import { useDeepEqualSceneValue, useMultipleSceneValues, useSimpleSceneValue, useSingleSceneValue } from "../figma_app/167249";
-import { NX } from "../figma_app/394327";
+import { getWebVariableSyntax } from "../figma_app/394327";
 import { xv as _$$xv, v4 } from "../figma_app/655139";
 import { getColorFormat } from "../figma_app/740163";
 import { CSSExportHelpers } from "../figma_app/763686";
-import { u as _$$u, hg } from "../figma_app/852050";
+import { getVariableById, getVariablesByIds } from "../figma_app/852050";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-
 let $$n3;
 export function $$N11() {
   let e = useSelector(e => e.mirror.selectionProperties?.numSelected === 1);
@@ -72,7 +71,7 @@ export function $$k9(e) {
   });
 }
 export function $$M1(e, t) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let n = useCallback(() => {
     if (!e) return null;
     r(lW({
@@ -86,7 +85,7 @@ export function $$M1(e, t) {
 export function $$F0(e) {
   let t = isDevHandoffEditorType();
   let r = v4();
-  let n = _$$u(e ?? void 0);
+  let n = getVariableById(e ?? void 0);
   let i = isDevHandoffEditorType();
   let a = useAtomWithSubscription(devModeShowVarCodeSyntaxAtom);
   if (!n) return;
@@ -252,15 +251,15 @@ export function $$j12(e) {
     let s = e.copyColors(n, i);
     if (!t.offset) return;
     let [o, l, d, c, u] = a && a.length === 5 ? a : [null, null, null, null, null];
-    return r([["box-shadow", [f([NX({
+    return r([["box-shadow", [f([getWebVariableSyntax({
       variable: o
-    }) || t.offset?.x, NX({
+    }) || t.offset?.x, getWebVariableSyntax({
       variable: l
-    }) || t.offset?.y, NX({
+    }) || t.offset?.y, getWebVariableSyntax({
       variable: d
-    }) || t.radius, NX({
+    }) || t.radius, getWebVariableSyntax({
       variable: c
-    }) || t.spread]).join(" "), NX({
+    }) || t.spread]).join(" "), getWebVariableSyntax({
       variable: u
     }) || s, t.type === "INNER_SHADOW" ? "inset" : void 0].filter(_$$t2).join(" ")]], {
       suffix: ";"
@@ -270,7 +269,7 @@ export function $$j12(e) {
     let t = getColorFormat();
     let r = OE(e, e => e.color);
     let n = e.flatMap(e => [e.xVar, e.yVar, e.radiusVar, e.spreadVar, e.colorVar]).map(e => e?.value?.alias ? convertKiwiToVariableIdString(e.value.alias) : void 0);
-    let a = hg(n ?? []);
+    let a = getVariablesByIds(n ?? []);
     return useCallback(() => r.filter(e => e.color).map((e, r) => E(e.value, [e.color], t, [a?.[5 * r], a?.[5 * r + 1], a?.[5 * r + 2], a?.[5 * r + 3], a?.[5 * r + 4]])).join("\n"), [r, t, a]);
   };
   let b = (e, t, r) => {

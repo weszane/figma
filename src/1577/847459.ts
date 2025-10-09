@@ -126,7 +126,7 @@ function z(e) {
     },
     subscription: result
   });
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let {
     file
   } = result.data;
@@ -241,7 +241,7 @@ function V(e) {
     fileKey,
     threadId
   } = r;
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   useEffect(() => {
     _(setActiveComment({
       threadId
@@ -258,7 +258,7 @@ function V(e) {
     updateMessage,
     submitEdit
   } = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = I_().writeAPI;
     let a = GH()?.threads;
     return {

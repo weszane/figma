@@ -140,9 +140,9 @@ export function $$G4(e) {
     collapseAfterIndex: 15
   });
   let M = useSelector(e => Object.keys(e.mirror.sceneGraphSelection)[0]);
-  let F = useDispatch();
+  let F = useDispatch<AppDispatch>();
   let U = function (e, t) {
-    let r = useDispatch();
+    let r = useDispatch<AppDispatch>();
     return IG(e.lines, e.language, e.pills, r, t);
   }(section, onInstancePillClick);
   let [G, Y] = useState(collapseLongSections);

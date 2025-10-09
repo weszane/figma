@@ -9,7 +9,7 @@ import { wf } from "../figma_app/975811";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue } from "../905/216495";
 import { useNonMixedSelectionPropertyValue } from "../905/275640";
-import { u as _$$u, t8 } from "../figma_app/852050";
+import { getVariableById, getResolvedVariableValueIfNotMixed } from "../figma_app/852050";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { g7 } from "../figma_app/481857";
@@ -85,7 +85,7 @@ export function $$M0(e) {
     "inspection_property--propertyValueDefaultFaded--0FlNK": !e.label && !s
   }, e.labelClassName);
   let d = $$U22(a);
-  let c = _$$u(e.variableId);
+  let c = getVariableById(e.variableId);
   return jsxs($$V9, {
     className: e.className,
     copyValue: e.label,
@@ -150,9 +150,9 @@ export function $$B19({
   let {
     variableId
   } = e;
-  let o = _$$u(variableId);
+  let o = getVariableById(variableId);
   let c = uV(o) ?? "";
-  let u = t8(variableId);
+  let u = getResolvedVariableValueIfNotMixed(variableId);
   let _ = isDevHandoffEditorType();
   if ("mixed" === e.format) {
     let a = e.value.some(e => !!e?.variableId);

@@ -89,7 +89,7 @@ export function $$w0(e) {
     name,
     monetizedResource
   } = e;
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   return jsx(clickableBaseLinkTracked, {
     className: _1,
     trackingEventName: "Detail View - Request Refund",

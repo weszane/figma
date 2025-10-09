@@ -31,7 +31,7 @@ export function $$R1(e) {
     currentPlanFilter,
     onPlanFilterUpdate
   } = e;
-  let R = useDispatch();
+  let R = useDispatch<AppDispatch>();
   let E = selectCurrentFile();
   let D = useRef(null);
   let F = !!getFeatureFlags().limited_plan_spaces;

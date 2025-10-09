@@ -1255,7 +1255,7 @@ class ez extends RecordingPureComponent {
   }
 }
 function eW(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let s = getObservableOrFallback(EditorPreferencesApi().showImmutableFrameSublayers);
   let l = getObservableValue(AppStateTsApi?.uiState().reparentIntoStackInfo, null);
   let a = NF();

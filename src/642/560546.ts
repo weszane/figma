@@ -15,7 +15,7 @@ import { formattedColorManipulator } from "../905/713722";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { isGradientType, isSolidType } from "../figma_app/385874";
-import { u as _$$u } from "../figma_app/852050";
+import { getVariableById } from "../figma_app/852050";
 import { calculatePickerPositionLeft } from "../905/959568";
 import { zi } from "../905/824449";
 import { C as _$$C } from "../642/180963";
@@ -132,7 +132,7 @@ export function $$F0({
     openColorPicker,
     closeColorPicker
   } = function (e, t, s, r, l) {
-    let a = useDispatch();
+    let a = useDispatch<AppDispatch>();
     let d = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
     let c = jj(e);
     return {
@@ -258,7 +258,7 @@ function K({
   variableId: e,
   fallbackText: t
 }) {
-  let s = _$$u(e);
+  let s = getVariableById(e);
   return jsx(_$$o2, {
     lastClassName: cssBuilderInstance.overflowHidden.noWrap.ellipsis.$,
     text: s?.name ?? t

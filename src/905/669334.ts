@@ -47,7 +47,7 @@ let $$k0 = memo(({
   tabManager: N,
   libraryFile: P
 }) => {
-  let O = useDispatch();
+  let O = useDispatch<AppDispatch>();
   let D = useSelector(e => e.dropdownShown);
   let L = selectCurrentUser();
   let F = useUniqueId();

@@ -738,7 +738,7 @@ function PaywallModalWrapper(e) {
   });
 }
 export function ConsumptionPaywallModalComponent(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: 'ConsumptionPaywallModal',
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,

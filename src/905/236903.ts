@@ -4,7 +4,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { showCaptions } from "../905/989765";
 import { WO } from "../figma_app/122682";
 export function $$l0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = WO();
   useEffect(() => {
     t && async function () {

@@ -32,7 +32,7 @@ function w({
   devFocusedOnboarding: e
 }) {
   let t = useIsFullscreenOverview();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useAtomWithSubscription(_$$d);
   let s = useAtomWithSubscription(cR);
   let l = useAtomWithSubscription(hv)?.data;
@@ -92,7 +92,7 @@ export function $$M1({
 }) {
   let t = useHasReadyNodesWithParentOrg();
   let i = !useCanAccessDevModeEntryPoint();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let u = useSelectedViewWithOverview();
   let p = useSelector(e => i ? void 0 : selectedViewToPath(e, u));
   let g = useIsFullscreenOverview();

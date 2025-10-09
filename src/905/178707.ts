@@ -76,7 +76,7 @@ export function $$S2(e) {
 }
 export function $$w0(e) {
   let [t, i] = useState(null);
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useSelector(e => e.auth.formState);
   let p = useSelector(e => e.auth.clickedSAMLSignIn);
   let f = useSelector(e => e.auth.email);
@@ -168,7 +168,7 @@ export function $$w0(e) {
 }
 export function $$C3(e) {
   let [t, i] = useState("");
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = useSelector(e => e.auth.invalidInput);
   let l = e.placeholder ?? getI18nString("auth.password-input-placeholder");
   let d = e.isSignUp ? "new-password" : "current-password";

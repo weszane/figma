@@ -40,7 +40,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { R6 } from "../figma_app/504823";
 import { useUserColorProfileSubscription, mapColorSpaceToEnum } from "../figma_app/829197";
 import { isIntegrationContext } from "../905/87821";
-import { SR } from "../figma_app/852050";
+import { initializeVariableHooks } from "../figma_app/852050";
 import { BI, m0 } from "../figma_app/546509";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -126,7 +126,7 @@ export function $$eO1({
   });
   let e4 = useSelector(canUserPublishToCommunity);
   let e8 = useAtomWithSubscription(canEditAndHasChangesAtom);
-  SR();
+  initializeVariableHooks();
   let e6 = useSubscription(FileNameViewDropdown({
     branchFileKey: eM?.key || ""
   }), {

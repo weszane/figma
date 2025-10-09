@@ -37,7 +37,7 @@ import { NuxSeatRequestConfirmationModal } from "../905/14084";
 var _ = p;
 export function $$B5(e) {
   let t = selectCurrentFile();
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = selectCurrentUser();
   let c = null;
   let p = null;
@@ -870,7 +870,7 @@ export function $$q0(e) {
   return e === FMemberRoleType.ADMIN;
 }
 export function $$J4(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentFile();
   let {
     getPlanAndPlanUser,

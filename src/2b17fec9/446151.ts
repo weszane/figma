@@ -338,7 +338,7 @@ function ep({
   isTopRight: c,
   onboardingKey: p
 }) {
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let {
     onDragStart,
     onDrag,

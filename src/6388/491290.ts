@@ -90,7 +90,7 @@ export function $$C0({
 function N({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     canAddOverlay,
     overlayPaint,

@@ -44,7 +44,7 @@ let E = registerModal(function ({
   hubFile: e,
   inResourceHub: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let o = selectCurrentUser();
   let j = useDuplicateTemplateHandler(e, !1, !1, t);
   useSingleEffect(() => {
@@ -174,7 +174,7 @@ export function $$Q0({
   enableWideButtonForStickyFooter: r
 }) {
   let l = createRef();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let [d, u] = useState(!1);
   let m = useSelector(e => isOrgOrTeamExport(e.authedActiveCommunityProfile));
   let _ = useSelector(e => e.userFlags).apple_eula_accepted;

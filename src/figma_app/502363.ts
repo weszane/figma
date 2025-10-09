@@ -400,7 +400,7 @@ let el = "search_bar--selectedSearchResult---VS1W";
 let ed = "search_bar--searchResultsSeparator--gxrj-";
 let ep = [uQ];
 export function $$e_0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.desktopNewTab.isSearchBarFocused);
   let r = useSelector(e => e.desktopNewTab.searchQuery);
   let s = useSelector(e => e.search.completedQueries[PublicModelType.FILES]);
@@ -557,7 +557,7 @@ function eh(e) {
   });
 }
 function em(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.search);
   let i = useSelector(e => e.selectedView);
   e.hasLoaded && e.completedQuery && r.queryId !== r.lastAckedQueryId && (t(searchSetLastAckedQueryIdAction({
@@ -601,7 +601,7 @@ function em(e) {
   });
 }
 function eg(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.folders);
   let {
     result,
@@ -682,7 +682,7 @@ function eg(e) {
   });
 }
 function ef(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.desktopNewTab.searchQuery);
   let s = useSelector(e => e.currentUserOrgId);
   let o = XW(r, s, PublicModelType.FILES);
@@ -746,7 +746,7 @@ function ey() {
 let ez = parsePxNumber(RAo);
 let eW = parsePxNumber(aIx);
 let eK = registerModal(function () {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.modalShown);
   let r = useSelector(e => e.search.sessionId);
   let s = useAtomWithSubscription(searchQueryAtom);
@@ -816,11 +816,11 @@ export function $$e53({
   hideSearchPreview: e,
   searchBarFullWidth: t
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let s = useSelector(e => e.modalShown);
   let o = getSelectedView();
   let l = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useIsCommunityHubView();
     let r = useSelector(e => getPermissionsStateMemoized(e));
     let n = useCurrentPublicPlan("useUpdateSearchScope");

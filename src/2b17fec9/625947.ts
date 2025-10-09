@@ -418,7 +418,7 @@ import { FileKindEnum } from '../figma_app/162807';
 import { b as _$$b9, c as _$$c8 } from '../figma_app/166989';
 import { useDeepEqualSceneValue, useSingleSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, getInitialOptions, getLocaleFallbacks } from '../figma_app/169182';
-import { M as _$$M2 } from '../figma_app/170366';
+import { getPluginManager } from '../figma_app/170366';
 import { s3 as _$$s6, TH as _$$TH, F1, kz, qI } from '../figma_app/171177';
 import { OU } from '../figma_app/175258';
 import { dh as _$$dh, nn as _$$nn } from '../figma_app/186343';
@@ -429,7 +429,7 @@ import { isWorkshopModeActive } from '../figma_app/193867';
 import { Xq } from '../figma_app/194956';
 import { fetchActiveSong, areSongArraysEqual, isSameSong, isStale } from '../figma_app/198387';
 import { yesNoTrackingEnum } from '../figma_app/198712';
-import { a6 as _$$a4, RD, Ve } from '../figma_app/198840';
+import { getHubFileVersionOrDefault, FileTypeSwitch, getTemplateActionLabel } from '../figma_app/198840';
 import { CF, kB } from '../figma_app/201703';
 import { ah as _$$ah, Ai as _$$Ai, oW as _$$oW, sz as _$$sz, Hf } from '../figma_app/204478';
 import { xl as _$$xl } from '../figma_app/212260';
@@ -475,7 +475,7 @@ import { eX as _$$eX, nm as _$$nm, tA as _$$tA, w5 as _$$w3, XH } from '../figma
 import { Cs as _$$Cs, M8 as _$$M4 } from '../figma_app/368611';
 import { B as _$$B5, M as _$$M5 } from '../figma_app/371825';
 import { G as _$$G3 } from '../figma_app/373780';
-import { _J as _$$_J } from '../figma_app/378195';
+import { initializeLocalPluginsThunk } from '../figma_app/378195';
 import { Aw } from '../figma_app/383828';
 import { stopPresenting } from '../figma_app/385215';
 import { pauseTimerThunk, pauseMusicThunk, stopMusicThunk, resetSelectedSongAndMusicStartTime, ACTIVE_SONG_NOT_FOUND, setTimerModalThunk, startMusicThunk, resumeTimerThunk, setMusicStandaloneVolumeThunk, updateEditorDocumentTitle, setMusicIsMutedThunk, getLastReceivedSongTimestamp, updateMusicSongIdThunk, setStartChimePlayed, fetchActiveSongsThunk, startTimerThunk, stopTimerThunk, adjustTimerThunk, setStandaloneMusicPlayer } from '../figma_app/389091';
@@ -513,7 +513,7 @@ import { Ht, O9 } from '../figma_app/522930';
 import { B as _$$B8 } from '../figma_app/539422';
 import { userFlagAtomFamily } from '../figma_app/545877';
 import { rN as _$$rN, yx as _$$yx, BI, F4, kM, Kx } from '../figma_app/546509';
-import { a8 as _$$a3, af as _$$af, fd as _$$fd, se as _$$se, LP } from '../figma_app/559491';
+import { getOrgPublishedWidgetsThunk, getResourceVersionsThunk, unpublishedWidgetsQuery, unpublishedPluginsQuery, getOrgPublishedPluginsThunk } from '../figma_app/559491';
 import { IW } from '../figma_app/563413';
 import { sendUrlToParent } from '../figma_app/564528';
 import { uL as _$$uL, k6, w8 } from '../figma_app/565197';
@@ -622,7 +622,7 @@ import { _q as _$$_q } from '../figma_app/957070';
 import { _0 as _$$_5 } from '../figma_app/957552';
 import { FK, zq, zx } from '../figma_app/961422';
 import { Ay as _$$Ay6, dA as _$$dA, nG as _$$nG2, s_ as _$$s_ } from '../figma_app/967857';
-import { fC as _$$fC, qR } from '../figma_app/968813';
+import { FETCH_FIGJAM_DEFAULT_INSERTS, fetchFigjamDefaultInsertsThunk } from '../figma_app/968813';
 import { fG as _$$fG2, gp as _$$gp } from '../figma_app/973927';
 import { o1 as _$$o5 } from '../figma_app/975811';
 import { toggleDropdown } from '../figma_app/976345';
@@ -811,7 +811,7 @@ async function Y(e, t, i, n, r, a) {
   }
 }
 function X() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentUser();
   let [i, n] = useAtomValueAndSetter(LQ);
   let r = useAtomWithSubscription(MX);
@@ -819,7 +819,7 @@ function X() {
     onInsert,
     onClear
   } = function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let [i, n] = useAtomValueAndSetter(LQ);
     let [r, a] = useAtomValueAndSetter(_$$h);
     let [s, o] = useAtomValueAndSetter(wm);
@@ -2475,7 +2475,7 @@ function ig({
   id: r,
   triggerID: a
 }) {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let c = {
     top: e.y + e.height + 16,
     left: e.x,
@@ -2570,7 +2570,7 @@ function iN({
   containerRef: e
 }) {
   let t = _$$Z();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let r = n?.type === _$$eg;
   let a = useSelector(e => e.isRenaming);
@@ -3580,7 +3580,7 @@ function n4(e) {
     teamId
   } = e;
   let c = Xr(_$$xw);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let h = useAtomWithSubscription(Zk);
   useEffect(() => {
     c({
@@ -3738,7 +3738,7 @@ function re(e) {
   });
 }
 function ad(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useRef(null);
   let n = useDropdownState();
   let r = getCurrentFileType() === 'whiteboard';
@@ -3815,9 +3815,9 @@ let af = 'browse_plugins_universal_modal_tiles--pluginTileIcon--C0pTJ';
 let a_ = 'browse_plugins_universal_modal_tiles--browsePluginTileRightSide--u74qu';
 let ax = 'browse_plugins_universal_modal_tiles--savedPluginTileLeftSide--nqHJe browse_plugins_universal_modal_tiles--browsePluginTileRightSide--u74qu';
 let ag = 'browse_plugins_universal_modal_tiles--pluginTileDescription--gno7V text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa';
-let ay = _$$M2();
+let ay = getPluginManager();
 let av = forwardRef((e, t) => {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let {
     localFileId,
     view
@@ -4108,7 +4108,7 @@ function aH(e) {
     publishedWidget
   } = e;
   let i = _$$cX().setPreviewResource;
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = publishedWidget.id;
   let a = publishedWidget?.versions[publishedWidget.current_plugin_version_id];
   let s = !!a;
@@ -4179,13 +4179,13 @@ function aH(e) {
     })
   });
 }
-let aB = _$$M2();
+let aB = getPluginManager();
 let aV = forwardRef((e, t) => {
   let i = useLocalPluginsExcludingWidgets();
   let {
     localFileId
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = i[localFileId];
   let s = useUserPublishedWidgets();
   let l = usePublishingPlugins();
@@ -4278,7 +4278,7 @@ let aG = memo(e => {
     tabManager,
     setPreviewResource
   } = _$$cX();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = e.widgetId;
   let a = getPublishedWidgetWithPayment(e.widgetId);
   let s = useMemo(() => e.widgetVersion || getPluginVersion(a), [e.widgetVersion, a]);
@@ -4296,7 +4296,7 @@ let aG = memo(e => {
     searchQuery
   } = _$$cX();
   useEffect(() => {
-    a || n(_$$af({
+    a || n(getResourceVersionsThunk({
       id: r,
       resourceType: HubTypeEnum.WIDGET
     }));
@@ -4513,7 +4513,7 @@ function aQ() {
   } = _$$I(Cn.FigJam);
   let i = useMemo(() => Ow(results.normalizedSearchResults), [results.normalizedSearchResults]);
   let n = Math.max(i.length - 12, 0);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = selectCurrentFile();
   let {
     fileVersion,
@@ -4578,7 +4578,7 @@ function a0(e) {
       })]
     }), jsx(_$$g3, {
       templates: r.slice(0, 4),
-      templateInsertionLocation: RD.CURRENT_FILE
+      templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
     })]
   });
 }
@@ -4675,7 +4675,7 @@ function sf(e) {
           type: _$$n4.HubFile,
           template: e
         })),
-        templateInsertionLocation: RD.CURRENT_FILE
+        templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
       })]
     }), !!n.length && jsxs(Fragment, {
       children: [jsx('div', {
@@ -4761,7 +4761,7 @@ function s_({
               insertTemplate: noop,
               isInsertingTemplate: isInsertingTemplate(primaryKey),
               shouldUseOpaqueBackground: !0,
-              children: Ve(RD.CURRENT_FILE)
+              children: getTemplateActionLabel(FileTypeSwitch.CURRENT_FILE)
             })
           }), jsx(Ho, {
             image: imageUrl || void 0,
@@ -5060,10 +5060,10 @@ function sP() {
   let t = _$$ik(e, 'templates', (e, t) => !t.some(t => t.type === _$$n4.HubFile && t.template.id === e.id), 4);
   let i = _$$mk(t, [useIsLoaded(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
-  })), useIsLoaded(_$$fC)]);
+  })), useIsLoaded(FETCH_FIGJAM_DEFAULT_INSERTS)]);
   return jsx(_$$g3, {
     templates: i,
-    templateInsertionLocation: RD.CURRENT_FILE
+    templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
   });
 }
 let sU = 'browse_widgets_view--sectionHeader--rxCOO text--fontPos13--xW8hS text--_fontBase--QdLsd';
@@ -5094,7 +5094,7 @@ let sK = 'browse_resources_all_tab--sectionBottomPadding--3jqXm';
 function sW() {
   let e = qZ();
   let t = Gi();
-  let i = useIsLoading(_$$fC);
+  let i = useIsLoading(FETCH_FIGJAM_DEFAULT_INSERTS);
   let n = useIsLoading(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
@@ -5233,7 +5233,7 @@ function sQ({
   disableDragging: g,
   setPinned: j
 }) {
-  let y = useDispatch();
+  let y = useDispatch<AppDispatch>();
   let {
     tabManager
   } = _$$cX();
@@ -5481,7 +5481,7 @@ function ol(e) {
 var oh = (e => (e.RECENT_AND_SAVED = 'recent_and_saved', e.DEVELOPMENT = 'development', e.ORG = 'org', e))(oh || {});
 let om = 'browse_main_view_selector--mainViewHeader--1tbfQ';
 function of(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCurrentUserOrg();
   let n = useCallback(e => function (e, t) {
     switch (e) {
@@ -5628,7 +5628,7 @@ function oI({
   let s = useCurrentFileKey();
   let c = getPluginAllowListKey(e?.id ?? '', s);
   let u = useIsLoaded(c);
-  let p = LP.loadingKeyForPayload(e?.id ?? '');
+  let p = getOrgPublishedPluginsThunk.loadingKeyForPayload(e?.id ?? '');
   let h = useIsLoaded(p);
   let m = useInstalledPluginsAndWidgets().orgPlugins;
   let f = useMemo(() => {
@@ -5639,7 +5639,7 @@ function oI({
   let _ = filterArrayByEditorTypeAndMemo(f);
   let x = !e.public_plugins_allowed || e.plugins_whitelist_enforced && u && Object.keys(n).length === 0;
   let g = t || h && Object.keys(r).length === 0;
-  let j = useDispatch();
+  let j = useDispatch<AppDispatch>();
   return (useEffect(() => {
     e && !t && j(Xt());
   }, [j, e, t]), (!i || u) && h) ? x && g ? jsx(oE, {}) : jsxs(TrackingProvider, {
@@ -5788,7 +5788,7 @@ function oF() {
   }));
   let n = useCurrentFileKey();
   let r = useIsLoading(getPluginAllowListKey(t, n));
-  let a = useIsLoading(LP.loadingKeyForPayload(t));
+  let a = useIsLoading(getOrgPublishedPluginsThunk.loadingKeyForPayload(t));
   return i || r || a ? jsx(VR, {}) : jsx(TrackingProvider, {
     name: 'plugins',
     children: jsx(oU, {})
@@ -5796,7 +5796,7 @@ function oF() {
 }
 function oQ(e) {
   let t = useSelector(e => e.universalInsertModal);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = getLocalPlugins();
   let r = useSelector(t => getPluginMetadata(e.pluginId, t.publishedPlugins));
   let a = isResourcePaymentFailed(r);
@@ -5837,7 +5837,7 @@ function oQ(e) {
     activeTextReviewPlugin: e.mirror.appModel.activeTextReviewPlugin
   }));
   useEffect(() => {
-    p || i(_$$af({
+    p || i(getResourceVersionsThunk({
       id: e.pluginId,
       resourceType: HubTypeEnum.PLUGIN
     }));
@@ -6045,10 +6045,10 @@ function o1(e) {
   }) : null;
 }
 function o8(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.universalInsertModal);
   let n = useSelector(e => e.hubFiles)[e.id];
-  let r = _$$a4(n);
+  let r = getHubFileVersionOrDefault(n);
   let a = Kx();
   let s = a?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os;
   return jsxs(TrackingProvider, {
@@ -6105,7 +6105,7 @@ function ln(e) {
     buttonCta
   } = e;
   let r = useSelector(e => e.hubFiles)[resourceId];
-  let a = _$$a4(r);
+  let a = getHubFileVersionOrDefault(r);
   let {
     insertTemplate,
     isInsertingTemplate
@@ -6218,7 +6218,7 @@ function la(e) {
       className: _$$iU,
       children: [jsx(_$$g3, {
         templates: s,
-        templateInsertionLocation: RD.CURRENT_FILE
+        templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
       }), !e.teamTemplatesFromSearchIsLoading && jsx('div', {
         className: cssBuilderInstance.relative.$,
         children: jsx(IntersectionSentinel, {
@@ -6497,7 +6497,7 @@ function lb({
   let s = useCurrentFileKey();
   let d = getWidgetAllowListKey(e?.id ?? '', s);
   let c = useIsLoaded(d);
-  let u = _$$a3.loadingKeyForPayload(e.id ?? '');
+  let u = getOrgPublishedWidgetsThunk.loadingKeyForPayload(e.id ?? '');
   let p = useIsLoaded(u);
   let h = !e.public_plugins_allowed || e.widgets_whitelist_enforced && c && Object.keys(r).length === 0;
   let m = i || p && a.length === 0;
@@ -6600,7 +6600,7 @@ function lT() {
   }));
   let n = useCurrentFileKey();
   let r = useIsLoading(getWidgetAllowListKey(t, n));
-  let a = useIsLoading(_$$a3.loadingKeyForPayload(t));
+  let a = useIsLoading(getOrgPublishedWidgetsThunk.loadingKeyForPayload(t));
   let s = useIsLoaded(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
@@ -6653,10 +6653,10 @@ function lk(e) {
   let s = useInstalledPluginsAndWidgets().plugins[resourceId] || getPluginVersion(r);
   let c = useSelector(e => isWorkshopModeActive(e.selectedView) && !e.user);
   let p = r.community_publishers?.accepted || [];
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let f = LR();
   useEffect(() => {
-    a || m(_$$af({
+    a || m(getResourceVersionsThunk({
       id: resourceId,
       resourceType: HubTypeEnum.PLUGIN
     }));
@@ -6759,7 +6759,7 @@ function lD(e) {
   } = e;
   let n = getPublishedWidgetWithPayment(e.resourceId);
   let r = n?.community_publishers.accepted || [];
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = LR();
   let c = Object.values(useLocalPluginsExcludingWidgets()).find(e => e.plugin_id === resourceId);
   let p = useSelector(e => e.authedActiveCommunityProfile);
@@ -6785,7 +6785,7 @@ function lD(e) {
     allowlistedExtensions: w
   });
   useEffect(() => {
-    n || a(_$$af({
+    n || a(getResourceVersionsThunk({
       id: resourceId,
       resourceType: HubTypeEnum.WIDGET
     }));
@@ -7014,7 +7014,7 @@ function lF({
   let {
     isInsertingTemplate
   } = Fz();
-  let $ = useDispatch();
+  let $ = useDispatch<AppDispatch>();
   let Y = _$$W5();
   let X = universalInsertModal.sourceRect;
   let [q, J] = useMemo(() => {
@@ -7052,7 +7052,7 @@ function lF({
     $(_$$cd.fetchWidgetsMetadata({
       key: FDocumentType.FigJam
     }));
-    $(qR({}));
+    $(fetchFigjamDefaultInsertsThunk({}));
   }, [$, m?.parentOrgId]);
   useEffect(() => {
     $(_$$sz2({
@@ -7067,10 +7067,10 @@ function lF({
   let ep = useRef(null);
   let eh = useRef(null);
   useEffect(() => {
-    el && ($(_$$_J()), $(_$$aq2()));
+    el && ($(initializeLocalPluginsThunk()), $(_$$aq2()));
   }, [$, el, eo]);
-  setupResourceAtomHandler(_$$se());
-  setupResourceAtomHandler(_$$fd());
+  setupResourceAtomHandler(unpublishedPluginsQuery());
+  setupResourceAtomHandler(unpublishedWidgetsQuery());
   useEffect(() => {
     $(setShouldSearchDefaultLibraries({
       shouldSearchDefaultLibraries: !0
@@ -7133,7 +7133,7 @@ function lF({
           type: _$$n4.HubFile,
           template: e
         },
-        templateInsertionLocation: RD.CURRENT_FILE,
+        templateInsertionLocation: FileTypeSwitch.CURRENT_FILE,
         triggeredFrom: Vq(tabManager.activeTab),
         isInsertingTemplate: isInsertingTemplate(e.id),
         onClickTitle: () => setPreviewResource({
@@ -7845,7 +7845,7 @@ function d1({
   updatePillSuggestions: i,
   maxHeight: n
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [a] = useLexicalComposerContext();
   let s = useAtomWithSubscription(_$$dO);
   let [l, c] = useAtomValueAndSetter(JV);
@@ -8477,7 +8477,7 @@ function cc({
 }
 function cu() {
   let e = useCurrentFileKey();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = {
     rest: {
       scale: 0.9
@@ -8522,7 +8522,7 @@ function cu() {
             type: PH.type,
             data: {
               triggeredFrom: 'aiModal',
-              templateInsertionLocation: RD.CURRENT_FILE
+              templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
             }
           }));
         },
@@ -8602,7 +8602,7 @@ function c_() {
 }
 function cx() {
   let e = useAtomWithSubscription(_$$dO);
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = _$$um2();
   useEffect(() => {
     e.status === _$$c6.LOADING ? t(VisualBellActions.enqueue({
@@ -10275,7 +10275,7 @@ function u6(e) {
     setIsEditorOpen
   } = e;
   let s = useId();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let p = useSelector(e => e.userFlags.seen_alt_text_explanation);
   let h = useCallback(() => {
     !p && n && c(postUserFlag({
@@ -13582,7 +13582,7 @@ function f1({
   tooltip: t,
   ...i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = useDropdownState();
   return jsx('div', {
     'data-tooltip-show-above': !0,
@@ -15265,7 +15265,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     return i?.mainComponent?.name;
   }, t);
   let r = useMemo(() => t ? [t] : [], [t]);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = useCallback(e => {
     _$$l.user('swap-instance', () => {
       a(swapToSharedComponent({
@@ -15565,7 +15565,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     min: 1,
     max: 2e3
   });
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useDropdownState();
   let [n, r] = useState(void 0);
   let [a, s] = useState(void 0);
@@ -17806,7 +17806,7 @@ function g9({
   let a = useSelector(e => e.dropdownShown?.type === 'song-dropdown' ? e.dropdownShown : null);
   let [s, c] = useState(void 0);
   let u = useStore();
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = useSelector(e => e.music.playerInstance);
   let m = e || g4;
   let f = shouldOptimizeForIpad();
@@ -19745,7 +19745,7 @@ function ju() {
   let i = useSelector(e => e.userFlags.dismissed_figjam_music_volume_hint);
   let n = useSelector(e => e.music.music?.selectedSongID && e.music.music?.selectedSongID !== '');
   let r = useSelector(e => e.music.music?.isPaused === !1 && e.music.music?.isStopped === !1);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   return t || i || !r || !n ? null : jsxs('div', {
     'className': ex()('volume_hint--hintContainer--A9gj2', Dm),
     'data-testid': 'volume-hint',
@@ -19903,7 +19903,7 @@ function jC() {
   let [u, p] = useState(!1);
   let h = useSelector(e => e.music.activeSongs, areSongArraysEqual);
   let m = gJ();
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   useEffect(() => {
     h.length && p(!1);
   }, [h.length]);
@@ -20026,7 +20026,7 @@ let jW = () => {
 };
 let jz = e => {
   let t = _$$F8(e);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useSelector(e => e.timer);
   let r = _$$F8(n);
   let a = _$$F8(useSelector(e => e.timer.volume));
@@ -20037,7 +20037,7 @@ let jz = e => {
   }, [t, i, s, o, r, e, a]);
 };
 let jZ = () => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = _$$F8(useSelector(e => e.timer.volume));
   let i = _$$F8(useSelector(e => e.timer.setBy));
   let n = _$$F8(selectCurrentUser());
@@ -20091,7 +20091,7 @@ let jZ = () => {
   };
 };
 let j$ = e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.timer.time);
   let n = _$$F8(useSelector(e => e.timer.audioEnabled));
   let r = _$$F8(useSelector(e => e.timer && e.timer.modalState === 'open'));
@@ -20213,7 +20213,7 @@ function j9({
     } = e;
     let o = useRef(null);
     let c = useRef(null);
-    let u = useDispatch();
+    let u = useDispatch<AppDispatch>();
     let p = useCallback(e => {
       if (!e.currentTarget.value.match(/^\d{0,2}$/)) {
         e.preventDefault();
@@ -20649,7 +20649,7 @@ function bs({
   onCancel: e
 }) {
   let t = C3();
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useCurrentFileKey();
   let r = useIsLoading(createEndVotingSessionKey(n || ''));
   let a = useCallback(() => {
@@ -20812,7 +20812,7 @@ function by({
   }), e), {}), [e.votedNodes]);
 }
 let bv = e => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return {
     isDropdownOpen: useSelector(e => e.dropdownShown?.type === bT),
     handleTargetClick: () => {
@@ -21497,7 +21497,7 @@ function bk() {
 function bR({
   recordingKey: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = Pd(useCallback(() => {
     t(setVotingSessionInfo({
       votingStage: SessionStatus.JOINED
@@ -21527,7 +21527,7 @@ let bU = e => {
   return t;
 };
 function bF() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCurrentFileKey();
   let {
     title,
@@ -21556,7 +21556,7 @@ function bF() {
 }
 function bH(e) {
   let t = useRef(null);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = useCurrentFileKey();
   let r = useSelector(e => !e.user);
   let a = useIsLoading(createStartVotingSessionKey(n || ''));
@@ -21769,7 +21769,7 @@ let bZ = 'meetings_panel';
 let b$ = registerModal(({
   votingSessionId: e
 }) => {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useCurrentFileKey();
   let n = () => {
     trackEventAnalytics('cancel_delete_voting_session', {
@@ -21857,7 +21857,7 @@ function bq({
   recordingKey: l,
   onClick: u
 }) {
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = useCurrentFileKey();
   return jsx('li', {
     children: jsxs(ButtonPrimitive, {
@@ -21981,7 +21981,7 @@ function b7({
   let n = e.guid;
   let r = useSingleSceneValue(n);
   let a = useNavigateToViewport('figjam_voting');
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let c = useSelector(e => e.voting.selectedVotePinId === n);
   let u = useSelector(e => !!t && e.voting.selectedVotePinId === t);
   let p = useSelector(e => e.voting.hoveredInModalVotePinId === n);
@@ -22259,7 +22259,7 @@ let ya = 'meetings_panel';
 function ys() {
   let e = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let t = useMemo(() => e && e.sessionId.length > 0, [e]);
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let n = Xr(Qs);
   let r = qU();
   let a = useStore();
@@ -22352,7 +22352,7 @@ function yu({
 }) {
   let r = useSelector(e => e.music.isMuted);
   let a = useSelector(e => r ? 0 : e.music.volume);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let l = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -22437,7 +22437,7 @@ function yj(e) {
   } = e;
   let u = useSelector(e => e.music.volume);
   let p = useSelector(e => e.music.isMuted);
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let m = useCallback(() => {
     h(setMusicIsMutedThunk({
       isMuted: !p,
@@ -22565,7 +22565,7 @@ function yT() {
   let [e, t] = jq();
   let i = useSelector(e => e.mirror.appModel.showUi);
   return (!function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let i = useSelector(e => e.timer);
     useEffect(() => {
       !1 !== i.startChimePlayed || isTimerFinished(i.time) || isTimerPausedAndStarted(i.time) || isTimerDone(i.time) || (e(), t(setStartChimePlayed(!0)));
@@ -22600,7 +22600,7 @@ function yT() {
     let n = gq(i || '')?.playback_url;
     let r = useSelector(e => e.music.volume);
     let a = useSelector(e => e.music.isMuted);
-    let s = useDispatch();
+    let s = useDispatch<AppDispatch>();
     useEffect(() => {
       s(fetchActiveSongsThunk());
     }, [s]);
@@ -22915,7 +22915,7 @@ function y0() {
     let [t, i] = useState(!1);
     let n = useSelector(yZ);
     let r = selectUserFlag(y$);
-    let a = useDispatch();
+    let a = useDispatch<AppDispatch>();
     let s = n > 1 && !r;
     useEffect(() => {
       if (!s) return;
@@ -23165,7 +23165,7 @@ let y6 = 'figjam_right_panel--controls--1DAKo';
 let y4 = 'figjam_right_panel--leftSection--wZTVw';
 let y9 = 'figjam_right_panel--middleSection--xMAsd';
 function y8() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectCurrentFile();
   let i = useDropdownState();
   let n = useSelector(e => e.multiplayer);
@@ -23412,7 +23412,7 @@ function vf({
   initiatorHandle: t,
   votingSessionId: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = Ii();
   let a = function (e) {
     let t = useSelector(e => e.multiplayer).allUsers.find(t => t.userID === e) ?? null;
@@ -23492,7 +23492,7 @@ function v_() {
   }) : null;
 }
 let vg = memo(() => {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getUserId();
   let i = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let n = useSelector(e => e.voting.selectedVotePinId);
@@ -24159,7 +24159,7 @@ let vD = {
         type: PH.type,
         data: {
           triggeredFrom: 'starterKitMore',
-          templateInsertionLocation: RD.CURRENT_FILE
+          templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
         }
       }));
     }
@@ -24192,7 +24192,7 @@ function vB({
   let t = useAtomWithSubscription(_$$P6);
   let i = useCurrentTool();
   let n = useCurrentFileKey() || void 0;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [a, s] = useState(!1);
   let u = useRef(!1);
   let h = e ? 'newFile' : 'recurring';
@@ -24381,7 +24381,7 @@ let vW = memo(({
   let m = p ? p.key : '';
   let y = useSelector(e => e.universalInsertModal);
   let w = useSelector(e => _$$h5(e));
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   useFileLibrarySubscriptions(m);
   _$$W(!0);
   let L = BI();

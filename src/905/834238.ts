@@ -24,7 +24,7 @@ function v(e) {
   return "other" === e || "something_else" === e;
 }
 function I(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useSelector(e => e.user);
   let _ = useDropdownState();
   let b = i.profile?.job_title ?? "";

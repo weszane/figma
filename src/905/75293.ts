@@ -34,7 +34,7 @@ import { ControlledVariablePickerProvider, VariablePicker } from '../figma_app/2
 import { DialogBody, DialogContents, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { cS } from '../figma_app/334459';
 import { getI18nState } from '../figma_app/363242';
-import { MH } from '../figma_app/394327';
+import { extractVariableAliasOrFontStyle } from '../figma_app/394327';
 import { oz } from '../figma_app/406976';
 import { fullscreenValue } from '../figma_app/455680';
 import { assertNotNullish } from '../figma_app/465776';
@@ -83,7 +83,7 @@ export function $$el2({
   positionRef: p
 }) {
   let m = new Point(i, s);
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let [f, A] = useState(!1);
   let [y, E] = useState(m);
   let S = useSetupPlayback(o, 'close', () => {
@@ -274,7 +274,7 @@ let ec = memo(({
   onChange: i,
   recordingKey: r
 }) => {
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let o = new $$ed3({
     min: 0
   });
@@ -354,7 +354,7 @@ let ep = memo(({
   bigNudgeAmount: s,
   smallNudgeAmount: o
 }) => {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = t.pattern !== 'GRID' && t.type === 'STRETCH';
   let c = e => {
     i({
@@ -405,7 +405,7 @@ let em = memo(({
   bigNudgeAmount: s,
   smallNudgeAmount: o
 }) => {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   return jsx(AutoInteractableWrapper, {
     name: 'grid_settings_gutter_size_input',
     children: jsx(eb, {
@@ -444,7 +444,7 @@ let eh = memo(({
   onChange: i,
   recordingKey: r
 }) => {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let l = useDropdownState();
   let d = getI18nState()?.getPrimaryLocale(!0);
   let c = {
@@ -532,7 +532,7 @@ let eg = memo(({
   bigNudgeAmount: s,
   smallNudgeAmount: o
 }) => {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = t.type === 'CENTER';
   let c = e => {
     i({
@@ -603,7 +603,7 @@ function e_({
   onValueChange: t,
   recordingKey: i
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return jsx(AutoInteractableWrapper, {
     name: 'grid_settings_opacity_input',
     children: jsx(OpacityInput, {
@@ -618,7 +618,7 @@ function e_({
 }
 let eA = new $$ea0();
 export function $$ey1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     layoutGrid,
     onChange
@@ -699,8 +699,8 @@ function eb({
   withInputControl: d = !0,
   recordingKey: c
 }) {
-  let u = MH(s[t]) ?? void 0;
-  let p = useDispatch();
+  let u = extractVariableAliasOrFontStyle(s[t]) ?? void 0;
+  let p = useDispatch<AppDispatch>();
   let g = useCallback(async e => {
     if (e) {
       let i = await p(loadSharedVariableThunk(e));

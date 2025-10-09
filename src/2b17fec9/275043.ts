@@ -360,7 +360,7 @@ let ef = memo(function ({
   disabled: j
 }) {
   let [b, y] = useAtomValueAndSetter(Q);
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let [C, T] = useState(!1);
   let [E, S] = useState(!1);
   let [I, L] = useState(0);
@@ -3992,7 +3992,7 @@ function iL({
     hasRemainingVotes,
     leaveVotingSessionAndCloseWheel
   } = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useIsVotingSessionJoined();
     let i = hr();
     return {

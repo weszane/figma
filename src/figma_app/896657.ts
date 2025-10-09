@@ -6,7 +6,7 @@ import { isResourceApprovedPublic } from "../figma_app/777551";
 import { p4 } from "../905/448740";
 import { T as _$$T } from "../905/594474";
 import { createOptimistThunk } from "../905/350402";
-import { Qi, fy } from "../figma_app/559491";
+import { mergePublishedPluginThunk, updateMetadata } from "../figma_app/559491";
 import { showModal, showModalHandler } from "../905/156213";
 import { PluginAction } from "../905/15667";
 import { trackUserEvent } from "../figma_app/314264";
@@ -18,7 +18,7 @@ import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { PageTypeEnum } from "../figma_app/10554";
 import { pluginAPIService } from "../905/3209";
 import { widgetAPIClient } from "../905/424668";
-import { o as _$$o } from "../905/938553";
+import { PluginPublishModal } from "../905/938553";
 import { KM, x5 } from "../figma_app/224019";
 import { O as _$$O } from "../905/166544";
 export let $$x0 = createOptimistThunk(async (e, {
@@ -41,7 +41,7 @@ export let $$x0 = createOptimistThunk(async (e, {
     let i = t.data.meta;
     let a = n.data.meta;
     let s = i.concat(a).find(e => e.id === r);
-    s && e.dispatch(Qi({
+    s && e.dispatch(mergePublishedPluginThunk({
       publishedPlugins: [s],
       src: "showPublishPluginModal"
     }));
@@ -72,7 +72,7 @@ export let $$x0 = createOptimistThunk(async (e, {
         } = publishingPlugins[t];
         metadata.widgetSnapshotImageSrc = C;
         metadata.widgetSnapshotImageBlob = w;
-        e.dispatch(fy({
+        e.dispatch(updateMetadata({
           id: t,
           metadata
         }));
@@ -92,7 +92,7 @@ export let $$x0 = createOptimistThunk(async (e, {
         publishedWidgets,
         authedProfilesById
       }, void 0, r, C);
-      e.dispatch(fy({
+      e.dispatch(updateMetadata({
         id: U.id,
         metadata: t
       }));
@@ -112,7 +112,7 @@ export let $$x0 = createOptimistThunk(async (e, {
       publishedWidgets,
       authedProfilesById
     }, t, r, C, w);
-    e.dispatch(fy({
+    e.dispatch(updateMetadata({
       id: t,
       metadata: n
     }));
@@ -134,7 +134,7 @@ export let $$x0 = createOptimistThunk(async (e, {
     if (!B && !U) return;
     if (x === KM.PERMISSIONS) {
       e.dispatch(showModalHandler({
-        type: _$$o,
+        type: PluginPublishModal,
         data: {
           localFileId: t,
           entryPoint: c,
@@ -172,7 +172,7 @@ export let $$x0 = createOptimistThunk(async (e, {
       }
     }));
   } else e.dispatch(showModalHandler({
-    type: _$$o,
+    type: PluginPublishModal,
     data: {
       localFileId: t,
       entryPoint: c,

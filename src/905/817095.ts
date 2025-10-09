@@ -31,7 +31,7 @@ import { VisualBellActions } from "../905/302958";
 import { KindEnum } from "../905/129884";
 import { customHistory } from "../905/612521";
 let D = memo(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = getFeatureFlags()[e.flagName] ?? !1;
   let r = _$$F(e.flagName);
   let a = void 0 !== getFeatureFlagRulesExport()[r];

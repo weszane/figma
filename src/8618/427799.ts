@@ -305,7 +305,7 @@ function $() {
 }
 let H = e => EditorPreferencesApi().renderRulerUnitAsInches.getCopy() ? 300 * e : EditorPreferencesApi().renderRulerUnitAsCentimeters.getCopy() ? 300 * e / 2.54 : e;
 function Z() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let [t, n] = useSelectionProperty("width");
   let [s, o] = useSelectionProperty("height");
   let a = 25;

@@ -258,7 +258,7 @@ export function $$B0({
   open: _,
   ...p
 }) {
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let [g, x] = useState(1);
   let b = useGetLicenseTypesForSeatType({
     visibility: SeatDescriptionVisibility.SEAT_DESCRIPTION

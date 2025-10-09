@@ -163,7 +163,7 @@ function U(e) {
   if (null === I.data) throw Error("Sticker price data was null");
   let P = C.data;
   let M = I.data;
-  let O = useDispatch();
+  let O = useDispatch<AppDispatch>();
   let B = () => {
     O(hideModal());
   };

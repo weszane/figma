@@ -10,7 +10,7 @@ import { FileFormat, FillType, StickyTableConfig, AppStateTsApi, Fullscreen } fr
 import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { n as _$$n } from "../figma_app/339971";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { rg } from "../figma_app/401069";
+import { logFileExportThunk } from "../figma_app/401069";
 import { hideModal } from "../905/156213";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { registerModal } from "../905/102752";
@@ -348,7 +348,7 @@ let J = memo(function (e) {
     ...i
   } = e;
   let A = useModalManager(i);
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let v = pickerInfo.nodeCounts.selectionStickyCount > 0 || pickerInfo.nodeCounts.canvasStickyCount > 0;
   let I = pickerInfo.nodeCounts.selectionTableCount > 0 || pickerInfo.nodeCounts.canvasTableCount > 0;
   let E = [];
@@ -377,7 +377,7 @@ let J = memo(function (e) {
           quality: D
         });
         "selection" === M ? Fullscreen.exportSelectionOrCurrentPage(!0, pickerInfo.selectionArea, pickerInfo.nodeCounts.selectionNodeCount) : Fullscreen.exportSelectionOrCurrentPage(!1, pickerInfo.canvasArea, pickerInfo.nodeCounts.canvasNodeCount);
-        b(rg());
+        b(logFileExportThunk());
         b(hideModal());
       }
     }));

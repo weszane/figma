@@ -14,7 +14,7 @@ import { X as _$$X } from "../905/190511";
 import { logCmsError } from "../905/937198";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
-import { u as _$$u, BQ } from "../figma_app/852050";
+import { getVariableById, getResolvedVariableValue } from "../figma_app/852050";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -33,7 +33,7 @@ import { FormattedInputContext } from "../905/427409";
 import { u3 } from "../figma_app/152690";
 import { P as _$$P, J } from "../figma_app/120873";
 import { VariablePicker } from "../figma_app/260445";
-import { eF, MH } from "../figma_app/394327";
+import { isLocallySoftDeleted, extractVariableAliasOrFontStyle } from "../figma_app/394327";
 import { calculatePickerPosition } from "../905/67286";
 import { wG, J2 } from "../905/331989";
 import { XA, Ig } from "../905/805224";
@@ -55,8 +55,8 @@ let M = memo(function ({
     isBoundVariableDeleted,
     onExpressionSubmitted
   } = s ?? {};
-  let E = _$$u(boundVariableId ?? void 0);
-  let x = BQ(boundVariableId ?? void 0);
+  let E = getVariableById(boundVariableId ?? void 0);
+  let x = getResolvedVariableValue(boundVariableId ?? void 0);
   let S = u3(["TEXT_DATA"]);
   let w = u3(["CMS_SERIALIZED_RICH_TEXT_DATA"]);
   let C = S.consumedVariable || w.consumedVariable;
@@ -126,7 +126,7 @@ export function $$W1({
   invalid: o = !1
 }) {
   let l = useContext(FormattedInputContext);
-  let d = BQ(t.node_id ?? void 0);
+  let d = getResolvedVariableValue(t.node_id ?? void 0);
   return jsx(ButtonPrimitive, {
     className: Cl,
     onClick: function () {
@@ -142,7 +142,7 @@ export function $$W1({
       containerClassName: $1,
       fullWidth: !0,
       invalid: o,
-      isDeleted: eF(t),
+      isDeleted: isLocallySoftDeleted(t),
       isNonInteractive: !0,
       text: t.name,
       thumbnailValue: d && "MIXED" !== d ? d : void 0,
@@ -161,7 +161,7 @@ export function $$K0({
     consumedVariable,
     clearVariableConsumption
   } = u3(["FONT_STYLE"], i);
-  let s = _$$u(MH(consumedVariable) ?? void 0);
+  let s = getVariableById(extractVariableAliasOrFontStyle(consumedVariable) ?? void 0);
   return s ? jsx("div", {
     className: OR,
     children: jsxs(XA, {

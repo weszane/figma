@@ -23,7 +23,7 @@ import { registerModal } from "../905/102752";
 import { GQ } from "../figma_app/32128";
 import { DraggableModalManager } from "../905/748636";
 function C(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = GQ();
   let s = useAtomWithSubscription(Tm);
   let [o, l] = useState(() => Zz());

@@ -41,7 +41,7 @@ export function $$y1(e) {
     forwardedRef,
     recordingKey
   } = e;
-  let R = useDispatch();
+  let R = useDispatch<AppDispatch>();
   let L = selectCurrentFile();
   let P = useSelector(e => e.search.sessionId);
   let D = _$$k();

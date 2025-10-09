@@ -9,7 +9,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
-import { sw, rk } from "../figma_app/914957";
+import { hideStylePreview, showStylePreviewThunk } from "../figma_app/914957";
 import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
 import { teamLibraryCache } from "../figma_app/80990";
 import { useLibraryFileLink } from "../905/217163";
@@ -18,14 +18,14 @@ import { useDropdownState } from "../905/848862";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 export let $$v0 = "variable-picker-style-context-menu";
 export function $$I1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useCurrentFileKey();
   let i = useSelector(e => e.stylePreviewShown);
   let {
     showStyleContextMenu,
     hideStyleContextMenu
   } = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     let t = useDropdownState();
     return useMemo(() => ({
       showStyleContextMenu: function ({
@@ -47,7 +47,7 @@ export function $$I1() {
   }();
   return useMemo(() => {
     function r() {
-      e(sw());
+      e(hideStylePreview());
     }
     return {
       showStyleContextMenu,
@@ -62,7 +62,7 @@ export function $$I1() {
           isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : teamLibraryCache.getCanvas(n).then(e => {
             Fullscreen.selectExternalStyle(e);
           });
-          e(rk({
+          e(showStylePreviewThunk({
             style: n,
             rowTop: a.y,
             rowLeft: a.x

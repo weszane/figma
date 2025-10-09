@@ -16,7 +16,7 @@ export let $$h4 = {
 };
 export var $$m2 = (e => (e.Reload = "reload", e.Trace = "trace", e))($$m2 || {});
 export function $$g3() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return useCallback((t, r, n) => {
     let i;
     if (n) switch (n.type) {

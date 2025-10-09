@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { hideModal } from "../905/156213";
 export function $$s0() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return useCallback(() => {
     e(hideModal());
   }, [e]);

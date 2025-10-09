@@ -1,7 +1,7 @@
 import { consentAllowedAtom } from "../905/18800";
 import { $z } from "../905/62762";
 import { debugState } from "../905/407919";
-import { a as _$$a } from "../905/882689";
+import { getBoundVariables } from "../905/882689";
 import { Ay } from "../905/931912";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackDefinedFileEvent } from "../figma_app/314264";
@@ -50,7 +50,7 @@ export function $$h1({
       l.numHiddenNodes += 1;
       return;
     }
-    if (e.annotations && e.annotations.length > 0 && (l.nodesWithAnnotations += 1), e.type === "SYMBOL" ? l.numComponents += 1 : e.type === "INSTANCE" && (l.numInstances += 1), e.isStateGroup && (l.isComponentSet = !0), e.type === "FRAME" && (["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.stackMode === "GRID" && (l.framesWithGridLayout += 1)), e.type === "FRAME" && ["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.boundVariables && _$$a(e, i).forEach(e => {
+    if (e.annotations && e.annotations.length > 0 && (l.nodesWithAnnotations += 1), e.type === "SYMBOL" ? l.numComponents += 1 : e.type === "INSTANCE" && (l.numInstances += 1), e.isStateGroup && (l.isComponentSet = !0), e.type === "FRAME" && (["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.stackMode === "GRID" && (l.framesWithGridLayout += 1)), e.type === "FRAME" && ["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.boundVariables && getBoundVariables(e, i).forEach(e => {
       e && e.value !== null && d.set(e.codeSyntaxName || e.name, e.type);
     }), e.childrenNodes && (l.numChildren += e.childrenNodes.length), e.id in o) {
       let t = o[e.id];

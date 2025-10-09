@@ -35,7 +35,7 @@ import { E as _$$E } from "../figma_app/126651";
 import { TrackingKeyEnum } from "../905/696396";
 import { j as _$$j } from "../figma_app/617663";
 import { devModalTypes } from "../figma_app/124713";
-import { B as _$$B2 } from "../figma_app/395012";
+import { TeamFeatureKey } from "../figma_app/395012";
 import { L as _$$L } from "../figma_app/288254";
 import { k as _$$k3 } from "../figma_app/121990";
 import { getUserHandleOrEmail } from "../905/144598";
@@ -105,7 +105,7 @@ function Y(e) {
   let p = localizeCurrency && u.data && isNotNullish(u.data[neededSeatType]) ? localizeCurrency.formatMoney(u.data[neededSeatType].amount, {
     showCents: !1
   }) : void 0;
-  let m = useDispatch();
+  let m = useDispatch<AppDispatch>();
   let h = async () => {
     if (pendingRole.invite?.id) try {
       await _$$j.updateInviteBillableProductKey({
@@ -157,12 +157,12 @@ function q(e) {
     currentSeatBillingInterval: _,
     enabled: isProrationEnabled && !isElaResult.data && !!e.localizeCurrency
   });
-  let I = useDispatch();
+  let I = useDispatch<AppDispatch>();
   let E = _$$N({
     planId: planKey.parentId,
     ...getPlanData(planKey.type, {
       team: {
-        entryPoint: _$$B2.FILE_PERMISSIONS_MODAL
+        entryPoint: TeamFeatureKey.FILE_PERMISSIONS_MODAL
       },
       org: {
         entryPoint: devModalTypes.FILE_PERMISSIONS_MODAL

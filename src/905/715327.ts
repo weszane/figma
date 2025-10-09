@@ -51,7 +51,7 @@ import { transformLibraryWithCounts, transformLibraryFile } from "../figma_app/6
 import { t as _$$t2 } from "../figma_app/579169";
 import { fV, Fl } from "../figma_app/236178";
 import { NX, k9 } from "../figma_app/777207";
-import { SR } from "../figma_app/852050";
+import { initializeVariableHooks } from "../figma_app/852050";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { useProcessedLibraryResults, useCommunityLibrarySearch } from "../905/842072";
@@ -168,7 +168,7 @@ function ew({
   let l = s?.name;
   let d = getCurrentTeamId();
   let u = useSelector(e => e.dropdownShown);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let m = useCallback(e => {
     i(e);
     trackEventAnalytics("CTA Clicked", {
@@ -1023,7 +1023,7 @@ function tC({
   let r = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   })?.thumbnail_url || "";
-  SR();
+  initializeVariableHooks();
   return jsxs("div", {
     className: tI,
     children: [jsx(e4, {
@@ -1066,8 +1066,8 @@ function tT({
   let r = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   })?.thumbnail_url || "";
-  SR();
-  let s = useDispatch();
+  initializeVariableHooks();
+  let s = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: TrackingKeyEnum.LIBRARY_MODAL_UPSELL,
     children: jsx("div", {
@@ -1285,7 +1285,7 @@ export function $$tM0({
   includeThumbnails: C = !1
 }) {
   let T;
-  let k = useDispatch();
+  let k = useDispatch<AppDispatch>();
   let {
     user,
     teams,

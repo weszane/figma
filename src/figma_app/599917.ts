@@ -70,7 +70,7 @@ let $$g0 = connect((e, t) => {
   };
 })(h);
 export function $$f1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = {
     view: "communityHub",
     subView: "handle",

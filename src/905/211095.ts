@@ -58,7 +58,7 @@ export function $$C0({
   preferredProductComponents: i
 }) {
   let l = function () {
-    let e = useDispatch();
+    let e = useDispatch<AppDispatch>();
     return useCallback(() => {
       e(hideModal());
       e(hideInstanceSwapPicker());

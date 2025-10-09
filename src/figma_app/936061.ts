@@ -10,7 +10,7 @@ import u from "../vendor/223926";
 import { trackEventAnalytics } from "../905/449184";
 import { Point } from "../905/736624";
 import { moveComment } from "../figma_app/770088";
-import { y as _$$y } from "../figma_app/705249";
+import { isXrDebounceThresholdEnabled } from "../figma_app/705249";
 import { j, N as _$$N } from "../figma_app/261650";
 import { fullscreenValue } from "../figma_app/455680";
 import { addBoundsChangeListener, removeBoundsChangeListener, watchBoundsForNodes, watchBoundsForStablePaths } from "../figma_app/141088";
@@ -66,7 +66,7 @@ export function $$R1(e, t) {
   let r = useMemo(() => p()(e, e => e.clientMeta?.nodeId), [e]);
   let s = useMemo(() => Object.keys(r), [r]);
   let o = useRef({});
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let d = useIsFullscreenReady();
   let c = useCallback(e => {
     let {
@@ -178,7 +178,7 @@ export function $$L0() {
   return {
     anchorPositions: useCallback(memoizeByArgs(t => fullscreenValue?.isReady() && e ? Fullscreen.getCanvasSpaceCommentLocations(t) : {}), [e]),
     boundingBoxPositions: useCallback(memoizeByArgs((t, r, n) => {
-      if (!_$$y() || !r || !e) return {};
+      if (!isXrDebounceThresholdEnabled() || !r || !e) return {};
       let i = {};
       let a = j(t, r);
       n.forEach(e => {

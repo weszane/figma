@@ -11,7 +11,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278"
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from "../figma_app/272243"
 
 export function $$v0(e) {
-  let a = useDispatch()
+  let a = useDispatch<AppDispatch>()
   useEffect(() => trackEventAnalytics("New Autosave File Already Open Modal Shown"))
   let s = () => a(hideModal())
   let v = useModalManager({

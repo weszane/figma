@@ -69,7 +69,7 @@ let O = registerTooltip("pro_trial", function (e) {
   daysLeft: Number(e.getAttribute("data-tooltip-pro-trials-days-left") || 0)
 }));
 function R(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useSelector(e => e.user);
   let _ = useSelector(e => e.teams)[e.teamId];
   let u = useSelector(e => getPermissionsStateMemoized(e));

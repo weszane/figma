@@ -281,7 +281,7 @@ export function $$q0({
     recordingKey: generateRecordingKey(N, "option.anchor_link"),
     icon: jsx(_$$M, {})
   }, "anchor-link-preset")] : [];
-  let V = useDispatch();
+  let V = useDispatch<AppDispatch>();
   let W = useDropdownState();
   let J = useRef(null);
   useEffect(() => {

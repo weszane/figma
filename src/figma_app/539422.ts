@@ -8,7 +8,7 @@ import { j } from "../905/834956";
 export function $$c0(e) {
   let t = useId();
   let r = e || t;
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = useSelector(e => e.dropdownShown?.type === r);
   let p = useMemo(() => document.createElement("div"), []);
   useEffect(() => (document.body.appendChild(p), () => {

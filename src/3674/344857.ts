@@ -123,7 +123,7 @@ import { RecordingScrollContainer } from "../905/347284";
 import { R6, zL, bE, i_ as _$$i_, eb as _$$eb, vo } from "../figma_app/617506";
 import { $ as _$$$3 } from "../905/532878";
 import { gs, ON } from "../figma_app/31103";
-import { yp, u as _$$u4, Rb } from "../figma_app/852050";
+import { getSortedLocalVariableSets, getVariableById, getSortedLocalVariables } from "../figma_app/852050";
 import { wV } from "../figma_app/779965";
 import { GC } from "../905/782020";
 import { postUserFlag } from "../905/985254";
@@ -400,7 +400,7 @@ import cO from "../vendor/260986";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { VisualBellIcon } from "../905/576487";
 import { O as _$$O5, K as _$$K5 } from "../figma_app/140784";
-import { rg as _$$rg, aK as _$$aK } from "../figma_app/401069";
+import { logFileExportThunk, logFileImageDownloadThunk } from "../figma_app/401069";
 import { filterValidImagePaints } from "../figma_app/385874";
 import { Xo } from "../figma_app/482495";
 import { useLibraryMetadata } from "../905/726668";
@@ -421,7 +421,7 @@ import { f as _$$f4 } from "../9410/228507";
 import { mO } from "../figma_app/410317";
 import { G as _$$G3 } from "../figma_app/953068";
 import { e as _$$e7 } from "../905/194891";
-import { f$ } from "../figma_app/836943";
+import { getValidStyleNodeId } from "../figma_app/836943";
 import { InputComponent } from "../905/185998";
 import { LinkPrimitive } from "../figma_app/496441";
 import { H_ } from "../905/963340";
@@ -593,7 +593,7 @@ function eu({
   upgradeRequestId: e
 }) {
   let t = _$$U("blocking_modal");
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let l = jsxs(Fragment, {
     children: [jsx("div", {
       className: DD,
@@ -2173,7 +2173,7 @@ function nK() {
   });
 }
 function nX() {
-  let e = yp();
+  let e = getSortedLocalVariableSets();
   let [t, n] = R6(e);
   let i = zL();
   let o = i && !!t;
@@ -2192,7 +2192,7 @@ function nJ({
   currentVariableSet: e,
   setCurrentVariableSet: t
 }) {
-  let n = yp();
+  let n = getSortedLocalVariableSets();
   let o = "variable-sets-list";
   let l = useRef(null);
   let s = ON();
@@ -3354,7 +3354,7 @@ function iT({
   });
 }
 function iO() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = trackFileEventWithUser();
   return jsxs("div", {
     className: a$,
@@ -3404,7 +3404,7 @@ function iO() {
   });
 }
 function iM({}) {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = "install-messaging-dropdown";
   let n = useDropdownState();
   let l = useRef(null);
@@ -3455,7 +3455,7 @@ function iM({}) {
   });
 }
 function iF() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getThemePreference();
   let n = [{
     theme: "system",
@@ -4479,7 +4479,7 @@ let iJ = {
 let iQ = isGovCluster() ? [1, 2] : [1, 2, 3, 4];
 function iq() {
   let e = useAtomWithSubscription(aR);
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     isShowing,
     uniqueId,
@@ -4534,7 +4534,7 @@ function iZ({
 }) {
   let t = trackFileEventWithStore();
   let [n, l] = useState(0);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = iY();
   let d = useRef(null);
   let c = useCallback(() => {
@@ -4937,7 +4937,7 @@ function o8({
   appendLabel: r,
   hintInMenu: d
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = !_$$G(t.linkUrl);
   let p = useSceneGraphSelector();
   let h = Nf() ?? "";
@@ -5235,7 +5235,7 @@ function lN() {
 function lk({
   backingSymbol: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useOpenFileLibraryKey();
   let s = useLibraryFileLink({
     libraryKey: e?.sourceLibraryKey,
@@ -5282,7 +5282,7 @@ let lD = memo(({
   useEffect(() => {
     e && atomStoreManager.set(figmaItemsAtom, [e]);
   }, [e]);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let d = useSelector(selectSingleSelectedNode);
   let u = wS();
   let f = "loaded" === u.status && "temp-scene" === u.result.dataLocation ? u.result : void 0;
@@ -5677,7 +5677,7 @@ function lK(e) {
   });
 }
 function lX() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = M4();
   let n = useCallback(() => {
     e(showModalHandler({
@@ -5702,7 +5702,7 @@ function lX() {
 function lJ(e) {
   let t = e.variables && e.variables.value[e.name];
   let n = t && t.type === VariableDataType.ALIAS ? t.value : void 0;
-  let i = _$$u4(n);
+  let i = getVariableById(n);
   return jsx(lK, {
     type: e.type,
     name: e.name,
@@ -5816,7 +5816,7 @@ function l8({
   onFocus: l,
   onUnfocus: s
 }) {
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [d, c] = useState("");
   let [u, p] = useState(!1);
   let h = useCallback(e => c(e.target.value), []);
@@ -5991,7 +5991,7 @@ let sd = registerModal(function (e) {
   let n = Nf() ?? "";
   let i = useCurrentFileKey();
   let l = useSceneGraphSelector().get(n);
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = async () => {
     if (!i || !n) return;
     let e = Tz({
@@ -6042,7 +6042,7 @@ let sf = registerModal(function ({
   let x = Nf() ?? "";
   let m = useCurrentFileKey();
   let _ = useSceneGraphSelector().get(x);
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let y = useCallback(e => h(e.target.value), []);
   let b = useCallback(e => c(e.target.value), []);
   let {
@@ -6297,7 +6297,7 @@ function sy({
   noBorder: e = !1,
   gapBetweenRows: t = !1
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let s = Nf() ?? "";
   let d = useSourceFileKey() ?? "";
   let u = useSceneGraphSelector();
@@ -6757,7 +6757,7 @@ function s2() {
   let t = selectCurrentUser()?.id;
   let n = _$$Tv();
   let i = useCurrentFileKey();
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   if (n?.length !== 2) return null;
   let s = n[1];
   let r = n[0];
@@ -6809,7 +6809,7 @@ function s3() {
   let s = s_();
   let r = useCanUseDevModeDemoFile();
   let d = useIsCanvasEditDisabled();
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let {
     getTriggerProps,
     manager
@@ -7335,7 +7335,7 @@ function rf({
   didSelectRow: n,
   hideHeader: s = !1
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = useSceneGraphSelector();
   let u = _$$uQ();
   let p = NM();
@@ -7543,7 +7543,7 @@ function rN(e) {
     e.stopPropagation();
     toggleExpand?.();
   });
-  let b = useDispatch();
+  let b = useDispatch<AppDispatch>();
   let j = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
@@ -7644,7 +7644,7 @@ let rk = memo(function (e) {
     e?.currentTarget?.blur();
     onClick?.(e);
   });
-  let S = useDispatch();
+  let S = useDispatch<AppDispatch>();
   let P = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
@@ -8072,7 +8072,7 @@ function rX() {
       setCurrentView: l
     }), [t, l]);
   }();
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let l = useMemo(() => ({
     activeTab: SimpleComponentType.PLUGIN,
     viewResource: e => {
@@ -8108,7 +8108,7 @@ function rJ() {
   let d = "LOADING" === s;
   let c = "RUNNING" === s;
   let u = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY) === IAssertResource.PLUGIN && !e;
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   useEffect(() => p(_$$aq()), [p]);
   useEffect(() => {
     let e = PluginUIManager.getInstance();
@@ -8707,7 +8707,7 @@ let dP = {
   disableHighlight: !0
 };
 function dL(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback(() => {
     t(postUserFlag({
       dev_mode_has_seen_interactive_inspection_onboarding: !0
@@ -8910,7 +8910,7 @@ function d3({
   }
 }
 function d4() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return () => {
     e(exitVersionHistoryMode());
   };
@@ -8926,7 +8926,7 @@ function d8(e, t) {
   }) : void 0;
 }
 function d6() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   return t => {
     e(exitVersionHistoryMode());
     HandoffBindingsCpp.focusOnNode(t, !1);
@@ -8942,7 +8942,7 @@ function d9({
   showCompareChanges: d,
   focusNodeId: c
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = trackFileEventWithStore();
   let h = useRelativeTime((t ?? 0) * 1e3);
   let f = useDevModeFocusId();
@@ -9063,7 +9063,7 @@ function ca({
   versions: d,
   focusNodeId: c
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = getSelectedView();
   let h = useSelector(e => e.versionHistory);
   let f = e.version?.id ?? void 0;
@@ -9073,7 +9073,7 @@ function ca({
   let _ = g && s || f === h.activeId;
   let v = function (e, t, n) {
     let a = useDevModeFocusId();
-    let s = useDispatch();
+    let s = useDispatch<AppDispatch>();
     let r = getSelectedView();
     let d = d4();
     let c = trackFileEventWithStore();
@@ -9195,7 +9195,7 @@ function cr() {
   let n = usePublishedPlugins();
   let i = useInstalledPluginsAndWidgets();
   let l = useCurrentOrgAdminInfo();
-  let s = useDispatch();
+  let s = useDispatch<AppDispatch>();
   let r = useCurrentFileKey();
   return jsx(_$$Q3, {
     allSavedPlugins: i.plugins,
@@ -9239,7 +9239,7 @@ function cf() {
   let e = _$$g3({
     entryPoint: InspectState.InspectNoSelection
   });
-  let t = Rb().length;
+  let t = getSortedLocalVariables().length;
   let n = generateRecordingKey("fullVarsTable", "panelEntry");
   return t ? jsx(ErrorBoundaryCrash, {
     boundaryKey: "varsTable_inspectEntry",
@@ -9404,7 +9404,7 @@ let c9 = memo(({
   }) : getI18nString("dev_handoff.assets.files", {
     count: I.length
   }) : C, [I, T, C]);
-  let P = useDispatch();
+  let P = useDispatch<AppDispatch>();
   let {
     getTriggerProps,
     manager
@@ -9417,7 +9417,7 @@ let c9 = memo(({
     f || (e.stopPropagation(), trackEventAnalytics("Asset Panel Export Clicked"), p(!0), await Dc(_$$hV.Export, g, P, "export-assets-handoff", [w], "export-assets-handoff", {
       guids: [w],
       exportSettings: I?.length ? I : [c8(C)]
-    }), P(_$$rg()), manager.isOpen && manager.setOpen(!1), p(!1));
+    }), P(logFileExportThunk()), manager.isOpen && manager.setOpen(!1), p(!1));
   }, [w, C, f, P, I, manager, g, p]);
   let B = _$$dI({
     assetGuid: w
@@ -9632,7 +9632,7 @@ function ue({
   onClose: t
 }) {
   let n = useCurrentFileKey() ?? "";
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let {
     ref,
     ...d
@@ -9661,7 +9661,7 @@ function ue({
   let p = useCallback(e => {
     e.stopPropagation();
     t();
-    l(_$$aK());
+    l(logFileImageDownloadThunk());
   }, [l, t]);
   return jsx(MenuLinkComp, {
     href: Me(n, e.hash),
@@ -9827,7 +9827,7 @@ function us({
   let p = !ua() || a || d;
   let f = selectCurrentFile();
   let g = useSelector(e => e.saveAsState);
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let m = useAtomWithSubscription(c4)[e];
   let _ = useAtomWithSubscription(c7);
   let v = _$$uQ();
@@ -9881,7 +9881,7 @@ function us({
               });
             }
           } else PE(new Blob([e]), `${f.name}_${a ? "gif" : "img"}.zip`);
-          x(_$$aK());
+          x(logFileImageDownloadThunk());
           b = !0;
         }
         t && n.length && HandoffBindingsCpp.prepareSourceImagesForZip(n);
@@ -9890,7 +9890,7 @@ function us({
           exportSettings: m,
           assetType: Vx(e),
           withSourceImages: t && !!n
-        }), x(_$$rg()));
+        }), x(logFileExportThunk()));
       } catch (e) {
         reportError(ServiceCategories.DEVELOPER_TOOLS, e);
         r && k.length > 1 && !b && x(VisualBellActions.enqueue({
@@ -9964,7 +9964,7 @@ function uc({
 }) {
   let [s, d] = useAtomValueAndSetter(c4);
   let [c, u] = useAtomValueAndSetter(c7);
-  let p = useDispatch();
+  let p = useDispatch<AppDispatch>();
   let h = useDropdownState();
   let f = Xo();
   let g = selectCurrentFile();
@@ -10693,7 +10693,7 @@ function uW({
   let s = getScaledValueWithUnit(o, e.fontSizeInPx, uK, {
     isTextProperty: !0
   });
-  let r = e.textStyleNodeId || f$(n);
+  let r = e.textStyleNodeId || getValidStyleNodeId(n);
   let {
     styleName,
     styleDescription
@@ -11115,7 +11115,7 @@ function pc() {
 function pu() {
   let e = selectUserFlag("dev_mode_mcp_has_dismissed_client_setup_banner");
   let t = selectUserFlag("dev_mode_mcp_has_used_a_tool");
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return e || t ? null : jsx("div", {
     className: pt,
     children: jsx(BannerInline, {
@@ -11308,7 +11308,7 @@ function pv({
   });
 }
 function py() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = selectIsCopyExportAllowed();
   return getFeatureFlags().dt_multi_node && t ? jsx(ButtonWide, {
     onClick: () => e(showModalHandler({
@@ -11418,7 +11418,7 @@ let pN = () => {
 function pk({
   version: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useDevModeFocusId();
   let i = function (e, t) {
     if (!t.dev_mode_activity || 0 === t.dev_mode_activity.length) return;
@@ -11472,7 +11472,7 @@ function pA({
   } = useSelector(e => e.versionHistory);
   let i = selectCurrentFile();
   let s = i?.canEdit;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let d = useDevModeFocusId();
   let c = d6();
   let u = d4();
@@ -11541,7 +11541,7 @@ let pL = memo(function () {
     comment: !0
   });
   let r = useDevModeFocusId();
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY);
   let p = new Set(getEnabledDevModePropertiesPanelTabs().map(e => r5[e]).filter(e => null != e));
   let h = {};
@@ -11625,7 +11625,7 @@ function pz({
   selectedNode: e,
   targetRect: t
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let i = (e => {
     let t = e.parentNode;
     return t?.childrenNodes ?? [e];
@@ -11674,7 +11674,7 @@ function pz({
 function pV({
   nodeID: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [n, i, l] = pF();
   let s = useDropdownState();
   let r = useSceneGraphSelector().get(e);
@@ -11721,7 +11721,7 @@ function pH({
 function pW({
   nodeIDs: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [n, i, l] = pF();
   let s = useDropdownState();
   let r = s?.type === pM;
@@ -11973,7 +11973,7 @@ function hc({
     styleNodeId,
     styleType
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let d = useCallback(() => {
     r(hideModal());
   }, [r]);
@@ -12311,7 +12311,7 @@ function hT(e) {
 }
 function hS() {
   let e = getSelectedView();
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback(() => {
     "fullscreen" === e.view && t(selectViewAction({
       ...e,
@@ -12511,7 +12511,7 @@ function hz() {
 function hV({
   setActiveTabId: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let n = useDropdownState();
   let s = useRef(null);
   let [d, c] = useAtomValueAndSetter(sg);
@@ -12576,7 +12576,7 @@ function hH() {
   let s = _$$ro();
   let d = useAtomWithSubscription(be);
   !function (e) {
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     useEffect(() => {
       let e = debugState.getState().selectedView;
       e.variableIdForDetailsPanel && t(selectViewAction({
@@ -12994,7 +12994,7 @@ function fp() {
   }) : null;
 }
 function fh() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = useSelector(e => e.versionHistory);
   let {
     Dropdown,
@@ -13056,7 +13056,7 @@ function fh() {
   });
 }
 function ff() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = getDevHandoffInspectSplitPosition();
   let n = useDevModeFocusId();
   let {
@@ -13182,7 +13182,7 @@ export function $$fg0() {
   let t = useIsProgressBarHiddenOrLocked();
   let n = useSelector(e => e.mirror.appModel.showUi);
   let s = selectCurrentUser();
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let c = _$$I2();
   X_();
   _$$z({
@@ -13263,7 +13263,7 @@ let f_ = memo(function () {
   !function () {
     let e = useHasParentOrgId();
     let t = selectUserFlag("dev_mode_notified_of_approved_org_request");
-    let n = useDispatch();
+    let n = useDispatch<AppDispatch>();
     useEffect(() => {
       e && !t && n(postUserFlag({
         dev_mode_notified_of_approved_org_request: !0

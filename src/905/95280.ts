@@ -106,7 +106,7 @@ const compareChangesModal = registerModal(CompareChangesModal, "CompareChangesMo
  * @returns A callback function that takes a nodeId and shows the notification if conditions are met.
  */
 export function useCompareChangesHandler() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const compareId = useSelector((state: any) => state.versionHistory.compareId)
   const version = useSelector((state: any) => findVersionById(compareId, state.versionHistory))
   const modalShown = useSelector((state: any) => state.modalShown)

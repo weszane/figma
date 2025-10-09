@@ -132,7 +132,7 @@ export function InstanceSwapToggle(props: {
   const pickerState = useSelector((state: any) => state.instanceSwapPickerShown)
 
   // Original: z
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   // Original: H
   const toggleRef = useRef<HTMLElement>(null)

@@ -59,7 +59,7 @@ export function $$k3(e, t, i) {
 }
 export function $$R1(e, t, i, l, d) {
   let c = _$$s();
-  let h = useDispatch();
+  let h = useDispatch<AppDispatch>();
   let g = useSceneGraphSelector();
   let f = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, null);
   let _ = f && f !== defaultSessionLocalIDString;
@@ -148,7 +148,7 @@ export function $$O4(e, t, i, a, s, o) {
   useEffect(() => {
     e && d(e === i);
   }, [e, i]);
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   let u = I_();
   let p = _$$s();
   let g = useNavigateToViewport("comments-navigate");
@@ -183,7 +183,7 @@ export function $$O4(e, t, i, a, s, o) {
 }
 export function $$D0(e, t) {
   let i = useSelector(e => e.comments.newComment);
-  let a = useDispatch();
+  let a = useDispatch<AppDispatch>();
   let s = I_().writeAPI;
   let o = _$$s();
   return useCallback(() => {

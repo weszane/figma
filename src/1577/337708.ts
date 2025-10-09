@@ -112,7 +112,7 @@ function Q({
   isPaletteEyedropperActive: m,
   theme: f
 }) {
-  let x = useDispatch();
+  let x = useDispatch<AppDispatch>();
   let [k, A] = useState(i?.name || "");
   let [P, F] = useAtomValueAndSetter(Jq);
   let M = useCallback(() => -1 !== P && (F(-1), !0), [P, F]);
@@ -295,7 +295,7 @@ export let $$$0 = registerModal(function ({
   enableSubmitWithNoChanges: i,
   ...r
 }) {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let s = getUserId();
   let c = getCurrentTeamId();
   let d = useModalManager(r);

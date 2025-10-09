@@ -80,7 +80,7 @@ function B({
   dismissModal: t,
   overlaySource: n
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let m = selectUser();
   let y = m.id;
   let T = m.profile.job_title;

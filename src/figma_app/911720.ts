@@ -18,7 +18,7 @@ import { hB } from "../figma_app/609511";
 import { imageOptionsWithMount, useTailwindAtom, denyOverwritingFilesAtom, mockDirForImageWritesAtom, isCodebaseSuggestionsEnabled } from "../figma_app/342355";
 import { Q } from "../905/938332";
 import { w6 } from "../905/372596";
-import { l as _$$l } from "../905/882689";
+import { collectNodeVariablesAndStyles } from "../905/882689";
 var d = l;
 var u = c;
 export async function $$A0(e, t, l, c, p) {
@@ -209,7 +209,7 @@ export async function $$A0(e, t, l, c, p) {
 
 ${$}`);
   let X = performance.now();
-  let q = _$$l(e, l, getFeatureFlags().dt_mcp_inline_variables ?? !1);
+  let q = collectNodeVariablesAndStyles(e, l, getFeatureFlags().dt_mcp_inline_variables ?? !1);
   w6("variables_and_styles", performance.now() - X, GET_CODE);
   let J = [{
     type: "text",

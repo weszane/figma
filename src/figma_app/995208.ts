@@ -20,7 +20,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { popModalStack, showModal } from "../905/156213";
 import { OnboardingSequence } from "../905/152487";
 function v(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let {
     isShowing,
     onClose,

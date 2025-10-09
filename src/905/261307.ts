@@ -40,7 +40,7 @@ export let $$O0 = registerModal(function ({
   entryPoint: M,
   planDataForSocialProof: j
 }) {
-  let U = useDispatch();
+  let U = useDispatch<AppDispatch>();
   let B = getRumLoggingConfig();
   let V = RR({
     preferOpenFilePlan: !0

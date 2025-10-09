@@ -27,7 +27,7 @@ let b = registerModal(function (e) {
     ...e,
     onClose: t
   });
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   return jsx(TrackingProvider, {
     name: "Project Disconnect Modal",
     properties: {
@@ -75,7 +75,7 @@ let b = registerModal(function (e) {
   });
 }, "ResourceDisconnectSuccessModal");
 let $$v0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = useModalManager(e);
   let [f, A] = useState(!1);
   let y = () => {

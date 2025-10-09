@@ -46,7 +46,7 @@ export function $$I2({
   fileKey: e
 }) {
   let t = Xr($$b3);
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let a = selectCurrentUser()?.id;
   let s = useIsSelectedFigmakeFullscreen();
   return {
@@ -122,7 +122,7 @@ export function $$v0({
   let a = JW(e);
   let s = useAtomWithSubscription($$b3);
   let l = Xr($$b3);
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = useCallback(() => {
     l({
       inProgress: !1,

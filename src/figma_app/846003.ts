@@ -4,8 +4,8 @@ import { getInitialOptions } from "../figma_app/169182";
 import { trackSidebarClick } from "../905/34809";
 import { ViewPathManager } from "../figma_app/422062";
 import { getTabTitle } from "../figma_app/471982";
-import { Af } from "../figma_app/49598";
-import { l5 } from "../figma_app/559491";
+import { updateHubFilePageTitle } from "../figma_app/49598";
+import { mergePublishedPlugin } from "../figma_app/559491";
 import { hydrateFileBrowser, selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { folderPutAction, folderPostAction } from "../figma_app/598926";
@@ -105,11 +105,11 @@ let $$P0 = e => t => function (r) {
       let e = r.payload.data;
       e && !e.category && setEditorDocumentTitle(getTabTitle(e));
     } else setViewDocumentTitle(P, r.payload);
-  } else if (Af.matches(r) && "hubFile" === P.selectedView.subView) setViewDocumentTitle(P, {
+  } else if (updateHubFilePageTitle.matches(r) && "hubFile" === P.selectedView.subView) setViewDocumentTitle(P, {
     hubFileId: r.payload.hubFileId,
     subView: "hubFile",
     view: "communityHub"
-  });else if (l5.matches(r)) {
+  });else if (mergePublishedPlugin.matches(r)) {
     let t = e.getState().selectedView;
     let n = r.payload.publishedPlugins;
     let a = t && "communityHub" === t.view && "plugin" === t.subView && t.publishedPluginId;

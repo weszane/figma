@@ -573,7 +573,7 @@ export function $$V1({
   selectedNodeId: i,
   currentUserId: s
 }) {
-  let o = useDispatch();
+  let o = useDispatch<AppDispatch>();
   let d = useSelector(e => e.voting.hoveredInModalVotePinId);
   let c = useMemo(() => yn(e), [e]);
   let u = useCallback(e => o(selectVotePin({

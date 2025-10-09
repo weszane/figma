@@ -8,7 +8,7 @@ import { buildFileUrl } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 import { sn } from "../905/301347";
 export function $$p1() {
-  let e = useDispatch();
+  let e = useDispatch<AppDispatch>();
   let t = sn();
   let i = getSelectedView();
   let a = "prototype" === i.view;

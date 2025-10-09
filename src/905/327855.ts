@@ -35,7 +35,7 @@ import { eventLogger } from "../905/945673";
 import { atomStoreManager } from "../figma_app/27355";
 import { i as _$$i } from "../figma_app/43065";
 import { doesEditorTypeMatchFileType, FEditorType, isWhiteboardOrDesignOrIllustration, mapEditorTypeToFileType, mapEditorTypeToWorkspaceType, mapFileTypeToEditorType } from "../figma_app/53721";
-import { bY, q7, Vf } from "../figma_app/60023";
+import { fileTypeAtom, booleanAtomFamily, FileType } from "../figma_app/60023";
 import { filePutAction } from "../figma_app/78808";
 import { newFileLoaded, setLeftPanelTab, setNeedsUpgrade, setProgressBarState, showFileCreationFailureBanner } from "../figma_app/91703";
 import { getGracePeriodStatus } from "../figma_app/141320";
@@ -543,7 +543,7 @@ async function handleNewFileCreation(store: any, newFileParams: any, fileCreatio
   let fileCreationResponse;
 
   // Initialize fullscreen environment
-  atomStoreManager.set(q7, true);
+  atomStoreManager.set(booleanAtomFamily, true);
   await initializeFullscreenForNewFile(store, mapFileTypeToEditorType(newFileParams.editorType), shouldHideUI);
   newFileParams.newFileDataLocalStorageKey && atomStoreManager.set(sessionIdAtom, newFileParams.newFileDataLocalStorageKey);
   if (newFileParams.editorType === "cooper" && templateSourceAtom && TemplateSourceType) {
@@ -563,21 +563,21 @@ async function handleNewFileCreation(store: any, newFileParams: any, fileCreatio
   if (newFileParams.editorType === "slides") {
     if (newFileParams.slidesAiNewFileData) {
       const slidesOutline = atomStoreManager.get(figjamCreateSlidesOutlineAtom);
-      atomStoreManager.set(bY, {
-        type: Vf.TEMPLATE_PICKER,
+      atomStoreManager.set(fileTypeAtom, {
+        type: FileType.TEMPLATE_PICKER,
         figjamEntryPointData: slidesOutline,
         source: newFileParams.slidesAiNewFileData.source
       });
     }
-    newFileParams.slideTemplateLibraryKey && atomStoreManager.set(bY, {
-      type: Vf.TEMPLATE,
+    newFileParams.slideTemplateLibraryKey && atomStoreManager.set(fileTypeAtom, {
+      type: FileType.TEMPLATE,
       libraryKey: newFileParams.slideTemplateLibraryKey,
       parentView: {
-        type: Vf.ALL
+        type: FileType.ALL
       }
     });
   }
-  atomStoreManager.set(q7, false);
+  atomStoreManager.set(booleanAtomFamily, false);
 
   // Handle autosave setup
   if (autosaveManager) {

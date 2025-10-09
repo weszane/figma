@@ -141,7 +141,7 @@ function z({
   });
 }
 function W(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = selectCurrentFile();
   let a = X8(!!r?.team?.canEdit, isOrgOrEnterprisePlan(r?.plan ?? null));
   return jsxs('div', {
@@ -258,7 +258,7 @@ function Y({
   disabled: a,
   recordingKey: o
 }) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   return jsx('div', {
     className: l()('color_palettes_submenu_picker--submenuPickerContainer--GTTBT', {
       'color_palettes_submenu_picker--submenuPickerContainerNested--wuRz-': !r,

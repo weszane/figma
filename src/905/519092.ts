@@ -207,7 +207,7 @@ export interface ConfirmationModalProps {
 }
 
 export function ConfirmationModal(props: ConfirmationModalProps) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const ButtonComponent = props.destructive ? ButtonNegativeTracked : ButtonBasePrimaryTracked
 

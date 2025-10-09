@@ -17,7 +17,7 @@ export function $$_0({
   modalType: t,
   initialTab: i
 }) {
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let A = useSelector(e => e.modalShown);
   let y = selectCurrentFile();
   let b = getParentOrgId();

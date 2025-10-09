@@ -377,7 +377,7 @@ let et = forwardRef((e, t) => {
   });
 });
 export function $$er4(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useRef(null);
   let s = "whiteboard" === e.displayType;
   useEffect(() => {
@@ -616,7 +616,7 @@ export class $$ea5 extends RecordingPureComponent {
   }
 }
 export function $$es7(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useRef(null);
   let s = X7();
   useEffect(() => {

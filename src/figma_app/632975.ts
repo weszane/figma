@@ -6,7 +6,7 @@ import { logWarning } from "../905/714362";
 import { upsertSharedVariable } from "../figma_app/933328";
 import { q } from "../905/113809";
 import { o as _$$o } from "../905/609215";
-import { Rb, yp, pN } from "../figma_app/852050";
+import { getSortedLocalVariables, getSortedLocalVariableSets, getSubscribedVariablesResource } from "../figma_app/852050";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { A } from "../905/749030";
 import { lC, sr, Yc, dC, HK } from "../905/820169";
@@ -155,9 +155,9 @@ export function $$H10(e) {
   return useMemo(() => e === VariableResolvedDataType.BOOLEAN ? [VariableResolvedDataType.BOOLEAN, VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT] : e === VariableResolvedDataType.STRING ? [VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT] : [e], [e]);
 }
 export function $$z31(e, t, r, i) {
-  let a = Rb();
-  let s = yp();
-  let o = pN();
+  let a = getSortedLocalVariables();
+  let s = getSortedLocalVariableSets();
+  let o = getSubscribedVariablesResource();
   let l = o.data?.libraryVariables;
   let d = o.data?.libraryVariableSets;
   let [c, f] = useMemo(() => "ALL_LIBRARIES" === r.type ? [[...a, ...(l ?? [])], [...s, ...(d ?? [])]] : "LOCAL_VARIABLES" === r.type ? [a, s] : [l ?? [], d ?? []], [r.type, a, l, s, d]);

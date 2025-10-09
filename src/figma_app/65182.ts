@@ -82,7 +82,7 @@ export function $$L9(e) {
     preferredProductComponents,
     missingValues
   } = useSelector(e => d(e, o));
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   let m = useRef(new Set());
   let [f, E] = useState(!1);
   let [y, b] = useState(0);

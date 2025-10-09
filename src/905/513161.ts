@@ -22,7 +22,7 @@ export let $$b0 = registerModal(function ({
   ...i
 }) {
   let b = useModalManager(i);
-  let v = useDispatch();
+  let v = useDispatch<AppDispatch>();
   let I = useSelector(e => e.repos);
   let E = selectCurrentFile();
   let x = useCallback(e => {

@@ -11,7 +11,7 @@ export function $$c0({
   resourceId: i,
   setFavorite: c
 }) {
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let p = useSelector(e => e.dropdownShown);
   let m = useRef(null);
   let h = !!m.current && p?.data?.targetRef === m.current;

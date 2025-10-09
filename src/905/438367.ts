@@ -7,9 +7,9 @@ import l from "../vendor/239910";
 import { compareNumbers } from "../figma_app/766708";
 import { generateUniqueKey } from "../905/383708";
 import { kiwiParserCodec } from "../905/294864";
-import { Rb, yp, kf, u5 } from "../figma_app/852050";
+import { getSortedLocalVariables, getSortedLocalVariableSets, getLibraryVariableProperties, getLibraryVariableSets } from "../figma_app/852050";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Bh, oz } from "../figma_app/936646";
+import { useLibraryData, getStylesFromLibraryHierarchy } from "../figma_app/936646";
 import { filterStylesByType, sortStyles } from "../figma_app/646357";
 import { isValidSolidFill } from "../905/405710";
 import { CURRENT_PAGE_SWATCH_SET_ID, LOCAL_SWATCH_SET_ID } from "../905/255097";
@@ -19,7 +19,7 @@ export function $$y2({
 }) {
   let t = useSelector(e => e.library);
   let i = useCurrentFileKey();
-  let o = Rb().filter(e => e.resolvedType === VariableResolvedDataType.COLOR).length > 0;
+  let o = getSortedLocalVariables().filter(e => e.resolvedType === VariableResolvedDataType.COLOR).length > 0;
   let l = filterStylesByType(t.local.styles, "FILL").length > 0;
   return useMemo(() => {
     let t = [CURRENT_PAGE_SWATCH_SET_ID];
@@ -58,9 +58,9 @@ export function $$b0() {
 }
 export function $$v3() {
   let e = useSelector(e => e.library);
-  let t = Rb();
+  let t = getSortedLocalVariables();
   let i = useMemo(() => [...t].sort((e, t) => e.sortPosition < t.sortPosition ? -1 : 1), [t]);
-  let a = yp();
+  let a = getSortedLocalVariableSets();
   let o = useMemo(() => d()(a, e => e.node_id), [a]);
   let l = useMemo(() => i.filter(e => e.resolvedType === VariableResolvedDataType.COLOR).map(e => ({
     type: "variable",
@@ -80,14 +80,14 @@ export function $$v3() {
 export function $$I1(e) {
   let t = useCurrentFileKey();
   let i = e !== CURRENT_PAGE_SWATCH_SET_ID && e !== LOCAL_SWATCH_SET_ID;
-  let r = kf(i ? e : null);
-  let a = u5(i ? e : null);
+  let r = getLibraryVariableProperties(i ? e : null);
+  let a = getLibraryVariableSets(i ? e : null);
   let l = useMemo(() => i ? {
     fileKey: e,
     libraryKey: generateUniqueKey(e)
   } : null, [i, e]);
-  let p = Bh(l);
-  let y = useMemo(() => resourceUtils.from(p).transform(e => oz(e, "FILL")), [p]);
+  let p = useLibraryData(l);
+  let y = useMemo(() => resourceUtils.from(p).transform(e => getStylesFromLibraryHierarchy(e, "FILL")), [p]);
   return useMemo(() => {
     if (!i || !t) return resourceUtils.loaded([]);
     let e = resourceUtils.all([r, a]).transform(([e, t]) => {

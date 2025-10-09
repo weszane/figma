@@ -4,7 +4,7 @@ import { showDropdownThunk } from "../905/929976";
 import { Gq } from "../figma_app/361662";
 import { K } from "../905/770444";
 export function $$l0(e, t, i, l) {
-  let d = useDispatch();
+  let d = useDispatch<AppDispatch>();
   let {
     query,
     searchSessionId

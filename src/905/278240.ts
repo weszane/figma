@@ -28,7 +28,7 @@ import { B as _$$B2 } from "../905/957400";
 import { ControlledVariablePickerProvider, VariablePicker } from "../figma_app/260445";
 import { FormattedInputContext } from "../905/427409";
 import { u3, y$ } from "../figma_app/152690";
-import { MH } from "../figma_app/394327";
+import { extractVariableAliasOrFontStyle } from "../figma_app/394327";
 import { calculatePickerPosition } from "../905/67286";
 import { Ej, hE } from "../905/71683";
 class L extends c$ {}
@@ -44,13 +44,13 @@ export function $$M0({
   hideVariableOptions: m,
   responsiveTextStyleVariantIndex: g
 }) {
-  let f = useDispatch();
+  let f = useDispatch<AppDispatch>();
   let {
     consumedVariable,
     updateVariableConsumption,
     clearVariableConsumption
   } = u3(["FONT_SIZE"], p, g);
-  let b = MH(consumedVariable) ?? void 0;
+  let b = extractVariableAliasOrFontStyle(consumedVariable) ?? void 0;
   let v = useCallback(async (e, t, i) => {
     i ? e(await f(loadSharedVariableThunk(i))) : t();
   }, [f]);
@@ -97,7 +97,7 @@ function j({
 }) {
   let B = useContext(FormattedInputContext);
   let V = useRef(null);
-  let G = useDispatch();
+  let G = useDispatch<AppDispatch>();
   let z = useDropdownState();
   let {
     smallNudgeAmount,

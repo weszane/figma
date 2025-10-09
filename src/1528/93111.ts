@@ -48,7 +48,7 @@ export function $$b0() {
   let S = OU(InsertSourceType.CMS_CONNECT_MODE);
   !function () {
     let e = getSingletonSceneGraph();
-    let t = useDispatch();
+    let t = useDispatch<AppDispatch>();
     let n = AppStateTsApi.cmsState();
     let l = f();
     let i = getObservableOrFallback(n.bindingCollectionId);

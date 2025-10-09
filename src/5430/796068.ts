@@ -13,7 +13,7 @@ import { d as _$$d, NY, EV } from "../5430/309696";
 export function $$h0({
   resource: e
 }) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useSelector(e => e.authedActiveCommunityProfile);
   let h = useSelector(t => getPublisherStatus(t, e));
   let x = hasContent(e) ? getMainContent(e) : e;

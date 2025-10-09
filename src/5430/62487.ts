@@ -155,7 +155,7 @@ export function $$A0(e) {
   let [o, a] = useState(!0);
   let [c, d] = useState(!0);
   let u = getSearchSessionIdFromSelector() ?? 'unattributed';
-  let _ = useDispatch();
+  let _ = useDispatch<AppDispatch>();
   useEffect(() => {
     u === 'unattributed' && _(searchStartSession({
       entryPoint: 'community'
@@ -243,7 +243,7 @@ export function $$A0(e) {
 export function $$P2(e, t) {
   let [r, o] = useState(w());
   let [a, c] = useState(b());
-  let u = useDispatch();
+  let u = useDispatch<AppDispatch>();
   let _ = useSelector(e => e.search.sessionId) || 'unattributed';
   useEffect(() => {
     _ === 'unattributed' && u(searchStartSession({

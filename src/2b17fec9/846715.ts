@@ -120,7 +120,7 @@ import { Yh } from "../figma_app/357047";
 import { ejp, nnJ } from "../figma_app/27776";
 var u = c;
 function Q(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, s] = useState(!0);
   let o = useCurrentFileKey();
   let l = FL();

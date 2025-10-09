@@ -36,7 +36,7 @@ function w({
   onBulkIgnoreComponents: o,
   onDismiss: t
 }) {
-  let c = useDispatch();
+  let c = useDispatch<AppDispatch>();
   useEffect(() => {
     if (0 === e) {
       c(VisualBellActions.dequeue({

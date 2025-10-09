@@ -138,7 +138,7 @@ function T(e) {
   });
 }
 function k(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let [i, s] = useState(!1);
   let l = e.teamRoleRequests.filter(t => t.level === e.requestType);
   let d = e.teamId;

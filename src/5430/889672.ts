@@ -47,7 +47,7 @@ function I({
 export function $$E0(e) {
   let [t, r] = useState(!1);
   let [v, w] = useState(!1);
-  let E = useDispatch();
+  let E = useDispatch<AppDispatch>();
   let S = useSelector(e => e.userFlags);
   let R = selectCurrentUser();
   let k = getSelectedView();

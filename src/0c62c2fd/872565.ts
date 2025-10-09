@@ -77,7 +77,7 @@ import l from "../vendor/805353"
 
 let d = l
 function R(e) {
-  let t = useDispatch()
+  let t = useDispatch<AppDispatch>()
   let r = useCallback((r) => {
     r.stopPropagation()
     e.team.canEdit && (trackEventAnalytics("New Folder", {
@@ -720,7 +720,7 @@ export function $$e83(e) {
       }
   let y = m == null || b === null ? null : b.transformed.folders[m]
   let w = y ? y.teamId : null
-  let j = useDispatch()
+  let j = useDispatch<AppDispatch>()
   useEffect(() => {
     v.loaded && j(eA({
       modalData: e,
@@ -1457,7 +1457,7 @@ export function $$e95(e) {
 function te(e) {
   let t = useRef(null)
   let [r, n] = useState(!1)
-  let o = useDispatch()
+  let o = useDispatch<AppDispatch>()
   useEffect(() => {
     !r && e.isTeamNew && t.current && e.hasFolderSection && (o(setFocusedIndexAt({
       indexAt: e.firstFolderFocusedIndex,
@@ -1533,7 +1533,7 @@ export function $$tt6(e) {
   })
 }
 function tr(e) {
-  let t = useDispatch()
+  let t = useDispatch<AppDispatch>()
   let r = getAtomMutate(mq)
   let s = (a, s) => {
     trackEventAnalytics("Rename Folder", {

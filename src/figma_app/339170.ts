@@ -102,7 +102,7 @@ export function $$T1() {
   } : null, [a, r, !1, s]);
 }
 function I(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   return useCallback(() => {
     e.current && t(showDropdownThunk({
       type: R,

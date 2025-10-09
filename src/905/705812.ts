@@ -43,7 +43,7 @@ export function $$E0(e) {
   });
 }
 export function $$$$x1(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = e.strokePanelMode === DrawingElementType.ENDPOINT;
   let s = 1 === e.strokePanelTerminalPointCount || i;
   let o = bC();

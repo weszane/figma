@@ -12,7 +12,7 @@ import { TrackingKeyEnum } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
 export let $$f0 = registerModal(function (e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let i = () => {
     t(hideModalHandler());
   };

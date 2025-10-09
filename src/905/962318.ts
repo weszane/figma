@@ -32,7 +32,7 @@ export let $$P0 = registerModal(({
   onClose: t,
   source: i
 }) => {
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let T = getI18nState()?.getPrimaryLocale(!0) ?? defaultLanguage;
   let P = useModalManager({
     open: e,

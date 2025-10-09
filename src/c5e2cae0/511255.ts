@@ -50,7 +50,7 @@ function X({
   TeamIllustration: r,
   upsellSource: l
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   return jsxs("div", {
     className: cssBuilderInstance.flex.flexColumn.gap8.$,
     style: styleBuilderInstance.add({
@@ -206,7 +206,7 @@ function et(e) {
   });
 }
 function ea(e) {
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let a = () => {
     t(hideModal());
   };

@@ -305,7 +305,7 @@ export function $$eT0({
 }
 function eC(e) {
   let i = usePublishedPlugins()[e.pluginId];
-  let t = useDispatch();
+  let t = useDispatch<AppDispatch>();
   let r = useCallback(() => {
     t(hideDropdownAction());
   }, [t]);
@@ -363,7 +363,7 @@ let eF = memo(e => {
     dropdownIsShown,
     version
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let {
     viewPluginDetails
   } = ew();
@@ -448,7 +448,7 @@ let eF = memo(e => {
   });
 });
 function eN(e) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let t = useLocalPluginsExcludingWidgets({
     allowNonVsCodePluginsInVsCode: !0
   });
@@ -755,7 +755,7 @@ function eE(e) {
   }) : null;
 }
 function eA(e) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let {
     viewWidgetDetails
   } = ej();
@@ -866,7 +866,7 @@ function eD(e) {
   }) : null;
 }
 function eS(e) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let t = useLocalPluginsExcludingWidgets();
   let r = useMemo(() => e.localFileId ? t[e.localFileId] : void 0, [t, e.localFileId]);
   let d = usePublishingPlugins();
@@ -1140,7 +1140,7 @@ let eM = memo(e => {
   });
 });
 export function $$ez5(e) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let t = useRef(null);
   let r = useDropdownState();
   let d = useCanPerformAction();
@@ -1227,7 +1227,7 @@ export function $$eG6(e, i) {
   return t?.type === eW && t.data.pluginId === e && i === t.data.tileType;
 }
 export function $$eH1(e) {
-  let i = useDispatch();
+  let i = useDispatch<AppDispatch>();
   let t = usePluginedWidgets()[e.widgetId];
   let r = findLocalPluginById(e.widgetId);
   let d = findPublishedWidgetById(e.widgetId);

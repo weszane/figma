@@ -96,7 +96,7 @@ export function $$Z0(e) {
 function X(e) {
   var t;
   var i;
-  let l = useDispatch();
+  let l = useDispatch<AppDispatch>();
   let h = useModalManager(e);
   let g = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: ServiceCategories.SCALE

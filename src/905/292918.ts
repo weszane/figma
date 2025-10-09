@@ -70,7 +70,7 @@ let $ = registerModal(function (e) {
     branchKey,
     sourceKey
   } = e;
-  let r = useDispatch();
+  let r = useDispatch<AppDispatch>();
   let [a, l] = useState(BranchType.MAIN);
   let [d, c] = useAtomValueAndSetter(currentSelectionAtom);
   let u = d ?? e.direction;
@@ -261,7 +261,7 @@ let el = registerModal(function ({
   currentFileKey: t,
   onCheckpointSelected: i
 }) {
-  let n = useDispatch();
+  let n = useDispatch<AppDispatch>();
   let r = useSubscription(FileVersions, {
     fileKey: e
   });
