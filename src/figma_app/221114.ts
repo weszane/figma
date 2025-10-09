@@ -54,7 +54,7 @@ import { useFileByKey } from "../905/862913";
 import { fullscreenValue } from "../figma_app/455680";
 import { FPlanNameType } from "../figma_app/191312";
 import { MAX_USERS } from "../figma_app/345997";
-import { hM } from "../905/851937";
+import { hasStoredValue } from "../905/851937";
 import { UpsellModalType } from "../905/165519";
 import { CURRENT_VERSION_ID, setActiveVersion, exitVersionHistoryMode, startCompareChanges, fetchVersionHistory } from "../figma_app/841351";
 import { FeatureFlag } from "../905/652992";
@@ -755,7 +755,7 @@ class eM extends RecordingComponent {
         }));
       }));
     };
-    this.isAllowedToChangeVersion = () => null === this.props.modalShown && !hM();
+    this.isAllowedToChangeVersion = () => null === this.props.modalShown && !hasStoredValue();
     this.onKeyDown = hookForKeyboard(this, "keydown", e => {
       if (!this.props.dropdownShown && !this.props.modalShown && !this.props.versionHistory.compareId) {
         if (e.keyCode === KeyCodes.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(exitVersionHistoryMode());else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Tv } from "../figma_app/311375";
+import { useSceneGraphSelectionKeys } from "../figma_app/311375";
 import { isDesignFileType } from "../figma_app/976749";
 import { useIsCurrentUserCreator } from "../figma_app/516028";
 import { useDraftsFolderProject } from "../905/461685";
@@ -15,7 +15,7 @@ export function $$u1() {
 export let $$p0 = _$$n(() => {
   let e = $$u1();
   let t = N();
-  let r = Tv();
+  let r = useSceneGraphSelectionKeys();
   let a = A();
   return useMemo(() => !!e && (r.length ? !!a.length : t.size > 0), [e, r.length, t.size, a.length]);
 });

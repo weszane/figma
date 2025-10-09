@@ -9,7 +9,7 @@ import { findCodegenLanguage } from '../905/661977';
 import { getUnit, resolveUnit, unitMapping } from '../905/762943';
 import { isActionSchema, isSelectSchema } from '../figma_app/155287';
 import { PluginCallbacks } from '../figma_app/603466';
-import { AC, QN, v4 } from '../figma_app/655139';
+import { getDevModePluginFromLanguage, getSelectedCodegenLanguage, getEffectiveCodegenLanguage } from '../figma_app/655139';
 import { MeasurementUnit } from '../figma_app/763686';
 import { findPluginOrWidgetByFileId } from '../figma_app/844435';
 import { trackFileEventWithStore } from '../figma_app/901889';
@@ -21,7 +21,7 @@ import { trackFileEventWithStore } from '../figma_app/901889';
  * (Original: $$y13)
  */
 export function getCodeExtensionPreferences(languageId?: string) {
-  const defaultId = v4().id;
+  const defaultId = getEffectiveCodegenLanguage().id;
   const devHandoffPreferences: any = useSelector<ObjectOf>(state => state.mirror.appModel.devHandoffPreferences);
   const id = languageId ?? defaultId;
   return useMemo(() => devHandoffPreferences.codeExtensionPreferences?.[id] ?? {}, [devHandoffPreferences, id]);
@@ -68,7 +68,7 @@ export function useUpdateCodeExtensionPreferences() {
  * (Original: $$I7)
  */
 export function getMeasurementUnit(language?: any) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   const lang = language ?? defaultLang;
   const unit = getCodeExtensionPreferences(lang.id)?.unit ?? MeasurementUnit.PIXEL;
   return lang.type === 'first-party' && lang.id === FIGMA_PROPERTIES ? MeasurementUnit.PIXEL : unit;
@@ -79,7 +79,7 @@ export function getMeasurementUnit(language?: any) {
  * (Original: $$S12)
  */
 export function getScaleFactor(language?: any) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   const lang = language ?? defaultLang;
   const {
     unit = MeasurementUnit.PIXEL,
@@ -107,7 +107,7 @@ function shouldUseOnlyText({
  * (Original: A)
  */
 function applyScaleFactor(language: any, values: number[], transform: (v: number) => number = v => v, options?: any) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   const lang = language ?? defaultLang;
   const scale = getScaleFactor(lang);
   const preferences = getCodeExtensionPreferences(lang.id);
@@ -133,7 +133,7 @@ export function applyScaleToValue(language: any, value: number, transform: (v: n
  * (Original: $$N0)
  */
 export function useScaleFactorCallback(language?: any, options?: any) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   const lang = language ?? defaultLang;
   const scale = getScaleFactor(lang);
   const preferences = getCodeExtensionPreferences(lang.id);
@@ -148,7 +148,7 @@ export function useScaleFactorCallback(language?: any, options?: any) {
  * (Original: $$C4)
  */
 export function getScaledValuesWithUnit(language: any, values: number[], transform: (v: number) => number, options?: any) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   const lang = language ?? defaultLang;
   const scaledValues = applyScaleFactor(lang, values, transform, options);
   const unit = getUnitForLanguage(lang, options);
@@ -187,7 +187,7 @@ export function getPluginInfo(language: any) {
  * (Original: $$R3)
  */
 export function isCodegenSupportedForLanguage(language: any) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   const plugin = getPluginInfo(language ?? defaultLang);
   return isCodegenSupported(language ?? defaultLang, plugin);
 }
@@ -225,7 +225,7 @@ export function getUnitLabel(unitType: string) {
  * (Original: $$D18)
  */
 export function getLanguageUnitLabel(language: any) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   return getUnitLabelForLanguage(language ?? defaultLang);
 }
 
@@ -243,7 +243,7 @@ export function getUnitLabelForLanguage(language: any) {
  * (Original: $$M14)
  */
 export function getUnitForLanguage(language: any, options?: any) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   const lang = language ?? defaultLang;
   const unit = getMeasurementUnit(lang);
   const resolvedUnit = resolveLanguageUnit(lang, options);
@@ -263,9 +263,9 @@ export function useCodegenPreferencesSettings({
   includeActions?: boolean;
   includeSelectSettings?: boolean;
 } = {}) {
-  const defaultLang = v4();
+  const defaultLang = getEffectiveCodegenLanguage();
   const language = localCodeLanguage ?? defaultLang;
-  const plugin = AC(language);
+  const plugin = getDevModePluginFromLanguage(language);
   const preferences = getCodeExtensionPreferences(language.id);
   const onChangePreferences = useUpdateCodeExtensionPreferences();
   return useMemo(() => getCodegenPreferencesSettings({
@@ -340,8 +340,8 @@ export function getCodegenPreferencesSettings({
  * (Original: $$U9)
  */
 export function useApplyCodeExtensionPreferences() {
-  const language = v4();
-  const plugin = QN();
+  const language = getEffectiveCodegenLanguage();
+  const plugin = getSelectedCodegenLanguage();
   useEffect(() => {
     if (!plugin) return;
     const pluginLanguage = language.pluginLanguage;

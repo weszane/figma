@@ -4,7 +4,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ho, a5 } from "../figma_app/337924";
 import { UM } from "../figma_app/114522";
-import { Ac, c2, uH } from "../figma_app/346422";
+import { lintFile, getQuickInfo, getAutocomplete } from "../figma_app/346422";
 import { openWindow } from "../905/508367";
 let u = /\b((?:https?):\/\/[^\s/$.?#].[^\s]*)\b/gi;
 let p = Pe.define();
@@ -126,7 +126,7 @@ export function $$A1(e) {
   let t = [x];
   e && /\.(ts|tsx)$/i.test(e) && (t.push(bu(async () => {
     try {
-      return await Ac(e);
+      return await lintFile(e);
     } catch (e) {
       Ho(e, lV.CODE_IN_SITES, a5.LINT);
       return [];
@@ -138,7 +138,7 @@ export function $$A1(e) {
       return t && "finished" === i;
     }
   })), t.push(Ux(async (t, i) => {
-    let n = await c2(e, i);
+    let n = await getQuickInfo(e, i);
     return n ? {
       pos: n.pos,
       end: n.end,
@@ -157,7 +157,7 @@ export function $$A1(e) {
       }
     } : null;
   })), t.push(yU({
-    override: [t => uH(e, t.pos, t.explicit)]
+    override: [t => getAutocomplete(e, t.pos, t.explicit)]
   })));
   return t;
 }

@@ -1,37 +1,35 @@
-import type { NoOpVm } from '../700654'
-import { permissionScopeHandler } from '../189185'
-import { fO, VK } from '../452962'
-import { getFeatureFlags } from '../601108'
-import { fb } from '../622391'
-import { x1 } from '../714362'
-import { u as _$$u } from '../816730'
-import { fn, sH } from '../871411'
-import { r as _$$r } from '../955316'
-import { Bll, RN1 } from '../../figma_app/763686'
-import { l6, uA } from '../../figma_app/781512'
-import { mapColorName } from './helper'
-import { setupPrototypeFromArgs } from './node-factory'
-
-export let colors = ['yellow', 'orange', 'red', 'pink', 'violet', 'blue', 'teal', 'green'] as const
-
+import type { NoOpVm } from '../700654';
+import { permissionScopeHandler } from '../189185';
+import { fO, VK } from '../452962';
+import { getFeatureFlags } from '../601108';
+import { fb } from '../622391';
+import { x1 } from '../714362';
+import { u as _$$u } from '../816730';
+import { fn, sH } from '../871411';
+import { r as _$$r } from '../955316';
+import { Bll, RN1 } from '../../figma_app/763686';
+import { getAnnotationCategoryColor, getAnnotationCategoryLabel } from '../../figma_app/781512';
+import { mapColorName } from './helper';
+import { setupPrototypeFromArgs } from './node-factory';
+export let colors = ['yellow', 'orange', 'red', 'pink', 'violet', 'blue', 'teal', 'green'] as const;
 export function getColorName(e) {
   switch (e) {
     case RN1.RED:
-      return 'red'
+      return 'red';
     case RN1.GREEN:
-      return 'green'
+      return 'green';
     case RN1.BLUE:
-      return 'blue'
+      return 'blue';
     case RN1.YELLOW:
-      return 'yellow'
+      return 'yellow';
     case RN1.PINK:
-      return 'pink'
+      return 'pink';
     case RN1.ORANGE:
-      return 'orange'
+      return 'orange';
     case RN1.TEAL:
-      return 'teal'
+      return 'teal';
     case RN1.VIOLET:
-      return 'violet'
+      return 'violet';
   }
 }
 
@@ -47,7 +45,7 @@ export const AnnotationCategoryAPI = {
   label({
     vm,
     defineVmProp,
-    getAnnotationCategory,
+    getAnnotationCategory
   }, handle) {
     defineVmProp({
       handle,
@@ -56,13 +54,13 @@ export const AnnotationCategoryAPI = {
         enumerable: true,
         metricsKey: 'annotationCategory.label',
         get() {
-          const category = getAnnotationCategory(this)
-          return vm.newString(uA(category))
-        },
+          const category = getAnnotationCategory(this);
+          return vm.newString(getAnnotationCategoryLabel(category));
+        }
       },
       canWriteInReadOnly: false,
-      hasEditScope: false,
-    })
+      hasEditScope: false
+    });
   },
   /**
    * Defines the 'color' property for an annotation category.
@@ -71,7 +69,7 @@ export const AnnotationCategoryAPI = {
   color({
     vm,
     defineVmProp,
-    getAnnotationCategory,
+    getAnnotationCategory
   }, handle) {
     defineVmProp({
       handle,
@@ -80,19 +78,19 @@ export const AnnotationCategoryAPI = {
         enumerable: true,
         metricsKey: 'annotationCategory.color',
         get() {
-          const category = getAnnotationCategory(this)
-          const colorValue = l6(category)
+          const category = getAnnotationCategory(this);
+          const colorValue = getAnnotationCategoryColor(category);
           if (colorValue === null) {
-            x1('annotation-category-plugin', `Category in invalid state exposed to user: ${JSON.stringify(category)}`)
-            const fallbackColor = RN1.GREEN
-            return vm.newString(getColorName(fallbackColor))
+            x1('annotation-category-plugin', `Category in invalid state exposed to user: ${JSON.stringify(category)}`);
+            const fallbackColor = RN1.GREEN;
+            return vm.newString(getColorName(fallbackColor));
           }
-          return vm.newString(getColorName(colorValue))
-        },
+          return vm.newString(getColorName(colorValue));
+        }
       },
       canWriteInReadOnly: false,
-      hasEditScope: false,
-    })
+      hasEditScope: false
+    });
   },
   /**
    * Defines the 'isPreset' property for an annotation category.
@@ -101,7 +99,7 @@ export const AnnotationCategoryAPI = {
   isPreset({
     vm,
     defineVmProp,
-    getAnnotationCategory,
+    getAnnotationCategory
   }, handle) {
     defineVmProp({
       handle,
@@ -110,13 +108,13 @@ export const AnnotationCategoryAPI = {
         enumerable: true,
         metricsKey: 'annotationCategory.isPreset',
         get() {
-          const category = getAnnotationCategory(this)
-          return vm.newBoolean(category.preset !== Bll.NONE)
-        },
+          const category = getAnnotationCategory(this);
+          return vm.newBoolean(category.preset !== Bll.NONE);
+        }
       },
       canWriteInReadOnly: false,
-      hasEditScope: false,
-    })
+      hasEditScope: false
+    });
   },
   /**
    * Defines the 'remove' function for an annotation category.
@@ -126,29 +124,27 @@ export const AnnotationCategoryAPI = {
     vm,
     defineVmFunction,
     getAnnotationCategory,
-    sceneGraph,
+    sceneGraph
   }, handle) {
     defineVmFunction({
       handle,
       key: 'remove',
       metricsKey: 'annotationCategory.remove',
       cb() {
-        const category = getAnnotationCategory(this)
-        const root = sceneGraph.getRoot()
-        if (root.annotationCategories === null)
-          return vm.undefined
-        const updatedCategories = root.annotationCategories.filter(e => e.id !== category.id)
+        const category = getAnnotationCategory(this);
+        const root = sceneGraph.getRoot();
+        if (root.annotationCategories === null) return vm.undefined;
+        const updatedCategories = root.annotationCategories.filter(e => e.id !== category.id);
         _$$r(() => {
-          const err = root.setAnnotationCategories(updatedCategories)
-          if (err !== '')
-            throw new Error(`Error removing annotation category: ${err}`)
-        })
-        return vm.undefined
+          const err = root.setAnnotationCategories(updatedCategories);
+          if (err !== '') throw new Error(`Error removing annotation category: ${err}`);
+        });
+        return vm.undefined;
       },
       isAllowedInReadOnly: true,
       isAllowedInFocusViewInteractiveInspection: false,
-      hasEditScope: true,
-    })
+      hasEditScope: true
+    });
   },
   /**
    * Defines the 'setColor' function for an annotation category.
@@ -158,49 +154,45 @@ export const AnnotationCategoryAPI = {
     vm,
     defineVmFunction,
     getAnnotationCategory,
-    sceneGraph,
+    sceneGraph
   }, handle) {
     defineVmFunction({
       handle,
       key: 'setColor',
       metricsKey: 'annotationCategory.setColor',
       cb(colorHandle) {
-        const category = getAnnotationCategory(this)
+        const category = getAnnotationCategory(this);
         const colorValue = _$$u({
           vm,
           handle: colorHandle,
           zSchema: _$$z.enum(colors),
-          property: 'color',
-        })
-        const root = sceneGraph.getRoot()
-        if (root.annotationCategories === null)
-          return vm.undefined
-        const updatedCategories = root.annotationCategories.map((e) => {
+          property: 'color'
+        });
+        const root = sceneGraph.getRoot();
+        if (root.annotationCategories === null) return vm.undefined;
+        const updatedCategories = root.annotationCategories.map(e => {
           if (e.id === category.id) {
-            const cat = VK(e)
-            return cat.custom === null
-              ? cat
-              : {
-                ...cat,
-                custom: {
-                  ...cat.custom,
-                  color: mapColorName(colorValue),
-                },
+            const cat = VK(e);
+            return cat.custom === null ? cat : {
+              ...cat,
+              custom: {
+                ...cat.custom,
+                color: mapColorName(colorValue)
               }
+            };
           }
-          return e
-        })
+          return e;
+        });
         _$$r(() => {
-          const err = root.setAnnotationCategories(updatedCategories)
-          if (err !== '')
-            throw new Error(`Error setting annotation category color: ${err}`)
-        })
-        return vm.undefined
+          const err = root.setAnnotationCategories(updatedCategories);
+          if (err !== '') throw new Error(`Error setting annotation category color: ${err}`);
+        });
+        return vm.undefined;
       },
       isAllowedInReadOnly: true,
       isAllowedInFocusViewInteractiveInspection: false,
-      hasEditScope: true,
-    })
+      hasEditScope: true
+    });
   },
   /**
    * Defines the 'setLabel' function for an annotation category.
@@ -210,184 +202,166 @@ export const AnnotationCategoryAPI = {
     vm,
     defineVmFunction,
     getAnnotationCategory,
-    sceneGraph,
+    sceneGraph
   }, handle) {
     defineVmFunction({
       handle,
       key: 'setLabel',
       metricsKey: 'annotationCategory.setLabel',
       cb(labelHandle) {
-        const category = getAnnotationCategory(this)
+        const category = getAnnotationCategory(this);
         const labelValue = _$$u({
           vm,
           handle: labelHandle,
           zSchema: _$$z.string(),
-          property: 'label',
-        })
-        const root = sceneGraph.getRoot()
-        if (root.annotationCategories === null)
-          return vm.undefined
-        const updatedCategories = root.annotationCategories.map((e) => {
+          property: 'label'
+        });
+        const root = sceneGraph.getRoot();
+        if (root.annotationCategories === null) return vm.undefined;
+        const updatedCategories = root.annotationCategories.map(e => {
           if (e.id === category.id) {
-            const cat = VK(e)
-            return cat.custom === null
-              ? cat
-              : {
-                ...cat,
-                custom: {
-                  ...cat.custom,
-                  label: labelValue,
-                },
+            const cat = VK(e);
+            return cat.custom === null ? cat : {
+              ...cat,
+              custom: {
+                ...cat.custom,
+                label: labelValue
               }
+            };
           }
-          return e
-        })
+          return e;
+        });
         _$$r(() => {
-          const err = root.setAnnotationCategories(updatedCategories)
-          if (err !== '')
-            throw new Error(`Error setting annotation category label: ${err}`)
-        })
-        return vm.undefined
+          const err = root.setAnnotationCategories(updatedCategories);
+          if (err !== '') throw new Error(`Error setting annotation category label: ${err}`);
+        });
+        return vm.undefined;
       },
       isAllowedInReadOnly: true,
       isAllowedInFocusViewInteractiveInspection: false,
-      hasEditScope: true,
-    })
-  },
-}
-let annotationCategoryApiMethods = [AnnotationCategoryAPI.label, AnnotationCategoryAPI.color, AnnotationCategoryAPI.isPreset, AnnotationCategoryAPI.remove, AnnotationCategoryAPI.setColor, AnnotationCategoryAPI.setLabel]
-
+      hasEditScope: true
+    });
+  }
+};
+let annotationCategoryApiMethods = [AnnotationCategoryAPI.label, AnnotationCategoryAPI.color, AnnotationCategoryAPI.isPreset, AnnotationCategoryAPI.remove, AnnotationCategoryAPI.setColor, AnnotationCategoryAPI.setLabel];
 export class AnnotationCategoryFactory {
-  vm: NoOpVm
-  annotationCategoryPrototype: any
-  sceneGraph: any
-
+  vm: NoOpVm;
+  annotationCategoryPrototype: any;
+  sceneGraph: any;
   constructor(e) {
     // Set properties with proper types
-    this.vm = e.vm
-    this.annotationCategoryPrototype = setupPrototypeFromArgs(e, 'AnnotationCategory', ...annotationCategoryApiMethods)
-    this.sceneGraph = e.sceneGraph
+    this.vm = e.vm;
+    this.annotationCategoryPrototype = setupPrototypeFromArgs(e, 'AnnotationCategory', ...annotationCategoryApiMethods);
+    this.sceneGraph = e.sceneGraph;
   }
-
   createAnnotationCategoryHandle(e) {
-    let t = this.vm
-    if (!fn(sH(e)))
-      return t.$$null
-    let i = t.newObject(this.annotationCategoryPrototype)
+    let t = this.vm;
+    if (!fn(sH(e))) return t.$$null;
+    let i = t.newObject(this.annotationCategoryPrototype);
     t.defineProp(i, 'id', {
       enumerable: true,
       writable: false,
-      value: t.newString(e),
-    })
-    return i
+      value: t.newString(e)
+    });
+    return i;
   }
-
   getLocalAnnotationCategoriesAsync() {
-    let e = this.vm
+    let e = this.vm;
     let {
       promise,
       resolve,
-      reject,
-    } = e.newPromise()
-    getFeatureFlags().plugins_annotations_seat_check && !fb()
-      ? reject(e.newString('A Full or Dev seat is required to get annotation categories'))
-      : e.registerPromise(iJ(this.sceneGraph)).then((t) => {
-        let r = e.newArray()
-        for (let [i, a] of t.entries()) {
-          let t = this.createAnnotationCategoryHandle(a.id)
-          if (e.isNull(t)) {
-            reject(e.newString('Failed to create annotation category'))
-            return
-          }
-          e.setProp(r, i.toString(), t)
+      reject
+    } = e.newPromise();
+    getFeatureFlags().plugins_annotations_seat_check && !fb() ? reject(e.newString('A Full or Dev seat is required to get annotation categories')) : e.registerPromise(iJ(this.sceneGraph)).then(t => {
+      let r = e.newArray();
+      for (let [i, a] of t.entries()) {
+        let t = this.createAnnotationCategoryHandle(a.id);
+        if (e.isNull(t)) {
+          reject(e.newString('Failed to create annotation category'));
+          return;
         }
-        resolve(r)
-      }).catch((t) => {
-        reject(e.newString(t.message))
-      })
-    return promise
+        e.setProp(r, i.toString(), t);
+      }
+      resolve(r);
+    }).catch(t => {
+      reject(e.newString(t.message));
+    });
+    return promise;
   }
-
   getLocalAnnotationCategoryByIdAsync(e) {
-    let t = this.vm
+    let t = this.vm;
     let {
       promise,
       resolve,
-      reject,
-    } = t.newPromise()
-    getFeatureFlags().plugins_annotations_seat_check && !fb()
-      ? reject(t.newString('A Full or Dev seat is required to get annotation categories'))
-      : t.registerPromise(iJ(this.sceneGraph)).then((i) => {
-        let r = i.find(t => t.id === e)
-        if (void 0 === r) {
-          resolve(t.$$null)
-          return
-        }
-        resolve(this.createAnnotationCategoryHandle(r.id))
-      }).catch((e) => {
-        reject(t.newString(e.message))
-      })
-    return promise
+      reject
+    } = t.newPromise();
+    getFeatureFlags().plugins_annotations_seat_check && !fb() ? reject(t.newString('A Full or Dev seat is required to get annotation categories')) : t.registerPromise(iJ(this.sceneGraph)).then(i => {
+      let r = i.find(t => t.id === e);
+      if (void 0 === r) {
+        resolve(t.$$null);
+        return;
+      }
+      resolve(this.createAnnotationCategoryHandle(r.id));
+    }).catch(e => {
+      reject(t.newString(e.message));
+    });
+    return promise;
   }
-
   createAnnotationCategoryAsync(e, t) {
-    let i = this.vm
+    let i = this.vm;
     let {
       promise,
       resolve,
-      reject,
-    } = i.newPromise()
-    getFeatureFlags().plugins_annotations_seat_check && !fb()
-      ? reject(i.newString('A Full seat is required to create annotation categories'))
-      : i.registerPromise(iJ(this.sceneGraph)).then((n) => {
-        let s = fO(this.sceneGraph)
-        let o = {
-          id: s,
-          preset: Bll.NONE,
-          custom: {
-            label: e,
-            color: mapColorName(t),
-          },
+      reject
+    } = i.newPromise();
+    getFeatureFlags().plugins_annotations_seat_check && !fb() ? reject(i.newString('A Full seat is required to create annotation categories')) : i.registerPromise(iJ(this.sceneGraph)).then(n => {
+      let s = fO(this.sceneGraph);
+      let o = {
+        id: s,
+        preset: Bll.NONE,
+        custom: {
+          label: e,
+          color: mapColorName(t)
         }
-        let l = this.sceneGraph.getRoot()
-        let d = [...n, o]
-        _$$r(() => permissionScopeHandler.plugin('update-annotation-categories', () => {
-          let e = l.setAnnotationCategories(d)
-          if (e !== '') {
-            reject(i.newString(e))
-            return
-          }
-          let t = this.createAnnotationCategoryHandle(s)
-          if (i.isNull(t)) {
-            reject(i.newString('Failed to create annotation category'))
-            return
-          }
-          resolve(t)
-        }))
-      })
-    return promise
+      };
+      let l = this.sceneGraph.getRoot();
+      let d = [...n, o];
+      _$$r(() => permissionScopeHandler.plugin('update-annotation-categories', () => {
+        let e = l.setAnnotationCategories(d);
+        if (e !== '') {
+          reject(i.newString(e));
+          return;
+        }
+        let t = this.createAnnotationCategoryHandle(s);
+        if (i.isNull(t)) {
+          reject(i.newString('Failed to create annotation category'));
+          return;
+        }
+        resolve(t);
+      }));
+    });
+    return promise;
   }
 }
-
 async function iJ(nodeAdapter) {
   // iJ - Get annotation categories, initializing if necessary
 
-  const rootNode = nodeAdapter.getRoot()
-  let annotationCategories = rootNode.annotationCategories
+  const rootNode = nodeAdapter.getRoot();
+  let annotationCategories = rootNode.annotationCategories;
 
   // Initialize annotation categories if not already available
   if (annotationCategories === null) {
-    await Promise.resolve()
+    await Promise.resolve();
     permissionScopeHandler.plugin('initialize-annotation-categories', () => {
-      const initializationError = rootNode.initializeAnnotationCategories()
+      const initializationError = rootNode.initializeAnnotationCategories();
       if (initializationError !== '') {
-        throw new Error(initializationError)
+        throw new Error(initializationError);
       }
-      annotationCategories = rootNode.annotationCategories
-    })
+      annotationCategories = rootNode.annotationCategories;
+    });
   }
   if (annotationCategories === null) {
-    throw new Error('Annotation categories not initialized')
+    throw new Error('Annotation categories not initialized');
   }
-  return annotationCategories
+  return annotationCategories;
 }

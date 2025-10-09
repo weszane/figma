@@ -16,7 +16,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { getSelectedDevModePropertiesPanelTab, setSelectedDevModePropertiesPanelTab, updateHoveredNode, clearSelection, replaceSelection, getEnabledDevModePropertiesPanelTabs, getPropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
 import { useDeepEqualSceneValue, $y, useStrictDeepEqualSceneValue, useImmediateSceneValue } from "../figma_app/167249";
 import { ec as _$$ec, Te } from "../figma_app/29089";
-import { uQ as _$$uQ, NM, Zl, Tv } from "../figma_app/311375";
+import { useSingleSelectedKey, useMultipleSelectedKeys, getSceneGraphItemByKey, useSceneGraphSelectionKeys } from "../figma_app/311375";
 import { OM, uL as _$$uL } from "../figma_app/422471";
 import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile, useCanAccessFullDevMode } from "../figma_app/473493";
 import { W as _$$W } from "../905/200727";
@@ -76,7 +76,7 @@ import { WEB as _$$uz, FIGMA_PROPERTIES, IOS as _$$p, IOS_UIKIT, ANDROID, ANDROI
 import { ButtonPrimitive } from "../905/632989";
 import { useAtomValue } from "../vendor/525001";
 import eU from "../vendor/77708";
-import { v4, QN, AC, Pt } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage, getSelectedCodegenLanguage, getDevModePluginFromLanguage, getCodegenLanguageFormatter } from "../figma_app/655139";
 import { fk, B7, Qm, g6, vI, $R, yP, p2 as _$$p2, cZ as _$$cZ, Vx } from "../figma_app/883490";
 import { gP, Ck, $L, W7, F9, yV, jt, lK as _$$lK, u9 as _$$u2, Fr, EN, Tk, Qz, tr as _$$tr, B5 } from "../figma_app/655717";
 import { useDevModeValueAndSetter, isCodeMode } from "../905/191741";
@@ -137,7 +137,7 @@ import { I as _$$I2 } from "../figma_app/51637";
 import { S as _$$S, z as _$$z } from "../figma_app/106763";
 import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
-import { s2 as _$$s3 } from "../905/851937";
+import { initializeGlobalPluginAPI } from "../905/851937";
 import { getCurrentGRAtom, handlePluginError } from "../905/753206";
 import { X_ } from "../figma_app/78725";
 import { notificationAPI } from "../905/894881";
@@ -427,8 +427,8 @@ import { LinkPrimitive } from "../figma_app/496441";
 import { H_ } from "../905/963340";
 import { G as _$$G4 } from "../905/800369";
 import { mockDirForImageWritesAtom, imageOptionsWithMount, denyOverwritingFilesAtom, codeOptionsAtom, codeConnectToolsEnabledAtom, codebaseSuggestionsEnabledAtom, useTailwindAtom } from "../figma_app/342355";
-import { Fc } from "../figma_app/484865";
-import { $k, As } from "../figma_app/802241";
+import { canAccessFullCodeConnect } from "../figma_app/484865";
+import { isDevModeMcpDisabledSelector, canWriteMcpAssetsLocally } from "../figma_app/802241";
 import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
 import { getInitialDynamicConfig } from "../figma_app/594947";
 import { userCreatedAtAtom } from "../figma_app/864723";
@@ -502,7 +502,7 @@ function b({
     commentsActive: e.mirror.appModel.currentTool === _$$ec.tool,
     isNodeSelected: Object.keys(e.mirror.sceneGraphSelection).length > 0
   }));
-  let o = _$$uQ();
+  let o = useSingleSelectedKey();
   let l = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.isTopLevelFrame(), o);
   useSingleEffect(() => {
     let t = globalPerfTimer.tryStop("switch_to_inspect_mode.right_panel_tti");
@@ -908,7 +908,7 @@ function tr({
   fillContainer: e = !1,
   loadingState: t = !1
 }) {
-  let n = _$$uQ();
+  let n = useSingleSelectedKey();
   if (!n) return null;
   let i = HandoffBindingsCpp?.getAssetInfo(n)?.type;
   let o = !t && fk(i);
@@ -1329,7 +1329,7 @@ function ty({
   corner: e
 }) {
   let t = Fr(e);
-  let n = v4();
+  let n = getEffectiveCodegenLanguage();
   let o = applyScaleToValue(n, t);
   let l = useMemo(() => {
     switch (e) {
@@ -1486,7 +1486,7 @@ function tN() {
 }
 function tk() {
   let e = Cj("box-sizing: border-box");
-  let t = v4();
+  let t = getEffectiveCodegenLanguage();
   let [n] = useDevModeValueAndSetter();
   return ts() || t.id !== _$$uz || "code" !== n ? null : jsx(ButtonPrimitive, {
     className: "box_model--borderBoxMessage--2jJc- text--fontPos11--2LvXf text--_fontBase--QdLsd",
@@ -1500,7 +1500,7 @@ function tk() {
   });
 }
 function tA(e) {
-  let t = v4();
+  let t = getEffectiveCodegenLanguage();
   let n = applyScaleToValue(t, e, B5);
   return void 0 === e ? "-" : n;
 }
@@ -2869,7 +2869,7 @@ let ir = "configuration_wizard--pluginTick--YbuJa";
 let id = "configuration_wizard--spinnerContainer--2xXeT";
 let ix = "OTHER";
 function im() {
-  let e = v4();
+  let e = getEffectiveCodegenLanguage();
   let {
     codegenPlugins = [],
     loading
@@ -3069,7 +3069,7 @@ let ib = new KD({
   min: 0.1
 });
 function ij() {
-  let e = v4();
+  let e = getEffectiveCodegenLanguage();
   let t = isCodegenSupportedForLanguage();
   let n = getMeasurementUnit();
   let o = getLanguageUnitLabel();
@@ -3259,7 +3259,7 @@ function iI({
   plugin: e,
   onSelect: t
 }) {
-  let n = v4();
+  let n = getEffectiveCodegenLanguage();
   let o = gB();
   let l = "first-party" !== n.type && n.id === e.id;
   let s = useMemo(() => iA(e), [e]);
@@ -4968,7 +4968,7 @@ function o8({
   let k = function (e) {
     let t = o5(e);
     let n = useCurrentFileKey();
-    let a = v4();
+    let a = getEffectiveCodegenLanguage();
     if (!t || !n || !hasInspectOrPanelCapability(t.manifest.capabilities)) return null;
     let i = async ({
       link: e
@@ -6533,7 +6533,7 @@ function sO() {
   let t = _$$lA();
   let n = wS();
   let s = useSelector(selectOpenFileKey);
-  let r = _$$uQ();
+  let r = useSingleSelectedKey();
   let d = function () {
     let e = RI();
     let t = useDeepEqualSceneValue((e, t, n) => {
@@ -6667,7 +6667,7 @@ function s1({
   let u = !n && c;
   let p = _$$dU(e, "cc_versions");
   let h = xY("cc_dropdown_detached_component");
-  let f = _$$uQ();
+  let f = useSingleSelectedKey();
   let g = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "INSTANCE", f);
   let x = useSelectionPropertyValue("overrides");
   let m = x && !isInvalidValue(x) ? x.instanceGuid : null;
@@ -6791,7 +6791,7 @@ function s2() {
 }
 function s5() {
   let e = wS();
-  let t = _$$uQ();
+  let t = useSingleSelectedKey();
   let n = useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     return n?.type === "SYMBOL" || n?.type === "INSTANCE";
@@ -6800,7 +6800,7 @@ function s5() {
 }
 function s3() {
   let e = selectCurrentFile();
-  let t = _$$uQ();
+  let t = useSingleSelectedKey();
   let n = useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     return n?.type === "SYMBOL" || n?.isStateGroup;
@@ -6884,7 +6884,7 @@ function s7({
   });
 }
 function s8() {
-  let e = NM();
+  let e = useMultipleSelectedKeys();
   return e ? jsx(VZ, {
     title: getI18nString("inspect_panel.property.selected", {
       numberOfItems: e.length
@@ -6897,7 +6897,7 @@ function s8() {
   }) : null;
 }
 function s6() {
-  let e = _$$uQ();
+  let e = useSingleSelectedKey();
   let t = s5();
   let n = _$$ei(e ?? void 0);
   let {
@@ -7013,11 +7013,11 @@ function s6() {
 function s9({
   hasCodeConnect: e
 }) {
-  let t = _$$uQ();
+  let t = useSingleSelectedKey();
   let n = s5();
   let o = wS();
   let l = function () {
-    let e = _$$uQ();
+    let e = useSingleSelectedKey();
     let t = s5();
     let {
       type,
@@ -7152,7 +7152,7 @@ function s9({
   });
 }
 function re() {
-  let e = _$$uQ();
+  let e = useSingleSelectedKey();
   let {
     name,
     showNameAsQuotedText
@@ -7189,7 +7189,7 @@ function re() {
   });
 }
 function rt() {
-  let e = _$$uQ();
+  let e = useSingleSelectedKey();
   let t = _$$dh();
   let n = useDeepEqualSceneValue((e, t) => e.get(t)?.name?.trim(), t);
   let i = Cj(n);
@@ -7227,7 +7227,7 @@ function rn() {
   });
 }
 function ra() {
-  let e = _$$uQ();
+  let e = useSingleSelectedKey();
   let t = useDeepEqualSceneValue((e, t) => {
     let n = e?.get(t ?? "");
     return n?.hyperlink && "mixed" !== n.hyperlink && n?.hyperlink?.type === "URL" ? n.hyperlink.value : void 0;
@@ -7254,7 +7254,7 @@ function ra() {
   }) : null;
 }
 function ri(e) {
-  let t = _$$uQ();
+  let t = useSingleSelectedKey();
   let {
     getMaybeEnabledItem
   } = _$$n8();
@@ -7337,8 +7337,8 @@ function rf({
 }) {
   let d = useDispatch<AppDispatch>();
   let c = useSceneGraphSelector();
-  let u = _$$uQ();
-  let p = NM();
+  let u = useSingleSelectedKey();
+  let p = useMultipleSelectedKeys();
   let h = e || t;
   let [f, g] = useState(() => 0 === Fullscreen.nodeStatusesOnPage(t).length || s);
   let [x, m] = useAtomValueAndSetter(rh);
@@ -7599,7 +7599,7 @@ let rk = memo(function (e) {
   let d = getObservableOrFallback(EditorPreferencesApi().showGuids);
   let [c, u] = useState(!1);
   let p = function (e) {
-    _$$uQ();
+    useSingleSelectedKey();
     let t = selectWithShallowEqual(e => !hasSingleSceneGraphSelection(e));
     return n => updateHoveredNode(n && t ? e : "");
   }(guid);
@@ -7730,7 +7730,7 @@ let rk = memo(function (e) {
   });
 });
 let rA = e => $y((e, t) => {
-  let n = Zl(e, t);
+  let n = getSceneGraphItemByKey(e, t);
   if (!n) return null;
   let a = n.isState ? n.parentNode : null;
   let i = a?.name || n.name;
@@ -7985,7 +7985,7 @@ function rP({
   didSelectRow: n
 }) {
   let i = getObservableOrFallback(AppStateTsApi.devHandoffState().currentNodeId);
-  let o = _$$uQ();
+  let o = useSingleSelectedKey();
   let s = getObservableOrFallback(AppStateTsApi.devHandoffState().readySectionItems);
   let {
     currentPage
@@ -8017,7 +8017,7 @@ let rL = memo(() => {
   let {
     inspectableRootNodeId,
     didSelectRow
-  } = rT(e, _$$uQ());
+  } = rT(e, useSingleSelectedKey());
   let r = useSelector(e => Object.keys(e.mirror.sceneGraphSelection).length > 0);
   useSingleEffect(() => {
     let e = globalPerfTimer.tryStop("switch_to_inspect_mode.left_panel_tti");
@@ -8425,7 +8425,7 @@ var dc = dd;
 function dp({
   plugin: e
 }) {
-  return "first-party" !== v4().type ? null : jsx(df, {
+  return "first-party" !== getEffectiveCodegenLanguage().type ? null : jsx(df, {
     plugin: e,
     buttonText: getI18nString("dev_handoff.inspect_panel.close_plugin")
   });
@@ -8433,7 +8433,7 @@ function dp({
 function dh({
   plugin: e
 }) {
-  return "first-party" === v4().type ? null : jsx(df, {
+  return "first-party" === getEffectiveCodegenLanguage().type ? null : jsx(df, {
     plugin: e,
     buttonText: getI18nString("dev_handoff.inspect_panel.generate_code")
   });
@@ -8505,7 +8505,7 @@ function dw({
   dataTestId: p
 }) {
   let h = selectIsCopyExportAllowed();
-  let f = v4();
+  let f = getEffectiveCodegenLanguage();
   let g = e ?? f;
   let x = useMemo(() => g.id === _$$uz && "first-party" === g.type ? {
     id: CodegenPlatform.CSS,
@@ -8568,7 +8568,7 @@ function dN({
     });
   }, [e.id, e.type, f, x, h]);
   let b = getCodeExtensionPreferences() || {};
-  let j = QN();
+  let j = getSelectedCodegenLanguage();
   let w = "first-party" === e.type;
   let {
     code,
@@ -9830,7 +9830,7 @@ function us({
   let x = useDispatch<AppDispatch>();
   let m = useAtomWithSubscription(c4)[e];
   let _ = useAtomWithSubscription(c7);
-  let v = _$$uQ();
+  let v = useSingleSelectedKey();
   let b = _$$dh();
   let j = v ?? b;
   let w = !m || 0 === m.length;
@@ -10456,7 +10456,7 @@ function uP() {
   }(d);
   let g = useRef(null);
   let x = function () {
-    let e = _$$uQ();
+    let e = useSingleSelectedKey();
     return useDeepEqualSceneValue((e, t) => {
       let n = e?.get(t ?? "");
       return n?.type === "TEXT";
@@ -10553,7 +10553,7 @@ let uz = parsePxNumber(WPY);
 function uV({
   fillContainer: e = !1
 }) {
-  let t = _$$uQ();
+  let t = useSingleSelectedKey();
   let n = useSelector(e => e.mirror.selectionProperties.selectedFonts);
   return !t || !n || n?.fonts.length < 1 ? null : jsx(VZ, {
     hideHeader: !0,
@@ -10878,7 +10878,7 @@ function uQ({
   fillContainer: e = !1
 }) {
   return !function () {
-    let e = _$$uQ();
+    let e = useSingleSelectedKey();
     return useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "TEXT", e);
   }() ? jsx(tr, {
     fillContainer: e
@@ -10972,7 +10972,7 @@ let pn = "mcp_panel--settingLabel--evanf";
 let pa = "mcp_panel--bannerDescription--80ohH";
 let pi = "https://help.figma.com/hc/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server";
 function po() {
-  let e = $k();
+  let e = isDevModeMcpDisabledSelector();
   let t = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
   let n = getInitialDynamicConfig("dt_mcp_eligible_for_new_ui_date").get("date", null);
   let i = useAtomWithSubscription(userCreatedAtAtom);
@@ -11057,7 +11057,7 @@ function pd() {
   let e = "internal-path-for-image-writes-to-disk";
   let [t, n] = useAtomValueAndSetter(mockDirForImageWritesAtom);
   let i = useAtomWithSubscription(imageOptionsWithMount);
-  return As() && getFeatureFlags().dt_my_cool_plugin_internal && "write-to-disk" === i ? jsxs("div", {
+  return canWriteMcpAssetsLocally() && getFeatureFlags().dt_my_cool_plugin_internal && "write-to-disk" === i ? jsxs("div", {
     className: pt,
     children: [jsx(Label, {
       className: pn,
@@ -11094,7 +11094,7 @@ function pc() {
           }), jsx(_$$c$2, {
             value: "placeholder-svg",
             children: renderI18nText("dev_handoff.mcp.image_source.placeholder")
-          }), As() && jsx(_$$c$2, {
+          }), canWriteMcpAssetsLocally() && jsx(_$$c$2, {
             value: "write-to-disk",
             children: renderI18nText("dev_handoff.mcp.image_source.write_to_disk")
           })]
@@ -11194,7 +11194,7 @@ function pf() {
   let [p, h] = useAtomValueAndSetter(codeOptionsAtom);
   let [f, g] = useAtomValueAndSetter(imageOptionsWithMount);
   let [x, m] = useAtomValueAndSetter(denyOverwritingFilesAtom);
-  let _ = Fc();
+  let _ = canAccessFullCodeConnect();
   let v = getFeatureFlags();
   let y = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
   let b = [{
@@ -11329,9 +11329,9 @@ function pj(e) {
   let t = useFullscreenReady();
   let n = isSingleSceneGraphSelectionInDevHandoff();
   let o = _$$ro();
-  let l = _$$uQ();
+  let l = useSingleSelectedKey();
   let d = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.type === "SECTION", l);
-  let c = NM();
+  let c = useMultipleSelectedKeys();
   let u = isCodeMode();
   let p = useDropdownState();
   let h = useRef(null);
@@ -11913,7 +11913,7 @@ function p4({
   let r = useRef(null);
   let [d, c] = useState(null);
   let u = getObservableOrFallback(AppStateTsApi.devHandoffState().currentNodeId);
-  let p = _$$uQ();
+  let p = useSingleSelectedKey();
   let {
     inspectableRootNodeId,
     didSelectRow
@@ -11978,7 +11978,7 @@ function hc({
     r(hideModal());
   }, [r]);
   !function (e = noop) {
-    let t = _$$uQ();
+    let t = useSingleSelectedKey();
     let n = useLatestRef(t);
     useEffect(() => {
       n && t !== n && e();
@@ -12166,8 +12166,8 @@ function hf({
     codeLanguageApi
   } = _$$Q4();
   let i = selectIsCopyExportAllowed();
-  let o = AC(codeLanguageApi?.codeLanguage);
-  let l = Pt(o);
+  let o = getDevModePluginFromLanguage(codeLanguageApi?.codeLanguage);
+  let l = getCodegenLanguageFormatter(o);
   let s = !!hg(e)?.length;
   return codeLanguageApi && i ? jsx(TrackingProvider, {
     name: "Style code",
@@ -12418,7 +12418,7 @@ function hD({
   });
 }
 function hO() {
-  let e = _$$uQ();
+  let e = useSingleSelectedKey();
   return selectIsExportRestricted() ? jsx(rO, {}) : e ? jsxs("div", {
     className: hN,
     children: [jsxs(hD, {
@@ -12572,7 +12572,7 @@ function hV({
 function hH() {
   let e = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY);
   let t = isSingleSceneGraphSelectionInDevHandoff();
-  let n = NM();
+  let n = useMultipleSelectedKeys();
   let s = _$$ro();
   let d = useAtomWithSubscription(be);
   !function (e) {
@@ -12584,7 +12584,7 @@ function hH() {
         variableIdForDetailsPanel: void 0
       }));
     }, [t, e]);
-  }([e, _$$uQ()]);
+  }([e, useSingleSelectedKey()]);
   let c = n ? [{
     id: IAssertResource.ASSETS,
     title: getI18nString("dev_handoff.assets"),
@@ -12675,7 +12675,7 @@ function hJ() {
   let [e, t] = useLocalStorageSync("extension_bottom_panel_expanded", !0);
   let [n, o] = useAtomValueAndSetter(_$$g4);
   let [d, c] = useState(!1);
-  let u = _$$uQ();
+  let u = useSingleSelectedKey();
   let p = getObservableOrFallback(AppStateTsApi.devHandoffState().focusMode);
   let h = getObservableOrFallback(EditorPreferencesApi().devHandoffInspectSplitPosition);
   useEffect(() => {
@@ -12754,7 +12754,7 @@ let h8 = "floating_layers_panel--isSymbol--3KTvH";
 let h6 = "floating_layers_panel--layerName--LBYru";
 function h9() {
   let e = getObservableOrFallback(EditorPreferencesApi().showGuids);
-  let t = Tv();
+  let t = useSceneGraphSelectionKeys();
   let n = useImmediateSceneValue((e, t) => t && e.get(t), t[0] || null);
   let d = !!n && ["SYMBOL", "INSTANCE"].includes(n.type);
   let {
@@ -12926,7 +12926,7 @@ function fp() {
     selectFocusNodeForInteractiveInspection,
     doneChangingFocusNodeForInteractiveInspection
   } = function () {
-    let e = Tv();
+    let e = useSceneGraphSelectionKeys();
     let t = useSelector(e => e.mirror.appModel.hoveredNode);
     let [n, a] = useAtomValueAndSetter(_$$hn);
     let l = useCallback(() => {
@@ -13003,7 +13003,7 @@ function fh() {
     isDropdownShown
   } = _$$B3("FOCUS_MODE_NAME_DROPDOWN");
   let r = selectCurrentFile();
-  let d = _$$uQ();
+  let d = useSingleSelectedKey();
   let c = useDevModeFocusId();
   let u = getSelectedView();
   let p = isFullscreenDevHandoffView(u) ? u.focusViewBackNavigation : void 0;
@@ -13193,7 +13193,7 @@ export function $$fg0() {
   return (useEffect(() => {
     let e = () => {
       handlePluginError().then(() => {
-        _$$s3({
+        initializeGlobalPluginAPI({
           userID: s?.id ?? "",
           openFileKey: u
         });

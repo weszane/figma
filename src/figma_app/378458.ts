@@ -32,7 +32,7 @@ import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { q } from "../figma_app/57000";
 import { isFullscreenDevHandoffView } from "../905/782918";
-import { XR, uA, FQ } from "../figma_app/781512";
+import { useAnnotationCategories, getAnnotationCategoryLabel, getAnnotationCategoryColorValue } from "../figma_app/781512";
 import { A as _$$A } from "../905/79603";
 import { j as _$$j } from "../905/834956";
 import { useIsCanvasEditDisabled } from "../905/595131";
@@ -58,7 +58,7 @@ function z({
   let y = useSelector(e => !!e.user);
   let b = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
   let I = useCanAccessFullDevMode();
-  let v = XR();
+  let v = useAnnotationCategories();
   let R = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
   let D = u === FEditorType.Design;
   let M = u === FEditorType.Slides;
@@ -233,7 +233,7 @@ function z({
       isChecked: !R,
       recordingKey: "showAllAnnotationCategories"
     }, ...v.map(e => {
-      let t = uA(e);
+      let t = getAnnotationCategoryLabel(e);
       return {
         type: "SHOW_ANNOTATION_CATEGORY",
         displayText: t,
@@ -241,7 +241,7 @@ function z({
         icon: jsx("div", {
           className: UF,
           style: {
-            backgroundColor: FQ(e) ?? void 0
+            backgroundColor: getAnnotationCategoryColorValue(e) ?? void 0
           }
         }),
         isChecked: e.id === R,
@@ -417,7 +417,7 @@ export function $$W1({
 }) {
   let _ = useDispatch<AppDispatch>();
   let h = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
-  let m = XR();
+  let m = useAnnotationCategories();
   let y = useMemo(() => ({
     ZOOM_IN: getI18nString("fullscreen_actions.zoom-in"),
     ZOOM_OUT: getI18nString("fullscreen_actions.zoom-out"),

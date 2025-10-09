@@ -320,7 +320,7 @@ import { lz as _$$lz, sf as _$$sf, td as _$$td, bV, Dt, EN, OL } from '../figma_
 import { AssetFilterMode, filterStylesByType, useSubscribedAssets } from '../figma_app/646357';
 import { wW } from '../figma_app/656450';
 import { useCachedSubtree } from '../figma_app/679183';
-import { y6 } from '../figma_app/681951';
+import { useSceneMarkupSync } from '../figma_app/681951';
 import { canCreateFileType, useProjectFileCreationPermissions } from '../figma_app/687776';
 import { s_ as _$$s_, yO } from '../figma_app/701001';
 import { $ as _$$$3 } from '../figma_app/709177';
@@ -10828,7 +10828,7 @@ let dN = memo(({
         },
         children: [p.map(e => jsx(_$$_2, {
           nodeId: e
-        }, `loading-embed-${e}`)), w && S && jsx(ej, {}), jsx(qn, {}), jsx(_$$u3, {}), h && jsx(_$$n3, {}), getFeatureFlags().ce_al_experiments_on && jsx(_$$n3, {}), jsx(_$$G4, {}), jsx(_$$b4, {}), jsx(_$$J7, {}), !k && !v && !C && jsx(_$$b3, {}), getFeatureFlags().dt_mcp_auto_resources && E && jsx(y6, {}), jsx(XI, {
+        }, `loading-embed-${e}`)), w && S && jsx(ej, {}), jsx(qn, {}), jsx(_$$u3, {}), h && jsx(_$$n3, {}), getFeatureFlags().ce_al_experiments_on && jsx(_$$n3, {}), jsx(_$$G4, {}), jsx(_$$b4, {}), jsx(_$$J7, {}), !k && !v && !C && jsx(_$$b3, {}), getFeatureFlags().dt_mcp_auto_resources && E && jsx(useSceneMarkupSync, {}), jsx(XI, {
           commentsDetailContainerRef: m
         }), jsx(_$$Z3, {}), getFeatureFlags().cursor_bot && y && jsx(_$$S2, {}), jsx(_$$X4, {}), jsx(_$$J6, {}), jsx(Nz, {}), jsx('div', {
           ref: m

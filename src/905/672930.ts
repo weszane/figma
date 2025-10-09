@@ -1,7 +1,14 @@
-import { createFigmaPluginScope } from "../905/629114";
-let r = null;
-export function $$a0() {
-  r || ((r = createFigmaPluginScope()).skipInvisibleInstanceChildren = !0);
-  return r;
+import { createFigmaPluginScope } from "../905/629114"
+// Refactored to use clearer naming, added type safety, and improved readability
+// Original function name: $$a0
+let figmaPluginScope: ReturnType<typeof createFigmaPluginScope> | null = null
+
+export function getFigmaPluginScope() {
+  if (!figmaPluginScope) {
+    figmaPluginScope = createFigmaPluginScope()
+    figmaPluginScope.skipInvisibleInstanceChildren = true
+  }
+  return figmaPluginScope
 }
-export const F = $$a0;
+
+export const F = getFigmaPluginScope

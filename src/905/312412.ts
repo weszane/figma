@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDelayedCallback } from '../905/116724';
 import { useNavigationStack } from '../905/794154';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
-import { Tv } from '../figma_app/311375';
+import { useSceneGraphSelectionKeys } from '../figma_app/311375';
 import { traverseUpAndDown } from '../figma_app/387100';
 function d(e, t, i) {
   if (!e.get(i)) return !1;
@@ -29,7 +29,7 @@ export function $$c0({
     autoClose();
   }, [autoClose, i]);
   let p = useDelayedCallback(u);
-  let m = Tv();
+  let m = useSceneGraphSelectionKeys();
   let h = useDeepEqualSceneValue((e, t, i) => t.some(t => d(e, i, t)) || i.some(i => d(e, t, i)), t, m);
   let [g, f] = useState(!1);
   useEffect(() => {

@@ -371,7 +371,7 @@ import { initializeFullscreenPreloading, isUsingLocalBuild, loadWasmBinaryByType
 import { XO as StateManagementBindings } from '../figma_app/299859';
 import { I as _$$I } from '../figma_app/304633';
 import { Pp as FullscreenWebSocketTsCallbacks } from '../figma_app/305244';
-import { uQ as _$$uQ } from '../figma_app/311375';
+import { useSingleSelectedKey } from '../figma_app/311375';
 import { logAndTrackCTA, mapEditorTypeToProductType, trackContextViewed } from '../figma_app/314264';
 import { lX as _$$lX, G2 } from '../figma_app/314591';
 import { CX, gT, If, NA } from '../figma_app/319440';
@@ -7784,7 +7784,7 @@ function pC() {
   return useDevModeFocusId() ? t : e;
 }
 function pw() {
-  let e = _$$uQ();
+  let e = useSingleSelectedKey();
   let t = pC();
   return e ? t.indexOf(e) : -1;
 }
@@ -7800,7 +7800,7 @@ function pP({
       }, [t, e]);
     }();
     let e = getObservableValue(AppStateTsApi?.devHandoffState()?.focusAnimationIsRunning, !1);
-    let t = _$$uQ() ?? defaultSessionLocalIDString;
+    let t = useSingleSelectedKey() ?? defaultSessionLocalIDString;
     let r = isSingleSceneGraphSelectionInDevHandoff();
     let n = useCanAccessFullDevMode();
     let i = useSceneGraphSelector();

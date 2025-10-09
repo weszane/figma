@@ -27,7 +27,7 @@ import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { R as _$$R } from "../905/304671";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { Dl } from "../figma_app/601682";
+import { checkUserHasPublishedComponents } from "../figma_app/601682";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useComponentBrowserEntrypoint } from "../figma_app/88239";
 import { n6 } from "../905/234821";
@@ -610,7 +610,7 @@ let ti = memo(function ({
   let eL = BI();
   let eU = _$$m2();
   let eK = o.user;
-  let eV = Dl(c);
+  let eV = checkUserHasPublishedComponents(c);
   let eW = useComponentBrowserEntrypoint("filename_menu");
   let eq = useSelector(hasLocalOrPublishedContent);
   let eQ = jT(c, eq).unwrapOr(!1);

@@ -8,7 +8,7 @@ import d from "classnames";
 import { jB, My } from "../vendor/46587";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { k as _$$k } from "../905/963262";
+import { internalPillKeyRegex } from "../905/963262";
 import { Fj } from "../figma_app/793429";
 import { BOUND_VAR_START_REGEX, BOUND_VAR_END_REGEX, BOUND_STYLE_START_REGEX, BOUND_STYLE_END_REGEX } from "../905/77776";
 import { joinCodeBlocks } from "../figma_app/711907";
@@ -260,9 +260,9 @@ function Q({
       children: t
     });
   }
-  if (e.content.match(_$$k)) {
+  if (e.content.match(internalPillKeyRegex)) {
     let i = [];
-    for (let r of e.content.matchAll(_$$k)) {
+    for (let r of e.content.matchAll(internalPillKeyRegex)) {
       let e = t[r[0]];
       if (e) switch (e.type) {
         case "INSTANCE":

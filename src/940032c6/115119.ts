@@ -242,7 +242,7 @@ import { FeatureFlag } from '../905/652992';
 import { i as _$$i3 } from '../905/661697';
 import { getResourceDataOrFallback, ResourceStatus } from '../905/663269';
 import { N as _$$N0 } from '../905/670143';
-import { F as _$$F6 } from '../905/672930';
+import { getFigmaPluginScope } from '../905/672930';
 import { WAFImage } from '../905/675859';
 import { textDisplayConfig } from '../905/687265';
 import { Qr as _$$Qr } from '../905/690539';
@@ -10116,7 +10116,7 @@ function cf({
   });
 }
 async function c_(e, t) {
-  let i = _$$F6().getNodeById(e);
+  let i = getFigmaPluginScope().getNodeById(e);
   if (!i || !('exportAsync' in i)) return null;
   let n = new Blob([await i?.exportAsync({
     format: 'PNG',

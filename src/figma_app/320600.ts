@@ -27,7 +27,7 @@ import { isDevEnvironment } from "../figma_app/169182";
 import { handleAtomEvent } from "../905/502364";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Point } from "../905/736624";
-import { cH } from "../figma_app/451396";
+import { breakInTemplateExecutionAtom } from "../figma_app/451396";
 import { Oq } from "../figma_app/478201";
 import { MW } from "../figma_app/570310";
 import { hideModalHandler, showModalConditional, showModalHandler } from "../905/156213";
@@ -59,7 +59,7 @@ let U = registerModal(function () {
   let t = useCallback(() => {
     e(hideModalHandler());
   }, [e]);
-  let [r, a] = useAtomValueAndSetter(cH);
+  let [r, a] = useAtomValueAndSetter(breakInTemplateExecutionAtom);
   let [o, l] = useAtomValueAndSetter(MW);
   let [d, c] = useAtomValueAndSetter(Oq);
   return jsx(DraggableModalManager, {

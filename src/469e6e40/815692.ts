@@ -79,7 +79,7 @@ import { FeatureFlag } from '../905/652992';
 import { ResourceStatus } from '../905/663269';
 import { In } from '../905/672640';
 import { textDisplayConfig } from '../905/687265';
-import { X as _$$X } from '../905/698965';
+import { navigationRoutes } from '../905/698965';
 import { S3 } from '../905/708054';
 import { ProductTierEnum, RenewalTermEnum } from '../905/712921';
 import { SvgComponent } from '../905/714743';
@@ -159,7 +159,7 @@ import { organizationAPIService } from '../figma_app/617654';
 import { ButtonBasePrimary, BaseLinkComponent, ButtonSecondary, ButtonWhite, SecureLink, BigTextInputForwardRef, ButtonNegative, ButtonBasePrimaryTracked } from '../figma_app/637027';
 import { pL, v0 } from '../figma_app/639088';
 import { DashboardSection } from '../figma_app/650409';
-import { QN, v4 } from '../figma_app/655139';
+import { getSelectedCodegenLanguage, getEffectiveCodegenLanguage } from '../figma_app/655139';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { AuthTypeEnum, UserTypeEnum, ApprovalStatusEnum, USEURegionEnum } from '../figma_app/736948';
 import { stopPropagation } from '../figma_app/753501';
@@ -1888,7 +1888,7 @@ function aj({
         c(selectViewAction({
           view: 'org',
           orgId: o ?? '',
-          orgViewTab: _$$X.PLUGINS
+          orgViewTab: navigationRoutes.PLUGINS
         }));
         c(hideModal());
       } else {
@@ -2222,7 +2222,7 @@ function aq({
   addCodegenPluginCallback: t,
   currentSavedCodeLanguage: a
 }) {
-  let s = v4();
+  let s = getEffectiveCodegenLanguage();
   let i = V0({
     codeLanguage: s,
     onChange: e,
@@ -2268,8 +2268,8 @@ function aB({
   codeExtensionPreferences: e,
   onCustomSettingsChange: t
 }) {
-  let a = v4();
-  let s = QN();
+  let a = getEffectiveCodegenLanguage();
+  let s = getSelectedCodegenLanguage();
   let i = getCodegenPreferencesSettings({
     codeLanguage: a,
     plugin: s,

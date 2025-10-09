@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { wS } from "../figma_app/221240";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { d as _$$d } from "../9410/441456";
 import { showModalHandler } from "../905/156213";
 import { isInvalidValue } from "../905/216495";
@@ -17,7 +17,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { ku, jo, EH } from "../figma_app/241341";
 import { $ } from "../905/330495";
 export function $$C0(e) {
-  let t = uQ();
+  let t = useSingleSelectedKey();
   let {
     backingSymbolGUID
   } = $([e ?? ""]);
@@ -43,7 +43,7 @@ export function $$C0(e) {
 }
 export function $$v2(e) {
   let t = wS();
-  let i = uQ();
+  let i = useSingleSelectedKey();
   let a = useDispatch<AppDispatch>();
   let s = trackFileEventWithStore();
   return useCallback(() => {
@@ -64,7 +64,7 @@ export function $$v2(e) {
 }
 export function $$E1(e, t) {
   let i = selectCurrentUser()?.id;
-  let d = uQ();
+  let d = useSingleSelectedKey();
   let c = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.name.trim(), d);
   let m = useCurrentFileKey();
   let b = useDispatch<AppDispatch>();

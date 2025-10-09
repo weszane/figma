@@ -9,7 +9,7 @@ import { librariesAPI } from '../905/939602';
 import { teamLibraryCache } from '../figma_app/80990';
 import { findCommonStateGroupId } from '../figma_app/164212';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
-import { uQ } from '../figma_app/311375';
+import { useSingleSelectedKey } from '../figma_app/311375';
 import { getContainingStateGroupId } from '../figma_app/505098';
 import { selectOpenFileKey, useOpenFileLibraryKey } from '../figma_app/516028';
 import { setupResourceAtomHandler } from '../figma_app/566371';
@@ -147,7 +147,7 @@ export function $$v3({
     } : {
       status: 'disabled'
     }, [d, n?.symbolId, n?.componentKey, N, t, u, h.status, w, L.status, g, f]);
-  }(uQ());
+  }(useSingleSelectedKey());
   return jsx(S.Provider, {
     value: t,
     children: e

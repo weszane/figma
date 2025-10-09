@@ -2,7 +2,7 @@ import { useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { openUrlInContext } from "../figma_app/976345";
-import { K } from "../905/621769";
+import { getBackingNodeInfo } from "../905/621769";
 import { selectViewAction } from "../905/929976";
 import { useLibraryFileLink } from "../905/217163";
 import { useSceneGraphSelector } from "../figma_app/722362";
@@ -10,14 +10,14 @@ import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { getSelectedView } from "../figma_app/386952";
 import { $ } from "../905/330495";
 import { Bv, wS } from "../figma_app/221240";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { M4 } from "../figma_app/624323";
 export function $$f1({
   navigateToStateGroupIfVariant: e = !1,
   trackingFunction: t,
   assetGuid: r
 }) {
-  let o = uQ();
+  let o = useSingleSelectedKey();
   let {
     singleBackingSymbol,
     singleBackingStateGroup
@@ -58,7 +58,7 @@ export function $$E2() {
     let {
       backingComponentKey,
       backingStateGroupKey
-    } = K(r, e, t);
+    } = getBackingNodeInfo(r, e, t);
     return backingStateGroupKey || backingComponentKey;
   }, [t, e]);
 }
@@ -67,12 +67,12 @@ export function $$y0() {
   let t = getSelectedView();
   let r = useSceneGraphSelector();
   let n = $$E2();
-  let a = uQ();
+  let a = useSingleSelectedKey();
   let _ = useOpenFileLibraryKey();
   let {
     backingLibraryKey,
     backingNodeId
-  } = K(a || "", r, _);
+  } = getBackingNodeInfo(a || "", r, _);
   let f = backingLibraryKey !== _;
   let y = n(a || "");
   let b = useLibraryFileLink({

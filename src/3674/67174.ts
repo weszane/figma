@@ -5,7 +5,7 @@ import { rI, Hf, IN } from "../6658/436658";
 import { k } from "../6658/341273";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lR } from "../figma_app/204145";
-import { Tv } from "../figma_app/311375";
+import { useSceneGraphSelectionKeys } from "../figma_app/311375";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { dh } from "../figma_app/186343";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -17,7 +17,7 @@ export function $$g0() {
     noSelection
   } = function () {
     let e = useDevModeFocusId();
-    let t = Tv();
+    let t = useSceneGraphSelectionKeys();
     let n = dh();
     let a = !e && !t?.length;
     let i = e ? [e] : t?.length ? t : [n];

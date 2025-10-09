@@ -16,8 +16,8 @@ import { debugState } from "../905/407919";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { v4, xv } from "../figma_app/655139";
-import { uQ } from "../figma_app/311375";
+import { getEffectiveCodegenLanguage, getPluginCodeSyntax } from "../figma_app/655139";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { Q } from "../905/217916";
 import { useDevModeFocusId } from "../figma_app/88239";
 import { showModalHandler } from "../905/156213";
@@ -402,10 +402,10 @@ export function $$eI16(e, t, r, n) {
   }(t), r, n);
 }
 export function $$eS25(e, t, r, n) {
-  let i = uQ();
+  let i = useSingleSelectedKey();
   let a = Q();
   let s = isDevHandoffEditorType();
-  let l = v4();
+  let l = getEffectiveCodegenLanguage();
   let {
     variableConsumptionMap
   } = $$et7();
@@ -423,7 +423,7 @@ export function $$eS25(e, t, r, n) {
       rawValue: t
     }
   } : {};
-  let m = xv(h, l.id);
+  let m = getPluginCodeSyntax(h, l.id);
   let g = s && "code" === a.inspectionMode && m ? m : h?.name;
   return {
     variable: h,
@@ -463,9 +463,9 @@ function ev(e, t, r) {
   } : {};
 }
 export function $$eA14(e, t) {
-  let r = uQ();
+  let r = useSingleSelectedKey();
   let n = Q();
-  let i = v4();
+  let i = getEffectiveCodegenLanguage();
   let a = isDevHandoffEditorType();
   let {
     boundVar,
@@ -523,7 +523,7 @@ export function $$eN6(e, t, r, n, i) {
   }(e, t, n.id, i, r) : $$ex29(e, t, n.id, i, r));
 }
 function eC(e, t, r, n, i) {
-  let a = xv(e, r);
+  let a = getPluginCodeSyntax(e, r);
   let s = n && "code" === i && a ? a : e?.name;
   return {
     variable: e,

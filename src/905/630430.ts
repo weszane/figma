@@ -4,7 +4,7 @@ import { noop } from 'lodash-es';
 import { MeasurementUnit } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
-import { v4, AC, Pt } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage, getDevModePluginFromLanguage, getCodegenLanguageFormatter } from "../figma_app/655139";
 import { SupportedPlatforms, WEB } from "../905/359509";
 import { isCodegenSupported, CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { useDevModeValueAndSetter, devModeOptions } from "../905/191741";
@@ -13,7 +13,7 @@ import { getPluginInfo, getUnitLabelForLanguage } from "../figma_app/120227";
 export function $$g0() {
   let [e] = useDevModeValueAndSetter();
   let [t, i] = useState(e);
-  let g = v4();
+  let g = getEffectiveCodegenLanguage();
   let [f, _] = useState({
     ...g
   });
@@ -64,8 +64,8 @@ export function $$g0() {
     }));
     return e;
   }, [y, I, S, x, f]);
-  let C = AC(f);
-  let T = Pt(C);
+  let C = getDevModePluginFromLanguage(f);
+  let T = getCodegenLanguageFormatter(C);
   let k = Z({
     codeLanguage: f,
     onChange: _,

@@ -251,7 +251,7 @@ import { useSendToMakeExperiment } from '../figma_app/297957';
 import { viewportNavigatorContext } from '../figma_app/298911';
 import { getPluginByFileId, getRelaunchablePlugins } from '../figma_app/300692';
 import { startChattingThunk } from '../figma_app/308685';
-import { mJ } from '../figma_app/311375';
+import { getSceneGraphItem } from '../figma_app/311375';
 import { logAndTrackCTA, mapFileToProductType, trackFileEvent } from '../figma_app/314264';
 import { LC, P5 } from '../figma_app/318590';
 import { e as _$$e2, Q as _$$Q } from '../figma_app/320600';
@@ -306,7 +306,7 @@ import { JT } from '../figma_app/632248';
 import { getSubscribedVariableInfo, PrimaryWorkflowEnum } from '../figma_app/633080';
 import { BigTextInputForwardRef } from '../figma_app/637027';
 import { findStyleDataByKey, isSubscribedLibrary } from '../figma_app/646357';
-import { v4, xv } from '../figma_app/655139';
+import { getEffectiveCodegenLanguage, getPluginCodeSyntax } from '../figma_app/655139';
 import { filterNotNullish } from '../figma_app/656233';
 import { LinkMetadataEvent } from '../figma_app/671547';
 import { t4 as _$$t6, Gm } from '../figma_app/675605';
@@ -1994,7 +1994,7 @@ function ib({
       }
     }
   });
-  let k = v4();
+  let k = getEffectiveCodegenLanguage();
   let N = Ig();
   let A = getColorFormat();
   let O = function () {
@@ -2035,7 +2035,7 @@ function ib({
   }), s = 'eyedropper-v2-style', V = [{
     key: 'modifier-1',
     label: 'shift'
-  }]) : B ? (z = P ? xv(B, k.id) ?? B.name : B.name, i = jsx(_$$J3, {
+  }]) : B ? (z = P ? getPluginCodeSyntax(B, k.id) ?? B.name : B.name, i = jsx(_$$J3, {
     className: iy,
     color: D,
     hideBorderShadow: !0
@@ -4991,7 +4991,7 @@ function nY({
   let s = useDispatch<AppDispatch>();
   let u = useSelector(e => e.mirror.appModel);
   let p = getSingletonSceneGraph();
-  let h = mJ(t);
+  let h = getSceneGraphItem(t);
   let m = !!h?.hasReadyStatus;
   let f = !!h?.hasCompletedStatus;
   let g = m || f;

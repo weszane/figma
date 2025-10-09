@@ -24,7 +24,7 @@ import { n as _$$n } from "../draftjs_composer/589474";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { UserAvatar } from "../905/590952";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -33,7 +33,7 @@ import { wV } from "../figma_app/779965";
 import { d as _$$d } from "../905/977713";
 import { uQ as _$$uQ, Vr } from "../figma_app/151869";
 import { getSingletonSceneGraph } from "../905/700578";
-import { B as _$$B } from "../figma_app/821179";
+import { useCodeConnectForInstances } from "../figma_app/821179";
 import { P as _$$P } from "../3592/617429";
 import { hB } from "../figma_app/609511";
 import { cortexAPI } from "../figma_app/432652";
@@ -231,7 +231,7 @@ export function $$el0(e) {
       ignoreSelectedNodeChanges: s
     }) {
       let n = getFeatureFlags().dt_multi_node_code_connect;
-      let o = _$$B();
+      let o = useCodeConnectForInstances();
       let i = _$$uQ();
       let [a, l] = useState(null);
       useEffect(() => {
@@ -520,7 +520,7 @@ export default App
 }
 function ec() {
   let e = selectCurrentFile()?.name || getI18nString("dev_handoff.dev_handoff_view_selector.untitled");
-  let t = uQ();
+  let t = useSingleSelectedKey();
   let s = useDeepEqualSceneValue((e, t) => e?.get(t ?? "")?.name, t);
   return jsx(DialogTitle, {
     children: jsxs("div", {

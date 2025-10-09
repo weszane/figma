@@ -24,14 +24,14 @@ import { parsePxNumber } from "../figma_app/783094";
 import { trackFileEventWithPage, trackFileEventWithUser, trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { getInitialOptions } from "../figma_app/169182";
 import { getViewportInfo, getVisibleArea } from "../figma_app/62612";
-import { mJ, uQ } from "../figma_app/311375";
+import { getSceneGraphItem, useSingleSelectedKey } from "../figma_app/311375";
 import { isDevModeFocusViewActive, isInteractiveInspectionResizing } from "../figma_app/544649";
 import { deactivateActiveComment } from "../figma_app/770088";
 import { Qx, Uu, ZR, Dm } from "../figma_app/8833";
 import { LO } from "../9410/571209";
 import { NW, E_ } from "../figma_app/355754";
 import { annotationVisibilityTracker } from "../figma_app/682945";
-import { XR, uA, FQ, yu, mi, AP, h9, Lw, cD } from "../figma_app/781512";
+import { useAnnotationCategories, getAnnotationCategoryLabel, getAnnotationCategoryColorValue, CATEGORY_COLOR_CONFIG, useUpdateAnnotationCategories, getCategoryPresetColor, getCategoryPresetLabel, getPresetCategoryColorConfig, isAnnotationCategoryLightColor } from "../figma_app/781512";
 import { y as _$$y } from "../905/661502";
 import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -47,7 +47,7 @@ import { o as _$$o } from "../905/89370";
 import { W as _$$W } from "../905/592530";
 import { permissionScopeHandler, scopeAwareFunction as _$$nc } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { getScaledValueWithUnit, getScaledValuesWithUnit } from "../figma_app/120227";
 import { fullscreenValue } from "../figma_app/455680";
 import { getVariableById, getVariablesByIds } from "../figma_app/852050";
@@ -261,7 +261,7 @@ function eF({
   variable: t,
   isPreview: n = !1
 }) {
-  let i = v4();
+  let i = getEffectiveCodegenLanguage();
   let o = getScaledValueWithUnit(i, e?.stackSpacing, eB);
   return t ? n ? jsx(Fragment, {
     children: t.name
@@ -298,7 +298,7 @@ function eV({
   isPreview: n = !1,
   isTextProperty: i = !1
 }) {
-  let o = v4();
+  let o = getEffectiveCodegenLanguage();
   let l = getScaledValuesWithUnit(o, e, eB, {
     isTextProperty: i
   });
@@ -512,7 +512,7 @@ function eK({
 function eZ(e, t) {
   let n = useSelector(e => e.library);
   let a = getValidStyleNodeId(e);
-  let i = mJ(a);
+  let i = getSceneGraphItem(a);
   if (!e || !a || !i) return null;
   let o = getStyleSubscriptionInfo(e.key, [a], n);
   if (!o) return null;
@@ -822,7 +822,7 @@ function ts({
   styleRef: e
 }) {
   let t = getValidStyleNodeId(e);
-  let n = mJ(t);
+  let n = getSceneGraphItem(t);
   return t && n ? jsx("div", {
     children: n.name
   }) : null;
@@ -862,7 +862,7 @@ function th({
   isPreview: n
 }) {
   let i = getVariableById(t?.id);
-  let o = v4();
+  let o = getEffectiveCodegenLanguage();
   let l = "mixed" !== e && "PIXELS" === e.units ? e.value : void 0;
   let s = getScaledValueWithUnit(o, l, tp, {
     isTextProperty: !0
@@ -1821,7 +1821,7 @@ function tL({
   isTextProperty: i = !1
 }) {
   let o = getVariableById(t?.id);
-  let l = v4();
+  let l = getEffectiveCodegenLanguage();
   let s = getScaledValueWithUnit(l, "number" == typeof e ? e : void 0, tP, {
     isTextProperty: i
   });
@@ -1842,7 +1842,7 @@ function tR({
   isTextProperty: i = !1
 }) {
   let o = getVariableById(t?.id);
-  let l = v4();
+  let l = getEffectiveCodegenLanguage();
   let s = getScaledValueWithUnit(l, "mixed" === e ? void 0 : e.value, tP, {
     isTextProperty: i
   });
@@ -1868,7 +1868,7 @@ function tD({
   styleRef: e
 }) {
   let t = getValidStyleNodeId(e);
-  let n = mJ(t);
+  let n = getSceneGraphItem(t);
   return n ? jsx(Fragment, {
     children: n.name
   }) : null;
@@ -1906,7 +1906,7 @@ function tB(e) {
   let c = tO();
   let u = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
   let h = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
-  let f = XR();
+  let f = useAnnotationCategories();
   let g = trackFileEventWithUser();
   let x = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
   let m = {
@@ -1958,14 +1958,14 @@ function tB(e) {
       isChecked: !x,
       recordingKey: "showAllAnnotationCategories"
     }, _$$w, ...f.map(e => {
-      let t = uA(e);
+      let t = getAnnotationCategoryLabel(e);
       return {
         displayText: t,
         displayTextClassName: "annotation_context_menu--annotationCategoryLabel--mWwoF",
         icon: jsx("div", {
           className: "annotation_context_menu--annotationsCategoryIcon--hD0eJ",
           style: {
-            backgroundColor: FQ(e) ?? void 0
+            backgroundColor: getAnnotationCategoryColorValue(e) ?? void 0
           }
         }),
         isChecked: e.id === x,
@@ -2138,12 +2138,12 @@ function nk({
         children: nw.map(e => jsx(MenuItemPrimitive, {
           onClick: () => T(e),
           className: A()("annotation_categories_edit_window--colorOption--24Kum", {
-            [n_]: r?.color === yu[e].color
+            [n_]: r?.color === CATEGORY_COLOR_CONFIG[e].color
           }),
           children: jsx("div", {
             className: nx,
             style: {
-              backgroundColor: yu[e].color
+              backgroundColor: CATEGORY_COLOR_CONFIG[e].color
             }
           })
         }, e))
@@ -2220,8 +2220,8 @@ let nA = registerModal(function (e) {
     open,
     onClose
   });
-  let d = XR();
-  let c = mi();
+  let d = useAnnotationCategories();
+  let c = useUpdateAnnotationCategories();
   let [u, p] = useState([]);
   let [h, f] = useState({});
   let [g, x] = useState([]);
@@ -2230,7 +2230,7 @@ let nA = registerModal(function (e) {
     d && (p(d.map(e => e.id)), f(d.reduce((e, t) => (e[t.id] = t, e), {})));
   }, [d]);
   let v = useMemo(() => {
-    let e = new Set(Object.values(h).map(e => e.preset === IssueCategory.NONE ? e.custom?.color : AP(e.preset)).filter(isNotNullish));
+    let e = new Set(Object.values(h).map(e => e.preset === IssueCategory.NONE ? e.custom?.color : getCategoryPresetColor(e.preset)).filter(isNotNullish));
     return nw.find(t => !e.has(t)) ?? ColorPalette.GREEN;
   }, [h]);
   let [y, b] = useState(null);
@@ -2276,7 +2276,7 @@ let nA = registerModal(function (e) {
     position === Nz.BEFORE ? p(t => [...t.slice(0, e), dragItem.categoryId, ...t.slice(e)].filter((t, n) => t !== dragItem.categoryId || n === e)) : p(t => [...t.slice(0, e + 1), dragItem.categoryId, ...t.slice(e + 1)].filter((t, n) => t !== dragItem.categoryId || n === e + 1));
     let s = h[dragItem.categoryId];
     s && t("reorder_annotation_category", {
-      category: s.preset === IssueCategory.NONE ? s.custom?.label ?? null : h9(s.preset),
+      category: s.preset === IssueCategory.NONE ? s.custom?.label ?? null : getCategoryPresetLabel(s.preset),
       oldRank: l,
       newRank: e
     });
@@ -2309,7 +2309,7 @@ let nA = registerModal(function (e) {
   let F = useCallback(e => {
     if (g.includes(e)) x(t => t.filter(t => t !== e));else {
       let t = h[e];
-      t && _(e => [...e, t.preset === IssueCategory.NONE ? t.custom?.label ?? "" : h9(t.preset)]);
+      t && _(e => [...e, t.preset === IssueCategory.NONE ? t.custom?.label ?? "" : getCategoryPresetLabel(t.preset)]);
     }
     p(t => t.filter(t => t !== e));
     f(t => {
@@ -2329,16 +2329,16 @@ let nA = registerModal(function (e) {
         preset: IssueCategory.NONE,
         custom: {
           ...(a.preset === IssueCategory.NONE ? a.custom : {
-            label: h9(a.preset),
-            color: AP(a.preset)
+            label: getCategoryPresetLabel(a.preset),
+            color: getCategoryPresetColor(a.preset)
           }),
           color: n
         }
       }
     })), t("edit_annotation_category_color", {
-      category: a.preset === IssueCategory.NONE ? a.custom?.label ?? null : h9(a.preset),
+      category: a.preset === IssueCategory.NONE ? a.custom?.label ?? null : getCategoryPresetLabel(a.preset),
       newColor: n,
-      oldColor: a.preset === IssueCategory.NONE ? a.custom?.color : AP(a.preset)
+      oldColor: a.preset === IssueCategory.NONE ? a.custom?.color : getCategoryPresetColor(a.preset)
     }));
   }, [h, t]);
   let H = useCallback((e, n) => {
@@ -2350,15 +2350,15 @@ let nA = registerModal(function (e) {
         preset: IssueCategory.NONE,
         custom: {
           ...(a.preset === IssueCategory.NONE ? a.custom : {
-            label: h9(a.preset),
-            color: AP(a.preset)
+            label: getCategoryPresetLabel(a.preset),
+            color: getCategoryPresetColor(a.preset)
           }),
           label: n
         }
       }
     })), t("edit_annotation_category_name", {
       newCategory: n,
-      oldCategory: a.preset === IssueCategory.NONE ? a.custom?.label : h9(a.preset)
+      oldCategory: a.preset === IssueCategory.NONE ? a.custom?.label : getCategoryPresetLabel(a.preset)
     }));
   }, [h, t]);
   let W = useCallback(() => {
@@ -2425,12 +2425,12 @@ let nA = registerModal(function (e) {
               let n = h[e];
               return n ? jsx(nk, {
                 categoryId: e,
-                color: n.preset === IssueCategory.NONE ? n.custom?.color !== void 0 ? yu[n.custom.color] : void 0 : Lw(n.preset),
+                color: n.preset === IssueCategory.NONE ? n.custom?.color !== void 0 ? CATEGORY_COLOR_CONFIG[n.custom.color] : void 0 : getPresetCategoryColorConfig(n.preset),
                 dragging: C,
                 index: t,
                 isLastItem: t === u.length - 1,
                 isSelected: w === e,
-                label: n.preset === IssueCategory.NONE ? n.custom?.label : h9(n.preset),
+                label: n.preset === IssueCategory.NONE ? n.custom?.label : getCategoryPresetLabel(n.preset),
                 onColorChange: z,
                 onDragEnd: R,
                 onDragStart: L,
@@ -2490,7 +2490,7 @@ function nB({
   isFadedOut: n,
   suggestions: i
 }) {
-  let o = uQ() === e;
+  let o = useSingleSelectedKey() === e;
   let l = e => {
     e && (clearSelection(), _$$S3("annotations"), addToSelection([e]));
   };
@@ -2638,7 +2638,7 @@ let nK = {
     nodeInfo: e,
     isFadedOut: t
   }) {
-    let n = uQ() === e.nodeId;
+    let n = useSingleSelectedKey() === e.nodeId;
     let i = function (e) {
       let t = useAtomWithSubscription(nU(e));
       return t?.managedStringData.key;
@@ -2804,7 +2804,7 @@ function n$({
   let [P, L] = useState(!1);
   let R = LZ();
   let D = useCurrentTool();
-  let O = uQ();
+  let O = useSingleSelectedKey();
   let M = O === e;
   let {
     data
@@ -2910,7 +2910,7 @@ function n2({
     let n = !!useDevModeFocusId();
     let a = isDevHandoffEditorType();
     let o = isDesignFileType();
-    let l = XR();
+    let l = useAnnotationCategories();
     return useCallback((i, s, r, d) => {
       permissionScopeHandler.user(r ? "edit-annotation" : "create-annotation", () => {
         r ? i.updateAnnotation(d, s) : i.addAnnotation(s);
@@ -2925,7 +2925,7 @@ function n2({
           isDevModeFocusView: n,
           isDevMode: a,
           isDesignMode: o,
-          category: u ? uA(u) : void 0,
+          category: u ? getAnnotationCategoryLabel(u) : void 0,
           annotationId: d
         };
         r ? e("edit_annotation", p) : (e("create_annotation", p), Sprig("track", "create_annotation", {
@@ -2940,7 +2940,7 @@ function n2({
   let y = tO();
   let b = Xr(_$$m);
   let j = useStrictDeepEqualSceneValue((e, t) => e.get(t)?.annotations, e);
-  let w = XR({
+  let w = useAnnotationCategories({
     initializeIfNull: !0
   });
   let N = j?.[r];
@@ -2950,7 +2950,7 @@ function n2({
   let P = useMemo(() => {
     if (!T) return null;
     let e = w.find(e => e.id === T);
-    return e ? FQ(e) : null;
+    return e ? getAnnotationCategoryColorValue(e) : null;
   }, [T, w]);
   useEffect(() => {
     T && S(w.find(e => e.id === T)?.id ?? null);
@@ -3036,7 +3036,7 @@ function n5({
   } = _$$B2("annotation-property-selector-dropdown");
   let D = tO();
   let O = useRef(null);
-  let M = XR();
+  let M = useAnnotationCategories();
   let F = useDeepEqualSceneValue((e, t) => e.get(t)?.type || null, e);
   let z = useStrictDeepEqualSceneValue((e, t, n) => {
     let a = {};
@@ -3081,9 +3081,9 @@ function n5({
   let Z = useCallback(t => {
     let a = getSingletonSceneGraph().get(e);
     let i = u ? M.find(e => e.id === u) : null;
-    let l = i ? uA(i) : null;
+    let l = i ? getAnnotationCategoryLabel(i) : null;
     let s = t ? M.find(e => e.id === t) : null;
-    let r = s ? uA(s) : null;
+    let r = s ? getAnnotationCategoryLabel(s) : null;
     if (a) {
       let e = findVisibleSectionChild(getSingletonSceneGraph(), a.guid);
       y("select_annotation_category", {
@@ -3157,14 +3157,14 @@ function n5({
   }, [isDropdownShown, toggleDropdown, n, d, j, w, b, e, y, x, Sprig]);
   let es = useMemo(() => M.map(e => ({
     id: e.id,
-    label: uA(e),
-    color: FQ(e)
+    label: getAnnotationCategoryLabel(e),
+    color: getAnnotationCategoryColorValue(e)
   })) ?? [], [M]);
   let er = useMemo(() => M.find(e => e.id === u), [M, u]);
   let ed = useRef(null);
   let ec = ed.current && ed.current.scrollHeight > ed.current.clientHeight;
   let eu = {
-    "--annotation-category-color": er ? FQ(er) ?? "var(--color-bg)" : "var(--color-bg)"
+    "--annotation-category-color": er ? getAnnotationCategoryColorValue(er) ?? "var(--color-bg)" : "var(--color-bg)"
   };
   let eg = useCallback(() => {
     y("click_edit_annotation_categories", {
@@ -3338,7 +3338,7 @@ function n5({
             className: "annotation--headerRowLeft--iIqjN",
             children: jsxs(RecordableButton, {
               className: A()("annotation--categorySelectorButton--q2A6p", {
-                [ex]: er && cD(er),
+                [ex]: er && isAnnotationCategoryLightColor(er),
                 [ep]: !!er
               }),
               onMouseDown: el,
@@ -3352,7 +3352,7 @@ function n5({
               "aria-expanded": isDropdownShown,
               children: [jsx("span", {
                 className: "annotation--categorySelectorButtonLabel--xGX7w annotation--_ellipsis--8F1VE",
-                children: er ? uA(er) : getI18nString("dev_handoff.annotations.no_category_option_label")
+                children: er ? getAnnotationCategoryLabel(er) : getI18nString("dev_handoff.annotations.no_category_option_label")
               }), jsx(SvgComponent, {
                 className: "annotation--caret--noLOu",
                 svg: _$$A14
@@ -3615,7 +3615,7 @@ let aa = memo(function ({
     }
   } = t;
   let f = trackFileEventWithPage();
-  let x = uQ();
+  let x = useSingleSelectedKey();
   let m = useCurrentTool();
   let v = x === nodeId;
   let [b, j] = useAtomValueAndSetter(_$$m);
@@ -3670,7 +3670,7 @@ let aa = memo(function ({
       }
     }));
   }, [D, nodeId, annotationIndex, e]);
-  let W = XR();
+  let W = useAnnotationCategories();
   let G = useStrictDeepEqualSceneValue((e, t) => {
     let n = e.get(t);
     return n ? {
@@ -3693,7 +3693,7 @@ let aa = memo(function ({
   } = J;
   let Y = W.find(e => e.id === J.categoryId);
   let Z = {
-    "--annotation-category-color": Y ? FQ(Y) ?? "var(--color-bg)" : "var(--color-bg)"
+    "--annotation-category-color": Y ? getAnnotationCategoryColorValue(Y) ?? "var(--color-bg)" : "var(--color-bg)"
   };
   let $ = detectEditorStateFormat(J.label);
   return jsxs(RecordableDiv, {
@@ -3730,10 +3730,10 @@ let aa = memo(function ({
       className: "annotation--annotationHeader--GXEj5",
       children: jsx("div", {
         className: A()("annotation--categoryLabel--7VWuC", {
-          [ex]: cD(Y)
+          [ex]: isAnnotationCategoryLightColor(Y)
         }),
         dir: "auto",
-        children: uA(Y)
+        children: getAnnotationCategoryLabel(Y)
       })
     }), jsxs("div", {
       className: A()(ef, eh),
@@ -3939,7 +3939,7 @@ z-index: 100;
 }
 function aj() {
   let e = useDispatch<AppDispatch>();
-  let t = uQ();
+  let t = useSingleSelectedKey();
   let n = useSelector(e => e.isFullscreenDocumentLoaded);
   let c = useCurrentTool();
   let f = getViewportInfo({
@@ -3965,7 +3965,7 @@ function aj() {
     annotationsBeingViewed,
     newAnnotationNodeInfo
   } = function (e, t) {
-    let n = uQ();
+    let n = useSingleSelectedKey();
     let a = LO();
     let c = useAtomWithSubscription(_$$m);
     let p = NW();
@@ -3981,8 +3981,8 @@ function aj() {
       let n = getObservableOrFallback(AppStateTsApi.annotationObserver().annotationInfoByTlf);
       let a = v([...n.keys()]);
       let i = useAtomWithSubscription(_$$m);
-      let l = uQ();
-      let c = XR();
+      let l = useSingleSelectedKey();
+      let c = useAnnotationCategories();
       let p = useSceneGraphSelector();
       let h = null !== i ? l : null;
       let f = null !== i ? e : void 0;
@@ -4022,7 +4022,7 @@ function aj() {
                       annotationIndex: n,
                       isUnAuthored: !1,
                       category: i,
-                      categoryColor: i && FQ(i) || void 0
+                      categoryColor: i && getAnnotationCategoryColorValue(i) || void 0
                     }
                   });
                 });

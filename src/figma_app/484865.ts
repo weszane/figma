@@ -1,310 +1,463 @@
-import { GET_CODE_CONNECT_MAP } from "../figma_app/728005";
+import { reportError } from "../905/11";
+import { searchAPIHandler } from "../905/144933";
 import { ServiceCategories } from "../905/165054";
-import { atomStoreManager } from "../figma_app/27355";
+import { getPlanFeaturesTeamAtomFamily } from "../905/276025";
+import { mapPlatformToFramework } from "../905/359509";
+import { trackToolCallDuration } from "../905/372596";
 import { debugState } from "../905/407919";
 import { subscribeAndAwaitData } from "../905/553831";
-import { setupResourceAtomHandler } from "../figma_app/566371";
-import { reportError } from "../905/11";
-import { A } from "../905/963262";
-import { qZ } from "../figma_app/451396";
-import { XP } from "../figma_app/655139";
-import { mapPlatformToFramework } from "../905/359509";
-import { r as _$$r } from "../figma_app/821179";
-import { trackDefinedFileEvent } from "../figma_app/314264";
-import { selectOpenFileKey, selectOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { waitForAtomStore } from "../905/618914";
-import { PreloadCodeConnectLk, FileCanAccessFullCodeConnect } from "../figma_app/43951";
-import { getPlanFeaturesTeamAtomFamily } from "../905/276025";
-import { searchAPIHandler } from "../905/144933";
-import { getBackingNodeInfo, collectInstanceKeys, selectCodeConnectDoc, findBestMatchingVariant } from "../figma_app/97042";
-import { codeConnectToolsEnabledAtom, isCodebaseSuggestionsEnabled, additionalStateAtom1, additionalStateAtom2 } from "../figma_app/342355";
-import { w6 } from "../905/372596";
-function v(e, t, r, n = new Set()) {
-  let i = selectOpenFileKey(t);
-  let a = t.mirror.sceneGraph;
-  let s = selectOpenFileLibraryKey(t);
-  if (!e) throw Error("No node provided");
-  if (!a) throw Error("No sceneGraph provided");
-  if (!i) throw Error("No fileKey provided");
-  if (!s) throw Error("No openLibraryKey provided");
-  let o = _$$r(e, [], n);
-  let l = new Map();
-  !function (e, t, r, n, i, a) {
-    for (let s of t) try {
-      let {
-        backingNodeId,
-        backingLibraryKey,
-        backingComponentKey,
-        backingStateGroupKey
-      } = getBackingNodeInfo(s.guid, r, i);
-      let d = collectInstanceKeys(s.guid, r, n, !1, i);
-      if (!backingLibraryKey || !backingNodeId) continue;
-      let c = {
-        nodeToFetch: s,
-        backingNodeId,
-        backingComponentKey,
-        backingStateGroupKey,
-        instanceList: d
+import { processOutputSections } from "../905/963262";
+import { atomStoreManager } from "../figma_app/27355";
+import { FileCanAccessFullCodeConnect, PreloadCodeConnectLk } from "../figma_app/43951";
+import { collectInstanceKeys, findBestMatchingVariant, getBackingNodeInfo, selectCodeConnectDoc } from "../figma_app/97042";
+import { trackDefinedFileEvent } from "../figma_app/314264";
+import { mockCodeConnect, mockCodebaseSuggestions, codeConnectToolsEnabledAtom, isCodebaseSuggestionsEnabled } from "../figma_app/342355";
+import { generateInstanceCode } from "../figma_app/451396";
+import { selectOpenFileKey, selectOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
+import { setupResourceAtomHandler } from "../figma_app/566371";
+import { normalizeCodegenLanguage } from "../figma_app/655139";
+import { GET_CODE_CONNECT_MAP } from "../figma_app/728005";
+import { collectInstanceAndSymbolNodes } from "../figma_app/821179";
+import type { SceneGraph } from "./175377";
+// Origin: /Users/allen/sigma-main/src/figma_app/484865.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified loops, added comments, improved readability, and ensured type safety.
+
+// Assumed dependencies: All imported modules exist and provide the expected APIs/types.
+
+
+interface INode {
+  guid: string;
+  // Add other properties as needed
+  [key: string]: any;
+}
+interface InstanceKey {
+  // Structure inferred from usage
+  [key: string]: any;
+}
+interface BackingNodeInfo {
+  backingNodeId: string;
+  backingLibraryKey: string;
+  backingComponentKey?: string;
+  backingStateGroupKey?: string;
+}
+interface NodeBatchItem {
+  nodeToFetch: INode;
+  backingNodeId: string;
+  backingComponentKey?: string;
+  backingStateGroupKey?: string;
+  instanceList: InstanceKey[];
+}
+interface CodeConnectContent {
+  componentName: string;
+  source: string;
+  snippet: string | null;
+  snippetImports: any;
+  version: string;
+  label: string;
+}
+interface CodeConnectMappingResult {
+  fileKey: string;
+  openLibraryKey: string;
+  nodesByLibraryKey: Map<string, NodeBatchItem[]>;
+  sceneGraph: SceneGraph;
+}
+interface CodeConnectBulkSuggestion {
+  assets: Array<{
+    key: string;
+    type: string;
+    library_key: string;
+  }>;
+  planParentType: string;
+  planParentId: string;
+  numResultsPerAsset: number;
+}
+interface CodeSuggestionResult {
+  name: string;
+  src_path?: string;
+}
+interface CodeConnectDoc {
+  figmadoc: string;
+  label?: string;
+  type?: string;
+  component?: string;
+  source?: string;
+  templateData?: {
+    imports?: any[];
+  };
+  template?: any;
+}
+interface InstanceFigmadocs {
+  [key: string]: any;
+}
+interface OParams {
+  batch: NodeBatchItem[];
+  result: any;
+  libraryKey: string;
+  fileKey: string;
+  openLibraryKey: string;
+  sceneGraph: SceneGraph;
+  label: string;
+  nodeIdToCodeConnectContent: Record<string, CodeConnectContent>;
+  nodeIdToErrors: Record<string, string>;
+}
+
+// Helper to collect mapping of nodes by library key
+function prepareNodesByLibraryKey(nodesByLibraryKey: Map<string, NodeBatchItem[]>, nodes: INode[], sceneGraph: SceneGraph, fileKey: string, openLibraryKey: string, nodeIdToErrors: Record<string, string>) {
+  for (const node of nodes) {
+    try {
+      const backingInfo: BackingNodeInfo = getBackingNodeInfo(node.guid, sceneGraph, openLibraryKey);
+      const instanceList: InstanceKey[] = collectInstanceKeys(node.guid, sceneGraph, fileKey, false, openLibraryKey);
+      if (!backingInfo.backingLibraryKey || !backingInfo.backingNodeId) continue;
+      const batchItem: NodeBatchItem = {
+        nodeToFetch: node,
+        backingNodeId: backingInfo.backingNodeId,
+        backingComponentKey: backingInfo.backingComponentKey,
+        backingStateGroupKey: backingInfo.backingStateGroupKey,
+        instanceList
       };
-      e.has(backingLibraryKey) || e.set(backingLibraryKey, []);
-      e.get(backingLibraryKey).push(c);
-    } catch (e) {
-      console.error(`Error while preparing Code Connect mapping for node ${s.guid}:`, e instanceof Error ? e.message : String(e));
-      a[s.guid] = `${e instanceof Error ? e.message : String(e)}`;
+      if (!nodesByLibraryKey.has(backingInfo.backingLibraryKey)) {
+        nodesByLibraryKey.set(backingInfo.backingLibraryKey, []);
+      }
+      nodesByLibraryKey.get(backingInfo.backingLibraryKey)!.push(batchItem);
+    } catch (err) {
+      console.error(`Error while preparing Code Connect mapping for node ${node.guid}:`, err instanceof Error ? err.message : String(err));
+      nodeIdToErrors[node.guid] = `${err instanceof Error ? err.message : String(err)}`;
     }
-  }(l, o, a, i, s, r);
+  }
+}
+
+// Main function to collect mapping info for code connect
+function collectCodeConnectMapping(node: INode, storeContext: any, nodeIdToErrors: Record<string, string>, filterGuids: Set<string> = new Set()): CodeConnectMappingResult {
+  const fileKey = selectOpenFileKey(storeContext);
+  const sceneGraph = storeContext.mirror.sceneGraph;
+  const openLibraryKey = selectOpenFileLibraryKey(storeContext);
+  if (!node) throw new Error("No node provided");
+  if (!sceneGraph) throw new Error("No sceneGraph provided");
+  if (!fileKey) throw new Error("No fileKey provided");
+  if (!openLibraryKey) throw new Error("No openLibraryKey provided");
+  const nodes = collectInstanceAndSymbolNodes(node, [], filterGuids);
+  const nodesByLibraryKey = new Map<string, NodeBatchItem[]>();
+  prepareNodesByLibraryKey(nodesByLibraryKey, nodes, sceneGraph, fileKey, openLibraryKey, nodeIdToErrors);
   return {
-    fileKey: i,
-    openLibraryKey: s,
-    nodesByLibraryKey: l,
-    sceneGraph: a
+    fileKey,
+    openLibraryKey,
+    nodesByLibraryKey,
+    sceneGraph
   };
 }
-export async function $$A2(e, t) {
-  if (!(t === GET_CODE_CONNECT_MAP || atomStoreManager.get(codeConnectToolsEnabledAtom))) return [[{}, {}], [{}, {}]];
+
+// Refactored async function for main code connect mapping logic
+export async function getCodeConnectMapping(toolName: string, context: any): Promise<[[Record<string, any>, Record<string, any>], [Record<string, any>, Record<string, any>]]> {
+  if (!(context === GET_CODE_CONNECT_MAP || atomStoreManager.get(codeConnectToolsEnabledAtom))) {
+    return [[{}, {}], [{}, {}]];
+  }
   try {
-    let r = performance.now();
-    let [n, i] = await x(e);
-    if (w6("code_connect_mapping", performance.now() - r, t), isCodebaseSuggestionsEnabled()) {
-      let t = new Set(n?.[0] ? Object.keys(n[0]) : []);
-      let [r, a] = await N(e, t);
-      return [[n, i], [r, a]];
+    const startTime = performance.now();
+    const [nodeIdToCodeConnectContent, nodeIdToErrors] = await fetchCodeConnectMapping(toolName);
+    trackToolCallDuration("code_connect_mapping", performance.now() - startTime, context);
+    if (isCodebaseSuggestionsEnabled()) {
+      const guids = new Set(nodeIdToCodeConnectContent?.[0] ? Object.keys(nodeIdToCodeConnectContent[0]) : []);
+      const [suggestions, suggestionErrors] = await fetchCodebaseSuggestions(toolName, guids);
+      return [[nodeIdToCodeConnectContent, nodeIdToErrors], [suggestions, suggestionErrors]];
     }
-    return [[n, i], [{}, {}]];
-  } catch (e) {
-    reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
+    return [[nodeIdToCodeConnectContent, nodeIdToErrors], [{}, {}]];
+  } catch (err) {
+    reportError(ServiceCategories.DEVELOPER_TOOLS, err, {
       extra: {
-        toolName: t
+        toolName
       }
     });
     return [[{}, {}], [{}, {}]];
   }
 }
-async function x(e) {
-  let t = atomStoreManager.get(additionalStateAtom1);
-  if (t) return [t, {}];
-  let r = {};
-  let n = {};
-  let i = debugState.getState();
-  let l = i.mirror.appModel.devHandoffCodeLanguage;
-  let d = XP(l);
-  let c = mapPlatformToFramework(d.id);
-  let {
+
+// Fetches code connect mapping for nodes
+async function fetchCodeConnectMapping(toolName: INode): Promise<[Record<string, any>, Record<string, any>]> {
+  const cached = atomStoreManager.get(mockCodeConnect);
+  if (cached) return [cached, {}];
+  const nodeIdToCodeConnectContent: Record<string, any> = {};
+  const nodeIdToErrors: Record<string, string> = {};
+  const state = debugState.getState();
+  const devHandoffCodeLanguage = state.mirror.appModel.devHandoffCodeLanguage;
+  const normalizedLanguage = normalizeCodegenLanguage(devHandoffCodeLanguage);
+  const frameworkLabel = mapPlatformToFramework(normalizedLanguage.id);
+  const {
     fileKey,
     nodesByLibraryKey,
     openLibraryKey,
     sceneGraph
-  } = v(e, i, n);
-  for (let [e, t] of nodesByLibraryKey) for (let i = 0; i < t.length; i += 20) {
-    let a = t.slice(i, i + 20);
-    try {
-      let t = await subscribeAndAwaitData(PreloadCodeConnectLk, {
-        nodes: Array.from(new Set(a.map(t => `${e},${t.backingNodeId}`).concat(a.map(e => e.instanceList).flat()))),
-        openFileKey: fileKey
-      });
-      await O({
-        batch: a,
-        result: t,
-        libraryKey: e,
-        fileKey,
-        openLibraryKey,
-        sceneGraph,
-        label: c,
-        nodeIdToCodeConnectContent: r,
-        nodeIdToErrors: n
-      });
-    } catch (e) {
-      for (let t of a) {
-        console.error(`Error while fetching batch for node ${t.nodeToFetch.guid}:`, e instanceof Error ? e.message : String(e));
-        n[t.nodeToFetch.guid] = `${e instanceof Error ? e.message : String(e)}`;
+  } = collectCodeConnectMapping(toolName, state, nodeIdToErrors);
+  for (const [libraryKey, batchItems] of nodesByLibraryKey) {
+    for (let i = 0; i < batchItems.length; i += 20) {
+      const batch = batchItems.slice(i, i + 20);
+      try {
+        const preloadResult = await subscribeAndAwaitData(PreloadCodeConnectLk, {
+          nodes: Array.from(new Set(batch.map(item => `${libraryKey},${item.backingNodeId}`).concat(batch.map(item => item.instanceList).flat()))),
+          openFileKey: fileKey
+        });
+        await processCodeConnectBatch({
+          batch,
+          result: preloadResult,
+          libraryKey,
+          fileKey,
+          openLibraryKey,
+          sceneGraph,
+          label: frameworkLabel,
+          nodeIdToCodeConnectContent,
+          nodeIdToErrors
+        });
+      } catch (err) {
+        for (const item of batch) {
+          console.error(`Error while fetching batch for node ${item.nodeToFetch.guid}:`, err instanceof Error ? err.message : String(err));
+          nodeIdToErrors[item.nodeToFetch.guid] = `${err instanceof Error ? err.message : String(err)}`;
+        }
       }
     }
   }
-  return [r, n];
+  return [nodeIdToCodeConnectContent, nodeIdToErrors];
 }
-async function N(e, t) {
-  let r = atomStoreManager.get(additionalStateAtom2);
-  if (r) return [r, {}];
-  let n = {};
-  let i = {};
-  let o = debugState.getState();
-  let l = await waitForAtomStore(getPlanFeaturesTeamAtomFamily(!0));
-  let {
+
+// Fetches codebase suggestions for nodes
+async function fetchCodebaseSuggestions(toolName: string, guids: Set<string>): Promise<[Record<string, any>, Record<string, any>]> {
+  const cached = atomStoreManager.get(mockCodebaseSuggestions);
+  if (cached) return [cached, {}];
+  const suggestions: Record<string, any> = {};
+  const suggestionErrors: Record<string, string> = {};
+  const state = debugState.getState();
+  const planFeatures = await waitForAtomStore(getPlanFeaturesTeamAtomFamily(true));
+  const {
     nodesByLibraryKey
-  } = v(e, o, i, t);
-  let c = new Map();
-  for (let [e, t] of nodesByLibraryKey.entries()) for (let r of t) {
-    let t;
-    (t = r.backingStateGroupKey ? {
-      type: "state_group",
-      key: r.backingStateGroupKey
-    } : r.backingComponentKey ? {
-      type: "component",
-      key: r.backingComponentKey
-    } : null) && (c.has(t.key) || c.set(t.key, {
-      type: t.type,
-      libraryKey: e,
-      nodes: []
-    }), c.get(t.key).nodes.push(r.nodeToFetch));
+  } = collectCodeConnectMapping(toolName, state, suggestionErrors, guids);
+
+  // Map of asset key to asset info
+  const assetMap = new Map<string, {
+    type: string;
+    libraryKey: string;
+    nodes: INode[];
+  }>();
+  for (const [libraryKey, batchItems] of nodesByLibraryKey.entries()) {
+    for (const item of batchItems) {
+      let assetInfo: {
+        type: string;
+        key: string;
+      } | null = null;
+      if (item.backingStateGroupKey) {
+        assetInfo = {
+          type: "state_group",
+          key: item.backingStateGroupKey
+        };
+      } else if (item.backingComponentKey) {
+        assetInfo = {
+          type: "component",
+          key: item.backingComponentKey
+        };
+      }
+      if (assetInfo) {
+        if (!assetMap.has(assetInfo.key)) {
+          assetMap.set(assetInfo.key, {
+            type: assetInfo.type,
+            libraryKey,
+            nodes: []
+          });
+        }
+        assetMap.get(assetInfo.key)!.nodes.push(item.nodeToFetch);
+      }
+    }
   }
-  let u = Array.from(c.entries());
-  for (let t = 0; t < u.length; t += 20) {
-    let r = u.slice(t, t + 20);
-    if (0 === r.length) continue;
-    let a = {
-      assets: r.map(([e, {
-        type: t,
-        libraryKey: r
+  const assetEntries = Array.from(assetMap.entries());
+  for (let i = 0; i < assetEntries.length; i += 20) {
+    const batch = assetEntries.slice(i, i + 20);
+    if (batch.length === 0) continue;
+    const bulkSuggestion: CodeConnectBulkSuggestion = {
+      assets: batch.map(([key, {
+        type,
+        libraryKey
       }]) => ({
-        key: e,
-        type: t,
-        library_key: r
+        key,
+        type,
+        library_key: libraryKey
       })),
-      planParentType: l.key.type,
-      planParentId: l.key.parentId ?? "",
+      planParentType: planFeatures.key.type,
+      planParentId: planFeatures.key.parentId ?? "",
       numResultsPerAsset: 3
     };
     try {
-      let e = await searchAPIHandler.getCodeSuggestionsBulk(a);
-      Object.entries(e.data.meta.results ?? {}).forEach(([e, t]) => {
-        let r = c.get(e);
-        if (!r) return;
-        let i = t.map(e => ({
-          componentName: e.name,
-          source: e.src_path ?? ""
+      const apiResult = await searchAPIHandler.getCodeSuggestionsBulk(bulkSuggestion);
+      Object.entries(apiResult.data.meta.results ?? {}).forEach(([key, results]) => {
+        const asset = assetMap.get(key);
+        if (!asset) return;
+        const mappedResults = (results as CodeSuggestionResult[]).map(result => ({
+          componentName: result.name,
+          source: result.src_path ?? ""
         }));
-        r.nodes.forEach(e => {
-          n[e.guid] = i;
+        asset.nodes.forEach(node => {
+          suggestions[node.guid] = mappedResults;
         });
       });
-    } catch (t) {
-      console.error(`Error while fetching codebase suggestions for node ${e.guid}:`, t instanceof Error ? t.message : String(t));
-      i[e.guid] = `${t instanceof Error ? t.message : String(t)}`;
+    } catch (err) {
+      console.error(`Error while fetching codebase suggestions for node ${toolName}:`, err instanceof Error ? err.message : String(err));
+      suggestionErrors[toolName] = `${err instanceof Error ? err.message : String(err)}`;
     }
   }
-  return [n, i];
+  return [suggestions, suggestionErrors];
 }
-export function $$C0() {
-  let e = useCurrentFileKey();
-  let [t] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
-    key: e ?? ""
+
+// Checks if the current file can access full Code Connect
+export function canAccessFullCodeConnect(): boolean {
+  const fileKey = useCurrentFileKey();
+  const [resource] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
+    key: fileKey ?? ""
   }));
-  return "loaded" === t.status && "loaded" === t.data.file.status && t.data.file.data?.hasPermission === !0;
+  return resource.status === "loaded" && resource.data.file.status === "loaded" && resource.data.file.data?.hasPermission === true;
 }
-export async function $$w1(e) {
-  let t = await subscribeAndAwaitData(FileCanAccessFullCodeConnect, {
-    key: e
+
+// Checks if a specific file key can access full Code Connect
+export async function canAccessFullCodeConnectByKey(fileKey: string): Promise<boolean> {
+  const resource = await subscribeAndAwaitData(FileCanAccessFullCodeConnect, {
+    key: fileKey
   });
-  return "loaded" === t.file.status && t.file.data?.hasPermission === !0;
+  return resource.file.status === "loaded" && resource.file.data?.hasPermission === true;
 }
-async function O({
-  batch: e,
-  result: t,
-  libraryKey: r,
-  fileKey: n,
-  openLibraryKey: a,
-  sceneGraph: o,
-  label: l,
-  nodeIdToCodeConnectContent: c,
-  nodeIdToErrors: u
-}) {
-  if (!t.file?.preload_code_connect_lk) {
-    console.error(`No preload_code_connect_lk data found for library key: ${r}`);
+
+// Processes a batch of nodes for Code Connect mapping
+async function processCodeConnectBatch(params: OParams): Promise<void> {
+  const {
+    batch,
+    result,
+    libraryKey,
+    fileKey,
+    openLibraryKey,
+    sceneGraph,
+    label,
+    nodeIdToCodeConnectContent,
+    nodeIdToErrors
+  } = params;
+  if (!result.file?.preload_code_connect_lk) {
+    console.error(`No preload_code_connect_lk data found for library key: ${libraryKey}`);
     return;
   }
-  for (let p of e) try {
-    let e = t.file.preload_code_connect_lk;
-    if (!e || !e.docsById) continue;
-    let u = e.docsById?.[`key-${r},${p.backingNodeId}`];
-    if (!u) continue;
-    let _ = JSON.parse(u);
-    let h = function (e, t) {
-      let r = "unknown";
-      if (Array.isArray(e) && t) {
-        let n = e.find(e => e.label === t);
-        r = n?.type || r;
-      }
-      return r;
-    }(_, l);
-    let g = selectCodeConnectDoc(_, l);
-    let f = {};
-    let E = p.instanceList;
+  for (const item of batch) {
     try {
-      for (let t of E) {
-        let r = e.docsById?.[`key-${t}`];
-        if (!r) continue;
-        let n = selectCodeConnectDoc(JSON.parse(r), l);
-        n && (f[`key-${t}`] = JSON.parse(n.figmadoc));
+      const preloadData = result.file.preload_code_connect_lk;
+      if (!preloadData || !preloadData.docsById) continue;
+      const docRaw = preloadData.docsById?.[`key-${libraryKey},${item.backingNodeId}`];
+      if (!docRaw) continue;
+      const docParsed: CodeConnectDoc = JSON.parse(docRaw);
+      const version = getDocVersion(docParsed, label);
+      const selectedDoc = selectCodeConnectDoc(docParsed, label);
+
+      // Collect instance figmadocs
+      const instanceFigmadocs: InstanceFigmadocs = {};
+      const instanceList = item.instanceList;
+      try {
+        for (const instanceKey of instanceList) {
+          const instanceDocRaw = preloadData.docsById?.[`key-${instanceKey}`];
+          if (!instanceDocRaw) continue;
+          const instanceDoc = selectCodeConnectDoc(JSON.parse(instanceDocRaw), label);
+          if (instanceDoc) {
+            instanceFigmadocs[`key-${instanceKey}`] = JSON.parse(instanceDoc.figmadoc);
+          }
+        }
+      } catch (err) {
+        console.error("Error processing instance Code Connect:", err);
+        reportError(ServiceCategories.DEVELOPER_TOOLS, err, {
+          extra: {
+            instances: instanceList,
+            codeConnectDocRaw: docRaw
+          }
+        });
       }
-    } catch (e) {
-      console.error("Error processing instance Code Connect:", e);
-      reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
-        extra: {
-          instances: E,
-          codeConnectDocRaw: u
-        }
-      });
+
+      // Parse figmadoc and find best matching variant
+      let figmadocArray: any[] = [];
+      try {
+        figmadocArray = JSON.parse(selectedDoc.figmadoc);
+      } catch (err) {
+        console.error("Error parsing Code Connect:", err);
+        reportError(ServiceCategories.DEVELOPER_TOOLS, err, {
+          extra: {
+            figmadoc: selectedDoc.figmadoc
+          }
+        });
+        continue;
+      }
+      const bestVariant = Array.isArray(figmadocArray) ? findBestMatchingVariant(figmadocArray, item.nodeToFetch) : null;
+      if (!bestVariant) continue;
+
+      // Track missing data event if needed
+      if (!bestVariant.source && !bestVariant.templateData?.imports?.length) {
+        trackDefinedFileEvent("mcp.get_code_connect_mapping.missing_data", fileKey, debugState.getState(), {
+          componentName: bestVariant.component || "",
+          source: bestVariant.source || ""
+        });
+      }
+      nodeIdToCodeConnectContent[item.nodeToFetch.guid] = {
+        componentName: bestVariant.component,
+        source: bestVariant.source,
+        snippet: await generateCodeSnippet({
+          node: item.nodeToFetch,
+          fileKey,
+          openLibraryKey,
+          sceneGraph,
+          figmadocResult: bestVariant,
+          instanceFigmadocs: instanceFigmadocs || {}
+        }),
+        snippetImports: bestVariant.templateData?.imports,
+        version,
+        label: bestVariant.label
+      };
+    } catch (err) {
+      console.error(`Error while processing Code Connect mapping for node ${item.nodeToFetch.guid}:`, err instanceof Error ? err.message : String(err));
+      nodeIdToErrors[item.nodeToFetch.guid] = `${err instanceof Error ? err.message : String(err)}`;
     }
-    let y = [];
-    try {
-      y = JSON.parse(g.figmadoc);
-    } catch (e) {
-      console.error("Error parsing Code Connect:", e);
-      reportError(ServiceCategories.DEVELOPER_TOOLS, e, {
-        extra: {
-          figmadoc: g.figmadoc
-        }
-      });
-      continue;
-    }
-    if (Array.isArray(y) && (y = findBestMatchingVariant(y, p.nodeToFetch)), !y) continue;
-    y.source || y.templateData.imports?.length || trackDefinedFileEvent("mcp.get_code_connect_mapping.missing_data", n, debugState.getState(), {
-      componentName: y.component || "",
-      source: y.source || ""
-    });
-    c[p.nodeToFetch.guid] = {
-      componentName: y.component,
-      source: y.source,
-      snippet: await R({
-        node: p.nodeToFetch,
-        fileKey: n,
-        openLibraryKey: a,
-        sceneGraph: o,
-        figmadocResult: y,
-        instanceFigmadocs: f || {}
-      }),
-      snippetImports: y.templateData.imports,
-      version: h,
-      label: y.label
-    };
-  } catch (e) {
-    console.error(`Error while processing Code Connect mapping for node ${p.nodeToFetch.guid}:`, e instanceof Error ? e.message : String(e));
-    u[p.nodeToFetch.guid] = `${e instanceof Error ? e.message : String(e)}`;
   }
 }
-async function R({
-  node: e,
-  fileKey: t,
-  openLibraryKey: r,
-  sceneGraph: n,
-  figmadocResult: i,
-  instanceFigmadocs: a
-}) {
-  let s = await qZ({
-    node: e,
-    instanceFigmadocs: a,
-    scene: n,
-    template: i.template,
-    openLibraryKey: r,
-    fileKey: t
+
+// Helper to get doc version from figmadoc
+function getDocVersion(doc: CodeConnectDoc, label: string): string {
+  let version = "unknown";
+  if (Array.isArray(doc) && label) {
+    const found = (doc as any[]).find(d => d.label === label);
+    version = found?.type || version;
+  }
+  return version;
+}
+
+// Generates code snippet for a node
+async function generateCodeSnippet(params: {
+  node: INode;
+  fileKey: string;
+  openLibraryKey: string;
+  sceneGraph: SceneGraph;
+  figmadocResult: any;
+  instanceFigmadocs: InstanceFigmadocs;
+}): Promise<string | null> {
+  const {
+    node,
+    fileKey,
+    openLibraryKey,
+    sceneGraph,
+    figmadocResult,
+    instanceFigmadocs
+  } = params;
+  const result = await generateInstanceCode({
+    node,
+    instanceFigmadocs,
+    scene: sceneGraph,
+    template: figmadocResult.template,
+    openLibraryKey,
+    fileKey
   });
-  return s && "SUCCESS" === s.result ? A({
-    output: s,
-    sceneGraph: n,
-    includeInstancePills: !1,
+  return result && result.result === "SUCCESS" ? processOutputSections({
+    output: result,
+    sceneGraph,
+    includeInstancePills: false,
     unrenderableInstanceMessage: "{/* Code Connect Logic Instance */}"
   }).code : null;
 }
-export const Fc = $$C0;
-export const Kk = $$w1;
-export const nP = $$A2;
+
+// Export statements with original names mapped to refactored functions
+export const Fc = canAccessFullCodeConnect;
+export const Kk = canAccessFullCodeConnectByKey;
+export const nP = getCodeConnectMapping;

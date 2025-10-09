@@ -3,7 +3,7 @@ import { atomStoreManager } from '../figma_app/27355';
 import { colorToHexString } from '../figma_app/191804';
 import { variableByIdAtomFamily } from '../figma_app/216057';
 import { resolvedTypeToString } from '../figma_app/394327';
-import { xv } from '../figma_app/655139';
+import { getPluginCodeSyntax } from '../figma_app/655139';
 import { VariableDataType, VariablesBindings } from '../figma_app/763686';
 import { getValidStyleNodeId } from '../figma_app/836943';
 // Refactored from minified JS: Renamed functions and variables for clarity, added TypeScript interfaces and types for type safety, simplified recursive logic with better structure, added comments explaining logic, preserved original export names but updated function names.
@@ -17,23 +17,25 @@ interface Node {
   inheritedTextStyle?: string;
   sceneGraph: Map<string, any>; // Assuming sceneGraph is a Map with style nodes
 }
-
 interface StyleNode {
   name: string;
-  fills?: Array<{ color: any }>;
-  fontName?: { family: string; style: string };
+  fills?: Array<{
+    color: any;
+  }>;
+  fontName?: {
+    family: string;
+    style: string;
+  };
   fontSize?: number;
   fontWeightOrMixed?: any;
   lineHeightOrMixed?: any;
 }
-
 interface VariableInfo {
   name: string;
   codeSyntaxName?: string;
   value: string | null;
   type: string;
 }
-
 interface ResolvedValue {
   type: VariableDataType;
   value: any;
@@ -41,11 +43,7 @@ interface ResolvedValue {
 }
 
 // Main function to collect variables and styles from a node tree
-export function collectNodeVariablesAndStyles(
-  rootNode: Node,
-  contextMap: Map<string, any>,
-  includeInherited: boolean
-): Record<string, string> {
+export function collectNodeVariablesAndStyles(rootNode: Node, contextMap: Map<string, any>, includeInherited: boolean): Record<string, string> {
   const result: Record<string, string> = {};
 
   // Recursive helper to traverse the node tree
@@ -59,7 +57,7 @@ export function collectNodeVariablesAndStyles(
 
     // Process bound variables if includeInherited or always (logic seems to always process boundVariables)
     const variables = getBoundVariables(node, contextMap);
-    variables.forEach((variable) => {
+    variables.forEach(variable => {
       if (variable && variable.value !== null) {
         result[variable.codeSyntaxName || variable.name] = variable.value;
       }
@@ -88,47 +86,43 @@ export function collectNodeVariablesAndStyles(
       }
     }
   }
-
   traverseNode(rootNode, result, contextMap, includeInherited);
   return result;
 }
 
 // Function to get bound variables for a node
 export function getBoundVariables(node: Node, contextMap: Map<string, any>): VariableInfo[] {
-  return Object.values(node.boundVariables)
-    .flatMap((bindings) => bindings)
-    .map((binding: any) => {
-      const variable = atomStoreManager.get(variableByIdAtomFamily(binding.id));
-      if (variable) {
-        const resolved = VariablesBindings.getVariableResolvedValue(binding.id, new Map()) as ResolvedValue | null;
-        const resolvedType = resolved?.resolvedType;
-        let value: string | null = null;
-        if (resolved) {
-          switch (resolved.type) {
-            case VariableDataType.STRING:
-              value = resolved.value;
-              break;
-            case VariableDataType.BOOLEAN:
-            case VariableDataType.FLOAT:
-              value = String(resolved.value);
-              break;
-            case VariableDataType.COLOR:
-              value = colorToHexString(resolved.value);
-              break;
-            default:
-              value = null;
-          }
+  return Object.values(node.boundVariables).flatMap(bindings => bindings).map((binding: any) => {
+    const variable = atomStoreManager.get(variableByIdAtomFamily(binding.id));
+    if (variable) {
+      const resolved = VariablesBindings.getVariableResolvedValue(binding.id, new Map()) as ResolvedValue | null;
+      const resolvedType = resolved?.resolvedType;
+      let value: string | null = null;
+      if (resolved) {
+        switch (resolved.type) {
+          case VariableDataType.STRING:
+            value = resolved.value;
+            break;
+          case VariableDataType.BOOLEAN:
+          case VariableDataType.FLOAT:
+            value = String(resolved.value);
+            break;
+          case VariableDataType.COLOR:
+            value = colorToHexString(resolved.value);
+            break;
+          default:
+            value = null;
         }
-        return {
-          name: variable.name,
-          codeSyntaxName: xv(variable, contextMap),
-          value,
-          type: resolvedTypeToString(resolvedType)
-        };
       }
-      return null;
-    })
-    .filter((item) => item !== null); // Filter out nulls
+      return {
+        name: variable.name,
+        codeSyntaxName: getPluginCodeSyntax(variable, contextMap),
+        value,
+        type: resolvedTypeToString(resolvedType)
+      };
+    }
+    return null;
+  }).filter(item => item !== null); // Filter out nulls
 }
 
 // Preserve original export names

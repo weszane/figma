@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useCallback, useContext, useMemo, useEffect } from "react";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { useDevModeValueAndSetter } from "../905/191741";
 import { TrackingProvider } from "../figma_app/831799";
 let d = createContext({});
@@ -50,7 +50,7 @@ export function $$m2({
   trackingProps: _ = u
 }) {
   let h = trackDefinedFileEventWithStore();
-  let m = v4().id;
+  let m = getEffectiveCodegenLanguage().id;
   let [g] = useDevModeValueAndSetter();
   let f = useMemo(() => ({
     codeLanguage: m,

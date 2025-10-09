@@ -10,7 +10,7 @@ import { Timer } from "../905/609396";
 import { VisualBellActions } from "../905/302958";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
-import { B9, Py } from "../figma_app/346422";
+import { updateImagesToEsmImports, optimizeCode } from "../figma_app/346422";
 import { hB } from "../figma_app/609511";
 import { O } from "../905/207358";
 var l = o;
@@ -26,10 +26,10 @@ export async function $$y0(e, t, n, r) {
       convertToTailwindCSS: !0,
       useFigmaComponents: getFeatureFlags().componetize_dtr,
       imageAssetsOptions: {
-        transformer: B9,
+        transformer: updateImagesToEsmImports,
         assets: u
       },
-      optimizeCode: e => Py(e, p),
+      optimizeCode: e => optimizeCode(e, p),
       additionalNodes: t,
       containingBreakpointFrame: n
     };

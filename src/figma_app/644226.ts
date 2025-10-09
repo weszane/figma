@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { MeasurementUnit } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { v4, AC, Pt } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage, getDevModePluginFromLanguage, getCodegenLanguageFormatter } from "../figma_app/655139";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { isCodeMode } from "../905/191741";
 import { j6 } from "../figma_app/243025";
@@ -17,9 +17,9 @@ export function $$f0(e) {
   let r = isCodeMode();
   let f = fullscreenAlias.getIsExtension();
   let E = function (e) {
-    let t = v4();
+    let t = getEffectiveCodegenLanguage();
     let r = e ?? t;
-    let s = AC(r);
+    let s = getDevModePluginFromLanguage(r);
     let c = getLanguageUnitLabel(r);
     let h = isCodegenSupportedForLanguage(r);
     let m = getCodeExtensionPreferences(r.id);
@@ -50,15 +50,15 @@ export function $$f0(e) {
       return e;
     }, [h, m?.unit, c, g, r, s, f]);
   }(e);
-  let y = v4();
+  let y = getEffectiveCodegenLanguage();
   let b = e ?? y;
   let {
     updateDefaultCodegenSettings,
     isSetToDefault
   } = Q();
   let [S, v] = useAtomValueAndSetter(devModeShowVarCodeSyntaxAtom);
-  let A = AC(b);
-  let x = Pt(A).format(b);
+  let A = getDevModePluginFromLanguage(b);
+  let x = getCodegenLanguageFormatter(A).format(b);
   return useMemo(() => {
     let e = [];
     E.length > 0 && (r || f || e.push({

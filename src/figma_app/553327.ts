@@ -1,6 +1,6 @@
 import { LayoutTabType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { useIsFullscreenOverview } from "../figma_app/88239";
 import { Ku } from "../figma_app/678782";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -9,7 +9,7 @@ export function $$d1(e = !0) {
   return t["add-selection-ready-status"] || t["remove-selection-status"] && !e;
 }
 export function $$c0(e) {
-  let t = uQ();
+  let t = useSingleSelectedKey();
   let r = e ?? t;
   let {
     nodeType,

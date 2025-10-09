@@ -1,236 +1,305 @@
-import _require from "../2824/40443";
-import { throwTypeError } from "../figma_app/465776";
-import { getFeatureFlags } from "../905/601108";
-import { x } from "../905/392802";
-import { F } from "../905/672930";
-import { isDebugSelectedFigmakeFullscreen } from "../figma_app/552876";
-let n;
-let d = 0;
-let c = new Map();
-let u = new Map();
-let p = new Set();
-export function $$_3(e, t) {
-  return v({
+import { createWorker } from "../905/392802"
+import { getFeatureFlags } from "../905/601108"
+import { getFigmaPluginScope } from "../905/672930"
+import { throwTypeError } from "../figma_app/465776"
+import { isDebugSelectedFigmakeFullscreen } from "../figma_app/552876"
+// Renamed variables, added types, simplified message handling logic, improved readability
+// Origin: $$346422.ts
+
+type MessageId = number
+type DevtoolsWorker = Worker & { onmessage: (event: MessageEvent<WorkerResponse>) => void }
+
+interface WorkerRequest {
+  type: string
+  messageId: MessageId
+  [key: string]: any
+}
+
+interface WorkerResponse {
+  type: string
+  messageId?: MessageId
+  error?: string
+  data?: any
+  assetPath?: string
+  id?: string
+  [key: string]: any
+}
+
+interface BundleOptions {
+  entrypointsOrIdentifierToFileName: Record<string, string>
+  filesystem: Record<string, string>
+  tailwind?: boolean
+  minify?: boolean
+  shadcn?: boolean
+  noWrapper?: boolean
+  jsxDev?: boolean
+}
+
+let devtoolsWorker: DevtoolsWorker | undefined
+let messageIdCounter: number = 0
+const pendingRequests: Map<MessageId, (value: any) => void> = new Map()
+const requestErrors: Map<MessageId, (reason: any) => void> = new Map()
+const dependencyStatusListeners: Set<(data: any) => void> = new Set()
+
+// Message creators
+export function formatCode(sourceCode: string, parserName: string) {
+  return sendMessage({
     type: "FORMAT",
-    sourceCode: e,
-    parserName: t
-  });
+    sourceCode,
+    parserName,
+  })
 }
-export function $$h10({
-  entrypointsOrIdentifierToFileName: e,
-  filesystem: t,
-  tailwind: r,
-  minify: n,
-  shadcn: i = !1,
-  noWrapper: a = !1,
-  jsxDev: s = !1
-}) {
-  return v({
+
+export function bundleCode({
+  entrypointsOrIdentifierToFileName,
+  filesystem,
+  tailwind,
+  minify,
+  shadcn = false,
+  noWrapper = false,
+  jsxDev = false,
+}: BundleOptions) {
+  return sendMessage({
     type: "BUNDLE",
-    entrypointsOrIdentifierToFileName: e,
-    filesystem: t,
-    tailwind: r,
-    minify: n,
-    shadcn: i,
-    noWrapper: a,
-    jsxDev: s
-  });
+    entrypointsOrIdentifierToFileName,
+    filesystem,
+    tailwind,
+    minify,
+    shadcn,
+    noWrapper,
+    jsxDev,
+  })
 }
-export function $$m12() {
-  return v({
+
+export function initializeLanguageService() {
+  return sendMessage({
     type: "INITIALIZE_LS",
-    skipTypeAcquisition: !!(getFeatureFlags().bake_skip_ata && isDebugSelectedFigmakeFullscreen())
-  });
+    skipTypeAcquisition: !!(getFeatureFlags().bake_skip_ata && isDebugSelectedFigmakeFullscreen()),
+  })
 }
-export function $$g9(e) {
-  return v({
+
+export function updateFiles(files: Record<string, string>) {
+  return sendMessage({
     type: "UPDATE_FILES",
-    files: e
-  });
+    files,
+  })
 }
-export function $$f1(e) {
-  return v({
+
+export function lintFile(fileName: string) {
+  return sendMessage({
     type: "LINT",
-    fileName: e
-  });
+    fileName,
+  })
 }
-export function $$E13(e, t, r) {
-  return v({
+
+export function getAutocomplete(fileName: string, position: number, explicit: boolean) {
+  return sendMessage({
     type: "AUTOCOMPLETE",
-    fileName: e,
-    position: t,
-    explicit: r
-  });
+    fileName,
+    position,
+    explicit,
+  })
 }
-export function $$y8(e, t) {
-  return v({
+
+export function getQuickInfo(fileName: string, position: number) {
+  return sendMessage({
     type: "QUICK_INFO",
-    fileName: e,
-    position: t
-  });
+    fileName,
+    position,
+  })
 }
-export function $$b11(e) {
-  return v({
+
+export function staticAnalyze(sourceCode: string) {
+  return sendMessage({
     type: "STATIC_ANALYZE",
-    sourceCode: e
-  });
+    sourceCode,
+  })
 }
-export function $$T4(e, t) {
-  return v({
+
+export function analyzeJsxComponents(sourceCode: string, componentNames: string[]) {
+  return sendMessage({
     type: "ANALYZE_JSX_COMPONENTS",
-    sourceCode: e,
-    componentNames: t
-  });
+    sourceCode,
+    componentNames,
+  })
 }
-export function $$I5(e) {
-  p.add(e);
+
+export function addDependencyStatusListener(listener: (data: any) => void) {
+  dependencyStatusListeners.add(listener)
 }
-export function $$S0(e) {
-  p.$$delete(e);
+
+export function removeDependencyStatusListener(listener: (data: any) => void) {
+  dependencyStatusListeners.delete(listener)
 }
-function v(e) {
-  let t = d++;
-  let a = new Promise((e, r) => {
-    c.set(t, e);
-    u.set(t, r);
-  });
-  (function e(t) {
-    let a = function () {
-      if (!n) {
-        let t = Fig.devtoolsWorkerURL;
-        t && ((n = x(t)).onmessage = async t => {
-          switch (t.data.type) {
-            case "INITIALIZE_LS_RESULT":
-              A(t.data.messageId, !0);
-              break;
-            case "FORMAT_RESULT":
-              A(t.data.messageId, t.data.changes);
-              break;
-            case "BUNDLE_RESULT":
-              A(t.data.messageId, t.data.bundle);
-              break;
-            case "UPDATE_FILES_RESULT":
-              A(t.data.messageId, t.data.updatedFiles);
-              break;
-            case "LINT_RESULT":
-              A(t.data.messageId, t.data.diagnostics);
-              break;
-            case "AUTOCOMPLETE_RESULT":
-              A(t.data.messageId, t.data.completions);
-              break;
-            case "QUICK_INFO_RESULT":
-              A(t.data.messageId, t.data.hoverData);
-              break;
-            case "STATIC_ANALYZE_RESULT":
-              A(t.data.messageId, t.data.results);
-              break;
-            case "ANALYZE_JSX_COMPONENTS_RESULT":
-              A(t.data.messageId, t.data.componentProps);
-              break;
-            case "ERROR_RESULT":
-              !function (e, t) {
-                let r = u.get(e);
-                r && (r(t), c.$$delete(e), u.$$delete(e));
-              }(t.data.messageId, Error(t.data.error));
-              break;
-            case "DEPENDENCY_TYPES_STATUS":
-              !function (e) {
-                for (let t of p) t(e);
-              }(t.data);
-              break;
-            case "REFACTOR_RESULT":
-              A(t.data.messageId, t.data.updatedSourceCode);
-              break;
-            case "RESOLVE_ASSET":
-              {
-                let r = await N(t.data.assetPath);
-                e({
-                  type: "RESOLVE_ASSET_RESULT",
-                  messageId: t.data.messageId,
-                  contents: r
-                });
-                break;
-              }
-            case "GET_SVG":
-              {
-                let {
-                  svgForDomId
-                } = await Promise.all([]).then(_require);
-                let i = svgForDomId(t.data.id);
-                e({
-                  type: "GET_SVG_RESULT",
-                  messageId: t.data.messageId,
-                  svg: i
-                });
-                break;
-              }
-            case "GET_CODE_EDITING_SNIPPET_RESULT":
-              A(t.data.messageId, t.data.codeSnippet);
-              break;
-            case "UPDATE_IMAGES_TO_ESM_IMPORTS_RESULT":
-              A(t.data.messageId, t.data.result);
-              break;
-            case "OPTIMIZE_CODE_RESULT":
-              A(t.data.messageId, t.data.reactCode);
-              break;
-            default:
-              throwTypeError(t.data);
-          }
-        });
-      }
-      return n;
-    }();
-    if (!a) throw Error("Devtools worker not available");
-    a.postMessage(t);
-  })({
-    ...e,
-    messageId: t
-  });
-  return a;
-}
-function A(e, t) {
-  let r = c.get(e);
-  r && (r(t), c.$$delete(e), u.$$delete(e));
-}
-export function $$x7(e) {
-  return v({
-    type: "GET_CODE_EDITING_SNIPPET",
-    selectedElementAndParents: e
-  });
-}
-async function N(e) {
-  if (e.endsWith(".png")) {
-    let t = F();
-    let r = e.slice(0, -4);
-    let n = t.getImageByHash(r);
-    if (n) return await n.getBytesAsync();
+
+function sendMessage(request: Omit<WorkerRequest, 'messageId'>): Promise<any> {
+  const messageId = messageIdCounter++
+  const promise = new Promise((resolve, reject) => {
+    pendingRequests.set(messageId, resolve)
+    requestErrors.set(messageId, reject)
+  })
+
+  const worker = getOrCreateWorker()
+  if (!worker) {
+    throw new Error("Devtools worker not available")
   }
-  return new Uint8Array();
+
+  worker.postMessage({
+    ...request,
+    messageId,
+  } as WorkerRequest)
+
+  return promise
 }
-export function $$C2(...e) {
-  return v({
+
+function getOrCreateWorker(): DevtoolsWorker | null {
+  if (!devtoolsWorker) {
+    const workerUrl = Fig.devtoolsWorkerURL
+    if (workerUrl) {
+      devtoolsWorker = createWorker(workerUrl) as DevtoolsWorker
+      devtoolsWorker.onmessage = async (event: MessageEvent<WorkerResponse>) => {
+        const { type, messageId, error, ...data } = event.data
+
+        switch (type) {
+          case "INITIALIZE_LS_RESULT":
+            resolveRequest(messageId, true)
+            break
+          case "FORMAT_RESULT":
+            resolveRequest(messageId, data.changes)
+            break
+          case "BUNDLE_RESULT":
+            resolveRequest(messageId, data.bundle)
+            break
+          case "UPDATE_FILES_RESULT":
+            resolveRequest(messageId, data.updatedFiles)
+            break
+          case "LINT_RESULT":
+            resolveRequest(messageId, data.diagnostics)
+            break
+          case "AUTOCOMPLETE_RESULT":
+            resolveRequest(messageId, data.completions)
+            break
+          case "QUICK_INFO_RESULT":
+            resolveRequest(messageId, data.hoverData)
+            break
+          case "STATIC_ANALYZE_RESULT":
+            resolveRequest(messageId, data.results)
+            break
+          case "ANALYZE_JSX_COMPONENTS_RESULT":
+            resolveRequest(messageId, data.componentProps)
+            break
+          case "ERROR_RESULT":
+            rejectRequest(messageId, new Error(error))
+            break
+          case "DEPENDENCY_TYPES_STATUS":
+            dependencyStatusListeners.forEach(listener => listener(data))
+            break
+          case "REFACTOR_RESULT":
+            resolveRequest(messageId, data.updatedSourceCode)
+            break
+          case "RESOLVE_ASSET":
+            {
+              const contents = await resolveAsset(data.assetPath)
+              sendMessage({
+                type: "RESOLVE_ASSET_RESULT",
+                messageId,
+                contents,
+              })
+              break
+            }
+          case "GET_SVG":
+            {
+              const { svgForDomId } = await import("../2824/40443")
+              const svg = svgForDomId(data.id)
+              sendMessage({
+                type: "GET_SVG_RESULT",
+                messageId,
+                svg,
+              })
+              break
+            }
+          case "GET_CODE_EDITING_SNIPPET_RESULT":
+            resolveRequest(messageId, data.codeSnippet)
+            break
+          case "UPDATE_IMAGES_TO_ESM_IMPORTS_RESULT":
+            resolveRequest(messageId, data.result)
+            break
+          case "OPTIMIZE_CODE_RESULT":
+            resolveRequest(messageId, data.reactCode)
+            break
+          default:
+            throwTypeError(event.data)
+        }
+      }
+    }
+  }
+  return devtoolsWorker
+}
+
+function resolveRequest(messageId: MessageId, value: any) {
+  const resolve = pendingRequests.get(messageId)
+  if (resolve) {
+    resolve(value)
+    pendingRequests.delete(messageId)
+    requestErrors.delete(messageId)
+  }
+}
+
+function rejectRequest(messageId: MessageId, error: Error) {
+  const reject = requestErrors.get(messageId)
+  if (reject) {
+    reject(error)
+    pendingRequests.delete(messageId)
+    requestErrors.delete(messageId)
+  }
+}
+
+export function getCodeEditingSnippet(selectedElementAndParents: any) {
+  return sendMessage({
+    type: "GET_CODE_EDITING_SNIPPET",
+    selectedElementAndParents,
+  })
+}
+
+async function resolveAsset(assetPath: string): Promise<Uint8Array> {
+  if (assetPath.endsWith(".png")) {
+    const pluginScope = getFigmaPluginScope()
+    const imageHash = assetPath.slice(0, -4)
+    const image = pluginScope.getImageByHash(imageHash)
+    if (image) {
+      return await image.getBytesAsync()
+    }
+  }
+  return new Uint8Array()
+}
+
+export function updateImagesToEsmImports(...args: any[]) {
+  return sendMessage({
     type: "UPDATE_IMAGES_TO_ESM_IMPORTS",
-    args: e
-  });
+    args,
+  })
 }
-export function $$w6(e, t) {
-  return v({
+
+export function optimizeCode(reactCode: string, refactorJsx: boolean) {
+  return sendMessage({
     type: "OPTIMIZE_CODE_REQUEST",
-    reactCode: e,
-    refactorJsx: t
-  });
+    reactCode,
+    refactorJsx,
+  })
 }
-export const AF = $$S0;
-export const Ac = $$f1;
-export const B9 = $$C2;
-export const IC = $$_3;
-export const M5 = $$T4;
-export const Nx = $$I5;
-export const Py = $$w6;
-export const Y3 = $$x7;
-export const c2 = $$y8;
-export const fM = $$g9;
-export const pS = $$h10;
-export const qs = $$b11;
-export const sM = $$m12;
-export const uH = $$E13;
+
+// Export aliases (keeping original names for compatibility)
+export const AF = removeDependencyStatusListener
+export const Ac = lintFile
+export const B9 = updateImagesToEsmImports
+export const IC = formatCode
+export const M5 = analyzeJsxComponents
+export const Nx = addDependencyStatusListener
+export const Py = optimizeCode
+export const Y3 = getCodeEditingSnippet
+export const c2 = getQuickInfo
+export const fM = updateFiles
+export const pS = bundleCode
+export const qs = staticAnalyze
+export const sM = initializeLanguageService
+export const uH = getAutocomplete

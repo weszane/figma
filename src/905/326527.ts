@@ -5,7 +5,7 @@ import { updateActiveTextReviewPlugin } from "../figma_app/741237";
 import { runSpellCheckCallback, hasSpellCheckCallback, hasPluginPageLoadedCallback, runPluginPageLoadedCallback } from "../figma_app/603466";
 import { canRunPlugin } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
-import { hM } from "../905/851937";
+import { hasStoredValue } from "../905/851937";
 import { PluginManager } from "../figma_app/612938";
 import { handlePluginError } from "../905/753206";
 import { hasLocalFileId } from "../figma_app/155287";
@@ -15,7 +15,7 @@ let h = class {
     this.runningPlugin = null;
     this.onExitTextEditModeCallbackCalled = !1;
     this.reviewText = async e => {
-      if (hM() && SH()?.command !== "textreview") return [];
+      if (hasStoredValue() && SH()?.command !== "textreview") return [];
       this.startTextReviewPlugin();
       let t = runSpellCheckCallback(e);
       let i = await Promise.race([t, new Promise(e => {
@@ -45,7 +45,7 @@ let h = class {
     if (this.runningPlugin) return;
     let e = debugState.getState();
     let t = f(e);
-    if (!hM() && t) {
+    if (!hasStoredValue() && t) {
       let i = debugState.subscribe(() => {
         debugState.getState().mirror.appModel.activeCanvasEditModeType !== LayoutTabType.TEXT && this.onExitTextEditMode();
       });

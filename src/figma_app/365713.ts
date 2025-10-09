@@ -12,7 +12,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { d as _$$d } from "../figma_app/429226";
 import { uint8ArrayToHex } from "../figma_app/930338";
 import { renderI18nText } from "../905/303541";
-import { Zl } from "../figma_app/311375";
+import { getSceneGraphItemByKey } from "../figma_app/311375";
 import { cortexAPI, StreamAsyncIteratorWithTimeout } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { trackDefinedFileEventWrapper } from "../figma_app/2590";
@@ -65,7 +65,7 @@ export function $$C9(e, t) {
 function w(e, t, r) {
   let n = [];
   for (let i of e) {
-    let e = Zl(t, i);
+    let e = getSceneGraphItemByKey(t, i);
     if (null !== e) {
       let i = {
         id: e.guid,

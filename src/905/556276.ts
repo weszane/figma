@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Tv } from "../figma_app/311375";
+import { useSceneGraphSelectionKeys } from "../figma_app/311375";
 export function $$s0(e = !0) {
-  let t = Tv();
+  let t = useSceneGraphSelectionKeys();
   return useMemo(() => {
     if (!t?.length) return [];
     let i = getSingletonSceneGraph();

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ei } from "../figma_app/9054";
 import { i as _$$i } from "../figma_app/553327";
 import { dU } from "../9410/461336";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { P } from "../905/647955";
 import { DS } from "../figma_app/571341";
@@ -14,7 +14,7 @@ export function $$h0() {
   let i = useSelector(e => e.selectedView.compareChangesVersionId);
   let h = useSelector(e => e.selectedView.compareChangesActivityId);
   let m = useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView.compareChangesNodeId || null);
-  let f = uQ();
+  let f = useSingleSelectedKey();
   let g = m ?? f ?? void 0;
   let _ = ei(g);
   let x = _$$i(g);

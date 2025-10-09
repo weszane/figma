@@ -7,7 +7,7 @@ import { KindEnum } from "../905/129884";
 import { conditionalWrapper } from "../905/579635";
 import { eH } from "../figma_app/318590";
 import { getSingletonSceneGraph } from "../905/700578";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { u as _$$u } from "../figma_app/398802";
 import { Ad } from "../figma_app/811257";
 export function $$m0({
@@ -15,7 +15,7 @@ export function $$m0({
 }) {
   let t = eH();
   let r = function () {
-    let e = uQ();
+    let e = useSingleSelectedKey();
     if (!e) return null;
     let t = getSingletonSceneGraph().get(e);
     if (!t) return null;

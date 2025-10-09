@@ -5,7 +5,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { getSingleSelectedKey } from "../figma_app/889655";
 import { jY } from "../figma_app/151869";
 import { wS, x9 } from "../figma_app/221240";
-import { Zl, uQ } from "../figma_app/311375";
+import { getSceneGraphItemByKey, useSingleSelectedKey } from "../figma_app/311375";
 export function $$u2() {
   let e = wS();
   let t = useSelector(e => e.mirror.selectionProperties.symbolGUIDsBackingSelectionContainer);
@@ -20,16 +20,16 @@ export function $$u2() {
 export function $$p3() {
   let e = jY();
   let t = $$u2();
-  return t && t?.nodeId ? t.isDetachedScene ? x9(t.nodeId) : Zl(e, t.nodeId) : null;
+  return t && t?.nodeId ? t.isDetachedScene ? x9(t.nodeId) : getSceneGraphItemByKey(e, t.nodeId) : null;
 }
 export function $$_0() {
   return function e(t, r) {
-    let n = Zl(t, r);
+    let n = getSceneGraphItemByKey(t, r);
     return n ? "SYMBOL" === n.type || "INSTANCE" === n.type || n.isStateGroup || n.detachedInfo ? n : n.parentGuid ? e(t, n.parentGuid) : null : null;
   }(jY(), useSelector(getSingleSelectedKey));
 }
 export function $$h4() {
-  let e = uQ();
+  let e = useSingleSelectedKey();
   let t = useDevModeFocusId();
   return e ?? t;
 }
@@ -45,7 +45,7 @@ export function $$m1() {
 export function $$g5({
   includeStateGroups: e = !0
 } = {}) {
-  let t = uQ();
+  let t = useSingleSelectedKey();
   let r = useDeepEqualSceneValue((t, r) => {
     let n = t?.get(r ?? "");
     return n?.type === "SYMBOL" || n?.type === "INSTANCE" || e && n?.isStateGroup;

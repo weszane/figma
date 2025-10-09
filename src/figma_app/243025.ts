@@ -9,7 +9,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { useThrottledCallback } from "../vendor/21595";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML, WEB, CSSBUILDER } from "../905/359509";
 import { V0, ls } from "../figma_app/755395";
 import { resolveLanguageUnit, getPluginInfo, getCodeExtensionPreferences, useUpdateCodeExtensionPreferences } from "../figma_app/120227";
@@ -80,7 +80,7 @@ export function $$C0({
   });
 }
 export let $$w2 = registerModal(function (e) {
-  let t = v4();
+  let t = getEffectiveCodegenLanguage();
   let [r, a] = useState(t);
   let E = getPluginInfo(r);
   let y = getCodeExtensionPreferences(r.id);

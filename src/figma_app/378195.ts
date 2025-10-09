@@ -3,7 +3,7 @@ import { widgetManagerHandler } from "../905/239551";
 import { createOptimistThunk } from "../905/350402";
 import { FlashActions } from "../905/573154";
 import { handlePluginError } from "../905/753206";
-import { A9, hM } from "../905/851937";
+import { runLastPlugin, hasStoredValue } from "../905/851937";
 import { debounce } from "../905/915765";
 import { PluginPublishModal } from "../905/938553";
 import { incrementCounter } from "../905/949750";
@@ -191,12 +191,12 @@ export const initializeLocalPluginsThunk = createOptimistThunk(async (context: S
         const plugin = SH()?.plugin;
         const triggeredFrom = SH()?.triggeredFrom;
         const state = context.getState();
-        if ("manifestFileId" in event && plugin && hasLocalFileId(plugin) && state.mirror.appModel.hotReloadPluginDev && event.manifestFileId === plugin.localFileId && hM()) {
+        if ("manifestFileId" in event && plugin && hasLocalFileId(plugin) && state.mirror.appModel.hotReloadPluginDev && event.manifestFileId === plugin.localFileId && hasStoredValue()) {
           // Handle plugin error and increment counter
           (async () => {
             await handlePluginError();
             if (triggeredFrom !== "codegen") {
-              A9({
+              runLastPlugin({
                 newTriggeredFrom: null
               });
             }

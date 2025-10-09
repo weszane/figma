@@ -1,10 +1,10 @@
 import { createContext, useCallback, useContext } from 'react';
-import { YZ } from '../905/62762';
+import { generateHashId } from '../905/62762';
 import { getAnonymousId } from '../905/449184';
 import { logger } from '../905/651849';
-import { An } from '../905/931912';
+import { defaultSdkImplementation } from '../905/931912';
 import { getInitialOptions } from '../figma_app/169182';
-import { G } from '../figma_app/714966';
+import { SdkMessageType } from '../figma_app/714966';
 
 // Sampling method enumeration for better type safety
 enum SamplingMethod {
@@ -70,11 +70,11 @@ const samplingStrategies = {
     const samplingKey = generateSamplingKey(eventName, 'user', samplingRate);
     const userId = getInitialOptions().user_data?.id;
     if (userId !== undefined) {
-      return shouldSample(YZ(`${samplingKey}${userId}`), samplingRate);
+      return shouldSample(generateHashId(`${samplingKey}${userId}`), samplingRate);
     }
     const anonymousId = getAnonymousId();
     if (anonymousId !== undefined) {
-      return shouldSample(YZ(`${samplingKey}${anonymousId}`), samplingRate);
+      return shouldSample(generateHashId(`${samplingKey}${anonymousId}`), samplingRate);
     }
     logger.warn('[Sprigma] Tried to sample an event tracking call by user, but neither user ID nor anonymous ID are available. Skipping tracking attempt');
     return false;
@@ -98,23 +98,23 @@ const defaultSprigApi = {
     logSprigNotSetupWarning()
     // Type assertion to handle spread argument limitations
     ;
-    (An.sendMessage as any)(...args);
+    (defaultSdkImplementation.sendMessage as any)(...args);
   },
   listenForMatchingMessage: (messageType: any) => {
     logSprigNotSetupWarning();
-    return An.listenForMatchingMessage(messageType);
+    return defaultSdkImplementation.listenForMatchingMessage(messageType);
   },
   setCallbacks(...args: any[]): void {
     logSprigNotSetupWarning()
     // Type assertion to handle spread argument limitations
     ;
-    (An.setCallbacks as any)(...args);
+    (defaultSdkImplementation.setCallbacks as any)(...args);
   },
   tearDown(...args: any[]): void {
     logSprigNotSetupWarning()
     // Type assertion to handle spread argument limitations
     ;
-    (An.tearDown as any)(...args);
+    (defaultSdkImplementation.tearDown as any)(...args);
   }
 };
 
@@ -131,7 +131,7 @@ export function useSprigWithSampling() {
   // Basic Sprig tracking function
   const trackEvent = useCallback((...args: any[]) => {
     sprigApi.sendMessage({
-      type: G.Call,
+      type: SdkMessageType.Call,
       content: {
         args
       }
@@ -186,7 +186,7 @@ export function useSprigWithSampling() {
   // Set property function
   const setProperty = useCallback((name: string, value: any) => {
     sprigApi.sendMessage({
-      type: G.SetProperty,
+      type: SdkMessageType.SetProperty,
       content: {
         name,
         value
@@ -196,9 +196,9 @@ export function useSprigWithSampling() {
 
   // Get property function
   const getProperty = useCallback(async (name: string): Promise<any> => {
-    const messageListener = sprigApi.listenForMatchingMessage(G.GetProperty);
+    const messageListener = sprigApi.listenForMatchingMessage(SdkMessageType.GetProperty);
     sprigApi.sendMessage({
-      type: G.GetProperty,
+      type: SdkMessageType.GetProperty,
       content: {
         name
       }

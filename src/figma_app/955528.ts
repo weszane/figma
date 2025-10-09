@@ -19,7 +19,7 @@ import { BE } from "../figma_app/991591";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Tv } from "../figma_app/311375";
+import { useSceneGraphSelectionKeys } from "../figma_app/311375";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { vu } from "../figma_app/8833";
 import { Gc, nl, fN } from "../figma_app/456871";
@@ -375,7 +375,7 @@ export function $$Q9(e) {
   }, [l, r, o, e, t]);
 }
 export function $$ee11(e, t) {
-  let r = $(Tv().join(","));
+  let r = $(useSceneGraphSelectionKeys().join(","));
   let a = $(useSelector(e => e.mirror.appModel.activeUserAction === UserActionState.SELECTING_TEXT));
   let s = r || a;
   let o = $(useSelector(() => nl()?.characters));

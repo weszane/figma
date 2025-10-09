@@ -166,7 +166,7 @@ import { uv } from '../figma_app/518364';
 import { setupCodegenLanguageSync } from '../figma_app/545541';
 import { BI } from '../figma_app/546509';
 import { Yp } from '../figma_app/578768';
-import { Dl } from '../figma_app/601682';
+import { checkUserHasPublishedComponents } from '../figma_app/601682';
 import { createTrackedAtom, setupRemovableAtomFamily } from '../figma_app/615482';
 import { FuzzyMatcher } from '../figma_app/616261';
 import { eb as _$$eb, i_ as _$$i_, A8, bE, EB, R6, vo, zL } from '../figma_app/617506';
@@ -551,7 +551,7 @@ let en = function ({
 function ea() {
   let e = bh();
   let t = selectCurrentFile();
-  let i = Dl(t);
+  let i = checkUserHasPublishedComponents(t);
   let [n, a] = Vc('componentBrowserOnboardingSelection', null);
   let s = useOpenFileLibraryKey();
   let o = getSelectedView();

@@ -1,3 +1,4 @@
+import type { PrimitiveAtom } from "jotai"
 import { getFeatureFlags } from "../905/601108"
 import { atom, atomStoreManager, createLocalStorageAtom, setupAtomWithMount } from "../figma_app/27355"
 import { desktopAPIInstance } from "../figma_app/876459"
@@ -80,11 +81,11 @@ export function getMcpSettingsExternal() {
 }
 
 // Additional atoms for application state
-export const additionalStateAtom1 = atom(null)
-export const additionalStateAtom2 = atom(null)
+export const mockCodeConnect = atom(null) as PrimitiveAtom<any>
+export const mockCodebaseSuggestions = atom(null)as PrimitiveAtom<any>
 
 // Exported atom constants for external usage
-export const DR = additionalStateAtom2
+export const DR = mockCodebaseSuggestions
 export const Kx = codeOptionsAtom
 export const Lw = isCodebaseSuggestionsEnabled
 export const Nt = getMcpSettings
@@ -94,5 +95,5 @@ export const f = mockDirForImageWritesAtom
 export const iy = getMcpSettingsExternal
 export const lk = useTailwindAtom
 export const pe = imageOptionsWithMount
-export const rx = additionalStateAtom1
+export const rx = mockCodeConnect
 export const tz = codeConnectToolsEnabledAtom

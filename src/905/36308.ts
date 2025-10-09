@@ -90,7 +90,7 @@ import { b as _$$b } from '../905/484176';
 import { u as _$$u3 } from '../905/486140';
 import { z as _$$z2 } from '../905/489760';
 import { Z as _$$Z2 } from '../905/498136';
-import { r as _$$r5 } from '../905/501976';
+import { handleMcpToolCall } from '../905/501976';
 import { l as _$$l3 } from '../905/509505';
 import { h as _$$h6 } from '../905/510194';
 import { h as _$$h2 } from '../905/513745';
@@ -188,7 +188,7 @@ import { getNavigationPreferenceMenuItems } from '../figma_app/253220';
 import { ContextType, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { gn } from '../figma_app/322845';
-import { codeConnectToolsEnabledAtom, codeOptionsAtom, useTailwindAtom, isCodebaseSuggestionsEnabled, imageOptionsWithMount, denyOverwritingFilesAtom, additionalStateAtom1, codebaseSuggestionsEnabledAtom } from '../figma_app/342355';
+import { codeConnectToolsEnabledAtom, codeOptionsAtom, useTailwindAtom, isCodebaseSuggestionsEnabled, imageOptionsWithMount, denyOverwritingFilesAtom, mockCodeConnect, codebaseSuggestionsEnabledAtom } from '../figma_app/342355';
 import { toggleFigmentDebugger } from '../figma_app/347406';
 import { c1 } from '../figma_app/357047';
 import { logFileSaveAs } from '../figma_app/401069';
@@ -217,7 +217,7 @@ import { EditorPreferencesApi } from '../figma_app/740163';
 import { AppStateTsApi, ComponentPanelTab, EasingType, Fullscreen, LogToConsoleMode, MeasurementUnit, MenuType, SelfDesignType, SwitchState, Thumbnail } from '../figma_app/763686';
 import { X as _$$X4 } from '../figma_app/765161';
 import { BrowserInfo } from '../figma_app/778880';
-import { As } from '../figma_app/802241';
+import { canWriteMcpAssetsLocally } from '../figma_app/802241';
 import { ARRANGE_MENU_ID, EDIT_MENU_ID, FIGMA_ACCOUNT_MENU_ID, OBJECT_MENU_ID, PREFERENCES_MENU_ID, TEXT_MENU_ID, VECTOR_MENU_ID, VIEW_MENU_ID } from '../figma_app/847915';
 import { YA } from '../figma_app/865646';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -5950,7 +5950,7 @@ export function generateFullscreenMenuItems(e) {
           },
           hideForQuickCommand: !0,
           featureFlags: []
-        }, ...(As() ? [{
+        }, ...(canWriteMcpAssetsLocally() ? [{
           name: 'dev-mode-mcp-server-settings',
           displayText: getI18nString('fullscreen_actions.mcp-write-images-to-disk'),
           get checked() {
@@ -5990,7 +5990,7 @@ export function generateFullscreenMenuItems(e) {
         displayText: 'Mock Code Connect from clipboard',
         callback: () => {
           let e = () => {
-            atomStoreManager.set(additionalStateAtom1, null);
+            atomStoreManager.set(mockCodeConnect, null);
             debugState.dispatch(VisualBellActions.enqueue({
               message: 'Reset Code Connect mock'
             }));
@@ -5998,7 +5998,7 @@ export function generateFullscreenMenuItems(e) {
           navigator.clipboard.readText().then(t => {
             try {
               let e = JSON.parse(t);
-              atomStoreManager.set(additionalStateAtom1, e);
+              atomStoreManager.set(mockCodeConnect, e);
               debugState.dispatch(VisualBellActions.enqueue({
                 message: 'Set Code Connect mock'
               }));
@@ -6013,7 +6013,7 @@ export function generateFullscreenMenuItems(e) {
         displayText: 'Copy get_code output',
         callback: () => {
           let e = debugState;
-          _$$r5('get_code', void 0, e).then(t => {
+          handleMcpToolCall('get_code', void 0, e).then(t => {
             let i = t.content.map(e => e.text).join('\n');
             navigator.clipboard.writeText(i).then(() => {
               e.dispatch(VisualBellActions.enqueue({

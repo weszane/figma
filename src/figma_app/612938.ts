@@ -1,20 +1,19 @@
-import { noop } from 'lodash-es'
-import { useCallback, useEffect } from 'react'
-import { i as _$$i } from '../905/46262'
-import { waitForAnimationFrame } from '../905/236856'
-import { debugState } from '../905/407919'
-import { applyCodeExtensionPreferences } from '../905/515076'
-import { logger } from '../905/651849'
-import { getCurrentGRAtom, handlePluginError, pluginState } from '../905/753206'
-import { isFullscreenDevHandoffView } from '../905/782918'
-
-import { bT } from '../905/851937'
-import { throwTypeError } from '../figma_app/465776'
-import { selectCurrentFile } from '../figma_app/516028'
-import { f$, hY, n4 } from '../figma_app/603466'
-import { wH } from '../figma_app/680166'
-import { getProductAccessTypeOrDefault } from '../figma_app/765689'
-import { isInteractionPathCheck } from '../figma_app/897289'
+import { noop } from 'lodash-es';
+import { useCallback, useEffect } from 'react';
+import { i as _$$i } from '../905/46262';
+import { waitForAnimationFrame } from '../905/236856';
+import { debugState } from '../905/407919';
+import { applyCodeExtensionPreferences } from '../905/515076';
+import { logger } from '../905/651849';
+import { getCurrentGRAtom, handlePluginError, pluginState } from '../905/753206';
+import { isFullscreenDevHandoffView } from '../905/782918';
+import { runPluginWorkflow } from '../905/851937';
+import { throwTypeError } from '../figma_app/465776';
+import { selectCurrentFile } from '../figma_app/516028';
+import { f$, hY, n4 } from '../figma_app/603466';
+import { wH } from '../figma_app/680166';
+import { getProductAccessTypeOrDefault } from '../figma_app/765689';
+import { isInteractionPathCheck } from '../figma_app/897289';
 
 /**
  * PluginManager class (originally 'y')
@@ -23,7 +22,6 @@ import { isInteractionPathCheck } from '../figma_app/897289'
 export class PluginManager {
   static instance: PluginManager = new PluginManager();
   static debug: boolean = false;
-
   runQueue: Array<RunState> = [];
   currentRunState: RunState | null = null;
   MAX_RESOLVE_ITERATIONS: number = 10;
@@ -53,10 +51,17 @@ export class PluginManager {
    * @returns Promise<any>
    */
   enqueue(params: EnqueueParams): Promise<any> {
-    const { runPluginArgs, onStart, mode, reuseExistingRunState = true } = params;
-    const { plugin } = runPluginArgs;
+    const {
+      runPluginArgs,
+      onStart,
+      mode,
+      reuseExistingRunState = true
+    } = params;
+    const {
+      plugin
+    } = runPluginArgs;
     if (!isFullscreenDevHandoffView(debugState.getState().selectedView)) {
-      return bT(runPluginArgs);
+      return runPluginWorkflow(runPluginArgs);
     }
     if (plugin.manifest.containsWidget) {
       throw new Error('Cannot enqueue a plugin that contains a widget');
@@ -66,13 +71,10 @@ export class PluginManager {
     if (reuseExistingRunState && existingRunState) {
       this.log('enqueue', 'Found existing run state, pushing runTask onto existing runState', {
         existingRunState,
-        runTask,
+        runTask
       });
       existingRunState.runTasks.push(runTask);
-      if (
-        existingRunState === this.currentRunState &&
-        existingRunState.status === 'settled'
-      ) {
+      if (existingRunState === this.currentRunState && existingRunState.status === 'settled') {
         this.resolveAllPromises(this.currentRunState);
       }
     } else {
@@ -80,10 +82,10 @@ export class PluginManager {
         runPluginArgs,
         runTasks: [runTask],
         mode,
-        status: 'idle',
+        status: 'idle'
       };
       this.log('enqueue', 'Creating new run state and adding to queue', {
-        runState,
+        runState
       });
       this.addToQueue(runState);
       this.runNextPlugin();
@@ -120,7 +122,9 @@ export class PluginManager {
     const pluginPromise = this.runPlugin(runState);
     await this.resolveAllPromises(runState);
     await pluginPromise;
-    this.log('runNextPlugin', 'Finished running plugin', { runState });
+    this.log('runNextPlugin', 'Finished running plugin', {
+      runState
+    });
     this.runNextPlugin();
   }
 
@@ -130,9 +134,13 @@ export class PluginManager {
    * @returns Promise<any>
    */
   runPlugin(runState: RunState): Promise<any> {
-    this.log('runNextPlugin', 'Running plugin', { runState });
-    const { runPluginArgs } = runState;
-    return bT(runPluginArgs);
+    this.log('runNextPlugin', 'Running plugin', {
+      runState
+    });
+    const {
+      runPluginArgs
+    } = runState;
+    return runPluginWorkflow(runPluginArgs);
   }
 
   /**
@@ -161,7 +169,7 @@ export class PluginManager {
       }),
       resolve: resolveFn,
       reject: rejectFn,
-      onStart,
+      onStart
     };
   }
 
@@ -183,7 +191,9 @@ export class PluginManager {
    * @param runState RunState
    */
   async resolveAllPromises(runState: RunState): Promise<void> {
-    this.log('runNextPlugin', 'Resolving all promises', { runState });
+    this.log('runNextPlugin', 'Resolving all promises', {
+      runState
+    });
     runState.status = 'resolving';
     let iterations = 0;
     while (iterations < this.MAX_RESOLVE_ITERATIONS) {
@@ -195,7 +205,9 @@ export class PluginManager {
     }
     await this.maybeTerminatePluginAfterRunSettled(runState);
     runState.status = 'settled';
-    this.log('runNextPlugin', 'Resolved all promises', { runState });
+    this.log('runNextPlugin', 'Resolved all promises', {
+      runState
+    });
   }
 
   /**
@@ -203,7 +215,9 @@ export class PluginManager {
    * @param runState RunState
    */
   addToQueue(runState: RunState): void {
-    this.log('addToQueue', 'Adding to queue', { toAdd: runState });
+    this.log('addToQueue', 'Adding to queue', {
+      toAdd: runState
+    });
     switch (runState.mode) {
       case 'run-forever':
       case 'run-and-terminate':
@@ -219,11 +233,7 @@ export class PluginManager {
    */
   async maybeTerminatePluginBeforeRun(): Promise<void> {
     const atom = getCurrentGRAtom();
-    if (
-      (!!atom !== !!this.currentRunState ||
-        (this.currentRunState?.status === 'settled' &&
-          this.currentRunState?.runPluginArgs.plugin.plugin_id === atom?.plugin_id))
-    ) {
+    if (!!atom !== !!this.currentRunState || this.currentRunState?.status === 'settled' && this.currentRunState?.runPluginArgs.plugin.plugin_id === atom?.plugin_id) {
       this.log('maybeTerminatePluginBeforeRun', 'Terminating plugin');
       await this.terminatePlugin();
     }
@@ -235,7 +245,7 @@ export class PluginManager {
    */
   async maybeTerminatePluginAfterRunSettled(runState: RunState): Promise<void> {
     this.log('maybeTerminatePluginAfterRunSettled', 'Maybe terminating plugin', {
-      toMaybeTerminate: runState,
+      toMaybeTerminate: runState
     });
     switch (runState.mode) {
       case 'run-forever':
@@ -268,17 +278,10 @@ export class PluginManager {
    */
   findExistingRunState(params: FindRunStateParams): RunState | undefined {
     const currentPluginId = this.currentRunState?.runPluginArgs.plugin.plugin_id;
-    if (
-      currentPluginId === params.runPluginArgs.plugin.plugin_id &&
-      getCurrentGRAtom()?.plugin_id === currentPluginId
-    ) {
+    if (currentPluginId === params.runPluginArgs.plugin.plugin_id && getCurrentGRAtom()?.plugin_id === currentPluginId) {
       return this.currentRunState;
     }
-    return this.runQueue.find(
-      runState =>
-        runState.runPluginArgs.plugin.plugin_id === params.runPluginArgs.plugin.plugin_id &&
-        runState.mode === params.mode
-    );
+    return this.runQueue.find(runState => runState.runPluginArgs.plugin.plugin_id === params.runPluginArgs.plugin.plugin_id && runState.mode === params.mode);
   }
 
   /**
@@ -295,7 +298,9 @@ export class PluginManager {
    * @param plugin Plugin
    */
   prepPluginForRun(plugin: Plugin): void {
-    this.log('prepPluginForRun', 'Prepping plugin for run', { plugin });
+    this.log('prepPluginForRun', 'Prepping plugin for run', {
+      plugin
+    });
     applyCodeExtensionPreferences(plugin, null);
     f$();
     n4();
@@ -314,7 +319,7 @@ export class PluginManager {
       currentRunState: this.currentRunState,
       runQueue: this.runQueue,
       runningPluginState: pluginState,
-      ...extra,
+      ...extra
     };
     logger.log('[PluginManager]', `[${method}]`, message, info);
   }
@@ -327,7 +332,6 @@ interface Plugin {
     containsWidget: boolean;
   };
 }
-
 interface RunPluginArgs {
   plugin: Plugin;
   command?: string;
@@ -337,35 +341,29 @@ interface RunPluginArgs {
   isWidget?: boolean;
   runMode?: 'default' | 'headless';
 }
-
 type RunMode = 'run-forever' | 'run-and-terminate';
-
 interface RunTask {
   promise: Promise<any>;
   resolve: (value?: any) => void;
   reject: (reason?: any) => void;
   onStart?: () => Promise<any>;
 }
-
 interface RunState {
   runPluginArgs: RunPluginArgs;
   runTasks: RunTask[];
   mode: RunMode;
   status: 'idle' | 'resolving' | 'settled';
 }
-
 interface EnqueueParams {
   runPluginArgs: RunPluginArgs;
   onStart?: () => Promise<any>;
   mode: RunMode;
   reuseExistingRunState?: boolean;
 }
-
 interface FindRunStateParams {
   runPluginArgs: RunPluginArgs;
   mode: RunMode;
 }
-
 type UpgradeHandler = (args: UpgradeArgs) => void;
 interface UpgradeArgs {
   afterUpgradeCallback: () => void;
@@ -380,28 +378,25 @@ interface UpgradeArgs {
  */
 export function useUpgradeHandler(): void {
   const file = selectCurrentFile();
-  const { handleUpgrade } = wH({
+  const {
+    handleUpgrade
+  } = wH({
     folderId: file?.folderId || null,
     fileInBrowser: {
       key: file?.key || '',
-      editorType: file?.editorType || null,
-    },
+      editorType: file?.editorType || null
+    }
   });
-
-  const upgradeCallback = useCallback(
-    (entryPoint: any) => {
-      if (!file) return;
-      const licenseType = getProductAccessTypeOrDefault(file.editorType);
-      handleUpgrade({
-        afterUpgradeCallback: noop,
-        licenseType,
-        upgradeReason: _$$i.EXTENSIONS,
-        entryPoint,
-      })({});
-    },
-    [file, handleUpgrade]
-  );
-
+  const upgradeCallback = useCallback((entryPoint: any) => {
+    if (!file) return;
+    const licenseType = getProductAccessTypeOrDefault(file.editorType);
+    handleUpgrade({
+      afterUpgradeCallback: noop,
+      licenseType,
+      upgradeReason: _$$i.EXTENSIONS,
+      entryPoint
+    })({});
+  }, [file, handleUpgrade]);
   useEffect(() => {
     PluginManager.instance.setUpgradeHandler(upgradeCallback);
     return () => {

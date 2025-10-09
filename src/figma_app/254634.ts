@@ -6,7 +6,7 @@ import { PropertyScope } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { b as _$$b } from "../figma_app/517135";
 import { getI18nString } from "../905/303541";
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { Q } from "../905/217916";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue, isValidValue } from "../905/216495";
@@ -27,7 +27,7 @@ export function $$$$N1() {
   let t = !e || isInvalidValue(e) ? [] : e.filter(e => e.visible);
   let r = uQ();
   let n = Q();
-  let c = v4();
+  let c = getEffectiveCodegenLanguage();
   let b = isDevHandoffEditorType();
   let v = pF(e => _$$b(e.mirror.selectionProperties, "inheritFillStyleKeyForStroke"));
   let A = useSelector(e => e.mirror.selectionProperties.styleIdForStrokeFill);

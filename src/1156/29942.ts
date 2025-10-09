@@ -24,7 +24,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { truncate, isWhitespace, isValidUrl } from "../figma_app/930338";
 import { Y as _$$Y } from "../905/506207";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { O1, Zl, uQ, Tv } from "../figma_app/311375";
+import { getSelectedSceneGraphItems, getSceneGraphItemByKey, useSingleSelectedKey, useSceneGraphSelectionKeys } from "../figma_app/311375";
 import { showModalHandler } from "../905/156213";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentSessionID } from "../figma_app/440875";
@@ -1674,7 +1674,7 @@ function t0({
   featureType: k
 }) {
   let E = useIsSelectedFigmakeFullscreen();
-  let w = O1();
+  let w = getSelectedSceneGraphItems();
   let A = k === lV.AI_ASSISTANT && w && !u;
   let T = useAtomWithSubscription(f3);
   let I = useCallback(e => {
@@ -1983,7 +1983,7 @@ function ni({
   let d = n.trim();
   let u = t === lV.AI_ASSISTANT && o && o.length > 0 && !l;
   let x = useSceneGraphSelector();
-  let m = useMemo(() => o && Array.isArray(o) ? o.map(e => Zl(x, e)).filter(e => null !== e) : [], [o, x]);
+  let m = useMemo(() => o && Array.isArray(o) ? o.map(e => getSceneGraphItemByKey(x, e)).filter(e => null !== e) : [], [o, x]);
   let h = _$$N3();
   let p = e => {
     h(e);
@@ -3206,7 +3206,7 @@ function rE({
     productType
   } = _$$q2(e, o, d, n?.id || "", s);
   let f = d === lV.AI_ASSISTANT ? JT.ASSISTANT_CHAT : JT.CODE_CHAT;
-  let y = uQ();
+  let y = useSingleSelectedKey();
   let _ = {
     action: f,
     source: d,
@@ -4932,7 +4932,7 @@ export function $$iC0({
     stashLibraryImport,
     setFrozenOnLibaryImport
   } = S1();
-  let eL = Tv();
+  let eL = useSceneGraphSelectionKeys();
   let ez = async ({
     message: e,
     errors: t,

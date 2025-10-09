@@ -452,7 +452,7 @@ import { mS as _$$mS, wR, zD } from '../figma_app/293326';
 import { kw } from '../figma_app/298911';
 import { b as _$$b6 } from '../figma_app/300024';
 import { filterPublishedResources, filterResourcesByOrgId, getCurrentPluginVersion, getPluginMetadata, getPluginVersion, pluginMetadata } from '../figma_app/300692';
-import { uQ as _$$uQ, Tv } from '../figma_app/311375';
+import { useSingleSelectedKey, useSceneGraphSelectionKeys } from '../figma_app/311375';
 import { R as _$$R2 } from '../figma_app/313269';
 import { logAndTrackCTA, trackFileEvent } from '../figma_app/314264';
 import { KD, O1 } from '../figma_app/317394';
@@ -9181,7 +9181,7 @@ function um({
   return null;
 }
 function uv() {
-  let e = Tv();
+  let e = useSceneGraphSelectionKeys();
   let t = useSceneGraphSelector();
   let i = useRef([]);
   let n = useRef(null);
@@ -15249,7 +15249,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   }, n);
 }], [WhiteboardFeatures.WHITEBOARD_PLATFORM_SHAPE, function () {
   let e = _$$es();
-  let t = _$$uQ();
+  let t = useSingleSelectedKey();
   let i = useDeepEqualSceneValue((e, t) => {
     if (!t) return null;
     let i = e.get(t);

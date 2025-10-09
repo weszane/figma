@@ -18,7 +18,7 @@ import { A as _$$A } from '../905/891805';
 import { a as _$$a } from '../905/964520';
 import { h as _$$h } from '../905/994594';
 import { atom, useAtomValueAndSetter } from '../figma_app/27355';
-import { AF, Nx } from '../figma_app/346422';
+import { removeDependencyStatusListener, addDependencyStatusListener } from '../figma_app/346422';
 import { throwTypeError } from '../figma_app/465776';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { $P, $t, Aw, b6, Hg, ij, L0, Lz, Pe, qf, Ri, ve, w4, yh, Z9 } from '../figma_app/770359';
@@ -574,8 +574,8 @@ export function $$M0({
         C(e => e?.status === 'finished' ? null : e);
       }, 2e3)) : e && (clearTimeout(e), e = null)) : throwTypeError(t.type);
     };
-    Nx(t);
-    return () => AF(t);
+    addDependencyStatusListener(t);
+    return () => removeDependencyStatusListener(t);
   }, []);
   let el = useCallback(e => {
     e.stopPropagation();

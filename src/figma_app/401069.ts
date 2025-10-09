@@ -81,22 +81,22 @@ export function logFileSaveAs(): void {
 }
 
 // Thunk: Export event
-const logFileExportThunk = createOptimistThunk((_store, _payload) => {
+export const logFileExportThunk = createOptimistThunk((_store, _payload) => {
   logFileActivity("fig_file_export")
 })
 
 // Thunk: Image Download event
-const logFileImageDownloadThunk = createOptimistThunk((_store, _payload) => {
+export const logFileImageDownloadThunk = createOptimistThunk((_store, _payload) => {
   logFileActivity("fig_file_image_download")
 })
 
 // Action creators
-const getActivityLogsAction = createActionCreator("GET_ACTIVITY_LOGS")
-const clearCursorActivityLogsAction = createActionCreator("CLEAR_CURSOR_ACTIVITY_LOGS")
-const setActivityLogsAction = createActionCreator("SET_ACTIVITY_LOGS")
+export const getActivityLogsAction = createActionCreator("GET_ACTIVITY_LOGS")
+export const clearCursorActivityLogsAction = createActionCreator("CLEAR_CURSOR_ACTIVITY_LOGS")
+export const setActivityLogsAction = createActionCreator("SET_ACTIVITY_LOGS")
 
 // Thunk: Fetch activity logs with filters and pagination
-const fetchActivityLogsThunk = createOptimistThunk(
+export const fetchActivityLogsThunk = createOptimistThunk(
   (storeContext, params: FetchActivityLogsParams) => {
     const { newQuery, teamId, emails, eventName, date } = params
     const state: DebugState = storeContext.getState()

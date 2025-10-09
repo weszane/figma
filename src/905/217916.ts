@@ -1,4 +1,4 @@
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { gB } from "../905/294543";
 import { V0 } from "../figma_app/755395";
 import { useDevModeValueAndSetter, devModeOptions } from "../905/191741";
@@ -9,7 +9,7 @@ export function $$d0() {
   let i = isCodegenSupportedForLanguage();
   let d = q();
   let c = getCodeExtensionPreferences();
-  let u = v4();
+  let u = getEffectiveCodegenLanguage();
   let p = gB();
   let m = V0({
     codeLanguage: u,

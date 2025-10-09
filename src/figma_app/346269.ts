@@ -7,7 +7,7 @@ import { logError } from "../905/714362";
 import { MIXED_MARKER } from "../905/216495";
 import { JL } from "../figma_app/690664";
 import { Zr } from "../figma_app/114522";
-import { Y3 } from "../figma_app/346422";
+import { getCodeEditingSnippet } from "../figma_app/346422";
 import { $5 } from "../figma_app/504321";
 import { D } from "../figma_app/446411";
 import { D as _$$D } from "../905/382895";
@@ -263,7 +263,7 @@ export class $$f1 {
       if (!t) return null;
       s.push(t);
     }
-    return await Y3(s);
+    return await getCodeEditingSnippet(s);
   }
   destroy() {
     for (let e of this._unsubscribes) e();

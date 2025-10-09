@@ -1,99 +1,228 @@
-import { consentAllowedAtom } from "../905/18800";
-import { $z } from "../905/62762";
-import { debugState } from "../905/407919";
-import { getBoundVariables } from "../905/882689";
-import { Ay } from "../905/931912";
-import { atomStoreManager } from "../figma_app/27355";
-import { trackDefinedFileEvent } from "../figma_app/314264";
-import { getMcpSettings } from "../figma_app/342355";
-import { traverseChildren } from "../figma_app/387100";
-import { G } from "../figma_app/714966";
-export function $$m2(e, t, i) {
-  trackDefinedFileEvent("mcp.client_tool_call_duration_split", debugState.getState().openFile?.key || "", debugState.getState(), {
-    operation: e,
-    durationMs: Math.round(t),
-    toolName: i
-  });
+import { consentAllowedAtom } from "../905/18800"
+import { shouldEnableSprigAnalytics } from "../905/62762"
+import { debugState } from "../905/407919"
+import { getBoundVariables } from "../905/882689"
+import { SprigSDKManager } from "../905/931912"
+import { atomStoreManager } from "../figma_app/27355"
+import { trackDefinedFileEvent } from "../figma_app/314264"
+import { getMcpSettings } from "../figma_app/342355"
+import { traverseChildren } from "../figma_app/387100"
+import { SdkMessageType } from "../figma_app/714966"
+// Renamed variables, added types, simplified logic, improved readability
+interface ToolCallMetrics {
+  numComponents: number
+  numInstances: number
+  numVariables: number
+  numChildren: number
+  nodeType: string
+  colorVariablesUsed: number
+  effectStylesUsed: number
+  framesWithAutoLayout: number
+  framesWithGridLayout: number
+  responseSize: number
+  nodesWithCodeConnect: number
+  numHiddenNodes: number
+  isComponentSet: boolean
+  nodesWithCodeConnectV1: number
+  nodesWithCodeConnectLibrary: number
+  nodesWithCodeConnectSnippet: number
+  nodesWithAnnotations: number
 }
-export function $$h1({
-  store: e,
-  startingNode: t,
-  codeSyntax: i,
-  responseSize: r,
-  toolArgs: a,
-  toolName: s,
-  codeConnectMapping: o
+
+interface NodeData {
+  visible?: boolean
+  annotations?: any[]
+  type: string
+  isStateGroup?: boolean
+  stackMode?: string
+  boundVariables?: any
+  childrenNodes?: any[]
+  id: string
+  effects?: Array<{ visible: boolean }>
+}
+
+interface CodeConnectEntry {
+  snippet?: boolean
+  version?: string
+}
+
+interface StoreState {
+  openFile?: { key: string }
+  mirror: { sceneGraphSelection: Record<string, any> }
+}
+
+interface StoreContext {
+  getState: () => StoreState
+}
+
+export function trackToolCallDuration(operation: string, durationMs: number, toolName: string) {
+  trackDefinedFileEvent(
+    "mcp.client_tool_call_duration_split",
+    debugState.getState().openFile?.key || "",
+    debugState.getState(),
+    {
+      operation,
+      durationMs: Math.round(durationMs),
+      toolName,
+    },
+  )
+}
+
+export function analyzeToolCallResult({
+  store,
+  startingNode,
+  codeSyntax,
+  responseSize,
+  toolArgs,
+  toolName,
+  codeConnectMapping,
+}: {
+  store: StoreContext
+  startingNode: NodeData
+  codeSyntax: string
+  responseSize: number
+  toolArgs: any
+  toolName: string
+  codeConnectMapping: Record<string, CodeConnectEntry>
 }) {
-  let l = {
+  const metrics: ToolCallMetrics = {
     numComponents: 0,
     numInstances: 0,
     numVariables: 0,
     numChildren: 0,
-    nodeType: t.type,
+    nodeType: startingNode.type,
     colorVariablesUsed: 0,
     effectStylesUsed: 0,
     framesWithAutoLayout: 0,
     framesWithGridLayout: 0,
-    responseSize: r,
+    responseSize,
     nodesWithCodeConnect: 0,
     numHiddenNodes: 0,
-    isComponentSet: !1,
+    isComponentSet: false,
     nodesWithCodeConnectV1: 0,
     nodesWithCodeConnectLibrary: 0,
     nodesWithCodeConnectSnippet: 0,
-    nodesWithAnnotations: 0
-  };
-  let d = new Map();
-  traverseChildren(t, e => {
-    let t;
-    if (!e.visible) {
-      l.numHiddenNodes += 1;
-      return;
+    nodesWithAnnotations: 0,
+  }
+
+  const variableMap = new Map<string, string>()
+
+  traverseChildren(startingNode, (node: NodeData) => {
+    // Count hidden nodes
+    if (!node.visible) {
+      metrics.numHiddenNodes += 1
+      return
     }
-    if (e.annotations && e.annotations.length > 0 && (l.nodesWithAnnotations += 1), e.type === "SYMBOL" ? l.numComponents += 1 : e.type === "INSTANCE" && (l.numInstances += 1), e.isStateGroup && (l.isComponentSet = !0), e.type === "FRAME" && (["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.stackMode === "GRID" && (l.framesWithGridLayout += 1)), e.type === "FRAME" && ["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.boundVariables && getBoundVariables(e, i).forEach(e => {
-      e && e.value !== null && d.set(e.codeSyntaxName || e.name, e.type);
-    }), e.childrenNodes && (l.numChildren += e.childrenNodes.length), e.id in o) {
-      let t = o[e.id];
-      t && (l.nodesWithCodeConnect += 1, t.snippet && (l.nodesWithCodeConnectSnippet += 1), t.version === "figmadoc" && (l.nodesWithCodeConnectV1 += 1), t.version === "component_browser" && (l.nodesWithCodeConnectLibrary += 1));
+
+    // Count annotated nodes
+    if (node.annotations && node.annotations.length > 0) {
+      metrics.nodesWithAnnotations += 1
     }
-    t = 0;
-    e.effects && e.effects.length > 0 && (t = e.effects.filter(e => e.visible).length);
-    let {
-      effectStylesUsed
-    } = {
-      effectStylesUsed: t
-    };
-    l.effectStylesUsed += effectStylesUsed;
-  });
-  l.numVariables = d.size;
-  d.forEach((e, t) => {
-    e === "color" && (l.colorVariablesUsed += 1);
-  });
-  trackDefinedFileEvent("mcp.client_tool_call_completed", e.getState().openFile?.key || "", e.getState(), {
-    toolArgs: JSON.stringify(a),
-    currentSelection: JSON.stringify(Object.keys(e.getState().mirror.sceneGraphSelection)),
-    rawToolName: s,
-    toolName: s,
-    clientLanguages: a?.clientLanguages,
-    clientFrameworks: a?.clientFrameworks,
-    ...l,
-    ...getMcpSettings()
-  });
+
+    // Count components and instances
+    if (node.type === "SYMBOL") {
+      metrics.numComponents += 1
+    }
+    else if (node.type === "INSTANCE") {
+      metrics.numInstances += 1
+    }
+
+    // Check if component set
+    if (node.isStateGroup) {
+      metrics.isComponentSet = true
+    }
+
+    // Count frames with layout types
+    if (node.type === "FRAME") {
+      if (["HORIZONTAL", "VERTICAL"].includes(node.stackMode || "")) {
+        metrics.framesWithAutoLayout += 1
+      }
+      if (node.stackMode === "GRID") {
+        metrics.framesWithGridLayout += 1
+      }
+    }
+
+    // Collect bound variables
+    if (node.boundVariables) {
+      getBoundVariables(node, codeSyntax).forEach((variable) => {
+        if (variable && variable.value !== null) {
+          variableMap.set(variable.codeSyntaxName || variable.name, variable.type)
+        }
+      })
+    }
+
+    // Count children nodes
+    if (node.childrenNodes) {
+      metrics.numChildren += node.childrenNodes.length
+    }
+
+    // Analyze code connect mappings
+    if (node.id in codeConnectMapping) {
+      const mapping = codeConnectMapping[node.id]
+      if (mapping) {
+        metrics.nodesWithCodeConnect += 1
+        if (mapping.snippet) {
+          metrics.nodesWithCodeConnectSnippet += 1
+        }
+        if (mapping.version === "figmadoc") {
+          metrics.nodesWithCodeConnectV1 += 1
+        }
+        if (mapping.version === "component_browser") {
+          metrics.nodesWithCodeConnectLibrary += 1
+        }
+      }
+    }
+
+    // Count visible effects
+    let visibleEffectsCount = 0
+    if (node.effects && node.effects.length > 0) {
+      visibleEffectsCount = node.effects.filter(effect => effect.visible).length
+    }
+    metrics.effectStylesUsed += visibleEffectsCount
+  })
+
+  // Process collected variables
+  metrics.numVariables = variableMap.size
+  variableMap.forEach((type) => {
+    if (type === "color") {
+      metrics.colorVariablesUsed += 1
+    }
+  })
+
+  // Track completion event
+  trackDefinedFileEvent(
+    "mcp.client_tool_call_completed",
+    store.getState().openFile?.key || "",
+    store.getState(),
+    {
+      toolArgs: JSON.stringify(toolArgs),
+      currentSelection: JSON.stringify(Object.keys(store.getState().mirror.sceneGraphSelection)),
+      rawToolName: toolName,
+      toolName,
+      clientLanguages: toolArgs?.clientLanguages,
+      clientFrameworks: toolArgs?.clientFrameworks,
+      ...metrics,
+      ...getMcpSettings(),
+    },
+  )
 }
-export function $$g0(e) {
-  let t = atomStoreManager.get(consentAllowedAtom);
-  $z({
-    canUseCookieForAnalytics: t,
-    geofence: {}
-  }) && Ay.sendMessage({
-    type: G.Call,
-    content: {
-      args: ["track", "mcp_tool_used", {
-        toolName: e
-      }]
-    }
-  });
+
+export function trackToolUsage(toolName: string) {
+  const consentAllowed = atomStoreManager.get(consentAllowedAtom)
+
+  if (shouldEnableSprigAnalytics({
+    canUseCookieForAnalytics: consentAllowed,
+    geofence: {},
+  })) {
+    SprigSDKManager.sendMessage({
+      type: SdkMessageType.Call,
+      content: {
+        args: ["track", "mcp_tool_used", { toolName }],
+      },
+    })
+  }
 }
-export const CX = $$g0;
-export const Kl = $$h1;
-export const w6 = $$m2;
+
+export const CX = trackToolUsage
+export const Kl = analyzeToolCallResult
+export const w6 = trackToolCallDuration

@@ -1,130 +1,226 @@
-import { useMemo, useEffect, useCallback } from "react";
-import { IssueCategory, ColorPalette, HandoffBindingsCpp, SessionOrigin } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { getI18nString } from "../905/303541";
-import { executeInIgnoreUndoRedoScope } from "../905/955316";
-import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
-var d = (e => (e[e.DARK = 0] = "DARK", e[e.LIGHT = 1] = "LIGHT", e))(d || {});
-export function $$c5(e) {
-  switch (e) {
+import { useCallback, useEffect, useMemo } from "react"
+import { permissionScopeHandler } from "../905/189185"
+import { getI18nString } from "../905/303541"
+import { executeInIgnoreUndoRedoScope } from "../905/955316"
+import { useStrictDeepEqualSceneValue } from "../figma_app/167249"
+import { ColorPalette, HandoffBindingsCpp, IssueCategory, SessionOrigin } from "../figma_app/763686"
+// Refactored code: Improved readability, added types, renamed variables, and simplified logic
+
+// Enum for theme modes
+
+/**
+ * Gets the localized string for a given issue category
+ * @param category - The issue category
+ * @returns Localized string key
+ */
+export function getCategoryPresetLabel(category: IssueCategory): string {
+  switch (category) {
     case IssueCategory.ACCESSIBILITY:
-      return getI18nString("dev_handoff.annotations.category_preset.accessibility");
+      return getI18nString("dev_handoff.annotations.category_preset.accessibility")
     case IssueCategory.BEHAVIOR:
-      return getI18nString("dev_handoff.annotations.category_preset.behavior");
+      return getI18nString("dev_handoff.annotations.category_preset.behavior")
     case IssueCategory.CONTENT:
-      return getI18nString("dev_handoff.annotations.category_preset.content");
+      return getI18nString("dev_handoff.annotations.category_preset.content")
     case IssueCategory.DEVELOPMENT:
-      return getI18nString("dev_handoff.annotations.category_preset.development");
+      return getI18nString("dev_handoff.annotations.category_preset.development")
     case IssueCategory.INTERACTION:
-      return getI18nString("dev_handoff.annotations.category_preset.interaction");
+      return getI18nString("dev_handoff.annotations.category_preset.interaction")
+    default:
+      return "" // Handle unexpected categories gracefully
   }
 }
-export function $$u0(e) {
-  switch (e) {
+
+/**
+ * Maps an issue category to a color palette
+ * @param category - The issue category
+ * @returns Corresponding color palette
+ */
+export function getCategoryPresetColor(category: IssueCategory): ColorPalette {
+  switch (category) {
     case IssueCategory.ACCESSIBILITY:
-      return ColorPalette.PINK;
+      return ColorPalette.PINK
     case IssueCategory.CONTENT:
-      return ColorPalette.ORANGE;
+      return ColorPalette.ORANGE
     case IssueCategory.BEHAVIOR:
-      return ColorPalette.BLUE;
+      return ColorPalette.BLUE
     case IssueCategory.DEVELOPMENT:
-      return ColorPalette.GREEN;
+      return ColorPalette.GREEN
     case IssueCategory.INTERACTION:
-      return ColorPalette.BLUE;
+      return ColorPalette.BLUE
+    default:
+      return ColorPalette.BLUE // Default fallback color
   }
 }
-export let $$p9 = {
+
+/**
+ * Color configuration mapping for annotation categories
+ */
+export const CATEGORY_COLOR_CONFIG: Record<ColorPalette, { color: string, label: () => string }> = {
   [ColorPalette.GREEN]: {
     color: "rgba(61, 160, 89, 1)",
-    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.green")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.green"),
   },
   [ColorPalette.PINK]: {
     color: "rgba(216, 52, 158, 1)",
-    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.pink")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.pink"),
   },
   [ColorPalette.RED]: {
     color: "rgba(227, 76, 44, 1)",
-    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.red")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.red"),
   },
   [ColorPalette.BLUE]: {
     color: "rgba(27, 113, 217, 1)",
-    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.blue")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.blue"),
   },
   [ColorPalette.YELLOW]: {
     color: "rgba(251, 198, 69, 1)",
-    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.yellow")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.yellow"),
   },
   [ColorPalette.ORANGE]: {
     color: "rgba(255, 165, 0, 1)",
-    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.orange")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.orange"),
   },
   [ColorPalette.TEAL]: {
     color: "rgba(0, 128, 128, 1)",
-    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.teal")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.teal"),
   },
   [ColorPalette.VIOLET]: {
     color: "rgba(148, 0, 211, 1)",
-    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.violet")
-  }
-};
-export function $$_3(e = {
-  initializeIfNull: !1
-}) {
-  let {
-    initializeIfNull = !1
-  } = e;
-  let r = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
-  let s = useMemo(() => [], []);
-  let d = useStrictDeepEqualSceneValue(e => e.getRoot().annotationCategories);
-  useEffect(() => {
-    !r && null === d && initializeIfNull && executeInIgnoreUndoRedoScope(() => {
-      permissionScopeHandler.system("initialize-annotation-categories", () => {
-        HandoffBindingsCpp.initializeAnnotationCategories();
-      });
-    });
-  }, [d, r, initializeIfNull]);
-  return d ?? s;
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.violet"),
+  },
 }
-export function $$h7() {
-  return useCallback(e => {
+
+/**
+ * Custom hook to manage annotation categories
+ * @param options - Configuration options
+ * @returns Annotation categories array
+ */
+export function useAnnotationCategories(options: { initializeIfNull?: boolean } = {}) {
+  const { initializeIfNull = false } = options
+
+  const isReadOnly = useMemo(() =>
+    HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), [])
+
+  const emptyCategories = useMemo(() => [], [])
+  const categories = useStrictDeepEqualSceneValue(
+    state => state.getRoot().annotationCategories,
+  )
+
+  useEffect(() => {
+    if (!isReadOnly && categories === null && initializeIfNull) {
+      executeInIgnoreUndoRedoScope(() => {
+        permissionScopeHandler.system("initialize-annotation-categories", () => {
+          HandoffBindingsCpp.initializeAnnotationCategories()
+        })
+      })
+    }
+  }, [categories, isReadOnly, initializeIfNull])
+
+  return categories ?? emptyCategories
+}
+
+/**
+ * Hook to update custom annotation categories
+ * @returns Update function for annotation categories
+ */
+export function useUpdateAnnotationCategories() {
+  return useCallback((newCategories: any[]) => {
     executeInIgnoreUndoRedoScope(() => {
       permissionScopeHandler.user("update-annotation-categories", () => {
-        HandoffBindingsCpp.setCustomAnnotationCategories(e);
-      });
-    });
-  }, []);
+        HandoffBindingsCpp.setCustomAnnotationCategories(newCategories)
+      })
+    })
+  }, [])
 }
-export function $$m2(e) {
-  return $$p9[$$u0(e)];
+
+/**
+ * Gets the color configuration for a preset category
+ * @param category - The issue category
+ * @returns Color configuration object
+ */
+export function getPresetCategoryColorConfig(category: IssueCategory) {
+  return CATEGORY_COLOR_CONFIG[getCategoryPresetColor(category)]
 }
-export function $$g6(e) {
-  return e.preset !== IssueCategory.NONE ? $$u0(e.preset) : e.custom?.color ?? null;
+
+/**
+ * Gets the color palette for an annotation category
+ * @param category - The annotation category
+ * @returns Color palette or null
+ */
+export function getAnnotationCategoryColor(category: any): ColorPalette | null {
+  if (category.preset !== IssueCategory.NONE) {
+    return getCategoryPresetColor(category.preset)
+  }
+  return category.custom?.color ?? null
 }
-export function $$f1(e) {
-  return e.preset !== IssueCategory.NONE ? $$m2(e.preset).color : e.custom?.color != null ? $$p9[e.custom.color].color : null;
+
+/**
+ * Gets the color value for an annotation category
+ * @param category - The annotation category
+ * @returns Color string or null
+ */
+export function getAnnotationCategoryColorValue(category: any): string | null {
+  if (category.preset !== IssueCategory.NONE) {
+    return getPresetCategoryColorConfig(category.preset).color
+  }
+
+  if (category.custom?.color != null) {
+    return CATEGORY_COLOR_CONFIG[category.custom.color].color
+  }
+
+  return null
 }
-export function $$E8(e) {
-  return e.preset !== IssueCategory.NONE ? $$c5(e.preset) : e.custom?.label ?? "";
+
+/**
+ * Gets the label for an annotation category
+ * @param category - The annotation category
+ * @returns Label string
+ */
+export function getAnnotationCategoryLabel(category: any): string {
+  if (category.preset !== IssueCategory.NONE) {
+    return getCategoryPresetLabel(category.preset)
+  }
+  return category.custom?.label ?? ""
 }
-export function $$y4(e) {
-  let t = e.preset === IssueCategory.NONE ? e.custom?.color : $$u0(e.preset);
-  return null != t && 0 === function (e) {
-    switch (e) {
+
+/**
+ * Checks if an annotation category has a light color
+ * @param category - The annotation category
+ * @returns True if the category uses a light color
+ */
+export function isAnnotationCategoryLightColor(category: any): boolean {
+  // Determine the color palette to check
+  const colorPalette = category.preset === IssueCategory.NONE
+    ? category.custom?.color
+    : getCategoryPresetColor(category.preset)
+
+  // Check if color is defined and is a light color
+  if (colorPalette == null) {
+    return false
+  }
+
+  // Function to determine if a color palette is light
+  const isLightColor = (palette: ColorPalette): number => {
+    switch (palette) {
       case ColorPalette.ORANGE:
       case ColorPalette.YELLOW:
-        return 0;
+        return 0 // Light colors
       default:
-        return 1;
+        return 1 // Dark colors
     }
-  }(t);
+  }
+
+  return isLightColor(colorPalette) === 0
 }
-export const AP = $$u0;
-export const FQ = $$f1;
-export const Lw = $$m2;
-export const XR = $$_3;
-export const cD = $$y4;
-export const h9 = $$c5;
-export const l6 = $$g6;
-export const mi = $$h7;
-export const uA = $$E8;
-export const yu = $$p9;
+
+// Export aliases for backward compatibility
+export const AP = getCategoryPresetColor
+export const FQ = getAnnotationCategoryColorValue
+export const Lw = getPresetCategoryColorConfig
+export const XR = useAnnotationCategories
+export const cD = isAnnotationCategoryLightColor
+export const h9 = getCategoryPresetLabel
+export const l6 = getAnnotationCategoryColor
+export const mi = useUpdateAnnotationCategories
+export const uA = getAnnotationCategoryLabel
+export const yu = CATEGORY_COLOR_CONFIG

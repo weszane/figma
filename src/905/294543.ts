@@ -11,9 +11,9 @@ import { getUserOrAnonymousId } from "../905/506024";
 import { getPluginByFileId } from "../figma_app/300692";
 import { hasLocalFileId } from "../figma_app/155287";
 import { FDocumentType } from "../905/862883";
-import { XP } from "../figma_app/655139";
+import { normalizeCodegenLanguage } from "../figma_app/655139";
 function _(e) {
-  let t = XP(e);
+  let t = normalizeCodegenLanguage(e);
   updateDevHandoffCodeLanguage(t);
   return t;
 }

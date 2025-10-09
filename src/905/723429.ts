@@ -23,7 +23,7 @@ import { allSubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { extractComponentInfo } from "../figma_app/407767";
 import { hB } from "../figma_app/609511";
-import { B9, Py } from "../figma_app/346422";
+import { updateImagesToEsmImports, optimizeCode } from "../figma_app/346422";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { analyticsEventManager } from "../905/449184";
 import { Om, jb, tI, Zc, Ul } from "../905/127813";
@@ -211,10 +211,10 @@ async function L(e) {
   let s = await designToReact(e, e => r.serializeHTML(e.guid), {
     convertToTailwindCSS: !0,
     imageAssetsOptions: {
-      transformer: B9,
+      transformer: updateImagesToEsmImports,
       assets: t
     },
-    optimizeCode: e => a ? Py(e, !0) : Promise.resolve(e)
+    optimizeCode: e => a ? optimizeCode(e, !0) : Promise.resolve(e)
   });
   let l = s.files.filter(e => "index.tsx" === e.name)[0]?.contents;
   return l?.toString() || null;

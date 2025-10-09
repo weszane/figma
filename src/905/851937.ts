@@ -6,7 +6,6 @@ import { getCounter, getStoredValue, hasStoredValue, incrementCounter, setStored
 import { SubscriptionStatus } from '../905/272080'
 import { VisualBellActions } from '../905/302958'
 import { getI18nString } from '../905/303541'
-import { n as _$$n } from '../905/347702'
 import { debugState } from '../905/407919'
 import { trackEventAnalytics } from '../905/449184'
 import { createDefaultPluginOptions, createPluginInstance } from '../905/472793'
@@ -47,10 +46,98 @@ import { isInteractionPathCheck } from '../figma_app/897289'
 import { DEFAULT_ALLOWED_ORIGINS, getPluginIframeMode, PluginInstanceManager } from '../figma_app/985200'
 import { ensureVmModuleLoaded } from "./realmVmWrapper"
 
-let n
-let r
-let a
-let $ = `const __html__ = (() => {
+/**
+ * Creates an error handler based on configuration
+ */
+function createErrorHandler(showRuntimeErrors: boolean, isWidget: boolean, originalErrorHandler?: (error: string) => void) {
+  if (showRuntimeErrors) {
+    let errorCount = 0
+    const visualBellErrorHandler = (errorMessage: string) => {
+      const formattedMessage = errorMessage.startsWith('Error')
+        ? errorMessage.replace('Error', 'error')
+        : errorMessage
+      const errorCountSuffix = ++errorCount > 1 ? ` (${errorCount} errors total)` : ''
+      const fullMessage = `${isWidget ? 'Widget' : 'Plugin'} ${formattedMessage}${errorCountSuffix}`
+      showVisualBell(fullMessage)
+    }
+
+    return originalErrorHandler
+      ? (error: string) => {
+          visualBellErrorHandler(error)
+          originalErrorHandler(error)
+        }
+      : visualBellErrorHandler
+  }
+
+  return originalErrorHandler || (() => {})
+}
+
+/**
+ * Performs syntax checking on plugin code
+ */
+async function performSyntaxCheck(code: string, noConsoleError: boolean) {
+  let parseResult
+  try {
+    parseResult = await parseAndRemoveSourceMapComments(code)
+  }
+  catch {
+    // Ignore parse errors for now
+  }
+
+  if (parseResult && parseResult.success === false) {
+    const { lineNumber, column, description } = parseResult.error
+    const errorMessage = `Syntax error on line ${lineNumber}: ${description}`
+    const codeLines = code.split('\n')
+    let contextualError = ''
+
+    const isValidLineAndColumn = lineNumber >= 1 && lineNumber <= codeLines.length
+      && column >= 1 && column < 100
+    if (isValidLineAndColumn) {
+      const errorLine = codeLines[lineNumber - 1].replace(/\t/g, ' ').slice(0, column + 100)
+      const pointer = `${' '.repeat(column - 1)}^`
+      contextualError = `\n${errorLine}\n${pointer}`
+    }
+
+    if (!noConsoleError) {
+      yA(errorMessage + contextualError)
+    }
+
+    return {
+      hasError: true,
+      error: new Error(errorMessage),
+      parseResult,
+    }
+  }
+
+  return {
+    hasError: false,
+    error: null,
+    parseResult,
+  }
+}
+
+/**
+ * Extracts HTML content from plugin code and replaces it with proxy code
+ */
+function extractHtmlFromCode(code: string) {
+  let extractedHtml = null
+  // eslint-disable-next-line regexp/no-useless-assertions
+  const processedCode = code.replace(/^const __html__ = ("(.*?)([^\\]|^)");/, (match, htmlString) => {
+    extractedHtml = JSON.parse(htmlString.split('"+"').join(''))
+    return HTML_PROXY_CODE
+  })
+
+  return {
+    html: extractedHtml,
+    code: processedCode,
+  }
+}
+
+let testMessageHandlerGlobal
+let realmsSecurityCheckPromise
+let cppvmSecurityCheckPromise
+
+const HTML_PROXY_CODE = `const __html__ = (() => {
   let realString = null;
   const getRealString = () => {
     if (realString == null) {
@@ -73,10 +160,19 @@ let $ = `const __html__ = (() => {
     },
   );
 })();`.replace(/\n/g, ' ')
-async function Z(e) {
-  let t
-  let i
-  let {
+
+async function executePluginCode(pluginExecutionOptions: any): Promise<{
+  runResult: Promise<string>
+  closePlugin: (result?: {
+    message?: string
+    isError?: boolean
+    overriddenBy?: any
+  }) => Promise<void>
+}> {
+  let processedErrorHandler
+  let extractedHtml
+
+  const {
     apiVersion,
     checkSyntax,
     code,
@@ -98,7 +194,7 @@ async function Z(e) {
     securityCheckReporter,
     showRuntimeErrors,
     stats,
-    testMessageHandler = n,
+    testMessageHandler = testMessageHandlerGlobal,
     triggeredFrom,
     userID,
     vmType,
@@ -107,81 +203,48 @@ async function Z(e) {
     allowIncrementalUnsafeApiCalls,
     enableNativeJsx,
     enableResponsiveSetHierarchyMutations,
-  } = e
-  let F = isWidget ? 'widget' : 'plugin'
+  } = pluginExecutionOptions
+
+  const pluginType = isWidget ? 'widget' : 'plugin'
   stats.markTime('timeToRunPluginCodeInternalMs')
-  if (apiVersion === '0.6.0' || apiVersion === '1.0.0') {
-    //
+
+  const SUPPORTED_API_VERSIONS = ['0.6.0', '1.0.0']
+  if (!SUPPORTED_API_VERSIONS.includes(apiVersion)) {
+    throw new Error(`Unknown ${pluginType} api version "${apiVersion}". Supported versions: ${SUPPORTED_API_VERSIONS.join(', ')}`)
   }
-  else {
-    throw new Error(`Unknown ${F} api version "${apiVersion}"`)
-  }
-  if (showRuntimeErrors) {
-    let e
-    e = 0
-    let i = (t) => {
-      let i = t.startsWith('Error') ? t.replace('Error', 'error') : t
-      let n = ''
-      ++e > 1 && (n = ` (${e} errors total)`)
-      isWidget ? showVisualBell(`Widget ${i}${n}`) : showVisualBell(`Plugin ${i}${n}`)
+
+  processedErrorHandler = createErrorHandler(showRuntimeErrors, isWidget, errorHandler)
+
+  let processedCode = code
+  const shouldCheckSyntax = !getFeatureFlags().plugins_remove_syntax_checking && checkSyntax !== false
+
+  if (shouldCheckSyntax) {
+    const syntaxCheckResult = await performSyntaxCheck(code, noConsoleError)
+    if (syntaxCheckResult.hasError) {
+      return syntaxCheckResult.error as any
     }
-    t = errorHandler
-      ? (e) => {
-          i(e)
-          errorHandler(e)
-        }
-      : i
-  }
-  else {
-    t = errorHandler || (() => {})
-  }
-  let M = code
-  if (!getFeatureFlags().plugins_remove_syntax_checking && !1 !== checkSyntax) {
-    let e
-    try {
-      e = await parseAndRemoveSourceMapComments(code)
+
+    if (vmType === 'realms' && syntaxCheckResult.parseResult?.success) {
+      processedCode = joinStringSegments(code, syntaxCheckResult.parseResult.rangesToRemove)
     }
-    catch {}
-    if (e && !1 === e.success) {
-      let {
-        lineNumber,
-        column,
-        description,
-      } = e.error
-      let r = `Syntax error on line ${lineNumber}: ${description}`
-      let a = code.split('\n')
-      let o = ''
-      if (lineNumber >= 1 && lineNumber <= a.length && column >= 1 && column < 100) {
-        let e = a[lineNumber - 1].replace(/\t/g, ' ').slice(0, column + 100)
-        o += `
-${e}
-${' '.repeat(column - 1)}^`
-      }
-      noConsoleError || yA(r + o)
-      return new Error(r)
-    }
-    vmType === 'realms' && e && e.success && (M = joinStringSegments(code, e.rangesToRemove))
   }
-  let j = null;
-  ({
-    html: j,
-    code: M,
-  } = (i = null, {
-    code: M.replace(/^const __html__ = ("(.*?)([^\\]|^)");/, (e, t) => (i = JSON.parse(t.split('"+"').join('')), $)),
-    html: i,
-  }))
+
+  const htmlExtractionResult = extractHtmlFromCode(processedCode)
+  extractedHtml = htmlExtractionResult.html
+  processedCode = htmlExtractionResult.code
+
   return runPluginInVm({
-    allowedDomains: e.allowedDomains,
+    allowedDomains: pluginExecutionOptions.allowedDomains,
     apiVersion,
-    capabilities: e.capabilities,
-    checkSyntax: !1,
-    code: M,
+    capabilities: pluginExecutionOptions.capabilities,
+    checkSyntax: false,
+    code: processedCode,
     command,
     deferRunEvent,
     disableSilenceConsole,
     enablePrivatePluginApi,
     enableProposedApi,
-    errorHandler: t,
+    errorHandler: processedErrorHandler,
     isLocal,
     isWidget,
     name,
@@ -189,31 +252,35 @@ ${' '.repeat(column - 1)}^`
     parameterValues,
     permissions,
     pluginCounter,
-    pluginID: e.pluginID,
+    pluginID: pluginExecutionOptions.pluginID,
     pluginRunID: '',
-    pluginVersionID: e.pluginVersionID,
+    pluginVersionID: pluginExecutionOptions.pluginVersionID,
     queryMode,
     securityCheckReporter,
-    showLaunchErrors: !1,
-    showRuntimeErrors: !1,
+    showLaunchErrors: false,
+    showRuntimeErrors: false,
     stats,
     testMessageHandler,
-    titleIconURL: e.titleIconURL,
+    titleIconURL: pluginExecutionOptions.titleIconURL,
     triggeredFrom,
     userID,
     vmType,
     widgetAction,
-    editorType: e.editorType,
-    html: j,
+    editorType: pluginExecutionOptions.editorType,
+    html: extractedHtml,
     incrementalSafeApi,
     allowIncrementalUnsafeApiCalls: !!allowIncrementalUnsafeApiCalls,
     enableNativeJsx,
     enableResponsiveSetHierarchyMutations,
   })
 }
-async function ei(e) {
-  let t
-  let i = `<script>
+
+/**
+ * Runs security checks for the specified VM type
+ */
+async function runVmSecurityChecks(vmType: string) {
+  let securityError
+  const iframeSecurityScript = `<script>
   function doIframeSecurityChecks() {
     // Edge seems to change the URL and origin of the page when you document.write()
     // a whole new page. The new URL looks something like http://{abc123.abcd-1234-5678-0123}/
@@ -251,7 +318,8 @@ async function ei(e) {
   }
   window.parent.postMessage({ pluginMessage: result }, '*')
   </script>`
-  let n = `
+
+  const mainThreadSecurityCode = `
     function doMainThreadSecurityChecks() {
       // Modify a grab bag of prototype objects to try to modify prototypes outside
       // of the sandbox.
@@ -339,31 +407,30 @@ async function ei(e) {
       reportSecurityResults(result)
       figma.closePlugin()
     }
-    figma.showUI(${JSON.stringify(i)}, { visible: false })
+    figma.showUI(${JSON.stringify(iframeSecurityScript)}, { visible: false })
     figma.ui.onmessage = result => {
       reportSecurityResults(result)
       figma.closePlugin()
     }
   `
   localStorageRef && (localStorageRef['figma-extension-guard'] = 'guard')
-  let r = ''
-  let {
-    runResult,
-  } = await Z({
+  let securityCheckResult = ''
+
+  const { runResult } = await executePluginCode({
     allowedDomains: DEFAULT_ALLOWED_ORIGINS,
     apiVersion: '1.0.0',
     capabilities: [],
-    checkSyntax: !1,
-    code: n,
+    checkSyntax: false,
+    code: mainThreadSecurityCode,
     command: '',
-    disableSilenceConsole: !0,
-    enablePrivatePluginApi: !1,
-    enableProposedApi: !1,
-    errorHandler: (e) => {
-      t = t || e || 'unknown error'
+    disableSilenceConsole: true,
+    enablePrivatePluginApi: false,
+    enableProposedApi: false,
+    errorHandler: (error: string) => {
+      securityError = securityError || error || 'unknown error'
     },
-    isLocal: !0,
-    isWidget: !1,
+    isLocal: true,
+    isWidget: false,
     name: 'Security Checker',
     openFileKey: '',
     permissions: PluginPermissions.none(),
@@ -371,77 +438,117 @@ async function ei(e) {
     pluginID: '',
     pluginRunID: '',
     pluginVersionID: '',
-    queryMode: !1,
-    securityCheckReporter: (e) => {
-      r = e
+    queryMode: false,
+    securityCheckReporter: (result: string) => {
+      securityCheckResult = result
     },
-    showLaunchErrors: !1,
-    showRuntimeErrors: !1,
+    showLaunchErrors: false,
+    showRuntimeErrors: false,
     stats: new PluginApiMetrics(),
     titleIconURL: '',
-    triggeredFrom: void 0,
+    triggeredFrom: undefined,
     userID: '',
-    vmType: e,
+    vmType,
     editorType: [],
     html: null,
-    incrementalSafeApi: !1,
-    enableNativeJsx: !1,
-    enableResponsiveSetHierarchyMutations: !1,
+    incrementalSafeApi: false,
+    enableNativeJsx: false,
+    enableResponsiveSetHierarchyMutations: false,
   })
   await runResult
-  let s = !1
-  for (let e of [Array.prototype, Function.prototype, Object.prototype, Date.prototype, Object.getPrototypeOf(function* () {
-    yield 0
-  }), 'Object.getPrototypeOf(async () => {})', 'Object.getPrototypeOf(async function*(){ yield 0 })']) {
-    if (typeof e == 'string') {
+
+  const prototypesToCheck = [
+    Array.prototype,
+    Function.prototype,
+    Object.prototype,
+    Date.prototype,
+    Object.getPrototypeOf(function* () { yield 0 }),
+    'Object.getPrototypeOf(async () => {})',
+    'Object.getPrototypeOf(async function*(){ yield 0 })',
+  ]
+
+  let prototypesHacked = false
+  for (let prototypeRef of prototypesToCheck) {
+    if (typeof prototypeRef === 'string') {
       try {
-        e = (0, eval)(e)
+        // eslint-disable-next-line no-eval
+        prototypeRef = (0, eval)(prototypeRef)
       }
-      catch (e) {
+      catch {
         continue
       }
     }
-    e.hackedSandbox && (s = !0, delete e.hackedSandbox)
+    if (prototypeRef.hackedSandbox) {
+      prototypesHacked = true
+      delete prototypeRef.hackedSandbox
+    }
   }
-  if (s)
+
+  if (prototypesHacked) {
     throw new Error('Prototypes not isolated')
-  if (void 0 !== t)
+  }
+  if (securityError !== undefined) {
     throw new Error('Security checks triggered error')
-  if (r !== 'ok')
-    throw new Error(r)
-}
-async function en(e, t) {
-  await ensureVmModuleLoaded(e)
-  await Promise.all([PluginInstanceManager.getInstanceLoading(getPluginIframeMode({
-    triggeredFrom: void 0,
-  })), PluginInstanceManager.getInstanceLoading(getPluginIframeMode({
-    triggeredFrom: t,
-  }))])
-  e === 'realms' && (r || (r = ei('realms').catch((e) => {
-    trackEventAnalytics('Plugin Sandbox Failure', {
-      error: `${e}`,
-      vm: 'realms',
-    })
-    return e
-  })), await r)
-  e === 'cppvm' && (a || (a = ei('cppvm').catch((e) => {
-    trackEventAnalytics('Plugin Sandbox Failure', {
-      error: `${e}`,
-      vm: 'cppvm',
-    })
-    return e
-  })), await a)
-}
-class er extends Error {
-  constructor(e) {
-    super(e)
+  }
+  if (securityCheckResult !== 'ok') {
+    throw new Error(securityCheckResult)
   }
 }
-export function $$ea2(e) {
-  let t = debugState.getState()
-  let i = canPerformAction(t) && canRunExtensions(t)
-  let n = isE2ETraffic() || i
-  if (!n) {
+
+/**
+ * Sets up the VM environment and runs security checks
+ */
+async function setupVmEnvironment(vmType: any, triggeredFrom?: string) {
+  await ensureVmModuleLoaded(vmType)
+
+  // Load plugin instances in parallel
+  await Promise.all([
+    PluginInstanceManager.getInstanceLoading(getPluginIframeMode({ triggeredFrom: undefined })),
+    PluginInstanceManager.getInstanceLoading(getPluginIframeMode({ triggeredFrom })),
+  ])
+
+  // Run security checks for the appropriate VM type
+  if (vmType === 'realms') {
+    if (!realmsSecurityCheckPromise) {
+      realmsSecurityCheckPromise = runVmSecurityChecks('realms').catch((error) => {
+        trackEventAnalytics('Plugin Sandbox Failure', {
+          error: `${error}`,
+          vm: 'realms',
+        })
+        return error
+      })
+    }
+    await realmsSecurityCheckPromise
+  }
+
+  if (vmType === 'cppvm') {
+    if (!cppvmSecurityCheckPromise) {
+      cppvmSecurityCheckPromise = runVmSecurityChecks('cppvm').catch((error) => {
+        trackEventAnalytics('Plugin Sandbox Failure', {
+          error: `${error}`,
+          vm: 'cppvm',
+        })
+        return error
+      })
+    }
+    await cppvmSecurityCheckPromise
+  }
+}
+
+/**
+ * Custom error class for plugin execution errors that should be displayed to users
+ */
+class PluginExecutionError extends Error {
+  constructor(message: string) {
+    super(message)
+  }
+}
+export function initializeGlobalPluginAPI(pluginConfig) {
+  const currentState = debugState.getState()
+  const canPerformActions = canPerformAction(currentState) && canRunExtensions(currentState)
+  const shouldInitialize = isE2ETraffic() || canPerformActions
+
+  if (!shouldInitialize) {
     if (isGlobalPluginActive()) {
       handlePluginError().then(clearPlaybackHandler)
       return
@@ -449,222 +556,165 @@ export function $$ea2(e) {
     clearPlaybackHandler()
     return
   }
-  setResetGlobalPluginAPI($$ea2)
+
+  setResetGlobalPluginAPI(initializeGlobalPluginAPI)
+
   try {
-    if (isGlobalPluginActive())
+    if (isGlobalPluginActive()) {
       return
-    n && (function (e) {
-      let t = new NoOpVm()
-      let i = [() => t.destroy(), () => clearPlaybackHandler, () => fullscreenValue.triggerAction('commit')]
-      let n = () => {
-        let e
-        for (let t of i) {
-          try {
-            t()
-          }
-          catch (t) {
-            e || (e = t)
-          }
-        }
-        if (i = [], e)
-          throw e
+    }
+
+    if (shouldInitialize) {
+      setupGlobalPluginInstance(pluginConfig)
+    }
+  }
+  catch (error) {
+    if (isDevEnvironment() && currentState.selectedView.view === 'fullscreen') {
+      console.error(error)
+    }
+  }
+}
+
+function setupGlobalPluginInstance(pluginConfig) {
+  const vm = new NoOpVm()
+  const shutdownActions = [
+    () => vm.destroy(),
+    () => clearPlaybackHandler,
+    () => fullscreenValue.triggerAction('commit'),
+  ]
+
+  const executeShutdownActions = () => {
+    let lastError
+    for (const action of shutdownActions) {
+      try {
+        action()
       }
-      let r = () => (n(), Promise.resolve())
-      clearPlaybackHandler()
-      let a = createDefaultPluginOptions()
-      createPluginInstance(t, {
-        ...a,
-        openFileKey: e.openFileKey,
-        userID: e.userID,
-        closePlugin: r,
-        addShutdownAction: (e) => {
-          !i.includes(e) && i.push(e)
-        },
-        incrementalSafeApi: !0,
-        allowIncrementalUnsafeApiCalls: !0,
-        enableResponsiveSetHierarchyMutations: !0,
-      })
-      setGlobalPluginCloseFunc(r)
-    }(e))
+      catch (error) {
+        lastError = lastError || error
+      }
+    }
+    shutdownActions.length = 0
+    if (lastError) {
+      throw lastError
+    }
   }
-  catch (e) {
-    isDevEnvironment() && t.selectedView.view === 'fullscreen' && console.error(e)
+
+  const closePlugin = () => {
+    executeShutdownActions()
+    Promise.resolve()
   }
+  clearPlaybackHandler()
+
+  const defaultOptions = createDefaultPluginOptions()
+  createPluginInstance(vm, {
+    ...defaultOptions,
+    openFileKey: pluginConfig.openFileKey,
+    userID: pluginConfig.userID,
+    closePlugin,
+    addShutdownAction: (action) => {
+      if (!shutdownActions.includes(action)) {
+        shutdownActions.push(action)
+      }
+    },
+    incrementalSafeApi: true,
+    allowIncrementalUnsafeApiCalls: true,
+    enableResponsiveSetHierarchyMutations: true,
+  })
+
+  setGlobalPluginCloseFunc(closePlugin)
 }
-export function $$es1({
-  pluginID: e,
-  widgetNodeID: t,
+export function isCurrentWidgetActive({
+  pluginID,
+  widgetNodeID,
 }) {
-  return hasStoredValue() && void 0 !== pluginState.currentWidget && pluginState.currentWidget.pluginID === e && pluginState.currentWidget.widgetNodeID === t
+  return hasStoredValue()
+    && pluginState.currentWidget !== undefined
+    && pluginState.currentWidget.pluginID === pluginID
+    && pluginState.currentWidget.widgetNodeID === widgetNodeID
 }
-export let $$eo4 = _$$n(async (e) => {
-  let t = generateRandomID()
-  pluginState.currentPluginRunID = t
-  let i = new PluginApiMetrics()
-  pluginState.stats = i
-  let n = e.plugin
+export async function runPluginWorkflow(runPluginRequest) {
+  const pluginRunID = generateRandomID()
+  pluginState.currentPluginRunID = pluginRunID
+  const stats = new PluginApiMetrics()
+  pluginState.stats = stats
+  const plugin = runPluginRequest.plugin
+
   trackEventAnalytics('Plugin Start Initiated', {
-    pluginID: n.plugin_id,
-    trigger: e.triggeredFrom,
-    runMode: e.runMode,
-    isWidget: e.isWidget,
-    command: e.command,
-    fileKey: e.openFileKey,
+    pluginID: plugin.plugin_id,
+    trigger: runPluginRequest.triggeredFrom,
+    runMode: runPluginRequest.runMode,
+    isWidget: runPluginRequest.isWidget,
+    command: runPluginRequest.command,
+    fileKey: runPluginRequest.openFileKey,
     orgId: getCurrentUserOrgId() ?? null,
-    pluginRunID: t,
+    pluginRunID,
     editorType: getFullscreenViewEditorType(),
-    ...(hasLocalFileId(n)
+    ...(hasLocalFileId(plugin)
       ? {
           pluginVersionID: '',
           source: 'development',
           name: '<local plugin>',
         }
       : {
-          pluginVersionID: n.id,
+          pluginVersionID: plugin.id,
           source: 'imported',
-          name: n.name,
+          name: plugin.name,
         }),
   })
-  let {
-    isCancelled,
-  } = await i.markDuration('waitForAllPagesMs', async () => await waitForAllPagesForPlugin(e))
+
+  const { isCancelled } = await stats.markDuration('waitForAllPagesMs', async () =>
+    await waitForAllPagesForPlugin(runPluginRequest))
   if (!isCancelled) {
-    if (isValidForCooper(e.triggeredFrom)) {
-      if (!isDevModeWithInspectPanel(e.plugin))
+    if (isValidForCooper(runPluginRequest.triggeredFrom)) {
+      if (!isDevModeWithInspectPanel(runPluginRequest.plugin))
         throw new Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.')
       atomStoreManager.set(d4, 'LOADING')
       setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN)
     }
-    if (isValidForCooperSelectedView(e.triggeredFrom)) {
-      if (!isBuzzPlugin(e.plugin))
+    if (isValidForCooperSelectedView(runPluginRequest.triggeredFrom)) {
+      if (!isBuzzPlugin(runPluginRequest.plugin))
         throw new Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.')
       atomStoreManager.set(d4, 'LOADING')
       atomStoreManager.set(assetCategoryAtom, AssetCategoryEnum.PLUGINS)
     }
-    e.isWidget || e.ignoreForRunLastPlugin || C3(e)
-    setPluginData(e.plugin)
-    setPluginTriggeredFrom(e.triggeredFrom)
-    e.runMode === 'default' && isValidForCooper(e.triggeredFrom) && (e.runMode = 'inspect')
-    setFAtom(e.runMode)
+    runPluginRequest.isWidget || runPluginRequest.ignoreForRunLastPlugin || C3(runPluginRequest)
+    setPluginData(runPluginRequest.plugin)
+    setPluginTriggeredFrom(runPluginRequest.triggeredFrom)
+    runPluginRequest.runMode === 'default' && isValidForCooper(runPluginRequest.triggeredFrom) && (runPluginRequest.runMode = 'inspect')
+    setFAtom(runPluginRequest.runMode)
     try {
-      if (hasLocalFileId(e.plugin)) {
+      if (hasLocalFileId(runPluginRequest.plugin)) {
         try {
-          let n = await ed(e, i, e.plugin)
-          await ec({
-            localPlugin: e.plugin,
-            runPluginArgs: e,
-            stats: i,
-            pluginRunID: t,
-            code: n,
+          const pluginCode = await loadPluginCode(runPluginRequest, stats, runPluginRequest.plugin)
+          await executeLocalPlugin({
+            localPlugin: runPluginRequest.plugin,
+            runPluginArgs: runPluginRequest,
+            stats,
+            pluginRunID,
+            code: pluginCode,
           })
         }
-        catch (t) {
-          yA(t)
-          el(t, e.isWidget)
+        catch (error) {
+          yA(error)
+          showPluginError(error, runPluginRequest.isWidget)
         }
       }
       else {
         try {
-          let n = await ed(e, i, e.plugin)
-          await (function ({
-            pluginVersion: e,
-            runPluginArgs: t,
-            stats: i,
-            pluginRunID: n,
-            code: r,
-          }) {
-            let {
-              command,
-              queryMode,
-              triggeredFrom,
-              openFileKey,
-              deferRunEvent,
-              parameterValues,
-              isWidget,
-              widgetAction,
-              forcePluginVersionId,
-            } = t
-            let f = handleSelectedView()
-            if (!f)
-              throw new er(t.isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'))
-            if (e = {
-              ...e,
-              id: forcePluginVersionId || e.id,
-            }, pluginState.currentPluginRunID !== n) {
-              return
-            }
-            let _ = debugState.getState().selectedView.editorType
-            let y = {
-              storeInRecentsKey: mapEditorTypeTo(_),
-              id: e.plugin_id,
-              version: e.version,
-              currentUserId: handleSelectedView(),
-            }
-            isWidget ? debugState.dispatch(addWidgetToRecentsThunk(y)) : debugState.dispatch(addPluginToRecentsThunk(y))
-            let b = debugState.getState().publishedPlugins[e.plugin_id]
-            let v = hasMonetizedResourceMetadata(b)
-            let x = {
-              pluginID: e.plugin_id,
-              pluginVersionID: e.id,
-              trigger: triggeredFrom,
-              source: 'imported',
-              command,
-              name: e.name,
-              fileKey: openFileKey,
-              pluginRunID: n,
-              queryMode,
-              deferRunEvent: !!deferRunEvent,
-              runWithParameters: !!parameterValues,
-              manifest: JSON.stringify(e.manifest),
-              productType: mapEditorTypeToStringWithObfuscated(_),
-              isWidget,
-              isMonetized: v,
-              paidStatus: (function (e) {
-                let t = hasMonetizedResourceMetadata(e)
-                let i = e?.community_resource_payment
-                return t && i ? i.status === SubscriptionStatus.TRIALING ? 'trial' : 'paid' : 'none'
-              }(b)),
-              widgetAction: widgetAction ?? null,
-              isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
-              editorType: getFullscreenViewEditorType(),
-              incrementalMode: e.manifest.documentAccess === 'dynamic-page',
-              isVsCode: isVsCodeEnvironment(),
-              orgId: getCurrentUserOrgId() ?? null,
-            }
-            trackEventAnalytics('Plugin Start', x, isWidget
-              ? {
-                  forwardToDatadog: !0,
-                }
-              : {})
-            return $$ep5(em({
-              runPluginArgs: t,
-              manifest: e.manifest,
-              stats: i,
-              isLocal: !1,
-              customOverrides: {
-                code: r,
-                name: e.name,
-                openFileKey,
-                permissions: PluginPermissions.forInstalledPlugin(e),
-                pluginID: e.plugin_id,
-                pluginRunID: n,
-                pluginVersionID: e.id,
-                titleIconURL: e.redirect_icon_url,
-                userID: f,
-                enablePrivatePluginApi: !!(e.manifest.enablePrivatePluginApi && e.is_private),
-              },
-            }))
-          }({
-            pluginVersion: e.plugin,
-            runPluginArgs: e,
-            stats: i,
-            pluginRunID: t,
-            code: n,
-          }))
+          const pluginCode = await loadPluginCode(runPluginRequest, stats, runPluginRequest.plugin)
+          await executeRemotePlugin({
+            pluginVersion: runPluginRequest.plugin,
+            runPluginArgs: runPluginRequest,
+            stats,
+            pluginRunID,
+            code: pluginCode,
+          })
         }
-        catch (t) {
-          t instanceof er || reportError(ServiceCategories.EXTENSIBILITY, t)
-          el(t, e.isWidget)
+        catch (error) {
+          if (!(error instanceof PluginExecutionError)) {
+            reportError(ServiceCategories.EXTENSIBILITY, error)
+          }
+          showPluginError(error, runPluginRequest.isWidget)
         }
       }
     }
@@ -674,40 +724,167 @@ export let $$eo4 = _$$n(async (e) => {
       setFAtom(null)
     }
   }
-})
-function el(e, t) {
-  let i = (e instanceof er ? e?.message : void 0) ?? (t ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin'))
-  showVisualBell(i)
 }
-async function ed(e, t, i) {
-  let n = hasLocalFileId(i)
+
+async function executeRemotePlugin({
+  pluginVersion,
+  runPluginArgs,
+  stats,
+  pluginRunID,
+  code,
+}) {
+  const {
+    command,
+    queryMode,
+    triggeredFrom,
+    openFileKey,
+    deferRunEvent,
+    parameterValues,
+    isWidget,
+    widgetAction,
+    forcePluginVersionId,
+  } = runPluginArgs
+
+  const currentUserId = handleSelectedView()
+  if (!currentUserId) {
+    throw new PluginExecutionError(runPluginArgs.isWidget
+      ? getI18nString('plugins.cannot_run_widget_logged_out')
+      : getI18nString('plugins.cannot_run_plugin_logged_out'))
+  }
+
+  const updatedPluginVersion = {
+    ...pluginVersion,
+    id: forcePluginVersionId || pluginVersion.id,
+  }
+
+  if (pluginState.currentPluginRunID !== pluginRunID) {
+    return
+  }
+
+  const editorType = debugState.getState().selectedView.editorType
+  const recentsData = {
+    storeInRecentsKey: mapEditorTypeTo(editorType),
+    id: updatedPluginVersion.plugin_id,
+    version: updatedPluginVersion.version,
+    currentUserId: handleSelectedView(),
+  }
+
+  if (isWidget) {
+    debugState.dispatch(addWidgetToRecentsThunk(recentsData))
+  }
+  else {
+    debugState.dispatch(addPluginToRecentsThunk(recentsData))
+  }
+
+  const publishedPlugin = debugState.getState().publishedPlugins[updatedPluginVersion.plugin_id]
+  const isMonetized = hasMonetizedResourceMetadata(publishedPlugin)
+
+  const getPaidStatus = (plugin) => {
+    const hasMonetization = hasMonetizedResourceMetadata(plugin)
+    const payment = plugin?.community_resource_payment
+    if (hasMonetization && payment) {
+      return payment.status === SubscriptionStatus.TRIALING ? 'trial' : 'paid'
+    }
+    return 'none'
+  }
+
+  const analyticsData = {
+    pluginID: updatedPluginVersion.plugin_id,
+    pluginVersionID: updatedPluginVersion.id,
+    trigger: triggeredFrom,
+    source: 'imported',
+    command,
+    name: updatedPluginVersion.name,
+    fileKey: openFileKey,
+    pluginRunID,
+    queryMode,
+    deferRunEvent: !!deferRunEvent,
+    runWithParameters: !!parameterValues,
+    manifest: JSON.stringify(updatedPluginVersion.manifest),
+    productType: mapEditorTypeToStringWithObfuscated(editorType),
+    isWidget,
+    isMonetized,
+    paidStatus: getPaidStatus(publishedPlugin),
+    widgetAction: widgetAction ?? null,
+    isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
+    editorType: getFullscreenViewEditorType(),
+    incrementalMode: updatedPluginVersion.manifest.documentAccess === 'dynamic-page',
+    isVsCode: isVsCodeEnvironment(),
+    orgId: getCurrentUserOrgId() ?? null,
+  }
+
+  trackEventAnalytics('Plugin Start', analyticsData, isWidget ? { forwardToDatadog: true } : {})
+
+  return executePluginWithOptions(createPluginOptions({
+    runPluginArgs,
+    manifest: updatedPluginVersion.manifest,
+    stats,
+    isLocal: false,
+    customOverrides: {
+      code,
+      name: updatedPluginVersion.name,
+      openFileKey,
+      permissions: PluginPermissions.forInstalledPlugin(updatedPluginVersion),
+      pluginID: updatedPluginVersion.plugin_id,
+      pluginRunID,
+      pluginVersionID: updatedPluginVersion.id,
+      titleIconURL: updatedPluginVersion.redirect_icon_url,
+      userID: currentUserId,
+      enablePrivatePluginApi: !!(updatedPluginVersion.manifest.enablePrivatePluginApi && updatedPluginVersion.is_private),
+    },
+  }))
+}
+function showPluginError(error, isWidget) {
+  const errorMessage = (error instanceof PluginExecutionError ? error?.message : undefined)
+    ?? (isWidget ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin'))
+  showVisualBell(errorMessage)
+}
+async function loadPluginCode(runPluginArgs, stats, plugin) {
+  const isLocalPlugin = hasLocalFileId(plugin)
   try {
     fullscreenValue.dispatch(VisualBellActions.enqueue({
       message: getI18nString('plugins.loading_plugin', {
-        pluginName: i.name,
+        pluginName: plugin.name,
       }),
       icon: VisualBellIcon.SPINNER,
       type: 'loading-plugin',
       delay: 200,
-      timeoutOverride: 1 / 0,
+      timeoutOverride: Infinity,
     }))
-    let r = n ? getPluginDevMode() : 'cppvm'
-    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration('pluginCodeDownloadedMs', async () => await setupPluginCodeCache.getAndCache(i, getCurrentUserOrgId()))))(), (async () => {
-      await t.markDuration('loadSandboxAndRunSecurityChecksMs', async () => {
-        try {
-          await en(r, e.triggeredFrom)
+
+    const vmType = isLocalPlugin ? getPluginDevMode() : 'cppvm'
+    const [pluginCode] = await Promise.all([
+      (async () => {
+        if (isLocalPlugin) {
+          return plugin.testCode ? plugin.testCode : loadLocalPluginSource(plugin.localFileId)
         }
-        catch (i) {
-          let t = e.isWidget ? getI18nString('plugins.error_loading_environment_widget') : getI18nString('plugins.error_loading_environment_plugin')
-          throw new er(t)
+        else {
+          return await stats.markDuration('pluginCodeDownloadedMs', async () =>
+            await setupPluginCodeCache.getAndCache(plugin, getCurrentUserOrgId()))
         }
-      })
-    })()])
-    if (!a) {
-      let t = e.isWidget ? getI18nString('plugins.no_code_found_for_widget') : getI18nString('plugins.no_code_found_for_plugin')
-      throw new er(t)
+      })(),
+      (async () => {
+        await stats.markDuration('loadSandboxAndRunSecurityChecksMs', async () => {
+          try {
+            await setupVmEnvironment(vmType, runPluginArgs.triggeredFrom)
+          }
+          catch {
+            const errorMessage = runPluginArgs.isWidget
+              ? getI18nString('plugins.error_loading_environment_widget')
+              : getI18nString('plugins.error_loading_environment_plugin')
+            throw new PluginExecutionError(errorMessage)
+          }
+        })
+      })(),
+    ])
+
+    if (!pluginCode) {
+      const errorMessage = runPluginArgs.isWidget
+        ? getI18nString('plugins.no_code_found_for_widget')
+        : getI18nString('plugins.no_code_found_for_plugin')
+      throw new PluginExecutionError(errorMessage)
     }
-    return a
+    return pluginCode
   }
   finally {
     fullscreenValue.dispatch(VisualBellActions.dequeue({
@@ -715,14 +892,14 @@ async function ed(e, t, i) {
     }))
   }
 }
-async function ec({
-  localPlugin: e,
-  runPluginArgs: t,
-  pluginRunID: i,
-  stats: n,
-  code: r,
+async function executeLocalPlugin({
+  localPlugin,
+  runPluginArgs,
+  pluginRunID,
+  stats,
+  code,
 }) {
-  let {
+  const {
     command,
     isWidget,
     widgetAction,
@@ -731,261 +908,333 @@ async function ec({
     openFileKey,
     deferRunEvent,
     parameterValues,
-  } = t
-  let g = handleSelectedView()
-  if (!g)
-    throw new er(isWidget ? getI18nString('plugins.cannot_run_widget_logged_out') : getI18nString('plugins.cannot_run_plugin_logged_out'))
-  let f = debugState.getState().selectedView.editorType
-  if (e.manifest) {
-    let t = {
-      pluginID: e.manifest.id || '',
+  } = runPluginArgs
+
+  const currentUserId = handleSelectedView()
+  if (!currentUserId) {
+    throw new PluginExecutionError(isWidget
+      ? getI18nString('plugins.cannot_run_widget_logged_out')
+      : getI18nString('plugins.cannot_run_plugin_logged_out'))
+  }
+
+  const editorType = debugState.getState().selectedView.editorType
+
+  if (localPlugin.manifest) {
+    const analyticsData = {
+      pluginID: localPlugin.manifest.id || '',
       pluginVersionID: '',
       trigger: triggeredFrom,
       source: 'development',
       command,
       name: '<local plugin>',
       fileKey: openFileKey,
-      pluginRunID: i,
+      pluginRunID,
       queryMode,
       deferRunEvent: !!deferRunEvent,
       runWithParameters: !!parameterValues,
-      manifest: JSON.stringify(e.manifest),
-      productType: mapEditorTypeToStringWithObfuscated(f),
+      manifest: JSON.stringify(localPlugin.manifest),
+      productType: mapEditorTypeToStringWithObfuscated(editorType),
       isWidget,
       widgetAction: widgetAction ?? null,
       isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
       editorType: getFullscreenViewEditorType(),
-      incrementalMode: e.manifest.documentAccess === 'dynamic-page',
+      incrementalMode: localPlugin.manifest.documentAccess === 'dynamic-page',
       isVsCode: isVsCodeEnvironment(),
       orgId: getCurrentUserOrgId() ?? null,
     }
-    trackEventAnalytics('Plugin Start', t, isWidget
-      ? {
-          forwardToDatadog: !0,
-        }
-      : {})
+    trackEventAnalytics('Plugin Start', analyticsData, isWidget ? { forwardToDatadog: true } : {})
   }
-  let _ = {
-    storeInRecentsKey: mapEditorTypeTo(f),
-    id: String(e.localFileId),
-    isDevelopment: !0,
+
+  const recentsData = {
+    storeInRecentsKey: mapEditorTypeTo(editorType),
+    id: String(localPlugin.localFileId),
+    isDevelopment: true,
     version: '',
     currentUserId: handleSelectedView(),
   }
-  isWidget ? debugState.dispatch(addWidgetToRecentsThunk(_)) : debugState.dispatch(addPluginToRecentsThunk(_))
+
+  if (isWidget) {
+    debugState.dispatch(addWidgetToRecentsThunk(recentsData))
+  }
+  else {
+    debugState.dispatch(addPluginToRecentsThunk(recentsData))
+  }
+
   try {
-    let a = e.testCode
-      ? e.manifest
-      : await loadPluginManifest(e.localFileId, {
+    const manifest = localPlugin.testCode
+      ? localPlugin.manifest
+      : await loadPluginManifest(localPlugin.localFileId, {
           resourceType: isWidget ? 'widget' : 'plugin',
-          ignoreMissingEditorType: !0,
-          isPublishing: !1,
+          ignoreMissingEditorType: true,
+          isPublishing: false,
         })
-    let o = em({
-      runPluginArgs: t,
-      manifest: a,
-      stats: n,
-      isLocal: !0,
+
+    const pluginOptions = createPluginOptions({
+      runPluginArgs,
+      manifest,
+      stats,
+      isLocal: true,
       customOverrides: {
-        code: r,
+        code,
         openFileKey,
-        permissions: PluginPermissions.forLocalPlugin(e),
-        enablePrivatePluginApi: !!a.enablePrivatePluginApi,
-        pluginID: a.id || '',
-        pluginRunID: i,
+        permissions: PluginPermissions.forLocalPlugin(localPlugin),
+        enablePrivatePluginApi: !!manifest.enablePrivatePluginApi,
+        pluginID: manifest.id || '',
+        pluginRunID,
         pluginVersionID: '',
         titleIconURL: '',
-        userID: g,
+        userID: currentUserId,
       },
     })
-    await $$ep5(o)
+    await executePluginWithOptions(pluginOptions)
   }
-  catch (t) {
-    yA(t)
+  catch (error) {
+    yA(error)
     dequeuePluginStatus({
-      shouldShowVisualBell: !0,
+      shouldShowVisualBell: true,
     })
-    let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'))
-    showVisualBell(e)
+    const errorMessage = (error instanceof PluginExecutionError ? error?.message : undefined)
+      ?? (isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'))
+    showVisualBell(errorMessage)
   }
 }
-export let $$eu3 = _$$n(({
-  newTriggeredFrom: e,
-} = {
-  newTriggeredFrom: 'runlast',
-}) => {
-  let t = SH()
-  t && isValidForFullscreenView(t) && (e && (t.triggeredFrom = e), PluginManager.instance.enqueue({
-    mode: 'run-forever',
-    runPluginArgs: t,
-  }))
-})
-export function $$ep5(e) {
-  if (pluginState.currentPluginRunID !== e.pluginRunID)
+export function runLastPlugin({
+  newTriggeredFrom = 'runlast',
+} = {}) {
+  const lastPluginArgs = SH()
+  if (lastPluginArgs && isValidForFullscreenView(lastPluginArgs)) {
+    if (newTriggeredFrom) {
+      lastPluginArgs.triggeredFrom = newTriggeredFrom
+    }
+    PluginManager.instance.enqueue({
+      mode: 'run-forever',
+      runPluginArgs: lastPluginArgs,
+    })
+  }
+}
+export function executePluginWithOptions(pluginOptions) {
+  if (pluginState.currentPluginRunID !== pluginOptions.pluginRunID) {
     return Promise.resolve()
-  getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${e.pluginRunID} started`, e)
-  let t = e.stats
-  t.markTime('timeToRunPluginCodeStartMs')
-  let i = e.isWidget ? 'widget' : 'plugin'
+  }
+
+  getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${pluginOptions.pluginRunID} started`, pluginOptions)
+
+  const stats = pluginOptions.stats
+  stats.markTime('timeToRunPluginCodeStartMs')
+  const pluginType = pluginOptions.isWidget ? 'widget' : 'plugin'
   clearVisualBell()
-  let n = getCounter()
-  setStoredValue(n)
+
+  const counterValue = getCounter()
+  setStoredValue(counterValue)
   incrementCounter()
-  let r = new Promise(async (t, i) => {
-    if (await closeCurrentPlugin({
-      overriddenBy: e.triggeredFrom,
-    }), getStoredValue() !== n) {
-      t()
+
+  const pluginPromise = new Promise<void>(async (resolve, reject) => {
+    await closeCurrentPlugin({
+      overriddenBy: pluginOptions.triggeredFrom,
+    })
+    if (getStoredValue() !== counterValue) {
+      resolve()
       return
     }
-    let r = () => (t(), Promise.resolve())
-    setPluginCloseFunc(r)
+
+    let closeFunction = () => {
+      resolve()
+      Promise.resolve()
+    }
+    setPluginCloseFunc(closeFunction)
+
     try {
-      if (e.isWidget) {
-        let {
-          widgetNodeID,
-        } = JSON.parse(e.command)
-        pluginState.currentWidget = {
-          widgetNodeID,
-          pluginID: e.pluginID,
+      if (pluginOptions.isWidget) {
+        try {
+          const { widgetNodeID } = JSON.parse(pluginOptions.command)
+          pluginState.currentWidget = {
+            widgetNodeID,
+            pluginID: pluginOptions.pluginID,
+          }
+        }
+        catch {
+          pluginState.currentWidget = undefined
         }
       }
       else {
-        pluginState.currentWidget = void 0
+        pluginState.currentWidget = undefined
       }
     }
     catch {
-      pluginState.currentWidget = void 0
+      pluginState.currentWidget = undefined
     }
+
     try {
-      if (isInteractionPathCheck() && (await en('cppvm', e?.triggeredFrom)), desktopAPIInstance && hasSpecialCapability(e.permissions.permissions) && (pluginState.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (pluginState.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), getStoredValue() !== n) {
-        t()
+      if (isInteractionPathCheck()) {
+        await setupVmEnvironment('cppvm', pluginOptions?.triggeredFrom)
+      }
+
+      if (desktopAPIInstance && hasSpecialCapability(pluginOptions.permissions.permissions)) {
+        pluginState.setMediaEnabled = true
+        if (pluginOptions.permissions.trustedPluginOrigin && desktopAPIInstance) {
+          pluginState.allowedPluginOrigin = pluginOptions.permissions.trustedPluginOrigin
+          await desktopAPIInstance.addAllowedPluginOrigin(pluginOptions.permissions.trustedPluginOrigin)
+        }
+      }
+
+      await delay(0)
+
+      if (getStoredValue() !== counterValue) {
+        resolve()
         return
       }
-      let {
-        runResult,
-        closePlugin,
-      } = await Z({
-        ...e,
-        pluginCounter: n,
+
+      const { runResult, closePlugin } = await executePluginCode({
+        ...pluginOptions,
+        pluginCounter: counterValue,
         html: null,
       })
-      if (getStoredValue() === n) {
+
+      if (getStoredValue() === counterValue) {
         setPluginCloseFunc(closePlugin, {
-          ignorePreviousCloseFunc: r,
+          ignorePreviousCloseFunc: closeFunction,
         })
-        r = closePlugin
-        let e = await runResult
-        e && fullscreenValue.dispatch(VisualBellActions.enqueue({
-          type: 'plugins-supplied-message',
-          message: e,
-        }))
+        closeFunction = closePlugin
+        const result = await runResult
+        if (result) {
+          fullscreenValue.dispatch(VisualBellActions.enqueue({
+            type: 'plugins-supplied-message',
+            message: result,
+          }))
+        }
       }
-      t()
+      resolve()
     }
-    catch (e) {
-      i(e)
+    catch (error) {
+      reject(error)
     }
     finally {
-      n === getStoredValue() && (setPluginCloseFunc(null, {
-        ignorePreviousCloseFunc: r,
-      }), resetPluginState())
+      if (counterValue === getStoredValue()) {
+        setPluginCloseFunc(null, {
+          ignorePreviousCloseFunc: closeFunction,
+        })
+        resetPluginState()
+      }
     }
-  }).catch((t) => {
-    if (e.noConsoleError || yA(t), e.showLaunchErrors) {
-      let i = (t instanceof er ? t?.message : void 0) ?? (e.isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'))
-      showVisualBell(i)
+  }).catch((error) => {
+    if (!pluginOptions.noConsoleError) {
+      yA(error)
+    }
+
+    if (pluginOptions.showLaunchErrors) {
+      const errorMessage = (error instanceof PluginExecutionError ? error?.message : undefined)
+        ?? (pluginOptions.isWidget ? getI18nString('plugins.error_occured_while_running_widget') : getI18nString('plugins.error_occured_while_running_plugin'))
+      showVisualBell(errorMessage)
     }
     else {
-      throw t
+      throw error
     }
   })
-  let a = () => {
-    let n = {
-      pluginID: e.pluginID,
-      pluginVersionID: e.pluginVersionID,
-      pluginRunID: e.pluginRunID,
-      apiUsage: t.callCountsToJSON(),
-      perfMetrics: t.perfMetricsToJSON(),
-      ranWithParameters: t.ranWithParameters(),
-      parameterCount: t.parameterCount(),
-      isWidget: e.isWidget,
-      trigger: e.triggeredFrom,
-      stackInvariants: t.stackInvariantFieldsToJSON(),
-      incrementalMode: e.incrementalSafeApi,
-      numPagesLoaded: t.getNumPagesLoaded(),
-      ...t.getTimingMarks(),
-      totalValidationDuration: t.totalValidationDuration(),
-      validationCount: t.validationCount(),
-      clientStorageUsageDelta: t.clientStorageUsageDelta(),
-      totalClientStorageUsage: t.totalClientStorageUsage(),
+
+  const completionHandler = () => {
+    const pluginEndEventData = {
+      pluginID: pluginOptions.pluginID,
+      pluginVersionID: pluginOptions.pluginVersionID,
+      pluginRunID: pluginOptions.pluginRunID,
+      apiUsage: stats.callCountsToJSON(),
+      perfMetrics: stats.perfMetricsToJSON(),
+      ranWithParameters: stats.ranWithParameters(),
+      parameterCount: stats.parameterCount(),
+      isWidget: pluginOptions.isWidget,
+      trigger: pluginOptions.triggeredFrom,
+      stackInvariants: stats.stackInvariantFieldsToJSON(),
+      incrementalMode: pluginOptions.incrementalSafeApi,
+      numPagesLoaded: stats.getNumPagesLoaded(),
+      ...stats.getTimingMarks(),
+      totalValidationDuration: stats.totalValidationDuration(),
+      validationCount: stats.validationCount(),
+      clientStorageUsageDelta: stats.clientStorageUsageDelta(),
+      totalClientStorageUsage: stats.totalClientStorageUsage(),
       jsvmCppFromManifest: !!getFeatureFlags().ext_jsvm_cpp_upgrade,
     }
-    let r = {
-      pluginDataHistogram: t.pluginDataHistogramToJSON(),
-      pluginDataTotalSetSize: t.pluginDataTotalSetSize(),
-      sharedPluginDataTotalSetSize: t.sharedPluginDataTotalSetSize(),
-      pluginDataMaximumKeyCountExceeded: t.pluginDataMaximumKeyCountExceeded(),
+
+    const setPluginDataStats = {
+      pluginDataHistogram: stats.pluginDataHistogramToJSON(),
+      pluginDataTotalSetSize: stats.pluginDataTotalSetSize(),
+      sharedPluginDataTotalSetSize: stats.sharedPluginDataTotalSetSize(),
+      pluginDataMaximumKeyCountExceeded: stats.pluginDataMaximumKeyCountExceeded(),
     }
-    getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${e.pluginRunID} finished`, {
-      pluginEndEventData: n,
-      setPluginDataStats: r,
+
+    getPluginApiDebugCopy() && logger.debug('[Plugin API]', `Plugin run ${pluginOptions.pluginRunID} finished`, {
+      pluginEndEventData,
+      setPluginDataStats,
     })
+
     trackEventAnalytics('Plugin End', {
-      ...n,
-      ...r,
+      ...pluginEndEventData,
+      ...setPluginDataStats,
     }, {
-      forwardToDatadog: !0,
+      forwardToDatadog: true,
     })
-    e.pluginID && t.hasResizedNodeWithMissingFont() && (trackEventAnalytics('Plugin resized node with missing font', {
-      pluginID: e.pluginID,
-    }), console.warn(`This ${i} resized a node with missing fonts. Text layout for node will not be applied.`))
+
+    if (pluginOptions.pluginID && stats.hasResizedNodeWithMissingFont()) {
+      trackEventAnalytics('Plugin resized node with missing font', {
+        pluginID: pluginOptions.pluginID,
+      })
+      console.warn(`This ${pluginType} resized a node with missing fonts. Text layout for node will not be applied.`)
+    }
   }
-  r.then(a, a)
-  return r
+
+  pluginPromise.then(completionHandler, completionHandler)
+  return pluginPromise
 }
-function em({
-  manifest: e,
-  isLocal: t,
-  stats: i,
-  runPluginArgs: n,
-  customOverrides: r,
+function createPluginOptions({
+  manifest,
+  isLocal,
+  stats,
+  runPluginArgs,
+  customOverrides,
 }) {
   return {
-    name: e.name,
-    allowedDomains: (function (e, t) {
-      let {
-        networkAccess,
-      } = e
-      return networkAccess ? t && networkAccess.devAllowedDomains ? networkAccess.devAllowedDomains.includes('*') || networkAccess.allowedDomains.includes('none') ? networkAccess.devAllowedDomains : Array.from(new Set([...networkAccess.devAllowedDomains, ...networkAccess.allowedDomains])) : networkAccess.allowedDomains : DEFAULT_ALLOWED_ORIGINS
-    }(e, t)),
-    apiVersion: e.api,
-    capabilities: e.capabilities ?? [],
-    stats: i,
-    checkSyntax: t,
-    isLocal: t,
-    disableSilenceConsole: t,
-    enableProposedApi: t && !!e.enableProposedApi,
-    showLaunchErrors: !t,
-    showRuntimeErrors: t,
-    vmType: t ? getPluginDevMode() : 'cppvm',
-    ...r,
-    command: n.command,
-    queryMode: n.queryMode,
-    triggeredFrom: n.triggeredFrom,
-    openFileKey: n.openFileKey,
-    deferRunEvent: n.deferRunEvent,
-    parameterValues: n.parameterValues,
-    isWidget: n.isWidget,
-    editorType: n.plugin.manifest.editorType ?? [],
-    incrementalSafeApi: e.documentAccess === 'dynamic-page',
+    name: manifest.name,
+    allowedDomains: getAllowedDomains(manifest, isLocal),
+    apiVersion: manifest.api,
+    capabilities: manifest.capabilities ?? [],
+    stats,
+    checkSyntax: isLocal,
+    isLocal,
+    disableSilenceConsole: isLocal,
+    enableProposedApi: isLocal && !!manifest.enableProposedApi,
+    showLaunchErrors: !isLocal,
+    showRuntimeErrors: isLocal,
+    vmType: isLocal ? getPluginDevMode() : 'cppvm',
+    ...customOverrides,
+    command: runPluginArgs.command,
+    queryMode: runPluginArgs.queryMode,
+    triggeredFrom: runPluginArgs.triggeredFrom,
+    openFileKey: runPluginArgs.openFileKey,
+    deferRunEvent: runPluginArgs.deferRunEvent,
+    parameterValues: runPluginArgs.parameterValues,
+    isWidget: runPluginArgs.isWidget,
+    editorType: runPluginArgs.plugin.manifest.editorType ?? [],
+    incrementalSafeApi: manifest.documentAccess === 'dynamic-page',
     enableNativeJsx: !!getFeatureFlags().ext_full_jsx,
-    enableResponsiveSetHierarchyMutations: !0,
+    enableResponsiveSetHierarchyMutations: true,
   }
 }
+
+function getAllowedDomains(manifest, isLocal) {
+  const { networkAccess } = manifest
+  if (!networkAccess)
+    return DEFAULT_ALLOWED_ORIGINS
+
+  if (isLocal && networkAccess.devAllowedDomains) {
+    if (networkAccess.devAllowedDomains.includes('*') || networkAccess.allowedDomains.includes('none')) {
+      return networkAccess.devAllowedDomains
+    }
+    return Array.from(new Set([...networkAccess.devAllowedDomains, ...networkAccess.allowedDomains]))
+  }
+
+  return networkAccess.allowedDomains
+}
 export const hM = hasStoredValue
-export const mK = $$es1
-export const s2 = $$ea2
-export const A9 = $$eu3
-export const bT = $$eo4
-export const E9 = $$ep5
+export const mK = isCurrentWidgetActive
+export const s2 = initializeGlobalPluginAPI
+export const A9 = runLastPlugin
+export const bT = runPluginWorkflow
+export const E9 = executePluginWithOptions

@@ -8,7 +8,7 @@ import { MeasurementUnit } from "../figma_app/763686";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { v4, AC, P0, QN } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage, getDevModePluginFromLanguage, getDevModePluginManifest, getSelectedCodegenLanguage } from "../figma_app/655139";
 import { c as _$$c } from "../469e6e40/927162";
 import { NH } from "../figma_app/755395";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
@@ -55,9 +55,9 @@ export function $$N0({
   });
 }
 function I() {
-  let e = v4();
-  let t = AC(e);
-  let a = P0().format(e);
+  let e = getEffectiveCodegenLanguage();
+  let t = getDevModePluginFromLanguage(e);
+  let a = getDevModePluginManifest().format(e);
   return "first-party" === e.type ? jsx(_$$E, {
     variant: "inactiveOutline",
     children: a
@@ -87,9 +87,9 @@ function T({
 function A({
   disabled: e
 }) {
-  let t = v4();
+  let t = getEffectiveCodegenLanguage();
   let a = useUpdateCodeExtensionPreferences();
-  let i = QN();
+  let i = getSelectedCodegenLanguage();
   let r = getMeasurementUnit();
   let o = useCallback(e => a(t, i, {
     unit: e

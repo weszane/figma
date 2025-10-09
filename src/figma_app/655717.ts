@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import a from "../vendor/77708";
 import { selectWithShallowEqual } from "../905/103090";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { filterValidImagePaints, hashToHexString } from "../figma_app/385874";
 import { selectOpenFileKey } from "../figma_app/516028";
@@ -41,7 +41,7 @@ export function $$b14(e) {
   });
 }
 export function $$T0(e) {
-  let t = uQ();
+  let t = useSingleSelectedKey();
   return useDeepEqualSceneValue((t, r) => {
     let n = t?.get(r);
     if (!n) return {};

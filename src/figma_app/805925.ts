@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Fc } from "../figma_app/484865";
-import { $k } from "../figma_app/802241";
+import { canAccessFullCodeConnect } from "../figma_app/484865";
+import { isDevModeMcpDisabledSelector } from "../figma_app/802241";
 import { selectWithShallowEqual } from "../905/103090";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
@@ -69,8 +69,8 @@ export function $$T3() {
 export function $$I0() {
   let e = getObservableOrFallback(EditorPreferencesApi().enableCodegenMcpServer);
   let t = useCanAccessFullDevMode();
-  let r = Fc();
-  let i = $k();
+  let r = canAccessFullCodeConnect();
+  let i = isDevModeMcpDisabledSelector();
   let o = e || t && !i;
   return useMemo(() => ({
     canStartCodegenMcpServer: o,

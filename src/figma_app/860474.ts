@@ -11,7 +11,7 @@ import { VisualBellActions } from "../905/302958";
 import { setCanvasSearchMode } from "../figma_app/712525";
 import { H1, z, XJ, X0 } from "../figma_app/451700";
 import { kM } from "../figma_app/421886";
-import { uA } from "../figma_app/781512";
+import { getAnnotationCategoryLabel } from "../figma_app/781512";
 export let $$$$n1;
 export function $$E0(e) {
   $$$$n1 = {
@@ -145,7 +145,7 @@ export function $$E0(e) {
         let t = "";
         if (e.categoryId) {
           let r = n.annotationCategories?.find(t => t.id === e.categoryId);
-          r && (t = uA(r) + " ");
+          r && (t = getAnnotationCategoryLabel(r) + " ");
         }
         return t + ("lexical" === detectEditorStateFormat(e.label) ? parseEditorStateToPlainText(e.label) : sanitizeAndExtractText(e.label));
       }).join(" ") : "";

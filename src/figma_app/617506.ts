@@ -2,7 +2,7 @@ import { useMemo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createLocalStorageAtom, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useLatestRef } from "../figma_app/922077";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { selectViewAction } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
 import { getVariableById, getSortedLocalVariables, getEffectiveVariableSet, getLocalVariablesForSet } from "../figma_app/852050";
@@ -47,7 +47,7 @@ export function $$y2(e) {
   }, [s, e]), r];
 }
 export function $$b4() {
-  let e = uQ();
+  let e = useSingleSelectedKey();
   let t = useLatestRef(e);
   let r = useDispatch<AppDispatch>();
   useEffect(() => {

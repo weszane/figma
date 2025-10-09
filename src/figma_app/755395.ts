@@ -9,7 +9,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { AC, Pt as _$$Pt, v4 } from "../figma_app/655139";
+import { getDevModePluginFromLanguage, getCodegenLanguageFormatter, getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { gB } from "../905/294543";
 import { Z } from "../905/820720";
 import { aq } from "../figma_app/399472";
@@ -27,8 +27,8 @@ export function $$I1({
   currentSavedCodeLanguage: o,
   skipBrowsePlugins: l
 }) {
-  let d = AC(e);
-  let c = _$$Pt(d);
+  let d = getDevModePluginFromLanguage(e);
+  let c = getCodegenLanguageFormatter(d);
   let u = useCurrentUserOrg();
   let p = useSelector(e => e.whitelistedPlugins);
   let _ = isPluginAllowListed(d, p, u) ? e : {
@@ -62,7 +62,7 @@ export function $$S0({
 }) {
   let a = $$I1({
     onlyShowFirstPartyLanguages: e,
-    codeLanguage: v4(),
+    codeLanguage: getEffectiveCodegenLanguage(),
     onChange: gB(),
     shouldHideLanguagesWithNoAltUnitSupport: t
   });

@@ -1,5 +1,5 @@
 import { Z9 } from "../figma_app/770359";
-import { IC } from "../figma_app/346422";
+import { formatCode } from "../figma_app/346422";
 export class $$a0 {
   constructor() {
     this.handlers = [];
@@ -36,7 +36,7 @@ class o {
     for (let e = 0; e < 3; e++) {
       let e = this.editorView.state.doc.toString();
       let t = this.documentEditCounter;
-      let i = await IC(e, this.parserName);
+      let i = await formatCode(e, this.parserName);
       if (this.documentEditCounter === t) {
         i.length > 0 && this.editorView.dispatch({
           changes: i

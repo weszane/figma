@@ -8,7 +8,7 @@ import { EditorPreferencesApi } from "../figma_app/740163";
 import { selectOpenFile } from "../figma_app/516028";
 import { O } from "../905/207358";
 import { getMcpSettingsExternal } from "../figma_app/342355";
-import { r as _$$r } from "../905/501976";
+import { handleMcpToolCall } from "../905/501976";
 let p = "[TEST] ";
 let h = "[Codegen] ";
 function g(e, t) {
@@ -33,11 +33,11 @@ async function b(e, t) {
       c.name = u;
     });
     let f = performance.now();
-    let p = await _$$r(GET_CODE, {
+    let p = await handleMcpToolCall(GET_CODE, {
       nodeId: s.data.nodeId
     }, e);
     let b = performance.now() - f;
-    let N = await _$$r(GET_IMAGE, {
+    let N = await handleMcpToolCall(GET_IMAGE, {
       nodeId: s.data.nodeId
     }, e);
     c.name !== i && permissionScopeHandler.system("bulk-record-mcp-tool-output", () => {

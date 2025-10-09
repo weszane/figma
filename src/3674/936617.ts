@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { uQ } from "../figma_app/311375";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { M } from "../469e6e40/302359";
 import { V } from "../469e6e40/782251";
 import { SelectionStylesHelpers } from "../figma_app/763686";
@@ -24,7 +24,7 @@ function m({
 }) {
   let t = q6("EFFECT");
   let n = q6("TEXT");
-  let i = uQ();
+  let i = useSingleSelectedKey();
   return useDeepEqualSceneValue((e, t) => {
     if (!t) return !1;
     let n = e?.get(t);
@@ -147,7 +147,7 @@ export function $$E0() {
   useVariableDataLoaded({
     enabled: !0
   });
-  let e = uQ();
+  let e = useSingleSelectedKey();
   return useDeepEqualSceneValue((e, t) => {
     if (!t) return !1;
     let n = e?.get(t);

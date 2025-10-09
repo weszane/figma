@@ -21,7 +21,7 @@ import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { getObservableOrFallback, subscribeObservable } from "../figma_app/84367";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { PrimaryWorkflowEnum } from "../905/497152";
-import { sM, pS } from "../figma_app/346422";
+import { initializeLanguageService, bundleCode } from "../figma_app/346422";
 import { sitesViewSetterAtomFamily } from "../figma_app/115923";
 import { jT as _$$jT, K8 } from "../figma_app/108909";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
@@ -112,7 +112,7 @@ export function $$K8(e) {
 }
 export function $$Y14() {
   useEffect(() => {
-    sM().then(() => {
+    initializeLanguageService().then(() => {
       console.log("[devtools] Initialized LS");
     }).catch(e => {
       Ho(e, lV.CODE_IN_SITES, a5.PREVIEW);
@@ -132,7 +132,7 @@ export async function $$$1({
   let l = Fullscreen.deriveFilesystemFromEntrypointNodeIds([e.guid]);
   let c = es(a, l.codeFilesystem);
   return {
-    ...(await pS({
+    ...(await bundleCode({
       entrypointsOrIdentifierToFileName: [s],
       filesystem: c,
       tailwind: t,

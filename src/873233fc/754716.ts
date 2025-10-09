@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 import { eBU } from "../figma_app/822011";
 import { LayoutSizingMode, StackBindingsCpp, HandoffBindingsCpp, AppStateTsApi, IAssertResource, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { y6 } from "../figma_app/681951";
+import { useSceneMarkupSync } from "../figma_app/681951";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { lerp, clamp } from "../figma_app/492908";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { v4 } from "../figma_app/655139";
-import { uQ } from "../figma_app/311375";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { getScaledValueWithUnit } from "../figma_app/120227";
 import { getCanvasViewState } from "../905/758967";
 import { EditorPreferencesApi } from "../figma_app/740163";
@@ -113,7 +113,7 @@ function I(e) {
 function E(e) {
   let t = I(e.guid);
   let n = getObservableOrFallback(EditorPreferencesApi().showGuids);
-  let r = uQ();
+  let r = useSingleSelectedKey();
   let a = useRef(null);
   let l = useCallback(e => -function (e) {
     let t = lerp(0, 2, (e - .1) * 5);
@@ -145,7 +145,7 @@ let R = e => e.toLocaleString("en", {
   useGrouping: !1
 });
 function B(e, t = 0) {
-  let n = v4();
+  let n = getEffectiveCodegenLanguage();
   let o = getScaledValueWithUnit(n, t, R);
   let {
     variable,
@@ -816,7 +816,7 @@ let eX = memo(({
         },
         children: [n.map(e => jsx(_$$_, {
           nodeId: e
-        }, `loading-embed-${e}`)), jsx(qn, {}), jsx(_$$u, {}), g && jsx(eI, {}), c && jsx(w, {}), jsx(_$$G2, {}), jsx(_$$b2, {}), jsx(_$$J, {}), !m && !x && !p && jsx(_$$b, {}), getFeatureFlags().dt_mcp_auto_resources && C && jsx(y6, {}), jsx(XI, {
+        }, `loading-embed-${e}`)), jsx(qn, {}), jsx(_$$u, {}), g && jsx(eI, {}), c && jsx(w, {}), jsx(_$$G2, {}), jsx(_$$b2, {}), jsx(_$$J, {}), !m && !x && !p && jsx(_$$b, {}), getFeatureFlags().dt_mcp_auto_resources && C && jsx(useSceneMarkupSync, {}), jsx(XI, {
           commentsDetailContainerRef: f
         }), jsx(Nz, {}), jsx("div", {
           ref: f

@@ -1,4 +1,4 @@
-import type { PluginError, PluginWrapper } from "../905/572400"
+import type { PluginError } from "../905/572400"
 import type { RealmVmWrapper } from "./realmVmWrapper"
 import type { CppVmWrapper } from "./valueCloner"
 import { z as _$$z2 } from "zod"
@@ -117,7 +117,7 @@ export async function runPluginInVm(pluginConfig: {
   allowIncrementalUnsafeApiCalls?: boolean
   enableNativeJsx?: boolean
   enableResponsiveSetHierarchyMutations?: boolean
-}) {
+} & ObjectOf) {
   let closePluginFunction: (result?: { message?: string, isError?: boolean, overriddenBy?: any }) => Promise<void>
 
   // Destructure plugin configuration

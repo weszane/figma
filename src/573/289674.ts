@@ -17,7 +17,7 @@ import { F as _$$F } from "../905/422355";
 import { noop } from 'lodash-es';
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
-import { uQ, NM } from "../figma_app/311375";
+import { useSingleSelectedKey, useMultipleSelectedKeys } from "../figma_app/311375";
 import { getCurrentFileType } from "../figma_app/976749";
 import { cortexAPI } from "../figma_app/432652";
 import { sF } from "../figma_app/193952";
@@ -564,8 +564,8 @@ export function $$X0() {
   let o = getCurrentFileType();
   let l = trackDefinedFileEventWithStore();
   let d = useTeamPlanPublicInfo().unwrapOr(null);
-  let c = uQ();
-  let u = NM();
+  let c = useSingleSelectedKey();
+  let u = useMultipleSelectedKeys();
   let y = useRef(null);
   let m = useMemo(() => {
     if (c) {

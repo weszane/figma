@@ -6,7 +6,7 @@ import { DialogTriggerButton } from "../905/976845";
 import { H_ } from "../905/963340";
 import { J } from "../905/125993";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { getCodeExtensionPreferences } from "../figma_app/120227";
 import { FOverrideType } from "../figma_app/191312";
 import { KindEnum } from "../905/129884";
@@ -44,7 +44,7 @@ export function $$f0() {
     setCodegenSettings,
     localCodegenSettings
   } = setupUserPluginPreferences();
-  let r = v4();
+  let r = getEffectiveCodegenLanguage();
   let n = getCodeExtensionPreferences();
   let s = useMemo(() => localCodegenSettings?.behavior === FOverrideType.OVERRIDE && ignoreUndefinedEqual(localCodegenSettings?.language, r) && ignoreUndefinedEqual(localCodegenSettings?.preferences, n), [r, n, localCodegenSettings]);
   return {

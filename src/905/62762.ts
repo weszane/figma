@@ -1,37 +1,74 @@
-import { getFeatureFlags } from "../905/601108";
-import { isIframe } from "../905/508367";
-import { bellFeedAPIInstance } from "../figma_app/876459";
-import { getInitialOptions } from "../figma_app/169182";
-import { F } from "../905/422355";
-import { isInteractionPathCheck } from "../figma_app/897289";
-export function $$d1(e) {
-  return parseInt(F(e).slice(0, 8), 16);
+// Refactored code: Improved readability, added types, renamed variables for clarity
+import md5 from "md5"
+import { isIframe } from "../905/508367"
+
+import { getFeatureFlags } from "../905/601108"
+
+import { getInitialOptions } from "../figma_app/169182"
+import { bellFeedAPIInstance } from "../figma_app/876459"
+import { isInteractionPathCheck } from "../figma_app/897289"
+
+/**
+ * Generates a hash-based numeric identifier from a string input.
+ * @origin $$d1
+ */
+export function generateHashId(input: string): number {
+  const hash = md5(input)
+  return parseInt(hash.slice(0, 8), 16)
 }
-function c(e, t) {
-  let {
-    country,
-    region
-  } = e;
-  return t.some(({
-    country: e,
-    region: t
-  }) => (!e || country === e) && (!t || region === t));
+
+/**
+ * Checks if the current user location matches any of the specified geofence rules.
+ * @origin c
+ */
+function isLocationInGeofence(
+  location: { country: string, region: string },
+  rules: Array<{ country?: string, region?: string }>,
+): boolean {
+  return rules.some((rule) => {
+    const countryMatch = !rule.country || location.country === rule.country
+    const regionMatch = !rule.region || location.region === rule.region
+    return countryMatch && regionMatch
+  })
 }
-export function $$u0(e) {
-  var t;
-  let {
-    geofence,
-    canUseCookieForAnalytics
-  } = e;
-  t = function () {
-    let e = getInitialOptions();
+
+/**
+ * Determines if Sprig analytics should be enabled based on various conditions.
+ * @origin $$u0
+ */
+export function shouldEnableSprigAnalytics(config: {
+  geofence: {
+    exclude?: Array<{ country?: string, region?: string }>
+    include?: Array<{ country?: string, region?: string }>
+  }
+  canUseCookieForAnalytics: boolean
+}): boolean {
+  // Get user's location information
+  const userLocation = (function () {
+    const options = getInitialOptions()
     return {
-      country: e.iso_code,
-      region: e.viewer_region
-    };
-  }();
-  let d = !(void 0 !== geofence.exclude && c(t, geofence.exclude)) && (void 0 === geofence.include || c(t, geofence.include));
-  return !isIframe() && !isInteractionPathCheck() && !getInitialOptions().e2e_traffic && canUseCookieForAnalytics && d && getFeatureFlags().sprig_enabled && !bellFeedAPIInstance;
+      country: options.iso_code,
+      region: options.viewer_region,
+    }
+  })()
+
+  // Evaluate geofence rules
+  const isExcluded = config.geofence.exclude && isLocationInGeofence(userLocation, config.geofence.exclude)
+  const isIncluded = !config.geofence.include || isLocationInGeofence(userLocation, config.geofence.include)
+  const passesGeofence = !isExcluded && isIncluded
+
+  // Check all conditions for enabling Sprig
+  return (
+    !isIframe()
+    && !isInteractionPathCheck()
+    && !getInitialOptions().e2e_traffic
+    && config.canUseCookieForAnalytics
+    && passesGeofence
+    && getFeatureFlags().sprig_enabled
+    && !bellFeedAPIInstance
+  )
 }
-export const $z = $$u0;
-export const YZ = $$d1;
+
+// Export aliases to maintain backward compatibility
+export const $z = shouldEnableSprigAnalytics
+export const YZ = generateHashId

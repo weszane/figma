@@ -28,7 +28,7 @@ import { hi } from "../figma_app/114522";
 import { f as _$$f } from "../figma_app/695131";
 import { generateNodeThumbnail, attachmentsAtomFamily, removePendingAttachmentAndShowError } from "../figma_app/119420";
 import { gz } from "../figma_app/302802";
-import { M5, qs, fM } from "../figma_app/346422";
+import { analyzeJsxComponents, staticAnalyze, updateFiles } from "../figma_app/346422";
 import { hB, wn } from "../figma_app/609511";
 import { GV, Xl } from "../figma_app/72338";
 import { Mj } from "../figma_app/346269";
@@ -364,7 +364,7 @@ export let $$eu0 = new class {
       let t = new Set();
       for (let e of Object.values(directManipulationSnapshot.fiberNodes)) null === e.elementInfo && e.displayName && t.add(e.displayName);
       if (t.size > 0 && e.sourceCode) try {
-        let r = await M5(e.sourceCode, Array.from(t));
+        let r = await analyzeJsxComponents(e.sourceCode, Array.from(t));
         this._directManipulationCanvasEditor.setStaticComponentPropInfo(e.guid, r);
       } catch (e) {
         console.warn("Component analysis failed:", e);
@@ -403,7 +403,7 @@ export let $$eu0 = new class {
         });
       }
     }
-    let n = await qs(t);
+    let n = await staticAnalyze(t);
     let i = r.exportedCodeComponents;
     if (r.exportedCodeComponents.some(e => !e.props) && (i = i.map(e => {
       if (e.props) return e;
@@ -482,7 +482,7 @@ export let $$eu0 = new class {
         });
       });
       this._codeNodeGUIDsWithSourceCodeToSync.clear();
-      fM(t);
+      updateFiles(t);
     }, 0));
   }
   shouldHideDefaultSetOnCreation() {

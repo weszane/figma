@@ -20,7 +20,7 @@ import { getWorkspaceName, isSameWorkspaceIdentity } from "../905/967587";
 import { DtmMigrationInfo, UserFlagByName } from "../figma_app/43951";
 import { hasExternalRestrictedOrgId } from "../figma_app/12796";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { X } from "../905/698965";
+import { navigationRoutes } from "../905/698965";
 import { OrganizationType } from "../905/833838";
 var c = d;
 if (443 == require.j) {}
@@ -120,7 +120,7 @@ export function $$A1({
       } : {
         view: "org",
         orgId: d.orgId,
-        orgViewTab: X.HOME
+        orgViewTab: navigationRoutes.HOME
       };
       I && w && b?.planParentId === l.plan_id && t(postUserFlag({
         seen_dtm_post_migration_badge: !0

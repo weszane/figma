@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { Y3 } from "../figma_app/346422";
+import { getCodeEditingSnippet } from "../figma_app/346422";
 import { $5 } from "../figma_app/504321";
 import { D } from "../905/382895";
 import { E } from "../905/618325";
@@ -100,7 +100,7 @@ export class $$u1 {
       ...e,
       isLoading: !0
     }));
-    let i = await Y3(n);
+    let i = await getCodeEditingSnippet(n);
     let s = atomStoreManager.get(this.selectedElementInfoAtom);
     if ((s?.figmaFiberId ?? null) !== e.figmaFiberId) return null;
     if (atomStoreManager.set(this._editingSnippetAtom, {

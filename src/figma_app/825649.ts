@@ -12,7 +12,7 @@ import { l as _$$l } from "../905/714607";
 import { I as _$$I } from "../905/531560";
 import { pH, GI } from "../figma_app/147337";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { Dl } from "../figma_app/601682";
+import { checkUserHasPublishedComponents } from "../figma_app/601682";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useComponentBrowserEntrypoint } from "../figma_app/88239";
 import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
@@ -115,7 +115,7 @@ export function $$eO1({
   let eJ = useIsSelectedViewFullscreenCooper();
   let eZ = _$$F3();
   let eQ = _$$e4();
-  let e0 = Dl(eM);
+  let e0 = checkUserHasPublishedComponents(eM);
   let e1 = useComponentBrowserEntrypoint("filename_menu");
   let e2 = BI();
   let e5 = m0();

@@ -1,83 +1,129 @@
+import { useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { generateNodeMarkup } from "../figma_app/728005";
 import { getSingletonSceneGraph } from "../905/700578";
-import { atom, Xr, atomStoreManager } from "../figma_app/27355";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { Tv } from "../figma_app/311375";
-import { getImageManager } from "../figma_app/624361";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
+import { useSceneGraphSelectionKeys } from "../figma_app/311375";
 import { codeOptionsAtom, getMcpSettingsExternal } from "../figma_app/342355";
-import { $w } from "../figma_app/935144";
-import { t2 } from "../figma_app/911720";
-let $$h1 = atom(null);
-let $$m0 = atom(null);
-let $$g2 = atom(null);
-export function $$f3() {
-  (function () {
-    let e = Tv()[0] ?? null;
-    let {
+import { getImageManager } from "../figma_app/624361";
+import { generateNodeMarkup } from "../figma_app/728005";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { generateCodeFromDesign } from "../figma_app/911720";
+import { countChildNodes } from "../figma_app/935144";
+// Origin: /Users/allen/sigma-main/src/figma_app/681951.ts
+// Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments for clarity and potential issues.
+
+// Assumed dependencies:
+// - atom, atomStoreManager, Xr: State management utilities (likely Jotai-like).
+// - useSceneGraphSelectionKeys, useStrictDeepEqualSceneValue: Custom React hooks.
+// - codeOptionsAtom, getMcpSettingsExternal: App settings/state.
+// - getSingletonSceneGraph, getImageManager, generateNodeMarkup, desktopAPIInstance, t2, countChildNodes: App-specific utilities/services.
+
+// Atom definitions for storing markup strings or null.
+export const selectionMarkupAtom = atom<string | null>(null);
+export const topLevelFrameMarkupAtom = atom<string | null>(null);
+export const pageMarkupAtom = atom<string | null>(null);
+
+// Interface for scene value containing top-level frame and page GUIDs.
+interface SceneValue {
+  tlfGuid: string | null;
+  pageGuid: string | null;
+}
+
+// Helper function to update atom with markup based on node and code mode.
+function updateMarkupAtom(nodeKey: string | null, setMarkup: (markup: string | null) => void, resourceUri: string) {
+  const node = getSingletonSceneGraph().get(nodeKey ?? null);
+  if (node) {
+    // Check code mode: "xml" or other (e.g., "web")
+    if (atomStoreManager.get(codeOptionsAtom) === "xml") {
+      // Generate XML markup for the node
+      const markup = generateNodeMarkup({
+        node,
+        includeComponents: true,
+        codeConnectMapping: null,
+        codebaseSuggestions: null,
+        loadImageByHash: (hash: string) => getImageManager().loadImageByHash(hash),
+        configSettings: getMcpSettingsExternal()
+      }).content.map(item => item.text).join("\n\n");
+      setMarkup(markup);
+      desktopAPIInstance?.sendMCPUpdate("resource", {
+        uri: resourceUri
+      });
+    } else {
+      // Generate web markup for the node asynchronously
+      const childCount = countChildNodes(node);
+      generateCodeFromDesign(node, childCount, "web", () => Promise.resolve([{}, {}])).then(([result]) => {
+        const markup = result.content.map((item: {
+          text: string;
+        }) => item.text).join("\n\n");
+        setMarkup(markup);
+        desktopAPIInstance?.sendMCPUpdate("resource", {
+          uri: resourceUri
+        });
+      });
+    }
+  } else {
+    // No node found, clear markup
+    setMarkup(null);
+    desktopAPIInstance?.sendMCPUpdate("resource", {
+      uri: resourceUri
+    });
+  }
+}
+
+// Main React hook to synchronize markup atoms with current selection, top-level frame, and page.
+// Note: This hook does not render anything, only manages side effects.
+export function useSceneMarkupSync(): null {
+  (function syncMarkup() {
+    // Get current selection key (first selected node or null)
+    const [selectedKey] = useSceneGraphSelectionKeys();
+    const selectionKey = selectedKey ?? null;
+
+    // Extract top-level frame and page GUIDs from scene value
+    const {
       tlfGuid,
       pageGuid
-    } = useStrictDeepEqualSceneValue((e, t) => {
-      if (t) {
-        let r = e.get(t);
-        if (r) return {
-          tlfGuid: r.findContainingTopLevelFrameOrSelf(),
-          pageGuid: r.containingCanvas ?? null
-        };
+    }: SceneValue = useStrictDeepEqualSceneValue((sceneGraph, key) => {
+      if (key) {
+        const node = sceneGraph.get(key);
+        if (node) {
+          return {
+            tlfGuid: node.findContainingTopLevelFrameOrSelf(),
+            pageGuid: node.containingCanvas ?? null
+          };
+        }
       }
       return {
         tlfGuid: null,
         pageGuid: null
       };
-    }, e);
-    let i = Xr($$h1);
-    let a = Xr($$m0);
-    let o = Xr($$g2);
+    }, selectionKey);
+
+    // Get atom setters for markup
+    const setSelectionMarkup = useSetAtom(selectionMarkupAtom);
+    const setTopLevelFrameMarkup = useSetAtom(topLevelFrameMarkupAtom);
+    const setPageMarkup = useSetAtom(pageMarkupAtom);
+
+    // Update markup when selection changes
     useEffect(() => {
-      E(e, i, "autocomplete://selection");
-    }, [e, i]);
+      updateMarkupAtom(selectionKey, setSelectionMarkup, "autocomplete://selection");
+    }, [selectionKey, setSelectionMarkup]);
+
+    // Update markup when top-level frame changes
     useEffect(() => {
-      E(tlfGuid, a, "autocomplete://tlf");
-    }, [tlfGuid, a]);
+      updateMarkupAtom(tlfGuid, setTopLevelFrameMarkup, "autocomplete://tlf");
+    }, [tlfGuid, setTopLevelFrameMarkup]);
+
+    // Update markup when page changes
     useEffect(() => {
-      E(pageGuid, o, "autocomplete://page");
-    }, [pageGuid, o]);
+      updateMarkupAtom(pageGuid, setPageMarkup, "autocomplete://page");
+    }, [pageGuid, setPageMarkup]);
   })();
   return null;
 }
-function E(e, t, r) {
-  let n = getSingletonSceneGraph().get(e ?? null);
-  if (n) {
-    if ("xml" === atomStoreManager.get(codeOptionsAtom)) {
-      t(generateNodeMarkup({
-        node: n,
-        includeComponents: !0,
-        codeConnectMapping: null,
-        codebaseSuggestions: null,
-        loadImageByHash: e => getImageManager().loadImageByHash(e),
-        configSettings: getMcpSettingsExternal()
-      }).content.map(e => e.text).join("\n\n"));
-      desktopAPIInstance?.sendMCPUpdate("resource", {
-        uri: r
-      });
-    } else {
-      let e = $w(n);
-      t2(n, e, "web", () => Promise.resolve([{}, {}])).then(([e]) => {
-        t(e.content.map(e => e.text).join("\n\n"));
-        desktopAPIInstance?.sendMCPUpdate("resource", {
-          uri: r
-        });
-      });
-    }
-  } else {
-    t(null);
-    desktopAPIInstance?.sendMCPUpdate("resource", {
-      uri: r
-    });
-  }
-}
-export const Lv = $$m0;
-export const jb = $$h1;
-export const oG = $$g2;
-export const y6 = $$f3;
+
+// Export atoms with original names for compatibility.
+export const Lv = topLevelFrameMarkupAtom;
+export const jb = selectionMarkupAtom;
+export const oG = pageMarkupAtom;
+export const y6 = useSceneMarkupSync;

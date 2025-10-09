@@ -6,7 +6,7 @@ import { PropertyScope } from "../figma_app/763686";
 import { convertKiwiToVariableIdString } from "../905/805904";
 import d from "classnames";
 import { getI18nString } from "../905/303541";
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { Fj } from "../figma_app/793429";
 import { Q } from "../905/217916";
 import { $Q } from "../figma_app/315578";
@@ -351,7 +351,7 @@ export function $$V3(e) {
 export function $$H5(e, t, r) {
   let n = uQ();
   let i = Q();
-  let a = v4();
+  let a = getEffectiveCodegenLanguage();
   let s = isDevHandoffEditorType();
   let l = Ig();
   return e.map(e => {

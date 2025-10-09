@@ -233,7 +233,7 @@ import { e as _$$e17 } from '../905/693478';
 import { T as _$$T6 } from '../905/696189';
 import { TrackingKeyEnum, OrgPersonal } from '../905/696396';
 import { setEditorDocumentTitle, openFileInNewTab, userHasPlan, openFileInFullscreen } from '../905/697795';
-import { X as _$$X } from '../905/698965';
+import { navigationRoutes } from '../905/698965';
 import { L as _$$L4 } from '../905/704296';
 import { H as _$$H3 } from '../905/706055';
 import { D as _$$D5 } from '../905/711533';
@@ -1217,7 +1217,7 @@ function tH(e) {
       t(selectViewAction({
         view: 'org',
         orgId: r.id,
-        orgViewTab: _$$X.HOME
+        orgViewTab: navigationRoutes.HOME
       }));
     },
     className: 'favorited_section--browseOrgLink--BvX0-',
@@ -2968,7 +2968,7 @@ function ad({
       t(selectViewAction({
         view: 'org',
         orgId: r,
-        orgViewTab: _$$X.HOME
+        orgViewTab: navigationRoutes.HOME
       }));
       t(trackSidebarClick({
         clickedResourceType: 'org',
@@ -14838,7 +14838,7 @@ function _B({
       s(selectViewAction({
         view: 'org',
         orgId: e.id,
-        orgViewTab: _$$X.HOME
+        orgViewTab: navigationRoutes.HOME
       }));
       logAndTrackCTA({
         clickedResourceType: 'org',
@@ -16420,7 +16420,7 @@ function p3({
         t(selectViewAction({
           view: 'org',
           orgId: e,
-          orgViewTab: _$$X.LIBRARIES
+          orgViewTab: navigationRoutes.LIBRARIES
         }));
       }
     }
@@ -16683,18 +16683,18 @@ function fg({
     })]
   });
 }
-let fx = [_$$X.HOME, _$$X.YOUR_TEAMS, _$$X.CONNECTED_PROJECTS, _$$X.PLUGINS, _$$X.WIDGETS];
+let fx = [navigationRoutes.HOME, navigationRoutes.YOUR_TEAMS, navigationRoutes.CONNECTED_PROJECTS, navigationRoutes.PLUGINS, navigationRoutes.WIDGETS];
 let fb = e => {
   switch (e) {
-    case _$$X.HOME:
+    case navigationRoutes.HOME:
       return getI18nString('org_view.overview');
-    case _$$X.YOUR_TEAMS:
+    case navigationRoutes.YOUR_TEAMS:
       return getI18nString('org_view.your_teams');
-    case _$$X.PLUGINS:
+    case navigationRoutes.PLUGINS:
       return getI18nString('org_view.plugins');
-    case _$$X.WIDGETS:
+    case navigationRoutes.WIDGETS:
       return getI18nString('org_view.widgets');
-    case _$$X.CONNECTED_PROJECTS:
+    case navigationRoutes.CONNECTED_PROJECTS:
       return getI18nString('org_view.connected_projects');
     default:
       return null;
@@ -16705,13 +16705,13 @@ function fv(e) {
   let r = useCurrentPublicPlan('OrgPageViewBar').unwrapOr(null);
   let n = getParentOrgIdIfOrgLevel(r);
   let o = {
-    [_$$X.HOME]: !0,
-    [_$$X.WIDGETS]: !0,
-    [_$$X.PLUGINS]: !0,
-    [_$$X.YOUR_TEAMS]: !0,
-    [_$$X.LIBRARIES]: !1,
-    [_$$X.FONTS]: !1,
-    [_$$X.CONNECTED_PROJECTS]: !0
+    [navigationRoutes.HOME]: !0,
+    [navigationRoutes.WIDGETS]: !0,
+    [navigationRoutes.PLUGINS]: !0,
+    [navigationRoutes.YOUR_TEAMS]: !0,
+    [navigationRoutes.LIBRARIES]: !1,
+    [navigationRoutes.FONTS]: !1,
+    [navigationRoutes.CONNECTED_PROJECTS]: !0
   };
   let l = e => {
     t(selectViewAction({
@@ -17162,21 +17162,21 @@ function fF(e) {
   }, [l, e.orgId, r]);
   let c = null;
   switch (e.selectedTab) {
-    case _$$X.WIDGETS:
+    case navigationRoutes.WIDGETS:
       c = jsx(_$$x7, {});
       break;
-    case _$$X.PLUGINS:
+    case navigationRoutes.PLUGINS:
       c = jsx(_$$C4, {});
       break;
-    case _$$X.YOUR_TEAMS:
+    case navigationRoutes.YOUR_TEAMS:
       c = jsx(fP, {});
       break;
-    case _$$X.CONNECTED_PROJECTS:
+    case navigationRoutes.CONNECTED_PROJECTS:
       c = jsx(fn, {});
       break;
-    case _$$X.HOME:
-    case _$$X.FONTS:
-    case _$$X.LIBRARIES:
+    case navigationRoutes.HOME:
+    case navigationRoutes.FONTS:
+    case navigationRoutes.LIBRARIES:
       c = n.status === 'loading' ? jsx(_$$X2, {
         isLoading: !0
       }) : n.data ? jsx(fR, {}) : jsx(fL, {});
@@ -20992,7 +20992,7 @@ function xm({
       s(selectViewAction({
         view: 'org',
         orgId: e.id,
-        orgViewTab: _$$X.HOME
+        orgViewTab: navigationRoutes.HOME
       }));
       logAndTrackCTA({
         clickedResourceType: 'org',
@@ -21157,7 +21157,7 @@ function x_({
             selectedTab: n.orgViewTab
           }), TrackingKeyEnum.ORG_PAGE, {
             orgId: n.orgId,
-            orgViewTab: (n.orgViewTab === _$$X.HOME ? 'HOME' : n.orgViewTab) || ''
+            orgViewTab: (n.orgViewTab === navigationRoutes.HOME ? 'HOME' : n.orgViewTab) || ''
           })
         };
       case 'orgAdminSettings':

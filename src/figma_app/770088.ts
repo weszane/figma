@@ -772,7 +772,7 @@ export let moveComment = createOptimistThunk((context, payload: MoveCommentPaylo
  * Sets a comment's content
  * @origin $$X48
  */
-let setCommentContentAction = createActionCreator('COMMENTS_SET_COMMENT_CONTENT')
+export let setCommentContentAction = createActionCreator('COMMENTS_SET_COMMENT_CONTENT')
 
 /**
  * Activates a comment thread

@@ -1,312 +1,616 @@
-import _require from "../2824/40443";
-import { GET_CODE, STYLING_RULE, CODE_CONNECT_DOCS, CODEBASE_SUGGESTIONS_DOCS, IMAGE_ASSET_DOCS, ANNOTATION_DOCS, getImageAssetDocs, IMPORTANT_IMAGE_PROMPT, populateAssetsMap, ASSETS_BASE_URL } from "../figma_app/728005";
-import { ServiceCategories } from "../905/165054";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager } from "../figma_app/27355";
-import l from "lodash-es/camelCase";
-import c from "../vendor/77708";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { debugState } from "../905/407919";
-import { reportError } from "../905/11";
-import { xg } from "../figma_app/677646";
-import { trackDefinedFileEvent } from "../figma_app/314264";
-import { htmlToEditorState } from "../905/902840";
-import { uA } from "../figma_app/781512";
-import { B9, Py } from "../figma_app/346422";
-import { hB } from "../figma_app/609511";
-import { imageOptionsWithMount, useTailwindAtom, denyOverwritingFilesAtom, mockDirForImageWritesAtom, isCodebaseSuggestionsEnabled } from "../figma_app/342355";
-import { Q } from "../905/938332";
-import { w6 } from "../905/372596";
-import { collectNodeVariablesAndStyles } from "../905/882689";
-var d = l;
-var u = c;
-export async function $$A0(e, t, l, c, p) {
-  let {
-    designToReact
-  } = await Promise.all([]).then(_require);
-  let C = atomStoreManager.get(imageOptionsWithMount);
-  let O = atomStoreManager.get(useTailwindAtom);
-  let R = atomStoreManager.get(denyOverwritingFilesAtom);
-  let L = atomStoreManager.get(mockDirForImageWritesAtom);
-  let P = new Map();
-  let D = {
-    transformer: B9,
-    assets: P
-  };
-  let k = new Set();
-  let M = c();
-  let F = !0;
-  let j = {};
-  let U = {};
-  let B = new Set();
-  let G = new Set();
-  let V = {};
-  function H(t, r) {
-    F = !1;
-    Object.assign(j, t);
-    Object.assign(U, r);
-    Object.keys(j).forEach(e => {
-      B.add(e);
-    });
-    Object.keys(U).forEach(e => {
-      G.add(e);
-    });
-    Q(e, B, debugState);
-  }
-  if (isCodebaseSuggestionsEnabled()) {
-    let [e, t] = await M;
-    H(e, t);
-    V = U ? Object.fromEntries(Object.entries(U).map(([e, t]) => [e, {
-      "data-codebase-suggestions": JSON.stringify(t)
-    }])) : {};
-  }
-  let z = function (e) {
-    try {
-      let t = function (e, a) {
-        let s = e.annotations.filter(e => e.label);
-        s.length > 0 && s.forEach(t => {
-          let s = t.categoryId ? r?.find(e => e.id === t.categoryId) : null;
-          let o = s ? `data-${uA(s).trim().replace(/[^a-zA-Z0-9\-\.:_]/g, "-").replace(/\-+/g, "-").replace(/^\-+|\-+$/g, "")}-annotations` : "data-annotations";
-          let l = htmlToEditorState(t.label);
-          n.push({
-            name: o,
-            value: l,
-            nodeIds: [e.guid, ...a],
-            mergeFn: i
-          });
-        });
-        e.childrenNodes.forEach(r => t(r, [e.guid, ...a]));
-      };
-      let r = e.sceneGraph.getRoot().annotationCategories;
-      let n = [];
-      let i = e => e.join(" | ");
-      t(e, []);
-      return n;
-    } catch (t) {
-      console.error("Error extracting annotations", t);
-      reportError(ServiceCategories.DEVELOPER_TOOLS, t, {
-        extra: {
-          rootNode: e?.guid
-        }
-      });
-      return [];
-    }
-  }(e);
-  let W = getFeatureFlags().d2r_refactor_mcp ?? !1;
-  let K = performance.now();
-  let {
-    files
-  } = await designToReact(e, async e => {
-    let t = performance.now();
-    let r = await hB({
-      assets: P,
-      compactDOM: !0,
-      isMcpGeneration: !0,
-      shouldOutputVariables: getFeatureFlags().dt_mcp_inline_variables ?? !1,
-      codeSyntaxLanguage: l
-    });
-    let i = await r.serializeHTML(e.guid);
-    w6("html_serialization", performance.now() - t, GET_CODE);
-    let [a, o] = await M;
-    F && H(a, o);
-    return i;
-  }, {
-    markupImageOption: C,
-    imageAssetsOptions: D,
-    convertToTailwindCSS: O,
-    inlineStyleProperties: !O,
-    useFigmaComponents: !0,
-    useFigmaComponentForNode: e => !B.has(e) && !G.has(e),
-    variantSerializationMode: "used",
-    disableExtractFrames: !0,
-    disableSvgImports: !0,
-    optimizeCode: e => {
-      if (W) {
-        let t = performance.now();
-        let r = Py(e, !0);
-        r.then(() => {
-          w6("code_optimization", performance.now() - t, GET_CODE);
-        });
-        return r;
-      }
-      return Promise.resolve(e);
-    },
-    domNodeToReactStr: ({
-      attributes: e
-    }) => {
-      let t = e?.getNamedItem("id")?.value;
-      if (!t) return null;
-      let r = xg(t);
-      if (!r) return null;
-      let n = getSingletonSceneGraph().getFromDeveloperFriendlyId(r);
-      if (!n || !N(n)) return null;
-      let i = j[n.guid];
-      if (i) {
-        let t = function e(t, r, n) {
-          if (!t.visible) return [];
-          let i = N(t) ? r[t.guid] : null;
-          if (i?.snippet) {
-            i?.snippetImports ? i.snippetImports.forEach(e => {
-              n.add(e);
-            }) : i.source && n.add(`import ${i.componentName} from "${i.source}"`);
-            return [i.snippet];
-          }
-          {
-            let o = [];
-            for (let i of t.childrenNodes) {
-              let t = e(i, r, n);
-              o.push(...t);
-            }
-            if (i) {
-              var a;
-              var s;
-              let e = "";
-              try {
-                a = t.componentProperties();
-                e = Object.entries(a).map(([e, t]) => {
-                  let r = d()(e.split("#")[0]);
-                  let n = "string" == typeof t.value ? `"${t.value}"` : `{${t.value}}`;
-                  return `${r}=${n}`;
-                }).join(" ");
-              } catch (e) {}
-              let r = [];
-              let l = i.componentName || (s = t.name, u()(d()(s)));
-              i.source && n.add(`import ${l} from "${i.source}"`);
-              o.length > 0 ? (r.push(w({
-                componentName: l,
-                props: e,
-                hasChildren: !0
-              })), r.push(...o), r.push(w({
-                componentName: l,
-                props: "",
-                isClosingTag: !0
-              }))) : r.push(w({
-                componentName: l,
-                props: e
-              }));
-              return r;
-            }
-            return o;
-          }
-        }(n, j, k);
-        if (t.length > 0) {
-          let r = Array.from(e).filter(e => "class" !== e.name).map(e => `${e.name}="${e.value}"`).concat(i.label ? [`data-snippet-language="${i.label}"`] : []).join(" ");
-          return `<CodeConnectSnippet ${r}>${t.join("\n")}</CodeConnectSnippet>`;
-        }
-      }
-      return null;
-    },
-    attributes: V,
-    attributesWithFallback: z
-  });
-  w6("design_to_react", performance.now() - K, GET_CODE);
-  let $ = files.find(e => "index.tsx" === e.name)?.contents;
-  if (!$ || "string" != typeof $) throw Error("No index.tsx string file found");
-  $ = $.replace(/id="node-(\d+)_(\d+)"/g, (e, t, r) => `data-node-id="${t}:${r}"`);
-  $ = await x($, C, P, p, L, R);
-  k.size > 0 && ($ = `${[...k].join("\n")}
+import { camelCase, upperFirst } from "lodash-es"
+import { reportError } from "../905/11"
+import { ServiceCategories } from "../905/165054"
+import { trackToolCallDuration } from "../905/372596"
+import { debugState } from "../905/407919"
+import { getFeatureFlags } from "../905/601108"
+import { getSingletonSceneGraph } from "../905/700578"
+import { collectNodeVariablesAndStyles } from "../905/882689"
+import { htmlToEditorState } from "../905/902840"
+import { updateUnmappedComponentsStore } from "../905/938332"
+import { atomStoreManager } from "../figma_app/27355"
+import { trackDefinedFileEvent } from "../figma_app/314264"
+import { denyOverwritingFilesAtom, imageOptionsWithMount, isCodebaseSuggestionsEnabled, mockDirForImageWritesAtom, useTailwindAtom } from "../figma_app/342355"
+import { optimizeCode, updateImagesToEsmImports } from "../figma_app/346422"
+import { hB } from "../figma_app/609511"
+import { xg } from "../figma_app/677646"
+import { ANNOTATION_DOCS, ASSETS_BASE_URL, CODE_CONNECT_DOCS, CODEBASE_SUGGESTIONS_DOCS, GET_CODE, getImageAssetDocs, IMAGE_ASSET_DOCS, IMPORTANT_IMAGE_PROMPT, populateAssetsMap, STYLING_RULE } from "../figma_app/728005"
+import { getAnnotationCategoryLabel } from "../figma_app/781512"
+import { desktopAPIInstance } from "../figma_app/876459"
+// Renamed variables, added types, simplified logic, improved readability
+// Origin: $$A0
 
-${$}`);
-  let X = performance.now();
-  let q = collectNodeVariablesAndStyles(e, l, getFeatureFlags().dt_mcp_inline_variables ?? !1);
-  w6("variables_and_styles", performance.now() - X, GET_CODE);
-  let J = [{
-    type: "text",
-    text: $
-  }];
-  if (O && J.push({
-    type: "text",
-    text: STYLING_RULE
-  }), J.push({
-    type: "text",
-    text: 'Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.'
-  }), Object.keys(q).length > 0) {
-    let e = getFeatureFlags().dt_mcp_inline_variables ? "styles" : "variables";
-    J.push({
-      type: "text",
-      text: `These ${e} are contained in the design: ${Object.entries(q).map(([e, t]) => `${e}: ${t}`).join(", ")}.`
-    });
+interface DesignToReactOptions {
+  markupImageOption: string
+  imageAssetsOptions: {
+    transformer: Fn
+    assets: Map<string, any>
   }
-  j && Object.keys(j).length > 0 && J.push({
-    type: "text",
-    text: CODE_CONNECT_DOCS
-  });
-  U && Object.keys(U).length > 0 && J.push({
-    type: "text",
-    text: CODEBASE_SUGGESTIONS_DOCS
-  });
-  "local" === C && J.push({
-    type: "text",
-    text: IMAGE_ASSET_DOCS
-  });
-  z.length > 0 && J.push({
-    type: "text",
-    text: ANNOTATION_DOCS
-  });
-  "write-to-disk" === C && (p || L) && J.push({
-    type: "text",
-    text: getImageAssetDocs(p || L)
-  });
-  J.push({
-    type: "text",
-    text: IMPORTANT_IMAGE_PROMPT
-  });
-  trackDefinedFileEvent("mcp.d2r_output_size", debugState.getState().openFile?.key || "", debugState.getState(), {
-    length: $.length,
-    numDivs: $.split("<div").length - 1,
-    numNodes: t,
-    isTailwind: atomStoreManager.get(useTailwindAtom)
-  });
-  return [{
-    content: J
-  }, {
-    codeConnectMapping: j
-  }];
+  convertToTailwindCSS: boolean
+  inlineStyleProperties: boolean
+  useFigmaComponents: boolean
+  useFigmaComponentForNode: (nodeId: string) => boolean
+  variantSerializationMode: string
+  disableExtractFrames: boolean
+  disableSvgImports: boolean
+  optimizeCode: (code: string) => Promise<string>
+  domNodeToReactStr: (node: { attributes: NamedNodeMap | null }) => string | null
+  attributes: Record<string, any>
+  attributesWithFallback: any[]
 }
-async function x(e, t, r, i, a, s) {
-  if ("local" === t) {
-    let t = performance.now();
-    populateAssetsMap(r);
-    let i = C(e, ASSETS_BASE_URL);
-    w6("image_assets_update", performance.now() - t, GET_CODE);
-    return i;
+
+interface CodeConnectMapping {
+  [nodeId: string]: {
+    snippet?: string
+    snippetImports?: string[]
+    source?: string
+    componentName?: string
+    label?: string
   }
-  if ("write-to-disk" === t) {
-    let t = performance.now();
-    let o = i || a;
-    if (!o) throw Error("Path for asset writes is required for write-to-disk option");
-    let l = o.endsWith("/") ? o.slice(0, -1) : o;
-    await O(r, l, s);
-    let d = C(e, l);
-    w6("image_write_to_disk", performance.now() - t, GET_CODE);
-    return d;
+}
+
+interface CodebaseSuggestions {
+  [nodeId: string]: any
+}
+
+interface AnnotationAttribute {
+  name: string
+  value: string
+  nodeIds: string[]
+  mergeFn: (ids: string[]) => string
+}
+
+interface SceneGraphNode {
+  guid: string
+  type: string
+  visible: boolean
+  annotations: Array<{
+    label?: string
+    categoryId?: string
+  }>
+  childrenNodes: SceneGraphNode[]
+  componentProperties?: () => Record<string, { value: string | number | boolean }>
+  name?: string
+}
+
+interface SceneGraph {
+  getRoot: () => {
+    annotationCategories: Array<{
+      id: string
+    }>
   }
-  return e;
 }
-function N(e) {
-  return "INSTANCE" === e.type || "SYMBOL" === e.type;
+
+interface SceneGraphWrapper {
+  sceneGraph: SceneGraph
 }
-function C(e, t) {
-  return e.replace(/import\s+(\w+)\s+from\s+['"]figma:asset\/([^'"]+)\.png['"];/g, (e, r, n) => `const ${r} = "${t}/${n}.png";`).replace(/import\s+(\w+)\s+from\s+['"]figma:asset\/([^'"]+)\.svg['"];/g, (e, r, n) => `const ${r} = "${t}/${n}.svg";`);
+
+interface FileContent {
+  name: string
+  contents: string
 }
-function w({
-  componentName: e,
-  props: t,
-  hasChildren: r = !1,
-  isClosingTag: n = !1
-}) {
-  return n ? `</${e}>` : "" === t ? r ? `<${e}>` : `<${e} />` : r ? `<${e} ${t}>` : `<${e} ${t} />`;
+
+interface DesignToReactResult {
+  files: FileContent[]
 }
-async function O(e, t, r) {
-  if (desktopAPIInstance && e.size > 0) for (let [n, i] of e.entries()) {
-    let e = new Uint8Array(await i.arrayBuffer());
-    let a = `${t}/${n}`;
+
+interface VariableAndStyleCollection {
+  [key: string]: string
+}
+
+export async function generateCodeFromDesign(
+  sceneGraphWrapper: SceneGraphWrapper,
+  nodeCount: number,
+  language: string,
+  getCodebaseSuggestions: () => Promise<[CodeConnectMapping, CodebaseSuggestions]>,
+  outputPath?: string,
+): Promise<[{ content: Array<{ type: string, text: string }> }, { codeConnectMapping: CodeConnectMapping }]> {
+  const { designToReact } = await import("../2824/40443")
+
+  // Get atom values
+  const imageOption = atomStoreManager.get(imageOptionsWithMount)
+  const useTailwind = atomStoreManager.get(useTailwindAtom)
+  const denyOverwritingFiles = atomStoreManager.get(denyOverwritingFilesAtom)
+  const mockDirectoryForImageWrites = atomStoreManager.get(mockDirForImageWritesAtom)
+
+  // Initialize assets map and options
+  const assetsMap = new Map<string, any>()
+  const imageAssetsOptions = {
+    transformer: updateImagesToEsmImports,
+    assets: assetsMap,
+  }
+
+  // Track imports for code snippets
+  const snippetImportsSet = new Set<string>()
+
+  // Get codebase suggestions
+  const codebaseSuggestionsPromise = getCodebaseSuggestions()
+
+  // State tracking variables
+  let hasProcessedCodebaseSuggestions = true
+  let codeConnectMapping: CodeConnectMapping = {}
+  let codebaseSuggestions: CodebaseSuggestions = {}
+  const unmappedComponentNodeIds = new Set<string>()
+  const codebaseSuggestionNodeIds = new Set<string>()
+  let dataAttributes: Record<string, any> = {}
+
+  // Update mapping with code connect and codebase suggestions
+  function updateMappings(newCodeConnectMapping: CodeConnectMapping, newCodebaseSuggestions: CodebaseSuggestions) {
+    hasProcessedCodebaseSuggestions = false
+    Object.assign(codeConnectMapping, newCodeConnectMapping)
+    Object.assign(codebaseSuggestions, newCodebaseSuggestions)
+
+    Object.keys(codeConnectMapping).forEach((nodeId) => {
+      unmappedComponentNodeIds.add(nodeId)
+    })
+
+    Object.keys(codebaseSuggestions).forEach((nodeId) => {
+      codebaseSuggestionNodeIds.add(nodeId)
+    })
+
+    updateUnmappedComponentsStore(sceneGraphWrapper, unmappedComponentNodeIds, debugState)
+  }
+
+  // Process codebase suggestions if enabled
+  if (isCodebaseSuggestionsEnabled()) {
+    const [fetchedCodeConnectMapping, fetchedCodebaseSuggestions] = await codebaseSuggestionsPromise
+    updateMappings(fetchedCodeConnectMapping, fetchedCodebaseSuggestions)
+
+    dataAttributes = codebaseSuggestions
+      ? Object.fromEntries(
+          Object.entries(codebaseSuggestions).map(([nodeId, suggestionData]) => [
+            nodeId,
+            { "data-codebase-suggestions": JSON.stringify(suggestionData) },
+          ]),
+        )
+      : {}
+  }
+
+  // Extract annotations from scene graph
+  const extractAnnotations = (wrapper: SceneGraphWrapper): AnnotationAttribute[] => {
     try {
-      await desktopAPIInstance.writeFileToPath(a, e, r);
-    } catch (e) {
-      throw Error(`Failed to write asset ${n} to disk at path ${a}: ${e.message}`);
+      const extractRecursive = (node: SceneGraphNode, ancestorIds: string[]) => {
+        const labeledAnnotations = node.annotations.filter(annotation => annotation.label)
+
+        if (labeledAnnotations.length > 0) {
+          labeledAnnotations.forEach((annotation) => {
+            const category = annotation.categoryId
+              ? rootAnnotationCategories?.find(cat => cat.id === annotation.categoryId)
+              : null
+
+            const attributeName = category
+              ? `data-${getAnnotationCategoryLabel(category)
+                .trim()
+                .replace(/[^\w\-.:]/g, "-")
+                .replace(/-+/g, "-")
+                .replace(/^-+|-+$/g, "")}-annotations`
+              : "data-annotations"
+
+            const editorState = htmlToEditorState(annotation.label || "")
+
+            annotationAttributes.push({
+              name: attributeName,
+              value: editorState,
+              nodeIds: [node.guid, ...ancestorIds],
+              mergeFn: joinNodeIds,
+            })
+          })
+        }
+
+        node.childrenNodes.forEach((childNode) => {
+          extractRecursive(childNode, [node.guid, ...ancestorIds])
+        })
+      }
+
+      const rootAnnotationCategories = wrapper.sceneGraph.getRoot().annotationCategories
+      const annotationAttributes: AnnotationAttribute[] = []
+      const joinNodeIds = (ids: string[]) => ids.join(" | ")
+
+      extractRecursive(wrapper.sceneGraph.getRoot() as unknown as SceneGraphNode, [])
+      return annotationAttributes
+    }
+    catch (error) {
+      console.error("Error extracting annotations", error)
+      reportError(ServiceCategories.DEVELOPER_TOOLS, error, {
+        extra: {
+          rootNode: wrapper?.sceneGraph?.getRoot()?.annotationCategories?.[0]?.id || "",
+        },
+      })
+      return []
+    }
+  }
+
+  const annotationAttributes = extractAnnotations(sceneGraphWrapper)
+
+  // Check if MCP refactor is enabled
+  const isMcpRefactorEnabled = getFeatureFlags().d2r_refactor_mcp ?? false
+
+  // Start timing for design to React conversion
+  const designToReactStartTime = performance.now()
+
+  // Convert design to React
+  const { files }: DesignToReactResult = await designToReact(
+    sceneGraphWrapper,
+    async (node: any) => {
+      const serializationStartTime = performance.now()
+
+      const htmlSerializer = await hB({
+        assets: assetsMap,
+        compactDOM: true,
+        isMcpGeneration: true,
+        shouldOutputVariables: getFeatureFlags().dt_mcp_inline_variables ?? false,
+        codeSyntaxLanguage: language,
+      })
+
+      const serializedHtml = await htmlSerializer.serializeHTML(node.guid)
+      trackToolCallDuration("html_serialization", performance.now() - serializationStartTime, GET_CODE)
+
+      const [fetchedCodeConnectMapping, fetchedCodebaseSuggestions] = await codebaseSuggestionsPromise
+      if (hasProcessedCodebaseSuggestions) {
+        updateMappings(fetchedCodeConnectMapping, fetchedCodebaseSuggestions)
+      }
+
+      return serializedHtml
+    },
+    {
+      markupImageOption: imageOption,
+      imageAssetsOptions,
+      convertToTailwindCSS: useTailwind,
+      inlineStyleProperties: !useTailwind,
+      useFigmaComponents: true,
+      useFigmaComponentForNode: (nodeId: string) =>
+        !unmappedComponentNodeIds.has(nodeId) && !codebaseSuggestionNodeIds.has(nodeId),
+      variantSerializationMode: "used",
+      disableExtractFrames: true,
+      disableSvgImports: true,
+      optimizeCode: async (code: string) => {
+        if (isMcpRefactorEnabled) {
+          const optimizationStartTime = performance.now()
+          const optimizedCode = optimizeCode(code, true)
+
+          optimizedCode.then(() => {
+            trackToolCallDuration("code_optimization", performance.now() - optimizationStartTime, GET_CODE)
+          })
+
+          return optimizedCode
+        }
+        return Promise.resolve(code)
+      },
+      domNodeToReactStr: ({ attributes }) => {
+        const nodeId = attributes?.getNamedItem("id")?.value
+        if (!nodeId)
+          return null
+
+        const developerFriendlyId = xg(nodeId)
+        if (!developerFriendlyId)
+          return null
+
+        const sceneNode = getSingletonSceneGraph().getFromDeveloperFriendlyId(developerFriendlyId)
+        if (!sceneNode || !isFigmaComponent(sceneNode))
+          return null
+
+        const mappingInfo = codeConnectMapping[sceneNode.guid]
+        if (mappingInfo) {
+          const buildComponentTree = (
+            node: any,
+            mappings: CodeConnectMapping,
+            importsSet: Set<string>,
+          ): string[] => {
+            if (!node.visible)
+              return []
+
+            const nodeMapping = isFigmaComponent(node) ? mappings[node.guid] : null
+
+            if (nodeMapping?.snippet) {
+              if (nodeMapping.snippetImports) {
+                nodeMapping.snippetImports.forEach((importStatement) => {
+                  importsSet.add(importStatement)
+                })
+              }
+              else if (nodeMapping.source) {
+                importsSet.add(`import ${nodeMapping.componentName} from "${nodeMapping.source}"`)
+              }
+              return [nodeMapping.snippet]
+            }
+            else {
+              const childSnippets: string[] = []
+              for (const childNode of node.childrenNodes) {
+                const childResult = buildComponentTree(childNode, mappings, importsSet)
+                childSnippets.push(...childResult)
+              }
+
+              if (nodeMapping) {
+                let componentProps = ""
+                let componentName = ""
+
+                try {
+                  const properties = node.componentProperties()
+                  componentProps = Object.entries<ObjectOf>(properties)
+                    .map(([propName, propValue]) => {
+                      const formattedName = camelCase(propName.split("#")[0])
+                      const formattedValue = typeof propValue.value === "string"
+                        ? `"${propValue.value}"`
+                        : `{${propValue.value}}`
+                      return `${formattedName}=${formattedValue}`
+                    })
+                    .join(" ")
+                }
+                catch { }
+
+                componentName = nodeMapping.componentName || upperFirst(camelCase(node.name || ""))
+
+                if (nodeMapping.source) {
+                  importsSet.add(`import ${componentName} from "${nodeMapping.source}"`)
+                }
+
+                const result: string[] = []
+                if (childSnippets.length > 0) {
+                  result.push(createComponentTag({ componentName, props: componentProps, hasChildren: true }))
+                  result.push(...childSnippets)
+                  result.push(createComponentTag({ componentName, props: "", isClosingTag: true }))
+                }
+                else {
+                  result.push(createComponentTag({ componentName, props: componentProps }))
+                }
+                return result
+              }
+
+              return childSnippets
+            }
+          }
+
+          const componentSnippets = buildComponentTree(sceneNode, codeConnectMapping, snippetImportsSet)
+
+          if (componentSnippets.length > 0) {
+            const filteredAttributes = Array.from(attributes || [])
+              .filter(attr => attr.name !== "class")
+              .map(attr => `${attr.name}="${attr.value}"`)
+
+            if (mappingInfo.label) {
+              filteredAttributes.push(`data-snippet-language="${mappingInfo.label}"`)
+            }
+
+            const attributesString = filteredAttributes.join(" ")
+            return `<CodeConnectSnippet ${attributesString}>${componentSnippets.join("\n")}</CodeConnectSnippet>`
+          }
+        }
+        return null
+      },
+      attributes: dataAttributes,
+      attributesWithFallback: annotationAttributes,
+    } as DesignToReactOptions,
+  )
+
+  trackToolCallDuration("design_to_react", performance.now() - designToReactStartTime, GET_CODE)
+
+  // Process the generated code
+  let generatedCode = files.find(file => file.name === "index.tsx")?.contents
+  if (!generatedCode || typeof generatedCode !== "string") {
+    throw new Error("No index.tsx string file found")
+  }
+
+  // Replace node IDs with data attributes
+  generatedCode = generatedCode.replace(
+    /id="node-(\d+)_(\d+)"/g,
+    (_, nodeId, subNodeId) => `data-node-id="${nodeId}:${subNodeId}"`,
+  )
+
+  // Process image assets
+  generatedCode = await processImageAssets(
+    generatedCode,
+    imageOption,
+    assetsMap,
+    outputPath,
+    mockDirectoryForImageWrites,
+    denyOverwritingFiles,
+  )
+
+  // Add snippet imports if any
+  if (snippetImportsSet.size > 0) {
+    generatedCode = `${[...snippetImportsSet].join("\n")}\n\n${generatedCode}`
+  }
+
+  // Collect variables and styles
+  const variablesAndStylesStartTime = performance.now()
+  const variablesAndStyles: VariableAndStyleCollection = collectNodeVariablesAndStyles(
+    sceneGraphWrapper,
+    language,
+    getFeatureFlags().dt_mcp_inline_variables ?? false,
+  )
+  trackToolCallDuration("variables_and_styles", performance.now() - variablesAndStylesStartTime, GET_CODE)
+
+  // Build response content
+  const responseContent: Array<{ type: string, text: string }> = [
+    {
+      type: "text",
+      text: generatedCode,
+    },
+  ]
+
+  // Add styling rule if using Tailwind
+  if (useTailwind) {
+    responseContent.push({
+      type: "text",
+      text: STYLING_RULE,
+    })
+  }
+
+  // Add node ID information
+  responseContent.push({
+    type: "text",
+    text: 'Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.',
+  })
+
+  // Add variables/styles information
+  if (Object.keys(variablesAndStyles).length > 0) {
+    const variableOrStyleType = getFeatureFlags().dt_mcp_inline_variables ? "styles" : "variables"
+    responseContent.push({
+      type: "text",
+      text: `These ${variableOrStyleType} are contained in the design: ${Object.entries(variablesAndStyles)
+        .map(([name, value]) => `${name}: ${value}`)
+        .join(", ")}.`,
+    })
+  }
+
+  // Add documentation links
+  if (codeConnectMapping && Object.keys(codeConnectMapping).length > 0) {
+    responseContent.push({
+      type: "text",
+      text: CODE_CONNECT_DOCS,
+    })
+  }
+
+  if (codebaseSuggestions && Object.keys(codebaseSuggestions).length > 0) {
+    responseContent.push({
+      type: "text",
+      text: CODEBASE_SUGGESTIONS_DOCS,
+    })
+  }
+
+  if (imageOption === "local") {
+    responseContent.push({
+      type: "text",
+      text: IMAGE_ASSET_DOCS,
+    })
+  }
+
+  if (annotationAttributes.length > 0) {
+    responseContent.push({
+      type: "text",
+      text: ANNOTATION_DOCS,
+    })
+  }
+
+  if (imageOption === "write-to-disk" && (outputPath || mockDirectoryForImageWrites)) {
+    responseContent.push({
+      type: "text",
+      text: getImageAssetDocs(outputPath || mockDirectoryForImageWrites),
+    })
+  }
+
+  responseContent.push({
+    type: "text",
+    text: IMPORTANT_IMAGE_PROMPT,
+  })
+
+  // Track file event
+  trackDefinedFileEvent(
+    "mcp.d2r_output_size",
+    debugState.getState().openFile?.key || "",
+    debugState.getState(),
+    {
+      length: generatedCode.length,
+      numDivs: generatedCode.split("<div").length - 1,
+      numNodes: nodeCount,
+      isTailwind: atomStoreManager.get(useTailwindAtom),
+    },
+  )
+
+  return [
+    {
+      content: responseContent,
+    },
+    {
+      codeConnectMapping,
+    },
+  ]
+}
+
+// Process image assets based on the selected option
+async function processImageAssets(
+  code: string,
+  imageOption: string,
+  assetsMap: Map<string, any>,
+  outputPath: string | undefined,
+  mockDirectory: string,
+  denyOverwrite: boolean,
+): Promise<string> {
+  if (imageOption === "local") {
+    const startTime = performance.now()
+    populateAssetsMap(assetsMap)
+    const updatedCode = replaceAssetImports(code, ASSETS_BASE_URL)
+    trackToolCallDuration("image_assets_update", performance.now() - startTime, GET_CODE)
+    return updatedCode
+  }
+
+  if (imageOption === "write-to-disk") {
+    const startTime = performance.now()
+    const targetPath = outputPath || mockDirectory
+
+    if (!targetPath) {
+      throw new Error("Path for asset writes is required for write-to-disk option")
+    }
+
+    const normalizedPath = targetPath.endsWith("/") ? targetPath.slice(0, -1) : targetPath
+    await writeAssetsToDisk(assetsMap, normalizedPath, denyOverwrite)
+    const updatedCode = replaceAssetImports(code, normalizedPath)
+    trackToolCallDuration("image_write_to_disk", performance.now() - startTime, GET_CODE)
+    return updatedCode
+  }
+
+  return code
+}
+
+// Check if a node is a Figma component (INSTANCE or SYMBOL)
+function isFigmaComponent(node: any): boolean {
+  return node.type === "INSTANCE" || node.type === "SYMBOL"
+}
+
+// Replace asset import statements with const declarations
+function replaceAssetImports(code: string, basePath: string): string {
+  return code
+    .replace(
+      /import\s+(\w+)\s+from\s+['"]figma:asset\/([^'"]+)\.png['"];/g,
+      (_, varName, assetName) => `const ${varName} = "${basePath}/${assetName}.png";`,
+    )
+    .replace(
+      /import\s+(\w+)\s+from\s+['"]figma:asset\/([^'"]+)\.svg['"];/g,
+      (_, varName, assetName) => `const ${varName} = "${basePath}/${assetName}.svg";`,
+    )
+}
+
+// Create a component tag string
+function createComponentTag({
+  componentName,
+  props = "",
+  hasChildren = false,
+  isClosingTag = false,
+}: {
+  componentName: string
+  props?: string
+  hasChildren?: boolean
+  isClosingTag?: boolean
+}): string {
+  if (isClosingTag) {
+    return `</${componentName}>`
+  }
+
+  if (props === "") {
+    return hasChildren ? `<${componentName}>` : `<${componentName} />`
+  }
+
+  return hasChildren ? `<${componentName} ${props}>` : `<${componentName} ${props} />`
+}
+
+// Write assets to disk using desktop API
+async function writeAssetsToDisk(
+  assetsMap: Map<string, any>,
+  directoryPath: string,
+  denyOverwrite: boolean,
+): Promise<void> {
+  if (desktopAPIInstance && assetsMap.size > 0) {
+    for (const [assetName, assetData] of assetsMap.entries()) {
+      const assetBytes = new Uint8Array(await assetData.arrayBuffer())
+      const filePath = `${directoryPath}/${assetName}`
+
+      try {
+        await desktopAPIInstance.writeFileToPath(filePath, assetBytes, denyOverwrite)
+      }
+      catch (error) {
+        throw new Error(`Failed to write asset ${assetName} to disk at path ${filePath}: ${error.message}`)
+      }
     }
   }
 }
-export const t2 = $$A0;
+
+export const t2 = generateCodeFromDesign

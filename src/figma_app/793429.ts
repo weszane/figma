@@ -4,9 +4,9 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
 import { stylesAtom } from "../905/125333";
 import { y as _$$y } from "../figma_app/404310";
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { t } from "../905/241707";
-import { NM, Zl } from "../figma_app/311375";
+import { useMultipleSelectedKeys, getSceneGraphItemByKey } from "../figma_app/311375";
 import { Q } from "../905/217916";
 import { getStyleSubscriptionInfo, getStyleSubscriptionName } from "../figma_app/646357";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -35,7 +35,7 @@ export function $$I1() {
     library: e.library,
     sceneGraph: e.mirror.sceneGraph
   }));
-  let a = NM();
+  let a = useMultipleSelectedKeys();
   let o = Ig();
   let l = uQ();
   let m = useDeepEqualSceneValue((e, t) => {
@@ -43,7 +43,7 @@ export function $$I1() {
     return !!r && r.childCount > 0 && r.visibleChildren.length > 0;
   }, l);
   let g = Q();
-  let f = v4();
+  let f = getEffectiveCodegenLanguage();
   let T = useCallback((e, t) => {
     let {
       styleKey,
@@ -51,7 +51,7 @@ export function $$I1() {
     } = e;
     let s = getStyleSubscriptionInfo(styleKey, styleGUIDs, library);
     if (!s || styleGUIDs.length < 1) return null;
-    let o = Zl(sceneGraph, styleGUIDs[0]);
+    let o = getSceneGraphItemByKey(sceneGraph, styleGUIDs[0]);
     if (!o) return null;
     let l = o.fills.map(e => dc(e, t));
     return rP(getStyleSubscriptionName(s, sceneGraph), s, l, styleGUIDs);

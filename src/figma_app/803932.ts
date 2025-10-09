@@ -12,7 +12,7 @@ import _ from "classnames";
 import { b as _$$b } from "../figma_app/517135";
 import { reportError } from "../905/11";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { v4 } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { G as _$$G, X as _$$X } from "../figma_app/521331";
 import { Fj } from "../figma_app/793429";
 import { Q } from "../905/217916";
@@ -535,7 +535,7 @@ let e_ = () => {
   let e = jY();
   let t = uQ();
   let r = Q();
-  let n = v4();
+  let n = getEffectiveCodegenLanguage();
   let s = isDevHandoffEditorType();
   let o = useSelector(e => $u(e) > 1 ? e.mirror.selectionPaints.paints : e.mirror.selectionPaints.paintsDirectlyOnSingleNode);
   let l = Ig();
@@ -670,7 +670,7 @@ export function $$eE6({
   let o = $$eu10();
   let l = $$ep11();
   let d = Q();
-  let c = v4();
+  let c = getEffectiveCodegenLanguage();
   let u = "TEXT" === s ? [...o, ...l] : o;
   let p = QT(u, a, d.inspectionMode, c, i);
   let _ = getColorFormat();

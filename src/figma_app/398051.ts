@@ -9,7 +9,7 @@ import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Tv } from "../figma_app/311375";
+import { useSceneGraphSelectionKeys } from "../figma_app/311375";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameLayers } from "../905/281495";
 import { getPropertiesPanelTab, setPropertiesPanelTab, replaceSelection } from "../figma_app/741237";
@@ -170,7 +170,7 @@ function j() {
   }
 }
 function U() {
-  let e = Tv();
+  let e = useSceneGraphSelectionKeys();
   return jsx(_$$u, {
     buttons: [{
       label: getI18nString("fullscreen.context_menu.auto_rename_layers"),

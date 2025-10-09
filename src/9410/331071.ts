@@ -149,7 +149,7 @@ import { AutoLayout } from '../905/470281';
 import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
 import { useDropdownState } from '../905/848862';
 import { V as _$$V3 } from '../905/849455';
-import { E9 } from '../905/851937';
+import { executePluginWithOptions } from '../905/851937';
 import { _ as _$$_3 } from '../905/862468';
 import { u as _$$u } from '../905/866761';
 import { bL as _$$bL, c$ } from '../905/867927';
@@ -286,7 +286,7 @@ import { eg as _$$eg, i6 as _$$i2, lw as _$$lw, Ev, F$, HD, mi, Mq, NH, vI } fro
 import { useSendToMakeExperiment } from '../figma_app/297957';
 import { filterArrayByEditorType, getCurrentPluginVersion, getPluginByFileId, injectHtmlOrUiFiles, PluginPermissions } from '../figma_app/300692';
 import { ResourceTypeEnum } from '../figma_app/306946';
-import { Tv } from '../figma_app/311375';
+import { useSceneGraphSelectionKeys } from '../figma_app/311375';
 import { getProductType } from '../figma_app/314264';
 import { bJ } from '../figma_app/318123';
 import { eH as _$$eH } from '../figma_app/318590';
@@ -774,7 +774,7 @@ async function ty(e, t) {
   let a = t ? injectHtmlOrUiFiles(e, n) : e;
   let s = generateRandomID();
   pluginState.currentPluginRunID = s;
-  E9({
+  executePluginWithOptions({
     allowedDomains: DEFAULT_ALLOWED_ORIGINS,
     apiVersion: pS,
     capabilities: [],
@@ -8362,7 +8362,7 @@ function oB({
               frecencyByAction,
               frecencyByQuery
             } = fJ();
-            let n = Tv();
+            let n = useSceneGraphSelectionKeys();
             let o = _$$C2();
             let l = useSendToMakeExperiment();
             return useCallback((a, s) => {

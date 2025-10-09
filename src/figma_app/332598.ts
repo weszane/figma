@@ -14,8 +14,8 @@ import { d as _$$d } from "../905/86829";
 import { WithTrackedIconButton } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { Spacer } from "../905/470281";
-import { k as _$$k } from "../905/963262";
-import { v4 } from "../figma_app/655139";
+import { internalPillKeyRegex } from "../905/963262";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
 import { BOUND_VAR_START_REGEX, BOUND_VAR_END_REGEX, BOUND_STYLE_START_REGEX, BOUND_STYLE_END_REGEX } from "../905/77776";
 import { joinCodeBlocks, ChangeType, getIndentString } from "../figma_app/711907";
 import { IssueCategoryEnum } from "../905/49095";
@@ -33,7 +33,7 @@ var _ = p;
 let k = atom(!1);
 let M = e => e.filter(e => !e.excludeFromCopy);
 function F(e, t = {}) {
-  return e.replace(BOUND_VAR_START_REGEX, "").replace(BOUND_VAR_END_REGEX, "").replace(BOUND_STYLE_START_REGEX, "").replace(BOUND_STYLE_END_REGEX, "").replace(SUGGESTED_VARIABLE_START_PATTERN, "").replace(SUGGESTED_VARIABLE_END_PATTERN, "").replace(_$$k, e => {
+  return e.replace(BOUND_VAR_START_REGEX, "").replace(BOUND_VAR_END_REGEX, "").replace(BOUND_STYLE_START_REGEX, "").replace(BOUND_STYLE_END_REGEX, "").replace(SUGGESTED_VARIABLE_START_PATTERN, "").replace(SUGGESTED_VARIABLE_END_PATTERN, "").replace(internalPillKeyRegex, e => {
     let r = t[e];
     return r ? "INSTANCE" === r.type || "D2C" === r.type ? `/* ${r.name} */` : `/* ${r.message} */` : "/* unknown instance */";
   });
@@ -54,7 +54,7 @@ export function $$U1({
   onMouseLeave: d,
   ...u
 }) {
-  let p = v4();
+  let p = getEffectiveCodegenLanguage();
   let _ = useMemo(() => ({
     name: "Copy code button",
     type: "code connect" !== e ? p.type : void 0,

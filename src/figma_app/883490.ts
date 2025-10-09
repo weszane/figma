@@ -7,7 +7,7 @@ import { debugState } from '../905/407919';
 import { VisualBellIcon } from '../905/576487';
 import { getCodeExtensionPreferences } from '../figma_app/120227';
 import { assetTypeEnum } from '../figma_app/198712';
-import { mJ } from '../figma_app/311375';
+import { getSceneGraphItem } from '../figma_app/311375';
 import { replaceSelection } from '../figma_app/741237';
 import { MeasurementUnit } from '../figma_app/763686';
 let $$m7 = atom(!1);
@@ -61,7 +61,7 @@ export function $$T0({
   shouldShowTypeLabel: i,
   hideDot: a
 }) {
-  let s = mJ(e.instancesGUIDs?.[0] ?? e.assetId);
+  let s = getSceneGraphItem(e.instancesGUIDs?.[0] ?? e.assetId);
   let o = s?.size?.x ?? 0;
   let l = s?.size?.y ?? 0;
   if (t && t.length > 0) {

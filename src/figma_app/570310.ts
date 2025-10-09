@@ -30,11 +30,11 @@ import { z as _$$z } from "../905/284530";
 import { f as _$$f, v as _$$v } from "../figma_app/258006";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Spacer } from "../905/470281";
-import { A as _$$A3 } from "../905/963262";
-import { Ur } from "../figma_app/451396";
+import { processOutputSections } from "../905/963262";
+import { generatePlaygroundInstanceCode } from "../figma_app/451396";
 import { rZ, yT, zM } from "../figma_app/332598";
-import { v4 } from "../figma_app/655139";
-import { uQ } from "../figma_app/311375";
+import { getEffectiveCodegenLanguage } from "../figma_app/655139";
+import { useSingleSelectedKey } from "../figma_app/311375";
 import { useSingleEffect } from "../905/791079";
 import { useLatestRef } from "../figma_app/922077";
 import { getPartnerType } from "../905/853613";
@@ -973,7 +973,7 @@ function eK({
 }) {
   let c = selectCurrentUser();
   let u = selectCurrentFile();
-  let p = uQ();
+  let p = useSingleSelectedKey();
   let _ = useSceneGraphSelector();
   let {
     backingNodeId,
@@ -983,7 +983,7 @@ function eK({
   } = getBackingNodeInfo(p ?? "", _, null);
   let E = usePlaygroundSceneGraph();
   s && (_ = E);
-  let I = Ur(e.template, a, s);
+  let I = generatePlaygroundInstanceCode(e.template, a, s);
   let S = _$$l(backingLibraryKey ?? "");
   let A = function (e) {
     let t = useLibraries([e]).data[0];
@@ -1047,7 +1047,7 @@ function eK({
       code,
       language,
       pills
-    } = _$$A3({
+    } = processOutputSections({
       output: I,
       sceneGraph: _
     });
@@ -1219,7 +1219,7 @@ export function $$eQ0({
   let o = useSceneGraphSelector();
   let l = usePlaygroundSceneGraph();
   let d = Fullscreen.getPlaygroundNodeData();
-  let c = uQ();
+  let c = useSingleSelectedKey();
   let {
     selectedLabel,
     setSelectedLabel
@@ -1230,7 +1230,7 @@ export function $$eQ0({
       selectedLabel: r,
       setSelectedLabel: n
     };
-  }(v4());
+  }(getEffectiveCodegenLanguage());
   e && (c = findComponentGuidOrPublishId(d.playgroundGUID, l, o) ?? c);
   let _ = l.get(d.playgroundGUID);
   let {
@@ -1380,7 +1380,7 @@ export function $$eQ0({
   }, [D.view, O, P]);
   let j = useRef(null);
   let U = useSceneGraphSelector();
-  let B = uQ();
+  let B = useSingleSelectedKey();
   let {
     backingLibraryKey
   } = getBackingNodeInfo(B ?? "", U, null);

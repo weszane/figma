@@ -18,9 +18,9 @@ import { useTheme } from "../905/289770";
 import { setupThemeContext } from "../905/614223";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { $w } from "../figma_app/935144";
-import { nP } from "../figma_app/484865";
-import { t2 } from "../figma_app/911720";
+import { countChildNodes } from "../figma_app/935144";
+import { getCodeConnectMapping } from "../figma_app/484865";
+import { generateCodeFromDesign } from "../figma_app/911720";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
@@ -312,9 +312,9 @@ function H({
             t(null);
             return;
           }
-          let e = $w(o);
-          let n = await t2(o, e, "web", async () => {
-            let [[e], [n]] = await nP(o, "get_code");
+          let e = countChildNodes(o);
+          let n = await generateCodeFromDesign(o, e, "web", async () => {
+            let [[e], [n]] = await getCodeConnectMapping(o, "get_code");
             return [e, n];
           }, void 0);
           if (n[0]?.content && Array.isArray(n[0].content) && n[0].content[0]?.type === "text") {

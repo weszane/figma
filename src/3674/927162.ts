@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { E as _$$E } from "../905/53857";
-import { v4, AC } from "../figma_app/655139";
+import { getEffectiveCodegenLanguage, getDevModePluginFromLanguage } from "../figma_app/655139";
 import { x1 } from "../469e6e40/936617";
 import { isCodeMode } from "../905/191741";
 import { selectIsCopyExportAllowed } from "../figma_app/212807";
@@ -55,8 +55,8 @@ export function $$_1({
 export function $$v0() {
   let e = isCodeMode();
   let t = selectIsCopyExportAllowed();
-  let n = v4();
-  let i = AC(n);
+  let n = getEffectiveCodegenLanguage();
+  let i = getDevModePluginFromLanguage(n);
   let l = "SECTION" === rb();
   return t && e && "first-party" !== n.type && i && !l ? jsx($$_1, {
     plugin: i

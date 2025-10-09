@@ -3,9 +3,9 @@ import { useState, useEffect, useLayoutEffect } from "react";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { consentAllowedAtom } from "../905/18800";
 import { SprigContext } from "../905/99656";
-import { An, Ay } from "../905/931912";
-import { m } from "../figma_app/714966";
-import { $z } from "../905/62762";
+import { defaultSdkImplementation, SprigSDKManager } from "../905/931912";
+import { areObjectsEqualWithRect } from "../figma_app/714966";
+import { shouldEnableSprigAnalytics } from "../905/62762";
 let u = atom([]);
 let p = atom(null, (e, t, r) => {
   let n = e(u);
@@ -23,14 +23,14 @@ export function $$h0({
   geofence: d = {}
 }) {
   let p = useAtomWithSubscription(consentAllowedAtom);
-  let _ = $z({
+  let _ = shouldEnableSprigAnalytics({
     canUseCookieForAnalytics: p,
     geofence: d
   });
-  let [h, m] = useState(An);
+  let [h, m] = useState(defaultSdkImplementation);
   let g = useAtomWithSubscription(u);
   useEffect(() => {
-    m(e => (e.tearDown(), _ ? new Ay() : An));
+    m(e => (e.tearDown(), _ ? new SprigSDKManager() : defaultSdkImplementation));
   }, [_]);
   useEffect(() => {
     h.setCallbacks({
@@ -39,7 +39,7 @@ export function $$h0({
     });
   }, [t, r, h]);
   useLayoutEffect(() => {
-    Ay.setScreenAreasToAvoid(g);
+    SprigSDKManager.setScreenAreasToAvoid(g);
   }, [g]);
   return jsx(SprigContext.Provider, {
     value: h,
@@ -51,7 +51,7 @@ export function $$m1(e) {
   let n = Xr(p);
   let s = Xr(_);
   useEffect(() => {
-    m(e, t) || r(e);
+    areObjectsEqualWithRect(e, t) || r(e);
   }, [e, t]);
   useEffect(() => {
     if (void 0 !== t) {

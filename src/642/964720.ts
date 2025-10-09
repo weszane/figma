@@ -19,7 +19,7 @@ import { DialogTriggerButton } from '../905/976845';
 import { defaultSerializationOptions, extractBooleanFieldDescriptions } from '../905/998509';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { MM, wv } from '../figma_app/236327';
-import { uQ } from '../figma_app/311375';
+import { useSingleSelectedKey } from '../figma_app/311375';
 import { fullscreenValue } from '../figma_app/455680';
 import { R$ } from '../figma_app/545190';
 import { jT, Zk } from '../figma_app/626177';
@@ -62,7 +62,7 @@ export function $$A0({
     text: !0,
     interactivity: !0
   });
-  let Q = uQ();
+  let Q = useSingleSelectedKey();
   let [ee, et] = useState({
     ...{
       ...Object.fromEntries(Object.entries(extractBooleanFieldDescriptions()).map(([e, t]) => [e, !1])),

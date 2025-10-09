@@ -53,7 +53,7 @@ async function copyImageUsagesBeforeMerge(
 /**
  * Creates an error handler thunk for merge operations
  */
-const createMergeErrorHandler = createOptimistThunk(({ dispatch }, action) => {
+export const createMergeErrorHandler = createOptimistThunk(({ dispatch }, action) => {
   const message = action?.message || getI18nString("collaboration.branching.error_merging")
   dispatch(VisualBellActions.enqueue({
     message,
@@ -65,7 +65,7 @@ const createMergeErrorHandler = createOptimistThunk(({ dispatch }, action) => {
 /**
  * Handles committing merge operations
  */
-const commitMerge = createOptimistThunk(async ({ dispatch, getState }, action) => {
+export const commitMerge = createOptimistThunk(async ({ dispatch, getState }, action) => {
   const {
     mergeParams,
     checkpointDiff,
@@ -198,7 +198,7 @@ const commitMerge = createOptimistThunk(async ({ dispatch, getState }, action) =
 /**
  * Handles branch modal exit and analytics tracking
  */
-const handleBranchModalExit = createOptimistThunk(({ dispatch, getState }, action) => {
+export const handleBranchModalExit = createOptimistThunk(({ dispatch, getState }, action) => {
   if (action.hideModal) {
     dispatch(hideModal())
   }
@@ -234,7 +234,7 @@ const handleBranchModalExit = createOptimistThunk(({ dispatch, getState }, actio
 /**
  * Handles merge operations when file needs to be opened first
  */
-const handleMergeOnFileOpen = createOptimistThunk(async ({ dispatch, getState }, action) => {
+export const handleMergeOnFileOpen = createOptimistThunk(async ({ dispatch, getState }, action) => {
   if (action.mergeParams.mergeOnFileOpen) {
     // Wait for animation frame and ensure connection
     await waitForAnimationFrame()
@@ -390,7 +390,7 @@ const handleMergeOnFileOpen = createOptimistThunk(async ({ dispatch, getState },
 /**
  * Handles the result of committing a diff
  */
-async function handleCommitDiffResult(response: any, dispatch: Fn, mergeParams: any, userId: string, diffProcessor: any = null): Promise<void> {
+export async function handleCommitDiffResult(response: any, dispatch: Fn, mergeParams: any, userId: string, diffProcessor: any = null): Promise<void> {
   if (!response)
     return
 

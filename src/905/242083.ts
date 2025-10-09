@@ -79,7 +79,7 @@ import { LogLevelStr } from '../905/361972';
 import { jp, WS } from '../905/370597';
 import { deepEqual } from '../905/382883';
 import { generateUniqueKey } from '../905/383708';
-import { x as _$$x4 } from '../905/392802';
+import { createWorker } from '../905/392802';
 import { isEffectOrGrid } from '../905/405710';
 import { Dn } from '../905/407352';
 import { debugState } from '../905/407919';
@@ -203,7 +203,7 @@ import { parseInteger } from '../905/833686';
 import { getOrgByCurrentUserId } from '../905/845253';
 import { useDropdownState } from '../905/848862';
 import { getCurrentMaxVariables } from '../905/850476';
-import { s2 as _$$s3, A9, bT, E9, mK } from '../905/851937';
+import { initializeGlobalPluginAPI, runLastPlugin, runPluginWorkflow, executePluginWithOptions, isCurrentWidgetActive } from '../905/851937';
 import { savepointOptimistThunk } from '../905/852057';
 import { y as _$$y2 } from '../905/855374';
 import { n3 as _$$n, Rf } from '../905/859698';
@@ -308,7 +308,7 @@ import { PR } from '../figma_app/299859';
 import { getFullscreenViewEditorType, getWidgetVersionData, isWidgetPlugin, loadLocalPluginSource, loadPluginManifest, PluginPermissions, showVisualBell } from '../figma_app/300692';
 import { Z as _$$Z3 } from '../figma_app/301719';
 import { u1 as _$$u2, zi } from '../figma_app/305244';
-import { Tv, Zl } from '../figma_app/311375';
+import { useSceneGraphSelectionKeys, getSceneGraphItemByKey } from '../figma_app/311375';
 import { logAndTrackCTA, mapEditorTypeToProductType, trackFileEvent, trackGenericEvent, trackUserEvent } from '../figma_app/314264';
 import { _d, P5 } from '../figma_app/318590';
 import { $I, iP as _$$iP, h$, jD, Jf, KY } from '../figma_app/322845';
@@ -2059,7 +2059,7 @@ var rD = (e => (e.INITIAL = 'initial', e.SELECT_EXISTING_COMPONENT = 'select-exi
 function rL() {
   let [e, t] = useState('initial');
   let [i, n] = useState([]);
-  let r = Tv();
+  let r = useSceneGraphSelectionKeys();
   let {
     close
   } = useNavigationStack();
@@ -4340,7 +4340,7 @@ let oN = class e {
       logError('RenderingWorker', 'Attempting to spawn the rendering worker but it\'s already spawned');
       return;
     }
-    if (this._worker = _$$x4(oT), !this._worker) {
+    if (this._worker = createWorker(oT), !this._worker) {
       logError('RenderingWorker', 'Failed to spawn rendering worker');
       this.processStateMachineEvent('error');
       return;
@@ -4661,7 +4661,7 @@ async function lN({
   if (isWidgetPlugin({
     plugin: p
   })) {
-    await bT({
+    await runPluginWorkflow({
       plugin: p,
       command: JSON.stringify(t),
       queryMode: !1,
@@ -4695,7 +4695,7 @@ async function lO({
   let o = generateRandomID();
   pluginState.currentPluginRunID = o;
   try {
-    await E9({
+    await executePluginWithOptions({
       allowedDomains: DEFAULT_ALLOWED_ORIGINS,
       apiVersion: pS,
       capabilities: [],
@@ -4773,7 +4773,7 @@ async function lF(e, {
     } = debugState.getState();
     let o = handleSelectedView();
     if (!o) throw new Error('Cannot run widget while logged out');
-    await E9({
+    await executePluginWithOptions({
       allowedDomains: manifest.networkAccess?.allowedDomains ?? DEFAULT_ALLOWED_ORIGINS,
       apiVersion: manifest.api,
       capabilities: manifest.capabilities ?? [],
@@ -5198,7 +5198,7 @@ class lV {
     this.addWidgetToRecentlyUsed(a?.widgetVersionId, e);
   }
   terminateRunningWidget(e, t) {
-    mK({
+    isCurrentWidgetActive({
       pluginID: e,
       widgetNodeID: t
     }) && handlePluginError();
@@ -6589,7 +6589,7 @@ let lX = class e extends WithFullscreenFunctionality {
     let l = 0;
     if (e === 'create_node_transition') {
       for (let e of o) {
-        let t = Zl(i, e);
+        let t = getSceneGraphItemByKey(i, e);
         t && (l += Yg(t));
       }
       if (l > 1) return;
@@ -7084,7 +7084,7 @@ let lX = class e extends WithFullscreenFunctionality {
     e.maybeEnterRecoveryMode(this._store);
     this._figFileLoadPromise.then(e => {
       let t = this._store.getState().user;
-      t && (setupPlaybackHandler(), _$$s3({
+      t && (setupPlaybackHandler(), initializeGlobalPluginAPI({
         userID: t.id,
         openFileKey: e
       }));
@@ -7344,7 +7344,7 @@ let lX = class e extends WithFullscreenFunctionality {
     });
   }
   runLastPlugin() {
-    return A9();
+    return runLastPlugin();
   }
   desktopAppQueueFileForWriting(e, t) {
     desktopAPIInstance && this._writeFilesQueue.push({
