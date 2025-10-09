@@ -1,3 +1,4 @@
+import type { SceneGraph } from "./830071"
 import { computeBackingGUIDs } from "../905/92359"
 import { isInvalidValue } from "../905/216495"
 import { getPublishedNodeId } from "../figma_app/97042"
@@ -25,7 +26,7 @@ interface BackingInfo {
 
 export function getBackingNodeInfo(
   nodeId: string,
-  nodeMap: Map<string, Node>,
+  nodeMap: SceneGraph,
   defaultLibraryKey: string,
 ): BackingInfo {
   const node = nodeMap.get(nodeId)

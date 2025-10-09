@@ -28,7 +28,7 @@ import { handleAtomEvent } from "../905/502364";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Point } from "../905/736624";
 import { breakInTemplateExecutionAtom } from "../figma_app/451396";
-import { Oq } from "../figma_app/478201";
+import { debugModeAtom } from "../figma_app/478201";
 import { MW } from "../figma_app/570310";
 import { hideModalHandler, showModalConditional, showModalHandler } from "../905/156213";
 import { registerModal } from "../905/102752";
@@ -61,7 +61,7 @@ let U = registerModal(function () {
   }, [e]);
   let [r, a] = useAtomValueAndSetter(breakInTemplateExecutionAtom);
   let [o, l] = useAtomValueAndSetter(MW);
-  let [d, c] = useAtomValueAndSetter(Oq);
+  let [d, c] = useAtomValueAndSetter(debugModeAtom);
   return jsx(DraggableModalManager, {
     title: "Code Connect Debug Settings",
     headerSize: "small",

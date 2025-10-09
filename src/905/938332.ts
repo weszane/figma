@@ -1,3 +1,4 @@
+import type { SceneGraph } from "./830071"
 import { D, d } from "../905/433403"
 import { getFeatureFlags } from "../905/601108"
 import { getBackingNodeInfo } from "../905/621769"
@@ -13,13 +14,6 @@ interface Node {
   name: string
   childrenNodes?: Node[]
 }
-
-interface SceneGraph {
-  // Define based on actual structure if available
-  [key: string]: any
-}
-
-
 
 interface ComponentInfo {
   nodeId: string

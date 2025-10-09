@@ -1,3 +1,4 @@
+import type { SceneGraph } from './830071'
 import { MIXED_MARKER } from '../905/216495'
 
 // Define types for better clarity
@@ -6,10 +7,6 @@ interface Component {
   node_id: string
 }
 
-interface StateInfo {
-  isState: boolean
-  parentGuid: string
-}
 
 /**
  * Generates a key for retrieving subscribed components and state groups.
@@ -41,7 +38,7 @@ export function generateSwappingInstanceKey(component: Component, states: string
  */
 export function computeBackingGUIDs(
   components: Set<string>,
-  stateMap: Map<string, StateInfo>,
+  stateMap: SceneGraph,
 ): { backingSymbolGUID: string | null, backingStateGroupGUID: string | null } {
   // Determine backingSymbolGUID based on number of components
   let backingSymbolGUID: any | null = null

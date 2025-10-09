@@ -24,7 +24,7 @@ import { useSceneGraphSelector } from "../figma_app/722362"
 interface SceneNode {
   guid: string
   type: string
-  // ...other properties as needed
+  [key: string]: any
 }
 
 interface CodeConnectImport {
@@ -36,24 +36,6 @@ interface CodeConnectImport {
 interface CodeConnectForNodeResult {
   imports: CodeConnectImport[]
   codeConnectForNodes: Map<string, any>
-}
-
-interface DebugState {
-  selectedView: {
-    view: string
-    fileKey: string | null
-  }
-  // ...other properties
-}
-
-interface BackingNodeInfo {
-  backingNodeId: string | null
-  backingLibraryKey: string | null
-}
-
-interface FilePermissionData {
-  // Structure inferred from S.data
-  [key: string]: any
 }
 
 interface CodeConnectDisplay {
@@ -104,7 +86,7 @@ export function collectInstanceAndSymbolNodes(
  * Returns a callback that, given a root node, collects imports and code connect data for each instance.
  */
 export function useCodeConnectForInstances(): (rootNode: SceneNode) => Promise<CodeConnectForNodeResult> {
-  const debug = debugState.getState() 
+  const debug = debugState.getState()
   const currentFileKey = debug.selectedView.view === "fullscreen" ? debug.selectedView.fileKey : null
   const sceneGraph = useSceneGraphSelector()
   const openLibraryKey = useAtomWithSubscription(openFileLibraryKeyAtom)
