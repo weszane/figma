@@ -13,7 +13,7 @@ import { isInvalidValue, isValidValue } from "../905/216495";
 import { useSelectionPropertyValue } from "../905/275640";
 import { getStyleSubscriptionInfo } from "../figma_app/646357";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { e_ } from "../figma_app/803787";
+import { selectLibrary } from "../figma_app/803787";
 import { Ig, dc, rP } from "../figma_app/155647";
 import { Cq } from "../figma_app/161708";
 import { QT } from "../figma_app/152690";
@@ -32,7 +32,7 @@ export function $$$$N1() {
   let v = pF(e => _$$b(e.mirror.selectionProperties, "inheritFillStyleKeyForStroke"));
   let A = useSelector(e => e.mirror.selectionProperties.styleIdForStrokeFill);
   let x = useDeepEqualSceneValue((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, A?.assetRef);
-  let N = useSelector(e_);
+  let N = useSelector(selectLibrary);
   let w = useSelectionPropertyValue("inheritFillStyleKeyForStroke");
   let L = w && isValidValue(w) ? getStyleSubscriptionInfo(w, x ? [x] : [], N) : void 0;
   let P = useSelector(e => e.mirror.selectionProperties.borderSharedWeight || e.mirror.selectionProperties.strokeWeight) || 1;

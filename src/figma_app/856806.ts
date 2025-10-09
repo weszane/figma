@@ -11,7 +11,7 @@ import { openFileLibraryKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { useLibraries } from "../905/420347";
 import { PreloadCodeConnectLk } from "../figma_app/43951";
 import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
-import { MH } from "../figma_app/803787";
+import { selectComponentLibraryItemsWithStatus } from "../figma_app/803787";
 import { selectAllComponentAssets, selectAllStateGroupAssets } from "../figma_app/645694";
 import { selectLocalSymbolsWithUsagesOnCurrentPage } from "../figma_app/889655";
 import { subscribedSymbolsOnCurrentPageSelector } from "../figma_app/141508";
@@ -69,7 +69,7 @@ function x(e, t) {
   let l = useSelector(subscribedSymbolsOnCurrentPageSelector);
   let d = useSelector(selectLocalSymbolsWithUsagesOnCurrentPage);
   let c = function (e) {
-    let t = useSelector(MH);
+    let t = useSelector(selectComponentLibraryItemsWithStatus);
     let r = useSelector(e => e.mirror.appModel.currentPage);
     let a = useAtomWithSubscription(openFileLibraryKeyAtom);
     return useMemo(() => {

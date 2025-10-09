@@ -21,7 +21,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Q as _$$Q } from "../905/978641";
-import { ce, Lm, U_, mF } from "../figma_app/755939";
+import { templateSearchQueryAtomFamily, templateSourceAtom, templateCommunityFilterAtomFamily, TemplateSourceType } from "../figma_app/755939";
 import { UpgradeAction } from "../905/370443";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { KindEnum } from "../905/129884";
@@ -362,12 +362,12 @@ export function $$ee9({
   children: t
 }) {
   let n = VU();
-  let r = useAtomWithSubscription(ce);
-  let i = useAtomWithSubscription(Lm);
-  let o = useAtomWithSubscription(U_);
+  let r = useAtomWithSubscription(templateSearchQueryAtomFamily);
+  let i = useAtomWithSubscription(templateSourceAtom);
+  let o = useAtomWithSubscription(templateCommunityFilterAtomFamily);
   let s = r.length > 0;
   let l = s && n;
-  let d = n && i.type === mF.TEMPLATES;
+  let d = n && i.type === TemplateSourceType.TEMPLATES;
   let c = "COMMUNITY" === o && !s;
   let _ = h()({
     "cooper_template_ui--grid---JmtS cooper_template_ui--gridBase--AIKjP": !n,

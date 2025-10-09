@@ -129,7 +129,7 @@ import { isGovCluster } from '../figma_app/169182';
 import { J as _$$J3 } from '../figma_app/179602';
 import { FPlanNameType, FOrganizationLevelType, FCostCenterType } from '../figma_app/191312';
 import { getProductAccessTypeByKey } from '../figma_app/217457';
-import { Bg } from '../figma_app/246699';
+import { isPublicLinkBanned } from '../figma_app/246699';
 import { ListFormatter } from '../figma_app/257703';
 import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { isResourceHubEnabled } from '../figma_app/275462';
@@ -3219,7 +3219,7 @@ let nm = registerModal(() => {
           labelClassName: nc,
           children: getGuestControlApprovalStatus(ApprovalStatusEnum.BANNED)
         })]
-      }), !Bg(t.shared_container_setting) && g != null && jsx('div', {
+      }), !isPublicLinkBanned(t.shared_container_setting) && g != null && jsx('div', {
         className: J()('guest_invite_settings_modal--publicLinksBanner--5qmdP', a ? cssBuilderInstance.mt16.$ : cssBuilderInstance.my16.$),
         children: renderI18nText('org_settings.guest_control.link_sharing_on', {
           enabled: jsx('span', {
@@ -3256,7 +3256,7 @@ let nm = registerModal(() => {
             return;
           }
           let s = a ? getGuestControlApprovalStatus(g) : n ? getMfaGuestControlSetting(o) : '';
-          if (Bg(t.shared_container_setting) || g !== ApprovalStatusEnum.BANNED) {
+          if (isPublicLinkBanned(t.shared_container_setting) || g !== ApprovalStatusEnum.BANNED) {
             let t = {};
             n && (t.mfa_required = o);
             a && (t.invite_whitelist_guest_invite_setting = g);

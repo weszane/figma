@@ -122,7 +122,7 @@ import { getCurrentPath } from '../905/508367';
 import { createFileBehaviorAtom, FileChangeBehaviorEnum } from '../905/508457';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { s as _$$s } from '../905/513506';
-import { RR } from '../905/514666';
+import { PublishingUIContext } from '../905/514666';
 import { v as _$$v } from '../905/516963';
 import { dD as _$$dD } from '../905/519113';
 import { APILoadingStatus } from '../905/520829';
@@ -137,7 +137,7 @@ import { lu as _$$lu } from '../905/545842';
 import { HAvatarType } from '../905/566881';
 import { d as _$$d8, O as _$$O } from '../905/572941';
 import { FlashActions } from '../905/573154';
-import { jO } from '../905/573265';
+import { LibraryPublishErrorType } from '../905/573265';
 import { VisualBellIcon } from '../905/576487';
 import { conditionalWrapper } from '../905/579635';
 import { SceneGraphHookBindingsInstance } from '../905/581543';
@@ -426,7 +426,7 @@ import { openFileKeyAtom, selectCurrentFile, useCurrentFileKey, useFileLibraryKe
 import { D as _$$D6, z as _$$z4 } from '../figma_app/516075';
 import { _c as _$$_c, l0 as _$$l3, wV as _$$wV, BX, Dp, Eo, wF } from '../figma_app/516324';
 import { IF, Lo } from '../figma_app/518364';
-import { dh as _$$dh, TS } from '../figma_app/519839';
+import { handlePublishEnded, finishPublishThunk } from '../figma_app/519839';
 import { jn } from '../figma_app/522082';
 import { Qw as autoSuggestAssetBindings } from '../figma_app/527668';
 import { hasRootPathOptional } from '../figma_app/528509';
@@ -497,7 +497,7 @@ import { getDevHandoffInspectSplitPosition, isHelpWidgetHidden } from '../figma_
 import { C as _$$C } from '../figma_app/747354';
 import { K7 } from '../figma_app/749805';
 import { Cg } from '../figma_app/751648';
-import { YA } from '../figma_app/755939';
+import { isTemplateSelectorOpenAtomFamily } from '../figma_app/755939';
 import { c as _$$c6 } from '../figma_app/763535';
 import { AppStateTsApi, Command, ComponentPropType, DesignGraphElements, DrawBindingsCpp, FileSourceType, Fullscreen, JoinType, LayoutTabType, OffsetPathTsApi, PerfQuality, RichTextType, SimplifyVectorToolTsApi, TextData_Internal, TextDirection, ThemeType, UserAppType, ViewType } from '../figma_app/763686';
 import { c as _$$c7 } from '../figma_app/765216';
@@ -790,7 +790,7 @@ function eu() {
 }
 let CooperTsBindings = new class {
   openTemplatePicker() {
-    atomStoreManager.set(YA, !0);
+    atomStoreManager.set(isTemplateSelectorOpenAtomFamily, !0);
   }
   getTextFields(e) {
     let t = getSingletonSceneGraph();
@@ -6079,7 +6079,7 @@ function dH() {
     }, [u]);
     let _ = useCurrentFileKey();
     useEffect(() => {
-      e(TS());
+      e(finishPublishThunk());
     }, [e, _]);
     let h = useMemo(() => 'publishStartMs' in r ? r.publishStartMs : null, [r]);
     let m = useRef(null);
@@ -6141,14 +6141,14 @@ function dH() {
         onPublishProgress
       } = _$$u5(t);
       let d = t => {
-        _$$dh(r, t ?? {
+        handlePublishEnded(r, t ?? {
           __tag: 'UNKNOWN'
         }, r.publishType === PublishStatusEnum.UNPUBLISH, e, r.savepoint, !0, onPublishSuccess, onPublishError);
       };
       if (p.status === 'errors') {
         d();
         onPublishError({
-          error: jO.ErrorReason,
+          error: LibraryPublishErrorType.ErrorReason,
           publishType: r.publishType,
           dispatch: e,
           errorReason: getI18nString('design_systems.publish_actions.reload')
@@ -6160,7 +6160,7 @@ function dH() {
         console.error('Error fetching library publish data from LG', p.errors);
         d();
         onPublishError({
-          error: jO.ErrorReason,
+          error: LibraryPublishErrorType.ErrorReason,
           publishType: r.publishType,
           dispatch: e,
           errorReason: getI18nString('design_systems.publish_actions.reload')
@@ -6172,7 +6172,7 @@ function dH() {
         let t = getI18nString('design_systems.publish_actions.reload');
         d(u.assetFailureCount);
         onPublishError({
-          error: jO.ErrorReason,
+          error: LibraryPublishErrorType.ErrorReason,
           publishType: r.publishType,
           dispatch: e,
           errorReason: t
@@ -6206,7 +6206,7 @@ function dH() {
           }
         })();
         onPublishError({
-          error: jO.ErrorReason,
+          error: LibraryPublishErrorType.ErrorReason,
           publishType: r.publishType,
           dispatch: e,
           errorReason: t
@@ -6214,7 +6214,7 @@ function dH() {
         return;
       }
       let h = r.numSkippedPriorToPublish + u.assetFailureCount;
-      _$$dh(r, h, r.publishType === PublishStatusEnum.UNPUBLISH, e, r.savepoint, !1, onPublishSuccess, onPublishError);
+      handlePublishEnded(r, h, r.publishType === PublishStatusEnum.UNPUBLISH, e, r.savepoint, !1, onPublishSuccess, onPublishError);
     }, [e, c, r, p, n, a, t]);
   }();
   return null;
@@ -8410,7 +8410,7 @@ class _p extends _a {
           this.props.dispatch(showModalHandler({
             type: _$$dD,
             data: {
-              entrypoint: RR.COMPONENT_PUBLISH_ERROR_NOTIFICATION
+              entrypoint: PublishingUIContext.COMPONENT_PUBLISH_ERROR_NOTIFICATION
             }
           }));
           return;

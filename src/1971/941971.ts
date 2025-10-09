@@ -32,7 +32,7 @@ import { pK } from "../9410/215872";
 import { C2 } from "../9410/671180";
 import { Ol } from "../figma_app/193952";
 import { setupResourceAtomHandler, liveStoreInstance } from "../905/713695";
-import { Xh } from "../figma_app/803787";
+import { createHasAnyStagedAssetsAtomFamily } from "../figma_app/803787";
 import { KindEnum } from "../905/129884";
 import { Gh, Xs } from "../figma_app/707567";
 import { m as _$$m } from "../figma_app/175364";
@@ -403,7 +403,7 @@ function ec({
   let [K, k] = useState(!1);
   let [E, N] = useState(null);
   let [A, R] = useState(null);
-  let _ = useAtomWithSubscription(Xh(void 0));
+  let _ = useAtomWithSubscription(createHasAnyStagedAssetsAtomFamily(void 0));
   let [J, $] = useState(!1);
   let B = GH();
   useEffect(() => {

@@ -47,7 +47,7 @@ import { selectCurrentFile, selectOpenFileObject } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FileManagePermission, FileNameViewDropdown } from "../figma_app/43951";
 import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
-import { p9, fA, F9 } from "../figma_app/803787";
+import { canEditAndHasChangesAtom, canUserPublishToCommunity, hasLocalOrPublishedContent } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
 import { UpsellModalType } from "../905/165519";
 import { FEditorType } from "../figma_app/53721";
@@ -97,7 +97,7 @@ import { Q as _$$Q } from "../figma_app/113686";
 import { e as _$$e3 } from "../905/225961";
 import { e as _$$e4 } from "../905/157975";
 import { dD } from "../905/519113";
-import { RR as _$$RR } from "../905/514666";
+import { PublishingUIContext } from "../905/514666";
 import { $3 } from "../905/946937";
 import { HiddenLabel } from "../905/270045";
 import { pH, GI } from "../figma_app/147337";
@@ -233,7 +233,7 @@ function e2() {
     e(showModalHandler({
       type: dD,
       data: {
-        entrypoint: _$$RR.FILENAME_VIEW_DROPDOWN
+        entrypoint: PublishingUIContext.FILENAME_VIEW_DROPDOWN
       }
     }));
   };
@@ -549,8 +549,8 @@ let ti = memo(function ({
       }, [e, t, i]);
     }(),
     publish: function () {
-      let e = useAtomWithSubscription(p9);
-      let t = useSelector(fA);
+      let e = useAtomWithSubscription(canEditAndHasChangesAtom);
+      let t = useSelector(canUserPublishToCommunity);
       let i = selectCurrentFile();
       let r = e2();
       let s = function () {
@@ -612,7 +612,7 @@ let ti = memo(function ({
   let eK = o.user;
   let eV = Dl(c);
   let eW = useComponentBrowserEntrypoint("filename_menu");
-  let eq = useSelector(F9);
+  let eq = useSelector(hasLocalOrPublishedContent);
   let eQ = jT(c, eq).unwrapOr(!1);
   let e$ = useSubscription(FileNameViewDropdown, {
     branchFileKey: c?.key || ""

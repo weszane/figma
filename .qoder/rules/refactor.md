@@ -1,6 +1,6 @@
 ---
-trigger: always_on
-alwaysApply: true
+trigger: manual
+alwaysApply: false
 ---
 
 - Analyze the file and directory structure to identify logical groupings of related functionality. If possible, suggest ways to organize code modules or files more intuitively.

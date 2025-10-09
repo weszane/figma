@@ -314,7 +314,7 @@ import { X as _$$X4 } from '../905/924044';
 import { A as _$$A16 } from '../905/925160';
 import { IntersectionSentinel } from '../905/925868';
 import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
-import { z as _$$z8 } from '../905/931953';
+import { siteAPIService } from '../905/931953';
 import { Legend } from '../905/932270';
 import { I as _$$I4 } from '../905/932503';
 import { noop } from 'lodash-es';
@@ -689,7 +689,7 @@ import { W as _$$W2 } from '../figma_app/592474';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { getCurrentTeam } from '../figma_app/598018';
 import { v4 as _$$v9, Qr } from '../figma_app/598952';
-import { f7 as _$$f8, j4 as _$$j3, jr as _$$jr, Tn as _$$Tn, MO, Rv, Z7 } from '../figma_app/599979';
+import { isSameWorkspace, getDebugWorkspaceInfo, isUserWorkspace, extractWorkspaceId, isOrgWorkspace, getValidAuthorsForHubFile, isTeamWorkspace } from '../figma_app/599979';
 import { mU as _$$mU, x7 as _$$x6 } from '../figma_app/600968';
 import { e as _$$e6 } from '../figma_app/601186';
 import { a as _$$a12, z as _$$z10 } from '../figma_app/601188';
@@ -3874,18 +3874,18 @@ function a8({
   } = liveStoreInstance.useFile(e);
   let i = selectUser();
   let n = function (e) {
-    let t = useSelector(t => Rv(e?.team_id ?? null, t, null, e?.parent_org_id ?? null), deepEqual);
+    let t = useSelector(t => getValidAuthorsForHubFile(e?.team_id ?? null, t, null, e?.parent_org_id ?? null), deepEqual);
     let i = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
     return useMemo(() => {
       if (a0()(t)) return null;
-      let e = _$$Tn(i);
-      if (e && t.some(t => _$$f8(t, e))) return _$$j3(e)?.name ?? null;
-      let n = t.find(_$$jr);
-      if (n) return _$$j3(n)?.name ?? null;
-      let l = t.find(MO);
-      if (l) return _$$j3(l)?.name ?? null;
-      let a = t.find(Z7);
-      return a ? _$$j3(a)?.name ?? null : null;
+      let e = extractWorkspaceId(i);
+      if (e && t.some(t => isSameWorkspace(t, e))) return getDebugWorkspaceInfo(e)?.name ?? null;
+      let n = t.find(isUserWorkspace);
+      if (n) return getDebugWorkspaceInfo(n)?.name ?? null;
+      let l = t.find(isOrgWorkspace);
+      if (l) return getDebugWorkspaceInfo(l)?.name ?? null;
+      let a = t.find(isTeamWorkspace);
+      return a ? getDebugWorkspaceInfo(a)?.name ?? null : null;
     }, [t, i]);
   }(data ?? void 0);
   let [r, o] = useState('');
@@ -7459,7 +7459,7 @@ function oY({
       y.cancel();
       f(!0);
       try {
-        await _$$z8.validateSubdomain({
+        await siteAPIService.validateSubdomain({
           fileKey: d,
           new_base_domain: `${c}${o}`
         });
@@ -7478,7 +7478,7 @@ function oY({
             i(!0);
             t();
             n(hideModalHandler());
-            let e = _$$z8.updateSubdomain({
+            let e = siteAPIService.updateSubdomain({
               fileKey: d,
               new_base_domain: `${c}${o}`
             }).then(() => {
@@ -7887,7 +7887,7 @@ function dn({
   let k = useCallback(async e => {
     x(!0);
     try {
-      let i = await _$$z8.addCustomDomain({
+      let i = await siteAPIService.addCustomDomain({
         fileKey: t,
         domain: e,
         createPairedDomain: g && f && b !== null
@@ -8115,7 +8115,7 @@ let dr = liveStoreInstance.Mutation((e, {
       e.limit_reached && t < e.num_domains_allowed && (e.limit_reached = !1);
     }
   });
-  return _$$z8.removeCustomDomain({
+  return siteAPIService.removeCustomDomain({
     fileKey: e.fileKey
   });
 });
@@ -8200,7 +8200,7 @@ function dx({
   let n = Xr(AP);
   let r = useCallback(async () => {
     try {
-      let t = await _$$z8.configureRedirect({
+      let t = await siteAPIService.configureRedirect({
         fileKey: e
       });
       n(t.data.meta);
@@ -8226,7 +8226,7 @@ function dm({
   let [r, d] = useAtomValueAndSetter(AP);
   let c = async () => {
     try {
-      let i = _$$z8.removeCustomDomainRedirect({
+      let i = siteAPIService.removeCustomDomainRedirect({
         fileKey: e
       });
       let n = a?.customDomain?.pairedDomain?.id;
@@ -8494,7 +8494,7 @@ function dS({
     if (!r && !x) {
       o(!0);
       try {
-        await _$$z8.activateCustomDomain({
+        await siteAPIService.activateCustomDomain({
           fileKey: t
         });
       } catch (e) {
@@ -8843,7 +8843,7 @@ function dz({
                 pwdConfig: null
               }
             }
-          }, _$$z8.unsetPassword({
+          }, siteAPIService.unsetPassword({
             fileKey: t
           }));
           d(VisualBellActions.enqueue({
@@ -8902,7 +8902,7 @@ function dz({
               canRead: !0
             }
           }
-        }, _$$z8.setPassword({
+        }, siteAPIService.setPassword({
           fileKey: t,
           password: y
         }));
@@ -9495,7 +9495,7 @@ let ct = registerModal(({
       productType: 'sites'
     });
     try {
-      await _$$z8.unpublishSite({
+      await siteAPIService.unpublishSite({
         fileKey: n
       });
       e();

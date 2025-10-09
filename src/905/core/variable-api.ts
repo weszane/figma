@@ -20,7 +20,7 @@ import { throwTypeError } from '../../figma_app/465776';
 import { kz } from '../../figma_app/633080';
 import { oH } from '../../figma_app/646357';
 import { CUU, CWU, mSn, NfO, rXF } from '../../figma_app/763686';
-import { tK as _$$tK2 } from '../../figma_app/803787';
+import { selectProcessedLocalVariables } from '../../figma_app/803787';
 import { loadSharedVariable } from '../../figma_app/933328';
 import { processPublishStatus, rM, variableDefinitions } from './helper';
 import { it, NodeAPI } from './node-api';
@@ -757,7 +757,7 @@ async function fetchPublishStatusForCollection(variableCollectionId) {
   }
 
   // Get variable collection status from published state
-  const publishedCollections = _$$tK2(currentState);
+  const publishedCollections = selectProcessedLocalVariables(currentState);
   const collectionInfo = publishedCollections[variableCollectionId];
   return processPublishStatus(collectionInfo?.status);
 }

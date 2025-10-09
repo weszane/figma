@@ -107,7 +107,7 @@ import { n6 } from "../9410/67768";
 import { y as _$$y2 } from "../figma_app/873852";
 import { Kj, $R as _$$$R, Hu, Iq } from "../2b17fec9/696626";
 import { stopChattingThunk } from "../figma_app/308685";
-import { H1 } from "../figma_app/124493";
+import { setVotingSessionInfo } from "../figma_app/124493";
 import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { hr } from "../9410/960980";
 import { L as _$$L2 } from "../905/453756";
@@ -3999,7 +3999,7 @@ function iL({
       numVotesRemaining: i,
       hasRemainingVotes: i > 0,
       leaveVotingSessionAndCloseWheel: useCallback(() => {
-        t && e(H1({
+        t && e(setVotingSessionInfo({
           votingStage: SessionStatus.NOT_JOINED
         }));
         e(stopChattingThunk());

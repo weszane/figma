@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { dx, Nn, MZ } from "../figma_app/399472";
-import { A, jT } from "../figma_app/711113";
+import { getPluginPublisherStatus, isPublisherPending } from "../figma_app/711113";
 import { getPluginMetadata } from "../figma_app/300692";
 import { isWidget, isPlugin } from "../figma_app/45218";
 import { vR } from "../5430/309696";
@@ -13,8 +13,8 @@ export function $$m0({
 }) {
   let r = useDispatch();
   let m = useSelector(t => getPluginMetadata(e, t.publishedPlugins));
-  let _ = useSelector(e => A(e, m));
-  return void 0 !== _ && jT(_) ? jsx("div", {
+  let _ = useSelector(e => getPluginPublisherStatus(e, m));
+  return void 0 !== _ && isPublisherPending(_) ? jsx("div", {
     className: t,
     children: jsx(vR, {
       onClickAccept: () => {

@@ -25,7 +25,7 @@ import { useSceneGraphSelector } from "../figma_app/722362";
 import { getStyleSubscriptionInfo } from "../figma_app/646357";
 import { getStyleThumbnail } from "../905/405710";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { e_ as _$$e_ } from "../figma_app/803787";
+import { selectLibrary } from "../figma_app/803787";
 import { $u } from "../figma_app/889655";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { J as _$$J } from "../905/225412";
@@ -514,7 +514,7 @@ export function $$eu10() {
   let t = _$$rb();
   let r = useMemo(() => !e || isInvalidValue(e) ? [] : e, [e]);
   let n = pF(e => _$$b(e.mirror.selectionProperties, "inheritFillStyleKey"));
-  let s = useSelector(_$$e_);
+  let s = useSelector(selectLibrary);
   let o = useSelector(e => e.mirror.selectionProperties.inheritFillStyleKey);
   let l = useSelector(e => e.mirror.selectionProperties.styleIdForFill);
   let d = useDeepEqualSceneValue((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, l?.assetRef);
@@ -541,7 +541,7 @@ let e_ = () => {
   let l = Ig();
   let d = useMemo(() => o.filter(e => $$ec9(e.paint)).map(e => dc(e.paint, l)), [o, l]);
   let c = useSelector(e => $u(e) > 1 ? e.mirror.selectionPaints.styles : e.mirror.selectionPaints.stylesDirectlyOnSingleNode);
-  let u = useSelector(_$$e_);
+  let u = useSelector(selectLibrary);
   let p = useMemo(() => {
     let t = c.map(e => ({
       ds: getStyleSubscriptionInfo(e.styleKey, e.styleGUIDs, u),

@@ -72,7 +72,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { A as _$$A0 } from "../905/251970";
 import { WAFImage } from "../905/675859";
 import { getValueOrFallback } from "../905/872825";
-import { CW, M0, Rd, Gf, f7, Dd, MO, Z7, Q4, Kg, jr, l8, UU, of } from "../figma_app/599979";
+import { SUPPORTED_IMAGE_TYPES, uploadBlobWithPresignedUrl, uploadCarouselImages, uploadVideoWithThumbnail, isSameWorkspace, isCreator, isOrgWorkspace, isTeamWorkspace, isPublicRole, prepareMediaUploadData, isUserWorkspace, loadImage, getValidAuthorsForPlugin, getPublisherWorkspace } from "../figma_app/599979";
 import { IMAGE_TYPES } from "../905/966582";
 import { L as _$$L } from "../905/597048";
 import { RadioPrimitiveRoot } from "../905/22449";
@@ -131,7 +131,7 @@ import { m as _$$m } from "../905/924751";
 import { Y as _$$Y2 } from "../905/192715";
 import { PluginUploadApi } from "../905/771986";
 import { trackEventAnalytics } from "../905/449184";
-import { i as _$$i } from "../905/970229";
+import { detectMimeType } from "../905/970229";
 import { createProfileThunk } from "../figma_app/530167";
 import { is as _$$is } from "../905/744076";
 import { n as _$$n } from "../905/341791";
@@ -793,7 +793,7 @@ let eX = forwardRef(function ({
     className: "icon_uploader--container---wkQt",
     onDragOver: e => {
       let t = getValueOrFallback(e.dataTransfer.items[0]?.type, IMAGE_TYPES);
-      1 === e.dataTransfer.items.length && t && CW.includes(t) ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
+      1 === e.dataTransfer.items.length && t && SUPPORTED_IMAGE_TYPES.includes(t) ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
       e.preventDefault();
     },
     onDragLeave: e => {
@@ -817,7 +817,7 @@ let eX = forwardRef(function ({
       className: cssBuilderInstance.hidden.$,
       type: "file",
       ref: m,
-      accept: CW.join(", "),
+      accept: SUPPORTED_IMAGE_TYPES.join(", "),
       onChange: async e => {
         !h && setIconFromInput && (i?.(), g(!0), await setIconFromInput(e.target), g(!1));
       },
@@ -1514,18 +1514,18 @@ async function ii(e) {
   code && "codeUploadUrl" in imagePaths && (t = uT(imagePaths.codeUploadUrl, code), validatePluginCodeSize(code));
   let d = assertFieldReady(icon).currentValue?.buffer;
   if (null != d) {
-    i = M0(imagePaths.iconUploadUrl, d);
-    let e = _$$i(d) ?? "image/png";
+    i = uploadBlobWithPresignedUrl(imagePaths.iconUploadUrl, d);
+    let e = detectMimeType(d) ?? "image/png";
     validateExtensionIconImage(new File([d], "icon.png", {
       type: e
     }));
   }
   let c = assertFieldReady(snapshot).currentValue?.buffer;
-  null != c && imagePaths.snapshotUploadUrl && (n = M0(imagePaths.snapshotUploadUrl, c));
+  null != c && imagePaths.snapshotUploadUrl && (n = uploadBlobWithPresignedUrl(imagePaths.snapshotUploadUrl, c));
   let {
     allMedia
   } = assertFieldReady(carouselMedia).currentValue;
-  let p = Rd(imagePaths.carouselImages, allMedia);
+  let p = uploadCarouselImages(imagePaths.carouselImages, allMedia);
   return await Promise.all([t, i, n, ...p]);
 }
 async function ir({
@@ -1535,7 +1535,7 @@ async function ir({
   allMedia: n
 }) {
   let r = e.map(async e => {
-    let r = await Gf(i ? "widgets" : "plugins", t, {
+    let r = await uploadVideoWithThumbnail(i ? "widgets" : "plugins", t, {
       sha1: e.sha1,
       bytes: e.bytes
     }, e.video_thumbnail_buffer, e.video_thumbnail_sha1);
@@ -1587,7 +1587,7 @@ async function is(e) {
     if (t && isAcceptedPublisher(t, n.id)) return;
     let r = assertFieldReady(e).currentValue;
     if (r) {
-      if (i && f7(i, r) && !Fh(t)) return;
+      if (i && isSameWorkspace(i, r) && !Fh(t)) return;
       return r;
     }
   }(author, existingExtension, existingAuthor, user);
@@ -1628,7 +1628,7 @@ async function io(e) {
   } = e;
   let l = assertFieldReady(publishRole).currentValue;
   let d = hasRoleOrOrgChanged(publishedExtension, l);
-  let c = Dd(publishedExtension, user.id) || isExistingExtensionUnpublished;
+  let c = isCreator(publishedExtension, user.id) || isExistingExtensionUnpublished;
   if (!d || !c) return;
   let u = {
     org_id: l?.org?.id,
@@ -1678,7 +1678,7 @@ async function il(e) {
   let x = assertFieldReady(snapshot).currentValue?.buffer;
   let S = assertFieldReady(author).currentValue;
   let w = assertFieldReady(publishRole).currentValue;
-  S && (MO(S) ? t = S.org_id : Z7(S) ? t = debugState.getState().teams[S.team_id]?.org_id || void 0 : "org" in w && (t = w.org?.id));
+  S && (isOrgWorkspace(S) ? t = S.org_id : isTeamWorkspace(S) ? t = debugState.getState().teams[S.team_id]?.org_id || void 0 : "org" in w && (t = w.org?.id));
   let C = assertFieldReady(category).currentValue?.id;
   assertNotNullish(C);
   let T = assertFieldReady(releaseNotes).currentValue;
@@ -1937,7 +1937,7 @@ let id = {
       let r = t?.manifest?.permissions?.includes("payments");
       return J9(e) || r ? {
         is_public: !0
-      } : e && Q4(e.roles) ? isResourcePendingPublishing(e) ? {
+      } : e && isPublicRole(e.roles) ? isResourcePendingPublishing(e) ? {
         is_public: !0
       } : e.roles : e && isResourcePendingPublishing(e) ? {
         is_public: !0
@@ -1951,7 +1951,7 @@ let id = {
       };
     },
     validate: ({}, e) => {
-      if (!Q4(e)) return [{
+      if (!isPublicRole(e)) return [{
         key: "INVALID_PUBLISH_ROLE",
         data: {
           publishRole: e
@@ -2314,7 +2314,7 @@ let ic = setupFormValidationHandler({
       uploadImages,
       uploadVideos,
       allMedia
-    } = Kg(f);
+    } = prepareMediaUploadData(f);
     if (g) {
       if (!e?.localFileId) return new withSubmissionError.SubmissionError({
         key: "ERROR_INVALID_EXTENSION_ID",
@@ -2531,9 +2531,9 @@ let ic = setupFormValidationHandler({
         let i = assertFieldReady(e.author).currentValue;
         let n = {
           profileHandle: t,
-          userId: i && jr(i) ? i.user_id : void 0,
-          teamId: i && Z7(i) ? i.team_id : void 0,
-          orgId: i && MO(i) ? i.org_id : void 0
+          userId: i && isUserWorkspace(i) ? i.user_id : void 0,
+          teamId: i && isTeamWorkspace(i) ? i.team_id : void 0,
+          orgId: i && isOrgWorkspace(i) ? i.org_id : void 0
         };
         debugState.dispatch(createProfileThunk(n));
       }
@@ -2600,7 +2600,7 @@ function iM({
       if (a) try {
         let n = t === FileInputType.PASTE;
         let r = await validateAndResizeIconImage(e, n, !0);
-        let [s, o] = await Promise.all([l8(URL.createObjectURL(r)), readImageBytes(r)]);
+        let [s, o] = await Promise.all([loadImage(URL.createObjectURL(r)), readImageBytes(r)]);
         let l = new Uint8Array(o);
         i.current($$in, {
           step: PublishModalState.UPLOAD_ICON,
@@ -2667,7 +2667,7 @@ function iM({
     }, [e]);
     let l = useMemo(() => async function (e) {
       if (a) try {
-        let [t, i] = await Promise.all([l8(URL.createObjectURL(e)), readImageBytes(e)]);
+        let [t, i] = await Promise.all([loadImage(URL.createObjectURL(e)), readImageBytes(e)]);
         let n = new Uint8Array(i);
         a({
           url: t.src,
@@ -3365,7 +3365,7 @@ function ij(e) {
       if (!e || !t && !i) return;
       let r = null;
       if (t && n && (r = _e(t, n?.x, n?.y)), !r && i && (r = await gI(i)), !r) return;
-      let [a, s] = await Promise.all([l8(URL.createObjectURL(r)), readImageBytes(r)]);
+      let [a, s] = await Promise.all([loadImage(URL.createObjectURL(r)), readImageBytes(r)]);
       return {
         url: a.src,
         buffer: new Uint8Array(s)
@@ -3394,11 +3394,11 @@ function ij(e) {
   let g = useCurrentUserOrg();
   let f = useCurrentPlanUser("ExtensionPublishingModal");
   let A = useIsOrgMemberOrAdminUser(f).unwrapOr(!1);
-  let y = useSelector(e => UU(e, existingExtension), deepEqual);
+  let y = useSelector(e => getValidAuthorsForPlugin(e, existingExtension), deepEqual);
   let b = useSelector(e => e.authedProfilesById);
   let v = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let I = useMemo(() => Promise.resolve([]), []);
-  let E = useSelector(e => existingExtension ? of(e, existingExtension) : void 0, deepEqual);
+  let E = useSelector(e => existingExtension ? getPublisherWorkspace(e, existingExtension) : void 0, deepEqual);
   let x = iu({
     ...e,
     localExtension,

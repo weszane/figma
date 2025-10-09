@@ -35,7 +35,7 @@ export function generateUniqueType(baseType: string): string {
  */
 export function createActionCreator(baseType: string) {
   const type = generateUniqueType(baseType)
-  const actionCreator = (payload: Record<string, any> = {}) => ({
+  const actionCreator = (payload: any = {}) => ({
     type,
     payload,
   })

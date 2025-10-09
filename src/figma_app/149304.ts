@@ -11,7 +11,7 @@ import { GLContextType } from "../figma_app/763686"
 import { BrowserInfo, getIsChromeOS, getIsLinux, getIsMac, getIsWindows, isMobilePlatform } from "../figma_app/778880"
 import { isInteractionOrEvalMode } from "../figma_app/897289"
 
-enum WebGLTestResult {
+export enum WebGLTestResult {
   SUCCESS = 0,
   NO_WEBGL = 1,
   STENCIL_TEST_FAILURE = 2,

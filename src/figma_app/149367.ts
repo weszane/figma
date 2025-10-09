@@ -1,27 +1,12 @@
-import { PS } from "../figma_app/433422";
-import { iA } from "../figma_app/433422";
-import { TF } from "../figma_app/433422";
-import { IM as _$$IM } from "../figma_app/433422";
-import { B } from "../905/261906";
-import { E } from "../905/162070";
-import { iO as _$$iO } from "../figma_app/433422";
-import { sH as _$$sH } from "../figma_app/433422";
-import { Ji as _$$Ji } from "../figma_app/433422";
-import { b_ as _$$b_ } from "../figma_app/433422";
-let $$n4 = _$$b_;
-let $$i3 = _$$Ji;
-let $$a6 = _$$sH;
-let $$s5 = _$$iO;
-let $$o1 = E;
-let $$l0 = B;
-TF;
-iA;
-PS;
-export let $$d2 = _$$IM;
-export const BC = $$l0;
-export const E1 = $$o1;
-export const IM = $$d2;
-export const Ji = $$i3;
-export const b_ = $$n4;
-export const iO = $$s5;
-export const sH = $$a6;
+import { E } from "../905/162070"
+import { B } from "../905/261906"
+import { b_ as _$$b_, IM as _$$IM, iO as _$$iO, Ji as _$$Ji, sH as _$$sH, iA, PS, TF } from "../figma_app/433422"
+
+export let $$d2 = _$$IM
+export const BC = B
+export const E1 = E
+export const IM = $$d2
+export const Ji = _$$Ji
+export const b_ = _$$b_
+export const iO = _$$iO
+export const sH = _$$sH

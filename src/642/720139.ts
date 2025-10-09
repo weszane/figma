@@ -44,7 +44,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { useSyncedRef } from "../905/633914";
 import { getAssetKey, isPrimaryWorkflowType } from "../figma_app/646357";
 import { H as _$$H } from "../905/216861";
-import { e_ as _$$e_ } from "../figma_app/803787";
+import { selectLibrary } from "../figma_app/803787";
 import { PrimaryWorkflowEnum, SubscriptionStatusEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
 import { registerModal } from "../905/102752";
@@ -676,7 +676,7 @@ export function $$tu1({
   let ec = fV(e.library_key);
   let eu = selectCurrentFile();
   let ep = useDispatch();
-  let eh = useSelector(e => _$$e_(e).local.thumbnails);
+  let eh = useSelector(e => selectLibrary(e).local.thumbnails);
   let em = _$$H();
   let eg = useCallback(({
     source: e

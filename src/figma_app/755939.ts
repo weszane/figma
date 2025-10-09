@@ -1,112 +1,200 @@
-import { atom } from "../figma_app/27355";
-import { setupRemovableAtomFamily } from "../figma_app/615482";
-var $$a23 = (e => (e.ALL = "ALL", e.ORG = "ORG", e.START_FROM_SCRATCH = "START_FROM_SCRATCH", e.NEW_TEMPLATE = "NEW_TEMPLATE", e.TEAM = "TEAM", e.TEMPLATES = "TEMPLATES", e.USE_CASE = "USE_CASE", e.IMPORT_FROM_DESIGN = "IMPORT_FROM_DESIGN", e))($$a23 || {});
-let $$s17 = setupRemovableAtomFamily(() => atom(!1));
-let $$o9 = atom({
-  type: "ALL"
-});
-let $$l12 = setupRemovableAtomFamily(() => atom(!0));
-let d = atom({});
-let $$c8 = atom(e => e(d), (e, t, r, n) => {
-  t(d, e => ({
-    ...e,
-    [r]: n
-  }));
-});
-let $$u10 = atom(null, (e, t) => {
-  t(d, {});
-});
-let $$p4 = setupRemovableAtomFamily(() => atom(null));
-let $$_19 = setupRemovableAtomFamily(() => atom(!1));
-let $$h22 = setupRemovableAtomFamily(() => atom(!1));
-let $$m0 = atom(Math.random());
-let $$g14 = setupRemovableAtomFamily(() => atom("COMMUNITY"));
-let $$f20 = setupRemovableAtomFamily(() => atom(""));
-let $$E1 = setupRemovableAtomFamily(() => atom(!0));
-let $$y24 = setupRemovableAtomFamily(() => atom(!0));
-let $$b3 = setupRemovableAtomFamily(() => atom(!0));
-export var $$T2 = (e => (e.DEFAULT = "DEFAULT", e.BROWSING_TEMPLATE = "BROWSING_TEMPLATE", e))($$T2 || {});
-let $$I21 = setupRemovableAtomFamily(() => atom({
-  type: "DEFAULT"
-}));
-let $$S5 = setupRemovableAtomFamily(() => atom(!1));
-export var $$v15 = (e => (e.PUBLISH_HUB_FILE_INITIATED = "PUBLISH_HUB_FILE_INITIATED", e.PUBLISH_HUB_FILE_COMPLETED = "PUBLISH_HUB_FILE_COMPLETED", e.PUBLISH_HUB_FILE_ERRORED = "PUBLISH_HUB_FILE_ERRORED", e.PUBLISH_TEMPLATE_INITIATED = "PUBLISH_TEMPLATE_INITIATED", e.PUBLISH_TEMPLATE_COMPLETED = "PUBLISH_TEMPLATE_COMPLETED", e.PUBLISH_TEMPLATE_ERRORED = "PUBLISH_TEMPLATE_ERRORED", e.UNPUBLISH_TEMPLATE_INITIATED = "UNPUBLISH_TEMPLATE_INITIATED", e.UNPUBLISH_HUB_FILE_INITIATED = "UNPUBLISH_HUB_FILE_INITIATED", e.UNPUBLISH_COMPLETED = "UNPUBLISH_COMPLETED", e.UNPUBLISH_TEMPLATE_ERRORED = "UNPUBLISH_ERRORED", e.CLEARED = "CLEARED", e))($$v15 || {});
-let A = ["PUBLISH_HUB_FILE_INITIATED", "PUBLISH_TEMPLATE_INITIATED", "UNPUBLISH_TEMPLATE_INITIATED", "UNPUBLISH_HUB_FILE_INITIATED"];
-let x = [...A, "CLEARED"];
-export function $$N11(e) {
-  return A.includes(e);
+import { atom } from "../figma_app/27355"
+import { setupRemovableAtomFamily } from "../figma_app/615482"
+
+// Renamed variables for clarity, added types, simplified logic, and improved readability
+// Preserved original export names as requested
+
+// Enum for template source types
+export enum TemplateSourceType {
+  ALL = "ALL",
+  ORG = "ORG",
+  START_FROM_SCRATCH = "START_FROM_SCRATCH",
+  NEW_TEMPLATE = "NEW_TEMPLATE",
+  TEAM = "TEAM",
+  TEMPLATES = "TEMPLATES",
+  USE_CASE = "USE_CASE",
+  IMPORT_FROM_DESIGN = "IMPORT_FROM_DESIGN",
 }
-let C = {
-  CLEARED: A,
-  PUBLISH_TEMPLATE_INITIATED: ["PUBLISH_TEMPLATE_COMPLETED", "PUBLISH_TEMPLATE_ERRORED"],
-  PUBLISH_TEMPLATE_COMPLETED: x,
-  PUBLISH_TEMPLATE_ERRORED: x,
-  UNPUBLISH_TEMPLATE_INITIATED: ["UNPUBLISH_COMPLETED", "UNPUBLISH_ERRORED"],
-  UNPUBLISH_HUB_FILE_INITIATED: ["UNPUBLISH_COMPLETED", "UNPUBLISH_ERRORED"],
-  UNPUBLISH_COMPLETED: x,
-  UNPUBLISH_ERRORED: x,
-  PUBLISH_HUB_FILE_INITIATED: ["PUBLISH_HUB_FILE_COMPLETED", "PUBLISH_HUB_FILE_ERRORED"],
-  PUBLISH_HUB_FILE_COMPLETED: x,
-  PUBLISH_HUB_FILE_ERRORED: x
-};
-let w = atom({
-  state: "CLEARED"
-});
-let $$O13 = atom(e => e(w).state);
-let $$R16 = atom(e => {
-  let t = e(w);
-  return "PUBLISH_TEMPLATE_INITIATED" === t.state ? t.request : null;
-});
-let $$L18 = atom(null, (e, t, r) => {
-  let n = e($$O13);
-  let {
-    state
-  } = r;
-  if (C[n].includes(state)) t(w, r);else throw Error(`Invalid state transition from ${n} to ${state}. Please check the state transition logic.`);
-});
-export function $$P6(e) {
-  switch (e) {
-    case "PUBLISH_TEMPLATE_ERRORED":
-    case "PUBLISH_TEMPLATE_INITIATED":
-      return "Cooper Team Template Publish";
-    case "UNPUBLISH_TEMPLATE_INITIATED":
-    case "UNPUBLISH_ERRORED":
-      return "Cooper Team Template Unpublish";
-    case "PUBLISH_HUB_FILE_ERRORED":
-    case "PUBLISH_HUB_FILE_INITIATED":
-      return "Cooper Hub File Publish";
-    case "UNPUBLISH_HUB_FILE_INITIATED":
-      return "Cooper Hub File Unpublish";
+
+// Enum for template browsing modes
+export enum TemplateBrowsingMode {
+  DEFAULT = "DEFAULT",
+  BROWSING_TEMPLATE = "BROWSING_TEMPLATE",
+}
+
+// Enum for publish/unpublish states
+export enum PublishState {
+  PUBLISH_HUB_FILE_INITIATED = "PUBLISH_HUB_FILE_INITIATED",
+  PUBLISH_HUB_FILE_COMPLETED = "PUBLISH_HUB_FILE_COMPLETED",
+  PUBLISH_HUB_FILE_ERRORED = "PUBLISH_HUB_FILE_ERRORED",
+  PUBLISH_TEMPLATE_INITIATED = "PUBLISH_TEMPLATE_INITIATED",
+  PUBLISH_TEMPLATE_COMPLETED = "PUBLISH_TEMPLATE_COMPLETED",
+  PUBLISH_TEMPLATE_ERRORED = "PUBLISH_TEMPLATE_ERRORED",
+  UNPUBLISH_TEMPLATE_INITIATED = "UNPUBLISH_TEMPLATE_INITIATED",
+  UNPUBLISH_HUB_FILE_INITIATED = "UNPUBLISH_HUB_FILE_INITIATED",
+  UNPUBLISH_COMPLETED = "UNPUBLISH_COMPLETED",
+  UNPUBLISH_TEMPLATE_ERRORED = "UNPUBLISH_ERRORED",
+  CLEARED = "CLEARED",
+}
+
+// Type for publish state transitions
+interface PublishStateTransition {
+  state: PublishState
+  request?: any
+}
+
+// Atoms for UI state management
+export const isTemplateSelectorOpenAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(false))
+export const templateSourceAtom = atom<{ type: TemplateSourceType }>({
+  type: TemplateSourceType.ALL,
+})
+export const isTemplateSearchEnabledAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(true))
+export const templateMetadataAtom = atom<Record<string, any>>({})
+export const updateTemplateMetadataAtom = atom(
+  get => get(templateMetadataAtom),
+  (get, set, key: string, value: any) => {
+    set(templateMetadataAtom, prev => ({
+      ...prev,
+      [key]: value,
+    }))
+  },
+)
+export const clearTemplateMetadataAtom = atom(null, (get, set) => {
+  set(templateMetadataAtom, {})
+})
+export const selectedTemplateAtomFamily = setupRemovableAtomFamily(() => atom<string | null>(null))
+export const isTemplatePreviewVisibleAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(false))
+export const isTemplatePublishingAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(false))
+export const templateRandomIdAtom = atom<number>(Math.random())
+export const templateCommunityFilterAtomFamily = setupRemovableAtomFamily(() => atom<string>("COMMUNITY"))
+export const templateSearchQueryAtomFamily = setupRemovableAtomFamily(() => atom<string>(""))
+export const isTemplateFavoriteAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(true))
+export const isTemplateUsedAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(true))
+export const isTemplateEditableAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(true))
+export const templateBrowsingModeAtomFamily = setupRemovableAtomFamily(() => atom<{ type: TemplateBrowsingMode }>({
+  type: TemplateBrowsingMode.DEFAULT,
+}))
+export const isTemplateDetailsVisibleAtomFamily = setupRemovableAtomFamily(() => atom<boolean>(false))
+
+// Publish state management
+export const initialPublishStates: PublishState[] = [
+  PublishState.PUBLISH_HUB_FILE_INITIATED,
+  PublishState.PUBLISH_TEMPLATE_INITIATED,
+  PublishState.UNPUBLISH_TEMPLATE_INITIATED,
+  PublishState.UNPUBLISH_HUB_FILE_INITIATED,
+]
+
+export const allPublishStates: PublishState[] = [...initialPublishStates, PublishState.CLEARED]
+
+// Check if a state is an initial state
+export function hasHubOrPublishState(state: PublishState): boolean {
+  return initialPublishStates.includes(state)
+}
+
+// Define valid state transitions
+const validStateTransitions: Record<PublishState, PublishState[]> = {
+  [PublishState.CLEARED]: initialPublishStates,
+  [PublishState.PUBLISH_TEMPLATE_INITIATED]: [
+    PublishState.PUBLISH_TEMPLATE_COMPLETED,
+    PublishState.PUBLISH_TEMPLATE_ERRORED,
+  ],
+  [PublishState.PUBLISH_TEMPLATE_COMPLETED]: allPublishStates,
+  [PublishState.PUBLISH_TEMPLATE_ERRORED]: allPublishStates,
+  [PublishState.UNPUBLISH_TEMPLATE_INITIATED]: [
+    PublishState.UNPUBLISH_COMPLETED,
+    PublishState.UNPUBLISH_TEMPLATE_ERRORED,
+  ],
+  [PublishState.UNPUBLISH_HUB_FILE_INITIATED]: [
+    PublishState.UNPUBLISH_COMPLETED,
+    PublishState.UNPUBLISH_TEMPLATE_ERRORED,
+  ],
+  [PublishState.UNPUBLISH_COMPLETED]: allPublishStates,
+  [PublishState.UNPUBLISH_TEMPLATE_ERRORED]: allPublishStates,
+  [PublishState.PUBLISH_HUB_FILE_INITIATED]: [
+    PublishState.PUBLISH_HUB_FILE_COMPLETED,
+    PublishState.PUBLISH_HUB_FILE_ERRORED,
+  ],
+  [PublishState.PUBLISH_HUB_FILE_COMPLETED]: allPublishStates,
+  [PublishState.PUBLISH_HUB_FILE_ERRORED]: allPublishStates,
+}
+
+// Atom for current publish state
+export const publishStateAtom = atom<{ state: PublishState, request?: any }>({
+  state: PublishState.CLEARED,
+})
+
+// Atom to get current publish state value
+export const currentPublishStateAtom = atom(get => get(publishStateAtom).state)
+
+// Atom to get publish request when in template publish initiated state
+export const publishRequestAtom = atom((get) => {
+  const state = get(publishStateAtom)
+  return state.state === PublishState.PUBLISH_TEMPLATE_INITIATED ? state.request : null
+})
+
+// Atom to update publish state with validation
+export const updatePublishStateAtom = atom(
+  null,
+  (get, set, newState: PublishStateTransition) => {
+    const currentState = get(currentPublishStateAtom)
+    const { state } = newState
+
+    if (validStateTransitions[currentState].includes(state)) {
+      set(publishStateAtom, newState)
+    }
+    else {
+      throw new Error(
+        `Invalid state transition from ${currentState} to ${state}. Please check the state transition logic.`,
+      )
+    }
+  },
+)
+
+// Get human-readable label for publish state
+export function getCooperString(state: PublishState): string {
+  switch (state) {
+    case PublishState.PUBLISH_TEMPLATE_ERRORED:
+    case PublishState.PUBLISH_TEMPLATE_INITIATED:
+      return "Cooper Team Template Publish"
+    case PublishState.UNPUBLISH_TEMPLATE_INITIATED:
+    case PublishState.UNPUBLISH_TEMPLATE_ERRORED:
+      return "Cooper Team Template Unpublish"
+    case PublishState.PUBLISH_HUB_FILE_ERRORED:
+    case PublishState.PUBLISH_HUB_FILE_INITIATED:
+      return "Cooper Hub File Publish"
+    case PublishState.UNPUBLISH_HUB_FILE_INITIATED:
+      return "Cooper Hub File Unpublish"
     default:
-      return e;
+      return state
   }
 }
-atom(null, (e, t) => t(w, {
-  state: "CLEARED"
-}));
-export let $$D7 = setupRemovableAtomFamily(() => atom(!1));
-export const Co = $$m0;
-export const EC = $$E1;
-export const Ef = $$T2;
-export const Fs = $$b3;
-export const Hb = $$p4;
-export const Hk = $$S5;
-export const Jw = $$P6;
-export const Ku = $$D7;
-export const L1 = $$c8;
-export const Lm = $$o9;
-export const Lo = $$u10;
-export const Md = $$N11;
-export const Tw = $$l12;
-export const UV = $$O13;
-export const U_ = $$g14;
-export const VW = $$v15;
-export const WU = $$R16;
-export const YA = $$s17;
-export const _9 = $$L18;
-export const az = $$_19;
-export const ce = $$f20;
-export const d2 = $$I21;
-export const hc = $$h22;
-export const mF = $$a23;
-export const xB = $$y24;
+
+
+
+// Exported atom families and constants with original names preserved
+export let isTemplateSubMenuOpen = setupRemovableAtomFamily(() => atom<boolean>(false))
+export const Co = templateRandomIdAtom
+export const EC = isTemplateFavoriteAtomFamily
+export const Ef = TemplateBrowsingMode
+export const Fs = isTemplateEditableAtomFamily
+export const Hb = selectedTemplateAtomFamily
+export const Hk = isTemplateDetailsVisibleAtomFamily
+export const Jw = getCooperString
+export const Ku = isTemplateSubMenuOpen
+export const L1 = updateTemplateMetadataAtom
+export const Lm = templateSourceAtom
+export const Lo = clearTemplateMetadataAtom
+export const Md = hasHubOrPublishState
+export const Tw = isTemplateSearchEnabledAtomFamily
+export const UV = currentPublishStateAtom
+export const U_ = templateCommunityFilterAtomFamily
+export const VW = PublishState
+export const WU = publishRequestAtom
+export const YA = isTemplateSelectorOpenAtomFamily
+export const _9 = updatePublishStateAtom
+export const az = isTemplatePreviewVisibleAtomFamily
+export const ce = templateSearchQueryAtomFamily
+export const d2 = templateBrowsingModeAtomFamily
+export const hc = isTemplatePublishingAtomFamily
+export const mF = TemplateSourceType
+export const xB = isTemplateUsedAtomFamily

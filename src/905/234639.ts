@@ -9,7 +9,7 @@ import { updateProfileThunk } from "../figma_app/530167";
 import { Ri } from "../figma_app/49598";
 import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523";
 import { trimOrEmpty } from "../figma_app/740025";
-import { R1, Z2 } from "../figma_app/599979";
+import { uploadHubFileImages, findMediaIndexBySha1 } from "../figma_app/599979";
 import { liveStoreInstance } from "../905/713695";
 import { ProductStatus } from "../905/54385";
 import { hubFileAPI } from "../905/473998";
@@ -31,8 +31,8 @@ export async function $$y2({
       signature
     },
     carousel_images
-  } = await R1(o, thumbnailMedium ? [thumbnailMedium, ...a()(allMedia, thumbnailMedium)] : [...allMedia], t, i ? void 0 : n.id);
-  let p = Z2(carousel_images, thumbnailMedium);
+  } = await uploadHubFileImages(o, thumbnailMedium ? [thumbnailMedium, ...a()(allMedia, thumbnailMedium)] : [...allMedia], t, i ? void 0 : n.id);
+  let p = findMediaIndexBySha1(carousel_images, thumbnailMedium);
   return {
     coverImageUploaded: cover_image_uploaded,
     coverImageSignature: signature,

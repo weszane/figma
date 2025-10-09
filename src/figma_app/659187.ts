@@ -6,14 +6,14 @@ import { globalPerfTimer } from "../905/542194";
 import { isColorTransparent, isColorDark } from "../figma_app/191804";
 import { getVisibleTheme } from "../905/640017";
 import { findAssetForNode } from "../figma_app/646357";
-import { FZ } from "../figma_app/803787";
+import { selectAllLibraryItems } from "../figma_app/803787";
 import { selectMergedAssets } from "../figma_app/645694";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { jY } from "../figma_app/151869";
 export function $$m1(e, t) {
   let r = function (e) {
     let t = jY();
-    let r = useSelector(FZ);
+    let r = useSelector(selectAllLibraryItems);
     let n = useSelector(selectMergedAssets);
     return findAssetForNode(e, t, r, n);
   }(e);

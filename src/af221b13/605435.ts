@@ -14,7 +14,7 @@ import { A as _$$A } from "../5724/965092";
 import { getResourceType } from "../figma_app/427318";
 import { selectCurrentUser } from "../905/372672";
 import { isResourceDelisted, isResourceBlocked, isResourcePendingPublishing } from "../figma_app/777551";
-import { MK, cN, Wd, RB } from "../figma_app/599979";
+import { getPublisherStatus, isAdminStatus, isCreatorAcceptedPublisher, useIsPublisher } from "../figma_app/599979";
 import { hasClientMeta, isWidget, isPlugin, HubTypeEnum, hasMonetizedResourceMetadata, isWidgetOrPlugin, hasFigFileMetadata } from "../figma_app/45218";
 import { useRef, useEffect } from "react";
 import { U as _$$U2 } from "../905/103637";
@@ -302,9 +302,9 @@ export function $$K0(e) {
   let {
     resource
   } = e;
-  let i = useSelector(e => MK(e, resource));
-  let o = useSelector(e => hasClientMeta(resource) ? cN(i) : Wd(e, resource));
-  let l = RB(resource);
+  let i = useSelector(e => getPublisherStatus(e, resource));
+  let o = useSelector(e => hasClientMeta(resource) ? isAdminStatus(i) : isCreatorAcceptedPublisher(e, resource));
+  let l = useIsPublisher(resource);
   let c = hasFigFileMetadata(resource) ? resource.fig_file_metadata?.key : void 0;
   return getFeatureFlags().community_hub_admin && isResourceBlocked(resource) ? jsx(E, {
     resource

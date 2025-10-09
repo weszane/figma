@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { rH } from "../figma_app/49598";
 import { showModalHandler } from "../905/156213";
 import { DM } from "../905/889062";
-import { Rv } from "../figma_app/599979";
+import { getValidAuthorsForHubFile } from "../figma_app/599979";
 import { Jj, bY } from "../figma_app/2023";
 import { $T } from "../figma_app/12535";
 import { fullscreenValue } from "../figma_app/455680";
@@ -16,7 +16,7 @@ import { FFileType } from "../figma_app/191312";
 import { PublishedHubFileForFile } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
 import { getObservableValue } from "../figma_app/84367";
-import { p6 } from "../figma_app/803787";
+import { selectCooperComponents } from "../figma_app/803787";
 import { mapCommunityPublishers } from "../905/71785";
 import { $S } from "../905/918620";
 import { m as _$$m } from "../figma_app/913212";
@@ -27,7 +27,7 @@ export function $$C2(e) {
   let i = useSelector(e => e.mirror.appModel.pagesList || []);
   let a = i.length > 0 ? i[0].nodeId : "";
   let o = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
-  let l = useSelector(p6);
+  let l = useSelector(selectCooperComponents);
   switch (e?.editorType) {
     case "slides":
       t = rY(o)[0];
@@ -80,7 +80,7 @@ export function $$k3(e, t, i, n) {
   if ("is_template" in e && e.is_template || e.trackTags?.isTemplate || "is_new_user_playground_library" in e && e.is_new_user_playground_library || e.track_tags?.source === "default") return "IS_DEFAULT_FILE";
   if ("has_file_link_password" in e ? e.has_file_link_password : e.hasFileLinkPassword) return "FILE_REQUIRES_PASSWORD";
   let r = "parent_org_id" in e ? e.parent_org_id ?? null : "parentOrgId" in e ? e.parentOrgId : null;
-  if (0 === Rv("team_id" in e ? e.team_id : e.teamId, i, n, r).length) return "NO_ALLOWED_AUTHORS";
+  if (0 === getValidAuthorsForHubFile("team_id" in e ? e.team_id : e.teamId, i, n, r).length) return "NO_ALLOWED_AUTHORS";
   let a = !!i.figFileDuplicatedFromHubFile[e.key];
   let s = !n;
   if (a && s) return "CANNOT_PUBLISH_REMIX";

@@ -5,9 +5,9 @@ import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { jO } from "../905/573265";
+import { LibraryPublishErrorType } from "../905/573265";
 import { hideModal } from "../905/156213";
-import { l as _$$l } from "../905/618307";
+import { uploadTemplate } from "../905/618307";
 import { LibrarySourceEnum, PublishStatusEnum } from "../figma_app/633080";
 import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { enqueueNetworkErrorBell } from "../905/470594";
@@ -15,7 +15,7 @@ import { UM, F4, _g, Jw, cZ } from "../figma_app/60023";
 let _ = "Slides Template Publish Error";
 let $$A0 = "slides-template-publish";
 export function $$y3(e, t) {
-  _$$l({
+  uploadTemplate({
     ...t,
     dispatch: e,
     onSuccess: () => {
@@ -122,7 +122,7 @@ function I(e) {
       return;
   }
   switch (error) {
-    case jO.Offline:
+    case LibraryPublishErrorType.Offline:
       dispatch(VisualBellActions.enqueue({
         type: $$A0,
         icon: VisualBellIcon.EXCLAMATION,
@@ -130,10 +130,10 @@ function I(e) {
         message: getI18nString("slides.templates.publish_actions.toast.offline_error")
       }));
       break;
-    case jO.NonS3PresignedPost:
+    case LibraryPublishErrorType.NonS3PresignedPost:
       enqueueNetworkErrorBell(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
       break;
-    case jO.NoItemsToPublish:
+    case LibraryPublishErrorType.NoItemsToPublish:
       dispatch(VisualBellActions.enqueue({
         type: $$A0,
         icon: VisualBellIcon.EXCLAMATION,
@@ -141,7 +141,7 @@ function I(e) {
         message: getI18nString("slides.templates.publish_actions.toast.no_items_error")
       }));
       break;
-    case jO.ErrorCode:
+    case LibraryPublishErrorType.ErrorCode:
       dispatch(413 === e.errorCode ? VisualBellActions.enqueue({
         type: $$A0,
         error: !0,

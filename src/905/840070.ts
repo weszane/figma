@@ -1,6 +1,6 @@
 import n from "../vendor/3757";
 import { Fh } from "../905/448740";
-import { T$, f7, Tn, jr, MO, Z7 } from "../figma_app/599979";
+import { getPublisherWorkspaceInfo, isSameWorkspace, extractWorkspaceId, isUserWorkspace, isOrgWorkspace, isTeamWorkspace } from "../figma_app/599979";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 var r = n;
 export let $$l0 = {
@@ -15,22 +15,22 @@ export let $$l0 = {
   }) => {
     if (e && isWidgetOrPlugin(e) && i) return i;
     if (r()(n)) return;
-    let d = T$(e || null, a, t.id || void 0);
-    if (d && n.some(e => f7(e, d))) return d;
-    let c = Tn(l);
-    if (c && n.some(e => f7(e, c))) return c;
-    let u = n.find(jr);
+    let d = getPublisherWorkspaceInfo(e || null, a, t.id || void 0);
+    if (d && n.some(e => isSameWorkspace(e, d))) return d;
+    let c = extractWorkspaceId(l);
+    if (c && n.some(e => isSameWorkspace(e, c))) return c;
+    let u = n.find(isUserWorkspace);
     if (u) return u;
-    let p = n.find(MO);
+    let p = n.find(isOrgWorkspace);
     if (p) return p;
-    let m = n.find(Z7);
+    let m = n.find(isTeamWorkspace);
     if (m) return m;
   },
   validate: ({
     existingResourceContent: e,
     user: t,
     allowedAuthors: i
-  }, n) => n ? !d(e, t) && i.every(e => !f7(e, n)) ? [{
+  }, n) => n ? !d(e, t) && i.every(e => !isSameWorkspace(e, n)) ? [{
     key: "INVALID_AUTHOR",
     data: {
       currentValue: n
@@ -43,7 +43,7 @@ export let $$l0 = {
     existingResourceContent: e,
     user: t
   }) => !d(e, t),
-  isEqual: (e, t) => f7(e, t)
+  isEqual: (e, t) => isSameWorkspace(e, t)
 };
 function d(e, t) {
   return !!(e && isWidgetOrPlugin(e) && !Fh(e) && e?.creator?.id && e.creator.id !== t.id);

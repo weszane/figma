@@ -404,7 +404,7 @@ import { zD as _$$zD } from '../figma_app/109758';
 import { gR as _$$gR, ts as _$$ts, LR, zo } from '../figma_app/120210';
 import { bu as _$$bu, n8 as _$$n2, tO as _$$tO, xG as _$$xG } from '../figma_app/121043';
 import { Lk } from '../figma_app/122682';
-import { $c, $l, D6 as _$$D8, gA as _$$gA, hL as _$$hL, rT as _$$rT2, U6 as _$$U4, vt as _$$vt2, Ev, H1, PK, Vw, w9, wQ } from '../figma_app/124493';
+import { createStartVotingSessionKey, deleteVotingSessionThunk, setTitle, unsetHoveredInModalVotePin, setVotesPerUserLimit, deselectVotePin, dismissJoinConfirmation, startVotingSession, exportVotingSessionAsCsv, setVotingSessionInfo, endVotingSession, setHoveredInModalVotePin, selectVotePin, createEndVotingSessionKey } from '../figma_app/124493';
 import { getColorForMultiplayer, multiplayerColors } from '../figma_app/136698';
 import { V as _$$V4 } from '../figma_app/144634';
 import { DF } from '../figma_app/146384';
@@ -20651,9 +20651,9 @@ function bs({
   let t = C3();
   let i = useDispatch();
   let n = useCurrentFileKey();
-  let r = useIsLoading(wQ(n || ''));
+  let r = useIsLoading(createEndVotingSessionKey(n || ''));
   let a = useCallback(() => {
-    i(PK({
+    i(endVotingSession({
       uiSurface: 'MeetingsPanel'
     }));
     trackEventAnalytics('confirm_end_voting_session', {
@@ -21499,7 +21499,7 @@ function bR({
 }) {
   let t = useDispatch();
   let i = Pd(useCallback(() => {
-    t(H1({
+    t(setVotingSessionInfo({
       votingStage: SessionStatus.JOINED
     }));
   }, [t]));
@@ -21534,11 +21534,11 @@ function bF() {
     userVoteLimit
   } = useSelector(e => e.voting.votingParams);
   let r = useSelector(e => !e.user);
-  let a = useIsLoading($c(t || ''));
+  let a = useIsLoading(createStartVotingSessionKey(t || ''));
   let [s, c] = useState(userVoteLimit.toString());
   useEffect(() => {
     let t = bU(s);
-    t && e(_$$hL(t));
+    t && e(setVotesPerUserLimit(t));
   }, [s, e]);
   let u = r || a;
   return jsxs('div', {
@@ -21550,7 +21550,7 @@ function bF() {
       isTitleDisabled: u,
       isLimitDisabled: u,
       userVoteLimit,
-      setTitle: useCallback(t => e(_$$D8(t)), [e])
+      setTitle: useCallback(t => e(setTitle(t)), [e])
     })]
   });
 }
@@ -21559,7 +21559,7 @@ function bH(e) {
   let i = useDispatch();
   let n = useCurrentFileKey();
   let r = useSelector(e => !e.user);
-  let a = useIsLoading($c(n || ''));
+  let a = useIsLoading(createStartVotingSessionKey(n || ''));
   let s = useSelector(e => e.multiplayer.allUsers.length);
   let c = useDeepEqualSceneValue(e => e.getCurrentPage()?.guid);
   let u = NE()?.id;
@@ -21600,7 +21600,7 @@ function bH(e) {
   });
   let S = Pd(useCallback(() => {
     if (!c) throw new Error('Cannot start a voting session since currentPageNodeId is null');
-    i(_$$vt2({
+    i(startVotingSession({
       source: 'voting_modal',
       usedCustomTitle: title !== '',
       requestBody: {
@@ -21790,10 +21790,10 @@ let b$ = registerModal(({
     onCancel: n,
     onCloseButtonClick: n,
     onConfirm: () => {
-      t($l({
+      t(deleteVotingSessionThunk({
         votingSessionId: e
       }));
-      t(H1({
+      t(setVotingSessionInfo({
         votingStage: SessionStatus.NO_SESSION
       }));
       trackEventAnalytics('confirm_delete_voting_session', {
@@ -21869,7 +21869,7 @@ function bq({
           source: 'meetings_panel',
           fileKey: h
         });
-        p(H1({
+        p(setVotingSessionInfo({
           sessionId: t,
           votingStage: SessionStatus.ENDED
         }));
@@ -21990,7 +21990,7 @@ function b7({
   useEffect(() => {
     if (p) {
       return () => {
-        s(_$$gA({
+        s(unsetHoveredInModalVotePin({
           votePinId: n
         }));
       };
@@ -22101,12 +22101,12 @@ function b7({
   }, [r]);
   let v = _$$oC(e);
   function C() {
-    isNotMobile() && s(Vw({
+    isNotMobile() && s(setHoveredInModalVotePin({
       votePinId: n
     }));
   }
   function T() {
-    isNotMobile() && s(_$$gA({
+    isNotMobile() && s(unsetHoveredInModalVotePin({
       votePinId: n
     }));
   }
@@ -22118,7 +22118,7 @@ function b7({
         'voting_results_detail_view--showSeparator--6aQOA': !c && !u && !p && !m && !!t
       }),
       'onClick': function () {
-        s(w9({
+        s(selectVotePin({
           votePinId: e.guid
         }));
         r && a(_$$e0(r, f, 'vote'));
@@ -22273,7 +22273,7 @@ function ys() {
     f();
   }, [f]);
   let _ = useCallback(() => {
-    t ? i(H1({
+    t ? i(setVotingSessionInfo({
       votingStage: SessionStatus.NO_SESSION
     })) : n({
       type: 'SET_VIEW',
@@ -22309,7 +22309,7 @@ function ys() {
       votingSessionId: e.sessionId,
       source: ya
     });
-    Ev(a.getState(), e.sessionId);
+    exportVotingSessionAsCsv(a.getState(), e.sessionId);
   }, [a, e, s]);
   let y = useMemo(() => {
     if (t) {
@@ -23422,7 +23422,7 @@ function vf({
   let u = useAtomWithSubscription(Fj);
   let h = isInteractionPathCheck() ? 1e3 : u;
   let m = useCallback(e => {
-    n(H1({
+    n(setVotingSessionInfo({
       votingStage: SessionStatus.JOINED
     }));
     trackEventAnalytics('join_voting_session', {
@@ -23432,7 +23432,7 @@ function vf({
     });
   }, [n, s, i]);
   let f = useCallback(e => {
-    n(_$$U4());
+    n(dismissJoinConfirmation());
     trackEventAnalytics('cancel_join_voting_session', {
       source: e,
       votingSessionId: i,
@@ -23512,7 +23512,7 @@ let vg = memo(() => {
   }, [i.votingStage, i.votedNodes, t]);
   let p = useMemo(() => u.filter(e => pageIdForNodeId(e.guid) === s), [u, pageIdForNodeId, s]);
   return (useEffect(() => {
-    n && (r && p.some(e => e.guid === n) || e(_$$rT2({
+    n && (r && p.some(e => e.guid === n) || e(deselectVotePin({
       votePinId: n
     })));
   }, [p, r, n, e]), r) ? jsx(ML, {

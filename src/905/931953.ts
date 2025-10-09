@@ -1,139 +1,244 @@
-import { z as _$$z } from "../905/239603";
-import { createNoOpValidator, createMetaValidator } from "../figma_app/181241";
-export let $$a0 = new class {
+import { z as _$$z } from "zod"
+import { createMetaValidator, createNoOpValidator } from "../figma_app/181241"
+
+export let siteAPIService = new class {
+  // Schema validators for different API responses
+  SitesBundleSchemaValidator = createNoOpValidator()
+  SitesCustomDomainDnsRecordsValidator = createMetaValidator("SitesCustomDomainDnsRecordsValidator", _$$z.array(_$$z.object({
+    type: _$$z.string(),
+    host: _$$z.string(),
+    value: _$$z.string(),
+  })), null)
+
+  SitesActivateCustomDomainValidator = createMetaValidator("SitesActivateCustomDomainValidator", _$$z.void(), null)
+  SitesRemoveCustomDomainValidator = createMetaValidator("SitesRemoveCustomDomainValidator", _$$z.void(), null)
+  SitesCustomDomainLimitReachedValidator = createMetaValidator("SitesCustomDomainLimitReachedValidator", _$$z.object({
+    limit_reached: _$$z.boolean(),
+    num_domains_allowed: _$$z.number(),
+    num_domains: _$$z.number(),
+  }), null)
+
+  SitesUpdateBundleValidator = createMetaValidator("SitesUpdateBundleValidator", _$$z.void(), null)
+  SitesUpdateSubdomainValidator = createMetaValidator("SitesUpdateSubdomainValidator", _$$z.object({
+    domain: _$$z.string(),
+  }), null)
+
+  SitesValidateSubdomainValidator = createMetaValidator("SitesValidateSubdomainValidator", _$$z.void(), null)
+  SitesFileKeyVideos = createMetaValidator("SitesFileKeyVideosValidator", _$$z.object({
+    videos: _$$z.record(_$$z.string(), _$$z.string()),
+  }), null)
+
+  SitesFileKeyVideosSha1Metadata = createMetaValidator("SitesFileKeyVideosSha1MetadataValidator", _$$z.object({
+    metadata: _$$z.object({
+      bytes: _$$z.string().optional(),
+      mime: _$$z.string(),
+    }),
+  }), null)
+
+  SitesSetPasswordValidator = createMetaValidator("SitesSetPasswordValidator", _$$z.object({
+    success: _$$z.boolean(),
+    password_version: _$$z.number(),
+  }), null)
+
+  SitesUnsetPasswordValidator = createMetaValidator("SitesUnsetPasswordValidator", _$$z.object({
+    success: _$$z.boolean(),
+  }), null)
+
   constructor() {
-    this.SitesBundleSchemaValidator = createNoOpValidator();
-    this.SitesCustomDomainDnsRecordsValidator = createMetaValidator("SitesCustomDomainDnsRecordsValidator", _$$z.array(_$$z.object({
-      type: _$$z.string(),
-      host: _$$z.string(),
-      value: _$$z.string()
-    })), null);
-    this.SitesActivateCustomDomainValidator = createMetaValidator("SitesActivateCustomDomainValidator", _$$z.$$void(), null);
-    this.SitesRemoveCustomDomainValidator = createMetaValidator("SitesRemoveCustomDomainValidator", _$$z.$$void(), null);
-    this.SitesCustomDomainLimitReachedValidator = createMetaValidator("SitesCustomDomainLimitReachedValidator", _$$z.object({
-      limit_reached: _$$z.boolean(),
-      num_domains_allowed: _$$z.number(),
-      num_domains: _$$z.number()
-    }), null);
-    this.SitesUpdateBundleValidator = createMetaValidator("SitesUpdateBundleValidator", _$$z.$$void(), null);
-    this.SitesUpdateSubdomainValidator = createMetaValidator("SitesUpdateSubdomainValidator", _$$z.object({
-      domain: _$$z.string()
-    }), null);
-    this.SitesValidateSubdomainValidator = createMetaValidator("SitesValidateSubdomainValidator", _$$z.$$void(), null);
-    this.SitesFileKeyVideos = createMetaValidator("SitesFileKeyVideosValidator", _$$z.object({
-      videos: _$$z.record(_$$z.string(), _$$z.string())
-    }), null);
-    this.SitesFileKeyVideosSha1Metadata = createMetaValidator("SitesFileKeyVideosSha1MetadataValidator", _$$z.object({
-      metadata: _$$z.object({
-        bytes: _$$z.string().optional(),
-        mime: _$$z.string()
-      })
-    }), null);
-    this.SitesSetPasswordValidator = createMetaValidator("SitesSetPasswordValidator", _$$z.object({
-      success: _$$z.boolean(),
-      password_version: _$$z.number()
-    }), null);
-    this.SitesUnsetPasswordValidator = createMetaValidator("SitesUnsetPasswordValidator", _$$z.object({
-      success: _$$z.boolean()
-    }), null);
   }
-  postSitesBundleAsync(e) {
+
+  /**
+   * Uploads a sites bundle asynchronously
+   * @param e - The upload parameters
+   * @returns Promise with upload response
+   */
+  postSitesBundleAsync(e: { responsiveSetGuids: string[], fontIndexHash: string, fileVersionId: string, fileKey: string }) {
     return this.SitesBundleSchemaValidator.validate(async ({
-      xr: t
+      xr: t,
     }) => {
-      let i = {
+      let requestPayload = {
         responsive_set_guids: e.responsiveSetGuids,
-        font_index_hash: e.fontIndexHash
-      };
-      i.file_version_id = e.fileVersionId;
-      return await t.post(`/api/sites/${e.fileKey}/async/upload`, i);
-    });
+        font_index_hash: e.fontIndexHash,
+        file_version_id: e.fileVersionId,
+      }
+      return await t.post(`/api/sites/${e.fileKey}/async/upload`, requestPayload)
+    })
   }
-  unpublishSite(e) {
+
+  /**
+   * Unpublishes a site
+   * @param e - The unpublish parameters
+   * @returns Promise with unpublish response
+   */
+  unpublishSite(e: { fileKey: string }) {
     return this.SitesBundleSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.put(`/api/sites/${e.fileKey}/unpublish`));
+      xr: t,
+    }) => await t.put(`/api/sites/${e.fileKey}/unpublish`))
   }
-  addCustomDomain(e) {
+
+  /**
+   * Adds a custom domain to a site
+   * @param e - The domain parameters
+   * @returns Promise with DNS records
+   */
+  addCustomDomain(e: { fileKey: string, domain: string, createPairedDomain: boolean }) {
     return this.SitesCustomDomainDnsRecordsValidator.validate(async ({
-      xr: t
+      xr: t,
     }) => await t.post(`/api/sites/${e.fileKey}/custom_domain`, {
       domain: e.domain,
-      create_paired_domain: e.createPairedDomain
-    }));
+      create_paired_domain: e.createPairedDomain,
+    }))
   }
-  configureRedirect(e) {
+
+  /**
+   * Configures a redirect for a site
+   * @param e - The redirect parameters
+   * @returns Promise with DNS records
+   */
+  configureRedirect(e: { fileKey: string }) {
     return this.SitesCustomDomainDnsRecordsValidator.validate(async ({
-      xr: t
-    }) => await t.post(`/api/sites/${e.fileKey}/configure_redirect`));
+      xr: t,
+    }) => await t.post(`/api/sites/${e.fileKey}/configure_redirect`))
   }
-  activateCustomDomain(e) {
+
+  /**
+   * Activates a custom domain for a site
+   * @param e - The activation parameters
+   * @returns Promise with activation response
+   */
+  activateCustomDomain(e: { fileKey: string }) {
     return this.SitesActivateCustomDomainValidator.validate(async ({
-      xr: t
-    }) => await t.post(`/api/sites/${e.fileKey}/verify_custom_domain`));
+      xr: t,
+    }) => await t.post(`/api/sites/${e.fileKey}/verify_custom_domain`))
   }
-  getDomainDNSRecords(e) {
+
+  /**
+   * Gets DNS records for a domain
+   * @param e - The domain parameters
+   * @returns Promise with DNS records
+   */
+  getDomainDNSRecords(e: { fileKey: string }) {
     return this.SitesCustomDomainDnsRecordsValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/sites/${e.fileKey}/get_custom_domain_dns_records`));
+      xr: t,
+    }) => await t.get(`/api/sites/${e.fileKey}/get_custom_domain_dns_records`))
   }
-  removeCustomDomain(e) {
+
+  /**
+   * Removes a custom domain from a site
+   * @param e - The removal parameters
+   * @returns Promise with removal response
+   */
+  removeCustomDomain(e: { fileKey: string }) {
     return this.SitesRemoveCustomDomainValidator.validate(async ({
-      xr: t
-    }) => await t.del(`/api/sites/${e.fileKey}/remove_custom_domain`));
+      xr: t,
+    }) => await t.del(`/api/sites/${e.fileKey}/remove_custom_domain`))
   }
-  removeCustomDomainRedirect(e) {
+
+  /**
+   * Removes a custom domain redirect
+   * @param e - The removal parameters
+   * @returns Promise with removal response
+   */
+  removeCustomDomainRedirect(e: { fileKey: string }) {
     return this.SitesRemoveCustomDomainValidator.validate(async ({
-      xr: t
-    }) => await t.del(`/api/sites/${e.fileKey}/remove_custom_domain_redirect`));
+      xr: t,
+    }) => await t.del(`/api/sites/${e.fileKey}/remove_custom_domain_redirect`))
   }
-  customDomainLimitReached(e) {
+
+  /**
+   * Checks if custom domain limit is reached
+   * @param e - The limit check parameters
+   * @returns Promise with limit information
+   */
+  customDomainLimitReached(e: { fileKey: string }) {
     return this.SitesCustomDomainLimitReachedValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/sites/${e.fileKey}/check_custom_domain_limit`));
+      xr: t,
+    }) => await t.get(`/api/sites/${e.fileKey}/check_custom_domain_limit`))
   }
-  updateBundle(e) {
+
+  /**
+   * Updates a site bundle
+   * @param e - The update parameters
+   * @returns Promise with update response
+   */
+  updateBundle(e: { fileKey: string, bundleId: string }) {
     return this.SitesUpdateBundleValidator.validate(async ({
-      xr: t
+      xr: t,
     }) => await t.put(`/api/sites/${e.fileKey}/update_bundle`, {
-      bundle_id: e.bundleId
-    }));
+      bundle_id: e.bundleId,
+    }))
   }
-  updateSubdomain(e) {
+
+  /**
+   * Updates a site subdomain
+   * @param e - The update parameters
+   * @returns Promise with domain information
+   */
+  updateSubdomain(e: { fileKey: string, new_base_domain: string }) {
     return this.SitesUpdateSubdomainValidator.validate(async ({
-      xr: t
+      xr: t,
     }) => await t.put(`/api/sites/${e.fileKey}/update_subdomain`, {
-      new_base_domain: e.new_base_domain
-    }));
+      new_base_domain: e.new_base_domain,
+    }))
   }
-  validateSubdomain(e) {
+
+  /**
+   * Validates a subdomain
+   * @param e - The validation parameters
+   * @returns Promise with validation response
+   */
+  validateSubdomain(e: { fileKey: string, new_base_domain: string }) {
     return this.SitesValidateSubdomainValidator.validate(async ({
-      xr: t
+      xr: t,
     }) => await t.get(`/api/sites/${e.fileKey}/validate_subdomain`, {
-      new_base_domain: e.new_base_domain
-    }));
+      new_base_domain: e.new_base_domain,
+    }))
   }
-  getFileVideos(e) {
+
+  /**
+   * Gets videos for a file
+   * @param e - The file parameters
+   * @returns Promise with video information
+   */
+  getFileVideos(e: { fileKey: string }) {
     return this.SitesFileKeyVideos.validate(async ({
-      xr: t
-    }) => await t.get(`/api/sites/${e.fileKey}/videos`));
+      xr: t,
+    }) => await t.get(`/api/sites/${e.fileKey}/videos`))
   }
-  getFileVideoMetadata(e) {
+
+  /**
+   * Gets metadata for a file video
+   * @param e - The video parameters
+   * @returns Promise with metadata information
+   */
+  getFileVideoMetadata(e: { fileKey: string, sha1: string }) {
     return this.SitesFileKeyVideosSha1Metadata.validate(async ({
-      xr: t
-    }) => await t.get(`/api/sites/${e.fileKey}/videos/${e.sha1}/metadata`));
+      xr: t,
+    }) => await t.get(`/api/sites/${e.fileKey}/videos/${e.sha1}/metadata`))
   }
-  setPassword(e) {
+
+  /**
+   * Sets a password for a site
+   * @param e - The password parameters
+   * @returns Promise with password response
+   */
+  setPassword(e: { fileKey: string, password: string }) {
     return this.SitesSetPasswordValidator.validate(async ({
-      xr: t
+      xr: t,
     }) => await t.put(`/api/sites/${e.fileKey}/set_password`, {
-      password: e.password
-    }));
+      password: e.password,
+    }))
   }
-  unsetPassword(e) {
+
+  /**
+   * Unsets a password for a site
+   * @param e - The unset parameters
+   * @returns Promise with unset response
+   */
+  unsetPassword(e: { fileKey: string }) {
     return this.SitesUnsetPasswordValidator.validate(async ({
-      xr: t
-    }) => await t.del(`/api/sites/${e.fileKey}/unset_password`));
+      xr: t,
+    }) => await t.del(`/api/sites/${e.fileKey}/unset_password`))
   }
-}();
-export const z = $$a0;
+}()
+export const z = siteAPIService

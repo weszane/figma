@@ -32,7 +32,7 @@ import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { Gi, qY } from '../figma_app/622574';
 import { useSceneGraphSelector } from '../figma_app/722362';
 import { setNodeExpanded } from '../figma_app/741237';
-import { ce, EC, Fs, Hk, L1, mF, Tw, xB } from '../figma_app/755939';
+import { templateSearchQueryAtomFamily, isTemplateFavoriteAtomFamily, isTemplateEditableAtomFamily, isTemplateDetailsVisibleAtomFamily, updateTemplateMetadataAtom, TemplateSourceType, isTemplateSearchEnabledAtomFamily, isTemplateUsedAtomFamily } from '../figma_app/755939';
 import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
 import { trackFileEventWithStore } from '../figma_app/901889';
 import { searchEndSession } from '../figma_app/925970';
@@ -108,10 +108,10 @@ export function $$X7() {
 export function $$J18() {
   let e = trackFileEventWithStore();
   let t = useSelector(e => e.search.sessionId);
-  let [n, i] = useAtomValueAndSetter(ce);
-  let [o, s] = useAtomValueAndSetter(EC);
-  let [l, d] = useAtomValueAndSetter(xB);
-  let [c, _] = useAtomValueAndSetter(Fs);
+  let [n, i] = useAtomValueAndSetter(templateSearchQueryAtomFamily);
+  let [o, s] = useAtomValueAndSetter(isTemplateFavoriteAtomFamily);
+  let [l, d] = useAtomValueAndSetter(isTemplateUsedAtomFamily);
+  let [c, _] = useAtomValueAndSetter(isTemplateEditableAtomFamily);
   let m = n.trim();
   let [h] = useDebounce(m, 200);
   let b = $$Z20();
@@ -176,7 +176,7 @@ export function $$J18() {
   };
 }
 export function $$ee13(e) {
-  let t = Xr(Tw);
+  let t = Xr(isTemplateSearchEnabledAtomFamily);
   let n = Z('cooper_template_picker_dismissed');
   let i = useSelector(e => e.search.sessionId);
   let l = useDispatch();
@@ -199,8 +199,8 @@ export function $$ee13(e) {
   }, [t, n, e, i, l]);
 }
 export function $$et11() {
-  let e = Xr(Tw);
-  let t = Xr(Hk);
+  let e = Xr(isTemplateSearchEnabledAtomFamily);
+  let t = Xr(isTemplateDetailsVisibleAtomFamily);
   let n = useCurrentFileKey();
   return useCallback(() => {
     n && (t(!0), e(!1), AppStateTsApi?.cooperFocusView().exitFocusedNodeView(), AppStateTsApi?.cooperFocusView().zoomToGrid(0));
@@ -209,7 +209,7 @@ export function $$et11() {
 export function $$en6({
   library: e
 }) {
-  let t = Xr(Tw);
+  let t = Xr(isTemplateSearchEnabledAtomFamily);
   let n = useCurrentFileKey();
   let i = useDispatch();
   let s = function (e) {
@@ -319,7 +319,7 @@ export function $$ea12({
   };
 }
 export function $$er3(e) {
-  let [t, n] = useAtomValueAndSetter(L1);
+  let [t, n] = useAtomValueAndSetter(updateTemplateMetadataAtom);
   let r = t[e] ?? 0;
   return {
     scrollPosition: r,
@@ -328,8 +328,8 @@ export function $$er3(e) {
       n(e, t);
     }, [n, e]),
     resetScrollTop: useCallback(e => {
-      for (let t in mF) {
-        let a = mF[t];
+      for (let t in TemplateSourceType) {
+        let a = TemplateSourceType[t];
         e.includes(a) || n(a, 0);
       }
     }, [n])

@@ -10,7 +10,7 @@ import { v } from "../905/442517";
 import { useDebouncedCallback } from "use-debounce";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { d6 } from "../figma_app/246699";
+import { normalizePublicLinkControlsSetting } from "../figma_app/246699";
 import { PublicLinkControlsSetting } from "../figma_app/482728";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -35,7 +35,7 @@ export function $$x2(e) {
   return e ? getI18nString("setting_tab.public_sharing.modal.days") : getI18nString("setting_tab.public_sharing.modal.hours");
 }
 export function $$b0(e, t, a) {
-  let n = d6(t);
+  let n = normalizePublicLinkControlsSetting(t);
   let i = n === PublicLinkControlsSetting.PASSWORD_REQUIRED || n === PublicLinkControlsSetting.EXP_AND_PWD_REQUIRED;
   let r = n === PublicLinkControlsSetting.EXPIRATION_REQUIRED || n === PublicLinkControlsSetting.EXP_AND_PWD_REQUIRED;
   let {

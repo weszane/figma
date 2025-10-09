@@ -18,7 +18,7 @@ import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { FileNameViewDropdown, ProjectTilePermissions } from "../figma_app/43951";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { F9 } from "../figma_app/803787";
+import { hasLocalOrPublishedContent } from "../figma_app/803787";
 import { UpsellModalType } from "../905/165519";
 import { PageFolderFile, FeatureFlag } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
@@ -52,7 +52,7 @@ export function $$k1() {
   let e = selectCurrentFile();
   let t = useDispatch();
   let r = useSelector(e => getPermissionsStateMemoized(e));
-  let y = useSelector(F9);
+  let y = useSelector(hasLocalOrPublishedContent);
   let N = useSubscription(FileNameViewDropdown, {
     branchFileKey: e?.key || ""
   }, {

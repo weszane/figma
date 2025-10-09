@@ -8,7 +8,7 @@ import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { WAFImage } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Tw } from "../figma_app/755939";
+import { isTemplateSearchEnabledAtomFamily } from "../figma_app/755939";
 import { useSelectedAndFocusedNodeIds } from "../figma_app/334505";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
@@ -35,7 +35,7 @@ export function $$N2() {
     overlay: CooperModal,
     priority: _$$N2.DEFAULT_MODAL
   });
-  let m = Xr(Tw);
+  let m = Xr(isTemplateSearchEnabledAtomFamily);
   let y = useDispatch();
   let E = useIsFullscreenReady();
   let w = useAtomWithSubscription(LZ);

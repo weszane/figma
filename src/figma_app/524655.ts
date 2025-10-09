@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { NX } from "../figma_app/456871";
 import { getObservableValue } from "../figma_app/84367";
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
-import { y6 } from "../figma_app/803787";
+import { createLibraryItemsAtomFamily } from "../figma_app/803787";
 import { Xm } from "../905/935570";
 import { Sz } from "../figma_app/784857";
 export function $$f9() {
@@ -105,7 +105,7 @@ export function $$x0() {
     numTotalSlides
   } = $$A3();
   let a = Xm();
-  let s = useAtomWithSubscription(y6(a)).productComponents.modified.erroneous;
+  let s = useAtomWithSubscription(createLibraryItemsAtomFamily(a)).productComponents.modified.erroneous;
   return useCallback(n => {
     0 === numTotalSlides ? e(VisualBellActions.enqueue({
       message: getI18nString("file_permissions_modal.share_as.publish_template_slides_error_no_slides"),

@@ -1,244 +1,380 @@
-import { l as _$$l } from "../905/716947";
-import { atom, createRemovableAtomFamily } from "../figma_app/27355";
-import { createLoadingState, createLoadedState, createErrorState } from "../905/723791";
-import { FileKeySourceEnum } from "../905/412913";
-import { AssetAtomMap } from "../figma_app/31188";
-import { openFileLibraryKeyAtom, openFileKeyAtom } from "../figma_app/516028";
-import { O as _$$O } from "../905/566074";
-import { deepEqual } from "../905/382883";
-import { logError } from "../905/714362";
-import { FComponentType } from "../figma_app/191312";
-import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
-import { PrimaryWorkflowEnum as _$$PW } from "../905/497152";
-import { publishedHubFileLibraryKeyAtom, libraryPublishingModeAtom, publishedHubFileIdAtom } from "../figma_app/825489";
-import { propertyMappers } from "../905/395857";
-import { isNotNullish } from "../figma_app/95419";
-import x from "../vendor/239910";
-import { conditionalFeatureFlag } from "../figma_app/169182";
-import { areFramesEqual } from "../figma_app/646357";
-import { StagingStatusEnum, PrimaryWorkflowEnum as _$$PW2, LibrarySourceEnum } from "../figma_app/633080";
-function _({
-  libraryKey: e,
-  assetType: t
+import { keyBy } from "lodash-es"
+import { deepEqual } from "../905/382883"
+import { propertyMappers } from "../905/395857"
+import { FileKeySourceEnum } from "../905/412913"
+import { PrimaryWorkflowEnum as _$$PW } from "../905/497152"
+import { isShareableAssetType } from "../905/566074"
+import { logError } from "../905/714362"
+import { createErrorState, createLoadedState, createLoadingState } from "../905/723791"
+import { atom, createRemovableAtomFamily } from "../figma_app/27355"
+import { AssetAtomMap } from "../figma_app/31188"
+import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951"
+import { isNotNullish } from "../figma_app/95419"
+import { conditionalFeatureFlag } from "../figma_app/169182"
+import { FComponentType } from "../figma_app/191312"
+import { openFileKeyAtom, openFileLibraryKeyAtom } from "../figma_app/516028"
+import { PrimaryWorkflowEnum as _$$PW2, LibrarySourceEnum, StagingStatusEnum } from "../figma_app/633080"
+import { areFramesEqual } from "../figma_app/646357"
+import { libraryPublishingModeAtom, publishedHubFileIdAtom, publishedHubFileLibraryKeyAtom } from "../figma_app/825489"
+// Renamed variables, added types, simplified logic, improved readability
+// Origin: $$L0 (exported as t)
+
+interface LibraryAssetQueryParams {
+  libraryKey: string
+  assetType: _$$PW
+  livegraphAssetToLibraryAsset: (libraryKey: string, asset: any) => any
+}
+
+interface PublishStatusData {
+  libraryStatus: StagingStatusEnum
+  error: any
+  libraryAsset: any
+}
+
+interface AssetPublishData {
+  type?: _$$PW
+  status: StagingStatusEnum
+  file_key_source: FileKeySourceEnum
+  file_key: string
+  library_key: string
+  userFacingVersion?: string
+  version?: string
+  name?: string
+  subscriptionStatus?: string
+  isPublishable?: boolean
+  keyForPublish?: string
+  node_id?: string
+}
+
+function createLibraryAssetQuery({
+  libraryKey,
+  assetType,
+}: {
+  libraryKey: string
+  assetType: _$$PW
 }) {
-  let i = propertyMappers[t];
-  return I({
-    libraryKey: e,
-    assetType: t,
-    livegraphAssetToLibraryAsset: i
-  });
+  const mapper = propertyMappers[assetType]
+  return createLibraryAssetAtomFamily({
+    libraryKey,
+    assetType,
+    livegraphAssetToLibraryAsset: mapper,
+  })
 }
-let A = {
-  [_$$PW.RESPONSIVE_SET]: b(_$$PW.RESPONSIVE_SET),
-  [_$$PW.CODE_COMPONENT]: b(_$$PW.CODE_COMPONENT)
-};
-let y = {
-  [_$$PW.RESPONSIVE_SET]: v(_$$PW.RESPONSIVE_SET),
-  [_$$PW.CODE_COMPONENT]: v(_$$PW.CODE_COMPONENT)
-};
-function b(e) {
-  return atom(t => {
-    let i = t(openFileLibraryKeyAtom);
-    return i ? t(_({
-      libraryKey: i,
-      assetType: e
-    })) : createLoadingState();
-  });
+
+const localLibraryAssetAtoms = {
+  [_$$PW.RESPONSIVE_SET]: createLocalLibraryAssetAtom(_$$PW.RESPONSIVE_SET),
+  [_$$PW.CODE_COMPONENT]: createLocalLibraryAssetAtom(_$$PW.CODE_COMPONENT),
 }
-function v(e) {
-  return atom(t => {
-    let i = t(publishedHubFileLibraryKeyAtom);
-    return i ? t(_({
-      libraryKey: i,
-      assetType: e
-    })) : createLoadingState();
-  });
+
+const publishedHubFileAssetAtoms = {
+  [_$$PW.RESPONSIVE_SET]: createPublishedHubFileAssetAtom(_$$PW.RESPONSIVE_SET),
+  [_$$PW.CODE_COMPONENT]: createPublishedHubFileAssetAtom(_$$PW.CODE_COMPONENT),
 }
-let I = createRemovableAtomFamily(({
-  libraryKey: e,
-  assetType: t,
-  livegraphAssetToLibraryAsset: i
-}) => atom(n => {
-  if (!n(openFileLibraryKeyAtom)) return createLoadingState();
-  let r = function (e) {
-    switch (function (e) {
-      switch (e) {
+
+function createLocalLibraryAssetAtom(assetType: _$$PW) {
+  return atom((get) => {
+    const libraryKey = get(openFileLibraryKeyAtom)
+    return libraryKey
+      ? get(createLibraryAssetQuery({
+          libraryKey,
+          assetType,
+        }))
+      : createLoadingState()
+  })
+}
+
+function createPublishedHubFileAssetAtom(assetType: _$$PW) {
+  return atom((get) => {
+    const libraryKey = get(publishedHubFileLibraryKeyAtom)
+    return libraryKey
+      ? get(createLibraryAssetQuery({
+          libraryKey,
+          assetType,
+        }))
+      : createLoadingState()
+  })
+}
+
+const createLibraryAssetAtomFamily = createRemovableAtomFamily(({
+  libraryKey,
+  assetType,
+  livegraphAssetToLibraryAsset,
+}: LibraryAssetQueryParams) => atom((get) => {
+  if (!get(openFileLibraryKeyAtom))
+    return createLoadingState()
+
+  const getQueryFunction = (assetType: _$$PW) => {
+    const componentType = (function (assetType: _$$PW) {
+      switch (assetType) {
         case _$$PW.CODE_COMPONENT:
-          return FComponentType.CODE_COMPONENT;
+          return FComponentType.CODE_COMPONENT
         case _$$PW.RESPONSIVE_SET:
-          return FComponentType.RESPONSIVE_SET;
-        case _$$PW.COMPONENT:
-        case _$$PW.MODULE:
-        case _$$PW.STATE_GROUP:
-        case _$$PW.STYLE:
-        case _$$PW.VARIABLE:
-        case _$$PW.VARIABLE_OVERRIDE:
-        case _$$PW.VARIABLE_SET:
-        case _$$PW.CONSTRAINED_TEMPLATE:
-        case _$$PW.CODE_LIBRARY:
-        case _$$PW.CODE_FILE:
-        case _$$PW.MANAGED_STRING:
-          return null;
+          return FComponentType.RESPONSIVE_SET
+        default:
+          return null
       }
-    }(e)) {
+    })(assetType)
+
+    switch (componentType) {
       case FComponentType.CODE_COMPONENT:
-        return e => CodeComponentsInLibrary.Query({
-          libraryKey: e
-        });
+        return (libraryKey: string) => CodeComponentsInLibrary.Query({
+          libraryKey,
+        })
       case FComponentType.RESPONSIVE_SET:
-        return e => LibraryAssetDataOfType.Query({
-          libraryKey: e,
-          assetType: FComponentType.RESPONSIVE_SET
-        });
+        return (libraryKey: string) => LibraryAssetDataOfType.Query({
+          libraryKey,
+          assetType: FComponentType.RESPONSIVE_SET,
+        })
       default:
-        return null;
+        return null
     }
-  }(t);
-  if (!r) {
+  }
+
+  const queryFunction = getQueryFunction(assetType)
+
+  if (!queryFunction) {
     logError("design-systems", "unsupported asset type for library asset query", {
-      assetType: t
+      assetType,
     }, {
-      reportAsSentryError: !0
-    });
-    return createLoadedState({});
+      reportAsSentryError: true,
+    })
+    return createLoadedState({})
   }
-  let s = n(r(e));
-  switch (s.status) {
+
+  const queryResult = get(queryFunction(libraryKey))
+
+  switch (queryResult.status) {
     case "loading":
-      return createLoadingState();
+      return createLoadingState()
     case "errors":
-      return createErrorState(s.errors);
+      return createErrorState(queryResult.errors)
   }
-  let o = s.data.libraryKeyToFile?.file;
-  let d = s.data.libraryKeyToFile?.hubFile ?? o;
-  if (!d) {
+
+  const file = queryResult.data.libraryKeyToFile?.file
+  const hubFile = queryResult.data.libraryKeyToFile?.hubFile ?? file
+
+  if (!hubFile) {
     logError("design-systems", "unexpected null file data", {
-      libraryKey: e
-    });
-    return createLoadedState({});
+      libraryKey,
+    })
+    return createLoadedState({})
   }
-  let c = {};
-  for (let t of d.libraryAssets) {
-    let n = i(e, t);
-    n && (c[n.key] = n);
+
+  const assets: Record<string, any> = {}
+  for (const libraryAsset of hubFile.libraryAssets) {
+    const mappedAsset = livegraphAssetToLibraryAsset(libraryKey, libraryAsset)
+    if (mappedAsset) {
+      assets[mappedAsset.key] = mappedAsset
+    }
   }
-  return createLoadedState(c);
-}), deepEqual);
-var S = x;
-let k = {
-  [_$$PW.RESPONSIVE_SET]: N(AssetAtomMap[_$$PW.RESPONSIVE_SET].local, A[_$$PW.RESPONSIVE_SET]),
-  [_$$PW.CODE_COMPONENT]: N(AssetAtomMap[_$$PW.CODE_COMPONENT].local, A[_$$PW.CODE_COMPONENT])
-};
-let R = {
-  [_$$PW.RESPONSIVE_SET]: N(AssetAtomMap[_$$PW.RESPONSIVE_SET].local, y[_$$PW.RESPONSIVE_SET]),
-  [_$$PW.CODE_COMPONENT]: N(AssetAtomMap[_$$PW.CODE_COMPONENT].local, y[_$$PW.CODE_COMPONENT])
-};
-function N(e, t, i = O, n = null) {
-  return atom(s => {
-    let o = s(t);
-    if ("loaded" !== o.status) return o;
-    let l = S()(Object.values(o.data).filter(isNotNullish), "sourceAssetId");
-    let d = s(e);
-    let c = new Set(Object.values(d).map(e => e.assetId));
-    let u = {};
-    let p = new Set();
-    for (let e of Object.values(o.data)) {
-      let t = e.sourceAssetId;
-      c.has(t) || p.add([t, e.key]);
+
+  return createLoadedState(assets)
+}), deepEqual)
+
+const localPublishStatusAtoms = {
+  [_$$PW.RESPONSIVE_SET]: createPublishStatusAtom(
+    AssetAtomMap[_$$PW.RESPONSIVE_SET].local,
+    localLibraryAssetAtoms[_$$PW.RESPONSIVE_SET],
+  ),
+  [_$$PW.CODE_COMPONENT]: createPublishStatusAtom(
+    AssetAtomMap[_$$PW.CODE_COMPONENT].local,
+    localLibraryAssetAtoms[_$$PW.CODE_COMPONENT],
+  ),
+}
+
+const hubFilePublishStatusAtoms = {
+  [_$$PW.RESPONSIVE_SET]: createPublishStatusAtom(
+    AssetAtomMap[_$$PW.RESPONSIVE_SET].local,
+    publishedHubFileAssetAtoms[_$$PW.RESPONSIVE_SET],
+  ),
+  [_$$PW.CODE_COMPONENT]: createPublishStatusAtom(
+    AssetAtomMap[_$$PW.CODE_COMPONENT].local,
+    publishedHubFileAssetAtoms[_$$PW.CODE_COMPONENT],
+  ),
+}
+
+function createPublishStatusAtom(
+  localAssetAtom: any,
+  libraryAssetAtom: any,
+  getStatusFunction = determineStagingStatus,
+  errorAtomFactory: ((assetId: string) => any) | null = null,
+) {
+  return atom((get) => {
+    const libraryAssets = get(libraryAssetAtom) as any
+
+    if (libraryAssets.status !== "loaded") {
+      return libraryAssets
     }
-    for (let e of Object.values(d)) {
-      let t = s(n?.(e.assetId) ?? atom(null));
-      let a = e.assetId;
-      let o = l[a] ?? null;
-      let d = i(e, o);
-      u[a] = {
-        libraryStatus: d,
-        error: t,
-        libraryAsset: o
-      };
+
+    const libraryAssetsByKey = keyBy(
+      Object.values(libraryAssets.data).filter(isNotNullish),
+      "sourceAssetId",
+    )
+
+    const localAssets = get(localAssetAtom)
+    const localAssetIds = new Set(Object.values(localAssets).map(asset => asset.assetId))
+
+    const result: Record<string, PublishStatusData> = {}
+    const unmatchedAssets = new Set<[string, string]>() // [assetId, key]
+
+    // Find unmatched library assets
+    for (const libraryAsset of Object.values<any>(libraryAssets.data)) {
+      const assetId = libraryAsset.sourceAssetId
+      if (!localAssetIds.has(assetId)) {
+        unmatchedAssets.add([assetId, libraryAsset.key])
+      }
     }
-    for (let [e, t] of p) u[e] = {
-      libraryStatus: i(null, o.data[t] ?? null),
-      error: null,
-      libraryAsset: o.data[t] ?? null
-    };
-    return createLoadedState(u);
-  });
+
+    // Process local assets
+    for (const localAsset of Object.values(localAssets)) {
+      const assetId = localAsset.assetId
+      const errorAtom = errorAtomFactory?.(assetId) ?? atom(null)
+      const error = get(errorAtom)
+      const libraryAsset = libraryAssetsByKey[assetId] ?? null
+      const status = getStatusFunction(localAsset, libraryAsset)
+
+      result[assetId] = {
+        libraryStatus: status,
+        error,
+        libraryAsset,
+      }
+    }
+
+    // Process unmatched library assets
+    for (const [assetId, key] of unmatchedAssets) {
+      result[assetId] = {
+        libraryStatus: getStatusFunction(null, libraryAssets.data[key] ?? null),
+        error: null,
+        libraryAsset: libraryAssets.data[key] ?? null,
+      }
+    }
+
+    return createLoadedState(result)
+  })
 }
-function P(e, t) {
-  return conditionalFeatureFlag("ds_user_facing_version_publishing", e.userFacingVersion !== t.userFacingVersion, e.version !== t.version) || areFramesEqual(e.containingFrame, t.containingFrame);
+
+function areAssetsDifferent(localAsset: any, libraryAsset: any): boolean {
+  return conditionalFeatureFlag(
+    "ds_user_facing_version_publishing",
+    localAsset.userFacingVersion !== libraryAsset.userFacingVersion,
+    localAsset.version !== libraryAsset.version,
+  ) || areFramesEqual(localAsset.containingFrame, libraryAsset.containingFrame)
 }
-function O(e, t, i = P) {
-  return e && e.isPublishable && !e.isSoftDeleted ? t ? i(e, t) ? StagingStatusEnum.CHANGED : StagingStatusEnum.CURRENT : StagingStatusEnum.NEW : t ? StagingStatusEnum.DELETED : StagingStatusEnum.NOT_STAGED;
+
+function determineStagingStatus(
+  localAsset: any,
+  libraryAsset: any,
+  compareFunction = areAssetsDifferent,
+): StagingStatusEnum {
+  if (localAsset && localAsset.isPublishable && !localAsset.isSoftDeleted) {
+    if (libraryAsset) {
+      return compareFunction(localAsset, libraryAsset)
+        ? StagingStatusEnum.CHANGED
+        : StagingStatusEnum.CURRENT
+    }
+    return StagingStatusEnum.NEW
+  }
+
+  return libraryAsset
+    ? StagingStatusEnum.DELETED
+    : StagingStatusEnum.NOT_STAGED
 }
-let D = [_$$PW2.RESPONSIVE_SET, _$$PW2.CODE_COMPONENT];
-let $$L0 = atom(e => {
-  let t = {};
-  let {
+
+const SUPPORTED_ASSET_TYPES = [_$$PW2.RESPONSIVE_SET, _$$PW2.CODE_COMPONENT]
+
+export const libraryAssetsAtom = atom((get) => {
+  const publishingMode = get(libraryPublishingModeAtom)
+  const isHubFileMode = publishingMode === LibrarySourceEnum.HUBFILE
+
+  const {
     libraryAssetAtoms,
     publishStatusAtoms,
     libraryKey,
-    fileKey
-  } = e(libraryPublishingModeAtom) === LibrarySourceEnum.HUBFILE ? {
-    libraryAssetAtoms: y,
-    publishStatusAtoms: R,
-    libraryKey: e(publishedHubFileLibraryKeyAtom),
-    fileKey: e(publishedHubFileIdAtom)
-  } : {
-    libraryAssetAtoms: A,
-    publishStatusAtoms: k,
-    libraryKey: e(openFileLibraryKeyAtom),
-    fileKey: e(openFileKeyAtom)
-  };
-  for (let l of D) {
-    if (!_$$O(l)) continue;
-    let p = e(AssetAtomMap[l].local);
-    let m = e(libraryAssetAtoms[l]);
-    let h = e(publishStatusAtoms[l]);
-    switch (h.status) {
-      case "loading":
-        return createLoadingState();
-      case "errors":
-        return createErrorState(h.errors);
-      case "disabled":
-        return createLoadedState({});
+    fileKey,
+  } = isHubFileMode
+    ? {
+        libraryAssetAtoms: publishedHubFileAssetAtoms,
+        publishStatusAtoms: hubFilePublishStatusAtoms,
+        libraryKey: get(publishedHubFileLibraryKeyAtom),
+        fileKey: get(publishedHubFileIdAtom),
+      }
+    : {
+        libraryAssetAtoms: localLibraryAssetAtoms,
+        publishStatusAtoms: localPublishStatusAtoms,
+        libraryKey: get(openFileLibraryKeyAtom),
+        fileKey: get(openFileKeyAtom),
+      }
+
+  const result: Record<string, AssetPublishData> = {}
+
+  for (const assetType of SUPPORTED_ASSET_TYPES) {
+    if (!isShareableAssetType(assetType)) {
+      continue
     }
-    switch (m.status) {
+
+    const localAssets = get(AssetAtomMap[assetType].local) as any
+    const libraryAssets = get(libraryAssetAtoms[assetType]) as any
+    const publishStatus = get(publishStatusAtoms[assetType]) as any
+
+    // Handle loading/error states
+    switch (publishStatus.status) {
       case "loading":
-        return createLoadingState();
+        return createLoadingState()
       case "errors":
-        return createErrorState(m.errors);
+        return createErrorState(publishStatus.errors)
       case "disabled":
-        return createLoadedState({});
+        return createLoadedState({})
     }
-    for (let [e, i] of Object.entries(h.data)) {
-      if (!i) continue;
-      let r = p[e];
-      let a = i.libraryAsset;
-      r ? t[e] = {
-        ...r,
-        status: i.libraryStatus,
-        userFacingVersion: r.version,
-        node_id: r.localGuid,
-        file_key_source: FileKeySourceEnum.LOCAL_FILE,
-        file_key: fileKey ?? "",
-        library_key: libraryKey ?? _$$l("")
-      } : t[e] = {
-        type: l,
-        status: i.libraryStatus,
-        file_key_source: FileKeySourceEnum.LOCAL_FILE,
-        file_key: fileKey ?? "",
-        library_key: libraryKey ?? _$$l(""),
-        userFacingVersion: a?.version ?? "",
-        version: a?.version ?? "",
-        name: a?.name ?? "",
-        subscriptionStatus: "LOCAL",
-        isPublishable: !1,
-        keyForPublish: a?.key ?? "",
-        node_id: a?.sourceAssetGuid ?? ""
-      };
+
+    switch (libraryAssets.status) {
+      case "loading":
+        return createLoadingState()
+      case "errors":
+        return createErrorState(libraryAssets.errors)
+      case "disabled":
+        return createLoadedState({})
+    }
+
+    // Process each asset
+    for (const [assetId, statusData] of Object.entries<PublishStatusData>(publishStatus.data)) {
+      if (!statusData) {
+        continue
+      }
+
+      const localAsset = localAssets[assetId]
+      const libraryAsset = statusData.libraryAsset
+
+      if (localAsset) {
+        result[assetId] = {
+          ...localAsset,
+          status: statusData.libraryStatus,
+          userFacingVersion: localAsset.version,
+          node_id: localAsset.localGuid,
+          file_key_source: FileKeySourceEnum.LOCAL_FILE,
+          file_key: fileKey ?? "",
+          library_key: libraryKey ?? "",
+        }
+      }
+      else {
+        result[assetId] = {
+          type: assetType,
+          status: statusData.libraryStatus,
+          file_key_source: FileKeySourceEnum.LOCAL_FILE,
+          file_key: fileKey ?? "",
+          library_key: libraryKey ?? "",
+          userFacingVersion: libraryAsset?.version ?? "",
+          version: libraryAsset?.version ?? "",
+          name: libraryAsset?.name ?? "",
+          subscriptionStatus: "LOCAL",
+          isPublishable: false,
+          keyForPublish: libraryAsset?.key ?? "",
+          node_id: libraryAsset?.sourceAssetGuid ?? "",
+        }
+      }
     }
   }
-  return createLoadedState(t);
-});
-export const t = $$L0;
+
+  return createLoadedState(result)
+})
+
+export const t = libraryAssetsAtom

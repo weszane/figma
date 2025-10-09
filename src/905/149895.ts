@@ -7,11 +7,11 @@ import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { ZS } from "../figma_app/519839";
+import { executePublishProcess } from "../figma_app/519839";
 import { getCurrentFileType } from "../figma_app/976749";
 import { FFileType } from "../figma_app/191312";
 import { aB } from "../905/576221";
-import { AC, jO, FZ } from "../figma_app/803787";
+import { selectWellFormedModuleNodeIds, selectAllModuleLibraryItemsWithStatus, selectAllLibraryItems } from "../figma_app/803787";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { _g, UM, Md, F4 } from "../figma_app/60023";
 import { CR, Dl, oX, ke } from "../905/58274";
@@ -35,9 +35,9 @@ export function $$I2() {
   let t = useAtomWithSubscription(_g);
   let i = Xr(UM);
   let d = Md(t);
-  let c = useSelector(e => AC(e));
-  let u = Object.values(useSelector(e => jO(e, LibrarySourceEnum.LIBRARY)));
-  let I = useSelector(e => FZ(e));
+  let c = useSelector(e => selectWellFormedModuleNodeIds(e));
+  let u = Object.values(useSelector(e => selectAllModuleLibraryItemsWithStatus(e, LibrarySourceEnum.LIBRARY)));
+  let I = useSelector(e => selectAllLibraryItems(e));
   let E = getCurrentFileType() === FFileType.SLIDES;
   return {
     initiateTemplatePublish: useCallback(t => {
@@ -55,7 +55,7 @@ export function $$I2() {
       let s = Object.keys(I);
       r.push(...s);
       0 === r.length ? oX(e, t) : requestAnimationFrame(() => {
-        e(ZS({
+        e(executePublishProcess({
           savepointDescription: "slide template publish",
           itemsToPublish: new Set(r),
           publishingMode: LibrarySourceEnum.LIBRARY,
@@ -69,7 +69,7 @@ export function $$I2() {
       }), sendWithRetry.del(`/api/templates/file/${t}`).then(() => {
         $$b1(e);
         AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(""));
-        e(ZS({
+        e(executePublishProcess({
           publishingMode: LibrarySourceEnum.LIBRARY,
           unpublishAll: !0,
           savepointDescription: "slide template unpublish",

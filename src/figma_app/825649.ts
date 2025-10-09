@@ -48,7 +48,7 @@ import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { FileManagePermission, FileNameViewDropdown } from "../figma_app/43951";
 import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
-import { fA, p9, F9 } from "../figma_app/803787";
+import { canUserPublishToCommunity, canEditAndHasChangesAtom, hasLocalOrPublishedContent } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
 import { UpsellModalType } from "../905/165519";
 import { exitVersionHistoryMode, enterVersionHistoryMode } from "../figma_app/841351";
@@ -65,7 +65,7 @@ import { Ah } from "../figma_app/221114";
 import { e as _$$e3 } from "../905/157975";
 import { jT } from "../figma_app/277330";
 import { dD } from "../905/519113";
-import { RR } from "../905/514666";
+import { PublishingUIContext } from "../905/514666";
 import { $3 } from "../905/946937";
 import { j as _$$j } from "../905/834956";
 import { tz as _$$tz } from "../figma_app/531331";
@@ -124,8 +124,8 @@ export function $$eO1({
   }), {
     enabled: !!eM?.key
   });
-  let e4 = useSelector(fA);
-  let e8 = useAtomWithSubscription(p9);
+  let e4 = useSelector(canUserPublishToCommunity);
+  let e8 = useAtomWithSubscription(canEditAndHasChangesAtom);
   SR();
   let e6 = useSubscription(FileNameViewDropdown({
     branchFileKey: eM?.key || ""
@@ -136,7 +136,7 @@ export function $$eO1({
   let e9 = useMemo(() => {
     if (eM && "loaded" === eK.status) return findFavoritedItem(eK.data, eM.key);
   }, [eM, eK]);
-  let te = useSelector(F9);
+  let te = useSelector(hasLocalOrPublishedContent);
   let tt = useSelector(e => e.mirror.appModel.topLevelMode);
   let tr = jT(eM, te).unwrapOr(!1);
   let tn = $n();
@@ -266,7 +266,7 @@ export function $$eO1({
     z(showModalHandler({
       type: dD,
       data: {
-        entrypoint: RR.FILENAME_VIEW_DROPDOWN
+        entrypoint: PublishingUIContext.FILENAME_VIEW_DROPDOWN
       }
     }));
   };

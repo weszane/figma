@@ -17,7 +17,7 @@ import { canSetFieldValue, getFieldValueOrDefault } from "../905/497882";
 import { Vb, wj } from "../905/759470";
 import { PublishModalState } from "../figma_app/350203";
 import { useTracking } from "../figma_app/831799";
-import { CW } from "../figma_app/599979";
+import { SUPPORTED_IMAGE_TYPES } from "../figma_app/599979";
 import { VIDEO_TYPE_VALUES, IMAGE_TYPES, VIDEO_TYPES } from "../905/966582";
 import { L } from "../905/597048";
 import { FieldContainer } from "../905/567946";
@@ -69,7 +69,7 @@ export let $$T0 = forwardRef(function ({
       q.current ? q.current.focus(e) : $.current?.focus(e);
     }
   }), []);
-  let ee = useMemo(() => [...CW, ...(allowVideos ? VIDEO_TYPE_VALUES : [])], [allowVideos]);
+  let ee = useMemo(() => [...SUPPORTED_IMAGE_TYPES, ...(allowVideos ? VIDEO_TYPE_VALUES : [])], [allowVideos]);
   return jsx(FieldContainer, {
     label: j ? getI18nString("community.publishing.set_a_thumbnail") : getI18nString("community.publishing.thumbnail_preview"),
     labelHtmlFor: X,

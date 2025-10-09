@@ -79,11 +79,11 @@ import { aU } from "../figma_app/757606";
 import { ButtonWide } from "../905/521428";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { getLibraryKeyWithReport } from "../905/997221";
-import { Pg, y6 } from "../figma_app/803787";
+import { hasOpenHubFileContent, createLibraryItemsAtomFamily } from "../figma_app/803787";
 import { b as _$$b2 } from "../905/937225";
 import { I as _$$I2 } from "../905/266213";
 import { Xm as _$$Xm } from "../905/935570";
-import { RR } from "../905/514666";
+import { PublishingUIContext } from "../905/514666";
 import { c as _$$c2 } from "../905/426262";
 import { u as _$$u } from "../905/831362";
 import { m as _$$m } from "../905/760316";
@@ -265,7 +265,7 @@ function e4({
   let h = getRepoById(e, m.repos);
   let g = isBranch(e);
   let f = getLibraryKeyWithReport(e);
-  let _ = useSelector(Pg);
+  let _ = useSelector(hasOpenHubFileContent);
   let y = _$$b2(t, i, r, o) || g;
   let v = getFeatureFlags().cmty_lib_admin_publish ? y && !_ : y;
   let {
@@ -280,7 +280,7 @@ function e4({
     viewFile: d
   });
   let x = _$$Xm();
-  let S = useAtomWithSubscription(y6(x));
+  let S = useAtomWithSubscription(createLibraryItemsAtomFamily(x));
   S.productComponents = {
     modified: {
       wellFormed: e5((u = S.productComponents).modified.wellFormed),
@@ -343,7 +343,7 @@ function e4({
   });
   let F = jsx(FileRowRightV2, {
     children: data?.file?.hasPermission && jsx(_$$I2, {
-      entryPoint: RR.LIBRARY_MODAL_OVERVIEW,
+      entryPoint: PublishingUIContext.LIBRARY_MODAL_OVERVIEW,
       recordingKey: "libraryPublishButton",
       publishedState: jsx(ButtonWide, {
         variant: "primary",

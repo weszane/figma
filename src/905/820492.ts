@@ -42,7 +42,7 @@ import { hideModal, popModalStack } from "../905/156213";
 import { PublishModalState } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { MAX_PUBLISHERS_PER_RESOURCE, findPublishedProfileForUser, validatePublisherCount, getStatusOrDefault, getCurrentOrgAdminInfo, getAuthedPublisherProfile, useIsCommunityHubView } from "../figma_app/740025";
-import { Ii, vC, $x, nK, $W, j4, xw } from "../figma_app/599979";
+import { isWorkspaceMatch, validateCarouselImages, processThumbnailImage, cleanupMediaObjectUrls, countEnabledFeatures, getDebugWorkspaceInfo, needsToAcceptCommunityTOS } from "../figma_app/599979";
 import { D as _$$D } from "../905/274925";
 import { DropdownEnableState } from "../figma_app/188152";
 import { selectUser } from "../905/372672";
@@ -523,7 +523,7 @@ class ts extends Component {
       let e = this.props.publishingState.metadata.author;
       if ("org_id" in e || "team_id" in e) return !0;
       let t = findPublishedProfileForUser(this.props.user, this.props.authedProfilesById);
-      return t && Ii(t, this.props.publishingState.metadata.author) || !1;
+      return t && isWorkspaceMatch(t, this.props.publishingState.metadata.author) || !1;
     };
     this.publishHubFile = () => {
       let {
@@ -539,7 +539,7 @@ class ts extends Component {
     };
     this.updateCarouselMedia = e => {
       this.setFormErrors({
-        carouselMedia: vC(e.carouselMedia)
+        carouselMedia: validateCarouselImages(e.carouselMedia)
       });
       this.updatePublishingMetadata(e);
     };
@@ -585,7 +585,7 @@ class ts extends Component {
         author: e,
         publishers: {
           ...publishers,
-          tokens: publishers.tokens.filter(t => !Ii(this.props.authedProfilesById[t.content.id], e))
+          tokens: publishers.tokens.filter(t => !isWorkspaceMatch(this.props.authedProfilesById[t.content.id], e))
         }
       });
     };
@@ -624,11 +624,11 @@ class ts extends Component {
       });
       i.set(this.state.editorCommunityProfiles);
       let n = e.inputValue.trim().toLowerCase().replace(/^@/, "");
-      return i.search(n).filter(e => !Ii(this.props.authedProfilesById[e.id], metadata.author) && (!metadata.publishers || !metadata.publishers.tokens.length || metadata.publishers.tokens.every(t => t.content?.id !== e.id)));
+      return i.search(n).filter(e => !isWorkspaceMatch(this.props.authedProfilesById[e.id], metadata.author) && (!metadata.publishers || !metadata.publishers.tokens.length || metadata.publishers.tokens.every(t => t.content?.id !== e.id)));
     };
     this.onPrototypeThumbnailUploadChange = async e => {
       try {
-        let t = await $x(e, this.state.customThumbnail);
+        let t = await processThumbnailImage(e, this.state.customThumbnail);
         let i = {
           ...t,
           sha1: sha1Hex(t.buffer),
@@ -685,7 +685,7 @@ class ts extends Component {
         this.state.canvasThumbnail && this.updateCarouselMedia({
           carouselMedia: [this.state.canvasThumbnail]
         });
-        e && "buffer" in e && nK(e);
+        e && "buffer" in e && cleanupMediaObjectUrls(e);
       });
     };
     this.restoreCarouselFileThumbnail = () => {
@@ -781,7 +781,7 @@ class ts extends Component {
     }
   }
   componentWillUnmount() {
-    this.state.canvasThumbnail && nK(this.state.canvasThumbnail);
+    this.state.canvasThumbnail && cleanupMediaObjectUrls(this.state.canvasThumbnail);
     this.props.publishingState.status.code === UploadStatusEnum.SUCCESS && this.props.clearPublishingState();
     this.props.Sprig("track", "hub_file_publish_modal_close", {
       hasAttemptedToPublish: this.hasAttemptedToPublish,
@@ -895,14 +895,14 @@ class ts extends Component {
     return this.props.isEditHubFilePageMode || zv(this.props.hubFile) ? getI18nString("general.save") : this.props.isPaid ? getI18nString("community.publishing.submit_for_review") : getI18nString("community.publishing.publish");
   }
   hasFormErrors(e) {
-    return !!$W(Object.keys(e), e);
+    return !!countEnabledFeatures(Object.keys(e), e);
   }
   renderForm() {
     let {
       metadata
     } = this.props.publishingState;
     let t = this.props.hubFile;
-    let i = j4(metadata.author);
+    let i = getDebugWorkspaceInfo(metadata.author);
     let n = this.state.formErrors;
     let a = this.props.publishingState.status.code === UploadStatusEnum.UPLOADING || this.props.slidesPublishState === F4.PUBLISH_HUB_FILE_INITIATED;
     let s = n.thumbnailIsSet || n.thumbnailBuffer;
@@ -972,7 +972,7 @@ class ts extends Component {
           name: "details",
           title: getI18nString("community.publishing.details"),
           defaultActive: !0,
-          numErrors: $W(["name", "categoryId", "description", "tags", "tagsV2"], n),
+          numErrors: countEnabledFeatures(["name", "categoryId", "description", "tags", "tagsV2"], n),
           children: [jsx(_$$A18, {
             value: metadata.name,
             onChange: e => {
@@ -1059,7 +1059,7 @@ class ts extends Component {
         }), this.renderPricingSection(metadata), jsxs(_$$A6, {
           name: "advanced",
           title: getI18nString("community.publishing.advanced"),
-          numErrors: $W(["supportContact", "publisherIds"], n),
+          numErrors: countEnabledFeatures(["supportContact", "publisherIds"], n),
           children: [jsx(_$$A1, {
             value: metadata.supportContact || "",
             onChange: e => {
@@ -1102,7 +1102,7 @@ class ts extends Component {
       }), jsx("div", {
         children: jsxs("div", {
           className: qr,
-          children: [$W(tr, n) ? jsxs("div", {
+          children: [countEnabledFeatures(tr, n) ? jsxs("div", {
             className: g()(PJ, YN),
             "data-testid": "publish-modal-footer-text",
             children: [jsx(SvgComponent, {
@@ -1178,7 +1178,7 @@ class ts extends Component {
       disabled: a,
       disabledMessage: n,
       defaultActive: this.props.isPaid,
-      numErrors: $W(["price"], this.state.formErrors),
+      numErrors: countEnabledFeatures(["price"], this.state.formErrors),
       children: jsx(eS, {
         figFile: this.props.figFile,
         hubFile: t,
@@ -1313,7 +1313,7 @@ let to = connect((e, t) => {
     teams: e.teams,
     commentsDisabled: u.metadata.commentsSetting === DropdownEnableState.ALL_DISABLED,
     authedProfilesById: e.authedProfilesById,
-    showToSCheckbox: xw(e),
+    showToSCheckbox: needsToAcceptCommunityTOS(e),
     wasPrototypeRevertingToFile: a?.viewer_mode === FTemplateCategoryType.PROTOTYPE && u.metadata.viewerMode !== FTemplateCategoryType.PROTOTYPE,
     isPaid: u.metadata.isPaid || !1
   };

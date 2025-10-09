@@ -393,7 +393,7 @@ import { A as _$$A2 } from '../figma_app/426577';
 import { hasContent, getTeamTemplateLg, isCooperTemplateAsset } from '../figma_app/427318';
 import { aE as _$$aE } from '../figma_app/433401';
 import { W1 } from '../figma_app/439493';
-import { q as _$$q4 } from '../figma_app/446378';
+import { templateService } from '../figma_app/446378';
 import { D as _$$D, ZB } from '../figma_app/451499';
 import { fullscreenValue } from '../figma_app/455680';
 import { useCurrentPlanUser, useIsProOrStudentPlan, useCurrentPrivilegedPlan, useCurrentPublicPlan } from '../figma_app/465071';
@@ -450,7 +450,7 @@ import { lB as _$$lB, tB as _$$tB, EE } from '../figma_app/731583';
 import { getSidebarSplitPosition, getColorFormat, shouldRenderRulers, getNudgeAmounts, EditorPreferencesApi } from '../figma_app/740163';
 import { renameNode, replaceSelection, setPropertiesPanelTab } from '../figma_app/741237';
 import { Jo } from '../figma_app/755783';
-import { az as _$$az, ce as _$$ce, d2 as _$$d2, xB as _$$xB, Co, EC, Ef, Fs, Hb, hc, Ku, Lm, Lo, mF, Tw, U_, YA } from '../figma_app/755939';
+import { isTemplatePreviewVisibleAtomFamily, templateSearchQueryAtomFamily, templateBrowsingModeAtomFamily, isTemplateUsedAtomFamily, templateRandomIdAtom, isTemplateFavoriteAtomFamily, TemplateBrowsingMode, isTemplateEditableAtomFamily, selectedTemplateAtomFamily, isTemplatePublishingAtomFamily, isTemplateSubMenuOpen, templateSourceAtom, clearTemplateMetadataAtom, TemplateSourceType, isTemplateSearchEnabledAtomFamily, templateCommunityFilterAtomFamily, isTemplateSelectorOpenAtomFamily } from '../figma_app/755939';
 import { AppStateTsApi, CooperHelpers, CooperTemplateTypesTsBindings, DesignGraphElements, DesignWorkspace, DiagramElementType, Fullscreen, GradientToolApi, ImageToolsBindings, ItemType, LayoutTabType, NodePropertyCategory, SceneGraphHelpers, SchemaJoinStatus, SelfDesignType, SocialMediaFormats, UIVisibilitySetting, VariableResolvedDataType, ViewType } from '../figma_app/763686';
 import { wV } from '../figma_app/779965';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
@@ -1283,7 +1283,7 @@ function td({
   let n = useSelector(e => e.search.sessionId);
   let l = useDispatch();
   let r = g5('import_from_design_search_bar');
-  let i = Xr(Lm);
+  let i = Xr(templateSourceAtom);
   let d = useCallback(e => {
     e === '' && n ? l(searchEndSession()) : e === '' || n || l(searchStartSession({
       entryPoint: ts
@@ -1317,7 +1317,7 @@ function td({
       iconClassName: _$$un,
       onBack: () => {
         i({
-          type: mF.ALL
+          type: TemplateSourceType.ALL
         });
       },
       onChange: d,
@@ -1341,7 +1341,7 @@ function tx({
   let l = useSelector(e => e.search.sessionId);
   let r = useDispatch();
   let i = v3();
-  let d = Xr(Tw);
+  let d = Xr(isTemplateSearchEnabledAtomFamily);
   let c = g5('search_bar');
   let u = i === Gu.NEW_FILE_MODAL;
   let x = useCallback(e => {
@@ -1453,12 +1453,12 @@ function tz({
   let x = _$$j2();
   let m = useMemo(() => [{
     type: _$$k2.TEXT,
-    id: mF.ALL,
+    id: TemplateSourceType.ALL,
     text: getI18nString('cooper.templates.explore')
   }], []);
   let h = useMemo(() => x || u ? [{
     type: _$$k2.TEXT,
-    id: mF.ORG,
+    id: TemplateSourceType.ORG,
     loading: u,
     text: c ? getI18nString('cooper.templates.from_plan_name', {
       planName: c
@@ -1469,7 +1469,7 @@ function tz({
     key: generateUUIDv4()
   }, ...Object.entries(i).map(([e]) => ({
     type: _$$k2.TEXT,
-    id: mF.USE_CASE,
+    id: TemplateSourceType.USE_CASE,
     text: function (e) {
       switch (e) {
         case 'SOCIAL':
@@ -1493,21 +1493,21 @@ function tz({
   let f = useMemo(() => [...m, ...h, ...g], [m, h, g]);
   return jsx(_$$j, {
     items: f,
-    selectedItemId: e.type === mF.START_FROM_SCRATCH ? mF.ALL : e.type,
-    selectedCategory: e.type === mF.USE_CASE ? e.useCase : void 0,
+    selectedItemId: e.type === TemplateSourceType.START_FROM_SCRATCH ? TemplateSourceType.ALL : e.type,
+    selectedCategory: e.type === TemplateSourceType.USE_CASE ? e.useCase : void 0,
     onItemSelected: e => {
       let n = e.id;
       switch (n) {
-        case mF.USE_CASE:
+        case TemplateSourceType.USE_CASE:
           let l = e.category;
           l ? (t({
-            type: mF.USE_CASE,
+            type: TemplateSourceType.USE_CASE,
             useCase: l
           }), s({
             sidebarItem: l
           })) : reportError(ServiceCategories.COMMUNITY, new Error('Missing useCase for use case view'));
           break;
-        case mF.ALL:
+        case TemplateSourceType.ALL:
           s({
             sidebarItem: 'explore'
           });
@@ -1515,7 +1515,7 @@ function tz({
             type: n
           });
           break;
-        case mF.ORG:
+        case TemplateSourceType.ORG:
           s({
             sidebarItem: 'from_plan_name'
           });
@@ -1523,7 +1523,7 @@ function tz({
             type: n
           });
           break;
-        case mF.START_FROM_SCRATCH:
+        case TemplateSourceType.START_FROM_SCRATCH:
           s({
             sidebarItem: 'new_blank_asset'
           });
@@ -1579,7 +1579,7 @@ function t$({
     scrollPosition,
     scrollRef,
     onScroll
-  } = Nd(mF.IMPORT_FROM_DESIGN);
+  } = Nd(TemplateSourceType.IMPORT_FROM_DESIGN);
   let {
     onShowSeparatorScroll
   } = gH();
@@ -2172,7 +2172,7 @@ function nc({
   onBackCallback: e
 }) {
   let t = v3();
-  let [n, l] = useAtomValueAndSetter(Lm);
+  let [n, l] = useAtomValueAndSetter(templateSourceAtom);
   let {
     scrollPosition,
     scrollRef,
@@ -2201,9 +2201,9 @@ function nc({
 }
 let nu = () => {
   let e = v3();
-  let [t] = useAtomValueAndSetter(Lm);
-  let n = Xr(Tw);
-  let [l, r] = useAtomValueAndSetter(Ku);
+  let [t] = useAtomValueAndSetter(templateSourceAtom);
+  let n = Xr(isTemplateSearchEnabledAtomFamily);
+  let [l, r] = useAtomValueAndSetter(isTemplateSubMenuOpen);
   let [i, o] = useAtomValueAndSetter(assetCategoryAtom);
   return useCallback(() => _$$r({
     templateType: SocialMediaFormats.CUSTOM,
@@ -2211,7 +2211,7 @@ let nu = () => {
       n(!1);
       e === Gu.LEFT_RAIL && o(AssetCategoryEnum.ASSETS);
     },
-    shouldInsertFrame: t.type === mF.NEW_TEMPLATE,
+    shouldInsertFrame: t.type === TemplateSourceType.NEW_TEMPLATE,
     shouldEnterGridView: e === Gu.NEW_FILE_MODAL,
     setDimensionsSubmenuOpen: r
   }), [e, t, n, o, r]);
@@ -2251,12 +2251,12 @@ function nm({
   iconUrl: t,
   templateTypes: n
 }) {
-  let [l, r] = useAtomValueAndSetter(Lm);
-  let i = Xr(Tw);
-  let [s, d] = useAtomValueAndSetter(Ku);
+  let [l, r] = useAtomValueAndSetter(templateSourceAtom);
+  let i = Xr(isTemplateSearchEnabledAtomFamily);
+  let [s, d] = useAtomValueAndSetter(isTemplateSubMenuOpen);
   let c = Xr(assetCategoryAtom);
-  let u = Xr(_$$az);
-  let x = Xr(hc);
+  let u = Xr(isTemplatePreviewVisibleAtomFamily);
+  let x = Xr(isTemplatePublishingAtomFamily);
   let {
     numColumns,
     containerRef
@@ -2293,7 +2293,7 @@ function nm({
           _$$r({
             templateType: e.type,
             closeTemplatePicker: () => i(!1),
-            shouldInsertFrame: l.type === mF.NEW_TEMPLATE,
+            shouldInsertFrame: l.type === TemplateSourceType.NEW_TEMPLATE,
             shouldEnterGridView: !1,
             setDimensionsSubmenuOpen: d,
             setActiveTab: c,
@@ -2310,11 +2310,11 @@ function nh({
   iconUrl: t,
   templateTypes: n
 }) {
-  let [l, r] = useAtomValueAndSetter(Lm);
-  let [i, a] = useAtomValueAndSetter(Ku);
-  let s = Xr(Tw);
+  let [l, r] = useAtomValueAndSetter(templateSourceAtom);
+  let [i, a] = useAtomValueAndSetter(isTemplateSubMenuOpen);
+  let s = Xr(isTemplateSearchEnabledAtomFamily);
   let d = Xr(assetCategoryAtom);
-  let c = Xr(_$$az);
+  let c = Xr(isTemplatePreviewVisibleAtomFamily);
   return jsxs('div', {
     children: [jsx(t8, {
       title: getI18nString('cooper.templates.blank_title_assets', {
@@ -2328,7 +2328,7 @@ function nh({
         onPointerDown: () => _$$r({
           templateType: e.type,
           closeTemplatePicker: () => s(!1),
-          shouldInsertFrame: l.type === mF.NEW_TEMPLATE,
+          shouldInsertFrame: l.type === TemplateSourceType.NEW_TEMPLATE,
           shouldEnterGridView: !1,
           setDimensionsSubmenuOpen: a,
           setActiveTab: d,
@@ -2341,13 +2341,13 @@ function nh({
 function ng({
   hideNewTemplateTile: e = !1
 }) {
-  let t = useAtomWithSubscription(Lm);
-  let n = Xr(Tw);
-  let [l, r] = useAtomValueAndSetter(Ku);
+  let t = useAtomWithSubscription(templateSourceAtom);
+  let n = Xr(isTemplateSearchEnabledAtomFamily);
+  let [l, r] = useAtomValueAndSetter(isTemplateSubMenuOpen);
   let i = Xr(assetCategoryAtom);
-  let a = Xr(Lm);
-  let s = Xr(_$$az);
-  let c = Xr(hc);
+  let a = Xr(templateSourceAtom);
+  let s = Xr(isTemplatePreviewVisibleAtomFamily);
+  let c = Xr(isTemplatePublishingAtomFamily);
   let u = _$$j2() && !e;
   let x = _$$aZ();
   let m = (u ? CooperTemplateTypesTsBindings?.getShortenedExploreNewAssetTemplateGroups() : CooperTemplateTypesTsBindings?.getExploreNewAssetTemplateGroups()) ?? [];
@@ -2356,7 +2356,7 @@ function ng({
       title: getI18nString('cooper.templates.new_blank_asset'),
       onClick: () => {
         a({
-          type: mF.START_FROM_SCRATCH
+          type: TemplateSourceType.START_FROM_SCRATCH
         });
       },
       trackingProperties: {
@@ -2376,7 +2376,7 @@ function ng({
             _$$r({
               templateType: l.type,
               closeTemplatePicker: () => n(!1),
-              shouldInsertFrame: t.type === mF.NEW_TEMPLATE,
+              shouldInsertFrame: t.type === TemplateSourceType.NEW_TEMPLATE,
               shouldEnterGridView: !1,
               setDimensionsSubmenuOpen: r,
               setActiveTab: i,
@@ -2635,7 +2635,7 @@ function nH({
 function nX({
   libraryKey: e
 }) {
-  let [t, n] = useAtomValueAndSetter(Lm);
+  let [t, n] = useAtomValueAndSetter(templateSourceAtom);
   let l = VU();
   let r = useDispatch();
   let i = useLibraries([_$$l(e)]);
@@ -2646,7 +2646,7 @@ function nX({
   let g = x.data.template_name;
   let f = x.data.description;
   let j = useSelector(e => e.search.sessionId);
-  let y = useAtomWithSubscription(_$$ce);
+  let y = useAtomWithSubscription(templateSearchQueryAtomFamily);
   let E = useMemo(() => [...h].sort(go), [h]);
   if (!getFeatureFlags().buzz_video_export) {
     for (let e of E) e.components = e.components.filter(e => !e.has_video);
@@ -2654,8 +2654,8 @@ function nX({
   }
   let v = useCallback(() => {
     j && y.length === 0 && r(searchEndSession());
-    n(t.type === mF.TEMPLATES ? t.parentView : {
-      type: mF.ALL
+    n(t.type === TemplateSourceType.TEMPLATES ? t.parentView : {
+      type: TemplateSourceType.ALL
     });
   }, [j, y, r, n, t]);
   if (x.status !== 'loaded' || u) return jsx(_$$ah, {});
@@ -2665,7 +2665,7 @@ function nX({
     error: !0,
     icon: VisualBellIcon.EXCLAMATION
   })), n({
-    type: mF.ALL
+    type: TemplateSourceType.ALL
   }));
   let T = d[0];
   T && !isPublishedLibraryWithAssets(T) && (T = void 0);
@@ -2771,7 +2771,7 @@ function nQ({
 }) {
   let x = 'insert-cooper-template';
   let m = trackFileEventWithStore();
-  let h = Xr(Tw);
+  let h = Xr(isTemplateSearchEnabledAtomFamily);
   let g = isNotInFocusedNodeView();
   let f = v3();
   let b = useCurrentFileKey();
@@ -3102,8 +3102,8 @@ function le({
   libraryKey: t,
   section: n
 }) {
-  let l = Xr(Lm);
-  let r = useAtomWithSubscription(Lm);
+  let l = Xr(templateSourceAtom);
+  let r = useAtomWithSubscription(templateSourceAtom);
   let {
     name,
     imageUrl,
@@ -3125,7 +3125,7 @@ function le({
         templateLibraryKey: t
       });
       l({
-        type: mF.TEMPLATES,
+        type: TemplateSourceType.TEMPLATES,
         parentView: r,
         libraryKey: t
       });
@@ -3211,9 +3211,9 @@ function lb({
   requestLoadMore: r,
   numPlaceholderTiles: i
 }) {
-  let a = useAtomWithSubscription(EC);
-  let s = useAtomWithSubscription(_$$xB);
-  let d = useAtomWithSubscription(Fs);
+  let a = useAtomWithSubscription(isTemplateFavoriteAtomFamily);
+  let s = useAtomWithSubscription(isTemplateUsedAtomFamily);
+  let d = useAtomWithSubscription(isTemplateEditableAtomFamily);
   let {
     isLoading,
     libraryKeyToPublishedLibrary,
@@ -3285,7 +3285,7 @@ function l_({
   template: e,
   libraryKey: t
 }) {
-  let n = Xr(_$$d2);
+  let n = Xr(templateBrowsingModeAtomFamily);
   let {
     name,
     imageUrl,
@@ -3301,7 +3301,7 @@ function l_({
     libraryKey: t,
     onClick: () => {
       n({
-        type: Ef.BROWSING_TEMPLATE,
+        type: TemplateBrowsingMode.BROWSING_TEMPLATE,
         libraryKey: t
       });
     },
@@ -3337,8 +3337,8 @@ let ly = {
   }
 };
 function lE() {
-  let e = Xr(_$$az);
-  let [t, n] = useAtomValueAndSetter(Hb);
+  let e = Xr(isTemplatePreviewVisibleAtomFamily);
+  let [t, n] = useAtomValueAndSetter(selectedTemplateAtomFamily);
   let l = M1();
   let r = t?.name ?? l;
   return r ? jsx(tQ, {
@@ -3359,21 +3359,21 @@ function lv() {
   let t = _$$j2();
   let n = isBuzzImportFromDesignEnabled();
   let l = _$$aZ();
-  let r = useAtomWithSubscription(Lm);
+  let r = useAtomWithSubscription(templateSourceAtom);
   let {
     resetScrollTop
-  } = Nd(mF.ALL);
-  let s = Xr(Lm);
+  } = Nd(TemplateSourceType.ALL);
+  let s = Xr(templateSourceAtom);
   let d = useCurrentPrivilegedPlan('CooperTemplateAllView');
-  useEffect(() => () => resetScrollTop([mF.ALL]), [resetScrollTop]);
-  return r.type === mF.ALL ? jsx(Fragment, {
+  useEffect(() => () => resetScrollTop([TemplateSourceType.ALL]), [resetScrollTop]);
+  return r.type === TemplateSourceType.ALL ? jsx(Fragment, {
     children: jsxs(RecordingScrollContainer, {
       className: na,
       children: [t && n() && jsx(lu, {
         onMakeATemplateSelected: l,
         onStartFromDesignSelected() {
           s({
-            type: mF.IMPORT_FROM_DESIGN
+            type: TemplateSourceType.IMPORT_FROM_DESIGN
           });
         }
       }), jsx(ng, {
@@ -3389,7 +3389,7 @@ function lv() {
     })
   }) : jsx(nc, {
     onBackCallback: () => s({
-      type: mF.ALL
+      type: TemplateSourceType.ALL
     })
   });
 }
@@ -3399,12 +3399,12 @@ function lT() {
     scrollRef,
     onScroll,
     resetScrollTop
-  } = Nd(mF.ALL);
-  let [r, i] = useAtomValueAndSetter(_$$az);
+  } = Nd(TemplateSourceType.ALL);
+  let [r, i] = useAtomValueAndSetter(isTemplatePreviewVisibleAtomFamily);
   useEffect(() => {
     r && i(!1);
   }, [r, i]);
-  useEffect(() => () => resetScrollTop([mF.ALL]), [resetScrollTop]);
+  useEffect(() => () => resetScrollTop([TemplateSourceType.ALL]), [resetScrollTop]);
   return jsx(RecordingScrollContainer, {
     className: nd,
     scrollContainerRef: scrollRef,
@@ -3414,7 +3414,7 @@ function lT() {
   });
 }
 function lI() {
-  let e = Xr(Lm);
+  let e = Xr(templateSourceAtom);
   let t = useCurrentUserOrg();
   let n = _$$j2();
   let [{
@@ -3428,7 +3428,7 @@ function lI() {
   let a = i ? l?.slice(0, YS) : l;
   let s = a && a.length > 0;
   let d = i ? () => e({
-    type: mF.ORG
+    type: TemplateSourceType.ORG
   }) : void 0;
   let c = jsx(t8, {
     title: getI18nString('cooper.templates.from_org_name', {
@@ -3465,7 +3465,7 @@ function lI() {
   });
 }
 let lS = liveStoreInstance.Query({
-  fetch: async e => e ? await _$$q4.getSearchPaginated({
+  fetch: async e => e ? await templateService.getSearchPaginated({
     orgId: e,
     size: 8,
     from: 0,
@@ -3477,8 +3477,8 @@ function lk({
   name: t,
   dimensions: n
 }) {
-  let l = Xr(_$$az);
-  let r = Xr(Hb);
+  let l = Xr(isTemplatePreviewVisibleAtomFamily);
+  let r = Xr(selectedTemplateAtomFamily);
   let i = jv(e);
   return i ? jsx(t8, {
     title: i,
@@ -3502,7 +3502,7 @@ function lC({
   name: t,
   dimensions: n
 }) {
-  let l = useAtomWithSubscription(Co);
+  let l = useAtomWithSubscription(templateRandomIdAtom);
   let {
     category_slug,
     tags_slug
@@ -3570,16 +3570,16 @@ function lz({
   includeCuratedAssets: s = !1,
   isAssetTypeView: c = !1
 }) {
-  let u = useAtomWithSubscription(Co);
+  let u = useAtomWithSubscription(templateRandomIdAtom);
   let x = VU();
-  let p = useAtomWithSubscription(Lm);
+  let p = useAtomWithSubscription(templateSourceAtom);
   let {
     scrollPosition,
     scrollRef,
     onScroll
   } = Nd(p.type);
   let f = useSelectedCooperFrameId();
-  let b = useAtomWithSubscription(Hb);
+  let b = useAtomWithSubscription(selectedTemplateAtomFamily);
   let j = s && !!n && n.length > 0 && !l;
   let y = {
     resourceType: [ResourceTypeEnum.COOPER_TEMPLATE_ASSET],
@@ -3750,7 +3750,7 @@ function lR() {
 function lw({
   plan: e
 }) {
-  let t = Xr(Lm);
+  let t = Xr(templateSourceAtom);
   let n = useCurrentPublicPlan('CooperTemplateAllViewTeamTemplateSection');
   let l = useIsProOrStudentPlan(n).unwrapOr(!1);
   let {
@@ -3796,7 +3796,7 @@ function lw({
   let s = templatesByTeam.templates;
   let d = a ? () => {
     t({
-      type: mF.ORG
+      type: TemplateSourceType.ORG
     });
   } : void 0;
   return jsxs(Fragment, {
@@ -3898,19 +3898,19 @@ function lD({
     teamId: e,
     editorType: FFileType.COOPER
   });
-  let a = Xr(Lm);
+  let a = Xr(templateSourceAtom);
   let {
     scrollPosition,
     scrollRef,
     onScroll
-  } = Nd(mF.TEAM);
+  } = Nd(TemplateSourceType.TEAM);
   return jsxs(Fragment, {
     children: [jsx(tQ, {
       title: t,
       onBack: () => n ? a({
-        type: mF.ORG
+        type: TemplateSourceType.ORG
       }) : a({
-        type: mF.ALL
+        type: TemplateSourceType.ALL
       })
     }), templatesByTeam ? jsx(RecordingScrollContainer, {
       className: ns,
@@ -3969,7 +3969,7 @@ function lV({
     scrollPosition,
     scrollRef,
     onScroll
-  } = Nd(mF.ORG);
+  } = Nd(TemplateSourceType.ORG);
   let i = useCurrentPublicPlan('CooperTemplateOrgView').transform(e => e.tier === FPlanNameType.ENTERPRISE);
   let {
     yourTemplates,
@@ -4092,7 +4092,7 @@ function lU({
   targetRef: r,
   scrollRef: i
 }) {
-  let a = Xr(Lm);
+  let a = Xr(templateSourceAtom);
   return e ? e.type === 'org_plus' ? jsx(Fragment, {
     children: e.data.map(e => jsx('div', {
       ref: l === e.teamId ? r : null,
@@ -4101,7 +4101,7 @@ function lU({
         templates: e.templates,
         teamId: e.teamId,
         onSeeAllClick: e.totalTemplatesByTeam > YS ? () => a({
-          type: mF.TEAM,
+          type: TemplateSourceType.TEAM,
           teamId: e.teamId,
           displayName: e.teamName ?? ''
         }) : void 0
@@ -4183,7 +4183,7 @@ function lX({
 function lY({
   libraryKey: e
 }) {
-  let t = Xr(_$$d2);
+  let t = Xr(templateBrowsingModeAtomFamily);
   let n = VU();
   let l = useDispatch();
   let r = useLibraries([_$$l(e)]);
@@ -4200,7 +4200,7 @@ function lY({
     error: !0,
     icon: VisualBellIcon.EXCLAMATION
   })), t({
-    type: Ef.DEFAULT
+    type: TemplateBrowsingMode.DEFAULT
   }));
   let g = i[0];
   g && !isPublishedLibraryWithAssets(g) && (g = void 0);
@@ -4213,7 +4213,7 @@ function lY({
         showText: !n
       }) : void 0,
       onBack: () => t({
-        type: Ef.DEFAULT
+        type: TemplateBrowsingMode.DEFAULT
       })
     }), jsx(RecordingScrollContainer, {
       className: cssBuilderInstance.hFull.$,
@@ -4272,17 +4272,17 @@ function lq({
   });
 }
 function lJ() {
-  let e = Xr(_$$ce);
-  let t = Xr(_$$d2);
-  let n = Xr(Lo);
-  let l = Xr(Lm);
+  let e = Xr(templateSearchQueryAtomFamily);
+  let t = Xr(templateBrowsingModeAtomFamily);
+  let n = Xr(clearTemplateMetadataAtom);
+  let l = Xr(templateSourceAtom);
   return useCallback(() => {
     e('');
     l({
-      type: mF.ALL
+      type: TemplateSourceType.ALL
     });
     t({
-      type: Ef.DEFAULT
+      type: TemplateBrowsingMode.DEFAULT
     });
     n();
   }, [e, l, t, n]);
@@ -4304,9 +4304,9 @@ function lQ() {
     setSearchQuery: _setSearchQuery,
     status
   } = _8(FFileType.DESIGN);
-  let h = useAtomWithSubscription(Lm);
-  let g = Xr(Lm);
-  let f = useAtomWithSubscription(_$$d2);
+  let h = useAtomWithSubscription(templateSourceAtom);
+  let g = Xr(templateSourceAtom);
+  let f = useAtomWithSubscription(templateBrowsingModeAtomFamily);
   let b = useAtomWithSubscription(openFileKeyAtom);
   let j = useCurrentPrivilegedPlan('CooperTemplateContent');
   let y = lJ();
@@ -4314,42 +4314,42 @@ function lQ() {
     y();
   }, [y]);
   _$$a2({
-    atom: Co
+    atom: templateRandomIdAtom
   });
-  let E = !trimmedSearchQuery && h.type !== mF.IMPORT_FROM_DESIGN;
-  let v = f.type === Ef.DEFAULT && h.type !== mF.IMPORT_FROM_DESIGN;
-  let T = h.type === mF.IMPORT_FROM_DESIGN;
+  let E = !trimmedSearchQuery && h.type !== TemplateSourceType.IMPORT_FROM_DESIGN;
+  let v = f.type === TemplateBrowsingMode.DEFAULT && h.type !== TemplateSourceType.IMPORT_FROM_DESIGN;
+  let T = h.type === TemplateSourceType.IMPORT_FROM_DESIGN;
   let I = null;
   switch (h.type) {
-    case mF.ALL:
-    case mF.START_FROM_SCRATCH:
+    case TemplateSourceType.ALL:
+    case TemplateSourceType.START_FROM_SCRATCH:
       I = jsx(lv, {});
       break;
-    case mF.NEW_TEMPLATE:
+    case TemplateSourceType.NEW_TEMPLATE:
       I = jsx(nc, {});
       break;
-    case mF.ORG:
+    case TemplateSourceType.ORG:
       I = j.status === 'loaded' ? jsx(lV, {
         plan: j.data
       }) : null;
       break;
-    case mF.TEAM:
+    case TemplateSourceType.TEAM:
       I = jsx(lD, {
         teamId: h.teamId,
         displayName: h.displayName
       });
       break;
-    case mF.TEMPLATES:
+    case TemplateSourceType.TEMPLATES:
       I = jsx(nX, {
         libraryKey: h.libraryKey
       });
       break;
-    case mF.USE_CASE:
+    case TemplateSourceType.USE_CASE:
       I = jsx(lq, {
         useCase: h.useCase
       });
       break;
-    case mF.IMPORT_FROM_DESIGN:
+    case TemplateSourceType.IMPORT_FROM_DESIGN:
       I = jsx(tD, {
         files,
         debouncedSearchQuery,
@@ -4378,7 +4378,7 @@ function lQ() {
           onViewSelected: e => g(e)
         }), jsx('div', {
           className: 'cooper_template_picker--pickerMainContent--3TeJ9',
-          children: trimmedSearchQuery ? f.type === Ef.DEFAULT ? jsx(lb, {
+          children: trimmedSearchQuery ? f.type === TemplateBrowsingMode.DEFAULT ? jsx(lb, {
             trimmedSearchQuery,
             templateResults,
             internalAssetResults,
@@ -4416,7 +4416,7 @@ function l5({
 }
 function l2() {
   let e = useAppModelProperty('isReadOnly');
-  let t = useAtomWithSubscription(Tw);
+  let t = useAtomWithSubscription(isTemplateSearchEnabledAtomFamily);
   let n = _$$pK();
   let l = useIsFullscreenReady();
   let r = XF();
@@ -10836,15 +10836,15 @@ function uu({
   let f = h && c;
   let b = e.current?.clientHeight || window.innerHeight;
   let j = useSelector(e => !e.mirror.appModel.isReadOnly);
-  let y = Xr(U_);
-  let E = Xr(Lm);
+  let y = Xr(templateCommunityFilterAtomFamily);
+  let E = Xr(templateSourceAtom);
   let v = useSelectedComponentLibraryKey();
   let T = useCallback(() => {
     v ? (y('INTERNAL'), E({
-      type: mF.TEMPLATES,
+      type: TemplateSourceType.TEMPLATES,
       libraryKey: v,
       parentView: {
-        type: mF.ALL
+        type: TemplateSourceType.ALL
       }
     }), l(AssetCategoryEnum.TEMPLATES)) : (l(AssetCategoryEnum.TEMPLATES), y('COMMUNITY'));
   }, [l, y, v, E]);
@@ -12991,7 +12991,7 @@ function x1() {
   });
 }
 function x5() {
-  let e = useAtomWithSubscription(Hb);
+  let e = useAtomWithSubscription(selectedTemplateAtomFamily);
   let {
     category_slug,
     tags_slug
@@ -13009,17 +13009,17 @@ function x5() {
   };
 }
 function x2() {
-  let [e, t] = useAtomValueAndSetter(U_);
-  let n = useAtomWithSubscription(Lm);
-  let l = useAtomWithSubscription(_$$d2);
-  let r = useAtomWithSubscription(_$$az);
+  let [e, t] = useAtomValueAndSetter(templateCommunityFilterAtomFamily);
+  let n = useAtomWithSubscription(templateSourceAtom);
+  let l = useAtomWithSubscription(templateBrowsingModeAtomFamily);
+  let r = useAtomWithSubscription(isTemplatePreviewVisibleAtomFamily);
   let i = _$$j2();
   let s = Gi();
   let {
     teamTemplates,
     isLoading
   } = wv(FFileType.COOPER, void 0, i);
-  let [u, x] = useAtomValueAndSetter(hc);
+  let [u, x] = useAtomValueAndSetter(isTemplatePublishingAtomFamily);
   let {
     searchQuery,
     setSearchQuery,
@@ -13048,20 +13048,20 @@ function x2() {
     k = r && categorySlug ? jsx(x1, {}) : jsx(lT, {});
   } else {
     switch (n.type) {
-      case mF.ALL:
-      case mF.ORG:
-      case mF.IMPORT_FROM_DESIGN:
+      case TemplateSourceType.ALL:
+      case TemplateSourceType.ORG:
+      case TemplateSourceType.IMPORT_FROM_DESIGN:
         k = v.status === 'loaded' ? jsx(lV, {
           plan: v.data
         }) : null;
         break;
-      case mF.TEAM:
+      case TemplateSourceType.TEAM:
         k = jsx(lD, {
           teamId: n.teamId,
           displayName: n.displayName
         });
         break;
-      case mF.TEMPLATES:
+      case TemplateSourceType.TEMPLATES:
         k = jsx(nX, {
           libraryKey: n.libraryKey
         });
@@ -13078,7 +13078,7 @@ function x2() {
     },
     children: jsxs('div', {
       className: 'x78zum5 xdt5ytf xou54vl x9f619 x5yr21d',
-      children: [n.type !== mF.TEMPLATES && jsxs('div', {
+      children: [n.type !== TemplateSourceType.TEMPLATES && jsxs('div', {
         className: 'x78zum5 xdt5ytf x1asosoz x167g77z x2lah0s',
         children: [jsx(tx, {
           searchQuery,
@@ -13114,7 +13114,7 @@ function x2() {
         })]
       }), jsx('div', {
         className: 'x1a2m2up x98rzlu x78zum5 xdt5ytf xgqtt45 xb3r6kr',
-        children: trimmedSearchQuery ? l.type === Ef.DEFAULT ? jsx(lb, {
+        children: trimmedSearchQuery ? l.type === TemplateBrowsingMode.DEFAULT ? jsx(lb, {
           trimmedSearchQuery,
           templateResults,
           internalAssetResults,
@@ -13174,7 +13174,7 @@ function x4() {
     I$(c);
   }, [c]);
   let u = useSelector(e => !e.mirror.appModel.isReadOnly);
-  let x = Xr(U_);
+  let x = Xr(templateCommunityFilterAtomFamily);
   let m = useSelectedCooperFrameId();
   let h = useRef(null);
   let g = function ({
@@ -13223,8 +13223,8 @@ function x4() {
   });
   let f = function () {
     let e = lJ();
-    let t = Xr(YA);
-    let n = Xr(_$$az);
+    let t = Xr(isTemplateSelectorOpenAtomFamily);
+    let n = Xr(isTemplatePreviewVisibleAtomFamily);
     return useCallback(({
       tab: l
     }) => {
@@ -13532,10 +13532,10 @@ function pu() {
 function px() {
   let [e, t] = useAtomValueAndSetter(assetCategoryAtom);
   let n = useSelectedComponentLibraryKey();
-  let l = Xr(Lm);
-  let r = Xr(U_);
+  let l = Xr(templateSourceAtom);
+  let r = Xr(templateCommunityFilterAtomFamily);
   let i = trackFileEventWithStore();
-  let c = Xr(_$$az);
+  let c = Xr(isTemplatePreviewVisibleAtomFamily);
   let u = isNotInFocusedNodeView();
   let x = useSelector(e => !e.mirror.appModel.isReadOnly);
   let m = cg();
@@ -13569,10 +13569,10 @@ function px() {
   let T = useCallback(i => {
     y(i);
     i === AssetCategoryEnum.TEMPLATES && e !== AssetCategoryEnum.TEMPLATES && n && (r('INTERNAL'), l({
-      type: mF.TEMPLATES,
+      type: TemplateSourceType.TEMPLATES,
       libraryKey: n,
       parentView: {
-        type: mF.ALL
+        type: TemplateSourceType.ALL
       }
     }));
     t(e === i ? AssetCategoryEnum.ASSETS : i);

@@ -31,7 +31,7 @@ class WidgetAPIClient {
     }))
   }
 
-  getWidgets<T = any>(params) {
+  getWidgets<T = any>(params = {}) {
     return this.validators.widgets.validate<T>(async ({
       xr: client,
     }) => await client.get('/api/widgets', APIParameterUtils.toAPIParameters(params)))

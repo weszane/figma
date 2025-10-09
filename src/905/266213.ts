@@ -6,7 +6,7 @@ import { RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
-import { fA, qN, $c, Iy, p9 } from "../figma_app/803787";
+import { canUserPublishToCommunity, hasPendingChangesAtom, hasAnyPublishableContentAtom, createHasAnyWellFormedAssetsAtomFamily, canEditAndHasChangesAtom } from "../figma_app/803787";
 import { LibraryPublishStatusEnum, PublishStatusEnum } from "../figma_app/633080";
 import { ConditionalKeyboardWrapper, useElementWithKeyboardArgs, LibraryModalSections } from "../905/66449";
 import { dD } from "../905/519113";
@@ -82,7 +82,7 @@ f.displayName = "PublishButton";
 export let $$_0 = connect(e => ({
   library: e.library,
   teams: e.teams,
-  canPublishComponents: fA(e),
+  canPublishComponents: canUserPublishToCommunity(e),
   openFile: e.openFile
 }))(function (e) {
   let {
@@ -92,10 +92,10 @@ export let $$_0 = connect(e => ({
     path: [LibraryModalSections.TabBodySection.Footer],
     column: 2
   });
-  let r = useAtomWithSubscription(qN);
-  let a = useAtomWithSubscription($c);
-  let o = useAtomWithSubscription(Iy(void 0));
-  let l = useAtomWithSubscription(p9);
+  let r = useAtomWithSubscription(hasPendingChangesAtom);
+  let a = useAtomWithSubscription(hasAnyPublishableContentAtom);
+  let o = useAtomWithSubscription(createHasAnyWellFormedAssetsAtomFamily(void 0));
+  let l = useAtomWithSubscription(canEditAndHasChangesAtom);
   return jsx(f, {
     buttonRef: ref,
     kbArgs,

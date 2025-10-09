@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { unsetSymbol } from "../905/17894";
 import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { findProfile, trimOrEmpty } from "../figma_app/740025";
-import { jr, Z7, MO } from "../figma_app/599979";
+import { isUserWorkspace, isTeamWorkspace, isOrgWorkspace } from "../figma_app/599979";
 import { profileServiceAPI } from "../905/608932";
 let $$d1 = 15;
 let c = RegExp(`^[a-zA-Z0-9_]{1,${$$d1}}$`);
@@ -14,19 +14,19 @@ function u(e) {
   let r = getFieldValueOrDefault(authorField, void 0);
   if (getFeatureFlags().ext_plugin_publish_rearch) {
     if (!canSetFieldValue(authorField)) return !1;
-    let e = r && (jr(r) && findProfile({
+    let e = r && (isUserWorkspace(r) && findProfile({
       userId: r.user_id,
       authedProfilesById
-    }) || Z7(r) && findProfile({
+    }) || isTeamWorkspace(r) && findProfile({
       teamId: r.team_id,
       authedProfilesById
-    }) || MO(r) && findProfile({
+    }) || isOrgWorkspace(r) && findProfile({
       orgId: r.org_id,
       authedProfilesById
     }));
     return !e || !e.public_at;
   }
-  let l = r && jr(r) && findProfile({
+  let l = r && isUserWorkspace(r) && findProfile({
     userId: r.user_id,
     authedProfilesById
   });

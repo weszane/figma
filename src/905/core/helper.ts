@@ -26,7 +26,7 @@ import { eX as _$$eX, nM as _$$nM } from '../../figma_app/276332';
 import { E8 } from '../../figma_app/633080';
 import { oH } from '../../figma_app/646357';
 import { Egt, Ez5, j0r, NfO, QCv, RN1, uQ6, y0x } from '../../figma_app/763686';
-import { bh } from '../../figma_app/803787';
+import { selectProcessedLocalVariableSets } from '../../figma_app/803787';
 import { Ag } from '../../figma_app/862289';
 import { deserializeJSX, serializeJSX } from '../../figma_app/964367';
 import { createVariableAlias, getAllStorageKeys, getStorageValue, normalizeBlendMode, processURL, setStorageValue } from '../modules';
@@ -1603,7 +1603,7 @@ export async function rM(variableId) {
   }
 
   // Get variable status from published state
-  const publishedVariables = bh(currentState);
+  const publishedVariables = selectProcessedLocalVariableSets(currentState);
   const variableInfo = publishedVariables[variableId];
   return processPublishStatus(variableInfo?.status);
 }

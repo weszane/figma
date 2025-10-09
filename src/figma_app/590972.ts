@@ -60,7 +60,7 @@ import { hideModal } from "../905/156213";
 import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { Yw, Of } from "../905/201596";
-import { Rv, mN } from "../figma_app/599979";
+import { getValidAuthorsForHubFile, getEditors } from "../figma_app/599979";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
@@ -540,10 +540,10 @@ function eR(e) {
   let n = selectUser();
   let o = useSelector(e => getCurrentUserOrgUser(e) ?? void 0, deepEqual);
   let l = useCurrentUserOrg();
-  let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
+  let d = useSelector(e => getValidAuthorsForHubFile(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let c = useSelector(e => e.authedProfilesById);
   let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
-  let p = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
+  let p = useMemo(async () => figFile ? (await getEditors(figFile)) ?? [] : [], [figFile]);
   let _ = useSceneGraphSelector();
   let h = _$$t3();
   return {

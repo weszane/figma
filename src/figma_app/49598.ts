@@ -12,7 +12,7 @@ import { maybeCreateSavepoint } from "../905/294113"
 import { VisualBellActions } from "../905/302958"
 import { getI18nString } from "../905/303541"
 import { createOptimistAction, createOptimistThunk } from "../905/350402"
-import { processHubFilesThunk } from "../905/359847"
+import { hubFileDelAll, hubFilePutAll, processHubFilesThunk } from "../905/359847"
 import { trackEventAnalytics } from "../905/449184"
 import { hubFileAPI } from "../905/473998"
 import { appendSearchParams } from "../905/508367"
@@ -26,16 +26,15 @@ import { createOptimistCommitAction, createOptimistRevertAction } from "../905/6
 import { setupLoadingStateHandler } from "../905/696711"
 import { liveStoreInstance } from "../905/713695"
 import { logError } from "../905/714362"
-import { l as _$$l } from "../905/716947"
 import { u as _$$u } from "../905/747030"
 import { AuthModal } from "../905/749159"
 import { getCurrentLiveGraphClient } from "../905/761735"
 import { FDocumentType, ITemplateType } from "../905/862883"
+import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/890368"
 import { resourceVersionsQuery } from "../905/909123"
 import { sendWithRetry } from "../905/910117"
-import { addAuthedCommunityProfileToHub, putCommunityProfile } from "../905/926523"
 import { hideDropdownAction, selectViewAction } from "../905/929976"
-import { z as _$$z } from "../905/931953"
+import { siteAPIService } from "../905/931953"
 import { UploadStatusEnum } from "../figma_app/10554"
 import { N as _$$N } from "../figma_app/23271"
 import { atomStoreManager } from "../figma_app/27355"
@@ -49,21 +48,21 @@ import { x as _$$x } from "../figma_app/256637"
 import { trackFileObjEvent } from "../figma_app/314264"
 import { HubEventType } from "../figma_app/350203"
 import { getCurrentSearchSessionId } from "../figma_app/387599"
-import { ZS } from "../figma_app/519839"
+import { executePublishProcess } from "../figma_app/519839"
 import { createPublishActionCreators } from "../figma_app/530167"
 import { triggerMissingFontPopover } from "../figma_app/557318"
 import { createAtomSetter } from "../figma_app/566371"
 import { AddOperationType, checkTeamFileRestrictions } from "../figma_app/598018"
-import { R1, Z2 } from "../figma_app/599979"
+import { findMediaIndexBySha1, uploadHubFileImages } from "../figma_app/599979"
 import { fileActionEnum } from "../figma_app/630077"
 import { LibrarySourceEnum } from "../figma_app/633080"
 import { PreviewMode } from "../figma_app/707808"
 import { findPublishedProfileForUser } from "../figma_app/740025"
 import { AppStateTsApi, PresentationValidationStatus, PrototypingTsApi } from "../figma_app/763686"
 import { isMobileUA } from "../figma_app/778880"
-import { AC, jO, x6 } from "../figma_app/803787"
+import { selectAllModuleLibraryItemsWithStatus, selectModuleLibraryItemsWithStatus, selectWellFormedModuleNodeIds } from "../figma_app/803787"
 
-let ep = ZS
+let ep = executePublishProcess
 let $$e_7 = createActionCreator("PUT_FIG_FILE_PUBLISHED_AS_HUB_FILE")
 let $$eh0 = createActionCreator("UPDATE_HUB_FILE_PAGE_TITILE")
 let $$em2 = createActionCreator("DEL_FIG_FILE_PUBLISHED_AS_HUB_FILE")
@@ -319,8 +318,8 @@ let $$ew13 = createOptimistThunk((e, t) => {
   let r = []
   let n = t.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE
   if (n) {
-    r = AC(e.getState())
-    let n = x6(e.getState())
+    r = selectWellFormedModuleNodeIds(e.getState())
+    let n = selectModuleLibraryItemsWithStatus(e.getState())
     let i = !!t.hubFileId && r.length > 0 && aB(Object.values(n), new Set(r))
     if (!t.hubFileId && r.length === 0 || i) {
       Dl(e.dispatch)
@@ -365,11 +364,11 @@ let $$ew13 = createOptimistThunk((e, t) => {
   }) => {
     if (!n || ep === null)
       return
-    let s = AC(e.getState())
-    let l = Object.values(jO(e.getState(), LibrarySourceEnum.HUBFILE)).map(e => e.node_id)
+    let s = selectWellFormedModuleNodeIds(e.getState())
+    let l = Object.values(selectAllModuleLibraryItemsWithStatus(e.getState(), LibrarySourceEnum.HUBFILE)).map(e => e.node_id)
     let d = AppStateTsApi.slideThemeLibBindings().renameThemeForTemplatePublish(t.name) ? l : s
     if (d.length > 0) {
-      r.library_key && AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(r.library_key))
+      r.library_key && AppStateTsApi?.canvasGrid().updateSourceLibraryKey(r.library_key)
       let {
         onPublishSuccess,
         onPublishProgress,
@@ -445,13 +444,13 @@ async function eO(e, t) {
     return new Error(e.data?.message || getI18nString("community.actions.could_not_connect_to_the_server"))
   })
   try {
-    r = await R1(thumbnailBuffer, carouselMedia || [], O)
+    r = await uploadHubFileImages(thumbnailBuffer, carouselMedia || [], O)
   }
   catch (e) {
     reportError(ServiceCategories.COMMUNITY, e)
     return new Error(getI18nString("community.actions.error_uploading_images_e"))
   }
-  let R = Z2(r?.carousel_images || [], customCarouselThumbnail)
+  let R = findMediaIndexBySha1(r?.carousel_images || [], customCarouselThumbnail)
   let L = {
     file_version_id: O,
     name,
@@ -518,7 +517,7 @@ let $$eR4 = createOptimistThunk(async (e, {
     thumbnailBuffer,
   } = t
   try {
-    i = await R1(thumbnailBuffer, carouselMedia || [], void 0, hubFileId)
+    i = await uploadHubFileImages(thumbnailBuffer, carouselMedia || [], void 0, hubFileId)
   }
   catch (t) {
     reportError(ServiceCategories.COMMUNITY, t)
@@ -529,7 +528,7 @@ let $$eR4 = createOptimistThunk(async (e, {
     }))
     return new Error(t)
   }
-  let O = Z2(i?.carousel_images || [], customCarouselThumbnail)
+  let O = findMediaIndexBySha1(i?.carousel_images || [], customCarouselThumbnail)
   let R = {
     name,
     description,
@@ -584,7 +583,7 @@ let eL = async (e) => {
     fileKey: t,
     productType: "sites",
   })
-  await _$$z.unpublishSite({
+  await siteAPIService.unpublishSite({
     fileKey: t,
   })
 }
@@ -768,7 +767,6 @@ let $$eV19 = createOptimistThunk((e, t) => {
   t === PreviewMode.FULLSCREEN && r.commentThreadId && delete r.commentThreadId
   e.dispatch(selectViewAction(r))
 })
-export { D3, L1, Sb } from "../905/359847"
 export const Af = $$eh0
 export const FO = $$em2
 export const N4 = $$eR4
@@ -791,3 +789,6 @@ export const vr = $$eU21
 export const wO = $$ev22
 export const yh = $$eD23
 export const zm = $$eM24
+export const D3 = hubFilePutAll
+export const L1 = hubFileDelAll
+export const Sb = processHubFilesThunk

@@ -125,7 +125,7 @@ import { filterNotNullish } from '../figma_app/656233';
 import { useOpenPlanInvoices } from '../figma_app/658324';
 import { useAppModelProperty, useIsProgressBarHiddenOrLocked } from '../figma_app/722362';
 import { useCurrentUserOrgUser } from '../figma_app/741211';
-import { Hk } from '../figma_app/755939';
+import { isTemplateDetailsVisibleAtomFamily } from '../figma_app/755939';
 import { CooperHelpers, Multiplayer, SchemaJoinStatus } from '../figma_app/763686';
 import { BrowserInfo } from '../figma_app/778880';
 import { fileApiHandler } from '../figma_app/787550';
@@ -1587,7 +1587,7 @@ let nn = {
     let {
       openSlidesPublishFlow
     } = _$$X();
-    let d = useAtomWithSubscription(Hk);
+    let d = useAtomWithSubscription(isTemplateDetailsVisibleAtomFamily);
     if (useEffect(() => {
       d && !isCurrentFileDraftTemplate() && setUserDraftTemplateKeyForCurrentFile();
     }, [isCurrentFileDraftTemplate, d, setUserDraftTemplateKeyForCurrentFile]), !a?.editorType || n || t || Object.keys(draftTemplateKeys).length === 0 || !isCurrentFileDraftTemplate() && !d) {

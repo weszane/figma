@@ -118,7 +118,7 @@ import { Yh } from "../figma_app/357047";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getResourceDataOrFallback } from "../905/419236";
 import { trackFileEventWithUser } from "../figma_app/901889";
-import { au } from "../figma_app/124493";
+import { hideJoinVotingSessionModal } from "../figma_app/124493";
 import { rE, CQ } from "../figma_app/186343";
 import { C3 } from "../figma_app/587765";
 import { Kd } from "../figma_app/121043";
@@ -886,7 +886,7 @@ export function $$t80({
       let l = r ? getResourceDataOrFallback(r.pageNodeId) : void 0;
       useEffect(() => {
         t && (t._select_page = async e => {
-          l === e && s(au({}));
+          l === e && s(hideJoinVotingSessionModal({}));
           await getSingletonSceneGraph().setCurrentPageAsync(e);
         });
       }, [s, t, l]);

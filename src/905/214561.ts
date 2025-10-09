@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { sha1Hex } from "../905/125019";
 import { eV } from "../905/889062";
-import { nK } from "../figma_app/599979";
+import { cleanupMediaObjectUrls } from "../figma_app/599979";
 import { $T } from "../figma_app/12535";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectUser } from "../905/372672";
@@ -26,7 +26,7 @@ export function $$c0(e) {
   useEffect(() => function () {
     (async () => {
       let e = (await c)?.thumbnailMedium;
-      e && nK(e);
+      e && cleanupMediaObjectUrls(e);
     })();
   }, [c]);
   return c;

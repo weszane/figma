@@ -4,14 +4,14 @@ import { atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/781591";
 import { createSelector } from "../vendor/925040";
 import { debugState } from "../905/407919";
-import { BT } from "../905/686934";
-import { ZS } from "../figma_app/519839";
+import { libraryPublishCallbacksSelectorAtom } from "../905/686934";
+import { executePublishProcess } from "../figma_app/519839";
 import { Se } from "../905/889062";
 import { Ol } from "../905/576221";
-import { vQ, p6 } from "../figma_app/803787";
+import { selectDeletedOrCooperComponentNodeIds, selectCooperComponents } from "../figma_app/803787";
 import { StagingStatusEnum } from "../figma_app/633080";
 var o = s;
-export let $$f3 = createSelector([vQ, p6], (e, t) => ({
+export let $$f3 = createSelector([selectDeletedOrCooperComponentNodeIds, selectCooperComponents], (e, t) => ({
   publishableComponentNodeIds: e,
   localComponents: Object.values(t)
 }));
@@ -37,20 +37,20 @@ export async function $$A1({
   savepointDescription: r
 }) {
   if (e.length > 0) return await new Promise((s, l) => {
-    debugState.dispatch(ZS({
+    debugState.dispatch(executePublishProcess({
       savepointDescription: r,
       itemsToPublish: new Set(e),
       publishScope: t,
       hubFileId: i,
       hideModalOnPublishRequestFinish: !1,
-      ...atomStoreManager.set(BT, {
+      ...atomStoreManager.set(libraryPublishCallbacksSelectorAtom, {
         onPublishSuccess: e => {
-          atomStoreManager.set(BT, void 0);
+          atomStoreManager.set(libraryPublishCallbacksSelectorAtom, void 0);
           s(o()(e, "dispatch"));
         },
         onPublishProgress: noop,
         onPublishError: e => {
-          atomStoreManager.set(BT, void 0);
+          atomStoreManager.set(libraryPublishCallbacksSelectorAtom, void 0);
           l(e);
         }
       })

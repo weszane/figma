@@ -35,7 +35,7 @@ import { Y5 } from '../figma_app/455680';
 import { throwTypeError } from '../figma_app/465776';
 import { buildCarouselMedia } from '../figma_app/471982';
 import { isAnyPublisher, isAcceptedPublisher } from '../figma_app/564095';
-import { Dd, En, Ii, l8, vC, Wl, xw } from '../figma_app/599979';
+import { isCreator, getDefaultPluginAuthor, isWorkspaceMatch, loadImage, validateCarouselImages, validateImage, needsToAcceptCommunityTOS } from '../figma_app/599979';
 import { sortByCreatedAt } from '../figma_app/656233';
 import { validateTaglineLength, getHubTypeString, trimOrEmpty, getValueOrDefault, MAX_RESOURCE_SIZE } from '../figma_app/740025';
 import { Rs } from '../figma_app/761870';
@@ -665,7 +665,7 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
     } else if ('manifest' in manifestSource) {
       try {
         isWidget = !!/containsWidget/.test(manifestSource.manifest!);
-      } catch { }
+      } catch {}
     }
   }
 
@@ -674,11 +674,11 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
     try {
       validateWithNoOpVm(manifest.editorType, editorTypePropType, 'manifest.editorType');
       editorType = manifest.editorType;
-    } catch { }
+    } catch {}
     try {
       validateWithNoOpVm(manifest.capabilities, capabilitiesPropType, 'manifest.capabilities');
       capabilities = manifest.capabilities;
-    } catch { }
+    } catch {}
   }
 
   // Update cached widget status
@@ -1144,7 +1144,7 @@ export function filterResourcesByMatch(resources: Record<string, any>, value: an
   Object.keys(resources).forEach(key => {
     const resource = resources[key];
     const matcher = useJY ? isAnyPublisher : isAcceptedPublisher;
-    if (Dd(resource, value) || matcher(resource, value)) {
+    if (isCreator(resource, value) || matcher(resource, value)) {
       result[key] = resource;
     }
   });
@@ -1195,7 +1195,7 @@ export function validatePluginCodeSize(code: string): number {
  * @returns Result of Wl.
  */
 export function validateExtensionIconImage(file: any): any {
-  return Wl(file, getI18nString('community.publishing.extension_icon_image'));
+  return validateImage(file, getI18nString('community.publishing.extension_icon_image'));
 }
 
 /**
@@ -1221,7 +1221,7 @@ export async function validateAndResizeIconImage(file: any, param2: any, param3:
  * @returns Result of Wl.
  */
 export function validateArtworkImage(file: any): any {
-  return Wl(file, 'Artwork image');
+  return validateImage(file, 'Artwork image');
 }
 
 /**
@@ -1256,7 +1256,7 @@ async function resizeImage(file: File, dimensions: {
     height
   } = dimensions;
   const objectUrl = URL.createObjectURL(file);
-  const image = await l8(objectUrl);
+  const image = await loadImage(objectUrl);
   try {
     if (!skipCheck && !isImageSizeValid(image, dimensions, allowMultiple)) {
       throw new Error(errorMsg);
@@ -1375,7 +1375,7 @@ export function getPublishingData(state: any, pluginId: string, resourceId: stri
   const pluginVersion = getPluginVersion(publishedResource);
   const hasPaymentsApi = manifest?.permissions?.includes('payments');
   try {
-    author = En(publishedResource, state);
+    author = getDefaultPluginAuthor(publishedResource, state);
   } catch {
     throw new Error('Unable to get Plugin Data. You might be trying to act on a personal plugin in an Org space.');
   }
@@ -1391,7 +1391,7 @@ export function getPublishingData(state: any, pluginId: string, resourceId: stri
     })), ...(pending?.map((e: any) => ({
       ...e,
       isPending: true
-    })) || [])] : []).reduce((arr: any[], item: any) => Ii(state.authedProfilesById[item.id], author) ? arr : arr.concat([{
+    })) || [])] : []).reduce((arr: any[], item: any) => isWorkspaceMatch(state.authedProfilesById[item.id], author) ? arr : arr.concat([{
       state: _$$d.OK,
       content: item
     }]), [])
@@ -1425,10 +1425,10 @@ export function getPublishingData(state: any, pluginId: string, resourceId: stri
     })).concat((pending ?? []).map((e: any) => ({
       ...e,
       isPending: true
-    }))).filter((item: any) => !Ii(state.authedProfilesById[item.id], author) && item.entity_type === TeamOrgType.USER),
+    }))).filter((item: any) => !isWorkspaceMatch(state.authedProfilesById[item.id], author) && item.entity_type === TeamOrgType.USER),
     commentsSetting: publishedResource.comments_setting || defaultPublishingData.commentsSetting,
     categoryId: publishedResource.category_id || defaultPublishingData.categoryId,
-    blockPublishingOnToS: xw(state),
+    blockPublishingOnToS: needsToAcceptCommunityTOS(state),
     playgroundFigFile: pluginVersion.playground_fig_file,
     playgroundFilePublishType: _$$J.Actions.NOOP,
     isPaid: !!publishedResource.monetized_resource_metadata || hasPaymentsApi,
@@ -1517,7 +1517,7 @@ export function validatePublishingData(data: any, manifest: PluginManifest, isWi
     errors.supportContact = getI18nString('community.publishing.support_contact_must_be_a_valid_email_or_url');
   }
   if (trimOrEmpty(data.iconSrc).length === 0) errors.iconImageError = getI18nString('community.publishing.icon_cant_be_empty');
-  errors.carouselMedia = vC(data.carouselMedia);
+  errors.carouselMedia = validateCarouselImages(data.carouselMedia);
   if (!data.categoryId) errors.categoryId = getI18nString('community.publishing.category_cant_be_empty');
   if (data.price === undefined || manifest.permissions?.includes('payments') || publishedResource?.third_party_m10n_status !== ProductStatus.FLAGGED) {
     // skip freemiumRequiredForMigrating
@@ -1574,7 +1574,7 @@ export function validatePublishingDataLengths(data: any): Record<string, any> {
   if (!data) return {};
   const errors: Record<string, any> = {};
   const nameLen = trimOrEmpty(data.name).length;
-  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long'); else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
+  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long');else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
   if (trimOrEmpty(data.description).length > 1e4) errors.description = getI18nString('community.publishing.description_must_be_at_most_10000_characters_long');
   if (trimOrEmpty(data.newVersionReleaseNotes).length > 1e4) errors.newVersionReleaseNotes = getI18nString('community.publishing.release_notes_must_be_at_most_10000_characters_long');
   if (trimOrEmpty(data.creatorPolicy).length > 1e4) errors.creatorPolicy = getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long');

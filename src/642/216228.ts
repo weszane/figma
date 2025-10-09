@@ -63,7 +63,7 @@ import { g as _$$g3 } from '../905/505662';
 import { getLibraryNames } from '../905/506188';
 import { LibraryIconWithTooltip } from '../905/511388';
 import { RecordableButton } from '../905/511649';
-import { RR as _$$RR } from '../905/514666';
+import { PublishingUIContext } from '../905/514666';
 import { dD } from '../905/519113';
 import { C as _$$C } from '../905/520159';
 import { Button, ButtonWide } from '../905/521428';
@@ -228,7 +228,7 @@ import { sF as _$$sF } from '../figma_app/777207';
 import { BrowserInfo } from '../figma_app/778880';
 import { l$ as _$$l$ } from '../figma_app/782261';
 import { parsePxNumber } from '../figma_app/783094';
-import { e_ as _$$e_, dM, F9, fA, MH } from '../figma_app/803787';
+import { selectLibrary, selectStateGroupLibraryItemsWithStatus, hasLocalOrPublishedContent, canUserPublishToCommunity, selectComponentLibraryItemsWithStatus } from '../figma_app/803787';
 import { BrowseCategoryRoute } from '../figma_app/805898';
 import { _2, hw, u2 } from '../figma_app/807786';
 import { defaultLibraryKeyAtom } from '../figma_app/825489';
@@ -607,7 +607,7 @@ function e2({
   let f = useDispatch();
   let x = _$$I(Cn.AssetsPanel);
   let y = useSelector(selectSceneGraph);
-  let _ = useSelector(F9);
+  let _ = useSelector(hasLocalOrPublishedContent);
   let b = useAtomWithSubscription(_$$T2);
   let C = x.searchOption?.type === _$$I2.ALL;
   let j = fV(e.library_key);
@@ -3163,9 +3163,9 @@ function r4() {
     hubFilesByLibraryKey
   } = _$$N4();
   let s = useSelector(selectOpenFile);
-  let r = useSelector(_$$e_);
-  let i = useSelector(MH);
-  let l = useSelector(dM);
+  let r = useSelector(selectLibrary);
+  let i = useSelector(selectComponentLibraryItemsWithStatus);
+  let l = useSelector(selectStateGroupLibraryItemsWithStatus);
   let a = useSelector(selectTeams);
   let o = useFigmaLibrariesEnabled();
   let d = Fl();
@@ -4360,12 +4360,12 @@ function nV({
       let e = useDispatch();
       let t = selectCurrentFile();
       let s = useSelector(e => e.teams);
-      let r = useSelector(fA);
+      let r = useSelector(canUserPublishToCommunity);
       let i = useCallback(() => {
         e(showModalHandler({
           type: dD,
           data: {
-            entrypoint: _$$RR.ASSET_PANEL_LIBRARY_CONTEXT_MENU
+            entrypoint: PublishingUIContext.ASSET_PANEL_LIBRARY_CONTEXT_MENU
           }
         }));
       }, [e]);

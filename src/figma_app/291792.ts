@@ -37,7 +37,7 @@ import { B as _$$B } from "../905/524020";
 import { d as _$$d } from "../905/647058";
 import { FFileType } from "../figma_app/191312";
 import { getPermissionsState } from "../figma_app/642025";
-import { p9 } from "../figma_app/803787";
+import { canEditAndHasChangesAtom } from "../figma_app/803787";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
 import { Yh } from "../figma_app/357047";
@@ -329,7 +329,7 @@ function ee() {
   }), [e, t]);
 }
 function et() {
-  let e = useAtomWithSubscription(p9);
+  let e = useAtomWithSubscription(canEditAndHasChangesAtom);
   return useMemo(() => ({
     isPublishingModalDisabled: !e
   }), [e]);

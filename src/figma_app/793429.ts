@@ -10,14 +10,14 @@ import { NM, Zl } from "../figma_app/311375";
 import { Q } from "../905/217916";
 import { getStyleSubscriptionInfo, getStyleSubscriptionName } from "../figma_app/646357";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
-import { cM } from "../figma_app/803787";
+import { selectStyledLibraryItemsWithStatus } from "../figma_app/803787";
 import { wi } from "../905/55146";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { uQ } from "../figma_app/151869";
 import { Ig, dc, rP } from "../figma_app/155647";
 import { QT } from "../figma_app/152690";
 export function $$T0(e = "") {
-  let t = useSelector(cM);
+  let t = useSelector(selectStyledLibraryItemsWithStatus);
   let r = useSelector(wi);
   let a = useMemo(() => Object.values(t).find(t => t.key === e), [t, e]);
   let s = useMemo(() => Object.values(r).find(t => t.key === e), [r, e]);

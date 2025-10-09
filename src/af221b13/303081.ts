@@ -202,7 +202,7 @@ import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P3, Mf, F5 } from "../5430/367577";
 import { A as _$$A31 } from "../figma_app/882803";
 import { e as _$$e7 } from "../905/621515";
-import { RB } from "../figma_app/599979";
+import { useIsPublisher } from "../figma_app/599979";
 import { N as _$$N4 } from "../figma_app/268271";
 import { p as _$$p } from "../figma_app/353099";
 import { _l, B$ } from "../figma_app/995208";
@@ -6026,7 +6026,7 @@ function st() {
 function si({
   resource: e
 }) {
-  return RB(e) ? null : jsx(Fragment, {
+  return useIsPublisher(e) ? null : jsx(Fragment, {
     children: jsx(_$$p, {
       featureFlag: "cmty_rdp_creator_modal",
       children: jsx(st, {})

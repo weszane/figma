@@ -8,7 +8,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { VisualBellActions } from "../905/302958";
 import { selectCurrentUser } from "../905/372672";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { z } from "../905/931953";
+import { siteAPIService } from "../905/931953";
 import { b } from "../905/875374";
 import { _t } from "../figma_app/171413";
 import { V7, TI, uV } from "../figma_app/359181";
@@ -89,7 +89,7 @@ export function $$I2({
             bundleId: null,
             error: !1
           });
-          await z.updateBundle({
+          await siteAPIService.updateBundle({
             fileKey: e,
             bundleId: r.siteBundle.id
           });

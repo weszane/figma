@@ -48,7 +48,7 @@ import { formatI18nMessage } from '../905/482208';
 import { z as _$$z2 } from '../905/491916';
 import { getLibraryName } from '../905/506188';
 import { l as _$$l } from '../905/509505';
-import { RR } from '../905/514666';
+import { PublishingUIContext } from '../905/514666';
 import { dD } from '../905/519113';
 import { Button, ButtonWide } from '../905/521428';
 import { o as _$$o } from '../905/530496';
@@ -145,7 +145,7 @@ import { jk as _$$jk, t_ as _$$t_, Bw, kK, mO, pk, S9, wy, Yy } from '../figma_a
 import { E1 } from '../figma_app/757606';
 import { Fullscreen, Multiplayer, PluginModalType } from '../figma_app/763686';
 import { sF } from '../figma_app/777207';
-import { $c, fA as _$$fA, p9, qN, y6 } from '../figma_app/803787';
+import { hasAnyPublishableContentAtom, canUserPublishToCommunity, canEditAndHasChangesAtom, hasPendingChangesAtom, createLibraryItemsAtomFamily } from '../figma_app/803787';
 import { z6 } from '../figma_app/805373';
 import { SR } from '../figma_app/852050';
 import { LargeLoadingSpinner } from '../figma_app/858013';
@@ -1915,7 +1915,7 @@ function tM({
 }) {
   let i = function () {
     let e = _$$Xm();
-    let t = useAtomWithSubscription(y6(e));
+    let t = useAtomWithSubscription(createLibraryItemsAtomFamily(e));
     let i = t.productComponents.modified.wellFormed.length;
     let n = t.styles.modified.wellFormed.length;
     return t.variableSets.modified.wellFormed.length + n + i + t.pageThumbnails.modified.length;
@@ -1934,10 +1934,10 @@ function tM({
   });
 }
 function tB() {
-  let e = useAtomWithSubscription(p9);
+  let e = useAtomWithSubscription(canEditAndHasChangesAtom);
   return {
     publishProgress: useSelector(e => e.library.publishProgress),
-    isPublished: useAtomWithSubscription(qN),
+    isPublished: useAtomWithSubscription(hasPendingChangesAtom),
     isPublishingModalEnabled: e
   };
 }
@@ -1980,7 +1980,7 @@ function tz({
 }
 let tH = () => {
   let e = useDispatch();
-  let t = useSelector(_$$fA);
+  let t = useSelector(canUserPublishToCommunity);
   let {
     sessionId
   } = useLibraryModalContextOptional() ?? {};
@@ -1989,7 +1989,7 @@ let tH = () => {
     e(showModalHandler({
       type: dD,
       data: {
-        entrypoint: RR.LIBRARY_MODAL_OVERVIEW,
+        entrypoint: PublishingUIContext.LIBRARY_MODAL_OVERVIEW,
         libraryModalSessionId: sessionId
       }
     }));
@@ -2349,7 +2349,7 @@ function id() {
       t(showModalHandler({
         type: dD,
         data: {
-          entrypoint: RR.LIBRARY_MODAL_UPSELL_UI3,
+          entrypoint: PublishingUIContext.LIBRARY_MODAL_UPSELL_UI3,
           libraryModalSessionId: sessionId
         }
       }));
@@ -2595,7 +2595,7 @@ function ib() {
   });
   let p = subscribedLibraries.status === 'loaded' && usedInThisFile.status === 'loaded' && missingLibraryKeys.status === 'loaded' && subscribedLibraries.data.length === 0 && usedInThisFile.data.length === 0 && missingLibraryKeys.data.length === 0;
   let m = useMemo(() => [subscribedLibraries, usedInThisFile, missingLibraryKeys].some(e => e.status === 'loading'), [missingLibraryKeys, subscribedLibraries, usedInThisFile]);
-  let h = useAtomWithSubscription($c);
+  let h = useAtomWithSubscription(hasAnyPublishableContentAtom);
   let {
     isPublishingModalEnabled
   } = tB();

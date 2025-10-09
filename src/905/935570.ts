@@ -7,7 +7,7 @@ import { APILoadingStatus } from "../905/520829";
 import { sendWithRetry } from "../905/910117";
 import { batchPutFileAction } from "../figma_app/78808";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { dU, GS } from "../figma_app/803787";
+import { selectStagedItemIdsWithContext, selectStagedItemIds } from "../figma_app/803787";
 let $$m3 = createContext({
   status: APILoadingStatus.SUCCESS,
   nodeIdToValidatedMoveInfo: Object.create(null)
@@ -78,7 +78,7 @@ export function $$f1() {
 }
 export function $$_0() {
   let e = $$f1();
-  return useSelector(t => e ? dU(t, e) : GS(t));
+  return useSelector(t => e ? selectStagedItemIdsWithContext(t, e) : selectStagedItemIds(t));
 }
 export const UJ = $$_0;
 export const Xm = $$f1;

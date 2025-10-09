@@ -1,616 +1,967 @@
-import { throwTypeError } from "../figma_app/465776";
-import { isNotNullish } from "../figma_app/95419";
-import { ServiceCategories } from "../905/165054";
-import { FirstDraftHelpers, LogToConsoleMode, Fullscreen } from "../figma_app/763686";
-import { StyleType } from "../figma_app/276332";
-import { getFeatureFlags } from "../905/601108";
-import { waitForAnimationFrame } from "../905/236856";
-import c from "../vendor/223926";
-import { createActionCreator } from "../905/73481";
-import { trackEventAnalytics } from "../905/449184";
-import { sendHistogram, sendMetric } from "../905/485103";
-import { PerfTimer } from "../905/609396";
-import { uploadToPresignedPost, UploadError } from "../905/623179";
-import { reportError } from "../905/11";
-import { logError, logWarning } from "../905/714362";
-import { handleAtomEvent } from "../905/502364";
-import { getI18nString } from "../905/303541";
-import { NotificationCategory } from "../905/170564";
-import { notificationActions } from "../905/463586";
-import { VisualBellActions } from "../905/302958";
-import { VisualBellIcon } from "../905/576487";
-import { createOptimistThunk } from "../905/350402";
-import { componentReplaceLocal } from "../905/879323";
-import { hideModal } from "../905/156213";
-import { postUserFlag } from "../905/985254";
-import { getSelectedFile } from "../905/766303";
-import { getLibrarySourceString } from "../905/853613";
-import { Hj } from "../figma_app/412398";
-import { tf } from "../905/295427";
-import { isStagedStatus, getContainingStateGroupNodeId } from "../figma_app/646357";
-import { aB, jx } from "../905/576221";
-import { maybeCreateSavepoint } from "../905/294113";
-import { MH, dM, cM, bh, x6, tK, Io } from "../figma_app/803787";
-import { getTeamById } from "../figma_app/598018";
-import { O as _$$O } from "../905/566074";
-import { StagingStatusEnum, PrimaryWorkflowEnum, LibraryPublishStatusEnum, PublishStatusEnum, DEFAULT_LIBRARY_LIMIT, NO_CONTAINING_STATE_GROUP_ID } from "../figma_app/633080";
-import { librariesAPI } from "../905/939602";
-import { Gh } from "../figma_app/707567";
-import { b as _$$b2 } from "../905/76245";
-import { I6, fn, p$ } from "../905/831303";
-import { jO, cc, UN, tZ } from "../905/573265";
-import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
-var u = c;
-let $$K1 = createActionCreator("START_PUBLISH");
-let $$Y5 = createActionCreator("PUBLISH_PROGRESS");
-let $$$3 = createActionCreator("PUBLISH_REQUEST_FINISHED");
-let $$X0 = createActionCreator("SAVE_PUBLISH_DESCRIPTION");
-let $$q2 = createOptimistThunk(e => {
-  e.dispatch(notificationActions.dequeue({
-    type: NotificationCategory.MOVE_COMPONENTS_PROMPT
-  }));
+import { reportError } from "../905/11"
+import { createActionCreator } from "../905/73481"
+import { b as _$$b2 } from "../905/76245"
+import { hideModal } from "../905/156213"
+import { ServiceCategories } from "../905/165054"
+import { NotificationCategory } from "../905/170564"
+import { waitForAnimationFrame } from "../905/236856"
+import { maybeCreateSavepoint } from "../905/294113"
+import { tf } from "../905/295427"
+import { VisualBellActions } from "../905/302958"
+import { getI18nString } from "../905/303541"
+import { createOptimistThunk } from "../905/350402"
+import { trackEventAnalytics } from "../905/449184"
+import { notificationActions } from "../905/463586"
+import { sendHistogram, sendMetric } from "../905/485103"
+import { handleAtomEvent } from "../905/502364"
+import { isShareableAssetType } from "../905/566074"
+import { handleLibraryPublishError, handleLibraryPublishInProgress, handleLibraryPublishSuccess, LibraryPublishErrorType } from "../905/573265"
+import { aB, jx } from "../905/576221"
+import { VisualBellIcon } from "../905/576487"
+import { getFeatureFlags } from "../905/601108"
+import { PerfTimer } from "../905/609396"
+import { UploadError, uploadToPresignedPost } from "../905/623179"
+import { logError, logWarning } from "../905/714362"
+import { getSelectedFile } from "../905/766303"
+import { fn, I6, p$ } from "../905/831303"
+import { getLibrarySourceString } from "../905/853613"
+import { componentReplaceLocal } from "../905/879323"
+import { librariesAPI } from "../905/939602"
+import { postUserFlag } from "../905/985254"
+import { isNotNullish } from "../figma_app/95419"
+import { StyleType } from "../figma_app/276332"
+import { Hj } from "../figma_app/412398"
+import { throwTypeError } from "../figma_app/465776"
+import { getTeamById } from "../figma_app/598018"
+import { DEFAULT_LIBRARY_LIMIT, LibraryPublishStatusEnum, NO_CONTAINING_STATE_GROUP_ID, PrimaryWorkflowEnum, PublishStatusEnum, StagingStatusEnum } from "../figma_app/633080"
+import { getContainingStateGroupNodeId, isStagedStatus } from "../figma_app/646357"
+import { Gh } from "../figma_app/707567"
+
+import { FirstDraftHelpers, Fullscreen, LogToConsoleMode } from "../figma_app/763686"
+import { selectComponentLibraryItemsWithStatus, selectLibraryPublishingMode, selectModuleLibraryItemsWithStatus, selectProcessedLocalVariables, selectProcessedLocalVariableSets, selectStateGroupLibraryItemsWithStatus, selectStyledLibraryItemsWithStatus } from "../figma_app/803787"
+import { updateLocalLibraryItemsThunk } from "../figma_app/864378"
+import { groupBy } from "lodash-es"
+
+// Renamed variables for clarity, added types, improved readability
+let startPublishAction = createActionCreator("START_PUBLISH")
+let publishProgressAction = createActionCreator("PUBLISH_PROGRESS")
+let publishRequestFinishedAction = createActionCreator("PUBLISH_REQUEST_FINISHED")
+let savePublishDescriptionAction = createActionCreator("SAVE_PUBLISH_DESCRIPTION")
+
+interface PublishThunkContext {
+  dispatch: (action: any) => void
+  getState: () => any
+}
+
+export let finishPublishThunk = createOptimistThunk((context: PublishThunkContext) => {
+  context.dispatch(notificationActions.dequeue({
+    type: NotificationCategory.MOVE_COMPONENTS_PROMPT,
+  }))
   handleAtomEvent({
-    id: "Finished publishing components"
-  });
-  e.dispatch($$$3());
-});
-let J = "library publish SSP";
-var Z = (e => (e.PublishStart = "publish_start", e.CreateSavepoint = "create_savepoint", e.GetPresignedPost = "get_presigned_post", e.UploadThumbnails = "upload_thumbnails", e.UploadParams = "upload_params", e.AssetValidation = "asset_validation", e.NonS3Error = "non_s3_error", e.GenericError = "generic_error", e))(Z || {});
-export let $$Q8 = createOptimistThunk((e, {
-  hubFileId: t,
-  localAssetsWithDenormalizedPublishInfo: r
-}) => {
-  let n = e.getState();
-  let i = getFeatureFlags().ds_remove_redux_library_status;
-  if (!i) {
-    let t = e => {
-      for (let t in e = {
-        ...e
-      }) isStagedStatus(e[t].status) ? e[t].status = StagingStatusEnum.DELETED : e[t].status === StagingStatusEnum.NEW && (e[t].status = StagingStatusEnum.NOT_STAGED);
-      return e;
-    };
-    let r = t(n.library.local.components);
-    let i = t(n.library.local.stateGroups);
-    let a = t(n.library.local.styles);
-    e.dispatch(componentReplaceLocal({
-      local: r,
-      type: PrimaryWorkflowEnum.COMPONENT
-    }));
-    e.dispatch(componentReplaceLocal({
-      local: i,
-      type: PrimaryWorkflowEnum.STATE_GROUP
-    }));
-    e.dispatch(componentReplaceLocal({
-      local: a,
-      type: PrimaryWorkflowEnum.STYLE
-    }));
-  }
-  e.dispatch($$Y5({
-    state: LibraryPublishStatusEnum.NONE
-  }));
-  e.dispatch($$eo4({
-    unpublishAll: i,
-    hubFileId: t,
-    localAssetsWithDenormalizedPublishInfo: r
-  }));
-});
-async function ee(e, t, r, n) {
-  let i = new PerfTimer("publish.client.generate_and_upload_thumbnails", {});
-  if (i.start(), !e.length) return {
-    s3Paths: [],
-    failedThumbnailNodeIds: [],
-    styleMetaByNodeId: {},
-    uploadDurationMs: 0,
-    encounteredNonS3PresignedPostError: !1
-  };
-  let s = e.length;
-  let o = 0;
-  let l = () => {
-    !function (e, t, r) {
-      e.dispatch($$Y5({
-        state: LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS,
-        progress: t,
-        publishType: r,
-        publishStartMs: et(e.getState().library.publishProgress)
-      }));
-    }(n, (o += 1) / s, t ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH);
-  };
-  let d = Object.create(null);
-  let c = [];
-  let u = [];
-  if (await Promise.all(e.map(async e => {
-    try {
-      let t = await scheduler.postTask(() => I6(e, r), {
-        priority: "user-blocking"
-      });
-      if (!t || 0 === t.length) throw Error("Unable to generate thumbnail");
-      let [n, i] = e.node_id.split(":").map(e => Number(e));
-      if (isNaN(n)) throw Error("Unable to parse sessionId");
-      if (isNaN(i)) throw Error("Unable to parse localId");
-      u.push({
-        sessionId: n,
-        localId: i,
-        thumbnail: t
-      });
-      e.type === PrimaryWorkflowEnum.STYLE && (d[e.node_id] = JSON.stringify(fn(e, r)));
-    } catch (t) {
-      logError("publish", "Failed to upload thumbnail for asset", {
-        guid: e.node_id
-      }, {
-        reportAsSentryError: !0
-      });
-      c.push(e.type === PrimaryWorkflowEnum.COMPONENT && e.containing_frame?.containingStateGroup?.nodeId || e.node_id);
-    } finally {
-      l();
-    }
-  })), 0 === u.length) return {
-    s3Paths: [],
-    failedThumbnailNodeIds: c,
-    styleMetaByNodeId: {},
-    uploadDurationMs: 0,
-    encounteredNonS3PresignedPostError: !1
-  };
-  let p = [];
-  for (; u.length;) p.push(u.splice(0, DEFAULT_LIBRARY_LIMIT));
-  let y = _$$b2.getThumbnailsBufferPresignedPostUrl(p.length);
-  let b = p.map(e => e.reduce(({
-    buffer: e,
-    offset: t,
-    guids: r
-  }, {
-    sessionId: n,
-    localId: i,
-    thumbnail: a
-  }) => (e.set([(0xff000000 & n) >> 24, (0xff0000 & n) >> 16, (65280 & n) >> 8, 255 & n, (0xff000000 & i) >> 24, (0xff0000 & i) >> 16, (65280 & i) >> 8, 255 & i, (0xff000000 & a.byteLength) >> 24, (0xff0000 & a.byteLength) >> 16, (65280 & a.byteLength) >> 8, 255 & a.byteLength], t), t += 12, e.set(a, t), t += a.byteLength, r.push(`${n}:${i}`), {
-    buffer: e,
-    offset: t,
-    guids: r
-  }), {
-    buffer: new Uint8Array(e.reduce((e, {
-      thumbnail: t
-    }) => e + t.byteLength + 12, 0)),
-    offset: 0,
-    guids: []
-  }));
-  let T = [];
-  let I = (await y).data.meta.presigned_posts;
-  let S = !1;
-  await Promise.allSettled(I.map(async ({
-    url: e,
-    fields: t
-  }) => {
-    let r = b.shift();
-    if (!r) {
-      reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, Error("Popped a concatenated buffer that does not exist"));
-      return;
-    }
-    try {
-      T.push(await uploadToPresignedPost(ServiceCategories.DESIGN_SYSTEMS_EDITOR, "uploadThumbnails", e, t, r.buffer, "application/octet-stream"));
-      sendHistogram("publish.thumbnails_buffer.bytes", r.buffer.byteLength);
-    } catch (e) {
-      e instanceof UploadError && (S = !0);
-      c.push(...r.guids);
-    }
-  }));
-  S && reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, Error("uploadThumbnails: encountered non-S3 presigned POST error"));
-  let v = i.stop();
-  v && trackEventAnalytics("Library generate and upload thumbnails", {
-    elapsedMs: v,
-    duration: v
-  }, {
-    forwardToDatadog: !0
-  });
-  return {
-    s3Paths: T,
-    styleMetaByNodeId: d,
-    failedThumbnailNodeIds: c,
-    uploadDurationMs: v,
-    encounteredNonS3PresignedPostError: S
-  };
+    id: "Finished publishing components",
+  })
+  context.dispatch(publishRequestFinishedAction())
+})
+
+// Error types enumeration for better type safety
+// enum LibraryPublishErrorType {
+//   PublishStart = "publish_start",
+//   CreateSavepoint = "create_savepoint",
+//   GetPresignedPost = "get_presigned_post",
+//   UploadThumbnails = "upload_thumbnails",
+//   UploadParams = "upload_params",
+//   AssetValidation = "asset_validation",
+//   NonS3Error = "non_s3_error",
+//   GenericError = "generic_error",
+// }
+
+// Refactored thunk for handling publish workflow
+interface PublishWorkflowParams {
+  hubFileId: string
+  localAssetsWithDenormalizedPublishInfo: Record<string, any>
 }
-function et(e) {
-  return e.state === LibraryPublishStatusEnum.NONE ? (logError(J, "Attempted to update progress while not assembling components", e), null) : e.publishStartMs;
-}
-function er(e, t, r, n) {
-  let i = et(e);
-  if (i) {
-    let e = performance.now() - i;
-    trackEventAnalytics(t, {
-      duration: e
-    });
-    sendHistogram(r, e, {
-      error: n
-    });
-  } else logError(J, "Publish start time was null");
-}
-function en(e, t, r, n, i, a, s, o) {
-  0 === t ? function (e, t, r, n) {
-    if (t.state === LibraryPublishStatusEnum.UPLOADING) {
-      let e = et(t);
-      if (e) {
-        let n = performance.now();
-        let i = n - e;
-        let a = r ? {
-          totalDurationMs: i
-        } : {
-          totalDurationMs: i,
-          uploadBuffersDurationMs: n - t.commitUpdatesDurationMs,
-          clientPreWorkDurationMs: t.clientPreWorkDurationMs,
-          createSavePointDurationMs: t.createSavePointDurationMs
-        };
-        trackEventAnalytics(`Client perceived ${t.publishType} duration`, a);
-        let s = getFeatureFlags().ssp_stop_client_gen_thumb_generation ? "true" : "false";
-        for (let [e, r] of Object.entries(a)) {
-          let n = `${t.publishType}.success.${e}`;
-          sendHistogram(n, r, {
-            skip_client_thumbnail: s
-          });
+
+export let handlePublishWorkflow = createOptimistThunk((context: PublishThunkContext, params: PublishWorkflowParams) => {
+  let state = context.getState()
+  let shouldRemoveReduxLibraryStatus = getFeatureFlags().ds_remove_redux_library_status
+
+  if (!shouldRemoveReduxLibraryStatus) {
+    // Helper function to update staging status
+    let updateStagingStatus = (items: Record<string, any>) => {
+      let updatedItems = { ...items }
+      for (let key in updatedItems) {
+        if (isStagedStatus(updatedItems[key].status)) {
+          updatedItems[key].status = StagingStatusEnum.DELETED
         }
-      } else logError(J, "Publish start time was null");
-    }
-    n({
-      publishProgress: t,
-      publishType: r ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
-      dispatch: e
-    });
-    e($$X0(""));
-  }(n, e, r, i) : function (e, t, r, n, i, a, s) {
-    let o = n ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH;
-    if (a && e($$X0(a)), s) {
-      i({
-        error: jO.NonS3PresignedPost,
-        publishType: o,
-        dispatch: e
-      });
-      return;
-    }
-    "number" != typeof r ? i({
-      error: jO.GenericError,
-      publishType: o,
-      dispatch: e
-    }) : (er(t, "Partial publish failure", `${o}.partial_error.duration`, "asset_validation"), i({
-      error: jO.PartialPublish,
-      publishType: o,
-      dispatch: e,
-      numPublishSkippedDueToError: r
-    }));
-  }(n, e, t, r, a, s, o);
-}
-export function $$ei6(e, t, r, n, i, a, s, o) {
-  trackEventAnalytics("Publish ended", {
-    savepointId: i.id,
-    hadException: a
-  });
-  en(e, t, r, n, s, o, i.description);
-  n($$q2());
-}
-let ea = async e => {
-  let t;
-  if (getFeatureFlags().first_draft_publish_ux && (e.publishAsFirstDraftKit || e.unpublishAll)) {
-    let r = FirstDraftHelpers.getLocalDesignSystemKits();
-    if (r.length > 1) logWarning("first_draft", "Attempting to publish a file with multiple kits", {
-      kitNames: r.map(e => e.name)
-    });else if (1 === r.length) {
-      let n = r[0];
-      if (!n) {
-        logWarning("first_draft", "No kit found for publishing", {
-          kits: r
-        });
-        return;
+        else if (updatedItems[key].status === StagingStatusEnum.NEW) {
+          updatedItems[key].status = StagingStatusEnum.NOT_STAGED
+        }
       }
-      t = await Hj(n.pageId, n.name, {
-        publishType: tf.LIBRARY_TYPE_INFO_UPDATE
-      }, e.firstDraftVariablesForTheme, e.unpublishAll);
+      return updatedItems
+    }
+
+    let updatedComponents = updateStagingStatus(state.library.local.components)
+    let updatedStateGroups = updateStagingStatus(state.library.local.stateGroups)
+    let updatedStyles = updateStagingStatus(state.library.local.styles)
+
+    context.dispatch(componentReplaceLocal({
+      local: updatedComponents,
+      type: PrimaryWorkflowEnum.COMPONENT,
+    }))
+    context.dispatch(componentReplaceLocal({
+      local: updatedStateGroups,
+      type: PrimaryWorkflowEnum.STATE_GROUP,
+    }))
+    context.dispatch(componentReplaceLocal({
+      local: updatedStyles,
+      type: PrimaryWorkflowEnum.STYLE,
+    }))
+  }
+
+  context.dispatch(publishProgressAction({
+    state: LibraryPublishStatusEnum.NONE,
+  }))
+
+  context.dispatch(executePublishProcess({
+    unpublishAll: shouldRemoveReduxLibraryStatus,
+    hubFileId: params.hubFileId,
+    localAssetsWithDenormalizedPublishInfo: params.localAssetsWithDenormalizedPublishInfo,
+  }))
+})
+
+// Thumbnail generation and upload function
+async function generateAndUploadThumbnails(
+  assets: any[],
+  isUnpublish: boolean,
+  thumbnails: any,
+  context: PublishThunkContext,
+) {
+  let perfTimer = new PerfTimer("publish.client.generate_and_upload_thumbnails", {})
+  if (perfTimer.start(), !assets.length) {
+    return {
+      s3Paths: [],
+      failedThumbnailNodeIds: [],
+      styleMetaByNodeId: {},
+      uploadDurationMs: 0,
+      encounteredNonS3PresignedPostError: false,
     }
   }
-  return t;
-};
-let $$es7 = createOptimistThunk(async (e, t = {}) => {
-  let r = e.getState();
-  let n = getSelectedFile(r);
-  let i = n?.key;
-  if (!i) {
-    logWarning("first_draft", "No file key found for publishing");
-    return;
+
+  let totalAssets = assets.length
+  let processedCount = 0
+
+  let updateProgress = () => {
+    context.dispatch(publishProgressAction({
+      state: LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS,
+      progress: (processedCount += 1) / totalAssets,
+      publishType: isUnpublish ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
+      publishStartMs: getPublishStartTime(context.getState().library.publishProgress),
+    }))
   }
-  let a = VisualBellActions.enqueue({
+
+  let styleMetadata: Record<string, string> = Object.create(null)
+  let failedNodeIds: string[] = []
+  let thumbnailData: Array<{ sessionId: number, localId: number, thumbnail: any }> = []
+
+  // Generate thumbnails for each asset
+  await Promise.all(assets.map(async (asset) => {
+    try {
+      let thumbnailBuffer = await scheduler.postTask(() => I6(asset, thumbnails), {
+        priority: "user-blocking",
+      })
+
+      if (!thumbnailBuffer || thumbnailBuffer.length === 0) {
+        throw new Error("Unable to generate thumbnail")
+      }
+
+      let [sessionId, localId] = asset.node_id.split(":").map((part: string) => Number(part))
+      if (isNaN(sessionId))
+        throw new Error("Unable to parse sessionId")
+      if (isNaN(localId))
+        throw new Error("Unable to parse localId")
+
+      thumbnailData.push({
+        sessionId,
+        localId,
+        thumbnail: thumbnailBuffer,
+      })
+
+      if (asset.type === PrimaryWorkflowEnum.STYLE) {
+        styleMetadata[asset.node_id] = JSON.stringify(fn(asset, thumbnails))
+      }
+    }
+    catch  {
+      logError("publish", "Failed to upload thumbnail for asset", {
+        guid: asset.node_id,
+      }, {
+        reportAsSentryError: true,
+      })
+      failedNodeIds.push(
+        asset.type === PrimaryWorkflowEnum.COMPONENT && asset.containing_frame?.containingStateGroup?.nodeId || asset.node_id,
+      )
+    }
+    finally {
+      updateProgress()
+    }
+  }))
+  if ( thumbnailData.length === 0) {
+    return {
+      s3Paths: [],
+      failedThumbnailNodeIds: failedNodeIds,
+      styleMetaByNodeId: {},
+      uploadDurationMs: 0,
+      encounteredNonS3PresignedPostError: false,
+    }
+  }
+
+  // Process thumbnails in batches
+  let batches: typeof thumbnailData[] = []
+  while (thumbnailData.length) {
+    batches.push(thumbnailData.splice(0, DEFAULT_LIBRARY_LIMIT))
+  }
+
+  let presignedUrlPromise = _$$b2.getThumbnailsBufferPresignedPostUrl(batches.length)
+  let batchBuffers = batches.map(batch =>
+    batch.reduce(({
+      buffer,
+      offset,
+      guids,
+    }, {
+      sessionId,
+      localId,
+      thumbnail,
+    }) => {
+      // Pack session ID, local ID, and thumbnail length into buffer
+      buffer.set([
+        (0xFF000000 & sessionId) >> 24,
+        (0xFF0000 & sessionId) >> 16,
+        (65280 & sessionId) >> 8,
+        255 & sessionId,
+        (0xFF000000 & localId) >> 24,
+        (0xFF0000 & localId) >> 16,
+        (65280 & localId) >> 8,
+        255 & localId,
+        (0xFF000000 & thumbnail.byteLength) >> 24,
+        (0xFF0000 & thumbnail.byteLength) >> 16,
+        (65280 & thumbnail.byteLength) >> 8,
+        255 & thumbnail.byteLength,
+      ], offset)
+
+      offset += 12
+      buffer.set(thumbnail, offset)
+      offset += thumbnail.byteLength
+      guids.push(`${sessionId}:${localId}`)
+
+      return {
+        buffer,
+        offset,
+        guids,
+      }
+    }, {
+      buffer: new Uint8Array(batch.reduce((size, { thumbnail }) => size + thumbnail.byteLength + 12, 0)),
+      offset: 0,
+      guids: [] as string[],
+    }),
+  )
+
+  let uploadedPaths: string[] = []
+  let { data: { meta: { presigned_posts: presignedPosts } } } = await presignedUrlPromise
+  let encounteredNonS3Error = false
+
+  // Upload each batch
+  await Promise.allSettled(presignedPosts.map(async ({ url, fields }) => {
+    let batchBuffer = batchBuffers.shift()
+    if (!batchBuffer) {
+      reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, new Error("Popped a concatenated buffer that does not exist"))
+      return
+    }
+
+    try {
+      let uploadResult = await uploadToPresignedPost(
+        ServiceCategories.DESIGN_SYSTEMS_EDITOR,
+        "uploadThumbnails",
+        url,
+        fields,
+        batchBuffer.buffer,
+        "application/octet-stream",
+      )
+      uploadedPaths.push(uploadResult)
+      sendHistogram("publish.thumbnails_buffer.bytes", batchBuffer.buffer.byteLength)
+    }
+    catch (error) {
+      if (error instanceof UploadError) {
+        encounteredNonS3Error = true
+      }
+      failedNodeIds.push(...batchBuffer.guids)
+    }
+  }))
+
+  if (encounteredNonS3Error) {
+    reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, new Error("uploadThumbnails: encountered non-S3 presigned POST error"))
+  }
+
+  let uploadDuration = perfTimer.stop()
+  if (uploadDuration) {
+    trackEventAnalytics("Library generate and upload thumbnails", {
+      elapsedMs: uploadDuration,
+      duration: uploadDuration,
+    }, {
+      forwardToDatadog: true,
+    })
+  }
+
+  return {
+    s3Paths: uploadedPaths,
+    styleMetaByNodeId: styleMetadata,
+    failedThumbnailNodeIds: failedNodeIds,
+    uploadDurationMs: uploadDuration,
+    encounteredNonS3PresignedPostError: encounteredNonS3Error,
+  }
+}
+
+// Get publish start time with validation
+function getPublishStartTime(publishProgress: any) {
+  return publishProgress.state === LibraryPublishStatusEnum.NONE
+    ? (logError("library publish SSP", "Attempted to update progress while not assembling components", publishProgress), null)
+    : publishProgress.publishStartMs
+}
+
+// Track publish event analytics
+function trackPublishEventAnalytics(
+  publishProgress: any,
+  eventName: string,
+  histogramName: string,
+  errorType?: string,
+) {
+  let startTime = getPublishStartTime(publishProgress)
+  if (startTime) {
+    let duration = performance.now() - startTime
+    trackEventAnalytics(eventName, {
+      duration,
+    })
+    sendHistogram(histogramName, duration, {
+      error: errorType,
+    })
+  }
+  else {
+    logError("library publish SSP", "Publish start time was null")
+  }
+}
+
+// Handle publish completion
+function handlePublishCompletion(
+  publishProgress: any,
+  errorCount: number,
+  isUnpublish: boolean,
+  dispatch: (action: any) => void,
+  onSuccess: (params: any) => void,
+  onError: (params: any) => void,
+  savepointDescription?: string,
+  encounteredNonS3Error?: boolean,
+) {
+  if (errorCount === 0) {
+    // Success case
+    if (publishProgress.state === LibraryPublishStatusEnum.UPLOADING) {
+      let startTime = getPublishStartTime(publishProgress)
+      if (startTime) {
+        let now = performance.now()
+        let totalDuration = now - startTime
+        let metrics = isUnpublish
+          ? { totalDurationMs: totalDuration }
+          : {
+              totalDurationMs: totalDuration,
+              uploadBuffersDurationMs: now - publishProgress.commitUpdatesDurationMs,
+              clientPreWorkDurationMs: publishProgress.clientPreWorkDurationMs,
+              createSavePointDurationMs: publishProgress.createSavePointDurationMs,
+            }
+
+        trackEventAnalytics(`Client perceived ${publishProgress.publishType} duration`, metrics)
+
+        let skipClientThumbnail = getFeatureFlags().ssp_stop_client_gen_thumb_generation ? "true" : "false"
+        for (let [key, value] of Object.entries(metrics)) {
+          let histogramName = `${publishProgress.publishType}.success.${key}`
+          sendHistogram(histogramName, value as number, {
+            skip_client_thumbnail: skipClientThumbnail,
+          })
+        }
+      }
+      else {
+        logError("library publish SSP", "Publish start time was null")
+      }
+    }
+
+    onSuccess({
+      publishProgress,
+      publishType: isUnpublish ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
+      dispatch,
+    })
+
+    dispatch(savePublishDescriptionAction(""))
+  }
+  else {
+    // Error case
+    let publishType = isUnpublish ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH
+
+    if (savepointDescription) {
+      dispatch(savePublishDescriptionAction(savepointDescription))
+    }
+
+    if (encounteredNonS3Error) {
+      onError({
+        error: LibraryPublishErrorType.NonS3PresignedPost,
+        publishType,
+        dispatch,
+      })
+      return
+    }
+
+    if (typeof errorCount !== "number") {
+      onError({
+        error: LibraryPublishErrorType.GenericError,
+        publishType,
+        dispatch,
+      })
+    }
+    else {
+      trackPublishEventAnalytics(
+        publishProgress,
+        "Partial publish failure",
+        `${publishType}.partial_error.duration`,
+        "asset_validation",
+      )
+
+      onError({
+        error: LibraryPublishErrorType.PartialPublish,
+        publishType,
+        dispatch,
+        numPublishSkippedDueToError: errorCount,
+      })
+    }
+  }
+}
+
+// Export function for publish completion handling
+export function handlePublishEnded(
+  publishProgress: any,
+  errorCount: number,
+  isUnpublish: boolean,
+  dispatch: (action: any) => void,
+  savepoint: any,
+  hadException: boolean,
+  onSuccess: (params: any) => void,
+  onError: (params: any) => void,
+  savepointDescription?: string,
+) {
+  trackEventAnalytics("Publish ended", {
+    savepointId: savepoint.id,
+    hadException,
+  })
+
+  handlePublishCompletion(
+    publishProgress,
+    errorCount,
+    isUnpublish,
+    dispatch,
+    onSuccess,
+    onError,
+    savepointDescription,
+  )
+
+  dispatch(finishPublishThunk())
+}
+
+// First draft publishing helper
+let handleFirstDraftPublishing = async (publishParams: any) => {
+  let kitMetadata
+  if (getFeatureFlags().first_draft_publish_ux && (publishParams.publishAsFirstDraftKit || publishParams.unpublishAll)) {
+    let designSystemKits = FirstDraftHelpers.getLocalDesignSystemKits()
+    if (designSystemKits.length > 1) {
+      logWarning("first_draft", "Attempting to publish a file with multiple kits", {
+        kitNames: designSystemKits.map(kit => kit.name),
+      })
+    }
+    else if (designSystemKits.length === 1) {
+      let kit = designSystemKits[0]
+      if (!kit) {
+        logWarning("first_draft", "No kit found for publishing", {
+          kits: designSystemKits,
+        })
+        return
+      }
+
+      kitMetadata = await Hj(kit.pageId, kit.name, {
+        publishType: tf.LIBRARY_TYPE_INFO_UPDATE,
+      }, publishParams.firstDraftVariablesForTheme, publishParams.unpublishAll)
+    }
+  }
+  return kitMetadata
+}
+
+// First draft publish thunk
+export let firstDraftPublishThunk = createOptimistThunk(async (context: PublishThunkContext, params: any = {}) => {
+  let state = context.getState()
+  let selectedFile = getSelectedFile(state)
+  let fileKey = selectedFile?.key
+
+  if (!fileKey) {
+    logWarning("first_draft", "No file key found for publishing")
+    return
+  }
+
+  let publishingNotification = VisualBellActions.enqueue({
     type: "first-draft-publish",
     message: "Publishing changes...",
-    icon: VisualBellIcon.SPINNER
-  });
-  let s = VisualBellActions.enqueue({
+    icon: VisualBellIcon.SPINNER,
+  })
+
+  let successNotification = VisualBellActions.enqueue({
     type: "first-draft-publish",
     message: "Changes published",
-    icon: VisualBellIcon.CHECK
-  });
-  let o = VisualBellActions.enqueue({
+    icon: VisualBellIcon.CHECK,
+  })
+
+  let errorNotification = VisualBellActions.enqueue({
     type: "first-draft-publish",
     message: "Failed to publish changes",
     icon: VisualBellIcon.EXCLAMATION,
-    error: !0
-  });
-  e.dispatch(hideModal());
-  e.dispatch(a);
-  let l = await ea(t);
-  if (!l) {
-    logWarning("first_draft", "No kit metadata found for publishing");
-    e.dispatch(o);
-    return;
+    error: true,
+  })
+
+  context.dispatch(hideModal())
+  context.dispatch(publishingNotification)
+
+  let kitMetadata = await handleFirstDraftPublishing(params)
+  if (!kitMetadata) {
+    logWarning("first_draft", "No kit metadata found for publishing")
+    context.dispatch(errorNotification)
+    return
   }
+
   try {
     await Gh.postFirstDraftUpdateMetadata({
-      fileKey: i,
-      publishMetadata: l
-    });
-    e.dispatch(s);
-  } catch (t) {
+      fileKey,
+      publishMetadata: kitMetadata,
+    })
+    context.dispatch(successNotification)
+  }
+  catch (error) {
     logWarning("first_draft", "Failed to publish changes", {
-      error: t
-    });
-    e.dispatch(o);
+      error,
+    })
+    context.dispatch(errorNotification)
   }
-});
-let $$eo4 = createOptimistThunk(async (e, t = {}) => {
-  let r;
-  let c;
-  let p;
-  let y;
-  let T;
-  let I;
-  let S;
-  let A = e.getState();
-  let x = t.onPublishSuccess ?? cc;
-  let G = t.onPublishProgress ?? UN;
-  let V = t.onPublishError ?? tZ;
-  t.publishingMode && t.publishingMode !== A.library.libraryPublishingMode && logError(J, "Publishing Mode does not match Redux state, and this will cause downstream errors.", {
-    desiredPublishingMode: t.publishingMode,
-    reduxLibraryPublishingMode: A.library.libraryPublishingMode
-  });
-  let $ = t.localAssetsWithDenormalizedPublishInfo ?? {};
-  if (A.library.publishProgress.state !== LibraryPublishStatusEnum.NONE) {
-    e.dispatch($$q2());
-    return;
+})
+
+// Main publish execution thunk
+export let executePublishProcess = createOptimistThunk(async (context: PublishThunkContext, params: any = {}) => {
+  let savepoint
+  let thumbnailUploadResult
+  let presignedUrl
+  let presignedFields
+  let paramsUploadPath
+  let libraryPublishId
+  let kitMetadata
+
+  let state = context.getState()
+  let onSuccess = params.onPublishSuccess ?? handleLibraryPublishSuccess
+  let onProgress = params.onPublishProgress ?? handleLibraryPublishInProgress
+  let onError = params.onPublishError ?? handleLibraryPublishError
+
+  // Validate publishing mode
+  if (params.publishingMode && params.publishingMode !== state.library.libraryPublishingMode) {
+    logError("library publish SSP", "Publishing Mode does not match Redux state, and this will cause downstream errors.", {
+      desiredPublishingMode: params.publishingMode,
+      reduxLibraryPublishingMode: state.library.libraryPublishingMode,
+    })
   }
-  let X = getSelectedFile(A);
-  if (!X) {
-    console.error("library publishChanges: file is null");
-    V({
-      error: jO.NoFile,
-      dispatch: e.dispatch
-    });
-    e.dispatch($$q2());
-    return;
+
+  let localAssets = params.localAssetsWithDenormalizedPublishInfo ?? {}
+
+  // Check if publish is already in progress
+  if (state.library.publishProgress.state !== LibraryPublishStatusEnum.NONE) {
+    context.dispatch(finishPublishThunk())
+    return
   }
-  let Z = t.itemsToPublish;
-  if (void 0 !== Z && 0 === Z.size) {
-    console.error("No items selected to publish");
-    V({
-      error: jO.NoItemsToPublish,
-      dispatch: e.dispatch
-    });
-    e.dispatch($$q2());
-    return;
+
+  let selectedFile = getSelectedFile(state)
+  if (!selectedFile) {
+    console.error("library publishChanges: file is null")
+    onError({
+      error: LibraryPublishErrorType.NoFile,
+      dispatch: context.dispatch,
+    })
+    context.dispatch(finishPublishThunk())
+    return
   }
-  let Q = [PrimaryWorkflowEnum.CODE_COMPONENT, PrimaryWorkflowEnum.RESPONSIVE_SET].every(e => !_$$O(e) || aB(Object.values($).filter(t => t.type === e), Z));
-  let ei = t.unpublishAll || aB(Object.values(MH(A)), Z) && aB(Object.values(dM(A)), Z) && aB(Object.values(cM(A)), Z) && aB(Object.values(bh(A)), Z) && (!_$$O(PrimaryWorkflowEnum.MODULE) || aB(Object.values(x6(A)), Z)) && Q;
-  sendMetric(`${ei ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH}.start`);
-  e.dispatch($$K1({
-    unpublishAll: !!ei
-  }));
-  e.dispatch(postUserFlag({
-    has_published_library_items: !0
-  }));
-  let ea = (r, n, i, a) => {
-    e.dispatch(updateLocalLibraryItemsThunk());
-    let o = a?.encounteredNonS3PresignedPostError ? "non_s3_error" : n;
-    er(e.getState().library.publishProgress, r, `${ei ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH}.error.duration`, o);
-    let l = a?.error;
-    logError(J, r, {
-      ...t,
-      name: l?.name,
-      message: l?.message,
-      stack: l?.stack
+
+  let itemsToPublish = params.itemsToPublish
+  if (itemsToPublish !== undefined && itemsToPublish.size === 0) {
+    console.error("No items selected to publish")
+    onError({
+      error: LibraryPublishErrorType.NoItemsToPublish,
+      dispatch: context.dispatch,
+    })
+    context.dispatch(finishPublishThunk())
+    return
+  }
+
+  // Check if all items should be unpublished
+  let areAllItemsShareable = [PrimaryWorkflowEnum.CODE_COMPONENT, PrimaryWorkflowEnum.RESPONSIVE_SET].every(
+    type => !isShareableAssetType(type) || aB(Object.values(localAssets).filter((asset: any) => asset.type === type), itemsToPublish),
+  )
+
+  let shouldUnpublishAll = params.unpublishAll
+    || aB(Object.values(selectComponentLibraryItemsWithStatus(state)), itemsToPublish)
+    && aB(Object.values(selectStateGroupLibraryItemsWithStatus(state)), itemsToPublish)
+    && aB(Object.values(selectStyledLibraryItemsWithStatus(state)), itemsToPublish)
+    && aB(Object.values(selectProcessedLocalVariableSets(state)), itemsToPublish)
+    && (!isShareableAssetType(PrimaryWorkflowEnum.MODULE)
+      || aB(Object.values(selectModuleLibraryItemsWithStatus(state)), itemsToPublish))
+    && areAllItemsShareable
+
+  sendMetric(`${shouldUnpublishAll ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH}.start`)
+
+  context.dispatch(startPublishAction({
+    unpublishAll: !!shouldUnpublishAll,
+  }))
+
+  context.dispatch(postUserFlag({
+    has_published_library_items: true,
+  }))
+
+  // Error handling function
+  let handleError = (
+    errorMessage: string,
+    errorType: string,
+    savepointId: string | null,
+    errorDetails: any,
+  ) => {
+    context.dispatch(updateLocalLibraryItemsThunk())
+
+    let finalErrorType = errorDetails?.encounteredNonS3PresignedPostError ? "non_s3_error" : errorType
+    trackPublishEventAnalytics(
+      context.getState().library.publishProgress,
+      errorMessage,
+      `${shouldUnpublishAll ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH}.error.duration`,
+      finalErrorType,
+    )
+
+    let error = errorDetails?.error
+    logError("library publish SSP", errorMessage, {
+      ...params,
+      name: error?.name,
+      message: error?.message,
+      stack: error?.stack,
     }, {
       logToConsole: LogToConsoleMode.ALWAYS,
-      reportAsSentryError: !0,
-      forwardToDatadog: !0
-    });
-    null !== i && trackEventAnalytics("Publish ended", {
-      savepointId: i,
-      hadException: !0
-    });
-    en(e.getState().library.publishProgress, a?.numSkippedDueToError ?? {
-      __tag: "UNKNOWN"
-    }, ei, e.dispatch, x, V, t.savepointDescription, a?.encounteredNonS3PresignedPostError);
-    e.dispatch($$q2());
-    let {
-      hideModalOnPublishRequestFinish = !0
-    } = t;
-    hideModalOnPublishRequestFinish && e.dispatch(hideModal());
-  };
-  let es = jx(dM(A), MH(A), cM(A), tK(A), bh(A), x6(A), $, X, A.teams, {
-    overridePublishPermissions: !!t.hubFileId,
-    moveRemappings: t.moveInformation?.moveRemappings ?? {},
-    itemsToPublish: Z,
-    forcePublish: t.forcePublish,
-    unpublishAll: t.unpublishAll
-  });
-  !function (e) {
-    let t = new PerfTimer("publish.client.prep_nodes_for_thumbnailing", {});
-    t.start();
-    let r = e[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.PUBLISH].filter(e => e.style_type === StyleType.TEXT);
-    r.forEach(e => {
-      Fullscreen.prepNodeForAssetThumbnailRendering(e.node_id);
-    });
-    let n = t.stop();
-    n && trackEventAnalytics("Prepared node fields used for thumbnail rendering", {
-      elapsedMs: n,
-      textStylesCount: r.length
-    }, {
-      forwardToDatadog: !0
-    });
-  }(es);
-  let eo = getFeatureFlags().ds_ssp_thumbnailing_client_prep_wait_extra_frames ? 10 : 2;
-  for (let e = 0; e < eo; e++) await waitForAnimationFrame();
-  let el = performance.now();
-  let ed = "slides" === X.editor_type;
-  let ec = ed ? getI18nString("design_systems.publish_actions.savepoint_for_unpublish_slides") : getI18nString("design_systems.publish_actions.savepoint_for_unpublish");
-  let eu = ed ? getI18nString("design_systems.publish_actions.savepoint_for_publish_slides") : getI18nString("design_systems.publish_actions.savepoint_for_publish");
+      reportAsSentryError: true,
+      forwardToDatadog: true,
+    })
+
+    if (savepointId !== null) {
+      trackEventAnalytics("Publish ended", {
+        savepointId,
+        hadException: true,
+      })
+    }
+
+    handlePublishCompletion(
+      context.getState().library.publishProgress,
+      errorDetails?.numSkippedDueToError ?? { __tag: "UNKNOWN" },
+      shouldUnpublishAll,
+      context.dispatch,
+      onSuccess,
+      onError,
+      params.savepointDescription,
+      errorDetails?.encounteredNonS3PresignedPostError,
+    )
+
+    context.dispatch(finishPublishThunk())
+
+    let { hideModalOnPublishRequestFinish = true } = params
+    if (hideModalOnPublishRequestFinish) {
+      context.dispatch(hideModal())
+    }
+  }
+
+  // Prepare assets for publishing
+  let preparedAssets = jx(
+    selectStateGroupLibraryItemsWithStatus(state),
+    selectComponentLibraryItemsWithStatus(state),
+    selectStyledLibraryItemsWithStatus(state),
+    selectProcessedLocalVariables(state),
+    selectProcessedLocalVariableSets(state),
+    selectModuleLibraryItemsWithStatus(state),
+    localAssets,
+    selectedFile,
+    state.teams,
+    {
+      overridePublishPermissions: !!params.hubFileId,
+      moveRemappings: params.moveInformation?.moveRemappings ?? {},
+      itemsToPublish,
+      forcePublish: params.forcePublish,
+      unpublishAll: params.unpublishAll,
+    },
+  )
+
+    // Prepare nodes for thumbnailing
+    ; (function prepareNodesForThumbnailing(assets: any) {
+    let perfTimer = new PerfTimer("publish.client.prep_nodes_for_thumbnailing", {})
+    perfTimer.start()
+
+    let textStyles = assets[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.PUBLISH].filter(
+      (style: any) => style.style_type === StyleType.TEXT,
+    )
+
+    textStyles.forEach((style: any) => {
+      Fullscreen.prepNodeForAssetThumbnailRendering(style.node_id)
+    })
+
+    let preparationTime = perfTimer.stop()
+    if (preparationTime) {
+      trackEventAnalytics("Prepared node fields used for thumbnail rendering", {
+        elapsedMs: preparationTime,
+        textStylesCount: textStyles.length,
+      }, {
+        forwardToDatadog: true,
+      })
+    }
+  })(preparedAssets)
+
+  // Wait for frame rendering
+  let extraFrames = getFeatureFlags().ds_ssp_thumbnailing_client_prep_wait_extra_frames ? 10 : 2
+  for (let i = 0; i < extraFrames; i++) await waitForAnimationFrame()
+
+  let publishStartTime = performance.now()
+  let isSlidesEditor = selectedFile.editor_type === "slides"
+  let unpublishSavepointMessage = isSlidesEditor
+    ? getI18nString("design_systems.publish_actions.savepoint_for_unpublish_slides")
+    : getI18nString("design_systems.publish_actions.savepoint_for_unpublish")
+  let publishSavepointMessage = isSlidesEditor
+    ? getI18nString("design_systems.publish_actions.savepoint_for_publish_slides")
+    : getI18nString("design_systems.publish_actions.savepoint_for_publish")
+
   try {
-    r = await maybeCreateSavepoint(X.key, ei ? ec : eu, t.savepointDescription, e.dispatch, !0);
-  } catch (t) {
-    navigator.onLine ? ea("Unable to create savepoint during library publish", "create_savepoint", null, {
-      error: t
-    }) : (V({
-      error: jO.Offline,
-      publishType: ei ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
-      dispatch: e.dispatch
-    }), e.dispatch($$q2()));
-    return;
+    savepoint = await maybeCreateSavepoint(
+      selectedFile.key,
+      shouldUnpublishAll ? unpublishSavepointMessage : publishSavepointMessage,
+      params.savepointDescription,
+      context.dispatch,
+      true,
+    )
   }
-  if (!r) {
-    ea("Created savepoint is null", "create_savepoint", null);
-    return;
+  catch (error) {
+    if (navigator.onLine) {
+      handleError("Unable to create savepoint during library publish", "create_savepoint", null, {
+        error,
+      })
+    }
+    else {
+      onError({
+        error: LibraryPublishErrorType.Offline,
+        publishType: shouldUnpublishAll ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
+        dispatch: context.dispatch,
+      })
+      context.dispatch(finishPublishThunk())
+    }
+    return
   }
-  let ep = performance.now() - el;
+
+  if (!savepoint) {
+    handleError("Created savepoint is null", "create_savepoint", null, undefined)
+    return
+  }
+
+  let savepointCreationTime = performance.now() - publishStartTime
   trackEventAnalytics("Publish start: savepoint successfully created", {
-    savepointId: r.id
-  });
-  let e_ = u()(Object.values(A.library.local.components).filter(e => e.isLocal), e => getContainingStateGroupNodeId(e) || NO_CONTAINING_STATE_GROUP_ID);
-  let eh = getTeamById(A);
-  let {
-    orderedUpdates
-  } = function (e) {
-    let t = [];
-    let r = e => {
-      e.assets.length && t.push(e);
-    };
-    let n = e[PrimaryWorkflowEnum.VARIABLE_SET][PublishStatusEnum.PUBLISH];
-    r({
+    savepointId: savepoint.id,
+  })
+
+  // Group components by state group
+  let componentsByStateGroup = groupBy(
+    Object.values(state.library.local.components).filter((component: any) => component.isLocal),
+    (component: any) => getContainingStateGroupNodeId(component) || NO_CONTAINING_STATE_GROUP_ID,
+  )
+
+  let team = getTeamById(state)
+
+  // Order the updates for publishing
+  let { orderedUpdates } = (function createOrderedUpdates(assets: any) {
+    let updates: Array<{ publishType: string, assetType: string, assets: any[] }> = []
+
+    let addUpdateIfNotEmpty = (update: { publishType: string, assetType: string, assets: any[] }) => {
+      if (update.assets.length) {
+        updates.push(update)
+      }
+    }
+
+    // Variable sets
+    let publishVariableSets = assets[PrimaryWorkflowEnum.VARIABLE_SET][PublishStatusEnum.PUBLISH]
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.PUBLISH,
       assetType: PrimaryWorkflowEnum.VARIABLE_SET,
-      assets: n
-    });
-    r({
+      assets: publishVariableSets,
+    })
+
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.UNPUBLISH,
       assetType: PrimaryWorkflowEnum.VARIABLE_SET,
-      assets: e[PrimaryWorkflowEnum.VARIABLE_SET][PublishStatusEnum.UNPUBLISH]
-    });
-    r({
+      assets: assets[PrimaryWorkflowEnum.VARIABLE_SET][PublishStatusEnum.UNPUBLISH],
+    })
+
+    // Variables
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.UNPUBLISH,
       assetType: PrimaryWorkflowEnum.VARIABLE,
-      assets: e[PrimaryWorkflowEnum.VARIABLE][PublishStatusEnum.UNPUBLISH]
-    });
-    let i = e[PrimaryWorkflowEnum.STATE_GROUP][PublishStatusEnum.PUBLISH];
-    let a = e[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH].filter(e => null === getContainingStateGroupNodeId(e));
-    r({
+      assets: assets[PrimaryWorkflowEnum.VARIABLE][PublishStatusEnum.UNPUBLISH],
+    })
+
+    // State groups
+    let publishStateGroups = assets[PrimaryWorkflowEnum.STATE_GROUP][PublishStatusEnum.PUBLISH]
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.PUBLISH,
       assetType: PrimaryWorkflowEnum.STATE_GROUP,
-      assets: i
-    });
-    r({
+      assets: publishStateGroups,
+    })
+
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.UNPUBLISH,
       assetType: PrimaryWorkflowEnum.STATE_GROUP,
-      assets: e[PrimaryWorkflowEnum.STATE_GROUP][PublishStatusEnum.UNPUBLISH]
-    });
-    r({
+      assets: assets[PrimaryWorkflowEnum.STATE_GROUP][PublishStatusEnum.UNPUBLISH],
+    })
+
+    // Components (filter out those in state groups)
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.PUBLISH,
       assetType: PrimaryWorkflowEnum.COMPONENT,
-      assets: e[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH].filter(e => !getContainingStateGroupNodeId(e))
-    });
-    r({
+      assets: assets[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH].filter(
+        (component: any) => !getContainingStateGroupNodeId(component),
+      ),
+    })
+
+    let unpublishComponents = assets[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH].filter(
+      (component: any) => getContainingStateGroupNodeId(component) === null,
+    )
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.UNPUBLISH,
       assetType: PrimaryWorkflowEnum.COMPONENT,
-      assets: a
-    });
-    r({
+      assets: unpublishComponents,
+    })
+
+    // Styles
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.PUBLISH,
       assetType: PrimaryWorkflowEnum.STYLE,
-      assets: e[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.PUBLISH]
-    });
-    r({
+      assets: assets[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.PUBLISH],
+    })
+
+    addUpdateIfNotEmpty({
       publishType: PublishStatusEnum.UNPUBLISH,
       assetType: PrimaryWorkflowEnum.STYLE,
-      assets: e[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.UNPUBLISH]
-    });
-    _$$O(PrimaryWorkflowEnum.MODULE) && (r({
-      publishType: PublishStatusEnum.PUBLISH,
-      assetType: PrimaryWorkflowEnum.MODULE,
-      assets: e[PrimaryWorkflowEnum.MODULE][PublishStatusEnum.PUBLISH]
-    }), r({
-      publishType: PublishStatusEnum.UNPUBLISH,
-      assetType: PrimaryWorkflowEnum.MODULE,
-      assets: e[PrimaryWorkflowEnum.MODULE][PublishStatusEnum.UNPUBLISH]
-    }));
-    _$$O(PrimaryWorkflowEnum.RESPONSIVE_SET) && (r({
-      publishType: PublishStatusEnum.PUBLISH,
-      assetType: PrimaryWorkflowEnum.RESPONSIVE_SET,
-      assets: e[PrimaryWorkflowEnum.RESPONSIVE_SET][PublishStatusEnum.PUBLISH]
-    }), r({
-      publishType: PublishStatusEnum.UNPUBLISH,
-      assetType: PrimaryWorkflowEnum.RESPONSIVE_SET,
-      assets: e[PrimaryWorkflowEnum.RESPONSIVE_SET][PublishStatusEnum.UNPUBLISH]
-    }));
-    _$$O(PrimaryWorkflowEnum.CODE_COMPONENT) && (r({
-      publishType: PublishStatusEnum.PUBLISH,
-      assetType: PrimaryWorkflowEnum.CODE_COMPONENT,
-      assets: e[PrimaryWorkflowEnum.CODE_COMPONENT][PublishStatusEnum.PUBLISH]
-    }), r({
-      publishType: PublishStatusEnum.UNPUBLISH,
-      assetType: PrimaryWorkflowEnum.CODE_COMPONENT,
-      assets: e[PrimaryWorkflowEnum.CODE_COMPONENT][PublishStatusEnum.UNPUBLISH]
-    }));
+      assets: assets[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.UNPUBLISH],
+    })
+
+    // Modules
+    if (isShareableAssetType(PrimaryWorkflowEnum.MODULE)) {
+      addUpdateIfNotEmpty({
+        publishType: PublishStatusEnum.PUBLISH,
+        assetType: PrimaryWorkflowEnum.MODULE,
+        assets: assets[PrimaryWorkflowEnum.MODULE][PublishStatusEnum.PUBLISH],
+      })
+
+      addUpdateIfNotEmpty({
+        publishType: PublishStatusEnum.UNPUBLISH,
+        assetType: PrimaryWorkflowEnum.MODULE,
+        assets: assets[PrimaryWorkflowEnum.MODULE][PublishStatusEnum.UNPUBLISH],
+      })
+    }
+
+    // Responsive sets
+    if (isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET)) {
+      addUpdateIfNotEmpty({
+        publishType: PublishStatusEnum.PUBLISH,
+        assetType: PrimaryWorkflowEnum.RESPONSIVE_SET,
+        assets: assets[PrimaryWorkflowEnum.RESPONSIVE_SET][PublishStatusEnum.PUBLISH],
+      })
+
+      addUpdateIfNotEmpty({
+        publishType: PublishStatusEnum.UNPUBLISH,
+        assetType: PrimaryWorkflowEnum.RESPONSIVE_SET,
+        assets: assets[PrimaryWorkflowEnum.RESPONSIVE_SET][PublishStatusEnum.UNPUBLISH],
+      })
+    }
+
+    // Code components
+    if (isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT)) {
+      addUpdateIfNotEmpty({
+        publishType: PublishStatusEnum.PUBLISH,
+        assetType: PrimaryWorkflowEnum.CODE_COMPONENT,
+        assets: assets[PrimaryWorkflowEnum.CODE_COMPONENT][PublishStatusEnum.PUBLISH],
+      })
+
+      addUpdateIfNotEmpty({
+        publishType: PublishStatusEnum.UNPUBLISH,
+        assetType: PrimaryWorkflowEnum.CODE_COMPONENT,
+        assets: assets[PrimaryWorkflowEnum.CODE_COMPONENT][PublishStatusEnum.UNPUBLISH],
+      })
+    }
+
     return {
-      orderedUpdates: t
-    };
-  }(es);
-  let eg = orderedUpdates.reduce((e, {
-    publishType: t,
-    assetType: r,
-    assets: i
-  }) => {
-    let a = "";
-    switch (r) {
+      orderedUpdates: updates,
+    }
+  })(preparedAssets)
+
+  // Count assets for analytics
+  let assetCounts = orderedUpdates.reduce((counts: any, { publishType, assetType, assets }) => {
+    let countKey = ""
+
+    switch (assetType) {
       case PrimaryWorkflowEnum.COMPONENT:
-        a = "numComponentBuffers";
-        break;
+        countKey = "numComponentBuffers"
+        break
       case PrimaryWorkflowEnum.STATE_GROUP:
-        a = "numStateGroupBuffers";
-        break;
+        countKey = "numStateGroupBuffers"
+        break
       case PrimaryWorkflowEnum.STYLE:
-        a = "numStyleBuffers";
-        break;
+        countKey = "numStyleBuffers"
+        break
       case PrimaryWorkflowEnum.VARIABLE_SET:
-        a = "numVariableSetBuffers";
-        break;
+        countKey = "numVariableSetBuffers"
+        break
       case PrimaryWorkflowEnum.MODULE:
-        a = "numTemplateBuffers";
-        break;
+        countKey = "numTemplateBuffers"
+        break
       case PrimaryWorkflowEnum.VARIABLE:
       case PrimaryWorkflowEnum.VARIABLE_OVERRIDE:
-        break;
+        break
       case PrimaryWorkflowEnum.RESPONSIVE_SET:
-        a = "numResponsiveSetBuffers";
-        break;
+        countKey = "numResponsiveSetBuffers"
+        break
       case PrimaryWorkflowEnum.CODE_LIBRARY:
-        a = "numCodeLibraryBuffers";
-        break;
+        countKey = "numCodeLibraryBuffers"
+        break
       case PrimaryWorkflowEnum.CODE_FILE:
-        a = "numCodeFileBuffers";
-        break;
+        countKey = "numCodeFileBuffers"
+        break
       case PrimaryWorkflowEnum.CODE_COMPONENT:
-        a = "numCodeComponentBuffers";
-        break;
+        countKey = "numCodeComponentBuffers"
+        break
       case PrimaryWorkflowEnum.CONSTRAINED_TEMPLATE:
       case PrimaryWorkflowEnum.MANAGED_STRING:
-        break;
+        break
       default:
-        throwTypeError(r);
+        throwTypeError(assetType)
     }
-    t === PublishStatusEnum.UNPUBLISH && (a = `${a}Unpublished`);
-    let s = a;
-    s in e && (e[s] = i.length);
-    return e;
+
+    if (publishType === PublishStatusEnum.UNPUBLISH) {
+      countKey = `${countKey}Unpublished`
+    }
+
+    if (countKey in counts) {
+      counts[countKey] = assets.length
+    }
+
+    return counts
   }, {
     numComponentBuffers: 0,
     numStateGroupBuffers: 0,
@@ -629,172 +980,248 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     numCodeFileBuffers: 0,
     numCodeFileBuffersUnpublished: 0,
     numCodeComponentBuffers: 0,
-    numCodeComponentBuffersUnpublished: 0
-  });
+    numCodeComponentBuffersUnpublished: 0,
+  })
+
   trackEventAnalytics("Library publish upload", {
-    fileKey: X.key,
-    publishMode: getLibrarySourceString(Io(A)),
-    publishScope: t.publishScope,
-    libraryModalSessionId: t.libraryModalSessionId,
-    orgId: eh?.org_id,
-    workspaceId: eh?.workspace_id,
-    teamId: eh?.id,
-    ...eg
+    fileKey: selectedFile.key,
+    publishMode: getLibrarySourceString(selectLibraryPublishingMode(state)),
+    publishScope: params.publishScope,
+    libraryModalSessionId: params.libraryModalSessionId,
+    orgId: team?.org_id,
+    workspaceId: team?.workspace_id,
+    teamId: team?.id,
+    ...assetCounts,
   }, {
-    forwardToDatadog: !0
-  });
-  let ef = orderedUpdates.flatMap(e => e.publishType === PublishStatusEnum.PUBLISH ? e.assets : []).reduce((e, t) => t.type !== PrimaryWorkflowEnum.VARIABLE && t.type !== PrimaryWorkflowEnum.VARIABLE_SET && _$$O(t.type) ? t.type === PrimaryWorkflowEnum.MODULE ? e.concat(t) : e.concat(t).concat(e_[t.node_id] || []) : e, []);
-  if (getFeatureFlags().ssp_stop_client_gen_thumb_generation) c = {
-    failedThumbnailNodeIds: [],
-    s3Paths: [],
-    styleMetaByNodeId: {},
-    uploadDurationMs: 0,
-    encounteredNonS3PresignedPostError: !1
-  };else try {
-    c = await ee(ef, ei, A.library.local.thumbnails, e);
-  } catch (e) {
-    ea("Unable to upload thumbnails during library publish", "upload_thumbnails", r.id, {
-      error: e
-    });
-    return;
+    forwardToDatadog: true,
+  })
+
+  // Prepare assets for thumbnail generation
+  let assetsForThumbnails = orderedUpdates
+    .flatMap(update => update.publishType === PublishStatusEnum.PUBLISH ? update.assets : [])
+    .reduce((acc: any[], asset: any) => {
+      if (asset.type !== PrimaryWorkflowEnum.VARIABLE
+        && asset.type !== PrimaryWorkflowEnum.VARIABLE_SET
+        && isShareableAssetType(asset.type)) {
+        if (asset.type === PrimaryWorkflowEnum.MODULE) {
+          return acc.concat(asset)
+        }
+        else {
+          return acc.concat(asset).concat(componentsByStateGroup[asset.node_id] || [])
+        }
+      }
+      return acc
+    }, [])
+
+  // Generate and upload thumbnails
+  if (getFeatureFlags().ssp_stop_client_gen_thumb_generation) {
+    thumbnailUploadResult = {
+      failedThumbnailNodeIds: [],
+      s3Paths: [],
+      styleMetaByNodeId: {},
+      uploadDurationMs: 0,
+      encounteredNonS3PresignedPostError: false,
+    }
   }
+  else {
+    try {
+      thumbnailUploadResult = await generateAndUploadThumbnails(
+        assetsForThumbnails,
+        shouldUnpublishAll,
+        state.library.local.thumbnails,
+        context,
+      )
+    }
+    catch (error) {
+      handleError("Unable to upload thumbnails during library publish", "upload_thumbnails", savepoint.id, {
+        error,
+      })
+      return
+    }
+  }
+
   let {
     failedThumbnailNodeIds,
     s3Paths,
     styleMetaByNodeId,
     uploadDurationMs,
-    encounteredNonS3PresignedPostError
-  } = c;
-  let eS = orderedUpdates.flatMap(e => e.assets).length;
-  if (failedThumbnailNodeIds.length === eS) {
-    ea("All thumbnails failed to upload" + (encounteredNonS3PresignedPostError ? " (non-s3 error)" : ""), "upload_thumbnails", r.id, {
-      numSkippedDueToError: eS,
-      encounteredNonS3PresignedPostError
-    });
-    return;
+    encounteredNonS3PresignedPostError,
+  } = thumbnailUploadResult
+
+  let totalAssets = orderedUpdates.flatMap(update => update.assets).length
+
+  // Check if all thumbnails failed
+  if (failedThumbnailNodeIds.length === totalAssets) {
+    handleError(
+      `All thumbnails failed to upload${encounteredNonS3PresignedPostError ? " (non-s3 error)" : ""}`,
+      "upload_thumbnails",
+      savepoint.id,
+      {
+        numSkippedDueToError: totalAssets,
+        encounteredNonS3PresignedPostError,
+      },
+    )
+    return
   }
-  let ev = orderedUpdates.map(({
-    publishType: e,
-    assetType: t,
-    assets: r
-  }) => {
-    let n = r.filter(e => !failedThumbnailNodeIds.includes(e.node_id));
-    return n.length > 0 ? {
-      publishType: e,
-      assetType: t,
-      assets: n
-    } : null;
-  }).filter(isNotNullish);
-  if (getFeatureFlags().first_draft_publish_ux && (t.publishAsFirstDraftKit || t.unpublishAll)) {
-    let e = FirstDraftHelpers.getLocalDesignSystemKits();
-    if (e.length > 1) logWarning("first_draft", "Attempting to publish a file with multiple kits", {
-      kitNames: e.map(e => e.name)
-    });else if (1 === e.length) {
-      let r = e[0];
-      if (!r) {
+
+  // Filter out failed assets
+  let successfulUpdates = orderedUpdates
+    .map(({ publishType, assetType, assets }) => {
+      let successfulAssets = assets.filter(asset => !failedThumbnailNodeIds.includes(asset.node_id))
+      return successfulAssets.length > 0
+        ? {
+            publishType,
+            assetType,
+            assets: successfulAssets,
+          }
+        : null
+    })
+    .filter(isNotNullish)
+
+  // Handle first draft publishing
+  if (getFeatureFlags().first_draft_publish_ux && (params.publishAsFirstDraftKit || params.unpublishAll)) {
+    let designSystemKits = FirstDraftHelpers.getLocalDesignSystemKits()
+    if (designSystemKits.length > 1) {
+      logWarning("first_draft", "Attempting to publish a file with multiple kits", {
+        kitNames: designSystemKits.map(kit => kit.name),
+      })
+    }
+    else if (designSystemKits.length === 1) {
+      let kit = designSystemKits[0]
+      if (!kit) {
         logWarning("first_draft", "No kit found for publishing", {
-          kits: e
-        });
-        return;
+          kits: designSystemKits,
+        })
+        return
       }
-      S = await Hj(r.pageId, r.name, {
+
+      kitMetadata = await Hj(kit.pageId, kit.name, {
         publishType: tf.LIBRARY_PUBLISH,
-        localComponents: MH(A),
-        localStateGroups: dM(A),
-        localVariableSets: bh(A),
-        isDirectGenCompatible: t.isDirectGenCompatible ?? !1
-      }, t.firstDraftVariablesForTheme, t.unpublishAll);
+        localComponents: selectComponentLibraryItemsWithStatus(state),
+        localStateGroups: selectStateGroupLibraryItemsWithStatus(state),
+        localVariableSets: selectProcessedLocalVariableSets(state),
+        isDirectGenCompatible: params.isDirectGenCompatible ?? false,
+      }, params.firstDraftVariablesForTheme, params.unpublishAll)
     }
   }
-  let eA = {
-    updates: ev.map(e => ({
-      publishType: e.publishType,
-      assetType: e.assetType,
-      guids: e.assets.map(e => {
-        let t = p$(e);
-        t || (console.warn("Asset with null nodeId:", e), reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, Error("Asset with null node ID found during publish")));
-        return t;
-      }).filter(isNotNullish)
+
+  // Prepare publish parameters
+  let publishParams = {
+    updates: successfulUpdates.map(update => ({
+      publishType: update.publishType,
+      assetType: update.assetType,
+      guids: update.assets.map((asset) => {
+        let nodeId = p$(asset)
+        if (!nodeId) {
+          console.warn("Asset with null nodeId:", asset)
+          reportError(ServiceCategories.DESIGN_SYSTEMS_EDITOR, new Error("Asset with null node ID found during publish"))
+        }
+        return nodeId
+      }).filter(isNotNullish),
     })),
-    moveRemappings: t.moveInformation?.moveRemappings ?? {},
+    moveRemappings: params.moveInformation?.moveRemappings ?? {},
     s3ThumbnailBufferPaths: s3Paths,
     styleMetaByNodeId,
     clientProtocolVersion: window.mpGlobal.version,
-    themeMetaData: t.themePublishData ?? {},
-    ...(S ? {
-      kitMetaData: S
-    } : {})
-  };
-  try {
-    let e = (await librariesAPI.postUploadPublishParams()).data.meta;
-    p = e.url;
-    y = e.fields;
-  } catch (e) {
-    ea("Unable to get presigned post url for params", "get_presigned_post", r.id, {
-      error: e
-    });
-    return;
+    themeMetaData: params.themePublishData ?? {},
+    ...(kitMetadata ? { kitMetaData: kitMetadata } : {}),
   }
+
+  // Get presigned URL for params upload
   try {
-    let e = new TextEncoder();
-    T = await uploadToPresignedPost(ServiceCategories.DESIGN_SYSTEMS_EDITOR, "publishChanges.params", p, y, e.encode(JSON.stringify(eA)), "application/json");
-  } catch (t) {
-    let e = t instanceof UploadError;
-    ea("Unable to upload publishing params" + (e ? " (non-s3 error)" : ""), "upload_params", r.id, {
-      error: t,
-      encounteredNonS3PresignedPostError: e
-    });
-    return;
+    let { data: { meta } } = await librariesAPI.postUploadPublishParams()
+    presignedUrl = meta.url
+    presignedFields = meta.fields
   }
+  catch (error) {
+    handleError("Unable to get presigned post url for params", "get_presigned_post", savepoint.id, {
+      error,
+    })
+    return
+  }
+
+  // Upload publish parameters
   try {
-    I = (await librariesAPI.postLibraryPublish({
-      fileKey: X.key,
-      checkpointKey: r.checkpoint_key,
-      paramsPath: T,
-      publishToCommunity: !!t.hubFileId,
-      publishScope: t.publishScope
-    })).data.meta.library_publish_id;
-  } catch (e) {
-    ea("Unable to publish", "generic_error", r.id, {
-      error: e
-    });
-    return;
+    let encoder = new TextEncoder()
+    paramsUploadPath = await uploadToPresignedPost(
+      ServiceCategories.DESIGN_SYSTEMS_EDITOR,
+      "publishChanges.params",
+      presignedUrl,
+      presignedFields,
+      encoder.encode(JSON.stringify(publishParams)),
+      "application/json",
+    )
   }
+  catch (error) {
+    let isNonS3Error = error instanceof UploadError
+    handleError(
+      `Unable to upload publishing params${isNonS3Error ? " (non-s3 error)" : ""}`,
+      "upload_params",
+      savepoint.id,
+      {
+        error,
+        encounteredNonS3PresignedPostError: isNonS3Error,
+      },
+    )
+    return
+  }
+
+  // Execute library publish
   try {
-    !function (e, t, r, n, i, a, s, o) {
-      let l = performance.now();
-      let d = t ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH;
-      e.dispatch($$Y5({
-        state: LibraryPublishStatusEnum.UPLOADING,
-        publishType: d,
-        progress: 0,
-        libraryPublishId: r,
-        savepoint: n,
-        numSkippedPriorToPublish: i,
-        publishStartMs: et(e.getState().library.publishProgress),
-        commitUpdatesDurationMs: l,
-        clientPreWorkDurationMs: a,
-        createSavePointDurationMs: s
-      }));
-      o({
-        publishType: d,
-        dispatch: e.dispatch,
-        icon: VisualBellIcon.SPINNER
-      });
-    }(e, ei, I, r, failedThumbnailNodeIds.length, uploadDurationMs, ep, G);
-  } catch (e) {
-    ea("Unable to notify publish start", "generic_error", r.id, {
-      error: e
-    });
-    return;
+    let { data: { meta } } = await librariesAPI.postLibraryPublish({
+      fileKey: selectedFile.key,
+      checkpointKey: savepoint.checkpoint_key,
+      paramsPath: paramsUploadPath,
+      publishToCommunity: !!params.hubFileId,
+      publishScope: params.publishScope,
+    })
+    libraryPublishId = meta.library_publish_id
   }
-});
-export const De = $$X0;
-export const Sb = $$K1;
-export const TS = $$q2;
-export const WM = $$$3;
-export const ZS = $$eo4;
-export const df = $$Y5;
-export const dh = $$ei6;
-export const iA = $$es7;
-export const sb = $$Q8;
+  catch (error) {
+    handleError("Unable to publish", "generic_error", savepoint.id, {
+      error,
+    })
+    return
+  }
+
+  // Notify publish start
+  try {
+    let commitStartTime = performance.now()
+    let publishType = shouldUnpublishAll ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH
+
+    context.dispatch(publishProgressAction({
+      state: LibraryPublishStatusEnum.UPLOADING,
+      publishType,
+      progress: 0,
+      libraryPublishId,
+      savepoint,
+      numSkippedPriorToPublish: failedThumbnailNodeIds.length,
+      publishStartMs: getPublishStartTime(context.getState().library.publishProgress),
+      commitUpdatesDurationMs: commitStartTime,
+      clientPreWorkDurationMs: uploadDurationMs,
+      createSavePointDurationMs: savepointCreationTime,
+    }))
+
+    onProgress({
+      publishType,
+      dispatch: context.dispatch,
+      icon: VisualBellIcon.SPINNER,
+    })
+  }
+  catch (error) {
+    handleError("Unable to notify publish start", "generic_error", savepoint.id, {
+      error,
+    })
+  }
+})
+
+// Export statements with original left names but refactored right names
+export const De = savePublishDescriptionAction
+export const Sb = startPublishAction
+export const TS = finishPublishThunk
+export const WM = publishRequestFinishedAction
+export const ZS = executePublishProcess
+export const df = publishProgressAction
+export const dh = handlePublishEnded
+export const iA = firstDraftPublishThunk
+export const sb = handlePublishWorkflow

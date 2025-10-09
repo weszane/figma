@@ -283,7 +283,7 @@ import { i as _$$i3 } from "../9410/16707";
 import { Kt, wl, uM, w1 } from "../figma_app/835688";
 import { showDropdownThunk } from "../905/929976";
 import { hX } from "../figma_app/644079";
-import { U as _$$U3 } from "../figma_app/446378";
+import { teamTemplateCountQuery } from "../figma_app/446378";
 import { Nr as _$$Nr } from "../figma_app/524655";
 import { oI as _$$oI, Te, Ug } from "../9410/904355";
 import { isHandbrakeDisabledForCurrentUser } from "../figma_app/757723";
@@ -8262,7 +8262,7 @@ function o2({
   let c = selectCurrentFile();
   let u = useAtomWithSubscription(Fy);
   let h = useIsProgressBarHiddenOrLocked();
-  let m = useAtomWithSubscription(_$$U3({
+  let m = useAtomWithSubscription(teamTemplateCountQuery({
     teamId: e,
     editorType: FFileType.SLIDES
   }));

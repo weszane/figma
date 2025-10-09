@@ -151,7 +151,7 @@ import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { copyTextThunk } from "../figma_app/11182";
 import { isValidTeamPaymentOrNotRequired, hasFileAccessBasedOnSubscription } from "../905/862913";
-import { Q3, Cy, Bg } from "../figma_app/246699";
+import { isPublicLinkExpirationRequired, isPublicLinkPasswordRequired, isPublicLinkBanned } from "../figma_app/246699";
 import { ApprovalStatusEnum } from "../figma_app/736948";
 import { _9, J4, p8, fb, YU, Iz, lG, ET, mi } from "../figma_app/907616";
 import { TooltipDropdown } from "../figma_app/209680";
@@ -197,7 +197,7 @@ import { $T } from "../figma_app/12535";
 import { HF, a6 as _$$a2, ow, M3 as _$$M3 } from "../figma_app/198840";
 import { getPermissionsState } from "../figma_app/642025";
 import { selectedViewToPath } from "../figma_app/193867";
-import { qG } from "../figma_app/803787";
+import { createUpdateLibraryPublishingModeAction } from "../figma_app/803787";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 import { Jd } from "../905/71785";
 import { LibrarySourceEnum } from "../figma_app/633080";
@@ -206,8 +206,8 @@ import { N as _$$N3 } from "../905/620375";
 import { generateHubFileUrl } from "../figma_app/870683";
 import { l as _$$l } from "../905/716947";
 import { isSlideTemplateResource } from "../figma_app/471982";
-import { sG } from "../905/686934";
-import { ZS } from "../figma_app/519839";
+import { getLibraryPublishCallbacks } from "../905/686934";
+import { executePublishProcess } from "../figma_app/519839";
 import { libraryPublishingModeAtom } from "../figma_app/825489";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { UM, F4 } from "../figma_app/60023";
@@ -2601,7 +2601,7 @@ function na({
   let [G, z] = useState(v ? J4.VIEW : fb[R.linkAccess].audienceAccessLevel || J4.VIEW);
   let W = () => v && null !== R.protoLinkAccess ? p8[R.protoLinkAccess].shareAudience === _9.ANYONE : fb[R.linkAccess].shareAudience === _9.ANYONE;
   let [K, Y] = useState(R.discoverable || !1);
-  let [q, $] = useState((!!_$$d2(mainFileLinkExpirationConfig) || Q3(d)) && W());
+  let [q, $] = useState((!!_$$d2(mainFileLinkExpirationConfig) || isPublicLinkExpirationRequired(d)) && W());
   let [Z, X] = useState(W() ? _$$d2(mainFileLinkExpirationConfig) : null);
   let [Q, J] = useState(!viewer_export_restricted || R.linkAccess === FPermissionLevelType.EDIT);
   let ee = dayjs();
@@ -2610,7 +2610,7 @@ function na({
   let er = v ? J4.VIEW : fb[R.linkAccess].audienceAccessLevel || J4.VIEW;
   let [ea, es] = useState(v ? mainFileLinkExpirationConfig?.prevPrivateProtoLinkAccess || null : mainFileLinkExpirationConfig?.prevPrivateLinkAccess || null);
   let eo = x && !(v && fb[R.linkAccess].shareAudience === _9.ANYONE);
-  let [el, ed] = useState(v && R.protoPasswordEnabled || R.filePasswordEnabled ? "view" : Cy(d) ? "edit" : "unprotected");
+  let [el, ed] = useState(v && R.protoPasswordEnabled || R.filePasswordEnabled ? "view" : isPublicLinkPasswordRequired(d) ? "edit" : "unprotected");
   let ec = useCallback(() => {
     if ("unprotected" === el) {
       if (o && !i && !C) {
@@ -2620,14 +2620,14 @@ function na({
       d?.autogen_password_controls && eh(_$$b3());
       ed("edit");
     } else {
-      if (Cy(d)) return;
+      if (isPublicLinkPasswordRequired(d)) return;
       eh(null);
       ed("unprotected");
     }
   }, [p, el, d, i, C, E, o]);
   let [em, eh] = useState(d?.autogen_password_controls ? _$$b3() : null);
   useEffect(() => {
-    U === _9.ANYONE && Cy(d) && "unprotected" === el && ed("edit");
+    U === _9.ANYONE && isPublicLinkPasswordRequired(d) && "unprotected" === el && ed("edit");
   }, [U, d, el]);
   useEffect(() => {
     U === _9.ANYONE && d?.autogen_password_controls && "edit" === el && (null === em || "" === em) && eh(_$$b3());
@@ -2681,16 +2681,16 @@ function na({
     return t ? cH(t, !0) : Fn(ee, $j.WEEK);
   }, [d, ee]);
   useEffect(() => {
-    U === _9.ANYONE && Q3(d) && !Z && ($(!0), X(eb().toDate()));
+    U === _9.ANYONE && isPublicLinkExpirationRequired(d) && !Z && ($(!0), X(eb().toDate()));
   }, [U, d, Z, eb]);
   useEffect(() => {
     en !== U && U === _9.ANYONE && q && (v && R.protoLinkAccess ? es(R.protoLinkAccess) : es(R.linkAccess));
   }, [en, U, q, R.linkAccess, v, R.protoLinkAccess]);
   let ev = x && !(v && fb[R.linkAccess].shareAudience === _9.ANYONE);
-  let eI = !(en !== U || er !== G || (R.discoverable || !1) !== K || (!viewer_export_restricted || R.linkAccess === FPermissionLevelType.EDIT) !== Q || (v && R.protoPasswordEnabled || R.filePasswordEnabled) && "unprotected" === el || "edit" === el || et !== Z) || !x || Cy(d) && !em && "edit" === el && U === _9.ANYONE || Bg(d) && U === _9.ANYONE;
+  let eI = !(en !== U || er !== G || (R.discoverable || !1) !== K || (!viewer_export_restricted || R.linkAccess === FPermissionLevelType.EDIT) !== Q || (v && R.protoPasswordEnabled || R.filePasswordEnabled) && "unprotected" === el || "edit" === el || et !== Z) || !x || isPublicLinkPasswordRequired(d) && !em && "edit" === el && U === _9.ANYONE || isPublicLinkBanned(d) && U === _9.ANYONE;
   let eE = C || i;
   let ex = E !== FEditorType.Whiteboard && S;
-  let ew = Bg(d) || E === FEditorType.Whiteboard && Q3(d);
+  let ew = isPublicLinkBanned(d) || E === FEditorType.Whiteboard && isPublicLinkExpirationRequired(d);
   let eC = E === FEditorType.Slides && !!o && !i && !C;
   let [eT, ek] = useState(!1);
   let eR = useRef(null);
@@ -2774,7 +2774,7 @@ function na({
               label: jsx(Label, {
                 children: getI18nString("permissions_modal.file_share_settings.password_required")
               }),
-              disabled: !ev || Cy(d)
+              disabled: !ev || isPublicLinkPasswordRequired(d)
             }), "edit" === el && jsxs("button", {
               className: _$$tl2,
               onClick: () => {
@@ -2815,12 +2815,12 @@ function na({
             checked: q,
             onChange: () => {
               let e = !q;
-              (!Q3(d) || e) && (q ? X(null) : q || X(eb().toDate()), $(!q));
+              (!isPublicLinkExpirationRequired(d) || e) && (q ? X(null) : q || X(eb().toDate()), $(!q));
             },
             label: jsx(Label, {
               children: q ? getI18nString("permissions_modal.file_share_settings.link_expires_in") : getI18nString("permissions_modal.file_share_settings.link_expiration")
             }),
-            disabled: Q3(d) || !eo
+            disabled: isPublicLinkExpirationRequired(d) || !eo
           }), q && ex && i && jsx(nt, {
             canChangeExpiration: eo,
             currentTimestamp: ee,
@@ -3213,7 +3213,7 @@ let n2 = registerModal(function ({
         state: F4.UNPUBLISH_HUB_FILE_INITIATED
       });
       AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(""));
-      await u(ZS({
+      await u(executePublishProcess({
         publishingMode: LibrarySourceEnum.HUBFILE,
         unpublishAll: !0,
         savepointDescription: "slide template unpublish",
@@ -3234,12 +3234,12 @@ let n2 = registerModal(function ({
   } : e.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE && getFeatureFlags().cooper_publish_to_cmty ? {
     beforeUnpublishHubFile: async () => {
       p(LibrarySourceEnum.HUBFILE);
-      await u(ZS({
+      await u(executePublishProcess({
         publishingMode: LibrarySourceEnum.HUBFILE,
         unpublishAll: !0,
         savepointDescription: "cooper hub file unpublish",
         hubFileId: e.id,
-        ...sG()
+        ...getLibraryPublishCallbacks()
       }));
     },
     onUnpublishHubFileRedirectLink: void 0,
@@ -4006,7 +4006,7 @@ function rn(e) {
   let {
     publishableComponentNodeIds,
     localComponents
-  } = useSelector(qG(Pn, LibrarySourceEnum.HUBFILE), deepEqual);
+  } = useSelector(createUpdateLibraryPublishingModeAction(Pn, LibrarySourceEnum.HUBFILE), deepEqual);
   let _ = (() => {
     if (o?.editorType === _YF.COOPER) {
       let e = PP({

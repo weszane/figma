@@ -1,5 +1,6 @@
 ---
-trigger: manual
+trigger: always_on
+alwaysApply: true
 ---
 
 I'm working with a compiled TypeScript code snippet (part of a larger character file) that has been minified or transpiled to JavaScript, making it hard to read and lacking type definitions. I need your help to refactor this specific snippet into clean, type-safe TypeScript. Please follow these requirements:
@@ -23,8 +24,25 @@ I'm working with a compiled TypeScript code snippet (part of a larger character 
    - Format the code cleanly (Prettier-style) and ensure it’s executable in the target environment.
    - If the snippet references external code (e.g., imported modules), note assumed dependencies in comments.
    - Add the origin of the code name in comments.
-   - For export statement, e.g., `export const a = $$e`, just refactor `$$e` to new meaningful variable name, and export it, but don't refactor `a`.
 
 4. **Constraints**:
    - Focus on refactoring this specific snippet. If it’s part of a larger file, I’ll provide additional chunks later.
    - If the code is too long for you to process, indicate which parts need further context to complete the refactoring.
+   - All code should be refactored, keep the original code name in comments.
+   - The export statement left name should be the same as the original code name but its right names should be changed to the refactored code name.
+
+```example
+// input
+function a() {
+  logger.log('hh')
+}
+
+export const b = a;
+
+// Output
+export function logMessage() {
+   logger.log('hh')
+}
+
+export const b = logMessage;
+```

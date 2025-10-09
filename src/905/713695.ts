@@ -312,7 +312,7 @@ let queryKeyCounter = 0
  * Original: class S
  */
 class BatchProcessor {
-  constructor(processBatch: (operations: any[]) => void) {
+  constructor(public processBatch: (operations: any[]) => void) {
     this.batchedOperations = []
   }
 
@@ -332,7 +332,7 @@ class BatchProcessor {
  * Original: class w
  */
 class ObjectStoreManager {
-  constructor(stores: any) {
+  constructor(public stores: any) {
     this.resolutions = []
     const batchProcessor = new BatchProcessor(ops => this.processBatch(ops))
     for (const key of Object.keys(stores)) {
@@ -380,7 +380,7 @@ class ObjectStoreManager {
  * Original: class C
  */
 class StoreProxy {
-  constructor(store: any, batch: BatchProcessor) { }
+  constructor(public store: any, public batch: BatchProcessor) { }
 
   update(id: any, updater: any): void {
     this.batch.enqueue({
@@ -406,7 +406,7 @@ class StoreProxy {
  * Original: class k
  */
 class QueryMutationManager {
-  constructor(client: QueryClient) {
+  constructor(public client: QueryClient) {
     this.invalidations = new Set()
     this.changes = new Set()
   }
@@ -1064,9 +1064,9 @@ class LiveStore {
               return observer.refetch({ refetchPage: (page: any, index: number) => index === 0 }).then((result: any) => {
                 getQueryContext().queryClient.setQueryData(observer.options.queryKey, (data: any) => data
                   ? {
-                    pages: data.pages.slice(0, 1),
-                    pageParams: data.pageParams.slice(0, 1),
-                  }
+                      pages: data.pages.slice(0, 1),
+                      pageParams: data.pageParams.slice(0, 1),
+                    }
                   : data)
                 return result
               })
@@ -1169,12 +1169,12 @@ class LiveStore {
           return queryConfig.joinPages
             ? queryConfig.joinPages(joinedPages)
             : joinedPages.reduce((acc: any[], page: any) => {
-              if (!Array.isArray(page.data)) {
-                throw new TypeError('Expected array data in page')
-              }
-              acc.push(...page.data)
-              return acc
-            }, [])
+                if (!Array.isArray(page.data)) {
+                  throw new TypeError('Expected array data in page')
+                }
+                acc.push(...page.data)
+                return acc
+              }, [])
         })
         const outputAtom = createCustomAtom(joinedDataAtom, (get: any) => {
           const { output } = queryConfig
@@ -1423,8 +1423,8 @@ class LiveStore {
     }
   }
 
-  extend(extension: (instance: this) => any): this {
-    return Object.assign(this, extension(this))
+  extend<T>(extension: (instance: this) => T): this & T {
+    return Object.assign(this, extension(this)) as this & T
   }
 
   setGremlinConfig(config: any): void {
@@ -1670,7 +1670,7 @@ class MetricsReporter {
 
 // Original: let et = new class { ... }()
 let et = new MetricsReporter()
-let el = {
+let extendedLiveStorePlugin = {
   File: setupFileLivestoreManager(() => debugState, () => realtimeV2),
   Repo: createRepoManager(() => debugState, () => realtimeV2),
   Folder: setupFolderLivestoreManager(() => debugState, () => realtimeV2),
@@ -1718,7 +1718,7 @@ function extendLiveStoreWithQueries(liveStore: LiveStore, managers: any) {
       useValue: (id: any) => {
         const queryAtom = objectQuery(id)
         const [resource] = setupResourceAtomHandler(queryAtom)
-        return resource
+        return resource as any
       },
     }
   }
@@ -1729,12 +1729,12 @@ function extendLiveStoreWithQueries(liveStore: LiveStore, managers: any) {
     Team: createQueryWrapper(managers.Team),
   }
 }
-
+type ExtendedLiveStorePlugin = ReturnType<typeof extendLiveStoreWithQueries>
 /**
  * The main LiveStore instance, created with atom store manager, extras provider, and managers.
  * Extended with query methods and configured with metrics reporter.
  */
-const liveStore = createLiveStore(atomStoreManager, extrasProvider, el).extend(() => extendLiveStoreWithQueries(liveStore, el))
+const liveStore = createLiveStore(atomStoreManager, extrasProvider, extendedLiveStorePlugin).extend<ExtendedLiveStorePlugin>((e: any) => (extendLiveStoreWithQueries(e, extendedLiveStorePlugin) as unknown as ExtendedLiveStorePlugin))
 liveStore.setMetricsReporter(et)
 /**
  * Extends the LiveStore instance with a custom useFile hook for handling cached file data.

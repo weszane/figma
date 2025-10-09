@@ -27,13 +27,13 @@ const UpgradeRequestSettingSchema = z.nativeEnum(UpgradeRequestSetting)
  * Enum for public link controls setting.
  * Original variable: $$l3
  */
-export const PublicLinkControlsSetting = {
-  ALLOWED: 'public_link_controls_setting_allowed',
-  PASSWORD_REQUIRED: 'public_link_controls_setting_password_required',
-  EXPIRATION_REQUIRED: 'public_link_controls_setting_expiration_required',
-  EXP_AND_PWD_REQUIRED: 'public_link_controls_setting_password_and_expiration_required',
-  BANNED: 'public_link_controls_setting_banned',
-} as const
+export  enum PublicLinkControlsSetting {
+  ALLOWED= 'public_link_controls_setting_allowed',
+  PASSWORD_REQUIRED= 'public_link_controls_setting_password_required',
+  EXPIRATION_REQUIRED= 'public_link_controls_setting_expiration_required',
+  EXP_AND_PWD_REQUIRED= 'public_link_controls_setting_password_and_expiration_required',
+  BANNED= 'public_link_controls_setting_banned',
+} 
 export type PublicLinkControlsSettingType = keyof typeof PublicLinkControlsSetting
 const PublicLinkControlsSettingSchema = z.nativeEnum(PublicLinkControlsSetting)
 

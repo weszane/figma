@@ -5,7 +5,7 @@
  * @throws If the file is not provided or reading fails.
  * Original function name: $$n0
  */
-export function readImageBytes(file: File): Promise<ArrayBuffer> {
+export function readImageBytes(file: Blob): Promise<ArrayBuffer> {
   return new Promise((resolve, reject) => {
     if (!file) {
       reject(new Error('Failed to load image bytes without file object'))

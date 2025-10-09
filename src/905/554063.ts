@@ -10,7 +10,7 @@ import { getValidationErrors } from "../905/113805";
 import { unsetSymbol } from "../905/17894";
 import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { MAX_PUBLISHERS_PER_RESOURCE } from "../figma_app/740025";
-import { jr } from "../figma_app/599979";
+import { isUserWorkspace } from "../figma_app/599979";
 import { CommunityMentionsLibrary } from "../905/772425";
 import { SimpleFuseSearch } from "../905/81982";
 import { d as _$$d } from "../905/44199";
@@ -66,7 +66,7 @@ export function $$S0({
     matchAllTokens: !0
   }));
   let O = getFieldValueOrDefault(authorField, void 0);
-  let D = useCallback(e => !R.tokens.map(e => e.content.id).includes(e.id) && !(O && jr(O) && e.primary_user_id === O.user_id), [R.tokens, O]);
+  let D = useCallback(e => !R.tokens.map(e => e.content.id).includes(e.id) && !(O && isUserWorkspace(O) && e.primary_user_id === O.user_id), [R.tokens, O]);
   return (useEffect(() => {
     P.current.set(validCocreators.filter(D));
   }, [D, validCocreators, authorField]), useEffect(() => {

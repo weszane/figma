@@ -9,7 +9,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { replaceSelection } from "../figma_app/741237";
 import { s } from "../figma_app/874592";
-import { Dr, Ct } from "../figma_app/803787";
+import { hasAnyStagedItems, isSelectedComponentInWellFormedProductComponents } from "../figma_app/803787";
 import { KindEnum } from "../905/129884";
 import { PanelWidth, DefinitionAssignment } from "../figma_app/164212";
 import { e6 } from "../figma_app/545190";
@@ -35,8 +35,8 @@ export let $$M0 = memo(function (e) {
   let a = useRef(null);
   Od(a);
   h$(a);
-  let d = useSelector(Dr);
-  let u = useSelector(Ct);
+  let d = useSelector(hasAnyStagedItems);
+  let u = useSelector(isSelectedComponentInWellFormedProductComponents);
   let {
     allowLibraryPublish
   } = useContext(s);

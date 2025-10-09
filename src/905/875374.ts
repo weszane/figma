@@ -2,7 +2,7 @@ import { getFontIndexHash } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { getCurrentLiveGraphClient } from "../905/761735";
 import { maybeCreateSavepoint } from "../905/294113";
-import { z } from "../905/931953";
+import { siteAPIService } from "../905/931953";
 export async function $$l0(e, {
   fileKey: t,
   publishedByUserId: i,
@@ -48,7 +48,7 @@ async function c(e, t, i) {
     shouldUse250317Index: !!getFeatureFlags().font_index_250317
   });
   try {
-    a = await z.postSitesBundleAsync({
+    a = await siteAPIService.postSitesBundleAsync({
       fileKey: t,
       responsiveSetGuids: i,
       fontIndexHash: l,

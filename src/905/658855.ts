@@ -16,7 +16,7 @@ import { VisualBellActions } from "../905/302958";
 import { I as _$$I } from "../905/343721";
 import { DM, en } from "../905/759470";
 import { PublishModalState } from "../figma_app/350203";
-import { N8, Gp, CW, nK } from "../figma_app/599979";
+import { processCarouselFiles, processCarouselMedia, SUPPORTED_IMAGE_TYPES, cleanupMediaObjectUrls } from "../figma_app/599979";
 import { VIDEO_TYPE_VALUES } from "../905/966582";
 import { PositioningStrategy } from "../905/748636";
 import { NJ } from "../figma_app/419216";
@@ -57,7 +57,7 @@ async function O(e, t, i, n, r, a, s, o, l, d) {
   a(!0);
   let u = [];
   try {
-    u = await N8(c, r);
+    u = await processCarouselFiles(c, r);
   } catch (e) {
     n(VisualBellActions.enqueue({
       message: e.message,
@@ -109,7 +109,7 @@ function D({
     R(!0);
     let i = [];
     try {
-      i = await Gp(t.dataTransfer?.files, e);
+      i = await processCarouselMedia(t.dataTransfer?.files, e);
     } catch (e) {
       V(VisualBellActions.enqueue({
         message: e.message,
@@ -136,7 +136,7 @@ function D({
     R(!0);
     let i = [];
     try {
-      i = await Gp(t.clipboardData?.files, e);
+      i = await processCarouselMedia(t.clipboardData?.files, e);
     } catch (e) {
       V(VisualBellActions.enqueue({
         message: e.message,
@@ -187,7 +187,7 @@ function D({
             display: "none"
           },
           type: "file",
-          accept: [...CW, ...(e ? VIDEO_TYPE_VALUES : [])].join(","),
+          accept: [...SUPPORTED_IMAGE_TYPES, ...(e ? VIDEO_TYPE_VALUES : [])].join(","),
           ref: z,
           onChange: l ? noop : () => O(z, c, w, V, e, R, D, U, B, L),
           multiple: !0
@@ -400,7 +400,7 @@ function B({
               onClick: () => function (e, t, n, r, a) {
                 let s = [...i];
                 let o = s.splice(e, 1)[0];
-                nK(o);
+                cleanupMediaObjectUrls(o);
                 trackEventAnalytics("community_publish_modal", {
                   userId: t,
                   orgId: n,
@@ -442,7 +442,7 @@ function B({
           }
         }), jsx("input", {
           type: "file",
-          accept: [...CW, ...(f ? VIDEO_TYPE_VALUES : [])].join(","),
+          accept: [...SUPPORTED_IMAGE_TYPES, ...(f ? VIDEO_TYPE_VALUES : [])].join(","),
           ref: R,
           style: {
             display: "none"

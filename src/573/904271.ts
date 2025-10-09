@@ -9,7 +9,7 @@ import { useHasReadyNodesWithParentOrg } from "../figma_app/88239";
 import { useSceneGraphSelector, useSceneGraphSelection, useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { selectOpenFile, selectCurrentFile } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
-import { F9, e_ as _$$e_, MH, dM, Xh } from "../figma_app/803787";
+import { hasLocalOrPublishedContent, selectLibrary, selectComponentLibraryItemsWithStatus, selectStateGroupLibraryItemsWithStatus, createHasAnyStagedAssetsAtomFamily } from "../figma_app/803787";
 import { bL, EA } from "../9410/499229";
 import { f as _$$f } from "../1528/716387";
 import { $ as _$$$ } from "../figma_app/644304";
@@ -465,7 +465,7 @@ function tS({
     searchOption
   } = _$$I(Cn.AssetsPanel);
   let _ = useSelector(selectSceneGraph);
-  let T = useSelector(F9);
+  let T = useSelector(hasLocalOrPublishedContent);
   let k = useAtomWithSubscription(_$$T2);
   let S = searchOption?.type === _$$I2.ALL;
   let w = fV(e.library_key);
@@ -1107,7 +1107,7 @@ function t9({
 }) {
   let c = useDispatch();
   let u = useSelector(e => e.dropdownShown);
-  let p = useSelector(_$$e_);
+  let p = useSelector(selectLibrary);
   let y = useSelector(getSelectedViewSelector);
   let m = useSelector(selectSceneGraph);
   let f = useSelector(selectSceneGraphSelection);
@@ -1143,11 +1143,11 @@ function t9({
   }) {
     var s;
     let a = function () {
-      let e = useSelector(_$$e_);
+      let e = useSelector(selectLibrary);
       let t = useSelector(selectOpenFile);
       let s = useAtomWithSubscription(libraryKeyMapAtom);
-      let n = useSelector(MH);
-      let a = useSelector(dM);
+      let n = useSelector(selectComponentLibraryItemsWithStatus);
+      let a = useSelector(selectStateGroupLibraryItemsWithStatus);
       let i = useSelector(selectTeams);
       let l = useFigmaLibrariesEnabled();
       let d = useAtomWithSubscription(filesByLibraryKeyAtom);
@@ -1910,7 +1910,7 @@ function sN({
   }) : null;
 }
 export let $$sC0 = memo(function () {
-  let e = useAtomWithSubscription(Xh(void 0));
+  let e = useAtomWithSubscription(createHasAnyStagedAssetsAtomFamily(void 0));
   let t = selectCurrentFile();
   let s = useIsProgressBarHiddenOrLocked();
   bi();

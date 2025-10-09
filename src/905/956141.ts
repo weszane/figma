@@ -7,7 +7,7 @@ import { LikeCountDisplay, UsageCountDisplay } from "../905/14017";
 import { Q } from "../905/978641";
 import { getFieldValueOrDefault } from "../905/497882";
 import { getResourceUserCount } from "../figma_app/777551";
-import { j4 } from "../figma_app/599979";
+import { getDebugWorkspaceInfo } from "../figma_app/599979";
 var o = s;
 let h = "preview_tile--nonOverflowingText---rDD1";
 export function $$g0({
@@ -23,7 +23,7 @@ export function $$g0({
   let b = getFieldValueOrDefault(s, void 0)?.thumbnailMedium;
   let v = g && getFieldValueOrDefault(g, void 0);
   let I = _ && getFieldValueOrDefault(_, void 0);
-  let E = I ? j4(I)?.name : i && "publishedByUser" in i ? i.publishedByUser?.name : void 0;
+  let E = I ? getDebugWorkspaceInfo(I)?.name : i && "publishedByUser" in i ? i.publishedByUser?.name : void 0;
   return jsxs("div", {
     className: o()("preview_tile--container--ecHQW", {
       "preview_tile--large--mdpJz": "large" === e

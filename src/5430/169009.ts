@@ -5,7 +5,7 @@ import _require from "../draftjs_composer/577988";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { isOrgOrTeamExport, isResourcePublicWithComments, getAcceptedPublisherProfile, isCommentingEnabled } from "../figma_app/740025";
-import { PR, MK, Cw } from "../figma_app/599979";
+import { isUserAcceptedAsAuthor, getPublisherStatus, PublisherStatus } from "../figma_app/599979";
 import { DropdownReportAction, DropdownCommunityType, DROPDOWN_TYPE_GENERIC_COMMENT_MENU, DropdownEnableState } from "../figma_app/188152";
 import { selectCurrentUser } from "../905/372672";
 import { useRef, useEffect, useState, useCallback, cloneElement, useMemo } from "react";
@@ -839,7 +839,7 @@ function eS(e) {
         p.push(jsx(eN, {
           id: n,
           replyId: replies[n],
-          isAuthorAcceptedPublisher: PR(a, e.resource),
+          isAuthorAcceptedPublisher: isUserAcceptedAsAuthor(a, e.resource),
           commentType: e.commentType,
           resourceType: _,
           resourceId: e.resource.id,
@@ -852,7 +852,7 @@ function eS(e) {
     return jsx(eN, {
       id: r,
       replyId: replies[r],
-      isAuthorAcceptedPublisher: PR(i, e.resource),
+      isAuthorAcceptedPublisher: isUserAcceptedAsAuthor(i, e.resource),
       commentType: e.commentType,
       resourceType: _,
       resourceId: e.resource.id,
@@ -1046,7 +1046,7 @@ export function $$eP0({
   resource: e
 }) {
   let t = selectCurrentUser();
-  let r = useSelector(t => MK(t, e)) >= Cw.ADMIN && (getAcceptedPublisherProfile(e)?.id || t?.community_profile_id) || null;
+  let r = useSelector(t => getPublisherStatus(t, e)) >= PublisherStatus.ADMIN && (getAcceptedPublisherProfile(e)?.id || t?.community_profile_id) || null;
   let c = useSelector(e => e.authedActiveCommunityProfile);
   return jsx(eA, {
     commentType: DropdownCommunityType.COMMUNITY,

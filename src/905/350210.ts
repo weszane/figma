@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef, PureComponent } from "react";
 import { useDispatch, connect } from "react-redux";
 import { s as _$$s } from "../905/601732";
-import { j4, o1, f7, Rv, UU, mH } from "../figma_app/599979";
+import { getDebugWorkspaceInfo, getWorkspaceDisplayName, isSameWorkspace, getValidAuthorsForHubFile, getValidAuthorsForPlugin, getWorkspaceHandle } from "../figma_app/599979";
 import { getPermissionsState } from "../figma_app/642025";
 import { TeamOrgType } from "../figma_app/10554";
 import { A as _$$A } from "../905/61817";
@@ -101,7 +101,7 @@ function y({
         i(e);
       },
       children: jsx(_$$A2, {
-        avatarEntity: j4(e),
+        avatarEntity: getDebugWorkspaceInfo(e),
         authorDisplayName: s(e),
         authorProfileHandle: l(e)
       })
@@ -112,12 +112,12 @@ class b extends PureComponent {
   constructor() {
     super(...arguments);
     this.formatter = {
-      format: e => o1(e, {
+      format: e => getWorkspaceDisplayName(e, {
         ...this.props.permissionsState,
         authedProfilesById: this.props.authedProfilesById,
         authedUsers: this.props.authedUsers
       }),
-      isEqual: f7
+      isEqual: isSameWorkspace
     };
     this.cmpOptions = (e, t) => {
       let i = e => "org_id" in e ? 3 : "user_id" in e ? 2 : 1;
@@ -132,10 +132,10 @@ class b extends PureComponent {
       currentOrgId: this.props.permissionsState.currentUserOrgId,
       authedProfilesById: this.props.authedProfilesById
     };
-    return "hub_file" === this.props.resourceType ? Rv(this.props.editingFile.team_id, e, this.props.hubFile || null, this.props.editingFile.parent_org_id || null) : "plugin" === this.props.resourceType || "widget" === this.props.resourceType ? UU(e, this.props.resource) : [];
+    return "hub_file" === this.props.resourceType ? getValidAuthorsForHubFile(this.props.editingFile.team_id, e, this.props.hubFile || null, this.props.editingFile.parent_org_id || null) : "plugin" === this.props.resourceType || "widget" === this.props.resourceType ? getValidAuthorsForPlugin(e, this.props.resource) : [];
   }
   renderCreatorWithIcon(e) {
-    let t = j4(e);
+    let t = getDebugWorkspaceInfo(e);
     let i = "org_id" in e ? TeamOrgType.ORG : "team_id" in e ? TeamOrgType.TEAM : TeamOrgType.USER;
     return t ? jsx(_$$A, {
       profile: {
@@ -156,7 +156,7 @@ class b extends PureComponent {
       dropdownType: "PUBLISHING_METADATA_AUTHOR_SELECT",
       getAuthorDisplayName: this.formatter.format,
       getAuthorOptionKey: _$$s,
-      getAuthorProfileHandle: e => mH(e, {
+      getAuthorProfileHandle: e => getWorkspaceHandle(e, {
         ...this.props.permissionsState,
         authedProfilesById: this.props.authedProfilesById,
         authedUsers: this.props.authedUsers

@@ -16,13 +16,13 @@ import { PaginatedTemplatesByOrgWorkspace, PaginatedTemplatesByOrg, PaginatedTem
 import { liveStoreInstance } from "../905/713695";
 import { isBigmaEnabledAlias } from "../figma_app/336853";
 import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from "../figma_app/465071";
-import { AC, tz } from "../figma_app/803787";
+import { selectWellFormedModuleNodeIds, selectDeletedOrCooperComponentAndFrameNodeIds } from "../figma_app/803787";
 import { getCurrentTeam } from "../figma_app/598018";
 import { checkForVisibleChanges } from "../figma_app/841351";
 import { n as _$$n } from "../905/79930";
 import { s as _$$s } from "../905/82276";
 import { UNASSIGNED } from "../905/247093";
-import { q as _$$q } from "../figma_app/446378";
+import { templateService } from "../figma_app/446378";
 import { getCurrentFileType } from "../figma_app/976749";
 import { hasTwoValue } from "../figma_app/741211";
 import { j } from "../905/521149";
@@ -120,7 +120,7 @@ export function $$V1(e, t) {
     myTeamsOnly: n,
     offset: i = 0
   }) => {
-    e && !E && _$$q.getFilteredTeamTemplates({
+    e && !E && templateService.getFilteredTeamTemplates({
       orgId: e.id,
       from: i,
       size: 5,
@@ -165,7 +165,7 @@ export function $$V1(e, t) {
       let i = n.templates.length;
       if ((S.current[r] || 0) >= i) return;
       S.current[r] = i;
-      _$$q.getTeamBrowsePaginated({
+      templateService.getTeamBrowsePaginated({
         orgId: e.id,
         teamId: r,
         from: i,
@@ -506,7 +506,7 @@ let q = liveStoreInstance.Query({
     count: t,
     editorType: r,
     enabled: n = !0
-  }) => e && n ? await _$$q.getSearchPaginated({
+  }) => e && n ? await templateService.getSearchPaginated({
     orgId: e,
     size: t,
     from: 0,
@@ -575,8 +575,8 @@ export function $$ee9() {
   let t = useStore();
   let [r, a] = useAtomValueAndSetter($$Q10);
   let s = getCurrentFileType();
-  let o = selectWithShallowEqual(e => s === FFileType.SLIDES ? AC(e) : []);
-  let d = selectWithShallowEqual(e => s === FFileType.COOPER ? tz(e) : []);
+  let o = selectWithShallowEqual(e => s === FFileType.SLIDES ? selectWellFormedModuleNodeIds(e) : []);
+  let d = selectWithShallowEqual(e => s === FFileType.COOPER ? selectDeletedOrCooperComponentAndFrameNodeIds(e) : []);
   let u = o.length;
   let p = d.length;
   useEffect(() => {

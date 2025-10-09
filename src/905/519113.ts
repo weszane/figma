@@ -29,7 +29,7 @@ import { oz, zq } from "../figma_app/782261";
 import { IW } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
-import { TS, ZS, iA } from "../figma_app/519839";
+import { finishPublishThunk, executePublishProcess, firstDraftPublishThunk } from "../figma_app/519839";
 import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
@@ -48,8 +48,8 @@ import { isOrgOrWorkspaceContainer, hasAssetError, getAllAssets, isNewOrChangedO
 import { FFileType, FContainerType, FAccessLevelType } from "../figma_app/191312";
 import { PublishingModalView } from "../figma_app/43951";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
-import { Wz, MW, ju, cM, MH, dM, fA, y6, x$ as _$$x$, oB as _$$oB, JI, Dc, Iy, Mh, Pd } from "../figma_app/803787";
-import { O as _$$O3 } from "../905/566074";
+import { groupComponentItemsByStateGroup, createWellFormedVariablesBySetIdSelector, createUnpublishedVariablesBySetIdSelector, selectStyledLibraryItemsWithStatus, selectComponentLibraryItemsWithStatus, selectStateGroupLibraryItemsWithStatus, canUserPublishToCommunity, createLibraryItemsAtomFamily, createAllStagedItemIdsAtomFamily, selectWellFormedComponentsForPublishing, selectWellFormedStateGroupsForPublishing, selectWellFormedStylesForPublishing, createHasAnyWellFormedAssetsAtomFamily, selectOpenHubFileComponents, selectOpenHubFileStateGroups } from "../figma_app/803787";
+import { isShareableAssetType } from "../905/566074";
 import { LibraryPublishStatusEnum, LibrarySourceEnum, PrimaryWorkflowEnum, StagingStatusEnum } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { isOrgBrowsableFile } from "../905/465068";
@@ -68,7 +68,7 @@ import { useNavigationStack } from "../905/794154";
 import { FlexBox } from "../905/222272";
 import { Panel } from "../905/236825";
 import { z as _$$z } from "../905/491916";
-import { cw, BT } from "../905/514666";
+import { getStagingStatusText, sortItemsByPosition } from "../905/514666";
 import { ExtensionFeatureKey } from "../905/946805";
 import { $I } from "../figma_app/322845";
 import { z as _$$z2 } from "../905/550439";
@@ -121,7 +121,7 @@ import { registerTooltip } from "../905/524523";
 import { Gu0 } from "../figma_app/27776";
 import { A as _$$A3 } from "../5724/388041";
 import { A as _$$A4 } from "../svg/660901";
-import { t as _$$t2 } from "../905/340158";
+import { libraryAssetsAtom } from "../905/340158";
 import { O as _$$O4 } from "../905/969533";
 import { k as _$$k4 } from "../905/44647";
 import { compareNumbers } from "../figma_app/766708";
@@ -710,11 +710,11 @@ function tF({
   let b = useSelector(e => e.library);
   let v = useSelector(e => e.fileByKey);
   let I = useAtomWithSubscription(filesByLibraryKeyAtom);
-  let E = useSelector(Wz);
+  let E = useSelector(groupComponentItemsByStateGroup);
   let x = useDispatch();
-  let S = useMemo(MW, []);
+  let S = useMemo(createWellFormedVariablesBySetIdSelector, []);
   let w = useSelector(t => S(t, e.node_id));
-  let C = useMemo(ju, []);
+  let C = useMemo(createUnpublishedVariablesBySetIdSelector, []);
   let T = useSelector(t => C(t, e.node_id));
   let k = e.type === PrimaryWorkflowEnum.VARIABLE_SET && w.length > 0;
   let R = useCallback(() => {
@@ -1032,7 +1032,7 @@ function tF({
             showingDropdown: !!A && A.type === N,
             svgContainerClassName: "library_item_row--chevron--fbLtW"
           }), F()]
-        }) : d ? e.status === StagingStatusEnum.NEW ? renderI18nText("design_systems.publishing_modal.added") : renderI18nText("design_systems.publishing_modal.modified") : e.type === PrimaryWorkflowEnum.STATE_GROUP && e.status !== StagingStatusEnum.DELETED && (E[e.node_id] ?? []).every(e => isStagedStatus(e.status)) ? renderI18nText("design_systems.publishing_modal.modified") : e.type === PrimaryWorkflowEnum.STYLE && e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : cw(e.status);
+        }) : d ? e.status === StagingStatusEnum.NEW ? renderI18nText("design_systems.publishing_modal.added") : renderI18nText("design_systems.publishing_modal.modified") : e.type === PrimaryWorkflowEnum.STATE_GROUP && e.status !== StagingStatusEnum.DELETED && (E[e.node_id] ?? []).every(e => isStagedStatus(e.status)) ? renderI18nText("design_systems.publishing_modal.modified") : e.type === PrimaryWorkflowEnum.STYLE && e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : getStagingStatusText(e.status);
       })(), !W && q]
     }), B && "THUMBNAIL" !== e.type && !e.deletedFromSceneGraph && jsx(tO, {
       className: "library_item_row--contextMenu--cO1wt",
@@ -1193,7 +1193,7 @@ function tZ({
       children: e.name
     }), t && jsx("span", {
       className: "variable_library_item_row--statusText--Khb5a",
-      children: e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : cw(e.status)
+      children: e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : getStagingStatusText(e.status)
     }), s?.type === o && !e.deletedFromSceneGraph && jsx(ms, {
       className: "variable_library_item_row--contextMenu--djku4",
       style: s.data.position,
@@ -1210,8 +1210,8 @@ function tX({
   drillUp: i
 }) {
   let [s, o] = useState(!1);
-  let l = useMemo(MW, []);
-  let d = useMemo(ju, []);
+  let l = useMemo(createWellFormedVariablesBySetIdSelector, []);
+  let d = useMemo(createUnpublishedVariablesBySetIdSelector, []);
   let c = useSelector(e => l(e, t.node_id));
   let u = useSelector(e => d(e, t.node_id));
   function p(e) {
@@ -1309,10 +1309,10 @@ function tJ(e) {
     useSinatraType: !0
   });
   let ef = em?.key;
-  let e_ = useSelector(cM);
-  let eA = useSelector(MH);
-  let ey = useSelector(dM);
-  let ev = useAtomWithSubscription(_$$t2);
+  let e_ = useSelector(selectStyledLibraryItemsWithStatus);
+  let eA = useSelector(selectComponentLibraryItemsWithStatus);
+  let ey = useSelector(selectStateGroupLibraryItemsWithStatus);
+  let ev = useAtomWithSubscription(libraryAssetsAtom);
   let eI = nN();
   let eE = useMemo(() => processLocalComponents(eA), [eA]);
   let {
@@ -1320,7 +1320,7 @@ function tJ(e) {
     canShowCTA,
     showCTA
   } = _$$z2("publishing");
-  let eR = useSelector(fA);
+  let eR = useSelector(canUserPublishToCommunity);
   let eN = useCurrentPublicPlan("PublishingModalInner").unwrapOr(null);
   let eP = getParentOrgIdIfOrgLevel(eN);
   let eO = useSelector(e => e.orgById);
@@ -1372,15 +1372,15 @@ function tJ(e) {
   let eq = UJ();
   let eQ = Xm();
   SR();
-  let e0 = useAtomWithSubscription(y6(eQ));
-  let e1 = useAtomWithSubscription(_$$x$(eQ));
+  let e0 = useAtomWithSubscription(createLibraryItemsAtomFamily(eQ));
+  let e1 = useAtomWithSubscription(createAllStagedItemIdsAtomFamily(eQ));
   let e2 = useLatestRef(eY);
   useEffect(() => {
     e2?.status === APILoadingStatus.LOADING && eY.status === APILoadingStatus.SUCCESS && (initiallyCheckedItemIDs || tt(new Set(e1)));
   }, [e1, eY, initiallyCheckedItemIDs, e2?.status]);
-  let e5 = useSelector(e => _$$oB(e, eQ));
-  let e4 = useSelector(e => JI(e, eQ));
-  let e6 = useSelector(e => Dc(e, eQ));
+  let e5 = useSelector(e => selectWellFormedComponentsForPublishing(e, eQ));
+  let e4 = useSelector(e => selectWellFormedStateGroupsForPublishing(e, eQ));
+  let e6 = useSelector(e => selectWellFormedStylesForPublishing(e, eQ));
   let [te, tt] = useState(() => new Set(initiallyCheckedItemIDs && initiallyCheckedItemIDs.size > 0 ? e1.filter(e => initiallyCheckedItemIDs?.has(e)) : e1));
   useEffect(() => {
     let e = e => {
@@ -1397,7 +1397,7 @@ function tJ(e) {
     };
   }, []);
   let ti = useCallback(() => {
-    eh.publishProgress.state === LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS && h(TS());
+    eh.publishProgress.state === LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS && h(finishPublishThunk());
   }, [h, eh.publishProgress.state]);
   let tn = useCallback(() => {
     ti();
@@ -1456,7 +1456,7 @@ function tJ(e) {
     }
   }, [te, ey, eh.used__LIVEGRAPH.localNodeIdToDestinationKey, eh.movedLibraryItems.local, e5, e4, e6]);
   let tu = _$$B();
-  let tp = useAtomWithSubscription(Iy(eQ));
+  let tp = useAtomWithSubscription(createHasAnyWellFormedAssetsAtomFamily(eQ));
   let {
     currentFileIsFirstDraftKit,
     currentFileIsDirectGenKit
@@ -1491,7 +1491,7 @@ function tJ(e) {
         t = remapNodeIdsForMove(e, i, n);
       }
       tc();
-      h(ZS({
+      h(executePublishProcess({
         savepointDescription: en,
         itemsToPublish: te,
         libraryModalSessionId,
@@ -1506,15 +1506,15 @@ function tJ(e) {
     }
   }, [em, tp, eY, tc, h, en, te, eV, eI, ev.data, modeLimit, canShowCTA, showCTA, eA, ey, e_, e5, tu, libraryModalSessionId, tg, t_]);
   let tI = useCallback(() => {
-    tg && h(iA({
+    tg && h(firstDraftPublishThunk({
       publishAsFirstDraftKit: tg,
       isDirectGenCompatible: t_,
       firstDraftVariablesForTheme: tu
     }));
   }, [h, tu, t_, tg]);
   let tE = JT();
-  let tx = useSelector(Mh);
-  let tS = useSelector(Pd);
+  let tx = useSelector(selectOpenHubFileComponents);
+  let tS = useSelector(selectOpenHubFileStateGroups);
   let {
     getAssetInvalidReason,
     itemsToPublishInvalidReason
@@ -1598,8 +1598,8 @@ function tJ(e) {
   let tD = e0.productComponents.modified.wellFormed.length;
   let tL = e0.styles.modified.wellFormed.length;
   let tF = e0.variableSets.modified.wellFormed.length;
-  let tj = _$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) ? e0.libraryAssets[PrimaryWorkflowEnum.RESPONSIVE_SET].modified.wellFormed.length : 0;
-  let tU = _$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) ? e0.libraryAssets[PrimaryWorkflowEnum.CODE_COMPONENT].modified.wellFormed.length : 0;
+  let tj = isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) ? e0.libraryAssets[PrimaryWorkflowEnum.RESPONSIVE_SET].modified.wellFormed.length : 0;
+  let tU = isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) ? e0.libraryAssets[PrimaryWorkflowEnum.CODE_COMPONENT].modified.wellFormed.length : 0;
   let tB = e0.pageThumbnails.modified.length;
   let tV = jsx(e$, {
     canPublishComponentsAndStateGroups: eR,
@@ -1739,8 +1739,8 @@ function t0({
 }) {
   let i = useOpenFileLibraryKey();
   let r = useDispatch();
-  let s = Object.values(useSelector(MH));
-  let o = Object.values(useSelector(dM));
+  let s = Object.values(useSelector(selectComponentLibraryItemsWithStatus));
+  let o = Object.values(useSelector(selectStateGroupLibraryItemsWithStatus));
   let l = !s.length && !o.length;
   let c = !1 === t ? {
     "data-tooltip-type": KindEnum.TEXT,
@@ -1828,13 +1828,13 @@ function t1(e) {
   };
   let m = Xm();
   let h = UJ();
-  let g = useAtomWithSubscription(y6(m));
+  let g = useAtomWithSubscription(createLibraryItemsAtomFamily(m));
   let [f, _, b, v, I, E, x, S, w, C, T, N, O, D, L, F, M, j, U, B, V, G] = useMemo(() => [g.libraryAssets[PrimaryWorkflowEnum.RESPONSIVE_SET].modified.wellFormed, g.libraryAssets[PrimaryWorkflowEnum.RESPONSIVE_SET].modified.erroneous, g.libraryAssets[PrimaryWorkflowEnum.RESPONSIVE_SET].unmodified.published, g.libraryAssets[PrimaryWorkflowEnum.RESPONSIVE_SET].unmodified.unpublished, g.libraryAssets[PrimaryWorkflowEnum.CODE_COMPONENT].modified.wellFormed, g.libraryAssets[PrimaryWorkflowEnum.CODE_COMPONENT].modified.erroneous, g.libraryAssets[PrimaryWorkflowEnum.CODE_COMPONENT].unmodified.published, g.libraryAssets[PrimaryWorkflowEnum.CODE_COMPONENT].unmodified.unpublished, g.variableSets.modified.wellFormed, g.variableSets.modified.erroneous, g.variableSets.unmodified.published, g.variableSets.unmodified.unpublished, g.variableSetsWithHiddenVariables.modified.wellFormed, g.styles.modified.wellFormed, g.styles.unmodified.published, g.styles.unmodified.unpublished, g.productComponents.modified.wellFormed, g.productComponents.modified.erroneous, g.productComponents.unmodified.published, g.productComponents.unmodified.unpublished, g.pageThumbnails.modified, g.pageThumbnails.unmodified].map(t => e.assetQuery ? t.filter(t => t.name.toLocaleLowerCase().trim().includes(e.assetQuery.toLocaleLowerCase())) : t), [g.libraryAssets, g.variableSets.modified.wellFormed, g.variableSets.modified.erroneous, g.variableSets.unmodified.published, g.variableSets.unmodified.unpublished, g.variableSetsWithHiddenVariables.modified.wellFormed, g.styles.modified.wellFormed, g.styles.unmodified.published, g.styles.unmodified.unpublished, g.productComponents.modified.wellFormed, g.productComponents.modified.erroneous, g.productComponents.unmodified.published, g.productComponents.unmodified.unpublished, g.pageThumbnails.modified, g.pageThumbnails.unmodified, e.assetQuery]);
-  let z = useMemo(() => new Set(D.concat(w).concat(M).concat(_$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) ? f : []).concat(_$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) ? I : []).map(e => e.node_id).concat(V.map(e => e.node_id))), [D, w, M, f, I, V]);
+  let z = useMemo(() => new Set(D.concat(w).concat(M).concat(isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) ? f : []).concat(isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) ? I : []).map(e => e.node_id).concat(V.map(e => e.node_id))), [D, w, M, f, I, V]);
   let H = w.length > 0 || N.length > 0 || O.length > 0;
-  let W = useSelector(Wz);
+  let W = useSelector(groupComponentItemsByStateGroup);
   let K = (t, i, r, a) => {
-    for (let s of t = BT(t)) {
+    for (let s of t = sortItemsByPosition(t)) {
       let t = m?.[s.node_id];
       let o = !1;
       if (s.type === PrimaryWorkflowEnum.STATE_GROUP) {
@@ -1896,10 +1896,10 @@ function t1(e) {
   };
   let X = (() => {
     let i = [];
-    let r = w.length + D.length + M.length + (_$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) ? f.length : 0) + (_$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) ? I.length : 0) + V?.length;
-    let a = T.length + L.length + U.length + (_$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) ? b.length : 0) + (_$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) ? x.length : 0) + G?.length;
-    let l = N.length + B.length + F.length + O.length + (_$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) ? v.length : 0) + (_$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) ? S.length : 0);
-    let u = j.length + C.length + (_$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) ? _.length : 0) + (_$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) ? E.length : 0);
+    let r = w.length + D.length + M.length + (isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) ? f.length : 0) + (isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) ? I.length : 0) + V?.length;
+    let a = T.length + L.length + U.length + (isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) ? b.length : 0) + (isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) ? x.length : 0) + G?.length;
+    let l = N.length + B.length + F.length + O.length + (isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) ? v.length : 0) + (isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) ? S.length : 0);
+    let u = j.length + C.length + (isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) ? _.length : 0) + (isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) ? E.length : 0);
     u && ($(jsx(tH, {
       header: renderI18nText("design_systems.publishing_modal.invalid_components_with_count", {
         countString: jsx(tW, {
@@ -1930,10 +1930,10 @@ function t1(e) {
       }), "changed:header", 32, i), w.length > 0 && $(jsx("div", {
         className: tV,
         children: renderI18nText("design_systems.publishing_modal.variable_collections")
-      }), "variableSet:header", 32, i), K(w, i, tL.CHECKBOX), _$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) && (f.length > 0 && $(jsx("div", {
+      }), "variableSet:header", 32, i), K(w, i, tL.CHECKBOX), isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) && (f.length > 0 && $(jsx("div", {
         className: tV,
         children: "Site blocks"
-      }), "responsiveSet:header", 32, i), K(f, i, tL.CHECKBOX)), _$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) && (I.length > 0 && $(jsx("div", {
+      }), "responsiveSet:header", 32, i), K(f, i, tL.CHECKBOX)), isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) && (I.length > 0 && $(jsx("div", {
         className: tV,
         children: "Code components"
       }), "codeComponent:header", 32, i), K(I, i, tL.CHECKBOX)), getFeatureFlags().dse_templates_proto) {
@@ -1968,7 +1968,7 @@ function t1(e) {
         isExpanded: t
       },
       onClick: s
-    }), "unchanged:header", 32, i), t && (K(T, i), K(L, i), K(U, i), _$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) && K(b, i), _$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) && K(x, i), getFeatureFlags().dse_library_pg_thumbnails && q(G, i)));
+    }), "unchanged:header", 32, i), t && (K(T, i), K(L, i), K(U, i), isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) && K(b, i), isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) && K(x, i), getFeatureFlags().dse_library_pg_thumbnails && q(G, i)));
     l && ($(jsx(tH, {
       header: renderI18nText("design_systems.publishing_modal.hidden_header_with_count", {
         countString: jsx(tW, {
@@ -1982,7 +1982,7 @@ function t1(e) {
     }), ":header", 32, i), o && ($(jsx("div", {
       className: "publishing_modal--subheader--g6LTL",
       children: renderI18nText("design_systems.publishing_modal.these_wont_be_published")
-    }), ":subheader", 22, i), K(N, i), K(O, i, void 0, !0), K(F, i), K(B, i), _$$O3(PrimaryWorkflowEnum.RESPONSIVE_SET) && K(v, i), _$$O3(PrimaryWorkflowEnum.CODE_COMPONENT) && K(S, i)));
+    }), ":subheader", 22, i), K(N, i), K(O, i, void 0, !0), K(F, i), K(B, i), isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) && K(v, i), isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) && K(S, i)));
     return i;
   })();
   return jsx(_$$O, {

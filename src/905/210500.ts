@@ -1,65 +1,146 @@
-import { defaultSessionLocalIDString } from "../905/871411";
-import { getFeatureFlags } from "../905/601108";
-import { atom } from "../figma_app/27355";
-import s from "../vendor/946678";
-import { createDeepEqualSelector } from "../905/270781";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { isNewOrChangedOrDeleted } from "../figma_app/646357";
-import { StagingStatusEnum } from "../figma_app/633080";
-var o = s;
-let p = atom(new Map());
-let m = createDeepEqualSelector([e => e.mirror.appModel.pagesList], e => {
-  let t = new Map();
-  e.forEach(e => {
-    e.thumbnailInfo && e.thumbnailInfo.nodeID !== defaultSessionLocalIDString && t.set(e.nodeId, {
-      ...e.thumbnailInfo,
-      pageName: e.name,
-      pageId: e.nodeId
-    });
-  });
-  return t;
-});
-let h = createReduxSubscriptionAtomWithState(m);
-let g = (e, t) => e.nodeID !== t.thumbnailId || e.thumbnailVersion !== t.content_hash;
-let f = (e, t) => {
-  let i = !!e && e.nodeID !== defaultSessionLocalIDString;
-  return t && !i ? StagingStatusEnum.DELETED : !t && i ? StagingStatusEnum.NEW : t || i ? e && t && g(e, t) ? StagingStatusEnum.CHANGED : StagingStatusEnum.CURRENT : StagingStatusEnum.NOT_STAGED;
-};
-let $$_0 = atom(e => {
-  if (!getFeatureFlags().dse_library_pg_thumbnails) return [];
-  let t = e(h);
-  let i = e(p);
-  let n = new Set([...t.keys(), ...i.keys()]);
-  let a = [];
-  for (let e of n) {
-    let n = t.get(e);
-    let r = i.get(e);
-    let s = f(n, r);
-    n ? a.push({
-      node_id: n.nodeID,
-      thumbnailVersion: n.thumbnailVersion,
-      status: s,
-      pageID: e,
-      name: n.pageName
-    }) : r && a.push({
-      node_id: r.thumbnailId,
-      thumbnailVersion: r.content_hash,
-      status: s,
-      pageID: e,
-      name: r.pageName,
-      unpublished_at: r.unpublished_at
-    });
-  }
-  a.sort((e, t) => e.name.localeCompare(t.name));
-  return a;
-});
-let A = e => e.status && isNewOrChangedOrDeleted(e.status);
-export function $$y1(e) {
-  let [t, i] = o()(e, e => A(e));
-  return {
-    modified: t,
-    unmodified: i
-  };
+import { partition } from "lodash-es"
+import { createReduxSubscriptionAtomWithState } from "../905/270322"
+import { createDeepEqualSelector } from "../905/270781"
+import { getFeatureFlags } from "../905/601108"
+import { defaultSessionLocalIDString } from "../905/871411"
+import { atom } from "../figma_app/27355"
+import { StagingStatusEnum } from "../figma_app/633080"
+import { isNewOrChangedOrDeleted } from "../figma_app/646357"
+
+// Thumbnail management atoms and selectors
+export const thumbnailCacheAtom = atom(new Map())
+
+/**
+ * Selector to extract thumbnail information from pages list
+ * Original name: m
+ */
+export const pageThumbnailsSelector = createDeepEqualSelector(
+  [state => state.mirror.appModel.pagesList],
+  (pages) => {
+    const thumbnailsMap = new Map()
+    pages.forEach((page) => {
+      if (page.thumbnailInfo && page.thumbnailInfo.nodeID !== defaultSessionLocalIDString) {
+        thumbnailsMap.set(page.nodeId, {
+          ...page.thumbnailInfo,
+          pageName: page.name,
+          pageId: page.nodeId,
+        })
+      }
+    })
+    return thumbnailsMap
+  },
+)
+
+/**
+ * Atom with state subscription for thumbnails
+ * Original name: h
+ */
+export const thumbnailSubscriptionAtom = createReduxSubscriptionAtomWithState(pageThumbnailsSelector)
+
+/**
+ * Check if thumbnail data has changed
+ * Original name: g
+ * @param currentPageThumbnail - Current page thumbnail info
+ * @param storedThumbnail - Stored thumbnail info
+ * @returns Boolean indicating if thumbnail has changed
+ */
+export function hasThumbnailChanged(currentPageThumbnail, storedThumbnail) {
+  return currentPageThumbnail.nodeID !== storedThumbnail.thumbnailId
+    || currentPageThumbnail.thumbnailVersion !== storedThumbnail.content_hash
 }
-export const dv = $$_0;
-export const tj = $$y1;
+
+/**
+ * Determine staging status of a thumbnail
+ * Original name: f
+ * @param currentPageThumbnail - Current page thumbnail info
+ * @param storedThumbnail - Stored thumbnail info
+ * @returns Staging status enum value
+ */
+export function determineThumbnailStagingStatus(currentPageThumbnail, storedThumbnail) {
+  const hasValidCurrentThumbnail = !!currentPageThumbnail && currentPageThumbnail.nodeID !== defaultSessionLocalIDString
+
+  if (storedThumbnail && !hasValidCurrentThumbnail) {
+    return StagingStatusEnum.DELETED
+  }
+  else if (!storedThumbnail && hasValidCurrentThumbnail) {
+    return StagingStatusEnum.NEW
+  }
+  else if (storedThumbnail || hasValidCurrentThumbnail) {
+    if (currentPageThumbnail && storedThumbnail && hasThumbnailChanged(currentPageThumbnail, storedThumbnail)) {
+      return StagingStatusEnum.CHANGED
+    }
+    return StagingStatusEnum.CURRENT
+  }
+  return StagingStatusEnum.NOT_STAGED
+}
+
+/**
+ * Main atom for thumbnail status computation
+ * Original name: $$_0
+ */
+export const thumbnailStatusAtom = atom((get) => {
+  if (!getFeatureFlags().dse_library_pg_thumbnails) {
+    return []
+  }
+
+  const pageThumbnails = get(thumbnailSubscriptionAtom)
+  const cachedThumbnails = get(thumbnailCacheAtom)
+  const allThumbnailIds = new Set([...pageThumbnails.keys(), ...cachedThumbnails.keys()])
+  const thumbnailStatusList = []
+
+  for (const thumbnailId of allThumbnailIds) {
+    const pageThumbnail = pageThumbnails.get(thumbnailId)
+    const cachedThumbnail = cachedThumbnails.get(thumbnailId)
+    const status = determineThumbnailStagingStatus(pageThumbnail, cachedThumbnail)
+
+    if (pageThumbnail) {
+      thumbnailStatusList.push({
+        node_id: pageThumbnail.nodeID,
+        thumbnailVersion: pageThumbnail.thumbnailVersion,
+        status,
+        pageID: thumbnailId,
+        name: pageThumbnail.pageName,
+      })
+    }
+    else if (cachedThumbnail) {
+      thumbnailStatusList.push({
+        node_id: cachedThumbnail.thumbnailId,
+        thumbnailVersion: cachedThumbnail.content_hash,
+        status,
+        pageID: thumbnailId,
+        name: cachedThumbnail.pageName,
+        unpublished_at: cachedThumbnail.unpublished_at,
+      })
+    }
+  }
+
+  thumbnailStatusList.sort((a, b) => a.name.localeCompare(b.name))
+  return thumbnailStatusList
+})
+
+/**
+ * Check if thumbnail status indicates modification
+ * Original name: A
+ * @param thumbnailStatus - Thumbnail status object
+ * @returns Boolean indicating if status is modified
+ */
+export function isThumbnailModified(thumbnailStatus) {
+  return thumbnailStatus.status && isNewOrChangedOrDeleted(thumbnailStatus.status)
+}
+
+/**
+ * Partition thumbnails into modified and unmodified groups
+ * Original name: $$y1
+ * @param thumbnails - Array of thumbnail status objects
+ * @returns Object with modified and unmodified thumbnail arrays
+ */
+export function partitionThumbnailsByModification(thumbnails) {
+  const [modified, unmodified] = partition(thumbnails, thumbnail => isThumbnailModified(thumbnail))
+  return {
+    modified,
+    unmodified,
+  }
+}
+
+export const dv = thumbnailStatusAtom
+export const tj = partitionThumbnailsByModification

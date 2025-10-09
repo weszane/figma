@@ -12,7 +12,7 @@ import { useHandleMouseEvent } from "../figma_app/878298";
 import { RecordingScrollContainer } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
-import { w9, rT } from "../figma_app/124493";
+import { selectVotePin, deselectVotePin } from "../figma_app/124493";
 import { isNodeContainedIn } from "../905/797478";
 import { wW } from "../figma_app/656450";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
@@ -576,10 +576,10 @@ export function $$V1({
   let o = useDispatch();
   let d = useSelector(e => e.voting.hoveredInModalVotePinId);
   let c = useMemo(() => yn(e), [e]);
-  let u = useCallback(e => o(w9({
+  let u = useCallback(e => o(selectVotePin({
     votePinId: e
   })), [o]);
-  let p = useCallback(e => o(rT({
+  let p = useCallback(e => o(deselectVotePin({
     votePinId: e
   })), [o]);
   let h = function ({

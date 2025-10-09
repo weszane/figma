@@ -52,7 +52,7 @@ import { copyTextThunk } from "../figma_app/11182";
 import { hideModal } from "../905/156213";
 import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
-import { Rv, mN } from "../figma_app/599979";
+import { getValidAuthorsForHubFile, getEditors } from "../figma_app/599979";
 import { useSceneGraphSelector } from "../figma_app/722362";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
@@ -465,10 +465,10 @@ export function $$em0(e) {
   let l = _$$h2(figFile);
   let d = useSelector(e => getCurrentUserOrgUser(e) ?? void 0, deepEqual);
   let c = useCurrentUserOrg();
-  let u = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
+  let u = useSelector(e => getValidAuthorsForHubFile(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let p = useSelector(e => e.authedProfilesById);
   let m = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
-  let h = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
+  let h = useMemo(async () => figFile ? (await getEditors(figFile)) ?? [] : [], [figFile]);
   let g = useSceneGraphSelector();
   let f = AC({
     ...e,

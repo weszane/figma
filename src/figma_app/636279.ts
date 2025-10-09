@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { updateModal } from "../905/156213";
-import { MH, dM } from "../figma_app/803787";
+import { selectComponentLibraryItemsWithStatus, selectStateGroupLibraryItemsWithStatus } from "../figma_app/803787";
 import { selectComponentAssetsMap, selectStateGroupAssetsMap } from "../figma_app/645694";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { useComponentFlyoutModal, COMPONENT_FLYOUT_MODAL_TYPE } from "../figma_app/608944";
@@ -35,8 +35,8 @@ export function $$u0(e, t, r) {
 export function $$p1(e) {
   let t = useSelector(selectComponentAssetsMap);
   let r = useSelector(selectStateGroupAssetsMap);
-  let n = useSelector(MH);
-  let a = useSelector(dM);
+  let n = useSelector(selectComponentLibraryItemsWithStatus);
+  let a = useSelector(selectStateGroupLibraryItemsWithStatus);
   if (e.type === PrimaryWorkflowEnum.COMPONENT) {
     let r = e.isLocal ? n[e.node_id] : e.component_key ? t[e.component_key] : void 0;
     return !!r && r.content_hash !== e.content_hash;

@@ -27,7 +27,7 @@ import { g5 } from "../figma_app/178752";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { useIsLoading } from "../905/18797";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { Sh } from "../figma_app/803787";
+import { hasComponentOrModuleItemsAtom } from "../figma_app/803787";
 import { getSelectedItemTypes } from "../905/202425";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
@@ -123,7 +123,7 @@ export function $$ef1({
   let et = useCurrentFileKey();
   let er = useAtomWithSubscription(Rt);
   let ei = useSelector(getSelectedItemTypes);
-  let ea = useAtomWithSubscription(Sh);
+  let ea = useAtomWithSubscription(hasComponentOrModuleItemsAtom);
   let ep = useAtomWithSubscription(Lk);
   let e_ = !ea && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
   let em = useMemo(() => N2(!0, !0), []);
@@ -383,7 +383,7 @@ export function $$eE0({
     presets,
     librariesForConnectedProject
   } = _$$g2();
-  let eE = !useAtomWithSubscription(Sh) && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
+  let eE = !useAtomWithSubscription(hasComponentOrModuleItemsAtom) && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
   let {
     debouncedAssetSearch,
     clearAssetSearchAndCancelDebounce,

@@ -208,7 +208,7 @@ import { wg } from '../figma_app/101956';
 import { Zg } from '../figma_app/106207';
 import { g as _$$g3 } from '../figma_app/106955';
 import { wo } from '../figma_app/109130';
-import { $c, au as _$$au, D6, H1 } from '../figma_app/124493';
+import { createStartVotingSessionKey, hideJoinVotingSessionModal, setTitle, setVotingSessionInfo } from '../figma_app/124493';
 import { autosaveAtom, FileProcessingStatus } from '../figma_app/139113';
 import { isAssetSuggestionsEnabled, isRenameLayersEnabled } from '../figma_app/144974';
 import { shouldUseWebGL2 } from '../figma_app/149304';
@@ -9238,21 +9238,21 @@ function le({
     let u = c.sessionId && s ? s.find(e => e.id === c.sessionId) : null;
     if (a) {
       if (a.id !== c.sessionId) {
-        t(_$$au({}));
-        let i = isLoading(n.loadingState, $c(e)) || n.voting.lastInitiatedVotingSessionId === a.id;
-        t(H1({
+        t(hideJoinVotingSessionModal({}));
+        let i = isLoading(n.loadingState, createStartVotingSessionKey(e)) || n.voting.lastInitiatedVotingSessionId === a.id;
+        t(setVotingSessionInfo({
           votingStage: i ? SessionStatus.JOINED : SessionStatus.NOT_JOINED
         }));
       }
     } else {
-      c.sessionId && !u ? t(H1({
+      c.sessionId && !u ? t(setVotingSessionInfo({
         votingStage: SessionStatus.NO_SESSION
-      })) : !a && c.sessionId && c.votingStage !== SessionStatus.ENDED && (t((u?.pageNodeId && getResourceDataOrFallback(u.pageNodeId)) === d ? H1({
+      })) : !a && c.sessionId && c.votingStage !== SessionStatus.ENDED && (t((u?.pageNodeId && getResourceDataOrFallback(u.pageNodeId)) === d ? setVotingSessionInfo({
         sessionId: c.sessionId,
         votingStage: SessionStatus.ENDED
-      }) : H1({
+      }) : setVotingSessionInfo({
         votingStage: SessionStatus.NO_SESSION
-      })), t(D6('')));
+      })), t(setTitle('')));
     }
   }, [e, t, s, r, l, i, d]);
   return null;

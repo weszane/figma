@@ -182,7 +182,7 @@ export function validateCoverImage(file: File) {
   }
   return file.size
 }
-const MAX_COVER_IMAGE_SIZE = 5242880 // $$B22
+export const MAX_COVER_IMAGE_SIZE = 5242880 // $$B22
 
 /**
  * Gets tags for resource.

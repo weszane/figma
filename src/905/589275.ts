@@ -15,12 +15,12 @@ import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { findAssetForNode } from "../figma_app/646357";
 import { isLoading } from "../905/18797";
-import { FZ } from "../figma_app/803787";
+import { selectAllLibraryItems } from "../figma_app/803787";
 import { selectMergedAssets } from "../figma_app/645694";
 import { selectSceneGraph } from "../figma_app/889655";
 import { rp } from "../figma_app/703988";
 import { dD } from "../905/519113";
-import { RR } from "../905/514666";
+import { PublishingUIContext } from "../905/514666";
 import { SelectAction } from "../905/221848";
 import { lL, Cc, T as _$$T } from "../figma_app/270091";
 import { wS, J0, fN, _A } from "../figma_app/65182";
@@ -241,7 +241,7 @@ function ee({
       type: dD,
       data: {
         initiallyCheckedItemIDs: new Set(e),
-        entrypoint: RR.UNPUBLISHED_PREFERRED_VALUES_WARNING
+        entrypoint: PublishingUIContext.UNPUBLISHED_PREFERRED_VALUES_WARNING
       }
     }));
   }, [i, e]);
@@ -319,7 +319,7 @@ export function $$ei0({
   let O = useCallback(e => {
     permissionScopeHandler.user("toggle-preferred-prop-value", () => h(e));
   }, [h]);
-  let D = useSelector(FZ);
+  let D = useSelector(selectAllLibraryItems);
   let L = useSelector(selectMergedAssets);
   let M = useSelector(selectSceneGraph);
   let j = wS(s);

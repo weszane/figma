@@ -9,7 +9,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
 import { useLibraryInfo, getOrgMigrationStatus } from "../figma_app/933328";
 import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
-import { MH, cM, tK } from "../figma_app/803787";
+import { selectComponentLibraryItemsWithStatus, selectStyledLibraryItemsWithStatus, selectProcessedLocalVariables } from "../figma_app/803787";
 import { registerModal } from "../905/102752";
 import { useTabState } from "../905/56919";
 import { Tabs } from "../905/150656";
@@ -203,9 +203,9 @@ let $$B0 = registerModal(function (e) {
   let g = useSelector(e => e.currentUserOrgId);
   let f = useSelector(e => g ? e.orgById[g] : void 0);
   let _ = liveStoreInstance.useFile(fileKey).data;
-  let A = useSelector(e => Object.values(MH(e)).length);
-  let y = useSelector(e => Object.values(cM(e)).length);
-  let b = useSelector(e => Object.values(tK(e)).length);
+  let A = useSelector(e => Object.values(selectComponentLibraryItemsWithStatus(e)).length);
+  let y = useSelector(e => Object.values(selectStyledLibraryItemsWithStatus(e)).length);
+  let b = useSelector(e => Object.values(selectProcessedLocalVariables(e)).length);
   let v = useMemo(() => Gk(A, y, b), [A, y, b]);
   let [I] = setupResourceAtomHandler(getOrgMigrationStatus(g));
   return f ? jsx(ModalRootComponent, {

@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { loadingStatePutLoading, loadingStateDelete } from "../figma_app/714946";
-import { D as _$$D } from "../905/775228";
+import { recentCustomTemplatePutAll } from "../905/775228";
 import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
 import { postUserFlag } from "../905/985254";
 import { B } from "../figma_app/750676";
@@ -29,7 +29,7 @@ import { isLoading } from "../905/18797";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { n as _$$n2 } from "../905/79930";
 import { ITemplateType, FDocumentType } from "../905/862883";
-import { q } from "../figma_app/446378";
+import { templateService } from "../figma_app/446378";
 let k = (e, t) => {
   switch (e.type) {
     case _$$n2.HubFile:
@@ -126,7 +126,7 @@ export async function $$U2({
         templateCategory: n.type === _$$n2.HubFile ? n.category : void 0
       }), s) && (t(postUserFlag({
         inserted_figjam_template: !0
-      })), n.type === _$$n2.TeamTemplate && t(_$$D([n.template])), "section-preset" !== d && "sites-templates-modal" !== d && t(addTemplateToRecentsThunkAction({
+      })), n.type === _$$n2.TeamTemplate && t(recentCustomTemplatePutAll([n.template])), "section-preset" !== d && "sites-templates-modal" !== d && t(addTemplateToRecentsThunkAction({
         storeInRecentsKey: FDocumentType.FigJam,
         ...j(n)
       })));
@@ -269,7 +269,7 @@ async function W({
       template
     } = n.meta;
     r();
-    e(_$$D([template]));
+    e(recentCustomTemplatePutAll([template]));
     e(addTemplateToRecentsThunkAction({
       storeInRecentsKey: FDocumentType.FigJam,
       ...t
@@ -356,7 +356,7 @@ export function $$q7(e, t, r, i = 10) {
       l(0);
       return;
     }
-    let e = q.getSearchPaginated({
+    let e = templateService.getSearchPaginated({
       orgId: g,
       query: a.searchTerm,
       from: a.offset,

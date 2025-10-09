@@ -1,3 +1,4 @@
+import type { PrimitiveAtom } from 'jotai'
 import { keyBy, noop } from 'lodash-es'
 import { mapLoadedFileComponents } from "../905/9585"
 import { mapAndSortVariableSets, mapVariablePropertiesFromResource } from "../905/261982"
@@ -18,7 +19,6 @@ import { hasRootPath } from "../figma_app/528509"
 import { currentTeamAtom } from "../figma_app/598018"
 import { LibrarySourceEnum } from "../figma_app/633080"
 import { figmaLibrariesEnabledAtom } from "../figma_app/657017"
-import { PrimitiveAtom } from 'jotai'
 // Refactored subscribed libraries atom with clear naming and structure
 export const subscribedLibrariesAtom = atom((get) => {
   const openFile = get(openFileAtom)
@@ -54,7 +54,7 @@ export const subscribedLibrariesAtom = atom((get) => {
 
 // Refactored atom family for library subscriptions with improved readability
 export const librarySubscriptionAtomFamily = createRemovableAtomFamily(
-  propertyKey => mg(
+  (propertyKey: string) => mg(
     subscribedLibrariesAtom,
     data => new Set(data.data?.map(item => item[propertyKey])),
     equals,
@@ -76,17 +76,17 @@ export const libraryPublishingModeAtom = createAtomWithReduxWithState(
   "SET_LIBRARY_PUBLISHING_MODE",
 )
 
-const publishedHubFileIdAtom = createReduxSubscriptionAtomWithState(
+export const publishedHubFileIdAtom = createReduxSubscriptionAtomWithState(
   state => state.openFile?.publishedHubFile?.id,
 )
 
-const publishedHubFileLibraryKeyAtom = createReduxSubscriptionAtomWithState(
+export const publishedHubFileLibraryKeyAtom = createReduxSubscriptionAtomWithState(
   state => state.openFile?.publishedHubFile?.libraryKey
     ? state.openFile.publishedHubFile.libraryKey
     : null,
 )
 
-const editorTypeAtom = createReduxSubscriptionAtomWithState(
+export const editorTypeAtom = createReduxSubscriptionAtomWithState(
   state => state.openFile?.editorType,
 )
 

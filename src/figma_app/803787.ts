@@ -1,13 +1,13 @@
-import { dv, tj } from '../905/210500'
+import { groupBy, mapKeys, partition, pickBy } from 'lodash-es'
+import { createSelector } from 'reselect'
+import { partitionThumbnailsByModification, thumbnailStatusAtom } from '../905/210500'
 import { createReduxSubscriptionAtomWithState } from '../905/270322'
 import { createDeepEqualSelector } from '../905/270781'
 import { selectTeams } from '../905/338617'
-import { t as _$$t } from '../905/340158'
-import { n as _$$n } from '../905/347702'
+import { libraryAssetsAtom } from '../905/340158'
 import { FileKeySourceEnum } from '../905/412913'
-import { O as _$$O } from '../905/566074'
+import { isShareableAssetType } from '../905/566074'
 import { getFeatureFlags } from '../905/601108'
-import { l as _$$l } from '../905/716947'
 import { atom, createRemovableAtomFamily } from '../figma_app/27355'
 import { AssetAtomMap } from '../figma_app/31188'
 import { conditionalFeatureFlag } from '../figma_app/169182'
@@ -24,548 +24,629 @@ import { sortByMultiple } from '../figma_app/656233'
 import { VariableErrorType } from '../figma_app/763686'
 import { isSelectedViewFullscreenCooper } from '../figma_app/828186'
 import { selectSceneGraphSelection } from '../figma_app/889655'
-import g from '../vendor/149674'
-import c from '../vendor/223926'
-import p from '../vendor/890446'
-import { createSelector } from '../vendor/925040'
-import h from '../vendor/946678'
 
-let u = c
-let _ = p
-let m = h
-let f = g
-let $$j24 = e => e.library
-let $$U8 = e => e.library.libraryPublishingMode
-let B = e => e.openFile?.publishedHubFile
-let $$G13 = e => e.library.openHubFilePublished__LIVEGRAPH.components
-let $$V14 = e => e.library.openHubFilePublished__LIVEGRAPH.stateGroups
-let H = e => e.library.openHubFilePublished__LIVEGRAPH.styles
-let z = e => e.library.openHubFilePublished__LIVEGRAPH.variables
-let W = e => e.library.openHubFilePublished__LIVEGRAPH.variableSets
-let K = e => e.library.openHubFilePublished__LIVEGRAPH.modules
-let $$Y15 = createSelector([$$G13, H, z, W, $$V14], (e, t, r, n, a) => !isEmptyObject(e) || !isEmptyObject(t) || !isEmptyObject(r) || !isEmptyObject(n) || !isEmptyObject(a))
-let $ = createSelector([selectOpenFileLibraryKey, selectFlattenedComponents], (e, t) => e && t[e] || {})
-let X = createSelector([selectOpenFileLibraryKey, selectFlattenedStateGroups], (e, t) => e && t[e] || {})
-let q = e => e.library.local.thumbnails
-let J = e => e.library.openFilePublished__LIVEGRAPH.styles
-let Z = e => e.library.openFilePublished__LIVEGRAPH.variableSets
-let Q = e => e.library.openFilePublished__LIVEGRAPH.modules
-let $$ee5 = createSelector([$, J, Z, Q], (e, t, r, n) => !isEmptyObject(t) || !isEmptyObject(e) || !isEmptyObject(r) || !isEmptyObject(n))
-let et = createSelector([e => e.library.local.styles, selectOpenFileKey, $$U8, e => e.library.publishableStyles, H, B, q], (e, t, r, n, i, a, s) => {
-  if (r === LibrarySourceEnum.HUBFILE && a) {
-    let r = _$$l(a.libraryKey)
+// Type definitions for library items
+interface BaseLibraryItem {
+  node_id: string
+  name: string
+  type: PrimaryWorkflowEnum
+  status?: StagingStatusEnum
+  isSoftDeleted?: boolean
+  isPublishable?: boolean
+  old_key?: string
+  [key: string]: any
+}
+
+interface StyleLibraryItem extends BaseLibraryItem {
+  type: PrimaryWorkflowEnum.STYLE
+  content_hash?: string
+  userFacingVersion?: string
+  description?: string
+  sort_position?: string
+}
+
+interface ComponentLibraryItem extends BaseLibraryItem {
+  type: PrimaryWorkflowEnum.COMPONENT
+  content_hash?: string
+  userFacingVersion?: string
+  description?: string
+  sort_position?: string
+  containing_frame?: any
+}
+
+interface StateGroupLibraryItem extends BaseLibraryItem {
+  type: PrimaryWorkflowEnum.STATE_GROUP
+  version?: string
+  userFacingVersion?: string
+  description?: string
+  containing_frame?: any
+}
+
+interface VariableLibraryItem extends BaseLibraryItem {
+  type: PrimaryWorkflowEnum.VARIABLE
+  version?: string
+  userFacingVersion?: string
+  sortPosition?: string
+  variableSetId?: string
+  resolvedType?: string
+  modeValues?: Record<string, any>
+}
+
+interface VariableSetLibraryItem extends BaseLibraryItem {
+  type: PrimaryWorkflowEnum.VARIABLE_SET
+  version?: string
+  userFacingVersion?: string
+  sortPosition?: string
+  modes?: any[]
+  defaultModeID?: string
+  isExtension?: boolean
+  backingVariableSetId?: string
+  rootVariableSetId?: string
+}
+
+interface ModuleLibraryItem extends BaseLibraryItem {
+  type: PrimaryWorkflowEnum.MODULE
+  version?: string
+  userFacingVersion?: string
+  description?: string
+}
+
+export let selectLibrary = state => state.library
+export let selectLibraryPublishingMode = state => state.library.libraryPublishingMode
+export let selectPublishedHubFile = state => state.openFile?.publishedHubFile
+export let selectOpenHubFileComponents = state => state.library.openHubFilePublished__LIVEGRAPH.components
+export let selectOpenHubFileStateGroups = state => state.library.openHubFilePublished__LIVEGRAPH.stateGroups
+export let selectOpenHubFileStyles = state => state.library.openHubFilePublished__LIVEGRAPH.styles
+export let selectOpenHubFileVariables = state => state.library.openHubFilePublished__LIVEGRAPH.variables
+export let selectOpenHubFileVariableSets = state => state.library.openHubFilePublished__LIVEGRAPH.variableSets
+export let selectOpenHubFileModules = state => state.library.openHubFilePublished__LIVEGRAPH.modules
+export let hasOpenHubFileContent = createSelector([selectOpenHubFileComponents, selectOpenHubFileStyles, selectOpenHubFileVariables, selectOpenHubFileVariableSets, selectOpenHubFileStateGroups], (components, styles, variables, variableSets, stateGroups) => !isEmptyObject(components) || !isEmptyObject(styles) || !isEmptyObject(variables) || !isEmptyObject(variableSets) || !isEmptyObject(stateGroups))
+export let selectCurrentLibraryComponents = createSelector([selectOpenFileLibraryKey, selectFlattenedComponents], (libraryKey, flattenedComponents) => libraryKey && flattenedComponents[libraryKey] || {})
+export let selectCurrentLibraryStateGroups = createSelector([selectOpenFileLibraryKey, selectFlattenedStateGroups], (libraryKey, flattenedStateGroups) => libraryKey && flattenedStateGroups[libraryKey] || {})
+export let selectLocalThumbnails = state => state.library.local.thumbnails
+export let selectOpenFileStyles = state => state.library.openFilePublished__LIVEGRAPH.styles
+export let selectOpenFileVariableSets = state => state.library.openFilePublished__LIVEGRAPH.variableSets
+export let selectOpenFileModules = state => state.library.openFilePublished__LIVEGRAPH.modules
+export let hasLocalOrPublishedContent = createSelector([selectCurrentLibraryComponents, selectOpenFileStyles, selectOpenFileVariableSets, selectOpenFileModules], (localComponents, publishedStyles, publishedVariableSets, publishedModules) => !isEmptyObject(publishedStyles) || !isEmptyObject(localComponents) || !isEmptyObject(publishedVariableSets) || !isEmptyObject(publishedModules))
+export let selectProcessedLocalStyles = createSelector([state => state.library.local.styles, selectOpenFileKey, selectLibraryPublishingMode, state => state.library.publishableStyles, selectOpenHubFileStyles, selectPublishedHubFile, selectLocalThumbnails], (localStyles, openFileKey, publishingMode, publishableStyles, hubFileStyles, publishedHubFile, thumbnails) => {
+  if (publishingMode === LibrarySourceEnum.HUBFILE && publishedHubFile) {
+    let libraryKey = publishedHubFile.libraryKey
     let {
       newLocal,
-    } = generateNewLocalLibraryItems(createLocalStyle, n, i, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.STYLE)
+    } = generateNewLocalLibraryItems(createLocalStyle, publishableStyles, hubFileStyles, localStyles, thumbnails, {}, openFileKey || '', libraryKey, new Set(), PrimaryWorkflowEnum.STYLE)
     return newLocal
   }
-  return e
+  return localStyles
 })
-let er = createSelector([J, H, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e)
-let $$en21 = createSelector([et, er], (e, t) => {
+export let selectEffectiveStyles = createSelector([selectOpenFileStyles, selectOpenHubFileStyles, selectLibraryPublishingMode], (openFileStyles, hubFileStyles, publishingMode) => publishingMode === LibrarySourceEnum.HUBFILE ? hubFileStyles : openFileStyles)
+export let selectStyledLibraryItemsWithStatus = createSelector([selectProcessedLocalStyles, selectEffectiveStyles], (localStyles: Record<string, StyleLibraryItem>, effectiveStyles) => {
   if (!getFeatureFlags().ds_remove_redux_library_status)
-    return e
-  let r = {}
-  for (let n of Object.values(e)) {
-    let e = eU(n, t[n.node_id], eG)
-    r[n.node_id] = {
-      ...n,
-      status: e,
+    return localStyles
+  let styledItemsWithStatus = {}
+  for (let styleItem of Object.values(localStyles)) {
+    let status = calculateItemStatus(styleItem, effectiveStyles[styleItem.node_id], hasStylePropertyChanged)
+    styledItemsWithStatus[styleItem.node_id] = {
+      ...(styleItem as any),
+      status,
     }
   }
-  return r
+  return styledItemsWithStatus
 })
-let ei = createSelector([e => e.library.local.components, selectOpenFileKey, $$U8, $$G13, B, e => e.library.publishableSymbols, q, isSelectedViewFullscreenCooper], (e, t, r, n, i, a, s, l) => {
-  if (r === LibrarySourceEnum.HUBFILE && i) {
-    let r = _$$l(i.libraryKey)
+export let selectProcessedLocalComponents = createSelector([state => state.library.local.components, selectOpenFileKey, selectLibraryPublishingMode, selectOpenHubFileComponents, selectPublishedHubFile, state => state.library.publishableSymbols, selectLocalThumbnails, isSelectedViewFullscreenCooper], (localComponents, openFileKey, publishingMode, hubFileComponents, publishedHubFile, publishableSymbols, thumbnails, isFullscreenCooper) => {
+  if (publishingMode === LibrarySourceEnum.HUBFILE && publishedHubFile) {
+    let libraryKey = publishedHubFile.libraryKey
     let {
       newLocal,
-    } = generateNewLocalLibraryItems((e, t, r, n, i) => createLocalComponent(e, t, r, n, i, l), a, n, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.COMPONENT)
+    } = generateNewLocalLibraryItems((componentData, hubComponent, localComponent, publishableSymbol, nodeId) => createLocalComponent(componentData, hubComponent, localComponent, publishableSymbol, nodeId, isFullscreenCooper), publishableSymbols, hubFileComponents, localComponents, thumbnails, {}, openFileKey || '', libraryKey, new Set(), PrimaryWorkflowEnum.COMPONENT)
     return newLocal
   }
-  return e
+  return localComponents
 })
-let ea = createSelector([$, $$G13, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e)
-let es = createSelector([function (e) {
-  return e.library.local.stateGroups
-}, selectOpenFileKey, $$U8, $$V14, B, e => e.library.publishableStateGroups, q], (e, t, r, n, i, a, s) => {
-  if (r === LibrarySourceEnum.HUBFILE && i) {
-    let r = _$$l(i.libraryKey)
+export let selectEffectiveComponents = createSelector([selectCurrentLibraryComponents, selectOpenHubFileComponents, selectLibraryPublishingMode], (currentComponents, hubFileComponents, publishingMode) => publishingMode === LibrarySourceEnum.HUBFILE ? hubFileComponents : currentComponents)
+export let selectProcessedLocalStateGroups = createSelector([function (state) {
+  return state.library.local.stateGroups
+}, selectOpenFileKey, selectLibraryPublishingMode, selectOpenHubFileStateGroups, selectPublishedHubFile, state => state.library.publishableStateGroups, selectLocalThumbnails], (localStateGroups, openFileKey, publishingMode, hubFileStateGroups, publishedHubFile, publishableStateGroups, thumbnails) => {
+  if (publishingMode === LibrarySourceEnum.HUBFILE && publishedHubFile) {
+    let libraryKey = publishedHubFile.libraryKey
     let {
       newLocal,
-    } = generateNewLocalLibraryItems(createLocalStateGroup, a, n, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.STATE_GROUP)
+    } = generateNewLocalLibraryItems(createLocalStateGroup, publishableStateGroups, hubFileStateGroups, localStateGroups, thumbnails, {}, openFileKey || '', libraryKey, new Set(), PrimaryWorkflowEnum.STATE_GROUP)
     return newLocal
   }
-  return e
+  return localStateGroups
 })
-let eo = createSelector([X, $$V14, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e)
-let $$el11 = createSelector([ei, ea, es, eo, isSelectedViewFullscreenCooper], (e, t, r, n, i) => {
+export let selectEffectiveStateGroups = createSelector([selectCurrentLibraryStateGroups, selectOpenHubFileStateGroups, selectLibraryPublishingMode], (currentStateGroups, hubFileStateGroups, publishingMode) => publishingMode === LibrarySourceEnum.HUBFILE ? hubFileStateGroups : currentStateGroups)
+export let selectComponentLibraryItemsWithStatus = createSelector([selectProcessedLocalComponents, selectEffectiveComponents, selectProcessedLocalStateGroups, selectEffectiveStateGroups, isSelectedViewFullscreenCooper], (localComponents: Record<string, ComponentLibraryItem>, effectiveComponents, localStateGroups: Record<string, StateGroupLibraryItem>, effectiveStateGroups, isFullscreenCooper) => {
   if (!getFeatureFlags().ds_remove_redux_library_status)
-    return e
-  let a = {}
-  let s = (e, t) => {
+    return localComponents
+  let componentItemsWithStatus = {}
+  let hasComponentPropertyChanged = (localComponent, publishedComponent) => {
     if (getFeatureFlags().ds_user_facing_version_publishing) {
-      if (t?.userFacingVersion !== e.userFacingVersion)
-        return !0
+      if (publishedComponent?.userFacingVersion !== localComponent.userFacingVersion)
+        return true
     }
-    else if (t?.content_hash !== e.content_hash) {
-      return !0
+    else if (publishedComponent?.content_hash !== localComponent.content_hash) {
+      return true
     }
-    if (!areValuesEqual(t.name, e?.name) || !areValuesEqual(t.description, e.description) || i && !areValuesEqual(t.sort_position, e.sort_position) || areFramesEqual(t.containing_frame, e?.containing_frame, {
-      compareSortPositions: i,
+    if (!areValuesEqual(publishedComponent.name, localComponent?.name) || !areValuesEqual(publishedComponent.description, localComponent.description) || isFullscreenCooper && !areValuesEqual(publishedComponent.sort_position, localComponent.sort_position) || areFramesEqual(publishedComponent.containing_frame, localComponent?.containing_frame, {
+      compareSortPositions: isFullscreenCooper,
     })) {
-      return !0
+      return true
     }
-    let a = getContainingStateGroupNodeId(e)
-    let s = a && r[a] || null
-    let o = getContainingStateGroupNodeId(t)
-    let d = o && n[o] || null
-    return s ? !d || eV(s, d) : d != null
+    let localStateGroupId = getContainingStateGroupNodeId(localComponent)
+    let localStateGroup = localStateGroupId && localStateGroups[localStateGroupId] || null
+    let publishedStateGroupId = getContainingStateGroupNodeId(publishedComponent)
+    let publishedStateGroup = publishedStateGroupId && effectiveStateGroups[publishedStateGroupId] || null
+    return localStateGroup ? !publishedStateGroup || haveStateGroupsChanged(localStateGroup, publishedStateGroup) : publishedStateGroup != null
   }
-  for (let r of Object.values(e)) {
-    let e = eU(r, t[r.node_id], s)
-    a[r.node_id] = {
-      ...r,
-      status: e,
+  for (let componentItem of Object.values(localComponents)) {
+    let status = calculateItemStatus(componentItem, effectiveComponents[componentItem.node_id], hasComponentPropertyChanged)
+    componentItemsWithStatus[componentItem.node_id] = {
+      ...(componentItem as any),
+      status,
     }
   }
-  return a
+  return componentItemsWithStatus
 })
-let $$ed22 = createSelector([es, eo], (e, t) => {
+export let selectStateGroupLibraryItemsWithStatus = createSelector([selectProcessedLocalStateGroups, selectEffectiveStateGroups], (localStateGroups: Record<string, StateGroupLibraryItem>, effectiveStateGroups) => {
   if (!getFeatureFlags().ds_remove_redux_library_status)
-    return e
-  let r = {}
-  for (let n of Object.values(e)) {
-    let e = eU(n, t[n.node_id], eV)
-    r[n.node_id] = {
-      ...n,
-      status: e,
+    return localStateGroups
+  let stateGroupItemsWithStatus = {}
+  for (let stateGroupItem of Object.values(localStateGroups)) {
+    let status = calculateItemStatus(stateGroupItem, effectiveStateGroups[stateGroupItem.node_id], haveStateGroupsChanged)
+    stateGroupItemsWithStatus[stateGroupItem.node_id] = {
+      ...(stateGroupItem as any),
+      status,
     }
   }
-  return r
+  return stateGroupItemsWithStatus
 })
-let $$ec33 = createDeepEqualSelector([(e) => {
-  let t = {}
-  Object.entries(e.library.localVariablesById).forEach(([e, r]) => {
-    r.isSoftDeleted || (t[e] = r)
+export let selectProcessedLocalVariables = createDeepEqualSelector([(state) => {
+  let nonDeletedVariables: Record<string, VariableLibraryItem> = {}
+  Object.entries(state.library.localVariablesById).forEach(([variableId, variable]) => {
+    if (!(variable as VariableLibraryItem).isSoftDeleted)
+      nonDeletedVariables[variableId] = variable as VariableLibraryItem
   })
-  return t
-}, e => e.library.openFilePublished__LIVEGRAPH.variables, selectOpenFile, $$U8, B, z], (e, t, r, n, i, a) => {
-  let s = {}
-  let l = n === LibrarySourceEnum.HUBFILE && i ? a : t
-  let d = r?.key ?? ''
-  let c = n === LibrarySourceEnum.HUBFILE && i ? _$$l(i.libraryKey) : _$$l(r?.libraryKey ?? '')
-  for (let [t, r] of Object.entries(l)) {
-    e.hasOwnProperty(t) || (s[t] = {
-      ...r,
+  return nonDeletedVariables
+}, state => state.library.openFilePublished__LIVEGRAPH.variables, selectOpenFile, selectLibraryPublishingMode, selectPublishedHubFile, selectOpenHubFileVariables], (localVariables, publishedVariables, openFile, publishingMode, publishedHubFile, hubFileVariables) => {
+  let processedVariables = {}
+  let effectiveVariables = publishingMode === LibrarySourceEnum.HUBFILE && publishedHubFile ? hubFileVariables : publishedVariables
+  let fileKey = openFile?.key ?? ''
+  let libraryKey = publishingMode === LibrarySourceEnum.HUBFILE && publishedHubFile ? publishedHubFile.libraryKey : openFile?.libraryKey ?? ''
+  for (let [variableId, variable] of Object.entries(effectiveVariables)) {
+    !Object.prototype.hasOwnProperty.call(localVariables, variableId) || (processedVariables[variableId] = {
+      ...(variable as Record<string, any>),
       subscriptionStatus: 'LOCAL',
-      isPublishable: !1,
+      isPublishable: false,
       modeValues: {},
-      keyForPublish: r.key,
+      keyForPublish: (variable as any).key,
       status: StagingStatusEnum.DELETED,
-      deletedFromSceneGraph: !0,
-      isSoftDeleted: !0,
-      file_key: d,
+      deletedFromSceneGraph: true,
+      isSoftDeleted: true,
+      file_key: fileKey,
       file_key_source: FileKeySourceEnum.LOCAL_FILE,
-      library_key: c,
-      hasOnlyBeenReordered: !1,
+      library_key: libraryKey,
+      hasOnlyBeenReordered: false,
     })
   }
-  for (let t of Object.values(e)) {
-    let e = l[t.node_id]
-    let r = eU(t, e, eH)
-    let n = conditionalFeatureFlag('ds_user_facing_version_publishing', t.userFacingVersion === e?.userFacingVersion, t.version === e?.version)
-    let i = !!(t && e && n && t.sortPosition !== e.sortPosition)
-    s[t.node_id] = {
-      ...t,
-      status: r,
-      file_key: d,
+  for (let variable of Object.values(localVariables)) {
+    let publishedVariable = effectiveVariables[variable.node_id]
+    let status = calculateItemStatus(variable, publishedVariable, hasVariablePropertyChanged)
+    let versionsMatch = conditionalFeatureFlag('ds_user_facing_version_publishing', variable.userFacingVersion === publishedVariable?.userFacingVersion, variable.version === publishedVariable?.version)
+    let hasOnlyBeenReordered = !!(variable && publishedVariable && versionsMatch && variable.sortPosition !== publishedVariable.sortPosition)
+    processedVariables[variable.node_id] = {
+      ...(variable as Record<string, any>),
+      status,
+      file_key: fileKey,
       file_key_source: FileKeySourceEnum.LOCAL_FILE,
-      library_key: c,
-      key: e?.key,
-      hasOnlyBeenReordered: i,
+      library_key: libraryKey,
+      key: publishedVariable?.key,
+      hasOnlyBeenReordered,
     }
   }
-  return s
+  return processedVariables
 })
-let eu = createSelector([$$ec33], e => u()(Object.values(e), e => e.variableSetId))
-let $$ep20 = createDeepEqualSelector([(e) => {
-  let t = {}
-  Object.entries(e.library.localVariableSetsById).forEach(([e, r]) => {
-    r.isSoftDeleted || (t[e] = r)
+export let groupVariablesBySetId = createSelector([selectProcessedLocalVariables], (variables: Record<string, VariableLibraryItem>) => groupBy(Object.values(variables), variable => variable.variableSetId))
+export let selectProcessedLocalVariableSets = createDeepEqualSelector([(state) => {
+  let nonDeletedVariableSets: Record<string, VariableSetLibraryItem> = {}
+  Object.entries(state.library.localVariableSetsById).forEach(([setId, set]) => {
+    if (!(set as VariableSetLibraryItem).isSoftDeleted)
+      nonDeletedVariableSets[setId] = set as VariableSetLibraryItem
   })
-  return t
-}, Z, eu, selectOpenFile, $$U8, B, W], (e, t, r, n, i, d, c) => {
-  let u = i === LibrarySourceEnum.HUBFILE && d ? c : t
-  let p = n?.key ?? ''
-  let _ = i === LibrarySourceEnum.HUBFILE && d ? _$$l(d.libraryKey) : _$$l(n?.libraryKey ?? '')
-  let h = {}
-  for (let [t, r] of Object.entries(u)) {
-    if (e.hasOwnProperty(t))
+  return nonDeletedVariableSets
+}, selectOpenFileVariableSets, groupVariablesBySetId, selectOpenFile, selectLibraryPublishingMode, selectPublishedHubFile, selectOpenHubFileVariableSets], (localVariableSets, publishedVariableSets, variablesBySetId, openFile, publishingMode, publishedHubFile, hubFileVariableSets) => {
+  let effectiveVariableSets = publishingMode === LibrarySourceEnum.HUBFILE && publishedHubFile ? hubFileVariableSets : publishedVariableSets
+  let fileKey = openFile?.key ?? ''
+  let libraryKey = publishingMode === LibrarySourceEnum.HUBFILE && publishedHubFile ? publishedHubFile.libraryKey : openFile?.libraryKey ?? ''
+  let processedVariableSets: Record<string, any> = {}
+  for (let [setId, variableSet] of Object.entries(effectiveVariableSets)) {
+    if (Object.prototype.hasOwnProperty.call(localVariableSets, setId))
       continue
-    let n = {
+    const deletedSetProperties = {
       subscriptionStatus: 'LOCAL',
       modes: [],
       defaultModeID: '',
-      isPublishable: !1,
-      keyForPublish: r.key,
+      isPublishable: false,
+      keyForPublish: (variableSet as any).key,
       status: StagingStatusEnum.DELETED,
-      deletedFromSceneGraph: !0,
-      isSoftDeleted: !0,
-      file_key: p,
+      deletedFromSceneGraph: true,
+      isSoftDeleted: true,
+      file_key: fileKey,
       file_key_source: FileKeySourceEnum.LOCAL_FILE,
-      library_key: _,
+      library_key: libraryKey,
       variableSetError: VariableErrorType.NONE,
-      hasOnlyBeenReordered: !1,
+      hasOnlyBeenReordered: false,
     }
-    r.isExtension
-      ? h[t] = {
-        ...r,
-        ...n,
+    if ((variableSet as any).isExtension) {
+      processedVariableSets[setId] = {
+        ...(variableSet as Record<string, any>),
+        ...deletedSetProperties,
         rootVariableSetId: VariableSetIdCompatHandler.INVALID,
         backingVariableSetId: VariableSetIdCompatHandler.INVALID,
       }
-      : h[t] = {
-        ...r,
-        ...n,
+    }
+    else {
+      processedVariableSets[setId] = {
+        ...(variableSet as Record<string, any>),
+        ...deletedSetProperties,
       }
+    }
   }
-  for (let t of Object.values(e)) {
-    let e = u[t.node_id]
-    let n = (function (e, t, r) {
-      let n = eU(e, t, ez)
-      if (n !== StagingStatusEnum.CURRENT)
-        return n
-      for (let e of r) {
-        if (e.status !== StagingStatusEnum.CURRENT && e.status !== StagingStatusEnum.NOT_STAGED)
+  for (let variableSet of Object.values(localVariableSets)) {
+    let publishedSet = effectiveVariableSets[variableSet.node_id]
+    let status = (function (localSet, publishedSet, setVariables) {
+      let setStatus = calculateItemStatus(localSet, publishedSet, hasVariableSetPropertyChanged)
+      if (setStatus !== StagingStatusEnum.CURRENT)
+        return setStatus
+      for (let variable of setVariables) {
+        if (variable.status !== StagingStatusEnum.CURRENT && variable.status !== StagingStatusEnum.NOT_STAGED)
           return StagingStatusEnum.CHANGED
       }
       return StagingStatusEnum.CURRENT
-    }(t, e, r[t.node_id] ?? []))
-    let i = !!(t && e && t.version == t.version && t.sortPosition !== e.sortPosition)
-    getFeatureFlags().ds_user_facing_version_publishing && (i = !!(t && e && t.userFacingVersion === e.userFacingVersion && t.sortPosition !== e.sortPosition))
-    h[t.node_id] = {
-      ...t,
-      status: n,
-      file_key: p,
+    }(variableSet, publishedSet, variablesBySetId[variableSet.node_id] ?? []))
+    let hasOnlyBeenReordered = !!(variableSet && publishedSet && variableSet.version === publishedSet.version && variableSet.sortPosition !== publishedSet.sortPosition)
+    getFeatureFlags().ds_user_facing_version_publishing && (hasOnlyBeenReordered = !!(variableSet && publishedSet && variableSet.userFacingVersion === publishedSet.userFacingVersion && variableSet.sortPosition !== publishedSet.sortPosition))
+    processedVariableSets[variableSet.node_id] = {
+      ...(variableSet as Record<string, any>),
+      status,
+      file_key: fileKey,
       file_key_source: FileKeySourceEnum.LOCAL_FILE,
-      library_key: _,
-      key: e?.key,
-      hasOnlyBeenReordered: i,
+      library_key: libraryKey,
+      key: publishedSet?.key,
+      hasOnlyBeenReordered,
     }
   }
-  return h
+  return processedVariableSets
 })
-let $$e_18 = createSelector([$$el11], (e) => {
-  let t = {}
-  for (let r of Object.values(e)) {
-    let e = getContainingStateGroupNodeId(r)
-    e != null && (t[e] = t[e] ?? [], t[e].push(r))
+export let groupComponentItemsByStateGroup = createSelector([selectComponentLibraryItemsWithStatus], (components) => {
+  let stateGroupComponents = {}
+  for (let component of Object.values(components)) {
+    let stateGroupId = getContainingStateGroupNodeId(component)
+    if (stateGroupId != null) {
+      if (!stateGroupComponents[stateGroupId]) {
+        stateGroupComponents[stateGroupId] = []
+      }
+      stateGroupComponents[stateGroupId].push(component)
+    }
   }
-  return t
+  return stateGroupComponents
 })
-let eh = createSelector([$$el11], e => f()(e, e => !hasContainingStateGroup(e)))
-let em = e => e.library.local.modules
-function eg(e, t) {
-  if (!t)
-    return !1
+export let selectComponentItemsWithoutStateGroup = createSelector([selectComponentLibraryItemsWithStatus], components => pickBy(components, component => !hasContainingStateGroup(component)))
+export let selectLocalModules = state => state.library.local.modules
+function hasModulePropertyChanged(localModule, publishedModule) {
+  if (!publishedModule)
+    return false
   if (getFeatureFlags().ds_user_facing_version_publishing) {
-    if (t.userFacingVersion !== e.userFacingVersion)
-      return !0
+    if (publishedModule.userFacingVersion !== localModule.userFacingVersion)
+      return true
   }
-  else if (t.version !== e.version) {
-    return !0
+  else if (publishedModule.version !== localModule.version) {
+    return true
   }
-  return !(areValuesEqual(t.name, e?.name) && areValuesEqual(t.description, e.description))
+  return !(areValuesEqual(publishedModule.name, localModule?.name) && areValuesEqual(publishedModule.description, localModule.description))
 }
-function ef(e, t, r, n, i) {
+export function processModuleItems(localModules: Record<string, ModuleLibraryItem>, publishedModules: Record<string, ModuleLibraryItem>, hubFileModules: Record<string, ModuleLibraryItem>, publishedHubFile: any, publishingMode: LibrarySourceEnum) {
   if (!getFeatureFlags().dse_module_publish)
     return {}
-  let a = {}
-  if (i === LibrarySourceEnum.HUBFILE && n) {
-    for (let [t, n] of Object.entries(r)) {
-      Object.keys(e).includes(t) || (a[t] = {
-        ...n,
+  let processedModules = {}
+  if (publishingMode === LibrarySourceEnum.HUBFILE && publishedHubFile) {
+    for (let [moduleId, module] of Object.entries(hubFileModules)) {
+      Object.keys(localModules).includes(moduleId) || (processedModules[moduleId] = {
+        ...(module as Record<string, any>),
         status: StagingStatusEnum.DELETED,
-        deletedFromSceneGraph: !0,
+        deletedFromSceneGraph: true,
       })
     }
   }
-  let s = i === LibrarySourceEnum.HUBFILE ? r : t
-  for (let t of Object.values(e)) {
-    let e = eU(t, s[t.node_id], eg)
-    a[t.node_id] = {
-      ...t,
-      status: e,
+  let effectiveModules = publishingMode === LibrarySourceEnum.HUBFILE ? hubFileModules : publishedModules
+  for (let module of Object.values(localModules)) {
+    let status = calculateItemStatus(module, effectiveModules[module.node_id], hasModulePropertyChanged)
+    processedModules[module.node_id] = {
+      ...(module as Record<string, any>),
+      status,
     }
   }
-  return a
+  return processedModules
 }
-let $$eE37 = createSelector([em, Q, K, B, $$U8], (e, t, r, n, i) => getFeatureFlags().dse_module_publish ? ef(e, t, r, n, i) : {})
-let $$ey26 = createSelector([em, Q, K, B, (e, t) => t], (e, t, r, n, i) => ef(e, t, r, n, i))
-let $$eb6 = createSelector([eh, $$ed22], (e, t) => ({
-  ...e,
-  ...t,
+export let selectModuleLibraryItemsWithStatus = createSelector([selectLocalModules, selectOpenFileModules, selectOpenHubFileModules, selectPublishedHubFile, selectLibraryPublishingMode], (localModules, openFileModules, hubFileModules, publishedHubFile, publishingMode) => getFeatureFlags().dse_module_publish ? processModuleItems(localModules, openFileModules, hubFileModules, publishedHubFile, publishingMode) : {})
+export let selectAllModuleLibraryItemsWithStatus = createSelector([selectLocalModules, selectOpenFileModules, selectOpenHubFileModules, selectPublishedHubFile, (state, extraParam) => extraParam], (localModules, openFileModules, hubFileModules, publishedHubFile, extraParam) => processModuleItems(localModules, openFileModules, hubFileModules, publishedHubFile, extraParam))
+export let selectAllLibraryItems = createSelector([selectComponentItemsWithoutStateGroup, selectStateGroupLibraryItemsWithStatus], (componentItems, stateGroupItems) => ({
+  ...componentItems,
+  ...stateGroupItems,
 }))
-let eT = createSelector([$$eb6], e => _()(e, e => getAssetKeyForPublish(e)))
-let eI = createSelector([$$eb6], e => Object.values(e).some(e => isStagedStatus(e.status)))
-let eS = createSelector([$$eE37], e => Object.values(e).some(e => isStagedStatus(e.status)))
-let $$ev4 = createSelector([eI, eS], (e, t) => e || t)
-let eA = createSelector([$$eb6, selectSceneGraphSelection], (e, t) => Object.keys(t).reduce((t, r) => (e[r] && (t[r] = e[r]), t), Object.create(null)))
-let ex = createSelector([$$eE37, selectSceneGraphSelection], (e, t) => Object.keys(t).reduce((t, r) => (e[r] && (t[r] = e[r]), t), Object.create(null)))
-let eN = createSelector([$$en21, $$eb6, $$ep20, $$eE37], (e, t, r, n) => Object.keys(e).length > 0 || Object.keys(t).length > 0 || Object.keys(r).length > 0 || Object.keys(n).length > 0)
-let eC = createReduxSubscriptionAtomWithState(eN)
-let $$ew0 = atom((e) => {
-  if (e(eC))
-    return !0
-  for (let t of Object.keys(AssetAtomMap)) {
-    if (_$$O(t) && AssetAtomMap[t].local) {
-      for (let r of Object.values(e(AssetAtomMap[t].local))) {
-        if (!r.isSoftDeleted)
-          return !0
+export let selectMappedLibraryItems = createSelector([selectAllLibraryItems], items => mapKeys(items, item => getAssetKeyForPublish(item)))
+export let hasStagedComponentItems = createSelector([selectAllLibraryItems], (items: Record<string, BaseLibraryItem>) => Object.values(items).some(item => isStagedStatus(item.status as StagingStatusEnum)))
+export let hasStagedModuleItems = createSelector([selectModuleLibraryItemsWithStatus], (items: Record<string, ModuleLibraryItem>) => Object.values(items).some(item => isStagedStatus(item.status as StagingStatusEnum)))
+export let hasAnyStagedItems = createSelector([hasStagedComponentItems, hasStagedModuleItems], (hasStagedComponents, hasStagedModules) => hasStagedComponents || hasStagedModules)
+export let selectSelectedComponentItems = createSelector([selectAllLibraryItems, selectSceneGraphSelection], (items, selection) => Object.keys(selection).reduce((selectedItems, nodeId) => {
+  if (items[nodeId]) {
+    selectedItems[nodeId] = items[nodeId]
+  }
+  return selectedItems
+}, Object.create(null)))
+// let selectSelectedModuleItems = createSelector([selectModuleLibraryItemsWithStatus, selectSceneGraphSelection], (items, selection) => Object.keys(selection).reduce((selectedItems, nodeId) => {
+//   if (items[nodeId]) {
+//     selectedItems[nodeId] = items[nodeId]
+//   }
+//   return selectedItems
+// }, Object.create(null)))
+export let hasAnyLibraryContent = createSelector([selectStyledLibraryItemsWithStatus, selectAllLibraryItems, selectProcessedLocalVariableSets, selectModuleLibraryItemsWithStatus], (styles, components, variableSets, modules) => Object.keys(styles).length > 0 || Object.keys(components).length > 0 || Object.keys(variableSets).length > 0 || Object.keys(modules).length > 0)
+export let hasLibraryContentAtom = createReduxSubscriptionAtomWithState(hasAnyLibraryContent)
+export let hasAnyPublishableContentAtom = atom((getAtomValue) => {
+  if (getAtomValue(hasLibraryContentAtom))
+    return true
+  for (let assetType of Object.keys(AssetAtomMap)) {
+    if (isShareableAssetType(assetType as PrimaryWorkflowEnum) && AssetAtomMap[assetType as PrimaryWorkflowEnum].local) {
+      for (let asset of Object.values(getAtomValue(AssetAtomMap[assetType].local))) {
+        if (!asset.isSoftDeleted)
+          return true
       }
     }
   }
-  return !1
+  return false
 })
-let eO = _$$n(createSelector([$$eb6, $$eE37], (e, t) => Object.keys(e).length > 0 || Object.keys(t).length > 0))
-let $$eR17 = createReduxSubscriptionAtomWithState(eO)
-let eL = (e, t) => e.status != null && (!!isNewOrChangedOrDeleted(e.status) || !!isActiveStagingStatus(e.status) && (t ? t.has(e.node_id) : !!e.old_key))
-let eP = (e, t) => eL(e, t) && isStagedStatus(e.status)
-let eD = createReduxSubscriptionAtomWithState(e => e.userStateLoaded)
-let $$ek30 = atom(e => e(eD) && e(openFileAtom)?.canEdit && (e($$tj32) || e($$ew0)))
-let $$eM23 = createSelector([$$el11, $$ed22, $$en21, (e, t) => t], ej)
-let $$eF7 = createSelector([$$el11, $$ed22, $$en21], (e, t, r) => ej(e, t, r, void 0))
-function ej(e, t, r, n) {
-  let i = {
-    ...e,
-    ...t,
-    ...r,
+export let hasComponentOrModuleItems = (createSelector([selectAllLibraryItems, selectModuleLibraryItemsWithStatus], (components, modules) => Object.keys(components).length > 0 || Object.keys(modules).length > 0))
+export let hasComponentOrModuleItemsAtom = createReduxSubscriptionAtomWithState(hasComponentOrModuleItems)
+export let isItemStagedOrActive = (item, stagedItemIds) => item.status != null && (!!isNewOrChangedOrDeleted(item.status) || !!isActiveStagingStatus(item.status) && (stagedItemIds ? stagedItemIds.has(item.node_id) : !!item.old_key))
+export let isItemStaged = (item: any, stagedItemIds: Set<string> | undefined) => isItemStagedOrActive(item, stagedItemIds) && isStagedStatus(item.status as StagingStatusEnum)
+export let isUserStateLoadedAtom = createReduxSubscriptionAtomWithState(state => state.userStateLoaded)
+export let canEditAndHasChangesAtom = atom(getAtomValue => getAtomValue(isUserStateLoadedAtom) && getAtomValue(openFileAtom)?.canEdit && (getAtomValue(hasPendingChangesAtom) || getAtomValue(hasAnyPublishableContentAtom)))
+export let selectStagedItemIdsWithContext = createSelector([selectComponentLibraryItemsWithStatus, selectStateGroupLibraryItemsWithStatus, selectStyledLibraryItemsWithStatus, (state, context) => context], collectStagedItemIds)
+export let selectStagedItemIds = createSelector([selectComponentLibraryItemsWithStatus, selectStateGroupLibraryItemsWithStatus, selectStyledLibraryItemsWithStatus], (components: Record<string, ComponentLibraryItem>, stateGroups: Record<string, StateGroupLibraryItem>, styles: Record<string, StyleLibraryItem>) => collectStagedItemIds(components, stateGroups, styles, undefined))
+export function collectStagedItemIds(components: Record<string, ComponentLibraryItem>, stateGroups: Record<string, StateGroupLibraryItem>, styles: Record<string, StyleLibraryItem>, context: any) {
+  let allItems = {
+    ...components,
+    ...stateGroups,
+    ...styles,
   }
-  let a = new Set(n ? Object.keys(n).filter(e => n[e].publishType !== 'FORCED_COPY') : Object.values(i).filter(e => !!e.old_key).map(e => e.node_id))
-  Array.from(a).map(t => e[t] && getContainingStateGroupNodeId(e[t])).filter(e => !!e).forEach((e) => {
-    a.add(e)
+  let stagedItemIds = new Set<string>(context ? Object.keys(context).filter(itemId => (context as any)[itemId].publishType !== 'FORCED_COPY') : Object.values(allItems).filter(item => !!(item as any).old_key).map(item => (item as any).node_id))
+  Array.from(stagedItemIds).map(itemId => components[itemId] && getContainingStateGroupNodeId(components[itemId])).filter(stateGroupId => !!stateGroupId).forEach((stateGroupId) => {
+    stagedItemIds.add(stateGroupId)
   })
-  return a
+  return stagedItemIds
 }
-let eU = (e, t, r) => {
-  let n = t && t.unpublished_at == null
-  let i = 'isSoftDeleted' in e && e.isSoftDeleted
-  let a = !!e.isPublishable && !i
-  return n && !a ? StagingStatusEnum.DELETED : !n && a ? StagingStatusEnum.NEW : n || a ? r(e, t) ? StagingStatusEnum.CHANGED : StagingStatusEnum.CURRENT : StagingStatusEnum.NOT_STAGED
+export let calculateItemStatus = (localItem: any, publishedItem: any, hasPropertyChanged: (local: any, published: any) => boolean) => {
+  let isPublished = publishedItem && publishedItem.unpublished_at == null
+  let isLocallyDeleted = 'isSoftDeleted' in localItem && localItem.isSoftDeleted
+  let isPublishable = !!localItem.isPublishable && !isLocallyDeleted
+  return isPublished && !isPublishable ? StagingStatusEnum.DELETED : !isPublished && isPublishable ? StagingStatusEnum.NEW : isPublished || isPublishable ? hasPropertyChanged(localItem, publishedItem) ? StagingStatusEnum.CHANGED : StagingStatusEnum.CURRENT : StagingStatusEnum.NOT_STAGED
 }
-let eB = (e, t) => {
-  let r = conditionalFeatureFlag('ds_user_facing_version_publishing', e.userFacingVersion === t.userFacingVersion, e.content_hash === t.content_hash)
-  return !(t && r && areValuesEqual(t.name, e.name) && areValuesEqual(t.description, e.description))
+export let hasStylePropertyChanged = (localStyle: StyleLibraryItem, publishedStyle: any) => {
+  let versionsMatch = conditionalFeatureFlag('ds_user_facing_version_publishing', localStyle.userFacingVersion === publishedStyle.userFacingVersion, localStyle.content_hash === publishedStyle.content_hash)
+  return !(publishedStyle && versionsMatch && areValuesEqual(publishedStyle.name, localStyle.name) && areValuesEqual(publishedStyle.description, localStyle.description))
 }
-let eG = (e, t) => eB(e, t) || !areValuesEqual(t.sort_position, e.sort_position)
-let eV = (e, t) => getFeatureFlags().ds_user_facing_version_publishing ? !(t && t.userFacingVersion === e.userFacingVersion && !areFramesEqual(t.containing_frame, e?.containing_frame) && areValuesEqual(t.name, e?.name) && areValuesEqual(t.description, e.description)) : !(t && t.version === e.version && !areFramesEqual(t.containing_frame, e?.containing_frame) && areValuesEqual(t.name, e?.name) && areValuesEqual(t.description, e.description))
-let eH = (e, t) => {
-  if (!e || !t)
-    return !0
+// let hasComponentSortPropertyChanged = (localComponent: ComponentLibraryItem, publishedComponent: any) => hasStylePropertyChanged(localComponent as unknown as StyleLibraryItem, publishedComponent) || !areValuesEqual(publishedComponent.sort_position, localComponent.sort_position)
+
+export let haveStateGroupsChanged = (localStateGroup: StateGroupLibraryItem, publishedStateGroup: any) => getFeatureFlags().ds_user_facing_version_publishing ? !(publishedStateGroup && publishedStateGroup.userFacingVersion === localStateGroup.userFacingVersion && !areFramesEqual(publishedStateGroup.containing_frame, localStateGroup?.containing_frame) && areValuesEqual(publishedStateGroup.name, localStateGroup?.name) && areValuesEqual(publishedStateGroup.description, localStateGroup.description)) : !(publishedStateGroup && publishedStateGroup.version === localStateGroup.version && !areFramesEqual(publishedStateGroup.containing_frame, localStateGroup?.containing_frame) && areValuesEqual(publishedStateGroup.name, localStateGroup?.name) && areValuesEqual(publishedStateGroup.description, localStateGroup.description))
+export let hasVariablePropertyChanged = (localVariable: VariableLibraryItem, publishedVariable: any) => {
+  if (!localVariable || !publishedVariable)
+    return true
   if (getFeatureFlags().ds_user_facing_version_publishing) {
-    if (t.userFacingVersion !== e.userFacingVersion)
-      return !0
+    if (publishedVariable.userFacingVersion !== localVariable.userFacingVersion)
+      return true
   }
-  else if (t.version !== e.version) {
-    return !0
+  else if (publishedVariable.version !== localVariable.version) {
+    return true
   }
-  return t.sortPosition !== e.sortPosition
+  return publishedVariable.sortPosition !== localVariable.sortPosition
 }
-let ez = (e, t) => getFeatureFlags().ds_user_facing_version_publishing ? !(t && t.userFacingVersion === e?.userFacingVersion && t.sortPosition === e.sortPosition) : !(t && t.version === e?.version && t.sortPosition === e.sortPosition)
-function eW(e, t, r, i) {
-  let [a, s] = m()(t, t => eL(t, e))
-  let [o, l] = m()(a, r)
-  let [d, c] = m()(s, e => isStagedStatus(e.status))
+export let hasVariableSetPropertyChanged = (localSet: VariableSetLibraryItem, publishedSet: any) => getFeatureFlags().ds_user_facing_version_publishing ? !(publishedSet && publishedSet.userFacingVersion === localSet?.userFacingVersion && publishedSet.sortPosition === localSet.sortPosition) : !(publishedSet && publishedSet.version === localSet?.version && publishedSet.sortPosition === localSet.sortPosition)
+export function categorizeAndSortItems(stagedItemIds: Set<string>, items: any[], filterErroneous: (item: any) => boolean, sortComparators: any[]) {
+  let [stagedItems, unmodifiedItems] = partition(items, (item: any) => isItemStagedOrActive(item, stagedItemIds))
+  let [erroneousItems, wellFormedItems] = partition(stagedItems, filterErroneous)
+  let [publishedItems, unpublishedItems] = partition(unmodifiedItems, (item: any) => isStagedStatus((item as any).status))
   return {
     modified: {
-      erroneous: sortByMultiple(o, ...i),
-      wellFormed: sortByMultiple(l, ...i),
+      erroneous: sortByMultiple(erroneousItems, ...sortComparators),
+      wellFormed: sortByMultiple(wellFormedItems, ...sortComparators),
     },
     unmodified: {
-      published: sortByMultiple(d, ...i),
-      unpublished: sortByMultiple(c, ...i),
+      published: sortByMultiple(publishedItems, ...sortComparators),
+      unpublished: sortByMultiple(unpublishedItems, ...sortComparators),
     },
   }
 }
-function eK(e, t) {
-  return t == null ? eX(e) : e$(e, t)
+export function selectLibraryItemsWithDetails(context: any, specificContext: any) {
+  return specificContext == null ? selectAllLibraryItemsWithDetails(context) : selectLibraryItemsWithDetailsAndContext(context, specificContext)
 }
-let $$eY38 = createRemovableAtomFamily((e) => {
-  let t = e ? createReduxSubscriptionAtomWithState(t => eK(t, e)) : createReduxSubscriptionAtomWithState(eX)
-  let r = e ? createReduxSubscriptionAtomWithState(t => $$eM23(t, e)) : atom(new Set())
-  return atom((e) => {
-    let n = e(t)
-    let i = e(r)
-    let a = Object.values(e(_$$t).data ?? {})
-    let s = e(dv)
+export let createLibraryItemsAtomFamily = createRemovableAtomFamily((context: any) => {
+  let itemsWithDetailsAtom = context ? createReduxSubscriptionAtomWithState((state: any) => selectLibraryItemsWithDetails(state, context)) : createReduxSubscriptionAtomWithState(selectAllLibraryItemsWithDetails)
+  let stagedItemIdsAtom = context ? createReduxSubscriptionAtomWithState((state: any) => selectStagedItemIdsWithContext(state, context)) : atom(new Set<string>())
+  return atom((getAtomValue: any) => {
+    let itemsWithDetails = getAtomValue(itemsWithDetailsAtom)
+    let stagedItemIds = getAtomValue(stagedItemIdsAtom)
+    let libraryAssets = Object.values(getAtomValue(libraryAssetsAtom).data ?? {})
+    let thumbnailStatus = getAtomValue(thumbnailStatusAtom)
     return {
-      ...n,
+      ...itemsWithDetails,
       libraryAssets: {
-        [PrimaryWorkflowEnum.RESPONSIVE_SET]: eW(i, _$$O(PrimaryWorkflowEnum.RESPONSIVE_SET) ? a.filter(e => e.type === PrimaryWorkflowEnum.RESPONSIVE_SET) : [], () => !1, [compareAssetsByFrameAndName]),
-        [PrimaryWorkflowEnum.CODE_COMPONENT]: eW(i, _$$O(PrimaryWorkflowEnum.CODE_COMPONENT) ? a.filter(e => e.type === PrimaryWorkflowEnum.CODE_COMPONENT) : [], () => !1, [compareAssetsByFrameAndName]),
+        [PrimaryWorkflowEnum.RESPONSIVE_SET]: categorizeAndSortItems(stagedItemIds as Set<string>, isShareableAssetType(PrimaryWorkflowEnum.RESPONSIVE_SET) ? libraryAssets.filter((asset: any) => asset.type === PrimaryWorkflowEnum.RESPONSIVE_SET) : [], () => false, [compareAssetsByFrameAndName]),
+        [PrimaryWorkflowEnum.CODE_COMPONENT]: categorizeAndSortItems(stagedItemIds as Set<string>, isShareableAssetType(PrimaryWorkflowEnum.CODE_COMPONENT) ? libraryAssets.filter((asset: any) => asset.type === PrimaryWorkflowEnum.CODE_COMPONENT) : [], () => false, [compareAssetsByFrameAndName]),
       },
-      pageThumbnails: tj(s),
+      pageThumbnails: partitionThumbnailsByModification(thumbnailStatus),
     }
   })
 })
-let e$ = createSelector([$$en21, $$el11, $$ed22, $$eb6, $$ep20, $$ec33, $$eE37, $$eM23, (e, t) => t], eq)
-let eX = createSelector([$$en21, $$el11, $$ed22, $$eb6, $$ep20, $$ec33, $$eE37, $$eF7], (e, t, r, n, i, a, s, o) => eq(e, t, r, n, i, a, s, o, void 0))
-function eq(e, t, r, n, i, a, s, o, l) {
-  let d = (e, t) => {
-    if (!l)
+export let selectLibraryItemsWithDetailsAndContext = createSelector([selectStyledLibraryItemsWithStatus, selectComponentLibraryItemsWithStatus, selectStateGroupLibraryItemsWithStatus, selectAllLibraryItems, selectProcessedLocalVariableSets, selectProcessedLocalVariables, selectModuleLibraryItemsWithStatus, selectStagedItemIdsWithContext, (state, context) => context], (styles: Record<string, StyleLibraryItem>, components: Record<string, ComponentLibraryItem>, stateGroups: Record<string, StateGroupLibraryItem>, productComponents: Record<string, BaseLibraryItem>, variableSets: Record<string, VariableSetLibraryItem>, variables: Record<string, VariableLibraryItem>, modules: Record<string, ModuleLibraryItem>, stagedItemIds: Set<string>, context: any) => organizeLibraryItems(styles, components, stateGroups, productComponents, variableSets, variables, modules, stagedItemIds, context))
+export let selectAllLibraryItemsWithDetails = createSelector([selectStyledLibraryItemsWithStatus, selectComponentLibraryItemsWithStatus, selectStateGroupLibraryItemsWithStatus, selectAllLibraryItems, selectProcessedLocalVariableSets, selectProcessedLocalVariables, selectModuleLibraryItemsWithStatus, selectStagedItemIds], (styles: Record<string, StyleLibraryItem>, components: Record<string, ComponentLibraryItem>, stateGroups: Record<string, StateGroupLibraryItem>, productComponents: Record<string, BaseLibraryItem>, variableSets: Record<string, VariableSetLibraryItem>, variables: Record<string, VariableLibraryItem>, modules: Record<string, ModuleLibraryItem>, stagedItemIds: Set<string>) => organizeLibraryItems(styles, components, stateGroups, productComponents, variableSets, variables, modules, stagedItemIds, undefined))
+function organizeLibraryItems(styles: Record<string, StyleLibraryItem>, components: Record<string, ComponentLibraryItem>, stateGroups: Record<string, StateGroupLibraryItem>, productComponents: Record<string, BaseLibraryItem>, variableSets: Record<string, VariableSetLibraryItem>, variables: Record<string, VariableLibraryItem>, modules: Record<string, ModuleLibraryItem>, stagedItemIds: Set<string>, context: any) {
+  let compareForcedCopyPriority = (item1: any, item2: any) => {
+    if (!context)
       return 0
-    let r = l[e.node_id]
-    let n = l[t.node_id]
-    return r && n ? r.publishType === 'FORCED_COPY' && n.publishType !== 'FORCED_COPY' ? 1 : r.publishType !== 'FORCED_COPY' && n.publishType === 'FORCED_COPY' ? -1 : 0 : 0
+    let context1 = context[item1.node_id]
+    let context2 = context[item2.node_id]
+    return context1 && context2 ? context1.publishType === 'FORCED_COPY' && context2.publishType !== 'FORCED_COPY' ? 1 : context1.publishType !== 'FORCED_COPY' && context2.publishType === 'FORCED_COPY' ? -1 : 0 : 0
   }
-  let c = [...new Set(Object.values(a).filter(e => !e.isPublishable).map(e => e.variableSetId))].map(e => i[e]).filter(e => !!e)
+  let variableSetsWithHiddenVariables = [...new Set(Object.values(variables).filter(variable => !(variable as VariableLibraryItem).isPublishable).map(variable => (variable as VariableLibraryItem).variableSetId))].map((setId: string) => variableSets[setId]).filter(set => !!set)
   return {
-    styles: eW(o, Object.values(e), () => !1, [compareStyles, d]),
-    components: eW(o, Object.values(t), hasAssetError, [compareAssetsByFrameAndName, d]),
-    stateGroups: eW(o, Object.values(r), hasAssetError, [compareAssetsByFrameAndName, d]),
-    productComponents: eW(o, Object.values(n), hasAssetError, [compareAssetsByFrameAndName, d]),
-    variableSets: eW(o, Object.values(i), hasVariableSetError, [compareAssetsByName]),
-    variableSetsWithHiddenVariables: eW(o, c, () => !1, [compareAssetsByName]),
-    variables: eW(o, Object.values(a), () => !1, [compareAssetsByName]),
-    modules: eW(o, _$$O(PrimaryWorkflowEnum.MODULE) ? Object.values(s) : [], () => !1, [compareAssetsByFrameAndName]),
+    styles: categorizeAndSortItems(stagedItemIds, Object.values(styles), () => false, [compareStyles, compareForcedCopyPriority]),
+    components: categorizeAndSortItems(stagedItemIds, Object.values(components), hasAssetError, [compareAssetsByFrameAndName, compareForcedCopyPriority]),
+    stateGroups: categorizeAndSortItems(stagedItemIds, Object.values(stateGroups), hasAssetError, [compareAssetsByFrameAndName, compareForcedCopyPriority]),
+    productComponents: categorizeAndSortItems(stagedItemIds, Object.values(productComponents), hasAssetError, [compareAssetsByFrameAndName, compareForcedCopyPriority]),
+    variableSets: categorizeAndSortItems(stagedItemIds, Object.values(variableSets), hasVariableSetError, [compareAssetsByName]),
+    variableSetsWithHiddenVariables: categorizeAndSortItems(stagedItemIds, variableSetsWithHiddenVariables, () => false, [compareAssetsByName]),
+    variables: categorizeAndSortItems(stagedItemIds, Object.values(variables), () => false, [compareAssetsByName]),
+    modules: categorizeAndSortItems(stagedItemIds, isShareableAssetType(PrimaryWorkflowEnum.MODULE) ? Object.values(modules) : [], () => false, [compareAssetsByFrameAndName]),
   }
 }
-let eJ = createDeepEqualSelector([eu], e => Object.fromEntries(Object.entries(e).map(([e, t]) => [e, eW(new Set(), t, () => !1, [compareAssetsByName])])))
-let $$eZ12 = () => createDeepEqualSelector([eJ, (e, t) => t], (e, t) => {
-  let r = e[t]
-  return r ? r.modified.wellFormed : []
+export let createVariableSetsBySetIdSelector = createDeepEqualSelector([groupVariablesBySetId], (variableSets: Record<string, VariableLibraryItem[]>) => Object.fromEntries(Object.entries(variableSets).map(([setId, variables]) => [setId, categorizeAndSortItems(new Set(), variables, () => false, [compareAssetsByName])])))
+export let createWellFormedVariablesBySetIdSelector = () => createDeepEqualSelector([createVariableSetsBySetIdSelector, (state, setId) => setId], (variableSets: Record<string, any>, setId: string) => {
+  let setVariables = variableSets[setId]
+  return setVariables ? setVariables.modified.wellFormed : []
 })
-let $$eQ27 = () => createDeepEqualSelector([eJ, (e, t) => t], (e, t) => {
-  let r = e[t]
-  return r ? r.unmodified.unpublished.filter(e => !e.isPublishable) : []
+export let createUnpublishedVariablesBySetIdSelector = () => createDeepEqualSelector([createVariableSetsBySetIdSelector, (state, setId) => setId], (variableSets: Record<string, any>, setId: string) => {
+  let setVariables = variableSets[setId]
+  return setVariables ? setVariables.unmodified.unpublished.filter(variable => !variable.isPublishable) : []
 })
-let e0 = createSelector([eK], e => e.styles.modified.wellFormed)
-let e1 = createSelector([$$en21], e => Object.values(e).filter(e => eP(e)))
-let e2 = createSelector([eK], e => e.components.modified.wellFormed)
-let e5 = createSelector([eK], e => e.stateGroups.modified.wellFormed)
-let e3 = createSelector([eK], e => e.productComponents.modified.wellFormed)
-let e4 = createSelector([e3], e => e.filter(e => isStagedStatus(e.status)))
-let e8 = createSelector([eK], e => e.variableSets.modified.wellFormed)
-let e6 = createSelector([e8], e => e.filter(e => isStagedStatus(e.status)))
-let e7 = createSelector([eK], e => _$$O(PrimaryWorkflowEnum.MODULE) ? e.modules.modified.wellFormed : [])
-let e9 = createSelector([e7], e => e.filter(e => isStagedStatus(e.status)))
-let $$te25 = createSelector([selectOpenFile, selectTeams], (e, t) => !!(getFeatureFlags().cmty_lib_admin_publish && e?.publishedHubFile) || !isTeamFolderV2(e?.project) && !!(e && hasTeamPaidAccess(e.teamId ? t[e.teamId] : null)))
-let $$tt3 = e0
-let tr = createSelector([$$tt3], e => e.length > 0)
-let tn = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tr(t, e)))
-let ti = createSelector([e1], e => e.length > 0)
-let ta = createReduxSubscriptionAtomWithState(ti)
-let $$ts28 = createSelector([e2, $$te25], (e, t) => t ? e : [])
-let $$to10 = createSelector([e5, $$te25], (e, t) => t ? e : [])
-let tl = createSelector([e3, $$te25], (e, t) => t ? e : [])
-let td = createSelector([tl], e => e.length > 0)
-let tc = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => td(t, e)))
-let tu = createSelector([e4, $$te25], (e, t) => t ? e : [])
-let tp = createSelector([tu], e => e.length > 0)
-let t_ = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tp(t, e)))
-let th = createSelector([e8], e => e)
-let tm = createSelector([th], e => e.length > 0)
-let tg = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tm(t, e)))
-let tf = createSelector([e6], e => e)
-let tE = createSelector([tf], e => e.length > 0)
-let ty = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tE(t, e)))
-let tb = createSelector([e7, $$te25], (e, t) => t ? e : [])
-let tT = createSelector([tb], e => e.length > 0)
-let tI = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tT(t, e)))
-let tS = createSelector([e9], e => e.length > 0)
-let tv = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tS(t, e)))
-let tA = createRemovableAtomFamily(e => atom((t) => {
-  for (let r of Object.values(t($$eY38(e)).libraryAssets)) {
-    if (r.modified.wellFormed.length > 0 && _$$O(r.modified.wellFormed[0].type))
-      return !0
+export let selectWellFormedStyles = createSelector([selectLibraryItemsWithDetails], (items: any) => items.styles.modified.wellFormed)
+export let selectStagedStyles = createSelector([selectStyledLibraryItemsWithStatus], (styles: Record<string, StyleLibraryItem>) => Object.values(styles).filter(style => isItemStaged(style, new Set())))
+export let selectWellFormedComponents = createSelector([selectLibraryItemsWithDetails], (items: any) => items.components.modified.wellFormed)
+export let selectWellFormedStateGroups = createSelector([selectLibraryItemsWithDetails], (items: any) => items.stateGroups.modified.wellFormed)
+export let selectWellFormedProductComponents = createSelector([selectLibraryItemsWithDetails], (items: any) => items.productComponents.modified.wellFormed)
+export let selectStagedProductComponents = createSelector([selectWellFormedProductComponents], (components: any[]) => components.filter((component: any) => isStagedStatus(component.status as StagingStatusEnum)))
+export let selectWellFormedVariableSets = createSelector([selectLibraryItemsWithDetails], (items: any) => items.variableSets.modified.wellFormed)
+export let selectStagedVariableSets = createSelector([selectWellFormedVariableSets], (variableSets: any[]) => variableSets.filter((set: any) => isStagedStatus(set.status as StagingStatusEnum)))
+export let selectWellFormedModules = createSelector([selectLibraryItemsWithDetails], (items: any) => isShareableAssetType(PrimaryWorkflowEnum.MODULE) ? items.modules.modified.wellFormed : [])
+export let selectStagedModules = createSelector([selectWellFormedModules], (modules: any[]) => modules.filter((module: any) => isStagedStatus(module.status as StagingStatusEnum)))
+export let canUserPublishToCommunity = createSelector([selectOpenFile, selectTeams], (openFile: any, teams: any) => !!(getFeatureFlags().cmty_lib_admin_publish && openFile?.publishedHubFile) || !isTeamFolderV2(openFile?.project) && !!(openFile && hasTeamPaidAccess(openFile.teamId ? teams[openFile.teamId] : null)))
+let selectWellFormedStylesForPublishing = selectWellFormedStyles
+export let hasWellFormedStylesAtom = createSelector([selectWellFormedStylesForPublishing], (styles: any[]) => styles.length > 0)
+export let createHasWellFormedStylesAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => hasWellFormedStylesAtom(state, context)))
+export let hasStagedStylesAtom = createSelector([selectStagedStyles], (styles: any[]) => styles.length > 0)
+let hasStagedStylesAtomInstance = createReduxSubscriptionAtomWithState(hasStagedStylesAtom)
+export let selectWellFormedComponentsForPublishing = createSelector([selectWellFormedComponents, canUserPublishToCommunity], (components: any[], canPublish: boolean) => canPublish ? components : [])
+export let selectWellFormedStateGroupsForPublishing = createSelector([selectWellFormedStateGroups, canUserPublishToCommunity], (stateGroups: any[], canPublish: boolean) => canPublish ? stateGroups : [])
+export let selectWellFormedProductComponentsForPublishing = createSelector([selectWellFormedProductComponents, canUserPublishToCommunity], (productComponents: any[], canPublish: boolean) => canPublish ? productComponents : [])
+export let hasWellFormedProductComponentsAtom = createSelector([selectWellFormedProductComponentsForPublishing], (components: any[]) => components.length > 0)
+export let createHasWellFormedProductComponentsAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => hasWellFormedProductComponentsAtom(state, context)))
+export let selectStagedProductComponentsForPublishing = createSelector([selectStagedProductComponents, canUserPublishToCommunity], (stagedComponents: any[], canPublish: boolean) => canPublish ? stagedComponents : [])
+export let hasStagedProductComponentsAtom = createSelector([selectStagedProductComponentsForPublishing], (components: any[]) => components.length > 0)
+export let createHasStagedProductComponentsAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => hasStagedProductComponentsAtom(state, context)))
+export let selectAllVariableSets = createSelector([selectWellFormedVariableSets], (sets: any[]) => sets)
+export let hasVariableSetsAtom = createSelector([selectAllVariableSets], (sets: any[]) => sets.length > 0)
+export let createHasVariableSetsAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => hasVariableSetsAtom(state, context)))
+export let selectStagedVariableSetsForFiltering = createSelector([selectStagedVariableSets], (sets: any[]) => sets)
+export let hasStagedVariableSetsAtom = createSelector([selectStagedVariableSetsForFiltering], (sets: any[]) => sets.length > 0)
+export let createHasStagedVariableSetsAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => hasStagedVariableSetsAtom(state, context)))
+export let selectWellFormedModulesForPublishing = createSelector([selectWellFormedModules, canUserPublishToCommunity], (modules: any[], canPublish: boolean) => canPublish ? modules : [])
+export let hasWellFormedModulesAtom = createSelector([selectWellFormedModulesForPublishing], (modules: any[]) => modules.length > 0)
+export let createHasWellFormedModulesAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => hasWellFormedModulesAtom(state, context)))
+export let selectStagedModulesForFiltering = createSelector([selectStagedModules], (modules: any[]) => modules.length > 0)
+export let createHasStagedModulesAtomFamily = createRemovableAtomFamily((context: any) => createReduxSubscriptionAtomWithState((state: any) => selectStagedModulesForFiltering(state, context)))
+export let createHasShareableAssetsAtomFamily = createRemovableAtomFamily((context: any) => atom((getAtomValue: any) => {
+  for (let assetCategory of Object.values(getAtomValue(createLibraryItemsAtomFamily(context)).libraryAssets)) {
+    if (assetCategory && (assetCategory as any).modified && (assetCategory as any).modified.wellFormed && (assetCategory as any).modified.wellFormed.length > 0 && isShareableAssetType((assetCategory as any).modified.wellFormed[0].type))
+      return true
   }
-  return !1
+  return false
 }))
-let tx = createRemovableAtomFamily(e => atom((t) => {
-  for (let r of Object.values(t($$eY38(e)).libraryAssets)) {
-    if (r.modified.wellFormed.length > 0 && _$$O(r.modified.wellFormed[0].type) && r.modified.wellFormed.some(e => isStagedStatus(e.status)))
-      return !0
+export let createHasStagedShareableAssetsAtomFamily = createRemovableAtomFamily((context: any) => atom((getAtomValue: any) => {
+  for (let assetCategory of Object.values(getAtomValue(createLibraryItemsAtomFamily(context)).libraryAssets)) {
+    if (assetCategory && (assetCategory as any).modified && (assetCategory as any).modified.wellFormed && (assetCategory as any).modified.wellFormed.length > 0 && isShareableAssetType((assetCategory as any).modified.wellFormed[0].type) && (assetCategory as any).modified.wellFormed.some((asset: any) => isStagedStatus(asset.status as StagingStatusEnum)))
+      return true
   }
-  return !1
+  return false
 }))
-let $$tN36 = createRemovableAtomFamily((e) => {
-  let t = createReduxSubscriptionAtomWithState(t => $$tt3(t, e))
-  let r = createReduxSubscriptionAtomWithState(t => tl(t, e))
-  let n = createReduxSubscriptionAtomWithState(t => th(t, e))
-  let i = createReduxSubscriptionAtomWithState(t => tb(t, e))
-  return atom((a) => {
-    let s = a(t)
-    let o = a(r)
-    let l = a(n)
-    let d = a(i)
-    let c = a($$eY38(e))
-    let u = Object.keys(c.libraryAssets).flatMap(e => _$$O(e) ? c.libraryAssets[e].modified.wellFormed : [])
-    let p = a(dv)
-    return [...s.map(e => e.node_id), ...o.map(e => e.node_id), ...l.map(e => e.node_id), ...d.map(e => e.node_id), ...u.map(e => e.node_id), ...p?.map(e => e.node_id)]
+export let createAllStagedItemIdsAtomFamily = createRemovableAtomFamily((context: any) => {
+  let wellFormedStylesAtom = createReduxSubscriptionAtomWithState(state => selectWellFormedStylesForPublishing(state, context))
+  let wellFormedProductComponentsAtom = createReduxSubscriptionAtomWithState(state => selectWellFormedProductComponentsForPublishing(state, context))
+  let allVariableSetsAtom = createReduxSubscriptionAtomWithState(state => selectAllVariableSets(state, context))
+  let wellFormedModulesAtom = createReduxSubscriptionAtomWithState(state => selectWellFormedModulesForPublishing(state, context))
+  return atom((getAtomValue) => {
+    let styles = getAtomValue(wellFormedStylesAtom)
+    let productComponents = getAtomValue(wellFormedProductComponentsAtom)
+    let variableSets = getAtomValue(allVariableSetsAtom)
+    let modules = getAtomValue(wellFormedModulesAtom)
+    let libraryAssets = getAtomValue(createLibraryItemsAtomFamily(context))
+    let shareableAssets = Object.keys(libraryAssets.libraryAssets).flatMap(assetType => isShareableAssetType(assetType as PrimaryWorkflowEnum) ? (libraryAssets.libraryAssets as any)[assetType].modified.wellFormed : [])
+    let thumbnailStatus = getAtomValue(thumbnailStatusAtom)
+    return [...styles.map(style => style.node_id), ...productComponents.map(component => component.node_id), ...variableSets.map(set => set.node_id), ...modules.map(module => module.node_id), ...shareableAssets.map(asset => asset.node_id), ...thumbnailStatus?.map(thumb => thumb.node_id)]
   })
 })
-let $$tC9 = createRemovableAtomFamily(e => atom(t => t(tn(e)) || t(tc(e)) || t(tg(e)) || t(tI(e)) || t(tA(e))))
-let $$tw19 = createRemovableAtomFamily(e => atom(t => t(ta) || t(t_(e)) || t(ty(e)) || t(tv(e)) || t(tx(e))))
-let $$tO2 = createSelector([eA, tl], (e, t) => t.some(t => e[t.node_id]))
-createSelector([ex, tb], (e, t) => t.some(t => e[t.node_id]))
-let $$tR16 = createSelector([eT, selectMergedAssets], (e, t) => ({
-  ...t,
-  ...e,
+export let createHasAnyWellFormedAssetsAtomFamily = createRemovableAtomFamily((context: any) => atom((getAtomValue: any) => getAtomValue(createHasWellFormedStylesAtomFamily(context)) || getAtomValue(createHasWellFormedProductComponentsAtomFamily(context)) || getAtomValue(createHasVariableSetsAtomFamily(context)) || getAtomValue(createHasWellFormedModulesAtomFamily(context)) || getAtomValue(createHasShareableAssetsAtomFamily(context))))
+export let createHasAnyStagedAssetsAtomFamily = createRemovableAtomFamily((context: any) => atom((getAtomValue: any) => getAtomValue(hasStagedStylesAtomInstance) || getAtomValue(createHasStagedProductComponentsAtomFamily(context)) || getAtomValue(createHasStagedVariableSetsAtomFamily(context)) || getAtomValue(createHasStagedModulesAtomFamily(context)) || getAtomValue(createHasStagedShareableAssetsAtomFamily(context))))
+export let isSelectedComponentInWellFormedProductComponents = createSelector([selectSelectedComponentItems, selectWellFormedProductComponentsForPublishing], (selectedComponents: Record<string, any>, productComponents: any[]) => productComponents.some((component: any) => selectedComponents[component.node_id]))
+// createSelector([selectSelectedModuleItems, selectWellFormedModulesForPublishing], (selectedModules, modules) => modules.some(module => selectedModules[module.node_id]))
+export let selectMergedAndLocalAssets = createSelector([selectMappedLibraryItems, selectMergedAssets], (localAssets: Record<string, any>, mergedAssets: Record<string, any>) => ({
+  ...mergedAssets,
+  ...localAssets,
 }))
-let $$tL1 = createSelector([tb], e => e.map(e => e.node_id))
-createSelector([$$to10], e => e.map(e => e.node_id))
-let $$tP35 = createSelector([$$ts28, () => getCooperFrameGuids()], (e, t) => e.filter(e => e.deletedFromSceneGraph || t.includes(e.node_id)).map(e => e.node_id))
-let $$tD34 = createSelector([$$tP35, () => getCooperFrames()], (e, t) => e.concat(t.filter(e => e.type !== 'SYMBOL').map(e => e.guid)))
-let $$tk29 = createSelector([$$el11, () => getCooperFrameGuids()], (e, t) => f()(e, e => t.includes(e.node_id)))
-let tM = atom(e => Object.values(e(_$$t).data ?? {}).some(e => isStagedStatus(e.status)))
-let tF = createReduxSubscriptionAtomWithState($$ee5)
-let $$tj32 = atom(e => e(tF) || e(tM))
-export function $$tU31(e, t) {
-  return r => e({
-    ...r,
+export let selectWellFormedModuleNodeIds = createSelector([selectWellFormedModulesForPublishing], (modules: any[]) => modules.map((module: any) => module.node_id))
+// createSelector([selectWellFormedStateGroupsForPublishing], stateGroups => stateGroups.map(stateGroup => stateGroup.node_id))
+export let selectDeletedOrCooperComponentNodeIds = createSelector(
+  [selectWellFormedComponentsForPublishing, () => getCooperFrameGuids()],
+  (components: any[], cooperFrameGuids: string[]) => components.filter((component: any) => component.deletedFromSceneGraph || cooperFrameGuids.includes(component.node_id)).map((component: any) => component.node_id),
+)
+export let selectDeletedOrCooperComponentAndFrameNodeIds = createSelector([selectDeletedOrCooperComponentNodeIds, () => getCooperFrames()], (componentNodeIds: string[], cooperFrames: any[]) => componentNodeIds.concat(cooperFrames.filter((frame: any) => frame.type !== 'SYMBOL').map((frame: any) => frame.guid)))
+export let selectCooperComponents = createSelector([selectComponentLibraryItemsWithStatus, () => getCooperFrameGuids()], (components: Record<string, ComponentLibraryItem>, cooperFrameGuids: string[]) => pickBy(components, (component: ComponentLibraryItem) => cooperFrameGuids.includes(component.node_id)))
+let hasStagedLibraryAssetsAtom = atom((getAtomValue: any) => Object.values(getAtomValue(libraryAssetsAtom).data ?? {}).some((asset: any) => isStagedStatus(asset.status as StagingStatusEnum)))
+let hasLocalOrPublishedContentAtom = createReduxSubscriptionAtomWithState(hasLocalOrPublishedContent)
+let hasPendingChangesAtom = atom((getAtomValue: any) => getAtomValue(hasLocalOrPublishedContentAtom) || getAtomValue(hasStagedLibraryAssetsAtom))
+export function createUpdateLibraryPublishingModeAction(updater: any, mode: LibrarySourceEnum) {
+  return state => updater({
+    ...state,
     library: {
-      ...r.library,
-      libraryPublishingMode: t,
+      ...state.library,
+      libraryPublishingMode: mode,
     },
   })
 }
-export const $c = $$ew0
-export const AC = $$tL1
-export const Ct = $$tO2
-export const Dc = $$tt3
-export const Dr = $$ev4
-export const F9 = $$ee5
-export const FZ = $$eb6
-export const GS = $$eF7
-export const Io = $$U8
-export const Iy = $$tC9
-export const JI = $$to10
-export const MH = $$el11
-export const MW = $$eZ12
-export const Mh = $$G13
-export const Pd = $$V14
-export const Pg = $$Y15
-export const Qp = $$tR16
-export const Sh = $$eR17
-export const Wz = $$e_18
-export const Xh = $$tw19
-export const bh = $$ep20
-export const cM = $$en21
-export const dM = $$ed22
-export const dU = $$eM23
-export const e_ = $$j24
-export const fA = $$te25
-export const jO = $$ey26
-export const ju = $$eQ27
-export const oB = $$ts28
-export const p6 = $$tk29
-export const p9 = $$ek30
-export const qG = $$tU31
-export const qN = $$tj32
-export const tK = $$ec33
-export const tz = $$tD34
-export const vQ = $$tP35
-export const x$ = $$tN36
-export const x6 = $$eE37
-export const y6 = $$eY38
+export const $c = hasAnyPublishableContentAtom
+export const AC = selectWellFormedModuleNodeIds
+export const Ct = isSelectedComponentInWellFormedProductComponents
+export const Dc = selectWellFormedStylesForPublishing
+export const Dr = hasAnyStagedItems
+export const F9 = hasLocalOrPublishedContent
+export const FZ = selectAllLibraryItems
+export const GS = selectStagedItemIds
+export const Io = selectLibraryPublishingMode
+export const Iy = createHasAnyWellFormedAssetsAtomFamily
+export const JI = selectWellFormedStateGroupsForPublishing
+export const MH = selectComponentLibraryItemsWithStatus
+export const MW = createWellFormedVariablesBySetIdSelector
+export const Mh = selectOpenHubFileComponents
+export const Pd = selectOpenHubFileStateGroups
+export const Pg = hasOpenHubFileContent
+export const Qp = selectMergedAndLocalAssets
+export const Sh = hasComponentOrModuleItemsAtom
+export const Wz = groupComponentItemsByStateGroup
+export const Xh = createHasAnyStagedAssetsAtomFamily
+export const bh = selectProcessedLocalVariableSets
+export const cM = selectStyledLibraryItemsWithStatus
+export const dM = selectStateGroupLibraryItemsWithStatus
+export const dU = selectStagedItemIdsWithContext
+export const e_ = selectLibrary
+export const fA = canUserPublishToCommunity
+export const jO = selectAllModuleLibraryItemsWithStatus
+export const ju = createUnpublishedVariablesBySetIdSelector
+export const oB = selectWellFormedComponentsForPublishing
+export const p6 = selectCooperComponents
+export const p9 = canEditAndHasChangesAtom
+export const qG = createUpdateLibraryPublishingModeAction
+export const qN = hasPendingChangesAtom
+export const tK = selectProcessedLocalVariables
+export const tz = selectDeletedOrCooperComponentAndFrameNodeIds
+export const vQ = selectDeletedOrCooperComponentNodeIds
+export const x$ = createAllStagedItemIdsAtomFamily
+export const x6 = selectModuleLibraryItemsWithStatus
+export const y6 = createLibraryItemsAtomFamily

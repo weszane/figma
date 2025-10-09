@@ -1,87 +1,155 @@
-import { liveStoreInstance } from "../905/713695";
-import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { sendWithRetry } from "../905/910117";
-let $$a0 = liveStoreInstance.Query({
-  fetch: async e => await $$s1.getNumTemplatesByTeam({
-    teamId: e.teamId,
-    editorType: e.editorType
-  }).then(e => e.data.meta.total)
-});
-let $$s1 = new class {
-  constructor() {
-    this.RecentsSchemaValidator = createNoOpValidator();
-    this.TeamBrowseFromSize10SchemaValidator = createNoOpValidator();
-    this.SearchPaginatedSchemaValidator = createNoOpValidator();
-    this.TeamTemplateLimitValidator = createNoOpValidator();
-    this.TeamTemplateCountValidator = createNoOpValidator();
-    this.UploadTemplateCoverImage = createNoOpValidator();
-    this.UpsertTemplateValidator = createNoOpValidator();
+import { liveStoreInstance } from "../905/713695"
+import { sendWithRetry } from "../905/910117"
+import { APIParameterUtils, createNoOpValidator } from "../figma_app/181241"
+
+/**
+ * Query for fetching the number of templates by team
+ * Original name: $$a0
+ */
+const teamTemplateCountQuery = liveStoreInstance.Query({
+  fetch: async (params: any) => {
+    const response:any = await templateService.getNumTemplatesByTeam({
+      teamId: params.teamId,
+      editorType: params.editorType,
+    })
+    return response.data.meta.total
+  },
+})
+
+/**
+ * Service class for template-related API operations
+ * Original name: $$s1
+ */
+class TemplateService {
+  // Schema validators
+  private readonly recentsSchemaValidator = createNoOpValidator()
+  private readonly teamBrowseFromSize10SchemaValidator = createNoOpValidator()
+  private readonly searchPaginatedSchemaValidator = createNoOpValidator()
+  private readonly teamTemplateLimitValidator = createNoOpValidator()
+  private readonly teamTemplateCountValidator = createNoOpValidator()
+  private readonly uploadTemplateCoverImageValidator = createNoOpValidator()
+  private readonly upsertTemplateValidator = createNoOpValidator()
+
+  /**
+   * Get recent templates
+   * Original name: getRecents
+   */
+  public getRecents(params: { orgId: string, teamId: string, fileKeys: string[] }) {
+    return this.recentsSchemaValidator.validate(async ({ xr: client }) => {
+      return await client.get("/api/templates", {
+        org_id: params.orgId,
+        team_id: params.teamId,
+        file_keys: params.fileKeys,
+      })
+    })
   }
-  getRecents(e) {
-    return this.RecentsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/templates", {
-      org_id: e.orgId,
-      team_id: e.teamId,
-      file_keys: e.fileKeys
-    }));
+
+  /**
+   * Get paginated team browse results
+   * Original name: getTeamBrowsePaginated
+   */
+  public getTeamBrowsePaginated(params: {
+    orgId: string
+    teamId: string
+    from: number
+    size: number
+    templateType?: string
+  }) {
+    return this.teamBrowseFromSize10SchemaValidator.validate(async ({ xr: client }) => {
+      return await client.get(
+        `/api/templates/${params.orgId}/team/${params.teamId}/browse`,
+        APIParameterUtils.toAPIParameters({
+          from: params.from,
+          size: params.size,
+          templateType: params.templateType,
+        }),
+      )
+    })
   }
-  getTeamBrowsePaginated(e) {
-    return this.TeamBrowseFromSize10SchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/templates/${e.orgId}/team/${e.teamId}/browse`, APIParameterUtils.toAPIParameters({
-      from: e.from,
-      size: e.size,
-      templateType: e.templateType
-    })));
+
+  /**
+   * Get paginated search results
+   * Original name: getSearchPaginated
+   */
+  public getSearchPaginated(params: { orgId: string, [key: string]: any }) {
+    const { orgId, ...restParams } = params
+    return this.searchPaginatedSchemaValidator.validate(({ xr: client }) => {
+      return client.get(
+        `/api/templates/${orgId}/search`,
+        APIParameterUtils.toAPIParameters(restParams),
+      )
+    })
   }
-  getSearchPaginated(e) {
-    let {
-      orgId,
-      ...r
-    } = e;
-    return this.SearchPaginatedSchemaValidator.validate(({
-      xr: t
-    }) => t.get(`/api/templates/${e.orgId}/search`, APIParameterUtils.toAPIParameters(r)));
+
+  /**
+   * Get filtered team templates
+   * Original name: getFilteredTeamTemplates
+   */
+  public getFilteredTeamTemplates(params: { orgId: string, [key: string]: any }) {
+    const { orgId, ...restParams } = params
+    return sendWithRetry.post(`/api/templates/${orgId}/browse`, restParams)
   }
-  getFilteredTeamTemplates(e) {
-    let {
-      orgId,
-      ...r
-    } = e;
-    return sendWithRetry.post(`/api/templates/${orgId}/browse`, r);
+
+  /**
+   * Check if team template limit is reached
+   * Original name: getTeamTemplateLimitReached
+   */
+  public getTeamTemplateLimitReached(params: { teamId: string, editorType: string }) {
+    return this.teamTemplateLimitValidator.validate(({ xr: client }) => {
+      return client.get(
+        `/api/templates/${params.teamId}/limits`,
+        APIParameterUtils.toAPIParameters({
+          editorType: params.editorType,
+        }),
+      )
+    })
   }
-  getTeamTemplateLimitReached(e) {
-    return this.TeamTemplateLimitValidator.validate(({
-      xr: t
-    }) => t.get(`/api/templates/${e.teamId}/limits`, APIParameterUtils.toAPIParameters({
-      editorType: e.editorType
-    })));
+
+  /**
+   * Get number of templates by team
+   * Original name: getNumTemplatesByTeam
+   */
+  public getNumTemplatesByTeam(params: { teamId: string, editorType: string }) {
+    return this.teamTemplateCountValidator.validate(({ xr: client }) => {
+      return client.get(
+        `/api/templates/${params.teamId}/count`,
+        APIParameterUtils.toAPIParameters({
+          editorType: params.editorType,
+        }),
+      )
+    })
   }
-  getNumTemplatesByTeam(e) {
-    return this.TeamTemplateCountValidator.validate(({
-      xr: t
-    }) => t.get(`/api/templates/${e.teamId}/count`, APIParameterUtils.toAPIParameters({
-      editorType: e.editorType
-    })));
+
+  /**
+   * Upload template cover image
+   * Original name: uploadTemplateCoverImage
+   */
+  public uploadTemplateCoverImage(params: { fileKey: string }) {
+    return this.uploadTemplateCoverImageValidator.validate(({ xr: client }) => {
+      return client.post(`/api/templates/file/${params.fileKey}/upload`)
+    })
   }
-  uploadTemplateCoverImage(e) {
-    return this.UploadTemplateCoverImage.validate(({
-      xr: t
-    }) => t.post(`/api/templates/file/${e.fileKey}/upload`));
+
+  /**
+   * Upsert template
+   * Original name: upsertTemplate
+   */
+  public upsertTemplate(params: { fileKey: string, payload: any, params: any }) {
+    const { fileKey, payload, params: apiParams } = params
+    return this.upsertTemplateValidator.validate(({ xr: client }) => {
+      return client.post(
+        `/api/templates/file/${fileKey}`,
+        payload,
+        APIParameterUtils.toAPIParameters({
+          params: apiParams,
+        }),
+      )
+    })
   }
-  upsertTemplate(e) {
-    let {
-      fileKey,
-      payload,
-      params
-    } = e;
-    return this.UpsertTemplateValidator.validate(({
-      xr: e
-    }) => e.post(`/api/templates/file/${fileKey}`, payload, APIParameterUtils.toAPIParameters({
-      params
-    })));
-  }
-}();
-export const U = $$a0;
-export const q = $$s1;
+}
+
+export const templateService = new TemplateService()
+
+// Export with meaningful names
+export const U = teamTemplateCountQuery
+export const q = templateService

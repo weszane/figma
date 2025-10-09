@@ -8,7 +8,7 @@ import { findAssetByNodeId, hasAssetError, isStagedStatus } from "../figma_app/6
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { dD } from "../905/519113";
-import { RR } from "../905/514666";
+import { PublishingUIContext } from "../905/514666";
 import { z } from "../905/454433";
 function g() {
   let e = useSelector(e => e.library.local);
@@ -27,7 +27,7 @@ function g() {
       type: dD,
       data: {
         initiallyCheckedItemIDs: s,
-        entrypoint: RR.PROPERTIES_PANEL
+        entrypoint: PublishingUIContext.PROPERTIES_PANEL
       }
     }));
   }, [r, s]);

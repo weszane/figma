@@ -23,7 +23,7 @@ import { s as _$$s } from '../905/551945';
 import { getFeatureFlags } from '../905/601108';
 import { tI } from '../905/603628';
 import { UploadError } from '../905/623179';
-import { K as _$$K2 } from '../905/659729';
+import { validateFileUploads } from '../905/659729';
 import { H as _$$H } from '../905/674803';
 import { Point } from '../905/736624';
 import { A as _$$A } from '../905/744692';
@@ -288,7 +288,7 @@ export function $$ed1(e) {
   }, [dispatch, e0]);
   let e2 = useCallback(t => {
     if (!eG || !updateAttachment || t.length === 0) return;
-    let l = _$$K2(t, eK, DEFAULT_THUMBNAIL_SIZE, IMAGE_TYPE_VALUES, e1);
+    let l = validateFileUploads(t, eK, DEFAULT_THUMBNAIL_SIZE, IMAGE_TYPE_VALUES, e1);
     eX(e => e + l.length);
     l.forEach((t, l) => {
       if (IMAGE_TYPE_VALUES.includes(t.type)) {

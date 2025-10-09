@@ -33,7 +33,7 @@ import { UpsellModalType } from "../905/165519";
 import { FeatureFlag } from "../905/652992";
 import { projectPermissionEnum } from "../figma_app/630077";
 import { registerModal } from "../905/102752";
-import { RR } from "../905/514666";
+import { PublishingUIContext } from "../905/514666";
 import { ConsumptionPaywallModalComponent } from "../905/739964";
 import { dD } from "../905/519113";
 export let $$V0 = registerModal(function (e) {
@@ -80,7 +80,7 @@ export let $$V0 = registerModal(function (e) {
     s(showModalHandler({
       type: dD,
       data: {
-        entrypoint: RR.PUBLISH_UPSELL_MODAL
+        entrypoint: PublishingUIContext.PUBLISH_UPSELL_MODAL
       }
     }));
   };

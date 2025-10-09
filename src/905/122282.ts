@@ -32,12 +32,12 @@ import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, useTracking } from "../figma_app/831799";
 import { T6 } from "../905/201596";
 import { Et as _$$Et, mZ, b2 } from "../figma_app/622574";
-import { $x, $W } from "../figma_app/599979";
+import { processThumbnailImage, countEnabledFeatures } from "../figma_app/599979";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { OpenEditorFileData } from "../figma_app/43951";
-import { l as _$$l, s as _$$s } from "../905/618307";
+import { uploadTemplate, validateTemplateData } from "../905/618307";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { ContainerTypeMap } from "../905/186961";
 import { TrackingKeyEnum } from "../905/696396";
@@ -79,7 +79,7 @@ import { Ai, vu } from "../905/870778";
 import { l as _$$l2 } from "../905/493845";
 import { PP, PH, Pn, OA } from "../905/230175";
 import { ServiceCategories } from "../905/165054";
-import { i as _$$i2 } from "../905/970229";
+import { detectMimeType } from "../905/970229";
 import { uploadRequest } from "../905/827765";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
@@ -89,7 +89,7 @@ import { v as _$$v } from "../905/513628";
 import { z as _$$z2 } from "../905/348343";
 import { om } from "../905/175462";
 import { renameFileOptimistic, filePutAction } from "../figma_app/78808";
-import { q as _$$q } from "../figma_app/446378";
+import { templateService } from "../figma_app/446378";
 import { n as _$$n2 } from "../905/341791";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { INTERNAL_PUBLISH_MODAL, PublishModalState } from "../figma_app/350203";
@@ -467,7 +467,7 @@ let e6 = setupFormValidationHandler({
           status,
           meta
         }
-      } = await _$$q.uploadTemplateCoverImage({
+      } = await templateService.uploadTemplateCoverImage({
         fileKey: figFile.key
       });
       if (200 !== status) return new withSubmissionError.SubmissionError({
@@ -483,7 +483,7 @@ let e6 = setupFormValidationHandler({
       c = meta.signature;
       let a = new FormData();
       Object.entries(fields).forEach(([e, t]) => a.append(e, t));
-      a.set("content-type", _$$i2(p) ?? "image/png");
+      a.set("content-type", detectMimeType(p) ?? "image/png");
       a.append("file", new Blob([p]));
       try {
         await uploadRequest(cover_image_upload_url, a);
@@ -501,7 +501,7 @@ let e6 = setupFormValidationHandler({
       let e = {};
       (u || c) && (e.cover_image_uploaded = "true");
       c && (e.signature = c);
-      i = (await _$$q.upsertTemplate({
+      i = (await templateService.upsertTemplate({
         fileKey: figFile.key,
         payload: {
           name: assertFieldReady(name).currentValue,
@@ -1123,7 +1123,7 @@ function tO({
         n || (i({
           state: Q.PUBLISH_TEMPLATE_INITIATED,
           request: t
-        }), _$$l({
+        }), uploadTemplate({
           ...t,
           dispatch: e,
           onSuccess: () => {
@@ -1159,7 +1159,7 @@ function tO({
   }, [eA, _publishInProgress, e_, publishInProgress, ey, _publishInProgress2]);
   let eR = useCallback(async e => {
     try {
-      let t = await $x(e, eb || n || void 0);
+      let t = await processThumbnailImage(e, eb || n || void 0);
       ev(t);
       eE(null);
     } catch (e) {
@@ -1196,7 +1196,7 @@ function tO({
   let eM = $u();
   let ej = () => {
     if (e_ && initiateTemplatePublish) {
-      let t = _$$s({
+      let t = validateTemplateData({
         name: B,
         description: z,
         publish_scope: ec
@@ -1216,7 +1216,7 @@ function tO({
         });
       });
     } else if (eA && _initiateTemplatePublish) {
-      let t = _$$s({
+      let t = validateTemplateData({
         name: B,
         description: z,
         publish_scope: ec
@@ -1234,7 +1234,7 @@ function tO({
         libraryKey: e.libraryKey
       });
     } else if (ey && _initiateTemplatePublish2) {
-      let t = _$$s({
+      let t = validateTemplateData({
         name: B,
         description: z,
         publish_scope: ec
@@ -1253,7 +1253,7 @@ function tO({
       });
     } else {
       R(!0);
-      _$$l({
+      uploadTemplate({
         fileKey: e.key,
         name: B,
         description: z,
@@ -1370,7 +1370,7 @@ function tO({
           }), t && (!o || o?.publishScope === ContainerTypeMap.TEAM) && ec === ContainerTypeMap.ORG && e_ && jsx(eo, {})]
         }), jsxs(DialogFooter, {
           children: [jsx("div", {
-            children: !!$W(tk, es) && jsxs("div", {
+            children: !!countEnabledFeatures(tk, es) && jsxs("div", {
               className: T()("template_publish_modal--footerText--dB9b6 publish_modal--footerText--2Sv9Q publish_modal--_userSelectNone--sP-aW", "template_publish_modal--footerError--AkcLv publish_modal--footerError--06reN text--fontPos11--2LvXf text--_fontBase--QdLsd"),
               "data-testid": "publish-modal-footer-text",
               children: [jsx(SvgComponent, {

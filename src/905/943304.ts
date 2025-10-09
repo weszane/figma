@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { LikeCountDisplay, UsageCountDisplay } from "../905/14017";
 import { getFieldValueOrDefault } from "../905/497882";
 import { getResourceUserCount } from "../figma_app/777551";
-import { j4 } from "../figma_app/599979";
+import { getDebugWorkspaceInfo } from "../figma_app/599979";
 import { FPublicationStatusType } from "../figma_app/191312";
 var l = o;
 export function $$g0({
@@ -23,7 +23,7 @@ export function $$g0({
   let b = o && getFieldValueOrDefault(o, void 0);
   let v = g && getFieldValueOrDefault(g, void 0);
   let I = (() => {
-    if (v) return j4(v)?.name;
+    if (v) return getDebugWorkspaceInfo(v)?.name;
   })();
   let E = jsxs("div", {
     className: l()("preview_row--container--it0ul", {

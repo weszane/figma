@@ -13,7 +13,7 @@ import { PrimaryWorkflowEnum } from '../figma_app/633080';
 import { selectMergedAssets } from '../figma_app/645694';
 import { getAssetKeyForPublish, findAssetForNode } from '../figma_app/646357';
 import { ComponentPropType, ComponentType, Fullscreen } from '../figma_app/763686';
-import { FZ, Qp } from '../figma_app/803787';
+import { selectAllLibraryItems, selectMergedAndLocalAssets } from '../figma_app/803787';
 import { fetchAndUpdateStateGroups } from '../figma_app/933328';
 import { createSelector } from '../vendor/925040';
 export function $$T2(e) {
@@ -50,7 +50,7 @@ let w = createOptimistThunk((e, {
 }) => {
   fetchAndUpdateStateGroups(r, t, e, C(e, n));
 });
-let O = () => createSelector([Qp, (e, t) => t], (e, t) => {
+let O = () => createSelector([selectMergedAndLocalAssets, (e, t) => t], (e, t) => {
   let r = [];
   let n = [];
   t.forEach(t => {
@@ -137,7 +137,7 @@ export function $$L9(e) {
   };
 }
 export function $$P7(e, t) {
-  let r = useSelector(FZ);
+  let r = useSelector(selectAllLibraryItems);
   let a = useSelector(selectMergedAssets);
   let [s, o] = useState(() => {
     let n = [];
@@ -170,7 +170,7 @@ export function $$k5(e) {
 let M = _$$n(e => (!!e.component_key || !!e.key) && !e.unpublished_at);
 export function $$F8(e) {
   let t = useSelector(selectContainingStateOrSymbolId);
-  let r = useSelector(FZ);
+  let r = useSelector(selectAllLibraryItems);
   let a = useMemo(() => !!t && M(r[t] ?? {}), [t, r]);
   return useMemoStable(() => a ? new Set(e.filter(e => !M(e)).map(e => e.node_id)) : new Set(), [a, e]);
 }

@@ -1,170 +1,210 @@
-import { throwError } from "../figma_app/465776";
-import { Fullscreen } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import s from "../vendor/223926";
-import { isNewOrChangedOrDeleted, isActiveStagingStatus, hasAssetError, mapAssetsToKeys } from "../figma_app/646357";
-import { hasTeamPaidAccess } from "../figma_app/345997";
-import { O } from "../905/566074";
-import { PublishStatusEnum, PrimaryWorkflowEnum, StagingStatusEnum } from "../figma_app/633080";
-var o = s;
+import { isShareableAssetType } from "../905/566074"
+import { getFeatureFlags } from "../905/601108"
+import { hasTeamPaidAccess } from "../figma_app/345997"
+import { throwError } from "../figma_app/465776"
+import { PrimaryWorkflowEnum, PublishStatusEnum, StagingStatusEnum } from "../figma_app/633080"
+import { hasAssetError, isActiveStagingStatus, isNewOrChangedOrDeleted, mapAssetsToKeys } from "../figma_app/646357"
+import { Fullscreen } from "../figma_app/763686"
+import s from "../vendor/223926"
+
+let o = s
 function p(e, t) {
-  return t?.has(e.node_id);
+  return t?.has(e.node_id)
 }
 class m {
   constructor(e) {
     this.addItem = (e, t, i) => {
       if (t[e.type] && t[e.type][i]) {
-        t[e.type][i].push(e);
-        return this.shouldReturnEarlyOnUpdate;
+        t[e.type][i].push(e)
+        return this.shouldReturnEarlyOnUpdate
       }
-      throwError("Unexpected library item type: " + e.type);
-    };
-    this.publishItem = (e, t) => this.addItem(e, t, PublishStatusEnum.PUBLISH);
-    this.unpublishItem = (e, t) => this.addItem(e, t, PublishStatusEnum.UNPUBLISH);
+      throwError(`Unexpected library item type: ${e.type}`)
+    }
+    this.publishItem = (e, t) => this.addItem(e, t, PublishStatusEnum.PUBLISH)
+    this.unpublishItem = (e, t) => this.addItem(e, t, PublishStatusEnum.UNPUBLISH)
     this.getPendingLibraryUpdates = (e, t, i, n, r, s, m, h, f, _) => {
       let A = {
         [PrimaryWorkflowEnum.STATE_GROUP]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
+          [PublishStatusEnum.UNPUBLISH]: [],
         },
         [PrimaryWorkflowEnum.COMPONENT]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
+          [PublishStatusEnum.UNPUBLISH]: [],
         },
         [PrimaryWorkflowEnum.STYLE]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
+          [PublishStatusEnum.UNPUBLISH]: [],
         },
         [PrimaryWorkflowEnum.VARIABLE]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
+          [PublishStatusEnum.UNPUBLISH]: [],
         },
         [PrimaryWorkflowEnum.VARIABLE_SET]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
+          [PublishStatusEnum.UNPUBLISH]: [],
         },
         [PrimaryWorkflowEnum.MODULE]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
+          [PublishStatusEnum.UNPUBLISH]: [],
         },
         [PrimaryWorkflowEnum.RESPONSIVE_SET]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
+          [PublishStatusEnum.UNPUBLISH]: [],
         },
         [PrimaryWorkflowEnum.CODE_COMPONENT]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
+          [PublishStatusEnum.UNPUBLISH]: [],
         },
         [PrimaryWorkflowEnum.MANAGED_STRING]: {
           [PublishStatusEnum.PUBLISH]: [],
-          [PublishStatusEnum.UNPUBLISH]: []
-        }
-      };
-      if (!h) return A;
-      let y = e => Object.values(e).filter(e => O(e.type) && p(e, _?.itemsToPublish));
-      let b = _?.overridePublishPermissions || hasTeamPaidAccess(h.team_id ? f[h.team_id] : null);
-      let v = y(b ? t : {});
-      let I = y(b ? e : {});
-      let E = y(i);
-      let x = y(r);
-      let S = getFeatureFlags().dse_module_publish ? y(s) : [];
-      let w = y(m);
+          [PublishStatusEnum.UNPUBLISH]: [],
+        },
+      }
+      if (!h)
+        return A
+      let y = e => Object.values(e).filter(e => isShareableAssetType(e.type) && p(e, _?.itemsToPublish))
+      let b = _?.overridePublishPermissions || hasTeamPaidAccess(h.team_id ? f[h.team_id] : null)
+      let v = y(b ? t : {})
+      let I = y(b ? e : {})
+      let E = y(i)
+      let x = y(r)
+      let S = getFeatureFlags().dse_module_publish ? y(s) : []
+      let w = y(m)
       if (_?.unpublishAll) {
-        for (let e of [...v, ...I, ...E, ...x, ...S, ...w]) e.status === StagingStatusEnum.NOT_STAGED || e.status === StagingStatusEnum.NEW || e.type === PrimaryWorkflowEnum.COMPONENT && e.containing_frame?.containingStateGroup?.nodeId || this.unpublishItem(e, A);
-        return A;
+        for (let e of [...v, ...I, ...E, ...x, ...S, ...w]) e.status === StagingStatusEnum.NOT_STAGED || e.status === StagingStatusEnum.NEW || e.type === PrimaryWorkflowEnum.COMPONENT && e.containing_frame?.containingStateGroup?.nodeId || this.unpublishItem(e, A)
+        return A
       }
-      let C = new Set(Object.keys(_?.moveRemappings || {}));
+      let C = new Set(Object.keys(_?.moveRemappings || {}))
       for (let e of E) {
-        if (g(e, C, _?.forcePublish)) continue;
-        let t = e.status;
+        if (g(e, C, _?.forcePublish))
+          continue
+        let t = e.status
         if (t === StagingStatusEnum.DELETED) {
-          if (this.unpublishItem(e, A)) return A;
-        } else if (isNewOrChangedOrDeleted(t) && this.publishItem(e, A)) return A;
+          if (this.unpublishItem(e, A))
+            return A
+        }
+        else if (isNewOrChangedOrDeleted(t) && this.publishItem(e, A)) {
+          return A
+        }
       }
-      let T = function (e) {
-        let t = new Map();
+      let T = (function (e) {
+        let t = new Map()
         for (let i of e) {
-          if (i.deletedFromSceneGraph) continue;
-          let e = i.containing_frame?.containingStateGroup?.nodeId;
-          if (!e) continue;
-          let n = t.get(e);
-          n || (n = [], t.set(e, n));
-          n.push(i);
+          if (i.deletedFromSceneGraph)
+            continue
+          let e = i.containing_frame?.containingStateGroup?.nodeId
+          if (!e)
+            continue
+          let n = t.get(e)
+          n || (n = [], t.set(e, n))
+          n.push(i)
         }
-        return t;
-      }(Object.values(t));
-      let k = o()(Object.values(n), e => e.variableSetId);
+        return t
+      }(Object.values(t)))
+      let k = o()(Object.values(n), e => e.variableSetId)
       for (let e of I) {
-        if (g(e, C, _?.forcePublish)) continue;
-        let t = e.status;
-        let i = e.node_id;
-        let n = T.get(i) ?? [];
+        if (g(e, C, _?.forcePublish))
+          continue
+        let t = e.status
+        let i = e.node_id
+        let n = T.get(i) ?? []
         if (!isActiveStagingStatus(t)) {
-          if (t === StagingStatusEnum.DELETED && this.unpublishItem(e, A)) return A;
+          if (t === StagingStatusEnum.DELETED && this.unpublishItem(e, A))
+            return A
           for (let e of n) {
-            let t = e.status !== StagingStatusEnum.NOT_STAGED && e.status !== StagingStatusEnum.NEW;
-            if (e.component_key && t && this.unpublishItem(e, A)) return A;
+            let t = e.status !== StagingStatusEnum.NOT_STAGED && e.status !== StagingStatusEnum.NEW
+            if (e.component_key && t && this.unpublishItem(e, A))
+              return A
           }
-          continue;
+          continue
         }
-        if (hasAssetError(e)) continue;
-        let r = new Set(n.map(e => e.node_id));
-        for (let e of n) if (!g(e, C, _?.forcePublish) && r.has(e.node_id) && this.publishItem(e, A)) return A;
-        if (this.publishItem(e, A)) return A;
+        if (hasAssetError(e))
+          continue
+        let r = new Set(n.map(e => e.node_id))
+        for (let e of n) {
+          if (!g(e, C, _?.forcePublish) && r.has(e.node_id) && this.publishItem(e, A))
+            return A
+        }
+        if (this.publishItem(e, A))
+          return A
       }
-      for (let e of v) if (!(e.status === StagingStatusEnum.NOT_STAGED || g(e, C, _?.forcePublish) || e.containing_frame?.containingStateGroup?.nodeId)) {
-        if (e.component_key && e.status === StagingStatusEnum.DELETED) {
-          if (this.unpublishItem(e, A)) return A;
-          continue;
-        }
-        if (this.publishItem(e, A)) return A;
-      }
-      let R = new Set(mapAssetsToKeys(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH]).filter(e => !!e));
-      let N = new Set(mapAssetsToKeys(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH]).filter(e => !!e));
-      for (let e of []) if (!R.has(e.component_key) && !N.has(e.component_key) && this.unpublishItem(t[e.node_id], A)) return A;
-      for (let e of x) if (e.status !== StagingStatusEnum.NOT_STAGED) {
-        if (e.key && e.status === StagingStatusEnum.DELETED) {
-          if (this.unpublishItem(e, A)) return A;
-          continue;
-        }
-        for (let t of k[e.node_id] ?? []) if (t.status !== StagingStatusEnum.NOT_STAGED && t.status !== StagingStatusEnum.CURRENT) {
-          if (t.key && t.status === StagingStatusEnum.DELETED) {
-            if (this.unpublishItem(t, A)) return A;
-            continue;
+      for (let e of v) {
+        if (!(e.status === StagingStatusEnum.NOT_STAGED || g(e, C, _?.forcePublish) || e.containing_frame?.containingStateGroup?.nodeId)) {
+          if (e.component_key && e.status === StagingStatusEnum.DELETED) {
+            if (this.unpublishItem(e, A))
+              return A
+            continue
           }
-          if (this.publishItem(t, A)) return A;
+          if (this.publishItem(e, A))
+            return A
         }
-        if (this.publishItem(e, A)) return A;
+      }
+      let R = new Set(mapAssetsToKeys(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH]).filter(e => !!e))
+      let N = new Set(mapAssetsToKeys(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH]).filter(e => !!e))
+      for (let e of []) {
+        if (!R.has(e.component_key) && !N.has(e.component_key) && this.unpublishItem(t[e.node_id], A))
+          return A
+      }
+      for (let e of x) {
+        if (e.status !== StagingStatusEnum.NOT_STAGED) {
+          if (e.key && e.status === StagingStatusEnum.DELETED) {
+            if (this.unpublishItem(e, A))
+              return A
+            continue
+          }
+          for (let t of k[e.node_id] ?? []) {
+            if (t.status !== StagingStatusEnum.NOT_STAGED && t.status !== StagingStatusEnum.CURRENT) {
+              if (t.key && t.status === StagingStatusEnum.DELETED) {
+                if (this.unpublishItem(t, A))
+                  return A
+                continue
+              }
+              if (this.publishItem(t, A))
+                return A
+            }
+          }
+          if (this.publishItem(e, A))
+            return A
+        }
       }
       for (let e of S) {
         if (e.key && e.status === StagingStatusEnum.DELETED) {
-          if (this.unpublishItem(e, A)) return A;
-          continue;
+          if (this.unpublishItem(e, A))
+            return A
+          continue
         }
-        if (this.publishItem(e, A)) return A;
+        if (this.publishItem(e, A))
+          return A
       }
-      for (let e of w) if (O(e.type)) {
-        if (e.status === StagingStatusEnum.DELETED) {
-          if (this.unpublishItem(e, A)) break;
-        } else if (isNewOrChangedOrDeleted(e.status) && this.publishItem(e, A)) break;
+      for (let e of w) {
+        if (isShareableAssetType(e.type)) {
+          if (e.status === StagingStatusEnum.DELETED) {
+            if (this.unpublishItem(e, A))
+              break
+          }
+          else if (isNewOrChangedOrDeleted(e.status) && this.publishItem(e, A)) {
+            break
+          }
+        }
       }
-      return A;
-    };
-    this.shouldReturnEarlyOnUpdate = !!e?.shouldReturnEarlyOnUpdate;
+      return A
+    }
+    this.shouldReturnEarlyOnUpdate = !!e?.shouldReturnEarlyOnUpdate
   }
 }
 export function $$h2(e, t, i, n, r, a, s, o, l, d) {
-  return new m().getPendingLibraryUpdates(e, t, i, n, r, a, s, o, l, d);
+  return new m().getPendingLibraryUpdates(e, t, i, n, r, a, s, o, l, d)
 }
 function g(e, t, i) {
-  return !i && !(e.status !== StagingStatusEnum.CURRENT || t.has(e.node_id)) && (Fullscreen.clearLibraryMoveInfo(e.node_id), !0);
+  return !i && !(e.status !== StagingStatusEnum.CURRENT || t.has(e.node_id)) && (Fullscreen.clearLibraryMoveInfo(e.node_id), !0)
 }
 export function $$f0(e) {
-  return !e.some(e => [StagingStatusEnum.CURRENT, StagingStatusEnum.CHANGED, StagingStatusEnum.NEW].includes(e.status));
+  return !e.some(e => [StagingStatusEnum.CURRENT, StagingStatusEnum.CHANGED, StagingStatusEnum.NEW].includes(e.status))
 }
 export function $$_1(e, t) {
-  return Object.values(e).filter(e => p(e, t)).every(e => !isActiveStagingStatus(e.status));
+  return Object.values(e).filter(e => p(e, t)).every(e => !isActiveStagingStatus(e.status))
 }
-export const Ol = $$f0;
-export const aB = $$_1;
-export const jx = $$h2;
+export const Ol = $$f0
+export const aB = $$_1
+export const jx = $$h2

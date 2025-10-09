@@ -24,7 +24,7 @@ import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
 import { Ow } from "../905/921418";
 import { useIsLoading, useIsLoaded, isLoaded, isNullOrFailure } from "../905/18797";
-import { MH } from "../figma_app/803787";
+import { selectComponentLibraryItemsWithStatus } from "../figma_app/803787";
 import { Rt } from "../figma_app/979658";
 import { FDocumentType } from "../905/862883";
 import { D as _$$D } from "../figma_app/268271";
@@ -316,7 +316,7 @@ export function $$eo1({
     modalType: G
   });
   let ex = useMemo(() => Ow(V.results.normalizedSearchResults), [V.results.normalizedSearchResults]);
-  let eh = useSelector(MH);
+  let eh = useSelector(selectComponentLibraryItemsWithStatus);
   let ef = useMemoStable(() => Object.values(eh), [eh]);
   return V.query && e ? V.isLoading ? jsx(ZA, {}) : jsx(TrackingProvider, {
     name: "stickers",
@@ -428,7 +428,7 @@ export function $$eo1({
   });
 }
 function el() {
-  let e = useSelector(MH);
+  let e = useSelector(selectComponentLibraryItemsWithStatus);
   let t = selectCurrentFile();
   return jsx(TrackingProvider, {
     name: "detail",

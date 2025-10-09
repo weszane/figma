@@ -11,821 +11,1500 @@ import { encodeBase64 } from '../905/561685'
 import { getFeatureFlags } from '../905/601108'
 import { profileServiceAPI } from '../905/608932'
 import { uploadVideoToPresignedPost } from '../905/623179'
-import { j } from '../905/659729'
+import { generateVideoThumbnail } from '../905/659729'
 import { liveStoreInstance } from '../905/713695'
-import { en, GT } from '../905/759470'
 import { uploadMultiple, uploadRequest } from '../905/827765'
-import { v as _$$v } from '../905/871922'
+import { VideoUploadService } from '../905/871922'
 import { getValueOrFallback } from '../905/872825'
 import { sendWithRetry } from '../905/910117'
 import { IMAGE_TYPES, VIDEO_TYPE_VALUES } from '../905/966582'
 import { isSameWorkspaceIdentity } from '../905/967587'
-import { i as _$$i } from '../905/970229'
+import { detectMimeType } from '../905/970229'
 import { TeamOrgType } from '../figma_app/10554'
 import { hasClientMeta, hasFigFileMetadata, hasMonetizedResourceMetadata, isPlugin, isWidget } from '../figma_app/45218'
 import { PublisherType } from '../figma_app/155287'
-import { Bg } from '../figma_app/246699'
+import { isPublicLinkBanned } from '../figma_app/246699'
 import { hasHubFile, isPluginOrWidget } from '../figma_app/427318'
 import { canAdminOrg, hasAdminRoleAccessOnTeam } from '../figma_app/642025'
-import { A as _$$A, E3 } from '../figma_app/711113'
+import { getPluginPublisherStatus, isPublisherAcceptedOrAdmin } from '../figma_app/711113'
 import { findPublishedProfileForUser, getAcceptedPublisherProfile, getAdminUserForProfile, getAssociatedProfiles, getAuthedPublisherProfile, isOrgOrTeamExport, MAX_COVER_IMAGE_SIZE, MAX_PLUGIN_SIZE } from '../figma_app/740025'
 import { isResourcePendingPublishing, isUserAcceptedPublisher } from '../figma_app/777551'
 import { getCurrentUserOrgUser } from '../figma_app/951233'
 
-var $$M4 = (e => (e[e.NONE = 0] = 'NONE', e[e.PENDING = 1] = 'PENDING', e[e.DISPLAY_ONLY = 2] = 'DISPLAY_ONLY', e[e.ADMIN_IN_DIFFERENT_WORKSPACE = 3] = 'ADMIN_IN_DIFFERENT_WORKSPACE', e[e.ADMIN = 4] = 'ADMIN', e[e.NONE_WITH_INHERITED_ADMIN = 5] = 'NONE_WITH_INHERITED_ADMIN', e[e.PENDING_WITH_INHERITED_ADMIN = 6] = 'PENDING_WITH_INHERITED_ADMIN', e[e.DISPLAY_ONLY_WITH_INHERITED_ADMIN = 7] = 'DISPLAY_ONLY_WITH_INHERITED_ADMIN', e[e.EXPLICIT_ADMIN = 8] = 'EXPLICIT_ADMIN', e))($$M4 || {})
-let $$F43 = [1, 6]
-let $$j8 = [2, 7]
-export function $$U29(e) {
-  return e >= 4
+// Define PublisherStatus enum for better type safety and readability
+enum PublisherStatus {
+  NONE = 0,
+  PENDING = 1,
+  DISPLAY_ONLY = 2,
+  ADMIN_IN_DIFFERENT_WORKSPACE = 3,
+  ADMIN = 4,
+  NONE_WITH_INHERITED_ADMIN = 5,
+  PENDING_WITH_INHERITED_ADMIN = 6,
+  DISPLAY_ONLY_WITH_INHERITED_ADMIN = 7,
+  EXPLICIT_ADMIN = 8,
 }
-export function $$B25(e, t) {
-  let r = getAssociatedProfiles(e)
-  let n = !!(t.creator.id && r.some(e => e.id === t.creator.id))
-  if (n && isOrgOrTeamExport(e.authedActiveCommunityProfile)) {
-    let r = getAcceptedPublisherProfile(t)
-    return r?.id === e.authedActiveCommunityProfile?.id
+
+// Status arrays for quick lookup
+export const PENDING_STATUSES = [PublisherStatus.PENDING, PublisherStatus.PENDING_WITH_INHERITED_ADMIN] as const
+export const DISPLAY_ONLY_STATUSES = [PublisherStatus.DISPLAY_ONLY, PublisherStatus.DISPLAY_ONLY_WITH_INHERITED_ADMIN] as const
+
+/**
+ * Checks if a publisher status indicates admin privileges
+ * @param status - The publisher status to check
+ * @returns True if the status indicates admin privileges
+ */
+export function isAdminStatus(status: PublisherStatus): boolean {
+  return status >= PublisherStatus.ADMIN
+}
+
+/**
+ * Checks if a creator is an accepted publisher in the given context
+ * @param state - Application state
+ * @param resource - The resource to check
+ * @returns True if the creator is an accepted publisher
+ */
+export function isCreatorAcceptedPublisher(state: any, resource: any): boolean {
+  const associatedProfiles = getAssociatedProfiles(state)
+  const isCreatorInProfiles = !!(resource.creator.id && associatedProfiles.some((profile: any) => profile.id === resource.creator.id))
+
+  if (isCreatorInProfiles && isOrgOrTeamExport(state.authedActiveCommunityProfile)) {
+    const acceptedProfile = getAcceptedPublisherProfile(resource)
+    return acceptedProfile?.id === state.authedActiveCommunityProfile?.id
   }
-  return n
+
+  return isCreatorInProfiles
 }
-export function $$G19(e) {
-  let t = useSelector(t => $$V13(t, e))
-  let r = useSelector(r => hasClientMeta(e) ? $$U29(t) : $$B25(r, e))
-  let i = useSelector(t => isPlugin(e) || isWidget(e) ? _$$A(t, e) : null)
-  let a = hasFigFileMetadata(e) ? e.fig_file_metadata?.key : null
-  let s = liveStoreInstance.File.useValue(a)
-  let o = !!a && !!s
-  return hasClientMeta(e) ? r && o : !!(isPlugin(e) || isWidget(e)) && (r || E3(i))
+
+/**
+ * Custom hook to determine if current user is a publisher for a resource
+ * @param resource - The resource to check
+ * @returns Boolean indicating if user is publisher
+ */
+export function useIsPublisher(resource: any): boolean {
+  const publisherStatus = useSelector((state: any) => getPublisherStatus(state, resource))
+  const isAcceptedPublisher = useSelector((state: any) =>
+    hasClientMeta(resource)
+      ? isAdminStatus(publisherStatus)
+      : isCreatorAcceptedPublisher(state, resource),
+  )
+
+  const pluginPublisherStatus = useSelector((state: any) =>
+    isPlugin(resource) || isWidget(resource)
+      ? getPluginPublisherStatus(state, resource)
+      : null,
+  )
+
+  const fileKey = hasFigFileMetadata(resource) ? resource.fig_file_metadata?.key : null
+  const fileData = liveStoreInstance.File.useValue(fileKey)
+  const hasFileData = !!fileKey && !!fileData
+
+  return hasClientMeta(resource)
+    ? isAcceptedPublisher && hasFileData
+    : !!(isPlugin(resource) || isWidget(resource)) && (isAcceptedPublisher || isPublisherAcceptedOrAdmin(pluginPublisherStatus))
 }
-export function $$V13(e, t) {
-  let r = getAuthedPublisherProfile(e, t)
-  let n = !!(r?.org_id || r?.team_id)
-  let i = r && getAdminUserForProfile(r, e)
-  let a = i && e.user && isSameWorkspaceIdentity(e, i)
-  return isPluginOrWidget(t) && (!i || i.userId === e.user?.id) && t.creator.id === e.user?.id ? 8 : t.community_publishers?.accepted.some(t => t.id === e.user?.community_profile_id) ? !n && hasHubFile(t) ? 8 : i ? a ? n ? 7 : 2 : 3 : 2 : t.community_publishers?.pending?.some(t => t.id === e.user?.community_profile_id) ? i && a ? 6 : 1 : i ? a ? 5 : 3 : 0
+
+/**
+ * Determines the publisher status for a user and resource
+ * @param state - Application state
+ * @param resource - The resource to check
+ * @returns PublisherStatus enum value
+ */
+export function getPublisherStatus(state: any, resource: any): PublisherStatus {
+  const authedProfile = getAuthedPublisherProfile(state, resource)
+  const hasWorkspace = !!(authedProfile?.org_id || authedProfile?.team_id)
+  const adminUser = authedProfile && getAdminUserForProfile(authedProfile, state)
+  const isSameWorkspace = adminUser && state.user && isSameWorkspaceIdentity(state, adminUser)
+
+  // Plugin/widget specific logic
+  if (isPluginOrWidget(resource)
+    && (!adminUser || adminUser.userId === state.user?.id)
+    && resource.creator.id === state.user?.id) {
+    return PublisherStatus.EXPLICIT_ADMIN
+  }
+
+  // Accepted publishers logic
+  const isAcceptedPublisher = resource.community_publishers?.accepted.some(
+    (publisher: any) => publisher.id === state.user?.community_profile_id,
+  )
+
+  if (isAcceptedPublisher) {
+    if (!hasWorkspace && hasHubFile(resource)) {
+      return PublisherStatus.EXPLICIT_ADMIN
+    }
+
+    if (adminUser) {
+      return isSameWorkspace
+        ? (hasWorkspace ? PublisherStatus.DISPLAY_ONLY_WITH_INHERITED_ADMIN : PublisherStatus.DISPLAY_ONLY)
+        : PublisherStatus.ADMIN_IN_DIFFERENT_WORKSPACE
+    }
+
+    return PublisherStatus.DISPLAY_ONLY
+  }
+
+  // Pending publishers logic
+  const isPendingPublisher = resource.community_publishers?.pending?.some(
+    (publisher: any) => publisher.id === state.user?.community_profile_id,
+  )
+
+  if (isPendingPublisher) {
+    return adminUser && isSameWorkspace
+      ? PublisherStatus.PENDING_WITH_INHERITED_ADMIN
+      : PublisherStatus.PENDING
+  }
+
+  // Default cases
+  if (adminUser) {
+    return isSameWorkspace
+      ? PublisherStatus.NONE_WITH_INHERITED_ADMIN
+      : PublisherStatus.ADMIN_IN_DIFFERENT_WORKSPACE
+  }
+
+  return PublisherStatus.NONE
 }
-export function $$H34(e, t) {
-  if ('user' in e) {
-    if (t.primary_user_id === e.user?.id)
-      return 4
-    if (isOrgOrTeamExport(t)) {
-      let r = getAdminUserForProfile(t, e)
-      let n = r && e.user && isSameWorkspaceIdentity(e, r)
-      if (r && n)
-        return 4
-      if (r && !n)
-        return 3
+
+/**
+ * Gets the primary user ID status
+ * @param state - Application state
+ * @param profile - The profile to check
+ * @returns Status code for primary user
+ */
+export function getPrimaryUserIdStatus(state: any, profile: any): number {
+  if ('user' in state) {
+    if (profile.primary_user_id === state.user?.id) {
+      return 4 // ADMIN
+    }
+
+    if (isOrgOrTeamExport(profile)) {
+      const adminUser = getAdminUserForProfile(profile, state)
+      const isSameIdentity = adminUser && state.user && isSameWorkspaceIdentity(state, adminUser)
+
+      if (adminUser && isSameIdentity) {
+        return 4 // ADMIN
+      }
+
+      if (adminUser && !isSameIdentity) {
+        return 3 // ADMIN_IN_DIFFERENT_WORKSPACE
+      }
     }
   }
-  return 0
+
+  return 0 // NONE
 }
-export let $$z17 = e => !0 === e.is_public || e.org != null
-export function $$W41(e, t, r, n) {
-  return hasMonetizedResourceMetadata(e) || n ? PublisherType.PUBLIC : $$z17(e.roles) ? e.roles.is_public || isResourcePendingPublishing(e) ? PublisherType.PUBLIC : PublisherType.ORG : t != null && r ? PublisherType.ORG : PublisherType.PUBLIC
+
+// Helper function to check if roles are public
+const isPublicRole = (roles: any): boolean => !!(roles?.is_public || roles?.org)
+
+/**
+ * Determines the publisher type for a resource
+ * @param resource - The resource to check
+ * @param teamId - Team ID if applicable
+ * @param state - Application state
+ * @param isPublic - Whether explicitly public
+ * @returns PublisherType enum value
+ */
+export function determinePublisherType(
+  resource: any,
+  teamId: string | null,
+  state: any,
+  isPublic: boolean,
+): PublisherType {
+  if (hasMonetizedResourceMetadata(resource) || isPublic) {
+    return PublisherType.PUBLIC
+  }
+
+  if (isPublicRole(resource.roles)) {
+    return resource.roles.is_public || isResourcePendingPublishing(resource)
+      ? PublisherType.PUBLIC
+      : PublisherType.ORG
+  }
+
+  return teamId != null && state ? PublisherType.ORG : PublisherType.PUBLIC
 }
-export function $$K31(e, t, r, n) {
-  let i = $$en21(t.team_id, r, e, t.parent_org_id || null)
-  if (i.length === 0)
+
+/**
+ * Gets the default author for a Hub file
+ * @param state - Application state
+ * @param hubFile - The Hub file
+ * @param authState - Authentication state
+ * @param preferredAuthor - Preferred author if available
+ * @returns Selected author workspace
+ */
+export function getDefaultHubFileAuthor(
+  state: any,
+  hubFile: any,
+  authState: any,
+  preferredAuthor: any,
+): any {
+  const validAuthors = getValidAuthorsForHubFile(
+    hubFile.team_id,
+    authState,
+    state,
+    hubFile.parent_org_id || null,
+  )
+
+  if (validAuthors.length === 0) {
     throw new Error('Called getDefaultHubFilePublishingMetadataAuthor when no valid author exists')
-  return Z(e, i, r.authedProfilesById, r.user?.id, n)
-}
-export function $$Y16(e, t) {
-  if (!e)
-    return !1
-  let r = e.author.id
-  return isUserAcceptedPublisher(r, t)
-}
-export function $$$5(e, t) {
-  return e.creator.id === t
-}
-export function $$X6(e, t) {
-  if (e) {
-    let r = $$ea42(t, e)
-    if (r)
-      return r
   }
-  let r = $$es24(t, e)
-  if (r.length === 0)
+
+  return selectDefaultAuthor(
+    state,
+    validAuthors,
+    authState.authedProfilesById,
+    authState.user?.id,
+    preferredAuthor,
+  )
+}
+
+/**
+ * Checks if user is accepted as an author
+ * @param metadata - Resource metadata
+ * @param userId - User ID to check
+ * @returns True if user is accepted author
+ */
+export function isUserAcceptedAsAuthor(metadata: any, userId: string): boolean {
+  if (!metadata)
+    return false
+
+  const authorId = metadata.author.id
+  return isUserAcceptedPublisher(authorId, userId)
+}
+
+/**
+ * Checks if a user is the creator of a resource
+ * @param resource - The resource to check
+ * @param userId - User ID to compare
+ * @returns True if user is creator
+ */
+export function isCreator(resource: any, userId: string): boolean {
+  return resource.creator.id === userId
+}
+
+/**
+ * Gets the default author for a plugin
+ * @param state - Application state
+ * @param plugin - The plugin resource
+ * @returns Selected author workspace
+ */
+export function getDefaultPluginAuthor(state: any, plugin: any): any {
+  if (state) {
+    const publisherWorkspace = getPublisherWorkspace(plugin, state)
+    if (publisherWorkspace) {
+      return publisherWorkspace
+    }
+  }
+
+  const validAuthors = getValidAuthorsForPlugin(plugin, state)
+  if (validAuthors.length === 0) {
     throw new Error('Called getDefaultPluginPublishingMetadataAuthor when no valid author exists')
-  return Z(e, r, t.authedProfilesById, t.user?.id)
+  }
+
+  return selectDefaultAuthor(
+    state,
+    validAuthors,
+    plugin.authedProfilesById,
+    plugin.user?.id,
+  )
 }
-export function $$q22(e, t, r) {
-  return e?.id && Object.keys(e.versions).length > 0
-    ? (function (e, t, r) {
-        if ((e.community_publishers?.accepted || []).length > 0) {
-          let n = getAcceptedPublisherProfile(e)
-          let i = n && t[n.id]
-          return i?.team_id
-            ? {
-                team_id: i.team_id,
-              }
-            : i?.org_id
-              ? {
-                  org_id: i.org_id,
-                }
-              : {
-                  user_id: r || e.creator.id,
-                }
-        }
-        let n = t[e.publisher.id]
-        return n?.org_id
-          ? {
-              org_id: n.org_id,
-            }
-          : n?.team_id
-            ? {
-                team_id: n.team_id,
-              }
-            : {
-                user_id: n?.primary_user_id || e.creator.id,
-              }
-      }(e, t, r))
-    : null
-}
-export function $$J23(e) {
-  let t
-  e?.team_id
-    ? t = {
-      team_id: e.team_id,
+
+/**
+ * Gets publisher workspace information
+ * @param resource - The resource
+ * @param profiles - Authenticated profiles
+ * @param userId - Current user ID
+ * @returns Workspace information or null
+ */
+export function getPublisherWorkspaceInfo(resource: any, profiles: any, userId: string): any {
+  if (!resource?.id || Object.keys(resource.versions).length === 0) {
+    return null
+  }
+
+  if ((resource.community_publishers?.accepted || []).length > 0) {
+    const acceptedProfile = getAcceptedPublisherProfile(resource)
+    const profileData = acceptedProfile && profiles[acceptedProfile.id]
+
+    if (profileData?.team_id) {
+      return { team_id: profileData.team_id }
     }
-    : e?.org_id && (t = {
-      org_id: e.org_id,
-    })
-  return t
+
+    if (profileData?.org_id) {
+      return { org_id: profileData.org_id }
+    }
+
+    return { user_id: userId || resource.creator.id }
+  }
+
+  const publisherData = profiles[resource.publisher.id]
+
+  if (publisherData?.org_id) {
+    return { org_id: publisherData.org_id }
+  }
+
+  if (publisherData?.team_id) {
+    return { team_id: publisherData.team_id }
+  }
+
+  return { user_id: publisherData?.primary_user_id || resource.creator.id }
 }
-function Z(e, t, r, i, a) {
-  if (t.length === 0)
+
+/**
+ * Extracts workspace ID information
+ * @param workspace - Workspace object
+ * @returns Extracted ID object or undefined
+ */
+export function extractWorkspaceId(workspace: any): any {
+  if (workspace?.team_id) {
+    return { team_id: workspace.team_id }
+  }
+
+  if (workspace?.org_id) {
+    return { org_id: workspace.org_id }
+  }
+
+  return undefined
+}
+
+/**
+ * Selects the default author from valid authors
+ * @param state - Application state
+ * @param validAuthors - Array of valid authors
+ * @param profiles - Authenticated profiles
+ * @param userId - Current user ID
+ * @param preferredAuthor - Preferred author if available
+ * @returns Selected author
+ */
+function selectDefaultAuthor(
+  state: any,
+  validAuthors: any[],
+  profiles: any,
+  userId: string | undefined,
+  preferredAuthor?: any,
+): any {
+  if (validAuthors.length === 0) {
     throw new Error('Called getDefaultPublishingMetadataAuthor when no valid author exists')
-  let s = $$q22(e, r, i)
-  if (s && t.some(e => $$Q30(e, s)))
-    return s
-  if (a && t.find(e => shallowEqual(e, a)))
-    return a
-  let o = t.find($$er33)
-  if (o)
-    return o
-  let l = t.find($$ee14)
-  return l || t.find($$et28) || t[0]
+  }
+
+  const publisherInfo = getPublisherWorkspaceInfo(state, profiles, userId)
+
+  if (publisherInfo && validAuthors.some(author => isSameWorkspace(author, publisherInfo))) {
+    return publisherInfo
+  }
+
+  if (preferredAuthor && validAuthors.find(author => shallowEqual(author, preferredAuthor))) {
+    return preferredAuthor
+  }
+
+  const userWorkspace = validAuthors.find(isUserWorkspace)
+  if (userWorkspace)
+    return userWorkspace
+
+  const orgWorkspace = validAuthors.find(isOrgWorkspace)
+  if (orgWorkspace)
+    return orgWorkspace
+
+  const teamWorkspace = validAuthors.find(isTeamWorkspace)
+  if (teamWorkspace)
+    return teamWorkspace
+
+  return validAuthors[0]
 }
-export function $$Q30(e, t) {
-  return 'team_id' in e ? 'team_id' in t && e.team_id === t.team_id : 'org_id' in e ? 'org_id' in t && e.org_id === t.org_id : 'user_id' in e && 'user_id' in t && e.user_id === t.user_id
+
+/**
+ * Checks if two workspaces are the same
+ * @param workspace1 - First workspace
+ * @param workspace2 - Second workspace
+ * @returns True if workspaces are the same
+ */
+export function isSameWorkspace(workspace1: any, workspace2: any): boolean {
+  if ('team_id' in workspace1) {
+    return 'team_id' in workspace2 && workspace1.team_id === workspace2.team_id
+  }
+
+  if ('org_id' in workspace1) {
+    return 'org_id' in workspace2 && workspace1.org_id === workspace2.org_id
+  }
+
+  if ('user_id' in workspace1) {
+    return 'user_id' in workspace2 && workspace1.user_id === workspace2.user_id
+  }
+
+  return false
 }
-let $$ee14 = e => 'org_id' in e
-let $$et28 = e => 'team_id' in e
-let $$er33 = e => 'user_id' in e
-export function $$en21(e, t, r, n) {
-  let i = []
-  if ((r?.community_publishers?.accepted || []).length > 0) {
-    if (!e && !n) {
-      return [{
-        user_id: t.user.id,
-      }]
+
+/**
+ * Type guard for org workspace
+ * @param workspace - Workspace to check
+ * @returns True if org workspace
+ */
+const isOrgWorkspace = (workspace: any): boolean => 'org_id' in workspace
+
+/**
+ * Type guard for team workspace
+ * @param workspace - Workspace to check
+ * @returns True if team workspace
+ */
+const isTeamWorkspace = (workspace: any): boolean => 'team_id' in workspace
+
+/**
+ * Type guard for user workspace
+ * @param workspace - Workspace to check
+ * @returns True if user workspace
+ */
+const isUserWorkspace = (workspace: any): boolean => 'user_id' in workspace
+
+/**
+ * Gets valid authors for a Hub file
+ * @param teamId - Team ID
+ * @param state - Application state
+ * @param hubFile - Hub file
+ * @param orgId - Organization ID
+ * @returns Array of valid authors
+ */
+export function getValidAuthorsForHubFile(
+  teamId: string | null,
+  state: any,
+  hubFile: any,
+  orgId: string | null,
+): any[] {
+  const result: any[] = []
+
+  if ((hubFile?.community_publishers?.accepted || []).length > 0) {
+    if (!teamId && !orgId) {
+      return [{ user_id: state.user.id }]
     }
-    let i = r && getAcceptedPublisherProfile(r)
-    let a = i ? t.authedProfilesById[i.id] : null
-    if (a?.team_id) {
-      return hasAdminRoleAccessOnTeam(a?.team_id, t)
-        ? [{
-            team_id: a.team_id,
-          }]
+
+    const acceptedProfile = hubFile && getAcceptedPublisherProfile(hubFile)
+    const profileData = acceptedProfile ? state.authedProfilesById[acceptedProfile.id] : null
+
+    if (profileData?.team_id) {
+      return hasAdminRoleAccessOnTeam(profileData.team_id, state)
+        ? [{ team_id: profileData.team_id }]
         : []
     }
-    if (a?.org_id) {
-      return canAdminOrg(a?.org_id, t)
-        ? [{
-            org_id: a.org_id,
-          }]
+
+    if (profileData?.org_id) {
+      return canAdminOrg(profileData.org_id, state)
+        ? [{ org_id: profileData.org_id }]
         : []
     }
   }
-  if (t.currentUserOrgId) {
-    let r = t.orgById[t.currentUserOrgId]
-    if (!r)
+
+  if (state.currentUserOrgId) {
+    const orgData = state.orgById[state.currentUserOrgId]
+    if (!orgData)
       return []
-    if (canAdminOrg(t.currentUserOrgId, t) && (i.push({
-      org_id: t.currentUserOrgId,
-    }), r.cmty_publish_as_user_enabled && i.push({
-      user_id: t.user.id,
-    })), e && t.teams[e]) {
-      if (t.teams[e]?.org_access === 'secret')
-        return [];
-      (Bg(r.shared_container_setting) ? canAdminOrg(t.currentUserOrgId, t) : hasAdminRoleAccessOnTeam(e, t)) && i.push({
-        team_id: e,
-      })
+
+    if (canAdminOrg(state.currentUserOrgId, state)) {
+      result.push({ org_id: state.currentUserOrgId })
+
+      if (orgData.cmty_publish_as_user_enabled) {
+        result.push({ user_id: state.user.id })
+      }
     }
-    return i
+
+    if (teamId && state.teams[teamId]) {
+      if (state.teams[teamId]?.org_access === 'secret') {
+        return []
+      }
+
+      const canAccessTeam = isPublicLinkBanned(orgData.shared_container_setting)
+        ? canAdminOrg(state.currentUserOrgId, state)
+        : hasAdminRoleAccessOnTeam(teamId, state)
+
+      if (canAccessTeam) {
+        result.push({ team_id: teamId })
+      }
+    }
+
+    return result
   }
-  return e
-    ? (hasAdminRoleAccessOnTeam(e, t) && i.push({
-        team_id: e,
-      }), i.push({
-        user_id: t.user.id,
-      }), i)
-    : [{
-        user_id: t.user.id,
-      }]
+
+  if (teamId) {
+    if (hasAdminRoleAccessOnTeam(teamId, state)) {
+      result.push({ team_id: teamId })
+    }
+    result.push({ user_id: state.user.id })
+    return result
+  }
+
+  return [{ user_id: state.user.id }]
 }
-export async function $$ei38(e) {
-  let {
-    data,
-    status,
-  } = await profileServiceAPI.getEditors({
-    fileKey: e.key,
+
+/**
+ * Fetches editors for a file
+ * @param file - File object with key
+ * @returns Promise resolving to editors data
+ */
+export async function getEditors(file: { key: string }): Promise<any> {
+  const { data, status } = await profileServiceAPI.getEditors({
+    fileKey: file.key,
   })
-  if (status === 200)
+
+  if (status === 200) {
     return data.meta
+  }
+
+  return undefined
 }
-export function $$ea42(e, t) {
-  if (t.publisher.id && e.user) {
-    switch (t.publisher.entity_type) {
-      case TeamOrgType.ORG:
-      {
-        let r = Object.values(e.orgById).find(e => e.community_profile_id === t.publisher.id)
-        return {
-          org_id: r?.id ?? e.currentUserOrgId ?? '',
-        }
+
+/**
+ * Gets publisher workspace information
+ * @param state - Application state
+ * @param resource - Resource object
+ * @returns Publisher workspace or null
+ */
+export function getPublisherWorkspace(state: any, resource: any): any {
+  if (resource.publisher.id && state.user) {
+    switch (resource.publisher.entity_type) {
+      case TeamOrgType.ORG: {
+        const org = Object.values<ObjectOf>(state.orgById).find(
+          (o: any) => o.community_profile_id === resource.publisher.id,
+        )
+        return { org_id: org?.id ?? state.currentUserOrgId ?? '' }
       }
-      case TeamOrgType.TEAM:
-      {
-        let r = Object.values(e.teams).find(e => e.community_profile_id === t.publisher.id)
-        return {
-          team_id: r?.id || '',
-        }
+
+      case TeamOrgType.TEAM: {
+        const team = Object.values<ObjectOf>(state.teams).find(
+          (t: any) => t.community_profile_id === resource.publisher.id,
+        )
+        return { team_id: team?.id || '' }
       }
+
       default:
-        return {
-          user_id: t.creator.id,
-        }
+        return { user_id: resource.creator.id }
     }
   }
+
   return null
 }
-export function $$es24(e, t, r = !0) {
-  let n = []
-  let i = r && t ? $$ea42(e, t) : null
-  e.currentUserOrgId && canAdminOrg(e.currentUserOrgId, e) && n.push({
-    org_id: e.currentUserOrgId,
-  })
-  Object.keys(e.teams).forEach((t) => {
-    let r = e.teams[t]
-    r && r.org_access !== 'secret' && hasAdminRoleAccessOnTeam(t, e) && n.push({
-      team_id: t,
-    })
-  })
-  n.push({
-    user_id: e.user.id,
-  })
-  i && !n.some(e => $$Q30(e, i)) && n.unshift(i)
-  return n
-}
-export function $$eo10(e, t) {
-  if (!e)
-    return !1
-  let {
-    team_id,
-    org_id,
-  } = e
-  if ('user_id' in t) {
-    let r = e.associated_users
-    return !!t.user_id && t.user_id === e.primary_user_id || r?.some(e => e.user_id === t.user_id)
+
+/**
+ * Gets valid authors for a plugin
+ * @param state - Application state
+ * @param plugin - Plugin resource
+ * @param checkPublisherWorkspace - Whether to check publisher workspace
+ * @returns Array of valid authors
+ */
+export function getValidAuthorsForPlugin(
+  state: any,
+  plugin: any,
+  checkPublisherWorkspace: boolean = true,
+): any[] {
+  const result: any[] = []
+  const publisherWorkspace = checkPublisherWorkspace && plugin
+    ? getPublisherWorkspace(plugin, state)
+    : null
+
+  if (state.currentUserOrgId && canAdminOrg(state.currentUserOrgId, state)) {
+    result.push({ org_id: state.currentUserOrgId })
   }
-  return 'team_id' in t && team_id === t.team_id || 'org_id' in t && org_id === t.org_id
-}
-export function $$el32(e) {
-  let t = debugState.getState()
-  return 'user_id' in e ? t.authedUsers.byId[e.user_id] : 'org_id' in e ? t.orgById[e.org_id] : 'team_id' in e ? t.teams[e.team_id] : void 0
-}
-export function $$ed35(e, t) {
-  if ('org_id' in e)
-    return t.orgById[e.org_id]?.name ?? null
-  if ('team_id' in e)
-    return t.teams[e.team_id]?.name ?? null
-  {
-    let e = t.user && findPublishedProfileForUser(t.user, t.authedProfilesById)
-    return e?.public_at && e?.name ? e.name : e?.public_at && e?.profile_handle ? `@${e.profile_handle}` : t.user?.handle || null
+
+  Object.keys(state.teams).forEach((teamId) => {
+    const team = state.teams[teamId]
+    if (team && team.org_access !== 'secret' && hasAdminRoleAccessOnTeam(teamId, state)) {
+      result.push({ team_id: teamId })
+    }
+  })
+
+  result.push({ user_id: state.user.id })
+
+  if (publisherWorkspace && !result.some(ws => isSameWorkspace(ws, publisherWorkspace))) {
+    result.unshift(publisherWorkspace)
   }
+
+  return result
 }
-export function $$ec40(e, t) {
-  if ('org_id' in e) {
-    let r = t.orgById[e.org_id]
-    return r
-      ? getI18nString('community.publishing.org_name', {
-          org: r.name,
-        })
+
+/**
+ * Checks if workspace matches criteria
+ * @param workspace - Workspace to check
+ * @param criteria - Matching criteria
+ * @returns True if workspace matches
+ */
+export function isWorkspaceMatch(workspace: any, criteria: any): boolean {
+  if (!workspace)
+    return false
+
+  const { team_id, org_id } = workspace
+
+  if ('user_id' in criteria) {
+    const associatedUsers = workspace.associated_users
+    return !!(criteria.user_id && criteria.user_id === workspace.primary_user_id)
+      || !!(associatedUsers?.some((user: any) => user.user_id === criteria.user_id))
+  }
+
+  return ('team_id' in criteria && team_id === criteria.team_id)
+    || ('org_id' in criteria && org_id === criteria.org_id)
+}
+
+/**
+ * Gets debug workspace information
+ * @param workspace - Workspace object
+ * @returns Debug information
+ */
+export function getDebugWorkspaceInfo(workspace: any): any {
+  const state = debugState.getState()
+
+  if ('user_id' in workspace) {
+    return state.authedUsers.byId[workspace.user_id]
+  }
+
+  if ('org_id' in workspace) {
+    return state.orgById[workspace.org_id]
+  }
+
+  if ('team_id' in workspace) {
+    return state.teams[workspace.team_id]
+  }
+
+  return undefined
+}
+
+/**
+ * Gets workspace name
+ * @param workspace - Workspace object
+ * @param state - Application state
+ * @returns Workspace name or null
+ */
+export function getWorkspaceName(workspace: any, state: any): string | null {
+  if ('org_id' in workspace) {
+    return state.orgById[workspace.org_id]?.name ?? null
+  }
+
+  if ('team_id' in workspace) {
+    return state.teams[workspace.team_id]?.name ?? null
+  }
+
+  const user = state.user && findPublishedProfileForUser(state.user, state.authedProfilesById)
+  if (user?.public_at && user?.name) {
+    return user.name
+  }
+
+  if (user?.public_at && user?.profile_handle) {
+    return `@${user.profile_handle}`
+  }
+
+  return state.user?.handle || null
+}
+
+/**
+ * Gets workspace display name
+ * @param workspace - Workspace object
+ * @param state - Application state
+ * @returns Display name
+ */
+export function getWorkspaceDisplayName(workspace: any, state: any): string {
+  if ('org_id' in workspace) {
+    const org = state.orgById[workspace.org_id]
+    return org
+      ? getI18nString('community.publishing.org_name', { org: org.name })
       : getI18nString('general.fallback_org_name')
   }
-  if ('team_id' in e) {
-    let r = t.teams[e.team_id]
-    return r
-      ? getI18nString('community.publishing.team_name', {
-          team: r.name,
-        })
+
+  if ('team_id' in workspace) {
+    const team = state.teams[workspace.team_id]
+    return team
+      ? getI18nString('community.publishing.team_name', { team: team.name })
       : getI18nString('general.fallback_team_name')
   }
-  {
-    let r = t.authedUsers.byId[e.user_id] ?? t.user
-    let n = findPublishedProfileForUser(r, t.authedProfilesById)
-    return n ? n.name : r?.name || getI18nString('general.fallback_user_name')
-  }
+
+  const user = state.authedUsers.byId[workspace.user_id] ?? state.user
+  const profile = findPublishedProfileForUser(user, state.authedProfilesById)
+
+  return profile
+    ? profile.name
+    : user?.name || getI18nString('general.fallback_user_name')
 }
-export function $$eu37(e, t) {
-  if ('org_id' in e) {
-    let r = t.orgById[e.org_id]
-    return r?.community_profile_handle || null
+
+/**
+ * Gets workspace handle
+ * @param workspace - Workspace object
+ * @param state - Application state
+ * @returns Handle or null
+ */
+export function getWorkspaceHandle(workspace: any, state: any): string | null {
+  if ('org_id' in workspace) {
+    const org = state.orgById[workspace.org_id]
+    return org?.community_profile_handle || null
   }
-  if ('team_id' in e) {
-    let r = t.teams[e.team_id]
-    return r?.community_profile_handle || null
+
+  if ('team_id' in workspace) {
+    const team = state.teams[workspace.team_id]
+    return team?.community_profile_handle || null
   }
-  {
-    let r = t.authedUsers.byId[e.user_id] ?? t.user
-    let n = findPublishedProfileForUser(r, t.authedProfilesById)
-    return n ? n.profile_handle : r?.handle || null
-  }
+
+  const user = state.authedUsers.byId[workspace.user_id] ?? state.user
+  const profile = findPublishedProfileForUser(user, state.authedProfilesById)
+
+  return profile
+    ? profile.profile_handle
+    : user?.handle || null
 }
-export let $$ep3 = [IMAGE_TYPES.PNG, IMAGE_TYPES.JPEG]
-export function $$e_26(e, t = 'Image') {
-  if (!e) {
+
+// Supported image types
+const SUPPORTED_IMAGE_TYPES = [IMAGE_TYPES.PNG, IMAGE_TYPES.JPEG]
+
+/**
+ * Validates an image file
+ * @param file - File to validate
+ * @param filename - Filename for error messages
+ * @returns File size
+ */
+export function validateImage(file: File, filename: string = 'Image'): number {
+  if (!file) {
     throw new Error(getI18nString('community.publishing.error_thumbnail_image_not_found', {
-      filename: t,
+      filename,
     }))
   }
-  let r = getValueOrFallback(e.type, IMAGE_TYPES)
-  if (!r || !$$ep3.includes(r)) {
+
+  const fileType = getValueOrFallback(file.type, IMAGE_TYPES)
+  if (!fileType || !SUPPORTED_IMAGE_TYPES.includes(fileType)) {
     throw new Error(getI18nString('community.publishing.error_thumbnail_image_wrong_format', {
-      filename: t,
+      filename,
     }))
   }
-  if (e.size > MAX_COVER_IMAGE_SIZE) {
+
+  if (file.size > MAX_COVER_IMAGE_SIZE) {
     throw new Error(getI18nString('community.publishing.error_thumbnail_image_too_large', {
-      filename: t,
+      filename,
       max_size: Math.floor(MAX_COVER_IMAGE_SIZE / 1e6),
     }))
   }
-  return e.size
+
+  return file.size
 }
-export function $$eh36(e): Promise<HTMLImageElement> {
-  return new Promise((t, r) => {
-    let n = new Image()
-    n.onload = () => t(n)
-    n.onerror = r
-    n.src = e
+
+/**
+ * Loads an image from URL
+ * @param url - Image URL
+ * @returns Promise resolving to HTMLImageElement
+ */
+export function loadImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => resolve(img)
+    img.onerror = reject
+    img.src = url
   })
 }
-let em = new Set()
-export async function $$eg1(e, t) {
-  if (e.files === null || !e.files[0])
+
+// Track loaded object URLs for cleanup
+const loadedObjectUrls = new Set<string>()
+
+/**
+ * Processes thumbnail image
+ * @param event - File input event
+ * @param previousUrl - Previous URL to clean up
+ * @returns Processed image data
+ */
+export async function processThumbnailImage(event: any, previousUrl: string): Promise<any> {
+  if (event.files === null || !event.files[0]) {
     throw new Error(getI18nString('community.publishing.error_thumbnail_image_not_found_no_filename'))
-  t && $$eN39(t)
-  let r = e.files[0]
-  $$e_26(r, getI18nString('community.publishing.thumbnail_image'))
-  let [n, i] = await Promise.all([$$eh36(URL.createObjectURL(r)), readImageBytes(r)])
-  em.add(n.src)
+  }
+
+  if (previousUrl) {
+    cleanupObjectUrl(previousUrl)
+  }
+
+  const file = event.files[0]
+  validateImage(file, getI18nString('community.publishing.thumbnail_image'))
+
+  const [image, imageData] = await Promise.all([
+    loadImage(URL.createObjectURL(file)),
+    readImageBytes(file),
+  ])
+
+  loadedObjectUrls.add(image.src)
+
   return {
-    url: n.src,
-    buffer: new Uint8Array(i),
+    url: image.src,
+    buffer: new Uint8Array(imageData),
   }
 }
-export async function $$ef9(e, t, r = en) {
-  let n = []
-  for (let i of Array.from(e).slice(0, r)) {
-    if (t && i.type.startsWith('video/')) {
-      !(function (e) {
-        let t = e.name
-        if (!e) {
-          throw new Error(getI18nString('community.publishing.error_thumbnail_image_not_found', {
-            filename: t,
-          }))
-        }
-        if (!VIDEO_TYPE_VALUES.includes(e.type)) {
-          throw new Error(getI18nString('community.publishing.error_video_wrong_format', {
-            filename: t,
-          }))
-        }
-        if (e.size > MAX_PLUGIN_SIZE) {
-          throw new Error(getI18nString('community.publishing.error_thumbnail_image_too_large', {
-            filename: t,
-            max_size: Math.floor(MAX_PLUGIN_SIZE / 1e6),
-          }))
-        }
-      }(i))
-      let e = URL.createObjectURL(i)
-      let [t, r] = await Promise.all([eC(i), j(e), eb(e, i.name)])
-      let s = URL.createObjectURL(new Blob([r]))
-      em.add(e)
-      em.add(s)
-      n.push({
-        url: e,
-        buffer: t.bytes,
-        sha1: t.sha1,
+
+/**
+ * Processes carousel media files
+ * @param files - Media files to process
+ * @param allowVideos - Whether to allow video files
+ * @param maxFiles - Maximum number of files to process
+ * @returns Processed media data
+ */
+export async function processCarouselMedia(
+  files: FileList,
+  allowVideos: boolean,
+  maxFiles: number = 10,
+): Promise<any[]> {
+  const result: any[] = []
+
+  for (const file of Array.from(files).slice(0, maxFiles)) {
+    if (allowVideos && file.type.startsWith('video/')) {
+      // Validate video
+      if (!file) {
+        throw new Error(getI18nString('community.publishing.error_thumbnail_image_not_found', {
+          filename: file.name,
+        }))
+      }
+
+      if (!VIDEO_TYPE_VALUES.includes(file.type)) {
+        throw new Error(getI18nString('community.publishing.error_video_wrong_format', {
+          filename: file.name,
+        }))
+      }
+
+      if (file.size > MAX_PLUGIN_SIZE) {
+        throw new Error(getI18nString('community.publishing.error_thumbnail_image_too_large', {
+          filename: file.name,
+          max_size: Math.floor(MAX_PLUGIN_SIZE / 1e6),
+        }))
+      }
+
+      const videoUrl = URL.createObjectURL(file)
+      const [videoData, thumbnailData, _] = await Promise.all([
+        readVideoData(file),
+        generateVideoThumbnail(videoUrl),
+        validateVideoLength(videoUrl, file.name),
+      ])
+
+      const thumbnailUrl = URL.createObjectURL(new Blob([thumbnailData]))
+      loadedObjectUrls.add(videoUrl)
+      loadedObjectUrls.add(thumbnailUrl)
+
+      result.push({
+        url: videoUrl,
+        buffer: videoData.bytes,
+        sha1: videoData.sha1,
         type: 'video',
-        thumbnail_url: s,
-        thumbnail_buffer: r,
-        thumbnail_sha1: sha1Hex(r),
+        thumbnail_url: thumbnailUrl,
+        thumbnail_buffer: thumbnailData,
+        thumbnail_sha1: sha1Hex(thumbnailData),
       })
     }
     else {
-      $$e_26(i, getI18nString('community.publishing.carousel_media_image'))
-      let [e, t] = await Promise.all([$$eh36(URL.createObjectURL(i)), readImageBytes(i)])
-      em.add(e.src)
-      let r = new Uint8Array(t)
-      n.push({
-        url: e.src,
-        buffer: r,
-        sha1: sha1Hex(r),
+      // Process as image
+      validateImage(file, getI18nString('community.publishing.carousel_media_image'))
+
+      const [image, imageData] = await Promise.all([
+        loadImage(URL.createObjectURL(file)),
+        readImageBytes(file),
+      ])
+
+      loadedObjectUrls.add(image.src)
+      const buffer = new Uint8Array(imageData)
+
+      result.push({
+        url: image.src,
+        buffer,
+        sha1: sha1Hex(buffer),
         type: 'image',
       })
     }
   }
-  return n
+
+  return result
 }
-export async function $$eE15(e, t) {
-  return e.files === null || e.files.length === 0 ? Promise.resolve([]) : await $$ef9(e.files, t)
+
+/**
+ * Processes carousel files from event
+ * @param event - File input event
+ * @param allowVideos - Whether to allow video files
+ * @returns Promise resolving to processed media
+ */
+export async function processCarouselFiles(event: any, allowVideos: boolean): Promise<any[]> {
+  return event.files === null || event.files.length === 0
+    ? Promise.resolve([])
+    : await processCarouselMedia(event.files, allowVideos)
 }
-export function $$ey44(e) {
-  if (!e || !e.length)
+
+/**
+ * Validates carousel images
+ * @param images - Images to validate
+ * @returns Error message or undefined
+ */
+export function validateCarouselImages(images: any[]): string | undefined {
+  if (!images || !images.length) {
     return getI18nString('community.publishing.upload_at_least_one_image')
+  }
+
+  return undefined
 }
-async function eb(e, t) {
-  if ((await new Promise((t, r) => {
-    let n = document.createElement('video')
-    n.preload = 'metadata'
-    n.addEventListener('error', (e) => {
-      r(e.message)
+
+/**
+ * Validates video length
+ * @param url - Video URL
+ * @param filename - Filename for error messages
+ */
+async function validateVideoLength(url: string, filename: string): Promise<void> {
+  const duration = await new Promise<number>((resolve, reject) => {
+    const video = document.createElement('video')
+    video.preload = 'metadata'
+
+    video.addEventListener('error', (e) => {
+      reject((e as any).message)
     })
-    n.addEventListener('loadedmetadata', () => {
-      t(n.duration)
+
+    video.addEventListener('loadedmetadata', () => {
+      resolve(video.duration)
     })
-    n.src = e
-    n.currentTime = 0
-    n.load()
+
+    video.src = url
+    video.currentTime = 0
+    video.load()
+
     setTimeout(() => {
-      r('Video load timeout during video length validation')
-    }, 1e4)
-  })) > GT) {
+      reject('Video load timeout during video length validation')
+    }, 10000)
+  })
+
+  if (duration > 30) {
     throw new Error(getI18nString('community.publishing.error_video_too_long', {
-      filename: t,
-      max_length: GT,
+      filename,
+      max_length: 30,
     }))
   }
 }
-export function $$eT11(e) {
-  let t = []
-  let r = []
-  let n = []
-  e && e.forEach((e, i) => {
-    if ('buffer' in e) {
-      if (e.type === 'video') {
-        if (!e.thumbnail_buffer)
+
+/**
+ * Prepares media upload data
+ * @param media - Media array
+ * @returns Upload data structure
+ */
+export function prepareMediaUploadData(media: any[]): any {
+  const uploadImages: any[] = []
+  const uploadVideos: any[] = []
+  const allMedia: any[] = []
+
+  media?.forEach((item, index) => {
+    if ('buffer' in item) {
+      if (item.type === 'video') {
+        if (!item.thumbnail_buffer) {
           throw new Error(getI18nString('community.publishing.error_video_thumbnail_not_found'))
-        let t = {
-          carousel_position: i,
-          sha1: sha1Hex(e.buffer),
-          bytes: e.buffer,
-          video_thumbnail_buffer: e.thumbnail_buffer,
-          video_thumbnail_sha1: sha1Hex(e.thumbnail_buffer),
         }
-        r.push(t)
+
+        const videoData = {
+          carousel_position: index,
+          sha1: sha1Hex(item.buffer),
+          bytes: item.buffer,
+          video_thumbnail_buffer: item.thumbnail_buffer,
+          video_thumbnail_sha1: sha1Hex(item.thumbnail_buffer),
+        }
+
+        uploadVideos.push(videoData)
       }
       else {
-        let r = {
-          carousel_position: i,
-          sha1: sha1Hex(e.buffer),
+        const imageData = {
+          carousel_position: index,
+          sha1: sha1Hex(item.buffer),
         }
-        t.push(r)
-        n.push(r)
+
+        uploadImages.push(imageData)
+        allMedia.push(imageData)
       }
     }
-    else if ('id' in e) {
-      let t = e.type === 'video'
+    else if ('id' in item) {
+      const existingData = item.type === 'video'
         ? {
-            carousel_position: i,
-            sha1: e.sha1,
-            video_file_uuid: e.video_file_uuid,
-            video_thumbnail_sha1: e.thumbnail_sha1,
+            carousel_position: index,
+            sha1: item.sha1,
+            video_file_uuid: item.video_file_uuid,
+            video_thumbnail_sha1: item.thumbnail_sha1,
           }
         : {
-            carousel_position: i,
-            sha1: e.sha1,
+            carousel_position: index,
+            sha1: item.sha1,
           }
-      n.push(t)
+
+      allMedia.push(existingData)
     }
   })
+
   return {
-    uploadImages: t,
-    uploadVideos: r,
-    allMedia: n,
+    uploadImages,
+    uploadVideos,
+    allMedia,
   }
 }
-export function $$eI20(e, t) {
-  return t && t?.length && e?.length
-    ? e.map(async ({
-        url: e,
-        fields: r,
-        carouselPosition: n,
-        signedCloudfrontUrl: i,
-      }) => {
-        let a = t[n]
-        if (!a || !('buffer' in a) || !a.buffer)
-          return !1
-        let c = new FormData()
-        Object.entries(r).forEach(([e, t]) => c.append(e, t))
-        c.set('content-type', _$$i(a.buffer) ?? 'image/png')
-        let u = new Blob([a.buffer])
-        try {
-          if (i && getFeatureFlags().ext_s3_url_use_figma_domains) {
-            let e = await readImageBytes(u)
-            await sendWithRetry.crossOriginPut(i, e, {
-              raw: !0,
-              headers: {
-                'Content-Type': u.type,
-                'x-amz-acl': 'bucket-owner-full-control',
-              },
-            })
-          }
-          else {
-            let t = new FormData()
-            Object.entries(r).forEach(([e, r]) => t.append(e, r))
-            t.set('content-type', _$$i(a.buffer) ?? 'image/png')
-            t.append('file', u)
-            await uploadRequest(e, t)
-          }
-        }
-        catch (e) {
-          reportError(ServiceCategories.COMMUNITY, e)
-          return new Error(getI18nString('community.actions.error_uploading_carousel_image_error', {
-            error: resolveMessage(e, e.data?.message || 'unknown error'),
-          }))
-        }
-        return !0
-      })
-    : []
+
+/**
+ * Uploads carousel images
+ * @param uploadUrls - Upload URL data
+ * @param media - Media to upload
+ * @returns Array of upload promises
+ */
+export function uploadCarouselImages(uploadUrls: any[], media: any[]): Promise<any>[] {
+  if (!media?.length || !uploadUrls?.length) {
+    return []
+  }
+
+  return uploadUrls.map(async ({
+    url,
+    fields,
+    carouselPosition,
+    signedCloudfrontUrl,
+  }) => {
+    const mediaItem = media[carouselPosition]
+
+    if (!mediaItem || !('buffer' in mediaItem) || !mediaItem.buffer) {
+      return false
+    }
+
+    const formData = new FormData()
+    Object.entries(fields).forEach(([key, value]) => formData.append(key, value as any))
+    formData.set('content-type', detectMimeType(mediaItem.buffer) ?? 'image/png')
+
+    const blob = new Blob([mediaItem.buffer])
+
+    try {
+      if (signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains) {
+        const imageData = await readImageBytes(blob)
+        await sendWithRetry.crossOriginPut(signedCloudfrontUrl, imageData, {
+          raw: true,
+          headers: {
+            'Content-Type': blob.type,
+            'x-amz-acl': 'bucket-owner-full-control',
+          },
+        })
+      }
+      else {
+        const formData = new FormData()
+        Object.entries(fields).forEach(([key, value]) => formData.append(key, value as any))
+        formData.set('content-type', detectMimeType(mediaItem.buffer) ?? 'image/png')
+        formData.append('file', blob)
+        await uploadRequest(url, formData)
+      }
+    }
+    catch (error: any) {
+      reportError(ServiceCategories.COMMUNITY, error)
+      return new Error(getI18nString('community.actions.error_uploading_carousel_image_error', {
+        error: resolveMessage(error, error.data?.message || 'unknown error'),
+      }))
+    }
+
+    return true
+  })
 }
-function eS(e, t) {
-  let r = new FormData()
-  Object.entries(e).forEach(([e, t]) => r.append(e, t))
-  r.set('content-type', _$$i(t) ?? 'image/png')
-  r.append('file', new Blob([t]))
-  return r
+
+/**
+ * Creates form data for file upload
+ * @param fields - Form fields
+ * @param buffer - File buffer
+ * @returns FormData object
+ */
+function createFormData(fields: any, buffer: Uint8Array): FormData {
+  const formData = new FormData()
+  Object.entries(fields).forEach(([key, value]) => formData.append(key, value as any))
+  formData.set('content-type', detectMimeType(buffer) ?? 'image/png')
+  formData.append('file', new Blob([buffer]))
+  return formData
 }
-export async function $$ev18(e, t, r, n) {
-  let i
-  let {
-    uploadImages,
-    allMedia,
-  } = $$eT11(t)
-  if (!e?.length && !uploadImages?.length) {
+
+/**
+ * Uploads Hub file images
+ * @param coverImageBuffer - Cover image buffer
+ * @param carouselMedia - Carousel media
+ * @param fileVersionId - File version ID
+ * @param hubFileId - Hub file ID
+ * @returns Upload result
+ */
+export async function uploadHubFileImages(
+  coverImageBuffer: Uint8Array | null,
+  carouselMedia: any[],
+  fileVersionId: string,
+  hubFileId: string,
+): Promise<any> {
+  let uploadData: any
+  const { uploadImages, allMedia } = prepareMediaUploadData(carouselMedia)
+
+  if (!coverImageBuffer?.length && !uploadImages?.length) {
     return {
       cover_image: {
-        cover_image_uploaded: !1,
+        cover_image_uploaded: false,
         signature: null,
       },
       carousel_images: allMedia,
     }
   }
+
   try {
-    i = (await hubFileAPI.setupMultiImageUploadForHubFile({
-      file_version_id: r,
-      hub_file_id: n,
+    uploadData = (await hubFileAPI.setupMultiImageUploadForHubFile({
+      file_version_id: fileVersionId,
+      hub_file_id: hubFileId,
       images_sha1: uploadImages,
     })).data.meta
   }
-  catch (e) {
-    reportError(ServiceCategories.COMMUNITY, e)
-    return new Error(resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server')))
+  catch (error: any) {
+    reportError(ServiceCategories.COMMUNITY, error)
+    return new Error(resolveMessage(error, getI18nString('community.actions.could_not_connect_to_the_server')))
   }
-  let l = []
-  for (let e of i.carousel_images) {
-    let r = t[e.carousel_position]
-    r && 'buffer' in r && r.buffer && l.push({
-      url: e.url,
-      formData: eS(e.fields, r.buffer),
+
+  const uploadTasks: any[] = []
+
+  for (const carouselImage of uploadData.carousel_images) {
+    const mediaItem = carouselMedia[carouselImage.carousel_position]
+    if (mediaItem && 'buffer' in mediaItem && mediaItem.buffer) {
+      uploadTasks.push({
+        url: carouselImage.url,
+        formData: createFormData(carouselImage.fields, mediaItem.buffer),
+      })
+    }
+  }
+
+  if (coverImageBuffer?.length) {
+    uploadTasks.push({
+      url: uploadData.cover_image.cover_image_upload_url,
+      formData: createFormData(uploadData.cover_image.fields, coverImageBuffer),
     })
   }
-  e?.length && l.push({
-    url: i.cover_image.cover_image_upload_url,
-    formData: eS(i.cover_image.fields, e),
-  })
+
   try {
-    await uploadMultiple(l)
+    await uploadMultiple(uploadTasks)
     return {
       cover_image: {
-        cover_image_uploaded: !!e?.length,
-        signature: i.cover_image.signature,
+        cover_image_uploaded: !!coverImageBuffer?.length,
+        signature: uploadData.cover_image.signature,
       },
       carousel_images: allMedia,
     }
   }
-  catch (e) {
-    reportError(ServiceCategories.COMMUNITY, e)
-    return new Error(resolveMessage(e, getI18nString('community.actions.error_connecting_to_server_to_upload_file_images')))
+  catch (error: any) {
+    reportError(ServiceCategories.COMMUNITY, error)
+    return new Error(resolveMessage(error, getI18nString('community.actions.error_connecting_to_server_to_upload_file_images')))
   }
 }
-export function $$eA27(e, t) {
-  return t ? e.findIndex(e => e.sha1 === t.sha1) : -1
+
+/**
+ * Finds media index by SHA1 hash
+ * @param mediaArray - Media array
+ * @param mediaItem - Media item to find
+ * @returns Index of media item or -1
+ */
+export function findMediaIndexBySha1(mediaArray: any[], mediaItem: any): number {
+  return mediaItem
+    ? mediaArray.findIndex(item => item.sha1 === mediaItem.sha1)
+    : -1
 }
-function ex(e) {
-  em.has(e) && (URL.revokeObjectURL(e), em.$$delete(e))
+
+/**
+ * Cleans up object URL
+ * @param url - URL to clean up
+ */
+function cleanupObjectUrl(url: string): void {
+  if (loadedObjectUrls.has(url)) {
+    URL.revokeObjectURL(url)
+    loadedObjectUrls.delete(url)
+  }
 }
-export function $$eN39(e) {
-  e && (e.url && ex(e.url), 'type' in e && e.type === 'video' && ex(e.thumbnail_url))
+
+/**
+ * Cleans up media object URLs
+ * @param media - Media object
+ */
+export function cleanupMediaObjectUrls(media: any): void {
+  if (media) {
+    if (media.url) {
+      cleanupObjectUrl(media.url)
+    }
+
+    if ('type' in media && media.type === 'video' && media.thumbnail_url) {
+      cleanupObjectUrl(media.thumbnail_url)
+    }
+  }
 }
-async function eC(e) {
-  let t = new Uint8Array(await readImageBytes(e))
+
+/**
+ * Reads video data
+ * @param file - Video file
+ * @returns Video data with SHA1 hash
+ */
+async function readVideoData(file: File): Promise<any> {
+  const bytes = new Uint8Array(await readImageBytes(file))
   return {
-    sha1: sha1Hex(t),
-    bytes: t,
+    sha1: sha1Hex(bytes),
+    bytes,
   }
 }
-export function $$ew45(e) {
-  if (!e.currentUserOrgId)
-    return !1
-  let t = getCurrentUserOrgUser(e)
-  return !(t && t.agreed_to_community_tos_at)
+
+/**
+ * Checks if user needs to accept community TOS
+ * @param state - Application state
+ * @returns True if TOS acceptance needed
+ */
+export function needsToAcceptCommunityTOS(state: any): boolean {
+  if (!state.currentUserOrgId)
+    return false
+
+  const orgUser = getCurrentUserOrgUser(state)
+  return !(orgUser && orgUser.agreed_to_community_tos_at)
 }
-export function $$eO0(e, t) {
-  return Object.entries(t).reduce((t, [r, n]) => t + Number(e.includes(r) && !!n), 0)
+
+/**
+ * Counts enabled features
+ * @param enabledFeatures - Array of enabled features
+ * @param featureFlags - Feature flags object
+ * @returns Count of enabled features
+ */
+export function countEnabledFeatures(enabledFeatures: string[], featureFlags: any): number {
+  return Object.entries(featureFlags).reduce(
+    (count, [feature, isEnabled]) =>
+      count + Number(enabledFeatures.includes(feature) && !!isEnabled),
+    0,
+  )
 }
-function eR(e) {
-  return typeof e == 'object' && 'fields' in e && 'imagePath' in e
+
+/**
+ * Checks if object is a presigned URL object
+ * @param obj - Object to check
+ * @returns True if presigned URL object
+ */
+function isPresignedUrlObject(obj: any): boolean {
+  return typeof obj === 'object' && 'fields' in obj && 'imagePath' in obj
 }
-export function $$eL2(e, t, r) {
-  if (eR(e)) {
-    let {
-      fields,
-      imagePath,
-      signedCloudfrontUrl,
-    } = e
+
+/**
+ * Uploads image with presigned URL
+ * @param presignedUrl - Presigned URL data
+ * @param file - File to upload
+ * @param buffer - File buffer
+ * @returns Upload promise
+ */
+export function uploadImageWithPresignedUrl(
+  presignedUrl: any,
+  file: File,
+  buffer: Uint8Array,
+): Promise<any> {
+  if (isPresignedUrlObject(presignedUrl)) {
+    const { fields, imagePath, signedCloudfrontUrl } = presignedUrl
+
     if (signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains) {
-      return sendWithRetry.crossOriginPut(signedCloudfrontUrl, r, {
-        raw: !0,
+      return sendWithRetry.crossOriginPut(signedCloudfrontUrl, buffer, {
+        raw: true,
         headers: {
-          'Content-Type': t.type,
+          'Content-Type': file.type,
           'x-amz-acl': 'bucket-owner-full-control',
         },
       })
     }
-    let s = new FormData()
-    Object.entries(fields).forEach(([e, t]) => s.append(e, t))
-    s.set('Content-Type', t.type)
-    s.append('file', t)
-    return sendWithRetry.crossOriginPost(imagePath, s, {
-      raw: !0,
+
+    const formData = new FormData()
+    Object.entries(fields).forEach(([key, value]) => formData.append(key, value as any))
+    formData.set('Content-Type', file.type)
+    formData.append('file', file)
+
+    return sendWithRetry.crossOriginPost(imagePath, formData, {
+      raw: true,
       headers: {
-        'Content-Type': t.type,
+        'Content-Type': file.type,
       },
     })
   }
-  return typeof e == 'string'
-    ? sendWithRetry.crossOriginPut(e, r, {
-        raw: !0,
-        headers: {
-          ...sendWithRetry.defaults.headers,
-          'Content-Type': t.type,
-        },
-      })
-    : Promise.reject(new Error('Invalid presigned_url'))
+
+  if (typeof presignedUrl === 'string') {
+    return sendWithRetry.crossOriginPut(presignedUrl, buffer, {
+      raw: true,
+      headers: {
+        ...sendWithRetry.defaults.headers,
+        'Content-Type': file.type,
+      },
+    })
+  }
+
+  return Promise.reject(new Error('Invalid presigned_url'))
 }
-export function $$eP12(e, t) {
-  let r = _$$i(t) ?? 'image/png'
-  if (eR(e)) {
-    let {
-      fields,
-      imagePath,
-      signedCloudfrontUrl,
-    } = e
+
+/**
+ * Uploads blob with presigned URL
+ * @param presignedUrl - Presigned URL data
+ * @param buffer - Blob buffer
+ * @returns Upload promise
+ */
+export function uploadBlobWithPresignedUrl(presignedUrl: any, buffer: Uint8Array): Promise<any> {
+  const mimeType = detectMimeType(buffer) ?? 'image/png'
+
+  if (isPresignedUrlObject(presignedUrl)) {
+    const { fields, imagePath, signedCloudfrontUrl } = presignedUrl
+
     if (signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains) {
-      return sendWithRetry.crossOriginPut(signedCloudfrontUrl, t, {
-        raw: !0,
+      return sendWithRetry.crossOriginPut(signedCloudfrontUrl, buffer, {
+        raw: true,
         headers: {
-          'Content-Type': r,
+          'Content-Type': mimeType,
           'x-amz-acl': 'bucket-owner-full-control',
         },
       })
     }
-    let s = new FormData()
-    Object.entries(fields).forEach(([e, t]) => s.append(e, t))
-    s.set('Content-Type', r)
-    s.append('file', new Blob([t]))
-    return sendWithRetry.crossOriginPost(imagePath, s, {
-      raw: !0,
+
+    const formData = new FormData()
+    Object.entries(fields).forEach(([key, value]) => formData.append(key, value as any))
+    formData.set('Content-Type', mimeType)
+    formData.append('file', new Blob([buffer]))
+
+    return sendWithRetry.crossOriginPost(imagePath, formData, {
+      raw: true,
       headers: {
-        'Content-Type': r,
+        'Content-Type': mimeType,
       },
     })
   }
-  return typeof e == 'string'
-    ? sendWithRetry.crossOriginPut(e, t, {
-        raw: !0,
-        headers: {
-          ...sendWithRetry.defaults.headers,
-          'Content-Type': r,
-        },
-      })
-    : Promise.reject(new Error('Invalid presigned_url'))
+
+  if (typeof presignedUrl === 'string') {
+    return sendWithRetry.crossOriginPut(presignedUrl, buffer, {
+      raw: true,
+      headers: {
+        ...sendWithRetry.defaults.headers,
+        'Content-Type': mimeType,
+      },
+    })
+  }
+
+  return Promise.reject(new Error('Invalid presigned_url'))
 }
-export async function $$eD7(e, t, r, n, s) {
-  let {
-    video,
-    videoThumbnail,
-  } = await _$$v.getVideoUploadUrl({
-    resourceType: e,
-    id: t,
-    sha1: r.sha1,
-    thumbnail_sha1: s,
+
+/**
+ * Uploads video with thumbnail
+ * @param resourceType - Resource type
+ * @param resourceId - Resource ID
+ * @param videoData - Video data
+ * @param thumbnailBuffer - Thumbnail buffer
+ * @param thumbnailSha1 - Thumbnail SHA1
+ * @returns Upload result
+ */
+export async function uploadVideoWithThumbnail(
+  resourceType: string,
+  resourceId: string,
+  videoData: any,
+  thumbnailBuffer: Uint8Array,
+  thumbnailSha1: string,
+): Promise<any> {
+  const { video, videoThumbnail } = await VideoUploadService.getVideoUploadUrl({
+    resourceType,
+    id: resourceId,
+    sha1: videoData.sha1,
+    thumbnail_sha1: thumbnailSha1,
   })
-  let c = null
+
+  let videoUploadPromise: Promise<any> | null = null
+
   if (video) {
-    let {
-      url,
-      fields,
-      signedCloudfrontUrl,
-    } = video
-    if (signedCloudfrontUrl && getFeatureFlags().ext_s3_url_use_figma_domains && getFeatureFlags().ext_s3_url_videos_use_figma_domains) {
-      let e = encodeBase64(sha1BytesFromHex(r.sha1))
-      c = sendWithRetry.crossOriginPut(signedCloudfrontUrl, r.bytes, {
-        raw: !0,
+    const { url, fields, signedCloudfrontUrl } = video
+
+    if (signedCloudfrontUrl
+      && getFeatureFlags().ext_s3_url_use_figma_domains
+      && getFeatureFlags().ext_s3_url_videos_use_figma_domains) {
+      const checksum = encodeBase64(sha1BytesFromHex(videoData.sha1))
+      videoUploadPromise = sendWithRetry.crossOriginPut(signedCloudfrontUrl, videoData.bytes, {
+        raw: true,
         headers: {
           'Content-Type': 'video/mp4',
           'x-amz-acl': 'bucket-owner-full-control',
-          'x-amz-checksum-sha1': e,
+          'x-amz-checksum-sha1': checksum,
         },
       }).then(() => fields.key || '')
     }
     else {
-      c = uploadVideoToPresignedPost(url, fields, r, 'video/mp4')
+      videoUploadPromise = uploadVideoToPresignedPost(url, fields, videoData, 'video/mp4')
     }
   }
-  let p = new Blob([n], {
-    type: 'image/png',
-  })
-  let g = $$eL2({
-    imagePath: videoThumbnail.url,
-    fields: videoThumbnail.fields,
-    signedCloudfrontUrl: videoThumbnail.signedCloudfrontUrl,
-  }, p, n).catch((e) => {
+
+  const thumbnailBlob = new Blob([thumbnailBuffer], { type: 'image/png' })
+
+  const thumbnailUploadPromise = uploadImageWithPresignedUrl(
+    {
+      imagePath: videoThumbnail.url,
+      fields: videoThumbnail.fields,
+      signedCloudfrontUrl: videoThumbnail.signedCloudfrontUrl,
+    },
+    thumbnailBlob as any,
+    thumbnailBuffer,
+  ).catch((error: any) => {
     throw new Error(getI18nString('community.actions.error_uploading_plugin_video_thumbnail_error', {
-      error: resolveMessage(e, e.data?.message || 'unknown error'),
+      error: resolveMessage(error, error.data?.message || 'unknown error'),
     }))
   })
-  let [f] = await Promise.all([c, g])
-  return await ek(r.sha1, t, e, f ?? '', s, video?.blobUploadCommitKey || '')
+
+  const [uploadPath] = await Promise.all([videoUploadPromise, thumbnailUploadPromise])
+
+  return await commitVideoUpload(
+    videoData.sha1,
+    resourceId,
+    resourceType,
+    uploadPath ?? '',
+    thumbnailSha1,
+    video?.blobUploadCommitKey || '',
+  )
 }
-async function ek(e, t, r, n, i, a) {
-  let s = new URLSearchParams()
-  s.append('sha1', e)
-  s.append('uploadPath', n)
-  s.append('resourceId', t)
-  s.append('resourceType', r)
-  s.append('blobUploadCommitKey', a)
+
+/**
+ * Commits video upload
+ * @param sha1 - Video SHA1
+ * @param resourceId - Resource ID
+ * @param resourceType - Resource type
+ * @param uploadPath - Upload path
+ * @param thumbnailSha1 - Thumbnail SHA1
+ * @param blobUploadCommitKey - Commit key
+ * @returns Commit result
+ */
+async function commitVideoUpload(
+  sha1: string,
+  resourceId: string,
+  resourceType: string,
+  uploadPath: string,
+  thumbnailSha1: string,
+  blobUploadCommitKey: string,
+): Promise<any> {
+  const params = new URLSearchParams()
+  params.append('sha1', sha1)
+  params.append('uploadPath', uploadPath)
+  params.append('resourceId', resourceId)
+  params.append('resourceType', resourceType)
+  params.append('blobUploadCommitKey', blobUploadCommitKey)
+
   return {
-    videoFileUuid: (await sendWithRetry.post(`/api/upnode/video?${s.toString()}`)).data.meta.video_file_uuid,
-    sha1: e,
-    videoThumbnailSha1: i,
+    videoFileUuid: (await sendWithRetry.post(`/api/upnode/video?${params.toString()}`)).data.meta.video_file_uuid,
+    sha1,
+    videoThumbnailSha1: thumbnailSha1,
   }
 }
-export const $W = $$eO0
-export const $x = $$eg1
-export const Ac = $$eL2
-export const CW = $$ep3
-export const Cw = $$M4
-export const Dd = $$$5
-export const En = $$X6
-export const Gf = $$eD7
-export const Gl = $$j8
-export const Gp = $$ef9
-export const Ii = $$eo10
-export const Kg = $$eT11
-export const M0 = $$eP12
-export const MK = $$V13
-export const MO = $$ee14
-export const N8 = $$eE15
-export const PR = $$Y16
-export const Q4 = $$z17
-export const R1 = $$ev18
-export const RB = $$G19
-export const Rd = $$eI20
-export const Rv = $$en21
-export const T$ = $$q22
-export const Tn = $$J23
-export const UU = $$es24
-export const Wd = $$B25
-export const Wl = $$e_26
-export const Z2 = $$eA27
-export const Z7 = $$et28
-export const cN = $$U29
-export const f7 = $$Q30
-export const gO = $$K31
-export const j4 = $$el32
-export const jr = $$er33
-export const kJ = $$H34
-export const kN = $$ed35
-export const l8 = $$eh36
-export const mH = $$eu37
-export const mN = $$ei38
-export const nK = $$eN39
-export const o1 = $$ec40
-export const oB = $$W41
-export const of = $$ea42
-export const ot = $$F43
-export const vC = $$ey44
-export const xw = $$ew45
+export const $W = countEnabledFeatures
+export const $x = processThumbnailImage
+export const Ac = uploadImageWithPresignedUrl
+export const CW = SUPPORTED_IMAGE_TYPES
+export const Cw = PublisherStatus
+export const Dd = isCreator
+export const En = getDefaultPluginAuthor
+export const Gf = uploadVideoWithThumbnail
+export const Gl = DISPLAY_ONLY_STATUSES
+export const Gp = processCarouselMedia
+export const Ii = isWorkspaceMatch
+export const Kg = prepareMediaUploadData
+export const M0 = uploadBlobWithPresignedUrl
+export const MK = getPublisherStatus
+export const MO = isOrgWorkspace
+export const N8 = processCarouselFiles
+export const PR = isUserAcceptedAsAuthor
+export const Q4 = isPublicRole
+export const R1 = uploadHubFileImages
+export const RB = useIsPublisher
+export const Rd = uploadCarouselImages
+export const Rv = getValidAuthorsForHubFile
+export const T$ = getPublisherWorkspaceInfo
+export const Tn = extractWorkspaceId
+export const UU = getValidAuthorsForPlugin
+export const Wd = isCreatorAcceptedPublisher
+export const Wl = validateImage
+export const Z2 = findMediaIndexBySha1
+export const Z7 = isTeamWorkspace
+export const cN = isAdminStatus
+export const f7 = isSameWorkspace
+export const gO = getDefaultHubFileAuthor
+export const j4 = getDebugWorkspaceInfo
+export const jr = isUserWorkspace
+export const kJ = getPrimaryUserIdStatus
+export const kN = getWorkspaceName
+export const l8 = loadImage
+export const mH = getWorkspaceHandle
+export const mN = getEditors
+export const nK = cleanupMediaObjectUrls
+export const o1 = getWorkspaceDisplayName
+export const oB = determinePublisherType
+export const of = getPublisherWorkspace
+export const ot = PENDING_STATUSES
+export const vC = validateCarouselImages
+export const xw = needsToAcceptCommunityTOS

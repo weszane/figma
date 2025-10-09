@@ -37,7 +37,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
-import { K as _$$K2 } from "../905/659729";
+import { validateFileUploads } from "../905/659729";
 import { getMentionsResult } from "../905/772425";
 import { UPLOAD_ERRORS, IMAGE_TYPE_VALUES } from "../905/966582";
 import { KindEnum } from "../905/129884";
@@ -286,7 +286,7 @@ export function $$em1(e) {
   }, [dispatch, e0]);
   let e1 = useCallback(t => {
     if (!eW || !updateAttachment || 0 === t.length) return;
-    let n = _$$K2(t, eV, DEFAULT_THUMBNAIL_SIZE, IMAGE_TYPE_VALUES, e2);
+    let n = validateFileUploads(t, eV, DEFAULT_THUMBNAIL_SIZE, IMAGE_TYPE_VALUES, e2);
     eZ(e => e + n.length);
     n.forEach((t, n) => {
       if (IMAGE_TYPE_VALUES.includes(t.type)) {

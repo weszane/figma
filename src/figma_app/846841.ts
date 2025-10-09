@@ -31,7 +31,7 @@ import { g5 } from "../figma_app/178752";
 import { selectCurrentFile, openFileKeyAtom } from "../figma_app/516028";
 import { useIsLoading } from "../905/18797";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { Sh } from "../figma_app/803787";
+import { hasComponentOrModuleItemsAtom } from "../figma_app/803787";
 import { C as _$$C } from "../905/758411";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { FDocumentType } from "../905/862883";
@@ -138,7 +138,7 @@ export function $$eR6({
     presets,
     librariesForConnectedProject
   } = _$$g2();
-  let eX = useAtomWithSubscription(Sh);
+  let eX = useAtomWithSubscription(hasComponentOrModuleItemsAtom);
   let eq = e ? 0 === libraries.length && 0 === librariesForConnectedProject.length : !eX && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
   let eJ = useMemo(() => N2(!0, !0), []);
   let {

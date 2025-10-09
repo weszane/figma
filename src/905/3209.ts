@@ -63,7 +63,7 @@ export class PluginAPIService {
   /**
    * Gets plugins with optional filtering parameters
    */
-  async getPlugins(params: PluginsParams) {
+  async getPlugins(params: PluginsParams = {}) {
     return this.pluginsValidator.validate(async ({
       xr,
     }) => await xr.get('/api/plugins', APIParameterUtils.toAPIParameters(params)))

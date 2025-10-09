@@ -19,7 +19,7 @@ import { showModalHandler } from "../905/156213";
 import { wP } from "../9410/845608";
 import { fullscreenValue } from "../figma_app/455680";
 import { s as _$$s } from "../figma_app/874592";
-import { Dr, Ct } from "../figma_app/803787";
+import { hasAnyStagedItems, isSelectedComponentInWellFormedProductComponents } from "../figma_app/803787";
 import { KindEnum } from "../905/129884";
 import { calculatePickerPositionLeft } from "../905/959568";
 import { Nu } from "../figma_app/23780";
@@ -303,8 +303,8 @@ export function $$eg0({
   let K = !!useSelector(Z3).length;
   let G = useSelector(K4);
   let H = !!G?.length;
-  let V = useSelector(Dr);
-  let U = useSelector(Ct);
+  let V = useSelector(hasAnyStagedItems);
+  let U = useSelector(isSelectedComponentInWellFormedProductComponents);
   let {
     allowLibraryPublish
   } = useContext(_$$s);

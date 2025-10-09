@@ -115,7 +115,7 @@ import { canSellOnCommunity, Co, getCurrentVersion, HD, isStripeAccepted, isView
 import { CurrencyFormatter } from '../figma_app/514043';
 import { restrictProfileThunk, uploadProfileCoverImageThunk, updateProfileThunk, unrestrictProfileThunk } from '../figma_app/530167';
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
-import { Cw, kJ, l8 } from '../figma_app/599979';
+import { PublisherStatus, getPrimaryUserIdStatus, loadImage } from '../figma_app/599979';
 import { a as _$$a, z as _$$z } from '../figma_app/601188';
 import { BaseLinkComponent, ButtonSecondary, SecureLink } from '../figma_app/637027';
 import { e9 as _$$e3 } from '../figma_app/692865';
@@ -230,7 +230,7 @@ let X = function ({
       if (!e || e.length === 0 || !e[0]) throw new Error('File not found');
       let t = e[0];
       validateCoverImage(t);
-      let s = await l8(URL.createObjectURL(t));
+      let s = await loadImage(URL.createObjectURL(t));
       if (s.width > MAX_DESCRIPTION_LENGTH || s.height > MAX_TAGS_PER_RESOURCE) {
         throw new Error(getI18nString('community.profiles.cover_image_must_be_less_than_dimensions', {
           PROFILE_COVER_IMAGE_MAX_WIDTH: MAX_DESCRIPTION_LENGTH,
@@ -1977,7 +1977,7 @@ function r6({
   let r = selectCurrentUser();
   let n = useDispatch();
   let a = useSelector(t => isAuthedActiveProfile(e, t));
-  let l = useSelector(t => kJ(t, e));
+  let l = useSelector(t => getPrimaryUserIdStatus(t, e));
   let c = useSelector(e => 'authedActiveCommunityProfile' in e ? e.authedActiveCommunityProfile?.id ?? null : null);
   let d = useSelector(e => 'selectedView' in e ? e.selectedView : null);
   let u = tabView && a ? tabView : UserProfileTab.RESOURCES;
@@ -2118,7 +2118,7 @@ function se({
           updateProfile: this.updateProfile,
           isViewingCurrentUserProfile: this.props.authedActiveCommunityProfileId === this.props.profile.id,
           showFollowsModal: this.showFollowsModal
-        }), this.props.isWithinProfileScope && this.props.communityStatusOnProfile !== Cw.ADMIN_IN_DIFFERENT_WORKSPACE && jsx(_$$z2, {
+        }), this.props.isWithinProfileScope && this.props.communityStatusOnProfile !== PublisherStatus.ADMIN_IN_DIFFERENT_WORKSPACE && jsx(_$$z2, {
           query: `(min-width: ${r3}px)`,
           children: jsx(r0, {
             profile: this.props.profile,

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { useLastAddedTimestamps, useAllowlistedPlugins, useAllowlistedWidgets, usePublishedPlugins, usePluginedWidgets, getLocalPlugins } from "../figma_app/844435";
 import { isAcceptedPublisher } from "../figma_app/564095";
-import { Dd } from "../figma_app/599979";
+import { isCreator } from "../figma_app/599979";
 import { selectCommunityPayments, getExtensionWithPayment } from "../figma_app/86989";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
@@ -147,7 +147,7 @@ export function $$T8(e) {
           publishedExtension,
           localPublishedExtension
         } = e;
-        return !!publishedExtension && !!t && (isAcceptedPublisher(publishedExtension, t) || Dd(publishedExtension, t)) && !localPublishedExtension;
+        return !!publishedExtension && !!t && (isAcceptedPublisher(publishedExtension, t) || isCreator(publishedExtension, t)) && !localPublishedExtension;
       }(e, t);
     default:
       throwTypeError(e);

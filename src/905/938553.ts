@@ -141,7 +141,7 @@ import { getPluginWidgetLabel, mapFileTypeToEnum } from '../figma_app/471982';
 import { SimpleComponentType } from '../figma_app/504088';
 import { Dl, fd, fy, gD, Ij, pm, Qi, R8, se, uX, Vp, wx, zn } from '../figma_app/559491';
 import { isAcceptedPublisher, isAnyPublisher, sendPublisherInvites } from '../figma_app/564095';
-import { $W, oB as _$$oB, Dd, f7, j4, kN, of, UU, xw } from '../figma_app/599979';
+import { countEnabledFeatures, determinePublisherType, isCreator, isSameWorkspace, getDebugWorkspaceInfo, getWorkspaceName, getPublisherWorkspace, getValidAuthorsForPlugin, needsToAcceptCommunityTOS } from '../figma_app/599979';
 import { fI } from '../figma_app/626177';
 import { BaseLinkComponent, BigTextInputForwardRef, SecureLink } from '../figma_app/637027';
 import { jE } from '../figma_app/639088';
@@ -1467,7 +1467,7 @@ function ia({
 }) {
   let [s, o] = useState([]);
   let l = useMemo(() => new Map(e.map(e => [e.id, e])), [e]);
-  let d = useMemo(() => j4(n), [n]);
+  let d = useMemo(() => getDebugWorkspaceInfo(n), [n]);
   let {
     isOpen,
     getMenuProps,
@@ -2192,10 +2192,10 @@ class iW extends Component {
         let e = this.props.teams[i.team_id];
         t = e?.org_id ?? '';
       }
-      let n = j4({
+      let n = getDebugWorkspaceInfo({
         org_id: t
       })?.name;
-      let r = j4(this.props.publishingState.metadata.author)?.name;
+      let r = getDebugWorkspaceInfo(this.props.publishingState.metadata.author)?.name;
       if (!n || !r) {
         this.doPublish();
         return;
@@ -2243,13 +2243,13 @@ class iW extends Component {
         });
         return;
       }
-      let n = UU(this.props.permissionsState, this.props.publishedPlugin, !1);
-      let r = of(this.props.permissionsState, this.props.publishedPlugin);
-      this.authorWillChange() && r && !n.some(e => f7(e, r)) ? this.props.dispatch(showModalHandler({
+      let n = getValidAuthorsForPlugin(this.props.permissionsState, this.props.publishedPlugin, !1);
+      let r = getPublisherWorkspace(this.props.permissionsState, this.props.publishedPlugin);
+      this.authorWillChange() && r && !n.some(e => isSameWorkspace(e, r)) ? this.props.dispatch(showModalHandler({
         type: to,
         data: {
           prevProfileName: this.props.publishedPlugin.publisher.name,
-          newProfileName: kN(this.props.publishingState.metadata.author, {
+          newProfileName: getWorkspaceName(this.props.publishingState.metadata.author, {
             ...this.props.permissionsState,
             authedProfilesById: this.props.authedProfilesById
           }),
@@ -2386,7 +2386,7 @@ class iW extends Component {
       if (r == null) return;
       let a = !e.blockPublishingOnToS;
       let s = hasRoleOrOrgChanged(this.props.publishedPlugin, r);
-      let o = Dd(this.props.publishedPlugin, this.props.user.id) || this.props.isRepublishingUnpublishedPlugin;
+      let o = isCreator(this.props.publishedPlugin, this.props.user.id) || this.props.isRepublishingUnpublishedPlugin;
       s && o && this.props.dispatch(zn({
         pluginId: n,
         role: r,
@@ -2549,8 +2549,8 @@ class iW extends Component {
       if (isAcceptedPublisher(this.props.publishedPlugin, this.props.user.id)) return !0;
       let t = e.metadata.author;
       if (!this.props.profile) {
-        let e = of(this.props.permissionsState, this.props.publishedPlugin);
-        return e && f7(e, t);
+        let e = getPublisherWorkspace(this.props.permissionsState, this.props.publishedPlugin);
+        return e && isSameWorkspace(e, t);
       }
       return 'org_id' in this.props.profile && 'org_id' in t && this.props.profile.org_id === t.org_id || 'team_id' in this.props.profile && 'team_id' in t && this.props.profile.team_id === t.team_id || 'user_id' in t && this.props.profile.id === this.props.authedActiveCommunityProfile?.id;
     };
@@ -2688,7 +2688,7 @@ class iW extends Component {
         }),
         disabled: u,
         defaultActive: n || a,
-        numErrors: $W(['price'], t),
+        numErrors: countEnabledFeatures(['price'], t),
         disabledMessage: l,
         children: this.renderIsPaidPricingSection(e, t, o, a)
       });
@@ -2945,7 +2945,7 @@ class iW extends Component {
     });
   }
   getDefaultRole() {
-    return _$$oB(this.props.publishedPlugin, this.props.currentOrg, this.props.isCurrentOrgMember, this.props.publishingState.metadata.hasPaymentsApi);
+    return determinePublisherType(this.props.publishedPlugin, this.props.currentOrg, this.props.isCurrentOrgMember, this.props.publishingState.metadata.hasPaymentsApi);
   }
   getCurrentPublishedPluginVersion() {
     let e = this.props.publishedPlugin.current_plugin_version_id;
@@ -2995,7 +2995,7 @@ class iW extends Component {
     return e;
   }
   hasFormErrors(e) {
-    return !!$W(Object.keys(e), e);
+    return !!countEnabledFeatures(Object.keys(e), e);
   }
   setCreatorsError(e) {
     let {
@@ -3095,7 +3095,7 @@ class iW extends Component {
         name: 'details',
         title: getI18nString('community.publishing.details'),
         defaultActive: this.isFirstTimePublish(),
-        numErrors: $W(['iconImageError', 'coverImageError', 'name', 'tagline', 'description', 'tags', 'tagsV2', 'categoryId'], i),
+        numErrors: countEnabledFeatures(['iconImageError', 'coverImageError', 'name', 'tagline', 'description', 'tags', 'tagsV2', 'categoryId'], i),
         children: [jsx(_$$A6, {
           label: getI18nString('community.publishing.icon'),
           error: i.iconImageError,
@@ -3163,14 +3163,14 @@ class iW extends Component {
           isPaidResource: !!(this.isPaidResource() || this.props.publishingState.metadata.isPaid),
           isUserPendingOrAcceptedPublisher: isAnyPublisher(this.props.publishedPlugin, this.props.user.id)
         }), jsx(_$$A16, {
-          showToSCheckbox: xw(this.props.permissionsState),
+          showToSCheckbox: needsToAcceptCommunityTOS(this.props.permissionsState),
           onOrgMsaChange: this.onOrgMsaChange,
           blockPublishingOnToS: t.blockPublishingOnToS
         })]
       }), this.renderPricingSection(t, i), jsxs(_$$A13, {
         name: 'advanced',
         title: getI18nString('community.publishing.advanced'),
-        numErrors: $W(o, i) + (this.hasManifestError(i) ? 1 : 0) + (a.missingNetworkAccess ? 1 : 0),
+        numErrors: countEnabledFeatures(o, i) + (this.hasManifestError(i) ? 1 : 0) + (a.missingNetworkAccess ? 1 : 0),
         defaultActive: this.state.advancedAccordionDefaultActive,
         children: [jsx(_$$A24, {
           value: t.supportContact,
@@ -3241,7 +3241,7 @@ class iW extends Component {
     };
     let i = this.props.publishingState.status?.code === UploadStatusEnum.UPLOADING;
     let n = !1;
-    this.hasFormErrors(errors) || i ? n = !0 : metadata.blockPublishingOnToS && xw(this.props.permissionsState) && (n = !0);
+    this.hasFormErrors(errors) || i ? n = !0 : metadata.blockPublishingOnToS && needsToAcceptCommunityTOS(this.props.permissionsState) && (n = !0);
     let a = jsx(Fragment, {
       children: jsx('div', {
         onPaste: this.snapshotUploadPaste,

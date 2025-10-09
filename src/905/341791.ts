@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { p as _$$p } from "../905/896627";
 import { unsetSymbol } from "../905/17894";
 import { canSetFieldValue, getFieldValueOrDefault } from "../905/497882";
-import { nK, Gp } from "../figma_app/599979";
+import { cleanupMediaObjectUrls, processCarouselMedia } from "../figma_app/599979";
 import { hasId, hasBuffer } from "../figma_app/809727";
 var a = r;
 var o = s;
@@ -92,7 +92,7 @@ export function $$b0(e, t) {
     } = e;
     if (currentValue !== unsetSymbol) {
       o()(r.current, ...currentValue.allMedia).filter(e => hasBuffer(e) && (i.status !== APILoadingStatus.SUCCESS || e.url !== i.value?.url)).forEach(e => {
-        nK(e);
+        cleanupMediaObjectUrls(e);
       });
       return () => {
         r.current = currentValue.allMedia;
@@ -168,7 +168,7 @@ export function $$b0(e, t) {
   let E = useMemo(() => {
     if (s) return async function (t) {
       try {
-        let i = await Gp([t], e.deps.allowVideos, 1);
+        let i = await processCarouselMedia([t], e.deps.allowVideos, 1);
         if (0 === i.length) return;
         s(i[0]);
       } catch (e) {
@@ -188,7 +188,7 @@ export function $$b0(e, t) {
     } = e;
     return async function (n) {
       try {
-        let r = await Gp(n, e.deps.allowVideos, 1 / 0);
+        let r = await processCarouselMedia(n, e.deps.allowVideos, 1 / 0);
         if (0 === r.length) return;
         setValue({
           ...currentValue,

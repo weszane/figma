@@ -6,7 +6,7 @@ import { isSubscriptionActive, isRecentActivePurchase } from "../figma_app/80829
 import { getResourceName } from "../figma_app/777551";
 import { hasContent, getMainContent } from "../figma_app/427318";
 import { bb } from "../figma_app/399472";
-import { MK, Gl } from "../figma_app/599979";
+import { getPublisherStatus, DISPLAY_ONLY_STATUSES } from "../figma_app/599979";
 import { selectCurrentUser } from "../905/372672";
 import { hasClientMeta, isWidget, isPlugin, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { d as _$$d, NY, EV } from "../5430/309696";
@@ -15,9 +15,9 @@ export function $$h0({
 }) {
   let t = useDispatch();
   let r = useSelector(e => e.authedActiveCommunityProfile);
-  let h = useSelector(t => MK(t, e));
+  let h = useSelector(t => getPublisherStatus(t, e));
   let x = hasContent(e) ? getMainContent(e) : e;
-  let f = Gl.includes(h) && (e.community_publishers?.accepted || []).length > 1 && r?.primary_user_id;
+  let f = DISPLAY_ONLY_STATUSES.includes(h) && (e.community_publishers?.accepted || []).length > 1 && r?.primary_user_id;
   let y = useCallback(() => {
     hasClientMeta(x) ? t(bb({
       hub_file_id: x.id

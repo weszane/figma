@@ -12,7 +12,7 @@ import { FX } from "../figma_app/12491";
 import { sF } from "../figma_app/777207";
 import { DefaultLibraryIcon } from "../905/511388";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
-import { Sh } from "../figma_app/803787";
+import { hasComponentOrModuleItemsAtom } from "../figma_app/803787";
 import { I as _$$I } from "../figma_app/130633";
 import { g as _$$g } from "../905/505662";
 import { usKeyboardFocusHandler } from "../905/286442";
@@ -29,7 +29,7 @@ export function $$x0({
   dropdownDataTestId: C
 }) {
   let T = useOpenFileLibraryKey() ?? _$$l("");
-  let k = useAtomWithSubscription(Sh);
+  let k = useAtomWithSubscription(hasComponentOrModuleItemsAtom);
   let {
     libraries,
     presets,

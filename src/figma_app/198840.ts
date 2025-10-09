@@ -1,20 +1,21 @@
-import { d as _$$d } from '../905/44199';
-import { ignoreCommandOrShift } from '../905/63728';
-import { getI18nString } from '../905/303541';
-import { customHistory } from '../905/612521';
-import { getCommunityFileUrl } from '../905/612685';
-import { TeamOrgType } from '../figma_app/10554';
-import { FFileType, FPublicationStatusType, FTemplateCategoryType } from '../figma_app/191312';
-import { isValidEmail } from '../figma_app/416935';
-import { throwTypeError } from '../figma_app/465776';
-import { buildCarouselMedia } from '../figma_app/471982';
-import { gO, Ii, Tn, vC, xw } from '../figma_app/599979';
-import { PreviewMode } from '../figma_app/707808';
-import { defaultTemplate, trimOrEmpty, getValueOrDefault, validatePublisherCount } from '../figma_app/740025';
-import { Rs } from '../figma_app/761870';
-import { PresentationValidationStatus, PrototypingTsApi } from '../figma_app/763686';
-import { centsToDollars, isNotInteger, isPriceOutOfRange, MIN_PRICE } from '../figma_app/808294';
-import { isValidUrl } from '../figma_app/930338';
+import { d as _$$d } from '../905/44199'
+import { ignoreCommandOrShift } from '../905/63728'
+import { getI18nString } from '../905/303541'
+import { customHistory } from '../905/612521'
+import { getCommunityFileUrl } from '../905/612685'
+import { TeamOrgType } from '../figma_app/10554'
+import { FFileType, FPublicationStatusType, FTemplateCategoryType } from '../figma_app/191312'
+import { isValidEmail } from '../figma_app/416935'
+import { throwTypeError } from '../figma_app/465776'
+import { buildCarouselMedia } from '../figma_app/471982'
+import { extractWorkspaceId, getDefaultHubFileAuthor, isWorkspaceMatch, needsToAcceptCommunityTOS, validateCarouselImages } from '../figma_app/599979'
+import { PreviewMode } from '../figma_app/707808'
+import { defaultTemplate, getValueOrDefault, trimOrEmpty, validatePublisherCount } from '../figma_app/740025'
+import { Rs } from '../figma_app/761870'
+import { PresentationValidationStatus, PrototypingTsApi } from '../figma_app/763686'
+import { centsToDollars, isNotInteger, isPriceOutOfRange, MIN_PRICE } from '../figma_app/808294'
+import { isValidUrl } from '../figma_app/930338'
+
 let b = {
   id: '',
   hub_file_id: '',
@@ -26,15 +27,15 @@ let b = {
   creator_policy: '',
   created_at: '',
   valid_prototype: !0,
-  thumbnail_guid: null
-};
+  thumbnail_guid: null,
+}
 let T = {
   id: '',
   category_id: null,
   creator: {
     id: '',
     handle: '',
-    img_url: ''
+    img_url: '',
   },
   publisher: {
     is_restricted_by_current_user: !1,
@@ -51,11 +52,11 @@ let T = {
     following_count: 0,
     entity_type: TeamOrgType.USER,
     badges: [],
-    description: ''
+    description: '',
   },
   community_publishers: {
     accepted: [],
-    pending: []
+    pending: [],
   },
   versions: {},
   current_hub_file_version_id: '',
@@ -74,66 +75,69 @@ let T = {
   thumbnail_is_set: !1,
   comments_setting: null,
   publishing_status: FPublicationStatusType.APPROVED_PUBLIC,
-  badges: []
-};
-var $$I12 = (e => (e.KEY = 'is-community-duplicate', e.VALUE = '1', e))($$I12 || {});
-var $$S2 = (e => (e.CURRENT_FILE = 'currentFile', e.NEW_FILE = 'newFile', e))($$S2 || {});
+  badges: [],
+}
+var $$I12 = (e => (e.KEY = 'is-community-duplicate', e.VALUE = '1', e))($$I12 || {})
+var $$S2 = (e => (e.CURRENT_FILE = 'currentFile', e.NEW_FILE = 'newFile', e))($$S2 || {})
 export function $$v4(e) {
   switch (e) {
     case 'currentFile':
     default:
-      return getI18nString('browse_templates_modal.add_template');
+      return getI18nString('browse_templates_modal.add_template')
     case 'newFile':
-      return getI18nString('browse_templates_modal.use_template');
+      return getI18nString('browse_templates_modal.use_template')
   }
 }
 export function $$A1(e, t) {
-  return getValueOrDefault(e, t, T);
+  return getValueOrDefault(e, t, T)
 }
 export function $$x6(e, t) {
-  let r = t || e.current_hub_file_version_id;
-  return getValueOrDefault(r, e.versions, b);
+  let r = t || e.current_hub_file_version_id
+  return getValueOrDefault(r, e.versions, b)
 }
 export function $$N15(e) {
-  if (!e) return FTemplateCategoryType.CANVAS;
+  if (!e)
+    return FTemplateCategoryType.CANVAS
   switch (e) {
     case FFileType.DESIGN:
-      return FTemplateCategoryType.CANVAS;
+      return FTemplateCategoryType.CANVAS
     case FFileType.WHITEBOARD:
-      return FTemplateCategoryType.WHITEBOARD;
+      return FTemplateCategoryType.WHITEBOARD
     case FFileType.SLIDES:
-      return FTemplateCategoryType.SLIDE_TEMPLATE;
+      return FTemplateCategoryType.SLIDE_TEMPLATE
     case FFileType.SITES:
-      return FTemplateCategoryType.SITE_TEMPLATE;
+      return FTemplateCategoryType.SITE_TEMPLATE
     case FFileType.COOPER:
-      return FTemplateCategoryType.COOPER_TEMPLATE_FILE;
+      return FTemplateCategoryType.COOPER_TEMPLATE_FILE
     case FFileType.FIGMAKE:
-      return FTemplateCategoryType.FIGMAKE_TEMPLATE;
+      return FTemplateCategoryType.FIGMAKE_TEMPLATE
     default:
-      throwTypeError(e);
+      throwTypeError(e)
   }
 }
 export function $$C11(e, t, r, n) {
-  let a;
-  let s = e.figFilePublishedAsHubFile[t];
-  let o = $$A1(s, e.hubFiles);
-  let l = $$x6(o);
-  let m = defaultTemplate;
-  let g = e.fileByKey[t];
-  !n && !r && (e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id) && (a = Tn(e.authedActiveCommunityProfile));
-  let y = gO(o, g, e, a);
-  let b = r ? o.viewer_mode : $$N15(g.editor_type);
-  !r && o.viewer_mode === FTemplateCategoryType.PROTOTYPE && n && PrototypingTsApi?.firstPagePrototypeStatus() === PresentationValidationStatus.VALID && (b = FTemplateCategoryType.PROTOTYPE);
+  let a
+  let s = e.figFilePublishedAsHubFile[t]
+  let o = $$A1(s, e.hubFiles)
+  let l = $$x6(o)
+  let m = defaultTemplate
+  let g = e.fileByKey[t]
+  !n && !r && (e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id) && (a = extractWorkspaceId(e.authedActiveCommunityProfile))
+  let y = getDefaultHubFileAuthor(o, g, e, a)
+  let b = r ? o.viewer_mode : $$N15(g.editor_type)
+  !r && o.viewer_mode === FTemplateCategoryType.PROTOTYPE && n && PrototypingTsApi?.firstPagePrototypeStatus() === PresentationValidationStatus.VALID && (b = FTemplateCategoryType.PROTOTYPE)
   let T = {
     ...Rs(),
     tokens: (o.community_publishers ? [...o.community_publishers.accepted, ...(o.community_publishers.pending || [])] : []).reduce((t, r) => {
-      let n = e.authedProfilesById[r.id];
-      return Ii(n, y) ? t : t.concat([{
-        state: _$$d.OK,
-        content: r
-      }]);
-    }, [])
-  };
+      let n = e.authedProfilesById[r.id]
+      return isWorkspaceMatch(n, y)
+        ? t
+        : t.concat([{
+            state: _$$d.OK,
+            content: r,
+          }])
+    }, []),
+  }
   return {
     name: l.name || (g.name === getI18nString('fullscreen.fullscreen_view_selector.untitled') ? '' : g.name),
     description: l.description || m.description,
@@ -146,79 +150,82 @@ export function $$C11(e, t, r, n) {
     author: y,
     publishers: T,
     commentsSetting: o.comments_setting || m.commentsSetting,
-    blockPublishingOnToS: xw(e),
+    blockPublishingOnToS: needsToAcceptCommunityTOS(e),
     price: centsToDollars(o.monetized_resource_metadata),
     isPaid: !!o.monetized_resource_metadata,
     supportContact: o.support_contact || e.user?.email,
     carouselMedia: buildCarouselMedia(o),
-    coverImageCarouselMediaId: o.cover_image_carousel_media_id
-  };
+    coverImageCarouselMediaId: o.cover_image_carousel_media_id,
+  }
 }
 export function $$w10(e, t) {
-  return e ? t ? isPriceOutOfRange(t) ? t < MIN_PRICE ? getI18nString('community.seller.paid_resource_minimum_err') : getI18nString('community.seller.paid_resource_maximum_err') : isNotInteger(t) ? getI18nString('community.seller.prices_must_follow_format') : void 0 : getI18nString('community.publishing.price_is_required_for_paid_resources') : void 0;
+  return e ? t ? isPriceOutOfRange(t) ? t < MIN_PRICE ? getI18nString('community.seller.paid_resource_minimum_err') : getI18nString('community.seller.paid_resource_maximum_err') : isNotInteger(t) ? getI18nString('community.seller.prices_must_follow_format') : void 0 : getI18nString('community.publishing.price_is_required_for_paid_resources') : void 0
 }
 export function $$O16(e) {
-  let t = trimOrEmpty(e || null).length;
-  return t === 0 ? getI18nString('community.publishing.name_must_not_be_empty') : t < 4 ? getI18nString('community.publishing.name_must_be_4_characters_long') : t > 100 ? getI18nString('community.publishing.name_must_be_at_most_100_characters_long') : void 0;
+  let t = trimOrEmpty(e || null).length
+  return t === 0 ? getI18nString('community.publishing.name_must_not_be_empty') : t < 4 ? getI18nString('community.publishing.name_must_be_4_characters_long') : t > 100 ? getI18nString('community.publishing.name_must_be_at_most_100_characters_long') : void 0
 }
 export function $$R14(e) {
-  if (trimOrEmpty(e || null).length > 1e4) return getI18nString('community.publishing.description_must_be_at_most_10000_characters_long');
+  if (trimOrEmpty(e || null).length > 1e4)
+    return getI18nString('community.publishing.description_must_be_at_most_10000_characters_long')
 }
 export function $$L3(e) {
-  if (trimOrEmpty(e || null).length > 1e4) return getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long');
+  if (trimOrEmpty(e || null).length > 1e4)
+    return getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long')
 }
 export function $$P7(e, t) {
-  return e && !t ? getI18nString('community.publishing.support_contact_must_not_be_empty') : !t || isValidEmail(t) || isValidUrl(t) ? void 0 : getI18nString('community.publishing.support_contact_must_be_a_valid_email_or_url');
+  return e && !t ? getI18nString('community.publishing.support_contact_must_not_be_empty') : !t || isValidEmail(t) || isValidUrl(t) ? void 0 : getI18nString('community.publishing.support_contact_must_be_a_valid_email_or_url')
 }
 export function $$D9(e) {
-  if (!e) return getI18nString('community.publishing.category_cant_be_empty');
+  if (!e)
+    return getI18nString('community.publishing.category_cant_be_empty')
 }
 export function $$k8(e) {
   let t = {
     name: $$O16(e.name),
     description: $$R14(e.description),
-    creatorPolicy: $$L3(e.creatorPolicy)
-  };
-  e.publisherIds && (t.publisherIds = validatePublisherCount(e.publisherIds.length) || void 0);
-  t.carouselMedia = vC(e.carouselMedia);
-  t.categoryId = $$D9(e.categoryId);
-  let r = 'isPaid' in e && !!e.isPaid;
-  t.price = $$w10(r, e.price);
-  t.supportContact = $$P7(r, e.supportContact);
-  Object.keys(t).forEach(e => !t[e] && delete t[e]);
-  return t;
+    creatorPolicy: $$L3(e.creatorPolicy),
+  }
+  e.publisherIds && (t.publisherIds = validatePublisherCount(e.publisherIds.length) || void 0)
+  t.carouselMedia = validateCarouselImages(e.carouselMedia)
+  t.categoryId = $$D9(e.categoryId)
+  let r = 'isPaid' in e && !!e.isPaid
+  t.price = $$w10(r, e.price)
+  t.supportContact = $$P7(r, e.supportContact)
+  Object.keys(t).forEach(e => !t[e] && delete t[e])
+  return t
 }
 export function $$M13(e) {
-  return e === PreviewMode.FULLSCREEN || e === PreviewMode.FULLSCREEN_WITH_COMMENTS;
+  return e === PreviewMode.FULLSCREEN || e === PreviewMode.FULLSCREEN_WITH_COMMENTS
 }
 export function $$F0(e) {
-  return !!e && !e.unpublished_at;
+  return !!e && !e.unpublished_at
 }
 export function $$j17(e) {
-  return !!e && e.publishing_status === FPublicationStatusType.APPROVED_PUBLIC;
+  return !!e && e.publishing_status === FPublicationStatusType.APPROVED_PUBLIC
 }
 export function $$U5(e) {
-  let t = getCommunityFileUrl(e);
-  return ignoreCommandOrShift(e => {
-    e?.preventDefault();
-    customHistory.redirect(t, '_blank');
-  });
+  let t = getCommunityFileUrl(e)
+  return ignoreCommandOrShift((e) => {
+    e?.preventDefault()
+    customHistory.redirect(t, '_blank')
+  })
 }
-export const HF = $$F0;
-export const M3 = $$A1;
-export const RD = $$S2;
-export const Rj = $$L3;
-export const Ve = $$v4;
-export const Vz = $$U5;
-export const a6 = $$x6;
-export const al = $$P7;
-export const bH = $$k8;
-export const cU = $$D9;
-export const cp = $$w10;
-export const ow = $$C11;
-export const pt = $$I12;
-export const t0 = $$M13;
-export const vK = $$R14;
-export const x0 = $$N15;
-export const yS = $$O16;
-export const zv = $$j17;
+export const HF = $$F0
+export const M3 = $$A1
+export const RD = $$S2
+export const Rj = $$L3
+export const Ve = $$v4
+export const Vz = $$U5
+export const a6 = $$x6
+export const al = $$P7
+export const bH = $$k8
+export const cU = $$D9
+export const cp = $$w10
+export const ow = $$C11
+export const pt = $$I12
+export const t0 = $$M13
+export const vK = $$R14
+export const x0 = $$N15
+export const yS = $$O16
+export const zv = $$j17

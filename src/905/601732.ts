@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { UserAvatar, TeamAvatar } from "../905/590952";
 import { getFieldValueOrDefault, canSetFieldValue } from "../905/497882";
 import { LG } from "../905/448440";
-import { jr, j4, Z7, MO } from "../figma_app/599979";
+import { isUserWorkspace, getDebugWorkspaceInfo, isTeamWorkspace, isOrgWorkspace } from "../figma_app/599979";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 import { TeamOrgType } from "../figma_app/10554";
 import { FieldContainer } from "../905/567946";
@@ -21,7 +21,7 @@ export function $$$$A0({
     existingResourceContent
   } = e.deps;
   let a = getFieldValueOrDefault(e, void 0);
-  let s = useMemo(() => LG(existingResourceContent) ? allowedAuthors.filter(e => jr(e)) : [...allowedAuthors].sort((e, t) => v(e) - v(t)), [allowedAuthors, existingResourceContent]);
+  let s = useMemo(() => LG(existingResourceContent) ? allowedAuthors.filter(e => isUserWorkspace(e)) : [...allowedAuthors].sort((e, t) => v(e) - v(t)), [allowedAuthors, existingResourceContent]);
   return existingResourceContent && isWidgetOrPlugin(existingResourceContent) && !canSetFieldValue(e) ? jsx(x, {
     existingResourceContent
   }) : jsx(FieldContainer, {
@@ -45,7 +45,7 @@ function y({
   author: e,
   existingResourceContent: t
 }) {
-  let i = j4(e);
+  let i = getDebugWorkspaceInfo(e);
   let r = $$b1(e);
   return i ? jsxs("label", {
     className: uK,
@@ -66,13 +66,13 @@ function y({
   }) : null;
 }
 export function $$b1(e) {
-  return jr(e) ? `user-${e.user_id}` : Z7(e) ? `team-${e.team_id}` : MO(e) ? `org-${e.org_id}` : void throwTypeError(e);
+  return isUserWorkspace(e) ? `user-${e.user_id}` : isTeamWorkspace(e) ? `team-${e.team_id}` : isOrgWorkspace(e) ? `org-${e.org_id}` : void throwTypeError(e);
 }
-let v = e => jr(e) ? 1 : Z7(e) ? 2 : MO(e) ? 3 : void throwTypeError(e);
-let I = e => jr(e) ? getI18nString("community.publishing.individual_creator") : Z7(e) ? getI18nString("community.publishing.team_author") : MO(e) ? getI18nString("community.publishing.organization_author") : throwTypeError(e);
-let E = (e, t) => jr(e) ? jsx(UserAvatar, {
+let v = e => isUserWorkspace(e) ? 1 : isTeamWorkspace(e) ? 2 : isOrgWorkspace(e) ? 3 : void throwTypeError(e);
+let I = e => isUserWorkspace(e) ? getI18nString("community.publishing.individual_creator") : isTeamWorkspace(e) ? getI18nString("community.publishing.team_author") : isOrgWorkspace(e) ? getI18nString("community.publishing.organization_author") : throwTypeError(e);
+let E = (e, t) => isUserWorkspace(e) ? jsx(UserAvatar, {
   user: t
-}) : Z7(e) || MO(e) ? jsx(TeamAvatar, {
+}) : isTeamWorkspace(e) || isOrgWorkspace(e) ? jsx(TeamAvatar, {
   team: t
 }) : throwTypeError(e);
 function x({

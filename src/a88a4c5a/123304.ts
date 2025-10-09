@@ -337,7 +337,7 @@ import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { zA } from '../figma_app/791586';
 import { Fj } from '../figma_app/793429';
 import { iP as _$$iP, Dj } from '../figma_app/803054';
-import { $c, qN } from '../figma_app/803787';
+import { hasAnyPublishableContentAtom, hasPendingChangesAtom } from '../figma_app/803787';
 import { eBU } from '../figma_app/822011';
 import { defaultLibraryKeyAtom } from '../figma_app/825489';
 import { oV as _$$oV, FR, xp } from '../figma_app/827216';
@@ -3375,7 +3375,7 @@ function nG({
     url,
     shouldCover
   } = _$$t2();
-  let s = useAtomWithSubscription($c);
+  let s = useAtomWithSubscription(hasAnyPublishableContentAtom);
   return l && s ? jsx('div', {
     'data-testid': 'design-linter-local-library-item',
     'children': jsx(nK, {
@@ -3601,7 +3601,7 @@ function nQ() {
   let _ = nL(usedInFileLibraries);
   let b = _$$sf();
   let j = checkedLibraryKeys.size === 0;
-  let v = useAtomWithSubscription($c);
+  let v = useAtomWithSubscription(hasAnyPublishableContentAtom);
   let C = y !== _$$oV.CONTENT && _ !== _$$oV.CONTENT && !v;
   let k = y === _$$oV.ERROR || _ === _$$oV.ERROR;
   let E = nx()(checkedLibraryKeys, f);
@@ -3628,7 +3628,7 @@ function nQ() {
     let s = e === FR.LIBRARY_SELECTOR_INITIAL;
     let o = t.status === 'loaded' && r.current !== 'loaded';
     let a = useRef(!0);
-    let d = useAtomWithSubscription(qN);
+    let d = useAtomWithSubscription(hasPendingChangesAtom);
     let u = useAtomWithSubscription(openFileKeyAtom);
     useEffect(() => {
       if (s && (o || t.status === 'loaded' && a.current)) {
@@ -4682,12 +4682,12 @@ function iJ() {
       subscribedLibraries
     } = nw();
     let t = selectCurrentFile();
-    let l = useAtomWithSubscription($c);
+    let l = useAtomWithSubscription(hasAnyPublishableContentAtom);
     let {
       url,
       shouldCover
     } = _$$t2();
-    let s = useAtomWithSubscription(qN);
+    let s = useAtomWithSubscription(hasPendingChangesAtom);
     let o = useAtomWithSubscription(openFileKeyAtom);
     let a = subscribedLibraries?.data?.map(e => {
       let t = isPublishedTeamLibrary(e);

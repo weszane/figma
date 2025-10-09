@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { getInitialOptions } from "../figma_app/169182";
 import { captureException, reportError } from "../905/11";
 import { getImageManager } from "../figma_app/624361";
-import { z } from "../905/931953";
+import { siteAPIService } from "../905/931953";
 import { F } from "../905/672930";
 let p = "sts_asset_cache_";
 class _ {
@@ -194,7 +194,7 @@ let I = class {
   async fetchAndCacheMetadata(e, t) {
     try {
       if (this.cache.has(t)) return;
-      let r = (await z.getFileVideoMetadata({
+      let r = (await siteAPIService.getFileVideoMetadata({
         fileKey: e,
         sha1: t
       })).data.meta.metadata;

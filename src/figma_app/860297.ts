@@ -1,12 +1,12 @@
 import { liveStoreInstance } from "../905/713695";
-import { z } from "../905/931953";
+import { siteAPIService } from "../905/931953";
 let $$a0 = liveStoreInstance.Query({
-  fetch: async e => (await z.getDomainDNSRecords({
+  fetch: async e => (await siteAPIService.getDomainDNSRecords({
     fileKey: e
   })).data.meta
 });
 let $$s1 = liveStoreInstance.Query({
-  fetch: async e => (await z.customDomainLimitReached({
+  fetch: async e => (await siteAPIService.customDomainLimitReached({
     fileKey: e
   })).data.meta,
   output: ({

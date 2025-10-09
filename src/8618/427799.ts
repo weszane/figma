@@ -20,7 +20,7 @@ import { _ as _$$_ } from "../8618/537054";
 import { j as _$$j } from "../8618/256463";
 import { j as _$$j2, p as _$$p } from "../8618/896045";
 import { R as _$$R } from "../7a72fc59/583347";
-import { Ku } from "../figma_app/755939";
+import { isTemplateSubMenuOpen } from "../figma_app/755939";
 import { XH } from "../1250/322393";
 import { useCooperFrameSelectionInfo } from "../figma_app/334505";
 import { EditorPreferencesApi } from "../figma_app/740163";
@@ -105,7 +105,7 @@ function z({
 }) {
   let l = XH();
   let [s, o] = useState("");
-  let [a, c] = useAtomValueAndSetter(Ku);
+  let [a, c] = useAtomValueAndSetter(isTemplateSubMenuOpen);
   let d = trackFileEventWithStore();
   let m = useCallback(e => {
     isValidValue(l) && e !== l && (d("cooper_template_asset_type_changed", {

@@ -11,7 +11,7 @@ import { addTemplateToRecentsThunkAction } from "../figma_app/147952";
 import { fullscreenValue } from "../figma_app/455680";
 import { FDocumentType, ITemplateType } from "../905/862883";
 import { Y } from "../figma_app/526287";
-import { q } from "../figma_app/446378";
+import { templateService } from "../figma_app/446378";
 import { Xi } from "../figma_app/634146";
 var $$E2 = (e => (e.OVERLAY_MODAL = "OVERLAY_MODAL", e.PICKER = "PICKER", e.BOARD_TO_DECK = "BOARD_TO_DECK", e.OUTLINE_TO_DECK = "OUTLINE_TO_DECK", e))($$E2 || {});
 function y(e, t) {
@@ -148,13 +148,13 @@ export function $$x5({
   }));
 }
 export async function $$N4(e) {
-  return !!e && !e.parentOrgId && !!e.teamId && !!e.editorType && (await q.getTeamTemplateLimitReached({
+  return !!e && !e.parentOrgId && !!e.teamId && !!e.editorType && (await templateService.getTeamTemplateLimitReached({
     teamId: e.teamId,
     editorType: e.editorType
   })).data.meta.template_limit_reached;
 }
 export async function $$C3(e) {
-  return !!e && !e.parent_org_id && !!e.team_id && !!e.editor_type && (await q.getTeamTemplateLimitReached({
+  return !!e && !e.parent_org_id && !!e.team_id && !!e.editor_type && (await templateService.getTeamTemplateLimitReached({
     teamId: e.team_id,
     editorType: e.editor_type
   })).data.meta.template_limit_reached;

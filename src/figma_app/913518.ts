@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SessionStatus } from "../figma_app/763686";
 import { atom, Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackFileEventWithUser } from "../figma_app/901889";
-import { H1 } from "../figma_app/124493";
+import { setVotingSessionInfo } from "../figma_app/124493";
 import { useIsVotingSessionJoined } from "../905/486443";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { jo } from "../figma_app/629335";
@@ -47,7 +47,7 @@ export function $$b5() {
     e({
       type: "CLOSE"
     });
-    o.votingStage === SessionStatus.ENDED && r(H1({
+    o.votingStage === SessionStatus.ENDED && r(setVotingSessionInfo({
       votingStage: SessionStatus.NO_SESSION
     }));
   }, [t, e, r, o]);

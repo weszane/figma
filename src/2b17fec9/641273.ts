@@ -9,7 +9,7 @@ import { SvgComponent } from "../905/714743";
 import { L as _$$L } from "../figma_app/819472";
 import { renderI18nText } from "../905/303541";
 import { stopChattingThunk } from "../figma_app/308685";
-import { H1 } from "../figma_app/124493";
+import { setVotingSessionInfo } from "../figma_app/124493";
 import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { LR } from "../figma_app/120210";
 import { useIsVotingSessionJoined } from "../905/486443";
@@ -42,7 +42,7 @@ let $$R0 = memo(function () {
   let u = useSelector(e => e.universalInsertModal.showing);
   let h = bu();
   let L = useCallback(() => {
-    o && e(H1({
+    o && e(setVotingSessionInfo({
       votingStage: SessionStatus.NOT_JOINED
     }));
     e(stopChattingThunk());

@@ -120,7 +120,7 @@ import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 import { FMemberRoleType, FOrganizationLevelType, FPlanAccessType, FPlanFeatureType, FPlanNameType, FProductAccessType, FUserRoleType, FUserTypeClassification } from '../figma_app/191312';
 import { getProductAccessTypeByKey } from '../figma_app/217457';
 import { c$, gw } from '../figma_app/236327';
-import { Bg } from '../figma_app/246699';
+import { isPublicLinkBanned } from '../figma_app/246699';
 import { N as _$$N } from '../figma_app/268271';
 import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useSubscription } from '../figma_app/288654';
@@ -2196,14 +2196,14 @@ let aZ = withTracking(e => {
     children: [jsx(aV, {
       user: e.user,
       orgUser: e.orgUser
-    }), !Bg(e.org.shared_container_setting) && jsx('p', {
+    }), !isPublicLinkBanned(e.org.shared_container_setting) && jsx('p', {
       className: aJ,
       children: i ? renderI18nText('members_tab.member_modal.guest_access.can_also_view_public_links_label', {
         name: e.user.handle
       }) : renderI18nText('members_tab.member_modal.guest_access.can_view_public_links_label', {
         name: e.user.handle
       })
-    }), Bg(e.org.shared_container_setting) && !i && jsx('p', {
+    }), isPublicLinkBanned(e.org.shared_container_setting) && !i && jsx('p', {
       className: aJ,
       children: renderI18nText('members_tab.member_modal.guest_access.no_access_label', {
         name: e.user.handle

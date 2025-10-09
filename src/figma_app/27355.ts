@@ -81,7 +81,7 @@ export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { de
     }
   }, [store, atomInstance, deferToFrame])
   useDebugValue(value)
-  return value instanceof Promise ? handlePromiseStatus(value as any)  : value
+  return value instanceof Promise ? handlePromiseStatus(value as any) as any  : value
 }
 
 /**
@@ -91,10 +91,10 @@ export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { de
  * @returns [atom value, atom setter]
  * @originalName $$v17
  */
-export function useAtomValueAndSetter<T, Args extends any[]>(
+export function useAtomValueAndSetter<T = any, Args extends any[] = any[]>(
   atomInstance: any,
   options?: { deferToFrame?: boolean },
-): [T | Error, (...args: Args) => void] {
+): [T , (...args: Args) => void] {
   return [useAtomWithSubscription(atomInstance, options), useSetAtom(atomInstance)]
 }
 

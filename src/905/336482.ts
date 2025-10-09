@@ -72,7 +72,7 @@ import { copyTextThunk } from "../figma_app/11182";
 import { hideModal } from "../905/156213";
 import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
-import { Rv, mN } from "../figma_app/599979";
+import { getValidAuthorsForHubFile, getEditors } from "../figma_app/599979";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
@@ -102,7 +102,7 @@ import { nV, bn } from "../905/361060";
 import { m as _$$m3 } from "../905/924751";
 import { aB } from "../905/576221";
 import { u as _$$u } from "../905/747030";
-import { ZS } from "../figma_app/519839";
+import { executePublishProcess } from "../figma_app/519839";
 import { n as _$$n } from "../905/341791";
 import { t as _$$t4 } from "../905/431558";
 import { p as _$$p } from "../905/896627";
@@ -790,10 +790,10 @@ function ej(e) {
   let s = selectUser();
   let o = useSelector(e => getCurrentUserOrgUser(e) ?? void 0, deepEqual);
   let l = useCurrentUserOrg();
-  let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
+  let d = useSelector(e => getValidAuthorsForHubFile(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let c = useSelector(e => e.authedProfilesById);
   let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
-  let p = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
+  let p = useMemo(async () => figFile ? (await getEditors(figFile)) ?? [] : [], [figFile]);
   let {
     publishableComponentNodeIds,
     localComponents
@@ -901,7 +901,7 @@ async function e9({
     } = _$$u(FFileType.SLIDES);
     await new Promise(n => {
       requestAnimationFrame(async () => {
-        await debugState.dispatch(ZS({
+        await debugState.dispatch(executePublishProcess({
           savepointDescription: "Community slide template publish",
           itemsToPublish: new Set(s),
           hubFileId: r.id,
@@ -1774,10 +1774,10 @@ function tc(e) {
   let o = _$$h4(figFile);
   let l = useSelector(e => getCurrentUserOrgUser(e) ?? void 0, deepEqual);
   let d = useCurrentUserOrg();
-  let c = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
+  let c = useSelector(e => getValidAuthorsForHubFile(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let u = useSelector(e => e.authedProfilesById);
   let p = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
-  let h = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
+  let h = useMemo(async () => figFile ? (await getEditors(figFile)) ?? [] : [], [figFile]);
   let g = ti({
     ...e,
     figFilePrototypeStatus: PrototypingTsApi?.firstPagePrototypeStatus(),

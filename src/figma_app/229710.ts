@@ -17,7 +17,7 @@ import { useSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues, u
 import { SG } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { useCachedSubtree } from "../figma_app/679183";
-import { cM } from "../figma_app/803787";
+import { selectStyledLibraryItemsWithStatus } from "../figma_app/803787";
 import { selectSceneGraphSelectionKeys } from "../figma_app/889655";
 import { Tn } from "../figma_app/323320";
 import { $i } from "../figma_app/467440";
@@ -590,7 +590,7 @@ let eI = memo(function ({
 });
 export let $$ex7 = "properties-panel-scroll-container";
 export function $$eN9() {
-  let e = useSelector(cM);
+  let e = useSelector(selectStyledLibraryItemsWithStatus);
   return useMemo(() => Object.values(e).filter(e => !e.deletedFromSceneGraph), [e]);
 }
 let $$eC6 = parsePxInt(wQn);

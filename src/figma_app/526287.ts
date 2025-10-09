@@ -1,8 +1,8 @@
 import { createOptimistThunk } from "../905/350402";
-import { D } from "../905/775228";
-import { q } from "../figma_app/446378";
+import { recentCustomTemplatePutAll } from "../905/775228";
+import { templateService } from "../figma_app/446378";
 export function $$s0(e = {}, t) {
-  if (D.matches(t)) {
+  if (recentCustomTemplatePutAll.matches(t)) {
     let r = {
       ...e
     };
@@ -21,7 +21,7 @@ export let $$o1 = createOptimistThunk(async (e, {
   let n = r.currentUserOrgId;
   let s = r.currentTeamId;
   if (t in r.recentCustomTemplates || !n && !s) return;
-  let o = await q.getRecents({
+  let o = await templateService.getRecents({
     fileKeys: t,
     ...(n ? {
       orgId: n
@@ -29,7 +29,7 @@ export let $$o1 = createOptimistThunk(async (e, {
       teamId: s
     } : {})
   });
-  o && o.data.meta.templates.length > 0 && e.dispatch(D([o.data.meta.templates[0]]));
+  o && o.data.meta.templates.length > 0 && e.dispatch(recentCustomTemplatePutAll([o.data.meta.templates[0]]));
 });
 export const A = $$s0;
 export const Y = $$o1;

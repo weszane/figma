@@ -332,7 +332,7 @@ import { w as _$$w } from '../figma_app/588564';
 import { OX as _$$OX, M6 } from '../figma_app/592180';
 import { sF as _$$sF2, hk, wx, XV } from '../figma_app/593440';
 import { b as _$$b } from '../figma_app/598297';
-import { Dd } from '../figma_app/599979';
+import { isCreator } from '../figma_app/599979';
 import { a as _$$a6, z as _$$z4 } from '../figma_app/601188';
 import { dd as _$$dd, rE as _$$rE, Bu, IH, JB, jh, Lk, P_, Q8, Rt } from '../figma_app/604494';
 import { DP as _$$DP, xk as _$$xk } from '../figma_app/612859';
@@ -9092,7 +9092,7 @@ function lE(e) {
   let h = _$$rH(augmentedExtension);
   let m = xZ(augmentedExtension);
   let f = getUserId();
-  let g = !!publishedExtension && !!f && (isAcceptedPublisher(publishedExtension, f) || Dd(publishedExtension, f));
+  let g = !!publishedExtension && !!f && (isAcceptedPublisher(publishedExtension, f) || isCreator(publishedExtension, f));
   let _ = lx(extension);
   let x = _$$O5({
     extension: augmentedExtension,

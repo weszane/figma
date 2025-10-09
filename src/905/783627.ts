@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { getFieldValueOrDefault } from "../905/497882";
-import { jr } from "../figma_app/599979";
+import { isUserWorkspace } from "../figma_app/599979";
 import { selectUser } from "../905/372672";
 import { FieldContainer } from "../905/567946";
 export function $$c0({
@@ -11,7 +11,7 @@ export function $$c0({
 }) {
   let i = selectUser();
   let c = getFieldValueOrDefault(e, void 0);
-  let u = c && jr(c) && c.user_id === i.id;
+  let u = c && isUserWorkspace(c) && c.user_id === i.id;
   return jsx(FieldContainer, {
     label: getI18nString("community.publishing.payee_label"),
     children: jsxs("div", {

@@ -1,52 +1,76 @@
-import { z } from "../905/239603";
-import { createNoOpValidator } from "../figma_app/181241";
-let a = z.object({
+import { z } from "zod"
+import { createNoOpValidator } from "../figma_app/181241"
+
+// Schema for video upload response data
+const VideoUploadResponseSchema = z.object({
   video: z.object({
     url: z.string(),
     fields: z.record(z.string()),
     blob_upload_commit_key: z.string().optional(),
-    signed_cloudfront_url: z.string().optional().nullable()
+    signed_cloudfront_url: z.string().optional().nullable(),
   }).optional(),
   video_thumbnail: z.object({
     url: z.string(),
     fields: z.record(z.string()),
-    signed_cloudfront_url: z.string().optional().nullable()
-  })
-}).transform(e => {
-  let {
+    signed_cloudfront_url: z.string().optional().nullable(),
+  }),
+}).transform((data) => {
+  const {
     video,
-    video_thumbnail
-  } = e;
+    video_thumbnail,
+  } = data
+
   return {
-    video: video ? {
-      url: video.url,
-      fields: video.fields,
-      blobUploadCommitKey: video.blob_upload_commit_key,
-      signedCloudfrontUrl: video.signed_cloudfront_url
-    } : void 0,
+    video: video
+      ? {
+          url: video.url,
+          fields: video.fields,
+          blobUploadCommitKey: video.blob_upload_commit_key,
+          signedCloudfrontUrl: video.signed_cloudfront_url,
+        }
+      : undefined,
     videoThumbnail: {
       url: video_thumbnail.url,
       fields: video_thumbnail.fields,
-      signedCloudfrontUrl: video_thumbnail.signed_cloudfront_url
-    }
-  };
-});
-let $$s0 = new class {
-  constructor() {
-    this.AdminVideosUploadSchemaValidator = createNoOpValidator();
-    this.getAdminVideosUpload = e => this.AdminVideosUploadSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/admin/${e.resourceType}/${e.id}/videos/${e.sha1}/upload`));
-    this.VideosUploadSchemaValidator = createNoOpValidator();
-    this.getVideoUploadUrl = async e => {
-      let t = await this.VideosUploadSchemaValidator.validate(async ({
-        xr: t
-      }) => await t.post(`/api/${e.resourceType}/${e.id}/videos/upload`, {
-        sha1: e.sha1,
-        thumbnail_sha1: e.thumbnail_sha1
-      }));
-      return a.parse(t.data.meta);
-    };
+      signedCloudfrontUrl: video_thumbnail.signed_cloudfront_url,
+    },
   }
-}();
-export const v = $$s0;
+})
+
+// Type definitions for better type safety
+interface ResourceTypeInfo {
+  resourceType: string
+  id: string
+  sha1: string
+}
+
+type VideoUploadParams = ResourceTypeInfo & {
+  thumbnail_sha1?: string
+}
+
+/**
+ * Video upload service class
+ * Handles video upload operations and validation
+ */
+export const VideoUploadService = new class {
+  AdminVideosUploadSchemaValidator = createNoOpValidator()
+  getAdminVideosUpload = (params: ResourceTypeInfo) =>
+    this.AdminVideosUploadSchemaValidator.validate(async ({
+      xr: client,
+    }) => await client.get(`/api/admin/${params.resourceType}/${params.id}/videos/${params.sha1}/upload`))
+
+  // Validator for regular video uploads
+  VideosUploadSchemaValidator = createNoOpValidator()
+  getVideoUploadUrl = async (params: VideoUploadParams) => {
+    const response = await this.VideosUploadSchemaValidator.validate(async ({
+      xr: client,
+    }) => await client.post(`/api/${params.resourceType}/${params.id}/videos/upload`, {
+      sha1: params.sha1,
+      thumbnail_sha1: params.thumbnail_sha1,
+    }))
+
+    return VideoUploadResponseSchema.parse(response.data.meta)
+  }
+}()
+
+export const v = VideoUploadService

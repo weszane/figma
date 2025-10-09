@@ -21,7 +21,7 @@ import { getFeatureFlags } from '../905/601108';
 import { getSingletonSceneGraph } from '../905/700578';
 import { generateUUIDv4 } from '../905/871474';
 import { J as _$$J } from '../905/916681';
-import { z as _$$z } from '../905/931953';
+import { siteAPIService } from '../905/931953';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { _p, q5 } from '../figma_app/11610';
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
@@ -665,7 +665,7 @@ class ei {
         if (!this.fileKey) return r(new Error('No fileKey set. Unable to retrieve video asset URLs.'));
         let e = p.reduce((e, t) => (t.type === 'VIDEO_ASSET' && e.push(t.hash), e), []);
         if (!MV.instance.hasURLsForHashes(e)) {
-          let e = await _$$z.getFileVideos({
+          let e = await siteAPIService.getFileVideos({
             fileKey: this.fileKey
           });
           MV.instance.setURLs(e.data.meta.videos);

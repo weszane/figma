@@ -2,7 +2,7 @@ import n from "../vendor/260986";
 import { unsetSymbol } from "../905/17894";
 import { getFieldValueOrDefault } from "../905/497882";
 import { MAX_PUBLISHERS_PER_RESOURCE } from "../figma_app/740025";
-import { Ii } from "../figma_app/599979";
+import { isWorkspaceMatch } from "../figma_app/599979";
 import { wC } from "../905/448440";
 var r = n;
 export let $$c0 = {
@@ -20,7 +20,7 @@ export let $$c0 = {
       ...e,
       isPending: !0
     }))];
-    return 0 === s.length ? [] : i.currentValue === unsetSymbol ? unsetSymbol : s.filter(e => void 0 !== i.currentValue && !Ii(t[e.id] || null, i.currentValue));
+    return 0 === s.length ? [] : i.currentValue === unsetSymbol ? unsetSymbol : s.filter(e => void 0 !== i.currentValue && !isWorkspaceMatch(t[e.id] || null, i.currentValue));
   },
   validate: async ({
     authedProfilesById: e,
@@ -59,7 +59,7 @@ export let $$c0 = {
     }
     let h = getFieldValueOrDefault(i, void 0);
     if (h) {
-      let t = c.find(t => Ii(e[t.id] || null, h));
+      let t = c.find(t => isWorkspaceMatch(e[t.id] || null, h));
       t && u.push({
         key: "AUTHOR_IS_INVALID_COCREATOR",
         data: {

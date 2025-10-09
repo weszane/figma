@@ -18,7 +18,7 @@ import { nM, NJ } from "../figma_app/570630";
 import { B } from "../905/107177";
 import { traverseChildren } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
-import { MH, dM, cM } from "../figma_app/803787";
+import { selectComponentLibraryItemsWithStatus, selectStateGroupLibraryItemsWithStatus, selectStyledLibraryItemsWithStatus } from "../figma_app/803787";
 import { allSubscribedStylesNodeIdsFromLoadedPagesSelector } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { extractComponentInfo } from "../figma_app/407767";
@@ -56,8 +56,8 @@ async function O(e, t, i) {
   let n = (await Eu()).map(e => e.component_key).filter(e => !!e);
   let a = function () {
     let e = debugState.getState();
-    let t = Object.values(MH(e));
-    let i = Object.values(dM(e)).map(e => e.default_state_key);
+    let t = Object.values(selectComponentLibraryItemsWithStatus(e));
+    let i = Object.values(selectStateGroupLibraryItemsWithStatus(e)).map(e => e.default_state_key);
     let n = getSingletonSceneGraph();
     let r = {};
     t.forEach(e => {
@@ -289,7 +289,7 @@ async function z(e) {
           let d = t.a.toFixed(2);
           r.push(`${e.name} : rgba(${s}, ${o}, ${l}, ${d})`);
         });
-        let s = Object.values(cM(t)).filter(e => !e.deletedFromSceneGraph && "FILL" === e.style_type).map(e => e.node_id);
+        let s = Object.values(selectStyledLibraryItemsWithStatus(t)).filter(e => !e.deletedFromSceneGraph && "FILL" === e.style_type).map(e => e.node_id);
         [...new Set([...s, ...allSubscribedStylesNodeIdsFromLoadedPagesSelector(t)])].map(t => e.get(t)).filter(e => !!e && "FILL" === e.styleType).forEach(e => {
           let t = e.fills[0]?.color;
           if (!t) return;
@@ -309,7 +309,7 @@ async function z(e) {
       let n = function () {
         let e = getSingletonSceneGraph();
         let t = debugState.getState();
-        let i = cM(t);
+        let i = selectStyledLibraryItemsWithStatus(t);
         let n = [];
         let r = Object.values(i).filter(e => !e.deletedFromSceneGraph && "TEXT" === e.style_type).map(e => e.node_id);
         [...new Set([...r, ...allSubscribedStylesNodeIdsFromLoadedPagesSelector(t)])].map(t => e.get(t)).filter(e => !!e && "TEXT" === e.type).forEach(e => {

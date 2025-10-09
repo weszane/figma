@@ -7,7 +7,7 @@ import { atom, atomStoreManager } from "../figma_app/27355";
 import { logDebug } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { PK } from "../figma_app/124493";
+import { endVotingSession } from "../figma_app/124493";
 import { Dm } from "../figma_app/8833";
 import { consumptionPaywallUtils } from "../905/224";
 import { HZ } from "../figma_app/186343";
@@ -164,7 +164,7 @@ export function $$O0({
       separator: !0
     }, {
       action: "page-delete",
-      callback: () => s(PK({})),
+      callback: () => s(endVotingSession({})),
       args: {
         nodeIds: [e]
       },
@@ -208,7 +208,7 @@ export function $$O0({
       separator: !0
     }, {
       action: "page-delete",
-      callback: () => i(PK({})),
+      callback: () => i(endVotingSession({})),
       args: {
         nodeIds: s
       },

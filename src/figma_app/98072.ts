@@ -3,7 +3,7 @@ import { FacetType, assetConsumptionBindings } from "../figma_app/763686";
 import { atom, setupCustomAtom } from "../figma_app/27355";
 import { fullscreenValue } from "../figma_app/455680";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { e as _$$e } from "../905/566074";
+import { isPublishableAssetType } from "../905/566074";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export let $$n0;
 let u = {
@@ -20,7 +20,7 @@ let $$p1 = {
       let r = setupRemovableAtomFamily(() => atom({}));
       let n = setupCustomAtom(r, (t, r) => {
         if ("changed" in r) {
-          if (!_$$e(e)) return t;
+          if (!isPublishableAssetType(e)) return t;
           let n = r.changed;
           return {
             ...t,
@@ -47,7 +47,7 @@ let $$p1 = {
       n.onMount = r => {
         var n;
         let i = () => {
-          _$$e(e) && r({
+          isPublishableAssetType(e) && r({
             changed: assetConsumptionBindings?.getAllSubscribedAssetConsumptions(t) ?? []
           });
         };

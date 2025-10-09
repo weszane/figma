@@ -7,7 +7,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { withTrackedClick } from "../figma_app/831799";
 import { u as _$$u } from "../905/389684";
-import { Xh } from "../figma_app/803787";
+import { createHasAnyStagedAssetsAtomFamily } from "../figma_app/803787";
 import { Lc } from "../figma_app/745458";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { D } from "../figma_app/268271";
@@ -25,7 +25,7 @@ export function $$v1({
 }) {
   let r = Xm();
   let i = useAtomWithSubscription(Lc);
-  let o = useAtomWithSubscription(Xh(r));
+  let o = useAtomWithSubscription(createHasAnyStagedAssetsAtomFamily(r));
   let c = getFirstActiveProjectResourceConnection();
   let {
     isLibraryModalShown,
