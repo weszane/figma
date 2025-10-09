@@ -2828,7 +2828,7 @@ interface DevHandoffPreferences {
 }
 
 interface DevHandoffCodeLanguage {
-  pluginLanguage: string
+  pluginLanguage?: string
   id: string
   type: string
 }

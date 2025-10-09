@@ -1,3 +1,4 @@
+import type { DevHandoffCodeLanguage } from '../../types/app'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { D } from '../905/273829'
@@ -7,7 +8,6 @@ import { findCodegenLanguage, getCodegenLanguages } from '../905/661977'
 import { useAtomWithSubscription } from '../figma_app/27355'
 import { isDevModePlugin } from '../figma_app/300692'
 import { findPluginOrWidgetByFileId, getAllPluginVersions, getLocalPlugins, usePluginManifestById } from '../figma_app/844435'
-import type { DevHandoffCodeLanguage } from '../../types/app'
 
 // Origin: /Users/allen/sigma-main/src/figma_app/655139.ts
 // Refactored: Renamed variables, added TypeScript types/interfaces, simplified logic, added comments, improved readability, and ensured type safety.
@@ -19,8 +19,8 @@ import type { DevHandoffCodeLanguage } from '../../types/app'
 // Type definitions for codegen language selection
 export type CodegenLanguageType
   = | 'first-party'
-    | 'local-plugin'
-    | 'published-plugin'
+  | 'local-plugin'
+  | 'published-plugin'
 
 export interface FirstPartyLanguage {
   type: 'first-party'
@@ -65,7 +65,7 @@ export interface SelectedViewState {
 }
 
 // Utility to normalize language input and ensure it's valid
-export function normalizeCodegenLanguage(input: string | DevHandoffCodeLanguage) {
+export function normalizeCodegenLanguage(input: DevHandoffCodeLanguage): DevHandoffCodeLanguage {
   // If input is a string, treat as first-party language
   const language
     = typeof input === 'string'
@@ -91,14 +91,14 @@ export function getDevModePluginManifest(): PluginManifest | null {
 }
 
 // Returns a formatter for codegen language display names
-export function getCodegenLanguageFormatter(language?: PluginManifest | PluginInfo | null) {
+export function getCodegenLanguageFormatter(language?: any) {
   const localPlugins = getLocalPlugins()
   const publishedPlugins = getAllPluginVersions()
 
   // Memoize formatter to avoid unnecessary recalculations
   return useMemo(
     () => ({
-      format(lang: CodegenLanguage | undefined): string {
+      format(lang: any | undefined): string {
         // Handle first-party languages
         if (lang?.type === 'first-party') {
           switch (lang.id) {
@@ -156,7 +156,7 @@ export function getCodegenLanguageFormatter(language?: PluginManifest | PluginIn
 }
 
 // Returns the dev mode plugin manifest for a given codegen language
-export function getDevModePluginFromLanguage(language: CodegenLanguage | null): PluginManifest | null {
+export function getDevModePluginFromLanguage(language: DevHandoffCodeLanguage | null) {
   // Find plugin/widget by file id if not first-party
   const pluginOrWidget = findPluginOrWidgetByFileId(
     language?.type !== 'first-party' ? language?.id ?? '' : '',
@@ -186,13 +186,13 @@ export function getCurrentCodegenLanguageFormatter() {
 }
 
 // Returns the currently selected codegen language
-export function getSelectedCodegenLanguage(): CodegenLanguage {
+export function getSelectedCodegenLanguage() {
   return normalizeCodegenLanguage(getEffectiveCodegenLanguage())
 }
 
 // Returns the effective codegen language, considering app state and view
-export function getEffectiveCodegenLanguage(): string | CodegenLanguage {
-  const atomValue = useAtomWithSubscription(D)
+export function getEffectiveCodegenLanguage() {
+  const atomValue = useAtomWithSubscription<DevHandoffCodeLanguage>(D)
   const devHandoffCodeLanguage = useSelector(
     (state: AppState) => state.mirror.appModel.devHandoffCodeLanguage,
   )
