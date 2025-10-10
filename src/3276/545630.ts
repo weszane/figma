@@ -92,7 +92,7 @@ import { j as _$$j } from '../draftjs_composer/390258';
 import { Dm, Uu, Z7 } from '../figma_app/8833';
 import { isNewCommentId, PIN_ELEMENT_OFFSET, getPinSizeNJv, extractUserIdsFromMessageMeta, isPointInSelectionRect, calculateThreadPinPosition, DEFAULT_PIN_OFFSET } from '../figma_app/12220';
 import { useIsFullscreenSlidesView } from '../figma_app/21029';
-import { useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { IuL, M$q, qoo, u24 } from '../figma_app/27776';
 import { hh } from '../figma_app/42945';
 import { FileCanEdit } from '../figma_app/43951';
@@ -3311,7 +3311,7 @@ export function $$nY1(e, t, n) {
   return t.canEdit || o || a;
 }
 let nJ = e => {
-  let t = Xr(_$$R);
+  let t = useSetAtom(_$$R);
   let n = trackFileEventWithUser();
   return useCallback(o => {
     t(o);

@@ -60,7 +60,7 @@ import { isCommandEvent, isCommandModifier, isExactModifier, isModifierMatch, Ke
 import { T as _$$T2 } from '../905/68180';
 import { calculateTypography } from '../905/71149';
 import { h1 as _$$h, LQ, MX, wm } from '../905/77316';
-import { n as _$$n4 } from '../905/79930';
+import { TeamTemplateType } from '../905/79930';
 import { setSideHandler } from '../905/80656';
 import { generateRetrievingSubscribedComponentsKey } from '../905/92359';
 import { W as _$$W3 } from '../905/95038';
@@ -128,7 +128,7 @@ import { shouldOptimizeForIpad } from '../905/355607';
 import { UpgradeAction } from '../905/370443';
 import { getUserId, selectCurrentUser } from '../905/372672';
 import { $ as _$$$4 } from '../905/379902';
-import { cd as _$$cd } from '../905/381612';
+import { recentItemsThunks } from '../905/381612';
 import { F as _$$F4 } from '../905/382217';
 import { deepEqual } from '../905/382883';
 import { Q as _$$Q4 } from '../905/384324';
@@ -154,7 +154,7 @@ import { useCanShowJoinConfirmation } from '../905/486443';
 import { E as _$$E } from '../905/486517';
 import { hm as _$$hm, Q0, SX } from '../905/487011';
 import { stripHtmlTags } from '../905/491152';
-import { bL as _$$bL, c$ as _$$c$2, l9 as _$$l6, mc as _$$mc, wv as _$$wv2 } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer, SelectRoot } from '../905/493196';
 import { J as _$$J1 } from '../905/494216';
 import { Z as _$$Z5 } from '../905/498136';
 import { handleAtomEvent } from '../905/502364';
@@ -166,7 +166,7 @@ import { h as _$$h9 } from '../905/513745';
 import { C as _$$C } from '../905/520159';
 import { Z as _$$Z } from '../905/521211';
 import { Button, ButtonLargeWide, ButtonWide } from '../905/521428';
-import { jv as _$$jv } from '../905/525678';
+import { processMenuItems as _$$jv } from '../905/525678';
 import { c5 as _$$c4 } from '../905/526509';
 import { R as _$$R4 } from '../905/531474';
 import { h as _$$h5 } from '../905/537858';
@@ -379,7 +379,7 @@ import { canPerformAction, canRunExtensions } from '../figma_app/12796';
 import { y as _$$y5 } from '../figma_app/13082';
 import { DZ, Ff, SO } from '../figma_app/15042';
 import { w5 } from '../figma_app/15924';
-import { um as _$$um, atom, createLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atomWithReducer, atom, createLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { cv$, Dts, fh1, if6, N5f, nwk, S3e, tRI, xM9, Yub } from '../figma_app/27776';
 import { Lz } from '../figma_app/27927';
 import { ec as _$$ec2 } from '../figma_app/29089';
@@ -434,9 +434,9 @@ import { CF, kB } from '../figma_app/201703';
 import { ah as _$$ah, Ai as _$$Ai, oW as _$$oW, sz as _$$sz, Hf } from '../figma_app/204478';
 import { xl as _$$xl } from '../figma_app/212260';
 import { DropdownThemeProvider } from '../figma_app/215667';
-import { sz as _$$sz2 } from '../figma_app/216696';
+import { fetchShelvesForShelfTypeThunk } from '../figma_app/216696';
 import { yU as _$$yU } from '../figma_app/221114';
-import { c$ as _$$c$, gw as _$$gw, wv } from '../figma_app/236327';
+import { OptionComponent, DropdownWithScrim, SeparatorComponent } from '../figma_app/236327';
 import { $s, _U as _$$_U, aq as _$$aq, d5 as _$$d2, du as _$$du, eu as _$$eu, iJ as _$$iJ, lK as _$$lK, lO as _$$lO, m3 as _$$m2, pD as _$$pD, uI as _$$uI, uO as _$$uO2, yR as _$$yR, zk as _$$zk, GN, Jg, KQ, Kv, kv, NQ, OS, Pr, qA, QA, qD, UC, w4, Xi, Yu, YV, Zu } from '../figma_app/240545';
 import { oW as _$$oW3 } from '../figma_app/247611';
 import { cK as _$$cK, dR as _$$dR, hN as _$$hN, Gt, RK } from '../figma_app/248118';
@@ -466,7 +466,7 @@ import { U1 } from '../figma_app/343967';
 import { ek as _$$ek, fT as _$$fT, pf as _$$pf, vD as _$$vD, vo as _$$vo, yw as _$$yw, DP, KE, KG, ko, Ln, N0, Nd, UH, vz, z9 } from '../figma_app/351862';
 import { p as _$$p3 } from '../figma_app/353099';
 import { ResourceType } from '../figma_app/354658';
-import { c1 as _$$c5, Yh as _$$Yh } from '../figma_app/357047';
+import { getKeyboardShortcut, isActionEnabled } from '../figma_app/357047';
 import { useMobileGestures } from '../figma_app/358450';
 import { fc as _$$fc2, Z0 as _$$Z3, DL } from '../figma_app/359152';
 import { $g, gr as _$$gr, nj as _$$nj, OL as _$$OL, qy as _$$qy, Sg, XG } from '../figma_app/360824';
@@ -531,7 +531,7 @@ import { es as _$$es2, fF as _$$fF, FN as _$$FN, fV as _$$fV, hZ as _$$hZ, jJ as
 import { En as _$$En } from '../figma_app/613182';
 import { Yv } from '../figma_app/616107';
 import { WithTrackedButton, WithTrackedIconButton } from '../figma_app/617427';
-import { li as _$$li, tS as _$$tS2, wv as _$$wv, Gi, GR, L_ } from '../figma_app/622574';
+import { usePaginatedTeamTemplates, hasTemplateEntity, useRecentTemplates, getCurrentTemplateEntity, useTeamTemplates, useOrgTemplates } from '../figma_app/622574';
 import { processImageWithThumbnail } from '../figma_app/624361';
 import { $ as _$$$5, jo as _$$jo, Ld } from '../figma_app/629335';
 import { Ru } from '../figma_app/630194';
@@ -1920,7 +1920,7 @@ function tz({
   isFullyExpanded: i = !1
 }) {
   let n = useMemo(() => e.reduce((e, t) => (e[t.title] || (e[t.title] = []), e[t.title]?.push(t), e), {}), [e]);
-  let r = Xr(_$$ah);
+  let r = useSetAtom(_$$ah);
   let [a, s] = useState(!1);
   let d = useCallback(e => {
     s(e > 0);
@@ -1989,7 +1989,7 @@ function t$() {
   let [c, h] = useAtomValueAndSetter(_$$oW);
   let [m, f] = useAtomValueAndSetter(_$$Ai);
   let _ = !!t;
-  let x = Xr(ti);
+  let x = useSetAtom(ti);
   let g = _$$es();
   let [j, b] = useAtomValueAndSetter(_$$sz);
   let y = useRef(null);
@@ -2139,7 +2139,7 @@ function t$() {
 function tY({
   title: e
 }) {
-  let t = Xr(_$$ah);
+  let t = useSetAtom(_$$ah);
   return jsxs('div', {
     className: 'x78zum5 x1q0g3np xe8ttls x9f619 xh8yej3',
     children: [jsx(IconButton, {
@@ -2495,7 +2495,7 @@ function ig({
   }, [t]);
   return jsx(EventShield, {
     eventListeners: ['onClick', 'onMouseDown'],
-    children: jsx(_$$gw, {
+    children: jsx(DropdownWithScrim, {
       'id': n && r || void 0,
       'aria-labelledby': n && a || void 0,
       'className': 'pages_dropdown--dropdown--wiw73',
@@ -3579,7 +3579,7 @@ function n4(e) {
     gif,
     teamId
   } = e;
-  let c = Xr(_$$xw);
+  let c = useSetAtom(_$$xw);
   let u = useDispatch<AppDispatch>();
   let h = useAtomWithSubscription(Zk);
   useEffect(() => {
@@ -4554,10 +4554,10 @@ function a0(e) {
   let i = useSelector(e => e.hubFiles);
   let n = (e.templateSearchResults[_$$e7] || []).map(e => i[e]);
   let r = [...e.teamTemplatesFromSearch.map(e => ({
-    type: _$$n4.TeamTemplate,
+    type: TeamTemplateType.TeamTemplate,
     template: e
   })), ...n.map(e => ({
-    type: _$$n4.HubFile,
+    type: TeamTemplateType.HubFile,
     template: e
   }))];
   let a = Math.max(n.length + e.totalNumTeamTemplatesFromSearch - 4, 0);
@@ -4646,7 +4646,7 @@ function sm() {
           resource: t
         }), t && 'viewer_mode' in t && !!t.viewer_mode && jsx(s_, {
           template: {
-            type: _$$n4.HubFile,
+            type: TeamTemplateType.HubFile,
             template: t
           }
         })]
@@ -4672,7 +4672,7 @@ function sf(e) {
         children: renderI18nText('whiteboard.inserts.templates')
       }), jsx(_$$g3, {
         templates: i.map(e => ({
-          type: _$$n4.HubFile,
+          type: TeamTemplateType.HubFile,
           template: e
         })),
         templateInsertionLocation: FileTypeSwitch.CURRENT_FILE
@@ -4775,7 +4775,7 @@ function s_({
       }),
       bottomRow: jsxs('button', {
         className: ex()(sc, t && _ && 'browse_resources_use_cases--resourceMetadataWithPublisher--V9KyE'),
-        role: e.type === _$$n4.HubFile ? void 0 : 'presentation',
+        role: e.type === TeamTemplateType.HubFile ? void 0 : 'presentation',
         children: [jsx('div', {
           className: ss,
           children: jsx('div', {
@@ -4928,7 +4928,7 @@ function sv({
   let {
     teamTemplates,
     isLoading
-  } = _$$wv(_$$_Y.WHITEBOARD);
+  } = useRecentTemplates(_$$_Y.WHITEBOARD);
   let {
     setSelectedCategory
   } = _$$cX();
@@ -5057,8 +5057,8 @@ function sD() {
 }
 function sP() {
   let e = _$$eE(FDocumentType.FigJam);
-  let t = _$$ik(e, 'templates', (e, t) => !t.some(t => t.type === _$$n4.HubFile && t.template.id === e.id), 4);
-  let i = _$$mk(t, [useIsLoaded(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let t = _$$ik(e, 'templates', (e, t) => !t.some(t => t.type === TeamTemplateType.HubFile && t.template.id === e.id), 4);
+  let i = _$$mk(t, [useIsLoaded(recentItemsThunks.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   })), useIsLoaded(FETCH_FIGJAM_DEFAULT_INSERTS)]);
   return jsx(_$$g3, {
@@ -5093,13 +5093,13 @@ let sG = 'browse_resources_all_tab--divider--lN9-d';
 let sK = 'browse_resources_all_tab--sectionBottomPadding--3jqXm';
 function sW() {
   let e = qZ();
-  let t = Gi();
+  let t = getCurrentTemplateEntity();
   let i = useIsLoading(FETCH_FIGJAM_DEFAULT_INSERTS);
-  let n = useIsLoading(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
+  let n = useIsLoading(recentItemsThunks.fetchWidgetsMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   let r = useIsLoading(_$$fi);
-  let a = useIsLoading(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let a = useIsLoading(recentItemsThunks.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   let s = useSelector(e => e.figjamDefaultInserts.useCases);
@@ -5508,19 +5508,19 @@ function of(e) {
   return (desktopAPIInstance && r.push(oh.DEVELOPMENT), r.length !== 1 || i) ? jsx('div', {
     className: om,
     ref: s,
-    children: jsxs(_$$bL, {
+    children: jsxs(SelectGroupLabel, {
       onChange: e.setCurrentView,
       value: e.currentView,
       recordingKey: 'figjam-browse-modal-main-view-select',
-      children: [jsx(_$$l6, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: getI18nString('universal_insert.view_resources_by')
         })
-      }), jsxs(_$$mc, {
-        children: [r.map(e => jsx(_$$c$2, {
+      }), jsxs(SelectContainer, {
+        children: [r.map(e => jsx(SelectOptionReset, {
           value: e,
           children: n(e)
-        }, e)), i && jsx(_$$wv2, {}), i && jsx(_$$c$2, {
+        }, e)), i && jsx(SelectRoot, {}), i && jsx(SelectOptionReset, {
           value: oh.ORG,
           children: n(oh.ORG)
         })]
@@ -5783,7 +5783,7 @@ function oF() {
   }, []);
   let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   let t = e ? e.id : '';
-  let i = useIsLoading(_$$sz2.loadingKeyForPayload({
+  let i = useIsLoading(fetchShelvesForShelfTypeThunk.loadingKeyForPayload({
     shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL
   }));
   let n = useCurrentFileKey();
@@ -6164,7 +6164,7 @@ function ln(e) {
           insertTemplate({
             template: {
               template: r,
-              type: _$$n4.HubFile
+              type: TeamTemplateType.HubFile
             },
             templateInsertionDirection: CustomPosition.RIGHT,
             triggeredFrom: _,
@@ -6197,16 +6197,16 @@ function ln(e) {
 function la(e) {
   let t = useSelector(e => e.hubFiles);
   let i = e.templates[_$$e7].map(e => t[e]);
-  let n = _$$tS2();
+  let n = hasTemplateEntity();
   let [r, a] = useState(!n);
   useEffect(() => {
     n && a(!1);
   }, [e.debouncedSearchQuery, n]);
   let s = [...e.teamTemplatesFromSearch.map(e => ({
-    type: _$$n4.TeamTemplate,
+    type: TeamTemplateType.TeamTemplate,
     template: e
   })), ...(r ? i.map(e => ({
-    type: _$$n4.HubFile,
+    type: TeamTemplateType.HubFile,
     template: e
   })) : [])];
   return i.length !== 0 || e.totalNumTeamTemplatesFromSearch !== 0 || e.teamTemplatesFromSearchIsLoading ? jsx(TrackingProvider, {
@@ -6595,13 +6595,13 @@ function lT() {
   }, []);
   let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   let t = e ? e.id : '';
-  let i = useIsLoading(_$$sz2.loadingKeyForPayload({
+  let i = useIsLoading(fetchShelvesForShelfTypeThunk.loadingKeyForPayload({
     shelfType: CommunityPageType.BROWSE_WIDGETS_MODAL
   }));
   let n = useCurrentFileKey();
   let r = useIsLoading(getWidgetAllowListKey(t, n));
   let a = useIsLoading(getOrgPublishedWidgetsThunk.loadingKeyForPayload(t));
-  let s = useIsLoaded(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
+  let s = useIsLoaded(recentItemsThunks.fetchWidgetsMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   return i || r || a || !s ? jsx(_$$i2, {}) : jsx(TrackingProvider, {
@@ -6615,7 +6615,7 @@ function lN({
   let {
     requestLoadMoreForTeam,
     templatesByTeam
-  } = _$$li({
+  } = usePaginatedTeamTemplates({
     teamId: e,
     editorType: _$$_Y.WHITEBOARD
   });
@@ -6625,7 +6625,7 @@ function lN({
       className: cssBuilderInstance.pt20.$,
       children: [jsx(_$$g3, {
         templates: templatesByTeam.templates.map(e => ({
-          type: _$$n4.TeamTemplateLg,
+          type: TeamTemplateType.TeamTemplateLg,
           template: e
         }))
       }), jsx(IntersectionSentinel, {
@@ -7045,17 +7045,17 @@ function lF({
     setPinned
   } = _$$C4(lB, setModalPosition, universalInsertModal.pinned, _$$t$, initialModalPosition, universalInsertModal.showing);
   useEffect(() => {
-    $(_$$cd.fetchTemplatesMetadata({
+    $(recentItemsThunks.fetchTemplatesMetadata({
       key: FDocumentType.FigJam,
       orgId: m?.parentOrgId
     }));
-    $(_$$cd.fetchWidgetsMetadata({
+    $(recentItemsThunks.fetchWidgetsMetadata({
       key: FDocumentType.FigJam
     }));
     $(fetchFigjamDefaultInsertsThunk({}));
   }, [$, m?.parentOrgId]);
   useEffect(() => {
-    $(_$$sz2({
+    $(fetchShelvesForShelfTypeThunk({
       shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER
     }));
   }, [$]);
@@ -7063,7 +7063,7 @@ function lF({
   let el = selectCurrentUser();
   let ed = useCurrentUserOrg();
   let ec = isBigmaEnabledAlias(ed);
-  let eu = Gi();
+  let eu = getCurrentTemplateEntity();
   let ep = useRef(null);
   let eh = useRef(null);
   useEffect(() => {
@@ -7097,7 +7097,7 @@ function lF({
     templatesByTeam,
     userTeamOrWorkspaceIds,
     isLoadingTeamTemplates
-  } = GR(eu?.type === 'org' ? eu.entity : null, _$$_Y.WHITEBOARD);
+  } = useTeamTemplates(eu?.type === 'org' ? eu.entity : null, _$$_Y.WHITEBOARD);
   let {
     filterOptions: _filterOptions,
     selectedIds,
@@ -7107,7 +7107,7 @@ function lF({
     teamTemplates,
     userTeamOrWorkspaceIds: _userTeamOrWorkspaceIds,
     isLoading
-  } = L_({
+  } = useOrgTemplates({
     orgId: eu?.type === 'org' ? eu.entity.id : null,
     areWorkspacesEnabled: ec,
     editorType: _$$_Y.WHITEBOARD,
@@ -7130,7 +7130,7 @@ function lF({
       setPreviewHubFile: setPreviewResource,
       renderResource: e => jsx(_$$S2, {
         template: {
-          type: _$$n4.HubFile,
+          type: TeamTemplateType.HubFile,
           template: e
         },
         templateInsertionLocation: FileTypeSwitch.CURRENT_FILE,
@@ -7599,7 +7599,7 @@ function dj({
   let t = dx();
   let i = useAtomWithSubscription(_$$dO);
   let n = useAppModelProperty('keyboardShortcuts');
-  let r = _$$c5(n, 'quick-create');
+  let r = getKeyboardShortcut(n, 'quick-create');
   return jsx('div', {
     className: 'ai_modal--generateButtonContainer--TZ5A4',
     children: jsx('div', {
@@ -7637,7 +7637,7 @@ function dP({
   let [r] = useLexicalComposerContext();
   let a = useAtomWithSubscription(_$$dO);
   let [s, o] = useAtomValueAndSetter(JV);
-  let d = Xr(KL);
+  let d = useSetAtom(KL);
   useEffect(() => {
     n ? r.update(() => {
       $convertFromMarkdownString(n.prompt, [UNORDERED_LIST, ORDERED_LIST]);
@@ -7763,8 +7763,8 @@ function dq({
   dismissModal: e,
   selectedPromptKey: t
 }) {
-  let i = Xr(_$$ft);
-  let n = Xr(_$$xc);
+  let i = useSetAtom(_$$ft);
+  let n = useSetAtom(_$$xc);
   let r = getLocaleFallbacks()[0] === 'en';
   let a = _$$dh();
   return jsxs('div', {
@@ -7939,7 +7939,7 @@ function d5({
   let [m, f] = useState(!0);
   let _ = useMemo(() => Cb(u), [u]);
   let x = _$$sM(_.title, _.subtitle, !1);
-  let g = Xr(Ac);
+  let g = useSetAtom(Ac);
   let j = useRef(null);
   let b = useResizeObserverRef(j);
   t = 180;
@@ -8132,11 +8132,11 @@ function d8({
   onGenerate: e
 }) {
   let t = useAtomWithSubscription(_$$zS);
-  let i = Xr(_$$H4);
+  let i = useSetAtom(_$$H4);
   let n = useCurrentFileKey();
   let r = useMemo(() => _$$w2(1), []);
-  let a = Xr(_$$ft);
-  let s = Xr(Ac);
+  let a = useSetAtom(_$$ft);
+  let s = useSetAtom(Ac);
   let d = _$$dh();
   let c = t => {
     e();
@@ -8263,14 +8263,14 @@ function ct() {
 function ci({
   onGenerate: e
 }) {
-  let t = Xr(_$$H4);
+  let t = useSetAtom(_$$H4);
   let i = useAtomWithSubscription(_$$dO);
   let n = useAtomWithSubscription(JV);
   let [r, a] = useAtomValueAndSetter(_$$Sn);
   let s = useAtomWithSubscription(_$$l8);
   let l = selectCurrentFile();
   let d = i.status === _$$c6.SUCCESS ? _$$Zj.REFINEMENT_MODE : _$$Zj.GENERATE_MODE;
-  let u = Xr(_$$ft);
+  let u = useSetAtom(_$$ft);
   let h = _$$dh();
   let m = async t => {
     e();
@@ -8362,7 +8362,7 @@ function cr() {
 function ca() {
   let e = useSelector(e => e.mirror.appModel.showUi);
   let t = useAtomWithSubscription(_$$zS);
-  let i = Xr(_$$H4);
+  let i = useSetAtom(_$$H4);
   let n = useRef(null);
   O1(() => {
     let r = document.activeElement;
@@ -8381,14 +8381,14 @@ function co() {
   !function () {
     let e = _$$dh();
     let t = useAtomWithSubscription(J1);
-    let i = Xr(_$$RJ);
+    let i = useSetAtom(_$$RJ);
     useEffect(() => {
       e !== t && i();
     }, [e, i, t]);
   }();
   (function () {
     let e = useCurrentFileKey();
-    let t = Xr(A0);
+    let t = useSetAtom(A0);
     useEffect(() => {
       t();
     }, [e, t]);
@@ -8435,7 +8435,7 @@ function cl({
 }
 function cd() {
   let e = !isAIFeaturesEnabledForCurrentUser() && Uy();
-  let t = Xr(_$$yt);
+  let t = useSetAtom(_$$yt);
   let i = useAtomWithSubscription(_$$zS) === Wl.TOP_BAR;
   let n = cr();
   return e && i && n ? jsx(lq, {
@@ -9104,7 +9104,7 @@ let ud = async ({
 });
 var uc = (e => (e[e.SHOW_PROMPT_BOX = 0] = 'SHOW_PROMPT_BOX', e[e.HIDE_PROMPT_BOX = 1] = 'HIDE_PROMPT_BOX', e))(uc || {});
 var uu = (e => (e.STICKIES = 'STICKIES', e.IMAGE = 'IMAGE', e))(uu || {});
-let up = _$$um({
+let up = atomWithReducer({
   currentAction: null,
   longRunningAction: null,
   prompt: '',
@@ -10829,7 +10829,7 @@ function hw() {
 }
 let hM = 'whiteboard_transparency--icon--LOJ7P';
 let hD = 'whiteboard_transparency--separator--t8wmx';
-let hP = wv;
+let hP = SeparatorComponent;
 let hU = {
   [VisibilityState.VISIBLE]: 'VISIBLE',
   [VisibilityState.TRANSPARENT]: 'TRANSPARENT',
@@ -11055,7 +11055,7 @@ let hQ = () => {
   let n = t.showComments && !!e.commentsEnabled;
   let r = new Set();
   let a = (e, i) => {
-    _$$Yh(t, i) && r.add(e);
+    isActionEnabled(t, i) && r.add(e);
   };
   let s = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   for (let [e, o] of (n && r.add('ADD_COMMENT'), hJ.entries())) {
@@ -12133,7 +12133,7 @@ function fl() {
 function fd() {
   return useSelector(e => {
     let t = e.mirror.selectionProperties.numSelectedByType;
-    return _$$Yh(e.mirror.appModel, 'ungroup-selection') && t && OU(t, ['FRAME', 'GROUP']);
+    return isActionEnabled(e.mirror.appModel, 'ungroup-selection') && t && OU(t, ['FRAME', 'GROUP']);
   });
 }
 function fp() {
@@ -13939,7 +13939,7 @@ function _K({
     let t = [];
     switch (!0) {
       case c:
-        t = [jsx(_$$c$, {
+        t = [jsx(OptionComponent, {
           className: ex()(_B, 'face_stamp_control--faceStampOption__loading--o6hDI'),
           children: jsx(LoadingSpinner, {
             size: 'lg'
@@ -13947,7 +13947,7 @@ function _K({
         }, 'loading')];
         break;
       case d.length > 0:
-        t = d.filter(e => !!p[e.id]).map((t, i) => jsxs(_$$c$, {
+        t = d.filter(e => !!p[e.id]).map((t, i) => jsxs(OptionComponent, {
           recordingKey: `faceStampInlineSwitcherOption-${t.id}`,
           onClick: async () => {
             let i = await _$$uL({
@@ -13979,7 +13979,7 @@ function _K({
         }, i));
         break;
       case d.length === 0:
-        t = [jsx(_$$c$, {
+        t = [jsx(OptionComponent, {
           className: _B,
           children: jsx('span', {
             className: 'face_stamp_control--noSearchFoundText--CAeSf ellipsis--ellipsis--Tjyfa',
@@ -15539,7 +15539,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
             svg: d,
             value: s
           }, s)
-        }, s) : jsx(wv, {}, 'divider');
+        }, s) : jsx(SeparatorComponent, {}, 'divider');
       },
       OptionWrapper({
         children: e
@@ -21728,7 +21728,7 @@ function bG({
 }) {
   let [t, i] = useState(!1);
   let n = _$$Ld();
-  let r = Xr(Qs);
+  let r = useSetAtom(Qs);
   let a = Pd(useCallback(() => {
     i(!0);
   }, []));
@@ -22260,7 +22260,7 @@ function ys() {
   let e = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let t = useMemo(() => e && e.sessionId.length > 0, [e]);
   let i = useDispatch<AppDispatch>();
-  let n = Xr(Qs);
+  let n = useSetAtom(Qs);
   let r = qU();
   let a = useStore();
   let s = trackFileEventWithUser();
@@ -22708,7 +22708,7 @@ function yF() {
   let e = generateRecordingKey('toolbarView', _$$ec2.recordingKey);
   let t = useRef(null);
   let i = selectCurrentFile();
-  let n = useSelector(e => _$$Yh(e.mirror.appModel, _$$ec2.action) && i);
+  let n = useSelector(e => isActionEnabled(e.mirror.appModel, _$$ec2.action) && i);
   let r = useSelector(e => e.mirror.appModel.currentTool === _$$ec2.tool);
   let a = _$$n0();
   let s = fullscreenAlias.getIsExtension();
@@ -22758,8 +22758,8 @@ function yF() {
 }
 function yW() {
   let e = useAtomWithSubscription(_$$zS);
-  let t = Xr(_$$bJ);
-  let i = Xr(_$$tz);
+  let t = useSetAtom(_$$bJ);
+  let i = useSetAtom(_$$tz);
   let n = useCallback(n => {
     n.preventDefault();
     e === Wl.TOP_BAR ? i() : (setSideHandler('right', i), t());
@@ -23296,7 +23296,7 @@ let vs = memo(() => {
   })();
   _$$M6();
   (function () {
-    let e = Xr(Qs);
+    let e = useSetAtom(Qs);
     useEffect(() => () => {
       e({
         type: 'CLOSE'
@@ -23389,7 +23389,7 @@ function vd({
   isCommentsPanelOpen: e
 }) {
   let [t, i] = useAtomValueAndSetter(qM);
-  let n = useSelector(e => _$$Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
+  let n = useSelector(e => isActionEnabled(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
   useEffect(() => {
     t && !n && i(!1);
   }, [t, n, i]);
@@ -24341,7 +24341,7 @@ function vV() {
   let t = _$$nw(e);
   let i = !isAIFeaturesEnabledForCurrentUser() && Uy();
   let n = !!getFeatureFlags().figjam_generate_handbrake;
-  let r = Xr(_$$P6);
+  let r = useSetAtom(_$$P6);
   useEffect(() => {
     r(e);
   }, [r, e]);
@@ -24358,7 +24358,7 @@ function vK() {
   let r = i === ViewType.HISTORY;
   let a = !isAIFeaturesEnabledForCurrentUser() && Uy();
   let s = getFeatureFlags().figjam_quick_actions_v2;
-  let h = Xr(_$$H4);
+  let h = useSetAtom(_$$H4);
   useEffect(() => {
     r && h();
   }, [r, h]);

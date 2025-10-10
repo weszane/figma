@@ -7,7 +7,7 @@ import { c as _$$c } from "../905/90943";
 import { x as _$$x } from "../905/764527";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { KeyCodes } from "../905/63728";
 import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { getI18nString } from "../905/303541";
@@ -46,7 +46,7 @@ let $$M10 = atom(!1);
 export function $$P9() {
   let e = $$F5();
   let [t, i] = useAtomValueAndSetter($$M10);
-  let r = Xr($$D12);
+  let r = useSetAtom($$D12);
   return useCallback(() => {
     e();
     i(!1);

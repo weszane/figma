@@ -26,7 +26,7 @@ import { textDisplayConfig } from '../905/687265';
 import { getSingletonSceneGraph } from '../905/700578';
 import { SvgComponent } from '../905/714743';
 import { getFilteredFeatureFlags } from '../905/717445';
-import { k as _$$k3 } from '../905/749197';
+import { DDRenderMode } from '../905/749197';
 import { styleBuilderInstance } from '../905/941192';
 import { O as _$$O } from '../905/969533';
 import { S as _$$S } from '../905/999953';
@@ -109,7 +109,7 @@ class ea extends PureComponent {
       let l = t === this.props.level && this.props.mask;
       let a = t === this.props.level && this.props.hasChildren;
       let o = g()(dK, co, {
-        [TY]: this.props.displayOrder === _$$k3.DOM
+        [TY]: this.props.displayOrder === DDRenderMode.DOM
       });
       e.push(jsx('span', {
         className: pZ

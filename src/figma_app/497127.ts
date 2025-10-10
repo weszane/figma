@@ -6,9 +6,9 @@ import { IntersectionSentinel } from "../905/925868";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { li } from "../figma_app/622574";
+import { usePaginatedTeamTemplates } from "../figma_app/622574";
 import { FFileType } from "../figma_app/191312";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { Ht } from "../figma_app/522930";
 import { iq, AF } from "../figma_app/80782";
 import { k } from "../figma_app/623769";
@@ -23,7 +23,7 @@ export function $$f0({
   let {
     requestLoadMoreForTeam,
     templatesByTeam
-  } = li({
+  } = usePaginatedTeamTemplates({
     teamId: e,
     editorType: FFileType.WHITEBOARD
   });
@@ -63,11 +63,11 @@ export function $$f0({
             templateInsertionLocation: r,
             template: {
               template: e,
-              type: _$$n.TeamTemplateLg
+              type: TeamTemplateType.TeamTemplateLg
             },
             onInsert: () => f({
               template: e,
-              type: _$$n.TeamTemplateLg
+              type: TeamTemplateType.TeamTemplateLg
             }),
             isInsertingTemplate: E(e.fileKey)
           }, e.fileKey))

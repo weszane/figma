@@ -27,7 +27,7 @@ import { useIsLoading, useIsLoaded, isLoaded, isNullOrFailure } from "../905/187
 import { selectComponentLibraryItemsWithStatus } from "../figma_app/803787";
 import { Rt } from "../figma_app/979658";
 import { FDocumentType } from "../905/862883";
-import { D as _$$D } from "../figma_app/268271";
+import { TEAM_LIBRARY_IDENTIFIER } from "../figma_app/268271";
 import { PI, rp } from "../figma_app/703988";
 import { r6 } from "../905/542608";
 import { generateRetrievingSubscribedComponentsKey } from "../905/92359";
@@ -367,7 +367,7 @@ export function $$eo1({
         children: renderI18nText("whiteboard.inserts.libraries")
       }), jsx("button", {
         onClick: onToggleLibraryModal,
-        "data-onboarding-key": _$$D,
+        "data-onboarding-key": TEAM_LIBRARY_IDENTIFIER,
         children: jsx("div", {
           className: "libraries_tab--secondaryButton--fxK2n ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
           children: renderI18nText("cooper.inserts.add_library")
@@ -383,7 +383,7 @@ export function $$eo1({
         children: jsxs(ButtonPrimitive, {
           className: _()("libraries_tab--toggleLibraryModalContainer--lup1l text--fontPos13--xW8hS text--_fontBase--QdLsd", "libraries_tab--hasFocusOutline--aUlA1"),
           onClick: onToggleLibraryModal,
-          "data-onboarding-key": _$$D,
+          "data-onboarding-key": TEAM_LIBRARY_IDENTIFIER,
           children: [jsx(SvgComponent, {
             className: cssBuilderInstance.colorIcon.$,
             svg: _$$A2

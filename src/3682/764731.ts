@@ -51,7 +51,7 @@ import { formatCount } from "../figma_app/930338";
 import { RecordingScrollContainer } from "../905/347284";
 import { Q as _$$Q } from "../3276/336897";
 import { vQ, sK } from "../9410/124657";
-import { h as _$$h } from "../figma_app/275739";
+import { VoiceCallManager } from "../figma_app/275739";
 import { i as _$$i, S as _$$S } from "../3276/270077";
 import { A as _$$A4 } from "../6828/364616";
 import { A as _$$A5 } from "../6828/844411";
@@ -607,7 +607,7 @@ class eC extends Component {
   render() {
     let e = (e, t) => `${e.name}-${t}`;
     let t = [];
-    let a = _$$h.getInstance();
+    let a = VoiceCallManager.getInstance();
     if (!a) return null;
     if (1 === this.state.fadeOut.length && this.state.fadeOut[0]) {
       let s = this.state.fadeOut[0];

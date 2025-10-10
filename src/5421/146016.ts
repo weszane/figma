@@ -11,7 +11,7 @@ import { HiddenLabel } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { wG } from '../905/331989';
 import { h4, Nz } from '../905/417232';
-import { bL, c$, l9, mc, wv } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer, SelectRoot } from '../905/493196';
 import { useIsFullscreenSitesView } from '../905/561485';
 import { getFeatureFlags } from '../905/601108';
 import { setupThemeContext } from '../905/614223';
@@ -62,7 +62,7 @@ function S({
   value: t,
   disabled: n
 }) {
-  return jsx(c$, {
+  return jsx(SelectOptionReset, {
     value: t,
     disabled: n,
     children: jsxs('div', {
@@ -102,11 +102,11 @@ function w(e) {
   let c = !useSelector(e => e.mirror.selectionProperties.isValidPrototypingSourceSelected ?? !0);
   return jsx('div', {
     id: t,
-    children: jsxs(bL, {
+    children: jsxs(SelectGroupLabel, {
       onChange: e.onChange,
       value: e.action,
       recordingKey: generateRecordingKey(e, 'select'),
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         'data-testid': 'action-select',
         'disabled': c,
         'iconLead': jsx('div', {
@@ -118,7 +118,7 @@ function w(e) {
         }),
         'width': 'fill',
         'children': isInvalidValue(e.action) ? getI18nString('fullscreen.mixed') : null
-      }), jsx(mc, {
+      }), jsx(SelectContainer, {
         children: function (e, t) {
           let n = useIsFullscreenSitesView();
           let i = jsx(S, {
@@ -181,16 +181,16 @@ function w(e) {
             value: 'CONDITIONAL',
             disabled: !1
           }, 'CONDITIONAL');
-          let g = jsx(wv, {}, 'first-divider');
-          let y = jsx(wv, {}, 'second-divider');
-          let _ = jsx(wv, {}, 'third-divider');
+          let g = jsx(SelectRoot, {}, 'first-divider');
+          let y = jsx(SelectRoot, {}, 'second-divider');
+          let _ = jsx(SelectRoot, {}, 'third-divider');
           let {
             getConfig
           } = selectExperimentConfigHook('exp_prototyping_reorder_actions');
           let j = !!getConfig().getValue('new_ordering', !1);
           let N = n ? [a, l, s, g, h, x] : j ? [i, g, r, a, l, s, d, y, h, m, x, _, c, p, u] : [i, g, r, a, l, s, d, y, c, p, u, _, h, m, x];
           if (e.showVideoActions && !n) {
-            let e = [jsx(wv, {}, 'fourth-divider'), jsx(S, {
+            let e = [jsx(SelectRoot, {}, 'fourth-divider'), jsx(S, {
               formatter: t,
               value: 'UPDATE_MEDIA_PLAY_PAUSE_OPTIONS',
               disabled: !1
@@ -213,7 +213,7 @@ function w(e) {
             formatter: t,
             value: 'MIXED',
             disabled: !0
-          }, 'MIXED'), jsx(wv, {}, 'mixed-divider')].concat(N));
+          }, 'MIXED'), jsx(SelectRoot, {}, 'mixed-divider')].concat(N));
           return N.filter(Boolean);
         }(e, n ? s : d)
       })]

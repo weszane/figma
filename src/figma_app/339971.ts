@@ -1,13 +1,13 @@
-import { o as _$$o } from "../figma_app/54816";
-import { jsx, jsxs } from "react/jsx-runtime";
-import { useEffect } from "react";
-import { LoadingSpinner } from "../905/443820";
-import { bL, QB } from "../905/174266";
-import { setupThemeContext } from "../905/614223";
 import d from "classnames";
-import { IQ } from "../figma_app/569743";
+import { useEffect } from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
+import { bL, QB } from "../905/174266";
+import { LoadingSpinner } from "../905/443820";
+import { setupThemeContext } from "../905/614223";
+import { blockedUILoadingIndicator } from "../figma_app/54816";
 import { d as _$$d } from "../figma_app/550089";
-var c = d;
+import { IQ } from "../figma_app/569743";
+let c = d;
 function _({
   children: e,
   shown: t
@@ -33,7 +33,7 @@ export function $$h0({
   useEffect(() => {
     let r = e?.callback;
     setTimeout(() => {
-      t(_$$o.remove({}));
+      t(blockedUILoadingIndicator.remove({}));
       r?.();
     }, 0);
   }, [e, t]);
@@ -53,4 +53,4 @@ export function $$h0({
   });
 }
 export const V = $$h0;
-export const n = _$$o;
+export const n = blockedUILoadingIndicator;

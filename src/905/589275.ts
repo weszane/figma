@@ -5,7 +5,7 @@ import { Button } from "../905/521428";
 import { ComponentPropType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { generateRecordingKey } from "../figma_app/878298";
-import { gw, c$ } from "../figma_app/236327";
+import { DropdownWithScrim, OptionComponent } from "../figma_app/236327";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
@@ -193,8 +193,8 @@ function Y(e) {
     })]
   });
 }
-let q = gw;
-let $ = c$;
+let q = DropdownWithScrim;
+let $ = OptionComponent;
 let Z = e => ["gridView", "gridItemProductComponent", e.node_id];
 function X({
   component: e,

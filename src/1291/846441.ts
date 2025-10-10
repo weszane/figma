@@ -20,7 +20,7 @@ import { getInitialOptions } from '../figma_app/169182';
 import { FFileType } from '../figma_app/191312';
 import { getHubFileVersionOrDefault } from '../figma_app/198840';
 import { useCurrentFileKey } from '../figma_app/516028';
-import { tS } from '../figma_app/622574';
+import { hasTemplateEntity } from '../figma_app/622574';
 import { FUSE_CONFIG_PROFILE } from '../figma_app/740025';
 import { useLocalPluginsExcludingWidgets, usePluginServerSideSearch, useWidgetServerSideSearch } from '../figma_app/844435';
 import { cX } from '../figma_app/920333';
@@ -138,7 +138,7 @@ export function $$z0() {
     lastWidgetSearchQuery
   } = useWidgetServerSideSearch(_$$k.Editors.FIGJAM);
   let V = d0();
-  let Y = tS();
+  let Y = hasTemplateEntity();
   let {
     templates,
     total,

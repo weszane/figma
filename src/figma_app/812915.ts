@@ -8,7 +8,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager, useSetAtom } from "../figma_app/27355";
 import { openWindow } from "../905/508367";
 import { reportError } from "../905/11";
 import { selectViewAction } from "../905/929976";
@@ -103,7 +103,7 @@ export function $$L1() {
   let {
     entryPointCodeInstance
   } = $$N6();
-  let t = Xr(td);
+  let t = useSetAtom(td);
   let r = useAtomWithSubscription(St);
   let i = entryPointCodeInstance?.sourceCode === j && (!getFeatureFlags().make_import_improvements_experimental || !r);
   useEffect(() => {

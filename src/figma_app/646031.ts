@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import s from "../vendor/805353";
 import { TW } from "../905/958097";
 import { generateUUIDv4 } from "../905/871474";
@@ -186,12 +186,12 @@ export function $$E3(e, t) {
   }, [e, t]);
 }
 export function $$y5() {
-  let e = Xr(uw);
-  let t = Xr(aW);
-  let r = Xr(iO);
-  let i = Xr(rg);
-  let s = Xr(jV);
-  let l = Xr(Ue);
+  let e = useSetAtom(uw);
+  let t = useSetAtom(aW);
+  let r = useSetAtom(iO);
+  let i = useSetAtom(rg);
+  let s = useSetAtom(jV);
+  let l = useSetAtom(Ue);
   return useMemo(() => o()(() => {
     jD();
     e(null);

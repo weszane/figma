@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useId } from "react";
 import { debounce } from "../905/915765";
-import { bL, l9, mc, c$, wv } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset, SelectRoot } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { generateRecordingKey } from "../figma_app/878298";
 import { k } from "../905/582200";
@@ -103,7 +103,7 @@ function j({
       updatePreview(e);
     }
   }, 50);
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     value: m,
     onChange: e => {
       e !== b && onSubmit(e);
@@ -113,26 +113,26 @@ function j({
       valueBeforePreview && !e && clearPreview();
     },
     recordingKey: generateRecordingKey(t, "maskType"),
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       width: "fill",
       label: jsx(HiddenLabel, {
         children: renderI18nText("fullscreen.mask_panel.mask")
       }),
       children: C.format(m)
-    }), jsxs(mc, {
+    }), jsxs(SelectContainer, {
       children: [h && jsxs(Fragment, {
-        children: [jsx(c$, {
+        children: [jsx(SelectOptionReset, {
           value: b,
           disabled: !0,
           children: renderI18nText("fullscreen.mixed")
-        }), jsx(wv, {})]
-      }), jsx(c$, {
+        }), jsx(SelectRoot, {})]
+      }), jsx(SelectOptionReset, {
         value: "ALPHA",
         children: C.formatExtended("ALPHA")?.text
-      }), jsx(c$, {
+      }), jsx(SelectOptionReset, {
         value: "OUTLINE",
         children: C.formatExtended("OUTLINE")?.text
-      }), jsx(c$, {
+      }), jsx(SelectOptionReset, {
         value: "LUMINANCE",
         children: C.formatExtended("LUMINANCE")?.text
       })]

@@ -6,7 +6,7 @@ import { getDebugWorkspaceInfo, getWorkspaceDisplayName, isSameWorkspace, getVal
 import { getPermissionsState } from "../figma_app/642025";
 import { TeamOrgType } from "../figma_app/10554";
 import { A as _$$A } from "../905/61817";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { useDropdownState } from "../905/848862";
@@ -92,7 +92,7 @@ function y({
     showPoint: !1,
     targetRect: c,
     type: DropdownType.MATCH_BACKGROUND,
-    children: e.sort(t).map(e => jsx(c$, {
+    children: e.sort(t).map(e => jsx(OptionComponent, {
       id: a(e),
       className: "publishing_metadata_author_select_ui3--singleOption--ygwXK",
       onClick: t => {

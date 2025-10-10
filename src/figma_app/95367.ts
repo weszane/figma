@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, createContext, useEffect } from "react";
 import { U1 } from "../figma_app/343967";
 import { N } from "../905/57692";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import l from "classnames";
 import { getI18nString } from "../905/303541";
 import { Dm } from "../figma_app/8833";
@@ -40,7 +40,7 @@ export function $$g1(e) {
   });
 }
 function f(e, t) {
-  let r = Xr(t);
+  let r = useSetAtom(t);
   useEffect(() => (r(e), () => {
     r(null);
   }), [e, r]);

@@ -6,7 +6,7 @@ import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { DialogLabel } from "../905/799737";
 import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atomStoreManager, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { hasAncestorWithAttribute } from "../figma_app/243213";
@@ -27,7 +27,7 @@ import { KP } from "../figma_app/12491";
 import { getAssetKeyForSubscription, mapToPrimaryWorkflow } from "../figma_app/473391";
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
-import { RR } from "../figma_app/307841";
+import { isCampfireModelEnabled } from "../figma_app/307841";
 import { isReduxDeprecationShadowreadOrCutover, ConfigGroups, isReduxDeprecationCutover } from "../figma_app/121751";
 import { useShadowReadLoaded, adminPermissionConfig, setupShadowRead } from "../figma_app/391338";
 import { selectCurrentFile, selectOpenFile } from "../figma_app/516028";
@@ -108,7 +108,7 @@ import { T as _$$T } from "../905/714785";
 import { useComponentFlyoutModal, COMPONENT_FLYOUT_MODAL_CONTENT, COMPONENT_FLYOUT_MODAL_TYPE } from "../figma_app/608944";
 import { LdP, wkK } from "../figma_app/27776";
 function H(e) {
-  let t = RR();
+  let t = isCampfireModelEnabled();
   let s = useCurrentPlanUser("useCanViewPlaygroundQuery");
   let r = useSelector(getPermissionsState);
   let l = selectCurrentFile();
@@ -665,7 +665,7 @@ export function $$tu1({
 }) {
   let D = useRef(null);
   let F = useRef(null);
-  let B = Xr(_$$T);
+  let B = useSetAtom(_$$T);
   let K = H(e.library_key);
   let Q = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let ea = _$$H2(e.library_key);

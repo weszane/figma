@@ -3,7 +3,7 @@ import { useMemo, useRef, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { props } from "@stylexjs/stylex";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { m8 } from "../905/864644";
 import { gX } from "../figma_app/448654";
 import { xD } from "../905/174697";
@@ -546,7 +546,7 @@ export function $$eT0({
   let F = useDispatch<AppDispatch>();
   let M = getSelectedView();
   let j = useCurrentUserOrgId();
-  let U = Xr(yH);
+  let U = useSetAtom(yH);
   let B = _$$v();
   let V = useAtomWithSubscription(renamingStateAtom);
   let G = useCallback(e => {

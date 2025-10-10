@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useCallback, Fragment as _$$Fragment } from "react";
-import { bL, l9, mc, c$, wv } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset, SelectRoot } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { r as _$$r } from "../905/571562";
 import { textDisplayConfig } from "../905/687265";
 import { props } from "@stylexjs/stylex";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
-import { wv as _$$wv, rr, gw } from "../figma_app/236327";
+import { SeparatorComponent, TrackedCheckableOption, DropdownWithScrim } from "../figma_app/236327";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -64,7 +64,7 @@ export function $$O1({
     if ("separator" === t.type) {
       R || (S += C);
       O += C;
-      return jsx(_$$wv, {
+      return jsx(SeparatorComponent, {
         dataTestId: `dropdown-separator-${r}`
       }, t.key ? String(t.key) : r);
     }
@@ -81,7 +81,7 @@ export function $$O1({
       style: c,
       "data-testid": `dropdown-option-${r}`,
       "data-onboarding-key": `dropdown-option-${String(t.key)}`,
-      children: jsx(rr, {
+      children: jsx(TrackedCheckableOption, {
         checked: i,
         onClick: r => {
           r.stopPropagation();
@@ -129,7 +129,7 @@ export function $$O1({
     ref: b,
     children: P
   });
-  return jsx(gw, {
+  return jsx(DropdownWithScrim, {
     stopScrollPropagation: !0,
     dispatch: e,
     className: u()(N1, t),
@@ -238,20 +238,20 @@ export function $$L2({
       newValue: e
     });
   }, [r, _]);
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     value: h(e),
     onChange: g,
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       label: jsx(HiddenLabel, {
         children: u || getI18nString("folder_permissions_modal.email_invite_level")
       }),
       children: o(e)
-    }), jsx(mc, {
+    }), jsx(SelectContainer, {
       children: t.map((e, r) => jsxs(_$$Fragment, {
-        children: [jsx(c$, {
+        children: [jsx(SelectOptionReset, {
           value: h(e),
           children: p(e)
-        }), c && r < t.length - 1 && jsx(wv, {})]
+        }), c && r < t.length - 1 && jsx(SelectRoot, {})]
       }, h(e)))
     })]
   });

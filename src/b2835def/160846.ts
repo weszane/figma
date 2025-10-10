@@ -80,8 +80,8 @@ import { Cs, cU, Je, zq, U_, VR } from "../figma_app/938628";
 import { _i } from "../figma_app/319440";
 import { x as _$$x } from "../573/916234";
 import { buildUploadUrl } from "../figma_app/169182";
-import { e as _$$e } from "../905/621515";
-import { N as _$$N } from "../figma_app/268271";
+import { useOverlay } from "../905/621515";
+import { ModalPriority } from "../figma_app/268271";
 import { ImageOverlayComponent } from "../905/129046";
 import { WZ } from "../905/893645";
 import { ArrowPosition } from "../905/858282";
@@ -148,9 +148,9 @@ function eN(e) {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: DrawPropertiesPanelOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useEffect(() => {
     panelsShown && show({

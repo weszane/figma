@@ -6,7 +6,7 @@ import { x } from "../905/587214";
 import { permissionScopeHandler } from "../905/189185";
 import { supportedResolvedTypes } from "../905/929949";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { getLocalVariablesForSet } from "../figma_app/852050";
 import { useDropdown } from "../905/848862";
@@ -117,7 +117,7 @@ function S(e) {
       insertVariableAtPosition(a, e.insertVariableBetweenIDs, r ?? n, e.groups);
     });
   }, [i, e, t]));
-  return jsx(c$, {
+  return jsx(OptionComponent, {
     onClick: s,
     children: jsxs("div", {
       className: Fs,

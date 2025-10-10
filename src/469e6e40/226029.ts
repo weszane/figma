@@ -5,7 +5,7 @@ import { useSingleEffect } from "../905/791079";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { tg, KB, lR } from "../4452/780544";
 import { g as _$$g } from "../4452/983384";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { useCurrentPrivilegedPlan, useTeamPlanFeatures, useCurrentPlanUser, checkOrgUserPermission, useCurrentPublicPlan } from "../figma_app/465071";
 import { WZ } from "../905/893645";
 import { ArrowPosition, PositioningStrategy } from "../905/858282";
@@ -74,7 +74,7 @@ function g(e) {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: AdminNavigationOnboardingOverlay,
     priority: _$$g(AdminNavigationOnboardingOverlay)
   }, [a]);
@@ -263,7 +263,7 @@ let ej = {
       show,
       isShowing,
       complete
-    } = _$$e({
+    } = useOverlay({
       overlay: TeamAdminManageUnassignedDraftsOverlay,
       priority: _$$g(TeamAdminManageUnassignedDraftsOverlay)
     }, [e]);

@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atom, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { e as _$$e } from "../figma_app/601186";
 import { j } from "../figma_app/64343";
@@ -9,7 +9,7 @@ export function $$c0(e) {
   let [t, r] = useState(null);
   let s = j();
   let c = useMemo(() => new Set(s), [s]);
-  let u = Xr(d);
+  let u = useSetAtom(d);
   let p = useAtomWithSubscription(d);
   let _ = !e.isLoading;
   let h = _ && !!e.lastSuccessfulPublishedResponsiveSetGuids;

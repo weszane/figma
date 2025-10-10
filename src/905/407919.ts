@@ -8,6 +8,7 @@ import type { ThunkActionDispatch } from 'redux-thunk'
 let currentState: {
   getState: () => AppState
   dispatch: ThunkActionDispatch<any>
+  subscribe: (listener: () => void) => () => void
 } // D
 
 /**

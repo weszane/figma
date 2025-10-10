@@ -1,22 +1,22 @@
-import { nativeEnum, z } from 'zod'
-import { ExperimentAssignmentsSchema } from '../905/13165'
-import { createPrimaryKeySchema, describeNormalized } from '../905/67898'
-import { W } from '../905/82276'
-import { FAccessLevelType, FBasicPermissionType, FDomainVerificationStatusType, FPaymentHealthStatusType, FPermissionLevelType, FPlanFeatureType, FPlanLimitationType, FStudentTeamStatusType, FTrialType } from '../figma_app/191312'
+import { nativeEnum, z } from 'zod';
+import { ExperimentAssignmentsSchema } from '../905/13165';
+import { createPrimaryKeySchema, describeNormalized } from '../905/67898';
+import { WorkspaceSchema } from '../905/82276';
+import { FAccessLevelType, FBasicPermissionType, FDomainVerificationStatusType, FPaymentHealthStatusType, FPermissionLevelType, FPlanFeatureType, FPlanLimitationType, FStudentTeamStatusType, FTrialType } from '../figma_app/191312';
 
 // Enum schemas for various types (l, d, c, u, p, _, h, m, g)
-export const trialTypeSchema = nativeEnum(FTrialType) // l
-export const permissionLevelSchema = nativeEnum(FPermissionLevelType) // d
-export const accessLevelSchema = nativeEnum(FAccessLevelType) // c
-export const planFeatureSchema = nativeEnum(FPlanFeatureType) // u
-export const studentTeamStatusSchema = nativeEnum(FStudentTeamStatusType) // p
-export const paymentHealthStatusSchema = nativeEnum(FPaymentHealthStatusType) // _
-export const domainVerificationStatusSchema = nativeEnum(FDomainVerificationStatusType) // h
-export const basicPermissionSchema = nativeEnum(FBasicPermissionType) // m
-export const planLimitationSchema = nativeEnum(FPlanLimitationType) // g
+export const trialTypeSchema = nativeEnum(FTrialType); // l
+export const permissionLevelSchema = nativeEnum(FPermissionLevelType); // d
+export const accessLevelSchema = nativeEnum(FAccessLevelType); // c
+export const planFeatureSchema = nativeEnum(FPlanFeatureType); // u
+export const studentTeamStatusSchema = nativeEnum(FStudentTeamStatusType); // p
+export const paymentHealthStatusSchema = nativeEnum(FPaymentHealthStatusType); // _
+export const domainVerificationStatusSchema = nativeEnum(FDomainVerificationStatusType); // h
+export const basicPermissionSchema = nativeEnum(FBasicPermissionType); // m
+export const planLimitationSchema = nativeEnum(FPlanLimitationType); // g
 
 /** Constant value for internal use (original: $$f8) */
-export const teamConstant = 118 // $$f8
+export const teamConstant = 118; // $$f8
 
 /**
  * Enum for payment action requirements (original: $$E7)
@@ -69,7 +69,7 @@ export const TeamSchema = describeNormalized('Team', ExperimentAssignmentsSchema
   community_profile_id: z.string().optional(),
   community_profile_handle: z.string().optional(),
   license_group_id: z.string().nullable(),
-  license_group: W.nullable(),
+  license_group: WorkspaceSchema.nullable(),
   workspace_id: z.string().nullable(),
   default_permission: basicPermissionSchema.optional().nullable(),
   is_favorited: z.boolean().optional(),
@@ -84,8 +84,8 @@ export const TeamSchema = describeNormalized('Team', ExperimentAssignmentsSchema
   sanctioned_at: z.string().nullable(),
   sharing_audience_control: permissionLevelSchema.optional(),
   org_browsable: z.boolean().optional(),
-  hidden: z.boolean().optional(),
-}))
+  hidden: z.boolean().optional()
+}));
 
 /**
  * Generates a team URL based on team/project IDs (original: $$T4)
@@ -94,7 +94,7 @@ export const TeamSchema = describeNormalized('Team', ExperimentAssignmentsSchema
  * @returns {string}
  */
 export function getTeamUrl(teamId: string, projectId?: string): string {
-  return projectId ? `${location.origin}/files/${projectId}/team/${teamId}` : `${location.origin}/files/team/${teamId}/all-projects`
+  return projectId ? `${location.origin}/files/${projectId}/team/${teamId}` : `${location.origin}/files/team/${teamId}/all-projects`;
 }
 
 /**
@@ -103,11 +103,11 @@ export function getTeamUrl(teamId: string, projectId?: string): string {
  * @returns {boolean}
  */
 export function isTeamEligibleForUpgrade(team: {
-  org_id?: string | null
-  subscription?: FPaymentHealthStatusType
-  student_team?: boolean
+  org_id?: string | null;
+  subscription?: FPaymentHealthStatusType;
+  student_team?: boolean;
 }): boolean {
-  return !team.org_id && (!!team.subscription && team.subscription !== FPaymentHealthStatusType.INCOMPLETE || team.student_team)
+  return !team.org_id && (!!team.subscription && team.subscription !== FPaymentHealthStatusType.INCOMPLETE || team.student_team);
 }
 
 /**
@@ -131,8 +131,8 @@ export const fileActionEnum = {
   INSERT_ADVANCED_SHAPE: 'insert_advanced_shape',
   ACCEPT_PROJECT_CONNECTION_INVITE: 'accept_project_connection_invite',
   ENABLE_MCP: 'enable_mcp',
-  CONNECT_DOMAIN: 'connect_domain',
-} as const
+  CONNECT_DOMAIN: 'connect_domain'
+} as const;
 
 /**
  * Enum for project permissions (original: $$v6)
@@ -142,8 +142,8 @@ export const projectPermissionEnum = {
   PUBLISH_COMPONENTS: 'publish_components',
   USE_AUDIO: 'use_audio',
   VIEW_ONLY_PROJECT: 'view_only_project',
-  INVITE_ONLY_PROJECT: 'invite_only_project',
-} as const
+  INVITE_ONLY_PROJECT: 'invite_only_project'
+} as const;
 
 /**
  * Normalizes team data for output (original: $$A3)
@@ -151,19 +151,19 @@ export const projectPermissionEnum = {
  * @returns {object}
  */
 export function normalizeTeamData(team: {
-  id: string
-  name: string
-  restrictionsList?: any
-  subscription?: any
-  studentTeamAt?: Date | string | null
-  gracePeriodEnd?: Date | null
+  id: string;
+  name: string;
+  restrictionsList?: any;
+  subscription?: any;
+  studentTeamAt?: Date | string | null;
+  gracePeriodEnd?: Date | null;
 }): {
-  id: string
-  name: string
-  restrictions_list?: any
-  subscription?: any
-  student_team: boolean
-  grace_period_end: string | null
+  id: string;
+  name: string;
+  restrictions_list?: any;
+  subscription?: any;
+  student_team: boolean;
+  grace_period_end: string | null;
 } {
   return {
     id: team.id,
@@ -171,17 +171,17 @@ export function normalizeTeamData(team: {
     restrictions_list: team.restrictionsList,
     subscription: team.subscription,
     student_team: !!team.studentTeamAt,
-    grace_period_end: team.gracePeriodEnd ? team.gracePeriodEnd instanceof Date ? team.gracePeriodEnd.toISOString() : team.gracePeriodEnd : null,
-  }
+    grace_period_end: team.gracePeriodEnd ? team.gracePeriodEnd instanceof Date ? team.gracePeriodEnd.toISOString() : team.gracePeriodEnd : null
+  };
 }
 
 // Export refactored enums and constants with original export names
-export const Fb = teamVisibilityEnum
-export const OI = isTeamEligibleForUpgrade
-export const ZN = fileActionEnum
-export const Z_ = normalizeTeamData
-export const bL = getTeamUrl
-export const kE = TeamSchema
-export const pE = projectPermissionEnum
-export const pk = paymentActionRequirementEnum
-export const qg = teamConstant
+export const Fb = teamVisibilityEnum;
+export const OI = isTeamEligibleForUpgrade;
+export const ZN = fileActionEnum;
+export const Z_ = normalizeTeamData;
+export const bL = getTeamUrl;
+export const kE = TeamSchema;
+export const pE = projectPermissionEnum;
+export const pk = paymentActionRequirementEnum;
+export const qg = teamConstant;

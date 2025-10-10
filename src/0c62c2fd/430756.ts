@@ -37,9 +37,9 @@ import { TrackingKeyEnum } from "../905/696396";
 import { e as _$$e } from "../905/393279";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
-import { e as _$$e2 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N as _$$N2 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
 import { ArrowPosition } from "../905/858282";
@@ -55,9 +55,9 @@ function X() {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: SharingClarityProjectCreationPermissionOverlay,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
     show({

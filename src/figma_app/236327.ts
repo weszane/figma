@@ -1,502 +1,766 @@
-import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useState, useMemo, Children, useRef, useEffect, useCallback, cloneElement, forwardRef, PureComponent } from "react";
-import { noop } from 'lodash-es';
-import { setupThemeContext } from "../905/614223";
-import { createMultiRefCallback } from "../figma_app/272902";
-import l from "classnames";
-import { handleUrlAction } from "../905/280005";
-import { isCommandOrShift } from "../905/63728";
-import { RecordingPureComponent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
-import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { SvgComponent } from "../905/714743";
-import { S } from "../905/339549";
-import { hideDropdownAction } from "../905/929976";
-import { s4, Dm } from "../figma_app/8833";
-import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
-import { shouldHandleMultiTouchOrPressure, stopPropagation, preventDefault } from "../figma_app/753501";
-import { gD, FR, Rp, Ts, E7, zT, ep, Vi, tZ, DE, Wh, fG, Wm, DY, _S, rU, IZ, wY, uK, me, se, jv, o6 as _$$o, cY, z6, pH, bv } from "../905/255309";
-import { A } from "../6828/954206";
-import { A as _$$A } from "../6828/364616";
-var d = l;
-export function $$S3(e) {
-  let [t, r] = useState(!1);
-  let a = "label" in e;
-  let s = "dropdownButton" in e;
+import classNames from "classnames"
+import { noop } from 'lodash-es'
+import { Children, cloneElement, forwardRef, PureComponent, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { Fragment, jsx, jsxs } from "react/jsx-runtime"
+import { isCommandOrShift } from "../905/63728"
+import { o6 as _$$o, _S, bv, cY, DE, DY, E7, ep, fG, FR, gD, IZ, jv, me, pH, Rp, rU, se, Ts, tZ, uK, Vi, Wh, Wm, wY, z6, zT } from "../905/255309"
+import { handleUrlAction } from "../905/280005"
+import { RenderRefCheckbox } from "../905/339549"
+import { setupThemeContext } from "../905/614223"
+import { SvgComponent } from "../905/714743"
+
+// Refactored dropdown components with improved readability, type safety, and maintainability
+// Renamed variables, added types, simplified logic, and preserved original functionality
+
+import { hideDropdownAction } from "../905/929976"
+import { A as _$$A } from "../6828/364616"
+import { A } from "../6828/954206"
+import { Dm, s4 } from "../figma_app/8833"
+import { createMultiRefCallback } from "../figma_app/272902"
+import { preventDefault, shouldHandleMultiTouchOrPressure, stopPropagation } from "../figma_app/753501"
+import { TrackingProvider, withTrackedClick } from "../figma_app/831799"
+import { handleMouseEvent, RecordingPureComponent, SKIP_RECORDING } from "../figma_app/878298"
+import { isInteractionOrEvalMode } from "../figma_app/897289"
+
+// Type definitions for better type safety
+interface DropdownProps {
+  className?: string
+  notDraggable?: boolean
+  shouldRenderAutocompleteStyles?: boolean
+  label?: string
+  iconLabel?: React.ReactNode
+  noBorder?: boolean
+  noRightPadding?: boolean
+  dropdownButton?: React.ComponentType<{ onClick: () => void }>
+  stayOpenOnSelect?: boolean
+  options?: React.ReactNode
+  dropdownOptionsClassName?: string
+  rightAlignOptions?: boolean
+  optionsBelowSelector?: boolean
+  menuTrackingContextName?: string
+  menuTrackingProperties?: Record<string, any>
+}
+
+interface DropdownHookProps {
+  focusContainerOnMount?: boolean
+  children?: React.ReactNode
+  options?: React.ReactNode
+  autofocusPrevElementOnEsc?: boolean
+  autofocusPrevElementOnTab?: boolean
+  hideDropdown: () => void
+  orientation?: "horizontal" | "vertical"
+  autofocusPrevElementOnSelect?: boolean
+}
+
+interface PositionStyle {
+  left: number
+  top: number
+  [key: string]: any
+}
+
+interface RefPosition {
+  left: number
+  top: number
+}
+
+// Main dropdown component
+export function DropdownComponent(props: DropdownProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const hasLabel = "label" in props
+  const hasDropdownButton = "dropdownButton" in props
+
   return jsxs("div", {
-    className: d()(gD, e.className, t && FR, e.shouldRenderAutocompleteStyles && Rp),
-    ...(e.notDraggable ? {
-      "data-not-draggable": !0
-    } : {}),
-    children: [a && jsxs("div", {
-      className: d()(Ts, e.noBorder && E7, e.noRightPadding && zT),
-      onClick: () => r(!t),
-      role: "menu",
-      tabIndex: 0,
-      children: [jsxs("div", {
-        className: ep,
-        children: [!!e.iconLabel && jsx("div", {
-          className: Vi,
-          children: e.iconLabel
-        }), jsx("p", {
-          children: e.label
-        })]
-      }), jsx(SvgComponent, {
-        className: tZ,
-        svg: _$$A
-      })]
-    }), s && jsx(e.dropdownButton, {
-      onClick: () => r(!t)
-    }), t && jsxs(Fragment, {
-      children: [jsx("div", {
-        className: d()(DE, e.dropdownOptionsClassName, e.rightAlignOptions && Wh, e.optionsBelowSelector && fG),
-        onClick: e.stayOpenOnSelect ? void 0 : () => r(!t),
+    className: classNames(gD, props.className, isOpen && FR, props.shouldRenderAutocompleteStyles && Rp),
+    ...(props.notDraggable
+      ? {
+          "data-not-draggable": true,
+        }
+      : {}),
+    children: [
+      hasLabel && jsxs("div", {
+        className: classNames(Ts, props.noBorder && E7, props.noRightPadding && zT),
+        onClick: () => setIsOpen(!isOpen),
         role: "menu",
         tabIndex: 0,
-        children: jsx(TrackingProvider, {
-          name: e.menuTrackingContextName || "",
-          enabled: !!e.menuTrackingContextName,
-          properties: e.menuTrackingProperties,
-          children: jsx($$A5, {
-            options: e.options,
-            hideDropdown: () => r(!1),
-            shouldRenderAutocompleteStyles: e.shouldRenderAutocompleteStyles
-          })
-        })
-      }), jsx($$B6, {
-        closeDropdown: () => r(!1)
-      })]
-    })]
-  });
+        children: [
+          jsxs("div", {
+            className: ep,
+            children: [
+              !!props.iconLabel && jsx("div", {
+                className: Vi,
+                children: props.iconLabel,
+              }),
+              jsx("p", {
+                children: props.label,
+              }),
+            ],
+          }),
+          jsx(SvgComponent, {
+            className: tZ,
+            svg: _$$A,
+          }),
+        ],
+      }),
+      hasDropdownButton && jsx(props.dropdownButton!, {
+        onClick: () => setIsOpen(!isOpen),
+      }),
+      isOpen && jsxs(Fragment, {
+        children: [
+          jsx("div", {
+            className: classNames(DE, props.dropdownOptionsClassName, props.rightAlignOptions && Wh, props.optionsBelowSelector && fG),
+            onClick: props.stayOpenOnSelect ? undefined : () => setIsOpen(false),
+            role: "menu",
+            tabIndex: 0,
+            children: jsx(TrackingProvider, {
+              name: props.menuTrackingContextName || "",
+              enabled: !!props.menuTrackingContextName,
+              properties: props.menuTrackingProperties,
+              children: jsx(DropdownOptions, {
+                options: props.options,
+                hideDropdown: () => setIsOpen(false),
+                shouldRenderAutocompleteStyles: props.shouldRenderAutocompleteStyles,
+              }),
+            }),
+          }),
+          jsx(DropdownScrim, {
+            closeDropdown: () => setIsOpen(false),
+          }),
+        ],
+      }),
+    ],
+  })
 }
-export function $$v2(e) {
-  let [t, r] = useState(e.focusContainerOnMount ? -1 : 0);
-  let n = useMemo(() => Children.toArray(e.children || e.options).filter(e => "boolean" != typeof e), [e.children, e.options]);
-  let s = useRef(Array(n.length));
-  let o = useRef(document.activeElement);
+
+// Hook for managing dropdown focus and keyboard navigation
+export function useDropdownFocus(props: DropdownHookProps) {
+  const [focusedIndex, setFocusedIndex] = useState(props.focusContainerOnMount ? -1 : 0)
+  const childrenComponents = useMemo(
+    () => Children.toArray(props.children || props.options).filter(child => typeof child !== "boolean"),
+    [props.children, props.options],
+  )
+  const childRefs = useRef<Array<HTMLElement | null>>(Array.from({ length: childrenComponents.length }))
+  const previousActiveElement = useRef(document.activeElement)
+
+  // Focus the currently selected element
   useEffect(() => {
-    let e = s.current[t];
-    e && (e.tabIndex = 0, e.focus());
-  }, [t, s]);
-  let l = useCallback((e, t) => {
-    let n = s.current[e];
-    n && (n.tabIndex = -1, n.focus());
-    r(t);
-  }, []);
-  let d = useCallback(() => {
-    let e = t - 1;
-    for (let t of s.current) if (null == s.current[e]) e = e - 1 < 0 ? s.current.length - 1 : e - 1;else break;
-    l(t, e);
-  }, [t, l]);
-  let c = useCallback(() => {
-    let e = t + 1;
-    for (let t of s.current) if (null == s.current[e]) e = e + 1 >= s.current.length ? 0 : e + 1;else break;
-    l(t, e);
-  }, [t, l]);
-  return {
-    childrenComponents: n,
-    getSetChildRef: e => (e => {
-      if ("boolean" != typeof e && (e.type === $$w7 || e.type === $$D1)) {
-        let t = e.props;
-        return !!(t.disabled || t.header);
+    const element = childRefs.current[focusedIndex]
+    if (element) {
+      element.tabIndex = 0
+      element.focus()
+    }
+  }, [focusedIndex, childRefs])
+
+  // Set focus to a specific element
+  const setFocusToElement = useCallback((currentIndex: number, newIndex: number) => {
+    const element = childRefs.current[currentIndex]
+    if (element) {
+      element.tabIndex = -1
+      element.focus()
+    }
+    setFocusedIndex(newIndex)
+  }, [])
+
+  // Focus the previous element (with wrapping)
+  const focusPreviousElement = useCallback(() => {
+    let newIndex = focusedIndex - 1
+    for (let i = 0; i < childRefs.current.length; i++) {
+      if (childRefs.current[newIndex] == null) {
+        newIndex = newIndex - 1 < 0 ? childRefs.current.length - 1 : newIndex - 1
       }
-      return !1;
-    })(n[e]) ? noop : t => s.current[e] = t,
-    onKeyDown: r => {
-      switch (r.stopPropagation(), r.nativeEvent && r.nativeEvent.stopImmediatePropagation(), r.key) {
-        case "Escape":
-          e.autofocusPrevElementOnEsc && o.current?.focus();
-          e.hideDropdown();
-          break;
-        case "Tab":
-          e.autofocusPrevElementOnTab && o.current?.focus();
-          e.hideDropdown();
-          break;
-        case " ":
-        case "Enter":
-          {
-            let r = s.current[t];
-            r && r.click();
-            e.autofocusPrevElementOnSelect && o.current?.focus();
-            break;
-          }
-        case "Left":
-        case "ArrowLeft":
-          "horizontal" === e.orientation && d();
-          break;
-        case "Up":
-        case "ArrowUp":
-          "horizontal" !== e.orientation && d();
-          break;
-        case "Right":
-        case "ArrowRight":
-          "horizontal" === e.orientation && c();
-          break;
-        case "ArrowDown":
-        case "Down":
-          "horizontal" !== e.orientation && c();
-          break;
-        case "Home":
-        case "PageUp":
-          l(t, 0);
-          break;
-        case "End":
-        case "PageDown":
-          l(t, s.current.length - 1);
-      }
-    },
-    onFocus: e => {
-      if (e && e.target) {
-        let r = s.current.indexOf(e.target);
-        r >= 0 && l(t, r);
+      else {
+        break
       }
     }
-  };
-}
-export function $$A5(e) {
-  let {
+    setFocusToElement(focusedIndex, newIndex)
+  }, [focusedIndex, setFocusToElement])
+
+  // Focus the next element (with wrapping)
+  const focusNextElement = useCallback(() => {
+    let newIndex = focusedIndex + 1
+    for (let i = 0; i < childRefs.current.length; i++) {
+      if (childRefs.current[newIndex] == null) {
+        newIndex = newIndex + 1 >= childRefs.current.length ? 0 : newIndex + 1
+      }
+      else {
+        break
+      }
+    }
+    setFocusToElement(focusedIndex, newIndex)
+  }, [focusedIndex, setFocusToElement])
+
+  // Get a ref callback for a child element
+  const getSetChildRef = (index: number) => {
+    const child = childrenComponents[index] as React.ReactElement
+    if (
+      typeof child !== "boolean"
+      && ("type" in child)
+      && (child.type === OptionComponent || child.type === CheckableOptionComponent)
+    ) {
+      const childProps = (child as React.ReactElement).props
+      if (childProps.disabled || childProps.header) {
+        return noop
+      }
+    }
+    return (element: HTMLElement | null) => childRefs.current[index] = element
+  }
+
+  // Handle keyboard navigation
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    event.stopPropagation()
+    if (event.nativeEvent) {
+      event.nativeEvent.stopImmediatePropagation()
+    }
+
+    switch (event.key) {
+      case "Escape":
+        if (props.autofocusPrevElementOnEsc) {
+          (previousActiveElement.current as HTMLElement)?.focus()
+        }
+        props.hideDropdown()
+        break
+      case "Tab":
+        if (props.autofocusPrevElementOnTab) {
+          (previousActiveElement.current as HTMLElement)?.focus()
+        }
+        props.hideDropdown()
+        break
+      case " ":
+      case "Enter":
+        {
+          const element = childRefs.current[focusedIndex]
+          if (element) {
+            element.click()
+          }
+          if (props.autofocusPrevElementOnSelect) {
+            (previousActiveElement.current as HTMLElement)?.focus()
+          }
+        }
+        break
+      case "Left":
+      case "ArrowLeft":
+        if (props.orientation === "horizontal") {
+          focusPreviousElement()
+        }
+        break
+      case "Up":
+      case "ArrowUp":
+        if (props.orientation !== "horizontal") {
+          focusPreviousElement()
+        }
+        break
+      case "Right":
+      case "ArrowRight":
+        if (props.orientation === "horizontal") {
+          focusNextElement()
+        }
+        break
+      case "ArrowDown":
+      case "Down":
+        if (props.orientation !== "horizontal") {
+          focusNextElement()
+        }
+        break
+      case "Home":
+      case "PageUp":
+        setFocusToElement(focusedIndex, 0)
+        break
+      case "End":
+      case "PageDown":
+        setFocusToElement(focusedIndex, childRefs.current.length - 1)
+        break
+    }
+  }
+
+  // Handle focus events
+  const onFocus = (event: React.FocusEvent) => {
+    if (event && event.target) {
+      const index = childRefs.current.indexOf(event.target as HTMLElement)
+      if (index >= 0) {
+        setFocusToElement(focusedIndex, index)
+      }
+    }
+  }
+
+  return {
     childrenComponents,
     getSetChildRef,
     onKeyDown,
-    onFocus
-  } = $$v2(e);
-  let {
+    onFocus,
+  }
+}
+
+// Dropdown options container
+export function DropdownOptions(props: any) {
+  const {
+    childrenComponents,
+    getSetChildRef,
+    onKeyDown,
+    onFocus,
+  } = useDropdownFocus(props)
+
+  const {
     children,
     options,
-    ...d
-  } = e;
-  return jsx($$C11, {
-    ...d,
+    ...restProps
+  } = props
+
+  return jsx(DropdownContainer, {
+    ...restProps,
     onKeyDown,
     tabIndex: -1,
-    children: Children.map(childrenComponents, (e, t) => cloneElement(e, {
-      buttonRef: getSetChildRef(t),
-      onFocus
-    }))
-  });
+    children: Children.map(childrenComponents, (child, index) =>
+      cloneElement(child as React.ReactElement, {
+        buttonRef: getSetChildRef(index),
+        onFocus,
+      })),
+  })
 }
-export function $$x10(e, t) {
-  let [r, n] = useState(null);
+
+// Positioning hook for dropdowns
+export function useDropdownPosition(ref: React.RefObject<HTMLElement>, style: RefPosition): PositionStyle {
+  const [position, setPosition] = useState<[number, number] | null>(null)
+
   useEffect(() => {
-    let r = e.current;
-    if (r) {
-      let e = r.getBoundingClientRect();
-      let i = t.left;
-      let a = t.top;
-      i < 8 ? i = 8 : i + e.width > window.innerWidth - 8 && (i = window.innerWidth - 8 - e.width);
-      a < 8 ? a = 8 : a + e.height > window.innerHeight - 8 && (a = window.innerHeight - 8 - e.height);
-      n([i, a]);
+    const element = ref.current
+    if (element) {
+      const rect = element.getBoundingClientRect()
+      let left = style.left
+      let top = style.top
+
+      // Ensure dropdown stays within viewport with 8px padding
+      if (left < 8) {
+        left = 8
+      }
+      else if (left + rect.width > window.innerWidth - 8) {
+        left = window.innerWidth - 8 - rect.width
+      }
+
+      if (top < 8) {
+        top = 8
+      }
+      else if (top + rect.height > window.innerHeight - 8) {
+        top = window.innerHeight - 8 - rect.height
+      }
+
+      setPosition([left, top])
     }
-  }, [e, t.left, t.top]);
-  return useMemo(() => r ? {
-    ...t,
-    left: r[0],
-    top: r[1]
-  } : {
-    ...t,
-    visibility: "hidden"
-  }, [r, t]);
+  }, [ref, style.left, style.top])
+
+  return useMemo(() =>
+    position
+      ? {
+          ...style,
+          left: position[0],
+          top: position[1],
+        }
+      : {
+          ...style,
+          visibility: "hidden",
+        }, [position, style])
 }
-export let $$N4 = forwardRef(function ({
-  style: e,
-  ...t
-}, r) {
-  let a = useRef(null);
-  let s = $$x10(a, e);
-  return jsx($$j9, {
-    dropdownRef: createMultiRefCallback(a, r),
-    style: s,
-    ...t
-  });
-});
-export class $$C11 extends RecordingPureComponent {
-  constructor() {
-    super(...arguments);
-    this.stopPropagationForPointerDown = e => {
-      shouldHandleMultiTouchOrPressure() && stopPropagation(e);
-    };
-    this.onClick = handleMouseEvent(this, "click", e => {
-      if (!this.props.onClick) return SKIP_RECORDING;
-      this.props.onClick(e);
-    });
+
+// Positioned dropdown component
+export const PositionedDropdown = forwardRef(({
+  style,
+  ...props
+}: any, ref) => {
+  const dropdownRef = useRef<HTMLElement>(null)
+  const positionedStyle = useDropdownPosition(dropdownRef, style)
+
+  return jsx(DropdownWithScrim, {
+    dropdownRef: createMultiRefCallback(dropdownRef, ref),
+    style: positionedStyle,
+    ...props,
+  })
+})
+
+// Dropdown container component
+export class DropdownContainer extends RecordingPureComponent<any> {
+  private stopPropagationForPointerDown = (event: React.PointerEvent) => {
+    if (shouldHandleMultiTouchOrPressure()) {
+      stopPropagation(event)
+    }
   }
+
+  private onClick = handleMouseEvent(this, "click", (event: React.MouseEvent) => {
+    if (!this.props.onClick) {
+      return SKIP_RECORDING
+    }
+    this.props.onClick(event)
+  })
+
   render() {
     return jsx("div", {
-      ref: this.props.dropdownRef,
+      "ref": this.props.dropdownRef,
       "aria-labelledby": this.props["aria-labelledby"],
-      className: d()(Wm, this.props.className, {
-        [DY]: this.props.positionAbsolute,
-        [_S]: this.props.positionFixed,
-        [rU]: this.props.shouldRenderAutocompleteStyles,
-        [s4]: this.props.preventZoom,
-        [Dm]: this.props.preventEventCapture
-      }),
-      "data-cancel-insertable-resource-drag-and-drop": !0,
+      "className": classNames(
+        Wm,
+        this.props.className,
+        {
+          [DY]: this.props.positionAbsolute,
+          [_S]: this.props.positionFixed,
+          [rU]: this.props.shouldRenderAutocompleteStyles,
+          [s4]: this.props.preventZoom,
+          [Dm]: this.props.preventEventCapture,
+        },
+      ),
+      "data-cancel-insertable-resource-drag-and-drop": true,
       "data-onboarding-key": this.props.dataOnboardingKey,
       "data-testid": this.props["data-testid"],
-      id: this.props.id,
-      onClick: this.onClick,
-      onContextMenu: preventDefault,
-      onFocus: this.props.onFocus,
-      onKeyDown: this.props.onKeyDown,
-      onMouseDown: stopPropagation,
-      onPointerDown: this.stopPropagationForPointerDown,
-      onScroll: this.props.stopScrollPropagation ? stopPropagation : this.props.onScroll,
-      onTouchStart: stopPropagation,
-      onWheel: this.props.preventZoom ? void 0 : stopPropagation,
-      role: "menu",
-      style: this.props.style,
-      tabIndex: this.props.tabIndex ?? 0,
-      children: this.props.children
-    });
+      "id": this.props.id,
+      "onClick": this.onClick,
+      "onContextMenu": preventDefault,
+      "onFocus": this.props.onFocus,
+      "onKeyDown": this.props.onKeyDown,
+      "onMouseDown": stopPropagation,
+      "onPointerDown": this.stopPropagationForPointerDown,
+      "onScroll": this.props.stopScrollPropagation ? stopPropagation : this.props.onScroll,
+      "onTouchStart": stopPropagation,
+      "onWheel": this.props.preventZoom ? undefined : stopPropagation,
+      "role": "menu",
+      "style": this.props.style,
+      "tabIndex": this.props.tabIndex ?? 0,
+      "children": this.props.children,
+    })
   }
+  static displayName = "Dropdown"
 }
-$$C11.displayName = "Dropdown";
-export class $$w7 extends RecordingPureComponent {
-  constructor() {
-    super(...arguments);
-    this.mouseOverTimestamp = 0;
-    this.state = {
-      hover: !1
-    };
-    this.onDragStart = e => {
-      e.preventDefault();
-    };
-    this.onPointerOver = e => {
-      this.props.onPointerOver && this.props.onPointerOver();
-      this.setState({
-        hover: !0
-      });
-      this.props.onHover && this.props.onHover(!0);
-      this.props.href || (this.mouseOverTimestamp = Number(e.timeStamp));
-    };
-    this.onPointerOut = e => {
-      this.props.onPointerOut && this.props.onPointerOut();
-      this.setState({
-        hover: !1
-      });
-      this.props.onHover && this.props.onHover(!1);
-    };
-    this.onPointerUp = handleMouseEvent(this, "mouseup", e => {
-      if (!this.props.href) {
-        if (this.props.onPointerUp) {
-          this.props.onPointerUp(e);
-          return;
-        }
-        if (Number(e.timeStamp) - this.mouseOverTimestamp > 20) {
-          let t = e.target;
-          null != t.click && (this.mouseUpTimer = setTimeout(t.click.bind(t), 1));
-        }
-      }
-    });
-    this.onTouchEnd = e => {
-      let t = e.target;
-      if (t.click && (e.preventDefault(), t && e.changedTouches)) {
-        let r = e.changedTouches[0];
-        document.elementFromPoint(r.clientX, r.clientY) === t && t.click();
-      }
-    };
-    this.onClick = handleMouseEvent(this, "click", e => {
-      this.props.href && isCommandOrShift(e) || (this.props.href ? handleUrlAction(this.props.href, e) : clearTimeout(this.mouseUpTimer), this.props.onClick?.(e));
-    });
-    this.ariaRole = () => this.props.header ? "presentation" : "role" in this.props ? this.props.role ?? "menuitem" : "menuitem";
+
+// Option component for dropdown items
+export class OptionComponent extends RecordingPureComponent<any> {
+  private mouseOverTimestamp = 0
+  private mouseUpTimer?: number
+  public state = {
+    hover: false,
   }
+
+  private onDragStart = (event: React.DragEvent) => {
+    event.preventDefault()
+  }
+
+  private onPointerOver = (event: React.PointerEvent) => {
+    this.props.onPointerOver?.()
+    this.setState({ hover: true })
+    this.props.onHover?.(true)
+    if (!this.props.href) {
+      this.mouseOverTimestamp = Number(event.timeStamp)
+    }
+  }
+
+  private onPointerOut = (_event: React.PointerEvent) => {
+    this.props.onPointerOut?.()
+    this.setState({ hover: false })
+    this.props.onHover?.(false)
+  }
+
+  private onPointerUp = handleMouseEvent(this, "mouseup", (event: React.MouseEvent) => {
+    if (!this.props.href) {
+      if (this.props.onPointerUp) {
+        this.props.onPointerUp(event)
+        return
+      }
+      if (Number(event.timeStamp) - this.mouseOverTimestamp > 20) {
+        const target = event.target as HTMLElement
+        if (target.click != null) {
+          this.mouseUpTimer = window.setTimeout(target.click.bind(target), 1)
+        }
+      }
+    }
+  })
+
+  private onTouchEnd = (event: React.TouchEvent) => {
+    const target = event.target as HTMLElement
+    if (target.click && event.preventDefault && target && event.changedTouches) {
+      const touch = event.changedTouches[0]
+      if (document.elementFromPoint(touch.clientX, touch.clientY) === target) {
+        target.click()
+      }
+    }
+  }
+
+  private onClick = handleMouseEvent(this, "click", (event: React.MouseEvent) => {
+    if (!(this.props.href && isCommandOrShift(event))) {
+      if (this.props.href) {
+        handleUrlAction(this.props.href, event)
+      }
+      else {
+        clearTimeout(this.mouseUpTimer)
+      }
+      this.props.onClick?.(event)
+    }
+  })
+
+  private ariaRole = () => {
+    if (this.props.header) {
+      return "presentation"
+    }
+    return "role" in this.props ? this.props.role ?? "menuitem" : "menuitem"
+  }
+
   render() {
-    let e = this.props.disabled || this.props.header;
-    let t = d()(e ? IZ : {
-      [wY]: this.state.hover || this.props.simulateHover,
-      [uK]: !0
-    }, this.props.className);
+    const isDisabledOrHeader = this.props.disabled || this.props.header
+    const className = classNames(
+      isDisabledOrHeader
+        ? IZ
+        : {
+            [wY]: this.state.hover || this.props.simulateHover,
+            [uK]: true,
+          },
+      this.props.className,
+    )
+
     return jsx("a", {
-      ref: this.props.buttonRef,
-      "aria-checked": "aria-checked" in this.props ? this.props["aria-checked"] : void 0,
+      "ref": this.props.buttonRef,
+      "aria-checked": "aria-checked" in this.props ? this.props["aria-checked"] : undefined,
       "aria-disabled": this.props.disabled,
-      className: t,
+      "className": className,
       "data-dropdown-tooltip": this.props.tooltip,
       "data-fullscreen-intercept": this.props["data-fullscreen-intercept"],
       "data-onboarding-key": this.props.onboardingKey,
       "data-search-click-action": this.props["data-search-click-action"],
       "data-testid": this.props.recordingKey,
-      href: this.props.href,
-      id: this.props.id,
-      onClick: e ? void 0 : this.onClick,
-      onDragStart: this.onDragStart,
-      onFocus: this.props.onFocus,
-      onKeyDown: this.props.onKeyDown,
-      onMouseDown: this.props.onMouseDown,
-      onPointerOut: e ? void 0 : this.onPointerOut,
-      onPointerOver: e ? void 0 : this.onPointerOver,
-      onPointerUp: e ? void 0 : this.onPointerUp,
-      onTouchEnd: this.onTouchEnd,
-      rel: "noopener",
-      role: this.ariaRole(),
-      tabIndex: -1,
-      target: this.props.target,
-      children: this.props.children
-    });
+      "href": this.props.href,
+      "id": this.props.id,
+      "onClick": isDisabledOrHeader ? undefined : this.onClick,
+      "onDragStart": this.onDragStart,
+      "onFocus": this.props.onFocus,
+      "onKeyDown": this.props.onKeyDown,
+      "onMouseDown": this.props.onMouseDown,
+      "onPointerOut": isDisabledOrHeader ? undefined : this.onPointerOut,
+      "onPointerOver": isDisabledOrHeader ? undefined : this.onPointerOver,
+      "onPointerUp": isDisabledOrHeader ? undefined : this.onPointerUp,
+      "onTouchEnd": this.onTouchEnd,
+      "rel": "noopener",
+      "role": this.ariaRole(),
+      "tabIndex": -1,
+      "target": this.props.target,
+      "children": this.props.children,
+    })
   }
+  static displayName = "Option"
 }
-$$w7.displayName = "Option";
-export let $$O8 = withTrackedClick($$w7);
-export class $$R14 extends PureComponent {
-  constructor() {
-    super(...arguments);
-    this.onClick = e => {
-      e.stopPropagation();
-    };
+
+// Tracked option component
+export const TrackedOption = withTrackedClick(OptionComponent)
+
+// Separator component
+export class SeparatorComponent extends PureComponent<any> {
+  private onClick = (event: React.MouseEvent) => {
+    event.stopPropagation()
   }
+
   render() {
-    let e = me;
-    this.props.className && (e += ` ${this.props.className}`);
+    let className = me
+    if (this.props.className) {
+      className += ` ${this.props.className}`
+    }
+
     return jsx("div", {
-      className: e,
-      onClick: this.onClick,
-      style: this.props.style,
+      "className": className,
+      "onClick": this.onClick,
+      "style": this.props.style,
       "data-testid": this.props.dataTestId ?? "dropdown-separator",
-      children: jsx("div", {
-        className: se
-      })
-    });
+      "children": jsx("div", {
+        className: se,
+      }),
+    })
   }
+  static displayName = "Separator"
 }
-$$R14.displayName = "Separator";
-class L extends PureComponent {
-  constructor() {
-    super(...arguments);
-    this.onClick = e => {
-      e.stopPropagation();
-    };
+
+// Indented separator component
+export class IndentedSeparatorComponent extends PureComponent<any> {
+  private onClick = (event: React.MouseEvent) => {
+    event.stopPropagation()
   }
+
   render() {
-    let e = jv;
-    this.props.className && (e += ` ${this.props.className}`);
+    let className = jv
+    if (this.props.className) {
+      className += ` ${this.props.className}`
+    }
+
     return jsx("div", {
-      className: e,
-      onClick: this.onClick,
-      style: this.props.style,
+      "className": className,
+      "onClick": this.onClick,
+      "style": this.props.style,
       "data-testid": this.props.dataTestId ?? "dropdown-indented-separator",
-      children: jsx("div", {
-        className: se
-      })
-    });
+      "children": jsx("div", {
+        className: se,
+      }),
+    })
   }
+  static displayName = "IndentedSeparator"
 }
-L.displayName = "IndentedSeparator";
-export var $$P0 = (e => (e.Checkmark = "Checkmark", e.Checkbox = "Checkbox", e))($$P0 || {});
-export class $$D1 extends RecordingPureComponent {
+
+// Display type enum for checkable options
+export enum CheckDisplayType {
+  Checkmark = "Checkmark",
+  Checkbox = "Checkbox",
+}
+
+// Checkable option component
+export class CheckableOptionComponent extends RecordingPureComponent<any> {
+  static defaultProps = {
+    displayType: CheckDisplayType.Checkmark,
+  }
+
   render() {
-    return jsxs($$w7, {
+    return jsxs(OptionComponent, {
       ...this.props,
-      className: d()(_$$o, "Checkbox" === this.props.displayType && this.props.nested && cY, this.props.className),
+      "className": classNames(
+        _$$o,
+        this.props.displayType === CheckDisplayType.Checkbox && this.props.nested && cY,
+        this.props.className,
+      ),
       "aria-checked": this.props.checked,
-      role: "role" in this.props ? this.props.role : void 0,
-      children: ["Checkbox" === this.props.displayType ? jsx(setupThemeContext, {
-        mode: "dark",
-        children: jsx("span", {
-          className: z6,
-          children: jsx(S, {
-            disabled: this.props.disabled,
-            checked: this.props.checked,
-            mixed: this.props.mixed
-          })
-        })
-      }) : this.props.checked ? jsx(SvgComponent, {
-        className: z6,
-        svg: A,
-        dataTestId: "dropdown-check-icon"
-      }) : jsx("span", {
-        className: z6
-      }), this.props.children]
-    });
+      "role": "role" in this.props ? this.props.role : undefined,
+      "children": [
+        this.props.displayType === CheckDisplayType.Checkbox
+          ? jsx(setupThemeContext, {
+              mode: "dark",
+              children: jsx("span", {
+                className: z6,
+                children: jsx(RenderRefCheckbox, {
+                  disabled: this.props.disabled,
+                  checked: this.props.checked,
+                  mixed: this.props.mixed,
+                }),
+              }),
+            })
+          : this.props.checked
+            ? jsx(SvgComponent, {
+                className: z6,
+                svg: A,
+                dataTestId: "dropdown-check-icon",
+              })
+            : jsx("span", {
+                className: z6,
+              }),
+        this.props.children,
+      ],
+    })
   }
+  static displayName = "CheckableOption"
 }
-$$D1.displayName = "CheckableOption";
-$$D1.defaultProps = {
-  displayType: "Checkmark"
-};
-export class $$k15 extends RecordingPureComponent {
+
+// Tracked checkable option component
+const TrackedCheckableOption = withTrackedClick(CheckableOptionComponent)
+
+// Option with primary and secondary text
+export class TextOptionComponent extends RecordingPureComponent<any> {
   render() {
-    return jsxs($$D1, {
+    return jsxs(CheckableOptionComponent, {
       ...this.props,
-      children: [jsx("div", {
-        children: this.props.primaryText
-      }), !!this.props.secondaryText && jsx("div", {
-        className: pH,
-        children: this.props.secondaryText
-      })]
-    });
+      children: [
+        jsx("div", {
+          children: this.props.primaryText,
+        }),
+        !!this.props.secondaryText && jsx("div", {
+          className: pH,
+          children: this.props.secondaryText,
+        }),
+      ],
+    })
   }
 }
-let $$M12 = withTrackedClick($$D1);
-let $$F13 = withTrackedClick($$k15);
-export class $$j9 extends RecordingPureComponent {
+
+// Tracked text option component
+const TrackedTextOption = withTrackedClick(TextOptionComponent)
+
+// Dropdown with scrim component
+export class DropdownWithScrim extends RecordingPureComponent<any> {
+  private hasCloseDropdown = (props: any) => !!props.closeDropdown
+
   render() {
     return jsxs(Fragment, {
-      children: [jsx($$C11, {
-        ...this.props
-      }), U(this.props) ? jsx($$B6, {
-        closeDropdown: this.props.closeDropdown,
-        recordingKey: "dropdownModalScrim",
-        preventEventCapture: this.props.preventEventCapture
-      }) : jsx($$B6, {
-        dispatch: this.props.dispatch,
-        recordingKey: "dropdownModalScrim",
-        preventEventCapture: this.props.preventEventCapture
-      })]
-    });
+      children: [
+        jsx(DropdownContainer, {
+          ...this.props,
+        }),
+        this.hasCloseDropdown(this.props)
+          ? jsx(DropdownScrim, {
+              closeDropdown: this.props.closeDropdown,
+              recordingKey: "dropdownModalScrim",
+              preventEventCapture: this.props.preventEventCapture,
+            })
+          : jsx(DropdownScrim, {
+              dispatch: this.props.dispatch,
+              recordingKey: "dropdownModalScrim",
+              preventEventCapture: this.props.preventEventCapture,
+            }),
+      ],
+    })
   }
+  static displayName = "DropdownWithScrim"
 }
-$$j9.displayName = "DropdownWithScrim";
-let U = e => !!e.closeDropdown;
-export class $$B6 extends RecordingPureComponent {
-  constructor() {
-    super(...arguments);
-    this.mouseMotionSinceMouseDown = 0;
-    this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY = 5;
-    this.closeDropdown = () => {
-      U(this.props) ? this.props.closeDropdown() : this.props.dispatch(hideDropdownAction());
-    };
-    this.onMouseDown = handleMouseEvent(this, "mousedown", e => {
-      this.mouseMotionSinceMouseDown = 0;
-      this.closeDropdown();
-      e.stopPropagation();
-    });
-    this.onMouseMove = handleMouseEvent(this, "mousemove", e => {
-      if (isInteractionOrEvalMode()) {
-        if (!(this.mouseMotionSinceMouseDown < this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY)) return SKIP_RECORDING;
-        this.mouseMotionSinceMouseDown += this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY;
-      } else {
-        this.mouseMotionSinceMouseDown += Math.abs(e.nativeEvent.movementX);
-        this.mouseMotionSinceMouseDown += Math.abs(e.nativeEvent.movementY);
-      }
-    });
-    this.onMouseUp = handleMouseEvent(this, "mouseup", e => {
-      this.mouseMotionSinceMouseDown >= this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY && (this.closeDropdown(), e.stopPropagation());
-    });
+
+// Dropdown scrim component (clicking outside closes dropdown)
+export class DropdownScrim extends RecordingPureComponent<any> {
+  private mouseMotionSinceMouseDown = 0
+  private readonly MENU_CLOSE_MOUSE_MOVE_SENSITIVITY = 5
+
+  private closeDropdown = () => {
+    if (this.props.closeDropdown) {
+      this.props.closeDropdown()
+    }
+    else {
+      this.props.dispatch(hideDropdownAction())
+    }
   }
+
+  private onMouseDown = handleMouseEvent(this, "mousedown", (event: React.MouseEvent) => {
+    this.mouseMotionSinceMouseDown = 0
+    this.closeDropdown()
+    event.stopPropagation()
+  })
+
+  private onMouseMove = handleMouseEvent(this, "mousemove", (event: React.MouseEvent) => {
+    if (isInteractionOrEvalMode()) {
+      if (!(this.mouseMotionSinceMouseDown < this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY)) {
+        return SKIP_RECORDING
+      }
+      this.mouseMotionSinceMouseDown += this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY
+    }
+    else {
+      this.mouseMotionSinceMouseDown += Math.abs(event.nativeEvent.movementX)
+      this.mouseMotionSinceMouseDown += Math.abs(event.nativeEvent.movementY)
+    }
+  })
+
+  private onMouseUp = handleMouseEvent(this, "mouseup", (event: React.MouseEvent) => {
+    if (this.mouseMotionSinceMouseDown >= this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY) {
+      this.closeDropdown()
+      event.stopPropagation()
+    }
+  })
+
   render() {
     return jsx("div", {
-      className: d()(bv, this.props.preventEventCapture && Dm),
-      onMouseDown: this.onMouseDown,
-      onMouseMove: this.onMouseMove,
-      onMouseUp: this.onMouseUp,
-      onContextMenu: preventDefault,
-      "data-does-not-dismiss-modal": !0
-    });
+      "className": classNames(bv, this.props.preventEventCapture && Dm),
+      "onMouseDown": this.onMouseDown,
+      "onMouseMove": this.onMouseMove,
+      "onMouseUp": this.onMouseUp,
+      "onContextMenu": preventDefault,
+      "data-does-not-dismiss-modal": true,
+    })
   }
 }
-export const Jn = $$P0;
-export const MM = $$D1;
-export const OR = $$v2;
-export const Ve = $$S3;
-export const Vq = $$N4;
-export const X3 = $$A5;
-export const X9 = $$B6;
-export const c$ = $$w7;
-export const gS = $$O8;
-export const gw = $$j9;
-export const l4 = $$x10;
-export const ms = $$C11;
-export const rr = $$M12;
-export const ru = $$F13;
-export const wv = $$R14;
-export const y0 = $$k15;
+
+// Export aliases to maintain compatibility with original code
+export const Jn = CheckDisplayType
+export const MM = CheckableOptionComponent
+export const OR = useDropdownFocus
+export const Ve = DropdownComponent
+export const Vq = PositionedDropdown
+export const X3 = DropdownOptions
+export const X9 = DropdownScrim
+export const c$ = OptionComponent
+export const gS = TrackedOption
+export const gw = DropdownWithScrim
+export const l4 = useDropdownPosition
+export const ms = DropdownContainer
+export const rr = TrackedCheckableOption
+export const ru = TrackedTextOption
+export const wv = SeparatorComponent
+export const y0 = TextOptionComponent

@@ -1,114 +1,206 @@
-import { NoneColor } from "../figma_app/763686";
-import { BrowserInfo } from "../figma_app/778880";
-import { getI18nString } from "../905/303541";
-import { initAction } from "../905/929976";
-import { updateMirror } from "../figma_app/91703";
-import { defaultAppState } from "../figma_app/198712";
-export function $$d7(e = {
-  ...defaultAppState
-}, t) {
-  return initAction.matches(t) ? defaultAppState : (updateMirror.matches(t) && t.payload.appModelChanges && -1 === (e = {
-    ...e,
-    ...t.payload.appModelChanges,
-    isInitialized: !0
-  }).currentSelectedGradientStop.index && (e.currentSelectedGradientStop = {
-    index: 0,
-    type: NoneColor.COLOR
-  }), e);
+// Refactored code: renamed variables, added types, simplified logic, improved readability
+import { getI18nString } from "../905/303541"
+import { initAction } from "../905/929976"
+import { updateMirror } from "../figma_app/91703"
+import { defaultAppState } from "../figma_app/198712"
+import { NoneColor } from "../figma_app/763686"
+import { BrowserInfo } from "../figma_app/778880"
+
+interface AppState {
+  [key: string]: any
+  currentSelectedGradientStop: {
+    index: number
+    type: string
+  }
+  isInitialized?: boolean
+  currentPage?: string
 }
-export let $$c9 = "fullscreen-menu-dropdown";
-export function $$u4(e) {
-  return e?.type === $$c9;
+
+interface Action {
+  type: string
+  payload?: {
+    appModelChanges?: Partial<AppState>
+  }
 }
-export let $$p0 = "page-picker-dropdown";
-export function $$_1(e) {
-  return e?.type === $$p0;
+
+/**
+ * Reducer function to handle state updates based on actions
+ * Origin: $$d7
+ */
+export function appStateReducer(
+  state = { ...defaultAppState },
+  action: Action,
+) {
+  if (initAction.matches(action)) {
+    return defaultAppState
+  }
+
+  if (
+    updateMirror.matches(action)
+    && action.payload?.appModelChanges
+  ) {
+    state = {
+      ...state,
+      ...action.payload.appModelChanges,
+      isInitialized: true,
+    }
+
+    // Reset gradient stop selection if invalid
+    if (state.currentSelectedGradientStop.index === -1) {
+      state.currentSelectedGradientStop = {
+        index: 0,
+        type: NoneColor.COLOR,
+      }
+    }
+  }
+
+  return state
 }
-let $$h8 = "quick-actions-dropdown";
-let m = Object.create(null);
-export function $$g3(e) {
-  let t = m[e];
-  t || (t = m[e] = `actionEnabled__${e}`);
-  return t;
+
+// Dropdown type constants
+export const FULLSCREEN_MENU_DROPDOWN = "fullscreen-menu-dropdown"
+export const PAGE_PICKER_DROPDOWN = "page-picker-dropdown"
+export const QUICK_ACTIONS_DROPDOWN = "quick-actions-dropdown"
+
+/**
+ * Type guard for fullscreen menu dropdown
+ * Origin: $$u4
+ */
+export function isFullscreenMenuDropdown(action: { type?: string }): boolean {
+  return action?.type === FULLSCREEN_MENU_DROPDOWN
 }
-export function $$f5(e, t) {
-  return !!e[$$g3(t)];
+
+/**
+ * Type guard for page picker dropdown
+ * Origin: $$_1
+ */
+export function isPagePickerDropdown(action: { type?: string }): boolean {
+  return action?.type === PAGE_PICKER_DROPDOWN
 }
-export function $$E10(e) {
-  return e.startsWith("actionEnabled__");
+
+// Action enabled property cache
+const actionEnabledPropertyCache: Record<string, string> = Object.create(null)
+
+/**
+ * Generate or retrieve cached property name for action enabled check
+ * Origin: $$g3
+ */
+export function getActionEnabledPropertyName(actionType: string): string {
+  if (!actionEnabledPropertyCache[actionType]) {
+    actionEnabledPropertyCache[actionType] = `actionEnabled__${actionType}`
+  }
+  return actionEnabledPropertyCache[actionType]
 }
-export function $$y6(e, t) {
-  let r = "\u{1F310}";
-  switch (t) {
+
+/**
+ * Check if action is enabled in state
+ * Origin: $$f5
+ */
+export function isActionEnabled(state: Record<string, any>, actionType: string): boolean {
+  return !!state[getActionEnabledPropertyName(actionType)]
+}
+
+/**
+ * Check if property name corresponds to action enabled pattern
+ * Origin: $$E10
+ */
+export function isActionEnabledProperty(propertyName: string): boolean {
+  return propertyName.startsWith("actionEnabled__")
+}
+
+/**
+ * Get keyboard shortcut for action
+ * Origin: $$y6
+ */
+export function getKeyboardShortcut(
+  customShortcuts: Record<string, Array<{ text: string }> | undefined>,
+  actionType: string,
+): string {
+  const globeSymbol = "\u{1F310}"
+
+  switch (actionType) {
     case "set-tool-bend":
-      return BrowserInfo.mac ? "\u2318" : "Ctrl";
+      return BrowserInfo.mac ? "\u2318" : "Ctrl"
     case "set-tool-vector-lasso":
-      return "Q";
+      return "Q"
     case "stack-reorder-left":
     case "stack-counter-align-left":
-      return "\u2190";
+      return "\u2190"
     case "stack-reorder-left-end":
-      return "\u2325\u2190";
+      return "\u2325\u2190"
     case "stack-reorder-right":
     case "stack-counter-align-right":
-      return "\u2192";
+      return "\u2192"
     case "stack-reorder-right-end":
-      return "\u2325\u2192";
+      return "\u2325\u2192"
     case "stack-reorder-up":
     case "stack-counter-align-top":
-      return "\u2191";
+      return "\u2191"
     case "stack-reorder-up-end":
     case "stack-reorder-down-end":
-      return "\u2325\u2191";
+      return "\u2325\u2191"
     case "stack-reorder-down":
     case "stack-counter-align-bottom":
-      return "\u2193";
+      return "\u2193"
     case "set-tool-default-desc-figjam":
     case "set-tool-default-desc-figma":
-      return "V";
+      return "V"
     case "set-tool-marker":
-      return "M";
+      return "M"
     case "set-tool-stamp":
     case "set-tool-code-component":
-      return "E";
+      return "E"
     case "set-tool-type":
-      return "T";
+      return "T"
     case "set-tool-connector-elbowed":
-      return "X";
+      return "X"
     case "toggle-publish":
-      return BrowserInfo.mac ? "\u23252" : "Alt+2";
+      return BrowserInfo.mac ? "\u23252" : "Alt+2"
     case "toggle-inline-preview":
     case "toggle-inline-html-preview":
-      return "\u21E7" + getI18nString("whiteboard.keyboard_shortcuts.key_label.space");
+      return `\u21E7${getI18nString("whiteboard.keyboard_shortcuts.key_label.space")}`
     case "set-tool-sites-responsive-set":
-      return "W";
+      return "W"
     case "deselect-all":
-      return "\u238B";
+      return "\u238B"
     case "multi-edit-text":
-      return "Enter";
+      return "Enter"
     case "page-next":
-      if (BrowserInfo.mac) return r + "\u2193";
-      break;
+      if (BrowserInfo.mac)
+        return `${globeSymbol}\u2193`
+      break
     case "page-previous":
-      if (BrowserInfo.mac) return r + "\u2191";
+      if (BrowserInfo.mac)
+        return `${globeSymbol}\u2191`
+      break
   }
-  if (e[t]) {
-    let r = e[t];
-    if (r && r.length >= 1) return r[0].text;
+
+  // Check for custom shortcuts
+  const shortcut = customShortcuts[actionType]
+  if (shortcut && shortcut.length >= 1) {
+    return shortcut[0].text
   }
-  return "";
+
+  return ""
 }
-export function $$b2(e) {
-  return e && e.currentPage ? e.currentPage : "0:1";
+
+/**
+ * Get current page ID or default
+ * Origin: $$b2
+ */
+export function getCurrentPageId(state: { currentPage?: string }): string {
+  return state && state.currentPage ? state.currentPage : "0:1"
 }
-export const G = $$p0;
-export const IS = $$_1;
-export const Nf = $$b2;
-export const Rn = $$g3;
-export const TY = $$u4;
-export const Yh = $$f5;
-export const c1 = $$y6;
-export const fj = $$d7;
-export const jv = $$h8;
-export const pi = $$c9;
-export const vg = $$E10;
+
+// Export aliases maintaining original names
+export const G = PAGE_PICKER_DROPDOWN
+export const IS = isPagePickerDropdown
+export const Nf = getCurrentPageId
+export const Rn = getActionEnabledPropertyName
+export const TY = isFullscreenMenuDropdown
+export const Yh = isActionEnabled
+export const c1 = getKeyboardShortcut
+export const fj = appStateReducer
+export const jv = QUICK_ACTIONS_DROPDOWN
+export const pi = FULLSCREEN_MENU_DROPDOWN
+export const vg = isActionEnabledProperty

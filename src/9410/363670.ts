@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { useSetAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { useResizeObserverRef } from "../figma_app/708845";
@@ -22,7 +22,7 @@ var l = o;
 let T = parsePxNumber(j4N);
 function w(e) {
   let t = useRef(null);
-  let i = Xr(fq);
+  let i = useSetAtom(fq);
   let o = useResizeObserverRef(t);
   let {
     centeredInPanels
@@ -78,7 +78,7 @@ export function $$S0(e) {
 }
 function j(e) {
   let t = useRef(null);
-  let i = Xr(IH);
+  let i = useSetAtom(IH);
   useEffect(() => (t.current && i(t), () => {
     i(null);
   }), [i]);

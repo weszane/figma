@@ -11,7 +11,7 @@ import { T as _$$T } from "../905/256551";
 import { A as _$$A } from "../905/800065";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, useAtomValueAndSetter, Xr, atomStoreManager } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, useSetAtom, atomStoreManager } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import E from "classnames";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
@@ -98,7 +98,7 @@ export function $$eR6({
   let Q = _$$V();
   let et = Ko();
   let [er, ei] = useAtomValueAndSetter(Q8);
-  let eu = Xr(Rt);
+  let eu = useSetAtom(Rt);
   let {
     recentFragments
   } = cN(!Q);

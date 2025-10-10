@@ -4,7 +4,7 @@ import { O } from "../905/587457";
 import { Fullscreen, SourceType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { createEmbedAnalyticsHandler, LinkMetadataEvent } from "../figma_app/671547";
 import { normalizeValue } from "../905/216495";
@@ -46,7 +46,7 @@ export function $$b1(e) {
   let i = useSelectionPropertyValue("embedData");
   let r = decodeURIComponent(normalizeValue(i)?.originalText || "");
   let a = createEmbedAnalyticsHandler(i);
-  let s = Xr(_$$n);
+  let s = useSetAtom(_$$n);
   return useCallback(() => {
     r && (a(LinkMetadataEvent.CONVERT_TO_TEXT), s({
       type: "MINIMIZE"

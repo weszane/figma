@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback, useState, useLayoutEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { bL, l9, mc, c$, wv, YJ, WL } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset, SelectRoot, SelectManuallyLabeledTrigger, SelectTrigger } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -101,25 +101,25 @@ export function $$x0({
     }
     V();
   }, [T, t, V]);
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     onChange: G,
     onOpenChange: V,
     value: D,
     recordingKey: w,
     children: [jsx(_$$c, {
       active,
-      children: jsx(l9, {
+      children: jsx(SelectSeparator, {
         "data-testid": "library-select-trigger",
         ref: L,
         label: jsx(HiddenLabel, {
           children: renderI18nText("design_systems.assets_panel.dropdown.aria_label")
         })
       })
-    }), jsx(mc, {
+    }), jsx(SelectContainer, {
       "data-testid": C,
       children: jsxs("div", {
         className: "x1hfn5x7",
-        children: [jsx(c$, {
+        children: [jsx(SelectOptionReset, {
           value: "all",
           children: renderI18nText("design_systems.assets_panel.dropdown_type_all_libraries")
         }), k && !u && jsx(S, {
@@ -129,7 +129,7 @@ export function $$x0({
         }, T), libraries.length > 0 && jsxs(Fragment, {
           children: [jsx("div", {
             "data-testid": "subscribed-libraries-divider",
-            children: jsx(wv, {})
+            children: jsx(SelectRoot, {})
           }, "subscribed-libraries-divider"), libraries.map(({
             libraryKey: t
           }) => jsx(S, {
@@ -139,8 +139,8 @@ export function $$x0({
             showTooltipOnEllipsis: e
           }, t))]
         }), librariesForConnectedProject.length > 0 && jsx(Fragment, {
-          children: jsx(YJ, {
-            groupLabel: jsx(WL, {
+          children: jsx(SelectManuallyLabeledTrigger, {
+            groupLabel: jsx(SelectTrigger, {
               children: renderI18nText("design_systems.libraries_modal.connected_project_libraries")
             }),
             children: librariesForConnectedProject.map(({
@@ -155,7 +155,7 @@ export function $$x0({
         }), !x && presets.length > 0 && jsxs(Fragment, {
           children: [jsx("div", {
             "data-testid": "preset-libraries-divider",
-            children: jsx(wv, {})
+            children: jsx(SelectRoot, {})
           }, "preset-libraries-divider"), presets.map(({
             libraryKey: t
           }) => jsx(S, {
@@ -186,7 +186,7 @@ function S({
       e !== l && d(e);
     } else l && d(void 0);
   }, [a, i, l]);
-  return jsx(c$, {
+  return jsx(SelectOptionReset, {
     value: e,
     children: jsxs("div", {
       className: "x78zum5 x1txdalj",

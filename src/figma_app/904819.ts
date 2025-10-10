@@ -2,12 +2,12 @@ import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
 import { Fullscreen } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
-import { ms, c$ } from "../figma_app/236327";
+import { DropdownContainer, OptionComponent } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { useLibraryFileLink } from "../905/217163";
 import { H } from "../905/184637";
-let u = ms;
-let p = c$;
+let u = DropdownContainer;
+let p = OptionComponent;
 let $$_1 = "component-insert-leaf-context-menu";
 let $$h0 = memo(function () {
   let {

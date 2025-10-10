@@ -27,24 +27,24 @@ import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { isLoading } from "../905/18797";
 import { useCurrentPublicPlan } from "../figma_app/465071";
-import { n as _$$n2 } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { ITemplateType, FDocumentType } from "../905/862883";
 import { templateService } from "../figma_app/446378";
 let k = (e, t) => {
   switch (e.type) {
-    case _$$n2.HubFile:
+    case TeamTemplateType.HubFile:
       return `/api/hub_files/${F(e)}/${t}/prepare_insert`;
-    case _$$n2.TeamTemplate:
-    case _$$n2.TeamTemplateLg:
+    case TeamTemplateType.TeamTemplate:
+    case TeamTemplateType.TeamTemplateLg:
       return `/api/templates/${F(e)}/${t}/prepare_insert`;
   }
 };
 let M = e => {
   switch (e.type) {
-    case _$$n2.HubFile:
+    case TeamTemplateType.HubFile:
       return `/api/hub_files/${F(e)}/template_canvas`;
-    case _$$n2.TeamTemplate:
-    case _$$n2.TeamTemplateLg:
+    case TeamTemplateType.TeamTemplate:
+    case TeamTemplateType.TeamTemplateLg:
       return `/api/templates/${F(e)}/template_canvas`;
   }
 };
@@ -53,11 +53,11 @@ let F = ({
   template: t
 }) => {
   switch (e) {
-    case _$$n2.HubFile:
+    case TeamTemplateType.HubFile:
       return t.id;
-    case _$$n2.TeamTemplate:
+    case TeamTemplateType.TeamTemplate:
       return t.file_key;
-    case _$$n2.TeamTemplateLg:
+    case TeamTemplateType.TeamTemplateLg:
       return t.fileKey;
     default:
       throwTypeError(e);
@@ -68,17 +68,17 @@ let j = ({
   type: t
 }) => {
   switch (t) {
-    case _$$n2.HubFile:
+    case TeamTemplateType.HubFile:
       return {
         type: ITemplateType.CommunityResource,
         id: e.id
       };
-    case _$$n2.TeamTemplate:
+    case TeamTemplateType.TeamTemplate:
       return {
         type: ITemplateType.TeamTemplate,
         file_key: e.file_key
       };
-    case _$$n2.TeamTemplateLg:
+    case TeamTemplateType.TeamTemplateLg:
       return {
         type: ITemplateType.TeamTemplate,
         file_key: e.fileKey
@@ -123,10 +123,10 @@ export async function $$U2({
         resourceId: _,
         triggeredFrom: d,
         templateType: n.type,
-        templateCategory: n.type === _$$n2.HubFile ? n.category : void 0
+        templateCategory: n.type === TeamTemplateType.HubFile ? n.category : void 0
       }), s) && (t(postUserFlag({
         inserted_figjam_template: !0
-      })), n.type === _$$n2.TeamTemplate && t(recentCustomTemplatePutAll([n.template])), "section-preset" !== d && "sites-templates-modal" !== d && t(addTemplateToRecentsThunkAction({
+      })), n.type === TeamTemplateType.TeamTemplate && t(recentCustomTemplatePutAll([n.template])), "section-preset" !== d && "sites-templates-modal" !== d && t(addTemplateToRecentsThunkAction({
         storeInRecentsKey: FDocumentType.FigJam,
         ...j(n)
       })));
@@ -151,7 +151,7 @@ export async function $$B1({
   if (!r) throw Error("Missing file version");
   let n = k(e, t);
   let i = M(e);
-  let a = e.type === _$$n2.HubFile ? {
+  let a = e.type === TeamTemplateType.HubFile ? {
     fv: `${r}`
   } : void 0;
   let s = loadCanvasData(i, (e, t) => sendWithRetry.post(e, {
@@ -235,12 +235,12 @@ export function $$z6(e) {
     switch (type) {
       case ITemplateType.CommunityResource:
         return {
-          type: _$$n2.HubFile,
+          type: TeamTemplateType.HubFile,
           template: r[e.id]
         };
       case ITemplateType.TeamTemplate:
         return {
-          type: _$$n2.TeamTemplate,
+          type: TeamTemplateType.TeamTemplate,
           template: s[e.key]
         };
       default:

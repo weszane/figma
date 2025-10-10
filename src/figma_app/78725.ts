@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { useSetAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { isDevHandoffEditorType } from "../figma_app/976749";
@@ -221,7 +221,7 @@ export function $$O3(e) {
   let c = D();
   let u = isDevHandoffEditorType();
   let p = u && o.plugin?.plugin_id === t;
-  let h = Xr(Lx);
+  let h = useSetAtom(Lx);
   let m = P();
   let g = useDispatch<AppDispatch>();
   return {

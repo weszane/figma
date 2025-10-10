@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { atom, useAtomWithSubscription, Rq } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, loadable } from "../figma_app/27355";
 import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { renderI18nText } from "../905/303541";
 import { isWhiteboardFileType } from "../figma_app/976749";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { Sb } from "../figma_app/101956";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { ArrowPosition, PositioningStrategy } from "../905/858282";
@@ -17,7 +17,7 @@ let $$x2 = atom(!1);
 let $$y1 = atom(!1);
 let $$b0 = "figjam_ai_actions_callout";
 export function $$C3() {
-  let e = useAtomWithSubscription(Rq(Sb));
+  let e = useAtomWithSubscription(loadable(Sb));
   let t = _$$_();
   let i = useAtomWithSubscription($$x2);
   let C = useAtomWithSubscription($$y1);
@@ -29,9 +29,9 @@ export function $$C3() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FigJamAIActionsCallout,
-    priority: N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [e]);
   useEffect(() => {
     i && t && getFeatureFlags().figjam_ai_actions_callout && w && show({

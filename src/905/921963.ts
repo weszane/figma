@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { t as _$$t2 } from "../905/378566";
@@ -31,7 +31,7 @@ export function $$N0(e) {
   let i = useDropdownState();
   let N = _$$P();
   let P = useSelector(e => e.userFlags);
-  let O = Xr(_$$G);
+  let O = useSetAtom(_$$G);
   let D = e.resource && e.resource.type === FResourceCategoryType.FILE ? e.resource.file : null;
   let L = e.role.pending && e.role.invite ? e.role.invite.inviteeUserId : e.role.user_id;
   let F = !!(D && D.key && L);

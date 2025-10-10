@@ -9,7 +9,7 @@ import { isVsCodeEnvironment } from "../905/858738";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
 import { G } from "../1250/269770";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
@@ -67,7 +67,7 @@ function L(e) {
     }
   }, [L]);
   let R = useRef(!1);
-  let D = Xr(workshopModeExpirationAtom);
+  let D = useSetAtom(workshopModeExpirationAtom);
   let M = useSubscription(FileWorkshopMode, {
     fileKey: i || ""
   }, {

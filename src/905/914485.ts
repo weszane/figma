@@ -11,7 +11,7 @@ import { mapRecentFilesAndRepos } from "../figma_app/349248";
 import { PublicModelType, DEFAULT_PAGE_SIZE, MAX_RESULTS } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
 import { SvgComponent } from "../905/714743";
 import { In } from "../905/672640";
@@ -31,7 +31,7 @@ function T({
 }) {
   let o = useDispatch<AppDispatch>();
   let l = getSelectedView();
-  let c = Xr(searchInputAtom);
+  let c = useSetAtom(searchInputAtom);
   let u = useAtomWithSubscription(searchScopeAtom);
   let p = useAtomWithSubscription(selectedItemAtom);
   let h = useSelector(e => e.currentUserOrgId || null);

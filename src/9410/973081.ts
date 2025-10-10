@@ -19,7 +19,7 @@ import { useTabState } from '../905/56919';
 import { R as _$$R3 } from '../905/57445';
 import { isExactModifier, KeyCodes, ModifierKeyCodes } from '../905/63728';
 import { addRecentlyUsedAction } from '../905/73603';
-import { n as _$$n3 } from '../905/79930';
+import { TeamTemplateType } from '../905/79930';
 import { setSideHandler } from '../905/80656';
 import { combineWithHyphen, ShareContext } from '../905/91820';
 import { useSprigWithSampling } from '../905/99656';
@@ -82,7 +82,7 @@ import { isVotingSessionJoined } from '../905/486443';
 import { nP as _$$nP, LU } from '../905/487011';
 import { O as _$$O3 } from '../905/487602';
 import { stripHtmlTags } from '../905/491152';
-import { bL as _$$bL, c$, l9, mc, WL, YJ } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer, SelectTrigger, SelectManuallyLabeledTrigger } from '../905/493196';
 import { exportPickerCheckAction } from '../905/496937';
 import { NO } from '../905/498139';
 import { handleAtomEvent } from '../905/502364';
@@ -187,7 +187,7 @@ import { i as _$$i, s9 as _$$s2, si as _$$si, t4 as _$$t2, AM, bx, C9, d2, Dm, D
 import { lW } from '../figma_app/11182';
 import { canPerformAction, canRunExtensions, isExportRestricted } from '../figma_app/12796';
 import { y as _$$y4 } from '../figma_app/13082';
-import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { IuL, k22, LdP, PXB, rY4, tui, tXK, ZAq, ZB$, zK5 } from '../figma_app/27776';
 import { Ye } from '../figma_app/32128';
 import { s9 as _$$s4 } from '../figma_app/34798';
@@ -212,7 +212,7 @@ import { createStartVotingSessionKey, hideJoinVotingSessionModal, setTitle, setV
 import { autosaveAtom, FileProcessingStatus } from '../figma_app/139113';
 import { isAssetSuggestionsEnabled, isRenameLayersEnabled } from '../figma_app/144974';
 import { shouldUseWebGL2 } from '../figma_app/149304';
-import { Dc, hV } from '../figma_app/151766';
+import { initiateSaveAs, ExportOption } from '../figma_app/151766';
 import { Vr } from '../figma_app/151869';
 import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287';
 import { Ig } from '../figma_app/155647';
@@ -258,7 +258,7 @@ import { e as _$$e2, Q as _$$Q } from '../figma_app/320600';
 import { $I, gn } from '../figma_app/322845';
 import { n as _$$n2 } from '../figma_app/339971';
 import { Zj as _$$Zj, S5 } from '../figma_app/355754';
-import { c1, jv, TY, Yh } from '../figma_app/357047';
+import { getKeyboardShortcut, QUICK_ACTIONS_DROPDOWN, isFullscreenMenuDropdown, isActionEnabled } from '../figma_app/357047';
 import { T as _$$T2 } from '../figma_app/373780';
 import { CreateVariableForm, useVariableCreateModalActions } from '../figma_app/380814';
 import { SY } from '../figma_app/383828';
@@ -269,7 +269,7 @@ import { logFileExportThunk } from '../figma_app/401069';
 import { setupCursorChatDisabledCheck } from '../figma_app/403368';
 import { NF } from '../figma_app/406976';
 import { KeyboardShortcut } from '../figma_app/420927';
-import { V8 } from '../figma_app/443991';
+import { processAndUploadAvatar } from '../figma_app/443991';
 import { A0, Mc, R4 } from '../figma_app/454974';
 import { fullscreenValue } from '../figma_app/455680';
 import { throwTypeError } from '../figma_app/465776';
@@ -278,7 +278,7 @@ import { canAccessFullDevMode, useCanAccessDevModeEntryPoint, useCanAccessFullDe
 import { getAllKeyboardLayoutNames, getCurrentKeyboardLayout, getKeyboardLayoutName, updateKeyboardLayoutPreference } from '../figma_app/475303';
 import { bO, j3 } from '../figma_app/500946';
 import { Ep, ZH } from '../figma_app/504823';
-import { Xw } from '../figma_app/506364';
+import { getCurrentSpellCheckImplementation } from '../figma_app/506364';
 import { ih as _$$ih2 } from '../figma_app/509285';
 import { selectCurrentFile, selectOpenFile, useCurrentFileKey, useIsCurrentUserCreator, useOpenFileLibraryKey } from '../figma_app/516028';
 import { rY as _$$rY } from '../figma_app/524655';
@@ -297,7 +297,7 @@ import { Bu, dd, Lk, Rt } from '../figma_app/604494';
 import { PluginManager } from '../figma_app/612938';
 import { WithTrackedButtonWide } from '../figma_app/617427';
 import { hasCmsCollection } from '../figma_app/618433';
-import { J3, JU, kD, kN } from '../figma_app/622574';
+import { getPublishTemplateStatus, canPublishTemplate, getCurrentTemplate, PublishTemplateStatusEnum } from '../figma_app/622574';
 import { copyTextToClipboard } from '../figma_app/623293';
 import { getViewState } from '../figma_app/623300';
 import { ImageManager } from '../figma_app/624361';
@@ -612,7 +612,7 @@ function ej({
   let s = useMemo(() => a.reduce((e, t, i) => (e.set(t, i), e), new Map()), [a]);
   let l = function () {
     let e = wq();
-    let t = Xr(ew);
+    let t = useSetAtom(ew);
     let [i, r] = useState(new Map());
     let [a, s] = useState(new Map());
     useEffect(() => {
@@ -1305,7 +1305,7 @@ class tk extends PureComponent {
       this.setState({
         downloadStarted: !0
       });
-      Dc(hV.Export, this.props.saveAsState, this.props.dispatch, () => {
+      initiateSaveAs(ExportOption.Export, this.props.saveAsState, this.props.dispatch, () => {
         this.setState({
           exportingStarted: !0,
           downloadStarted: !1
@@ -3006,10 +3006,10 @@ function nn(e) {
   let _ = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
-  let x = J3();
-  let y = JU(x);
-  let b = x === kN.FILE_IN_DRAFTS;
-  let C = !!kD();
+  let x = getPublishTemplateStatus();
+  let y = canPublishTemplate(x);
+  let b = x === PublishTemplateStatusEnum.FILE_IN_DRAFTS;
+  let C = !!getCurrentTemplate();
   let v = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let E = ng();
   let T = Ne();
@@ -3423,7 +3423,7 @@ let ns = class e extends PureComponent {
       flags: ['view_restricted', 'whiteboard'],
       featureFlags: ['figjam_canvas_image_to_avatar'],
       callback: () => {
-        V8(t, this.props.user, this.props.dispatch);
+        processAndUploadAvatar(t, this.props.user, this.props.dispatch);
       }
     };
   }
@@ -3538,11 +3538,11 @@ let ns = class e extends PureComponent {
   }
   getMainComponentActionsMenu() {
     if (this.props.isLimitedDevMode) return null;
-    let e = Yh(this.props.appModel, 'find-symbol') && !this.selectedDefaultLibraryComponents();
-    let t = Yh(this.props.appModel, 'push-changes-to-main');
-    let i = Yh(this.props.appModel, 'restore-symbol-or-state-group');
-    let r = Yh(this.props.appModel, 'add-variant');
-    let n = Yh(this.props.appModel, 'publish-selection');
+    let e = isActionEnabled(this.props.appModel, 'find-symbol') && !this.selectedDefaultLibraryComponents();
+    let t = isActionEnabled(this.props.appModel, 'push-changes-to-main');
+    let i = isActionEnabled(this.props.appModel, 'restore-symbol-or-state-group');
+    let r = isActionEnabled(this.props.appModel, 'add-variant');
+    let n = isActionEnabled(this.props.appModel, 'publish-selection');
     let a = [e, t, i, r, n].filter(Boolean).length;
     if (a === 0) return null;
     if (a === 1) {
@@ -3584,8 +3584,8 @@ let ns = class e extends PureComponent {
     };
   }
   getTableCellMenu() {
-    let e = Yh(this.props.appModel, 'delete-table-contents');
-    let t = Yh(this.props.appModel, 'delete-current-table-row') || Yh(this.props.appModel, 'delete-current-table-column');
+    let e = isActionEnabled(this.props.appModel, 'delete-table-contents');
+    let t = isActionEnabled(this.props.appModel, 'delete-current-table-row') || isActionEnabled(this.props.appModel, 'delete-current-table-column');
     return [{
       action: 'move-table-row-up',
       flags: ['edit']
@@ -3639,8 +3639,8 @@ let ns = class e extends PureComponent {
     let s = P5();
     let o = isAssetSuggestionsEnabled() && this.props.hasFragmentSearchPermission;
     let d = this.props.isEligibleForDesignToSites;
-    let c = Yh(this.props.appModel, 'send-to-make-from-design') && (this.props.shouldShowSendToMake?.() ?? !1);
-    let u = Yh(this.props.appModel, 'send-selection-to-buzz-from-design');
+    let c = isActionEnabled(this.props.appModel, 'send-to-make-from-design') && (this.props.shouldShowSendToMake?.() ?? !1);
+    let u = isActionEnabled(this.props.appModel, 'send-selection-to-buzz-from-design');
     let p = [{
       action: 'copy-text'
     }, {
@@ -3779,7 +3779,7 @@ let ns = class e extends PureComponent {
     }, {
       action: i,
       displayText: getI18nString('fullscreen.ruler_guide_context_menu.hide_rulers'),
-      shortcutText: c1(this.props.appModel.keyboardShortcuts, i)
+      shortcutText: getKeyboardShortcut(this.props.appModel.keyboardShortcuts, i)
     }, ...this.getRulerUnitSubmenu()];
     let n = [{
       action: 'remove-guide'
@@ -3915,13 +3915,13 @@ let ns = class e extends PureComponent {
     let c = this.props.selectedView.editorType === FEditorType.Figmake;
     let u = this.props.selectedView.editorType === FEditorType.Cooper;
     let p = this.props.selectedView.editorType === FEditorType.Illustration;
-    let h = (a || d || c || p) && Yh(this.props.appModel, 'select-node-menu') && !this.props.isObjectsPanelMenu && objectItems.length > 1;
+    let h = (a || d || c || p) && isActionEnabled(this.props.appModel, 'select-node-menu') && !this.props.isObjectsPanelMenu && objectItems.length > 1;
     let m = this.props.isObjectsPanelMenu;
     let f = m && this.props.hasAIPermission && isRenameLayersEnabled();
     let g = window.FigmaMobile;
     let x = nh(n.showComments, this.props.selectedView, this.props.viewportInfo, this.props.clientX, this.props.clientY, this.props.dispatch, g?.requestToAddDraftCommentPin);
-    let y = Yh(this.props.appModel, 'swap-to-related-symbol');
-    let b = Yh(this.props.appModel, 'swap-to-related-state');
+    let y = isActionEnabled(this.props.appModel, 'swap-to-related-symbol');
+    let b = isActionEnabled(this.props.appModel, 'swap-to-related-state');
     let C = this.props.isPrototypeCanvasEditUiVisible ? [{
       separator: !0
     }, {
@@ -4056,7 +4056,7 @@ let ns = class e extends PureComponent {
     } : null, {
       action: 'outline-stroke',
       flags: ['edit'],
-      shortcutText: c1(this.props.appModel.keyboardShortcuts, 'outline-stroke')
+      shortcutText: getKeyboardShortcut(this.props.appModel.keyboardShortcuts, 'outline-stroke')
     }, {
       action: 'mask-selection',
       flags: ['edit'],
@@ -4084,9 +4084,9 @@ let ns = class e extends PureComponent {
       action: this.props.propertiesPanelShouldShowRemoveAutoLayout ? 'unstack-selection' : 'stack-selection',
       flags: ['design', 'edit', 'slides']
     }, _$$r3({
-      msalEnabled: Yh(this.props.appModel, 'run-multi-stack-auto-layout') && !this.props.propertiesPanelShouldShowRemoveAutoLayout,
-      destroyAllALEnabled: Yh(this.props.appModel, 'destroy-all-auto-layout'),
-      resizeToFitEnabled: Yh(this.props.appModel, 'resize-to-fit')
+      msalEnabled: isActionEnabled(this.props.appModel, 'run-multi-stack-auto-layout') && !this.props.propertiesPanelShouldShowRemoveAutoLayout,
+      destroyAllALEnabled: isActionEnabled(this.props.appModel, 'destroy-all-auto-layout'),
+      resizeToFitEnabled: isActionEnabled(this.props.appModel, 'resize-to-fit')
     }), {
       action: 'create-symbol',
       flags: ['edit']
@@ -4642,7 +4642,7 @@ function nm(e, t) {
           word: i
         });
         if (e.status === 200) {
-          let e = await Xw();
+          let e = await getCurrentSpellCheckImplementation();
           await e.addWords([i]);
           fullscreenValue.triggerAction('redo-spell-checking');
         } else {
@@ -5004,8 +5004,8 @@ function nY({
   let T = useCanAccessDevModeEntryPoint();
   let S = useHasParentOrgId();
   let j = E && S;
-  let I = Yh(u, 'set-selection-completed-status');
-  let k = Yh(u, 'mark-incomplete');
+  let I = isActionEnabled(u, 'set-selection-completed-status');
+  let k = isActionEnabled(u, 'mark-incomplete');
   let N = qZ();
   let A = trackFileEventWithStore();
   let O = getSelectedEditorType();
@@ -5423,7 +5423,7 @@ let aa = registerModal(({
       sectionId: e,
       initialTemplateCategory: i,
       initialTemplateId: t,
-      templateType: _$$n3.HubFile
+      templateType: TeamTemplateType.HubFile
     },
     children: jsx(ConfirmationModal2, {
       confirmationTitle: jsxs('div', {
@@ -5564,9 +5564,9 @@ function ab({
   let [v, E] = useState(!1);
   let T = fG();
   let w = _$$g2();
-  let S = Xr(Yq);
-  let j = Xr(pn);
-  let I = Xr(bj);
+  let S = useSetAtom(Yq);
+  let j = useSetAtom(pn);
+  let I = useSetAtom(bj);
   let k = useAtomWithSubscription(_$$oh);
   let N = useAtomWithSubscription(pF);
   let A = useFullscreenReady();
@@ -5663,7 +5663,7 @@ function ab({
         j();
         return;
       }
-      i.type === _$$n3.HubFile && Zg({
+      i.type === TeamTemplateType.HubFile && Zg({
         insert: () => w(i, {
           moveViewportAfterPreview: !1,
           priority: 'user-visible',
@@ -5731,7 +5731,7 @@ function ab({
     let e = i && s ? bO(f, i, s) : null;
     u = G.shelf_content.map((t, i) => {
       let n = {
-        type: _$$n3.HubFile,
+        type: TeamTemplateType.HubFile,
         template: t,
         category: x
       };
@@ -5803,7 +5803,7 @@ function ab({
       sectionId: e,
       initialTemplateCategory: i,
       initialTemplateId: s,
-      templateType: _$$n3.HubFile
+      templateType: TeamTemplateType.HubFile
     },
     children: jsx(_$$j2, {
       depth: 0,
@@ -6269,7 +6269,7 @@ function aZ(e) {
       children: [jsx(TextWithTruncation, {
         children: EG(e.searchResult)
       }), jsx(Spacer, {}), jsx(TextWithTruncation, {
-        children: e.searchResult.shortcutText ?? c1(t, getActionOrName(e.searchResult))
+        children: e.searchResult.shortcutText ?? getKeyboardShortcut(t, getActionOrName(e.searchResult))
       })]
     })
   });
@@ -7816,21 +7816,21 @@ function sR({
     };
   }).filter(isNotNullish).sort((e, t) => e.layoutOption === KeyboardLayout.UNKNOWN ? 1 : t.layoutOption === KeyboardLayout.UNKNOWN ? -1 : e.name.localeCompare(t.name)).map(({
     layoutOption: e
-  }) => jsx(c$, {
+  }) => jsx(SelectOptionReset, {
     value: KeyboardLayout[e],
     children: getKeyboardLayoutName(e)
   }, e)), []);
   let c = useMemo(() => s ? jsxs(Fragment, {
-    children: [jsx(YJ, {
-      groupLabel: jsx(WL, {
+    children: [jsx(SelectManuallyLabeledTrigger, {
+      groupLabel: jsx(SelectTrigger, {
         children: getI18nString('keyboard_settings.detected')
       }),
-      children: jsx(c$, {
+      children: jsx(SelectOptionReset, {
         value: KeyboardLayout[s],
         children: getKeyboardLayoutName(s)
       }, s)
-    }, getI18nString('keyboard_settings.detected')), jsx(YJ, {
-      groupLabel: jsx(WL, {
+    }, getI18nString('keyboard_settings.detected')), jsx(SelectManuallyLabeledTrigger, {
+      groupLabel: jsx(SelectTrigger, {
         children: getI18nString('keyboard_settings.other_layouts')
       }),
       children: d.filter(e => e.key !== s.toString())
@@ -7850,7 +7850,7 @@ function sR({
         className: 'keyboard_shortcut_panel_layout_tab--selectorDropdownContainer--0rd1S',
         children: jsx(EventShield, {
           eventListeners: ['onMouseDown', 'onClick', 'onScroll', 'onWheel'],
-          children: jsxs(_$$bL, {
+          children: jsxs(SelectGroupLabel, {
             value: KeyboardLayout[i || 0],
             onChange: e => {
               let i = p(e);
@@ -7864,12 +7864,12 @@ function sR({
               e && t(p(e));
             },
             recordingKey: 'keyboardLayoutSelector',
-            children: [jsx(l9, {
+            children: [jsx(SelectSeparator, {
               label: jsx(HiddenLabel, {
                 children: getI18nString('keyboard_settings.keyboard_layout_panel_selector')
               }),
               width: 'fill'
-            }), jsx(mc, {
+            }), jsx(SelectContainer, {
               children: c
             })]
           })
@@ -8269,7 +8269,7 @@ function sq(e) {
 sG.displayName = 'Category';
 sH.displayName = 'KeyboardShortcutPanel';
 function s$() {
-  let e = Xr(mH);
+  let e = useSetAtom(mH);
   let t = XC(useAtomWithSubscription(_$$a3));
   return getFeatureFlags().cursor_bot && t ? jsx('div', {
     'className': CR,
@@ -8834,7 +8834,7 @@ class ok extends RecordingPureComponent {
     let e = this.props.item;
     let t = this.getDisplayText();
     let i = getActionOrName(e);
-    let n = e.shortcutText || c1(this.props.appModel.keyboardShortcuts, i);
+    let n = e.shortcutText || getKeyboardShortcut(this.props.appModel.keyboardShortcuts, i);
     let a = void 0 !== this.props.item.runPluginArgs;
     let s = e.menuActionType && e.menuActionType === 'run-local-plugin' && (!e.runPluginArgs || this.props.searchQuery);
     let o = e.name === 'plugins-menu-item' && !!e.itemParameterArgs && e.itemParameterArgs.parameters.length > 0;
@@ -8893,7 +8893,7 @@ function oN({
 }) {
   let [i, a] = useState();
   let [s, o] = useState(!0);
-  let l = Xr(dd);
+  let l = useSetAtom(dd);
   if (useEffect(() => {
     if (s) {
       o(!1);
@@ -9416,9 +9416,9 @@ export function $$lr0({
   let G = useIsFullscreenDevModeComponentBrowser();
   let K = useIsSelectedFigmakeFullscreen();
   let [H] = useAtomValueAndSetter(autosaveAtom);
-  let z = Xr(t5);
-  let V = !t.showUi && TY(t.dropdownShown);
-  let W = t.dropdownShown?.type === jv;
+  let z = useSetAtom(t5);
+  let V = !t.showUi && isFullscreenMenuDropdown(t.dropdownShown);
+  let W = t.dropdownShown?.type === QUICK_ACTIONS_DROPDOWN;
   let Y = W ? t.dropdownShown?.data?.parameterEntryArgs : void 0;
   let Z = t.dropdownShown?.data?.fireQuickActionsTrackingEvent || noop;
   let Q = !_$$ty();

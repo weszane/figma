@@ -8,7 +8,7 @@ import { Checkbox } from '../905/274480';
 import { renderI18nText } from '../905/303541';
 import { SerializeError } from '../905/340677';
 import { IconButton } from '../905/443068';
-import { bL, c$, l9, mc } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer } from '../905/493196';
 import { PointingDropdown } from '../905/504727';
 import { Button } from '../905/521428';
 import { getSingletonSceneGraph } from '../905/700578';
@@ -18,7 +18,7 @@ import { noop } from 'lodash-es';
 import { DialogTriggerButton } from '../905/976845';
 import { defaultSerializationOptions, extractBooleanFieldDescriptions } from '../905/998509';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { MM, wv } from '../figma_app/236327';
+import { CheckableOptionComponent, SeparatorComponent } from '../figma_app/236327';
 import { useSingleSelectedKey } from '../figma_app/311375';
 import { fullscreenValue } from '../figma_app/455680';
 import { R$ } from '../figma_app/545190';
@@ -196,18 +196,18 @@ export function $$A0({
             children: 'JSX Flavor'
           }), jsx(DE, {
             label: null,
-            input: jsxs(bL, {
+            input: jsxs(SelectGroupLabel, {
               value: G,
               onChange: e => H(e),
-              children: [jsx(l9, {
+              children: [jsx(SelectSeparator, {
                 label: jsx(HiddenLabel, {
                   children: ' '
                 })
-              }), jsxs(mc, {
-                children: [jsx(c$, {
+              }), jsxs(SelectContainer, {
+                children: [jsx(SelectOptionReset, {
                   value: 'default',
                   children: 'Default'
-                }, 'default'), jsx(c$, {
+                }, 'default'), jsx(SelectOptionReset, {
                   value: 'flow',
                   children: 'Flow'
                 }, 'flow')]
@@ -381,11 +381,11 @@ function P({
       [e]: !t[e]
     }));
   }, [t]);
-  let u = [...Object.entries(s ?? {}).map(([e, t]) => jsx(MM, {
+  let u = [...Object.entries(s ?? {}).map(([e, t]) => jsx(CheckableOptionComponent, {
     checked: t,
     onClick: () => d(e),
     children: E[e]
-  }, e)), ...(s ? [jsx(wv, {}, 'separator')] : []), ...Object.entries(e).filter(([e, t]) => typeof t == 'boolean').map(([e, t]) => jsx(MM, {
+  }, e)), ...(s ? [jsx(SeparatorComponent, {}, 'separator')] : []), ...Object.entries(e).filter(([e, t]) => typeof t == 'boolean').map(([e, t]) => jsx(CheckableOptionComponent, {
     checked: !!t,
     onClick: () => c(e),
     children: a[e] || e

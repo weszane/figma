@@ -10,7 +10,7 @@ import { RecordingScrollContainer } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { updateProfileThunk } from "../figma_app/530167";
 import { isSuccess, isFailure, isLoading } from "../905/18797";
-import { Bj } from "../905/708054";
+import { closeChangeProfileHandleModalIfOpen } from "../905/708054";
 import { qw, Py, H5, BU, Ng as _$$Ng, rh, qr, PJ, GC, u1 } from "../905/599844";
 var n;
 export function $$A2(e) {
@@ -109,7 +109,7 @@ export function $$v3(e) {
       };
       this.loadingKey = () => updateProfileThunk.loadingKeyForPayload({
         profileHandle: this.state.handle,
-        onSuccess: Bj,
+        onSuccess: closeChangeProfileHandleModalIfOpen,
         profileId: this.props.publisher.id
       });
       this.onSaveHandleClick = () => {
@@ -118,7 +118,7 @@ export function $$v3(e) {
         });
         this.props.dispatch(updateProfileThunk({
           profileHandle: this.state.handle,
-          onSuccess: Bj,
+          onSuccess: closeChangeProfileHandleModalIfOpen,
           profileId: this.props.publisher.id
         }));
       };

@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { P } from "../3276/355202";
 import { D } from "../905/537702";
 import { getI18nString } from "../905/303541";
-import { q } from "../figma_app/275739";
+import { volumeThreshold } from "../figma_app/275739";
 let i = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -31,7 +31,7 @@ let $$u0 = {
     alwaysShowVoiceBars: n,
     userName: a
   }) => {
-    if ((e || 0) < q) {
+    if ((e || 0) < volumeThreshold) {
       if (!0 !== n) return null;
       e = 0;
     }

@@ -1,7 +1,7 @@
 import { debug } from "../figma_app/465776";
 import { AppStateTsApi, Fullscreen, ThemeMode } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter, Ut } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter, RESET } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { useConditionalCallback } from "../905/165069";
 import { logError } from "../905/714362";
@@ -102,7 +102,7 @@ export function $$C1() {
       fileKey: r.fileKey,
       selectedNodeIds: r.selectedNodeIds
     }).then(() => {
-      d(Ut);
+      d(RESET);
       AppStateTsApi?.uiState().leftPanelCollapsedUI3.set(!1);
       debugState.dispatch(VisualBellActions.dequeue({
         matchType: "design-to-slides-load"

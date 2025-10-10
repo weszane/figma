@@ -6,7 +6,7 @@ import { StylesBindings, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { generateRecordingKey } from "../figma_app/878298";
-import { ms, c$ } from "../figma_app/236327";
+import { DropdownContainer, OptionComponent } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { hideStylePreview, showStylePreviewThunk } from "../figma_app/914957";
@@ -96,28 +96,28 @@ export function $$E2({
   }, [a.data]);
   if (s) return null;
   let f = compareLibraryItemWithKey(e, m);
-  return f || h ? jsx(ms, {
+  return f || h ? jsx(DropdownContainer, {
     style: {
       top: t.y,
       left: t.x,
       position: "fixed"
     },
     children: f ? jsxs(Fragment, {
-      children: [jsx(c$, {
+      children: [jsx(OptionComponent, {
         recordingKey: generateRecordingKey(i, "editStyle"),
         onClick: () => showStyleDetails({
           dsStyle: e,
           position: t
         }),
         children: renderI18nText("design_systems.styles.edit_style")
-      }), jsx(c$, {
+      }), jsx(OptionComponent, {
         recordingKey: generateRecordingKey(i, "deleteStyle"),
         onClick: () => permissionScopeHandler.user("delete-style", () => deleteStyle(e)),
         children: renderI18nText("design_systems.styles.delete_styles", {
           numStyles: 1
         })
       })]
-    }) : jsx(c$, {
+    }) : jsx(OptionComponent, {
       href: h,
       target: "_blank",
       recordingKey: generateRecordingKey(i, "goToStyleDefinition"),

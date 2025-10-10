@@ -15,7 +15,7 @@ import { k as _$$k } from "../905/888808";
 import { PageViewMode, EditAction, CanvasSearchHelpers, SelectionState, MatchCriteria, Multiplayer, DataLoadStatus } from "../figma_app/763686";
 import { defaultSessionLocalIDString, zeroSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atom, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import I from "classnames";
 import { $ as _$$$ } from "../905/455748";
 import { isCommandEvent, KeyCodes, isExactModifier, ModifierKeyCodes, isCommandModifier } from "../905/63728";
@@ -53,7 +53,7 @@ import { Vz, v9, ei as _$$ei, G$, PP, Wv, Fn, Z9, S as _$$S, dz, sb, Jo, bB, T a
 import { mapFilter } from "../figma_app/656233";
 import { v as _$$v } from "../905/213481";
 import { props } from "@stylexjs/stylex";
-import { kM } from "../figma_app/421886";
+import { NodeType } from "../figma_app/421886";
 import { p9, D4, IM, OP } from "../figma_app/463678";
 import { f as _$$f } from "../905/54715";
 import { VS, JE, oZ, WP, _0 } from "../9410/763216";
@@ -76,7 +76,7 @@ var et = (e => (e[e.NONE = 0] = "NONE", e[e.TOP = 1] = "TOP", e[e.MIDDLE = 2] = 
 var en = (e => (e[e.NONE = 0] = "NONE", e[e.SINGLE = 1] = "SINGLE", e[e.MULTI = 2] = "MULTI", e))(en || {});
 let el = atom(!1);
 let er = memo(function (e) {
-  let t = Xr(el);
+  let t = useSetAtom(el);
   let n = useDispatch<AppDispatch>();
   let l = useSelector(e => e.canvasSearch.scope);
   let i = useSelector(e => e.mirror.appModel.pagesList);
@@ -163,7 +163,7 @@ function eh({
     "aria-label": getI18nString("canvas_search.filter.remove_filter", {
       filter: p9(e)
     }),
-    recordingKey: generateRecordingKey(n, kM[e], "remove"),
+    recordingKey: generateRecordingKey(n, NodeType[e], "remove"),
     children: p9(e)
   }, `filter-chip-${e}`) : null), [s, d, t, n]);
   return c.length ? jsx("div", {
@@ -243,7 +243,7 @@ function eg({
       onClick: t,
       "aria-label": getI18nString("canvas_search.filter.remove"),
       "aria-describedby": p9(e),
-      recordingKey: generateRecordingKey(n, kM[e], "remove"),
+      recordingKey: generateRecordingKey(n, NodeType[e], "remove"),
       children: jsx(_$$f, {})
     })]
   });
@@ -848,7 +848,7 @@ function eM({
     }, [i, u, p, c, d, t]);
   }(e, t, J, Q, h, S, C);
   let eT = eD(S);
-  let ej = Xr(genericAtomFamily1);
+  let ej = useSetAtom(genericAtomFamily1);
   return jsxs("div", {
     className: sb,
     children: [jsxs("div", {

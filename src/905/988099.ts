@@ -1,4 +1,4 @@
-import { um, atom, atomStoreManager } from "../figma_app/27355";
+import { atomWithReducer, atom, atomStoreManager } from "../figma_app/27355";
 import { eventEmitterAtom } from "../905/502364";
 import { getUserEvents } from "../905/337355";
 import { b } from "../905/965432";
@@ -19,7 +19,7 @@ export function $$c0(e, t) {
         lastEvent: null,
         previousState: null
       };
-      return um(t, (i, n) => {
+      return atomWithReducer(t, (i, n) => {
         switch (n?.type) {
           case "RESET":
             return t;

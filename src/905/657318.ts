@@ -22,7 +22,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
 import { AutoInteractableWrapper } from "../905/277716";
 import { Point } from "../905/736624";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { hideStylePicker, hidePickerThunk, showStylePicker } from "../figma_app/91703";
@@ -277,7 +277,7 @@ class eA extends RecordingPureComponent {
       }), this.props.dropdownShown?.type === this.STYLE_UPDATE_DROPDOWN_ID && (this.selectUpdateOptionRef.current ? jsx(ConnectedPointingDropdown, {
         targetRect: this.selectUpdateOptionRef.current.getBoundingClientRect(),
         propagateCloseClick: !0,
-        children: s.map(e => jsx(c$, {
+        children: s.map(e => jsx(OptionComponent, {
           className: VM,
           onClick: e.callback,
           recordingKey: generateRecordingKey(this.props, e.displayText),

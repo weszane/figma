@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { textDisplayConfig } from "../905/687265";
 import { stylex } from "@stylexjs/stylex";
-import { ms, c$ } from "../figma_app/236327";
+import { DropdownContainer, OptionComponent } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
 import { styleBuilderInstance } from "../905/941192";
@@ -188,8 +188,8 @@ let k = e => {
       throwTypeError(e);
   }
 };
-let L = ms;
-let A = c$;
+let L = DropdownContainer;
+let A = OptionComponent;
 let B = "FIGJAM_LIBRARY_ITEM_DROPDOWN_KEY";
 export function $$P1() {
   let e = useDropdownState();

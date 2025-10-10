@@ -1,4 +1,27 @@
-var $$$$n1 = (e => (e.PRODUCT_COMPONENTS = "components", e.STYLES = "styles", e.VARIABLES = "variables", e))($$$$n1 || {});
-var $$r0 = (e => (e[e.PRODUCT_COMPONENTS = 0] = "PRODUCT_COMPONENTS", e[e.STYLES = 1] = "STYLES", e[e.VARIABLES = 2] = "VARIABLES", e[e.VARIABLE_MODES = 3] = "VARIABLE_MODES", e[e.FILES = 4] = "FILES", e))($$r0 || {});
-export const l = $$r0;
-export const n = $$$$n1;
+// Refactored from minified code: renamed variables, added TypeScript enums for better type safety and readability
+
+/**
+ * Enum representing different library types as string values.
+ * Origin: $$$$n1 variable in minified code.
+ */
+export enum LibraryTypeString {
+  PRODUCT_COMPONENTS = "components",
+  STYLES = "styles",
+  VARIABLES = "variables",
+}
+
+/**
+ * Enum representing different library types as numeric indices.
+ * Origin: $$r0 variable in minified code.
+ */
+export enum LibraryTypeIndex {
+  PRODUCT_COMPONENTS,
+  STYLES,
+  VARIABLES,
+  VARIABLE_MODES,
+  FILES,
+}
+
+// Export the refactored enums with original export names
+export const l = LibraryTypeIndex
+export const n = LibraryTypeString

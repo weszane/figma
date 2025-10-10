@@ -1,11 +1,11 @@
-import { atom, um } from "../figma_app/27355";
+import { atom, atomWithReducer } from "../figma_app/27355";
 var $$r0 = (e => (e.ClickOut = "clickOut", e.KeyboardEsc = "keyboardEsc", e.ToolSelected = "toolSelected", e.ChevronClicked = "chevronClicked", e.PropertyChanged = "propertyChanged", e.CloseButton = "closeButton", e.ClickDemotedDlt = "clickDemotedDlt", e.OpenedShapesSidebar = "openedShapesSidebar", e))($$r0 || {});
 let $$a1 = atom({
   stage: "FULL",
   thresholdWidth: 774,
   numPrimaryTools: 4
 });
-let $$s2 = um({
+let $$s2 = atomWithReducer({
   state: "closed"
 }, function (e, t) {
   return "open" === t.type ? {

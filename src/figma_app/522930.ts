@@ -8,7 +8,7 @@ import { renderI18nText } from "../905/303541";
 import { V } from "../905/965990";
 import { postUserFlag } from "../905/985254";
 import { A } from "../905/563377";
-import { tS } from "../figma_app/622574";
+import { hasTemplateEntity } from "../figma_app/622574";
 import { selectUserFlag } from "../905/940356";
 import { $z, IX } from "../figma_app/957169";
 let g = "team_template_card_view_count";
@@ -49,7 +49,7 @@ export function $$y1({
 }) {
   let r = selectUserFlag("dismissed_team_template_announcement_card");
   let o = useDispatch<AppDispatch>();
-  let l = tS();
+  let l = hasTemplateEntity();
   let d = useCallback(() => {
     o(postUserFlag({
       dismissed_team_template_announcement_card: !0

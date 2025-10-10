@@ -6,7 +6,7 @@ import { noop } from 'lodash-es';
 import { getFirstKey } from "../figma_app/493477";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { DialogTriggerButton } from "../905/976845";
 import { IconButton } from "../905/443068";
 import { s as _$$s2 } from "../905/403855";
@@ -44,7 +44,7 @@ import { generateExportPreview, convertImageDataToURL } from "../905/619652";
 import { useLabConfiguration, labConfigurations } from "../905/226610";
 import { isExportRestricted } from "../figma_app/12796";
 import { CachedSubtreeRenderer } from "../figma_app/679183";
-import { Dc, hV } from "../figma_app/151766";
+import { initiateSaveAs, ExportOption } from "../figma_app/151766";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
 import { calculatePickerPositionLeft } from "../905/959568";
@@ -173,7 +173,7 @@ let ex = class e extends PureComponent {
         });
         let n = [this.props.currentPage];
         ImageManager.includeOutsideContents(e) || (n = Object.keys(this.props.sceneGraphSelection));
-        Dc(hV.Export, this.props.saveAsState, this.props.dispatch, "export-selected-exportables-direct", n, "export-selected-exportables-direct");
+        initiateSaveAs(ExportOption.Export, this.props.saveAsState, this.props.dispatch, "export-selected-exportables-direct", n, "export-selected-exportables-direct");
         this.props.dispatch(logFileExportThunk());
       }
     };
@@ -564,27 +564,27 @@ let eF = forwardRef(function ({
   let G = useRef(null);
   let V = jsx(AutoInteractableWrapper, {
     name: "export_image_type_select",
-    children: D ? jsxs(bL, {
+    children: D ? jsxs(SelectGroupLabel, {
       value: t.imageType,
       onChange: d,
       recordingKey: L("imageType"),
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         ref: G,
         width: "fill",
         label: jsx(HiddenLabel, {
           children: getI18nString("fullscreen.properties_panel.export_settings_image_file_type")
         })
-      }), jsxs(mc, {
-        children: [jsx(c$, {
+      }), jsxs(SelectContainer, {
+        children: [jsx(SelectOptionReset, {
           value: "PNG",
           children: "PNG"
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: "JPEG",
           children: "JPEG"
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: "SVG",
           children: "SVG"
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: "PDF",
           children: "PDF"
         })]

@@ -13,7 +13,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
 import { configAtom } from "../905/125333";
-import { y0, wv, MM } from "../figma_app/236327";
+import { TextOptionComponent, SeparatorComponent, CheckableOptionComponent } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -21,7 +21,7 @@ import { setCanvasSearchMode, toggleCanvasSearchCategoryFilter, switchCanvasSear
 import { getCurrentFileType } from "../figma_app/976749";
 import { useDropdown } from "../905/848862";
 import { useAppModelProperty } from "../figma_app/722362";
-import { b4, _V, kM } from "../figma_app/421886";
+import { primaryNodeTypes, searchOptions, NodeType } from "../figma_app/421886";
 import { KindEnum } from "../905/129884";
 import { PointingDropdown } from "../905/504727";
 import { useIsFullscreenSitesView } from "../905/561485";
@@ -76,7 +76,7 @@ function D({
   let D = useIsFullscreenSitesView();
   let F = useIsSelectedViewFullscreenCooper();
   let B = useMemo(() => {
-    let e = y ? [] : [jsx(y0, {
+    let e = y ? [] : [jsx(TextOptionComponent, {
       primaryText: getI18nString("canvas_search.search"),
       checked: L === EditAction.FIND,
       onClick: () => {
@@ -84,7 +84,7 @@ function D({
         c.hide();
       },
       recordingKey: generateRecordingKey(i, "settings.find")
-    }, "find"), jsx(y0, {
+    }, "find"), jsx(TextOptionComponent, {
       primaryText: getI18nString("canvas_search.replace"),
       checked: L === EditAction.REPLACE,
       onClick: () => {
@@ -92,7 +92,7 @@ function D({
         c.hide();
       },
       recordingKey: generateRecordingKey(i, "settings", "replace")
-    }, "replace"), jsx(wv, {}, "sep1")];
+    }, "replace"), jsx(SeparatorComponent, {}, "sep1")];
     let t = (t, n = !1) => {
       let a = !!A[t];
       e.push(jsx(M, {
@@ -106,7 +106,7 @@ function D({
       }, t));
     };
     if (L === EditAction.FIND && !R && !F) {
-      let n = !b4.some(e => !!A[e]);
+      let n = !primaryNodeTypes.some(e => !!A[e]);
       let a = Object.values(N).reduce((e, t) => e + t, 0);
       e.push(jsx(P, {
         checked: n,
@@ -119,10 +119,10 @@ function D({
         },
         recordingKey: generateRecordingKey(i, "settings", "All")
       }));
-      b4.forEach(e => t(e));
-      e.push(jsx(wv, {}, "sep2"));
+      primaryNodeTypes.forEach(e => t(e));
+      e.push(jsx(SeparatorComponent, {}, "sep2"));
     }
-    _V.forEach(e => t(e, !0));
+    searchOptions.forEach(e => t(e, !0));
     return e;
   }, [d, c, A, R, F, y, L, N, i]);
   useEffect(() => {
@@ -171,7 +171,7 @@ function M(e) {
     count: t,
     onClick: e.onClick,
     buttonRef: e.buttonRef,
-    recordingKey: generateRecordingKey(e, "settings", kM[e.option])
+    recordingKey: generateRecordingKey(e, "settings", NodeType[e.option])
   });
 }
 function P({
@@ -183,7 +183,7 @@ function P({
   buttonRef: s,
   recordingKey: o
 }) {
-  return jsx(MM, {
+  return jsx(CheckableOptionComponent, {
     checked: e,
     onClick: a,
     recordingKey: o,
@@ -285,7 +285,7 @@ function F({
         }), L && jsxs(MenuGroupComp, {
           children: [jsx(B, {
             recordingKey: generateRecordingKey(a, "settings", "All"),
-            checked: !b4.some(e => !!y[e]),
+            checked: !primaryNodeTypes.some(e => !!y[e]),
             onChange: () => {
               h(clearCanvasSearchCategoryFilters());
             },
@@ -293,8 +293,8 @@ function F({
             label: getI18nString("canvas_search.filter.all"),
             count: Object.values(x).reduce((e, t) => e + t, 0),
             minWidth: e
-          }), b4.map(t => jsx(B, {
-            recordingKey: generateRecordingKey(a, "settings", kM[t]),
+          }), primaryNodeTypes.map(t => jsx(B, {
+            recordingKey: generateRecordingKey(a, "settings", NodeType[t]),
             checked: !!y[t],
             onChange: e => k(e, t),
             icon: sW(t),
@@ -303,8 +303,8 @@ function F({
             minWidth: e
           }, t))]
         }), jsx(MenuGroupComp, {
-          children: _V.map(e => jsx(B, {
-            recordingKey: generateRecordingKey(a, "settings", kM[e]),
+          children: searchOptions.map(e => jsx(B, {
+            recordingKey: generateRecordingKey(a, "settings", NodeType[e]),
             checked: !!y[e],
             onChange: () => A(e),
             icon: sW(e),

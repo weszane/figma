@@ -40,7 +40,7 @@ import { z as _$$z } from "../c5e2cae0/580036";
 import { y as _$$y, I as _$$I } from "../c5e2cae0/74041";
 import { f as _$$f } from "../c5e2cae0/279252";
 import { W as _$$W } from "../c5e2cae0/300137";
-import { UR } from "../figma_app/307841";
+import { isCampfireCartBannerEnabled } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -1192,7 +1192,7 @@ export function $$eO0({
     }), a && jsx("p", {
       className: cssBuilderInstance.colorTextSecondary.font13.mt8.$,
       children: a
-    }), UR() && jsx(_$$W, {
+    }), isCampfireCartBannerEnabled() && jsx(_$$W, {
       billingPeriod: SubscriptionType.ANNUAL,
       isCampfireCart: !0
     })]

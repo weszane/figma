@@ -13,8 +13,8 @@ import { d as _$$d, cR, hv } from "../figma_app/715641";
 import { useSingleEffect } from "../905/791079";
 import { useIsFullscreenOverview, useHasReadyNodesWithParentOrg, useSelectedViewWithOverview, useTotalReadyAndCompletedNodes, useDevModeOverviewEntryClick } from "../figma_app/88239";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
-import { N as _$$N } from "../figma_app/268271";
+import { useOverlay } from "../905/621515";
+import { ModalPriority } from "../figma_app/268271";
 import { nT, o5 } from "../figma_app/433401";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
@@ -40,9 +40,9 @@ function w({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: DevModeOverviewOnboardingOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useSingleEffect(() => {
     t && !l && nT(i);

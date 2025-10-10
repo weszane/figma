@@ -7,7 +7,7 @@ import u from "classnames";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
 import { ModalCloseButton } from "../905/17223";
-import { c$, wv, ms } from "../figma_app/236327";
+import { OptionComponent, SeparatorComponent, DropdownContainer } from "../figma_app/236327";
 import { ButtonBasePrimary } from "../figma_app/637027";
 import { R as _$$R } from "../3591/975641";
 import { SvgComponent } from "../905/714743";
@@ -88,7 +88,7 @@ export function $$ed0(e) {
     targetRect: t?.data.targetRect,
     lean: e.lean,
     propagateCloseClick: !0,
-    children: [jsx(c$, {
+    children: [jsx(OptionComponent, {
       onClick: t => {
         if (t.stopPropagation(), i(closeUniversalInsertModal()), !n) return PluginManager.instance.handleUpgrade(PluginAction.MANAGE_EXTENSIONS);
         i(showModalHandler({
@@ -99,7 +99,7 @@ export function $$ed0(e) {
         }));
       },
       children: ea(s ? "widgets-menu-dev-create-new" : "plugins-menu-dev-create-new")
-    }), jsx(c$, {
+    }), jsx(OptionComponent, {
       onClick: e => {
         if (e.stopPropagation(), !n) {
           i(closeUniversalInsertModal());
@@ -180,13 +180,13 @@ let eu = class e extends PureComponent {
   }
   render() {
     let e = jsxs(Fragment, {
-      children: [jsx(c$, {
+      children: [jsx(OptionComponent, {
         onClick: this.onPublish,
         children: renderI18nText("community.plugins.publish_new_version")
-      }), jsx(c$, {
+      }), jsx(OptionComponent, {
         onClick: this.onRevealLocally,
         children: ea(getPluginsMenuOpenDirectory())
-      }), jsx(wv, {}), jsx(c$, {
+      }), jsx(SeparatorComponent, {}), jsx(OptionComponent, {
         onClick: this.onDelete,
         children: renderI18nText("community.permissions_modal_publish_tab.footer.remove")
       })]
@@ -251,7 +251,7 @@ let eu = class e extends PureComponent {
         "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.plugins.options"),
         selected: this.shouldShowPointingDropdown()
-      }), this.shouldShowContextMenu() && jsx(ms, {
+      }), this.shouldShowContextMenu() && jsx(DropdownContainer, {
         className: Gm,
         style: {
           left: this.props.dropdownShown.data.clientX,

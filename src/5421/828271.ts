@@ -50,7 +50,7 @@ import { Cy, n9, DV, a2, R as _$$R } from "../figma_app/976110";
 import { B as _$$B2 } from "../905/872019";
 import { a as _$$a } from "../905/29104";
 import { trackDefinedFileEventWrapper } from "../figma_app/2590";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3, Ag } from "../figma_app/862289";
@@ -89,7 +89,7 @@ let X = memo(function ({
 });
 function eu() {
   let e = useDispatch<AppDispatch>();
-  let t = useSelector(e => Yh(e.mirror.appModel, JT.MAGIC_LINK));
+  let t = useSelector(e => isActionEnabled(e.mirror.appModel, JT.MAGIC_LINK));
   let n = _$$a();
   if (!hasJubileePermissionForDesign()) return null;
   let i = n ? getI18nString("fullscreen.toolbar.prototyping-add-interactions-tooltip-v2") : getI18nString("fullscreen.toolbar.prototyping-add-interactions-tooltip-ga");

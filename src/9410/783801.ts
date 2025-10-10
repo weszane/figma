@@ -13,7 +13,7 @@ import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { NotificationCategory } from "../905/170564";
 import { notificationActions } from "../905/463586";
-import { hx } from "../905/292918";
+import { initiateBranchMergeThunk } from "../905/292918";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { handleModalError, isDefaultFileAlt, handleError, isBranchAlt } from "../905/760074";
 import { RepoFiles, MergeStatusRepoFiles } from "../figma_app/43951";
@@ -132,7 +132,7 @@ function j(e) {
         type: NotificationCategory.BRANCHING_SOURCE_FILE_UPDATED,
         message: getI18nString("collaboration.branching.updates_available_from_main_file"),
         acceptCallback: () => {
-          dispatch(hx({
+          dispatch(initiateBranchMergeThunk({
             direction: SourceDirection.FROM_SOURCE,
             trackingContextName: TrackingKeyEnum.BRANCHING_UPDATE_NOTIFICATION
           }));

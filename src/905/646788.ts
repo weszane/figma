@@ -29,7 +29,7 @@ import { sR as _$$sR, gq, KZ } from "../905/932881";
 // import { LoadingSpinner } from "../905/443820";
 import { m as _$$m } from "../905/701558";
 import { Y as _$$Y } from "../905/185567";
-import { atom, useAtomWithSubscription, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useSetAtom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { Qw } from "../905/989992";
 import { ResourceStatus } from "../905/663269";
 import { conditionalFeatureFlag, getInitialOptions, isStagingCluster, buildUploadUrl, isDevEnvironment, getSupportEmail } from "../figma_app/169182";
@@ -105,11 +105,11 @@ import { selectUserFlag } from "../905/940356";
 import { useSingleEffect } from "../905/791079";
 import { postUserFlag } from "../905/985254";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e2 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zl as _$$zl } from "../figma_app/641749";
 import { rn as _$$rn } from "../figma_app/903573";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { createOnboardingStateMachine } from "../905/298004";
 import { WZ } from "../905/893645";
 import { NotModalType } from "../905/11928";
@@ -121,8 +121,8 @@ import { x as _$$x } from "../905/764527";
 import { E as _$$E2 } from "../figma_app/999099";
 import { $t, HZ } from "../figma_app/29287";
 import { n as _$$n2 } from "../905/796896";
-import { J3, JU, kD, kN } from "../figma_app/622574";
-import { j as _$$j2 } from "../905/521149";
+import { getPublishTemplateStatus, canPublishTemplate, getCurrentTemplate, PublishTemplateStatusEnum } from "../figma_app/622574";
+import { useAllowInternalTemplatesCooper } from "../905/521149";
 import { useCurrentUserOrgId } from "../905/845253";
 import { t as _$$t3 } from "../905/825647";
 import { x as _$$x2 } from "../905/619833";
@@ -132,7 +132,7 @@ import { X as _$$X2 } from "../905/802843";
 import { $u } from "../figma_app/524655";
 import { fS, st as _$$st, d3, dG, QU as _$$QU, VA, bV, ts as _$$ts, Fk, pi, tl as _$$tl2, Ph, ER, p3, fA, U5, WZ as _$$WZ, ix as _$$ix, G as _$$G, HL, HO, Zq, QW, mq, O6, hz, ZD, Ac, Uo, Kz, oT, hC, N1, TK, i1 as _$$i3, IH, iA as _$$iA, UB, KN, Cr, E_, BA, QA, eF as _$$eF, Zk, Ed, Sc, Bd, v7, DA, IE, vv } from "../figma_app/538002";
 import { throwTypeError, assert, debug } from "../figma_app/465776";
-import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { KeyCodes, ignoreCommandOrShift } from "../905/63728";
 import { i as _$$i4 } from "../905/385727";
 import { TeamAvatar } from "../figma_app/537817";
@@ -1119,9 +1119,9 @@ function tV(e) {
     uniqueId,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: SharingClarityFileModalOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t]);
   let l = useDispatch<AppDispatch>();
   let d = _$$zl(tB);
@@ -1331,13 +1331,13 @@ let tQ = memo(function (e) {
 function t9({
   file: e
 }) {
-  let t = J3();
+  let t = getPublishTemplateStatus();
   let i = isFullscreenView();
   let n = X();
-  return e.canEdit && i && !n && !getInitialOptions().integration_host && !BrowserInfo.isIpadNative && JU(t);
+  return e.canEdit && i && !n && !getInitialOptions().integration_host && !BrowserInfo.isIpadNative && canPublishTemplate(t);
 }
 function ie(e) {
-  let t = kD();
+  let t = getCurrentTemplate();
   let i = useCurrentUserOrgId();
   let r = getCurrentTeamId();
   let a = t ? jsx(tQ, {}) : jsx(_$$n2, {});
@@ -1381,8 +1381,8 @@ function ir() {
   let {
     openMakePublishFlow
   } = function () {
-    let e = !!kD();
-    let t = J3();
+    let e = !!getCurrentTemplate();
+    let t = getPublishTemplateStatus();
     let i = selectCurrentFile();
     let n = useDispatch<AppDispatch>();
     return {
@@ -1392,7 +1392,7 @@ function ir() {
             _$$i$(n);
             return;
           }
-          t === kN.FILE_IN_DRAFTS ? _$$x2({
+          t === PublishTemplateStatusEnum.FILE_IN_DRAFTS ? _$$x2({
             file: {
               key: i.key,
               name: i.name,
@@ -1402,7 +1402,7 @@ function ir() {
               parent_org_id: i.parentOrgId
             },
             dispatch: n
-          }) : JU(t) && YM(n, i.key, i.editorType, r);
+          }) : canPublishTemplate(t) && YM(n, i.key, i.editorType, r);
         }
       }
     };
@@ -1503,7 +1503,7 @@ function is({
   let x = function ({
     file: e
   }) {
-    let t = _$$j2();
+    let t = useAllowInternalTemplatesCooper();
     return t9({
       file: e
     }) && t ? jsx(ii, {}) : null;
@@ -1869,18 +1869,18 @@ function im(e) {
           children: getI18nString("file_permissions_modal.external_teams_in_connected_projects.description")
         }), jsx("div", {
           className: cssBuilderInstance.py8.$,
-          children: jsxs(_$$bL, {
+          children: jsxs(SelectGroupLabel, {
             value: m,
             onChange: e => g(e ?? t),
-            children: [jsx(l9, {
+            children: [jsx(SelectSeparator, {
               label: jsx(HiddenLabel, {
                 children: " "
               })
-            }), jsxs(mc, {
-              children: [jsx(c$, {
+            }), jsxs(SelectContainer, {
+              children: [jsx(SelectOptionReset, {
                 value: t,
                 children: getI18nString("file_permissions_modal.connected_project.all_collaborators")
-              }), jsx(c$, {
+              }), jsx(SelectOptionReset, {
                 value: i,
                 children: d
               }), jsx("div", {
@@ -1888,13 +1888,13 @@ function im(e) {
                 children: jsx("div", {
                   className: dG
                 })
-              }), jsx(c$, {
+              }), jsx(SelectOptionReset, {
                 value: a,
                 children: getI18nString("file_permissions_modal.connected_project.all_external_teams")
-              }), Object.keys(c).map(e => jsx(c$, {
+              }), Object.keys(c).map(e => jsx(SelectOptionReset, {
                 value: e,
                 children: e
-              }, e)), jsx(c$, {
+              }, e)), jsx(SelectOptionReset, {
                 value: s,
                 children: getI18nString("file_permissions_modal.connected_project.other_guests")
               })]
@@ -3010,7 +3010,7 @@ function ns(e) {
 }
 function nc(e) {
   let t = useDispatch<AppDispatch>();
-  let i = Xr(ti);
+  let i = useSetAtom(ti);
   return jsx(TrackingProvider, {
     name: "google_device_screenshare_disclaimer_modal",
     children: jsxs("div", {
@@ -3199,7 +3199,7 @@ let n2 = registerModal(function ({
   onError: d
 }) {
   let u = useDispatch<AppDispatch>();
-  let p = Xr(libraryPublishingModeAtom);
+  let p = useSetAtom(libraryPublishingModeAtom);
   let [m, g] = useState(!1);
   let {
     beforeUnpublishHubFile,
@@ -4158,7 +4158,7 @@ function rb() {
   let s = setupShareModalTabHandler();
   let o = e?.editorType;
   let [l, d] = useState(null);
-  let u = kD();
+  let u = getCurrentTemplate();
   let p = !!u;
   let g = e?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && e.publishedHubFile || null;
   let f = e?.trackTags?.isTemplate || !1;
@@ -4167,8 +4167,8 @@ function rb() {
   let b = e?.key;
   let v = Pb(e);
   let I = useDispatch<AppDispatch>();
-  let E = J3();
-  let x = JU(E);
+  let E = getPublishTemplateStatus();
+  let x = canPublishTemplate(E);
   let S = !!Of(e).canPublishAsHubFile;
   let w = useCallback(() => {
     e && _$$x2({
@@ -4197,7 +4197,7 @@ function rb() {
   let T = Hz({
     figFileKey: e?.key
   });
-  return E === kN.NOT_ENABLED ? jsx(rn, {}) : e && b ? (i === ShareAction.PUBLISH_TEMPLATE || "template" === l) && u ? jsx(rg, {
+  return E === PublishTemplateStatusEnum.NOT_ENABLED ? jsx(rn, {}) : e && b ? (i === ShareAction.PUBLISH_TEMPLATE || "template" === l) && u ? jsx(rg, {
     file: e,
     template: u
   }) : i === ShareAction.PUBLISH_COMMUNITY || "community" === l ? jsx(rn, {}) : jsx(TrackingProvider, {
@@ -4219,7 +4219,7 @@ function rb() {
         isDisabled: !x,
         onClick: () => {
           if (x && e && b) {
-            if (E === kN.FILE_IN_DRAFTS) {
+            if (E === PublishTemplateStatusEnum.FILE_IN_DRAFTS) {
               w();
               return;
             }
@@ -4278,7 +4278,7 @@ let rv = memo(e => {
     publishTemplateStatus,
     org
   } = e;
-  return publishedTemplate && JU(publishTemplateStatus) ? renderI18nText("publishing.templates.menu.title.published_to_org_name", {
+  return publishedTemplate && canPublishTemplate(publishTemplateStatus) ? renderI18nText("publishing.templates.menu.title.published_to_org_name", {
     orgName: org?.name
   }) : renderI18nText("publishing.templates.menu.title.unpublished");
 });
@@ -4294,20 +4294,20 @@ let rI = memo(e => {
     children: renderI18nText("publishing.templates.menu.description.disabled.link")
   });
   switch (publishTemplateStatus) {
-    case kN.CANNOT_PUBLISH:
+    case PublishTemplateStatusEnum.CANNOT_PUBLISH:
       return renderI18nText("publishing.templates.menu.description.disabled_edit_permissions", {
         link: r
       });
-    case kN.FILE_IN_DRAFTS_CANNOT_MOVE:
+    case PublishTemplateStatusEnum.FILE_IN_DRAFTS_CANNOT_MOVE:
       return renderI18nText("publishing.templates.menu.description.disabled_delete_permissions", {
         link: r
       });
-    case kN.DISABLED_IN_SETTINGS:
+    case PublishTemplateStatusEnum.DISABLED_IN_SETTINGS:
       return renderI18nText("publishing.templates.menu.description.disabled", {
         link: r
       });
     default:
-      assert(JU(publishTemplateStatus));
+      assert(canPublishTemplate(publishTemplateStatus));
   }
   if (!publishedTemplate) return renderI18nText("publishing.templates.menu.description.unpublished");
   let a = publishedTemplate.publishedByUser?.name;
@@ -4800,9 +4800,9 @@ function ae() {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: SharingClarityBranchModalOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
     show({
@@ -4832,9 +4832,9 @@ function ar() {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: SharingClarityFileAudienceOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
     show({
@@ -4864,9 +4864,9 @@ function al() {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: SharingClarityPrototypeModalOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
     show({
@@ -6209,7 +6209,7 @@ function si() {
   return e?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && e.publishedHubFile ? renderI18nText("publishing.community.header") : renderI18nText("file_permissions_modal.tab.publish");
 }
 function sn() {
-  return kD() ? renderI18nText("publishing.templates.header") : renderI18nText("file_permissions_modal.tab.publish");
+  return getCurrentTemplate() ? renderI18nText("publishing.templates.header") : renderI18nText("file_permissions_modal.tab.publish");
 }
 function sr({
   fileRoles: e,

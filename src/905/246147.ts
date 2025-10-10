@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { stopPresenting } from "../figma_app/385215";
 import { $ } from "../905/532878";
 import { KP } from "../figma_app/31103";
@@ -17,7 +17,7 @@ export function $$m0({
   let h = stopPresenting();
   let g = useDispatch<AppDispatch>();
   let f = useDevModeFocusId();
-  let _ = Xr($);
+  let _ = useSetAtom($);
   let A = KP("full_table", t);
   return useCallback(() => {
     h();

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { IconButton } from "../905/443068";
 import { BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
-import { bL, DZ, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectOption, SelectContainer, SelectOptionReset } from "../905/493196";
 import { ButtonLargeWide, Button } from "../905/521428";
 import { LoadingSpinner } from "../905/443820";
 import { A as _$$A } from "../905/251970";
@@ -271,10 +271,10 @@ function z({
       })]
     }), jsxs("div", {
       className: U,
-      children: [jsxs(bL, {
+      children: [jsxs(SelectGroupLabel, {
         onChange: u,
         value: d,
-        children: [jsx(DZ, {
+        children: [jsx(SelectOption, {
           id: "github-repo-select",
           placeholder: getI18nString("dev_handoff.component_browser_onboarding.github_select_repository"),
           width: "fill",
@@ -283,8 +283,8 @@ function z({
             className: "github_settings_modal--select--JHTPI",
             children: f
           })
-        }), jsx(mc, {
-          children: i?.availableRepositories?.map(e => jsx(c$, {
+        }), jsx(SelectContainer, {
+          children: i?.availableRepositories?.map(e => jsx(SelectOptionReset, {
             value: e.id,
             children: e.name
           }, e.id))

@@ -53,7 +53,7 @@ import { _f, D1, i$, OC, ow } from '../figma_app/150804';
 import { mY, Px, R1, u3, y$ } from '../figma_app/152690';
 import { getVariableSetErrorMessage, PanelWidth, DefinitionAssignment, computeBackingGUID, DROPDOWN_HEIGHT, getComponentPropDisplayName, renderComponentPropIcon } from '../figma_app/164212';
 import { D5, Tj } from '../figma_app/218448';
-import { c$, ms } from '../figma_app/236327';
+import { OptionComponent, DropdownContainer } from '../figma_app/236327';
 import { VariableIdHandler } from '../figma_app/243058';
 import { useVariablePickerForFields } from '../figma_app/260445';
 import { deleteProperties, findBestMatchingState, withDeferredVariantPropDefBackfill, renameProperty, EM_DASH, trackStateGroupAnalytics, formatPropertyValues } from '../figma_app/264776';
@@ -661,8 +661,8 @@ function eO({
     })]
   });
 }
-let eR = ms;
-let eL = c$;
+let eR = DropdownContainer;
+let eL = OptionComponent;
 function eP({
   defs: e,
   guids: t,
@@ -1364,8 +1364,8 @@ function td({
     icon: $
   }, G);
 }
-let tc = ms;
-let tu = c$;
+let tc = DropdownContainer;
+let tu = OptionComponent;
 function tp({
   defs: e,
   guids: t,

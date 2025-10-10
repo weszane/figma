@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories } from "../905/165054";
 import { l as _$$l } from "../905/716947";
-import { atom, Xr, atomStoreManager } from "../figma_app/27355";
+import { atom, useSetAtom, atomStoreManager } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { useDebouncedCallback } from "use-debounce";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
@@ -47,7 +47,7 @@ export function $$z2({
   onSearchSuccess: t
 }) {
   let i = _$$s();
-  let r = Xr($$V3);
+  let r = useSetAtom($$V3);
   let a = useDebouncedCallback($$H1, e);
   let s = useCallback(() => {
     a.cancel();

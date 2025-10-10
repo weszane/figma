@@ -7,7 +7,7 @@ import { J } from "../905/125993";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { BadgeSize } from "../figma_app/919079";
-import { gS, c$ } from "../figma_app/236327";
+import { TrackedOption, OptionComponent } from "../figma_app/236327";
 import { RelativeTimeDisplay } from "../905/986103";
 import { PlaybackInput } from "../905/991924";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -165,7 +165,7 @@ export function $$V0(e) {
   let V = !e.isMain && e.isArchived && branch.canManage && (!e.isMerged || !!getFeatureFlags().branching_restore_branches);
   let G = !e.isMain && e.isArchived && branch.canManage;
   let z = !e.isMain && !e.isArchived && branch.canEdit;
-  let H = [...U(E, jsx(gS, {
+  let H = [...U(E, jsx(TrackedOption, {
     onClick: () => {
       t(w({
         branches: [e.branch]
@@ -176,14 +176,14 @@ export function $$V0(e) {
       fileRepoId: e.branch.fileRepoId
     },
     children: renderI18nText("collaboration.branching.archive")
-  }, "archive")), ...U(V, jsx(c$, {
+  }, "archive")), ...U(V, jsx(OptionComponent, {
     onClick: () => {
       t(S({
         branches: [e.branch]
       }));
     },
     children: renderI18nText("collaboration.branching.restore")
-  }, "restore")), jsx(c$, {
+  }, "restore")), jsx(OptionComponent, {
     onClick: () => {
       t(copyShareLinkOptimistic({
         fileKey: e.branch.key,
@@ -192,7 +192,7 @@ export function $$V0(e) {
       }));
     },
     children: renderI18nText("collaboration.branching.copy_link")
-  }, "copy-link"), ...U(G, jsx(c$, {
+  }, "copy-link"), ...U(G, jsx(OptionComponent, {
     onClick: () => {
       t(showModalHandler({
         type: _$$e,
@@ -208,7 +208,7 @@ export function $$V0(e) {
       }));
     },
     children: renderI18nText("collaboration.branching.delete")
-  }, "delete")), ...U(z, jsx(c$, {
+  }, "delete")), ...U(z, jsx(OptionComponent, {
     onClick: () => {
       b(!0);
     },

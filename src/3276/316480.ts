@@ -15,7 +15,7 @@ import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
 import { getPluginVersion } from "../figma_app/300692";
 import { Ph, T0 } from "../figma_app/455620";
 import { getTemplateId } from "../figma_app/190980";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { FDocumentType } from "../905/862883";
 import { mk } from "../figma_app/920333";
 import { qK } from "../9410/353422";
@@ -146,7 +146,7 @@ export function $$D1() {
         t.push({
           type: 3,
           item: {
-            type: _$$n.HubFile,
+            type: TeamTemplateType.HubFile,
             template: e
           },
           id: e.id

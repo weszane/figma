@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { bL, l9, mc, wv, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectRoot, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { IconButton } from "../905/443068";
 import { t as _$$t } from "../905/947268";
@@ -59,11 +59,11 @@ function T({
       libraryFilterKey: i.fileKey
     }));
   }, [a, t.layout, h, l, b]);
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     recordingKey: e,
     onChange: E,
     value: "SUBSCRIBED_VARIABLES" === t.type ? t.libraryKey : t.type,
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       label: jsx(HiddenLabel, {
         children: renderI18nText("variables.binding_ui.variable_set")
       }),
@@ -72,15 +72,15 @@ function T({
         currentView: t,
         selectedLibraryKey: b
       })
-    }), jsxs(mc, {
+    }), jsxs(SelectContainer, {
       children: [jsx(R, {
         value: "ALL_LIBRARIES",
         formattedValue: getI18nString("variables.binding_ui.set_labels.all_libraries")
       }), i.length > 0 && jsxs(Fragment, {
-        children: [jsx(wv, {}), jsx(R, {
+        children: [jsx(SelectRoot, {}), jsx(R, {
           value: "LOCAL_VARIABLES",
           formattedValue: getI18nString("variables.binding_ui.set_labels.assets_created_in_file")
-        }), jsx(wv, {})]
+        }), jsx(SelectRoot, {})]
       }), fail.map(e => {
         let t = d && sF(e.libraryKey);
         return jsx(R, {
@@ -112,7 +112,7 @@ function R({
   formattedValue: t,
   rightIcon: i
 }) {
-  return jsx(c$, {
+  return jsx(SelectOptionReset, {
     value: e,
     children: jsxs("span", {
       className: "x3nfvp2",

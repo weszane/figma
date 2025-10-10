@@ -18,7 +18,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { BrowserInfo } from "../figma_app/778880";
 import { Ho, JI, GU, t_, dB, Kj } from "../905/416496";
 import { Label } from "../905/270045";
-import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectOption, SelectContainer, SelectOptionReset } from "../905/493196";
 import U from "classnames";
 import { A as _$$A } from "../905/639174";
 import { RadioInputRoot, RadioInputOption } from "../905/308099";
@@ -129,17 +129,17 @@ function j(e) {
     }), !o && jsx(Label, {
       className: L,
       children: w("file")
-    }), o && jsxs(_$$bL, {
+    }), o && jsxs(SelectGroupLabel, {
       value: w(areaType),
       onChange: e => {
         let t = M.find(t => w(t) === e);
         void 0 !== t && onChangeAreaType(t);
       },
       recordingKey: generateRecordingKey(recordingKey, "exportAreaTypeSelect"),
-      children: [jsx(DZ, {
+      children: [jsx(SelectOption, {
         id: l
-      }), jsx(mc, {
-        children: M.map(e => jsx(c$, {
+      }), jsx(SelectContainer, {
+        children: M.map(e => jsx(SelectOptionReset, {
           value: w(e),
           children: w(e)
         }, e))
@@ -170,19 +170,19 @@ function z(e) {
     }), !l && jsx(Label, {
       className: L,
       children: c
-    }), l && jsxs(_$$bL, {
+    }), l && jsxs(SelectGroupLabel, {
       value: x(backgroundType),
       onChange: e => {
         let t = G.find(t => x(t) === e);
         void 0 !== t && onChangeBackgroundType(t);
       },
       recordingKey: generateRecordingKey(recordingKey, "backgroundTypeSelect"),
-      children: [jsx(DZ, {
+      children: [jsx(SelectOption, {
         id: u
-      }), jsx(mc, {
+      }), jsx(SelectContainer, {
         children: G.map(e => {
           let i = !k(e, fileType);
-          return jsx(c$, {
+          return jsx(SelectOptionReset, {
             value: x(e),
             disabled: i,
             children: jsxs("div", {
@@ -238,19 +238,19 @@ function W(e) {
       htmlFor: l,
       className: D,
       children: renderI18nText("whiteboard.figjam_export.content_type")
-    }), jsxs(_$$bL, {
+    }), jsxs(SelectGroupLabel, {
       value: S(contentType),
       onChange: e => {
         let t = T().find(t => S(t) === e);
         void 0 !== t && onChangeContentType(t);
       },
       recordingKey: generateRecordingKey(recordingKey, "contentTypeSelect"),
-      children: [jsx(DZ, {
+      children: [jsx(SelectOption, {
         id: l
-      }), jsx(mc, {
+      }), jsx(SelectContainer, {
         children: T().map(e => {
           let t = S(e);
-          return jsx(c$, {
+          return jsx(SelectOptionReset, {
             value: t,
             disabled: disabledContentTypes.includes(e),
             children: t
@@ -323,17 +323,17 @@ function X(e) {
       htmlFor: d,
       className: D,
       children: renderI18nText("fullscreen.properties_panel.export_settings_quality")
-    }), jsxs(_$$bL, {
+    }), jsxs(SelectGroupLabel, {
       value: SD.format(c),
       onChange: e => {
         let i = ZF.find(t => SD.format(t) === e);
         void 0 !== i && o(i, fileType);
       },
       recordingKey: generateRecordingKey(recordingKey, "qualitySelect"),
-      children: [jsx(DZ, {
+      children: [jsx(SelectOption, {
         id: d
-      }), jsx(mc, {
-        children: ZF.map(e => jsx(c$, {
+      }), jsx(SelectContainer, {
+        children: ZF.map(e => jsx(SelectOptionReset, {
           value: SD.format(e),
           children: SD.format(e)
         }, e))

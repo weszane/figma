@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { M } from "../figma_app/749682";
 import { NONE_SYMBOL } from "../905/992467";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { AvatarSize } from "../905/590952";
 import { setEditingAttachment, resetComments, setEditingComment, stopEditingComment } from "../figma_app/770088";
@@ -174,10 +174,10 @@ function I(e) {
   let {
     onEdit
   } = e;
-  let d = useMemo(() => [jsx(c$, {
+  let d = useMemo(() => [jsx(OptionComponent, {
     onClick: onEdit,
     children: renderI18nText("comments.edit")
-  }, "edit"), jsx(c$, {
+  }, "edit"), jsx(OptionComponent, {
     onClick: n,
     children: renderI18nText("comments.delete_comment")
   }, "delete")], [n, onEdit]);

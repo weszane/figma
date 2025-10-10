@@ -11,7 +11,7 @@ import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
-import { c$, wv } from "../figma_app/236327";
+import { OptionComponent, SeparatorComponent } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
@@ -377,11 +377,11 @@ export function $$eg0({
     }), m && q.current && jsxs(ConnectedPointingDropdown, {
       targetRect: q.current.getBoundingClientRect(),
       propagateCloseClick: !0,
-      children: [jsx(c$, {
+      children: [jsx(OptionComponent, {
         disabled: !0,
         className: em,
         children: renderI18nText("design_systems.component_properties.create_property")
-      }), !en && jsxs(c$, {
+      }), !en && jsxs(OptionComponent, {
         className: eh,
         onClick: et,
         recordingKey: generateRecordingKey("openCreatePropModal", getComponentPropDisplayName(ComponentPropType.VARIANT)),
@@ -390,7 +390,7 @@ export function $$eg0({
             children: jsx(_$$m, {})
           })
         }), renderI18nText("design_systems.component_properties.across_variants")]
-      }), ei.map(e => jsxs(c$, {
+      }), ei.map(e => jsxs(OptionComponent, {
         className: eh,
         onClick: () => Q(e),
         recordingKey: generateRecordingKey("openCreatePropModal", getComponentPropDisplayName(e)),
@@ -398,11 +398,11 @@ export function $$eg0({
           children: renderComponentPropIcon(e, !0)
         }), getComponentPropDisplayName(e)]
       }, e)), H && jsxs(Fragment, {
-        children: [jsx(wv, {}), jsx(c$, {
+        children: [jsx(SeparatorComponent, {}), jsx(OptionComponent, {
           disabled: !0,
           className: em,
           children: renderI18nText("design_systems.component_properties.expose_nested_instances")
-        }), jsxs(c$, {
+        }), jsxs(OptionComponent, {
           className: eh,
           onClick: es,
           recordingKey: "openBubbledPropPicker",
@@ -411,7 +411,7 @@ export function $$eg0({
           }), getI18nString("design_systems.component_properties.choose_instances")]
         })]
       }), getFeatureFlags().first_draft_suggest_props && jsxs(Fragment, {
-        children: [jsx(wv, {}), jsxs(c$, {
+        children: [jsx(SeparatorComponent, {}), jsxs(OptionComponent, {
           className: eh,
           onClick: er,
           recordingKey: "suggestProps",

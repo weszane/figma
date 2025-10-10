@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { hO, Hl, G4 } from "../figma_app/545293";
 import { CZ, l4 } from "../905/124270";
 import { createResourceFacet } from "../905/171315";
@@ -24,7 +24,7 @@ export function $$A0(e, t, i) {
   let d = useDispatch<AppDispatch>();
   let _ = useSelector(e => e.currentUserOrgId);
   let A = S(_)?.searches;
-  let y = Xr(l4(CreatorResourceType.RESOURCE));
+  let y = useSetAtom(l4(CreatorResourceType.RESOURCE));
   let b = useSelector(e => e.search.sessionId);
   let v = useSelector(e => e.selectedView);
   let I = useAtomWithSubscription(hO.currentSearchAtom);

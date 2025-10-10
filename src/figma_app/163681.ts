@@ -4,13 +4,13 @@ import { useDispatch, useStore, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { postUserFlag } from "../905/985254";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { NT, g5 } from "../figma_app/579169";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { generateSlug, PanelIdentifiers, validateUserFileAccess } from "../figma_app/242339";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { FigmaBasicsTooltipOnboarding } from "../figma_app/6204";
 import { renderI18nText } from "../905/303541";
 import { createAndOpenFile } from "../905/738636";
@@ -592,9 +592,9 @@ export function $$ea1() {
     complete,
     show,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: FigmaBasicsTooltipOnboarding,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [E, f]);
   let S = !!selectUserFlag("editor_onboarded");
   let v = !!selectUserFlag("figma_basics_tooltips_onboarding");

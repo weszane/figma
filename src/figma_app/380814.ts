@@ -7,7 +7,7 @@ import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
-import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectOption, SelectContainer, SelectOptionReset } from "../905/493196";
 import { U as _$$U } from "../905/708285";
 import { VariablesBindings, VariableCollectionContext, VariableUIContext, VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -381,16 +381,16 @@ function et({
     e && r(e);
   }, [r]);
   let o = useMemo(() => b()(t, e => e?.node_id), [t])[e];
-  return jsxs(_$$bL, {
+  return jsxs(SelectGroupLabel, {
     onChange: s,
     value: o?.node_id,
-    children: [jsx(DZ, {
+    children: [jsx(SelectOption, {
       id: "variable-create-modal-variable-set-select",
       "aria-labelledby": a,
       width: "fill",
       children: o?.name
-    }), jsx(mc, {
-      children: t.map(e => jsx(c$, {
+    }), jsx(SelectContainer, {
+      children: t.map(e => jsx(SelectOptionReset, {
         value: e.node_id,
         children: e.name
       }, e.node_id))

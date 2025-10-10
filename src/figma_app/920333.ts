@@ -18,7 +18,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { getHubFileVersionOrDefault } from "../figma_app/198840";
 import { isNullOrFailure } from "../905/18797";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { Rt, Vq as _$$Vq } from "../figma_app/979658";
 import { SubscriptionStatus } from "../905/272080";
 import { EditorType } from "../figma_app/155287";
@@ -32,7 +32,7 @@ export function $$P5(e, t, r, n) {
   let i = useSelector(e => e.figjamDefaultInserts)[t];
   let s = [];
   for (let n of i) r(n, e) && ("templates" === t ? s.push({
-    type: _$$n.HubFile,
+    type: TeamTemplateType.HubFile,
     template: n
   }) : s.push(n));
   e.push(...s);
@@ -147,7 +147,7 @@ export function $$U6({
           resourceType: "template",
           resourceName: r.name,
           resourceId: e.id,
-          templateType: _$$n.HubFile,
+          templateType: TeamTemplateType.HubFile,
           triggeredFrom: _$$Vq(p.activeTab)
         });
       }

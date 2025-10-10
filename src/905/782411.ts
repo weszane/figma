@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { increment } from "../905/972754";
 import { handleResourceQuery, communityLibraryComponentsQuery, pageLoadAtom, nonceAtom } from "../figma_app/255679";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,7 @@ let g = atom(e => {
 });
 export function $$f0() {
   let [e, t] = useAtomValueAndSetter(pageLoadAtom);
-  let i = Xr(nonceAtom);
+  let i = useSetAtom(nonceAtom);
   !function () {
     let e = useDispatch<AppDispatch>();
     let {

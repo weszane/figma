@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { textDisplayConfig } from "../905/687265";
 import { stylex } from "@stylexjs/stylex";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { getAtomMutate } from "../figma_app/566371";
 import { Badge, BadgeColor } from "../figma_app/919079";
@@ -24,7 +24,7 @@ export function $$S0(e) {
   let [t, i] = useState(null);
   let m = useDispatch<AppDispatch>();
   let x = getAtomMutate(renameAutosaveFileMutation);
-  let S = Xr(renamingStateAtom);
+  let S = useSetAtom(renamingStateAtom);
   let C = useSubscription(FileCanEdit, {
     key: e.tile.type === TileType.FILE ? e.tile.file.key : ""
   }, {

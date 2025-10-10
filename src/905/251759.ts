@@ -6,7 +6,7 @@ import { renderI18nText } from '../905/303541';
 import { ConnectedPointingDropdown } from '../905/504727';
 import { SvgComponent } from '../905/714743';
 import { hideDropdownAction, showDropdownThunk } from '../905/929976';
-import { c$ } from '../figma_app/236327';
+import { OptionComponent } from '../figma_app/236327';
 import { withTrackedClick } from '../figma_app/831799';
 import { A } from '../svg/763165';
 let switcherDropdownType = 'CART_CURRENCY_SWITCHER_DROPDOWN_TYPE';
@@ -167,7 +167,7 @@ export interface CurrencyDropdownOptionProps {
  */
 export const CurrencyDropdownOption = withTrackedClick((props: CurrencyDropdownOptionProps) => {
   const option = currencyOptions[props.currency];
-  return jsx(c$, {
+  return jsx(OptionComponent, {
     onClick: props.onClick,
     children: jsxs('div', {
       className: 'currency_switcher--dropdownOption--6dFex',

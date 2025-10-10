@@ -12,7 +12,7 @@ import { lX } from '../figma_app/588397';
 import { PrimaryWorkflowEnum } from '../figma_app/633080';
 import { getAssetUniqueId } from '../figma_app/646357';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
-import { sp } from '../figma_app/678300';
+import { isNodePresentWithTraversal } from '../figma_app/678300';
 import { addToSelection, clearSelection } from '../figma_app/741237';
 import { sortWithCollator } from '../figma_app/930338';
 const COMPONENT_TILES_MARGIN_CLASS = 'component_tiles--margin24--vBPYF';
@@ -33,7 +33,7 @@ interface LibraryItemTilesByPageProps {
   onItemClick?: (item: any) => void;
   className?: string;
 }
-interface LibraryItemTilesByPageState { }
+interface LibraryItemTilesByPageState {}
 
 /**
  * Component that renders library items grouped by page
@@ -127,7 +127,7 @@ function getAssetId(item: any) {
       return item.node_id;
   }
 }
-interface LibraryItemTilesByFrameProps extends LibraryItemTilesByPageProps { }
+interface LibraryItemTilesByFrameProps extends LibraryItemTilesByPageProps {}
 
 /**
  * Component that renders library items grouped by frame
@@ -223,7 +223,7 @@ function calculateGutterWidth(containerWidth: number, itemWidth: number, gutterW
   const spacesBetweenItems = itemsPerRow - 1;
   return gutterWidth + (adjustedWidth - (itemsPerRow * itemWidth + spacesBetweenItems * gutterWidth)) / spacesBetweenItems;
 }
-interface LibraryItemTileGridProps extends LibraryItemTilesByPageProps { }
+interface LibraryItemTileGridProps extends LibraryItemTilesByPageProps {}
 
 /**
  * Component that renders a grid of library item tiles
@@ -247,7 +247,7 @@ export function LibraryItemTileGrid(props: LibraryItemTileGridProps) {
         }
       }
     }));
-    if (props.sceneGraphSelection && props.sceneGraph && !sp(props.sceneGraph, props.sceneGraphSelection, item.node_id)) {
+    if (props.sceneGraphSelection && props.sceneGraph && !isNodePresentWithTraversal(props.sceneGraph, props.sceneGraphSelection, item.node_id)) {
       clearSelection();
       await getSingletonSceneGraph().setCurrentPageFromNodeAsync(item.node_id);
       addToSelection([item.node_id]);

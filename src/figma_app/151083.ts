@@ -9,7 +9,7 @@ import c from "../vendor/128080";
 import { analyticsEventManager } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
-import { c$, wv } from "../figma_app/236327";
+import { OptionComponent, SeparatorComponent } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -21,7 +21,7 @@ import { useSubscribedAssets, AssetFilterMode } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
 import { createPrimaryInstancesSelector } from "../905/557338";
 import { KindEnum } from "../905/129884";
-import { c1, Yh } from "../figma_app/357047";
+import { getKeyboardShortcut, isActionEnabled } from "../figma_app/357047";
 import { $H } from "../figma_app/323320";
 import { AX } from "../905/542608";
 import { $$et0 } from "../905/759609";
@@ -51,7 +51,7 @@ export function $$H1(e) {
     detachInstanceShortcut
   } = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
-    detachInstanceShortcut: c1(e.mirror.appModel.keyboardShortcuts, "detach-instance")
+    detachInstanceShortcut: getKeyboardShortcut(e.mirror.appModel.keyboardShortcuts, "detach-instance")
   }));
   let u = useMemo($H, []);
   let p = useSelector(e => u(e, instanceAndSublayerGUIDs));
@@ -88,7 +88,7 @@ export function $$H1(e) {
       callback: () => {
         permissionScopeHandler.user("detach-instances", () => Fullscreen.detachInstances(instanceAndSublayerGUIDs, !0));
       }
-    }), Yh(appModel, "push-changes-to-main") && 0 === nestedInstances.length && !isBackingSymbolSoftDeleted && (e.length > 0 && e.push({
+    }), isActionEnabled(appModel, "push-changes-to-main") && 0 === nestedInstances.length && !isBackingSymbolSoftDeleted && (e.length > 0 && e.push({
       type: "separator"
     }), e.push({
       type: "option",
@@ -212,7 +212,7 @@ export function $$z0({
   return e && null != e.current && i ? jsx(ConnectedPointingDropdown, {
     targetRect: e.current.getBoundingClientRect(),
     propagateCloseClick: !0,
-    children: t.map((e, t) => "option" === e.type ? jsxs(c$, {
+    children: t.map((e, t) => "option" === e.type ? jsxs(OptionComponent, {
       className: VM,
       onClick: e.callback,
       recordingKey: generateRecordingKey(r, e.displayText),
@@ -220,7 +220,7 @@ export function $$z0({
       children: [e.displayText, e.shortcut && jsx("span", {
         children: e.shortcut
       })]
-    }, "reset-component-prop-assignment" === e.value ? generateRecordingKey(e.value, t) : e.value) : jsx(wv, {}, t))
+    }, "reset-component-prop-assignment" === e.value ? generateRecordingKey(e.value, t) : e.value) : jsx(SeparatorComponent, {}, t))
   }) : null;
 }
 function W() {

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { Fz } from "../figma_app/106207";
 import { fG } from "../figma_app/973927";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { Vq, Rt } from "../figma_app/979658";
 import { cX } from "../figma_app/920333";
 import { S, N } from "../1291/885929";
@@ -27,7 +27,7 @@ export function $$u0(e) {
         templateInsertionLocation: e.templateInsertionLocation,
         triggeredFrom: m,
         isInsertingTemplate: isInsertingTemplate(primaryKey),
-        onClickTitle: s.type === _$$n.HubFile ? () => {
+        onClickTitle: s.type === TeamTemplateType.HubFile ? () => {
           setPreviewResource({
             id: s.template.id,
             type: Rt.TEMPLATES

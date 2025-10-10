@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import i, { memo, useCallback, useMemo, useEffect, useRef, useState, forwardRef } from "react";
 import { VariableResolvedDataType, NodePropertyType, HandoffBindingsCpp, SessionOrigin, AppStateTsApi, ColorPalette, IssueCategory, IAssertResource, DesignGraphElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, atom, useAtomWithSubscription, createRemovableAtomFamily, mg, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
+import { useSetAtom, atom, useAtomWithSubscription, createRemovableAtomFamily, selectAtom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { useSceneGraphSelector, useCurrentTool } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { ViewportContainer } from "../figma_app/372802";
@@ -41,7 +41,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { buildFileUrl } from "../905/612685";
 import { ShareContext } from "../905/91820";
 import { w as _$$w } from "../figma_app/883622";
-import { c1 } from "../figma_app/357047";
+import { getKeyboardShortcut } from "../figma_app/357047";
 import { j as _$$j } from "../905/834956";
 import { o as _$$o } from "../905/89370";
 import { W as _$$W } from "../905/592530";
@@ -1875,7 +1875,7 @@ function tD({
 }
 function tO() {
   let e = trackFileEventWithPage();
-  let t = Xr(_$$m);
+  let t = useSetAtom(_$$m);
   let n = !!useDevModeFocusId();
   return useCallback((a, i) => {
     permissionScopeHandler.user("clear-annotations", () => {
@@ -1911,7 +1911,7 @@ function tB(e) {
   let x = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
   let m = {
     displayText: getI18nString("dev_handoff.annotations.hide_annotations"),
-    shortcut: c1(h, "toggle-show-annotations"),
+    shortcut: getKeyboardShortcut(h, "toggle-show-annotations"),
     callback: () => {
       VU.get("toggle-show-annotations", "context-menu")();
     },
@@ -2586,7 +2586,7 @@ let nF = {
     }) : null;
   }
 };
-let nU = createRemovableAtomFamily(e => mg(atom(t => {
+let nU = createRemovableAtomFamily(e => selectAtom(atom(t => {
   if (!e) return null;
   let n = t(AssetAtomMap[PrimaryWorkflowEnum.MANAGED_STRING].local);
   let a = t(AssetAtomMap[PrimaryWorkflowEnum.MANAGED_STRING].subscribed);
@@ -2938,7 +2938,7 @@ function n2({
     }, [Sprig, e, n, a, o, l]);
   }();
   let y = tO();
-  let b = Xr(_$$m);
+  let b = useSetAtom(_$$m);
   let j = useStrictDeepEqualSceneValue((e, t) => e.get(t)?.annotations, e);
   let w = useAnnotationCategories({
     initializeIfNull: !0
@@ -3947,7 +3947,7 @@ function aj() {
   });
   let g = useSelector(e => e.dropdownShown);
   let x = g?.type === tM;
-  let m = Xr(_$$f);
+  let m = useSetAtom(_$$f);
   let [y, b] = useAtomValueAndSetter(_$$m);
   let k = getThemeContextOrDefault();
   useEffect(() => {

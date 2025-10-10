@@ -1,24 +1,13 @@
 // Type definitions for menu item properties
-interface MenuItem {
-  action?: () => void
-  name?: string
-  children?: MenuItem[]
-  childDropdown?: MenuItem[]
-  callback?: () => void
-  separator?: boolean
-  header?: boolean
-  render?: () => JSX.Element
-  checked?: boolean
-  propertyValue?: any
-  property?: string | { getCopy: () => any }
-}
+
+import type { IMenuItem } from "../905/525678"
 
 // Type guards for menu item properties
 /**
  * Checks if a menu item has children or child dropdown elements
  * (Original: $$n3)
  */
-export function hasChildrenOrDropdown(item: MenuItem): boolean {
+export function hasChildrenOrDropdown(item: IMenuItem): boolean {
   return "children" in item || "childDropdown" in item
 }
 
@@ -26,7 +15,7 @@ export function hasChildrenOrDropdown(item: MenuItem): boolean {
  * Checks if a menu item has an action or callback function
  * (Original: $$i6)
  */
-export function hasActionOrCallback(item: MenuItem): boolean {
+export function hasActionOrCallback(item: IMenuItem): boolean {
   return "action" in item || "callback" in item
 }
 
@@ -34,7 +23,7 @@ export function hasActionOrCallback(item: MenuItem): boolean {
  * Checks if a menu item is a separator
  * (Original: $$a12)
  */
-export function hasSeparator(item: MenuItem): boolean {
+export function hasSeparator(item: IMenuItem): boolean {
   return "separator" in item
 }
 
@@ -42,7 +31,7 @@ export function hasSeparator(item: MenuItem): boolean {
  * Checks if a menu item is a header
  * (Original: $$s9)
  */
-export function hasHeader(item: MenuItem): boolean {
+export function hasHeader(item: IMenuItem): boolean {
   return "header" in item
 }
 
@@ -50,7 +39,7 @@ export function hasHeader(item: MenuItem): boolean {
  * Checks if a menu item has a render function
  * (Original: $$o11)
  */
-export function hasRenderFunction(item: MenuItem): boolean {
+export function hasRenderFunction(item: IMenuItem): boolean {
   return "render" in item
 }
 
@@ -58,7 +47,7 @@ export function hasRenderFunction(item: MenuItem): boolean {
  * Checks if a menu item has a checked state or property value
  * (Original: $$l5)
  */
-export function isCheckedOrHasPropertyValue(item: MenuItem): boolean {
+export function isCheckedOrHasPropertyValue(item: IMenuItem): boolean {
   const hasPropertyValue = "propertyValue" in item && item.propertyValue !== undefined
   return "checked" in item || hasPropertyValue
 }
@@ -67,7 +56,7 @@ export function isCheckedOrHasPropertyValue(item: MenuItem): boolean {
  * Determines if a menu item is checked based on its properties
  * (Original: $$d4)
  */
-export function isMenuItemChecked(target: any, item: MenuItem): boolean {
+export function isMenuItemChecked(target: any, item: IMenuItem): boolean {
   if (item.checked) {
     return true
   }
@@ -94,7 +83,7 @@ export function getProperty(target: any, item: string | { getCopy: () => any }):
  * Gets the action or name of a menu item
  * (Original: $$u0)
  */
-export function getActionOrName(item: MenuItem): (() => void) | string | undefined {
+export function getActionOrName(item: IMenuItem): (() => void) | string | undefined {
   return item.action || item.name
 }
 

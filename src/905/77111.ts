@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Vq, c$, wv } from "../figma_app/236327";
+import { PositionedDropdown, OptionComponent, SeparatorComponent } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 function l(e, t) {
   !function (e, t) {
@@ -33,7 +33,7 @@ export function $$c1({
     e?.current && (h(t), navigator.clipboard.writeText(e.current.value));
   };
   let f = useRef(null);
-  return t ? jsxs(Vq, {
+  return t ? jsxs(PositionedDropdown, {
     ref: f,
     style: {
       top: m,
@@ -41,16 +41,16 @@ export function $$c1({
       position: "fixed"
     },
     closeDropdown: d,
-    children: [jsx(c$, {
+    children: [jsx(OptionComponent, {
       onClick: u,
       recordingKey: generateRecordingKey(p, "detachVariable"),
       children: getI18nString("variables.binding_ui.detach_variable_tooltip")
-    }), jsx(c$, {
+    }), jsx(OptionComponent, {
       onClick: c,
       recordingKey: generateRecordingKey(p, "applyVariable"),
       children: getI18nString("fullscreen.properties_panel.apply_variable_ellipses")
     })]
-  }) : jsxs(Vq, {
+  }) : jsxs(PositionedDropdown, {
     ref: f,
     style: {
       top: m,
@@ -58,17 +58,17 @@ export function $$c1({
       position: "fixed"
     },
     closeDropdown: d,
-    children: [jsx(c$, {
+    children: [jsx(OptionComponent, {
       onClick: t => {
         e?.current && (g(t), l(e.current, ""));
       },
       recordingKey: generateRecordingKey(p, "cut"),
       children: getI18nString("fullscreen_actions.cut")
-    }), jsx(c$, {
+    }), jsx(OptionComponent, {
       onClick: g,
       recordingKey: generateRecordingKey(p, "copy"),
       children: getI18nString("fullscreen_actions.copy")
-    }), jsx(c$, {
+    }), jsx(OptionComponent, {
       onClick: () => {
         navigator.clipboard.readText().then(t => {
           e?.current && (e.current.focus(), l(e.current, t));
@@ -77,11 +77,11 @@ export function $$c1({
       },
       recordingKey: generateRecordingKey(p, "paste"),
       children: getI18nString("fullscreen_actions.paste")
-    }), jsx(c$, {
+    }), jsx(OptionComponent, {
       onClick: h,
       recordingKey: generateRecordingKey(p, "selectAll"),
       children: getI18nString("fullscreen_actions.select-all")
-    }), jsx(wv, {}), jsx(c$, {
+    }), jsx(SeparatorComponent, {}), jsx(OptionComponent, {
       onClick: c,
       recordingKey: generateRecordingKey(p, "applyVariable"),
       children: getI18nString("fullscreen.properties_panel.apply_variable_ellipses")

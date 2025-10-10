@@ -4,7 +4,7 @@ import { LoadingRenderer } from "../905/211326";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { X } from "../figma_app/91315";
-import { hv } from "../905/952832";
+import { UploadState } from "../905/952832";
 import { Ro, CH, z6 } from "../figma_app/805373";
 import { n1, Lq, Lw, Kk, iE, sH, iQ, Ew } from "../905/687467";
 import { A } from "../1617/754897";
@@ -23,7 +23,7 @@ let _ = (e, t = {}) => function (r) {
     height: `${c}px`,
     minHeight: `${c}px`
   };
-  let m = r.avatarEditorState && r.avatarEditorState.status === hv.UPLOADING && r.entity === r.avatarEditorState.entity;
+  let m = r.avatarEditorState && r.avatarEditorState.status === UploadState.UPLOADING && r.entity === r.avatarEditorState.entity;
   let g = t.className ? t.className : n1;
   let f = jsx(LoadingRenderer, {
     isLoading: m,

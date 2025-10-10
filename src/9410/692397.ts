@@ -5,7 +5,7 @@ import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
 import { b as _$$b } from "../figma_app/556971";
 import { renderI18nText } from "../905/303541";
-import { oz, o5 } from "../905/292918";
+import { openSourceFileThunk, showBranchesModalThunk } from "../905/292918";
 import { getDisplayNameAlt, isDefaultFileAlt, isBranchAlt } from "../905/760074";
 import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -23,7 +23,7 @@ function C(e) {
     className: "static_repo_name--container--6SAYd",
     children: jsx(ButtonPrimitive, {
       className: "static_repo_name--button--4ZBh2 ellipsis--ellipsis--Tjyfa",
-      onClick: () => e.dispatch(oz({
+      onClick: () => e.dispatch(openSourceFileThunk({
         trackingContextName: e.trackingContextName
       })),
       children: getDisplayNameAlt(e.repo)
@@ -121,7 +121,7 @@ function A() {
   let t = useContext(X);
   return null === t || t < 1 ? null : jsx(ButtonPrimitive, {
     className: "left_panel_header_components--button--zghbk",
-    onClick: () => e(o5({
+    onClick: () => e(showBranchesModalThunk({
       trackingContextName: TrackingKeyEnum.EDITOR_TOOLBAR_ACTION
     })),
     children: renderI18nText("fullscreen.filename_view.branch-count", {

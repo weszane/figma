@@ -128,7 +128,7 @@ import { allCategoriesQuery } from '../figma_app/188671';
 import { FPublicationStatusType, FRequestStatusType } from '../figma_app/191312';
 import { NU } from '../figma_app/204891';
 import { fJ, KM, x5 } from '../figma_app/224019';
-import { c$ } from '../figma_app/236327';
+import { OptionComponent } from '../figma_app/236327';
 import { getFirstFileOrThrow, getFullscreenViewEditorType, getLocalFileId, getOrgRole, getPluginVersion, getPublishedResource, getPublishedResourceOrNull, getPublishingData, getPublishingErrors, getPublishingRole, hasRoleOrOrgChanged, isDevModePlugin, pluginMetadata, validateAndResizeIconImage, validatePublishingData, validatePublishingDataLengths } from '../figma_app/300692';
 import { trackGenericEvent } from '../figma_app/314264';
 import { getCurrentUserOrg, hasValidId, isEmailAllowed } from '../figma_app/336853';
@@ -354,13 +354,13 @@ function eZ(e) {
       maxWidth: 190,
       disableDropdownScrollContainer: !0,
       dataTestId: 'playgroundFileEditOptions',
-      children: [jsx(c$, {
+      children: [jsx(OptionComponent, {
         onClick: () => {
           let e = n?.url;
           e && customHistory.redirect(e, '_blank');
         },
         children: renderI18nText('community.publishing.playground_file.dropdown.open_file')
-      }), jsx(c$, {
+      }), jsx(OptionComponent, {
         onClick: () => {
           t(hideDropdownAction());
           e.removeFileCallback();

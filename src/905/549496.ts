@@ -11,11 +11,11 @@ import { LoadingRenderer } from "../905/211326";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { pI, nx, _E } from "../figma_app/443991";
+import { uploadAvatarThunk, base64ToUint8Array, createImageDataURL } from "../figma_app/443991";
 import { UpgradeAction } from "../905/370443";
 import { A as _$$A2 } from "../905/639174";
 import { ThemeContext } from "../905/187165";
-import { hv, Pf, ck } from "../905/952832";
+import { UploadState, SLSize, UserContextScope } from "../905/952832";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { neutralOffWhiteColor } from "../figma_app/728075";
 import { pL } from "../figma_app/639088";
@@ -25,7 +25,7 @@ let $$x0 = registerModal(function (e) {
   let o = useSelector(e => e.avatarEditorState);
   let l = useModalManager(e);
   return jsx(LoadingRenderer, {
-    isLoading: o.status !== hv.POSITIONING,
+    isLoading: o.status !== UploadState.POSITIONING,
     children: () => jsx(w, {
       ...e,
       fplModalManager: l,
@@ -102,7 +102,7 @@ class w extends Component {
         this.props.onClose();
         return;
       }
-      if (this.image.width < Pf.LARGE || this.image.height < Pf.LARGE) {
+      if (this.image.width < SLSize.LARGE || this.image.height < SLSize.LARGE) {
         this.props.dispatch(FlashActions.error(getI18nString("avatar_editor.your_profile_image_must_be_at_least_500_x500_px")));
         this.props.onClose();
         return;
@@ -113,12 +113,12 @@ class w extends Component {
     };
     this.startUpload = () => {
       this.props.onClose();
-      let e = this.props.avatarEditorState.entityType === ck.WORKSPACE ? "image/png" : "image/jpeg";
-      this.props.dispatch(pI({
+      let e = this.props.avatarEditorState.entityType === UserContextScope.WORKSPACE ? "image/png" : "image/jpeg";
+      this.props.dispatch(uploadAvatarThunk({
         entity: this.props.avatarEditorState.entity,
         entityType: this.props.avatarEditorState.entityType,
-        small: nx(_E(this.image, Pf.SMALL, this.computeImagePosition(Pf.SMALL), e)),
-        large: nx(_E(this.image, Pf.LARGE, this.computeImagePosition(Pf.LARGE), e)),
+        small: base64ToUint8Array(createImageDataURL(this.image, SLSize.SMALL, this.computeImagePosition(SLSize.SMALL), e)),
+        large: base64ToUint8Array(createImageDataURL(this.image, SLSize.LARGE, this.computeImagePosition(SLSize.LARGE), e)),
         contentType: e
       }));
       trackEventAnalytics("Change Profile Picture");
@@ -215,7 +215,7 @@ class w extends Component {
           children: renderI18nText("avatar_editor.modal_title")
         }), jsx(DialogBody, {
           children: jsx(LoadingRenderer, {
-            isLoading: this.props.avatarEditorState.status !== hv.POSITIONING,
+            isLoading: this.props.avatarEditorState.status !== UploadState.POSITIONING,
             children: () => jsxs("div", {
               className: cssBuilderInstance.flex.flexColumn.gap24.itemsCenter.$,
               children: [jsx("canvas", {

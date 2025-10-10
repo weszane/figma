@@ -35,7 +35,7 @@ import { Id, Zk, $4 } from "../figma_app/626177";
 import { l6, c$ } from "../905/794875";
 import { Point } from "../905/736624";
 import { DraggableModalManager } from "../905/748636";
-import { bL, l9, mc, c$ as _$$c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { EventShield } from "../905/821217";
 import { bL as _$$bL, RT, c$ as _$$c$2 } from "../905/867927";
@@ -88,22 +88,22 @@ let Y = memo(function (e) {
 });
 let Z = "ui3_transform_modifiers_settings_picker--controlTwoSegments--eKMVM";
 function X(e) {
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     value: e.currentUnits,
     onChange: t => e.onUnitsChange(t, yesNoTrackingEnum.YES),
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       width: "fill",
       label: jsx(HiddenLabel, {
         children: getI18nString("properties_panel.transform_modifiers.repeat.units_label")
       }),
       disabled: e.disabled
-    }), jsxs(mc, {
-      children: [jsx(_$$c$, {
+    }), jsxs(SelectContainer, {
+      children: [jsx(SelectOptionReset, {
         value: "RELATIVE",
         children: getI18nString("properties_panel.transform_modifiers.repeat.units_relative", {
           numUnits: e.value
         })
-      }), jsx(_$$c$, {
+      }), jsx(SelectOptionReset, {
         value: "PIXELS",
         children: getI18nString("properties_panel.transform_modifiers.repeat.units_pixels")
       })]

@@ -6,7 +6,7 @@ import { setupMenu, MenuRootComp, MenuContainerComp, MenuLinkComp, MenuItemComp,
 import { ButtonPrimitive } from "../905/632989";
 import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom, atomStoreManager } from "../figma_app/27355";
 import _ from "classnames";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { openWindow } from "../905/508367";
@@ -28,7 +28,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler, hideModal } from "../905/156213";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Badge, BadgeColor } from "../figma_app/919079";
-import { c$, wv as _$$wv, X3 } from "../figma_app/236327";
+import { OptionComponent, SeparatorComponent, DropdownOptions } from "../figma_app/236327";
 import { trackedSvgComponent } from "../figma_app/637027";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { serializeQuery } from "../905/634134";
@@ -53,7 +53,7 @@ import { hasTeamPaidAccess } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { mapFileTypeToEditorTypeNullable, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
-import { c1 } from "../figma_app/357047";
+import { getKeyboardShortcut } from "../figma_app/357047";
 import { aG } from "../figma_app/728657";
 import { H as _$$H } from "../905/75186";
 import { isBoolean } from "../905/71";
@@ -62,9 +62,9 @@ import { KeyboardFocusManager } from "../905/826900";
 import { kA, IO } from "../905/962318";
 import { H as _$$H2 } from "../figma_app/731109";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily, userFlagAtomFamily, userFlagsAtom } from "../figma_app/545877";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { J_ } from "../figma_app/598952";
 import { BugReporterMachine, CollectiveUpsellOverlay, KoreanReportTranslationIssueCallout, GuestLanguagePickerOverlay } from "../figma_app/6204";
@@ -255,9 +255,9 @@ let eR = userFlagExistsAtomFamily(eO);
 function eL() {
   let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(eR);
-  let r = _$$e({
+  let r = useOverlay({
     overlay: BugReporterMachine,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [t]);
   let s = useSelector(e => e.user?.created_at);
   let o = useSelector(e => e.user?.email);
@@ -746,9 +746,9 @@ function tc({
   let {
     flagNumberVal
   } = eH(...WB);
-  let _ = _$$e({
+  let _ = useOverlay({
     overlay: CollectiveUpsellOverlay,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [s, o]);
   useSingleEffect(() => {
     _.show({
@@ -2217,9 +2217,9 @@ function tR({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: KoreanReportTranslationIssueCallout,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   useSingleEffect(() => {
     show({
@@ -2253,9 +2253,9 @@ function tM({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: GuestLanguagePickerOverlay,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   useSingleEffect(() => {
     !r && a !== languageCodes.EN && s && show();
@@ -2740,12 +2740,12 @@ export function $$t60(e) {
   }();
   let _ = !!selectUserFlag("collective_upsell_first_file_created");
   let h = u && _;
-  let m = Xr(aG);
+  let m = useSetAtom(aG);
   let g = isTryWhiteboardFile();
   let f = useSelector(e => e.userFlags);
   let y = selectCurrentFile();
   let I = useRef(null);
-  let v = Xr(_$$H2);
+  let v = useSetAtom(_$$H2);
   return jsxs(Fragment, {
     children: [jsx(tM, {
       helpWidgetOnboardingKey: t8
@@ -3180,7 +3180,7 @@ let t7 = class e extends RecordingPureComponent {
       onClick: this.onClickKeyboardShortcuts,
       label: jsxs(Fragment, {
         children: [renderI18nText("help_widget.menu.keyboard_shortcuts"), jsx(KeyboardShortcut, {
-          shortcut: c1(this.props.keyboardShortcuts, "open-shortcuts"),
+          shortcut: getKeyboardShortcut(this.props.keyboardShortcuts, "open-shortcuts"),
           className: "help_widget--shortcut--H4xrS"
         })]
       })
@@ -3241,7 +3241,7 @@ let t7 = class e extends RecordingPureComponent {
           onHover,
           simulateHover
         } = e;
-        return jsx(c$, {
+        return jsx(OptionComponent, {
           target,
           href,
           onClick,
@@ -3254,7 +3254,7 @@ let t7 = class e extends RecordingPureComponent {
           })
         }, t);
       }
-      return "separator" === e.type && jsx(_$$wv, {}, t);
+      return "separator" === e.type && jsx(SeparatorComponent, {}, t);
     });
     this.rootRef = e.rootRef;
     this.state = {
@@ -3355,7 +3355,7 @@ let t7 = class e extends RecordingPureComponent {
           userEmail: this.props.user?.email || null
         }), !this.props.dropDownOpen && jsx(re, {}), this.props.dropDownOpen && jsx("div", {
           className: "help_widget--dropdown--3SXN1 help_widget--tooltipPosition--XygMP",
-          children: jsx(X3, {
+          children: jsx(DropdownOptions, {
             hideDropdown: this.hideDropdownWithTabLogging,
             id: this.dropdownID,
             options: this.renderDropdownOptions()

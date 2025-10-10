@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppStateTsApi } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -33,7 +33,7 @@ export function $$v0(e) {
 export function $$I2() {
   let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(currentStateAtom);
-  let i = Xr(updatePublishStateAtom);
+  let i = useSetAtom(updatePublishStateAtom);
   let d = isInitiatedState(t);
   let c = useSelector(e => selectWellFormedModuleNodeIds(e));
   let u = Object.values(useSelector(e => selectAllModuleLibraryItemsWithStatus(e, LibrarySourceEnum.LIBRARY)));

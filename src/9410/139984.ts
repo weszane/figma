@@ -5,14 +5,14 @@ import { DesignGraphElements, Fullscreen, SchemaJoinStatus } from "../figma_app/
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { createAndOpenFile } from "../905/738636";
 import { postUserFlag } from "../905/985254";
-import { e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { getNewFileConfig } from "../905/766303";
 import { useOpenFileObjectWithSinatraType, selectCurrentFile } from "../figma_app/516028";
 import { selectUserFlag } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { validateUserFileAccess, checkUserAccess, checkCursorBotOnboarding, isBasicOnboardingComplete } from "../figma_app/242339";
 import { TabOpenBehavior, FileBrowserLocation } from "../figma_app/915202";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { hH, Qe } from "../9410/728210";
 import { J as _$$J } from "../figma_app/553179";
 import { iF } from "../figma_app/511910";
@@ -512,9 +512,9 @@ export function $$eo1() {
     show,
     complete,
     uniqueId
-  } = e({
+  } = useOverlay({
     overlay: CursorBotV2Overlay,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let O = useDispatch<AppDispatch>();
   let L = useStore();

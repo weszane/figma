@@ -26,7 +26,7 @@ import { RelativeTimeDisplay } from '../905/986103';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { JR, Wi } from '../figma_app/162641';
 import { getSelectedViewSelector } from '../figma_app/198885';
-import { Ct } from '../figma_app/199513';
+import { trashFolderMutation } from '../figma_app/199513';
 import { mapProjectProperties } from '../figma_app/349248';
 import { getSelectedView } from '../figma_app/386952';
 import { getAtomMutate } from '../figma_app/566371';
@@ -241,7 +241,7 @@ export function $$ea0(e) {
   let s = useDispatch<AppDispatch>();
   let x = useSelector(k);
   let S = getSelectedView();
-  let w = getAtomMutate(Ct);
+  let w = getAtomMutate(trashFolderMutation);
   let C = MD(t);
   let T = useSelector(e => e.teams);
   let {

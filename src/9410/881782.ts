@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from 'react';
-import { n as _$$n } from '../905/79930';
+import { TeamTemplateType } from '../905/79930';
 import { useNavigateToViewport } from '../905/104740';
 import { ServiceCategories } from '../905/165054';
 import { permissionScopeHandler } from '../905/189185';
@@ -9,7 +9,7 @@ import { endPerformanceSpan, startPerformanceSpan } from '../905/670985';
 import { logError, logInfo } from '../905/714362';
 import { selectUserFlag } from '../905/940356';
 import { postUserFlag } from '../905/985254';
-import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
+import { useAtomValueAndSetter, useSetAtom } from '../figma_app/27355';
 import { getHubFileVersionsThunk } from '../figma_app/49598';
 import { $2, bn, GF, h0, HQ, JJ, mf, NI, zu } from '../figma_app/61403';
 import { isRectInsideViewport, viewportToScreen } from '../figma_app/62612';
@@ -147,7 +147,7 @@ class L {
       }, r);
       await this.insertTemplate({
         template: {
-          type: _$$n.HubFile,
+          type: TeamTemplateType.HubFile,
           template: e
         },
         userTriggered: !1,
@@ -726,15 +726,15 @@ class L {
 export function $$R0() {
   let [e, t] = useAtomValueAndSetter(jr);
   let [i, m] = useAtomValueAndSetter(Sf);
-  let f = Xr(H7);
-  let g = Xr(nG);
-  let _ = Xr(Ds);
-  let x = Xr(Dh);
-  let y = Xr(a8);
-  let b = Xr(iB);
-  let C = Xr(oO);
-  let v = Xr($i);
-  let E = Xr(jE);
+  let f = useSetAtom(H7);
+  let g = useSetAtom(nG);
+  let _ = useSetAtom(Ds);
+  let x = useSetAtom(Dh);
+  let y = useSetAtom(a8);
+  let b = useSetAtom(iB);
+  let C = useSetAtom(oO);
+  let v = useSetAtom($i);
+  let E = useSetAtom(jE);
   let T = !!selectUserFlag('cursor_bot_v2_has_greeted_with_wave');
   let w = useContext(viewportNavigatorContext);
   let S = useNavigateToViewport();

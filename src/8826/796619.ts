@@ -3,7 +3,7 @@ import { useRef, useEffect, useState, useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { languageCodes } from "../905/816253";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { bL, DZ, mc, c$, wv } from "../905/493196";
+import { SelectGroupLabel, SelectOption, SelectContainer, SelectOptionReset, SelectRoot } from "../905/493196";
 import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
 import { trackFileEventWithUser } from "../figma_app/901889";
@@ -459,7 +459,7 @@ function J({
       }),
       children: getFeatureFlags().ce_tv_fpl_select ? jsx("span", {
         className: Y,
-        children: jsxs(bL, {
+        children: jsxs(SelectGroupLabel, {
           value: b ? "Mixed" : c ? "TRUE" : "FALSE",
           onChange: e => {
             k("TRUE" === e);
@@ -472,20 +472,20 @@ function J({
             enabled: "TRUE" === t
           }),
           recordingKey: generateRecordingKey(t, "reverseStackingOrder"),
-          children: [jsx(DZ, {
+          children: [jsx(SelectOption, {
             id: I,
             width: "fill"
-          }), jsxs(mc, {
+          }), jsxs(SelectContainer, {
             children: [b && jsxs(Fragment, {
-              children: [jsx(c$, {
+              children: [jsx(SelectOptionReset, {
                 value: "Mixed",
                 disabled: !0,
                 children: getI18nString("fullscreen.mixed")
-              }), jsx(wv, {})]
-            }), jsx(c$, {
+              }), jsx(SelectRoot, {})]
+            }), jsx(SelectOptionReset, {
               value: "TRUE",
               children: en.format(!0)
-            }), jsx(c$, {
+            }), jsx(SelectOptionReset, {
               value: "FALSE",
               children: en.format(!1)
             })]
@@ -588,7 +588,7 @@ function et({
       }),
       children: getFeatureFlags().ce_tv_fpl_select ? jsx("span", {
         className: Y,
-        children: jsxs(bL, {
+        children: jsxs(SelectGroupLabel, {
           value: y ? "Mixed" : S ? "TRUE" : "FALSE",
           onChange: e => {
             c("TRUE" === e);
@@ -603,20 +603,20 @@ function et({
             enabled: "TRUE" === t
           }),
           recordingKey: generateRecordingKey(t, "bordersTakeSpace"),
-          children: [jsx(DZ, {
+          children: [jsx(SelectOption, {
             id: j,
             width: "fill"
-          }), jsxs(mc, {
+          }), jsxs(SelectContainer, {
             children: [y && jsxs(Fragment, {
-              children: [jsx(c$, {
+              children: [jsx(SelectOptionReset, {
                 value: "Mixed",
                 disabled: !0,
                 children: getI18nString("fullscreen.mixed")
-              }), jsx(wv, {})]
-            }), jsx(c$, {
+              }), jsx(SelectRoot, {})]
+            }), jsx(SelectOptionReset, {
               value: "TRUE",
               children: el.format(!0)
-            }), jsx(c$, {
+            }), jsx(SelectOptionReset, {
               value: "FALSE",
               children: el.format(!1)
             })]

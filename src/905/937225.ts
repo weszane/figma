@@ -1,4 +1,4 @@
-export function $$n0(e, t, i, n) {
-  return 0 === e + t + i + n;
+export function isEqualZero(e, t, i, n) {
+  return e + t + i + n === 0
 }
-export const b = $$n0;
+export const b = isEqualZero

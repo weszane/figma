@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useState } from "react";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { useDropdown } from "../905/848862";
 import { ConnectedPointingDropdown } from "../905/504727";
@@ -75,7 +75,7 @@ function g({
     r(e);
     t();
   }, [t, e, r]));
-  return jsxs(c$, {
+  return jsxs(OptionComponent, {
     className: Fs,
     onClick: u,
     children: [jsx(_$$i2, {

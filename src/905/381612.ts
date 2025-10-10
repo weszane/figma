@@ -1,477 +1,798 @@
-import { createOptimistThunk } from "../905/350402";
-import { localStorageRef } from "../905/657224";
-import { recentCustomTemplatePutAll } from "../905/775228";
-import { FaceToolType, FDocumentType, ITemplateType } from "../905/862883";
-import { HubTypeEnum } from "../figma_app/45218";
-import { getHubFileVersionsThunk } from "../figma_app/49598";
-import { addFaceStampToRecentsAction, addFetchedPluginVersionAction, addFetchedWidgetVersionAction, addPluginToRecentsAction, addTemplateToRecentsWithUserIdThunk, addWhiteboardToolToRecentsAction, addWidgetsToRecentsAction, removeRecentlyUsedPluginAction, removeRecentlyUsedWidgetAction, setRecentFaceStampsAction, setRecentPluginsAction, setRecentTemplatesAction, setRecentWhiteboardToolsAction, setRecentWidgetsAction, syncRecentPluginsAction, syncRecentWidgetsAction } from "../figma_app/147952";
-import { getRecentItems, getRecentKey, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
-import { getCurrentPluginVersionId } from "../figma_app/300692";
-import { templateService } from "../figma_app/446378";
-import { throwTypeError } from "../figma_app/465776";
-import { cacheWidgetVersionsThunk, fetchCanvasWidgetVersions } from "../figma_app/559491";
-import { NO_TEAM } from "../figma_app/633080";
-import { getAssetKeyVersion } from "../figma_app/646357";
-import { loadingStatePutLoading, loadingStatePutSuccess } from "../figma_app/714946";
-import { ADD_ASSET_TO_RECENTS } from "../figma_app/933328";
-import { combineReducers } from "../vendor/156872";
-let x = "recent-library-items-design";
-let S = "recent-library-items";
-let w = "recent-library-items-slides";
-let C = "recent-library-items-cooper";
-let T = createOptimistThunk(async (e, t, {
-  loadingKey: i
-}) => {
-  let n = e.getState();
-  let {
-    orgId,
-    teamId
-  } = t;
-  if (!orgId && !teamId) return;
-  let s = n.recentlyUsed.templates[t.key];
-  let o = s.filter(e => e.type === ITemplateType.CommunityResource);
-  let l = s.filter(e => e.type === ITemplateType.TeamTemplate);
-  let d = new Set();
-  for (let e of o) n.hubFiles[e.id] || d.add(e.id);
-  if (d.size === 0 && l.length === 0) return;
-  e.dispatch(loadingStatePutLoading({
-    key: i
-  }));
-  let c = [];
-  let p = Array.from(d).map(async t => {
-    try {
-      await e.dispatch(getHubFileVersionsThunk({
-        hubFileId: t
-      }));
-    } catch (e) {
-      c.push(t);
-    }
-  });
-  let m = !1;
-  let _ = new Set();
-  if (l.length !== 0) {
-    let t = {
-      fileKeys: l.map(e => e.key).join(","),
-      ...(orgId ? {
-        orgId
-      } : teamId ? {
-        teamId
-      } : {})
-    };
-    let i = await templateService.getRecents(t).catch(e => {
-      m = !0;
-      console.error("Error fetching recent custom templates", e);
-    });
-    if (i) {
-      let t = i?.data.meta.templates;
-      if (t.length < l.length) {
-        for (let e of l) t.find(t => t.file_key === e.key) || _.add(e.key);
-      }
-      e.dispatch(recentCustomTemplatePutAll(t));
-    }
-  }
-  await Promise.all(p);
-  let A = m || _.size !== 0;
-  if (c.length !== 0 || A) {
-    let i = new Set();
-    for (let e of c) i.add(e);
-    let n = s.filter(e => e.type === ITemplateType.TeamTemplate ? !m && !_.has(e.key) : !i.has(e.id));
-    e.dispatch(setRecentTemplatesAction({
-      storeInRecentsKey: t.key,
-      recentTemplates: n
-    }));
-  }
-  e.dispatch(loadingStatePutSuccess({
-    key: i
-  }));
-});
-let k = createOptimistThunk(async (e, t, {
-  loadingKey: i
-}) => {
-  let n = e.getState();
-  let r = {};
-  for (let e of n.recentlyUsed.widgets[t.key]) {
-    let t = getCurrentPluginVersionId(n.publishedCanvasWidgetVersions, e.id);
-    !(t && n.publishedCanvasWidgetVersions[e.id]?.[t]) && e.version && (r[e.id] || (r[e.id] = []), e.version && r[e.id].push(e.version));
-  }
-  if (e.dispatch(loadingStatePutLoading({
-    key: i
-  })), Object.keys(r).length === 0) {
-    e.dispatch(loadingStatePutSuccess({
-      key: i
-    }));
-    return;
-  }
-  Object.keys(r).length > 0 && (await fetchCanvasWidgetVersions(r, n.currentUserOrgId), e.dispatch(cacheWidgetVersionsThunk({
-    widgetIDToVersions: r
-  })), e.dispatch(loadingStatePutSuccess({
-    key: i
-  })));
-});
-let R = [];
-let N = [];
-let P = [];
-let O = [];
-if (localStorageRef) {
-  let e = localStorageRef.getItem(x);
-  let t = localStorageRef.getItem(S);
-  let i = localStorageRef.getItem(w);
-  let n = localStorageRef.getItem(C);
-  try {
-    R = e && JSON.parse(e) || [];
-    N = t && JSON.parse(t) || [];
-    P = i && JSON.parse(i) || [];
-    O = n && JSON.parse(n) || [];
-    R = B(R);
-    N = B(N);
-    P = B(P);
-    O = B(O);
-  } catch (e) {}
+import { partition } from "lodash-es"
+import { createOptimistThunk } from "../905/350402"
+import { localStorageRef } from "../905/657224"
+import { recentCustomTemplatePutAll } from "../905/775228"
+import { FaceToolType, FDocumentType, ITemplateType } from "../905/862883"
+import { HubTypeEnum } from "../figma_app/45218"
+import { getHubFileVersionsThunk } from "../figma_app/49598"
+import { addFaceStampToRecentsAction, addFetchedPluginVersionAction, addFetchedWidgetVersionAction, addPluginToRecentsAction, addTemplateToRecentsWithUserIdThunk, addWhiteboardToolToRecentsAction, addWidgetsToRecentsAction, removeRecentlyUsedPluginAction, removeRecentlyUsedWidgetAction, setRecentFaceStampsAction, setRecentPluginsAction, setRecentTemplatesAction, setRecentWhiteboardToolsAction, setRecentWidgetsAction, syncRecentPluginsAction, syncRecentWidgetsAction } from "../figma_app/147952"
+import { getRecentItems, getRecentKey, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980"
+import { getCurrentPluginVersionId } from "../figma_app/300692"
+import { templateService } from "../figma_app/446378"
+import { throwTypeError } from "../figma_app/465776"
+import { cacheWidgetVersionsThunk, fetchCanvasWidgetVersions } from "../figma_app/559491"
+import { NO_TEAM } from "../figma_app/633080"
+import { getAssetKeyVersion } from "../figma_app/646357"
+import { loadingStatePutLoading, loadingStatePutSuccess } from "../figma_app/714946"
+import { ADD_ASSET_TO_RECENTS } from "../figma_app/933328"
+import { combineReducers } from "../vendor/156872"
+
+let x = "recent-library-items-design"
+let S = "recent-library-items"
+let w = "recent-library-items-slides"
+let C = "recent-library-items-cooper"
+// Renamed variables, added types, simplified logic, improved readability
+// Origin: T and k thunks for fetching templates and widgets metadata
+
+interface TemplateFetchParams {
+  key: string
+  orgId?: string
+  teamId?: string
 }
-let D = {
-  [FDocumentType.Design]: R,
-  [FDocumentType.FigJam]: N,
+
+interface WidgetFetchParams {
+  key: string
+}
+
+interface WidgetVersionMap {
+  [widgetId: string]: string[]
+}
+
+const fetchTemplatesMetadata = createOptimistThunk(
+  async (
+    thunkApi,
+    params: TemplateFetchParams,
+    { loadingKey }: { loadingKey: string },
+  ) => {
+    const state = thunkApi.getState()
+    const { orgId, teamId } = params
+
+    // Early return if no org or team ID
+    if (!orgId && !teamId) {
+      return
+    }
+
+    // Get recent templates and separate by type
+    const recentTemplates = state.recentlyUsed.templates[params.key] || []
+    const communityTemplates = recentTemplates.filter(
+      template => template.type === ITemplateType.CommunityResource,
+    )
+    const teamTemplates = recentTemplates.filter(
+      template => template.type === ITemplateType.TeamTemplate,
+    )
+
+    // Find missing community templates (not in hubFiles)
+    const missingCommunityTemplateIds = new Set<string>()
+    for (const template of communityTemplates) {
+      if (!state.hubFiles[template.id]) {
+        missingCommunityTemplateIds.add(template.id)
+      }
+    }
+
+    // Early return if nothing to fetch
+    if (missingCommunityTemplateIds.size === 0 && teamTemplates.length === 0) {
+      return
+    }
+
+    // Dispatch loading state
+    thunkApi.dispatch(
+      loadingStatePutLoading({
+        key: loadingKey,
+      }),
+    )
+
+    // Fetch missing community templates
+    const failedCommunityTemplateIds: string[] = []
+    const communityTemplatePromises = Array.from(
+      missingCommunityTemplateIds,
+    ).map(async (templateId) => {
+      try {
+        await thunkApi.dispatch(
+          getHubFileVersionsThunk({
+            hubFileId: templateId,
+          }),
+        )
+      }
+      catch (error) {
+        failedCommunityTemplateIds.push(templateId)
+      }
+    })
+
+    // Flag for tracking team template fetch errors
+    let hasTeamTemplateError = false
+    const missingTeamTemplateKeys = new Set<string>()
+
+    // Fetch team templates if any exist
+    if (teamTemplates.length > 0) {
+      const teamTemplateRequest = {
+        fileKeys: teamTemplates.map(t => t.key).join(","),
+        ...(orgId
+          ? { orgId }
+          : teamId
+            ? { teamId }
+            : {}),
+      }
+
+      try {
+        const response = await templateService.getRecents(teamTemplateRequest)
+        const fetchedTemplates = response?.data.meta.templates || []
+
+        // Check for missing team templates
+        if (fetchedTemplates.length < teamTemplates.length) {
+          for (const template of teamTemplates) {
+            const found = fetchedTemplates.some(
+              t => t.file_key === template.key,
+            )
+            if (!found) {
+              missingTeamTemplateKeys.add(template.key)
+            }
+          }
+        }
+
+        // Update store with fetched templates
+        thunkApi.dispatch(recentCustomTemplatePutAll(fetchedTemplates))
+      }
+      catch (error) {
+        hasTeamTemplateError = true
+        console.error("Error fetching recent custom templates", error)
+      }
+    }
+
+    // Wait for all community template requests to complete
+    await Promise.all(communityTemplatePromises)
+
+    // Update recent templates if there were failures
+    const hasErrors = hasTeamTemplateError || missingTeamTemplateKeys.size > 0
+    if (failedCommunityTemplateIds.length > 0 || hasErrors) {
+      const failedCommunitySet = new Set(failedCommunityTemplateIds)
+
+      const validTemplates = recentTemplates.filter((template) => {
+        if (template.type === ITemplateType.TeamTemplate) {
+          return !hasTeamTemplateError && !missingTeamTemplateKeys.has(template.key)
+        }
+        else {
+          return !failedCommunitySet.has(template.id)
+        }
+      })
+
+      thunkApi.dispatch(
+        setRecentTemplatesAction({
+          storeInRecentsKey: params.key,
+          recentTemplates: validTemplates,
+        }),
+      )
+    }
+
+    // Dispatch success state
+    thunkApi.dispatch(
+      loadingStatePutSuccess({
+        key: loadingKey,
+      }),
+    )
+  },
+)
+
+const fetchWidgetsMetadata = createOptimistThunk(
+  async (
+    thunkApi,
+    params: WidgetFetchParams,
+    { loadingKey }: { loadingKey: string },
+  ) => {
+    const state = thunkApi.getState()
+
+    // Build map of widget IDs to missing versions
+    const widgetVersionsToFetch: WidgetVersionMap = {}
+
+    const recentWidgets = state.recentlyUsed.widgets[params.key] || []
+    for (const widget of recentWidgets) {
+      const currentVersionId = getCurrentPluginVersionId(
+        state.publishedCanvasWidgetVersions,
+        widget.id,
+      )
+
+      const hasCurrentVersion
+        = currentVersionId
+        && state.publishedCanvasWidgetVersions[widget.id]?.[currentVersionId]
+
+      // If widget doesn't have current version and has a version specified, add to fetch list
+      if (!hasCurrentVersion && widget.version) {
+        if (!widgetVersionsToFetch[widget.id]) {
+          widgetVersionsToFetch[widget.id] = []
+        }
+        widgetVersionsToFetch[widget.id].push(widget.version)
+      }
+    }
+
+    // Dispatch loading state
+    thunkApi.dispatch(
+      loadingStatePutLoading({
+        key: loadingKey,
+      }),
+    )
+
+    // Early return if nothing to fetch
+    if (Object.keys(widgetVersionsToFetch).length === 0) {
+      thunkApi.dispatch(
+        loadingStatePutSuccess({
+          key: loadingKey,
+        }),
+      )
+      return
+    }
+
+    // Fetch missing widget versions
+    await fetchCanvasWidgetVersions(
+      widgetVersionsToFetch,
+      state.currentUserOrgId,
+    )
+
+    thunkApi.dispatch(
+      cacheWidgetVersionsThunk({
+        widgetIDToVersions: widgetVersionsToFetch,
+      }),
+    )
+
+    thunkApi.dispatch(
+      loadingStatePutSuccess({
+        key: loadingKey,
+      }),
+    )
+  },
+)
+
+// Initialize recent items from localStorage
+let designLibraryItems: any[] = []
+let figjamLibraryItems: any[] = []
+let slidesLibraryItems: any[] = []
+let cooperLibraryItems: any[] = []
+
+if (localStorageRef) {
+  try {
+    const storedDesign = localStorageRef.getItem(x)
+    const storedFigjam = localStorageRef.getItem(S)
+    const storedSlides = localStorageRef.getItem(w)
+    const storedCooper = localStorageRef.getItem(C)
+
+    designLibraryItems = (storedDesign && JSON.parse(storedDesign)) || []
+    figjamLibraryItems = (storedFigjam && JSON.parse(storedFigjam)) || []
+    slidesLibraryItems = (storedSlides && JSON.parse(storedSlides)) || []
+    cooperLibraryItems = (storedCooper && JSON.parse(storedCooper)) || []
+
+    // Filter out items without library_key
+    designLibraryItems = filterByLibraryKey(designLibraryItems)
+    figjamLibraryItems = filterByLibraryKey(figjamLibraryItems)
+    slidesLibraryItems = filterByLibraryKey(slidesLibraryItems)
+    cooperLibraryItems = filterByLibraryKey(cooperLibraryItems)
+  }
+  catch (error) {
+    // Silently handle parse errors
+  }
+}
+
+const initialLibraryItems = {
+  [FDocumentType.Design]: designLibraryItems,
+  [FDocumentType.FigJam]: figjamLibraryItems,
   [FDocumentType.Handoff]: [],
-  [FDocumentType.Slides]: P,
-  [FDocumentType.Cooper]: O
-};
-let L = {
+  [FDocumentType.Slides]: slidesLibraryItems,
+  [FDocumentType.Cooper]: cooperLibraryItems,
+}
+
+const initialWidgets = {
   [FDocumentType.Design]: [],
   [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, HubTypeEnum.WIDGET),
   [FDocumentType.Handoff]: [],
   [FDocumentType.Slides]: [],
   [FDocumentType.Cooper]: [],
-  fetchedResources: {}
-};
-let F = {
+  fetchedResources: {},
+}
+
+const initialPlugins = {
   [FDocumentType.Design]: [],
   [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, HubTypeEnum.PLUGIN),
   [FDocumentType.Handoff]: getRecentItems(FDocumentType.Handoff, HubTypeEnum.PLUGIN),
   [FDocumentType.Slides]: [],
   [FDocumentType.Cooper]: [],
-  fetchedResources: {}
-};
-let M = {
+  fetchedResources: {},
+}
+
+const initialTemplates = {
   [FDocumentType.Design]: [],
   [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, HubTypeEnum.HUB_FILE),
   [FDocumentType.Handoff]: [],
   [FDocumentType.Slides]: getRecentItems(FDocumentType.Slides, HubTypeEnum.HUB_FILE),
-  [FDocumentType.Cooper]: []
-};
-let j = {
+  [FDocumentType.Cooper]: [],
+}
+
+const initialFaceStamps = {
   [FDocumentType.Design]: [],
   [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, FaceToolType.FACE_STAMP),
   [FDocumentType.Handoff]: [],
   [FDocumentType.Slides]: [],
-  [FDocumentType.Cooper]: []
-};
-let U = {
+  [FDocumentType.Cooper]: [],
+}
+
+const initialWhiteboardTools = {
   [FDocumentType.Design]: [],
   [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, FaceToolType.WHITEBOARD_TOOL),
   [FDocumentType.Handoff]: [],
   [FDocumentType.Slides]: [],
-  [FDocumentType.Cooper]: []
-};
-function B(e) {
-  return e.filter(e => !!e.library_key);
+  [FDocumentType.Cooper]: [],
 }
-function V(e) {
-  let {
-    currentUserId,
-    resourceId,
-    currentVersionId,
-    editorKey,
-    resourceKey
-  } = e;
-  let [[d], c] = partition()(getRecentItems(editorKey, resourceKey), e => e.type === ITemplateType.CommunityResource && e.id === resourceId);
-  let u = [{
-    id: resourceId,
-    version: currentVersionId,
-    run_by_user_ids: uniq()([...(d?.run_by_user_ids || []), ...(currentUserId ? [currentUserId] : [])]),
-    last_added_at_by_user_id: {
-      ...(d?.last_added_at_by_user_id || {}),
-      ...(currentUserId ? {
-        [currentUserId]: Date.now()
-      } : {})
+
+/**
+ * Filter array to only include items with library_key
+ */
+function filterByLibraryKey(items: any[]): any[] {
+  return items.filter(item => !!item.library_key)
+}
+
+/**
+ * Update recent items with new resource
+ */
+function updateRecentItems(params: {
+  currentUserId?: string
+  resourceId: string
+  currentVersionId?: string
+  editorKey: FDocumentType
+  resourceKey: HubTypeEnum
+}): any[] {
+  const { currentUserId, resourceId, currentVersionId, editorKey, resourceKey } = params
+
+  const [existingItem, otherItems] = partition(
+    getRecentItems(editorKey, resourceKey),
+    item =>
+      item.type === ITemplateType.CommunityResource && item.id === resourceId,
+  )[0]
+
+  const updatedItems = [
+    {
+      id: resourceId,
+      version: currentVersionId,
+      run_by_user_ids: uniq()([
+        ...(existingItem?.run_by_user_ids || []),
+        ...(currentUserId ? [currentUserId] : []),
+      ]),
+      last_added_at_by_user_id: {
+        ...(existingItem?.last_added_at_by_user_id || {}),
+        ...(currentUserId
+          ? {
+            [currentUserId]: Date.now(),
+          }
+          : {}),
+      },
+      type: ITemplateType.CommunityResource,
     },
-    type: ITemplateType.CommunityResource
-  }, ...c].slice(0, resourceKey === HubTypeEnum.PLUGIN ? 21 : 12);
-  let p = getRecentKey(editorKey, resourceKey);
-  p && localStorageRef?.setItem(p, JSON.stringify(u));
-  return u;
+    ...otherItems,
+  ].slice(0, resourceKey === HubTypeEnum.PLUGIN ? 21 : 12)
+
+  const storageKey = getRecentKey(editorKey, resourceKey)
+  if (storageKey) {
+    localStorageRef?.setItem(storageKey, JSON.stringify(updatedItems))
+  }
+
+  return updatedItems
 }
-function G(e, t, i) {
-  let n = getRecentItems(e, t);
-  if (!i) return n;
-  n = n.filter(e => e.id !== i);
-  let a = getRecentKey(e, t);
-  a && localStorageRef?.setItem(a, JSON.stringify(n));
-  return n;
+
+/**
+ * Remove resource from recent items
+ */
+function removeRecentItem(
+  editorKey: FDocumentType,
+  resourceKey: HubTypeEnum,
+  resourceId?: string,
+): any[] {
+  let recentItems = getRecentItems(editorKey, resourceKey)
+
+  if (!resourceId) {
+    return recentItems
+  }
+
+  recentItems = recentItems.filter(item => item.id !== resourceId)
+
+  const storageKey = getRecentKey(editorKey, resourceKey)
+  if (storageKey) {
+    localStorageRef?.setItem(storageKey, JSON.stringify(recentItems))
+  }
+
+  return recentItems
 }
-let $$z1 = {
-  fetchWidgetsMetadata: k,
-  fetchTemplatesMetadata: T
-};
-let $$H0 = combineReducers({
-  libraryItems(e = D, t) {
-    if (ADD_ASSET_TO_RECENTS.matches(t)) {
-      if (!t.payload.storeInRecentsKey) return e;
-      let i = getAssetKeyVersion(t.payload.item);
-      if (!i.key) return e;
-      let {
-        node_id,
-        team_id
-      } = t.payload.item;
-      let o = t.payload.item.library_key;
-      let [[l], d] = partition()(e[t.payload.storeInRecentsKey], e => e.library_key === o && e.node_id === node_id);
-      let c = [{
-        ...i,
-        team_id: team_id || NO_TEAM,
-        library_key: t.payload.item.library_key,
-        node_id,
-        last_added_at_by_user_id: {
-          ...(l?.last_added_at_by_user_id || {}),
-          ...(t.payload.userId ? {
-            [t.payload.userId]: Date.now()
-          } : {})
-        }
-      }, ...d].slice(0, 21);
-      localStorageRef?.setItem(function (e) {
-        switch (e) {
-          case FDocumentType.Design:
-            return x;
-          case FDocumentType.Slides:
-            return w;
-          case FDocumentType.FigJam:
-            return S;
-          case FDocumentType.Cooper:
-            return C;
-          default:
-            return S;
-        }
-      }(t.payload.storeInRecentsKey), JSON.stringify(c));
-      return {
-        ...e,
-        [t.payload.storeInRecentsKey]: c
-      };
-    }
-    return e;
-  },
-  widgets(e = L, t) {
-    if (addWidgetsToRecentsAction.matches(t)) {
-      let {
-        storeInRecentsKey
-      } = t.payload;
-      let n = HubTypeEnum.WIDGET;
-      if (!getRecentKey(storeInRecentsKey, n)) return e;
-      let r = V({
-        currentUserId: t.payload.currentUserId,
-        resourceId: t.payload.id,
-        currentVersionId: t.payload.version,
-        editorKey: storeInRecentsKey,
-        resourceKey: n
-      });
-      return {
-        ...e,
-        [t.payload.storeInRecentsKey]: r
-      };
-    }
-    if (setRecentWidgetsAction.matches(t)) {
-      return {
-        ...e,
-        [t.payload.storeInRecentsKey]: t.payload.recentResources
-      };
-    }
-    if (removeRecentlyUsedWidgetAction.matches(t)) {
-      let {
-        resourceId,
-        storeInRecentsKey
-      } = t.payload;
-      let r = G(storeInRecentsKey, HubTypeEnum.WIDGET, resourceId);
-      return {
-        ...e,
-        [storeInRecentsKey]: r
-      };
-    }
-    return syncRecentWidgetsAction.matches(t) ? {
-      ...e,
-      [t.payload.storeInRecentsKey]: getRecentItems(t.payload.storeInRecentsKey, HubTypeEnum.WIDGET)
-    } : addFetchedWidgetVersionAction.matches(t) ? {
-      ...e,
-      fetchedResources: {
-        ...e.fetchedResources,
-        [t.payload.id]: {
-          version: t.payload.version,
-          status: t.payload.status
-        }
+
+export const recentItemsThunks = {
+  fetchWidgetsMetadata,
+  fetchTemplatesMetadata,
+}
+
+export const recentItemsReducer = combineReducers({
+  libraryItems(state = initialLibraryItems, action: any) {
+    if (ADD_ASSET_TO_RECENTS.matches(action)) {
+      if (!action.payload.storeInRecentsKey)
+        return state
+
+      const assetInfo = getAssetKeyVersion(action.payload.item)
+      if (!assetInfo.key)
+        return state
+
+      const { node_id, team_id } = action.payload.item
+      const libraryKey = action.payload.item.library_key
+
+      const [existingItem, otherItems] = partition(
+        state[action.payload.storeInRecentsKey],
+        item =>
+          item.library_key === libraryKey && item.node_id === node_id,
+      )[0]
+
+      const updatedItems = [
+        {
+          ...assetInfo,
+          team_id: team_id || NO_TEAM,
+          library_key: action.payload.item.library_key,
+          node_id,
+          last_added_at_by_user_id: {
+            ...(existingItem?.last_added_at_by_user_id || {}),
+            ...(action.payload.userId
+              ? {
+                [action.payload.userId]: Date.now(),
+              }
+              : {}),
+          },
+        },
+        ...otherItems,
+      ].slice(0, 21)
+
+      // Determine localStorage key based on document type
+      let storageKey: string
+      switch (action.payload.storeInRecentsKey) {
+        case FDocumentType.Design:
+          storageKey = x
+          break
+        case FDocumentType.Slides:
+          storageKey = w
+          break
+        case FDocumentType.FigJam:
+          storageKey = S
+          break
+        case FDocumentType.Cooper:
+          storageKey = C
+          break
+        default:
+          storageKey = S
       }
-    } : e;
-  },
-  plugins(e = F, t) {
-    if (addPluginToRecentsAction.matches(t)) {
-      let {
-        storeInRecentsKey
-      } = t.payload;
-      let n = HubTypeEnum.PLUGIN;
-      if (!getRecentKey(storeInRecentsKey, n)) return e;
-      let r = V({
-        currentUserId: t.payload.currentUserId,
-        resourceId: t.payload.id,
-        currentVersionId: t.payload.version || void 0,
-        editorKey: storeInRecentsKey,
-        resourceKey: n
-      });
+
+      localStorageRef?.setItem(storageKey, JSON.stringify(updatedItems))
+
       return {
-        ...e,
-        [t.payload.storeInRecentsKey]: r
-      };
-    }
-    if (setRecentPluginsAction.matches(t)) {
-      return {
-        ...e,
-        [t.payload.storeInRecentsKey]: t.payload.recentResources
-      };
-    }
-    if (removeRecentlyUsedPluginAction.matches(t)) {
-      let {
-        resourceId,
-        storeInRecentsKey
-      } = t.payload;
-      let r = G(storeInRecentsKey, HubTypeEnum.PLUGIN, resourceId);
-      return {
-        ...e,
-        [storeInRecentsKey]: r
-      };
-    }
-    return syncRecentPluginsAction.matches(t) ? t.payload.storeInRecentsKey === FDocumentType.Design ? e : {
-      ...e,
-      [t.payload.storeInRecentsKey]: getRecentItems(t.payload.storeInRecentsKey, HubTypeEnum.PLUGIN)
-    } : addFetchedPluginVersionAction.matches(t) ? {
-      ...e,
-      fetchedResources: {
-        ...e.fetchedResources,
-        [t.payload.id]: {
-          version: t.payload.version,
-          status: t.payload.status
-        }
+        ...state,
+        [action.payload.storeInRecentsKey]: updatedItems,
       }
-    } : e;
+    }
+    return state
   },
-  templates(e = M, t) {
-    if (addTemplateToRecentsWithUserIdThunk.matches(t)) {
-      let i;
-      let {
-        storeInRecentsKey
-      } = t.payload;
-      let o = getRecentKey(storeInRecentsKey, HubTypeEnum.HUB_FILE);
-      if (!o) throw new Error("Recently used templates currently only implemented for FigJam and Slides");
-      let {
-        payload
-      } = t;
-      let {
-        type,
-        userId
-      } = uniq;
-      let [[u], p] = partition()(getRecentItems(storeInRecentsKey, HubTypeEnum.HUB_FILE), e => {
-        let {
-          type: _type
-        } = e;
-        switch (_type) {
-          case ITemplateType.CommunityResource:
-            return payload.type === ITemplateType.CommunityResource && e.id === payload.id;
-          case ITemplateType.TeamTemplate:
-            return payload.type === ITemplateType.TeamTemplate && e.key === payload.file_key;
-          default:
-            throwTypeError(_type);
-        }
-      });
-      let m = {
-        ...(u?.last_added_at_by_user_id || {}),
-        ...(userId ? {
-          [userId]: Date.now()
-        } : {})
-      };
+
+  widgets(state = initialWidgets, action: any) {
+    if (addWidgetsToRecentsAction.matches(action)) {
+      const { storeInRecentsKey } = action.payload
+      const resourceKey = HubTypeEnum.WIDGET
+
+      if (!getRecentKey(storeInRecentsKey, resourceKey))
+        return state
+
+      const updatedItems = updateRecentItems({
+        currentUserId: action.payload.currentUserId,
+        resourceId: action.payload.id,
+        currentVersionId: action.payload.version,
+        editorKey: storeInRecentsKey,
+        resourceKey,
+      })
+
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: updatedItems,
+      }
+    }
+
+    if (setRecentWidgetsAction.matches(action)) {
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: action.payload.recentResources,
+      }
+    }
+
+    if (removeRecentlyUsedWidgetAction.matches(action)) {
+      const { resourceId, storeInRecentsKey } = action.payload
+      const updatedItems = removeRecentItem(
+        storeInRecentsKey,
+        HubTypeEnum.WIDGET,
+        resourceId,
+      )
+
+      return {
+        ...state,
+        [storeInRecentsKey]: updatedItems,
+      }
+    }
+
+    if (syncRecentWidgetsAction.matches(action)) {
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: getRecentItems(
+          action.payload.storeInRecentsKey,
+          HubTypeEnum.WIDGET,
+        ),
+      }
+    }
+
+    if (addFetchedWidgetVersionAction.matches(action)) {
+      return {
+        ...state,
+        fetchedResources: {
+          ...state.fetchedResources,
+          [action.payload.id]: {
+            version: action.payload.version,
+            status: action.payload.status,
+          },
+        },
+      }
+    }
+
+    return state
+  },
+
+  plugins(state = initialPlugins, action: any) {
+    if (addPluginToRecentsAction.matches(action)) {
+      const { storeInRecentsKey } = action.payload
+      const resourceKey = HubTypeEnum.PLUGIN
+
+      if (!getRecentKey(storeInRecentsKey, resourceKey))
+        return state
+
+      const updatedItems = updateRecentItems({
+        currentUserId: action.payload.currentUserId,
+        resourceId: action.payload.id,
+        currentVersionId: action.payload.version || undefined,
+        editorKey: storeInRecentsKey,
+        resourceKey,
+      })
+
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: updatedItems,
+      }
+    }
+
+    if (setRecentPluginsAction.matches(action)) {
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: action.payload.recentResources,
+      }
+    }
+
+    if (removeRecentlyUsedPluginAction.matches(action)) {
+      const { resourceId, storeInRecentsKey } = action.payload
+      const updatedItems = removeRecentItem(
+        storeInRecentsKey,
+        HubTypeEnum.PLUGIN,
+        resourceId,
+      )
+
+      return {
+        ...state,
+        [storeInRecentsKey]: updatedItems,
+      }
+    }
+
+    if (syncRecentPluginsAction.matches(action)) {
+      if (action.payload.storeInRecentsKey === FDocumentType.Design) {
+        return state
+      }
+
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: getRecentItems(
+          action.payload.storeInRecentsKey,
+          HubTypeEnum.PLUGIN,
+        ),
+      }
+    }
+
+    if (addFetchedPluginVersionAction.matches(action)) {
+      return {
+        ...state,
+        fetchedResources: {
+          ...state.fetchedResources,
+          [action.payload.id]: {
+            version: action.payload.version,
+            status: action.payload.status,
+          },
+        },
+      }
+    }
+
+    return state
+  },
+
+  templates(state = initialTemplates, action: any) {
+    if (addTemplateToRecentsWithUserIdThunk.matches(action)) {
+      const { storeInRecentsKey } = action.payload
+      const storageKey = getRecentKey(storeInRecentsKey, HubTypeEnum.HUB_FILE)
+
+      if (!storageKey) {
+        throw new Error(
+          "Recently used templates currently only implemented for FigJam and Slides",
+        )
+      }
+
+      const { payload } = action
+      const { type, userId } = payload // Fixed reference to payload instead of uniq
+
+      const [existingItem, otherItems] = partition(
+        getRecentItems(storeInRecentsKey, HubTypeEnum.HUB_FILE),
+        (item) => {
+          switch (item.type) {
+            case ITemplateType.CommunityResource:
+              return (
+                payload.type === ITemplateType.CommunityResource
+                && item.id === payload.id
+              )
+            case ITemplateType.TeamTemplate:
+              return (
+                payload.type === ITemplateType.TeamTemplate
+                && item.key === payload.file_key
+              )
+            default:
+              throwTypeError(item.type)
+          }
+        },
+      )[0]
+
+      const updatedAtMap = {
+        ...(existingItem?.last_added_at_by_user_id || {}),
+        ...(userId
+          ? {
+            [userId]: Date.now(),
+          }
+          : {}),
+      }
+
+      let newItem: any
       switch (type) {
         case ITemplateType.CommunityResource:
-          i = {
+          newItem = {
             id: payload.id,
             type: ITemplateType.CommunityResource,
-            last_added_at_by_user_id: m
-          };
-          break;
+            last_added_at_by_user_id: updatedAtMap,
+          }
+          break
         case ITemplateType.TeamTemplate:
-          i = {
+          newItem = {
             key: payload.file_key,
             type: ITemplateType.TeamTemplate,
-            last_added_at_by_user_id: m
-          };
-          break;
+            last_added_at_by_user_id: updatedAtMap,
+          }
+          break
         default:
-          throwTypeError(type);
+          throwTypeError(type)
       }
-      let h = [i, ...p].slice(0, 4);
-      localStorageRef?.setItem(o, JSON.stringify(h));
+
+      const updatedItems = [newItem, ...otherItems].slice(0, 4)
+      localStorageRef?.setItem(storageKey, JSON.stringify(updatedItems))
+
       return {
-        ...e,
-        [t.payload.storeInRecentsKey]: h
-      };
+        ...state,
+        [action.payload.storeInRecentsKey]: updatedItems,
+      }
     }
-    return setRecentTemplatesAction.matches(t) ? {
-      ...e,
-      [t.payload.storeInRecentsKey]: t.payload.recentTemplates
-    } : e;
+
+    if (setRecentTemplatesAction.matches(action)) {
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: action.payload.recentTemplates,
+      }
+    }
+
+    return state
   },
-  faceStamps(e = j, t) {
-    if (addFaceStampToRecentsAction.matches(t)) {
-      if (t.payload.storeInRecentsKey !== FDocumentType.FigJam) throw new Error("Recently used facestamps currently only implemented for Figjam.");
-      let [[i], n] = partition()(e[t.payload.storeInRecentsKey], e => e.user.id === t.payload.item.user.id);
-      let a = [{
-        id: t.payload.item.user.id,
-        type: ITemplateType.FaceStamp,
-        user: t.payload.item.user,
-        last_added_at_by_user_id: {
-          ...(i?.last_added_at_by_user_id || {}),
-          ...(t.payload.currentUserId ? {
-            [t.payload.currentUserId]: Date.now()
-          } : {})
-        }
-      }, ...n].slice(0, 20);
-      localStorageRef?.setItem(RECENT_FACE_STAMPS_FIGJAM, JSON.stringify(a));
+
+  faceStamps(state = initialFaceStamps, action: any) {
+    if (addFaceStampToRecentsAction.matches(action)) {
+      if (action.payload.storeInRecentsKey !== FDocumentType.FigJam) {
+        throw new Error(
+          "Recently used facestamps currently only implemented for Figjam.",
+        )
+      }
+
+      const [existingItem, otherItems] = partition(
+        state[action.payload.storeInRecentsKey],
+        item => item.user.id === action.payload.item.user.id,
+      )[0]
+
+      const updatedItems = [
+        {
+          id: action.payload.item.user.id,
+          type: ITemplateType.FaceStamp,
+          user: action.payload.item.user,
+          last_added_at_by_user_id: {
+            ...(existingItem?.last_added_at_by_user_id || {}),
+            ...(action.payload.currentUserId
+              ? {
+                [action.payload.currentUserId]: Date.now(),
+              }
+              : {}),
+          },
+        },
+        ...otherItems,
+      ].slice(0, 20)
+
+      localStorageRef?.setItem(
+        RECENT_FACE_STAMPS_FIGJAM,
+        JSON.stringify(updatedItems),
+      )
+
       return {
-        ...e,
-        [t.payload.storeInRecentsKey]: a
-      };
+        ...state,
+        [action.payload.storeInRecentsKey]: updatedItems,
+      }
     }
-    return setRecentFaceStampsAction.matches(t) ? {
-      ...e,
-      [t.payload.storeInRecentsKey]: t.payload.recentFaceStamps
-    } : e;
+
+    if (setRecentFaceStampsAction.matches(action)) {
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: action.payload.recentFaceStamps,
+      }
+    }
+
+    return state
   },
-  whiteboardTools(e = U, t) {
-    if (addWhiteboardToolToRecentsAction.matches(t)) {
-      if (t.payload.storeInRecentsKey !== FDocumentType.FigJam) throw new Error("Recently used whiteboard tools currently only implemented for Figjam.");
-      let [[i], n] = partition()(e[t.payload.storeInRecentsKey], e => e.id === t.payload.item.id);
-      let a = [{
-        id: t.payload.item.id,
-        type: ITemplateType.WhiteboardTool,
-        last_added_at_by_user_id: {
-          ...(i?.last_added_at_by_user_id || {}),
-          ...(t.payload.currentUserId ? {
-            [t.payload.currentUserId]: Date.now()
-          } : {})
-        }
-      }, ...n];
-      localStorageRef?.setItem(RECENT_WHITEBOARD_TOOLS_FIGJAM, JSON.stringify(a));
+
+  whiteboardTools(state = initialWhiteboardTools, action: any) {
+    if (addWhiteboardToolToRecentsAction.matches(action)) {
+      if (action.payload.storeInRecentsKey !== FDocumentType.FigJam) {
+        throw new Error(
+          "Recently used whiteboard tools currently only implemented for Figjam.",
+        )
+      }
+
+      const [existingItem, otherItems] = partition(
+        state[action.payload.storeInRecentsKey],
+        item => item.id === action.payload.item.id,
+      )[0]
+
+      const updatedItems = [
+        {
+          id: action.payload.item.id,
+          type: ITemplateType.WhiteboardTool,
+          last_added_at_by_user_id: {
+            ...(existingItem?.last_added_at_by_user_id || {}),
+            ...(action.payload.currentUserId
+              ? {
+                [action.payload.currentUserId]: Date.now(),
+              }
+              : {}),
+          },
+        },
+        ...otherItems,
+      ]
+
+      localStorageRef?.setItem(
+        RECENT_WHITEBOARD_TOOLS_FIGJAM,
+        JSON.stringify(updatedItems),
+      )
+
       return {
-        ...e,
-        [t.payload.storeInRecentsKey]: a
-      };
+        ...state,
+        [action.payload.storeInRecentsKey]: updatedItems,
+      }
     }
-    return setRecentWhiteboardToolsAction.matches(t) ? {
-      ...e,
-      [t.payload.storeInRecentsKey]: t.payload.recentWhiteboardTools
-    } : e;
-  }
-});
-export const Cs = $$H0;
-export const cd = $$z1;
+
+    if (setRecentWhiteboardToolsAction.matches(action)) {
+      return {
+        ...state,
+        [action.payload.storeInRecentsKey]: action.payload.recentWhiteboardTools,
+      }
+    }
+
+    return state
+  },
+})
+
+export const Cs = recentItemsReducer
+export const cd = recentItemsThunks

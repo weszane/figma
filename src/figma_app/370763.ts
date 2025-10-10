@@ -5,7 +5,7 @@ import { atom } from "jotai";
 import { VU } from "../905/625959";
 import { dropdownStateAtom } from "../905/848862";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { c1 } from "../figma_app/357047";
+import { getKeyboardShortcut } from "../figma_app/357047";
 export function $$u3(e) {
   switch (e) {
     case DesignGraphElements.SELECT:
@@ -185,7 +185,7 @@ export function $$u3(e) {
 }
 export function $$p1() {
   let e = useSelector(e => e.mirror.appModel.keyboardShortcuts);
-  return useCallback(t => c1(e, t), [e]);
+  return useCallback(t => getKeyboardShortcut(e, t), [e]);
 }
 export function $$_7(e) {
   let t = $$p1();

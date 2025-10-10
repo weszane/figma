@@ -1,140 +1,329 @@
-import _require from "../vendor/112457";
-import { waitForCondition, getDictionaryConfig } from "../905/461516";
-import { B } from "../905/627729";
-let n;
-let r;
-var o = (e => (e[e.NOT_STARTED = 0] = "NOT_STARTED", e[e.LOADING = 1] = "LOADING", e[e.FINISHED = 2] = "FINISHED", e))(o || {});
-let l = 0;
-async function d(e) {
-  1 === l ? await waitForCondition(() => 2 !== l, 50) : (n || (l = 1, n = e || (await _require).loadModule), l = 2);
-  return n;
+// Renamed variables, added types, simplified control flow, improved readability
+import { getDictionaryConfig, waitForCondition } from "../905/461516"
+import { processTextForSpellCheck } from "../905/627729"
+
+// Enum for module loading state
+enum ModuleLoadState {
+  NOT_STARTED = 0,
+  LOADING = 1,
+  FINISHED = 2,
 }
-async function c(e, t) {
-  let i = await fetch(t);
-  let n = new Uint8Array(await i.arrayBuffer());
-  let r = t.split("/");
-  return e.mountBuffer(n, r[r.length - 1]);
+
+// Type definitions
+interface DictionaryConfig {
+  affURL: string
+  dicURL: string
 }
-async function u(e, t, i) {
-  let n = await e();
-  let [r, a] = await Promise.all([c(n, t), c(n, i)]);
-  return n.create(r, a);
+
+interface SpellCheckResult {
+  start: number
+  end: number
 }
-async function p(e, t) {
-  let i = getDictionaryConfig(t);
-  return await u(e, i.affURL, i.dicURL);
+
+interface ProcessedText {
+  index: number
+  text: string
+  skipSpellCheck?: boolean
 }
-let m = null;
-let h = null;
-let g = !1;
-async function f(e) {
-  if (await waitForCondition(() => !!g && (!g || null === m) || (g = !0, !1)), h !== e && _(), null === m) {
-    let t = await d();
-    m = await p(t, e);
-    h = e;
+
+interface WorkerMessage {
+  type: string
+  messageId?: number
+  results?: SpellCheckResult[]
+}
+
+interface SpellCheckerWorker extends Worker {
+  onmessage: (event: MessageEvent<WorkerMessage>) => void
+}
+
+// Module loading state
+let hunspellModule: any
+let spellCheckWorker: SpellCheckerWorker | null = null
+let moduleLoadState: ModuleLoadState = ModuleLoadState.NOT_STARTED
+
+/**
+ * Loads the hunspell module with proper state management
+ */
+async function loadHunspellModule(fallbackModule?: any): Promise<any> {
+  // If currently loading, wait until finished
+  if (moduleLoadState === ModuleLoadState.LOADING) {
+    await waitForCondition(() => moduleLoadState !== ModuleLoadState.LOADING, 50)
   }
-  return m;
-}
-function _() {
-  m?.dispose();
-  m = null;
-  h = null;
-  g = !1;
-}
-async function A(e, t) {
-  let i = await f(e);
-  for (let e of t) i?.addWord(e);
-}
-async function y(e, t) {
-  let i = await f(t);
-  let n = B(e);
-  let r = [];
-  for (let e of n) !i || e.skipSpellCheck || i.spell(e.text) || r.push({
-    start: e.index,
-    end: e.index + e.text.length
-  });
-  return r;
-}
-async function b(e, t) {
-  let i = await f(t);
-  return i?.suggest(e) || [];
-}
-async function v(e, t) {
-  let i = await f(t);
-  for (let t of e) i?.addWord(t);
-}
-export function $$I1() {
-  r || ((r = new Worker(Fig.spellCheckWorkerURL)).onmessage = e => {
-    if ("SPELL_CHECK_RESULT" === e.data.type) {
-      let t = e.data.messageId;
-      let i = x[t];
-      i && (i(e.data.results), delete x[t]);
+  else {
+    // If not loaded yet, start loading
+    if (!hunspellModule) {
+      moduleLoadState = ModuleLoadState.LOADING
+      hunspellModule = fallbackModule || (await import('hunspell-asm')).loadModule()
     }
-  });
-  return r;
+    moduleLoadState = ModuleLoadState.FINISHED
+  }
+
+  return hunspellModule
 }
-let E = 0;
-let x = {};
-function S(e, t) {
-  return new Promise(i => {
-    let n = function (e) {
-      let t = E++;
-      x[t] = e;
-      return t;
-    }(i);
-    e.postMessage({
-      ...t,
-      messageId: n
-    });
-  });
+
+/**
+ * Mounts a buffer from a URL to the hunspell module
+ */
+async function mountBufferFromUrl(module: any, url: string): Promise<any> {
+  const response = await fetch(url)
+  const arrayBuffer = await response.arrayBuffer()
+  const uint8Array = new Uint8Array(arrayBuffer)
+  const fileName = url.split("/").pop() || "dictionary"
+  return module.mountBuffer(uint8Array, fileName)
 }
-export class $$w0 {
-  constructor() {
-    this.name = "Hunspell";
-    this.language = "";
+
+/**
+ * Creates a hunspell instance with affix and dictionary files
+ */
+async function createHunspellInstance(getModule: () => Promise<any>, affUrl: string, dicUrl: string): Promise<any> {
+  const module = await getModule()
+  const [affBuffer, dicBuffer] = await Promise.all([
+    mountBufferFromUrl(module, affUrl),
+    mountBufferFromUrl(module, dicUrl),
+  ])
+  return module.create(affBuffer, dicBuffer)
+}
+
+/**
+ * Gets hunspell instance for a specific language
+ */
+async function getHunspellInstanceForLanguage(getModule: () => Promise<any>, language: string): Promise<any> {
+  const config: DictionaryConfig = getDictionaryConfig(language)
+  return await createHunspellInstance(getModule, config.affURL, config.dicURL)
+}
+
+// Dictionary instance management
+let currentDictionary: any = null
+let currentLanguage: string | null = null
+let isInitializing: boolean = false
+
+/**
+ * Gets or creates a dictionary instance for the specified language
+ */
+async function getOrCreateDictionary(language: string): Promise<any> {
+  // Wait if another initialization is in progress
+  await waitForCondition(() =>
+    (!!isInitializing && (!isInitializing || currentDictionary === null))
+    || (isInitializing = true, false))
+
+  // Reset if language changed
+  if (currentLanguage !== language) {
+    disposeCurrentDictionary()
   }
-  async initialize(e, t) {
-    this.language = e;
-    let i = await $$I1();
-    i ? await S(i, {
-      type: "INIT",
-      userIgnoreWords: t,
-      language: e
-    }) : await A(e, t);
+
+  // Create new dictionary if needed
+  if (currentDictionary === null) {
+    const module = await loadHunspellModule()
+    currentDictionary = await getHunspellInstanceForLanguage(() => Promise.resolve(module), language)
+    currentLanguage = language
   }
-  async getSuggestionsForWord(e) {
-    let t = await $$I1();
-    return t ? await S(t, {
-      type: "GET_SUGGESTIONS",
-      word: e,
-      language: this.language
-    }) : await b(e, this.language);
-  }
-  async spellCheckText(e) {
-    let t = await $$I1();
-    return t ? await S(t, {
-      type: "CHECK_SPELLING",
-      text: e,
-      language: this.language
-    }) : await y(e, this.language);
-  }
-  async setLanguage(e) {
-    this.language = e;
-    let t = await $$I1();
-    t ? await S(t, {
-      type: "SET_LANGUAGE",
-      language: e
-    }) : (_(), f(e));
-    return Promise.resolve(!0);
-  }
-  async addWords(e) {
-    let t = await $$I1();
-    t ? await S(t, {
-      type: "ADD_WORDS",
-      words: e,
-      language: this.language
-    }) : await v(e, this.language);
+
+  return currentDictionary
+}
+
+/**
+ * Disposes the current dictionary instance
+ */
+function disposeCurrentDictionary(): void {
+  currentDictionary?.dispose()
+  currentDictionary = null
+  currentLanguage = null
+  isInitializing = false
+}
+
+/**
+ * Adds words to the dictionary
+ */
+async function addWordsToDictionary(language: string, words: string[]): Promise<void> {
+  const dictionary = await getOrCreateDictionary(language)
+  for (const word of words) {
+    dictionary?.addWord(word)
   }
 }
-export const mz = $$w0;
-export const jk = $$I1;
+
+/**
+ * Checks spelling of text and returns misspelled ranges
+ */
+async function checkSpelling(text: string, language: string): Promise<SpellCheckResult[]> {
+  const dictionary = await getOrCreateDictionary(language)
+  const processedTexts: ProcessedText[] = processTextForSpellCheck(text)
+  const results: SpellCheckResult[] = []
+
+  for (const item of processedTexts) {
+    if (!dictionary || item.skipSpellCheck || dictionary.spell(item.text)) {
+      continue
+    }
+
+    results.push({
+      start: item.index,
+      end: item.index + item.text.length,
+    })
+  }
+
+  return results
+}
+
+/**
+ * Gets spelling suggestions for a word
+ */
+async function getSuggestions(word: string, language: string): Promise<string[]> {
+  const dictionary = await getOrCreateDictionary(language)
+  return dictionary?.suggest(word) || []
+}
+
+/**
+ * Adds multiple words to the dictionary
+ */
+async function addMultipleWords(words: string[], language: string): Promise<void> {
+  const dictionary = await getOrCreateDictionary(language)
+  for (const word of words) {
+    dictionary?.addWord(word)
+  }
+}
+
+/**
+ * Gets or creates the spell check worker
+ * Origin: $$I1
+ */
+export function getSpellCheckWorker(): SpellCheckerWorker | null {
+  if (!spellCheckWorker) {
+    spellCheckWorker = new Worker(Fig.spellCheckWorkerURL) as SpellCheckerWorker
+    spellCheckWorker.onmessage = (event: MessageEvent<WorkerMessage>) => {
+      if (event.data.type === "SPELL_CHECK_RESULT") {
+        const messageId = event.data.messageId
+        const callback = pendingMessages[messageId]
+        if (callback) {
+          callback(event.data.results)
+          delete pendingMessages[messageId]
+        }
+      }
+    }
+  }
+  return spellCheckWorker
+}
+
+// Message handling for worker communication
+let nextMessageId: number = 0
+const pendingMessages: Record<number, (results?: any) => void> = {}
+
+/**
+ * Sends a message to worker and waits for response
+ * Origin: S
+ */
+function sendMessageToWorker<T>(worker: Worker, message: any): Promise<T> {
+  return new Promise((resolve) => {
+    const messageId = nextMessageId++
+    pendingMessages[messageId] = resolve
+
+    worker.postMessage({
+      ...message,
+      messageId,
+    })
+  })
+}
+
+/**
+ * Hunspell spell checker implementation
+ * Origin: $$w0
+ */
+export class HunspellSpellChecker {
+  public name: string = "Hunspell"
+  public language: string = ""
+
+  /**
+   * Initializes the spell checker with a language and ignored words
+   */
+  async initialize(language: string, userIgnoreWords: string[]): Promise<void> {
+    this.language = language
+    const worker = getSpellCheckWorker()
+
+    if (worker) {
+      await sendMessageToWorker(worker, {
+        type: "INIT",
+        userIgnoreWords,
+        language,
+      })
+    }
+    else {
+      await addWordsToDictionary(language, userIgnoreWords)
+    }
+  }
+
+  /**
+   * Gets spelling suggestions for a word
+   */
+  async getSuggestionsForWord(word: string): Promise<string[]> {
+    const worker = getSpellCheckWorker()
+
+    if (worker) {
+      return await sendMessageToWorker<string[]>(worker, {
+        type: "GET_SUGGESTIONS",
+        word,
+        language: this.language,
+      })
+    }
+    else {
+      return await getSuggestions(word, this.language)
+    }
+  }
+
+  /**
+   * Checks spelling of text and returns misspelled ranges
+   */
+  async spellCheckText(text: string): Promise<SpellCheckResult[]> {
+    const worker = getSpellCheckWorker()
+
+    if (worker) {
+      return await sendMessageToWorker<SpellCheckResult[]>(worker, {
+        type: "CHECK_SPELLING",
+        text,
+        language: this.language,
+      })
+    }
+    else {
+      return await checkSpelling(text, this.language)
+    }
+  }
+
+  /**
+   * Sets the language for spell checking
+   */
+  async setLanguage(language: string): Promise<boolean> {
+    this.language = language
+    const worker = getSpellCheckWorker()
+
+    if (worker) {
+      await sendMessageToWorker(worker, {
+        type: "SET_LANGUAGE",
+        language,
+      })
+    }
+    else {
+      disposeCurrentDictionary()
+      await getOrCreateDictionary(language)
+    }
+
+    return Promise.resolve(true)
+  }
+
+  /**
+   * Adds words to the dictionary
+   */
+  async addWords(words: string[]): Promise<void> {
+    const worker = getSpellCheckWorker()
+
+    if (worker) {
+      await sendMessageToWorker(worker, {
+        type: "ADD_WORDS",
+        words,
+        language: this.language,
+      })
+    }
+    else {
+      await addMultipleWords(words, this.language)
+    }
+  }
+}
+
+export const mz = HunspellSpellChecker
+export const jk = getSpellCheckWorker

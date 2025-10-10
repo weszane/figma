@@ -12,7 +12,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
 import { addInteractionPath, removeInteractionPath, generateRecordingKey } from "../figma_app/878298";
 import { logError } from "../905/714362";
-import { wv } from "../figma_app/236327";
+import { SeparatorComponent } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
 import { VU } from "../905/625959";
@@ -20,7 +20,7 @@ import { LW, bs } from "../figma_app/553940";
 import { useDropdownState } from "../905/848862";
 import { selectAppModel } from "../figma_app/889655";
 import { KindEnum } from "../905/129884";
-import { Yh, TY, c1 } from "../figma_app/357047";
+import { isActionEnabled, isFullscreenMenuDropdown, getKeyboardShortcut } from "../figma_app/357047";
 import { c as _$$c } from "../figma_app/740884";
 import { oO } from "../figma_app/467440";
 import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
@@ -108,10 +108,10 @@ export function $$B1(e) {
     return !1;
   }), U);
   let I = useSelector(e => {
-    let r = item.children.find(t => Zk(t) && Yh(e.mirror.appModel, t.action));
-    return "symbol-flyout" === item.name ? r : b || (c && Yh(e.mirror.appModel, c.action) ? c : r);
+    let r = item.children.find(t => Zk(t) && isActionEnabled(e.mirror.appModel, t.action));
+    return "symbol-flyout" === item.name ? r : b || (c && isActionEnabled(e.mirror.appModel, c.action) ? c : r);
   }, U);
-  let v = useSelector(e => !!I && Yh(e.mirror.appModel, I.action));
+  let v = useSelector(e => !!I && isActionEnabled(e.mirror.appModel, I.action));
   if (!I) return null;
   v || logError("FlyoutView", `Expected defaultItem with action ${I.action} to be enabled`);
   let A = _?.type === M(item.name);
@@ -208,7 +208,7 @@ function V(e) {
   let f = useDropdownState();
   let E = f?.type === M(item.name);
   let y = useId();
-  let b = !!activeItem && !TY(f) && !disabled && styleActiveItem;
+  let b = !!activeItem && !isFullscreenMenuDropdown(f) && !disabled && styleActiveItem;
   let I = defaultItem.text || $$Y0(defaultItem.action);
   let v = j(defaultItem.property, defaultItem.propertyValue, defaultItem.action);
   let C = generateRecordingKey(recordingKey, "default", defaultItem.recordingKey);
@@ -302,7 +302,7 @@ function H(e) {
     orientation: e.item.largeDisplayMode ? "horizontal" : "vertical",
     type: e.item.largeDisplayMode ? DropdownType.MATCH_BACKGROUND : DropdownType.DEFAULT,
     footer: e.item.footer,
-    children: t.data?.items && t.data.items.map((t, a) => HK(t) ? jsx(wv, {}, a) : e.item.largeDisplayMode ? jsx(K, {
+    children: t.data?.items && t.data.items.map((t, a) => HK(t) ? jsx(SeparatorComponent, {}, a) : e.item.largeDisplayMode ? jsx(K, {
       item: t,
       simulatedHoverActionName: r,
       onFlyoutItemClick: e.onFlyoutItemClick,
@@ -326,7 +326,7 @@ function z(e, t) {
     propertyValue,
     description
   } = e;
-  let d = Yh(r, action);
+  let d = isActionEnabled(r, action);
   let c = void 0 !== propertyValue && r[property] === propertyValue;
   let u = t ? j(property, propertyValue, action) : null;
   return {
@@ -334,7 +334,7 @@ function z(e, t) {
     isChecked: c || n,
     icons: u,
     text: e.text || $$Y0(action),
-    shortcutText: c1(r.keyboardShortcuts, action),
+    shortcutText: getKeyboardShortcut(r.keyboardShortcuts, action),
     descriptionText: description ? $$Y0(description) : void 0
   };
 }

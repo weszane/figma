@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSubscription } from "../figma_app/288654";
-import { sz } from "../figma_app/216696";
+import { fetchShelvesForShelfTypeThunk } from "../figma_app/216696";
 import { CommunityProfileView } from "../figma_app/43951";
 import { useIsLoading, useIsLoaded } from "../905/18797";
 export function $$c0(e) {
   let t = useDispatch<AppDispatch>();
   let r = useSelector(t => t.communityHub.shelves[e] || []);
-  let n = sz.loadingKeyForPayload({
+  let n = fetchShelvesForShelfTypeThunk.loadingKeyForPayload({
     shelfType: e
   });
   let a = useIsLoading(n);
   let c = useIsLoaded(n);
   useEffect(() => {
-    a || c || t(sz({
+    a || c || t(fetchShelvesForShelfTypeThunk({
       shelfType: e
     }));
   });

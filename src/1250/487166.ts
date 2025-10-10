@@ -14,10 +14,10 @@ import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
 import { getVisibleTheme } from "../905/640017";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N as _$$N2 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { zo } from "../1250/615231";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
@@ -97,9 +97,9 @@ export function $$M0() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: EsEsLaunchAnnouncementModal,
-    priority: _$$N2.SECONDARY_MODAL,
+    priority: ModalPriority.SECONDARY_MODAL,
     experiment: {
       check: () => {
         if (getFeatureFlags().i18n_es_es) return !0;

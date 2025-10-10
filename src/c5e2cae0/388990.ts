@@ -11,7 +11,7 @@ import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027"
 import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sx } from "../figma_app/307841";
+import { isCampfireCartEnabled } from "../figma_app/307841";
 import { selectViewAction } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
@@ -248,7 +248,7 @@ function U(e) {
   });
 }
 export let $$z0 = withTracking(function (e) {
-  let t = sx();
+  let t = isCampfireCartEnabled();
   let a = getCurrentTeam();
   return jsx(ErrorBoundaryCrash, {
     boundaryKey: "OrgUpgradeSingleTeamModal",

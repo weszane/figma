@@ -18,7 +18,7 @@ import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
 import { WithTrackedButton, WithTrackedButtonLink, WithTrackedPopupButtonPrimitive } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { B as _$$B } from "../905/261906";
-import { RR } from "../figma_app/307841";
+import { isCampfireModelEnabled } from "../figma_app/307841";
 import { tI } from "../figma_app/599327";
 import { useProAnnualImprovementsExperiment, useTeamAccountCreditBanner, useSeatManagementWidgetExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
@@ -259,7 +259,7 @@ function G(e) {
   });
 }
 function z(e) {
-  return RR() ? "billing_interval" === e.seatCountsWithSplit.split ? jsx(G, {
+  return isCampfireModelEnabled() ? "billing_interval" === e.seatCountsWithSplit.split ? jsx(G, {
     seatCountsDataByBillingInterval: e.seatCountsWithSplit.data,
     isELA: e.isELA,
     onManageClick: e.onManageClick,

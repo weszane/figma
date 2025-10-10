@@ -3,7 +3,7 @@ import { getI18nString } from "../905/303541";
 import { r3 } from "../figma_app/599327";
 import { FUserRoleType } from "../figma_app/191312";
 import { getCostCenterTypeString } from "../figma_app/336853";
-import { s as _$$s } from "../905/82276";
+import { UNASSIGNED_LABEL } from "../905/82276";
 import { ColumnName, SpecialUserTypes } from "../figma_app/967319";
 export function $$c5(e, t) {
   switch (e) {
@@ -47,7 +47,7 @@ export function $$c5(e, t) {
   }
 }
 export function $$u0(e, t) {
-  return e === _$$s ? getI18nString("license_group.unassigned") : t[e]?.name ?? "";
+  return e === UNASSIGNED_LABEL ? getI18nString("license_group.unassigned") : t[e]?.name ?? "";
 }
 export function $$p11(e) {
   switch (e) {

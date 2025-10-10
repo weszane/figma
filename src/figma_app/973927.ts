@@ -3,15 +3,15 @@ import { throwTypeError } from "../figma_app/465776";
 import { l as _$$l } from "../905/716947";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { getHubFileVersionOrDefault } from "../figma_app/198840";
 export function $$c3(e) {
   switch (e.type) {
-    case _$$n.HubFile:
+    case TeamTemplateType.HubFile:
       return e.template.id;
-    case _$$n.TeamTemplate:
+    case TeamTemplateType.TeamTemplate:
       return e.template.file_key;
-    case _$$n.TeamTemplateLg:
+    case TeamTemplateType.TeamTemplateLg:
       return e.template.fileKey;
     default:
       return throwTypeError(e);
@@ -19,10 +19,10 @@ export function $$c3(e) {
 }
 export function $$u0(e) {
   switch (e.type) {
-    case _$$n.HubFile:
-    case _$$n.TeamTemplate:
+    case TeamTemplateType.HubFile:
+    case TeamTemplateType.TeamTemplate:
       return e.template.library_key;
-    case _$$n.TeamTemplateLg:
+    case TeamTemplateType.TeamTemplateLg:
       return e.template.libraryKey;
     default:
       return throwTypeError(e);
@@ -30,10 +30,10 @@ export function $$u0(e) {
 }
 export function $$p2(e) {
   switch (e.type) {
-    case _$$n.HubFile:
+    case TeamTemplateType.HubFile:
       return getHubFileVersionOrDefault(e.template).name;
-    case _$$n.TeamTemplate:
-    case _$$n.TeamTemplateLg:
+    case TeamTemplateType.TeamTemplate:
+    case TeamTemplateType.TeamTemplateLg:
       return e.template.name;
     default:
       return throwTypeError(e);
@@ -48,10 +48,10 @@ export function $$_1() {
     let o = $$p2(e);
     let u = function (e) {
       switch (e.type) {
-        case _$$n.HubFile:
+        case TeamTemplateType.HubFile:
           return getHubFileVersionOrDefault(e.template).description;
-        case _$$n.TeamTemplate:
-        case _$$n.TeamTemplateLg:
+        case TeamTemplateType.TeamTemplate:
+        case TeamTemplateType.TeamTemplateLg:
           return e.template.description;
         default:
           return throwTypeError(e);
@@ -62,7 +62,7 @@ export function $$_1() {
       template
     } = e;
     switch (type) {
-      case _$$n.HubFile:
+      case TeamTemplateType.HubFile:
         return {
           imageUrl: template.thumbnail_url || void 0,
           clientMeta: template.client_meta,
@@ -78,7 +78,7 @@ export function $$_1() {
           resizedThumbnailUrls: template.resized_thumbnail_urls,
           libraryKey: template.library_key
         };
-      case _$$n.TeamTemplate:
+      case TeamTemplateType.TeamTemplate:
         {
           let e = template.published_by_user ? [{
             name: template.published_by_user.handle,
@@ -101,7 +101,7 @@ export function $$_1() {
             libraryKey: template.library_key
           };
         }
-      case _$$n.TeamTemplateLg:
+      case TeamTemplateType.TeamTemplateLg:
         {
           let e = template.publishedByUserNullable ? [{
             name: template.publishedByUserNullable.handle,

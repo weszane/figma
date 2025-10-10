@@ -9,7 +9,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { getTrackingSessionId } from "../905/471229";
 import { getI18nString } from "../905/303541";
 import { cortexAPI } from "../figma_app/432652";
-import { _s } from "../figma_app/33126";
+import { currentUserOrgIdAtom } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
 import { useNavigateToViewport } from "../905/104740";
@@ -35,7 +35,7 @@ export function $$x1() {
   let w = useRef();
   let O = useNavigateToViewport("figjam_summary_navigate");
   let R = um();
-  let L = useAtomWithSubscription(_s);
+  let L = useAtomWithSubscription(currentUserOrgIdAtom);
   let P = useAtomWithSubscription(openFileTeamIdAtom);
   let D = useAtomWithSubscription(userIdAtom);
   let k = useAtomWithSubscription(openFileKeyAtom);

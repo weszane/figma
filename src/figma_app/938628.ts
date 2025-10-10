@@ -26,14 +26,14 @@ import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { P as _$$P } from '../905/460261';
 import { removePositionChars, parseAnchorPosition } from '../905/476456';
 import { z as _$$z } from '../905/489760';
-import { bL as _$$bL, c$ as _$$c$, l9, mc } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer } from '../905/493196';
 import { RecordableDiv } from '../905/511649';
 import { r as _$$r3 } from '../905/571562';
 import { conditionalWrapper } from '../905/579635';
 import { k as _$$k2 } from '../905/582200';
 import { O as _$$O } from '../905/587457';
 import { getFeatureFlags } from '../905/601108';
-import { e as _$$e } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { N as _$$N3 } from '../905/696319';
 import { getSingletonSceneGraph } from '../905/700578';
@@ -77,7 +77,7 @@ import { yesNoTrackingEnum } from '../figma_app/198712';
 import { II, Vk } from '../figma_app/200284';
 import { Xw } from '../figma_app/201694';
 import { aq } from '../figma_app/257798';
-import { N as _$$N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { useCooperFrameSelectionInfo } from '../figma_app/334505';
 import { p as _$$p } from '../figma_app/353099';
 import { Ij } from '../figma_app/359943';
@@ -505,7 +505,7 @@ function el(e) {
     children: c || r.format(e.constraint)
   });
   return jsxs(Fragment, {
-    children: [jsxs(_$$bL, {
+    children: [jsxs(SelectGroupLabel, {
       onChange: t ? noop : t => {
         let r = e.axis === 'HORIZONTAL' ? 'horizontalConstraint' : 'verticalConstraint';
         e.updateConstraints({
@@ -514,7 +514,7 @@ function el(e) {
       },
       value: t ? eo.format('AUTO') : r.format(e.constraint),
       recordingKey: generateRecordingKey(e, 'select'),
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: p
         }),
@@ -522,15 +522,15 @@ function el(e) {
         disabled: t,
         iconLead: d,
         children: _
-      }), jsx(mc, {
+      }), jsx(SelectContainer, {
         'data-testId': `${e.axis}-constraint-select`,
-        'children': t ? jsx(_$$c$, {
+        'children': t ? jsx(SelectOptionReset, {
           disabled: !0,
           value: 'AUTO',
           children: c || eo.format('AUTO')
         }) : ['MIN', 'MAX', 'STRETCH', 'CENTER', 'SCALE'].map(i => {
           let a = e.disableStretchScaleConstraints && ['STRETCH', 'SCALE'].includes(i);
-          return jsx(_$$c$, {
+          return jsx(SelectOptionReset, {
             value: i,
             disabled: t || a,
             children: r.format(i)
@@ -1529,9 +1529,9 @@ function td({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: AspectRatioLockOnboarding,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [t, r]);
   !function (e) {
     let t = useSelectionPropertyValue('aspectRatioLockToggled');

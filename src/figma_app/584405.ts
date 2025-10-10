@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { fetchVariableSetThumbnails } from '../905/711212';
-import { atomStoreManager, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atomStoreManager, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { _M, IZ } from '../figma_app/99772';
 import { y4 } from '../figma_app/210234';
 import { Iv, tS, yA } from '../figma_app/327683';
@@ -14,7 +14,7 @@ import { getSubscribedVariablesResource } from '../figma_app/852050';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { F7, yU } from '../figma_app/908460';
 export function $$E6() {
-  let e = Xr(v4);
+  let e = useSetAtom(v4);
   let t = getSubscribedVariablesResource();
   let r = t.data?.libraryVariables;
   let s = t.data?.libraryVariableSets;
@@ -104,7 +104,7 @@ export function $$I3() {
   return useAtomWithSubscription(u2) !== td.GROUPING_COMPLETE;
 }
 export function $$S0() {
-  let e = Xr(_M);
+  let e = useSetAtom(_M);
   let t = sf();
   return useCallback(r => {
     t();

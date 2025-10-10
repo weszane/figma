@@ -56,7 +56,7 @@ import { f as _$$f7 } from '../905/54715';
 import { B as _$$B4 } from '../905/55104';
 import { isCommandOrShift, KeyCodes } from '../905/63728';
 import { y as _$$y4 } from '../905/76789';
-import { n as _$$n5 } from '../905/79930';
+import { TeamTemplateType } from '../905/79930';
 import { resetTileSelection, selectTiles, selectTilesByKeys } from '../905/81009';
 import { setupPricesTransform, ensureLoadedResource } from '../905/84777';
 import { combineWithHyphen, ShareContext } from '../905/91820';
@@ -175,7 +175,7 @@ import { AutoLayout } from '../905/470281';
 import { H as _$$H7 } from '../905/474029';
 import { FSidebarItemType } from '../905/483499';
 import { e as _$$e9 } from '../905/483726';
-import { bL as _$$bL3, c$ as _$$c$2, l9 as _$$l5, mc as _$$mc3 } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer } from '../905/493196';
 import { useUserOrgPath } from '../905/495564';
 import { handleAtomEvent } from '../905/502364';
 import { z as _$$z12 } from '../905/502533';
@@ -214,7 +214,7 @@ import { i as _$$i4 } from '../905/610691';
 import { customHistory, getPreviousSelectedView } from '../905/612521';
 import { buildFileUrl, getDesignFileUrlConditional } from '../905/612685';
 import { setupThemeContext } from '../905/614223';
-import { e as _$$e3 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { Z as _$$Z2 } from '../905/622097';
 import { ButtonPrimitive } from '../905/632989';
 import { AlertState, HiddenState } from '../905/638715';
@@ -295,7 +295,7 @@ import { fileEntityDataMapper } from '../905/943101';
 import { t as _$$t2 } from '../905/947268';
 import { a as _$$a2 } from '../905/948337';
 import { B as _$$B2 } from '../905/950875';
-import { ck as _$$ck2 } from '../905/952832';
+import { UserContextScope } from '../905/952832';
 import { ResourceStatus } from '../905/957591';
 import { d as _$$d7 } from '../905/958822';
 import { a as _$$a4 } from '../905/964520';
@@ -419,13 +419,13 @@ import { z as _$$z5 } from '../940032c6/265110';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { A as _$$A29 } from '../f2246930/458609';
 import { nk as _$$nk } from '../figma_app/2023';
-import { OrgAdminMovedUnassignedDraftsOnboarding, TeamProjectLinkOverlay, CommunityProfileAdminDropdownOnboarding, CommunityCreatorMediaUpsellModal, CommunityTabOnboardingOverlay, PlanSpacesNewStarterTeamOverlay, BillingGroupAdminOnboarding, OrgAdminUnassignedDraftsTabOnboarding, JapaneseLaunchAnnouncementMachine, FileBrowserFigjamWhatsNew, FigJamConnectGoogleDrive, PromoCodeSelectTeam, NuxOnboardingOverlay, FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay, MobileRedirect, TeamFeedAudienceSelection, ConnectedProjectsAdminSettingsOverlay, EduPostVerification, CustomSectionsNudge, TeamAdminManageUnassignedDraftsOverlay, ConnectedProjectsUsageOverlay, EnterpriseOrgAdminOnboarding, FileViewHistoryOnboardingOverlay, OrgAdminLicenseGroupsOnboarding, CommunityMonetizationMetricsTabOnboarding, OnboardFileBrowser, OrgAdminActivityOnboarding, OrgAdminTeamOnboarding, PromoCodeCreateTeam, DevModeOptInEventOnlyOverlay, OrgAdminWorkspacesOnboarding, PlanSpacesLaunchOverlay, SearchWorkspaceOnboarding, SidebarWorkspaceLinkOnboarding, CommunityDevModeFilterOnboarding, TeamAdminMovedUnassignedDraftsOverlay, EduOffboarding, OrgAdminMembersOnboarding, OrgSelectWorkspace, UniversalUpgrade, OnboardOrgsWelcome, SharingClarityAdminOnboardingOverlay, DtmDeprecationNavToPlanOverlay, WorkspaceAdminOnboarding, PlanSpacesRecreatedStarterTeamOverlay, FolderSettingsConnectedProjectsOnboardingOverlay } from '../figma_app/6204';
+import { OrgAdminMovedUnassignedDraftsOnboarding, TeamProjectLinkOverlay, CommunityProfileAdminDropdownOnboarding, CommunityCreatorMediaUpsellModal, CommunityTabOnboardingOverlay, PlanSpacesNewStarterTeamOverlay, BillingGroupAdminOnboarding, OrgAdminUnassignedDraftsTabOnboarding, JapaneseLaunchAnnouncementMachine, FileBrowserFigjamWhatsNew, FigJamConnectGoogleDrive, PromoCodeSelectTeam, BaseNuxOnboardingOverlay, FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay, MobileRedirect, TeamFeedAudienceSelection, ConnectedProjectsAdminSettingsOverlay, EduPostVerification, CustomSectionsNudge, TeamAdminManageUnassignedDraftsOverlay, ConnectedProjectsUsageOverlay, EnterpriseOrgAdminOnboarding, FileViewHistoryOnboardingOverlay, OrgAdminLicenseGroupsOnboarding, CommunityMonetizationMetricsTabOnboarding, OnboardFileBrowser, OrgAdminActivityOnboarding, OrgAdminTeamOnboarding, PromoCodeCreateTeam, DevModeOptInEventOnlyOverlay, OrgAdminWorkspacesOnboarding, PlanSpacesLaunchOverlay, SearchWorkspaceOnboarding, SidebarWorkspaceLinkOnboarding, CommunityDevModeFilterOnboarding, TeamAdminMovedUnassignedDraftsOverlay, EduOffboarding, OrgAdminMembersOnboarding, OrgSelectWorkspace, UniversalUpgrade, OnboardOrgsWelcome, SharingClarityAdminOnboardingOverlay, DtmDeprecationNavToPlanOverlay, WorkspaceAdminOnboarding, PlanSpacesRecreatedStarterTeamOverlay, FolderSettingsConnectedProjectsOnboardingOverlay } from '../figma_app/6204';
 import { copyLinkThunk } from '../figma_app/11182';
 import { stylizeMessageMeta } from '../figma_app/12220';
 import { getAccessLevelLabels, isExternalRestricted } from '../figma_app/12796';
 import { L as _$$L6 } from '../figma_app/23271';
 import { putUserAction } from '../figma_app/24841';
-import { atom, createRemovableAtomFamily, createValidatedLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, createRemovableAtomFamily, createValidatedLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { ISO, tgj } from '../figma_app/27776';
 import { fetchLicenseGroupsThunk } from '../figma_app/28323';
 import { o as _$$o7, s as _$$s3 } from '../figma_app/29593';
@@ -466,20 +466,20 @@ import { areColorsEqual, isColorDarkByLuminance, parseColor, whiteColor } from '
 import { getSelectedViewUrl, isRecentsAndSharingView } from '../figma_app/193867';
 import { getHubFileVersionOrDefault } from '../figma_app/198840';
 import { getDirectoryWorkspaceId } from '../figma_app/198885';
-import { BU, jl, LK, SX, Xg } from '../figma_app/199513';
+import { paginatedFolderQuery, loadFolderIfNeededThunk, useFolderQuery, createNewFolderThunk, teamFoldersQuery } from '../figma_app/199513';
 import { NM } from '../figma_app/204891';
 import { lg as _$$lg, ng as _$$ng2 } from '../figma_app/205827';
 import { selectPermissionsState } from '../figma_app/212807';
 import { DropdownThemeProvider } from '../figma_app/215667';
-import { Dw as _$$Dw, sz as _$$sz } from '../figma_app/216696';
+import { fetchShelvesForShelfTypeAndFilterLabelThunk, fetchShelvesForShelfTypeThunk } from '../figma_app/216696';
 import { orgTemplatePickerViewAtom } from '../figma_app/223206';
 import { vt } from '../figma_app/231614';
-import { c$ as _$$c$, ms as _$$ms, MM, Ve } from '../figma_app/236327';
+import { OptionComponent, DropdownContainer, CheckableOptionComponent, DropdownComponent } from '../figma_app/236327';
 import { fetchTeamMembersThunk, getTeamAction, postTeamAction, restoreTeamThunk, setTeamCreationLoadingAction } from '../figma_app/240735';
 import { p as _$$p4 } from '../figma_app/243977';
 import { ListFormatter } from '../figma_app/257703';
 import { ZF } from '../figma_app/258114';
-import { N as _$$N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { DialogBody, DialogContents, DialogHeader, DialogHiddenTitle } from '../figma_app/272243';
 import { isMakeDiscoveryEnabled, isResourceHubEnabled, isResourceHubInternalSearchEnabled, isResourceHubProfilesEnabled, isTntSavingEnabled } from '../figma_app/275462';
 import { DesignToolType } from '../figma_app/277543';
@@ -488,7 +488,7 @@ import { FBGNavigationUpdatesVariants, useDismissibleUUBExperiment, useFBGNaviga
 import { isUsingLocalBuild } from '../figma_app/298277';
 import { filterPublishedResources, filterResourcesByMatch, filterResourcesByOrgOrPublisher } from '../figma_app/300692';
 import { ResourceTypeEnum } from '../figma_app/306946';
-import { sx as _$$sx3 } from '../figma_app/307841';
+import { isCampfireCartEnabled } from '../figma_app/307841';
 import { trackFavoritesReordered, FAVORITES_SIDEBAR_ROW, trackSidebarSectionCollapsed, trackFavoritesContextMenuActionClicked, trackFavoritedResourceClicked } from '../figma_app/310688';
 import { DISABLED_TEAM_CREATION_BUTTON_HOVERED, FILE_BROWSER_FILE_CLICKED, logAndTrackCTA, TEAM_CREATION_BUTTON_HOVERED_TIMEOUT, trackFileBrowserFileClick, trackFileBrowserFileClicked, trackFileBrowserLoaded, trackFileBrowserPageVisit, trackUserEvent } from '../figma_app/314264';
 import { useRouteMatchExists, useRouteParams, useRouteQuery, useRouteStateInstance, useSafeRouteParams, useSafeRouteStateInstance } from '../figma_app/321395';
@@ -517,7 +517,7 @@ import { transformFileRepoData } from '../figma_app/411744';
 import { useIsMounted } from '../figma_app/412189';
 import { o8 as _$$o2, sm as _$$sm } from '../figma_app/425283';
 import { getMainContent, hasContent, hasLibraryKey, hasResourceType, isFigmakeTemplate, mapVtToFileType } from '../figma_app/427318';
-import { zE as _$$zE, Jw } from '../figma_app/435872';
+import { setAutosaveSnooze, garbageCollectAndSyncAutosave } from '../figma_app/435872';
 import { f as _$$f5 } from '../figma_app/436731';
 import { $n as _$$$n, wv } from '../figma_app/439493';
 import { zh } from '../figma_app/448654';
@@ -562,11 +562,11 @@ import { unpinFileThunk, folderSetPinnedFileAction, folderLoadAction } from '../
 import { ResourceHubInternalSearchRoute, ResourceHubSearchRoute } from '../figma_app/600006';
 import { a as _$$a0, z as _$$z8 } from '../figma_app/601188';
 import { _O as _$$_O, CK } from '../figma_app/603826';
-import { A as _$$A17 } from '../figma_app/608914';
+import { PriorityProvider } from '../figma_app/608914';
 import { x as _$$x7 } from '../figma_app/609500';
 import { hX as _$$hX } from '../figma_app/614170';
 import { WithTrackedButton, WithTrackedButtonLarge, WithTrackedPopupButtonPrimitive, WithTrackedButtonWide, WithTrackedIconButton } from '../figma_app/617427';
-import { e2 as _$$e13, li as _$$li } from '../figma_app/622574';
+import { usePaginatedOrgTemplates, usePaginatedTeamTemplates } from '../figma_app/622574';
 import { A5 as _$$A11, J5, jT } from '../figma_app/623414';
 import { fileActionEnum, getTeamUrl, paymentActionRequirementEnum } from '../figma_app/630077';
 import { BaseLinkComponent, BigButtonPrimaryTracked, BigTextInput, ButtonBasePrimaryTracked, ButtonBaseReversedContainer, ButtonLinkTracked, ButtonNegativeTracked, ButtonSecondary, ButtonSecondaryLinkTracked, ButtonSecondaryTracked, clickableBaseLinkTracked, linkWithTracking, trackedButtonClickHandler } from '../figma_app/637027';
@@ -679,9 +679,9 @@ function ej() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: OrgAdminMovedUnassignedDraftsOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   let n = useSelector(e => getCurrentUserOrgUser(e));
   let o = n?.created_at;
@@ -757,9 +757,9 @@ function e0(e) {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: ConnectedProjectsAdminSettingsOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {
     show({
@@ -995,9 +995,9 @@ function tg(e) {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: DtmDeprecationNavToPlanOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {
     show({
@@ -2993,9 +2993,9 @@ function ap() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: TeamAdminMovedUnassignedDraftsOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
     show({
@@ -4286,7 +4286,7 @@ function s0(e) {
   let [{
     status: p,
     data: h
-  }] = setupResourceAtomHandler(Xg({
+  }] = setupResourceAtomHandler(teamFoldersQuery({
     teamId: o || void 0
   }), {
     enabled: !n
@@ -5037,7 +5037,7 @@ function nf() {
       onClick: () => {
         e(_$$X3({
           entity: r.workspace,
-          entityType: _$$ck2.WORKSPACE,
+          entityType: UserContextScope.WORKSPACE,
           shape: 'SQUARE'
         }));
       }
@@ -5054,7 +5054,7 @@ function nw({
     solid: getI18nString('workspace_view.toolbar.solid'),
     no_fill: getI18nString('workspace_view.toolbar.no_fill')
   };
-  return jsx(Ve, {
+  return jsx(DropdownComponent, {
     className: cssBuilderInstance.ml8.colorTextMenuSecondary.colorIconMenuSecondary.$,
     dropdownButton({
       onClick: t
@@ -5071,7 +5071,7 @@ function nw({
       });
     },
     dropdownOptionsClassName: cssBuilderInstance.mt4.$,
-    options: ['solid', 'no_fill'].map((e, s) => jsx(_$$c$, {
+    options: ['solid', 'no_fill'].map((e, s) => jsx(OptionComponent, {
       className: cssBuilderInstance.colorTextMenuSecondary.$,
       id: e,
       onClick: () => {
@@ -5546,7 +5546,7 @@ function nB(e) {
       children: jsx(iV, {
         avatar: d ? jsx(_$$j3, {
           avatarEditorState: l,
-          entityType: _$$ck2.WORKSPACE,
+          entityType: UserContextScope.WORKSPACE,
           entity: workspace,
           dispatch: n,
           size: 40
@@ -9139,7 +9139,7 @@ function dF() {
     } catch {}
   }
   let s = e.data?.type === FOrganizationLevelType.ORG ? templatesTeamId : e.data?.key.parentId;
-  return _$$li({
+  return usePaginatedTeamTemplates({
     teamId: s ?? null,
     editorType: a,
     enabled: !!a && !!s && e.status === 'loaded'
@@ -9187,7 +9187,7 @@ function dL({
     teamTemplates,
     isLoading,
     requestLoadMoreForOrg
-  } = _$$e13({
+  } = usePaginatedOrgTemplates({
     orgId: r,
     areWorkspacesEnabled: t === FPlanNameType.ENTERPRISE,
     numTemplatesPerTeam: MAX_DESCRIPTION_LENGTH2 + 1,
@@ -9616,9 +9616,9 @@ function d2({
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: CommunityTabOnboardingOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {
     show({
@@ -9719,7 +9719,7 @@ function cs({
     mode: 'match',
     children: jsx('div', {
       className: 'x1iog12x x1db2dqx',
-      children: jsxs(_$$bL3, {
+      children: jsxs(SelectGroupLabel, {
         value: l,
         onChange: t => {
           if (t !== l && (d(t), e?.(t), r && i && n)) {
@@ -9732,16 +9732,16 @@ function cs({
             customHistory.push(e.href);
           }
         },
-        children: [jsx(_$$l5, {
+        children: [jsx(SelectSeparator, {
           iconLead: jsx(_$$h8, {}),
           label: jsx(HiddenLabel, {
             children: getI18nString('community.search.select_search_scope')
           })
-        }), jsxs(_$$mc3, {
-          children: [jsx(_$$c$2, {
+        }), jsxs(SelectContainer, {
+          children: [jsx(SelectOptionReset, {
             value: PublishSourceType.COMMUNITY,
             children: getI18nString('community.community')
-          }), jsx(_$$c$2, {
+          }), jsx(SelectOptionReset, {
             value: PublishSourceType.INTERNAL,
             children: t
           })]
@@ -13057,11 +13057,11 @@ function mj(e) {
     content: s
   });
 }
-let mE = [UniversalUpgrade, EduOffboarding, EduPostVerification, OrgSelectWorkspace, MobileRedirect, NuxOnboardingOverlay, OnboardFileBrowser, PromoCodeCreateTeam, PromoCodeSelectTeam, OnboardOrgsWelcome, CustomSectionsNudge, FigJamConnectGoogleDrive, EnterpriseOrgAdminOnboarding, OrgAdminMembersOnboarding, OrgAdminTeamOnboarding, OrgAdminActivityOnboarding, OrgAdminLicenseGroupsOnboarding, OrgAdminMovedUnassignedDraftsOnboarding, OrgAdminUnassignedDraftsTabOnboarding, OrgAdminWorkspacesOnboarding, WorkspaceAdminOnboarding, JapaneseLaunchAnnouncementMachine, PlanSpacesLaunchOverlay, PlanSpacesNewStarterTeamOverlay, PlanSpacesRecreatedStarterTeamOverlay, TeamProjectLinkOverlay, FileBrowserFigjamWhatsNew, TeamAdminMovedUnassignedDraftsOverlay, TeamAdminManageUnassignedDraftsOverlay, CommunityCreatorMediaUpsellModal, CommunityDevModeFilterOnboarding, SearchWorkspaceOnboarding, TeamFeedAudienceSelection, SidebarWorkspaceLinkOnboarding, SharingClarityAdminOnboardingOverlay, BillingGroupAdminOnboarding, CommunityMonetizationMetricsTabOnboarding, CommunityProfileAdminDropdownOnboarding, FileViewHistoryOnboardingOverlay, FolderSettingsConnectedProjectsOnboardingOverlay, FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay, ConnectedProjectsUsageOverlay, DevModeOptInEventOnlyOverlay].map(e => e.id);
+let mE = [UniversalUpgrade, EduOffboarding, EduPostVerification, OrgSelectWorkspace, MobileRedirect, BaseNuxOnboardingOverlay, OnboardFileBrowser, PromoCodeCreateTeam, PromoCodeSelectTeam, OnboardOrgsWelcome, CustomSectionsNudge, FigJamConnectGoogleDrive, EnterpriseOrgAdminOnboarding, OrgAdminMembersOnboarding, OrgAdminTeamOnboarding, OrgAdminActivityOnboarding, OrgAdminLicenseGroupsOnboarding, OrgAdminMovedUnassignedDraftsOnboarding, OrgAdminUnassignedDraftsTabOnboarding, OrgAdminWorkspacesOnboarding, WorkspaceAdminOnboarding, JapaneseLaunchAnnouncementMachine, PlanSpacesLaunchOverlay, PlanSpacesNewStarterTeamOverlay, PlanSpacesRecreatedStarterTeamOverlay, TeamProjectLinkOverlay, FileBrowserFigjamWhatsNew, TeamAdminMovedUnassignedDraftsOverlay, TeamAdminManageUnassignedDraftsOverlay, CommunityCreatorMediaUpsellModal, CommunityDevModeFilterOnboarding, SearchWorkspaceOnboarding, TeamFeedAudienceSelection, SidebarWorkspaceLinkOnboarding, SharingClarityAdminOnboardingOverlay, BillingGroupAdminOnboarding, CommunityMonetizationMetricsTabOnboarding, CommunityProfileAdminDropdownOnboarding, FileViewHistoryOnboardingOverlay, FolderSettingsConnectedProjectsOnboardingOverlay, FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay, ConnectedProjectsUsageOverlay, DevModeOptInEventOnlyOverlay].map(e => e.id);
 function mI({
   children: e
 }) {
-  return jsx(_$$A17, {
+  return jsx(PriorityProvider, {
     name: 'FileBrowser',
     order: mE,
     children: e
@@ -13077,7 +13077,7 @@ function mC({
     sort_order: r.sort.dir === SortOrder.ASC ? 'asc' : 'desc',
     sort_column: mk(r.sort.key)
   }), [r.filters.fileType, r.sort.dir, r.sort.key]);
-  return setupResourceAtomHandler(BU({
+  return setupResourceAtomHandler(paginatedFolderQuery({
     folderId: e,
     ...a
   }), {
@@ -14496,7 +14496,7 @@ function _M() {
   }, [C]);
   let z = useCallback(e => G.has(e), [G]);
   let K = useCallback(e => V.has(e), [V]);
-  useEffect(() => $.forEach(t => W && e(jl({
+  useEffect(() => $.forEach(t => W && e(loadFolderIfNeededThunk({
     folderId: t,
     loadedFolders: v
   }))), [v, $, e, W]);
@@ -14969,9 +14969,9 @@ function _q({
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: FolderSettingsDisconnectedProjectShareCopyOnboardingOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t, r]);
   useSingleEffect(() => {
     show({
@@ -15218,10 +15218,10 @@ let _2 = {
   }
 };
 let pt = new Set(['PM', 'ENG', 'DES', 'MKT', 'UR']);
-let pr = (e, t) => e ? _$$Dw.loadingKeyForPayload({
+let pr = (e, t) => e ? fetchShelvesForShelfTypeAndFilterLabelThunk.loadingKeyForPayload({
   shelfType: CommunityPageType.FILE_BROWSER_RECOMMENDED_TEMPLATES,
   filterLabel: t
-}) : _$$sz.loadingKeyForPayload({
+}) : fetchShelvesForShelfTypeThunk.loadingKeyForPayload({
   shelfType: CommunityPageType.FILE_BROWSER_RECOMMENDED_TEMPLATES
 });
 let pa = _$$n4(e => function (e) {
@@ -15258,11 +15258,11 @@ function pc(e) {
   let o = useIsLoading(n);
   let l = useIsLoaded(n);
   let d = pt.has(r) ? r : UserRole.ALL;
-  let c = Xr(pd);
+  let c = useSetAtom(pd);
   useEffect(() => (c(!0), () => c(!1)), [c]);
   useEffect(() => {
     if (!o && !l) {
-      return t(_$$Dw({
+      return t(fetchShelvesForShelfTypeAndFilterLabelThunk({
         shelfType: CommunityPageType.FILE_BROWSER_TEMPLATES_BAR,
         filterLabel: d
       }));
@@ -15444,7 +15444,7 @@ function pp(e) {
           resourceId: s,
           resourceName: l.name,
           resourceType: 'template',
-          templateType: _$$n5.HubFile,
+          templateType: TeamTemplateType.HubFile,
           triggeredFrom: e.newFileFrom,
           category: e.tab.tabTitle,
           templateCategory: e.tab.tabKey
@@ -15854,11 +15854,11 @@ function p$(e) {
   let m = r.current && n?.data?.targetRef === r.current && n?.type === jU;
   let _ = r.current;
   let p = [];
-  e.folder.canRead && p.push(jsx(_$$c$, {
+  e.folder.canRead && p.push(jsx(OptionComponent, {
     children: renderI18nText('file_browser.folder.share'),
     onClick: e.onShareClick
   }, 'share'));
-  p.push(jsx(_$$c$, {
+  p.push(jsx(OptionComponent, {
     children: jsxs('div', {
       className: cssBuilderInstance.flex.justifyBetween.itemsCenter.w150.$,
       children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(SvgComponent, {
@@ -15936,7 +15936,7 @@ function p5({
         e.dispatch(folderLoadAction({
           folderId: t
         }));
-        isTempId(t) || e.dispatch(jl({
+        isTempId(t) || e.dispatch(loadFolderIfNeededThunk({
           folderId: t,
           loadedFolders: {}
         }));
@@ -16198,7 +16198,7 @@ function p8({
   let r = selectPermissionsState();
   let [n, l] = function (e) {
     let t = !!getFeatureFlags().file_browser_paginated_folder_full_reads;
-    let r = LK(e, !t);
+    let r = useFolderQuery(e, !t);
     let [a, i] = mC({
       folderId: e,
       enabled: t
@@ -18240,7 +18240,7 @@ let gE = {
 };
 var gI = (e => (e.SHOW_NOTHING = 'SHOW_NOTHING', e.SHOW_HOME_SHELF = 'SHOW_HOME_SHELF', e))(gI || {});
 function gN() {
-  let e = Xr(gt);
+  let e = useSetAtom(gt);
   let t = function () {
     let e = !!useSelector(e => e.userFlags).dismissed_community_home_shelf_v2_recommendations;
     let t = useSelector(({
@@ -19387,7 +19387,7 @@ function hp({
   let s = !!r.data?.team?.hasPermission;
   let [{
     data: n
-  }] = setupResourceAtomHandler(Xg({
+  }] = setupResourceAtomHandler(teamFoldersQuery({
     teamId: e.id
   }));
   let o = (n || []).filter(e => e.name !== '').length;
@@ -19458,15 +19458,15 @@ function hf(e) {
   let m = r.current && n?.data?.targetRef === r.current && n?.type === jU;
   let _ = r.current;
   let p = [];
-  e.showInvite && p.push(jsx(_$$c$, {
+  e.showInvite && p.push(jsx(OptionComponent, {
     children: renderI18nText('file_browser.team.invite'),
     onClick: e.onInviteClick
   }, 'import'));
-  p.push(jsx(_$$c$, {
+  p.push(jsx(OptionComponent, {
     children: renderI18nText('file_browser.team.view_members'),
     onClick: t => e.onMembersClick(t)
   }, 'share'));
-  p.push(jsx(_$$c$, {
+  p.push(jsx(OptionComponent, {
     children: jsxs('div', {
       className: cssBuilderInstance.flex.justifyBetween.itemsCenter.w150.$,
       children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(SvgComponent, {
@@ -19834,7 +19834,7 @@ function hM({
   let [{
     status: x,
     data: b
-  }] = setupResourceAtomHandler(Xg({
+  }] = setupResourceAtomHandler(teamFoldersQuery({
     teamId: e?.id
   }), {
     revalidateOnMount: !0
@@ -19885,7 +19885,7 @@ function hM({
     }
   }, [C, e]);
   let L = () => {
-    C(SX({
+    C(createNewFolderThunk({
       where: FolderViewType.FolderListView,
       team: {
         ...e,
@@ -19957,7 +19957,7 @@ function hM({
   });
   let V = t.canAdminTeam ? jsx(FL, {
     entity: e,
-    entityType: _$$ck2.TEAM,
+    entityType: UserContextScope.TEAM,
     avatarEditorState: R,
     size: 40,
     dispatch: C,
@@ -20076,7 +20076,7 @@ function hM({
               'aria-label': getI18nString('project_creation.create_project'),
               'iconPrefix': jsx(_$$x2, {}),
               'onClick': () => {
-                t(SX({
+                t(createNewFolderThunk({
                   team: {
                     ...e,
                     canEdit: i.canEditTeam
@@ -20414,7 +20414,7 @@ function h6(e) {
         onClick: () => {
           r(_$$X3({
             entity: e.user,
-            entityType: _$$ck2.CURRENT_USER,
+            entityType: UserContextScope.CURRENT_USER,
             shape: 'CIRCLE'
           }));
           logAndTrackCTA({
@@ -21576,7 +21576,7 @@ function xP(e) {
   let t = useDispatch<AppDispatch>();
   useEffect(() => {
     let e = () => {
-      t(Jw());
+      t(garbageCollectAndSyncAutosave());
     };
     ipcStorageHandler.register(restoredAutosaveKey, e);
     return function () {
@@ -21642,7 +21642,7 @@ function xP(e) {
             files: d.length,
             firstFile: m.fileKey
           });
-          t(_$$zE(Date.now()));
+          t(setAutosaveSnooze(Date.now()));
         },
         children: renderI18nText('autosave.notification.action_later')
       })]
@@ -21670,21 +21670,21 @@ function xM(e) {
       })]
     }), r && jsx('div', {
       className: 'team_org_access_dropdown--orgAccessDropdownContainer--iVvqn',
-      children: jsxs(_$$ms, {
+      children: jsxs(DropdownContainer, {
         className: 'team_org_access_dropdown--orgAccessDropdown--zJupm',
-        children: [jsx(MM, {
+        children: [jsx(CheckableOptionComponent, {
           checked: e.orgAccess === FAccessLevelType.PUBLIC,
           onClick: () => {
             e.onChangeOrgAccess(FAccessLevelType.PUBLIC);
           },
           children: getAccessLevelLabels()[FAccessLevelType.PUBLIC]
-        }), jsx(MM, {
+        }), jsx(CheckableOptionComponent, {
           checked: e.orgAccess === FAccessLevelType.PRIVATE,
           onClick: () => {
             e.onChangeOrgAccess(FAccessLevelType.PRIVATE);
           },
           children: getAccessLevelLabels()[FAccessLevelType.PRIVATE]
-        }), jsx(MM, {
+        }), jsx(CheckableOptionComponent, {
           checked: e.orgAccess === FAccessLevelType.SECRET,
           onClick: () => {
             e.onChangeOrgAccess(FAccessLevelType.SECRET);
@@ -21963,7 +21963,7 @@ function xq(e) {
   let [r, n] = useState(() => getUserCurrency());
   let o = UpsellModalType.UPGRADE_NEW_TEAM;
   let l = useDispatch<AppDispatch>();
-  let d = _$$sx3();
+  let d = isCampfireCartEnabled();
   let c = (t, a) => {
     let s = e.selectedView;
     l(startProUpgradeFlowThunk({
@@ -22358,7 +22358,7 @@ export function $$bo0() {
     allowResourceTracking: !0
   });
   useSingleEffect(() => {
-    E && e(Jw());
+    E && e(garbageCollectAndSyncAutosave());
   });
   setupResourceAtomHandler(XZ({
     currentOrgId: t ?? void 0,

@@ -1,476 +1,683 @@
-import { assert, assertNotNullish, throwTypeError } from "../figma_app/465776";
-import { PrototypingTsApi } from "../figma_app/763686";
-import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
-import { um, atomStoreManager } from "../figma_app/27355";
-import { debugState } from "../905/407919";
-import { fullscreenValue } from "../figma_app/455680";
-import { replaceSelection } from "../figma_app/741237";
-import { interactionTestAtom } from "../figma_app/617727";
-import { trackDefinedFileEventWrapper } from "../figma_app/2590";
-import { getValidPrototypeNodeId } from "../905/291518";
-import { Ew } from "../figma_app/170018";
-import { hF, l5, HS } from "../figma_app/354027";
-import { A as _$$A } from "../905/991888";
-let g = 0;
-let f = () => {
-  0 !== g && (debugState.dispatch(trackDefinedFileEventWrapper({
-    name: "prototype.frame_following_selection_replaced",
-    params: {
-      jumps: g
-    }
-  })), g = 0);
-};
-let E = () => {
-  (g += 1) >= 5 && f();
-};
-var $$y2 = (e => (e[e.SHOWN = 0] = "SHOWN", e[e.HIDDEN = 1] = "HIDDEN", e[e.LOAD_PENDING = 2] = "LOAD_PENDING", e[e.LOAD_FORBIDDEN = 3] = "LOAD_FORBIDDEN", e))($$y2 || {});
-var $$b0 = (e => (e[e.OPEN = 0] = "OPEN", e[e.CLOSED = 1] = "CLOSED", e[e.NOT_LOADED = 2] = "NOT_LOADED", e))($$b0 || {});
-let T = {
-  navigateForwardEnabled: !1,
-  navigateBackwardEnabled: !1,
+import { atomWithReducer } from "jotai/utils"
+
+import { getValidPrototypeNodeId } from "../905/291518"
+import { debugState } from "../905/407919"
+import { atomStoreManager } from "../905/490038"
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411"
+import { inlinePreviewController } from "../905/991888"
+import { trackDefinedFileEventWrapper } from "../figma_app/2590"
+import { areDevicesEquivalent } from "../figma_app/170018"
+import { BreakpointType, calculateInitialViewerSize, getBreakpoint } from "../figma_app/354027"
+import { fullscreenValue } from "../figma_app/455680"
+import { assert, assertNotNullish, throwTypeError } from "../figma_app/465776"
+import { interactionTestAtom } from "../figma_app/617727"
+import { replaceSelection } from "../figma_app/741237"
+import { PrototypingTsApi } from "../figma_app/763686"
+// Refactored for readability, type safety, and modularity. Renamed variables, added types, simplified logic, and added explanatory comments.
+
+// Counter for tracking selection replacements
+let selectionReplacementCounter = 0
+
+// Dispatches an event when the selection has been replaced multiple times
+function dispatchSelectionReplacedEvent() {
+  if (selectionReplacementCounter !== 0) {
+    debugState.dispatch(
+      trackDefinedFileEventWrapper({
+        name: "prototype.frame_following_selection_replaced",
+        params: {
+          jumps: selectionReplacementCounter,
+        },
+      }),
+    )
+    selectionReplacementCounter = 0
+  }
+}
+
+// Increments the counter and dispatches event if threshold is met
+function incrementAndCheckReplacementThreshold() {
+  selectionReplacementCounter += 1
+  if (selectionReplacementCounter >= 5) {
+    dispatchSelectionReplacedEvent()
+  }
+}
+
+// Enum for inline preview visibility status
+export enum InlinePreviewVisibilityStatus {
+  SHOWN = 0,
+  HIDDEN = 1,
+  LOAD_PENDING = 2,
+  LOAD_FORBIDDEN = 3,
+}
+
+// Enum for modal status
+export enum InlineModalStatus {
+  OPEN = 0,
+  CLOSED = 1,
+  NOT_LOADED = 2,
+}
+
+// Interface for inline preview state
+interface InlinePreviewState {
+  navigateForwardEnabled: boolean
+  navigateBackwardEnabled: boolean
+  currentPresentedNode: string | null
+  requestedNodeId: string | null
+  modalStatus: InlineModalStatus
+  wasModalOpenedSinceViewerLoaded: boolean
+  sizeInfo: {
+    breakpoint: {
+      type: BreakpointType
+      x?: number
+      y?: number
+    } | null
+    initialViewerSize: { x: number, y: number } | null
+  } | null
+  scalingInfo: {
+    viewportScalingMode: string
+    contentScalingMode: string
+  }
+  forceScalingInfo?: {
+    viewportScalingMode: string
+    contentScalingMode: string
+  }
+  targetFrameFollowingEnabled: boolean
+  targetFrameFollowingScrollToNode?: (nodeId: string) => void
+  showDeviceFrameEnabled: boolean
+  getCurrentViewerSize: (() => { x: number, y: number }) | null
+  previewKeyForErrorBoundary: number
+  isCrashed: boolean
+  exporting: boolean
+  buzzInlinePreviewStatus: InlinePreviewVisibilityStatus
+  buzzInlinePreviewPosition: {
+    left: number
+    top: number
+  }
+  timelinePlayerState: {
+    status: "stopped" | "playing" | "paused"
+    currentTimeMs: number
+    totalTimeMs: number
+  }
+}
+
+// Initial state for the inline preview reducer
+const initialInlinePreviewState: InlinePreviewState = {
+  navigateForwardEnabled: false,
+  navigateBackwardEnabled: false,
   currentPresentedNode: null,
   requestedNodeId: null,
-  modalStatus: 2,
-  wasModalOpenedSinceViewerLoaded: !1,
+  modalStatus: InlineModalStatus.NOT_LOADED,
+  wasModalOpenedSinceViewerLoaded: false,
   sizeInfo: null,
   scalingInfo: {
     viewportScalingMode: "scale-down-width",
-    contentScalingMode: "fixed"
+    contentScalingMode: "fixed",
   },
-  targetFrameFollowingEnabled: !1,
-  targetFrameFollowingScrollToNode: void 0,
-  showDeviceFrameEnabled: !0,
+  targetFrameFollowingEnabled: false,
+  targetFrameFollowingScrollToNode: undefined,
+  showDeviceFrameEnabled: true,
   getCurrentViewerSize: null,
   previewKeyForErrorBoundary: 0,
-  isCrashed: !1,
-  exporting: !1,
-  buzzInlinePreviewStatus: 3,
+  isCrashed: false,
+  exporting: false,
+  buzzInlinePreviewStatus: InlinePreviewVisibilityStatus.LOAD_FORBIDDEN,
   buzzInlinePreviewPosition: {
     left: 0,
-    top: 0
+    top: 0,
   },
   timelinePlayerState: {
     status: "stopped",
     currentTimeMs: 0,
-    totalTimeMs: 0
+    totalTimeMs: 0,
+  },
+}
+
+// Resets the inline preview state and ensures the preview controller is closed
+function resetInlinePreviewState(state: InlinePreviewState): InlinePreviewState {
+  inlinePreviewController.ensureClosed()
+  dispatchSelectionReplacedEvent()
+  return {
+    ...state,
+    requestedNodeId: null,
+    currentPresentedNode: null,
+    modalStatus: InlineModalStatus.CLOSED,
   }
-};
-let I = e => (_$$A.ensureClosed(), f(), {
-  ...e,
-  requestedNodeId: null,
-  currentPresentedNode: null,
-  modalStatus: 1
-});
-let $$S1 = um(T, (e, t) => {
-  let {
-    type
-  } = t;
-  let o = e;
+}
+interface Action {
+  type: string
+  payload: any
+}
+// Reducer for managing inline preview state
+const inlinePreviewReducer = atomWithReducer<InlinePreviewState, Action>(initialInlinePreviewState, (state, action) => {
+  const { type } = action
+  let newState = state
+
   switch (type) {
-    case "OPEN_INLINE_PREVIEW":
-      {
-        let {
-          sceneGraph,
-          requestedNodeId,
-          onOpen
-        } = t.payload;
-        _$$A.navigateTo(requestedNodeId);
-        _$$A.notifyWasModalOpenedSinceViewerLoaded(!0);
-        atomStoreManager.set(interactionTestAtom, !0);
-        let l = sceneGraph.get(requestedNodeId);
-        assert(!!l, "expected selectedNode to exist");
-        let d = hF(e.sizeInfo, !1, e.showDeviceFrameEnabled, requestedNodeId, sceneGraph);
-        onOpen(d.initialViewerSize);
-        let u = e.isCrashed ? e.previewKeyForErrorBoundary + 1 : e.previewKeyForErrorBoundary;
-        o = {
-          ...e,
-          requestedNodeId,
-          currentPresentedNode: requestedNodeId,
-          sizeInfo: d,
-          modalStatus: 0,
-          wasModalOpenedSinceViewerLoaded: !0,
-          isCrashed: !1,
-          previewKeyForErrorBoundary: u
-        };
-        break;
+    case "OPEN_INLINE_PREVIEW": {
+      const { sceneGraph, requestedNodeId, onOpen } = action.payload
+      inlinePreviewController.navigateTo(requestedNodeId)
+      inlinePreviewController.notifyWasModalOpenedSinceViewerLoaded(true)
+      atomStoreManager.set(interactionTestAtom, true)
+
+      const selectedNode = sceneGraph.get(requestedNodeId)
+      assert(!!selectedNode, "expected selectedNode to exist")
+
+      const sizeInfo = calculateInitialViewerSize(
+        state.sizeInfo,
+        false,
+        state.showDeviceFrameEnabled,
+        requestedNodeId,
+        sceneGraph,
+      )
+      onOpen(sizeInfo.initialViewerSize)
+
+      const previewKeyForErrorBoundary = state.isCrashed
+        ? state.previewKeyForErrorBoundary + 1
+        : state.previewKeyForErrorBoundary
+
+      newState = {
+        ...state,
+        requestedNodeId,
+        currentPresentedNode: requestedNodeId,
+        sizeInfo,
+        modalStatus: InlineModalStatus.OPEN,
+        wasModalOpenedSinceViewerLoaded: true,
+        isCrashed: false,
+        previewKeyForErrorBoundary,
       }
+      break
+    }
+
     case "OPEN_SLIDES_INLINE_PREVIEW":
-      o = {
-        ...e,
+      newState = {
+        ...state,
         scalingInfo: {
           viewportScalingMode: "contain",
-          contentScalingMode: "fixed"
+          contentScalingMode: "fixed",
         },
         forceScalingInfo: {
           viewportScalingMode: "contain",
-          contentScalingMode: "fixed"
+          contentScalingMode: "fixed",
         },
-        modalStatus: 1,
-        targetFrameFollowingEnabled: !0
-      };
-      break;
-    case "OPEN_BUZZ_INLINE_PREVIEW":
-      {
-        let {
-          sceneGraph,
-          requestedNodeId,
-          onOpen
-        } = t.payload;
-        let l = {
-          viewportScalingMode: "contain",
-          contentScalingMode: "fixed"
-        };
-        _$$A.navigateTo(requestedNodeId);
-        _$$A.notifyWasModalOpenedSinceViewerLoaded(!0);
-        atomStoreManager.set(interactionTestAtom, !0);
-        let d = sceneGraph.get(requestedNodeId);
-        assert(!!d, "expected selectedNode to exist");
-        let u = hF(e.sizeInfo, !1, e.showDeviceFrameEnabled, requestedNodeId, sceneGraph);
-        onOpen(u.initialViewerSize);
-        let p = e.isCrashed ? e.previewKeyForErrorBoundary + 1 : e.previewKeyForErrorBoundary;
-        o = {
-          ...e,
-          requestedNodeId,
-          sizeInfo: u,
-          isCrashed: !1,
-          previewKeyForErrorBoundary: p,
-          forceScalingInfo: l,
-          scalingInfo: l,
-          buzzInlinePreviewStatus: 1
-        };
-        break;
+        modalStatus: InlineModalStatus.CLOSED,
+        targetFrameFollowingEnabled: true,
       }
-    case "UPDATE_BUZZ_INLINE_PREVIEW":
-      {
-        let {
-          status,
-          position,
-          size,
-          requestedNodeId
-        } = t.payload;
-        let s = !1;
-        if (void 0 !== status) {
-          let t = 3 === e.buzzInlinePreviewStatus && 2 === status;
-          let n = 3 !== e.buzzInlinePreviewStatus && 2 !== e.buzzInlinePreviewStatus;
-          s = t || n;
-        }
-        o = {
-          ...(requestedNodeId ? x(e, requestedNodeId, !1) : e),
-          ...(s && {
-            buzzInlinePreviewStatus: status
-          }),
-          ...(position && {
-            buzzInlinePreviewPosition: position
-          }),
-          ...(size && {
-            sizeInfo: {
-              breakpoint: e.sizeInfo?.breakpoint || {
-                type: l5.SMALL
-              },
-              initialViewerSize: size
-            }
-          })
-        };
-        break;
+      break
+
+    case "OPEN_BUZZ_INLINE_PREVIEW": {
+      const { sceneGraph, requestedNodeId, onOpen } = action.payload
+      const scalingInfo = {
+        viewportScalingMode: "contain",
+        contentScalingMode: "fixed",
       }
-    case "CLOSE_INLINE_PREVIEW":
-      o = I(e);
-      break;
-    case "RESET_INLINE_PREVIEW":
-      _$$A.ensureClosed();
-      o = {
-        ...T,
-        targetFrameFollowingScrollToNode: e.targetFrameFollowingScrollToNode,
-        modalStatus: 1
-      };
-      break;
-    case "HANDLE_EDITOR_SELECTION_CHANGED":
-      {
-        if (0 !== e.modalStatus) break;
-        let r = PrototypingTsApi.getInlinePreviewNodeIdOnSelectionChange();
-        let {
-          sceneGraph
-        } = t.payload;
-        o = isValidSessionLocalID(parseSessionLocalID(r)) ? x(e, r) : A(e, sceneGraph);
-        break;
+
+      inlinePreviewController.navigateTo(requestedNodeId)
+      inlinePreviewController.notifyWasModalOpenedSinceViewerLoaded(true)
+      atomStoreManager.set(interactionTestAtom, true)
+
+      const selectedNode = sceneGraph.get(requestedNodeId)
+      assert(!!selectedNode, "expected selectedNode to exist")
+
+      const sizeInfo = calculateInitialViewerSize(
+        state.sizeInfo,
+        false,
+        state.showDeviceFrameEnabled,
+        requestedNodeId,
+        sceneGraph,
+      )
+      onOpen(sizeInfo.initialViewerSize)
+
+      const previewKeyForErrorBoundary = state.isCrashed
+        ? state.previewKeyForErrorBoundary + 1
+        : state.previewKeyForErrorBoundary
+
+      newState = {
+        ...state,
+        requestedNodeId,
+        sizeInfo,
+        isCrashed: false,
+        previewKeyForErrorBoundary,
+        forceScalingInfo: scalingInfo,
+        scalingInfo,
+        buzzInlinePreviewStatus: InlinePreviewVisibilityStatus.SHOWN,
       }
-    case "UPDATE_PRESENTED_NODE":
-      e.targetFrameFollowingEnabled && t.payload.nodeId !== e.currentPresentedNode && (E(), replaceSelection([t.payload.nodeId], !1), assert(!!e.targetFrameFollowingScrollToNode, "Scroll callback should have been set already through SET_SCROLL_CALLBACK."), e.targetFrameFollowingScrollToNode(t.payload.nodeId));
-      o = {
-        ...e,
-        currentPresentedNode: t.payload.nodeId
-      };
-      break;
-    case "UPDATE_FRAME_CONTROLS":
-      o = {
-        ...e,
-        navigateForwardEnabled: t.payload.navigateForwardEnabled,
-        navigateBackwardEnabled: t.payload.navigateBackwardEnabled
-      };
-      break;
-    case "CHANGE_DEVICE_FRAME":
-      {
-        let r;
-        let i;
-        if (0 !== e.modalStatus) break;
-        assertNotNullish(e.sizeInfo, "sizeInfo must be set");
-        let {
-          sceneGraph,
-          oldPresetIdentifier,
-          oldRotation,
-          newPresetIdentifier,
-          newRotation
-        } = t.payload;
-        (e => {
-          e[e.DEVICE = 0] = "DEVICE";
-          e[e.ROTATION = 1] = "ROTATION";
-          e[e.STYLE = 2] = "STYLE";
-        })(r || (r = {}));
-        let u = !!oldPresetIdentifier && !!newPresetIdentifier;
-        let p = oldRotation === newRotation && u && Ew(newPresetIdentifier, oldPresetIdentifier);
-        if (oldPresetIdentifier !== newPresetIdentifier && p ? i = 2 : oldPresetIdentifier === newPresetIdentifier && u ? oldRotation !== newRotation && (i = 1) : i = 0, assert(void 0 !== i, "changeType must be set"), 1 === i) {
-          assert(!!e.getCurrentViewerSize, "getCurrentViewerSize must be set");
-          let t = e.getCurrentViewerSize();
-          assert(e.sizeInfo.breakpoint.type === l5.DEVICE, "breakpoint must be device");
-          o = {
-            ...e,
-            sizeInfo: {
-              breakpoint: {
-                type: l5.DEVICE,
-                x: e.sizeInfo.breakpoint.y,
-                y: e.sizeInfo.breakpoint.x
-              },
-              initialViewerSize: {
-                x: t.y,
-                y: t.x
-              }
-            }
-          };
-        } else if (0 === i) {
-          assert(!!e.currentPresentedNode, "currentPresentedNode must be set");
-          let t = hF(e.sizeInfo, !0, e.showDeviceFrameEnabled, e.currentPresentedNode, sceneGraph);
-          o = {
-            ...e,
-            sizeInfo: t
-          };
-        } else 2 === i || throwTypeError(i);
-        break;
+      break
+    }
+
+    case "UPDATE_BUZZ_INLINE_PREVIEW": {
+      const { status, position, size, requestedNodeId } = action.payload
+      let shouldUpdateStatus = false
+
+      if (status !== undefined) {
+        const isTransitioningToLoadPending
+          = state.buzzInlinePreviewStatus === InlinePreviewVisibilityStatus.LOAD_FORBIDDEN
+            && status === InlinePreviewVisibilityStatus.LOAD_PENDING
+        const isNotInLoadState
+          = state.buzzInlinePreviewStatus !== InlinePreviewVisibilityStatus.LOAD_FORBIDDEN
+            && state.buzzInlinePreviewStatus !== InlinePreviewVisibilityStatus.LOAD_PENDING
+        shouldUpdateStatus = isTransitioningToLoadPending || isNotInLoadState
       }
-    case "RESIZE_MODAL":
-      {
-        let {
-          sceneGraph
-        } = t.payload;
-        assert(!!e.currentPresentedNode, "currentPresentedNode must be set");
-        assert(!!e.sizeInfo, "sizeInfo must be set");
-        let i = sceneGraph.get(e.currentPresentedNode);
-        assert(!!i, "expected selectedNode to exist");
-        let a = HS(sceneGraph, i);
-        o = {
-          ...e,
+
+      newState = {
+        ...(requestedNodeId ? updateRequestedNode(state, requestedNodeId, false) : state),
+        ...(shouldUpdateStatus && {
+          buzzInlinePreviewStatus: status,
+        }),
+        ...(position && {
+          buzzInlinePreviewPosition: position,
+        }),
+        ...(size && {
           sizeInfo: {
-            ...e.sizeInfo,
-            breakpoint: a
-          }
-        };
-        break;
+            breakpoint:
+              state.sizeInfo?.breakpoint || {
+                type: BreakpointType.SMALL,
+              },
+            initialViewerSize: size,
+          },
+        }),
       }
+      break
+    }
+
+    case "CLOSE_INLINE_PREVIEW":
+      newState = resetInlinePreviewState(state)
+      break
+
+    case "RESET_INLINE_PREVIEW":
+      inlinePreviewController.ensureClosed()
+      newState = {
+        ...initialInlinePreviewState,
+        targetFrameFollowingScrollToNode: state.targetFrameFollowingScrollToNode,
+        modalStatus: InlineModalStatus.CLOSED,
+      }
+      break
+
+    case "HANDLE_EDITOR_SELECTION_CHANGED": {
+      if (state.modalStatus !== InlineModalStatus.OPEN)
+        break
+      const nodeId = PrototypingTsApi.getInlinePreviewNodeIdOnSelectionChange()
+      const { sceneGraph } = action.payload
+      newState = isValidSessionLocalID(parseSessionLocalID(nodeId))
+        ? updateRequestedNode(state, nodeId)
+        : handleInvalidPresentedNode(state, sceneGraph)
+      break
+    }
+
+    case "UPDATE_PRESENTED_NODE":
+      if (
+        state.targetFrameFollowingEnabled
+        && action.payload.nodeId !== state.currentPresentedNode
+      ) {
+        incrementAndCheckReplacementThreshold()
+        replaceSelection([action.payload.nodeId], false)
+        assert(
+          !!state.targetFrameFollowingScrollToNode,
+          "Scroll callback should have been set already through SET_SCROLL_CALLBACK.",
+        )
+        state.targetFrameFollowingScrollToNode(action.payload.nodeId)
+      }
+      newState = {
+        ...state,
+        currentPresentedNode: action.payload.nodeId,
+      }
+      break
+
+    case "UPDATE_FRAME_CONTROLS":
+      newState = {
+        ...state,
+        navigateForwardEnabled: action.payload.navigateForwardEnabled,
+        navigateBackwardEnabled: action.payload.navigateBackwardEnabled,
+      }
+      break
+
+    case "CHANGE_DEVICE_FRAME": {
+      if (state.modalStatus !== InlineModalStatus.OPEN)
+        break
+      assertNotNullish(state.sizeInfo, "sizeInfo must be set")
+
+      const {
+        sceneGraph,
+        oldPresetIdentifier,
+        oldRotation,
+        newPresetIdentifier,
+        newRotation,
+      } = action.payload
+
+      enum ChangeType {
+        DEVICE = 0,
+        ROTATION = 1,
+        STYLE = 2,
+      }
+
+      let changeType: ChangeType
+
+      const hasBothIdentifiers = !!oldPresetIdentifier && !!newPresetIdentifier
+      const isEquivalentDevice
+        = oldRotation === newRotation
+          && hasBothIdentifiers
+          && areDevicesEquivalent(newPresetIdentifier, oldPresetIdentifier)
+
+      if (oldPresetIdentifier !== newPresetIdentifier && isEquivalentDevice) {
+        changeType = ChangeType.STYLE
+      }
+      else if (
+        oldPresetIdentifier === newPresetIdentifier
+        && hasBothIdentifiers
+        && oldRotation !== newRotation
+      ) {
+        changeType = ChangeType.ROTATION
+      }
+      else {
+        changeType = ChangeType.DEVICE
+      }
+
+      assert(changeType !== undefined, "changeType must be set")
+
+      if (changeType === ChangeType.ROTATION) {
+        assert(!!state.getCurrentViewerSize, "getCurrentViewerSize must be set")
+        const viewerSize = state.getCurrentViewerSize()
+        assert(
+          state.sizeInfo.breakpoint.type === BreakpointType.DEVICE,
+          "breakpoint must be device",
+        )
+        newState = {
+          ...state,
+          sizeInfo: {
+            breakpoint: {
+              type: BreakpointType.DEVICE,
+              x: state.sizeInfo.breakpoint.y,
+              y: state.sizeInfo.breakpoint.x,
+            },
+            initialViewerSize: {
+              x: viewerSize.y,
+              y: viewerSize.x,
+            },
+          },
+        }
+      }
+      else if (changeType === ChangeType.DEVICE) {
+        assert(!!state.currentPresentedNode, "currentPresentedNode must be set")
+        const sizeInfo = calculateInitialViewerSize(
+          state.sizeInfo,
+          true,
+          state.showDeviceFrameEnabled,
+          state.currentPresentedNode,
+          sceneGraph,
+        )
+        newState = {
+          ...state,
+          sizeInfo,
+        }
+      }
+      else {
+        // changeType === ChangeType.STYLE
+        // No state change needed for style changes
+        changeType === ChangeType.STYLE || throwTypeError(changeType)
+      }
+      break
+    }
+
+    case "RESIZE_MODAL": {
+      const { sceneGraph } = action.payload
+      assert(!!state.currentPresentedNode, "currentPresentedNode must be set")
+      assert(!!state.sizeInfo, "sizeInfo must be set")
+
+      const selectedNode = sceneGraph.get(state.currentPresentedNode)
+      assert(!!selectedNode, "expected selectedNode to exist")
+
+      const breakpoint = getBreakpoint(sceneGraph, selectedNode)
+      newState = {
+        ...state,
+        sizeInfo: {
+          ...state.sizeInfo,
+          breakpoint,
+        },
+      }
+      break
+    }
+
     case "HANDLE_VIEWER_LOADED":
-      _$$A.setScalingMode(e.scalingInfo, !1);
-      _$$A.navigateTo(e.requestedNodeId);
-      fullscreenValue.triggerAction("inline-preview-loaded");
-      break;
+      inlinePreviewController.setScalingMode(state.scalingInfo, false)
+      inlinePreviewController.navigateTo(state.requestedNodeId)
+      fullscreenValue.triggerAction("inline-preview-loaded")
+      // No state change
+      break
+
     case "HANDLE_READY_TO_RECEIVE_MESSAGES":
-      _$$A.notifyWasModalOpenedSinceViewerLoaded(e.wasModalOpenedSinceViewerLoaded);
-      break;
+      inlinePreviewController.notifyWasModalOpenedSinceViewerLoaded(
+        state.wasModalOpenedSinceViewerLoaded,
+      )
+      // No state change
+      break
+
     case "TOGGLE_TARGET_FRAME_FOLLOWING":
-      f();
-      o = {
-        ...e,
-        targetFrameFollowingEnabled: !e.targetFrameFollowingEnabled
-      };
-      break;
+      dispatchSelectionReplacedEvent()
+      newState = {
+        ...state,
+        targetFrameFollowingEnabled: !state.targetFrameFollowingEnabled,
+      }
+      break
+
     case "ENABLE_TARGET_FRAME_FOLLOWING":
-      o = {
-        ...e,
-        targetFrameFollowingEnabled: !0
-      };
-      break;
+      newState = {
+        ...state,
+        targetFrameFollowingEnabled: true,
+      }
+      break
+
     case "TOGGLE_SHOW_DEVICE_FRAME":
-      o = {
-        ...e,
-        showDeviceFrameEnabled: !e.showDeviceFrameEnabled
-      };
-      break;
+      newState = {
+        ...state,
+        showDeviceFrameEnabled: !state.showDeviceFrameEnabled,
+      }
+      break
+
     case "SET_SCROLL_CALLBACK":
-      o = {
-        ...e,
-        targetFrameFollowingScrollToNode: t.payload
-      };
-      break;
+      newState = {
+        ...state,
+        targetFrameFollowingScrollToNode: action.payload,
+      }
+      break
+
     case "SET_CURRENT_VIEWER_SIZE_CALLBACK":
-      o = {
-        ...e,
-        getCurrentViewerSize: t.payload
-      };
-      break;
+      newState = {
+        ...state,
+        getCurrentViewerSize: action.payload,
+      }
+      break
+
     case "HANDLE_PREVIEW_CRASHED":
-      o = {
-        ...I(e),
-        isCrashed: !0
-      };
-      break;
+      newState = {
+        ...resetInlinePreviewState(state),
+        isCrashed: true,
+      }
+      break
+
     case "SET_PREVIEW_IS_RESPONSIVE":
-      if (t.payload) {
-        let t = {
+      if (action.payload) {
+        const responsiveScalingInfo = {
           viewportScalingMode: "contain",
-          contentScalingMode: "responsive"
-        };
-        o = {
-          ...e,
-          scalingInfo: t,
-          forceScalingInfo: t
-        };
-      } else {
-        let t = v(e);
-        o = {
-          ...e,
-          scalingInfo: t,
-          forceScalingInfo: void 0
-        };
+          contentScalingMode: "responsive",
+        }
+        newState = {
+          ...state,
+          scalingInfo: responsiveScalingInfo,
+          forceScalingInfo: responsiveScalingInfo,
+        }
       }
-      _$$A.setScalingMode(o.scalingInfo, !0);
-      break;
-    case "REQUEST_EXPORT":
-      {
-        let {
-          nodeIds,
-          videoVolumeByNodeId
-        } = t.payload;
-        _$$A.$$export(nodeIds, videoVolumeByNodeId);
-        o = {
-          ...e,
-          exporting: !0
-        };
-        break;
+      else {
+        const defaultScalingInfo = getDefaultScalingInfo(newState)
+        newState = {
+          ...state,
+          scalingInfo: defaultScalingInfo,
+          forceScalingInfo: undefined,
+        }
       }
+      inlinePreviewController.setScalingMode(newState.scalingInfo, true)
+      break
+
+    case "REQUEST_EXPORT": {
+      const { nodeIds, videoVolumeByNodeId } = action.payload
+      inlinePreviewController.export(nodeIds, videoVolumeByNodeId)
+      newState = {
+        ...state,
+        exporting: true,
+      }
+      break
+    }
+
     case "CANCEL_EXPORT":
-      _$$A.cancelExport();
-      break;
+      inlinePreviewController.cancelExport()
+      // No state change
+      break
+
     case "HANDLE_EXPORT_COMPLETED":
-      o = {
-        ...e,
-        exporting: !1
-      };
-      break;
-    case "TIMELINE_PLAYER_PLAY":
-      {
-        let {
-          videoVolumeByNodeId
-        } = t.payload;
-        _$$A.play(videoVolumeByNodeId);
-        break;
+      newState = {
+        ...state,
+        exporting: false,
       }
+      break
+
+    case "TIMELINE_PLAYER_PLAY": {
+      const { videoVolumeByNodeId } = action.payload
+      inlinePreviewController.play(videoVolumeByNodeId)
+      // No state change
+      break
+    }
+
     case "TIMELINE_PLAYER_PAUSE":
-      _$$A.pause();
-      break;
+      inlinePreviewController.pause()
+      // No state change
+      break
+
     case "TIMELINE_PLAYER_RESET":
-      _$$A.isIframeInitialized() && _$$A.resetPlayer();
-      break;
-    case "UPDATE_TIMELINE_PLAYER_STATE":
-      {
-        let {
+      if (inlinePreviewController.isIframeInitialized()) {
+        inlinePreviewController.resetPlayer()
+      }
+      // No state change
+      break
+
+    case "UPDATE_TIMELINE_PLAYER_STATE": {
+      const { status, currentTimeMs, totalTimeMs } = action.payload
+      newState = {
+        ...state,
+        timelinePlayerState: {
           status,
           currentTimeMs,
-          totalTimeMs
-        } = t.payload;
-        o = {
-          ...e,
-          timelinePlayerState: {
-            status,
-            currentTimeMs,
-            totalTimeMs
-          }
-        };
-        break;
+          totalTimeMs,
+        },
       }
+      break
+    }
+
     default:
-      throwTypeError(type);
+      throwTypeError(type)
   }
-  if (!o.forceScalingInfo && o.sizeInfo?.breakpoint?.type !== e.sizeInfo?.breakpoint?.type) {
-    let e = v(o);
-    o = {
-      ...o,
-      scalingInfo: e
-    };
-    _$$A.setScalingMode(e, !1);
+
+  // Handle scaling info changes based on breakpoint type
+  if (
+    !newState.forceScalingInfo
+    && newState.sizeInfo?.breakpoint?.type !== state.sizeInfo?.breakpoint?.type
+  ) {
+    const updatedScalingInfo = getDefaultScalingInfo(newState)
+    newState = {
+      ...newState,
+      scalingInfo: updatedScalingInfo,
+    }
+    inlinePreviewController.setScalingMode(updatedScalingInfo, false)
   }
-  N(e, o, t);
-  return o;
-});
-let v = e => e.sizeInfo?.breakpoint?.type === l5.DEVICE ? {
-  viewportScalingMode: "fit-width",
-  contentScalingMode: "fixed"
-} : {
-  viewportScalingMode: "scale-down-width",
-  contentScalingMode: "fixed"
-};
-let A = (e, t) => {
-  let {
-    currentPresentedNode
-  } = e;
-  if (currentPresentedNode && null == t.get(currentPresentedNode)) {
-    let t = getValidPrototypeNodeId();
-    return t ? (_$$A.navigateTo(t), {
-      ...e,
-      requestedNodeId: t,
-      currentPresentedNode: t
-    }) : (_$$A.ensureClosed(), {
-      ...e,
-      requestedNodeId: null,
-      currentPresentedNode: null,
-      modalStatus: 1
-    });
+
+  // Handle side effects after state update
+  handleStateChangeSideEffects(state, newState, action)
+
+  return newState
+})
+
+// Determines default scaling info based on breakpoint type
+function getDefaultScalingInfo(state: InlinePreviewState) {
+  return state.sizeInfo?.breakpoint?.type === BreakpointType.DEVICE
+    ? {
+        viewportScalingMode: "fit-width",
+        contentScalingMode: "fixed",
+      }
+    : {
+        viewportScalingMode: "scale-down-width",
+        contentScalingMode: "fixed",
+      }
+}
+
+// Handles logic when the presented node is invalid
+function handleInvalidPresentedNode(state: InlinePreviewState, sceneGraph: any): InlinePreviewState {
+  const { currentPresentedNode } = state
+  if (currentPresentedNode && sceneGraph.get(currentPresentedNode) == null) {
+    const validNodeId = getValidPrototypeNodeId()
+    if (validNodeId) {
+      inlinePreviewController.navigateTo(validNodeId)
+      return {
+        ...state,
+        requestedNodeId: validNodeId,
+        currentPresentedNode: validNodeId,
+      }
+    }
+    else {
+      inlinePreviewController.ensureClosed()
+      return {
+        ...state,
+        requestedNodeId: null,
+        currentPresentedNode: null,
+        modalStatus: InlineModalStatus.CLOSED,
+      }
+    }
   }
-  return e;
-};
-let x = (e, t, r = !0) => {
-  let {
-    requestedNodeId,
-    currentPresentedNode
-  } = e;
-  return t === requestedNodeId && t === currentPresentedNode ? e : (_$$A.navigateTo(t), {
-    ...e,
-    requestedNodeId: t,
-    ...(r && {
-      currentPresentedNode: t
-    })
-  });
-};
-let N = (e, t, r) => {
-  let {
-    type
-  } = r;
-  let a = e => {
+  return state
+}
+
+// Updates the requested node in state
+function updateRequestedNode(state: InlinePreviewState, nodeId: string, updateCurrentPresentedNode: boolean = true): InlinePreviewState {
+  const { requestedNodeId, currentPresentedNode } = state
+  if (nodeId === requestedNodeId && nodeId === currentPresentedNode) {
+    return state
+  }
+  inlinePreviewController.navigateTo(nodeId)
+  return {
+    ...state,
+    requestedNodeId: nodeId,
+    ...(updateCurrentPresentedNode && {
+      currentPresentedNode: nodeId,
+    }),
+  }
+}
+
+// Handles side effects triggered by state changes
+function handleStateChangeSideEffects(oldState: InlinePreviewState, newState: InlinePreviewState, action: any) {
+  const { type } = action
+
+  const triggerPresentedNodeChanged = (nodeId: string | null) => {
     fullscreenValue.triggerAction("inline-preview-presented-node-changed", {
-      currentHighlightedNode: e
-    });
-  };
-  let s = t.currentPresentedNode !== e.currentPresentedNode;
-  let o = 0 === t.modalStatus;
+      currentHighlightedNode: nodeId,
+    })
+  }
+
+  const hasPresentedNodeChanged = newState.currentPresentedNode !== oldState.currentPresentedNode
+  const isModalOpen = newState.modalStatus === InlineModalStatus.OPEN
+
   switch (type) {
     case "UPDATE_PRESENTED_NODE":
-      o && s && a(t.currentPresentedNode);
-      break;
+      if (isModalOpen && hasPresentedNodeChanged) {
+        triggerPresentedNodeChanged(newState.currentPresentedNode)
+      }
+      break
     case "OPEN_INLINE_PREVIEW":
-      a(t.currentPresentedNode);
-      break;
+      triggerPresentedNodeChanged(newState.currentPresentedNode)
+      break
     case "CLOSE_INLINE_PREVIEW":
-      a(null);
-      break;
+      triggerPresentedNodeChanged(null)
+      break
     case "HANDLE_EDITOR_SELECTION_CHANGED":
-      s && a(t.currentPresentedNode);
-      break;
+      if (hasPresentedNodeChanged) {
+        triggerPresentedNodeChanged(newState.currentPresentedNode)
+      }
+      break
+    // All other cases intentionally left blank as no side effects are needed
     case "OPEN_SLIDES_INLINE_PREVIEW":
     case "OPEN_BUZZ_INLINE_PREVIEW":
     case "UPDATE_BUZZ_INLINE_PREVIEW":
@@ -494,11 +701,13 @@ let N = (e, t, r) => {
     case "TIMELINE_PLAYER_PAUSE":
     case "TIMELINE_PLAYER_RESET":
     case "UPDATE_TIMELINE_PLAYER_STATE":
-      break;
+      break
     default:
-      throwTypeError(type);
+      throwTypeError(type)
   }
-};
-export const bi = $$b0;
-export const hg = $$S1;
-export const u7 = $$y2;
+}
+
+// Exporting refactored constants and reducer
+export const bi = InlineModalStatus
+export const hg = inlinePreviewReducer
+export const u7 = InlinePreviewVisibilityStatus

@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo, useCallback, useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { Textarea } from "../905/909590";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { LabelPrimitive } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
@@ -206,10 +206,10 @@ export let $$K0 = registerModal(function (e) {
       svg: _$$A
     })
   });
-  let eM = jsxs(bL, {
+  let eM = jsxs(SelectGroupLabel, {
     value: em ?? UNASSIGNED,
     onChange: e => e_(e ?? UNASSIGNED),
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       label: jsx(HiddenLabel, {
         children: getI18nString("team_creation.workspace")
       }),
@@ -227,8 +227,8 @@ export let $$K0 = registerModal(function (e) {
           })]
         })
       })
-    }), jsx(mc, {
-      children: J.map(e => jsx(c$, {
+    }), jsx(SelectContainer, {
+      children: J.map(e => jsx(SelectOptionReset, {
         value: e.id,
         children: jsxs("div", {
           className: z,

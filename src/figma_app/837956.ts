@@ -15,7 +15,7 @@ import { showModalHandler } from "../905/156213";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { consumptionPaywallUtils } from "../905/224";
-import { k4, jl } from "../figma_app/199513";
+import { restoreFolderMutation, loadFolderIfNeededThunk } from "../figma_app/199513";
 import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
 import { PageFolderFile } from "../905/652992";
 import { getProjectUrl } from "../905/316062";
@@ -28,7 +28,7 @@ export function $$w1(e) {
   let t = useSelector(e => e.currentUserOrgId);
   let r = useSelector(e => e.currentTeamId);
   let n = useSelector(e => e.loadedFolders);
-  let u = getAtomMutate(k4);
+  let u = getAtomMutate(restoreFolderMutation);
   let f = t || r;
   let E = useSelector(e => e.teams);
   let A = YO(e);
@@ -107,7 +107,7 @@ export function $$w1(e) {
     }), r || (O && D && k.push({
       displayText: getI18nString("sidebar.share"),
       onClick: () => {
-        w(jl({
+        w(loadFolderIfNeededThunk({
           folderId: e.id,
           loadedFolders: n
         }));
@@ -121,7 +121,7 @@ export function $$w1(e) {
     }), (l === f || i === f) && k.push({
       displayText: getI18nString("sidebar.move_project"),
       onClick: () => {
-        w(jl({
+        w(loadFolderIfNeededThunk({
           folderId: e.id,
           loadedFolders: n
         }));

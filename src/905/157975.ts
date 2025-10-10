@@ -20,9 +20,9 @@ import { LibraryAgeEnum, PrimaryWorkflowEnum, initialLibraryStats } from "../fig
 import { TrackingKeyEnum } from "../905/696396";
 import { O as _$$O } from "../905/480562";
 import { LibraryOverviewView } from "../905/362016";
-import { S as _$$S } from "../905/669334";
-import { n as _$$n } from "../905/402643";
-import { v as _$$v, E as _$$E } from "../905/928543";
+import { LibraryViewTabs } from "../905/669334";
+import { LibraryTypeString } from "../905/402643";
+import { StateGroupView, ComponentDrilldownView } from "../905/928543";
 import { U as _$$U } from "../905/402186";
 import { x as _$$x } from "../905/805083";
 import { OverviewCategory } from "../905/697254";
@@ -39,7 +39,7 @@ function D({
   width: i,
   entrypoint: s
 }) {
-  let [o, l] = useState(e ?? _$$n.PRODUCT_COMPONENTS);
+  let [o, l] = useState(e ?? LibraryTypeString.PRODUCT_COMPONENTS);
   let [d, c] = useState(OverviewCategory.OVERVIEW);
   let [u, m] = useState(LibraryAgeEnum.THIRTY_DAYS);
   let [h, g] = useState(void 0);
@@ -95,7 +95,7 @@ function D({
       className: "dsa_file_view_v2--slidingPaneContainer--aGZ15 sliding_pane--slidingPaneContainer--RQkXf",
       children: [jsxs("div", {
         className: B ? P : O,
-        children: [jsx(_$$S, {
+        children: [jsx(LibraryViewTabs, {
           selectedDuration: u,
           onSelectDuration: m,
           shownView: d,
@@ -153,7 +153,7 @@ function D({
         })]
       }), D && jsx("div", {
         className: h ? O : P,
-        children: jsx(_$$v, {
+        children: jsx(StateGroupView, {
           stateGroup: D,
           onBackClick: V,
           onItemClick: W,
@@ -162,7 +162,7 @@ function D({
         })
       }), h && jsx("div", {
         className: P,
-        children: jsx(_$$E, {
+        children: jsx(ComponentDrilldownView, {
           component: h,
           onBackClick: G,
           width: i,

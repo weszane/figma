@@ -6,7 +6,7 @@ import { LoadingSpinner } from "../905/443820";
 import { AppStateTsApi, BuzzCloneHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { base64ToUint8Array } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -51,7 +51,7 @@ export function $$C0({
   let w = C * N.size;
   let [R, A] = useState(!1);
   let L = isNotInFocusedNodeView();
-  let k = Xr(_$$v);
+  let k = useSetAtom(_$$v);
   let B = function (e, t, l) {
     let r = useAtomWithSubscription(_$$v);
     let i = isFullscreenAndInFocusedNodeView();

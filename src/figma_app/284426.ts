@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useId } from "react";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { ColorFormatEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -79,16 +79,16 @@ function E({
   }, e));
   return jsx("div", {
     className: c()(NC, jS, r),
-    children: jsxs(bL, {
+    children: jsxs(SelectGroupLabel, {
       value: String(e),
       onChange: e => t(Number(e)),
       recordingKey: generateRecordingKey(i, "colorFormatSelect"),
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: $$m0.format(e)
         }),
         "aria-label": getI18nString("fullscreen.properties_panel.color_picker.color_format.aria_label")
-      }), jsx(mc, {
+      }), jsx(SelectContainer, {
         children: l
       })]
     })
@@ -97,7 +97,7 @@ function E({
 function y({
   colorFormat: e
 }) {
-  return jsx(c$, {
+  return jsx(SelectOptionReset, {
     value: String(e),
     children: $$m0.format(e)
   });

@@ -5,7 +5,7 @@ import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { dayjs } from "../905/920142";
 import { getResourceDataOrFallback, createLoadingState, createLoadedState } from "../905/723791";
-import { dl } from "../figma_app/307841";
+import { isDateBeforeAnalyzeDataFlowV2Until } from "../figma_app/307841";
 import { useSeatBillingTermsExperiment } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
 import { FBillingModelType } from "../figma_app/191312";
@@ -61,7 +61,7 @@ export function $$f0(e) {
     isAdminView: r,
     isTermsOfServiceUpdateOn: s
   }) {
-    return !!(e && dl({
+    return !!(e && isDateBeforeAnalyzeDataFlowV2Until({
       date: new Date(e)
     }) && l && i && (t || a) && (r || s));
   }({

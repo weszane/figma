@@ -2,7 +2,7 @@ import { PureComponent, useCallback, useId, useMemo, useRef, useState } from "re
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { useUniqueId } from "../905/27228";
-import { A as _$$A3 } from "../905/27250";
+import { LibraryStatsTable } from "../905/27250";
 import { KindEnum } from "../905/129884";
 import { Tabs } from "../905/150656";
 import { TrackedLink } from "../905/160095";
@@ -11,15 +11,15 @@ import { Label } from "../905/270045";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { RecordingScrollContainer } from "../905/347284";
 import { selectCurrentUser } from "../905/372672";
-import { l as _$$l, n as _$$n } from "../905/402643";
+import { LibraryTypeIndex, LibraryTypeString } from "../905/402643";
 import { TrackingWrapper } from "../905/414363";
 import { IconButton } from "../905/443068";
 import { LoadingSpinner } from "../905/443820";
 import { analyticsEventManager } from "../905/449184";
-import { bL, c$, DZ, mc, zW } from "../905/493196";
+import { SelectGroupLabel, SelectOptionReset, SelectOption, SelectContainer, SelectGroup } from "../905/493196";
 import { registerTooltip } from "../905/524523";
 import { r as _$$r } from "../905/571562";
-import { h as _$$h } from "../905/589458";
+import { DSASelect } from "../905/589458";
 import { getFeatureFlags } from "../905/601108";
 import { fX, Im } from "../905/627262";
 import { DSAApiServiceInstance } from "../905/669853";
@@ -37,7 +37,7 @@ import { postUserFlag } from "../905/985254";
 import { resourceUtils } from "../905/989992";
 import { A as _$$A2 } from "../1617/380980";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { MM, ms, rr } from "../figma_app/236327";
+import { CheckableOptionComponent, DropdownContainer, TrackedCheckableOption } from "../figma_app/236327";
 import { nZ, ue } from "../figma_app/277330";
 import { throwTypeError } from "../figma_app/465776";
 import { getUserLocale } from "../figma_app/514043";
@@ -75,15 +75,15 @@ function b({
   numItems: t
 }) {
   switch (e) {
-    case _$$n.PRODUCT_COMPONENTS:
+    case LibraryTypeString.PRODUCT_COMPONENTS:
       return renderI18nText("design_systems.libraries_modal.plural.num_library_components_shown", {
         numItems: t
       });
-    case _$$n.STYLES:
+    case LibraryTypeString.STYLES:
       return renderI18nText("design_systems.libraries_modal.plural.num_library_styles_shown", {
         numItems: t
       });
-    case _$$n.VARIABLES:
+    case LibraryTypeString.VARIABLES:
       return renderI18nText("design_systems.libraries_modal.plural.num_library_variables_shown", {
         numItems: t
       });
@@ -124,11 +124,11 @@ function R({
   let A = useMemo(() => {
     if (!getFeatureFlags().dsa_styles_variables_ui) return renderI18nText("design_systems.libraries_modal.component_insertions");
     switch (e) {
-      case _$$n.PRODUCT_COMPONENTS:
+      case LibraryTypeString.PRODUCT_COMPONENTS:
         return renderI18nText("design_systems.libraries_modal.component_insertions");
-      case _$$n.STYLES:
+      case LibraryTypeString.STYLES:
         return renderI18nText("design_systems.libraries_modal.style_insertions");
-      case _$$n.VARIABLES:
+      case LibraryTypeString.VARIABLES:
         return renderI18nText("design_systems.libraries_modal.variable_insertions");
     }
   }, [e]);
@@ -154,7 +154,7 @@ function R({
       className: "dsa_file_view_analytics_header--libraryComparison--i1HxB text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: [s && jsx("span", {
         className: "dsa_file_view_analytics_header--comparisonDot--Ftd-Z"
-      }), getFeatureFlags().dse_fpl_wave_1 ? jsx(_$$h, {
+      }), getFeatureFlags().dse_fpl_wave_1 ? jsx(DSASelect, {
         labelContent: renderI18nText("design_systems.libraries_modal.compare_with"),
         value: s ?? void 0,
         onChange: E,
@@ -173,13 +173,13 @@ function R({
             children: jsx(_$$r, {})
           })]
         }), jsx("div", {
-          children: k(m) && jsxs(ms, {
+          children: k(m) && jsxs(DropdownContainer, {
             className: "dsa_file_view_analytics_header--dropdown--5HdGZ",
-            children: [jsx(MM, {
+            children: [jsx(CheckableOptionComponent, {
               onClick: l,
               checked: s == null,
               children: renderI18nText("design_systems.libraries_modal.none")
-            }, "none"), h.map(e => jsx(rr, {
+            }, "none"), h.map(e => jsx(TrackedCheckableOption, {
               onClick: _(e),
               innerText: "DS Analytics Compare Libraries",
               checked: s === e.library_file_key,
@@ -605,55 +605,55 @@ function eE({
     fileKey: e ?? "",
     numDays: t
   }), {
-    enabled: (!getFeatureFlags().dsa_styles_variables_ui || i === _$$n.PRODUCT_COMPONENTS) && !!e
+    enabled: (!getFeatureFlags().dsa_styles_variables_ui || i === LibraryTypeString.PRODUCT_COMPONENTS) && !!e
   });
   let [a] = setupResourceAtomHandler(k9({
     fileKey: e ?? "",
     numDays: t
   }), {
-    enabled: (!getFeatureFlags().dsa_styles_variables_ui || i === _$$n.PRODUCT_COMPONENTS) && !!e
+    enabled: (!getFeatureFlags().dsa_styles_variables_ui || i === LibraryTypeString.PRODUCT_COMPONENTS) && !!e
   });
   let [s] = setupResourceAtomHandler(DQ({
     fileKey: e ?? ""
   }), {
-    enabled: !!e && getFeatureFlags().dsa_styles_variables_ui && i === _$$n.STYLES
+    enabled: !!e && getFeatureFlags().dsa_styles_variables_ui && i === LibraryTypeString.STYLES
   });
   let [o] = setupResourceAtomHandler(y$({
     fileKey: e ?? ""
   }), {
-    enabled: !!e && getFeatureFlags().dsa_styles_variables_ui && i === _$$n.VARIABLES
+    enabled: !!e && getFeatureFlags().dsa_styles_variables_ui && i === LibraryTypeString.VARIABLES
   });
   let l = resourceUtils.all([n, a]);
   let c = useMemo(() => {
     if (!getFeatureFlags().dsa_styles_variables_ui) return n.data;
     switch (i) {
-      case _$$n.PRODUCT_COMPONENTS:
+      case LibraryTypeString.PRODUCT_COMPONENTS:
         return n.data;
-      case _$$n.STYLES:
+      case LibraryTypeString.STYLES:
         return fX(s.data?.weekly_insertions);
-      case _$$n.VARIABLES:
+      case LibraryTypeString.VARIABLES:
         return fX(o.data?.weekly_insertions);
     }
   }, [i, n, s, o]);
   let u = useMemo(() => {
     if (!getFeatureFlags().dsa_styles_variables_ui) return a.data;
     switch (i) {
-      case _$$n.PRODUCT_COMPONENTS:
+      case LibraryTypeString.PRODUCT_COMPONENTS:
         return a.data;
-      case _$$n.STYLES:
+      case LibraryTypeString.STYLES:
         return Im(s.data?.teams, t);
-      case _$$n.VARIABLES:
+      case LibraryTypeString.VARIABLES:
         return Im(o.data?.teams, t);
     }
   }, [i, a, s, o, t]);
   let p = useMemo(() => {
     if (!getFeatureFlags().dsa_styles_variables_ui) return l.status;
     switch (i) {
-      case _$$n.PRODUCT_COMPONENTS:
+      case LibraryTypeString.PRODUCT_COMPONENTS:
         return l.status;
-      case _$$n.STYLES:
+      case LibraryTypeString.STYLES:
         return s.status;
-      case _$$n.VARIABLES:
+      case LibraryTypeString.VARIABLES:
         return o.status;
     }
   }, [i, l, s, o]);
@@ -1143,9 +1143,9 @@ function eq({
   libraryFile: o
 }) {
   switch (t.type) {
-    case _$$n.PRODUCT_COMPONENTS:
+    case LibraryTypeString.PRODUCT_COMPONENTS:
       let l = {
-        type: _$$l.PRODUCT_COMPONENTS,
+        type: LibraryTypeIndex.PRODUCT_COMPONENTS,
         items: t.items
       };
       return jsx("div", {
@@ -1157,9 +1157,9 @@ function eq({
           onScrollTo: s
         })
       });
-    case _$$n.STYLES:
+    case LibraryTypeString.STYLES:
       let d = {
-        type: _$$l.STYLES,
+        type: LibraryTypeIndex.STYLES,
         items: t.items
       };
       return jsx("div", {
@@ -1171,13 +1171,13 @@ function eq({
           onScrollTo: s
         })
       });
-    case _$$n.VARIABLES:
+    case LibraryTypeString.VARIABLES:
       let c = {
-        type: _$$l.VARIABLES,
+        type: LibraryTypeIndex.VARIABLES,
         items: t.items
       };
       let u = {
-        type: _$$l.VARIABLE_MODES,
+        type: LibraryTypeIndex.VARIABLE_MODES,
         items: t.modeItems
       };
       return jsx(e$, {
@@ -1222,18 +1222,18 @@ function e$({
     });
   }, [g, h, d, l, c]);
   let b = useMemo(() => h == null ? e : {
-    type: _$$l.VARIABLES,
+    type: LibraryTypeIndex.VARIABLES,
     items: e.items.filter(e => e.variableCollectionKey === h)
   }, [e, h]);
   let v = useMemo(() => h == null ? t : {
-    type: _$$l.VARIABLE_MODES,
+    type: LibraryTypeIndex.VARIABLE_MODES,
     items: t.items.filter(e => e.collectionKey === h)
   }, [t, h]);
   let [I, E, x] = Tabs.useTabs({
     variables: !0,
     modes: !0
   });
-  let S = x.activeTab === "modes" ? _$$l.VARIABLE_MODES : _$$l.VARIABLES;
+  let S = x.activeTab === "modes" ? LibraryTypeIndex.VARIABLE_MODES : LibraryTypeIndex.VARIABLES;
   return jsxs(Fragment, {
     children: [jsx(Yu, {
       tableType: S
@@ -1254,16 +1254,16 @@ function e$({
           className: "library_item_stats_by_asset--dropdownLabel--pciWg text--fontPos11--2LvXf text--_fontBase--QdLsd",
           htmlFor: A,
           children: getI18nString("design_systems.libraries_modal.collection")
-        }), jsxs(bL, {
+        }), jsxs(SelectGroupLabel, {
           value: h,
           onChange: y,
-          children: [jsx(DZ, {
+          children: [jsx(SelectOption, {
             id: A,
             children: _?.name ?? renderI18nText("design_systems.libraries_modal.all")
-          }), jsxs(mc, {
-            children: [jsx(zW, {
+          }), jsxs(SelectContainer, {
+            children: [jsx(SelectGroup, {
               children: renderI18nText("design_systems.libraries_modal.all")
-            }), i.map(e => jsx(c$, {
+            }), i.map(e => jsx(SelectOptionReset, {
               value: e.key,
               children: e.name
             }, e.key))]
@@ -1359,7 +1359,7 @@ export function $$eJ0({
           onStyleClick: l,
           onVariableClick: m,
           onScrollTo: C
-        }) : jsx(_$$A3, {
+        }) : jsx(LibraryStatsTable, {
           itemStats: itemsList.items,
           duration: t,
           viewItem: o,

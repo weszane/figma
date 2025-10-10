@@ -1,42 +1,61 @@
-import { desktopAPIInstance } from "../figma_app/876459";
-import { logInfo } from "../905/714362";
-import { filterSuggestions, transformLocaleCode } from "../905/927060";
-export async function $$s0() {
+import { logInfo } from "../905/714362"
+import { filterSuggestions, transformLocaleCode } from "../905/927060"
+// Refactored code: Renamed variables and functions for clarity, added TypeScript types, improved readability
+import { desktopAPIInstance } from "../figma_app/876459"
+
+// Check if the desktop app supports spell checking by fetching available languages
+export async function checkDesktopSpellCheckSupport(): Promise<boolean> {
   if (desktopAPIInstance) {
-    let e = await desktopAPIInstance.spellingGetLanguages();
+    const languages = await desktopAPIInstance.spellingGetLanguages()
     logInfo("Desktop app spellcheck support check", "spellingGetLanguages", {
-      type: typeof e,
-      isArray: Array.isArray(e),
-      isNull: null === e,
-      isUndefined: void 0 === e
-    });
-    return !!e;
+      type: typeof languages,
+      isArray: Array.isArray(languages),
+      isNull: languages === null,
+      isUndefined: undefined === languages,
+    })
+    return !!languages
   }
-  return !1;
+  return false
 }
-export class $$o1 {
+
+// Desktop spell checker implementation
+export class DesktopSpellChecker {
+  name: string
+  language: string
+
   constructor() {
-    this.name = "Desktop";
-    this.language = "";
+    this.name = "Desktop"
+    this.language = ""
   }
-  async initialize(e, t) {
-    this.setLanguage(e);
-    await desktopAPIInstance.spellingIgnore(t || []);
+
+  // Initialize spell checker with language and ignored words
+  async initialize(language: string, ignoredWords?: string[]): Promise<void> {
+    this.setLanguage(language)
+    await desktopAPIInstance.spellingIgnore(ignoredWords || [])
   }
-  async getSuggestionsForWord(e) {
-    return await desktopAPIInstance.spellingSuggest(e, this.language);
+
+  // Get spelling suggestions for a word
+  async getSuggestionsForWord(word: string): Promise<string[]> {
+    return await desktopAPIInstance.spellingSuggest(word, this.language)
   }
-  async spellCheckText(e) {
-    let t = await desktopAPIInstance.spellingCheckSpelling(e, this.language);
-    return filterSuggestions(e, t);
+
+  // Spell check a text and return filtered suggestions
+  async spellCheckText(text: string): Promise<any> {
+    const spellingResults = await desktopAPIInstance.spellingCheckSpelling(text, this.language)
+    return filterSuggestions(text, spellingResults)
   }
-  async setLanguage(e) {
-    this.language = transformLocaleCode(e);
-    return !0;
+
+  // Set the language for spell checking
+  async setLanguage(languageCode: string): Promise<boolean> {
+    this.language = transformLocaleCode(languageCode)
+    return true
   }
-  async addWords(e) {
-    await desktopAPIInstance.spellingIgnore(e, this.language);
+
+  // Add words to the ignore list
+  async addWords(words: string[]): Promise<void> {
+    await desktopAPIInstance.spellingIgnore(words, this.language)
   }
 }
-export const V = $$s0;
-export const f = $$o1;
+
+export const V = checkDesktopSpellCheckSupport
+export const f = DesktopSpellChecker

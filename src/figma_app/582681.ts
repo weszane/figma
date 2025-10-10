@@ -10,7 +10,7 @@ import { Label } from "../905/270045";
 import { InputComponent } from "../905/185998";
 import { useTheme } from "../905/289770";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { trackAccessibilityEvent, AccessibilityActionType } from "../905/693155";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { Fj, jI } from "../905/763714";
@@ -29,7 +29,7 @@ export let $$C0 = registerModal(function ({
 }) {
   let [r, x] = useScreenReaderManager();
   let [C, w] = useAtomValueAndSetter(Fj);
-  let O = Xr(jI);
+  let O = useSetAtom(jI);
   let R = setupAutofocusHandler();
   let L = useDispatch<AppDispatch>();
   let P = useSelector(e => e.screenreader.errorType);

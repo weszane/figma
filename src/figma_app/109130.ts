@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { ServiceCategories } from "../905/165054";
-import { atom, Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
+import { atom, useSetAtom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { z } from "../905/239603";
 import o from "../vendor/260986";
 import { useDebouncedCallback } from "use-debounce";
@@ -24,7 +24,7 @@ export function $$S1() {
   let r = usePublishedPlugins();
   let o = usePluginedWidgets();
   let l = useCurrentFileKey();
-  let S = Xr($$I2);
+  let S = useSetAtom($$I2);
   let v = useDispatch<AppDispatch>();
   let A = [];
   let x = [];

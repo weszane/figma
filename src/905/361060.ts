@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { useDropdownState } from "../905/848862";
@@ -73,7 +73,7 @@ function g({
     focusContainerOnMount: !0,
     type: DropdownType.MATCH_BACKGROUND,
     propagateCloseClick: !0,
-    children: $$m1.map(t => jsx(c$, {
+    children: $$m1.map(t => jsx(OptionComponent, {
       className: "publishing_metadata_scaling_mode_select_ui3--singleOption--ZE6u3",
       onClick: i => {
         i.preventDefault();

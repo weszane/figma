@@ -1,11 +1,11 @@
 import { useRef, useCallback, useEffect } from "react";
 import { PanelType } from "../figma_app/763686";
-import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { useSetAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { O1, KD } from "../figma_app/317394";
 import { _4 } from "../figma_app/32128";
 import { sitesViewSetterAtomFamily, genericAtomFamily1, booleanAtomFamily, ViewActionType } from "../figma_app/115923";
 export function $$d0() {
-  let e = Xr(sitesViewSetterAtomFamily);
+  let e = useSetAtom(sitesViewSetterAtomFamily);
   let [t, r] = useAtomValueAndSetter(genericAtomFamily1);
   let [d, c] = useAtomValueAndSetter(booleanAtomFamily);
   let u = useRef(null);

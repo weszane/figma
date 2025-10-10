@@ -34,7 +34,7 @@ import { BP, hF, QK, sC, BG, Kw, X8 } from "../figma_app/100987";
 import { l as _$$l } from "../figma_app/603241";
 import { R as _$$R2 } from "../905/726507";
 import { getSingletonSceneGraph } from "../905/700578";
-import { useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import X from "../vendor/415955";
 import $ from "../vendor/128080";
 import { M as _$$M } from "../figma_app/634148";
@@ -75,15 +75,15 @@ import { dayjs } from "../905/920142";
 import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { Fy, mp } from "../figma_app/579169";
-import { N as _$$N2 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
 import { GridOnboarding } from "../figma_app/6204";
 import { e as _$$e2 } from "../905/810361";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { m7, Hh } from "../figma_app/386160";
 import { A as _$$A2 } from "../svg/179975";
 import { A as _$$A3 } from "../svg/299062";
@@ -462,7 +462,7 @@ function es(e) {
   let d = Fp();
   let u = useRef(0);
   let h = useRef(new Map());
-  let g = Xr(Md);
+  let g = useSetAtom(Md);
   let [m, x] = useAtomValueAndSetter(_$$Kl);
   let f = [];
   s !== minMaxApi.value && f.push(vC);
@@ -1094,9 +1094,9 @@ function tl() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: GridOnboarding,
-    priority: _$$N2.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [e, t]);
   useSingleEffect(() => {
     show({
@@ -1155,9 +1155,9 @@ function ta() {
     } = e;
     return {
       showMigrationUi: containsStacksNeedingAlignmentMigration,
-      actionEnabledStackSelection: Yh(appModel, "stack-selection"),
-      actionEnabledMultiStackSelection: Yh(appModel, "run-multi-stack-auto-layout"),
-      actionEnabledUnstackSelection: Yh(appModel, "unstack-selection"),
+      actionEnabledStackSelection: isActionEnabled(appModel, "stack-selection"),
+      actionEnabledMultiStackSelection: isActionEnabled(appModel, "run-multi-stack-auto-layout"),
+      actionEnabledUnstackSelection: isActionEnabled(appModel, "unstack-selection"),
       propertiesPanelShouldShowRemoveAutoLayout,
       propertiesPanelShouldShowAddAutoLayout,
       wrappingEnabled: ("HORIZONTAL" === stackMode || isInvalidValue(stackMode)) && ("WRAP" === stackWrap || isInvalidValue(stackWrap))

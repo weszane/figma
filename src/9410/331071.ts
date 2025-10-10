@@ -240,7 +240,7 @@ import { canPerformAction } from '../figma_app/12796';
 import { O as _$$O4, y as _$$y3 } from '../figma_app/13082';
 // import { ImageToolsBindings } from '../figma_app/13528'
 import { lg as _$$lg2, lH as _$$lH, Dk } from '../figma_app/18582';
-import { atom, atomStoreManager, useResetAtom, createLocalStorageAtom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, atomStoreManager, useResetAtom, createLocalStorageAtom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { Pt as _$$Pt2, NV, OX, qu, x2, xZ } from '../figma_app/33586';
 import { ms } from '../figma_app/38430';
 import { useLatestRef } from '../figma_app/922077';
@@ -294,7 +294,7 @@ import { m as _$$m2 } from '../figma_app/321561';
 import { dL as _$$dL, el as _$$el, _V, KY } from '../figma_app/322845';
 import { SortOptions } from '../figma_app/324237';
 import { CN, FL, MR, NY, Vl, w8, Y6 } from '../figma_app/347120';
-import { c1, vg, Yh } from '../figma_app/357047';
+import { getKeyboardShortcut, isActionEnabledProperty, isActionEnabled } from '../figma_app/357047';
 import { nj as _$$nj, XG } from '../figma_app/360824';
 import { Kh } from '../figma_app/370763';
 import { a as _$$a } from '../figma_app/380422';
@@ -435,7 +435,7 @@ function eP() {
   return selectWithShallowEqual(e => {
     let t = {};
     for (let i in e.mirror.appModel) {
-      vg(i) && (t[i] = e.mirror.appModel[i]);
+      isActionEnabledProperty(i) && (t[i] = e.mirror.appModel[i]);
       i === 'isReadOnly' && (t.isReadOnly = e.mirror.appModel.isReadOnly);
     }
     return t;
@@ -1420,7 +1420,7 @@ function ig() {
   let e = useSelector(e => e.mirror?.appModel);
   return (t, i, r = !1) => {
     let n = t[i];
-    if (n && (r || !n.disabled && (!n.action || Yh(e, i)))) return n;
+    if (n && (r || !n.disabled && (!n.action || isActionEnabled(e, i)))) return n;
   };
 }
 function i_(e) {
@@ -6455,7 +6455,7 @@ function ot({
     searchSynonyms: s,
     quickAction: {
       beforeModuleOpen: () => {
-        Yh(debugState.getState().mirror.appModel, e) && J7(t);
+        isActionEnabled(debugState.getState().mirror.appModel, e) && J7(t);
       },
       alwaysEnabled: !0,
       module: {
@@ -6553,7 +6553,7 @@ let oi = [{
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
       B3(_$$JT.SHORTEN_TEXT);
-      Yh(debugState.getState().mirror.appModel, _$$JT.SHORTEN_TEXT) && _$$Ag(_$$JT.SHORTEN_TEXT, _$$$4, {
+      isActionEnabled(debugState.getState().mirror.appModel, _$$JT.SHORTEN_TEXT) && _$$Ag(_$$JT.SHORTEN_TEXT, _$$$4, {
         featureType: _$$JT.SHORTEN_TEXT,
         source: 'quick-actions'
       });
@@ -7062,7 +7062,7 @@ let oi = [{
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
-      if (B3(_$$JT.REMOVE_BACKGROUND), Yh(debugState.getState().mirror.appModel, _$$JT.REMOVE_BACKGROUND)) {
+      if (B3(_$$JT.REMOVE_BACKGROUND), isActionEnabled(debugState.getState().mirror.appModel, _$$JT.REMOVE_BACKGROUND)) {
         let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
         _$$Ag(_$$JT.REMOVE_BACKGROUND, _$$J2, {
           source: 'quick-actions',
@@ -7090,7 +7090,7 @@ let oi = [{
     },
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
-      if (B3(_$$JT.UPSCALE_IMAGE), Yh(debugState.getState().mirror.appModel, _$$JT.UPSCALE_IMAGE)) {
+      if (B3(_$$JT.UPSCALE_IMAGE), isActionEnabled(debugState.getState().mirror.appModel, _$$JT.UPSCALE_IMAGE)) {
         let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
         _$$Ag(_$$JT.UPSCALE_IMAGE, _$$r3, {
           source: 'quick-actions',
@@ -7120,7 +7120,7 @@ let oi = [{
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
       B3(_$$JT.AUTO_RENAME_LAYERS);
-      Yh(debugState.getState().mirror.appModel, _$$JT.AUTO_RENAME_LAYERS) && _$$Ag(_$$JT.AUTO_RENAME_LAYERS, renameLayers, {
+      isActionEnabled(debugState.getState().mirror.appModel, _$$JT.AUTO_RENAME_LAYERS) && _$$Ag(_$$JT.AUTO_RENAME_LAYERS, renameLayers, {
         source: ActionType.QUICK_ACTIONS,
         overwriteNames: !1
       });
@@ -7284,7 +7284,7 @@ let oi = [{
         }
       }));
       B3(_$$JT.MAGIC_LINK);
-      Yh(debugState.getState().mirror.appModel, _$$JT.MAGIC_LINK) && _$$Ag(_$$JT.MAGIC_LINK, _$$e4, {});
+      isActionEnabled(debugState.getState().mirror.appModel, _$$JT.MAGIC_LINK) && _$$Ag(_$$JT.MAGIC_LINK, _$$e4, {});
     }
   },
   iconType: jsx(_$$B5, {}),
@@ -7350,7 +7350,7 @@ let oi = [{
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
       B3(_$$JT.IMAGE_TO_DESIGN);
-      Yh(debugState.getState().mirror.appModel, _$$JT.IMAGE_TO_DESIGN) && _$$Ag(_$$JT.IMAGE_TO_DESIGN, sX, {});
+      isActionEnabled(debugState.getState().mirror.appModel, _$$JT.IMAGE_TO_DESIGN) && _$$Ag(_$$JT.IMAGE_TO_DESIGN, sX, {});
     }
   },
   searchSynonyms: ['convert image to layers', 'make image editable', 'convert image to design', 'generate design from image', 'screenshot to design', 'picture to design']
@@ -8018,7 +8018,7 @@ function oF({
       }
     });
   }, [b, _, x, u, push, t, E, m]);
-  let w = e.shortcutText || c1(f, d);
+  let w = e.shortcutText || getKeyboardShortcut(f, d);
   let j = e.name === 'plugins-menu-item' && !!e.itemParameterArgs && e.itemParameterArgs.parameters.length > 0;
   let I = YT(e);
   let k = usePublishedPlugins();
@@ -8376,7 +8376,7 @@ function oB({
                 let t = getSingletonSceneGraph().get(e);
                 return t?.isSlide;
               }).length > 0;
-              let h = Yh(e, 'send-to-make-from-design');
+              let h = isActionEnabled(e, 'send-to-make-from-design');
               if (n.length === 0 || p) {
                 c = [_$$JT.GENERATE_IMAGE, _$$JT.REMOVE_BACKGROUND, _$$JT.UPSCALE_IMAGE, _$$JT.EDIT_IMAGE, _$$JT.AUTO_RENAME_LAYERS, _$$JT.CONTENT_FILL, _$$JT.FIND_INSPIRATION, _$$JT.FIRST_DRAFT, _$$JT.FIRST_DRAFT_FINE_TUNE, _$$JT.MAGIC_LINK, _$$JT.MAKE_EDITS, _$$JT.SLIDES_GENERATE_SPEAKER_NOTES, _$$JT.SLIDES_REWRITE_TEXT, _$$JT.REWRITE_TEXT, _$$JT.SHORTEN_TEXT, _$$JT.TRANSLATE_TEXT, _$$JT.WHITEBOARD_GENERATE_CONTENT, _$$JT.SUMMARIZE_STICKIES, _$$JT.SORT_STICKIES_BY_TOPIC, _$$JT.MIND_MAP_GENERATE_IDEAS];
                 o && c.push(OZ);
@@ -8407,7 +8407,7 @@ function oB({
                     if (i.action === _$$JT.GENERATE_IMAGE) return 1;
                   }
                 }(s, e, t) ?? u.sort('', _g(e).searchItem, _g(t).searchItem));
-                let f = Object.values(d).filter(t => Yh(e, t.name || t.action || '') && !p.includes(t) && !t.searchOnly && !(t.featureFlags && t.featureFlags.includes('internal_only_debug_tools')) && _$$y('', _$$n2(t), {
+                let f = Object.values(d).filter(t => isActionEnabled(e, t.name || t.action || '') && !p.includes(t) && !t.searchOnly && !(t.featureFlags && t.featureFlags.includes('internal_only_debug_tools')) && _$$y('', _$$n2(t), {
                   actions: frecencyByAction,
                   queries: frecencyByQuery
                 }) > 0).sort((e, t) => u.sort('', _g(e).searchItem, _g(t).searchItem));
@@ -8432,7 +8432,7 @@ function oB({
               return e;
             }
             let r = [];
-            for (let i of (Yh(e, _$$JT.FIRST_DRAFT_MAKE_CHANGES) && r.push([_$$JT.FIRST_DRAFT_MAKE_CHANGES, _$$b4.SUGGESTIONS]), t)) i.action && !i.disabled && r.push([i.action, _$$b4.SUGGESTIONS]);
+            for (let i of (isActionEnabled(e, _$$JT.FIRST_DRAFT_MAKE_CHANGES) && r.push([_$$JT.FIRST_DRAFT_MAKE_CHANGES, _$$b4.SUGGESTIONS]), t)) i.action && !i.disabled && r.push([i.action, _$$b4.SUGGESTIONS]);
             return r;
           }, [e, t, i]);
         }(e, l);
@@ -10405,7 +10405,7 @@ function dI() {
     defaultViewAssetsTabVisible
   } = gB();
   let [i, r] = useAtomValueAndSetter(Q8);
-  let o = Xr(Rt);
+  let o = useSetAtom(Rt);
   let [l, d] = useAtomValueAndSetter(_$$t6);
   let [u, p] = useAtomValueAndSetter(Lk);
   let {
@@ -10516,7 +10516,7 @@ function dI() {
     })
   }) : void 0;
   let ex = u === AssetTabType.EXTENSIONS;
-  let ey = Xr(FX);
+  let ey = useSetAtom(FX);
   let eb = useId();
   let eC = useLabConfiguration(labConfigurations.quickActionsA11y);
   return jsx(_$$n, {
@@ -10596,7 +10596,7 @@ let dN = (e, t) => {
 };
 function dA() {
   !function () {
-    let e = Xr(P_);
+    let e = useSetAtom(P_);
     let t = useRecentlyUsedPlugins();
     let i = useRecentlyUsedWidgets();
     let {
@@ -10660,7 +10660,7 @@ function dA() {
       });
     }, [loaded, _, e]);
   }();
-  let e = Xr(Bu);
+  let e = useSetAtom(Bu);
   let t = useAtomWithSubscription(_$$rE);
   let i = useAtomWithSubscription(_$$dd);
   useSingleEffect(() => (e(!0), i && dN(i, t || void 0), () => {

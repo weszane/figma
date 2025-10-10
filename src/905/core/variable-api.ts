@@ -12,7 +12,7 @@ import { u as _$$u } from '../816730';
 import { Ot } from '../850476';
 import { ey as _$$ey } from '../859698';
 import { d5, QO, Y4 } from '../888985';
-import { zl } from '../../figma_app/27355';
+import { atomStoreManager } from '../../figma_app/27355';
 import { Ae, gK } from '../../figma_app/198712';
 import { gr, sD } from '../../figma_app/243058';
 import { GA, Zt } from '../../figma_app/349248';
@@ -592,7 +592,7 @@ async function rU(variableCollectionKey) {
     variableCollectionKey
   });
   const collectionResult = (await QO(queryParams, (resolve, reject) => {
-    const cachedCollection = zl.get<VariableResult>(queryParams);
+    const cachedCollection = atomStoreManager.get<VariableResult>(queryParams);
     if (cachedCollection.status === 'loaded') {
       resolve(cachedCollection);
     } else if (cachedCollection.status === 'errors') {
@@ -694,7 +694,7 @@ async function fetchAndProcessVariableData(variableKey) {
     key: variableKey
   });
   const variableResult = (await QO(queryParams, (resolve, reject) => {
-    const cachedVariable = zl.get<LibraryResult>(queryParams);
+    const cachedVariable = atomStoreManager.get<LibraryResult>(queryParams);
     if (cachedVariable.status === 'loaded') {
       resolve(cachedVariable);
     } else if (cachedVariable.status === 'errors') {

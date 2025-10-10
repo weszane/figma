@@ -17,7 +17,7 @@ import { WithTrackedButtonLargeWide } from "../figma_app/617427";
 import { LJ } from "../c5e2cae0/793139";
 import { W } from "../c5e2cae0/173602";
 import { Um } from "../figma_app/681712";
-import { IP } from "../figma_app/307841";
+import { isAnalyzeDataFlowV2Expired } from "../figma_app/307841";
 import { _ as _$$_ } from "../c5e2cae0/57596";
 import { O } from "../c5e2cae0/648208";
 import { f as _$$f } from "../c5e2cae0/279252";
@@ -155,7 +155,7 @@ function I({
   tier: e,
   isAnnual: t
 }) {
-  return IP() ? jsx(k, {
+  return isAnalyzeDataFlowV2Expired() ? jsx(k, {
     tier: e,
     isAnnual: t
   }) : e === ProductTierEnum.ORG ? jsx(P, {}) : null;

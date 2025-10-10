@@ -33,7 +33,7 @@ import { FFileType, FOrganizationLevelType } from '../figma_app/191312';
 import { hK } from '../figma_app/211706';
 import { compareProductAccessTypes } from '../figma_app/217457';
 import { useSubscription } from '../figma_app/288654';
-import { sx as _$$sx } from '../figma_app/307841';
+import { isCampfireCartEnabled } from '../figma_app/307841';
 import { renderCheckoutDevModeText } from '../figma_app/361869';
 import { Jh } from '../figma_app/441925';
 import { useCurrentPublicPlan } from '../figma_app/465071';
@@ -403,7 +403,7 @@ function PlanBox({
   planBoxHeaderSize,
   setPlanBoxHeaderSize
 }) {
-  let isCampfire = _$$sx();
+  let isCampfire = isCampfireCartEnabled();
   let planName = function (planValue) {
     switch (planValue) {
       case consumptionPaywallUtils.Plan.STARTER:
@@ -574,7 +574,7 @@ function ConsumptionPaywallModal(e) {
     trigger: upsellSource,
     upgradePoint: _$$h.MonetizationUpgradePoint.CONSUMPTION_UPSELL_MODAL
   });
-  let C = _$$sx();
+  let C = isCampfireCartEnabled();
   let [T, R] = useState(-1);
   let L = consumptionPaywallUtils.getModalTitle(resource, action, multipleResources, editorType as any);
   let F = consumptionPaywallUtils.getModalSubtitle(resource, action, currentPlan, editorType as any ?? FFileType.DESIGN);

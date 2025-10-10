@@ -159,7 +159,7 @@ import { customHistory } from '../905/612521';
 import { getDesignFileUrl } from '../905/612685';
 import { setupThemeContext } from '../905/614223';
 import { ManuallyLabeledRadioOption, ManuallyLabeledRadioRoot } from '../905/618904';
-import { e as _$$e8 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, parseQuerySimple } from '../905/634134';
 import { eo as _$$eo, fp as _$$fp, TX } from '../905/634218';
@@ -286,11 +286,11 @@ import { OrgTrialPendingOverlay, DrawFirstTimeOnboarding, DrawPostConfigNudge, O
 import { bN as WhiteboardAnalyticsTsBindings } from '../figma_app/16595';
 import { $t, lW as _$$lW, FC, JO, y7 } from '../figma_app/20203';
 import { H as _$$H5, U as _$$U } from '../figma_app/23564';
-import { atom, atomStoreManager, createRemovableAtomFamily, mg, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, atomStoreManager, createRemovableAtomFamily, selectAtom, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { createSnapshotComponent, hideElementById, setupLoadablePageManager } from '../figma_app/27829';
 import { assetMirrorInstance } from '../figma_app/31188';
 import { Ye } from '../figma_app/32128';
-import { ZS } from '../figma_app/33126';
+import { currentUserOrgAtom } from '../figma_app/33126';
 import { Y9 as _$$Y4 } from '../figma_app/42724';
 import { i as _$$i2 } from '../figma_app/43065';
 import { ActiveFileUsersForFileView, ClientReloadView, ComponentByKey, DesktopNewTabRecentFilesView, DesktopPushNotificationView, FileCreationDropdownView, FileThumbnail, FolderPageView, LegacySourceStyleData, LibraryPublish, OpenEditorFileData, PinnedFiles, ProductTrialsView, RecentIdleTimeoutSettingChangeView, RecentNetworkControlRejectionView, StyleByKey } from '../figma_app/43951';
@@ -342,7 +342,7 @@ import { zT as LinterBindings } from '../figma_app/192142';
 import { isMainView, selectedViewToPath } from '../figma_app/193867';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { getHubFileVersionOrDefault, getHubFileOrDefault } from '../figma_app/198840';
-import { LK } from '../figma_app/199513';
+import { useFolderQuery } from '../figma_app/199513';
 import { NM } from '../figma_app/204891';
 import { fullscreenConfigInstance } from '../figma_app/204937';
 import { Vm as SummaryBindings } from '../figma_app/209965';
@@ -359,7 +359,7 @@ import { rG as whiteboardThemeTsBindings } from '../figma_app/260703';
 import { J as _$$J6 } from '../figma_app/261874';
 import { X as AutosaveSessionBindings } from '../figma_app/266084';
 import { z5 as autosuggestTextBindings } from '../figma_app/268172';
-import { N as _$$N5 } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
 import { fullscreenCrashStateAtom } from '../figma_app/276445';
@@ -386,7 +386,7 @@ import { variableMirrorManagerInstance } from '../figma_app/345195';
 import { mapRecentFilesAndRepos } from '../figma_app/349248';
 import { p as _$$p2 } from '../figma_app/353099';
 import { u as SitesJsBindings } from '../figma_app/353758';
-import { c1 as _$$c9, Yh } from '../figma_app/357047';
+import { getKeyboardShortcut, isActionEnabled } from '../figma_app/357047';
 import { Tl as DSAWebBindings } from '../figma_app/357433';
 import { $v } from '../figma_app/370763';
 import { r as _$$r5 } from '../figma_app/375550';
@@ -421,7 +421,7 @@ import { LinkPrimitive, LinkPrimitiveProvider } from '../figma_app/496441';
 import { zj } from '../figma_app/502363';
 import { p as _$$p4 } from '../figma_app/502587';
 import { wG } from '../figma_app/504823';
-import { $4 as SpellCheckAPIBindings } from '../figma_app/506364';
+import { spellCheckManager } from '../figma_app/506364';
 import { openFileKeyAtom, selectCurrentFile, useCurrentFileKey, useFileLibraryKeys, useFullscreenViewFile, useRequireOpenFileOrSuspend } from '../figma_app/516028';
 import { D as _$$D6, z as _$$z4 } from '../figma_app/516075';
 import { _c as _$$_c, l0 as _$$l3, wV as _$$wV, BX, Dp, Eo, wF } from '../figma_app/516324';
@@ -1753,7 +1753,7 @@ let ns = {
   AccessibilityBindings: () => AccessibilityBindings,
   HandoffScenegraphBindings: () => HandoffScenegraphBindings,
   RichTextBindings: () => RichTextBindings,
-  SpellCheckAPIBindings: () => SpellCheckAPIBindings,
+  SpellCheckAPIBindings: () => spellCheckManager,
   VariablesBindingsWeb: () => VariablesBindingsWeb,
   VariablesMirrorBindings: () => variableMirrorManagerInstance,
   AssetMirrorBindings: () => assetMirrorInstance,
@@ -3613,7 +3613,7 @@ function so({
   });
 }
 function sl(e) {
-  let t = Xr(_$$lu);
+  let t = useSetAtom(_$$lu);
   useEffect(() => {
     t(e);
   }, [e, t]);
@@ -4406,10 +4406,10 @@ function od() {
   let e = _$$zl(oi);
   let t = useAtomWithSubscription(os);
   let r = useAtomWithSubscription(latestSurveyResponseDateAtom);
-  let n = useAtomWithSubscription(ZS);
-  let i = _$$e8({
+  let n = useAtomWithSubscription(currentUserOrgAtom);
+  let i = useOverlay({
     overlay: OrgAdminSurvey,
-    priority: _$$N5.SURVEY
+    priority: ModalPriority.SURVEY
   }, [t, r, n]);
   useEffect(() => {
     e.completed && (e.reset(), i.show({
@@ -4533,9 +4533,9 @@ function oT() {
   let n = useAtomWithSubscription(_$$nZ);
   let i = useAtomWithSubscription(oy);
   let a = _$$zl(og);
-  let s = _$$e8({
+  let s = useOverlay({
     overlay: OrgCartAbandonSurvey,
-    priority: _$$N5.SURVEY
+    priority: ModalPriority.SURVEY
   }, [e, t, r, n, i]);
   let o = useCallback(() => {
     s.show({
@@ -4611,9 +4611,9 @@ function oL({
     show,
     complete,
     isShowing
-  } = _$$e8({
+  } = useOverlay({
     overlay: OrgTrialExpiredOverlay,
-    priority: _$$N5.URGENT_ALERT
+    priority: ModalPriority.URGENT_ALERT
   }, [t]);
   useEffect(() => {
     isShowing && t.data?.status !== _$$Q4.EXPIRED ? complete() : show({
@@ -4784,9 +4784,9 @@ function oG({
     show,
     complete,
     isShowing
-  } = _$$e8({
+  } = useOverlay({
     overlay: OrgTrialPendingOverlay,
-    priority: _$$N5.URGENT_ALERT
+    priority: ModalPriority.URGENT_ALERT
   }, [t]);
   useEffect(() => {
     isShowing && t.data?.status !== _$$Q4.PENDING ? complete() : show({
@@ -4968,9 +4968,9 @@ function o1({
     show,
     complete,
     isShowing
-  } = _$$e8({
+  } = useOverlay({
     overlay: ProductTrialPendingOverlay,
-    priority: _$$N5.URGENT_ALERT
+    priority: ModalPriority.URGENT_ALERT
   }, [t]);
   return (useEffect(() => {
     isShowing && t.data?.status !== _$$Q4.PENDING ? complete() : show({
@@ -5982,7 +5982,7 @@ let dj = atom(e => {
   }
   return t;
 });
-let dU = mg(dj, e => new Set(e.map(e => e.sourceLibraryKey)), equals);
+let dU = selectAtom(dj, e => new Set(e.map(e => e.sourceLibraryKey)), equals);
 function dB({
   children: e,
   maxSubscriptionsBeforeCleanup: t
@@ -6488,7 +6488,7 @@ function cs() {
 function co() {
   let e = dJ();
   assert(!!e, 'Folder id is undefined');
-  let t = LK(e);
+  let t = useFolderQuery(e);
   let [r] = handleSuspenseRetainRelease(t);
   let n = r.unwrapOr(void 0)?.files;
   assert(!!n, 'Files is undefined');
@@ -6647,7 +6647,7 @@ function cE() {
   let e = useAtomWithSubscription(V1);
   let t = useDeferredValue(e);
   let r = useLabConfiguration(labConfigurations.interopFiles);
-  let n = Xr(V1);
+  let n = useSetAtom(V1);
   let i = useAtomWithSubscription(XU);
   return r ? jsxs(setupThemeContext, {
     mode: 'dark',
@@ -7061,9 +7061,9 @@ function uy(e) {
     isShowing,
     complete,
     uniqueId
-  } = _$$e8({
+  } = useOverlay({
     overlay: DrawFirstTimeOnboarding,
-    priority: _$$N5.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useSingleEffect(() => {
     activeMode !== 'illustration' || illustrationLoading || show({
@@ -7127,9 +7127,9 @@ function uT(e) {
     show,
     isShowing,
     complete
-  } = _$$e8({
+  } = useOverlay({
     overlay: DrawPostConfigNudge,
-    priority: _$$N5.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [r]);
   useEffect(() => {
     let e = getFeatureFlags().ce_il_onboard_nudge;
@@ -7179,9 +7179,9 @@ function uv(e) {
     show,
     isShowing,
     complete
-  } = _$$e8({
+  } = useOverlay({
     overlay: DrawBackToDesignNudge,
-    priority: _$$N5.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let [d, c] = useState(!1);
   useEffect(() => {
@@ -7318,9 +7318,9 @@ function uF() {
     show,
     isShowing,
     complete
-  } = _$$e8({
+  } = useOverlay({
     overlay: DevModeUpgradedPopup,
-    priority: _$$N5.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   let a = _$$W4();
   let s = useCallback(() => {
@@ -7561,8 +7561,8 @@ function ph(e) {
   } = e;
   let i = _$$rb();
   let a = z0();
-  let s = getFilteredFeatureFlags().ce_il_vem_offset_path && Yh(a, 'set-tool-offset-path');
-  let o = getFilteredFeatureFlags().ce_il_simplify && Yh(a, 'set-tool-simplify-vector');
+  let s = getFilteredFeatureFlags().ce_il_vem_offset_path && isActionEnabled(a, 'set-tool-offset-path');
+  let o = getFilteredFeatureFlags().ce_il_simplify && isActionEnabled(a, 'set-tool-simplify-vector');
   let d = mapEditorTypeToProductType(debugState.getState().selectedView.editorType);
   let c = getFilteredFeatureFlags().ce_il_vem_offset_path && jsx(_$$N8, {
     activeToolId,
@@ -7793,7 +7793,7 @@ function pP({
 }) {
   let t = function () {
     !function () {
-      let e = Xr(_$$r5);
+      let e = useSetAtom(_$$r5);
       let t = pN();
       useEffect(() => {
         e(t);
@@ -7876,7 +7876,7 @@ function pP({
             marginLeft: 'var(--spacer-1)',
             color: 'var(--color-text-secondary)'
           },
-          children: _$$c9(r, 'zoom-to-selection')
+          children: getKeyboardShortcut(r, 'zoom-to-selection')
         })]
       })]
     })
@@ -8648,7 +8648,7 @@ function _v({
 }) {
   let r = useLabConfiguration(labConfigurations.interopFiles);
   let n = useAtomWithSubscription(V1);
-  let i = Xr(XU);
+  let i = useSetAtom(XU);
   let a = jsx(conditionalWrapper, {
     condition: r,
     wrapper: e => jsxs(Fragment, {
@@ -9195,7 +9195,7 @@ executeWhenDomReady(async () => {
         HandoffScenegraphBindings: () => HandoffScenegraphBindings,
         RichTextBindings: () => RichTextBindings,
         CanvasSearchBindings: () => CanvasSearchBindings,
-        SpellCheckAPIBindings: () => SpellCheckAPIBindings,
+        SpellCheckAPIBindings: () => spellCheckManager,
         VariablesBindingsWeb: () => VariablesBindingsWeb,
         VariablesMirrorBindings: () => variableMirrorManagerInstance,
         AssetMirrorBindings: () => assetMirrorInstance,

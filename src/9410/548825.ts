@@ -5,7 +5,7 @@ import { v } from "../figma_app/163822";
 import { getSingletonSceneGraph } from "../905/700578";
 import { $convertFromMarkdownString, UNORDERED_LIST, ORDERED_LIST } from "../vendor/693164";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { atomStoreManager, Xr } from "../figma_app/27355";
+import { atomStoreManager, useSetAtom } from "../figma_app/27355";
 import { CLEAR_EDITOR_COMMAND } from "lexical";
 import { logError } from "../905/714362";
 import { JT } from "../figma_app/632248";
@@ -35,7 +35,7 @@ export function $$x5() {
 }
 export function $$y4() {
   let [e] = useLexicalComposerContext();
-  let t = Xr(hD);
+  let t = useSetAtom(hD);
   useEffect(() => {
     t(e);
   }, [e, t]);

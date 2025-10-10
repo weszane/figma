@@ -5,16 +5,16 @@ import { customHistory } from "../905/612521";
 import { clickableBaseLinkTracked, Spacing, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { S as _$$S } from "../905/339549";
+import { RenderRefCheckbox } from "../905/339549";
 import { V8, $c, Wy, Um } from "../figma_app/681712";
-import { sx } from "../figma_app/307841";
+import { isCampfireCartEnabled } from "../figma_app/307841";
 import { useCartOptimizationsExperiment } from "../figma_app/297957";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { L } from "../c5e2cae0/262856";
 import { isAddressEmpty, UpgradeSteps, SubscriptionType } from "../figma_app/831101";
-import { p as _$$p, m as _$$m } from "../figma_app/160942";
+import { isEligibleForPromoReviewOrTeamUpgradeWithPromo, getPricingCalculators } from "../figma_app/160942";
 import { CurrencyFormatter, isNonUsdUserCurrency } from "../figma_app/514043";
 import { HX, PT, Bo, TV, pV, Gn, fK, S as _$$S2 } from "../figma_app/81441";
 function v(e) {
@@ -147,14 +147,14 @@ export function $$E0(e) {
   let T = x.displayName || j;
   let N = x.legalName || j;
   let E = x.billingPeriod === SubscriptionType.STUDENT;
-  let A = !!_$$p(e.selectedView, x);
+  let A = !!isEligibleForPromoReviewOrTeamUpgradeWithPromo(e.selectedView, x);
   let I = A || E;
   let k = x.submitPending || !A && !t;
-  let P = sx();
+  let P = isCampfireCartEnabled();
   let {
     estimatedDesignCost,
     estimatedWhiteboardCost
-  } = _$$m({
+  } = getPricingCalculators({
     currency: e.currency
   });
   let O = x.numWhiteboardEditors;
@@ -244,7 +244,7 @@ export function $$E0(e) {
       }), jsxs("div", {
         children: [finePrint, !A && jsxs("div", {
           className: Gn,
-          children: [jsx(_$$S, {
+          children: [jsx(RenderRefCheckbox, {
             checked: t,
             onChange: e => {
               a(e.currentTarget.checked);

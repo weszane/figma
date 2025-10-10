@@ -10,7 +10,7 @@ import { u as _$$u } from "../905/389684";
 import { createHasAnyStagedAssetsAtomFamily } from "../figma_app/803787";
 import { Lc } from "../figma_app/745458";
 import { LibraryTabEnum } from "../figma_app/633080";
-import { D } from "../figma_app/268271";
+import { TEAM_LIBRARY_IDENTIFIER } from "../figma_app/268271";
 import { KindEnum } from "../905/129884";
 import { getFirstActiveProjectResourceConnection } from "../905/606579";
 import { Xm } from "../905/935570";
@@ -77,7 +77,7 @@ export function $$S0({
       recordingKey: generateRecordingKey(e, "teamLibrary"),
       onClick,
       htmlAttributes: {
-        "data-onboarding-key": D
+        "data-onboarding-key": TEAM_LIBRARY_IDENTIFIER
       },
       children: [createElement(icon), badge ? jsxs("div", {
         className: "library_modal_button--badgeContainer--ebOHQ",
@@ -88,7 +88,7 @@ export function $$S0({
       }) : null]
     }) : jsx(o5, {
       ref: t,
-      "data-onboarding-key": D,
+      "data-onboarding-key": TEAM_LIBRARY_IDENTIFIER,
       "data-tooltip": getI18nString("fullscreen.libraries_button.tooltip.no_updates"),
       "data-tooltip-type": KindEnum.TEXT,
       fallbackSvg: _$$A2,

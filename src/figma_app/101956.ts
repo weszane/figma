@@ -7,7 +7,7 @@ import { ng } from "../figma_app/205827";
 import { isWhiteboardEditingEnabled } from "../905/32091";
 import { a as _$$a } from "../905/692930";
 import { transformAtom, mapAndAggregateResources } from "../905/401885";
-import { _s, KI } from "../figma_app/33126";
+import { currentUserOrgIdAtom, orgDictionaryAtom } from "../figma_app/33126";
 import { Z_, Hh, Vm } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 let $$m3 = transformAtom(Z_, (e, t) => {
@@ -21,7 +21,7 @@ let $$m3 = transformAtom(Z_, (e, t) => {
 });
 let $$g5 = mapAndAggregateResources([Hh], ([e], t) => {
   let r = t(openFileAtom);
-  let n = t(_s) ? null : e;
+  let n = t(currentUserOrgIdAtom) ? null : e;
   return !!r && !!n && !r.teamId && !r.parentOrgId && r.folderId === n;
 });
 let f = createReduxSubscriptionAtomWithState(({
@@ -35,7 +35,7 @@ let b = transformAtom(Vm, (e, t) => {
   let r = t(openFileAtom);
   return r?.teamId ? e?.find(e => e.id === r?.teamId) : null;
 });
-let $$T0 = mapAndAggregateResources([KI, b], ([e, t], r) => {
+let $$T0 = mapAndAggregateResources([orgDictionaryAtom, b], ([e, t], r) => {
   let n = r(openFileAtom);
   let i = n?.parentOrgId ? e[n.parentOrgId] : null;
   let s = t ? {

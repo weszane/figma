@@ -75,9 +75,7 @@ export class CommunityShelfService {
     const slug = e?.urlSlug ? `/${e.urlSlug}` : '';
     return this.CommunityShelvesSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get<{
-      meta: any[];
-    }>(`/api/community_shelves${slug}`, APIParameterUtils.toAPIParameters(e || {})));
+    }) => await i.get<any[]>(`/api/community_shelves${slug}`, APIParameterUtils.toAPIParameters(e || {})));
   }
 
   /**

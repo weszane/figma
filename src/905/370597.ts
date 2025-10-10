@@ -8,7 +8,7 @@ import { s as _$$s } from "../905/551945";
 import { SceneGraphHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager, useSetAtom } from "../figma_app/27355";
 import { useMultiRefCallback } from "../figma_app/272902";
 import { generateRecordingKey, useHandleChangeEvent } from "../figma_app/878298";
 import { trackEventAnalytics } from "../905/449184";
@@ -402,7 +402,7 @@ export function $$ep1({
 function em() {
   let e = useAtomWithSubscription(hO.currentSearchAtom);
   let t = _$$s3(e);
-  let i = Xr(hO.currentSearchAtom);
+  let i = useSetAtom(hO.currentSearchAtom);
   let a = useRef(null);
   let s = _$$U();
   let o = eH();

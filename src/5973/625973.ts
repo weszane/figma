@@ -18,7 +18,7 @@ import { id as _$$id, Bj, fW } from '../905/648693';
 import { iN as _$$iN, Hn, Kx, VS } from '../905/696699';
 import { getSingletonSceneGraph } from '../905/700578';
 import { BlendModeSchema, denormalizeBlendMode, normalizeBlendMode } from '../905/722575';
-import { k as _$$k } from '../905/749197';
+import { DDRenderMode } from '../905/749197';
 import { transformZodSchema } from '../905/797463';
 import { S as _$$S, V as _$$V, parseJSX } from '../905/802325';
 import { defaultSessionLocalIDString, parseSessionLocalID, sessionLocalIDToString } from '../905/871411';
@@ -577,7 +577,7 @@ function J(e) {
   });
 }
 function H(e) {
-  return 'childrenNodes' in e ? e.childrenDisplayOrder === _$$k.DOM || !e.absoluteRenderBounds || e.type === 'BOOLEAN_OPERATION' || e.isStateGroup ? e.childrenNodes : function (e) {
+  return 'childrenNodes' in e ? e.childrenDisplayOrder === DDRenderMode.DOM || !e.absoluteRenderBounds || e.type === 'BOOLEAN_OPERATION' || e.isStateGroup ? e.childrenNodes : function (e) {
     let t = e.absoluteRenderBounds;
     if (!t) return [];
     let i = e.childrenNodes;
@@ -658,7 +658,7 @@ function H(e) {
   }).flat() : [];
 }
 function $(e) {
-  return 'childrenNodes' in e ? e.childrenDisplayOrder === _$$k.DOM ? e.childrenNodes : e.reversedChildrenNodes : [];
+  return 'childrenNodes' in e ? e.childrenDisplayOrder === DDRenderMode.DOM ? e.childrenNodes : e.reversedChildrenNodes : [];
 }
 function W(e, t, i) {
   t in e ? Object.defineProperty(e, t, {

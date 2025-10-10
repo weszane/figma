@@ -80,7 +80,7 @@ import { ResourceStatus } from '../905/663269';
 import { In } from '../905/672640';
 import { textDisplayConfig } from '../905/687265';
 import { navigationRoutes } from '../905/698965';
-import { S3 } from '../905/708054';
+import { CHANGE_PROFILE_HANDLE_MODAL_TYPE } from '../905/708054';
 import { ProductTierEnum, RenewalTermEnum } from '../905/712921';
 import { SvgComponent } from '../905/714743';
 import { getResourceDataOrFallback } from '../905/723791';
@@ -115,7 +115,7 @@ import { d as _$$d2 } from '../7021/966231';
 import { fm } from '../c5e2cae0/453906';
 import { WQ } from '../c5e2cae0/705272';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { useLatestRef } from '../figma_app/922077';
 import { IpAllowlistRangesView, OrgAdminSettingsPage, OrgMfaGuestInfoView, Plugin, OrgWorkspacesWithControlSettingsView, OrgMfaMemberInfoView, OrgSharedSettingView, ToggledDevModeSettingsView } from '../figma_app/43951';
 import { BannerInsetModal } from '../figma_app/59509';
@@ -2510,11 +2510,11 @@ let aH = registerModal(() => {
   let [r, l] = useAtomValueAndSetter(aC);
   let [o, d] = useAtomValueAndSetter(aE);
   let [_, u] = useAtomValueAndSetter(aS);
-  let m = Xr(aT);
-  let p = Xr(aR);
-  let g = Xr(aN);
-  let h = Xr(aI);
-  let b = Xr(aA);
+  let m = useSetAtom(aT);
+  let p = useSetAtom(aR);
+  let g = useSetAtom(aN);
+  let h = useSetAtom(aI);
+  let b = useSetAtom(aA);
   useEffect(() => () => {
     m(null);
     p(null);
@@ -4611,7 +4611,7 @@ export function $$sr0(e) {
     currentValue: org.community_profile_handle ? `@${org.community_profile_handle}` : '',
     onClick: () => {
       $(showModalHandler({
-        type: S3,
+        type: CHANGE_PROFILE_HANDLE_MODAL_TYPE,
         data: {
           orgId: org.id,
           profileId: org.community_profile_id,

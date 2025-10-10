@@ -25,7 +25,7 @@ import { KindEnum } from "../905/129884";
 import { A as _$$A } from "../3850/566892";
 import { E as _$$E } from "../905/370356";
 import { TH } from "../figma_app/95367";
-import { RR } from "../figma_app/307841";
+import { isCampfireModelEnabled } from "../figma_app/307841";
 import { useOneClickAskToEditExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
@@ -133,7 +133,7 @@ function V(e) {
   let a = e.upgradePathway === _$$J.RE_REQUEST_PATHWAY;
   let s = useOneClickAskToEditExperiment(r && e.licenseType === FProductAccessType.DESIGN);
   let o = e.upgradePathway === _$$J.AUTO_PATHWAY || e.upgradePathway === _$$J.ADMIN_AUTO_PATHWAY;
-  let l = RR({
+  let l = isCampfireModelEnabled({
     preferOpenFilePlan: !0
   });
   let d = s();

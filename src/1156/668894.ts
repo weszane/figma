@@ -5,7 +5,7 @@ import { Button } from "../905/521428";
 import { e } from "../905/149844";
 import { textDisplayConfig } from "../905/687265";
 import { stylex } from "@stylexjs/stylex";
-import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { RelativeTimeDisplay } from "../905/986103";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -437,7 +437,7 @@ function Y({
       fileKey: o
     }));
     let v = _$$S();
-    let k = Xr(Kj);
+    let k = useSetAtom(Kj);
     let C = async () => {
       if (!o || !x) {
         console.error("No open file key or organization ID found");

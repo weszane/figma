@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { B } from "../905/872019";
 import { _ as _$$_ } from "../905/862468";
 import { PrototypingTsApi, DesignWorkspace, ActionType } from "../figma_app/763686";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -15,7 +15,7 @@ import { renameLayers } from "../905/281495";
 import { getPropertiesPanelTab, setPropertiesPanelTab, replaceSelection } from "../figma_app/741237";
 import { getObservableValue } from "../figma_app/84367";
 import { trackDefinedFileEventWrapper } from "../figma_app/2590";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { d as _$$d } from "../figma_app/550089";
 import { ft, sT, _U } from "../figma_app/365713";
 import { d_, pD } from "../905/727576";
@@ -59,8 +59,8 @@ function j() {
   useEffect(() => () => {
     state === qy.INITIAL && null !== g.current && setPropertiesPanelTab(g.current);
   }, [state]);
-  let T = Xr(d_);
-  let C = Xr(pD);
+  let T = useSetAtom(d_);
+  let C = useSetAtom(pD);
   let w = useAtomWithSubscription(pD);
   let {
     selectedDisplayAmount,
@@ -184,7 +184,7 @@ function U() {
             name: ExtensionFeatureKey.RENAME_LAYERS_TOAST,
             beforeModuleOpen: () => {
               cT(JT.MAGIC_LINK);
-              Yh(debugState.getState().mirror.appModel, JT.AUTO_RENAME_LAYERS) && Ag(JT.AUTO_RENAME_LAYERS, renameLayers, {
+              isActionEnabled(debugState.getState().mirror.appModel, JT.AUTO_RENAME_LAYERS) && Ag(JT.AUTO_RENAME_LAYERS, renameLayers, {
                 source: ActionType.MAGIC_LINK,
                 overwriteNames: !1
               });
@@ -207,7 +207,7 @@ function U() {
 }
 export function $$B0(e) {
   let t = debugState.dispatch;
-  let r = Yh(debugState.getState().mirror.appModel, JT.MAGIC_LINK);
+  let r = isActionEnabled(debugState.getState().mirror.appModel, JT.MAGIC_LINK);
   $I({
     moduleToOpen: {
       type: "custom",

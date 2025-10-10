@@ -73,7 +73,7 @@ import { mL, UC } from '../905/563637';
 import { FlashActions } from '../905/573154';
 import { demoteEditorRolesAction } from '../905/595507';
 import { getFeatureFlags } from '../905/601108';
-import { e as _$$e3 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { v as _$$v3 } from '../905/621749';
 import { K as _$$K } from '../905/628118';
 import { s as _$$s4 } from '../905/645504';
@@ -94,7 +94,7 @@ import { hideDropdownAction, selectViewAction } from '../905/929976';
 import { styleBuilderInstance } from '../905/941192';
 import { b as _$$b } from '../905/946806';
 import { B as _$$B2 } from '../905/950875';
-import { ck } from '../905/952832';
+import { UserContextScope } from '../905/952832';
 import { V as _$$V2 } from '../905/965990';
 import { TextWithTruncation } from '../905/984674';
 import { RelativeTimeDisplay } from '../905/986103';
@@ -128,10 +128,10 @@ import { UserFieldEnum } from '../figma_app/135698';
 import { b_, Ji, sH } from '../figma_app/149367';
 import { FBillingPeriodType, FOrganizationLevelType, FPlanNameType } from '../figma_app/191312';
 import { toggleFigmaLibrariesThunk, batchDeleteTeamMembers, fetchTeamMembersThunk, setTeamOptimistThunk } from '../figma_app/240735';
-import { N as _$$N2 } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { useSubscription } from '../figma_app/288654';
 import { useSeatManagementWidgetProExperiment, useSeatManagementWidgetExperiment } from '../figma_app/297957';
-import { y3 } from '../figma_app/307841';
+import { isCampfireEducationEnabled } from '../figma_app/307841';
 import { getFutureDateOrNull, hasValidSubscription, isTeamInGracePeriod } from '../figma_app/345997';
 import { p as _$$p3 } from '../figma_app/353099';
 import { z as _$$z2 } from '../figma_app/369596';
@@ -206,7 +206,7 @@ function B({
       className: cssBuilderInstance.flex.flexRow.gap24.py24.px16.justifyStart.$,
       children: [jsx(ER, {
         dispatch: t,
-        entityType: ck.TEAM,
+        entityType: UserContextScope.TEAM,
         entity: e,
         size: 80,
         avatarEditorState: a
@@ -302,9 +302,9 @@ function eJ() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: TeamAdminPeopleTableChangesOverlay,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t]);
   useSingleEffect(() => {
     show({
@@ -1735,9 +1735,9 @@ function an() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: TeamAdminAuthorityOverlay,
-    priority: _$$N2.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   useSingleEffect(() => {
     show();
@@ -2262,7 +2262,7 @@ export function $$aG0(e) {
   }(e.teamId, e.selectedTab);
   let $ = _$$R();
   let G = _$$R2(e.teamId);
-  let z = y3(s?.created_at, s?.last_upgraded_at);
+  let z = isCampfireEducationEnabled(s?.created_at, s?.last_upgraded_at);
   let V = s && (G || e.selectedTab === DashboardSections.SETTINGS && s.pro_team);
   let W = useOpenPlanInvoices(V ? {
     planId: s.id,

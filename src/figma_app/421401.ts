@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef } from "react";
 import { useDispatch } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
-import { gw, rr, wv, ru } from "../figma_app/236327";
+import { DropdownWithScrim, TrackedCheckableOption, SeparatorComponent, TrackedTextOption } from "../figma_app/236327";
 import { V } from "../figma_app/312987";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -60,7 +60,7 @@ export function $$C2(e) {
           children: i
         })]
       })
-    }), t && jsx(gw, {
+    }), t && jsx(DropdownWithScrim, {
       stopScrollPropagation: !0,
       dispatch: e.dispatch,
       className: sI,
@@ -69,15 +69,15 @@ export function $$C2(e) {
         maxDropdownHeight: e => Math.round(.5 * e),
         dropdownChildrenHeight: a,
         children: [!e.hideDefaultOption && jsxs(Fragment, {
-          children: [jsx(rr, {
+          children: [jsx(TrackedCheckableOption, {
             checked: null === e.selectedValue,
             onClick: () => e.updateFilter(null),
             trackingProperties: {
               filterType: e.dropdownType
             },
             children: r
-          }), jsx(wv, {})]
-        }), e.values.map(t => jsx(ru, {
+          }), jsx(SeparatorComponent, {})]
+        }), e.values.map(t => jsx(TrackedTextOption, {
           checked: e.selectedValue === t,
           onClick: () => e.updateFilter(t),
           primaryText: e.getDisplayText(t),
@@ -99,17 +99,17 @@ function O(e) {
   let l = 0;
   let d = e.workspaces.map(t => {
     let r = "WORKSPACE" === e.selectedWorkspace.type && e.selectedWorkspace.workspaceId === t.id;
-    return jsx(rr, {
+    return jsx(TrackedCheckableOption, {
       checked: r,
       onClick: r ? void 0 : () => e.onChange(t),
       children: t.name
     }, t.id);
   });
   l += S * d.length;
-  d.push(jsx(wv, {}, "separator"));
+  d.push(jsx(SeparatorComponent, {}, "separator"));
   l += v;
   let c = "UNASSIGNED" === e.selectedWorkspace.type;
-  d.push(jsx(rr, {
+  d.push(jsx(TrackedCheckableOption, {
     checked: c,
     onClick: c ? void 0 : () => e.onChange(null),
     children: c ? "Unassigned" : "Unassign"
@@ -121,7 +121,7 @@ function O(e) {
     ref: s,
     children: d
   });
-  return jsx(gw, {
+  return jsx(DropdownWithScrim, {
     dispatch: t,
     className: "shared_table--batchActionsSelectorDropdown--FTtYq",
     style: r.data.position,

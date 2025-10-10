@@ -1,21 +1,21 @@
 import { useSelector } from "react-redux";
 import { selectWithShallowEqual } from "../905/103090";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 export function $$s1(e) {
-  return useSelector(t => Yh(t.mirror.appModel, e));
+  return useSelector(t => isActionEnabled(t.mirror.appModel, e));
 }
 export function $$o0(e) {
   return selectWithShallowEqual(t => {
     let r = {};
-    for (let n of e) r[n] = Yh(t.mirror.appModel, n);
+    for (let n of e) r[n] = isActionEnabled(t.mirror.appModel, n);
     return r;
   });
 }
 export function $$l2(e) {
-  return useSelector(t => e.every(e => Yh(t.mirror.appModel, e)));
+  return useSelector(t => e.every(e => isActionEnabled(t.mirror.appModel, e)));
 }
 export function $$d3(e) {
-  return useSelector(t => e.some(e => Yh(t.mirror.appModel, e)));
+  return useSelector(t => e.some(e => isActionEnabled(t.mirror.appModel, e)));
 }
 export const Ku = $$o0;
 export const Zr = $$s1;

@@ -39,7 +39,7 @@ import { FlashActions } from '../905/573154';
 import { getFeatureFlags } from '../905/601108';
 import { profileServiceAPI } from '../905/608932';
 import { customHistory } from '../905/612521';
-import { e as _$$e2 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { WAFImage } from '../905/675859';
 import { textDisplayConfig } from '../905/687265';
 import { TrackingKeyEnum } from '../905/696396';
@@ -96,7 +96,7 @@ import { buildUploadUrl } from '../figma_app/169182';
 import { PayoutMetric, SourceType, StatusType } from '../figma_app/175992';
 import { APIParameterUtils, createMinimalValidator, createPaginatedValidator } from '../figma_app/181241';
 import { DROPDOWN_TYPE_COMMUNITY_PROFILE_MORE_ACTIONS_MENU } from '../figma_app/188152';
-import { N as _$$N2 } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { isResourceHubProfilesEnabled } from '../figma_app/275462';
 import { useSubscription } from '../figma_app/288654';
 import { ResourceWithOptionalContentListSchema } from '../figma_app/306946';
@@ -701,9 +701,9 @@ function to({
   onboardingKey: e
 }) {
   let t = useAtomWithSubscription(tn);
-  let r = _$$e2({
+  let r = useOverlay({
     overlay: CommunityMonetizationMetricsTabOnboarding,
-    priority: _$$N2.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [t]);
   useSingleEffect(() => {
     r.show({

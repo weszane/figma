@@ -41,7 +41,7 @@ import { conditionalFeatureFlag } from '../figma_app/169182';
 import { useAccessibilityFocusManager } from '../figma_app/290668';
 import { vF } from '../figma_app/290870';
 import { Gl, of } from '../figma_app/297733';
-import { c1 } from '../figma_app/357047';
+import { getKeyboardShortcut } from '../figma_app/357047';
 import { kL, Qg } from '../figma_app/404319';
 import { a0, RG, rs } from '../figma_app/440994';
 import { fullscreenValue } from '../figma_app/455680';
@@ -74,8 +74,8 @@ function O({
 function R() {
   let e = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   if (useSelector(e => e.screenreader.enabled)) return null;
-  let t = c1(e, 'open-shortcuts').replace('?', getI18nString('general.question_mark'));
-  let r = c1(e, 'toggle-menu');
+  let t = getKeyboardShortcut(e, 'open-shortcuts').replace('?', getI18nString('general.question_mark'));
+  let r = getKeyboardShortcut(e, 'toggle-menu');
   return jsx(O, {
     children: renderI18nText('fullscreen.toolbar.screenreader_notice_figjam', {
       shortcut: t,

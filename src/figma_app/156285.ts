@@ -4,7 +4,7 @@ import { DistributionType, Thumbnail, NodePropertyCategory, Fullscreen } from ".
 import { defaultSessionLocalIDString, sessionLocalIDToString, defaultSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { atom, createRemovableAtomFamily, useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import c from "../vendor/805353";
 import p from "../vendor/128080";
 import { analyticsEventManager } from "../905/449184";
@@ -181,7 +181,7 @@ export function $$H2() {
   let [i, c] = useAtomValueAndSetter($$G6);
   let u = $$F1();
   let p = useMemo(() => u.filter(e => !e.isSoftDeleted && t.includes(e.guid) && e.guid !== defaultSessionLocalIDString), [t, u]);
-  let _ = Xr(brushStyleAtom);
+  let _ = useSetAtom(brushStyleAtom);
   useEffect(() => {
     if (p.length && !i) {
       let e = p.filter(e => e.type === DistributionType.STRETCH);

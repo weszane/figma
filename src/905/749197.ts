@@ -1,6 +1,11 @@
-export var $$n0;
-(function (e) {
-  e[e.DESIGN = 0] = "DESIGN";
-  e[e.DOM = 1] = "DOM";
-})($$n0 || ($$n0 = {}));
-export const k = $$n0;
+// Refactored enum definition for better readability and type safety
+// Original code name: $$n0
+
+// Define a TypeScript enum for better type safety and readability
+export enum DDRenderMode {
+  DESIGN = 0,
+  DOM = 1,
+}
+
+// Export the enum with the original export name
+export const k = DDRenderMode

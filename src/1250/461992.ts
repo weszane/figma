@@ -8,7 +8,7 @@ import { MAX_DESCRIPTION_LENGTH2 } from "../figma_app/350203";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { Pe } from "../1250/610336";
 import { a as _$$a, z } from "../figma_app/601188";
-import { li, e2 } from "../figma_app/622574";
+import { usePaginatedTeamTemplates, usePaginatedOrgTemplates } from "../figma_app/622574";
 if (443 == require.j) {}
 export function $$p4({
   limit: e = N,
@@ -99,7 +99,7 @@ export function $$h2(e, t, n, a = MAX_DESCRIPTION_LENGTH2) {
   let {
     templatesByTeam,
     isLoading
-  } = li({
+  } = usePaginatedTeamTemplates({
     teamId: t,
     editorType: FFileType.COOPER,
     pageSize: a + 1,
@@ -109,7 +109,7 @@ export function $$h2(e, t, n, a = MAX_DESCRIPTION_LENGTH2) {
   let {
     templatesByTeam: _templatesByTeam,
     isLoading: _isLoading
-  } = li({
+  } = usePaginatedTeamTemplates({
     teamId: t,
     editorType: FFileType.WHITEBOARD,
     pageSize: a + 1,
@@ -119,7 +119,7 @@ export function $$h2(e, t, n, a = MAX_DESCRIPTION_LENGTH2) {
   let {
     templatesByTeam: _templatesByTeam2,
     isLoading: _isLoading2
-  } = li({
+  } = usePaginatedTeamTemplates({
     teamId: t,
     editorType: FFileType.SLIDES,
     pageSize: a + 1,
@@ -129,7 +129,7 @@ export function $$h2(e, t, n, a = MAX_DESCRIPTION_LENGTH2) {
   let {
     templatesByTeam: _templatesByTeam3,
     isLoading: _isLoading3
-  } = li({
+  } = usePaginatedTeamTemplates({
     teamId: t,
     editorType: FFileType.FIGMAKE,
     pageSize: a + 1,
@@ -164,7 +164,7 @@ export function $$b1(e, t, n, a = MAX_DESCRIPTION_LENGTH2) {
   let {
     teamTemplates,
     isLoading
-  } = e2({
+  } = usePaginatedOrgTemplates({
     orgId: t,
     editorType: FFileType.COOPER,
     areWorkspacesEnabled: r,
@@ -176,7 +176,7 @@ export function $$b1(e, t, n, a = MAX_DESCRIPTION_LENGTH2) {
   let {
     teamTemplates: _teamTemplates,
     isLoading: _isLoading4
-  } = e2({
+  } = usePaginatedOrgTemplates({
     orgId: t,
     editorType: FFileType.WHITEBOARD,
     areWorkspacesEnabled: r,
@@ -188,7 +188,7 @@ export function $$b1(e, t, n, a = MAX_DESCRIPTION_LENGTH2) {
   let {
     teamTemplates: _teamTemplates2,
     isLoading: _isLoading5
-  } = e2({
+  } = usePaginatedOrgTemplates({
     orgId: t,
     editorType: FFileType.SLIDES,
     areWorkspacesEnabled: r,
@@ -200,7 +200,7 @@ export function $$b1(e, t, n, a = MAX_DESCRIPTION_LENGTH2) {
   let {
     teamTemplates: _teamTemplates3,
     isLoading: _isLoading6
-  } = e2({
+  } = usePaginatedOrgTemplates({
     orgId: t,
     editorType: FFileType.FIGMAKE,
     areWorkspacesEnabled: r,

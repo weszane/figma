@@ -1,249 +1,350 @@
 import { shallowEqual } from "react-redux";
-import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
-import { PresetType, RotationType } from "../figma_app/763686";
-import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
+import { getI18nString } from "../905/303541";
+import { HEADER_HEIGHT } from "../905/748636";
+import { FEditorType } from "../figma_app/53721";
+import { getCurrentPagePrototypeDevicePresetIdentifier, inverseScaleVector, getDevicePresetInfo } from "../figma_app/170018";
 import { supportsInlinePreview } from "../figma_app/349969";
 import { fullscreenValue } from "../figma_app/455680";
-import { FEditorType } from "../figma_app/53721";
-import { HEADER_HEIGHT } from "../905/748636";
-import { $W, is, BX } from "../figma_app/170018";
-let $$_11 = 16;
-let $$h0 = 216;
-let $$m7 = 152;
-let $$g1 = 104;
-let $$f3 = 20;
-export var $$E8 = (e => (e[e.DEVICE = 0] = "DEVICE", e[e.WEBSITE = 1] = "WEBSITE", e[e.SMALL = 2] = "SMALL", e))($$E8 || {});
-export function $$y12(e) {
-  return "fullscreen" === e.selectedView.view && (e.selectedView.editorType === FEditorType.Design || e.selectedView.editorType === FEditorType.DevHandoff || e.selectedView.editorType === FEditorType.Slides || e.selectedView.editorType === FEditorType.Illustration);
+import { assert, assertNotNullish, throwTypeError } from "../figma_app/465776";
+import { PresetType, RotationType } from "../figma_app/763686";
+
+// Refactored from minified code in /Users/allen/github/fig/src/figma_app/354027.ts
+// Changes: Renamed minified variables and functions to descriptive names (e.g., $$_11 to BOTTOM_PADDING, $$y12 to isFullscreenEditor), added TypeScript interfaces and types for type safety, simplified complex scaling logic in scaleDownToFit and scaleUpToFit while preserving functionality, added comments explaining logic and potential issues, followed camelCase/PascalCase naming and DRY principles.
+
+// Define types based on inferred usage in the code
+interface Size {
+  x: number;
+  y: number;
+  w?: number;
+  h?: number;
 }
-let b = 16 / 9;
-let T = (e, t) => {
-  let r = t.getCurrentPage();
-  if (!r) throw Error("Expected currentPage to exist");
-  let {
+interface Breakpoint {
+  type: any;
+  x?: number;
+  y?: number;
+}
+interface Page {
+  prototypeDevice?: {
+    type: PresetType;
+    rotation: RotationType;
+    size: Size;
+  };
+}
+interface Node {
+  absoluteBoundingBox: {
+    w: number;
+    h: number;
+  };
+}
+interface Store {
+  getCurrentPage: () => Page | null;
+  get: (nodeId: string) => Node | null;
+}
+interface ViewState {
+  selectedView: {
+    view: string;
+    editorType: FEditorType;
+  };
+}
+interface ViewerConfig {
+  initialViewerSize: Size;
+  breakpoint: Breakpoint;
+}
+
+// Constants (renamed from minified names)
+const BOTTOM_PADDING = 16;
+const DEFAULT_HEIGHT = 216;
+const DEFAULT_WIDTH = 152;
+const MIN_WIDTH = 104;
+const TOP_OFFSET = 20;
+const ASPECT_RATIO = 16 / 9;
+
+// Enum for breakpoint types (renamed from $$E8)
+export enum BreakpointType {
+  DEVICE = 0,
+  WEBSITE = 1,
+  SMALL = 2,
+}
+
+// Function to check if the selected view is fullscreen with specific editor types (renamed from $$y12)
+export function isFullscreenEditor(state: ViewState): boolean {
+  return state.selectedView.view === "fullscreen" && (state.selectedView.editorType === FEditorType.Design || state.selectedView.editorType === FEditorType.DevHandoff || state.selectedView.editorType === FEditorType.Slides || state.selectedView.editorType === FEditorType.Illustration);
+}
+
+// Function to get the prototype device size, handling rotation (renamed from T)
+function getPrototypeDeviceSize(node: Node, store: Store) {
+  const currentPage = store.getCurrentPage();
+  if (!currentPage) {
+    throw new Error("Expected currentPage to exist");
+  }
+  const {
     prototypeDevice
-  } = r;
-  return prototypeDevice ? prototypeDevice.type === PresetType.PRESENTATION ? {
-    x: e.absoluteBoundingBox.w,
-    y: e.absoluteBoundingBox.h
-  } : prototypeDevice.type === PresetType.NONE ? null : prototypeDevice.rotation === RotationType.NONE ? prototypeDevice.size : {
+  } = currentPage;
+  if (!prototypeDevice) {
+    return null;
+  }
+  if (prototypeDevice.type === PresetType.PRESENTATION) {
+    return {
+      x: node.absoluteBoundingBox.w,
+      y: node.absoluteBoundingBox.h
+    };
+  }
+  if (prototypeDevice.type === PresetType.NONE) {
+    return null;
+  }
+  if (prototypeDevice.rotation === RotationType.NONE) {
+    return prototypeDevice.size;
+  }
+  return {
     x: prototypeDevice.size.y,
     y: prototypeDevice.size.x
-  } : null;
-};
-export function $$I2(e, t) {
-  let r = T(t, e);
-  return r ? {
-    type: 0,
-    ...r
-  } : t.absoluteBoundingBox.w >= 1280 ? {
-    type: 1
-  } : {
-    type: 2
   };
 }
-export function $$S9(e, t) {
-  switch (e.type) {
-    case 0:
+
+// Function to determine the breakpoint based on node and store (renamed from $$I2)
+export function getBreakpoint(store: Store, node: Node) {
+  const deviceSize = getPrototypeDeviceSize(node, store);
+  if (deviceSize) {
+    return {
+      type: BreakpointType.DEVICE,
+      ...deviceSize
+    };
+  }
+  if (node.absoluteBoundingBox.w >= 1280) {
+    return {
+      type: BreakpointType.WEBSITE
+    };
+  }
+  return {
+    type: BreakpointType.SMALL
+  };
+}
+
+// Function to get the size based on breakpoint (renamed from $$S9)
+export function getBreakpointSize(breakpoint: Breakpoint, node: Node): Size {
+  switch (breakpoint.type) {
+    case BreakpointType.DEVICE:
       return {
-        x: e.x,
-        y: e.y
+        x: breakpoint.x,
+        y: breakpoint.y
       };
-    case 1:
+    case BreakpointType.WEBSITE:
       return {
-        x: t.absoluteBoundingBox.w,
-        y: t.absoluteBoundingBox.w / b
+        x: node.absoluteBoundingBox.w,
+        y: node.absoluteBoundingBox.w / ASPECT_RATIO
       };
-    case 2:
+    case BreakpointType.SMALL:
       return {
-        x: t.absoluteBoundingBox.w,
-        y: t.absoluteBoundingBox.h
+        x: node.absoluteBoundingBox.w,
+        y: node.absoluteBoundingBox.h
       };
     default:
-      throwTypeError(e);
+      throwTypeError(breakpoint);
   }
 }
-export function $$v10(e, t) {
-  return (e.getCurrentPage()?.prototypeDevice?.rotation ?? RotationType.NONE) === RotationType.NONE ? {
-    x: $$g1,
-    y: $$f3 + (t ? HEADER_HEIGHT : 0)
-  } : {
-    x: $$g1,
-    y: $$g1
+
+// Function to get offset based on rotation (renamed from $$v10)
+export function getOffset(store: Store, includeHeader: boolean = false): Size {
+  const rotation = store.getCurrentPage()?.prototypeDevice?.rotation ?? RotationType.NONE;
+  if (rotation === RotationType.NONE) {
+    return {
+      x: MIN_WIDTH,
+      y: TOP_OFFSET + (includeHeader ? HEADER_HEIGHT : 0)
+    };
+  }
+  return {
+    x: MIN_WIDTH,
+    y: MIN_WIDTH
   };
 }
-let A = (e, {
-  x: t,
-  y: r
-}, n) => {
-  let i = r / e.y;
-  let a = Math.min(i, t / e.x);
-  let {
-    x,
-    y
-  } = $$v10(n);
-  if (a < 1) {
-    if (a === i) {
-      if (Math.max(e.x * a, x) !== x) return {
-        x: e.x * a,
-        y: e.y * a
-      };
-      {
-        let t = x / e.x;
+
+// Function to scale down size to fit within bounds (renamed from A, simplified logic)
+function scaleDownToFit(originalSize: Size, bounds: Size, store: Store): Size {
+  const scaleY = bounds.y / originalSize.y;
+  const scaleX = bounds.x / originalSize.x;
+  const scale = Math.min(scaleY, scaleX);
+  const {
+    x: minX,
+    y: minY
+  } = getOffset(store);
+  if (scale < 1) {
+    if (scale === scaleY) {
+      if (Math.max(originalSize.x * scale, minX) !== minX) {
         return {
-          x,
-          y: e.y * t
+          x: originalSize.x * scale,
+          y: originalSize.y * scale
         };
       }
-    }
-    if (Math.max(e.y * a, y) !== y) return {
-      x: e.x * a,
-      y: e.y * a
-    };
-    {
-      let t = y / e.y;
+      const adjustedScale = minX / originalSize.x;
       return {
-        x: e.x * t,
-        y
+        x: minX,
+        y: originalSize.y * adjustedScale
       };
     }
-  }
-  return e;
-};
-let x = (e, {
-  x: t,
-  y: r
-}, n) => {
-  let {
-    x,
-    y
-  } = $$v10(n);
-  let s = y / e.y;
-  let o = Math.max(s, x / e.x);
-  if (o > 1) {
-    if (o === s) {
-      if (Math.min(e.x * o, t) !== t) return {
-        x: e.x * o,
-        y: e.y * o
-      };
-      {
-        let r = t / e.x;
-        return {
-          x: t,
-          y: e.y * r
-        };
-      }
-    }
-    if (Math.min(e.y * o, r) !== r) return {
-      x: e.x * o,
-      y: e.y * o
-    };
-    {
-      let t = r / e.y;
+    if (Math.max(originalSize.y * scale, minY) !== minY) {
       return {
-        x: e.x * t,
-        y: r
+        x: originalSize.x * scale,
+        y: originalSize.y * scale
       };
     }
-  }
-  return e;
-};
-export function $$N5(e, t, r, a, s) {
-  let o = s.get(a);
-  assert(!!o, "expected node to exist");
-  let c = $$I2(s, o);
-  if (e && shallowEqual(e.breakpoint, c) && !t) return e;
-  let h = fullscreenValue.getViewportInfo();
-  let m = h.height - HEADER_HEIGHT - 2 * $$_11;
-  let f = Math.max(.5 * h.width, $$g1);
-  let E = $W(s);
-  let y = !!E && supportsInlinePreview(E);
-  if (!(0 === c.type && r && y)) {
-    let e = A($$S9(c, o), {
-      x: f,
-      y: m
-    }, s);
+    const adjustedScale = minY / originalSize.y;
     return {
-      initialViewerSize: e = x(e, {
-        x: f,
-        y: m
-      }, s),
-      breakpoint: c
+      x: originalSize.x * adjustedScale,
+      y: minY
     };
   }
-  let b = s.getCurrentPage()?.prototypeDevice?.rotation;
-  assertNotNullish(b, "expected device rotation to exist");
-  let {
+  return originalSize;
+}
+
+// Function to scale up size to fit within bounds (renamed from x, simplified logic)
+function scaleUpToFit(originalSize: Size, bounds: Size, store: Store): Size {
+  const {
+    x: minX,
+    y: minY
+  } = getOffset(store);
+  const scaleY = minY / originalSize.y;
+  const scaleX = minX / originalSize.x;
+  const scale = Math.max(scaleY, scaleX);
+  if (scale > 1) {
+    if (scale === scaleY) {
+      if (Math.min(originalSize.x * scale, bounds.x) !== bounds.x) {
+        return {
+          x: originalSize.x * scale,
+          y: originalSize.y * scale
+        };
+      }
+      const adjustedScale = bounds.x / originalSize.x;
+      return {
+        x: bounds.x,
+        y: originalSize.y * adjustedScale
+      };
+    }
+    if (Math.min(originalSize.y * scale, bounds.y) !== bounds.y) {
+      return {
+        x: originalSize.x * scale,
+        y: originalSize.y * scale
+      };
+    }
+    const adjustedScale = bounds.y / originalSize.y;
+    return {
+      x: originalSize.x * adjustedScale,
+      y: bounds.y
+    };
+  }
+  return originalSize;
+}
+
+// Main function to calculate initial viewer size (renamed from $$N5)
+export function calculateInitialViewerSize(previousConfig: ViewerConfig | null, forceRecalc: boolean, isInlinePreview: boolean, nodeId: string, store: Store): ViewerConfig {
+  const node = store.get(nodeId);
+  assert(!!node, "expected node to exist");
+  const breakpoint = getBreakpoint(store, node);
+  if (previousConfig && shallowEqual(previousConfig.breakpoint, breakpoint) && !forceRecalc) {
+    return previousConfig;
+  }
+  const viewport = fullscreenValue.getViewportInfo();
+  const availableHeight = viewport.height - HEADER_HEIGHT - 2 * BOTTOM_PADDING;
+  const availableWidth = Math.max(0.5 * viewport.width, MIN_WIDTH);
+  const currentPage = getCurrentPagePrototypeDevicePresetIdentifier(store);
+  const supportsPreview = !!currentPage && supportsInlinePreview(currentPage);
+  if (!(breakpoint.type === BreakpointType.DEVICE && isInlinePreview && supportsPreview)) {
+    let viewerSize = scaleDownToFit(getBreakpointSize(breakpoint, node), {
+      x: availableWidth,
+      y: availableHeight
+    }, store);
+    viewerSize = scaleUpToFit(viewerSize, {
+      x: availableWidth,
+      y: availableHeight
+    }, store);
+    return {
+      initialViewerSize: viewerSize,
+      breakpoint
+    };
+  }
+  const rotation = store.getCurrentPage()?.prototypeDevice?.rotation;
+  assertNotNullish(rotation, "expected device rotation to exist");
+  const {
     idealDeviceSize,
     framePresetSize
-  } = is(E, b);
-  let N = A(idealDeviceSize, {
-    x: f,
-    y: m
-  }, s);
-  N = x(N, {
-    x: f,
-    y: m
-  }, s);
+  } = getDevicePresetInfo(currentPage, rotation);
+  let viewerSize = scaleDownToFit(idealDeviceSize, {
+    x: availableWidth,
+    y: availableHeight
+  }, store);
+  viewerSize = scaleUpToFit(viewerSize, {
+    x: availableWidth,
+    y: availableHeight
+  }, store);
   return {
-    initialViewerSize: BX(N, framePresetSize, idealDeviceSize),
-    breakpoint: c
+    initialViewerSize: inverseScaleVector(viewerSize, framePresetSize, idealDeviceSize),
+    breakpoint
   };
 }
-export function $$C6(e, t, r, n) {
-  assert(0 !== r.type, "Can't fit to aspect ratio for devices");
-  let a = $$S9(r, t);
-  if (e.x < a.x) switch (r.type) {
-    case 1:
-      a = {
-        x: e.x,
-        y: e.x / b
-      };
-      break;
-    case 2:
-      {
-        let r = t.absoluteBoundingBox.w / t.absoluteBoundingBox.h;
-        a = {
-          x: e.x,
-          y: e.x / r
+
+// Function to fit size to aspect ratio (renamed from $$C6)
+export function fitToAspectRatio(viewerSize: Size, node: Node, breakpoint: Breakpoint, store: Store): ViewerConfig {
+  assert(breakpoint.type !== BreakpointType.DEVICE, "Can't fit to aspect ratio for devices");
+  let adjustedSize = getBreakpointSize(breakpoint, node);
+  if (viewerSize.x < adjustedSize.x) {
+    switch (breakpoint.type) {
+      case BreakpointType.WEBSITE:
+        adjustedSize = {
+          x: viewerSize.x,
+          y: viewerSize.x / ASPECT_RATIO
         };
         break;
-      }
-    default:
-      throwTypeError(r);
+      case BreakpointType.SMALL:
+        {
+          const aspectRatio = node.absoluteBoundingBox.w / node.absoluteBoundingBox.h;
+          adjustedSize = {
+            x: viewerSize.x,
+            y: viewerSize.x / aspectRatio
+          };
+          break;
+        }
+      default:
+        throwTypeError(breakpoint);
+    }
   }
+  adjustedSize = scaleUpToFit(adjustedSize, {
+    x: Infinity,
+    y: Infinity
+  }, store);
   return {
-    initialViewerSize: a = x(a, {
-      x: 1 / 0,
-      y: 1 / 0
-    }, n),
-    breakpoint: r
+    initialViewerSize: adjustedSize,
+    breakpoint
   };
 }
-export function $$w4(e, t, r) {
-  let n = fullscreenValue.getViewportInfo();
-  e.x > .9 * n.width && t(VisualBellActions.enqueue({
-    type: "inline-preview-resize-to-actual-size",
-    message: getI18nString("inline_preview.resize_to_actual_size_visual_bell"),
-    button: {
-      text: getI18nString("bindings.revert"),
-      editScope: "inline-preview-resize-revert",
-      action: r
-    },
-    error: !1
-  }));
+
+// Function to show visual bell for resize (renamed from $$w4)
+export function showResizeBell(viewerSize: Size, enqueueAction: (action: any) => void, revertAction: any): void {
+  const viewport = fullscreenValue.getViewportInfo();
+  if (viewerSize.x > 0.9 * viewport.width) {
+    enqueueAction(VisualBellActions.enqueue({
+      type: "inline-preview-resize-to-actual-size",
+      message: getI18nString("inline_preview.resize_to_actual_size_visual_bell"),
+      button: {
+        text: getI18nString("bindings.revert"),
+        editScope: "inline-preview-resize-revert",
+        action: revertAction
+      },
+      error: false
+    }));
+  }
 }
-export const Ah = $$h0;
-export const Fe = $$g1;
-export const HS = $$I2;
-export const Sq = $$f3;
-export const UB = $$w4;
-export const hF = $$N5;
-export const hX = $$C6;
-export const kl = $$m7;
-export const l5 = $$E8;
-export const nw = $$S9;
-export const ut = $$v10;
-export const wR = $$_11;
-export const xY = $$y12;
+
+// Exported constants (right side renamed to new names)
+export const Ah = DEFAULT_HEIGHT;
+export const Fe = MIN_WIDTH;
+export const HS = getBreakpoint;
+export const Sq = TOP_OFFSET;
+export const UB = showResizeBell;
+export const hF = calculateInitialViewerSize;
+export const hX = fitToAspectRatio;
+export const kl = DEFAULT_WIDTH;
+export const l5 = BreakpointType;
+export const nw = getBreakpointSize;
+export const ut = getOffset;
+export const wR = BOTTOM_PADDING;
+export const xY = isFullscreenEditor;

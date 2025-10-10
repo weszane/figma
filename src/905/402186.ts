@@ -5,7 +5,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { setupResourceAtomHandler } from "../905/713695";
 import { TrackingKeyEnum } from "../905/696396";
-import { l as _$$l, n as _$$n } from "../905/402643";
+import { LibraryTypeIndex, LibraryTypeString } from "../905/402643";
 import { a as _$$a } from "../905/275092";
 import { U as _$$U } from "../905/540113";
 import { OverviewStatsView } from "../905/167005";
@@ -30,14 +30,14 @@ export let $$v0 = memo(function ({
     enabled: !!e
   });
   let v = useMemo(() => g.data ? {
-    type: _$$l.FILES,
+    type: LibraryTypeIndex.FILES,
     items: _4(g.data.files)
   } : {
-    type: _$$l.FILES,
+    type: LibraryTypeIndex.FILES,
     items: []
   }, [g]);
   let E = useMemo(() => ({
-    assetType: _$$n.STYLES,
+    assetType: LibraryTypeString.STYLES,
     styleKey: t.key
   }), [t.key]);
   let x = useRef(null);

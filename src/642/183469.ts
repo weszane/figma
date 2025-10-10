@@ -44,17 +44,17 @@ import { getUserId } from "../905/372672";
 import { y0 } from "../figma_app/718307";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { useStrictDeepEqualSceneValue, $y, useDeepEqualSceneValue } from "../figma_app/167249";
-import { sp, K3 } from "../figma_app/678300";
+import { isNodePresentWithTraversal, isNodeSelected } from "../figma_app/678300";
 import { isInstanceSimplified } from "../figma_app/164212";
 import { p as _$$p } from "../figma_app/353099";
 import { KeyboardShortcut } from "../figma_app/420927";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e2 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { $$in } from "../figma_app/76123";
 import { browserCapabilities } from "../905/409121";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { vx, oo } from "../642/38487";
 import { ArrowPosition } from "../905/748636";
@@ -159,9 +159,9 @@ function ep() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e2({
+  } = useOverlay({
     overlay: MSALOnboardingOverlay,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   let l = browserCapabilities.isApple();
   let a = useMemo(() => jsx(KeyboardShortcut, {
@@ -599,7 +599,7 @@ class ez extends RecordingPureComponent {
       }
       let s = this.getScene().get(e);
       if (!s) return;
-      sp(this.getScene(), this.props.sceneGraphSelection, s.guid) || this.updateSelection(s.guid);
+      isNodePresentWithTraversal(this.getScene(), this.props.sceneGraphSelection, s.guid) || this.updateSelection(s.guid);
       let {
         clientX,
         clientY
@@ -622,12 +622,12 @@ class ez extends RecordingPureComponent {
       getFeatureFlags().version_diffing && this.props.editModeType === LayoutTabType.COMPARE_CHANGES && Fullscreen.setActiveChange(t) && this.props.showViewChangesNotification(t);
       let s = getSingleKey(this.props.sceneGraphSelection);
       let r = null;
-      if (s ? r = s : this.rangeSelectAnchorNodeId && K3(this.props.sceneGraphSelection, this.rangeSelectAnchorNodeId) && (r = this.rangeSelectAnchorNodeId), (this.props.allowSelectRange ?? !0) && e.shiftKey && r) {
+      if (s ? r = s : this.rangeSelectAnchorNodeId && isNodeSelected(this.props.sceneGraphSelection, this.rangeSelectAnchorNodeId) && (r = this.rangeSelectAnchorNodeId), (this.props.allowSelectRange ?? !0) && e.shiftKey && r) {
         selectNodesInRange(r, t);
         fullscreenValue.commit();
         return;
       }
-      sp(this.getScene(), this.props.sceneGraphSelection, t) || (this.updateSelection(t), this.rangeSelectAnchorNodeId = t);
+      isNodePresentWithTraversal(this.getScene(), this.props.sceneGraphSelection, t) || (this.updateSelection(t), this.rangeSelectAnchorNodeId = t);
       _$$i(e) || this.setState({
         mouseDown: new Point(e.clientX, e.clientY)
       });
@@ -1064,14 +1064,14 @@ class ez extends RecordingPureComponent {
     if (!i || !i.parentGuid) return null;
     let l = t.getAncestorInfo(i.parentGuid);
     let a = t.getMaskInfo(e.guid);
-    let o = null != e.isSelected ? e.isSelected : K3(this.props.sceneGraphSelection, e.guid);
+    let o = null != e.isSelected ? e.isSelected : isNodeSelected(this.props.sceneGraphSelection, e.guid);
     if (!l || !a) return null;
     let d = (l.isAncestorSelected || o) && !l.isAncestorHidden && this.hasAtLeastOneRefToHoveredDefId(i);
     let c = !!e.prevNodeGuid && t.getAncestorInfo(e.prevNodeGuid).isAncestorSelected;
-    let p = (!!e.prevNodeGuid && K3(this.props.sceneGraphSelection, e.prevNodeGuid) || c) && OZ(this.cachedAllRowData)?.guid !== e.guid;
+    let p = (!!e.prevNodeGuid && isNodeSelected(this.props.sceneGraphSelection, e.prevNodeGuid) || c) && OZ(this.cachedAllRowData)?.guid !== e.guid;
     let m = !!e.nextNodeGuid && t.getAncestorInfo(e.nextNodeGuid).isAncestorSelected;
     let g = ("FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" === i.scrollBehavior || l.isAncestorFixed) && l.isAncestorSelected;
-    let f = (!!e.nextNodeGuid && K3(this.props.sceneGraphSelection, e.nextNodeGuid) || m) && w6(this.cachedAllRowData)?.guid !== e.guid;
+    let f = (!!e.nextNodeGuid && isNodeSelected(this.props.sceneGraphSelection, e.nextNodeGuid) || m) && w6(this.cachedAllRowData)?.guid !== e.guid;
     let x = i.isLayerLikeCodeNode && !i.isInstanceSublayer && !i.isSymbolSublayer;
     let y = (i.isCodeInstance || i.isCodeFile || i.isCodeComponent) && !x;
     return jsx(oo, {
@@ -1163,7 +1163,7 @@ class ez extends RecordingPureComponent {
   }
   renderSectionHeader(e) {
     let t = this.sectionById[e.sectionId];
-    let s = t && sp(this.getScene(), this.props.sceneGraphSelection, t.parentGuid);
+    let s = t && isNodePresentWithTraversal(this.getScene(), this.props.sceneGraphSelection, t.parentGuid);
     let n = !0;
     if (t?.parentGuid && t?.type !== ScrollBehavior.FIXED) {
       let e = this.props.sceneGraph.get(t?.parentGuid);

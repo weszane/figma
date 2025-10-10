@@ -81,12 +81,12 @@ import { AutoLayout, Spacer } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { isBranch } from "../905/760074";
 import { liveStoreInstance } from "../905/713695";
-import { bL as _$$bL, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectContainer, SelectOptionReset } from "../905/493196";
 import { useSelectPrimitiveState, SelectPrimitiveTrigger } from "../905/408073";
 import { r as _$$r3 } from "../905/571562";
 import { textDisplayConfig } from "../905/687265";
 import { selectWithShallowEqual } from "../905/103090";
-import { ms, MM, c$ as _$$c$ } from "../figma_app/236327";
+import { DropdownContainer, CheckableOptionComponent, OptionComponent } from "../figma_app/236327";
 import { LoadingSpinner } from "../figma_app/858013";
 import { G as _$$G } from "../905/750789";
 import { p as _$$p } from "../905/927118";
@@ -367,14 +367,14 @@ function eW(e) {
     }), (() => {
       if (!dropdownShown || dropdownShown.type !== ez || !currentOrgId || !y || !f.current) return null;
       let t = f.current.getBoundingClientRect();
-      return jsx(ms, {
+      return jsx(DropdownContainer, {
         className: "publish_scope_dropdown--dropdown--0w1ox",
         positionFixed: !0,
         style: {
           left: t.left,
           top: t.top
         },
-        children: E.map(t => jsx(MM, {
+        children: E.map(t => jsx(CheckableOptionComponent, {
           onClick: () => {
             onPublishScopeChange(t);
           },
@@ -390,13 +390,13 @@ function eW(e) {
       children: [jsx(Label, {
         htmlFor: _,
         children: renderI18nText("design_systems.publishing_modal.publish_to_label")
-      }), jsxs(_$$bL, {
+      }), jsxs(SelectGroupLabel, {
         value: e.publishScope,
         onChange: onPublishScopeChange,
         children: [jsx(eK, {
           id: _
-        }), jsx(mc, {
-          children: E.map(e => jsx(c$, {
+        }), jsx(SelectContainer, {
+          children: E.map(e => jsx(SelectOptionReset, {
             value: e,
             children: I(e)
           }, e))
@@ -689,8 +689,8 @@ let tw = registerTooltip("publish_source_style_as_copy_info", tx, e => ({
 let tT = "library_item_row--imageThumbWrapper--t-7P5 library_item_row--itemThumbWrapper--GSlEq";
 let tk = "library_item_row--itemThumb--jJ-jS";
 let tR = "library_item_row--helpIcon--jshFi";
-let tO = ms;
-let tD = _$$c$;
+let tO = DropdownContainer;
+let tD = OptionComponent;
 var tL = (e => (e[e.CHECKBOX = 0] = "CHECKBOX", e[e.TARGET = 1] = "TARGET", e))(tL || {});
 function tF({
   libraryItem: e,
@@ -730,20 +730,20 @@ function tF({
     if (!A || A.type !== N || l?.publishType === "FORCED_COPY") return null;
     let t = !!l;
     let i = l?.publishType === "MOVE" ? -4 - parsePxInt(Gu0) : -4;
-    return jsxs(ms, {
+    return jsxs(DropdownContainer, {
       style: {
         position: "absolute",
         bottom: i,
         right: 4
       },
-      children: [jsx(MM, {
+      children: [jsx(CheckableOptionComponent, {
         onClick: () => {
           l && (R(), o(e.node_id, "MOVE"));
         },
         checked: l?.publishType === "MOVE",
         disabled: !t,
         children: renderI18nText("design_systems.publishing_modal.move_to_this_file")
-      }), jsx(MM, {
+      }), jsx(CheckableOptionComponent, {
         onClick: () => {
           l && (R(), o(e.node_id, "USER_SELECTED_COPY"));
         },
@@ -1194,10 +1194,10 @@ function tZ({
     }), t && jsx("span", {
       className: "variable_library_item_row--statusText--Khb5a",
       children: e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : getStagingStatusText(e.status)
-    }), s?.type === o && !e.deletedFromSceneGraph && jsx(ms, {
+    }), s?.type === o && !e.deletedFromSceneGraph && jsx(DropdownContainer, {
       className: "variable_library_item_row--contextMenu--djku4",
       style: s.data.position,
-      children: jsx(_$$c$, {
+      children: jsx(OptionComponent, {
         onClick: l,
         children: e.isPublishable ? renderI18nText("design_systems.publishing_modal.hide_when_publishing") : renderI18nText("design_systems.publishing_modal.show_when_publishing")
       })

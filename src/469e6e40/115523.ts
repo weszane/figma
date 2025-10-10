@@ -57,7 +57,7 @@ import { T as _$$T } from "../figma_app/472024";
 import { UserAvatar, UserTeamAvatar } from "../905/144598";
 import { A as _$$A3 } from "../6828/70690";
 import { IconButton } from "../905/443068";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { FuzzyMatcher } from "../figma_app/616261";
 import { truncate } from "../figma_app/930338";
@@ -538,15 +538,15 @@ function eO(e) {
       })
     }), isHostPlanAdmin && jsx("div", {
       className: "connected_projects_flyout--filterDropdownContainer---4vii",
-      children: jsxs(bL, {
+      children: jsxs(SelectGroupLabel, {
         value: c,
         onChange: e => _(e ?? "ALL"),
-        children: [jsx(l9, {
+        children: [jsx(SelectSeparator, {
           label: jsx(HiddenLabel, {
             children: " "
           })
-        }), jsxs(mc, {
-          children: [jsx(c$, {
+        }), jsxs(SelectContainer, {
+          children: [jsx(SelectOptionReset, {
             value: "ALL",
             children: y.ALL
           }), jsx("div", {
@@ -554,7 +554,7 @@ function eO(e) {
             children: jsx("div", {
               className: "connected_projects_flyout--selectDropdownDivider--UEuEC"
             })
-          }), j.map(e => jsx(c$, {
+          }), j.map(e => jsx(SelectOptionReset, {
             value: e,
             children: truncate(y[e] || "", 20)
           }, e))]

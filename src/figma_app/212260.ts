@@ -5,7 +5,7 @@ import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { R as _$$R } from "../figma_app/313269";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { RecordingScrollContainer } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -112,7 +112,7 @@ export function $$G2(e) {
       maxWidth: 190,
       disableDropdownScrollContainer: !0,
       propagateCloseClick: !0,
-      children: [j?.error || G ? jsx(c$, {
+      children: [j?.error || G ? jsx(OptionComponent, {
         onClick: () => {
           j && j.error ? w(showModalHandler({
             type: _$$r,
@@ -131,7 +131,7 @@ export function $$G2(e) {
           }));
         },
         children: renderI18nText("whiteboard.inserts.in_development_version_error_dropdown")
-      }) : jsx(c$, {
+      }) : jsx(OptionComponent, {
         onClick: () => {
           createWidget({
             pluginID: Z.plugin_id,
@@ -142,7 +142,7 @@ export function $$G2(e) {
           J();
         },
         children: renderI18nText("whiteboard.inserts.in_development_version_dropdown")
-      }), jsx(c$, {
+      }), jsx(OptionComponent, {
         onClick: () => {
           createWidget({
             pluginID: Z.plugin_id,

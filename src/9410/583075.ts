@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { SelfDesignType, DesignWorkspace, DesignGraphElements, Fullscreen } from "../figma_app/763686";
-import { Xr, atomStoreManager } from "../figma_app/27355";
+import { useSetAtom, atomStoreManager } from "../figma_app/27355";
 import { useSprigWithSampling } from "../905/99656";
 import { Kh } from "../figma_app/370763";
 import { hideDropdownAction } from "../905/929976";
@@ -16,8 +16,8 @@ export function $$g0({
 } = {}) {
   let t = function () {
     let e = useDispatch<AppDispatch>();
-    let t = Xr(FT);
-    let i = Xr(bs);
+    let t = useSetAtom(FT);
+    let i = useSetAtom(bs);
     return () => {
       e(hideDropdownAction());
       e(hidePickerThunk());

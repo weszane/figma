@@ -27,7 +27,7 @@ import { n6 } from "../905/234821";
 import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
 import { h as _$$h } from "../905/864281";
-import { kD, J3, JU, kN } from "../figma_app/622574";
+import { getCurrentTemplate, getPublishTemplateStatus, canPublishTemplate, PublishTemplateStatusEnum } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { isBranchAlt, getRepoByIdAlt, isDefaultFile } from "../905/760074";
@@ -54,13 +54,13 @@ import { UpsellModalType } from "../905/165519";
 import { exitVersionHistoryMode, enterVersionHistoryMode } from "../figma_app/841351";
 import { FEditorType } from "../figma_app/53721";
 import { TeamOrgType } from "../figma_app/10554";
-import { Yh, c1 } from "../figma_app/357047";
+import { isActionEnabled, getKeyboardShortcut } from "../figma_app/357047";
 import { TrackingKeyEnum } from "../905/696396";
 import { Q as _$$Q } from "../figma_app/113686";
 import { e as _$$e2 } from "../905/225961";
 import { AM, pT } from "../905/467351";
 import { rC, we } from "../figma_app/861982";
-import { jv } from "../905/525678";
+import { processMenuItems } from "../905/525678";
 import { Ah } from "../figma_app/221114";
 import { e as _$$e3 } from "../905/157975";
 import { jT } from "../figma_app/277330";
@@ -141,10 +141,10 @@ export function $$eO1({
   let tr = jT(eM, te).unwrapOr(!1);
   let tn = $n();
   let ti = n6();
-  let ta = kD();
-  let ts = J3();
-  let to = JU(ts);
-  let tl = ts === kN.FILE_IN_DRAFTS;
+  let ta = getCurrentTemplate();
+  let ts = getPublishTemplateStatus();
+  let to = canPublishTemplate(ts);
+  let tl = ts === PublishTemplateStatusEnum.FILE_IN_DRAFTS;
   let td = pH(eM?.key ?? null, {
     enabled: !!eM
   });
@@ -308,11 +308,11 @@ export function $$eO1({
     }));
   };
   let re = !eC && eP.editorType === FEditorType.Design && eM.canEdit;
-  let rt = jv(_$$t2(tn, TrackingKeyEnum.EDITOR_TOOLBAR, tt), {
+  let rt = processMenuItems(_$$t2(tn, TrackingKeyEnum.EDITOR_TOOLBAR, tt), {
     appModel: eL,
     selectedView: eP
   });
-  let rr = jv(_$$m(tn, TrackingKeyEnum.EDITOR_TOOLBAR, tt, ti), {
+  let rr = processMenuItems(_$$m(tn, TrackingKeyEnum.EDITOR_TOOLBAR, tt, ti), {
     appModel: eL,
     selectedView: eP
   });
@@ -335,7 +335,7 @@ export function $$eO1({
     separator: !0,
     displayText: ""
   }, ...ri(ez && !eC && !tu && !eX, [{
-    disabled: !Yh(eL, "enter-history-mode"),
+    disabled: !isActionEnabled(eL, "enter-history-mode"),
     recordingKey: "toggleVersionHistory",
     displayText: Ah(eL.activeCanvasEditModeType) ? getI18nString("fullscreen.filename_view.version-history-hide") : getI18nString("fullscreen.filename_view.version-history-show"),
     callback: () => {
@@ -394,7 +394,7 @@ export function $$eO1({
     disabled: !tO,
     recordingKey: "exportSelectedExportables",
     displayText: getI18nString("fullscreen.filename_view.export"),
-    shortcut: eL.keyboardShortcuts && c1(eL.keyboardShortcuts, "export-selected-exportables"),
+    shortcut: eL.keyboardShortcuts && getKeyboardShortcut(eL.keyboardShortcuts, "export-selected-exportables"),
     callback: () => {
       fullscreenValue.triggerAction("export-selected-exportables", {
         source: "toolbar"

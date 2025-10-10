@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { sortByPropertyWithOptions, sortBySelectors } from "../figma_app/656233";
 import { LoadingSpinner } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
-import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/419236";
 import { useSubscription } from "../figma_app/288654";
 import { RecordingScrollContainer } from "../905/347284";
@@ -1094,7 +1094,7 @@ let tr = function ({
   useEffect(() => {
     u && i(e => l && null === e || _ && _.some(t => t.id === e) ? e : !l && _ && _.length ? _[0].id : null);
   }, [l, t, _, u]);
-  let g = Xr(ev);
+  let g = useSetAtom(ev);
   useEffect(() => (g(a), () => {
     g(void 0);
   }), [a, g]);

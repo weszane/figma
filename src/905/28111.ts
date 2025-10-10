@@ -16,7 +16,7 @@ import { OnboardingModal } from '../905/425180';
 import { LoadingSpinner } from '../905/443820';
 import { l as _$$l } from '../905/479687';
 import { ButtonWide } from '../905/521428';
-import { e } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { formattedColorManipulator, defaultColorManipulator } from '../905/713722';
 import { ArrowPosition } from '../905/748636';
@@ -30,7 +30,7 @@ import { DialogTriggerButton } from '../905/976845';
 import { ColorContrastOnboardingOverlay } from '../figma_app/6204';
 import { buildUploadUrl } from '../figma_app/169182';
 import { yesNoTrackingEnum } from '../figma_app/198712';
-import { N as _$$N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { DialogContents } from '../figma_app/272243';
 import { p as _$$p } from '../figma_app/353099';
 import { B as _$$B } from '../figma_app/539422';
@@ -610,9 +610,9 @@ function et() {
     show,
     isShowing,
     complete
-  } = e({
+  } = useOverlay({
     overlay: ColorContrastOnboardingOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let {
     showColorContrast,

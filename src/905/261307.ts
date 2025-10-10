@@ -14,7 +14,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
-import { RR } from "../figma_app/307841";
+import { isCampfireModelEnabled } from "../figma_app/307841";
 import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
@@ -42,7 +42,7 @@ export let $$O0 = registerModal(function ({
 }) {
   let U = useDispatch<AppDispatch>();
   let B = getRumLoggingConfig();
-  let V = RR({
+  let V = isCampfireModelEnabled({
     preferOpenFilePlan: !0
   });
   let G = isProrationBillingEnabledForCurrentPlan();

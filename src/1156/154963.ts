@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { e as _$$e } from "../905/693478";
 import { textDisplayConfig } from "../905/687265";
 import { stylex } from "@stylexjs/stylex";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { ry } from "../figma_app/408883";
 import { E } from "../figma_app/924252";
@@ -49,7 +49,7 @@ export function $$p1({
   nodeGuid: e
 }) {
   let t = ry();
-  let n = Xr(mC(e));
+  let n = useSetAtom(mC(e));
   let s = e => {
     n(e);
   };

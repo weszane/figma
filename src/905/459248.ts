@@ -73,7 +73,7 @@ import { TeamCanAdmin } from "../figma_app/43951";
 import { gg, Rk } from "../905/981217";
 import { UpsellModalType } from "../905/165519";
 import { A as _$$A3 } from "../6828/673039";
-import { ms, MM } from "../figma_app/236327";
+import { DropdownContainer, CheckableOptionComponent } from "../figma_app/236327";
 import { Kyn } from "../figma_app/27776";
 import { A as _$$A4 } from "../6828/555288";
 import { A as _$$A5 } from "../2854/630701";
@@ -183,20 +183,20 @@ function eV({
 }) {
   if (!e || e.type !== eB || !t.current) return null;
   let a = t.current.getBoundingClientRect();
-  return jsxs(ms, {
+  return jsxs(DropdownContainer, {
     positionFixed: !0,
     style: {
       left: a.left,
       top: a.top
     },
-    children: [jsx(MM, {
+    children: [jsx(CheckableOptionComponent, {
       onClick: () => {
         logInfo("missing fonts", "setting scope to current page");
         r(PageSelectionType.CURRENT_PAGE);
       },
       checked: i === PageSelectionType.CURRENT_PAGE,
       children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.current_page")
-    }), jsx(MM, {
+    }), jsx(CheckableOptionComponent, {
       onClick: () => {
         logInfo("missing fonts", "setting scope to all pages");
         r(PageSelectionType.ALL_PAGES);

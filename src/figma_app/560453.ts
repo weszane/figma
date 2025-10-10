@@ -9,7 +9,7 @@ import { k as _$$k } from "../905/792988";
 import { q as _$$q } from "../905/820062";
 import { N as _$$N } from "../905/865305";
 import { c as _$$c } from "../905/486270";
-import { useAtomWithSubscription, useAtomValueAndSetter, Xr, atomStoreManager } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, useSetAtom, atomStoreManager } from "../figma_app/27355";
 import m from "classnames";
 import f from "../vendor/524488";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
@@ -367,7 +367,7 @@ export function $$eE0({
   let f = useAtomWithSubscription(hO.currentSearchAtom);
   let E = useAtomWithSubscription(hO.currentCommunitySearchAtom);
   let [C, w] = useAtomValueAndSetter(Q8);
-  let R = Xr(Rt);
+  let R = useSetAtom(Rt);
   let {
     recentFragments
   } = cN(!d);

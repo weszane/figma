@@ -13,7 +13,7 @@ import { addViewportOffset, getViewportInfo } from '../figma_app/62612';
 import { J } from '../figma_app/63663';
 import { isNullish } from '../figma_app/95419';
 import { b as _$$b } from '../figma_app/192260';
-import { c$ } from '../figma_app/236327';
+import { OptionComponent } from '../figma_app/236327';
 import { T as _$$T } from '../figma_app/300269';
 import { useSingleSelectedKey } from '../figma_app/311375';
 import { O as _$$O } from '../figma_app/373984';
@@ -255,7 +255,7 @@ function j(e) {
     onClick,
     icon
   } = e;
-  return jsx(c$, {
+  return jsx(OptionComponent, {
     disabled,
     onClick: disabled ? void 0 : onClick,
     recordingKey: generateRecordingKey('breakpointDropdownAction', title),

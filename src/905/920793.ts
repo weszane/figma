@@ -5,7 +5,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
-import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectOption, SelectContainer, SelectOptionReset } from "../905/493196";
 import { RadioInputRoot, RadioInputOption } from "../905/308099";
 import { Legend } from "../905/932270";
 import { InputComponent } from "../905/185998";
@@ -294,17 +294,17 @@ export function $$z2({
 }) {
   return jsx(AutoInteractableWrapper, {
     name: "export_settings_color_profile_select",
-    children: jsxs(_$$bL, {
+    children: jsxs(SelectGroupLabel, {
       value: i?.toString() ?? "DOCUMENT",
       onChange: t,
       recordingKey: generateRecordingKey(d, "colorProfile"),
-      children: [jsx(DZ, {
+      children: [jsx(SelectOption, {
         id: $$G10,
         "data-testid": $$G10,
         width: "fill",
         disabled: !!l
-      }), jsx(mc, {
-        children: (l ? L : F).map(t => jsx(c$, {
+      }), jsx(SelectContainer, {
+        children: (l ? L : F).map(t => jsx(SelectOptionReset, {
           value: t.toString(),
           children: D(e).format(t)
         }, t))
@@ -331,18 +331,18 @@ export function $$K1({
 }) {
   return jsx(AutoInteractableWrapper, {
     name: "export_settings_quality_select",
-    children: jsxs(_$$bL, {
+    children: jsxs(SelectGroupLabel, {
       value: OK(t, i).toString(),
       onChange: t => {
         i && e(+t, i);
       },
       recordingKey: generateRecordingKey(s, "exportQuality"),
-      children: [jsx(DZ, {
+      children: [jsx(SelectOption, {
         id: $$H0,
         "data-testid": "export-settings-export-quality",
         width: "fill"
-      }), jsx(mc, {
-        children: $$j7.map(e => jsx(c$, {
+      }), jsx(SelectContainer, {
+        children: $$j7.map(e => jsx(SelectOptionReset, {
           value: e.toString(),
           children: $$M4.format(e)
         }, e))
@@ -425,21 +425,21 @@ function X({
 }) {
   return jsx(AutoInteractableWrapper, {
     name: "export_settings_image_sampling_select",
-    children: jsxs(_$$bL, {
+    children: jsxs(SelectGroupLabel, {
       value: t ? "BICUBIC" : "DEFAULT",
       onChange: t => {
         e("BICUBIC" === t);
       },
       recordingKey: generateRecordingKey(a, "imageSampling"),
-      children: [jsx(DZ, {
+      children: [jsx(SelectOption, {
         id: "export-settings-image-sampling",
         "data-testid": "export-settings-image-sampling",
         width: "fill"
-      }), jsxs(mc, {
-        children: [jsx(c$, {
+      }), jsxs(SelectContainer, {
+        children: [jsx(SelectOptionReset, {
           value: "BICUBIC",
           children: U.format(!0)
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: "DEFAULT",
           children: U.format(!1)
         })]

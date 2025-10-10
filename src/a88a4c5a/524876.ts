@@ -37,7 +37,7 @@ import { postUserFlag } from '../905/985254';
 import { iX } from '../6443/426443';
 import { n as _$$n } from '../draftjs_composer/589474';
 import { isNewCommentId } from '../figma_app/12220';
-import { useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { FFileType } from '../figma_app/191312';
 import { useAtMentionInviteExperiment } from '../figma_app/297957';
 import { trackUserEvent } from '../figma_app/314264';
@@ -162,7 +162,7 @@ export function $$ed1(e) {
   let eb = useSelector(e => e.comments.editingComment);
   let ej = !!selectUserFlag('has_mentioned_pending_user_invite');
   let ev = !!selectUserFlag('has_mentioned_pending_user_invite_twice');
-  let eC = Xr(_$$H);
+  let eC = useSetAtom(_$$H);
   let [ek, eE] = useState(!1);
   let eS = getCurrentFileType();
   let ew = isPrototypeView();

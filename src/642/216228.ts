@@ -73,7 +73,7 @@ import { K as _$$K5 } from '../905/547934';
 import { useIsFullscreenSitesView } from '../905/561485';
 import { getFeatureFlags } from '../905/601108';
 import { PerfTimer } from '../905/609396';
-import { e as _$$e } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { getVisibleTheme } from '../905/640017';
 import { N as _$$N3 } from '../905/645480';
@@ -133,7 +133,7 @@ import { VisualAssetPacksTooltip } from '../figma_app/6204';
 import { Dm } from '../figma_app/8833';
 import { getSiteKitAssets, SITE_KIT_EMBEDS_LIBRARY_KEY } from '../figma_app/10098';
 import { FX as _$$FX } from '../figma_app/12491';
-import { atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { usePreviousValue, useLatestRef } from '../figma_app/922077';
 import { TeamCanEdit } from '../figma_app/43951';
 import { bo, Bs, fg, ko } from '../figma_app/73698';
@@ -161,13 +161,13 @@ import { cG, hK, X3, xU } from '../figma_app/211706';
 import { q as _$$q, U as _$$U3 } from '../figma_app/213525';
 import { suggestionsSeenTrackerAtom, suggestionsManagerAtom } from '../figma_app/235371';
 import { Fl, fV } from '../figma_app/236178';
-import { X3 as _$$X, c$, MM, ms, wv } from '../figma_app/236327';
+import { DropdownOptions, OptionComponent, CheckableOptionComponent, DropdownContainer, SeparatorComponent } from '../figma_app/236327';
 import { isOnboardingComplete } from '../figma_app/242339';
 import { Bf } from '../figma_app/249941';
 import { hasLibraryKeyInSet, hasResourcePresetKey, queryUiKitsFeedbackUrls } from '../figma_app/255679';
 import { SearchEventType, MAX_CONCURRENT_FRAGMENT_LOADS, ContextType, SUPPORTED_NODE_TYPES, SearchResultType, SEARCH_CONFIG, DEFAULT_SEARCH_CONTEXT } from '../figma_app/257779';
 import { useRecentlyUsed } from '../figma_app/267183';
-import { N as _$$N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { createMultiRefCallback } from '../figma_app/272902';
 import { alwaysFalseCallback2, setupStarterUserCallback } from '../figma_app/275462';
 import { useSubscription } from '../figma_app/288654';
@@ -264,9 +264,9 @@ function M() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: VisualAssetPacksTooltip,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [s]);
   let o = alwaysFalseCallback2();
   let {
@@ -2571,8 +2571,8 @@ let sB = ({
 };
 let sZ = 'asset-panel-library-context-menu';
 let sQ = generateRecordingKey('assetsLibrary', 'contextMenu');
-let s0 = ms;
-let s1 = c$;
+let s0 = DropdownContainer;
+let s1 = OptionComponent;
 let s3 = memo(({
   dropdownShown: e,
   usePortal: t
@@ -2631,8 +2631,8 @@ let s3 = memo(({
 });
 let s4 = 'asset-panel-page-context-menu';
 let s5 = generateRecordingKey('assetsLibrary', 'contextMenu');
-let s6 = ms;
-let s8 = c$;
+let s6 = DropdownContainer;
+let s8 = OptionComponent;
 let s7 = memo(({
   dropdownShown: e,
   usePortal: t
@@ -2803,7 +2803,7 @@ function rF({
   subscribedLibraries: i
 }) {
   let l = rH();
-  let a = Xr(suggestionsSeenTrackerAtom);
+  let a = useSetAtom(suggestionsSeenTrackerAtom);
   let o = useCallback(() => {
     trackAutoSuggestFunnelEvent(t, SearchEventType.RESULT_INSERTED, ContextType.ASSET_PANEL);
   }, [t]);
@@ -3056,7 +3056,7 @@ function rB() {
       debugString: ''
     } : t;
   }(i);
-  let m = Xr(rO);
+  let m = useSetAtom(rO);
   let x = rH();
   let y = getObservableValue(AppStateTsApi?.editorPreferences().showAssetAutoSuggest, !0);
   let [_, b] = useState(null);
@@ -3575,14 +3575,14 @@ let ns = forwardRef(({
         'aria-expanded': d,
         'children': '\u2026'
       })]
-    }), d && createPortal(jsx(_$$X, {
+    }), d && createPortal(jsx(DropdownOptions, {
       className: Dm,
       positionAbsolute: !0,
       style: _,
       id: 'asset-panel-ellipsis-menu',
       hideDropdown: u,
       autofocusPrevElementOnEsc: !0,
-      children: x.map((e, t) => jsx(c$, {
+      children: x.map((e, t) => jsx(OptionComponent, {
         onClick: v(t),
         children: e
       }, e))
@@ -7569,7 +7569,7 @@ function lR({
     let {
       focusSearchBar
     } = _$$rl();
-    let p = Xr(aK);
+    let p = useSetAtom(aK);
     let h = useCallback(e => {
       s('settingsMenu', e);
     }, [s]);
@@ -7638,7 +7638,7 @@ function lR({
       checked: currentView !== S5.Recents && libraryKey === N.libraryKey,
       onClick: () => goToLibrary(N.libraryKey)
     }));
-    (libraries.length > 0 || presets.length > 0) && e.push(jsx(wv, {}));
+    (libraries.length > 0 || presets.length > 0) && e.push(jsx(SeparatorComponent, {}));
     e.push(...libraries.map(({
       name: e,
       libraryKey: t
@@ -7658,7 +7658,7 @@ function lR({
       checked: currentView !== S5.Recents && libraryKey === t,
       onClick: () => goToLibrary(t)
     })));
-    librariesForConnectedProject.length > 0 && (e.push(jsx(wv, {})), e.push(jsx('div', {
+    librariesForConnectedProject.length > 0 && (e.push(jsx(SeparatorComponent, {})), e.push(jsx('div', {
       className: l()(cssBuilderInstance.textBodyMedium.$, 'asset_panel_settings--optionSubtitle--9d2Ib'),
       children: getI18nString('design_systems.libraries_modal.connected_project_libraries')
     })), e.push(...librariesForConnectedProject.map(({
@@ -7670,7 +7670,7 @@ function lR({
       checked: currentView !== S5.Recents && libraryKey === t,
       onClick: () => goToLibrary(t)
     }))));
-    e.push(jsx(wv, {}));
+    e.push(jsx(SeparatorComponent, {}));
     k || (e.push(lO({
       text: getI18nString('design_systems.assets_panel.view_toggle_grid'),
       checked: S === $H.GRID,
@@ -7694,7 +7694,7 @@ function lR({
     ...e,
     maxHeight: d
   }), [d, e]);
-  return createPortal(jsx(_$$X, {
+  return createPortal(jsx(DropdownOptions, {
     className: l()(Dm, 'asset_panel_settings--dropdown--gs7K3'),
     positionAbsolute: !0,
     style: B,
@@ -7712,7 +7712,7 @@ function lO({
   onClick: i,
   icon: l
 }) {
-  return jsx(MM, {
+  return jsx(CheckableOptionComponent, {
     className: 'asset_panel_settings--dropdownOption--kJ-6M',
     checked: !!n,
     onClick: i,

@@ -1,9 +1,9 @@
 import { SessionStatus } from "../figma_app/763686";
-import { um, createCustomAtom } from "../figma_app/27355";
+import { atomWithReducer, createCustomAtom } from "../figma_app/27355";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 var $$s2 = (e => (e.VOTING = "VOTING", e.TIMER = "TIMER", e.MUSIC = "MUSIC", e))($$s2 || {});
 var $$o1 = (e => (e.DEFAULT = "DEFAULT", e.PAST_VOTES = "PAST_VOTES", e))($$o1 || {});
-let l = um({
+let l = atomWithReducer({
   isOpen: !1,
   activeToolModal: null,
   view: "DEFAULT"

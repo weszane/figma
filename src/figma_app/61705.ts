@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { isCommandOrShift } from "../905/63728";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { B } from "../905/524020";
@@ -19,7 +19,7 @@ export function $$h1({
   let g = B();
   let f = useDispatch<AppDispatch>();
   let E = getUserId();
-  let y = Xr(P4);
+  let y = useSetAtom(P4);
   let b = useSelector(e => {
     let t = r ?? e.user?.drafts_folder_id;
     let n = t ? e.folders[t] : void 0;

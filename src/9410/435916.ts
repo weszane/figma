@@ -10,14 +10,14 @@ import { useSingleEffect } from "../905/791079";
 import { isAnyMobile, isIOSUA } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { Fy, g5, NT } from "../figma_app/579169";
 import { userFlagExistsAtomFamily, userFlagAtomFamily } from "../figma_app/545877";
 import { fullscreenValue } from "../figma_app/455680";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
 import { isAllowedToSeeNux } from "../905/14910";
 import { w as _$$w, tX } from "../figma_app/728657";
@@ -26,7 +26,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { hideDropdownAction, updateDropdownSelectionAction, showDropdownThunk } from "../905/929976";
 import { useFullscreenReady } from "../905/924253";
 import { useDropdownState } from "../905/848862";
-import { TY, pi } from "../figma_app/357047";
+import { isFullscreenMenuDropdown, FULLSCREEN_MENU_DROPDOWN } from "../figma_app/357047";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/748636";
 import { oi } from "../figma_app/598952";
@@ -51,19 +51,19 @@ function M({
     i(hideDropdownAction());
   }, [e, i]);
   useEffect(() => {
-    d.current && !TY(l) && e();
+    d.current && !isFullscreenMenuDropdown(l) && e();
   }, [e, l]);
   useEffect(() => {
     if (c && !d.current) {
-      if (TY(l)) i(updateDropdownSelectionAction({
-        type: pi,
+      if (isFullscreenMenuDropdown(l)) i(updateDropdownSelectionAction({
+        type: FULLSCREEN_MENU_DROPDOWN,
         data: {
           selectionToUpdate: SettingsAction.PREFERENCES
         }
       }));else {
         let e = s ? 42 : 0;
         i(showDropdownThunk({
-          type: pi,
+          type: FULLSCREEN_MENU_DROPDOWN,
           data: {
             targetRect: {
               top: 0,
@@ -636,9 +636,9 @@ function et() {
     show,
     complete,
     isShowing
-  } = _$$e({
+  } = useOverlay({
     overlay: FigJamPanZoomOnboardingDLTBannerOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e, t, i, a, o, l]);
   useEffect(() => {
     let e = [tX.NOT_STARTED, tX.COMPLETED].includes(c);

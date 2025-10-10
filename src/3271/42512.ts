@@ -82,7 +82,7 @@ import { getPluginAllowListKey, getWidgetAllowListKey } from '../figma_app/15528
 import { getPluginManager } from '../figma_app/170366';
 import { FUserRoleType } from '../figma_app/191312';
 import { B6, dQ, Ex, ff, gC, IT, Ix, kB, Kr, NF, np, Xo, Zm } from '../figma_app/201703';
-import { MM } from '../figma_app/236327';
+import { CheckableOptionComponent } from '../figma_app/236327';
 import { Cc, LL } from '../figma_app/270091';
 import { DesignToolType } from '../figma_app/277543';
 import { filterArrayByEditorTypeAndMemo, filterDevModeEntriesAndMemo } from '../figma_app/279454';
@@ -1726,7 +1726,7 @@ function sd({
     }));
   }, [r, h]);
   let A = [];
-  A.push(jsx(MM, {
+  A.push(jsx(CheckableOptionComponent, {
     checked: N,
     onClick: () => {
       T(!N);

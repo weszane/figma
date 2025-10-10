@@ -9,12 +9,12 @@ import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint } from "../figma
 import { J } from "../figma_app/261874";
 import { UpgradeAction } from "../905/370443";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { LZ } from "../figma_app/101956";
 import { NT, mp } from "../figma_app/579169";
-import { o9 } from "../figma_app/621201";
+import { updateLastSeenDevModeUpsell } from "../figma_app/621201";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { U } from "../figma_app/65327";
@@ -40,9 +40,9 @@ export function $$E0() {
     complete,
     isShowing,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: DevModeOnboardingTooltipOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [T, S, l, E]);
   useEffect(() => {
     show({
@@ -51,7 +51,7 @@ export function $$E0() {
         return !n && !o && !l && !t && i > new Date("2024-09-25") && C && (P && e || !P && !e && r) && r;
       },
       onShow: () => {
-        o9();
+        updateLastSeenDevModeUpsell();
       }
     });
   }, [n, C, e, t, T, P, l, S, E, show]);

@@ -39,7 +39,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { SharedFontsModalOrgPermissions, SharedFontsModalTeamPermissions } from '../figma_app/43951';
 import { l as _$$l } from '../figma_app/121794';
 import { selectPermissionsState } from '../figma_app/212807';
-import { c$, gw } from '../figma_app/236327';
+import { OptionComponent, DropdownWithScrim } from '../figma_app/236327';
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { useSubscription } from '../figma_app/288654';
 import { V as _$$V } from '../figma_app/312987';
@@ -172,11 +172,11 @@ function H(e) {
           children: [jsx(SvgComponent, {
             svg: SVG3,
             className: 'shared_fonts_table--menuIcon--jIy13'
-          }), s && jsx(gw, {
+          }), s && jsx(DropdownWithScrim, {
             dispatch,
             className: 'shared_fonts_table--dropdown---Uhz6',
             style: dropdownShown.data.position,
-            children: jsx(c$, {
+            children: jsx(OptionComponent, {
               onClick: () => h([e.fontInfo]),
               children: renderI18nText('resources_tab.shared_fonts_table.delete_font')
             })

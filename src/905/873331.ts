@@ -6,7 +6,7 @@ import { DialogTriggerButton } from "../905/976845";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
-import { MM, wv } from "../figma_app/236327";
+import { CheckableOptionComponent, SeparatorComponent } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { getNudgeAmounts } from "../figma_app/740163";
@@ -129,7 +129,7 @@ function D(e) {
   let o = [];
   if (e.borderOption === om.MIXED) {
     let t = Ww(om.MIXED);
-    o.push(jsx(MM, {
+    o.push(jsx(CheckableOptionComponent, {
       checked: om.MIXED === e.borderOption,
       disabled: !0,
       children: jsxs("div", {
@@ -143,10 +143,10 @@ function D(e) {
         })]
       })
     }));
-    o.push(jsx(wv, {}));
+    o.push(jsx(SeparatorComponent, {}));
   }
   let l = Ww(om.ALL);
-  o.push(jsx(MM, {
+  o.push(jsx(CheckableOptionComponent, {
     checked: om.ALL === e.borderOption,
     onClick: () => s(om.ALL),
     recordingKey: generateRecordingKey(e, om.ALL),
@@ -164,7 +164,7 @@ function D(e) {
   O.forEach(i => {
     let r = t(i).side;
     let a = Ww(i);
-    o.push(jsx(MM, {
+    o.push(jsx(CheckableOptionComponent, {
       checked: r === e.borderOption,
       onClick: () => s(r),
       recordingKey: generateRecordingKey(e, i),
@@ -181,8 +181,8 @@ function D(e) {
     }, i));
   });
   let d = Ww(om.CUSTOM);
-  o.push(jsx(wv, {}));
-  o.push(jsx(MM, {
+  o.push(jsx(SeparatorComponent, {}));
+  o.push(jsx(CheckableOptionComponent, {
     checked: om.CUSTOM === e.borderOption,
     onClick: () => s(om.CUSTOM),
     recordingKey: generateRecordingKey(e, om.CUSTOM),

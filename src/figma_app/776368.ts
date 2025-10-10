@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useLayoutEffect } from "react";
-import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { consentAllowedAtom } from "../905/18800";
 import { SprigContext } from "../905/99656";
 import { defaultSdkImplementation, SprigSDKManager } from "../905/931912";
@@ -48,8 +48,8 @@ export function $$h0({
 }
 export function $$m1(e) {
   let [t, r] = useState();
-  let n = Xr(p);
-  let s = Xr(_);
+  let n = useSetAtom(p);
+  let s = useSetAtom(_);
   useEffect(() => {
     areObjectsEqualWithRect(e, t) || r(e);
   }, [e, t]);

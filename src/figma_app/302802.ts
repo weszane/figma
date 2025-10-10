@@ -8,7 +8,7 @@ import { Fullscreen, ChangesStagerBindings, UserExperienceMode, PanelType, AppSt
 import { CodeFileIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { selectViewAction } from "../905/929976";
@@ -87,8 +87,8 @@ export function $$z9(e) {
 }
 export function $$W16(e) {
   var t;
-  let r = Xr(YD);
-  let i = Xr(Vo);
+  let r = useSetAtom(YD);
+  let i = useSetAtom(Vo);
   let [a, s] = useState(0);
   let [o, l] = useState(null);
   let d = null;

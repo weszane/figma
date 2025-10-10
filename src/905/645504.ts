@@ -4,9 +4,9 @@ import { renderI18nText } from "../905/303541";
 import { $X, fF } from "../figma_app/425283";
 import { l4, l_ } from "../figma_app/982327";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { PositioningStrategy } from "../905/858282";
 import { AdminBillingOverviewSecondaryTabOnboardingOverlay } from "../figma_app/6204";
@@ -17,9 +17,9 @@ export function $$g0({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: AdminBillingOverviewSecondaryTabOnboardingOverlay,
-    priority: N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useSingleEffect(() => {
     show();

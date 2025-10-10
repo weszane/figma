@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
 import { debounce } from "../905/915765";
 import { deepEqual } from "../905/382883";
-import { c$, bL, l9, mc, wv } from "../905/493196";
+import { SelectOptionReset, SelectGroupLabel, SelectSeparator, SelectContainer, SelectRoot } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { IconButton } from "../905/443068";
 import { W } from "../905/63398";
@@ -180,7 +180,7 @@ export function $$G1(e) {
       }(F));
     }
   }, [F, f]);
-  let H = useMemo(() => Object.entries(U).map(([e, i]) => jsx(c$, {
+  let H = useMemo(() => Object.entries(U).map(([e, i]) => jsx(SelectOptionReset, {
     value: e,
     children: jsx(setupThemeContext, {
       mode: "dark",
@@ -241,7 +241,7 @@ export function $$G1(e) {
     darkBackground: L,
     disabled: t
   }), [M, t, X, L, Z, v, _]);
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     value: Q,
     onChange: onSubmit,
     recordingKey: e.recordingKey,
@@ -249,7 +249,7 @@ export function $$G1(e) {
     onOpenChange: e => {
       valueBeforePreview && !e && clearPreview();
     },
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       disabled: t,
       width: "fill",
       label: jsx(HiddenLabel, {
@@ -260,15 +260,15 @@ export function $$G1(e) {
         "data-tooltip-type": t ? KindEnum.TEXT : void 0
       },
       children: ee
-    }), jsxs(mc, {
+    }), jsxs(SelectContainer, {
       children: [Z && jsx(Fragment, {
-        children: jsx(c$, {
+        children: jsx(SelectOptionReset, {
           value: "MIXED",
           disabled: !0,
           children: renderI18nText("fullscreen.mixed")
         }, "MIXED")
       }), ...H, X && jsxs(Fragment, {
-        children: [jsx(wv, {}), jsx(c$, {
+        children: [jsx(SelectRoot, {}), jsx(SelectOptionReset, {
           value: "CUSTOM",
           children: getFeatureFlags().ce_il_vws_custom_preview ? M ? jsx(V, {
             imageUrl: M,
@@ -276,7 +276,7 @@ export function $$G1(e) {
           }) : jsx(Qp, {}) : renderI18nText("fullscreen.properties_panel.width_profile.custom")
         }, "CUSTOM")]
       }), getFeatureFlags().ce_il_vws_custom_preview && z && jsxs(Fragment, {
-        children: [jsx(wv, {}), jsx(c$, {
+        children: [jsx(SelectRoot, {}), jsx(SelectOptionReset, {
           value: "EDIT",
           children: renderI18nText("fullscreen.properties_panel.width_profile.edit")
         }, "EDIT")]

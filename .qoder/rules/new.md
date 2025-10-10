@@ -30,6 +30,9 @@ I'm working with a compiled TypeScript code snippet (part of a larger character 
    - If the code is too long for you to process, indicate which parts need further context to complete the refactoring.
    - All code should be refactored, keep the original code name in comments.
    - The export statement left name should be the same as the original code name but its right names should be changed to the refactored code name.
+5. **Last step**:
+   - Check the output and make sure it's correct.
+   - If there are any errors, fix them.
 
 ```example
 // input

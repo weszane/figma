@@ -17,7 +17,7 @@ import { useDropdownState } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { KindEnum } from "../905/129884";
-import { Yh, TY, vg } from "../figma_app/357047";
+import { isActionEnabled, isFullscreenMenuDropdown, isActionEnabledProperty } from "../figma_app/357047";
 import { xn } from "../figma_app/108168";
 import { t as _$$t } from "../figma_app/856638";
 import { FK, rA, T0 } from "../figma_app/121043";
@@ -38,7 +38,7 @@ let R = memo(function ({
   item: e,
   recordingKey: t
 }) {
-  let r = useSelector(t => Yh(t.mirror.appModel, e.action));
+  let r = useSelector(t => isActionEnabled(t.mirror.appModel, e.action));
   let i = useSelector(t => formatI18nMessage(e.action));
   return jsx(FK, {
     action: e.action,
@@ -53,7 +53,7 @@ let L = memo(function ({
   recordingKey: r
 }) {
   let i = e.children.filter(e => !Zk(e) || !e.featureFlags || e.featureFlags.every(e => getFeatureFlags()[e]));
-  let s = selectWithShallowEqual(e => i.filter(t => Zk(t) && Yh(e.mirror.appModel, t.action)));
+  let s = selectWithShallowEqual(e => i.filter(t => Zk(t) && isActionEnabled(e.mirror.appModel, t.action)));
   let o = useSelector(e => s.length > 0 && P(s[0], e));
   if (0 === s.length) return null;
   if (e.flyoutHideOptionsIfSingleEnabledAction && 1 === s.length) {
@@ -103,9 +103,9 @@ let k = memo(function ({
   recordingKey: r,
   canEdit: i
 }) {
-  let s = useSelector(t => Yh(t.mirror.appModel, e.action));
+  let s = useSelector(t => isActionEnabled(t.mirror.appModel, e.action));
   let o = useDropdownState();
-  let l = useSelector(t => e.tool !== DesignGraphElements.NONE && e.tool === t.mirror.appModel.currentTool && !TY(o));
+  let l = useSelector(t => e.tool !== DesignGraphElements.NONE && e.tool === t.mirror.appModel.currentTool && !isFullscreenMenuDropdown(o));
   let d = useSelector(e => e.mirror.appModel.topLevelMode);
   return e.featureFlags && !e.featureFlags.every(e => getFeatureFlags()[e]) ? null : jsx(T0, {
     dropdownShown: o,
@@ -227,7 +227,7 @@ export function $$U3() {
 export function $$B2() {
   return selectWithShallowEqual(e => {
     let t = {};
-    for (let r in e.mirror.appModel) vg(r) && (t[r] = e.mirror.appModel[r]);
+    for (let r in e.mirror.appModel) isActionEnabledProperty(r) && (t[r] = e.mirror.appModel[r]);
     return t;
   });
 }
@@ -235,7 +235,7 @@ export function $$G0() {
   let e = $$B2();
   let t = selectWithShallowEqual(e => e.mirror.selectionProperties.resettableInstanceOverrides?.selectionOverrides);
   let r = selectCurrentFile();
-  return useCallback(n => Yh(e, n.action) && (!n.featureFlags || n.featureFlags.every(e => getFeatureFlags()[e])) && (!n.isAvailable || n.isAvailable(e, t, r)), [e, t, r]);
+  return useCallback(n => isActionEnabled(e, n.action) && (!n.featureFlags || n.featureFlags.every(e => getFeatureFlags()[e])) && (!n.isAvailable || n.isAvailable(e, t, r)), [e, t, r]);
 }
 export const PK = $$G0;
 export const QE = $$j1;

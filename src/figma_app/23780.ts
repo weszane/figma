@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { l as _$$l } from "../905/479687";
 import a from "classnames";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { KeyboardShortcut } from "../figma_app/420927";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 var s = a;
@@ -24,7 +24,7 @@ function p(e) {
   });
 }
 export function $$_0(e) {
-  return jsxs(c$, {
+  return jsxs(OptionComponent, {
     disabled: !e.isEnabled,
     onClick: e.onClick,
     onPointerUp: e.onPointerUp,
@@ -55,7 +55,7 @@ export function $$_0(e) {
 export function $$h1(e) {
   return jsx("div", {
     className: "action_option--largeOptionContainerWrapper--AePOP",
-    children: jsx(c$, {
+    children: jsx(OptionComponent, {
       disabled: !e.isEnabled,
       onClick: e.onClick,
       onPointerUp: e.onPointerUp,

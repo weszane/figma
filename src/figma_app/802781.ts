@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { bL, mc as _$$mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectContainer, SelectOptionReset } from "../905/493196";
 import { v as _$$v } from "../905/213481";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuGroupComp, MenuTitleComp } from "../figma_app/860955";
 import { H_ } from "../905/963340";
@@ -82,7 +82,7 @@ function w(e) {
       dir: r === SortOrder.ASC ? "asc" : r === SortOrder.DESC ? "desc" : void 0
     }));
   };
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     value: t,
     onChange: e => r(e ?? ""),
     children: [jsx(_$$v.SelectTrigger, {
@@ -90,8 +90,8 @@ function w(e) {
       children: jsx("span", {
         children: e.filterDisplayText[e.checkedValue]
       })
-    }), jsx(_$$mc, {
-      children: e.filterOptions.map(t => jsx(c$, {
+    }), jsx(SelectContainer, {
+      children: e.filterOptions.map(t => jsx(SelectOptionReset, {
         value: t.toString(),
         children: e.filterDisplayText[t]
       }, t))

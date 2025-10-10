@@ -1,13 +1,13 @@
 import { useCallback, useEffect } from "react";
 import { debug } from "../figma_app/465776";
-import { k } from "../905/749197";
+import { DDRenderMode } from "../905/749197";
 import { ScrollBehavior } from "../figma_app/763686";
 import { getDepth, isDescendant, getParent, isContainerType } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { memoizeByArgs } from "../figma_app/815945";
 import { Fj, GY } from "../figma_app/76123";
-import { cX, YI, K3 } from "../figma_app/678300";
+import { findNodeWithTraversal, applyToNodes, isNodeSelected } from "../figma_app/678300";
 import { n as _$$n } from "../figma_app/583890";
 import { gz } from "../figma_app/605071";
 var $$m12 = (e => (e.Object = "OBJECT", e.Webpage = "WEBPAGE", e.CodeComponent = "CODE_COMPONENT", e))($$m12 || {});
@@ -75,7 +75,7 @@ export function $$I0(e, t, r, n, i, a = !1) {
     (!l || r[e] > r[l]) && (l = e);
   }
   if (!s && (o && i < r[o] ? s = o : l && i > r[l] + n[l] && (s = l)), s && a) {
-    let r = cX(e, t, s);
+    let r = findNodeWithTraversal(e, t, s);
     if (r) return r.guid;
   }
   return s;
@@ -83,7 +83,7 @@ export function $$I0(e, t, r, n, i, a = !1) {
 let $$S14 = 16;
 let v = memoizeByArgs((e, t) => {
   let r = 1 / 0;
-  YI(e, t, t => {
+  applyToNodes(e, t, t => {
     t && (r = Math.min(r, getDepth(e, t.guid)));
   });
   r === 1 / 0 && (r = 0);
@@ -92,7 +92,7 @@ let v = memoizeByArgs((e, t) => {
 let A = memoizeByArgs((e, t, r) => null !== t && null === t.guid && t.children.length > 0 && !t.children.some(t => isDescendant(e, t, r)));
 let x = memoizeByArgs((e, t) => {
   let r = new Set();
-  YI(e, t, e => {
+  applyToNodes(e, t, e => {
     e && r.add(e.type);
   });
   return r;
@@ -233,7 +233,7 @@ function D(e, t, r, n, a, l, d, c, u, _) {
   let E = f.uiOrderedChildren.indexOf(a);
   let b = isContainerType(h.type) && !$$F15(c);
   let T = (i, a, s) => P(e, t, r, n, l, i, a, s, u, _);
-  if (b && K3(t, a)) return T(f, E, d > m + y(e, a, n) / 2 ? "after" : "before");
+  if (b && isNodeSelected(t, a)) return T(f, E, d > m + y(e, a, n) / 2 ? "after" : "before");
   if (b) {
     if (d < m + g / 3) return T(f, E, "before");
     if (!(d < m + 2 * g / 3)) return h.isExpanded || h.isTemporarilyExpanded ? T(h, 0, "before") : T(f, E, "after");
@@ -280,7 +280,7 @@ export function $$k6(e, t, r, n, a, o, l, d, c, u, _) {
     let h = $$I0(e, t, r, n, l, !0);
     let m = null;
     !h && d ? m = function (e, t, r, n, a, o, l, d, c, u) {
-      let _ = cX(e, t, a.parentGuid);
+      let _ = findNodeWithTraversal(e, t, a.parentGuid);
       if (_) return D(e, t, r, n, _.guid, o, l, d, c, u);
       {
         var h;
@@ -295,7 +295,7 @@ export function $$k6(e, t, r, n, a, o, l, d, c, u, _) {
   }
 }
 export function $$M2(e, t) {
-  return e.childrenDisplayOrder === k.DESIGN ? e.uiOrderedChildren.length - t : t;
+  return e.childrenDisplayOrder === DDRenderMode.DESIGN ? e.uiOrderedChildren.length - t : t;
 }
 export function $$F15(e) {
   return "WEBPAGE" === e;

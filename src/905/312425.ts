@@ -1,11 +1,11 @@
-import { _ } from "../905/199441";
+import { createReactiveValue } from "../905/199441";
 export class $$r0 {
   constructor() {
     this.THRESHOLD_MS_TO_CONCATENATE_MESSAGES = 3e3;
     this.THRESHOLD_CHARS_TO_NEW_PARAGRAPH = 300;
     this.THRESHOLD_CHARS_TO_NEW_CAPTION = 500;
     this.THRESHOLD_PARAGRAPHS_TO_NEW_CAPTION = 6;
-    this.store = _(null);
+    this.store = createReactiveValue(null);
   }
   subscribe(e) {
     this.store.subscribe(e);

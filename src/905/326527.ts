@@ -1,100 +1,178 @@
-import { LayoutTabType } from "../figma_app/763686";
-import { debugState } from "../905/407919";
-import { getSelectedViewPluginVersions } from "../figma_app/740025";
-import { updateActiveTextReviewPlugin } from "../figma_app/741237";
-import { runSpellCheckCallback, hasSpellCheckCallback, hasPluginPageLoadedCallback, runPluginPageLoadedCallback } from "../figma_app/603466";
-import { canRunPlugin } from "../figma_app/300692";
-import { SH } from "../figma_app/790714";
-import { hasStoredValue } from "../905/851937";
-import { PluginManager } from "../figma_app/612938";
-import { handlePluginError } from "../905/753206";
-import { hasLocalFileId } from "../figma_app/155287";
-let h = class {
+import { debugState } from "../905/407919"
+import { handlePluginError } from "../905/753206"
+import { hasStoredValue } from "../905/851937"
+import { hasLocalFileId } from "../figma_app/155287"
+import { canRunPlugin } from "../figma_app/300692"
+import { hasPluginPageLoadedCallback, hasSpellCheckCallback, runPluginPageLoadedCallback, runSpellCheckCallback } from "../figma_app/603466"
+import { PluginManager } from "../figma_app/612938"
+import { getSelectedViewPluginVersions } from "../figma_app/740025"
+import { updateActiveTextReviewPlugin } from "../figma_app/741237"
+import { LayoutTabType } from "../figma_app/763686"
+import { SH } from "../figma_app/790714"
+
+// Renamed variables, added types, simplified logic, improved readability
+interface SpellCheckResult {
+  start: number
+  end: number
+  color: string
+  suggestions: string[]
+}
+
+interface Plugin {
+  localFileId?: string
+  plugin_id?: string
+  name?: string
+  manifest?: {
+    capabilities?: string[]
+  }
+}
+
+export class TextReviewPluginManager {
+  name: string = "plugin"
+  runningPlugin: Promise<void> | null = null
+  onExitTextEditModeCallbackCalled: boolean = false
+
   constructor() {
-    this.name = "plugin";
-    this.runningPlugin = null;
-    this.onExitTextEditModeCallbackCalled = !1;
-    this.reviewText = async e => {
-      if (hasStoredValue() && SH()?.command !== "textreview") return [];
-      this.startTextReviewPlugin();
-      let t = runSpellCheckCallback(e);
-      let i = await Promise.race([t, new Promise(e => {
-        setTimeout(() => e("timeout"), 3e3);
-      })]);
-      let n = SH()?.plugin;
-      let r = n && hasLocalFileId(n);
-      if ("timeout" === i) {
-        if (!hasSpellCheckCallback()) {
-          handlePluginError(r ? "Text review plugins must call on('textreview') upon running" : void 0);
-          return [];
-        }
-        i = await t;
+    this.reviewText = this.reviewText.bind(this)
+  }
+
+  reviewText = async (text: string): Promise<SpellCheckResult[]> => {
+    if (hasStoredValue() && SH()?.command !== "textreview") {
+      return []
+    }
+
+    this.startTextReviewPlugin()
+
+    const spellCheckPromise = runSpellCheckCallback(text)
+
+    const timeoutPromise = new Promise<"timeout">((resolve) => {
+      setTimeout(() => resolve("timeout"), 3000)
+    })
+
+    let spellCheckResult = await Promise.race([spellCheckPromise, timeoutPromise])
+
+    const currentPlugin = SH()?.plugin
+    const isLocalPlugin = currentPlugin && hasLocalFileId(currentPlugin)
+
+    if (spellCheckResult === "timeout") {
+      if (!hasSpellCheckCallback()) {
+        handlePluginError(
+          isLocalPlugin
+            ? "Text review plugins must call on('textreview') upon running"
+            : undefined,
+        )
+        return []
       }
-      return i.map(e => ({
-        start: e.start,
-        end: e.end,
-        color: e.color,
-        suggestions: e.suggestions
-      }));
-    };
+      spellCheckResult = await spellCheckPromise
+    }
+
+    return spellCheckResult.map((item: any) => ({
+      start: item.start,
+      end: item.end,
+      color: item.color,
+      suggestions: item.suggestions,
+    }))
   }
-  async onExitTextEditMode() {
-    this.onExitTextEditModeCallbackCalled || (this.onExitTextEditModeCallbackCalled = !0, hasPluginPageLoadedCallback() && !(await runPluginPageLoadedCallback()) && updateActiveTextReviewPlugin(null), handlePluginError());
+
+  async onExitTextEditMode(): Promise<void> {
+    if (!this.onExitTextEditModeCallbackCalled) {
+      this.onExitTextEditModeCallbackCalled = true
+
+      if (hasPluginPageLoadedCallback()) {
+        const pageLoaded = await runPluginPageLoadedCallback()
+        if (!pageLoaded) {
+          updateActiveTextReviewPlugin(null)
+        }
+      }
+
+      handlePluginError()
+    }
   }
-  startTextReviewPlugin() {
-    if (this.runningPlugin) return;
-    let e = debugState.getState();
-    let t = f(e);
-    if (!hasStoredValue() && t) {
-      let i = debugState.subscribe(() => {
-        debugState.getState().mirror.appModel.activeCanvasEditModeType !== LayoutTabType.TEXT && this.onExitTextEditMode();
-      });
-      let a = () => {
-        this.runningPlugin = null;
-        i();
-        hasLocalFileId(t) && console.log(`Closing local text review plugin: ${t.name}`);
-      };
-      hasLocalFileId(t) && console.log(`Starting local text review plugin: ${t.name}`);
-      this.onExitTextEditModeCallbackCalled = !1;
+
+  startTextReviewPlugin(): void {
+    if (this.runningPlugin) {
+      return
+    }
+
+    const state = debugState.getState()
+    const plugin = getTextReviewPlugin(state)
+
+    if (!hasStoredValue() && plugin) {
+      const unsubscribe = debugState.subscribe(() => {
+        const currentState = debugState.getState()
+        if (currentState.mirror.appModel.activeCanvasEditModeType !== LayoutTabType.TEXT) {
+          this.onExitTextEditMode()
+        }
+      })
+
+      const cleanup = () => {
+        this.runningPlugin = null
+        unsubscribe()
+        if (hasLocalFileId(plugin)) {
+          console.log(`Closing local text review plugin: ${plugin.name}`)
+        }
+      }
+
+      if (hasLocalFileId(plugin)) {
+        console.log(`Starting local text review plugin: ${plugin.name}`)
+      }
+
+      this.onExitTextEditModeCallbackCalled = false
+
       this.runningPlugin = PluginManager.instance.enqueue({
         mode: "run-forever",
         runPluginArgs: {
-          plugin: t,
+          plugin,
           command: "textreview",
-          queryMode: !0,
-          openFileKey: e.openFile.key,
-          isWidget: !1,
+          queryMode: true,
+          openFileKey: state.openFile.key,
+          isWidget: false,
           runMode: "textreview",
-          triggeredFrom: "textreview"
-        }
-      }).then(a, a);
+          triggeredFrom: "textreview",
+        } as any,
+      }).then(cleanup, cleanup)
     }
   }
-  static shouldUsePluginForSpellChecking() {
-    return !!f(debugState.getState());
+
+  static shouldUsePluginForSpellChecking(): boolean {
+    return !!getTextReviewPlugin(debugState.getState())
   }
-};
-h.instance = new h();
-export let $$g0 = h;
-function f(e) {
-  let {
-    localPlugins,
-    installedPluginVersions,
-    mirror: {
-      appModel: {
-        activeTextReviewPlugin
-      }
-    }
-  } = e;
-  let r = getSelectedViewPluginVersions(e);
-  if (!activeTextReviewPlugin) return null;
-  let s = null;
-  if ("local" === activeTextReviewPlugin.type ? s = Object.values(localPlugins).find(e => e.localFileId === activeTextReviewPlugin.localFileId) ?? null : "published" === activeTextReviewPlugin.type && (s = [...Object.values(installedPluginVersions.plugins), ...Object.values(r)].find(e => !hasLocalFileId(e) && e.plugin_id === activeTextReviewPlugin.pluginId) ?? null), !s || !s?.manifest.capabilities?.some(e => "textreview" === e)) return null;
-  let {
-    canRun
-  } = canRunPlugin({
-    plugin: s
-  });
-  return canRun ? s : null;
+
+  static instance: TextReviewPluginManager | undefined = new TextReviewPluginManager()
 }
-export const X = $$g0;
+
+function getTextReviewPlugin(state: AppState): Plugin | null {
+  const { localPlugins, installedPluginVersions } = state
+  const { activeTextReviewPlugin } = state.mirror.appModel
+
+  const viewPluginVersions = getSelectedViewPluginVersions(state)
+
+  if (!activeTextReviewPlugin) {
+    return null
+  }
+
+  let plugin: Plugin | null = null
+
+  if (activeTextReviewPlugin.type === "local") {
+    plugin = Object.values(localPlugins).find(
+      p => p.localFileId === activeTextReviewPlugin.localFileId,
+    ) ?? null
+  }
+  else if (activeTextReviewPlugin.type === "published") {
+    plugin = [
+      ...Object.values(installedPluginVersions.plugins),
+      ...Object.values(viewPluginVersions),
+    ].find(
+      p => !hasLocalFileId(p) && p.plugin_id === activeTextReviewPlugin.pluginId,
+    ) ?? null
+  }
+
+  if (!plugin || !plugin.manifest?.capabilities?.some(cap => cap === "textreview")) {
+    return null
+  }
+
+  const { canRun } = canRunPlugin({ plugin })
+  return canRun ? plugin : null
+}
+
+export const X = TextReviewPluginManager

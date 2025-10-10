@@ -9,7 +9,7 @@ import { Button } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import { textDisplayConfig } from "../905/687265";
 import { stylex } from "@stylexjs/stylex";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useSingleEffect } from "../905/791079";
 import { KeyboardNavigationProvider } from "../figma_app/119475";
@@ -194,7 +194,7 @@ function G({
   });
 }
 function H() {
-  let e = Xr(jx);
+  let e = useSetAtom(jx);
   let t = useAtomWithSubscription(FX);
   let n = useCurrentFileKey();
   useSingleEffect(() => {

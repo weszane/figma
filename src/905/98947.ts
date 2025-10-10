@@ -1,4 +1,4 @@
-import { atom, t_ } from "../figma_app/27355";
+import { atom, atomWithDefault } from "../figma_app/27355";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
 import { userFlagsAtom } from "../figma_app/545877";
@@ -45,7 +45,7 @@ let $$M4 = atom(e => {
 });
 let $$j23 = atom(null);
 let $$U2 = atom(e => e($$j23) === ProductAccessTypeEnum.DEVELOPER);
-let $$B1 = t_(e => !!e(userFlagsAtom).data?.opted_in_email);
+let $$B1 = atomWithDefault(e => !!e(userFlagsAtom).data?.opted_in_email);
 export const $l = $$h0;
 export const BG = $$B1;
 export const FP = $$U2;

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect } from "react";
-import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { zD, L8, jM, J, P_, l4, a3, wf } from "../905/124270";
 import { Hz, RF, p2, H9, aI } from "../905/714062";
 import { getFacetPrefix, createResourceFacet, getFacetDisplayValue, getFacetValueLabel, updateCreatorFacet, FacetOperation, updateSpaceFacet, buildSearchQuery, getFacetQueryParams, buildQueryObject } from "../905/171315";
@@ -102,7 +102,7 @@ export function $$k0({
     let [y, b] = useAtomValueAndSetter(searchInputAtom);
     let v = _$$f();
     let I = _$$n();
-    let E = Xr(l4(e?.facetType ?? null));
+    let E = useSetAtom(l4(e?.facetType ?? null));
     let x = useAtomWithSubscription(hO.isFragmentSearchAtom);
     let S = _$$L(x ? "fragment_search_modal" : "file_browser", t, !0);
     let w = useCallback(t => {

@@ -35,7 +35,7 @@ import { ModalRootComponent } from '../905/38914';
 import { $ as _$$$2 } from '../905/43354';
 import { k as _$$k3 } from '../905/44647';
 import { resourceDataToSubscriptionMapAtom } from '../905/72677';
-import { n as _$$n } from '../905/79930';
+import { TeamTemplateType } from '../905/79930';
 import { o as _$$o4 } from '../905/89370';
 import { m as _$$m } from '../905/99004';
 import { selectWithShallowEqual } from '../905/103090';
@@ -108,7 +108,7 @@ import { customHistory } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
 import { setupThemeContext } from '../905/614223';
 import { convertImageDataToURL } from '../905/619652';
-import { e as _$$e2 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { ButtonPrimitive } from '../905/632989';
 import { getVisibleTheme } from '../905/640017';
 import { XF } from '../905/661614';
@@ -174,7 +174,7 @@ import { E as _$$E2 } from '../3674/466343';
 import { S as _$$S } from '../3674/674644';
 import { s as _$$s5 } from '../3682/764731';
 import { normalizeJobRole } from '../3973/538504';
-import { NuxOnboardingOverlay } from '../4452/529989';
+import { BaseNuxOnboardingOverlay } from '../4452/529989';
 import { m as _$$m4 } from '../5421/111531';
 import { Ay as _$$Ay5 } from '../5421/231229';
 import { u as _$$u2 } from '../5421/310610';
@@ -215,7 +215,7 @@ import { Dm } from '../figma_app/8833';
 import { ei as _$$ei } from '../figma_app/9054';
 import { KP } from '../figma_app/12491';
 import { y as _$$y } from '../figma_app/13082';
-import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { u24 } from '../figma_app/27776';
 import { GQ, Ye } from '../figma_app/32128';
 import { pO } from '../figma_app/42945';
@@ -261,7 +261,7 @@ import { isOnboardingComplete } from '../figma_app/242339';
 import { MM } from '../figma_app/246831';
 import { r0 as _$$r5, yU as _$$yU, d9, GM, kR, LG, qQ, QU } from '../figma_app/257614';
 import { J as _$$J3 } from '../figma_app/261874';
-import { N as _$$N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { DialogActionStrip, DialogBody, DialogContents, DialogCustomContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { A5 } from '../figma_app/274104';
 import { alwaysFalseCallback2 } from '../figma_app/275462';
@@ -311,7 +311,7 @@ import { oR as _$$oR, E_ } from '../figma_app/598952';
 import { WithTrackedButton, WithTrackedPopupButtonPrimitive } from '../figma_app/617427';
 import { lV as _$$lV } from '../figma_app/617606';
 import { kQ, pZ } from '../figma_app/620124';
-import { o9 as _$$o } from '../figma_app/621201';
+import { updateLastSeenDevModeUpsell } from '../figma_app/621201';
 import { JT } from '../figma_app/632248';
 import { isPublishedTeamLibrary, LibraryTabEnum } from '../figma_app/633080';
 import { zl as _$$zl } from '../figma_app/641749';
@@ -1086,10 +1086,10 @@ function eW() {
   let s = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
-  let o = Xr(hj);
-  let a = Xr(d1);
+  let o = useSetAtom(hj);
+  let a = useSetAtom(d1);
   let d = useAtomWithSubscription(Sp);
-  let u = Xr(Sp);
+  let u = useSetAtom(Sp);
   let c = useRef(null);
   let x = useNavigateToViewport('dev-handoff-rfd-signals-frame-upsell');
   let [p, h] = useState(!1);
@@ -1115,9 +1115,9 @@ function eW() {
     complete,
     uniqueId,
     isShowing
-  } = _$$e2({
+  } = useOverlay({
     overlay: ReadyForDevNodeNameChangeUpsell,
-    priority: _$$N.HIGH_PRIORITY_MODAL,
+    priority: ModalPriority.HIGH_PRIORITY_MODAL,
     experiment: {
       check: y,
       predicate: e => e,
@@ -1179,7 +1179,7 @@ function e7() {
   let l = useCanAccessDevModeEntryPoint();
   let s = _$$J3();
   let o = _$$U2('upsell');
-  let a = Xr(e4);
+  let a = useSetAtom(e4);
   let {
     show,
     complete,
@@ -1194,9 +1194,9 @@ function e7() {
       complete: _complete,
       isShowing,
       uniqueId
-    } = _$$e2({
+    } = useOverlay({
       overlay: DeveloperContextualUpsellMeasureOverlay,
-      priority: _$$N.DEFAULT_MODAL,
+      priority: ModalPriority.DEFAULT_MODAL,
       experiment: {
         check: t,
         predicate: e => e,
@@ -1208,9 +1208,9 @@ function e7() {
       complete: _complete2,
       isShowing: _isShowing,
       uniqueId: _uniqueId
-    } = _$$e2({
+    } = useOverlay({
       overlay: DeveloperContextualUpsellExportOverlay,
-      priority: _$$N.DEFAULT_MODAL,
+      priority: ModalPriority.DEFAULT_MODAL,
       experiment: {
         check: t,
         predicate: e => e,
@@ -1249,7 +1249,7 @@ function e7() {
     show(n)({
       canShow: n => !t && l && s && e && normalizeJobRole(n) === 'developer',
       onShow: () => {
-        _$$o();
+        updateLastSeenDevModeUpsell();
       }
     });
   });
@@ -1318,15 +1318,15 @@ function th() {
     complete,
     isShowing,
     uniqueId
-  } = _$$e2({
+  } = useOverlay({
     overlay: DeveloperRFDUpsellOverlay,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [p]);
   useEffect(() => {
     show({
       canShow: l => h && d && !u && !e.loading && !e.hasPendingRequest && o && c && !t && normalizeJobRole(l) === 'developer',
       onShow: () => {
-        _$$o();
+        updateLastSeenDevModeUpsell();
       }
     });
   }, [show, u, c, d, t, p, h, e, o]);
@@ -1428,15 +1428,15 @@ function tk() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e2({
+  } = useOverlay({
     overlay: ViewerDevModeStatusChangedTooltipOverlay,
-    priority: _$$N.OVERRIDING_MODAL - 1
+    priority: ModalPriority.OVERRIDING_MODAL - 1
   }, [i]);
   useEventForwarder(uniqueId, 'ui3_finished_entering_design_mode', () => {
     getQueryParam('rfd-notif') && show({
       canShow: e => !e.file?.hasPermission,
       onShow: () => {
-        _$$o();
+        updateLastSeenDevModeUpsell();
       }
     });
   });
@@ -1531,9 +1531,9 @@ function tW() {
     isShowing,
     show,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: DevModeDemoFileEntryPoint,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   return (useEffect(() => {
     show({
@@ -1647,9 +1647,9 @@ function t4() {
     isShowing,
     show,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: FigmaMakeUpsellInDesignEditorOverlay,
-    priority: _$$N.DEFAULT_MODAL,
+    priority: ModalPriority.DEFAULT_MODAL,
     experiment: {
       check: c,
       predicate: e => e,
@@ -1791,8 +1791,8 @@ function lw({
     insertTemplate
   } = Fz();
   let A = _$$g2();
-  let M = Xr(Yq);
-  let O = Xr(bj);
+  let M = useSetAtom(Yq);
+  let O = useSetAtom(bj);
   let [z, B] = useState(!1);
   let F = GQ();
   let $ = _$$P();
@@ -1816,7 +1816,7 @@ function lw({
       let l = R.data[t]?.files;
       if (!l) return;
       let n = {
-        type: _$$n.HubFile,
+        type: TeamTemplateType.HubFile,
         template: l
       };
       e.push(n);
@@ -1862,7 +1862,7 @@ function lw({
       }),
       template: {
         template: n,
-        type: _$$n.HubFile
+        type: TeamTemplateType.HubFile
       },
       fileKey: C,
       dispatch: t,
@@ -1871,7 +1871,7 @@ function lw({
     }) : await insertTemplate({
       template: {
         template: n,
-        type: _$$n.HubFile
+        type: TeamTemplateType.HubFile
       },
       userTriggered: !1,
       editScopeType: SourceType.ONBOARDING,
@@ -1899,7 +1899,7 @@ function lw({
     let l = R.data[e]?.files;
     if (!l) return;
     let n = {
-      type: _$$n.HubFile,
+      type: TeamTemplateType.HubFile,
       template: l
     };
     let i = lS[e];
@@ -2049,9 +2049,9 @@ function lL() {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: StartingPointsTemplatesModal,
-    priority: _$$N.OVERRIDING_MODAL + 1
+    priority: ModalPriority.OVERRIDING_MODAL + 1
   }, [h, y]);
   return (useEffect(() => {
     t && p && !u && !s && d && !isShowing && (l ? show() : f && m && _ && show({
@@ -2087,9 +2087,9 @@ function lV() {
     complete,
     show,
     uniqueId
-  } = _$$e2({
+  } = useOverlay({
     overlay: VisualAssetsIntroTooltip,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   let a = wA();
   let d = useIsProgressBarHiddenOrLocked();
@@ -3943,7 +3943,7 @@ function iS({
   let o = 'design-linter-dropdown';
   let a = useRef(null);
   let [d, u] = useState(null);
-  let c = Xr(_$$dd);
+  let c = useSetAtom(_$$dd);
   let p = useCallback(e => {
     u(e);
   }, [u]);
@@ -4794,9 +4794,9 @@ function i1({
   libraryData: e,
   hasLoaded: t
 }) {
-  let l = Xr(_M);
-  let r = Xr(_$$E4);
-  let s = Xr(Dg);
+  let l = useSetAtom(_M);
+  let r = useSetAtom(_$$E4);
+  let s = useSetAtom(Dg);
   let o = useCallback(() => {
     l(FR.LIBRARY_SELECTOR_FROM_ALL_GROUPS_VIEW);
   }, [l]);
@@ -5032,8 +5032,8 @@ let rs = memo(({
   group: e,
   virtualRow: t
 }) => {
-  let l = Xr(NM);
-  let r = Xr(_M);
+  let l = useSetAtom(NM);
+  let r = useSetAtom(_M);
   let [s, o] = useAtomValueAndSetter(Dg);
   let [a, d] = _$$M2();
   let u = useCallback(() => {
@@ -7995,10 +7995,10 @@ function s7({
   } = e ?? {};
   let d = useRef(null);
   let [u, c] = useAtomValueAndSetter(uw);
-  let p = Xr(_$$aW);
-  let h = Xr(_$$iO);
-  let m = Xr(_$$rg);
-  let f = Xr(jV);
+  let p = useSetAtom(_$$aW);
+  let h = useSetAtom(_$$iO);
+  let m = useSetAtom(_$$rg);
+  let f = useSetAtom(jV);
   let y = _$$sf();
   let {
     fix
@@ -8097,10 +8097,10 @@ function s8({
   let c = useRef(null);
   let p = _$$sf();
   let [h, m] = useAtomValueAndSetter(uw);
-  let f = Xr(_$$aW);
-  let y = Xr(_$$iO);
-  let _ = Xr(_$$rg);
-  let b = Xr(jV);
+  let f = useSetAtom(_$$aW);
+  let y = useSetAtom(_$$iO);
+  let _ = useSetAtom(_$$rg);
+  let b = useSetAtom(jV);
   let {
     fix
   } = sv(l);
@@ -8231,10 +8231,10 @@ function s6({
   let p = useRef(null);
   let h = _$$sf();
   let [m, f] = useAtomValueAndSetter(uw);
-  let y = Xr(_$$aW);
-  let _ = Xr(_$$iO);
-  let b = Xr(_$$rg);
-  let j = Xr(jV);
+  let y = useSetAtom(_$$aW);
+  let _ = useSetAtom(_$$iO);
+  let b = useSetAtom(_$$rg);
+  let j = useSetAtom(jV);
   let {
     fix
   } = sv(l);
@@ -8487,10 +8487,10 @@ function or({
   let p = useRef(null);
   let h = _$$sf();
   let [m, f] = useAtomValueAndSetter(uw);
-  let y = Xr(_$$aW);
-  let _ = Xr(_$$iO);
-  let b = Xr(_$$rg);
-  let j = Xr(jV);
+  let y = useSetAtom(_$$aW);
+  let _ = useSetAtom(_$$iO);
+  let b = useSetAtom(_$$rg);
+  let j = useSetAtom(jV);
   let {
     fix
   } = sv(r);
@@ -8882,10 +8882,10 @@ function op({
   let c = useRef(null);
   let p = _$$sf();
   let [h, m] = useAtomValueAndSetter(uw);
-  let f = Xr(_$$aW);
-  let y = Xr(_$$iO);
-  let _ = Xr(_$$rg);
-  let b = Xr(jV);
+  let f = useSetAtom(_$$aW);
+  let y = useSetAtom(_$$iO);
+  let _ = useSetAtom(_$$rg);
+  let b = useSetAtom(jV);
   let {
     fix
   } = sv(r);
@@ -9102,11 +9102,11 @@ function ob({
   let p = useRef(null);
   let h = _$$sf();
   let [m, f] = useAtomValueAndSetter(uw);
-  let y = Xr(_$$aW);
-  let _ = Xr(_$$iO);
-  let b = Xr(_$$rg);
-  let j = Xr(jV);
-  let v = Xr(Ue);
+  let y = useSetAtom(_$$aW);
+  let _ = useSetAtom(_$$iO);
+  let b = useSetAtom(_$$rg);
+  let j = useSetAtom(jV);
+  let v = useSetAtom(Ue);
   let {
     fix
   } = sv(r);
@@ -9364,10 +9364,10 @@ function oS({
   } = t ?? {};
   let a = useRef(null);
   let [d, u] = useAtomValueAndSetter(uw);
-  let c = Xr(_$$aW);
-  let p = Xr(_$$iO);
-  let h = Xr(_$$rg);
-  let m = Xr(jV);
+  let c = useSetAtom(_$$aW);
+  let p = useSetAtom(_$$iO);
+  let h = useSetAtom(_$$rg);
+  let m = useSetAtom(jV);
   let f = _$$sf();
   let {
     fix
@@ -9787,20 +9787,20 @@ function oB() {
     };
   }();
   let l = function () {
-    let e = Xr($H);
+    let e = useSetAtom($H);
     return useMemo(() => ia()(t => {
       e(t);
     }, 100), [e]);
   }();
   let r = function () {
-    let e = Xr(_$$r3);
+    let e = useSetAtom(_$$r3);
     return useMemo(() => ia()(t => {
       e(t);
     }, 100), [e]);
   }();
   let s = Hl();
   let o = useAtomWithSubscription(_M);
-  let d = Xr($H);
+  let d = useSetAtom($H);
   let u = useCallback(e => {
     e.size && l(e.size);
     r(e.position);
@@ -9961,7 +9961,7 @@ function oP() {
   });
 }
 function oV() {
-  let e = Xr(_M);
+  let e = useSetAtom(_M);
   let t = _i();
   let l = useCallback(async () => {
     try {
@@ -10300,9 +10300,9 @@ let a_ = memo(() => {
   });
 });
 function aO() {
-  let e = _$$e2({
+  let e = useOverlay({
     overlay: MobileReplyUpsellAnnouncement,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useEventForwarder(e.uniqueId, 'commentThreadMobileAnnouncementClicked', () => {
     trackEventAnalytics('sidebar_announcement_mobile_app_download_prompt_modal_shown');
@@ -10387,7 +10387,7 @@ function dc({
   let c = useMemo(() => jsx(_$$d2, {
     nodeGuid: u
   }), [u]);
-  let x = Xr(mC(u));
+  let x = useSetAtom(mC(u));
   let p = Xu();
   let {
     changedFiles
@@ -10869,7 +10869,7 @@ let dA = memo(() => {
 let dM = memo(() => {
   return jsxs(Fragment, {
     children: [jsx(_$$p2, {
-      children: jsx(NuxOnboardingOverlay, {
+      children: jsx(BaseNuxOnboardingOverlay, {
         entryPoint: C5.Design
       })
     }), jsx(_$$p2, {

@@ -1,5 +1,5 @@
 import { useId, useCallback, useRef, useEffect } from "react";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { KeyCodes } from "../905/63728";
 import { TT, Bw } from "../figma_app/604494";
 import { TH } from "../figma_app/171177";
@@ -13,8 +13,8 @@ export function $$l1({
   target: c
 }) {
   let u = useId();
-  let p = Xr(TT);
-  let m = Xr(Bw);
+  let p = useSetAtom(TT);
+  let m = useSetAtom(Bw);
   let h = useCallback(() => {
     e?.onAction?.({
       shortcut: null,

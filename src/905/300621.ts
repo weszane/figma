@@ -20,17 +20,17 @@ import { getFeatureFlags } from '../905/601108';
 import { createFileLibraryKeys } from '../905/651613';
 import { LoadingRow } from '../905/682977';
 import { kz } from '../905/691188';
-import { S as _$$S } from '../905/711770';
+import { useLibraryFileExpanded } from '../905/711770';
 import { liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { l as _$$l } from '../905/716947';
-import { I as _$$I } from '../905/717213';
+import { formatLibraryCounts } from '../905/717213';
 import { m as _$$m } from '../905/760316';
 import { u as _$$u2 } from '../905/831362';
 import { useCurrentUserOrgId } from '../905/845253';
 import { useFileByKey } from '../905/862913';
 import { LibraryItemTilesByPage } from '../905/909811';
-import { b as _$$b } from '../905/937225';
+import { isEqualZero } from '../905/937225';
 import { librariesAPI } from '../905/939602';
 import { filesByLibraryKeyAtom } from '../905/977779';
 import { getLibraryKeyWithReport } from '../905/997221';
@@ -66,8 +66,8 @@ function j({
 }) {
   let m = createFileLibraryKeys(e.key, t?.library_key ?? null);
   let h = t?.library_name ?? '';
-  let g = _$$b(i, r, a, 0);
-  let f = _$$S({
+  let g = isEqualZero(i, r, a, 0);
+  let f = useLibraryFileExpanded({
     disabled: g,
     libraryIdentifier: m,
     fileName: h,
@@ -96,7 +96,7 @@ function j({
         noMargin: !0
       }), jsx('div', {
         className: 'figjam_file_row--figjamFileItemCount--GgBHq',
-        children: u ? jsx(_$$I, {
+        children: u ? jsx(formatLibraryCounts, {
           numComponents: i,
           numStateGroups: r,
           numStyles: a,

@@ -5,7 +5,7 @@ import { deepEqual } from "../905/382883";
 import { clamp } from "../figma_app/492908";
 import { LayoutTabType, Fullscreen, SceneGraphHelpers, CustomFocusHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import u from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -274,7 +274,7 @@ export function $$j2({
     };
   }(k, er);
   !function (e, t, r, n, a, s, o, l, d) {
-    let u = Xr(_$$f);
+    let u = useSetAtom(_$$f);
     let p = getSelectedEditorType();
     useEffect(() => {
       e && u({

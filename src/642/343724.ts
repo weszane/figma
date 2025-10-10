@@ -17,7 +17,7 @@ import { preventDefaultAndStopPropagation } from "../figma_app/753501";
 import { A0, Br } from "../figma_app/454974";
 import { selectCurrentFile } from "../figma_app/516028";
 import { KindEnum } from "../905/129884";
-import { c1 } from "../figma_app/357047";
+import { getKeyboardShortcut } from "../figma_app/357047";
 import { BZ } from "../642/998522";
 import { X } from "../642/70391";
 import { X as _$$X } from "../642/183469";
@@ -114,7 +114,7 @@ function A(e) {
     let s = [{
       displayText: formatI18nMessage(i),
       callback: l,
-      sideText: c1(t, i),
+      sideText: getKeyboardShortcut(t, i),
       rightJustifySideText: !0,
       icon: jsx(_$$_, {}),
       recordingKey: i

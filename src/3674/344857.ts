@@ -4,7 +4,7 @@ import { useEffect, useCallback, useRef, memo, createContext, useContext, useMem
 import { useDispatch, useSelector } from "react-redux";
 import { HandoffBindingsCpp, DesignGraphElements, ColorFormatEnum, LayoutTabType, IAssertResource, SceneGraphHelpers, Fullscreen, FileSourceType, Thumbnail, ComponentPropType, VariableDataType, OperationType, AppStateTsApi, LayoutSizingMode, BuildStatus, UIVisibilitySetting, NodePropertyCategory, Fonts, FitMode, DesignWorkspace, ViewType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager, Xr, useResetAtom, createLocalStorageAtom } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager, useSetAtom, useResetAtom, createLocalStorageAtom } from "../figma_app/27355";
 import { useHasParentOrgId } from "../905/882262";
 import { si as _$$si, wS, g$, iX as _$$iX, Bv, x9 } from "../figma_app/221240";
 import { ServiceCategories } from "../905/165054";
@@ -145,9 +145,9 @@ import { p as _$$p4 } from "../figma_app/353099";
 import { uh as _$$uh } from "../figma_app/370763";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e3 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { mp } from "../figma_app/579169";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { wX } from "../figma_app/710136";
@@ -385,7 +385,7 @@ import { L as _$$L4 } from "../figma_app/467950";
 import { A as _$$A18 } from "../6020/852410";
 import { VX } from "../figma_app/635062";
 import { hasCodeConnect } from "../figma_app/97042";
-import { bL as _$$bL3, l9 as _$$l3, mc as _$$mc, c$ as _$$c$2, DZ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset, SelectOption } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { bL as _$$bL4 } from "../905/911410";
 import { Checkbox } from "../905/274480";
@@ -404,7 +404,7 @@ import { logFileExportThunk, logFileImageDownloadThunk } from "../figma_app/4010
 import { filterValidImagePaints } from "../figma_app/385874";
 import { Xo } from "../figma_app/482495";
 import { useLibraryMetadata } from "../905/726668";
-import { Dc, hV as _$$hV } from "../figma_app/151766";
+import { initiateSaveAs, ExportOption } from "../figma_app/151766";
 import { O as _$$O6 } from "../figma_app/301719";
 import { assetTypeEnum } from "../figma_app/198712";
 import { calculatePickerPositionLeft } from "../905/959568";
@@ -2803,9 +2803,9 @@ function a_() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: EyeDropperToolInDevModeOnboardingOverlay,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [e]);
   let u = useCallback(() => {
     !n && t && show({
@@ -4485,9 +4485,9 @@ function iq() {
     uniqueId,
     show,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: DevHandoffConfigWizard,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [e]);
   let d = useModalManager({
     open: isShowing,
@@ -6672,7 +6672,7 @@ function s1({
   let x = useSelectionPropertyValue("overrides");
   let m = x && !isInvalidValue(x) ? x.instanceGuid : null;
   let v = Xn(m);
-  let b = Xr(go);
+  let b = useSetAtom(go);
   let {
     Dropdown,
     dropdownTargetRef,
@@ -8050,7 +8050,7 @@ function rX() {
     setCurrentView,
     currentPluginView
   } = function () {
-    let e = Xr(initialViewAtom);
+    let e = useSetAtom(initialViewAtom);
     let [t, n] = useAtomValueAndSetter(defaultViewAtom);
     let a = useResetAtom(defaultViewAtom);
     let o = useCallback(() => {
@@ -8735,9 +8735,9 @@ function dD() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: DevModeInteractiveInspectionOnboardingOverlay,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [e, t]);
   useEffect(() => {
     n && show({
@@ -8769,9 +8769,9 @@ function dH() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: DevModeFocusViewOnboardingOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let o = dR();
   let l = dL(complete);
@@ -9414,7 +9414,7 @@ let c9 = memo(({
     manager: _manager
   } = setupMenu();
   let M = useCallback(async e => {
-    f || (e.stopPropagation(), trackEventAnalytics("Asset Panel Export Clicked"), p(!0), await Dc(_$$hV.Export, g, P, "export-assets-handoff", [w], "export-assets-handoff", {
+    f || (e.stopPropagation(), trackEventAnalytics("Asset Panel Export Clicked"), p(!0), await initiateSaveAs(ExportOption.Export, g, P, "export-assets-handoff", [w], "export-assets-handoff", {
       guids: [w],
       exportSettings: I?.length ? I : [c8(C)]
     }), P(logFileExportThunk()), manager.isOpen && manager.setOpen(!1), p(!1));
@@ -9492,26 +9492,26 @@ let c9 = memo(({
       }), jsxs("div", {
         className: "asset_panel--buttons--QytN9",
         children: [(Z || Y) && jsxs(Fragment, {
-          children: [!getFeatureFlags().dt_insp_impr_assets && jsxs(_$$bL3, {
+          children: [!getFeatureFlags().dt_insp_impr_assets && jsxs(SelectGroupLabel, {
             onChange: G,
             value: S,
-            children: [jsx(_$$l3, {
+            children: [jsx(SelectSeparator, {
               disabled: f || getFeatureFlags().dt_insp_impr_assets,
               label: jsx(HiddenLabel, {
                 children: renderI18nText("fullscreen.export.export_file_type")
               }),
               "aria-label": getFeatureFlags().dt_insp_impr_assets ? getI18nString("dev_handoff.assets.modify_hint") : void 0
-            }), jsxs(_$$mc, {
-              children: [jsx(_$$c$2, {
+            }), jsxs(SelectContainer, {
+              children: [jsx(SelectOptionReset, {
                 value: "PNG",
                 children: "PNG"
-              }), jsx(_$$c$2, {
+              }), jsx(SelectOptionReset, {
                 value: "JPEG",
                 children: "JPG"
-              }), (K || Y) && jsx(_$$c$2, {
+              }), (K || Y) && jsx(SelectOptionReset, {
                 value: "SVG",
                 children: "SVG"
-              }), jsx(_$$c$2, {
+              }), jsx(SelectOptionReset, {
                 value: "PDF",
                 children: "PDF"
               })]
@@ -9571,16 +9571,16 @@ let c9 = memo(({
             })
           })]
         }), q && (!getFeatureFlags().dt_insp_impr_assets || !n) && jsxs(Fragment, {
-          children: [!getFeatureFlags().dt_insp_impr_assets && jsxs(_$$bL3, {
+          children: [!getFeatureFlags().dt_insp_impr_assets && jsxs(SelectGroupLabel, {
             onChange: noop,
             value: J ? "GIF" : "MP4",
-            children: [jsx(_$$l3, {
+            children: [jsx(SelectSeparator, {
               disabled: !0,
               label: jsx(HiddenLabel, {
                 children: renderI18nText("fullscreen.export.export_file_type")
               })
-            }), jsx(_$$mc, {
-              children: jsx(_$$c$2, {
+            }), jsx(SelectContainer, {
+              children: jsx(SelectOptionReset, {
                 value: J ? "GIF" : "MP4",
                 children: J ? "GIF" : "MP4"
               })
@@ -9885,7 +9885,7 @@ function us({
           b = !0;
         }
         t && n.length && HandoffBindingsCpp.prepareSourceImagesForZip(n);
-        !a && m?.length && (await Dc(_$$hV.Export, g, x, "export-assets-handoff", [j], "export-assets-handoff", {
+        !a && m?.length && (await initiateSaveAs(ExportOption.Export, g, x, "export-assets-handoff", [j], "export-assets-handoff", {
           guids: o,
           exportSettings: m,
           assetType: Vx(e),
@@ -10894,9 +10894,9 @@ function u6() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: McpEnableButtonCalloutOverlay,
-    priority: _$$N.SECONDARY_MODAL,
+    priority: ModalPriority.SECONDARY_MODAL,
     experiment: {
       check: e,
       predicate: e => !!e,
@@ -11082,19 +11082,19 @@ function pc() {
         className: pn,
         htmlFor: e,
         children: renderI18nText("dev_handoff.mcp.image_source")
-      }), jsxs(_$$bL3, {
+      }), jsxs(SelectGroupLabel, {
         value: t,
         onChange: e => n(e),
-        children: [jsx(DZ, {
+        children: [jsx(SelectOption, {
           id: e
-        }), jsxs(_$$mc, {
-          children: [jsx(_$$c$2, {
+        }), jsxs(SelectContainer, {
+          children: [jsx(SelectOptionReset, {
             value: "local",
             children: renderI18nText("dev_handoff.mcp.image_source.local")
-          }), jsx(_$$c$2, {
+          }), jsx(SelectOptionReset, {
             value: "placeholder-svg",
             children: renderI18nText("dev_handoff.mcp.image_source.placeholder")
-          }), canWriteMcpAssetsLocally() && jsx(_$$c$2, {
+          }), canWriteMcpAssetsLocally() && jsx(SelectOptionReset, {
             value: "write-to-disk",
             children: renderI18nText("dev_handoff.mcp.image_source.write_to_disk")
           })]
@@ -12763,7 +12763,7 @@ function h9() {
   } = rT(getObservableOrFallback(AppStateTsApi.devHandoffState().currentNodeId), t[0] || null);
   let p = useSelector(e => e.mirror.appModel.currentPage);
   let h = inspectableRootNodeId || p;
-  let f = Xr(rh);
+  let f = useSetAtom(rh);
   let g = [{
     displayText: getI18nString("dev_handoff.layers.collapse_all_layers"),
     callback: () => f([h])

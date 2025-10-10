@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import { l as _$$l } from "../905/716947";
-import { createRemovableAtomFamily, atom, setupDebounceAtoms, useAtomWithSubscription, atomStoreManager, Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom, setupDebounceAtoms, useAtomWithSubscription, atomStoreManager, useSetAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { selectAtom, loadable } from "../vendor/812047";
 import c from "../vendor/946678";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
@@ -448,7 +448,7 @@ export function $$eT4(e) {
   } = Z(e);
   let a = useAtomWithSubscription(currentValueAtom);
   let o = useAtomWithSubscription(isDebouncingAtom);
-  let c = Xr(debouncedValueAtom);
+  let c = useSetAtom(debouncedValueAtom);
   let [u, p] = useAtomValueAndSetter(ee(e));
   let h = useCallback((e, t) => {
     c(e);
@@ -474,7 +474,7 @@ export function $$eT4(e) {
   }(e);
   let f = "loading" === g.state || o;
   let _ = "hasData" === g.state ? g.data : er;
-  let A = Xr(eu(e));
+  let A = useSetAtom(eu(e));
   useEffect(() => {
     A(3);
   }, [A]);

@@ -2,8 +2,8 @@ import { isEmptyObject } from "../figma_app/493477";
 import { traverseChildren, getAncestors } from "../figma_app/387100";
 import { createOptimistThunk } from "../905/350402";
 import { exportPickerSetItemsAction } from "../905/496937";
-import { Nf } from "../figma_app/357047";
-import { y2, YI } from "../figma_app/678300";
+import { getCurrentPageId } from "../figma_app/357047";
+import { traverseNodeChildren, applyToNodes } from "../figma_app/678300";
 class d {
   constructor() {
     this.indexer = {};
@@ -48,7 +48,7 @@ export let $$p0 = createOptimistThunk(e => {
     (null != e.exportSettings && e.exportSettings.length > 0 || _(e)) && r.push(e);
   };
   if (isEmptyObject(p.sceneGraphSelection)) {
-    let e = h.get(Nf(p.appModel));
+    let e = h.get(getCurrentPageId(p.appModel));
     e && (traverseChildren(e, m), traverseChildren(e, e => {
       let t = e.parentNode;
       _(e) && null != t && "CANVAS" === t.type && a.push({
@@ -57,8 +57,8 @@ export let $$p0 = createOptimistThunk(e => {
       });
     }));
   } else {
-    y2(h, p.sceneGraphSelection, m);
-    YI(h, p.sceneGraphSelection, e => {
+    traverseNodeChildren(h, p.sceneGraphSelection, m);
+    applyToNodes(h, p.sceneGraphSelection, e => {
       _(e) && a.push({
         nodeID: e.guid,
         name: e.name

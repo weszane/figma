@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { sendWithRetry } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -14,7 +14,7 @@ import { enqueueNoItemsToPublishError, handleTemplateUpload, getLibraryPublishCa
 export function $$f0() {
   let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(currentPublishStateAtom);
-  let i = Xr(updatePublishStateAtom);
+  let i = useSetAtom(updatePublishStateAtom);
   let f = hasHubOrPublishState(t);
   let _ = useSelector(selectDeletedOrCooperComponentNodeIds);
   let A = Object.values(useSelector(selectCooperComponents));

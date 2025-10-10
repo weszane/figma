@@ -4,7 +4,7 @@ import { RotationType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import o from "classnames";
 import { DEVICE_PRESETS_BY_ID } from "../figma_app/349969";
-import { is, Ho } from "../figma_app/170018";
+import { getDevicePresetInfo, scaleVectorByAspectRatio } from "../figma_app/170018";
 import { Wc } from "../9410/855699";
 import { qW, Cb, Q$, Q0, mT, M4 } from "../9410/874933";
 var l = o;
@@ -60,10 +60,10 @@ export function $$g0({
       idealDeviceSize,
       framePresetSize,
       offset
-    } = is(presetIdentifier, rotation);
-    let v = Ho(t, framePresetSize, idealDeviceSize);
+    } = getDevicePresetInfo(presetIdentifier, rotation);
+    let v = scaleVectorByAspectRatio(t, framePresetSize, idealDeviceSize);
     y = v.x / v.y;
-    let E = Ho(t, framePresetSize, offset);
+    let E = scaleVectorByAspectRatio(t, framePresetSize, offset);
     let T = {
       x: t.x / v.x * 100,
       y: t.y / v.y * 100

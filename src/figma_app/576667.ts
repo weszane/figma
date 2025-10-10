@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { hO } from "../figma_app/545293";
 import { l4 } from "../905/124270";
 import { L } from "../905/713563";
@@ -20,8 +20,8 @@ export function $$g0({
   let f = useAtomWithSubscription(searchInputAtom);
   let E = useAtomWithSubscription(searchScopeAtom);
   let y = useSelector(e => "search" === e.selectedView.view);
-  let b = Xr(l4(e));
-  let T = Xr(selectedItemAtom);
+  let b = useSetAtom(l4(e));
+  let T = useSetAtom(selectedItemAtom);
   let I = useAtomWithSubscription(hO.isFragmentSearchAtom);
   let S = L(I ? "fragment_search_modal" : "file_browser", E, !0);
   let v = useCallback((e, t, r) => {

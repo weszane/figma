@@ -28,7 +28,7 @@ import { WC, T$, wi } from "../figma_app/792783";
 import { getObservableValue } from "../figma_app/84367";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { PinningState } from "../905/192333";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { b as _$$b } from "../905/635568";
 import { JI, Vq, pf, pc, xH, $$in, sg, Ud } from "../figma_app/942553";
 import { KT, AO } from "../figma_app/325158";
@@ -1685,7 +1685,7 @@ export function $$eE0() {
   }, [d]);
   let _ = useSelector(e => {
     let t = e.mirror.appModel;
-    return u.filter(e => Yh(t, e));
+    return u.filter(e => isActionEnabled(t, e));
   });
   let E = useLatestRef(_);
   useEffect(() => {

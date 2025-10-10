@@ -4,7 +4,7 @@ import { checkEligibilityStatus } from '../905/509613';
 import { getFeatureFlags } from '../905/601108';
 import { useCurrentUserOrg } from '../905/845253';
 import { ResourceStatus } from '../905/957591';
-import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { FileCanUseFigmaAi, FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFigmakeAi } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
 import { getInitialOptions } from '../figma_app/169182';

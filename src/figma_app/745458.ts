@@ -2,7 +2,7 @@ import { StyleIdHandler } from "../figma_app/243058";
 import { Xf, sg, ey, yG } from "../905/859698";
 import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { atom, createRemovableAtomFamily, mg, p6 } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, selectAtom, atomCombiner } from "../figma_app/27355";
 import l from "../vendor/983401";
 import { createSelector } from "../vendor/925040";
 import { conditionalFeatureFlag } from "../figma_app/169182";
@@ -346,7 +346,7 @@ let $$ee15 = createRemovableAtomFamily(e => atom(t => {
   } = t($);
   return e === AssetFilterMode.ALL ? styleUpdatesForAllPages : styleUpdatesForCurrentPage;
 }));
-let $$et11 = mg($, e => e.styleUpdatesForAllPages);
+let $$et11 = selectAtom($, e => e.styleUpdatesForAllPages);
 let $$er12 = createRemovableAtomFamily(e => atom(t => {
   let {
     variableSetUpdatesForAllPages,
@@ -445,7 +445,7 @@ let $$eo8 = createRemovableAtomFamily(e => atom(t => {
     scopedLibraryAssetUpdates: libraryAssetUpdatesForCurrentPage
   };
 }));
-let el = mg($$ea4, ({
+let el = selectAtom($$ea4, ({
   componentUpdatesForAllPages: e,
   stateGroupUpdatesForAllPages: t,
   styleUpdatesForAllPages: r,
@@ -462,7 +462,7 @@ let el = mg($$ea4, ({
     includesMoveComponentUpdatesOnAnyPage: s
   };
 });
-let $$ed6 = mg($$es3, ({
+let $$ed6 = selectAtom($$es3, ({
   componentUpdatesForCurrentPage: e,
   stateGroupUpdatesForCurrentPage: t,
   styleUpdatesForCurrentPage: r,
@@ -479,20 +479,20 @@ let $$ed6 = mg($$es3, ({
     includesMoveComponentUpdatesOnCurrentPage: s
   };
 });
-let $$ec1 = mg(el, ({
+let $$ec1 = selectAtom(el, ({
   hasUpdates: e
 }) => e);
-let $$eu2 = mg($$ed6, ({
+let $$eu2 = selectAtom($$ed6, ({
   hasUpdates: e
 }) => e);
 let $$ep17 = createRemovableAtomFamily(e => atom(t => t(e === AssetFilterMode.ALL ? el : $$ed6).hasUpdates));
-let $$e_9 = mg(el, ({
+let $$e_9 = selectAtom(el, ({
   updateCount: e
 }) => e);
-mg($$ed6, ({
+selectAtom($$ed6, ({
   updateCount: e
 }) => e);
-let $$eh18 = p6([$$ea4], ({
+let $$eh18 = atomCombiner([$$ea4], ({
   componentUpdatesForAllPages: e,
   stateGroupUpdatesForAllPages: t,
   styleUpdatesForAllPages: r,

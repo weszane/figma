@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
 import { isIframe } from "../905/508367";
 import { useResizeObserverRef, initialSize } from "../figma_app/708845";
@@ -21,7 +21,7 @@ function T(e) {
   let [s, l] = useState(!1);
   let c = useRef(null);
   let u = useRef();
-  let E = Xr(consentCounterAtom);
+  let E = useSetAtom(consentCounterAtom);
   let T = useResizeObserverRef(c) ?? initialSize;
   let I = t ? T.height + (e.verticalPadding || 0) : 0;
   useEffect(() => {

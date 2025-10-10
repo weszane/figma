@@ -6,11 +6,11 @@ import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { getUserId } from "../905/372672";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
 import { JapaneseLaunchAnnouncementMachine } from "../figma_app/6204";
@@ -23,9 +23,9 @@ export function $$T0() {
   let t = getUserId();
   let n = useAtomWithSubscription(mp);
   let m = useAtomWithSubscription(w);
-  let x = _$$e({
+  let x = useOverlay({
     overlay: JapaneseLaunchAnnouncementMachine,
-    priority: N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [n, m]);
   useSingleEffect(() => {
     let e = getInitialOptions()?.iso_code === "JP";

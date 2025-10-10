@@ -47,7 +47,7 @@ import { V as _$$V } from "../905/633585";
 import { d as _$$d } from "../905/693444";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { consumptionPaywallUtils } from "../905/224";
-import { Ct } from "../figma_app/199513";
+import { trashFolderMutation } from "../figma_app/199513";
 import { b as _$$b } from "../905/388233";
 import { N as _$$N2 } from "../figma_app/55043";
 import { ProjectByIdForFolderSettings } from "../figma_app/43951";
@@ -337,7 +337,7 @@ let eo = (e, t) => {
     projectId: e
   });
   let a = useDispatch<AppDispatch>();
-  let s = getAtomMutate(Ct);
+  let s = getAtomMutate(trashFolderMutation);
   let o = n.data?.project;
   let l = _$$b(o?.plan?.tier);
   let d = o?.activeProjectResourceConnections;

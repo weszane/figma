@@ -4,11 +4,11 @@ import { useSingleEffect } from '../905/791079';
 import { renderI18nText } from '../905/303541';
 import { UpgradeAction } from '../905/370443';
 import { OnboardingModal } from '../905/425180';
-import { e as _$$e } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { ConnectedProjectsUsageOverlay } from '../figma_app/6204';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { buildUploadUrl } from '../figma_app/169182';
-import { N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { userFlagExistsAtomFamily } from '../figma_app/545877';
 let m = 'connected_projects_usage_onboarded';
 let g = userFlagExistsAtomFamily(m);
@@ -25,9 +25,9 @@ export function $$f0({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: ConnectedProjectsUsageOverlay,
-    priority: N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [y]);
   useSingleEffect(() => {
     show({

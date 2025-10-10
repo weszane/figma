@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppStateTsApi, DesignGraphElements, Fullscreen, Command } from "../figma_app/763686";
-import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useAtomValueAndSetter, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { sharedStateAtom } from "../905/125333";
 import { V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
@@ -40,8 +40,8 @@ export function $$O7() {
   }, [t]);
 }
 export function $$L9() {
-  let e = Xr(oW);
-  let t = Xr(Ai);
+  let e = useSetAtom(oW);
+  let t = useSetAtom(Ai);
   let [i, n] = useAtomValueAndSetter(Hf);
   return useCallback(() => {
     ko({

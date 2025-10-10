@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useContext, useRef, memo, useCallback, useEffect, useMemo } from "react";
 import i, { setupDragHandler } from "../905/97346";
-import { atom, setupCustomAtom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { atom, setupCustomAtom, useAtomWithSubscription, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useWindowDimensions } from "../905/745972";
 import { KeyCodes } from "../905/63728";
@@ -32,7 +32,7 @@ import { G2 } from "../figma_app/314591";
 import { renderBadgesLayout } from "../905/154591";
 import { nK } from "../905/836986";
 import { ww } from "../figma_app/194956";
-import { ms, c$, wv } from "../figma_app/236327";
+import { DropdownContainer, OptionComponent, SeparatorComponent } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { E as _$$E2 } from "../905/142894";
 import { R as _$$R } from "../905/741991";
@@ -213,9 +213,9 @@ function en(e, t) {
 function es(e, t) {
   return "nodeChange" in e && "nodeChange" in t ? [e.nodeChange, t.nodeChange] : [null, null];
 }
-let eh = ms;
-let ep = c$;
-let ef = wv;
+let eh = DropdownContainer;
+let ep = OptionComponent;
+let ef = SeparatorComponent;
 function ex({
   contextMenuData: {
     objectId: e,
@@ -236,7 +236,7 @@ function ex({
   let m = g instanceof _$$R ? g : null;
   let j = g instanceof _$$E2 ? g : null;
   let [b, y] = useAtomValueAndSetter(Oz);
-  let v = Xr(X);
+  let v = useSetAtom(X);
   if (null == g) return null;
   let C = e => () => {
     e();
@@ -416,7 +416,7 @@ function ey({
     let e = t.findIndex(e => e.id === r);
     e >= 0 && d.current?.scrollToItem(e, "smart");
   }, [t, r]);
-  let u = Xr(X);
+  let u = useSetAtom(X);
   useEffect(() => {
     u({
       type: "expandAncestors",
@@ -593,7 +593,7 @@ var eD = eE;
 function eF({
   searchRef: e
 }) {
-  let t = Xr(AJ);
+  let t = useSetAtom(AJ);
   let r = useAtomWithSubscription(W);
   let i = useAtomWithSubscription(G);
   let [a, o] = useState(!1);
@@ -626,9 +626,9 @@ function eP({
   let r = useAtomWithSubscription(V);
   let i = function () {
     let e = useAtomWithSubscription(Cc);
-    let t = Xr(R);
-    let r = Xr(Y);
-    let n = Xr(M);
+    let t = useSetAtom(R);
+    let r = useSetAtom(Y);
+    let n = useSetAtom(M);
     let i = useRef(0);
     let a = useMemo(() => debounce(s => {
       let l = ++i.current;
@@ -940,7 +940,7 @@ function e1({
   diffState: r,
   setDiffState: s
 }) {
-  let i = Xr(AJ);
+  let i = useSetAtom(AJ);
   return jsxs("div", {
     className: cssBuilderInstance.flex1.ml10.my4.$,
     children: [jsxs("div", {
@@ -1103,8 +1103,8 @@ function e9({
       y(`${(100 * r).toFixed(2)}%`);
     }
   });
-  let k = Xr(jI);
-  let E = Xr(JN);
+  let k = useSetAtom(jI);
+  let E = useSetAtom(JN);
   let D = useCallback(e => {
     let t = f.current;
     document.activeElement !== t && (e.keyCode === KeyCodes.FORWARD_SLASH && t ? (t.focus(), e.preventDefault()) : e.keyCode === KeyCodes.BRACKET_LEFT ? (analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {

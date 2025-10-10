@@ -8,7 +8,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBod
 import { L as _$$L } from "../905/704296";
 import { T as _$$T } from "../905/2124";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription, useResetAtom } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription, useResetAtom } from "../figma_app/27355";
 import h from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -22,7 +22,7 @@ import { In } from "../905/672640";
 import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { hasJubileePermissionForDesign } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3, qy, wj } from "../figma_app/862289";
@@ -282,9 +282,9 @@ function er() {
   });
 }
 let $$ei0 = memo(function () {
-  let e = Xr(qM);
+  let e = useSetAtom(qM);
   let t = useSelector(e => e.mirror.appModel.showUi);
-  let r = useSelector(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
+  let r = useSelector(e => isActionEnabled(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
   let l = U1();
   return (useEffect(() => (B3(JT.SLIDES_REWRITE_TEXT), () => {
     B3(JT.SLIDES_REWRITE_TEXT);

@@ -36,7 +36,7 @@ import { G as _$$G } from '../figma_app/80900';
 import { useIsFullscreenDevModeComponentBrowser, useIsFullscreenOverview } from '../figma_app/88239';
 import { uQ, xv } from '../figma_app/151869';
 import { floatToString } from '../figma_app/164212';
-import { g as _$$g } from '../figma_app/240060';
+import { createOpenDesktopAppModal } from '../figma_app/240060';
 import { createMultiplayerCursorSystem } from '../figma_app/242062';
 import { trackUserEvent } from '../figma_app/314264';
 import { gI } from '../figma_app/399472';
@@ -62,7 +62,6 @@ import { trackFileEventWithStore } from '../figma_app/901889';
 import { PluginRunForContext } from '../figma_app/915202';
 import { ConfirmationModal2, ModalView } from '../figma_app/918700';
 import { w as _$$w } from '../figma_app/984514';
-
 let P: typeof M = M;
 let q = 'on_canvas_name_editor--frameNameInput--VpLPf sf_pro--uiFontWithSFProFallback--m-p9V';
 
@@ -336,8 +335,7 @@ function OnCanvasNameEditorInput({
   maxWidth,
   noSelectOnFocus,
   disableSaveOnEscape,
-  hasSlideRowBeenManuallyRenamed,
-  
+  hasSlideRowBeenManuallyRenamed
 }: QComponentProps) {
   const editorHookResult = useOnCanvasNameEditor(name, setName, {
     maxWidth,
@@ -1106,7 +1104,7 @@ export function PluginModal() {
   if (progressBarState.mode !== UIVisibilitySetting.OFF) return jsx(Fragment, {});
   switch (showingOpenDesktopAppModal) {
     case PluginRunForContext.FOR_OPEN:
-      return jsx(_$$g, {
+      return jsx(createOpenDesktopAppModal, {
         dispatch
       });
     case PluginRunForContext.FOR_MENU:
@@ -1307,7 +1305,6 @@ interface _OnCanvasNameEditorInfo {
   activeCanvasEditModeType?: LayoutTabType;
   currentPage?: string;
 }
-
 interface Position {
   x: number;
   y: number;
@@ -1365,4 +1362,3 @@ interface GridTrackSizeEditorProps {
   shouldOpenDropdown?: boolean;
   containerClassname?: string;
 }
-

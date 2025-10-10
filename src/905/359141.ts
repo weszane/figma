@@ -103,7 +103,7 @@ import { LOADING_STATUS } from '../905/989992';
 import { h as _$$h3 } from '../905/994594';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { KP } from '../figma_app/12491';
-import { atom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { LibraryModalAssetsDataByLibraryKey, OrgTeamView } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
 import { h as _$$h2 } from '../figma_app/58251';
@@ -3068,7 +3068,7 @@ function ny({
     }, [i, componentUpdateKeys, stateGroupUpdateKeys, styleUpdateKeys, variableSetKeys, f, g, t, e?.refs]);
     return e?.metadata;
   }();
-  let g = Xr(wy);
+  let g = useSetAtom(wy);
   let _ = useSelector(selectFileInfo);
   let A = useAtomWithSubscription(openFileAtom);
   let y = A?.parentOrgId?.toString();

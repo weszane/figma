@@ -32,7 +32,7 @@ import { useEventForwarder } from '../905/453826';
 import { useWebLoggerTimerEffect } from '../905/485103';
 import { Button } from '../905/521428';
 import { AccessLevelEnum } from '../905/557142';
-import { e as _$$e3 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { $ as _$$$, t as _$$t2 } from '../905/628632';
 import { ButtonPrimitive } from '../905/632989';
 import { liveStoreInstance } from '../905/713695';
@@ -62,9 +62,9 @@ import { useAtomWithSubscription } from '../figma_app/27355';
 import { FolderPermissions } from '../figma_app/43951';
 import { BannerFullWidth } from '../figma_app/59509';
 import { FPermissionLevelType, FPlanNameType, FResourceCategoryType, FTeamAccessPermissionType } from '../figma_app/191312';
-import { Q3, xT } from '../figma_app/199513';
+import { updateFolderSharingAudienceAction, updateFolderTeamAccessAction } from '../figma_app/199513';
 import { selectPermissionsState } from '../figma_app/212807';
-import { N as _$$N2 } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { DialogActionStrip, DialogBackButton, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useSubscription } from '../figma_app/288654';
 import { checkDomainExists } from '../figma_app/336853';
@@ -88,9 +88,9 @@ function ClarityProjectModalOverlay() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: SharingClarityProjectCreationTeamAccessOverlay,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [userFlag]);
   useSingleEffect(() => {
     show({
@@ -125,9 +125,9 @@ function SharingClarityProjectModalOnboarding() {
     uniqueId,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: SharingClarityProjectModalOverlay,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [userFlag]);
   const dispatch = useDispatch<AppDispatch>();
   const onboardingState = zl(projectModalOnboardingAtom);
@@ -723,7 +723,7 @@ export let FolderPermissionsModal = registerModal(modalProps => {
         }));
         return;
       }
-      hideModalDispatch(xT({
+      hideModalDispatch(updateFolderTeamAccessAction({
         folder: folderData,
         teamAccess: teamAccessState
       }));
@@ -972,7 +972,7 @@ export let FolderPermissionsModal = registerModal(modalProps => {
                   return;
                 }
                 let permissionLevel = mapAudienceAccessToPermissionLevel(audienceAccessType, audienceAccessLevel);
-                hideModalDispatch(Q3({
+                hideModalDispatch(updateFolderSharingAudienceAction({
                   folder: folderData,
                   sharingAudienceControl: permissionLevel
                 }));

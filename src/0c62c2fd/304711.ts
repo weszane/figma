@@ -10,14 +10,14 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { t as _$$t2 } from "../905/53773";
-import { Q4 } from "../figma_app/199513";
+import { permanentlyDeleteFolderMutation } from "../figma_app/199513";
 import { getSidebarPath } from "../figma_app/528509";
 import { x as _$$x } from "../905/98916";
 export function $$x0(e) {
   var t;
   let r = useDispatch<AppDispatch>();
   let x = useModalManager(e);
-  let b = getAtomMutate(Q4);
+  let b = getAtomMutate(permanentlyDeleteFolderMutation);
   let v = _$$x(e.folder.id, !0);
   let y = jsx("span", {
     className: cssBuilderInstance.fontBold.$,

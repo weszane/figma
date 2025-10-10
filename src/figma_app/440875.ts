@@ -21,12 +21,13 @@ import { Multiplayer } from "../figma_app/763686";
 import { getIsMobile, isInFigmaMobile, isIpadDevice } from "../figma_app/778880";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { useLatestRef } from "../figma_app/922077";
+
 enum AutoFollowType {
   INITIAL = "initial",
   NEXT = "next",
 }
 // Thunk for handling presentation stop events with user-specific messages
-const handlePresentationStoppedThunk = createOptimistThunk(({
+export const handlePresentationStoppedThunk = createOptimistThunk(({
   dispatch,
   getState
 }, {
@@ -45,7 +46,7 @@ const handlePresentationStoppedThunk = createOptimistThunk(({
 });
 
 // Thunk for clearing presentation stop alerts
-const clearPresentationStoppedAlertThunk = createOptimistThunk(({
+export const clearPresentationStoppedAlertThunk = createOptimistThunk(({
   dispatch
 }) => {
   dispatch(VisualBellActions.dequeue({
@@ -54,7 +55,7 @@ const clearPresentationStoppedAlertThunk = createOptimistThunk(({
 });
 
 // Helper function to determine if a user change should trigger observation
-function shouldObserveUserChange(previousPresenterRef: React.MutableRefObject<string | null>, currentPresenter: string | null, observingSession: string | number | null, currentSession: number | string | null): boolean {
+export function shouldObserveUserChange(previousPresenterRef: React.MutableRefObject<string | null>, currentPresenter: string | null, observingSession: string | number | null, currentSession: number | string | null): boolean {
   const hasPresenterChanged = isNotNullish(currentPresenter) && previousPresenterRef.current !== currentPresenter;
   const isObservingPresenter = observingSession === currentPresenter;
   const isCurrentUserPresenter = currentSession === currentPresenter;
@@ -62,7 +63,7 @@ function shouldObserveUserChange(previousPresenterRef: React.MutableRefObject<st
 }
 
 // Hook to get the appropriate observe function based on view type
-function useObserveFunction() {
+export function useObserveFunction() {
   const viewType = getSelectedViewType();
   const dispatch = useDispatch<AppDispatch>();
   const multiplayerState = useSelector<AppState, AppState['multiplayer']>(state => state.multiplayer);

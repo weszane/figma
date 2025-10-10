@@ -11,9 +11,9 @@ import { TextWithTruncation } from "../905/984674";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { FigmakeOnboardingTOS } from "../figma_app/6204";
 import { _H } from "../figma_app/408883";
@@ -59,9 +59,9 @@ export function $$I1() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FigmakeOnboardingTOS,
-    priority: N.HIGH_PRIORITY_MODAL - 1
+    priority: ModalPriority.HIGH_PRIORITY_MODAL - 1
   }, [t]);
   let {
     onAcknowledge,

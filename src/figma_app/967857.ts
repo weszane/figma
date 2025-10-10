@@ -20,7 +20,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { sendUrlToParent } from "../figma_app/564528";
 import { a as _$$a } from "../905/29104";
 import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
-import { wv } from "../figma_app/236327";
+import { SeparatorComponent } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { postUserFlag } from "../905/985254";
@@ -366,7 +366,7 @@ let eo = withTrackedClick(function ({
 });
 function el() {
   return jsxs(Fragment, {
-    children: [jsx(wv, {}, "menu-separator-token"), jsx("div", {
+    children: [jsx(SeparatorComponent, {}, "menu-separator-token"), jsx("div", {
       className: "ai_quick_actions_control--dropdownFooterContainer--1d8mD",
       children: jsxs("span", {
         children: [jsx("span", {

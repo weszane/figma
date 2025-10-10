@@ -1,6 +1,6 @@
 import { GraphicElement } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
-import { b4, _V, kM } from "../figma_app/421886";
+import { primaryNodeTypes, searchOptions, NodeType } from "../figma_app/421886";
 import { A } from "../3850/868552";
 import { A as _$$A } from "../3850/839808";
 import { A as _$$A2 } from "../2854/372209";
@@ -17,52 +17,52 @@ let $$_5 = {
   [GraphicElement.SHAPE]: 0,
   [GraphicElement.OTHER]: 0
 };
-let $$h0 = [...b4, ..._V];
-let $$m1 = _V;
+let $$h0 = [...primaryNodeTypes, ...searchOptions];
+let $$m1 = searchOptions;
 export function $$g3(e) {
-  return b4.filter(t => e[t]);
+  return primaryNodeTypes.filter(t => e[t]);
 }
 export var $$f2 = (e => (e[e.PREV = -1] = "PREV", e[e.NONE = 0] = "NONE", e[e.NEXT = 1] = "NEXT", e))($$f2 || {});
 export function $$E4(e) {
   switch (e) {
-    case kM.Text:
+    case NodeType.Text:
       return getI18nString("canvas_search.filter.text");
-    case kM.FrameOrGroup:
+    case NodeType.FrameOrGroup:
       return getI18nString("canvas_search.filter.frame_or_group");
-    case kM.Component:
+    case NodeType.Component:
       return getI18nString("canvas_search.filter.component");
-    case kM.Instance:
+    case NodeType.Instance:
       return getI18nString("canvas_search.filter.instance");
-    case kM.Image:
+    case NodeType.Image:
       return getI18nString("canvas_search.filter.image");
-    case kM.Shape:
+    case NodeType.Shape:
       return getI18nString("canvas_search.filter.shape");
-    case kM.Other:
+    case NodeType.Other:
       return getI18nString("canvas_search.filter.other");
-    case kM.MatchCase:
+    case NodeType.MatchCase:
       return getI18nString("canvas_search.filter.match_case");
-    case kM.WholeWords:
+    case NodeType.WholeWords:
       return getI18nString("canvas_search.filter.whole_words");
   }
 }
 export function $$y6(e) {
   switch (e) {
-    case kM.Text:
+    case NodeType.Text:
       return _$$A4;
-    case kM.FrameOrGroup:
+    case NodeType.FrameOrGroup:
       return A;
-    case kM.Component:
+    case NodeType.Component:
       return _$$A2;
-    case kM.Instance:
+    case NodeType.Instance:
       return _$$A;
-    case kM.Image:
+    case NodeType.Image:
       return _$$A6;
-    case kM.Shape:
+    case NodeType.Shape:
       return _$$A3;
-    case kM.Other:
+    case NodeType.Other:
       return _$$A5;
-    case kM.MatchCase:
-    case kM.WholeWords:
+    case NodeType.MatchCase:
+    case NodeType.WholeWords:
       return null;
   }
 }

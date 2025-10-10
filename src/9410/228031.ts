@@ -22,7 +22,7 @@ import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { a3, ow } from "../905/188421";
 import { c$, sK } from "../905/794875";
 import { ServiceCategories } from "../905/165054";
-import { c$ as _$$c$, bL, l9, mc } from "../905/493196";
+import { SelectOptionReset, SelectGroupLabel, SelectSeparator, SelectContainer } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { reportError } from "../905/11";
 import { SvgComponent } from "../905/714743";
@@ -79,7 +79,7 @@ function F({
   if (!d || !s || !l) return null;
   let u = d.map(e => {
     var t;
-    return jsx(_$$c$, {
+    return jsx(SelectOptionReset, {
       value: e.id,
       children: (t = e.id, c.get(t) || (reportError(ServiceCategories.CMS, Error("invalid slug name when formatting a CMS item page link"), {
         extra: {
@@ -88,7 +88,7 @@ function F({
       }), ""))
     }, e.id);
   });
-  let p = jsxs(bL, {
+  let p = jsxs(SelectGroupLabel, {
     value: s,
     onChange: e => {
       if (null == e) {
@@ -105,14 +105,14 @@ function F({
     },
     children: [jsx("div", {
       className: "xjp7ctv x9hn8t9",
-      children: jsx(l9, {
+      children: jsx(SelectSeparator, {
         width: "fill",
         label: jsx(HiddenLabel, {
           children: renderI18nText("sites.panel.link_panel.cms_item")
         }),
         disabled: 0 === d.length
       })
-    }), jsx(mc, {
+    }), jsx(SelectContainer, {
       children: u
     })]
   });

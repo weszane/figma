@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { snapWidget, toggleWidget } from "../905/989765";
 import { trackFileEvent } from "../figma_app/314264";
 import { selectCurrentFile } from "../figma_app/516028";
-import { h as _$$h } from "../figma_app/275739";
+import { VoiceCallManager } from "../figma_app/275739";
 export function $$u0(e) {
   let t = useDispatch<AppDispatch>();
   let n = useStore();
@@ -19,7 +19,7 @@ export function $$u0(e) {
       e.hidePopover && e.hidePopover();
       u && f ? u && t(snapWidget()) : (trackFileEvent("Context Viewed", e.fileKey, n.getState(), {
         name: "should-close-open-audio-nux"
-      }), await _$$h.createInstance(), f && trackFileEvent("voice_widget_minimized_toggle", e.fileKey, n.getState(), {
+      }), await VoiceCallManager.createInstance(), f && trackFileEvent("voice_widget_minimized_toggle", e.fileKey, n.getState(), {
         minimized: !1
       }), t(toggleWidget(!0)));
     },

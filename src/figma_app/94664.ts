@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { atom, Xr } from "../figma_app/27355";
+import { atom, useSetAtom } from "../figma_app/27355";
 export let $$a1 = atom(null);
 export function $$s0(e) {
-  let t = Xr($$a1);
+  let t = useSetAtom($$a1);
   return useEffect(() => (e?.current && t(e), () => {
     t(null);
   }), [t, e]);

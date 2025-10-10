@@ -5,10 +5,10 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { i as _$$i } from "../905/264868";
 import { renderI18nText } from "../905/303541";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { Fy } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { VideoOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
@@ -24,9 +24,9 @@ export function $$b0() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FilePreviewOverlay,
-    priority: N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t, p]);
   useEffect(() => {
     e.size && i && show({

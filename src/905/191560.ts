@@ -27,7 +27,7 @@ import { Button } from '../905/521428';
 import { FlashActions } from '../905/573154';
 import { CustomSpacer } from '../905/585996';
 import { customHistory } from '../905/612521';
-import { k as _$$k2 } from '../905/644504';
+import { samlAuthenticationService } from '../905/644504';
 import { I8, TA } from '../905/667970';
 import { getArkoseToken, ArkoseChallengeComponent, setArkoseAuthParams } from '../905/694658';
 import { SvgComponent } from '../905/714743';
@@ -46,7 +46,7 @@ import { A as _$$A4 } from '../5724/600086';
 import { A as _$$A2 } from '../5724/643251';
 import { A as _$$A } from '../6828/71291';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { getInitialOptions } from '../figma_app/169182';
 import { FResourceCategoryType } from '../figma_app/191312';
 import { _B, Bs, DT, Rm, W8, xI } from '../figma_app/320164';
@@ -364,7 +364,7 @@ function H(e) {
           }));
         });
       } else if (TA()) {
-        _$$k2.twoFactor(d || '').then(e => {
+        samlAuthenticationService.twoFactor(d || '').then(e => {
           customHistory.redirect(e.data.meta.redirect);
         }).catch(e => {
           let i = e.data;
@@ -1376,7 +1376,7 @@ function ez(e) {
 function eH(e) {
   let t = useDispatch<AppDispatch>();
   let [i, r] = useAtomValueAndSetter(Kf);
-  let o = Xr(nb);
+  let o = useSetAtom(nb);
   useSingleEffect(() => () => {
     i && r(!1);
   });
@@ -1469,7 +1469,7 @@ function eX(e) {
 }
 function eQ(e) {
   let t = useDispatch<AppDispatch>();
-  let i = Xr(nb);
+  let i = useSetAtom(nb);
   let [o, l] = useAtomValueAndSetter(Kf);
   let c = function () {
     let {
@@ -1634,7 +1634,7 @@ function e2(e) {
     onSubmit: () => {
       trackAuthEvent('validate_code_attempt', e.auth.origin);
       t(AUTH_SET_AUTH_LOADING());
-      i ? _$$k2.validateCode(i).then(e => {
+      i ? samlAuthenticationService.validateCode(i).then(e => {
         customHistory.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
@@ -1695,7 +1695,7 @@ function e2(e) {
           className: 'validate_code--link--aOlPI modal--blueLink--9GcJu blue_link--blueLink--9rlnd',
           onClick: () => {
             trackAuthEvent('resend_code', e.auth.origin);
-            _$$k2.resendCode().then(() => {
+            samlAuthenticationService.resendCode().then(() => {
               t(FlashActions.flash(getI18nString('auth.validate-code.code-resent-check-email')));
             }).catch(e => {
               let i = e.data;
@@ -2226,7 +2226,7 @@ export function $$to0(e) {
 }
 function tl(e) {
   let t = useDispatch<AppDispatch>();
-  let i = Xr(nb);
+  let i = useSetAtom(nb);
   useSingleEffect(() => {
     e.auth.formState !== AuthFlowStep.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT && e.auth.formState !== AuthFlowStep.VERIFY_HUMAN && (t(AUTH_SET_GOOGLE_ID_TOKEN({
       googleIdToken: null

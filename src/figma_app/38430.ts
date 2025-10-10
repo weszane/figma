@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { qR, JZ } from "../figma_app/696043";
 import { S as _$$S } from "../figma_app/11182";
@@ -38,7 +38,7 @@ export function $$w2(e) {
     maxWidth: 190,
     disableDropdownScrollContainer: !0,
     propagateCloseClick: !0,
-    children: [d?.error || p ? jsxs(c$, {
+    children: [d?.error || p ? jsxs(OptionComponent, {
       onClick: () => {
         d && d.error ? t(showModalHandler({
           type: _$$r,
@@ -57,7 +57,7 @@ export function $$w2(e) {
         }));
       },
       children: ["\u26A0 ", renderI18nText("universal_insert.in_development_version")]
-    }) : jsx(c$, {
+    }) : jsx(OptionComponent, {
       onClick: () => {
         createWidget({
           pluginID: i.plugin_id,
@@ -67,7 +67,7 @@ export function $$w2(e) {
         });
       },
       children: renderI18nText("universal_insert.in_development_version")
-    }), jsx(c$, {
+    }), jsx(OptionComponent, {
       onClick: () => {
         createWidget({
           pluginID: i.plugin_id,

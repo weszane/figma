@@ -14,7 +14,7 @@ import { T as _$$T2 } from "../905/256551";
 import { permissionScopeHandler } from "../905/189185";
 import { stylex } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { analyticsEventManager } from "../905/449184";
@@ -193,11 +193,11 @@ import { r as _$$r3 } from "../905/571562";
 import { l as _$$l2 } from "../905/509505";
 import { Fullscreen } from "../figma_app/13528";
 import { Point } from "../905/736624";
-import { e as _$$e5 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { consumptionPaywallUtils } from "../905/224";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { FeatureFlag } from "../905/652992";
-import { N as _$$N5 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
 import { FigmakeSelectedDesignSystemOnboarding } from "../figma_app/6204";
 import { nM as _$$nM, nc as _$$nc, NJ } from "../figma_app/570630";
@@ -307,7 +307,7 @@ function eU() {
     openOnHover: !0,
     placement: "top"
   });
-  let d = Xr(Xl);
+  let d = useSetAtom(Xl);
   let u = useAtomWithSubscription(Xl);
   let x = useAtomWithSubscription(GV);
   let m = _$$A4();
@@ -1259,7 +1259,7 @@ function tV({
 }
 function tK() {
   let e = _$$P2();
-  let t = Xr(_$$rK);
+  let t = useSetAtom(_$$rK);
   return jsx(eB, {
     variant: "error",
     onClose: () => t(!1),
@@ -1343,8 +1343,8 @@ function tY({
   errorCount: s,
   variant: a
 }) {
-  let l = Xr(YD);
-  let o = Xr(Vo);
+  let l = useSetAtom(YD);
+  let o = useSetAtom(Vo);
   let c = getI18nString("living_designs.chat.errors.error_count", {
     count: s
   });
@@ -2324,7 +2324,7 @@ function nM({
     existingProjects,
     isLoading
   } = zA();
-  let d = Xr(hR);
+  let d = useSetAtom(hR);
   let u = useAtomWithSubscription(Kj);
   useEffect(() => {
     if (isLoading) {
@@ -4421,9 +4421,9 @@ function iy({
     show,
     isShowing,
     complete
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigmakeSelectedDesignSystemOnboarding,
-    priority: _$$N5.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [o]);
   let x = useCurrentFileKey();
   useEffect(() => {
@@ -4441,7 +4441,7 @@ function iy({
   let {
     libraryImport
   } = S1();
-  let E = Xr(jx);
+  let E = useSetAtom(jx);
   let N = useDispatch<AppDispatch>();
   useEffect(() => {
     libraryImport && !atomStoreManager.get(FX) && show({
@@ -4797,7 +4797,7 @@ export function $$iC0({
   let {
     codeLibraryInstance
   } = oA();
-  let J = Xr(St);
+  let J = useSetAtom(St);
   let Z = useSceneGraphSelector();
   let {
     Sprig

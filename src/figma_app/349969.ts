@@ -6,19 +6,17 @@ import { assertNotNullish } from "../figma_app/465776"
 
 interface FramePreset {
   deviceName: string
-  framePresetSize: {
-    x: number
-    y: number
-  }
+  framePresetSize: Size
+}
+interface Size {
+  x: number
+  y: number
 }
 
 interface DevicePreset {
   presetIdentifier: string
   deviceName: string
-  framePresetSize: {
-    x: number
-    y: number
-  }
+  framePresetSize: Size
   archived?: boolean
   isSuggested?: boolean
   hideUnlessActive?: boolean
@@ -26,6 +24,9 @@ interface DevicePreset {
   inlinePreviewInfo?: {
     hitTargetSvgUrl: string
   }
+  imageSize?: Size
+  scaleFactor?: number
+  offset?: Size
 }
 
 // Presentation slide presets
@@ -257,7 +258,7 @@ getUniqueDeviceNames(APPLE_PRESET_LIST).slice(0, 5)
  * @param presetIdentifier - Identifier for the preset
  * @returns Whether the device supports inline preview
  */
-function supportsInlinePreview(presetIdentifier: string): boolean {
+export function supportsInlinePreview(presetIdentifier: string): boolean {
   const preset = DEVICE_PRESETS_BY_ID[presetIdentifier]
   return !!preset?.inlinePreviewInfo
 }
@@ -307,9 +308,9 @@ export function getDevicePresetWithFallback(
     if (currentPreset) {
       const isSameSizeAndHidden
         = currentPreset.hideUnlessActive
-        && !currentPreset.archived
-        && preset.framePresetSize.x === currentPreset.framePresetSize.x
-        && preset.framePresetSize.y === currentPreset.framePresetSize.y
+          && !currentPreset.archived
+          && preset.framePresetSize.x === currentPreset.framePresetSize.x
+          && preset.framePresetSize.y === currentPreset.framePresetSize.y
 
       if (currentPreset.deviceName === deviceName) {
         preset = currentPreset

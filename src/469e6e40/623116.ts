@@ -38,11 +38,11 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { kd, Pc, Jb, E7 } from "../figma_app/425283";
 import { UpgradeAction } from "../905/370443";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e3 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zl } from "../figma_app/641749";
 import { rn } from "../figma_app/903573";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { createOnboardingStateMachine } from "../905/298004";
 import { OnboardingModal } from "../905/425180";
 import { OrgAdminTeamOnboarding, WorkspaceAdminOnboarding } from "../figma_app/6204";
@@ -132,9 +132,9 @@ function ee(e) {
     complete,
     show,
     uniqueId
-  } = _$$e3({
+  } = useOverlay({
     overlay: OrgAdminTeamOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t]);
   let o = zl(Z);
   useSingleEffect(() => {
@@ -171,9 +171,9 @@ function e_() {
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: WorkspaceAdminOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [a, t]);
   useSingleEffect(() => {
     show({

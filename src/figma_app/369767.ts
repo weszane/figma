@@ -6,7 +6,7 @@ import { O as _$$O } from "../905/587457";
 import { PanelType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
@@ -61,7 +61,7 @@ export function $$P2(e) {
   let {
     closeOverlay
   } = _$$h();
-  let s = Xr(j);
+  let s = useSetAtom(j);
   let o = e ?? _$$p.WEBSITE;
   return () => {
     s(o);
@@ -98,7 +98,7 @@ export function $$M0({
 }) {
   let t = h5();
   let r = C5();
-  let i = Xr(j);
+  let i = useSetAtom(j);
   let {
     handleUpgrade,
     getUpgradeEligibility,

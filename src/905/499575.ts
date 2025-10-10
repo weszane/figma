@@ -16,7 +16,7 @@ import { decodeBase64, encodeBase64 } from '../905/561685';
 import { C_, dG, xg } from '../905/709354';
 import { l as _$$l } from '../905/716947';
 import { ConnectorMixin } from '../905/739338';
-import { k as _$$k } from '../905/749197';
+import { DDRenderMode } from '../905/749197';
 import { F7, Rf, sg } from '../905/859698';
 import { colorManagementStateJs, ColorProfileEnum } from '../905/864609';
 import { defaultSessionLocalIDString } from '../905/871411';
@@ -2402,12 +2402,12 @@ export class SceneNode extends createMixinNodes() {
     let e = this.isStack && this.inferredAutoLayoutResult;
     this.setGlobalNodeID();
     let t = e ? SceneNodeCpp.getInferredSortedChildren(this.sceneGraph.nodeContext) : this.bindings.NodeTsApi.getVisibleChildren(this.sceneGraph.nodeContext);
-    this.childrenDisplayOrder === _$$k.DESIGN && t.reverse();
+    this.childrenDisplayOrder === DDRenderMode.DESIGN && t.reverse();
     return t;
   }
   get uiOrderedChildren() {
     this.setGlobalNodeID();
-    let e = this.childrenDisplayOrder === _$$k.DESIGN;
+    let e = this.childrenDisplayOrder === DDRenderMode.DESIGN;
     return !this.simplifyInstancePanels || this.containingSymbolId || this.containingStateGroupId ? e ? SceneNodeCpp.getReversedChildren(this.sceneGraph.nodeContext) : this.bindings.NodeTsApi.getChildren(this.sceneGraph.nodeContext) : SceneNodeCpp.getSimplifiedChildrenIfNotExpanded(this.sceneGraph.nodeContext, e);
   }
   findContainingFragmentOrSelf() {
@@ -3351,7 +3351,7 @@ export class SceneNode extends createMixinNodes() {
     return SceneNodeCpp.materializeDescendants(this.sceneGraph.nodeContext);
   }
   get childrenDisplayOrder() {
-    return isSpecialNodeType(this.type) && this.isStack ? _$$k.DOM : _$$k.DESIGN;
+    return isSpecialNodeType(this.type) && this.isStack ? DDRenderMode.DOM : DDRenderMode.DESIGN;
   }
   get documentColorProfile() {
     let e = void 0 !== colorManagementStateJs && colorManagementStateJs.documentColorProfile().getCopy() != null ? colorManagementStateJs.documentColorProfile().getCopy() : ColorProfileEnum.LEGACY;

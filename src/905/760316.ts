@@ -1,11 +1,12 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { useCallback } from "react";
-import { ButtonPrimitive } from "../905/632989";
-import s from "classnames";
-import { useClickHandler } from "../905/911623";
-import { useHandleMouseEvent } from "../figma_app/878298";
-import { w } from "../905/768636";
-var o = s;
+import classNames from "classnames"
+import { useCallback } from "react"
+import { jsx, jsxs } from "react/jsx-runtime"
+
+import { ButtonPrimitive } from "../905/632989"
+import { w } from "../905/768636"
+import { useClickHandler } from "../905/911623"
+import { useHandleMouseEvent } from "../figma_app/878298"
+
 export function $$u0({
   libraryKey: e,
   children: t,
@@ -16,39 +17,39 @@ export function $$u0({
   hideCaret: m = !1,
   onClick: h,
   recordingKey: g,
-  ariaLabel: f
+  ariaLabel: f,
 }) {
-  let _ = function (e, t) {
-    let i = useCallback(t => {
-      t.stopPropagation();
-      t.preventDefault();
-      0 === t.button && e();
-    }, [e]);
-    return useHandleMouseEvent(t, "mousedown", i);
-  }(h, g);
+  let _ = (function (e, t) {
+    let i = useCallback((t) => {
+      t.stopPropagation()
+      t.preventDefault()
+      t.button === 0 && e()
+    }, [e])
+    return useHandleMouseEvent(t, "mousedown", i)
+  }(h, g))
   let {
     onMouseDown,
     onClick,
     onMouseUp,
-    onMouseLeave
+    onMouseLeave,
   } = useClickHandler({
     onClick: _,
-    isDisabled: i
-  });
+    isDisabled: i,
+  })
   return jsxs("div", {
-    className: o()(i ? u : s, "file_row_styles--fileRowContainer--5uxdH"),
+    className: classNames(i ? u : s, "file_row_styles--fileRowContainer--5uxdH"),
     children: [jsx(ButtonPrimitive, {
       "aria-label": f,
-      className: "file_row_styles--fileRowContainerButton---kQS9",
-      children: null,
+      "className": "file_row_styles--fileRowContainerButton---kQS9",
+      "children": null,
       onClick,
-      htmlAttributes: {
+      "htmlAttributes": {
         onMouseDown,
         onMouseUp,
         onMouseLeave,
-        "data-testid": `file-row-${p ? "used-" : ""}${e}`
-      }
-    }), t, !m && !i && jsx(w, {})]
-  });
+        "data-testid": `file-row-${p ? "used-" : ""}${e}`,
+      },
+    }), t, !m && !i && jsx(w, {})],
+  })
 }
-export const m = $$u0;
+export const m = $$u0

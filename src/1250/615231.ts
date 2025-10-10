@@ -12,10 +12,10 @@ import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
 import { getVisibleTheme } from "../905/640017";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
 import { EsLaLaunchAnnouncementModal } from "../figma_app/6204";
@@ -84,9 +84,9 @@ export function $$O0() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: EsLaLaunchAnnouncementModal,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [c, t, n]);
   if (useEffect(() => {
     getInitialOptions().user_data?.locale === languageCodes.ES_LA && "loaded" === t.status && !1 === t.data && e(postUserFlag({

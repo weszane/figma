@@ -13,7 +13,7 @@ import { up, Vh, kV, N9 } from "../figma_app/692987";
 import { s$ } from "../figma_app/361035";
 import { gS } from "../figma_app/441925";
 import { tI } from "../figma_app/847597";
-import { UR } from "../figma_app/307841";
+import { isCampfireCartBannerEnabled } from "../figma_app/307841";
 import { TrackingProvider } from "../figma_app/831799";
 import { setupPricesTransform } from "../905/84777";
 import { ProductAccessTypeEnum, isValidAccessType } from "../905/513035";
@@ -34,7 +34,7 @@ export function $$E0({
   taxPercent: i,
   tier: l
 }) {
-  let o = UR();
+  let o = isCampfireCartBannerEnabled();
   let x = setupPricesTransform({
     billableProductKeys: collaboratorSet,
     baseQuery: {

@@ -11,7 +11,7 @@ import { n as _$$n } from '../905/841238';
 import { useDropdownState } from '../905/848862';
 import { a1 } from '../figma_app/23780';
 import { getSlotPropTypes, trackComponentPropsModalOpen, DROPDOWN_HEIGHT, getComponentPropDisplayName } from '../figma_app/164212';
-import { wv } from '../figma_app/236327';
+import { SeparatorComponent } from '../figma_app/236327';
 import { On, p1 } from '../figma_app/323320';
 import { selectContainingStateOrSymbolId } from '../figma_app/505098';
 import { ComponentPropType, Fullscreen } from '../figma_app/763686';
@@ -95,7 +95,7 @@ export function $$I0({
       isEnabled: !1,
       hideCheck: !0,
       isChecked: !1
-    }), (!!containingComponentDefs.length || getFeatureFlags().dse_slots) && jsx(wv, {}), jsx(x, {
+    }), (!!containingComponentDefs.length || getFeatureFlags().dse_slots) && jsx(SeparatorComponent, {}), jsx(x, {
       action: 'create-prop',
       nodeField: t,
       onCreate: O,

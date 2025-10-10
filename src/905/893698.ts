@@ -12,7 +12,7 @@ import { createMultiRefCallback } from "../figma_app/272902";
 import { useStorageEventSync } from "../905/657224";
 import { analyticsEventManager } from "../905/449184";
 import { PickerOptionType } from "../905/211621";
-import { X3, MM } from "../figma_app/236327";
+import { DropdownOptions, CheckableOptionComponent } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -144,22 +144,22 @@ function R({
     ...e,
     maxHeight: E
   }), [E, e]);
-  return jsxs(X3, {
+  return jsxs(DropdownOptions, {
     className: Dm,
     positionAbsolute: !0,
     style: B,
     id: i,
     hideDropdown: f,
     autofocusPrevElementOnEsc: !0,
-    children: [jsxs(MM, {
+    children: [jsxs(CheckableOptionComponent, {
       checked: !C,
       onClick: M,
       children: [jsx(_$$t, {}), renderI18nText("design_systems.instance_swap_picker.grid")]
-    }, "grid"), jsxs(MM, {
+    }, "grid"), jsxs(CheckableOptionComponent, {
       checked: C,
       onClick: j,
       children: [jsx(Z, {}), renderI18nText("design_systems.instance_swap_picker.list")]
-    }, "list"), !!t && jsxs(MM, {
+    }, "list"), !!t && jsxs(CheckableOptionComponent, {
       checked: N,
       onClick: U,
       children: [jsx(_$$e, {}), renderI18nText("design_systems.instance_swap_picker.show_subfolders")]

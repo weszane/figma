@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { IconButton } from "../905/443068";
 import { h as _$$h } from "../905/994594";
 import { A as _$$A } from "../905/251970";
-import { useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import c from "../vendor/197638";
 import { useSingleEffect } from "../905/791079";
 import { useKeyboardNavigationItem } from "../figma_app/119475";
@@ -42,13 +42,13 @@ export function $$P0({
   let B = useAtomWithSubscription(L8);
   let [V, G] = useAtomValueAndSetter(rG);
   let [z, H] = useAtomValueAndSetter(z5);
-  let W = Xr(q4);
+  let W = useSetAtom(q4);
   let K = useAtomWithSubscription(hO.isFragmentSearchAtom);
   let Y = _$$y(K ? "fragment_search_modal" : "file_browser", j, !0);
   let q = _$$v(V);
   let $ = _$$A2();
   !function () {
-    let e = Xr(Vp);
+    let e = useSetAtom(Vp);
     let t = useAtomWithSubscription(H9);
     let i = t?.facetType;
     let n = t?.valueToQuery ?? null;

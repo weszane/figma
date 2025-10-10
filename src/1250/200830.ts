@@ -8,9 +8,9 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { CR, NJ } from "../figma_app/419216";
 import { TrackingProvider, TrackedDiv } from "../figma_app/831799";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily, fileBrowserOnboardedAtom, userFlagsAtom, userFlagAtomFamily } from "../figma_app/545877";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingSequence } from "../905/152487";
 import { CustomSectionsNudge, FileBrowserFigjamWhatsNew, OnboardFileBrowser, OnboardOrgsWelcome, OrgSelectWorkspace, PlanSpacesLaunchOverlay, PlanSpacesRecreatedStarterTeamOverlay, ProTrialsV3EntryOverlay, ProTrialsV3ExpiryOverlay, ProTrialsV3TeamWelcomeOverlay, PromoCodeCreateTeam, PromoCodeSelectTeam, ResourceHubPromotionalOverlay, TeamProjectLinkOverlay, StarterPlanUpdatesOverlay, EduOffboarding, EduPostVerification, LimitedPlanSpacesOnboarding, UniversalUpgrade } from "../figma_app/6204";
 import { useSingleEffect } from "../905/791079";
@@ -27,7 +27,7 @@ import { SIGNED_UP_FROM_OPEN_SESSIONS } from "../905/862321";
 import { isResourceHubEnabled } from "../figma_app/275462";
 import { postUserFlag } from "../905/985254";
 import { A as _$$A } from "../905/956262";
-import { UC, uA } from "../figma_app/33126";
+import { orgHasWorkspacesAndBigmaAtomFamily, canAccessBigmaAtom } from "../figma_app/33126";
 import { of, mW } from "../figma_app/797994";
 import { hasAnyOnboardingFlag } from "../figma_app/242339";
 import { OrgPersonal } from "../905/696396";
@@ -129,7 +129,7 @@ import { useFBGNavigationUpdatesTreatment, FBGNavigationUpdatesVariants } from "
 import { P as _$$P5 } from "../1250/232298";
 import { A as _$$A6 } from "../1250/545022";
 import { C as _$$C } from "../1250/50098";
-import { NuxOnboardingOverlay } from "../4452/529989";
+import { BaseNuxOnboardingOverlay } from "../4452/529989";
 import { A as _$$A7 } from "../1250/318790";
 import { getResourceDataOrFallback } from "../905/723791";
 import { selectExperimentConfigHook } from "../figma_app/594947";
@@ -187,9 +187,9 @@ let $$w0 = "favorites-count-crossed-threshold";
 let T = userFlagExistsAtomFamily(v);
 function j() {
   let e = useAtomWithSubscription(T);
-  let t = _$$e({
+  let t = useOverlay({
     overlay: CustomSectionsNudge,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [e]);
   useEventForwarder(t.uniqueId, $$w0, () => {
     t.show({
@@ -220,9 +220,9 @@ function O() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FileBrowserFigjamWhatsNew,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e, t, r, o]);
   useSingleEffect(() => {
     show({
@@ -605,12 +605,12 @@ function eG() {
   let r = useLatestRef(n);
   let s = useAtomWithSubscription(d2);
   let l = useSelector(e => e.currentUserOrgId);
-  let d = UC(l);
+  let d = orgHasWorkspacesAndBigmaAtomFamily(l);
   let c = useAtomWithSubscription(d);
   let _ = useAtomWithSubscription(Ot);
-  let u = _$$e({
+  let u = useOverlay({
     overlay: OnboardFileBrowser,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [t, s, c, _]);
   let [m, p] = useState([]);
   let [x, v] = useState([]);
@@ -706,9 +706,9 @@ let eQ = userFlagExistsAtomFamily(eY);
 function eZ() {
   let e = useAtomWithSubscription(d2);
   let t = useAtomWithSubscription(eQ);
-  let n = _$$e({
+  let n = useOverlay({
     overlay: OnboardOrgsWelcome,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [e, t]);
   useSingleEffect(() => {
     n.show({
@@ -882,7 +882,7 @@ function tc() {
   let r = useRef();
   r.current = n;
   let o = useAtomWithSubscription(d2);
-  let s = useAtomWithSubscription(uA);
+  let s = useAtomWithSubscription(canAccessBigmaAtom);
   let l = Au(e);
   let d = useAtomWithSubscription(td(e));
   let c = useAtomWithSubscription(tl);
@@ -890,9 +890,9 @@ function tc() {
     show,
     complete,
     isShowing
-  } = _$$e({
+  } = useOverlay({
     overlay: OrgSelectWorkspace,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [o, s, l, d, c, t]);
   return (useSingleEffect(() => {
     show({
@@ -1085,9 +1085,9 @@ function tS() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: PlanSpacesLaunchOverlay,
-    priority: _$$N.DEFAULT_MODAL + 1
+    priority: ModalPriority.DEFAULT_MODAL + 1
   }, [d]);
   useEffect(() => {
     g || show({
@@ -1136,9 +1136,9 @@ function tP() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: PlanSpacesRecreatedStarterTeamOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e, n]);
   useSingleEffect(() => {
     t || show({
@@ -1905,9 +1905,9 @@ function nc() {
   });
 }
 function n_() {
-  let e = _$$e({
+  let e = useOverlay({
     overlay: ProTrialsV3EntryOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let t = useDispatch<AppDispatch>();
   useSingleEffect(() => {
@@ -1936,9 +1936,9 @@ function n_() {
   });
 }
 function nu(e) {
-  let t = _$$e({
+  let t = useOverlay({
     overlay: ProTrialsV3ExpiryOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let {
     proTrial
@@ -1978,9 +1978,9 @@ function nu(e) {
   });
 }
 function nm(e) {
-  let t = _$$e({
+  let t = useOverlay({
     overlay: ProTrialsV3TeamWelcomeOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let {
     proTrial
@@ -2091,9 +2091,9 @@ function nT() {
   let e = useAtomWithSubscription(ny);
   let t = useAtomWithSubscription(nb);
   let n = useAtomWithSubscription(nx);
-  let r = _$$e({
+  let r = useOverlay({
     overlay: PromoCodeCreateTeam,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [e]);
   let o = useCallback(() => {
     t && n && r.show({
@@ -2195,9 +2195,9 @@ function nS() {
   let e = useAtomWithSubscription(ny);
   let t = useAtomWithSubscription(nb);
   let n = useAtomWithSubscription(nx);
-  let r = _$$e({
+  let r = useOverlay({
     overlay: PromoCodeSelectTeam,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [e]);
   let o = useCallback(() => {
     t && n && r.show({
@@ -2226,9 +2226,9 @@ function nL() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: ResourceHubPromotionalOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e, t]);
   useSingleEffect(() => {
     show({
@@ -2279,9 +2279,9 @@ function n$() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: TeamProjectLinkOverlay,
-    priority: _$$N.DEFAULT_MODAL,
+    priority: ModalPriority.DEFAULT_MODAL,
     experiment: {
       check: () => n(),
       predicate: e => !e,
@@ -2315,9 +2315,9 @@ function n0() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: StarterPlanUpdatesOverlay,
-    priority: _$$N.DEFAULT_MODAL,
+    priority: ModalPriority.DEFAULT_MODAL,
     experiment: {
       check: () => {
         if (!getFeatureFlags().sts_starter_enabled) return !1;
@@ -2370,9 +2370,9 @@ function n6() {
   let n = useAtomWithSubscription(zN);
   let a = getCurrentTeam();
   let r = useDispatch<AppDispatch>();
-  let o = _$$e({
+  let o = useOverlay({
     overlay: EduOffboarding,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [e, t, n]);
   useSingleEffect(() => {
     o.show({
@@ -2402,9 +2402,9 @@ let ae = {
   value: "1"
 };
 function an() {
-  let e = _$$e({
+  let e = useOverlay({
     overlay: EduPostVerification,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   });
   let t = useDispatch<AppDispatch>();
   useSingleEffect(() => {
@@ -2442,9 +2442,9 @@ function ao() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: LimitedPlanSpacesOnboarding,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [t, n, r]);
   return (useEffect(() => {
     l && show({
@@ -2472,9 +2472,9 @@ function ao() {
 function a_() {
   let e = useDispatch<AppDispatch>();
   let t = useAtomWithSubscription(d2);
-  let n = _$$e({
+  let n = useOverlay({
     overlay: UniversalUpgrade,
-    priority: _$$N.URGENT_ALERT
+    priority: ModalPriority.URGENT_ALERT
   }, [t]);
   useSingleEffect(() => {
     let t = getQueryParam("upgrade");
@@ -2529,7 +2529,7 @@ export function $$au2() {
     }), jsx(_$$p2, {
       children: jsx(n6, {})
     }), jsx(_$$p2, {
-      children: jsx(NuxOnboardingOverlay, {
+      children: jsx(BaseNuxOnboardingOverlay, {
         entryPoint: C5.FileBrowser
       })
     }), (isIpadDevice || !isMobileUA) && jsxs(Fragment, {

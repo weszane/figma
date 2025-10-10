@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { c$, bL, l9, mc } from "../905/493196";
+import { SelectOptionReset, SelectGroupLabel, SelectSeparator, SelectContainer } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
@@ -11,7 +11,7 @@ function _({
   value: n,
   count: o
 }) {
-  return jsx(c$, {
+  return jsx(SelectOptionReset, {
     value: n,
     children: jsxs("div", {
       className: "component_browser_filters--option--0cVym",
@@ -39,10 +39,10 @@ export function $$p0({
   componentCounts: o
 }) {
   let i = sD();
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     value: e,
     onChange: e => n(e),
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       label: jsx(HiddenLabel, {
         children: getI18nString("dev_handoff.component_browser.filter")
       }),
@@ -52,7 +52,7 @@ export function $$p0({
           count: o[e]
         })]
       })
-    }), jsx(mc, {
+    }), jsx(SelectContainer, {
       children: Object.entries(W).filter(([e]) => getFeatureFlags().dt_component_browser_bulk_mapping || "suggestionsAvailable" !== e).map(([e, {
         value: n
       }]) => {

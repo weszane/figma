@@ -4,7 +4,7 @@ import a from "classnames";
 import { useSingleEffect } from "../905/791079";
 import { EnhancedInput } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { S } from "../905/339549";
+import { RenderRefCheckbox } from "../905/339549";
 import { useThemeContext, getVisibleTheme } from "../905/640017";
 import { E } from "../905/712094";
 import { zY } from "../905/148137";
@@ -120,7 +120,7 @@ function b(e) {
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: "stripe--paymentDetailsCheckbox--2HcCJ",
-      children: [jsx(S, {
+      children: [jsx(RenderRefCheckbox, {
         checked: t,
         onChange: () => a(e)
       }), jsxs("p", {

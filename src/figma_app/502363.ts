@@ -51,7 +51,7 @@ import { A as _$$A6 } from "../1617/586892";
 import { A as _$$A7 } from "../svg/821527";
 import { h as _$$h2 } from "../905/994594";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { hO } from "../figma_app/545293";
 import { showModalHandler, hideModalHandler } from "../905/156213";
@@ -847,7 +847,7 @@ export function $$e53({
   let [d, u] = useAtomValueAndSetter(searchInputAtom);
   let _ = useAtomWithSubscription(L8);
   let h = useRef(null);
-  let g = Xr(q4);
+  let g = useSetAtom(q4);
   let f = useCallback(() => {
     if (!h.current || s?.type === _$$r2) return;
     let n = h.current.getBoundingClientRect();

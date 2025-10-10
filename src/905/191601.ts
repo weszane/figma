@@ -23,7 +23,7 @@ import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { createOptimistThunk } from "../905/350402";
-import { vv } from "../figma_app/435872";
+import { deleteAutosaveFilesExceptKeys } from "../figma_app/435872";
 import { resetTileSelection } from "../905/81009";
 import { deleteFilesOptimistThunk, deleteFilesPermanentlyAction } from "../905/880488";
 let I = registerModal(function (e) {
@@ -358,7 +358,7 @@ let $$M2 = createOptimistThunk(async (e, t, {
       userInitiated: !0,
       fileKeys: Object.keys(t.filesByKey)
     }));
-    t.offlineFilesByKey && d > 0 && e.dispatch(vv(t.offlineFilesByKey));
+    t.offlineFilesByKey && d > 0 && e.dispatch(deleteAutosaveFilesExceptKeys(t.offlineFilesByKey));
     e.dispatch(resetTileSelection());
   };
   m === d ? e.dispatch(showModalHandler({

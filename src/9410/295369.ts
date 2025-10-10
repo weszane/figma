@@ -4,9 +4,9 @@ import { noop } from 'lodash-es';
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
 import { TrackingProvider } from "../figma_app/831799";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { isViewportPanning } from "../figma_app/62612";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { TrackingKeyEnum } from "../905/696396";
 import { OnboardingSequence } from "../905/152487";
 import { mI } from "../9410/983167";
@@ -64,9 +64,9 @@ export function $$v0() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FigJamAISummarizationEntrpointPointerOverlay,
-    priority: N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   useEffect(() => {
     show({

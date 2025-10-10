@@ -9,14 +9,14 @@ import { T as _$$T } from "../1577/951568";
 import { SeatBillingTermsModal } from "../7021/149615";
 import { postUserFlag } from "../905/985254";
 import { getContractCurrency, setupPricesTransform } from "../905/84777";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { collaboratorSet } from "../905/332483";
 import { selectUserFlag } from "../905/940356";
 import { FBillingModelType, FOrganizationLevelType } from "../figma_app/191312";
 import { liveStoreInstance, getAtomMutate } from "../905/713695";
 import { isBigmaEnabledSimple } from "../figma_app/336853";
 import { ProductTierEnum, RenewalTermEnum } from "../905/712921";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { w as _$$w } from "../7021/108292";
 import { OnboardingSequence } from "../905/152487";
 import { SeatBillingTermsOverlay } from "../figma_app/6204";
@@ -65,9 +65,9 @@ export function $$$$k0({
     isShowing,
     show,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: SeatBillingTermsOverlay,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [n]);
   if (useSingleEffect(() => {
     show({

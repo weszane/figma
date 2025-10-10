@@ -6,7 +6,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { VU } from "../905/625959";
 import { bs } from "../figma_app/553940";
 import { selectAppModel } from "../figma_app/889655";
-import { Yh, c1 } from "../figma_app/357047";
+import { isActionEnabled, getKeyboardShortcut } from "../figma_app/357047";
 import { Jg } from "../figma_app/108168";
 import { isDropdownGroupHeader, DMenuItemType } from "../figma_app/986347";
 let h = "overflowMenuDropdown";
@@ -92,7 +92,7 @@ function y({
   recordingKey: t
 }) {
   let r = useSelector(selectAppModel);
-  let _ = Yh(r, e.action);
+  let _ = isActionEnabled(r, e.action);
   return jsxs(MenuItemComp, {
     disabled: !_,
     onClick: VU.get(e.action, "toolbar"),
@@ -101,7 +101,7 @@ function y({
       children: bs(e.action)?.ui3Icon || jsx(V, {})
     }), Jg(e.getDisplayAction?.() ?? e.action), jsx(MenuItemTrail, {
       children: jsx(MenuShortcut, {
-        children: c1(r.keyboardShortcuts, e.action)
+        children: getKeyboardShortcut(r.keyboardShortcuts, e.action)
       })
     })]
   });

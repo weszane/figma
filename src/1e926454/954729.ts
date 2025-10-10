@@ -34,7 +34,7 @@ import { CurrencyFormatter } from "../figma_app/514043";
 import { resourceUtils } from "../905/989992";
 import { un } from "../figma_app/457899";
 import { RenewalTermEnum } from "../905/712921";
-import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectOption, SelectContainer, SelectOptionReset } from "../905/493196";
 import { E as _$$E } from "../905/53857";
 import { AutoLayout, Spacer } from "../905/470281";
 import { B as _$$B } from "../905/261906";
@@ -109,7 +109,7 @@ function H(e) {
       newValue: e
     });
   }, [onChange, t]);
-  return jsx(_$$bL, {
+  return jsx(SelectGroupLabel, {
     value: e.value,
     onChange: r,
     children: jsxs(Suspense, {
@@ -130,7 +130,7 @@ function X({
   value: n,
   disabled: t
 }) {
-  return jsx(DZ, {
+  return jsx(SelectOption, {
     id: e,
     iconLead: jsx("div", {
       className: "xfawy5m",
@@ -153,7 +153,7 @@ function Q({
     reportErrorsToTeam: ServiceCategories.SCALE
   });
   let a = W(e);
-  return jsx(mc, {
+  return jsx(SelectContainer, {
     children: viewCollaboratorSet.sort(compareProductAccessTypes).map(r => r === ViewAccessTypeEnum.VIEW ? jsx(U, {
       planTier: e.tier,
       seatType: r
@@ -177,7 +177,7 @@ function U({
   let l = useFormatProductNamesForSeatType({
     overridePlanTier: n
   });
-  return jsx(c$, {
+  return jsx(SelectOptionReset, {
     value: e,
     "data-testid": `seat-type-option-${e}`,
     children: jsxs(AutoLayout, {

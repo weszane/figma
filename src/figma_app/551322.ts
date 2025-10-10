@@ -10,7 +10,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { Ve, c$ } from "../figma_app/236327";
+import { DropdownComponent, OptionComponent } from "../figma_app/236327";
 import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { SvgComponent } from "../905/714743";
@@ -267,7 +267,7 @@ export function $$ee2({
       className: "move_drafts_nudge_rcs_steps--moveFileSelector--bUHWg",
       children: [jsx("h2", {
         children: renderI18nText("rcs.move_drafts_nudge.move_file_to")
-      }), jsx(Ve, {
+      }), jsx(DropdownComponent, {
         className: "move_drafts_nudge_rcs_steps--dropdownSelector--vE83U",
         optionsBelowSelector: !0,
         shouldRenderAutocompleteStyles: !0,
@@ -283,7 +283,7 @@ export function $$ee2({
             imgUrl: w.imgUrl || void 0
           }
         }),
-        options: V.map((e, t) => !!e && !!e.projects && jsxs(c$, {
+        options: V.map((e, t) => !!e && !!e.projects && jsxs(OptionComponent, {
           id: String(t),
           onClick: e => M(V[parseInt(e.currentTarget.id)]),
           className: "move_drafts_nudge_rcs_steps--projectRow--4JZde",

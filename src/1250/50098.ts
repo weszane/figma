@@ -5,7 +5,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogCustomContents } from "../figma_app/272243";
 import { ButtonLarge } from "../905/521428";
-import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { useSetAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useSingleEffect } from "../905/791079";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
@@ -15,11 +15,11 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { putUserAction } from "../figma_app/24841";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingSequence } from "../905/152487";
 import { bk, Q7, ZE } from "../905/98947";
 import { pu } from "../7037/430062";
@@ -45,17 +45,17 @@ export function $$F0({
     let o = normalizeJobRole(i);
     return useCallback(() => !(a && a.k12_google_org || n.email.endsWith(".edu") || t || dayjs(n.email_validated_at).add(14, "day").isAfter(dayjs(Date.now()))) && (!i || ("something_else" === i ? !!dayjs(n.email_validated_at).isBefore(dayjs(new Date("2024-12-10"))) : "other" === o && (!a || !a.saml_sso_only))), [a, t, o, i, n.email, n.email_validated_at]);
   }();
-  let n = Xr(bk);
-  let i = Xr(Q7);
+  let n = useSetAtom(bk);
+  let i = useSetAtom(Q7);
   let o = selectUser().name;
   let s = !!selectUserFlag("submitted_job_title_prompt_overlay");
   let {
     show,
     complete,
     isShowing
-  } = _$$e({
+  } = useOverlay({
     overlay: JobTitlePromptOverlay,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   return (useSingleEffect(() => {
     getIsAndroidOrIphoneNotFigmaMobile() || window.matchMedia("(max-width: 840px)").matches || s || show({

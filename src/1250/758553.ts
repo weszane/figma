@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { sendWithRetry } from "../905/910117";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { REFRESH_FEED_ACTION } from "../905/504768";
@@ -76,7 +76,7 @@ export function $$y1(e) {
   }, [t, y, g, b]);
   if (!canDelete && !canAdminDelete) return null;
   let T = canDelete ? renderI18nText("fig_feed.delete_ellipsis") : renderI18nText("fig_feed.delete_admin_ellipsis");
-  let j = [(!!canDelete || !!canAdminDelete) && jsx(c$, {
+  let j = [(!!canDelete || !!canAdminDelete) && jsx(OptionComponent, {
     onClick: w,
     children: T
   }, "delete")];

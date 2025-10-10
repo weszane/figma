@@ -3,7 +3,7 @@ import { memo, useState, useEffect, useRef } from "react";
 import { A as _$$A } from "../vendor/648136";
 import { Y1 } from "../vendor/891888";
 import { setupDragHandler } from "../905/97346";
-import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { KeyboardNavigationProvider } from "../figma_app/119475";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { Spacer } from "../905/470281";
@@ -125,7 +125,7 @@ export function $$A0({
   let r = useAtomWithSubscription(e.currentAtom);
   let [c, u] = useAtomValueAndSetter(b);
   let [p, _] = useAtomValueAndSetter($$T1);
-  let m = Xr(y);
+  let m = useSetAtom(y);
   let [S, A] = useState(200);
   let [, x] = setupDragHandler({
     onDrag(e) {

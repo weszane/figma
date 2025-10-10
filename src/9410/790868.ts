@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen, DataLoadStatus } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { handleAtomEvent } from "../905/502364";
 import { Yh } from "../figma_app/888478";
@@ -22,7 +22,7 @@ export function $$_0(e) {
   let E = useSelector(e => e.versionHistory);
   let T = trackFileEventWithUser();
   let w = W();
-  let S = Xr(Yh);
+  let S = useSetAtom(Yh);
   let j = useCallback(e => {
     _(e);
     Fullscreen.triggerActionInUserEditScope("track-page-rename", {

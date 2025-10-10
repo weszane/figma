@@ -1,5 +1,5 @@
 import { Hg } from "../figma_app/304955";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { generateUUIDv4 } from "../905/871474";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { liveStoreInstance } from "../905/713695";
@@ -13,16 +13,16 @@ import { gZ } from "../figma_app/952035";
 import { GA, PM, ZO } from "../1156/108847";
 import { A9, SR, rq } from "../1156/929233";
 export function $$f0() {
-  let e = Xr(p7);
+  let e = useSetAtom(p7);
   let {
     entryPointCodeInstance
   } = oA();
   let n = vD(entryPointCodeInstance?.guid ?? null);
   let f = I4(n);
   let y = useCurrentFileKey();
-  let _ = Xr(Xl);
-  let b = Xr(GV);
-  let j = Xr(GA);
+  let _ = useSetAtom(Xl);
+  let b = useSetAtom(GV);
+  let j = useSetAtom(GA);
   let [, v] = PM();
   return async t => {
     let {

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { A as _$$A } from "../905/251970";
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { useSetAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { KD } from "../figma_app/975811";
 import { useDropdownState } from "../905/848862";
@@ -53,10 +53,10 @@ let $$v5 = createTrackedAtom($$y2[f].height || 852);
 let $$I10 = createTrackedAtom($$y2[f].width || 393);
 let $$C9 = createTrackedAtom(1);
 export function $$E0() {
-  let e = Xr($$_8);
-  let t = Xr(b);
-  let n = Xr($$v5);
-  let o = Xr($$I10);
+  let e = useSetAtom($$_8);
+  let t = useSetAtom(b);
+  let n = useSetAtom($$v5);
+  let o = useSetAtom($$I10);
   return useCallback(() => {
     e(!1);
     t(f);

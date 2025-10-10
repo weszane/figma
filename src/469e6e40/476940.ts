@@ -5,8 +5,8 @@ import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
-import { N } from "../figma_app/268271";
+import { useOverlay } from "../905/621515";
+import { ModalPriority } from "../figma_app/268271";
 import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
@@ -16,7 +16,7 @@ import { iX } from "../905/415545";
 import { BrowserNotificationsOnboardingOverlay } from "../figma_app/6204";
 import { n as _$$n } from "../905/347702";
 import { qH, UU, ym, vH, fD, mk, V_ } from "../905/807385";
-let j = _$$n(() => N.SECONDARY_MODAL);
+let j = _$$n(() => ModalPriority.SECONDARY_MODAL);
 let y = _$$n(() => _$$d.isBrowserNotificationSupported());
 let w = _$$n(() => _$$d.isFirebaseInitialized());
 export function $$k0({
@@ -27,7 +27,7 @@ export function $$k0({
     complete,
     isShowing,
     show
-  } = _$$e({
+  } = useOverlay({
     overlay: BrowserNotificationsOnboardingOverlay,
     priority: j()
   });

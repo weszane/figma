@@ -13,7 +13,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { Vector2D } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { createAtomWithEquality, atom, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { createAtomWithEquality, atom, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { useStableMemo } from "../905/19536";
 import { useDebouncedCallback } from "use-debounce";
 import { trackFileEventWithUser } from "../figma_app/901889";
@@ -635,7 +635,7 @@ export let $$eM7 = createAtomWithEquality(atom(null));
 export function $$eF41(e) {
   let t = $$e_22();
   let [r, i] = useAtomValueAndSetter($$eD6);
-  let a = Xr($$eM7);
+  let a = useSetAtom($$eM7);
   return useCallback(() => {
     a(null);
     let n = r[e];

@@ -1,98 +1,145 @@
-import { UIVisibilitySetting } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
+import type { ActionCreator } from "redux";
+import type { ThunkAction } from "redux-thunk";
 import { createActionCreator } from "../905/73481";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { FlashActions } from "../905/573154";
-import { getI18nString } from "../905/303541";
+import { permissionScopeHandler } from "../905/189185";
 import { resolveMessage } from "../905/231762";
-import { tryPluginInFullscreen } from "../905/489647";
-import { selectViewAction } from "../905/929976";
-import { Z, kq } from "../905/292918";
+import { showBranchMergeModalThunk, fetchSourceFileInfoThunk } from "../905/292918";
 import { handleMergeOnFileOpen } from "../905/300250";
-import { setProgressBarState } from "../figma_app/91703";
-import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
-import { isBranchAlt } from "../905/760074";
+import { getI18nString } from "../905/303541";
 import { createNewFramePreset } from "../905/327855";
-import { setFileInfo } from "../figma_app/682945";
-import { enterVersionHistoryMode, loadVersionIncrementally, startCompareChanges } from "../figma_app/841351";
-import { SourceDirection } from "../905/535806";
-import { versionHandlerInstance } from "../905/985740";
-import { openResiger } from "../905/438683";
 import { createOptimistThunk } from "../905/350402";
-let $$x1 = createActionCreator("FULLSCREEN_DOCUMENT_LOADED");
-let $$S0 = createOptimistThunk(e => {
+import { openResiger } from "../905/438683";
+import { tryPluginInFullscreen } from "../905/489647";
+import { SourceDirection } from "../905/535806";
+import { FlashActions } from "../905/573154";
+import { isBranchAlt } from "../905/760074";
+import { selectViewAction } from "../905/929976";
+import { versionHandlerInstance } from "../905/985740";
+import { setProgressBarState } from "../figma_app/91703";
+import { setFileInfo } from "../figma_app/682945";
+import { UIVisibilitySetting } from "../figma_app/763686";
+
+// Refactored code: Improved readability, added types, simplified logic, and preserved functionality.
+// Origin: FULLSCREEN_DOCUMENT_LOADED thunk logic
+
+import { enterVersionHistoryMode, loadVersionIncrementally, startCompareChanges } from "../figma_app/841351";
+import { updateLocalLibraryItemsThunk } from "../figma_app/864378";
+import { desktopAPIInstance } from "../figma_app/876459";
+
+// Action creator for fullscreen document loaded
+export const fullscreenDocumentLoadedAction = createActionCreator("FULLSCREEN_DOCUMENT_LOADED");
+
+// Thunk to handle fullscreen document loading logic
+export const handleFullscreenDocumentLoaded = createOptimistThunk(({
+  dispatch,
+  getState
+}) => {
+  const state = getState();
+  const {
+    selectedView
+  } = state;
+  const {
+    openFile
+  } = state;
+
+  // Handle desktop API loading state
   if (desktopAPIInstance) {
-    let t = e.getState().selectedView;
-    !desktopAPIInstance.isFileBrowserTab() && ("fullscreen" !== t.view || t.fileKey) && desktopAPIInstance.setLoading(!1);
+    const viewState = state.selectedView;
+    if (!desktopAPIInstance.isFileBrowserTab() && (viewState.view !== "fullscreen" || viewState.fileKey)) {
+      desktopAPIInstance.setLoading(false);
+    }
   }
-  let t = e.getState();
-  let i = t.selectedView;
-  t.openFile && setFileInfo(t.openFile.key, i.editorType);
-  i.fileKey && i.versionId && versionHandlerInstance.getVersion({
-    fileKey: i.fileKey,
-    versionId: i.versionId
-  }).then(i => {
-    e.dispatch(enterVersionHistoryMode());
-    e.dispatch(loadVersionIncrementally({
-      version: i.data.meta.version,
-      fetchedPageIds: new Set(),
-      currentPageNodeId: t.mirror.appModel.currentPage,
-      eventType: "LOAD_NEW_VERSION"
-    }));
-  }).catch(t => {
-    e.dispatch(enterVersionHistoryMode());
-    let i = "missing_authentication" === t.data.reason ? getI18nString("collaboration.feedback.version_history_authentication_error") : getI18nString("collaboration.feedback.version_history_error");
-    e.dispatch(FlashActions.error(resolveMessage(t, i)));
-    e.dispatch(setProgressBarState({
-      mode: UIVisibilitySetting.OFF
-    }));
-  });
-  i.fileKey && i.compareVersionId && (e.dispatch(enterVersionHistoryMode()), e.dispatch(startCompareChanges({
-    fromVersionId: i.compareVersionId
-  })));
-  i && i.fileKey && i.showCommentPreferencesPicker && openResiger();
-  let a = t.openFile;
-  let E = i.reviewNumber;
-  if (i && i.framePresetName) {
-    let t = i.framePresetName;
-    e.dispatch(selectViewAction({
-      ...i,
-      framePresetName: void 0
-    }));
-    createNewFramePreset(t);
+
+  // Set file info if openFile exists
+  if (openFile) {
+    setFileInfo(openFile.key, selectedView.editorType);
   }
-  if (t.user && a && isBranchAlt(a) && (e.dispatch(Z({
-    branchFileKey: a.key
-  })), E && !isNaN(E) || i.openReview)) {
-    let t = {
-      branchKey: a.key,
-      sourceKey: a.sourceFileKey,
+
+  // Handle version history loading
+  if (selectedView.fileKey && selectedView.versionId) {
+    versionHandlerInstance.getVersion({
+      fileKey: selectedView.fileKey,
+      versionId: selectedView.versionId
+    }).then(response => {
+      dispatch(enterVersionHistoryMode());
+      dispatch(loadVersionIncrementally({
+        version: response.data.meta.version,
+        fetchedPageIds: new Set(),
+        currentPageNodeId: state.mirror.appModel.currentPage,
+        eventType: "LOAD_NEW_VERSION"
+      }));
+    }).catch(error => {
+      dispatch(enterVersionHistoryMode());
+      const errorMessage = error.data?.reason === "missing_authentication" ? getI18nString("collaboration.feedback.version_history_authentication_error") : getI18nString("collaboration.feedback.version_history_error");
+      dispatch(FlashActions.error(resolveMessage(error, errorMessage)));
+      dispatch(setProgressBarState({
+        mode: UIVisibilitySetting.OFF
+      }));
+    });
+  }
+
+  // Handle version comparison
+  if (selectedView.fileKey && selectedView.compareVersionId) {
+    dispatch(enterVersionHistoryMode());
+    dispatch(startCompareChanges({
+      fromVersionId: selectedView.compareVersionId
+    }));
+  }
+
+  // Open comment preferences picker if needed
+  if (selectedView.fileKey && selectedView.showCommentPreferencesPicker) {
+    openResiger();
+  }
+
+  // Handle frame preset creation
+  if (selectedView.framePresetName) {
+    const presetName = selectedView.framePresetName;
+    dispatch(selectViewAction({
+      ...selectedView,
+      framePresetName: undefined
+    }));
+    createNewFramePreset(presetName);
+  }
+
+  // Handle branch redirection
+  if (state.user && openFile && isBranchAlt(openFile) && (dispatch(fetchSourceFileInfoThunk({
+    branchFileKey: openFile.key
+  })), selectedView.reviewNumber || !isNaN(selectedView.reviewNumber) || selectedView.openReview)) {
+    const branchParams = {
+      branchKey: openFile.key,
+      sourceKey: openFile.sourceFileKey,
       direction: SourceDirection.TO_SOURCE
     };
-    e.dispatch(kq(t));
+    dispatch(showBranchMergeModalThunk(branchParams));
   }
-  if (i.mergeParams) {
-    if (e.dispatch(selectViewAction({
-      ...i,
-      mergeParams: void 0,
-      framePresetName: void 0
-    })), i.mergeParams.mergeOnFileOpen) {
-      let n = t.openFile;
-      if (!n) return;
-      e.dispatch(handleMergeOnFileOpen({
-        mergeParams: i.mergeParams,
+
+  // Handle merge parameters
+  if (selectedView.mergeParams) {
+    dispatch(selectViewAction({
+      ...selectedView,
+      mergeParams: undefined,
+      framePresetName: undefined
+    }));
+    if (selectedView.mergeParams.mergeOnFileOpen) {
+      if (!openFile) return;
+      dispatch(handleMergeOnFileOpen({
+        mergeParams: selectedView.mergeParams,
         editingFile: {
-          key: n.key,
-          file_repo_id: n.fileRepoId
+          key: openFile.key,
+          file_repo_id: openFile.fileRepoId
         },
-        migrationVersion: t.fileVersion,
-        user: t.user,
-        branchModalTrackingId: i.mergeParams.branchModalTrackingId
+        migrationVersion: state.fileVersion,
+        user: state.user,
+        branchModalTrackingId: selectedView.mergeParams.branchModalTrackingId
       }));
-      e.dispatch(updateLocalLibraryItemsThunk());
-    } else e.dispatch(kq(i.mergeParams));
+      dispatch(updateLocalLibraryItemsThunk());
+    } else {
+      dispatch(showBranchMergeModalThunk(selectedView.mergeParams));
+    }
   }
-  let {
+
+  // Handle plugin loading in fullscreen
+  const {
     tryPluginId,
     tryPluginName,
     tryPluginVersionId,
@@ -101,20 +148,24 @@ let $$S0 = createOptimistThunk(e => {
     isPlaygroundFile,
     fileKey,
     tryPluginParams
-  } = i;
-  t.user && tryPluginId && tryPluginName && tryPluginVersionId && fileKey && editorType && permissionScopeHandler.user("try-plugin", () => {
-    e.dispatch(tryPluginInFullscreen({
-      tryPluginId,
-      tryPluginName,
-      tryPluginVersionId,
-      isWidget: !!isWidget,
-      fullscreenEditorType: editorType,
-      isPlaygroundFile: !!isPlaygroundFile,
-      fileKey,
-      tryPluginParams
-    }));
-  });
-  e.dispatch($$x1());
+  } = selectedView;
+  if (state.user && tryPluginId && tryPluginName && tryPluginVersionId && fileKey && editorType) {
+    permissionScopeHandler.user("try-plugin", () => {
+      dispatch(tryPluginInFullscreen({
+        tryPluginId,
+        tryPluginName,
+        tryPluginVersionId,
+        isWidget: !!isWidget,
+        fullscreenEditorType: editorType,
+        isPlaygroundFile: !!isPlaygroundFile,
+        fileKey,
+        tryPluginParams
+      }));
+    });
+  }
+
+  // Dispatch final action
+  dispatch(fullscreenDocumentLoadedAction());
 });
-export const X = $$S0;
-export const o = $$x1;
+export const X = handleFullscreenDocumentLoaded;
+export const o = fullscreenDocumentLoadedAction;

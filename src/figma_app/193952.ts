@@ -4,7 +4,7 @@ import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { logWarning } from "../905/714362";
 import { getTrackingSessionId } from "../905/471229";
-import { _s } from "../figma_app/33126";
+import { currentUserOrgIdAtom } from "../figma_app/33126";
 import { J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
@@ -58,7 +58,7 @@ export function $$S12({
   clientLifecycleId: e
 }) {
   return {
-    orgId: atomStoreManager.get(_s) || null,
+    orgId: atomStoreManager.get(currentUserOrgIdAtom) || null,
     teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
     fileKey: atomStoreManager.get(openFileKeyAtom) || null,
     userId: atomStoreManager.get(userIdAtom) || null,

@@ -24,7 +24,7 @@ import { Y as _$$Y2 } from '../469e6e40/924996';
 import { getRumLoggingConfig } from '../905/16237';
 import { ModalRootComponent } from '../905/38914';
 import { SimpleFuseSearch } from '../905/81982';
-import { s as _$$s2 } from '../905/82276';
+import { UNASSIGNED_LABEL } from '../905/82276';
 import { e as _$$e5 } from '../905/86132';
 import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
@@ -69,7 +69,7 @@ import { AdvancedSet } from '../905/596651';
 import { p as _$$p } from '../905/597320';
 import { getFeatureFlags } from '../905/601108';
 import { setupThemeContext } from '../905/614223';
-import { e as _$$e4 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { K as _$$K2 } from '../905/628118';
 import { getResourceDataOrFallback } from '../905/663269';
 import { In } from '../905/672640';
@@ -119,9 +119,9 @@ import { getGroupTypeLabel } from '../figma_app/173467';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 import { FMemberRoleType, FOrganizationLevelType, FPlanAccessType, FPlanFeatureType, FPlanNameType, FProductAccessType, FUserRoleType, FUserTypeClassification } from '../figma_app/191312';
 import { getProductAccessTypeByKey } from '../figma_app/217457';
-import { c$, gw } from '../figma_app/236327';
+import { OptionComponent, DropdownWithScrim } from '../figma_app/236327';
 import { isPublicLinkBanned } from '../figma_app/246699';
-import { N as _$$N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useSubscription } from '../figma_app/288654';
 import { usePlanInviteWithSeatExperiment } from '../figma_app/297957';
@@ -904,7 +904,7 @@ let tf = registerModal(({
   let x = {
     ...DefaultFilters
   };
-  e ? x.licenseGroupFilter = _$$s2 : t && (x.workspaceFilter = UNASSIGNED);
+  e ? x.licenseGroupFilter = UNASSIGNED_LABEL : t && (x.workspaceFilter = UNASSIGNED);
   return jsx(TrackingProvider, {
     name: 'Add Unassigned Members Modal',
     children: jsx(HeaderModal, {
@@ -1202,7 +1202,7 @@ function tM() {
       otherLicenseGroups,
       allAdminableLicenseGroups
     } = EQ(e, t, !n);
-    return groupsUserIsAdminOf.length === 0 && otherLicenseGroups.length === 0 ? [] : allAdminableLicenseGroups.map(e => e.id).concat(_$$s2);
+    return groupsUserIsAdminOf.length === 0 && otherLicenseGroups.length === 0 ? [] : allAdminableLicenseGroups.map(e => e.id).concat(UNASSIGNED_LABEL);
   }, [t, r, l, e, n]);
 }
 function tP({
@@ -1237,9 +1237,9 @@ function tJ(e) {
     show,
     isShowing,
     complete
-  } = _$$e4({
+  } = useOverlay({
     overlay: BillingGroupAdminOnboarding,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [a]);
   useSingleEffect(() => {
     show({
@@ -1328,9 +1328,9 @@ function tQ(e) {
     isShowing,
     show,
     complete
-  } = _$$e4({
+  } = useOverlay({
     overlay: OrgAdminFiltersOnboardingOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useSingleEffect(() => {
     show({
@@ -1361,9 +1361,9 @@ function tZ(e) {
     show,
     isShowing,
     complete
-  } = _$$e4({
+  } = useOverlay({
     overlay: OrgAdminFlyoutOnboardingOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useSingleEffect(() => {
     show();
@@ -1921,16 +1921,16 @@ function aq({
       }
     }));
   }, [o, a, r, l, t]);
-  let c = useMemo(() => [jsx(c$, {
+  let c = useMemo(() => [jsx(OptionComponent, {
     onClick: () => d(ProductAccessTypeEnum.EXPERT),
     children: getI18nString('general.bundle.expert')
-  }, '1'), jsx(c$, {
+  }, '1'), jsx(OptionComponent, {
     onClick: () => d(ProductAccessTypeEnum.COLLABORATOR),
     children: getI18nString('general.bundle.collaborator')
-  }, '2'), jsx(c$, {
+  }, '2'), jsx(OptionComponent, {
     onClick: () => d(ProductAccessTypeEnum.DEVELOPER),
     children: getI18nString('general.bundle.developer')
-  }, '3'), jsx(c$, {
+  }, '3'), jsx(OptionComponent, {
     onClick: () => d(ViewAccessTypeEnum.VIEW),
     children: getI18nString('checkout.view')
   }, '4')], [d]);
@@ -1941,7 +1941,7 @@ function aq({
     type: aF,
     children: [getI18nString('members_table.change_seats_button', {
       userCount: r.length
-    }), _ && jsx(gw, {
+    }), _ && jsx(DropdownWithScrim, {
       dispatch: o,
       style: e.data.position,
       className: n$,
@@ -2833,7 +2833,7 @@ function nn(e) {
         let t = e.filters.workspaceFilter ?? void 0;
         t === UNASSIGNED && (t = void 0);
         let a = e.filters.licenseGroupFilter ?? void 0;
-        a === _$$s2 && (a = void 0);
+        a === UNASSIGNED_LABEL && (a = void 0);
         e.dispatch(showModalHandler({
           type: tf,
           data: {
@@ -2859,7 +2859,7 @@ function nn(e) {
         let t = e.filters.workspaceFilter ?? void 0;
         t === UNASSIGNED && (t = void 0);
         let a = e.filters.licenseGroupFilter ?? void 0;
-        a === _$$s2 && (a = void 0);
+        a === UNASSIGNED_LABEL && (a = void 0);
         eu({
           isPlanAdmin: !0
         }) ? e.dispatch(showModalHandler({
@@ -3196,7 +3196,7 @@ export function $$nc0(e) {
     if (a) {
       if (!isUserObject(e)) return !1;
       let t = e.license_group_member?.license_group_id;
-      if (!t && a !== _$$s2 || t && a !== t) return !1;
+      if (!t && a !== UNASSIGNED_LABEL || t && a !== t) return !1;
     }
     if (n) {
       if (!isUserObject(e)) return !1;

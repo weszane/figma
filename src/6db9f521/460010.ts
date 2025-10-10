@@ -60,7 +60,7 @@ import { xG } from "../figma_app/121043";
 import { Button, ButtonLarge, ButtonWide } from "../905/521428";
 import { ScrollContainer } from "../905/143421";
 import { x as _$$x } from "../905/764527";
-import { Xr, useAtomValueAndSetter, useAtomWithSubscription, um, atomStoreManager } from "../figma_app/27355";
+import { useSetAtom, useAtomValueAndSetter, useAtomWithSubscription, atomWithReducer, atomStoreManager } from "../figma_app/27355";
 import { CortexError } from "../figma_app/691470";
 import { CortexErrorV2, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError } from "../figma_app/316567";
 import { withAbortSignal } from "../905/829242";
@@ -91,7 +91,7 @@ import { bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { q as _$$q } from "../9410/847736";
 import { lockAtomFamily, fileTypeAtom, FileType } from "../figma_app/60023";
-import { bL as _$$bL, l9 as _$$l4, mc, c$, wv } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset, SelectRoot } from "../905/493196";
 import { p as _$$p } from "../905/536283";
 import { u as _$$u } from "../905/591949";
 import { h as _$$h } from "../905/513745";
@@ -122,7 +122,7 @@ import { updateHoveredNode, replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback, normalizeValue } from "../905/216495";
 import { useUpdateSelectionProperty, useSelectionProperty, useSelectionPropertyValue, useSelectedStyleOrSelectionPropertyValues, useNonMixedSelectedStyleOrSelectionPropertyValues, useNonMixedSelectionPropertyValue, useNonMixedSelectionPropertyValues } from "../905/275640";
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { calculatePickerPositionLeft } from "../905/959568";
 import { q as _$$q2 } from "../figma_app/905311";
 import { Wv, r as _$$r } from "../figma_app/711157";
@@ -162,7 +162,7 @@ import { Y as _$$Y3 } from "../905/912236";
 import { useLocalStorageSync } from "../905/657224";
 import { dh as _$$dh } from "../figma_app/186343";
 import { p as _$$p2 } from "../figma_app/353099";
-import { NuxOnboardingOverlay } from "../4452/529989";
+import { BaseNuxOnboardingOverlay } from "../4452/529989";
 import { C5 } from "../7021/95197";
 import { isSelfDesignMode, syncDesignModePermission } from "../figma_app/357367";
 import { v as _$$v3 } from "../6388/254246";
@@ -178,12 +178,12 @@ import { showDropdownThunk } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
 import { hX, xn } from "../figma_app/644079";
-import { J3, JU as _$$JU } from "../figma_app/622574";
+import { getPublishTemplateStatus, canPublishTemplate } from "../figma_app/622574";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { A as _$$A4 } from "../905/956262";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N as _$$N3 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
 import { OnboardingModal } from "../905/425180";
 import { NotModalType } from "../905/11928";
@@ -423,7 +423,7 @@ import { K as _$$K6 } from "../6388/893524";
 import { P as _$$P5 } from "../6388/491290";
 import { xm, CL, iS as _$$iS } from "../figma_app/887835";
 import { m as _$$m4 } from "../905/886380";
-import { c$ as _$$c$3 } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { ConnectedPointingDropdown } from "../905/504727";
 import { aF as _$$aF, Pm } from "../441/443466";
 import { EW } from "../9410/486658";
@@ -1327,7 +1327,7 @@ async function tl({
   }
 }
 function tc() {
-  let e = Xr(lockAtomFamily);
+  let e = useSetAtom(lockAtomFamily);
   let t = useCallback(() => {
     e(!1);
   }, [e]);
@@ -1386,17 +1386,17 @@ function tb({
 }) {
   return jsx("div", {
     ...stylex.props(tf.createDeckOptionContainer),
-    children: jsxs(_$$bL, {
+    children: jsxs(SelectGroupLabel, {
       value: n,
       onChange: l,
-      children: [jsx(_$$l4, {
+      children: [jsx(SelectSeparator, {
         width: "fill",
         label: jsxs("div", {
           className: "x78zum5 x6s0dn4 xv1l7n4 x180r7m8",
           children: [e, t]
         })
-      }), jsx(mc, {
-        children: i.map(e => jsx(c$, {
+      }), jsx(SelectContainer, {
+        children: i.map(e => jsx(SelectOptionReset, {
           value: e,
           children: e
         }, e))
@@ -2673,7 +2673,7 @@ let iT = memo(function (e) {
     })
   });
 });
-let iV = um({
+let iV = atomWithReducer({
   type: "NONE"
 }, (e, t) => {
   switch (t.type) {
@@ -2869,25 +2869,25 @@ function i8({
   let u = isInvalidValue(e) ? i4 : i6.format(e);
   return jsx(_LabelInputRow, {
     labelTx: renderI18nText("slides.properties_panel.object_animations.animation_trigger"),
-    input: jsxs(_$$bL, {
+    input: jsxs(SelectGroupLabel, {
       onChange: _$$nc.user("change-slides-animation-start-condition", d),
       value: u,
       recordingKey: n,
-      children: [jsx(_$$l4, {
+      children: [jsx(SelectSeparator, {
         width: "fill",
         label: jsx(HiddenLabel, {
           children: getI18nString("slides.properties_panel.object_animations.animation_trigger")
         }),
         children: isInvalidValue(e) ? getI18nString("common.mixed") : void 0
-      }), jsxs(mc, {
+      }), jsxs(SelectContainer, {
         "data-testid": `slides-animation-trigger-control-select-${s}`,
         children: [isInvalidValue(e) && jsxs(Fragment, {
-          children: [jsx(c$, {
+          children: [jsx(SelectOptionReset, {
             value: i4,
             disabled: !0,
             children: getI18nString("common.mixed")
-          }), jsx(wv, {})]
-        }), o.map(e => jsx(c$, {
+          }), jsx(SelectRoot, {})]
+        }), o.map(e => jsx(SelectOptionReset, {
           value: i6.format(e),
           children: i6.format(e)
         }, e))]
@@ -3138,14 +3138,14 @@ function nR({
   })) ?? [];
   return jsx(_LabelInputRow4, {
     labelTx: renderI18nText("slides.properties_panel.object_animations.animation_type"),
-    input: jsxs(_$$bL, {
+    input: jsxs(SelectGroupLabel, {
       onChange: e => {
         l(isValidValue(i) ? i : void 0, e);
         n(e);
       },
       value: isValidValue(i) ? i : isInvalidValue(i) ? nP : void 0,
       recordingKey: e,
-      children: [jsx(_$$l4, {
+      children: [jsx(SelectSeparator, {
         iconLead: d,
         width: "fill",
         size: "md",
@@ -3153,14 +3153,14 @@ function nR({
           children: getI18nString("slides.properties_panel.object_animations.animation_type")
         }),
         children: isInvalidValue(i) ? getI18nString("common.mixed") : void 0
-      }), jsxs(mc, {
+      }), jsxs(SelectContainer, {
         children: [isInvalidValue(i) && jsxs(Fragment, {
-          children: [jsx(c$, {
+          children: [jsx(SelectOptionReset, {
             value: nP,
             disabled: !0,
             children: getI18nString("common.mixed")
-          }, nP), jsx(wv, {})]
-        }), p.map(e => jsx(c$, {
+          }, nP), jsx(SelectRoot, {})]
+        }), p.map(e => jsx(SelectOptionReset, {
           value: e.type,
           onFocus: () => o(e.type),
           children: e.children
@@ -3316,7 +3316,7 @@ function nB({
   let _;
   let [g, f] = useState(!1);
   let [j, b] = useState(o);
-  let E = Xr(iV);
+  let E = useSetAtom(iV);
   let v = !n && g || i;
   let T = Gu(e.action.transitionNodeID) || "";
   let S = useDeepEqualSceneValue((e, t) => e.get(t)?.name, T);
@@ -3581,7 +3581,7 @@ function nW({
   let t = useSceneGraphSelector();
   let i = useSelector(e => e.mirror.sceneGraphSelection);
   let n = useRef(null);
-  let o = Xr(iV);
+  let o = useSetAtom(iV);
   let d = Jb() ?? null;
   let c = useDeepEqualSceneValue((e, t) => {
     let i = t ? e.get(t) : null;
@@ -3869,7 +3869,7 @@ function nZ({
   let l = useSelector(e => e.mirror.sceneGraphSelection);
   let a = _$$l5();
   let o = Object.keys(l).filter(e => !a.includes(e)).length;
-  let d = useSelector(e => Yh(e.mirror.appModel, "add-slide-object-animation"));
+  let d = useSelector(e => isActionEnabled(e.mirror.appModel, "add-slide-object-animation"));
   t = d ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_valid_selection") : n ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_already_animated") : o > 0 ? 1 === o ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_singular") : getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_multiple") : getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_invalid_selection");
   return jsx(IconButton, {
     "aria-label": getI18nString("slides.properties_panel.object_animations.plus_button.aria_label"),
@@ -4072,8 +4072,8 @@ let r_ = memo(function () {
 });
 function rR() {
   let e = useDispatch<AppDispatch>();
-  let t = J3();
-  let i = _$$JU(t);
+  let t = getPublishTemplateStatus();
+  let i = canPublishTemplate(t);
   let n = userFlagExistsAtomFamily(uM);
   let a = useAtomWithSubscription(n);
   let o = useHasValidSceneSlideTheme();
@@ -4082,9 +4082,9 @@ function rR() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: SlidesTemplateOnboarding,
-    priority: _$$N3.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [a]);
   let x = useMemo(() => i ? [rM, rF] : [rM], [i]);
   let {
@@ -4202,7 +4202,7 @@ function rF({
 function rB() {
   syncDesignModePermission();
   let e = _$$dh();
-  let t = Xr(fileTypeAtom);
+  let t = useSetAtom(fileTypeAtom);
   let i = !!S7();
   let n = useEffectiveThemeId();
   TG();
@@ -4228,7 +4228,7 @@ function rB() {
   }, [i, t]);
   return jsxs(Fragment, {
     children: [jsx(_$$p2, {
-      children: jsx(NuxOnboardingOverlay, {
+      children: jsx(BaseNuxOnboardingOverlay, {
         entryPoint: C5.Slides
       })
     }), jsx(r_, {}), jsx(_$$g2, {}), jsx(_$$h3, {}), jsx(ra, {}), jsx(_$$_4, {}), jsx(_$$p2, {
@@ -5095,24 +5095,24 @@ function sT({
 }) {
   return jsx(AutoInteractableWrapper, {
     name: "slide_transition_easing",
-    children: jsxs(_$$bL, {
+    children: jsxs(SelectGroupLabel, {
       value: e,
       onChange: t,
       recordingKey: i,
-      children: [jsx(_$$l4, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: renderI18nText("slides.properties_panel.slide_transition.curve")
         }),
         width: "fill",
         size: "md"
-      }), jsxs(mc, {
-        children: [jsx(c$, {
+      }), jsxs(SelectContainer, {
+        children: [jsx(SelectOptionReset, {
           value: "LINEAR",
           children: sv.format("LINEAR")
-        }), jsx(wv, {}), sE.map(e => jsx(c$, {
+        }), jsx(SelectRoot, {}), sE.map(e => jsx(SelectOptionReset, {
           value: e,
           children: sv.format(e)
-        }, e)), jsx(wv, {}), l9.map(e => jsx(c$, {
+        }, e)), jsx(SelectRoot, {}), l9.map(e => jsx(SelectOptionReset, {
           value: e,
           children: sv.format(e)
         }, e))]
@@ -5129,21 +5129,21 @@ function sN({
 }) {
   return jsx(AutoInteractableWrapper, {
     name: "slide_transition_style",
-    children: jsxs(_$$bL, {
+    children: jsxs(SelectGroupLabel, {
       value: e,
       onChange: t,
       recordingKey: i,
-      children: [jsx(_$$l4, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: renderI18nText("slides.properties_panel.slide_transition.style")
         }),
         width: "fill",
         size: "md"
-      }), jsxs(mc, {
-        children: [jsx(c$, {
+      }), jsxs(SelectContainer, {
+        children: [jsx(SelectOptionReset, {
           value: "INSTANT",
           children: sS.format("INSTANT")
-        }, "INSTANT"), jsx(wv, {}), sI.map(e => jsx(c$, {
+        }, "INSTANT"), jsx(SelectRoot, {}), sI.map(e => jsx(SelectOptionReset, {
           value: e,
           children: sS.format(e)
         }, e))]
@@ -5168,19 +5168,19 @@ function sO({
   onChange: t,
   recordingKey: i
 }) {
-  return jsxs(_$$bL, {
+  return jsxs(SelectGroupLabel, {
     value: e,
     onChange: t,
     recordingKey: i,
-    children: [jsx(_$$l4, {
+    children: [jsx(SelectSeparator, {
       label: jsx(HiddenLabel, {
         children: getI18nString("slides.properties_panel.slide_transition.timing")
       }),
       width: "fill",
       size: "md",
       iconLead: _$$e3(e)
-    }), jsx(mc, {
-      children: si.map(e => jsx(c$, {
+    }), jsx(SelectContainer, {
+      children: si.map(e => jsx(SelectOptionReset, {
         value: e,
         children: jsx(sw, {
           trigger: e
@@ -5270,7 +5270,7 @@ function sM({
     appliedTransition
   } = sa(t);
   let o = iK();
-  let d = Xr(iV);
+  let d = useSetAtom(iV);
   let u = sd(e.behavior);
   let p = u && (o || n);
   let x = o ? i0.FULL : void 0;
@@ -5328,7 +5328,7 @@ function sF({
     appliedTransition
   } = sa(t);
   let o = iK();
-  let d = Xr(iV);
+  let d = useSetAtom(iV);
   let c = sd(e.behavior);
   let u = c && (o || n);
   return jsx(Ad, {
@@ -7439,7 +7439,7 @@ let dt = memo(() => {
   let u = _$$lD();
   let p = function () {
     let e = useIsFullscreenSlidesView();
-    let t = useSelector(e => Yh(e.mirror.appModel, JT.REMOVE_BACKGROUND));
+    let t = useSelector(e => isActionEnabled(e.mirror.appModel, JT.REMOVE_BACKGROUND));
     let i = PE();
     if (e && t && i) return {
       type: DMenuItemType.CUSTOM_ACTION,
@@ -7478,7 +7478,7 @@ let dt = memo(() => {
   }();
   let x = function () {
     let e = useIsFullscreenSlidesView();
-    let t = useSelector(e => Yh(e.mirror.appModel, JT.UPSCALE_IMAGE));
+    let t = useSelector(e => isActionEnabled(e.mirror.appModel, JT.UPSCALE_IMAGE));
     let i = PE();
     if (e && t && i) return {
       type: DMenuItemType.CUSTOM_ACTION,
@@ -8253,7 +8253,7 @@ function co({
         className: cssBuilderInstance.py4.pr8.pl16.$,
         children: jsx(AutoInteractableWrapper, {
           name: "slides_image_scale_mode",
-          children: jsxs(_$$bL, {
+          children: jsxs(SelectGroupLabel, {
             value: e.imageScaleMode ?? "FILL",
             onChange: t => {
               "STRETCH" === t ? fullscreenValue.triggerActionInUserEditScope("crop-image") : i({
@@ -8262,14 +8262,14 @@ function co({
               });
             },
             recordingKey: generateRecordingKey(n, "imageScaleMode"),
-            children: [jsx(_$$l4, {
+            children: [jsx(SelectSeparator, {
               label: jsx(HiddenLabel, {
                 children: renderI18nText("slides.properties_panel.fill.fill_type_media.scale_options.legend")
               }),
               width: "fill",
               size: "md"
-            }), jsx(mc, {
-              children: GA.map((e, t) => jsx(c$, {
+            }), jsx(SelectContainer, {
+              children: GA.map((e, t) => jsx(SelectOptionReset, {
                 value: e,
                 children: o.format(e)
               }, t))
@@ -8615,10 +8615,10 @@ function cb({
     }), showing && s.current && jsxs(ConnectedPointingDropdown, {
       targetRect: s.current.getBoundingClientRect(),
       displayOverTarget: !0,
-      children: [jsx(_$$c$3, {
+      children: [jsx(OptionComponent, {
         disabled: !0,
         children: renderI18nText("slides.properties_panel.interactive_widget.reset_confirmation_title")
-      }), jsx(_$$c$3, {
+      }), jsx(OptionComponent, {
         onClick: t,
         children: renderI18nText("slides.properties_panel.interactive_widget.confirm_reset_label")
       })]

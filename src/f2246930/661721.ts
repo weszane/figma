@@ -5,7 +5,7 @@ import { clamp } from "../figma_app/492908";
 import { setupDragHandler } from "../905/97346";
 import { SceneGraphHelpers, PluginHelpers, figmaScopeBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { useDebounce } from 'use-debounce';
 import { createSuccessState, createLoadingState } from "../figma_app/851625";
 import { parsePxInt } from "../figma_app/783094";
@@ -99,7 +99,7 @@ function I({
   let [w] = useDebounce(f, 500, {
     trailing: !0
   });
-  let b = Xr(lu);
+  let b = useSetAtom(lu);
   let E = useSelector(e => {
     if ("prototype" === c.view) return !0;
     try {
@@ -134,7 +134,7 @@ function I({
   } = useWindowDimensions();
   let [P, K] = useState(window.innerHeight / 2);
   let Y = useMemo(() => windowInnerHeight - clamp(P, parsePxInt("design" === I ? LdP : tui), windowInnerHeight - 32), [P, I, windowInnerHeight]);
-  let B = Xr(_$$O);
+  let B = useSetAtom(_$$O);
   useEffect(() => {
     B(Y);
   }, [B, Y]);

@@ -1,11 +1,11 @@
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 export function $$r0(e, t) {
   if (!t) return !1;
   switch (t.type) {
-    case _$$n.HubFile:
+    case TeamTemplateType.HubFile:
       return e.type === t.type && t.template.id === e.template.id && t.category === e.category;
-    case _$$n.TeamTemplate:
-    case _$$n.TeamTemplateLg:
+    case TeamTemplateType.TeamTemplate:
+    case TeamTemplateType.TeamTemplateLg:
       return e.type === t.type && t.template.id === e.template.id;
   }
 }

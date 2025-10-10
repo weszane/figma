@@ -56,7 +56,7 @@ import { setAutosaveStatus } from '../figma_app/139113';
 import { getGracePeriodStatus } from '../figma_app/141320';
 import { isASTCCompressionSupported, testWebGLSupport, WebGLTestResult } from '../figma_app/149304';
 import { getInitialOptions, isLocalDevOnCluster } from '../figma_app/169182';
-import { Xg } from '../figma_app/199513';
+import { teamFoldersQuery } from '../figma_app/199513';
 import { ColorTokenManager } from '../figma_app/214121';
 import { setTeamOptimistThunk } from '../figma_app/240735';
 import { shouldUseFullscreen } from '../figma_app/298277';
@@ -735,7 +735,7 @@ export const processFileView = createOptimistThunk(async (store, {
       }
 
       // Fetch folder data and perform team upgrade
-      const folderData = (await liveStore.fetch(Xg({
+      const folderData = (await liveStore.fetch(teamFoldersQuery({
         teamId: teamToMoveFileToOnNavigate
       }), {
         policy: 'networkOnly'

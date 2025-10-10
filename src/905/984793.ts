@@ -7,7 +7,7 @@ import { columnResizeAtom } from '../905/456000';
 import { getFeatureFlags } from '../905/601108';
 import { $y, Jy, Zu } from '../905/708651';
 import { y } from '../905/871724';
-import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
+import { useAtomValueAndSetter, useSetAtom } from '../figma_app/27355';
 import { clamp } from '../figma_app/492908';
 import { parsePxNumber } from '../figma_app/783094';
 let c = d;
@@ -63,7 +63,7 @@ let $$y7 = forwardRef(({
   });
 });
 function b() {
-  let e = Xr(columnResizeAtom);
+  let e = useSetAtom(columnResizeAtom);
   return [() => {
     e(e => ({
       ...e,

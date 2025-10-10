@@ -7,7 +7,7 @@ import { AutoLayout, Spacer } from '../905/470281';
 import { setupThemeContext } from '../905/614223';
 import { selectUserFlag } from '../905/940356';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { Xr } from '../figma_app/27355';
+import { useSetAtom } from '../figma_app/27355';
 import { zu } from '../figma_app/61403';
 import { checkUserAccess } from '../figma_app/242339';
 import { el, h_, Lq, N2, qr, R3, wx } from '../figma_app/404712';
@@ -84,9 +84,9 @@ export function $$x0(e) {
   let t = useRef(null);
   let r = useRef(null);
   let a = useRef(null);
-  let o = Xr(jr);
-  let d = Xr(Sf);
-  let u = Xr(H7);
+  let o = useSetAtom(jr);
+  let d = useSetAtom(Sf);
+  let u = useSetAtom(H7);
   let [p, _] = useState(!1);
   let [h, v] = useState();
   let x = () => {

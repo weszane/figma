@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useState, forwardRef, useRef, createRef } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { Xr, useAtomValueAndSetter, useAtomWithSubscription, atom } from "../figma_app/27355";
+import { useSetAtom, useAtomValueAndSetter, useAtomWithSubscription, atom } from "../figma_app/27355";
 import a from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
@@ -26,7 +26,7 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { useConditionalCallback } from "../905/165069";
 import { reportError } from "../905/11";
 import { useSeatChoiceInNuxExperiment } from "../figma_app/297957";
-import { eS as _$$eS } from "../figma_app/33126";
+import { hasK12GoogleOrgAtom } from "../figma_app/33126";
 import { $B } from "../figma_app/545877";
 import { getSelectedView } from "../figma_app/386952";
 import { isGovOrDevWithMagicLinks } from "../figma_app/336853";
@@ -91,7 +91,7 @@ import { A as _$$A2 } from "../svg/831814";
 import { throwTypeError } from "../figma_app/465776";
 import { textDisplayConfig } from "../905/687265";
 import { TrackedLink, TrackedLinkPrimitive } from "../905/160095";
-import { sx as _$$sx } from "../figma_app/307841";
+import { isCampfireCartEnabled } from "../figma_app/307841";
 import { pA, eI as _$$eI, QP } from "../7021/724859";
 import { l as _$$l } from "../905/479687";
 import { resourceUtils } from "../905/989992";
@@ -204,7 +204,7 @@ function S({
   children: i,
   className: o
 }) {
-  let l = Xr(YX);
+  let l = useSetAtom(YX);
   useSingleEffect(() => {
     l(!0);
   });
@@ -228,9 +228,9 @@ function N() {
   let [i] = useAtomWithSubscription(PG);
   let [s] = useAtomWithSubscription(ZE);
   let o = useIsSelectedFigmakeFullscreen();
-  let l = Xr(xO);
-  let a = Xr(VQ);
-  let d = Xr(qV);
+  let l = useSetAtom(xO);
+  let a = useSetAtom(VQ);
+  let d = useSetAtom(qV);
   return ({
     jobTitle: n
   } = {}) => {
@@ -1610,7 +1610,7 @@ let rR = {
 function rI({
   hasFigJamIntent: e
 }) {
-  let r = _$$sx();
+  let r = isCampfireCartEnabled();
   let t = getRumLoggingConfig();
   let [i, o] = useAtomValueAndSetter(aV);
   let l = i === VN.STARTER;
@@ -1933,7 +1933,7 @@ function rH() {
   }) : null;
 }
 function rV(e) {
-  let r = _$$sx();
+  let r = isCampfireCartEnabled();
   let {
     onStarterClick,
     onProClick,
@@ -2330,7 +2330,7 @@ function r7({
 }
 function te() {
   let [e, r] = useAtomValueAndSetter(fj);
-  let t = Xr(JA);
+  let t = useSetAtom(JA);
   let i = e === ViewAccessTypeEnum.VIEW;
   let l = e === ProductAccessTypeEnum.COLLABORATOR;
   let a = e === ProductAccessTypeEnum.DEVELOPER;
@@ -2860,7 +2860,7 @@ function tC() {
   } = CR();
   let [a, c] = useAtomValueAndSetter(ZE);
   let [x, h] = useAtomValueAndSetter(_$$eL);
-  let _ = Xr(SL);
+  let _ = useSetAtom(SL);
   let p = Array.from(options);
   useEffect(() => {
     _(p);
@@ -2913,7 +2913,7 @@ function tL() {
   let [h, _] = useAtomValueAndSetter(ZE);
   let [p, f] = useAtomValueAndSetter(_$$eL);
   let g = useAtomWithSubscription(YX);
-  let m = Xr(SL);
+  let m = useSetAtom(SL);
   let E = Array.from(options);
   useEffect(() => {
     m(E);
@@ -3015,7 +3015,7 @@ function tR(e) {
   r = getInitialOptions().iso_code ?? "";
   let t = tS.has(r);
   let [i, l] = useAtomValueAndSetter(BG);
-  let a = Xr(kd);
+  let a = useSetAtom(kd);
   let [d] = useState(!!selectUserFlag("tos_accepted"));
   let c = !!getInitialOptions().tos_agreement_required && !d;
   useEffect(() => {
@@ -3439,9 +3439,9 @@ function tG(e) {
   });
 }
 function tW(e) {
-  let r = Xr(ZE);
-  let t = Xr(X9);
-  let i = Xr(Q7);
+  let r = useSetAtom(ZE);
+  let t = useSetAtom(X9);
+  let i = useSetAtom(Q7);
   let o = useAtomWithSubscription(ni);
   let l = () => e.currentQuestion === pu.HAVE_USED_FIGMA_PRODUCTS_BEFORE;
   let a = () => {
@@ -3746,7 +3746,7 @@ function t7({
   } = setupMenu({
     initialPosition: "right-end"
   });
-  let d = Xr(ni);
+  let d = useSetAtom(ni);
   let c = getUserId();
   let u = selectCurrentUser();
   let x = !selectUserFlag("not_gen_0");
@@ -4476,7 +4476,7 @@ function iE({
     signupSource: t,
     isMobileViewport: s
   }) {
-    let l = useAtomWithSubscription(_$$eS);
+    let l = useAtomWithSubscription(hasK12GoogleOrgAtom);
     let a = useAtomWithSubscription($B);
     let d = getSelectedView();
     let c = null !== getFileKeyFromSelectedView(d);
@@ -4595,7 +4595,7 @@ function iE({
 }
 let ib = "nux_dynamic_preview_overlay--mobile--beL6j";
 export function $$ij0(e) {
-  let r = Xr(pr);
+  let r = useSetAtom(pr);
   let t = L(e.onOverlayClose);
   let i = getIsAndroidOrIphoneNotFigmaMobile();
   let a = useSelector(e => MS(e.userFlags));

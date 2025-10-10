@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { DesignToBuzzHelpers, Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { atomStoreManager, useAtomWithSubscription, Xr, Ut } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription, useSetAtom, RESET } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { H } from "../905/620380";
 import { useConditionalCallback } from "../905/165069";
@@ -12,7 +12,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createNewFileWithRestrictions } from "../905/738636";
 import { sendToBuzzFromDesignAtom, sessionIdAtom } from "../figma_app/223206";
-import { J3, JU } from "../figma_app/622574";
+import { getPublishTemplateStatus, canPublishTemplate } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -70,9 +70,9 @@ export function $$k0() {
   let s = useIsFullscreenReady();
   let l = !!t;
   let u = l && !!i && s;
-  let f = Xr(sessionIdAtom);
-  let y = J3();
-  let C = JU(y);
+  let f = useSetAtom(sessionIdAtom);
+  let y = getPublishTemplateStatus();
+  let C = canPublishTemplate(y);
   let {
     openCooperPublishFlow
   } = _$$t2();
@@ -114,7 +114,7 @@ export function $$k0() {
         fileKey: t.fileKey,
         selectedGuids: t.sourceNodeIds
       }), t.fileKey, t.sourceNodeIds, !1);
-      f(Ut);
+      f(RESET);
       AppStateTsApi?.cooperFocusView().exitFocusedNodeView();
       e(VisualBellActions.dequeue({
         matchType: "send-to-buzz-from-design-loading"

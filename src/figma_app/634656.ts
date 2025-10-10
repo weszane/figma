@@ -2,7 +2,7 @@ import { useRef, useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { rgbToNormalized } from "../figma_app/273493";
 import { ColorOptions, WhiteboardTsApi } from "../figma_app/763686";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { parseHex, areColorsEqual } from "../figma_app/191804";
 import { Eg } from "../figma_app/583114";
 import { useLatestRef } from "../figma_app/922077";
@@ -25,7 +25,7 @@ import { Qv, $R, zd, Ze } from "../figma_app/967873";
 export function $$N2() {
   let e = useCurrentFileKey();
   let t = useDispatch<AppDispatch>();
-  let r = Xr(Qv);
+  let r = useSetAtom(Qv);
   return (n, i, a) => {
     e && (r(i), getCurrentLiveGraphClient().optimisticallyUpdate({}, _$$v.setUserColorPaletteOverrideForFile(e, n)).catch(e => {
       console.error(e);
@@ -95,7 +95,7 @@ export let $$w7 = D(() => {
       };
     }, [uuid, a, e.status]);
   }(t);
-  let a = Xr($R);
+  let a = useSetAtom($R);
   return (useEffect(() => {
     a(loadedPaletteVariations);
   }, [loadedPaletteVariations, a]), loadedColorPalette && loadedPaletteVariations) ? {
@@ -135,12 +135,12 @@ export function $$M9() {
   let e = $$w7();
   let t = useLatestRef(e.uuid);
   let r = e.type === Yv.CUSTOM ? zd(e) : null;
-  let i = Xr(vectorPencilStyleAtom);
-  let l = Xr(highlighterStyleAtom);
-  let d = Xr(shapeColorAtom);
-  let u = Xr(strokeColorAtom);
-  let p = Xr(shapeStrokeStyleAtom);
-  let h = Xr(stickyColorAtom);
+  let i = useSetAtom(vectorPencilStyleAtom);
+  let l = useSetAtom(highlighterStyleAtom);
+  let d = useSetAtom(shapeColorAtom);
+  let u = useSetAtom(strokeColorAtom);
+  let p = useSetAtom(shapeStrokeStyleAtom);
+  let h = useSetAtom(stickyColorAtom);
   useEffect(() => {
     e.uuid !== t && (e.type === Yv.DEFAULT ? void 0 !== t && (i({
       paints: blackSolidBorder
@@ -166,7 +166,7 @@ export function $$M9() {
   }, [e, t, r, i, l, d, u, p, h]);
 }
 export function $$F0(e) {
-  let t = Xr(Ze);
+  let t = useSetAtom(Ze);
   return {
     closeColorPalettePicker: useCallback((r = !1) => {
       r ? t(!0) : e(!1);

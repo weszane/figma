@@ -2,9 +2,9 @@ import { jsx } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingRenderFrame } from "../905/284399";
 import { k } from "../905/391967";
 import { OverlayType } from "../figma_app/450829";
@@ -21,9 +21,9 @@ function y() {
 }
 export function $$b0() {
   let e = useAtomWithSubscription(f);
-  let t = _$$e({
+  let t = useOverlay({
     overlay: PluginPublishInvitePublishersOnboardingNudgeModal,
-    priority: N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [e]);
   useEventForwarder(t.uniqueId, $$h2, () => {
     t.show({

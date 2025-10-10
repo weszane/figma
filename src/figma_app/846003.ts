@@ -23,7 +23,7 @@ import { YH, getUserState } from "../figma_app/502247";
 import { mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { NavigationRoutes } from "../905/548208";
 import { o0 } from "../905/844131";
-import { q } from "../905/417890";
+import { shouldEnableFullscreenPreload } from "../905/417890";
 export function $$w1(e, t) {
   return null == e || null == t ? e !== t : $Z.requireHistoryChange(e, t);
 }
@@ -74,7 +74,7 @@ let $$P0 = e => t => function (r) {
       jsCommitHash: getReleaseManifestGitCommit()
     });
   } else if (selectViewAction.matches(r)) {
-    if ("prototype" !== o.view && "prototype" === r.payload.view && q()) {
+    if ("prototype" !== o.view && "prototype" === r.payload.view && shouldEnableFullscreenPreload()) {
       let e = selectedViewToPath(P, r.payload);
       customHistory.redirect(e);
     }

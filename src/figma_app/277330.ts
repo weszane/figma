@@ -6,7 +6,7 @@ import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/4650
 import { mergeComponentsWithOrphanStateGroups } from "../905/297574";
 import { Wb, rV, uU } from "../905/627262";
 import { Xk, DQ, y$ } from "../905/712714";
-import { n as _$$n } from "../905/402643";
+import { LibraryTypeString } from "../905/402643";
 export function $$p2(e, t) {
   let r = useCurrentPlanUser("useCanViewDSA");
   return useIsOrgMemberOrAdminUser(r).transform(r => $$_1(e, t, r));
@@ -29,17 +29,17 @@ export function $$h4({
     libraryFileKey: r ?? "",
     entryPointForLogging: o
   }), {
-    enabled: !!r && (!getFeatureFlags().dsa_styles_variables_ui || e === _$$n.PRODUCT_COMPONENTS)
+    enabled: !!r && (!getFeatureFlags().dsa_styles_variables_ui || e === LibraryTypeString.PRODUCT_COMPONENTS)
   });
   let [h] = setupResourceAtomHandler(DQ({
     fileKey: r ?? ""
   }), {
-    enabled: !!r && getFeatureFlags().dsa_styles_variables_ui && e === _$$n.STYLES
+    enabled: !!r && getFeatureFlags().dsa_styles_variables_ui && e === LibraryTypeString.STYLES
   });
   let [m] = setupResourceAtomHandler(y$({
     fileKey: r ?? ""
   }), {
-    enabled: !!r && getFeatureFlags().dsa_styles_variables_ui && e === _$$n.VARIABLES
+    enabled: !!r && getFeatureFlags().dsa_styles_variables_ui && e === LibraryTypeString.VARIABLES
   });
   return {
     itemsList: useMemo(() => {
@@ -51,23 +51,23 @@ export function $$h4({
         stateGroups: []
       };
       if (!getFeatureFlags().dsa_styles_variables_ui) return {
-        type: _$$n.PRODUCT_COMPONENTS,
+        type: LibraryTypeString.PRODUCT_COMPONENTS,
         items: mergeComponentsWithOrphanStateGroups(components, stateGroups)
       };
       switch (e) {
-        case _$$n.PRODUCT_COMPONENTS:
+        case LibraryTypeString.PRODUCT_COMPONENTS:
           return {
-            type: _$$n.PRODUCT_COMPONENTS,
+            type: LibraryTypeString.PRODUCT_COMPONENTS,
             items: mergeComponentsWithOrphanStateGroups(components, stateGroups)
           };
-        case _$$n.STYLES:
+        case LibraryTypeString.STYLES:
           return {
-            type: _$$n.STYLES,
+            type: LibraryTypeString.STYLES,
             items: Wb(h.data?.styles, r ?? "", t)
           };
-        case _$$n.VARIABLES:
+        case LibraryTypeString.VARIABLES:
           return {
-            type: _$$n.VARIABLES,
+            type: LibraryTypeString.VARIABLES,
             items: rV(m.data?.variables, r ?? "", t),
             modeItems: uU(m.data?.variable_modes),
             variableSets: m.data?.variable_sets ?? []
@@ -77,11 +77,11 @@ export function $$h4({
     isLoading: useMemo(() => {
       if (!getFeatureFlags().dsa_styles_variables_ui) return "loading" === _.status;
       switch (e) {
-        case _$$n.PRODUCT_COMPONENTS:
+        case LibraryTypeString.PRODUCT_COMPONENTS:
           return "loading" === _.status;
-        case _$$n.STYLES:
+        case LibraryTypeString.STYLES:
           return "loading" === h.status;
-        case _$$n.VARIABLES:
+        case LibraryTypeString.VARIABLES:
           return "loading" === m.status;
       }
     }, [_.status, h.status, m.status, e])
@@ -93,7 +93,7 @@ export function $$m3(e) {
   }, [e]);
 }
 export function $$g0(e, t, r) {
-  return !getFeatureFlags().dsa_styles_variables_ui || e > 0 ? _$$n.PRODUCT_COMPONENTS : t > 0 ? _$$n.STYLES : r > 0 ? _$$n.VARIABLES : _$$n.PRODUCT_COMPONENTS;
+  return !getFeatureFlags().dsa_styles_variables_ui || e > 0 ? LibraryTypeString.PRODUCT_COMPONENTS : t > 0 ? LibraryTypeString.STYLES : r > 0 ? LibraryTypeString.VARIABLES : LibraryTypeString.PRODUCT_COMPONENTS;
 }
 export const Gk = $$g0;
 export const MG = $$_1;

@@ -13,7 +13,7 @@ import { AutoInteractableWrapper } from '../905/277716';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { FormattedInputContext } from '../905/427409';
 import { trackEventAnalytics } from '../905/449184';
-import { bL as _$$bL, c$, l9, mc } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer } from '../905/493196';
 import { getFeatureFlags } from '../905/601108';
 import { formattedColorManipulator } from '../905/713722';
 import { SvgComponent } from '../905/714743';
@@ -470,26 +470,26 @@ let eh = memo(({
   let h = d === languageCodes.EN ? 'grid_settings--stripesTypeDropdown--V6Bp3' : 'grid_settings--stripesTypeDropdownL10n--R1Ksc';
   return getFeatureFlags().ce_tv_fpl_select ? jsx(AutoInteractableWrapper, {
     name: 'grid_settings_layout_type_select',
-    children: jsxs(_$$bL, {
+    children: jsxs(SelectGroupLabel, {
       onChange: m,
       value: e.type,
       recordingKey: generateRecordingKey(r, 'type'),
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: getI18nString('fullscreen.grid_panel.layout_guide_type')
         }),
         width: 'fill'
-      }), jsxs(mc, {
-        children: [jsx(c$, {
+      }), jsxs(SelectContainer, {
+        children: [jsx(SelectOptionReset, {
           value: 'MIN',
           children: c.format('MIN')
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: 'MAX',
           children: c.format('MAX')
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: 'CENTER',
           children: c.format('CENTER')
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: 'STRETCH',
           children: c.format('STRETCH')
         })]
@@ -643,24 +643,24 @@ export function $$ey1(e) {
   }, [onChange, layoutGrid, o, l]);
   let c = useDropdownState();
   let m = useId();
-  return getFeatureFlags().ce_tv_fpl_select ? jsxs(_$$bL, {
+  return getFeatureFlags().ce_tv_fpl_select ? jsxs(SelectGroupLabel, {
     onChange: d,
     value: layoutGrid.pattern === 'GRID' ? 'GRID' : layoutGrid.axis,
     recordingKey: generateRecordingKey(e, 'pattern'),
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       label: jsx(HiddenLabel, {
         children: getI18nString('fullscreen.grid_panel.layout_guide_type')
       }),
       width: 'fill',
       children: e.dropdownOverride ?? void 0
-    }), jsxs(mc, {
-      children: [jsx(c$, {
+    }), jsxs(SelectContainer, {
+      children: [jsx(SelectOptionReset, {
         value: 'GRID',
         children: eA.format('GRID')
-      }), jsx(c$, {
+      }), jsx(SelectOptionReset, {
         value: 'X',
         children: eA.format('X')
-      }), jsx(c$, {
+      }), jsx(SelectOptionReset, {
         value: 'Y',
         children: eA.format('Y')
       })]

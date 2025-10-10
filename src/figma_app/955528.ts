@@ -27,7 +27,7 @@ import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
 import { cortexAPI } from "../figma_app/432652";
 import { TJ } from "../figma_app/482495";
 import { useDeepEqualSceneValue, useStrictDeepEqualSceneValue } from "../figma_app/167249";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { calculatePickerPositionLeft, DEFAULT_PICKER_WIDTH } from "../905/959568";
 import { h as _$$h } from "../figma_app/203891";
 import { A as _$$A2 } from "../figma_app/78608";
@@ -45,7 +45,7 @@ let K = "tone-dial-visual-bell";
 let $$Y4 = TJ(vu);
 export function $$$12() {
   let e = BE();
-  let t = useSelector(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
+  let t = useSelector(e => isActionEnabled(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
   let r = useIsFullscreenSlidesView();
   let n = isDesignFileType();
   let a = isWhiteboardFileType();

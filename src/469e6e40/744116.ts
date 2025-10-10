@@ -4,16 +4,16 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories } from "../905/165054";
 import { useSingleEffect } from "../905/791079";
 import { renderI18nText } from "../905/303541";
-import { y3 } from "../figma_app/307841";
+import { isCampfireEducationEnabled } from "../figma_app/307841";
 import { eC } from "../figma_app/982327";
 import { Ut } from "../figma_app/425283";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e2 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { d as _$$d } from "../figma_app/603561";
 import { selectUserFlag } from "../905/940356";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
 import { SeatApprovalOverlay } from "../figma_app/6204";
@@ -27,16 +27,16 @@ function k({
   team: a
 }) {
   let s = useDispatch<AppDispatch>();
-  let r = y3(t?.created_at || a?.created_at, a?.last_upgraded_at);
+  let r = isCampfireEducationEnabled(t?.created_at || a?.created_at, a?.last_upgraded_at);
   let h = selectUserFlag(y);
   let {
     show,
     isShowing,
     complete,
     uniqueId
-  } = _$$e2({
+  } = useOverlay({
     overlay: SeatApprovalOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let S = e => s(postUserFlag({
     [y]: e

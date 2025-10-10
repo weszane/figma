@@ -7,7 +7,7 @@ import { ServiceCategories } from "../905/165054";
 import { Thumbnail, SlideConstantsCppBindings, Fullscreen, PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import h from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
@@ -1367,7 +1367,7 @@ let $$tl0 = registerModal(function (e) {
   });
   let a = getCommunityHubLikeStatus(n?.id, ResourceTypeNoComment.HUB_FILE);
   let o = useAtomWithSubscription(currentStateAtom);
-  let l = Xr(libraryPublishingModeAtom);
+  let l = useSetAtom(libraryPublishingModeAtom);
   return i ? _$$W2(i.editor_type) ? jsx(_$$T, {
     publishingEntryPoint: e.entryPoint,
     figFileKey: e.fileKey

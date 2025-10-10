@@ -4,13 +4,13 @@ import { trackEventAnalytics } from "../905/449184";
 import { getAtomMutate } from "../figma_app/566371";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { U } from "../figma_app/199513";
+import { batchDeleteFoldersMutation } from "../figma_app/199513";
 import { ConfirmationModal2 } from "../figma_app/918700";
 export function $$u0({
   folders: e
 }) {
   let t = useDispatch<AppDispatch>();
-  let r = getAtomMutate(U);
+  let r = getAtomMutate(batchDeleteFoldersMutation);
   let u = e => {
     e.forEach(e => {
       trackEventAnalytics("Folder Batch Abandoned Draft Delete Confirmation Click", {

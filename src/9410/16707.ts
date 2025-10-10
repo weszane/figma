@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, createElement, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
-import { Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl, isGovCluster, getLocaleFallbacks } from "../figma_app/169182";
@@ -12,14 +12,14 @@ import { renderI18nText } from "../905/303541";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { d2 } from "../figma_app/579169";
 import { orgSubscriptionAtom } from "../905/296690";
 import { fullscreenValue } from "../figma_app/455680";
 import { getObservableValue } from "../figma_app/84367";
 import { currentTeamAtom } from "../figma_app/598018";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OrgPersonal } from "../905/696396";
 import { U as _$$U } from "../905/455766";
 import { ImageOverlayComponent } from "../905/129046";
@@ -44,16 +44,16 @@ function U() {
   });
 }
 export function $$K0() {
-  let e = Xr(selectionAtomFamily);
+  let e = useSetAtom(selectionAtomFamily);
   let t = useHasValidSceneSlideTheme();
   let i = canEnterDesignMode();
   let {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: SlidesOnboarding,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   });
   let c = useMemo(() => i ? [$$H1, z, V, W, Y, J] : [$$H1, z, V, W, J], [i]);
   let {
@@ -93,7 +93,7 @@ export function $$H1({
   isOnboarding: s
 }) {
   let d;
-  let _ = Xr(selectionAtomFamily);
+  let _ = useSetAtom(selectionAtomFamily);
   let x = useAtomWithSubscription(d2);
   let C = function () {
     let {

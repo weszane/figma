@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { a as _$$a } from "../905/462280";
 import { PropertyScope, ColorFormatEnum } from "../figma_app/763686";
@@ -716,16 +716,16 @@ export function $$eI1() {
       value: _$$F.format(+e)
     });
   }, [r]);
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     value: e.toString(),
     onChange: a,
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       width: "fill",
       label: jsx(HiddenLabel, {
         children: _$$F.format(e)
       })
-    }), jsx(mc, {
-      children: (t ? eb : eT).map(e => jsx(c$, {
+    }), jsx(SelectContainer, {
+      children: (t ? eb : eT).map(e => jsx(SelectOptionReset, {
         value: e.toString(),
         children: _$$F.format(e)
       }, e))

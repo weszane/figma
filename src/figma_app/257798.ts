@@ -24,12 +24,12 @@ import { KindEnum } from "../905/129884";
 import { ei as _$$ei } from "../figma_app/795674";
 import { UpgradeAction } from "../905/370443";
 import { isDesignFileType } from "../figma_app/976749";
-import { e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { selectCurrentUser } from "../905/372672";
 import { selectUserFlag } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { pN } from "../figma_app/433401";
 import { OnboardingModal } from "../905/425180";
 import { V as _$$V2 } from "../905/460261";
@@ -60,9 +60,9 @@ function G() {
     show,
     isShowing,
     complete
-  } = e({
+  } = useOverlay({
     overlay: UI3LabelsEducation,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   let a = B();
   useEffect(() => {

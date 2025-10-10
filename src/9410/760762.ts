@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { BadgeLabels } from "../figma_app/919079";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -102,7 +102,7 @@ function w({
 }) {
   let t = useDispatch<AppDispatch>();
   let i = useAtomWithSubscription(QY);
-  let n = Xr(xw);
+  let n = useSetAtom(xw);
   let o = useAtomWithSubscription(Zk);
   let h = useSelector(e => e.multiplayer.sessionID);
   let m = useCurrentFileKey();
@@ -498,7 +498,7 @@ function eh({
   let i = _$$y(t, UpsellModalType.STARTER_TEAM_FILE_BADGE);
   let n = useDispatch<AppDispatch>();
   let o = useAtomWithSubscription(QY);
-  let c = Xr(xw);
+  let c = useSetAtom(xw);
   return jsx(E, {
     name: BadgeLabels.FREE,
     onBadgeClick: () => {

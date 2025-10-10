@@ -4,7 +4,7 @@ import { debounce } from "../905/915765";
 import { getInitialOptions } from "../figma_app/169182";
 import { isCommandOrShift } from "../905/63728";
 import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
-import { sz } from "../figma_app/216696";
+import { fetchShelvesForShelfTypeThunk } from "../figma_app/216696";
 import { createFileFromTemplateThunk } from "../figma_app/49598";
 import { showDropdownThunk } from "../905/929976";
 import { trackTemplateEvent } from "../905/793009";
@@ -15,7 +15,7 @@ import { getHubFileVersionOrDefault } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { useIsLoading, useIsLoaded } from "../905/18797";
 import { SimpleFuseSearch } from "../905/81982";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
 import { hubFileAPI } from "../905/473998";
 let $$S = {};
@@ -30,7 +30,7 @@ export function $$A3(e) {
     keys: ["name"]
   }));
   let p = templatesShelfType || CommunityPageType.FIGJAM_TEMPLATES_PICKER;
-  let h = sz.loadingKeyForPayload({
+  let h = fetchShelvesForShelfTypeThunk.loadingKeyForPayload({
     shelfType: p
   });
   let f = useIsLoading(h);
@@ -63,7 +63,7 @@ export function $$A3(e) {
     }));
   }, [o, I, source]);
   useEffect(() => {
-    f || b || o(sz({
+    f || b || o(fetchShelvesForShelfTypeThunk({
       shelfType: p
     }));
   }, [o, b, f, p]);
@@ -202,7 +202,7 @@ export function $$C1(e) {
           resourceId: templateId,
           resourceName: m?.name,
           resourceType: "template",
-          templateType: _$$n.HubFile,
+          templateType: TeamTemplateType.HubFile,
           triggeredFrom: source
         });
         n?.(e);

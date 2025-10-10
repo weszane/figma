@@ -44,7 +44,7 @@ import { useLatestRef } from '../figma_app/922077';
 import { formatFontMetrics } from '../figma_app/80990';
 import { hidePickerThunk } from '../figma_app/91703';
 import { Bs } from '../figma_app/229710';
-import { c$, ms, wv } from '../figma_app/236327';
+import { OptionComponent, DropdownContainer, SeparatorComponent } from '../figma_app/236327';
 import { mapTypeToStyleKey } from '../figma_app/276332';
 import { fullscreenValue } from '../figma_app/455680';
 import { a2, getAllStylesFromFolder, getDragDropDividerStyles, getSelectionIndices, getPrevNextItems, getAllFoldersFromFolder, flattenStyleFolderTree, setupStyleFolderTree, canDropStyleOrFolder, getFolderContentsIndices, deleteStyleIfKeyMatches, normalizeStylePath, getSelectedItems, getStyleOrFolderLevel, getStyleOrFolderId, flattenToStyles, handleStyleFolderReorder } from '../figma_app/463500';
@@ -556,9 +556,9 @@ function em({
   });
 }
 ey.displayName = 'StyleTypeSection';
-let eg = ms;
-let eh = c$;
-let ew = wv;
+let eg = DropdownContainer;
+let eh = OptionComponent;
+let ew = SeparatorComponent;
 let eS = 'styles-by-type-context-menu';
 let eb = 0.75 * parsePxInt(uj0);
 function ek({
@@ -778,7 +778,7 @@ function eP({
             t.stopPropagation();
             E(e);
           };
-          return jsxs(c$, {
+          return jsxs(OptionComponent, {
             className: 'styles--createStyleDropdownRow--7iCXQ',
             onClick: s,
             onPointerUp: s,

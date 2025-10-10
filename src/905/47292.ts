@@ -11,7 +11,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { textDisplayConfig } from "../905/687265";
 import { w } from "../905/768636";
 import { useCurrentUserOrgId } from "../905/845253";
-import { p as _$$p } from "../905/895920";
+import { LibrariesEmptyState } from "../905/895920";
 import { e as _$$e } from "../905/916195";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { WorkspacesDirectoryView } from "../figma_app/43951";
@@ -259,7 +259,7 @@ export function LibraryFilterRows({
   }
 
   // Fallback when no workspaces/libraries to show
-  return jsx(_$$p, {
+  return jsx(LibrariesEmptyState, {
     onViewPresetsClicked: () => handleLibrariesViewFilterChange({
       type: "presetLibraries"
     })

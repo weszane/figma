@@ -5,7 +5,7 @@ import { noop } from 'lodash-es';
 import { U1 } from "../figma_app/343967";
 import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
@@ -158,9 +158,9 @@ function B() {
   }) : null;
 }
 function es() {
-  let e = Xr(Px);
-  let t = Xr(Bl);
-  let r = Xr(go);
+  let e = useSetAtom(Px);
+  let t = useSetAtom(Bl);
+  let r = useSetAtom(go);
   let [i, a] = useAtomValueAndSetter(HO);
   return i ? jsx(WithTrackedPopupButtonPrimitive, {
     className: "dev_mode_demo_file_restart_button--restartButton--jXEnp",

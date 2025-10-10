@@ -1,4 +1,4 @@
-import { um, atomStoreManager, atom } from "../figma_app/27355";
+import { atomWithReducer, atomStoreManager, atom } from "../figma_app/27355";
 import { openWindow } from "../905/508367";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -14,7 +14,7 @@ function c(e) {
     ("object" == typeof t || "function" == typeof t) && t && t instanceof e.Object && (e[r] = null);
   } catch (e) {}
 }
-let u = um({
+let u = atomWithReducer({
   readyForMessages: !1
 }, (e, t) => {
   switch (t.type) {

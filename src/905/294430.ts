@@ -54,7 +54,7 @@ import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { Point } from "../905/736624";
 import { stopPropagation } from "../figma_app/753501";
 import { Rk } from "../figma_app/844696";
-import { bL as _$$bL2, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import eE from "../vendor/805353";
 import { c$ as _$$c$, l6 } from "../905/794875";
@@ -500,7 +500,7 @@ function eP(e) {
       value: e
     })
   });
-  return jsxs(_$$bL2, {
+  return jsxs(SelectGroupLabel, {
     ...l,
     value: String(valueBeforePreview ?? currentEffectType),
     onChange: e => {
@@ -511,18 +511,18 @@ function eP(e) {
       e || clearPreview();
     },
     recordingKey,
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       width: "fill",
       label: jsx(HiddenLabel, {
         children: eC.format(currentEffectType)
       })
-    }), jsx(mc, {
+    }), jsx(SelectContainer, {
       children: eO(currentEffectType, allowedEffects)
     })]
   });
 }
 function eO(e, t) {
-  return Bf().map(i => jsx(c$, {
+  return Bf().map(i => jsx(SelectOptionReset, {
     value: i,
     disabled: !eT(i, e, t),
     children: eC.format(i)

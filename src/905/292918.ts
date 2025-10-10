@@ -49,71 +49,73 @@ import { GitReferenceType, SchemaJoinStatus, ViewType } from "../figma_app/76368
 import { fileApiHandler } from "../figma_app/787550"
 import { ConfirmationModal2, ModalContainer } from "../figma_app/918700"
 
-
 // Refactored from minified code in /Users/allen/sigma-main/src/905/292918.ts
 // Changes: Renamed variables for clarity (e.g., single-letter vars to descriptive names), added TypeScript interfaces and types for type safety, simplified complex logic (e.g., destructuring and conditional rendering), added comments explaining key logic and potential issues, followed camelCase/PascalCase conventions, ensured DRY principles. Identified potential bug: 'A' and 'f' were undefined in original code; assumed 'A' is 'diffInfo' and 'f' is '_diffInfo' based on context. Added error handling comments where applicable.
-
 
 // Assumed dependencies: lodash-es functions like partition and flatMap are used but not imported; added in refactoring for clarity.
 // Types inferred from usage and imported enums.
 
 interface BranchForceMergeModalProps {
-  branchKey: string;
-  sourceKey: string;
-  direction: SourceDirection;
+  branchKey: string
+  sourceKey: string
+  direction: SourceDirection
 }
 
 interface IncrementalUpdateModalProps {
-  sourceKey: string;
-  currentFileKey: string;
-  onCheckpointSelected: (checkpointKey: string | 'latest') => void;
+  sourceKey: string
+  currentFileKey: string
+  onCheckpointSelected: (checkpointKey: string | 'latest') => void
 }
 
 interface FetchSourceFileInfoParams {
-  branchFileKey: string;
+  branchFileKey: string
 }
 
-interface ShowBranchMergeModalParams {
-  branchKey: string;
-  sourceKey: string;
-  direction: SourceDirection;
-  force?: boolean;
-  backFileKey?: string;
-  sourceCheckpointKey?: string;
-  unreadCommentCount?: number;
-  readOnly?: boolean;
+export interface ShowBranchMergeModalParams {
+  branchKey: string
+  sourceKey: string
+  direction: string
+  force?: boolean
+  backFileKey?: string
+  sourceCheckpointKey?: string
+  unreadCommentCount?: number
+  readOnly?: boolean
+  toCheckpointKey?: string
+  fromCheckpointKey?: string
+  mergeOnFileOpen?: boolean
+  checkpointDiffURL?: string
 }
 
 interface HandleBranchMergeParams {
-  branchKey: string;
-  sourceKey: string;
-  direction: SourceDirection;
-  force?: boolean;
-  sourceCheckpointKey?: string;
-  unreadCommentCount?: number;
+  branchKey: string
+  sourceKey: string
+  direction: SourceDirection
+  force?: boolean
+  sourceCheckpointKey?: string
+  unreadCommentCount?: number
 }
 
 interface InitiateBranchMergeParams {
-  direction: SourceDirection;
-  trackingContextName: string;
-  force?: boolean;
-  sourceCheckpointKey?: string;
-  unreadCommentCount?: number;
+  direction: SourceDirection
+  trackingContextName: string
+  force?: boolean
+  sourceCheckpointKey?: string
+  unreadCommentCount?: number
 }
 
 interface OpenSourceFileParams {
-  trackingContextName: string;
+  trackingContextName: string
 }
 
 interface ShowBranchesModalParams {
-  trackingContextName: string;
+  trackingContextName: string
 }
 
 // Original: let Y = { ... }
 const branchTypeLabels: Record<BranchType, () => JSX.Element> = {
   [BranchType.MAIN]: () => renderI18nText('collaboration.branching_force.merge_from_source_merge_conflict_radio_option_main'),
   [BranchType.BRANCH]: () => renderI18nText('collaboration.branching_force.merge_from_source_merge_conflict_radio_option_branch'),
-};
+}
 
 // Original: function q(e) { ... }
 function renderConflictChoiceLabel(props: { value: BranchType }): JSX.Element {
@@ -122,54 +124,55 @@ function renderConflictChoiceLabel(props: { value: BranchType }): JSX.Element {
       className: 'branch_force_merge_modal--conflictChoiceBold---XcmF',
       children: branchTypeLabels[props.value](),
     }),
-  });
+  })
 }
 
 // Original: let $ = registerModal((e) => { ... }, "BranchForceMergeModal", ModalSupportsBackground.YES)
-const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const [selectedBranchType, setSelectedBranchType] = useState<BranchType>(BranchType.MAIN);
-  const [currentSelection, setCurrentSelection] = useAtomValueAndSetter(currentSelectionAtom);
-  const direction = currentSelection ?? props.direction;
+export const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) => {
+  const dispatch = useDispatch<AppDispatch>()
+  const [selectedBranchType, setSelectedBranchType] = useState<BranchType>(BranchType.MAIN)
+  const [currentSelection, setCurrentSelection] = useAtomValueAndSetter(currentSelectionAtom)
+  const direction = currentSelection ?? props.direction
   useSingleEffect(() => {
     setCurrentSelection(props.direction)
     return () => setCurrentSelection(null)
-  });
-  const fileVersion = useSelector((state: any) => state.fileVersion); // Assumed state type; refine if possible
-  const currentUserOrgId = useSelector((state: any) => state.currentUserOrgId);
-  const user = selectUser();
-  const branchModalTrackingId = useContext(ss);
-  const { diffInfo, error } = zZ(GitReferenceType.BRANCH, props.branchKey, props.sourceKey, props.direction, fileVersion, currentUserOrgId, null, true);
-  const { diffInfo: sourceDiffInfo, error: sourceError } = zZ(GitReferenceType.SOURCE, props.branchKey, props.sourceKey, props.direction, fileVersion, currentUserOrgId, null, false);
-  const [isCalculatingConflicts, setIsCalculatingConflicts] = useState<boolean>(false);
-  const [conflicts, setConflicts] = useState<any>(null); // Type conflicts if possible; assumed from DiffManager
+  })
+  const fileVersion = useSelector((state: any) => state.fileVersion) // Assumed state type; refine if possible
+  const currentUserOrgId = useSelector((state: any) => state.currentUserOrgId)
+  const user = selectUser()
+  const branchModalTrackingId = useContext(ss)
+  const { diffInfo, error } = zZ(GitReferenceType.BRANCH, props.branchKey, props.sourceKey, props.direction, fileVersion, currentUserOrgId, null, true)
+  const { diffInfo: sourceDiffInfo, error: sourceError } = zZ(GitReferenceType.SOURCE, props.branchKey, props.sourceKey, props.direction, fileVersion, currentUserOrgId, null, false)
+  const [isCalculatingConflicts, setIsCalculatingConflicts] = useState<boolean>(false)
+  const [conflicts, setConflicts] = useState<any>(null) // Type conflicts if possible; assumed from DiffManager
   useEffect(() => {
-    const hasStyleKeys = !!(sourceDiffInfo.styleKeyToLibraryKey != null && diffInfo.styleKeyToLibraryKey != null);
+    const hasStyleKeys = !!(sourceDiffInfo.styleKeyToLibraryKey != null && diffInfo.styleKeyToLibraryKey != null)
     if (!isCalculatingConflicts && hasStyleKeys && conflicts == null) {
-      const sourceKey = props.sourceKey;
-      const branchKey = props.branchKey;
-      setIsCalculatingConflicts(true);
+      const sourceKey = props.sourceKey
+      const branchKey = props.branchKey
+      setIsCalculatingConflicts(true)
       try {
         const calculatedConflicts = DiffManager.getConflicts({
           branchKey,
           sourceKey,
           branchModalTrackingId,
-        });
-        setConflicts(calculatedConflicts);
-        setIsCalculatingConflicts(false);
-      } catch (error) {
-        handleModalError(error);
+        })
+        setConflicts(calculatedConflicts)
+        setIsCalculatingConflicts(false)
+      }
+      catch (error) {
+        handleModalError(error)
         dispatch(VisualBellActions.enqueue({
           message: 'An error occurred while calculating conflicts',
           error: true,
-        }));
+        }))
       }
     }
-  }, [sourceDiffInfo.styleKeyToLibraryKey, diffInfo.styleKeyToLibraryKey, conflicts, isCalculatingConflicts, dispatch, props.branchKey, props.sourceKey, branchModalTrackingId, props.direction]);
-  const combinedError = error ?? sourceError;
+  }, [sourceDiffInfo.styleKeyToLibraryKey, diffInfo.styleKeyToLibraryKey, conflicts, isCalculatingConflicts, dispatch, props.branchKey, props.sourceKey, branchModalTrackingId, props.direction])
+  const combinedError = error ?? sourceError
   // Assumed: 'A' was diffInfo, 'f' was sourceDiffInfo
-  const { checkpointDiff, displayGroups } = diffInfo;
-  const { checkpointDiff: sourceCheckpointDiff, displayGroups: sourceDisplayGroups } = sourceDiffInfo;
+  const { checkpointDiff, displayGroups } = diffInfo
+  const { checkpointDiff: sourceCheckpointDiff, displayGroups: sourceDisplayGroups } = sourceDiffInfo
   const handleClose = () => {
     dispatch(handleBranchModalExit({
       hideModal: true,
@@ -181,15 +184,15 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
       },
       userInitiated: true,
       reason: 'force_merge_modal_closed',
-    }));
-  };
+    }))
+  }
   if (combinedError) {
-    handleModalError(combinedError);
-    console.error(combinedError);
+    handleModalError(combinedError)
+    console.error(combinedError)
     dispatch(VisualBellActions.enqueue({
       message: getI18nString('collaboration.branching.error_generic'),
       error: true,
-    }));
+    }))
     dispatch(handleBranchModalExit({
       hideModal: true,
       mergeParams: {
@@ -201,9 +204,9 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
       userInitiated: false,
       reason: 'useDiffs_failed_with_error',
       error: combinedError.message,
-    }));
+    }))
   }
-  const relevantDisplayGroups = direction === SourceDirection.TO_SOURCE ? sourceDisplayGroups : displayGroups;
+  const relevantDisplayGroups = direction === SourceDirection.TO_SOURCE ? sourceDisplayGroups : displayGroups
   if (relevantDisplayGroups === null || conflicts === null) {
     return jsx(ModalContainer, {
       onHide: handleClose,
@@ -214,10 +217,10 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
           hasLoadedConflictDetection: conflicts !== null,
         }),
       }),
-    });
+    })
   }
   if (direction === SourceDirection.TO_SOURCE) {
-    const isMergeRequired = conflicts.isMergeRequired ?? false;
+    const isMergeRequired = conflicts.isMergeRequired ?? false
     return jsxs(ConfirmationModal2, {
       confirmationTitle: renderI18nText('collaboration.branching_force.merge_to_source_title'),
       destructive: true,
@@ -235,7 +238,7 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
             pendingMessage: getI18nString('collaboration.branching.merge_pending'),
             successMessage: getI18nString('collaboration.branching.merge_success'),
             user,
-          }));
+          }))
         }
       },
       onCancel: handleClose,
@@ -248,7 +251,7 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
           children: renderI18nText('collaboration.branching_force.merge_to_source_blocked_description'),
         }),
       ],
-    });
+    })
   }
   if (direction === SourceDirection.FROM_SOURCE) {
     return jsxs(ConfirmationModal2, {
@@ -256,18 +259,19 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
       destructive: true,
       confirmText: renderI18nText('collaboration.branching_force.merge_from_source_confirm'),
       onConfirm: () => {
-        if (conflicts === null || !checkpointDiff) return;
-        const conflictGroups = conflicts.conflictGroups;
+        if (conflicts === null || !checkpointDiff)
+          return
+        const conflictGroups = conflicts.conflictGroups
         const resolutionMap = conflictGroups.reduce((acc: Record<string, BranchType>, group) => ({
           ...acc,
           [group.id]: selectedBranchType,
-        }), {}) ?? null;
+        }), {}) ?? null
         // Simplified: Using lodash partition and flatMap for clarity
-        const [branchPicks, mainPicks] = partition(conflictGroups, (group) => resolutionMap[group.id] === BranchType.BRANCH);
-        const branchChunks = flatMap(branchPicks, (group) => ue(group, BranchType.BRANCH));
-        const mainChunks = flatMap(mainPicks, (group) => ue(group, BranchType.MAIN));
-        const nonConflictingGroups = tF(sourceDiffInfo.displayGroups || [], conflictGroups, conflicts.identicalChunkGUIDs);
-        n6(mainChunks, branchChunks, conflicts.nonConflictingSourceChunkGUIDs, conflicts.nonConflictingBranchChunkGUIDs, conflicts.identicalChunkGUIDs);
+        const [branchPicks, mainPicks] = partition(conflictGroups, group => resolutionMap[group.id] === BranchType.BRANCH)
+        const branchChunks = flatMap(branchPicks, group => ue(group, BranchType.BRANCH))
+        const mainChunks = flatMap(mainPicks, group => ue(group, BranchType.MAIN))
+        const nonConflictingGroups = tF(sourceDiffInfo.displayGroups || [], conflictGroups, conflicts.identicalChunkGUIDs)
+        n6(mainChunks, branchChunks, conflicts.nonConflictingSourceChunkGUIDs, conflicts.nonConflictingBranchChunkGUIDs, conflicts.identicalChunkGUIDs)
         dispatch(commitMerge({
           mergeParams: {
             branchKey: props.branchKey,
@@ -284,7 +288,7 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
           },
           user,
           branchModalTrackingId,
-        }));
+        }))
       },
       onCancel: handleClose,
       onHide: handleClose,
@@ -295,7 +299,7 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
         }),
         jsxs(RadioInputRoot, {
           value: selectedBranchType,
-          onChange: (value) => setSelectedBranchType(findMatchingValue(BranchType, value) ?? BranchType.MAIN),
+          onChange: value => setSelectedBranchType(findMatchingValue(BranchType, value) ?? BranchType.MAIN),
           legend: jsx(HiddenLegend, {
             children: jsx('span', {
               className: 'branch_force_merge_modal--conflictChoiceRadioLegend--onrEN',
@@ -322,47 +326,47 @@ const BranchForceMergeModal = registerModal((props: BranchForceMergeModalProps) 
           ],
         }),
       ],
-    });
+    })
   }
-  return null;
-}, 'BranchForceMergeModal', ModalSupportsBackground.YES);
+  return null
+}, 'BranchForceMergeModal', ModalSupportsBackground.YES)
 
 // Original: let el = registerModal((...) => { ... }, "IncrementalUpdateModal", ModalSupportsBackground.YES)
-const IncrementalUpdateModal = registerModal((props: IncrementalUpdateModalProps) => {
-  const dispatch = useDispatch<AppDispatch>();
+export const IncrementalUpdateModal = registerModal((props: IncrementalUpdateModalProps) => {
+  const dispatch = useDispatch<AppDispatch>()
   const fileVersionsSubscription = useSubscription(FileVersions, {
     fileKey: props.sourceKey,
-  });
-  const [sourceCheckpointCreatedAt, setSourceCheckpointCreatedAt] = useState<Date | undefined>(undefined);
+  })
+  const [sourceCheckpointCreatedAt, setSourceCheckpointCreatedAt] = useState<Date | undefined>(undefined)
   useEffect(() => {
     fileApiHandler.getSourceCheckpointCreatedAt({
       currentFileKey: props.currentFileKey,
     }).then(({ data }) => {
-      setSourceCheckpointCreatedAt(new Date(data.created_at));
+      setSourceCheckpointCreatedAt(new Date(data.created_at))
     }).catch(() => {
-      dispatch(FlashActions.error('Unable to load file versions'));
-    });
-  }, [props.currentFileKey, setSourceCheckpointCreatedAt, dispatch]);
-  const [selectedVersion, setSelectedVersion] = useState<any>(null); // Type version if possible
-  const isLoading = fileVersionsSubscription.status === 'loading' || sourceCheckpointCreatedAt === undefined;
-  let fileVersions: any[] = [];
+      dispatch(FlashActions.error('Unable to load file versions'))
+    })
+  }, [props.currentFileKey, setSourceCheckpointCreatedAt, dispatch])
+  const [selectedVersion, setSelectedVersion] = useState<any>(null) // Type version if possible
+  const isLoading = fileVersionsSubscription.status === 'loading' || sourceCheckpointCreatedAt === undefined
+  let fileVersions: any[] = []
   if (fileVersionsSubscription.status === 'loaded') {
-    const { file } = fileVersionsSubscription.data;
+    const { file } = fileVersionsSubscription.data
     if (file) {
-      fileVersions = getResourceDataOrFallback(file.recentFileVersions) || [];
+      fileVersions = getResourceDataOrFallback(file.recentFileVersions) || []
     }
   }
-  const filteredVersions = fileVersions.filter((version) => !(isLoading || !version.checkpoint?.createdAt || new Date(version.checkpoint.createdAt) <= sourceCheckpointCreatedAt!));
-  const sortedVersions = orderBy(filteredVersions, ['updatedAt'], ['desc']);
+  const filteredVersions = fileVersions.filter(version => !(isLoading || !version.checkpoint?.createdAt || new Date(version.checkpoint.createdAt) <= sourceCheckpointCreatedAt!))
+  const sortedVersions = orderBy(filteredVersions, ['updatedAt'], ['desc'])
   const versionItems = sortedVersions.map((version, index) => {
-    const isLast = index === sortedVersions.length - 1;
-    const viewName = getViewName(version.view);
+    const isLast = index === sortedVersions.length - 1
+    const viewName = getViewName(version.view)
     const itemData = {
       user: version.user,
       label: version.label || undefined,
       view: viewName,
-    };
-    const displayText = ur(itemData);
+    }
+    const displayText = ur(itemData)
     return jsx(jP, {
       dispatch: noop,
       displayText: jsx(YL, {
@@ -384,8 +388,8 @@ const IncrementalUpdateModal = registerModal((props: IncrementalUpdateModalProps
       userUrl: version.label && version.user?.imgUrl || null,
       versionId: version.id,
       view: viewName,
-    }, version.id);
-  });
+    }, version.id)
+  })
   const latestVersionItem = jsx(jP, {
     dispatch: noop,
     displayText: renderI18nText('collaboration.feedback.incremental_update_modal.latest_version'),
@@ -401,20 +405,21 @@ const IncrementalUpdateModal = registerModal((props: IncrementalUpdateModalProps
     userUrl: null,
     versionId: 'current_version',
     view: 'file_default',
-  });
+  })
   return jsx(ConfirmationModal, {
     title: getI18nString('collaboration.feedback.incremental_update_modal.title'),
     maxWidth: 528,
     minWidth: 528,
     fixedCenter: true,
     onClose: () => {
-      dispatch(hideModal());
+      dispatch(hideModal())
     },
     onConfirm: () => {
-      if (selectedVersion === null) return;
-      const checkpointKey = selectedVersion === 'latest' ? 'latest' : selectedVersion.checkpoint?.key;
+      if (selectedVersion === null)
+        return
+      const checkpointKey = selectedVersion === 'latest' ? 'latest' : selectedVersion.checkpoint?.key
       if (checkpointKey) {
-        props.onCheckpointSelected(checkpointKey);
+        props.onCheckpointSelected(checkpointKey)
       }
     },
     focus: true,
@@ -427,30 +432,31 @@ const IncrementalUpdateModal = registerModal((props: IncrementalUpdateModalProps
         children: [latestVersionItem, ...versionItems],
       }),
     }),
-  });
-}, 'IncrementalUpdateModal', ModalSupportsBackground.YES);
+  })
+}, 'IncrementalUpdateModal', ModalSupportsBackground.YES)
 
 // Original: let $$ed0 = createOptimistThunk(async (e, t) => { ... })
-const fetchSourceFileInfoThunk = createOptimistThunk(async (thunkAPI, params: FetchSourceFileInfoParams) => {
+export const fetchSourceFileInfoThunk = createOptimistThunk(async (thunkAPI, params: FetchSourceFileInfoParams) => {
   try {
     const response = await fileApiHandler.getSourceFileUpdatedInfo({
       branchFileKey: params.branchFileKey,
-    });
+    })
     thunkAPI.dispatch(filePutAction({
       file: response.data.meta.source,
-    }));
-  } catch  {
-    console.error('Error fetching source file');
+    }))
   }
-});
+  catch {
+    console.error('Error fetching source file')
+  }
+})
 
 // Original: let $$ec5 = createOptimistThunk(async (e, t) => { ... })
-const showBranchMergeModalThunk = createOptimistThunk(async (thunkAPI, params: ShowBranchMergeModalParams) => {
+export const showBranchMergeModalThunk = createOptimistThunk(async (thunkAPI, params: ShowBranchMergeModalParams) => {
   if (thunkAPI.getState().mirror.appModel.topLevelMode !== ViewType.BRANCHING) {
     if (params.force) {
-      fullscreenValue.triggerAction('enter-branching-mode');
-      fullscreenValue.triggerAction('show-design-panel');
-      await waitForJoinStatus(SchemaJoinStatus.JOINED);
+      fullscreenValue.triggerAction('enter-branching-mode')
+      fullscreenValue.triggerAction('show-design-panel')
+      await waitForJoinStatus(SchemaJoinStatus.JOINED)
       thunkAPI.dispatch(showModalHandler({
         type: BranchForceMergeModal,
         data: {
@@ -459,8 +465,8 @@ const showBranchMergeModalThunk = createOptimistThunk(async (thunkAPI, params: S
           direction: params.direction,
           backFileKey: params.backFileKey,
         },
-      }));
-      return;
+      }))
+      return
     }
     thunkAPI.dispatch(showModalHandler({
       type: $l, // Assumed external modal
@@ -473,68 +479,69 @@ const showBranchMergeModalThunk = createOptimistThunk(async (thunkAPI, params: S
         unreadCommentCount: params.unreadCommentCount,
         readOnly: params.readOnly,
       },
-    }));
+    }))
   }
-});
+})
 
 // Original: let $$eu2 = createOptimistThunk(async (e, t) => { ... })
-const handleBranchMergeThunk = createOptimistThunk(async (thunkAPI, params: HandleBranchMergeParams) => {
-  const state = thunkAPI.getState();
-  const { openFile } = state;
+export const handleBranchMergeThunk = createOptimistThunk(async (thunkAPI, params: HandleBranchMergeParams) => {
+  const state = thunkAPI.getState()
+  const { openFile } = state
   if (!openFile) {
     analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.branching.merge_modal_blocked', {
       reason: 'no open file',
-    });
-    return;
+    })
+    return
   }
-  const openFileMerge = state.openFileMerge;
+  const openFileMerge = state.openFileMerge
   if (openFileMerge != null) {
     thunkAPI.dispatch(VisualBellActions.enqueue({
       message: getI18nString('collaboration.branching.waiting_for_previous_merge'),
-    }));
+    }))
     analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.branching.merge_modal_blocked', {
       reason: 'file merge in progress',
       fileMergeId: openFileMerge.fileMergeId,
-    });
-    return;
+    })
+    return
   }
-  await handlePluginError();
+  await handlePluginError()
   const [branchCanEdit, sourceCanEdit] = await Promise.all([
     subscribeAndAwaitData(FileCanEdit, { key: params.branchKey }),
     subscribeAndAwaitData(FileCanEdit, { key: params.sourceKey }),
-  ]);
-  const savepointPromises: any[] = [];
+  ])
+  const savepointPromises: any[] = []
   if (branchCanEdit.file?.hasPermission) {
-    const isCurrentFile = params.branchKey === openFile.key;
-    savepointPromises.push(maybeCreateSavepoint(params.branchKey, '', '', thunkAPI.dispatch, isCurrentFile));
+    const isCurrentFile = params.branchKey === openFile.key
+    savepointPromises.push(maybeCreateSavepoint(params.branchKey, '', '', thunkAPI.dispatch, isCurrentFile))
   }
   if (sourceCanEdit.file?.hasPermission) {
-    const isCurrentFile = params.sourceKey === openFile.key;
-    savepointPromises.push(maybeCreateSavepoint(params.sourceKey, '', '', thunkAPI.dispatch, isCurrentFile));
+    const isCurrentFile = params.sourceKey === openFile.key
+    savepointPromises.push(maybeCreateSavepoint(params.sourceKey, '', '', thunkAPI.dispatch, isCurrentFile))
   }
   if (savepointPromises.length > 0) {
     thunkAPI.dispatch(VisualBellActions.enqueue({
       message: getI18nString('collaboration.branching.saving_file'),
       type: 'file-merge-save',
       icon: VisualBellIcon.SPINNER,
-    }));
+    }))
     try {
-      await Promise.all(savepointPromises);
+      await Promise.all(savepointPromises)
       thunkAPI.dispatch(VisualBellActions.dequeue({
         matchType: 'file-merge-save',
-      }));
-    } catch {
+      }))
+    }
+    catch {
       thunkAPI.dispatch(VisualBellActions.dequeue({
         matchType: 'file-merge-save',
-      }));
+      }))
       thunkAPI.dispatch(VisualBellActions.enqueue({
         message: getI18nString('collaboration.branching.error_saving_file'),
         error: true,
-      }));
+      }))
       analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.branching.merge_modal_blocked', {
         reason: 'error saving file',
-      });
-      return;
+      })
+      return
     }
   }
   const mergeParams = {
@@ -545,14 +552,14 @@ const handleBranchMergeThunk = createOptimistThunk(async (thunkAPI, params: Hand
     sourceCheckpointKey: params.sourceCheckpointKey,
     unreadCommentCount: params.unreadCommentCount,
     readOnly: state.mirror.appModel.isReadOnly,
-  };
-  thunkAPI.dispatch(showBranchMergeModalThunk(mergeParams));
-});
+  }
+  thunkAPI.dispatch(showBranchMergeModalThunk(mergeParams))
+})
 
 // Original: let $$ep3 = createOptimistThunk((e, { ... }) => { ... })
-const initiateBranchMergeThunk = createOptimistThunk((thunkAPI, params: InitiateBranchMergeParams) => {
-  const state = thunkAPI.getState();
-  const selectedFile = getSelectedFile(state);
+export const initiateBranchMergeThunk = createOptimistThunk((thunkAPI, params: InitiateBranchMergeParams) => {
+  const state = thunkAPI.getState()
+  const selectedFile = getSelectedFile(state)
   if (selectedFile && selectedFile.source_file_key) {
     thunkAPI.dispatch(handleBranchMergeThunk({
       branchKey: selectedFile.key,
@@ -561,21 +568,21 @@ const initiateBranchMergeThunk = createOptimistThunk((thunkAPI, params: Initiate
       force: params.force,
       sourceCheckpointKey: params.sourceCheckpointKey,
       unreadCommentCount: params.unreadCommentCount,
-    }));
+    }))
     if (params.direction === SourceDirection.FROM_SOURCE) {
       trackEventAnalytics('Branch Update From Main Clicked', {
         trackingContext: params.trackingContextName,
         fileKey: selectedFile.key,
         fileRepoId: selectedFile.file_repo_id,
         sourceCheckpointKey: params.sourceCheckpointKey,
-      });
+      })
     }
   }
-});
+})
 
 // Original: let $$em1 = createOptimistThunk((e) => { ... })
-const showIncrementalUpdateModalThunk = createOptimistThunk((thunkAPI) => {
-  const { openFile } = thunkAPI.getState();
+export const showIncrementalUpdateModalThunk = createOptimistThunk((thunkAPI) => {
+  const { openFile } = thunkAPI.getState()
   if (openFile && openFile.sourceFileKey && openFile.sourceCheckpointId) {
     thunkAPI.dispatch(showModalHandler({
       type: IncrementalUpdateModal,
@@ -587,51 +594,52 @@ const showIncrementalUpdateModalThunk = createOptimistThunk((thunkAPI) => {
             direction: SourceDirection.FROM_SOURCE,
             trackingContextName: TrackingKeyEnum.BRANCHING_UPDATE_FROM_VERSION_MODAL,
             sourceCheckpointKey: checkpointKey === 'latest' ? undefined : checkpointKey,
-          }));
+          }))
         },
       },
-    }));
+    }))
   }
-});
+})
 
 // Original: let $$eh4 = createOptimistThunk((e, { ... }) => { ... })
-const openSourceFileThunk = createOptimistThunk((thunkAPI, params: OpenSourceFileParams) => {
-  const openFile = thunkAPI.getState().openFile;
-  if (!openFile || !openFile.sourceFile) return;
-  const sourceFile = openFile.sourceFile;
+export const openSourceFileThunk = createOptimistThunk((thunkAPI, params: OpenSourceFileParams) => {
+  const openFile = thunkAPI.getState().openFile
+  if (!openFile || !openFile.sourceFile)
+    return
+  const sourceFile = openFile.sourceFile
   thunkAPI.dispatch(selectViewAction({
     view: 'fullscreen',
     fileKey: sourceFile.key,
     editorType: FEditorType.Design,
-  }));
+  }))
   trackEventAnalytics('Open File Click', {
     trackingContext: params.trackingContextName,
     fileKey: sourceFile.key,
     fileRepoId: sourceFile.fileRepoId,
-  });
-});
+  })
+})
 
 // Original: let $$eg6 = createOptimistThunk((e, { ... }) => { ... })
-const showBranchesModalThunk = createOptimistThunk((thunkAPI, params: ShowBranchesModalParams) => {
-  const state = thunkAPI.getState();
-  const selectedFile = getSelectedFile(state);
+export const showBranchesModalThunk = createOptimistThunk((thunkAPI, params: ShowBranchesModalParams) => {
+  const state = thunkAPI.getState()
+  const selectedFile = getSelectedFile(state)
   if (selectedFile) {
     thunkAPI.dispatch(showModalHandler({
       type: jS, // Assumed external modal
-    }));
+    }))
     trackEventAnalytics('View Branches Clicked', {
       trackingContext: params.trackingContextName,
       fileKey: selectedFile.key,
       fileRepoId: selectedFile.file_repo_id,
-    });
+    })
   }
-});
+})
 
 // Original exports
-export const Z = fetchSourceFileInfoThunk;
-export const dZ = showIncrementalUpdateModalThunk;
-export const Cp = handleBranchMergeThunk;
-export const hx = initiateBranchMergeThunk;
-export const oz = openSourceFileThunk;
-export const kq = showBranchMergeModalThunk;
-export const o5 = showBranchesModalThunk;
+export const Z = fetchSourceFileInfoThunk
+export const dZ = showIncrementalUpdateModalThunk
+export const Cp = handleBranchMergeThunk
+export const hx = initiateBranchMergeThunk
+export const oz = openSourceFileThunk
+export const kq = showBranchMergeModalThunk
+export const o5 = showBranchesModalThunk

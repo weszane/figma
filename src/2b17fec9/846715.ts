@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { noop } from 'lodash-es';
 import { U1 } from "../figma_app/343967";
 import { DesignGraphElements, Fullscreen, ViewType, ToolType, AlignmentPosition, ConfirmationLevel, LayoutTabType } from "../figma_app/763686";
-import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { useResizeObserverRef } from "../figma_app/708845";
@@ -50,7 +50,7 @@ import { p as _$$p } from "../9410/505291";
 import { Q as _$$Q } from "../1250/220026";
 import { V as _$$V } from "../905/355181";
 import { UpgradeAction } from "../905/370443";
-import { kD, tS as _$$tS2 } from "../figma_app/622574";
+import { getCurrentTemplate, hasTemplateEntity } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
 import { ITemplateType } from "../905/862883";
 import { RJ } from "../figma_app/869006";
@@ -116,7 +116,7 @@ import { f7, az } from "../2b17fec9/523222";
 import { s as _$$s4 } from "../2b17fec9/641273";
 import { xI } from "../figma_app/355754";
 import { fullscreenValue } from "../figma_app/455680";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { ejp, nnJ } from "../figma_app/27776";
 var u = c;
 function Q(e) {
@@ -176,10 +176,10 @@ function Q(e) {
 }
 let eo = memo(function () {
   let e = useIsProgressBarHiddenOrLocked();
-  let t = kD();
+  let t = getCurrentTemplate();
   let i = b4();
   let r = selectCurrentFile();
-  if (!_$$tS2() || e) return null;
+  if (!hasTemplateEntity() || e) return null;
   let a = {
     icon: jsx(_$$Q, {})
   };
@@ -870,7 +870,7 @@ function th({
 let tg = memo(function () {
   let e = useIsVotingSessionJoined();
   let t = useAtomWithSubscription(c5);
-  let i = Xr(n6);
+  let i = useSetAtom(n6);
   let a = f7();
   debug(void 0 !== t, "There should be at least one collapsedStage threshold width less than our current container width.");
   let s = a.slice(0, t.numPrimaryTools);
@@ -913,7 +913,7 @@ function tb({
   });
 }
 function tC() {
-  let e = useSelector(e => Yh(e.mirror.appModel, "undo"));
+  let e = useSelector(e => isActionEnabled(e.mirror.appModel, "undo"));
   return jsx(_$$I, {
     ButtonLayout: _$$Z,
     className: tN,
@@ -935,7 +935,7 @@ function tC() {
   });
 }
 function tT() {
-  let e = useSelector(e => Yh(e.mirror.appModel, "redo"));
+  let e = useSelector(e => isActionEnabled(e.mirror.appModel, "redo"));
   return jsx(_$$I, {
     ButtonLayout: _$$Z,
     className: ZS,

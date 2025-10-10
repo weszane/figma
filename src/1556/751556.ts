@@ -64,7 +64,7 @@ import { switchCommunityProfileThunk } from "../figma_app/530167";
 import { K as _$$K } from "../1556/124168";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { X as _$$X } from "../figma_app/91315";
-import { ck } from "../905/952832";
+import { UserContextScope } from "../905/952832";
 import { InterProfileType } from "../905/895626";
 import { TrackingKeyEnum } from "../905/696396";
 import { S as _$$S } from "../1556/805548";
@@ -72,7 +72,7 @@ import { s as _$$s3 } from "../905/539471";
 import { T$ as _$$T$, B$, SO } from "../1556/114224";
 import { d8i } from "../figma_app/27776";
 import { trackEventAnalytics } from "../905/449184";
-import { X9 } from "../figma_app/236327";
+import { DropdownScrim } from "../figma_app/236327";
 import { J as _$$J3 } from "../1577/181415";
 import { stopPropagation } from "../figma_app/753501";
 import { N as _$$N2 } from "../1577/472492";
@@ -245,7 +245,7 @@ function eT({
     close();
     e(_$$X({
       entity: t,
-      entityType: ck.CURRENT_USER,
+      entityType: UserContextScope.CURRENT_USER,
       shape: "CIRCLE"
     }));
   };
@@ -1155,7 +1155,7 @@ export function $$th1() {
         hasNotifications: _
       })
     }), l && jsxs(Fragment, {
-      children: [jsx(X9, {
+      children: [jsx(DropdownScrim, {
         closeDropdown: () => t(hideDropdownAction())
       }), jsx(ue, {
         registrationOrigin: iX.NOTIFICATION_BELL

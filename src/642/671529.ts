@@ -7,7 +7,7 @@ import { AppStateTsApi, DesignWorkspace, ViewType, Fullscreen, SelfDesignType, D
 import { n3, VariableStyleId } from "../905/859698";
 import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { G as _$$G } from "../figma_app/318030";
 import m from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -814,7 +814,7 @@ function e4({
   let q = getObservableValue(EditorPreferencesApi().renderRulers, !1);
   let J = _$$T();
   let Z = getFeatureFlags().properties_panel_resize_lag_fix;
-  let Q = Xr(At);
+  let Q = useSetAtom(At);
   let {
     setRulerVisibilityOnInitialSizeChange,
     setRulerVisibilityOnDragEnd,

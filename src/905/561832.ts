@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { ModalSupportsBackground, registerModal } from "../905/102752";
 import { hideModal } from "../905/156213";
-import { Cp } from "../905/292918";
+import { handleBranchMergeThunk } from "../905/292918";
 import { finishBranchMerge, clearOpenFileMerge, setBranchMergeError, handleBranchModalExit } from "../905/300250";
 import { VisualBellActions } from "../905/302958";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -77,7 +77,7 @@ let L = e => {
       ...e.mergeParams,
       mergeOnFileOpen: !1
     }
-  })) : e.dispatch(Cp(e.mergeParams));
+  })) : e.dispatch(handleBranchMergeThunk(e.mergeParams));
 };
 let F = (e, t, i) => {
   let n;

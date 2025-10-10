@@ -6,7 +6,7 @@ import { usePublishedPlugins, useInstalledPluginsAndWidgets, getLocalPlugins } f
 import { getPluginVersion, isDevWithOnlyCodegen, getFullscreenViewEditorType } from "../figma_app/300692";
 import { HubTypeEnum } from "../figma_app/45218";
 import { r as _$$r } from "../905/319631";
-import { jv } from "../905/525678";
+import { processMenuItems } from "../905/525678";
 import { createMenuItems } from "../905/905430";
 import { q } from "../905/276489";
 export function $$$$p1(e, t, a) {
@@ -25,11 +25,11 @@ export function $$$$p1(e, t, a) {
   let j = Object.values(getLocalPlugins()).find(t => t.plugin_id === e);
   let y = j?.manifest.menu && j.manifest.menu.length > 0 && !isDevWithOnlyCodegen(j) ? createMenuItems(j.manifest.menu, j) : [];
   let w = f.manifest.menu && f.manifest.menu.length > 0 && !isDevWithOnlyCodegen(f) ? createMenuItems(f.manifest.menu, f) : [];
-  let k = jv(w.map(e => q(e, e => () => t(e))), {
+  let k = processMenuItems(w.map(e => q(e, e => () => t(e))), {
     appModel,
     selectedView
   });
-  let E = jv(y.map(e => q(e, e => () => a(e))), {
+  let E = processMenuItems(y.map(e => q(e, e => () => a(e))), {
     appModel,
     selectedView
   });
@@ -87,7 +87,7 @@ export function $$g0(e, t) {
   let i = usePublishedPlugins()[e];
   let r = getPluginVersion(i);
   let d = r.manifest.menu && r.manifest.menu.length > 0 ? createMenuItems(r.manifest.menu, r) : [];
-  return jv(d.map(e => q(e, e => () => t(e))), {
+  return processMenuItems(d.map(e => q(e, e => () => t(e))), {
     appModel: a,
     selectedView: s
   });

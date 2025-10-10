@@ -72,7 +72,7 @@ import { dh } from "../figma_app/186343";
 import { FFileType } from "../figma_app/191312";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { U1 } from "../figma_app/343967";
-import { c1 } from "../figma_app/357047";
+import { getKeyboardShortcut } from "../figma_app/357047";
 import { fullscreenValue } from "../figma_app/455680";
 import { assertNotNullish, throwTypeError } from "../figma_app/465776";
 import { selectCurrentFile, selectOpenFileKey, useCurrentFileKey } from "../figma_app/516028";
@@ -1098,7 +1098,7 @@ function tp() {
     });
   }, []);
   let f = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
-  let _ = c1(f, "toggle-show-comments");
+  let _ = getKeyboardShortcut(f, "toggle-show-comments");
   let v = trackFileEventWithUser();
   if (useEffect(() => {
     v("Properties Panel Comments Tab Settings Opened");

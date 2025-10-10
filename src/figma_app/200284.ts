@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { ServiceCategories } from "../905/165054";
 import { IconButton } from "../905/443068";
 import { Button, ButtonWide } from "../905/521428";
-import { c$, bL, l9, mc } from "../905/493196";
+import { SelectOptionReset, SelectGroupLabel, SelectSeparator, SelectContainer } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { A as _$$A } from "../905/920165";
 import { R as _$$R } from "../905/649743";
@@ -524,7 +524,7 @@ function ev(e) {
       imageScaleMode: t
     });
   };
-  let i = $$eS1.map((e, r) => jsx(c$, {
+  let i = $$eS1.map((e, r) => jsx(SelectOptionReset, {
     value: e,
     children: t.format(e)
   }, r));
@@ -533,18 +533,18 @@ function ev(e) {
       [Nd]: !e.insetImageSettings,
       [ak]: e.insetImageSettings
     }),
-    children: jsxs(bL, {
+    children: jsxs(SelectGroupLabel, {
       value: e.paint.imageScaleMode.toString(),
       onChange: e => {
         r(e);
       },
       recordingKey: e.recordingKey,
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         width: "fill",
         label: jsx(HiddenLabel, {
           children: getI18nString("fullscreen.properties_panel.image_scale_mode")
         })
-      }), jsx(mc, {
+      }), jsx(SelectContainer, {
         children: i
       })]
     })

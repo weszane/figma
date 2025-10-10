@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
 import { isIframe } from "../905/508367";
 import { useResizeObserverRef, initialSize } from "../figma_app/708845";
@@ -23,7 +23,7 @@ function I(e) {
     trackEvent
   } = useTracking();
   let l = useRef(null);
-  let c = Xr(consentCounterAtom);
+  let c = useSetAtom(consentCounterAtom);
   let u = useResizeObserverRef(l) ?? initialSize;
   let y = t ? u.height + (e.verticalPadding || 0) : 0;
   useEffect(() => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Label } from "../905/270045";
 import { BannerInsetModal } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { Link } from "../905/438674";
 import { InputComponent } from "../905/185998";
 import { Textarea } from "../905/909590";
@@ -168,20 +168,20 @@ export let $$L0 = function (e) {
             })
           }), jsx("div", {
             className: "form-module--typeSelectionContainer--aNd5t",
-            children: jsxs(bL, {
+            children: jsxs(SelectGroupLabel, {
               value: S ? I(S) : "",
               onChange: e => {
                 v(T(e));
               },
-              children: [jsx(l9, {
+              children: [jsx(SelectSeparator, {
                 width: "fill",
                 size: "lg",
                 label: R(renderI18nText("report_abuse.abuse_type.label")),
                 placeholder: getI18nString("report_abuse.abuse_type.placeholder"),
                 "data-testid": "abuse-type-select-trigger"
-              }), jsx(mc, {
+              }), jsx(SelectContainer, {
                 "data-testid": "abuse-type-select-container",
-                children: Object.values(b).filter(e => "number" == typeof e && e > 0).sort((e, t) => e === b.ABUSE_TYPE_OTHER ? 1 : t === b.ABUSE_TYPE_OTHER ? -1 : I(T(e)).localeCompare(I(T(t)))).map(e => jsx(c$, {
+                children: Object.values(b).filter(e => "number" == typeof e && e > 0).sort((e, t) => e === b.ABUSE_TYPE_OTHER ? 1 : t === b.ABUSE_TYPE_OTHER ? -1 : I(T(e)).localeCompare(I(T(t)))).map(e => jsx(SelectOptionReset, {
                   value: I(T(e)),
                   children: O[T(e)]
                 }, e))

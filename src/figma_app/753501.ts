@@ -41,7 +41,7 @@ export function shouldHandleMultiTouchOrPressure(force: boolean = false): boolea
  * Original function name: $$o1
  * @param event - The event to stop propagation for.
  */
-export function stopPropagation(event: Event): void {
+export function stopPropagation(event: React.SyntheticEvent): void {
   event.stopPropagation()
 }
 

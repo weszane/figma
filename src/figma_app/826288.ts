@@ -5,11 +5,11 @@ import { FuzzyMatcher } from "../figma_app/616261";
 import { dU, cT } from "../905/660732";
 import { hasSeparator, hasHeader, hasRenderFunction, hasActionOrCallback } from "../figma_app/847915";
 import { a as _$$a } from "../905/69481";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { EG } from "../figma_app/995580";
 import { isQaSearchFrecencyEnabled } from "../figma_app/144974";
 import { x0 } from "../figma_app/963341";
-import { UN } from "../905/525678";
+import { shouldShowMenuItem } from "../905/525678";
 import { r as _$$r } from "../905/454477";
 import { ou } from "../905/942991";
 var s = a;
@@ -22,7 +22,7 @@ export class $$E2 {
     }
   }
   addFigmaMenuItemsToSearchMap(e, t, r) {
-    if (!r || hasSeparator(r) || hasHeader(r) || hasRenderFunction(r) || !UN(r, {
+    if (!r || hasSeparator(r) || hasHeader(r) || hasRenderFunction(r) || !shouldShowMenuItem(r, {
       isDesktopMenu: !1,
       isReadOnly: e.isReadOnly,
       isSearching: !0,
@@ -163,7 +163,7 @@ export function $$y0(e) {
   };
 }
 export function $$b1(e, t) {
-  return t.disabled ? t.disabled : !(t.name || Yh(e, t.action) || t.quickAction?.alwaysEnabled);
+  return t.disabled ? t.disabled : !(t.name || isActionEnabled(e, t.action) || t.quickAction?.alwaysEnabled);
 }
 export const _g = $$y0;
 export const oG = $$b1;

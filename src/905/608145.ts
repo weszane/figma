@@ -29,7 +29,7 @@ import { HubAction } from '../figma_app/350203';
 import { fullscreenValue } from '../figma_app/455680';
 import { throwTypeError } from '../figma_app/465776';
 import { SimpleComponentType } from '../figma_app/504088';
-import { $4 } from '../figma_app/506364';
+import { spellCheckManager } from '../figma_app/506364';
 import { zM } from '../figma_app/580736';
 import { PluginManager } from '../figma_app/612938';
 import { assetCategoryAtom, AssetCategoryEnum } from '../figma_app/639711';
@@ -264,7 +264,7 @@ export function $$J0(e, t, i) {
     case 'set-text-review-plugin':
       if (O) return PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);
       updateActiveTextReviewPlugin(i.textReviewPluginInfo);
-      $4.reset();
+      spellCheckManager.reset();
       return;
     case 'run-last':
       if (O) return PluginManager.instance.handleUpgrade(PluginAction.RUN_PLUGIN);

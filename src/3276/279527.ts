@@ -9,10 +9,10 @@ import { sendWithRetry } from "../905/910117";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { A } from "../905/956262";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { U } from "../905/455766";
 import { OnboardingRenderFrame } from "../905/284399";
 import { CornerPosition, OverlayType } from "../figma_app/450829";
@@ -54,9 +54,9 @@ let $$E1 = "commentSubmitted";
 export function $$N0() {
   let e = useAtomWithSubscription(M);
   let t = useSelector(e => e.userAnalyticsData?.is_active_mobile_user);
-  let n = _$$e({
+  let n = useOverlay({
     overlay: MobileReplyUpsellHint,
-    priority: N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useEventForwarder(n.uniqueId, $$E1, useCallback(() => {
     !t && getFeatureFlags().mobile_reply_upsell && n.show({

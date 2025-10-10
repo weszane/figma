@@ -10,7 +10,7 @@ import { renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { setupHyperlinkHandler } from "../figma_app/815170";
 import { useSelectedNodesWithinBreakpointFrame } from "../905/913055";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { Bf } from "../figma_app/249941";
 import { useNavigationStack } from "../905/794154";
 import { ID, aK } from "../905/487011";
@@ -90,7 +90,7 @@ export function $$x0({
   customActionPrefix: R
 }) {
   let N = useSelectedNodesWithinBreakpointFrame();
-  let P = useSelector(t => Yh(t.mirror.appModel, e));
+  let P = useSelector(t => isActionEnabled(t.mirror.appModel, e));
   let {
     close
   } = useNavigationStack();

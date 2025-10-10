@@ -1,8 +1,8 @@
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { createOptimistThunk } from "../905/350402";
-import { s6 } from "../figma_app/443991";
+import { initAvatarEditorAction } from "../figma_app/443991";
 import { showModalHandler } from "../905/156213";
-import { ck } from "../905/952832";
+import { UserContextScope } from "../905/952832";
 import { _ } from "../905/549496";
 let $$d0 = createOptimistThunk((e, {
   entity: t,
@@ -16,7 +16,7 @@ let $$d0 = createOptimistThunk((e, {
   o.style.display = "none";
   o.onchange = () => {
     let n = o.files;
-    null !== n && n.length > 0 && (e.dispatch(s6({
+    null !== n && n.length > 0 && (e.dispatch(initAvatarEditorAction({
       entity: t,
       entityType: r,
       file: n[0],
@@ -34,7 +34,7 @@ let $$c1 = createOptimistThunk((e, {
 }) => {
   e.dispatch($$d0({
     entity: t,
-    entityType: ck.TEAM,
+    entityType: UserContextScope.TEAM,
     shape: "SQUARE"
   }));
 });

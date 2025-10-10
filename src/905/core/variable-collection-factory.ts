@@ -8,7 +8,7 @@ import { getFeatureFlags } from '../601108';
 import { yG } from '../859698';
 import { QO } from '../888985';
 import { resourceUtils } from '../989992';
-import { zl } from '../../figma_app/27355';
+import { atomStoreManager } from '../../figma_app/27355';
 import { bsh } from '../../figma_app/43951';
 import { libraryVariableCollectionsWithVarsByLibraryKeysAtomFamily } from '../../figma_app/216057';
 import { gr } from '../../figma_app/243058';
@@ -217,7 +217,7 @@ async function rO(variableCollectionInputs) {
 
   // Fetch library data and process variable collections
   const libraryData = (await QO(libraryKeys, (resolve, reject) => {
-    const cachedLibraries = zl.get<ComponentInfo>(libraryKeys);
+    const cachedLibraries = atomStoreManager.get<ComponentInfo>(libraryKeys);
     const allLibrariesResult = resourceUtils.all(Object.values(cachedLibraries));
     if (allLibrariesResult.status === 'loaded') {
       resolve(cachedLibraries);
@@ -271,7 +271,7 @@ async function rL() {
   // rL - Get available libraries from cache or query them
 
   const libraryResult = (await QO(subscribedLibrariesAtom, (resolve, reject) => {
-    const cachedLibraries = zl.get<LibraryResult>(subscribedLibrariesAtom);
+    const cachedLibraries = atomStoreManager.get<LibraryResult>(subscribedLibrariesAtom);
     if (cachedLibraries.status === 'loaded') {
       resolve(cachedLibraries);
     } else if (cachedLibraries.status === 'errors') {

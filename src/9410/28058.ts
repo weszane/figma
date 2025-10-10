@@ -5,7 +5,7 @@ import { AppStateTsApi } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
-import { sz } from "../figma_app/216696";
+import { fetchShelvesForShelfTypeThunk } from "../figma_app/216696";
 import { Qx, Dm } from "../figma_app/8833";
 import { TrackingProvider } from "../figma_app/831799";
 import { designCopyToSlidesAtom } from "../figma_app/223206";
@@ -20,7 +20,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
 import { CommunityPageType } from "../figma_app/45218";
 import { FDocumentType } from "../905/862883";
-import { cd } from "../905/381612";
+import { recentItemsThunks } from "../905/381612";
 import { Ye } from "../figma_app/32128";
 import { JT } from "../figma_app/632248";
 import { wj, qy } from "../figma_app/862289";
@@ -75,11 +75,11 @@ export function $$V1() {
     closeOnEsc: !0,
     ignore: [g, getElementByDataTarget("slides-template-button"), getElementByDataTarget(_$$G), getElementByDataTarget(_$$l)]
   }), useEffect(() => {
-    m(cd.fetchTemplatesMetadata({
+    m(recentItemsThunks.fetchTemplatesMetadata({
       key: FDocumentType.Slides,
       orgId: f?.id
     }));
-    m(sz({
+    m(fetchShelvesForShelfTypeThunk({
       shelfType: CommunityPageType.SLIDES_TEMPLATE_MODAL
     }));
   }, [f?.id, m]), !e) return null;

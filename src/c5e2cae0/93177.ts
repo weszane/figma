@@ -37,7 +37,7 @@ import { f as _$$f2 } from "../905/950641";
 import { L as _$$L } from "../905/61587";
 import { FPlanNameType, FMemberRoleType, FAccessLevelType } from "../figma_app/191312";
 import { hK } from "../figma_app/211706";
-import { UR } from "../figma_app/307841";
+import { isCampfireCartBannerEnabled } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
 import { switchAccountAndNavigate } from "../figma_app/976345";
 import { q as _$$q } from "../figma_app/712384";
@@ -1133,7 +1133,7 @@ function eZ({
     }), e === UpgradeSteps.CONFIRM_PAY && jsx("p", {
       className: cssBuilderInstance.colorTextSecondary.font13.mt8.$,
       children: renderI18nText("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set")
-    }), UR() && jsx(_$$W, {
+    }), isCampfireCartBannerEnabled() && jsx(_$$W, {
       billingPeriod: getSubscriptionTypeFromBillingCycle(a) ?? void 0,
       isCampfireCart: !0
     })]

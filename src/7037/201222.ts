@@ -20,7 +20,7 @@ import { Dr } from '../905/530837';
 import { FlashActions } from '../905/573154';
 import { UserAvatar, AvatarSize } from '../905/590952';
 import { customHistory } from '../905/612521';
-import { e as _$$e } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { setEditorDocumentTitle } from '../905/697795';
 import { SvgComponent } from '../905/714743';
 import { FeedAtMentionsLibrary } from '../905/772425';
@@ -42,7 +42,7 @@ import { FeedPostDetailZoomPanNudge } from '../figma_app/6204';
 import { stylizeMessageMeta } from '../figma_app/12220';
 import { FeedPostWithDetails } from '../figma_app/43951';
 import { xT } from '../figma_app/195407';
-import { N as _$$N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { useSubscription } from '../figma_app/288654';
 import { p as _$$p } from '../figma_app/353099';
 import { getSelectedView } from '../figma_app/386952';
@@ -167,9 +167,9 @@ function ee(e) {
 }
 let en = 'feed-post-detail-modal';
 function eo() {
-  let e = _$$e({
+  let e = useOverlay({
     overlay: FeedPostDetailZoomPanNudge,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let t = zl(B);
   let n = useMemo(() => renderI18nText('rcs.feed_onboarding.zoom_pan.title'), []);

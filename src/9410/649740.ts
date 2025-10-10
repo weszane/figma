@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createRef } from "react";
 import { RecordingPureComponent } from "../figma_app/878298";
-import { ms } from "../figma_app/236327";
+import { DropdownContainer } from "../figma_app/236327";
 import { RecordingScrollContainer } from "../905/347284";
 import { Dm } from "../figma_app/8833";
 import { KeyboardReceiver } from "../905/826900";
@@ -35,7 +35,7 @@ export class $$u0 extends RecordingPureComponent {
       name: this.props.recordingKey || "",
       handleKeyDown: this.onKeyDownFromFullscreen,
       focusOnMount: !0,
-      children: jsx(ms, {
+      children: jsx(DropdownContainer, {
         className: `${DU} ${Dm}`,
         style: e,
         "data-testid": this.props["data-testid"],

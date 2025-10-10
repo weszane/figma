@@ -58,7 +58,7 @@ export async function isHaveSpellingLanguages(): Promise<boolean> {
  * Spelling agent class for handling spell checking operations.
  * Original class: $$d1
  */
-export const SpellingAgent = class {
+export class SpellingAgent {
   name: string
   language: string
 

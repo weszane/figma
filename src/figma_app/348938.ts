@@ -1,6 +1,6 @@
 import { debug } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
-import { k } from "../905/749197";
+import { DDRenderMode } from "../905/749197";
 import { SceneGraphHelpers, ScrollBehavior } from "../figma_app/763686";
 import { isSpecialNodeType } from "../905/266460";
 import { isSpecialType } from "../figma_app/387100";
@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
 import { isRecordingEnabled } from "../figma_app/878298";
 import { isValidWidgetType } from "../figma_app/364284";
-import { K3 } from "../figma_app/678300";
+import { isNodeSelected } from "../figma_app/678300";
 import { isInstanceSimplified } from "../figma_app/164212";
 import { n as _$$n } from "../figma_app/583890";
 import { indentWidth, indentWidthWithMargin } from "../figma_app/786175";
@@ -36,7 +36,7 @@ export class $$f3 {
       t = {
         isAncestorHidden: n.isAncestorHidden || !r.visible,
         isAncestorLocked: n.isAncestorLocked || r.locked,
-        isAncestorSelected: n.isAncestorSelected || K3(this.sceneGraphSelection, e),
+        isAncestorSelected: n.isAncestorSelected || isNodeSelected(this.sceneGraphSelection, e),
         isAncestorFixed: n.isAncestorFixed || "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" === r.scrollBehavior,
         childrenDisplayOrder: r.childrenDisplayOrder
       };
@@ -45,7 +45,7 @@ export class $$f3 {
       isAncestorLocked: !1,
       isAncestorSelected: !1,
       isAncestorFixed: !1,
-      childrenDisplayOrder: k.DESIGN
+      childrenDisplayOrder: DDRenderMode.DESIGN
     };
     this.ancestorInfos[e] = t;
     return t;

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useState, useEffect, useRef, useLayoutEffect, useCallback, PureComponent, createElement, Suspense } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager, Xr, useAtomWithSubscription, atom, useAtomValueAndSetter, Rq } from "../figma_app/27355";
+import { atomStoreManager, useSetAtom, useAtomWithSubscription, atom, useAtomValueAndSetter, loadable } from "../figma_app/27355";
 import { BrowserInfo, isAnyMobile } from "../figma_app/778880";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
@@ -10,8 +10,8 @@ import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useSelector, useDispatch, useStore } from "react-redux";
 import { postUserFlag } from "../905/985254";
 import { withTrackedClick, TrackingProvider, useTracking } from "../figma_app/831799";
-import { e as _$$e } from "../905/621515";
-import { N as _$$N, D as _$$D } from "../figma_app/268271";
+import { useOverlay } from "../905/621515";
+import { ModalPriority, TEAM_LIBRARY_IDENTIFIER } from "../figma_app/268271";
 import { TrackingKeyEnum } from "../905/696396";
 import { OnboardingSequence } from "../905/152487";
 import { FigJamAiSummarizationNudgeOverlay, AdvancedPrototypingUpsellOverlay, AudioNux, ColorManagementDefaultToP3Modal, CustomTemplatePublishNudge, DesktopDownloadModalPrompt, FigJamTemplatesWhatsNew, FigJamTryConfirmSave, FigJamTryDeviceAlreadyClaimed, EditorFigjamWhatsNew, GlassEffectOnboardingOverlay, UpsellLibrariesReuseComponentsOverlay, LinkShortcutOverlay, LocalComponentDragDrop, MobileCommentDownloadModalPrompt, ShareToGoogleClassroomNewUserOnboarding, OnboardFigJamEditorUnifiedPanAndZoom, OnboardFigJamEditorUnifiedProduct, OnboardFigJamViewer, OnboardFigJamEditorUnified, OnboardFigJamEditor, OnboardFigJamEditorBrowseTemplates, OnboardFigJamEditorMakeSomething, OssSalesUpsell, FigJamSectionPresetPickerCallout, ShareToGoogleClassroomExistingUserOnboarding, AIOnboarding, UI3ReactivationOverlay, UpsellLibrariesConsecutivePaste, WorkflowInteropMachine, WorkshopPointer, CursorBotFrameFormattingFollowUp, CursorBotTextFormattingFollowUp, FrameFormattingReactiveFollowUp, TextFormattingReactiveFollowUp, DesignFileLinkExpiration, SlidesAiWelcome, SlidesProTemplatesAnnouncement, FigJamUI3ToolbeltOnboarding, SetUserOnboardingProgressUserFlagsEventOnlyOverlay } from "../figma_app/6204";
@@ -87,7 +87,7 @@ import { jJ } from "../figma_app/828908";
 import { s as _$$s2 } from "../905/445054";
 import { useInstalledPluginVersions } from "../figma_app/844435";
 import { getColorSpaceSupportStatus, isColorSpaceStatusSupported } from "../figma_app/622881";
-import { JU, J3, Gi } from "../figma_app/622574";
+import { canPublishTemplate, getPublishTemplateStatus, getCurrentTemplateEntity } from "../figma_app/622574";
 import { zC } from "../figma_app/186343";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { RcsFrame } from "../905/559280";
@@ -148,7 +148,7 @@ import { F as _$$F2 } from "../figma_app/751989";
 import { w as _$$w4 } from "../3276/726467";
 import { b as _$$b3 } from "../3276/369349";
 import { C as _$$C } from "../1250/50098";
-import { NuxOnboardingOverlay } from "../4452/529989";
+import { BaseNuxOnboardingOverlay } from "../4452/529989";
 import { noop } from 'lodash-es';
 import { handleAtomEvent } from "../905/502364";
 import { Dv, Du, NJ } from "../figma_app/419216";
@@ -179,7 +179,7 @@ import { Fz } from "../figma_app/106207";
 import { useIsFullscreenReady } from "../figma_app/115586";
 import { B as _$$B2 } from "../905/524020";
 import { getHubFileVersionOrDefault, FileTypeSwitch } from "../figma_app/198840";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
 import { mI, vX, wV, mN, rL as _$$rL, CM } from "../9410/983167";
 import { PH } from "../figma_app/701580";
@@ -416,7 +416,7 @@ function q({
     summarizeCanvasSelection
   } = _$$ss(Positioning.ABOVE, !1, "DISCOVERY_NUDGE");
   let u = Cb();
-  let h = Xr(_$$v2);
+  let h = useSetAtom(_$$v2);
   let m = o && l;
   m && (a = getI18nString("whiteboard.ai_summary.nudge.too_many_tokens"));
   let f = useRef(null);
@@ -604,9 +604,9 @@ function et() {
       show,
       isShowing: _isShowing,
       complete: _complete
-    } = _$$e({
+    } = useOverlay({
       overlay: FigJamAiSummarizationNudgeOverlay,
-      priority: _$$N.SECONDARY_MODAL
+      priority: ModalPriority.SECONDARY_MODAL
     }, [e]);
     let a = Q();
     let o = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
@@ -701,9 +701,9 @@ function eD() {
     isShowing,
     show,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: AdvancedPrototypingUpsellOverlay,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [e, t, i]);
   let c = useAdvancedPrototypingUpsellExperiment();
   useEventForwarder(uniqueId, "properties-panel-select-tab", e => {
@@ -755,9 +755,9 @@ let eF = "seen_audio_nux";
 let eB = userFlagExistsAtomFamily(eF);
 function eU() {
   let e = useAtomWithSubscription(eB);
-  let t = _$$e({
+  let t = useOverlay({
     overlay: AudioNux,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [e]);
   useEventForwarder(t.uniqueId, "Context Viewed", e => {
     let i = e.properties?.name;
@@ -807,9 +807,9 @@ let te = _$$tO;
 let tt = O0;
 let ti = "color_management_default_to_p3_modal";
 function tr() {
-  let e = _$$e({
+  let e = useOverlay({
     overlay: ColorManagementDefaultToP3Modal,
-    priority: _$$N.SURVEY
+    priority: ModalPriority.SURVEY
   });
   let {
     currentStep,
@@ -991,14 +991,14 @@ function to() {
   }
 }
 function th() {
-  let e = _$$e({
+  let e = useOverlay({
     overlay: CustomTemplatePublishNudge,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let t = useDispatch<AppDispatch>();
   let i = useStore();
   let a = useDeepEqualSceneValue((e, t) => zC(e, t), i.getState().mirror.appModel.currentPage);
-  let s = JU(J3());
+  let s = canPublishTemplate(getPublishTemplateStatus());
   let o = !!selectCurrentFile()?.template;
   let l = useIsProgressBarHiddenOrLocked();
   let d = !!selectUserFlag("seen_custom_template_publish_nudge");
@@ -1046,9 +1046,9 @@ function tC() {
     isShowing,
     show,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: DesktopDownloadModalPrompt,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t, e, i]);
   if (useSingleEffect(() => {
     desktopAPIInstance || n || !l || show({
@@ -1123,9 +1123,9 @@ function tD() {
   let c = useAtomWithSubscription(d);
   let u = useAtomWithSubscription(wg);
   let [h, m] = useState(!1);
-  let _ = _$$e({
+  let _ = useOverlay({
     overlay: FigJamTemplatesWhatsNew,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [c]);
   useSingleEffect(() => {
     _.show({
@@ -1215,9 +1215,9 @@ function tV({
   });
 }
 function tW() {
-  let e = _$$e({
+  let e = useOverlay({
     overlay: FigJamTryConfirmSave,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   });
   let t = useAtomWithSubscription(openFileAtom);
   let i = t?.isTryFile;
@@ -1252,9 +1252,9 @@ function tQ() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FigJamTryDeviceAlreadyClaimed,
-    priority: _$$N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   });
   let l = useAtomWithSubscription(openFileAtom);
   let d = l?.isTryFile;
@@ -1330,9 +1330,9 @@ function t7() {
   let a = useAtomWithSubscription(t5);
   let o = useAtomWithSubscription(Ot);
   let l = isOnboardingComplete();
-  let d = _$$e({
+  let d = useOverlay({
     overlay: EditorFigjamWhatsNew,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e, i, a, o]);
   useSingleEffect(() => {
     d.show({
@@ -1359,9 +1359,9 @@ function ir() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: GlassEffectOnboardingOverlay,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   useSingleEffect(() => {
     show();
@@ -1451,9 +1451,9 @@ function ic() {
     show,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: UpsellLibrariesReuseComponentsOverlay,
-    priority: _$$N.DEFAULT_MODAL,
+    priority: ModalPriority.DEFAULT_MODAL,
     experiment: {
       check: () => getConfig().get("show_library_upsell", !1),
       predicate: e => e,
@@ -1510,7 +1510,7 @@ function ic() {
       onClick: b,
       ctaTrackingDescriptor: UpgradeAction.GOT_IT
     },
-    targetKey: _$$D,
+    targetKey: TEAM_LIBRARY_IDENTIFIER,
     title: renderI18nText("rcs.upsell_libraries.reuse_components_across_all_files"),
     trackingContextName: "Upsell Libraries Reuse Components Overlay"
   });
@@ -1525,9 +1525,9 @@ function i_() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: LinkShortcutOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t]);
   let l = browserCapabilities.isApple();
   let d = useMemo(() => jsx(KeyboardShortcut, {
@@ -1600,9 +1600,9 @@ function iw() {
     show,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: LocalComponentDragDrop,
-    priority: _$$N.SECONDARY_MODAL,
+    priority: ModalPriority.SECONDARY_MODAL,
     experiment: {
       check: () => isTruthy(t ?? void 0),
       predicate: e => e,
@@ -1660,9 +1660,9 @@ function ik() {
     show,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: MobileCommentDownloadModalPrompt,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t]);
   if (useEventForwarder(uniqueId, _$$w3, useCallback(() => {
     show({
@@ -2020,9 +2020,9 @@ function rg() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: ShareToGoogleClassroomNewUserOnboarding,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [a, i, o, t]);
   useEventForwarder(uniqueId, rf, () => {
     show({
@@ -4137,7 +4137,7 @@ function r3(e) {
 let r6 = "browse_templates_make_something_onboarding--faded--UuXrP";
 let nt = "loadingMakeSomethingTemplate";
 let ni = e => {
-  let t = Xr(_$$w5);
+  let t = useSetAtom(_$$w5);
   let {
     name
   } = useTracking();
@@ -4155,7 +4155,7 @@ let ni = e => {
   useEffect(() => (c && WhiteboardStarterKitCppBindings?.setFigjamStarterKitEnabled(!0), () => {
     WhiteboardStarterKitCppBindings?.setFigjamStarterKitEnabled(!1);
   }), [c]);
-  let u = Xr(Qs);
+  let u = useSetAtom(Qs);
   useEffect(() => {
     u({
       type: "CLOSE"
@@ -4287,7 +4287,7 @@ let nr = {
 let nn = _$$n2(({
   onSuccess: e
 } = {}) => {
-  let t = Xr(_$$w5);
+  let t = useSetAtom(_$$w5);
   let i = useDispatch<AppDispatch>();
   let r = useIsProgressBarHiddenOrLocked();
   let a = useIsFullscreenReady();
@@ -4326,7 +4326,7 @@ let nn = _$$n2(({
       n && insertTemplate({
         template: {
           template: n,
-          type: _$$n.HubFile
+          type: TeamTemplateType.HubFile
         },
         onSuccess: () => {
           e?.();
@@ -4782,7 +4782,7 @@ function np(e) {
   });
 }
 function nh(e) {
-  let t = Xr(_$$w5);
+  let t = useSetAtom(_$$w5);
   useSingleEffect(() => {
     t(_$$tX2.MODAL_SHOWING);
   });
@@ -4816,9 +4816,9 @@ function nx() {
     uniqueId,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: OnboardFigJamEditorUnifiedPanAndZoom,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let l = r_(useCallback(() => {
     complete();
@@ -4847,9 +4847,9 @@ function ny() {
     uniqueId,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: OnboardFigJamEditorUnifiedProduct,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let d = r_(complete);
   useEventForwarder(uniqueId, nm, () => {
@@ -4995,9 +4995,9 @@ function nB() {
     uniqueId,
     complete,
     isShowing
-  } = _$$e({
+  } = useOverlay({
     overlay: OnboardFigJamViewer,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [t]);
   let d = function (e, t) {
     let i = useRef();
@@ -5100,8 +5100,8 @@ function nz({
 }
 let nV = (e, t) => {
   let i = useFullscreenViewFile();
-  let r = Xr(communityHomeShelfModeAtom);
-  let a = Xr(_$$w5);
+  let r = useSetAtom(communityHomeShelfModeAtom);
+  let a = useSetAtom(_$$w5);
   let o = useAtomWithSubscription(zo);
   let l = useIsProgressBarHiddenOrLocked();
   let d = useAtomWithSubscription(dO).status === _$$c3.LOADING;
@@ -5125,7 +5125,7 @@ function nW({
   let a = useAtomWithSubscription(zo);
   let o = userFlagAtomFamily("interacted_figjam_whats_new_v2_cta");
   let l = useAtomWithSubscription(o);
-  let d = Xr(communityHomeShelfModeAtom);
+  let d = useSetAtom(communityHomeShelfModeAtom);
   let {
     getConfig
   } = useUserFlagExperimentConfig("exposed_exp_figjam_unified_onboarding", "figjam_unified_onboarding");
@@ -5142,9 +5142,9 @@ function nW({
     isShowing,
     complete,
     experimentResult
-  } = _$$e({
+  } = useOverlay({
     overlay: OnboardFigJamEditorUnified,
-    priority: _$$N.OVERRIDING_MODAL,
+    priority: ModalPriority.OVERRIDING_MODAL,
     experiment: {
       check: u,
       predicate: e => e !== CommunityHomeShelfMode.DEFAULT,
@@ -5159,9 +5159,9 @@ function nW({
     show: _show,
     isShowing: _isShowing2,
     complete: _complete2
-  } = _$$e({
+  } = useOverlay({
     overlay: OnboardFigJamEditor,
-    priority: _$$N.OVERRIDING_MODAL,
+    priority: ModalPriority.OVERRIDING_MODAL,
     experiment: {
       check: u,
       predicate: e => e === CommunityHomeShelfMode.DEFAULT,
@@ -5215,9 +5215,9 @@ function nY({
     uniqueId,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: OnboardFigJamEditor,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [a, l]);
   let [m, _] = useState([]);
   nV(uniqueId, useCallback(() => {
@@ -5260,7 +5260,7 @@ let nq = atom(async () => {
   }
   await document.fonts.ready;
 });
-let nX = Rq(nq);
+let nX = loadable(nq);
 function nZ(e) {
   return jsx(OnboardingModal, {
     testId: e.testId,
@@ -5298,9 +5298,9 @@ function n$() {
     isShowing,
     uniqueId,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: OnboardFigJamEditorBrowseTemplates,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [t, i]);
   useEventForwarder(uniqueId, Lz, () => {
     o(!0);
@@ -6853,15 +6853,15 @@ function a0({
 }
 function a1() {
   let [e, t] = useState([]);
-  let i = Xr(_$$w5);
+  let i = useSetAtom(_$$w5);
   let {
     complete,
     uniqueId,
     show,
     isShowing
-  } = _$$e({
+  } = useOverlay({
     overlay: OnboardFigJamEditorMakeSomething,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let c = useCallback(() => {
     complete();
@@ -7124,9 +7124,9 @@ function sa({
   let o = useSubscription(TeamCanAdmin, {
     id: e
   });
-  let l = _$$e({
+  let l = useOverlay({
     overlay: OssSalesUpsell,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [a, o]);
   let d = getInitialOptions().user_data;
   let c = d?.email;
@@ -7221,9 +7221,9 @@ function sx() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FigJamSectionPresetPickerCallout,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [i, a]);
   return (useEffect(() => {
     t && l && c && e && show({
@@ -7283,9 +7283,9 @@ function sC() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: ShareToGoogleClassroomExistingUserOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [a, i, o, l, t]);
   useEffect(() => {
     show({
@@ -7351,7 +7351,7 @@ function sC() {
 }
 let sN = "has_onboarded_ai";
 let sA = atom(!1);
-let sL = _$$N.HIGH_PRIORITY_MODAL + 3;
+let sL = ModalPriority.HIGH_PRIORITY_MODAL + 3;
 function sR(e, t) {
   useSingleEffect(() => {
     e(postUserFlag({
@@ -7474,7 +7474,7 @@ function sB() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: AIOnboarding,
     priority: sL
   }, [i, c, l, p]);
@@ -7542,9 +7542,9 @@ function sK() {
   let {
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: UI3ReactivationOverlay,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   let {
     currentStep,
@@ -7758,9 +7758,9 @@ function s4() {
   let o = useAtomWithSubscription(s5);
   let l = useAtomWithSubscription(s3);
   let d = _$$zl(s2);
-  let c = _$$e({
+  let c = useOverlay({
     overlay: UpsellLibrariesConsecutivePaste,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [t, n, l]);
   useEventForwarder(c.uniqueId, zb, () => {
     null === o && c.show({
@@ -7853,7 +7853,7 @@ function oo() {
           insertTemplate({
             template: {
               template: t,
-              type: _$$n.HubFile
+              type: TeamTemplateType.HubFile
             },
             userTriggered: !1,
             templateInsertionDirection: CustomPosition.ABOVE,
@@ -7864,9 +7864,9 @@ function oo() {
     });
   })();
   let e = useAtomWithSubscription(ot);
-  let t = _$$e({
+  let t = useOverlay({
     overlay: WorkflowInteropMachine,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   }, [e]);
   let i = function (e) {
     let t = useDispatch<AppDispatch>();
@@ -7940,9 +7940,9 @@ function ou(e) {
   let i = useAtomWithSubscription(oc);
   let n = useAtomWithSubscription(zo);
   let a = useAtomWithSubscription(PD);
-  let o = _$$e({
+  let o = useOverlay({
     overlay: WorkshopPointer,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [t, i, n, a]);
   useSingleEffect(() => {
     o.show({
@@ -7992,9 +7992,9 @@ function ow() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: CursorBotFrameFormattingFollowUp,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let o = useDispatch<AppDispatch>();
   let l = selectUserFlag("cursor_bot_v2__no_basics_file__played_frame_formatting");
@@ -8035,9 +8035,9 @@ function oS() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: CursorBotTextFormattingFollowUp,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let o = useDispatch<AppDispatch>();
   let l = selectUserFlag("cursor_bot_v2__no_basics_file__played_text_formatting");
@@ -8079,9 +8079,9 @@ function oS() {
   });
 }
 function ok() {
-  let e = _$$e({
+  let e = useOverlay({
     overlay: FrameFormattingReactiveFollowUp,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let t = selectUserFlag("no_figma_basics_tooltips_design_panel_step");
   let i = selectUserFlag("design_panel_step_shown");
@@ -8111,9 +8111,9 @@ function ok() {
   });
 }
 function oN() {
-  let e = _$$e({
+  let e = useOverlay({
     overlay: TextFormattingReactiveFollowUp,
-    priority: _$$N.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let t = selectUserFlag("no_figma_basics_tooltips_format_text_step");
   let i = selectUserFlag("format_text_step_shown");
@@ -8185,9 +8185,9 @@ function oG(e) {
 let oK = createReduxSubscriptionAtomWithState(e => e.modalShown);
 function oH(e) {
   let t = useRef(null);
-  let i = _$$e({
+  let i = useOverlay({
     overlay: DesignFileLinkExpiration,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   let a = useCurrentUserOrg();
   let o = useAtomWithSubscription(openFileAtom);
@@ -8218,7 +8218,7 @@ function oX() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: SlidesAiWelcome,
     priority: sL
   }, [r, o]);
@@ -8243,9 +8243,9 @@ function oX() {
 function o1({
   openFile: e
 }) {
-  let t = Gi();
-  let i = J3();
-  let n = JU(i);
+  let t = getCurrentTemplateEntity();
+  let i = getPublishTemplateStatus();
+  let n = canPublishTemplate(i);
   return e && e.teamId && t?.type === "team" && n ? jsx(o2, {
     teamId: e.teamId
   }) : null;
@@ -8275,9 +8275,9 @@ function o2({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: SlidesProTemplatesAnnouncement,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [a, l, u, m]);
   let T = useCallback(() => {
     !h && d && c && show({
@@ -8322,9 +8322,9 @@ function o7() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FigJamUI3ToolbeltOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   let l = _$$L();
   let d = !!getFeatureFlags().figjam_ui3_toolbelt_onboarding;
@@ -8413,7 +8413,7 @@ export let $$le0 = memo(function ({
     yE("fontStyle", e);
     _$$g2("has_zoomed_in_design_file", e);
     _$$U2("has_panned_in_design_file", e);
-    let a = _$$e({
+    let a = useOverlay({
       overlay: SetUserOnboardingProgressUserFlagsEventOnlyOverlay,
       priority: 0
     });
@@ -8501,7 +8501,7 @@ function li({
   }(e);
   return f ? jsx(Fragment, {
     children: jsx(_$$p3, {
-      children: jsx(NuxOnboardingOverlay, {
+      children: jsx(BaseNuxOnboardingOverlay, {
         entryPoint: _
       })
     })
@@ -8539,7 +8539,7 @@ function li({
         openFile: t
       }), jsx(a1, {}), jsx(nl, {}), jsx(n$, {}), jsx(nx, {}), jsx(ny, {})]
     }), !isDesignEditor && !isSlidesEditor && !g && jsx(_$$p3, {
-      children: jsx(NuxOnboardingOverlay, {
+      children: jsx(BaseNuxOnboardingOverlay, {
         entryPoint: _
       })
     }), isFigjamEditor && jsx(Fragment, {

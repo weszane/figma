@@ -78,7 +78,7 @@ import { N as _$$N4 } from '../905/430294';
 import { useModalManager } from '../905/437088';
 import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
-import { aJ, Oc } from '../905/449579';
+import { processVerticesLayout, VertexNodeMap } from '../905/449579';
 import { n as _$$n2 } from '../905/451212';
 import { K as _$$K2 } from '../905/459096';
 import { setEnhancedContrastThunk } from '../905/469533';
@@ -175,13 +175,13 @@ import { $t, HZ } from '../figma_app/29287';
 import { handleAutosaveAndNavigationThunk } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { getUnitLabel } from '../figma_app/120227';
-import { Dc, hV, mU } from '../figma_app/151766';
+import { initiateSaveAs, ExportOption, exportAllFramesToPdf } from '../figma_app/151766';
 import { useSubscribedLibraryKeys } from '../figma_app/155728';
 import { conditionalFeatureFlag, getInitialOptions } from '../figma_app/169182';
 import { FPlanNameType } from '../figma_app/191312';
 import { WB } from '../figma_app/192664';
 import { t as _$$t4 } from '../figma_app/235299';
-import { N as _$$N7 } from '../figma_app/240060';
+import { OpenDesktopAppModal } from '../figma_app/240060';
 import { j6 } from '../figma_app/243025';
 import { hasJubileePermissionForWhiteboard } from '../figma_app/251115';
 import { getNavigationPreferenceMenuItems } from '../figma_app/253220';
@@ -190,7 +190,7 @@ import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHead
 import { gn } from '../figma_app/322845';
 import { codeConnectToolsEnabledAtom, codeOptionsAtom, useTailwindAtom, isCodebaseSuggestionsEnabled, imageOptionsWithMount, denyOverwritingFilesAtom, mockCodeConnect, codebaseSuggestionsEnabledAtom } from '../figma_app/342355';
 import { toggleFigmentDebugger } from '../figma_app/347406';
-import { c1 } from '../figma_app/357047';
+import { getKeyboardShortcut } from '../figma_app/357047';
 import { logFileSaveAs } from '../figma_app/401069';
 import { OX } from '../figma_app/407414';
 import { getAnticipationConfig } from '../figma_app/407767';
@@ -3107,7 +3107,7 @@ async function tJ() {
   }
   let i = t[0];
   let n = await t1(i);
-  let r = new Oc();
+  let r = new VertexNodeMap();
   let a = {
     value: 1
   };
@@ -3123,7 +3123,7 @@ async function tJ() {
     };
     s(i);
     figma.currentPage.selection = n;
-    aJ(n, e, r, a, {
+    processVerticesLayout(n, e, r, a, {
       skipResponsive: !1,
       recurseOnlySingleLayer: !0,
       noRecurse: !1
@@ -3133,7 +3133,7 @@ async function tJ() {
     }, !0);
   }
   figma.currentPage.selection = [i];
-  aJ([i], e, r, a);
+  processVerticesLayout([i], e, r, a);
 }
 async function t0() {
   let e = figma.currentPage.selection;
@@ -3927,7 +3927,7 @@ export function generateFullscreenMenuItems(e) {
       name: 'save-as',
       callback: (e, i, n) => {
         let r = () => {
-          Dc(hV.SaveLocalFile, t, n, e, ['0:0'], 'save-as');
+          initiateSaveAs(ExportOption.SaveLocalFile, t, n, e, ['0:0'], 'save-as');
           logFileSaveAs();
         };
         c ? function ({
@@ -4005,14 +4005,14 @@ export function generateFullscreenMenuItems(e) {
     }(!!d), {
       name: 'export-all-frames-to-pdf',
       callback: (e, i, n) => {
-        mU(t, n, e);
+        exportAllFramesToPdf(t, n, e);
       },
       flags: ['view_restricted', 'design', '!slides', 'dev_handoff', '!recovery', '!limited_dev_mode'],
       featureFlags: []
     }, {
       name: 'export-slides-to',
       callback: (e, i, n) => {
-        mU(t, n, e);
+        exportAllFramesToPdf(t, n, e);
       },
       searchSynonyms: [getI18nString('fullscreen.export.export_to_pptx'), getI18nString('fullscreen.export.export_to_pdf')],
       flags: ['view_restricted', 'slides']
@@ -4563,7 +4563,7 @@ export function generateFullscreenMenuItems(e) {
         action: 'toggle-outlines',
         property: getCanvasViewState().showOutlines,
         propertyValue: !0,
-        shortcutText: c1(debugState.getState().mirror.appModel.keyboardShortcuts, 'toggle-outlines'),
+        shortcutText: getKeyboardShortcut(debugState.getState().mirror.appModel.keyboardShortcuts, 'toggle-outlines'),
         featureFlags: []
       }, {
         separator: !0
@@ -5185,7 +5185,7 @@ export function generateFullscreenMenuItems(e) {
       action: 'outline-stroke',
       iconType: createElement(Z),
       flags: ['design', 'edit', 'sites', 'slides', 'cooper'],
-      shortcutText: c1(debugState.getState().mirror.appModel.keyboardShortcuts, 'outline-stroke'),
+      shortcutText: getKeyboardShortcut(debugState.getState().mirror.appModel.keyboardShortcuts, 'outline-stroke'),
       featureFlags: []
     }, {
       name: 'boolean-menu',
@@ -5825,14 +5825,14 @@ export function generateFullscreenMenuItems(e) {
     }, {
       name: 'open-links-in-desktop-app',
       get checked() {
-        return _$$N7.isAutoOpenEnabled();
+        return OpenDesktopAppModal.isAutoOpenEnabled();
       },
       callback: () => {
-        _$$N7.toggleAutoOpen();
+        OpenDesktopAppModal.toggleAutoOpen();
       },
       flags: getFeatureFlags().desktop_use_db_auto_open_pref ? [] : ['!desktop'],
       get platforms() {
-        return _$$N7.shouldShowOnce() ? [] : ['mac', 'windows'];
+        return OpenDesktopAppModal.shouldShowOnce() ? [] : ['mac', 'windows'];
       },
       featureFlags: []
     }, ...(desktopAPIInstance?.hasFeature('addCodegenMCPStartupBinding') && getFeatureFlags().show_mcp_server_upsell && !mcpArgs?.canStartCodegenMcpServer && fileMenuArgs?.openFile?.plan?.tier === FPlanNameType.STARTER ? [{

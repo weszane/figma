@@ -1,6 +1,6 @@
 import { aalSettingsConfig } from "../905/55273";
 import { isApproximatelyEqual, EPSILON, calculateTransformedBoundingBox } from "../905/259345";
-import { aJ, Oc, Rm } from "../905/449579";
+import { processVerticesLayout, VertexNodeMap, logVerMessage } from "../905/449579";
 import { logger } from "../905/651849";
 function s(e) {
   aalSettingsConfig.LOG_RESPONSIVE && logger.log(e);
@@ -335,8 +335,8 @@ async function y(e, t, i, r) {
   }), c.noRecurse = !0) : "children" in e[0] && e[0].children.forEach(e => {
     d(e);
   }));
-  let u = new Oc();
-  let p = aJ(e, i || figma, u, {
+  let u = new VertexNodeMap();
+  let p = processVerticesLayout(e, i || figma, u, {
     value: r || 1
   }, c);
   t?.skipResponsive || (await _(p, i || figma, [...l]));
@@ -378,7 +378,7 @@ async function v(e, t, i) {
   return (await Promise.all(e.map(async e => {
     if (e.type === "FRAME" || e.type === "GROUP" || e.type === "INSTANCE" || e.type === "COMPONENT") {
       let r = !1;
-      e.type !== "GROUP" && n.mixed !== e.fills && e.fills.length === 0 && (Rm("destroy-structure-from-selection", `setting fills to white. Node name: ${e.name}`, 4), e.fills = [n.util.solidPaint("#FFFFFF")], r = !0);
+      e.type !== "GROUP" && n.mixed !== e.fills && e.fills.length === 0 && (logVerMessage("destroy-structure-from-selection", `setting fills to white. Node name: ${e.name}`, 4), e.fills = [n.util.solidPaint("#FFFFFF")], r = !0);
       let a = await b(e, t, i);
       e.type !== "GROUP" && r && (e.fills = []);
       return a;
@@ -412,7 +412,7 @@ export function $$x4(e, t) {
   let i = t || figma;
   let s = e.map(e => i.getNodeById(e)).filter(e => e);
   let o = (s.length === 1 && s[0] && "children" in s[0] ? s[0].children : s).filter(e => e.visible);
-  return !!(s.length === 1 && o.length <= 1 || s.find(e => e.type === "COMPONENT_SET") || o.find(e => e.type === "COMPONENT_SET")) || (o.length <= 1 ? (Rm("shouldRunSimpleStackDetection", "Single node in selection, returning true", 1), !0) : !function (e) {
+  return !!(s.length === 1 && o.length <= 1 || s.find(e => e.type === "COMPONENT_SET") || o.find(e => e.type === "COMPONENT_SET")) || (o.length <= 1 ? (logVerMessage("shouldRunSimpleStackDetection", "Single node in selection, returning true", 1), !0) : !function (e) {
     if (e.length < 2) return !1;
     try {
       let t = -Number.MAX_VALUE;
@@ -443,7 +443,7 @@ export function $$x4(e, t) {
         return a / s > aalSettingsConfig.TIDY_UP_OVERLAP_THRESHOLD;
       });
       if (l.every(Boolean) && d.every(Boolean)) {
-        Rm("shouldTidySelectionSingleDimension:", "All nodes overlap in both dimensions. Ret true", 3);
+        logVerMessage("shouldTidySelectionSingleDimension:", "All nodes overlap in both dimensions. Ret true", 3);
         return !0;
       }
       let c = calculateTransformedBoundingBox(e);
@@ -475,7 +475,7 @@ export function $$x4(e, t) {
           r.bottom < a.top ? t.push(!1) : t.push(!0);
         }
         if (t.every(e => !e) && e.every(e => !e)) {
-          Rm("shouldTidySelectionSingleDimension:", "diagonal selection detected, returning true", 3);
+          logVerMessage("shouldTidySelectionSingleDimension:", "diagonal selection detected, returning true", 3);
           return !0;
         }
       }
@@ -491,11 +491,11 @@ export function $$x4(e, t) {
           let n = o.get(u[e].id);
           let a = i.left - n.right;
           if (Math.abs(a - t) / t > aalSettingsConfig.HORIZONTAL_TIDY_UP_SPACING_EQUALITY_THRESHOLD) {
-            Rm("shouldTidySelectionSingleDimension:", `width spacing check failed between node ordered ${e} - ${e + 1}`, 3);
+            logVerMessage("shouldTidySelectionSingleDimension:", `width spacing check failed between node ordered ${e} - ${e + 1}`, 3);
             return !1;
           }
         }
-        Rm("shouldTidySelectionSingleDimension:", "width spacing check passed", 3);
+        logVerMessage("shouldTidySelectionSingleDimension:", "width spacing check passed", 3);
         return !0;
       }
       if (d.every(Boolean)) {
@@ -510,19 +510,19 @@ export function $$x4(e, t) {
           let n = o.get(p[e].id);
           let a = i.top - n.bottom;
           if (Math.abs(a - t) / t > aalSettingsConfig.VERTICAL_TIDY_UP_SPACING_EQUALITY_THRESHOLD) {
-            Rm("shouldTidySelectionSingleDimension:", `height spacing check failed between node ordered ${e} - ${e + 1}`, 3);
+            logVerMessage("shouldTidySelectionSingleDimension:", `height spacing check failed between node ordered ${e} - ${e + 1}`, 3);
             return !1;
           }
         }
-        Rm("shouldTidySelectionSingleDimension:", "height spacing check passed", 3);
+        logVerMessage("shouldTidySelectionSingleDimension:", "height spacing check passed", 3);
         return !0;
       }
     } catch (e) {
       logger.info("failed on checking shouldTidySelectionSingleDimension with error: ", e);
     }
-    Rm("shouldTidySelectionSingleDimension", "fallthrough, return false", 3);
+    logVerMessage("shouldTidySelectionSingleDimension", "fallthrough, return false", 3);
     return !1;
-  }(o) ? (Rm("shouldRunSimpleStackDetection", "exiting with return false", 1), !1) : (Rm("shouldRunSimpleStackDetection", "shouldTidySelectionSingleDimension() returned true", 1), !0));
+  }(o) ? (logVerMessage("shouldRunSimpleStackDetection", "exiting with return false", 1), !1) : (logVerMessage("shouldRunSimpleStackDetection", "shouldTidySelectionSingleDimension() returned true", 1), !0));
 }
 export async function $$S1(e, t, i) {
   let n = e || figma;

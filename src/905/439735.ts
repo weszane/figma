@@ -6,7 +6,7 @@ import { Spacing } from "../figma_app/637027";
 import { KeyboardShortcut } from "../figma_app/420927";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { formatI18nMessage } from "../905/482208";
-import { c1 } from "../figma_app/357047";
+import { getKeyboardShortcut } from "../figma_app/357047";
 import { TT, oo } from "../905/114390";
 var s = a;
 function h({
@@ -51,7 +51,7 @@ export function $$g0({
   let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let i = camelToKebab(e);
   let a = formatI18nMessage(i);
-  let g = c1(t, i);
+  let g = getKeyboardShortcut(t, i);
   let f = TT.includes(e) ? oo[e]?.getDescription() : null;
   return jsxs("div", {
     className: s()(cssBuilderInstance.flex.flexColumn.colorBg.$, "animated_tooltip--contentWrapper--lL3Ks"),

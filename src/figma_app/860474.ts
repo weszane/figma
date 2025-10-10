@@ -10,7 +10,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { setCanvasSearchMode } from "../figma_app/712525";
 import { H1, z, XJ, X0 } from "../figma_app/451700";
-import { kM } from "../figma_app/421886";
+import { NodeType } from "../figma_app/421886";
 import { getAnnotationCategoryLabel } from "../figma_app/781512";
 export let $$$$n1;
 export function $$E0(e) {
@@ -28,8 +28,8 @@ export function $$E0(e) {
     },
     getTextMatches(t, r) {
       let {
-        [kM.MatchCase]: n = !1,
-        [kM.WholeWords]: i = !1
+        [NodeType.MatchCase]: n = !1,
+        [NodeType.WholeWords]: i = !1
       } = e.getState().canvasSearch.filters;
       let a = {
         useExtendedSearch: !0,

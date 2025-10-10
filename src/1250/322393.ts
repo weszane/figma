@@ -5,7 +5,7 @@ import { getI18nString } from '../905/303541';
 import { useLibraries } from '../905/420347';
 import { handleAtomEvent } from '../905/502364';
 import { Vector2D } from '../905/512402';
-import { j as _$$j } from '../905/521149';
+import { useAllowInternalTemplatesCooper } from '../905/521149';
 import { getResourceDataOrFallback } from '../905/663269';
 import { getSingletonSceneGraph } from '../905/700578';
 import { l as _$$l } from '../905/716947';
@@ -14,7 +14,7 @@ import { qA } from '../1250/182479';
 import { go } from '../1250/447088';
 import { Z } from '../1250/621895';
 import { V as _$$V } from '../1250/993385';
-import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
+import { useAtomValueAndSetter, useSetAtom } from '../figma_app/27355';
 import { LibraryComponentDataByLibraryKey } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
 import { u as _$$u } from '../figma_app/187359';
@@ -29,7 +29,7 @@ import { useIsProOrStudentPlan, useCurrentPublicPlan } from '../figma_app/465071
 import { useCurrentFileKey } from '../figma_app/516028';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
-import { Gi, qY } from '../figma_app/622574';
+import { getCurrentTemplateEntity, useSearchTemplates } from '../figma_app/622574';
 import { useSceneGraphSelector } from '../figma_app/722362';
 import { setNodeExpanded } from '../figma_app/741237';
 import { templateSearchQueryAtomFamily, isTemplateFavoriteAtomFamily, isTemplateEditableAtomFamily, isTemplateDetailsVisibleAtomFamily, updateTemplateMetadataAtom, TemplateSourceType, isTemplateSearchEnabledAtomFamily, isTemplateUsedAtomFamily } from '../figma_app/755939';
@@ -115,15 +115,15 @@ export function $$J18() {
   let m = n.trim();
   let [h] = useDebounce(m, 200);
   let b = $$Z20();
-  let x = Gi();
+  let x = getCurrentTemplateEntity();
   let {
     teamTemplates,
     requestLoadMore,
     status
-  } = qY(h, FFileType.COOPER, b === 'NEW_FILE_MODAL' ? 16 : 10);
+  } = useSearchTemplates(h, FFileType.COOPER, b === 'NEW_FILE_MODAL' ? 16 : 10);
   let E = useCurrentPublicPlan('useCooperTemplatesSearch');
   let C = useIsProOrStudentPlan(E).unwrapOr(!1);
-  let I = _$$j();
+  let I = useAllowInternalTemplatesCooper();
   let N = x?.type === 'team' && C;
   let O = x?.type === 'org' ? x.entity.id : void 0;
   let R = N ? x.entity.id : void 0;
@@ -176,7 +176,7 @@ export function $$J18() {
   };
 }
 export function $$ee13(e) {
-  let t = Xr(isTemplateSearchEnabledAtomFamily);
+  let t = useSetAtom(isTemplateSearchEnabledAtomFamily);
   let n = Z('cooper_template_picker_dismissed');
   let i = useSelector(e => e.search.sessionId);
   let l = useDispatch<AppDispatch>();
@@ -199,8 +199,8 @@ export function $$ee13(e) {
   }, [t, n, e, i, l]);
 }
 export function $$et11() {
-  let e = Xr(isTemplateSearchEnabledAtomFamily);
-  let t = Xr(isTemplateDetailsVisibleAtomFamily);
+  let e = useSetAtom(isTemplateSearchEnabledAtomFamily);
+  let t = useSetAtom(isTemplateDetailsVisibleAtomFamily);
   let n = useCurrentFileKey();
   return useCallback(() => {
     n && (t(!0), e(!1), AppStateTsApi?.cooperFocusView().exitFocusedNodeView(), AppStateTsApi?.cooperFocusView().zoomToGrid(0));
@@ -209,7 +209,7 @@ export function $$et11() {
 export function $$en6({
   library: e
 }) {
-  let t = Xr(isTemplateSearchEnabledAtomFamily);
+  let t = useSetAtom(isTemplateSearchEnabledAtomFamily);
   let n = useCurrentFileKey();
   let i = useDispatch<AppDispatch>();
   let s = function (e) {

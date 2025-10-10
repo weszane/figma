@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { vF } from "../vendor/150583";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { getAtomMutate, setupResourceAtomHandler } from "../figma_app/566371";
 import { useSprigWithSampling } from "../905/99656";
@@ -86,7 +86,7 @@ export function $$E2({
       });
     }, [directories, e, r]);
   }();
-  let W = Xr(mO);
+  let W = useSetAtom(mO);
   let Y = trackDefinedFileEventWithStore();
   let j = useCallback(e => {
     if (void 0 !== e) for (let o = e + 1; o < x.current.length; o++) {

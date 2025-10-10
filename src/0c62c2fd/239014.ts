@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { o as _$$o } from "../905/530496";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { z } from "../905/239603";
 import c from "classnames";
@@ -32,7 +32,7 @@ export function $$E0({
 }) {
   let c = selectCurrentFile();
   let _ = trackDefinedFileEventWithStore();
-  let p = Xr(qp);
+  let p = useSetAtom(qp);
   if (!c || !t.current || !e.current) return null;
   let g = t.current.getBoundingClientRect().left + t.current.getBoundingClientRect().width;
   let w = g - 16;

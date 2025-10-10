@@ -9,7 +9,7 @@ import c from "classnames";
 import { Y1 } from "../905/143116";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
-import { ms, c$ } from "../figma_app/236327";
+import { DropdownContainer, OptionComponent } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../figma_app/11182";
@@ -20,7 +20,7 @@ import { convertToRgba } from "../905/862913";
 import { useDropdownState } from "../905/848862";
 import { getTemplateActionLabel } from "../figma_app/198840";
 import { FileCanView } from "../figma_app/43951";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { zq, FK, zx, Wf } from "../figma_app/961422";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { i as _$$i } from "../figma_app/566312";
@@ -56,18 +56,18 @@ function k({
     duplicateLink,
     primaryKey
   } = fG()(e);
-  let d = e.type === _$$n.TeamTemplate;
+  let d = e.type === TeamTemplateType.TeamTemplate;
   let c = useSubscription(FileCanView, {
     key: primaryKey
   }, {
     enabled: d
   });
-  return jsxs(ms, {
+  return jsxs(DropdownContainer, {
     style: {
       ...t,
       position: "fixed"
     },
-    children: [jsx(c$, {
+    children: [jsx(OptionComponent, {
       onClick: () => {
         r(hideDropdownAction());
         r(_$$S({
@@ -75,7 +75,7 @@ function k({
         }));
       },
       children: renderI18nText("browse_templates_modal.context_menu.copy_link")
-    }), viewSourceFileUrl && d && jsx(c$, {
+    }), viewSourceFileUrl && d && jsx(OptionComponent, {
       onClick: () => {
         r(hideDropdownAction());
         customHistory.redirect(viewSourceFileUrl, "_blank");
@@ -152,11 +152,11 @@ export function $$F4(e) {
   return jsx($$M0, {
     template: {
       template: t,
-      type: _$$n.HubFile
+      type: TeamTemplateType.HubFile
     },
     onInsert: () => e.onInsert({
       template: t,
-      type: _$$n.HubFile
+      type: TeamTemplateType.HubFile
     }),
     isInsertingTemplate: e.isInsertingTemplate,
     onPreview: e.previewHubFile,

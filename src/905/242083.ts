@@ -103,7 +103,7 @@ import { formatI18nMessage } from '../905/482208';
 import { Vy, zT } from '../905/484695';
 import { sendHistogram } from '../905/485103';
 import { as as _$$as, Dl } from '../905/487011';
-import { bL as _$$bL2, c$, l9, mc } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer } from '../905/493196';
 import { J as _$$J4 } from '../905/494216';
 import { k as _$$k3 } from '../905/498777';
 import { handleAtomEvent } from '../905/502364';
@@ -120,7 +120,7 @@ import { h as _$$h4 } from '../905/537858';
 import { P as _$$P2 } from '../905/540614';
 import { reactTimerGroup } from '../905/542194';
 import { r6 as _$$r } from '../905/542608';
-import { fJ, x5 } from '../905/543054';
+import { initializeSupportedLanguages, determineCurrentSpellCheckEngine } from '../905/543054';
 import { xK } from '../905/543466';
 import { updateAppCapabilities } from '../905/544669';
 import { PluginApiMetrics } from '../905/545265';
@@ -163,13 +163,13 @@ import { EventEmitter } from '../905/690073';
 import { isFigmaDomain, replaceColonWithDash } from '../905/691205';
 import { getSingletonSceneGraph, ReduxSceneGraph } from '../905/700578';
 import { createPluginContext as _$$e8 } from '../905/700654';
-import { X as _$$X } from '../905/701807';
+import { handleFullscreenDocumentLoaded } from '../905/701807';
 import { y as _$$y } from '../905/705736';
 import { replaceThumbnailsOptimist } from '../905/711212';
 import { setComponentPropBindings } from '../905/714160';
 import { logDebug, logError, logInfo, logWarning } from '../905/714362';
 import { SvgComponent } from '../905/714743';
-import { jk as _$$jk } from '../905/715541';
+import { getSpellCheckWorker } from '../905/715541';
 import { l as _$$l } from '../905/716947';
 import { A as _$$A6 } from '../905/721854';
 import { xP as _$$xP, d_, Gh } from '../905/727576';
@@ -179,7 +179,7 @@ import { c as _$$c3, s as _$$s7 } from '../905/744710';
 import { useWindowDimensions } from '../905/745972';
 import { DraggableModalManager } from '../905/748636';
 import { AuthModal } from '../905/749159';
-import { y as _$$y5 } from '../905/749689';
+import { toggleUseNumbersForOpacity } from '../905/749689';
 import { generateRandomID, handlePluginError, pluginState } from '../905/753206';
 import { setScenegraphStringManagementBindings } from '../905/755627';
 import { Z as _$$Z } from '../905/757420';
@@ -231,7 +231,7 @@ import { parse, unparse } from '../905/945633';
 import { AssetTabType, ExtensionFeatureKey } from '../905/946805';
 import { $3 } from '../905/946937';
 import { DEFAULT_PICKER_WIDTH } from '../905/959568';
-import { L as _$$L } from '../905/970585';
+import { MultiplayerController } from '../905/970585';
 import { n as _$$n5 } from '../905/971006';
 import { setupMultiplayerSession } from '../905/977824';
 import { postUserFlag } from '../905/985254';
@@ -272,7 +272,7 @@ import { isQaSearchFrecencyEnabled } from '../figma_app/144974';
 import { addWhiteboardToolToRecentsAction, addWidgetToRecentsThunk } from '../figma_app/147952';
 import { H as _$$H } from '../figma_app/147959';
 import { sendWebGLInitializationAnalytics } from '../figma_app/149304';
-import { Dc as _$$Dc, hV } from '../figma_app/151766';
+import { initiateSaveAs, ExportOption } from '../figma_app/151766';
 import { getTimeRemaining } from '../figma_app/152368';
 import { hasLocalFileId, ManifestEditorType, PluginInstallStatus } from '../figma_app/155287';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
@@ -292,7 +292,7 @@ import { initializeFullscreenConfig } from '../figma_app/204937';
 import { no as _$$no } from '../figma_app/209965';
 import { YL } from '../figma_app/213643';
 import { Wj } from '../figma_app/224338';
-import { N as _$$N3 } from '../figma_app/240060';
+import { OpenDesktopAppModal } from '../figma_app/240060';
 import { initializeMouseEventManager } from '../figma_app/242565';
 import { mr, U2 } from '../figma_app/247611';
 import { hasJubileePermissionForWhiteboard } from '../figma_app/251115';
@@ -322,7 +322,7 @@ import { hasTeamPaidAccess } from '../figma_app/345997';
 import { Qy, v$ } from '../figma_app/347120';
 import { determineFrameType, isMobileDevice } from '../figma_app/349969';
 import { KE as _$$KE } from '../figma_app/351862';
-import { pi as _$$pi, TY, Yh } from '../figma_app/357047';
+import { FULLSCREEN_MENU_DROPDOWN, isFullscreenMenuDropdown, isActionEnabled } from '../figma_app/357047';
 import { pH } from '../figma_app/357433';
 import { IU } from '../figma_app/357655';
 import { getI18nState } from '../figma_app/363242';
@@ -336,7 +336,7 @@ import { initializeShadowReadReporter } from '../figma_app/391338';
 import { g as _$$g6 } from '../figma_app/398051';
 import { sn as _$$sn, hf } from '../figma_app/407856';
 import { figmaReady } from '../figma_app/415217';
-import { bi as _$$bi, hg } from '../figma_app/425489';
+import { InlineModalStatus, inlinePreviewReducer } from '../figma_app/425489';
 import { cortexAPI } from '../figma_app/432652';
 import { initializeEmojiWheelManager } from '../figma_app/442259';
 import { U as _$$U } from '../figma_app/449815';
@@ -2877,21 +2877,21 @@ let aO = registerModal(e => {
             htmlFor: 'export-settings-file-type',
             children: getI18nString('fullscreen.export.export_file_type')
           }),
-          input: jsxs(_$$bL2, {
+          input: jsxs(SelectGroupLabel, {
             onChange: e => {
               m(e);
             },
             value: p,
-            children: [jsx(l9, {
+            children: [jsx(SelectSeparator, {
               label: jsx(HiddenLabel, {
                 children: getI18nString('fullscreen.export.export_file_type')
               }),
               width: 'fill'
-            }), jsxs(mc, {
-              children: [jsx(c$, {
+            }), jsxs(SelectContainer, {
+              children: [jsx(SelectOptionReset, {
                 value: 'pdf',
                 children: aL().format('pdf')
-              }), jsx(c$, {
+              }), jsx(SelectOptionReset, {
                 value: 'pptx',
                 children: aL().format('pptx')
               })]
@@ -4000,12 +4000,12 @@ class oo {
         }
       case 'toggle-inline-preview':
         let t = e.payload.source === 'toolbar' ? 'button' : e.payload.source;
-        atomStoreManager.get(hg).modalStatus === _$$bi.OPEN ? (this._store.dispatch(trackDefinedFileEventWrapper({
+        atomStoreManager.get(inlinePreviewReducer).modalStatus === InlineModalStatus.OPEN ? (this._store.dispatch(trackDefinedFileEventWrapper({
           name: 'prototype.close_inline_viewer',
           params: {
             source: t
           }
-        })), atomStoreManager.set(hg, {
+        })), atomStoreManager.set(inlinePreviewReducer, {
           type: 'CLOSE_INLINE_PREVIEW'
         })) : this._openPrototype({
           source: t,
@@ -4059,7 +4059,7 @@ class oo {
         break;
       case 'inline-preview-reset-size':
         let i = selectSceneGraph(this._store.getState());
-        atomStoreManager.set(hg, {
+        atomStoreManager.set(inlinePreviewReducer, {
           type: 'CHANGE_DEVICE_FRAME',
           payload: {
             sceneGraph: i,
@@ -5406,7 +5406,7 @@ export function $$lq1(e, t, i, n) {
     setInputValue(new sB(t));
     setUserValue(new OutOfMemoryHandler(t));
     setSessionValue(new _$$Z3(t));
-    setFlagValue(new _$$L(t));
+    setFlagValue(new MultiplayerController(t));
     setAdditionalValue(new oq());
     Zb(t);
     gh();
@@ -5443,7 +5443,7 @@ export function $$lq1(e, t, i, n) {
     YL();
     _$$bJ();
     jx(t);
-    _$$y5(i);
+    toggleUseNumbersForOpacity(i);
     _$$no();
     initializeMissingFontTracker();
     initializeFullscreenConfig();
@@ -5530,7 +5530,7 @@ let lX = class e extends WithFullscreenFunctionality {
       let t = isInteractionPathCheck();
       if (this._readyStartTime = window.performance.now(), fullscreenPerfManager.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), canOpenUrlInDesktop(location.href).then(e => {
         this._isDesktopAppRunning = e;
-        e && _$$N3.shouldShowOnce() && this._store.dispatch(showOpenDesktopAppModal(PluginRunForContext.FOR_OPEN));
+        e && OpenDesktopAppModal.shouldShowOnce() && this._store.dispatch(showOpenDesktopAppModal(PluginRunForContext.FOR_OPEN));
       }), e.prepareSpellCheck(), t && console.log('isMacDebugApp', isFigmaNativeApp), isFigmaNativeApp) {
         await this.onReady();
         Fullscreen?.debugMacAppIsStartingFullscreen();
@@ -5683,9 +5683,9 @@ let lX = class e extends WithFullscreenFunctionality {
         return;
       }
       if (e === SettingsAction.PREFERENCES) {
-        if (TY(this._state.dropdownShown)) {
+        if (isFullscreenMenuDropdown(this._state.dropdownShown)) {
           this.dispatch(updateDropdownSelectionAction({
-            type: _$$pi,
+            type: FULLSCREEN_MENU_DROPDOWN,
             data: {
               selectionToUpdate: SettingsAction.PREFERENCES
             }
@@ -5693,7 +5693,7 @@ let lX = class e extends WithFullscreenFunctionality {
         } else {
           let t = this._state.mirror.appModel.showUi ? 42 : 0;
           this.dispatch(showDropdownThunk({
-            type: _$$pi,
+            type: FULLSCREEN_MENU_DROPDOWN,
             data: {
               targetRect: {
                 top: 0,
@@ -5817,9 +5817,9 @@ let lX = class e extends WithFullscreenFunctionality {
   }
   static prepareSpellCheck() {
     BrowserInfo.isIpad || (migrateLegacySpellCheckLanguage(), (async () => {
-      let e = await x5();
-      fJ(e);
-      e === SpellCheckEngine.HUNSPELL && _$$jk();
+      let e = await determineCurrentSpellCheckEngine();
+      initializeSupportedLanguages(e);
+      e === SpellCheckEngine.HUNSPELL && getSpellCheckWorker();
     })());
   }
   showFragmentSearchSuggestion() {
@@ -5918,7 +5918,7 @@ let lX = class e extends WithFullscreenFunctionality {
       });
       openUrlInDesktop(location.href, DesktopModalType.FULLSCREEN_MENU).then(t => {
         t && _$$s5.shouldShowOnce() && Promise.race([e, delay(3e3)]).then(() => {
-          _$$N3.disableAutoOpenIfUnset();
+          OpenDesktopAppModal.disableAutoOpenIfUnset();
           this._store.dispatch(showOpenDesktopAppModal(PluginRunForContext.FOR_MENU));
         });
       });
@@ -6595,7 +6595,7 @@ let lX = class e extends WithFullscreenFunctionality {
       if (l > 1) return;
     } else if (e === 'box_selection') {
       for (let e of a) l += Yg(e);
-      if (l > 0 || !Yh(this._state.mirror.appModel, 'magic-link')) return;
+      if (l > 0 || !isActionEnabled(this._state.mirror.appModel, 'magic-link')) return;
     }
     (r.length !== 1 || !(o.length < 2)) && this._state.openFile.canEdit && _$$iP(JT.MAGIC_LINK, {
       source: e
@@ -7079,7 +7079,7 @@ let lX = class e extends WithFullscreenFunctionality {
         logAutosaveErrorWithOriginalMessage('Unable to enable autosave for new file', e);
       });
     }
-    this.dispatch(_$$X());
+    this.dispatch(handleFullscreenDocumentLoaded());
     fullscreenAlias.getIsExtension() && figmaReady();
     e.maybeEnterRecoveryMode(this._store);
     this._figFileLoadPromise.then(e => {
@@ -8244,15 +8244,15 @@ let lX = class e extends WithFullscreenFunctionality {
     let i = Object.keys(this._store.getState().mirror.sceneGraphSelection);
     switch (e) {
       case ImageFormat.PNG:
-        t = hV.CopyAsPNG;
+        t = ExportOption.CopyAsPNG;
         break;
       case ImageFormat.SVG:
-        t = hV.CopyAsSVG;
+        t = ExportOption.CopyAsSVG;
         break;
       case ImageFormat.RASTERIZE:
-        t = hV.RasterizeSelection;
+        t = ExportOption.RasterizeSelection;
     }
-    _$$Dc(t, debugState.getState().saveAsState, this.dispatch, () => e === ImageFormat.RASTERIZE ? permissionScopeHandler.user('rasterize', () => Fullscreen?.completeExportAction(e)) : Fullscreen?.completeExportAction(e), i, 'copy for export');
+    initiateSaveAs(t, debugState.getState().saveAsState, this.dispatch, () => e === ImageFormat.RASTERIZE ? permissionScopeHandler.user('rasterize', () => Fullscreen?.completeExportAction(e)) : Fullscreen?.completeExportAction(e), i, 'copy for export');
   }
   sendEventToWebEventListener(e) {
     handleAtomEvent({

@@ -17,7 +17,7 @@ import { bL } from "../905/246123";
 import { fI } from "../905/201252";
 import { fh } from "../905/127493";
 import { HiddenLabel } from "../905/270045";
-import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { T as _$$T } from "../905/68180";
 import { K as _$$K2 } from "../905/621139";
 import { FormattedInputRoot, FormattedInputField } from "../905/4410";
@@ -72,9 +72,9 @@ import { If, _i } from "../figma_app/319440";
 import { x as _$$x } from "../573/916234";
 import { B as _$$B2 } from "../7a72fc59/288229";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e2 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
 import { DrawDesignFollowupOnboarding } from "../figma_app/6204";
@@ -265,7 +265,7 @@ function L({
       })
     }), jsx(fh, {
       className: "grid_tracks_panel--rightInput--wjOuc",
-      children: jsxs(_$$bL, {
+      children: jsxs(SelectGroupLabel, {
         onChange: e => {
           e && a(+e);
         },
@@ -273,19 +273,19 @@ function L({
           e && o(!0);
         },
         value: r.toString(),
-        children: [jsx(l9, {
+        children: [jsx(SelectSeparator, {
           width: "fill",
           label: jsx(HiddenLabel, {
             children: getI18nString("fullscreen.properties_panel.grid.track_sizing")
           })
-        }), jsxs(mc, {
-          children: [jsx(c$, {
+        }), jsxs(SelectContainer, {
+          children: [jsx(SelectOptionReset, {
             value: LayoutSizingType.FIXED.toString(),
             children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed")
-          }), jsx(c$, {
+          }), jsx(SelectOptionReset, {
             value: LayoutSizingType.FLEX.toString(),
             children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill")
-          }), jsx(c$, {
+          }), jsx(SelectOptionReset, {
             value: LayoutSizingType.HUG.toString(),
             children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug")
           })]
@@ -382,9 +382,9 @@ function eD(e) {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: DrawDesignFollowupOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [n]);
   useEffect(() => {
     panelsShown && show({

@@ -42,7 +42,7 @@ import { fileEntityDataMapper } from '../905/943101';
 import { nk } from '../figma_app/2023';
 import { copyLinkThunk } from '../figma_app/11182';
 import { isExternalRestricted } from '../figma_app/12796';
-import { useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { copyShareLinkOptimistic } from '../figma_app/78808';
 import { yN } from '../figma_app/88484';
 import { GI } from '../figma_app/147337';
@@ -60,7 +60,7 @@ import { TileType, TileUtils, renamingStateAtom } from '../figma_app/543100';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { pinFileThunk, unpinFileThunk } from '../figma_app/598926';
-import { UF } from '../figma_app/622574';
+import { canPublishToTeam } from '../figma_app/622574';
 import { Z as _$$Z } from '../figma_app/640519';
 import { wH } from '../figma_app/680166';
 import { Cp, jB, Px, zS } from '../figma_app/722141';
@@ -328,7 +328,7 @@ export function $$ek0(e) {
         }));
     }
   };
-  let te = Xr(renamingStateAtom);
+  let te = useSetAtom(renamingStateAtom);
   let tt = e => {
     te({
       type: 'FILE',
@@ -1085,7 +1085,7 @@ export function $$ek0(e) {
       },
       [eC.PUBLISH_ORG_TEMPLATE]: () => {
         let i = !!tH?.canEdit;
-        let n = tG && UF({
+        let n = tG && canPublishToTeam({
           fileCanEdit: i,
           editor_type: tG.editorType,
           team_id: tG.teamId,

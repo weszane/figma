@@ -6,7 +6,7 @@ import o from "../vendor/128080";
 import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
-import { c$, wv, MM } from "../figma_app/236327";
+import { OptionComponent, SeparatorComponent, CheckableOptionComponent } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { useDropdown } from "../905/848862";
 import { PointingDropdown } from "../905/504727";
@@ -162,7 +162,7 @@ function v(e) {
       options: e.items.map((t, r) => {
         switch (t.type) {
           case "header":
-            return jsx(c$, {
+            return jsx(OptionComponent, {
               disabled: !0,
               children: jsx("div", {
                 className: cssBuilderInstance.overflowHidden.ellipsis.block.$,
@@ -170,9 +170,9 @@ function v(e) {
               })
             }, r);
           case "separator":
-            return jsx(wv, {}, r);
+            return jsx(SeparatorComponent, {}, r);
           case "option":
-            return jsx(c$, {
+            return jsx(OptionComponent, {
               disabled: t.disabled,
               onClick: () => x(t),
               children: jsx("div", {
@@ -181,7 +181,7 @@ function v(e) {
               })
             }, r);
           case "checkableOption":
-            return jsx(MM, {
+            return jsx(CheckableOptionComponent, {
               disabled: t.disabled,
               onClick: () => x(t),
               checked: l()(e.selected, t.value),

@@ -16,7 +16,7 @@ import { desktopAPIInstance } from "../figma_app/876459"
 export const setSaveStatus = createActionCreator("SET_SAVE_STATUS")
 
 // Thunk for handling save status updates
-const handleSaveStatusUpdate = createOptimistThunk(({dispatch}, saveStatus) => {
+export const handleSaveStatusUpdate = createOptimistThunk(({dispatch}, saveStatus) => {
   // Update desktop API save status if available and not in file browser tab
   if (desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab()) {
     const isSaved = !saveStatus.hasUnsavedChanges

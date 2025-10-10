@@ -18,6 +18,7 @@ import { getUserSkinToneShortcode, isEmojiModifierBase, splitEmojiAndSkinTone } 
 import { ConfirmCommentMentionModal } from '../905/431747'
 import { openResiger } from '../905/438683'
 import { trackEventAnalytics } from '../905/449184'
+import { atomStoreManager } from '../905/490038'
 import { FlashActions, handlePromiseError } from '../905/573154'
 import { getFeatureFlags } from '../905/601108'
 import { calculateCommentPinViewport } from '../905/617605'
@@ -31,8 +32,8 @@ import { createAttachmentsLookup, createEmptyLookup } from '../905/901964'
 import { sendWithRetry } from '../905/910117'
 import { selectViewAction } from '../905/929976'
 import { recordsWithRemove } from '../905/963222'
+
 import { postUserFlag } from '../905/985254'
-import { atomStoreManager } from '../figma_app/27355'
 import { getFileKeyFromSelectedView } from '../figma_app/193867'
 import { trackFileEvent } from '../figma_app/314264'
 import { fullscreenValue } from '../figma_app/455680'
@@ -983,7 +984,7 @@ export let deactivateActiveComment = createOptimistThunk((context, payload: any)
  * Sets a new comment as active
  * @origin $$es0
  */
-let setNewCommentActive = createActionCreator('COMMENTS_SET_NEW_COMMENT_ACTIVE')
+export let setNewCommentActive = createActionCreator('COMMENTS_SET_NEW_COMMENT_ACTIVE')
 
 /**
  * Activates a new comment
@@ -1073,24 +1074,24 @@ export let createCommentReply = createOptimistThunk((context, payload: CreateCom
     if (data && Object.prototype.hasOwnProperty.call(data, 'message') && data.message && data.message.is_new_file_follower) {
       const manageButton = commentsConfiguration.showNotificationSettings
         ? {
-          text: getI18nString('comments.manage'),
-          action: () => {
-            const freshState = getState()
-            dispatch(deactivateActiveComment())
+            text: getI18nString('comments.manage'),
+            action: () => {
+              const freshState = getState()
+              dispatch(deactivateActiveComment())
 
-            if (!freshState.mirror.appModel.showUi) {
-              fullscreenValue.triggerAction('toggle-ui')
-            }
+              if (!freshState.mirror.appModel.showUi) {
+                fullscreenValue.triggerAction('toggle-ui')
+              }
 
-            if (freshState.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS) {
-              fullscreenValue.triggerAction('set-tool-comments')
-            }
+              if (freshState.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS) {
+                fullscreenValue.triggerAction('set-tool-comments')
+              }
 
-            requestAnimationFrame(() => {
-              openResiger()
-            })
-          },
-        }
+              requestAnimationFrame(() => {
+                openResiger()
+              })
+            },
+          }
         : undefined
 
       dispatch(VisualBellActions.enqueue({
@@ -1293,24 +1294,24 @@ export let createNewComment = createOptimistThunk((context, payload: NewCommentP
     if (data && Object.prototype.hasOwnProperty.call(data, 'message') && data.message && data.message.is_new_file_follower) {
       const manageButton = commentsConfiguration.showNotificationSettings
         ? {
-          text: getI18nString('comments.manage'),
-          action: () => {
-            const freshState = getState()
-            dispatch(deactivateActiveComment({ force: true }))
+            text: getI18nString('comments.manage'),
+            action: () => {
+              const freshState = getState()
+              dispatch(deactivateActiveComment({ force: true }))
 
-            if (!freshState.mirror.appModel.showUi) {
-              fullscreenValue.triggerAction('toggle-ui')
-            }
+              if (!freshState.mirror.appModel.showUi) {
+                fullscreenValue.triggerAction('toggle-ui')
+              }
 
-            if (freshState.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS) {
-              fullscreenValue.triggerAction('set-tool-comments')
-            }
+              if (freshState.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS) {
+                fullscreenValue.triggerAction('set-tool-comments')
+              }
 
-            requestAnimationFrame(() => {
-              openResiger()
-            })
-          },
-        }
+              requestAnimationFrame(() => {
+                openResiger()
+              })
+            },
+          }
         : undefined
 
       dispatch(VisualBellActions.enqueue({

@@ -8,7 +8,7 @@ import { DialogTriggerButton } from "../905/976845";
 import { S as _$$S } from "../905/720922";
 import { D as _$$D } from "../905/716990";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import h from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
@@ -631,7 +631,7 @@ let eM = memo(function ({
   total: c
 }) {
   let u = _$$P2(e.index);
-  let h = Xr(_$$k3);
+  let h = useSetAtom(_$$k3);
   let f = u?.id === e.index;
   let _ = f && u?.scrollIntoView;
   let A = useRef(null);

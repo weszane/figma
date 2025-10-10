@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { RadioInputRoot, RadioInputOption } from "../905/308099";
 import { Legend } from "../905/932270";
@@ -163,10 +163,10 @@ export function $$M1(e) {
     "data-testid": "create-team-modal-audience-selector",
     children: [jsx("div", {
       "data-onboarding-key": e.dataOnboardingKey,
-      children: jsxs(bL, {
+      children: jsxs(SelectGroupLabel, {
         value: e.value,
         onChange: e.onChange,
-        children: [jsx(l9, {
+        children: [jsx(SelectSeparator, {
           label: jsx(HiddenLabel, {
             children: getI18nString("permissions.audience_selector.aria_label")
           }),
@@ -185,8 +185,8 @@ export function $$M1(e) {
               "data-tooltip": r
             })]
           })
-        }), jsx(mc, {
-          children: t.map(t => jsx(c$, {
+        }), jsx(SelectContainer, {
+          children: t.map(t => jsx(SelectOptionReset, {
             value: t,
             disabled: "anyone" === t && e.publicLinksBanned,
             children: jsxs("div", {

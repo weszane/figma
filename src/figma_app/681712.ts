@@ -6,7 +6,7 @@ import { renderCheckoutDevModeText } from "../figma_app/361869";
 import { Spacing, linkWithTracking } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
-import { m as _$$m } from "../figma_app/160942";
+import { getPricingCalculators } from "../figma_app/160942";
 import { FFileType } from "../figma_app/191312";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { SubscriptionType, DesignProductIds, FigJamProductIds } from "../figma_app/831101";
@@ -69,7 +69,7 @@ function y({
 }) {
   let {
     getDesignUnitCost
-  } = _$$m({
+  } = getPricingCalculators({
     currency: a
   });
   return e === SubscriptionType.STUDENT ? null : jsx(b, {
@@ -124,7 +124,7 @@ function T({
 }) {
   let {
     getWhiteboardUnitCost
-  } = _$$m({
+  } = getPricingCalculators({
     currency: a
   });
   return jsx(b, {
@@ -164,7 +164,7 @@ function v({
   let {
     estimatedDesignCost,
     estimatedWhiteboardCost
-  } = _$$m({
+  } = getPricingCalculators({
     currency: r
   });
   n = "design" === e ? estimatedDesignCost(t, SubscriptionType.MONTHLY) : estimatedWhiteboardCost(t, SubscriptionType.MONTHLY);
@@ -248,7 +248,7 @@ function x({
   let {
     estimatedDesignCost,
     estimatedWhiteboardCost
-  } = _$$m({
+  } = getPricingCalculators({
     currency: t
   });
   let f = new CurrencyFormatter(t);

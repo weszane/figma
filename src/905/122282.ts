@@ -20,7 +20,7 @@ import { LoadingSpinner } from "../905/443820";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom, atomStoreManager } from "../figma_app/27355";
 import C from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { useSubscription } from "../figma_app/288654";
@@ -31,7 +31,7 @@ import { X as _$$X } from "../905/859195";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, useTracking } from "../figma_app/831799";
 import { T6 } from "../905/201596";
-import { Et as _$$Et, mZ, b2 } from "../figma_app/622574";
+import { isTemplatePublished, canUseCustomTemplates, hasChangesAtom } from "../figma_app/622574";
 import { processThumbnailImage, countEnabledFeatures } from "../figma_app/599979";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
@@ -96,9 +96,9 @@ import { INTERNAL_PUBLISH_MODAL, PublishModalState } from "../figma_app/350203";
 import { getCurrentFileType } from "../figma_app/976749";
 import { liveStoreInstance } from "../905/713695";
 import { B3, $o } from "../905/54042";
-import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { c$ as _$$c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { TeamAvatar } from "../figma_app/537817";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -899,10 +899,10 @@ function tI({
   let o = useRef(null);
   let l = useDropdownState()?.type === tA;
   let u = useDispatch<AppDispatch>();
-  return getFeatureFlags().figjam_fpl_template_publish_scope ? jsxs(_$$bL, {
+  return getFeatureFlags().figjam_fpl_template_publish_scope ? jsxs(SelectGroupLabel, {
     value: e,
     onChange: i,
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       width: "fill",
       label: jsx(HiddenLabel, {
         children: getI18nString("templates.publishing.scope.label")
@@ -911,8 +911,8 @@ function tI({
       children: s ? jsx(tb, {
         item: s
       }) : getI18nString("common.select")
-    }), jsx(mc, {
-      children: t.map(e => jsx(c$, {
+    }), jsx(SelectContainer, {
+      children: t.map(e => jsx(SelectOptionReset, {
         value: e.scope,
         children: jsx(tv, {
           item: e
@@ -953,7 +953,7 @@ function tE({
   setSelectedIndex: n
 }) {
   let r = jsx(Fragment, {
-    children: e.map((e, t) => jsx(_$$c$, {
+    children: e.map((e, t) => jsx(OptionComponent, {
       onClick: () => {
         n(t);
         i(e.scope);
@@ -1066,8 +1066,8 @@ function tO({
   canvasThumbnail: n
 }) {
   var a;
-  let o = _$$Et(e) ? e.template : null;
-  let l = mZ(e);
+  let o = isTemplatePublished(e) ? e.template : null;
+  let l = canUseCustomTemplates(e);
   let h = getCurrentTeamId();
   let g = e.name;
   let A = e.team;
@@ -1078,7 +1078,7 @@ function tO({
   let M = g === getI18nString("fullscreen.fullscreen_view_selector.untitled");
   let [B, V] = useState(o?.name || (M ? "" : g));
   let [z, W] = useState(o?.description || "");
-  let [X, ea] = useAtomValueAndSetter(b2);
+  let [X, ea] = useAtomValueAndSetter(hasChangesAtom);
   let [es, ed] = useState({});
   let [ec, eu] = useState(() => o ? o.publishScope : t ? ContainerTypeMap.ORG : ContainerTypeMap.TEAM);
   let ep = selectCurrentUser();
@@ -1116,7 +1116,7 @@ function tO({
   } = function () {
     let e = useDispatch<AppDispatch>();
     let t = useAtomWithSubscription(J);
-    let i = Xr(ee);
+    let i = useSetAtom(ee);
     let n = "PUBLISH_TEMPLATE_INITIATED" === t.state || "UNPUBLISH_TEMPLATE_INITIATED" === t.state;
     return {
       initiateTemplatePublish: useCallback(t => {
@@ -1416,7 +1416,7 @@ let tD = registerModal(function ({
   open: i
 }) {
   let n = selectCurrentFile();
-  return (Xr(tR)(i), !n && e) ? jsx(tN, {
+  return (useSetAtom(tR)(i), !n && e) ? jsx(tN, {
     fileKey: e,
     source: t
   }) : n ? n.editorType === FFileType.COOPER && getFeatureFlags().cooper ? jsx(tr, {

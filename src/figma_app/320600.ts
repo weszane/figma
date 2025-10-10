@@ -18,7 +18,7 @@ import { d$ } from "../figma_app/291792";
 import { VU } from "../905/625959";
 import { handleKeyboardEventByState, KeyboardEventResponse } from "../figma_app/896988";
 import { FEditorType } from "../figma_app/53721";
-import { pi } from "../figma_app/357047";
+import { FULLSCREEN_MENU_DROPDOWN } from "../figma_app/357047";
 import { TrackingKeyEnum } from "../905/696396";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { j as _$$j } from "../905/834956";
@@ -53,7 +53,7 @@ import { HeaderModal } from "../905/519092";
 import { k as _$$k2 } from "../905/284709";
 import { D as _$$D } from "../figma_app/32557";
 import { O as _$$O } from "../figma_app/688952";
-import { jv } from "../905/525678";
+import { processMenuItems } from "../905/525678";
 let U = registerModal(function () {
   let e = useDispatch<AppDispatch>();
   let t = useCallback(() => {
@@ -186,11 +186,11 @@ let J = registerModal(function () {
     })
   });
 }, "CommentDebugSettingsModal");
-class ea extends Error {}
+class ea extends Error { }
 async function es({
   dispatch: e,
   fileKey: t,
-  log: r = () => {}
+  log: r = () => { }
 }) {
   try {
     r("Generating file version...");
@@ -374,7 +374,7 @@ class e_ extends RecordingPureComponent {
     if (super.componentDidUpdate(e, t), this.props.selectionToUpdate && this.props.selectionToUpdate === SettingsAction.PREFERENCES) {
       let e = this.multilevelDropdown && this.multilevelDropdown.getActiveItemAtDepth(0);
       !e || hasSeparator(e) || hasHeader(e) || hasRenderFunction(e) || !e.name || e.name !== ep ? (this.selectPreferencesMenu(), this.props.dispatch(updateDropdownSelectionAction({
-        type: pi,
+        type: FULLSCREEN_MENU_DROPDOWN,
         data: {
           selectionToUpdate: null
         }
@@ -456,7 +456,7 @@ export class $$em1 extends Component {
         }
       });
     };
-    this.transformMenuItems = memoizeByArgs(e => jv(e, {
+    this.transformMenuItems = memoizeByArgs(e => processMenuItems(e, {
       appModel: this.props.appModel,
       selectedView: this.props.selectedView,
       sceneGraph: this.props.sceneGraph,

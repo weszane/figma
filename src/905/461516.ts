@@ -1,6 +1,6 @@
 // Dictionary configuration for spell checking
-const DEFAULT_MODE = "auto"
-const BRAND_WORDS_URL = "https://figma.com/figma-spell-check-dictionaries/brand-words_9ee8fe6ad8a6c77912d1a4a3b425ea24.txt.gz"
+export const DEFAULT_MODE = "auto"
+export const BRAND_WORDS_URL = "https://figma.com/figma-spell-check-dictionaries/brand-words_9ee8fe6ad8a6c77912d1a4a3b425ea24.txt.gz"
 
 // Language dictionary configurations
 export const LANGUAGE_DICTIONARIES = {

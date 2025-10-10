@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { getStorage, localStorageRef } from "../905/657224";
 import { usePreventBrowserKeydown } from "../figma_app/347146";
 import { Tf } from "../905/280919";
-import { ji } from "../figma_app/814196";
+import { useAutoOpenPreferenceAtom } from "../figma_app/814196";
 import { ModifierKeyCodes, isExactModifier } from "../905/63728";
 import { BrowserInfo, isIpadDevice } from "../figma_app/778880";
 import { selectWithShallowEqual } from "../905/103090";
@@ -15,7 +15,7 @@ import { selectExperimentConfigHook } from "../figma_app/594947";
 import { k as _$$k2 } from "../905/582200";
 import { useErrorBoundaryContext, ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { subscribeDevModePermissions, useCanUseDevModeDemoFile } from "../figma_app/473493";
-import { oQ } from "../figma_app/332085";
+import { DEBUG_SUCCEEDED_PAYMENTS_KEY } from "../figma_app/332085";
 import { recentlyUsedQuickCommands, trackFileEventThunk } from "../figma_app/91703";
 import { syncRecentPluginsThunk, syncRecentFaceStampsThunk, syncRecentWhiteboardToolsThunk, syncRecentWidgetsThunk } from "../figma_app/147952";
 import { NX } from "../figma_app/568591";
@@ -70,7 +70,7 @@ import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/5
 import { getSession } from "../905/574958";
 import { TrackingKeyEnum } from "../905/696396";
 import { L as _$$L } from "../905/92291";
-import { atom, useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, atomStoreManager, useSetAtom } from "../figma_app/27355";
 import eO from "../vendor/879378";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { useSubscription } from "../figma_app/288654";
@@ -114,7 +114,7 @@ import { Yk } from "../figma_app/644079";
 import { getAutosaveManagerInstance } from "../figma_app/840917";
 import { useAppModelProperty, useCurrentTool } from "../figma_app/722362";
 import { BI, m0 as _$$m, pt, Ef } from "../figma_app/546509";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getResourceDataOrFallback } from "../905/419236";
 import { trackFileEventWithUser } from "../figma_app/901889";
@@ -787,7 +787,7 @@ export function $$t80({
       }) && YG.subscriptionsDidChange(e, m, f);
     }, [e, x, m, f, o, l, d, y]);
   })();
-  ji();
+  useAutoOpenPreferenceAtom();
   gN();
   desktopAPIInstance && function () {
     let e = useCanPerformAction();
@@ -951,8 +951,8 @@ export function $$t80({
     useEffect(() => {
       i?.updateSaveStatus && (p ? l ? i.updateSaveStatus(_$$a.SAVING) : i.updateSaveStatus(_$$a.PAUSED) : i.updateSaveStatus(_$$a.SAVED));
     }, [i, p, l]);
-    let h = useSelector(e => Yh(e.mirror.appModel, "undo"));
-    let m = useSelector(e => Yh(e.mirror.appModel, "redo"));
+    let h = useSelector(e => isActionEnabled(e.mirror.appModel, "undo"));
+    let m = useSelector(e => isActionEnabled(e.mirror.appModel, "redo"));
     useEffect(() => {
       if (i?.updateUndoEnabled && i.updateUndoEnabled(h), i?.updateRedoEnabled && i.updateRedoEnabled(m), u) {
         let t = t => {
@@ -1157,13 +1157,13 @@ export function $$t80({
   }, [i, h, Y]);
   let er = getUserId();
   useEffect(() => {
-    er && i(oQ());
+    er && i(DEBUG_SUCCEEDED_PAYMENTS_KEY());
   }, [i, er]);
   useEffect(() => {
     S && detachMultiplayer();
   }, [S]);
   (function () {
-    let e = Xr(eB);
+    let e = useSetAtom(eB);
     useEffect(() => {
       let t;
       let i = () => {

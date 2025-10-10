@@ -44,7 +44,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { getWorkshopModeStatus } from '../figma_app/789';
 import { isExportRestricted } from '../figma_app/12796';
 import { useIsFullscreenSlidesView } from '../figma_app/21029';
-import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { Ax, Fz } from '../figma_app/29089';
 import { fu, Hk, lK, pu } from '../figma_app/123994';
 import { YJ } from '../figma_app/144692';
@@ -55,7 +55,7 @@ import { oe } from '../figma_app/376315';
 import { H as _$$H } from '../figma_app/378458';
 import { stopPresenting } from '../figma_app/385215';
 import { kb, Oh, OI, tU, wR, Yg } from '../figma_app/386160';
-import { hg, u7 } from '../figma_app/425489';
+import { inlinePreviewReducer, InlinePreviewVisibilityStatus } from '../figma_app/425489';
 import { usePresenterUser } from '../figma_app/440875';
 import { throwTypeError } from '../figma_app/465776';
 import { isIntegrationContext } from '../figma_app/469876';
@@ -87,25 +87,25 @@ class $ {
       let {
         status,
         currentTimeMs
-      } = atomStoreManager.get(hg).timelinePlayerState;
+      } = atomStoreManager.get(inlinePreviewReducer).timelinePlayerState;
       (this._status !== status || this._currentTimeMs !== currentTimeMs) && (this._status !== 'stopped' || this._currentTimeMs !== 0 || this._canPlayTriggered || (this._canPlayListeners.forEach(e => e(new Event('canplay'))), this._canPlayTriggered = !0), (this._status !== status || this._currentTimeMs !== currentTimeMs) && this._timeUpdateListeners.forEach(e => e(new Event('timeupdate'))), this._status !== 'playing' && status === 'playing' && this._playingListeners.forEach(e => e(new Event('playing'))), this._status !== 'ended' && status === 'ended' && this._endedListeners.forEach(e => e(new Event('ended'))), this._status = status, this._currentTimeMs = currentTimeMs);
     };
-    this._unsubscribe = atomStoreManager.sub(hg, this.onAtomUpdate);
+    this._unsubscribe = atomStoreManager.sub(inlinePreviewReducer, this.onAtomUpdate);
   }
   setVolumeByNodeId(e) {
     this._videoVolumeByNodeId = e;
   }
   isPlaying() {
-    return atomStoreManager.get(hg).timelinePlayerState.status === 'playing';
+    return atomStoreManager.get(inlinePreviewReducer).timelinePlayerState.status === 'playing';
   }
   isPaused() {
-    return atomStoreManager.get(hg).timelinePlayerState.status === 'paused';
+    return atomStoreManager.get(inlinePreviewReducer).timelinePlayerState.status === 'paused';
   }
   hasEnded() {
-    return atomStoreManager.get(hg).timelinePlayerState.status === 'ended';
+    return atomStoreManager.get(inlinePreviewReducer).timelinePlayerState.status === 'ended';
   }
   getVideoState() {
-    let e = atomStoreManager.get(hg).timelinePlayerState.status;
+    let e = atomStoreManager.get(inlinePreviewReducer).timelinePlayerState.status;
     switch (e) {
       case 'playing':
         return 'playing';
@@ -120,18 +120,18 @@ class $ {
     }
   }
   currentTime() {
-    return atomStoreManager.get(hg).timelinePlayerState.currentTimeMs / 1e3;
+    return atomStoreManager.get(inlinePreviewReducer).timelinePlayerState.currentTimeMs / 1e3;
   }
   totalTime() {
-    return atomStoreManager.get(hg).timelinePlayerState.totalTimeMs / 1e3;
+    return atomStoreManager.get(inlinePreviewReducer).timelinePlayerState.totalTimeMs / 1e3;
   }
   togglePlay() {
-    let e = atomStoreManager.get(hg).timelinePlayerState.status;
+    let e = atomStoreManager.get(inlinePreviewReducer).timelinePlayerState.status;
     switch (e) {
       case 'stopped':
       case 'paused':
       case 'ended':
-        atomStoreManager.set(hg, {
+        atomStoreManager.set(inlinePreviewReducer, {
           type: 'TIMELINE_PLAYER_PLAY',
           payload: {
             videoVolumeByNodeId: this._videoVolumeByNodeId
@@ -139,7 +139,7 @@ class $ {
         });
         break;
       case 'playing':
-        atomStoreManager.set(hg, {
+        atomStoreManager.set(inlinePreviewReducer, {
           type: 'TIMELINE_PLAYER_PAUSE'
         });
         break;
@@ -513,10 +513,10 @@ function eu({
     }, s] = useAtomValueAndSetter(_$$e.stateAtom);
     let o = useAnyNodeHasVideoPaint(e ? [e] : []);
     useEffect(() => {
-      i === u7.LOAD_FORBIDDEN && s({
+      i === InlinePreviewVisibilityStatus.LOAD_FORBIDDEN && s({
         type: 'UPDATE_BUZZ_INLINE_PREVIEW',
         payload: {
-          status: u7.LOAD_PENDING
+          status: InlinePreviewVisibilityStatus.LOAD_PENDING
         }
       });
     }, [i, s]);
@@ -544,18 +544,18 @@ function eu({
       });
     }, [e, s, a]);
     let d = o && !a && r === e;
-    let c = d && i === u7.HIDDEN;
-    let p = !d && i === u7.SHOWN;
+    let c = d && i === InlinePreviewVisibilityStatus.HIDDEN;
+    let p = !d && i === InlinePreviewVisibilityStatus.SHOWN;
     useLayoutEffect(() => {
       c ? s({
         type: 'UPDATE_BUZZ_INLINE_PREVIEW',
         payload: {
-          status: u7.SHOWN
+          status: InlinePreviewVisibilityStatus.SHOWN
         }
       }) : p && s({
         type: 'UPDATE_BUZZ_INLINE_PREVIEW',
         payload: {
-          status: u7.HIDDEN
+          status: InlinePreviewVisibilityStatus.HIDDEN
         }
       });
     }, [s, d, p, c]);
@@ -598,7 +598,7 @@ function eu({
       s({
         type: 'UPDATE_BUZZ_INLINE_PREVIEW',
         payload: {
-          status: u7.HIDDEN
+          status: InlinePreviewVisibilityStatus.HIDDEN
         }
       });
     })));
@@ -832,7 +832,7 @@ function eF(e) {
   let L = getWorkshopModeStatus(T?.key || '').enabled;
   let R = isIntegrationContext();
   let D = useRef(null);
-  let O = Xr($$eP1);
+  let O = useSetAtom($$eP1);
   let j = isUserNotLoggedInAndEditorSupported();
   let k = _$$e2();
   let A = useIsCodeViewPanel();

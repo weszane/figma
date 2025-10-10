@@ -41,7 +41,7 @@ import { IconButton } from '../905/443068';
 import { LoadingSpinner } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
-import { bL as _$$bL, mc as _$$mc, c$, l9, WL } from '../905/493196';
+import { SelectGroupLabel, SelectContainer, SelectOptionReset, SelectSeparator, SelectTrigger } from '../905/493196';
 import { O as _$$O } from '../905/501876';
 import { RecordableAnchor } from '../905/511649';
 import { C as _$$C } from '../905/520159';
@@ -115,7 +115,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { ei as _$$ei } from '../figma_app/9054';
 import { useHasValidSceneSlideTheme, useIsFullscreenSlidesView } from '../figma_app/21029';
-import { atom, createValidatedLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, createValidatedLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { a_Q, bTb, Evg, Gyo, m8f, RtY, Wsk, wxr } from '../figma_app/27776';
 import { gs, ON, oy } from '../figma_app/31103';
 import { n0 } from '../figma_app/32128';
@@ -136,7 +136,7 @@ import { Ig } from '../figma_app/155647';
 import { JR, Qp } from '../figma_app/162641';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
 import { buildUploadUrl, isDevEnvironment } from '../figma_app/169182';
-import { is as _$$is, BX, Ho } from '../figma_app/170018';
+import { getDevicePresetInfo, inverseScaleVector, scaleVectorByAspectRatio } from '../figma_app/170018';
 import { FEventType } from '../figma_app/191312';
 import { selectedViewToPath, getSelectedViewUrl } from '../figma_app/193867';
 import { Vc } from '../figma_app/211694';
@@ -148,13 +148,13 @@ import { a as _$$a } from '../figma_app/289605';
 import { isUsingLocalBuild } from '../figma_app/298277';
 import { mapFileToProductType } from '../figma_app/314264';
 import { DeviceCategory, preloadDevicePreviewImages, DEVICE_PRESETS_BY_ID, supportsInlinePreview, getDeviceCategory } from '../figma_app/349969';
-import { ut as _$$ut, Ah, Fe, HS, hX, kl, l5, nw, Sq, UB, wR, xY } from '../figma_app/354027';
+import { getOffset, DEFAULT_HEIGHT, MIN_WIDTH, getBreakpoint, fitToAspectRatio, DEFAULT_WIDTH, BreakpointType, getBreakpointSize, TOP_OFFSET, showResizeBell, BOTTOM_PADDING, isFullscreenEditor } from '../figma_app/354027';
 import { handleFullscreenViewTransition, getBackgroundColorWithOverride } from '../figma_app/379850';
 import { stopPresenting } from '../figma_app/385215';
 import { getSelectedView } from '../figma_app/386952';
 import { c as _$$c2 } from '../figma_app/391827';
 import { resolvedTypeToString, getVariableDisplayString } from '../figma_app/394327';
-import { bi } from '../figma_app/425489';
+import { InlineModalStatus } from '../figma_app/425489';
 import { usePresenterUser, useCurrentUser } from '../figma_app/440875';
 import { fullscreenValue } from '../figma_app/455680';
 import { assert, assertNotNullish, throwTypeError } from '../figma_app/465776';
@@ -1284,7 +1284,7 @@ function th({
   let d = getSelectedView();
   let c = useDispatch<AppDispatch>();
   let u = useSelector(e => 'devModeVariablesTableBackFocusId' in e.selectedView ? e.selectedView.devModeVariablesTableBackFocusId : void 0);
-  let p = Xr(_$$$);
+  let p = useSetAtom(_$$$);
   let m = useCallback(() => {
     p(null);
     c(selectViewAction({
@@ -2437,17 +2437,17 @@ function i7({
   sortedBy: e,
   setSortedBy: t
 }) {
-  return jsxs(_$$bL, {
+  return jsxs(SelectGroupLabel, {
     value: e,
     onChange: t,
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       label: jsx(HiddenLabel, {
         children: getI18nString('dev_handoff.workflows.overview.sort_by')
       })
-    }), jsxs(_$$mc, {
-      children: [jsx(WL, {
+    }), jsxs(SelectContainer, {
+      children: [jsx(SelectTrigger, {
         children: getI18nString('dev_handoff.workflows.overview.sort_by')
-      }), Object.values(SortBy).map(e => jsx(c$, {
+      }), Object.values(SortBy).map(e => jsx(SelectOptionReset, {
         value: e,
         children: i6.format(e)
       }, e))]
@@ -2649,7 +2649,7 @@ let rQ = () => {
   let t = getViewportY({
     subscribeToUpdates_expensive: !0
   });
-  return useMemo(() => new Point(e + wR, t + wR), [e, t]);
+  return useMemo(() => new Point(e + BOTTOM_PADDING, t + BOTTOM_PADDING), [e, t]);
 };
 let r$ = memo(({
   pageId: e,
@@ -2694,7 +2694,7 @@ let r0 = memo(({
   }, _] = useAtomValueAndSetter(t.stateAtom);
   let x = useDispatch<AppDispatch>();
   let y = useSceneGraphSelector();
-  let C = useMemo(() => h === bi.OPEN, [h]);
+  let C = useMemo(() => h === InlineModalStatus.OPEN, [h]);
   let v = m?.initialViewerSize ?? rX;
   let E = useLatestRef(v);
   let T = rQ();
@@ -2746,8 +2746,8 @@ let r0 = memo(({
     let {
       framePresetSize,
       idealDeviceSize
-    } = _$$is(O, t);
-    return BX(e, framePresetSize, idealDeviceSize);
+    } = getDevicePresetInfo(O, t);
+    return inverseScaleVector(e, framePresetSize, idealDeviceSize);
   }, [O, V, R, A?.rotation]);
   useEffect(() => {
     o.current || S(T);
@@ -2758,16 +2758,16 @@ let r0 = memo(({
       payload: Y
     });
   }, [_, Y]);
-  let J = useMemo(() => m?.breakpoint?.type !== l5.DEVICE, [m]);
+  let J = useMemo(() => m?.breakpoint?.type !== BreakpointType.DEVICE, [m]);
   let q = useCallback(e => {
     if (!J) return;
     let t = Y();
     assert(!!d, 'currentPresentedNode must be set');
     let i = y.get(d);
     assert(!!i, 'expected selectedNode to exist');
-    let r = HS(y, i);
-    let n = hX(t, i, r, y);
-    assert(n.breakpoint.type !== l5.DEVICE, 'fit to aspect ratio not allowed for device');
+    let r = getBreakpoint(y, i);
+    let n = fitToAspectRatio(t, i, r, y);
+    assert(n.breakpoint.type !== BreakpointType.DEVICE, 'fit to aspect ratio not allowed for device');
     W(n.initialViewerSize);
     x(Zh({
       name: 'prototype.resize_to_fit_aspect_ratio',
@@ -2782,14 +2782,14 @@ let r0 = memo(({
     if (R) {
       let {
         idealDeviceSize
-      } = _$$is(O, A.rotation);
-      e = idealDeviceSize.x >= Fe && idealDeviceSize.y >= Sq;
+      } = getDevicePresetInfo(O, A.rotation);
+      e = idealDeviceSize.x >= MIN_WIDTH && idealDeviceSize.y >= TOP_OFFSET;
     } else {
       let t = y.get(d);
       if (!t) return !1;
-      let i = HS(y, t);
-      let r = nw(i, t);
-      e = r.x >= Fe && r.y >= Sq;
+      let i = getBreakpoint(y, t);
+      let r = getBreakpointSize(i, t);
+      e = r.x >= MIN_WIDTH && r.y >= TOP_OFFSET;
     }
     return e;
   };
@@ -2814,7 +2814,7 @@ let r0 = memo(({
         alwaysPan: !0,
         maxScale: 0.6
       });
-      K ? h === bi.OPEN && (M(t), F && AppStateTsApi.singleSlideView().focusNodeInFocusedNodeView(e, !0)) : M(t);
+      K ? h === InlineModalStatus.OPEN && (M(t), F && AppStateTsApi.singleSlideView().focusNodeInFocusedNodeView(e, !0)) : M(t);
     }
   }, [M, K, F, h]);
   useEffect(() => {
@@ -2843,7 +2843,7 @@ let r0 = memo(({
     }
   }, [R, O, A?.rotation]);
   let ei = useCallback(e => {
-    assert(m?.breakpoint.type === l5.DEVICE, 'device must be set to toggle device frame');
+    assert(m?.breakpoint.type === BreakpointType.DEVICE, 'device must be set to toggle device frame');
     assert(!!A, 'prototypeDevice must be set to toggle device frame');
     let t = Y();
     if (e) {
@@ -2851,8 +2851,8 @@ let r0 = memo(({
       let {
         idealDeviceSize,
         framePresetSize
-      } = _$$is(e, A.rotation);
-      ee(Ho(t, framePresetSize, idealDeviceSize));
+      } = getDevicePresetInfo(e, A.rotation);
+      ee(scaleVectorByAspectRatio(t, framePresetSize, idealDeviceSize));
     } else {
       W(t);
     }
@@ -2864,8 +2864,8 @@ let r0 = memo(({
         let {
           idealDeviceSize,
           framePresetSize
-        } = _$$is(O, A.rotation);
-        ee(Ho(v, framePresetSize, idealDeviceSize));
+        } = getDevicePresetInfo(O, A.rotation);
+        ee(scaleVectorByAspectRatio(v, framePresetSize, idealDeviceSize));
       } else {
         W(v);
       }
@@ -2901,7 +2901,7 @@ let r0 = memo(({
       borderBottomRightRadius: 'var(--radius-small)'
     };
   }, [R]);
-  if (h === bi.NOT_LOADED) return null;
+  if (h === InlineModalStatus.NOT_LOADED) return null;
   let ea = P()(K ? CN : aq, R ? null : H);
   let es = P()(R ? [H, k9] : null, {
     [FO]: K
@@ -2909,7 +2909,7 @@ let r0 = memo(({
   let {
     x: _x,
     y: _y
-  } = _$$ut(getSingletonSceneGraph(), !0);
+  } = getOffset(getSingletonSceneGraph(), !0);
   let ec = !C || !m?.initialViewerSize;
   return jsx(DraggableModal, {
     ResizeTargetComponent: et,
@@ -2930,8 +2930,8 @@ let r0 = memo(({
         let e = y.get(d);
         if (!e) return !1;
         let t = Y();
-        let i = HS(y, e);
-        let r = hX(t, e, i, y);
+        let i = getBreakpoint(y, e);
+        let r = fitToAspectRatio(t, e, i, y);
         let n = t.x / t.y;
         let a = r.initialViewerSize.x / r.initialViewerSize.y;
         return _$$o2(n, a);
@@ -2941,7 +2941,7 @@ let r0 = memo(({
         if (!d || !i.current) return !1;
         let e = y.get(d);
         if (!e || !m?.breakpoint) return !1;
-        let t = R ? _$$is(O, A.rotation).framePresetSize : nw(m.breakpoint, e);
+        let t = R ? getDevicePresetInfo(O, A.rotation).framePresetSize : getBreakpointSize(m.breakpoint, e);
         let r = Y();
         return _$$o2(t.x, r.x, 1e-4) && _$$o2(t.y, r.y, 1e-4);
       },
@@ -2957,13 +2957,13 @@ let r0 = memo(({
         x(Zh({
           name: 'prototype.resize_to_actual_size'
         }));
-        let t = R ? _$$is(O, A.rotation).idealDeviceSize : nw(m.breakpoint, e);
+        let t = R ? getDevicePresetInfo(O, A.rotation).idealDeviceSize : getBreakpointSize(m.breakpoint, e);
         let i = (e, t) => {
           W(e);
           S(new Point(t.x, t.y));
         };
         let r = V();
-        UB(t, x, () => i(r, w));
+        showResizeBell(t, x, () => i(r, w));
         W(t);
       },
       resizeToFitAspectRatio: () => q('overflow_menu'),
@@ -2981,7 +2981,7 @@ let r0 = memo(({
     height: k,
     hidden: ec,
     ignoreCloseShortcut: !C,
-    lockAspectRatio: m?.breakpoint?.type === l5.DEVICE,
+    lockAspectRatio: m?.breakpoint?.type === BreakpointType.DEVICE,
     makeContentPixelPerfect: !0,
     minHeight: _y,
     minWidth: _x,
@@ -3173,7 +3173,7 @@ function r1({
       recordingKey: 'openInNewTabButton',
       name: 'open-in-new-tab',
       callback: L,
-      hidden: C > kl
+      hidden: C > DEFAULT_WIDTH
     }];
   }, [x, s, R, I, f, t, g, d, v, e, i, D, k, L, C, _]);
   let P = useCallback(() => {
@@ -3196,7 +3196,7 @@ function r1({
         'recordingKey': generateRecordingKey(rZ, 'overflowMenuButton'),
         'children': jsx(_$$A9, {})
       })
-    }), C > kl && jsx(IconButton, {
+    }), C > DEFAULT_WIDTH && jsx(IconButton, {
       'htmlAttributes': {
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('inline_preview.new_tab'),
@@ -3243,7 +3243,7 @@ function r2({
   let l = useDispatch<AppDispatch>();
   return jsxs('div', {
     className: KW,
-    children: [n <= Ah ? null : jsxs(Fragment, {
+    children: [n <= DEFAULT_HEIGHT ? null : jsxs(Fragment, {
       children: [jsx(IconButton, {
         'htmlAttributes': {
           'data-testid': 'preview-navigate-backward'
@@ -3263,7 +3263,7 @@ function r2({
         },
         'children': jsx(_$$e6, {})
       })]
-    }), n <= kl ? null : jsx(IconButton, {
+    }), n <= DEFAULT_WIDTH ? null : jsx(IconButton, {
       'aria-label': getI18nString('inline_preview.restart'),
       'htmlAttributes': {
         'data-tooltip-type': KindEnum.TEXT,
@@ -3430,7 +3430,7 @@ function r5() {
 export function $$r40({
   children: e
 }) {
-  let t = useSelector(xY);
+  let t = useSelector(isFullscreenEditor);
   let i = useSelector(e => e.mirror.appModel.currentPage);
   let n = useIsFullscreenOverview();
   let s = useIsFullscreenWithDevVariables();

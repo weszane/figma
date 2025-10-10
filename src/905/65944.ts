@@ -38,7 +38,7 @@ import { A as _$$A } from '../905/442873';
 import { IconButton } from '../905/443068';
 import { useEventForwarder } from '../905/453826';
 import { O as _$$O } from '../905/487602';
-import { bL as _$$bL, c$ as _$$c$, l9, mc, wv } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer, SelectRoot } from '../905/493196';
 import { handleAtomEvent } from '../905/502364';
 import { openWindow } from '../905/508367';
 import { Button } from '../905/521428';
@@ -47,7 +47,7 @@ import { c$ } from '../905/575478';
 import { k as _$$k2 } from '../905/582200';
 import { W as _$$W } from '../905/592530';
 import { getFeatureFlags } from '../905/601108';
-import { e as _$$e3 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { z as _$$z } from '../905/626016';
 import { ButtonPrimitive } from '../905/632989';
 import { getVisibleTheme, useThemeContext } from '../905/640017';
@@ -100,7 +100,7 @@ import { SY } from '../figma_app/200284';
 import { Qh } from '../figma_app/228217';
 import { Bf } from '../figma_app/249941';
 import { mu, Rh, S7 } from '../figma_app/259578';
-import { N as _$$N } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { DialogActionStrip, DialogBody, DialogContents, DialogHeader, DialogHiddenTitle, DialogTabStrip } from '../figma_app/272243';
 import { L as _$$L2 } from '../figma_app/297778';
 import { ZI } from '../figma_app/328825';
@@ -151,9 +151,9 @@ function ey({
     isShowing,
     complete,
     uniqueId
-  } = _$$e3({
+  } = useOverlay({
     overlay: VideoFillCallout,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [r]);
   useSingleEffect(() => {
     show({
@@ -584,7 +584,7 @@ function e6({
   let p = !e.every(isSwatchSetId);
   let m = useCallback(e => {
     let t = u.format(e).replace(/\W/g, '');
-    return c ? jsx(_$$c$, {
+    return c ? jsx(SelectOptionReset, {
       value: e,
       children: u.format(e)
     }, e) : jsx(_$$c$2, {
@@ -594,18 +594,18 @@ function e6({
   }, [u, s, c]);
   let g = useMemo(() => e.filter(isSwatchSetId).map(m), [m, e]);
   let f = useMemo(() => e.filter(e => !isSwatchSetId(e)).map(m), [m, e]);
-  return c ? jsxs(_$$bL, {
+  return c ? jsxs(SelectGroupLabel, {
     value: t,
     onChange: o,
     recordingKey: s,
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       'width': 'fill',
       'label': jsx(HiddenLabel, {
         children: u.format(t)
       }),
       'aria-label': getI18nString('fullscreen.properties_panel.library_swatch_select.aria_label')
-    }), jsxs(mc, {
-      children: [g, p && jsx(wv, {}), f]
+    }), jsxs(SelectContainer, {
+      children: [g, p && jsx(SelectRoot, {}), f]
     })]
   }) : jsxs(l6, {
     ariaLabel: getI18nString('fullscreen.properties_panel.library_swatch_select.aria_label'),

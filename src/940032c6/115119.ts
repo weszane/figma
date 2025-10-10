@@ -69,7 +69,7 @@ import { R as _$$R } from '../905/57445';
 import { isCommandEvent, KeyCodes } from '../905/63728';
 import { M as _$$M2 } from '../905/69907';
 import { hE as _$$hE3, Ej } from '../905/71683';
-import { n as _$$n10 } from '../905/79930';
+import { TeamTemplateType } from '../905/79930';
 import { o as _$$o1 } from '../905/89370';
 import { c as _$$c3 } from '../905/90943';
 import { useSprigWithSampling } from '../905/99656';
@@ -194,7 +194,7 @@ import { v as _$$v3 } from '../905/479136';
 import { O as _$$O1 } from '../905/487602';
 import { r as _$$r3 } from '../905/490676';
 import { U as _$$U } from '../905/492359';
-import { bL as _$$bL6, c$ as _$$c$5, l9 as _$$l7, mc as _$$mc2, wv as _$$wv2, zW } from '../905/493196';
+import { SelectGroupLabel, SelectOptionReset, SelectSeparator, SelectContainer, SelectRoot, SelectGroup } from '../905/493196';
 import { PrimaryWorkflowEnum } from '../905/497152';
 import { Z as _$$Z4 } from '../905/498136';
 import { eventEmitterAtom, handleAtomEvent } from '../905/502364';
@@ -233,7 +233,7 @@ import { customHistory } from '../905/612521';
 import { buildFileUrl } from '../905/612685';
 import { setupThemeContext } from '../905/614223';
 import { compareVersions } from '../905/616700';
-import { e as _$$e5 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { R as _$$R0 } from '../905/621802';
 import { ButtonPrimitive } from '../905/632989';
 import { z as _$$z9 } from '../905/634240';
@@ -393,7 +393,7 @@ import { J as _$$J6 } from '../1577/181415';
 import { V as _$$V5 } from '../1577/311426';
 import { L as _$$L } from '../1577/392861';
 import { A as _$$A12 } from '../3276/701353';
-import { NuxOnboardingOverlay } from '../4452/529989';
+import { BaseNuxOnboardingOverlay } from '../4452/529989';
 import { z as _$$z0 } from '../5132/283698';
 import { t as _$$t1 } from '../5132/435788';
 import { J as _$$J8 } from '../5132/948584';
@@ -490,7 +490,7 @@ import { dC as _$$dC, iO as _$$iO, lf as _$$lf, lT as _$$lT, Mj as _$$Mj, ou as 
 import { hv as _$$hv, YZ as _$$YZ, BW, WD, z_ } from '../figma_app/11610';
 import { useIsFullscreenReady } from '../figma_app/21029';
 import { a1 as _$$a } from '../figma_app/23780';
-import { mg as _$$mg, atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Ut, Xr } from '../figma_app/27355';
+import { selectAtom, atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, RESET, useSetAtom } from '../figma_app/27355';
 import { MGP } from '../figma_app/27776';
 import { AssetAtomMap } from '../figma_app/31188';
 import { bi as _$$bi, cT as _$$cT, g_ as _$$g_, TU as _$$TU, vr as _$$vr, GQ } from '../figma_app/32128';
@@ -533,7 +533,7 @@ import { I as _$$I } from '../figma_app/131348';
 import { cu as _$$cu, rh as _$$rh, Mg } from '../figma_app/139865';
 import { O as _$$O6 } from '../figma_app/142811';
 import { VQ } from '../figma_app/144692';
-import { hI as _$$hI } from '../figma_app/151766';
+import { fileExportUtilities } from '../figma_app/151766';
 import { Tv as _$$Tv, I9 } from '../figma_app/151869';
 import { S2 as _$$S0, GV, P5 } from '../figma_app/159296';
 import { JR, Qp, Wi } from '../figma_app/162641';
@@ -563,7 +563,7 @@ import { TS as _$$TS } from '../figma_app/205280';
 import { q as _$$q5 } from '../figma_app/216831';
 import { sessionIdAtom, copyToSitesFromDesignAtom } from '../figma_app/223206';
 import { gc as _$$gc, tC as _$$tC, w5 as _$$w5, B8, F$, GR } from '../figma_app/229710';
-import { c$ as _$$c$4, gw as _$$gw, wv as _$$wv } from '../figma_app/236327';
+import { OptionComponent, DropdownWithScrim, SeparatorComponent } from '../figma_app/236327';
 import { P as _$$P6 } from '../figma_app/237095';
 import { F as _$$F2 } from '../figma_app/241247';
 import { rM as _$$rM } from '../figma_app/241541';
@@ -577,7 +577,7 @@ import { aq as _$$aq } from '../figma_app/257798';
 import { a as _$$a2 } from '../figma_app/258808';
 import { e as _$$e0 } from '../figma_app/259678';
 import { gs as _$$gs2, lt as _$$lt, Z0 } from '../figma_app/263905';
-import { N as _$$N5 } from '../figma_app/268271';
+import { ModalPriority } from '../figma_app/268271';
 import { DialogTitle, DialogArrow, DialogActionStrip, DialogBody, DialogCustomFooter, DialogContents, DialogFooter, DialogCustomContents, DialogHeader } from '../figma_app/272243';
 import { StyleType, mapTypeToStyleKey } from '../figma_app/276332';
 import { DesignToolType } from '../figma_app/277543';
@@ -612,7 +612,7 @@ import { STREAMLINED_PUBLISH_INITIATED } from '../figma_app/350203';
 import { Ig } from '../figma_app/350332';
 import { p as _$$p3 } from '../figma_app/353099';
 import { u as _$$u8 } from '../figma_app/353758';
-import { Yh as _$$Yh } from '../figma_app/357047';
+import { isActionEnabled } from '../figma_app/357047';
 import { nC as _$$nC } from '../figma_app/357655';
 import { V7 as _$$V, Hh } from '../figma_app/359181';
 import { nl as _$$nl3 } from '../figma_app/359943';
@@ -720,7 +720,7 @@ import { P as _$$P3 } from '../figma_app/650304';
 import { lg as _$$lg2, QY } from '../figma_app/651753';
 import { _ as _$$_4 } from '../figma_app/658134';
 import { X as _$$X2 } from '../figma_app/668312';
-import { K3 } from '../figma_app/678300';
+import { isNodeSelected } from '../figma_app/678300';
 import { useCachedSubtree } from '../figma_app/679183';
 import { wH as _$$wH } from '../figma_app/680166';
 import { TJ as _$$TJ, YD } from '../figma_app/690664';
@@ -2225,7 +2225,7 @@ function iD({
   let T = useRef(null);
   let I = useDropdown('OPEN_IN_CODE_VIEW_DROPDOWN');
   let E = useAtomWithSubscription(DW);
-  let N = Xr(YD);
+  let N = useSetAtom(YD);
   useSingleEffect(() => {
     N(!1);
   });
@@ -2665,9 +2665,9 @@ function nI() {
     show,
     isShowing,
     complete
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigMakeStarterFullscreenOverlay,
-    priority: _$$N5.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   });
   let n = useCurrentPublicPlan('FigMakePaywallOverlay');
   let a = useIsStarterPlan(n).unwrapOr(!1);
@@ -2732,9 +2732,9 @@ function nD() {
   let {
     show,
     isShowing
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigmakeMobileWebBlockingPopup,
-    priority: _$$N5.HIGH_PRIORITY_MODAL - 1
+    priority: ModalPriority.HIGH_PRIORITY_MODAL - 1
   });
   return (useEffect(() => {
     e && t && show();
@@ -2829,7 +2829,7 @@ function nH({
 function nq() {
   let e = function () {
     let e = useIsSelectedFigmakeFullscreen();
-    let t = Xr(sitesViewSetterAtomFamily);
+    let t = useSetAtom(sitesViewSetterAtomFamily);
     let i = _$$C4();
     return e ? () => {
       i(AppView.FILE);
@@ -3298,7 +3298,7 @@ function am({
     n();
   };
   let j = [];
-  e.action !== 'unpublish' && getFeatureFlags().sites_named_versions && j.push(jsx(_$$c$4, {
+  e.action !== 'unpublish' && getFeatureFlags().sites_named_versions && j.push(jsx(OptionComponent, {
     onClick: () => {
       let {
         label,
@@ -3320,7 +3320,7 @@ function am({
       'children': getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.name_this_version')
     })
   }, 0));
-  e.action !== 'unpublish' && !t && e.siteBundle?.id && j.push(jsx(_$$c$4, {
+  e.action !== 'unpublish' && !t && e.siteBundle?.id && j.push(jsx(OptionComponent, {
     onClick: () => v(),
     children: jsx('span', {
       'data-testid': 'republish-button',
@@ -5390,7 +5390,7 @@ let rm = {
 function rj() {
   let e = useCurrentFileKey();
   let t = getAtomMutate(_$$rY);
-  let i = Xr(Kj);
+  let i = useSetAtom(Kj);
   let {
     connectedProject,
     isConnectedNonOwner
@@ -5427,7 +5427,7 @@ function rj() {
   };
 }
 function rk() {
-  let e = Xr(_$$p8);
+  let e = useSetAtom(_$$p8);
   let {
     connectedProject,
     connectedProjectExpired,
@@ -6564,7 +6564,7 @@ function ob() {
     data
   } = function () {
     let e = useAtomWithSubscription(o_);
-    let t = Xr(o_);
+    let t = useSetAtom(o_);
     useEffect(() => {
       e.data || e.isLoading || e.error || t();
     }, [e, t]);
@@ -6988,7 +6988,7 @@ function oI() {
   let e = getSingletonSceneGraph().getCurrentPage();
   let t = getSingletonSceneGraph().getDirectlySelectedNodes();
   let i = t.length === 1 ? t[0] : void 0;
-  let n = Xr(_$$j4);
+  let n = useSetAtom(_$$j4);
   let l = _$$b2();
   return {
     currentPage: e,
@@ -7836,18 +7836,18 @@ function dt({
       })]
     }), n && t !== null && jsx('div', {
       className: 'xkdneqi',
-      children: jsxs(_$$bL6, {
+      children: jsxs(SelectGroupLabel, {
         value: t,
         onChange: e => {
           e && Object.values(de).includes(e) ? i(e) : i(null);
         },
-        children: [jsx(_$$l7, {
+        children: [jsx(SelectSeparator, {
           label: jsx(HiddenLabel, {
             children: getI18nString('sites.metadata.domains.redirect_direction')
           }),
           size: 'lg'
-        }), jsx(_$$mc2, {
-          children: g.map(e => jsx(_$$c$5, {
+        }), jsx(SelectContainer, {
+          children: g.map(e => jsx(SelectOptionReset, {
             value: e.direction,
             children: getI18nString('sites.metadata.domains.redirect_option_label', {
               from: e.from,
@@ -7872,7 +7872,7 @@ function dn({
   recordingKey: i
 }) {
   let n = useDispatch<AppDispatch>();
-  let r = Xr(AP);
+  let r = useSetAtom(AP);
   let [d, c] = useState(null);
   let [p, x] = useState(!1);
   let [m, h] = useState('');
@@ -8157,7 +8157,7 @@ function du({
   let i = useDispatch<AppDispatch>();
   let n = !!getFeatureFlags().apex_domain_support;
   let a = t.customDomainType === 'apex' || t.customDomainType === 'subdomain' && qg(t.customDomain).subdomain === 'www';
-  return jsxs(_$$gw, {
+  return jsxs(DropdownWithScrim, {
     closeDropdown: () => i(hideDropdownAction()),
     positionAbsolute: !0,
     id: dd,
@@ -8180,7 +8180,7 @@ function dp({
   fileKey: e
 }) {
   let t = useDispatch<AppDispatch>();
-  return jsx(_$$c$4, {
+  return jsx(OptionComponent, {
     onClick: () => {
       t(showModalHandler({
         type: ds,
@@ -8197,7 +8197,7 @@ function dx({
   domain: t
 }) {
   let i = useDispatch<AppDispatch>();
-  let n = Xr(AP);
+  let n = useSetAtom(AP);
   let r = useCallback(async () => {
     try {
       let t = await siteAPIService.configureRedirect({
@@ -8209,7 +8209,7 @@ function dx({
     }
   }, [e, n, i]);
   let d = qg(t).subdomain ? getI18nString('sites.metadata.domain.add_redirect_from_apex_domain') : getI18nString('sites.metadata.domain.add_redirect_from_www_subdomain');
-  return jsx(_$$c$4, {
+  return jsx(OptionComponent, {
     onClick: r,
     children: d
   });
@@ -8242,7 +8242,7 @@ function dm({
       i(FlashActions.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
     }
   };
-  return jsx(_$$c$4, {
+  return jsx(OptionComponent, {
     onClick: c,
     children: getI18nString('sites.metadata.domain.remove_redirect')
   });
@@ -9322,7 +9322,7 @@ function d8({
   let y = useId();
   let v = `${y}-input`;
   let j = f ? f.guid : void 0;
-  return jsxs(_$$bL6, {
+  return jsxs(SelectGroupLabel, {
     value: j,
     onChange: n => {
       if (void 0 === n) {
@@ -9359,9 +9359,9 @@ function d8({
       })]
     }), jsx(EventShield, {
       eventListeners: ['onWheel'],
-      children: jsxs(_$$mc2, {
+      children: jsxs(SelectContainer, {
         children: [!d && jsxs(Fragment, {
-          children: [jsx(_$$c$5, {
+          children: [jsx(SelectOptionReset, {
             value: 'new',
             children: jsxs('div', {
               className: 'x78zum5 x6s0dn4 x167g77z',
@@ -9373,8 +9373,8 @@ function d8({
                 children: getI18nString('sites.metadata.image_selector.upload_image')
               })]
             })
-          }, 'new'), n?.length ? jsx(_$$wv2, {}) : null]
-        }), n?.map(e => jsx(_$$c$5, {
+          }, 'new'), n?.length ? jsx(SelectRoot, {}) : null]
+        }), n?.map(e => jsx(SelectOptionReset, {
           value: e.guid,
           children: jsxs('div', {
             ...{
@@ -9403,7 +9403,7 @@ function d8({
             })]
           })
         }, e.guid)), !!f && jsxs(Fragment, {
-          children: [jsx(_$$wv2, {}), jsx(zW, {
+          children: [jsx(SelectRoot, {}), jsx(SelectGroup, {
             children: o
           })]
         })]
@@ -11094,9 +11094,9 @@ function ur({
   let {
     color
   } = useTheme();
-  let d = Xr(FX);
+  let d = useSetAtom(FX);
   let c = useDispatch<AppDispatch>();
-  let p = Xr(EB);
+  let p = useSetAtom(EB);
   let {
     noDataLoaded
   } = Ig(JT.FIGMAKE);
@@ -11346,9 +11346,9 @@ function uy() {
     isShowing,
     complete,
     show
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigmakeExistingFilesFullscreenOnboarding,
-    priority: _$$N5.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   useEffect(() => {
     r || o || e || !figmakeInFullscreen || componentPreviewState !== _$$d3.LOADED || show();
@@ -11409,7 +11409,7 @@ let uw = _$$A12.createLazyComponent(() => Promise.all([]).then(_require2).then(e
 });
 let uC = setupRemovableAtomFamily(() => atom(!1));
 function uT() {
-  let e = Xr(uC);
+  let e = useSetAtom(uC);
   return !function () {
     let [e] = useAtomValueAndSetter(uC);
     let {
@@ -11456,9 +11456,9 @@ function uN({
     isShowing,
     complete,
     show
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigmakeExistingFilesEditorOnboarding,
-    priority: _$$N5.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   useEffect(() => {
     x || p || t || figmakeInFullscreen || s || componentPreviewState !== _$$d3.LOADED || show();
@@ -11569,9 +11569,9 @@ function uO() {
     complete,
     show,
     uniqueId
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigmakeNewFileOnboardingPreGeneration,
-    priority: _$$N5.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let s = selectUserFlag('seen_figmake_new_file_post_generation_onboarding');
   return (useEventForwarder(uniqueId, 'ai_for_production.chat_message_sent', () => {
@@ -11602,9 +11602,9 @@ function uF({
     complete,
     show,
     uniqueId
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigmakeNewFileOnboardingPostGeneration,
-    priority: _$$N5.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   return (useEventForwarder(uniqueId, 'ai_for_production.chat_response_received', () => n(!0)), useEffect(() => {
     t && d === 'put_it_on_the_web' && handleAtomEvent({
@@ -11633,9 +11633,9 @@ function uM() {
     complete,
     show,
     uniqueId
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigmakeNewFileTemplateInsertionChatNudge,
-    priority: _$$N5.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let s = useRef(null);
   let r = useRef(!1);
@@ -11714,9 +11714,9 @@ function uU() {
     complete,
     show,
     uniqueId
-  } = _$$e5({
+  } = useOverlay({
     overlay: FigmakeSendToMakeOnboarding,
-    priority: _$$N5.OVERRIDING_MODAL
+    priority: ModalPriority.OVERRIDING_MODAL
   });
   let c = useCallback(() => {
     show({
@@ -11874,7 +11874,7 @@ function uX() {
   let N = figmakeInFullscreen ? Ic.PREVIEW : h;
   return jsxs(uV, {
     children: [jsx(uT, {}), jsxs(_$$p3, {
-      children: [jsx(NuxOnboardingOverlay, {
+      children: [jsx(BaseNuxOnboardingOverlay, {
         entryPoint: _$$C3.FigMake
       }), jsx(_$$ev, {}), jsx(nD, {})]
     }), jsx(_$$p3, {
@@ -12252,7 +12252,7 @@ function pr({
   let p = useMemo(() => jsx(_$$d8, {
     nodeGuid: c
   }), [c]);
-  let x = Xr(_$$mC(c));
+  let x = useSetAtom(_$$mC(c));
   let m = Xu();
   let {
     changedFiles
@@ -12645,7 +12645,7 @@ function xa({
     ref: s,
     children: [jsx('div', {
       className: 'toolbar_plugin--textStyleSelect--87Zz6',
-      children: jsxs(_$$bL6, {
+      children: jsxs(SelectGroupLabel, {
         value: f,
         onChange: e => {
           switch (e) {
@@ -12671,44 +12671,44 @@ function xa({
               k(n);
           }
         },
-        children: [jsx(_$$l7, {
+        children: [jsx(SelectSeparator, {
           width: 'fill',
           label: jsx(HiddenLabel, {
             children: getI18nString('dakota.rich_text_editor.toolbar.text_style.select_label')
           })
-        }), jsxs(_$$mc2, {
+        }), jsxs(SelectContainer, {
           ref: r,
-          children: [jsx(_$$c$5, {
+          children: [jsx(SelectOptionReset, {
             value: 'h1',
             children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 1
             })
-          }), jsx(_$$c$5, {
+          }), jsx(SelectOptionReset, {
             value: 'h2',
             children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 2
             })
-          }), jsx(_$$c$5, {
+          }), jsx(SelectOptionReset, {
             value: 'h3',
             children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 3
             })
-          }), jsx(_$$c$5, {
+          }), jsx(SelectOptionReset, {
             value: 'h4',
             children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 4
             })
-          }), jsx(_$$c$5, {
+          }), jsx(SelectOptionReset, {
             value: 'h5',
             children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 5
             })
-          }), jsx(_$$c$5, {
+          }), jsx(SelectOptionReset, {
             value: 'h6',
             children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 6
             })
-          }), jsx(_$$c$5, {
+          }), jsx(SelectOptionReset, {
             value: 'paragraph',
             children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_paragraph')
           })]
@@ -13247,7 +13247,7 @@ let xE = memo(({
     onRowContextMenu
   } = function (e) {
     let [t, i] = useState(null);
-    let n = Xr(UU);
+    let n = useSetAtom(UU);
     let l = useDispatch<AppDispatch>();
     let r = useCallback(t => {
       KB({
@@ -14586,7 +14586,7 @@ function mf({
   let c = e.id;
   let p = Mo(t);
   let [x, m] = useAtomValueAndSetter(pT(c));
-  let h = Xr(pC(c));
+  let h = useSetAtom(pC(c));
   let [g, f] = useAtomValueAndSetter(pI(c));
   let _ = useRef('');
   let b = async (t, n, l) => {
@@ -14715,7 +14715,7 @@ function mv({
   let p = _$$uE(r);
   let [x, m] = useAtomValueAndSetter(pT(s?.id));
   let h = useAtomWithSubscription(pC(s?.id));
-  let g = Xr(UU);
+  let g = useSetAtom(UU);
   let f = p.find(e => e.fieldType === _$$_j.SLUG);
   let _ = _$$gg(r);
   let b = useRef(!1);
@@ -15441,7 +15441,7 @@ let mW = registerModal(({
   let f = getCollectionViewStatus(i ?? '').data;
   let _ = r ?? f?.name;
   let b = useDispatch<AppDispatch>();
-  let y = Xr(_$$iO);
+  let y = useSetAtom(_$$iO);
   let {
     collectionFields,
     createField,
@@ -15901,26 +15901,26 @@ function hn({
   isDisabled: t,
   onChange: i
 }) {
-  return jsxs(_$$bL6, {
+  return jsxs(SelectGroupLabel, {
     value: e,
     onChange: i,
-    children: [jsx(_$$l7, {
+    children: [jsx(SelectSeparator, {
       disabled: t,
       label: jsx(HiddenLabel, {
         children: renderI18nText('dakota.import_csv_modal.labels.type')
       }),
       width: 'fill'
-    }), jsxs(_$$mc2, {
-      children: [jsx(_$$c$5, {
+    }), jsxs(SelectContainer, {
+      children: [jsx(SelectOptionReset, {
         value: 'plain_text',
         children: m1(_$$_j.PLAIN_TEXT)
-      }), jsx(_$$c$5, {
+      }), jsx(SelectOptionReset, {
         value: 'rich_text',
         children: m1(_$$_j.RICH_TEXT)
-      }), jsx(_$$c$5, {
+      }), jsx(SelectOptionReset, {
         value: 'image',
         children: m1(_$$_j.IMAGE)
-      }), jsx(_$$c$5, {
+      }), jsx(SelectOptionReset, {
         value: 'link',
         children: m1(_$$_j.LINK)
       })]
@@ -16403,7 +16403,7 @@ function hp() {
       }) : null;
     };
   }();
-  let i = Xr(_$$iO);
+  let i = useSetAtom(_$$iO);
   let n = trackDefinedFileEventWithStore();
   let l = t => {
     reportError(ServiceCategories.CMS, new Error('Failed to import CSV'), {
@@ -16639,7 +16639,7 @@ async function hg(e) {
   });
 }
 function hf() {
-  let e = Xr(pb);
+  let e = useSetAtom(pb);
   return jsxs('div', {
     className: 'x1n2onr6 x78zum5 xdt5ytf xl56j7k x6s0dn4 xsag5q8 x167g77z xemv814 x1ma9mv9 x17hqfcz xyny9ap',
     children: [jsx('div', {
@@ -16687,9 +16687,9 @@ function hb() {
   let d = getI18nString('dakota.ai.prompt_placeholder');
   let [c, x] = useState(d);
   let m = useCurrentFileKey();
-  let h = Xr(pb);
-  let g = Xr(_$$iO);
-  let f = Xr(_$$ou);
+  let h = useSetAtom(pb);
+  let g = useSetAtom(_$$iO);
+  let f = useSetAtom(_$$ou);
   let _ = t.length > 0;
   let b = () => x(d);
   let y = _ && !n;
@@ -16849,7 +16849,7 @@ let hj = 'dakota_view_empty_state--dakotaEmptyStateButton--uOQGY';
 let hk = 'dakota_view_empty_state--dakotaEmptyStateGenerateButtonContents--QE5Gd';
 function hw() {
   let e = mJ();
-  let t = Xr(pb);
+  let t = useSetAtom(pb);
   let i = hp();
   let n = hasJubileePermissionForDesign();
   return jsxs(Fragment, {
@@ -17005,8 +17005,8 @@ function hO({
   let a = getCollectionSummaryStatus(t).data;
   let r = a?.find(t => t.id === e.id);
   let d = pL(r?.name ?? '', 'header', e.id);
-  let c = Xr(UU);
-  let p = Xr(pE(e.id));
+  let c = useSetAtom(UU);
+  let p = useSetAtom(pE(e.id));
   return jsx(nH.Header, {
     title: d,
     children: jsx(hA, {
@@ -17229,7 +17229,7 @@ function h0(e) {
       buildCodeInteractionsRows: () => v(f)
     }), [v, x, m, f]);
   }();
-  let P = Xr(sitesViewSetterAtomFamily);
+  let P = useSetAtom(sitesViewSetterAtomFamily);
   let O = e => {
     let t = getSingletonSceneGraph().get(e);
     t && _$$xB(t);
@@ -17409,7 +17409,7 @@ function h5(e) {
     onToggle,
     fileInEditableState
   } = e;
-  let a = Xr(_$$f4);
+  let a = useSetAtom(_$$f4);
   return jsx(h1, {
     isOpen,
     onToggle,
@@ -17527,7 +17527,7 @@ function h3({
   });
 }
 function h8() {
-  let e = Xr(_$$zl);
+  let e = useSetAtom(_$$zl);
   let t = () => {
     _$$l.user('create-new-code-file', () => {
       let e = '';
@@ -17610,7 +17610,7 @@ function h7() {
 }
 function h9() {
   let e = _$$b2();
-  let t = Xr(sitesViewSetterAtomFamily);
+  let t = useSetAtom(sitesViewSetterAtomFamily);
   let i = !!Object.values(useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_FILE].local)).filter(h4).length;
   let n = function () {
     let e = useAtomWithSubscription(Y3);
@@ -17741,7 +17741,7 @@ function gl() {
 }
 function ga() {
   let e = useDispatch<AppDispatch>();
-  let t = Xr(pb);
+  let t = useSetAtom(pb);
   let i = mJ();
   let n = _$$ut2();
   let a = hasJubileePermissionForDesign();
@@ -17836,9 +17836,9 @@ function ga() {
   });
 }
 function gs(e) {
-  let t = Xr(UU);
+  let t = useSetAtom(UU);
   let i = AppStateTsApi.cmsState();
-  let n = Xr(_$$iO);
+  let n = useSetAtom(_$$iO);
   let a = _$$e();
   let {
     type,
@@ -17901,10 +17901,10 @@ function go({
     id
   } = getObservableOrFallback(f.bindingFieldSchema);
   let [v, w] = useAtomValueAndSetter(_$$iO);
-  let S = Xr(_$$ou);
+  let S = useSetAtom(_$$ou);
   let C = useDropdown(V6);
   let [T, I] = useState(!1);
-  let E = Xr(UU);
+  let E = useSetAtom(UU);
   let N = b === d && !id;
   let R = v === d && !id;
   let A = () => {
@@ -18023,7 +18023,7 @@ function gu(e) {
     width
   } = e;
   let i = useAtomWithSubscription(p_);
-  let n = Xr(ge);
+  let n = useSetAtom(ge);
   return (useEffect(() => () => {
     CmsHelpers?.exitCmsBindingEditMode();
   }, []), _$$U()) ? jsxs(Fragment, {
@@ -18534,7 +18534,7 @@ function gL(e) {
   let ee = (e, t) => {
     let i = S.get(e);
     if (!i) return;
-    K3(_, i.guid) || Y(i.guid);
+    isNodeSelected(_, i.guid) || Y(i.guid);
     let {
       clientX,
       clientY
@@ -18868,8 +18868,8 @@ function gU({
   });
 }
 function gK() {
-  let e = Xr(sitesViewSetterAtomFamily);
-  let t = Xr(_$$j4);
+  let e = useSetAtom(sitesViewSetterAtomFamily);
+  let t = useSetAtom(_$$j4);
   return jsx(IconButton, {
     'aria-label': getI18nString('sites.metadata.domain.warning_icon_indicating_that_the_custom_domain_has_not_been_verified'),
     'data-tooltip': getI18nString('sites.metadata.domains.unverified_custom_domain'),
@@ -19264,7 +19264,7 @@ function fs() {
     duplicatedBreakpointId,
     parentId
   } = t ?? {};
-  let r = Xr(_$$K);
+  let r = useSetAtom(_$$K);
   let [d, c] = useState('');
   let [p, x] = useState('');
   let [m, h] = useState(!1);
@@ -19354,9 +19354,9 @@ function fd() {
     show,
     isShowing,
     complete
-  } = _$$e5({
+  } = useOverlay({
     overlay: SitesStarterFullscreenOverlay,
-    priority: _$$N5.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   });
   let {
     isEligible,
@@ -19389,16 +19389,16 @@ function fy() {
   let n = useDispatch<AppDispatch>();
   let a = useSceneGraphSelector();
   let r = useAtomWithSubscription(LZ);
-  let d = Xr(P4);
+  let d = useSetAtom(P4);
   let c = fR();
   let p = PR(a);
   let {
     show,
     isShowing,
     complete
-  } = _$$e5({
+  } = useOverlay({
     overlay: SitesOnboardingTOS,
-    priority: _$$N5.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t, i]);
   useSingleEffect(() => {
     r || show({
@@ -19497,9 +19497,9 @@ function fv() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e5({
+  } = useOverlay({
     overlay: SitesOnboardingCallouts,
-    priority: _$$N5.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [i, r]);
   let [m, h] = useState(!1);
   useEventForwarder(uniqueId, [_$$lz], () => {
@@ -19557,9 +19557,9 @@ function fj() {
     show,
     isShowing,
     complete
-  } = _$$e5({
+  } = useOverlay({
     overlay: SitesOnboardingCodeCallout,
-    priority: _$$N5.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [i, d, u]);
   useEffect(() => {
     p || show({
@@ -19572,7 +19572,7 @@ function fj() {
     }));
     complete();
   }, [e, complete]);
-  let _ = Xr(_$$tM);
+  let _ = useSetAtom(_$$tM);
   let b = useCallback(() => {
     _(DesignGraphElements.CODE_COMPONENT);
     f();
@@ -20157,7 +20157,7 @@ function f1({
   let d = useAtomWithSubscription(e.currentAtom);
   let c = d.url;
   let p = f0(c);
-  return jsxs(_$$bL6, {
+  return jsxs(SelectGroupLabel, {
     value: c,
     onChange: t => {
       t !== d.url && e.restartAt({
@@ -20166,7 +20166,7 @@ function f1({
     },
     children: [jsx('div', {
       className: 'xjp7ctv xuvv7d7',
-      children: jsx(_$$l7, {
+      children: jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: getI18nString('sites.panel.selectPage')
         }),
@@ -20176,7 +20176,7 @@ function f1({
         }),
         children: p
       })
-    }), jsx(_$$mc2, {
+    }), jsx(SelectContainer, {
       children: r.map(e => jsx(f2, {
         name: e
       }, e))
@@ -20199,7 +20199,7 @@ function f2({
   name: e
 }) {
   let t = useMemo(() => f0(e), [e]);
-  return jsxs(_$$c$5, {
+  return jsxs(SelectOptionReset, {
     value: e,
     children: [' ', t]
   });
@@ -20712,7 +20712,7 @@ async function _b(e, t, i, n, l, a = !1) {
         } = await x.sendMessage('snapshotPage', {});
         let i = await png.arrayBuffer();
         let n = `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(i)))}`;
-        _$$hI.downloadFile(n, `${e}_${l}.png`);
+        fileExportUtilities.downloadFile(n, `${e}_${l}.png`);
       }
       let r = s.elementData ?? void 0;
       let d = s.documentData ?? void 0;
@@ -21418,7 +21418,7 @@ function _X({
     };
   }(t, _H);
   let [_, b] = useAtomValueAndSetter(_$$_b);
-  let y = Xr(q9);
+  let y = useSetAtom(q9);
   let [v, j] = useAtomValueAndSetter(Og);
   let k = () => {
     _$$uP(Sprig);
@@ -21660,7 +21660,7 @@ let bi = () => {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = Xr(P4);
+  let t = useSetAtom(P4);
   let i = useDispatch<AppDispatch>();
   let n = trackFileEventWithStore();
   return {
@@ -21747,7 +21747,7 @@ function bc({
 function bu({
   template: e
 }) {
-  let t = Xr(_$$ZH);
+  let t = useSetAtom(_$$ZH);
   let i = bs('sites_template_previewed');
   let {
     id,
@@ -21885,7 +21885,7 @@ function bf() {
     Sprig
   } = useSprigWithSampling();
   let t = trackFileEventWithStore();
-  let i = Xr(P4);
+  let i = useSetAtom(P4);
   let n = useDispatch<AppDispatch>();
   return jsxs('div', {
     className: v()('site_templates_view--header--kKbXy', 'site_templates_view--separator--NIAqk'),
@@ -21976,8 +21976,8 @@ function bS({
     Sprig
   } = useSprigWithSampling();
   let n = trackFileEventWithStore();
-  let a = Xr(P4);
-  let d = Xr(_$$ZH);
+  let a = useSetAtom(P4);
+  let d = useSetAtom(_$$ZH);
   let c = useDispatch<AppDispatch>();
   let p = () => {
     d(null);
@@ -22111,7 +22111,7 @@ let bE = ({
   onInsertTemplateFinished: t
 }) => {
   let i = useDispatch<AppDispatch>();
-  let n = Xr(P4);
+  let n = useSetAtom(P4);
   let {
     insertTemplate
   } = Fz();
@@ -22120,7 +22120,7 @@ let bE = ({
     onUseThisTemplate: () => {
       let s = {
         template: e.content.hub_file,
-        type: _$$n10.HubFile
+        type: TeamTemplateType.HubFile
       };
       let o = () => {
         insertTemplate({
@@ -22207,7 +22207,7 @@ function bA({
   children: e
 }) {
   let t = trackFileEventWithStore();
-  let i = Xr(P4);
+  let i = useSetAtom(P4);
   let n = useDispatch<AppDispatch>();
   useSingleEffect(() => t('sites_template_picker_shown'));
   return jsx(ModalContainer, {
@@ -22598,19 +22598,19 @@ function y_({
   });
 }
 function yb(e) {
-  return jsxs(_$$bL6, {
+  return jsxs(SelectGroupLabel, {
     recordingKey: generateRecordingKey(e.recordingKey, 'collectionDropdown'),
     value: e.currentCollection?.name ?? getI18nString('dakota.properties_panel.collection_panel.collection_dropdown_nullstate'),
     onChange: t => {
       e.setCollectionAction(e.collectionList.find(e => e.name === t)?.id ?? null);
     },
-    children: [jsx(_$$l7, {
+    children: [jsx(SelectSeparator, {
       width: 'fill',
       label: jsx(HiddenLabel, {
         children: getI18nString('dakota.properties_panel.collection_panel.page_collection_label')
       })
-    }), jsx(_$$mc2, {
-      children: e.collectionList.map(e => jsx(_$$c$5, {
+    }), jsx(SelectContainer, {
+      children: e.collectionList.map(e => jsx(SelectOptionReset, {
         value: e.name,
         children: e.name
       }, e.id))
@@ -22705,11 +22705,11 @@ function yj({
   if (!e || !a || !n || !i) return null;
   let s = new Map();
   a.forEach(e => s.set(e.id, e.fields?.find(e => e.fieldSchemaId === i)?.value ?? ''));
-  let r = a.map(e => jsx(_$$c$5, {
+  let r = a.map(e => jsx(SelectOptionReset, {
     value: e.id,
     children: s.get(e.id) ?? ''
   }, e.id));
-  let o = jsxs(_$$bL6, {
+  let o = jsxs(SelectGroupLabel, {
     recordingKey: generateRecordingKey(t, 'itemSelectorDropdown'),
     value: n,
     onChange: e => {
@@ -22717,13 +22717,13 @@ function yj({
         getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => t.setDakotaSelectorSingleItemFilter(e));
       });
     },
-    children: [jsx(_$$l7, {
+    children: [jsx(SelectSeparator, {
       width: 'fill',
       label: jsx(HiddenLabel, {
         children: getI18nString('dakota.properties_panel.collection_panel.item_switcher_label')
       }),
       disabled: a.length === 0
-    }), jsx(_$$mc2, {
+    }), jsx(SelectContainer, {
       children: r
     })]
   });
@@ -22781,24 +22781,24 @@ function yw({
     status
   } = Vp(e ?? '');
   let a = useDeepEqualSceneValue(e => e.getDirectlySelectedNodes()[0]?.getDakotaSelector()?.limit);
-  let s = [jsx(_$$c$5, {
+  let s = [jsx(SelectOptionReset, {
     value: '0',
     children: getI18nString('dakota.properties_panel.collection_panel.repeater_limit_dropdown_no_limit')
   }, 0)];
   if (status === 'loaded') {
     for (let e = 1; e <= data.length; e++) {
-      s.push(jsx(_$$c$5, {
+      s.push(jsx(SelectOptionReset, {
         value: e.toString(),
         children: e
       }, e));
     }
   } else {
-    a && s.push(jsx(_$$c$5, {
+    a && s.push(jsx(SelectOptionReset, {
       value: a.toString(),
       children: a
     }, a));
   }
-  let r = jsxs(_$$bL6, {
+  let r = jsxs(SelectGroupLabel, {
     recordingKey: generateRecordingKey(t, 'repeaterLimitDropdown'),
     value: a ? a.toString() : '0',
     onChange: e => {
@@ -22806,14 +22806,14 @@ function yw({
         getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => t.updateDakotaSelectorLimit(Number(e)));
       });
     },
-    children: [jsx(_$$l7, {
+    children: [jsx(SelectSeparator, {
       width: 'fill',
       label: jsx(HiddenLabel, {
         children: getI18nString('dakota.properties_panel.collection_panel.limit_label')
       }),
       disabled: status !== 'loaded',
       placeholder: getI18nString('dakota.properties_panel.collection_panel.repeater_limit_dropdown_no_limit')
-    }), jsx(_$$mc2, {
+    }), jsx(SelectContainer, {
       children: s
     })]
   }, (e ?? '') + (a ?? 0) + data.length);
@@ -27159,7 +27159,7 @@ function Sh(e, t) {
   }
   return i[e];
 }
-let Sg = createRemovableAtomFamily(e => _$$mg(atom(t => {
+let Sg = createRemovableAtomFamily(e => selectAtom(atom(t => {
   let i = t(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].local);
   let n = t(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].subscribed);
   let l = CodeComponentIdHandler.fromString(e);
@@ -27242,22 +27242,22 @@ function Sv(e) {
       })
     }), jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.hotspot'),
-      input: jsxs(_$$bL6, {
+      input: jsxs(SelectGroupLabel, {
         value: g,
         onChange: _,
-        children: [jsx(_$$l7, {
+        children: [jsx(SelectSeparator, {
           width: 'fill',
           label: jsx(HiddenLabel, {
             children: renderI18nText('sites.panel.interactions_panel.hotspot')
           })
-        }), jsxs(_$$mc2, {
-          children: [jsx(_$$c$5, {
+        }), jsxs(SelectContainer, {
+          children: [jsx(SelectOptionReset, {
             value: 'top-left',
             children: renderI18nText('sites.panel.interactions_panel.hotspot_top_left')
-          }), jsx(_$$c$5, {
+          }), jsx(SelectOptionReset, {
             value: 'center',
             children: renderI18nText('sites.panel.interactions_panel.hotspot_center')
-          }), jsx(_$$wv, {}), jsx(_$$c$5, {
+          }), jsx(SeparatorComponent, {}), jsx(SelectOptionReset, {
             value: 'manual',
             children: renderI18nText('sites.panel.interactions_panel.hotspot_manual')
           })]
@@ -30616,7 +30616,7 @@ function TY({
   let d = useSelectedStyleOrSelectionPropertyValue('containsResponsiveSets');
   let c = !n[ItemType.FRAME_PRESETS] && !n[ItemType.PENCIL_TOOL] && !d;
   let p = z0();
-  let x = Object.keys(i).length > 0 && _$$Yh(p, 'create-code-layer-from-design');
+  let x = Object.keys(i).length > 0 && isActionEnabled(p, 'create-code-layer-from-design');
   let m = (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) && x;
   let h = !x && !_$$jd(n) && !n[ItemType.SITES_LINK_ITEM] && !n[ItemType.SITES_INTERACTIONS_ITEM] && !n[ItemType.FRAME_PRESETS] && !n[ItemType.PENCIL_TOOL];
   return jsxs(TabLoop, {
@@ -30833,7 +30833,7 @@ let T2 = memo(({
     let t = useIsFullscreenReady();
     let i = selectCurrentFile();
     let n = useAtomWithSubscription(copyToSitesFromDesignAtom);
-    let l = Xr(sessionIdAtom);
+    let l = useSetAtom(sessionIdAtom);
     let a = useSceneGraphSelector();
     let d = useDispatch<AppDispatch>();
     let [c, x] = useAtomValueAndSetter(u3);
@@ -30855,7 +30855,7 @@ let T2 = memo(({
           t.setSelectionToSingleNode(i);
           fullscreenValue.triggerActionEnum(Command.TOGGLE_LOCKED_FOR_SELECTED_NODES);
           u5(n).then(() => {
-            l(Ut);
+            l(RESET);
             let t = a.getDirectlySelectedNodes()[0]?.guid;
             debug(!!t, 'newlyCopiedNodeId is undefined. This should never happen');
             renameNode(t, getI18nString('sites.modal.desktop'));

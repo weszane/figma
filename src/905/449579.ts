@@ -1,909 +1,2013 @@
+/**
+ * Auto-layout system for organizing UI elements into structured layouts.
+ * This module processes vertices (UI elements) and creates appropriate layout structures.
+ *
+ * Refactored for improved readability, type safety, and maintainability.
+ * Changes: Renamed variables for clarity, added TypeScript interfaces, improved code organization,
+ * added documentation comments, and simplified complex logic while preserving functionality.
+ */
+
 import { aalSettingsConfig } from "../905/55273"
-import { areBoxesApproximatelyEqual, calculateAverageSpacing, calculateBoundingBox, calculateCenterDistance, calculateSpacingBetweenBoxes, calculateTransformedBoundingBox, compareWithTolerance, determineDominantAlignment, doBoxesOverlap, EPSILON, getCoordinateForAxis, getOppositeAxis, isApproximatelyEqual, isApproximatelyEqualOrGreater, mapAlignmentToConstraintType } from "../905/259345"
+import {
+  areBoxesApproximatelyEqual,
+  calculateAverageSpacing,
+  calculateBoundingBox,
+  calculateCenterDistance,
+  calculateSpacingBetweenBoxes,
+  calculateTransformedBoundingBox,
+  compareWithTolerance,
+  determineDominantAlignment,
+  doBoxesOverlap,
+  EPSILON,
+  getCoordinateForAxis,
+  getOppositeAxis,
+  isApproximatelyEqual,
+  isApproximatelyEqualOrGreater,
+  mapAlignmentToConstraintType,
+} from "../905/259345"
 import { logger } from "../905/651849"
 
-function s(e) {
-  return e.join(",")
+// ==================== INTERFACES ====================
+
+interface Vertex {
+  type: "NODE" | "LIST" | "GROUP" | "FRAME" | "INSTANCE"
+  id: string
+  x: number
+  y: number
+  width: number
+  height: number
+  node?: any // Original node reference
+  signature: string
+  children?: Vertex[]
+  absolutePositionedChildren?: Vertex[]
+  axis?: "X" | "Y"
+  spacing?: number
+  wrap?: boolean
+  counterSpacing?: number
+  layoutMode?: string
+  primaryAxisAlignItems?: string
+  counterAxisAlignItems?: string
+  layoutSizingHorizontal?: string
+  layoutSizingVertical?: string
+  layoutWrap?: string
+  itemSpacing?: number
+  paddingLeft?: number
+  paddingRight?: number
+  paddingTop?: number
+  paddingBottom?: number
+  visible?: boolean
+  removed?: boolean
 }
-function o(e, t) {
-  if (e.from.id !== t.id && e.to.id !== t.id)
+
+interface Edge {
+  id: string
+  spacing: number
+  axis: "X" | "Y"
+  hitCount: number
+  from: Vertex
+  to: Vertex
+}
+
+interface LayoutOptions {
+  maxHitCount: number
+  enablePivotRule: boolean
+}
+
+interface VertexGroup {
+  vertices: Vertex[]
+  bbox: { left: number, top: number, right: number, bottom: number }
+}
+
+interface FrameCreationContext {
+  value: number
+}
+
+type GraphAdjacencyMap = Map<string, Edge[]>
+
+// ==================== UTILITY FUNCTIONS ====================
+
+/**
+ * Joins array elements with commas
+ */
+function joinWithCommas(elements: any[]): string {
+  return elements.join(",")
+}
+
+/**
+ * Gets the opposite vertex of an edge
+ */
+function getOppositeVertex(edge: Edge, vertex: Vertex): Vertex {
+  if (edge.from.id !== vertex.id && edge.to.id !== vertex.id) {
     throw new Error("vertex is not in edge!")
-  return e.from.id === t.id ? e.to : e.from
+  }
+  return edge.from.id === vertex.id ? edge.to : edge.from
 }
-function l(e, t) {
-  return e.from.id === t.id ? 1 : -1
+
+/**
+ * Determines the direction of an edge relative to a vertex
+ */
+function getEdgeDirection(edge: Edge, vertex: Vertex): number {
+  return edge.from.id === vertex.id ? 1 : -1
 }
-function d(e, t) {
-  let i = 0
-  return (i = -compareWithTolerance(e.width * e.height, t.width * t.height)) != 0 || (i = compareWithTolerance(e.x, t.x)) !== 0 || (i = compareWithTolerance(e.y, t.y)) !== 0 ? i : e.id.localeCompare(t.id)
+
+/**
+ * Compares vertices based on area, x, y coordinates, and id
+ */
+function compareVertices(first: Vertex, second: Vertex): number {
+  let result = -compareWithTolerance(first.width * first.height, second.width * second.height)
+  if (result !== 0)
+    return result
+
+  result = compareWithTolerance(first.x, second.x)
+  if (result !== 0)
+    return result
+
+  result = compareWithTolerance(first.y, second.y)
+  if (result !== 0)
+    return result
+
+  return first.id.localeCompare(second.id)
 }
-function c(e, t) {
-  let i = 0
-  return (i = compareWithTolerance(e.spacing, t.spacing, EPSILON, !0)) !== 0 || (i = compareWithTolerance(t.hitCount, e.hitCount)) !== 0 ? i : i = compareWithTolerance(e.axis, t.axis)
+
+/**
+ * Compares edges based on spacing, hit count, and axis
+ */
+function compareEdges(first: Edge, second: Edge): number {
+  let result = compareWithTolerance(first.spacing, second.spacing, EPSILON, true)
+  if (result !== 0)
+    return result
+
+  result = compareWithTolerance(second.hitCount, first.hitCount)
+  if (result !== 0)
+    return result
+
+  return compareWithTolerance(first.axis, second.axis)
 }
-function u(e) {
-  let t = new Map()
-  let i = new Map()
-  function n(e, n, r) {
-    let s
-    let o
-    if (!n)
+
+// ==================== GRAPH BUILDING ====================
+
+/**
+ * Builds a graph from vertices
+ */
+function buildGraph(vertices: Vertex[]): GraphAdjacencyMap {
+  const edgeMap: Map<string, Edge> = new Map()
+  const adjacencyMap: GraphAdjacencyMap = new Map()
+
+  function addEdge(fromVertex: Vertex, toVertex: Vertex, axis: "X" | "Y"): void {
+    if (!toVertex)
       return
-    let l = (s = e.id) > (o = n.id) ? `${o}-${s}` : `${s}-${o}`
-    if (t.has(l)) {
-      let e = t.get(l)
-      if (e.axis === r) {
-        e.hitCount++
+
+    // Create a unique edge ID
+    const edgeId = fromVertex.id > toVertex.id ? `${toVertex.id}-${fromVertex.id}` : `${fromVertex.id}-${toVertex.id}`
+
+    // If edge already exists with same axis, increment hit count
+    if (edgeMap.has(edgeId)) {
+      const existingEdge = edgeMap.get(edgeId)!
+      if (existingEdge.axis === axis) {
+        existingEdge.hitCount++
         return
       }
     }
-    let d = getCoordinateForAxis(e, r) < getCoordinateForAxis(n, r) ? e : n
-    let c = getCoordinateForAxis(e, r) < getCoordinateForAxis(n, r) ? n : e
-    let u = {
-      id: l,
-      spacing: calculateSpacingBetweenBoxes(e, n, r),
-      axis: r,
+
+    // Determine which vertex is "from" and which is "to" based on coordinate
+    const from = getCoordinateForAxis(fromVertex, axis) < getCoordinateForAxis(toVertex, axis) ? fromVertex : toVertex
+    const to = getCoordinateForAxis(fromVertex, axis) < getCoordinateForAxis(toVertex, axis) ? toVertex : fromVertex
+
+    // Create new edge
+    const edge: Edge = {
+      id: edgeId,
+      spacing: calculateSpacingBetweenBoxes(fromVertex, toVertex, axis),
+      axis,
       hitCount: 1,
-      from: d,
-      to: c,
-    }
-    t.set(l, u)
-    i.has(e.id) || i.set(e.id, [])
-    i.has(n.id) || i.set(n.id, [])
-    i.get(e.id).push(u)
-    i.get(n.id).push(u)
-  }
-  let r = [...e].sort((e, t) => {
-    let i = compareWithTolerance(e.x, t.x)
-    return i !== 0 ? i : compareWithTolerance(e.y, t.y)
-  })
-  let s = [...e].sort((e, t) => {
-    let i = compareWithTolerance(e.y, t.y)
-    return i !== 0 ? i : compareWithTolerance(e.x, t.x)
-  })
-  function o(e, t, i) {
-    let n = e + i
-    for (; n >= 0 && n < r.length;) {
-      let s = r[n]
-      if (!isApproximatelyEqual(s.x, r[e].x) && s.y <= t + EPSILON && s.y + s.height >= t - EPSILON && !(isApproximatelyEqual(s.y + s.height, t, 0.5) && s.x >= r[e].x && s.x + s.width <= r[e].x + r[e].width) && !(isApproximatelyEqual(s.y, t, 0.5) && s.x <= r[e].x && s.x + s.width >= r[e].x + r[e].width))
-        return s
-      n += i
-    }
-  }
-  function l(e, t, i) {
-    let n = e + i
-    for (; n >= 0 && n < s.length;) {
-      let r = s[n]
-      if (!isApproximatelyEqual(r.y, s[e].y) && r.x <= t + EPSILON && r.x + r.width >= t - EPSILON && !(r.x + r.width === t && r.y >= s[e].y && r.y + r.height <= s[e].y + s[e].height) && !(r.x === t && r.y <= s[e].y && r.y + r.height >= s[e].y + s[e].height))
-        return r
-      n += i
-    }
-  }
-  for (let e = 0; e < r.length; e++) {
-    let t = r[e]
-    {
-      let i = o(e, t.y, -1)
-      n(t, i, "X")
-    }
-    {
-      let i = o(e, t.y + t.height, -1)
-      n(t, i, "X")
-    }
-    {
-      let i = o(e, t.y, 1)
-      n(t, i, "X")
-    }
-    {
-      let i = o(e, t.y + t.height, 1)
-      n(t, i, "X")
-    }
-  }
-  for (let e = 0; e < s.length; e++) {
-    let t = s[e]
-    {
-      let i = l(e, t.x, -1)
-      n(t, i, "Y")
-    }
-    {
-      let i = l(e, t.x, 1)
-      n(t, i, "Y")
-    }
-    {
-      let i = l(e, t.x + t.width, -1)
-      n(t, i, "Y")
-    }
-    {
-      let i = l(e, t.x + t.width, 1)
-      n(t, i, "Y")
-    }
-  }
-  return i
-}
-function p(e, t, i) {
-  let n = calculateTransformedBoundingBox([e, t])
-  for (let r of i) {
-    if (r.id === e.id || r.id === t.id)
-      continue
-    let i = calculateTransformedBoundingBox([r])
-    if (doBoxesOverlap(n, i))
-      return !0
-  }
-  return !1
-}
-function m(e, t, i, n, r, s) {
-  let d = getOppositeAxis(i)
-  let c = s.get(e.id).filter(e => e.to.id !== t.id && e.axis === d)
-  let u = s.get(t.id).filter(t => t.from.id !== e.id && t.axis === d)
-  for (let s of c) {
-    let d = o(s, e)
-    for (let c of u) {
-      let u = o(c, t)
-      if (d.id === u.id)
-        continue
-      if (n.indexOf(d) > r || n.indexOf(u) > r)
-        return !0
-      let p = l(s, e)
-      let m = l(c, t)
-      let h = isApproximatelyEqual(s.spacing, c.spacing)
-      let g = isApproximatelyEqual(calculateCenterDistance(e, d), calculateCenterDistance(t, u))
-      let f = d.signature === u.signature
-      let _ = p === m
-      if ((h || g) && f && _ && (e.signature !== t.signature || d.signature !== e.signature || s.spacing < calculateSpacingBetweenBoxes(e, t, i)))
-        return !0
-    }
-  }
-  return !1
-}
-function h(e, t, i, n, r, a) {
-  let s = e.filter((e) => {
-    let {
       from,
       to,
-      axis,
-    } = e
-    return !(!i.includes(from) || !i.includes(to) || p(from, to, t) || a && m(from, to, axis, t, n, r))
+    }
+
+    edgeMap.set(edgeId, edge)
+
+    // Add to adjacency map
+    if (!adjacencyMap.has(fromVertex.id))
+      adjacencyMap.set(fromVertex.id, [])
+    if (!adjacencyMap.has(toVertex.id))
+      adjacencyMap.set(toVertex.id, [])
+
+    adjacencyMap.get(fromVertex.id)!.push(edge)
+    adjacencyMap.get(toVertex.id)!.push(edge)
+  }
+
+  // Sort vertices by x and y coordinates
+  const sortedByX = [...vertices].sort((a, b) => {
+    const result = compareWithTolerance(a.x, b.x)
+    return result !== 0 ? result : compareWithTolerance(a.y, b.y)
   })
-  if (s.length)
-    return s[0]
-}
-function g(e) {
-  return e.length !== 0 && (e.every(t => t.width === e[0].width) || e.every(t => t.height === e[0].height))
-}
-function f(e) {
-  if (e.length === 0)
-    return
-  let t = e[0]
-  let i = e[0]
-  let n = calculateTransformedBoundingBox([t])
-  let r = calculateTransformedBoundingBox([i])
-  e.forEach((e) => {
-    let s = calculateTransformedBoundingBox([e])
-    n.left > s.left && (n = s, t = e)
-    r.top > s.top && (r = s, i = e)
+
+  const sortedByY = [...vertices].sort((a, b) => {
+    const result = compareWithTolerance(a.y, b.y)
+    return result !== 0 ? result : compareWithTolerance(a.x, b.x)
   })
-  return i.id === t.id ? t : void 0
-}
-function _(e, t, i, n, r, s, d, u, p, g, f, _) {
-  if (t.axis !== e)
-    return !1
-  let A = l(t, i[0])
-  let y = !1
-  for (let e of [...i]) {
-    for (; e && !y && r.has(e.id);) {
-      let b = r.get(e.id).filter((r) => {
-        if (r.axis !== t.axis || r.hitCount < d)
-          return !1
-        let c = o(r, e)
-        if (i.includes(c) || s.indexOf(c) >= g || Math.abs(A) !== Math.abs(l(r, e)))
-          return !1
-        if (!isApproximatelyEqual(r.spacing, t.spacing) && r.spacing < t.spacing + EPSILON && r.hitCount >= n[n.length - 1].hitCount) {
-          y = !0
-          return !1
-        }
-        if (!isApproximatelyEqual(r.spacing, t.spacing))
-          return !1
-        let m = calculateTransformedBoundingBox([c])
-        return !(m.left < u - EPSILON) && !(m.right > p + EPSILON)
-      }).sort(c)
-      if (y)
-        break
-      let v = h(b, s, _, g, r, f)
-      if (!v)
-        break
-      let I = o(v, e)
-      if (f && m(i[0], I, v.axis, s, g, r))
-        break
-      i.push(I)
-      n.push(v)
-      e = I
+
+  // Helper functions to find adjacent vertices
+  function findAdjacentX(sortedIndex: number, yCoordinate: number, direction: number): Vertex | undefined {
+    let currentIndex = sortedIndex + direction
+    while (currentIndex >= 0 && currentIndex < sortedByX.length) {
+      const candidate = sortedByX[currentIndex]
+      if (!isApproximatelyEqual(candidate.x, sortedByX[sortedIndex].x)
+        && candidate.y <= yCoordinate + EPSILON
+        && candidate.y + candidate.height >= yCoordinate - EPSILON
+        && !(isApproximatelyEqual(candidate.y + candidate.height, yCoordinate, 0.5)
+          && candidate.x >= sortedByX[sortedIndex].x
+          && candidate.x + candidate.width <= sortedByX[sortedIndex].x + sortedByX[sortedIndex].width)
+        && !(isApproximatelyEqual(candidate.y, yCoordinate, 0.5)
+          && candidate.x <= sortedByX[sortedIndex].x
+          && candidate.x + candidate.width >= sortedByX[sortedIndex].x + sortedByX[sortedIndex].width)) {
+        return candidate
+      }
+      currentIndex += direction
     }
   }
-  return y
-}
-function A(e, t, i, n, s, l, d) {
-  let c = t === "X" ? "Y" : "X"
-  let u = i.get(e.id)
-  let p = []
-  for (let e of u ?? []) e.axis === c && (p.length === 0 || isApproximatelyEqual(p[0].spacing, e.spacing) ? p.push(e) : p.length > 0 && p[0].spacing > e.spacing && (p = [e]))
-  let m = p.map(t => ({
-    other: o(t, e),
-    edge: t,
-  }))
-  let h = []
-  for (let {
-    other,
-    edge,
-  } of m) {
-    if (edge.spacing > aalSettingsConfig.WRAP_CANDIDATE_VERTICAL_THRESHOLD)
-      return []
-    if (!isApproximatelyEqual(other.width, e.width) && !isApproximatelyEqual(other.height, e.height))
-      continue
-    let u = [edge]
-    if (_(c, edge, [e, other], u, i, n, l, -1 / 0, 1 / 0, s, !1, d))
-      return []
-    h.push(...u)
+
+  function findAdjacentY(sortedIndex: number, xCoordinate: number, direction: number): Vertex | undefined {
+    let currentIndex = sortedIndex + direction
+    while (currentIndex >= 0 && currentIndex < sortedByY.length) {
+      const candidate = sortedByY[currentIndex]
+      if (!isApproximatelyEqual(candidate.y, sortedByY[sortedIndex].y)
+        && candidate.x <= xCoordinate + EPSILON
+        && candidate.x + candidate.width >= xCoordinate - EPSILON
+        && !(candidate.x + candidate.width === xCoordinate
+          && candidate.y >= sortedByY[sortedIndex].y
+          && candidate.y + candidate.height <= sortedByY[sortedIndex].y + sortedByY[sortedIndex].height)
+        && !(candidate.x === xCoordinate
+          && candidate.y <= sortedByY[sortedIndex].y
+          && candidate.y + candidate.height >= sortedByY[sortedIndex].y + sortedByY[sortedIndex].height)) {
+        return candidate
+      }
+      currentIndex += direction
+    }
   }
-  h.sort((e, t) => {
-    let i = calculateTransformedBoundingBox([e.from, e.to])
-    let n = calculateTransformedBoundingBox([t.from, t.to])
-    return compareWithTolerance(i.top, n.top)
-  })
-  return h
+
+  // Process X-axis adjacencies
+  for (let i = 0; i < sortedByX.length; i++) {
+    const vertex = sortedByX[i]
+
+    // Check for adjacent vertices in four positions
+    const adjacent1 = findAdjacentX(i, vertex.y, -1)
+    addEdge(vertex, adjacent1, "X")
+
+    const adjacent2 = findAdjacentX(i, vertex.y + vertex.height, -1)
+    addEdge(vertex, adjacent2, "X")
+
+    const adjacent3 = findAdjacentX(i, vertex.y, 1)
+    addEdge(vertex, adjacent3, "X")
+
+    const adjacent4 = findAdjacentX(i, vertex.y + vertex.height, 1)
+    addEdge(vertex, adjacent4, "X")
+  }
+
+  // Process Y-axis adjacencies
+  for (let i = 0; i < sortedByY.length; i++) {
+    const vertex = sortedByY[i]
+
+    // Check for adjacent vertices in four positions
+    const adjacent1 = findAdjacentY(i, vertex.x, -1)
+    addEdge(vertex, adjacent1, "Y")
+
+    const adjacent2 = findAdjacentY(i, vertex.x, 1)
+    addEdge(vertex, adjacent2, "Y")
+
+    const adjacent3 = findAdjacentY(i, vertex.x + vertex.width, -1)
+    addEdge(vertex, adjacent3, "Y")
+
+    const adjacent4 = findAdjacentY(i, vertex.x + vertex.width, 1)
+    addEdge(vertex, adjacent4, "Y")
+  }
+
+  return adjacencyMap
 }
-function y(e, t, i, n, r, s) {
-  let d = []
-  let c = -1 / 0
-  let u = 1 / 0
-  let m = new Set()
-  for (let h of e) {
-    if (h.axis === "Y") {
-      for (let e of [h.from, h.to]) {
-        if (m.has(e.id))
-          continue
-        m.add(e.id)
-        let h = (function (e, t, i) {
-          let n
-          let r
-          for (let i of t.get(e.id) ?? []) {
-            if (i.axis === "Y" || l(i, e) < 0)
-              continue
-            let t = o(i, e)
-            let s = (function (e) {
-              let t = e.axis === "X" ? "Y" : "X"
-              let i = calculateTransformedBoundingBox([e.from])
-              let n = calculateTransformedBoundingBox([e.to])
-              return t === "Y" ? isApproximatelyEqual(i.top, n.top) || isApproximatelyEqual(i.bottom, n.bottom) || isApproximatelyEqual(i.top + (i.bottom - i.top) / 2, n.top + (n.bottom - n.top) / 2) : isApproximatelyEqual(i.left, n.left) || isApproximatelyEqual(i.right, n.right) || isApproximatelyEqual(i.left + (i.right - i.left) / 2, n.left + (n.right - n.left) / 2)
-            }(i));
-            (!n || n.spacing) && s && (n = i, r = t)
-          }
-          if (!(r && p(e, r, i)))
-            return n
-        }(e, t, i))
-        if (!h) {
-          d.push([e])
-          continue
-        }
-        let g = o(h, e)
-        let f = [e, g]
-        let A = [h]
-        if (_("X", h, f, A, t, i, n, c, u, r, !1, s)) {
-          d.push([e])
-          break
-        }
-        d.push(f)
-        let y = calculateTransformedBoundingBox(f)
-        c = Math.max(c, y.left)
-        u = Math.min(u, y.right)
+
+// ==================== VERTEX PROCESSING ====================
+
+/**
+ * Checks if two vertices overlap with any other vertices
+ */
+function doVerticesOverlapWithOthers(from: Vertex, to: Vertex, allVertices: Vertex[]): boolean {
+  const boundingBox = calculateTransformedBoundingBox([from, to])
+
+  for (const vertex of allVertices) {
+    if (vertex.id === from.id || vertex.id === to.id)
+      continue
+
+    const vertexBox = calculateTransformedBoundingBox([vertex])
+    if (doBoxesOverlap(boundingBox, vertexBox))
+      return true
+  }
+
+  return false
+}
+
+/**
+ * Checks if two vertices satisfy the pivot rule
+ */
+function satisfiesPivotRule(
+  from: Vertex,
+  to: Vertex,
+  axis: "X" | "Y",
+  allVertices: Vertex[],
+  maxIndex: number,
+  adjacencyMap: GraphAdjacencyMap,
+): boolean {
+  const oppositeAxis = getOppositeAxis(axis)
+
+  // Filter edges for both vertices
+  const fromEdges = (adjacencyMap.get(from.id) || []).filter(edge => edge.to.id !== to.id && edge.axis === oppositeAxis)
+  const toEdges = (adjacencyMap.get(to.id) || []).filter(edge => edge.from.id !== from.id && edge.axis === oppositeAxis)
+
+  // Check all combinations of edges
+  for (const fromEdge of fromEdges) {
+    const fromOpposite = getOppositeVertex(fromEdge, from)
+
+    for (const toEdge of toEdges) {
+      const toOpposite = getOppositeVertex(toEdge, to)
+
+      if (fromOpposite.id === toOpposite.id)
+        continue
+
+      // Check if vertices are beyond the max index
+      if (allVertices.indexOf(fromOpposite) > maxIndex || allVertices.indexOf(toOpposite) > maxIndex) {
+        return true
+      }
+
+      const fromDirection = getEdgeDirection(fromEdge, from)
+      const toDirection = getEdgeDirection(toEdge, to)
+
+      const spacingEqual = isApproximatelyEqual(fromEdge.spacing, toEdge.spacing)
+      const centerDistanceEqual = isApproximatelyEqual(
+        calculateCenterDistance(from, fromOpposite),
+        calculateCenterDistance(to, toOpposite),
+      )
+
+      const signaturesEqual = fromOpposite.signature === toOpposite.signature
+      const directionsEqual = fromDirection === toDirection
+
+      if ((spacingEqual || centerDistanceEqual) && signaturesEqual && directionsEqual
+        && (from.signature !== to.signature || fromOpposite.signature !== from.signature
+          || fromEdge.spacing < calculateSpacingBetweenBoxes(from, to, axis))) {
+        return true
       }
     }
   }
-  return d
+
+  return false
 }
-function b(e, t = []) {
-  let i = calculateTransformedBoundingBox([...e, ...t])
+
+/**
+ * Filters edges based on various criteria
+ */
+function filterEdges(
+  edges: Edge[],
+  includedVertices: Vertex[],
+  allVertices: Vertex[],
+  maxIndex: number,
+  adjacencyMap: GraphAdjacencyMap,
+  enablePivotRule: boolean,
+): Edge | undefined {
+  const validEdges = edges.filter((edge) => {
+    const { from, to, axis } = edge
+    return !(!includedVertices.includes(from) || !includedVertices.includes(to)
+      || doVerticesOverlapWithOthers(from, to, allVertices)
+      || (enablePivotRule && satisfiesPivotRule(from, to, axis, allVertices, maxIndex, adjacencyMap)))
+  })
+
+  return validEdges.length > 0 ? validEdges[0] : undefined
+}
+
+/**
+ * Checks if all vertices have the same width or height
+ */
+function areVerticesUniform(vertices: Vertex[]): boolean {
+  return vertices.length !== 0 && (
+    vertices.every(vertex => vertex.width === vertices[0].width)
+    || vertices.every(vertex => vertex.height === vertices[0].height)
+  )
+}
+
+/**
+ * Finds the leftmost and topmost vertices
+ */
+function findCornerVertices(vertices: Vertex[]): Vertex | undefined {
+  if (vertices.length === 0)
+    return undefined
+
+  let leftmost = vertices[0]
+  let topmost = vertices[0]
+
+  let leftmostBox = calculateTransformedBoundingBox([leftmost])
+  let topmostBox = calculateTransformedBoundingBox([topmost])
+
+  for (const vertex of vertices) {
+    const box = calculateTransformedBoundingBox([vertex])
+
+    if (box.left < leftmostBox.left) {
+      leftmostBox = box
+      leftmost = vertex
+    }
+
+    if (box.top < topmostBox.top) {
+      topmostBox = box
+      topmost = vertex
+    }
+  }
+
+  return topmost.id === leftmost.id ? leftmost : undefined
+}
+
+/**
+ * Extends a chain of vertices along an axis
+ */
+function extendVertexChain(
+  targetAxis: "X" | "Y",
+  edge: Edge,
+  vertices: Vertex[],
+  edges: Edge[],
+  adjacencyMap: GraphAdjacencyMap,
+  allVertices: Vertex[],
+  maxHitCount: number,
+  leftBoundary: number,
+  rightBoundary: number,
+  maxIndex: number,
+  enablePivotRule: boolean,
+): boolean {
+  if (edge.axis !== targetAxis)
+    return false
+
+  const direction = getEdgeDirection(edge, vertices[0])
+  let foundOverlap = false
+
+  // Process each vertex in the chain
+  for (const vertex of [...vertices]) {
+    // Continue while we have a valid vertex and haven't found an overlap
+    for (let currentVertex = vertex; currentVertex && !foundOverlap && adjacencyMap.has(currentVertex.id);) {
+      // Filter and sort adjacent edges
+      const adjacentEdges = adjacencyMap.get(currentVertex.id)!
+        .filter((adjacentEdge) => {
+          // Check basic conditions
+          if (adjacentEdge.axis !== edge.axis || adjacentEdge.hitCount < maxHitCount) {
+            return false
+          }
+
+          const oppositeVertex = getOppositeVertex(adjacentEdge, currentVertex)
+
+          // Check if vertex is already included or beyond max index
+          if (vertices.includes(oppositeVertex) || allVertices.indexOf(oppositeVertex) >= maxIndex) {
+            return false
+          }
+
+          // Check direction consistency
+          if (Math.abs(direction) !== Math.abs(getEdgeDirection(adjacentEdge, currentVertex))) {
+            return false
+          }
+
+          // Check spacing conditions
+          if (!isApproximatelyEqual(adjacentEdge.spacing, edge.spacing)
+            && adjacentEdge.spacing < edge.spacing + EPSILON
+            && adjacentEdge.hitCount >= edges[edges.length - 1].hitCount) {
+            foundOverlap = true
+            return false
+          }
+
+          // If spacings aren't equal, skip this edge
+          if (!isApproximatelyEqual(adjacentEdge.spacing, edge.spacing)) {
+            return false
+          }
+
+          // Check boundary conditions
+          const box = calculateTransformedBoundingBox([oppositeVertex])
+          return !(box.left < leftBoundary - EPSILON) && !(box.right > rightBoundary + EPSILON)
+        })
+        .sort(compareEdges)
+
+      // Break if we found an overlap
+      if (foundOverlap)
+        break
+
+      // Find the next valid edge
+      const nextEdge = filterEdges(adjacentEdges, allVertices, allVertices, maxIndex, adjacencyMap, enablePivotRule)
+      if (!nextEdge)
+        break
+
+      // Check pivot rule if enabled
+      const oppositeVertex = getOppositeVertex(nextEdge, currentVertex)
+      if (enablePivotRule && satisfiesPivotRule(
+        vertices[0],
+        oppositeVertex,
+        nextEdge.axis,
+        allVertices,
+        maxIndex,
+        adjacencyMap,
+      )) {
+        break
+      }
+
+      // Add the new vertex and edge to our chain
+      vertices.push(oppositeVertex)
+      edges.push(nextEdge)
+      currentVertex = oppositeVertex
+    }
+  }
+
+  return foundOverlap
+}
+
+/**
+ * Finds wrapping candidates for a vertex
+ */
+function findWrappingCandidates(
+  vertex: Vertex,
+  axis: "X" | "Y",
+  adjacencyMap: GraphAdjacencyMap,
+  allVertices: Vertex[],
+  maxIndex: number,
+  maxHitCount: number,
+): Edge[] {
+  const oppositeAxis = axis === "X" ? "Y" : "X"
+  const vertexEdges = adjacencyMap.get(vertex.id) || []
+
+  // Filter edges along the opposite axis
+  const candidateEdges: Edge[] = []
+  for (const edge of vertexEdges) {
+    if (edge.axis === oppositeAxis) {
+      if (candidateEdges.length === 0 || isApproximatelyEqual(candidateEdges[0].spacing, edge.spacing)) {
+        candidateEdges.push(edge)
+      }
+      else if (candidateEdges.length > 0 && candidateEdges[0].spacing > edge.spacing) {
+        candidateEdges.length = 0 // Clear array
+        candidateEdges.push(edge)
+      }
+    }
+  }
+
+  // Create edge-object pairs
+  const edgeObjectPairs = candidateEdges.map(edge => ({
+    other: getOppositeVertex(edge, vertex),
+    edge,
+  }))
+
+  const validEdges: Edge[] = []
+
+  // Process each pair
+  for (const { other, edge } of edgeObjectPairs) {
+    // Check if spacing exceeds threshold
+    if (edge.spacing > aalSettingsConfig.WRAP_CANDIDATE_VERTICAL_THRESHOLD) {
+      return []
+    }
+
+    // Check if dimensions are approximately equal
+    if (!isApproximatelyEqual(other.width, vertex.width) && !isApproximatelyEqual(other.height, vertex.height)) {
+      continue
+    }
+
+    const edgeChain: Edge[] = [edge]
+
+    // Try to extend the chain
+    if (extendVertexChain(
+      oppositeAxis,
+      edge,
+      [vertex, other],
+      edgeChain,
+      adjacencyMap,
+      allVertices,
+      maxHitCount,
+      -Infinity,
+      Infinity,
+      maxIndex,
+      false, // disable pivot rule for wrapping
+    )) {
+      return []
+    }
+
+    validEdges.push(...edgeChain)
+  }
+
+  // Sort edges by top coordinate
+  validEdges.sort((a, b) => {
+    const boxA = calculateTransformedBoundingBox([a.from, a.to])
+    const boxB = calculateTransformedBoundingBox([b.from, b.to])
+    return compareWithTolerance(boxA.top, boxB.top)
+  })
+
+  return validEdges
+}
+
+/**
+ * Groups edges by Y-axis alignment
+ */
+function groupEdgesByYAlignment(
+  edges: Edge[],
+  adjacencyMap: GraphAdjacencyMap,
+  allVertices: Vertex[],
+  maxHitCount: number,
+  maxIndex: number,
+  _enablePivotRule: boolean,
+): Vertex[][] {
+  const groups: Vertex[][] = []
+  let leftBoundary = -Infinity
+  let rightBoundary = Infinity
+  const processedVertices = new Set<string>()
+
+  for (const edge of edges) {
+    if (edge.axis === "Y") {
+      // Process both vertices of the edge
+      for (const vertex of [edge.from, edge.to]) {
+        if (processedVertices.has(vertex.id))
+          continue
+        processedVertices.add(vertex.id)
+
+        // Find the best adjacent edge
+        let bestEdge: Edge | undefined
+        let bestVertex: Vertex | undefined
+
+        for (const adjacentEdge of adjacencyMap.get(vertex.id) || []) {
+          // Skip Y-axis edges or edges pointing in wrong direction
+          if (adjacentEdge.axis === "Y" || getEdgeDirection(adjacentEdge, vertex) < 0)
+            continue
+
+          const oppositeVertex = getOppositeVertex(adjacentEdge, vertex)
+
+          // Check if edges are aligned
+          const isAligned = (() => {
+            const axis = adjacentEdge.axis === "X" ? "Y" : "X"
+            const fromBox = calculateTransformedBoundingBox([adjacentEdge.from])
+            const toBox = calculateTransformedBoundingBox([adjacentEdge.to])
+
+            if (axis === "Y") {
+              return isApproximatelyEqual(fromBox.top, toBox.top)
+                || isApproximatelyEqual(fromBox.bottom, toBox.bottom)
+                || isApproximatelyEqual(
+                  fromBox.top + (fromBox.bottom - fromBox.top) / 2,
+                  toBox.top + (toBox.bottom - toBox.top) / 2,
+                )
+            }
+            else {
+              return isApproximatelyEqual(fromBox.left, toBox.left)
+                || isApproximatelyEqual(fromBox.right, toBox.right)
+                || isApproximatelyEqual(
+                  fromBox.left + (fromBox.right - fromBox.left) / 2,
+                  toBox.left + (toBox.right - toBox.left) / 2,
+                )
+            }
+          })()
+
+          // Update best edge if this one is better
+          if ((!bestEdge || bestEdge.spacing) && isAligned) {
+            bestEdge = adjacentEdge
+            bestVertex = oppositeVertex
+          }
+        }
+
+        // Skip if no suitable edge found or if vertices overlap
+        if (!(bestVertex && doVerticesOverlapWithOthers(vertex, bestVertex, allVertices))) {
+          groups.push([vertex])
+          continue
+        }
+
+        const oppositeVertex = getOppositeVertex(bestEdge!, vertex)
+        const vertexPair = [vertex, oppositeVertex]
+        const edgeChain = [bestEdge!]
+
+        // Try to extend the chain along X-axis
+        if (extendVertexChain(
+          "X",
+          bestEdge!,
+          vertexPair,
+          edgeChain,
+          adjacencyMap,
+          allVertices,
+          maxHitCount,
+          leftBoundary,
+          rightBoundary,
+          maxIndex,
+          false, // disable pivot rule for grouping
+        )) {
+          groups.push([vertex])
+          break
+        }
+
+        groups.push(vertexPair)
+
+        // Update boundaries
+        const groupBox = calculateTransformedBoundingBox(vertexPair)
+        leftBoundary = Math.max(leftBoundary, groupBox.left)
+        rightBoundary = Math.min(rightBoundary, groupBox.right)
+      }
+    }
+  }
+
+  return groups
+}
+
+/**
+ * Creates a frame from absolute and regular positioned children
+ */
+function createFrameFromVertices(absoluteChildren: Vertex[], regularChildren: Vertex[] = []): Vertex {
+  const boundingBox = calculateTransformedBoundingBox([...absoluteChildren, ...regularChildren])
+
   return {
     type: "FRAME",
-    id: `${t.map(e => e.id).join("-")}absolute${e.map(e => e.id).join("-")}`,
-    x: i.left,
-    y: i.top,
-    width: i.right - i.left,
-    height: i.bottom - i.top,
-    absolutePositionedChildren: e,
-    children: t,
-    signature: `${s(t.map(e => e.signature))}absolute${s(e.map(e => e.signature))}`,
+    id: `${regularChildren.map(child => child.id).join("-")}absolute${absoluteChildren.map(child => child.id).join("-")}`,
+    x: boundingBox.left,
+    y: boundingBox.top,
+    width: boundingBox.right - boundingBox.left,
+    height: boundingBox.bottom - boundingBox.top,
+    absolutePositionedChildren: absoluteChildren,
+    children: regularChildren,
+    signature: `${joinWithCommas(regularChildren.map(child => child.signature))}absolute${joinWithCommas(absoluteChildren.map(child => child.signature))}`,
   }
 }
-function v(e, t, i) {
-  let n = {
+
+/**
+ * Main vertex processing function
+ */
+function processVertices(vertices: Vertex[], subset: Vertex[], containerDimensions?: { width?: number, height?: number }): Vertex[] {
+  let layoutOptions: LayoutOptions = {
     maxHitCount: 4,
-    enablePivotRule: !0,
+    enablePivotRule: true,
   }
-  t || (t = e)
+
+  // Use subset if provided, otherwise use vertices
+  if (!subset)
+    subset = vertices
+
   {
-    let n = new Map()
-    let r = i?.height || 1 / 0
-    let o = i?.width || 1 / 0
-    let l = 0.1 * o
-    let c = 0.1 * r
-    let u = e.filter(e => e.height > 0.9 * r && e.width > 0.9 * o || e.x < -1 * l || e.y < -1 * c || e.x + e.width > o + l || e.y + e.height > r + c)
-    if (u.length > 0) {
-      let i = b(u)
-      e.push(i)
-      t.push(i)
-      n.set(i.id, !0)
+    const processedVertices = new Map<string, boolean>()
+    const containerHeight = containerDimensions?.height || Infinity
+    const containerWidth = containerDimensions?.width || Infinity
+    const widthThreshold = 0.1 * containerWidth
+    const heightThreshold = 0.1 * containerHeight
+
+    // Filter vertices that are likely background elements
+    const backgroundVertices = vertices.filter(vertex =>
+      vertex.height > 0.9 * containerHeight && vertex.width > 0.9 * containerWidth
+      || vertex.x < -1 * widthThreshold || vertex.y < -1 * heightThreshold
+      || vertex.x + vertex.width > containerWidth + widthThreshold
+      || vertex.y + vertex.height > containerHeight + heightThreshold,
+    )
+
+    // Create a frame for background elements
+    if (backgroundVertices.length > 0) {
+      const backgroundFrame = createFrameFromVertices(backgroundVertices)
+      vertices.push(backgroundFrame)
+      subset.push(backgroundFrame)
+      processedVertices.set(backgroundFrame.id, true)
     }
-    for (let e of u) n.set(e.id, !0)
-    e = e.filter(e => !n.has(e.id))
-    t = t.filter(e => !n.has(e.id))
-    e.sort(d)
-    t.sort(d)
-    let p = (function (e) {
-      let t = []
-      let i = new Set()
-      for (let n of e) {
-        if (!i.has(n.id)) {
-          for (let r of e) {
-            if (i.has(r.id) || n.id === r.id)
+
+    // Mark background vertices as processed
+    for (const vertex of backgroundVertices) {
+      processedVertices.set(vertex.id, true)
+    }
+
+    // Filter out processed vertices
+    vertices = vertices.filter(vertex => !processedVertices.has(vertex.id))
+    subset = subset.filter(vertex => !processedVertices.has(vertex.id))
+
+    // Sort vertices
+    vertices.sort(compareVertices)
+    subset.sort(compareVertices)
+
+    // Group overlapping vertices
+    const overlappingGroups = (() => {
+      const groups: Vertex[][] = []
+      const processed = new Set<string>()
+
+      for (const vertex of vertices) {
+        if (!processed.has(vertex.id)) {
+          for (const otherVertex of vertices) {
+            if (processed.has(otherVertex.id) || vertex.id === otherVertex.id)
               continue
-            let e = calculateTransformedBoundingBox([n])
-            let s = calculateTransformedBoundingBox([r])
-            if (doBoxesOverlap(e, s)) {
-              t.push([n, r])
-              i.add(n.id)
-              i.add(r.id)
+
+            const vertexBox = calculateTransformedBoundingBox([vertex])
+            const otherBox = calculateTransformedBoundingBox([otherVertex])
+
+            if (doBoxesOverlap(vertexBox, otherBox)) {
+              groups.push([vertex, otherVertex])
+              processed.add(vertex.id)
+              processed.add(otherVertex.id)
               break
             }
           }
         }
       }
-      return t
-    }(e))
-    let m = []
-    for (; p.length > 0 && p[0];) {
-      let i = p.pop()
-      !i || n.get(i[0].id) || n.get(i[1].id) || (!(function (e, t, i, n, r) {
-        let {
-          vertex,
-          oldGroupId,
-        } = (function (e) {
-          let t = calculateTransformedBoundingBox(e)
-          let i = e.find(e => e.type === "GROUP")
-          if (!i) {
-            return {
-              vertex: {
-                absolutePositionedChildren: [],
-                type: "GROUP",
-                id: `group-${e.map(e => e.id).join("-")}`,
-                x: t.left,
-                y: t.top,
-                width: t.right - t.left,
-                height: t.bottom - t.top,
-                children: e,
-                signature: `group-${s(e.map(e => e.signature))}`,
-              },
-              oldGroupId: void 0,
-            }
+
+      return groups
+    })()
+
+    const groupedVertices: Vertex[] = []
+
+    // Process overlapping groups
+    while (overlappingGroups.length > 0 && overlappingGroups[0]) {
+      const group = overlappingGroups.pop()
+      if (!group || processedVertices.get(group[0].id) || processedVertices.get(group[1].id))
+        continue
+
+      // Create group vertex
+      const { vertex: groupVertex, oldGroupId } = (() => {
+        const boundingBox = calculateTransformedBoundingBox(group)
+        const groupNode = group.find(item => item.type === "GROUP")
+
+        if (!groupNode) {
+          return {
+            vertex: {
+              absolutePositionedChildren: [],
+              type: "GROUP",
+              id: `group-${group.map(item => item.id).join("-")}`,
+              x: boundingBox.left,
+              y: boundingBox.top,
+              width: boundingBox.right - boundingBox.left,
+              height: boundingBox.bottom - boundingBox.top,
+              children: group,
+              signature: `group-${joinWithCommas(group.map(item => item.signature))}`,
+            } as Vertex,
+            oldGroupId: undefined,
           }
-          {
-            let t = i.children
-            let n = calculateTransformedBoundingBox([...t, ...e])
-            let r = [...t, ...e.filter(e => e.id !== i.id)]
-            return {
-              vertex: {
-                absolutePositionedChildren: [],
-                type: "GROUP",
-                id: `group-${r.map(e => e.id).join("-")}`,
-                x: n.left,
-                y: n.top,
-                width: n.right - n.left,
-                height: n.bottom - n.top,
-                children: r,
-                signature: `group-${s(e.map(e => e.signature))}`,
-              },
-              oldGroupId: i.id,
-            }
+        }
+        else {
+          const groupChildren = groupNode.children || []
+          const combinedBox = calculateTransformedBoundingBox([...groupChildren, ...group])
+          const remainingItems = [...groupChildren, ...group.filter(item => item.id !== groupNode.id)]
+
+          return {
+            vertex: {
+              absolutePositionedChildren: [],
+              type: "GROUP",
+              id: `group-${remainingItems.map(item => item.id).join("-")}`,
+              x: combinedBox.left,
+              y: combinedBox.top,
+              width: combinedBox.right - combinedBox.left,
+              height: combinedBox.bottom - combinedBox.top,
+              children: remainingItems,
+              signature: `group-${joinWithCommas(group.map(item => item.signature))}`,
+            } as Vertex,
+            oldGroupId: groupNode.id,
           }
-        }([e, t]))
-        i.push(vertex)
-        r.push(vertex)
-        let d = i.find(e => e.id === oldGroupId)
-        let c = [e, t, ...(d ? [d] : [])]
-        let u = calculateTransformedBoundingBox([vertex])
-        let p = []
-        for (let r of (i.forEach((i) => {
-          i.id !== vertex.id && !n.has(i.id) && i.id !== oldGroupId && i.id !== t.id && i.id !== e.id && (function (e) {
-            let t = e => e.type === "NODE" || e.type === "GROUP" && e.children.every(t)
-            return e.every(t)
-          }([i])) && doBoxesOverlap(calculateTransformedBoundingBox([i]), u) && (c.push(i), p.push(i), u = calculateTransformedBoundingBox([vertex, ...p, i]))
-        }), vertex.children.push(...p), vertex.id = vertex.children.map(e => e.id).join("-"), vertex.x = u.left, vertex.y = u.top, vertex.width = u.right - u.left, vertex.height = u.bottom - u.top, vertex.signature = s(vertex.children.map(e => e.signature)), c)) n.set(r.id, !0)
-      }(i[0], i[1], e, n, m)), e = e.filter(e => !n.has(e.id)).sort(d), t = t.filter(e => !n.has(e.id)).concat(m.filter(e => !n.has(e.id))).sort(d))
-    }
-    let h = new Map()
-    for (let i of m) {
-      for (let e of "children" in i ? i?.children : []) isApproximatelyEqualOrGreater(e.x, i.x, Math.max(10, 0.1 * i.width)) && isApproximatelyEqualOrGreater(e.y, i.y, Math.max(10, 0.1 * i.height)) && isApproximatelyEqualOrGreater(e.width, i.width, Math.max(10, 0.1 * i.width)) && isApproximatelyEqualOrGreater(e.height, i.height, Math.max(10, 0.1 * i.height)) && (h.has(i.id) || h.set(i.id, []), h.get(i.id)?.push(e))
-      let r = h.get(i.id)
-      if (r?.length) {
-        let a = (function (e, t) {
-          let i = []
-          let n = new Set(t.map(e => e.id))
-          for (let t of e.children) n.has(t.id) || i.push(t)
-          return b(t, i)
-        }(i, r))
-        n.set(i.id, !0)
-        e.push(a)
-        t.push(a)
+        }
+      })()
+
+      vertices.push(groupVertex)
+      groupedVertices.push(groupVertex)
+
+      const oldGroup = vertices.find(item => item.id === oldGroupId)
+      const groupItems = [group[0], group[1], ...(oldGroup ? [oldGroup] : [])]
+      const groupBox = calculateTransformedBoundingBox([groupVertex])
+      const overlappingItems: Vertex[] = []
+
+      // Find items that overlap with the group
+      for (const item of vertices) {
+        if (item.id !== groupVertex.id && !processedVertices.has(item.id)
+          && item.id !== oldGroupId && item.id !== group[1].id && item.id !== group[0].id) {
+          const isNodeOrGroup = (item: Vertex): boolean =>
+            item.type === "NODE" || (item.type === "GROUP" && item.children?.every((child: Vertex) => child.type === "NODE" || (child.type === "GROUP" && child.children?.every((grandchild: Vertex) => grandchild.type === "NODE"))))
+
+          if (isNodeOrGroup(item) && doBoxesOverlap(calculateTransformedBoundingBox([item]), groupBox)) {
+            groupItems.push(item)
+            overlappingItems.push(item)
+            // Update group box to include this item
+          }
+        }
+      }
+
+      // Add overlapping items to group
+      groupVertex.children = groupVertex.children?.concat(overlappingItems) || overlappingItems
+      groupVertex.id = groupVertex.children.map(child => child.id).join("-")
+
+      const updatedBox = calculateTransformedBoundingBox([groupVertex, ...overlappingItems])
+      groupVertex.x = updatedBox.left
+      groupVertex.y = updatedBox.top
+      groupVertex.width = updatedBox.right - updatedBox.left
+      groupVertex.height = updatedBox.bottom - updatedBox.top
+      groupVertex.signature = joinWithCommas(groupVertex.children.map(child => child.signature))
+
+      // Mark all group items as processed
+      for (const item of groupItems) {
+        processedVertices.set(item.id, true)
       }
     }
-    e = e.filter(e => !n.has(e.id))
-    t = t.filter(e => !n.has(e.id)).concat(m.filter(e => !n.has(e.id)))
-  }
-  for (; t.length > 1 && n.maxHitCount > 0;) {
-    let i = !0
-    for (; i;) {
-      let {
-        vertices,
-        verticesSubset,
-      } = (function (e, t, i, n) {
-        (e = [...e]).sort(d)
-        let r = u(e)
-        for (let t of r.keys()) {
-          let i = r.get(t)
-          let n = i.filter(t => !p(t.from, t.to, e))
-          n.length < i.length && r.set(t, n)
+
+    // Process nested children
+    const nestedChildrenMap = new Map<string, Vertex[]>()
+
+    for (const group of groupedVertices) {
+      // Process children that are significantly smaller than their parent
+      for (const child of ("children" in group ? group.children || [] : [])) {
+        if (isApproximatelyEqualOrGreater(child.x, group.x, Math.max(10, 0.1 * group.width))
+          && isApproximatelyEqualOrGreater(child.y, group.y, Math.max(10, 0.1 * group.height))
+          && isApproximatelyEqualOrGreater(child.width, group.width, Math.max(10, 0.1 * group.width))
+          && isApproximatelyEqualOrGreater(child.height, group.height, Math.max(10, 0.1 * group.height))) {
+          if (!nestedChildrenMap.has(group.id))
+            nestedChildrenMap.set(group.id, [])
+          nestedChildrenMap.get(group.id)?.push(child)
         }
-        let l = new Map()
-        let m = e.length
-        for (let d = 0; d < m; d++) {
-          let u
-          let p
-          let b = e[d]
-          if (!t.includes(b) || l.has(b.id) || !r.has(b.id))
+      }
+
+      const nestedChildren = nestedChildrenMap.get(group.id)
+      if (nestedChildren?.length) {
+        // Create a frame for nested children
+        const createFrameWithoutNestedChildren = (parent: Vertex, nested: Vertex[]): Vertex => {
+          const remainingChildren: Vertex[] = []
+          const nestedIds = new Set(nested.map(child => child.id))
+
+          for (const child of parent.children || []) {
+            if (!nestedIds.has(child.id))
+              remainingChildren.push(child)
+          }
+
+          return createFrameFromVertices(nested, remainingChildren)
+        }
+
+        const frame = createFrameWithoutNestedChildren(group, nestedChildren)
+        processedVertices.set(group.id, true)
+        vertices.push(frame)
+        subset.push(frame)
+      }
+    }
+
+    // Filter out processed vertices
+    vertices = vertices.filter(vertex => !processedVertices.has(vertex.id))
+    subset = subset.filter(vertex => !processedVertices.has(vertex.id)).concat(groupedVertices.filter(vertex => !processedVertices.has(vertex.id)))
+  }
+
+  // Main processing loop
+  while (subset.length > 1 && layoutOptions.maxHitCount > 0) {
+    let hasChanges = true
+
+    while (hasChanges) {
+      const { vertices: updatedVertices, verticesSubset: updatedSubset } = (() => {
+        // Make a copy and sort
+        let workingVertices = [...vertices].sort(compareVertices)
+
+        // Build adjacency map
+        const adjacencyMap = buildGraph(workingVertices)
+
+        // Filter out overlapping edges
+        for (const vertexId of adjacencyMap.keys()) {
+          const edges = adjacencyMap.get(vertexId)!
+          const nonOverlappingEdges = edges.filter(edge =>
+            !doVerticesOverlapWithOthers(edge.from, edge.to, workingVertices),
+          )
+
+          if (nonOverlappingEdges.length < edges.length) {
+            adjacencyMap.set(vertexId, nonOverlappingEdges)
+          }
+        }
+
+        const processedVertices = new Map<string, boolean>()
+        const vertexCount = workingVertices.length
+
+        // Process each vertex
+        for (let i = 0; i < vertexCount; i++) {
+          let spacingOverride: number | undefined
+          let counterSpacing: number | undefined
+
+          const currentVertex = workingVertices[i]
+
+          // Skip if vertex is not in subset, already processed, or has no edges
+          if (!subset.includes(currentVertex) || processedVertices.has(currentVertex.id) || !adjacencyMap.has(currentVertex.id)) {
             continue
-          let v = h(r.get(b.id).sort(c), e, t, m, r, n)
-          if (!v || v.hitCount < i)
+          }
+
+          // Find the best edge
+          const sortedEdges = adjacencyMap.get(currentVertex.id)!.sort(compareEdges)
+          const bestEdge = filterEdges(
+            sortedEdges,
+            workingVertices,
+            workingVertices,
+            vertexCount,
+            adjacencyMap,
+            layoutOptions.enablePivotRule,
+          )
+
+          // Skip if no valid edge or hit count is too low
+          if (!bestEdge || bestEdge.hitCount < layoutOptions.maxHitCount)
             continue
-          let I = o(v, b)
-          if (e.indexOf(I) > m)
+
+          const oppositeVertex = getOppositeVertex(bestEdge, currentVertex)
+
+          // Skip if opposite vertex is beyond the limit
+          if (workingVertices.indexOf(oppositeVertex) > vertexCount)
             continue
-          let E = [b, I]
-          let x = [v]
-          let S = !1
-          if (v.axis === "X") {
-            if (S = _("X", v, E, x, r, e, i, -1 / 0, 1 / 0, m, n, t))
-              continue
-            if (g(E)) {
-              let n = f(E)
-              if (n) {
-                let a = A(n, "X", r, e, m, i, t)
-                let s = y(a, r, e, i, m, t)
-                let o = s.flat()
-                s.length > 1 && s[0].length > 1 && o.every(e => e.type !== "NODE" || e.node.type !== "TEXT") && (E = o, u = a[0]?.spacing ?? 0, p = v.spacing)
+
+          // Create initial vertex pair and edge chain
+          const vertexPair = [currentVertex, oppositeVertex]
+          const edgeChain = [bestEdge]
+          let shouldSkip = false
+
+          // Process based on axis
+          if (bestEdge.axis === "X") {
+            shouldSkip = extendVertexChain(
+              "X",
+              bestEdge,
+              vertexPair,
+              edgeChain,
+              adjacencyMap,
+              workingVertices,
+              layoutOptions.maxHitCount,
+              -Infinity,
+              Infinity,
+              vertexCount,
+              layoutOptions.enablePivotRule,
+            )
+
+            if (!shouldSkip && areVerticesUniform(vertexPair)) {
+              const cornerVertex = findCornerVertices(vertexPair)
+              if (cornerVertex) {
+                const wrappingCandidates = findWrappingCandidates(
+                  cornerVertex,
+                  "X",
+                  adjacencyMap,
+                  workingVertices,
+                  vertexCount,
+                  layoutOptions.maxHitCount,
+                )
+
+                const groupedEdges = groupEdgesByYAlignment(
+                  wrappingCandidates,
+                  adjacencyMap,
+                  workingVertices,
+                  layoutOptions.maxHitCount,
+                  vertexCount,
+                  layoutOptions.enablePivotRule,
+                )
+
+                const flattenedVertices = groupedEdges.flat()
+
+                // Apply transformation if conditions are met
+                if (groupedEdges.length > 1 && groupedEdges[0].length > 1
+                  && flattenedVertices.every(vertex => vertex.type !== "NODE" || vertex.node?.type !== "TEXT")) {
+                  vertexPair.length = 0 // Clear array
+                  vertexPair.push(...flattenedVertices)
+                  spacingOverride = wrappingCandidates[0]?.spacing ?? 0
+                  counterSpacing = bestEdge.spacing
+                }
               }
             }
           }
           else {
-            if (S = _("Y", v, E, x, r, e, i, -1 / 0, 1 / 0, m, n, t))
-              continue
-            if (g(E)) {
-              let n = f(E)
-              if (n) {
-                let s = A(n, "X", r, e, m, i, t)
-                let o = y(s, r, e, i, m, t)
-                let l = o.flat()
-                o.length > 1 && o[0].length > 1 && l.every(e => e.type !== "NODE" || e.node.type !== "TEXT") && (E = l, u = s[0]?.spacing ?? 0, p = calculateSpacingBetweenBoxes(o[0][0], o[0][1], "X"))
+            shouldSkip = extendVertexChain(
+              "Y",
+              bestEdge,
+              vertexPair,
+              edgeChain,
+              adjacencyMap,
+              workingVertices,
+              layoutOptions.maxHitCount,
+              -Infinity,
+              Infinity,
+              vertexCount,
+              layoutOptions.enablePivotRule,
+            )
+
+            if (!shouldSkip && areVerticesUniform(vertexPair)) {
+              const cornerVertex = findCornerVertices(vertexPair)
+              if (cornerVertex) {
+                const wrappingCandidates = findWrappingCandidates(
+                  cornerVertex,
+                  "X",
+                  adjacencyMap,
+                  workingVertices,
+                  vertexCount,
+                  layoutOptions.maxHitCount,
+                )
+
+                const groupedEdges = groupEdgesByYAlignment(
+                  wrappingCandidates,
+                  adjacencyMap,
+                  workingVertices,
+                  layoutOptions.maxHitCount,
+                  vertexCount,
+                  layoutOptions.enablePivotRule,
+                )
+
+                const flattenedVertices = groupedEdges.flat()
+
+                // Apply transformation if conditions are met
+                if (groupedEdges.length > 1 && groupedEdges[0].length > 1
+                  && flattenedVertices.every(vertex => vertex.type !== "NODE" || vertex.node?.type !== "TEXT")) {
+                  vertexPair.length = 0 // Clear array
+                  vertexPair.push(...flattenedVertices)
+                  spacingOverride = wrappingCandidates[0]?.spacing ?? 0
+                  counterSpacing = calculateSpacingBetweenBoxes(
+                    groupedEdges[0][0],
+                    groupedEdges[0][1],
+                    "X",
+                  )
+                }
               }
             }
           }
-          if (S)
+
+          // Skip if chain extension failed
+          if (shouldSkip)
             continue
-          let w = [...E].sort((e, t) => void 0 !== u ? compareWithTolerance(e.y, t.y) !== 0 ? compareWithTolerance(e.y, t.y) : compareWithTolerance(e.x, t.x) : v.axis === "X" ? compareWithTolerance(e.x, t.x) : compareWithTolerance(e.y, t.y))
-          let C = void 0 !== u
-          let T = (function (e, t, i, n, r) {
-            let o = r ?? calculateAverageSpacing(t, e)
-            let l = calculateTransformedBoundingBox(t)
-            return {
-              type: "LIST",
-              id: t.map(e => e.id).join("-"),
-              x: l.left,
-              y: l.top,
-              axis: e,
-              spacing: o,
-              width: l.right - l.left,
-              height: l.bottom - l.top,
-              children: t,
-              wrap: i ?? !1,
-              counterSpacing: n ?? 0,
-              signature: s(t.map(e => e.signature)),
-            }
-          }(C ? "X" : v.axis, w, C, u, p))
-          for (let t of (e.push(T), E)) {
-            l.set(t.id, !0)
-            let e = r.get(t.id)
-            if (e) {
-              for (let i of e) {
-                let e = o(i, t)
-                let n = r.get(e.id)
-                n && n.splice(n.indexOf(i), 1)
+
+          // Sort vertices
+          const sortedVertices = [...vertexPair].sort((a, b) =>
+            spacingOverride !== undefined
+              ? compareWithTolerance(a.y, b.y) !== 0
+                ? compareWithTolerance(a.y, b.y)
+                : compareWithTolerance(a.x, b.x)
+              : bestEdge.axis === "X"
+                ? compareWithTolerance(a.x, b.x)
+                : compareWithTolerance(a.y, b.y),
+          )
+
+          const hasSpacingOverride = spacingOverride !== undefined
+
+          // Create list vertex
+          const listVertex: Vertex = {
+            type: "LIST",
+            id: sortedVertices.map(vertex => vertex.id).join("-"),
+            x: 0,
+            y: 0,
+            width: 0,
+            height: 0,
+            axis: hasSpacingOverride ? "X" : bestEdge.axis,
+            spacing: spacingOverride ?? calculateAverageSpacing(sortedVertices, hasSpacingOverride ? "X" : bestEdge.axis),
+            children: sortedVertices,
+            wrap: hasSpacingOverride ?? false,
+            counterSpacing: counterSpacing ?? 0,
+            signature: joinWithCommas(sortedVertices.map(vertex => vertex.signature)),
+          }
+
+          // Set position and dimensions
+          const listBox = calculateTransformedBoundingBox(sortedVertices)
+          listVertex.x = listBox.left
+          listVertex.y = listBox.top
+          listVertex.width = listBox.right - listBox.left
+          listVertex.height = listBox.bottom - listBox.top
+
+          // Add to working vertices
+          workingVertices.push(listVertex)
+
+          // Mark vertices as processed and update adjacency map
+          for (const vertex of vertexPair) {
+            processedVertices.set(vertex.id, true)
+            const vertexEdges = adjacencyMap.get(vertex.id)
+
+            if (vertexEdges) {
+              for (const edge of vertexEdges) {
+                const opposite = getOppositeVertex(edge, vertex)
+                const oppositeEdges = adjacencyMap.get(opposite.id)
+
+                if (oppositeEdges) {
+                  const edgeIndex = oppositeEdges.indexOf(edge)
+                  if (edgeIndex !== -1) {
+                    oppositeEdges.splice(edgeIndex, 1)
+                  }
+                }
               }
             }
           }
         }
-        let b = e.slice(m)
+
+        // Get newly added vertices
+        const newVertices = workingVertices.slice(vertexCount)
+
         return {
-          vertices: e.filter(e => !l.has(e.id)),
-          verticesSubset: t.filter(e => !l.has(e.id)).concat(b),
+          vertices: workingVertices.filter(vertex => !processedVertices.has(vertex.id)),
+          verticesSubset: subset.filter(vertex => !processedVertices.has(vertex.id)).concat(newVertices),
         }
-      }(e, t, n.maxHitCount, n.enablePivotRule))
-      if (i = e.length !== vertices.length, e = vertices, t = verticesSubset, e.length === 0)
+      })()
+
+      // Update state
+      hasChanges = vertices.length !== updatedVertices.length
+      vertices = updatedVertices
+      subset = updatedSubset
+
+      // Error conditions
+      if (vertices.length === 0)
         throw new Error("graph is empty!")
-      if (e.length === 1)
+      if (vertices.length === 1)
         break
     }
-    n = (function (e) {
-      let t = {
-        ...e,
+
+    // Update layout options
+    layoutOptions = (() => {
+      const updatedOptions = { ...layoutOptions }
+      updatedOptions.maxHitCount--
+
+      if (updatedOptions.maxHitCount === 0 && updatedOptions.enablePivotRule) {
+        updatedOptions.maxHitCount = 4
+        updatedOptions.enablePivotRule = false
       }
-      t.maxHitCount--
-      t.maxHitCount === 0 && t.enablePivotRule && (t.maxHitCount = 4, t.enablePivotRule = !1)
-      return t
-    }(n))
+
+      return updatedOptions
+    })()
   }
-  return e
+
+  return vertices
 }
-function I(e, t = 40) {
-  let i = []
-  let n = new Set()
-  let r = u(e)
-  for (let t of e) {
-    let e = function (t) {
-      if (!n.has(t.id)) {
-        for (let i of (s.push(t), n.add(t.id), (r.get(t.id) || []).filter(e => e.axis === "X"))) e(o(i, t))
+
+/**
+ * Groups vertices into rows based on proximity
+ */
+function groupVerticesIntoRows(vertices: Vertex[], maxSpacing: number = 40): Vertex[][] {
+  const groups: VertexGroup[] = []
+  const processedVertices = new Set<string>()
+  const adjacencyMap = buildGraph(vertices)
+
+  // Group connected vertices
+  for (const vertex of vertices) {
+    const addConnectedVertices = (startVertex: Vertex) => {
+      if (!processedVertices.has(startVertex.id)) {
+        const connected: Vertex[] = []
+        processedVertices.add(startVertex.id)
+
+        // Add directly connected vertices (X-axis only)
+        const connectedEdges = (adjacencyMap.get(startVertex.id) || []).filter(edge => edge.axis === "X")
+        for (const edge of connectedEdges) {
+          const opposite = getOppositeVertex(edge, startVertex)
+          connected.push(opposite)
+        }
+
+        connected.unshift(startVertex) // Add start vertex first
+        groups.push({
+          vertices: connected,
+          bbox: calculateTransformedBoundingBox(connected),
+        })
       }
     }
-    if (n.has(t.id))
+
+    if (processedVertices.has(vertex.id))
       continue
-    let s = []
-    e(t)
-    i.push({
-      vertices: s,
-      bbox: calculateTransformedBoundingBox(s),
+    const connected: Vertex[] = []
+    addConnectedVertices(vertex)
+    groups.push({
+      vertices: connected,
+      bbox: calculateTransformedBoundingBox(connected),
     })
   }
-  i.sort((e, t) => compareWithTolerance(e.bbox.top, t.bbox.top))
-  let s = []
-  let l = new Set()
-  let d = 0
-  let c = null
-  i.forEach((e, n) => {
-    if (n === 0) {
-      l.add(n)
-      s.push(e)
-      c = e.bbox
+
+  // Sort groups by vertical position
+  groups.sort((a, b) => compareWithTolerance(a.bbox.top, b.bbox.top))
+
+  const rowGroups: VertexGroup[] = []
+  const processedGroupIndices = new Set<number>()
+  let previousSpacing = 0
+  let currentBoundingBox = null
+
+  // Group rows based on vertical spacing
+  groups.forEach((group, index) => {
+    if (index === 0) {
+      processedGroupIndices.add(index)
+      rowGroups.push(group)
+      currentBoundingBox = group.bbox
       return
     }
-    if (l.has(n))
+
+    if (processedGroupIndices.has(index))
       return
-    let {
-      bbox,
-    } = e
-    d = n === 0 ? bbox.top : bbox.top - c.bottom
-    let o = {
-      vertices: e.vertices,
+
+    const { bbox } = group
+    previousSpacing = index === 0 ? bbox.top : bbox.top - currentBoundingBox!.bottom
+
+    const rowGroup: VertexGroup = {
+      vertices: group.vertices,
       bbox,
     }
-    c = bbox
-    for (let e = n + 1; e < i.length; e++) {
-      if (l.has(e))
+
+    currentBoundingBox = bbox
+
+    // Check subsequent groups for inclusion in this row
+    for (let i = index + 1; i < groups.length; i++) {
+      if (processedGroupIndices.has(i))
         continue
-      let n = i[e]
-      let {
-        bbox: _bbox,
-      } = n
-      let s = _bbox.top - c.bottom
-      if (s > d + EPSILON || s > t)
+
+      const nextGroup = groups[i]
+      const { bbox: nextBbox } = nextGroup
+      const spacing = nextBbox.top - currentBoundingBox.bottom
+
+      // Break if spacing exceeds threshold
+      if (spacing > previousSpacing + EPSILON || spacing > maxSpacing)
         break
-      o.vertices.push(...n.vertices)
-      o.bbox = calculateTransformedBoundingBox(o.vertices)
-      c = o.bbox
-      l.add(e)
+
+      // Add group to current row
+      rowGroup.vertices.push(...nextGroup.vertices)
+      rowGroup.bbox = calculateTransformedBoundingBox(rowGroup.vertices)
+      currentBoundingBox = rowGroup.bbox
+      processedGroupIndices.add(i)
     }
-    l.add(n)
-    s.push(o)
+
+    processedGroupIndices.add(index)
+    rowGroups.push(rowGroup)
   })
-  return s.map(e => e.vertices)
+
+  return rowGroups.map(group => group.vertices)
 }
-export function $$E2(e, t, i = 0) {
-  let a = aalSettingsConfig.LOG_FILTERS.length === 0 || aalSettingsConfig.LOG_FILTERS.includes(e)
-  i >= aalSettingsConfig.LOG_LEVEL && a && logger.log(`${i} ${e}: ${t}`)
+
+// ==================== EXPORTED FUNCTIONS ====================
+
+/**
+ * Logging function for debugging
+ */
+export function logVerMessage(prefix: string, message: string, level: number = 0): void {
+  const shouldLog = aalSettingsConfig.LOG_FILTERS.length === 0 || aalSettingsConfig.LOG_FILTERS.includes(prefix)
+  if (level >= aalSettingsConfig.LOG_LEVEL && shouldLog) {
+    logger.log(`${level} ${prefix}: ${message}`)
+  }
 }
-export class $$x0 {
-  constructor() {
+
+/**
+ * Class for managing vertex-node mappings
+ */
+export class VertexNodeMap {
+  private vertexIdToNode: { [key: string]: any } = {}
+
+  getNodeForVertexId(vertexId: string): any {
+    return this.vertexIdToNode[vertexId]
+  }
+
+  setNodeForVertexId(vertexId: string, node: any): void {
+    this.vertexIdToNode[vertexId] = node
+  }
+
+  clearAfterComplete(): void {
     this.vertexIdToNode = {}
   }
-
-  getNodeForVertexId(e) {
-    return this.vertexIdToNode[e]
-  }
-
-  setNodeForVertexId(e, t) {
-    this.vertexIdToNode[e] = t
-  }
-
-  clearAfterComplete() {
-    this.vertexIdToNode = {}
-  }
 }
-class S extends Error {
-  constructor(e) {
-    super(e)
+
+/**
+ * Custom error for graph resolution failures
+ */
+class GraphResolutionError extends Error {
+  constructor(message: string) {
+    super(message)
     this.name = "GraphResolutionError"
   }
 }
-function w(e, t = [], i, r, s, o) {
-  let l = "children" in e ? e.children : []
-  let d = t.map(e => e.id)
-  if ((l = l.filter(e => !d.includes(e.id) && e.type !== "CONNECTOR" && e.visible)).length === 0) {
-    e.type === "FRAME" && C(e)
-    return e
+
+/**
+ * Processes a frame with children
+ */
+function processFrameWithChildren(
+  frame: any,
+  absoluteChildren: Vertex[] = [],
+  pluginApi: any,
+  nodeManager: any,
+  frameContext: FrameCreationContext,
+  options?: { noRecurse?: boolean, recurseOnlySingleLayer?: boolean },
+  containerDimensions?: { width: number, height: number },
+): any {
+  let children = "children" in frame ? frame.children : []
+  const absoluteChildIds = absoluteChildren.map(child => child.id)
+
+  // Filter out absolute children and connectors
+  children = children.filter((child: any) =>
+    !absoluteChildIds.includes(child.id) && child.type !== "CONNECTOR" && child.visible,
+  )
+
+  // Handle empty children case
+  if (children.length === 0) {
+    if (frame.type === "FRAME") {
+      setDefaultLayout(frame, undefined)
+    }
+    return frame
   }
-  if (e.type === "INSTANCE")
-    return e
-  let c = calculateTransformedBoundingBox(l)
-  let u = {}
-  if (l.forEach((e) => {
-    u[e.id] = calculateTransformedBoundingBox([e])
-  }), l.length === 1 && l[0].type !== "FRAME") {
-    C(e, c)
-    return e
-  }
-  let p = $$k1(l, i, r, s, {
-    noRecurse: o?.recurseOnlySingleLayer || o?.noRecurse,
-  }, {
-    width: e.width,
-    height: e.height,
+
+  // Return early for instances
+  if (frame.type === "INSTANCE")
+    return frame
+
+  const childrenBoundingBox = calculateTransformedBoundingBox(children)
+  const childBoundingBoxes: { [key: string]: any } = {}
+
+  // Calculate bounding boxes for each child
+  children.forEach((child: any) => {
+    childBoundingBoxes[child.id] = calculateTransformedBoundingBox([child])
   })
-  let m = e.width
-  let h = e.height
-  if (!p.layoutMode || p.layoutMode === "NONE") {
-    C(e, c)
-    return e
+
+  // Handle single non-frame child
+  if (children.length === 1 && children[0].type !== "FRAME") {
+    setDefaultLayout(frame, childrenBoundingBox)
+    return frame
   }
-  if (p.type === "INSTANCE")
-    return e
-  if (p.id === l[0]?.id) {
-    C(e, c)
-    return e
+
+  // Process children with layout algorithm
+  const layoutResult = processVertices(
+    children.map((child: any) => ({
+      type: "NODE",
+      id: child.id,
+      x: childBoundingBoxes[child.id].left,
+      y: childBoundingBoxes[child.id].top,
+      width: childBoundingBoxes[child.id].right - childBoundingBoxes[child.id].left,
+      height: childBoundingBoxes[child.id].bottom - childBoundingBoxes[child.id].top,
+      node: child,
+      signature: getNodeSignature(child),
+    })),
+    [],
+    containerDimensions,
+  )
+
+  const frameWidth = frame.width
+  const frameHeight = frame.height
+
+  // Handle case where no layout was determined
+  if (layoutResult.length === 0 || (layoutResult[0] as Vertex).layoutMode === "NONE") {
+    setDefaultLayout(frame, childrenBoundingBox)
+    return frame
   }
-  e.layoutMode = p.layoutMode
-  e.primaryAxisAlignItems = p.primaryAxisAlignItems
-  e.counterAxisAlignItems = p.counterAxisAlignItems
-  e.setSharedPluginData("AAL", "was_auto_auto_layouted_but_existing", "true")
-  e.children.forEach((t) => {
-    if ("layoutPositioning" in t && t.visible) {
-      let i = t.x
-      let n = t.y
-      t.layoutPositioning = "ABSOLUTE"
-      t.x = i - e.paddingLeft
-      t.y = n - e.paddingTop
+
+  // Handle instance case
+  if ((layoutResult[0] as Vertex).type === "INSTANCE")
+    return frame
+
+  // Handle case where layout result is the same as first child
+  if ((layoutResult[0] as Vertex).id === children[0]?.id) {
+    setDefaultLayout(frame, childrenBoundingBox)
+    return frame
+  }
+
+  // Apply layout properties to frame
+  const resultVertex = layoutResult[0] as Vertex
+  frame.layoutMode = resultVertex.layoutMode
+  frame.primaryAxisAlignItems = resultVertex.primaryAxisAlignItems
+  frame.counterAxisAlignItems = resultVertex.counterAxisAlignItems
+  frame.setSharedPluginData("AAL", "was_auto_auto_layouted_but_existing", "true")
+
+  // Update child positions
+  frame.children.forEach((child: any) => {
+    if ("layoutPositioning" in child && child.visible) {
+      const originalX = child.x
+      const originalY = child.y
+      child.layoutPositioning = "ABSOLUTE"
+      child.x = originalX - frame.paddingLeft!
+      child.y = originalY - frame.paddingTop!
     }
   })
-  e.layoutSizingHorizontal = p.layoutSizingHorizontal
-  e.layoutWrap = p.layoutWrap
-  e.itemSpacing = p.itemSpacing
-  p.children.forEach((t) => {
-    e.appendChild(t)
+
+  frame.layoutSizingHorizontal = resultVertex.layoutSizingHorizontal
+  frame.layoutWrap = resultVertex.layoutWrap
+  frame.itemSpacing = resultVertex.itemSpacing
+
+  // Append layout result children
+  resultVertex.children?.forEach((child: any) => {
+    frame.appendChild(child)
   })
-  p.remove()
-  let g = Object.entries(u).filter((e) => {
-    let t = i.getNodeById(e[0])
-    let n = areBoxesApproximatelyEqual(e[1], c, 0.1)
-    return t && !("layoutPositioning" in t && t.layoutPositioning === "ABSOLUTE" && n)
-  }).map(e => e[1])
-  g.length > 0 && (c = calculateBoundingBox(g))
-  c.left >= 0 ? e.paddingLeft = c.left : logger.log("paddingLeftCandidate is negative", c.left)
-  let f = m - c.right
-  f >= 0 ? e.paddingRight = m - c.right : logger.log("paddingRightCandidate is negative", f)
-  c.top >= 0 ? e.paddingTop = c.top : logger.log("paddingTopCandidate is negative", c.top)
-  h - c.bottom >= 0 ? e.paddingBottom = h - c.bottom : logger.log("paddingBottomCandidate is negative", c.top)
-  e.resize(m, h)
-  return e
+
+  // Filter out absolute positioned children that match the container
+  const nonMatchingBoxes = Object.entries(childBoundingBoxes)
+    .filter(([childId, box]) => {
+      const node = pluginApi.getNodeById(childId)
+      const isApproxEqual = areBoxesApproximatelyEqual(box as any, childrenBoundingBox, 0.1)
+      return node && !("layoutPositioning" in node && node.layoutPositioning === "ABSOLUTE" && isApproxEqual)
+    })
+    .map(([_, box]) => box)
+
+  // Update container bounding box if needed
+  if (nonMatchingBoxes.length > 0) {
+    const updatedBox = calculateBoundingBox(nonMatchingBoxes)
+    childrenBoundingBox.left = updatedBox.left
+    childrenBoundingBox.top = updatedBox.top
+    childrenBoundingBox.right = updatedBox.right
+    childrenBoundingBox.bottom = updatedBox.bottom
+  }
+
+  // Set padding values
+  if (childrenBoundingBox.left >= 0) {
+    frame.paddingLeft = childrenBoundingBox.left
+  }
+  else {
+    logger.log("paddingLeftCandidate is negative", childrenBoundingBox.left)
+  }
+
+  const paddingRightCandidate = frameWidth - childrenBoundingBox.right
+  if (paddingRightCandidate >= 0) {
+    frame.paddingRight = paddingRightCandidate
+  }
+  else {
+    logger.log("paddingRightCandidate is negative", paddingRightCandidate)
+  }
+
+  if (childrenBoundingBox.top >= 0) {
+    frame.paddingTop = childrenBoundingBox.top
+  }
+  else {
+    logger.log("paddingTopCandidate is negative", childrenBoundingBox.top)
+  }
+
+  const paddingBottomCandidate = frameHeight - childrenBoundingBox.bottom
+  if (paddingBottomCandidate >= 0) {
+    frame.paddingBottom = paddingBottomCandidate
+  }
+  else {
+    logger.log("paddingBottomCandidate is negative", childrenBoundingBox.top)
+  }
+
+  frame.resize(frameWidth, frameHeight)
+  return frame
 }
-function C(e, t) {
-  let i = e.width
-  let r = e.height
-  if (i <= r ? e.layoutMode = "VERTICAL" : e.layoutMode = "HORIZONTAL", e.layoutSizingHorizontal = "FIXED", e.layoutSizingVertical = "FIXED", e.resize(i, r), t) {
-    let i = e.width
-    let r = e.height
-    t.left >= 0 ? e.paddingLeft = t.left : logger.log("paddingLeftCandidate is negative", t.left)
-    let a = i - t.right
-    a >= 0 ? e.paddingRight = i - t.right : logger.log("paddingRightCandidate is negative", a)
-    t.top >= 0 ? e.paddingTop = t.top : logger.log("paddingTopCandidate is negative", t.top)
-    r - t.bottom >= 0 ? e.paddingBottom = r - t.bottom : logger.log("paddingBottomCandidate is negative", t.top)
+
+/**
+ * Sets default layout properties for a frame
+ */
+function setDefaultLayout(frame: any, boundingBox?: { left: number, top: number, right: number, bottom: number }): void {
+  const width = frame.width
+  const height = frame.height
+
+  // Set layout mode based on dimensions
+  frame.layoutMode = width <= height ? "VERTICAL" : "HORIZONTAL"
+  frame.layoutSizingHorizontal = "FIXED"
+  frame.layoutSizingVertical = "FIXED"
+  frame.resize(width, height)
+
+  // Set padding if bounding box is provided
+  if (boundingBox) {
+    const frameWidth = frame.width
+    const frameHeight = frame.height
+
+    if (boundingBox.left >= 0) {
+      frame.paddingLeft = boundingBox.left
+    }
+    else {
+      logger.log("paddingLeftCandidate is negative", boundingBox.left)
+    }
+
+    const paddingRightCandidate = frameWidth - boundingBox.right
+    if (paddingRightCandidate >= 0) {
+      frame.paddingRight = paddingRightCandidate
+    }
+    else {
+      logger.log("paddingRightCandidate is negative", paddingRightCandidate)
+    }
+
+    if (boundingBox.top >= 0) {
+      frame.paddingTop = boundingBox.top
+    }
+    else {
+      logger.log("paddingTopCandidate is negative", boundingBox.top)
+    }
+
+    const paddingBottomCandidate = frameHeight - boundingBox.bottom
+    if (paddingBottomCandidate >= 0) {
+      frame.paddingBottom = paddingBottomCandidate
+    }
+    else {
+      logger.log("paddingBottomCandidate is negative", boundingBox.top)
+    }
   }
 }
-function T(e) {
-  return (e.type === "FRAME" || e.type === "COMPONENT") && (e.layoutMode === "NONE" || void 0 === e.layoutMode)
+
+/**
+ * Gets a signature for a node based on its type and properties
+ */
+function getNodeSignature(node: any): string {
+  if (node.type === "FRAME" || node.type === "GROUP" || node.type === "INSTANCE" || node.type === "COMPONENT") {
+    return node.children.length === 0
+      ? "FRAME"
+      : joinWithCommas(node.children.map((child: any) => getNodeSignature(child)))
+  }
+
+  if (node.type === "TEXT") {
+    return [typeof node.fontSize === "number" ? node.fontSize : "mixed", typeof node.fontName === "object" && "family" in node.fontName ? node.fontName.family : "mixed"]
+      .join(",")
+  }
+
+  return node.type
 }
-export function $$k1(e, t, i, l, d, c, p = !1) {
-  let m = e.filter(t => !(!t || t.parent && e.includes(t.parent)) && t.type !== "CONNECTOR" && (!("visible" in t) || !!t.visible))
-  if (m.length === 0)
+
+/**
+ * Checks if a node should use auto-layout
+ */
+function shouldUseAutoLayout(node: any): boolean {
+  return (node.type === "FRAME" || node.type === "COMPONENT")
+    && (node.layoutMode === "NONE" || node.layoutMode === undefined)
+}
+
+/**
+ * Main layout function - processes vertices and creates layout structure
+ */
+export function processVerticesLayout(
+  nodes: any[],
+  pluginApi: any,
+  nodeManager: any,
+  frameContext: FrameCreationContext,
+  options?: any,
+  containerDimensions?: { width: number, height: number },
+  isRecursiveCall: boolean = false,
+): any {
+  // Filter valid nodes
+  const validNodes = nodes.filter(node =>
+    !(!node || (node.parent && nodes.includes(node.parent)))
+    && node.type !== "CONNECTOR"
+    && (!("visible" in node) || !!node.visible),
+  )
+
+  if (validNodes.length === 0)
     throw new Error("no nodes to stack!")
-  let h = m[0].parent
-  let g = 1 / 0
-  let f = h.children.map(e => e.id)
-  for (let e = 0; e < m.length; e++) {
-    let t = f.indexOf(m[e].id)
-    if (t < g && (g = t, t === 0))
-      break
+
+  const parent = validNodes[0].parent
+  let insertIndex = Infinity
+  const siblingIds = parent?.children.map((child: any) => child.id) || []
+
+  // Find the earliest insert index
+  for (let i = 0; i < validNodes.length; i++) {
+    const index = siblingIds.indexOf(validNodes[i].id)
+    if (index < insertIndex) {
+      insertIndex = index
+      if (index === 0)
+        break
+    }
   }
-  let _ = m.map((e) => {
-    let t = calculateTransformedBoundingBox([e])
+
+  // Convert nodes to vertices
+  let vertices: Vertex[] = validNodes.map((node) => {
+    const boundingBox = calculateTransformedBoundingBox([node])
     return {
       type: "NODE",
-      id: e.id,
-      x: t.left,
-      y: t.top,
-      width: t.right - t.left,
-      height: t.bottom - t.top,
-      node: e,
-      signature: (function e(t) {
-        return t.type === "FRAME" || t.type === "GROUP" || t.type === "INSTANCE" || t.type === "COMPONENT" ? t.children.length === 0 ? "FRAME" : s(t.children.map(t => e(t))) : t.type === "TEXT" ? [typeof t.fontSize == "number" ? t.fontSize : "mixed", typeof t.fontName == "object" && "family" in t.fontName ? t.fontName.family : "mixed"].join(",") : t.type
-      }(e)),
+      id: node.id,
+      x: boundingBox.left,
+      y: boundingBox.top,
+      width: boundingBox.right - boundingBox.left,
+      height: boundingBox.bottom - boundingBox.top,
+      node,
+      signature: getNodeSignature(node),
     }
   })
-  let A = calculateTransformedBoundingBox(_)
-  let y = m.length === 1 ? m[0].width : A.right - A.left
-  let b = m.length === 1 ? m[0].height : A.bottom - A.top
-  switch (c && (y = c.width, b = c.height), aalSettingsConfig.PRE_SEGMENTATION_STRATEGY) {
-    case "blobify":
-    {
-      let e = !0
-      let t = 12
-      for (; e && _.length > 1;) {
-        let i = (function (e, t) {
-          let i = []
-          let n = new Set()
-          let r = u(e)
-          for (let a of e) {
-            let e = function (i) {
-              if (!n.has(i.id)) {
-                for (let a of (s.push(i), n.add(i.id), (r.get(i.id) || []).filter(e => e.spacing <= t))) e(o(a, i))
+
+  const containerBox = calculateTransformedBoundingBox(vertices)
+  let containerWidth = validNodes.length === 1 ? validNodes[0].width : containerBox.right - containerBox.left
+  let containerHeight = validNodes.length === 1 ? validNodes[0].height : containerBox.bottom - containerBox.top
+
+  // Override dimensions if provided
+  if (containerDimensions) {
+    containerWidth = containerDimensions.width
+    containerHeight = containerDimensions.height
+  }
+
+  // Apply segmentation strategy
+  switch (aalSettingsConfig.PRE_SEGMENTATION_STRATEGY) {
+    case "blobify": {
+      let hasChanges = true
+      let spacingThreshold = 12
+
+      while (hasChanges && vertices.length > 1) {
+        const blobGroups = (() => {
+          const groups: Vertex[][] = []
+          const processed = new Set<string>()
+          const adjacencyMap = buildGraph(vertices)
+
+          for (const vertex of vertices) {
+            const addConnectedVertices = (startVertex: Vertex) => {
+              if (!processed.has(startVertex.id)) {
+                const connected: Vertex[] = []
+                processed.add(startVertex.id)
+
+                // Add connected vertices within spacing threshold
+                const connectedEdges = (adjacencyMap.get(startVertex.id) || [])
+                  .filter(edge => edge.spacing <= spacingThreshold)
+
+                for (const edge of connectedEdges) {
+                  const opposite = getOppositeVertex(edge, startVertex)
+                  connected.push(opposite)
+                }
+
+                connected.unshift(startVertex)
+                groups.push(connected)
               }
             }
-            if (n.has(a.id))
+
+            if (processed.has(vertex.id))
               continue
-            let s = []
-            e(a)
-            i.push(s)
+            const connected: Vertex[] = []
+            addConnectedVertices(vertex)
+            groups.push(connected)
           }
-          return i
-        }(_, t))
-        let n = _.length
-        for (let e of i) {
-          for (let i of I(e, t)) _ = v(_, i, c)
+
+          return groups
+        })()
+
+        const originalLength = vertices.length
+
+        // Process each blob group
+        for (const group of blobGroups) {
+          const rowGroups = groupVerticesIntoRows(group, spacingThreshold)
+          for (const rowGroup of rowGroups) {
+            vertices = processVertices(vertices, rowGroup, containerDimensions)
+          }
         }
-        (e = _.length !== n) || !(t < 80) || (t += 8, e = !0)
+
+        // Check if changes occurred or if we should continue with increased threshold
+        hasChanges = vertices.length !== originalLength
+        if (!hasChanges && spacingThreshold < 80) {
+          spacingThreshold += 8
+          hasChanges = true
+        }
       }
       break
     }
+
     case "rowify":
-      for (let e of I(_)) _ = v(_, e, c)
+      // Group vertices into rows and process
+      for (const rowGroup of groupVerticesIntoRows(vertices)) {
+        vertices = processVertices(vertices, rowGroup, containerDimensions)
+      }
   }
-  if (_.length > 1 && (_ = v(_, _, c)), _.length !== 1) {
-    let e = new S(`graph could not resolve: ${_.length} vertices`)
-    logger.log(e)
-    _.forEach((e, t) => logger.log(`${t}: ${(function e(t, i) {
-      return t.type === "NODE" ? t.node.name : t.type === "LIST" || t.type === "GROUP" ? `\n${" ".repeat(i ?? 0)}${t.type}: ${t.children.map(t => e(t, i ?? 2)).join(", ")}` : ""
-    }(e, 0))}\n\n`))
-    return e
+
+  // Final processing if we still have multiple vertices
+  if (vertices.length > 1) {
+    vertices = processVertices(vertices, vertices, containerDimensions)
   }
-  let E = (function e(t) {
-    if (t.type !== "LIST" || t.wrap)
-      return t
-    let i = []
-    for (let n of t.children) {
-      let r = e(n)
-      if (r.type === "LIST" && !r.wrap && r.wrap === t.wrap && r.axis === t.axis && isApproximatelyEqual(r.spacing, t.spacing) && isApproximatelyEqual(r.counterSpacing, t.counterSpacing)) {
-        i.push(...r.children)
+
+  // Handle case where we couldn't resolve to a single vertex
+  if (vertices.length !== 1) {
+    const error = new GraphResolutionError(`graph could not resolve: ${vertices.length} vertices`)
+    logger.log(error)
+
+    vertices.forEach((vertex, index) => {
+      logger.log(`${index}: ${getVertexDescription(vertex, 0)}\n\n`)
+    })
+
+    return error
+  }
+
+  // Flatten nested lists
+  const flattenNestedLists = (vertex: Vertex): Vertex => {
+    if (vertex.type !== "LIST" || vertex.wrap)
+      return vertex
+
+    const flattenedChildren: Vertex[] = []
+
+    for (const child of vertex.children || []) {
+      const processedChild = flattenNestedLists(child)
+
+      if (processedChild.type === "LIST"
+        && !processedChild.wrap
+        && processedChild.wrap === vertex.wrap
+        && processedChild.axis === vertex.axis
+        && isApproximatelyEqual(processedChild.spacing!, vertex.spacing!)
+        && isApproximatelyEqual(processedChild.counterSpacing!, vertex.counterSpacing!)) {
+        flattenedChildren.push(...(processedChild.children || []))
         continue
       }
-      i.push(r)
+
+      flattenedChildren.push(processedChild)
     }
+
     return {
-      ...t,
-      children: i,
+      ...vertex,
+      children: flattenedChildren,
     }
-  }(_[0]))
-  let x = (function e(t, i, r, s, o) {
-    if (t.type !== "LIST" && t.type !== "GROUP" && t.type !== "FRAME")
-      return t.node
-    if (t.type === "FRAME" || t.type === "GROUP") {
-      let n = i.createFrame()
-      n.fills = []
-      n.x = t.x
-      n.y = t.y
-      n.name = s.value === 1 ? "Frame" : `Frame ${s.value}`
-      s.value += 1
-      n.resize(t.width, t.height)
-      t.absolutePositionedChildren.concat(t.children).map(t => e(t, i, r, s, o)).forEach((e) => {
-        n.appendChild(e)
-        e.x = e.x - t.x
-        e.y = e.y - t.y
+  }
+
+  const flattenedVertex = flattenNestedLists(vertices[0])
+
+  // Convert vertex structure to actual nodes
+  const convertVertexToNode = (vertex: Vertex, api: any, manager: any, context: FrameCreationContext, opts: any): any => {
+    // Handle leaf nodes
+    if (vertex.type !== "LIST" && vertex.type !== "GROUP" && vertex.type !== "FRAME") {
+      return vertex.node
+    }
+
+    // Handle frames and groups
+    if (vertex.type === "FRAME" || vertex.type === "GROUP") {
+      const frame = api.createFrame()
+      frame.fills = []
+      frame.x = vertex.x
+      frame.y = vertex.y
+      frame.name = context.value === 1 ? "Frame" : `Frame ${context.value}`
+      context.value += 1
+      frame.resize(vertex.width, vertex.height)
+
+      // Process children
+      const processedChildren = (vertex.absolutePositionedChildren || [])
+        .concat(vertex.children || [])
+        .map(child => convertVertexToNode(child, api, manager, context, opts))
+
+      processedChildren.forEach((child: any) => {
+        frame.appendChild(child)
+        child.x = child.x - vertex.x
+        child.y = child.y - vertex.y
       })
-      t.absolutePositionedChildren.length === 0
-        ? (function (e) {
-            let t = {}
-            e.children.forEach((e) => {
-              t[e.id] = {
-                x: e.x,
-                y: e.y,
-              }
-            })
-            C(e)
-            e.children.forEach((e) => {
-              "layoutPositioning" in e && (e.layoutPositioning = "ABSOLUTE", e.x = t[e.id].x ?? 0, e.y = t[e.id].y ?? 0, "layoutPositioning" in e && "constraints" in e && (e.constraints = {
+
+      // Handle absolute positioned children
+      if (!vertex.absolutePositionedChildren || vertex.absolutePositionedChildren.length === 0) {
+        const childPositions: { [key: string]: { x: number, y: number } } = {}
+
+        frame.children.forEach((child: any) => {
+          childPositions[child.id] = {
+            x: child.x,
+            y: child.y,
+          }
+        })
+
+        setDefaultLayout(frame)
+
+        frame.children.forEach((child: any) => {
+          if ("layoutPositioning" in child) {
+            child.layoutPositioning = "ABSOLUTE"
+            child.x = childPositions[child.id].x ?? 0
+            child.y = childPositions[child.id].y ?? 0
+
+            if ("layoutPositioning" in child && "constraints" in child) {
+              child.constraints = {
                 horizontal: "MAX",
                 vertical: "MIN",
-              }))
-            })
-          }(n))
-        : (n = w(n, t.absolutePositionedChildren, i, r, s)).type === "FRAME" && t.absolutePositionedChildren.forEach((t) => {
-            (function (t, i, n, r, a, s) {
-              let o = e(i, n, r, a, s)
-              o.removed || (t.insertChild(0, o), t.layoutMode !== "NONE" && (o.layoutPositioning = "ABSOLUTE"), o.x = 0, o.y = 0)
-            })(n, t, i, r, s, o)
-          })
-      r.setNodeForVertexId(t.id, n)
-      return n
-    }
-    for (let n of t.children) e(n, i, r, s, o)
-    let l = determineDominantAlignment(t.children, calculateTransformedBoundingBox([t]), t.axis)
-    let d = "MIN"
-    d = mapAlignmentToConstraintType(l)
-    let c = i.createFrame()
-    c.x = t.x
-    c.y = t.y
-    c.name = s.value === 1 ? "Frame" : `Frame ${s.value}`
-    s.value += 1
-    c.layoutMode = t.axis === "X" ? "HORIZONTAL" : "VERTICAL"
-    t.wrap && (c.layoutWrap = t.wrap ? "WRAP" : "NO_WRAP", c.counterAxisSpacing = t.counterSpacing)
-    c.setSharedPluginData("AAL", "was_auto_auto_layouted", "true")
-    c.itemSpacing = isNaN(t.spacing) ? 0 : t.spacing
-    c.resize(isNaN(t.width) ? c.width : t.width, isNaN(t.height) ? c.height : t.height)
-    c.layoutSizingHorizontal = "FIXED"
-    c.layoutSizingVertical = "FIXED"
-    c.fills = []
-    c.clipsContent = !1
-    t.children.forEach((e) => {
-      if (e.type === "LIST" || e.type === "GROUP" || e.type === "FRAME") {
-        let i = r.getNodeForVertexId(e.id)
-        i ? c.appendChild(i) : logger.log("Could not find vertex in store", t.id)
+              }
+            }
+          }
+        })
       }
       else {
-        c.appendChild(e.node)
-        let t = e.node
-        "layoutSizingVertical" in t && (t.layoutSizingVertical === "FILL" || t.layoutSizingHorizontal === "FILL") && (isApproximatelyEqual(t.height, e.height, 0.1) || isApproximatelyEqual(t.width, e.width, 0.1)) && e.height > 0.001 && e.width > 0.001 && t.resize(isNaN(e.width) || e.width < 0.001 ? t.width : e.width, isNaN(e.height) || e.height < 0.001 ? t.height : e.height)
+        const processedFrame = processFrameWithChildren(
+          frame,
+          vertex.absolutePositionedChildren,
+          api,
+          manager,
+          context,
+          opts,
+        )
+
+        // Handle absolute children
+        if (processedFrame.type === "FRAME" && vertex.absolutePositionedChildren) {
+          vertex.absolutePositionedChildren.forEach((absoluteChild: Vertex) => {
+            const convertedChild = convertVertexToNode(absoluteChild, api, manager, context, opts)
+            if (!convertedChild.removed) {
+              processedFrame.insertChild(0, convertedChild)
+              if (processedFrame.layoutMode !== "NONE") {
+                convertedChild.layoutPositioning = "ABSOLUTE"
+              }
+              convertedChild.x = 0
+              convertedChild.y = 0
+            }
+          })
+        }
+      }
+
+      manager.setNodeForVertexId(vertex.id, frame)
+      return frame
+    }
+
+    // Process list children
+    for (const child of vertex.children || []) {
+      convertVertexToNode(child, api, manager, context, opts)
+    }
+
+    // Determine alignment and create frame
+    const alignmentBox = calculateTransformedBoundingBox([vertex])
+    const dominantAlignment = determineDominantAlignment(
+      vertex.children || [],
+      alignmentBox,
+      vertex.axis!,
+    )
+
+    let alignmentType = "MIN"
+    alignmentType = mapAlignmentToConstraintType(dominantAlignment)
+
+    const frame = api.createFrame()
+    frame.x = vertex.x
+    frame.y = vertex.y
+    frame.name = context.value === 1 ? "Frame" : `Frame ${context.value}`
+    context.value += 1
+    frame.layoutMode = vertex.axis === "X" ? "HORIZONTAL" : "VERTICAL"
+
+    if (vertex.wrap) {
+      frame.layoutWrap = vertex.wrap ? "WRAP" : "NO_WRAP"
+      frame.counterAxisSpacing = vertex.counterSpacing
+    }
+
+    frame.setSharedPluginData("AAL", "was_auto_auto_layouted", "true")
+    frame.itemSpacing = isNaN(vertex.spacing!) ? 0 : vertex.spacing!
+    frame.resize(isNaN(vertex.width) ? frame.width : vertex.width, isNaN(vertex.height) ? frame.height : vertex.height)
+    frame.layoutSizingHorizontal = "FIXED"
+    frame.layoutSizingVertical = "FIXED"
+    frame.fills = []
+    frame.clipsContent = false
+
+    // Add children to frame
+    vertex.children?.forEach((child: Vertex) => {
+      if (child.type === "LIST" || child.type === "GROUP" || child.type === "FRAME") {
+        const node = manager.getNodeForVertexId(child.id)
+        if (node) {
+          frame.appendChild(node)
+        }
+        else {
+          logger.log("Could not find vertex in store", vertex.id)
+        }
+      }
+      else {
+        frame.appendChild(child.node)
+        const node = child.node
+
+        if ("layoutSizingVertical" in node
+          && (node.layoutSizingVertical === "FILL" || node.layoutSizingHorizontal === "FILL")
+          && (isApproximatelyEqual(node.height, child.height, 0.1) || isApproximatelyEqual(node.width, child.width, 0.1))
+          && child.height > 0.001 && child.width > 0.001) {
+          node.resize(
+            isNaN(child.width) || child.width < 0.001 ? node.width : child.width,
+            isNaN(child.height) || child.height < 0.001 ? node.height : child.height,
+          )
+        }
       }
     })
-    c.primaryAxisAlignItems = "MIN"
-    d && (c.counterAxisAlignItems = d)
-    c.layoutMode === "HORIZONTAL" && (c.children.length === 2 && (c.itemSpacing > 0.2 * c.width || c.itemSpacing > 0.1 * c.width && c.children[0].width > 0.7 * c.width) && (c.primaryAxisAlignItems = "SPACE_BETWEEN"), c.children.length === 3 && (c.itemSpacing > 0.15 * c.width || c.itemSpacing > 0.05 * c.width && c.children[1].width > 0.5 * c.width) && (c.primaryAxisAlignItems = "SPACE_BETWEEN"))
-    r.setNodeForVertexId(t.id, c)
-    return c
-  }(E, t, i, l, d))
-  if (h?.insertChild(g, x), E.type === "NODE" && T(E.node) && !d?.noRecurse)
-    return w(E.node, [], t, i, l, d)
-  if (E.type === "LIST") {
-    let e = (n) => {
-      n.type === "NODE" && T(n.node) ? w(n.node, [], t, i, l, d) : "children" in n && n.children.forEach(e)
+
+    frame.primaryAxisAlignItems = "MIN"
+    if (alignmentType) {
+      frame.counterAxisAlignItems = alignmentType
     }
-    d?.noRecurse || E.children.forEach(e);
-    (x.parent?.type === "PAGE" || p) && (x.x = A.left, x.y = A.top)
-    isApproximatelyEqual(y, x.width) || x.resize(y, x.height)
-    isApproximatelyEqual(b, x.height) || x.resize(x.width, b)
+
+    // Special spacing adjustments for horizontal layouts
+    if (frame.layoutMode === "HORIZONTAL") {
+      if (frame.children.length === 2
+        && (frame.itemSpacing > 0.2 * frame.width
+          || (frame.itemSpacing > 0.1 * frame.width && frame.children[0].width > 0.7 * frame.width))) {
+        frame.primaryAxisAlignItems = "SPACE_BETWEEN"
+      }
+
+      if (frame.children.length === 3
+        && (frame.itemSpacing > 0.15 * frame.width
+          || (frame.itemSpacing > 0.05 * frame.width && frame.children[1].width > 0.5 * frame.width))) {
+        frame.primaryAxisAlignItems = "SPACE_BETWEEN"
+      }
+    }
+
+    manager.setNodeForVertexId(vertex.id, frame)
+    return frame
   }
-  return x
+
+  const resultNode = convertVertexToNode(flattenedVertex, pluginApi, nodeManager, frameContext, options)
+
+  // Insert result into parent if it exists
+  if (parent?.insertChild) {
+    parent.insertChild(insertIndex, resultNode)
+  }
+
+  // Handle recursive processing
+  if (flattenedVertex.type === "NODE" && shouldUseAutoLayout(flattenedVertex.node) && !options?.noRecurse) {
+    return processFrameWithChildren(
+      flattenedVertex.node,
+      [],
+      pluginApi,
+      nodeManager,
+      frameContext,
+      options,
+    )
+  }
+
+  if (flattenedVertex.type === "LIST") {
+    const processChildren = (vertex: Vertex) => {
+      if (vertex.type === "NODE" && shouldUseAutoLayout(vertex.node)) {
+        processFrameWithChildren(
+          vertex.node,
+          [],
+          pluginApi,
+          nodeManager,
+          frameContext,
+          options,
+        )
+      }
+      else if ("children" in vertex && vertex.children) {
+        vertex.children.forEach(processChildren)
+      }
+    }
+
+    if (!options?.noRecurse) {
+      flattenedVertex.children?.forEach(processChildren)
+    }
+
+    // Position result if it's a top-level element
+    if ((resultNode.parent?.type === "PAGE" || isRecursiveCall) && containerBox) {
+      resultNode.x = containerBox.left
+      resultNode.y = containerBox.top
+    }
+
+    // Resize if dimensions don't match
+    if (!isApproximatelyEqual(containerWidth, resultNode.width)) {
+      resultNode.resize(containerWidth, resultNode.height)
+    }
+
+    if (!isApproximatelyEqual(containerHeight, resultNode.height)) {
+      resultNode.resize(resultNode.width, containerHeight)
+    }
+  }
+
+  return resultNode
 }
-export const Oc = $$x0
-export const aJ = $$k1
-export const Rm = $$E2
+
+/**
+ * Gets a description of a vertex for debugging
+ */
+function getVertexDescription(vertex: Vertex, indentLevel: number = 0): string {
+  if (vertex.type === "NODE") {
+    return vertex.node?.name || "Unnamed Node"
+  }
+
+  if (vertex.type === "LIST" || vertex.type === "GROUP") {
+    return `\n${" ".repeat(indentLevel)}${vertex.type}: ${(vertex.children || [])
+      .map(child => getVertexDescription(child, indentLevel + 2))
+      .join(", ")}`
+  }
+
+  return ""
+}
+
+// ==================== EXPORTS ====================
+
+export const Oc = VertexNodeMap
+export const aJ = processVerticesLayout
+export const Rm = logVerMessage

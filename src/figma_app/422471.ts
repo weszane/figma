@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { postUserFlag } from "../905/985254";
 import { userFlagAtomFamily } from "../figma_app/545877";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -29,7 +29,7 @@ export function $$h0() {
   (function () {
     let e = useDispatch<AppDispatch>();
     let t = useAtomWithSubscription($$p5);
-    let r = Xr($$u2);
+    let r = useSetAtom($$u2);
     let o = useRef(!1);
     useEffect(() => {
       r(!0);

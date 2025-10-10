@@ -24,7 +24,7 @@ import { KeyboardReceiver } from '../905/826900';
 import { hideDropdownAction } from '../905/929976';
 import { b as _$$b } from '../905/946806';
 import { h as _$$h } from '../905/994594';
-import { ms, wv } from '../figma_app/236327';
+import { DropdownContainer, SeparatorComponent } from '../figma_app/236327';
 import { KeyboardShortcut } from '../figma_app/420927';
 import { parsePxInt } from '../figma_app/783094';
 import { memoizeByArgs } from '../figma_app/815945';
@@ -263,8 +263,8 @@ class MultilevelDropdownOption extends z {
   }
 }
 MultilevelDropdownOption.displayName = 'MultilevelDropdownOption';
-let Y = ms;
-let q = wv;
+let Y = DropdownContainer;
+let q = SeparatorComponent;
 let $ = parsePxInt(km);
 let Z = parsePxInt(hX);
 var X = (e => (e[e.RIGHT = 0] = 'RIGHT', e[e.LEFT = 1] = 'LEFT', e[e.OVERLAP = 2] = 'OVERLAP', e))(X || {});

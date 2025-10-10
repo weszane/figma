@@ -5,18 +5,18 @@ import { bL, gZ } from "../905/598775";
 import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
-import { rr, Jn, wv, Ve } from "../figma_app/236327";
+import { TrackedCheckableOption, CheckDisplayType, SeparatorComponent, DropdownComponent } from "../figma_app/236327";
 import { IntersectionSentinel } from "../905/925868";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { qI, GR, L_ } from "../figma_app/622574";
+import { isUnassignedLabel, useTeamTemplates, useOrgTemplates } from "../figma_app/622574";
 import { gp } from "../figma_app/973927";
 import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { isBigmaEnabledAlias } from "../figma_app/336853";
-import { s as _$$s2 } from "../905/82276";
+import { UNASSIGNED_LABEL } from "../905/82276";
 import { TrackingKeyEnum } from "../905/696396";
 import { Ht } from "../figma_app/522930";
 import { Kt, iq, AF } from "../figma_app/80782";
@@ -43,7 +43,7 @@ export function $$L0({
   let E = !1;
   for (let t of e) {
     d.has(t.id) && _.push(t);
-    qI(t) ? E = !0 : s.has(t.id) ? c.push(t) : p.push(t);
+    isUnassignedLabel(t) ? E = !0 : s.has(t.id) ? c.push(t) : p.push(t);
   }
   sortByPropertyWithOptions(c, "name");
   sortByPropertyWithOptions(p, "name");
@@ -69,7 +69,7 @@ export function $$L0({
     userNonMemberFilterOptionsSelected: b,
     showWorkspaces: o,
     isMyTeamsOnly: r,
-    unassignedTeamsSelected: d.has(_$$s2)
+    unassignedTeamsSelected: d.has(UNASSIGNED_LABEL)
   });
   let v = (e, t) => {
     i({
@@ -91,38 +91,38 @@ export function $$L0({
   if (o) {
     if (x.push(...[...c, ...p].filter(e => !!e.id).map(e => {
       let t = d.has(e.id);
-      return jsx(rr, {
+      return jsx(TrackedCheckableOption, {
         checked: t,
         onClick: () => {
           v(t, e);
         },
-        displayType: Jn.Checkbox,
+        displayType: CheckDisplayType.Checkbox,
         children: e.name
       }, e.id || e.name);
-    })), x.length && x.unshift(jsx(wv, {}, "my-teams-only-separator")), x.unshift(jsx(rr, {
+    })), x.length && x.unshift(jsx(SeparatorComponent, {}, "my-teams-only-separator")), x.unshift(jsx(TrackedCheckableOption, {
       checked: r,
       onClick: () => i({
         ids: t,
         myTeamsOnly: !r
       }),
-      displayType: Jn.Checkmark,
+      displayType: CheckDisplayType.Checkmark,
       children: renderI18nText("browse_templates_modal.my_teams_only")
     }, "my-teams-only")), E) {
-      let e = d.has(_$$s2);
-      x.push(jsx(wv, {}, "unassigned-teams-separator"), jsx(rr, {
+      let e = d.has(UNASSIGNED_LABEL);
+      x.push(jsx(SeparatorComponent, {}, "unassigned-teams-separator"), jsx(TrackedCheckableOption, {
         checked: e,
         onClick: () => {
           v(e, {
-            id: _$$s2
+            id: UNASSIGNED_LABEL
           });
         },
-        displayType: Jn.Checkbox,
+        displayType: CheckDisplayType.Checkbox,
         children: renderI18nText("browse_templates_modal.other_teams")
       }, "unassigned-teams"));
     }
   } else {
-    c.length > 0 && x.push(jsx(rr, {
-      displayType: Jn.Checkbox,
+    c.length > 0 && x.push(jsx(TrackedCheckableOption, {
+      displayType: CheckDisplayType.Checkbox,
       checked: c.length === y.length,
       mixed: c.length > y.length && y.length > 0,
       onClick: () => {
@@ -132,19 +132,19 @@ export function $$L0({
     }, "my-teams"));
     x.push(...c.map(e => {
       let t = d.has(e.id);
-      return jsx(rr, {
+      return jsx(TrackedCheckableOption, {
         checked: t,
         onClick: () => {
           v(t, e);
         },
-        displayType: Jn.Checkbox,
+        displayType: CheckDisplayType.Checkbox,
         nested: !0,
         children: e.name
       }, e.id || e.name);
     }));
-    c.length > 0 && p.length > 0 && x.push(jsx(wv, {}, "other-teams-separator"));
-    p.length > 0 && x.push(jsx(rr, {
-      displayType: Jn.Checkbox,
+    c.length > 0 && p.length > 0 && x.push(jsx(SeparatorComponent, {}, "other-teams-separator"));
+    p.length > 0 && x.push(jsx(TrackedCheckableOption, {
+      displayType: CheckDisplayType.Checkbox,
       checked: p.length === b.length,
       mixed: p.length > b.length && b.length > 0,
       onClick: () => {
@@ -154,12 +154,12 @@ export function $$L0({
     }, "other-teams"));
     x.push(...p.map(e => {
       let t = d.has(e.id);
-      return jsx(rr, {
+      return jsx(TrackedCheckableOption, {
         checked: t,
         onClick: () => {
           v(t, e);
         },
-        displayType: Jn.Checkbox,
+        displayType: CheckDisplayType.Checkbox,
         nested: !0,
         children: e.name
       }, e.id || e.name);
@@ -171,7 +171,7 @@ export function $$L0({
     children: [jsx("span", {
       className: cssBuilderInstance.colorTextSecondary.$,
       children: renderI18nText("browse_templates_modal.published_from")
-    }), jsx(Ve, {
+    }), jsx(DropdownComponent, {
       label: T,
       menuTrackingContextName: TrackingKeyEnum.TEMPLATES_BROWSE_FILTERS,
       menuTrackingProperties: {
@@ -282,7 +282,7 @@ export function $$k3(e) {
     templatesByTeam,
     userTeamOrWorkspaceIds,
     isLoadingTeamTemplates
-  } = GR(r, FFileType.WHITEBOARD);
+  } = useTeamTemplates(r, FFileType.WHITEBOARD);
   let {
     filterOptions: _filterOptions,
     selectedIds,
@@ -292,7 +292,7 @@ export function $$k3(e) {
     teamTemplates,
     userTeamOrWorkspaceIds: _userTeamOrWorkspaceIds,
     isLoading
-  } = L_({
+  } = useOrgTemplates({
     orgId: r.id,
     areWorkspacesEnabled: a,
     editorType: FFileType.WHITEBOARD,

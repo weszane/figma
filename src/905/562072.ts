@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { CZ } from "../905/294085";
 import { hO, Hl } from "../figma_app/545293";
@@ -13,7 +13,7 @@ export function $$d0({
   isFigmake: u
 }) {
   let p = useAtomWithSubscription(openFileAtom);
-  let m = Xr(d ? hO.currentCommunitySearchAtom : hO.currentSearchAtom);
+  let m = useSetAtom(d ? hO.currentCommunitySearchAtom : hO.currentSearchAtom);
   let h = useDebouncedCallback(Hl, e);
   let g = useAtomWithSubscription(CZ);
   let f = useAtomWithSubscription(hO.sortByAtom);

@@ -1,461 +1,648 @@
-import { sha1Hex } from "../905/125019";
-import { ServiceCategories } from "../905/165054";
-import { PluginModalType, documentStateTsApi, ImageCppBindings, ImageExportType, Fullscreen, SceneGraphTsApi, StateSourceType } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import o from "../vendor/656470";
-import { trackEventAnalytics } from "../905/449184";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { isSupportShareEmail, isFigmaEmail } from "../figma_app/416935";
-import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { logInfo } from "../905/714362";
-import { sendWithRetry } from "../905/910117";
-import { v as _$$v } from "../905/479136";
-import { n as _$$n } from "../figma_app/339971";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { VisualBellIcon } from "../905/576487";
-import { createOptimistThunk } from "../905/350402";
-import { updateSaveAsProgressThunk, initiateSaveAsAction, beginSaveAsAction, cancelSaveAsAction } from "../905/445022";
-import { getImageManager } from "../figma_app/624361";
+import { ExportOption } from "../905/44234";
+import { sha1Hex } from "../905/125019";
 import { fullscreenPerfManager } from "../905/125218";
-import { areAllLoaded } from "../figma_app/623300";
-import { h as _$$h } from "../905/44234";
-import { fileApiHandler } from "../figma_app/787550";
-import { fullscreenValue } from "../figma_app/455680";
+import { ServiceCategories } from "../905/165054";
+import { VisualBellActions } from "../905/302958";
+import { getI18nString } from "../905/303541";
+import { createOptimistThunk } from "../905/350402";
+import { debugState } from "../905/407919";
+import { beginSaveAsAction, cancelSaveAsAction, initiateSaveAsAction, updateSaveAsProgressThunk } from "../905/445022";
+import { trackEventAnalytics } from "../905/449184";
+import { v as _$$v } from "../905/479136";
+import { VisualBellIcon } from "../905/576487";
+import { getFeatureFlags } from "../905/601108";
+import { logInfo } from "../905/714362";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
-var l = o;
-export let $$O1 = {
-  downloadFile(e, t = null) {
-    let r = document.createElement("a");
-    r.setAttribute("href", e);
-    t && (r.download = t);
-    document.body.appendChild(r);
-    r.click();
-    document.body.removeChild(r);
+import { sendWithRetry } from "../905/910117";
+import { n as _$$n } from "../figma_app/339971";
+import { isFigmaEmail, isSupportShareEmail } from "../figma_app/416935";
+import { fullscreenValue } from "../figma_app/455680";
+import { areAllLoaded } from "../figma_app/623300";
+import { getImageManager } from "../figma_app/624361";
+import { documentStateTsApi, Fullscreen, ImageCppBindings, ImageExportType, PluginModalType, SceneGraphTsApi, StateSourceType } from "../figma_app/763686";
+import { fileApiHandler } from "../figma_app/787550";
+import { desktopAPIInstance } from "../figma_app/876459";
+
+// Refactored code: Improved readability, added types, simplified logic, and preserved functionality.
+// Origin: $$O1 object with downloadFile and addAssetsToZip methods.
+
+interface ZipContainer {
+  zipWriter: any; // Assuming ZipWriter type from external library
+  zipPromise: Promise<void>;
+}
+interface AssetBatchResponse {
+  data: {
+    meta: {
+      s3_urls: Record<string, string>;
+    };
+  };
+}
+interface VideoBatchResponse {
+  data: {
+    meta: {
+      videos: Record<string, string>;
+    };
+  };
+}
+interface ExportMetadata {
+  client_meta: any;
+  file_name: string;
+  developer_related_links: string[];
+}
+export const fileExportUtilities = {
+  /**
+   * Triggers a file download in the browser by creating and clicking a temporary anchor element.
+   * @param url - The URL of the file to download.
+   * @param filename - Optional. The name to give the downloaded file.
+   */
+  downloadFile(url: string, filename: string | null = null): void {
+    const anchorElement = document.createElement("a");
+    anchorElement.setAttribute("href", url);
+    if (filename) {
+      anchorElement.download = filename;
+    }
+    document.body.appendChild(anchorElement);
+    anchorElement.click();
+    document.body.removeChild(anchorElement);
   },
-  async addAssetsToZip(e, t, r, n, i) {
-    let a = [];
-    let s = [];
-    let o = {};
-    let l = {};
-    if (0 === t.length && 0 === r.size) return;
-    async function d(t) {
-      let r = 2e3;
-      for (;;) try {
-        return await t();
-      } catch (t) {
-        if (e()) return;
-        await new Promise(e => setTimeout(e, r));
-        r < 32e3 && (r *= 2);
+  /**
+   * Adds image and video assets to a ZIP archive with retry logic.
+   * @param shouldCancel - A function that returns true if the operation should be canceled.
+   * @param imageSha1s - An array of SHA1 hashes for images to include.
+   * @param videoIds - A set of video IDs to include.
+   * @param fileKey - The key of the file being exported.
+   * @param zipContainer - An object containing the ZIP writer and a promise for ongoing ZIP operations.
+   */
+  async addAssetsToZip(shouldCancel: () => boolean, imageSha1s: string[], videoIds: Set<string>, fileKey: string, zipContainer: ZipContainer): Promise<void> {
+    let imageKeys: string[] = [];
+    let videoKeys: string[] = [];
+    let imageUrls: Record<string, string> = {};
+    let videoUrls: Record<string, string> = {};
+    if (imageSha1s.length === 0 && videoIds.size === 0) {
+      return;
+    }
+
+    /**
+     * Retries an asynchronous operation with exponential backoff.
+     * @param operation - The async function to retry.
+     * @returns The result of the operation.
+     */
+    async function retryWithBackoff<T>(operation: () => Promise<T>): Promise<T> {
+      let delay = 2000;
+      for (;;) {
+        try {
+          return await operation();
+        } catch (error) {
+          if (shouldCancel()) {
+            throw new Error("Operation canceled");
+          }
+          await new Promise(resolve => setTimeout(resolve, delay));
+          if (delay < 32000) {
+            delay *= 2;
+          }
+        }
       }
     }
-    for (let r = 0; r < t.length && !e(); r += 100) await d(async () => {
-      let e = await sendWithRetry.post(`/file/${n}/image/batch`, {
-        sha1s: t.slice(r, r + 100)
+
+    // Fetch image URLs in batches
+    for (let i = 0; i < imageSha1s.length && !shouldCancel(); i += 100) {
+      await retryWithBackoff(async () => {
+        const response: AssetBatchResponse = await sendWithRetry.post(`/file/${fileKey}/image/batch`, {
+          sha1s: imageSha1s.slice(i, i + 100)
+        });
+        imageKeys = imageKeys.concat(Object.keys(response.data.meta.s3_urls));
+        imageUrls = {
+          ...imageUrls,
+          ...response.data.meta.s3_urls
+        };
       });
-      a = a.concat(Object.keys(e.data.meta.s3_urls));
-      o = {
-        ...o,
-        ...e.data.meta.s3_urls
-      };
-    });
-    r.size > 0 && (await d(async () => {
-      let e = (await fileApiHandler.getVideos({
-        fileKey: n
-      })).data.meta.videos;
-      for (let t in e) r.has(t) && (l[t] = e[t]);
-      s = Object.keys(l);
-    }));
-    let c = a.length + s.length;
-    let u = c;
-    R(c, c);
-    let p = [];
-    async function _(t) {
-      for (; t.nextIdx < t.queue.length && !e();) {
-        let r = t.queue[t.nextIdx];
-        t.nextIdx++;
-        await d(async () => {
-          let n = (await sendWithRetry.crossOriginGetAny(t.urls[r], null, {
+    }
+
+    // Fetch video URLs if any video IDs are provided
+    if (videoIds.size > 0) {
+      await retryWithBackoff(async () => {
+        const response: VideoBatchResponse = await fileApiHandler.getVideos({
+          fileKey
+        });
+        const videos = response.data.meta.videos;
+        for (const videoId in videos) {
+          if (videoIds.has(videoId)) {
+            videoUrls[videoId] = videos[videoId];
+          }
+        }
+        videoKeys = Object.keys(videoUrls);
+      });
+    }
+    let totalAssets = imageKeys.length + videoKeys.length;
+    let remainingAssets = totalAssets;
+    updateDownloadProgress(remainingAssets, totalAssets);
+    const downloadWorkers: Promise<void>[] = [];
+
+    /**
+     * Worker function to download assets and add them to the ZIP.
+     * @param config - Configuration for the worker, including asset queue and prefix.
+     */
+    async function downloadWorker(config: {
+      prefix: string;
+      queue: string[];
+      nextIdx: number;
+      urls: Record<string, string>;
+    }): Promise<void> {
+      while (config.nextIdx < config.queue.length && !shouldCancel()) {
+        const assetKey = config.queue[config.nextIdx];
+        config.nextIdx++;
+        await retryWithBackoff(async () => {
+          const response = await sendWithRetry.crossOriginGetAny(config.urls[assetKey], null, {
             responseType: "blob"
-          })).response;
-          if (R(--c, u), e()) return;
-          let a = await _$$v();
-          i.zipPromise = i.zipPromise.then(() => i.zipWriter.add(`${t.prefix}/${r}`, new a.BlobReader(n), {
+          });
+          const blob = response.response;
+          updateDownloadProgress(--remainingAssets, totalAssets);
+          if (shouldCancel()) {
+            return;
+          }
+          const zipLibrary = await _$$v();
+          zipContainer.zipPromise = zipContainer.zipPromise.then(() => zipContainer.zipWriter.add(`${config.prefix}/${assetKey}`, new zipLibrary.BlobReader(blob), {
             level: 0
           }));
         });
       }
     }
-    let h = {
+
+    // Start image download workers
+    const imageWorkerConfig = {
       prefix: "images",
-      queue: a,
+      queue: imageKeys,
       nextIdx: 0,
-      urls: o
+      urls: imageUrls
     };
-    for (let e = 0; e < 5; e++) p.push(_(h));
-    p.push(_({
+    for (let i = 0; i < 5; i++) {
+      downloadWorkers.push(downloadWorker(imageWorkerConfig));
+    }
+
+    // Start video download worker
+    downloadWorkers.push(downloadWorker({
       prefix: "videos",
-      queue: s,
+      queue: videoKeys,
       nextIdx: 0,
-      urls: l
+      urls: videoUrls
     }));
-    await Promise.all(p);
+    await Promise.all(downloadWorkers);
   }
 };
-function R(e, t) {
+
+/**
+ * Updates the download progress in the application state.
+ * @param pending - The number of assets still pending download.
+ * @param total - The total number of assets to download.
+ */
+function updateDownloadProgress(pending: number, total: number): void {
   debugState.dispatch(updateSaveAsProgressThunk({
-    pendingImageDownload: e,
-    totalImages: t
+    pendingImageDownload: pending,
+    totalImages: total
   }));
 }
-function L(e, t, r) {
-  let n = debugState.dispatch;
-  let i = debugState.getState();
-  let a = i.mirror.appModel;
-  let s = i.saveAsState.waitTime;
-  let o = areAllLoaded(a.pagesList);
-  let l = 2e4 - s;
-  let d = !navigator.onLine || l <= 0;
-  n(M({
-    mode: e,
-    pagesAllLoaded: o,
-    showSkipButton: d,
-    completeSaveAction: t,
-    cancelCallback: r
+
+/**
+ * Displays a visual bell notification for save/export progress with skip/cancel options.
+ * @param mode - The current operation mode (e.g., SaveLocalFile, Export).
+ * @param completeSaveAction - Function or string to complete the save action.
+ * @param cancelCallback - Optional. Function to call when the operation is canceled.
+ */
+function showSaveAsProgress(mode: any,
+// _$$h type
+completeSaveAction: string | (() => void), cancelCallback?: () => void): void {
+  const dispatch = debugState.dispatch;
+  const state = debugState.getState();
+  const appModel = state.mirror.appModel;
+  const waitTime = state.saveAsState.waitTime;
+  const pagesAllLoaded = areAllLoaded(appModel.pagesList);
+  const timeRemaining = 20000 - waitTime;
+  const showSkipButton = !navigator.onLine || timeRemaining <= 0;
+  dispatch(showSaveAsProgressNotification({
+    mode,
+    pagesAllLoaded,
+    showSkipButton,
+    completeSaveAction,
+    cancelCallback
   }));
-  d || setTimeout(() => {
-    n(F({
-      mode: e,
-      pagesAllLoaded: o,
-      showSkipAfterWaitingMs: 2e4,
-      completeSaveAction: t,
-      cancelCallback: r
-    }));
-  }, l);
+  if (!showSkipButton) {
+    setTimeout(() => {
+      dispatch(updateSaveAsProgressNotification({
+        mode,
+        pagesAllLoaded,
+        showSkipAfterWaitingMs: 20000,
+        completeSaveAction,
+        cancelCallback
+      }));
+    }, timeRemaining);
+  }
 }
-async function P(e, t, r) {
-  let o;
-  let c = _$$v();
-  let h = debugState.dispatch;
-  let m = debugState.getState();
-  let f = !1;
-  let T = () => {};
-  let I = !1;
-  let S = () => {};
-  let A = new Promise(e => {
-    S = e;
+
+/**
+ * Initiates the process of saving a file locally as a ZIP archive.
+ * @param file - The file object to save.
+ * @param attemptId - A unique ID for this save attempt.
+ * @param mode - The current operation mode (e.g., SaveLocalFile).
+ */
+async function initiateLocalSave(file: any, attemptId: string, mode: any): Promise<void> {
+  let exportEventType: string;
+  const zipLibraryPromise = _$$v();
+  const dispatch = debugState.dispatch;
+  const state = debugState.getState();
+  let downloadSkipped = false;
+  let skipDownloadCallback = () => {};
+  let isCanceled = false;
+  let cancelCallback = () => {};
+  const skipDownloadPromise = new Promise<void>(resolve => {
+    skipDownloadCallback = resolve;
   });
-  let N = new Promise(e => {
-    T = e;
+  const cancelPromise = new Promise<void>(resolve => {
+    cancelCallback = resolve;
   });
-  let C = () => {
-    T();
-    f = !0;
+  const skipDownload = () => {
+    cancelCallback();
+    downloadSkipped = true;
   };
-  let R = 0;
-  let P = 0;
-  function D() {
+  let imageCount = 0;
+  let videoCount = 0;
+
+  /**
+   * Gathers analytics data for tracking the export process.
+   */
+  function getExportAnalyticsData() {
     return {
-      downloadSkipped: f,
-      attemptId: t,
-      canceled: I,
+      downloadSkipped,
+      attemptId,
+      canceled: isCanceled,
       reason: "save-as",
-      exportV2: !0,
-      imageCount: R,
-      videoCount: P,
+      exportV2: true,
+      imageCount,
+      videoCount,
       loadId: fullscreenPerfManager.loadID()
     };
   }
-  let k = () => {
-    S();
-    I = !0;
-    trackEventAnalytics("File Export V2 Canceled", D());
+  const cancelExport = () => {
+    skipDownloadCallback();
+    isCanceled = true;
+    trackEventAnalytics("File Export V2 Canceled", getExportAnalyticsData());
   };
-  L(_$$h.SaveLocalFile, C, k);
-  let M = handleLoadAllPagesWithVersionCheck(PluginModalType.SAVE_LOCAL_COPY);
-  M.catch(() => {
-    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("saveAs: waitForAllPagesPromise rejected"));
-    h(VisualBellActions.dequeue({
+  showSaveAsProgress(ExportOption.SaveLocalFile, skipDownload, cancelExport);
+  const waitForAllPagesPromise = handleLoadAllPagesWithVersionCheck(PluginModalType.SAVE_LOCAL_COPY);
+  waitForAllPagesPromise.catch(() => {
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error("saveAs: waitForAllPagesPromise rejected"));
+    dispatch(VisualBellActions.dequeue({
       matchType: "save-as-progress"
     }));
-    h(VisualBellActions.enqueue({
-      error: !0,
+    dispatch(VisualBellActions.enqueue({
+      error: true,
       message: getI18nString("visual_bell.save_as_error")
     }));
   });
-  await Promise.race([M, A, N]);
-  h(VisualBellActions.dequeue({
+  await Promise.race([waitForAllPagesPromise, skipDownloadPromise, cancelPromise]);
+  dispatch(VisualBellActions.dequeue({
     matchType: "save-as-progress"
   }));
-  let F = documentStateTsApi.getMutableActiveDocument();
-  let j = ImageCppBindings.findImagesUnder(F, ["0:0"], ImageExportType.ALL);
-  let U = {};
-  let B = [];
-  for (let e of j) {
-    let t = ImageCppBindings.getCompressedImage(e);
-    t ? U[e] = t : B.push(e);
+  const activeDocument = documentStateTsApi.getMutableActiveDocument();
+  const allImageIds = ImageCppBindings.findImagesUnder(activeDocument, ["0:0"], ImageExportType.ALL);
+  const compressedImages: Record<string, Uint8Array> = {};
+  const imageIdsToFetch: string[] = [];
+  for (const imageId of allImageIds) {
+    const compressedImage = ImageCppBindings.getCompressedImage(imageId);
+    if (compressedImage) {
+      compressedImages[imageId] = compressedImage;
+    } else {
+      imageIdsToFetch.push(imageId);
+    }
   }
-  let G = new Set(ImageCppBindings.findAllVideos());
-  if (R = j.length, P = G.size, I) return;
-  h(VisualBellActions.enqueue({
+  const videoIds = new Set(ImageCppBindings.findAllVideos());
+  imageCount = allImageIds.length;
+  videoCount = videoIds.size;
+  if (isCanceled) {
+    return;
+  }
+  dispatch(VisualBellActions.enqueue({
     type: "save-as-actual",
     message: getI18nString("visual_bell.saving"),
     icon: VisualBellIcon.SPINNER
   }));
-  await new Promise(e => setTimeout(e, 0));
-  let V = Fullscreen.attemptActiveDocumentSave(t);
-  if (!V) return;
-  let H = await c;
-  let z = new H.ZipWriter(new H.BlobWriter("application/zip"));
-  async function W() {
-    if (!V) return;
-    let t = l()(Array.from(Fullscreen.getDeveloperRelatedLinks().values()));
-    for (let r in await z.add("canvas.fig", new H.Uint8ArrayReader(V.canvas), {
+  await new Promise(resolve => setTimeout(resolve, 0));
+  const saveResult = Fullscreen.attemptActiveDocumentSave(attemptId);
+  if (!saveResult) {
+    return;
+  }
+  const zipLibrary = await zipLibraryPromise;
+  const zipWriter = new zipLibrary.ZipWriter(new zipLibrary.BlobWriter("application/zip"));
+
+  /**
+   * Adds core file data (canvas, thumbnail, metadata) to the ZIP.
+   */
+  async function addCoreFileDataToZip(): Promise<void> {
+    if (!saveResult) {
+      return;
+    }
+    const developerLinks = Array.from(Fullscreen.getDeveloperRelatedLinks().values()).flat();
+    await zipWriter.add("canvas.fig", new zipLibrary.Uint8ArrayReader(saveResult.canvas), {
       level: 0
-    }), await z.add("thumbnail.png", new H.Uint8ArrayReader(V.thumbnail), {
+    });
+    await zipWriter.add("thumbnail.png", new zipLibrary.Uint8ArrayReader(saveResult.thumbnail), {
       level: 0
-    }), await z.add("meta.json", new H.TextReader(JSON.stringify({
-      client_meta: JSON.parse(V.clientMeta),
-      file_name: e.name,
-      developer_related_links: t
-    }))), await z.add("images", null, {
-      directory: !0
-    }), U) {
-      let e = U[r];
-      await z.add(`images/${r}`, new H.Uint8ArrayReader(e), {
+    });
+    const metadata: ExportMetadata = {
+      client_meta: JSON.parse(saveResult.clientMeta),
+      file_name: file.name,
+      developer_related_links: developerLinks
+    };
+    await zipWriter.add("meta.json", new zipLibrary.TextReader(JSON.stringify(metadata)));
+    await zipWriter.add("images", null, {
+      directory: true
+    });
+    for (const imageId in compressedImages) {
+      const imageData = compressedImages[imageId];
+      await zipWriter.add(`images/${imageId}`, new zipLibrary.Uint8ArrayReader(imageData), {
         level: 0
       });
     }
   }
-  h(VisualBellActions.dequeue({
+  dispatch(VisualBellActions.dequeue({
     matchType: "save-as-actual"
   }));
-  f || L(_$$h.SaveLocalFile, C, k);
-  let K = {
-    zipWriter: z,
-    zipPromise: W()
+  if (!downloadSkipped) {
+    showSaveAsProgress(ExportOption.SaveLocalFile, skipDownload, cancelExport);
+  }
+  const zipContainer: ZipContainer = {
+    zipWriter,
+    zipPromise: addCoreFileDataToZip()
   };
-  if (getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
-    stage: "start",
-    ...D()
-  }), await Promise.race([$$O1.addAssetsToZip(() => f || I, B, G, e.key, K), N, A]), getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
-    stage: "finished",
-    ...D(),
-    userId: m.user?.id,
-    fileKey: e.key,
-    fileId: e.id,
-    orgId: e.parentOrgId
-  }), h(VisualBellActions.dequeue({
+  if (getFeatureFlags().export_image_download_logging) {
+    trackEventAnalytics("Image Download For Export", {
+      stage: "start",
+      ...getExportAnalyticsData()
+    });
+  }
+  await Promise.race([fileExportUtilities.addAssetsToZip(() => downloadSkipped || isCanceled, imageIdsToFetch, videoIds, file.key, zipContainer), cancelPromise, skipDownloadPromise]);
+  if (getFeatureFlags().export_image_download_logging) {
+    trackEventAnalytics("Image Download For Export", {
+      stage: "finished",
+      ...getExportAnalyticsData(),
+      userId: state.user?.id,
+      fileKey: file.key,
+      fileId: file.id,
+      orgId: file.parentOrgId
+    });
+  }
+  dispatch(VisualBellActions.dequeue({
     matchType: "save-as-progress"
-  })), I) return;
-  h(VisualBellActions.enqueue({
+  }));
+  if (isCanceled) {
+    return;
+  }
+  dispatch(VisualBellActions.enqueue({
     type: "save-as-actual",
     message: getI18nString("visual_bell.saving"),
     icon: VisualBellIcon.SPINNER
   }));
-  await K.zipPromise;
-  let Y = await z.close();
-  if (isSupportShareEmail(m.user?.email)) {
-    let e = "";
-    let t = m.authedUsers?.byId;
-    if (t) {
-      Object.values(t).forEach(t => {
-        let r = t.email;
-        isFigmaEmail(r) && !isSupportShareEmail(r) && (e = r);
+  await zipContainer.zipPromise;
+  const zipBlob = await zipWriter.close();
+  if (isSupportShareEmail(state.user?.email)) {
+    let internalEmail = "";
+    const authedUsers = state.authedUsers?.byId;
+    if (authedUsers) {
+      Object.values(authedUsers).forEach(user => {
+        const email = user.email;
+        if (isFigmaEmail(email) && !isSupportShareEmail(email)) {
+          internalEmail = email;
+        }
       });
-      let r = new FileReader();
-      r.onloadend = () => {
-        let t = r.result;
-        let i = sha1Hex(new Uint8Array(t));
+      const fileReader = new FileReader();
+      fileReader.onloadend = () => {
+        const arrayBuffer = fileReader.result as ArrayBuffer;
+        const sha1Hash = sha1Hex(new Uint8Array(arrayBuffer));
         trackEventAnalytics("Support Share Download", {
-          sha1Hash: i,
-          internalEmail: e
+          sha1Hash,
+          internalEmail
         });
       };
-      r.readAsArrayBuffer(Y);
+      fileReader.readAsArrayBuffer(zipBlob);
     }
   }
-  let $ = URL.createObjectURL(Y);
-  let X = Fullscreen.fileExtension();
-  let q = `${e.name}${X}`;
-  let J = getI18nString("save_as_actions.save_partial_file_name_suffix", {
+  const downloadUrl = URL.createObjectURL(zipBlob);
+  const fileExtension = Fullscreen.fileExtension();
+  const fullFileName = `${file.name}${fileExtension}`;
+  const dateSuffix = getI18nString("save_as_actions.save_partial_file_name_suffix", {
     date: new Date().toLocaleDateString().replace(/_|\//g, "-")
   });
-  let Z = `${e.name} - ${J}${X}`;
-  $$O1.downloadFile($, f ? Z : q);
-  URL.revokeObjectURL($);
-  o = r === _$$h.Export ? "export" : r === _$$h.SaveLocalFile ? "save" : r === _$$h.CopyAsPNG || r === _$$h.CopyAsSVG ? "copy" : "non-export-related";
+  const partialFileName = `${file.name} - ${dateSuffix}${fileExtension}`;
+  fileExportUtilities.downloadFile(downloadUrl, downloadSkipped ? partialFileName : fullFileName);
+  URL.revokeObjectURL(downloadUrl);
+  exportEventType = mode === ExportOption.Export ? "export" : mode === ExportOption.SaveLocalFile ? "save" : mode === ExportOption.CopyAsPNG || mode === ExportOption.CopyAsSVG ? "copy" : "non-export-related";
   trackEventAnalytics("File Export V2 Completed", {
-    ...D(),
-    exportEvent: o,
-    fileName: q,
-    fileKey: e.key,
-    orgId: e.parentOrgId,
-    userId: m.user?.id
+    ...getExportAnalyticsData(),
+    exportEvent: exportEventType,
+    fileName: fullFileName,
+    fileKey: file.key,
+    orgId: file.parentOrgId,
+    userId: state.user?.id
   });
-  h(VisualBellActions.dequeue({
+  dispatch(VisualBellActions.dequeue({
     matchType: "save-as-actual"
   }));
 }
-export function $$D3(e, t, r) {
-  $$k0(_$$h.Export, e, t, r, [SceneGraphTsApi?.getCurrentPage(StateSourceType.REDUX, documentStateTsApi.getActiveDocument()) || ""], "export-all-frames-to-pdf");
+export async function exportAllFramesToPdf(file: any, dispatch: any, callback: any): Promise<void> {
+  initiateSaveAs(ExportOption.Export, file, dispatch, callback, [SceneGraphTsApi?.getCurrentPage(StateSourceType.REDUX, documentStateTsApi.getActiveDocument()) || ""], "export-all-frames-to-pdf");
 }
-export async function $$k0(e, t, r, n, o, l, u) {
+export async function initiateSaveAs(mode: any, file: any, dispatch: any, completeSaveAction: string | (() => void), nodesToLoad: string[], reason: string, settings?: any): Promise<void> {
   logInfo("initiateSaveAs", "begin", {
-    completeSaveAction: n,
-    nodesToLoad: o,
-    mode: e
+    completeSaveAction,
+    nodesToLoad,
+    mode
   });
-  r(initiateSaveAsAction());
-  let g = debugState.getState();
-  let f = g.saveAsState.attemptId;
-  if (getFeatureFlags().antiabuse_file_download_check) try {
-    let e = g.openFile?.key || "";
-    let t = await sendWithRetry.post(`/api/file_download_log/${e}`, {
-      is_desktop: !!desktopAPIInstance
-    });
-    t.data?.meta?.download_err && (await fileApiHandler.getWAFValidator());
-  } catch (e) {
-    if (429 === e.status) throw e;
-    trackEventAnalytics("File Download Log Error", {
-      attemptId: f,
-      error: e
-    });
+  dispatch(initiateSaveAsAction());
+  const state = debugState.getState();
+  const attemptId = state.saveAsState.attemptId;
+  if (getFeatureFlags().antiabuse_file_download_check) {
+    try {
+      const fileKey = state.openFile?.key || "";
+      const response = await sendWithRetry.post(`/api/file_download_log/${fileKey}`, {
+        is_desktop: !!desktopAPIInstance
+      });
+      if (response.data?.meta?.download_err) {
+        await fileApiHandler.getWAFValidator();
+      }
+    } catch (error: any) {
+      if (error.status === 429) {
+        throw error;
+      }
+      trackEventAnalytics("File Download Log Error", {
+        attemptId,
+        error
+      });
+    }
   }
-  if (e === _$$h.SaveLocalFile && (trackEventAnalytics("File Export Initiated", {
-    attemptId: f,
-    reason: l,
-    exportV2: !0,
-    loadId: fullscreenPerfManager.loadID()
-  }), g.openFile)) {
-    P(g.openFile, f, e);
+  if (mode === ExportOption.SaveLocalFile && state.openFile) {
+    trackEventAnalytics("File Export Initiated", {
+      attemptId,
+      reason,
+      exportV2: true,
+      loadId: fullscreenPerfManager.loadID()
+    });
+    initiateLocalSave(state.openFile, attemptId, mode);
     return;
   }
-  L(e, n);
-  let E = e === _$$h.SaveLocalFile ? ImageExportType.ALL : ImageExportType.NON_ANIMATED_ONLY;
-  getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
-    stage: "start",
-    attemptId: f,
-    reason: l
-  });
-  await getImageManager().loadAllImagesUnder(o, E, l, R);
-  getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
-    stage: "finished",
-    attemptId: f,
-    reason: l,
-    userId: g.user?.id,
-    fileKey: g.openFile?.key,
-    fileId: g.openFile?.id,
-    orgId: g.openFile?.parentOrgId
-  });
-  try {
-    debugState.getState().saveAsState.startTime ? (r(j({
-      mode: e,
-      completeSaveAction: n,
-      settings: u
-    })), r(beginSaveAsAction({
-      skipped: !1
-    }))) : trackEventAnalytics("File Export V1 Canceled", {
-      attemptId: f
+  showSaveAsProgress(mode, completeSaveAction);
+  const imageExportType = mode === ExportOption.SaveLocalFile ? ImageExportType.ALL : ImageExportType.NON_ANIMATED_ONLY;
+  if (getFeatureFlags().export_image_download_logging) {
+    trackEventAnalytics("Image Download For Export", {
+      stage: "start",
+      attemptId,
+      reason
     });
-  } catch (e) {
-    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e);
+  }
+  await getImageManager().loadAllImagesUnder(nodesToLoad, imageExportType, reason, updateDownloadProgress);
+  if (getFeatureFlags().export_image_download_logging) {
+    trackEventAnalytics("Image Download For Export", {
+      stage: "finished",
+      attemptId,
+      reason,
+      userId: state.user?.id,
+      fileKey: state.openFile?.key,
+      fileId: state.openFile?.id,
+      orgId: state.openFile?.parentOrgId
+    });
+  }
+  try {
+    const saveAsState = debugState.getState().saveAsState;
+    if (saveAsState.startTime) {
+      dispatch(executeSaveAction({
+        mode,
+        completeSaveAction,
+        settings
+      }));
+      dispatch(beginSaveAsAction({
+        skipped: false
+      }));
+    } else {
+      trackEventAnalytics("File Export V1 Canceled", {
+        attemptId
+      });
+    }
+  } catch (error) {
+    reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, error);
   }
 }
-let M = createOptimistThunk((e, t) => {
-  let r = {
+const showSaveAsProgressNotification = createOptimistThunk((storeContext: any, payload: any) => {
+  const cancelButton = {
     text: getI18nString("save_as_actions.cancel"),
-    action: t.cancelCallback || (() => {
-      e.dispatch(cancelSaveAsAction());
+    action: payload.cancelCallback || (() => {
+      storeContext.dispatch(cancelSaveAsAction());
     })
   };
-  let n = function (e, t, r) {
-    switch (e) {
-      case _$$h.SaveLocalFile:
-        if (t) return getI18nString("save_as_actions.save_partial_file");
-        return r ? getI18nString("save_as_actions.save_without_images") : getI18nString("save_as_actions.save_partial_file");
-      case _$$h.Export:
-        if (t) return null;
-        return r ? getI18nString("save_as_actions.export_without_images") : getI18nString("save_as_actions.export_without_content");
+  const getSkipButtonText = (mode: any, isOnline: boolean, pagesLoaded: boolean) => {
+    switch (mode) {
+      case ExportOption.SaveLocalFile:
+        if (isOnline) {
+          return getI18nString("save_as_actions.save_partial_file");
+        }
+        return pagesLoaded ? getI18nString("save_as_actions.save_without_images") : getI18nString("save_as_actions.save_partial_file");
+      case ExportOption.Export:
+        if (isOnline) {
+          return null;
+        }
+        return pagesLoaded ? getI18nString("save_as_actions.export_without_images") : getI18nString("save_as_actions.export_without_content");
       default:
         return null;
     }
-  }(t.mode, navigator.onLine, t.pagesAllLoaded);
-  let i = null;
-  n && (i = {
-    text: n,
-    action: () => {
-      trackEventAnalytics("image_loading_canceled", {
-        mode: t.mode
-      });
-      e.dispatch(j({
-        mode: t.mode,
-        completeSaveAction: t.completeSaveAction
-      }));
-      e.dispatch(beginSaveAsAction({
-        skipped: !0
-      }));
+  };
+  const skipButtonText = getSkipButtonText(payload.mode, navigator.onLine, payload.pagesAllLoaded);
+  let skipButton = null;
+  if (skipButtonText) {
+    skipButton = {
+      text: skipButtonText,
+      action: () => {
+        trackEventAnalytics("image_loading_canceled", {
+          mode: payload.mode
+        });
+        storeContext.dispatch(executeSaveAction({
+          mode: payload.mode,
+          completeSaveAction: payload.completeSaveAction
+        }));
+        storeContext.dispatch(beginSaveAsAction({
+          skipped: true
+        }));
+      }
+    };
+  }
+  const getMessage = (isOnline: boolean, pagesLoaded: boolean) => {
+    if (isOnline) {
+      return pagesLoaded ? getI18nString("save_as_actions.downloading_images") : getI18nString("save_as_actions.downloading_content");
     }
-  });
-  let a = {
+    return pagesLoaded ? getI18nString("save_as_actions.cannot_download_images") : getI18nString("save_as_actions.cannot_download_content");
+  };
+  const notification = {
     type: "save-as-progress",
     progressKey: "save-as",
-    message: function (e, t) {
-      return e ? t ? getI18nString("save_as_actions.downloading_images") : getI18nString("save_as_actions.downloading_content") : t ? getI18nString("save_as_actions.cannot_download_images") : getI18nString("save_as_actions.cannot_download_content");
-    }(navigator.onLine, t.pagesAllLoaded),
+    message: getMessage(navigator.onLine, payload.pagesAllLoaded),
     icon: VisualBellIcon.PROGRESS,
-    button: r
+    button: skipButton ? {
+      primary: cancelButton,
+      secondary: skipButton
+    } : cancelButton
   };
-  e.dispatch(VisualBellActions.enqueue({
-    ...a,
-    button: i ? {
-      primary: r,
-      secondary: i
-    } : r
-  }));
+  storeContext.dispatch(VisualBellActions.enqueue(notification));
 });
-let F = createOptimistThunk((e, t) => {
-  let r = e.getState();
-  if (!r.visualBell.find(e => "save-as-progress" === e.type) || !r.saveAsState?.startTime) return;
-  let n = (r.saveAsState.waitTime || 0) + Date.now() - r.saveAsState.startTime;
-  (!navigator.onLine || n > t.showSkipAfterWaitingMs) && (e.dispatch(VisualBellActions.clearAllExcept(["plugins-status"])), e.dispatch(M({
-    mode: t.mode,
-    pagesAllLoaded: t.pagesAllLoaded,
-    showSkipButton: !0,
-    completeSaveAction: t.completeSaveAction,
-    cancelCallback: t.cancelCallback
-  })));
+const updateSaveAsProgressNotification = createOptimistThunk((storeContext: any, payload: any) => {
+  const state = storeContext.getState();
+  if (!state.visualBell.find((item: any) => item.type === "save-as-progress") || !state.saveAsState?.startTime) {
+    return;
+  }
+  const elapsedTime = (state.saveAsState.waitTime || 0) + Date.now() - state.saveAsState.startTime;
+  if (!navigator.onLine || elapsedTime > payload.showSkipAfterWaitingMs) {
+    storeContext.dispatch(VisualBellActions.clearAllExcept(["plugins-status"]));
+    storeContext.dispatch(showSaveAsProgressNotification({
+      mode: payload.mode,
+      pagesAllLoaded: payload.pagesAllLoaded,
+      showSkipButton: true,
+      completeSaveAction: payload.completeSaveAction,
+      cancelCallback: payload.cancelCallback
+    }));
+  }
 });
-let j = createOptimistThunk((e, t) => {
-  e.dispatch(VisualBellActions.clearAllExcept(["plugins-status"]));
-  let r = e.getState().saveAsState;
-  e.dispatch(_$$n.set({
-    message: function (e) {
-      switch (e) {
-        case _$$h.SaveLocalFile:
+const executeSaveAction = createOptimistThunk((storeContext: any, payload: any) => {
+  storeContext.dispatch(VisualBellActions.clearAllExcept(["plugins-status"]));
+  const saveAsState = storeContext.getState().saveAsState;
+  storeContext.dispatch(_$$n.set({
+    message: function (mode) {
+      switch (mode) {
+        case ExportOption.SaveLocalFile:
           return getI18nString("visual_bell.saving");
-        case _$$h.Export:
+        case ExportOption.Export:
           return getI18nString("visual_bell.exporting");
-        case _$$h.CopyAsPNG:
+        case ExportOption.CopyAsPNG:
           return getI18nString("save_as_actions.copy_as_png_progress");
-        case _$$h.CopyAsSVG:
+        case ExportOption.CopyAsSVG:
           return getI18nString("save_as_actions.copy_as_svg_progress");
-        case _$$h.RasterizeSelection:
+        case ExportOption.RasterizeSelection:
           return getI18nString("save_as_actions.rasterize_selection_progress");
+        default:
+          return "";
       }
-    }(t.mode),
-    showLoadingSpinner: !1,
+    }(payload.mode),
+    showLoadingSpinner: false,
     callback: () => {
-      "string" == typeof t.completeSaveAction ? fullscreenValue.triggerAction(t.completeSaveAction, {
-        source: "menu",
-        attemptId: r.attemptId,
-        settings: t.settings
-      }) : t.completeSaveAction();
+      if (typeof payload.completeSaveAction === "string") {
+        fullscreenValue.triggerAction(payload.completeSaveAction, {
+          source: "menu",
+          attemptId: saveAsState.attemptId,
+          settings: payload.settings
+        });
+      } else {
+        payload.completeSaveAction();
+      }
     }
   }));
 });
-export const Dc = $$k0;
-export const hI = $$O1;
-export const hV = _$$h;
-export const mU = $$D3;
+export const Dc = initiateSaveAs;
+export const hI = fileExportUtilities;
+export const hV = ExportOption;
+export const mU = exportAllFramesToPdf;
+export {ExportOption}

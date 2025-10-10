@@ -12,7 +12,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { P as _$$P } from "../905/537307";
 import { getFeatureFlags } from "../905/601108";
-import { c$, ms, MM } from "../figma_app/236327";
+import { OptionComponent, DropdownContainer, CheckableOptionComponent } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { WithTrackedButton } from "../figma_app/617427";
 import { TrackedLink } from "../905/160095";
@@ -161,10 +161,10 @@ function B(e) {
       minWidth: 140,
       lean: "left",
       propagateCloseClick: !0,
-      children: [jsx(c$, {
+      children: [jsx(OptionComponent, {
         onClick: e.resetInviteLinks,
         children: renderI18nText("team_join_links.reset_invite_links")
-      }), e.canAdmin && jsx(c$, {
+      }), e.canAdmin && jsx(OptionComponent, {
         onClick: e.disableInviteLinks,
         children: renderI18nText("team_join_links.turn_off_invite_links")
       })]
@@ -200,12 +200,12 @@ function O(e) {
             svg: _$$A
           })
         })]
-      }), e.dropdownShown && e.dropdownShown.type === t && jsx(ms, {
+      }), e.dropdownShown && e.dropdownShown.type === t && jsx(DropdownContainer, {
         className: "team_join_link_permissions--permissionLevelDropdownOptions--cgu-T",
         style: {
           marginTop: a
         },
-        children: e.inviteLevels.map((n, t) => jsx(MM, {
+        children: e.inviteLevels.map((n, t) => jsx(CheckableOptionComponent, {
           checked: n === e.currentLevel,
           onClick: () => e.setLevel(n),
           children: getPermissionLevelName(n)

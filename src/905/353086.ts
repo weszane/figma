@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { ImageProviderType, ImageModelType, ImageSourceType } from "../905/585727";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { isLlamaEnabledForOrg } from "../figma_app/459490";
@@ -69,18 +69,18 @@ export function $$m1({
   let r = $$p0(i, useCurrentUserOrg());
   if (!r[0]) return null;
   let o = e ?? r[0].value;
-  return jsxs(bL, {
+  return jsxs(SelectGroupLabel, {
     value: o,
     onChange: e => t(e),
-    children: [jsx(l9, {
+    children: [jsx(SelectSeparator, {
       label: jsx(HiddenLabel, {
         children: renderI18nText("image_ai.model_type")
       })
-    }), jsxs(mc, {
+    }), jsxs(SelectContainer, {
       children: [jsx("div", {
         className: "xclx6tv x17akokd x1qxcl5b x1betce5 xno9bf3 x7ey041 xa1e1dt",
         children: renderI18nText("image_ai.model_type")
-      }), r.map(e => jsx(c$, {
+      }), r.map(e => jsx(SelectOptionReset, {
         value: e.value,
         children: e.label
       }, e.value))]

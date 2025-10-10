@@ -16,7 +16,7 @@ import { buildFileUrl } from "../905/612685";
 import { getLibraryAgeLabel } from "../figma_app/646357";
 import { FFileType } from "../figma_app/191312";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { l as _$$l } from "../905/402643";
+import { LibraryTypeIndex } from "../905/402643";
 import { zi } from "../905/824449";
 import { i } from "../905/415810";
 import { TableRow, SortableHeaderCell } from "../905/682977";
@@ -73,15 +73,15 @@ function F({
       let [u, p] = useAtomValueAndSetter(et);
       let [m, h] = useMemo(() => {
         switch (e) {
-          case _$$l.PRODUCT_COMPONENTS:
+          case LibraryTypeIndex.PRODUCT_COMPONENTS:
             return [t, i];
-          case _$$l.STYLES:
+          case LibraryTypeIndex.STYLES:
             return [n, a];
-          case _$$l.VARIABLES:
+          case LibraryTypeIndex.VARIABLES:
             return [s, o];
-          case _$$l.VARIABLE_MODES:
+          case LibraryTypeIndex.VARIABLE_MODES:
             return [l, d];
-          case _$$l.FILES:
+          case LibraryTypeIndex.FILES:
             return [u, p];
         }
       }, [e, t, n, s, l, u, i, a, o, d, p]);
@@ -113,7 +113,7 @@ function F({
   }(t, s, m, h);
   let v = useMemo(() => function (e, t, i) {
     switch (e.type) {
-      case _$$l.PRODUCT_COMPONENTS:
+      case LibraryTypeIndex.PRODUCT_COMPONENTS:
         return function (e, t, i) {
           let n = [...e];
           switch (t) {
@@ -136,7 +136,7 @@ function F({
           }
           return n;
         }([...e.items], t, i);
-      case _$$l.STYLES:
+      case LibraryTypeIndex.STYLES:
         return function (e, t, i) {
           let n = [...e];
           switch (t) {
@@ -156,7 +156,7 @@ function F({
           }
           return n;
         }([...e.items], t, i);
-      case _$$l.VARIABLES:
+      case LibraryTypeIndex.VARIABLES:
         return function (e, t, i) {
           let n = [...e];
           switch (t) {
@@ -181,7 +181,7 @@ function F({
           }
           return n;
         }([...e.items], t, i);
-      case _$$l.VARIABLE_MODES:
+      case LibraryTypeIndex.VARIABLE_MODES:
         return function (e, t, i) {
           let n = [...e];
           switch (t) {
@@ -200,7 +200,7 @@ function F({
           }
           return n;
         }([...e.items], t, i);
-      case _$$l.FILES:
+      case LibraryTypeIndex.FILES:
         return function (e, t, i) {
           let n = [...e];
           switch (t) {
@@ -229,8 +229,8 @@ function F({
   let x = useMemo(() => d(v), [v, d]);
   let S = useMemo(() => {
     switch (g) {
-      case _$$l.VARIABLES:
-      case _$$l.VARIABLE_MODES:
+      case LibraryTypeIndex.VARIABLES:
+      case LibraryTypeIndex.VARIABLE_MODES:
         return !1;
       default:
         return !0;
@@ -271,14 +271,14 @@ export function $$M2({
 }) {
   let i = useMemo(() => {
     switch (e) {
-      case _$$l.PRODUCT_COMPONENTS:
+      case LibraryTypeIndex.PRODUCT_COMPONENTS:
         return t ? getI18nString("design_systems.libraries_modal.all_variants") : getI18nString("design_systems.libraries_modal.component_statistics");
-      case _$$l.STYLES:
+      case LibraryTypeIndex.STYLES:
         return getI18nString("design_systems.libraries_modal.style_statistics");
-      case _$$l.VARIABLES:
-      case _$$l.VARIABLE_MODES:
+      case LibraryTypeIndex.VARIABLES:
+      case LibraryTypeIndex.VARIABLE_MODES:
         return getI18nString("design_systems.libraries_modal.usage_statistics");
-      case _$$l.FILES:
+      case LibraryTypeIndex.FILES:
         return null;
       default:
         throwTypeError(e);
@@ -726,17 +726,17 @@ function $({
   });
 }
 let Z = {
-  [_$$l.PRODUCT_COMPONENTS]: "subscriptionFileViewComponentStats:state",
-  [_$$l.STYLES]: "subscriptionFileViewStyleStats:state",
-  [_$$l.VARIABLES]: "subscriptionFileViewVariableStats:state",
-  [_$$l.VARIABLE_MODES]: "subscriptionFileViewVariableModeStats:state",
-  [_$$l.FILES]: "subscriptionFileViewFileStats:state"
+  [LibraryTypeIndex.PRODUCT_COMPONENTS]: "subscriptionFileViewComponentStats:state",
+  [LibraryTypeIndex.STYLES]: "subscriptionFileViewStyleStats:state",
+  [LibraryTypeIndex.VARIABLES]: "subscriptionFileViewVariableStats:state",
+  [LibraryTypeIndex.VARIABLE_MODES]: "subscriptionFileViewVariableModeStats:state",
+  [LibraryTypeIndex.FILES]: "subscriptionFileViewFileStats:state"
 };
-let X = createLocalStorageAtom(Z[_$$l.PRODUCT_COMPONENTS], null);
-let Q = createLocalStorageAtom(Z[_$$l.STYLES], null);
-let J = createLocalStorageAtom(Z[_$$l.VARIABLES], null);
-let ee = createLocalStorageAtom(Z[_$$l.VARIABLE_MODES], null);
-let et = createLocalStorageAtom(Z[_$$l.FILES], null);
+let X = createLocalStorageAtom(Z[LibraryTypeIndex.PRODUCT_COMPONENTS], null);
+let Q = createLocalStorageAtom(Z[LibraryTypeIndex.STYLES], null);
+let J = createLocalStorageAtom(Z[LibraryTypeIndex.VARIABLES], null);
+let ee = createLocalStorageAtom(Z[LibraryTypeIndex.VARIABLE_MODES], null);
+let et = createLocalStorageAtom(Z[LibraryTypeIndex.FILES], null);
 export const Dd = $$B0;
 export const KZ = $$H1;
 export const Yu = $$M2;

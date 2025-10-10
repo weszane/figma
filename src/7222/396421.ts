@@ -5,7 +5,7 @@ import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { resourceUtils, LOADING_STATUS } from "../905/989992";
 import { useLocalStorageSync } from "../905/657224";
 import E from "../vendor/116389";
@@ -14,7 +14,7 @@ import { Wn, ql } from "../figma_app/88484";
 import { isLocalCluster, getSlidesDefaultBlankTemplate } from "../figma_app/169182";
 import { Point } from "../905/736624";
 import { insertSharedModule } from "../figma_app/933328";
-import { qY } from "../figma_app/622574";
+import { useSearchTemplates } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
@@ -25,7 +25,7 @@ import { mapRecentFilesAndRepos } from "../figma_app/349248";
 import { setupResourceAtomHandler } from "../905/713695";
 import { useDeepEqualSceneValue } from "../figma_app/167249";
 import { AdvancedWorkerFuseSearch } from "../905/81982";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { mapFileTypeToNumericString } from "../figma_app/53721";
 import { TeamSortField, PublicModelType } from "../figma_app/162807";
 import { searchAPIHandler } from "../905/144933";
@@ -67,7 +67,7 @@ export function $$F16() {
     let e = useAtomWithSubscription(fileTypeAtom);
     return e.type === FileType.TEMPLATE_PICKER && e.source === _$$E.SLIDES_TEMPLATE;
   }();
-  let r = Xr(selectionAtomFamily);
+  let r = useSetAtom(selectionAtomFamily);
   let u = useMemo(() => e.data || [], [e]);
   let c = u[0];
   let i = "loaded" === e.status && u.length > 0;
@@ -115,8 +115,8 @@ export function $$J7() {
 }
 export function $$W17(e) {
   let t = useDispatch<AppDispatch>();
-  let r = Xr(draftModeAtomFamily);
-  let l = Xr(selectionAtomFamily);
+  let r = useSetAtom(draftModeAtomFamily);
+  let l = useSetAtom(selectionAtomFamily);
   let [c, i] = useState(!1);
   let a = _$$D(e?.library_key);
   return (e, _, u, s, o) => {
@@ -188,8 +188,8 @@ export function $$z15() {
   };
 }
 export function $$Z13() {
-  let e = Xr(draftModeAtomFamily);
-  let t = Xr(selectionAtomFamily);
+  let e = useSetAtom(draftModeAtomFamily);
+  let t = useSetAtom(selectionAtomFamily);
   return () => {
     e(!1);
     t(!1);
@@ -236,7 +236,7 @@ export function $$e_0() {
     teamTemplates,
     requestLoadMore,
     status
-  } = qY(u, FFileType.SLIDES, l === Ji.OVERLAY_MODAL ? 16 : 10);
+  } = useSearchTemplates(u, FFileType.SLIDES, l === Ji.OVERLAY_MODAL ? 16 : 10);
   let {
     hubFilesById,
     hubFileVersions,
@@ -271,7 +271,7 @@ export function $$e_0() {
           let _ = r.item.hub_file_id;
           let u = hubFilesById[_];
           !t.has(_) && u && (t.add(_), e.push({
-            type: _$$n.HubFile,
+            type: TeamTemplateType.HubFile,
             template: u
           }));
           return e;

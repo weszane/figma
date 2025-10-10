@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { z5, a6, jM, J, P_ } from "../905/124270";
@@ -19,7 +19,7 @@ export function $$y0({
   path: t,
   setFacetValue: i
 }) {
-  let y = Xr(z5);
+  let y = useSetAtom(z5);
   let b = useAtomWithSubscription(a6);
   let v = useAtomWithSubscription(jM);
   let I = useAtomWithSubscription(J);

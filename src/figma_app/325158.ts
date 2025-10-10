@@ -13,7 +13,7 @@ import { AffineTransform } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { trackEventAnalytics } from "../905/449184";
-import { wv as _$$wv, c$ } from "../figma_app/236327";
+import { SeparatorComponent, OptionComponent } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -459,14 +459,14 @@ function ee() {
         disabled: "Circle" === e && !t,
         selected: i,
         onPointerUp: r
-      }), "Custom" === e && jsx(_$$wv, {})]
+      }), "Custom" === e && jsx(SeparatorComponent, {})]
     }, e),
     OptionWrapper: A3,
     PopoverWrapper: er
   }) : null;
 }
 function et(e) {
-  return jsxs(c$, {
+  return jsxs(OptionComponent, {
     recordingKey: e.recordingKey,
     onClick: e.onClick,
     onPointerUp: e.onPointerUp,

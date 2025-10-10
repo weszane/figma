@@ -4,7 +4,7 @@ import { VisualBellActions } from "../905/302958";
 import { getI18nString } from "../905/303541";
 import { debugState } from "../905/407919";
 import { trackEventAnalytics } from "../905/449184";
-import { Rm } from "../905/449579";
+import { logVerMessage } from "../905/449579";
 import { handleAtomEvent } from "../905/502364";
 import { getFeatureFlags } from "../905/601108";
 import { createFigmaPluginScope } from "../905/629114";
@@ -116,7 +116,7 @@ class N {
           for (let e of n.backgroundNodes) {
             let n = r.getNodeById(e);
             n && function (e, t, r = !0, n = "transferAndMaybeRemoveBackgroundNode", i = !0) {
-              if (Rm(`${n}`, `Merging background node (${e.id}) into: ${t}`, 3), e.removed) return;
+              if (logVerMessage(`${n}`, `Merging background node (${e.id}) into: ${t}`, 3), e.removed) return;
               let a = 1;
               i && "opacity" in e && (a = e.opacity);
               x(e, t, "fills", r, a);

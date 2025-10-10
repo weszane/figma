@@ -15,7 +15,7 @@ import { getUserId } from "../905/372672";
 import { useIsLoading } from "../905/18797";
 import { FDocumentType } from "../905/862883";
 import { KindEnum } from "../905/129884";
-import { cd } from "../905/381612";
+import { recentItemsThunks } from "../905/381612";
 import { TabCategory } from "../905/42189";
 import { c5 } from "../905/526509";
 import { hx } from "../figma_app/630194";
@@ -217,20 +217,20 @@ function H({
   let I = fG();
   let A = _$$r(S, c?.stage !== "FULL" ? TabCategory.MORE : void 0);
   useEffect(() => {
-    l(cd.fetchTemplatesMetadata({
+    l(recentItemsThunks.fetchTemplatesMetadata({
       key: FDocumentType.FigJam,
       orgId: b?.id
     }));
-    l(cd.fetchWidgetsMetadata({
+    l(recentItemsThunks.fetchWidgetsMetadata({
       key: FDocumentType.FigJam
     }));
     o(!0);
   }, [l, b?.id]);
   let R = useIsLoading(FETCH_FIGJAM_DEFAULT_INSERTS);
-  let P = useIsLoading(cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let P = useIsLoading(recentItemsThunks.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
-  let F = useIsLoading(cd.fetchWidgetsMetadata.loadingKeyForPayload({
+  let F = useIsLoading(recentItemsThunks.fetchWidgetsMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   let G = $$K1(!i || R || P || F, d.map(e => _$$h(e, I, t ?? void 0))) ? d.map(e => e.id || "").sort((e, t) => e.localeCompare(t)).join("") : "loading";

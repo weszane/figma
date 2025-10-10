@@ -13,7 +13,7 @@ import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/6
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TeamAvatar } from "../figma_app/537817";
-import { S as _$$S } from "../905/339549";
+import { RenderRefCheckbox } from "../905/339549";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
@@ -194,7 +194,7 @@ let D = registerModal(function (e) {
         className: "team_creation_speed_bump--separator--8QwGz"
       }), jsxs("div", {
         className: "team_creation_speed_bump--footer--qMvoj",
-        children: [jsx(_$$S, {
+        children: [jsx(RenderRefCheckbox, {
           checked: g,
           onChange: e => _(e.currentTarget.checked),
           label: getI18nString("team_creation_speed_bump.footer.checkbox_text")

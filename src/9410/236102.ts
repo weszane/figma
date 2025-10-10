@@ -1,6 +1,6 @@
 import { Jh } from "../9410/60886";
 import { useCallback, useEffect } from "react";
-import { um, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
+import { atomWithReducer, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { WS, S7 } from "../7222/396421";
 let o = {
@@ -9,7 +9,7 @@ let o = {
     deckOptions: Jh
   }
 };
-let l = setupRemovableAtomFamily(() => um(o, (e, t) => {
+let l = setupRemovableAtomFamily(() => atomWithReducer(o, (e, t) => {
   switch (t.type) {
     case "SET_STEP":
       if (!function (e, t) {

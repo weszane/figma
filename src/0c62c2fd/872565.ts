@@ -45,9 +45,9 @@ import { AccessibleFoldersV2, MoveFileCurrentProject, TeamFileCountsByTeamId } f
 import { createNoOpValidator } from "../figma_app/181241";
 import { FAccessLevelType, FFileType, FPaymentHealthStatusType, FPlanFeatureType, FPlanRestrictionType } from "../figma_app/191312";
 import { isRecentsAndSharingView } from "../figma_app/193867";
-import { mq, SX } from "../figma_app/199513";
+import { renameFolderMutation, createNewFolderThunk } from "../figma_app/199513";
 import { convertLgSeatTypeProduct } from "../figma_app/217457";
-import { c$, ms, wv } from "../figma_app/236327";
+import { OptionComponent, DropdownContainer, SeparatorComponent } from "../figma_app/236327";
 import { useSubscription } from "../figma_app/288654";
 import { hasStarterTeamLoopholeAccess } from "../figma_app/297957";
 import { hasProjectRestrictions, hasTeamStatePaidAccess } from "../figma_app/345997";
@@ -81,7 +81,7 @@ function R(e) {
     r.stopPropagation();
     e.team.canEdit && (trackEventAnalytics("New Folder", {
       trackingContext: e.trackingContextName
-    }), t(SX({
+    }), t(createNewFolderThunk({
       where: FolderViewType.FolderListView,
       team: {
         ...convertTeamToRaw(e.team),
@@ -818,7 +818,7 @@ export class $$e32 extends PureComponent {
             if (e.type === _$$b.NEW_FOLDER_TEAM) {
               let t = e.id;
               let a = userResources.teams[t];
-              this.props.dispatch(SX({
+              this.props.dispatch(createNewFolderThunk({
                 where: this.props.modalId.type,
                 team: {
                   ...convertTeamToRaw(a),
@@ -1467,7 +1467,7 @@ export function $$tt6(e) {
 }
 function tr(e) {
   let t = useDispatch<AppDispatch>();
-  let r = getAtomMutate(mq);
+  let r = getAtomMutate(renameFolderMutation);
   let s = (a, s) => {
     trackEventAnalytics("Rename Folder", {
       trackingContext: e.trackingContextName
@@ -1546,14 +1546,14 @@ export class $$ta0 extends PureComponent {
     let e = this.props.folder;
     let t = e.canRename;
     let r = $$e48(this.props.selectedView);
-    return jsxs(ms, {
+    return jsxs(DropdownContainer, {
       className: "file_move--fileMoveContextMenu--47Rjw",
       style: this.props.dropdownShown.data.position,
-      children: [jsx(c$, {
+      children: [jsx(OptionComponent, {
         disabled: !t,
         onClick: this.renameFolder,
         children: renderI18nText("file_browser.file_move.context_menu_rename")
-      }), jsx(wv, {}), jsx(c$, {
+      }), jsx(SeparatorComponent, {}), jsx(OptionComponent, {
         href: getProjectUrl(e.id, e.orgId),
         target: r,
         children: renderI18nText("file_browser.file_move.context_menu_show_in_files")

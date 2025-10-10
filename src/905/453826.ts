@@ -4,17 +4,13 @@ import { eventEmitterAtom } from "../905/502364"
 import { logCuratorEvent } from "../905/994802"
 import { useAtomWithSubscription } from "../figma_app/27355"
 
-interface EventForwarderOptions {
-  overlayId: string
-  eventIds: string | string[]
-  handler: (event: any) => void
-}
+
 
 /**
  * Custom hook to forward events from an event emitter to a handler function
  * ($$l0 - original function name)
  */
-export function useEventForwarder({ overlayId, eventIds, handler }: EventForwarderOptions): void {
+export function useEventForwarder( overlayId, eventIds, handler): void {
   const eventEmitter = useAtomWithSubscription(eventEmitterAtom) as any
   const eventIdsArray = useMemoShallow(() =>
     typeof eventIds === "string" ? [eventIds] : eventIds, [eventIds])

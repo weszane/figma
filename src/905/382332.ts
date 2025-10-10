@@ -17,8 +17,8 @@ import { useSceneGraphSelection } from "../figma_app/722362";
 import { vE, W as _$$W, UH, Lk } from "../figma_app/156285";
 import { useSingleEffect } from "../905/791079";
 import { UpgradeAction } from "../905/370443";
-import { e } from "../905/621515";
-import { N as _$$N } from "../figma_app/268271";
+import { useOverlay } from "../905/621515";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
 import { DrawScatterBrushOnboarding } from "../figma_app/6204";
@@ -48,9 +48,9 @@ function R() {
     show,
     isShowing,
     complete
-  } = e({
+  } = useOverlay({
     overlay: DrawScatterBrushOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let r = getFeatureFlags().ce_il_scatter_onboarding ?? !1;
   useSingleEffect(() => {

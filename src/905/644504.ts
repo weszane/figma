@@ -1,34 +1,61 @@
-import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { sendWithRetry } from "../905/910117";
-export let $$a0 = new class {
+// Refactored code: Renamed variables, added types, improved readability
+
+import { sendWithRetry } from "../905/910117"
+import { APIParameterUtils, createNoOpValidator } from "../figma_app/181241"
+
+// Define interfaces for better type safety
+interface SamlRequest {
+  email: string
+}
+
+// Original code name: $$a0
+class SamlAuthenticationService {
+  samlSchemaValidator = createNoOpValidator()
+  validateCodeValidator = createNoOpValidator()
+  twoFactorValidator = createNoOpValidator()
   constructor() {
-    this.SamlSchemaValidator = createNoOpValidator();
-    this.ValidateCodeValidator = createNoOpValidator();
-    this.TwoFactorValidator = createNoOpValidator();
   }
-  getSaml(e) {
-    return this.SamlSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/saml", APIParameterUtils.toAPIParameters({
-      email: e.email
-    })));
+
+  /**
+   * Fetch SAML configuration based on user email
+   */
+  getSaml(request: SamlRequest) {
+    return this.samlSchemaValidator.validate(async ({ xr }) =>
+      await xr.get("/api/saml", APIParameterUtils.toAPIParameters({
+        email: request.email,
+      })),
+    )
   }
+
+  /**
+   * Resend SAML authentication code
+   */
   resendCode() {
-    return sendWithRetry.post("api/saml/resend_code");
+    return sendWithRetry.post("api/saml/resend_code")
   }
-  validateCode(e) {
-    return this.ValidateCodeValidator.validate(({
-      xr: t
-    }) => t.post("/api/saml/validate_code", {
-      code: e
-    }));
+
+  /**
+   * Validate the SAML authentication code
+   */
+  validateCode(code: string) {
+    return this.validateCodeValidator.validate(({ xr }) =>
+      xr.post("/api/saml/validate_code", {
+        code,
+      }),
+    )
   }
-  twoFactor(e) {
-    return this.TwoFactorValidator.validate(({
-      xr: t
-    }) => t.post("/api/saml/two_factor", {
-      code: e
-    }));
+
+  /**
+   * Handle two-factor authentication for SAML
+   */
+  twoFactor(code: string) {
+    return this.twoFactorValidator.validate(({ xr }) =>
+      xr.post("/api/saml/two_factor", {
+        code,
+      }),
+    )
   }
-}();
-export const k = $$a0;
+}
+
+export const samlAuthenticationService = new SamlAuthenticationService()
+export const k = samlAuthenticationService

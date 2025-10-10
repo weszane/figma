@@ -47,7 +47,7 @@ import { Dy } from "../figma_app/165422";
 import { getInitialOptions } from "../figma_app/169182";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { isFullscreenPreviewMode } from "../figma_app/198840";
-import { c$, ms, rr, wv } from "../figma_app/236327";
+import { OptionComponent, DropdownContainer, TrackedCheckableOption, SeparatorComponent } from "../figma_app/236327";
 import { mouseEventManager } from "../figma_app/242565";
 import { findMatchingScalingOptionId, getScalingOptionLabel, ViewportScalingMode, generateScalingOptions, usePrototypeNavigationControls, getViewportScalingMode, usePrototypeNavigationState, PrototypeViewMode } from "../figma_app/292324";
 import { defaultViewportState } from "../figma_app/298911";
@@ -279,11 +279,11 @@ let ef = "hub_file_viewer--caret--LG-MD";
         pageId: r
       }));
     };
-    return n ? jsx(ms, {
+    return n ? jsx(DropdownContainer, {
       className: "hub_file_viewer--dropdownPages--2AxvQ hub_file_viewer--_dropdownElement--jYk1H hub_file_viewer--_embedControlContainer--NACFL hub_file_viewer--_embedControlContainerAnimated--QrVUJ ellipsis--ellipsis--Tjyfa",
       style: a,
       recordingKey: "hub_file_embed_pages_dropdown",
-      children: e.pages.map(t => jsx(rr, {
+      children: e.pages.map(t => jsx(TrackedCheckableOption, {
         checked: e.currentPageId === t.id,
         onClick: e => {
           e.stopPropagation();
@@ -390,10 +390,10 @@ let ef = "hub_file_viewer--caret--LG-MD";
         scale: r / 100
       }), o(r / 100, DEFAULT_ANIMATION_DURATION));
     };
-    return jsxs(ms, {
+    return jsxs(DropdownContainer, {
       className: "hub_file_viewer--dropdownZoom--Beepj hub_file_viewer--dropdownPrototypeZoom--5Lfor hub_file_viewer--_dropdownElement--jYk1H hub_file_viewer--_embedControlContainer--NACFL hub_file_viewer--_embedControlContainerAnimated--QrVUJ ellipsis--ellipsis--Tjyfa",
       recordingKey: "hub_file_embed_zoom_dropdown",
-      children: [jsx(c$, {
+      children: [jsx(OptionComponent, {
         className: "hub_file_viewer--zoomInputContainer--1az4W",
         children: jsx(PlaybackInput, {
           className: "hub_file_viewer--zoomInput--NzhHp",
@@ -404,30 +404,30 @@ let ef = "hub_file_viewer--caret--LG-MD";
           },
           cancel: noop
         })
-      }), jsx(wv, {}), jsxs(c$, {
+      }), jsx(SeparatorComponent, {}), jsxs(OptionComponent, {
         onClick: adjustZoomInFactory("clickFromDropdown"),
         children: [renderI18nText("community.hub_file_viewer.zoom_in"), jsx(KeyboardShortcut, {
           shortcut: "+",
           className: e_
         })]
-      }), jsxs(c$, {
+      }), jsxs(OptionComponent, {
         onClick: adjustZoomOutFactory("clickFromDropdown"),
         children: [renderI18nText("community.hub_file_viewer.zoom_out"), jsx(KeyboardShortcut, {
           shortcut: "-",
           className: e_
         })]
-      }), jsxs(c$, {
+      }), jsxs(OptionComponent, {
         onClick: resetZoomToFitCanvasContentFactory("clickFromDropdown"),
         children: [renderI18nText("community.hub_file_viewer.zoom_to_fit"), jsx(KeyboardShortcut, {
           shortcut: "1",
           className: e_
         })]
-      }), jsx(c$, {
+      }), jsx(OptionComponent, {
         onClick: setZoomFactory(0.5, "clickFromDropdown"),
         children: renderI18nText("community.hub_file_viewer.zoom_to", {
           percent: "50%"
         })
-      }), jsxs(c$, {
+      }), jsxs(OptionComponent, {
         onClick: setZoomFactory(1, "clickFromDropdown"),
         children: [renderI18nText("community.hub_file_viewer.zoom_to", {
           percent: "100%"
@@ -435,7 +435,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
           shortcut: "0",
           className: e_
         })]
-      }), jsx(c$, {
+      }), jsx(OptionComponent, {
         onClick: setZoomFactory(2, "clickFromDropdown"),
         children: renderI18nText("community.hub_file_viewer.zoom_to", {
           percent: "200%"

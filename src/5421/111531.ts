@@ -6,7 +6,7 @@ import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { d as _$$d, k as _$$k2 } from "../5421/548912";
 import { Y_, p_, l6, Xs, xJ, UL, iK, ZY, qQ, Wn } from "../figma_app/114522";
 import { deepEqual } from "../905/382883";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { Button } from "../905/521428";
 import { setupToggleButton } from "../905/167712";
@@ -18,7 +18,7 @@ import { Tj } from "../figma_app/342207";
 import { AppStateTsApi, PanelType, Fullscreen, CodeComponentHelper } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { normalizeTrackingEnum, replaceSelection } from "../figma_app/741237";
 import { Zk } from "../figma_app/626177";
@@ -3380,17 +3380,17 @@ function nU({
       borderBottom: "none"
     },
     children: jsxs(Wv, {
-      titleTx: P.length > 1 ? jsxs(bL, {
+      titleTx: P.length > 1 ? jsxs(SelectGroupLabel, {
         value: V,
         onChange: e => {
           e && b(e);
         },
-        children: [jsx(l9, {
+        children: [jsx(SelectSeparator, {
           label: jsx(HiddenLabel, {
             children: getI18nString("sites.code_component.preview_legend")
           })
-        }), jsx(mc, {
-          children: P.map(e => jsx(c$, {
+        }), jsx(SelectContainer, {
+          children: P.map(e => jsx(SelectOptionReset, {
             value: e.localGuid,
             children: e.name
           }, e.localGuid))
@@ -3681,7 +3681,7 @@ function nG() {
   let [e] = jT();
   let t = e?.filter(e => "error" === e.type);
   let [n, r] = useAtomValueAndSetter(YD);
-  let a = Xr(Vo);
+  let a = useSetAtom(Vo);
   let [l, s] = useState(!1);
   return n || !t || 0 === t.length || l ? null : jsxs("button", {
     className: "x10l6tqk x191j7n5 x1nrll8i xuuh30 x78zum5 xl56j7k x6s0dn4 x1jnr06f x1ihmbg5 xxvmw7z x1sxf85j xehqz9p x3brusf",

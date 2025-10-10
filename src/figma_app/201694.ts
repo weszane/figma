@@ -15,7 +15,7 @@ import { useSelectionPropertyValue } from "../905/275640";
 import { useDropdown } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { KindEnum } from "../905/129884";
-import { c1 } from "../figma_app/357047";
+import { getKeyboardShortcut } from "../figma_app/357047";
 import { a1 } from "../figma_app/23780";
 import { ConnectedPointingDropdown } from "../905/504727";
 import { zi } from "../figma_app/626177";
@@ -219,7 +219,7 @@ function $(e) {
         source: "panel"
       } : null);
     },
-    shortcut: c1(i, action),
+    shortcut: getKeyboardShortcut(i, action),
     recordingKey: generateRecordingKey(e, "distributeDropdown", action),
     children: jsx(X, {
       action

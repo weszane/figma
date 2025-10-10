@@ -11,12 +11,12 @@ import _ from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { trackTemplateEvent } from "../905/793009";
-import { Gi, tS, wv } from "../figma_app/622574";
+import { getCurrentTemplateEntity, hasTemplateEntity, useRecentTemplates } from "../figma_app/622574";
 import { Ou, Fz, b4, WS } from "../figma_app/106207";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getHubFileVersionOrDefault, getTemplateActionLabel, FileTypeSwitch } from "../figma_app/198840";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
 import { ITemplateType } from "../905/862883";
 import { registerModal } from "../905/102752";
@@ -65,7 +65,7 @@ function B({
 }) {
   let c = useDispatch<AppDispatch>();
   let u = useCurrentFileKey();
-  let p = Gi();
+  let p = getCurrentTemplateEntity();
   let _ = selectUserFlag("figjam_editor_onboarded");
   let h = selectUserFlag(U);
   let g = n.filter(e => d.every(t => !t.categoryIds.includes(e)));
@@ -142,7 +142,7 @@ function G(e) {
 B.displayName = "BrowseTemplatesModalSidebar";
 G.displayName = "TemplatesPickerSidebarItem";
 function z(e) {
-  let t = tS();
+  let t = hasTemplateEntity();
   let r = useSelector(e => e.hubFiles);
   let n = useCurrentFileKey();
   let o = useMemo(() => $(e.templates), [e.templates]);
@@ -156,7 +156,7 @@ function z(e) {
     d = jsx(K, {
       templates: t.filter(e => !!e).map(e => ({
         template: e,
-        type: _$$n.HubFile
+        type: TeamTemplateType.HubFile
       })),
       categoryTitle: e.categoryTitles[e.selectedCategory],
       category: e.selectedCategory,
@@ -178,7 +178,7 @@ function z(e) {
         categoryTitle: e.categoryTitles[t],
         templates: n.map(e => ({
           template: e,
-          type: _$$n.HubFile,
+          type: TeamTemplateType.HubFile,
           category: t
         })),
         templateInsertionLocation: e.templateInsertionLocation,
@@ -202,8 +202,8 @@ function W(e) {
   let {
     teamTemplates,
     isLoading
-  } = wv(FFileType.WHITEBOARD, 3);
-  let n = Gi();
+  } = useRecentTemplates(FFileType.WHITEBOARD, 3);
+  let n = getCurrentTemplateEntity();
   return n ? isLoading ? jsxs(Fragment, {
     children: [jsx(G3, {}), jsx(G3, {}), jsx(G3, {
       shouldFade: !0
@@ -258,7 +258,7 @@ function Y(e) {
         templateInsertionLocation: e.templateInsertionLocation,
         onInsert: () => e.onInsertTemplate(n),
         isInsertingTemplate: e.isInsertingTemplate(primaryKey),
-        onPreview: n.type === _$$n.HubFile && previewHubFile ? () => previewHubFile(n.template.id) : void 0
+        onPreview: n.type === TeamTemplateType.HubFile && previewHubFile ? () => previewHubFile(n.template.id) : void 0
       }, primaryKey);
     }), jsx(hT, {
       numResources: e.templates.length,
@@ -331,7 +331,7 @@ function en(e) {
   if (!a) return null;
   let l = jsx(_$$i, {
     insertTemplate: () => e.insertTemplate({
-      type: _$$n.HubFile,
+      type: TeamTemplateType.HubFile,
       template: a
     }),
     isInsertingTemplate: e.isInsertingTemplate,
@@ -387,7 +387,7 @@ function en(e) {
             hubFileId: t.id,
             templateInsertionLocation: e.templateInsertionLocation,
             onInsert: () => e.insertTemplate({
-              type: _$$n.HubFile,
+              type: TeamTemplateType.HubFile,
               template: t
             }),
             isInsertingTemplate: e.isInsertingTemplate,
@@ -408,7 +408,7 @@ function eo({
 }) {
   let o = useCurrentFileKey();
   let l = useRef(null);
-  let d = tS();
+  let d = hasTemplateEntity();
   let [c, u] = useState(!d);
   let {
     templates,
@@ -430,12 +430,12 @@ function eo({
       children: [d && templates.map(e => jsx(AF, {
         template: {
           template: e,
-          type: _$$n.TeamTemplate
+          type: TeamTemplateType.TeamTemplate
         },
         isInsertingTemplate: r(e.file_key),
         onInsert: () => n({
           template: e,
-          type: _$$n.TeamTemplate
+          type: TeamTemplateType.TeamTemplate
         })
       }, `team-template-${e.file_key}`)), c && t.map(e => jsx(Pr, {
         hubFileId: e,
@@ -516,7 +516,7 @@ function em(e) {
     ..._templates,
     ...templates
   };
-  let P = Gi();
+  let P = getCurrentTemplateEntity();
   let D = {};
   _categoryIds.reduce((e, t) => (e[t] = getI18nString("browse_templates_modal_sidebar.get_started"), e), D);
   let k = {
@@ -547,7 +547,7 @@ function em(e) {
       resourceName: getHubFileVersionOrDefault($).name,
       resourceId: M,
       triggeredFrom: "browse-templates-modal",
-      templateType: _$$n.HubFile
+      templateType: TeamTemplateType.HubFile
     });
   }, [M, fileKey, $]);
   let q = !searchQuery;
@@ -561,10 +561,10 @@ function em(e) {
       triggeredFrom: "browse-templates-modal"
     });else {
       switch (t.type) {
-        case _$$n.HubFile:
+        case TeamTemplateType.HubFile:
           duplicateFile(t.template.id);
           break;
-        case _$$n.TeamTemplate:
+        case TeamTemplateType.TeamTemplate:
           J({
             templateIdentifier: {
               type: ITemplateType.TeamTemplate,
@@ -574,7 +574,7 @@ function em(e) {
             openInNewTab: !0
           });
           break;
-        case _$$n.TeamTemplateLg:
+        case TeamTemplateType.TeamTemplateLg:
           J({
             templateIdentifier: {
               type: ITemplateType.TeamTemplate,

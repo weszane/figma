@@ -839,6 +839,7 @@ export interface LiveStore_QueryConfig<Args = any, Data = any, Output = Data> {
   schema?: any
   sync?: (args: Args, context: any & { mutate: (updater: (draft: Data) => void) => void }) => void | (() => void)
   syncObjects?: boolean
+  [key: string]: any
 }
 // Original: class z
 /**
@@ -1064,9 +1065,9 @@ class LiveStore {
               return observer.refetch({ refetchPage: (page: any, index: number) => index === 0 }).then((result: any) => {
                 getQueryContext().queryClient.setQueryData(observer.options.queryKey, (data: any) => data
                   ? {
-                      pages: data.pages.slice(0, 1),
-                      pageParams: data.pageParams.slice(0, 1),
-                    }
+                    pages: data.pages.slice(0, 1),
+                    pageParams: data.pageParams.slice(0, 1),
+                  }
                   : data)
                 return result
               })
@@ -1169,12 +1170,12 @@ class LiveStore {
           return queryConfig.joinPages
             ? queryConfig.joinPages(joinedPages)
             : joinedPages.reduce((acc: any[], page: any) => {
-                if (!Array.isArray(page.data)) {
-                  throw new TypeError('Expected array data in page')
-                }
-                acc.push(...page.data)
-                return acc
-              }, [])
+              if (!Array.isArray(page.data)) {
+                throw new TypeError('Expected array data in page')
+              }
+              acc.push(...page.data)
+              return acc
+            }, [])
         })
         const outputAtom = createCustomAtom(joinedDataAtom, (get: any) => {
           const { output } = queryConfig
@@ -1445,10 +1446,28 @@ class LiveStore {
   }
 
   // Properties for query methods
-  Query: ReturnType<LiveStore['createQueryMethod']>
-  PaginatedQuery: ReturnType<LiveStore['createPaginatedQueryMethod']>
-  Mutation: ReturnType<LiveStore['createMutationMethod']>
-  ObjectQuery: ReturnType<LiveStore['createObjectQueryMethod']>
+  Query: <TArgs = any, TData = any, TOutput = SuspendableResource> (
+    queryConfig: LiveStore_QueryConfig<TArgs, TData, TOutput>
+  ) => (args: TArgs) => WritableAtom<SuspendableResource, any, any> & {
+    queryKey: number[]
+    queryFn: () => Promise<TData>
+    __OPAQUE_RQ_QUERY__: symbol
+  }
+
+  PaginatedQuery: <TArgs = any, TData = any, TOutput = SuspendableResource>(
+    queryConfig: LiveStore_QueryConfig<TArgs, TData, TOutput>
+  ) => (args: TArgs) => WritableAtom<SuspendableResource, any, any> & {
+    queryKey: number[]
+    __OPAQUE_RQ_PAGINATED_QUERY__: symbol
+  }
+
+  Mutation: <TArgs = any, TData = any> (
+    mutationConfig: (variables: TArgs, context: any) => Promise<TData> | TData
+  ) => WritableAtom<any, [TArgs], Promise<TData>>
+
+  ObjectQuery: (
+    store: any
+  ) => (id: string) => WritableAtom<SuspendableResource, any, any>
 }
 let X = {
   QUERY_FINISHED: 'web.livestore.query.finished',

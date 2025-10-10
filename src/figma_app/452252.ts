@@ -5,7 +5,7 @@ import { ServiceCategories } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import p from "classnames";
 import { getAtomMutate } from "../figma_app/566371";
 import { RecordingPureComponent, handleMouseEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
@@ -206,7 +206,7 @@ export function $$q4({
     }, [e, t, r]);
   }();
   let l = useLabConfiguration(labConfigurations.interopFiles);
-  let p = Xr(V1);
+  let p = useSetAtom(V1);
   let _ = e?.project?.activeProjectResourceConnections?.[0];
   let h = useCurrentFile();
   let g = h?.ownerRole?.userId === t?.id;

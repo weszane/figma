@@ -4,7 +4,7 @@ import { ResourceStatus } from "../905/957591";
 import { selectWithShallowEqual } from "../905/103090";
 import { useSubscription } from "../figma_app/288654";
 import { loadTrashedFiles } from "../figma_app/976345";
-import { jl } from "../figma_app/199513";
+import { loadFolderIfNeededThunk } from "../figma_app/199513";
 import { selectCurrentUser } from "../905/372672";
 import { FileKeysInProject } from "../figma_app/43951";
 import { hasExternalRestrictedOrgId } from "../figma_app/12796";
@@ -50,7 +50,7 @@ export function $$f0() {
   let u = useSelector(e => e.userFlags);
   let m = s?.personal_drafts_folder_id;
   useEffect(() => {
-    m && _(jl({
+    m && _(loadFolderIfNeededThunk({
       folderId: m,
       loadedFolders
     }));

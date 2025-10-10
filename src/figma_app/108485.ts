@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
 import { postUserFlag } from "../905/985254";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { N as _$$N } from "../905/482239";
 import { zo, pQ } from "../figma_app/101956";
@@ -14,7 +14,7 @@ import { isTeamFolderV2 } from "../figma_app/528509";
 import { openFileAtom, useEditorType } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { isOnboardingComplete } from "../figma_app/242339";
-import { N as _$$N2 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OrgPersonal } from "../905/696396";
 import { U } from "../905/455766";
 import { OnboardingRenderFrame } from "../905/284399";
@@ -36,10 +36,10 @@ export function $$O1() {
   let D = useAtomWithSubscription(_$$t);
   let k = useAtomWithSubscription(_$$N);
   let M = useAtomWithSubscription(w);
-  let F = Xr($$x0);
-  let j = _$$e({
+  let F = useSetAtom($$x0);
+  let j = useOverlay({
     overlay: MoveDraftsNudge,
-    priority: _$$N2.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [k, t, r, P, D, R, M]);
   let {
     currentStep,

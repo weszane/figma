@@ -1,10 +1,10 @@
 import { AppStateTsApi } from "../figma_app/763686";
-import { mg, atom, createRemovableAtomFamily } from "../figma_app/27355";
+import { selectAtom, atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { setupObservableAtomFamily } from "../905/508457";
 setupObservableAtomFamily(() => AppStateTsApi.cmsState().bindingCollectionId);
 let o = setupObservableAtomFamily(() => AppStateTsApi.cmsState().bindingFieldSchema);
-let $$l2 = mg(o, e => e?.id);
+let $$l2 = selectAtom(o, e => e?.id);
 let $$d4 = setupRemovableAtomFamily(() => atom(null));
 let $$c7 = atom(new Set());
 let $$u0 = createRemovableAtomFamily(() => atom(void 0));

@@ -37,7 +37,7 @@ import { A as _$$A3 } from '../1617/805095';
 import { A as _$$A2 } from '../5724/75936';
 import { A as _$$A } from '../5724/734215';
 import { lW } from '../figma_app/11182';
-import { atom, useAtomValueAndSetter, Xr } from '../figma_app/27355';
+import { atom, useAtomValueAndSetter, useSetAtom } from '../figma_app/27355';
 import { mapEditorTypeToStringWithObfuscated } from '../figma_app/53721';
 import { getInitialOptions } from '../figma_app/169182';
 import { getSelectedView } from '../figma_app/386952';
@@ -159,11 +159,11 @@ function eu({
   } = useWindowDimensions();
   let G = _$$v();
   let [H, W] = useAtomValueAndSetter(ei);
-  let K = Xr(ea);
-  let Y = Xr(es);
-  let $ = Xr(eo);
-  let X = Xr(el);
-  let q = Xr(ed);
+  let K = useSetAtom(ea);
+  let Y = useSetAtom(es);
+  let $ = useSetAtom(eo);
+  let X = useSetAtom(el);
+  let q = useSetAtom(ed);
   let [Z, ec] = useAtomValueAndSetter(en);
   let [eu, e_] = useState(!1);
   let [em, eg] = useState(!1);
@@ -175,7 +175,7 @@ function eu({
   let eI = useRef([]);
   let eS = useRef(null);
   let ev = useRef(0);
-  let eA = Xr($$J2);
+  let eA = useSetAtom($$J2);
   let ex = () => {
     D(hideModal());
   };

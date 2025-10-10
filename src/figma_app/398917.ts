@@ -21,7 +21,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { AutoInteractableWrapper } from "../905/277716";
-import { c$, wv } from "../figma_app/236327";
+import { OptionComponent, SeparatorComponent } from "../figma_app/236327";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getNudgeAmounts } from "../figma_app/740163";
@@ -153,7 +153,7 @@ function Q({
   let o = e.some(e => e.minWidth >= zQ && e.name === getI18nString("sites.breakpoint_bar.add_desktop_breakpoint"));
   let l = e.some(e => e.minWidth > _$$b && e.minWidth < zQ && e.name === getI18nString("sites.breakpoint_bar.add_tablet_breakpoint"));
   let d = [];
-  s || d.unshift(jsx(c$, {
+  s || d.unshift(jsx(OptionComponent, {
     onClick: () => i(1, getI18nString("sites.breakpoint_bar.add_mobile_breakpoint")),
     children: jsxs("div", {
       className: q,
@@ -166,7 +166,7 @@ function Q({
       })]
     })
   }, "add-mobile-breakpoint"));
-  l || d.unshift(jsx(c$, {
+  l || d.unshift(jsx(OptionComponent, {
     onClick: () => i(IL, getI18nString("sites.breakpoint_bar.add_tablet_breakpoint")),
     children: jsxs("div", {
       className: q,
@@ -179,7 +179,7 @@ function Q({
       })]
     })
   }, "add-tablet-breakpoint"));
-  o || d.unshift(jsx(c$, {
+  o || d.unshift(jsx(OptionComponent, {
     onClick: () => i(yF, getI18nString("sites.breakpoint_bar.add_desktop_breakpoint")),
     children: jsxs("div", {
       className: q,
@@ -203,7 +203,7 @@ function Q({
   u.map(e => {
     let t = e.minWidth;
     e.currentSize && (t = e.currentSize);
-    p.push(jsx(c$, {
+    p.push(jsx(OptionComponent, {
       onClick: () => i(t, e.name),
       children: jsxs("div", {
         className: q,
@@ -221,7 +221,7 @@ function Q({
     targetRect: r,
     type: DropdownType.DEFAULT,
     lean: "left",
-    children: [d, d.length > 0 && jsx(wv, {}), p, u.length > 0 && jsx(wv, {}), jsx(c$, {
+    children: [d, d.length > 0 && jsx(SeparatorComponent, {}), p, u.length > 0 && jsx(SeparatorComponent, {}), jsx(OptionComponent, {
       onClick: a,
       children: jsx("div", {
         className: q,

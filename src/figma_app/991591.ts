@@ -1,6 +1,6 @@
 import { n as _$$n } from "../905/347702";
 import { useEffect } from "react";
-import { atomStoreManager, atom, Xr } from "../figma_app/27355";
+import { atomStoreManager, atom, useSetAtom } from "../figma_app/27355";
 import { ResourceStatus } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { isAIFeaturesEnabledForCurrentUser, isLlamaEnabledForOrg } from "../figma_app/459490";
@@ -45,7 +45,7 @@ export function $$f3() {
 var E = (e => (e.LOADING = "loading", e.HAS_PERMISSION = "has_permission", e.NO_PERMISSION = "no_permission", e))(E || {});
 let y = atom("loading");
 export function $$b2(e) {
-  let t = Xr(y);
+  let t = useSetAtom(y);
   let r = useCurrentUserOrg();
   let l = useSubscription(isLlamaEnabledForOrg(r) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseSlidesAi, {
     key: e

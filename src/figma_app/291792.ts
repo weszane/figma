@@ -40,7 +40,7 @@ import { getPermissionsState } from "../figma_app/642025";
 import { canEditAndHasChangesAtom } from "../figma_app/803787";
 import { getCurrentTeamId } from "../figma_app/598018";
 import { FileBrowserLocation, TabOpenBehavior } from "../figma_app/915202";
-import { Yh } from "../figma_app/357047";
+import { isActionEnabled } from "../figma_app/357047";
 import { C as _$$C } from "../figma_app/444297";
 import { getSelectedEditorType, getCurrentFileType } from "../figma_app/976749";
 import { checkFileCmsCollections } from "../905/47975";
@@ -389,14 +389,14 @@ export function $$en0(e, {
       shouldShowBackToFiles: !1
     },
     zoomArgs: {
-      canZoomIn: Yh(e.mirror.appModel, "zoom-in"),
-      canZoomOut: Yh(e.mirror.appModel, "zoom-out")
+      canZoomIn: isActionEnabled(e.mirror.appModel, "zoom-in"),
+      canZoomOut: isActionEnabled(e.mirror.appModel, "zoom-out")
     },
     publishingModalArgs: {
       isPublishingModalDisabled: s
     },
     spotlightArgs: {
-      spotlightDisabledForSelf: !Yh(e.mirror.appModel, "spotlight-me")
+      spotlightDisabledForSelf: !isActionEnabled(e.mirror.appModel, "spotlight-me")
     }
   });
 }

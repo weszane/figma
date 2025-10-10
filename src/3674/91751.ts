@@ -3,7 +3,7 @@ import { g as _$$g } from "../1250/701065";
 import { s as _$$s } from "../9314/287043";
 import { h as _$$h } from "../905/994594";
 import { t as _$$t } from "../5132/435788";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { useEffect } from "react";
 import { N as _$$N } from "../905/57692";
 import { IconButton } from "../905/443068";
@@ -110,7 +110,7 @@ let v = {
   }]
 };
 export function $$I0() {
-  let e = Xr(G);
+  let e = useSetAtom(G);
   let t = [{
     id: "file",
     label: "File",

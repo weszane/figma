@@ -11,7 +11,7 @@ import { TY } from "../figma_app/701001";
 import { useIsProgressBarHiddenOrLocked, useAppModelProperty } from "../figma_app/722362";
 import { selectCurrentUser, selectUser } from "../905/372672";
 import { debounce } from "../905/915765";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -320,9 +320,9 @@ function ee({
 }) {
   let t = useTracking();
   let s = Yj();
-  let n = Xr(J9);
-  let i = Xr(Zf);
-  let l = Xr(QU);
+  let n = useSetAtom(J9);
+  let i = useSetAtom(Zf);
+  let l = useSetAtom(QU);
   return jsxs("button", {
     className: cssBuilderInstance.cursorPointer.$,
     style: styleBuilderInstance.radiusMedium.b1.colorBorder.flex.flexRow.wFull.add({
@@ -497,7 +497,7 @@ function em() {
   let {
     hideInProductHelpView
   } = A5();
-  let s = Xr(J9);
+  let s = useSetAtom(J9);
   return jsxs("div", {
     className: cssBuilderInstance.flex.flexRow.justifyBetween.p16.pl12.$,
     children: [jsxs(ButtonPrimitive, {
@@ -649,7 +649,7 @@ function ej({
   });
 }
 function ev() {
-  let e = Xr(J9);
+  let e = useSetAtom(J9);
   let t = useAtomWithSubscription(Zf);
   let s = useAtomWithSubscription(QU);
   if (!t) return null;
@@ -699,8 +699,8 @@ function eS({
   details: e
 }) {
   let t = Yj();
-  let s = Xr(J9);
-  let n = Xr(QU);
+  let s = useSetAtom(J9);
+  let n = useSetAtom(QU);
   return jsxs(Fragment, {
     children: [jsx("p", {
       children: e.description
@@ -738,7 +738,7 @@ function eS({
 }
 function ek() {
   let e = Yj();
-  let t = Xr(QU);
+  let t = useSetAtom(QU);
   return jsxs("button", {
     className: cssBuilderInstance.radiusMedium.b1.colorBorder.flex.flexRow.m16.cursorPointer.overflowHidden.$,
     style: styleBuilderInstance.add({

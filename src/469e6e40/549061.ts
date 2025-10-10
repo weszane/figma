@@ -33,7 +33,7 @@ import { VisualBellIcon } from '../905/576487';
 import { UserAvatar, AvatarSize } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { removeQueryParam, getQueryParam } from '../905/609392';
-import { e as _$$e3 } from '../905/621515';
+import { useOverlay } from '../905/621515';
 import { ResourceStatus, getResourceDataOrFallback } from '../905/663269';
 import { BannerButton } from '../905/692618';
 import { TrackingKeyEnum } from '../905/696396';
@@ -46,7 +46,7 @@ import { noop } from 'lodash-es';
 ;
 import { O as _$$O2 } from '../905/936515';
 import { styleBuilderInstance } from '../905/941192';
-import { ck } from '../905/952832';
+import { UserContextScope } from '../905/952832';
 import { a as _$$a } from '../905/964520';
 import { RelativeTimeDisplay } from '../905/986103';
 import { k as _$$k5 } from '../4452/48052';
@@ -132,7 +132,7 @@ function U({
     spacing: 16,
     children: [jsx(ER, {
       dispatch: a,
-      entityType: t?.key.type === FOrganizationLevelType.ORG ? ck.ORG : ck.TEAM,
+      entityType: t?.key.type === FOrganizationLevelType.ORG ? UserContextScope.ORG : UserContextScope.TEAM,
       entity: {
         ...t,
         id: t?.key.parentId ?? void 0
@@ -463,7 +463,7 @@ function eO({
     show,
     isShowing,
     complete
-  } = _$$e3({
+  } = useOverlay({
     overlay: AdminDashboardOnboardingOverlay,
     priority: _$$g(AdminDashboardOnboardingOverlay)
   }, [r, t]);

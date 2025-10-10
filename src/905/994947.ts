@@ -8,7 +8,7 @@ import { showDropdownThunk, selectViewAction, hideDropdownAction } from "../905/
 import { fileEntityDataMapper } from "../905/943101";
 import { PublicModelType } from "../figma_app/162807";
 import { G as _$$G } from "../905/186289";
-import { ms, wv, c$ } from "../figma_app/236327";
+import { DropdownContainer, SeparatorComponent, OptionComponent } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { copyLinkThunk, copyViewLinkThunk, copySelectedViewLinkThunk } from "../figma_app/11182";
 import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
@@ -85,9 +85,9 @@ function x(e) {
       ...e.targetRect,
       position: "fixed"
     };
-    return jsx(ms, {
+    return jsx(DropdownContainer, {
       style: n,
-      children: i.map((e, t) => null === e ? null : "SEPARATOR" === e ? t === i.length - 1 ? null : jsx(wv, {}, `sep${t}`) : jsx(c$, {
+      children: i.map((e, t) => null === e ? null : "SEPARATOR" === e ? t === i.length - 1 ? null : jsx(SeparatorComponent, {}, `sep${t}`) : jsx(OptionComponent, {
         id: e.id,
         onClick: e.onClick,
         disabled: e.disabled,

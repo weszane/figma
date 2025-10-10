@@ -5,7 +5,7 @@ import { useSceneGraphSelection } from "../figma_app/722362";
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249";
 import { useState } from "react";
 import { Button } from "../905/521428";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { Label } from "../905/270045";
 import { permissionScopeHandler } from "../905/189185";
 import { parseColor, colorToHexString } from "../figma_app/191804";
@@ -39,18 +39,18 @@ function C({
     }), h && jsx(Button, {
       onClick: () => permissionScopeHandler.user("chart-clearOverrides", () => od(e)),
       children: getI18nString("react-scenegraph.chart.clear_overrides")
-    }), jsxs(bL, {
+    }), jsxs(SelectGroupLabel, {
       value: l,
       onChange: e => a(e),
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         label: jsx(Label, {
           children: getI18nString("react-scenegraph.chart.chart_type")
         })
-      }), jsxs(mc, {
-        children: [jsx(c$, {
+      }), jsxs(SelectContainer, {
+        children: [jsx(SelectOptionReset, {
           value: N.BAR_GROUPED,
           children: getI18nString("react-scenegraph.chart.bar_grouped")
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: N.BAR_STACKED,
           children: getI18nString("react-scenegraph.chart.bar_stacked")
         })]

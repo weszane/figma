@@ -60,12 +60,12 @@ import { UpsellModalType } from "../905/165519";
 import { AccessLevelEnum } from "../905/557142";
 import { p as _$$p } from "../figma_app/353099";
 import { useSingleEffect } from "../905/791079";
-import { e as _$$e3 } from "../905/621515";
-import { UC } from "../figma_app/33126";
+import { useOverlay } from "../905/621515";
+import { orgHasWorkspacesAndBigmaAtomFamily } from "../figma_app/33126";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { KI } from "../figma_app/797994";
 import { useDropdownState } from "../905/848862";
-import { N as _$$N2 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getCurrentTeamId } from "../figma_app/598018";
@@ -80,7 +80,7 @@ import { ButtonWide } from "../905/521428";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { getLibraryKeyWithReport } from "../905/997221";
 import { hasOpenHubFileContent, createLibraryItemsAtomFamily } from "../figma_app/803787";
-import { b as _$$b2 } from "../905/937225";
+import { isEqualZero } from "../905/937225";
 import { I as _$$I2 } from "../905/266213";
 import { Xm as _$$Xm } from "../905/935570";
 import { PublishingUIContext } from "../905/514666";
@@ -88,7 +88,7 @@ import { c as _$$c2 } from "../905/426262";
 import { u as _$$u } from "../905/831362";
 import { m as _$$m } from "../905/760316";
 import { FileRowLeftV2, FileRowRightV2, FileRowLeft, FileRowRight } from "../905/42209";
-import { Q as _$$Q } from "../905/711770";
+import { useLibraryKeyExpanded } from "../905/711770";
 import { getResourceDataOrFallback } from "../905/723791";
 import { generateRecordingKey } from "../figma_app/878298";
 import { KP, L1 } from "../figma_app/12491";
@@ -97,7 +97,7 @@ import { createFileLibraryKeys } from "../905/651613";
 import { ButtonPrimitive } from "../905/632989";
 import { w as _$$w } from "../905/768636";
 import { useFigmaLibrariesEnabled } from "../figma_app/657017";
-import { p as _$$p2 } from "../905/895920";
+import { LibrariesEmptyState } from "../905/895920";
 import { hasResourcePresetKey } from "../figma_app/255679";
 import { B as _$$B2 } from "../905/146468";
 import { h as _$$h2 } from "../905/594794";
@@ -208,13 +208,13 @@ let eR = userFlagExistsAtomFamily(eT);
 function eN() {
   let e = useAtomWithSubscription(ek);
   let t = useSelector(e => e.currentUserOrgId);
-  let i = UC(t);
+  let i = orgHasWorkspacesAndBigmaAtomFamily(t);
   let s = useAtomWithSubscription(i);
   let o = useAtomWithSubscription(eR);
   let l = useDropdownState();
-  let d = _$$e3({
+  let d = useOverlay({
     overlay: LibrariesWorkspaceOnboarding,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e, s, o]);
   useSingleEffect(() => {
     d.show({
@@ -266,14 +266,14 @@ function e4({
   let g = isBranch(e);
   let f = getLibraryKeyWithReport(e);
   let _ = useSelector(hasOpenHubFileContent);
-  let y = _$$b2(t, i, r, o) || g;
+  let y = isEqualZero(t, i, r, o) || g;
   let v = getFeatureFlags().cmty_lib_admin_publish ? y && !_ : y;
   let {
     data
   } = useSubscription(FileCanEdit, {
     key: e.key
   });
-  let E = _$$Q({
+  let E = useLibraryKeyExpanded({
     disabled: v,
     libraryKey: f,
     fileName: e.name,
@@ -393,8 +393,8 @@ function te({
     });
     return getResourceDataOrFallback(t?.data?.libraryKeyToFile?.file?.isBranch) ?? !1;
   }(f.libraryKey);
-  g = !_ && (_$$b2(a, s, o, d) || y);
-  let v = _$$Q({
+  g = !_ && (isEqualZero(a, s, o, d) || y);
+  let v = useLibraryKeyExpanded({
     disabled: g,
     libraryKey: t.library_key,
     fileName: e.name,
@@ -505,10 +505,10 @@ function tl({
   resourceConnectionSharingGroupData: p
 }) {
   let m = e.library_key;
-  let h = _$$b2(s, o, l, d);
+  let h = isEqualZero(s, o, l, d);
   let [g, f] = useState(!1);
   let _ = e.library_name;
-  let A = _$$Q({
+  let A = useLibraryKeyExpanded({
     disabled: h || g,
     libraryKey: e.library_key,
     fileName: _,
@@ -784,7 +784,7 @@ function th({
           showLibraryModalUiRefresh: !y
         })]
       }, t.library_key);
-    }), m && jsx(_$$p2, {
+    }), m && jsx(LibrariesEmptyState, {
       filtersActive: s || o,
       onViewPresetsClicked: () => a({
         type: "presetLibraries"

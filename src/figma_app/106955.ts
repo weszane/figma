@@ -1,4 +1,4 @@
-import { atom, Rq } from "../figma_app/27355";
+import { atom, loadable } from "../figma_app/27355";
 import { isAnyMobile } from "../figma_app/778880";
 import { editorTypeAtom } from "../figma_app/976749";
 import { CommunityPageType } from "../figma_app/45218";
@@ -13,6 +13,6 @@ let $$c1 = atom(e => {
 let u = atom(async () => await communityShelfService.getCommunityShelves({
   shelfType: CommunityPageType.FIGJAM_SECTION_PRESET_PICKER
 }).then(e => e.data.meta));
-let $$p0 = Rq(u);
+let $$p0 = loadable(u);
 export const g = $$p0;
 export const w = $$c1;

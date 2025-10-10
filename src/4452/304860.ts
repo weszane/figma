@@ -33,7 +33,7 @@ import { cssBuilderInstance } from '../cssbuilder/589278';
 import { isNullish, isNotNullish } from '../figma_app/95419';
 import { i as _$$i } from '../figma_app/127401';
 import { FPlanNameType, FOrganizationLevelType } from '../figma_app/191312';
-import { c$, Ve, wv } from '../figma_app/236327';
+import { OptionComponent, DropdownComponent, SeparatorComponent } from '../figma_app/236327';
 import { b as _$$b } from '../figma_app/246400';
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter } from '../figma_app/272243';
 import { useTeamPlanFeatures } from '../figma_app/465071';
@@ -76,7 +76,7 @@ function ee({
       'data-tooltip-show-left': !0,
       'data-tooltip-text-left': !0,
       'data-tooltip-type': KindEnum.TEXT,
-      'children': jsx(c$, {
+      'children': jsx(OptionComponent, {
         id: `${e}_${t}`,
         onClick: () => n(e, t),
         disabled: !!u,
@@ -107,7 +107,7 @@ function ee({
           })]
         })
       }, `${e}_${t}`)
-    }), !r && jsx(wv, {})]
+    }), !r && jsx(SeparatorComponent, {})]
   });
 }
 let et = [zRx.MANUAL_APPROVAL, zRx.INSTANT_APPROVAL_IF_AVAILABLE_SEATS, zRx.INSTANT_APPROVAL];
@@ -158,7 +158,7 @@ function ea({
           seatType: t
         })]
       })
-    }), jsx(Ve, {
+    }), jsx(DropdownComponent, {
       label: SI(a),
       options: u,
       className: cssBuilderInstance.wFull.radiusMedium.$,

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories } from "../905/165054";
 import { Wi } from "../figma_app/162641";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { RR } from "../figma_app/307841";
+import { isCampfireModelEnabled } from "../figma_app/307841";
 import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
@@ -24,7 +24,7 @@ export function $$T0() {
   let e = useDispatch<AppDispatch>();
   let t = useTeamPlanFeatures();
   let r = useTeamPlanUser();
-  let T = RR();
+  let T = isCampfireModelEnabled();
   let E = getSelectedView();
   let I = useSelector(e => getPermissionsStateMemoized(e));
   let N = useSelector(e => e.teams);

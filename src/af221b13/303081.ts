@@ -108,7 +108,7 @@ import { A as _$$A9 } from "../6828/523860";
 import { A as _$$A0 } from "../svg/951803";
 import { A as _$$A1 } from "../svg/228383";
 import { setupThemeContext } from "../905/614223";
-import { useAtomWithSubscription, Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { userFlagAtomFamily, userFlagExistsAtomFamily } from "../figma_app/545877";
 import { w4, QK, Xt } from "../figma_app/692865";
@@ -201,9 +201,9 @@ import { clamp, range } from "../figma_app/492908";
 import { AnimatePresence } from "../vendor/930821";
 import { P as _$$P3, Mf, F5 } from "../5430/367577";
 import { A as _$$A31 } from "../figma_app/882803";
-import { e as _$$e7 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { useIsPublisher } from "../figma_app/599979";
-import { N as _$$N4 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { p as _$$p } from "../figma_app/353099";
 import { _l, B$ } from "../figma_app/995208";
 import { CommunityCreatorMediaUpsellModal } from "../figma_app/6204";
@@ -4195,7 +4195,7 @@ function n$() {
   });
 }
 function nD() {
-  let e = Xr(_$$E3);
+  let e = useSetAtom(_$$E3);
   return jsxs("div", {
     className: "hero--hero--a1ML6",
     children: [jsx(n$, {}), jsx(ng, {
@@ -5977,9 +5977,9 @@ function st() {
     show,
     isShowing,
     complete
-  } = _$$e7({
+  } = useOverlay({
     overlay: CommunityCreatorMediaUpsellModal,
-    priority: _$$N4.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
     !n && i && i.has_published && show({

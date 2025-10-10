@@ -1,4 +1,4 @@
-import { um, atom, setupAtomWithMount, atomStoreManager } from "../figma_app/27355";
+import { atomWithReducer, atom, setupAtomWithMount, atomStoreManager } from "../figma_app/27355";
 import { getStorage } from "../905/657224";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { padTime, getTimeRemaining } from "../figma_app/152368";
@@ -14,7 +14,7 @@ function o() {
     }
   };
 }
-let $$l0 = um(o(), (e, t) => {
+let $$l0 = atomWithReducer(o(), (e, t) => {
   let r = {
     ...e,
     lastAction: t

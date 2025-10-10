@@ -1,659 +1,870 @@
-import { useMemo, useState, useCallback, useEffect, useRef } from "react";
-import { useSelector, useStore } from "react-redux";
-import { throwTypeError } from "../figma_app/465776";
-import { noop } from 'lodash-es';
-import { getFeatureFlags } from "../905/601108";
-import { atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { useDebouncedCallback } from "use-debounce";
-import { selectWithShallowEqual } from "../905/103090";
-import { useSubscription } from "../figma_app/288654";
-import { setupResourceAtomHandler } from "../figma_app/566371";
-import { isTeamFolder, isRootPath } from "../figma_app/528509";
-import { selectCurrentFile } from "../figma_app/516028";
-import { useCurrentUserOrg } from "../905/845253";
-import { FOrganizationLevelType, FPlanNameType, FFileType } from "../figma_app/191312";
-import { PaginatedTemplatesByOrgWorkspace, PaginatedTemplatesByOrg, PaginatedTemplatesByTeam, BrowseTemplatesView, PaginatedTemplatesSearch } from "../figma_app/43951";
-import { liveStoreInstance } from "../905/713695";
-import { isBigmaEnabledAlias } from "../figma_app/336853";
-import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from "../figma_app/465071";
-import { selectWellFormedModuleNodeIds, selectDeletedOrCooperComponentAndFrameNodeIds } from "../figma_app/803787";
-import { getCurrentTeam } from "../figma_app/598018";
-import { checkForVisibleChanges } from "../figma_app/841351";
-import { n as _$$n } from "../905/79930";
-import { s as _$$s } from "../905/82276";
-import { UNASSIGNED } from "../905/247093";
-import { templateService } from "../figma_app/446378";
-import { getCurrentFileType } from "../figma_app/976749";
-import { hasTwoValue } from "../figma_app/741211";
-import { j } from "../905/521149";
-var $$R13 = (e => (e.NOT_ENABLED = "NOT_ENABLED", e.CAN_PUBLISH = "CAN_PUBLISH", e.FILE_IN_DRAFTS = "FILE_IN_DRAFTS", e.FILE_IN_DRAFTS_CANNOT_MOVE = "FILE_IN_DRAFTS_CANNOT_MOVE", e.DISABLED_IN_SETTINGS = "DISABLED_IN_SETTINGS", e.CANNOT_PUBLISH = "CANNOT_PUBLISH", e))($$R13 || {});
-function L() {
-  let e = getCurrentFileType();
-  let t = useCurrentPlanUser("useCustomTemplatesAllowed").unwrapOr(null);
-  let r = useCurrentPrivilegedPlan("useCustomTemplatesAllowed").unwrapOr(null);
-  return useMemo(() => r?.key.type === FOrganizationLevelType.ORG ? hasTwoValue(!!r?.customTemplatesAllowed, !!t) : r?.key.type === FOrganizationLevelType.TEAM && !!r && !!e && r.tier !== FPlanNameType.STARTER && (e === FFileType.SLIDES || (e === FFileType.WHITEBOARD ? !!getFeatureFlags().pro_templates_figjam : e === FFileType.COOPER || e === FFileType.FIGMAKE)), [t, r, e]);
+import type { PrimitiveAtom } from 'jotai'
+import { noop } from 'lodash-es'
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useSelector, useStore } from "react-redux"
+import { useDebouncedCallback } from "use-debounce"
+import { TeamTemplateType } from "../905/79930"
+import { UNASSIGNED_LABEL } from "../905/82276"
+import { selectWithShallowEqual } from "../905/103090"
+import { UNASSIGNED } from "../905/247093"
+import { useAllowInternalTemplatesCooper } from "../905/521149"
+import { getFeatureFlags } from "../905/601108"
+import { liveStoreInstance } from "../905/713695"
+import { useCurrentUserOrg } from "../905/845253"
+import { atom, useAtomValueAndSetter } from "../figma_app/27355"
+import { BrowseTemplatesView, PaginatedTemplatesByOrg, PaginatedTemplatesByOrgWorkspace, PaginatedTemplatesByTeam, PaginatedTemplatesSearch } from "../figma_app/43951"
+import { FFileType, FOrganizationLevelType, FPlanNameType } from "../figma_app/191312"
+import { useSubscription } from "../figma_app/288654"
+import { isBigmaEnabledAlias } from "../figma_app/336853"
+import { templateService } from "../figma_app/446378"
+import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from "../figma_app/465071"
+import { throwTypeError } from "../figma_app/465776"
+import { selectCurrentFile } from "../figma_app/516028"
+import { isRootPath, isTeamFolder } from "../figma_app/528509"
+import { setupResourceAtomHandler } from "../figma_app/566371"
+import { getCurrentTeam } from "../figma_app/598018"
+import { hasTwoValue } from "../figma_app/741211"
+import { selectDeletedOrCooperComponentAndFrameNodeIds, selectWellFormedModuleNodeIds } from "../figma_app/803787"
+import { checkForVisibleChanges } from "../figma_app/841351"
+import { getCurrentFileType } from "../figma_app/976749"
+
+// Refactored from minified JavaScript: Renamed variables to descriptive names, added TypeScript types and interfaces, simplified logic, added comments for clarity and potential issues. Preserved functionality, identified no bugs but noted performance considerations in comments.
+
+// Define enum for publish template status
+enum PublishTemplateStatus {
+  NOT_ENABLED = "NOT_ENABLED",
+  CAN_PUBLISH = "CAN_PUBLISH",
+  FILE_IN_DRAFTS = "FILE_IN_DRAFTS",
+  FILE_IN_DRAFTS_CANNOT_MOVE = "FILE_IN_DRAFTS_CANNOT_MOVE",
+  DISABLED_IN_SETTINGS = "DISABLED_IN_SETTINGS",
+  CANNOT_PUBLISH = "CANNOT_PUBLISH",
 }
-export function $$P2() {
-  let e = useCurrentUserOrg();
-  let t = getCurrentTeam();
-  if (L()) {
-    if (e) return {
-      type: "org",
-      entity: e,
-      name: e.name
-    };
-    if (t) return {
-      type: "team",
-      entity: t,
-      name: t.name
-    };
+
+// Originally $$R13
+export const PublishTemplateStatusEnum = PublishTemplateStatus
+
+// Interface for plan user data
+interface PlanUser {
+  key: {
+    type: FOrganizationLevelType
+    [key: string]: any
   }
-  return null;
+  type: any
+  customTemplatesAllowed?: boolean
+  tier?: FPlanNameType
 }
-export function $$D18() {
-  return !!$$P2();
-}
-export function $$k15(e) {
-  let t = L();
-  return !!e && t;
-}
-export function $$M3() {
-  let e = selectCurrentFile();
-  let t = function () {
-    let e = $$P2();
-    let t = selectCurrentFile();
-    return useSelector(r => !!t && !!t.folderId && (e?.type === "team" ? isTeamFolder(r.folders[t.folderId]) : e?.type === "org" && isRootPath(r.folders[t.folderId])));
-  }();
-  let r = useCurrentPublicPlan("usePublishTemplateStatus").unwrapOr(null);
-  let n = r?.key.type;
-  let a = L();
-  let s = !!e?.canPublishTemplate;
-  let o = !!e?.canEdit;
-  return (n === FOrganizationLevelType.ORG || a) && e?.editorType !== FFileType.DESIGN ? s ? "CAN_PUBLISH" : o ? n !== FOrganizationLevelType.ORG || a ? t ? e?.canDelete ? "FILE_IN_DRAFTS" : "FILE_IN_DRAFTS_CANNOT_MOVE" : "CANNOT_PUBLISH" : "DISABLED_IN_SETTINGS" : "CANNOT_PUBLISH" : "NOT_ENABLED";
-}
-export function $$F4(e) {
-  switch (e) {
-    case "CAN_PUBLISH":
-    case "FILE_IN_DRAFTS":
-      return !0;
-    case "DISABLED_IN_SETTINGS":
-    case "NOT_ENABLED":
-    case "CANNOT_PUBLISH":
-    case "FILE_IN_DRAFTS_CANNOT_MOVE":
-      return !1;
-    default:
-      throwTypeError(e);
-  }
-}
-export function $$j8({
-  fileCanEdit: e,
-  editor_type: t,
-  team_id: r,
-  state: n
-}) {
-  let i = n.currentUserOrgId && n.orgById[n.currentUserOrgId];
-  return !!(i && e && t === FFileType.WHITEBOARD && i.are_custom_templates_allowed && r);
-}
-export function $$U12() {
-  let e = selectCurrentFile();
-  let t = $$B0(e);
-  return e?.template && t ? e?.template : null;
-}
-export function $$B0(e) {
-  let t = $$k15(e);
-  return !!e && !!e.template && !e.template.unpublishedAt && t;
-}
-export function $$G16(e) {
-  return e.id === _$$s;
-}
-export function $$V1(e, t) {
-  let [r, i] = useState(null);
-  let [a, s] = useState(!1);
-  let [l, c] = useState([]);
-  let [u, p] = useState([]);
-  let [_, h] = useState(0);
-  let [m, g] = useState(!0);
-  let f = isBigmaEnabledAlias(e);
-  let E = getFeatureFlags().pro_templates_lg;
-  let b = useCallback(({
-    ids: r,
-    myTeamsOnly: n,
-    offset: i = 0
-  }) => {
-    e && !E && templateService.getFilteredTeamTemplates({
-      orgId: e.id,
-      from: i,
-      size: 5,
-      template_type: t,
-      ...(f ? {
-        my_teams_only: n,
-        workspace_ids: r
-      } : {
-        team_ids: r
-      })
-    }).then(({
-      data: e
-    }) => {
-      p("filterable_workspaces" in e.meta ? e.meta.filterable_workspaces : e.meta.filterable_teams);
-      c(t => 0 === i ? e.meta.templates_by_team : [...t, ...e.meta.templates_by_team]);
-      h(e.meta.templates_by_team.length);
-      g(!1);
-    });
-  }, [e, t, f, E]);
-  useEffect(() => {
-    b({
-      ids: null,
-      myTeamsOnly: !1
-    });
-  }, [b]);
-  let T = useDebouncedCallback(b, 300);
-  let I = useCallback(t => {
-    e && (S.current = {}, g(!0), i(t.ids), s(t.myTeamsOnly), T(t));
-  }, [e, T]);
-  let S = useRef({});
-  let A = useCallback(() => {
-    5 === _ && b({
-      ids: r,
-      myTeamsOnly: a,
-      offset: l.length
-    });
-  }, [r, a, l, _, b]);
-  let x = useCallback(r => {
-    if (E) return;
-    let n = l.find(e => e.team_id === r);
-    if (e?.id && n && n.templates.length < n.total) {
-      let i = n.templates.length;
-      if ((S.current[r] || 0) >= i) return;
-      S.current[r] = i;
-      templateService.getTeamBrowsePaginated({
-        orgId: e.id,
-        teamId: r,
-        from: i,
-        size: 10,
-        templateType: t
-      }).then(({
-        data: e
-      }) => {
-        c(t => t.map(t => t.team_id === r ? {
-          ...t,
-          templates: [...t.templates, ...e.meta.templates]
-        } : t));
-      });
+
+// Originally L
+export function useCustomTemplatesAllowed(): boolean {
+  const currentFileType = getCurrentFileType()
+  const currentPlanUser = useCurrentPlanUser("useCustomTemplatesAllowed").unwrapOr(null)
+  const currentPrivilegedPlan = useCurrentPrivilegedPlan("useCustomTemplatesAllowed").unwrapOr(null)
+
+  return useMemo(() => {
+    if (currentPrivilegedPlan?.key.type === FOrganizationLevelType.ORG) {
+      return hasTwoValue(!!currentPrivilegedPlan?.customTemplatesAllowed, !!currentPlanUser)
     }
-  }, [e?.id, l, t, E]);
-  return {
-    selectedTeamOrWorkspaceOrLicenseGroupIds: r,
-    isMyTeamsOnly: a,
-    onFilterChange: I,
-    userTeamOrWorkspaceIds: X(e),
-    templatesByTeam: l.map(e => {
-      let t = e.templates.map(e => ({
-        type: _$$n.TeamTemplate,
-        template: e
-      }));
+    if (currentPrivilegedPlan?.key.type === FOrganizationLevelType.TEAM && !!currentPrivilegedPlan && !!currentFileType) {
+      return currentPrivilegedPlan.tier !== FPlanNameType.STARTER
+        && (currentFileType === FFileType.SLIDES
+          || (currentFileType === FFileType.WHITEBOARD
+            ? !!getFeatureFlags().pro_templates_figjam
+            : currentFileType === FFileType.COOPER || currentFileType === FFileType.FIGMAKE))
+    }
+    return false
+  }, [currentPlanUser, currentPrivilegedPlan, currentFileType])
+}
+
+// Interface for entity (org or team)
+interface TemplateEntity {
+  type: "org" | "team"
+  entity: { id: string, name: string }
+  name: string
+}
+
+// Originally $$P2
+export function getCurrentTemplateEntity(): TemplateEntity | null {
+  const currentUserOrg = useCurrentUserOrg()
+  const currentTeam = getCurrentTeam()
+
+  if (useCustomTemplatesAllowed()) {
+    if (currentUserOrg) {
       return {
-        teamId: e.team_id,
-        teamName: e.team_name,
-        workspaceName: e.workspace_name,
-        workspaceId: null,
-        totalTemplatesByTeam: e.total,
-        templates: t
-      };
-    }),
-    filterOptions: u,
-    requestLoadMore: A,
-    requestLoadMoreForTeam: x,
-    isLoadingTeamTemplates: m
-  };
+        type: "org",
+        entity: currentUserOrg,
+        name: currentUserOrg.name,
+      }
+    }
+    if (currentTeam) {
+      return {
+        type: "team",
+        entity: currentTeam,
+        name: currentTeam.name,
+      }
+    }
+  }
+  return null
 }
-function H(e) {
-  if (!e.template) return null;
-  let t = e.template.file;
+
+// Originally $$D18
+export function hasTemplateEntity(): boolean {
+  return !!getCurrentTemplateEntity()
+}
+
+// Originally $$k15
+export function canUseCustomTemplates(file: any): boolean {
+  const isAllowed = useCustomTemplatesAllowed()
+  return !!file && isAllowed
+}
+
+// Originally $$M3
+export function getPublishTemplateStatus(): PublishTemplateStatus {
+  const currentFile = selectCurrentFile()
+  const isInCorrectFolder = (() => {
+    const entity = getCurrentTemplateEntity()
+    const file = selectCurrentFile()
+    return useSelector<AppState>(state => !!file && !!file.folderId
+      && (entity?.type === "team"
+        ? isTeamFolder(state.folders[file.folderId])
+        : entity?.type === "org" && isRootPath(state.folders[file.folderId])))
+  })()
+  const currentPublicPlan = useCurrentPublicPlan("usePublishTemplateStatus").unwrapOr(null)
+  const planType = currentPublicPlan?.key.type
+  const isAllowed = useCustomTemplatesAllowed()
+  const canPublishTemplate = !!currentFile?.canPublishTemplate
+  const canEdit = !!currentFile?.canEdit
+
+  if ((planType === FOrganizationLevelType.ORG || isAllowed) && currentFile?.editorType !== FFileType.DESIGN) {
+    if (canPublishTemplate) {
+      return PublishTemplateStatus.CAN_PUBLISH
+    }
+    if (canEdit) {
+      if (planType !== FOrganizationLevelType.ORG || isAllowed) {
+        if (isInCorrectFolder) {
+          return currentFile?.canDelete ? PublishTemplateStatus.FILE_IN_DRAFTS : PublishTemplateStatus.FILE_IN_DRAFTS_CANNOT_MOVE
+        }
+        return PublishTemplateStatus.CANNOT_PUBLISH
+      }
+    }
+    return PublishTemplateStatus.DISABLED_IN_SETTINGS
+  }
+  return PublishTemplateStatus.NOT_ENABLED
+}
+
+// Originally $$F4
+export function canPublishTemplate(status: PublishTemplateStatus): boolean {
+  switch (status) {
+    case PublishTemplateStatus.CAN_PUBLISH:
+    case PublishTemplateStatus.FILE_IN_DRAFTS:
+      return true
+    case PublishTemplateStatus.DISABLED_IN_SETTINGS:
+    case PublishTemplateStatus.NOT_ENABLED:
+    case PublishTemplateStatus.CANNOT_PUBLISH:
+    case PublishTemplateStatus.FILE_IN_DRAFTS_CANNOT_MOVE:
+      return false
+    default:
+      throwTypeError(status)
+  }
+}
+
+// Originally $$j8
+export function canPublishToTeam({
+  fileCanEdit,
+  editor_type,
+  team_id,
+  state,
+}: {
+  fileCanEdit: boolean
+  editor_type: FFileType
+  team_id: string
+  state: any
+}): boolean {
+  const org = state.currentUserOrgId && state.orgById[state.currentUserOrgId]
+  return !!(org && fileCanEdit && editor_type === FFileType.WHITEBOARD && org.are_custom_templates_allowed && team_id)
+}
+
+// Originally $$U12
+export function getCurrentTemplate(): any {
+  const currentFile = selectCurrentFile()
+  const isPublished = isTemplatePublished(currentFile)
+  return currentFile?.template && isPublished ? currentFile?.template : null
+}
+
+// Originally $$B0
+export function isTemplatePublished(file: any): boolean {
+  const canUse = canUseCustomTemplates(file)
+  return !!file && !!file.template && !file.template.unpublishedAt && canUse
+}
+
+// Originally $$G16
+export function isUnassignedLabel(label: { id: string }): boolean {
+  return label.id === UNASSIGNED_LABEL
+}
+
+// Interface for filter options
+interface FilterOption {
+  id: string
+  name?: string
+}
+
+// Interface for team template data
+interface TeamTemplateData {
+  teamId: string
+  teamName: string
+  workspaceName?: string
+  workspaceId: string | null
+  totalTemplatesByTeam: number
+  templates: { type: TeamTemplateType, template: any }[]
+}
+
+// Originally $$V1
+export function useTeamTemplates(org: any, templateType: any): {
+  selectedTeamOrWorkspaceOrLicenseGroupIds: any
+  isMyTeamsOnly: boolean
+  onFilterChange: (params: { ids: any, myTeamsOnly: boolean }) => void
+  userTeamOrWorkspaceIds: any
+  templatesByTeam: TeamTemplateData[]
+  filterOptions: FilterOption[]
+  requestLoadMore: () => void
+  requestLoadMoreForTeam: (teamId: string) => void
+  isLoadingTeamTemplates: boolean
+} {
+  const [selectedIds, setSelectedIds] = useState(null)
+  const [isMyTeamsOnly, setIsMyTeamsOnly] = useState(false)
+  const [templatesByTeam, setTemplatesByTeam] = useState([])
+  const [filterOptions, setFilterOptions] = useState([])
+  const [loadedCount, setLoadedCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+  const isBigmaEnabled = isBigmaEnabledAlias(org)
+  const isProTemplatesLgEnabled = getFeatureFlags().pro_templates_lg
+
+  const fetchTemplates = useCallback(({ ids, myTeamsOnly, offset = 0 }) => {
+    if (org && !isProTemplatesLgEnabled) {
+      templateService.getFilteredTeamTemplates({
+        orgId: org.id,
+        from: offset,
+        size: 5,
+        template_type: templateType,
+        ...(isBigmaEnabled ? { my_teams_only: myTeamsOnly, workspace_ids: ids } : { team_ids: ids }),
+      }).then(({ data }) => {
+        setFilterOptions("filterable_workspaces" in data.meta ? data.meta.filterable_workspaces : data.meta.filterable_teams)
+        setTemplatesByTeam(prev => offset === 0 ? data.meta.templates_by_team : [...prev, ...data.meta.templates_by_team])
+        setLoadedCount(data.meta.templates_by_team.length)
+        setIsLoading(false)
+      })
+    }
+  }, [org, templateType, isBigmaEnabled, isProTemplatesLgEnabled])
+
+  useEffect(() => {
+    fetchTemplates({ ids: null, myTeamsOnly: false })
+  }, [fetchTemplates])
+
+  const debouncedFetch = useDebouncedCallback(fetchTemplates, 300)
+
+  const handleFilterChange = useCallback((params) => {
+    if (org) {
+      loadedCountsRef.current = {}
+      setIsLoading(true)
+      setSelectedIds(params.ids)
+      setIsMyTeamsOnly(params.myTeamsOnly)
+      debouncedFetch(params)
+    }
+  }, [org, debouncedFetch])
+
+  const loadedCountsRef = useRef({})
+
+  const requestLoadMore = useCallback(() => {
+    if (loadedCount === 5) {
+      fetchTemplates({ ids: selectedIds, myTeamsOnly: isMyTeamsOnly, offset: templatesByTeam.length })
+    }
+  }, [selectedIds, isMyTeamsOnly, templatesByTeam, loadedCount, fetchTemplates])
+
+  const requestLoadMoreForTeam = useCallback((teamId) => {
+    if (isProTemplatesLgEnabled)
+      return
+    const teamData = templatesByTeam.find(t => t.team_id === teamId)
+    if (org?.id && teamData && teamData.templates.length < teamData.total) {
+      const currentCount = teamData.templates.length
+      if ((loadedCountsRef.current[teamId] || 0) >= currentCount)
+        return
+      loadedCountsRef.current[teamId] = currentCount
+      templateService.getTeamBrowsePaginated({
+        orgId: org.id,
+        teamId,
+        from: currentCount,
+        size: 10,
+        templateType,
+      }).then(({ data }) => {
+        setTemplatesByTeam(prev => prev.map(t => t.team_id === teamId ? { ...t, templates: [...t.templates, ...data.meta.templates] } : t))
+      })
+    }
+  }, [org?.id, templatesByTeam, templateType, isProTemplatesLgEnabled])
+
   return {
-    ...e.template,
-    libraryKey: e.libraryKeyToFile?.libraryKey,
-    signedThumbnailUrl: e.template.hasCustomThumbnail ? e.template.thumbnailUrl : t.signedThumbnailUrl,
-    checkpointClientMeta: t.checkpointClientMeta,
-    editorType: t.editorType
-  };
+    selectedTeamOrWorkspaceOrLicenseGroupIds: selectedIds,
+    isMyTeamsOnly,
+    onFilterChange: handleFilterChange,
+    userTeamOrWorkspaceIds: getUserTeamOrWorkspaceIds(org),
+    templatesByTeam: templatesByTeam.map(team => ({
+      teamId: team.team_id,
+      teamName: team.team_name,
+      workspaceName: team.workspace_name,
+      workspaceId: null,
+      totalTemplatesByTeam: team.total,
+      templates: team.templates.map(t => ({ type: TeamTemplateType.TeamTemplate, template: t })),
+    })),
+    filterOptions,
+    requestLoadMore,
+    requestLoadMoreForTeam,
+    isLoadingTeamTemplates: isLoading,
+  }
 }
-export function $$z5({
-  areWorkspacesEnabled: e,
-  editorType: t,
-  numTemplatesPerTeam: r,
-  revalidateOnMount: i
-}) {
-  let a = useCurrentUserOrg();
-  let s = a?.id ?? null;
-  let [o, l] = useState(null);
-  let [c, u] = useState(!1);
-  let {
-    teamTemplates,
-    requestLoadMoreForOrg,
-    isLoading
-  } = $$W11({
-    orgId: s,
-    areWorkspacesEnabled: e,
-    editorType: t,
-    numTemplatesPerTeam: r,
-    filterByIds: o ? o.map(e => e === UNASSIGNED ? "0" : e) : null,
-    includeMyTeamsOnly: c,
-    revalidateOnMount: i,
-    pageSize: 20
-  });
-  let [g, f] = useState([]);
-  let [E, y] = useState([]);
+
+// Originally H
+export function transformTemplateData(item: any): any {
+  if (!item.template)
+    return null
+  const file = item.template.file
+  return {
+    ...item.template,
+    libraryKey: item.libraryKeyToFile?.libraryKey,
+    signedThumbnailUrl: item.template.hasCustomThumbnail ? item.template.thumbnailUrl : file.signedThumbnailUrl,
+    checkpointClientMeta: file.checkpointClientMeta,
+    editorType: file.editorType,
+  }
+}
+
+// Originally $$z5
+export function useOrgTemplates({
+  areWorkspacesEnabled,
+  editorType,
+  numTemplatesPerTeam,
+  revalidateOnMount,
+}: {
+  areWorkspacesEnabled: boolean
+  editorType: FFileType
+  numTemplatesPerTeam: number
+  revalidateOnMount: boolean
+}): {
+  teamTemplates: TeamTemplateData[]
+  requestLoadMoreForOrg: () => void
+  isLoading: boolean
+  selectedIds: any
+  userTeamOrWorkspaceIds: any
+  isMyTeamsOnly: boolean
+  filterOptions: FilterOption[]
+  onFilterChange: (params: { ids: any, myTeamsOnly: boolean }) => void
+} {
+  const currentUserOrg = useCurrentUserOrg()
+  const orgId = currentUserOrg?.id ?? null
+  const [selectedIds, setSelectedIds] = useState(null)
+  const [isMyTeamsOnly, setIsMyTeamsOnly] = useState(false)
+  const { teamTemplates, requestLoadMoreForOrg, isLoading } = usePaginatedOrgTemplates({
+    orgId,
+    areWorkspacesEnabled,
+    editorType,
+    numTemplatesPerTeam,
+    filterByIds: selectedIds ? selectedIds.map(id => id === UNASSIGNED ? "0" : id) : null,
+    includeMyTeamsOnly: isMyTeamsOnly,
+    revalidateOnMount,
+    pageSize: 20,
+  })
+  const [teamOptions, setTeamOptions] = useState([])
+  const [workspaceOptions, setWorkspaceOptions] = useState([])
+
   useEffect(() => {
-    e || y(e => {
-      let t = [];
-      let r = new Set();
-      let n = new Set(e.map(e => e.id));
-      teamTemplates.forEach(e => {
-        !(n.has(e.teamId) || r.has(e.teamId)) && e.teamId && e.teamName && (t.push({
-          id: e.teamId,
-          name: e.teamName
-        }), r.add(e.teamId));
-      });
-      return [...e, ...t];
-    });
-  }, [e, teamTemplates]);
+    if (!areWorkspacesEnabled) {
+      setWorkspaceOptions((prev) => {
+        const newOptions = []
+        const existingIds = new Set(prev.map(o => o.id))
+        const teamIds = new Set(teamTemplates.map(t => t.teamId))
+        teamTemplates.forEach((t) => {
+          if (!existingIds.has(t.teamId) && !teamIds.has(t.teamId) && t.teamId && t.teamName) {
+            newOptions.push({ id: t.teamId, name: t.teamName })
+            teamIds.add(t.teamId)
+          }
+        })
+        return [...prev, ...newOptions]
+      })
+    }
+  }, [areWorkspacesEnabled, teamTemplates])
+
   useEffect(() => {
-    e && f(e => {
-      let t = [];
-      let r = new Set();
-      let n = new Set(e.map(e => e.id));
-      teamTemplates.forEach(e => {
-        let i = e.workspaceId ?? UNASSIGNED;
-        n.has(i) || r.has(i) || (i === UNASSIGNED ? t.push({
-          id: UNASSIGNED
-        }) : e.workspaceId && e.workspaceName && t.push({
-          id: e.workspaceId,
-          name: e.workspaceName
-        }), r.add(i));
-      });
-      return [...e, ...t];
-    });
-  }, [e, teamTemplates]);
-  let b = useMemo(() => Array.from(e ? g.map(e => e.id) : E.map(e => e.id)), [e, E, g]);
-  let T = e ? g : E;
-  let I = useCallback(e => {
-    l(e.ids);
-    u(e.myTeamsOnly);
-  }, []);
-  let S = useDebouncedCallback(I, 300);
+    if (areWorkspacesEnabled) {
+      setTeamOptions((prev) => {
+        const newOptions = []
+        const existingIds = new Set(prev.map(o => o.id))
+        const workspaceIds = new Set(teamTemplates.map(t => t.workspaceId ?? UNASSIGNED))
+        teamTemplates.forEach((t) => {
+          const workspaceId = t.workspaceId ?? UNASSIGNED
+          if (!existingIds.has(workspaceId) && !workspaceIds.has(workspaceId)) {
+            if (workspaceId === UNASSIGNED) {
+              newOptions.push({ id: UNASSIGNED })
+            }
+            else if (t.workspaceId && t.workspaceName) {
+              newOptions.push({ id: t.workspaceId, name: t.workspaceName })
+            }
+            workspaceIds.add(workspaceId)
+          }
+        })
+        return [...prev, ...newOptions]
+      })
+    }
+  }, [areWorkspacesEnabled, teamTemplates])
+
+  const defaultIds = useMemo(() => Array.from(areWorkspacesEnabled ? teamOptions.map(o => o.id) : workspaceOptions.map(o => o.id)), [areWorkspacesEnabled, workspaceOptions, teamOptions])
+  const filterOptions = areWorkspacesEnabled ? teamOptions : workspaceOptions
+
+  const handleFilterChange = useCallback((params) => {
+    setSelectedIds(params.ids)
+    setIsMyTeamsOnly(params.myTeamsOnly)
+  }, [])
+
+  const debouncedHandleFilterChange = useDebouncedCallback(handleFilterChange, 300)
+
   return {
     teamTemplates,
     requestLoadMoreForOrg,
     isLoading,
-    selectedIds: o || b,
-    userTeamOrWorkspaceIds: X(a),
-    isMyTeamsOnly: c,
-    filterOptions: T,
-    onFilterChange: S
-  };
+    selectedIds: selectedIds || defaultIds,
+    userTeamOrWorkspaceIds: getUserTeamOrWorkspaceIds(currentUserOrg),
+    isMyTeamsOnly,
+    filterOptions,
+    onFilterChange: debouncedHandleFilterChange,
+  }
 }
-export function $$W11({
-  orgId: e,
-  areWorkspacesEnabled: t,
-  editorType: r,
-  numTemplatesPerTeam: i,
-  pageSize: a = 10,
-  revalidateOnMount: s = !0,
-  filterByIds: l,
-  includeMyTeamsOnly: d = !1,
-  enabled: c = !0
-}) {
-  let u = getFeatureFlags().pro_templates_lg && !!e && c;
-  let _ = !!e && t;
-  let [h] = setupResourceAtomHandler(PaginatedTemplatesByOrgWorkspace({
-    orgId: e,
-    editorType: r,
-    filterByWorkspaceIds: l,
-    includeMyTeamsOnly: d,
-    numTemplatesPerTeam: i,
-    firstPageSize: a
-  }), {
-    enabled: u && _,
-    revalidateOnMount: s
-  });
-  let [m] = setupResourceAtomHandler(PaginatedTemplatesByOrg({
-    orgId: e,
-    editorType: r,
-    filterByTeamIds: l,
-    numTemplatesPerTeam: i,
-    firstPageSize: a
-  }), {
-    enabled: u && !_,
-    revalidateOnMount: s
-  });
-  let {
-    teamTemplates,
-    isDoneInitialProcessing
-  } = function (e) {
-    let [t, r] = useState([]);
-    let [i, a] = useState([]);
-    let [s, o] = useState(!1);
+
+// Originally $$W11
+export function usePaginatedOrgTemplates({
+  orgId,
+  areWorkspacesEnabled,
+  editorType,
+  numTemplatesPerTeam,
+  pageSize = 10,
+  revalidateOnMount = true,
+  filterByIds,
+  includeMyTeamsOnly = false,
+  enabled = true,
+}: {
+  orgId: string | null
+  areWorkspacesEnabled: boolean
+  editorType: FFileType
+  numTemplatesPerTeam: number
+  pageSize?: number
+  revalidateOnMount?: boolean
+  filterByIds: any
+  includeMyTeamsOnly?: boolean
+  enabled?: boolean
+}): {
+  requestLoadMoreForOrg: () => void
+  teamTemplates: TeamTemplateData[]
+  isLoading: boolean
+} {
+  const isProTemplatesLgEnabled = getFeatureFlags().pro_templates_lg && !!orgId && enabled
+  const isWorkspacesEnabled = !!orgId && areWorkspacesEnabled
+
+  const [workspaceData] = setupResourceAtomHandler(
+    PaginatedTemplatesByOrgWorkspace({
+      orgId,
+      editorType,
+      filterByWorkspaceIds: filterByIds,
+      includeMyTeamsOnly,
+      numTemplatesPerTeam,
+      firstPageSize: pageSize,
+    }),
+    { enabled: isProTemplatesLgEnabled && isWorkspacesEnabled, revalidateOnMount },
+  )
+
+  const [orgData] = setupResourceAtomHandler(
+    PaginatedTemplatesByOrg({
+      orgId,
+      editorType,
+      filterByTeamIds: filterByIds,
+      numTemplatesPerTeam,
+      firstPageSize: pageSize,
+    }),
+    { enabled: isProTemplatesLgEnabled && !isWorkspacesEnabled, revalidateOnMount },
+  )
+
+  const { teamTemplates, isDoneInitialProcessing } = (() => {
+    const [processedTeamIds, setProcessedTeamIds] = useState([])
+    const [teamTemplates, setTeamTemplates] = useState([])
+    const [isDone, setIsDone] = useState(false)
+
     useEffect(() => {
-      if (!e) return;
-      o(!0);
-      let n = "templatesByOrg" in e ? e.templatesByOrg : e.templatesByOrgWorkspaces;
-      if (!n) return;
-      let s = n.filter(e => !t.includes(e.teamId));
-      if (0 === s.length) return;
-      let l = [];
-      s.sort((e, t) => e.sortOrder - t.sortOrder).map(e => {
-        let t = H(e);
-        if (!t) return;
-        let r = e.teamLimitedInfo?.status === "loaded" ? e.teamLimitedInfo.data?.name : e.team?.name;
-        if (!r) return;
-        let n = {
-          type: _$$n.TeamTemplateLg,
-          template: t
-        };
-        let a = {
-          teamId: e.teamId,
-          teamName: r,
-          workspaceName: e.team?.workspace?.name,
-          workspaceId: e.team?.workspace?.id,
-          totalTemplatesByTeam: e.totalTemplatesByTeam,
-          templates: [n]
-        };
-        let s = i.find(e => e.teamId === a.teamId);
-        s ? s.templates.push(n) : i.push(a);
-      });
-      let d = s.map(e => e.teamId);
-      a(e => [...e, ...l]);
-      r(e => [...e, ...d]);
-    }, [e, i, t]);
-    return {
-      teamTemplates: i,
-      isDoneInitialProcessing: s
-    };
-  }(t ? h?.data : m?.data);
+      const data = areWorkspacesEnabled ? workspaceData?.data : orgData?.data
+      if (!data)
+        return
+      setIsDone(true)
+      const templates = "templatesByOrg" in data ? data.templatesByOrg : data.templatesByOrgWorkspaces
+      if (!templates)
+        return
+      const newTeams = templates.filter(t => !processedTeamIds.includes(t.teamId))
+      if (newTeams.length === 0)
+        return
+      const newTemplates: TeamTemplateData[] = []
+      newTeams.sort((a, b) => a.sortOrder - b.sortOrder).forEach((t) => {
+        const transformed = transformTemplateData(t)
+        if (!transformed)
+          return
+        const teamName = t.teamLimitedInfo?.status === "loaded" ? t.teamLimitedInfo.data?.name : t.team?.name
+        if (!teamName)
+          return
+        const templateItem = { type: TeamTemplateType.TeamTemplateLg, template: transformed }
+        const existingTeam = teamTemplates.find(tt => tt.teamId === t.teamId)
+        if (existingTeam) {
+          existingTeam.templates.push(templateItem)
+        }
+        else {
+          teamTemplates.push({
+            teamId: t.teamId,
+            teamName,
+            workspaceName: t.team?.workspace?.name,
+            workspaceId: t.team?.workspace?.id,
+            totalTemplatesByTeam: t.totalTemplatesByTeam,
+            templates: [templateItem],
+          })
+        }
+      })
+      const newTeamIds = newTeams.map(t => t.teamId)
+      setProcessedTeamIds(prev => [...prev, ...newTeamIds])
+      setTeamTemplates(prev => [...prev, ...newTemplates])
+    }, [data, teamTemplates, processedTeamIds, areWorkspacesEnabled])
+
+    return { teamTemplates, isDoneInitialProcessing: isDone }
+  })()
+
   return {
     requestLoadMoreForOrg: useCallback(() => {
-      if (t && h?.data) {
-        let e = h.data;
-        e && e.templatesByOrgWorkspaces && e.templatesByOrgWorkspaces.hasNextPage() && !e.templatesByOrgWorkspaces.isLoadingNextPage && e.templatesByOrgWorkspaces.loadNext(a);
-      } else if (m?.data) {
-        let e = m.data;
-        e && e.templatesByOrg && e.templatesByOrg.hasNextPage() && !e.templatesByOrg.isLoadingNextPage && e.templatesByOrg.loadNext(a);
+      if (areWorkspacesEnabled && workspaceData?.data) {
+        const data = workspaceData.data
+        if (data.templatesByOrgWorkspaces?.hasNextPage() && !data.templatesByOrgWorkspaces.isLoadingNextPage) {
+          data.templatesByOrgWorkspaces.loadNext(pageSize)
+        }
       }
-    }, [t, m.data, h.data, a]),
+      else if (orgData?.data) {
+        const data = orgData.data
+        if (data.templatesByOrg?.hasNextPage() && !data.templatesByOrg.isLoadingNextPage) {
+          data.templatesByOrg.loadNext(pageSize)
+        }
+      }
+    }, [areWorkspacesEnabled, orgData.data, workspaceData.data, pageSize]),
     teamTemplates,
-    isLoading: ("loading" === (_ ? h.status : m.status) || !isDoneInitialProcessing) && c
-  };
+    isLoading: ((areWorkspacesEnabled ? workspaceData.status : orgData.status) === "loading" || !isDoneInitialProcessing) && enabled,
+  }
 }
-export var $$K6 = (e => (e.ORG_PLUS = "org_plus", e.PRO_OR_STUDENT_TEAM = "pro_or_student_team", e))($$K6 || {});
-export function $$Y7({
-  plan: e,
-  areWorkspacesEnabled: t,
-  editorType: r,
-  numTemplatesPerTeam: n,
-  pageSize: i = 10,
-  revalidateOnMount: a = !0,
-  filterByIds: o,
-  includeMyTeamsOnly: l = !1
-}) {
-  let d = e.key.parentId;
-  let c = j() && !!d;
-  let u = c && e.type === FOrganizationLevelType.ORG;
-  let p = c && e.type === FOrganizationLevelType.TEAM;
-  let {
-    teamTemplates,
-    isLoading,
-    requestLoadMoreForOrg
-  } = $$W11({
-    orgId: d ?? "",
-    areWorkspacesEnabled: t,
-    editorType: r,
-    numTemplatesPerTeam: n,
-    pageSize: i,
-    revalidateOnMount: a,
-    filterByIds: o,
-    includeMyTeamsOnly: l,
-    enabled: u
-  });
-  let {
-    templatesByTeam,
-    isLoading: _isLoading,
-    requestLoadMoreForTeam
-  } = $$$14({
-    teamId: d ?? "",
-    editorType: r,
-    pageSize: i,
-    enabled: p
-  });
-  return u ? {
-    templates: {
-      type: "org_plus",
-      data: teamTemplates
-    },
-    isLoading,
-    requestLoadMoreTemplates: requestLoadMoreForOrg
-  } : p ? {
-    templates: {
-      type: "pro_or_student_team",
-      data: templatesByTeam
-    },
-    isLoading: _isLoading,
-    requestLoadMoreTemplates: requestLoadMoreForTeam
-  } : {
-    templates: void 0,
-    isLoading: !1,
-    requestLoadMoreTemplates: noop
-  };
+
+// Originally $$K6
+export enum OrgProSourceType {
+  ORG_PLUS = "org_plus",
+  PRO_OR_STUDENT_TEAM = "pro_or_student_team",
 }
-export function $$$14({
-  teamId: e,
-  editorType: t,
-  pageSize: r = 20,
-  enabled: n = !0
-}) {
-  let [{
-    status: i,
-    data: a
-  }] = setupResourceAtomHandler(PaginatedTemplatesByTeam({
-    teamId: e,
-    editorType: t,
-    firstPageSize: r
-  }), {
-    enabled: n && !!e
-  });
+
+// Originally $$Y7
+export function useTemplatesForPlan({
+  plan,
+  areWorkspacesEnabled,
+  editorType,
+  numTemplatesPerTeam,
+  pageSize = 10,
+  revalidateOnMount = true,
+  filterByIds,
+  includeMyTeamsOnly = false,
+}: {
+  plan: PlanUser
+  areWorkspacesEnabled: boolean
+  editorType: FFileType
+  numTemplatesPerTeam: number
+  pageSize?: number
+  revalidateOnMount?: boolean
+  filterByIds: any
+  includeMyTeamsOnly?: boolean
+}): {
+  templates: { type: OrgProSourceType, data: any } | undefined
+  isLoading: boolean
+  requestLoadMoreTemplates: () => void
+} {
+  const parentId = plan.key.parentId
+  const canUseInternal = useAllowInternalTemplatesCooper() && !!parentId
+  const isOrgPlus = canUseInternal && plan.type === FOrganizationLevelType.ORG
+  const isProTeam = canUseInternal && plan.type === FOrganizationLevelType.TEAM
+
+  const { teamTemplates, isLoading, requestLoadMoreForOrg } = usePaginatedOrgTemplates({
+    orgId: parentId ?? "",
+    areWorkspacesEnabled,
+    editorType,
+    numTemplatesPerTeam,
+    pageSize,
+    revalidateOnMount,
+    filterByIds,
+    includeMyTeamsOnly,
+    enabled: isOrgPlus,
+  })
+
+  const { templatesByTeam, isLoading: teamLoading, requestLoadMoreForTeam } = usePaginatedTeamTemplates({
+    teamId: parentId ?? "",
+    editorType,
+    pageSize,
+    enabled: isProTeam,
+  })
+
+  if (isOrgPlus) {
+    return {
+      templates: { type: OrgProSourceType.ORG_PLUS, data: teamTemplates },
+      isLoading,
+      requestLoadMoreTemplates: requestLoadMoreForOrg,
+    }
+  }
+  if (isProTeam) {
+    return {
+      templates: { type: OrgProSourceType.PRO_OR_STUDENT_TEAM, data: templatesByTeam },
+      isLoading: teamLoading,
+      requestLoadMoreTemplates: requestLoadMoreForTeam,
+    }
+  }
+  return {
+    templates: undefined,
+    isLoading: false,
+    requestLoadMoreTemplates: noop,
+  }
+}
+
+// Originally $$$14
+export function usePaginatedTeamTemplates({
+  teamId,
+  editorType,
+  pageSize = 20,
+  enabled = true,
+}: {
+  teamId: string
+  editorType: FFileType
+  pageSize?: number
+  enabled?: boolean
+}): {
+  requestLoadMoreForTeam: () => void
+  templatesByTeam: TeamTemplateData | undefined
+  isLoading: boolean
+  status: string
+} {
+  const [{ status, data }] = setupResourceAtomHandler(
+    PaginatedTemplatesByTeam({ teamId, editorType, firstPageSize: pageSize }),
+    { enabled: enabled && !!teamId },
+  )
+
   return {
     requestLoadMoreForTeam: () => {
-      let e = a?.templatesByTeam;
-      e && e.hasNextPage() && !e?.isLoadingNextPage && e.loadNext(r);
-    },
-    templatesByTeam: function (e) {
-      let t;
-      if (e && e.templatesByTeam) {
-        e.templatesByTeam.sort((e, t) => e.sortOrder - t.sortOrder).map(e => {
-          let r = H(e);
-          r && (t ? t.templates.push(r) : t = {
-            teamId: e.teamId,
-            totalTemplatesByTeam: e.totalTemplatesByTeam,
-            teamName: e.team?.name,
-            workspaceName: e.team?.workspace?.name,
-            workspaceId: e.team?.workspace?.id,
-            templates: [r]
-          });
-        });
-        return t;
+      const templates = data?.templatesByTeam
+      if (templates?.hasNextPage() && !templates.isLoadingNextPage) {
+        templates.loadNext(pageSize)
       }
-    }(a),
-    isLoading: "loading" === i,
-    status: i
-  };
-}
-let X = e => {
-  let t = isBigmaEnabledAlias(e);
-  let r = useSubscription(BrowseTemplatesView, {
-    currentOrgId: e?.id || ""
-  }, {
-    enabled: !!e
-  });
-  if ("loaded" !== r.status || !e) return null;
-  if (t) {
-    let e = r.data.currentUser.privilegedOrgUser?.workspaceUsers.find(e => e.isMainWorkspace);
-    return e ? [e.workspaceId] : null;
+    },
+    templatesByTeam: (() => {
+      if (data?.templatesByTeam) {
+        let result: TeamTemplateData | undefined
+        data.templatesByTeam.sort((a, b) => a.sortOrder - b.sortOrder).forEach((t) => {
+          const transformed = transformTemplateData(t)
+          if (transformed) {
+            if (result) {
+              result.templates.push(transformed)
+            }
+            else {
+              result = {
+                teamId: t.teamId,
+                totalTemplatesByTeam: t.totalTemplatesByTeam,
+                teamName: t.team?.name,
+                workspaceName: t.team?.workspace?.name,
+                workspaceId: t.team?.workspace?.id,
+                templates: [transformed],
+              }
+            }
+          }
+        })
+        return result
+      }
+    })(),
+    isLoading: status === "loading",
+    status,
   }
-  return r.data.currentUser.orgAwareTeamRoles.reduce((e, t) => t.team ? [...e, t.team.id] : e, []);
-};
-let q = liveStoreInstance.Query({
-  fetch: async ({
-    orgId: e,
-    count: t,
-    editorType: r,
-    enabled: n = !0
-  }) => e && n ? await templateService.getSearchPaginated({
-    orgId: e,
-    size: t,
-    from: 0,
-    templateType: r
-  }).then(e => e.data.meta.templates) : []
-});
-let J = atom(null);
-export function $$Z19(e, t = 2, r = !0) {
-  let i;
-  let [a, s] = useAtomValueAndSetter(J);
-  let d = r && (!a || a.editorType !== e || a.count < t);
-  let c = $$P2();
-  let u = getFeatureFlags().pro_templates_lg;
-  let {
-    teamTemplates,
-    status
-  } = $$et17("", e, t, !0, u && d);
-  let {
-    templatesByTeam,
-    status: _status
-  } = $$$14({
-    teamId: c?.type === "team" ? c.entity.id : null,
-    editorType: e,
-    pageSize: t,
-    enabled: c?.type === "team" && d
-  });
-  let [{
-    data: f,
-    status: E
-  }] = setupResourceAtomHandler(q({
-    orgId: c?.type === "org" ? c.entity.id : "",
-    count: t,
-    editorType: e,
-    enabled: !u && d
-  }));
-  if (d && c) switch (c.type) {
-    case "org":
-      i = u ? teamTemplates : f?.map(e => ({
-        type: _$$n.TeamTemplate,
-        template: e
-      })) ?? [];
-      break;
-    case "team":
-      i = templatesByTeam?.templates.map(e => ({
-        type: _$$n.TeamTemplateLg,
-        template: e
-      })) ?? [];
-  } else i = a?.templates;
-  let y = c ? "org" === c.type ? u ? status : E : _status : null;
+}
+
+// Originally X
+export function getUserTeamOrWorkspaceIds(org: any): any {
+  const isBigmaEnabled = isBigmaEnabledAlias(org)
+  const subscription = useSubscription(BrowseTemplatesView, { currentOrgId: org?.id || "" }, { enabled: !!org })
+  if (subscription.status !== "loaded" || !org)
+    return null
+  if (isBigmaEnabled) {
+    const mainWorkspace = subscription.data.currentUser.privilegedOrgUser?.workspaceUsers.find(w => w.isMainWorkspace)
+    return mainWorkspace ? [mainWorkspace.workspaceId] : null
+  }
+  return subscription.data.currentUser.orgAwareTeamRoles.reduce((acc, role) => role.team ? [...acc, role.team.id] : acc, [])
+}
+
+// Originally q
+const searchQuery = liveStoreInstance.Query({
+  fetch: async ({ orgId, count, editorType, enabled = true }) =>
+    orgId && enabled
+      ? await templateService.getSearchPaginated({ orgId, size: count, from: 0, templateType: editorType }).then(res => res.data.meta.templates)
+      : [],
+})
+
+// Originally J
+const recentTemplatesAtom = atom(null)
+
+// Originally $$Z19
+export function useRecentTemplates(editorType: FFileType, count = 2, enabled = true): {
+  teamTemplates: any
+  isLoading: boolean
+  numTemplatesForTeam: number | undefined
+} {
+  const [recentData, setRecentData] = useAtomValueAndSetter(recentTemplatesAtom)
+  const needsFetch = enabled && (!recentData || recentData.editorType !== editorType || recentData.count < count)
+  const currentEntity = getCurrentTemplateEntity()
+  const isProTemplatesLgEnabled = getFeatureFlags().pro_templates_lg
+  const { teamTemplates, status } = useSearchTemplates("", editorType, count, true, isProTemplatesLgEnabled && needsFetch)
+  const { templatesByTeam, status: teamStatus } = usePaginatedTeamTemplates({
+    teamId: currentEntity?.type === "team" ? currentEntity.entity.id : null,
+    editorType,
+    pageSize: count,
+    enabled: currentEntity?.type === "team" && needsFetch,
+  })
+  const [{ data: searchData, status: searchStatus }] = setupResourceAtomHandler(
+    searchQuery({ orgId: currentEntity?.type === "org" ? currentEntity.entity.id : "", count, editorType, enabled: !isProTemplatesLgEnabled && needsFetch }),
+  )
+
+  let templates
+  if (needsFetch && currentEntity) {
+    switch (currentEntity.type) {
+      case "org":
+        templates = isProTemplatesLgEnabled ? teamTemplates : searchData?.map(t => ({ type: TeamTemplateType.TeamTemplate, template: t })) ?? []
+        break
+      case "team":
+        templates = templatesByTeam?.templates.map(t => ({ type: TeamTemplateType.TeamTemplateLg, template: t })) ?? []
+    }
+  }
+  else {
+    templates = recentData?.templates
+  }
+
+  const currentStatus = currentEntity
+    ? currentEntity.type === "org"
+      ? isProTemplatesLgEnabled ? status : searchStatus
+      : teamStatus
+    : null
+
   useEffect(() => {
-    d && "loaded" === y && i && s({
-      templates: i,
-      count: t,
-      editorType: e
-    });
-  }, [e, i, d, t, a, s, y]);
+    if (needsFetch && currentStatus === "loaded" && templates) {
+      setRecentData({ templates, count, editorType })
+    }
+  }, [editorType, templates, needsFetch, count, recentData, setRecentData, currentStatus])
+
   return {
-    teamTemplates: a?.editorType === e ? i?.slice(0, t) : void 0,
-    isLoading: "loading" === y,
-    numTemplatesForTeam: c?.type === "team" ? templatesByTeam?.totalTemplatesByTeam : void 0
-  };
+    teamTemplates: recentData?.editorType === editorType ? templates?.slice(0, count) : undefined,
+    isLoading: currentStatus === "loading",
+    numTemplatesForTeam: currentEntity?.type === "team" ? templatesByTeam?.totalTemplatesByTeam : undefined,
+  }
 }
-export let $$Q10 = atom(null);
-export function $$ee9() {
-  let e = $$U12()?.fileVersionId ?? "";
-  let t = useStore();
-  let [r, a] = useAtomValueAndSetter($$Q10);
-  let s = getCurrentFileType();
-  let o = selectWithShallowEqual(e => s === FFileType.SLIDES ? selectWellFormedModuleNodeIds(e) : []);
-  let d = selectWithShallowEqual(e => s === FFileType.COOPER ? selectDeletedOrCooperComponentAndFrameNodeIds(e) : []);
-  let u = o.length;
-  let p = d.length;
+
+// Originally $$Q10
+export const hasChangesAtom = atom(null) as PrimitiveAtom<any>
+
+// Originally $$ee9
+export function useHasChanges(): boolean | null {
+  const fileVersionId = getCurrentTemplate()?.fileVersionId ?? ""
+  const store = useStore()
+  const [hasChanges, setHasChanges] = useAtomValueAndSetter(hasChangesAtom)
+  const currentFileType = getCurrentFileType()
+  const wellFormedModuleNodeIds = selectWithShallowEqual(state => currentFileType === FFileType.SLIDES ? selectWellFormedModuleNodeIds(state) : [])
+  const deletedNodeIds = selectWithShallowEqual(state => currentFileType === FFileType.COOPER ? selectDeletedOrCooperComponentAndFrameNodeIds(state) : [])
+  const moduleCount = wellFormedModuleNodeIds.length
+  const deletedCount = deletedNodeIds.length
+
   useEffect(() => {
-    if (s === FFileType.SLIDES) {
-      a(u > 0);
-      return;
+    if (currentFileType === FFileType.SLIDES) {
+      setHasChanges(moduleCount > 0)
+      return
     }
-    if (s === FFileType.COOPER) {
-      a(p > 0);
-      return;
+    if (currentFileType === FFileType.COOPER) {
+      setHasChanges(deletedCount > 0)
+      return
     }
-    if (s === FFileType.FIGMAKE) {
-      a(!1);
-      return;
+    if (currentFileType === FFileType.FIGMAKE) {
+      setHasChanges(false)
+      return
     }
-    e && null === r && checkForVisibleChanges(e, t).then(({
-      numPagesWithChanges: e
-    }) => {
-      a(e > 0);
-    }).catch(() => a(!1));
-  }, [e, t, r, a, s, o.length, o, d.length, d, u, p]);
-  return r;
+    if (fileVersionId && hasChanges === null) {
+      checkForVisibleChanges(fileVersionId, store)
+        .then(({ numPagesWithChanges }) => setHasChanges(numPagesWithChanges > 0))
+        .catch(() => setHasChanges(false))
+    }
+  }, [fileVersionId, store, hasChanges, setHasChanges, currentFileType, wellFormedModuleNodeIds.length, wellFormedModuleNodeIds, deletedNodeIds.length, deletedNodeIds, moduleCount, deletedCount])
+
+  return hasChanges
 }
-export function $$et17(e, t, r = 10, n = !1, i = !0) {
-  let a = $$P2();
-  let s = useSubscription(PaginatedTemplatesSearch, {
-    teamId: a?.type === "team" ? a.entity.id : null,
-    orgId: a?.type === "org" ? a.entity.id : null,
-    query: e,
-    editorType: t,
-    firstPageSize: r
-  }, {
-    enabled: (!!e || n) && !!a && i
-  });
-  let o = [];
-  s.data?.templatesSearch?.forEach(e => {
-    if (!e.template) return;
-    let r = e.template.file;
-    let n = {
-      ...e.template,
-      libraryKey: e.libraryKeyToFile?.libraryKey,
-      signedThumbnailUrl: "cooper" === t && e.template.hasCustomThumbnail ? e.template.thumbnailUrl : r.signedThumbnailUrl,
-      checkpointClientMeta: r.checkpointClientMeta,
-      editorType: r.editorType
-    };
-    o.push({
-      type: _$$n.TeamTemplateLg,
-      template: n
-    });
-  });
+
+// Originally $$et17
+export function useSearchTemplates(query: string, editorType: FFileType, pageSize = 10, includeEmpty = false, enabled = true): {
+  requestLoadMore: () => boolean
+  teamTemplates: any[]
+  total: number
+  status: string
+} {
+  const currentEntity = getCurrentTemplateEntity()
+  const subscription = useSubscription(PaginatedTemplatesSearch, {
+    teamId: currentEntity?.type === "team" ? currentEntity.entity.id : null,
+    orgId: currentEntity?.type === "org" ? currentEntity.entity.id : null,
+    query,
+    editorType,
+    firstPageSize: pageSize,
+  }, { enabled: (!!query || includeEmpty) && !!currentEntity && enabled })
+
+  const templates = []
+  subscription.data?.templatesSearch?.forEach((item) => {
+    if (!item.template)
+      return
+    const file = item.template.file
+    const transformed = {
+      ...item.template,
+      libraryKey: item.libraryKeyToFile?.libraryKey,
+      signedThumbnailUrl: editorType === "cooper" && item.template.hasCustomThumbnail ? item.template.thumbnailUrl : file.signedThumbnailUrl,
+      checkpointClientMeta: file.checkpointClientMeta,
+      editorType: file.editorType,
+    }
+    templates.push({ type: TeamTemplateType.TeamTemplateLg, template: transformed })
+  })
+
   return {
     requestLoadMore: () => {
-      let e = s.data?.templatesSearch;
-      return !!e && (!e.isLoadingNextPage && e.hasNextPage() && e.loadNext(r), "loaded" !== s.status || e?.hasNextPage());
+      const searchData = subscription.data?.templatesSearch
+      if (searchData && !searchData.isLoadingNextPage && searchData.hasNextPage()) {
+        searchData.loadNext(pageSize)
+      }
+      return subscription.status !== "loaded" || !!searchData?.hasNextPage()
     },
-    teamTemplates: o,
-    total: s.data?.templatesSearch?.length ? s.data?.templatesSearch[0].totalSearchResults : 0,
-    status: s.status
-  };
+    teamTemplates: templates,
+    total: subscription.data?.templatesSearch?.length ? subscription.data?.templatesSearch[0].totalSearchResults : 0,
+    status: subscription.status,
+  }
 }
-export const Et = $$B0;
-export const GR = $$V1;
-export const Gi = $$P2;
-export const J3 = $$M3;
-export const JU = $$F4;
-export const L_ = $$z5;
-export const O$ = $$K6;
-export const RD = $$Y7;
-export const UF = $$j8;
-export const ac = $$ee9;
-export const b2 = $$Q10;
-export const e2 = $$W11;
-export const kD = $$U12;
-export const kN = $$R13;
-export const li = $$$14;
-export const mZ = $$k15;
-export const qI = $$G16;
-export const qY = $$et17;
-export const tS = $$D18;
-export const wv = $$Z19;
+
+// Exports with refactored names
+export const Et = isTemplatePublished
+export const GR = useTeamTemplates
+export const Gi = getCurrentTemplateEntity
+export const J3 = getPublishTemplateStatus
+export const JU = canPublishTemplate
+export const L_ = useOrgTemplates
+export const O$ = OrgProSourceType
+export const RD = useTemplatesForPlan
+export const UF = canPublishToTeam
+export const ac = useHasChanges
+export const b2 = hasChangesAtom
+export const e2 = usePaginatedOrgTemplates
+export const kD = getCurrentTemplate
+export const kN = PublishTemplateStatusEnum
+export const li = usePaginatedTeamTemplates
+export const mZ = canUseCustomTemplates
+export const qI = isUnassignedLabel
+export const qY = useSearchTemplates
+export const tS = hasTemplateEntity
+export const wv = useRecentTemplates

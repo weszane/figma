@@ -7,7 +7,7 @@ import { fetchVoiceUsersThunk, toggleWidget, clearActiveCall } from "../905/9897
 import { multiplayerSessionManager } from "../905/977824";
 import { _i } from "../figma_app/578768";
 import { selectCurrentUser } from "../905/372672";
-import { h as _$$h } from "../figma_app/275739";
+import { VoiceCallManager } from "../figma_app/275739";
 import { Lk } from "../figma_app/122682";
 function h() {
   let e = useSelector(e => e.multiplayer).allUsers;
@@ -115,7 +115,7 @@ export function $$E3(e) {
   let r = Lk();
   let a = useSelector(t => e && e in t.voice.activeCall);
   useEffect(() => () => {
-    r && a && (t(toggleWidget(!1)), _$$h.leave(), e && t(clearActiveCall({
+    r && a && (t(toggleWidget(!1)), VoiceCallManager.leave(), e && t(clearActiveCall({
       fileKey: e
     })));
   }, [r, a, t, e]);

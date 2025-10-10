@@ -8,7 +8,7 @@ import { getRepoById } from "../905/760074";
 import { Ad } from "../figma_app/2023";
 import { FileShareModalPermissionsV3, FileShareModalCurrentUserPermissions, TeamCanEdit, ResourceConnectionSharingGroupUsersByFile } from "../figma_app/43951";
 import { getFullscreenNodeId } from "../figma_app/193867";
-import { Nf } from "../figma_app/357047";
+import { getCurrentPageId } from "../figma_app/357047";
 export function $$h0({
   fileKey: e,
   file: t
@@ -60,7 +60,7 @@ export function $$f3({
 export function $$_2() {
   return useSelector(e => {
     if (e.mirror?.appModel?.pagesList?.length > 1) {
-      let t = e.mirror.sceneGraph.get(Nf(e.mirror.appModel));
+      let t = e.mirror.sceneGraph.get(getCurrentPageId(e.mirror.appModel));
       if (t) return t.name;
     }
   });

@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Multiplayer } from "../figma_app/763686";
 import { postUserFlag } from "../905/985254";
-import { h } from "../figma_app/275739";
+import { VoiceCallManager } from "../figma_app/275739";
 export let $$l0 = {
   MAIN_GUIDE: "https://help.figma.com/hc/articles/1500004414622",
   TROUBLESHOOT: "https://help.figma.com/hc/articles/4402390108951",
@@ -30,7 +30,7 @@ export function $$c2() {
   let [e, t] = useState(null);
   let r = useSelector(e => e.voice.showWidget);
   useEffect(() => {
-    r && !e && t(h.getInstance());
+    r && !e && t(VoiceCallManager.getInstance());
   }, [r, e]);
   return e;
 }

@@ -6,7 +6,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { LandingFormTextInput } from "../905/773401";
 import { TabLoop, TabLoopDisplayAs } from "../905/64217";
@@ -131,21 +131,21 @@ function v({
       children: renderI18nText("file_browser.request_access_modal.you", {
         username: r.name
       })
-    }), jsxs(_$$bL, {
+    }), jsxs(SelectGroupLabel, {
       value: e.toString(),
       onChange: e => {
         t(parseInt(e));
       },
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: getI18nString("file_browser.settings.access")
         }),
         disabled: !a
-      }), jsxs(mc, {
-        children: [a && jsx(c$, {
+      }), jsxs(SelectContainer, {
+        children: [a && jsx(SelectOptionReset, {
           value: AccessLevelEnum.VIEWER.toString(),
           children: getI18nString("file_browser.request_access_modal.can_view")
-        }), jsx(c$, {
+        }), jsx(SelectOptionReset, {
           value: AccessLevelEnum.EDITOR.toString(),
           children: getI18nString("file_browser.request_access_modal.can_edit")
         })]

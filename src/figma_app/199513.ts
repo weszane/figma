@@ -1,640 +1,790 @@
-import { unstable_batchedUpdates } from "react-redux";
-import { noop } from 'lodash-es';
-import { isNotNullish } from "../figma_app/95419";
-import { getFeatureFlags } from "../905/601108";
-import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { z as _$$z } from "../905/239603";
-import { getCurrentLiveGraphClient } from "../905/761735";
-import { createAtomSetter } from "../figma_app/566371";
-import { getRequest, sendWithRetry } from "../905/910117";
-import { handlePromiseError, FlashActions } from "../905/573154";
-import { getI18nString } from "../905/303541";
-import { VisualBellActions } from "../905/302958";
-import { beginCreateNewFolder } from "../905/34809";
-import { p as _$$p } from "../905/282607";
-import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { selectViewAction } from "../905/929976";
-import { batchPutFileAction } from "../figma_app/78808";
-import { folderPutAction, folderPostAction, folderLoadedAction } from "../figma_app/598926";
-import { showModalHandler } from "../905/156213";
-import { batchPutReposInSameFolder } from "../905/466026";
-import { roleBatchPutAction } from "../905/98702";
-import { trackFolderEvent } from "../figma_app/314264";
-import { consumptionPaywallUtils } from "../905/224";
-import { validateFolderName } from "../figma_app/528509";
-import { convertTeamToRaw } from "../905/628874";
-import { FFolderType } from "../figma_app/191312";
-import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951";
-import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695";
-import { checkTeamFileRestrictions, AddOperationType } from "../figma_app/598018";
-import { UpsellModalType } from "../905/165519";
-import { convertLiveGraphFile } from "../905/970170";
-import { convertToFolder } from "../905/438864";
-import { PageFolderFile } from "../905/652992";
-import { fileEntityModel } from "../905/806985";
-import { FolderSchema } from "../905/316062";
-import { repositoryDefinition } from "../905/954314";
-import { AccessSchema } from "../905/557142";
-import { EntityType } from "../figma_app/707808";
-import { fileActionEnum } from "../figma_app/630077";
-import { folderAPIInstance } from "../905/522628";
-import { teamAPIClient } from "../905/834575";
-import { z as _$$z3 } from "../905/40865";
-import { ConsumptionPaywallModalPlansPricing } from "../905/739964";
-import { o as _$$o } from "../905/29370";
-let Y = createOptimistThunk((e, {
-  folderId: t,
-  folderData: r
-}) => {
-  unstable_batchedUpdates(() => {
-    e.getState().folders[t] ? e.dispatch(folderPutAction({
-      folder: r.folder
-    })) : e.dispatch(folderPostAction(r.folder));
-    e.dispatch(batchPutFileAction({
-      files: r.files,
-      subscribeToRealtime: !1
-    }));
-    e.dispatch(batchPutReposInSameFolder({
-      repos: r.repos
-    }));
-    e.dispatch(roleBatchPutAction({
-      roles: r.roles
-    }));
-    e.dispatch(folderLoadedAction({
-      folderId: t,
-      state: "loaded"
-    }));
-  });
-});
-let $ = liveStoreInstance.Query({
-  fetch: async (e, {
-    reduxStore: t
-  }) => {
-    let r = await folderAPIInstance.getFiles({
-      folderId: e.folderId,
-      shouldShowOnlyTrashedFiles: !!e.shouldShowOnlyTrashedFiles
-    });
-    t.dispatch(batchPutFileAction({
-      files: r.data.meta.files
-    }));
-    t.dispatch(batchPutReposInSameFolder({
-      repos: r.data.meta.repos
-    }));
-    t.dispatch(roleBatchPutAction({
-      roles: r.data.meta.roles
-    }));
-    t.dispatch(folderLoadedAction({
-      folderId: e.folderId,
-      state: "loaded"
-    }));
-    return r.data.meta;
-  },
-  schema: e => e.object({
-    folder: FolderSchema.nullable(),
-    files: e.array(fileEntityModel),
-    repos: e.array(repositoryDefinition)
-  }),
-  sync: ({
-    folderId: e
-  }, {
-    mutate: t,
-    livegraphClient: r
-  }) => {
-    let n = new Date(new Date().setHours(0, 0, 0, 0));
-    return r.subscribe(FilesForProject, {
-      projectId: e,
-      updatedAtTimestamp: n
-    }, r => {
-      t(t => {
-        let n = t.files;
-        (r.data?.project?.fileUpdates || []).filter(t => t.folderId === e).forEach(e => {
-          n.find(t => t.key === e.key) || t.files.unshift(convertLiveGraphFile(e));
-        });
-      });
-    });
-  },
-  syncObjects: !0,
-  output: ({
-    data: e,
-    args: t
-  }) => {
-    let r = e.files.filter(e => e.folder_id === t.folderId && (t.shouldShowOnlyTrashedFiles && e.trashed_at && e.trashed_with_parent === FFolderType.FOLDER || !t.shouldShowOnlyTrashedFiles && !e.trashed_at) && !e.file_repo_id);
-    let n = e.repos.filter(e => e.folder_id === t.folderId && (t.shouldShowOnlyTrashedFiles && e.trashed_at && e.trashed_with_parent === FFolderType.FOLDER || !t.shouldShowOnlyTrashedFiles && !e.trashed_at));
-    let i = e.repos.filter(e => !e.trashed_at && !e.deleted_at).map(t => e.files.find(e => e.key === t.default_file_key)).filter(isNotNullish);
-    let s = {};
-    e.repos.forEach(t => {
-      let r = e.files.filter(e => e.file_repo_id === t.id).sort((e, t) => new Date(t.touched_at).getTime() - new Date(e.touched_at).getTime());
-      s[t.id] = r;
-    });
-    return {
-      folder: e.folder,
-      files: r,
-      repos: n,
-      previewFiles: [...r, ...i],
-      filesByRepoId: s
-    };
+import type { AjaxResponse } from "../905/910117"
+import { noop } from 'lodash-es'
+import { batch } from "react-redux"
+import { z } from "zod"
+import { consumptionPaywallUtils } from "../905/224"
+import { o as _$$o } from "../905/29370"
+import { beginCreateNewFolder } from "../905/34809"
+import { z as _$$z3 } from "../905/40865"
+import { roleBatchPutAction } from "../905/98702"
+import { showModalHandler } from "../905/156213"
+import { UpsellModalType } from "../905/165519"
+import { p as _$$p } from "../905/282607"
+import { VisualBellActions } from "../905/302958"
+import { getI18nString } from "../905/303541"
+import { FolderSchema } from "../905/316062"
+import { createOptimistAction, createOptimistThunk } from "../905/350402"
+import { convertToFolder } from "../905/438864"
+import { batchPutReposInSameFolder } from "../905/466026"
+import { folderAPIInstance } from "../905/522628"
+import { AccessSchema } from "../905/557142"
+import { FlashActions, handlePromiseError } from "../905/573154"
+import { getFeatureFlags } from "../905/601108"
+import { convertTeamToRaw } from "../905/628874"
+import { PageFolderFile } from "../905/652992"
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456"
+import { liveStoreInstance, setupResourceAtomHandler } from "../905/713695"
+import { ConsumptionPaywallModalPlansPricing } from "../905/739964"
+import { getCurrentLiveGraphClient } from "../905/761735"
+import { fileEntityModel } from "../905/806985"
+import { teamAPIClient } from "../905/834575"
+import { getRequest, sendWithRetry } from "../905/910117"
+import { selectViewAction } from "../905/929976"
+import { repositoryDefinition } from "../905/954314"
+import { convertLiveGraphFile } from "../905/970170"
+import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951"
+import { batchPutFileAction } from "../figma_app/78808"
+import { isNotNullish } from "../figma_app/95419"
+import { FFolderType } from "../figma_app/191312"
+import { trackFolderEvent } from "../figma_app/314264"
+import { validateFolderName } from "../figma_app/528509"
+import { createAtomSetter } from "../figma_app/566371"
+import { AddOperationType, checkTeamFileRestrictions } from "../figma_app/598018"
+import { folderLoadedAction, folderPostAction, folderPutAction } from "../figma_app/598926"
+import { fileActionEnum } from "../figma_app/630077"
+import { EntityType } from "../figma_app/707808"
+
+// Refactored code: renamed variables, added types, simplified logic, improved readability
+// Origin: $$Y -> updateFolderDataThunk
+
+interface FolderDataPayload {
+  folderId: string
+  folderData: {
+    folder: any // TODO: Replace with proper Folder type
+    files: any[] // TODO: Replace with proper File type
+    repos: any[] // TODO: Replace with proper Repo type
+    roles: any[] // TODO: Replace with proper Role type
   }
-});
-export function $$X2(e, t = !0, r = !1) {
-  let [n] = setupResourceAtomHandler($({
-    folderId: e,
-    shouldShowOnlyTrashedFiles: r
-  }), {
-    enabled: t
-  });
-  return n;
 }
-let q = _$$z.object({
+
+export const updateFolderDataThunk = createOptimistThunk(
+  (
+    storeContext,
+    { folderId, folderData }: FolderDataPayload,
+  ) => {
+    batch(() => {
+      const folderExists = storeContext.getState().folders[folderId]
+
+      if (folderExists) {
+        storeContext.dispatch(folderPutAction({ folder: folderData.folder }))
+      }
+      else {
+        storeContext.dispatch(folderPostAction(folderData.folder))
+      }
+
+      storeContext.dispatch(batchPutFileAction({
+        files: folderData.files,
+        subscribeToRealtime: false,
+      }))
+
+      storeContext.dispatch(batchPutReposInSameFolder({ repos: folderData.repos }))
+      storeContext.dispatch(roleBatchPutAction({ roles: folderData.roles }))
+      storeContext.dispatch(folderLoadedAction({ folderId, state: "loaded" }))
+    })
+  },
+)
+interface FolderRes {
+  folder: z.infer<typeof FolderSchema>
+  files: z.infer<typeof fileEntityModel>[]
+  repos: z.infer<typeof repositoryDefinition>[]
+  roles: z.infer<typeof AccessSchema>[]
+}
+// Origin: $ -> folderQuery
+export const folderQuery = liveStoreInstance.Query<any, any, FolderRes>({
+  fetch: async (params: { folderId: string, shouldShowOnlyTrashedFiles: boolean }, { reduxStore }) => {
+    const response = await folderAPIInstance.getFiles({
+      folderId: params.folderId,
+      shouldShowOnlyTrashedFiles: !!params.shouldShowOnlyTrashedFiles,
+    })
+
+    const metaData = response.data.meta as FolderRes
+
+    reduxStore.dispatch(batchPutFileAction({ files: metaData.files }))
+    reduxStore.dispatch(batchPutReposInSameFolder({ repos: metaData.repos }))
+    reduxStore.dispatch(roleBatchPutAction({ roles: metaData.roles }))
+    reduxStore.dispatch(folderLoadedAction({ folderId: params.folderId, state: "loaded" }))
+
+    return metaData
+  },
+
+  schema: (schemaBuilder: { object: (arg0: { folder: z.ZodNullable<z.ZodObject<any, z.UnknownKeysParam, z.ZodTypeAny, { [x: string]: any }, { [x: string]: any }>>, files: any, repos: any }) => any, array: (arg0: z.ZodObject<any, z.UnknownKeysParam, z.ZodTypeAny, { [x: string]: any }, { [x: string]: any }>) => any }) => schemaBuilder.object({
+    folder: FolderSchema.nullable(),
+    files: schemaBuilder.array(fileEntityModel),
+    repos: schemaBuilder.array(repositoryDefinition),
+  }),
+
+  sync: ({ folderId }, { mutate, livegraphClient }) => {
+    const today = new Date(new Date().setHours(0, 0, 0, 0))
+
+    return livegraphClient.subscribe(FilesForProject, {
+      projectId: folderId,
+      updatedAtTimestamp: today,
+    }, (subscriptionData) => {
+      mutate((currentState) => {
+        const fileUpdates = subscriptionData.data?.project?.fileUpdates || []
+        const filteredUpdates = fileUpdates.filter(update => update.folderId === folderId)
+
+        filteredUpdates.forEach((update) => {
+          const fileExists = currentState.files.find(file => file.key === update.key)
+          if (!fileExists) {
+            currentState.files.unshift(convertLiveGraphFile(update))
+          }
+        })
+      })
+    })
+  },
+
+  syncObjects: true,
+
+  output: ({ data, args }) => {
+    const filterFiles = (showTrashed: boolean) =>
+      data.files.filter(file =>
+        file.folder_id === args.folderId
+        && (showTrashed && file.trashed_at && file.trashed_with_parent === FFolderType.FOLDER
+          || !showTrashed && !file.trashed_at)
+        && !file.file_repo_id,
+      )
+
+    const filterRepos = (showTrashed: boolean) =>
+      data.repos.filter(repo =>
+        repo.folder_id === args.folderId
+        && (showTrashed && repo.trashed_at && repo.trashed_with_parent === FFolderType.FOLDER
+          || !showTrashed && !repo.trashed_at),
+      )
+
+    const activeRepos = data.repos.filter(repo => !repo.trashed_at && !repo.deleted_at)
+    const previewFiles = activeRepos
+      .map(repo => data.files.find(file => file.key === repo.default_file_key))
+      .filter(isNotNullish)
+
+    const filesByRepoId: Record<string, any[]> = {}
+    data.repos.forEach((repo) => {
+      const repoFiles = data.files
+        .filter(file => file.file_repo_id === repo.id)
+        .sort((a, b) => new Date(b.touched_at).getTime() - new Date(a.touched_at).getTime())
+      filesByRepoId[repo.id] = repoFiles
+    })
+
+    const files = filterFiles(args.shouldShowOnlyTrashedFiles)
+    const repos = filterRepos(args.shouldShowOnlyTrashedFiles)
+
+    return {
+      folder: data.folder,
+      files,
+      repos,
+      previewFiles: [...files, ...previewFiles],
+      filesByRepoId,
+    }
+  },
+})
+
+// Origin: $$X2 -> useFolderQuery
+export function useFolderQuery(folderId: string, enabled = true, showOnlyTrashed = false) {
+  const [queryResult] = setupResourceAtomHandler(
+    folderQuery({ folderId, shouldShowOnlyTrashedFiles: showOnlyTrashed }),
+    { enabled },
+  )
+  return queryResult
+}
+
+// Schema definition for paginated query
+const PaginatedFolderDataSchema = z.object({
   folder: FolderSchema.nullable(),
-  files: _$$z.array(fileEntityModel),
-  repos: _$$z.array(repositoryDefinition),
-  roles: _$$z.array(AccessSchema)
-});
-let $$J0 = liveStoreInstance.PaginatedQuery({
-  fetch: async (e, {
-    pageParam: t,
-    reduxStore: r
-  }) => {
-    let n;
-    if (t) n = t;else {
-      let {
+  files: z.array(fileEntityModel),
+  repos: z.array(repositoryDefinition),
+  roles: z.array(AccessSchema),
+})
+
+// Origin: $$J0 -> paginatedFolderQuery
+export const paginatedFolderQuery = liveStoreInstance.PaginatedQuery({
+  fetch: async (params, { pageParam, reduxStore }) => {
+    let url: string
+
+    if (pageParam) {
+      url = pageParam
+    }
+    else {
+      const {
         folderId,
-        shouldShowOnlyTrashedFiles = !1,
+        shouldShowOnlyTrashedFiles = false,
         page_size = 50,
-        skipFetchingRepoBranches = !1,
+        skipFetchingRepoBranches = false,
         file_type = "",
-        ...o
-      } = e;
-      let l = new URLSearchParams({
-        ...o,
+        ...restParams
+      } = params
+
+      const searchParams = new URLSearchParams({
+        ...restParams,
         fetch_only_trashed_with_folder_files: shouldShowOnlyTrashedFiles.toString(),
         page_size: page_size.toString(),
         skip_fetching_repo_branches: skipFetchingRepoBranches.toString(),
-        file_type
-      }).toString();
-      n = `/api/folders/${folderId}/paginated_files?${l}`;
+        file_type,
+      }).toString()
+
+      url = `/api/folders/${folderId}/paginated_files?${searchParams}`
     }
-    let i = await getRequest(n);
-    let a = i.data.meta;
-    r.dispatch(batchPutFileAction({
-      files: a.files
-    }));
-    r.dispatch(batchPutReposInSameFolder({
-      repos: a.repos
-    }));
-    r.dispatch(roleBatchPutAction({
-      roles: a.roles
-    }));
-    r.dispatch(folderLoadedAction({
-      folderId: e.folderId,
-      state: "loaded"
-    }));
+
+    const response = await getRequest(url) as any
+    const metaData = response.data.meta as z.infer<typeof PaginatedFolderDataSchema>
+
+    reduxStore.dispatch(batchPutFileAction({ files: metaData.files }))
+    reduxStore.dispatch(batchPutReposInSameFolder({ repos: metaData.repos }))
+    reduxStore.dispatch(roleBatchPutAction({ roles: metaData.roles }))
+    reduxStore.dispatch(folderLoadedAction({ folderId: params.folderId, state: "loaded" }))
+
     return {
-      data: i.data.meta,
-      nextPage: i.data.pagination?.next_page,
-      prevPage: i.data.pagination?.prev_page
-    };
+      data: metaData,
+      nextPage: response.data.pagination?.next_page,
+      prevPage: response.data.pagination?.prev_page,
+    }
   },
-  joinPages: e => ({
-    files: e.flatMap(e => e.data.files),
-    repos: e.flatMap(e => e.data.repos),
-    roles: e.flatMap(e => e.data.roles),
-    folder: e.length > 0 ? e[e.length - 1].data.folder : null
+
+  joinPages: pages => ({
+    files: pages.flatMap(page => page.data.files),
+    repos: pages.flatMap(page => page.data.repos),
+    roles: pages.flatMap(page => page.data.roles),
+    folder: pages.length > 0 ? pages[pages.length - 1].data.folder : null,
   }),
-  sync: ({
-    folderId: e
-  }, {
-    mutate: t,
-    livegraphClient: r
-  }) => {
-    let n = new Date(new Date().setHours(0, 0, 0, 0));
-    return r.subscribe(FilesForProject, {
-      projectId: e,
-      updatedAtTimestamp: n
-    }, r => {
-      t(t => {
-        let n = t[0];
-        n && (r.data?.project?.fileUpdates || []).filter(t => t.folderId === e).forEach(e => {
-          t.find(t => !!t.files.find(t => t.key === e.key)) || n.files.unshift(convertLiveGraphFile(e));
-        });
-      });
-    });
-  },
-  output: ({
-    data: e,
-    args: t
-  }) => {
-    let r = e.files.filter(e => {
-      let r = t.shouldShowOnlyTrashedFiles && e.trashed_at && e.trashed_with_parent === FFolderType.FOLDER || !t.shouldShowOnlyTrashedFiles && !e.trashed_at;
-      let n = t.skipFetchingRepoBranches && !e.source_file_key || !e.file_repo_id;
-      return e.folder_id === t.folderId && r && n;
-    });
-    let n = e.repos.filter(e => e.folder_id === t.folderId && (t.shouldShowOnlyTrashedFiles && e.trashed_at && e.trashed_with_parent === FFolderType.FOLDER || !t.shouldShowOnlyTrashedFiles && !e.trashed_at));
-    let i = {};
-    e.repos.forEach(t => {
-      let r = e.files.filter(e => e.file_repo_id === t.id).sort((e, t) => new Date(t.touched_at).getTime() - new Date(e.touched_at).getTime());
-      i[t.id] = r;
-    });
-    return {
-      folder: e.folder,
-      files: r,
-      repos: n,
-      filesByRepoId: i
-    };
-  },
-  schema: q,
-  syncObjects: !0
-});
-let $$Z10 = createOptimistThunk(async (e, {
-  folderId: t,
-  loadedFolders: r
-}) => {
-  if (!r[t]) {
-    e.dispatch(folderLoadedAction({
-      folderId: t,
-      state: "loading"
-    }));
-    try {
-      let r = (await folderAPIInstance.getFiles({
-        folderId: t
-      })).data.meta;
-      e.dispatch(Y({
-        folderId: t,
-        folderData: r
-      }));
-    } catch (r) {
-      404 === r.status || 403 === r.status ? e.dispatch(selectViewAction({
-        view: "resourceUnavailable",
-        resourceType: EntityType.PROJECT
-      })) : r.status >= 400 && r.status < 500 ? e.dispatch(folderLoadedAction({
-        folderId: t,
-        state: "loaded"
-      })) : e.dispatch(folderLoadedAction({
-        folderId: t,
-        state: null
-      }));
-    }
-  }
-});
-let $$Q8 = liveStoreInstance.Query({
-  fetch: async e => (await teamAPIClient.getFolders({
-    teamId: e.teamId
-  })).data.meta.folder_rows,
-  schema: e => e.array(FolderSchema.extend({
-    touched_at: e.string()
-  })),
-  syncObjects: !0,
-  enabled: e => !!e.teamId,
-  sync: ({
-    teamId: e
-  }, {
-    mutate: t,
-    livegraphClient: r
-  }) => {
-    if (!e || !getFeatureFlags().team_page_folder_creation_live_updates) return noop;
-    let n = new Date(new Date().setHours(0, 0, 0, 0));
-    return r.subscribe(TeamFoldersQuerySyncView, {
-      teamId: e,
-      updatedAtTimestamp: n
-    }, r => {
-      t(t => {
-        (r.data?.team?.projectUpdates ?? []).filter(t => t.teamId === e).forEach(e => {
-          t.find(t => t.id === e.id) || t.push({
-            ...convertToFolder(e),
-            touched_at: e.updatedAt.toISOString()
-          });
-        });
-      });
-    });
-  },
-  output: ({
-    data: e
-  }) => e.filter(e => !(e.trashed_at || e.deleted_at))
-});
-let $$ee5 = liveStoreInstance.Mutation((e, {
-  reduxStore: t
-}) => folderAPIInstance.permanentlyDelete({
-  folderId: e.folderId
-}).then(() => {
-  t.dispatch(VisualBellActions.enqueue({
-    message: getI18nString("file_browser.file_browser_actions.folder_deleted_forever")
-  }));
-}));
-let $$et1 = liveStoreInstance.Mutation(({
-  folderId: e
-}, {
-  objects: t,
-  reduxStore: r
-}) => {
-  let n = folderAPIInstance.trash({
-    folderId: e
-  }).then(() => {
-    t.Folder.update(e, e => {
-      e.trashed_at = Date.now().toString();
-    });
-    r.dispatch(VisualBellActions.enqueue({
-      message: getI18nString("file_browser.file_browser_actions.folder_trashed")
-    }));
-  });
-  r.dispatch(handlePromiseError({
-    promise: n,
-    fallbackError: getI18nString("file_browser.api_folder.error_when_moving_to_trash")
-  }));
-  getCurrentLiveGraphClient().optimisticallyUpdate({
-    Project: {
-      [e]: {
-        trashedAt: new Date()
-      }
-    }
-  }, n);
-});
-let $$er11 = liveStoreInstance.Mutation(({
-  folderId: e,
-  team: t
-}, {
-  objects: r,
-  reduxStore: n
-}) => {
-  let i = folderAPIInstance.restore({
-    folderId: e
-  }).then(() => {
-    r.Folder.update(e, e => {
-      e.trashed_at = null;
-    });
-    n.dispatch(VisualBellActions.enqueue({
-      message: getI18nString("file_browser.file_browser_actions.folder_restored"),
-      button: {
-        text: getI18nString("visual_bell.show_in_toast", {
-          destination: t?.name ?? "Recents"
-        }),
-        action: () => {
-          t ? n.dispatch(selectViewAction({
-            view: "team",
-            teamId: t.id
-          })) : n.dispatch(selectViewAction({
-            view: "recentsAndSharing"
-          }));
+
+  sync: ({ folderId }, { mutate, livegraphClient }) => {
+    const today = new Date(new Date().setHours(0, 0, 0, 0))
+
+    return livegraphClient.subscribe(FilesForProject, {
+      projectId: folderId,
+      updatedAtTimestamp: today,
+    }, (subscriptionData) => {
+      mutate((currentState) => {
+        const firstPage = currentState[0]
+        if (firstPage) {
+          const fileUpdates = subscriptionData.data?.project?.fileUpdates || []
+          const filteredUpdates = fileUpdates.filter(update => update.folderId === folderId)
+
+          filteredUpdates.forEach((update) => {
+            const pageContainsFile = currentState.find(page =>
+              !!page.files.find(file => file.key === update.key),
+            )
+
+            if (!pageContainsFile) {
+              firstPage.files.unshift(convertLiveGraphFile(update))
+            }
+          })
         }
-      }
-    }));
-  });
-  n.dispatch(handlePromiseError({
-    promise: i,
-    fallbackError: getI18nString("file_browser.api_folder.error_when_restoring")
-  }));
-  getCurrentLiveGraphClient().optimisticallyUpdate({
-    Project: {
-      [e]: {
-        trashedAt: null
-      }
-    }
-  }, i);
-});
-let $$en7 = liveStoreInstance.Mutation(e => folderAPIInstance.batchDelete({
-  folderIds: e.folderIds
-}));
-let $$ei12 = liveStoreInstance.Mutation(({
-  folderId: e,
-  folderName: t
-}, {
-  objects: r,
-  reduxStore: n
-}) => {
-  let i = validateFolderName(t);
-  if (i) {
-    n.dispatch(FlashActions.error(i));
-    return;
-  }
-  r.Folder.update(e, e => {
-    e.name = t;
-    e.path = t;
-  });
-  trackFolderEvent("Folder Renamed", e, null, n.getState(), {
-    folderName: t
-  });
-  let a = sendWithRetry.put("/api/folders/rename", {
-    folder_id: e,
-    name: t
-  });
-  n.dispatch(handlePromiseError({
-    promise: a,
-    fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_renaming_this_project")
-  }));
-  getCurrentLiveGraphClient().optimisticallyUpdate({
-    Project: {
-      [e]: {
-        name: t,
-        path: t
-      }
-    }
-  }, a);
-  return a;
-});
-let $$ea9 = createOptimistAction("FOLDER_UPDATE_FOLDER_ACCESS", (e, t, {
-  optimistId: r
-}) => {
-  let n = sendWithRetry.put(`/api/folders/${t.folderId}`, {
-    is_invite_only: t.isInviteOnly,
-    is_view_only: t.isViewOnly
-  }).then(() => {
-    e.dispatch(createOptimistCommitAction(r));
-  }).catch(() => {
-    e.dispatch(createOptimistRevertAction(r));
-  });
-  handlePromiseError({
-    promise: n,
-    fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_access")
-  });
-});
-let $$es4 = createOptimistAction("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, t, {
-  optimistId: r
-}) => {
-  let n = folderAPIInstance.updateFolderSharingAudienceControls({
-    folderId: t.folder.id,
-    sharingAudienceControl: t.sharingAudienceControl
-  }).then(() => {
-    e.dispatch(createOptimistCommitAction(r));
-    trackFolderEvent("Folder Share Settings Updated", t.folder.id, t.folder.team_id, e.getState(), {
-      share_settings_type: "sharing_audience",
-      oldSharingAudienceControl: t.folder.sharing_audience_control,
-      newSharingAudienceControl: t.sharingAudienceControl
-    });
-  }).catch(() => {
-    e.dispatch(createOptimistRevertAction(r));
-  });
-  handlePromiseError({
-    promise: n,
-    fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_sharing_audience_control")
-  });
-});
-let $$eo13 = createOptimistAction("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
-  optimistId: r
-}) => {
-  let n = folderAPIInstance.updatedFolderTeamAccess({
-    folderId: t.folder.id,
-    teamAccess: t.teamAccess
-  }).then(() => {
-    e.dispatch(createOptimistCommitAction(r));
-    trackFolderEvent("Folder Share Settings Updated", t.folder.id, t.folder.team_id, e.getState(), {
-      share_settings_type: "team_access",
-      oldTeamAccess: t.folder.team_access,
-      newTeamAccess: t.teamAccess
-    });
-  }).catch(() => {
-    e.dispatch(createOptimistRevertAction(r));
-  });
-  handlePromiseError({
-    promise: n,
-    fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_team_access")
-  });
-});
-let $$el3 = createOptimistThunk(async (e, t) => {
-  let r = t.folder;
-  let n = t.team;
-  let i = convertTeamToRaw(n);
-  if (r.inviteOnlyAt || r.viewOnlyAt) {
-    e.dispatch(showModalHandler({
-      type: _$$z3,
-      data: {
-        folder: r
-      }
-    }));
-    return;
-  }
-  try {
-    await folderAPIInstance.getCanMove({
-      teamId: n.id,
-      folderId: r.id
-    });
-  } catch (t) {
-    t.data?.failure_info?.code === "ERR_FILE_LIMIT" || t.data?.failure_info?.code === "ERR_PROJECT_LIMIT" ? e.dispatch(showModalHandler({
-      type: ConsumptionPaywallModalPlansPricing,
-      data: {
-        team: i,
-        resource: PageFolderFile.FOLDER,
-        action: fileActionEnum.MOVE_FOLDER,
-        currentPlan: consumptionPaywallUtils.Plan.STARTER,
-        upsellPlan: consumptionPaywallUtils.Plan.PRO,
-        editorType: null,
-        upsellSource: UpsellModalType.FOLDER_MOVE_MODAL
-      }
-    })) : e.dispatch(FlashActions.error(t.data?.message));
-    return;
-  }
-  if (r.teamId && i) {
-    e.dispatch(showModalHandler({
-      type: _$$o,
-      data: {
-        folder: r,
-        destinationTeam: i,
-        onConfirm: () => {
-          createAtomSetter(ed)({
-            folder: r,
-            team: i
-          });
-        }
-      }
-    }));
-    return;
-  }
-  createAtomSetter(ed)({
-    folder: r,
-    team: i
-  });
-  t.onSuccess && t.onSuccess();
-});
-let ed = liveStoreInstance.Mutation((e, {
-  query: t,
-  objects: r,
-  reduxStore: n
-}) => {
-  let {
-    folder,
-    team
-  } = e;
-  trackFolderEvent("Folder Moved", folder.id, null, n.getState(), {
-    destTeamId: team.id
-  });
-  let s = sendWithRetry.put("/api/folders/move", {
-    folder_id: folder.id,
-    team_id: team.id
-  }).then(() => {
-    n.dispatch(VisualBellActions.enqueue({
-      message: getI18nString("file_browser.folder_move.project_moved_toast", {
-        folderName: folder.path,
-        teamName: team.name
       })
-    }));
-  });
-  n.dispatch(handlePromiseError({
-    promise: s,
-    fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_moving_this_project")
-  }));
-  getCurrentLiveGraphClient()?.optimisticallyUpdate({
-    Project: {
-      [folder.id]: {
-        teamId: team.id
+    })
+  },
+
+  output: ({ data, args }) => {
+    const files = data.files.filter((file) => {
+      const matchesTrashFilter
+        = args.shouldShowOnlyTrashedFiles && file.trashed_at && file.trashed_with_parent === FFolderType.FOLDER
+          || !args.shouldShowOnlyTrashedFiles && !file.trashed_at
+
+      const matchesRepoBranchFilter
+        = args.skipFetchingRepoBranches && !file.source_file_key
+          || !file.file_repo_id
+
+      return file.folder_id === args.folderId && matchesTrashFilter && matchesRepoBranchFilter
+    })
+
+    const repos = data.repos.filter(repo =>
+      repo.folder_id === args.folderId
+      && (args.shouldShowOnlyTrashedFiles && repo.trashed_at && repo.trashed_with_parent === FFolderType.FOLDER
+        || !args.shouldShowOnlyTrashedFiles && !repo.trashed_at),
+    )
+
+    const filesByRepoId: Record<string, any[]> = {}
+    data.repos.forEach((repo) => {
+      const repoFiles = data.files
+        .filter(file => file.file_repo_id === repo.id)
+        .sort((a, b) => new Date(b.touched_at).getTime() - new Date(a.touched_at).getTime())
+      filesByRepoId[repo.id] = repoFiles
+    })
+
+    return {
+      folder: data.folder,
+      files,
+      repos,
+      filesByRepoId,
+    }
+  },
+
+  schema: PaginatedFolderDataSchema,
+  syncObjects: true,
+})
+
+// Origin: $$Z10 -> loadFolderIfNeededThunk
+export const loadFolderIfNeededThunk = createOptimistThunk(
+  async (storeContext, { folderId, loadedFolders }) => {
+    if (!loadedFolders[folderId]) {
+      storeContext.dispatch(folderLoadedAction({ folderId, state: "loading" }))
+
+      try {
+        const response = await folderAPIInstance.getFiles({ folderId })
+        const metaData = response.data.meta
+
+        storeContext.dispatch(updateFolderDataThunk({ folderId, folderData: metaData }))
+      }
+      catch (error: any) {
+        if (error.status === 404 || error.status === 403) {
+          storeContext.dispatch(selectViewAction({
+            view: "resourceUnavailable",
+            resourceType: EntityType.PROJECT,
+          }))
+        }
+        else if (error.status >= 400 && error.status < 500) {
+          storeContext.dispatch(folderLoadedAction({ folderId, state: "loaded" }))
+        }
+        else {
+          storeContext.dispatch(folderLoadedAction({ folderId, state: null }))
+        }
       }
     }
-  }, s);
-  folder.teamId && (t.mutate($$Q8({
-    teamId: folder.teamId
-  }), e => {
-    let t = e.findIndex(e => e.id === folder.id);
-    -1 !== t && e.splice(t, 1);
-  }), r.Folder.update(folder.id, e => {
-    e.team_id = team.id;
-  }));
-  return s;
-});
-let $$ec6 = createOptimistThunk((e, t) => {
-  let r = e.getState();
-  let n = t.where;
-  let i = t.team.id;
-  let a = r.creatingNewFolder && r.creatingNewFolder.where === n && r.creatingNewFolder.teamId === i;
-  let s = t.team;
-  if (!a) {
-    if (s.canEdit) checkTeamFileRestrictions(s, {
-      type: AddOperationType.ADD_PROJECT
-    }) ? (e.dispatch(beginCreateNewFolder({
-      where: n,
-      teamId: i
-    })), e.dispatch(showModalHandler({
-      type: _$$p(),
-      data: {
-        teamId: s.id,
-        modalShown: r.modalShown,
-        onFolderCreated: t.onFolderCreated
-      }
-    }))) : e.dispatch(showModalHandler({
-      type: ConsumptionPaywallModalPlansPricing,
-      data: {
-        team: s,
-        resource: PageFolderFile.FOLDER,
-        action: fileActionEnum.CREATE_FOLDER,
-        currentPlan: consumptionPaywallUtils.Plan.STARTER,
-        upsellPlan: consumptionPaywallUtils.Plan.PRO,
-        editorType: null
-      }
-    }));else {
-      let t = s ? getI18nString("file_browser.api_folder.no_create_permissions_team_name", {
-        teamName: s.name
-      }) : getI18nString("file_browser.api_folder.no_create_permissions_this_team");
-      e.dispatch(FlashActions.flash(t));
+  },
+)
+
+// Origin: $$Q8 -> teamFoldersQuery
+export const teamFoldersQuery = liveStoreInstance.Query({
+  fetch: async (params) => {
+    const response = await teamAPIClient.getFolders({ teamId: params.teamId })
+    return response.data.meta.folder_rows
+  },
+
+  schema: schemaBuilder => schemaBuilder.array(
+    FolderSchema.extend({ touched_at: schemaBuilder.string() }),
+  ),
+
+  syncObjects: true,
+  enabled: params => !!params.teamId,
+
+  sync: ({ teamId }, { mutate, livegraphClient }) => {
+    if (!teamId || !getFeatureFlags().team_page_folder_creation_live_updates) {
+      return noop
     }
-  }
-});
-export const BU = $$J0;
-export const Ct = $$et1;
-export const LK = $$X2;
-export const Nr = $$el3;
-export const Q3 = $$es4;
-export const Q4 = $$ee5;
-export const SX = $$ec6;
-export const U = $$en7;
-export const Xg = $$Q8;
-export const iT = $$ea9;
-export const jl = $$Z10;
-export const k4 = $$er11;
-export const mq = $$ei12;
-export const xT = $$eo13;
+
+    const today = new Date(new Date().setHours(0, 0, 0, 0))
+
+    return livegraphClient.subscribe(TeamFoldersQuerySyncView, {
+      teamId,
+      updatedAtTimestamp: today,
+    }, (subscriptionData) => {
+      mutate((currentState) => {
+        const projectUpdates = subscriptionData.data?.team?.projectUpdates ?? []
+        const filteredUpdates = projectUpdates.filter(update => update.teamId === teamId)
+
+        filteredUpdates.forEach((update) => {
+          const folderExists = currentState.find(folder => folder.id === update.id)
+          if (!folderExists) {
+            currentState.push({
+              ...convertToFolder(update),
+              touched_at: update.updatedAt.toISOString(),
+            })
+          }
+        })
+      })
+    })
+  },
+
+  output: ({ data }) => data.filter(folder => !(folder.trashed_at || folder.deleted_at)),
+})
+
+// Origin: $$ee5 -> permanentlyDeleteFolderMutation
+export const permanentlyDeleteFolderMutation = liveStoreInstance.Mutation(
+  (params, { reduxStore }) =>
+    folderAPIInstance.permanentlyDelete({ folderId: params.folderId }).then(() => {
+      reduxStore.dispatch(VisualBellActions.enqueue({
+        message: getI18nString("file_browser.file_browser_actions.folder_deleted_forever"),
+      }))
+    }),
+)
+
+// Origin: $$et1 -> trashFolderMutation
+export const trashFolderMutation = liveStoreInstance.Mutation(
+  ({ folderId }, { objects, reduxStore }) => {
+    const trashPromise = folderAPIInstance.trash({ folderId }).then(() => {
+      objects.Folder.update(folderId, (folder) => {
+        folder.trashed_at = Date.now().toString()
+      })
+
+      reduxStore.dispatch(VisualBellActions.enqueue({
+        message: getI18nString("file_browser.file_browser_actions.folder_trashed"),
+      }))
+    })
+
+    reduxStore.dispatch(handlePromiseError({
+      promise: trashPromise,
+      fallbackError: getI18nString("file_browser.api_folder.error_when_moving_to_trash"),
+    }))
+
+    getCurrentLiveGraphClient().optimisticallyUpdate({
+      Project: {
+        [folderId]: {
+          trashedAt: new Date(),
+        },
+      },
+    }, trashPromise)
+  },
+)
+
+// Origin: $$er11 -> restoreFolderMutation
+export const restoreFolderMutation = liveStoreInstance.Mutation(
+  ({ folderId, team }, { objects, reduxStore }) => {
+    const restorePromise = folderAPIInstance.restore({ folderId }).then(() => {
+      objects.Folder.update(folderId, (folder) => {
+        folder.trashed_at = null
+      })
+
+      reduxStore.dispatch(VisualBellActions.enqueue({
+        message: getI18nString("file_browser.file_browser_actions.folder_restored"),
+        button: {
+          text: getI18nString("visual_bell.show_in_toast", {
+            destination: team?.name ?? "Recents",
+          }),
+          action: () => {
+            if (team) {
+              reduxStore.dispatch(selectViewAction({
+                view: "team",
+                teamId: team.id,
+              }))
+            }
+            else {
+              reduxStore.dispatch(selectViewAction({
+                view: "recentsAndSharing",
+              }))
+            }
+          },
+        },
+      }))
+    })
+
+    reduxStore.dispatch(handlePromiseError({
+      promise: restorePromise,
+      fallbackError: getI18nString("file_browser.api_folder.error_when_restoring"),
+    }))
+
+    getCurrentLiveGraphClient().optimisticallyUpdate({
+      Project: {
+        [folderId]: {
+          trashedAt: null,
+        },
+      },
+    }, restorePromise)
+  },
+)
+
+// Origin: $$en7 -> batchDeleteFoldersMutation
+export const batchDeleteFoldersMutation = liveStoreInstance.Mutation(
+  params => folderAPIInstance.batchDelete({ folderIds: params.folderIds }),
+)
+
+// Origin: $$ei12 -> renameFolderMutation
+export const renameFolderMutation = liveStoreInstance.Mutation(
+  ({ folderId, folderName }, { objects, reduxStore }) => {
+    const validationError = validateFolderName(folderName)
+
+    if (validationError) {
+      reduxStore.dispatch(FlashActions.error(validationError))
+      return
+    }
+
+    objects.Folder.update(folderId, (folder) => {
+      folder.name = folderName
+      folder.path = folderName
+    })
+
+    trackFolderEvent("Folder Renamed", folderId, null, reduxStore.getState(), {
+      folderName,
+    })
+
+    const renamePromise = sendWithRetry.put("/api/folders/rename", {
+      folder_id: folderId,
+      name: folderName,
+    })
+
+    reduxStore.dispatch(handlePromiseError({
+      promise: renamePromise,
+      fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_renaming_this_project"),
+    }))
+
+    getCurrentLiveGraphClient().optimisticallyUpdate({
+      Project: {
+        [folderId]: {
+          name: folderName,
+          path: folderName,
+        },
+      },
+    }, renamePromise)
+
+    return renamePromise
+  },
+)
+
+// Origin: $$ea9 -> updateFolderAccessAction
+export const updateFolderAccessAction = createOptimistAction(
+  "FOLDER_UPDATE_FOLDER_ACCESS",
+  (storeContext, params, { optimistId }) => {
+    const updatePromise = sendWithRetry.put(`/api/folders/${params.folderId}`, {
+      is_invite_only: params.isInviteOnly,
+      is_view_only: params.isViewOnly,
+    }).then(() => {
+      storeContext.dispatch(createOptimistCommitAction(optimistId))
+    }).catch(() => {
+      storeContext.dispatch(createOptimistRevertAction(optimistId))
+    })
+
+    handlePromiseError({
+      promise: updatePromise,
+      fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_access"),
+    })
+  },
+)
+
+// Origin: $$es4 -> updateFolderSharingAudienceAction
+export const updateFolderSharingAudienceAction = createOptimistAction(
+  "FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS",
+  (storeContext, params, { optimistId }) => {
+    const updatePromise = folderAPIInstance.updateFolderSharingAudienceControls({
+      folderId: params.folder.id,
+      sharingAudienceControl: params.sharingAudienceControl,
+    }).then(() => {
+      storeContext.dispatch(createOptimistCommitAction(optimistId))
+
+      trackFolderEvent(
+        "Folder Share Settings Updated",
+        params.folder.id,
+        params.folder.team_id,
+        storeContext.getState(),
+        {
+          share_settings_type: "sharing_audience",
+          oldSharingAudienceControl: params.folder.sharing_audience_control,
+          newSharingAudienceControl: params.sharingAudienceControl,
+        },
+      )
+    }).catch(() => {
+      storeContext.dispatch(createOptimistRevertAction(optimistId))
+    })
+
+    handlePromiseError({
+      promise: updatePromise,
+      fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_sharing_audience_control"),
+    })
+  },
+)
+
+// Origin: $$eo13 -> updateFolderTeamAccessAction
+export const updateFolderTeamAccessAction = createOptimistAction(
+  "FOLDER_UPDATE_TEAM_ACCESS",
+  (storeContext, params, { optimistId }) => {
+    const updatePromise = folderAPIInstance.updatedFolderTeamAccess({
+      folderId: params.folder.id,
+      teamAccess: params.teamAccess,
+    }).then(() => {
+      storeContext.dispatch(createOptimistCommitAction(optimistId))
+
+      trackFolderEvent(
+        "Folder Share Settings Updated",
+        params.folder.id,
+        params.folder.team_id,
+        storeContext.getState(),
+        {
+          share_settings_type: "team_access",
+          oldTeamAccess: params.folder.team_access,
+          newTeamAccess: params.teamAccess,
+        },
+      )
+    }).catch(() => {
+      storeContext.dispatch(createOptimistRevertAction(optimistId))
+    })
+
+    handlePromiseError({
+      promise: updatePromise,
+      fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_team_access"),
+    })
+  },
+)
+
+// Origin: $$el3 -> moveFolderThunk
+export const moveFolderThunk = createOptimistThunk(
+  async (storeContext, params) => {
+    const { folder, team } = params
+    const rawTeam = convertTeamToRaw(team)
+
+    if (folder.inviteOnlyAt || folder.viewOnlyAt) {
+      storeContext.dispatch(showModalHandler({
+        type: _$$z3,
+        data: { folder },
+      }))
+      return
+    }
+
+    try {
+      await folderAPIInstance.getCanMove({
+        teamId: team.id,
+        folderId: folder.id,
+      })
+    }
+    catch (error: any) {
+      if (error.data?.failure_info?.code === "ERR_FILE_LIMIT"
+        || error.data?.failure_info?.code === "ERR_PROJECT_LIMIT") {
+        storeContext.dispatch(showModalHandler({
+          type: ConsumptionPaywallModalPlansPricing,
+          data: {
+            team: rawTeam,
+            resource: PageFolderFile.FOLDER,
+            action: fileActionEnum.MOVE_FOLDER,
+            currentPlan: consumptionPaywallUtils.Plan.STARTER,
+            upsellPlan: consumptionPaywallUtils.Plan.PRO,
+            editorType: null,
+            upsellSource: UpsellModalType.FOLDER_MOVE_MODAL,
+          },
+        }))
+      }
+      else {
+        storeContext.dispatch(FlashActions.error(error.data?.message))
+      }
+      return
+    }
+
+    if (folder.teamId && rawTeam) {
+      storeContext.dispatch(showModalHandler({
+        type: _$$o,
+        data: {
+          folder,
+          destinationTeam: rawTeam,
+          onConfirm: () => {
+            createAtomSetter(moveFolderMutation)({
+              folder,
+              team: rawTeam,
+            })
+          },
+        },
+      }))
+      return
+    }
+
+    createAtomSetter(moveFolderMutation)({
+      folder,
+      team: rawTeam,
+    })
+
+    params.onSuccess && params.onSuccess()
+  },
+)
+
+// Origin: ed -> executeMoveFolderMutation
+export const executeMoveFolderMutation = liveStoreInstance.Mutation(
+  (params, { query, objects, reduxStore }) => {
+    const { folder, team } = params
+
+    trackFolderEvent("Folder Moved", folder.id, null, reduxStore.getState(), {
+      destTeamId: team.id,
+    })
+
+    const movePromise = sendWithRetry.put("/api/folders/move", {
+      folder_id: folder.id,
+      team_id: team.id,
+    }).then(() => {
+      reduxStore.dispatch(VisualBellActions.enqueue({
+        message: getI18nString("file_browser.folder_move.project_moved_toast", {
+          folderName: folder.path,
+          teamName: team.name,
+        }),
+      }))
+    })
+
+    reduxStore.dispatch(handlePromiseError({
+      promise: movePromise,
+      fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_moving_this_project"),
+    }))
+
+    getCurrentLiveGraphClient()?.optimisticallyUpdate({
+      Project: {
+        [folder.id]: {
+          teamId: team.id,
+        },
+      },
+    }, movePromise)
+
+    if (folder.teamId) {
+      query.mutate(teamFoldersQuery({ teamId: folder.teamId }), (folders) => {
+        const index = folders.findIndex(f => f.id === folder.id)
+        if (index !== -1) {
+          folders.splice(index, 1)
+        }
+      })
+
+      objects.Folder.update(folder.id, (f) => {
+        f.team_id = team.id
+      })
+    }
+
+    return movePromise
+  },
+)
+
+// Origin: $$ec6 -> createNewFolderThunk
+export const createNewFolderThunk = createOptimistThunk(
+  (storeContext, params) => {
+    const state = storeContext.getState()
+    const { where, team } = params
+    const teamId = team.id
+
+    const isCreatingNewFolder
+      = state.creatingNewFolder
+        && state.creatingNewFolder.where === where
+        && state.creatingNewFolder.teamId === teamId
+
+    if (!isCreatingNewFolder) {
+      if (team.canEdit) {
+        if (checkTeamFileRestrictions(team, { type: AddOperationType.ADD_PROJECT })) {
+          storeContext.dispatch(beginCreateNewFolder({ where, teamId }))
+          storeContext.dispatch(showModalHandler({
+            type: _$$p(),
+            data: {
+              teamId: team.id,
+              modalShown: state.modalShown,
+              onFolderCreated: params.onFolderCreated,
+            },
+          }))
+        }
+        else {
+          storeContext.dispatch(showModalHandler({
+            type: ConsumptionPaywallModalPlansPricing,
+            data: {
+              team,
+              resource: PageFolderFile.FOLDER,
+              action: fileActionEnum.CREATE_FOLDER,
+              currentPlan: consumptionPaywallUtils.Plan.STARTER,
+              upsellPlan: consumptionPaywallUtils.Plan.PRO,
+              editorType: null,
+            },
+          }))
+        }
+      }
+      else {
+        const errorMessage = team
+          ? getI18nString("file_browser.api_folder.no_create_permissions_team_name", {
+              teamName: team.name,
+            })
+          : getI18nString("file_browser.api_folder.no_create_permissions_this_team")
+
+        storeContext.dispatch(FlashActions.flash(errorMessage))
+      }
+    }
+  },
+)
+
+// Export statements with original names mapped to refactored implementations
+export const BU = paginatedFolderQuery
+export const Ct = trashFolderMutation
+export const LK = useFolderQuery
+export const Nr = moveFolderThunk
+export const Q3 = updateFolderSharingAudienceAction
+export const Q4 = permanentlyDeleteFolderMutation
+export const SX = createNewFolderThunk
+export const U = batchDeleteFoldersMutation
+export const Xg = teamFoldersQuery
+export const iT = updateFolderAccessAction
+export const jl = loadFolderIfNeededThunk
+export const k4 = restoreFolderMutation
+export const mq = renameFolderMutation
+export const xT = updateFolderTeamAccessAction

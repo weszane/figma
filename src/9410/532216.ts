@@ -35,7 +35,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
 import { isDesignFileType, isDevHandoffEditorType } from "../figma_app/976749";
 import { h as _$$h } from "../905/864281";
-import { kD, J3, JU, kN } from "../figma_app/622574";
+import { getCurrentTemplate, getPublishTemplateStatus, canPublishTemplate, PublishTemplateStatusEnum } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getRepoByIdAlt, isDefaultFile, isBranchAlt } from "../905/760074";
 import { m as _$$m, t as _$$t2 } from "../905/364535";
@@ -52,14 +52,14 @@ import { jB, Cp, Px, zS } from "../figma_app/722141";
 import { UpsellModalType } from "../905/165519";
 import { FEditorType } from "../figma_app/53721";
 import { TeamOrgType } from "../figma_app/10554";
-import { Yh, c1 } from "../figma_app/357047";
+import { isActionEnabled, getKeyboardShortcut } from "../figma_app/357047";
 import { TrackingKeyEnum } from "../905/696396";
 import { AM, pT } from "../905/467351";
 import { Z5, R5 } from "../figma_app/861982";
 import { Ah } from "../figma_app/221114";
 import { hasSeparator, hasHeader, hasRenderFunction, hasActionOrCallback, getActionOrName, hasChildrenOrDropdown } from "../figma_app/847915";
 import { formatI18nMessage } from "../905/482208";
-import { UN } from "../905/525678";
+import { shouldShowMenuItem } from "../905/525678";
 import { Pu, Qq, MJ as _$$MJ, Oo } from "../figma_app/4616";
 import { jT } from "../figma_app/277330";
 import { tz } from "../figma_app/531331";
@@ -74,7 +74,7 @@ import { z6 } from "../905/963340";
 import { R6 } from "../figma_app/504823";
 import { useUserColorProfileSubscription, mapColorSpaceToEnum } from "../figma_app/829197";
 import { useFloatingTree } from "@floating-ui/react";
-import { RR } from "../figma_app/307841";
+import { isCampfireModelEnabled } from "../figma_app/307841";
 import { l as _$$l } from "../905/714607";
 import { I as _$$I } from "../905/531560";
 import { removeFileFavorite, addFileFavorite } from "../figma_app/909778";
@@ -92,7 +92,7 @@ import { selectPermissionsState } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { exitVersionHistoryMode, enterVersionHistoryMode } from "../figma_app/841351";
-import { Ay } from "../figma_app/86921";
+import { userReducerAlias } from "../figma_app/86921";
 import { Q as _$$Q } from "../figma_app/113686";
 import { e as _$$e3 } from "../905/225961";
 import { e as _$$e4 } from "../905/157975";
@@ -137,7 +137,7 @@ function S(e) {
   });
 }
 function em(e, t) {
-  e = e.filter(e => e && UN(e, {
+  e = e.filter(e => e && shouldShowMenuItem(e, {
     isDesktopMenu: !1,
     isReadOnly: t.appModel.isReadOnly,
     isSearching: !!t.isSearching,
@@ -162,7 +162,7 @@ function em(e, t) {
 }
 function ef(e, t) {
   if (!e || hasSeparator(e) || hasHeader(e) || hasRenderFunction(e)) return null;
-  let i = hasActionOrCallback(e) && e.disabled || !e.name && !(hasActionOrCallback(e) && Yh(t.appModel, e.action));
+  let i = hasActionOrCallback(e) && e.disabled || !e.name && !(hasActionOrCallback(e) && isActionEnabled(t.appModel, e.action));
   if (!(hasActionOrCallback(e) && e.disabledAndForceVisible) && i && t.removeDisabledItems) return null;
   let n = getActionOrName(e);
   return hasActionOrCallback(e) ? jsxs(Pu, {
@@ -482,7 +482,7 @@ let ti = memo(function ({
       return () => {
         if (!e || !i) return;
         let r = getRepoByIdAlt(e, o);
-        let a = !!Ay && t && !n;
+        let a = !!userReducerAlias && t && !n;
         r && isDefaultFile(e, r) ? e.repo?.canEdit && !r.trashed_at && s(U1({
           filesByKey: {},
           reposById: {
@@ -648,7 +648,7 @@ let ti = memo(function ({
       userCanMoveWithReasons
     } = e3();
     let s = selectCurrentFile();
-    let o = RR();
+    let o = isCampfireModelEnabled();
     let l = useSubscription(FileManagePermission({
       fileKey: s?.key || ""
     }), {
@@ -676,10 +676,10 @@ let ti = memo(function ({
   let tp = useSelector(e => e.mirror.appModel.topLevelMode);
   let th = _$$F();
   let tm = n6();
-  let tf = kD();
-  let tg = J3();
-  let t_ = JU(tg);
-  let tx = tg === kN.FILE_IN_DRAFTS;
+  let tf = getCurrentTemplate();
+  let tg = getPublishTemplateStatus();
+  let t_ = canPublishTemplate(tg);
+  let tx = tg === PublishTemplateStatusEnum.FILE_IN_DRAFTS;
   let ty = _$$h.useTrackingContext({
     trigger: UpsellModalType.FILE_DUPLICATE
   });
@@ -750,7 +750,7 @@ let ti = memo(function ({
         }, `merging-${t}`)), tA && tG.map((e, t) => jsx(_$$Fragment, {
           children: e
         }, `branching-${t}`)), g && !tt && !tS && !ew && jsx(Pu, {
-          disabled: !Yh(t, "enter-history-mode"),
+          disabled: !isActionEnabled(t, "enter-history-mode"),
           recordingKey: generateRecordingKey(e, "toggleVersionHistory"),
           onClick: toggleVersionHistory,
           children: Ah(t.activeCanvasEditModeType) ? getI18nString("fullscreen.filename_view.version-history-hide") : getI18nString("fullscreen.filename_view.version-history-show")
@@ -792,7 +792,7 @@ let ti = memo(function ({
             },
             children: [getI18nString("fullscreen.filename_view.export"), jsx(MenuItemTrail, {
               children: jsx(MenuShortcut, {
-                children: c1(t.keyboardShortcuts, "export-selected-exportables")
+                children: getKeyboardShortcut(t.keyboardShortcuts, "export-selected-exportables")
               })
             })]
           }), th && c.canEdit && jsx(Pu, {

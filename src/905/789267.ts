@@ -12,7 +12,7 @@ import { WithTrackedButton } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
-import { RR } from "../figma_app/307841";
+import { isCampfireModelEnabled } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
 import { DeepLinkType } from "../905/15667";
@@ -62,7 +62,7 @@ export let $$N0 = registerModal(function ({
       i();
     }
   });
-  if (!RR({
+  if (!isCampfireModelEnabled({
     preferOpenFilePlan: !0
   })) return null;
   let H = mV(e);

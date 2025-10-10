@@ -12,7 +12,7 @@ import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
-import { wv } from "../figma_app/236327";
+import { SeparatorComponent } from "../figma_app/236327";
 import { L as _$$L } from "../figma_app/942671";
 import { getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
@@ -29,7 +29,7 @@ import { useDropdown } from "../905/848862";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
-import { c1 } from "../figma_app/357047";
+import { getKeyboardShortcut } from "../figma_app/357047";
 import { q } from "../figma_app/57000";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { useAnnotationCategories, getAnnotationCategoryLabel, getAnnotationCategoryColorValue } from "../figma_app/781512";
@@ -87,24 +87,24 @@ function z({
   b ? v.length > 0 ? (eo = !1, el = !1, ed = !0) : (eo = !0, el = !1, ed = !1) : I && !J && !H && (eo = !1, el = !0, ed = !1, getFeatureFlags().dt_annotations_always_expand && (eo = !0, el = !1, ed = !1));
   let ec = [{
     type: "ZOOM_IN",
-    shortcut: c1(f, "zoom-in"),
+    shortcut: getKeyboardShortcut(f, "zoom-in"),
     recordingKey: "zoomIn",
     disabled: !Zr("zoom-in")
   }, {
     type: "ZOOM_OUT",
-    shortcut: c1(f, "zoom-out"),
+    shortcut: getKeyboardShortcut(f, "zoom-out"),
     recordingKey: "zoomOut",
     disabled: !Zr("zoom-out")
   }, {
     type: "ZOOM_TO_FIT",
-    shortcut: c1(f, "zoom-to-fit"),
+    shortcut: getKeyboardShortcut(f, "zoom-to-fit"),
     recordingKey: "zoomToFit"
   }, {
     type: "ZOOM_TO_50",
     recordingKey: "zoomTo50"
   }, {
     type: "ZOOM_TO_100",
-    shortcut: c1(f, "zoom-reset"),
+    shortcut: getKeyboardShortcut(f, "zoom-reset"),
     recordingKey: "zoomTo100"
   }, {
     type: "ZOOM_TO_200",
@@ -119,43 +119,43 @@ function z({
     disabled: Zr("activeCanvasPixelPreview"),
     children: [{
       type: "PIXEL_PREVIEW_DISABLED",
-      shortcut: c1(f, "toggle-pixel-preview"),
+      shortcut: getKeyboardShortcut(f, "toggle-pixel-preview"),
       isChecked: !_,
       recordingKey: "disabled"
     }, {
       type: "PIXEL_PREVIEW_1X",
       isChecked: _ && !g,
-      shortcut: g ? void 0 : c1(f, "toggle-pixel-preview"),
+      shortcut: g ? void 0 : getKeyboardShortcut(f, "toggle-pixel-preview"),
       recordingKey: "1x"
     }, {
       type: "PIXEL_PREVIEW_2X",
       isChecked: _ && g,
-      shortcut: g ? c1(f, "toggle-pixel-preview") : void 0,
+      shortcut: g ? getKeyboardShortcut(f, "toggle-pixel-preview") : void 0,
       recordingKey: "2x"
     }]
   }, {
     type: K ? "DOT_GRID" : "PIXEL_GRID",
-    shortcut: c1(f, z ? "toggle-grid" : "toggle-show-dot-grid"),
+    shortcut: getKeyboardShortcut(f, z ? "toggle-grid" : "toggle-show-dot-grid"),
     recordingKey: es,
     isChecked: ea,
     disabled: !Zr("toggle-grid")
   }, {
     type: K ? "SNAP_TO_DOT_GRID" : "SNAP_TO_PIXEL_GRID",
-    shortcut: c1(f, z || M ? "toggle-snapping-to-pixels" : "toggle-snapping-to-dots"),
+    shortcut: getKeyboardShortcut(f, z || M ? "toggle-snapping-to-pixels" : "toggle-snapping-to-dots"),
     recordingKey: K ? "snapToDotGrid" : "snapToPixelGrid",
     isChecked: er,
     disabled: !Zr(D || M || U || B || H ? "toggle-snapping-to-pixels" : "toggle-snapping-to-dots"),
     hidden: b
   }, {
     type: "LAYOUT_GRIDS",
-    shortcut: c1(f, "toggle-shown-layout-grids"),
+    shortcut: getKeyboardShortcut(f, "toggle-shown-layout-grids"),
     recordingKey: Q,
     hidden: !z || !y,
     isChecked: Z ? X : q,
     disabled: Zr(Q)
   }, {
     type: "RULERS",
-    shortcut: c1(f, "toggle-rulers"),
+    shortcut: getKeyboardShortcut(f, "toggle-rulers"),
     recordingKey: "renderRulers",
     hidden: !z,
     isChecked: getObservableOrFallback(EditorPreferencesApi().renderRulers),
@@ -167,7 +167,7 @@ function z({
     disabled: Zr("showOutlines"),
     children: [{
       type: "OUTLINES",
-      shortcut: c1(f, "toggle-outlines"),
+      shortcut: getKeyboardShortcut(f, "toggle-outlines"),
       isChecked: getObservableOrFallback(getCanvasViewState().showOutlines),
       recordingKey: "showOutlines"
     }, {
@@ -183,7 +183,7 @@ function z({
     }]
   }, {
     type: "MULTIPLAYER_CURSORS",
-    shortcut: c1(f, "toggle-multiplayer-cursors"),
+    shortcut: getKeyboardShortcut(f, "toggle-multiplayer-cursors"),
     recordingKey: "hideMultiplayerCursors",
     isChecked: !RF(),
     disabled: Zr("hideMultiplayerCursors")
@@ -196,13 +196,13 @@ function z({
     type: "separator"
   }, {
     type: "COMMENTS",
-    shortcut: c1(f, "toggle-show-comments"),
+    shortcut: getKeyboardShortcut(f, "toggle-show-comments"),
     recordingKey: "showComments",
     isChecked: useSelector(e => !!e.mirror.appModel.showComments),
     disabled: Zr("showComments")
   }, {
     type: "SHOW_ANNOTATIONS",
-    shortcut: c1(f, "toggle-show-annotations"),
+    shortcut: getKeyboardShortcut(f, "toggle-show-annotations"),
     recordingKey: "showAnnotationsInDevMode",
     isChecked: oQ(),
     disabled: !Zr("toggle-show-annotations"),
@@ -219,7 +219,7 @@ function z({
     hidden: !ed,
     children: [{
       type: "SHOW_ANNOTATIONS",
-      shortcut: c1(f, "toggle-show-annotations"),
+      shortcut: getKeyboardShortcut(f, "toggle-show-annotations"),
       recordingKey: "showAnnotationsInDevMode",
       isChecked: oQ(),
       disabled: !Zr("toggle-show-annotations")
@@ -257,7 +257,7 @@ function z({
     })] : [])]
   }, {
     type: "PROTOTYPING",
-    shortcut: c1(f, "toggle-prototyping-info"),
+    shortcut: getKeyboardShortcut(f, "toggle-prototyping-info"),
     recordingKey: "prototypingMode",
     hidden: !D || E,
     isChecked: Y
@@ -524,7 +524,7 @@ export function $$W1({
         },
         recordingKey: generateRecordingKey(r, "dropdown", "zoomInput")
       })
-    }), jsx(wv, {})]
+    }), jsx(SeparatorComponent, {})]
   });
 }
 export let $$K0 = memo(function ({

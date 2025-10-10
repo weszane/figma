@@ -97,7 +97,7 @@ import { selectPermissionsState } from '../figma_app/212807';
 import { h as _$$h2 } from '../figma_app/270558';
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243';
 import { N as _$$N } from '../figma_app/301442';
-import { dl } from '../figma_app/307841';
+import { isDateBeforeAnalyzeDataFlowV2Until } from '../figma_app/307841';
 import { getCurrentUserOrg, isBigmaEnabledSimple } from '../figma_app/336853';
 import { hasFolderOrTeamRestrictions, hasValidSubscription, isTeamLocked } from '../figma_app/345997';
 import { CHECKOUT_ROUTE } from '../figma_app/350203';
@@ -118,7 +118,7 @@ import { getAtomMutate } from '../figma_app/566371';
 import { getCurrentTeam, getCurrentTeamId } from '../figma_app/598018';
 import { n3 as _$$n2, DB, Vg } from '../figma_app/600310';
 import { WithTrackedButton, WithTrackedButtonLarge, WithTrackedPopupButtonPrimitive } from '../figma_app/617427';
-import { tS as _$$tS2, ac, J3, kD, kN } from '../figma_app/622574';
+import { hasTemplateEntity, useHasChanges, getPublishTemplateStatus, getCurrentTemplate, PublishTemplateStatusEnum } from '../figma_app/622574';
 import { BaseLinkComponent, ButtonSecondaryTracked, SecureLink } from '../figma_app/637027';
 import { canAdminTeam, canEditTeam } from '../figma_app/642025';
 import { filterNotNullish } from '../figma_app/656233';
@@ -1455,22 +1455,22 @@ let nt = {
   Banner(e) {
     let t = useDispatch<AppDispatch>();
     let n = useIsProgressBarHiddenOrLocked();
-    let r = kD();
+    let r = getCurrentTemplate();
     let i = b4();
     let l = selectCurrentFile();
-    let d = _$$tS2();
-    let _ = ac();
+    let d = hasTemplateEntity();
+    let _ = useHasChanges();
     let u = useIsCanvasEditDisabled();
     let m = getCurrentFileType();
     let g = useIsFullscreenSlidesView();
     let f = useIsSelectedViewFullscreenCooper();
     let h = selectCurrentUser();
     let b = h?.id && r && r.publishedByUserId === h.id;
-    let x = J3();
+    let x = getPublishTemplateStatus();
     let y = WS();
     let v = r != null && y(r.fileKey);
     if (!d || n || !l || !r || u || _ === null) return null;
-    let w = _ && x === kN.CAN_PUBLISH;
+    let w = _ && x === PublishTemplateStatusEnum.CAN_PUBLISH;
     let T = g ? getI18nString('slides.templates.banner.new_deck_button') : getI18nString('whiteboard.delightful_toolbar.custom_template_banner.new_file_button');
     let j = v ? {
       type: MA.CUSTOM,
@@ -1577,7 +1577,7 @@ let nn = {
   bannerId: om.TemplatePublishingNudgeBanner,
   Banner(e) {
     let t = useIsProgressBarHiddenOrLocked();
-    let n = kD();
+    let n = getCurrentTemplate();
     let a = selectCurrentFile();
     let {
       draftTemplateKeys,
@@ -1942,7 +1942,7 @@ let nl = {
     let n = useAtomWithSubscription(_$$b2(t?.id ?? null));
     let a = useAtomWithSubscription(eg);
     let i = getFeatureFlags().terms_of_service_may_2025_update;
-    let o = !!t?.created_at && dl({
+    let o = !!t?.created_at && isDateBeforeAnalyzeDataFlowV2Until({
       date: new Date(t?.created_at)
     });
     let s = useCurrentPlanUser('NonAdminBillingTermsBanner');

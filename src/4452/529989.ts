@@ -5,17 +5,17 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
 import { postUserFlag } from "../905/985254";
 import { Q } from "../9864/768691";
-import { e as _$$e } from "../905/621515";
-import { eS } from "../figma_app/33126";
+import { useOverlay } from "../905/621515";
+import { hasK12GoogleOrgAtom } from "../figma_app/33126";
 import { NT, g5 } from "../figma_app/579169";
 import { selectUserFlag } from "../905/940356";
 import { N } from "../figma_app/268271";
 import { b as _$$b2 } from "../9864/543300";
 import { isAllowedToSeeNux } from "../905/14910";
 import { pC } from "../905/98947";
-import { NuxOnboardingOverlay } from "../figma_app/6204";
+import { BaseNuxOnboardingOverlay } from "../figma_app/6204";
 export function $$v0(e) {
-  let t = useAtomWithSubscription(eS);
+  let t = useAtomWithSubscription(hasK12GoogleOrgAtom);
   let a = useDispatch<AppDispatch>();
   let v = !!selectUserFlag("not_gen_0");
   let b = useAtomWithSubscription(NT);
@@ -25,8 +25,8 @@ export function $$v0(e) {
     show,
     complete,
     isShowing
-  } = _$$e({
-    overlay: NuxOnboardingOverlay,
+  } = useOverlay({
+    overlay: BaseNuxOnboardingOverlay,
     priority: N.HIGH_PRIORITY_MODAL
   }, [b, y, t]);
   let T = useCallback(() => {

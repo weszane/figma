@@ -5,7 +5,7 @@ import { toggleEnhancedContrast } from "../905/266289";
 import { Fullscreen } from "../figma_app/763686";
 import { isChromebookTabbed, applyDarkBackground } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { f3 } from "../figma_app/504640";
+import { getEmbedTheme } from "../figma_app/504640";
 import { fullscreenValue } from "../figma_app/455680";
 import { getSelectedView } from "../figma_app/386952";
 import { getMPVisibleTheme } from "../905/187165";
@@ -21,7 +21,7 @@ export function $$_0() {
     toggleEnhancedContrast(_);
   }, [_]);
   let A = getSelectedView();
-  let y = f3();
+  let y = getEmbedTheme();
   useEffect(() => {
     desktopAPIInstance && e && desktopAPIInstance.setTabColor(t);
   }, [t, e]);

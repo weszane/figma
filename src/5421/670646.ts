@@ -22,7 +22,7 @@ import { u as _$$u } from "../figma_app/365543";
 import { YR } from "../figma_app/365713";
 import { bL, c$ } from "../905/867927";
 import { Legend } from "../905/932270";
-import { c$ as _$$c$, bL as _$$bL, l9, mc, wv, DZ } from "../905/493196";
+import { SelectOptionReset, SelectGroupLabel, SelectSeparator, SelectContainer, SelectRoot, SelectOption } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { atomStoreManager } from "../figma_app/27355";
 import { DEVICE_PRESETS_BY_ID, DEVICE_PRESETS_BY_NAME, isCustomFrameRequired, getDevicePresetWithFallback, androidDeviceNames, extendedDeviceNames, appleWatchDeviceNames, appleDeviceNames, archivedDeviceNames } from "../figma_app/349969";
@@ -39,7 +39,7 @@ import { h as _$$h2 } from "../905/65944";
 import { FormattedInputVariant3 } from "../905/203369";
 import { TN, dx } from "../figma_app/334459";
 import { hl, nV, fI, Zk } from "../figma_app/626177";
-import { hg, bi } from "../figma_app/425489";
+import { inlinePreviewReducer, InlineModalStatus } from "../figma_app/425489";
 import { Rk } from "../figma_app/483189";
 import { A as _$$A } from "../6020/852410";
 import { y7 } from "../5421/828271";
@@ -434,7 +434,7 @@ class ee extends RecordingPureComponent {
         params: {
           oldType: this.props.prototypeDevice.presetIdentifier || t,
           newType: e.presetIdentifier || n,
-          isInlinePreviewOpened: atomStoreManager.get(hg).modalStatus === bi.OPEN
+          isInlinePreviewOpened: atomStoreManager.get(inlinePreviewReducer).modalStatus === InlineModalStatus.OPEN
         }
       }));
     };
@@ -442,7 +442,7 @@ class ee extends RecordingPureComponent {
       let n = getDevicePresetWithFallback(e, this.props.prototypeDevice);
       if (null === n) return null;
       let i = n.framePresetSize;
-      return jsx(_$$c$, {
+      return jsx(SelectOptionReset, {
         value: n.presetIdentifier,
         children: jsxs("div", {
           className: Y,
@@ -458,23 +458,23 @@ class ee extends RecordingPureComponent {
   render() {
     let e;
     let t = "string" == typeof (e = "NONE" === this.props.prototypeDevice.type ? "NONE" : "PRESENTATION" === this.props.prototypeDevice.type ? "PRESENTATION" : "CUSTOM" === this.props.prototypeDevice.type ? "CUSTOM" : DEVICE_PRESETS_BY_ID[this.props.prototypeDevice.presetIdentifier] || "NONE") ? e : e.presetIdentifier;
-    return jsxs(_$$bL, {
+    return jsxs(SelectGroupLabel, {
       onChange: e => {
         "NONE" === e || "PRESENTATION" === e || "CUSTOM" === e ? this.onChange(e) : this.onChange(getDevicePresetWithFallback(e, this.props.prototypeDevice));
       },
       recordingKey: generateRecordingKey(this.props, "select"),
       value: t,
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: renderI18nText("proto.frame_preset_panel.device")
         }),
         width: "fill",
         children: this.formatter.format(e)
-      }), jsxs(mc, {
-        children: [jsx(_$$c$, {
+      }), jsxs(SelectContainer, {
+        children: [jsx(SelectOptionReset, {
           value: "NONE",
           children: renderI18nText("proto.frame_preset_panel.no_device")
-        }), jsx(wv, {}), androidDeviceNames.map(this.renderPresetOption), jsx(wv, {}), extendedDeviceNames.map(this.renderPresetOption), jsx(wv, {}), appleWatchDeviceNames.map(this.renderPresetOption), jsx(wv, {}), appleDeviceNames.map(this.renderPresetOption), jsx(wv, {}), jsx(_$$c$, {
+        }), jsx(SelectRoot, {}), androidDeviceNames.map(this.renderPresetOption), jsx(SelectRoot, {}), extendedDeviceNames.map(this.renderPresetOption), jsx(SelectRoot, {}), appleWatchDeviceNames.map(this.renderPresetOption), jsx(SelectRoot, {}), appleDeviceNames.map(this.renderPresetOption), jsx(SelectRoot, {}), jsx(SelectOptionReset, {
           value: "CUSTOM",
           children: jsxs("div", {
             className: Y,
@@ -484,7 +484,7 @@ class ee extends RecordingPureComponent {
               children: renderI18nText("proto.frame_preset_panel.fit")
             })]
           })
-        }), jsx(_$$c$, {
+        }), jsx(SelectOptionReset, {
           value: "PRESENTATION",
           children: jsxs("div", {
             className: Y,
@@ -494,7 +494,7 @@ class ee extends RecordingPureComponent {
               children: renderI18nText("proto.frame_preset_panel.fill")
             })]
           })
-        }), jsx(wv, {}), archivedDeviceNames.map(this.renderPresetOption)]
+        }), jsx(SelectRoot, {}), archivedDeviceNames.map(this.renderPresetOption)]
       })]
     });
   }
@@ -512,7 +512,7 @@ class et extends RecordingPureComponent {
     };
     this.renderStyleOption = (e, t) => {
       let n = e.presetIdentifier;
-      return jsx(_$$c$, {
+      return jsx(SelectOptionReset, {
         value: n,
         children: DEVICE_PRESETS_BY_ID[n].getI18nStyleName()
       }, t);
@@ -523,17 +523,17 @@ class et extends RecordingPureComponent {
     if (!e) return null;
     let t = DEVICE_PRESETS_BY_NAME[e.deviceName];
     let n = this.props.presetIdentifier;
-    return jsxs(_$$bL, {
+    return jsxs(SelectGroupLabel, {
       onChange: this.props.onChange,
       recordingKey: generateRecordingKey(this.props, "select"),
       value: n,
-      children: [jsx(l9, {
+      children: [jsx(SelectSeparator, {
         label: jsx(HiddenLabel, {
           children: renderI18nText("proto.frame_preset_panel.device.model")
         }),
         width: "fill",
         children: this.formatter.format(n)
-      }), jsx(mc, {
+      }), jsx(SelectContainer, {
         children: t.map(this.renderStyleOption)
       })]
     });
@@ -845,17 +845,17 @@ function ez({
       children: jsx(_$$r, {})
     }), jsx("div", {
       className: a ? "scroll_behavior_panel--scrollDirectionShort--w6iSo" : eH,
-      children: jsxs(_$$bL, {
+      children: jsxs(SelectGroupLabel, {
         onChange: u,
         value: l || "NONE",
         recordingKey: t,
-        children: [jsx(DZ, {
+        children: [jsx(SelectOption, {
           "data-testid": "scroll-direction-dropdown",
           disabled: e || s,
           id: c,
           width: "fill"
-        }), jsx(mc, {
-          children: e$.map(e => jsx(_$$c$, {
+        }), jsx(SelectContainer, {
+          children: e$.map(e => jsx(SelectOptionReset, {
             value: e,
             children: _$$Rk.format(e)
           }, e))
@@ -906,24 +906,24 @@ function eG({
       })
     }), jsx("div", {
       className: eH,
-      children: jsxs(_$$bL, {
+      children: jsxs(SelectGroupLabel, {
         onChange: l,
         value: a,
         recordingKey: t,
-        children: [jsx(DZ, {
+        children: [jsx(SelectOption, {
           "data-testid": "scroll-behavior-dropdown",
           disabled: e,
           id: d,
           width: "fill"
-        }), jsxs(mc, {
-          children: [jsx(_$$c$, {
+        }), jsxs(SelectContainer, {
+          children: [jsx(SelectOptionReset, {
             value: "SCROLLS",
             children: Ge.format("SCROLLS")
-          }), jsx(_$$c$, {
+          }), jsx(SelectOptionReset, {
             value: "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME",
             disabled: fixedScrollingDisabled,
             children: Ge.format("FIXED_WHEN_CHILD_OF_SCROLLING_FRAME")
-          }), jsx(_$$c$, {
+          }), jsx(SelectOptionReset, {
             value: "STICKY_SCROLLS",
             children: Ge.format("STICKY_SCROLLS")
           })]

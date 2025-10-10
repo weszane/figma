@@ -10,11 +10,11 @@ import { useSubscription } from "../figma_app/288654";
 import { LoadingOverlay } from "../figma_app/858013";
 import { k as _$$k2 } from "../7021/223482";
 import { d as _$$d } from "../469e6e40/744116";
-import { RR, y3 } from "../figma_app/307841";
+import { isCampfireModelEnabled, isCampfireEducationEnabled } from "../figma_app/307841";
 import { i as _$$i } from "../469e6e40/549061";
 import { isBillingGroupAdminEnabled } from "../figma_app/845611";
 import { throwTypeError } from "../figma_app/465776";
-import { useAtomWithSubscription, atom, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, atom, useSetAtom } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
@@ -24,7 +24,7 @@ import { parsePxNumber, parsePxInt } from "../figma_app/783094";
 import { usePrefersMediaQuery } from "../figma_app/469468";
 import { Ytf, URh, YEj } from "../figma_app/27776";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e2 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { FPlanNameType, FUserRoleType, FOrganizationLevelType, FAccessLevelType, FPublicationStatusType } from "../figma_app/191312";
@@ -34,7 +34,7 @@ import { U as _$$U } from "../905/455766";
 import { OnboardingModal } from "../905/425180";
 import { PositioningStrategy, ArrowPosition } from "../905/858282";
 import { EnterpriseOrgAdminOnboarding, OrgAdminAuthorityOverlay, SharingClarityAdminOnboardingOverlay, OrgAdminTeamOnboarding, OrgAdminActivityOnboarding, OrgAdminLicenseGroupsOnboarding, OrgAdminWorkspacesOnboarding, OrgAdminUnassignedDraftsTabOnboarding } from "../figma_app/6204";
-import { N as _$$N2 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { X as _$$X } from "../905/482718";
 import { Ui3PositionType } from "../905/11928";
 import { M as _$$M } from "../469e6e40/490222";
@@ -96,7 +96,7 @@ import { isValidEmail } from "../figma_app/416935";
 import { isMobileUA } from "../figma_app/778880";
 import { truncate, formatList } from "../figma_app/930338";
 import { sendWithRetry } from "../905/910117";
-import { gw, MM, wv } from "../figma_app/236327";
+import { DropdownWithScrim, CheckableOptionComponent, SeparatorComponent } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
 import { ButtonBasePrimary, BigTextInputForwardRef, ButtonSecondary, SecureLink, BUTTON_INTERNAL_CONST_Z12, ButtonBasePrimaryTracked, clickableBaseLinkTracked, ButtonSecondaryTracked, ButtonNegativeTracked } from "../figma_app/637027";
 import { RecordingScrollContainer } from "../905/347284";
@@ -125,7 +125,7 @@ import { jG, NM, ln, oi } from "../figma_app/527041";
 import { usePlanInvoices } from "../figma_app/658324";
 import { Q as _$$Q3 } from "../469e6e40/825225";
 import { y2 } from "../figma_app/563413";
-import { S as _$$S } from "../905/339549";
+import { RenderRefCheckbox } from "../905/339549";
 import { tI as _$$tI } from "../figma_app/847597";
 import { p as _$$p2 } from "../905/597320";
 import { z as _$$z } from "../figma_app/369596";
@@ -133,7 +133,7 @@ import { useThemeContext } from "../905/640017";
 import { compareProductAccessTypes } from "../figma_app/217457";
 import { SimpleFuseSearch } from "../905/81982";
 import { e as _$$e4 } from "../figma_app/119601";
-import { s as _$$s2 } from "../905/82276";
+import { UNASSIGNED_LABEL } from "../905/82276";
 import { az as _$$az, pw, z6 } from "../figma_app/805373";
 import { f as _$$f2 } from "../figma_app/750432";
 import { Cj } from "../905/270084";
@@ -310,7 +310,7 @@ function W() {
     show,
     complete,
     isShowing
-  } = _$$e2({
+  } = useOverlay({
     overlay: EnterpriseOrgAdminOnboarding,
     priority: _$$g(EnterpriseOrgAdminOnboarding)
   }, [i, r]);
@@ -349,9 +349,9 @@ function K() {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: OrgAdminAuthorityOverlay,
-    priority: _$$N2.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   });
   useSingleEffect(() => {
     show();
@@ -513,9 +513,9 @@ function eK() {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: SharingClarityAdminOnboardingOverlay,
-    priority: _$$N2.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [e]);
   useSingleEffect(() => {
     show({
@@ -593,9 +593,9 @@ let tx = rn("org_admin_activity_onboarding", createOnboardingStateMachine(OrgAdm
 let tb = userFlagExistsAtomFamily(th);
 function tv() {
   let e = useAtomWithSubscription(tb);
-  let t = _$$e2({
+  let t = useOverlay({
     overlay: OrgAdminActivityOnboarding,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   let a = useDispatch<AppDispatch>();
   let n = zl(tx);
@@ -1640,14 +1640,14 @@ function t0(e) {
           children: [u ? u.description : getI18nString("activity_log.filter.custom"), _ && jsx("div", {
             className: tA,
             style: e.dropdownShown.data.position,
-            children: jsxs(gw, {
+            children: jsxs(DropdownWithScrim, {
               dispatch: e.dispatch,
               className: "activity_logs_section--dateDropdown--fnvV4 activity_logs_section--dropdown--mr5p8",
-              children: [tX.map(t => jsx(MM, {
+              children: [tX.map(t => jsx(CheckableOptionComponent, {
                 checked: u === t,
                 onClick: () => e.onDateOptionClick(t),
                 children: t.description
-              }, `${t.value}-${t.description.props.id}`)), jsx(wv, {}), jsx(MM, {
+              }, `${t.value}-${t.description.props.id}`)), jsx(SeparatorComponent, {}), jsx(CheckableOptionComponent, {
                 checked: !u,
                 onClick: () => e.onDateOptionClick({
                   value: null,
@@ -1676,14 +1676,14 @@ function t0(e) {
         }), d && jsx("div", {
           className: tA,
           style: e.dropdownShown.data.position,
-          children: jsx(gw, {
+          children: jsx(DropdownWithScrim, {
             dispatch: e.dispatch,
             className: tR,
             children: tK(e.bigmaEnabled, e.org, e.orgCanUseMfaRequiredForGuests).map(t => {
               let a = t.description.props.id;
               let n = `${t.value}-${a}`;
               return t.value === tL ? jsxs(_$$Fragment, {
-                children: [jsx(wv, {}), jsx(MM, {
+                children: [jsx(SeparatorComponent, {}), jsx(CheckableOptionComponent, {
                   disabled: !0,
                   checked: !1,
                   onClick: noop,
@@ -1692,7 +1692,7 @@ function t0(e) {
                     children: t.description
                   })
                 })]
-              }, n) : jsx(MM, {
+              }, n) : jsx(CheckableOptionComponent, {
                 checked: e.filtersConfig.event.description.props.id === a,
                 onClick: () => e.onEventClick(t),
                 children: jsx("span", {
@@ -1712,14 +1712,14 @@ function t0(e) {
         }), c && jsx("div", {
           className: tA,
           style: e.dropdownShown.data.position,
-          children: jsxs(gw, {
+          children: jsxs(DropdownWithScrim, {
             dispatch: e.dispatch,
             className: tR,
-            children: [jsx(MM, {
+            children: [jsx(CheckableOptionComponent, {
               checked: null === e.filtersConfig.team,
               onClick: () => e.onTeamClick(null),
               children: renderI18nText("activity_log.table.all")
-            }), jsx(wv, {}), e.orgTeams.map(t => jsx(MM, {
+            }), jsx(SeparatorComponent, {}), e.orgTeams.map(t => jsx(CheckableOptionComponent, {
               checked: e.filtersConfig.team === t,
               onClick: () => e.onTeamClick(t),
               children: t.name
@@ -1761,9 +1761,9 @@ function aa() {
     show,
     complete,
     uniqueId
-  } = _$$e2({
+  } = useOverlay({
     overlay: OrgAdminLicenseGroupsOnboarding,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   let l = zl(ae);
   useSingleEffect(() => {
@@ -2009,7 +2009,7 @@ let aS = registerModal(function (e) {
   let l = useCurrentUserOrgId();
   let o = useCurrentUserOrg();
   let d = MX();
-  let _ = Xr(t7);
+  let _ = useSetAtom(t7);
   let u = !!e.licenseGroup;
   let m = [];
   u && !e.licenseGroup.is_orphaned && (m = e.licenseGroup.admin_users_metadata.map(e => ({
@@ -2259,9 +2259,9 @@ function aU(e) {
     name: getI18nString("billing_groups_table.column_header.members"),
     className: "license_groups_table--membersColumn--3Z-23 license_groups_table--column--KDz0m table--column--974RA",
     cellComponent: t => renderI18nText("billing_groups_table.n_members", {
-      count: e.licenseGroupMemberCounts[t.id ?? _$$s2]?.total_count ?? 0
+      count: e.licenseGroupMemberCounts[t.id ?? UNASSIGNED_LABEL]?.total_count ?? 0
     }),
-    getSortValue: t => e.licenseGroupMemberCounts[t.id ?? _$$s2]?.total_count ?? 0,
+    getSortValue: t => e.licenseGroupMemberCounts[t.id ?? UNASSIGNED_LABEL]?.total_count ?? 0,
     sortNumerically: !0
   }, ...collaboratorSet.sort(compareProductAccessTypes).map(t => ({
     name: getI18nString("billing_groups_table.column_header.seats", {
@@ -2269,14 +2269,14 @@ function aU(e) {
     }),
     className: "license_groups_table--licenseCountsColumn--wVXQD license_groups_table--column--KDz0m table--column--974RA",
     cellComponent: a => {
-      let n = e.licenseGroupMemberCounts[a.id ?? _$$s2]?.editor_counts?.[t] ?? 0;
+      let n = e.licenseGroupMemberCounts[a.id ?? UNASSIGNED_LABEL]?.editor_counts?.[t] ?? 0;
       return jsx("div", {
         children: renderI18nText("billing_groups_table.n_editors.seat_rename", {
           count: n
         })
       });
     },
-    getSortValue: a => e.licenseGroupMemberCounts[a.id ?? _$$s2]?.editor_counts[t] ?? 0,
+    getSortValue: a => e.licenseGroupMemberCounts[a.id ?? UNASSIGNED_LABEL]?.editor_counts[t] ?? 0,
     sortNumerically: !0
   }))];
   e.invoices && hX(e.invoices) && u.splice(1, 0, {
@@ -2374,7 +2374,7 @@ function aU(e) {
             query: n,
             clearSearch: () => l(""),
             placeholder: getI18nString("billing_groups_table.search.placeholder")
-          }), e.invoices && hX(e.invoices) && jsx(_$$S, {
+          }), e.invoices && hX(e.invoices) && jsx(RenderRefCheckbox, {
             checked: o,
             onChange: () => d(e => !e),
             label: jsxs(AutoLayout, {
@@ -2539,7 +2539,7 @@ function a5(e) {
 }
 function a3(e) {
   let t = useDispatch<AppDispatch>();
-  let a = RR();
+  let a = isCampfireModelEnabled();
   let n = Xf(e.org.id);
   let l = usePlanInvoices({
     planType: FOrganizationLevelType.ORG,
@@ -3036,7 +3036,7 @@ let nk = registerModal(function (e) {
             children: renderI18nText("workspace_table.visibility")
           }), jsx("div", {
             className: nj,
-            children: jsx(_$$S, {
+            children: jsx(RenderRefCheckbox, {
               checked: j === FAccessLevelType.SECRET,
               onChange: k,
               label: getI18nString("workspace_table.make_it_hidden"),
@@ -3091,9 +3091,9 @@ function nS() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e2({
+  } = useOverlay({
     overlay: OrgAdminWorkspacesOnboarding,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useEventForwarder(uniqueId, nw, () => {
     show({
@@ -3186,7 +3186,7 @@ let nL = registerModal(function (e) {
             });
           },
           children: [jsx("label", {
-            children: jsx(_$$S, {
+            children: jsx(RenderRefCheckbox, {
               checked: c,
               onChange: () => _(!c),
               label: getI18nString("billing_groups_table.delete_modal.i_understand_that_this_action_isnt_reversible")
@@ -3796,9 +3796,9 @@ function nX() {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: OrgAdminUnassignedDraftsTabOnboarding,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [e]);
   useSingleEffect(() => {
     show({
@@ -3832,7 +3832,7 @@ function n4(e) {
       let n = e.filters.workspaceFilter ?? void 0;
       n === UNASSIGNED && (n = void 0);
       let s = e.filters.licenseGroupFilter ?? void 0;
-      s === _$$s2 && (s = void 0);
+      s === UNASSIGNED_LABEL && (s = void 0);
       a({
         isPlanAdmin: !0
       }) ? t(showModalHandler({
@@ -5347,7 +5347,7 @@ function sB(e) {
       }
     }), jsx(W, {}), useSeatBillingTermsExperiment() && jsx(_$$k2, {
       org: n
-    }), y3(n.created_at) && jsx(_$$d, {
+    }), isCampfireEducationEnabled(n.created_at) && jsx(_$$d, {
       org: n
     }), (e.selectedTab === DashboardSection.TEAMS || e.selectedTab === DashboardSection.ACTIVITY) && jsx(eK, {}), e.selectedTab === DashboardSection.CONTENT && jsx(nX, {}), jsx(K, {})]
   });

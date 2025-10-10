@@ -1,96 +1,95 @@
-import { reportError } from "../905/11"
-import { ServiceCategories } from "../905/165054"
-import { P } from "../905/184837"
-import { P as _$$P } from "../905/255442"
-import { createReduxSubscriptionAtomWithState } from "../905/270322"
-import { debugState } from "../905/407919"
-import { getTrackingSessionId } from "../905/471229"
-import { getFeatureFlags } from "../905/601108"
-import { AITemplateType } from "../905/793009"
-import { c as _$$c } from "../905/850166"
-import { J } from "../905/915227"
-import { L as _$$L } from "../905/978623"
-import { postUserFlag } from "../905/985254"
-import { $D as _$$$D, Xi } from "../905/990497"
-import { atom } from "../figma_app/27355"
-import { _s } from "../figma_app/33126"
-import { iH } from "../figma_app/449975"
-import { isEditDisabled } from "../figma_app/459490"
-import { openFileKeyAtom, openFileTeamIdAtom } from "../figma_app/516028"
-import { userFlagExistsAtomFamily } from "../figma_app/545877"
-import { $B, es, Uy } from "../figma_app/610446"
-import { setupRemovableAtomFamily } from "../figma_app/615482"
-import { l5 } from "../figma_app/728657"
-import { B as _$$B } from "../figma_app/750676"
-import { IPanelType } from "../figma_app/763686"
-import { fD } from "../figma_app/816671"
-import { E$, ez } from "../figma_app/835718"
-import { fK, h5, LX, lx, Mg } from "../figma_app/862108"
-import { userIdAtom } from "../figma_app/864723"
-
-var $$L12 = (e => (e.NONE = "none", e.TOP_BAR = "top-bar", e.NEW_FILE = "new-file", e))($$L12 || {})
-let $$P11 = "used_figjam_ai_generate"
-let $$D7 = "used_figjam_ai_generate_modal_v2"
-let k = atom(!1)
+import { reportError } from "../905/11";
+import { ServiceCategories } from "../905/165054";
+import { P } from "../905/184837";
+import { P as _$$P } from "../905/255442";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
+import { debugState } from "../905/407919";
+import { getTrackingSessionId } from "../905/471229";
+import { getFeatureFlags } from "../905/601108";
+import { AITemplateType } from "../905/793009";
+import { c as _$$c } from "../905/850166";
+import { J } from "../905/915227";
+import { L as _$$L } from "../905/978623";
+import { postUserFlag } from "../905/985254";
+import { $D as _$$$D, Xi } from "../905/990497";
+import { atom } from "../figma_app/27355";
+import { currentUserOrgIdAtom } from "../figma_app/33126";
+import { iH } from "../figma_app/449975";
+import { isEditDisabled } from "../figma_app/459490";
+import { openFileKeyAtom, openFileTeamIdAtom } from "../figma_app/516028";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
+import { $B, es, Uy } from "../figma_app/610446";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
+import { l5 } from "../figma_app/728657";
+import { B as _$$B } from "../figma_app/750676";
+import { IPanelType } from "../figma_app/763686";
+import { fD } from "../figma_app/816671";
+import { E$, ez } from "../figma_app/835718";
+import { fK, h5, LX, lx, Mg } from "../figma_app/862108";
+import { userIdAtom } from "../figma_app/864723";
+var $$L12 = (e => (e.NONE = "none", e.TOP_BAR = "top-bar", e.NEW_FILE = "new-file", e))($$L12 || {});
+let $$P11 = "used_figjam_ai_generate";
+let $$D7 = "used_figjam_ai_generate_modal_v2";
+let k = atom(!1);
 let $$M13 = atom(null, (e, t) => {
-  t(k, !0)
-  t($$X20, void 0)
-})
+  t(k, !0);
+  t($$X20, void 0);
+});
 let $$F19 = atom(null, (e, t) => {
-  t(V)
-  t(k, !1)
-})
-let $$j17 = atom(!1)
+  t(V);
+  t(k, !1);
+});
+let $$j17 = atom(!1);
 let U = atom(null, (e, t) => {
-  t(V)
-  t($$j17, !0)
-})
+  t(V);
+  t($$j17, !0);
+});
 let B = createReduxSubscriptionAtomWithState(() => Uy() && !getFeatureFlags().figjam_generate_handbrake && !isEditDisabled({
-  isDisabledForViewers: !0,
-}))
-let $$G22 = atom(e => e(B) ? e(k) ? "top-bar" : e(P) !== iH.TRUE || e($$j17) || e(l5) !== fD.NONE ? "none" : "new-file" : "none")
+  isDisabledForViewers: !0
+}));
+let $$G22 = atom(e => e(B) ? e(k) ? "top-bar" : e(P) !== iH.TRUE || e($$j17) || e(l5) !== fD.NONE ? "none" : "new-file" : "none");
 let V = atom(null, (e, t) => {
-  t(K)
-  t($$X20, void 0)
-})
+  t(K);
+  t($$X20, void 0);
+});
 let $$H3 = atom(null, (e, t) => {
-  let r = e($$G22)
-  r === "top-bar" ? t($$F19) : r === "new-file" && t(U)
-})
+  let r = e($$G22);
+  r === "top-bar" ? t($$F19) : r === "new-file" && t(U);
+});
 let $$z9 = atom(null, (e, t) => {
-  e(ei).abort()
-  t(ei, new AbortController())
+  e(ei).abort();
+  t(ei, new AbortController());
   t($$ee14, {
-    status: _$$c.NONE,
-  })
-})
+    status: _$$c.NONE
+  });
+});
 let $$W0 = atom(null, (e, t) => {
-  t(V)
-  t($$j17, !1)
-  t(k, !1)
-})
+  t(V);
+  t($$j17, !1);
+  t(k, !1);
+});
 let K = atom(null, (e, t) => {
-  t($$z9)
-  t($$J5, void 0)
-  t($$Z16, Xi())
-  t($$Q10, IPanelType.BASIC)
-})
-let $$Y21 = setupRemovableAtomFamily(() => atom(!1))
-let $$$1 = atom("")
-let $$X20 = atom(void 0)
-let $$q6 = atom("")
-let $$J5 = atom(void 0)
-let $$Z16 = atom(Xi())
-let $$Q10 = atom(IPanelType.BASIC)
+  t($$z9);
+  t($$J5, void 0);
+  t($$Z16, Xi());
+  t($$Q10, IPanelType.BASIC);
+});
+let $$Y21 = setupRemovableAtomFamily(() => atom(!1));
+let $$$1 = atom("");
+let $$X20 = atom(void 0);
+let $$q6 = atom("");
+let $$J5 = atom(void 0);
+let $$Z16 = atom(Xi());
+let $$Q10 = atom(IPanelType.BASIC);
 let $$ee14 = atom({
-  status: _$$c.NONE,
-})
-let $$et4 = atom(null)
-let $$er18 = setupRemovableAtomFamily(() => atom(!1))
+  status: _$$c.NONE
+});
+let $$et4 = atom(null);
+let $$er18 = setupRemovableAtomFamily(() => atom(!1));
 let $$en8 = atom(null, (e, t, r) => {
-  t($$er18, r)
-})
-let ei = atom(new AbortController())
+  t($$er18, r);
+});
+let ei = atom(new AbortController());
 let ea = atom(null, async (e, t, {
   fileKey: r,
   prompt: i,
@@ -100,122 +99,116 @@ let ea = atom(null, async (e, t, {
   subtitle: b,
   entrypoint: T,
   fromGenerateModalV2: I,
-  pageNodeId: S,
+  pageNodeId: S
 }) => {
-  let v
+  let v;
   if (r === null && reportError(ServiceCategories.AI_PRODUCTIVITY, new Error("No file key provided for FigJam AI Generate request")), !i) {
     return {
-      status: _$$c.NONE,
-    }
+      status: _$$c.NONE
+    };
   }
-  t(Mg, e => e + 1)
+  t(Mg, e => e + 1);
   e(userFlagExistsAtomFamily($$P11)).data || debugState.dispatch(postUserFlag({
-    [$$P11]: !0,
-  }))
-  let L = e(userFlagExistsAtomFamily($$D7)).data
+    [$$P11]: !0
+  }));
+  let L = e(userFlagExistsAtomFamily($$D7)).data;
   I && !L && debugState.dispatch(postUserFlag({
-    [$$D7]: !0,
-  }))
-  t($$z9)
-  let k = e(ei).signal
+    [$$D7]: !0
+  }));
+  t($$z9);
+  let k = e(ei).signal;
   let M = {
-    orgId: e(_s),
+    orgId: e(currentUserOrgIdAtom),
     teamId: e(openFileTeamIdAtom) || null,
     fileKey: r,
     userId: e(userIdAtom) || null,
     trackingSessionId: getTrackingSessionId(),
-    fileSeq: e(J)?.toString() || null,
-  }
+    fileSeq: e(J)?.toString() || null
+  };
   t($$ee14, {
-    status: _$$c.LOADING,
-  })
-  t($$J5, c)
-  t($$et4, S)
-  let F = "board"
+    status: _$$c.LOADING
+  });
+  t($$J5, c);
+  t($$et4, S);
+  let F = "board";
   try {
-    globalThis.AI_DEBUG_XML && getFeatureFlags().figjam_text_to_template_debug
-      ? F = "board"
-      : (F = (await _$$P({
-          prompt: i,
-          signal: k,
-          authInfo: M,
-        })) || "board", getFeatureFlags().figjam_text_to_visual_timeline || F !== "timeline" || (F = "gantt"), $B() || F !== "mindmap" || (F = "board"))
-  }
-  catch (a) {
-    let e = E$(a, ez.GENERATE)
+    globalThis.AI_DEBUG_XML && getFeatureFlags().figjam_text_to_template_debug ? F = "board" : (F = (await _$$P({
+      prompt: i,
+      signal: k,
+      authInfo: M
+    })) || "board", getFeatureFlags().figjam_text_to_visual_timeline || F !== "timeline" || (F = "gantt"), $B() || F !== "mindmap" || (F = "board"));
+  } catch (a) {
+    let e = E$(a, ez.GENERATE);
     v = {
       status: _$$c.ERROR,
       type: F,
       errorMessage: e.message,
-      trace: a.trace,
-    }
-    h5(r, 0, 1, i, "inappropriate", s, T, c, y, b)
-    fK(r, e.message)
-    e.reportToSentry && reportError(ServiceCategories.AI_PRODUCTIVITY, a)
-    t($$ee14, v)
-    return v
+      trace: a.trace
+    };
+    h5(r, 0, 1, i, "inappropriate", s, T, c, y, b);
+    fK(r, e.message);
+    e.reportToSentry && reportError(ServiceCategories.AI_PRODUCTIVITY, a);
+    t($$ee14, v);
+    return v;
   }
-  c && (c === es.FLOW_CHART ? F = "diagram" : c === es.GANTT_CHART ? F = "gantt" : c === es.ORG_CHART && (F = "orgchart"))
-  let j = e($$q6)
-  let U = j && i.includes(j) ? j : void 0
-  t($$q6, "")
-  h5(r, 0, 1, i, F, s, T, c, y, b, U)
+  c && (c === es.FLOW_CHART ? F = "diagram" : c === es.GANTT_CHART ? F = "gantt" : c === es.ORG_CHART && (F = "orgchart"));
+  let j = e($$q6);
+  let U = j && i.includes(j) ? j : void 0;
+  t($$q6, "");
+  h5(r, 0, 1, i, F, s, T, c, y, b, U);
   try {
     v = await _$$B(() => e(LX) || "null", r, AITemplateType.AI, async () => {
-      let t
+      let t;
       if (F === "board") {
-        let n = e(_s)
+        let n = e(currentUserOrgIdAtom);
         t = await _$$L({
           prompt: i,
           signal: k,
           fileKey: r,
           authInfo: M,
-          orgId: n,
-        })
-      }
-      else {
-        let t = e($$Q10)
-        let r = e($$Z16)
-        let n = F
+          orgId: n
+        });
+      } else {
+        let t = e($$Q10);
+        let r = e($$Z16);
+        let n = F;
         await _$$$D({
           prompt: i,
           signal: k,
           visualType: n,
           authInfo: M,
           ganttColor: r,
-          ganttType: t,
-        })
+          ganttType: t
+        });
       }
-      let n = e(LX)
-      lx(r, 0, i, F, n)
+      let n = e(LX);
+      lx(r, 0, i, F, n);
       return {
         status: _$$c.SUCCESS,
         type: F,
-        trace: t,
-      }
-    })
-  }
-  catch (e) {
+        trace: t
+      };
+    });
+  } catch (e) {
     if (e?.name === "AbortError") {
       v = {
-        status: _$$c.NONE,
-      }
-    }
-    else {
-      let t = E$(e, ez.GENERATE)
+        status: _$$c.NONE
+      };
+    } else {
+      let t = E$(e, ez.GENERATE);
       v = {
         status: _$$c.ERROR,
         type: F,
         errorMessage: t.message,
-        trace: e.trace,
-      }
-      t.reportToSentry && reportError(ServiceCategories.AI_PRODUCTIVITY, e)
-      fK(r, t.message)
+        trace: e.trace
+      };
+      t.reportToSentry && reportError(ServiceCategories.AI_PRODUCTIVITY, e);
+      fK(r, t.message);
     }
   }
-  t($$ee14, v)
-  return v
-})
+  t($$ee14, v);
+  return v;
+});
 let $$es15 = atom(null, (e, t, {
   prompt: r,
   stage: i,
@@ -224,12 +217,12 @@ let $$es15 = atom(null, (e, t, {
   subtitle: o,
   entrypoint: d,
   fromGenerateModalV2: c,
-  pageNodeId: u,
+  pageNodeId: u
 }) => {
-  let p = e(openFileKeyAtom)
+  let p = e(openFileKeyAtom);
   if (p === null || p.length === 0) {
-    reportError(ServiceCategories.AI_PRODUCTIVITY, new Error("No file key found for loaded file to use for FigJam AI Generate request"))
-    return
+    reportError(ServiceCategories.AI_PRODUCTIVITY, new Error("No file key found for loaded file to use for FigJam AI Generate request"));
+    return;
   }
   t(ea, {
     fileKey: p,
@@ -240,9 +233,9 @@ let $$es15 = atom(null, (e, t, {
     subtitle: o,
     entrypoint: d,
     fromGenerateModalV2: c,
-    pageNodeId: u,
-  })
-})
+    pageNodeId: u
+  });
+});
 let $$eo2 = atom(null, (e, t, {
   fileKey: r,
   prompt: n,
@@ -252,7 +245,7 @@ let $$eo2 = atom(null, (e, t, {
   subtitle: o,
   entrypoint: l,
   fromGenerateModalV2: d,
-  pageNodeId: c,
+  pageNodeId: c
 }) => {
   t(ea, {
     fileKey: r,
@@ -263,29 +256,29 @@ let $$eo2 = atom(null, (e, t, {
     subtitle: o,
     entrypoint: l,
     fromGenerateModalV2: d,
-    pageNodeId: c,
-  })
-})
-export const A0 = $$W0
-export const Ac = $$$1
-export const D2 = $$eo2
-export const H4 = $$H3
-export const J1 = $$et4
-export const JV = $$J5
-export const KL = $$q6
-export const Pg = $$D7
-export const RC = $$en8
-export const RJ = $$z9
-export const Sn = $$Q10
-export const W1 = $$P11
-export const Wl = $$L12
-export const bJ = $$M13
-export const dO = $$ee14
-export const ft = $$es15
-export const l1 = $$Z16
-export const qe = $$j17
-export const rM = $$er18
-export const tz = $$F19
-export const xc = $$X20
-export const yt = $$Y21
-export const zS = $$G22
+    pageNodeId: c
+  });
+});
+export const A0 = $$W0;
+export const Ac = $$$1;
+export const D2 = $$eo2;
+export const H4 = $$H3;
+export const J1 = $$et4;
+export const JV = $$J5;
+export const KL = $$q6;
+export const Pg = $$D7;
+export const RC = $$en8;
+export const RJ = $$z9;
+export const Sn = $$Q10;
+export const W1 = $$P11;
+export const Wl = $$L12;
+export const bJ = $$M13;
+export const dO = $$ee14;
+export const ft = $$es15;
+export const l1 = $$Z16;
+export const qe = $$j17;
+export const rM = $$er18;
+export const tz = $$F19;
+export const xc = $$X20;
+export const yt = $$Y21;
+export const zS = $$G22;

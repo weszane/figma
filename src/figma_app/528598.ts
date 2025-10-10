@@ -12,7 +12,7 @@ import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/49800";
 import { HiddenLabel } from "../905/270045";
 import { A as _$$A } from "../905/920165";
-import { c$, bL, l9, mc } from "../905/493196";
+import { SelectOptionReset, SelectGroupLabel, SelectSeparator, SelectContainer } from "../905/493196";
 import { ButtonPrimitive } from "../905/632989";
 import { bL as _$$bL } from "../905/911410";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
@@ -853,7 +853,7 @@ function eX({
 }) {
   let p = l.options.map(e => {
     let t = e.value.value.toString();
-    return jsx(c$, {
+    return jsx(SelectOptionReset, {
       value: t,
       children: e.label
     }, e.label);
@@ -865,7 +865,7 @@ function eX({
     children: jsx("div", {
       className: eG(s),
       "data-disabled": o,
-      children: jsxs(bL, {
+      children: jsxs(SelectGroupLabel, {
         value: _,
         onChange: e => {
           let n = t.type === ComponentPropType.TEXT ? resolveVariableValue(VariableResolvedDataType.TEXT_DATA, {
@@ -877,14 +877,14 @@ function eX({
           u?.(r, t.explicitDefID, n, i);
         },
         recordingKey: generateRecordingKey("componentPropAssignmentSelect", r.join("-"), c),
-        children: [jsx(l9, {
+        children: [jsx(SelectSeparator, {
           placeholder: isInvalidValue(e) ? getI18nString("design_systems.component_properties.mixed") : void 0,
           label: jsx(HiddenLabel, {
             children: h
           }),
           width: "fill",
           size: "md"
-        }), jsx(mc, {
+        }), jsx(SelectContainer, {
           children: p
         })]
       })

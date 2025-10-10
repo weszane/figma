@@ -1238,3 +1238,4 @@ export const s2 = initializeGlobalPluginAPI
 export const A9 = runLastPlugin
 export const bT = runPluginWorkflow
 export const E9 = executePluginWithOptions
+export {hasStoredValue}

@@ -1,178 +1,271 @@
-let n = new class {
+// Refactored InlinePreviewController - renamed variables, added types, improved readability
+class InlinePreviewController {
+  private inlinePreviewIframe: HTMLIFrameElement | null = null
+  private viewerLoaded: boolean = false
+  private iframeReadyToReceiveMessages: boolean = false
+  private disableCloseWithShortcut: boolean = false
+
   constructor() {
-    this.inlinePreviewIframe = null;
-    this.viewerLoaded = !1;
-    this.iframeReadyToReceiveMessages = !1;
-    this.isIframeInitialized = () => null != this.inlinePreviewIframe;
-    this.disableCloseWithShortcut = !1;
-    this.isLoaded = () => this.viewerLoaded;
-    this.isReadyToReceiveMessages = () => this.iframeReadyToReceiveMessages;
-    this.focus = () => {
-      this.verifyIframe(this.inlinePreviewIframe);
-      this.inlinePreviewIframe.focus();
-    };
+    // Bind methods to preserve `this` context
+    this.isIframeInitialized = this.isIframeInitialized.bind(this)
+    this.isLoaded = this.isLoaded.bind(this)
+    this.isReadyToReceiveMessages = this.isReadyToReceiveMessages.bind(this)
+    this.focus = this.focus.bind(this)
   }
-  verifyIframe(e) {
-    if (null == e) throw Error("Inline Preview Iframe not initialized");
+
+  // Checks if iframe is initialized
+  public isIframeInitialized(): boolean {
+    return this.inlinePreviewIframe !== null
   }
-  addBubbleUpEventHandlers(e) {
-    let t = t => {
-      var i = new CustomEvent(t.type, {
-        bubbles: !0,
-        cancelable: !1
+
+  // Checks if viewer is loaded
+  public isLoaded(): boolean {
+    return this.viewerLoaded
+  }
+
+  // Checks if iframe is ready to receive messages
+  public isReadyToReceiveMessages(): boolean {
+    return this.iframeReadyToReceiveMessages
+  }
+
+  // Focuses on the iframe after verification
+  public focus(): void {
+    this.verifyIframe(this.inlinePreviewIframe)
+    this.inlinePreviewIframe!.focus()
+  }
+
+  // Throws error if iframe is not initialized
+  private verifyIframe(iframe: HTMLIFrameElement | null): asserts iframe is HTMLIFrameElement {
+    if (iframe === null) {
+      throw new Error("Inline Preview Iframe not initialized")
+    }
+  }
+
+  // Adds event handlers to bubble up events from iframe
+  private addBubbleUpEventHandlers(iframe: HTMLIFrameElement): () => void {
+    const handleEvent = (event: KeyboardEvent): void => {
+      const customEvent = new CustomEvent(event.type, {
+        bubbles: true,
+        cancelable: false,
       });
-      i.shiftKey = t.shiftKey;
-      e.dispatchEvent(i);
-    };
-    let i = e.contentWindow;
-    let n = ["keydown", "keyup"];
-    n.forEach(e => {
-      i.addEventListener(e, t);
-    });
-    return () => {
-      n.forEach(e => {
-        i.removeEventListener(e, t);
-      });
-    };
+      (customEvent as any).shiftKey = event.shiftKey
+      iframe.dispatchEvent(customEvent)
+    }
+
+    const contentWindow = iframe.contentWindow!
+    const eventTypes = ["keydown", "keyup"]
+
+    eventTypes.forEach((eventType) => {
+      contentWindow.addEventListener(eventType, handleEvent)
+    })
+
+    // Return cleanup function
+    return (): void => {
+      eventTypes.forEach((eventType) => {
+        contentWindow.removeEventListener(eventType, handleEvent)
+      })
+    }
   }
-  initialize(e, {
-    closeInlinePreview: t,
-    dispatch: i,
-    onLoad: n
-  }) {
-    this.inlinePreviewIframe = e;
-    let r = this.addBubbleUpEventHandlers(e);
-    this.inlinePreviewIframe.contentWindow.addEventListener("click", this.focus);
-    let a = e => {
-      if (e.origin === location.origin) {
-        if (e.data?.type === "UPDATE_TIMELINE_PLAYER_STATE" && i({
-          type: "UPDATE_TIMELINE_PLAYER_STATE",
-          payload: {
-            status: e.data.data.status,
-            currentTimeMs: e.data.data.currentTimeMs,
-            totalTimeMs: e.data.data.totalTimeMs
-          }
-        }), e.data?.type === "PRESENTED_NODE_CHANGED" && i({
-          type: "UPDATE_PRESENTED_NODE",
-          payload: {
-            nodeId: e.data.data?.presentedNodeId
-          }
-        }), e.data?.type === "REQUEST_CLOSE") {
-          if (this.disableCloseWithShortcut) return;
-          t("keyboard");
-        }
-        e.data?.type === "INITIAL_LOAD" && (this.viewerLoaded = !0, n(), i({
-          type: "HANDLE_VIEWER_LOADED"
-        }));
-        e.data?.type === "INLINE_PREVIEW_READY_TO_RECEIVE_MESSAGES" && (this.iframeReadyToReceiveMessages = !0, i({
-          type: "HANDLE_READY_TO_RECEIVE_MESSAGES"
-        }));
-        e.data?.type === "INLINE_PREVIEW_SET_FRAME_CONTROLS" && i({
-          type: "UPDATE_FRAME_CONTROLS",
-          payload: e.data.data
-        });
-        e.data?.type === "EXPORT_COMPLETED" && i({
-          type: "HANDLE_EXPORT_COMPLETED"
-        });
+
+  // Initializes the controller with iframe and callbacks
+  public initialize(
+    iframe: HTMLIFrameElement,
+    callbacks: {
+      closeInlinePreview: (reason: string) => void
+      dispatch: (action: any) => void
+      onLoad: () => void
+    },
+  ): () => void {
+    this.inlinePreviewIframe = iframe
+    const removeBubbleUpHandlers = this.addBubbleUpEventHandlers(iframe)
+
+    iframe.contentWindow!.addEventListener("click", this.focus)
+
+    const handleMessage = (event: MessageEvent): void => {
+      if (event.origin !== location.origin)
+        return
+
+      const { data } = event
+      const { type } = data || {}
+
+      switch (type) {
+        case "UPDATE_TIMELINE_PLAYER_STATE":
+          callbacks.dispatch({
+            type: "UPDATE_TIMELINE_PLAYER_STATE",
+            payload: {
+              status: data.data.status,
+              currentTimeMs: data.data.currentTimeMs,
+              totalTimeMs: data.data.totalTimeMs,
+            },
+          })
+          break
+
+        case "PRESENTED_NODE_CHANGED":
+          callbacks.dispatch({
+            type: "UPDATE_PRESENTED_NODE",
+            payload: {
+              nodeId: data.data?.presentedNodeId,
+            },
+          })
+          break
+
+        case "REQUEST_CLOSE":
+          if (this.disableCloseWithShortcut)
+            return
+          callbacks.closeInlinePreview("keyboard")
+          break
+
+        case "INITIAL_LOAD":
+          this.viewerLoaded = true
+          callbacks.onLoad()
+          callbacks.dispatch({ type: "HANDLE_VIEWER_LOADED" })
+          break
+
+        case "INLINE_PREVIEW_READY_TO_RECEIVE_MESSAGES":
+          this.iframeReadyToReceiveMessages = true
+          callbacks.dispatch({ type: "HANDLE_READY_TO_RECEIVE_MESSAGES" })
+          break
+
+        case "INLINE_PREVIEW_SET_FRAME_CONTROLS":
+          callbacks.dispatch({
+            type: "UPDATE_FRAME_CONTROLS",
+            payload: data.data,
+          })
+          break
+
+        case "EXPORT_COMPLETED":
+          callbacks.dispatch({ type: "HANDLE_EXPORT_COMPLETED" })
+          break
       }
-    };
-    window.addEventListener("message", a);
-    return () => {
-      this.inlinePreviewIframe?.contentWindow && (r(), this.inlinePreviewIframe.contentWindow.removeEventListener("click", this.focus));
-      window.removeEventListener("message", a);
-      this.inlinePreviewIframe = null;
-      this.viewerLoaded = !1;
-      this.iframeReadyToReceiveMessages = !1;
-    };
+    }
+
+    window.addEventListener("message", handleMessage)
+
+    // Return cleanup function
+    return (): void => {
+      if (this.inlinePreviewIframe?.contentWindow) {
+        removeBubbleUpHandlers()
+        this.inlinePreviewIframe.contentWindow.removeEventListener("click", this.focus)
+      }
+      window.removeEventListener("message", handleMessage)
+      this.inlinePreviewIframe = null
+      this.viewerLoaded = false
+      this.iframeReadyToReceiveMessages = false
+    }
   }
-  messageViewer(e) {
-    this.verifyIframe(this.inlinePreviewIframe);
-    this.inlinePreviewIframe.contentWindow?.postMessage(e, "*");
+
+  // Sends a message to the iframe viewer
+  private messageViewer(message: any): void {
+    this.verifyIframe(this.inlinePreviewIframe)
+    this.inlinePreviewIframe!.contentWindow!.postMessage(message, "*")
   }
-  navigateBackward() {
+
+  // Navigation methods
+  public navigateBackward(): void {
+    this.messageViewer({ type: "NAVIGATE_BACKWARD" })
+  }
+
+  public navigateForward(): void {
+    this.messageViewer({ type: "NAVIGATE_FORWARD" })
+  }
+
+  public navigateTo(nodeId: string | null): void {
+    if (!this.viewerLoaded)
+      return
+    this.verifyIframe(this.inlinePreviewIframe)
     this.messageViewer({
-      type: "NAVIGATE_BACKWARD"
-    });
-  }
-  navigateForward() {
-    this.messageViewer({
-      type: "NAVIGATE_FORWARD"
-    });
-  }
-  navigateTo(e) {
-    this.viewerLoaded && (this.verifyIframe(this.inlinePreviewIframe), this.messageViewer({
       type: "NAVIGATE_TO_FRAME_AND_CLOSE_OVERLAYS",
       data: {
-        nodeId: e,
-        startingPointNodeId: e ?? void 0
-      }
-    }));
+        nodeId,
+        startingPointNodeId: nodeId ?? undefined,
+      },
+    })
   }
-  export(e, t) {
-    this.verifyIframe(this.inlinePreviewIframe);
+
+  // Export methods
+  public export(nodeIds: string[], videoVolumeByNodeId: Record<string, number>): void {
+    this.verifyIframe(this.inlinePreviewIframe)
     this.messageViewer({
       type: "REQUEST_EXPORT",
       data: {
-        nodeIds: e,
-        videoVolumeByNodeId: t
-      }
-    });
+        nodeIds,
+        videoVolumeByNodeId,
+      },
+    })
   }
-  cancelExport() {
-    this.verifyIframe(this.inlinePreviewIframe);
-    this.messageViewer({
-      type: "CANCEL_EXPORT"
-    });
+
+  public cancelExport(): void {
+    this.verifyIframe(this.inlinePreviewIframe)
+    this.messageViewer({ type: "CANCEL_EXPORT" })
   }
-  play(e) {
-    this.verifyIframe(this.inlinePreviewIframe);
+
+  // Player control methods
+  public play(videoVolumeByNodeId?: Record<string, number>): void {
+    this.verifyIframe(this.inlinePreviewIframe)
     this.messageViewer({
       type: "TIMELINE_PLAYER_PLAY",
       data: {
-        videoVolumeByNodeId: e
-      }
-    });
+        videoVolumeByNodeId,
+      },
+    })
   }
-  pause() {
-    this.verifyIframe(this.inlinePreviewIframe);
+
+  public pause(): void {
+    this.verifyIframe(this.inlinePreviewIframe)
+    this.messageViewer({ type: "TIMELINE_PLAYER_PAUSE" })
+  }
+
+  public resetPlayer(): void {
+    this.verifyIframe(this.inlinePreviewIframe)
+    this.messageViewer({ type: "TIMELINE_PLAYER_RESET" })
+  }
+
+  // Scaling mode
+  public setScalingMode(scalingInfo: any, userInitiated: boolean): void {
+    if (!this.viewerLoaded)
+      return
+    this.verifyIframe(this.inlinePreviewIframe)
     this.messageViewer({
-      type: "TIMELINE_PLAYER_PAUSE"
-    });
-  }
-  resetPlayer() {
-    this.verifyIframe(this.inlinePreviewIframe);
-    this.messageViewer({
-      type: "TIMELINE_PLAYER_RESET"
-    });
-  }
-  setScalingMode(e, t) {
-    this.viewerLoaded && (this.verifyIframe(this.inlinePreviewIframe), this.messageViewer({
       type: "SET_SCALING_MODE",
       data: {
-        scalingInfo: e,
-        userInitiated: t
-      }
-    }));
+        scalingInfo,
+        userInitiated,
+      },
+    })
   }
-  ensureClosed() {
-    this.inlinePreviewIframe && n.navigateTo(null);
+
+  // Ensures iframe is closed
+  public ensureClosed(): void {
+    if (this.inlinePreviewIframe) {
+      this.navigateTo(null)
+    }
   }
-  restartPrototype() {
-    this.inlinePreviewIframe && this.messageViewer({
-      type: "RESTART"
-    });
+
+  // Restarts prototype
+  public restartPrototype(): void {
+    if (this.inlinePreviewIframe) {
+      this.messageViewer({ type: "RESTART" })
+    }
   }
-  notifyWasModalOpenedSinceViewerLoaded(e) {
-    this.iframeReadyToReceiveMessages && (this.verifyIframe(this.inlinePreviewIframe), this.messageViewer({
+
+  // Notifies about modal state
+  public notifyWasModalOpenedSinceViewerLoaded(wasModalOpenedSinceViewerLoaded: boolean): void {
+    if (!this.iframeReadyToReceiveMessages)
+      return
+    this.verifyIframe(this.inlinePreviewIframe)
+    this.messageViewer({
       type: "INLINE_PREVIEW_WAS_MODAL_OPENED_SINCE_VIEWER_LOADED",
       data: {
-        wasModalOpenedSinceViewerLoaded: e
-      }
-    }));
+        wasModalOpenedSinceViewerLoaded,
+      },
+    })
   }
-  setDisableCloseWithShortcut(e) {
-    this.disableCloseWithShortcut = e;
+
+  // Sets whether closing with shortcut is disabled
+  public setDisableCloseWithShortcut(disabled: boolean): void {
+    this.disableCloseWithShortcut = disabled
   }
-}();
-let $$r0 = n;
-export const A = $$r0;
+}
+
+export const inlinePreviewController = new InlinePreviewController()
+export const A = inlinePreviewController

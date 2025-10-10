@@ -1,8 +1,9 @@
 import type { Atom } from 'jotai'
 import type { AtomFamily } from 'jotai/vanilla/utils/atomFamily'
 import { atom } from 'jotai'
+
 import { useSetAtom, useStore } from 'jotai/react'
-import { atomFamily, atomWithDefault, unwrap } from 'jotai/utils'
+import { atomFamily, atomWithDefault, atomWithReducer, atomWithReset, loadable, RESET, selectAtom, unwrap } from 'jotai/utils'
 import { useDebugValue, useEffect, useMemo, useReducer } from 'react'
 import { createAtomWithEquality } from '../905/12800'
 import { setupDebounceAtoms } from '../905/20215'
@@ -10,6 +11,7 @@ import { createLocalStorageAtom, createValidatedLocalStorageAtom } from '../905/
 import { createCustomAtom } from '../905/62389'
 import { useUndoRedoAtom } from '../905/123366'
 import { setupSubscriptionAtom } from '../905/142517'
+import { atomCombiner, identitySelector } from '../905/292282'
 import { atomStoreManager } from '../905/490038'
 import { AtomProvider } from '../905/577276'
 import { setupAtomWithInitialValue } from '../905/623391'
@@ -30,7 +32,10 @@ const defaultSymbol = Symbol()
  * @returns A new atom with custom read/write logic.
  * @originalName $$_13
  */
-export function createCustomReadWriteAtom<T>(atomLike: Atom<T> | { read: (get: any) => T, write?: any }) {
+export function createCustomReadWriteAtom<T>(atomLike: Atom<T> | {
+  read: (get: any) => T
+  write?: any
+}) {
   const initialValue = unwrap(atomLike, (...args: any[]) => args.length ? args[0] : defaultSymbol)
   const read = (get: (atom: any) => any) => get(initialValue) === defaultSymbol ? get(atomLike) : get(initialValue)
   return 'write' in atomLike ? atom(read, atomLike.write) : atom(read)
@@ -43,18 +48,14 @@ export function createCustomReadWriteAtom<T>(atomLike: Atom<T> | { read: (get: a
  * @returns The current value of the atom, or a promise status if the value is a Promise.
  * @originalName $$S18
  */
-export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { deferToFrame?: boolean }): T {
+export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: {
+  deferToFrame?: boolean
+}): T {
   const store = useStore()
-  const [[, lastStore, lastAtom], trigger] = useReducer(
-    (prev) => {
-      const nextValue = store.get(atomInstance)
-      return Object.is(prev[0], nextValue) && prev[1] === store && prev[2] === atomInstance
-        ? prev
-        : [nextValue, store, atomInstance]
-    },
-    undefined,
-    () => [store.get(atomInstance), store, atomInstance],
-  )
+  const [[, lastStore, lastAtom], trigger] = useReducer((prev) => {
+    const nextValue = store.get(atomInstance)
+    return Object.is(prev[0], nextValue) && prev[1] === store && prev[2] === atomInstance ? prev : [nextValue, store, atomInstance]
+  }, undefined, () => [store.get(atomInstance), store, atomInstance])
   let value = store.get(atomInstance)
   if (lastStore !== store || lastAtom !== atomInstance) {
     trigger()
@@ -81,7 +82,7 @@ export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { de
     }
   }, [store, atomInstance, deferToFrame])
   useDebugValue(value)
-  return value instanceof Promise ? handlePromiseStatus(value as any) as any  : value
+  return value instanceof Promise ? handlePromiseStatus(value as any) as any : value
 }
 
 /**
@@ -91,10 +92,9 @@ export function useAtomWithSubscription<T>(atomInstance: Atom<T>, options?: { de
  * @returns [atom value, atom setter]
  * @originalName $$v17
  */
-export function useAtomValueAndSetter<T = any, Args extends any[] = any[]>(
-  atomInstance: any,
-  options?: { deferToFrame?: boolean },
-): [T , (...args: Args) => void] {
+export function useAtomValueAndSetter<T = any, Args extends any[] = any[]>(atomInstance: any, options?: {
+  deferToFrame?: boolean
+}): [T, (...args: Args) => void] {
   return [useAtomWithSubscription(atomInstance, options), useSetAtom(atomInstance)]
 }
 
@@ -105,11 +105,12 @@ export function useAtomValueAndSetter<T = any, Args extends any[] = any[]>(
  * @returns Atom family with removeAll method.
  * @originalName $$A3
  */
-export function createRemovableAtomFamily<T, K, R extends Atom<K> = Atom<K>>(
-  keyFn: (value: T) => R,
-  areEqual?: (a: T, b: T) => boolean,
-): AtomFamily<T, R> & { removeAll: () => void } {
-  const family = atomFamily(keyFn, areEqual) as AtomFamily<T, R> & { removeAll: () => void }
+export function createRemovableAtomFamily<T, K, R extends Atom<K> = Atom<K>>(keyFn: (value: T) => R, areEqual?: (a: T, b: T) => boolean): AtomFamily<T, R> & {
+  removeAll: () => void
+} {
+  const family = atomFamily(keyFn, areEqual) as AtomFamily<T, R> & {
+    removeAll: () => void
+  }
   family.removeAll = () => {
     family.setShouldRemove(() => true)
     family.setShouldRemove(null)
@@ -135,10 +136,7 @@ export const Mt = createCustomReadWriteAtom
 export const fp = useAtomValueAndSetter
 export const md = useAtomWithSubscription
 export const mC = useMemoizedAtomValue
-export { p6, tP } from '../905/292282'
-export { Pj, Xr } from '../vendor/525001'
-export { mg, Rq, t_, tx, um, Ut } from '../vendor/812047'
-export { useResetAtom } from 'jotai/react/utils'
+// export { useResetAtom } from 'jotai/react/utils'
 export const An = AtomProvider
 export const xP = useUndoRedoAtom
 export const zl = atomStoreManager
@@ -152,4 +150,16 @@ export const M2 = createAtomWithEquality
 export const LJ = createCustomAtom
 export const FZ = setupCustomAtom
 export const eU = atom
-export { atom, AtomProvider, atomStoreManager, atomWithDefault, createAtomWithEquality, createCustomAtom, createLocalStorageAtom, createValidatedLocalStorageAtom, setupAtomWithMount, setupCustomAtom, setupSubscriptionAtom }
+// export { atom, AtomProvider, atomStoreManager, atomWithDefault, createAtomWithEquality, createCustomAtom, createLocalStorageAtom, createValidatedLocalStorageAtom, setupAtomWithMount, setupCustomAtom, setupSubscriptionAtom }
+export const p6 = atomCombiner
+export const tP = identitySelector
+export const Pj = useStore
+export const Xr = useSetAtom
+export const mg = selectAtom
+export const Rq = loadable
+export const t_ = atomWithDefault
+export const tx = atomWithReset
+export const um = atomWithReducer
+export const Ut = RESET
+
+export {atomStoreManager}

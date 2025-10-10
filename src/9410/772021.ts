@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useAtomWithSubscription, Rq, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, loadable, useSetAtom } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { Sb } from "../figma_app/101956";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { TrackingKeyEnum } from "../905/696396";
 import { ImageOverlayComponent } from "../905/129046";
 import { OnboardingModal } from "../905/425180";
@@ -27,9 +27,9 @@ export function $$I3() {
   let e = useAtomWithSubscription(S);
   let t = useAtomWithSubscription(qe);
   let i = useAtomWithSubscription(rM);
-  let s = _$$e({
+  let s = useOverlay({
     overlay: FigJamAiToolbarOverlay,
-    priority: N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [e]);
   useEffect(() => {
     let e = setTimeout(() => {
@@ -53,14 +53,14 @@ export function $$I3() {
 export function $$k2({
   targetKey: e
 }) {
-  let t = useAtomWithSubscription(Rq(Sb));
+  let t = useAtomWithSubscription(loadable(Sb));
   let i = useAtomWithSubscription(T);
   let n = useAtomWithSubscription(w);
   let p = useAtomWithSubscription(j);
-  let b = Xr(RC);
-  let C = _$$e({
+  let b = useSetAtom(RC);
+  let C = useOverlay({
     overlay: FigJamAiNewFileOverlay,
-    priority: N.HIGH_PRIORITY_MODAL
+    priority: ModalPriority.HIGH_PRIORITY_MODAL
   }, [i, n, t, p]);
   useSingleEffect(() => {
     C.show({

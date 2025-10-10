@@ -3,7 +3,7 @@ import { memo, useMemo, useRef, useState, useEffect, useCallback, Suspense } fro
 import { assert } from "../figma_app/465776";
 import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
-import { bL, l9, mc, c$, wv } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset, SelectRoot } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { LoadingSpinner } from "../905/443820";
 import { ox } from "../905/163832";
@@ -18,7 +18,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
-import { c$ as _$$c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { _ as _$$_ } from "../figma_app/658134";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -110,7 +110,7 @@ function z({
     let e = t.recommendations.map(({
       label: e,
       action: r
-    }, i) => jsx(_$$c$, {
+    }, i) => jsx(OptionComponent, {
       onClick: () => {
         H(r, t.nodeIds);
         hide();
@@ -244,22 +244,22 @@ export function $$K1({
     className: "lint_error_modal--lintErrorsContent--qTrOy",
     children: [_ && jsx("div", {
       className: "lint_error_modal--filterContainer--NwWyY",
-      children: jsxs(bL, {
+      children: jsxs(SelectGroupLabel, {
         value: c,
         onChange: e => u(e),
         recordingKey: generateRecordingKey(e, "category-filter"),
-        children: [jsx(l9, {
+        children: [jsx(SelectSeparator, {
           label: jsx(HiddenLabel, {
             children: getI18nString("sites.panel.sites_issues.issue_type")
           }),
           children: "all" === c ? getI18nString("sites.panel.sites_issues.all_properties") : o[c].label
-        }), jsxs(mc, {
-          children: [jsx(c$, {
+        }), jsxs(SelectContainer, {
+          children: [jsx(SelectOptionReset, {
             value: "all",
             children: getI18nString("sites.panel.sites_issues.all_properties")
-          }), jsx(wv, {}), Object.entries(o).filter(([e]) => p.has(e)).map(([e, {
+          }), jsx(SelectRoot, {}), Object.entries(o).filter(([e]) => p.has(e)).map(([e, {
             label: t
-          }]) => jsx(c$, {
+          }]) => jsx(SelectOptionReset, {
             value: e,
             children: t
           }, e))]

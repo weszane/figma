@@ -10,7 +10,7 @@ import { T } from '../905/434246';
 import { useModalManager } from '../905/437088';
 import { textDisplayConfig } from '../905/687265';
 import { generateUUIDv4 } from '../905/871474';
-import { Xr } from '../figma_app/27355';
+import { useSetAtom } from '../figma_app/27355';
 import { FProductAccessType } from '../figma_app/191312';
 import { MQ } from '../figma_app/197432';
 import { DialogActionStrip, DialogBody, DialogHiddenTitle, DialogContents, DialogFooter } from '../figma_app/272243';
@@ -25,7 +25,7 @@ let v = {
 function I(e) {
   let t = useModalManager(e);
   !function (e = !0) {
-    let t = Xr(MQ);
+    let t = useSetAtom(MQ);
     let i = useRef(generateUUIDv4());
     useEffect(() => {
       t(i.current, e);

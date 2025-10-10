@@ -1,9 +1,9 @@
-import { hg } from "../figma_app/425489";
-import { A as _$$A } from "../905/991888";
+import { inlinePreviewReducer } from "../figma_app/425489";
+import { inlinePreviewController } from "../905/991888";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useState, useContext, useMemo, useEffect } from "react";
 import { UIVisibilitySetting } from "../figma_app/763686";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import d from "classnames";
 import { logWarning } from "../905/714362";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
@@ -29,7 +29,7 @@ let v = forwardRef(function ({
   scalingMode: S,
   contentScalingMode: j
 }, I) {
-  let k = Xr(hg);
+  let k = useSetAtom(inlinePreviewReducer);
   let [N, A] = useState(!1);
   let O = useAtomWithSubscription(interactionTestAtom);
   let {
@@ -39,7 +39,7 @@ let v = forwardRef(function ({
   let D = useMemo(() => isResizing || isDragging || !v, [isResizing, isDragging, v]);
   let M = useMemo(() => isResizing || isDragging, [isResizing, isDragging]);
   useEffect(() => {
-    _$$A.setDisableCloseWithShortcut(M);
+    inlinePreviewController.setDisableCloseWithShortcut(M);
   }, [M]);
   useEffect(() => {
     I.current && (d ? I.current.focus() : $z());
@@ -76,7 +76,7 @@ let v = forwardRef(function ({
   }(t, e, w, S, j) : "";
   if (useEffect(() => {
     if (!I.current) return;
-    let e = _$$A.initialize(I.current, {
+    let e = inlinePreviewController.initialize(I.current, {
       closeInlinePreview: i,
       dispatch: k,
       onLoad: () => {
@@ -125,20 +125,20 @@ let v = forwardRef(function ({
 });
 let $$E0 = {
   overflowDropdownType: "INLINE_PREVIEW_OVERFLOW_DROPDOWN",
-  stateAtom: hg,
+  stateAtom: inlinePreviewReducer,
   ViewerComponent: v,
   onBack: () => {
-    _$$A.navigateBackward();
+    inlinePreviewController.navigateBackward();
   },
   onForward: () => {
-    _$$A.navigateForward();
+    inlinePreviewController.navigateForward();
   },
   onRestart: () => {
-    _$$A.restartPrototype();
+    inlinePreviewController.restartPrototype();
   },
-  onFocus: () => !!_$$A.isIframeInitialized() && (_$$A.focus(), !0),
+  onFocus: () => !!inlinePreviewController.isIframeInitialized() && (inlinePreviewController.focus(), !0),
   onDismissOverflow: () => {
-    _$$A.focus();
+    inlinePreviewController.focus();
   }
 };
 export const e = $$E0;

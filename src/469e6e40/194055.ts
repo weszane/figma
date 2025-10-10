@@ -35,7 +35,7 @@ import { A as _$$A3 } from "../5724/663128";
 import { SvgComponent } from "../905/714743";
 import { noop } from 'lodash-es';
 import { z as _$$z2 } from "../905/239603";
-import { c$, ms } from "../figma_app/236327";
+import { OptionComponent, DropdownContainer } from "../figma_app/236327";
 import { consumptionPaywallUtils } from "../905/224";
 import { FPlanNameType } from "../figma_app/191312";
 import { FeatureFlag } from "../905/652992";
@@ -593,11 +593,11 @@ function ei(e) {
   } = e;
   let [l, o] = useState(0);
   let [c, m] = useState(!1);
-  let p = [jsx(c$, {
+  let p = [jsx(OptionComponent, {
     onClick: () => o(0),
     recordingKey: "userViewOption",
     children: renderI18nText("resources_tab.extension_usage_data.users")
-  }, 0), jsx(c$, {
+  }, 0), jsx(OptionComponent, {
     onClick: () => o(1),
     recordingKey: "workspaceViewOption",
     children: renderI18nText("resources_tab.extension_usage_data.workspaces")
@@ -606,7 +606,7 @@ function ei(e) {
   let [b, v] = useState(!1);
   let f = i.usage_windows[g];
   let y = [];
-  for (let [e, t] of et.entries()) y.push(jsx(c$, {
+  for (let [e, t] of et.entries()) y.push(jsx(OptionComponent, {
     onClick: () => x(e),
     children: t
   }, e));
@@ -637,7 +637,7 @@ function ei(e) {
             svg: _$$A4,
             className: cssBuilderInstance.colorIconSecondary.inlineBlock.pl8.$
           })]
-        }), b && jsx(ms, {
+        }), b && jsx(DropdownContainer, {
           className: K,
           onClick: () => v(!1),
           children: y
@@ -652,7 +652,7 @@ function ei(e) {
             svg: _$$A4,
             className: cssBuilderInstance.colorIconSecondary.inlineBlock.pl8.$
           })]
-        }), c && jsx(ms, {
+        }), c && jsx(DropdownContainer, {
           className: K,
           onClick: () => m(!1),
           children: p

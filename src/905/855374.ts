@@ -37,7 +37,7 @@ import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
 import { KindEnum } from "../905/129884";
-import { c$, wv, l4, gw } from "../figma_app/236327";
+import { OptionComponent, SeparatorComponent, useDropdownPosition, DropdownWithScrim } from "../figma_app/236327";
 import { ConnectedPointingDropdown } from "../905/504727";
 import { tq as _$$tq, lo } from "../905/386270";
 import { $ as _$$$, b as _$$b } from "../905/483620";
@@ -107,7 +107,7 @@ import { E as _$$E2 } from "../905/53857";
 import { setupMenu, MenuRootComp, MenuContainerComp, MenuItemComp, MenuSeparator, MenuTitleComp, MenuHiddenTitleComp, MenuItemLead, MenuGroupComp } from "../figma_app/860955";
 import { stylex } from "@stylexjs/stylex";
 import { P as _$$P4 } from "../905/537307";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { createMultiRefCallback } from "../figma_app/272902";
 import { m as _$$m2 } from "../905/871166";
 import { i as _$$i2 } from "../905/415810";
@@ -157,7 +157,7 @@ function K({
       platform: e,
       onClick: r
     }) {
-      return jsx(c$, {
+      return jsx(OptionComponent, {
         disabled: t.hasOwnProperty(e),
         recordingKey: generateRecordingKey(i, PlatformType[e].toLowerCase()),
         onClick: () => r(e),
@@ -1168,15 +1168,15 @@ function eZ(e) {
   }, [e, o]), !!o && everyLocalSubscription(e.allVariables));
   let A = useCallback(() => e.contextMenuData.groupNames.some(t => 0 === getVariablesWithPrefix(e.allVariables, t).length), [e]);
   let b = jsxs(Fragment, {
-    children: [f && jsx(c$, {
+    children: [f && jsx(OptionComponent, {
       onClick: f,
       recordingKey: generateRecordingKey(e.recordingKey, "ungroupOption"),
       children: getI18nString("variables.authoring_modal.group_context_menu.ungroup")
-    }), g && !A() && jsx(c$, {
+    }), g && !A() && jsx(OptionComponent, {
       onClick: g,
       recordingKey: generateRecordingKey(e.recordingKey, "duplicateGroupOption"),
       children: e.contextMenuData.groupNames.length > 1 ? getI18nString("variables.authoring_modal.group_context_menu.duplicate_groups") : getI18nString("variables.authoring_modal.group_context_menu.duplicate_group")
-    }), _ && jsx(c$, {
+    }), _ && jsx(OptionComponent, {
       onClick: _,
       recordingKey: generateRecordingKey(e.recordingKey, "deleteGroupOption"),
       children: e.contextMenuData.groupNames.length > 1 ? getI18nString("variables.authoring_modal.group_context_menu.delete_groups") : getI18nString("variables.authoring_modal.group_context_menu.delete_group")
@@ -1194,35 +1194,35 @@ function eZ(e) {
       variable: v.variable,
       variableOverride: v.variableOverride,
       variableSet: e.contextMenuData.variableSet
-    }), u && jsx(c$, {
+    }), u && jsx(OptionComponent, {
       "data-testid": "copy-variables-menuopt",
       onClick: u,
       recordingKey: generateRecordingKey(e.recordingKey, "copyVariablesOption"),
       children: getI18nString("fullscreen_actions.copy")
-    }), m && jsx(c$, {
+    }), m && jsx(OptionComponent, {
       "data-testid": "paste-variables-menuopt",
       onClick: m,
       recordingKey: generateRecordingKey(e.recordingKey, "pasteVariablesOption"),
       children: getI18nString("fullscreen_actions.paste")
-    }), u || m ? jsx(wv, {}) : null, s && jsx(c$, {
+    }), u || m ? jsx(SeparatorComponent, {}) : null, s && jsx(OptionComponent, {
       onClick: s,
       recordingKey: generateRecordingKey(e.recordingKey, "createGroupOption"),
       children: getI18nString("variables.authoring_modal.context_menu.create_group")
-    }), d && (1 === e.contextMenuData.selectedVariableRows.length && jsx(c$, {
+    }), d && (1 === e.contextMenuData.selectedVariableRows.length && jsx(OptionComponent, {
       "data-testid": "edit-variable-menuopt",
       onClick: d,
       recordingKey: generateRecordingKey(e.recordingKey, "editVariableOption"),
       children: getI18nString("variables.authoring_modal.context_menu.edit", {
         count: e.contextMenuData.selectedVariableRows.length
       })
-    }) || e.contextMenuData.selectedVariableRows.length > 1 && jsx(c$, {
+    }) || e.contextMenuData.selectedVariableRows.length > 1 && jsx(OptionComponent, {
       "data-testid": "edit-variables-menuopt",
       onClick: d,
       recordingKey: generateRecordingKey(e.recordingKey, "editVariablesOption"),
       children: getI18nString("variables.authoring_modal.context_menu.edit", {
         count: e.contextMenuData.selectedVariableRows.length
       })
-    })), c && jsx(c$, {
+    })), c && jsx(OptionComponent, {
       "data-testid": "duplicate-variables-menuopt",
       onClick: c,
       recordingKey: generateRecordingKey(e.recordingKey, "duplicateVariablesOption"),
@@ -1230,7 +1230,7 @@ function eZ(e) {
         count: e.contextMenuData.selectedVariableRows.length
       })
     }), h && jsxs(Fragment, {
-      children: [jsx(wv, {}), jsx(c$, {
+      children: [jsx(SeparatorComponent, {}), jsx(OptionComponent, {
         onClick: h,
         recordingKey: generateRecordingKey(e.recordingKey, "deleteVariableOption"),
         children: e.contextMenuData.selectedVariableRows.length > 1 ? getI18nString("variables.authoring_modal.context_menu.delete_multiple") : getI18nString("variables.authoring_modal.context_menu.delete")
@@ -1238,8 +1238,8 @@ function eZ(e) {
     })]
   });
   let E = useRef(null);
-  let x = l4(E, e.contextMenuData.position);
-  return createPortal(jsx(gw, {
+  let x = useDropdownPosition(E, e.contextMenuData.position);
+  return createPortal(jsx(DropdownWithScrim, {
     style: x,
     className: He,
     dispatch: t,
@@ -1268,16 +1268,16 @@ function eX(e) {
     e.detachAlias && (e.detachAlias(e.variable.node_id, e.modeID, e.variableSet.node_id), e.hideContextMenu());
   }, [e]);
   return jsx(Fragment, {
-    children: o && e.detachAlias ? jsx(c$, {
+    children: o && e.detachAlias ? jsx(OptionComponent, {
       recordingKey: generateRecordingKey(e.recordingKey, "clearAliasOption"),
       onClick: h,
       children: getI18nString("variables.authoring_modal.context_menu.clear_alias")
     }) : jsxs(Fragment, {
-      children: [jsx(c$, {
+      children: [jsx(OptionComponent, {
         onClick: u,
         recordingKey: generateRecordingKey(e.recordingKey, "createAliasOption"),
         children: getI18nString("variables.authoring_modal.context_menu.create_alias")
-      }), getFeatureFlags().ds_reactive_variables && jsx(c$, {
+      }), getFeatureFlags().ds_reactive_variables && jsx(OptionComponent, {
         onClick: m,
         recordingKey: generateRecordingKey(e.recordingKey, "createExpressionOption"),
         children: getI18nString("variables.authoring_modal.context_menu.create_expression")
@@ -1533,23 +1533,23 @@ function tk({
   }), !!l);
   let x = useRef(null);
   let S = [];
-  return (y && S.push(jsx(c$, {
+  return (y && S.push(jsx(OptionComponent, {
     className: tw,
     onClick: y,
     children: getI18nString("variables.authoring_modal.overflow_dropdown.rename_collection")
-  }, "rename")), E && S.push(jsx(c$, {
+  }, "rename")), E && S.push(jsx(OptionComponent, {
     className: tw,
     onClick: E,
     children: getI18nString("variables.authoring_modal.overflow_dropdown.delete_collection")
-  }, "delete")), (_ || A) && (S.length > 0 && S.push(jsx(wv, {}, "separator")), _ && S.push(jsx(c$, {
+  }, "delete")), (_ || A) && (S.length > 0 && S.push(jsx(SeparatorComponent, {}, "separator")), _ && S.push(jsx(OptionComponent, {
     className: tw,
     onClick: _,
     children: getI18nString("variables.authoring_modal.overflow_dropdown.create_collection")
-  }, "create-root")), A && S.push(jsx(c$, {
+  }, "create-root")), A && S.push(jsx(OptionComponent, {
     className: tw,
     onClick: A,
     children: getI18nString("variables.authoring_modal.overflow_dropdown.create_extended_collection")
-  }, "create-extension")), h.length > 1 && I && (S.push(jsx(wv, {}, "separator")), S.push(jsx(c$, {
+  }, "create-extension")), h.length > 1 && I && (S.push(jsx(SeparatorComponent, {}, "separator")), S.push(jsx(OptionComponent, {
     className: tw,
     onClick: I,
     children: getI18nString("variables.authoring_modal.overflow_dropdown.reorder_collections")
@@ -2330,7 +2330,7 @@ function ie({
     v ? E && x() : _?.(i, s);
     hide();
   }, [v, E, hide, _, i, s, x]), !!_);
-  let J = Xr(columnResizeAtom);
+  let J = useSetAtom(columnResizeAtom);
   let ee = conditionalValue(useCallback(() => {
     getFeatureFlags().ds_variables_modal_resize && J(e => {
       let t = {
@@ -2380,29 +2380,29 @@ function ie({
   let el = !d && !c;
   let ed = d && s === DEFAULT_MODE ? getI18nString("variables.create_modal.value_label") : s;
   let ec = [];
-  data && !data.onlyAllowDeletion && (Q && ec.push(jsx(c$, {
+  data && !data.onlyAllowDeletion && (Q && ec.push(jsx(OptionComponent, {
     onClick: Q,
     disabled: v && !E,
     recordingKey: generateRecordingKey(b, "duplicate"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.duplicate_mode")
-  }, "duplicate")), !e && el && eo && ec.push(jsx(c$, {
+  }, "duplicate")), !e && el && eo && ec.push(jsx(OptionComponent, {
     onClick: eo,
     recordingKey: generateRecordingKey(b, "setAsDefault"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.set_as_default")
-  }, "setAsDefault")), !e && et && w.indexOf(i) > 0 && ec.push(jsx(c$, {
+  }, "setAsDefault")), !e && et && w.indexOf(i) > 0 && ec.push(jsx(OptionComponent, {
     onClick: et,
     recordingKey: generateRecordingKey(b, "moveLeft"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.move_left")
-  }, "moveLeft")), !e && en && -1 !== w.indexOf(i) && w.indexOf(i) < w.length - 1 && ec.push(jsx(c$, {
+  }, "moveLeft")), !e && en && -1 !== w.indexOf(i) && w.indexOf(i) < w.length - 1 && ec.push(jsx(OptionComponent, {
     onClick: en,
     recordingKey: generateRecordingKey(b, "moveRight"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.move_right")
-  }, "moveRight")), !d && ea && ec.push(jsx(c$, {
+  }, "moveRight")), !d && ea && ec.push(jsx(OptionComponent, {
     onClick: ea,
     recordingKey: generateRecordingKey(b, "startRenaming"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.rename_mode")
   }, "rename")));
-  t && ee && (ec.length > 0 && ec.push(jsx(wv, {}, "separator1")), ec.push(jsx(c$, {
+  t && ee && (ec.length > 0 && ec.push(jsx(SeparatorComponent, {}, "separator1")), ec.push(jsx(OptionComponent, {
     onClick: ee,
     recordingKey: generateRecordingKey(b, "delete"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.delete_mode")
@@ -2470,7 +2470,7 @@ function ie({
       }), S && jsx(Mz, {
         modeID: i
       })]
-    }), ec.length > 0 && showing && data?.modeID === i && createPortal(jsxs(gw, {
+    }), ec.length > 0 && showing && data?.modeID === i && createPortal(jsxs(DropdownWithScrim, {
       dispatch: B,
       className: "variables_modal_table_mode_cell--contextMenu--B1Bjv",
       style: data?.position,

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "../905/438674";
 import { E as _$$E } from "../905/53857";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
 import { WAFImage } from "../905/675859";
@@ -15,9 +15,9 @@ import { postUserFlag } from "../905/985254";
 import { UpgradeAction } from "../905/370443";
 import { getVisibleTheme } from "../905/640017";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { LZ } from "../figma_app/101956";
-import { N as _$$N2 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { ImageOverlayComponent } from "../905/129046";
 import { _l } from "../figma_app/995208";
 import { OnboardingModal } from "../905/425180";
@@ -31,11 +31,11 @@ export function $$N2() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: CooperModal,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
-  let m = Xr(isTemplateSearchEnabledAtomFamily);
+  let m = useSetAtom(isTemplateSearchEnabledAtomFamily);
   let y = useDispatch<AppDispatch>();
   let E = useIsFullscreenReady();
   let w = useAtomWithSubscription(LZ);
@@ -119,9 +119,9 @@ export function $$A0({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: CooperBulkCreate,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let s = useSelectedAndFocusedNodeIds();
   let o = s.length ? s[0] : null;
@@ -170,9 +170,9 @@ export function $$O3() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: CooperInsertLockedTemplate,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let a = useSelectedAndFocusedNodeIds();
   let s = a.length ? a[0] : null;
@@ -211,9 +211,9 @@ export function $$L1() {
     isShowing,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: CooperPublishTemplatesOverview,
-    priority: _$$N2.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useEventForwarder(uniqueId, Mt, () => {
     show();

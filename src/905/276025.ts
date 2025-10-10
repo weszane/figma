@@ -1,10 +1,12 @@
+import type { DisabledResource } from '../905/989992'
+import { atom } from 'jotai'
 import { shallowEqual } from 'react-redux'
 import { createReduxSubscriptionAtomWithState } from '../905/270322'
 import { getResourceDataOrFallback } from '../905/419236'
 import { analyticsEventManager } from '../905/449184'
 import { resolveTeamId } from '../905/515860'
 import { resourceUtils } from '../905/989992'
-import { atom, createRemovableAtomFamily } from '../figma_app/27355'
+import { createRemovableAtomFamily } from '../figma_app/27355'
 import { OrgByIdForPlanUserView, OrgByIdForPlanView, TeamByIdForPlanUserView, TeamByIdForPlanView } from '../figma_app/43951'
 import { FOrganizationLevelType } from '../figma_app/191312'
 import { getPlanFeatures } from '../figma_app/428858'
@@ -15,7 +17,7 @@ import { isIncludedView, isOrgView } from '../figma_app/707808'
  */
 
 /** Atom for current team id (original: h) */
-export const teamIdAtom = createReduxSubscriptionAtomWithState(e => resolveTeamId(e))
+export const teamIdAtom = createReduxSubscriptionAtomWithState((e: any) => resolveTeamId(e))
 
 /** Atom for current user org id (original: g) */
 export const userOrgIdAtom = createReduxSubscriptionAtomWithState(e => e.currentUserOrgId)
@@ -298,7 +300,7 @@ function planPublicInfoAtomFamily(useTeam: boolean) {
  * Original: x
  */
 function planFeaturesAtomFamily(useTeam: boolean) {
-  return createRemovableAtomFamily(key => atom((get) => {
+  return createRemovableAtomFamily<any, DisabledResource>(key => atom((get) => {
     let teamId: string | null
     let orgId: string | null
     if (key) {

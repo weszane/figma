@@ -7,7 +7,7 @@ import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { stylex } from "@stylexjs/stylex";
-import { Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import h from "classnames";
 import { Point } from "../905/736624";
 import { WAFImage } from "../905/675859";
@@ -37,8 +37,8 @@ export function $$P2({
   ...t
 }) {
   let i = r$();
-  let s = Xr(selectionAtomFamily);
-  let o = Xr(draftModeAtomFamily);
+  let s = useSetAtom(selectionAtomFamily);
+  let o = useSetAtom(draftModeAtomFamily);
   let c = useAtomWithSubscription(v2);
   let u = useCurrentFileKey();
   let h = useDispatch<AppDispatch>();
@@ -225,11 +225,11 @@ function K({
     imageUrl,
     libraryKey
   } = fG()(e);
-  let a = Xr(fileTypeAtom);
+  let a = useSetAtom(fileTypeAtom);
   let o = r$();
   let l = useAtomWithSubscription(fileTypeAtom);
   let d = JY();
-  let u = Xr(lockAtomFamily);
+  let u = useSetAtom(lockAtomFamily);
   if (!libraryKey) return null;
   let h = e => {
     e.stopPropagation();

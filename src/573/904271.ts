@@ -69,7 +69,7 @@ import { hasTeamPaidAccess } from "../figma_app/345997";
 import { getSelectedViewSelector } from "../figma_app/198885";
 import { selectSceneGraph, selectSceneGraphSelection } from "../figma_app/889655";
 import { selectTeams } from "../905/338617";
-import { sp as _$$sp } from "../figma_app/678300";
+import { isNodePresentWithTraversal } from "../figma_app/678300";
 import { getUUID } from "../figma_app/517115";
 import { defaultLibraryKeyAtom } from "../figma_app/825489";
 import { Wq, od } from "../figma_app/392189";
@@ -1523,7 +1523,7 @@ function t9({
         getViewportHeight: e => e - 2 * T,
         initialScrollTop: e,
         isList: $,
-        isTileSelected: e => !!e.item.isLocal && f && _$$sp(m, f, e.item.node_id),
+        isTileSelected: e => !!e.item.isLocal && f && isNodePresentWithTraversal(m, f, e.item.node_id),
         onMouseUp: X,
         onScroll: t,
         orgId: k?.parentOrgId ?? void 0,

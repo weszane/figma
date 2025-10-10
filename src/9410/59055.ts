@@ -5,7 +5,7 @@ import { useModalManager, ModalRoot } from "../905/437088";
 import { Fullscreen, AppStateTsApi, Multiplayer } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { isEmbedAllowed } from "../figma_app/916560";
 import { useResizeObserverElement } from "../figma_app/708845";
@@ -25,7 +25,7 @@ import { A as _$$A } from "../svg/480057";
 import { e as _$$e } from "../9410/917051";
 var p = u;
 function I() {
-  let e = Xr(_$$n);
+  let e = useSetAtom(_$$n);
   let t = useCallback(() => {
     e({
       type: "MINIMIZE"
@@ -157,7 +157,7 @@ let R = memo(function (e) {
     }, [i, t]);
     return a || !i && e;
   }(nodeSelected, u);
-  let y = Xr(_$$n);
+  let y = useSetAtom(_$$n);
   let b = useModalManager({
     open: isEmbedMaximized,
     onClose: () => y({

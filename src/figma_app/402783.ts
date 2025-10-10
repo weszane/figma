@@ -11,7 +11,7 @@ import { getTrackingSessionId } from "../905/471229";
 import { generateUUIDv4 } from "../905/871474";
 import { postUserFlag } from "../905/985254";
 import { cortexAPI, createNotesParserStream, StreamAsyncIterator } from "../figma_app/432652";
-import { _s } from "../figma_app/33126";
+import { currentUserOrgIdAtom } from "../figma_app/33126";
 import { J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
 import { zp } from "../figma_app/847014";
@@ -52,7 +52,7 @@ async function R({
   let I;
   let v;
   let A = {
-    orgId: atomStoreManager.get(_s),
+    orgId: atomStoreManager.get(currentUserOrgIdAtom),
     teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
     fileKey: atomStoreManager.get(openFileKeyAtom) || null,
     userId: atomStoreManager.get(userIdAtom) || null,

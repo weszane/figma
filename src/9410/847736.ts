@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useEffect, useCallback, useState, useRef } from "react";
-import { useAtomWithSubscription, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
-import { J3, JU, wv, kN, Gi, GR, e2 as _$$e, li } from "../figma_app/622574";
+import { useAtomWithSubscription, useSetAtom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
+import { getPublishTemplateStatus, canPublishTemplate, useRecentTemplates, PublishTemplateStatusEnum, getCurrentTemplateEntity, useTeamTemplates, usePaginatedOrgTemplates, usePaginatedTeamTemplates } from "../figma_app/622574";
 import { fileTypeAtom, FileType, booleanAtomFamily, genericNullAtomFamily, selectionModeAtomFamily, SelectionMode, nullAtomFamily, selectionAtomFamily, draftModeAtomFamily, orgAtom, resetStateAtom } from "../figma_app/60023";
 import d from "classnames";
 import { buildUploadUrl, isLocalCluster } from "../figma_app/169182";
@@ -33,9 +33,9 @@ import { FFileType } from "../figma_app/191312";
 import { useIsLoading } from "../905/18797";
 import { getObservableValue } from "../figma_app/84367";
 import { getRecentTemplateCount } from "../figma_app/190980";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { FDocumentType } from "../905/862883";
-import { cd } from "../905/381612";
+import { recentItemsThunks } from "../905/381612";
 import { ZW } from "../figma_app/861982";
 import { _ as _$$_2, Q as _$$Q2 } from "../7222/460441";
 import { IntersectionSentinel } from "../905/925868";
@@ -71,7 +71,7 @@ import { S as _$$S, E as _$$E } from "../figma_app/999099";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getTrackingSessionId } from "../905/471229";
 import { cortexAPI, StreamAsyncIterator } from "../figma_app/432652";
-import { _s } from "../figma_app/33126";
+import { currentUserOrgIdAtom } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
 import { userIdAtom } from "../figma_app/864723";
 import { _E } from "../905/788069";
@@ -158,8 +158,8 @@ function L({
   let {
     setUserDraftTemplateKeyForCurrentFile
   } = Iv();
-  let d = J3();
-  let c = JU(d);
+  let d = getPublishTemplateStatus();
+  let c = canPublishTemplate(d);
   let u = useMemo(() => {
     let a = [];
     return (canDismiss && a.push({
@@ -233,7 +233,7 @@ function Q({
   let {
     teamTemplates,
     numTemplatesForTeam
-  } = wv(FFileType.SLIDES, t);
+  } = useRecentTemplates(FFileType.SLIDES, t);
   if (!teamTemplates || 0 === teamTemplates.length) return null;
   let s = (numTemplatesForTeam ?? 0) > t;
   return jsx(ei, {
@@ -255,7 +255,7 @@ function $({
   let {
     teamTemplates,
     isLoading
-  } = wv(FFileType.SLIDES, t);
+  } = useRecentTemplates(FFileType.SLIDES, t);
   let a = useSetAtom(fileTypeAtom);
   let s = teamTemplates && teamTemplates.length >= t;
   if (isLoading || !teamTemplates || !teamTemplates.length || !t) return null;
@@ -283,7 +283,7 @@ function ee() {
   }) : e && 0 !== e.length ? jsx(Fragment, {
     children: e.map(e => {
       let t = e.shelf_content.map(t => ({
-        type: _$$n.HubFile,
+        type: TeamTemplateType.HubFile,
         template: t,
         category: e.id
       }));
@@ -305,11 +305,11 @@ function et() {
   let i = fK();
   let r = useDispatch<AppDispatch>();
   let a = selectCurrentFile();
-  let s = J3();
-  let l = JU(s);
-  let d = s === kN.FILE_IN_DRAFTS;
+  let s = getPublishTemplateStatus();
+  let l = canPublishTemplate(s);
+  let d = s === PublishTemplateStatusEnum.FILE_IN_DRAFTS;
   let c = 0 === getObservableValue(AppStateTsApi?.canvasGrid()?.canvasGridArray, []).length;
-  let u = useIsLoading(cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let u = useIsLoading(recentItemsThunks.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.Slides
   }));
   return 0 === t ? null : u || !a ? jsx(kM, {
@@ -427,11 +427,11 @@ function ed({
   } = gH();
   let y = useAtomWithSubscription(booleanAtomFamily);
   let b = useCurrentFileKey();
-  let C = Gi();
+  let C = getCurrentTemplateEntity();
   let {
     start
   } = JY();
-  let E = Xr(fileTypeAtom);
+  let E = useSetAtom(fileTypeAtom);
   return (useEffect(() => () => resetScrollTop([FileType.ALL]), [resetScrollTop]), loading || y && !b) ? jsx(kM, {}) : jsxs(RecordingScrollContainer, {
     className: cssBuilderInstance.px8.hFull.$,
     scrollContainerRef: scrollRef,
@@ -560,7 +560,7 @@ function ef({
       children: jsx(p9, {
         children: t.shelf_content.map(t => jsx(AK, {
           template: {
-            type: _$$n.HubFile,
+            type: TeamTemplateType.HubFile,
             category: e,
             template: t
           }
@@ -707,7 +707,7 @@ async function eZ({
       version: "1.1",
       data: e
     }, {
-      orgId: atomStoreManager.get(_s),
+      orgId: atomStoreManager.get(currentUserOrgIdAtom),
       teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
       fileKey: atomStoreManager.get(openFileKeyAtom) || null,
       fileSeq: atomStoreManager.get(_$$J)?.toString() || null,
@@ -800,7 +800,7 @@ function e2() {
   let p = useDispatch<AppDispatch>();
   let h = useAtomWithSubscription(openFileKeyAtom);
   let m = t?.source ?? _$$E.SLIDES_TEMPLATE;
-  Xr(zF)(m);
+  useSetAtom(zF)(m);
   let g = _$$D(slidePresetModules[0]?.library_key);
   let _ = useMemo(() => ({
     figjamFileKey: r,
@@ -1054,7 +1054,7 @@ function tr() {
 }
 function tn() {
   let e = useAtomWithSubscription(selectionModeAtomFamily);
-  let t = Xr(fileTypeAtom);
+  let t = useSetAtom(fileTypeAtom);
   let i = useAtomWithSubscription(genericNullAtomFamily);
   return jsx(ti, {
     children: jsx(Button, {
@@ -1090,8 +1090,8 @@ function to({
   let o = null === useCurrentFileKey();
   let d = r$();
   let c = S7();
-  let u = Xr(nullAtomFamily);
-  let p = Xr(genericNullAtomFamily);
+  let u = useSetAtom(nullAtomFamily);
+  let p = useSetAtom(genericNullAtomFamily);
   return (useEffect(() => {
     o || ["loading", "loaded"].includes(t.status) || logInfo(ServiceCategories.SLIDES, `Query result status has unexpected value: ${t.status}`);
   }, [o, t.status]), "loading" === t.status || o) ? jsxs(x, {
@@ -1126,8 +1126,8 @@ function tl({
   let i = selectCurrentFile();
   let r = r$();
   let [o, d] = useAtomValueAndSetter(fileTypeAtom);
-  let c = Xr(nullAtomFamily);
-  let u = Xr(genericNullAtomFamily);
+  let c = useSetAtom(nullAtomFamily);
+  let u = useSetAtom(genericNullAtomFamily);
   let {
     showSeparator
   } = gH();
@@ -1301,14 +1301,14 @@ function tm({
     templatesByTeam,
     requestLoadMore,
     requestLoadMoreForTeam
-  } = GR(e, FFileType.SLIDES);
+  } = useTeamTemplates(e, FFileType.SLIDES);
   let d = isBigmaEnabledAlias(e);
   let c = fK();
   let {
     teamTemplates,
     isLoading,
     requestLoadMoreForOrg
-  } = _$$e({
+  } = usePaginatedOrgTemplates({
     orgId: e.id,
     areWorkspacesEnabled: d,
     numTemplatesPerTeam: c,
@@ -1385,7 +1385,7 @@ function tg({
       ref: e.id === r ? s : void 0,
       children: jsx(AK, {
         template: {
-          type: _$$n.TeamTemplateLg,
+          type: TeamTemplateType.TeamTemplateLg,
           template: e
         }
       }, e.id)
@@ -1399,7 +1399,7 @@ function t_({
   let {
     requestLoadMoreForTeam,
     templatesByTeam
-  } = li({
+  } = usePaginatedTeamTemplates({
     teamId: e,
     editorType: FFileType.SLIDES
   });
@@ -1448,7 +1448,7 @@ function tE({
     status
   } = _$$_(FFileType.WHITEBOARD);
   let [p, f] = useAtomValueAndSetter(nullAtomFamily);
-  let g = Xr(genericNullAtomFamily);
+  let g = useSetAtom(genericNullAtomFamily);
   let {
     showSeparator
   } = gH();
@@ -1782,7 +1782,7 @@ function tO({
   let {
     requestLoadMoreForTeam,
     templatesByTeam
-  } = li({
+  } = usePaginatedTeamTemplates({
     teamId: e,
     editorType: FFileType.SLIDES
   });
@@ -1814,13 +1814,13 @@ function tL({
     templatesByTeam,
     requestLoadMore,
     requestLoadMoreForTeam
-  } = GR(e, FFileType.SLIDES);
+  } = useTeamTemplates(e, FFileType.SLIDES);
   let u = isBigmaEnabledAlias(e);
   let {
     teamTemplates,
     isLoading,
     requestLoadMoreForOrg
-  } = _$$e({
+  } = usePaginatedOrgTemplates({
     orgId: e.id,
     areWorkspacesEnabled: u,
     numTemplatesPerTeam: 6,
@@ -1883,7 +1883,7 @@ function tR({
     children: jsx(p9, {
       children: e.shelf_content.map(e => {
         let t = {
-          type: _$$n.HubFile,
+          type: TeamTemplateType.HubFile,
           category: s,
           template: e
         };
@@ -1898,11 +1898,11 @@ export function $$tD0({
   showCloseButton: e
 }) {
   let t = useAtomWithSubscription(fileTypeAtom);
-  let i = Xr(selectionAtomFamily);
-  let r = Xr(draftModeAtomFamily);
-  let d = Xr(orgAtom);
-  let c = Xr(resetStateAtom);
-  let u = Gi();
+  let i = useSetAtom(selectionAtomFamily);
+  let r = useSetAtom(draftModeAtomFamily);
+  let d = useSetAtom(orgAtom);
+  let c = useSetAtom(resetStateAtom);
+  let u = getCurrentTemplateEntity();
   switch (useEffect(() => () => {
     d("");
     c();

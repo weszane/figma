@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { Command, Fullscreen } from "../figma_app/763686";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { toolStylesAtom, shapeColorAtom } from "../905/125333";
 import { Jc, Qd } from "../figma_app/27927";
@@ -110,7 +110,7 @@ let $$K1 = ["SQUARE", "ELLIPSE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "ROU
 let $$W0 = [...$$G5, "PREDEFINED_PROCESS", "DOCUMENT_SINGLE", "DOCUMENT_MULTIPLE", "MANUAL_INPUT", "HEXAGON", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT", "ENG_DATABASE", "ENG_QUEUE", "INTERNAL_STORAGE", "TRAPEZOID", "SUMMING_JUNCTION", "OR", "SHIELD", "ENG_FOLDER", "ENG_FILE", "PENTAGON", "OCTAGON", "PLUS", "ARROW_LEFT", "ARROW_RIGHT", "STAR", "SPEECH_BUBBLE"];
 export function $$z2(e) {
   let t = useAtomWithSubscription(toolStylesAtom);
-  let i = Xr(shapeColorAtom);
+  let i = useSetAtom(shapeColorAtom);
   let {
     shapeWithTextType
   } = t;

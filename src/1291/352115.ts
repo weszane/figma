@@ -1,15 +1,15 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef } from "react";
-import { sz } from "../figma_app/216696";
+import { fetchShelvesForShelfTypeThunk } from "../figma_app/216696";
 import { TrackingProvider } from "../figma_app/831799";
 import { eE, Fz } from "../figma_app/106207";
 import { FileTypeSwitch } from "../figma_app/198840";
 import { useIsLoaded, useIsLoading } from "../905/18797";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { Rt } from "../figma_app/979658";
 import { CommunityPageType, HubTypeEnum } from "../figma_app/45218";
 import { FDocumentType } from "../905/862883";
-import { cd } from "../905/381612";
+import { recentItemsThunks } from "../905/381612";
 import { K } from "../1291/825015";
 import { i8 } from "../1291/533467";
 import { S as _$$S } from "../1291/885929";
@@ -17,17 +17,17 @@ import { bL, gZ } from "../905/598775";
 import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Gi, wv } from "../figma_app/622574";
+import { getCurrentTemplateEntity, useRecentTemplates } from "../figma_app/622574";
 import { FFileType } from "../figma_app/191312";
 import { cX, mk } from "../figma_app/920333";
 import { g as _$$g } from "../1291/914498";
 import { H6, bV, jy, a0 } from "../figma_app/745709";
 function C() {
-  let e = Gi();
+  let e = getCurrentTemplateEntity();
   let {
     teamTemplates,
     isLoading
-  } = wv(FFileType.WHITEBOARD);
+  } = useRecentTemplates(FFileType.WHITEBOARD);
   let {
     setSelectedCategory
   } = cX();
@@ -82,7 +82,7 @@ function C() {
 }
 function $() {
   let e = eE(FDocumentType.FigJam).slice(0, 4);
-  let t = mk(e, [useIsLoaded(cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let t = mk(e, [useIsLoaded(recentItemsThunks.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }))]);
   return jsx(Fragment, {
@@ -106,10 +106,10 @@ export function $$I0(e) {
     isInsertingTemplate
   } = Fz();
   let s = useRef(null);
-  let f = useIsLoading(sz.loadingKeyForPayload({
+  let f = useIsLoading(fetchShelvesForShelfTypeThunk.loadingKeyForPayload({
     shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER
   }));
-  let b = useIsLoading(cd.fetchTemplatesMetadata.loadingKeyForPayload({
+  let b = useIsLoading(recentItemsThunks.fetchTemplatesMetadata.loadingKeyForPayload({
     key: FDocumentType.FigJam
   }));
   return f || b ? jsx(i8, {}) : jsx("div", {
@@ -122,7 +122,7 @@ export function $$I0(e) {
         renderResource: s => jsx(_$$S, {
           template: {
             template: s,
-            type: _$$n.HubFile
+            type: TeamTemplateType.HubFile
           },
           templateInsertionLocation: FileTypeSwitch.CURRENT_FILE,
           triggeredFrom: "universal-insert-figjam-templates",

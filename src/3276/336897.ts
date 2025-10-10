@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { getFileTypePx } from "../905/149328";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { RelativeTimeDisplay } from "../905/986103";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UserAvatar } from "../905/590952";
@@ -201,7 +201,7 @@ function V(e) {
           }), (() => {
             let e = Z.current;
             if (q && e) {
-              let t = secondaryActions?.map(e => jsx(c$, {
+              let t = secondaryActions?.map(e => jsx(OptionComponent, {
                 onClick: t => {
                   t.stopPropagation();
                   t.preventDefault();

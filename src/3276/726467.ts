@@ -4,13 +4,13 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { dayjs } from "../905/920142";
 import { useSingleEffect } from "../905/791079";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { d9, $5 } from "../3276/240191";
 import { PD } from "../figma_app/101956";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { getUserCreatedAt } from "../905/372672";
 import { MULTIPLAYER_USER_STATE_CHANGE } from "../figma_app/915202";
-import { N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingRenderFrame } from "../905/284399";
 import { OverlayType } from "../figma_app/450829";
 import { MultiplayerSpotlightNux, MultiplayerObservationNux } from "../figma_app/6204";
@@ -88,13 +88,13 @@ export function $$M0() {
   let u = useAtomWithSubscription(T);
   let x = getUserCreatedAt();
   let b = dayjs().subtract(7, "day").isBefore(dayjs(x));
-  let y = _$$e({
+  let y = useOverlay({
     overlay: MultiplayerSpotlightNux,
-    priority: N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [t, u]);
-  let C = _$$e({
+  let C = useOverlay({
     overlay: MultiplayerObservationNux,
-    priority: N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let w = useCallback(() => {
     e && n && !b && y.show({

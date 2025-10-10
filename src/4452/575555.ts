@@ -35,7 +35,7 @@ import { adminPermissionConfig } from '../905/654645';
 import { getResourceDataOrFallback } from '../905/663269';
 import { fetchTeamRoles } from '../905/672897';
 import { d as _$$d } from '../905/693444';
-import { S3 } from '../905/708054';
+import { CHANGE_PROFILE_HANDLE_MODAL_TYPE } from '../905/708054';
 import { setupResourceAtomHandler } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { yN } from '../905/727738';
@@ -49,7 +49,7 @@ import { h as _$$h } from '../905/864281';
 import { InterProfileType } from '../905/895626';
 import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
 import { B as _$$B2 } from '../905/950875';
-import { ck } from '../905/952832';
+import { UserContextScope } from '../905/952832';
 import { TextWithTruncation } from '../905/984674';
 import { j as _$$j } from '../1577/266226';
 import { A as _$$A6 } from '../1617/401431';
@@ -69,7 +69,7 @@ import { FL } from '../figma_app/102449';
 import { isReduxDeprecationCutover, ConfigGroups } from '../figma_app/121751';
 import { J as _$$J } from '../figma_app/179602';
 import { FAccessLevelType, FMemberRoleType, FOrganizationLevelType, FPermissionLevelType, FPlanNameType, FResourceCategoryType, FUserTypeClassification } from '../figma_app/191312';
-import { c$, MM, ms, wv } from '../figma_app/236327';
+import { OptionComponent, CheckableOptionComponent, DropdownContainer, SeparatorComponent } from '../figma_app/236327';
 import { useSubscription } from '../figma_app/288654';
 import { hasValidSubscription } from '../figma_app/345997';
 import { useLatencyLogger, useShadowRead } from '../figma_app/391338';
@@ -296,17 +296,17 @@ function ea(e) {
               svg: _$$A3,
               className: K
             })]
-          }), u() && jsxs(ms, {
+          }), u() && jsxs(DropdownContainer, {
             className: Q,
             style: t,
-            children: [n.map(t => jsx(MM, {
+            children: [n.map(t => jsx(CheckableOptionComponent, {
               onClick: e.teamRole.level !== t ? () => p(t) : void 0,
               checked: e.teamRole.level === t,
               children: getPermissionLevelNameCapitalized(t)
-            }, t)), jsx(wv, {}), r && jsx(c$, {
+            }, t)), jsx(SeparatorComponent, {}), r && jsx(OptionComponent, {
               onClick: _,
               children: renderI18nText('file_browser.team.resend_invite')
-            }), jsx(c$, {
+            }), jsx(OptionComponent, {
               onClick: () => p(AccessLevelEnum.NONE),
               children: e.teamRole.user_id !== a.id || o?.isCurrentUserTeamOwner ? renderI18nText('file_browser.team.remove_confirm') : renderI18nText('file_browser.team.leave_confirm')
             })]
@@ -457,10 +457,10 @@ function el(e) {
             svg: _$$A3,
             className: K
           })]
-        }), a && a.data.requestId === e.request.id && u.length > 1 && jsx(ms, {
+        }), a && a.data.requestId === e.request.id && u.length > 1 && jsx(DropdownContainer, {
           className: Q,
           style: h,
-          children: u.map(e => jsx(MM, {
+          children: u.map(e => jsx(CheckableOptionComponent, {
             onClick: l !== e ? () => {
               p(e);
             } : void 0,
@@ -983,7 +983,7 @@ function tf(e) {
           className: ti,
           onClick: () => {
             t(showModalHandler({
-              type: S3,
+              type: CHANGE_PROFILE_HANDLE_MODAL_TYPE,
               data: {
                 teamId: f?.teamId,
                 profileId: f?.communityProfileId || '',
@@ -1396,7 +1396,7 @@ let $$tT0 = registerModal(e => {
   let y = v ? window.innerWidth : Math.max(b, i);
   let j = canAdmin ? jsx(FL, {
     entity: x,
-    entityType: ck.TEAM,
+    entityType: UserContextScope.TEAM,
     avatarEditorState: f,
     size: 80,
     dispatch: t,

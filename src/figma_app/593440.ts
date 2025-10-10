@@ -1,7 +1,7 @@
 import { ImageToolsBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { atomStoreManager, atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atomStoreManager, atom, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { base64ToUint8Array } from "../figma_app/930338";
 import { cortexAPI } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
@@ -93,10 +93,10 @@ let h = atom(null, (e, t) => {
   });
 });
 export function $$m2() {
-  return Xr(_);
+  return useSetAtom(_);
 }
 export function $$g1() {
-  return Xr(h);
+  return useSetAtom(h);
 }
 export function $$f0() {
   return useAtomWithSubscription(p).currentOperation;

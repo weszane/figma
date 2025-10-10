@@ -14,7 +14,7 @@ import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
-import { sx as _$$sx } from "../figma_app/307841";
+import { isCampfireCartEnabled } from "../figma_app/307841";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
 import { UpgradeAction } from "../905/370443";
@@ -210,7 +210,7 @@ function ea(e) {
   let a = () => {
     t(hideModal());
   };
-  let l = _$$sx();
+  let l = isCampfireCartEnabled();
   let d = useMemo(() => [getI18nString("org_upgrade.multi_team.plan_items.shared_design_libraries"), getI18nString("org_upgrade.multi_team.plan_items.shared_fonts_and_styles"), getI18nString("org_upgrade.multi_team.plan_items.centralized_billing_and_admin_controls"), getI18nString("org_upgrade.multi_team.plan_items.single_sign_on_sso_integrations")], []);
   let _ = () => {
     a();

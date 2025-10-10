@@ -1,593 +1,906 @@
-import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { reportError } from "../905/11";
-import { overlayIdsAtom, overlayStateAtom } from "../905/12032";
-import { isAllowedToSeeNux } from "../905/14910";
-import { useMemoShallow } from "../905/19536";
-import { BaseRule } from "../905/92222";
-import { e as _$$e } from "../905/107684";
-import { setCuratorLoggingLevel } from "../905/121508";
-import { LifecycleManager } from "../905/147383";
-import { ServiceCategories } from "../905/165054";
-import { NotificationCategory } from "../905/170564";
-import { debugState } from "../905/407919";
-import { trackEventAnalytics } from "../905/449184";
-import { useEventForwarder } from "../905/453826";
-import { handleAtomEvent } from "../905/502364";
-import { checkLifecycleConditions, createLifecycleAtomFamily, getBlockMessage, incrementLifecycleCounter } from "../905/539601";
-import { globalPerfTimer } from "../905/542194";
-import { getFeatureFlags } from "../905/601108";
-import { getQueryParam } from "../905/609392";
-import { E1 } from "../905/696065";
-import { useSingleEffect } from "../905/791079";
-import { h as _$$h } from "../905/881732";
-import { BlockReasonType, ChannelID, ExperienceManager, OverlayManager } from "../905/953718";
-import { appendUUID, removeUUID } from "../905/958284";
-import { resourceUtils } from "../905/989992";
-import { logCuratorEvent } from "../905/994802";
-import { atom, atomStoreManager, t_, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { getInitialOptions, getLaunchDarklyFlagsExport, isDevEnvironment } from "../figma_app/169182";
-import { N as _$$N } from "../figma_app/268271";
-import { modalTypeAtom, notificationTypeAtom, selectedViewAtom } from "../figma_app/386952";
-import { isSyntheticTesterEmail } from "../figma_app/416935";
-import { throwTypeError } from "../figma_app/465776";
-import { userFlagAtomFamily } from "../figma_app/545877";
-import { NT } from "../figma_app/579169";
-import { y as _$$y2 } from "../figma_app/608914";
-import { RI } from "../figma_app/621201";
-import { CURATOR_GLOBAL_REQUEST_CLOSE } from "../figma_app/916469";
+import { useSetAtom } from "jotai"
+import { zip } from "lodash-es"
+import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { reportError } from "../905/11"
+import { overlayIdsAtom, overlayStateAtom } from "../905/12032"
+import { isAllowedToSeeNux } from "../905/14910"
+import { useMemoShallow } from "../905/19536"
+import { BaseRule } from "../905/92222"
+import { e as _$$e } from "../905/107684"
+import { setCuratorLoggingLevel } from "../905/121508"
+import { LifecycleManager } from "../905/147383"
+import { ServiceCategories } from "../905/165054"
+import { NotificationCategory } from "../905/170564"
+import { debugState } from "../905/407919"
+import { trackEventAnalytics } from "../905/449184"
+import { useEventForwarder } from "../905/453826"
+import { handleAtomEvent } from "../905/502364"
+import { checkLifecycleConditions, createLifecycleAtomFamily, getBlockMessage, incrementLifecycleCounter } from "../905/539601"
+import { globalPerfTimer } from "../905/542194"
+import { getFeatureFlags } from "../905/601108"
+import { getQueryParam } from "../905/609392"
+import { E1 } from "../905/696065"
+import { useSingleEffect } from "../905/791079"
+import { h as _$$h } from "../905/881732"
+import { BlockReasonType, ChannelID, ExperienceManager, OverlayManager } from "../905/953718"
+import { appendUUID, removeUUID } from "../905/958284"
+import { resourceUtils } from "../905/989992"
+import { logCuratorEvent } from "../905/994802"
+import { atom, atomStoreManager, atomWithDefault, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355"
+import { getInitialOptions, getLaunchDarklyFlagsExport, isDevEnvironment } from "../figma_app/169182"
+import { ModalPriority } from "../figma_app/268271"
+import { modalTypeAtom, notificationTypeAtom, selectedViewAtom } from "../figma_app/386952"
+import { isSyntheticTesterEmail } from "../figma_app/416935"
+import { throwTypeError } from "../figma_app/465776"
+import { userFlagAtomFamily } from "../figma_app/545877"
+import { NT } from "../figma_app/579169"
+import { PriorityContext } from "../figma_app/608914"
+import { LimitDevModeUpsellFrequencyRule } from "../figma_app/621201"
+import { CURATOR_GLOBAL_REQUEST_CLOSE } from "../figma_app/916469"
 
-let l = t_(() => new OverlayManager());
-let _ = new BaseRule("PreventModalCollisions", "A rule that prevents overlays from being shown while a modal is displayed", (e, t) => !e.uiState.modalShownType || (t.attributes.allowShowingIfModalPresent ? (trackEventAnalytics("curator_collision", {
-  blocked_overlay_id: removeUUID(t.id),
-  blocking_modal_type: e.uiState.modalShownType,
-  was_allowlisted: !0
-}), !0) : (trackEventAnalytics("curator_collision", {
-  blocked_overlay_id: removeUUID(t.id),
-  blocking_modal_type: e.uiState.modalShownType
-}), !1)));
-let A = new BaseRule("PreventNotificationCollisions", "A rule that prevents overlays from being shown while a notification is displayed", (e, t) => {
-  if (e.uiState.currentNotificationType === null) return !0;
-  let i = NotificationCategory[e.uiState.currentNotificationType];
-  trackEventAnalytics("curator_collision", {
-    blocked_overlay_id: removeUUID(t.id),
-    blocking_notif_type: i
-  });
-  return !1;
-});
-let b = new BaseRule("DenyForRequestModal", "Don't show any overlays on the team page if the request to upgrade pro modal is open", e => !(e.uiState.modalShownType === E1 && e.uiState.selectedView.view === "team"));
-let E = new BaseRule("DenyForSyntheticTestUser", "Don't show to synthetic test users (in E2E tests)", e => !isSyntheticTesterEmail(e.userData?.email) || !!getQueryParam("allow_synthetic_tester_overlays"));
-let T = new BaseRule("DenyIfNuxHasNotShown", "Don't show any overlays if the user has not seen NUX", (e, t) => {
-  let i = removeUUID(t.id);
-  let n = getFeatureFlags().curator_deny_if_nux_has_not_shown;
-  if (t.priority === _$$N.URGENT_ALERT || !n || !_$$e.some(t => e.allMountedOverlays.includes(t)) || e.uiState.selectedView.view === "prototype") return !0;
-  let r = {
-    emailValidatedAt: e.userData?.email_validated_at ? new Date(e.userData?.email_validated_at) : null,
-    jobTitle: e.jobTitle
-  };
-  return !(!_$$e.includes(i) && function ({
-    emailValidatedAt: e,
-    jobTitle: t
-  }) {
-    return !isAllowedToSeeNux({
-      emailValidatedAt: e,
-      jobTitle: t
-    });
-  }(r));
-});
-let k = new BaseRule("DenyInInlinePreview", "Hide all overlays inside the inline preview", e => e.uiState.selectedView.view !== "prototype" || !e.uiState.selectedView.inlinePreview);
-let R = new BaseRule("DenyInKillSwitch", "Don't show any overlays that belong to the LaunchDarkly flag when the kill switch is enabled", (e, t) => {
-  let i = removeUUID(t.id);
-  let n = getLaunchDarklyFlagsExport().curator_disallow_overlay_rule;
-  return !n || !Array.isArray(n) || !n.includes(i);
-});
-let O = atom(e => {
-  let t = e(selectedViewAtom);
-  let i = e(modalTypeAtom);
-  let n = e(notificationTypeAtom);
-  let r = e(NT);
-  let a = e(overlayIdsAtom);
-  let o = typeof r == "string" || void 0 === r ? r : r.status === "loaded" ? r.data : void 0;
-  let l = e(userFlagAtomFamily("last_seen_dev_mode_upsell"));
+// Renamed variables, added types, simplified logic, and improved readability
+// Origin: $$es0 function and related variables from curator overlay system
+
+// Overlay manager atom
+const overlayManagerAtom = atomWithDefault(() => new OverlayManager())
+
+// Rule to prevent overlays from showing while a modal is displayed
+const preventModalCollisionsRule = new BaseRule(
+  "PreventModalCollisions",
+  "A rule that prevents overlays from being shown while a modal is displayed",
+  (context, overlay) => {
+    if (!context.uiState.modalShownType) {
+      return true
+    }
+
+    if (overlay.attributes.allowShowingIfModalPresent) {
+      trackEventAnalytics("curator_collision", {
+        blocked_overlay_id: removeUUID(overlay.id),
+        blocking_modal_type: context.uiState.modalShownType,
+        was_allowlisted: true,
+      })
+      return true
+    }
+
+    trackEventAnalytics("curator_collision", {
+      blocked_overlay_id: removeUUID(overlay.id),
+      blocking_modal_type: context.uiState.modalShownType,
+    })
+    return false
+  },
+)
+
+// Rule to prevent overlays from showing while a notification is displayed
+const preventNotificationCollisionsRule = new BaseRule(
+  "PreventNotificationCollisions",
+  "A rule that prevents overlays from being shown while a notification is displayed",
+  (context, overlay) => {
+    if (context.uiState.currentNotificationType === null) {
+      return true
+    }
+
+    const notificationCategory = NotificationCategory[context.uiState.currentNotificationType]
+    trackEventAnalytics("curator_collision", {
+      blocked_overlay_id: removeUUID(overlay.id),
+      blocking_notif_type: notificationCategory,
+    })
+    return false
+  },
+)
+
+// Rule to deny overlays when request modal is open on team page
+const denyForRequestModalRule = new BaseRule(
+  "DenyForRequestModal",
+  "Don't show any overlays on the team page if the request to upgrade pro modal is open",
+  (context) => {
+    return !(context.uiState.modalShownType === E1 && context.uiState.selectedView.view === "team")
+  },
+)
+
+// Rule to deny overlays for synthetic test users
+const denyForSyntheticTestUserRule = new BaseRule(
+  "DenyForSyntheticTestUser",
+  "Don't show to synthetic test users (in E2E tests)",
+  (context) => {
+    return !isSyntheticTesterEmail(context.userData?.email) || !!getQueryParam("allow_synthetic_tester_overlays")
+  },
+)
+
+// Rule to deny overlays if NUX has not been shown
+const denyIfNuxHasNotShownRule = new BaseRule(
+  "DenyIfNuxHasNotShown",
+  "Don't show any overlays if the user has not seen NUX",
+  (context, overlay) => {
+    const overlayId = removeUUID(overlay.id)
+    const featureFlagEnabled = getFeatureFlags().curator_deny_if_nux_has_not_shown
+
+    if (
+      overlay.priority === ModalPriority.URGENT_ALERT
+      || !featureFlagEnabled
+      || !_$$e.some(id => context.allMountedOverlays.includes(id))
+      || context.uiState.selectedView.view === "prototype"
+    ) {
+      return true
+    }
+
+    const userInfo = {
+      emailValidatedAt: context.userData?.email_validated_at ? new Date(context.userData?.email_validated_at) : null,
+      jobTitle: context.jobTitle,
+    }
+
+    return !(!_$$e.includes(overlayId) && !isAllowedToSeeNux(userInfo))
+  },
+)
+
+// Rule to deny overlays in inline preview
+const denyInInlinePreviewRule = new BaseRule(
+  "DenyInInlinePreview",
+  "Hide all overlays inside the inline preview",
+  (context) => {
+    return context.uiState.selectedView.view !== "prototype" || !context.uiState.selectedView.inlinePreview
+  },
+)
+
+// Rule to deny overlays based on kill switch
+const denyInKillSwitchRule = new BaseRule(
+  "DenyInKillSwitch",
+  "Don't show any overlays that belong to the LaunchDarkly flag when the kill switch is enabled",
+  (context, overlay) => {
+    const overlayId = removeUUID(overlay.id)
+    const disallowedOverlays = getLaunchDarklyFlagsExport().curator_disallow_overlay_rule
+
+    return !disallowedOverlays
+      || !Array.isArray(disallowedOverlays)
+      || !disallowedOverlays.includes(overlayId)
+  },
+)
+
+// Atom to collect UI state and user data for overlay rules
+const overlayRuleContextAtom = atom((get) => {
+  const selectedView = get(selectedViewAtom)
+  const modalType = get(modalTypeAtom)
+  const notificationType = get(notificationTypeAtom)
+  const jobTitleResource = get(NT)
+  const overlayIds = get(overlayIdsAtom)
+  const devModeUpsellFlag = get(userFlagAtomFamily("last_seen_dev_mode_upsell"))
+
+  const jobTitle = typeof jobTitleResource === "string" || jobTitleResource === undefined
+    ? jobTitleResource
+    : jobTitleResource.status === "loaded"
+      ? jobTitleResource.data
+      : undefined
+
   return {
     uiState: {
-      selectedView: t,
-      modalShownType: i,
-      currentNotificationType: n
+      selectedView,
+      modalShownType: modalType,
+      currentNotificationType: notificationType,
     },
     userData: getInitialOptions().user_data,
-    lastSeenDevModeUpsell: l.data?.updatedAt,
-    jobTitle: o || getInitialOptions().user_data?.profile?.job_title,
-    allMountedOverlays: a.map(e => removeUUID(e))
-  };
-});
-class D {
+    lastSeenDevModeUpsell: devModeUpsellFlag.data?.updatedAt,
+    jobTitle: jobTitle || getInitialOptions().user_data?.profile?.job_title,
+    allMountedOverlays: overlayIds.map(removeUUID),
+  }
+})
+
+// Overlay channel implementation for experience manager
+class OverlayChannel {
+  id = ChannelID.Overlay
+  currentExperience = undefined
+  queuedExperiences: any[] = []
+
   constructor() {
-    this.id = ChannelID.Overlay;
-    this.currentExperience = void 0;
-    this.queuedExperiences = [];
+    // Initialization done in field declarations
   }
+
   getContext() {
-    return atomStoreManager.get(O);
+    return atomStoreManager.get(overlayRuleContextAtom)
   }
+
   getRules() {
-    return [R, k, _$$h, E, b, RI, T, _, A];
+    return [
+      denyInKillSwitchRule,
+      denyInInlinePreviewRule,
+      _$$h,
+      denyForSyntheticTestUserRule,
+      denyForRequestModalRule,
+      LimitDevModeUpsellFrequencyRule,
+      denyIfNuxHasNotShownRule,
+      preventModalCollisionsRule,
+      preventNotificationCollisionsRule,
+    ]
   }
 }
-let L = atom(() => new ExperienceManager({
-  [ChannelID.Overlay]: new D()
-}));
+
+// Experience manager atom for overlay channel
+const experienceManagerAtom = atom(() => new ExperienceManager({
+  [ChannelID.Overlay]: new OverlayChannel(),
+}))
+
+// Global Curator API
 window.Curator = {
   enableTraceLogging: () => setCuratorLoggingLevel("trace"),
   enableDebugLogging: () => setCuratorLoggingLevel("debug"),
   disableLogging: () => setCuratorLoggingLevel("disabled"),
+
   getMountedOverlays() {
-    return atomStoreManager.get(overlayIdsAtom);
+    return atomStoreManager.get(overlayIdsAtom)
   },
-  sendEvent(e) {
-    handleAtomEvent(e);
-    return !0;
+
+  sendEvent(event) {
+    handleAtomEvent(event)
+    return true
   },
+
   getExperienceSelectorChannels() {
-    return atomStoreManager.get(L).getImmutableChannels();
+    return atomStoreManager.get(experienceManagerAtom).getImmutableChannels()
   },
+
   getLoadingOverlays() {
-    return atomStoreManager.get(l).getImmutableLoadingOverlays();
+    return atomStoreManager.get(overlayManagerAtom).getImmutableLoadingOverlays()
   },
+
   getOverlaysBlockedByDataDependencies() {
-    return atomStoreManager.get(l).getImmutableQueuedOverlays();
+    return atomStoreManager.get(overlayManagerAtom).getImmutableQueuedOverlays()
   },
-  resetUserFlags(e) {
-    let t = e.reduce((e, t) => ({
-      ...e,
-      [t]: !1
-    }), {});
+
+  resetUserFlags(flagNames) {
+    const resetFlags = flagNames.reduce((acc, flagName) => ({
+      ...acc,
+      [flagName]: false,
+    }), {})
+
     debugState.dispatch({
       type: "USER_FLAG_POST",
-      payload: t
-    });
+      payload: resetFlags,
+    })
+  },
+}
+
+// Regular expression to match UUID suffixes
+const UUID_REGEX = /__[0-9A-Z\-]+$/i
+
+// Enumeration for overlay completion reasons
+enum OverlayCompletionReason {
+  Deactivated = "deactivated",
+  Unmounted = "unmounted",
+  GlobalRequestClose = "global_request_close",
+}
+
+// Atom to track if overlay system has been initialized
+const isOverlaySystemInitializedAtom = atom(false)
+
+// Utility function to convert resource state to resource utils format
+function convertResourceState(resource: any) {
+  if (resource.state === "hasData") {
+    return resourceUtils.loaded(resource.data)
   }
-};
-let Q = /__[0-9A-Z\-]+$/i;
-var ee = (e => (e.Deactivated = "deactivated", e.Unmounted = "unmounted", e.GlobalRequestClose = "global_request_close", e))(ee || {});
-let et = atom(!1);
-function ei(e) {
-  return e.state === "hasData" ? resourceUtils.loaded(e.data) : e.state === "hasError" ? resourceUtils.error(e.error) : resourceUtils.loading();
+  else if (resource.state === "hasError") {
+    return resourceUtils.error(resource.error)
+  }
+  return resourceUtils.loading()
 }
-function en(e) {
-  return e.status === "loading";
+
+// Utility function to check if resource is loading
+function isResourceLoading(resource: any) {
+  return resource.status === "loading"
 }
-let er = "curator_perf";
-let ea = "timed out";
-export function $$es0({
-  overlay: e,
-  ...t
-}, i = []) {
-  let r = e.id;
-  let [a] = useState(() => appendUUID(r));
-  let u = function (e, t) {
-    let i = useContext(_$$y2);
-    let n = useRef(!1);
-    return useMemo(() => {
-      if (!i) return t;
-      let r = i.priorityMap.get(e);
-      return r ? getFeatureFlags().curator_file_browser_ordering ? r : t : (!n.current && getFeatureFlags().curator_file_browser_ordering && (reportError(ServiceCategories.GROWTH_PLATFORM, new Error("[Curator] Overlay not registered with gallery"), {
+
+// Constants for performance tracking
+const CURATOR_PERFORMANCE_KEY = "curator_perf"
+const DEPENDENCY_TIMEOUT_MESSAGE = "timed out"
+
+// Main overlay hook function
+export function useOverlay(
+  { overlay, ...overlayProps }: { overlay: any, [key: string]: any },
+  dependencies: any[] = [],
+) {
+  const overlayId = overlay.id
+  const [uniqueOverlayId] = useState(() => appendUUID(overlayId))
+
+  // Get overlay priority with context consideration
+  const priority = useMemo(() => {
+    const priorityContext = useContext(PriorityContext)
+    const ref = useRef(false)
+
+    if (!priorityContext) {
+      return overlayProps.priority
+    }
+
+    const galleryPriority = priorityContext.priorityMap.get(overlayId)
+
+    if (galleryPriority) {
+      return getFeatureFlags().curator_file_browser_ordering ? galleryPriority : overlayProps.priority
+    }
+
+    if (!ref.current && getFeatureFlags().curator_file_browser_ordering) {
+      reportError(ServiceCategories.GROWTH_PLATFORM, new Error("[Curator] Overlay not registered with gallery"), {
         tags: {
-          overlayId: e,
-          galleryName: i.name
-        }
-      }), n.current = !0), getFeatureFlags().curator_file_browser_ordering ? 0 : t);
-    }, [e, i, t]);
-  }(r, t.priority);
-  let p = Xr(overlayStateAtom);
-  let m = useAtomWithSubscription(l);
-  let g = useAtomWithSubscription(L);
-  let f = Xr(overlayIdsAtom);
-  let _ = useAtomWithSubscription(createLifecycleAtomFamily(e.lifecycle));
-  let A = useRef(_);
-  A.current = _;
-  let [y, b] = useAtomValueAndSetter(et);
-  let [v, I] = useState(!1);
-  let E = useRef(v);
-  E.current = v;
-  let S = useRef(void 0);
-  let w = function (e, t, i) {
-    let n = useMemoShallow(() => [t, ...e], [e, t]);
-    let r = useMemo(() => function (e) {
-      let t = e.map(e => "state" in e ? ei(e) : e);
-      return resourceUtils.all(t);
-    }(n), [n]);
-    !function (e, t) {
-      function i(e) {
-        return e.map(e => "state" in e ? ei(e) : e);
-      }
-      let n = useCallback((t, i) => {
-        isDevEnvironment() && console.error(i);
-        trackEventAnalytics("curator_dependency_error", {
-          errorType: t,
-          overlay: e
-        }, {
-          forwardToDatadog: !0
-        });
-      }, [e]);
-      let r = useRef(!1);
-      let a = useRef(!1);
-      let s = useRef(i(t ?? []));
-      useEffect(() => {
-        if ((t?.length ?? 0) === 0 && s.current.length === 0) return;
-        let o = i(t ?? []);
-        if (o.length !== s.current.length) {
-          r.current || (n("changed_dependency_count", `[Error] Number of dependencies changed between calls to useOverlay in overlay \`${e}\`.`), r.current = !0);
-          return;
-        }
-        let l = a.current;
-        for (let [e, t] of zip()(o, s.current)) {
-          if (e == null || t == null || (l ||= e.status !== "loaded" && t.status === "loaded")) break;
-        }
-        l && !a.current && (n("unloaded_dependencies", `[useOverlay] One or more dependency statuses became unloaded between updates in overlay '${e}'.`), a.current = !0);
-        s.current = o;
-      }, [t, n, e]);
-    }(i, n);
-    let [a, s] = useState(!1);
+          overlayId,
+          galleryName: priorityContext.name,
+        },
+      })
+      ref.current = true
+    }
+
+    return getFeatureFlags().curator_file_browser_ordering ? 0 : overlayProps.priority
+  }, [overlayId, overlayProps.priority])
+
+  const setOverlayState = useSetAtom(overlayStateAtom)
+  const overlayManager = useAtomWithSubscription(overlayManagerAtom)
+  const experienceManager = useAtomWithSubscription(experienceManagerAtom)
+  const setOverlayIds = useSetAtom(overlayIdsAtom)
+  const lifecycleAtom = useAtomWithSubscription(createLifecycleAtomFamily(overlay.lifecycle))
+  const lifecycleAtomRef = useRef(lifecycleAtom)
+  lifecycleAtomRef.current = lifecycleAtom
+
+  const [isInitialized, setIsInitialized] = useAtomValueAndSetter(isOverlaySystemInitializedAtom)
+  const [isShowing, setIsShowing] = useState(false)
+  const isShowingRef = useRef(isShowing)
+  isShowingRef.current = isShowing
+
+  const showStartTimeRef = useRef<number | undefined>(undefined)
+
+  // Process overlay dependencies
+  const dependencyResult = useMemo(() => {
+    const allDependencies = useMemoShallow(() => [lifecycleAtom, ...dependencies], [lifecycleAtom, dependencies])
+
+    // Dependency validation effect
     useEffect(() => {
-      let e = setTimeout(() => {
-        r.status === "loading" && (s(!0), trackEventAnalytics("curator_dependencies_timed_out", {
-          overlay: i
-        }, {
-          forwardToDatadog: !0
-        }));
-      }, 9e3);
-      return () => clearTimeout(e);
-    }, [r.status, i]);
-    return a ? eo : r;
-  }(i, _, r);
-  let C = useRef(w);
-  C.current = w;
-  let [T, k] = useState(void 0);
-  let {
-    experiment
-  } = t;
-  let N = useRef(experiment?.check);
-  N.current = experiment?.check;
-  let [P] = useState(() => [() => {
-    if (experiment == null) return;
-    let e = N.current;
-    if (!e) return;
-    let t = e();
-    k(t);
-    let i = experiment.predicate(t);
-    let n = !1;
-    if (C.current.status === "loaded" ? n = experiment.postCheck(...ed(C.current.data)) : C.current.status === "loading" && reportError(ServiceCategories.GROWTH_PLATFORM, new Error("[Curator] Experiment postCheck unexpectedly did not have loaded data dependencies"), {
-      tags: {
-        overlayId: r,
-        dependencyStatus: C.current.status
+      function mapResources(resources: any[]) {
+        return resources.map(resource => "state" in resource ? convertResourceState(resource) : resource)
       }
-    }), i && n) {
-      logCuratorEvent({
-        type: "resumed",
-        name: "experiment_check_passed",
-        properties: {
-          overlayId: a
+
+      const handleError = useCallback((errorType: string, message: string) => {
+        if (isDevEnvironment()) {
+          console.error(message)
         }
-      }, "debug");
-      return;
-    }
-    logCuratorEvent({
-      type: "failed",
-      name: "experiment_check_failed",
-      properties: {
-        overlayId: a,
-        predicateValue: i,
-        postCheckValue: n
+        trackEventAnalytics("curator_dependency_error", {
+          errorType,
+          overlay: overlayId,
+        }, {
+          forwardToDatadog: true,
+        })
+      }, [overlayId])
+
+      const hasErrorsRef = useRef(false)
+      const becameUnloadedRef = useRef(false)
+      const previousResourcesRef = useRef(mapResources(dependencies ?? []))
+
+      if ((dependencies?.length ?? 0) === 0 && previousResourcesRef.current.length === 0) {
+        return
       }
-    }, "debug");
-    return {
-      reasonType: BlockReasonType.ExperimentCheckFail
-    };
-  }, () => {
-    if (e.lifecycle != null) {
-      if (A.current.status !== "loaded") {
-        reportError(ServiceCategories.GROWTH_PLATFORM, new Error("[Curator] Lifecycle postCheck unexpectedly did not have loaded data dependencies"), {
+
+      const currentResources = mapResources(dependencies ?? [])
+
+      if (currentResources.length !== previousResourcesRef.current.length) {
+        if (!hasErrorsRef.current) {
+          handleError("changed_dependency_count", `[Error] Number of dependencies changed between calls to useOverlay in overlay \`${overlayId}\`.`)
+          hasErrorsRef.current = true
+        }
+        return
+      }
+
+      let becameUnloaded = becameUnloadedRef.current
+      for (const [current, previous] of zip(currentResources, previousResourcesRef.current)) {
+        becameUnloaded ||= current.status !== "loaded"
+        if (current == null || previous == null
+          || (becameUnloaded && previous.status === "loaded")) {
+          break
+        }
+      }
+
+      if (becameUnloaded && !becameUnloadedRef.current) {
+        handleError("unloaded_dependencies", `[useOverlay] One or more dependency statuses became unloaded between updates in overlay '${overlayId}'.`)
+        becameUnloadedRef.current = true
+      }
+
+      previousResourcesRef.current = currentResources
+    }, [dependencies, overlayId])
+
+    // Timeout handling
+    const [hasTimedOut, setHasTimedOut] = useState(false)
+    useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        if (resourceUtils.all(allDependencies).status === "loading") {
+          setHasTimedOut(true)
+          trackEventAnalytics("curator_dependencies_timed_out", {
+            overlay: overlayId,
+          }, {
+            forwardToDatadog: true,
+          })
+        }
+      }, 9000)
+
+      return () => clearTimeout(timeoutId)
+    }, [allDependencies, overlayId])
+
+    return hasTimedOut
+      ? resourceUtils.error([DEPENDENCY_TIMEOUT_MESSAGE])
+      : resourceUtils.all(allDependencies.map(dep => "state" in dep ? convertResourceState(dep) : dep))
+  }, [dependencies, lifecycleAtom, overlayId])
+
+  const dependencyResultRef = useRef(dependencyResult)
+  dependencyResultRef.current = dependencyResult
+
+  const [experimentResult, setExperimentResult] = useState<any>(undefined)
+
+  const { experiment } = overlayProps
+  const experimentCheckRef = useRef(experiment?.check)
+  experimentCheckRef.current = experiment?.check
+
+  // Post-check functions for experiments and lifecycle
+  const [postCheckFunctions] = useState(() => [
+    () => {
+      if (experiment == null)
+        return
+
+      const checkFunction = experimentCheckRef.current
+      if (!checkFunction)
+        return
+
+      const result = checkFunction()
+      setExperimentResult(result)
+
+      const predicateValue = experiment.predicate(result)
+      let postCheckValue = false
+
+      if (dependencyResultRef.current.status === "loaded") {
+        postCheckValue = experiment.postCheck(...getDependencyData(dependencyResultRef.current.data))
+      }
+      else if (dependencyResultRef.current.status === "loading") {
+        reportError(ServiceCategories.GROWTH_PLATFORM, new Error("[Curator] Experiment postCheck unexpectedly did not have loaded data dependencies"), {
           tags: {
-            overlayId: r,
-            dependencyStatus: C.current.status
-          }
-        });
-        return;
+            overlayId,
+            dependencyStatus: dependencyResultRef.current.status,
+          },
+        })
       }
-      return checkLifecycleConditions({
-        ...A.current.data,
-        lifecycleConfig: e.lifecycle
-      });
-    }
-  }]);
-  let O = function (e, t, i) {
-    let n = useRef(0);
-    useLayoutEffect(() => (globalPerfTimer.start(el, {
-      key: t
-    }), () => {
-      globalPerfTimer.$$delete(el, t);
-    }), []);
-    useLayoutEffect(() => {
-      i === "loaded" ? n.current = globalPerfTimer.tryStop(el, t) ?? 0 : (i === "errors" || i === "disabled") && globalPerfTimer.$$delete(el, t);
-    }, [i, e, t]);
-    return n;
-  }(r, a, w.status);
-  let D = useRef(0);
-  let F = useRef();
-  useEffect(() => {
-    F.current?.(w);
-  }, [w]);
-  let G = useCallback((e, t) => {
-    if (E.current) {
-      if (logCuratorEvent({
-        type: "triggered",
-        name: "overlay_complete_called",
+
+      if (predicateValue && postCheckValue) {
+        logCuratorEvent({
+          type: "resumed",
+          name: "experiment_check_passed",
+          properties: {
+            overlayId: uniqueOverlayId,
+          },
+        }, "debug")
+        return
+      }
+
+      logCuratorEvent({
+        type: "failed",
+        name: "experiment_check_failed",
         properties: {
-          overlayId: a,
-          completeReason: e,
-          completeRequester: t
-        }
-      }, "debug"), S.current) {
-        let i;
-        let n = (performance.now() - S.current) / 1e3;
-        i = t ?? null;
-        trackEventAnalytics("curator_content_hidden", {
-          overlay_id: r,
-          timeShownSec: n,
-          completeReason: e,
-          completeRequester: i
-        }, {
-          forwardToDatadog: !0
-        });
-        S.current = void 0;
+          overlayId: uniqueOverlayId,
+          predicateValue,
+          postCheckValue,
+        },
+      }, "debug")
+
+      return {
+        reasonType: BlockReasonType.ExperimentCheckFail,
       }
-      I(!1);
-      g.completeExperience(a);
-      p(null);
+    },
+
+    () => {
+      if (overlay.lifecycle != null) {
+        if (lifecycleAtomRef.current.status !== "loaded") {
+          reportError(ServiceCategories.GROWTH_PLATFORM, new Error("[Curator] Lifecycle postCheck unexpectedly did not have loaded data dependencies"), {
+            tags: {
+              overlayId,
+              dependencyStatus: dependencyResultRef.current.status,
+            },
+          })
+          return
+        }
+
+        return checkLifecycleConditions({
+          ...lifecycleAtomRef.current.data,
+          lifecycleConfig: overlay.lifecycle,
+        })
+      }
+    },
+  ])
+
+  // Performance tracking for dependencies
+  const dependencyLoadTimeRef = useMemo(() => {
+    const ref = useRef(0)
+    const key = "curator_deps_loaded"
+
+    useLayoutEffect(() => {
+      globalPerfTimer.start(key, {
+        key: uniqueOverlayId,
+      })
+
+      return () => {
+        globalPerfTimer.delete(key, uniqueOverlayId)
+      }
+    }, [])
+
+    useLayoutEffect(() => {
+      if (dependencyResult.status === "loaded") {
+        ref.current = globalPerfTimer.tryStop(key, uniqueOverlayId) ?? 0
+      }
+      else if (dependencyResult.status === "errors" || dependencyResult.status === "disabled") {
+        globalPerfTimer.delete(key, uniqueOverlayId)
+      }
+    }, [dependencyResult.status, overlayId, uniqueOverlayId])
+
+    return ref
+  }, [overlayId, uniqueOverlayId, dependencyResult.status])
+
+  const queueDurationRef = useRef(0)
+  const dependencyUpdateCallbackRef = useRef<((result: any) => void) | undefined>(undefined)
+
+  useEffect(() => {
+    dependencyUpdateCallbackRef.current?.(dependencyResult)
+  }, [dependencyResult])
+
+  // Function to complete an overlay
+  const completeOverlay = useCallback((reason: OverlayCompletionReason, requester?: string) => {
+    if (isShowingRef.current) {
+      if (showStartTimeRef.current) {
+        const timeShownSeconds = (performance.now() - showStartTimeRef.current) / 1000
+        const requesterValue = requester ?? null
+
+        trackEventAnalytics("curator_content_hidden", {
+          overlay_id: overlayId,
+          timeShownSec: timeShownSeconds,
+          completeReason: reason,
+          completeRequester: requesterValue,
+        }, {
+          forwardToDatadog: true,
+        })
+
+        showStartTimeRef.current = undefined
+      }
+
+      setIsShowing(false)
+      experienceManager.completeExperience(uniqueOverlayId)
+      setOverlayState(null)
     }
-  }, [S, a, r, g, p]);
-  useEventForwarder(a, CURATOR_GLOBAL_REQUEST_CLOSE, ({
+  }, [overlayId, uniqueOverlayId, experienceManager, setOverlayState])
+
+  // Handle global close events
+  useEventForwarder(uniqueOverlayId, CURATOR_GLOBAL_REQUEST_CLOSE, ({
     properties: {
-      requester: e
-    }
+      requester,
+    },
   }) => {
-    G(ee.GlobalRequestClose, e);
-  });
+    completeOverlay(OverlayCompletionReason.GlobalRequestClose, requester)
+  })
+
+  // Cleanup effects
   useEffect(() => () => {
-    E.current ? G(ee.Unmounted) : g.dequeueExperience(a);
-  }, [G, g, a]);
-  useEffect(() => () => {
-    m.removeOverlay(a);
-  }, [m, a]);
-  useSingleEffect(() => (y || (b(!0), LifecycleManager.removeStaleLocalStorageLifecycleNames()), logCuratorEvent({
-    type: "triggered",
-    name: "overlay_mounted",
-    properties: {
-      overlayId: a,
-      priority: u
+    if (isShowingRef.current) {
+      completeOverlay(OverlayCompletionReason.Unmounted)
     }
-  }, "debug"), f({
-    type: "mount",
-    uniqueOverlayId: a
-  }), () => {
+    else {
+      experienceManager.dequeueExperience(uniqueOverlayId)
+    }
+  }, [completeOverlay, experienceManager, uniqueOverlayId])
+
+  useEffect(() => () => {
+    overlayManager.removeOverlay(uniqueOverlayId)
+  }, [overlayManager, uniqueOverlayId])
+
+  // Initialization effect
+  useSingleEffect(() => {
+    if (!isInitialized) {
+      setIsInitialized(true)
+      LifecycleManager.removeStaleLocalStorageLifecycleNames()
+    }
+
     logCuratorEvent({
       type: "triggered",
-      name: "overlay_unmounted",
+      name: "overlay_mounted",
       properties: {
-        overlayId: a
-      }
-    }, "debug");
-    f({
-      type: "unmount",
-      uniqueOverlayId: a
-    });
-  }));
-  let ec = useCallback(t => {
-    let i = {
-      id: a,
-      priority: u,
+        overlayId: uniqueOverlayId,
+        priority,
+      },
+    }, "debug")
+
+    setOverlayIds({
+      type: "mount",
+      uniqueOverlayId,
+    })
+
+    return () => {
+      logCuratorEvent({
+        type: "triggered",
+        name: "overlay_unmounted",
+        properties: {
+          overlayId: uniqueOverlayId,
+        },
+      }, "debug")
+
+      setOverlayIds({
+        type: "unmount",
+        uniqueOverlayId,
+      })
+    }
+  })
+
+  // Callback to queue an overlay experience
+  const queueExperience = useCallback((options: any) => {
+    const experienceConfig = {
+      id: uniqueOverlayId,
+      priority,
       channelID: ChannelID.Overlay,
-      onShow: i => {
-        I(!0);
-        e.lifecycle && incrementLifecycleCounter(e.lifecycle);
-        t?.onShow?.();
+
+      onShow: () => {
+        setIsShowing(true)
+
+        if (overlay.lifecycle) {
+          incrementLifecycleCounter(overlay.lifecycle)
+        }
+
+        options?.onShow?.()
+
         trackEventAnalytics("curator_content_shown", {
-          shown: r,
-          overlay_id: r
+          shown: overlayId,
+          overlay_id: overlayId,
         }, {
-          forwardToDatadog: !0
-        });
+          forwardToDatadog: true,
+        })
+
         logCuratorEvent({
           type: "output",
           name: "overlay_showing",
           properties: {
-            overlayId: a
-          }
-        }, "debug");
-        S.current = performance.now();
-        p(r);
-        let n = globalPerfTimer.tryStop(er, a);
-        n && (trackEventAnalytics(er, {
-          totalShowMs: n,
-          dependenciesLoadingMs: O.current,
-          queuedMs: D.current,
-          overlayId: r
-        }, {
-          forwardToDatadog: !0
-        }), O.current = 0);
+            overlayId: uniqueOverlayId,
+          },
+        }, "debug")
+
+        showStartTimeRef.current = performance.now()
+        setOverlayState(overlayId)
+
+        const totalShowTime = globalPerfTimer.tryStop(CURATOR_PERFORMANCE_KEY, uniqueOverlayId)
+        if (totalShowTime) {
+          trackEventAnalytics(CURATOR_PERFORMANCE_KEY, {
+            totalShowMs: totalShowTime,
+            dependenciesLoadingMs: dependencyLoadTimeRef.current,
+            queuedMs: queueDurationRef.current,
+            overlayId,
+          }, {
+            forwardToDatadog: true,
+          })
+          dependencyLoadTimeRef.current = 0
+        }
       },
-      onBlocked: i => {
-        switch (i.reasonType) {
+
+      onBlocked: (blockInfo: any) => {
+        switch (blockInfo.reasonType) {
           case BlockReasonType.ExistingExperience:
-          case BlockReasonType.HigherPriExperience:
-            let n = {
-              overlayId: a,
-              blockingOverlayId: i.blocker.id
-            };
-            e.queueOnBlock ? logCuratorEvent({
-              type: "paused",
-              name: "paused_on_current_overlay",
-              properties: n
-            }, "debug") : logCuratorEvent({
-              type: "failed",
-              name: "failed_on_current_overlay",
-              properties: n
-            }, "debug");
-            let s = i.blocker.id.replace(Q, "");
-            t?.onBlocked?.(s);
+          case BlockReasonType.HigherPriExperience: {
+            const blockProperties = {
+              overlayId: uniqueOverlayId,
+              blockingOverlayId: blockInfo.blocker.id,
+            }
+
+            if (overlay.queueOnBlock) {
+              logCuratorEvent({
+                type: "paused",
+                name: "paused_on_current_overlay",
+                properties: blockProperties,
+              }, "debug")
+            }
+            else {
+              logCuratorEvent({
+                type: "failed",
+                name: "failed_on_current_overlay",
+                properties: blockProperties,
+              }, "debug")
+            }
+
+            const cleanBlockingId = blockInfo.blocker.id.replace(UUID_REGEX, "")
+            options?.onBlocked?.(cleanBlockingId)
+
             trackEventAnalytics("curator_content_blocked", {
-              blocked: r,
-              blocking: s,
-              overlay_id: r,
-              blocked_priority: u,
-              blocking_priority: i.blocker.priority,
-              block_type: i.reasonType
+              blocked: overlayId,
+              blocking: cleanBlockingId,
+              overlay_id: overlayId,
+              blocked_priority: priority,
+              blocking_priority: blockInfo.blocker.priority,
+              block_type: blockInfo.reasonType,
             }, {
-              forwardToDatadog: !0
-            });
-            globalPerfTimer.$$delete(er, a);
-            break;
+              forwardToDatadog: true,
+            })
+
+            globalPerfTimer.delete(CURATOR_PERFORMANCE_KEY, uniqueOverlayId)
+            break
+          }
+
           case BlockReasonType.ExperimentCheckFail:
-            break;
+            break
+
           case BlockReasonType.RuleFail:
             logCuratorEvent({
               type: "failed",
               name: "rule_check_failed",
               properties: {
-                overlayId: a,
-                name: i.rule.name,
-                description: i.rule.description
-              }
-            }, "debug");
-            break;
+                overlayId: uniqueOverlayId,
+                name: blockInfo.rule.name,
+                description: blockInfo.rule.description,
+              },
+            }, "debug")
+            break
+
           case BlockReasonType.LifecycleCheckFail:
             logCuratorEvent({
               type: "failed",
               name: "lifecycle_check_failed",
               properties: {
-                overlayId: a,
-                description: getBlockMessage(i.cause)
-              }
-            }, "debug");
-            break;
+                overlayId: uniqueOverlayId,
+                description: getBlockMessage(blockInfo.cause),
+              },
+            }, "debug")
+            break
+
           default:
-            throwTypeError(i);
+            throwTypeError(blockInfo)
         }
       },
-      postChecks: P,
-      queueOnBlock: e.queueOnBlock ?? !1,
+
+      postChecks: postCheckFunctions,
+      queueOnBlock: overlay.queueOnBlock ?? false,
       attributes: {
-        allowShowingIfModalPresent: !!e.allowShowingIfModalPresent
-      }
-    };
-    g.queueExperience(i);
-  }, [e.queueOnBlock, e.allowShowingIfModalPresent, e.lifecycle, O, g, u, P, r, p, a]);
-  let eu = useCallback(e => {
-    if (E.current) return;
-    globalPerfTimer.start(er, {
-      key: a
-    });
+        allowShowingIfModalPresent: !!overlay.allowShowingIfModalPresent,
+      },
+    }
+
+    experienceManager.queueExperience(experienceConfig)
+  }, [
+    overlay.queueOnBlock,
+    overlay.allowShowingIfModalPresent,
+    overlay.lifecycle,
+    dependencyLoadTimeRef,
+    experienceManager,
+    priority,
+    postCheckFunctions,
+    overlayId,
+    setOverlayState,
+    uniqueOverlayId,
+  ])
+
+  // Callback to show an overlay
+  const showOverlay = useCallback((showOptions?: any) => {
+    if (isShowingRef.current)
+      return
+
+    globalPerfTimer.start(CURATOR_PERFORMANCE_KEY, {
+      key: uniqueOverlayId,
+    })
+
     logCuratorEvent({
       type: "triggered",
       name: "overlay_show_called",
       properties: {
-        overlayId: a
-      }
-    }, "debug");
-    let t = {
-      id: a,
-      priority: u,
-      queryResult: C.current
-    };
-    function i(i) {
-      if (i.status === "errors") {
-        m.removeOverlay(t.id);
-        e?.onLoadFailed?.(i.errors);
-        let n = i.errors.includes(ea);
+        overlayId: uniqueOverlayId,
+      },
+    }, "debug")
+
+    const overlayConfig = {
+      id: uniqueOverlayId,
+      priority,
+      queryResult: dependencyResultRef.current,
+    }
+
+    function handleDependencyResult(result: any) {
+      if (result.status === "errors") {
+        overlayManager.removeOverlay(overlayConfig.id)
+        showOptions?.onLoadFailed?.(result.errors)
+
+        const hasTimeoutError = result.errors.includes(DEPENDENCY_TIMEOUT_MESSAGE)
         logCuratorEvent({
           type: "failed",
           name: "data_dependencies_load_error",
           properties: {
-            overlayId: a,
-            timedOut: n,
-            errors: i.errors
-          }
-        }, "debug");
-        globalPerfTimer.$$delete(er, a);
-        return;
+            overlayId: uniqueOverlayId,
+            timedOut: hasTimeoutError,
+            errors: result.errors,
+          },
+        }, "debug")
+
+        globalPerfTimer.delete(CURATOR_PERFORMANCE_KEY, uniqueOverlayId)
+        return
       }
-      if (i.status === "disabled") {
-        m.removeOverlay(t.id);
+
+      if (result.status === "disabled") {
+        overlayManager.removeOverlay(overlayConfig.id)
         logCuratorEvent({
           type: "failed",
           name: "data_dependencies_disabled",
           properties: {
-            overlayId: a
-          }
-        }, "debug");
-        globalPerfTimer.$$delete(er, a);
-        return;
+            overlayId: uniqueOverlayId,
+          },
+        }, "debug")
+
+        globalPerfTimer.delete(CURATOR_PERFORMANCE_KEY, uniqueOverlayId)
+        return
       }
-      if (i.status === "loaded") {
-        if (logCuratorEvent({
+
+      if (result.status === "loaded") {
+        logCuratorEvent({
           type: "resumed",
           name: "data_dependencies_loaded",
           properties: {
-            overlayId: a,
-            dataDependencies: i.data
-          }
-        }, "trace"), e?.canShow != null && !e.canShow(...ed(i.data))) {
-          m.removeOverlay(t.id);
+            overlayId: uniqueOverlayId,
+            dataDependencies: result.data,
+          },
+        }, "trace")
+
+        if (showOptions?.canShow != null && !showOptions.canShow(...getDependencyData(result.data))) {
+          overlayManager.removeOverlay(overlayConfig.id)
           logCuratorEvent({
             type: "failed",
             name: "can_show_failed",
             properties: {
-              overlayId: a,
-              dataDependencies: i.data
-            }
-          }, "debug");
-          globalPerfTimer.$$delete(er, a);
-          return;
+              overlayId: uniqueOverlayId,
+              dataDependencies: result.data,
+            },
+          }, "debug")
+
+          globalPerfTimer.delete(CURATOR_PERFORMANCE_KEY, uniqueOverlayId)
+          return
         }
-        m.showOverlay(t.id, t => {
-          D.current = "didNotQueue" in t ? 0 : t.queueDuration;
-          ec(e);
-        });
+
+        overlayManager.showOverlay(overlayConfig.id, (showResult: any) => {
+          queueDurationRef.current = "didNotQueue" in showResult ? 0 : showResult.queueDuration
+          queueExperience(showOptions)
+        })
       }
     }
-    if (m.updateOverlay(t), !en(C.current)) {
-      i(C.current);
-      return;
+
+    overlayManager.updateOverlay(overlayConfig)
+
+    if (!isResourceLoading(dependencyResultRef.current)) {
+      handleDependencyResult(dependencyResultRef.current)
+      return
     }
+
     logCuratorEvent({
       type: "paused",
       name: "data_dependencies_loading",
       properties: {
-        overlayId: a
+        overlayId: uniqueOverlayId,
+      },
+    }, "trace")
+
+    dependencyUpdateCallbackRef.current = (result) => {
+      overlayManager.updateOverlay({
+        id: overlayConfig.id,
+        priority,
+        queryResult: result,
+      })
+
+      if (!isResourceLoading(result)) {
+        handleDependencyResult(result)
+        dependencyUpdateCallbackRef.current = undefined
       }
-    }, "trace");
-    F.current = e => {
-      m.updateOverlay({
-        id: t.id,
-        priority: u,
-        queryResult: e
-      });
-      en(e) || (i(e), F.current = void 0);
-    };
-  }, [a, u, m, ec]);
-  let ep = useCallback(() => G(ee.Deactivated), [G]);
+    }
+  }, [uniqueOverlayId, priority, overlayManager, queueExperience])
+
+  // Callback to deactivate an overlay
+  const deactivateOverlay = useCallback(() => {
+    completeOverlay(OverlayCompletionReason.Deactivated)
+  }, [completeOverlay])
+
   return useMemo(() => ({
-    show: eu,
-    complete: ep,
-    isShowing: v,
-    experimentResult: T,
-    uniqueId: a
-  }), [eu, ep, v, T, a]);
+    show: showOverlay,
+    complete: deactivateOverlay,
+    isShowing,
+    experimentResult,
+    uniqueId: uniqueOverlayId,
+  }), [showOverlay, deactivateOverlay, isShowing, experimentResult, uniqueOverlayId])
 }
-let eo = resourceUtils.error([ea]);
-let el = "curator_deps_loaded";
-function ed(e) {
-  let [t, ...i] = e;
-  return i;
+
+// Helper function to extract dependency data
+function getDependencyData(dependencies: any[]) {
+  const [, ...rest] = dependencies
+  return rest
 }
-export const e = $$es0;
+
+// Export with original name for compatibility
+export const e = useOverlay

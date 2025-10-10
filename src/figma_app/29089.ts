@@ -6,7 +6,7 @@ import { Iv } from "../figma_app/987"
 import { isNotNullish } from "../figma_app/95419"
 import { kg } from "../figma_app/120210"
 import { useStrictDeepEqualSceneValue } from "../figma_app/167249"
-import { Yh } from "../figma_app/357047"
+import { isActionEnabled } from "../figma_app/357047"
 import { canAccessFullDevMode } from "../figma_app/473493"
 import { AppStateTsApi, DesignGraphElements, LayoutTabType, PresentationMode, SelectionPanelType, SwitchState, SymbolOverrideType } from "../figma_app/763686"
 import { IF, uo } from "../figma_app/781981"
@@ -260,8 +260,6 @@ let O = {
   tooltip: "leave-vector-edit-mode",
   recordingKey: "toolLeaveVectorEditMode",
 }].map(e => e === $$C22 ? N : e)
-
-
 function P(e) {
   return (t, r, n) => !!r?.[e]
 }
@@ -310,7 +308,7 @@ let B = {
   recordingKey: "autoFocusModeResponsiveSetToggle",
   onboardingKey: "auto-focus-mode-responsive-set-toggle",
   isActive: () => AppStateTsApi.editorPreferences().toggleResponsiveSetAutoFocus.getCopy(),
-  isAvailable: e => Yh(e, "focus-mode-responsive-set"),
+  isAvailable: e => isActionEnabled(e, "focus-mode-responsive-set"),
   getDisplayAction: () => AppStateTsApi.editorPreferences().toggleResponsiveSetAutoFocus.getCopy() ? "focus-mode-responsive-set-disable" : "focus-mode-responsive-set-enable",
 }
 let G = e => ({
@@ -318,7 +316,7 @@ let G = e => ({
   action: "select-matching",
   editModes: [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT, LayoutTabType.BUZZ_LAYOUT],
   recordingKey: "selectMatching",
-  isAvailable: e => Yh(e, "select-matching"),
+  isAvailable: e => isActionEnabled(e, "select-matching"),
   preventHoisting: eF(e),
 })
 let $$V33 = {
@@ -326,7 +324,7 @@ let $$V33 = {
   action: "select-similar",
   editModes: [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT],
   recordingKey: "selectSimilar",
-  isAvailable: e => Yh(e, "select-similar"),
+  isAvailable: e => isActionEnabled(e, "select-similar"),
   featureFlags: ["first_draft_select_similar"],
 }
 let H = {
@@ -532,7 +530,7 @@ let ey = {
   action: "create-code-layer-from-design",
   editModes: $$E11,
   recordingKey: "toolConvertDesignToCodeLayer",
-  isAvailable: e => Yh(e, "create-code-layer-from-design"),
+  isAvailable: e => isActionEnabled(e, "create-code-layer-from-design"),
   disabled: !getFeatureFlags().sts_code_authoring && !getFeatureFlags().sts_code_authoring_by_plan,
   getDisplayAction: () => getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan ? "create-code-layer-from-design" : "create-code-layer-from-design-disabled",
 }
@@ -545,7 +543,7 @@ export function $$eb16() {
       action: "create-make-from-design",
       editModes: $$E11,
       recordingKey: "toolMakeFromDesign",
-      isAvailable: e => Yh(e, "create-make-from-design"),
+      isAvailable: e => isActionEnabled(e, "create-make-from-design"),
       preventHoisting: eF(t),
     }
   })
@@ -556,7 +554,7 @@ let eT = {
   editModes: $$E11,
   recordingKey: "toolRestoreDesignInPlaceFromCode",
   preventHoisting: !0,
-  isAvailable: e => Yh(e, "restore-design-in-place-from-code"),
+  isAvailable: e => isActionEnabled(e, "restore-design-in-place-from-code"),
 }
 let eI = {
   type: DMenuItemType.ACTION,
@@ -564,7 +562,7 @@ let eI = {
   editModes: $$E11,
   recordingKey: "toolCopyOutDesignFromCode",
   preventHoisting: !0,
-  isAvailable: e => Yh(e, "copy-out-design-from-code"),
+  isAvailable: e => isActionEnabled(e, "copy-out-design-from-code"),
 }
 let eS = {
   type: DMenuItemType.FLYOUT,

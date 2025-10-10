@@ -6,12 +6,12 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import l from "classnames";
 import { shapeColorAtom, toolStylesAtom, shapeStrokeStyleAtom, connectorColorAtom } from "../905/125333";
 import { colorCSSManipulatorInstance } from "../905/989956";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { Fy } from "../figma_app/579169";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { LR } from "../figma_app/120210";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { KindEnum } from "../905/129884";
 import { FigJamAdvancedDiagrammingOnboarding } from "../figma_app/6204";
 import { oh, Yg } from "../905/526509";
@@ -859,9 +859,9 @@ export function $$eA1({
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: FigJamAdvancedDiagrammingOnboarding,
-    priority: _$$N.SECONDARY_MODAL
+    priority: ModalPriority.SECONDARY_MODAL
   }, [N, L]);
   let M = AE();
   useEffect(() => {

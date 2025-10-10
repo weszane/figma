@@ -12,7 +12,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { hh } from "../905/417232";
-import { c$ } from "../figma_app/236327";
+import { OptionComponent } from "../figma_app/236327";
 import { ErrorBoundaryCrash } from "../905/751457";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -350,7 +350,7 @@ function H({
     maxWidth: 120,
     disableDropdownScrollContainer: !0,
     propagateCloseClick: !0,
-    children: jsx(c$, {
+    children: jsx(OptionComponent, {
       onClick: () => t(e.plugin_id),
       children: renderI18nText("dev_handoff.inspect_panel.unpin")
     })

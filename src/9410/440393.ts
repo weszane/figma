@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
 import { IconButton } from "../905/443068";
 import { getI18nString } from "../905/303541";
-import { h as _$$h } from "../figma_app/275739";
+import { VoiceCallManager } from "../figma_app/275739";
 import { TI } from "../figma_app/318520";
 import { KindEnum } from "../905/129884";
 import { A } from "../3276/51271";
@@ -11,7 +11,7 @@ export function $$u0({
   onMuteButtonClickCallback: t,
   disabled: i
 }) {
-  let u = _$$h.getInstance();
+  let u = VoiceCallManager.getInstance();
   let [p, h] = useState(null);
   let m = TI(e, u);
   let f = useCallback(async () => {

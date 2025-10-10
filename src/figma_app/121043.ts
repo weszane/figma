@@ -53,7 +53,7 @@ import { replaceColonWithDash } from "../905/691205";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
-import { Yh, TY, G as _$$G, pi, IS } from "../figma_app/357047";
+import { isActionEnabled, isFullscreenMenuDropdown, PAGE_PICKER_DROPDOWN, FULLSCREEN_MENU_DROPDOWN, isPagePickerDropdown } from "../figma_app/357047";
 import { AuthModal } from "../905/749159";
 import { e as _$$e } from "../figma_app/320600";
 import { KeyboardFocusManager } from "../905/826900";
@@ -255,7 +255,7 @@ memo(function ({
 }) {
   let t = useDropdownState();
   let r = selectCurrentFile();
-  let i = useSelector(e => Yh(e.mirror.appModel, _$$ec.action) && !!r);
+  let i = useSelector(e => isActionEnabled(e.mirror.appModel, _$$ec.action) && !!r);
   let s = useSelector(e => e.mirror.appModel.currentTool === _$$ec.tool);
   let o = n6();
   let l = useSelector(e => e.mirror.appModel.topLevelMode);
@@ -417,7 +417,7 @@ let $$eU7 = memo(function (e) {
   let p = isUserNotLoggedInAndEditorSupported();
   let _ = WN();
   useEffect(() => {
-    TY(dropdownShown) ? handleAtomEvent({
+    isFullscreenMenuDropdown(dropdownShown) ? handleAtomEvent({
       id: $$eM2
     }) : handleAtomEvent({
       id: $$eF1
@@ -431,12 +431,12 @@ let $$eU7 = memo(function (e) {
   }) : jsxs(_$$i, {
     ref: t,
     "aria-controls": s,
-    "aria-expanded": TY(dropdownShown),
+    "aria-expanded": isFullscreenMenuDropdown(dropdownShown),
     "aria-haspopup": "menu",
     ariaLabel: getI18nString("fullscreen_actions.main_menu"),
     chevronRef: h,
     className: y()(AQ, e.hideToolsClassName, {
-      [ET]: TY(dropdownShown)
+      [ET]: isFullscreenMenuDropdown(dropdownShown)
     }),
     "data-tooltip": "main-menu",
     "data-tooltip-offset-x": m ? 8 : 0,
@@ -467,7 +467,7 @@ let $$eU7 = memo(function (e) {
               return;
             }
             r(showDropdownThunk({
-              type: _$$G,
+              type: PAGE_PICKER_DROPDOWN,
               data: {
                 targetRect: e.getBoundingClientRect()
               }
@@ -478,9 +478,9 @@ let $$eU7 = memo(function (e) {
       }
       if (modalShown?.type && ex.includes(modalShown?.type) && r(hideSpecificModal({
         type: modalShown.type
-      })), TY(dropdownShown)) r(hideDropdownAction());else if (e) {
+      })), isFullscreenMenuDropdown(dropdownShown)) r(hideDropdownAction());else if (e) {
         let t = {
-          type: pi,
+          type: FULLSCREEN_MENU_DROPDOWN,
           data: {
             targetRect: e.getBoundingClientRect()
           },
@@ -495,14 +495,14 @@ let $$eU7 = memo(function (e) {
     showChevron: !e.hideChevron,
     svg: _$$A7,
     ui3Icon: jsx(_$$m2, {}),
-    children: [TY(dropdownShown) && jsx(_$$e, {
+    children: [isFullscreenMenuDropdown(dropdownShown) && jsx(_$$e, {
       id: s,
       "aria-labelledby": "toggle-menu-button",
       controlledByID: "toggle-menu-button",
       dropdown: dropdownShown,
       chevronRef: h,
       positionOnChevron: !0
-    }, "fullscreen-menu"), IS(dropdownShown) && jsx(ep, {
+    }, "fullscreen-menu"), isPagePickerDropdown(dropdownShown) && jsx(ep, {
       dropdown: dropdownShown
     })]
   }, "toggle-menu-button");

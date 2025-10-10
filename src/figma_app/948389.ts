@@ -5,12 +5,12 @@ import { atomStoreManager } from "../figma_app/27355";
 import { getTrackingSessionId } from "../905/471229";
 import { J } from "../905/915227";
 import { ErrorType } from "../905/969273";
-import { _s } from "../figma_app/33126";
+import { currentUserOrgIdAtom } from "../figma_app/33126";
 import { userIdAtom } from "../figma_app/864723";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 export function $$_1() {
   return {
-    orgId: atomStoreManager.get(_s) || null,
+    orgId: atomStoreManager.get(currentUserOrgIdAtom) || null,
     teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
     fileKey: atomStoreManager.get(openFileKeyAtom) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,

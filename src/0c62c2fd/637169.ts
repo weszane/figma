@@ -3,7 +3,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { setupThemeContext } from "../905/614223";
 import { SceneGraphHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useAtomValueAndSetter, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { buildUploadUrl } from "../figma_app/169182";
 import { WithTrackedButton } from "../figma_app/617427";
@@ -11,12 +11,12 @@ import { getI18nString } from "../905/303541";
 import { useRfdSignalsUpsellExperiment } from "../figma_app/297957";
 import { UpgradeAction } from "../905/370443";
 import { useEventForwarder } from "../905/453826";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { fullscreenAlias } from "../905/37051";
 import { useNavigateToViewport } from "../905/104740";
 import { EE, lB } from "../figma_app/731583";
 import { getViewportInfo, computeFullscreenViewportForNode } from "../figma_app/62612";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { ArrowPosition } from "../905/858282";
 import { NJ } from "../figma_app/419216";
 import { GV } from "../figma_app/532170";
@@ -106,9 +106,9 @@ export function $$$$A1() {
   let [e, t] = useState("show_page_tooltip");
   let [r, d] = useState(null);
   let [c, h] = useAtomValueAndSetter(hj);
-  let b = Xr(d1);
+  let b = useSetAtom(d1);
   let A = useAtomWithSubscription(Sp);
-  let O = Xr(Sp);
+  let O = useSetAtom(Sp);
   let F = useNavigateToViewport("dev-handoff-rfd-signals-page-upsell");
   let P = useRfdSignalsUpsellExperiment();
   let {
@@ -116,9 +116,9 @@ export function $$$$A1() {
     complete,
     uniqueId,
     isShowing
-  } = _$$e({
+  } = useOverlay({
     overlay: ReadyForDevPageNameChangeUpsell,
-    priority: _$$N.HIGH_PRIORITY_MODAL,
+    priority: ModalPriority.HIGH_PRIORITY_MODAL,
     experiment: {
       check: P,
       predicate: e => e,

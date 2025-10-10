@@ -20,7 +20,7 @@ import { trackFileClicked } from "../figma_app/976345";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { useHighPriorityNotificationsExperiment } from "../figma_app/297957";
 import { trackContextViewed, trackFileBrowserPlanFilterSelected, logAndTrackCTA, trackFolderEvent, trackTeamEvent } from "../figma_app/314264";
-import { H as _$$H } from "../905/422284";
+import { handleRouteUpdate } from "../905/422284";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectPermissionsState } from "../figma_app/212807";
@@ -1078,7 +1078,7 @@ function eW(e, t) {
       }
       d(hideDropdownAction());
       let r = !!_ && _.key === zv(n.pathname);
-      if (!desktopAPIInstance && r) d(_$$H({
+      if (!desktopAPIInstance && r) d(handleRouteUpdate({
         params: n.searchParams.toString(),
         hash: n.hash
       }));else if (t.deeplink.use_unsafe) customHistory.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank");else if (e.inDesktopTray) customHistory.redirect(n.href);else try {

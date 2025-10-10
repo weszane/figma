@@ -28,7 +28,7 @@ import { KeyCodes } from '../905/63728';
 import { s as _$$s9 } from '../905/66404';
 import { d as _$$d6 } from '../905/68441';
 import { q as _$$q6 } from '../905/74101';
-import { n as _$$n3 } from '../905/79930';
+import { TeamTemplateType } from '../905/79930';
 import { m as _$$m } from '../905/99004';
 import { useSprigWithSampling } from '../905/99656';
 import { registerModal } from '../905/102752';
@@ -124,7 +124,7 @@ import { l as _$$l3 } from '../905/509505';
 import { RecordableButton } from '../905/511649';
 import { h as _$$h3 } from '../905/513745';
 import { C as _$$C2 } from '../905/520159';
-import { j as _$$j2 } from '../905/521149';
+import { useAllowInternalTemplatesCooper } from '../905/521149';
 import { Button, ButtonWide } from '../905/521428';
 import { j as _$$j3 } from '../905/523935';
 import { q as _$$q3 } from '../905/524117';
@@ -317,7 +317,7 @@ import { renderAvatar } from '../figma_app/3731';
 import { H as _$$H } from '../figma_app/7677';
 import { a8 as _$$a, Dm } from '../figma_app/8833';
 import { useIsFullscreenReady } from '../figma_app/21029';
-import { um as _$$um, atom, atomStoreManager, useResetAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atomWithReducer, atom, atomStoreManager, useResetAtom, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { CVP, Ep1, j4N, oBL } from '../figma_app/27776';
 import { GQ as _$$GQ, nJ as _$$nJ, bQ } from '../figma_app/32128';
 import { useLatestRef } from '../figma_app/922077';
@@ -376,7 +376,7 @@ import { jH, Tj, Vq } from '../figma_app/342207';
 import { U1 } from '../figma_app/343967';
 import { hasValidSubscription } from '../figma_app/345997';
 import { p as _$$p4 } from '../figma_app/353099';
-import { c1 as _$$c5, Yh } from '../figma_app/357047';
+import { getKeyboardShortcut, isActionEnabled } from '../figma_app/357047';
 import { isSelfDesignMode, syncDesignModePermission } from '../figma_app/357367';
 import { lW as _$$lW, tM as _$$tM, uh as _$$uh, AE } from '../figma_app/370763';
 import { G as _$$G3, T as _$$T6 } from '../figma_app/373780';
@@ -388,7 +388,7 @@ import { useSelectedSlideRowGuids, useSelectedCooperFrameId, useSelectedCooperFr
 import { aq as _$$aq } from '../figma_app/399472';
 import { logFileExportThunk } from '../figma_app/401069';
 import { R as _$$R } from '../figma_app/421558';
-import { u7 as _$$u, hg } from '../figma_app/425489';
+import { InlinePreviewVisibilityStatus, inlinePreviewReducer } from '../figma_app/425489';
 import { A as _$$A2 } from '../figma_app/426577';
 import { hasContent, getTeamTemplateLg, isCooperTemplateAsset } from '../figma_app/427318';
 import { aE as _$$aE } from '../figma_app/433401';
@@ -423,7 +423,7 @@ import { a as _$$a6, z as _$$z3 } from '../figma_app/601188';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { WithTrackedButton, WithTrackedPopupButtonPrimitive, WithTrackedIconButton } from '../figma_app/617427';
 import { i as _$$i4 } from '../figma_app/622160';
-import { li as _$$li, Gi, O$, RD, wv } from '../figma_app/622574';
+import { usePaginatedTeamTemplates, getCurrentTemplateEntity, OrgProSourceType, useTemplatesForPlan, useRecentTemplates } from '../figma_app/622574';
 import { getColorSpaceString } from '../figma_app/622881';
 import { processImageWithThumbnail } from '../figma_app/624361';
 import { fI } from '../figma_app/626177';
@@ -1025,7 +1025,7 @@ let el = (e, t) => {
   return {
     isCanceling: n,
     handleCancelExport: () => {
-      n || (l(!0), e.mp4Configs.length > 0 ? atomStoreManager.set(hg, {
+      n || (l(!0), e.mp4Configs.length > 0 ? atomStoreManager.set(inlinePreviewReducer, {
         type: 'CANCEL_EXPORT'
       }) : (t(), l(!1)));
     }
@@ -1052,7 +1052,7 @@ let eo = (e, t, n, l) => {
   if (e.length > 0) {
     let r = e.map(e => e.nodeId);
     let i = Date.now();
-    atomStoreManager.set(hg, {
+    atomStoreManager.set(inlinePreviewReducer, {
       type: 'REQUEST_EXPORT',
       payload: {
         nodeIds: r,
@@ -1111,7 +1111,7 @@ function eL(e) {
 function eP() {
   return useAtomWithSubscription(eO).activePanel;
 }
-let eO = _$$um({
+let eO = atomWithReducer({
   activePanel: null
 }, (e, t) => {
   switch (t.type) {
@@ -1283,7 +1283,7 @@ function td({
   let n = useSelector(e => e.search.sessionId);
   let l = useDispatch<AppDispatch>();
   let r = g5('import_from_design_search_bar');
-  let i = Xr(templateSourceAtom);
+  let i = useSetAtom(templateSourceAtom);
   let d = useCallback(e => {
     e === '' && n ? l(searchEndSession()) : e === '' || n || l(searchStartSession({
       entryPoint: ts
@@ -1341,7 +1341,7 @@ function tx({
   let l = useSelector(e => e.search.sessionId);
   let r = useDispatch<AppDispatch>();
   let i = v3();
-  let d = Xr(isTemplateSearchEnabledAtomFamily);
+  let d = useSetAtom(isTemplateSearchEnabledAtomFamily);
   let c = g5('search_bar');
   let u = i === Gu.NEW_FILE_MODAL;
   let x = useCallback(e => {
@@ -1450,7 +1450,7 @@ function tz({
   let d = useCurrentPrivilegedPlan('CooperTemplateSidebar');
   let c = d.data?.name;
   let u = d.status !== 'loaded';
-  let x = _$$j2();
+  let x = useAllowInternalTemplatesCooper();
   let m = useMemo(() => [{
     type: _$$k2.TEXT,
     id: TemplateSourceType.ALL,
@@ -2202,7 +2202,7 @@ function nc({
 let nu = () => {
   let e = v3();
   let [t] = useAtomValueAndSetter(templateSourceAtom);
-  let n = Xr(isTemplateSearchEnabledAtomFamily);
+  let n = useSetAtom(isTemplateSearchEnabledAtomFamily);
   let [l, r] = useAtomValueAndSetter(isTemplateSubMenuOpen);
   let [i, o] = useAtomValueAndSetter(assetCategoryAtom);
   return useCallback(() => _$$r({
@@ -2252,11 +2252,11 @@ function nm({
   templateTypes: n
 }) {
   let [l, r] = useAtomValueAndSetter(templateSourceAtom);
-  let i = Xr(isTemplateSearchEnabledAtomFamily);
+  let i = useSetAtom(isTemplateSearchEnabledAtomFamily);
   let [s, d] = useAtomValueAndSetter(isTemplateSubMenuOpen);
-  let c = Xr(assetCategoryAtom);
-  let u = Xr(isTemplatePreviewVisibleAtomFamily);
-  let x = Xr(isTemplatePublishingAtomFamily);
+  let c = useSetAtom(assetCategoryAtom);
+  let u = useSetAtom(isTemplatePreviewVisibleAtomFamily);
+  let x = useSetAtom(isTemplatePublishingAtomFamily);
   let {
     numColumns,
     containerRef
@@ -2312,9 +2312,9 @@ function nh({
 }) {
   let [l, r] = useAtomValueAndSetter(templateSourceAtom);
   let [i, a] = useAtomValueAndSetter(isTemplateSubMenuOpen);
-  let s = Xr(isTemplateSearchEnabledAtomFamily);
-  let d = Xr(assetCategoryAtom);
-  let c = Xr(isTemplatePreviewVisibleAtomFamily);
+  let s = useSetAtom(isTemplateSearchEnabledAtomFamily);
+  let d = useSetAtom(assetCategoryAtom);
+  let c = useSetAtom(isTemplatePreviewVisibleAtomFamily);
   return jsxs('div', {
     children: [jsx(t8, {
       title: getI18nString('cooper.templates.blank_title_assets', {
@@ -2342,13 +2342,13 @@ function ng({
   hideNewTemplateTile: e = !1
 }) {
   let t = useAtomWithSubscription(templateSourceAtom);
-  let n = Xr(isTemplateSearchEnabledAtomFamily);
+  let n = useSetAtom(isTemplateSearchEnabledAtomFamily);
   let [l, r] = useAtomValueAndSetter(isTemplateSubMenuOpen);
-  let i = Xr(assetCategoryAtom);
-  let a = Xr(templateSourceAtom);
-  let s = Xr(isTemplatePreviewVisibleAtomFamily);
-  let c = Xr(isTemplatePublishingAtomFamily);
-  let u = _$$j2() && !e;
+  let i = useSetAtom(assetCategoryAtom);
+  let a = useSetAtom(templateSourceAtom);
+  let s = useSetAtom(isTemplatePreviewVisibleAtomFamily);
+  let c = useSetAtom(isTemplatePublishingAtomFamily);
+  let u = useAllowInternalTemplatesCooper() && !e;
   let x = _$$aZ();
   let m = (u ? CooperTemplateTypesTsBindings?.getShortenedExploreNewAssetTemplateGroups() : CooperTemplateTypesTsBindings?.getExploreNewAssetTemplateGroups()) ?? [];
   return jsxs('div', {
@@ -2771,7 +2771,7 @@ function nQ({
 }) {
   let x = 'insert-cooper-template';
   let m = trackFileEventWithStore();
-  let h = Xr(isTemplateSearchEnabledAtomFamily);
+  let h = useSetAtom(isTemplateSearchEnabledAtomFamily);
   let g = isNotInFocusedNodeView();
   let f = v3();
   let b = useCurrentFileKey();
@@ -3102,7 +3102,7 @@ function le({
   libraryKey: t,
   section: n
 }) {
-  let l = Xr(templateSourceAtom);
+  let l = useSetAtom(templateSourceAtom);
   let r = useAtomWithSubscription(templateSourceAtom);
   let {
     name,
@@ -3285,7 +3285,7 @@ function l_({
   template: e,
   libraryKey: t
 }) {
-  let n = Xr(templateBrowsingModeAtomFamily);
+  let n = useSetAtom(templateBrowsingModeAtomFamily);
   let {
     name,
     imageUrl,
@@ -3337,7 +3337,7 @@ let ly = {
   }
 };
 function lE() {
-  let e = Xr(isTemplatePreviewVisibleAtomFamily);
+  let e = useSetAtom(isTemplatePreviewVisibleAtomFamily);
   let [t, n] = useAtomValueAndSetter(selectedTemplateAtomFamily);
   let l = M1();
   let r = t?.name ?? l;
@@ -3356,14 +3356,14 @@ function lv() {
     } = tv();
     return exploreResourceIds;
   }();
-  let t = _$$j2();
+  let t = useAllowInternalTemplatesCooper();
   let n = isBuzzImportFromDesignEnabled();
   let l = _$$aZ();
   let r = useAtomWithSubscription(templateSourceAtom);
   let {
     resetScrollTop
   } = Nd(TemplateSourceType.ALL);
-  let s = Xr(templateSourceAtom);
+  let s = useSetAtom(templateSourceAtom);
   let d = useCurrentPrivilegedPlan('CooperTemplateAllView');
   useEffect(() => () => resetScrollTop([TemplateSourceType.ALL]), [resetScrollTop]);
   return r.type === TemplateSourceType.ALL ? jsx(Fragment, {
@@ -3414,9 +3414,9 @@ function lT() {
   });
 }
 function lI() {
-  let e = Xr(templateSourceAtom);
+  let e = useSetAtom(templateSourceAtom);
   let t = useCurrentUserOrg();
-  let n = _$$j2();
+  let n = useAllowInternalTemplatesCooper();
   let [{
     data: l,
     status: r
@@ -3449,7 +3449,7 @@ function lI() {
     children: [c, jsx(_$$p2, {
       children: a.filter(e => e.library_key).map(e => jsx(le, {
         template: {
-          type: _$$n3.TeamTemplate,
+          type: TeamTemplateType.TeamTemplate,
           template: e
         },
         libraryKey: e.library_key,
@@ -3477,8 +3477,8 @@ function lk({
   name: t,
   dimensions: n
 }) {
-  let l = Xr(isTemplatePreviewVisibleAtomFamily);
-  let r = Xr(selectedTemplateAtomFamily);
+  let l = useSetAtom(isTemplatePreviewVisibleAtomFamily);
+  let r = useSetAtom(selectedTemplateAtomFamily);
   let i = jv(e);
   return i ? jsx(t8, {
     title: i,
@@ -3719,7 +3719,7 @@ function lN({
 function lR() {
   let e = useCurrentPrivilegedPlan('CooperTemplateLeftRailEmptyState');
   let t = e.status === 'loaded' ? e.data.name : '';
-  let n = _$$j2();
+  let n = useAllowInternalTemplatesCooper();
   let l = useCurrentPlanUser('CooperTemplateLeftRailEmptyState').unwrapOr(null);
   return l?.userId ? jsx(Fragment, {
     children: n && jsxs('div', {
@@ -3750,13 +3750,13 @@ function lR() {
 function lw({
   plan: e
 }) {
-  let t = Xr(templateSourceAtom);
+  let t = useSetAtom(templateSourceAtom);
   let n = useCurrentPublicPlan('CooperTemplateAllViewTeamTemplateSection');
   let l = useIsProOrStudentPlan(n).unwrapOr(!1);
   let {
     templatesByTeam,
     isLoading
-  } = _$$li({
+  } = usePaginatedTeamTemplates({
     teamId: e.key.parentId,
     editorType: FFileType.COOPER,
     pageSize: YS,
@@ -3816,7 +3816,7 @@ function lw({
         if (e.libraryKey) {
           return jsx(le, {
             template: {
-              type: _$$n3.TeamTemplateLg,
+              type: TeamTemplateType.TeamTemplateLg,
               template: e
             },
             libraryKey: _$$l(e.libraryKey),
@@ -3894,11 +3894,11 @@ function lD({
     requestLoadMoreForTeam,
     templatesByTeam,
     isLoading
-  } = _$$li({
+  } = usePaginatedTeamTemplates({
     teamId: e,
     editorType: FFileType.COOPER
   });
-  let a = Xr(templateSourceAtom);
+  let a = useSetAtom(templateSourceAtom);
   let {
     scrollPosition,
     scrollRef,
@@ -3950,7 +3950,7 @@ function l$({
         if (t) {
           return jsx(le, {
             template: {
-              type: _$$n3.TeamTemplateLg,
+              type: TeamTemplateType.TeamTemplateLg,
               template: e
             },
             libraryKey: _$$l(t),
@@ -4012,7 +4012,7 @@ function lV({
     templates,
     isLoading: _isLoading,
     requestLoadMoreTemplates
-  } = RD({
+  } = useTemplatesForPlan({
     plan: e,
     areWorkspacesEnabled: i.status === 'loaded' && i.data,
     numTemplatesPerTeam: YS,
@@ -4027,8 +4027,8 @@ function lV({
     targetKey: p,
     onIntersectionChange: requestLoadMoreTemplates
   });
-  let h = templates?.type === O$.ORG_PLUS && templates.data.length > 0;
-  let g = templates?.type === O$.PRO_OR_STUDENT_TEAM && templates.data?.templates;
+  let h = templates?.type === TemplateSourceType.ORG_PLUS && templates.data.length > 0;
+  let g = templates?.type === TemplateSourceType.PRO_OR_STUDENT_TEAM && templates.data?.templates;
   let f = yourTemplates.length > 0;
   let b = _isLoading || isLoading;
   return b || h || g || f ? jsxs(Fragment, {
@@ -4092,7 +4092,7 @@ function lU({
   targetRef: r,
   scrollRef: i
 }) {
-  let a = Xr(templateSourceAtom);
+  let a = useSetAtom(templateSourceAtom);
   return e ? e.type === 'org_plus' ? jsx(Fragment, {
     children: e.data.map(e => jsx('div', {
       ref: l === e.teamId ? r : null,
@@ -4183,7 +4183,7 @@ function lX({
 function lY({
   libraryKey: e
 }) {
-  let t = Xr(templateBrowsingModeAtomFamily);
+  let t = useSetAtom(templateBrowsingModeAtomFamily);
   let n = VU();
   let l = useDispatch<AppDispatch>();
   let r = useLibraries([_$$l(e)]);
@@ -4272,10 +4272,10 @@ function lq({
   });
 }
 function lJ() {
-  let e = Xr(templateSearchQueryAtomFamily);
-  let t = Xr(templateBrowsingModeAtomFamily);
-  let n = Xr(clearTemplateMetadataAtom);
-  let l = Xr(templateSourceAtom);
+  let e = useSetAtom(templateSearchQueryAtomFamily);
+  let t = useSetAtom(templateBrowsingModeAtomFamily);
+  let n = useSetAtom(clearTemplateMetadataAtom);
+  let l = useSetAtom(templateSourceAtom);
   return useCallback(() => {
     e('');
     l({
@@ -4305,7 +4305,7 @@ function lQ() {
     status
   } = _8(FFileType.DESIGN);
   let h = useAtomWithSubscription(templateSourceAtom);
-  let g = Xr(templateSourceAtom);
+  let g = useSetAtom(templateSourceAtom);
   let f = useAtomWithSubscription(templateBrowsingModeAtomFamily);
   let b = useAtomWithSubscription(openFileKeyAtom);
   let j = useCurrentPrivilegedPlan('CooperTemplateContent');
@@ -4825,7 +4825,7 @@ function r7({
   tooltip: a
 }) {
   let d = useSelector(e => e.mirror.appModel.keyboardShortcuts);
-  let c = _$$c5(d, n ?? '');
+  let c = getKeyboardShortcut(d, n ?? '');
   return jsxs(ButtonPrimitive, {
     onClick: l,
     ...props(r6.container, i && r6.containerDisabled),
@@ -5616,7 +5616,7 @@ let oF = memo(({
   isMouseDisabled: s
 }) => {
   let d = _$$P4(t);
-  let u = Xr(_$$k6);
+  let u = useSetAtom(_$$k6);
   let x = d?.id === t;
   let m = x && d?.scrollIntoView;
   let h = useRef(null);
@@ -6904,7 +6904,7 @@ function aN({
 }
 function aR(e) {
   return selectWithShallowEqual(t => {
-    let n = e.actions.filter(e => e.type === 0 || e.type === 2 ? void 0 === e.enabled ? Yh(t.mirror.appModel, e.fullscreenAction) : Yh(t.mirror.appModel, e.fullscreenAction) && e.enabled : e.enabled);
+    let n = e.actions.filter(e => e.type === 0 || e.type === 2 ? void 0 === e.enabled ? isActionEnabled(t.mirror.appModel, e.fullscreenAction) : isActionEnabled(t.mirror.appModel, e.fullscreenAction) && e.enabled : e.enabled);
     return n.length ? {
       ...e,
       actions: n
@@ -8459,7 +8459,7 @@ function sY({
   let i = hasJubileePermissionForDesign();
   let d = _$$u4();
   let u = MK(JT.GENERATE_IMAGE);
-  let x = Xr(assetCategoryAtom);
+  let x = useSetAtom(assetCategoryAtom);
   let m = function () {
     let e = useDispatch<AppDispatch>();
     let {
@@ -10836,8 +10836,8 @@ function uu({
   let f = h && c;
   let b = e.current?.clientHeight || window.innerHeight;
   let j = useSelector(e => !e.mirror.appModel.isReadOnly);
-  let y = Xr(templateCommunityFilterAtomFamily);
-  let E = Xr(templateSourceAtom);
+  let y = useSetAtom(templateCommunityFilterAtomFamily);
+  let E = useSetAtom(templateSourceAtom);
   let v = useSelectedComponentLibraryKey();
   let T = useCallback(() => {
     v ? (y('INTERNAL'), E({
@@ -11010,7 +11010,7 @@ function uI({
     onImportSuccess: e,
     importFileError: t
   }) {
-    let n = Xr(_$$v2);
+    let n = useSetAtom(_$$v2);
     return useCallback(l => {
       if (l.type === 'text/csv') {
         uj().parse(l, {
@@ -11341,7 +11341,7 @@ var uO = (e => (e[e.SELECT_FILE = 0] = 'SELECT_FILE', e[e.MAP_DATA = 1] = 'MAP_D
 let uM = setupRemovableAtomFamily(() => atom(0));
 function uF() {
   let [e, t] = useAtomValueAndSetter(uM);
-  let n = Xr(assetCategoryAtom);
+  let n = useSetAtom(assetCategoryAtom);
   let [l, r] = useAtomValueAndSetter(_$$v);
   let [i, s] = useState({});
   let c = useSceneGraphSelector();
@@ -11460,7 +11460,7 @@ function uK() {
     setCurrentView,
     currentPluginView
   } = function () {
-    let e = Xr(hO);
+    let e = useSetAtom(hO);
     let [t, n] = useAtomValueAndSetter(zM);
     let l = useResetAtom(zM);
     let r = useCallback(() => {
@@ -12453,7 +12453,7 @@ function xL({
   fetchNextPage: i
 }) {
   let s = xy();
-  let d = Xr(d3);
+  let d = useSetAtom(d3);
   let c = useCallback(e => d(e), [d]);
   let u = useMemo(() => n.map(e => ({
     key: e.id,
@@ -12884,7 +12884,7 @@ function xY({
 }
 function xq() {
   let e = isInteractionPathCheck();
-  let t = Xr(_$$tM);
+  let t = useSetAtom(_$$tM);
   let n = useCallback(() => t(DesignGraphElements.IMAGE_OR_VIDEO), [t]);
   let l = jsx(xJ, {
     onClick: n
@@ -13013,12 +13013,12 @@ function x2() {
   let n = useAtomWithSubscription(templateSourceAtom);
   let l = useAtomWithSubscription(templateBrowsingModeAtomFamily);
   let r = useAtomWithSubscription(isTemplatePreviewVisibleAtomFamily);
-  let i = _$$j2();
-  let s = Gi();
+  let i = useAllowInternalTemplatesCooper();
+  let s = getCurrentTemplateEntity();
   let {
     teamTemplates,
     isLoading
-  } = wv(FFileType.COOPER, void 0, i);
+  } = useRecentTemplates(FFileType.COOPER, void 0, i);
   let [u, x] = useAtomValueAndSetter(isTemplatePublishingAtomFamily);
   let {
     searchQuery,
@@ -13174,14 +13174,14 @@ function x4() {
     I$(c);
   }, [c]);
   let u = useSelector(e => !e.mirror.appModel.isReadOnly);
-  let x = Xr(templateCommunityFilterAtomFamily);
+  let x = useSetAtom(templateCommunityFilterAtomFamily);
   let m = useSelectedCooperFrameId();
   let h = useRef(null);
   let g = function ({
     tab: e
   }) {
     let [t, n] = useAtomValueAndSetter(uM);
-    let l = Xr(_$$v);
+    let l = useSetAtom(_$$v);
     let [r, i] = useAtomValueAndSetter(d3);
     let o = uW();
     let {
@@ -13223,8 +13223,8 @@ function x4() {
   });
   let f = function () {
     let e = lJ();
-    let t = Xr(isTemplateSelectorOpenAtomFamily);
-    let n = Xr(isTemplatePreviewVisibleAtomFamily);
+    let t = useSetAtom(isTemplateSelectorOpenAtomFamily);
+    let n = useSetAtom(isTemplatePreviewVisibleAtomFamily);
     return useCallback(({
       tab: l
     }) => {
@@ -13532,10 +13532,10 @@ function pu() {
 function px() {
   let [e, t] = useAtomValueAndSetter(assetCategoryAtom);
   let n = useSelectedComponentLibraryKey();
-  let l = Xr(templateSourceAtom);
-  let r = Xr(templateCommunityFilterAtomFamily);
+  let l = useSetAtom(templateSourceAtom);
+  let r = useSetAtom(templateCommunityFilterAtomFamily);
   let i = trackFileEventWithStore();
-  let c = Xr(isTemplatePreviewVisibleAtomFamily);
+  let c = useSetAtom(isTemplatePreviewVisibleAtomFamily);
   let u = isNotInFocusedNodeView();
   let x = useSelector(e => !e.mirror.appModel.isReadOnly);
   let m = cg();
@@ -14524,7 +14524,7 @@ let mI = memo(({
   let m = isInteractionOrEvalMode();
   return (useEffect(() => {
     let e = c[0];
-    x && e && !m && l === _$$u.LOAD_PENDING && p(() => {
+    x && e && !m && l === InlinePreviewVisibilityStatus.LOAD_PENDING && p(() => {
       s({
         type: 'OPEN_BUZZ_INLINE_PREVIEW',
         payload: {
@@ -14534,7 +14534,7 @@ let mI = memo(({
         }
       });
     });
-  }, [d, c, l, x, s, m]), l !== _$$u.HIDDEN && l !== _$$u.SHOWN) ? null : jsx(ErrorBoundaryCrash, {
+  }, [d, c, l, x, s, m]), l !== InlinePreviewVisibilityStatus.HIDDEN && l !== InlinePreviewVisibilityStatus.SHOWN) ? null : jsx(ErrorBoundaryCrash, {
     boundaryKey: 'BuzzInlinePreview',
     fallback: errorBoundaryFallbackTypes.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
@@ -14560,7 +14560,7 @@ let mS = memo(({
 }) => {
   let i = useRef(null);
   let s = useCurrentFileKey();
-  let d = r === _$$u.HIDDEN;
+  let d = r === InlinePreviewVisibilityStatus.HIDDEN;
   let c = useMemo(() => n?.initialViewerSize ? n.initialViewerSize : {
     x: 400,
     y: 400

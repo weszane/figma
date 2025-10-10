@@ -2,8 +2,8 @@
  * Constants for UI spacing
  * Original: $$n1
  */
-export const SPACING_CONSTANTS = {
-  SPACER: "spacer",
+export enum SPACING_CONSTANTS {
+  SPACER = "spacer",
 }
 
 /**

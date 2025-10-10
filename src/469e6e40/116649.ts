@@ -16,7 +16,7 @@ import { useCurrentUserOrg } from "../905/845253";
 import { getGroupOrDefault } from "../905/817247";
 import { MX, EQ } from "../figma_app/684446";
 import { useTeamPlanUser, useTeamPlanFeatures, useIsOrgAdminUser } from "../figma_app/465071";
-import { ck } from "../905/952832";
+import { UserContextScope } from "../905/952832";
 import { FRequestsStr } from "../905/384551";
 import { UserGroupRole, GroupType } from "../905/441038";
 import { DashboardSection } from "../figma_app/650409";
@@ -103,7 +103,7 @@ export function $$D0({
         className: "dashboard--overviewLeft---r1Si",
         children: [jsx(ER, {
           dispatch: t,
-          entityType: ck.ORG,
+          entityType: UserContextScope.ORG,
           entity: a,
           size: 80,
           avatarEditorState: S

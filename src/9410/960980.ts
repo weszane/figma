@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { SessionStatus } from "../figma_app/763686";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { isIpadDevice, getIsMobile } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -85,7 +85,7 @@ export function $$O11(e) {
 }
 export function $$L3() {
   let e = useSelector(e => e.mirror.appModel.votingSessionInfo.votingStage);
-  let t = Xr(Qs);
+  let t = useSetAtom(Qs);
   useEffect(() => {
     (e === SessionStatus.JOINED || e === SessionStatus.NOT_JOINED) && t({
       type: "SET_VIEW",
@@ -95,7 +95,7 @@ export function $$L3() {
 }
 export function $$R6() {
   let e = useSelector(e => e.mirror.appModel.votingSessionInfo.votingStage);
-  let t = Xr(Qs);
+  let t = useSetAtom(Qs);
   let i = shouldOptimizeForIpad();
   let o = qU();
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { SceneGraphHelpers, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
-import { Xr, atomStoreManager } from "../figma_app/27355";
+import { useSetAtom, atomStoreManager } from "../figma_app/27355";
 import { useSingleEffect } from "../905/791079";
 import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -23,13 +23,13 @@ import { ActionButton } from "../905/189361";
 import { FlexBox } from "../905/222272";
 import { Panel } from "../905/236825";
 import { Oq, is } from "../905/904596";
-import { hg } from "../figma_app/425489";
+import { inlinePreviewReducer } from "../figma_app/425489";
 export function $$k0({
   aiTrackingContext: e
 }) {
-  let t = Xr(Gh);
-  let i = Xr(d_);
-  let k = Xr(xP);
+  let t = useSetAtom(Gh);
+  let i = useSetAtom(d_);
+  let k = useSetAtom(xP);
   useSingleEffect(() => (i(!0), k(!0), () => {
     k(!1);
     t(e);
@@ -51,7 +51,7 @@ export function $$k0({
         fullscreenValue.triggerAction("toggle-inline-preview", {
           source: "magic-link"
         });
-        atomStoreManager.set(hg, {
+        atomStoreManager.set(inlinePreviewReducer, {
           type: "ENABLE_TARGET_FRAME_FOLLOWING"
         });
       },

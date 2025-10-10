@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { truncate } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { q } from "../469e6e40/218292";
-import { s as _$$s } from "../905/82276";
+import { UNASSIGNED_LABEL } from "../905/82276";
 import { A } from "../469e6e40/557114";
 export function $$c1(e, t) {
   return [...t.map(e => ({
@@ -25,14 +25,14 @@ export function $$_0({
   groupsCanMoveUserTo: a,
   onChangeLicenseGroup: i
 }) {
-  let d = useMemo(() => [...a, "separator", _$$s], [a]);
+  let d = useMemo(() => [...a, "separator", UNASSIGNED_LABEL], [a]);
   let c = e.license_group_member?.license_group_id;
   return jsx(q, {
     ariaLabel: getI18nString("members_table.license_group_cell.aria_label"),
     disabled: t,
     options: d,
-    getOptionValue: e => e === _$$s ? "" : e.id,
-    getOptionLabel: e => e === _$$s ? c ? getI18nString("members_table.license_group_cell.unassign") : getI18nString("license_group.unassigned") : e.name,
+    getOptionValue: e => e === UNASSIGNED_LABEL ? "" : e.id,
+    getOptionLabel: e => e === UNASSIGNED_LABEL ? c ? getI18nString("members_table.license_group_cell.unassign") : getI18nString("license_group.unassigned") : e.name,
     onChange: t => i([e.id], t),
     value: c ?? ""
   });

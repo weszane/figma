@@ -34,7 +34,7 @@ class TemplateService {
    * Get recent templates
    * Original name: getRecents
    */
-  public getRecents(params: { orgId: string, teamId: string, fileKeys: string[] }) {
+  public getRecents(params: { orgId?: string, teamId?: string, fileKeys?: string[] }) {
     return this.recentsSchemaValidator.validate(async ({ xr: client }) => {
       return await client.get("/api/templates", {
         org_id: params.orgId,

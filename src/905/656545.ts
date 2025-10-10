@@ -196,7 +196,7 @@ async function checkEulaAndFonts(dispatch: any, libraryKey: string, source: stri
  * @param options - Options for the modal.
  * @returns Promise resolving to acceptance result.
  */
-function showEulaModal(dispatch: any, options: any): Promise<{
+function showEulaModalHelper(dispatch: any, options: any): Promise<{
   accepted: boolean;
   type: string;
 }> {

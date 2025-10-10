@@ -34,7 +34,7 @@ import { UM } from '../figma_app/940844'
 
 export { deleteAllPlugins, deleteAllWidgets, mergePublishedPlugin, mergePublishedPluginThunk, putAllPlugins, putAllWidgets } from '../905/172918'
 
-const replaceFeaturedPluginAction = createActionCreator('PLUGIN_REPLACE_FEATURED')
+export const replaceFeaturedPluginAction = createActionCreator('PLUGIN_REPLACE_FEATURED')
 const initializeUserPublishedResourcesThunk = createOptimistThunk((dispatch, action, {
   loadingKey,
 }) => {
@@ -62,7 +62,7 @@ const initializeUserPublishedResourcesThunk = createOptimistThunk((dispatch, act
   })
   setupLoadingStateHandler(widgetsRequest, dispatch, loadingKey)
 })
-const unpublishedPluginsQuery = liveStoreInstance.Query({
+export const unpublishedPluginsQuery = liveStoreInstance.Query({
   fetch: async () => (await pluginAPIService.getUnpublishedPlugins()).data.meta,
   output: ({
     data,
@@ -76,7 +76,7 @@ const unpublishedPluginsQuery = liveStoreInstance.Query({
     return result
   },
 })
-const unpublishedWidgetsQuery = liveStoreInstance.Query({
+export const unpublishedWidgetsQuery = liveStoreInstance.Query({
   fetch: async () => (await widgetAPIClient.getUnpublishedWidgets()).data.meta,
   output: ({
     data,
@@ -90,7 +90,7 @@ const unpublishedWidgetsQuery = liveStoreInstance.Query({
     return result
   },
 })
-const cacheWidgetVersionsThunk = createOptimistThunk((dispatch, {
+export const cacheWidgetVersionsThunk = createOptimistThunk((dispatch, {
   widgetIDToVersions,
 }) => {
   const {
@@ -133,8 +133,8 @@ const getPublishedResourceThunk = createOptimistThunk(async (dispatch, {
     }))
   }
 })
-const updatePublishedCanvasWidgetVersionsAction = createActionCreator('UPDATE_PUBLISHED_CANVAS_WIDGET_VERSIONS')
-const updateFetchedCanvasWidgetVersionsAction = createActionCreator('UPDATE_FETCHED_CANVAS_WIDGET_VERSIONS')
+export const updatePublishedCanvasWidgetVersionsAction = createActionCreator('UPDATE_PUBLISHED_CANVAS_WIDGET_VERSIONS')
+export const updateFetchedCanvasWidgetVersionsAction = createActionCreator('UPDATE_FETCHED_CANVAS_WIDGET_VERSIONS')
 export async function getCanvasWidgetVersion(widgetId, versionId, orgId) {
   const versions = await fetchCanvasWidgetVersions({
     [widgetId]: [versionId],
@@ -607,7 +607,7 @@ async function publishNewPluginVersion(pluginId, localFileId, pluginVersion, com
     profile: responseData.profile,
   }
 }
-const publishActionCreators = createPublishActionCreators('PLUGIN')
+export const publishActionCreators = createPublishActionCreators('PLUGIN')
 const {
   updateMetadata,
   updateStatus,

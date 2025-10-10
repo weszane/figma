@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CanvasSearchHelpers, PageViewMode, AppStateTsApi, Multiplayer, PluginModalType, SelectionState, NodeType } from "../figma_app/763686";
 import { zeroSessionLocalIDString, defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { useAtomWithSubscription, Xr, atom, useAtomValueAndSetter } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { globalPerfTimer } from "../905/542194";
 import { useEventSubscription } from "../figma_app/516794";
@@ -26,7 +26,7 @@ import { useAppModelProperty } from "../figma_app/722362";
 import { hasNotLoaded } from "../figma_app/623300";
 import { FFileType } from "../figma_app/191312";
 import { H1 as _$$H } from "../figma_app/451700";
-import { kM } from "../figma_app/421886";
+import { NodeType } from "../figma_app/421886";
 import { iW } from "../figma_app/34798";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { genericAtomFamily1 } from "../figma_app/115923";
@@ -184,7 +184,7 @@ export function $$K7() {
       }
     });
   }, [e]);
-  let V = Xr(genericAtomFamily1);
+  let V = useSetAtom(genericAtomFamily1);
   let W = useIsFullscreenSitesView();
   return {
     query,
@@ -229,8 +229,8 @@ function H() {
         resultsByPage: {}
       };
     }
-    let m = !!filters[kM.MatchCase];
-    let f = !!filters[kM.WholeWords];
+    let m = !!filters[NodeType.MatchCase];
+    let f = !!filters[NodeType.WholeWords];
     let {
       resultsByPage,
       metrics
@@ -282,7 +282,7 @@ function H() {
       categories: y,
       mode
     });
-    let E = y.map(e => kM[e]);
+    let E = y.map(e => NodeType[e]);
     l("canvas_search_results", {
       ...metrics,
       ...v,
@@ -349,13 +349,13 @@ export function $$J11() {
   return useAtomValueAndSetter(Y);
 }
 export function $$q10() {
-  let e = Xr(Y);
+  let e = useSetAtom(Y);
   return useCallback(t => {
     t?.detail && e(null);
   }, [e]);
 }
 export function $$X3() {
-  let e = Xr(Y);
+  let e = useSetAtom(Y);
   return useCallback(t => {
     t?.detail || e(t.currentTarget);
   }, [e]);

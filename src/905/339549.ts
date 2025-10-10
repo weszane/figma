@@ -1,76 +1,113 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { forwardRef, useRef, useImperativeHandle, useEffect, useId } from "react";
-import { w } from "../905/442596";
-import { l as _$$l } from "../905/479687";
-import o from "classnames";
-import { RecordableInput } from "../905/511649";
-import { TextWithTruncation } from "../905/838445";
-import { A } from "../6828/954206";
-import { A as _$$A } from "../6828/482039";
-var l = o;
-export let $$m0 = forwardRef((e, t) => {
-  let {
+import classNames from "classnames"
+import { forwardRef, useEffect, useId, useImperativeHandle, useRef } from "react"
+import { jsx, jsxs } from "react/jsx-runtime"
+import { w } from "../905/442596"
+import { l as _$$l } from "../905/479687"
+import { RecordableInput } from "../905/511649"
+import { TextWithTruncation } from "../905/838445"
+import { A as _$$A } from "../6828/482039"
+import { A } from "../6828/954206"
+
+// Props interface for the checkbox component
+interface CheckboxProps {
+  label?: string
+  description?: string
+  checked?: boolean
+  mixed?: boolean
+  disabled?: boolean
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+  recordingKey?: string
+  truncateLabel?: Partial<React.ComponentProps<typeof TextWithTruncation>>
+}
+
+export let RenderRefCheckbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
+  const {
     label,
     description,
-    checked = !1,
-    mixed = !1,
+    checked = false,
+    mixed = false,
     disabled,
     onChange,
     onKeyDown,
-    recordingKey
-  } = e;
-  let y = useRef(null);
-  useImperativeHandle(t, () => y.current);
+    recordingKey,
+  } = props
+
+  // Ref for the input element
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // Expose the input element to parent components
+  useImperativeHandle(ref, () => inputRef.current!)
+
+  // Update the indeterminate state when mixed changes
   useEffect(() => {
-    y.current && (y.current.indeterminate = mixed);
-  }, [mixed]);
-  let b = useId();
-  let v = `${b}-check`;
-  let I = `${b}-desc`;
-  let E = mixed ? _$$A : checked ? A : null;
+    if (inputRef.current) {
+      inputRef.current.indeterminate = mixed
+    }
+  }, [mixed])
+
+  // Generate unique IDs for accessibility
+  const uniqueId = useId()
+  const checkboxId = `${uniqueId}-check`
+  const descriptionId = `${uniqueId}-desc`
+
+  // Determine which icon to show based on state
+  const IconComponent = mixed ? _$$A : checked ? A : null
+
   return jsxs("div", {
     className: "checkbox--checkLabelDescriptionContainer--NjaZ4",
-    children: [jsxs("div", {
-      className: "checkbox--checkAndLabelContainer--v09nP",
-      children: [jsxs("div", {
-        className: "checkbox--checkWrapper--nHmJ0",
-        children: [jsx(RecordableInput, {
-          "aria-describedby": description ? I : void 0,
-          checked,
-          className: l()("checkbox--input--dQMU-", {
-            "checkbox--filled--WJH3o": checked || mixed
+    children: [
+      jsxs("div", {
+        className: "checkbox--checkAndLabelContainer--v09nP",
+        children: [
+          jsxs("div", {
+            className: "checkbox--checkWrapper--nHmJ0",
+            children: [
+              jsx(RecordableInput, {
+                "aria-describedby": description ? descriptionId : undefined,
+                checked,
+                "className": classNames("checkbox--input--dQMU-", {
+                  "checkbox--filled--WJH3o": checked || mixed,
+                }),
+                disabled,
+                "forwardedRef": inputRef,
+                "id": checkboxId,
+                onChange,
+                onKeyDown,
+                recordingKey,
+                "type": "checkbox",
+              }),
+              IconComponent && jsx("div", {
+                "className": "checkbox--svg---GjIJ",
+                "aria-hidden": true,
+                "children": mixed ? jsx(w, {}) : jsx(_$$l, {}),
+              }),
+            ],
           }),
-          disabled,
-          forwardedRef: y,
-          id: v,
-          onChange,
-          onKeyDown,
-          recordingKey,
-          type: "checkbox"
-        }), E && jsx("div", {
-          className: "checkbox--svg---GjIJ",
-          "aria-hidden": !0,
-          children: mixed ? jsx(w, {}) : jsx(_$$l, {})
-        })]
-      }), label && jsx("label", {
-        className: "checkbox--label--ev6kh",
-        htmlFor: v,
+          label && jsx("label", {
+            className: "checkbox--label--ev6kh",
+            htmlFor: checkboxId,
+            children: jsx(TextWithTruncation, {
+              ...(props.truncateLabel ?? {}),
+              fontSize: 11,
+              color: disabled ? "disabled" : "default",
+              children: label,
+            }),
+          }),
+        ],
+      }),
+      description && jsx("div", {
+        className: "checkbox--description--AZF1u",
+        id: descriptionId,
         children: jsx(TextWithTruncation, {
-          ...(e.truncateLabel ?? {}),
           fontSize: 11,
-          color: disabled ? "disabled" : "default",
-          children: label
-        })
-      })]
-    }), description && jsx("div", {
-      className: "checkbox--description--AZF1u",
-      id: I,
-      children: jsx(TextWithTruncation, {
-        fontSize: 11,
-        color: disabled ? "disabled" : "secondary",
-        children: description
-      })
-    })]
-  });
-});
-export const S = $$m0;
+          color: disabled ? "disabled" : "secondary",
+          children: description,
+        }),
+      }),
+    ],
+  })
+})
+
+// Maintain the original export name
+export const S = RenderRefCheckbox

@@ -1,4 +1,4 @@
-import { createCustomReadWriteAtom, atom, useAtomWithSubscription, Rq } from "../figma_app/27355";
+import { createCustomReadWriteAtom, atom, useAtomWithSubscription, loadable } from "../figma_app/27355";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Vg } from "../figma_app/410518";
 import { V, S } from "../figma_app/694362";
@@ -20,7 +20,7 @@ export function $$c0() {
   let e = useAtomWithSubscription(u);
   return "hasData" !== e.state || e.data;
 }
-let u = Rq(createCustomReadWriteAtom(setupRemovableAtomFamily(() => atom(async e => {
+let u = loadable(createCustomReadWriteAtom(setupRemovableAtomFamily(() => atom(async e => {
   for (let t of l(e)) if ((await e(Vg(t))).length > 0) return !1;
   return !0;
 }))));

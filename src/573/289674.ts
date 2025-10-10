@@ -9,7 +9,7 @@ import { design_editor } from "../figma_app/686647";
 import { ServiceCategories } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { atom, atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atom, atomStoreManager, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { generateUUIDv4 } from "../905/871474";
 import { logger } from "../905/651849";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
@@ -558,7 +558,7 @@ export function $$J1(e) {
 }
 export function $$X0() {
   let e = getFeatureFlags().ai_assistant_server_side_chat ?? !1;
-  let t = Xr(mC("0:1"));
+  let t = useSetAtom(mC("0:1"));
   let s = selectCurrentUser();
   let n = getFullscreenFileKey();
   let o = getCurrentFileType();

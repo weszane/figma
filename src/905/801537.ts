@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { generateSessionId } from "../figma_app/925970";
 import { wf } from "../905/124270";
@@ -9,7 +9,7 @@ import { searchAPIHandler } from "../905/144933";
 import { A as _$$A } from "../905/421315";
 export function $$p0(e, t) {
   let [i, d] = useState(e);
-  let c = Xr(wf);
+  let c = useSetAtom(wf);
   let {
     restrictOrgId,
     restrictTeamId

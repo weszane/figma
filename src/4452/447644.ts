@@ -12,7 +12,7 @@ import { useConditionalCallback } from "../905/165069";
 import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
 import { BadgeColor } from "../figma_app/919079";
-import { gw, MM, wv } from "../figma_app/236327";
+import { DropdownWithScrim, CheckableOptionComponent, SeparatorComponent } from "../figma_app/236327";
 import { SecureLink } from "../figma_app/637027";
 import { RelativeTimeDisplay } from "../905/986103";
 import { Wi, JR } from "../figma_app/162641";
@@ -27,7 +27,7 @@ import { VisualBellIcon } from "../905/576487";
 import { AutoLayout, Spacer } from "../905/470281";
 import { V as _$$V } from "../905/355181";
 import { B as _$$B } from "../905/261906";
-import { RR } from "../figma_app/307841";
+import { isCampfireModelEnabled } from "../figma_app/307841";
 import { isProrationBillingEnabledForCurrentPlan } from "../figma_app/618031";
 import { tI as _$$tI } from "../figma_app/599327";
 import { Y as _$$Y2 } from "../figma_app/515088";
@@ -74,7 +74,7 @@ import { VU } from "../4452/650793";
 import { useSingleEffect } from "../905/791079";
 import { qf } from "../4452/780544";
 import { g as _$$g } from "../4452/983384";
-import { e as _$$e2 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { OnboardingModal } from "../905/425180";
 import { AdminSeatApprovalSettingsOnboardingOverlay } from "../figma_app/6204";
@@ -152,7 +152,7 @@ function eR(e) {
     show,
     isShowing,
     complete
-  } = _$$e2({
+  } = useOverlay({
     overlay: AdminSeatApprovalSettingsOnboardingOverlay,
     priority: _$$g(AdminSeatApprovalSettingsOnboardingOverlay)
   }, [a]);
@@ -254,7 +254,7 @@ function eB(e) {
     children: [jsx("div", {
       "data-testid": e.dataTestId,
       children: e.isDefaultFilter ? e.defaultFilterLabel : e.filterLabel
-    }), n && jsx(gw, {
+    }), n && jsx(DropdownWithScrim, {
       dispatch: t,
       className: x1,
       style: a.data.position,
@@ -276,7 +276,7 @@ export function $$e$0({
   let z = useRef(null);
   let H = useRef(null);
   let J = isProrationBillingEnabledForCurrentPlan();
-  let eI = RR();
+  let eI = isCampfireModelEnabled();
   let eE = getRumLoggingConfig();
   let eS = useDispatch<AppDispatch>();
   let {
@@ -918,11 +918,11 @@ export function $$e$0({
           })
         }),
         renderFilterOptions: () => jsxs(Fragment, {
-          children: [jsx(MM, {
+          children: [jsx(CheckableOptionComponent, {
             checked: null === tc,
             onClick: () => tu(null),
             children: getI18nString("admin_dashboard.requests.all_users")
-          }), jsx(wv, {}), Object.values(MemberGuest).map(e => jsx(MM, {
+          }), jsx(SeparatorComponent, {}), Object.values(MemberGuest).map(e => jsx(CheckableOptionComponent, {
             checked: tc === e,
             onClick: () => tu(e),
             children: tK(e)
@@ -940,11 +940,11 @@ export function $$e$0({
           })
         }),
         renderFilterOptions: () => jsxs(Fragment, {
-          children: [jsx(MM, {
+          children: [jsx(CheckableOptionComponent, {
             checked: null === eq,
             onClick: () => eO(null),
             children: getI18nString("admin_dashboard.requests.filter.seats_all_option")
-          }), jsx(wv, {}), collaboratorSet.sort(compareProductAccessTypes).map(e => jsx(MM, {
+          }), jsx(SeparatorComponent, {}), collaboratorSet.sort(compareProductAccessTypes).map(e => jsx(CheckableOptionComponent, {
             checked: eq === e,
             onClick: () => eO(e),
             children: _$$tI(e)
@@ -972,16 +972,16 @@ export function $$e$0({
             label: getI18nString("admin_dashboard.requests.from_unassigned")
           });
           return jsxs(Fragment, {
-            children: [t.map(e => jsx(MM, {
+            children: [t.map(e => jsx(CheckableOptionComponent, {
               checked: to === e.key,
               onClick: () => td(e.key),
               children: e.label
-            }, e.key)), jsx(wv, {}), jsx(MM, {
+            }, e.key)), jsx(SeparatorComponent, {}), jsx(CheckableOptionComponent, {
               disabled: !0,
               checked: !1,
               onClick: noop,
               children: renderI18nText(ti === RequestFilterType.ALL_ORG_REQUESTS ? "admin_dashboard.requests.billing_groups" : "admin_dashboard.requests.your_billing_groups")
-            }), e.map(e => jsx(MM, {
+            }), e.map(e => jsx(CheckableOptionComponent, {
               checked: to === e.id,
               onClick: () => td(e.id),
               children: e.name

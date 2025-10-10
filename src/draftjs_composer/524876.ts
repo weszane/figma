@@ -8,7 +8,7 @@ import { N as _$$N } from "../905/7587";
 import { A as _$$A } from "../905/744692";
 import { s as _$$s } from "../905/551945";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
 import { dN } from "../vendor/291472";
 import { trackEventAnalytics } from "../905/449184";
@@ -162,7 +162,7 @@ export function $$em1(e) {
   let ey = useSelector(e => e.comments.editingComment);
   let ex = !!selectUserFlag("has_mentioned_pending_user_invite");
   let eI = !!selectUserFlag("has_mentioned_pending_user_invite_twice");
-  let ev = Xr(_$$H);
+  let ev = useSetAtom(_$$H);
   let [eE, eM] = useState(!1);
   let eT = getCurrentFileType();
   let ej = isPrototypeView();

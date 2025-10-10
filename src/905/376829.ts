@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
-import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { KJ, $T, Vx, V0 } from "../905/657710";
+import { fileSearchConfig, projectSearchConfig, teamSearchConfig, userSearchConfig } from "../905/657710";
 import { hO } from "../figma_app/545293";
 import { xH, eB } from "../905/546357";
 import { Tabs } from "../905/150656";
@@ -33,10 +33,10 @@ import { useSubscription } from "../figma_app/288654";
 import { SearchFilterWorkspaceView } from "../figma_app/43951";
 import { p as _$$p } from "../figma_app/353099";
 import { useSingleEffect } from "../905/791079";
-import { e as _$$e } from "../905/621515";
-import { UC } from "../figma_app/33126";
+import { useOverlay } from "../905/621515";
+import { orgHasWorkspacesAndBigmaAtomFamily } from "../figma_app/33126";
 import { userFlagExistsAtomFamily } from "../figma_app/545877";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { SearchWorkspaceOnboarding } from "../figma_app/6204";
 import { A as _$$A2 } from "../6828/154709";
@@ -45,7 +45,7 @@ import { xH as _$$xH2, zQ as _$$zQ2 } from "../905/869282";
 import { g as _$$g } from "../905/345380";
 import { publicWidgetsSearchModule, privateWidgetsSearchModule } from "../905/572991";
 import { debounce } from "../905/915765";
-import { wv, MM } from "../figma_app/236327";
+import { SeparatorComponent, CheckableOptionComponent } from "../figma_app/236327";
 import { lV, R1 } from "../figma_app/802781";
 import { selectCurrentUser } from "../905/372672";
 import { ConnectedPointingDropdown } from "../905/504727";
@@ -144,13 +144,13 @@ let J = userFlagExistsAtomFamily("file_browser_onboarded");
 let ee = userFlagExistsAtomFamily(X);
 function et() {
   let e = useSelector(e => e.currentUserOrgId);
-  let t = UC(e);
+  let t = orgHasWorkspacesAndBigmaAtomFamily(e);
   let i = useAtomWithSubscription(t);
   let n = useAtomWithSubscription(J);
   let a = useAtomWithSubscription(ee);
-  let o = _$$e({
+  let o = useOverlay({
     overlay: SearchWorkspaceOnboarding,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   }, [n, i, a]);
   useSingleEffect(() => {
     o.show({
@@ -315,7 +315,7 @@ function eh(e) {
     })]
   });
 }
-let ex = wv;
+let ex = SeparatorComponent;
 let eS = "NON_ORG_TEAMS";
 let ew = {};
 function eC(e) {
@@ -393,14 +393,14 @@ function eT(e) {
       showPoint: !0,
       lean: "right",
       propagateCloseClick: !0,
-      children: [jsx(MM, {
+      children: [jsx(CheckableOptionComponent, {
         checked: "ALL" === e.checkedValue,
         onClick: () => {
           u();
           e.onResetFilter();
         },
         children: ew.ALL
-      }, "ALL"), jsx(ex, {}), e.values.map(t => jsx(MM, {
+      }, "ALL"), jsx(ex, {}), e.values.map(t => jsx(CheckableOptionComponent, {
         checked: t === e.checkedValue,
         onClick: () => {
           u();
@@ -468,22 +468,22 @@ function eT(e) {
       case PublicModelType.FILES:
         return jsx(t, {
           ...e,
-          ...KJ
+          ...fileSearchConfig
         });
       case PublicModelType.PROJECTS:
         return jsx(t, {
           ...e,
-          ...$T
+          ...projectSearchConfig
         });
       case PublicModelType.TEAMS:
         return jsx(t, {
           ...e,
-          ...Vx
+          ...teamSearchConfig
         });
       case PublicModelType.USERS:
         return jsx(t, {
           ...e,
-          ...V0
+          ...userSearchConfig
         });
       case PublicModelType.PUBLIC_PROFILES:
       case PublicModelType.PUBLIC_WIDGETS:
@@ -500,22 +500,22 @@ function eP(e) {
     case PublicModelType.FILES:
       return jsx(Kc, {
         ...e,
-        ...KJ
+        ...fileSearchConfig
       });
     case PublicModelType.PROJECTS:
       return jsx(Kc, {
         ...e,
-        ...$T
+        ...projectSearchConfig
       });
     case PublicModelType.TEAMS:
       return jsx(Kc, {
         ...e,
-        ...Vx
+        ...teamSearchConfig
       });
     case PublicModelType.USERS:
       return jsx(Kc, {
         ...e,
-        ...V0
+        ...userSearchConfig
       });
     case PublicModelType.HUB_FILES:
     case PublicModelType.PUBLIC_PLUGINS:
@@ -531,25 +531,25 @@ function eP(e) {
 export let $$eO1 = {
   [PublicModelType.FILES]: (e, t) => ({
     sortMode: e.sortState.files,
-    viewMode: getValueWithFallback(KJ.viewId, t, KJ.defaultOptions.viewMode),
+    viewMode: getValueWithFallback(fileSearchConfig.viewId, t, fileSearchConfig.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
   [PublicModelType.PROJECTS]: (e, t) => ({
     sortMode: e.sortState.projects,
-    viewMode: getValueWithFallback($T.viewId, t, $T.defaultOptions.viewMode),
+    viewMode: getValueWithFallback(projectSearchConfig.viewId, t, projectSearchConfig.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
   [PublicModelType.TEAMS]: (e, t) => ({
     sortMode: e.sortState.teams,
-    viewMode: getValueWithFallback(Vx.viewId, t, Vx.defaultOptions.viewMode),
+    viewMode: getValueWithFallback(teamSearchConfig.viewId, t, teamSearchConfig.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
   [PublicModelType.USERS]: (e, t) => ({
     sortMode: e.sortState.users,
-    viewMode: getValueWithFallback(V0.viewId, t, V0.defaultOptions.viewMode),
+    viewMode: getValueWithFallback(userSearchConfig.viewId, t, userSearchConfig.defaultOptions.viewMode),
     shouldShowGroupFilter: !1,
     shouldShowPlanFilter: !0
   }),
@@ -580,7 +580,7 @@ export function $$eD0(e) {
   let P = useAtomWithSubscription(searchScopeAtom);
   let O = _$$L(N ? "fragment_search_modal" : "file_browser", P, !1);
   let D = useAtomWithSubscription(searchInputAtom);
-  let L = Xr(l4(CreatorResourceType.RESOURCE));
+  let L = useSetAtom(l4(CreatorResourceType.RESOURCE));
   let F = useCallback(e => {
     if (e === h) return;
     let i = convertModelTypeToSearchModelType(e);

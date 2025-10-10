@@ -10,8 +10,8 @@ import { getDevModeFocusId } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
 import { trackPrototypeScaleChangeEvent, trackDefinedFileEventWrapper } from "../figma_app/2590";
 import { isFirstPageCurrentSelector } from "../905/91038";
-import { hg } from "../figma_app/425489";
-import { xY } from "../figma_app/354027";
+import { inlinePreviewReducer } from "../figma_app/425489";
+import { isFullscreenEditor } from "../figma_app/354027";
 import { getValidPrototypeNodeId } from "../905/291518";
 import { F as _$$F } from "../905/160142";
 export let $$y0 = createOptimistThunk((e, {
@@ -51,14 +51,14 @@ export let $$y0 = createOptimistThunk((e, {
     }));
     return;
   }
-  if (xY(x) && !y) {
+  if (isFullscreenEditor(x) && !y) {
     let t = p ? i : PrototypingTsApi.getInlinePreviewNodeIdOnPreviewOpen();
     if (!t) {
       let e = getDevModeFocusId(x.selectedView);
       e && (t = e);
     }
     isValidSessionLocalID(parseSessionLocalID(t)) || (t = getValidPrototypeNodeId());
-    atomStoreManager.set(hg, {
+    atomStoreManager.set(inlinePreviewReducer, {
       type: "OPEN_INLINE_PREVIEW",
       payload: {
         onOpen: t => {

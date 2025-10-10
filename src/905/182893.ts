@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, createRef, useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -147,13 +147,13 @@ function T({
   }, [a, e, s, p, i, N]);
   return jsx("div", {
     className: "xh8yej3",
-    children: jsxs(bL, {
+    children: jsxs(SelectGroupLabel, {
       onChange: P,
       value: t,
       onOpenChange: N,
       children: [jsx(_$$c, {
         active,
-        children: jsx(l9, {
+        children: jsx(SelectSeparator, {
           label: jsx(HiddenLabel, {
             children: renderI18nText("fragment_search.sort_by")
           }),
@@ -162,8 +162,8 @@ function T({
             children: t ? k(t) : renderI18nText("fragment_search.sort_by")
           })
         })
-      }), jsx(mc, {
-        children: _.map(e => jsx(c$, {
+      }), jsx(SelectContainer, {
+        children: _.map(e => jsx(SelectOptionReset, {
           value: e.value,
           children: e.text
         }, e.value))

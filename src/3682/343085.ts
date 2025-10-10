@@ -1,11 +1,11 @@
 import { useLayoutEffect } from "react";
-import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atom, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 let i = atom(0);
 let n = atom(e => e(i) > 0);
 export function $$l0({
   isVisible: e
 }) {
-  let t = Xr(i);
+  let t = useSetAtom(i);
   useLayoutEffect(() => {
     if (e) {
       t(e => e + 1);

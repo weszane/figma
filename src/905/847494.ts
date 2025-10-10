@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { U1 } from "../figma_app/343967";
 import { N } from "../905/57692";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { useMultiRefCallback } from "../figma_app/272902";
 import d from "classnames";
 import { Dm } from "../figma_app/8833";
@@ -19,7 +19,7 @@ export function $$f0({
 }) {
   let f = useRef(null);
   let _ = U1(f);
-  let A = Xr(dN);
+  let A = useSetAtom(dN);
   let y = useCallback(e => A(e), [A]);
   let b = useMultiRefCallback(_, y);
   let v = _$$N();

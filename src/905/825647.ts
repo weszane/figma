@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
-import { kD, J3, kN, JU } from "../figma_app/622574";
+import { getCurrentTemplate, getPublishTemplateStatus, PublishTemplateStatusEnum, canPublishTemplate } from "../figma_app/622574";
 import { selectCurrentFile } from "../figma_app/516028";
 import { x } from "../905/619833";
 import { i$, YM } from "../905/122282";
 import { YW } from "../figma_app/553488";
 export function $$d0() {
-  let e = !!kD();
-  let t = J3();
+  let e = !!getCurrentTemplate();
+  let t = getPublishTemplateStatus();
   let i = selectCurrentFile();
   let d = useDispatch<AppDispatch>();
   return {
@@ -16,7 +16,7 @@ export function $$d0() {
           i$(d);
           return;
         }
-        t === kN.FILE_IN_DRAFTS ? x({
+        t === PublishTemplateStatusEnum.FILE_IN_DRAFTS ? x({
           file: {
             key: i.key,
             name: i.name,
@@ -26,7 +26,7 @@ export function $$d0() {
             parent_org_id: i.parentOrgId
           },
           dispatch: d
-        }) : JU(t) && YM(d, i.key, i.editorType, n);
+        }) : canPublishTemplate(t) && YM(d, i.key, i.editorType, n);
       }
     }
   };

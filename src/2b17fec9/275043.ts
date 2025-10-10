@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, forwardRef, memo, useContext, useMemo } from "react";
 import { noop } from 'lodash-es';
 import { getFeatureFlags } from "../905/601108";
-import { um, useAtomWithSubscription, useAtomValueAndSetter, Xr, atom } from "../figma_app/27355";
+import { atomWithReducer, useAtomWithSubscription, useAtomValueAndSetter, useSetAtom, atom } from "../figma_app/27355";
 import { useResizeObserverRef } from "../figma_app/708845";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { F as _$$F } from "../figma_app/832508";
@@ -119,7 +119,7 @@ import { I as _$$I } from "../figma_app/827540";
 import { rX, UJ as _$$UJ } from "../figma_app/801324";
 import { k as _$$k2 } from "../905/545760";
 var H = F;
-let Q = um({
+let Q = atomWithReducer({
   draggedTool: void 0,
   draggedToolCanCancel: !0,
   shouldFinishClick: !0
@@ -1036,7 +1036,7 @@ function e1() {
   let e = useAtomWithSubscription(shapeColorAtom);
   let t = function (e) {
     let t = useAtomWithSubscription(toolStylesAtom);
-    let i = Xr(shapeColorAtom);
+    let i = useSetAtom(shapeColorAtom);
     let {
       shapeWithTextType
     } = t;
@@ -4069,7 +4069,7 @@ function ik({
     numVisibleTools
   } = useAtomWithSubscription(Kj);
   let d = _$$$R(numVisibleTools);
-  let c = Xr(n6);
+  let c = useSetAtom(n6);
   useEffect(() => {
     c(void 0 !== d.find(e => e.toolId === _$$y2));
   }, [c, d]);
@@ -4259,7 +4259,7 @@ function iF({
     let e = useRef(null);
     let t = useResizeObserverRef(e);
     let i = t?.width ?? Hu().thresholdWidth + 260;
-    let n = Xr(Kj);
+    let n = useSetAtom(Kj);
     let a = useIsVotingSessionJoined();
     useEffect(() => {
       n(Iq(a).find(e => i >= e.thresholdWidth + 260) ?? Hu());

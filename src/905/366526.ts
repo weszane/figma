@@ -1,9 +1,11 @@
 import { datadogRum } from '@datadog/browser-rum'
 import classNames from 'classnames'
 import { diff } from 'deep-diff'
+import { atom, useSetAtom } from 'jotai'
 import Cookie from 'js-cookie'
 import { initialize } from 'launchdarkly-js-client-sdk'
-import { groupBy, isEmpty, keyBy, memoize, pick } from 'lodash-es'
+import { withLDProvider } from 'launchdarkly-react-client-sdk'
+import { groupBy, isEmpty, isEqual, keyBy, memoize, pick, throttle } from 'lodash-es'
 import { PureComponent, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { createPortal } from 'react-dom'
@@ -15,6 +17,7 @@ import optimist, { BEGIN, COMMIT, REVERT } from 'redux-optimist'
 import { thunk } from 'redux-thunk'
 import statsigSDK from 'statsig-js'
 import { Statsig } from 'statsig-react'
+import { expect } from 'vitest'
 import { z as _$$z3 } from 'zod'
 import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../905/11'
 import { resolveAndResetPromise, resolvePromise } from '../905/2848'
@@ -97,6 +100,7 @@ import { a as _$$a5 } from '../905/242083'
 import { trackAuthEvent } from '../905/248178'
 import { CURRENT_PAGE_SWATCH_SET_ID, GridListViewMode } from '../905/255097'
 import { compareThemePreferences, getCurrentThemePreferences, themeAttributeNames } from '../905/266289'
+import { hasStoredValue } from '../905/266529'
 import { createReduxSubscriptionAtomWithState } from '../905/270322'
 import { parentOrgIdAtom, teamOrOrgIdAtom } from '../905/276025'
 import { ThemeProvider2 } from '../905/289770'
@@ -126,7 +130,7 @@ import { SharedFontsComponent } from '../905/375507'
 import { isShowingBannerAtom } from '../905/378189'
 import { PRIVATE_PLUGINS_SEARCH_CONFIG } from '../905/378567'
 import { BusyReadyState, NEW_COMMENT_ID } from '../905/380385'
-import { Cs as _$$Cs } from '../905/381612'
+import { recentItemsReducer } from '../905/381612'
 import { generateUniqueKey } from '../905/383708'
 import { getWAFChallengeType, wafManager } from '../905/394005'
 import { orgsBatchPut, orgsLockAccount, orgsLockOrgs, orgsSetOrgId, orgsUnlockOrgs } from '../905/395917'
@@ -139,9 +143,9 @@ import { getCookieOrStorage } from '../905/414007'
 import { shouldProcessSettingsChange } from '../905/414069'
 import { TrackingWrapper } from '../905/414363'
 import { performanceMetricsTracker } from '../905/414972'
-import { v as _$$v3 } from '../905/417890'
+import { viewActionMiddleware } from '../905/417890'
 import { getResourceDataOrFallback } from '../905/419236'
-import { H as _$$H5 } from '../905/422284'
+import { handleRouteUpdate } from '../905/422284'
 import { LivegraphProvider } from '../905/436043'
 import { useModalManager } from '../905/437088'
 import { Link } from '../905/438674'
@@ -176,7 +180,7 @@ import { APILoadingStatus } from '../905/520829'
 import { getContainingAssetPanel } from '../905/521144'
 import { Button } from '../905/521428'
 import { registerTooltip } from '../905/524523'
-import { UN } from '../905/525678'
+import { shouldShowMenuItem } from '../905/525678'
 import { canOpenUrlInDesktop, DesktopModalType, openUrlInDesktop } from '../905/535224'
 import { q as _$$q5 } from '../905/540614'
 import { closeFullscreenAction, closeFullscreenThunk } from '../905/541060'
@@ -206,20 +210,20 @@ import { PerfTimer } from '../905/609396'
 import { customHistory, CustomRouter } from '../905/612521'
 import { createPublicUserPutAction, createPublicUserPutManyAction, createPublicUserPutManyEmptyIdsAction } from '../905/618921'
 import { convertImageDataToURL, generateExportThumbnail } from '../905/619652'
-import { e as _$$e5 } from '../905/621515'
+import { useOverlay } from '../905/621515'
 import { setupFileObject } from '../905/628874'
 import { ButtonPrimitive } from '../905/632989'
 import { parseAndNormalizeQuery, parseQuery, removeQueryParam, serializeQuery } from '../905/634134'
 import { AlertState, HiddenState } from '../905/638715'
 import { fileImporter, initializeFileImporter } from '../905/642505'
-import { k as _$$k3 } from '../905/644504'
+import { samlAuthenticationService } from '../905/644504'
 import { createFileLibraryKeys } from '../905/651613'
 import { logger } from '../905/651849'
 import { getLocalStorage, getStorage, localStorageRef, useLocalStorageSync } from '../905/657224'
-import { $T, KJ as _$$KJ, Vx as _$$Vx, V0 } from '../905/657710'
+import { fileSearchConfig, projectSearchConfig, teamSearchConfig, userSearchConfig } from '../905/657710'
 import { ResourceStatus } from '../905/663269'
 import { j2 } from '../905/667970'
-import { S as _$$S4 } from '../905/669334'
+import { LibraryViewTabs } from '../905/669334'
 import { measureAsyncDuration, measureSyncDuration } from '../905/670985'
 import { fetchFileRoles, fetchFolderRoles, fetchRepoRoles, fetchTeamRoles } from '../905/672897'
 import { WAFImage } from '../905/675859'
@@ -234,20 +238,20 @@ import { OverviewCategory, StatValueType } from '../905/697254'
 import { setupPopstateListener } from '../905/697795'
 import { navigationRoutes } from '../905/698965'
 import { getSingletonSceneGraph, SingletonSceneGraph } from '../905/700578'
-import { o as _$$o8 } from '../905/701807'
+import { fullscreenDocumentLoadedAction } from '../905/701807'
 import { U as _$$U } from '../905/707331'
-import { S3 } from '../905/708054'
+import { CHANGE_PROFILE_HANDLE_MODAL_TYPE } from '../905/708054'
 import { vV } from '../905/709095'
 import { compareLibraryItemWithKey } from '../905/709171'
 import { uiVariantName } from '../905/709735'
 import { addThumbnailForDanglingStyle, replaceLocalThumbnails } from '../905/711212'
-import { S as _$$S5 } from '../905/711770'
+import { useLibraryFileExpanded } from '../905/711770'
 import { liveStoreInstance, setupResourceAtomHandler } from '../905/713695'
 import { logDebug, logError, logInfo, logWarning } from '../905/714362'
 import { fontReducer } from '../905/714538'
 import { SvgComponent } from '../905/714743'
 import { RealtimeSubscriptionManager } from '../905/715533'
-import { I as _$$I2 } from '../905/717213'
+import { formatLibraryCounts } from '../905/717213'
 import { IpcStorageHandler } from '../905/724705'
 import { MergeState } from '../905/725962'
 import { Point } from '../905/736624'
@@ -255,8 +259,8 @@ import { createAndOpenFile, setFullscreenNewFileOpen } from '../905/738636'
 import { extractOriginalTextMap } from '../905/744769'
 import { useWindowDimensions } from '../905/745972'
 import { AuthModal } from '../905/749159'
-import { k as _$$k6 } from '../905/749197'
-import { f as _$$f3 } from '../905/749689'
+import { DDRenderMode } from '../905/749197'
+import { handleOpacitySettingsChange } from '../905/749689'
 import { StatsigContext } from '../905/749933'
 import { attachReactStackToError, ErrorBoundaryCrash, errorBoundaryFallbackTypes, RootErrorBoundaryFallback } from '../905/751457'
 import { handlePluginError } from '../905/753206'
@@ -292,7 +296,6 @@ import { teamLivestoreBinding } from '../905/844455'
 import { useCurrentUserOrg } from '../905/845253'
 import { mergeWithObject } from '../905/848904'
 import { c as _$$c6 } from '../905/850166'
-import { hasStoredValue } from '../905/851937'
 import { fileUpdateSavepointAction } from '../905/852057'
 import { clearSelectionPaintsDueToLimitExceeded, forceUpdateSelectionPaintsForUndo, updateCurrentSelectionPaintInPicker, updatePaintsDirectlyOnSingleNodeFromFullscreen, updateSelectionPaintsFromFullscreen, updateSelectionStylesFromFullscreen, updateStylesDirectlyOnSingleNodeFromFullscreen } from '../905/854717'
 import { isVsCodeEnvironment } from '../905/858738'
@@ -310,30 +313,30 @@ import { useHasParentOrgId } from '../905/882262'
 import { updateEnvironmentInfo } from '../905/883621'
 import { addAuthedCommunityProfileToHub, clearCommunityProfile, deleteTeam, hydrateFileBrowser, patchOrgs, putCommunityProfile, putOrgs, putTeam, putUser, setCommunityAuthedActiveProfile, setSessionStateAction, setUserInOrgs } from '../905/890368'
 import { contextSwitchAtom, initializeAtom, prefetchAtom } from '../905/895600'
-import { p as _$$p4 } from '../905/895920'
+import { LibrariesEmptyState } from '../905/895920'
 import { extractFormValues } from '../905/897919'
 import { Au, h8, UK } from '../905/898493'
 import { sendWithRetry } from '../905/910117'
 import { ComFileType } from '../905/915030'
 import { dayjs } from '../905/920142'
 import { useFullscreenReady } from '../905/924253'
-import { E as _$$E5, v as _$$v2 } from '../905/928543'
+import { ComponentDrilldownView, StateGroupView } from '../905/928543'
 import { hideDropdownAction, initAction, selectViewAction, showDropdownAction, updateDropdownSelectionAction, userStateLoadedAction } from '../905/929976'
 import { A7, EL, H_ } from '../905/932769'
-import { b as _$$b3 } from '../905/937225'
+import { isEqualZero } from '../905/937225'
 import { PluginPublishModal } from '../905/938553'
 import { selectUserFlag } from '../905/940356'
 import { styleBuilderInstance } from '../905/941192'
 import { F1 } from '../905/941249'
 import { Gk as _$$Gk, jH } from '../905/950959'
-import { hv as _$$hv } from '../905/952832'
+import { UploadState } from '../905/952832'
 import { instanceSwapPickerReducer, pickerInStyleCreationReducer, pickerVisibilityReducer, stackAlignmentPickerReducer, stylePickerReducer, variablePickerReducer } from '../905/959568'
 import { convertLiveGraphFile, FileChannelFilesShim, FileRepoChannelFilesShim, FolderChannelFilesShim, handleFileUpdate, TeamChannelFilesShim } from '../905/970170'
-import { S as _$$S6 } from '../905/970585'
+import { initializeFlashMessage } from '../905/970585'
 import { clearWorkspaceFilterThunk, handleSearchParameterChangeThunk, searchClearQueryAction, searchClearResponsesAction, searchEndSessionAction, searchIncrementQueryCountAction, searchResetFileTypeFilterAction, searchRestoreSessionAction, searchSelectedAction, searchSessionEnteredSearchViewAction, searchSessionEnteredSearchViewViaEnterAction, searchSessionSeeMoreClickAction, searchSetLastAckedQueryIdAction, searchSetLastLoadedQueryAction, searchSetParametersAction, searchSetQueryIdAction, searchSetScrollTopAction, searchThunk, setFocusAction, setFullResultsSearchResponseAction, setResponseAction, setResponsesAction, setResponseSortStateAction, setSearchTypeBehaviorAction, sortStateThunk, startSearchSessionAction } from '../905/977218'
 import { filesByLibraryKeyAtom } from '../905/977779'
 import { postUserFlag, setAllUserFlags } from '../905/985254'
-import { Y as _$$Y4 } from '../905/986107'
+import { NotImplementedClass } from '../905/986107'
 import { createReactRoot } from '../905/986450'
 import { captionsInstallProgress, clearActiveCall, joinActiveCall, leaveActiveCall, setActiveCall, setUserIdsInCallFromProvider, setVoiceUsers, showCaptions, snapWidget, toggleWidget, toggleWidgetParticipantList } from '../905/989765'
 import { twoFactorAuthReducer } from '../905/990455'
@@ -351,7 +354,7 @@ import { copyTextThunk } from '../figma_app/11182'
 import { DEFAULT_RECT, DEFAULT_THREAD_STATE, getDefaultReplyState } from '../figma_app/12220'
 import { canPerformAction, canRunExtensions } from '../figma_app/12796'
 import { checkUnsyncedAutosaveFilesThunk, putUserAction, userEraseSecretsAction } from '../figma_app/24841'
-import { tP as _$$tP, atom, AtomProvider, atomStoreManager, createLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr as useSetAtom } from '../figma_app/27355'
+import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355'
 import { YQL } from '../figma_app/27776'
 import { licenseGroupDelete, licenseGroupSet, licenseGroupUpdate } from '../figma_app/28323'
 import { ec as _$$ec } from '../figma_app/29089'
@@ -360,11 +363,11 @@ import { BlockingUserState, CommunityPaymentsForRealtimeShim, ComponentUpdatesFo
 import { CommentTabType, ResourceTypeNoComment } from '../figma_app/45218'
 import { delFigFilePublishedAsHubFile, hubFileDelAll, hubFilePublishActionCreators, hubFilePutAll, hubFilePutHubFileRemix, optimisticDuplicateHubFileAction, processHubFilesThunk, putFigFileDuplicateFromHubFile, putFigFilePublishedAsHubFile } from '../figma_app/49598'
 import { FEditorType, mapEditorTypeToString, mapEditorTypeToStringWithObfuscated, mapEditorTypeToWorkspaceType, mapFileTypeToEditorType } from '../figma_app/53721'
-import { o as _$$o6 } from '../figma_app/54816'
+import { blockedUILoadingIndicator } from '../figma_app/54816'
 import { batchPutFileAction, batchSubscribeToRealtimeAction, clearActiveFileUsersAction, copyShareLinkOptimistic, filePermissionsPutAction, filePutAction, fileRestoreAction, hasFileRepo, moveFileAction, postFileAction, removeFileFromProjectAction, renameFileOptimistic, setActiveFileUsersAction } from '../figma_app/78808'
 import { revokeThumbnailUrl, teamLibraryCache } from '../figma_app/80990'
 import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367'
-import { nm as _$$nm, kQ, Yb } from '../figma_app/86921'
+import { getIsFreeUser, getIsStarterUser, userReducer } from '../figma_app/86921'
 import { isFullscreenOverview } from '../figma_app/88239'
 import { attemptClose, beginRenaming, fullscreenOpen, hideDowntimeBanner, hideOpenDesktopAppModal, hidePickerThunk, hideStylePicker, hideUpgradeBanner, newFileLoaded, recentlyUsedQuickCommands, reconnectingStarted, reconnectingSucceeded, setCanvasMentionPopup, setEyedropper, setFileVersion, setHyperlinkPopup, setInstanceSwapPickerListLayout, setLeftPanelTab, setNeedsUpgrade, setPickerListLayout, setPreferredValuesPickerListLayout, setProgressBarState, showDowntimeBanner, showFileCreationFailureBanner, showOpenDesktopAppModal, showUpgradeBanner, stopObservingOtherUser, stopRenaming, updateCanvasMentionPopupPosition, updateHyperlinkPopupPosition, updateLocalFontAgentVersion, updateMirror, updateMultiplayerState, updateOpenFile, updateRecentlyUsedQuickCommand, updateSelectedStyleProperties, updateSelectedStyleThumbnailUrl } from '../figma_app/91703'
 import { isNotNullish } from '../figma_app/95419'
@@ -374,8 +377,8 @@ import { clearState, deselectVotePin, dismissJoinConfirmation, hideJoinVotingSes
 import { isStudentValidated } from '../figma_app/141320'
 import { testWebGLSupport, WebGLTestResult } from '../figma_app/149304'
 import { iO as _$$iO } from '../figma_app/149367'
-import { hV as _$$hV2, Dc } from '../figma_app/151766'
-import { p as _$$p5 } from '../figma_app/160942'
+import { ExportOption, initiateSaveAs } from '../figma_app/151766'
+import { isEligibleForPromoReviewOrTeamUpgradeWithPromo } from '../figma_app/160942'
 import { ModelTypeConfigs, PublicModelType, SearchTypeMode, SpaceAccessType } from '../figma_app/162807'
 import { v2 } from '../figma_app/164260'
 import { xZ } from '../figma_app/165422'
@@ -388,34 +391,34 @@ import { DropdownEnableState } from '../figma_app/188152'
 import { FAccessLevelType, FBasicPermissionType, FFeatureAdoptionStatusType, FFileType, FOrganizationLevelType, FPaymentHealthStatusType, FPermissionLevelType, FPlanAccessType, FPlanRestrictionType, FProductAccessType, FPublicationStatusType, FResourceCategoryType, FTeamAccessPermissionType, FUserRoleType } from '../figma_app/191312'
 import { getFileIdFromPath, getFileKeyFromSelectedView, getSelectedViewName, getTeamIdFromPath, isRecentsAndSharingView, mapPathToSelectedView, selectedViewToPath } from '../figma_app/193867'
 import { randomizeSongStartTimes } from '../figma_app/198387'
-import { iT as _$$iT, Q3, xT } from '../figma_app/199513'
+import { updateFolderAccessAction, updateFolderSharingAudienceAction, updateFolderTeamAccessAction } from '../figma_app/199513'
 import { selectPermissionsState } from '../figma_app/212807'
 import { localVariablesAtom, localVariableSetsAtom, subscribedVariablesAtom, subscribedVariableSetsAtom, usedLibraryVariablesByKeyReduxAtom, usedLibraryVariableSetsByKeyReduxAtom } from '../figma_app/216057'
-import { wJ as _$$wJ } from '../figma_app/216696'
-import { N as _$$N9 } from '../figma_app/240060'
+import { setShelvesForShelfTypeAction } from '../figma_app/216696'
+import { OpenDesktopAppModal } from '../figma_app/240060'
 import { batchDeleteTeamMembers, batchJoinTeamAction, batchPutTeamAction, beginRenameTeamAction, changeDefaultPermissionAction, changeOrgAccessAction, changeSharingSettingsAction, deleteTeamAction, getTeamAction, joinTeamAction, postTeamAction, putTeamAction, renameTeamAction, setTeamCreationLoadingAction, setTeamMembersAction, setTeamOptimistThunk, stopRenameTeamAction } from '../figma_app/240735'
 import { updateTeamUserDesignPaidStatus } from '../figma_app/247343'
 import { NavigationPreferences, updateRightClickPanPreference, updateScrollWheelZoomPreference } from '../figma_app/253220'
-import { N as _$$N0 } from '../figma_app/268271'
+import { ModalPriority } from '../figma_app/268271'
 import { DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader, DialogTitle } from '../figma_app/272243'
 import { td as _$$td } from '../figma_app/273118'
-import { h as _$$h2 } from '../figma_app/275739'
+import { VoiceCallManager } from '../figma_app/275739'
 import { Gk } from '../figma_app/277330'
 import { useSubscription } from '../figma_app/288654'
 import { isCommunityOrUserPath, isUsingLocalBuild } from '../figma_app/298277'
 import { getPluginVersion } from '../figma_app/300692'
 import { g3 } from '../figma_app/304207'
-import { RR } from '../figma_app/307841'
+import { isCampfireModelEnabled } from '../figma_app/307841'
 import { clearEmojiState, startChattingAction, startReactingAction, stopReactingAction, toggleEmojiWheelAction, updateEmojiWheelPosition } from '../figma_app/308685'
 import { trackFileCopyEvent, trackFileEvent, trackRoleEvent, trackUserEvent } from '../figma_app/314264'
 import { dO as _$$dO2 } from '../figma_app/318123'
 import { getBackgroundColorByTheme, setIsSearchBarFocused, setLoadingBackgroundColor, setSearchQuery } from '../figma_app/327577'
 import { fetchDiscoverableTeamsAction, resetOrgTeams, setDiscoverableTeams, setOrgTeamsStatus } from '../figma_app/330108'
-import { M2 as _$$M3, Sp as _$$Sp, k3 } from '../figma_app/332085'
+import { deleteActiveUserPayment, realtimeActiveUserPayment, setActiveUserPayments } from '../figma_app/332085'
 import { orgSamlConfigGet, orgSamlConfigSet } from '../figma_app/342125'
 import { isAllowedPath, isChromebookTabbed, setupChromeOSListeners } from '../figma_app/347146'
 import { mapFileProperties } from '../figma_app/349248'
-import { fj } from '../figma_app/357047'
+import { appStateReducer } from '../figma_app/357047'
 import { getI18nState, reportTranslationIssue } from '../figma_app/363242'
 import { userTeamFlagPost, userTeamFlagReceiveDelete, userTeamFlagReceiveUpdate } from '../figma_app/375098'
 import { pluginDeleteLocal, pluginInitializeLocal, pluginUpdateLocal } from '../figma_app/378195'
@@ -426,12 +429,12 @@ import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } fro
 import { clearCursorActivityLogsAction, getActivityLogsAction, logFileSaveAs, setActivityLogsAction } from '../figma_app/401069'
 import { configureAutocomplete, messageWithCallbackManager, messageWithResponseManager, pageLoaded, relatedLinkCreated, relatedLinkRemoved, selectedLayerGuid, selectedPageGuid, sendCssProperties, sendFileName, sendHtmlSkeleton, sendLayers, sendMappingSuggestion, sendText, sendThumbnail } from '../figma_app/415217'
 import { isSyntheticTesterEmail, isValidEmail, isWorkDomainType } from '../figma_app/416935'
-import { b4 as _$$b5, _V } from '../figma_app/421886'
+import { primaryNodeTypes, searchOptions } from '../figma_app/421886'
 import { viewKeys } from '../figma_app/422062'
-import { hg as _$$hg } from '../figma_app/425489'
+import { inlinePreviewReducer } from '../figma_app/425489'
 import { parseOrgParentId } from '../figma_app/428858'
-import { h0, TP, Y3, zE } from '../figma_app/435872'
-import { PI as _$$PI, s6 as _$$s4, AY } from '../figma_app/443991'
+import { setAutosaveNextGarbageCollectionTimestamp, setAutosaveSnooze, setUnclaimedFiles, setupAutosaveIPCListeners } from '../figma_app/435872'
+import { initAvatarEditorAction, resetAvatarEditorAction, uploadAvatarAction } from '../figma_app/443991'
 import { fullscreenValue } from '../figma_app/455680'
 import { setLastUsedLeftPanelTab } from '../figma_app/457074'
 import { webGLColorSpaceManager } from '../figma_app/458300'
@@ -444,8 +447,8 @@ import { initPaymentAction, makeStudentTeamAction, restoreSavedCartAction, setBi
 import { clamp, randomBetween } from '../figma_app/492908'
 import { isEmptyObject } from '../figma_app/493477'
 import { tb as _$$tb, getOrgId, getRecentUserData, getSessionUserState, getTeamId, getUserState, kb, persistCommunityProfileId, setCommunityProfileId } from '../figma_app/502247'
-import { ih as _$$ih, l7 as _$$l } from '../figma_app/504640'
-import { up as _$$up2 } from '../figma_app/506364'
+import { isEmbedContext, isIframeIntegrationContext } from '../figma_app/504640'
+import { updateSpellCheckLanguageAndRefresh } from '../figma_app/506364'
 import { getUserCurrency } from '../figma_app/514043'
 import { Fi, YD } from '../figma_app/515363'
 import { openFileKeyAtom, selectCurrentFile } from '../figma_app/516028'
@@ -459,7 +462,6 @@ import { isFigmakeSitesEnabled } from '../figma_app/552876'
 import { deleteAllPlugins, deleteAllWidgets, mergePublishedPluginThunk, publishActionCreators, putAllPlugins, putAllWidgets, replaceFeaturedPluginAction, updateFetchedCanvasWidgetVersionsAction, updatePublishedCanvasWidgetVersionsAction } from '../figma_app/559491'
 import { getCurrentTeamId, hasTeamPermissions, sortItemsByOrder } from '../figma_app/598018'
 import { folderBatchPostAction, folderClearAction, folderDeleteAction, folderDeleteLgShimAction, folderLoadedAction, folderPinFileAction, folderPostAction, folderPutAction, folderPutUpdatedAtAction, folderSetPinnedFileAction, folderUnpinFileAction } from '../figma_app/598926'
-import { Dl as _$$Dl, i_ as _$$i_2 } from '../figma_app/610446'
 import { aZ as _$$aZ2 } from '../figma_app/613182'
 import { a as _$$a } from '../figma_app/620913'
 import { copyTextToClipboard } from '../figma_app/623293'
@@ -469,7 +471,7 @@ import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, has
 import { batchFetchFiles, clearTrackedState, dispatchDeleteLoadingStates, resetAllAsyncPromises } from '../figma_app/646357'
 import { DashboardSection, FigResourceType } from '../figma_app/650409'
 import { PAGINATION_NEXT, PAGINATION_PREV } from '../figma_app/661371'
-import { bp } from '../figma_app/678300'
+import { updateSelectionState } from '../figma_app/678300'
 import { chatStateTracker, performanceTracker, reportFullscreenPerfMetrics } from '../figma_app/682945'
 import { FileCreationPermissionsGenerator } from '../figma_app/687776'
 import { commitCreatedComment, commitDeletedComment, commitEditedComment, commitHideComment, editComment, resetCommentStatus, setShowResolved, submitComment } from '../figma_app/703138'
@@ -534,9 +536,12 @@ import { IK } from '../figma_app/991245'
 import { deleteOrgInviteAction, setIsCreatingOrgInvites, setOrgInvites } from '../figma_app/996356'
 import { fileBrowserPageManager } from '../figma_app/997907'
 import { A as _$$A12 } from '../svg/433566'
-import { GS } from '../vendor/61400'
 import rb from '../vendor/128080'
 import { suggestMappings } from '../vscode/70443'
+import { createLocalStorageAtom } from './42220'
+import { identitySelector } from './292282'
+import { atomStoreManager } from './490038'
+import { AtomProvider } from './577276'
 
 function m({
   children: e,
@@ -642,7 +647,7 @@ class G {
     let i = new G(t)
     let n = {}
     for (let r of e) {
-      if (UN(r, {
+      if (shouldShowMenuItem(r, {
         isDesktopMenu: !0,
         isReadOnly: !1,
         isSearching: !1,
@@ -664,14 +669,14 @@ class G {
   convertToDesktopItem(e) {
     return hasSeparator(e)
       ? {
-          type: 'separator',
-        }
+        type: 'separator',
+      }
       : hasChildrenOrDropdown(e) ? this.convertToDesktopMenuGroup(e) : hasHeader(e) || hasRenderFunction(e) ? null : e.action ? this.convertToDesktopActionItem(e) : this.convertToDesktopNonActionItem(e)
   }
 
   convertToDesktopMenuGroup(e) {
     let t = getActionOrName(e)
-    let i = (e.children ?? []).filter(e => UN(e, {
+    let i = (e.children ?? []).filter(e => shouldShowMenuItem(e, {
       isDesktopMenu: !0,
       isReadOnly: !1,
       isSearching: !1,
@@ -680,11 +685,11 @@ class G {
     return i.length === 0 || i.every(e => e.type === 'separator')
       ? null
       : {
-          type: 'submenu',
-          key: t,
-          label: this.getLabel(t, e),
-          children: i,
-        }
+        type: 'submenu',
+        key: t,
+        label: this.getLabel(t, e),
+        children: i,
+      }
   }
 
   convertToDesktopActionItem(e) {
@@ -703,10 +708,10 @@ class G {
     let t = getActionOrName(e)
     return FullscreenMenu.isNonActionItemKey(t)
       ? {
-          type: 'non-action-item',
-          key: t,
-          label: this.getLabel(t, e),
-        }
+        type: 'non-action-item',
+        key: t,
+        label: this.getLabel(t, e),
+      }
       : null
   }
 
@@ -714,14 +719,14 @@ class G {
     let i = t.displayText ?? formatI18nMessage(e, t.args)
     return this.options.isEnLocale
       ? (function (e) {
-          let t = e.split(' ')
-          for (let e = 1; e < t.length - 1; e++) {
-            let i = t[e]
-            !H.has(i) && i.length > 0 && (t[e] = z(i))
-          }
-          t.length > 1 && (t[t.length - 1] = z(t[t.length - 1]))
-          return t.join(' ')
-        }(i))
+        let t = e.split(' ')
+        for (let e = 1; e < t.length - 1; e++) {
+          let i = t[e]
+          !H.has(i) && i.length > 0 && (t[e] = z(i))
+        }
+        t.length > 1 && (t[t.length - 1] = z(t[t.length - 1]))
+        return t.join(' ')
+      }(i))
       : i
   }
 }
@@ -735,7 +740,7 @@ let Z = atom((e) => {
   return t == null ? null : t === ColorProfileEnum.DISPLAY_P3 ? 'display-p3' : 'srgb'
 })
 let X = createReduxSubscriptionAtomWithState(e => e.isOpenFileLoadedFromLiveGraph)
-let Q = _$$tP(atom((e) => {
+let Q = identitySelector(atom((e) => {
   let t = e(openFileKeyAtom)
   return t == null ? null : [t, e(X)]
 }))
@@ -749,7 +754,7 @@ let es = '__figma.embed.test.cookie__'
 let eo = null
 async function el() {
   try {
-    if (!_$$l() && !_$$ih()) {
+    if (!isEmbedContext() && !isIframeIntegrationContext()) {
       logDebug('[rehydrateStorageAccessIfNeeded]', 'Not an embed. Skip.')
       return
     }
@@ -1097,8 +1102,8 @@ function eJ({
       ? l(t)
       : p && initCompleted
         ? l(jsx(Fragment, {
-            children: jsx(xZ, {}),
-          }))
+          children: jsx(xZ, {}),
+        }))
         : m && initCompleted
           ? l(t)
           : initCompleted && l(jsx(Fragment, {
@@ -1137,7 +1142,7 @@ function e0(e) {
       initStarted: r,
       statsigPromise: null,
       userVersion: t,
-      updateUser: () => {},
+      updateUser: () => { },
     }), [a, i, r, t])
   }())
   return (!(function (e) {
@@ -1205,20 +1210,20 @@ function e0(e) {
     planKey,
   })), getFeatureFlags().statsig_suspend)
     ? jsx(StatsigContext.Provider, {
-        value: l,
-        children: jsx(Suspense, {
-          fallback,
-          children,
-        }),
-      })
+      value: l,
+      children: jsx(Suspense, {
+        fallback,
+        children,
+      }),
+    })
     : jsx(StatsigContext.Provider, {
-        value: l,
-        children: jsx(eJ, {
-          contextValue: l,
-          fallback: e.fallback,
-          children,
-        }),
-      })
+      value: l,
+      children: jsx(eJ, {
+        contextValue: l,
+        fallback: e.fallback,
+        children,
+      }),
+    })
 }
 function e1({
   children: e,
@@ -1516,37 +1521,37 @@ let t_ = e => t => async function (i) {
     let s = validateSignInForm(a)
     s.message
       ? (n.auth.formState === AuthFlowStep.VERIFY_HUMAN && n.auth.prevForm !== AuthFlowStep.VERIFY_HUMAN && e.dispatch(changeAuthFormState({
-          formState: n.auth.prevForm,
-        })), e.dispatch(AUTH_SHOW_ERROR({
-          message: s.message,
-          invalidInput: s.invalidInput,
-        })))
+        formState: n.auth.prevForm,
+      })), e.dispatch(AUTH_SHOW_ERROR({
+        message: s.message,
+        invalidInput: s.invalidInput,
+      })))
       : (a.username = a.email.trim(), sendWithRetry.post('/api/session/login', a).then(({
+        data: t,
+      }) => {
+        e.dispatch(handleAuthSuccess({
           data: t,
-        }) => {
-          e.dispatch(handleAuthSuccess({
+        }))
+      }).catch((t) => {
+        resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401
+          ? (a.modality = 'login', a.cont = n.auth.redirectUrl, sendWithRetry.post('/api/session/request_magic_link', a).then(({
             data: t,
+          }) => {
+            trackAuthEvent('magic_link_request_success', n.auth.origin, {
+              modality: 'login',
+              user_id: t?.meta?.id,
+            })
+            e.dispatch(changeAuthFormState({
+              formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
+              userId: t.meta.id,
+            }))
+          }).catch(t => e.dispatch(handleAuthError({
+            resp: t,
+          }))))
+          : e.dispatch(handleAuthError({
+            resp: t,
           }))
-        }).catch((t) => {
-          resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401
-            ? (a.modality = 'login', a.cont = n.auth.redirectUrl, sendWithRetry.post('/api/session/request_magic_link', a).then(({
-                data: t,
-              }) => {
-                trackAuthEvent('magic_link_request_success', n.auth.origin, {
-                  modality: 'login',
-                  user_id: t?.meta?.id,
-                })
-                e.dispatch(changeAuthFormState({
-                  formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
-                  userId: t.meta.id,
-                }))
-              }).catch(t => e.dispatch(handleAuthError({
-                resp: t,
-              }))))
-            : e.dispatch(handleAuthError({
-                resp: t,
-              }))
-        }), e.dispatch(AUTH_SET_AUTH_LOADING()))
+      }), e.dispatch(AUTH_SET_AUTH_LOADING()))
     return t(i)
   }
   if (AUTH_SEND_PASSWORD_RESET.matches(i)) {
@@ -1576,7 +1581,7 @@ let t_ = e => t => async function (i) {
     let r = document.getElementById(i.payload.formId)
     let a = extractFormValues(r)
     a.email = a.email.trim()
-    isValidEmail(a.email) && _$$k3.getSaml({
+    isValidEmail(a.email) && samlAuthenticationService.getSaml({
       email: a.email,
     }).then(({
       data: e,
@@ -1589,22 +1594,22 @@ let t_ = e => t => async function (i) {
     }).catch((t) => {
       resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401
         ? (trackAuthEvent('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, sendWithRetry.post('/api/session/request_magic_link', a).then(({
-            data: t,
-          }) => {
-            trackAuthEvent('magic_link_request_success', n.auth.origin, {
-              modality: 'either',
-              user_id: t?.meta?.id,
-            })
-            e.dispatch(changeAuthFormState({
-              formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
-              userId: t.meta.id,
-            }))
-          }).catch(t => e.dispatch(handleAuthError({
-            resp: t,
-          }))))
-        : e.dispatch(handleAuthError({
-            resp: t,
+          data: t,
+        }) => {
+          trackAuthEvent('magic_link_request_success', n.auth.origin, {
+            modality: 'either',
+            user_id: t?.meta?.id,
+          })
+          e.dispatch(changeAuthFormState({
+            formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
+            userId: t.meta.id,
           }))
+        }).catch(t => e.dispatch(handleAuthError({
+          resp: t,
+        }))))
+        : e.dispatch(handleAuthError({
+          resp: t,
+        }))
     })
     e.dispatch(AUTH_SET_AUTH_LOADING())
     return t(i)
@@ -1616,12 +1621,12 @@ let t_ = e => t => async function (i) {
     }) => {
       t.meta.org_saml_config
         ? (trackAuthEvent('saml_gate_redirect_success', n.auth.origin), redirectWithContinuation({
-            url: t.meta.org_saml_config.sp_sso_target_url,
-            cont: n.auth.redirectUrl,
-          }))
+          url: t.meta.org_saml_config.sp_sso_target_url,
+          cont: n.auth.redirectUrl,
+        }))
         : e.dispatch(AUTH_SHOW_ERROR({
-            message: getI18nString('auth.sso-gate.invalid-session'),
-          }))
+          message: getI18nString('auth.sso-gate.invalid-session'),
+        }))
     }).catch(t => e.dispatch(handleAuthError({
       resp: t,
     })))
@@ -1637,35 +1642,35 @@ let t_ = e => t => async function (i) {
       trackAuthEvent('email_only_success', n.auth.origin)
       t.meta.account_type === 'guest'
         ? e.dispatch(changeAuthFormState({
-            formState: t.meta.existing_user ? AuthFlowStep.SIGN_IN : AuthFlowStep.SIGN_UP,
-          }))
+          formState: t.meta.existing_user ? AuthFlowStep.SIGN_IN : AuthFlowStep.SIGN_UP,
+        }))
         : n.auth.ssoMethod === AuthProvider.SAML
           ? redirectWithContinuation({
-              url: t.meta.org_saml_config.sp_sso_target_url,
-              cont: n.auth.redirectUrl,
-            })
+            url: t.meta.org_saml_config.sp_sso_target_url,
+            cont: n.auth.redirectUrl,
+          })
           : e.dispatch(changeAuthFormState({
-              formState: AuthFlowStep.SSO_GATE,
-            }))
+            formState: AuthFlowStep.SSO_GATE,
+          }))
     }).catch((t) => {
       resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401
         ? (a.modality = 'either', a.cont = n.auth.redirectUrl, sendWithRetry.post('/api/session/request_magic_link', a).then(({
-            data: t,
-          }) => {
-            trackAuthEvent('magic_link_request_success', n.auth.origin, {
-              modality: 'either',
-              user_id: t?.meta?.id,
-            })
-            e.dispatch(changeAuthFormState({
-              formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
-              userId: t.meta.id,
-            }))
-          }).catch(t => e.dispatch(handleAuthError({
-            resp: t,
-          }))))
-        : e.dispatch(handleAuthError({
-            resp: t,
+          data: t,
+        }) => {
+          trackAuthEvent('magic_link_request_success', n.auth.origin, {
+            modality: 'either',
+            user_id: t?.meta?.id,
+          })
+          e.dispatch(changeAuthFormState({
+            formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
+            userId: t.meta.id,
           }))
+        }).catch(t => e.dispatch(handleAuthError({
+          resp: t,
+        }))))
+        : e.dispatch(handleAuthError({
+          resp: t,
+        }))
     })
     return t(i)
   }
@@ -1677,15 +1682,15 @@ let t_ = e => t => async function (i) {
     let a = extractFormValues(r)
     a.password !== a.password_retype
       ? e.dispatch(AUTH_SHOW_ERROR({
-          message: getI18nString('auth.reset-password.password-retype-error'),
-          invalidInput: AuthField.PASSWORD,
-        }))
-      : sendWithRetry.post('/api/password/recover', a).then(({}) => {
-          trackAuthEvent('reset_password_success', n.auth.origin)
-          e.dispatch(AUTH_COMPLETE())
-        }).catch(t => e.dispatch(handleAuthError({
-          resp: t,
-        })))
+        message: getI18nString('auth.reset-password.password-retype-error'),
+        invalidInput: AuthField.PASSWORD,
+      }))
+      : sendWithRetry.post('/api/password/recover', a).then(({ }) => {
+        trackAuthEvent('reset_password_success', n.auth.origin)
+        e.dispatch(AUTH_COMPLETE())
+      }).catch(t => e.dispatch(handleAuthError({
+        resp: t,
+      })))
   }
   else if (AUTH_SHOW_ERROR.matches(i)) {
     trackAuthEvent('error', n.auth.origin, {
@@ -1696,9 +1701,9 @@ let t_ = e => t => async function (i) {
     let r = i.payload.message
     i.payload.errorType === AuthErrorCode.UNAUTHORIZED || (i.payload.errorType == AuthErrorCode.SAML_REQUIRED
       ? e.dispatch(changeAuthFormState({
-          formState: AuthFlowStep.SAML_START,
-          errorMessage: r,
-        }))
+        formState: AuthFlowStep.SAML_START,
+        errorMessage: r,
+      }))
       : i.payload.errorType === AuthErrorCode.MAGIC_LINK_LOGIN_NO_ACCOUNT && e.dispatch(changeAuthFormState({
         formState: AuthFlowStep.SIGN_UP,
         errorMessage: r,
@@ -1922,7 +1927,7 @@ function iv() {
   try {
     webGLColorSpaceManager.onFrame()
   }
-  catch (e) {}
+  catch (e) { }
   fullscreenValue?.onFrame()
   getFeatureFlags()?.comments_react || clusteredPinsInstance?.onFrame()
   perfTimerFrameManagerBindings?.startProfile('redux-frame-handler', 100)
@@ -1997,34 +2002,34 @@ let iz = e => t => function (i) {
           l
             ? n
               ? e.dispatch(VisualBellActions.enqueue({
-                  type: 'file_deleted',
-                  message: getI18nString('file_browser.file_browser_actions.branch_archived'),
-                  button: {
-                    text: getI18nString('general.undo'),
-                    action: d,
-                  },
-                }))
+                type: 'file_deleted',
+                message: getI18nString('file_browser.file_browser_actions.branch_archived'),
+                button: {
+                  text: getI18nString('general.undo'),
+                  action: d,
+                },
+              }))
               : e.dispatch(VisualBellActions.enqueue({
-                  type: 'file_deleted',
-                  message: getI18nString('file_browser.file_browser_actions.branch_deleted'),
-                }))
+                type: 'file_deleted',
+                message: getI18nString('file_browser.file_browser_actions.branch_deleted'),
+              }))
             : r || (n
               ? e.dispatch(VisualBellActions.enqueue({
-                  type: 'file_deleted',
-                  message: getI18nString('file_browser.file_browser_actions.files_trashed', {
-                    numFiles: s.length,
-                  }),
-                  button: {
-                    text: getI18nString('general.undo'),
-                    action: d,
-                  },
-                }))
+                type: 'file_deleted',
+                message: getI18nString('file_browser.file_browser_actions.files_trashed', {
+                  numFiles: s.length,
+                }),
+                button: {
+                  text: getI18nString('general.undo'),
+                  action: d,
+                },
+              }))
               : e.dispatch(VisualBellActions.enqueue({
-                  type: 'file_deleted',
-                  message: getI18nString('file_browser.file_browser_actions.files_deleted_forever', {
-                    numFiles: s.length,
-                  }),
-                })))
+                type: 'file_deleted',
+                message: getI18nString('file_browser.file_browser_actions.files_deleted_forever', {
+                  numFiles: s.length,
+                }),
+              })))
           i.payload.onSuccessCallback && i.payload.onSuccessCallback()
           t({
             type: null,
@@ -2380,7 +2385,7 @@ let i6 = e => t => function (i) {
   }
   return t(i)
 }
-let nr = [registerFollowsListModal.type, S3, F0.type, PluginPublishModal.type]
+let nr = [registerFollowsListModal.type, CHANGE_PROFILE_HANDLE_MODAL_TYPE, F0.type, PluginPublishModal.type]
 let na = async (e) => {
   await _$$tb.promise
   let {
@@ -2449,11 +2454,11 @@ let ng = e => t => function (i) {
       isInFullscreen,
       currentFileKey,
     } = n.selectedView?.view === 'fullscreen'
-      ? {
+        ? {
           isInFullscreen: !0,
           currentFileKey: n.selectedView.fileKey,
         }
-      : {
+        : {
           isInFullscreen: !1,
           currentFileKey: void 0,
         }
@@ -2461,11 +2466,11 @@ let ng = e => t => function (i) {
       isEnteringFullscreen,
       newFileKey,
     } = i.payload.view === 'fullscreen'
-      ? {
+        ? {
           isEnteringFullscreen: !0,
           newFileKey: i.payload.fileKey,
         }
-      : {
+        : {
           isEnteringFullscreen: !1,
           newFileKey: void 0,
         };
@@ -2652,7 +2657,7 @@ let nS = e => t => function (i) {
           thumbnail: e,
         })
       }
-    }).catch((e) => {})
+    }).catch((e) => { })
   }
   else if (beginBranchMerge.matches(i)) {
     desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(MergeState.MERGING)
@@ -2704,23 +2709,23 @@ let nK = registerModal((e) => {
       }), jsx(DialogBody, {
         children: (t = e.result, desktopAPIInstance && t !== WebGLTestResult.SUCCESS
           ? jsxs('p', {
-              children: [renderI18nText('webgl_error.message.we_cant_open_this_file_webgl_trouble'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.if_this_problem_persists')],
-            })
+            children: [renderI18nText('webgl_error.message.we_cant_open_this_file_webgl_trouble'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.if_this_problem_persists')],
+          })
           : t === WebGLTestResult.NO_WEBGL
             ? jsx('p', {
-                children: renderI18nText('webgl_error.message.webgl_disabled', {
-                  helpArticleLink: jsx(Link, {
-                    newTab: !0,
-                    href: 'https://help.figma.com/hc/articles/360039828614',
-                    trusted: !0,
-                    children: renderI18nText('webgl_error.message.this_help_article_link'),
-                  }),
+              children: renderI18nText('webgl_error.message.webgl_disabled', {
+                helpArticleLink: jsx(Link, {
+                  newTab: !0,
+                  href: 'https://help.figma.com/hc/articles/360039828614',
+                  trusted: !0,
+                  children: renderI18nText('webgl_error.message.this_help_article_link'),
                 }),
-              })
+              }),
+            })
             : t === WebGLTestResult.STENCIL_TEST_FAILURE
               ? jsxs('span', {
-                  children: [renderI18nText('webgl_error.message.browser_bug'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.figma_is_working_with_the_browser_developers')],
-                })
+                children: [renderI18nText('webgl_error.message.browser_bug'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.figma_is_working_with_the_browser_developers')],
+              })
               : void 0),
       }), jsx(DialogFooter, {
         children: jsx(DialogActionStrip, {
@@ -2765,11 +2770,11 @@ let nQ = e => t => function (i) {
     if (a.view === 'fullscreen' && a.fileKey && !(r.view === 'fullscreen' && r.fileKey === a.fileKey) && _$$tG().getAllVideoUrls(), a.view === 'fullscreen' && (fullscreenValue.isReady()
       ? (nq(a), n$(a), nZ(a), nX(a))
       : fullscreenValue.onReady().then(() => {
-          nq(a)
-          n$(a)
-          nZ(a)
-          nX(a)
-        })), r.view === 'fullscreen' && a.view !== 'fullscreen') {
+        nq(a)
+        n$(a)
+        nZ(a)
+        nX(a)
+      })), r.view === 'fullscreen' && a.view !== 'fullscreen') {
       e.dispatch(closeFullscreenThunk())
     }
     else if (r.view !== 'fullscreen' && a.view === 'fullscreen') {
@@ -2794,16 +2799,16 @@ let nQ = e => t => function (i) {
           })
           r.view === 'desktopNewTab'
             ? initializeFullscreenForNewFile(e, a.editorType, !0).then(async () => {
-                if (!n.fileByKey[t]) {
-                  let i = await fileApiHandler.getFiles({
-                    fileKey: t,
-                  })
-                  e.dispatch(filePutAction({
-                    file: i.data.meta,
-                  }))
-                }
-                i()
-              })
+              if (!n.fileByKey[t]) {
+                let i = await fileApiHandler.getFiles({
+                  fileKey: t,
+                })
+                e.dispatch(filePutAction({
+                  file: i.data.meta,
+                }))
+              }
+              i()
+            })
             : i()
         }
         else {
@@ -2881,19 +2886,19 @@ let nQ = e => t => function (i) {
         a.editorType === FEditorType.DevHandoff
           ? (e.dispatch(closeUniversalInsertModal()), e.dispatch(hideModal()), t && fullscreenValue.onReady().then(() => fullscreenValue.triggerAction('set-tool-comments')))
           : (a.editorType === FEditorType.Design && (r.editorType === FEditorType.Illustration || r.editorType === FEditorType.DevHandoff) || a.editorType === FEditorType.Illustration && (r.editorType === FEditorType.Design || r.editorType === FEditorType.DevHandoff)) && (e.dispatch(hideModal()), fullscreenValue.onReady().then(() => {
-              t && fullscreenValue.triggerAction('set-tool-comments')
-              let i = e.getState()
-              let n = !!i.openFile?.canEdit
-              let r = AppStateTsApi?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? DesignWorkspace.DESIGN
-              let a = n ? [DesignWorkspace.DESIGN, DesignWorkspace.PROTOTYPE] : [DesignWorkspace.INSPECT, DesignWorkspace.EXPORT]
-              if (t) {
-                setPropertiesPanelTab(DesignWorkspace.COMMENT)
-              }
-              else if (!a.includes(r)) {
-                let e = n ? DesignWorkspace.DESIGN : DesignWorkspace.INSPECT
-                setPropertiesPanelTab(e)
-              }
-            }))
+            t && fullscreenValue.triggerAction('set-tool-comments')
+            let i = e.getState()
+            let n = !!i.openFile?.canEdit
+            let r = AppStateTsApi?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? DesignWorkspace.DESIGN
+            let a = n ? [DesignWorkspace.DESIGN, DesignWorkspace.PROTOTYPE] : [DesignWorkspace.INSPECT, DesignWorkspace.EXPORT]
+            if (t) {
+              setPropertiesPanelTab(DesignWorkspace.COMMENT)
+            }
+            else if (!a.includes(r)) {
+              let e = n ? DesignWorkspace.DESIGN : DesignWorkspace.INSPECT
+              setPropertiesPanelTab(e)
+            }
+          }))
       }
       else {
         fullscreenAlias.getIsExtension() && r.editorType === FEditorType.DevHandoff && a.nodeId && a.nodeId !== r.nodeId && SceneGraphHelpers?.setSelectedNodeAndCanvas(a.nodeId, !1)
@@ -2902,8 +2907,8 @@ let nQ = e => t => function (i) {
         let e = Jj()
         e
           ? fullscreenValue.onReady().then(() => {
-              e.updateCommentsMode && (fullscreenValue.triggerAction('set-tool-comments'), e.updateCommentsMode(!0))
-            })
+            e.updateCommentsMode && (fullscreenValue.triggerAction('set-tool-comments'), e.updateCommentsMode(!0))
+          })
           : fullscreenValue.onReady().then(() => fullscreenValue.triggerAction('set-tool-comments'))
       }
     }
@@ -2916,10 +2921,10 @@ let nQ = e => t => function (i) {
         let n = t.openFile != null ? getRepoByIdAlt(t.openFile, t.repos) : null
         isBranchAlt(t.openFile) && n?.default_file_key
           ? e.dispatch(selectViewAction({
-              view: 'fullscreen',
-              fileKey: n.default_file_key,
-              editorType: FEditorType.Design,
-            }))
+            view: 'fullscreen',
+            fileKey: n.default_file_key,
+            editorType: FEditorType.Design,
+          }))
           : desktopAPIInstance
             ? i.payload.userInitiated || customHistory.reload('File deleted', {
               key: t.openFile?.key || null,
@@ -2971,66 +2976,46 @@ function ry({
     },
     children: [A
       ? jsx(SubscriptionFileViewHeader, {
-          libraryStat: A,
-          libraryKey: I.libraryKey,
-          showingDefaultSubscriptionsForTeamId: null,
-          showingDefaultSubscriptionsForUser: !1,
-          showingDefaultSubscriptionsForOrg: c,
-          canEditSubscriptions: e,
-          onBackToList: r,
-        })
+        libraryStat: A,
+        libraryKey: I.libraryKey,
+        showingDefaultSubscriptionsForTeamId: null,
+        showingDefaultSubscriptionsForUser: !1,
+        showingDefaultSubscriptionsForOrg: c,
+        canEditSubscriptions: e,
+        onBackToList: r,
+      })
       : jsx(MissingLibrariesHeader, {
-          backToList: r,
-          numMissingLibraries: 1,
-        }), jsx(_$$S4, {
-      selectedDuration: m,
-      onSelectDuration: h,
-      shownView: u,
-      onSelectShownView: l,
-      selectedAssetType: f,
-      onSelectAssetType: _,
-      libraryFile: t,
-      tabManager: v,
-      tabProps: y,
-    }), getFeatureFlags().dse_fpl_wave_1
+        backToList: r,
+        numMissingLibraries: 1,
+      }), jsx(LibraryViewTabs, {
+        selectedDuration: m,
+        onSelectDuration: h,
+        shownView: u,
+        onSelectShownView: l,
+        selectedAssetType: f,
+        onSelectAssetType: _,
+        libraryFile: t,
+        tabManager: v,
+        tabProps: y,
+      }), getFeatureFlags().dse_fpl_wave_1
       ? jsxs('div', {
-          className: cssBuilderInstance.minH0.$,
-          children: [jsx(Tabs.TabPanel, {
-            ...b.overview,
-            height: 'fill',
-            children: jsx(LibraryOverviewView, {
-              duration: m,
-              entrypoint: FileOrgViewMode.OrgView,
-              file: t,
-              onItemClick: a,
-              width: p,
-            }),
-          }), jsx(Tabs.TabPanel, {
-            ...b.analytics,
-            height: 'fill',
-            children: jsx(_$$O2, {
-              duration: m,
-              assetType: f,
-              entrypoint: FileOrgViewMode.OrgView,
-              libraryFile: t,
-              libraries: i,
-              onComponentClick: a,
-              onStyleClick: s,
-              onVariableClick: o,
-              width: p,
-            }),
-          })],
-        })
-      : jsxs(Fragment, {
-          children: [u === OverviewCategory.OVERVIEW && jsx(LibraryOverviewView, {
+        className: cssBuilderInstance.minH0.$,
+        children: [jsx(Tabs.TabPanel, {
+          ...b.overview,
+          height: 'fill',
+          children: jsx(LibraryOverviewView, {
             duration: m,
             entrypoint: FileOrgViewMode.OrgView,
             file: t,
             onItemClick: a,
             width: p,
-          }), u === OverviewCategory.ANALYTICS && jsx(_$$O2, {
-            assetType: f,
+          }),
+        }), jsx(Tabs.TabPanel, {
+          ...b.analytics,
+          height: 'fill',
+          children: jsx(_$$O2, {
             duration: m,
+            assetType: f,
             entrypoint: FileOrgViewMode.OrgView,
             libraryFile: t,
             libraries: i,
@@ -3038,8 +3023,28 @@ function ry({
             onStyleClick: s,
             onVariableClick: o,
             width: p,
-          })],
+          }),
         })],
+      })
+      : jsxs(Fragment, {
+        children: [u === OverviewCategory.OVERVIEW && jsx(LibraryOverviewView, {
+          duration: m,
+          entrypoint: FileOrgViewMode.OrgView,
+          file: t,
+          onItemClick: a,
+          width: p,
+        }), u === OverviewCategory.ANALYTICS && jsx(_$$O2, {
+          assetType: f,
+          duration: m,
+          entrypoint: FileOrgViewMode.OrgView,
+          libraryFile: t,
+          libraries: i,
+          onComponentClick: a,
+          onStyleClick: s,
+          onVariableClick: o,
+          width: p,
+        })],
+      })],
   })
 }
 let rH = 'dsa_file_row--numColVal--bT1UJ library_modal_stats--numCol---FbhI'
@@ -3055,9 +3060,9 @@ function rW({
   recordingKey: d,
   viewFile: c,
 }) {
-  let u = _$$b3(i, r, a, o)
+  let u = isEqualZero(i, r, a, o)
   let p = createFileLibraryKeys(e.key, getLibraryKeyWithReport(e))
-  let m = _$$S5({
+  let m = useLibraryFileExpanded({
     disabled: u,
     libraryIdentifier: p,
     fileName: e.name,
@@ -3086,20 +3091,20 @@ function rW({
       })],
     }), jsx(FileRowRight, {
       children: t
-        ? jsx(_$$I2, {
-            numComponents: i,
-            numStateGroups: r,
-            numStyles: a,
-            numVariables: s,
-            numVariableCollections: o,
-          })
+        ? jsx(formatLibraryCounts, {
+          numComponents: i,
+          numStateGroups: r,
+          numStyles: a,
+          numVariables: s,
+          numVariableCollections: o,
+        })
         : jsx(rK, {
-            numComponents: i,
-            numStateGroups: r,
-            numStyles: a,
-            numVariables: s,
-            numInserts: l,
-          }),
+          numComponents: i,
+          numStateGroups: r,
+          numStyles: a,
+          numVariables: s,
+          numInserts: l,
+        }),
     })],
   })
 }
@@ -3126,8 +3131,8 @@ function rK({
       className: rH,
       children: s
         ? getI18nString('design_systems.libraries_modal.plural.num_component', {
-            numComponents: a,
-          })
+          numComponents: a,
+        })
         : a.toLocaleString(),
     })],
   })
@@ -3186,7 +3191,7 @@ function rY({
             onItemClick: s,
           })],
         }, i.key)
-      }), m && jsx(_$$p4, {})],
+      }), m && jsx(LibrariesEmptyState, {})],
     })],
   })
 }
@@ -3286,31 +3291,31 @@ function r0({
   let S = !!_?.workspaces_count
   let w = useMemo(() => S
     ? {
-        type: 'org',
-      }
+      type: 'org',
+    }
     : null, [S])
   let [C, T] = useState(w)
   let k = useMemo(() => !isSearching && (C?.type === 'workspace' || C?.type === 'drafts' || C?.type === 'unassigned'), [C, isSearching])
   let R = S && C?.type === 'org'
     ? jsx(LibraryFilterRows, {
-        libraryFiles: x,
-        allLibrariesViewFilterStates: [C],
-        handleLibrariesViewFilterChange: T,
-        showingDefaultSubscriptionsForUser: !1,
-        isSearching,
-      })
+      libraryFiles: x,
+      allLibrariesViewFilterStates: [C],
+      handleLibrariesViewFilterChange: T,
+      showingDefaultSubscriptionsForUser: !1,
+      isSearching,
+    })
     : jsx(rY, {
-        currentLibrariesViewFilterState: C,
-        debouncedSearchQuery,
-        fileByKey,
-        isSearching,
-        libraryFiles: x,
-        onItemClick: r,
-        sortBy: E,
-        sortState: v,
-        viewFile: i,
-        width: a,
-      })
+      currentLibrariesViewFilterState: C,
+      debouncedSearchQuery,
+      fileByKey,
+      isSearching,
+      libraryFiles: x,
+      onItemClick: r,
+      sortBy: E,
+      sortState: v,
+      viewFile: i,
+      width: a,
+    })
   let N = isSearching && libraryFiles.length === 0
   let P = useMemo(() => isEqual()(C, w) ? 'dsa:list_view' : 'dsa:list_view:filtered', [C, w])
   return jsxs('div', {
@@ -3538,7 +3543,7 @@ function r7({
           }),
         }), m && jsx('div', {
           className: u ? r6 : r3,
-          children: jsx(_$$v2, {
+          children: jsx(StateGroupView, {
             stateGroup: m,
             onBackClick: w,
             onItemClick: R,
@@ -3546,7 +3551,7 @@ function r7({
           }),
         }), u && jsx('div', {
           className: r3,
-          children: jsx(_$$E5, {
+          children: jsx(ComponentDrilldownView, {
             component: u,
             onBackClick: C,
             width: t,
@@ -3583,7 +3588,7 @@ let ar = () => ({
   [navigationRoutes.PLUGINS]: getI18nString('org_view.plugins'),
   [navigationRoutes.WIDGETS]: getI18nString('org_view.widgets'),
 })
-class aa extends TabWithRecording {}
+class aa extends TabWithRecording { }
 let as = registerModal((e) => {
   let t = useDispatch<AppDispatch>()
   let i = getSelectedView()
@@ -3626,8 +3631,8 @@ let as = registerModal((e) => {
         let t = getFeatureFlags().disable_org_dsa
           ? []
           : [{
-              view: navigationRoutes.LIBRARIES,
-            }]
+            view: navigationRoutes.LIBRARIES,
+          }]
         c || t.push({
           view: navigationRoutes.FONTS,
         })
@@ -3658,9 +3663,9 @@ let as = registerModal((e) => {
               return getFeatureFlags().disable_org_dsa
                 ? null
                 : jsx(r7, {
-                    org: r,
-                    width: an,
-                  })
+                  org: r,
+                  width: an,
+                })
             case navigationRoutes.FONTS:
               return jsx(SharedFontsComponent, {
                 dispatch: t,
@@ -3695,16 +3700,16 @@ let ao = e => t => function (i) {
   }
   selectViewAction.matches(i) && (i.payload.view === 'org'
     ? (i.payload.orgViewTab === 'libraries' && e.dispatch(showModalHandler({
-        type: as,
-        data: {
-          tab: navigationRoutes.LIBRARIES,
-        },
-      })), i.payload.orgViewTab === 'fonts' && e.dispatch(showModalHandler({
-        type: as,
-        data: {
-          tab: navigationRoutes.FONTS,
-        },
-      })))
+      type: as,
+      data: {
+        tab: navigationRoutes.LIBRARIES,
+      },
+    })), i.payload.orgViewTab === 'fonts' && e.dispatch(showModalHandler({
+      type: as,
+      data: {
+        tab: navigationRoutes.FONTS,
+      },
+    })))
     : i.payload.view === 'orgAdminSettings' && i.payload.teamsTabAssetTransferRequest && e.dispatch(showModalHandler({
       type: getHandleAssetTransferRequestModal(),
       data: {
@@ -3718,16 +3723,16 @@ let ac = e => t => function (i) {
   if (selectViewAction.matches(i) && (i.payload.view === 'teamUpgrade' || i.payload.view === 'promoReview' || i.payload.view === 'eduReview')) {
     let r = i.payload.teamId
     if (!r) {
-      _$$p5(n.selectedView, n.payment)
+      isEligibleForPromoReviewOrTeamUpgradeWithPromo(n.selectedView, n.payment)
         ? e.dispatch(initPaymentAction({
-            numDesignEditors: 0,
-            numWhiteboardEditors: 0,
-            billingPeriod: SubscriptionType.MONTHLY,
-          }))
+          numDesignEditors: 0,
+          numWhiteboardEditors: 0,
+          billingPeriod: SubscriptionType.MONTHLY,
+        }))
         : i.payload.view === 'teamUpgrade' && i.payload.billingPeriod
           ? e.dispatch(setBillingPeriodAction({
-              billingPeriod: i.payload.billingPeriod,
-            }))
+            billingPeriod: i.payload.billingPeriod,
+          }))
           : i.payload.view === 'eduReview' && e.dispatch(setBillingPeriodAction({
             billingPeriod: SubscriptionType.STUDENT,
           }))
@@ -3775,7 +3780,7 @@ let aT = new RealtimeSubscriptionManager({
   ...meChannelHandler,
   livegraphView: CommunityPaymentsForRealtimeShim,
   livegraphArgs: () => ({}),
-  convertLivegraphMessage: (e, t, {}, i) => (function (e, t) {
+  convertLivegraphMessage: (e, t, { }, i) => (function (e, t) {
     let i = []
     let n = e.getState().communityPayments
     let r = new Map()
@@ -3865,38 +3870,38 @@ function aF(e, t) {
         break
       case 'post':
       case 'put':
-      {
-        let r = {}
-        for (let e of i) r[e.node_id] = e
-        e.dispatch(putProductComponentsThunk({
-          itemsById: r,
-          fileKey: u.key,
-          libraryKey: u.library_key,
-          teamId: u.team_id,
-          type: n,
-        }))
-        e.dispatch(setLibraryUpdatesBannerDismissed({
-          libraryUpdatesBannerDismissed: !1,
-        }))
-        t.component && e.getState().selectedView?.view === 'fullscreen' && setTimeout(() => {
-          let {
-            updateCount,
-          } = atomStoreManager.get(_$$WJ)
-          updateCount && trackEventAnalytics('component_update_from_realtime', {
-            updateCount,
-            isShimFFEnabled: !0,
-          })
-        }, 1e3)
-        t.state_group && e.getState().selectedView?.view === 'fullscreen' && setTimeout(() => {
-          let {
-            updateCount,
-          } = atomStoreManager.get(_$$WJ)
-          updateCount && trackEventAnalytics('state_group_update_from_realtime', {
-            updateCount,
-            isShimFFEnabled: !0,
-          })
-        }, 1e3)
-      }
+        {
+          let r = {}
+          for (let e of i) r[e.node_id] = e
+          e.dispatch(putProductComponentsThunk({
+            itemsById: r,
+            fileKey: u.key,
+            libraryKey: u.library_key,
+            teamId: u.team_id,
+            type: n,
+          }))
+          e.dispatch(setLibraryUpdatesBannerDismissed({
+            libraryUpdatesBannerDismissed: !1,
+          }))
+          t.component && e.getState().selectedView?.view === 'fullscreen' && setTimeout(() => {
+            let {
+              updateCount,
+            } = atomStoreManager.get(_$$WJ)
+            updateCount && trackEventAnalytics('component_update_from_realtime', {
+              updateCount,
+              isShimFFEnabled: !0,
+            })
+          }, 1e3)
+          t.state_group && e.getState().selectedView?.view === 'fullscreen' && setTimeout(() => {
+            let {
+              updateCount,
+            } = atomStoreManager.get(_$$WJ)
+            updateCount && trackEventAnalytics('state_group_update_from_realtime', {
+              updateCount,
+              isShimFFEnabled: !0,
+            })
+          }, 1e3)
+        }
     }
   }
 }
@@ -4075,9 +4080,9 @@ function aV(e) {
       sortPosition: e.component?.containingFrame?.sortPosition || null,
       containingStateGroup: e.component?.containingFrame?.containingStateGroup
         ? {
-            nodeId: e.component?.containingFrame?.containingStateGroup?.nodeId || void 0,
-            name: e.component?.containingFrame?.containingStateGroup?.name || void 0,
-          }
+          nodeId: e.component?.containingFrame?.containingStateGroup?.nodeId || void 0,
+          name: e.component?.containingFrame?.containingStateGroup?.name || void 0,
+        }
         : void 0,
     },
     sort_position: e.component?.sortPosition || null,
@@ -4316,21 +4321,21 @@ function aX(e, t) {
     }
     t && r.version && t[r.version] && t[r.version].updatedAt && t[r.version].updatedAt >= n.updatedAt || (t
       ? i.push({
-          method: 'put',
+        method: 'put',
+        type: 'font_file',
+        font_file: r,
+      })
+      : n.deletedAt
+        ? i.push({
+          method: 'delete',
           type: 'font_file',
           font_file: r,
         })
-      : n.deletedAt
-        ? i.push({
-            method: 'delete',
-            type: 'font_file',
-            font_file: r,
-          })
         : i.push({
-            method: 'post',
-            type: 'font_file',
-            font_file: r,
-          }))
+          method: 'post',
+          type: 'font_file',
+          font_file: r,
+        }))
   }
   return i
 }
@@ -4380,15 +4385,15 @@ let a1 = new RealtimeSubscriptionManager({
   convertLivegraphMessage: (e, t, i, n) => (function (e, t) {
     return t.org?.id
       ? [{
-          method: 'put',
-          type: 'org',
-          org: {
-            id: t.org.id,
-            plugins_whitelist_enforced: !!t.org.pluginsWhitelistEnforced,
-            widgets_whitelist_enforced: !!t.org.widgetsWhitelistEnforced,
-            are_custom_templates_allowed: t.org.customTemplatesAllowed === 'ALLOW',
-          },
-        }]
+        method: 'put',
+        type: 'org',
+        org: {
+          id: t.org.id,
+          plugins_whitelist_enforced: !!t.org.pluginsWhitelistEnforced,
+          widgets_whitelist_enforced: !!t.org.widgetsWhitelistEnforced,
+          are_custom_templates_allowed: t.org.customTemplatesAllowed === 'ALLOW',
+        },
+      }]
       : []
   }(n.store, e)),
   periodicallyResubscribe: !1,
@@ -4487,10 +4492,10 @@ let a6 = new RealtimeSubscriptionManager({
       let a = a7(e, t.org.name)
       a && (r
         ? i.push({
-            method: 'put',
-            type: 'plugin',
-            plugin: a,
-          })
+          method: 'put',
+          type: 'plugin',
+          plugin: a,
+        })
         : r || i.push({
           method: 'post',
           type: 'plugin',
@@ -4507,110 +4512,110 @@ function a7(e, t) {
   let i
   return e.currentPluginVersion && e.creator
     ? {
-        id: e.id,
-        install_count: e.installCount,
-        view_count: e.viewCount,
-        like_count: e.likeCount,
-        comment_count: e.commentCount,
-        category_id: e.categoryId,
-        roles: {
-          is_public: e.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC,
-          org: {
-            id: e.orgId,
-            name: t,
-          },
+      id: e.id,
+      install_count: e.installCount,
+      view_count: e.viewCount,
+      like_count: e.likeCount,
+      comment_count: e.commentCount,
+      category_id: e.categoryId,
+      roles: {
+        is_public: e.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC,
+        org: {
+          id: e.orgId,
+          name: t,
         },
-        versions: {
-          [e.currentPluginVersion.id]: {
-            code_path: e.currentPluginVersion.codePath,
-            cover_image_path: e.currentPluginVersion.coverImagePath,
-            created_at: e.currentPluginVersion.createdAt.toISOString(),
-            creator_policy: e.currentPluginVersion.creatorPolicy,
-            current_plugin_version_id: e.currentPluginVersion.id,
-            description: e.currentPluginVersion.description,
-            icon_path: e.currentPluginVersion.iconPath,
-            id: e.currentPluginVersion.id,
-            is_private: !!e.orgId,
-            manifest: JSON.parse(e.currentPluginVersion.manifest || '{}'),
-            name: e.currentPluginVersion.name,
-            playground_file_version_id: e.currentPluginVersion.playgroundFileVersionId,
-            plugin_id: e.currentPluginVersion.pluginId,
-            redirect_code_url: `/community/plugin/${e.currentPluginVersion.pluginId}/code`,
-            redirect_cover_image_url: `/community/thumbnail?resource_id=${e.currentPluginVersion.pluginId}&resource_type=plugin`,
-            redirect_icon_url: `/community/icon?resource_id=${e.currentPluginVersion.pluginId}&resource_type=plugin`,
-            redirect_snapshot_url: e.currentPluginVersion.snapshotPath ? `/community/snapshot?resource_id=${e.currentPluginVersion.pluginId}&resource_type=widget` : null,
-            release_notes: e.currentPluginVersion.releaseNotes,
-            resource_staging_signature: e.currentPluginVersion.resourceStagingSignature,
-            snapshot_path: e.currentPluginVersion.snapshotPath,
-            tagline: e.currentPluginVersion.tagline,
-            user_id: e.currentPluginVersion.userId,
-            version: e.currentPluginVersion.version,
-          },
+      },
+      versions: {
+        [e.currentPluginVersion.id]: {
+          code_path: e.currentPluginVersion.codePath,
+          cover_image_path: e.currentPluginVersion.coverImagePath,
+          created_at: e.currentPluginVersion.createdAt.toISOString(),
+          creator_policy: e.currentPluginVersion.creatorPolicy,
+          current_plugin_version_id: e.currentPluginVersion.id,
+          description: e.currentPluginVersion.description,
+          icon_path: e.currentPluginVersion.iconPath,
+          id: e.currentPluginVersion.id,
+          is_private: !!e.orgId,
+          manifest: JSON.parse(e.currentPluginVersion.manifest || '{}'),
+          name: e.currentPluginVersion.name,
+          playground_file_version_id: e.currentPluginVersion.playgroundFileVersionId,
+          plugin_id: e.currentPluginVersion.pluginId,
+          redirect_code_url: `/community/plugin/${e.currentPluginVersion.pluginId}/code`,
+          redirect_cover_image_url: `/community/thumbnail?resource_id=${e.currentPluginVersion.pluginId}&resource_type=plugin`,
+          redirect_icon_url: `/community/icon?resource_id=${e.currentPluginVersion.pluginId}&resource_type=plugin`,
+          redirect_snapshot_url: e.currentPluginVersion.snapshotPath ? `/community/snapshot?resource_id=${e.currentPluginVersion.pluginId}&resource_type=widget` : null,
+          release_notes: e.currentPluginVersion.releaseNotes,
+          resource_staging_signature: e.currentPluginVersion.resourceStagingSignature,
+          snapshot_path: e.currentPluginVersion.snapshotPath,
+          tagline: e.currentPluginVersion.tagline,
+          user_id: e.currentPluginVersion.userId,
+          version: e.currentPluginVersion.version,
         },
-        org_id: e.orgId,
-        created_at: e.createdAt.toISOString() || '',
-        redirect_thumbnail_url: e.redirectThumbnailUrl,
-        unique_run_count: e.uniqueRunCount,
-        editor_type: (i = e.pluginEditorType) === 1 ? 'whiteboard' : i === 2 ? 'design_and_whiteboard' : 'design',
-        unpublished_at: e.unpublishedAt,
-        current_plugin_version_id: e.currentPluginVersionId,
-        support_contact: e.supportContact,
-        comments_setting: e.commentsSetting || DropdownEnableState.ENABLED,
-        hide_related_content_by_others: e.hideRelatedContentByOthers,
-        publishing_status: e.publishingStatus,
-        is_widget: e.isWidget,
-        badges: e.badges?.map(e => e.badgeType) || [],
-        thumbnail_url: e.thumbnailUrl,
-        creator: {
-          id: e.creator.id || '',
-          handle: e.creator.handle || '',
-          img_url: e.creator.imgUrl || '',
+      },
+      org_id: e.orgId,
+      created_at: e.createdAt.toISOString() || '',
+      redirect_thumbnail_url: e.redirectThumbnailUrl,
+      unique_run_count: e.uniqueRunCount,
+      editor_type: (i = e.pluginEditorType) === 1 ? 'whiteboard' : i === 2 ? 'design_and_whiteboard' : 'design',
+      unpublished_at: e.unpublishedAt,
+      current_plugin_version_id: e.currentPluginVersionId,
+      support_contact: e.supportContact,
+      comments_setting: e.commentsSetting || DropdownEnableState.ENABLED,
+      hide_related_content_by_others: e.hideRelatedContentByOthers,
+      publishing_status: e.publishingStatus,
+      is_widget: e.isWidget,
+      badges: e.badges?.map(e => e.badgeType) || [],
+      thumbnail_url: e.thumbnailUrl,
+      creator: {
+        id: e.creator.id || '',
+        handle: e.creator.handle || '',
+        img_url: e.creator.imgUrl || '',
+      },
+      publisher: {
+        badges: e.profile.badges?.map(e => e.badgeType) || [],
+        current_user_is_followed: e.profile.currentUserIsFollowed || null,
+        current_user_is_following: e.profile.currentUserIsFollowing || null,
+        entity_type: e.profile.entityType,
+        follower_count: e.profile.followerCount,
+        following_count: e.profile.followingCount,
+        id: e.profile.id,
+        img_url: e.profile.user?.imgUrl || '',
+        img_urls: {
+          '120_120': e.profile.user?.imgUrl || void 0,
+          ...e.profile.user?.profile?.images,
         },
-        publisher: {
-          badges: e.profile.badges?.map(e => e.badgeType) || [],
-          current_user_is_followed: e.profile.currentUserIsFollowed || null,
-          current_user_is_following: e.profile.currentUserIsFollowing || null,
-          entity_type: e.profile.entityType,
-          follower_count: e.profile.followerCount,
-          following_count: e.profile.followingCount,
-          id: e.profile.id,
-          img_url: e.profile.user?.imgUrl || '',
-          img_urls: {
-            '120_120': e.profile.user?.imgUrl || void 0,
-            ...e.profile.user?.profile?.images,
-          },
-          location: e.profile.location,
-          name: e.profile.name,
-          primary_user_id: e.profile.primaryUserId || '',
-          profile_handle: e.profile.profileHandle,
-          public_at: e.profile.publicAt?.toISOString() || '',
-          realtime_token: '',
-        },
-        community_publishers: {
-          accepted: e.communityPublishers?.map(e => ({
-            badges: e.profile?.badges?.map(e => e.badgeType) || [],
-            current_user_is_followed: e.profile?.currentUserIsFollowed || null,
-            current_user_is_following: e.profile?.currentUserIsFollowing || null,
-            entity_type: e.profile?.entityType,
-            follower_count: e.profile?.followerCount,
-            following_count: e.profile?.followingCount,
-            id: e.profile?.id,
-            img_url: e.profile?.user?.imgUrl || '',
-            img_urls: {
-              '120_120': e.profile?.user?.imgUrl || void 0,
-              ...e.profile?.user?.profile?.images,
-            },
-            location: e.profile?.location,
-            name: e.profile?.name,
-            primary_user_id: e.profile?.primaryUserId || '',
-            profile_handle: e.profile?.profileHandle,
-            public_at: e.profile?.publicAt?.toISOString() || '',
-            realtime_token: '',
-          })) || [],
-        },
-        blocked_at: e.blockedAt?.toISOString() || null,
+        location: e.profile.location,
+        name: e.profile.name,
+        primary_user_id: e.profile.primaryUserId || '',
+        profile_handle: e.profile.profileHandle,
+        public_at: e.profile.publicAt?.toISOString() || '',
         realtime_token: '',
-      }
+      },
+      community_publishers: {
+        accepted: e.communityPublishers?.map(e => ({
+          badges: e.profile?.badges?.map(e => e.badgeType) || [],
+          current_user_is_followed: e.profile?.currentUserIsFollowed || null,
+          current_user_is_following: e.profile?.currentUserIsFollowing || null,
+          entity_type: e.profile?.entityType,
+          follower_count: e.profile?.followerCount,
+          following_count: e.profile?.followingCount,
+          id: e.profile?.id,
+          img_url: e.profile?.user?.imgUrl || '',
+          img_urls: {
+            '120_120': e.profile?.user?.imgUrl || void 0,
+            ...e.profile?.user?.profile?.images,
+          },
+          location: e.profile?.location,
+          name: e.profile?.name,
+          primary_user_id: e.profile?.primaryUserId || '',
+          profile_handle: e.profile?.profileHandle,
+          public_at: e.profile?.publicAt?.toISOString() || '',
+          realtime_token: '',
+        })) || [],
+      },
+      blocked_at: e.blockedAt?.toISOString() || null,
+      realtime_token: '',
+    }
     : null
 }
 function se(e, t) {
@@ -4670,10 +4675,10 @@ let si = new RealtimeSubscriptionManager({
         file_repo: ss(t.repo),
       })
       : n.push({
-          method: 'post',
-          type: 'file_repo',
-          file_repo: ss(t.repo),
-        }))
+        method: 'post',
+        type: 'file_repo',
+        file_repo: ss(t.repo),
+      }))
     return n
   }(n.store, e, i)),
   periodicallyResubscribe: !1,
@@ -4699,10 +4704,10 @@ let sn = new RealtimeSubscriptionManager({
           file_repo: ss(t.file.repo),
         })
         : i.push({
-            method: 'post',
-            type: 'file_repo',
-            file_repo: ss(t.file.repo),
-          })
+          method: 'post',
+          type: 'file_repo',
+          file_repo: ss(t.file.repo),
+        })
     }
     return i
   }(n.store, e)),
@@ -4730,10 +4735,10 @@ let sr = new RealtimeSubscriptionManager({
           file_repo: ss(n),
         })
         : i.push({
-            method: 'post',
-            type: 'file_repo',
-            file_repo: ss(n),
-          })
+          method: 'post',
+          type: 'file_repo',
+          file_repo: ss(n),
+        })
     }
     return i
   }(n.store, e)),
@@ -4761,10 +4766,10 @@ let sa = new RealtimeSubscriptionManager({
           file_repo: ss(n),
         })
         : i.push({
-            method: 'post',
-            type: 'file_repo',
-            file_repo: ss(n),
-          })
+          method: 'post',
+          type: 'file_repo',
+          file_repo: ss(n),
+        })
     }
     return i
   }(n.store, e)),
@@ -4824,8 +4829,8 @@ function sl(e) {
             ...n,
             ...(i
               ? {
-                  created_at: i,
-                }
+                created_at: i,
+              }
               : null),
           }
           return r
@@ -4899,15 +4904,15 @@ let sm = new RealtimeSubscriptionManager({
     let r = t.getState().teams[e]
     i.team && (r
       ? (!r.updated_at || i.team.updatedAt > new Date(r.updated_at) || r.restrictions_list !== i.team.restrictionsList) && n.push({
-          method: 'put',
-          type: 'team',
-          team: sg(i.team),
-        })
+        method: 'put',
+        type: 'team',
+        team: sg(i.team),
+      })
       : n.push({
-          method: 'post',
-          type: 'team',
-          team: sg(i.team),
-        }))
+        method: 'post',
+        type: 'team',
+        team: sg(i.team),
+      }))
     return n
   }(i, n.store, e)),
   periodicallyResubscribe: !1,
@@ -5008,13 +5013,13 @@ let sf = new RealtimeSubscriptionManager({
           },
         })
         : i.push({
-            method: 'post',
-            type: 'role',
-            role: sb(e),
-            role_data: {
-              file: e.file ? convertLiveGraphFile(e.file) : void 0,
-            },
-          })
+          method: 'post',
+          type: 'role',
+          role: sb(e),
+          role_data: {
+            file: e.file ? convertLiveGraphFile(e.file) : void 0,
+          },
+        })
     }
     for (let e of repoRoleUpdates) {
       let t = e.resourceId
@@ -5027,11 +5032,11 @@ let sf = new RealtimeSubscriptionManager({
           role_data: void 0,
         })
         : i.push({
-            method: 'post',
-            type: 'role',
-            role: sb(e),
-            role_data: void 0,
-          })
+          method: 'post',
+          type: 'role',
+          role: sb(e),
+          role_data: void 0,
+        })
     }
     for (let e of projectRoleUpdates) {
       let t = e.resourceId
@@ -5046,13 +5051,13 @@ let sf = new RealtimeSubscriptionManager({
           },
         })
         : i.push({
-            method: 'post',
-            type: 'role',
-            role: sb(e),
-            role_data: {
-              folder: e.project ? convertToFolder(e.project) : void 0,
-            },
-          })
+          method: 'post',
+          type: 'role',
+          role: sb(e),
+          role_data: {
+            folder: e.project ? convertToFolder(e.project) : void 0,
+          },
+        })
     }
     for (let e of teamRoleUpdates) {
       let t = e.resourceId
@@ -5067,13 +5072,13 @@ let sf = new RealtimeSubscriptionManager({
           },
         })
         : i.push({
-            method: 'post',
-            type: 'role',
-            role: sb(e),
-            role_data: {
-              team: e.team ? sg(e.team) : void 0,
-            },
-          })
+          method: 'post',
+          type: 'role',
+          role: sb(e),
+          role_data: {
+            team: e.team ? sg(e.team) : void 0,
+          },
+        })
     }
     for (let e of roleDeletionUpdates) {
       let t
@@ -5143,13 +5148,13 @@ let s_ = new RealtimeSubscriptionManager({
           },
         })
         : r.push({
-            method: 'post',
-            type: 'role',
-            role: sb(t),
-            role_data: {
-              team: sg(o),
-            },
-          })
+          method: 'post',
+          type: 'role',
+          role: sb(t),
+          role_data: {
+            team: sg(o),
+          },
+        })
     }
     let l = Object.values(roles.byTeamId[e] || {})
     for (let e of o.roleDeletionUpdates) {
@@ -5171,43 +5176,43 @@ function sA(e, t) {
   if (t.role) {
     switch (t.method) {
       case 'put':
-      {
-        let i = t.role
-        if (e.dispatch(rolePutAction({
-          role: i,
-        })), t.role_data) {
-          let i = e.getState()
-          let n = t.role_data.folder
-          !n || n.deleted_at || i.folders[n.id] || e.dispatch(folderPostAction(n))
-          let r = t.role_data.file
-          !r || r.deleted_at || i.fileByKey[r.key] || getFeatureFlags().dse_lk_realtime_role_filter && !r.library_key || e.dispatch(postFileAction({
-            file: r,
-          }))
+        {
+          let i = t.role
+          if (e.dispatch(rolePutAction({
+            role: i,
+          })), t.role_data) {
+            let i = e.getState()
+            let n = t.role_data.folder
+            !n || n.deleted_at || i.folders[n.id] || e.dispatch(folderPostAction(n))
+            let r = t.role_data.file
+            !r || r.deleted_at || i.fileByKey[r.key] || getFeatureFlags().dse_lk_realtime_role_filter && !r.library_key || e.dispatch(postFileAction({
+              file: r,
+            }))
+          }
+          break
         }
-        break
-      }
       case 'post':
-      {
-        let i = t.role
-        e.dispatch(rolePostAction({
-          role: t.role,
-        }))
-        let n = e.getState().user
-        if (t.role_data && n && n.id === i.user_id) {
-          let i = e.getState()
-          let n = t.role_data.team
-          !n || n.deleted_at || i.teams[n.id] || (e.dispatch(postTeamAction({
-            team: n,
-          })), e.dispatch(initializeUserThunk({})))
-          let r = t.role_data.folder
-          !r || r.deleted_at || i.folders[r.id] || r.org_id && !r.team_id && r.path !== '' || e.dispatch(folderPostAction(r))
-          let a = t.role_data.file
-          a && !a.deleted_at && (!getFeatureFlags().dse_lk_realtime_role_filter || a.library_key) && e.dispatch(postFileAction({
-            file: a,
+        {
+          let i = t.role
+          e.dispatch(rolePostAction({
+            role: t.role,
           }))
+          let n = e.getState().user
+          if (t.role_data && n && n.id === i.user_id) {
+            let i = e.getState()
+            let n = t.role_data.team
+            !n || n.deleted_at || i.teams[n.id] || (e.dispatch(postTeamAction({
+              team: n,
+            })), e.dispatch(initializeUserThunk({})))
+            let r = t.role_data.folder
+            !r || r.deleted_at || i.folders[r.id] || r.org_id && !r.team_id && r.path !== '' || e.dispatch(folderPostAction(r))
+            let a = t.role_data.file
+            a && !a.deleted_at && (!getFeatureFlags().dse_lk_realtime_role_filter || a.library_key) && e.dispatch(postFileAction({
+              file: a,
+            }))
+          }
+          break
         }
-        break
-      }
       case 'delete':
         e.dispatch(roleDeleteAction({
           role: t.role,
@@ -5222,42 +5227,42 @@ function sb(e) {
   let t
   return e.pending || !e.user
     ? {
-        id: e.id,
-        level: e.level,
-        resource_id_or_key: e.resourceId,
-        resource_type: e.resourceType,
-        created_at: e.createdAt.toISOString(),
-        updated_at: e.updatedAt.toISOString(),
-        org_user: void 0,
-        team_user: void 0,
-        user_id: null,
-        pending: !0,
-        user: {
-          id: null,
-          email: e.pendingEmail || '',
-        },
-      }
+      id: e.id,
+      level: e.level,
+      resource_id_or_key: e.resourceId,
+      resource_type: e.resourceType,
+      created_at: e.createdAt.toISOString(),
+      updated_at: e.updatedAt.toISOString(),
+      org_user: void 0,
+      team_user: void 0,
+      user_id: null,
+      pending: !0,
+      user: {
+        id: null,
+        email: e.pendingEmail || '',
+      },
+    }
     : {
-        id: e.id,
-        level: e.level,
-        resource_id_or_key: e.resourceId,
-        resource_type: e.resourceType,
-        created_at: e.createdAt.toISOString(),
-        updated_at: e.updatedAt.toISOString(),
-        org_user: void 0,
-        team_user: void 0,
-        user_id: e.userId,
-        pending: !1,
-        user: {
-          id: (t = e.user).id,
-          name: t.name || void 0,
-          handle: t.handle,
-          img_url: t.imgUrl,
-          email: t.email || void 0,
-          description: t.description,
-          org_id: void 0,
-        },
-      }
+      id: e.id,
+      level: e.level,
+      resource_id_or_key: e.resourceId,
+      resource_type: e.resourceType,
+      created_at: e.createdAt.toISOString(),
+      updated_at: e.updatedAt.toISOString(),
+      org_user: void 0,
+      team_user: void 0,
+      user_id: e.userId,
+      pending: !1,
+      user: {
+        id: (t = e.user).id,
+        name: t.name || void 0,
+        handle: t.handle,
+        img_url: t.imgUrl,
+        email: t.email || void 0,
+        description: t.description,
+        org_id: void 0,
+      },
+    }
 }
 class sI {
   constructor() {
@@ -5340,7 +5345,7 @@ class sI {
     }
   }
 
-  logMessages(e, t) {}
+  logMessages(e, t) { }
 }
 let sS = new RealtimeSubscriptionManager({
   name: 'TeamRoleRequestShim',
@@ -5636,19 +5641,19 @@ let sM = new RealtimeSubscriptionManager({
         let i = a7(e, t)
         return i
           ? {
-              ...i,
-              is_widget: !0,
-              current_user_first_ran_at: e.currentUserFirstRanAt || void 0,
-              profile_install_status: e.profileInstallStatus || void 0,
-            }
+            ...i,
+            is_widget: !0,
+            current_user_first_ran_at: e.currentUserFirstRanAt || void 0,
+            profile_install_status: e.profileInstallStatus || void 0,
+          }
           : null
       }(e, t.org.name))
       a && (r
         ? i.push({
-            method: 'put',
-            type: 'widget',
-            widget: a,
-          })
+          method: 'put',
+          type: 'widget',
+          widget: a,
+        })
         : r || i.push({
           method: 'post',
           type: 'widget',
@@ -5725,13 +5730,13 @@ sj.registerShim(sm, (e, t) => {
       case 'put':
         t.team.deleted_at
           ? e.dispatch(deleteTeamAction({
-              team: t.team,
-              userInitiated: !1,
-            }))
+            team: t.team,
+            userInitiated: !1,
+          }))
           : e.dispatch(setTeamOptimistThunk({
-              team: t.team,
-              userInitiated: !1,
-            }))
+            team: t.team,
+            userInitiated: !1,
+          }))
         break
       case 'delete':
         e.dispatch(deleteTeamAction({
@@ -5797,24 +5802,24 @@ sj.registerShim(a2, (e, t) => {
   else {
     t.method === 'delete'
       ? e.dispatch(batchDeleteOrgUsersThunk({
-          params: {
-            org_user_ids: [r.id],
-          },
-          orgId: r.org_id,
-          userInitiated: !1,
-        }))
+        params: {
+          org_user_ids: [r.id],
+        },
+        orgId: r.org_id,
+        userInitiated: !1,
+      }))
       : t.method === 'put' || t.method === 'post'
         ? e.dispatch(updateOrgUserDescriptionAction({
-            orgUser: r,
-            userInitiated: !1,
-          }))
+          orgUser: r,
+          userInitiated: !1,
+        }))
         : e.dispatch(switchAccountAndNavigate({
-            workspace: {
-              orgId: n,
-              userId: r.user_id,
-            },
-            view: i.selectedView,
-          }))
+          workspace: {
+            orgId: n,
+            userId: r.user_id,
+          },
+          view: i.selectedView,
+        }))
   }
 })
 sj.registerShim(a6, a3)
@@ -5834,20 +5839,20 @@ sj.registerShim(sF, (e, t) => {
     case 'put':
       e.dispatch(i
         ? putAllowlistedWidget({
-            pluginId: t.whitelisted_plugin.plugin_id,
-          })
+          pluginId: t.whitelisted_plugin.plugin_id,
+        })
         : putAllowlistedPlugin({
-            pluginId: t.whitelisted_plugin.plugin_id,
-          }))
+          pluginId: t.whitelisted_plugin.plugin_id,
+        }))
       break
     case 'delete':
       e.dispatch(i
         ? deleteAllowlistedWidget({
-            pluginId: t.whitelisted_plugin.plugin_id,
-          })
+          pluginId: t.whitelisted_plugin.plugin_id,
+        })
         : deleteAllowlistedPlugin({
-            pluginId: t.whitelisted_plugin.plugin_id,
-          }))
+          pluginId: t.whitelisted_plugin.plugin_id,
+        }))
   }
 })
 sj.registerShim(sk, (e, t) => {
@@ -5876,10 +5881,10 @@ sj.registerShim(aT, (e, t) => {
     switch (t.method) {
       case 'post':
       case 'put':
-        e.dispatch(k3(t.community_resource_payment))
+        e.dispatch(realtimeActiveUserPayment(t.community_resource_payment))
         break
       case 'delete':
-        e.dispatch(_$$Sp(t.community_resource_payment.monetized_resource_metadata_id))
+        e.dispatch(deleteActiveUserPayment(t.community_resource_payment.monetized_resource_metadata_id))
     }
   }
 })
@@ -6029,21 +6034,21 @@ let sH = (e, t) => {
   if (!i.realtime.subscriptions[r.channel]) {
     switch (t.resource_type) {
       case FResourceCategoryType.FILE:
-      {
-        let n = i.fileByKey[t.resource_id_or_key]
-        n && sz(e, n)
-        break
-      }
-      case FResourceCategoryType.FOLDER:
-      {
-        sG(e, r)
-        let n = i.folders[t.resource_id_or_key]
-        if (n && n.team_id && !(getFeatureFlags().realtime_cleanup_viewer_role_access ? i.realtime.subscriptions[`/team-members-${n.team_id}`] : hasViewerRoleAccessOnTeam(n.team_id, i))) {
-          let t = i.teams[n.team_id]
-          t && t.realtime_token && sG(e, parseMessage(t.realtime_token))
+        {
+          let n = i.fileByKey[t.resource_id_or_key]
+          n && sz(e, n)
+          break
         }
-        break
-      }
+      case FResourceCategoryType.FOLDER:
+        {
+          sG(e, r)
+          let n = i.folders[t.resource_id_or_key]
+          if (n && n.team_id && !(getFeatureFlags().realtime_cleanup_viewer_role_access ? i.realtime.subscriptions[`/team-members-${n.team_id}`] : hasViewerRoleAccessOnTeam(n.team_id, i))) {
+            let t = i.teams[n.team_id]
+            t && t.realtime_token && sG(e, parseMessage(t.realtime_token))
+          }
+          break
+        }
       case FResourceCategoryType.TEAM:
         sG(e, r)
     }
@@ -6092,12 +6097,12 @@ let sW = getInitialOptions().disable_realtime
                   })), i.file_key) {
                     let n = i.unpublished_at
                       ? delFigFilePublishedAsHubFile({
-                          fileKey: i.file_key,
-                        })
+                        fileKey: i.file_key,
+                      })
                       : putFigFilePublishedAsHubFile({
-                          hubFileId: t.id,
-                          fileKey: i.file_key,
-                        })
+                        hubFileId: t.id,
+                        fileKey: i.file_key,
+                      })
                     e.dispatch(n)
                   }
                 }
@@ -6287,16 +6292,16 @@ let s6 = {
         ...xH.defaultOptions.sortMode,
       },
       [PublicModelType.FILES]: {
-        ..._$$KJ.defaultOptions.sortMode,
+        ...fileSearchConfig.defaultOptions.sortMode,
       },
       [PublicModelType.PROJECTS]: {
-        ...$T.defaultOptions.sortMode,
+        ...projectSearchConfig.defaultOptions.sortMode,
       },
       [PublicModelType.TEAMS]: {
-        ..._$$Vx.defaultOptions.sortMode,
+        ...teamSearchConfig.defaultOptions.sortMode,
       },
       [PublicModelType.USERS]: {
-        ...V0.defaultOptions.sortMode,
+        ...userSearchConfig.defaultOptions.sortMode,
       },
       [PublicModelType.PUBLIC_WIDGETS]: {
         ...publicWidgetsSearchModule.viewBarConfig.defaultOptions.sortMode,
@@ -6471,16 +6476,16 @@ function oi(e, t) {
   return void 0 === e || void 0 === t
     ? (e || t) ?? oe
     : {
-        ...t,
-        sort: {
-          ...oe.sort,
-          ...t.sort,
-        },
-        filters: {
-          ...oe.filters,
-          ...t.filters,
-        },
-      }
+      ...t,
+      sort: {
+        ...oe.sort,
+        ...t.sort,
+      },
+      filters: {
+        ...oe.filters,
+        ...t.filters,
+      },
+    }
 }
 function on(e = ot, t) {
   if (hydrateFileBrowser.matches(t)) {
@@ -6636,7 +6641,7 @@ let or = (e) => {
       let t = JSON.stringify(e)
       localStorageRef.setItem(s9, t)
     }
-    catch (e) {}
+    catch (e) { }
   }
 }
 let oa = !1
@@ -6671,28 +6676,28 @@ let oo = e => t => function (i) {
       }))
       t.search.parameters.facetFilters || (searchModelType === PublicModelType.HUB_FILES || searchModelType === PublicModelType.PUBLIC_PLUGINS || searchModelType === PublicModelType.PUBLIC_PROFILES || searchModelType === PublicModelType.PUBLIC_WIDGETS
         ? (atomStoreManager.set(selectedItemAtom, PublicModelType.FILES), e.dispatch(searchSetParametersAction({
-            facetFilters: {
-              searchModelType: PublicModelType.FILES,
-            },
-          })))
+          facetFilters: {
+            searchModelType: PublicModelType.FILES,
+          },
+        })))
         : (atomStoreManager.set(selectedItemAtom, searchModelType), e.dispatch(searchSetParametersAction({
-            facetFilters: {
-              searchModelType,
-            },
-          }))))
+          facetFilters: {
+            searchModelType,
+          },
+        }))))
       query
         ? (atomStoreManager.set(searchInputAtom, query), e.dispatch(searchThunk({
-            searchModelType,
-            query,
-            searchScope,
-            forceRefreshSearchResults: !0,
-            debounce: !1,
-            overrideIsFullResultsView: !0,
-          })))
+          searchModelType,
+          query,
+          searchScope,
+          forceRefreshSearchResults: !0,
+          debounce: !1,
+          overrideIsFullResultsView: !0,
+        })))
         : e.dispatch(handleSearchParameterChangeThunk({
-            searchModelType,
-            searchScope,
-          }))
+          searchModelType,
+          searchScope,
+        }))
     }
     t(i)
     oa && (trackEventAnalytics('Search Mode Closed', {
@@ -6935,7 +6940,7 @@ let oR = combineReducers({
       let r = associated_users.reduce((t, {
         user_id: n,
       }) => n in e
-        ? {
+          ? {
             ...t,
             [n]: {
               ...e[n],
@@ -6943,7 +6948,7 @@ let oR = combineReducers({
               community_profile_id: i.id,
             },
           }
-        : t, {})
+          : t, {})
       return {
         ...e,
         ...r,
@@ -6955,13 +6960,13 @@ let oR = combineReducers({
         let r = e[n]
         return r.community_profile_handle === i
           ? {
-              ...t,
-              [n]: {
-                ...r,
-                community_profile_handle: void 0,
-                community_profile_id: void 0,
-              },
-            }
+            ...t,
+            [n]: {
+              ...r,
+              community_profile_handle: void 0,
+              community_profile_id: void 0,
+            },
+          }
           : t
       }, {})
       return {
@@ -7004,13 +7009,13 @@ let oG = combineReducers({
         ? containsDash(t.payload.threadId) || t.payload.threadId.startsWith('feed_post') && !isXrDebounceThresholdEnabled()
           ? e
           : {
-              id: t.payload.threadId,
-              source: t.payload.source,
-            }
+            id: t.payload.threadId,
+            source: t.payload.source,
+          }
         : setNewCommentActive.matches(t)
           ? {
-              id: NEW_COMMENT_ID,
-            }
+            id: NEW_COMMENT_ID,
+          }
           : deleteCommentAction.matches(t) && t.payload.comment.id === e?.id ? null : e
   },
   threads(e = {}, t) {
@@ -7121,11 +7126,11 @@ let oG = combineReducers({
           ...(t.payload.resetStatusOnly
             ? {}
             : {
-                reply: {
-                  messageMeta: [],
-                  attachments: {},
-                },
-              }),
+              reply: {
+                messageMeta: [],
+                attachments: {},
+              },
+            }),
         },
       }
     }
@@ -7197,9 +7202,9 @@ let oG = combineReducers({
     else if (resetNewComment.matches(t)) {
       return t.payload.resetStatusOnly
         ? {
-            ...e,
-            state: BusyReadyState.READY,
-          }
+          ...e,
+          state: BusyReadyState.READY,
+        }
         : DEFAULT_THREAD_STATE
     }
     else if (revertNewComment.matches(t)) {
@@ -7278,8 +7283,8 @@ let oG = combineReducers({
       : showEmojiPicker.matches(t)
         ? t.payload.visible
           ? {
-              ...t.payload,
-            }
+            ...t.payload,
+          }
           : null
         : e
   },
@@ -7621,9 +7626,9 @@ let oQ = combineReducers({
         totalNumberOfComments: o$(n[CommentTabType.ALL], -1),
         pagination: n[CommentTabType.ALL]?.pagination?.selected_comment?.id === commentId
           ? {
-              ...(n[CommentTabType.ALL]?.pagination || {}),
-              selected_comment: void 0,
-            }
+            ...(n[CommentTabType.ALL]?.pagination || {}),
+            selected_comment: void 0,
+          }
           : n[CommentTabType.ALL]?.pagination,
       }
       return n
@@ -7796,36 +7801,36 @@ let o0 = combineReducers({
     }
     return putUserAction.matches(t) && e && t.payload.user.id === e.primary_user_id && t.payload.user.img_url
       ? {
-          ...e,
-          img_url: t.payload.user.img_url,
-        }
+        ...e,
+        img_url: t.payload.user.img_url,
+      }
       : putTeamAction.matches(t) && e && t.payload.team.community_profile_id === e.id && t.payload.team.img_url
         ? {
-            ...e,
-            img_url: t.payload.team.img_url,
-          }
+          ...e,
+          img_url: t.payload.team.img_url,
+        }
         : putOrgs.matches(t) && e && t.payload.org.community_profile_id === e.id && t.payload.org.img_url
           ? {
-              ...e,
-              img_url: t.payload.org.img_url,
-            }
+            ...e,
+            img_url: t.payload.org.img_url,
+          }
           : e
   },
   pageState(e = null, t) {
     return savePageState.matches(t)
       ? {
-          ...e,
-          ...t.payload,
-        }
+        ...e,
+        ...t.payload,
+      }
       : clearCommunityProfile.matches(t) && e?.view === 'communityHub' && e.subView === 'handle' && e.handle === t.payload ? null : e
   },
   comments: oQ,
   shelves(e = {}, t) {
-    return _$$wJ.matches(t)
+    return setShelvesForShelfTypeAction.matches(t)
       ? {
-          ...e,
-          [t.payload.shelfType]: t.payload.shelves,
-        }
+        ...e,
+        [t.payload.shelfType]: t.payload.shelves,
+      }
       : e
   },
   showingCommunityAdminBanner(e = !1, t) {
@@ -7879,29 +7884,29 @@ let o8 = combineReducers({
   },
 })
 let lt = {
-  status: _$$hv.INIT,
+  status: UploadState.INIT,
   entity: null,
 }
 function li(e = lt, t) {
-  return _$$s4.matches(t)
+  return initAvatarEditorAction.matches(t)
     ? {
-        file: t.payload.file,
+      file: t.payload.file,
+      entity: t.payload.entity,
+      entityType: t.payload.entityType,
+      status: UploadState.POSITIONING,
+      shape: t.payload.shape,
+    }
+    : uploadAvatarAction.matches(t)
+      ? {
+        ...e,
+        status: UploadState.UPLOADING,
         entity: t.payload.entity,
         entityType: t.payload.entityType,
-        status: _$$hv.POSITIONING,
-        shape: t.payload.shape,
       }
-    : AY.matches(t)
-      ? {
-          ...e,
-          status: _$$hv.UPLOADING,
-          entity: t.payload.entity,
-          entityType: t.payload.entityType,
-        }
-      : _$$PI.matches(t)
+      : resetAvatarEditorAction.matches(t)
         ? {
-            ...lt,
-          }
+          ...lt,
+        }
         : e
 }
 let ln = {
@@ -7913,32 +7918,32 @@ let ln = {
 function lr(e = ln, t) {
   return setNewSectionIndexAction.matches(t)
     ? {
-        ...e,
-        newCustomSectionIndex: t.payload.newCustomSectionIndex,
-      }
+      ...e,
+      newCustomSectionIndex: t.payload.newCustomSectionIndex,
+    }
     : setMovingResourceAction.matches(t)
       ? {
-          ...e,
-          movingResource: t.payload.movingResource,
-        }
+        ...e,
+        movingResource: t.payload.movingResource,
+      }
       : updateExpandedSectionsAction.matches(t)
         ? {
-            ...e,
-            collapsedCustomSections: t.payload.collapsedCustomSections,
-          }
+          ...e,
+          collapsedCustomSections: t.payload.collapsedCustomSections,
+        }
         : setFavoritesCountAction.matches(t)
           ? {
-              ...e,
-              favoritesCount: t.payload.favoritesCount,
-            }
+            ...e,
+            favoritesCount: t.payload.favoritesCount,
+          }
           : e
 }
 let lc = 0
 let lu = bindWithIgnore((e, t) => updateFileImportItem.matches(t) && t.payload.id === e.id
   ? {
-      ...e,
-      ...t.payload,
-    }
+    ...e,
+    ...t.payload,
+  }
   : e, {
   shouldIgnoreAction: e => !updateFileImportItem.matches(e),
 })
@@ -7998,14 +8003,14 @@ function lp(e, t) {
   else if (doneProcessingFile.matches(t)) {
     return e.queue.length
       ? {
-          ...e,
-          queue: e.queue.slice(1),
-          isProcessingFile: !1,
-        }
+        ...e,
+        queue: e.queue.slice(1),
+        isProcessingFile: !1,
+      }
       : {
-          ...e,
-          isProcessingFile: !1,
-        }
+        ...e,
+        isProcessingFile: !1,
+      }
   }
   else if (clearFileImports.matches(t)) {
     if (fileImporter?.resetCancel(), !e.queue.length)
@@ -8507,12 +8512,12 @@ let lj = combineReducers({
     }
     return addThumbnailForDanglingStyle.matches(t)
       ? {
-          ...e,
-          [t.payload.styleID]: {
-            kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
-            url: t.payload.url,
-          },
-        }
+        ...e,
+        [t.payload.styleID]: {
+          kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
+          url: t.payload.url,
+        },
+      }
       : e
   },
 })
@@ -8612,31 +8617,31 @@ let lU = combineReducers({
       let i = t.payload.searchOptions
       return e.searchOptions !== i && _$$eu(i)
         ? {
-            ...e,
-            isLoading: !0,
-            searchOptions: i,
-          }
+          ...e,
+          isLoading: !0,
+          searchOptions: i,
+        }
         : e
     }
     return setAssetsSearchNoResults.matches(t)
       ? {
-          ...e,
-          isLoading: !1,
-          normalizedSearchResults: [],
-          unsubscribedSearchResults: [],
-        }
+        ...e,
+        isLoading: !1,
+        normalizedSearchResults: [],
+        unsubscribedSearchResults: [],
+      }
       : setAssetsSearchResults.matches(t)
         ? {
-            ...e,
-            isLoading: !1,
-            normalizedSearchResults: t.payload.normalizedSearchResults,
-            unsubscribedSearchResults: t.payload.unsubscribedSearchResults,
-          }
+          ...e,
+          isLoading: !1,
+          normalizedSearchResults: t.payload.normalizedSearchResults,
+          unsubscribedSearchResults: t.payload.unsubscribedSearchResults,
+        }
         : setShouldSearchDefaultLibraries.matches(t)
           ? {
-              ...e,
-              shouldSearchDefaultLibraries: t.payload.shouldSearchDefaultLibraries,
-            }
+            ...e,
+            shouldSearchDefaultLibraries: t.payload.shouldSearchDefaultLibraries,
+          }
           : e
   },
   publishProgress(e = {
@@ -8644,15 +8649,15 @@ let lU = combineReducers({
   }, t) {
     return startPublishAction.matches(t)
       ? {
-          state: LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS,
-          progress: 0,
-          publishType: t.payload.unpublishAll ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
-          publishStartMs: performance.now(),
-        }
+        state: LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS,
+        progress: 0,
+        publishType: t.payload.unpublishAll ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
+        publishStartMs: performance.now(),
+      }
       : publishRequestFinishedAction.matches(t)
         ? {
-            state: LibraryPublishStatusEnum.NONE,
-          }
+          state: LibraryPublishStatusEnum.NONE,
+        }
         : publishProgressAction.matches(t) ? t.payload : e
   },
   isRenamingSelectedStyle(e = !1, t) {
@@ -8667,7 +8672,7 @@ let lU = combineReducers({
     subscribed: {},
     local: {},
   }, t) => putMoveLibraryItemKeyMappings.matches(t)
-    ? {
+      ? {
         subscribed: {
           ...e.subscribed,
           ...t.payload.subscribedOldKeyToNewKey,
@@ -8677,7 +8682,7 @@ let lU = combineReducers({
           ...t.payload.localOldGuidToNewKey,
         },
       }
-    : e,
+      : e,
   libraryPublishingMode: libraryPublishingModeAtom.reducer,
   localVariablesById: localVariablesAtom.reducer,
   localVariableSetsById: localVariableSetsAtom.reducer,
@@ -8720,20 +8725,20 @@ let lV = combineReducers({
       let i = t.payload.teamId
       return e.map(e => e.id === i
         ? {
-            ...e,
-            member_count: (e.member_count || 0) + 1,
-            orphaned: !1,
-          }
+          ...e,
+          member_count: (e.member_count || 0) + 1,
+          orphaned: !1,
+        }
         : e)
     }
     if (batchJoinTeamAction.matches(t)) {
       let i = t.payload.teamIds
       return e.map(e => i.includes(e.id)
         ? {
-            ...e,
-            member_count: (e.member_count || 0) + 1,
-            orphaned: !1,
-          }
+          ...e,
+          member_count: (e.member_count || 0) + 1,
+          orphaned: !1,
+        }
         : e)
     }
     if (deleteTeamAction.matches(t)) {
@@ -8741,45 +8746,45 @@ let lV = combineReducers({
       return t.payload.teamDelete
         ? e.filter(e => e.id !== i.id)
         : e.reduce((e, t) => {
-            if (i.id === t.id) {
-              if (t.org_access === FAccessLevelType.PUBLIC || t.org_access === FAccessLevelType.PRIVATE || t.org_access === FAccessLevelType.SECRET && t.member_count === 1) {
-                let i = t.member_count - 1
-                e.push({
-                  ...t,
-                  member_count: i,
-                  orphaned: i === 0,
-                })
-              }
+          if (i.id === t.id) {
+            if (t.org_access === FAccessLevelType.PUBLIC || t.org_access === FAccessLevelType.PRIVATE || t.org_access === FAccessLevelType.SECRET && t.member_count === 1) {
+              let i = t.member_count - 1
+              e.push({
+                ...t,
+                member_count: i,
+                orphaned: i === 0,
+              })
             }
-            else {
-              e.push(t)
-            }
-            return e
-          }, [])
+          }
+          else {
+            e.push(t)
+          }
+          return e
+        }, [])
     }
     if (postTeamAction.matches(t)) {
       let i = t.payload.team
       return i.org_id
         ? e.findIndex(e => e.id === i.id) >= 0
           ? e.map(e => e.id === i.id
-              ? {
-                  ...e,
-                  ...i,
-                }
-              : e)
-          : [...e, {
+            ? {
+              ...e,
               ...i,
-              member_count: 1,
-            }]
+            }
+            : e)
+          : [...e, {
+            ...i,
+            member_count: 1,
+          }]
         : e
     }
     if (putTeamAction.matches(t)) {
       let i = t.payload.team.id
       return e.map(e => e.id === i
         ? {
-            ...e,
-            ...t.payload.team,
-          }
+          ...e,
+          ...t.payload.team,
+        }
         : e)
     }
     if (renameTeamAction.matches(t)) {
@@ -8787,10 +8792,10 @@ let lV = combineReducers({
       let n = t.payload.name
       return e.map(e => e.id === i
         ? {
-            ...e,
-            ...t.payload.team,
-            name: n,
-          }
+          ...e,
+          ...t.payload.team,
+          name: n,
+        }
         : e)
     }
     else if (changeSharingSettingsAction.matches(t)) {
@@ -8803,14 +8808,14 @@ let lV = combineReducers({
       n === FPermissionLevelType.ORG_EDIT ? (s = FAccessLevelType.PUBLIC, o = FBasicPermissionType.EDIT) : n === FPermissionLevelType.ORG_VIEW ? (s = FAccessLevelType.PUBLIC, o = FBasicPermissionType.VIEW) : n === FPermissionLevelType.INVITE_ONLY && (r ? s = FAccessLevelType.PRIVATE : a && (s = FAccessLevelType.SECRET))
       return e.map(e => e.id === i
         ? {
-            ...e,
-            ...t.payload.team,
-            org_access: s,
-            default_permission: o,
-            sharing_audience_control: n,
-            org_browsable: r,
-            hidden: a,
-          }
+          ...e,
+          ...t.payload.team,
+          org_access: s,
+          default_permission: o,
+          sharing_audience_control: n,
+          org_browsable: r,
+          hidden: a,
+        }
         : e)
     }
     else if (changeOrgAccessAction.matches(t)) {
@@ -8818,10 +8823,10 @@ let lV = combineReducers({
       let n = t.payload.orgAccess
       return e.map(e => e.id === i
         ? {
-            ...e,
-            ...t.payload.team,
-            orgAccess: n,
-          }
+          ...e,
+          ...t.payload.team,
+          orgAccess: n,
+        }
         : e)
     }
     return e
@@ -9044,17 +9049,17 @@ function lW(e, t) {
   else if (deleteRecentPrototype.matches(t)) {
     return e.map(e => t.payload.fileKeys.includes(e.file_key)
       ? {
-          ...e,
-          trashed: !0,
-        }
+        ...e,
+        trashed: !0,
+      }
       : e)
   }
   else if (restoreRecentPrototype.matches(t)) {
     return e.map(e => t.payload.fileKeys.includes(e.file_key)
       ? {
-          ...e,
-          trashed: !1,
-        }
+        ...e,
+        trashed: !1,
+      }
       : e)
   }
   return e
@@ -9063,9 +9068,9 @@ let lY = bindWithIgnore((e, t) => putRepoOptimist.matches(t) || putRepoPermissio
   ? t.payload && t.payload.repo && t.payload.repo.id !== e.id
     ? e
     : {
-        ...e,
-        ...t.payload.repo,
-      }
+      ...e,
+      ...t.payload.repo,
+    }
   : e, {
   shouldIgnoreAction: e => !(putRepoOptimist.matches(e) || putRepoPermissions.matches(e)),
 })
@@ -9105,9 +9110,9 @@ let lq = composeFn((e = {}, t) => {
     let r = addFileFavoriteAction.matches(t)
     return repoId
       ? (i[repoId] = {
-          ...i[repoId],
-          is_favorited: r,
-        }, i)
+        ...i[repoId],
+        is_favorited: r,
+      }, i)
       : e
   }
   if (postRepo.matches(t)) {
@@ -9276,9 +9281,9 @@ function lZ(e = {}, t) {
 function lX(e = {}, t) {
   return setSelectedBranch.matches(t)
     ? {
-        ...e,
-        [t.payload.repoId]: t.payload.branchKey,
-      }
+      ...e,
+      [t.payload.repoId]: t.payload.branchKey,
+    }
     : selectViewAction.matches(t) || hydrateFileBrowser.matches(t) ? {} : e
 }
 let lQ = bindWithIgnore((e, t) => {
@@ -9295,10 +9300,10 @@ let lQ = bindWithIgnore((e, t) => {
   }
   return i !== e.repo || n !== e.files
     ? {
-        ...e,
-        repo: i,
-        files: n,
-      }
+      ...e,
+      repo: i,
+      files: n,
+    }
     : e
 }, {
   shouldIgnoreAction: e => lY.shouldIgnoreAction(e) && fileReducer.shouldIgnoreAction(e) && !(deleteFilesAction.matches(e) || restoreTrashedFilesAction.matches(e)),
@@ -9389,31 +9394,31 @@ let l1 = {
 function l2(e = l1, t) {
   return _$$l9.matches(t)
     ? {
-        ...e,
-        summary: t.payload.summary,
-      }
+      ...e,
+      summary: t.payload.summary,
+    }
     : OP.matches(t)
       ? {
-          ...e,
-          summary: {
-            ...e.summary,
-            ...t.payload.summary,
-          },
-        }
+        ...e,
+        summary: {
+          ...e.summary,
+          ...t.payload.summary,
+        },
+      }
       : e
 }
 function l5(e = {}, t) {
   return setTeamCreationLoadingAction.matches(t)
     ? {
-        ...e,
-        loading: t.payload.loading,
-      }
+      ...e,
+      loading: t.payload.loading,
+    }
     : selectViewAction.matches(t) && t.payload.view === 'teamCreation'
       ? {
-          ...e,
-          loading: !1,
-          isEduTeam: t.payload.isEduTeam,
-        }
+        ...e,
+        loading: !1,
+        isEduTeam: t.payload.isEduTeam,
+      }
       : e
 }
 let l3 = _$$P
@@ -9615,23 +9620,23 @@ function dn(e = {
 }, t) {
   return beginRenameTeamAction.matches(t)
     ? {
-        ...e,
-        renamingTeam: !0,
-      }
+      ...e,
+      renamingTeam: !0,
+    }
     : stopRenameTeamAction.matches(t)
       ? {
-          ...e,
-          renamingTeam: !1,
-        }
+        ...e,
+        renamingTeam: !1,
+      }
       : e
 }
 let da = combineReducers({
   communityProfileBellStates(e = {}, t) {
     return Q$.matches(t) && t.payload.profileId
       ? {
-          ...e,
-          [t.payload.profileId]: t.payload.isBellStateHigh,
-        }
+        ...e,
+        [t.payload.profileId]: t.payload.isBellStateHigh,
+      }
       : e
   },
 })
@@ -9821,9 +9826,9 @@ let dv = composeFn((e = {}, t) => {
     let r = i[n]
     return r
       ? (i[n] = {
-          ...r,
-          is_favorited: !0,
-        }, i)
+        ...r,
+        is_favorited: !0,
+      }, i)
       : e
   }
   if (removeFolderFromFavorites.matches(t)) {
@@ -9834,9 +9839,9 @@ let dv = composeFn((e = {}, t) => {
     let r = i[n]
     return r
       ? (i[n] = {
-          ...r,
-          is_favorited: !1,
-        }, i)
+        ...r,
+        is_favorited: !1,
+      }, i)
       : e
   }
   return reduceObject(e, t, dI)
@@ -9846,20 +9851,20 @@ let dI = bindWithIgnore((e, t) => {
     return t.payload.folder.id !== e.id
       ? e
       : {
-          ...e,
-          ...t.payload.folder,
-        }
+        ...e,
+        ...t.payload.folder,
+      }
   }
-  if (_$$iT.matches(t)) {
+  if (updateFolderAccessAction.matches(t)) {
     return t.payload.folderId !== e.id
       ? e
       : {
-          ...e,
-          is_view_only: t.payload.isViewOnly,
-          is_invite_only: t.payload.isInviteOnly,
-        }
+        ...e,
+        is_view_only: t.payload.isViewOnly,
+        is_invite_only: t.payload.isInviteOnly,
+      }
   }
-  if (Q3.matches(t)) {
+  if (updateFolderSharingAudienceAction.matches(t)) {
     if (t.payload.folder.id !== e.id)
       return e
     let i = t.payload.sharingAudienceControl
@@ -9868,7 +9873,7 @@ let dI = bindWithIgnore((e, t) => {
       sharing_audience_control: i,
     }
   }
-  if (xT.matches(t)) {
+  if (updateFolderTeamAccessAction.matches(t)) {
     if (t.payload.folder.id !== e.id)
       return e
     let i = t.payload.teamAccess
@@ -9884,7 +9889,7 @@ let dI = bindWithIgnore((e, t) => {
   }
   return e
 }, {
-  shouldIgnoreAction: e => !(folderPutAction.matches(e) || _$$iT.matches(e) || Q3.matches(e) || xT.matches(e)),
+  shouldIgnoreAction: e => !(folderPutAction.matches(e) || updateFolderAccessAction.matches(e) || updateFolderSharingAudienceAction.matches(e) || updateFolderTeamAccessAction.matches(e)),
 })
 function dM(e = Object.create(null), t) {
   if (!putStyleSet.matches(t))
@@ -9903,20 +9908,20 @@ function dj(e = {
 }, t) {
   return showStylePreview.matches(t)
     ? {
-        ...t.payload,
-        isCreating: !1,
-        isShown: !0,
-      }
+      ...t.payload,
+      isCreating: !1,
+      isShown: !0,
+    }
     : showCreateStylePreview.matches(t)
       ? {
-          ...t.payload,
-          isCreating: !0,
-          isShown: !0,
-        }
+        ...t.payload,
+        isCreating: !0,
+        isShown: !0,
+      }
       : hideStylePreview.matches(t)
         ? {
-            isShown: !1,
-          }
+          isShown: !1,
+        }
         : e
 }
 let dB = {
@@ -10032,10 +10037,10 @@ function dV(e = dB, t) {
       versions: e.versions.map(e => e.id !== savepointID
         ? e
         : {
-            ...e,
-            label,
-            description,
-          }),
+          ...e,
+          label,
+          description,
+        }),
     }
   }
   else if (VERSION_HISTORY_SET_FILE_LAST_SEEN_AT.matches(t)) {
@@ -10122,8 +10127,8 @@ function dK(e, t) {
     let i
     e.filters[t.payload]
       ? (i = {
-          ...e.filters,
-        }, delete i[t.payload])
+        ...e.filters,
+      }, delete i[t.payload])
       : i = {
         ...e.filters,
         [t.payload]: !0,
@@ -10135,7 +10140,7 @@ function dK(e, t) {
   }
   if (switchCanvasSearchCategoryFilterExclusive.matches(t)) {
     let i = 0
-    for (let t of _$$b5) {
+    for (let t of primaryNodeTypes) {
       if (e.filters[t] && ++i, i > 1)
         break
     }
@@ -10170,7 +10175,7 @@ function dK(e, t) {
 }
 function dY(e) {
   let t = {}
-  for (let i of _V) e[i] && (t[i] = !0)
+  for (let i of searchOptions) e[i] && (t[i] = !0)
   return t
 }
 let dq = createActionCreator('COLOR_PICKER_SELECT_SWATCH_SET')
@@ -10183,9 +10188,9 @@ function dX(e, t) {
   return e
     ? dq.matches(t)
       ? (debug(t.payload.swatchId !== '', 'selectedSwatchSetId must be a valid swatch set ID'), {
-          ...e,
-          selectedSwatchSetId: t.payload.swatchId,
-        })
+        ...e,
+        selectedSwatchSetId: t.payload.swatchId,
+      })
       : e
     : dZ
 }
@@ -10388,22 +10393,22 @@ let ct = (e, t) => (getStorage().set(d3, t), {
 })
 let ci = (e, t) => e.time && t.state === 'open' && !e.time.isPaused && performance.now() - e.time.timeOrigin > e.time.timeRemainingMs + 100
   ? {
-      ...e,
-      time: {
-        totalTimeMs: 0,
-        timeRemainingMs: 0,
-        isPaused: !0,
-        timeOrigin: performance.now(),
-        timerID: e.time?.timerID,
-        lastReceivedSongTimestampMs: 0,
-      },
-      selectedSongID: '',
-      modalState: t.state,
-    }
+    ...e,
+    time: {
+      totalTimeMs: 0,
+      timeRemainingMs: 0,
+      isPaused: !0,
+      timeOrigin: performance.now(),
+      timerID: e.time?.timerID,
+      lastReceivedSongTimestampMs: 0,
+    },
+    selectedSongID: '',
+    modalState: t.state,
+  }
   : {
-      ...e,
-      modalState: t.state,
-    }
+    ...e,
+    modalState: t.state,
+  }
 let cn = (e, t) => {
   let i
   i = t > 100 ? 100 : t < 0 ? 0 : Math.floor(t)
@@ -10415,19 +10420,19 @@ let cn = (e, t) => {
 }
 let cr = (e, t) => e.time
   ? {
-      ...e,
-      time: {
-        ...e.time,
-        lastReceivedSongTimestampMs: t.musicStartTimeMs,
-      },
-      musicStartTimeMs: t.musicStartTimeMs,
-      selectedSongID: t.selectedSongID,
-    }
+    ...e,
+    time: {
+      ...e.time,
+      lastReceivedSongTimestampMs: t.musicStartTimeMs,
+    },
+    musicStartTimeMs: t.musicStartTimeMs,
+    selectedSongID: t.selectedSongID,
+  }
   : {
-      ...e,
-      musicStartTimeMs: t.musicStartTimeMs,
-      selectedSongID: t.selectedSongID,
-    }
+    ...e,
+    musicStartTimeMs: t.musicStartTimeMs,
+    selectedSongID: t.selectedSongID,
+  }
 let ca = () => d9()
 let cs = (e, t) => ({
   ...e,
@@ -10435,25 +10440,25 @@ let cs = (e, t) => ({
 })
 let co = (e, t, i) => t.musicStartTimeMs != null
   ? {
-      ...e,
-      time: {
-        isPaused: !1,
-        timeRemainingMs: t.totalTimeMs,
-        totalTimeMs: t.totalTimeMs,
-        lastReceivedSongTimestampMs: t.musicStartTimeMs,
-        timeOrigin: performance.now(),
-        timerID: i,
-      },
-    }
+    ...e,
+    time: {
+      isPaused: !1,
+      timeRemainingMs: t.totalTimeMs,
+      totalTimeMs: t.totalTimeMs,
+      lastReceivedSongTimestampMs: t.musicStartTimeMs,
+      timeOrigin: performance.now(),
+      timerID: i,
+    },
+  }
   : e
 let cl = e => e.time
   ? {
-      ...e,
-      time: {
-        ...e.time,
-        isPaused: !1,
-      },
-    }
+    ...e,
+    time: {
+      ...e.time,
+      isPaused: !1,
+    },
+  }
   : e
 function cd(e = d9(), t) {
   let i = (e.time?.timerID || 0) + 1
@@ -10571,9 +10576,9 @@ function cu(e = cc, t) {
     return t.payload.votePinId && e.selectedVotePinId !== t.payload.votePinId
       ? e
       : {
-          ...e,
-          selectedVotePinId: null,
-        }
+        ...e,
+        selectedVotePinId: null,
+      }
   }
   else if (setHoveredInModalVotePin.matches(t)) {
     return {
@@ -10585,9 +10590,9 @@ function cu(e = cc, t) {
     return t.payload.votePinId && e.hoveredInModalVotePinId !== t.payload.votePinId
       ? e
       : {
-          ...e,
-          hoveredInModalVotePinId: null,
-        }
+        ...e,
+        hoveredInModalVotePinId: null,
+      }
   }
   else if (clearState.matches(t)) {
     return cc
@@ -10602,14 +10607,14 @@ let ch = {
 function cg(e = ch, t) {
   return setKeyboardShortcutPanelTab.matches(t)
     ? {
-        ...e,
-        ...t.payload,
-      }
+      ...e,
+      ...t.payload,
+    }
     : e
 }
-let cy = new _$$Y4()
+let cy = new NotImplementedClass()
 let cE = combineReducers({
-  appModel: fj,
+  appModel: appStateReducer,
   selectionProperties(e = {}, t) {
     if (initAction.matches(t))
       return Object.create(null)
@@ -10653,22 +10658,22 @@ let cE = combineReducers({
       let i = t.payload.selectedStyleProperties || {}
       return areSessionLocalIDsEqual(i.guid, e.guid)
         ? {
-            ...i,
-            url: e.url,
-          }
+          ...i,
+          url: e.url,
+        }
         : i
     }
     return updateSelectedStyleThumbnailUrl.matches(t)
       ? {
-          ...e,
-          url: t.payload.selectedStyleThumbnailURL,
-        }
+        ...e,
+        url: t.payload.selectedStyleThumbnailURL,
+      }
       : e
   },
   sceneGraph(e = cy, t) {
     return initAction.matches(t) || closeFullscreenAction.matches(t) ? (resolveAndResetPromise(), cy) : updateMirror.matches(t) && t.payload.invalidateSceneGraph ? (resolvePromise(), new SingletonSceneGraph()) : e
   },
-  sceneGraphSelection: bp,
+  sceneGraphSelection: updateSelectionState,
   objectsPanelRowRebuildCounter(e = 0, t) {
     return updateMirror.matches(t) && t.payload.invalidateSceneGraph && t.payload.invalidateSceneGraph.rebuildRows ? e + 1 : e
   },
@@ -10682,42 +10687,42 @@ let cE = combineReducers({
   }, t) {
     return updateSelectionPaintsFromFullscreen.matches(t)
       ? {
-          ...e,
-          paints: t.payload,
-          emptyDueToLimitExceeded: !1,
-        }
+        ...e,
+        paints: t.payload,
+        emptyDueToLimitExceeded: !1,
+      }
       : updateSelectionStylesFromFullscreen.matches(t)
         ? {
-            ...e,
-            styles: t.payload,
-            emptyDueToLimitExceeded: !1,
-          }
+          ...e,
+          styles: t.payload,
+          emptyDueToLimitExceeded: !1,
+        }
         : updatePaintsDirectlyOnSingleNodeFromFullscreen.matches(t)
           ? {
-              ...e,
-              paintsDirectlyOnSingleNode: t.payload,
-              emptyDueToLimitExceeded: !1,
-            }
+            ...e,
+            paintsDirectlyOnSingleNode: t.payload,
+            emptyDueToLimitExceeded: !1,
+          }
           : updateStylesDirectlyOnSingleNodeFromFullscreen.matches(t)
             ? {
-                ...e,
-                stylesDirectlyOnSingleNode: t.payload,
-                emptyDueToLimitExceeded: !1,
-              }
+              ...e,
+              stylesDirectlyOnSingleNode: t.payload,
+              emptyDueToLimitExceeded: !1,
+            }
             : clearSelectionPaintsDueToLimitExceeded.matches(t)
               ? {
-                  paints: [],
-                  styles: [],
-                  paintsDirectlyOnSingleNode: [],
-                  stylesDirectlyOnSingleNode: [],
-                  emptyDueToLimitExceeded: !0,
-                  forceUpdateForUndo: !1,
-                }
+                paints: [],
+                styles: [],
+                paintsDirectlyOnSingleNode: [],
+                stylesDirectlyOnSingleNode: [],
+                emptyDueToLimitExceeded: !0,
+                forceUpdateForUndo: !1,
+              }
               : forceUpdateSelectionPaintsForUndo.matches(t)
                 ? {
-                    ...e,
-                    forceUpdateForUndo: t.payload,
-                  }
+                  ...e,
+                  forceUpdateForUndo: t.payload,
+                }
                 : e
   },
 })
@@ -10728,9 +10733,9 @@ function cC(e, t) {
   return e
     ? quickStartSetTextNodeIdAction.matches(t)
       ? {
-          ...e,
-          insertedTextNodeId: t.payload.nodeId,
-        }
+        ...e,
+        insertedTextNodeId: t.payload.nodeId,
+      }
       : e
     : cw
 }
@@ -10741,7 +10746,7 @@ if (localStorageRef) {
   try {
     (cR = e && JSON.parse(e) || {})['toggle-bold'] = (cR['text-toggle-bold'] || 0) + (cR['toggle-bold'] || 0)
   }
-  catch (e) {}
+  catch (e) { }
 }
 function cN(e = cR, t) {
   if (usedKeyboardShortcut.matches(t)) {
@@ -10749,13 +10754,13 @@ function cN(e = cR, t) {
     let n = t.payload.key
     i = n in e
       ? {
-          ...e,
-          [n]: e[n] + 1,
-        }
+        ...e,
+        [n]: e[n] + 1,
+      }
       : {
-          ...e,
-          [n]: 1,
-        }
+        ...e,
+        [n]: 1,
+      }
     localStorageRef && localStorageRef.setItem(ck, JSON.stringify(i))
     return i
   }
@@ -10767,45 +10772,45 @@ function cP(e = !1, t) {
 function cO(e = null, t) {
   return initAction.matches(t)
     ? (function (e = {}) {
-        let t = getInitialOptions().editing_file
-        if (!t)
-          return null
-        let i = t.folder
-          ? {
-              ...FileCreationPermissionsGenerator.disabled(),
-              ...t.folder,
-            }
-          : null
-        let n = getInitialOptions().frame_context
-        return {
-          ...setupFileObject(t, {
-            folder: i,
-            team: t.team,
-            repo: t.file_repo,
-            org: t.org,
-            teamUser: t.team_user,
-            orgUser: t.org_user,
-            sourceFile: t.source_file
-              ? {
-                  ...t.source_file,
-                  can_manage: !0,
-                  can_view: !0,
-                }
-              : null,
-            can_delete: t.can_manage,
-            can_edit: n?.type !== 'integration' && t.can_edit,
-            can_export: n?.type !== 'integration' && t.can_export,
-            can_edit_canvas: n?.type !== 'integration' && t.can_edit_canvas,
-            can_access_dev_mode_entry_point: n?.type !== 'integration' && t.can_access_dev_mode_entry_point,
-            can_access_full_dev_mode: n?.type !== 'integration' && t.can_access_full_dev_mode,
-            can_manage: t.can_manage,
-            can_view: t.can_view,
-            hasEduGracePeriod: !!t.edu_grace_period,
-            isFavorited: !!t?.is_favorited,
-          }),
-          ...e,
+      let t = getInitialOptions().editing_file
+      if (!t)
+        return null
+      let i = t.folder
+        ? {
+          ...FileCreationPermissionsGenerator.disabled(),
+          ...t.folder,
         }
-      }())
+        : null
+      let n = getInitialOptions().frame_context
+      return {
+        ...setupFileObject(t, {
+          folder: i,
+          team: t.team,
+          repo: t.file_repo,
+          org: t.org,
+          teamUser: t.team_user,
+          orgUser: t.org_user,
+          sourceFile: t.source_file
+            ? {
+              ...t.source_file,
+              can_manage: !0,
+              can_view: !0,
+            }
+            : null,
+          can_delete: t.can_manage,
+          can_edit: n?.type !== 'integration' && t.can_edit,
+          can_export: n?.type !== 'integration' && t.can_export,
+          can_edit_canvas: n?.type !== 'integration' && t.can_edit_canvas,
+          can_access_dev_mode_entry_point: n?.type !== 'integration' && t.can_access_dev_mode_entry_point,
+          can_access_full_dev_mode: n?.type !== 'integration' && t.can_access_full_dev_mode,
+          can_manage: t.can_manage,
+          can_view: t.can_view,
+          hasEduGracePeriod: !!t.edu_grace_period,
+          isFavorited: !!t?.is_favorited,
+        }),
+        ...e,
+      }
+    }())
     : fullscreenOpen.matches(t)
       ? t.payload.file
       : newFileLoaded.matches(t)
@@ -10814,16 +10819,16 @@ function cO(e = null, t) {
           ? null
           : updateOpenFile.matches(t)
             ? {
-                ...t.payload.openFile,
-                name: t.payload.openFile._name || 'Untitled',
-              }
+              ...t.payload.openFile,
+              name: t.payload.openFile._name || 'Untitled',
+            }
             : e
 }
 function cD(e = !1, t) {
   return !(initAction.matches(t) || fullscreenOpen.matches(t)) && !closeFullscreenAction.matches(t) && (updateOpenFile.matches(t) && !!t.payload.isLiveGraphSync || e)
 }
 function cL(e = !1, t) {
-  return !closeFullscreenAction.matches(t) && (!!_$$o8.matches(t) || e)
+  return !closeFullscreenAction.matches(t) && (!!fullscreenDocumentLoadedAction.matches(t) || e)
 }
 function cF(e = [], t) {
   return updateFaceStamps.matches(t) ? t.payload : e
@@ -10851,7 +10856,7 @@ function cU(e = {
         ? i = {
           mode: UIVisibilitySetting.HIDE_UI,
         }
-        : _$$o8.matches(t) && e.mode !== UIVisibilitySetting.ON_AND_LOCKED
+        : fullscreenDocumentLoadedAction.matches(t) && e.mode !== UIVisibilitySetting.ON_AND_LOCKED
           ? i = {
             mode: UIVisibilitySetting.OFF,
           }
@@ -10867,7 +10872,7 @@ function cB(e = !1, t) {
     if (t.payload.openNewFileIn === TabOpenBehavior.SAME_TAB)
       return !1
   }
-  else if (initAction.matches(t) || fullscreenOpen.matches(t) || reconnectingSucceeded.matches(t) || _$$o8.matches(t)) {
+  else if (initAction.matches(t) || fullscreenOpen.matches(t) || reconnectingSucceeded.matches(t) || fullscreenDocumentLoadedAction.matches(t)) {
     return !1
   }
   else if (reconnectingStarted.matches(t)) {
@@ -10897,9 +10902,9 @@ function cH(e = cz, t) {
       ? t.payload
       : stopObservingOtherUser.matches(t)
         ? {
-            ...e,
-            observingSessionID: -1,
-          }
+          ...e,
+          observingSessionID: -1,
+        }
         : e
 }
 function cW(e = !1, t) {
@@ -10914,15 +10919,15 @@ function cY(e = !1, t) {
 function cq(e, t) {
   return e == null
     ? {
-        activeTab: UserInterfaceElements.LAYERS,
-        shouldFocusSearchBar: !1,
-      }
+      activeTab: UserInterfaceElements.LAYERS,
+      shouldFocusSearchBar: !1,
+    }
     : setLeftPanelTab.matches(t)
       ? (t.payload.persist && setLastUsedLeftPanelTab(t.payload.tab), {
-          ...e,
-          activeTab: t.payload.tab,
-          shouldFocusSearchBar: t.payload.shouldFocusSearchBar ?? void 0,
-        })
+        ...e,
+        activeTab: t.payload.tab,
+        shouldFocusSearchBar: t.payload.shouldFocusSearchBar ?? void 0,
+      })
       : e
 }
 function c$(e, t) {
@@ -10988,43 +10993,43 @@ function c2(e = {
     }
     return startReactingAction.matches(t)
       ? {
-          type: 'REACTING_OR_CHATTING',
-          wheelType: e.wheelType,
-          isChatting: e.type === 'REACTING_OR_CHATTING' && e.isChatting,
-          imageUrl: t.payload.imageUrl,
-          name: t.payload.name,
-          viewportPosition: t.payload.position,
-        }
+        type: 'REACTING_OR_CHATTING',
+        wheelType: e.wheelType,
+        isChatting: e.type === 'REACTING_OR_CHATTING' && e.isChatting,
+        imageUrl: t.payload.imageUrl,
+        name: t.payload.name,
+        viewportPosition: t.payload.position,
+      }
       : stopReactingAction.matches(t) && e.type === 'REACTING_OR_CHATTING'
         ? e.isChatting
           ? {
-              ...e,
-              imageUrl: null,
-            }
+            ...e,
+            imageUrl: null,
+          }
           : {
+            type: 'NONE',
+            wheelType: e.wheelType,
+          }
+        : startChattingAction.matches(t)
+          ? {
+            type: 'REACTING_OR_CHATTING',
+            wheelType: e.wheelType,
+            imageUrl: e.type === 'REACTING_OR_CHATTING' ? e.imageUrl : null,
+            name: e.type === 'REACTING_OR_CHATTING' ? e.name : null,
+            viewportPosition: t.payload.position,
+            isChatting: !0,
+          }
+          : clearEmojiState.matches(t)
+            ? {
               type: 'NONE',
               wheelType: e.wheelType,
             }
-        : startChattingAction.matches(t)
-          ? {
-              type: 'REACTING_OR_CHATTING',
-              wheelType: e.wheelType,
-              imageUrl: e.type === 'REACTING_OR_CHATTING' ? e.imageUrl : null,
-              name: e.type === 'REACTING_OR_CHATTING' ? e.name : null,
-              viewportPosition: t.payload.position,
-              isChatting: !0,
-            }
-          : clearEmojiState.matches(t)
-            ? {
-                type: 'NONE',
-                wheelType: e.wheelType,
-              }
             : updateEmojiWheelPosition.matches(t) && e.type === 'WHEEL'
               ? {
-                  ...e,
-                  viewportX: t.payload.viewportX,
-                  viewportY: t.payload.viewportY,
-                }
+                ...e,
+                viewportX: t.payload.viewportX,
+                viewportY: t.payload.viewportY,
+              }
               : e
   })(e, t)
   chatStateTracker?.setIsCurrentUserChatting(!!i.isChatting)
@@ -11039,10 +11044,10 @@ function c4(e = null, t) {
     : updateHyperlinkPopupPosition.matches(t)
       ? e && e.data
         ? {
-            ...e,
-            position: t.payload.position,
-            size: t.payload.size,
-          }
+          ...e,
+          position: t.payload.position,
+          size: t.payload.size,
+        }
         : null
       : e
 }
@@ -11052,10 +11057,10 @@ function c3(e = null, t) {
     : updateCanvasMentionPopupPosition.matches(t)
       ? e && e.data
         ? {
-            ...e,
-            position: t.payload.position,
-            size: t.payload.size,
-          }
+          ...e,
+          position: t.payload.position,
+          size: t.payload.size,
+        }
         : null
       : e
 }
@@ -11225,9 +11230,9 @@ uI(uv)
 let ux = bindWithIgnore((e, t) => {
   return updateOrgUserDescriptionAction.matches(t) && e && t.payload && t.payload.orgUser && e.id === t.payload.orgUser.id
     ? {
-        ...e,
-        description: t.payload.orgUser.description || e.description,
-      }
+      ...e,
+      description: t.payload.orgUser.description || e.description,
+    }
     : e
 }, {
   shouldIgnoreAction: e => !updateOrgUserDescriptionAction.matches(e),
@@ -11839,8 +11844,8 @@ window && (window.userAnalyticsDataTools = {
     let t = getInitialOptions().user_data?.id
     return t
       ? pa(i => (i[t] = e, trackEventAnalytics('Set UserAnalyticsData Override', {
-          currentUserId: t,
-        }), i))
+        currentUserId: t,
+      }), i))
       : ps()
   },
   clearUserAnalyticsDataOverrides: e => pa(t => (delete t[e], t)),
@@ -11926,12 +11931,12 @@ let pg = {
     }
     return resetContacts.matches(t)
       ? {
-          appData: {
-            contactsFetched: !1,
-          },
-          usersByEmail: {},
-          users: [],
-        }
+        appData: {
+          contactsFetched: !1,
+        },
+        usersByEmail: {},
+        users: [],
+      }
       : e
   },
   dropdownShown(e = null, t) {
@@ -11941,13 +11946,13 @@ let pg = {
         ? null
         : updateDropdownSelectionAction.matches(t)
           ? {
-              ...e,
-              ...t.payload,
-              data: {
-                ...e?.data,
-                ...t.payload.data,
-              },
-            }
+            ...e,
+            ...t.payload,
+            data: {
+              ...e?.data,
+              ...t.payload.data,
+            },
+          }
           : e
   },
   flashes(e = {}, t) {
@@ -11973,9 +11978,9 @@ let pg = {
     }), showModal.matches(t))
       ? e
         ? {
-            prevModal: e.optOutOfPrevModal ? e.prevModal : e,
-            ...t.payload,
-          }
+          prevModal: e.optOutOfPrevModal ? e.prevModal : e,
+          ...t.payload,
+        }
         : t.payload
       : popModalStack.matches(t)
         ? e && e.prevModal || null
@@ -11985,15 +11990,15 @@ let pg = {
             ? e && t.payload.type === e.type ? null : e
             : updateModal.matches(t) && e
               ? {
-                  prevModal: e.prevModal,
-                  type: e.type,
-                  data: t.payload.data,
-                }
+                prevModal: e.prevModal,
+                type: e.type,
+                data: t.payload.data,
+              }
               : popPrevModal.matches(t) && e
                 ? {
-                    ...e,
-                    prevModal: e.prevModal?.prevModal,
-                  }
+                  ...e,
+                  prevModal: e.prevModal?.prevModal,
+                }
                 : e
   },
   progress(e = {}, t) {
@@ -12046,11 +12051,11 @@ let pg = {
         ? e
         : t.payload.matchType || t.payload.matchTimeout || t.payload.shouldDequeueFunc
           ? e.filter((e) => {
-              if (e.type === t.payload.matchType)
-                return !1
-              let i = getNotificationTimeout(e)
-              return (t.payload.matchTimeout !== 'persistent' || i !== 1 / 0) && (t.payload.matchTimeout !== 'ephemeral' || i === 1 / 0) && (!t.payload.shouldDequeueFunc || !t.payload.shouldDequeueFunc(e))
-            })
+            if (e.type === t.payload.matchType)
+              return !1
+            let i = getNotificationTimeout(e)
+            return (t.payload.matchTimeout !== 'persistent' || i !== 1 / 0) && (t.payload.matchTimeout !== 'ephemeral' || i === 1 / 0) && (!t.payload.shouldDequeueFunc || !t.payload.shouldDequeueFunc(e))
+          })
           : e.slice(1)
     }
     if (VisualBellActions.clearAll.matches(t))
@@ -12082,7 +12087,7 @@ let pg = {
   },
   downtime: pd,
   blockedUILoadingIndicator(e = null, t) {
-    return _$$o6.set.matches(t) ? t.payload : _$$o6.remove.matches(t) ? null : e
+    return blockedUILoadingIndicator.set.matches(t) ? t.payload : blockedUILoadingIndicator.remove.matches(t) ? null : e
   },
   teams: u0,
   authedUsers: oR,
@@ -12095,26 +12100,26 @@ let pg = {
     }
     return addAuthedCommunityProfileToHub.matches(t)
       ? {
-          ...e,
-          [t.payload.id]: t.payload,
-        }
+        ...e,
+        [t.payload.id]: t.payload,
+      }
       : putCommunityProfile.matches(t)
         ? t.payload.id in e
           ? {
-              ...e,
-              [t.payload.id]: {
-                ...e[t.payload.id],
-                ...t.payload,
-              },
-            }
+            ...e,
+            [t.payload.id]: {
+              ...e[t.payload.id],
+              ...t.payload,
+            },
+          }
           : e
         : clearCommunityProfile.matches(t)
           ? Object.keys(e).reduce((i, n) => e[n].profile_handle === t.payload
-              ? i
-              : {
-                  ...i,
-                  [n]: e[n],
-                }, {})
+            ? i
+            : {
+              ...i,
+              [n]: e[n],
+            }, {})
           : e
   },
   authedTeamsById(e = oT, t) {
@@ -12156,7 +12161,7 @@ let pg = {
     }
     return e
   },
-  user: kQ,
+  user: userReducer,
   userFlags(e = {}, t) {
     if (postUserFlag.matches(t)) {
       let i = {
@@ -12264,16 +12269,16 @@ let pg = {
     }
     return sC.matches(t)
       ? {
-          ...e,
-          [t.payload.team_id]: {
-            createdAt: new Date(t.payload.created_at),
-            updatedAt: new Date(t.payload.updated_at ? t.payload.updated_at : t.payload.created_at),
-          },
-        }
+        ...e,
+        [t.payload.team_id]: {
+          createdAt: new Date(t.payload.created_at),
+          updatedAt: new Date(t.payload.updated_at ? t.payload.updated_at : t.payload.created_at),
+        },
+      }
       : e
   },
-  isFreeUser: Yb,
-  isStarterUser: _$$nm,
+  isFreeUser: getIsFreeUser,
+  isStarterUser: getIsStarterUser,
   fileMove: dA,
   fileByKey: lg,
   deletedFilesByKey(e = {}, t) {
@@ -12404,23 +12409,23 @@ let pg = {
       ? e
       : updateTooltip.matches(t)
         ? {
-            ...e,
-            ...t.payload.tooltip,
-          }
+          ...e,
+          ...t.payload.tooltip,
+        }
         : initAction.matches(t) ? u6 : (setTargetRef.matches(t) && (e.targetRefMap ||= {}, e.targetRefMap[t.payload.targetKey] = t.payload.targetRef), e)
   },
   comments: oG,
   appWindow(e = oS, t) {
     return _$$r$.matches(t)
       ? {
-          ...e,
-          inFullScreenMode: !0,
-        }
+        ...e,
+        inFullScreenMode: !0,
+      }
       : ZH.matches(t)
         ? {
-            ...e,
-            inFullScreenMode: !1,
-          }
+          ...e,
+          inFullScreenMode: !1,
+        }
         : e
   },
   orgById(e = uw, t) {
@@ -12431,9 +12436,9 @@ let pg = {
       }), isEqual()(e, i))
         ? e
         : {
-            ...e,
-            ...i,
-          }
+          ...e,
+          ...i,
+        }
     }
     if (putOrgs.matches(t)) {
       let i = t.payload.org
@@ -12497,9 +12502,9 @@ let pg = {
   dragState(e = o3, t) {
     return dragAndDropStart.matches(t)
       ? {
-          ...e,
-          ...t.payload,
-        }
+        ...e,
+        ...t.payload,
+      }
       : dragAndDropStop.matches(t) ? o3 : e
   },
   userFavoriteFonts(e = [], t) {
@@ -12556,15 +12561,15 @@ let pg = {
       }
       i.uploadsLaunched === 0 || (t.payload.collision && t.payload.uploadId != null
         ? (i.collisions = [...i.collisions, {
-            ...t.payload.collision,
-            file: i.uploadsRemaining[t.payload.uploadId].file,
-          }], i.uploadsLaunched--)
+          ...t.payload.collision,
+          file: i.uploadsRemaining[t.payload.uploadId].file,
+        }], i.uploadsLaunched--)
         : i.unsuccessfulUploads = [...i.unsuccessfulUploads, {
           filename: t.payload.filename,
           status: t.payload.status,
         }], t.payload.uploadId && (i.uploadsRemaining = {
-        ...i.uploadsRemaining,
-      }, delete i.uploadsRemaining[t.payload.uploadId]))
+          ...i.uploadsRemaining,
+        }, delete i.uploadsRemaining[t.payload.uploadId]))
       return i
     }
     if (sharedFontActions.uploadFontWarning.matches(t)) {
@@ -12749,61 +12754,61 @@ let pg = {
   universalInsertModal(e = u9, t) {
     return setUniversalInsertModalOpen.matches(t)
       ? {
-          showing: !0,
-          pinned: t.payload.pinned || e.pinned,
-          initialX: t.payload.initialX,
-          initialY: t.payload.initialY,
-          initialFdResourceTab: t.payload.initialFdResourceTab ?? e.initialFdResourceTab,
-          initialFdView: t.payload.initialFdView,
-          fdPreviewResource: t.payload.fdPreviewResource ?? e.fdPreviewResource,
-          previewResource: t.payload.previewResource ?? e.previewResource,
-          initialTab: t.payload.initialTab ?? e.initialTab,
-          scrollDevelopmentSectionIntoView: t.payload.scrollDevelopmentSectionIntoView || !1,
-          initialSearch: t.payload.initialSearch,
-          initialSelectedCategory: t.payload.initialSelectedCategory,
-          sourceRect: t.payload.sourceRect,
-        }
+        showing: !0,
+        pinned: t.payload.pinned || e.pinned,
+        initialX: t.payload.initialX,
+        initialY: t.payload.initialY,
+        initialFdResourceTab: t.payload.initialFdResourceTab ?? e.initialFdResourceTab,
+        initialFdView: t.payload.initialFdView,
+        fdPreviewResource: t.payload.fdPreviewResource ?? e.fdPreviewResource,
+        previewResource: t.payload.previewResource ?? e.previewResource,
+        initialTab: t.payload.initialTab ?? e.initialTab,
+        scrollDevelopmentSectionIntoView: t.payload.scrollDevelopmentSectionIntoView || !1,
+        initialSearch: t.payload.initialSearch,
+        initialSelectedCategory: t.payload.initialSelectedCategory,
+        sourceRect: t.payload.sourceRect,
+      }
       : setUniversalInsertViewResourceDetails.matches(t)
         ? {
-            ...e,
-            ...t.payload,
-          }
+          ...e,
+          ...t.payload,
+        }
         : setUniversalInsertScrolledDevelopmentSection.matches(t)
           ? {
-              ...e,
-              scrollDevelopmentSectionIntoView: !1,
-            }
+            ...e,
+            scrollDevelopmentSectionIntoView: !1,
+          }
           : setUniversalInsertModalClose.matches(t)
             ? {
-                ...e,
-                showing: !1,
-                pinned: PinningState.NOT_PINNED,
-                initialX: 0,
-                initialY: 0,
-                initialFdResourceTab: void 0,
-                initialFdView: void 0,
-                fdPreviewResource: void 0,
-                previewResource: void 0,
-              }
+              ...e,
+              showing: !1,
+              pinned: PinningState.NOT_PINNED,
+              initialX: 0,
+              initialY: 0,
+              initialFdResourceTab: void 0,
+              initialFdView: void 0,
+              fdPreviewResource: void 0,
+              previewResource: void 0,
+            }
             : setUniversalInsertModalPin.matches(t)
               ? t.payload.initialX && t.payload.initialY
                 ? {
-                    ...e,
-                    showing: !0,
-                    pinned: t.payload.pinned,
-                    initialX: t.payload.initialX,
-                    initialY: t.payload.initialY,
-                  }
+                  ...e,
+                  showing: !0,
+                  pinned: t.payload.pinned,
+                  initialX: t.payload.initialX,
+                  initialY: t.payload.initialY,
+                }
                 : {
-                    ...e,
-                    showing: !0,
-                    pinned: t.payload.pinned,
-                  }
+                  ...e,
+                  showing: !0,
+                  pinned: t.payload.pinned,
+                }
               : updateSourceRect.matches(t)
                 ? {
-                    ...e,
-                    sourceRect: t.payload.sourceRect,
-                  }
+                  ...e,
+                  sourceRect: t.payload.sourceRect,
+                }
                 : e
   },
   loadingState(e = {}, t) {
@@ -12856,25 +12861,25 @@ let pg = {
     return !!userStateLoadedAction.matches(t) || e
   },
   autosave(e = oO, t) {
-    return Y3.matches(t)
+    return setUnclaimedFiles.matches(t)
       ? {
-          ...e,
-          unclaimedFilesWithChangesInIDB: t.payload.filesWithChangesInIDB,
-          unclaimedFilesCreatedOffline: t.payload.filesCreatedOffline,
-        }
-      : zE.matches(t)
+        ...e,
+        unclaimedFilesWithChangesInIDB: t.payload.filesWithChangesInIDB,
+        unclaimedFilesCreatedOffline: t.payload.filesCreatedOffline,
+      }
+      : setAutosaveSnooze.matches(t)
         ? {
-            ...e,
-            lastSnoozeTime: t.payload,
-          }
-        : TP.matches(t)
+          ...e,
+          lastSnoozeTime: t.payload,
+        }
+        : setAutosaveNextGarbageCollectionTimestamp.matches(t)
           ? {
-              ...e,
-              nextGarbageCollectionTimestamp: t.payload,
-            }
+            ...e,
+            nextGarbageCollectionTimestamp: t.payload,
+          }
           : e
   },
-  recentlyUsed: _$$Cs,
+  recentlyUsed: recentItemsReducer,
   figjamDefaultInserts(e = {
     plugins: [],
     widgets: [],
@@ -12884,12 +12889,12 @@ let pg = {
   }, t) {
     return putDefaultFigjamInsertItems.matches(t)
       ? {
-          plugins: t.payload.plugins.map(e => getPluginVersion(e)),
-          widgets: t.payload.widgets.map(e => getPluginVersion(e)),
-          templates: t.payload.templates,
-          components: t.payload.components,
-          useCases: t.payload.use_cases,
-        }
+        plugins: t.payload.plugins.map(e => getPluginVersion(e)),
+        widgets: t.payload.widgets.map(e => getPluginVersion(e)),
+        templates: t.payload.templates,
+        components: t.payload.components,
+        useCases: t.payload.use_cases,
+      }
       : e
   },
   localPlugins(e = {}, t) {
@@ -12920,9 +12925,9 @@ let pg = {
       ? e
       : g3.matches(t)
         ? {
-            loaded: !0,
-            plugins: t.payload,
-          }
+          loaded: !0,
+          plugins: t.payload,
+        }
         : e
   },
   publishedCanvasWidgetVersions(e = {}, t) {
@@ -13184,7 +13189,7 @@ let pg = {
   },
   communityHub: o0,
   communityPayments(e = {}, t) {
-    if (_$$M3.matches(t)) {
+    if (setActiveUserPayments.matches(t)) {
       let i = {
         ...e,
       }
@@ -13193,18 +13198,18 @@ let pg = {
       })
       return i
     }
-    if (_$$Sp.matches(t)) {
+    if (deleteActiveUserPayment.matches(t)) {
       let i = {
         ...e,
       }
       delete i[t.payload]
       return i
     }
-    return k3.matches(t)
+    return realtimeActiveUserPayment.matches(t)
       ? {
-          ...e,
-          [t.payload.monetized_resource_metadata_id]: t.payload,
-        }
+        ...e,
+        [t.payload.monetized_resource_metadata_id]: t.payload,
+      }
       : e
   },
   repos: lq,
@@ -13311,38 +13316,38 @@ let pg = {
     }
     return updateThemePreferenceFromIpc.matches(t) || setUserThemePreference.matches(t)
       ? {
-          ...e,
-          themePreference: t.payload.theme,
-          visibleTheme: getMPVisibleTheme(t.payload.theme),
-        }
+        ...e,
+        themePreference: t.payload.theme,
+        visibleTheme: getMPVisibleTheme(t.payload.theme),
+      }
       : setUserThemeDirectly.matches(t)
         ? {
-            ...e,
-            visibleTheme: t.payload.theme,
-          }
+          ...e,
+          visibleTheme: t.payload.theme,
+        }
         : setEnhancedContrast.matches(t)
           ? {
-              ...e,
-              enhancedContrast: t.payload.enhancedContrast,
-            }
+            ...e,
+            enhancedContrast: t.payload.enhancedContrast,
+          }
           : e
   },
   desktopNewTab(e = o5, t) {
     return setSearchQuery.matches(t)
       ? {
-          ...e,
-          searchQuery: t.payload,
-        }
+        ...e,
+        searchQuery: t.payload,
+      }
       : setIsSearchBarFocused.matches(t)
         ? {
-            ...e,
-            isSearchBarFocused: t.payload,
-          }
+          ...e,
+          isSearchBarFocused: t.payload,
+        }
         : setLoadingBackgroundColor.matches(t)
           ? {
-              ...e,
-              loadingBackgroundColor: t.payload,
-            }
+            ...e,
+            loadingBackgroundColor: t.payload,
+          }
           : e
   },
   sharingAttributionContextKey(e = null, t) {
@@ -13378,47 +13383,47 @@ let pg = {
             enabled,
           }
         case 'LOCAL':
-        {
-          let t = {
-            ...e,
-            localStoredPreference: enabled,
+          {
+            let t = {
+              ...e,
+              localStoredPreference: enabled,
+            }
+            ph(t)
+            return t
           }
-          ph(t)
-          return t
-        }
         case 'BACKEND':
-        {
-          let t = {
-            ...e,
-            serverStoredPreference: enabled,
+          {
+            let t = {
+              ...e,
+              serverStoredPreference: enabled,
+            }
+            ph(t)
+            return t
           }
-          ph(t)
-          return t
-        }
         case 'PERSISTENT':
-        {
-          let t = {
-            ...e,
-            enabled,
+          {
+            let t = {
+              ...e,
+              enabled,
+            }
+            try {
+              localStorageRef && (localStorageRef.setItem(pm, enabled ? '1' : '0'), t.localStoredPreference = enabled)
+            }
+            catch (e) { }
+            if (user) {
+              let i = e.serverStoredPreference
+              t.serverStoredPreference = enabled
+              sendWithRetry.put('/api/user', {
+                enable_screenreader: enabled,
+              }).catch(() => {
+                debugState.dispatch(screenReaderEnableAction({
+                  enabled: !!i,
+                  scope: 'BACKEND',
+                }))
+              })
+            }
+            return t
           }
-          try {
-            localStorageRef && (localStorageRef.setItem(pm, enabled ? '1' : '0'), t.localStoredPreference = enabled)
-          }
-          catch (e) {}
-          if (user) {
-            let i = e.serverStoredPreference
-            t.serverStoredPreference = enabled
-            sendWithRetry.put('/api/user', {
-              enable_screenreader: enabled,
-            }).catch(() => {
-              debugState.dispatch(screenReaderEnableAction({
-                enabled: !!i,
-                scope: 'BACKEND',
-              }))
-            })
-          }
-          return t
-        }
         default:
           throwTypeError(scope)
       }
@@ -13729,9 +13734,9 @@ let pg = {
     setLastVisitedPlan.matches(t) ? (i = t.payload.planId, n = t.payload.planType) : orgsSetOrgId.matches(t) && e === null && t.payload.orgId && (i = t.payload.orgId, n = OrganizationType.ORG)
     return i && n
       ? {
-          planId: i,
-          planType: n,
-        }
+        planId: i,
+        planType: n,
+      }
       : null
   },
   plans(e = [], t) {
@@ -13761,13 +13766,13 @@ function pv({
   })
   let l = (e, t, i) => e + 183 >= i || e <= 0
     ? (a(e => (e + 1) % pb.length), {
-        newPos: e <= 0 ? 0 : i - 183,
-        newVelocity: -t,
-      })
+      newPos: e <= 0 ? 0 : i - 183,
+      newVelocity: -t,
+    })
     : {
-        newPos: e,
-        newVelocity: t,
-      }
+      newPos: e,
+      newVelocity: t,
+    }
   let c = useCallback((e) => {
     let t = e / 8.4
     let i = window.innerWidth
@@ -13877,10 +13882,10 @@ class pS extends PureComponent {
     openUrlInDesktop(location.href, DesktopModalType.DESKTOP_INTERSTITIAL).then((e) => {
       e
         ? (this.setState({
-            opened: !0,
-          }), getFeatureFlags().desktop_auto_close_interstitial_tab && (this.tabCloseTimerID = setTimeout(() => {
-            window.postMessage('close_desktop_interstitial_tab')
-          }, 7e3)))
+          opened: !0,
+        }), getFeatureFlags().desktop_auto_close_interstitial_tab && (this.tabCloseTimerID = setTimeout(() => {
+          window.postMessage('close_desktop_interstitial_tab')
+        }, 7e3)))
         : this.props.onDismiss()
     })
   }
@@ -13897,11 +13902,11 @@ class pS extends PureComponent {
           children: t
             ? e
               ? renderI18nText('desktop_open_views.interstitial.opened_in_app', {
-                  fileName: t.name,
-                })
+                fileName: t.name,
+              })
               : renderI18nText('desktop_open_views.interstitial.opening_in_app', {
-                  fileName: t.name,
-                })
+                fileName: t.name,
+              })
             : e ? renderI18nText('desktop_open_views.interstitial.opened_link_in_app') : renderI18nText('desktop_open_views.interstitial.opening_link_in_app'),
         }), jsx(ButtonPrimitive, {
           className: 'desktop_app_interstitial--link--XNAnR',
@@ -13981,14 +13986,14 @@ async function pY(e, t) {
   let n = t.safeParse(i.data)
   return n.success
     ? {
-        status: 'success',
-        data: n.data,
-      }
+      status: 'success',
+      data: n.data,
+    }
     : (logError('force client reload', 'Failed to parse response', {
-        error: n.error.message,
-      }), pX('schema_violation'), {
-        status: 'error',
-      })
+      error: n.error.message,
+    }), pX('schema_violation'), {
+      status: 'error',
+    })
 }
 async function pq(e) {
   let t = await pY(pV, pj)
@@ -14000,19 +14005,19 @@ async function pq(e) {
   let n = poisonedReleases.find(t => t.release === e)
   return n
     ? {
-        status: 'poisoned',
-        reloadRequest: {
-          release: e,
-          disableAutomaticReload: n.disableAutomaticReload ?? !1,
-          disableFullscreenBanner: n.disableFullscreenBanner ?? !1,
-          reloadIntervalMs: n.reloadIntervalMs,
-          additionalViewsToReload: n.additionalViewsToReload ?? [],
-          poisonedAt: n.poisonedAt ?? 0,
-        },
-      }
+      status: 'poisoned',
+      reloadRequest: {
+        release: e,
+        disableAutomaticReload: n.disableAutomaticReload ?? !1,
+        disableFullscreenBanner: n.disableFullscreenBanner ?? !1,
+        reloadIntervalMs: n.reloadIntervalMs,
+        additionalViewsToReload: n.additionalViewsToReload ?? [],
+        poisonedAt: n.poisonedAt ?? 0,
+      },
+    }
     : {
-        status: 'safe',
-      }
+      status: 'safe',
+    }
 }
 async function p$(e, t) {
   let i = await pq(e)
@@ -14024,12 +14029,12 @@ async function p$(e, t) {
     case 'poisoned':
       return isEqual()(t, i.reloadRequest)
         ? {
-            status: 'unchanged',
-          }
+          status: 'unchanged',
+        }
         : {
-            status: 'changed',
-            reloadRequest: i.reloadRequest,
-          }
+          status: 'changed',
+          reloadRequest: i.reloadRequest,
+        }
     case 'error':
       return i
     default:
@@ -14063,7 +14068,7 @@ async function pJ(e, t) {
   let n = delay(i).then(() => ({
     status: 'done',
   }))
-  let r = () => {}
+  let r = () => { }
   let a = new Promise((i) => {
     r = (function (e, t, i) {
       let n = setInterval(async () => {
@@ -14111,27 +14116,27 @@ async function p0(e, t) {
 function p1(e, t, i) {
   e === 'poisoned'
     ? analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.force_client_reload_poisoned', {
+      selectedView: i.getState().selectedView.view,
+      coarseSelectedView: p3(i),
+      isSafeToReload: pB(i, t.additionalViewsToReload),
+      reloadInterval: t.reloadIntervalMs,
+      additionalViewsToReload: t.additionalViewsToReload.join(','),
+      disableFullscreenBanner: t.disableFullscreenBanner,
+      disableAutomaticReload: t.disableAutomaticReload,
+      isBackgrounded: document.hidden,
+    })
+    : e === 'triggered'
+      ? analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.force_client_reload_triggered', {
         selectedView: i.getState().selectedView.view,
         coarseSelectedView: p3(i),
         isSafeToReload: pB(i, t.additionalViewsToReload),
+        reason: 'release',
         reloadInterval: t.reloadIntervalMs,
         additionalViewsToReload: t.additionalViewsToReload.join(','),
         disableFullscreenBanner: t.disableFullscreenBanner,
         disableAutomaticReload: t.disableAutomaticReload,
         isBackgrounded: document.hidden,
       })
-    : e === 'triggered'
-      ? analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.force_client_reload_triggered', {
-          selectedView: i.getState().selectedView.view,
-          coarseSelectedView: p3(i),
-          isSafeToReload: pB(i, t.additionalViewsToReload),
-          reason: 'release',
-          reloadInterval: t.reloadIntervalMs,
-          additionalViewsToReload: t.additionalViewsToReload.join(','),
-          disableFullscreenBanner: t.disableFullscreenBanner,
-          disableAutomaticReload: t.disableAutomaticReload,
-          isBackgrounded: document.hidden,
-        })
       : throwTypeError(e)
 }
 async function p2(e, t, i) {
@@ -14145,15 +14150,15 @@ async function p2(e, t, i) {
     : n.data
       ? (pX('on_currently_deployed'), 'canceled')
       : (p1('triggered', t, i), logInfo('force client reload', 'Reload when convenient', {
-          selectedView: i.getState().selectedView.view,
-        }), t.disableFullscreenBanner || atomStoreManager.set(isShowingBannerAtom, !0), t.disableAutomaticReload || i.dispatch(scheduleReload({
-          reason: 'force client reload',
-          delay: ReloadReasonEnum.NONE,
-          metadata: {
-            isForceClientReload: !0,
-          },
-          additionalViewsToReload: t.additionalViewsToReload,
-        })), 'reloading')
+        selectedView: i.getState().selectedView.view,
+      }), t.disableFullscreenBanner || atomStoreManager.set(isShowingBannerAtom, !0), t.disableAutomaticReload || i.dispatch(scheduleReload({
+        reason: 'force client reload',
+        delay: ReloadReasonEnum.NONE,
+        metadata: {
+          isForceClientReload: !0,
+        },
+        additionalViewsToReload: t.additionalViewsToReload,
+      })), 'reloading')
 }
 var p5 = (e => (e.SAFE = 'safe', e.WAITING_FOR_RELOAD_INTERVAL = 'waiting_for_reload_interval', e.RELOADING = 'reloading', e))(p5 || {})
 class p4 {
@@ -14307,7 +14312,7 @@ let mh = createOptimistThunk((e, t) => {
 })
 let mg = createOptimistThunk((e) => {
   let t = e.getState()
-  t.selectedView.view === 'fullscreen' && atomStoreManager.set(_$$hg, {
+  t.selectedView.view === 'fullscreen' && atomStoreManager.set(inlinePreviewReducer, {
     type: 'HANDLE_EDITOR_SELECTION_CHANGED',
     payload: {
       sceneGraph: t.mirror.sceneGraph,
@@ -14318,19 +14323,19 @@ let mf = new Map([['hideMultiplayerCursors', e => ({
   message: e ? getI18nString('visual_bell.multiplayer_cursors_hidden') : getI18nString('visual_bell.multiplayer_cursors_visible'),
 })], ['showFrameGrids', (e, t, i) => jH()
   ? (_$$Gk(), {
-      message: getI18nString('visual_bell.show_frame_guides_visible'),
-      button: {
-        text: getI18nString('visual_bell.show_frame_grids_hide_button'),
-        action: (e) => {
-          e.stopPropagation()
-          i.dispatch(VisualBellActions.dequeue({}))
-          AppStateTsApi.editorPreferences().showFrameGrids.set(!1)
-        },
+    message: getI18nString('visual_bell.show_frame_guides_visible'),
+    button: {
+      text: getI18nString('visual_bell.show_frame_grids_hide_button'),
+      action: (e) => {
+        e.stopPropagation()
+        i.dispatch(VisualBellActions.dequeue({}))
+        AppStateTsApi.editorPreferences().showFrameGrids.set(!1)
       },
-    })
+    },
+  })
   : {
-      message: e ? getI18nString('visual_bell.show_frame_guides_visible') : getI18nString('visual_bell.show_frame_guides_hidden'),
-    }]])
+    message: e ? getI18nString('visual_bell.show_frame_guides_visible') : getI18nString('visual_bell.show_frame_guides_hidden'),
+  }]])
 async function my(e) {
   try {
     let t = await _$$dO(e)
@@ -14462,9 +14467,9 @@ function mN(e) {
   }
 }
 function mF(e) {
-  let t = _$$e5({
+  let t = useOverlay({
     overlay: SprigSurveysOverlay,
-    priority: _$$N0.SURVEY,
+    priority: ModalPriority.SURVEY,
   })
   let i = useCallback(async () => await new Promise((e) => {
     t.show({
@@ -14493,7 +14498,7 @@ function mB() {
     Sprig,
   } = useSprigWithSampling()
   let i = useCurrentUserOrg()
-  let n = RR()
+  let n = isCampfireModelEnabled()
   let r = useCurrentPlanUser('TrackEnterDevHandoffModeWithSprig')
   let a = useHasParentOrgId()
   let o = useCurrentPlanUser('TrackEnterDevHandoffModeWithSprig').unwrapOr(null)
@@ -14643,7 +14648,7 @@ function mZ() {
   let t = useAtomWithSubscription(_$$dO2)
   let i = useLatestRef(t)
   useEffect(() => {
-    i?.status === _$$c6.LOADING && t.status === _$$c6.SUCCESS && (t.type === 'board' ? Sprig('track', _$$Dl) : Sprig('track', _$$i_2))
+    i?.status === _$$c6.LOADING && t.status === _$$c6.SUCCESS && (t.type === 'board' ? Sprig('track', "figjam_ai_template") : Sprig('track', "figjam_ai_diagram"))
   }, [Sprig, i, t])
   return null
 }
@@ -14886,18 +14891,18 @@ function hk(e) {
           return {
             ...(e / window.innerHeight <= 0.5
               ? {
-                  top: e,
-                }
+                top: e,
+              }
               : {
-                  bottom: i,
-                }),
+                bottom: i,
+              }),
             ...(t / window.innerWidth <= 0.5
               ? {
-                  left: t,
-                }
+                left: t,
+              }
               : {
-                  right: n,
-                }),
+                right: n,
+              }),
           }
         }({
           top: r - a.top,
@@ -14953,21 +14958,21 @@ function hP() {
   }), [c, a]), !a || r || l)
     ? null
     : jsx(hk, {
-        'data-tooltip-type': KindEnum.SPECIAL,
-        'data-tooltip-desired-commit-sha': manifest_commit_sha_override_desired,
-        'data-tooltip-max-width': 300,
-        'data-tooltip-blocked-reason': manifest_commit_sha_override_blocked_reason,
-        'data-tooltip': FrontendCommitPreviewIndicator,
-        'data-tooltip-interactive': !0,
-        'data-tooltip-show-immediately': !0,
-        'children': jsx(SvgComponent, {
-          svg: _$$A12,
-          width: '40px',
-          className: classNames()('frontend_commit_preview_indicator--icon--aQl-E', o ? 'frontend_commit_preview_indicator--animated--gwUR5' : null, s ? cssBuilderInstance.colorIconDisabled.$ : cssBuilderInstance.colorIconDanger.$),
-          autosize: !0,
-          dataTestId: 'frontend-commit-preview-indicator',
-        }),
-      })
+      'data-tooltip-type': KindEnum.SPECIAL,
+      'data-tooltip-desired-commit-sha': manifest_commit_sha_override_desired,
+      'data-tooltip-max-width': 300,
+      'data-tooltip-blocked-reason': manifest_commit_sha_override_blocked_reason,
+      'data-tooltip': FrontendCommitPreviewIndicator,
+      'data-tooltip-interactive': !0,
+      'data-tooltip-show-immediately': !0,
+      'children': jsx(SvgComponent, {
+        svg: _$$A12,
+        width: '40px',
+        className: classNames()('frontend_commit_preview_indicator--icon--aQl-E', o ? 'frontend_commit_preview_indicator--animated--gwUR5' : null, s ? cssBuilderInstance.colorIconDisabled.$ : cssBuilderInstance.colorIconDanger.$),
+        autosize: !0,
+        dataTestId: 'frontend-commit-preview-indicator',
+      }),
+    })
 }
 let hD = {
   [languageCodes.JA]: 'desktop_language_support_modal_interacted_ja',
@@ -15075,62 +15080,62 @@ export async function $$hz0(e, t, d = {
       liveStore: liveStoreInstance,
     })
     setTagGlobal('ReduxDevtoolsInstalled', !!window.__REDUX_DEVTOOLS_EXTENSION__)
-    let p = compose(applyMiddleware(u, ao, t_, sW, iK, iz, nS, nQ, i2, i6, ng, ns, am, oA, od, _$$Ay5, ob, ac, _$$v3, sK, sq, oo, of, hc, hd, hh), c && window.__REDUX_DEVTOOLS_EXTENSION__
+    let p = compose(applyMiddleware(u, ao, t_, sW, iK, iz, nS, nQ, i2, i6, ng, ns, am, oA, od, _$$Ay5, ob, ac, viewActionMiddleware, sK, sq, oo, of, hc, hd, hh), c && window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__({
-          stateSanitizer: mN,
-        })
+        stateSanitizer: mN,
+      })
       : e => e, (function (e, t) {
-      let i = null
-      function n() {
-        if (e?.(), i) {
-          let e = i
-          i = null
-          e()
-        }
-        t?.()
-      }
-      return (function (e) {
-        let t = []
-        let i = t
+        let i = null
         function n() {
-          i === t && (i = t.slice())
+          if (e?.(), i) {
+            let e = i
+            i = null
+            e()
+          }
+          t?.()
         }
-        function r(e) {
-          let t = !0
-          n()
-          i.push(e)
-          return function () {
-            if (!t)
-              return
-            t = !1
+        return (function (e) {
+          let t = []
+          let i = t
+          function n() {
+            i === t && (i = t.slice())
+          }
+          function r(e) {
+            let t = !0
             n()
-            let r = i.indexOf(e)
-            i.splice(r, 1)
+            i.push(e)
+            return function () {
+              if (!t)
+                return
+              t = !1
+              n()
+              let r = i.indexOf(e)
+              i.splice(r, 1)
+            }
           }
-        }
-        function a() {
-          let e = t = i
-          for (let t = 0; t < e.length; t++) e[t]()
-        }
-        return t => (i, n) => {
-          let s = t(i, n)
-          return {
-            ...s,
-            dispatch: (t) => {
-              let i = s.dispatch(t)
-              e(a)
-              return i
-            },
-            subscribe: r,
-            subscribeImmediate: s.subscribe,
+          function a() {
+            let e = t = i
+            for (let t = 0; t < e.length; t++) e[t]()
           }
-        }
-      }((e) => {
-        ec = n
-        requestDeferredExecution()
-        i = e
-      }))
-    }(hW, hK)))
+          return t => (i, n) => {
+            let s = t(i, n)
+            return {
+              ...s,
+              dispatch: (t) => {
+                let i = s.dispatch(t)
+                e(a)
+                return i
+              },
+              subscribe: r,
+              subscribeImmediate: s.subscribe,
+            }
+          }
+        }((e) => {
+          ec = n
+          requestDeferredExecution()
+          i = e
+        }))
+      }(hW, hK)))
     let b = createStore((function () {
       let e = {
         ...pg,
@@ -15264,7 +15269,7 @@ export async function $$hz0(e, t, d = {
               updatedAt: e.updatedAt,
             }
           }
-          _$$f3(t(), n)
+          handleOpacitySettingsChange(t(), n)
           e(setAllUserFlags(n))
         }
       })
@@ -15278,7 +15283,7 @@ export async function $$hz0(e, t, d = {
       b.dispatch(updateEnhancedContrastFromIpcThunk({
         enhancedContrast: e,
       }))
-    }), O.register(KEYBOARD_LAYOUT_PREFERENCE_KEY, handleExternalKeyboardLayoutUpdate), O.register(NavigationPreferences.MouseScrollToZoom, updateScrollWheelZoomPreference), O.register(NavigationPreferences.RightClickDragToPan, updateRightClickPanPreference), O.register(SpellCheckStorageKey.DESKTOP, () => _$$up2(SpellCheckStorageKey.DESKTOP)), O.register(SpellCheckStorageKey.HUNSPELL, () => _$$up2(SpellCheckStorageKey.HUNSPELL)), h0(b), k === 'fullscreen' || k === 'communityHub' || !P) {
+    }), O.register(KEYBOARD_LAYOUT_PREFERENCE_KEY, handleExternalKeyboardLayoutUpdate), O.register(NavigationPreferences.MouseScrollToZoom, updateScrollWheelZoomPreference), O.register(NavigationPreferences.RightClickDragToPan, updateRightClickPanPreference), O.register(SpellCheckStorageKey.DESKTOP, () => updateSpellCheckLanguageAndRefresh(SpellCheckStorageKey.DESKTOP)), O.register(SpellCheckStorageKey.HUNSPELL, () => updateSpellCheckLanguageAndRefresh(SpellCheckStorageKey.HUNSPELL)), setupAutosaveIPCListeners(b), k === 'fullscreen' || k === 'communityHub' || !P) {
       let {
         editing_file,
       } = getInitialOptions()
@@ -15324,7 +15329,7 @@ export async function $$hz0(e, t, d = {
         e = JSON.parse(t)?.meta || null
         delete window.sessionStateXHR
       }
-      if (e && !isIntegrationContext() && !_$$l()) {
+      if (e && !isIntegrationContext() && !isEmbedContext()) {
         b.dispatch(setSessionStateAction(e))
         b.dispatch(sendIpcRefreshSession(e))
         let t = new IpcStorageHandler()
@@ -15366,9 +15371,9 @@ export async function $$hz0(e, t, d = {
       }))
       T
         ? fullscreenPerfManager.time('hydrateActionWithUserState', () => {
-            b.dispatch(hydrateFileBrowser(e.meta))
-            b.dispatch(updateVisibleThemeThunk())
-          })
+          b.dispatch(hydrateFileBrowser(e.meta))
+          b.dispatch(updateVisibleThemeThunk())
+        })
         : j(e.meta)
       kb.resolve()
       b.dispatch(userStateLoadedAction())
@@ -15379,7 +15384,7 @@ export async function $$hz0(e, t, d = {
         _$$a5(getInitialOptions().user_data || null, b, b.getState().userFlags, t)
         initializeFileImporter()
         b.dispatch(setupPopstateListener())
-        b.dispatch(_$$S6())
+        b.dispatch(initializeFlashMessage())
         b.dispatch(initAction())
       }))
       d.loadBlank ? initializeFullscreenForNewFile(b, FEditorType.Design).catch(e => reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e)) : d.newFileInfo && initiateNewFileCreation(b, d.newFileInfo, !0)
@@ -15407,8 +15412,8 @@ export async function $$hz0(e, t, d = {
           let e = t.editorType || FFileType.DESIGN
           let i = t.source && typeof t.source == 'string'
             ? {
-                from: t.source,
-              }
+              from: t.source,
+            }
             : void 0
           let n = getNewFileConfig({
             state: b.getState(),
@@ -15461,12 +15466,12 @@ export async function $$hz0(e, t, d = {
               return
             }
             let c = mapPathToSelectedView(e, t.path, t.params)
-            c && (b.dispatch(selectViewAction(c)), c.view === 'search' && b.dispatch(_$$H5({
+            c && (b.dispatch(selectViewAction(c)), c.view === 'search' && b.dispatch(handleRouteUpdate({
               params: t.params,
             })))
           }
           else if (e === 'handleUrlParams') {
-            b.dispatch(_$$H5({
+            b.dispatch(handleRouteUpdate({
               params: t.params,
               hash: t.hash,
             }))
@@ -15509,9 +15514,9 @@ export async function $$hz0(e, t, d = {
               let e = t.options
               let i = void 0 !== e
                 ? {
-                    batchRequest: e.batchRequest,
-                    forwardToDatadog: e.forwardToDatadog,
-                  }
+                  batchRequest: e.batchRequest,
+                  forwardToDatadog: e.forwardToDatadog,
+                }
                 : void 0
               trackEventAnalytics(t.event, t.params || void 0, i)
             }
@@ -15520,7 +15525,7 @@ export async function $$hz0(e, t, d = {
             console.log('showColorManagementSettings')
           }
           else if (e === 'handleNewAudioCaption' && t.text.trim().length > 0) {
-            _$$h2.getInstance()?.audioCaptionStream.addNewCaption(t.userId, t.timestamp, t.text)
+            VoiceCallManager.getInstance()?.audioCaptionStream.addNewCaption(t.userId, t.timestamp, t.text)
           }
           else if (e === 'handleCaptionsInstallProgress') {
             b.dispatch(captionsInstallProgress(t.captionsInstallProgress))
@@ -15594,8 +15599,8 @@ export async function $$hz0(e, t, d = {
                 }
                 t = o
                   ? getI18nString('copy_to_clipboard.slides.link_to_slide_copied_to_clipboard', {
-                      name: o.name,
-                    })
+                    name: o.name,
+                  })
                   : getI18nString('desktop_bindings.visual_bell.slide_deck_link_copied')
               }
               else {
@@ -15624,8 +15629,8 @@ export async function $$hz0(e, t, d = {
               return
             reportTranslationIssue(locale, primaryLocale, id, issueType, errorMessage
               ? {
-                  message: errorMessage,
-                }
+                message: errorMessage,
+              }
               : void 0)
           }
           else if (e === 'showFlashMessage') {
@@ -15715,7 +15720,7 @@ export async function $$hz0(e, t, d = {
           let e = {}
           let i = b.getState()
           t.source && (e.source = t.source)
-          t.action === 'save-as' ? (Dc(_$$hV2.SaveLocalFile, i.saveAsState, b.dispatch, t.action, ['0:0'], t.action), logFileSaveAs()) : t.action === 'export-all-frames-to-pdf' ? Dc(_$$hV2.Export, i.saveAsState, b.dispatch, t.action, [i.mirror.appModel.currentPage], t.action) : fullscreenValue.triggerActionInUserEditScope(t.action, e)
+          t.action === 'save-as' ? (initiateSaveAs(ExportOption.SaveLocalFile, i.saveAsState, b.dispatch, t.action, ['0:0'], t.action), logFileSaveAs()) : t.action === 'export-all-frames-to-pdf' ? initiateSaveAs(ExportOption.Export, i.saveAsState, b.dispatch, t.action, [i.mirror.appModel.currentPage], t.action) : fullscreenValue.triggerActionInUserEditScope(t.action, e)
         }
       })
       desktopAPIInstance && desktopAPIInstance.setLocales(getI18nState().locales);
@@ -15798,8 +15803,8 @@ export async function $$hz0(e, t, d = {
                   let n = m(e.getState().mirror.sceneGraph.guidFromDeveloperFriendlyId(t))
                   n
                     ? (HandoffBindingsCpp.selectAndPanToNode(n.guid), i && setTimeout(() => {
-                        Fullscreen.triggerAction('zoom-to-selection', void 0)
-                      }, 100))
+                      Fullscreen.triggerAction('zoom-to-selection', void 0)
+                    }, 100))
                     : console.error('no node matching guid')
                 })(t.data.guid, t.data.zoomToSelection)
                 break
@@ -15809,7 +15814,7 @@ export async function $$hz0(e, t, d = {
                     return
                   let e = HandoffBindingsCpp?.getAssetInfo(o.guid)
                   if (o?.childrenGuids && o.childCount > 0 && !vY(e, !0)) {
-                    let e = o.childrenDisplayOrder === _$$k6.DESIGN ? o.childCount - 1 : 0
+                    let e = o.childrenDisplayOrder === DDRenderMode.DESIGN ? o.childCount - 1 : 0
                     let t = o?.childrenGuids[e]
                     HandoffBindingsCpp.selectAndPanToNode(t)
                   }
@@ -16099,7 +16104,7 @@ export async function $$hz0(e, t, d = {
           o = m(t)
           c = (l = o?.parentNode || null) ? l.childrenGuids.indexOf(t) : null
           u = (d = l?.parentGuid ? m(l.parentGuid) : null) ? d.childrenGuids.indexOf(l.guid) : null
-          p = l?.childrenDisplayOrder === _$$k6.DESIGN
+          p = l?.childrenDisplayOrder === DDRenderMode.DESIGN
           await A(t, getCurrentCodeExtensionPreferences())
           sendText(e.getState().mirror.selectionProperties.nodeText)
         }
@@ -16262,7 +16267,7 @@ export async function $$hz0(e, t, d = {
               context: mw().getUserContext(),
               ldClient: mw().getLDClient(),
             }
-            return GS(i)(e)
+            return withLDProvider(i)(e)
           }
           catch (t) {
             t.sentryTags = {
@@ -16302,10 +16307,10 @@ export async function $$hz0(e, t, d = {
           })
           return getFeatureFlags().common_app_entry_suspense && !isInteractionOrEvalMode()
             ? jsx(SuspenseWithGuardrail, {
-                fallback: null,
-                source: 'common_app_entry',
-                children: t,
-              })
+              fallback: null,
+              source: 'common_app_entry',
+              children: t,
+            })
             : t
         }))
         let i = document.getElementById('react-page')
@@ -16330,7 +16335,7 @@ export async function $$hz0(e, t, d = {
   })
 }
 let hH = async () => {
-  if (_$$N9.shouldAutoOpen() && (await canOpenUrlInDesktop(location.href))) {
+  if (OpenDesktopAppModal.shouldAutoOpen() && (await canOpenUrlInDesktop(location.href))) {
     return new Promise((e) => {
       createReactRoot().render(jsx(pS, {
         file: getInitialOptions().editing_file,

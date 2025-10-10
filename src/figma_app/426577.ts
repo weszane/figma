@@ -26,9 +26,9 @@ import { getFeatureFlags } from "../905/601108";
 import { useSingleEffect } from "../905/791079";
 import { handleAtomEvent } from "../905/502364";
 import { UpgradeAction } from "../905/370443";
-import { e as _$$e } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { selectUserFlag } from "../905/940356";
-import { N as _$$N3 } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { OnboardingModal } from "../905/425180";
 import { DrawVariableWidthStrokeOnboarding, DrawSecondaryToolbeltOnboarding } from "../figma_app/6204";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -67,9 +67,9 @@ function V(e) {
     isShowing,
     complete,
     uniqueId
-  } = _$$e({
+  } = useOverlay({
     overlay: DrawVariableWidthStrokeOnboarding,
-    priority: _$$N3.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let s = (getFeatureFlags().ce_il_var_width_onboarding ?? !1) && !e.isVarWidthPointDisabled;
   let o = selectUserFlag("seen_draw_secondary_toolbelt_onboarding");
@@ -119,9 +119,9 @@ function H() {
     show,
     isShowing,
     complete
-  } = _$$e({
+  } = useOverlay({
     overlay: DrawSecondaryToolbeltOnboarding,
-    priority: _$$N3.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   useSingleEffect(() => {
     show({

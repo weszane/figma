@@ -30,7 +30,7 @@ import { A as _$$A3 } from "../3850/824007";
 import { A as _$$A } from "../6828/364616";
 import { A as _$$A2 } from "../6828/844411";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { gw, wv } from "../figma_app/236327";
+import { DropdownWithScrim, SeparatorComponent } from "../figma_app/236327";
 import { setRefValue } from "../figma_app/272902";
 import { fullscreenValue } from "../figma_app/455680";
 import { stopPropagation } from "../figma_app/753501";
@@ -44,8 +44,8 @@ let {
   OverridesProvider,
   OverridableComponent
 } = _$$r2();
-let Y = gw;
-let q = wv;
+let Y = DropdownWithScrim;
+let q = SeparatorComponent;
 function $() {
   return getI18nString("design_systems.instance_panel.mixed");
 }

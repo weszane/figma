@@ -12,7 +12,7 @@ import { useFileByKey } from '../905/862913';
 import { styleBuilderInstance } from '../905/941192';
 import { isNotNullish, isNullish } from '../figma_app/95419';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
-import { c$, ms } from '../figma_app/236327';
+import { OptionComponent, DropdownContainer } from '../figma_app/236327';
 import { useComponentFlyoutModal } from '../figma_app/608944';
 export enum LibraryItemTileContextMenuType {
   ASSETS_PANEL = 'library-item-tile-context-menu-for-assets-panel',
@@ -42,8 +42,8 @@ interface LibraryItemTileContextMenuProps {
 function isValidContextMenuType(type: any): type is LibraryItemTileContextMenuType {
   return Object.values(LibraryItemTileContextMenuType).includes(type);
 }
-const MenuContainer = ms;
-const MenuItem = c$;
+const MenuContainer = DropdownContainer;
+const MenuItem = OptionComponent;
 export const LibraryItemTileContextMenu = memo(({
   dropdownShown: dropdownShownData,
   hideForLocalComponents = false,

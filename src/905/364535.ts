@@ -1,7 +1,7 @@
 import { filterNotNullish } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
 import { ViewType, AppStateTsApi } from "../figma_app/763686";
-import { oz, o5, hx, dZ } from "../905/292918";
+import { openSourceFileThunk, showBranchesModalThunk, initiateBranchMergeThunk, showIncrementalUpdateModalThunk } from "../905/292918";
 import { j, l as _$$l } from "../905/618243";
 import { SourceDirection } from "../905/535806";
 export function $$d1(e, t, i) {
@@ -35,7 +35,7 @@ export function $$d1(e, t, i) {
     flags: ["design"],
     disabled: "disabled" === e.openBranchSource.status,
     callback: (e, i, n) => {
-      n(oz({
+      n(openSourceFileThunk({
         trackingContextName: t
       }));
     }
@@ -44,7 +44,7 @@ export function $$d1(e, t, i) {
     flags: ["design"],
     disabled: "disabled" === e.viewBranches.status,
     callback: (e, i, n) => {
-      n(o5({
+      n(showBranchesModalThunk({
         trackingContextName: t
       }));
     }
@@ -56,7 +56,7 @@ export function $$c0(e, t, i, r) {
     flags: ["design"],
     disabled: "disabled" === e.viewBranchDiff.status,
     callback: (e, i, n) => {
-      n(hx({
+      n(initiateBranchMergeThunk({
         direction: SourceDirection.TO_SOURCE,
         trackingContextName: t
       }));
@@ -66,7 +66,7 @@ export function $$c0(e, t, i, r) {
     flags: ["design", "!integration"],
     disabled: "disabled" === e.mergeBranch.status,
     callback: (e, i, n) => {
-      n(hx({
+      n(initiateBranchMergeThunk({
         direction: SourceDirection.TO_SOURCE,
         trackingContextName: t,
         unreadCommentCount: r
@@ -78,7 +78,7 @@ export function $$c0(e, t, i, r) {
     flags: ["design", "!integration"],
     featureFlags: ["branching_and_merging_force"],
     callback: (e, i, n) => {
-      n(hx({
+      n(initiateBranchMergeThunk({
         direction: SourceDirection.TO_SOURCE,
         trackingContextName: t,
         force: !0
@@ -89,7 +89,7 @@ export function $$c0(e, t, i, r) {
     flags: ["design"],
     disabled: "disabled" === e.viewSourceDiff.status,
     callback: (e, i, n) => {
-      n(hx({
+      n(initiateBranchMergeThunk({
         direction: SourceDirection.FROM_SOURCE,
         trackingContextName: t
       }));
@@ -99,7 +99,7 @@ export function $$c0(e, t, i, r) {
     flags: ["design", "!integration"],
     disabled: "disabled" === e.updateBranch.status,
     callback: (e, i, n) => {
-      n(hx({
+      n(initiateBranchMergeThunk({
         direction: SourceDirection.FROM_SOURCE,
         trackingContextName: t
       }));
@@ -110,7 +110,7 @@ export function $$c0(e, t, i, r) {
     flags: ["design", "!integration"],
     featureFlags: ["branching_and_merging_force"],
     callback: (e, i, n) => {
-      n(hx({
+      n(initiateBranchMergeThunk({
         direction: SourceDirection.FROM_SOURCE,
         trackingContextName: t,
         force: !0
@@ -123,7 +123,7 @@ export function $$c0(e, t, i, r) {
     featureFlags: ["branching_incremental_updates"],
     disabled: "disabled" === e.updateBranch.status,
     callback: (e, t, i) => {
-      i(dZ({}));
+      i(showIncrementalUpdateModalThunk({}));
     }
   } : null]);
 }

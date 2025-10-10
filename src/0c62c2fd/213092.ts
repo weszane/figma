@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { I } from "../c5e2cae0/718426";
-import { sx } from "../figma_app/307841";
+import { isCampfireCartEnabled } from "../figma_app/307841";
 import { openCreateTeamFlow } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
 import { startStudentReviewThunk } from "../figma_app/482142";
@@ -32,7 +32,7 @@ function h({
 export function $$x0() {
   let e = selectPermissionsState();
   let t = useDispatch<AppDispatch>();
-  let r = sx();
+  let r = isCampfireCartEnabled();
   let x = useCallback(() => {
     t(hideModal());
   }, [t]);

@@ -1,6 +1,6 @@
 import { Positioning } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
-import { um } from "../figma_app/27355";
+import { atomWithReducer } from "../figma_app/27355";
 let s = {
   positionRelativeToSelection: Positioning.ABOVE,
   currentlySelectedNode: {
@@ -8,7 +8,7 @@ let s = {
     ariaLabel: null
   }
 };
-let $$o0 = um(s, (e, t) => {
+let $$o0 = atomWithReducer(s, (e, t) => {
   switch (t.type) {
     case "SET_POS_RELATIVE_TO_SELECTION":
       return {

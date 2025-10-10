@@ -7,7 +7,7 @@ import { getPaymentFlowData } from "../figma_app/169182";
 import { sendWithRetry } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { sx as _$$sx } from "../figma_app/307841";
+import { isCampfireCartEnabled } from "../figma_app/307841";
 import { selectViewAction } from "../905/929976";
 import { loadingStateDelete } from "../figma_app/714946";
 import { restoreSavedCartAction, setTaxesAction, setNumFigmaEmailTeamUsersAction, setBillingPeriodAction, setVatGstIdAction, setCompanyDetailsAction, setRegionalVatGstIdAction, setCampfireSeatsAction, setEditorStatusChangesAction, setNumEditorsAction, setNumWhiteboardEditorsAction } from "../figma_app/482142";
@@ -31,7 +31,7 @@ let $$b2 = D(({
   let b = selectCurrentUser();
   let [w, A] = useState(!0);
   let I = useLatestRef(e);
-  let k = _$$sx();
+  let k = isCampfireCartEnabled();
   let P = fetchTeamUsers.loadingKeyForPayload({
     teamId: e
   });

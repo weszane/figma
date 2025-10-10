@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import { L8, rG } from "../905/124270";
 import { getFacetPrefix, getFacetValueLabel, getFacetQueryParams } from "../905/171315";
 import { k } from "../905/252342";
@@ -28,7 +28,7 @@ function g({
   let s = useRef(null);
   let h = useSelector(e => e.modalShown?.type === _$$r);
   let g = useAtomWithSubscription(L8);
-  let f = Xr(rG);
+  let f = useSetAtom(rG);
   let _ = _$$v(e);
   let A = getFacetPrefix(e.type);
   let y = getFacetValueLabel(e);

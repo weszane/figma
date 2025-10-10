@@ -8,7 +8,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { V } from "../905/355181";
-import { S as _$$S } from "../905/339549";
+import { RenderRefCheckbox } from "../905/339549";
 import { TextWithTruncation } from "../905/984674";
 import { tI } from "../figma_app/599327";
 import { BC } from "../figma_app/149367";
@@ -49,7 +49,7 @@ function N(e) {
           padding: {
             bottom: I
           },
-          children: jsx(_$$S, {
+          children: jsx(RenderRefCheckbox, {
             checked: a,
             label: getI18nString("org_admin_settings.billing.finalize_invoice_modal.checkbox"),
             onChange: () => r(!a)

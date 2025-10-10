@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { Fragment, jsx } from 'react/jsx-runtime';
-import { atom, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { atom, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { useFocusFirstItem } from '../figma_app/119475';
 let $$o0 = 0;
 let $$l6 = 1;
@@ -27,8 +27,8 @@ export function $$m4(e, {
   lockUp: r,
   lockDown: n
 }) {
-  let s = Xr(_);
-  let o = Xr(h);
+  let s = useSetAtom(_);
+  let o = useSetAtom(h);
   return {
     onFocus: useCallback(() => {
       t && (r && s({

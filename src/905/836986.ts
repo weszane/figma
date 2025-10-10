@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { StyleIdHandler, VariableIdHandler, VariableOverrideIdHandler, VariableSetIdCompatHandler, CodeComponentIdHandler, CodeLibraryIdHandler, CodeFileIdHandler, CanvasNodeIdHandler } from "../figma_app/243058";
-import { useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useSetAtom } from "../figma_app/27355";
 import s from "classnames";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { cssBuilderInstance } from "../cssbuilder/589278";
@@ -173,7 +173,7 @@ function P({
   errorIfMissing: i,
   fullText: r
 }) {
-  let s = Xr(AJ);
+  let s = useSetAtom(AJ);
   return null == e ? jsx(O, {
     colorStyle: i ? 0 : 3,
     text: t,

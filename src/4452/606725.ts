@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { r as _$$r } from "../905/398386";
 import { EntityType } from "../figma_app/707808";
-import { NuxOnboardingOverlay } from "../4452/529989";
+import { BaseNuxOnboardingOverlay } from "../4452/529989";
 import { C5 } from "../7021/95197";
 export function $$d0(e) {
   let t = (e => {
@@ -45,7 +45,7 @@ export function $$d0(e) {
       children: renderI18nText("file_browser.unavailable_view_text", {
         resourceNoun: t
       })
-    }), jsx(NuxOnboardingOverlay, {
+    }), jsx(BaseNuxOnboardingOverlay, {
       entryPoint: C5.FileBrowserUnavailableView
     })]
   });

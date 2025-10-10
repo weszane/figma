@@ -11,7 +11,7 @@ import { getSelectedView } from "../figma_app/386952";
 import { HeaderModal } from "../905/519092";
 import { shuffle } from "../figma_app/656233";
 import g from "classnames";
-import { c$, wv, Ve } from "../figma_app/236327";
+import { OptionComponent, SeparatorComponent, DropdownComponent } from "../figma_app/236327";
 import { RadioGroup, RadioOption } from "../905/306088";
 import { v as _$$v } from "../905/318279";
 import { pL } from "../figma_app/639088";
@@ -110,14 +110,14 @@ let C = [{
     let i = [...I.map(({
       id: e,
       shorthand: t
-    }) => jsx(c$, {
+    }) => jsx(OptionComponent, {
       id: e,
       onClick: s,
       children: jsx(N, {
         id: e,
         shorthand: t
       })
-    }, e)), jsx(wv, {}, "separator"), jsx(c$, {
+    }, e)), jsx(SeparatorComponent, {}, "separator"), jsx(OptionComponent, {
       id: e,
       onClick: s,
       children: renderI18nText("downgrade_survey.survey_option.too_expensive.other_currency")
@@ -130,7 +130,7 @@ let C = [{
           className: h()({
             "downgrade_survey_modal_component_v2--currencySelector__other--khpqx": t === e
           }),
-          children: [jsx(Ve, {
+          children: [jsx(DropdownComponent, {
             label: t.length ? getI18nString(`downgrade_survey.survey_option.too_expensive.${t}`) : getI18nString("downgrade_survey.survey_option.too_expensive.currency_selector"),
             options: i
           }), jsx("input", {

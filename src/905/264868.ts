@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useState, useRef, useEffect, useCallback } from "react";
 import { ServiceCategories } from "../905/165054";
-import { atom, Xr } from "../figma_app/27355";
+import { atom, useSetAtom } from "../figma_app/27355";
 import o from "classnames";
 import { logError } from "../905/714362";
 import { V } from "../figma_app/385855";
@@ -58,7 +58,7 @@ let $$g0 = forwardRef(({
     I(0);
     x(500);
   };
-  let L = Xr($$h1);
+  let L = useSetAtom($$h1);
   let F = "IntersectionObserver" in window;
   let [M, j] = useState(!1);
   return (useEffect(() => {

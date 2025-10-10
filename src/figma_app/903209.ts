@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { atom, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { useSprigWithSampling } from "../905/99656";
 import { VisualBellActions } from "../905/302958";
@@ -45,7 +45,7 @@ export function $$T1({
 export function $$I2({
   fileKey: e
 }) {
-  let t = Xr($$b3);
+  let t = useSetAtom($$b3);
   let r = useDispatch<AppDispatch>();
   let a = selectCurrentUser()?.id;
   let s = useIsSelectedFigmakeFullscreen();
@@ -121,7 +121,7 @@ export function $$v0({
   let r = _t(e);
   let a = JW(e);
   let s = useAtomWithSubscription($$b3);
-  let l = Xr($$b3);
+  let l = useSetAtom($$b3);
   let u = useDispatch<AppDispatch>();
   let p = useCallback(() => {
     l({

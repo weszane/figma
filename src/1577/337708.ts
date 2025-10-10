@@ -12,7 +12,7 @@ import { useModalManager } from "../905/437088";
 import { L as _$$L } from "../905/704296";
 import { rgbToHsl, hslToRgb } from "../figma_app/273493";
 import { DesignGraphElements, ToolType } from "../figma_app/763686";
-import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { useAtomValueAndSetter, useSetAtom, useAtomWithSubscription } from "../figma_app/27355";
 import x from "classnames";
 import { colorToHex } from "../905/436288";
 import { areColorArraysEqual, areColorsEqual, parseHex, multiplayerColors, blackColor } from "../figma_app/191804";
@@ -119,7 +119,7 @@ function Q({
   O1(M, KD.OVERLAY);
   let O = useMemo(() => i?.baseColors || Vk(), [i?.baseColors]);
   let [Q, Y] = useAtomValueAndSetter(rN);
-  let J = Xr(_$$B);
+  let J = useSetAtom(_$$B);
   let K = !areColorArraysEqual(O, Q) || r;
   let [X, W] = useState(!1);
   useEffect(() => (F(-1), Y(O), J(ToolType.EDIT_PALETTE_MODAL), () => {

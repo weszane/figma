@@ -3,7 +3,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useId } from "react";
 import { Button } from "../905/521428";
 import { InputComponent } from "../905/185998";
-import { bL, l9, mc, c$ } from "../905/493196";
+import { SelectGroupLabel, SelectSeparator, SelectContainer, SelectOptionReset } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
 import { v } from "../905/442517";
@@ -138,15 +138,15 @@ function w(e) {
           onChange
         }), jsx("div", {
           className: "x7hzu26"
-        }), jsxs(bL, {
+        }), jsxs(SelectGroupLabel, {
           value: currentTimeScale,
           onChange: onChangeTimeScale,
-          children: [jsx(l9, {
+          children: [jsx(SelectSeparator, {
             label: jsx(HiddenLabel, {
               children: getI18nString("org_settings.time_scale_label")
             })
-          }), jsx(mc, {
-            children: options.map(e => jsx(c$, {
+          }), jsx(SelectContainer, {
+            children: options.map(e => jsx(SelectOptionReset, {
               value: e.value,
               children: e.label
             }, e.value))

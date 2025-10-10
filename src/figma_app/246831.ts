@@ -25,7 +25,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { ms, c$ } from "../figma_app/236327";
+import { DropdownContainer, OptionComponent } from "../figma_app/236327";
 import { useKeyboardNavigationItem, KeyboardNavigationProvider } from "../figma_app/119475";
 import { Lp } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -835,8 +835,8 @@ export function $$eV2({
     recordingKey: o
   });
 }
-let eH = ms;
-let ez = c$;
+let eH = DropdownContainer;
+let ez = OptionComponent;
 function eW({
   dsStyle: e,
   position: t

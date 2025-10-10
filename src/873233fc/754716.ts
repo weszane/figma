@@ -33,12 +33,12 @@ import { Lk } from "../figma_app/122682";
 import { FEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../9410/188255";
 import { TrackingProvider } from "../figma_app/831799";
-import { e as _$$e2 } from "../905/621515";
+import { useOverlay } from "../905/621515";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { getUserPlan } from "../figma_app/502247";
-import { N as _$$N } from "../figma_app/268271";
+import { ModalPriority } from "../figma_app/268271";
 import { DevModeDemoFileTourOverlay } from "../figma_app/6204";
-import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, useSetAtom } from "../figma_app/27355";
 import { PY, go, Px, Bl, kO, HO, aN } from "../figma_app/57551";
 import { useSingleEffect } from "../905/791079";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -679,7 +679,7 @@ function eN({
   let [t, n] = useAtomValueAndSetter(Px);
   let [r, a] = useAtomValueAndSetter(Bl);
   let [l, d] = useAtomValueAndSetter(kO);
-  let s = Xr(HO);
+  let s = useSetAtom(HO);
   let u = useIsProgressBarHiddenOrLocked();
   let [c, m] = useState(!1);
   let x = useRef(0);
@@ -757,9 +757,9 @@ function eI() {
   let {
     isShowing,
     show
-  } = _$$e2({
+  } = useOverlay({
     overlay: DevModeDemoFileTourOverlay,
-    priority: _$$N.DEFAULT_MODAL
+    priority: ModalPriority.DEFAULT_MODAL
   });
   let n = getUserId();
   let [r, a] = getUserPlan(n || "") || [];

@@ -1,19 +1,46 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, useMemo } from "react";
-export let $$a1 = createContext(null);
-export function $$s0({
-  name: e,
-  children: t,
-  order: r
-}) {
-  let s = useMemo(() => ({
-    name: e,
-    priorityMap: r.reduce((e, t, n) => (e.set(t, r.length - n), e), new Map())
-  }), [e, r]);
-  return jsx($$a1.Provider, {
-    value: s,
-    children: t
-  });
+import { createContext, useMemo } from "react"
+import { jsx } from "react/jsx-runtime"
+
+// Refactored to use descriptive names, added TypeScript types, and improved readability
+// Original code name: $$s0, $$a1
+
+interface PriorityContextValue {
+  name: string
+  priorityMap: Map<string, number>
 }
-export const A = $$s0;
-export const y = $$a1;
+
+interface PriorityProviderProps {
+  name: string
+  children: React.ReactNode
+  order: string[]
+}
+
+export const PriorityContext = createContext<PriorityContextValue | null>(null)
+
+export function PriorityProvider({
+  name,
+  children,
+  order,
+}: PriorityProviderProps) {
+  const contextValue = useMemo(() => {
+    // Create a map where each item's priority is based on its position in the order array
+    // Items earlier in the array have higher priority (higher number)
+    const priorityMap = order.reduce((map, item, index) => {
+      map.set(item, order.length - index)
+      return map
+    }, new Map<string, number>())
+
+    return {
+      name,
+      priorityMap,
+    }
+  }, [name, order])
+
+  return jsx(PriorityContext.Provider, {
+    value: contextValue,
+    children,
+  })
+}
+
+export const A = PriorityProvider
+export const y = PriorityContext

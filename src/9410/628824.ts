@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { Xr } from "../figma_app/27355";
+import { useSetAtom } from "../figma_app/27355";
 import { zm } from "../figma_app/384673";
 import { c as _$$c } from "../figma_app/763535";
 import { f as _$$f } from "../figma_app/913332";
@@ -9,7 +9,7 @@ import { hV } from "../figma_app/822177";
 import { WithTrackedButton } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { UpgradeAction } from "../905/370443";
-import { kD, tS } from "../figma_app/622574";
+import { getCurrentTemplate, hasTemplateEntity } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
 import { useIsProgressBarHiddenOrLocked } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -52,10 +52,10 @@ function T({
 }
 function w() {
   let e = useIsProgressBarHiddenOrLocked();
-  let t = kD();
+  let t = getCurrentTemplate();
   let i = b4();
   let n = selectCurrentFile();
-  if (!tS() || e) return null;
+  if (!hasTemplateEntity() || e) return null;
   let a = t?.publishedByUser?.handle ? jsx("div", {
     children: renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_team_template", {
       userName: jsx("b", {
@@ -105,7 +105,7 @@ export var $$N0 = (e => (e[e.NONE = 0] = "NONE", e[e.TEAM_TEMPLATES = 1] = "TEAM
 export function $$A1({
   activeBannerType: e
 }) {
-  let t = Xr(hV);
+  let t = useSetAtom(hV);
   let {
     getProvisionalAccessBanner
   } = wH();

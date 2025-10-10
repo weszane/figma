@@ -1,11 +1,11 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, useAtomWithSubscription, atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/27355";
+import { useSetAtom, useAtomWithSubscription, atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { f3, JL } from "../figma_app/690664";
 import { $5, Rg } from "../figma_app/504321";
 export function $$o0(e) {
   let [t, n] = useState(!1);
-  let i = Xr(e.hasPopoverOpenAtom);
+  let i = useSetAtom(e.hasPopoverOpenAtom);
   let a = useCallback(e => n(() => (i(e), e)), [i]);
   return useMemo(() => [t, a], [t, a]);
 }

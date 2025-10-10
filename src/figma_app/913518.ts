@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SessionStatus } from "../figma_app/763686";
-import { atom, Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
+import { atom, useSetAtom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { setVotingSessionInfo } from "../figma_app/124493";
 import { useIsVotingSessionJoined } from "../905/486443";
@@ -22,7 +22,7 @@ let E = () => {
   }, [e]);
 };
 export function $$y2() {
-  let e = Xr(Qs);
+  let e = useSetAtom(Qs);
   let t = E();
   let r = $$b5();
   let [i, a] = useAtomValueAndSetter($$m4);
@@ -38,7 +38,7 @@ export function $$y2() {
   }, [t, e, r, i, a]);
 }
 export function $$b5() {
-  let e = Xr(Qs);
+  let e = useSetAtom(Qs);
   let t = E();
   let r = useDispatch<AppDispatch>();
   let o = useSelector(e => e.mirror.appModel.votingSessionInfo);

@@ -6,7 +6,7 @@ import { convertToRgba } from "../905/862913";
 import { S as _$$S } from "../3276/591174";
 import { B } from "../3276/578394";
 import { getTemplateActionLabel } from "../figma_app/198840";
-import { n as _$$n } from "../905/79930";
+import { TeamTemplateType } from "../905/79930";
 import { sU, WM, Wh, dY } from "../905/838765";
 import { i as _$$i } from "../figma_app/566312";
 import { b as _$$b } from "../905/635568";
@@ -69,7 +69,7 @@ export function $$y1(e) {
         name,
         onClick: e.onClickTitle,
         publishers,
-        showUserAvatar: e.template.type === _$$n.TeamTemplate
+        showUserAvatar: e.template.type === TeamTemplateType.TeamTemplate
       }),
       onContextMenu: $
     }), jsx(_$$S, {
