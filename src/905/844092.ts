@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { DT } from "../figma_app/8833";
+import { dropdownTypeCommentAttachmentContextMenu } from "../figma_app/8833";
 import { fileCommentAttachmentAPI } from "../905/348437";
 import { q } from "../905/70772";
 import { M } from "../905/981847";
@@ -34,7 +34,7 @@ export function $$h0(e) {
     e.preventDefault();
     e.stopPropagation();
     t(showDropdownThunk({
-      type: DT,
+      type: dropdownTypeCommentAttachmentContextMenu,
       data: {
         id: "comment_attachment_context_menu",
         clientX: e.clientX,

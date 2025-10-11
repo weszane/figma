@@ -22,7 +22,7 @@ import { IssueCategoryEnum } from "../905/49095";
 import { SUGGESTED_VARIABLE_START_PATTERN, SUGGESTED_VARIABLE_END_PATTERN } from "../905/246310";
 import { lW } from "../figma_app/11182";
 import { showDropdownThunk } from "../905/929976";
-import { Sl } from "../figma_app/8833";
+import { dropdownTypeDevHandoffCodeContextMenu } from "../figma_app/8833";
 import { KindEnum } from "../905/129884";
 import { VZ } from "../figma_app/727192";
 import { A as _$$A, x as _$$x } from "../905/141226";
@@ -183,7 +183,7 @@ export function $$G4(e) {
       clientY
     } = e;
     F(showDropdownThunk({
-      type: Sl,
+      type: dropdownTypeDevHandoffCodeContextMenu,
       data: {
         clientX,
         clientY,

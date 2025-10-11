@@ -26,7 +26,7 @@ import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { hidePickerThunk, hideStylePicker, showPickerThunk } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
-import { J6 } from "../figma_app/8833";
+import { fontPicker } from "../figma_app/8833";
 import { getEditorTypeFromView } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { shouldShowEula } from "../905/291654";
@@ -112,7 +112,7 @@ export function $$em2({
   restrictedFontSet: $,
   versionsForStyles: ea,
   editingStyleGuid: es,
-  fontPickerId: eo = J6,
+  fontPickerId: eo = fontPicker,
   customPlaceholder: ep,
   variant: em = "row"
 }) {

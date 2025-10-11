@@ -89,7 +89,7 @@ import { i as _$$i } from '../7037/201545';
 import { B as _$$B2 } from '../7037/575850';
 import { ue } from '../af221b13/476940';
 import { j as _$$j } from '../draftjs_composer/390258';
-import { Dm, Uu, Z7 } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture, jsFullscreenWheelEventPassthrough, dropdownTypeCommentContextMenu } from '../figma_app/8833';
 import { isNewCommentId, PIN_ELEMENT_OFFSET, getPinSizeNJv, extractUserIdsFromMessageMeta, isPointInSelectionRect, calculateThreadPinPosition, DEFAULT_PIN_OFFSET } from '../figma_app/12220';
 import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
@@ -988,7 +988,7 @@ let eU = memo(e => {
     };
     let r = addRectOffset(s, a);
     m(showDropdownThunk({
-      type: Z7,
+      type: dropdownTypeCommentContextMenu,
       data: {
         thread: o,
         pinClientRect: r
@@ -2208,7 +2208,7 @@ function nu(e) {
       transform: N,
       WebkitTransform: N
     },
-    'className': `${S.anchorClass} ${Dm}`,
+    'className': `${S.anchorClass} ${jsFullscreenPreventEventCapture}`,
     'onPointerDown': y,
     'children': e.type === 'face' ? jsx('div', {
       className: 'anchor--commentPinIcon--6I08n'
@@ -2500,7 +2500,7 @@ function nP(e) {
   } = w;
   let V = `translate(${_x2}px, ${_y2}px)`;
   let q = `calc(${e.viewportBounds.height}px - (2 * ${nj}px))`;
-  let z = !0 === e.disablePointerEvents ? 'new_comment_container--translatedThreadContainerNoPointerEvents--9z1L5 new_comment_container--translatedThreadContainer--2xkOH' : `new_comment_container--translatedThreadContainer--2xkOH ${Dm}`;
+  let z = !0 === e.disablePointerEvents ? 'new_comment_container--translatedThreadContainerNoPointerEvents--9z1L5 new_comment_container--translatedThreadContainer--2xkOH' : `new_comment_container--translatedThreadContainer--2xkOH ${jsFullscreenPreventEventCapture}`;
   let Z = e.thread.id === NEW_COMMENT_ID ? 'new_comment_container--newCommentContainerNext--bCfo7 new_comment_container--threadContainer--XIsVX text--fontPos11--2LvXf text--_fontBase--QdLsd overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7' : 'new_comment_container--threadContainer--XIsVX text--fontPos11--2LvXf text--_fontBase--QdLsd overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7';
   let $ = getI18nString('comments.add_a_comment');
   return jsx(ny, {
@@ -2762,7 +2762,7 @@ function nR({
 }) {
   return jsx('div', {
     'data-forward-events-to-fullscreen': !0,
-    'className': `${a ? 'comments_modal--detailsContainerToFront--mQO8y comments_modal--detailsContainer--zHNy9' : 'comments_modal--detailsContainer--zHNy9'} ${Uu}`,
+    'className': `${a ? 'comments_modal--detailsContainerToFront--mQO8y comments_modal--detailsContainer--zHNy9' : 'comments_modal--detailsContainer--zHNy9'} ${jsFullscreenWheelEventPassthrough}`,
     'style': {
       ...(t && {
         position: 'absolute'

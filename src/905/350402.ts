@@ -46,10 +46,10 @@ export function createOptimistThunk<S = any, P = any, Extra extends ExtraArg = a
     payload: P,
     extra?: Extra,
   ) => R,
-  loadingKeySelector?: (payload: P) => string,
+  loadingKeySelector?: (payload?: P) => string,
 ) {
   const uniqueType = generateUniqueType('THUNK')
-  const getLoadingKey = (payload: P) => loadingKeySelector ? loadingKeySelector(payload) : uniqueType
+  const getLoadingKey = (payload?: P) => loadingKeySelector ? loadingKeySelector(payload) : uniqueType
 
   /**
    * The actual thunk action creator.

@@ -211,7 +211,7 @@ import { K as _$$K2 } from '../b2835def/230877';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { CommentsSubmitButton } from '../draftjs_composer/524876';
 import { MobileReplyUpsellAnnouncement, DevModeDemoFileEntryPoint, StartingPointsTemplatesModal, ReadyForDevNodeNameChangeUpsell, DeveloperRFDUpsellOverlay, AIOnboarding, DeveloperContextualUpsellExportOverlay, VisualAssetsIntroTooltip, DeveloperContextualUpsellMeasureOverlay, FigmaMakeUpsellInDesignEditorOverlay, ViewerDevModeStatusChangedTooltipOverlay } from '../figma_app/6204';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { ei as _$$ei } from '../figma_app/9054';
 import { KP } from '../figma_app/12491';
 import { y as _$$y } from '../figma_app/13082';
@@ -817,7 +817,7 @@ function ey({
           position: 'absolute',
           visibility: isPositioned ? 'visible' : 'hidden'
         },
-        className: Dm,
+        className: jsFullscreenPreventEventCapture,
         children: jsx(_$$c, {
           wiggleCount: o,
           onWiggle: f,

@@ -33,7 +33,7 @@ interface BreadcrumbData {
  * @param rootElementId - The ID of the root DOM node (default: 'react-page').
  * @returns React Root if found, otherwise Error.
  */
-export function createReactRoot(rootElementId: string = 'react-page'): Root | Error {
+export function createReactRoot(rootElementId: string = 'react-page'): Root {
   const rootElement = document.getElementById(rootElementId)
   if (!rootElement) {
     // Gather information about the document's body children for debugging

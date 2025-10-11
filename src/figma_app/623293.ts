@@ -13,7 +13,7 @@ import { ServiceCategories } from '../905/165054';
 import { CustomCauseError } from '../905/194389';
 import { getFeatureFlags } from '../905/601108';
 import { logInfo } from '../905/714362';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { getInitialOptions } from '../figma_app/169182';
 import { BrowserInfo } from '../figma_app/778880';
 import { isInteractionPathCheck } from '../figma_app/897289';
@@ -219,7 +219,7 @@ async function copyTextLegacy(text: string, options: {
       }
       const element = options.withLineBreaks ? document.createElement('textarea') : document.createElement('input');
       element.style.cssText = 'position: fixed; top: -100px';
-      element.classList.add(Dm);
+      element.classList.add(jsFullscreenPreventEventCapture);
       document.body.appendChild(element);
       element.value = text;
       element.focus();
@@ -300,7 +300,7 @@ export async function copyRichTextToClipboard(html: string): Promise<void> {
     const tempDiv = document.createElement('div');
     tempDiv.style.cssText = 'position: fixed; transform: translateX(-200%)';
     tempDiv.innerHTML = dompurify().sanitize(html);
-    tempDiv.classList.add(Dm);
+    tempDiv.classList.add(jsFullscreenPreventEventCapture);
     document.body.appendChild(tempDiv);
     try {
       const selection = window.getSelection();

@@ -8,7 +8,7 @@ import { V as _$$V2 } from './546897';
 import { ButtonPrimitive } from './632989';
 import { MB } from '../figma_app/525558';
 import { getAssetKeyForSubscription } from '../figma_app/473391';
-import { Qx } from '../figma_app/8833';
+import { jsFullscreenPreventEventCaptureKeys } from '../figma_app/8833';
 import { Bx } from './221848';
 import { styleBuilderInstance } from './941192';
 import { useKeyboardNavigationItemForSubpath, useFocusParentSubpath } from './keyboard-navigation';
@@ -94,7 +94,7 @@ export const SubpathItem = memo<SubpathItemProps>(({
       top,
       height: gridLayoutMode ? subpathGridHeight : subpathListHeight
     },
-    className: g()(isList ? 'drilldown_item--subpathContainerList--n-4-2 drilldown_item--_drilldownItemBase--YOfRd drilldown_item--_subpathContainerBase--krA4j' : 'drilldown_item--subpathContainerGrid--8bV5l drilldown_item--_drilldownItemBase--YOfRd drilldown_item--_subpathContainerBase--krA4j', Qx),
+    className: g()(isList ? 'drilldown_item--subpathContainerList--n-4-2 drilldown_item--_drilldownItemBase--YOfRd drilldown_item--_subpathContainerBase--krA4j' : 'drilldown_item--subpathContainerGrid--8bV5l drilldown_item--_drilldownItemBase--YOfRd drilldown_item--_subpathContainerBase--krA4j', jsFullscreenPreventEventCaptureKeys),
     onClick: combinedHandler,
     recordingKey,
     ref: setKeyboardNavigationElement,

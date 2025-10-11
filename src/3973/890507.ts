@@ -150,7 +150,7 @@ export function trackInvalidBootstrapInfo(experimentName: string, bootstrapUserI
  * @param {string} usedOrgId - Used org ID.
  * @param {string} usedUserId - Used user ID.
  */
-export function trackStatsigPlanKeyBootstrap(featureFlagValue: any, planKey: string, orgId: string, sidebarOrgId: string, sidebarTeamId: string, useTeamIdHook: boolean, selectedView: string, usedPlanKey: string, usedOrgId: string, usedUserId: string): void {
+export function trackStatsigPlanKeyBootstrap(featureFlagValue: any, planKey: string, orgId: string, sidebarOrgId: string, sidebarTeamId: string, useTeamIdHook: string, selectedView: string, usedPlanKey: string, usedOrgId: string, usedUserId: string): void {
   analyticsEventManager.trackDefinedEvent('application_platform.statsig_plan_key_bootstrap', {
     statsig_feature_flag_value: featureFlagValue,
     initial_options_plan_key: planKey,

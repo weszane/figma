@@ -10,7 +10,7 @@ import { K as _$$K2 } from '../905/851274';
 import { createDeferredPromise } from '../905/874553';
 import { p as _$$p } from '../905/951634';
 import { Az } from '../9410/635978';
-import { Uu } from '../figma_app/8833';
+import { jsFullscreenWheelEventPassthrough } from '../figma_app/8833';
 import { useAtomValueAndSetter } from '../figma_app/27355';
 import { K as _$$K } from '../figma_app/291291';
 import { oe } from '../figma_app/376315';
@@ -321,7 +321,7 @@ let $$T1 = memo(({
   let g = useMemo(() => h ? _$$K : m ? _$$p : r ? H : _$$K2, [h, m, r]);
   return jsx('div', {
     className: 'x67bb7w x78zum5 x6s0dn4 xl56j7k',
-    className: Uu,
+    className: jsFullscreenWheelEventPassthrough,
     children: jsx(IconButton, {
       'size': r ? 'md' : n,
       'ref': u,

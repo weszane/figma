@@ -5,7 +5,7 @@
  * @param options - An object containing shouldIgnoreAction.
  * @returns The bound function with shouldIgnoreAction property.
  */
-export function bindWithIgnore(fn: (...args: any[]) => any, options: { shouldIgnoreAction: (action: any) => boolean }): (...args: any[]) => any {
+export function bindWithIgnore(fn: (...args: any[]) => any, options: { shouldIgnoreAction: (action: any) => boolean }) {
   const boundFn = fn.bind(null);
   boundFn.shouldIgnoreAction = options.shouldIgnoreAction;
   return boundFn;
@@ -20,7 +20,7 @@ export function bindWithIgnore(fn: (...args: any[]) => any, options: { shouldIgn
  * @param reducer - The reducer function.
  * @returns The reduced object or the original if unchanged.
  */
-export function reduceObject<T extends Record<string, any>>(obj: T, action: any, reducer: { shouldIgnoreAction: (action: any) => boolean; (value: any, action: any): any }): T {
+export function reduceObject<T extends Record<string, any>>(obj: T, action: any, reducer: { shouldIgnoreAction?: (action: any) => boolean; (value: any, action: any): any }): T {
   if (reducer.shouldIgnoreAction(action)) return obj;
   let result: any = null;
   for (const key of Object.keys(obj)) {
@@ -44,7 +44,7 @@ export function reduceObject<T extends Record<string, any>>(obj: T, action: any,
  * @param reducer - The reducer function.
  * @returns The reduced array or the original if unchanged.
  */
-export function reduceArray<T>(arr: T[], action: any, reducer: { shouldIgnoreAction: (action: any) => boolean; (value: T, action: any): T }): T[] {
+export function reduceArray<T>(arr: T[], action: any, reducer: { shouldIgnoreAction?: (action: any) => boolean; (value: T, action: any): T }): T[] {
   if (reducer.shouldIgnoreAction(action)) return arr;
   let result: T[] | null = null;
   for (let i = 0; i < arr.length; i++) {

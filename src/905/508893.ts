@@ -15,7 +15,7 @@ import { o as _$$o } from "../905/237202";
 import { p as _$$p } from "../figma_app/378458";
 import { useDispatch } from "react-redux";
 import { r as _$$r } from "../figma_app/67145";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { useDropdownState, useDropdown } from "../905/848862";
 import { KindEnum } from "../905/129884";
 import { l6, c$, uQ } from "../905/794875";
@@ -145,7 +145,7 @@ function j(e) {
       chevronClassName: "edit_preview_toolbar--chevron--zjsKc",
       dispatch: o,
       dropdownAlignment: "right",
-      dropdownClassName: Dm,
+      dropdownClassName: jsFullscreenPreventEventCapture,
       dropdownShown: l,
       dropdownWidth: a,
       id: `feedZoomPanPresetControl:${e.id}`,

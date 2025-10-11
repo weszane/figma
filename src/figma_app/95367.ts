@@ -5,7 +5,7 @@ import { N } from "../905/57692";
 import { useSetAtom } from "../figma_app/27355";
 import l from "classnames";
 import { getI18nString } from "../905/303541";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { bo } from "../figma_app/447445";
 import { S, f as _$$f } from "../figma_app/109947";
 var d = l;
@@ -19,7 +19,7 @@ export function $$h0({
     children: jsx(N, {
       ref: r,
       "aria-label": getI18nString("fullscreen.toolbar.aria_label"),
-      className: d()("toolbelt--root--jwHGa", Dm),
+      className: d()("toolbelt--root--jwHGa", jsFullscreenPreventEventCapture),
       children: e
     })
   });

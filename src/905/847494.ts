@@ -5,7 +5,7 @@ import { N } from "../905/57692";
 import { useSetAtom } from "../figma_app/27355";
 import { useMultiRefCallback } from "../figma_app/272902";
 import d from "classnames";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { bo } from "../figma_app/447445";
 import { N as _$$N } from "../figma_app/910954";
 import { dN } from "../figma_app/384673";
@@ -25,7 +25,7 @@ export function $$f0({
   let v = _$$N();
   return jsx(N, {
     ref: b,
-    className: c()(zr, Dm, {
+    className: c()(zr, jsFullscreenPreventEventCapture, {
       [al]: !d
     }),
     "aria-label": t,

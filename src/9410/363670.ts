@@ -6,7 +6,7 @@ import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { useResizeObserverRef } from "../figma_app/708845";
 import { f as _$$f } from "../figma_app/109947";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { d as _$$d } from "../9410/847929";
 import { xn, Yk } from "../figma_app/644079";
 import { gB } from "../9410/517270";
@@ -63,7 +63,7 @@ function w(e) {
         left: 0,
         ...w
       },
-      className: l()(tT, Dm),
+      className: l()(tT, jsFullscreenPreventEventCapture),
       "data-testid": "quick-actions-v2",
       children: jsx(j, {
         children: e.children
@@ -89,7 +89,7 @@ function j(e) {
       maxWidth: X,
       minWidth: a
     },
-    className: l()(N8, Dm),
+    className: l()(N8, jsFullscreenPreventEventCapture),
     "data-cancel-insertable-resource-drag-and-drop": "true",
     children: e.children
   });

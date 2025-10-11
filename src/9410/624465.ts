@@ -8,7 +8,7 @@ import { logDebug } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { endVotingSession } from "../figma_app/124493";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { consumptionPaywallUtils } from "../905/224";
 import { HZ } from "../figma_app/186343";
 import { useAppModelProperty } from "../figma_app/722362";
@@ -242,7 +242,7 @@ export function $$O0({
     atomStoreManager.set($$A1, !1);
   }), []);
   return jsx("div", {
-    className: `${Dm}`,
+    className: `${jsFullscreenPreventEventCapture}`,
     children: jsx(Q, {
       appModel: D,
       menuItems: filterNotNullish(K),

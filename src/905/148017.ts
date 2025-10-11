@@ -17,7 +17,7 @@ import { AutoInteractableWrapper } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { getI18nString } from "../905/303541";
 import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
-import { F as _$$F } from "../figma_app/8833";
+import { maxInt32 } from "../figma_app/8833";
 import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { c6 } from "../905/950959";
@@ -133,12 +133,12 @@ let ee = (e, t) => {
   });
   return "GRID" === pattern ? getI18nString("fullscreen.grid_panel.grid_size", {
     sectionSize
-  }) : "X" === axis ? numSections === _$$F ? getI18nString("fullscreen.grid_panel.columns", {
+  }) : "X" === axis ? numSections === maxInt32 ? getI18nString("fullscreen.grid_panel.columns", {
     suffix: o ?? ""
   }) : getI18nString("fullscreen.grid_panel.num_columns", {
     numColumns: numSections,
     suffix: o
-  }) : numSections === _$$F ? getI18nString("fullscreen.grid_panel.rows", {
+  }) : numSections === maxInt32 ? getI18nString("fullscreen.grid_panel.rows", {
     suffix: o ?? ""
   }) : getI18nString("fullscreen.grid_panel.num_rows", {
     numRows: numSections,

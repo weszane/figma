@@ -4,7 +4,7 @@ import { isShapeType } from "../figma_app/387100";
 import { memoizeByArgs } from "../figma_app/815945";
 import l from "classnames";
 import { V, SvgComponent } from "../905/714743";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { D, GN } from "../figma_app/249941";
 import { V_, F, sQ, Io, HR, rH, Pn, Ok, ue } from "../3682/933480";
@@ -55,7 +55,7 @@ export let $$x0 = forwardRef(function (e, t) {
   } = i;
   return jsx("div", {
     ref: t,
-    className: r()(Dm, V_, {
+    className: r()(jsFullscreenPreventEventCapture, V_, {
       [F]: e.centered,
       [sQ]: e.bottom
     }),

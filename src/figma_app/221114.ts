@@ -44,7 +44,7 @@ import { selectViewAction } from "../905/929976";
 import { setProgressBarState } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { fileUpdateSavepointAction } from "../905/852057";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
@@ -1089,7 +1089,7 @@ class eM extends RecordingComponent {
           teamId: t?.id
         },
         children: jsxs("div", {
-          className: A()(kL, Dm),
+          className: A()(kL, jsFullscreenPreventEventCapture),
           style: {
             width: g ? "100%" : void 0,
             borderLeft: g ? "unset" : void 0,

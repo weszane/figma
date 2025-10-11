@@ -21,7 +21,7 @@ import { e as _$$e } from "../1528/93111";
 import { hasCmsCollection } from "../figma_app/618433";
 import { hideStylePreview, showCreateStylePreviewThunk } from "../figma_app/914957";
 import { hideVariablePicker } from "../905/330741";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { getPropertiesPanelSplitPosition, EditorPreferencesApi } from "../figma_app/740163";
 import { q as _$$q, T as _$$T } from "../figma_app/590592";
 import { normalizeValue, valueOrFallback } from "../905/216495";
@@ -411,7 +411,7 @@ function ek({
       children: [jsx(RecordingScrollContainer, {
         hideScrollbar: !0,
         scrollingDisabled: !0,
-        className: g()(ux, KE, Dm, Ph, {
+        className: g()(ux, KE, jsFullscreenPreventEventCapture, Ph, {
           [_$$eu]: n
         }),
         width: iP,
@@ -879,7 +879,7 @@ function e4({
       },
       children: jsx(bo, {
         children: jsx("div", {
-          className: g()(ux, Dm, {
+          className: g()(ux, jsFullscreenPreventEventCapture, {
             [_$$ew]: q,
             [Ph]: !V && !d || z,
             [Jq]: !J
@@ -924,7 +924,7 @@ function e6({
   let l = getObservableValue(EditorPreferencesApi().renderRulers, !1);
   let a = _$$T();
   return jsx(lY, {
-    className: g()(ux, Dm, {
+    className: g()(ux, jsFullscreenPreventEventCapture, {
       [_$$ew]: l,
       [Ph]: !t && !n || i,
       [Jq]: !a

@@ -28,7 +28,7 @@ import { useIsScreenReaderEnabled } from '../905/810168';
 import { d2, Dm, rp } from '../905/845277';
 import { _ as _$$_, W as _$$W } from '../905/898204';
 import { showDropdownThunk } from '../905/929976';
-import { K9 } from '../figma_app/8833';
+import { dropdownTypeSelectionContextMenu } from '../figma_app/8833';
 import { FEditorType } from '../figma_app/53721';
 import { computeFullscreenViewportForNode, getViewportInfo } from '../figma_app/62612';
 import { B5, cH, cU, tp, Z3 } from '../figma_app/80462';
@@ -461,7 +461,7 @@ function eE({
   let _ = useCallback(e => {
     e.preventDefault();
     s(showDropdownThunk({
-      type: K9,
+      type: dropdownTypeSelectionContextMenu,
       data: {
         clientX: e.clientX,
         clientY: e.clientY

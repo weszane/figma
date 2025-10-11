@@ -12,7 +12,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { useWindowDimensions } from "../905/745972";
 import { createDeepEqualSelector } from "../905/270781";
 import { setLocalStyleSelection } from "../905/879323";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { getCurrentFileType } from "../figma_app/976749";
 import { Z } from "../905/224161";
 import { useCurrentTheme } from "../905/640017";
@@ -152,7 +152,7 @@ function I({
         position: "relative"
       },
       ref: F,
-      className: Dm,
+      className: jsFullscreenPreventEventCapture,
       tabIndex: -1,
       children: [jsx("div", {
         ...U({

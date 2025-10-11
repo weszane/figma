@@ -20,7 +20,7 @@ import { OnboardingModal } from "../905/425180";
 import { ArrowPosition } from "../905/858282";
 import { DevModeOverviewOnboardingOverlay } from "../figma_app/6204";
 import { showDropdownThunk } from "../905/929976";
-import { bx } from "../figma_app/8833";
+import { dropdownTypeDevHandoffOverviewEntryContextMenu } from "../figma_app/8833";
 import { isWhiteboardFileType } from "../figma_app/976749";
 import { n as _$$n } from "../figma_app/848232";
 import { selectedViewToPath } from "../figma_app/193867";
@@ -111,7 +111,7 @@ export function $$M1({
       clientY
     } = e;
     l(showDropdownThunk({
-      type: bx,
+      type: dropdownTypeDevHandoffOverviewEntryContextMenu,
       data: {
         clientX,
         clientY

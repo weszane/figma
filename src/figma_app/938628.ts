@@ -58,7 +58,7 @@ import { A as _$$A11 } from '../2854/374356';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { AspectRatioLockOnboarding } from '../figma_app/6204';
 import { u as _$$u } from '../figma_app/6978';
-import { ak } from '../figma_app/8833';
+import { epsilon } from '../figma_app/8833';
 import { createLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { v as _$$v } from '../figma_app/45501';
 import { Q as _$$Q3 } from '../figma_app/67145';
@@ -2125,7 +2125,7 @@ function t4(e) {
         'data-tooltip-show-on-target-only': !0,
         'data-tooltip-type': KindEnum.TEXT,
         'dataTestId': `transform-${key}`,
-        'min': getFeatureFlags().editor_zero_width_input ? ak : void 0,
+        'min': getFeatureFlags().editor_zero_width_input ? epsilon : void 0,
         'noBorderOnHover': !0,
         'onEvaluateExpressionError': relativeInputHandler,
         'onScrubBegin': () => AspectRatioLockBindings?.showAspectRatioLockResizingLines(),

@@ -10,7 +10,7 @@ import u from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showDropdownThunk } from "../905/929976";
-import { K9 } from "../figma_app/8833";
+import { dropdownTypeSelectionContextMenu } from "../figma_app/8833";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
@@ -315,7 +315,7 @@ export function $$j2({
       id: W ? void 0 : k,
       onContextMenu: e => {
         Q.dispatch(showDropdownThunk({
-          type: K9,
+          type: dropdownTypeSelectionContextMenu,
           data: {
             clientX: e.clientX,
             clientY: e.clientY

@@ -5,7 +5,7 @@ import { atom, atomStoreManager } from "../figma_app/27355";
 import { stylesAtom } from "../905/125333";
 import { setEyedropper } from "../figma_app/91703";
 import { updateSelectionPaintsFromFullscreen, forceUpdateSelectionPaintsForUndo, updatePaintsDirectlyOnSingleNodeFromFullscreen, updateSelectionStylesFromFullscreen, updateStylesDirectlyOnSingleNodeFromFullscreen, clearSelectionPaintsDueToLimitExceeded, updateCurrentSelectionPaintInPicker } from "../905/854717";
-import { Yr, o$ } from "../figma_app/8833";
+import { selectionPaintItemSlides, prototypeInteractionSettings } from "../figma_app/8833";
 import { getStyleSubscriptionInfo, getStyleSubscriptionName } from "../figma_app/646357";
 import { S, K } from "../905/733706";
 import { librariesAPI } from "../905/939602";
@@ -131,12 +131,12 @@ export class $$g1 {
       modeId: e.modeID
     };
     let t = this.store.getState().pickerShown?.id;
-    let r = t?.startsWith(Yr);
+    let r = t?.startsWith(selectionPaintItemSlides);
     let n = atomStoreManager.get(E_);
     return r && n ? n : {};
   }
   isPrototypingModalOpen() {
-    return this.store.getState().pickerShown?.id === o$;
+    return this.store.getState().pickerShown?.id === prototypeInteractionSettings;
   }
   validateCopyBuffer(e, t) {
     let r = this.store.getState().openFile?.key;

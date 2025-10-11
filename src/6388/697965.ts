@@ -19,7 +19,7 @@ import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getFocusedNodeId, isFullscreenAndInFocusedNodeView, getFocusNodeFunction } from "../figma_app/327588";
 import { useSelectedCooperFrameGuids } from "../figma_app/334505";
-import { F1, U3, Vx } from "../figma_app/8833";
+import { jsFullscreenClipboardEventPassthrough, dropdownTypeSlideCarouselContextMenu, dropdownTypeBuzzPageContextMenu } from "../figma_app/8833";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { useAppModelProperty } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
@@ -199,7 +199,7 @@ function K(e) {
             block: "nearest",
             inline: "nearest",
             behavior: s ? "smooth" : "instant"
-          }); else {
+          });else {
             let t = n.getBoundingClientRect();
             let l = e.current.getBoundingClientRect();
             (t.top < l.top || t.bottom > l.bottom) && requestAnimationFrame(() => {
@@ -289,7 +289,7 @@ function K(e) {
       scrollToCarouselItem: e => requestAnimationFrame(() => scrollToCarouselItem(e, !0)),
       backButtonText
     }), jsx("div", {
-      className: d()(F1, cssBuilderInstance.flexGrow1.wFull.pr2.py8.borderBox.overflowYScroll.relative.itemsCenter.hFull.$, _$$T),
+      className: d()(jsFullscreenClipboardEventPassthrough, cssBuilderInstance.flexGrow1.wFull.pr2.py8.borderBox.overflowYScroll.relative.itemsCenter.hFull.$, _$$T),
       style: {
         overflowAnchor: "none",
         scrollBehavior: didSetScrollTopOnMount && !Q.isDraggingCarouselItems ? "smooth" : "auto",
@@ -384,7 +384,7 @@ function $$G() {
   let l = ie();
   let r = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   let a = l5();
-  let d = AppStateTsApi?.singleSlideView().focusNodeInFocusedNodeView ?? (() => { });
+  let d = AppStateTsApi?.singleSlideView().focusNodeInFocusedNodeView ?? (() => {});
   let c = getObservableValue(AppStateTsApi?.singleSlideView().isCarouselFocused, !0);
   let u = {
     shouldIndentChildren: !0,
@@ -419,7 +419,7 @@ function $$G() {
     carouselConfig: u,
     carouselType: "slides",
     collapsedStatesDisabled: !1,
-    dropdownContextMenu: U3,
+    dropdownContextMenu: dropdownTypeSlideCarouselContextMenu,
     getStackTooltipText: $.slides,
     isCarouselFocused: c,
     itemRecodingKeyPrefix: "slide",
@@ -478,7 +478,7 @@ function V({
     },
     carouselType: "buzz",
     collapsedStatesDisabled: r,
-    dropdownContextMenu: Vx,
+    dropdownContextMenu: dropdownTypeBuzzPageContextMenu,
     getStackTooltipText: $.buzz,
     itemRecodingKeyPrefix: "asset",
     recordingKey: l ? "buzzMiniCarousel" : "buzzCarousel",

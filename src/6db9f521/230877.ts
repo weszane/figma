@@ -3,7 +3,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { lz } from "../figma_app/212767";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
 import { getPropertiesPanelSplitPosition, EditorPreferencesApi } from "../figma_app/740163";
@@ -36,7 +36,7 @@ export function $$g0(e) {
   });
   return jsx("div", {
     style: t,
-    className: s()("nav_container--flexContainer--3Us-2 nav_container--baseContainer--QideS overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7", Dm, e.className),
+    className: s()("nav_container--flexContainer--3Us-2 nav_container--baseContainer--QideS overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7", jsFullscreenPreventEventCapture, e.className),
     children: e.children
   });
 }

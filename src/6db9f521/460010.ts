@@ -140,7 +140,7 @@ import { EventShield } from "../905/821217";
 import { B as _$$B } from "../1250/314515";
 import { Z as _$$Z2 } from "../905/279476";
 import { useDebounce } from 'use-debounce';
-import { OI, Dm, Yr } from "../figma_app/8833";
+import { dropdownTypeSlideObjectAnimationContextMenu, jsFullscreenPreventEventCapture, selectionPaintItemSlides } from "../figma_app/8833";
 import { useCachedSubtree } from "../figma_app/679183";
 import { Bf } from "../figma_app/249941";
 import { TimeInput, NumericDropdownWithIcon, ScaleInput } from "../figma_app/178475";
@@ -3223,7 +3223,7 @@ function n$({
   let k = isValidSessionLocalID(parseSessionLocalID(N)) && N === E;
   let C = e.action.transitionDuration;
   let w = useRef(null);
-  let O = useDropdown(OI);
+  let O = useDropdown(dropdownTypeSlideObjectAnimationContextMenu);
   let A = jsx(nG, {
     isInvalid: d,
     nodeId: E
@@ -4556,7 +4556,7 @@ function lk({
         })]
       })
     }), jsx("div", {
-      className: iG()(cssBuilderInstance.relative.wFull.borderBox.$, Dm),
+      className: iG()(cssBuilderInstance.relative.wFull.borderBox.$, jsFullscreenPreventEventCapture),
       style: {
         ...styleBuilderInstance.add({
           padding: `0px ${d}px`,
@@ -7764,7 +7764,7 @@ function dE({
     inheritStyleKey: i,
     inheritStyleName: n,
     inheritStyleId: t,
-    pickerId: `${Yr}-border`,
+    pickerId: `${selectionPaintItemSlides}-border`,
     recordingKey: generateRecordingKey(s, "color"),
     hideCustomColorPickerFillTypeToggle: !1
   });
@@ -8405,7 +8405,7 @@ function cc({
     })
   });
 }
-let cu = `${Yr}-fill`;
+let cu = `${selectionPaintItemSlides}-fill`;
 let cp = ["NONE", "SOLID", "GRADIENT", "MEDIA"];
 let cx = {
   SOLID: "SOLID",

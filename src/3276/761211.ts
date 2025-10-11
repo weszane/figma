@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { generateRecordingKey } from "../figma_app/878298";
 import { showDropdownThunk } from "../905/929976";
-import { LO } from "../figma_app/8833";
+import { dropdownTypePluginRunContextMenu } from "../figma_app/8833";
 import { t as _$$t } from "../469e6e40/489933";
 import { getCurrentFileType } from "../figma_app/976749";
 import { Gt, dR } from "../figma_app/248118";
@@ -45,7 +45,7 @@ export function $$y0(e) {
           e
         } = t;
         I ? P(showDropdownThunk({
-          type: LO,
+          type: dropdownTypePluginRunContextMenu,
           data: {
             pluginId: e.resource.plugin_id,
             target: {

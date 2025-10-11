@@ -12,7 +12,7 @@ import { $ } from "../905/355181";
 import { showDropdownThunk } from "../905/929976";
 import { popModalStack } from "../905/156213";
 import { hideTooltip } from "../905/765855";
-import { Dm, DT } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture, dropdownTypeCommentAttachmentContextMenu } from "../figma_app/8833";
 import { O1, KD } from "../figma_app/317394";
 import { KindEnum } from "../905/129884";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -35,7 +35,7 @@ function v(e) {
       top: e.location.y
     },
     children: jsx("div", {
-      className: `alt_text_editor--popup--slm4K hyperlink_editor--popup--CHv-O _overlayBase--_overlayBase--Rkj8l ${Dm}`,
+      className: `alt_text_editor--popup--slm4K hyperlink_editor--popup--CHv-O _overlayBase--_overlayBase--Rkj8l ${jsFullscreenPreventEventCapture}`,
       children: e.canEdit && (a || "" === text) ? jsx("input", {
         className: "alt_text_editor--input--la-OY hyperlink_editor--input--FGLip input--darkInput--zfbnG",
         defaultValue: text,
@@ -124,7 +124,7 @@ export let $$k0 = registerModal(function (e) {
     e.preventDefault();
     e.stopPropagation();
     t(showDropdownThunk({
-      type: DT,
+      type: dropdownTypeCommentAttachmentContextMenu,
       data: {
         id: "comment_attachment_context_menu",
         clientX: e.clientX,

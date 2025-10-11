@@ -30,7 +30,7 @@ import { V as _$$V2 } from "../905/506207";
 import { RecordingScrollContainer } from "../905/347284";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { showDropdownThunk } from "../905/929976";
-import { Rb } from "../figma_app/8833";
+import { dropdownTypeObjectsPanelContextMenu } from "../figma_app/8833";
 import { i as _$$i } from "../figma_app/85949";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
@@ -605,7 +605,7 @@ class ez extends RecordingPureComponent {
         clientY
       } = t;
       this.props.dispatch(showDropdownThunk({
-        type: Rb,
+        type: dropdownTypeObjectsPanelContextMenu,
         data: {
           clientX,
           clientY

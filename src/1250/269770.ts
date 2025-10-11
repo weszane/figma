@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import s from "classnames";
 import { ErrorBoundaryCrash } from "../905/751457";
-import { s4, Dm } from "../figma_app/8833";
+import { jsFullscreenWheelEventCapture, jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { flagAtom, requestsAtom, NetworkState } from "../905/149196";
 import { getFigmentDebuggerFlag } from "../figma_app/347406";
 var l = s;
@@ -28,7 +28,7 @@ function g({
     n(!!getFigmentDebuggerFlag());
   }, []);
   return t && getFeatureFlags().figment_debugger ? jsx("div", {
-    className: l()("file_browser" === e ? "figment_debugger--fileBrowserContainer--KNMPr figment_debugger--container--4qsMx" : "figment_debugger--container--4qsMx", s4, Dm),
+    className: l()("file_browser" === e ? "figment_debugger--fileBrowserContainer--KNMPr figment_debugger--container--4qsMx" : "figment_debugger--container--4qsMx", jsFullscreenWheelEventCapture, jsFullscreenPreventEventCapture),
     children: jsx(f, {})
   }) : null;
 }

@@ -183,7 +183,7 @@ import { $_, e_ as _$$e_ } from '../9410/960980';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import _require2 from '../f2246930/661721';
 import _require from '../f2246930/661721';
-import { i as _$$i, s9 as _$$s2, si as _$$si, t4 as _$$t2, AM, bx, C9, d2, Dm, DT, J7, jQ, K9, ku, kX, LO, OI, Rb, SA, Sl, U3, V6, Vl, Vx, W_, wi, WJ, XX, Z7, Zn } from '../figma_app/8833';
+import { dropdownTypeDevHandoffLayerContextMenu, dropdownTypeDakotaItemContextMenu, dropdownTypeSectionPresetPickerContextMenu, dropdownTypeRulerGuideContextMenu, dropdownTypeLinterContextMenu, dropdownTypeDevHandoffOverviewEntryContextMenu, exportPicker, dropdownTypePageContextMenu, jsFullscreenPreventEventCapture, dropdownTypeCommentAttachmentContextMenu, dropdownTypeWebpageContextMenu, dropdownTypeCodeComponentContextMenu, dropdownTypeSelectionContextMenu, dropdownTypeTextEditModeContextMenu, dropdownTypeSlideColorPickerContextMenu, dropdownTypePluginRunContextMenu, dropdownTypeSlideObjectAnimationContextMenu, dropdownTypeObjectsPanelContextMenu, dropdownTypeDevHandoffPageContextMenu, dropdownTypeDevHandoffCodeContextMenu, dropdownTypeSlideCarouselContextMenu, dropdownTypeDakotaCollectionContextMenu, dropdownTypeGradientStopContextMenu, dropdownTypeBuzzPageContextMenu, dropdownTypeCanvasContextMenu, dropdownTypeSelectLayerContextMenu, dropdownTypeReadyStatusContextMenu, dropdownTypeAnnotationsButtonContextMenu, dropdownTypeCommentContextMenu, dropdownTypeDakotaFieldContextMenu } from '../figma_app/8833';
 import { lW } from '../figma_app/11182';
 import { canPerformAction, canRunExtensions, isExportRestricted } from '../figma_app/12796';
 import { y as _$$y4 } from '../figma_app/13082';
@@ -2196,7 +2196,7 @@ function iC({
   dataTestId: a
 }) {
   return jsxs('div', {
-    'className': el()('eyedropper_v2--menuRow--IGEss', n && 'eyedropper_v2--selectedRow--GlyoK', Dm),
+    'className': el()('eyedropper_v2--menuRow--IGEss', n && 'eyedropper_v2--selectedRow--GlyoK', jsFullscreenPreventEventCapture),
     'data-testid': a,
     'children': [jsxs('div', {
       className: ix,
@@ -2296,7 +2296,7 @@ function iw({
     }
   });
   return jsx('div', {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx(_$$Q, {
       appModel,
       dispatch: o,
@@ -2346,7 +2346,7 @@ function iS({
     callback: n
   });
   return jsx('div', {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx(_$$Q, {
       appModel,
       dispatch: o,
@@ -2392,7 +2392,7 @@ function ij({
     }
   });
   return jsx('div', {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx(_$$Q, {
       appModel,
       dispatch: s,
@@ -2644,7 +2644,7 @@ function iV({
     height: e.size.y
   };
   return jsx('div', {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx(_$$Q, {
       allowDisabledOnly: !p,
       appModel: o,
@@ -2950,7 +2950,7 @@ class ni extends PureComponent {
     let e = this.props.clientX;
     let t = this.props.clientY;
     return jsx('div', {
-      className: `${Dm}`,
+      className: `${jsFullscreenPreventEventCapture}`,
       children: jsx(_$$Q, {
         'allowCodegenOptions': this.props.selectedView.editorType === FEditorType.Design,
         'appModel': this.props.appModel,
@@ -4206,7 +4206,7 @@ let ns = class e extends PureComponent {
     let i = filterNotNullish(this.props.isTextEditModeMenu ? this.textEditModeMenu() : this.props.isSelectLayerMenu ? this.selectLayerMenu() : this.props.isRulerGuideMenu ? this.rulerGuideMenu(this.props.axis, this.props.rulerGuideContextMenuType) : this.props.isSingleSlideViewCarousel ? this.singleSlideViewCarouselMenu() : this.props.isBuzzCarousel ? this.buzzCarouselMenu() : this.contextMenu());
     n_(i, this.getActionSource());
     return jsx('div', {
-      className: `${Dm}`,
+      className: `${jsFullscreenPreventEventCapture}`,
       children: jsx(_$$Q, {
         appModel: this.props.appModel,
         dispatch: this.props.dispatch,
@@ -4486,7 +4486,7 @@ function nu({
   let x = i.clientX;
   let y = i.clientY;
   return jsx('div', {
-    className: `${Dm}`,
+    className: `${jsFullscreenPreventEventCapture}`,
     children: jsx(_$$Q, {
       appModel: s,
       dispatch: h,
@@ -4527,7 +4527,7 @@ function np({
   let d = e.clientX;
   let c = e.clientY;
   return jsx('div', {
-    className: `${Dm}`,
+    className: `${jsFullscreenPreventEventCapture}`,
     children: jsx(_$$Q, {
       appModel: i,
       dispatch: s,
@@ -4699,7 +4699,7 @@ function ny({
     callback: d
   }];
   return jsx('div', {
-    className: `${Dm}`,
+    className: `${jsFullscreenPreventEventCapture}`,
     children: jsx(_$$Q, {
       appModel: o,
       menuItems: c,
@@ -4736,7 +4736,7 @@ function nb({
     disabled: l
   }];
   return jsx('div', {
-    className: `${Dm}`,
+    className: `${jsFullscreenPreventEventCapture}`,
     children: jsx(_$$Q, {
       appModel: o,
       menuItems: d,
@@ -4771,7 +4771,7 @@ function nC(e) {
     callback: e.deleteStop
   }];
   return jsx('div', {
-    className: `${Dm}`,
+    className: `${jsFullscreenPreventEventCapture}`,
     children: jsx(_$$Q, {
       appModel: i,
       menuItems: o,
@@ -4869,7 +4869,7 @@ function nk({
     height: e.size.y
   };
   return jsx('div', {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx(_$$Q, {
       appModel: s,
       dispatch: i,
@@ -5179,7 +5179,7 @@ function nY({
   };
   KV(MenuType.RFD_STATUS_MENU, N && !!getFeatureFlags().aip_flower_garden_ready_for_dev);
   return jsx('div', {
-    className: `${Dm}`,
+    className: `${jsFullscreenPreventEventCapture}`,
     children: jsx(_$$Q, {
       appModel: u,
       dispatch: s,
@@ -5263,7 +5263,7 @@ class nX extends PureComponent {
     let t = this.props.clientY;
     let i = filterNotNullish(this.contextMenu());
     return jsx('div', {
-      className: `${Dm}`,
+      className: `${jsFullscreenPreventEventCapture}`,
       children: jsx(_$$Q, {
         appModel: this.props.appModel,
         dispatch: this.props.dispatch,
@@ -5323,7 +5323,7 @@ function nZ({
     callback: l
   });
   return jsx('div', {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx(_$$Q, {
       appModel: m,
       dispatch: u,
@@ -5386,7 +5386,7 @@ function n1({
     }
   }));
   return jsx('div', {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx(_$$Q, {
       appModel,
       dispatch: d,
@@ -5841,7 +5841,7 @@ function aC(e) {
   let o = useCanRunExtensions();
   let l = e.dropdownShown.type;
   let d = _$$v();
-  if (l === K9) {
+  if (l === dropdownTypeSelectionContextMenu) {
     let {
       clientX,
       clientY
@@ -5857,7 +5857,7 @@ function aC(e) {
       isObjectsPanelMenu: !1
     });
   }
-  if (l === wi) {
+  if (l === dropdownTypeSelectLayerContextMenu) {
     let {
       clientX,
       clientY
@@ -5874,7 +5874,7 @@ function aC(e) {
       isObjectsPanelMenu: !1
     });
   }
-  if (l === ku) {
+  if (l === dropdownTypeTextEditModeContextMenu) {
     let {
       clientX,
       clientY
@@ -5891,7 +5891,7 @@ function aC(e) {
       isTextEditModeMenu: !0
     });
   }
-  if (l === _$$t2) {
+  if (l === dropdownTypeRulerGuideContextMenu) {
     let {
       clientX,
       clientY,
@@ -5913,7 +5913,7 @@ function aC(e) {
       userCanViewWidgets: s
     });
   }
-  if (l === Rb) {
+  if (l === dropdownTypeObjectsPanelContextMenu) {
     let {
       clientX,
       clientY
@@ -5929,7 +5929,7 @@ function aC(e) {
       isObjectsPanelMenu: !0
     });
   }
-  if (l === W_) {
+  if (l === dropdownTypeCanvasContextMenu) {
     let {
       clientX,
       clientY
@@ -5946,9 +5946,9 @@ function aC(e) {
       ariaLabelledBy: e.ariaLabelledBy
     });
   }
-  if (l === LO) {
+  if (l === dropdownTypePluginRunContextMenu) {
     return jsx(nM, {});
-  } else if (l === SA) {
+  } else if (l === dropdownTypeDevHandoffPageContextMenu) {
     let {
       clientX,
       clientY,
@@ -5960,7 +5960,7 @@ function aC(e) {
       clientY,
       selectedView: e.selectedView
     });
-  } else if (l === bx) {
+  } else if (l === dropdownTypeDevHandoffOverviewEntryContextMenu) {
     let {
       clientX,
       clientY
@@ -5970,7 +5970,7 @@ function aC(e) {
       clientY,
       selectedView: e.selectedView
     });
-  } else if (l === d2) {
+  } else if (l === dropdownTypePageContextMenu) {
     let {
       clientX,
       clientY,
@@ -5984,7 +5984,7 @@ function aC(e) {
       selectedView: e.selectedView,
       shouldShowDuplicateOption
     });
-  } else if (l === Z7) {
+  } else if (l === dropdownTypeCommentContextMenu) {
     let {
       thread,
       pinClientRect
@@ -5995,7 +5995,7 @@ function aC(e) {
       pinClientRect,
       copyLink: d
     });
-  } else if (l === DT) {
+  } else if (l === dropdownTypeCommentAttachmentContextMenu) {
     let {
       attachment,
       clientX,
@@ -6007,7 +6007,7 @@ function aC(e) {
       clientX,
       clientY
     });
-  } else if (l === _$$i) {
+  } else if (l === dropdownTypeDevHandoffLayerContextMenu) {
     let {
       clientX,
       clientY,
@@ -6028,7 +6028,7 @@ function aC(e) {
       userCanViewPlugins: n,
       userCanViewWidgets: s
     });
-  } else if (l === Sl) {
+  } else if (l === dropdownTypeDevHandoffCodeContextMenu) {
     let {
       clientX,
       clientY,
@@ -6045,7 +6045,7 @@ function aC(e) {
       isObjectsPanelMenu: !0,
       onCopyText
     });
-  } else if (l === WJ) {
+  } else if (l === dropdownTypeReadyStatusContextMenu) {
     let {
       targetInViewport,
       nodeId
@@ -6060,7 +6060,7 @@ function aC(e) {
       isObjectsPanelMenu: !0,
       nodeId
     });
-  } else if (l === AM) {
+  } else if (l === dropdownTypeLinterContextMenu) {
     let {
       targetInViewport
     } = e.dropdownShown.data;
@@ -6068,7 +6068,7 @@ function aC(e) {
       targetInViewport,
       selectedView: e.selectedView
     });
-  } else if (l === XX) {
+  } else if (l === dropdownTypeAnnotationsButtonContextMenu) {
     let {
       targetInViewport,
       annotationsCount
@@ -6083,7 +6083,7 @@ function aC(e) {
       userCanRunExtensions: o,
       isObjectsPanelMenu: !0
     });
-  } else if (l === _$$si) {
+  } else if (l === dropdownTypeSectionPresetPickerContextMenu) {
     let {
       sectionId,
       initialShelfId,
@@ -6104,7 +6104,7 @@ function aC(e) {
       userCanViewPlugins: n,
       userCanViewWidgets: s
     });
-  } else if (l === U3) {
+  } else if (l === dropdownTypeSlideCarouselContextMenu) {
     let {
       clientX,
       clientY
@@ -6120,7 +6120,7 @@ function aC(e) {
       isObjectsPanelMenu: !1,
       carouselType: nd.SINGLE_SLIDE_VIEW
     });
-  } else if (l === kX) {
+  } else if (l === dropdownTypeSlideColorPickerContextMenu) {
     let {
       clientX,
       clientY,
@@ -6136,7 +6136,7 @@ function aC(e) {
       paint,
       onPaintChange
     });
-  } else if (l === OI) {
+  } else if (l === dropdownTypeSlideObjectAnimationContextMenu) {
     let {
       boundingRect,
       targetObjectAnimation
@@ -6146,7 +6146,7 @@ function aC(e) {
       selectedView: e.selectedView,
       targetObjectAnimation
     });
-  } else if (l === J7) {
+  } else if (l === dropdownTypeWebpageContextMenu) {
     let {
       clientX,
       clientY
@@ -6162,7 +6162,7 @@ function aC(e) {
       isObjectsPanelMenu: !1,
       isTextEditModeMenu: !0
     });
-  } else if (l === V6) {
+  } else if (l === dropdownTypeDakotaCollectionContextMenu) {
     let {
       clientX,
       clientY,
@@ -6176,7 +6176,7 @@ function aC(e) {
       selectedView: e.selectedView,
       collectionId
     });
-  } else if (l === Zn) {
+  } else if (l === dropdownTypeDakotaFieldContextMenu) {
     let {
       clientX,
       clientY,
@@ -6190,7 +6190,7 @@ function aC(e) {
       duplicateField,
       selectedView: e.selectedView
     });
-  } else if (l === _$$s2) {
+  } else if (l === dropdownTypeDakotaItemContextMenu) {
     let {
       clientX,
       clientY,
@@ -6202,7 +6202,7 @@ function aC(e) {
       deleteItemOrItems,
       selectedView: e.selectedView
     });
-  } else if (l === jQ) {
+  } else if (l === dropdownTypeCodeComponentContextMenu) {
     let {
       clientX,
       clientY,
@@ -6222,7 +6222,7 @@ function aC(e) {
       selectOnCanvas,
       selectedView: e.selectedView
     });
-  } else if (l === Vx) {
+  } else if (l === dropdownTypeBuzzPageContextMenu) {
     let {
       clientX,
       clientY
@@ -6238,7 +6238,7 @@ function aC(e) {
       isObjectsPanelMenu: !1,
       carouselType: nd.COOPER_CAROUSEL
     });
-  } else if (l === Vl) {
+  } else if (l === dropdownTypeGradientStopContextMenu) {
     let {
       clientX,
       clientY,
@@ -8305,7 +8305,7 @@ function s6({
   return jsxs('div', {
     className: 'loading_overlay--pageSyncing--9AqbU',
     children: [jsx('div', {
-      className: el()('loading_overlay--blurredOverlay--79bya', Dm),
+      className: el()('loading_overlay--blurredOverlay--79bya', jsFullscreenPreventEventCapture),
       style: d
     }), t && u ? jsx('div', {
       className: 'loading_overlay--pageSyncingFadeIn--QVvQE',
@@ -9079,7 +9079,7 @@ function o$(e) {
       top: Math.round(y + d.y)
     },
     children: jsxs('div', {
-      className: `sites_hyperlink_editor--popup--3kD7E _overlayBase--_overlayBase--Rkj8l ${Dm}`,
+      className: `sites_hyperlink_editor--popup--3kD7E _overlayBase--_overlayBase--Rkj8l ${jsFullscreenPreventEventCapture}`,
       children: [a && jsx(SvgComponent, {
         svg: _$$A21,
         className: 'sites_hyperlink_editor--breakIcon--LW2w0',
@@ -9492,7 +9492,7 @@ export function $$lr0({
               selectedView: t.selectedView,
               ariaLabelledBy: getI18nString('fullscreen.fullscreen_view.context_menu.aria_label')
             })
-          }), t.pickerShown?.id === C9 && jsx(tS, {}), t.pickerShown?.id === _$$O4 && jsx(_$$S5, {
+          }), t.pickerShown?.id === exportPicker && jsx(tS, {}), t.pickerShown?.id === _$$O4 && jsx(_$$S5, {
             recordingKey: 'nudgeAmountPicker'
           }), jsx(iv, {})]
         })

@@ -10,7 +10,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { setupHyperlinkHandler } from "../figma_app/815170";
-import { Dm, Uu } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture, jsFullscreenWheelEventPassthrough } from "../figma_app/8833";
 import { getCurrentFileType } from "../figma_app/976749";
 import { PluginModalTypeEnum } from "../figma_app/671547";
 import { fullscreenValue } from "../figma_app/455680";
@@ -381,7 +381,7 @@ export function $$U1(e) {
     className: kL,
     style: divStyle,
     children: jsxs("div", {
-      className: `${kz} ${verticalAlignmentStyle} ${Dm} ${Uu}`,
+      className: `${kz} ${verticalAlignmentStyle} ${jsFullscreenPreventEventCapture} ${jsFullscreenWheelEventPassthrough}`,
       children: [jsx($$j0, {
         data: r.data,
         editorType: l,

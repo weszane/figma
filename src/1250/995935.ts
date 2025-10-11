@@ -77,7 +77,7 @@ import { Iv as _$$Iv } from '../7222/396421';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { useCurrentFileWorkshopModeStatus } from '../figma_app/789';
 import { isCommunityResourceSubscriptionActive } from '../figma_app/4253';
-import { C9 } from '../figma_app/8833';
+import { exportPicker } from '../figma_app/8833';
 import { isExternalRestricted } from '../figma_app/12796';
 import { useIsFullscreenSlidesView } from '../figma_app/21029';
 import { f as _$$f2 } from '../figma_app/24747';
@@ -556,7 +556,7 @@ let t$ = {
           buttonText: getI18nString('external_collaboration_restricted.banner.export_file'),
           onClick: () => {
             n?.editorType === 'design' ? t(showPickerThunk({
-              id: C9
+              id: exportPicker
             })) : t(showModalHandler({
               type: _$$B,
               data: {

@@ -13,7 +13,7 @@ import { logger } from "../905/651849";
 import { selectWithShallowEqual } from "../905/103090";
 import { BaseLinkComponent } from "../905/551536";
 import { cssBuilderInstance } from "../cssbuilder/589278";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { defaultColorManipulator } from "../905/713722";
 import { getSelectedEditorType } from "../figma_app/976749";
 import { widgetManagerHandler } from "../905/239551";
@@ -184,7 +184,7 @@ function R({
       className: p ? "widget_controls--select---Nqnq text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L" : Lt,
       dispatch: i,
       dropdownAlignment: "left",
-      dropdownClassName: Dm,
+      dropdownClassName: jsFullscreenPreventEventCapture,
       dropdownShown: r,
       dropdownWidth: 144,
       formatter: {

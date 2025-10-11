@@ -54,7 +54,7 @@ import { DialogContents } from "../figma_app/272243";
 import ey from "../vendor/197638";
 import { clamp } from "../figma_app/492908";
 import { V as _$$V } from "../905/506207";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { lY } from "../figma_app/779965";
 import { bo } from "../figma_app/447445";
@@ -783,7 +783,7 @@ function eA({
   return "side_panel" !== inProductHelpViewType ? null : jsx(_$$V, {
     children: jsx(bo, {
       children: jsx(lY, {
-        className: j()("dynamic_panel--sidePanelPosition--YOgLo", Dm),
+        className: j()("dynamic_panel--sidePanelPosition--YOgLo", jsFullscreenPreventEventCapture),
         size: s,
         onResize: e => {
           !function (e) {

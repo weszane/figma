@@ -1,8 +1,8 @@
 export type Fn = (...args: any[]) => any
 
 export interface EarlyArgs {
-  api_user_state_path: null
-  api_session_state_path: null
+  api_user_state_path: any
+  api_session_state_path: any
   file_minimal_user_state: boolean
   multiplayer_preconnect_options: MultiplayerPreconnectOptions
   should_connect_to_multiplayer: boolean
@@ -12,8 +12,8 @@ export interface MultiplayerPreconnectOptions {
   fileKey: string
   role: string
   nodeIds: string
-  targetFileVersion: null
-  tagForLogging: null
+  targetFileVersion: any
+  tagForLogging: any
   multiplayerPreload: boolean
   forceIncrementalForEditors: ObjectOf
 }
@@ -77,7 +77,7 @@ export interface InitialOptions {
   dictionary_url_by_locale: DictionaryURLByLocale
   flash: Flash
   user_currency_from_ip: string
-  fxr_for_currency: null
+  fxr_for_currency: any
   google_drive_client_id: string
   google_drive_api_key: string
   cursor_bot: CursorBot
@@ -87,11 +87,11 @@ export interface InitialOptions {
   google_client_id: string
   consent_region: string
   page_load_token: string
-  resource_type: null
-  email: null
+  resource_type: any
+  email: any
   user_ip: string
-  redirect_url: null
-  email_token: null
+  redirect_url: any
+  email_token: any
   existing_session: boolean
   should_use_redirect_instead: boolean
   mailing_list_checkbox_default: boolean
@@ -1335,8 +1335,8 @@ export interface LivegraphPreloadViews {
   [key: string]: {
     hash: string
     args: {
-      currentOrgId: string | null
-      currentTeamId: string | null
+      currentOrgId: string | any
+      currentTeamId: string | any
     }
   }
 }
@@ -1490,31 +1490,31 @@ export interface EditingFile {
   updated_at: Date
   key: string
   name: string
-  description: null
+  description: any
   folder_id: string
-  scheme: null
+  scheme: any
   team_id: string
   link_access: string
-  trashed_user_id: null
+  trashed_user_id: any
   client_meta: string
-  license: null
-  parent_org_id: null
+  license: any
+  parent_org_id: any
   org_browsable: boolean
-  thumbnail_url_override: null
-  thumbnail_guid: null
-  proto_link_access: null
+  thumbnail_url_override: any
+  thumbnail_guid: any
+  proto_link_access: any
   org_audience: boolean
-  file_repo_id: null
-  source_file_key: null
-  source_checkpoint_id: null
+  file_repo_id: any
+  source_file_key: any
+  source_checkpoint_id: any
   editor_type: string
-  branch_checkpoint_id: null
+  branch_checkpoint_id: any
   has_file_link_password: boolean
   has_proto_link_password: boolean
   folder_access_enabled: boolean
   _internal_only_written_by_backfill: number
   is_trashed_with_project: boolean
-  trashed_with_parent: null
+  trashed_with_parent: any
   url: string
   edit_url: string
   prototype_url: string
@@ -1526,16 +1526,16 @@ export interface EditingFile {
   is_try_file: boolean
   library_key: string
   created_at: Date
-  deleted_at: null
-  trashed_at: null
-  folder: null
-  team: null
-  team_user: null
-  org: null
-  org_user: null
-  edu_grace_period: null
-  file_repo: null
-  source_file: null
+  deleted_at: any
+  trashed_at: any
+  folder: any
+  team: any
+  team_user: any
+  org: any
+  org_user: any
+  edu_grace_period: any
+  file_repo: any
+  source_file: any
   can_edit: boolean
   can_export: boolean
   can_edit_canvas: boolean
@@ -1562,9 +1562,9 @@ export interface FirebaseCloudMessagingBrowserNotifications {
 }
 
 export interface Flash {
-  error: null
-  warn: null
-  success: null
+  error: any
+  warn: any
+  success: any
 }
 
 export interface I18NDesktopVersionSupport {

@@ -8,7 +8,7 @@ import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent, handleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
 import { showDropdownThunk } from "../905/929976";
-import { Vl } from "../figma_app/8833";
+import { dropdownTypeGradientStopContextMenu } from "../figma_app/8833";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
@@ -384,7 +384,7 @@ class k extends RecordingPureComponent {
           left: this.stopPositionToLeft(e.position),
           onContextMenu: e => {
             this.contextMenuEnabled && !(this.props.paint.stops.length <= 1) && (this.props.dispatch(showDropdownThunk({
-              type: Vl,
+              type: dropdownTypeGradientStopContextMenu,
               data: {
                 clientX: e.clientX,
                 clientY: e.clientY,

@@ -8,7 +8,7 @@ import { ResizeDragContext } from '../905/208152';
 import { HeaderModalContainer } from '../905/519092';
 import { KeyboardEventWrapper, KeyboardReceiver } from '../905/826900';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { Dm, Uu } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture, jsFullscreenWheelEventPassthrough } from '../figma_app/8833';
 import { createMultiRefCallback } from '../figma_app/272902';
 import { throwTypeError } from '../figma_app/465776';
 import { shouldHandleMultiTouchOrPressure } from '../figma_app/753501';
@@ -397,13 +397,13 @@ export class DraggableModalView extends RecordingComponent {
     let {
       allowWheelPassthrough
     } = this.props;
-    let wheelPassthroughClass = allowWheelPassthrough ? Uu : '';
+    let wheelPassthroughClass = allowWheelPassthrough ? jsFullscreenWheelEventPassthrough : '';
     let ResizeTargetComponent = this.props.ResizeTargetComponent ?? K;
     return jsxs(Fragment, {
       children: [jsx('div', {
         'ref': createMultiRefCallback(this.props.containerRef, element => this._containerRef = element),
         'aria-labelledby': this.props.titleId,
-        'className': `${containerClassNames} ${Dm} ${wheelPassthroughClass}`,
+        'className': `${containerClassNames} ${jsFullscreenPreventEventCapture} ${wheelPassthroughClass}`,
         'data-cancel-insertable-resource-drag-and-drop': !this.props.hidden && !this.props.noCancelDragAndDrop,
         'data-fullscreen-bubble-phase': this.props.beMoreAccessible || undefined,
         'data-testid': 'draggable-modal-view',
@@ -504,7 +504,7 @@ export class DraggableModalView extends RecordingComponent {
         let resizeDirectionsClass = as(this.state.resizeDirections);
         let draggingClass = E6;
         return jsx('div', {
-          className: classNames(iE, isResizing ? resizeDirectionsClass : isDragging ? draggingClass : undefined, Dm)
+          className: classNames(iE, isResizing ? resizeDirectionsClass : isDragging ? draggingClass : undefined, jsFullscreenPreventEventCapture)
         });
       })()]
     });

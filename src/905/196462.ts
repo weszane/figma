@@ -6,7 +6,7 @@ import { U } from "../905/708285";
 import { setupThemeContext } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 export function $$p0(e) {
   let {
     onBlur,
@@ -37,7 +37,7 @@ export function $$p0(e) {
     children: jsx(setupThemeContext, {
       mode: "dark",
       children: jsxs("div", {
-        className: `hyperlink_editor--popup--CHv-O _overlayBase--_overlayBase--Rkj8l ${Dm}`,
+        className: `hyperlink_editor--popup--CHv-O _overlayBase--_overlayBase--Rkj8l ${jsFullscreenPreventEventCapture}`,
         children: [getFeatureFlags().figjam_a11y_inline_toolbar ? jsx("div", {
           className: "xt7dq6l x3smdqs xfifm61",
           children: jsx(InputComponent, {

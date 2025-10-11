@@ -41,7 +41,7 @@ import { whiteColor, getColorBrightness } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { hideStylePreview, showStylePreviewThunk } from "../figma_app/914957";
-import { Yr } from "../figma_app/8833";
+import { selectionPaintItemSlides } from "../figma_app/8833";
 import { colorCSSManipulatorInstance } from "../905/989956";
 import { getModeValue } from "../figma_app/852050";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
@@ -475,7 +475,7 @@ function eI({
     children: e
   });
 }
-let eE = `${Yr}-advanced-theme-editing`;
+let eE = `${selectionPaintItemSlides}-advanced-theme-editing`;
 function ex({
   themeId: e,
   recordingKey: t

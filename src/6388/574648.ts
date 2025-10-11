@@ -56,7 +56,7 @@ import { rM } from "../figma_app/241541";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { n6 } from "../905/234821";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { d as _$$d } from "../9410/847929";
 import { xn } from "../figma_app/644079";
 import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
@@ -680,7 +680,7 @@ function e9({
   let r = n[1] ?? 0;
   let i = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !1);
   return jsx("div", {
-    className: K()(Dm, cssBuilderInstance.fixed.flex.justifyCenter.eventsNone.$),
+    className: K()(jsFullscreenPreventEventCapture, cssBuilderInstance.fixed.flex.justifyCenter.eventsNone.$),
     style: {
       marginBottom: l,
       left: 0,

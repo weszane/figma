@@ -130,7 +130,7 @@ import { A as _$$A6 } from '../af221b13/388839';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { we } from '../figma_app/987';
 import { VisualAssetPacksTooltip } from '../figma_app/6204';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { getSiteKitAssets, SITE_KIT_EMBEDS_LIBRARY_KEY } from '../figma_app/10098';
 import { FX as _$$FX } from '../figma_app/12491';
 import { atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
@@ -3576,7 +3576,7 @@ let ns = forwardRef(({
         'children': '\u2026'
       })]
     }), d && createPortal(jsx(DropdownOptions, {
-      className: Dm,
+      className: jsFullscreenPreventEventCapture,
       positionAbsolute: !0,
       style: _,
       id: 'asset-panel-ellipsis-menu',
@@ -7695,7 +7695,7 @@ function lR({
     maxHeight: d
   }), [d, e]);
   return createPortal(jsx(DropdownOptions, {
-    className: l()(Dm, 'asset_panel_settings--dropdown--gs7K3'),
+    className: l()(jsFullscreenPreventEventCapture, 'asset_panel_settings--dropdown--gs7K3'),
     positionAbsolute: !0,
     style: B,
     id: lP,

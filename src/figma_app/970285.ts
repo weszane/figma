@@ -29,7 +29,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { logFileExportThunk } from "../figma_app/401069";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
 import { hideStylePreview } from "../figma_app/914957";
-import { C9 } from "../figma_app/8833";
+import { exportPicker } from "../figma_app/8833";
 import { mz } from "../figma_app/975811";
 import { stopPropagation } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
@@ -160,7 +160,7 @@ let ex = class e extends PureComponent {
           from: "export-panel"
         });
         this.props.dispatch(showPickerThunk({
-          id: C9
+          id: exportPicker
         }));
       } else {
         this.state.isRenameLayersEnabled && (await this.autoRenameFrameOnExport());

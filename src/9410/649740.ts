@@ -3,7 +3,7 @@ import { createRef } from "react";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { DropdownContainer } from "../figma_app/236327";
 import { RecordingScrollContainer } from "../905/347284";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { KeyboardReceiver } from "../905/826900";
 import { DU } from "../figma_app/575164";
 export class $$u0 extends RecordingPureComponent {
@@ -36,7 +36,7 @@ export class $$u0 extends RecordingPureComponent {
       handleKeyDown: this.onKeyDownFromFullscreen,
       focusOnMount: !0,
       children: jsx(DropdownContainer, {
-        className: `${DU} ${Dm}`,
+        className: `${DU} ${jsFullscreenPreventEventCapture}`,
         style: e,
         "data-testid": this.props["data-testid"],
         onClick: this.onContainerClick,

@@ -13,7 +13,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { X as _$$X } from "../figma_app/776368";
 import { ErrorBoundaryCrash, errorBoundaryFallbackTypes } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { TrackingProvider } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
 import { useFocusArea } from "../figma_app/290668";
@@ -1077,7 +1077,7 @@ let tw = memo(function () {
   let eo = BI();
   let el = BrowserInfo.isIpad || BrowserInfo.isMeetDevice ? jsx(Fragment, {
     children: jsxs("div", {
-      className: u()(ph, Dm),
+      className: u()(ph, jsFullscreenPreventEventCapture),
       children: [jsx("div", {
         className: u()(s$, fT, {
           [cz]: !es
@@ -1156,7 +1156,7 @@ let tw = memo(function () {
     children: jsxs(nS.Provider, {
       value: q,
       children: [el, jsx("div", {
-        className: u()(HG, Dm, {
+        className: u()(HG, jsFullscreenPreventEventCapture, {
           [E$]: !1,
           [Qs]: eg,
           [i0]: "ANIMATING" === c && !$,

@@ -6,7 +6,7 @@ import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/273
 import l from "classnames";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { fetchShelvesForShelfTypeThunk } from "../figma_app/216696";
-import { Qx, Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCaptureKeys, jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { TrackingProvider } from "../figma_app/831799";
 import { designCopyToSlidesAtom } from "../figma_app/223206";
 import { overlayStateAtom } from "../905/12032";
@@ -47,7 +47,7 @@ function G({
     maybeUseLightTemplateOnDismiss
   } = vN();
   return jsx(ModalContainer, {
-    className: d()("slides_template_modal--templateModal--GmDGm", Qx),
+    className: d()("slides_template_modal--templateModal--GmDGm", jsFullscreenPreventEventCaptureKeys),
     size: parsePxInt(uRR),
     onHide: maybeUseLightTemplateOnDismiss,
     tintedModalBackground: !0,
@@ -87,7 +87,7 @@ export function $$V1() {
   return jsx(TrackingProvider, {
     name: "Slides Template Picker",
     children: jsx("div", {
-      className: d()(ij, Dm),
+      className: d()(ij, jsFullscreenPreventEventCapture),
       style: {
         top: b,
         left: l ? 12 : i + 12,

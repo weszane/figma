@@ -89,7 +89,7 @@ import { A as _$$A6 } from '../5724/388041';
 import { A as _$$A5 } from '../6828/85206';
 import { A as _$$A4 } from '../6828/523860';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { AB, h2, Pr } from '../figma_app/8833';
+import { typeSettings, stylePreviewTypeSettings, textDecorationPaintPicker } from '../figma_app/8833';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { c as _$$c } from '../figma_app/73139';
 import { hidePickerThunk, hideStylePicker, showPickerThunk } from '../figma_app/91703';
@@ -745,11 +745,11 @@ let tN = memo(e => {
   let A = useRef(null);
   let y = () => {
     if (!A) return;
-    let t = e.isEditingStyle ? h2 : AB;
+    let t = e.isEditingStyle ? stylePreviewTypeSettings : typeSettings;
     i(e.pickerShown?.id === t);
     let n = calculatePickerPositionLeft(A.current);
     s({
-      id: Pr,
+      id: textDecorationPaintPicker,
       initialX: n.x,
       initialY: n.y
     });
@@ -768,7 +768,7 @@ let tN = memo(e => {
       firstIconButton: null,
       fitToSize: !0,
       hasFocus: !1,
-      id: Pr,
+      id: textDecorationPaintPicker,
       isDragHover: !1,
       isDragging: !1,
       noBorderOnFocus: !0,
@@ -799,7 +799,7 @@ let tN = memo(e => {
       onChange: _,
       onClose: b,
       paint: g,
-      paintId: Pr,
+      paintId: textDecorationPaintPicker,
       pickerShown: n,
       recordingKey: e.recordingKey,
       selectedStyle: null,
@@ -2932,7 +2932,7 @@ class iS extends PureComponent {
     this.fontStyleInputRef = createRef();
     this.fontStyleVariablePickerHandleRef = createRef();
     this.shownSettings = () => {
-      let e = this.isInStyleModal() ? h2 : AB;
+      let e = this.isInStyleModal() ? stylePreviewTypeSettings : typeSettings;
       return this.props.pickerShown && this.props.pickerShown.id === e ? this.props.pickerShown : null;
     };
     this.maybeUnsetVariableTab = () => {
@@ -2950,7 +2950,7 @@ class iS extends PureComponent {
         this.props.dispatch(hidePickerThunk());
       } else if (e.current) {
         let i = calculatePickerPositionLeft(e.current);
-        let n = t ? h2 : AB;
+        let n = t ? stylePreviewTypeSettings : typeSettings;
         this.props.dispatch(showPickerThunk({
           id: n,
           initialX: i.x,

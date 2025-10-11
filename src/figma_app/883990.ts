@@ -18,7 +18,7 @@ import { SvgComponent } from '../905/714743';
 import { useNavigationStack } from '../905/794154';
 import { A as _$$A3 } from '../1617/377036';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { C as _$$C2 } from '../figma_app/523506';
 import { generateRecordingKey, useHandleChangeEvent } from '../figma_app/878298';
 let c = d;
@@ -61,7 +61,7 @@ let R = forwardRef(({
   'ref': s,
   'aria-autocomplete': 'list',
   'aria-describedby': a,
-  'className': c()(Rt, Dm),
+  'className': c()(Rt, jsFullscreenPreventEventCapture),
   'data-component': 'QuickActionsV2SearchInput',
   'data-testid': 'quick-actions-search-input',
   'dir': 'auto',

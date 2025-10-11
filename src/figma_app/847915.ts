@@ -83,7 +83,7 @@ export function getProperty(target: any, item: string | { getCopy: () => any }):
  * Gets the action or name of a menu item
  * (Original: $$u0)
  */
-export function getActionOrName(item: IMenuItem): (() => void) | string | undefined {
+export function getActionOrName(item: IMenuItem) {
   return item.action || item.name
 }
 

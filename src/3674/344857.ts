@@ -61,7 +61,7 @@ import { getThemeContextOrDefault } from "../905/158740";
 import eN from "classnames";
 import { Wi, JR, Qp } from "../figma_app/162641";
 import { SvgComponent } from "../905/714743";
-import { Dm, i as _$$i, ak as _$$ak } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture, dropdownTypeDevHandoffLayerContextMenu, epsilon } from "../figma_app/8833";
 import { $ as _$$$ } from "../figma_app/644304";
 import { s as _$$s2 } from "../b2835def/812839";
 import { d as _$$d2 } from "../3682/659785";
@@ -814,7 +814,7 @@ function eO() {
       width: 240,
       disableResizing: !0,
       children: jsxs("div", {
-        className: ek()(Dm, "left_panel--nodesPanel---qMcy dev_handoff_nodes_panel--nodesPanel--4Pea0"),
+        className: ek()(jsFullscreenPreventEventCapture, "left_panel--nodesPanel---qMcy dev_handoff_nodes_panel--nodesPanel--4Pea0"),
         "data-testid": "dev-mode-paywall-left-panel",
         children: [jsx(_$$s2, {}), e && jsxs(Fragment, {
           children: [jsx(_$$n2, {}), jsx(_$$d2, {})]
@@ -1616,7 +1616,7 @@ function t6() {
     children: [jsx("div", {
       className: ek()(_$$ux, Ph),
       children: jsxs("div", {
-        className: ek()("right_panel--panelContainer--BwtVM dev_handoff_right_panel_container--panelContainer--XcbIk dev_handoff_right_panel_container--panelContainerBase--npHfL", KE, Dm, Ph),
+        className: ek()("right_panel--panelContainer--BwtVM dev_handoff_right_panel_container--panelContainer--XcbIk dev_handoff_right_panel_container--panelContainerBase--npHfL", KE, jsFullscreenPreventEventCapture, Ph),
         children: [t && jsx(v2, {}), jsxs("div", {
           className: cssBuilderInstance.wFull.flex.flexRow.flexShrink0.itemsCenter.borderBox.bSolid.bb1.pr8.colorBorder.justifyBetween.colorBg.$,
           children: [jsxs(_$$y, {
@@ -4555,7 +4555,7 @@ function iZ({
   let h = 0 === n;
   let f = n === iQ[iQ.length - 1];
   return jsxs("div", {
-    className: ek()("configuration_wizard--wizardContainer--gss4b", Dm),
+    className: ek()("configuration_wizard--wizardContainer--gss4b", jsFullscreenPreventEventCapture),
     tabIndex: -1,
     ref: d,
     children: [jsx("div", {
@@ -4722,7 +4722,7 @@ function oe(e) {
     document.removeEventListener("mouseup", d);
   }), [r, d]);
   return jsxs("div", {
-    className: ek()("resizable--panelContainer--35Ay7", Dm),
+    className: ek()("resizable--panelContainer--35Ay7", jsFullscreenPreventEventCapture),
     style: {
       width: e.size.width,
       minWidth: e.size.width,
@@ -7379,7 +7379,7 @@ function rf({
       clientY
     } = e;
     d(showDropdownThunk({
-      type: _$$i,
+      type: dropdownTypeDevHandoffLayerContextMenu,
       data: {
         clientX,
         clientY,
@@ -7552,7 +7552,7 @@ function rN(e) {
       clientY
     } = e;
     x && b(showDropdownThunk({
-      type: _$$i,
+      type: dropdownTypeDevHandoffLayerContextMenu,
       data: {
         clientX,
         clientY,
@@ -7653,7 +7653,7 @@ let rk = memo(function (e) {
       clientY
     } = e;
     S(showDropdownThunk({
-      type: _$$i,
+      type: dropdownTypeDevHandoffLayerContextMenu,
       data: {
         clientX,
         clientY,
@@ -8029,7 +8029,7 @@ let rL = memo(() => {
     });
   });
   return jsxs("div", {
-    className: ek()(Dm, "dev_handoff_nodes_panel--nodesPanel--4Pea0"),
+    className: ek()(jsFullscreenPreventEventCapture, "dev_handoff_nodes_panel--nodesPanel--4Pea0"),
     children: [!n && jsx(_$$o, {}), !t && jsx(rP, {
       inspectableRootNodeId,
       didSelectRow
@@ -8392,7 +8392,7 @@ function de(e) {
       side: "right"
     }), jsxs(wV, {
       "data-testid": "dev-handoff-right-panel",
-      className: ek()(_$$ux, Dm, {
+      className: ek()(_$$ux, jsFullscreenPreventEventCapture, {
         [_$$ew]: c && !u,
         [Ph]: !h,
         [Jq]: !p
@@ -12703,7 +12703,7 @@ function hJ() {
   }));
   return jsxs("div", {
     id: "dev-handoff-inspect-panel",
-    className: ek()("vscode", "extension_bottom_panel--container--zaRdX", Dm, e && "extension_bottom_panel--isOpen--m5UfA"),
+    className: ek()("vscode", "extension_bottom_panel--container--zaRdX", jsFullscreenPreventEventCapture, e && "extension_bottom_panel--isOpen--m5UfA"),
     style: {
       height: `${h}px`
     },
@@ -12891,7 +12891,7 @@ let fs = memo(function (e) {
       "data-tooltip": u,
       "data-tooltip-show-above": !1,
       "data-tooltip-type": KindEnum.TEXT,
-      min: getFeatureFlags().editor_zero_width_input ? _$$ak : void 0,
+      min: getFeatureFlags().editor_zero_width_input ? epsilon : void 0,
       noBorderOnHover: !0,
       onBlur: e.onBlur,
       onFocus: e.onFocus,

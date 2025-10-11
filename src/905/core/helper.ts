@@ -19,7 +19,7 @@ import { vX } from '../866640';
 import { fH, gO, HC, hp, JE, Lk, MN, SE, Vw, W$, Wh } from '../929949';
 import { $x, $$ as _$$$$, rY as _$$rY, cT, Df, DW, hD, Jk, Ku, Mo, mx, NH, SU, U_, V8, VL, Wp, XX, yj, zd } from '../933084';
 import { At } from '../973142';
-import { F as _$$F2 } from '../../figma_app/8833';
+import { maxInt32 } from '../../figma_app/8833';
 import { isNullish } from '../../figma_app/95419';
 import { mx as _$$mx, tK as _$$tK, di } from '../../figma_app/191804';
 import { eX as _$$eX, nM as _$$nM } from '../../figma_app/276332';
@@ -854,18 +854,18 @@ export function processGridLayout(gridLayoutConfig) {
       case 'MIN':
       case 'MAX':
         // For MIN/MAX alignment: set infinite count if needed, section size, and offset with type assertion
-        config.count = gridLayoutConfig.numSections === _$$F2 ? Number.POSITIVE_INFINITY : gridLayoutConfig.numSections;
+        config.count = gridLayoutConfig.numSections === maxInt32 ? Number.POSITIVE_INFINITY : gridLayoutConfig.numSections;
         config.sectionSize = gridLayoutConfig.sectionSize;
         config.offset = gridLayoutConfig.offset;
         break;
       case 'STRETCH':
         // For STRETCH alignment: set single count if infinite, and offset with type assertion
-        config.count = gridLayoutConfig.numSections === _$$F2 ? 1 : gridLayoutConfig.numSections;
+        config.count = gridLayoutConfig.numSections === maxInt32 ? 1 : gridLayoutConfig.numSections;
         config.offset = gridLayoutConfig.offset;
         break;
       case 'CENTER':
         // For CENTER alignment: set infinite count if needed and section size with type assertion
-        config.count = gridLayoutConfig.numSections === _$$F2 ? Number.POSITIVE_INFINITY : gridLayoutConfig.numSections;
+        config.count = gridLayoutConfig.numSections === maxInt32 ? Number.POSITIVE_INFINITY : gridLayoutConfig.numSections;
         config.sectionSize = gridLayoutConfig.sectionSize;
     }
   } else {
@@ -902,7 +902,7 @@ export function convertGridLayoutConfig(config) {
   const internalConfig: GridLayoutConfig = {
     pattern: normalized.pattern === 'COLUMNS' || normalized.pattern === 'ROWS' ? 'STRIPES' : normalized.pattern,
     axis: normalized.pattern === 'COLUMNS' ? 'X' : 'Y',
-    numSections: Math.min(normalized.count, _$$F2),
+    numSections: Math.min(normalized.count, maxInt32),
     type: normalized.alignment,
     gutterSize: normalized.gutterSize,
     sectionSize: normalized.sectionSize,

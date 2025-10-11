@@ -4,7 +4,7 @@ import { useMemoStable } from "../905/19536";
 import s from "classnames";
 import { useResizeObserverRef, initialSize } from "../figma_app/708845";
 import { $ } from "../905/455748";
-import { Dm, Uu } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture, jsFullscreenWheelEventPassthrough } from "../figma_app/8833";
 import { useClickOutside } from "../905/1768";
 var o = s;
 export function $$p1({
@@ -33,7 +33,7 @@ export function $$p1({
   };
   p && (A.zIndex = p);
   return jsx("div", {
-    className: o()("window_positioner--positionerRoot--nDb0j", Dm, Uu),
+    className: o()("window_positioner--positionerRoot--nDb0j", jsFullscreenPreventEventCapture, jsFullscreenWheelEventPassthrough),
     style: A,
     children: jsx($$T0, {
       frozen: I,

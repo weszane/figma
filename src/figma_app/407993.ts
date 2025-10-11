@@ -18,7 +18,7 @@ import { useHandleMouseEvent } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { stopChattingThunk, startReactingThunk, toggleEmojiWheelThunk } from "../figma_app/308685";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { getElementByDataTarget } from "../905/797478";
 import { emojiWheelManagerInstance } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
@@ -419,7 +419,7 @@ function eg({
       tabIndex: -1,
       ref: d,
       style: k,
-      className: E()("emoji_wheel--wheelContainer--PDwZJ", l && "emoji_wheel--wheelContainerWithExtendedHitBox--dtL8J", Dm),
+      className: E()("emoji_wheel--wheelContainer--PDwZJ", l && "emoji_wheel--wheelContainerWithExtendedHitBox--dtL8J", jsFullscreenPreventEventCapture),
       onMouseEnter: () => f(!0),
       onMouseLeave: () => f(!1),
       "data-fullscreen-intercept": !0,

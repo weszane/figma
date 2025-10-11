@@ -45,7 +45,7 @@ import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411';
 import { sendWithRetry } from '../905/910117';
 import { selectViewAction } from '../905/929976';
 import { nk } from '../figma_app/2023';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { atomStoreManager } from '../figma_app/27355';
 import { OpenEditorFileData } from '../figma_app/43951';
 import { FEditorType, mapEditorTypeToFileType, mapEditorTypeToWorkspaceType, mapFileTypeToEditorType } from '../figma_app/53721';
@@ -381,7 +381,7 @@ class LicenseAgreementModal extends PureComponent<{
     if (selectedFile?.license?.toLowerCase() === 'apple') {
       return jsxs(ModalContainer, {
         size: 560,
-        className: `${Dm} license_agreement--modal--EN2ao`,
+        className: `${jsFullscreenPreventEventCapture} license_agreement--modal--EN2ao`,
         disableClickOutsideToHide: true,
         ...this.props,
         children: [jsx(RecordingScrollContainer, {

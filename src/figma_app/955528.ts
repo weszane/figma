@@ -21,7 +21,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { useSceneGraphSelectionKeys } from "../figma_app/311375";
 import { showPickerThunk, hidePickerThunk } from "../figma_app/91703";
-import { vu } from "../figma_app/8833";
+import { slidesRewriteTextPicker } from "../figma_app/8833";
 import { Gc, nl, fN } from "../figma_app/456871";
 import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
 import { cortexAPI } from "../figma_app/432652";
@@ -42,7 +42,7 @@ import { G as _$$G } from "../figma_app/682672";
 var m = h;
 let $$W0 = 1 / 3;
 let K = "tone-dial-visual-bell";
-let $$Y4 = TJ(vu);
+let $$Y4 = TJ(slidesRewriteTextPicker);
 export function $$$12() {
   let e = BE();
   let t = useSelector(e => isActionEnabled(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
@@ -77,7 +77,7 @@ export function $$X6(e, t) {
     y: 0
   } : calculatePickerPositionLeft(s, DEFAULT_PICKER_WIDTH);
   e(showPickerThunk({
-    id: vu,
+    id: slidesRewriteTextPicker,
     initialX: o.x,
     initialY: o.y
   }));

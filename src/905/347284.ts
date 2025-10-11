@@ -1,63 +1,62 @@
-import classNames from "classnames"
-import { jsx, jsxs } from "react/jsx-runtime"
-import { s4, ZR } from "../figma_app/8833"
-import { setRefValue } from "../figma_app/272902"
-import { BrowserInfo } from "../figma_app/778880"
-import { parsePxNumber } from "../figma_app/783094"
-import { scrollBarXHeight, scrollBarYWidth, trackPadding } from "../figma_app/786175"
-import { memoizeByArgs } from "../figma_app/815945"
-import { handleMouseEvent, RecordingComponent } from "../figma_app/878298"
+import classNames from "classnames";
+import { jsx, jsxs } from "react/jsx-runtime";
+import { jsFullscreenWheelEventCapture, jsFullscreenNoModWheelEventCapture } from "../figma_app/8833";
+import { setRefValue } from "../figma_app/272902";
+import { BrowserInfo } from "../figma_app/778880";
+import { parsePxNumber } from "../figma_app/783094";
+import { scrollBarXHeight, scrollBarYWidth, trackPadding } from "../figma_app/786175";
+import { memoizeByArgs } from "../figma_app/815945";
+import { handleMouseEvent, RecordingComponent } from "../figma_app/878298";
 
 // Define interfaces for props and state to add type safety
 interface ScrollContainerProps {
-  useBottomPinning?: boolean
-  scrollContainerRef?: React.RefObject<HTMLElement>
-  initialScrollTop?: number
-  onScroll?: (scrollTop: number, stateSnapshot: any) => void
-  onScrollLeftChanged?: (scrollLeft: number, wasImperativelyScrolled: boolean) => void
-  enableOverscroll?: boolean
-  horizontalScrollBarEnabled?: boolean
-  onCanScrollChange?: (canScroll: boolean) => void
-  className?: string
-  width?: number | string
-  height?: number | string
-  minContentWidth?: number | string
-  horizontalScrollingDisabled?: boolean
-  scrollingDisabled?: boolean
-  allowScrollAndZoomOver?: boolean
-  hideScrollbar?: boolean
-  maxHeight?: number | string
-  onContextMenu?: (event: React.MouseEvent) => void
-  onMouseDown?: (event: React.MouseEvent) => void
-  onPointerDown?: (event: React.PointerEvent) => void
-  dataTestId?: string
-  dataOnboardingKey?: string
-  containerId?: string
-  enableScrollShadow?: boolean
-  scrollContainerDataTestId?: string
-  innerClassName?: string
-  contentId?: string
-  role?: string
-  scrollContentRef?: React.RefObject<HTMLElement>
-  children?: React.ReactNode
-  scrollBarAlways?: boolean
-  disableScrollbarBorder?: boolean
+  useBottomPinning?: boolean;
+  scrollContainerRef?: React.RefObject<HTMLElement>;
+  initialScrollTop?: number;
+  onScroll?: (scrollTop: number, stateSnapshot: any) => void;
+  onScrollLeftChanged?: (scrollLeft: number, wasImperativelyScrolled: boolean) => void;
+  enableOverscroll?: boolean;
+  horizontalScrollBarEnabled?: boolean;
+  onCanScrollChange?: (canScroll: boolean) => void;
+  className?: string;
+  width?: number | string;
+  height?: number | string;
+  minContentWidth?: number | string;
+  horizontalScrollingDisabled?: boolean;
+  scrollingDisabled?: boolean;
+  allowScrollAndZoomOver?: boolean;
+  hideScrollbar?: boolean;
+  maxHeight?: number | string;
+  onContextMenu?: (event: React.MouseEvent) => void;
+  onMouseDown?: (event: React.MouseEvent) => void;
+  onPointerDown?: (event: React.PointerEvent) => void;
+  dataTestId?: string;
+  dataOnboardingKey?: string;
+  containerId?: string;
+  enableScrollShadow?: boolean;
+  scrollContainerDataTestId?: string;
+  innerClassName?: string;
+  contentId?: string;
+  role?: string;
+  scrollContentRef?: React.RefObject<HTMLElement>;
+  children?: React.ReactNode;
+  scrollBarAlways?: boolean;
+  disableScrollbarBorder?: boolean;
 }
-
 interface ScrollContainerState {
-  canScroll: boolean
-  canScrollUp: boolean
-  canScrollDown: boolean
-  scrollbarTop: number
-  scrollbarHeight: number
-  overscrollHeight: number
-  canScrollX: boolean
-  scrollbarLeft: number
-  scrollbarWidth: number
-  startDragY?: number
-  startDragScrollTop?: number
-  startDragX?: number
-  startDragScrollLeft?: number
+  canScroll: boolean;
+  canScrollUp: boolean;
+  canScrollDown: boolean;
+  scrollbarTop: number;
+  scrollbarHeight: number;
+  overscrollHeight: number;
+  canScrollX: boolean;
+  scrollbarLeft: number;
+  scrollbarWidth: number;
+  startDragY?: number;
+  startDragScrollTop?: number;
+  startDragX?: number;
+  startDragScrollLeft?: number;
 }
 
 /**
@@ -66,31 +65,30 @@ interface ScrollContainerState {
  */
 export class RecordingScrollContainer extends RecordingComponent<ScrollContainerProps, ScrollContainerState> {
   // Instance variables (original properties from constructor)
-  private scrollingTimeout: NodeJS.Timeout | null = null
-  private trackHeight = 0
-  private trackTop = 0
-  private scrollHeight = 0
-  private scrollTop = 0
-  private trackWidth = 0
-  private trackLeft = 0
-  private scrollWidth = 0
-  private scrollLeft = 0
-  private wasImperativelyScrolled = false
-  private rafId: number | null = null
-  private outerResizeObserver: ResizeObserver
-  private resizeObserver: ResizeObserver
-  private lastParentHeight = 0
-  private lastContentHeight = 0
-  private scrollContainer: HTMLElement | null = null
-  private clipContainer: HTMLElement | null = null
-  private scrollContent: HTMLElement | null = null
-  private nextClientY = 0
-  private nextClientX = 0
-  private nextFrameRequestedY: number | null = null
-  private nextFrameRequestedX: number | null = null
-
+  private scrollingTimeout: NodeJS.Timeout | null = null;
+  private trackHeight = 0;
+  private trackTop = 0;
+  private scrollHeight = 0;
+  private scrollTop = 0;
+  private trackWidth = 0;
+  private trackLeft = 0;
+  private scrollWidth = 0;
+  private scrollLeft = 0;
+  private wasImperativelyScrolled = false;
+  private rafId: number | null = null;
+  private outerResizeObserver: ResizeObserver;
+  private resizeObserver: ResizeObserver;
+  private lastParentHeight = 0;
+  private lastContentHeight = 0;
+  private scrollContainer: HTMLElement | null = null;
+  private clipContainer: HTMLElement | null = null;
+  private scrollContent: HTMLElement | null = null;
+  private nextClientY = 0;
+  private nextClientX = 0;
+  private nextFrameRequestedY: number | null = null;
+  private nextFrameRequestedX: number | null = null;
   constructor(props: ScrollContainerProps) {
-    super(props)
+    super(props);
     this.state = {
       canScroll: false,
       canScrollUp: false,
@@ -100,10 +98,10 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
       overscrollHeight: 0,
       canScrollX: false,
       scrollbarLeft: 0,
-      scrollbarWidth: 0,
-    }
-    this.outerResizeObserver = new ResizeObserver(this.handleResize)
-    this.resizeObserver = new ResizeObserver(this.handleResize)
+      scrollbarWidth: 0
+    };
+    this.outerResizeObserver = new ResizeObserver(this.handleResize);
+    this.resizeObserver = new ResizeObserver(this.handleResize);
   }
 
   /**
@@ -111,21 +109,21 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    * Original method: this.handleResize
    */
   private handleResize = () => {
-    this.updateOverscrollMinHeight()
-    this.recomputeScrollbar("vertical")
-    this.recomputeScrollbar("horizontal")
+    this.updateOverscrollMinHeight();
+    this.recomputeScrollbar("vertical");
+    this.recomputeScrollbar("horizontal");
     if (this.props.useBottomPinning) {
-      const scrollContainer = this.scrollContainer
-      const lastContentHeight = this.lastContentHeight
-      const lastParentHeight = this.lastParentHeight
-      const offsetHeight = scrollContainer!.offsetHeight
-      const scrollTop = scrollContainer!.scrollTop
+      const scrollContainer = this.scrollContainer;
+      const lastContentHeight = this.lastContentHeight;
+      const lastParentHeight = this.lastParentHeight;
+      const offsetHeight = scrollContainer!.offsetHeight;
+      const scrollTop = scrollContainer!.scrollTop;
       if (lastParentHeight > 0 && scrollTop + 1 >= lastContentHeight - lastParentHeight) {
-        scrollContainer!.scrollTop = this.scrollContent!.offsetHeight - offsetHeight
+        scrollContainer!.scrollTop = this.scrollContent!.offsetHeight - offsetHeight;
       }
-      this.lastParentHeight = offsetHeight
+      this.lastParentHeight = offsetHeight;
     }
-  }
+  };
 
   /**
    * Scrolls to a specific top position.
@@ -133,9 +131,9 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   scrollTo = (top: number) => {
     if (this.scrollContainer) {
-      this.scrollContainer.scrollTop = top
+      this.scrollContainer.scrollTop = top;
     }
-  }
+  };
 
   /**
    * Scrolls to a specific left position.
@@ -143,10 +141,10 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   scrollToLeft = (left: number) => {
     if (this.scrollContainer) {
-      this.wasImperativelyScrolled = true
-      this.scrollContainer.scrollLeft = left
+      this.wasImperativelyScrolled = true;
+      this.scrollContainer.scrollLeft = left;
     }
-  }
+  };
 
   /**
    * Scrolls to the top.
@@ -154,9 +152,9 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   scrollToTop = () => {
     if (this.scrollContainer) {
-      this.scrollContainer.scrollTop = 0
+      this.scrollContainer.scrollTop = 0;
     }
-  }
+  };
 
   /**
    * Scrolls to the bottom.
@@ -164,57 +162,57 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   scrollToBottom = () => {
     if (this.scrollContainer) {
-      this.scrollContainer.scrollTop = this.scrollContainer.scrollHeight
+      this.scrollContainer.scrollTop = this.scrollContainer.scrollHeight;
     }
-  }
+  };
 
   /**
    * Gets the current scroll top position.
    * Original method: this.getScrollTop
    */
-  getScrollTop = (): number => (this.scrollContainer ? this.scrollContainer.scrollTop : 0)
+  getScrollTop = (): number => this.scrollContainer ? this.scrollContainer.scrollTop : 0;
 
   /**
    * Gets the scroll container element.
    * Original method: this.getScrollContainer
    */
-  getScrollContainer = (): HTMLElement | null => this.scrollContainer
+  getScrollContainer = (): HTMLElement | null => this.scrollContainer;
 
   /**
    * Gets the clip container element.
    * Original method: this.getClipContainer
    */
-  getClipContainer = (): HTMLElement | null => this.clipContainer
+  getClipContainer = (): HTMLElement | null => this.clipContainer;
 
   /**
    * Gets the scroll height.
    * Original method: this.getScrollHeight
    */
-  getScrollHeight = (): number => this.scrollHeight
+  getScrollHeight = (): number => this.scrollHeight;
 
   /**
    * Gets the scroll width.
    * Original method: this.getScrollWidth
    */
-  getScrollWidth = (): number => this.scrollWidth
+  getScrollWidth = (): number => this.scrollWidth;
 
   /**
    * Gets the scroll container's top bounding rect (memoized).
    * Original method: this.getScrollContainerTop
    */
-  getScrollContainerTop = memoizeByArgs(() => this.scrollContainer!.getBoundingClientRect().top)
+  getScrollContainerTop = memoizeByArgs(() => this.scrollContainer!.getBoundingClientRect().top);
 
   /**
    * Gets the scroll container's bottom bounding rect (memoized).
    * Original method: this.getScrollContainerBottom
    */
-  getScrollContainerBottom = memoizeByArgs(() => this.scrollContainer!.getBoundingClientRect().bottom)
+  getScrollContainerBottom = memoizeByArgs(() => this.scrollContainer!.getBoundingClientRect().bottom);
 
   /**
    * Gets the track height.
    * Original method: this.getTrackHeight
    */
-  getTrackHeight = (): number => this.trackHeight
+  getTrackHeight = (): number => this.trackHeight;
 
   /**
    * Sets the clip container ref.
@@ -222,73 +220,73 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   setClipContainer = (element: HTMLElement | null) => {
     if (element) {
-      this.clipContainer = element
+      this.clipContainer = element;
     }
-  }
+  };
 
   /**
    * Sets the scroll container ref and initializes observers.
    * Original method: this.setScrollContainer
    */
   setScrollContainer = (element: HTMLElement | null) => {
-    this.outerResizeObserver.disconnect()
+    this.outerResizeObserver.disconnect();
     if (element) {
-      this.scrollContainer = element
-      setRefValue(this.props.scrollContainerRef, element)
+      this.scrollContainer = element;
+      setRefValue(this.props.scrollContainerRef, element);
       if (this.props.initialScrollTop) {
-        this.scrollContainer.scrollTop = this.props.initialScrollTop
+        this.scrollContainer.scrollTop = this.props.initialScrollTop;
       }
-      this.outerResizeObserver.observe(element)
-      this.recomputeScrollbar("vertical")
-      this.recomputeScrollbar("horizontal")
+      this.outerResizeObserver.observe(element);
+      this.recomputeScrollbar("vertical");
+      this.recomputeScrollbar("horizontal");
     }
-  }
+  };
 
   /**
    * Sets the scroll content ref and initializes observer.
    * Original method: this.setScrollContent
    */
   setScrollContent = (element: HTMLElement | null) => {
-    this.resizeObserver.disconnect()
+    this.resizeObserver.disconnect();
     if (element) {
-      this.scrollContent = element
+      this.scrollContent = element;
       if (this.props.scrollContentRef) {
-        this.props.scrollContentRef.current = element
+        this.props.scrollContentRef.current = element;
       }
-      this.resizeObserver.observe(element)
+      this.resizeObserver.observe(element);
     }
-  }
+  };
 
   /**
    * Handles scroll events.
    * Original method: this.onScroll
    */
   onScroll = () => {
-    const previousScrollTop = this.scrollTop
-    this.scrollTop = this.scrollContainer!.scrollTop
-    this.recomputeScrollbar("vertical")
+    const previousScrollTop = this.scrollTop;
+    this.scrollTop = this.scrollContainer!.scrollTop;
+    this.recomputeScrollbar("vertical");
     if (this.props.onScroll) {
-      this.props.onScroll(this.scrollTop, this.getStateSnapshot())
+      this.props.onScroll(this.scrollTop, this.getStateSnapshot());
     }
     if (this.scrollLeft !== this.scrollContainer!.scrollLeft) {
-      this.scrollLeft = this.scrollContainer!.scrollLeft
-      this.recomputeScrollbar("horizontal")
+      this.scrollLeft = this.scrollContainer!.scrollLeft;
+      this.recomputeScrollbar("horizontal");
       if (this.props.onScrollLeftChanged) {
-        this.props.onScrollLeftChanged(this.scrollLeft, this.wasImperativelyScrolled)
+        this.props.onScrollLeftChanged(this.scrollLeft, this.wasImperativelyScrolled);
       }
     }
-    this.wasImperativelyScrolled = false
+    this.wasImperativelyScrolled = false;
     if (this.scrollingTimeout) {
-      clearTimeout(this.scrollingTimeout)
+      clearTimeout(this.scrollingTimeout);
     }
     this.scrollingTimeout = setTimeout(() => {
-      this.scrollingTimeout = null
-    }, 200)
-    this.lastContentHeight = this.scrollContent!.offsetHeight
+      this.scrollingTimeout = null;
+    }, 200);
+    this.lastContentHeight = this.scrollContent!.offsetHeight;
     if (this.props.enableOverscroll && !(this.scrollTop >= previousScrollTop) && this.state.overscrollHeight > this.scrollContent!.clientHeight) {
-      this.updateOverscrollMinHeight()
+      this.updateOverscrollMinHeight();
     }
-  }
+  };
 
   /**
    * Recomputes scrollbar dimensions and position.
@@ -296,50 +294,53 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   recomputeScrollbar = (direction: "vertical" | "horizontal") => {
     if (direction === "horizontal" && !this.props.horizontalScrollBarEnabled) {
-      return
+      return;
     }
     if (!this.scrollingTimeout) {
       if (direction === "vertical") {
-        const adjustment = parsePxNumber(scrollBarXHeight) + parsePxNumber(trackPadding)
-        this.trackHeight = this.scrollContainer!.clientHeight - adjustment
-        this.scrollHeight = this.scrollContainer!.scrollHeight - adjustment
-        this.trackTop = this.scrollContainer!.getBoundingClientRect().top
-      }
-      else if (direction === "horizontal") {
-        const adjustment = parsePxNumber(scrollBarYWidth) + parsePxNumber(trackPadding)
-        this.trackWidth = this.scrollContainer!.clientWidth - adjustment
-        this.scrollWidth = this.scrollContainer!.scrollWidth - adjustment
-        this.trackLeft = this.scrollContainer!.getBoundingClientRect().left
+        const adjustment = parsePxNumber(scrollBarXHeight) + parsePxNumber(trackPadding);
+        this.trackHeight = this.scrollContainer!.clientHeight - adjustment;
+        this.scrollHeight = this.scrollContainer!.scrollHeight - adjustment;
+        this.trackTop = this.scrollContainer!.getBoundingClientRect().top;
+      } else if (direction === "horizontal") {
+        const adjustment = parsePxNumber(scrollBarYWidth) + parsePxNumber(trackPadding);
+        this.trackWidth = this.scrollContainer!.clientWidth - adjustment;
+        this.scrollWidth = this.scrollContainer!.scrollWidth - adjustment;
+        this.trackLeft = this.scrollContainer!.getBoundingClientRect().left;
       }
     }
-    const { trackSize, scrollSize, minScrollbarSize, scrollPos, scrollbarPos, scrollbarSize } = direction === "vertical"
-      ? {
-          trackSize: this.trackHeight,
-          scrollSize: this.scrollHeight,
-          minScrollbarSize: 42,
-          scrollPos: this.scrollTop,
-          scrollbarPos: this.state.scrollbarTop,
-          scrollbarSize: this.state.scrollbarHeight,
-        }
-      : {
-          trackSize: this.trackWidth,
-          scrollSize: this.scrollWidth,
-          minScrollbarSize: 42,
-          scrollPos: this.scrollLeft,
-          scrollbarPos: this.state.scrollbarLeft,
-          scrollbarSize: this.state.scrollbarWidth,
-        }
-    const scrollbarSizeNew = scrollSize === 0 ? 0 : Math.max(trackSize / scrollSize * trackSize, minScrollbarSize)
-    const canScroll = scrollSize > trackSize
-    let scrollbarPosNew = 0
+    const {
+      trackSize,
+      scrollSize,
+      minScrollbarSize,
+      scrollPos,
+      scrollbarPos,
+      scrollbarSize
+    } = direction === "vertical" ? {
+      trackSize: this.trackHeight,
+      scrollSize: this.scrollHeight,
+      minScrollbarSize: 42,
+      scrollPos: this.scrollTop,
+      scrollbarPos: this.state.scrollbarTop,
+      scrollbarSize: this.state.scrollbarHeight
+    } : {
+      trackSize: this.trackWidth,
+      scrollSize: this.scrollWidth,
+      minScrollbarSize: 42,
+      scrollPos: this.scrollLeft,
+      scrollbarPos: this.state.scrollbarLeft,
+      scrollbarSize: this.state.scrollbarWidth
+    };
+    const scrollbarSizeNew = scrollSize === 0 ? 0 : Math.max(trackSize / scrollSize * trackSize, minScrollbarSize);
+    const canScroll = scrollSize > trackSize;
+    let scrollbarPosNew = 0;
     if (canScroll) {
-      const scrollRange = scrollSize - trackSize
+      const scrollRange = scrollSize - trackSize;
       if (direction === "vertical") {
-        scrollbarPosNew = scrollPos / scrollRange * (trackSize - scrollbarSizeNew)
-      }
-      else if (direction === "horizontal") {
-        const padding = parsePxNumber(trackPadding) + parsePxNumber(scrollBarYWidth)
-        scrollbarPosNew = scrollPos / scrollRange * (trackSize - scrollbarSizeNew - padding) + padding
+        scrollbarPosNew = scrollPos / scrollRange * (trackSize - scrollbarSizeNew);
+      } else if (direction === "horizontal") {
+        const padding = parsePxNumber(trackPadding) + parsePxNumber(scrollBarYWidth);
+        scrollbarPosNew = scrollPos / scrollRange * (trackSize - scrollbarSizeNew - padding) + padding;
       }
     }
     if (scrollbarPos !== scrollbarPosNew || scrollbarSize !== scrollbarSizeNew) {
@@ -349,18 +350,17 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
           scrollbarHeight: scrollbarSizeNew,
           canScroll,
           canScrollUp: scrollPos > 10,
-          canScrollDown: scrollPos < scrollSize - trackSize - 10,
-        })
-      }
-      else if (direction === "horizontal") {
+          canScrollDown: scrollPos < scrollSize - trackSize - 10
+        });
+      } else if (direction === "horizontal") {
         this.setState({
           scrollbarLeft: scrollbarPosNew,
           scrollbarWidth: scrollbarSizeNew,
-          canScrollX: canScroll,
-        })
+          canScrollX: canScroll
+        });
       }
     }
-  }
+  };
 
   /**
    * Checks if the scrollbar is being dragged.
@@ -368,72 +368,72 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   isDraggingScrollbar = (direction: "vertical" | "horizontal"): boolean => {
     if (direction === "vertical") {
-      return this.state.startDragScrollTop != null && this.state.startDragY != null
+      return this.state.startDragScrollTop != null && this.state.startDragY != null;
+    } else if (direction === "horizontal") {
+      return this.state.startDragScrollLeft != null && this.state.startDragX != null;
     }
-    else if (direction === "horizontal") {
-      return this.state.startDragScrollLeft != null && this.state.startDragX != null
-    }
-    return false
-  }
+    return false;
+  };
 
   /**
    * Handles mousedown on scrollbar.
    * Original method: this.onScrollBarMouseDown
    */
   onScrollBarMouseDown = (event: React.MouseEvent, direction: "vertical" | "horizontal") => {
-    event.stopPropagation()
-    event.preventDefault()
+    event.stopPropagation();
+    event.preventDefault();
     if (direction === "vertical") {
       this.setState({
         startDragY: event.clientY,
-        startDragScrollTop: this.scrollTop,
-      })
-    }
-    else if (direction === "horizontal") {
+        startDragScrollTop: this.scrollTop
+      });
+    } else if (direction === "horizontal") {
       this.setState({
         startDragX: event.clientX,
-        startDragScrollLeft: this.scrollLeft,
-      })
+        startDragScrollLeft: this.scrollLeft
+      });
     }
-  }
+  };
 
   /**
    * Handles mousedown on track.
    * Original method: this.onTrackMouseDown
    */
   onTrackMouseDown = (event: React.MouseEvent, direction: "vertical" | "horizontal") => {
-    event.stopPropagation()
-    event.preventDefault()
-    const { relativePos, trackSize, scrollSize, relativeSize } = direction === "vertical"
-      ? {
-          relativePos: event.clientY - this.trackTop,
-          relativeSize: this.state.scrollbarHeight / 2,
-          trackSize: this.trackHeight,
-          scrollSize: this.scrollHeight,
-        }
-      : {
-          relativePos: event.clientX - this.trackLeft,
-          relativeSize: this.state.scrollbarWidth ? this.state.scrollbarWidth / 2 : 0,
-          trackSize: this.trackWidth,
-          scrollSize: this.scrollWidth,
-        }
-    const scrollPos = Math.min(Math.max(0, relativePos - relativeSize), trackSize) / trackSize * scrollSize
+    event.stopPropagation();
+    event.preventDefault();
+    const {
+      relativePos,
+      trackSize,
+      scrollSize,
+      relativeSize
+    } = direction === "vertical" ? {
+      relativePos: event.clientY - this.trackTop,
+      relativeSize: this.state.scrollbarHeight / 2,
+      trackSize: this.trackHeight,
+      scrollSize: this.scrollHeight
+    } : {
+      relativePos: event.clientX - this.trackLeft,
+      relativeSize: this.state.scrollbarWidth ? this.state.scrollbarWidth / 2 : 0,
+      trackSize: this.trackWidth,
+      scrollSize: this.scrollWidth
+    };
+    const scrollPos = Math.min(Math.max(0, relativePos - relativeSize), trackSize) / trackSize * scrollSize;
     if (direction === "vertical") {
-      this.scrollContainer!.scrollTop = scrollPos
+      this.scrollContainer!.scrollTop = scrollPos;
       this.setState({
         startDragY: event.clientY,
-        startDragScrollTop: this.scrollTop,
-      })
-    }
-    else if (direction === "horizontal") {
-      this.scrollContainer!.scrollLeft = scrollPos
+        startDragScrollTop: this.scrollTop
+      });
+    } else if (direction === "horizontal") {
+      this.scrollContainer!.scrollLeft = scrollPos;
       this.setState({
         startDragX: event.clientX,
-        startDragScrollLeft: this.scrollLeft,
-      })
+        startDragScrollLeft: this.scrollLeft
+      });
     }
-    this.recomputeScrollbar(direction)
-  }
+    this.recomputeScrollbar(direction);
+  };
 
   /**
    * Handles wheel events on track.
@@ -445,24 +445,21 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
       DOM_DELTA_LINE = 1,
       DOM_DELTA_PAGE = 2,
     }
-    const delta = direction === "vertical" ? event.deltaY : event.deltaX
-    let scrollDelta = 0
+    const delta = direction === "vertical" ? event.deltaY : event.deltaX;
+    let scrollDelta = 0;
     if (event.deltaMode === DeltaMode.DOM_DELTA_PIXEL) {
-      scrollDelta = delta
-    }
-    else if (event.deltaMode === DeltaMode.DOM_DELTA_LINE) {
-      scrollDelta = 10 * delta
-    }
-    else if (event.deltaMode === DeltaMode.DOM_DELTA_PAGE) {
-      scrollDelta = 100 * delta
+      scrollDelta = delta;
+    } else if (event.deltaMode === DeltaMode.DOM_DELTA_LINE) {
+      scrollDelta = 10 * delta;
+    } else if (event.deltaMode === DeltaMode.DOM_DELTA_PAGE) {
+      scrollDelta = 100 * delta;
     }
     if (direction === "vertical") {
-      this.scrollContainer!.scrollTop += scrollDelta
+      this.scrollContainer!.scrollTop += scrollDelta;
+    } else if (direction === "horizontal") {
+      this.scrollContainer!.scrollLeft += scrollDelta;
     }
-    else if (direction === "horizontal") {
-      this.scrollContainer!.scrollLeft += scrollDelta
-    }
-  }
+  };
 
   /**
    * Handles mousemove for dragging.
@@ -470,75 +467,75 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   onMouseMove = (event: MouseEvent) => {
     if (this.isDraggingScrollbar("vertical")) {
-      this.nextClientY = event.clientY
+      this.nextClientY = event.clientY;
       if (BrowserInfo.safari) {
         if (this.nextFrameRequestedY == null) {
           this.nextFrameRequestedY = requestAnimationFrame(() => {
-            this.scrollByNextClient("vertical")
-          })
+            this.scrollByNextClient("vertical");
+          });
         }
+      } else {
+        this.scrollByNextClient("vertical");
       }
-      else {
-        this.scrollByNextClient("vertical")
-      }
-    }
-    else if (this.isDraggingScrollbar("horizontal")) {
-      this.nextClientX = event.clientX
+    } else if (this.isDraggingScrollbar("horizontal")) {
+      this.nextClientX = event.clientX;
       if (BrowserInfo.safari) {
         if (this.nextFrameRequestedX == null) {
           this.nextFrameRequestedX = requestAnimationFrame(() => {
-            this.scrollByNextClient("horizontal")
-          })
+            this.scrollByNextClient("horizontal");
+          });
         }
-      }
-      else {
-        this.scrollByNextClient("horizontal")
+      } else {
+        this.scrollByNextClient("horizontal");
       }
     }
-  }
+  };
 
   /**
    * Scrolls based on client position during drag.
    * Original method: this.scrollByNextClient
    */
   scrollByNextClient = (direction: "vertical" | "horizontal") => {
-    const { trackSize, scrollSize, trackPos, startDrag, startDragScroll, nextClient } = direction === "vertical"
-      ? {
-          trackSize: this.trackHeight,
-          scrollSize: this.scrollHeight,
-          trackPos: this.trackTop,
-          startDrag: this.state.startDragY,
-          startDragScroll: this.state.startDragScrollTop,
-          nextClient: this.nextClientY,
-        }
-      : {
-          trackSize: this.trackWidth,
-          scrollSize: this.scrollWidth,
-          trackPos: this.trackLeft,
-          startDrag: this.state.startDragX,
-          startDragScroll: this.state.startDragScrollLeft,
-          nextClient: this.nextClientX,
-        }
+    const {
+      trackSize,
+      scrollSize,
+      trackPos,
+      startDrag,
+      startDragScroll,
+      nextClient
+    } = direction === "vertical" ? {
+      trackSize: this.trackHeight,
+      scrollSize: this.scrollHeight,
+      trackPos: this.trackTop,
+      startDrag: this.state.startDragY,
+      startDragScroll: this.state.startDragScrollTop,
+      nextClient: this.nextClientY
+    } : {
+      trackSize: this.trackWidth,
+      scrollSize: this.scrollWidth,
+      trackPos: this.trackLeft,
+      startDrag: this.state.startDragX,
+      startDragScroll: this.state.startDragScrollLeft,
+      nextClient: this.nextClientX
+    };
     if (startDrag != null && startDragScroll != null) {
-      const delta = nextClient - startDrag
-      const scrollDelta = delta / trackSize * scrollSize
-      if ((delta > 0 && nextClient >= trackPos) || (delta < 0 && nextClient <= trackPos + trackSize)) {
+      const delta = nextClient - startDrag;
+      const scrollDelta = delta / trackSize * scrollSize;
+      if (delta > 0 && nextClient >= trackPos || delta < 0 && nextClient <= trackPos + trackSize) {
         if (direction === "vertical") {
-          this.scrollContainer!.scrollTop = startDragScroll + scrollDelta
+          this.scrollContainer!.scrollTop = startDragScroll + scrollDelta;
+        } else if (direction === "horizontal") {
+          this.scrollContainer!.scrollLeft = startDragScroll + scrollDelta;
         }
-        else if (direction === "horizontal") {
-          this.scrollContainer!.scrollLeft = startDragScroll + scrollDelta
-        }
-        this.recomputeScrollbar(direction)
+        this.recomputeScrollbar(direction);
       }
       if (direction === "vertical") {
-        this.nextFrameRequestedY = null
-      }
-      else if (direction === "horizontal") {
-        this.nextFrameRequestedX = null
+        this.nextFrameRequestedY = null;
+      } else if (direction === "horizontal") {
+        this.nextFrameRequestedX = null;
       }
     }
-  }
+  };
 
   /**
    * Handles mouseup to end dragging.
@@ -549,9 +546,9 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
       startDragScrollTop: undefined,
       startDragY: undefined,
       startDragScrollLeft: undefined,
-      startDragX: undefined,
-    })
-  }
+      startDragX: undefined
+    });
+  };
 
   /**
    * Handles mousedown with custom event handling.
@@ -559,38 +556,35 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   onMouseDown = handleMouseEvent(this, "mousedown", (event: React.MouseEvent) => {
     if (this.props.onMouseDown) {
-      this.props.onMouseDown(event)
+      this.props.onMouseDown(event);
     }
-  })
-
+  });
   componentDidMount() {
-    super.componentDidMount()
-    document.addEventListener("mousemove", this.onMouseMove)
-    document.addEventListener("mouseup", this.onMouseUp)
+    super.componentDidMount();
+    document.addEventListener("mousemove", this.onMouseMove);
+    document.addEventListener("mouseup", this.onMouseUp);
   }
-
   UNSAFE_componentWillUpdate(nextProps: ScrollContainerProps, nextState: ScrollContainerState) {
     if (this.rafId) {
-      cancelAnimationFrame(this.rafId)
+      cancelAnimationFrame(this.rafId);
     }
     this.rafId = requestAnimationFrame(() => {
-      this.recomputeScrollbar("vertical")
-      this.recomputeScrollbar("horizontal")
+      this.recomputeScrollbar("vertical");
+      this.recomputeScrollbar("horizontal");
       if (this.props.onCanScrollChange && this.state.canScroll !== nextState.canScroll) {
-        this.props.onCanScrollChange(nextState.canScroll)
+        this.props.onCanScrollChange(nextState.canScroll);
       }
-    })
+    });
   }
-
   componentWillUnmount() {
     if (this.rafId) {
-      cancelAnimationFrame(this.rafId)
+      cancelAnimationFrame(this.rafId);
     }
-    super.componentWillUnmount()
-    document.removeEventListener("mousemove", this.onMouseMove)
-    document.removeEventListener("mouseup", this.onMouseUp)
-    this.resizeObserver.disconnect()
-    this.outerResizeObserver.disconnect()
+    super.componentWillUnmount();
+    document.removeEventListener("mousemove", this.onMouseMove);
+    document.removeEventListener("mouseup", this.onMouseUp);
+    this.resizeObserver.disconnect();
+    this.outerResizeObserver.disconnect();
   }
 
   /**
@@ -605,8 +599,8 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
       scrollTop: this.scrollTop,
       scrollContainerScrollTop: this.scrollContainer!.scrollTop,
       scrollContainerScrollLeft: this.scrollContainer!.scrollLeft,
-      componentState: this.state,
-    }
+      componentState: this.state
+    };
   }
 
   /**
@@ -615,34 +609,28 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
    */
   updateOverscrollMinHeight() {
     if (this.props.enableOverscroll) {
-      const isHovered = this.scrollContainer?.matches(":hover")
-      const isAtBottom = this.scrollTop >= this.scrollContent!.clientHeight
-      const overscrollHeight = Math.max(
-        !isHovered || isAtBottom || this.scrollTop === 0
-          ? 0
-          : Math.ceil(this.scrollTop) + this.scrollContainer!.clientHeight,
-        this.scrollContent!.clientHeight,
-      )
+      const isHovered = this.scrollContainer?.matches(":hover");
+      const isAtBottom = this.scrollTop >= this.scrollContent!.clientHeight;
+      const overscrollHeight = Math.max(!isHovered || isAtBottom || this.scrollTop === 0 ? 0 : Math.ceil(this.scrollTop) + this.scrollContainer!.clientHeight, this.scrollContent!.clientHeight);
       this.setState({
-        overscrollHeight,
-      })
+        overscrollHeight
+      });
     }
   }
-
   render() {
     const scrollContainerClass = classNames("scroll_container--scrollContainer--DYS0c scroll_container--full--CiWTy", {
       "scroll_container--horizontalScrollingEnabled--yhrnC": this.props.minContentWidth && !this.props.horizontalScrollingDisabled,
-      "scroll_container--verticalScrollingDisabled--swGL9": this.props.scrollingDisabled,
-    })
-    const clipContainerClass = this.props.allowScrollAndZoomOver ? (this.state.canScroll ? ZR : "") : s4
-    const showHorizontalScrollbar = !this.props.hideScrollbar && this.state.canScrollX && this.props.minContentWidth && !this.props.horizontalScrollingDisabled && this.props.horizontalScrollBarEnabled
+      "scroll_container--verticalScrollingDisabled--swGL9": this.props.scrollingDisabled
+    });
+    const clipContainerClass = this.props.allowScrollAndZoomOver ? this.state.canScroll ? jsFullscreenNoModWheelEventCapture : "" : jsFullscreenWheelEventCapture;
+    const showHorizontalScrollbar = !this.props.hideScrollbar && this.state.canScrollX && this.props.minContentWidth && !this.props.horizontalScrollingDisabled && this.props.horizontalScrollBarEnabled;
     return jsxs("div", {
       "className": classNames(this.props.className, "scroll_container--clipContainer--5rNO2", clipContainerClass),
       "style": {
         width: this.props.width,
         height: this.props.height,
         minWidth: this.props.minContentWidth,
-        maxHeight: this.props.maxHeight,
+        maxHeight: this.props.maxHeight
       },
       "onContextMenu": this.props.onContextMenu,
       "onMouseDown": this.props.onMouseDown ? this.onMouseDown : undefined,
@@ -651,82 +639,70 @@ export class RecordingScrollContainer extends RecordingComponent<ScrollContainer
       "data-non-interactive": true,
       "data-testid": this.props.dataTestId,
       "data-onboarding-key": this.props.dataOnboardingKey,
-      "children": [
-        showHorizontalScrollbar && jsx("div", {
-          className: this.isDraggingScrollbar("horizontal")
-            ? classNames("scroll_container--trackDraggingX--FMfwj scroll_container--trackX--hi0Cm scroll_container--_baseTrack--2eCvb", {
-                "scroll_container--trackDraggingBorderX--BmoqS": !this.props.disableScrollbarBorder,
-              })
-            : classNames("scroll_container--trackX--hi0Cm scroll_container--_baseTrack--2eCvb", {
-                "scroll_container--trackBorderX--YtWKS": !this.props.disableScrollbarBorder,
-              }),
-          onMouseDown: event => this.onTrackMouseDown(event, "horizontal"),
-          onWheel: event => this.onTrackMouseWheel(event, "horizontal"),
-          children: jsx("div", {
-            className: this.props.scrollBarAlways ? "scroll_container--scrollBarAlwaysX--vgl9K scroll_container--scrollBarX--045hC scroll_container--_baseScrollBar--k-tCf" : "scroll_container--scrollBarX--045hC scroll_container--_baseScrollBar--k-tCf",
-            style: {
-              transform: `translate3d(${this.state.scrollbarLeft}px, 0px, 0)`,
-              width: this.state.scrollbarWidth,
-            },
-            onMouseDown: event => this.onScrollBarMouseDown(event, "horizontal"),
-          }),
+      "children": [showHorizontalScrollbar && jsx("div", {
+        className: this.isDraggingScrollbar("horizontal") ? classNames("scroll_container--trackDraggingX--FMfwj scroll_container--trackX--hi0Cm scroll_container--_baseTrack--2eCvb", {
+          "scroll_container--trackDraggingBorderX--BmoqS": !this.props.disableScrollbarBorder
+        }) : classNames("scroll_container--trackX--hi0Cm scroll_container--_baseTrack--2eCvb", {
+          "scroll_container--trackBorderX--YtWKS": !this.props.disableScrollbarBorder
         }),
-        jsx("div", {
-          "ref": this.setScrollContainer,
-          "id": this.props.containerId,
-          "className": classNames(scrollContainerClass, {
-            "scroll_container--propagateScrolling--ZuMmX": !!this.props.minContentWidth,
-            "scroll_container--scrollShadowTop--iFgEd": this.props.enableScrollShadow && this.state.canScrollUp && !this.state.canScrollDown,
-            "scroll_container--scrollShadowBottom--xsUjO": this.props.enableScrollShadow && this.state.canScrollDown && !this.state.canScrollUp,
-            "scroll_container--scrollShadowBoth--ehH-a": this.props.enableScrollShadow && this.state.canScrollUp && this.state.canScrollDown,
-            "scroll_container--scrollShadowCommon--LB95H": this.props.enableScrollShadow && (this.state.canScrollUp || this.state.canScrollDown),
-          }),
-          "onScroll": this.onScroll,
+        onMouseDown: event => this.onTrackMouseDown(event, "horizontal"),
+        onWheel: event => this.onTrackMouseWheel(event, "horizontal"),
+        children: jsx("div", {
+          className: this.props.scrollBarAlways ? "scroll_container--scrollBarAlwaysX--vgl9K scroll_container--scrollBarX--045hC scroll_container--_baseScrollBar--k-tCf" : "scroll_container--scrollBarX--045hC scroll_container--_baseScrollBar--k-tCf",
+          style: {
+            transform: `translate3d(${this.state.scrollbarLeft}px, 0px, 0)`,
+            width: this.state.scrollbarWidth
+          },
+          onMouseDown: event => this.onScrollBarMouseDown(event, "horizontal")
+        })
+      }), jsx("div", {
+        "ref": this.setScrollContainer,
+        "id": this.props.containerId,
+        "className": classNames(scrollContainerClass, {
+          "scroll_container--propagateScrolling--ZuMmX": !!this.props.minContentWidth,
+          "scroll_container--scrollShadowTop--iFgEd": this.props.enableScrollShadow && this.state.canScrollUp && !this.state.canScrollDown,
+          "scroll_container--scrollShadowBottom--xsUjO": this.props.enableScrollShadow && this.state.canScrollDown && !this.state.canScrollUp,
+          "scroll_container--scrollShadowBoth--ehH-a": this.props.enableScrollShadow && this.state.canScrollUp && this.state.canScrollDown,
+          "scroll_container--scrollShadowCommon--LB95H": this.props.enableScrollShadow && (this.state.canScrollUp || this.state.canScrollDown)
+        }),
+        "onScroll": this.onScroll,
+        "data-non-interactive": true,
+        "data-testid": this.props.scrollContainerDataTestId,
+        "children": jsx("div", {
+          "style": this.props.enableOverscroll ? {
+            minHeight: this.state.overscrollHeight
+          } : undefined,
+          "className": "scroll_container--full--CiWTy",
           "data-non-interactive": true,
-          "data-testid": this.props.scrollContainerDataTestId,
           "children": jsx("div", {
-            "style": this.props.enableOverscroll
-              ? {
-                  minHeight: this.state.overscrollHeight,
-                }
-              : undefined,
-            "className": "scroll_container--full--CiWTy",
+            "className": this.props.innerClassName,
+            "id": this.props.contentId,
+            "ref": this.setScrollContent,
+            "role": this.props.role,
             "data-non-interactive": true,
-            "children": jsx("div", {
-              "className": this.props.innerClassName,
-              "id": this.props.contentId,
-              "ref": this.setScrollContent,
-              "role": this.props.role,
-              "data-non-interactive": true,
-              "children": this.props.children,
-            }),
-          }),
+            "children": this.props.children
+          })
+        })
+      }), !this.props.hideScrollbar && this.state.canScroll && jsx("div", {
+        className: this.isDraggingScrollbar("vertical") ? classNames("scroll_container--trackDraggingY--SwLNT scroll_container--trackY--p6A6y scroll_container--_baseTrack--2eCvb", {
+          "scroll_container--trackDraggingBorderY---uhHH": !this.props.disableScrollbarBorder
+        }) : classNames("scroll_container--trackY--p6A6y scroll_container--_baseTrack--2eCvb", {
+          "scroll_container--trackBorderY--Rwpf0": !this.props.disableScrollbarBorder,
+          "scroll_container--trackYWithTrackXPresent--fT3ux": showHorizontalScrollbar
         }),
-        !this.props.hideScrollbar && this.state.canScroll && jsx("div", {
-          className: this.isDraggingScrollbar("vertical")
-            ? classNames("scroll_container--trackDraggingY--SwLNT scroll_container--trackY--p6A6y scroll_container--_baseTrack--2eCvb", {
-                "scroll_container--trackDraggingBorderY---uhHH": !this.props.disableScrollbarBorder,
-              })
-            : classNames("scroll_container--trackY--p6A6y scroll_container--_baseTrack--2eCvb", {
-                "scroll_container--trackBorderY--Rwpf0": !this.props.disableScrollbarBorder,
-                "scroll_container--trackYWithTrackXPresent--fT3ux": showHorizontalScrollbar,
-              }),
-          onMouseDown: event => this.onTrackMouseDown(event, "vertical"),
-          onWheel: event => this.onTrackMouseWheel(event, "vertical"),
-          children: jsx("div", {
-            className: this.props.scrollBarAlways ? "scroll_container--scrollBarAlwaysY--r0qYV scroll_container--scrollBarY--pCJVZ scroll_container--_baseScrollBar--k-tCf" : "scroll_container--scrollBarY--pCJVZ scroll_container--_baseScrollBar--k-tCf",
-            style: {
-              transform: `translate3d(0px, ${this.state.scrollbarTop}px, 0)`,
-              height: this.state.scrollbarHeight,
-            },
-            onMouseDown: event => this.onScrollBarMouseDown(event, "vertical"),
-          }),
-        }),
-      ],
-    })
+        onMouseDown: event => this.onTrackMouseDown(event, "vertical"),
+        onWheel: event => this.onTrackMouseWheel(event, "vertical"),
+        children: jsx("div", {
+          className: this.props.scrollBarAlways ? "scroll_container--scrollBarAlwaysY--r0qYV scroll_container--scrollBarY--pCJVZ scroll_container--_baseScrollBar--k-tCf" : "scroll_container--scrollBarY--pCJVZ scroll_container--_baseScrollBar--k-tCf",
+          style: {
+            transform: `translate3d(0px, ${this.state.scrollbarTop}px, 0)`,
+            height: this.state.scrollbarHeight
+          },
+          onMouseDown: event => this.onScrollBarMouseDown(event, "vertical")
+        })
+      })]
+    });
   }
-
-  static displayName = "ScrollContainer"
+  static displayName = "ScrollContainer";
 }
-
-export const P = RecordingScrollContainer
+export const P = RecordingScrollContainer;

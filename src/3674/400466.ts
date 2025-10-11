@@ -27,7 +27,7 @@ import { getViewportInfo, getVisibleArea } from "../figma_app/62612";
 import { getSceneGraphItem, useSingleSelectedKey } from "../figma_app/311375";
 import { isDevModeFocusViewActive, isInteractiveInspectionResizing } from "../figma_app/544649";
 import { deactivateActiveComment } from "../figma_app/770088";
-import { Qx, Uu, ZR, Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCaptureKeys, jsFullscreenWheelEventPassthrough, jsFullscreenNoModWheelEventCapture, jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { LO } from "../9410/571209";
 import { NW, E_ } from "../figma_app/355754";
 import { annotationVisibilityTracker } from "../figma_app/682945";
@@ -3329,7 +3329,7 @@ function n5({
       ref: _dropdownTargetRef,
       "data-testid": "annotationDialog",
       children: [jsxs("div", {
-        className: A()("annotation--createAnnotation--tWKSM annotation--_annotationBase--MPByC", er ? ep : void 0, Qx, Uu),
+        className: A()("annotation--createAnnotation--tWKSM annotation--_annotationBase--MPByC", er ? ep : void 0, jsFullscreenPreventEventCaptureKeys, jsFullscreenWheelEventPassthrough),
         style: eu,
         children: [jsxs("div", {
           className: "annotation--createAnnotationHeader--thXfu",
@@ -3376,7 +3376,7 @@ function n5({
             children: [jsx("div", {
               ref: ed,
               className: A()("annotation--labelEditor--xNx12", {
-                [ZR]: ec
+                [jsFullscreenNoModWheelEventCapture]: ec
               }),
               dir: "auto",
               children: jsx(_$$A12, {
@@ -3519,7 +3519,7 @@ function n7({
   onPointerDown: t
 }) {
   return jsx(n.recordableDiv, {
-    className: `${ed} ${Dm} ${Uu}`,
+    className: `${ed} ${jsFullscreenPreventEventCapture} ${jsFullscreenWheelEventPassthrough}`,
     recordingKey: "annotationDialogBackground",
     style: {
       position: "absolute",
@@ -3933,7 +3933,7 @@ z-index: 100;
   return jsx("div", {
     ref: n,
     "data-testid": "annotation-renderer-shadow-dom-container",
-    className: A()("annotation--annotationContainer--k4xiM", Dm, Uu, r && "annotation--isPageLoading--JGk-P"),
+    className: A()("annotation--annotationContainer--k4xiM", jsFullscreenPreventEventCapture, jsFullscreenWheelEventPassthrough, r && "annotation--isPageLoading--JGk-P"),
     children: o && createPortal(children, o)
   });
 }

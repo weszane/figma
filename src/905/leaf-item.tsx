@@ -3,7 +3,7 @@ import g from 'classnames';
 import { memo, useCallback, useContext, useId, useMemo, useRef, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { Qx } from '../figma_app/8833';
+import { jsFullscreenPreventEventCaptureKeys } from '../figma_app/8833';
 import { rp } from '../figma_app/703988';
 import { ph } from '../figma_app/709893';
 import { useHandleMouseEvent } from '../figma_app/878298';
@@ -181,7 +181,7 @@ export const LeafItem = memo<LeafItemProps>(({
           [cssBuilderInstance.wFull.itemsCenter.$]: isList
         }),
         children: [content, jsx('div', {
-          className: g()(isList ? 'drilldown_item--checkboxList--kqmln' : 'drilldown_item--checkboxGrid--aXuyI', Qx, {
+          className: g()(isList ? 'drilldown_item--checkboxList--kqmln' : 'drilldown_item--checkboxGrid--aXuyI', jsFullscreenPreventEventCaptureKeys, {
             'drilldown_item--checkboxChecked--c4ThM': selected
           }),
           children: jsx(ManuallyLabeledCheckbox, {
@@ -208,7 +208,7 @@ export const LeafItem = memo<LeafItemProps>(({
         height: leafListHeight
       })
     },
-    className: g()(containerClass, focusClass, Qx),
+    className: g()(containerClass, focusClass, jsFullscreenPreventEventCaptureKeys),
     onClick: handleClick,
     recordingKey,
     ref: setKeyboardNavigationElement,

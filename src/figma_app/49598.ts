@@ -906,4 +906,4 @@ export const zm = likeHubFileThunk
 export const D3 = hubFilePutAll
 export const L1 = hubFileDelAll
 export const Sb = processHubFilesThunk
-export { hubFileDelAll, hubFilePutAll }
+export { hubFileDelAll, hubFilePutAll, processHubFilesThunk }

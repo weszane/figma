@@ -41,7 +41,7 @@ import { showModalHandler } from "../905/156213";
 import { showPickerInStyleCreation, hidePickerInStyleCreation } from "../905/295712";
 import { updateCurrentSelectionPaintInPicker, forceUpdateSelectionPaintsForUndo } from "../905/854717";
 import { hideStylePreview } from "../figma_app/914957";
-import { yJ, F7 } from "../figma_app/8833";
+import { selectionStyleItem, selectionPaintItem } from "../figma_app/8833";
 import { formatI18nMessage } from "../905/482208";
 import { AutoColorFormatter, FormattedHexColor } from "../905/713722";
 import { ZB } from "../figma_app/451499";
@@ -1340,7 +1340,7 @@ function tf({
     stylePreviewShown: e.stylePreviewShown
   }));
   let v = useDispatch<AppDispatch>();
-  let A = `${yJ}-${o}`;
+  let A = `${selectionStyleItem}-${o}`;
   let x = m?.id === A ? m : null;
   let N = stateStylePickerShown.isShown && stateStylePickerShown.id === A ? stateStylePickerShown : null;
   let C = _$$M(c);
@@ -1666,10 +1666,10 @@ $$t_2.displayName = "Paint";
       };
     }
     pickerID() {
-      return `${F7}-${this.props.id}`;
+      return `${selectionPaintItem}-${this.props.id}`;
     }
     stylePickerID() {
-      return `${yJ}-${this.props.id}`;
+      return `${selectionStyleItem}-${this.props.id}`;
     }
     componentDidMount() {
       this.props.openPickerOnInitialRender && this.showPicker();

@@ -27,7 +27,7 @@ import { A as _$$A2 } from '../1617/325876';
 import { A as _$$A3 } from '../1617/495612';
 import { A as _$$A } from '../5724/594037';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { useAtomValueAndSetter } from '../figma_app/27355';
 import { kz } from '../figma_app/171177';
 import { debug, assert, throwTypeError } from '../figma_app/465776';
@@ -521,7 +521,7 @@ function $({
         children: [jsx('input', {
           autoFocus: !0,
           ref: g,
-          className: h()('parameter_entry--inputTextBox--0eA0n', Dm),
+          className: h()('parameter_entry--inputTextBox--0eA0n', jsFullscreenPreventEventCapture),
           onChange: I,
           value: e,
           maxLength: 150,

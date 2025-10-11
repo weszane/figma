@@ -15,7 +15,7 @@ import { M as _$$M } from "../figma_app/749682";
 import { BrowserInfo } from "../figma_app/778880";
 import { _d } from "../figma_app/795674";
 import { getI18nString } from "../905/303541";
-import { Uu, Dm } from "../figma_app/8833";
+import { jsFullscreenWheelEventPassthrough, jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { KindEnum } from "../905/129884";
 import { vx, jJ, bb, _v, YC, TN, yG, zR, TJ, z9, BT, qD, sf, Ct, It, tS, xE, CN, Yq, CY, ct, gJ } from "../9410/269644";
 var m = h;
@@ -171,7 +171,7 @@ export function $$j1({
     })
   }) : BrowserInfo.isIpad && a ? null : ee ? Y && !v ? eh : null : jsxs(Fragment, {
     children: [H ? null : eh, jsxs("div", {
-      className: m()(Uu, _v, !Y && YC),
+      className: m()(jsFullscreenWheelEventPassthrough, _v, !Y && YC),
       ref: Q,
       children: [jsxs("div", {
         className: TN,
@@ -291,7 +291,7 @@ function N({
       className: sf,
       children: jsx("input", {
         ref: s,
-        className: m()(Ct, Dm, Uu),
+        className: m()(Ct, jsFullscreenPreventEventCapture, jsFullscreenWheelEventPassthrough),
         max: 1,
         min: 0,
         onChange: e,
@@ -422,7 +422,7 @@ function O({
   let l = o ? T.BUTTON_BG_FILL_HOVER_OPACITY : T.BUTTON_BG_FILL_OPACITY;
   return jsx("button", {
     ref: s,
-    className: m()(Uu, CY, !e && ct),
+    className: m()(jsFullscreenWheelEventPassthrough, CY, !e && ct),
     onPointerDown: function () {
       document.activeElement instanceof HTMLElement && document.activeElement.blur();
       t();

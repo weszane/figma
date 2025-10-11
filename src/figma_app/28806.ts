@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { assert } from "../figma_app/465776";
-import { P } from "../figma_app/529847";
+import { teamUserUpdateSeatType } from "../figma_app/529847";
 import { batchUpdateOrgUsersAction } from "../figma_app/990058";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { collaboratorSet } from "../905/332483";
@@ -31,7 +31,7 @@ export function $$m0(e) {
       license_types: r(i)
     });
     assert(e.planType === FOrganizationLevelType.TEAM);
-    t(P({
+    t(teamUserUpdateSeatType({
       teamId: e.planId,
       deltas: n.map(({
         userId: e

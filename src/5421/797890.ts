@@ -19,7 +19,7 @@ import { captureMessage } from "../905/11";
 import { Point } from "../905/736624";
 import { RecordingScrollContainer } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { o$ } from "../figma_app/8833";
+import { prototypeInteractionSettings } from "../figma_app/8833";
 import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4 } from "../figma_app/540726";
 import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isInvalidValue } from "../905/216495";
@@ -1540,5 +1540,5 @@ function tt({
     })]
   });
 }
-let tn = e => e.pickerShown?.id === o$ ? e.pickerShown : null;
+let tn = e => e.pickerShown?.id === prototypeInteractionSettings ? e.pickerShown : null;
 export const E = $$e90;

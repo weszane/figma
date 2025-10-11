@@ -20,7 +20,7 @@ import { bL } from '../905/911410';
 import { calculatePickerPositionLeft } from '../905/959568';
 import { colorCSSManipulatorInstance } from '../905/989956';
 import { cssBuilderInstance } from '../cssbuilder/589278';
-import { kX } from '../figma_app/8833';
+import { dropdownTypeSlideColorPickerContextMenu } from '../figma_app/8833';
 import { useAtomValueAndSetter } from '../figma_app/27355';
 import { hidePickerThunk } from '../figma_app/91703';
 import { buildUploadUrl } from '../figma_app/169182';
@@ -157,7 +157,7 @@ function K({
   closeColorPicker: s,
   recordingKey: o
 }) {
-  let l = useDropdown(kX);
+  let l = useDropdown(dropdownTypeSlideColorPickerContextMenu);
   let d = useEffectiveThemeId();
   let u = UZ(d);
   let p = lK(d);
@@ -278,7 +278,7 @@ function $({
   isEditingTheme: s,
   recordingKey: o
 }) {
-  let l = useDropdown(kX);
+  let l = useDropdown(dropdownTypeSlideColorPickerContextMenu);
   let [c, u] = useState(!1);
   let h = useEffectiveThemeId();
   let [m, g] = useState(nE(h));

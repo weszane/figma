@@ -483,7 +483,7 @@ import { at as _$$at, lz as _$$lz, N as _$$N4, uy as _$$uy, we as _$$we, Ab, Iv,
 import { bY as _$$bY, Jj } from '../figma_app/2023';
 import { SitesStarterFullscreenOverlay, FigmakeMobileWebBlockingPopup, FigmakeNewFileTemplateInsertionChatNudge, FigmakeNewFileOnboardingPreGeneration, FigmakeSendToMakeOnboarding, FigmakeExistingFilesFullscreenOnboarding, FigmakeNewFileOnboardingPostGeneration, SitesOnboardingCallouts, FigmakeExistingFilesEditorOnboarding, SitesOnboardingTOS, SitesOnboardingCodeCallout, FigMakeStarterFullscreenOverlay } from '../figma_app/6204';
 import { H as _$$H } from '../figma_app/7677';
-import { jQ as _$$jQ, s9 as _$$s, uR as _$$uR, Dm, J7, Qx, Uu, V6, Zn } from '../figma_app/8833';
+import { dropdownTypeCodeComponentContextMenu, dropdownTypeDakotaItemContextMenu, behaviorSettings, jsFullscreenPreventEventCapture, dropdownTypeWebpageContextMenu, jsFullscreenPreventEventCaptureKeys, jsFullscreenWheelEventPassthrough, dropdownTypeDakotaCollectionContextMenu, dropdownTypeDakotaFieldContextMenu } from '../figma_app/8833';
 import { PageTypeEnum } from '../figma_app/10554';
 import { lW as _$$lW2 } from '../figma_app/11182';
 import { dC as _$$dC, iO as _$$iO, lf as _$$lf, lT as _$$lT, Mj as _$$Mj, ou as _$$ou, rx as _$$rx, UU } from '../figma_app/11329';
@@ -924,7 +924,7 @@ function E({
   };
   return jsx('div', {
     style: C,
-    className: v()(Dm, T),
+    className: v()(jsFullscreenPreventEventCapture, T),
     children: jsx(I, {
       focused: selectedNodeId === n || hoveredNodeId === n || selectedNodeParentResponsiveSetId === n,
       icon: jsx(_$$r, {}),
@@ -984,7 +984,7 @@ function L({
   let u = selectedNodeId === e || hoveredNodeId === e;
   return s && !u ? null : jsx('div', {
     style: c,
-    className: v()(Dm, T),
+    className: v()(jsFullscreenPreventEventCapture, T),
     children: n.filter((e, t, i) => t === i.findIndex(t => t.fieldSchemaId === e.fieldSchemaId)).map(t => zoomScale < 0.1 ? null : jsx(A, {
       collectionId: t.collectionId,
       fieldSchemaId: t.fieldSchemaId,
@@ -1013,7 +1013,7 @@ function F({
   return jsx('div', {
     'ref': t,
     'data-testid': 'cms-shadow-dom-container',
-    'className': v()('cms_binding_indicators--container--AGBTv', Dm, Uu),
+    'className': v()('cms_binding_indicators--container--AGBTv', jsFullscreenPreventEventCapture, jsFullscreenWheelEventPassthrough),
     'children': i && createPortal(e, i)
   });
 }
@@ -1427,7 +1427,7 @@ let e0 = memo(e => {
 function tO() {
   let e = _$$xn();
   return jsx('div', {
-    className: v()(Dm, _$$z2),
+    className: v()(jsFullscreenPreventEventCapture, _$$z2),
     style: {
       marginBottom: e
     },
@@ -8761,7 +8761,7 @@ function dL({
   let n = stylex.props(i ? dR.fullPageViewContainer : dR.container);
   return jsxs('div', {
     className: v()(n.className, {
-      [Qx]: i
+      [jsFullscreenPreventEventCaptureKeys]: i
     }),
     children: [i ? dA(jsx(oZ, {
       domainInfo: t
@@ -10294,7 +10294,7 @@ function cj({
   });
   return t && isValidSessionLocalID(parseSessionLocalID(t)) ? jsxs('div', {
     className: v()(cssBuilderInstance.flex.flexColumn.gap24.$, {
-      [Qx]: n
+      [jsFullscreenPreventEventCaptureKeys]: n
     }),
     children: [jsx(cv, {
       children: o
@@ -10345,7 +10345,7 @@ function ck({
   });
   return t && isValidSessionLocalID(parseSessionLocalID(t)) ? jsxs('div', {
     className: v()(cssBuilderInstance.flex.flexColumn.gap24.$, {
-      [Qx]: n
+      [jsFullscreenPreventEventCaptureKeys]: n
     }),
     children: [jsx(cv, {
       children: s
@@ -11957,7 +11957,7 @@ function uV({
   let i = GQ();
   let n = _$$_o();
   return jsx('div', {
-    'className': Dm,
+    'className': jsFullscreenPreventEventCapture,
     'data-testid': 'figmake-full-view',
     'children': jsx('div', {
       className: 'x9f619 x10l6tqk x78zum5 x1qjc9v5 x1szn6h9 x13vifvy xu96u03 x3m8u43 x1ey2m1c x1yjdb4r',
@@ -13256,7 +13256,7 @@ let xE = memo(({
       });
       n(e => e.has(t.id) ? pk(e, t.id) : e);
     }, [e, n]);
-    let d = useDropdown(_$$s);
+    let d = useDropdown(dropdownTypeDakotaItemContextMenu);
     return {
       editingCellId: t,
       setEditingCellId: i,
@@ -15458,7 +15458,7 @@ let mW = registerModal(({
   useEffect(() => {
     O === null && collectionFields.length > 0 && F(collectionFields[0]?.id ?? null);
   }, [O, collectionFields, F]);
-  let M = useDropdown(Zn);
+  let M = useDropdown(dropdownTypeDakotaFieldContextMenu);
   let D = e => t => {
     t.stopPropagation();
     t.preventDefault();
@@ -17073,7 +17073,7 @@ function hF() {
         children: [jsx(hL, {
           isCollectionListLoading: status === 'loading'
         }), jsxs('div', {
-          className: v()(cssBuilderInstance.relative.wFull.hFull.flex.$, Dm),
+          className: v()(cssBuilderInstance.relative.wFull.hFull.flex.$, jsFullscreenPreventEventCapture),
           ref: p,
           children: [g, u.size === 1 && jsx(mI, {
             parentContainerWidth: x ?? 0
@@ -17242,7 +17242,7 @@ function h0(e) {
       clientY
     } = t;
     d(showDropdownThunk({
-      type: _$$jQ,
+      type: dropdownTypeCodeComponentContextMenu,
       data: {
         clientX,
         clientY,
@@ -17902,7 +17902,7 @@ function go({
   } = getObservableOrFallback(f.bindingFieldSchema);
   let [v, w] = useAtomValueAndSetter(_$$iO);
   let S = useSetAtom(_$$ou);
-  let C = useDropdown(V6);
+  let C = useDropdown(dropdownTypeDakotaCollectionContextMenu);
   let [T, I] = useState(!1);
   let E = useSetAtom(UU);
   let N = b === d && !id;
@@ -18540,7 +18540,7 @@ function gL(e) {
       clientY
     } = t;
     g(showDropdownThunk({
-      type: J7,
+      type: dropdownTypeWebpageContextMenu,
       data: {
         clientX,
         clientY
@@ -29372,7 +29372,7 @@ function Tm({
   });
 }
 function Th(e) {
-  return e.pickerShown?.id === _$$uR ? e.pickerShown : null;
+  return e.pickerShown?.id === behaviorSettings ? e.pickerShown : null;
 }
 let Tg = function (e) {
   return () => {

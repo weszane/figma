@@ -17,7 +17,7 @@ import { batchDownloadImages } from "../figma_app/624361";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { BrowserInfo } from "../figma_app/778880";
 import { sQ, _L } from "../9410/635978";
-import { s4 } from "../figma_app/8833";
+import { jsFullscreenWheelEventCapture } from "../figma_app/8833";
 import { RJ, mc, DD, ZU } from "../9410/640042";
 import { vE, H } from "../figma_app/376315";
 var c = d;
@@ -135,7 +135,7 @@ let L = memo(({
         ref: p,
         crossOrigin: "anonymous",
         autoPlay: _ && !BrowserInfo.safari,
-        className: c()("rich_media_overlay--video--O6uP2", i && s4, i && "rich_media_overlay--maximizedVideoBg--FUhbn"),
+        className: c()("rich_media_overlay--video--O6uP2", i && jsFullscreenWheelEventCapture, i && "rich_media_overlay--maximizedVideoBg--FUhbn"),
         onMouseUp: function () {
           document.activeElement instanceof HTMLElement && document.activeElement.blur();
         },

@@ -19,7 +19,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
-import { ak } from "../figma_app/8833";
+import { epsilon } from "../figma_app/8833";
 import { PZ, Lk } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { getNudgeAmounts } from "../figma_app/740163";
@@ -283,7 +283,7 @@ export function $$el23(e, t) {
     bigNudgeAmount
   } = getNudgeAmounts();
   return useMemo(() => new $$eS17({
-    min: getFeatureFlags().editor_zero_width_input ? ak : 0,
+    min: getFeatureFlags().editor_zero_width_input ? epsilon : 0,
     smallNudgeAmount,
     bigNudgeAmount,
     onEvaluateExpressionError: t

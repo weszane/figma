@@ -1,4 +1,4 @@
-import { antfu } from "@antfu/eslint-config";
+import { antfu } from "@antfu/eslint-config"
 
 export default antfu({
   formatters: true,
@@ -20,5 +20,7 @@ export default antfu({
     "ts/no-use-before-define": "off",
     "unicorn/prefer-dom-node-text-content": "off",
     "regexp/no-unused-capturing-group": "off",
+    "style/semi": "off",
+    "style/member-delimiter-style": "off",
   },
-});
+})

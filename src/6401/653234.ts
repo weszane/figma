@@ -13,7 +13,7 @@ import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Qx, Uu } from "../figma_app/8833";
+import { jsFullscreenPreventEventCaptureKeys, jsFullscreenWheelEventPassthrough } from "../figma_app/8833";
 import { p as _$$p } from "../905/167135";
 import { selectCurrentUser } from "../905/372672";
 import { KindEnum } from "../905/129884";
@@ -182,7 +182,7 @@ function T({
   setPrompt: l
 }) {
   return jsx(LazyInputForwardRef, {
-    className: b()(E, Qx, Uu),
+    className: b()(E, jsFullscreenPreventEventCaptureKeys, jsFullscreenWheelEventPassthrough),
     type: "text",
     placeholder: getI18nString("slides.flapp.alignment.prompt_placeholder"),
     value: t,
@@ -497,7 +497,7 @@ function et({
   return jsx(InputPrimitive, {
     id: f(nodeId, "facepile-prompt-input"),
     "aria-label": getI18nString("slides.flapp.facepile.input_label"),
-    className: b()(Qx, Uu),
+    className: b()(jsFullscreenPreventEventCaptureKeys, jsFullscreenWheelEventPassthrough),
     type: "text",
     placeholder: getI18nString("slides.flapp.facepile.prompt_placeholder"),
     value: e,
@@ -874,7 +874,7 @@ function eF({
         className: eI,
         children: [jsx(InputPrimitive, {
           id: r,
-          className: b()(eP, Qx, Uu),
+          className: b()(eP, jsFullscreenPreventEventCaptureKeys, jsFullscreenWheelEventPassthrough),
           value: e,
           placeholder: getI18nString("slides.flapp.poll.option_placeholder"),
           onChange: x,
@@ -1118,7 +1118,7 @@ function eB() {
     children: n
   }) : jsx(InputPrimitive, {
     id: f(nodeId, "questionInput"),
-    className: b()(ej, Qx, Uu),
+    className: b()(ej, jsFullscreenPreventEventCaptureKeys, jsFullscreenWheelEventPassthrough),
     value: n,
     placeholder: getI18nString("slides.flapp.poll.question_placeholder"),
     onChange: i,

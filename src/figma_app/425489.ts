@@ -147,7 +147,7 @@ interface Action {
   payload: any
 }
 // Reducer for managing inline preview state
-const inlinePreviewReducer = atomWithReducer<InlinePreviewState, Action>(initialInlinePreviewState, (state, action) => {
+export const inlinePreviewReducer = atomWithReducer<InlinePreviewState, Action>(initialInlinePreviewState, (state, action) => {
   const { type } = action
   let newState = state
 

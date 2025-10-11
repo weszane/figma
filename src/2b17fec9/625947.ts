@@ -374,7 +374,7 @@ import { T as _$$T3 } from '../940032c6/307867';
 import { d as _$$d6 } from '../c5e2cae0/368426';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { getWorkshopModeStatus, isWorkshopModeEnabled, useCurrentFileWorkshopModeStatus } from '../figma_app/789';
-import { Dm, K9, LO } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture, dropdownTypeSelectionContextMenu, dropdownTypePluginRunContextMenu } from '../figma_app/8833';
 import { canPerformAction, canRunExtensions } from '../figma_app/12796';
 import { y as _$$y5 } from '../figma_app/13082';
 import { DZ, Ff, SO } from '../figma_app/15042';
@@ -2085,7 +2085,7 @@ function t$() {
     'size': qm,
     'defaultSize': qm,
     'onResize': noop,
-    'className': ex()(_$$cx, cssBuilderInstance.relative.wFitContent.flex.flexShrink1.flexGrow1.overflowAuto.$, Dm),
+    'className': ex()(_$$cx, cssBuilderInstance.relative.wFitContent.flex.flexShrink1.flexGrow1.overflowAuto.$, jsFullscreenPreventEventCapture),
     'disableResizing': !0,
     'side': 'right',
     'data-cancel-insertable-resource-drag-and-drop': !0,
@@ -2736,7 +2736,7 @@ let iR = forwardRef(({
 }, n) => {
   return jsx('div', {
     'ref': n,
-    'className': ex()(Dm, 'figjam_collapsed_left_panel--container--FYM0w', 'figjam_collapsed_left_panel--withShapeSidebar--A1L6c'),
+    'className': ex()(jsFullscreenPreventEventCapture, 'figjam_collapsed_left_panel--container--FYM0w', 'figjam_collapsed_left_panel--withShapeSidebar--A1L6c'),
     'style': {
       maxWidth: isMobileNotFigmaMobile() ? 300 : _$$g_
     },
@@ -2930,7 +2930,7 @@ let i8 = forwardRef(({
   let n = _$$ew();
   return jsx(wV, {
     'ref': i,
-    'className': ex()(Dm, 'figjam_expanded_left_panel--resizableContainer--DhTbD', {
+    'className': ex()(jsFullscreenPreventEventCapture, 'figjam_expanded_left_panel--resizableContainer--DhTbD', {
       [i6]: n
     }),
     'size': e,
@@ -3752,7 +3752,7 @@ function ad(e) {
   let m = _$$dR(e.pluginId, u);
   let f = RK(e.pluginId);
   let _ = _$$t4(e.pluginId, p, m).length > 0;
-  let x = _ && n?.type === LO;
+  let x = _ && n?.type === dropdownTypePluginRunContextMenu;
   let g = _$$b4();
   let {
     validatePublishedPluginInOrgAllowlist,
@@ -3770,7 +3770,7 @@ function ad(e) {
         }
       }), _) {
         x ? t(hideDropdownAction()) : t(showDropdownThunk({
-          type: LO,
+          type: dropdownTypePluginRunContextMenu,
           data: {
             pluginId: e.pluginId,
             view: e.view,
@@ -9343,7 +9343,7 @@ function uD({
         e && e.focus();
       },
       children: [jsx('div', {
-        className: ex()(cssBuilderInstance.flex.relative.overflowHidden.$, Dm),
+        className: ex()(cssBuilderInstance.flex.relative.overflowHidden.$, jsFullscreenPreventEventCapture),
         children: jsxs('div', {
           className: cssBuilderInstance.flex1.relative.font13.ml8.$,
           style: styleBuilderInstance.add({
@@ -10301,7 +10301,7 @@ function u6(e) {
       className: 'image_description_editor--explanation--JK2UL',
       children: renderI18nText('whiteboard.inline_menu.image_description_explanation')
     }), jsx('div', {
-      className: `${x} ${Dm}`,
+      className: `${x} ${jsFullscreenPreventEventCapture}`,
       children: getFeatureFlags().figjam_a11y_inline_toolbar ? jsx('div', {
         className: 'xt7dq6l xs1vzh6 xfifm61',
         children: jsx(setupThemeContext, {
@@ -10812,7 +10812,7 @@ function hw() {
   let e = useSelector(e => e.mirror.appModel.hyperlinkLocation);
   let t = useDropdownState();
   let i = useAtomWithSubscription(_$$n9);
-  let n = t && t.type === K9;
+  let n = t && t.type === dropdownTypeSelectionContextMenu;
   let r = useSelector(e => e.progressBarState.mode === UIVisibilitySetting.HIDE_UI);
   let a = useSelector(e => e.mirror.selectionProperties.name && e.mirror.selectionProperties.name.includes('FigJam Stamp Icon') && e.mirror.selectionProperties.numSelectedByType?.ROUNDED_RECTANGLE === 1 && e.mirror.selectionProperties.numSelected === 1);
   let s = useSelector(e => a || e.mirror.selectionProperties.numSelectedByType?.STAMP === 1 && e.mirror.selectionProperties.numSelected === 1);
@@ -13599,7 +13599,7 @@ function f1({
       className: _$$Lt,
       dispatch: n,
       dropdownAlignment: 'right',
-      dropdownClassName: Dm,
+      dropdownClassName: jsFullscreenPreventEventCapture,
       dropdownShown: r,
       dropdownWidth: 144,
       id: 'codeBlockLanguageSelector',
@@ -15742,7 +15742,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       chevronClassName: _$$ai,
       dispatch: t,
       dropdownAlignment: 'right',
-      dropdownClassName: ex()(z4, Dm),
+      dropdownClassName: ex()(z4, jsFullscreenPreventEventCapture),
       dropdownShown: i,
       dropdownWidth: a,
       id: 'whiteboardTextStyleControl',
@@ -17291,7 +17291,7 @@ let gC = memo(() => {
   let e = function () {
     let e = useSelector(e => e.mirror.appModel.hyperlinkLocation);
     let t = useDropdownState();
-    let i = t && t.type === K9;
+    let i = t && t.type === dropdownTypeSelectionContextMenu;
     let n = useSelector(e => e.progressBarState.mode === UIVisibilitySetting.HIDE_UI);
     let r = hC();
     let a = useSelector(e => e.mirror.selectionProperties.numSelectedByType?.SHAPE_WITH_TEXT === 1 && e.mirror.selectionProperties.numSelected === 1);
@@ -17443,7 +17443,7 @@ function gP() {
   return jsx(TabLoop, {
     children: jsxs('div', {
       ref: C,
-      className: ex()(Dm, 'figjam_search--container--p-leE', {
+      className: ex()(jsFullscreenPreventEventCapture, 'figjam_search--container--p-leE', {
         'figjam_search--hidden--FjJ1m': hidden
       }),
       onTransitionEnd: () => {
@@ -19747,7 +19747,7 @@ function ju() {
   let r = useSelector(e => e.music.music?.isPaused === !1 && e.music.music?.isStopped === !1);
   let a = useDispatch<AppDispatch>();
   return t || i || !r || !n ? null : jsxs('div', {
-    'className': ex()('volume_hint--hintContainer--A9gj2', Dm),
+    'className': ex()('volume_hint--hintContainer--A9gj2', jsFullscreenPreventEventCapture),
     'data-testid': 'volume-hint',
     'children': [jsx('div', {
       children: renderI18nText('whiteboard.timer.music_volume_hint_prompt_cta_v2', {
@@ -23205,7 +23205,7 @@ function y8() {
   }) : jsx(_$$bo, {
     children: jsx(_$$V, {
       'ref': v,
-      'className': ex()(y5, Dm),
+      'className': ex()(y5, jsFullscreenPreventEventCapture),
       'style': {
         visibility: BrowserInfo.isIpadNative ? 'hidden' : 'visible'
       },
@@ -23358,7 +23358,7 @@ function vo({
     },
     children: jsx('div', {
       ref: c,
-      className: ex()(vr, Dm),
+      className: ex()(vr, jsFullscreenPreventEventCapture),
       children: i && jsx(vl, {})
     })
   }) : jsx('div', {
@@ -23368,7 +23368,7 @@ function vo({
     },
     children: jsxs('div', {
       ref: c,
-      className: ex()(vr, Dm),
+      className: ex()(vr, jsFullscreenPreventEventCapture),
       children: [e && jsx(y8, {}), jsx(gD, {}), s && jsx(_$$s8, {}), f]
     })
   });

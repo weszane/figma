@@ -1,5 +1,5 @@
 import { showDropdownThunk } from "../905/929976";
-import { si } from "../figma_app/8833";
+import { dropdownTypeSectionPresetPickerContextMenu } from "../figma_app/8833";
 import { gY } from "../figma_app/973927";
 import { fullscreenValue } from "../figma_app/455680";
 import { TeamTemplateType } from "../905/79930";
@@ -26,7 +26,7 @@ export function $$u0(e, t) {
   let o = e.name;
   let l = e.hasSectionPresetWithEdits;
   return !!o && (t(showDropdownThunk({
-    type: si,
+    type: dropdownTypeSectionPresetPickerContextMenu,
     data: {
       sectionId: e.guid,
       sectionName: o,

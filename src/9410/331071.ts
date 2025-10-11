@@ -234,7 +234,7 @@ import { A as _$$A1 } from '../af221b13/388839';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { r as _$$r2 } from '../figma_app/6042';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { ei as _$$ei } from '../figma_app/9054';
 import { canPerformAction } from '../figma_app/12796';
 import { O as _$$O4, y as _$$y3 } from '../figma_app/13082';
@@ -4662,7 +4662,7 @@ function sc({
         'className': cssBuilderInstance.flex.flexColumn.gap8.pt8.$,
         'data-testid': 'kitSelectionListContainer',
         'children': [jsxs('div', {
-          className: rB()('kit_picker_view--navContainer--JHIEY', Dm),
+          className: rB()('kit_picker_view--navContainer--JHIEY', jsFullscreenPreventEventCapture),
           children: [jsx('div', {
             className: cssBuilderInstance.h24.$,
             children: jsx(IconButton, {
@@ -4674,7 +4674,7 @@ function sc({
           }), jsx('input', {
             'ref': u,
             'aria-autocomplete': 'list',
-            'className': rB()('kit_picker_view--searchInput--Yj6zW', Dm),
+            'className': rB()('kit_picker_view--searchInput--Yj6zW', jsFullscreenPreventEventCapture),
             'dir': 'auto',
             'maxLength': 100,
             'onChange': e => {

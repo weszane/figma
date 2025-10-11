@@ -6,7 +6,7 @@ import { useSingleEffect } from "../905/791079";
 import { getInitialOptions } from "../figma_app/169182";
 import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString } from "../905/303541";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { getBasicViewportRect } from "../figma_app/62612";
 import { ConnectedPointingDropdown, DropdownType } from "../905/504727";
 import { Xr, qN, Fb } from "../905/235109";
@@ -88,7 +88,7 @@ export let $$f1 = memo(e => {
       targetRect,
       type: DropdownType.MATCH_BACKGROUND,
       children: jsx("div", {
-        className: `${Fb} ${Dm}`,
+        className: `${Fb} ${jsFullscreenPreventEventCapture}`,
         onClick: e => {
           e.stopPropagation();
         },

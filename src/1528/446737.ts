@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { U1 } from "../figma_app/343967";
 import { setRefValue } from "../figma_app/272902";
 import o from "classnames";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { Yh, g_ } from "../figma_app/32128";
 import { E as _$$E } from "../9410/112838";
 var d = o;
@@ -42,7 +42,7 @@ export function $$h0({
     _(e ? t : null);
   }, [_, e]);
   return jsx("div", {
-    className: d()(Dm, "left_panel_island_container--islandContainer--uM5h6", {
+    className: d()(jsFullscreenPreventEventCapture, "left_panel_island_container--islandContainer--uM5h6", {
       "left_panel_island_container--collapsed--OEOq4": e,
       "left_panel_island_container--withInsetEditor--XKTTi": !e
     }),

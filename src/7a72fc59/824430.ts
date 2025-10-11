@@ -315,7 +315,7 @@ import u_ from '../b2835def/987714';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { renderAvatar } from '../figma_app/3731';
 import { H as _$$H } from '../figma_app/7677';
-import { a8 as _$$a, Dm } from '../figma_app/8833';
+import { selectionPaintItemCooper, jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { useIsFullscreenReady } from '../figma_app/21029';
 import { atomWithReducer, atom, atomStoreManager, useResetAtom, useAtomValueAndSetter, useAtomWithSubscription, useSetAtom } from '../figma_app/27355';
 import { CVP, Ep1, j4N, oBL } from '../figma_app/27776';
@@ -1260,7 +1260,7 @@ function e0({
   return jsx(setupThemeContext, {
     brand: t,
     children: jsx('div', {
-      className: em()(Dm, cssBuilderInstance.fixed.flex.justifyCenter.eventsNone.$),
+      className: em()(jsFullscreenPreventEventCapture, cssBuilderInstance.fixed.flex.justifyCenter.eventsNone.$),
       style: {
         marginBottom: r,
         marginLeft: -1 * rightOffset,
@@ -11265,7 +11265,7 @@ function uR({
   c.left = u.x + s.x + u.width / 2;
   c.top = u.y + s.y + u.height;
   return createPortal(jsx('span', {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx('div', {
       className: 'x10l6tqk x78zum5',
       style: {
@@ -13888,7 +13888,7 @@ function pR({
     additionalControls: n
   });
 }
-let pw = `${_$$a}-custom`;
+let pw = `${selectionPaintItemCooper}-custom`;
 function pL({
   paint: e,
   onClose: t,
@@ -13919,7 +13919,7 @@ function pL({
     })
   });
 }
-let pF = `${_$$a}-library`;
+let pF = `${selectionPaintItemCooper}-library`;
 function pB({
   paint: e,
   initialPosition: t,

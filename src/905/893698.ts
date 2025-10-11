@@ -17,7 +17,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { setInstanceSwapPickerListLayout } from "../figma_app/91703";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { useDropdownState } from "../905/848862";
 import { R2 } from "../figma_app/188908";
 import { MB } from "../figma_app/525558";
@@ -145,7 +145,7 @@ function R({
     maxHeight: E
   }), [E, e]);
   return jsxs(DropdownOptions, {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     positionAbsolute: !0,
     style: B,
     id: i,

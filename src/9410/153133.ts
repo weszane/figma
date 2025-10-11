@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { showDropdownThunk } from "../905/929976";
-import { SA, d2 } from "../figma_app/8833";
+import { dropdownTypeDevHandoffPageContextMenu, dropdownTypePageContextMenu } from "../figma_app/8833";
 import { Pe } from "../figma_app/32128";
 import { cE } from "../figma_app/932601";
 export function $$c0() {
@@ -13,7 +13,7 @@ export function $$c0() {
     clientY: r
   }) => {
     e(showDropdownThunk({
-      type: SA,
+      type: dropdownTypeDevHandoffPageContextMenu,
       data: {
         clientX: i,
         clientY: r,
@@ -44,7 +44,7 @@ export function $$u1({
       return [r];
     })();
     0 !== h.length && i(showDropdownThunk({
-      type: d2,
+      type: dropdownTypePageContextMenu,
       data: {
         clientX: n,
         clientY: a,

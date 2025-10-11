@@ -25,7 +25,7 @@ import { useSingleEffect } from "../905/791079";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
 import { styleBuilderInstance } from "../905/941192";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { O1, KD } from "../figma_app/317394";
 import { registerModal } from "../905/102752";
 import { kz, s3 } from "../figma_app/171177";
@@ -277,7 +277,7 @@ let K = registerModal(function ({
         opacity: 0
       }
     }), jsx(_$$n.div, {
-      className: x()("fragment_search_peek_modal--base--MOQE-", cssBuilderInstance.p32.fixed.top0.right0.bottom0.left0.zIndexModal.$, Dm),
+      className: x()("fragment_search_peek_modal--base--MOQE-", cssBuilderInstance.p32.fixed.top0.right0.bottom0.left0.zIndexModal.$, jsFullscreenPreventEventCapture),
       "data-testid": "fragment-search-peek-modal",
       onMouseDown: e => {
         e.preventDefault();

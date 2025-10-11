@@ -8,7 +8,7 @@ import d from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { f as _$$f } from "../figma_app/109947";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { getViewportWidth } from "../figma_app/62612";
 import { wV } from "../figma_app/779965";
 import { M$q } from "../figma_app/27776";
@@ -43,7 +43,7 @@ export function $$b0({
   }, [A, u]);
   return jsx(wV, {
     ref: S,
-    className: c()("floating_layers_panel--container---6H4q", Dm, "devHandoffFloatingLayersPanel", "pagesPanel"),
+    className: c()("floating_layers_panel--container---6H4q", jsFullscreenPreventEventCapture, "devHandoffFloatingLayersPanel", "pagesPanel"),
     "data-cancel-insertable-resource-drag-and-drop": !0,
     defaultSize: 230,
     disableResizing: !v,

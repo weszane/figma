@@ -8,7 +8,7 @@ import { k } from "../905/582200";
 import { v as _$$v } from "../642/135773";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Yr } from "../figma_app/8833";
+import { selectionPaintItemSlides } from "../figma_app/8833";
 import { defaultColorManipulator } from "../905/713722";
 import { normalizeValue, isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { Zr } from "../figma_app/678782";
@@ -20,7 +20,7 @@ import { Y } from "../6388/262412";
 import { K } from "../6388/893524";
 import { useClickOutside } from "../905/1768";
 import { u as _$$u } from "../642/560546";
-let I = `${Yr}-overlay`;
+let I = `${selectionPaintItemSlides}-overlay`;
 let T = {
   type: "SOLID",
   color: {

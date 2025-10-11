@@ -25,7 +25,7 @@ import { languageCodes } from '../905/816253';
 import { useDropdownState } from '../905/848862';
 import { bL } from '../905/911410';
 import { calculatePickerPositionLeft } from '../905/959568';
-import { F as _$$F } from '../figma_app/8833';
+import { maxInt32 } from '../figma_app/8833';
 import { t7B } from '../figma_app/27776';
 import { hidePickerThunk } from '../figma_app/91703';
 import { useDeepEqualSceneValue } from '../figma_app/167249';
@@ -262,10 +262,10 @@ export function $$el2({
 }
 export class $$ed3 extends X9 {
   format(e) {
-    return e === _$$F ? getI18nString('fullscreen.grids_panel.grid_settings.auto') : super.format(e);
+    return e === maxInt32 ? getI18nString('fullscreen.grids_panel.grid_settings.auto') : super.format(e);
   }
   parse(e, t) {
-    return e === 'Auto' ? _$$F : super.parse(e, t);
+    return e === 'Auto' ? maxInt32 : super.parse(e, t);
   }
 }
 let ec = memo(({
@@ -307,7 +307,7 @@ let ec = memo(({
       'tooltipForScreenReadersOnly': !0,
       'value': t.numSections,
       'children': [jsx(Z0, {
-        value: _$$F
+        value: maxInt32
       }, 'Auto'), jsx(sK, {}, 'divider'), mapRange(12, e => jsx(Z0, {
         value: e + 1
       }, e))]

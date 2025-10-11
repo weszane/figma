@@ -243,7 +243,7 @@ import { A as _$$A2 } from '../4711/145260';
 import { A as _$$A4 } from '../4711/621307';
 import { cssBuilderInstance } from '../cssbuilder/589278';
 import { trackDefinedFileEventWrapper } from '../figma_app/2590';
-import { o$ as _$$o$, t4 as _$$t2, C9, K9, ku, uR, W_, wi } from '../figma_app/8833';
+import { prototypeInteractionSettings, dropdownTypeRulerGuideContextMenu, exportPicker, dropdownTypeSelectionContextMenu, dropdownTypeTextEditModeContextMenu, behaviorSettings, dropdownTypeCanvasContextMenu, dropdownTypeSelectLayerContextMenu } from '../figma_app/8833';
 import { parseEditorStateToPlainText } from '../figma_app/9619';
 import { canEditBasedOnPlan, checkZoomWidgetAccess, isExportRestricted } from '../figma_app/12796';
 import { bJ as _$$bJ } from '../figma_app/16595';
@@ -4082,7 +4082,7 @@ class oo {
           isBehaviorsOnly
         } = e.payload.args;
         let d = {
-          id: isBehaviorsOnly ? uR : _$$o$,
+          id: isBehaviorsOnly ? behaviorSettings : prototypeInteractionSettings,
           initialX: x,
           initialY: y,
           shouldPin: source === CanvasComponentType.PROPERTIES_PANEL
@@ -5970,7 +5970,7 @@ let lX = class e extends WithFullscreenFunctionality {
       from: 'toolbar-or-keyboard'
     });
     this.dispatch(showPickerThunk({
-      id: C9
+      id: exportPicker
     }));
   }
   openExportSettingsPicker(e, t, i) {
@@ -7505,7 +7505,7 @@ let lX = class e extends WithFullscreenFunctionality {
   }
   showCanvasContextMenu(e, t) {
     this.dispatch(showDropdownThunk({
-      type: W_,
+      type: dropdownTypeCanvasContextMenu,
       data: {
         clientX: e,
         clientY: t
@@ -7514,7 +7514,7 @@ let lX = class e extends WithFullscreenFunctionality {
   }
   showSelectionContextMenu(e, t) {
     this.dispatch(showDropdownThunk({
-      type: K9,
+      type: dropdownTypeSelectionContextMenu,
       data: {
         clientX: e,
         clientY: t
@@ -7523,7 +7523,7 @@ let lX = class e extends WithFullscreenFunctionality {
   }
   showSelectLayerContextMenu(e, t) {
     this.dispatch(showDropdownThunk({
-      type: wi,
+      type: dropdownTypeSelectLayerContextMenu,
       data: {
         clientX: e,
         clientY: t
@@ -7532,7 +7532,7 @@ let lX = class e extends WithFullscreenFunctionality {
   }
   showTextEditModeContextMenu(e, t) {
     this.dispatch(showDropdownThunk({
-      type: ku,
+      type: dropdownTypeTextEditModeContextMenu,
       data: {
         clientX: e,
         clientY: t
@@ -7541,7 +7541,7 @@ let lX = class e extends WithFullscreenFunctionality {
   }
   showRulerGuideContextMenu(e, t, i, n) {
     this.dispatch(showDropdownThunk({
-      type: _$$t2,
+      type: dropdownTypeRulerGuideContextMenu,
       data: {
         clientX: e,
         clientY: t,

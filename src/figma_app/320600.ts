@@ -9,7 +9,7 @@ import { RecordingPureComponent } from "../figma_app/878298";
 import { n as _$$n } from "../figma_app/339971";
 import { canAccessFullDevMode } from "../figma_app/473493";
 import { updateDropdownSelectionAction, hideDropdownAction } from "../905/929976";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { hasSeparator, hasHeader, hasRenderFunction, getActionOrName } from "../figma_app/847915";
 import { formatI18nMessage } from "../905/482208";
 import { n as _$$n2 } from "../figma_app/307143";
@@ -186,11 +186,11 @@ let J = registerModal(function () {
     })
   });
 }, "CommentDebugSettingsModal");
-class ea extends Error { }
+class ea extends Error {}
 async function es({
   dispatch: e,
   fileKey: t,
-  log: r = () => { }
+  log: r = () => {}
 }) {
   try {
     r("Generating file version...");
@@ -384,7 +384,7 @@ class e_ extends RecordingPureComponent {
   render() {
     let e = this.props.positionOnChevron && this.props.chevronRef?.current?.getBoundingClientRect() || null;
     let t = jsx("div", {
-      className: `${Dm}`,
+      className: `${jsFullscreenPreventEventCapture}`,
       children: jsx($$em1, {
         ref: this.multilevelDropdownRef,
         activatePathOnMount: this.props.dropdown.data.togglePreferences ? this.getPathToPreferences() : void 0,

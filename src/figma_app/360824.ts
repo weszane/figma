@@ -16,7 +16,7 @@ import { RecordingScrollContainer } from "../905/347284";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { styleBuilderInstance } from "../905/941192";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { trackFileEvent } from "../figma_app/314264";
 import { C as _$$C2 } from "../figma_app/523506";
 import { z } from "../905/654860";
@@ -213,7 +213,7 @@ export function $$H3({
       e && e.focus();
     },
     children: [jsxs("div", {
-      className: m()(cssBuilderInstance.flex.relative.overflowHidden.if(ed, cssBuilderInstance.flexColumn).$, Dm),
+      className: m()(cssBuilderInstance.flex.relative.overflowHidden.if(ed, cssBuilderInstance.flexColumn).$, jsFullscreenPreventEventCapture),
       style: ed && !M ? {
         height: 128
       } : {},
@@ -353,7 +353,7 @@ export function $$W4({
   return jsxs("div", {
     className: "xh8yej3",
     children: [jsx("div", {
-      className: Dm,
+      className: jsFullscreenPreventEventCapture,
       children: jsxs("div", {
         ...stylex.props(K.prompt(g - 16)),
         children: [d.length > 0 && 0 === e.length && jsx("div", {

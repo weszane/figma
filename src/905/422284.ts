@@ -442,7 +442,7 @@ const handleSearchNavigation = createOptimistThunk((dispatch: any, routeParams: 
 })
 
 // Main thunk that checks for route changes and dispatches sub-thunks
-const handleRouteUpdate = createOptimistThunk((dispatch: any, routeParams: RouteParams) => {
+export const handleRouteUpdate = createOptimistThunk((dispatch: any, routeParams: RouteParams) => {
   const currentUrl = new URL(window.location.href)
   const currentParams = currentUrl.searchParams
   const newParams = new URLSearchParams(routeParams.params)

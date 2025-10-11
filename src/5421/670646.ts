@@ -32,7 +32,7 @@ import { LengthInput } from "../figma_app/178475";
 import { Q as _$$Q } from "../905/346809";
 import { Point } from "../905/736624";
 import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
-import { $T } from "../figma_app/8833";
+import { prototypeBackgroundPanelColorPicker } from "../figma_app/8833";
 import { calculatePickerPositionLeft } from "../905/959568";
 import { J as _$$J2 } from "../905/225412";
 import { h as _$$h2 } from "../905/65944";
@@ -113,10 +113,10 @@ function z(e) {
   } = e;
   let l = useCallback(() => {
     let e = t.current;
-    if (pickerShown && pickerShown.id === $T) dispatch(hidePickerThunk());else if (e && e instanceof HTMLElement) {
+    if (pickerShown && pickerShown.id === prototypeBackgroundPanelColorPicker) dispatch(hidePickerThunk());else if (e && e instanceof HTMLElement) {
       let t = calculatePickerPositionLeft(e);
       dispatch(showPickerThunk({
-        id: $T,
+        id: prototypeBackgroundPanelColorPicker,
         initialX: t.x,
         initialY: t.y
       }));
@@ -160,7 +160,7 @@ function z(e) {
     children: [jsx(TN, {
       ref: t,
       children: p
-    }), pickerShown && pickerShown.id === $T && jsx(_$$h2, {
+    }), pickerShown && pickerShown.id === prototypeBackgroundPanelColorPicker && jsx(_$$h2, {
       disabledVariableIds: new Set(),
       initialPosition: new Point(pickerShown.initialX ?? 0, pickerShown.initialY ?? 0),
       color: c,

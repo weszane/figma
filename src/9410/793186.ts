@@ -29,7 +29,7 @@ import { initializeWidgetAllowlist } from '../905/837497';
 import { O as _$$O } from '../905/969533';
 import { N as _$$N } from '../905/995635';
 import { $2 } from '../3276/545630';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { v as _$$v } from '../figma_app/45501';
 import { getViewportInfo, viewportToScreen } from '../figma_app/62612';
 import { G as _$$G } from '../figma_app/80900';
@@ -315,7 +315,7 @@ function OnCanvasNameEditorContainer({
 }: ZComponentProps) {
   return jsxs('div', {
     ref: containerRef,
-    className: P(containerClassname, Dm, 'on_canvas_name_editor--containerOnLight--6zUKs'),
+    className: P(containerClassname, jsFullscreenPreventEventCapture, 'on_canvas_name_editor--containerOnLight--6zUKs'),
     style: containerStyle,
     children: [jsx('span', {
       ref: measurerRef,
@@ -840,7 +840,7 @@ function SectionNameEditorInput({
   const fontWeight = isDesignLayout ? 'normal' : 500;
   return jsxs('div', {
     ref: containerRef,
-    className: `on_canvas_name_editor--sectionNameContainer--D8aez ${Dm}`,
+    className: `on_canvas_name_editor--sectionNameContainer--D8aez ${jsFullscreenPreventEventCapture}`,
     style: containerStyle,
     children: [jsx('span', {
       ref: measurerRef,

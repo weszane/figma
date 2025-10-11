@@ -5,7 +5,7 @@ import { MenuRootComp, MenuContainerComp, MenuItemComp } from "../figma_app/8609
 import { AnimationTriggerType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { Q } from "../figma_app/320600";
@@ -45,7 +45,7 @@ export function $$_0({
     height: e.height
   };
   return jsx("div", {
-    className: Dm,
+    className: jsFullscreenPreventEventCapture,
     children: jsx(Q, {
       appModel,
       dispatch: a,

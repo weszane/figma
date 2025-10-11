@@ -12,7 +12,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { In as Icon1 } from '../905/672640';
 import { usePreventScrollOnIOS } from '../905/772711';
 import { runOnceAtATime } from '../905/807529';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { ButtonBasePrimaryTracked, ButtonNegativeTracked, ButtonSecondaryTracked } from '../figma_app/637027';
 import { useTracking } from '../figma_app/831799';
 import { LoadingSpinner } from '../figma_app/858013';
@@ -119,7 +119,7 @@ export function ModalView(props) {
   });
 
   // Modal background classes
-  const backgroundClass = classNames(K1, backgroundClassName, Dm, {
+  const backgroundClass = classNames(K1, backgroundClassName, jsFullscreenPreventEventCapture, {
     [Y0]: tintedModalBackground,
     [CY]: fixedTop,
     [Xt]: alignment === 'left',

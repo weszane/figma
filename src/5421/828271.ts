@@ -26,7 +26,7 @@ import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hidePickerThunk, showPickerThunk } from "../figma_app/91703";
-import { AO, o$ } from "../figma_app/8833";
+import { scrollBehaviorModal, prototypeInteractionSettings } from "../figma_app/8833";
 import { JV, Eq, sX, cP, js, mj } from "../figma_app/451499";
 import { isSitesFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
@@ -268,10 +268,10 @@ let $$eT0 = memo(function ({
     shouldIgnoreKeyboardEvents: l.length > 0 || s.type !== NodePropertyCategory.PROTOTYPE_INTERACTION && s.type !== NodePropertyCategory.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
     showResetInteractionsButton: C,
     toggleScrollBehaviorPicker: () => {
-      if (f?.id === AO) t(hidePickerThunk());else {
+      if (f?.id === scrollBehaviorModal) t(hidePickerThunk());else {
         let e = calculatePickerPositionLeft(R.current);
         t(showPickerThunk({
-          id: AO,
+          id: scrollBehaviorModal,
           initialX: e.x,
           initialY: e.y
         }));
@@ -412,7 +412,7 @@ function eA({
   let G = useSelector(DV);
   let Y = a2();
   let X = useSelector(ew);
-  let Q = X?.id === o$ ? X : null;
+  let Q = X?.id === prototypeInteractionSettings ? X : null;
   let et = useSelector(selectSceneGraph);
   let [en, eo] = useState(!1);
   let ei = useAtomWithSubscription(NE) ? ej : eE;

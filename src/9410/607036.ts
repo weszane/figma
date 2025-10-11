@@ -19,7 +19,7 @@ import { BigTextInputForwardRef } from "../figma_app/637027";
 import { f as _$$f } from "../figma_app/109947";
 import { cssBuilderInstance } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getElementByDataTarget } from "../905/797478";
 import { fullscreenValue } from "../figma_app/455680";
@@ -117,7 +117,7 @@ export let $$M0 = forwardRef(function (e, t) {
       transform: "translateX(-50%)",
       ...o
     },
-    className: h()("slides_insert_embed_modal--dockedToolbeltWindow--lJ7x1 text--fontPos13--xW8hS text--_fontBase--QdLsd", Dm),
+    className: h()("slides_insert_embed_modal--dockedToolbeltWindow--lJ7x1 text--fontPos13--xW8hS text--_fontBase--QdLsd", jsFullscreenPreventEventCapture),
     children: jsx("div", {
       style: {
         minWidth: e.minWidth ?? a?.width ?? 396

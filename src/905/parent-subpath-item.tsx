@@ -6,7 +6,7 @@ import { C as _$$C } from './520159';
 import { ButtonPrimitive } from './632989';
 import { MB } from '../figma_app/525558';
 import { handleKeyboardEventByState } from '../figma_app/896988';
-import { Qx } from '../figma_app/8833';
+import { jsFullscreenPreventEventCaptureKeys } from '../figma_app/8833';
 import { useKeyboardNavigationItemForParentSubpath, useFocusSubpath } from './keyboard-navigation';
 import { DrilldownContextValue } from './drilldown-types';
 const SUBPATH_DISPLAY_TEXT_CLASS = 'drilldown_item--subpathDisplayText--Lgl-w drilldown_item--displayText--pdJKd text--fontPos11--2LvXf text--_fontBase--QdLsd';
@@ -50,7 +50,7 @@ export const ParentSubpathItem = memo<ParentSubpathItemProps>(({
     combinedHandler(e);
   }, [combinedHandler]);
   return jsxs(ButtonPrimitive, {
-    className: g()('drilldown_item--parentSubpathContainer--wbu7T drilldown_item--_drilldownItemBase--YOfRd text--fontPos11--2LvXf text--_fontBase--QdLsd', Qx),
+    className: g()('drilldown_item--parentSubpathContainer--wbu7T drilldown_item--_drilldownItemBase--YOfRd text--fontPos11--2LvXf text--_fontBase--QdLsd', jsFullscreenPreventEventCaptureKeys),
     style: {
       height: listItemHeight
     },

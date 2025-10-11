@@ -27,7 +27,7 @@ import { n as _$$n } from '../3276/582222';
 import { BK, vB, x5 } from '../3276/677176';
 import { J as _$$J } from '../3276/853301';
 import { ue } from '../af221b13/476940';
-import { Z7 } from '../figma_app/8833';
+import { dropdownTypeCommentContextMenu } from '../figma_app/8833';
 import { hasUnreadPinnedComments } from '../figma_app/12220';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { addRectOffset, getBasicViewportRect, useFullscreenViewportUpdates, useViewportWithDelta, viewportToScreen } from '../figma_app/62612';
@@ -208,7 +208,7 @@ let er = memo(e => {
     };
     let r = addRectOffset(s, o);
     P(showDropdownThunk({
-      type: Z7,
+      type: dropdownTypeCommentContextMenu,
       data: {
         thread: n,
         pinClientRect: r

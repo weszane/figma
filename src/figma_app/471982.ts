@@ -9,7 +9,7 @@ import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { getValueOrFallback } from '../905/872825';
 import { ProfileRouteState, ResourceHubProfileRouteState } from '../905/934145';
-import { Dm as _$$Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { TeamOrgType } from '../figma_app/10554';
 import { hasClientMeta, HubTypeEnum, isMonetizedOrThirdParty, isPlugin, isWidget, ResourceTypeNoComment } from '../figma_app/45218';
 import { ManifestEditorType } from '../figma_app/155287';
@@ -351,7 +351,7 @@ export function copyToClipboard(text: string) {
   input.style.position = 'fixed';
   input.style.top = '-1000px';
   input.value = text;
-  input.classList.add(_$$Dm);
+  input.classList.add(jsFullscreenPreventEventCapture);
   document.body.appendChild(input);
   input.select();
   input.focus();

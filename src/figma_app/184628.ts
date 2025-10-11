@@ -17,7 +17,7 @@ import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Dm } from "../figma_app/8833";
+import { jsFullscreenPreventEventCapture } from "../figma_app/8833";
 import { EditorPreferencesApi } from "../figma_app/740163";
 import { KindEnum } from "../905/129884";
 import { Zk } from "../figma_app/626177";
@@ -217,7 +217,7 @@ export function $$X1({
       setIsChatVisible: d,
       streamingCodeToDisplay: code
     }), jsx("div", {
-      className: Dm,
+      className: jsFullscreenPreventEventCapture,
       style: {
         height: e_ ? "calc(100% - 40px)" : "100%"
       },

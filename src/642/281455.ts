@@ -23,7 +23,7 @@ import { noop } from 'lodash-es';
 ;
 import { calculatePickerPositionLeft } from '../905/959568';
 import { wu } from '../1528/306300';
-import { k8 } from '../figma_app/8833';
+import { backgroundPanelColorPicker } from '../figma_app/8833';
 import { showPickerThunk, hidePickerThunk } from '../figma_app/91703';
 import { Q } from '../figma_app/104130';
 import { M as _$$M } from '../figma_app/339170';
@@ -160,7 +160,7 @@ export function $$G0(e) {
   }, [backgroundColor, backgroundOpacity]);
   let z = useMemo(() => isValidValue(backgroundOpacity) && typeof backgroundOpacity == 'number' && isNaN(backgroundOpacity) ? 0 : backgroundOpacity, [backgroundOpacity]);
   let W = () => {
-    if (e.setDefaultToolOnPickerOpen && fullscreenValue.triggerAction('set-tool-default'), e.pickerShown && e.pickerShown.id === k8) {
+    if (e.setDefaultToolOnPickerOpen && fullscreenValue.triggerAction('set-tool-default'), e.pickerShown && e.pickerShown.id === backgroundPanelColorPicker) {
       k(hidePickerThunk());
     } else {
       getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics('editor-background-panel-color-picker-show');
@@ -169,7 +169,7 @@ export function $$G0(e) {
         y: 0
       };
       k(showPickerThunk({
-        id: k8,
+        id: backgroundPanelColorPicker,
         initialX: e.x,
         initialY: e.y
       }));
@@ -202,7 +202,7 @@ export function $$G0(e) {
     paint: Y(),
     previewActive: !1,
     secondIconButton: q(),
-    selected: e.pickerShown?.id === k8,
+    selected: e.pickerShown?.id === backgroundPanelColorPicker,
     singletonRow: !0
   });
   let q = () => void 0 === backgroundEnabled ? void 0 : jsx('span', {
@@ -271,7 +271,7 @@ export function $$G0(e) {
           'data-tooltip': getI18nString('fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports'),
           'children': renderI18nText('fullscreen.properties_panel.show_in_exports')
         })]
-      }) : void 0, e.pickerShown?.id === k8 && jsx(_$$h, {
+      }) : void 0, e.pickerShown?.id === backgroundPanelColorPicker && jsx(_$$h, {
         disabledVariableIds: new Set(),
         initialPosition: new Point(e.pickerShown.initialX, e.pickerShown.initialY),
         color: isValidValue(U) ? normalizeValue(U) : {

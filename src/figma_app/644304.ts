@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { jsx } from 'react/jsx-runtime';
 import { labConfigurations, useLabConfiguration } from '../905/226610';
-import { Dm } from '../figma_app/8833';
+import { jsFullscreenPreventEventCapture } from '../figma_app/8833';
 import { M$q } from '../figma_app/27776';
 import { dc, g_, GQ, qm, xT, Ye, Yh } from '../figma_app/32128';
 import { R4 } from '../figma_app/74043';
@@ -28,7 +28,7 @@ function w({
   customLoadingView: e
 }) {
   return jsx('div', {
-    className: c()(Dm, I, S),
+    className: c()(jsFullscreenPreventEventCapture, I, S),
     children: jsx('div', {
       className: c()(v, S, 'left_panel_container--loading--YwG7B', N),
       children: e ?? jsx(_$$U, {})
@@ -68,7 +68,7 @@ function O({
     return null;
   }
   let G = jsx(wV, {
-    'className': c()(Dm, I, S),
+    'className': c()(jsFullscreenPreventEventCapture, I, S),
     'data-cancel-insertable-resource-drag-and-drop': !0,
     'defaultSize': d,
     'disableResizing': r,
@@ -92,7 +92,7 @@ function O({
     })
   });
   let V = jsx(_$$G, {
-    'className': c()(Dm, I, {
+    'className': c()(jsFullscreenPreventEventCapture, I, {
       'left_panel_container--ghostRuler--hLFw2': shouldShowGhostRulers
     }),
     'data-cancel-insertable-resource-drag-and-drop': !0,
